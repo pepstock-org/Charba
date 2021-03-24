@@ -17,7 +17,7 @@ package org.pepstock.charba.client.labels.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.labels.Context;
+import org.pepstock.charba.client.labels.LabelsScriptableContext;
 import org.pepstock.charba.client.labels.LabelsPlugin;
 
 /**
@@ -36,6 +36,6 @@ public interface RenderCallback {
 	 * @param context callback context, passed by plugin
 	 * @return a string or as image instance to show as label
 	 */
-	Object invoke(IsChart chart, Context context);
+	Object invoke(IsChart chart, LabelsScriptableContext context);
 
 }

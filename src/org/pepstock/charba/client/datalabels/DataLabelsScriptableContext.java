@@ -24,14 +24,14 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class DatalabelsScriptableContext extends ScriptableContext {
+final class DataLabelsScriptableContext extends ScriptableContext {
 
 	/**
 	 * Creates the object with public object instance to be wrapped.
 	 * 
 	 * @param nativeObject public object instance to be wrapped.
 	 */
-	DatalabelsScriptableContext(NativeObject nativeObject) {
+	DataLabelsScriptableContext(NativeObject nativeObject) {
 		super(new DataLabelsEnvelop<>(nativeObject));
 	}
 

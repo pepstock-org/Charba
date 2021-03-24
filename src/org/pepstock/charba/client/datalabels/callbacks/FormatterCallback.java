@@ -32,10 +32,11 @@ import org.pepstock.charba.client.items.DataItem;
 public interface FormatterCallback {
 
 	/**
-	 * Returns the <code>formatter</code> property at runtime, using the chart instance and the plugin context.
+	 * Returns the formatted label value.
 	 * 
 	 * @param chart chart instance
-	 * @param dataItem value container to be formatted, Can be a simple <code>double</code>, {@link String} or a {@link FloatingData}.
+	 * @param dataItem value container to be formatted.<br>
+	 *            Can be a simple <code>double</code>, {@link String} or a {@link FloatingData}.
 	 * @param context {@link DataLabelsPlugin#ID} plugin context instance
 	 * @return the label value to be showed
 	 */

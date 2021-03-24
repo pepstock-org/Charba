@@ -15,12 +15,10 @@
 */
 package org.pepstock.charba.client.labels;
 
-import org.pepstock.charba.client.Chart;
-import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -30,16 +28,13 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Context extends NativeObjectContainer {
+public final class LabelsScriptableContext extends ScriptableContext {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		CHART("chart"),
-		DATASET_INDEX("datasetIndex"),
-		DATA_INDEX("dataIndex"),
 		LABEL("label"),
 		VALUE("value"),
 		PERCENTAGE("percentage");
@@ -67,7 +62,7 @@ public final class Context extends NativeObjectContainer {
 		}
 	}
 
-	// instacne of data item to wrap the value
+	// instance of data item to wrap the value
 	private final DataItem dataItem;
 
 	/**
@@ -75,8 +70,8 @@ public final class Context extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Context(NativeObject nativeObject) {
-		super(nativeObject);
+	LabelsScriptableContext(NativeObject nativeObject) {
+		super(new LabelsEnvelop<>(nativeObject));
 		// gets the type of value
 		ObjectType type = type(Property.VALUE);
 		// object instance for data item
@@ -99,66 +94,43 @@ public final class Context extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the CHARBA chart instance.
+	 * Returns the label for the data set.
 	 * 
-	 * @return the CHARBA chart instance
-	 */
-	IsChart getChart() {
-		// gets native chart
-		Chart nativeChart = getNativeChart(Property.CHART);
-		// checks if native chart is present
-		if (nativeChart != null) {
-			// returns is chart instance
-			return nativeChart.getChart();
-		}
-		// if here, the native chart is not consistent
-		return null;
-	}
-
-	/**
-	 * Returns the index of the data inside the dataset.
-	 * 
-	 * @return the index of the data inside the dataset.
-	 */
-
-	public final int getDataIndex() {
-		return getValue(Property.DATA_INDEX, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the dataset index of the data inside the dataset.
-	 * 
-	 * @return the dataset index of the data inside the dataset.
-	 */
-	public final int getDatasetIndex() {
-		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the label for the dataset.
-	 * 
-	 * @return the label for the dataset.
+	 * @return the label for the data set.
 	 */
 	public final String getLabel() {
 		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
 
 	/**
-	 * Returns the percentage for the dataset.
+	 * Returns the percentage for the data set.
 	 * 
-	 * @return the percentage for the dataset.
+	 * @return the percentage for the data set.
 	 */
 	public final double getPercentage() {
 		return getValue(Property.PERCENTAGE, UndefinedValues.DOUBLE);
 	}
 
 	/**
-	 * Returns the value for the dataset by a {@link DataItem}.
+	 * Returns the value for the data set by a {@link DataItem}.
 	 * 
-	 * @return the value for the dataset by a {@link DataItem}.
+	 * @return the value for the data set by a {@link DataItem}.
 	 */
 	public final DataItem getDataItem() {
 		return dataItem;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.callbacks.AbstractScriptableContext#isConsistent()
+	 */
+	@Override
+	protected boolean isConsistent() {
+		// checks if the data index and data set index are consistent
+		boolean indexed = getDatasetIndex() != UndefinedValues.INTEGER && getDataIndex() != UndefinedValues.INTEGER;
+		// checks that all items are there
+		return indexed && has(Property.LABEL) && has(Property.PERCENTAGE);
 	}
 
 }

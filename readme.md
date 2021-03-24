@@ -298,6 +298,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `ScaleLabelPadding` options,  use `Padding` instead.
  * remove `CartesianPadding` options,  use `Padding` instead.
  * rename `ScaleBounds` class to `Bounds`.
+ * replace `Context` class with `LabelsScriptableContext` for `Labels` plugin.
   
 ### Features
 

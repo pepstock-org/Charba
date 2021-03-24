@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayImage;
@@ -172,7 +173,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyFontColorCallback {
+	interface ProxyColorCallback {
 
 		/**
 		 * Method of function to be called to get the font color of render in the chat.
@@ -192,7 +193,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	// callback proxy to invoke the font function
 	private final CallbackProxy<ProxyFontCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the font color function
-	private final CallbackProxy<ProxyFontColorCallback> fontColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyColorCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// render callback instance
 	private static final CallbackPropertyHandler<RenderCallback> RENDER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.RENDER);
 	// font callback instance
@@ -210,23 +211,25 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	private enum Property implements Key
 	{
+		// common id
 		ID("id"),
-		RENDER("render"),
-		PRECISION("precision"),
-		SHOW_ZERO("showZero"),
+		// plugin options
+		ARC("arc"),
 		COLOR("color"),
 		FONT("font"),
-		TEXT_SHADOW("textShadow"),
-		SHADOW_BLUR("shadowBlur"),
-		SHADOW_OFFSET_X("shadowOffsetX"),
-		SHADOW_OFFSET_Y("shadowOffsetY"),
-		SHADOW_COLOR("shadowColor"),
-		ARC("arc"),
-		POSITION("position"),
-		OVERLAP("overlap"),
-		SHOW_ACTUAL_PERCENTAGES("showActualPercentages"),
 		IMAGES("images"),
 		OUTSIDE_PADDING("outsidePadding"),
+		OVERLAP("overlap"),
+		POSITION("position"),
+		PRECISION("precision"),
+		RENDER("render"),
+		SHADOW_BLUR("shadowBlur"),
+		SHADOW_COLOR("shadowColor"),
+		SHADOW_OFFSET_X("shadowOffsetX"),
+		SHADOW_OFFSET_Y("shadowOffsetY"),
+		SHOW_ACTUAL_PERCENTAGES("showActualPercentages"),
+		SHOW_ZERO("showZero"),
+		TEXT_SHADOW("textShadow"),
 		TEXT_MARGIN("textMargin");
 
 		// name value of property
@@ -309,9 +312,9 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(new Context(item)));
-		fontCallbackProxy.setCallback((context, item) -> onFontCallback(new Context(item)));
-		fontColorCallbackProxy.setCallback((context, item) -> onFontColorCallback(new Context(item)));
+		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(new LabelsScriptableContext(item)));
+		fontCallbackProxy.setCallback((context, item) -> onFontCallback(new LabelsScriptableContext(item)));
+		colorCallbackProxy.setCallback((context, item) -> onColorCallback(new LabelsScriptableContext(item)));
 	}
 
 	/**
@@ -736,7 +739,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param colorCallback the font color callback.
 	 */
 	public void setColor(ColorCallback colorCallback) {
-		COLOR_PROPERTY_HANDLER.setCallback(this, DEFAULT_ID.value(), colorCallback, fontColorCallbackProxy.getProxy());
+		COLOR_PROPERTY_HANDLER.setCallback(this, DEFAULT_ID.value(), colorCallback, colorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -745,13 +748,13 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param context native object with callback context
 	 * @return image or string for rendering.
 	 */
-	private Object onRenderCallback(Context context) {
+	private Object onRenderCallback(LabelsScriptableContext context) {
 		// gets callback
 		RenderCallback renderCallback = RENDER_PROPERTY_HANDLER.getCallback(this);
 		// gets chart instance
-		IsChart chart = context.getChart();
+		IsChart chart = ScriptableUtils.retrieveChart(context, renderCallback);
 		// checks if the callback is set
-		if (IsChart.isValid(chart) && renderCallback != null) {
+		if (IsChart.isValid(chart)) {
 			// calls callback
 			Object value = renderCallback.invoke(chart, context);
 			// checks result
@@ -776,15 +779,15 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param context native object with callback context
 	 * @return the font instance
 	 */
-	private NativeObject onFontCallback(Context context) {
+	private NativeObject onFontCallback(LabelsScriptableContext context) {
 		// gets callback
-		FontCallback fontColorCallback = FONT_PROPERTY_HANDLER.getCallback(this);
+		FontCallback fontCallback = FONT_PROPERTY_HANDLER.getCallback(this);
 		// gets chart instance
-		IsChart chart = context.getChart();
+		IsChart chart = ScriptableUtils.retrieveChart(context, fontCallback);
 		// checks if the callback is set
-		if (IsChart.isValid(chart) && fontColorCallback != null) {
+		if (IsChart.isValid(chart)) {
 			// calls callback
-			Font value = fontColorCallback.invoke(chart, context);
+			Font value = fontCallback.invoke(chart, context);
 			// checks result
 			if (value != null) {
 				return value.nativeObject();
@@ -801,15 +804,15 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param context native object with callback context
 	 * @return the font color instance
 	 */
-	private String onFontColorCallback(Context context) {
+	private String onColorCallback(LabelsScriptableContext context) {
 		// gets callback
-		ColorCallback fontColorCallback = COLOR_PROPERTY_HANDLER.getCallback(this);
+		ColorCallback colorCallback = COLOR_PROPERTY_HANDLER.getCallback(this);
 		// gets chart instance
-		IsChart chart = context.getChart();
+		IsChart chart = ScriptableUtils.retrieveChart(context, colorCallback);
 		// checks if the callback is set
-		if (IsChart.isValid(chart) && fontColorCallback != null) {
+		if (IsChart.isValid(chart)) {
 			// calls callback
-			Object result = fontColorCallback.invoke(chart, context);
+			Object result = colorCallback.invoke(chart, context);
 			// checks result
 			if (result instanceof IsColor) {
 				// is color instance

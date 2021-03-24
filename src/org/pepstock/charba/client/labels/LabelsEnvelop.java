@@ -13,29 +13,27 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.labels.callbacks;
+package org.pepstock.charba.client.labels;
 
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.labels.LabelsPlugin;
-import org.pepstock.charba.client.labels.LabelsScriptableContext;
+import org.pepstock.charba.client.commons.ImmutableEnvelop;
 
 /**
- * Callback interface of {@link LabelsPlugin#ID} plugin to change font color at runtime, using the arguments.
+ * This object is a container of hidden object to pass to other packages.<br>
+ * It can not be instantiated in order that public methods can be invoked in safe mode.
  * 
  * @author Andrea "Stock" Stocchero
- *
- * @see IsColor
+ * @param <T> type of envelop content.
+ * 
  */
-public interface ColorCallback {
+public final class LabelsEnvelop<T> extends ImmutableEnvelop<T> {
 
 	/**
-	 * Called to change font color at runtime, using the arguments.
+	 * Create an envelop with the content passed as argument.
 	 * 
-	 * @param chart chart instance
-	 * @param context callback context, passed by plugin
-	 * @return a font color instance
+	 * @param content content to set as initial value
 	 */
-	Object invoke(IsChart chart, LabelsScriptableContext context);
+	LabelsEnvelop(T content) {
+		super(content);
+	}
 
 }

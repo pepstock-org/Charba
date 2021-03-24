@@ -21,10 +21,9 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.datalabels.DataLabelsEnvelop;
-import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.DatasetElement;
-import org.pepstock.charba.client.items.DatasetPoint;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.labels.LabelsEnvelop;
 
 /**
  * The option context is used to give contextual information when resolving options.
@@ -41,8 +40,6 @@ public class ScriptableContext extends AbstractScriptableContext {
 		ACTIVE("active"),
 		DATASET_INDEX("datasetIndex"),
 		DATA_INDEX("dataIndex"),
-		PARSED("parsed"),
-		RAW("raw"),
 		ELEMENT("element");
 
 		// name value of property
@@ -68,12 +65,8 @@ public class ScriptableContext extends AbstractScriptableContext {
 		}
 	}
 
-	// data point instance
-	private DatasetPoint dataPoint = null;
 	// element instance
 	private DatasetElement element = null;
-	// raw data
-	private DataItem rawData = null;
 
 	/**
 	 * Creates the object with public object instance to be wrapped, called by <code>configuration</code> package.
@@ -99,6 +92,15 @@ public class ScriptableContext extends AbstractScriptableContext {
 	 * @param envelop envelop of public object instance to be wrapped.
 	 */
 	public ScriptableContext(DataLabelsEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+
+	/**
+	 * Creates the object with public object instance to be wrapped, called by <code>labels</code> package.
+	 * 
+	 * @param envelop envelop of public object instance to be wrapped.
+	 */
+	public ScriptableContext(LabelsEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
@@ -136,34 +138,6 @@ public class ScriptableContext extends AbstractScriptableContext {
 	 */
 	public final int getDataIndex() {
 		return getValue(Property.DATA_INDEX, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the parsed data value for the given dataIndex and datasetIndex.
-	 * 
-	 * @return the parsed data value for the given dataIndex and datasetIndex
-	 */
-	public final DatasetPoint getParsed() {
-		// checks if point object is not already created
-		if (dataPoint == null) {
-			// stores point
-			this.dataPoint = new DatasetPoint(new CallbacksEnvelop<>(getValue(Property.PARSED), true));
-		}
-		return dataPoint;
-	}
-	
-	/**
-	 * Returns the raw data value for the given dataIndex and datasetIndex.
-	 * 
-	 * @return the raw data value for the given dataIndex and datasetIndex
-	 */
-	public final DataItem getRaw() {
-		// checks if raw object is not already created
-		if (rawData == null) {
-			// stores point
-			this.rawData = new DataItem(getValueAsJavaObject(Property.PARSED));
-		}
-		return rawData;
 	}
 
 	/**
