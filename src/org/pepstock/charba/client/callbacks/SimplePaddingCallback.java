@@ -13,17 +13,14 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.datalabels.callbacks;
-
-import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
+package org.pepstock.charba.client.callbacks;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>offset</code> property at runtime, using the chart instance and the plugin context.
+ * Callback interface to set <code>padding</code> property (not as object but only as number) at runtime to scale instance.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * 
  */
-public interface OffsetCallback extends Scriptable<Double> {
+public interface SimplePaddingCallback extends Scriptable<Integer, ScaleScriptableContext> {
 
 }

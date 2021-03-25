@@ -15,17 +15,15 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
-import org.pepstock.charba.client.callbacks.BorderColorCallback;
-import org.pepstock.charba.client.callbacks.BorderWidthCallback;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -38,18 +36,13 @@ import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClampCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClipCallback;
-import org.pepstock.charba.client.datalabels.callbacks.ColorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FontCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
-import org.pepstock.charba.client.datalabels.callbacks.OffsetCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
 import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
-import org.pepstock.charba.client.datalabels.callbacks.TextShadowColorCallback;
-import org.pepstock.charba.client.datalabels.callbacks.TextStrokeColorCallback;
-import org.pepstock.charba.client.datalabels.callbacks.TextStrokeWidthCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
@@ -119,7 +112,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	// callback proxy to invoke the display function
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the offset function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> offsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> offsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the opacity function
 	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> opacityCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the rotation function
@@ -142,19 +135,19 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	// formatter callback instance
 	private static final CallbackPropertyHandler<FormatterCallback> FORMATTER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FORMATTER);
 	// background color callback instance
-	private static final CallbackPropertyHandler<BackgroundColorCallback> BACKGROUND_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BACKGROUND_COLOR);
+	private static final CallbackPropertyHandler<ColorCallback<DataLabelsScriptableContext>> BACKGROUND_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BACKGROUND_COLOR);
 	// border color callback instance
-	private static final CallbackPropertyHandler<BorderColorCallback> BORDER_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_COLOR);
+	private static final CallbackPropertyHandler<ColorCallback<DataLabelsScriptableContext>> BORDER_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_COLOR);
 	// color callback instance
-	private static final CallbackPropertyHandler<ColorCallback> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
+	private static final CallbackPropertyHandler<ColorCallback<DataLabelsScriptableContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
 	// align callback instance
 	private static final CallbackPropertyHandler<AlignCallback> ALIGN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ALIGN);
 	// anchor callback instance
 	private static final CallbackPropertyHandler<AnchorCallback> ANCHOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ANCHOR);
 	// borderRadius callback instance
-	private static final CallbackPropertyHandler<RadiusCallback> BORDER_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_RADIUS);
+	private static final CallbackPropertyHandler<RadiusCallback<DataLabelsScriptableContext>> BORDER_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_RADIUS);
 	// borderWidth callback instance
-	private static final CallbackPropertyHandler<BorderWidthCallback> BORDER_WIDTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_WIDTH);
+	private static final CallbackPropertyHandler<WidthCallback<DataLabelsScriptableContext>> BORDER_WIDTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_WIDTH);
 	// clamp callback instance
 	private static final CallbackPropertyHandler<ClampCallback> CLAMP_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CLAMP);
 	// clip callback instance
@@ -162,21 +155,21 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	// display callback instance
 	private static final CallbackPropertyHandler<DisplayCallback> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
 	// offset callback instance
-	private static final CallbackPropertyHandler<OffsetCallback> OFFSET_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.OFFSET);
+	private static final CallbackPropertyHandler<OffsetCallback<DataLabelsScriptableContext>> OFFSET_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.OFFSET);
 	// opacity callback instance
 	private static final CallbackPropertyHandler<OpacityCallback> OPACITY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.OPACITY);
 	// rotation callback instance
-	private static final CallbackPropertyHandler<RotationCallback> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
+	private static final CallbackPropertyHandler<RotationCallback<DataLabelsScriptableContext>> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
 	// text align callback instance
 	private static final CallbackPropertyHandler<TextAlignCallback> TEXT_ALIGN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_ALIGN);
 	// text stroke color callback instance
-	private static final CallbackPropertyHandler<TextStrokeColorCallback> TEXT_STROKE_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_STROKE_COLOR);
+	private static final CallbackPropertyHandler<ColorCallback<DataLabelsScriptableContext>> TEXT_STROKE_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_STROKE_COLOR);
 	// text stroke width callback instance
-	private static final CallbackPropertyHandler<TextStrokeWidthCallback> TEXT_STROKE_WIDTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_STROKE_WIDTH);
+	private static final CallbackPropertyHandler<WidthCallback<DataLabelsScriptableContext>> TEXT_STROKE_WIDTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_STROKE_WIDTH);
 	// text shadow blur callback instance
 	private static final CallbackPropertyHandler<TextShadowBlurCallback> TEXT_SHADOW_BLUR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_SHADOW_BLUR);
 	// text shadow color callback instance
-	private static final CallbackPropertyHandler<TextShadowColorCallback> TEXT_SHADOW_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_SHADOW_COLOR);
+	private static final CallbackPropertyHandler<ColorCallback<DataLabelsScriptableContext>> TEXT_SHADOW_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_SHADOW_COLOR);
 	// font callback instance
 	private static final CallbackPropertyHandler<FontCallback> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
 	// padding callback instance
@@ -284,8 +277,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// -------------------------------
 		formatterCallbackProxy.setCallback((contextFunction, value, context) -> onFormatter(new DataLabelsScriptableContext(context), value));
 		// gets value calling callback
-		backgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsScriptableContext(context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), getBackgroundColorAsString()));
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsScriptableContext(context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), getBackgroundColorAsString()));
 		// gets value calling callback
 		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsScriptableContext(context), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), getBorderColorAsString()));
 		// gets value calling callback
@@ -305,7 +297,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// gets value calling callback
 		displayCallbackProxy.setCallback((contextFunction, context) -> onDisplay(new DataLabelsScriptableContext(context)));
 		// gets value calling callback
-		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsScriptableContext(context), OFFSET_PROPERTY_HANDLER.getCallback(this), getOffset()).doubleValue());
+		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsScriptableContext(context), OFFSET_PROPERTY_HANDLER.getCallback(this), getOffset()).intValue());
 		// gets value calling callback
 		opacityCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsScriptableContext(context), OPACITY_PROPERTY_HANDLER.getCallback(this), getOpacity()).doubleValue());
 		// gets value calling callback
@@ -313,15 +305,13 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// gets value calling callback
 		textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsScriptableContext(context), TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this), getTextAlign()).value());
 		// gets value calling callback
-		textStrokeColorCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsScriptableContext(context), TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this), getTextStrokeColorAsString()));
+		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsScriptableContext(context), TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this), getTextStrokeColorAsString()));
 		// gets value calling callback
 		textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsScriptableContext(context), TEXT_STROKE_WIDTH_PROPERTY_HANDLER.getCallback(this), getTextStrokeWidth()).intValue());
 		// gets value calling callback
 		textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsScriptableContext(context), TEXT_SHADOW_BLUR_PROPERTY_HANDLER.getCallback(this), getTextShadowBlur()).doubleValue());
 		// gets value calling callback
-		textShadowColorCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsScriptableContext(context), TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this), getTextShadowColorAsString()));
+		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsScriptableContext(context), TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this), getTextShadowColorAsString()));
 		// gets value calling callback
 		fontCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new DataLabelsScriptableContext(context), FONT_PROPERTY_HANDLER.getCallback(this)));
 		// gets value calling callback
@@ -673,7 +663,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param offset the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is
 	 *            'start', the label is moved in the opposite direction.
 	 */
-	public final void setOffset(double offset) {
+	public final void setOffset(int offset) {
 		setValue(Property.OFFSET, offset);
 	}
 
@@ -685,7 +675,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 *         label is moved in the opposite direction.
 	 */
 	@Override
-	public final double getOffset() {
+	public final int getOffset() {
 		return getValue(Property.OFFSET, defaultOptions.getOffset());
 	}
 
@@ -864,7 +854,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the background color callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final BackgroundColorCallback getBackgroundColorCallback() {
+	public final ColorCallback<DataLabelsScriptableContext> getBackgroundColorCallback() {
 		return BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getBackgroundColorCallback());
 	}
 
@@ -873,7 +863,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param backgroundColorCallback the background color callback.
 	 */
-	public final void setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
+	public final void setBackgroundColor(ColorCallback<DataLabelsScriptableContext> backgroundColorCallback) {
 		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, getId(), backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
 	}
 
@@ -883,7 +873,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the border color callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final BorderColorCallback getBorderColorCallback() {
+	public final ColorCallback<DataLabelsScriptableContext> getBorderColorCallback() {
 		return BORDER_COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getBorderColorCallback());
 	}
 
@@ -892,7 +882,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param borderColorCallback the border color callback.
 	 */
-	public final void setBorderColor(BorderColorCallback borderColorCallback) {
+	public final void setBorderColor(ColorCallback<DataLabelsScriptableContext> borderColorCallback) {
 		BORDER_COLOR_PROPERTY_HANDLER.setCallback(this, getId(), borderColorCallback, borderColorCallbackProxy.getProxy());
 	}
 
@@ -902,7 +892,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the color callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final ColorCallback getColorCallback() {
+	public final ColorCallback<DataLabelsScriptableContext> getColorCallback() {
 		return COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getColorCallback());
 	}
 
@@ -911,7 +901,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param colorCallback the color callback.
 	 */
-	public final void setColor(ColorCallback colorCallback) {
+	public final void setColor(ColorCallback<DataLabelsScriptableContext> colorCallback) {
 		COLOR_PROPERTY_HANDLER.setCallback(this, getId(), colorCallback, colorCallbackProxy.getProxy());
 	}
 
@@ -978,7 +968,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the border radius callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final RadiusCallback getBorderRadiusCallback() {
+	public final RadiusCallback<DataLabelsScriptableContext> getBorderRadiusCallback() {
 		return BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this, defaultOptions.getBorderRadiusCallback());
 	}
 
@@ -987,7 +977,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param borderRadiusCallback the border radius callback to set
 	 */
-	public final void setBorderRadius(RadiusCallback borderRadiusCallback) {
+	public final void setBorderRadius(RadiusCallback<DataLabelsScriptableContext> borderRadiusCallback) {
 		BORDER_RADIUS_PROPERTY_HANDLER.setCallback(this, getId(), borderRadiusCallback, borderRadiusCallbackProxy.getProxy());
 	}
 
@@ -997,7 +987,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the border width callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final BorderWidthCallback getBorderWidthCallback() {
+	public final WidthCallback<DataLabelsScriptableContext> getBorderWidthCallback() {
 		return BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultOptions.getBorderWidthCallback());
 	}
 
@@ -1006,7 +996,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param borderWidthCallback the border width callback to set
 	 */
-	public final void setBorderWidth(BorderWidthCallback borderWidthCallback) {
+	public final void setBorderWidth(WidthCallback<DataLabelsScriptableContext> borderWidthCallback) {
 		BORDER_WIDTH_PROPERTY_HANDLER.setCallback(this, getId(), borderWidthCallback, borderWidthCallbackProxy.getProxy());
 	}
 
@@ -1073,7 +1063,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the offset callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final OffsetCallback getOffsetCallback() {
+	public final OffsetCallback<DataLabelsScriptableContext> getOffsetCallback() {
 		return OFFSET_PROPERTY_HANDLER.getCallback(this, defaultOptions.getOffsetCallback());
 	}
 
@@ -1082,7 +1072,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param offsetCallback the offset callback to set
 	 */
-	public final void setOffset(OffsetCallback offsetCallback) {
+	public final void setOffset(OffsetCallback<DataLabelsScriptableContext> offsetCallback) {
 		OFFSET_PROPERTY_HANDLER.setCallback(this, getId(), offsetCallback, offsetCallbackProxy.getProxy());
 	}
 
@@ -1111,7 +1101,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the rotation callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final RotationCallback getRotationCallback() {
+	public final RotationCallback<DataLabelsScriptableContext> getRotationCallback() {
 		return ROTATION_PROPERTY_HANDLER.getCallback(this, defaultOptions.getRotationCallback());
 	}
 
@@ -1120,7 +1110,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param rotationCallback the rotation callback to set
 	 */
-	public final void setRotation(RotationCallback rotationCallback) {
+	public final void setRotation(RotationCallback<DataLabelsScriptableContext> rotationCallback) {
 		ROTATION_PROPERTY_HANDLER.setCallback(this, getId(), rotationCallback, rotationCallbackProxy.getProxy());
 	}
 
@@ -1149,7 +1139,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the text stroke color callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final TextStrokeColorCallback getTextStrokeColorCallback() {
+	public final ColorCallback<DataLabelsScriptableContext> getTextStrokeColorCallback() {
 		return TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getTextStrokeColorCallback());
 	}
 
@@ -1158,7 +1148,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param textStrokeColorCallback the text stroke color callback to set
 	 */
-	public final void setTextStrokeColor(TextStrokeColorCallback textStrokeColorCallback) {
+	public final void setTextStrokeColor(ColorCallback<DataLabelsScriptableContext> textStrokeColorCallback) {
 		TEXT_STROKE_COLOR_PROPERTY_HANDLER.setCallback(this, getId(), textStrokeColorCallback, textStrokeColorCallbackProxy.getProxy());
 	}
 
@@ -1168,7 +1158,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the text stroke width callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final TextStrokeWidthCallback getTextStrokeWidthCallback() {
+	public final WidthCallback<DataLabelsScriptableContext> getTextStrokeWidthCallback() {
 		return TEXT_STROKE_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultOptions.getTextStrokeWidthCallback());
 	}
 
@@ -1177,7 +1167,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param textStrokeWidthCallback the text stroke width callback to set
 	 */
-	public final void setTextStrokeWidth(TextStrokeWidthCallback textStrokeWidthCallback) {
+	public final void setTextStrokeWidth(WidthCallback<DataLabelsScriptableContext> textStrokeWidthCallback) {
 		TEXT_STROKE_WIDTH_PROPERTY_HANDLER.setCallback(this, getId(), textStrokeWidthCallback, textStrokeWidthCallbackProxy.getProxy());
 	}
 
@@ -1206,7 +1196,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the text shadow color callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final TextShadowColorCallback getTextShadowColorCallback() {
+	public final ColorCallback<DataLabelsScriptableContext> getTextShadowColorCallback() {
 		return TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getTextShadowColorCallback());
 	}
 
@@ -1215,7 +1205,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param textShadowColorCallback the text shadow color callback to set
 	 */
-	public final void setTextShadowColor(TextShadowColorCallback textShadowColorCallback) {
+	public final void setTextShadowColor(ColorCallback<DataLabelsScriptableContext> textShadowColorCallback) {
 		TEXT_SHADOW_COLOR_PROPERTY_HANDLER.setCallback(this, getId(), textShadowColorCallback, textShadowColorCallbackProxy.getProxy());
 	}
 
@@ -1264,15 +1254,13 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param value value to be formatted
 	 * @return a string as formatted value
 	 */
-	private String onFormatter(ScriptableContext context, Object value) {
+	private String onFormatter(DataLabelsScriptableContext context, Object value) {
 		// gets callback
 		FormatterCallback formatterCallback = FORMATTER_PROPERTY_HANDLER.getCallback(this);
-		// gets chart instance
-		IsChart chart = ScriptableUtils.retrieveChart(context, formatterCallback);
 		// checks if the handler is set
-		if (IsChart.isValid(chart)) {
+		if (ScriptableUtils.isContextConsistent(context) && formatterCallback != null) {
 			// calls callback
-			String result = formatterCallback.invoke(chart, new DataItem(value), context);
+			String result = formatterCallback.invoke(context, new DataItem(value));
 			// checks result
 			if (result != null) {
 				return result;
@@ -1288,7 +1276,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param context native object as context.
 	 * @return a object property value, as boolean or {@link Display}
 	 */
-	private Object onDisplay(ScriptableContext context) {
+	private Object onDisplay(DataLabelsScriptableContext context) {
 		// gets value
 		Display value = ScriptableUtils.getOptionValueAsString(context, DISPLAY_PROPERTY_HANDLER.getCallback(this));
 		Display result = value == null ? getDisplay() : value;
@@ -1310,7 +1298,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param callback callback to invoke
 	 * @return a native object as padding
 	 */
-	private NativeObject onPadding(ScriptableContext context, Scriptable<Padding> callback) {
+	private NativeObject onPadding(DataLabelsScriptableContext context, Scriptable<Padding, DataLabelsScriptableContext> callback) {
 		// gets value
 		Padding result = ScriptableUtils.getOptionValue(context, callback);
 		// checks if result is consistent
@@ -1329,7 +1317,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param callback callback to invoke
 	 * @return a native object as font
 	 */
-	private NativeObject onFontOrPadding(ScriptableContext context, Scriptable<Font> callback) {
+	private NativeObject onFontOrPadding(DataLabelsScriptableContext context, Scriptable<Font, DataLabelsScriptableContext> callback) {
 		// gets value
 		Font result = ScriptableUtils.getOptionValue(context, callback);
 		// checks if result is consistent

@@ -60,7 +60,7 @@ import org.pepstock.charba.client.options.HasBarDatasetOptions;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
- * The bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The bar chart allows a number of properties to be specified for each data set. These are used to set display properties for a specific data set.<br>
  * Some properties can be specified as an array. If these are set to an array value, the first value applies to the first bar, the second value to the second bar, and so on.
  * 
  * @author Andrea "Stock" Stocchero
@@ -157,7 +157,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private final BarDatasetOptionsHandler barOptionsHandler;
 
 	/**
-	 * Creates a dataset.<br>
+	 * Creates a data set.<br>
 	 * It uses the global options has default.
 	 */
 	public BarDataset() {
@@ -165,7 +165,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Creates a dataset.<br>
+	 * Creates a data set.<br>
 	 * It uses the global options has default.
 	 * 
 	 * @param hidden if <code>true</code>, it will be initially hidden.
@@ -395,18 +395,19 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Sets the base axis for the dataset. Use {@link IndexAxis#Y} for horizontal bar.
+	 * Sets the base axis for the data set.<br>
+	 * Use {@link IndexAxis#Y} for horizontal bar.
 	 * 
-	 * @param indexAxis the base axis for the dataset
+	 * @param indexAxis the base axis for the data set
 	 */
 	public void setIndexAxis(IndexAxis indexAxis) {
 		setValue(Property.INDEX_AXIS, indexAxis);
 	}
 
 	/**
-	 * Returns the base axis for the dataset.
+	 * Returns the base axis for the data set.
 	 * 
-	 * @return the base axis for the dataset
+	 * @return the base axis for the data set
 	 */
 	public IndexAxis getIndexAxis() {
 		return getValue(Property.INDEX_AXIS, IndexAxis.values(), getDefaultValues().getIndexAxis());
@@ -441,9 +442,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Returns the stroke width of the bar in pixels. If a callback has been set, returns an empty list.
+	 * Returns the stroke width of the bar in pixels.<br>
+	 * If a callback has been set, returns an empty list.
 	 * 
-	 * @return list of the stroke width of the bar in pixels. If a callback has been set, returns an empty list.
+	 * @return list of the stroke width of the bar in pixels.<br>
+	 *         If a callback has been set, returns an empty list.
 	 */
 	@Override
 	public List<Integer> getBorderWidth() {
@@ -451,9 +454,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Returns the stroke width of the bar in pixels. If a callback or an array have been set, returns an empty object.
+	 * Returns the stroke width of the bar in pixels.<br>
+	 * If a callback or an array have been set, returns an empty object.
 	 * 
-	 * @return list of the stroke width of the bar in pixels. If a callback or an array have been set, returns an empty object
+	 * @return list of the stroke width of the bar in pixels.<br>
+	 *         If a callback or an array have been set, returns an empty object
 	 */
 	public List<BarBorderWidth> getBorderWidthAsObjects() {
 		return getBorderItemAsObjects(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, BarBorderWidth.FACTORY, getDefaultBorderWidth());
@@ -673,9 +678,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
-	 * Returns the list of bar border radius (in pixels). If a callback or an array have been set, returns an empty object.
+	 * Returns the list of bar border radius (in pixels).<br>
+	 * If a callback or an array have been set, returns an empty object.
 	 * 
-	 * @return the list of bar border radius (in pixels). If a callback or an array have been set, returns an empty object
+	 * @return the list of bar border radius (in pixels).<br>
+	 *         If a callback or an array have been set, returns an empty object
 	 */
 	public List<BarBorderRadius> getBorderRadiusAsObjects() {
 		return getBorderItemAsObjects(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius());
@@ -1040,7 +1047,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param <T> type of border item object
 	 * @return a object property value, as integer or {@link AbstractBarBorderItem}
 	 */
-	private <T extends AbstractBarBorderItem> NativeObject onBorderItem(ScriptableContext context, Scriptable<Object> borderItemCallback, NativeObjectContainerFactory<T> factory, int defaultValue) {
+	private <T extends AbstractBarBorderItem> NativeObject onBorderItem(ScriptableContext context, Scriptable<Object, ScriptableContext> borderItemCallback, NativeObjectContainerFactory<T> factory, int defaultValue) {
 		// gets value
 		Object value = ScriptableUtils.getOptionValue(context, borderItemCallback);
 		// checks the type of result
@@ -1211,7 +1218,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * 
 	 * @param property property to use to store the values
 	 * @param borderItemCallback the border item callback to set
-	 * @param proxy claback proxy to set
+	 * @param proxy callback proxy to set
 	 */
 	private void setBorderItemCallback(Key property, Object borderItemCallback, Proxy proxy) {
 		setBorderItemCallback(property, null, borderItemCallback, proxy);
@@ -1223,7 +1230,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param property property to use to store the values
 	 * @param propertyType property to use to store the type
 	 * @param borderItemCallback the border item callback to set
-	 * @param proxy claback proxy to set
+	 * @param proxy callback proxy to set
 	 */
 	private void setBorderItemCallback(Key property, Key propertyType, Object borderItemCallback, Proxy proxy) {
 		// checks if callback is consistent

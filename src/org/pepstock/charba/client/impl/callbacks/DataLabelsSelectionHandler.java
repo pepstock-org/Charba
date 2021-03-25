@@ -19,18 +19,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
+import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEventHandler;
 import org.pepstock.charba.client.items.DatasetElement;
-import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
 
 /**
- * {@link DataLabelsPlugin#ID} event callbacks to invoke dataset selection handlers if there were defined.<br>
+ * {@link DataLabelsPlugin#ID} event callbacks to invoke data set selection handlers if there were defined.<br>
  * This can substitute the event handling at chart level.
  * 
  * @author Andrea "Stock" Stocchero
@@ -58,9 +58,9 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	}
 
 	/**
-	 * Adds a dataset selection handler instance to be invoke at click event.
+	 * Adds a data set selection handler instance to be invoke at click event.
 	 * 
-	 * @param handler dataset selection handler instance to be invoke at click event
+	 * @param handler data set selection handler instance to be invoke at click event
 	 */
 	public void addDatasetSelectionEventHandler(DatasetSelectionEventHandler handler) {
 		// checks if argument is consistent
@@ -70,9 +70,9 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	}
 
 	/**
-	 * Removes a dataset selection handler instance.
+	 * Removes a data set selection handler instance.
 	 * 
-	 * @param handler dataset selection handler instance
+	 * @param handler data set selection handler instance
 	 * @return <code>true</code> if the handler has been removed, otherwise <code>false</code>
 	 */
 	public boolean removeDatasetSelectionEventHandler(DatasetSelectionEventHandler handler) {
@@ -87,25 +87,25 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.ClickEventHandler#onClick(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.callbacks.ScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.events.AbstractEventHandler#onClick(org.pepstock.charba.client.datalabels.DataLabelsScriptableContext)
 	 */
 	@Override
-	public boolean onClick(IsChart chart, ScriptableContext context) {
+	public boolean onClick(DataLabelsScriptableContext context) {
+		// gets chart
+		IsChart chart = ScriptableUtils.retrieveChart(context);
 		// consistency of argument
 		// checks if there is any selection handler and
 		// chart is initialized
-		if (IsChart.isValid(chart) && context != null && !dataSelectionHandlers.isEmpty() && chart.isInitialized()) {
-			// gets dataset item
-			DatasetItem datasetItem = chart.getDatasetItem(context.getDatasetIndex());
-			// checks if consistent with next operations
-			if (datasetItem != null && !datasetItem.getElements().isEmpty()) {
-				// gets dataset element
-				DatasetElement item = datasetItem.getElements().get(context.getDataIndex());
-				// creates the dataset reference item
-				DatasetReference referenceItem = new DatasetReference(context, item);
+		if (IsChart.isValid(chart) && !dataSelectionHandlers.isEmpty() && chart.isInitialized()) {
+			// gets data set element
+			DatasetElement element = context.getDatasetElement();
+			// checks if element is consistent
+			if (element != null) {
+				// creates the data set reference element
+				DatasetReference referenceElement = new DatasetReference(context, element);
 				// creates the event
 				// setting as native event new change event
-				DatasetSelectionEvent event = new DatasetSelectionEvent(DOMBuilder.get().createChangeEvent(), chart, referenceItem);
+				DatasetSelectionEvent event = new DatasetSelectionEvent(DOMBuilder.get().createChangeEvent(), chart, referenceElement);
 				// scans the handlers
 				for (DatasetSelectionEventHandler handler : dataSelectionHandlers) {
 					// invoke the handler

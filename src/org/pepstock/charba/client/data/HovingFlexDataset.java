@@ -19,8 +19,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
-import org.pepstock.charba.client.callbacks.BorderColorCallback;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -112,7 +112,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(IsColor... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback) null);
+		setBackgroundColor((ColorCallback<ScriptableContext>) null);
 		// stores value
 		setColors(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, backgroundColor);
 		// removes previous configuration to other containers
@@ -126,7 +126,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(String... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback) null);
+		setBackgroundColor((ColorCallback<ScriptableContext>) null);
 		// stores value
 		setColors(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, backgroundColor);
 		// removes previous configuration to other containers
@@ -140,7 +140,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Pattern... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback) null);
+		setBackgroundColor((ColorCallback<ScriptableContext>) null);
 		// sets value to patterns
 		getPatternsContainer().setObjects(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor), getDefaultBackgroundColorAsString());
 		// removes previous configuration to other containers
@@ -154,7 +154,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Gradient... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback) null);
+		setBackgroundColor((ColorCallback<ScriptableContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor), getDefaultBackgroundColorAsString());
 		// removes previous configuration to other containers
@@ -162,9 +162,11 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the fill colors of the elements. If property is missing or not a color, returns an empty list.
+	 * Returns the fill colors of the elements.<br>
+	 * If property is missing or not a color, returns an empty list.
 	 * 
-	 * @return list of the fill colors of the elements. If property is missing or not a color, returns an empty list.
+	 * @return list of the fill colors of the elements.<br>
+	 *         If property is missing or not a color, returns an empty list.
 	 */
 	public List<String> getBackgroundColorAsString() {
 		// checks if the property is not a color (therefore a pattern or gradient) and no callback
@@ -180,18 +182,22 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the fill colors of the elements. If property is missing or not a color, returns an empty list.
+	 * Returns the fill colors of the elements.<br>
+	 * If property is missing or not a color, returns an empty list.
 	 * 
-	 * @return list of the fill colors of the elements. If property is missing or not a color, returns an empty list.
+	 * @return list of the fill colors of the elements.<br>
+	 *         If property is missing or not a color, returns an empty list.
 	 */
 	public List<IsColor> getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
-	 * Returns the fill patters of elements. If property is missing or not a pattern, returns an empty list.
+	 * Returns the fill patters of elements.<br>
+	 * If property is missing or not a pattern, returns an empty list.
 	 * 
-	 * @return list of the fill patterns of elements. If property is missing or not a pattern, returns an empty list.
+	 * @return list of the fill patterns of elements.<br>
+	 *         If property is missing or not a pattern, returns an empty list.
 	 */
 	public List<Pattern> getBackgroundColorAsPatterns() {
 		// checks if the property is not a pattern (therefore a color) and no callback
@@ -205,9 +211,11 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the fill gradient of elements. If property is missing or not a gradient, returns an empty list.
+	 * Returns the fill gradient of elements.<br>
+	 * If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return the fill gradient of elements. If property is missing or not a gradient, returns an empty list.
+	 * @return the fill gradient of elements.<br>
+	 *         If property is missing or not a gradient, returns an empty list.
 	 */
 	public List<Gradient> getBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern) and no callback
@@ -221,13 +229,13 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Sets the color of the bar border
+	 * Sets the color of the bar border.
 	 * 
 	 * @param borderColor the color of the bar border
 	 */
 	public void setBorderColor(IsColor... borderColor) {
 		// resets callback
-		setBorderColor((BorderColorCallback) null);
+		setBorderColor((ColorCallback<ScriptableContext>) null);
 		// stores value
 		setColors(Dataset.CanvasObjectProperty.BORDER_COLOR, borderColor);
 		// removes previous configuration to other containers
@@ -235,13 +243,13 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Sets the color of the bar border
+	 * Sets the color of the bar border.
 	 * 
 	 * @param borderColor the color of the bar border
 	 */
 	public void setBorderColor(String... borderColor) {
 		// resets callback
-		setBorderColor((BorderColorCallback) null);
+		setBorderColor((ColorCallback<ScriptableContext>) null);
 		// stores value
 		setColors(Dataset.CanvasObjectProperty.BORDER_COLOR, borderColor);
 		// removes previous configuration to other containers
@@ -255,7 +263,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderColor(Gradient... borderColor) {
 		// resets callback
-		setBorderColor((BorderColorCallback) null);
+		setBorderColor((ColorCallback<ScriptableContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.BORDER_COLOR, ArrayObject.fromOrNull(borderColor), getDefaultBorderColorAsString());
 		// removes previous configuration to other containers
@@ -263,7 +271,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the color of the bar border
+	 * Returns the color of the bar border.
 	 * 
 	 * @return list of the color of the bar border
 	 */
@@ -280,7 +288,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the color of the bar border
+	 * Returns the color of the bar border.
 	 * 
 	 * @return list of the color of the bar border
 	 */
@@ -289,9 +297,11 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the gradient of the bar border. If property is missing or not a gradient, returns an empty list.
+	 * Returns the gradient of the bar border.<br>
+	 * If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return the gradient of the bar border. If property is missing or not a gradient, returns an empty list.
+	 * @return the gradient of the bar border.<br>
+	 *         If property is missing or not a gradient, returns an empty list.
 	 */
 	public List<Gradient> getBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
@@ -317,9 +327,11 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the stroke width of the bar in pixels. If a callback has been set, returns an empty list.
+	 * Returns the stroke width of the bar in pixels.<br>
+	 * If a callback has been set, returns an empty list.
 	 * 
-	 * @return list of the stroke width of the bar in pixels. If a callback has been set, returns an empty list.
+	 * @return list of the stroke width of the bar in pixels.<br>
+	 *         If a callback has been set, returns an empty list.
 	 */
 	public List<Integer> getBorderWidth() {
 		// checks if no callback has been set
@@ -334,7 +346,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Sets the fill color of the elements when hovered
+	 * Sets the fill color of the elements when hovered.
 	 * 
 	 * @param colors the fill color of the elements when hovered
 	 */
@@ -345,7 +357,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Sets the fill color of the elements when hovered
+	 * Sets the fill color of the elements when hovered.
 	 * 
 	 * @param colors the fill color of the elements when hovered
 	 */
@@ -358,7 +370,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	/**
 	 * Sets the fill pattern of the elements when hovered.
 	 * 
-	 * @param colors the fill pattern of element when hovered.
+	 * @param colors the fill pattern of element when hovered
 	 */
 	public void setHoverBackgroundColor(Pattern... colors) {
 		// sets value to patterns
@@ -370,7 +382,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	/**
 	 * Sets the fill gradient of the elements when hovered.
 	 * 
-	 * @param colors the fill gradient of the elements when hovered.
+	 * @param colors the fill gradient of the elements when hovered
 	 */
 	public void setHoverBackgroundColor(Gradient... colors) {
 		// sets value to gradients
@@ -380,9 +392,11 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the fill color of the elements when hovered. If property is missing or not a color, returns an empty list.
+	 * Returns the fill color of the elements when hovered.<br>
+	 * If property is missing or not a color, returns an empty list.
 	 * 
-	 * @return list of the fill color of the elements when hovered. If property is missing or not a color, returns an empty list.
+	 * @return list of the fill color of the elements when hovered.<br>
+	 *         If property is missing or not a color, returns an empty list.
 	 */
 	public List<String> getHoverBackgroundColorAsString() {
 		// checks if the property is not a color (therefore a pattern or gradient)
@@ -398,18 +412,22 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the fill color of the elements when hovered. If property is missing or not a color, returns an empty list.
+	 * Returns the fill color of the elements when hovered.<br>
+	 * If property is missing or not a color, returns an empty list.
 	 * 
-	 * @return list of the fill color of the elements when hovered.If property is missing or not a color, returns an empty list.
+	 * @return list of the fill color of the elements when hovered.<br>
+	 *         If property is missing or not a color, returns an empty list.
 	 */
 	public List<IsColor> getHoverBackgroundColor() {
 		return ColorBuilder.parse(getHoverBackgroundColorAsString());
 	}
 
 	/**
-	 * Returns the fill patters of elements when hovered. If property is missing or not a pattern, returns an empty list.
+	 * Returns the fill patters of elements when hovered.<br>
+	 * If property is missing or not a pattern, returns an empty list.
 	 * 
-	 * @return list of the fill patterns of elements when hovered. If property is missing or not a pattern, returns an empty list.
+	 * @return list of the fill patterns of elements when hovered.<br>
+	 *         If property is missing or not a pattern, returns an empty list.
 	 */
 	public List<Pattern> getHoverBackgroundColorAsPatterns() {
 		// checks if the property is not a pattern (therefore a color)
@@ -423,9 +441,11 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the fill gradients of elements when hovered. If property is missing or not a gradient, returns an empty list.
+	 * Returns the fill gradients of elements when hovered.<br>
+	 * If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the fill gradients of elements when hovered. If property is missing or not a gradient, returns an empty list.
+	 * @return list of the fill gradients of elements when hovered.<br>
+	 *         If property is missing or not a gradient, returns an empty list.
 	 */
 	public List<Gradient> getHoverBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
@@ -439,7 +459,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Sets the stroke color of the elements when hovered
+	 * Sets the stroke color of the elements when hovered.
 	 * 
 	 * @param colors the stroke color of the elements when hovered
 	 */
@@ -450,7 +470,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Sets the stroke color of the elements when hovered
+	 * Sets the stroke color of the elements when hovered.
 	 * 
 	 * @param colors the stroke color of the elements when hovered
 	 */
@@ -463,7 +483,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	/**
 	 * Sets the stroke gradient of elements when hovered as gradient.
 	 * 
-	 * @param colors the stroke gradient of elements when hovered as gradient.
+	 * @param colors the stroke gradient of elements when hovered as gradient
 	 */
 	public void setHoverBorderColor(Gradient... colors) {
 		// sets value to gradients
@@ -475,7 +495,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	/**
 	 * Returns the stroke color of the elements when hovered.
 	 * 
-	 * @return list of the stroke color of the elements when hovered.
+	 * @return list of the stroke color of the elements when hovered
 	 */
 	public List<String> getHoverBorderColorAsString() {
 		// checks if the property is not a color (therefore a gradient)
@@ -491,7 +511,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the stroke color of the elements when hovered
+	 * Returns the stroke color of the elements when hovered.
 	 * 
 	 * @return list of the stroke color of the elements when hovered
 	 */
@@ -500,9 +520,11 @@ public abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns an empty list.
+	 * Returns the stroke gradients of the elements when hovered.<br>
+	 * If property is missing or not a pattern, returns an empty list.
 	 * 
-	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns an empty list.
+	 * @return list of the stroke gradients of the elements when hovered.<br>
+	 *         If property is missing or not a pattern, returns an empty list
 	 */
 	public List<Gradient> getHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
@@ -518,7 +540,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	/**
 	 * Sets the stroke width of the elements when hovered.
 	 * 
-	 * @param widths the stroke width of the elements when hovered.
+	 * @param widths the stroke width of the elements when hovered
 	 */
 	public void setHoverBorderWidth(int... widths) {
 		// resets callback
@@ -530,7 +552,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	/**
 	 * Returns the stroke width of the elements when hovered.
 	 * 
-	 * @return list of the stroke width of the elements when hovered.
+	 * @return list of the stroke width of the elements when hovered
 	 */
 	public List<Integer> getHoverBorderWidth() {
 		// checks if no callback has been set

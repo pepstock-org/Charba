@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.enums;
 
-import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
-import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.data.BarBorderWidth;
@@ -38,7 +38,7 @@ public enum BorderItemType implements Key
 	 */
 	OBJECTS("objects"),
 	/**
-	 * When border width or radius are missing or set by a callback, {@link BorderWidthCallback} or {@link BorderRadiusCallback}.
+	 * When border width or radius are missing or set by a callback, {@link WidthCallback} or {@link RadiusCallback}.
 	 */
 	UNKNOWN("unknown");
 

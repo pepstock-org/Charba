@@ -15,14 +15,13 @@
 */
 package org.pepstock.charba.client.datalabels.callbacks;
 
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.data.FloatingData;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
+import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
 import org.pepstock.charba.client.items.DataItem;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>formatter</code> property at runtime, using the chart instance and the plugin context.<br>
+ * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>formatter</code> property at runtime, using the plugin context.<br>
  * Labels can be displayed on multiple lines by using the newline character <code>\n</code> between each line or by providing an array of strings where each item represents a new
  * line.
  * 
@@ -34,12 +33,11 @@ public interface FormatterCallback {
 	/**
 	 * Returns the formatted label value.
 	 * 
-	 * @param chart chart instance
+	 * @param context {@link DataLabelsPlugin#ID} plugin context instance
 	 * @param dataItem value container to be formatted.<br>
 	 *            Can be a simple <code>double</code>, {@link String} or a {@link FloatingData}.
-	 * @param context {@link DataLabelsPlugin#ID} plugin context instance
 	 * @return the label value to be showed
 	 */
-	String invoke(IsChart chart, DataItem dataItem, ScriptableContext context);
+	String invoke(DataLabelsScriptableContext context, DataItem dataItem);
 
 }

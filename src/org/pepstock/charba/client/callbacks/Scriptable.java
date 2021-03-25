@@ -15,23 +15,22 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.IsChart;
-
 /**
  * Interface to map all callback of scriptable options available for CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
+ * 
  * @param <T> type of result of invocation method.
+ * @param <C> type of context to pass to the callback.
  */
-public interface Scriptable<T> {
+public interface Scriptable<T, C extends AbstractScriptableContext> {
 
 	/**
 	 * Returns the value of property at runtime, using the chart instance and the context.
 	 * 
-	 * @param chart chart instance
 	 * @param context context instance
 	 * @return value of property to be applied
 	 */
-	T invoke(IsChart chart, ScriptableContext context);
+	T invoke(C context);
 
 }

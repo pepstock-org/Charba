@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -61,6 +60,7 @@ public class DatasetElement extends NativeObjectContainer {
 		// bubble, line, radar
 		SKIP("skip"),
 		// line
+		// FIXME
 		CONTROL_POINT_PREVIOUS_X("controlPointPreviousX"),
 		CONTROL_POINT_PREVIOUS_Y("controlPointPreviousY"),
 		CONTROL_POINT_NEXT_X("controlPointNextX"),
@@ -94,15 +94,6 @@ public class DatasetElement extends NativeObjectContainer {
 
 	// dataset item options instance
 	private final DatasetElementOptions options;
-
-	/**
-	 * Creates the object with a native object passed as argument.
-	 * 
-	 * @param envelop envelop of native java script object which contains all properties.
-	 */
-	public DatasetElement(CallbacksEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
 
 	/**
 	 * Creates the item using an envelop of the native java script object which contains all properties.

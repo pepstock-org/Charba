@@ -16,13 +16,10 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.commons.IsEnvelop;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.datalabels.DataLabelsEnvelop;
-import org.pepstock.charba.client.items.DatasetElement;
-import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.labels.LabelsEnvelop;
 
 /**
@@ -30,43 +27,7 @@ import org.pepstock.charba.client.labels.LabelsEnvelop;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class ScriptableContext extends AbstractScriptableContext {
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		ACTIVE("active"),
-		DATASET_INDEX("datasetIndex"),
-		DATA_INDEX("dataIndex"),
-		ELEMENT("element");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-	}
-
-	// element instance
-	private DatasetElement element = null;
+public class ScriptableContext extends AbstractDatasetScriptableContext {
 
 	/**
 	 * Creates the object with public object instance to be wrapped, called by <code>configuration</code> package.
@@ -111,47 +72,6 @@ public class ScriptableContext extends AbstractScriptableContext {
 	 */
 	private ScriptableContext(NativeObject nativeObject) {
 		super(nativeObject);
-	}
-
-	/**
-	 * Returns true if element is active (hovered).
-	 * 
-	 * @return true if element is active (hovered)
-	 */
-	public final boolean isActive() {
-		return getValue(Property.ACTIVE, false);
-	}
-
-	/**
-	 * Returns the index of the current data set.
-	 * 
-	 * @return the index of the current data set.
-	 */
-	public final int getDatasetIndex() {
-		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the index of the current data.
-	 * 
-	 * @return the index of the current data.
-	 */
-	public final int getDataIndex() {
-		return getValue(Property.DATA_INDEX, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the element (point, arc, bar, etc.) for this data.
-	 * 
-	 * @return the element (point, arc, bar, etc.) for this data
-	 */
-	public final DatasetElement getElement() {
-		// checks if element object is not already created
-		if (element == null) {
-			// stores element
-			this.element = new DatasetElement(new CallbacksEnvelop<>(getValue(Property.ELEMENT), true));
-		}
-		return element;
 	}
 
 }

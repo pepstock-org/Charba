@@ -24,15 +24,13 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
-import org.pepstock.charba.client.callbacks.BorderColorCallback;
-import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.AbstractNode;
@@ -62,8 +60,8 @@ import org.pepstock.charba.client.plugins.PluginIdChecker;
 import org.pepstock.charba.client.utils.JSON;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
- * This is the base implementation for all datasets with common fields.
+ * The chart allows a number of properties to be specified for each data set. These are used to set display properties for a specific data set.<br>
+ * This is the base implementation for all data sets with common fields.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -86,17 +84,17 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// hover background color callback instance
-	private BackgroundColorCallback hoverBackgroundColorCallback = null;
+	private ColorCallback<ScriptableContext> hoverBackgroundColorCallback = null;
 	// hover border color callback instance
-	private BorderColorCallback hoverBorderColorCallback = null;
+	private ColorCallback<ScriptableContext> hoverBorderColorCallback = null;
 	// hover borderWidth callback instance
-	private BorderWidthCallback hoverBorderWidthCallback = null;
+	private WidthCallback<ScriptableContext> hoverBorderWidthCallback = null;
 	// background color callback instance
-	private BackgroundColorCallback backgroundColorCallback = null;
+	private ColorCallback<ScriptableContext> backgroundColorCallback = null;
 	// border color callback instance
-	private BorderColorCallback borderColorCallback = null;
+	private ColorCallback<ScriptableContext> borderColorCallback = null;
 	// borderWidth callback instance
-	private BorderWidthCallback borderWidthCallback = null;
+	private WidthCallback<ScriptableContext> borderWidthCallback = null;
 
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
@@ -115,14 +113,14 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	// gradients container
 	private final GradientsContainer gradientsContainer;
 	// cache for gradients created by callbacks
-	// K = key + dataset locator, V = gradient
+	// K = key + data set locator, V = gradient
 	private final Map<String, Gradient> callbackGradientsContainer = new HashMap<>();
 	// cache for patterns created by callbacks
-	// K = key + dataset locator, V = pattern
+	// K = key + data set locator, V = pattern
 	private final Map<String, Pattern> callbackPatternsContainer = new HashMap<>();
 	// default options values
 	private final IsDefaultOptions defaultValues;
-	// chart type related to dataset
+	// chart type related to data set
 	private final Type type;
 	// scope instance
 	private final String scope;
@@ -255,9 +253,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Creates the dataset using a default and chart type related to the dataset, adding patterns and gradients element.
+	 * Creates the data set using a default and chart type related to the data set, adding patterns and gradients element.
 	 * 
-	 * @param type chart type related to the dataset
+	 * @param type chart type related to the data set
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
@@ -281,7 +279,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		this.gradientsContainer = new GradientsContainer(this);
 		// stores the id based on a counter
 		setValue(InternalProperty.CHARBA_ID, COUNTER.getAndIncrement());
-		// sets the Charba containers in the dataset java script configuration
+		// sets the Charba containers in the data set java script configuration
 		setValue(InternalProperty.CHARBA_PATTERNS, patternsContainer);
 		setValue(InternalProperty.CHARBA_GRADIENTS, gradientsContainer);
 		// sets default data type
@@ -319,27 +317,27 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns the unique id of datasets.
+	 * Returns the unique id of data sets.
 	 * 
-	 * @return the unique id of datasets
+	 * @return the unique id of data sets
 	 */
 	public final int getId() {
 		return getValue(InternalProperty.CHARBA_ID, UndefinedValues.INTEGER);
 	}
 
 	/**
-	 * Returns the scope of the dataset, which is the options are used for defaults, chart defaults or chart.
+	 * Returns the scope of the data set, which is the options are used for defaults, chart defaults or chart.
 	 * 
-	 * @return the scope of the dataset
+	 * @return the scope of the data set
 	 */
 	public final String getScope() {
 		return scope;
 	}
 
 	/**
-	 * Returns the data type of datasets.
+	 * Returns the data type of data sets.
 	 * 
-	 * @return the data type of datasets
+	 * @return the data type of data sets
 	 */
 	public final DataType getDataType() {
 		return getValue(InternalProperty.CHARBA_DATA_TYPE, DataType.values(), DataType.UNKNOWN);
@@ -424,12 +422,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Removes the property key related to the color from dataset object and gradient container if pattern is selected.
+	 * Removes the property key related to the color from data set object and gradient container if pattern is selected.
 	 * 
 	 * @param key key property name to remove.
 	 */
 	final void resetBeingPatterns(Key key) {
-		// removes color key from dataset object
+		// removes color key from data set object
 		remove(key);
 		// remove from gradients
 		getGradientsContainer().removeObjects(key);
@@ -438,12 +436,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Removes the property key related to the color from dataset object and pattern container if gradient is selected.
+	 * Removes the property key related to the color from data set object and pattern container if gradient is selected.
 	 * 
 	 * @param key key property name to remove.
 	 */
 	final void resetBeingGradients(Key key) {
-		// removes color key from dataset object
+		// removes color key from data set object
 		remove(key);
 		// remove from patterns
 		getPatternsContainer().removeObjects(key);
@@ -452,12 +450,12 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Removes the property key related to the color from dataset object and pattern and gradient containers if callback is selected.
+	 * Removes the property key related to the color from data set object and pattern and gradient containers if callback is selected.
 	 * 
 	 * @param key key property name to remove.
 	 */
 	final void resetBeingCallback(Key key) {
-		// removes color key from dataset object
+		// removes color key from data set object
 		remove(key);
 		// remove from patterns
 		getPatternsContainer().removeObjects(key);
@@ -470,7 +468,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the background color callback, if set, otherwise <code>null</code>.
 	 */
-	public BackgroundColorCallback getBackgroundColorCallback() {
+	public ColorCallback<ScriptableContext> getBackgroundColorCallback() {
 		return backgroundColorCallback;
 	}
 
@@ -479,7 +477,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param backgroundColorCallback the background color callback.
 	 */
-	public void setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
+	public void setBackgroundColor(ColorCallback<ScriptableContext> backgroundColorCallback) {
 		// sets the callback
 		this.backgroundColorCallback = backgroundColorCallback;
 		// checks if callback is consistent
@@ -499,7 +497,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the border color callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderColorCallback getBorderColorCallback() {
+	public ColorCallback<ScriptableContext> getBorderColorCallback() {
 		return borderColorCallback;
 	}
 
@@ -508,7 +506,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param borderColorCallback the border color callback.
 	 */
-	public void setBorderColor(BorderColorCallback borderColorCallback) {
+	public void setBorderColor(ColorCallback<ScriptableContext> borderColorCallback) {
 		// sets the callback
 		this.borderColorCallback = borderColorCallback;
 		// checks if callback is consistent
@@ -528,7 +526,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the border width callback, if set, otherwise <code>null</code>.
 	 */
-	final BorderWidthCallback getInternalBorderWidthCallback() {
+	final WidthCallback<ScriptableContext> getInternalBorderWidthCallback() {
 		return borderWidthCallback;
 	}
 
@@ -537,7 +535,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param borderWidthCallback the border width callback to set
 	 */
-	final void setInternalBorderWidth(BorderWidthCallback borderWidthCallback) {
+	final void setInternalBorderWidth(WidthCallback<ScriptableContext> borderWidthCallback) {
 		// sets the callback
 		this.borderWidthCallback = borderWidthCallback;
 		// checks if callback is consistent
@@ -555,7 +553,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the hover background color callback, if set, otherwise <code>null</code>.
 	 */
-	public BackgroundColorCallback getHoverBackgroundColorCallback() {
+	public ColorCallback<ScriptableContext> getHoverBackgroundColorCallback() {
 		return hoverBackgroundColorCallback;
 	}
 
@@ -564,7 +562,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param hoverBackgroundColorCallback the hover background color callback.
 	 */
-	public void setHoverBackgroundColor(BackgroundColorCallback hoverBackgroundColorCallback) {
+	public void setHoverBackgroundColor(ColorCallback<ScriptableContext> hoverBackgroundColorCallback) {
 		// sets the callback
 		this.hoverBackgroundColorCallback = hoverBackgroundColorCallback;
 		// checks if callback is consistent
@@ -584,7 +582,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the hover border color callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderColorCallback getHoverBorderColorCallback() {
+	public ColorCallback<ScriptableContext> getHoverBorderColorCallback() {
 		return hoverBorderColorCallback;
 	}
 
@@ -593,7 +591,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param hoverBorderColorCallback the hover border color callback.
 	 */
-	public void setHoverBorderColor(BorderColorCallback hoverBorderColorCallback) {
+	public void setHoverBorderColor(ColorCallback<ScriptableContext> hoverBorderColorCallback) {
 		// sets the callback
 		this.hoverBorderColorCallback = hoverBorderColorCallback;
 		// checks if callback is consistent
@@ -613,7 +611,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the hover border width callback, if set, otherwise <code>null</code>.
 	 */
-	final BorderWidthCallback getInternalHoverBorderWidthCallback() {
+	final WidthCallback<ScriptableContext> getInternalHoverBorderWidthCallback() {
 		return hoverBorderWidthCallback;
 	}
 
@@ -622,7 +620,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param hoverBorderWidthCallback the hover border width callback to set
 	 */
-	final void setInternalHoverBorderWidth(BorderWidthCallback hoverBorderWidthCallback) {
+	final void setInternalHoverBorderWidth(WidthCallback<ScriptableContext> hoverBorderWidthCallback) {
 		// sets the callback
 		this.hoverBorderWidthCallback = hoverBorderWidthCallback;
 		// checks if callback is consistent
@@ -666,9 +664,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Sets if the dataset will appear or not.
+	 * Sets if the data set will appear or not.
 	 * 
-	 * @param hidden if the dataset will appear or not.
+	 * @param hidden if the data set will appear or not.
 	 */
 	protected final void setHidden(boolean hidden) {
 		// checks if is hidden
@@ -683,27 +681,27 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns if the dataset at first drawing will appear or not.
+	 * Returns if the data set at first drawing will appear or not.
 	 * 
-	 * @return if the dataset at first drawing will appear or not.
+	 * @return if the data set at first drawing will appear or not.
 	 */
 	public final boolean isHidden() {
 		return getValue(InternalProperty.HIDDEN, DEFAULT_HIDDEN);
 	}
 
 	/**
-	 * Sets the label for the dataset which appears in the legend and tooltips.
+	 * Sets the label for the data set which appears in the legend and tooltips.
 	 * 
-	 * @param label the label for the dataset which appears in the legend and tooltips.
+	 * @param label the label for the data set which appears in the legend and tooltips.
 	 */
 	public void setLabel(String label) {
 		setValue(InternalProperty.LABEL, label);
 	}
 
 	/**
-	 * Returns the label for the dataset which appears in the legend and tooltips.
+	 * Returns the label for the data set which appears in the legend and tooltips.
 	 * 
-	 * @return the label for the dataset which appears in the legend and tooltips.
+	 * @return the label for the data set which appears in the legend and tooltips.
 	 */
 	public String getLabel() {
 		return getValue(InternalProperty.LABEL, UndefinedValues.STRING);
@@ -767,22 +765,23 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			return new Clip(getClip());
 		}
 		// creates new value with previous item
-		// if there is otherwise an empyt object
+		// if there is otherwise an empty object
 		return new Clip(getValue(CommonProperty.CLIP));
 	}
 
 	/**
-	 * Returns <code>true</code> if dataset must use only data points otherwise <code>false</code>.<br>
-	 * The dataset which can set this capabilities, must override this method.
+	 * Returns <code>true</code> if data set must use only data points otherwise <code>false</code>.<br>
+	 * The data set which can set this capabilities, must override this method.
 	 * 
-	 * @return <code>true</code> if dataset must use only data points otherwise <code>false</code>
+	 * @return <code>true</code> if data set must use only data points otherwise <code>false</code>
 	 */
 	boolean mustUseDataPoints() {
 		return false;
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x axis.
+	 * Sets the data property of a data set for a chart is specified as an array of numbers.<br>
+	 * Each point in the data array corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param values an array of numbers
 	 */
@@ -799,7 +798,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x axis.
+	 * Sets the data property of a data set for a chart is specified as an array of numbers.<br>
+	 * Each point in the data array corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param values list of numbers.
 	 */
@@ -816,8 +816,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x
-	 * axis.
+	 * Returns the data property of a data set for a chart is specified as an array of numbers.<br>
+	 * Each point in the data array corresponds to the label at the same index on the x axis.
 	 * 
 	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
 	 */
@@ -826,8 +826,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x
-	 * axis.
+	 * Returns the data property of a data set for a chart is specified as an array of numbers.<br>
+	 * Each point in the data array corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
@@ -860,9 +860,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * Returns the data property of a data set for a chart is specified as an array of data points
 	 * 
-	 * @param factory datapoint object factory
+	 * @param factory data point object factory
 	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
@@ -889,7 +889,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of data points.
+	 * Sets the data property of a data set for a chart is specified as an array of data points.
 	 * 
 	 * @param datapoints an array of data points
 	 */
@@ -900,7 +900,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of data points.
+	 * Sets the data property of a data set for a chart is specified as an array of data points.
 	 * 
 	 * @param datapoints a list of data points
 	 */
@@ -911,9 +911,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * Returns the data property of a data set for a chart is specified as an array of data points.
 	 * 
-	 * @param factory datapoint object factory
+	 * @param factory data point object factory
 	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
@@ -940,7 +940,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of time series item.
+	 * Sets the data property of a data set for a chart is specified as an array of time series item.
 	 * 
 	 * @param timeSeriesItems an array of time series item
 	 */
@@ -955,7 +955,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of time series items.
+	 * Sets the data property of a data set for a chart is specified as an array of time series items.
 	 * 
 	 * @param timeSeriesItems a list of time series items
 	 */
@@ -980,9 +980,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns the type of dataset, based on type of chart.
+	 * Returns the type of data set, based on type of chart.
 	 * 
-	 * @return type of dataset.
+	 * @return type of data set.
 	 */
 	public final Type getType() {
 		return type;
@@ -1020,8 +1020,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Sets the plugin dataset configuration.<br>
-	 * If dataset configuration options is <code>null</code>, the configuration of plugin will be removed.
+	 * Sets the plugin data set configuration.<br>
+	 * If data set configuration options is <code>null</code>, the configuration of plugin will be removed.
 	 * 
 	 * @param pluginId plugin id.
 	 * @param options options used to configure the plugin.<br>
@@ -1043,7 +1043,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Checks if there is any dataset configuration for a specific plugin, by its id.
+	 * Checks if there is any data set configuration for a specific plugin, by its id.
 	 * 
 	 * @param pluginId plugin id.
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
@@ -1054,7 +1054,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns the plugin dataset configuration, if exist.<br>
+	 * Returns the plugin data set configuration, if exist.<br>
 	 * It uses a factory instance to create a plugin options.
 	 * 
 	 * @param pluginId plugin id.
@@ -1108,10 +1108,10 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns the gradient configured by callback for a specific dataset and data index, for a specific property.
+	 * Returns the gradient configured by callback for a specific data set and data index, for a specific property.
 	 * 
-	 * @param property property of dataset which have stored the gradient
-	 * @param datasetIndex dataset index to get gradient
+	 * @param property property of data set which have stored the gradient
+	 * @param datasetIndex data set index to get gradient
 	 * @param index data index to get the gradient
 	 * @return the gradient instance or <code>null</code> if not defined
 	 */
@@ -1128,10 +1128,10 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns the pattern configured by callback for a specific dataset and data index, for a specific property.
+	 * Returns the pattern configured by callback for a specific data set and data index, for a specific property.
 	 * 
-	 * @param property property of dataset which have stored the pattern
-	 * @param datasetIndex dataset index to get pattern
+	 * @param property property of data set which have stored the pattern
+	 * @param datasetIndex data set index to get pattern
 	 * @param index data index to get the pattern
 	 * @return the pattern instance or <code>null</code> if not defined
 	 */
@@ -1152,17 +1152,15 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param context scriptable context
 	 * @param callback callback to invoke
-	 * @param property property of dataset used to store the color
+	 * @param property property of data set used to store the color
 	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
 	 * @return a value of property as color
 	 */
-	protected final Object invokeColorCallback(ScriptableContext context, Scriptable<?> callback, CanvasObjectKey property, String defaultValue) {
+	protected final Object invokeColorCallback(ScriptableContext context, Scriptable<?, ScriptableContext> callback, CanvasObjectKey property, String defaultValue) {
 		// checks if the context and chart are correct
-		if (context != null && IsChart.isValid(context.getChart())) {
-			// gets chart instance
-			IsChart chart = context.getChart();
+		if (context != null) {
 			// calls callback
-			Object result = callback.invoke(chart, context);
+			Object result = callback.invoke(context);
 			if (result instanceof Gradient) {
 				String key = createCallbackCanvasObjectKey(property, context.getDatasetIndex(), context.getDataIndex());
 				Gradient gradient = (Gradient) result;
@@ -1182,8 +1180,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * Returns a unique key to store canvas objects, created by callbacks, in the a cache.<br>
 	 * The format is <code>[property],[datasetIndex],[dataIndex]</code>.
 	 * 
-	 * @param property property of dataset
-	 * @param datasetIndex dataset index
+	 * @param property property of data set
+	 * @param datasetIndex data set index
 	 * @param index data index
 	 * @return the key to use to store canvas object in the cache
 	 */
@@ -1194,34 +1192,34 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		StringBuilder sb = new StringBuilder();
 		// adds property value
 		sb.append(property.value()).append(Constants.COMMA);
-		// adds dataset index getting the max with 0
-		// because where the dataset is not defined, the value is integer min value
+		// adds data set index getting the max with 0
+		// because where the data set is not defined, the value is integer min value
 		sb.append(Math.max(datasetIndex, 0)).append(Constants.COMMA);
 		// adds data index getting the max with 0
-		// because where the dataset is not defined, the value is integer min value
+		// because where the data set is not defined, the value is integer min value
 		sb.append(Math.max(index, 0));
 		return sb.toString();
 	}
 
 	/**
-	 * Returns the JSON representation of dataset. This is used y canvas object handler to know if the dataset has been changed.
+	 * Returns the JSON representation of data set. This is used y canvas object handler to know if the data set has been changed.
 	 * 
-	 * @return JSON representation of dataset
+	 * @return JSON representation of data set
 	 */
 	String toFilteredJSON() {
 		return JSON.stringifyNativeObject(getNativeObject(), -1);
 	}
 
 	/**
-	 * Creates a key for the dataset options.<br>
+	 * Creates a key for the data set options.<br>
 	 * The format is the following:<br>
 	 * <br>
 	 * <code>&lt;dataset-[datasetId]&gt;</code><br>
 	 * <br>
-	 * where dataset id if is the id of the dataset.
+	 * where data set id if is the id of the data set.
 	 * 
-	 * @param id the id of dataset
-	 * @return a key for the dataet options
+	 * @param id the id of data set
+	 * @return a key for the data set options
 	 */
 	private static final String createScope(int id) {
 		// creates a string builder

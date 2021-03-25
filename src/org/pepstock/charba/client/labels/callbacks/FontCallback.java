@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.labels.callbacks;
 
-import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.labels.Font;
 import org.pepstock.charba.client.labels.LabelsPlugin;
@@ -28,15 +28,6 @@ import org.pepstock.charba.client.labels.LabelsScriptableContext;
  *
  * @see IsColor
  */
-public interface FontCallback {
-
-	/**
-	 * Called to set the font of the label at runtime.
-	 * 
-	 * @param chart chart instance
-	 * @param context callback context, passed by plugin
-	 * @return a font instance
-	 */
-	Font invoke(IsChart chart, LabelsScriptableContext context);
+public interface FontCallback extends Scriptable<Font, LabelsScriptableContext> {
 
 }

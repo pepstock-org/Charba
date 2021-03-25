@@ -26,6 +26,6 @@ import org.pepstock.charba.client.enums.PointStyle;
  * @see PointStyle
  * @see Img
  */
-public interface PointStyleCallback extends Scriptable<Object> {
+public interface PointStyleCallback extends Scriptable<Object, ScriptableContext> {
 
 }

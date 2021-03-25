@@ -60,13 +60,13 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// radius callback instance
-	private RadiusCallback radiusCallback = null;
+	private RadiusCallback<ScriptableContext> radiusCallback = null;
 	// hit radius callback instance
-	private RadiusCallback hitRadiusCallback = null;
+	private RadiusCallback<ScriptableContext> hitRadiusCallback = null;
 	// hover radius callback instance
-	private RadiusCallback hoverRadiusCallback = null;
+	private RadiusCallback<ScriptableContext> hoverRadiusCallback = null;
 	// rotation callback instance
-	private RotationCallback rotationCallback = null;
+	private RotationCallback<ScriptableContext> rotationCallback = null;
 	// point style callback instance
 	private PointStyleCallback pointStyleCallback = null;
 
@@ -237,7 +237,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 */
 	public void setHitRadius(double... hitRadius) {
 		// resets callback
-		setHitRadius((RadiusCallback) null);
+		setHitRadius((RadiusCallback<ScriptableContext>) null);
 		// stores value
 		setValueOrArray(Property.HIT_RADIUS, hitRadius);
 	}
@@ -266,7 +266,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 */
 	public void setHoverRadius(double... hoverRadius) {
 		// resets callback
-		setHoverRadius((RadiusCallback) null);
+		setHoverRadius((RadiusCallback<ScriptableContext>) null);
 		// stores value
 		setValueOrArray(Property.HOVER_RADIUS, hoverRadius);
 	}
@@ -296,7 +296,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 */
 	public void setRadius(double... radius) {
 		// resets callback
-		setRadius((RadiusCallback) null);
+		setRadius((RadiusCallback<ScriptableContext>) null);
 		// stores value
 		setValueOrArray(Property.RADIUS, radius);
 	}
@@ -325,7 +325,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 */
 	public void setRotation(double... rotation) {
 		// resets callback
-		setRotation((RotationCallback) null);
+		setRotation((RotationCallback<ScriptableContext>) null);
 		// stores value
 		setValueOrArray(Property.ROTATION, rotation);
 	}
@@ -352,7 +352,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * 
 	 * @return the radius callback, if set, otherwise <code>null</code>.
 	 */
-	public RadiusCallback getRadiusCallback() {
+	public RadiusCallback<ScriptableContext> getRadiusCallback() {
 		return radiusCallback;
 	}
 
@@ -361,7 +361,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * 
 	 * @param radiusCallback the radius callback to set
 	 */
-	public void setRadius(RadiusCallback radiusCallback) {
+	public void setRadius(RadiusCallback<ScriptableContext> radiusCallback) {
 		// sets the callback
 		this.radiusCallback = radiusCallback;
 		// checks if callback is consistent
@@ -379,7 +379,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * 
 	 * @return the hit radius callback, if set, otherwise <code>null</code>.
 	 */
-	public RadiusCallback getHitRadiusCallback() {
+	public RadiusCallback<ScriptableContext> getHitRadiusCallback() {
 		return hitRadiusCallback;
 	}
 
@@ -388,7 +388,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * 
 	 * @param hitRadiusCallback the hit radius callback to set
 	 */
-	public void setHitRadius(RadiusCallback hitRadiusCallback) {
+	public void setHitRadius(RadiusCallback<ScriptableContext> hitRadiusCallback) {
 		// sets the callback
 		this.hitRadiusCallback = hitRadiusCallback;
 		// checks if callback is consistent
@@ -406,7 +406,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * 
 	 * @return the hover radius callback, if set, otherwise <code>null</code>.
 	 */
-	public RadiusCallback getHoverRadiusCallback() {
+	public RadiusCallback<ScriptableContext> getHoverRadiusCallback() {
 		return hoverRadiusCallback;
 	}
 
@@ -415,7 +415,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * 
 	 * @param hoverRadiusCallback the hover radius callback to set
 	 */
-	public void setHoverRadius(RadiusCallback hoverRadiusCallback) {
+	public void setHoverRadius(RadiusCallback<ScriptableContext> hoverRadiusCallback) {
 		// sets the callback
 		this.hoverRadiusCallback = hoverRadiusCallback;
 		// checks if callback is consistent
@@ -433,7 +433,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * 
 	 * @return the rotation callback, if set, otherwise <code>null</code>.
 	 */
-	public RotationCallback getRotationCallback() {
+	public RotationCallback<ScriptableContext> getRotationCallback() {
 		return rotationCallback;
 	}
 
@@ -442,7 +442,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * 
 	 * @param rotationCallback the rotation callback to set
 	 */
-	public void setRotation(RotationCallback rotationCallback) {
+	public void setRotation(RotationCallback<ScriptableContext> rotationCallback) {
 		// sets the callback
 		this.rotationCallback = rotationCallback;
 		// checks if callback is consistent

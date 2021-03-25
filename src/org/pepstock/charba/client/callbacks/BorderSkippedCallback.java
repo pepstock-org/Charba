@@ -23,6 +23,6 @@ import org.pepstock.charba.client.enums.BorderSkipped;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface BorderSkippedCallback extends Scriptable<BorderSkipped> {
+public interface BorderSkippedCallback extends Scriptable<BorderSkipped, ScriptableContext> {
 
 }

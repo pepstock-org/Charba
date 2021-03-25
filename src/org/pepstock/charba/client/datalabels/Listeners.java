@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -148,15 +146,13 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 * @param context native object as context.
 	 * @return a object property value, as boolean
 	 */
-	private boolean onClick(ScriptableContext context) {
+	private boolean onClick(DataLabelsScriptableContext context) {
 		// gets callback
 		ClickEventHandler clickEventHandler = CLICK_EVENT_PROPERTY_HANDLER.getCallback(this);
-		// gets chart instance
-		IsChart chart = ScriptableUtils.retrieveChart(context, clickEventHandler);
-		// checks if the handler is set
-		if (IsChart.isValid(chart)) {
+		// checks if the context and handler are consistent
+		if (ScriptableUtils.isContextConsistent(context) && clickEventHandler != null) {
 			// calls handler
-			return clickEventHandler.onClick(chart, context);
+			return clickEventHandler.onClick(context);
 		}
 		// defaults always true
 		return true;
@@ -168,15 +164,13 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 * @param context native object as context.
 	 * @return a object property value, as boolean
 	 */
-	private boolean onEnter(ScriptableContext context) {
+	private boolean onEnter(DataLabelsScriptableContext context) {
 		// gets callback
 		EnterEventHandler enterEventHandler = ENTER_EVENT_PROPERTY_HANDLER.getCallback(this);
-		// gets chart instance
-		IsChart chart = ScriptableUtils.retrieveChart(context, enterEventHandler);
-		// checks if the handler is set
-		if (IsChart.isValid(chart)) {
+		// checks if the context and handler are consistent
+		if (ScriptableUtils.isContextConsistent(context) && enterEventHandler != null) {
 			// calls handler
-			return enterEventHandler.onEnter(chart, context);
+			return enterEventHandler.onEnter(context);
 		}
 		// defaults always true
 		return true;
@@ -188,15 +182,13 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 * @param context native object as context.
 	 * @return a object property value, as boolean
 	 */
-	private boolean onLeave(ScriptableContext context) {
+	private boolean onLeave(DataLabelsScriptableContext context) {
 		// gets callback
 		LeaveEventHandler leaveEventHandler = LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this);
-		// gets chart instance
-		IsChart chart = ScriptableUtils.retrieveChart(context, leaveEventHandler);
-		// checks if the handler is set
-		if (IsChart.isValid(chart)) {
+		// checks if the context and handler are consistent
+		if (ScriptableUtils.isContextConsistent(context) && leaveEventHandler != null) {
 			// calls handler
-			return leaveEventHandler.onLeave(chart, context);
+			return leaveEventHandler.onLeave(context);
 		}
 		// defaults always true
 		return true;

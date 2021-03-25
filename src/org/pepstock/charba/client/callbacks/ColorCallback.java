@@ -20,14 +20,28 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 
 /**
- * Callback interface to set <code>textStrokeColor</code> property at runtime to ticks instances.
+ * Callback interface to set <br>
+ * <ul>
+ * <li><code>borderColor</code>
+ * <li><code>hoverBorderColor</code>
+ * <li><code>pointBorderColor</code>
+ * <li><code>pointHoverBorderColor</code>
+ * <li><code>textStrokeColor</code>
+ * <li><code>backgroundColor</code>
+ * <li><code>hoverBackgroundColor</code>
+ * <li><code>pointBackgroundColor</code>
+ * <li><code>pointHoverBackgroundColor</code>
+ * </ul>
+ * property at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
  *
  * @see IsColor
  * @see Pattern
  * @see Gradient
+ * 
+ * @param <C> type of context to pass to the callback.
  */
-public interface TextStrokeColorCallback extends ScaleScriptable<Object> {
+public interface ColorCallback<C extends AbstractScriptableContext> extends Scriptable<Object, C> {
 
 }

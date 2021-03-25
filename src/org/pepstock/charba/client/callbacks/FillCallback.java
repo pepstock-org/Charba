@@ -37,6 +37,6 @@ import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
  * @see AbsoluteDatasetIndexFill
  * @see RelativeDatasetIndexFill
  */
-public interface FillCallback extends Scriptable<Object> {
+public interface FillCallback extends Scriptable<Object, ScriptableContext> {
 
 }

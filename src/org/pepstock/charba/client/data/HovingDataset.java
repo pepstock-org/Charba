@@ -19,9 +19,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
-import org.pepstock.charba.client.callbacks.BorderColorCallback;
-import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
@@ -31,7 +31,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.
+ * The chart allows a number of properties to be specified for each data set.<br>
+ * These are used to set display properties for a specific data set.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -39,9 +40,9 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 public abstract class HovingDataset extends HovingFlexDataset {
 
 	/**
-	 * Creates the dataset using a default and chart type related to the dataset.
+	 * Creates the data set using a default and chart type related to the data set.
 	 * 
-	 * @param type chart type related to the dataset
+	 * @param type chart type related to the data set
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
@@ -105,9 +106,9 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	/**
 	 * Returns the border width callback, if set, otherwise <code>null</code>.
 	 * 
-	 * @return the border width callback, if set, otherwise <code>null</code>.
+	 * @return the border width callback, if set, otherwise <code>null</code>
 	 */
-	public BorderWidthCallback getBorderWidthCallback() {
+	public WidthCallback<ScriptableContext> getBorderWidthCallback() {
 		return getInternalBorderWidthCallback();
 	}
 
@@ -116,66 +117,68 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * 
 	 * @param borderWidthCallback the border width callback to set
 	 */
-	public void setBorderWidth(BorderWidthCallback borderWidthCallback) {
+	public void setBorderWidth(WidthCallback<ScriptableContext> borderWidthCallback) {
 		setInternalBorderWidth(borderWidthCallback);
 	}
 
 	/**
-	 * Sets the fill color of the arcs when hovered
+	 * Sets the fill color of the arcs when hovered.
 	 * 
 	 * @param colors the fill color of the arcs when hovered
 	 */
 	@Override
 	public void setHoverBackgroundColor(IsColor... colors) {
 		// resets callback
-		setHoverBackgroundColor((BackgroundColorCallback) null);
+		setHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
 		// call super
 		super.setHoverBackgroundColor(colors);
 	}
 
 	/**
-	 * Sets the fill color of the arcs when hovered as string
+	 * Sets the fill color of the arcs when hovered as string.
 	 * 
 	 * @param colors the fill color of the arcs when hovered as string
 	 */
 	@Override
 	public void setHoverBackgroundColor(String... colors) {
 		// resets callback
-		setHoverBackgroundColor((BackgroundColorCallback) null);
+		setHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
 		// call super
 		super.setHoverBackgroundColor(colors);
 	}
 
 	/**
-	 * Sets the fill pattern of the arcs in the dataset when hovered.
+	 * Sets the fill pattern of the arcs in the data set when hovered.
 	 * 
-	 * @param colors the fill pattern of the arcs in the dataset when hovered.
+	 * @param colors the fill pattern of the arcs in the data set when hovered.
 	 */
 	@Override
 	public void setHoverBackgroundColor(Pattern... colors) {
 		// resets callback
-		setHoverBackgroundColor((BackgroundColorCallback) null);
+		setHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
 		// call super
 		super.setHoverBackgroundColor(colors);
 	}
 
 	/**
-	 * Sets the fill gradient of the arcs in the dataset when hovered.
+	 * Sets the fill gradient of the arcs in the data set when hovered.
 	 * 
-	 * @param colors the fill gradient of the arcs in the dataset when hovered.
+	 * @param colors the fill gradient of the arcs in the data set when hovered.
 	 */
 	@Override
 	public void setHoverBackgroundColor(Gradient... colors) {
 		// resets callback
-		setHoverBackgroundColor((BackgroundColorCallback) null);
+		setHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
 		// call super
 		super.setHoverBackgroundColor(colors);
 	}
 
 	/**
-	 * Returns the fill color of the arcs when hovered as string. If property is missing or not a color, returns an empty list.
+	 * Returns the fill color of the arcs when hovered as string.<br>
+	 * If property is missing or not a color, returns an empty list.
 	 * 
-	 * @return list of the fill color of the arcs when hovered as string. If property is missing or not a color, returns an empty list.
+	 * @return list of the fill color of the arcs when hovered as string.<br>
+	 *         If property is missing or not a color, returns an empty list
 	 */
 	@Override
 	public List<String> getHoverBackgroundColorAsString() {
@@ -190,9 +193,11 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	}
 
 	/**
-	 * Returns the fill patterns of the arcs in the dataset when hovered. If property is missing or not a pattern, returns an empty list.
+	 * Returns the fill patterns of the arcs in the data set when hovered.<br>
+	 * If property is missing or not a pattern, returns an empty list.
 	 * 
-	 * @return list of the fill patterns of the arcs in the dataset when hovered. If property is missing or not a pattern, returns an empty list.
+	 * @return list of the fill patterns of the arcs in the data set when hovered.<br>
+	 *         If property is missing or not a pattern, returns an empty list
 	 */
 	@Override
 	public List<Pattern> getHoverBackgroundColorAsPatterns() {
@@ -208,9 +213,11 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	}
 
 	/**
-	 * Returns the fill gradients of the arcs in the dataset when hovered. If property is missing or not a gradient, returns an empty list.
+	 * Returns the fill gradients of the arcs in the data set when hovered.<br>
+	 * If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the fill gradients of the arcs in the dataset when hovered. If property is missing or not a gradient, returns an empty list.
+	 * @return list of the fill gradients of the arcs in the data set when hovered.<br>
+	 *         If property is missing or not a gradient, returns an empty list.
 	 */
 	@Override
 	public List<Gradient> getHoverBackgroundColorAsGradient() {
@@ -227,12 +234,12 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	/**
 	 * Sets the stroke color of the arcs when hovered as string.
 	 * 
-	 * @param colors the stroke color of the arcs when hovered as string.
+	 * @param colors the stroke color of the arcs when hovered as string
 	 */
 	@Override
 	public void setHoverBorderColor(IsColor... colors) {
 		// resets callback
-		setHoverBorderColor((BorderColorCallback) null);
+		setHoverBorderColor((ColorCallback<ScriptableContext>) null);
 		// call super
 		super.setHoverBorderColor(colors);
 	}
@@ -240,25 +247,25 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	/**
 	 * Sets the stroke color of the arcs when hovered as string.
 	 * 
-	 * @param colors the stroke color of the arcs when hovered as string.
+	 * @param colors the stroke color of the arcs when hovered as string
 	 */
 	@Override
 	public void setHoverBorderColor(String... colors) {
 		// resets callback
-		setHoverBorderColor((BorderColorCallback) null);
+		setHoverBorderColor((ColorCallback<ScriptableContext>) null);
 		// call super
 		super.setHoverBorderColor(colors);
 	}
 
 	/**
-	 * Sets the stroke gradient of the arcs in the dataset when hovered as gradient.
+	 * Sets the stroke gradient of the arcs in the data set when hovered as gradient.
 	 * 
-	 * @param colors the stroke gradient of the arcs in the dataset when hovered as gradient.
+	 * @param colors the stroke gradient of the arcs in the data set when hovered as gradient.
 	 */
 	@Override
 	public void setHoverBorderColor(Gradient... colors) {
 		// resets callback
-		setHoverBorderColor((BorderColorCallback) null);
+		setHoverBorderColor((ColorCallback<ScriptableContext>) null);
 		// call super
 		super.setHoverBorderColor(colors);
 	}
@@ -281,9 +288,11 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	}
 
 	/**
-	 * Returns the stroke gradients of the arcs in the dataset when hovered. If property is missing or not a pattern, returns an empty list.
+	 * Returns the stroke gradients of the arcs in the data set when hovered.<br>
+	 * If property is missing or not a pattern, returns an empty list.
 	 * 
-	 * @return list of the stroke gradients of the arcs in the dataset when hovered. If property is missing or not a pattern, returns an empty list.
+	 * @return list of the stroke gradients of the arcs in the data set when hovered.<br>
+	 *         If property is missing or not a pattern, returns an empty list.
 	 */
 	@Override
 	public List<Gradient> getHoverBorderColorAsGradient() {
@@ -319,7 +328,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * 
 	 * @return the hover border width callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderWidthCallback getHoverBorderWidthCallback() {
+	public WidthCallback<ScriptableContext> getHoverBorderWidthCallback() {
 		return getInternalHoverBorderWidthCallback();
 	}
 
@@ -328,7 +337,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * 
 	 * @param hoverBorderWidthCallback the hover border width callback to set
 	 */
-	public void setHoverBorderWidth(BorderWidthCallback hoverBorderWidthCallback) {
+	public void setHoverBorderWidth(WidthCallback<ScriptableContext> hoverBorderWidthCallback) {
 		setInternalHoverBorderWidth(hoverBorderWidthCallback);
 	}
 

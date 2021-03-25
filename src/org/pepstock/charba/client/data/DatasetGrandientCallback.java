@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
 
@@ -26,7 +25,7 @@ import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DatasetGrandientCallback extends AbstractCanvasObjectCallback<Gradient> implements BorderColorCallback {
+final class DatasetGrandientCallback extends AbstractCanvasObjectCallback<Gradient> {
 
 	/**
 	 * Creates the callback using the container of canvas object and the property related to the canvas object to set in the dataset.

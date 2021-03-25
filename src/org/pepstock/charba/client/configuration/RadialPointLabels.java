@@ -16,13 +16,13 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
-import org.pepstock.charba.client.callbacks.ScaleColorCallback;
-import org.pepstock.charba.client.callbacks.ScaleFontCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
-import org.pepstock.charba.client.callbacks.ScaleSimplePaddingCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.SimplePaddingCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -85,13 +85,13 @@ public class RadialPointLabels extends AxisContainer {
 	// user callbacks implementation for point labels
 	private RadialPointLabelCallback callback = null;
 	// font callback instance
-	private ScaleFontCallback fontCallback = null;
+	private FontCallback fontCallback = null;
 	// color callback instance
-	private ScaleColorCallback colorCallback = null;
+	private ColorCallback<ScaleScriptableContext> colorCallback = null;
 	// padding callback instance
-	private ScaleSimplePaddingCallback paddingCallback = null;
+	private SimplePaddingCallback paddingCallback = null;
 	// color callback instance
-	private ScaleColorCallback backdropColorCallback = null;
+	private ColorCallback<ScaleScriptableContext> backdropColorCallback = null;
 
 	// font instance
 	private final Font font;
@@ -156,15 +156,17 @@ public class RadialPointLabels extends AxisContainer {
 			return item;
 		});
 		// gets value calling callback
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), fontCallback));
+		this.fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), fontCallback));
 		// gets value calling callback
-		this.colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), colorCallback, getAxis().getDefaultValues().getPointLabels().getColorAsString()));
+		this.colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), colorCallback, getAxis().getDefaultValues().getPointLabels().getColorAsString()));
 		// gets value calling callback
-		this.backdropColorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), backdropColorCallback, getAxis().getDefaultValues().getPointLabels().getBackdropColorAsString()));
+		this.backdropColorCallbackProxy
+				.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropColorCallback, getAxis().getDefaultValues().getPointLabels().getBackdropColorAsString()));
 		// gets value calling callback
-		this.paddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), paddingCallback, getAxis().getDefaultValues().getPointLabels().getPadding()).intValue());
+		this.paddingCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), paddingCallback, getAxis().getDefaultValues().getPointLabels().getPadding()).intValue());
 	}
-	
+
 	/**
 	 * Returns the padding of label backdrop.
 	 * 
@@ -240,7 +242,7 @@ public class RadialPointLabels extends AxisContainer {
 	public boolean isDisplay() {
 		return getAxis().getScale().getPointLabels().isDisplay();
 	}
-	
+
 	/**
 	 * Sets the padding between chart and point labels, in pixels.
 	 * 
@@ -258,7 +260,7 @@ public class RadialPointLabels extends AxisContainer {
 	public int getPadding() {
 		return getAxis().getScale().getPointLabels().getPadding();
 	}
-	
+
 	/**
 	 * Sets the background color of the point label.
 	 * 
@@ -321,13 +323,13 @@ public class RadialPointLabels extends AxisContainer {
 			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.CALLBACK, null);
 		}
 	}
-	
+
 	/**
 	 * Returns the font callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
-	public ScaleFontCallback getFontCallback() {
+	public FontCallback getFontCallback() {
 		return fontCallback;
 	}
 
@@ -336,7 +338,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
-	public void setFont(ScaleFontCallback fontCallback) {
+	public void setFont(FontCallback fontCallback) {
 		// sets the callback
 		this.fontCallback = fontCallback;
 		// checks if callback is consistent
@@ -354,7 +356,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @return the padding callback, if set, otherwise <code>null</code>.
 	 */
-	public ScaleSimplePaddingCallback getPaddingCallback() {
+	public SimplePaddingCallback getPaddingCallback() {
 		return paddingCallback;
 	}
 
@@ -363,7 +365,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @param paddingCallback the padding callback to set
 	 */
-	public void setPadding(ScaleSimplePaddingCallback paddingCallback) {
+	public void setPadding(SimplePaddingCallback paddingCallback) {
 		// sets the callback
 		this.paddingCallback = paddingCallback;
 		// checks if callback is consistent
@@ -381,7 +383,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @return the color callback, if set, otherwise <code>null</code>.
 	 */
-	public ScaleColorCallback getColorCallback() {
+	public ColorCallback<ScaleScriptableContext> getColorCallback() {
 		return colorCallback;
 	}
 
@@ -390,7 +392,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @param colorCallback the color callback to set
 	 */
-	public void setColor(ScaleColorCallback colorCallback) {
+	public void setColor(ColorCallback<ScaleScriptableContext> colorCallback) {
 		// sets the callback
 		this.colorCallback = colorCallback;
 		// checks if callback is consistent
@@ -402,13 +404,13 @@ public class RadialPointLabels extends AxisContainer {
 			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.COLOR, null);
 		}
 	}
-	
+
 	/**
 	 * Returns the backdrop color callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the backdrop color callback, if set, otherwise <code>null</code>.
 	 */
-	public ScaleColorCallback getBackdropColorCallback() {
+	public ColorCallback<ScaleScriptableContext> getBackdropColorCallback() {
 		return backdropColorCallback;
 	}
 
@@ -417,7 +419,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @param backdropColorCallback the backdrop color callback to set
 	 */
-	public void setBackdropColor(ScaleColorCallback backdropColorCallback) {
+	public void setBackdropColor(ColorCallback<ScaleScriptableContext> backdropColorCallback) {
 		// sets the callback
 		this.backdropColorCallback = backdropColorCallback;
 		// checks if callback is consistent
@@ -437,9 +439,9 @@ public class RadialPointLabels extends AxisContainer {
 	 * @param callback callback to invoke
 	 * @return a native object as font
 	 */
-	private NativeObject onFont(ScaleScriptableContext context, ScaleFontCallback callback) {
+	private NativeObject onFont(ScaleScriptableContext context, FontCallback callback) {
 		// gets value
-		FontOptions result = ScriptableUtils.getOptionValue(getAxis(), context, callback);
+		FontOptions result = ScriptableUtils.getOptionValue(context, callback);
 		// checks if result is consistent
 		if (result != null) {
 			// returns result
@@ -457,9 +459,9 @@ public class RadialPointLabels extends AxisContainer {
 	 * @param defaultValue default value of the color
 	 * @return a string as color
 	 */
-	private String onColor(ScaleScriptableContext context, ScaleColorCallback callback, String defaultValue) {
+	private String onColor(ScaleScriptableContext context, ColorCallback<ScaleScriptableContext> callback, String defaultValue) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValueAsColor(getAxis(), context, callback, defaultValue, false);
+		Object result = ScriptableUtils.getOptionValueAsColor(context, callback, defaultValue, false);
 		// checks if result is a string
 		if (result instanceof String) {
 			// returns result

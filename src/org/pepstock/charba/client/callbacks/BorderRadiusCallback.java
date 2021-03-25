@@ -21,6 +21,6 @@ package org.pepstock.charba.client.callbacks;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface BorderRadiusCallback extends Scriptable<Object> {
+public interface BorderRadiusCallback extends Scriptable<Object, ScriptableContext> {
 
 }

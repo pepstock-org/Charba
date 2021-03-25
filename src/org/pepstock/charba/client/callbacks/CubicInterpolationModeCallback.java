@@ -23,6 +23,6 @@ import org.pepstock.charba.client.enums.CubicInterpolationMode;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public interface CubicInterpolationModeCallback extends Scriptable<CubicInterpolationMode> {
+public interface CubicInterpolationModeCallback extends Scriptable<CubicInterpolationMode, ScriptableContext> {
 
 }

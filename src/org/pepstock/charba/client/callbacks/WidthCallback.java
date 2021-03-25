@@ -15,23 +15,14 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.configuration.Axis;
-
 /**
- * Interface to map all callback of scriptable options for SCALEs, available for CHART.JS.
+ * Callback interface to set <code>textStrokeWidth</code>, <code>linerWidth</code>, <code>borderWidth</code>, <code>hoverBorderWidth</code>, <code>pointBorderWidth</code> or <code>pointHoverBorderWidth</code> property at runtime, using
+ * the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
- * @param <T> type of result of invocation method.
+ *
+ * @param <C> type of context to pass to the callback.
  */
-public interface ScaleScriptable<T> {
-
-	/**
-	 * Returns the value of property at runtime for scales.
-	 * 
-	 * @param axis axis instance
-	 * @param context context instance
-	 * @return value of property to be applied
-	 */
-	T invoke(Axis axis, ScaleScriptableContext context);
+public interface WidthCallback<C extends AbstractScriptableContext> extends Scriptable<Integer, C> {
 
 }

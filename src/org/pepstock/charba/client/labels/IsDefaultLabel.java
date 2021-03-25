@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
-import org.pepstock.charba.client.labels.callbacks.ColorCallback;
 import org.pepstock.charba.client.labels.callbacks.FontCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
@@ -197,7 +197,7 @@ interface IsDefaultLabel {
 	 * 
 	 * @return the font color callback, if set, otherwise <code>null</code>
 	 */
-	default ColorCallback getColorCallback() {
+	default ColorCallback<LabelsScriptableContext> getColorCallback() {
 		return null;
 	}
 }

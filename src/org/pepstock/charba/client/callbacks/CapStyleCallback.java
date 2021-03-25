@@ -15,13 +15,14 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.enums.CapStyle;
+
 /**
- * Callback interface to set <code>borderWidth</code>, <code>hoverBorderWidth</code>, <code>pointBorderWidth</code> or <code>pointHoverBorderWidth</code> property at runtime, using
- * the chart instance and the context.
+ * Callback interface to set <code>borderCapStyle</code> property at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * 
  */
-public interface BorderWidthCallback extends Scriptable<Integer> {
+public interface CapStyleCallback extends Scriptable<CapStyle, ScriptableContext> {
 
 }

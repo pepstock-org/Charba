@@ -18,6 +18,7 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScaleTickItem;
@@ -68,6 +69,9 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 		}
 	}
 
+	// axis instance
+	private final Axis axis;
+
 	private ScaleItem scale = null;
 
 	private ScaleTickItem tick = null;
@@ -75,10 +79,27 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 	/**
 	 * Creates the object with an envelop of the native object instance to be wrapped.
 	 * 
+	 * @param axis axis instance where the callback must be invoked
 	 * @param envelop envelop of native object instance to be wrapped.
 	 */
-	public ScaleScriptableContext(ConfigurationEnvelop<NativeObject> envelop) {
+	public ScaleScriptableContext(Axis axis, ConfigurationEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		// checks if axis is consistent
+		if (axis == null) {
+			// exception!!
+			throw new IllegalArgumentException("Axis argument is null");
+		}
+		// stores axis
+		this.axis = axis;
+	}
+
+	/**
+	 * Returns the axis instance where the callback must be invoked.
+	 * 
+	 * @return the axis instance where the callback must be invoked
+	 */
+	public final Axis getAxis() {
+		return axis;
 	}
 
 	/**

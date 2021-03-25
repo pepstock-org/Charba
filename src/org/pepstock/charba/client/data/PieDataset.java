@@ -47,9 +47,9 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border offset callback instance
-	private OffsetCallback offsetCallback = null;
+	private OffsetCallback<ScriptableContext> offsetCallback = null;
 	// hover offset callback instance
-	private OffsetCallback hoverOffsetCallback = null;
+	private OffsetCallback<ScriptableContext> hoverOffsetCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -241,7 +241,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @return the offset callback, if set, otherwise <code>null</code>.
 	 */
-	public OffsetCallback getOffsetCallback() {
+	public OffsetCallback<ScriptableContext> getOffsetCallback() {
 		return offsetCallback;
 	}
 
@@ -250,7 +250,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @param offsetCallback the offset callback.
 	 */
-	public void setOffset(OffsetCallback offsetCallback) {
+	public void setOffset(OffsetCallback<ScriptableContext> offsetCallback) {
 		// sets the callback
 		this.offsetCallback = offsetCallback;
 		// checks if callback is consistent
@@ -268,7 +268,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @return the offset callback, when dataset is hovered, if set, otherwise <code>null</code>.
 	 */
-	public OffsetCallback getHoverOffsetCallback() {
+	public OffsetCallback<ScriptableContext> getHoverOffsetCallback() {
 		return hoverOffsetCallback;
 	}
 
@@ -277,7 +277,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @param hoverOffsetCallback the offset callback, when dataset is hovered.
 	 */
-	public void setHoverOffset(OffsetCallback hoverOffsetCallback) {
+	public void setHoverOffset(OffsetCallback<ScriptableContext> hoverOffsetCallback) {
 		// sets the callback
 		this.hoverOffsetCallback = hoverOffsetCallback;
 		// checks if callback is consistent

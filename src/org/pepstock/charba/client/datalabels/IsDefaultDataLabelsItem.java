@@ -16,27 +16,22 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
-import org.pepstock.charba.client.callbacks.BorderColorCallback;
-import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClampCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClipCallback;
-import org.pepstock.charba.client.datalabels.callbacks.ColorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FontCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
-import org.pepstock.charba.client.datalabels.callbacks.OffsetCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
 import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
-import org.pepstock.charba.client.datalabels.callbacks.TextShadowColorCallback;
-import org.pepstock.charba.client.datalabels.callbacks.TextStrokeColorCallback;
-import org.pepstock.charba.client.datalabels.callbacks.TextStrokeWidthCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
@@ -169,7 +164,7 @@ interface IsDefaultDataLabelsItem {
 	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the
 	 *         label is moved in the opposite direction.
 	 */
-	default double getOffset() {
+	default int getOffset() {
 		return DataLabelsOptions.DEFAULT_OFFSET;
 	}
 
@@ -241,7 +236,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the background color callback.
 	 */
-	default BackgroundColorCallback getBackgroundColorCallback() {
+	default ColorCallback<DataLabelsScriptableContext> getBackgroundColorCallback() {
 		return null;
 	}
 
@@ -250,7 +245,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the border color callback.
 	 */
-	default BorderColorCallback getBorderColorCallback() {
+	default ColorCallback<DataLabelsScriptableContext> getBorderColorCallback() {
 		return null;
 	}
 
@@ -259,7 +254,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the color callback.
 	 */
-	default ColorCallback getColorCallback() {
+	default ColorCallback<DataLabelsScriptableContext> getColorCallback() {
 		return null;
 	}
 
@@ -295,7 +290,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the border radius callback.
 	 */
-	default RadiusCallback getBorderRadiusCallback() {
+	default RadiusCallback<DataLabelsScriptableContext> getBorderRadiusCallback() {
 		return null;
 	}
 
@@ -304,7 +299,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the border width callback.
 	 */
-	default BorderWidthCallback getBorderWidthCallback() {
+	default WidthCallback<DataLabelsScriptableContext> getBorderWidthCallback() {
 		return null;
 	}
 
@@ -340,7 +335,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the offset callback.
 	 */
-	default OffsetCallback getOffsetCallback() {
+	default OffsetCallback<DataLabelsScriptableContext> getOffsetCallback() {
 		return null;
 	}
 
@@ -358,7 +353,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the rotation callback.
 	 */
-	default RotationCallback getRotationCallback() {
+	default RotationCallback<DataLabelsScriptableContext> getRotationCallback() {
 		return null;
 	}
 
@@ -376,7 +371,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the text stroke color callback.
 	 */
-	default TextStrokeColorCallback getTextStrokeColorCallback() {
+	default ColorCallback<DataLabelsScriptableContext> getTextStrokeColorCallback() {
 		return null;
 	}
 
@@ -385,7 +380,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the text stroke width callback.
 	 */
-	default TextStrokeWidthCallback getTextStrokeWidthCallback() {
+	default WidthCallback<DataLabelsScriptableContext> getTextStrokeWidthCallback() {
 		return null;
 	}
 
@@ -403,7 +398,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the text shadow color callback.
 	 */
-	default TextShadowColorCallback getTextShadowColorCallback() {
+	default ColorCallback<DataLabelsScriptableContext> getTextShadowColorCallback() {
 		return null;
 	}
 

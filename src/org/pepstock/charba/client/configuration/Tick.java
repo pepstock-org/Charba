@@ -15,14 +15,12 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.callbacks.ScaleColorCallback;
-import org.pepstock.charba.client.callbacks.ScaleFontCallback;
-import org.pepstock.charba.client.callbacks.ScaleScriptable;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
-import org.pepstock.charba.client.callbacks.TextStrokeColorCallback;
-import org.pepstock.charba.client.callbacks.TextStrokeWidthCallback;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -51,13 +49,13 @@ abstract class Tick extends AxisContainer {
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> textStrokeWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// font callback instance
-	private ScaleFontCallback fontCallback = null;
+	private FontCallback fontCallback = null;
 	// color callback instance
-	private ScaleColorCallback colorCallback = null;
+	private ColorCallback<ScaleScriptableContext> colorCallback = null;
 	// text color callback instance
-	private TextStrokeColorCallback textStrokeColorCallback = null;
+	private ColorCallback<ScaleScriptableContext> textStrokeColorCallback = null;
 	// text width callback instance
-	private TextStrokeWidthCallback textStrokeWidthCallback = null;
+	private WidthCallback<ScaleScriptableContext> textStrokeWidthCallback = null;
 
 	// major tick instance
 	private final Major major;
@@ -113,14 +111,14 @@ abstract class Tick extends AxisContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), fontCallback));
+		fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), fontCallback));
 		// gets value calling callback
-		colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), colorCallback));
+		colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), colorCallback));
 		// gets value calling callback
-		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), textStrokeColorCallback));
+		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), textStrokeColorCallback));
 		// gets value calling callback
-		textStrokeWidthCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis(), new ScaleScriptableContext(new ConfigurationEnvelop<>(context)), textStrokeWidthCallback, getAxis().getDefaultValues().getTicks().getTextStrokeWidth()).intValue());
+		textStrokeWidthCallbackProxy.setCallback(
+				(contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), textStrokeWidthCallback, getAxis().getDefaultValues().getTicks().getTextStrokeWidth()).intValue());
 	}
 
 	/**
@@ -311,7 +309,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
-	public ScaleFontCallback getFontCallback() {
+	public FontCallback getFontCallback() {
 		return fontCallback;
 	}
 
@@ -320,7 +318,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @return the color callback, if set, otherwise <code>null</code>.
 	 */
-	public ScaleColorCallback getColorCallback() {
+	public ColorCallback<ScaleScriptableContext> getColorCallback() {
 		return colorCallback;
 	}
 
@@ -329,7 +327,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @return the text stroke color callback, if set, otherwise <code>null</code>.
 	 */
-	public TextStrokeColorCallback getTextStrokeColorCallback() {
+	public ColorCallback<ScaleScriptableContext> getTextStrokeColorCallback() {
 		return textStrokeColorCallback;
 	}
 
@@ -338,7 +336,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @return the text stroke width callback, if set, otherwise <code>null</code>.
 	 */
-	public TextStrokeWidthCallback getTextStrokeWidthCallback() {
+	public WidthCallback<ScaleScriptableContext> getTextStrokeWidthCallback() {
 		return textStrokeWidthCallback;
 	}
 
@@ -347,7 +345,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @param colorCallback the color callback to set
 	 */
-	public void setColor(ScaleColorCallback colorCallback) {
+	public void setColor(ColorCallback<ScaleScriptableContext> colorCallback) {
 		// sets the callback
 		this.colorCallback = colorCallback;
 		// checks if callback is consistent
@@ -365,7 +363,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @param textStrokeColorCallback the text stroke color callback to set
 	 */
-	public void setTextStrokeColorCallback(TextStrokeColorCallback textStrokeColorCallback) {
+	public void setTextStrokeColorCallback(ColorCallback<ScaleScriptableContext> textStrokeColorCallback) {
 		// sets the callback
 		this.textStrokeColorCallback = textStrokeColorCallback;
 		// checks if callback is consistent
@@ -383,7 +381,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @param textStrokeWidthCallback the text stroke width callback to set
 	 */
-	public void setTextStrokeWidthCallback(TextStrokeWidthCallback textStrokeWidthCallback) {
+	public void setTextStrokeWidthCallback(WidthCallback<ScaleScriptableContext> textStrokeWidthCallback) {
 		// sets the callback
 		this.textStrokeWidthCallback = textStrokeWidthCallback;
 		// checks if callback is consistent
@@ -401,7 +399,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
-	public void setFont(ScaleFontCallback fontCallback) {
+	public void setFont(FontCallback fontCallback) {
 		// sets the callback
 		this.fontCallback = fontCallback;
 		// checks if callback is consistent
@@ -421,9 +419,9 @@ abstract class Tick extends AxisContainer {
 	 * @param callback callback to invoke
 	 * @return a native object as font
 	 */
-	private NativeObject onFont(ScaleScriptableContext context, ScaleFontCallback callback) {
+	private NativeObject onFont(ScaleScriptableContext context, FontCallback callback) {
 		// gets value
-		FontOptions result = ScriptableUtils.getOptionValue(getAxis(), context, callback);
+		FontOptions result = ScriptableUtils.getOptionValue(context, callback);
 		// checks if result is consistent
 		if (result != null) {
 			// returns result
@@ -440,11 +438,11 @@ abstract class Tick extends AxisContainer {
 	 * @param callback callback to invoke
 	 * @return a string as color
 	 */
-	private String onColor(ScaleScriptableContext context, ScaleScriptable<Object> callback) {
+	private String onColor(ScaleScriptableContext context, ColorCallback<ScaleScriptableContext> callback) {
 		// gets default color
 		String defaultColor = getAxis().getDefaultValues().getTicks().getColorAsString();
 		// gets value
-		Object result = ScriptableUtils.getOptionValueAsColor(getAxis(), context, callback, defaultColor, false);
+		Object result = ScriptableUtils.getOptionValueAsColor(context, callback, defaultColor, false);
 		// checks if result is a string
 		if (result instanceof String) {
 			// returns result

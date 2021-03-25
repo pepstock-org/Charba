@@ -17,8 +17,9 @@ package org.pepstock.charba.client.labels;
 
 import java.util.List;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
@@ -33,7 +34,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.labels.callbacks.ColorCallback;
 import org.pepstock.charba.client.labels.callbacks.FontCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
@@ -193,13 +193,13 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	// callback proxy to invoke the font function
 	private final CallbackProxy<ProxyFontCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the font color function
-	private final CallbackProxy<ProxyColorCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// render callback instance
 	private static final CallbackPropertyHandler<RenderCallback> RENDER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.RENDER);
 	// font callback instance
 	private static final CallbackPropertyHandler<FontCallback> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
 	// font color callback instance
-	private static final CallbackPropertyHandler<ColorCallback> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
+	private static final CallbackPropertyHandler<ColorCallback<LabelsScriptableContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
 
 	// defaults options instance
 	private final IsDefaultLabel defaultOptions;
@@ -314,7 +314,8 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		// -------------------------------
 		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(new LabelsScriptableContext(item)));
 		fontCallbackProxy.setCallback((context, item) -> onFontCallback(new LabelsScriptableContext(item)));
-		colorCallbackProxy.setCallback((context, item) -> onColorCallback(new LabelsScriptableContext(item)));
+		// gets value calling callback
+		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new LabelsScriptableContext(context), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
 	}
 
 	/**
@@ -729,7 +730,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @return the font color callback, if set, otherwise <code>null</code>
 	 */
 	@Override
-	public ColorCallback getColorCallback() {
+	public ColorCallback<LabelsScriptableContext> getColorCallback() {
 		return COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getColorCallback());
 	}
 
@@ -738,7 +739,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * 
 	 * @param colorCallback the font color callback.
 	 */
-	public void setColor(ColorCallback colorCallback) {
+	public void setColor(ColorCallback<LabelsScriptableContext> colorCallback) {
 		COLOR_PROPERTY_HANDLER.setCallback(this, DEFAULT_ID.value(), colorCallback, colorCallbackProxy.getProxy());
 	}
 
@@ -751,12 +752,10 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	private Object onRenderCallback(LabelsScriptableContext context) {
 		// gets callback
 		RenderCallback renderCallback = RENDER_PROPERTY_HANDLER.getCallback(this);
-		// gets chart instance
-		IsChart chart = ScriptableUtils.retrieveChart(context, renderCallback);
-		// checks if the callback is set
-		if (IsChart.isValid(chart)) {
+		// checks if the context and callback are consistent
+		if (ScriptableUtils.isContextConsistent(context) && renderCallback != null) {
 			// calls callback
-			Object value = renderCallback.invoke(chart, context);
+			Object value = renderCallback.invoke(context);
 			// checks result
 			if (value != null) {
 				// checks if is image
@@ -782,12 +781,10 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	private NativeObject onFontCallback(LabelsScriptableContext context) {
 		// gets callback
 		FontCallback fontCallback = FONT_PROPERTY_HANDLER.getCallback(this);
-		// gets chart instance
-		IsChart chart = ScriptableUtils.retrieveChart(context, fontCallback);
-		// checks if the callback is set
-		if (IsChart.isValid(chart)) {
+		// checks if the context and callback are consistent
+		if (ScriptableUtils.isContextConsistent(context) && fontCallback != null) {
 			// calls callback
-			Font value = fontCallback.invoke(chart, context);
+			Font value = fontCallback.invoke(context);
 			// checks result
 			if (value != null) {
 				return value.nativeObject();
@@ -795,40 +792,6 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		}
 		// defaults returns null
 		// and plugin will apply the default chart font
-		return null;
-	}
-
-	/**
-	 * Invokes the COLOR callback.
-	 * 
-	 * @param context native object with callback context
-	 * @return the font color instance
-	 */
-	private String onColorCallback(LabelsScriptableContext context) {
-		// gets callback
-		ColorCallback colorCallback = COLOR_PROPERTY_HANDLER.getCallback(this);
-		// gets chart instance
-		IsChart chart = ScriptableUtils.retrieveChart(context, colorCallback);
-		// checks if the callback is set
-		if (IsChart.isValid(chart)) {
-			// calls callback
-			Object result = colorCallback.invoke(chart, context);
-			// checks result
-			if (result instanceof IsColor) {
-				// is color instance
-				IsColor color = (IsColor) result;
-				// checks if the color is consistent
-				if (IsColor.isConsistent(color)) {
-					// then returns RGBA representation
-					return color.toRGBA();
-				}
-			} else if (result instanceof String) {
-				// is string instance
-				return (String) result;
-			}
-		}
-		// defaults returns null
-		// and plugin will apply the default chart font color
 		return null;
 	}
 

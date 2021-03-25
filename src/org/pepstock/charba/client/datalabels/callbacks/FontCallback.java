@@ -17,14 +17,15 @@ package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
+import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
 import org.pepstock.charba.client.datalabels.Font;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set a font element at runtime, using the chart instance and the plugin context.
+ * Callback interface of {@link DataLabelsPlugin#ID} plugin to set a font element at runtime, using the plugin context.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface FontCallback extends Scriptable<Font> {
+public interface FontCallback extends Scriptable<Font, DataLabelsScriptableContext> {
 
 }

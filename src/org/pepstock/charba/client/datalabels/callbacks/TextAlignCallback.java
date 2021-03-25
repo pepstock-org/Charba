@@ -17,14 +17,15 @@ package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
+import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>textAlign</code> property at runtime, using the chart instance and the plugin context.
+ * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>textAlign</code> property at runtime, using the plugin context.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface TextAlignCallback extends Scriptable<TextAlign> {
+public interface TextAlignCallback extends Scriptable<TextAlign, DataLabelsScriptableContext> {
 
 }

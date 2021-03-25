@@ -15,10 +15,9 @@
 */
 package org.pepstock.charba.client.impl.callbacks;
 
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
+import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.items.DataItem;
@@ -106,11 +105,11 @@ public final class PercentageCallback implements FormatterCallback {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.callbacks.FormatterCallback#invoke(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.DataItem,
-	 * org.pepstock.charba.client.callbacks.ScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.callbacks.FormatterCallback#invoke(org.pepstock.charba.client.datalabels.DataLabelsScriptableContext,
+	 * org.pepstock.charba.client.items.DataItem)
 	 */
 	@Override
-	public String invoke(IsChart chart, DataItem dataItem, ScriptableContext context) {
+	public String invoke(DataLabelsScriptableContext context, DataItem dataItem) {
 		// checks if the data type is a possible numbers
 		if (DataType.NUMBERS.equals(dataItem.getDataType()) || DataType.ARRAYS.equals(dataItem.getDataType())) {
 			// calculates the value to use for percentage
@@ -118,7 +117,7 @@ public final class PercentageCallback implements FormatterCallback {
 			// the arguments are not checked because
 			// they will be checked inside percentage compute method
 			// computes the percentage
-			double percentage = Percentage.compute(chart, value, context, stacked);
+			double percentage = Percentage.compute(context.getChart(), value, context, stacked);
 			// checks if consistent
 			if (Double.isNaN(percentage)) {
 				// if not, returns NaN as string

@@ -15,12 +15,14 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.configuration.FontOptions;
+
 /**
- * Callback interface to set <code>borderDashOffset</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>font</code> property at runtime to scale instance.
  * 
  * @author Andrea "Stock" Stocchero
- * 
+ *
  */
-public interface ScaleBorderDashOffsetCallback extends ScaleScriptable<Double> {
+public interface FontCallback extends Scriptable<FontOptions, ScaleScriptableContext> {
 
 }

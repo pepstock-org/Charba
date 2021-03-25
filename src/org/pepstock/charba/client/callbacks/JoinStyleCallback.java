@@ -15,14 +15,14 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.configuration.FontOptions;
+import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
- * Callback interface to set <code>font</code> property at runtime to scale instance.
+ * Callback interface to set <code>borderJoinStyle</code> property at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * 
  */
-public interface ScaleFontCallback extends ScaleScriptable<FontOptions> {
+public interface JoinStyleCallback extends Scriptable<JoinStyle, ScriptableContext> {
 
 }

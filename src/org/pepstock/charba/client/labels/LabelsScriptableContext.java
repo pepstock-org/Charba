@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.labels;
 
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.AbstractDatasetScriptableContext;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -28,7 +28,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LabelsScriptableContext extends ScriptableContext {
+public final class LabelsScriptableContext extends AbstractDatasetScriptableContext {
 
 	/**
 	 * Name of properties of native object.
@@ -71,7 +71,7 @@ public final class LabelsScriptableContext extends ScriptableContext {
 	 * @param nativeObject native object instance to be wrapped.
 	 */
 	LabelsScriptableContext(NativeObject nativeObject) {
-		super(new LabelsEnvelop<>(nativeObject));
+		super(nativeObject);
 		// gets the type of value
 		ObjectType type = type(Property.VALUE);
 		// object instance for data item

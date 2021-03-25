@@ -18,7 +18,7 @@ package org.pepstock.charba.client.data;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
+import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.colors.CanvasObject;
 import org.pepstock.charba.client.commons.Key;
@@ -32,7 +32,7 @@ import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
  * @param <T> type of canvas object
  *
  */
-abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements BackgroundColorCallback {
+abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements ColorCallback<ScriptableContext> {
 
 	// key of the gradient
 	private final Key property;
@@ -55,10 +55,12 @@ abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements B
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.Scriptable#invoke(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.callbacks.ScriptableContext)
+	 * @see org.pepstock.charba.client.callbacks.Scriptable#invoke(org.pepstock.charba.client.callbacks.AbstractScriptableContext)
 	 */
 	@Override
-	public final T invoke(IsChart chart, ScriptableContext context) {
+	public T invoke(ScriptableContext context) {
+		// gets chart
+		IsChart chart = context.getChart();
 		// checks if chart is consistent
 		if (IsChart.isValid(chart) && context.getDatasetIndex() >= 0 && chart.getNode().getChartArea().isConsistent()) {
 			// checks if chart area is consistent
@@ -85,7 +87,7 @@ abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements B
 			}
 		}
 		// if here, arguments are not consistent
-		// datasets without any canvas objects
+		// data sets without any canvas objects
 		return null;
 	}
 

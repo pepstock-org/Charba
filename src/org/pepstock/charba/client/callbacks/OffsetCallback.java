@@ -20,7 +20,8 @@ package org.pepstock.charba.client.callbacks;
  * 
  * @author Andrea "Stock" Stocchero
  * 
+ * @param <C> type of context to pass to the callback.
  */
-public interface OffsetCallback extends Scriptable<Integer> {
+public interface OffsetCallback<C extends AbstractScriptableContext> extends Scriptable<Integer, C> {
 
 }

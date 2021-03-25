@@ -85,7 +85,7 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultDataL
 	/**
 	 * Default distance (in pixels) to pull the label away from the anchor point, <b>{@value DEFAULT_OFFSET}</b>.
 	 */
-	public static final double DEFAULT_OFFSET = 4D;
+	public static final int DEFAULT_OFFSET = 4;
 
 	/**
 	 * Default opacity, <b>{@value DEFAULT_OPACITY}</b>.
