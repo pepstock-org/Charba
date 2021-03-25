@@ -235,7 +235,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `radius` and `radiusPercentage` properties in the options and configuration classes, for pie and doughnut charts.
  * add `resizeDelay` property to options and configuration.
 
-### Scales
+### _Scales_
 
 #### Breaking changes
  * remove `DEFAULT_X_AXIS_ID`, `DEFAULT_Y_AXIS_ID` and `DEFAULT_SINGLE_AXIS_ID` constants from `Scales` class, use `DefaultScaleId` enumeration.
@@ -330,7 +330,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `getBaseValue`
    * `getBasePixel`
 
-### Datasets
+### _Datasets_
 
 #### Breaking changes
  * rename `steppedLine` from the dataset options to `stepped`.
@@ -363,7 +363,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable overriding the legend `pointStyle` (from dataset) using new `pointStyle` option.
  * improve the gradients and patterns management at dataset level in order to be managed by a callback instead of by a plugin in order to have the right chart area size for gradients.
 
-### Plugins
+### _Plugins_
 
 #### Breaking changes
  * change the signatures of `Plugin` interface in order to manage new arguments of functions.
@@ -423,7 +423,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * improve `LabelsOptionsBuilder` class in order to manage the multi-labels configuration.
  * improve `Zoom` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
 
-### Controllers
+### _Controllers_
 
 #### Breaking changes
  * remove the feature to create custom controller without extending an existing one. You can only extend existing chart type.
@@ -438,7 +438,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * add `linkScales` and `buildOrUpdateElements` methods to Controller interface in order to have the complete mapping of CHART.JS controller interface.
  * implement easing value management for `Meter` and `Gauge` charts (and their controller) because in the new version of CHART.JS, easing value is not provided anymore.
 
-### Callbacks   
+### _Callbacks_   
 
 #### Breaking changes
  * change the structure of scriptable options context.
@@ -465,7 +465,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * add `sort` callback (by `LegendItemSortCallback` class) to the `LegendLabels` configuration in order to sort the legend items. 
  * move `width` and `height` options to `BaseBoxitem` class.
 
-### Colors
+### _Colors_
 
 #### Breaking changes
  * reduces the visibility of `Gradient` and `Pattern` class constructors in order to use new `GradientBuilder` and `PatternBuilder` classes. This change avoids inconsistent gradient and pattern objects, improving some capabilities of them (like the `equals` and `hashCode` methods in case they will be needed).
@@ -475,7 +475,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * add `checkAndGetValue` static method to `IsColor` class.
  * remove static cache for canvas patterns and gradients creation, going to a cache for each canvas object factory in order that every factory must manage own objects.
 
-### Utils
+### _Utils_
 
 #### Breaking changes
  * change `toFont` method to `Utilities` class in order to get the weight of the font.
@@ -496,7 +496,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * add `CScheduler` class in order to provide asynchronous and delayed task scheduling.
  * add `CTimer` class in order to provide asynchronous and repeatedly task scheduling.
 
-### INTL  and date adapters
+### _INTL  and date adapters_
 
 #### Breaking changes
  * change the type for some properties of LuxonOptions class:
@@ -516,7 +516,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * change the default date adapter library, using as default `Luxon` instead of `Moment` in order to enable I18N by default.
  * change the `Adapter` options and configuration of time axis in order to get a date adapter options (LUXON options) by `date` property.
   
-### Development
+### _Development_
  * change visibility of `AbstractModel` class, now it is public.
  * add `@Override` annotation to all overriding methods. 
  * change the registering of tooltips positioner in order to apply to CHART.JS tooltips plugin.
