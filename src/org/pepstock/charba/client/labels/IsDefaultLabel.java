@@ -197,7 +197,7 @@ interface IsDefaultLabel {
 	 * 
 	 * @return the font color callback, if set, otherwise <code>null</code>
 	 */
-	default ColorCallback<LabelsScriptableContext> getColorCallback() {
+	default ColorCallback<LabelsContext> getColorCallback() {
 		return null;
 	}
 }

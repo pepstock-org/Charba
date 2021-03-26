@@ -177,6 +177,7 @@
     var label;
     if (typeof this.options.render === 'function') {
       label = this.options.render({
+        type: 'labels',
         label: this.chart.config.data.labels[index],
         value: dataset.data[index],
         percentage: this.getPercentage(dataset, element, index),
@@ -212,6 +213,7 @@
 
   Label.prototype.getFont = function (dataset, element, index) {
   	const result = this.options.font({
+        type: 'labels',
         label: this.chart.config.data.labels[index],
         value: dataset.data[index],
         percentage: this.getPercentage(dataset, element, index),
@@ -225,6 +227,7 @@
   
   Label.prototype.getFontColor = function (dataset, element, index) {
   	const result = this.options.color({
+        type: 'labels',
         label: this.chart.config.data.labels[index],
         value: dataset.data[index],
         percentage: this.getPercentage(dataset, element, index),

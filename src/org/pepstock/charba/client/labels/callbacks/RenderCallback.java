@@ -18,7 +18,7 @@ package org.pepstock.charba.client.labels.callbacks;
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.labels.LabelsPlugin;
-import org.pepstock.charba.client.labels.LabelsScriptableContext;
+import org.pepstock.charba.client.labels.LabelsContext;
 
 /**
  * Callback interface of {@link LabelsPlugin#ID} plugin to provide the item to be rendered as string or as image at runtime, using the arguments.
@@ -27,6 +27,6 @@ import org.pepstock.charba.client.labels.LabelsScriptableContext;
  * 
  * @see Img
  */
-public interface RenderCallback extends Scriptable<Object, LabelsScriptableContext> {
+public interface RenderCallback extends Scriptable<Object, LabelsContext> {
 
 }

@@ -16,7 +16,9 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.callbacks.AbstractDatasetScriptableContext;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.ContextType;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -24,15 +26,54 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DataLabelsScriptableContext extends AbstractDatasetScriptableContext {
+public final class DataLabelsContext extends AbstractDatasetScriptableContext {
+	
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		TYPE("type");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+	}
 
 	/**
 	 * Creates the object with public object instance to be wrapped.
 	 * 
 	 * @param nativeObject public object instance to be wrapped.
 	 */
-	DataLabelsScriptableContext(NativeObject nativeObject) {
+	DataLabelsContext(NativeObject nativeObject) {
 		super(nativeObject);
+		// as you can see from following rejected PR
+		// https://github.com/chartjs/chartjs-plugin-datalabels/pull/229
+		// data labels does not provide the context type
+		// to normalize the structure of the context
+		// the type is added here
+		if (!has(Property.TYPE)) {
+			// overrides and sets the data labels type
+			setValue(Property.TYPE, ContextType.DATALABELS);
+		}
 	}
 
 	/*
@@ -43,7 +84,7 @@ public final class DataLabelsScriptableContext extends AbstractDatasetScriptable
 	@Override
 	protected boolean isConsistent() {
 		// checks if the data index and data set index are consistent
-		return getDatasetIndex() != UndefinedValues.INTEGER && getDataIndex() != UndefinedValues.INTEGER;
+		return ContextType.DATALABELS.equals(getType()) && getDatasetIndex() != UndefinedValues.INTEGER && getDataIndex() != UndefinedValues.INTEGER;
 	}
 
 }

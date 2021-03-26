@@ -17,7 +17,7 @@ package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 
 /**
  * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>opacity</code> property at runtime, using the plugin context.
@@ -25,6 +25,6 @@ import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface OpacityCallback extends Scriptable<Double, DataLabelsScriptableContext> {
+public interface OpacityCallback extends Scriptable<Double, DataLabelsContext> {
 
 }

@@ -236,7 +236,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the background color callback.
 	 */
-	default ColorCallback<DataLabelsScriptableContext> getBackgroundColorCallback() {
+	default ColorCallback<DataLabelsContext> getBackgroundColorCallback() {
 		return null;
 	}
 
@@ -245,7 +245,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the border color callback.
 	 */
-	default ColorCallback<DataLabelsScriptableContext> getBorderColorCallback() {
+	default ColorCallback<DataLabelsContext> getBorderColorCallback() {
 		return null;
 	}
 
@@ -254,7 +254,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the color callback.
 	 */
-	default ColorCallback<DataLabelsScriptableContext> getColorCallback() {
+	default ColorCallback<DataLabelsContext> getColorCallback() {
 		return null;
 	}
 
@@ -290,7 +290,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the border radius callback.
 	 */
-	default RadiusCallback<DataLabelsScriptableContext> getBorderRadiusCallback() {
+	default RadiusCallback<DataLabelsContext> getBorderRadiusCallback() {
 		return null;
 	}
 
@@ -299,7 +299,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the border width callback.
 	 */
-	default WidthCallback<DataLabelsScriptableContext> getBorderWidthCallback() {
+	default WidthCallback<DataLabelsContext> getBorderWidthCallback() {
 		return null;
 	}
 
@@ -335,7 +335,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the offset callback.
 	 */
-	default OffsetCallback<DataLabelsScriptableContext> getOffsetCallback() {
+	default OffsetCallback<DataLabelsContext> getOffsetCallback() {
 		return null;
 	}
 
@@ -353,7 +353,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the rotation callback.
 	 */
-	default RotationCallback<DataLabelsScriptableContext> getRotationCallback() {
+	default RotationCallback<DataLabelsContext> getRotationCallback() {
 		return null;
 	}
 
@@ -371,7 +371,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the text stroke color callback.
 	 */
-	default ColorCallback<DataLabelsScriptableContext> getTextStrokeColorCallback() {
+	default ColorCallback<DataLabelsContext> getTextStrokeColorCallback() {
 		return null;
 	}
 
@@ -380,7 +380,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the text stroke width callback.
 	 */
-	default WidthCallback<DataLabelsScriptableContext> getTextStrokeWidthCallback() {
+	default WidthCallback<DataLabelsContext> getTextStrokeWidthCallback() {
 		return null;
 	}
 
@@ -398,7 +398,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the text shadow color callback.
 	 */
-	default ColorCallback<DataLabelsScriptableContext> getTextShadowColorCallback() {
+	default ColorCallback<DataLabelsContext> getTextShadowColorCallback() {
 		return null;
 	}
 

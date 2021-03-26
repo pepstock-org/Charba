@@ -199,7 +199,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	// font callback instance
 	private static final CallbackPropertyHandler<FontCallback> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
 	// font color callback instance
-	private static final CallbackPropertyHandler<ColorCallback<LabelsScriptableContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
+	private static final CallbackPropertyHandler<ColorCallback<LabelsContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
 
 	// defaults options instance
 	private final IsDefaultLabel defaultOptions;
@@ -312,10 +312,10 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(new LabelsScriptableContext(item)));
-		fontCallbackProxy.setCallback((context, item) -> onFontCallback(new LabelsScriptableContext(item)));
+		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(new LabelsContext(item)));
+		fontCallbackProxy.setCallback((context, item) -> onFontCallback(new LabelsContext(item)));
 		// gets value calling callback
-		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new LabelsScriptableContext(context), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
+		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(context), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
 	}
 
 	/**
@@ -730,7 +730,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @return the font color callback, if set, otherwise <code>null</code>
 	 */
 	@Override
-	public ColorCallback<LabelsScriptableContext> getColorCallback() {
+	public ColorCallback<LabelsContext> getColorCallback() {
 		return COLOR_PROPERTY_HANDLER.getCallback(this, defaultOptions.getColorCallback());
 	}
 
@@ -739,7 +739,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * 
 	 * @param colorCallback the font color callback.
 	 */
-	public void setColor(ColorCallback<LabelsScriptableContext> colorCallback) {
+	public void setColor(ColorCallback<LabelsContext> colorCallback) {
 		COLOR_PROPERTY_HANDLER.setCallback(this, DEFAULT_ID.value(), colorCallback, colorCallbackProxy.getProxy());
 	}
 
@@ -749,7 +749,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param context native object with callback context
 	 * @return image or string for rendering.
 	 */
-	private Object onRenderCallback(LabelsScriptableContext context) {
+	private Object onRenderCallback(LabelsContext context) {
 		// gets callback
 		RenderCallback renderCallback = RENDER_PROPERTY_HANDLER.getCallback(this);
 		// checks if the context and callback are consistent
@@ -778,7 +778,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param context native object with callback context
 	 * @return the font instance
 	 */
-	private NativeObject onFontCallback(LabelsScriptableContext context) {
+	private NativeObject onFontCallback(LabelsContext context) {
 		// gets callback
 		FontCallback fontCallback = FONT_PROPERTY_HANDLER.getCallback(this);
 		// checks if the context and callback are consistent

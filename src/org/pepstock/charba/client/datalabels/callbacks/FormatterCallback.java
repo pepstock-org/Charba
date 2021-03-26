@@ -17,7 +17,7 @@ package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.data.FloatingData;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.items.DataItem;
 
 /**
@@ -38,6 +38,6 @@ public interface FormatterCallback {
 	 *            Can be a simple <code>double</code>, {@link String} or a {@link FloatingData}.
 	 * @return the label value to be showed
 	 */
-	String invoke(DataLabelsScriptableContext context, DataItem dataItem);
+	String invoke(DataLabelsContext context, DataItem dataItem);
 
 }

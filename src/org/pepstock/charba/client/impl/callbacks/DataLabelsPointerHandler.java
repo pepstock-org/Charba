@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.callbacks;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.dom.enums.CursorType;
 
@@ -69,7 +69,7 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	 * @see org.pepstock.charba.client.datalabels.events.AbstractEventHandler#onLeave(org.pepstock.charba.client.datalabels.DataLabelsScriptableContext)
 	 */
 	@Override
-	public boolean onLeave(DataLabelsScriptableContext context) {
+	public boolean onLeave(DataLabelsContext context) {
 		// gets chart
 		IsChart chart = ScriptableUtils.retrieveChart(context);
 		// checks consistency of arguments
@@ -85,7 +85,7 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	 * @see org.pepstock.charba.client.datalabels.events.AbstractEventHandler#onEnter(org.pepstock.charba.client.datalabels.DataLabelsScriptableContext)
 	 */
 	@Override
-	public boolean onEnter(DataLabelsScriptableContext context) {
+	public boolean onEnter(DataLabelsContext context) {
 		// gets chart
 		IsChart chart = ScriptableUtils.retrieveChart(context);
 		// checks consistency of arguments

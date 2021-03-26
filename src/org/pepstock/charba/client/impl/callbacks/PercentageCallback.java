@@ -17,7 +17,7 @@ package org.pepstock.charba.client.impl.callbacks;
 
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.items.DataItem;
@@ -109,7 +109,7 @@ public final class PercentageCallback implements FormatterCallback {
 	 * org.pepstock.charba.client.items.DataItem)
 	 */
 	@Override
-	public String invoke(DataLabelsScriptableContext context, DataItem dataItem) {
+	public String invoke(DataLabelsContext context, DataItem dataItem) {
 		// checks if the data type is a possible numbers
 		if (DataType.NUMBERS.equals(dataItem.getDataType()) || DataType.ARRAYS.equals(dataItem.getDataType())) {
 			// calculates the value to use for percentage

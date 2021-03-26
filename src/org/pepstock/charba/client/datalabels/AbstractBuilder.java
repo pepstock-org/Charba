@@ -376,7 +376,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param backgroundColorCallback the background color callback.
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setBackgroundColor(ColorCallback<DataLabelsScriptableContext> backgroundColorCallback) {
+	public final AbstractBuilder<T> setBackgroundColor(ColorCallback<DataLabelsContext> backgroundColorCallback) {
 		label.setBackgroundColor(backgroundColorCallback);
 		return this;
 	}
@@ -387,7 +387,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param borderColorCallback the border color callback.
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setBorderColor(ColorCallback<DataLabelsScriptableContext> borderColorCallback) {
+	public final AbstractBuilder<T> setBorderColor(ColorCallback<DataLabelsContext> borderColorCallback) {
 		label.setBorderColor(borderColorCallback);
 		return this;
 	}
@@ -398,7 +398,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param colorCallback the color callback.
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setColor(ColorCallback<DataLabelsScriptableContext> colorCallback) {
+	public final AbstractBuilder<T> setColor(ColorCallback<DataLabelsContext> colorCallback) {
 		label.setColor(colorCallback);
 		return this;
 	}
@@ -442,7 +442,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param borderRadiusCallback the border radius callback to set
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setBorderRadius(RadiusCallback<DataLabelsScriptableContext> borderRadiusCallback) {
+	public final AbstractBuilder<T> setBorderRadius(RadiusCallback<DataLabelsContext> borderRadiusCallback) {
 		label.setBorderRadius(borderRadiusCallback);
 		return this;
 	}
@@ -453,7 +453,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param borderWidthCallback the border width callback to set
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setBorderWidth(WidthCallback<DataLabelsScriptableContext> borderWidthCallback) {
+	public final AbstractBuilder<T> setBorderWidth(WidthCallback<DataLabelsContext> borderWidthCallback) {
 		label.setBorderWidth(borderWidthCallback);
 		return this;
 	}
@@ -497,7 +497,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param offsetCallback the offset callback to set
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setOffset(OffsetCallback<DataLabelsScriptableContext> offsetCallback) {
+	public final AbstractBuilder<T> setOffset(OffsetCallback<DataLabelsContext> offsetCallback) {
 		label.setOffset(offsetCallback);
 		return this;
 	}
@@ -519,7 +519,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param rotationCallback the rotation callback to set
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setRotation(RotationCallback<DataLabelsScriptableContext> rotationCallback) {
+	public final AbstractBuilder<T> setRotation(RotationCallback<DataLabelsContext> rotationCallback) {
 		label.setRotation(rotationCallback);
 		return this;
 	}
@@ -541,7 +541,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param textStrokeColorCallback the text stroke color callback to set
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setTextStrokeColor(ColorCallback<DataLabelsScriptableContext> textStrokeColorCallback) {
+	public final AbstractBuilder<T> setTextStrokeColor(ColorCallback<DataLabelsContext> textStrokeColorCallback) {
 		label.setTextStrokeColor(textStrokeColorCallback);
 		return this;
 	}
@@ -552,7 +552,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param textStrokeWidthCallback the text stroke width callback to set
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setTextStrokeWidth(WidthCallback<DataLabelsScriptableContext> textStrokeWidthCallback) {
+	public final AbstractBuilder<T> setTextStrokeWidth(WidthCallback<DataLabelsContext> textStrokeWidthCallback) {
 		label.setTextStrokeWidth(textStrokeWidthCallback);
 		return this;
 	}
@@ -574,7 +574,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param textShadowColorCallback the text shadow color callback to set
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setTextShadowColor(ColorCallback<DataLabelsScriptableContext> textShadowColorCallback) {
+	public final AbstractBuilder<T> setTextShadowColor(ColorCallback<DataLabelsContext> textShadowColorCallback) {
 		label.setTextShadowColor(textShadowColorCallback);
 		return this;
 	}

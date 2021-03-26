@@ -17,7 +17,7 @@ package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 
 /**
@@ -26,6 +26,6 @@ import org.pepstock.charba.client.datalabels.enums.TextAlign;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface TextAlignCallback extends Scriptable<TextAlign, DataLabelsScriptableContext> {
+public interface TextAlignCallback extends Scriptable<TextAlign, DataLabelsContext> {
 
 }

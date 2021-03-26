@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.enums.ContextType;
 import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 
@@ -28,7 +29,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LabelsScriptableContext extends AbstractDatasetScriptableContext {
+public final class LabelsContext extends AbstractDatasetScriptableContext {
 
 	/**
 	 * Name of properties of native object.
@@ -70,7 +71,7 @@ public final class LabelsScriptableContext extends AbstractDatasetScriptableCont
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	LabelsScriptableContext(NativeObject nativeObject) {
+	LabelsContext(NativeObject nativeObject) {
 		super(nativeObject);
 		// gets the type of value
 		ObjectType type = type(Property.VALUE);
@@ -130,7 +131,7 @@ public final class LabelsScriptableContext extends AbstractDatasetScriptableCont
 		// checks if the data index and data set index are consistent
 		boolean indexed = getDatasetIndex() != UndefinedValues.INTEGER && getDataIndex() != UndefinedValues.INTEGER;
 		// checks that all items are there
-		return indexed && has(Property.LABEL) && has(Property.PERCENTAGE);
+		return indexed && ContextType.LABELS.equals(getType()) && has(Property.LABEL) && has(Property.PERCENTAGE);
 	}
 
 }

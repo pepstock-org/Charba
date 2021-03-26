@@ -19,7 +19,7 @@ import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.labels.Font;
 import org.pepstock.charba.client.labels.LabelsPlugin;
-import org.pepstock.charba.client.labels.LabelsScriptableContext;
+import org.pepstock.charba.client.labels.LabelsContext;
 
 /**
  * Callback interface of {@link LabelsPlugin#ID} plugin to change font at runtime, using the arguments.
@@ -28,6 +28,6 @@ import org.pepstock.charba.client.labels.LabelsScriptableContext;
  *
  * @see IsColor
  */
-public interface FontCallback extends Scriptable<Font, LabelsScriptableContext> {
+public interface FontCallback extends Scriptable<Font, LabelsContext> {
 
 }

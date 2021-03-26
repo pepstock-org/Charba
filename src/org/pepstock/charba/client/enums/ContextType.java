@@ -49,6 +49,18 @@ public enum ContextType implements Key
 	 */
 	TOOLTIP("tooltip"),
 	/**
+	 * DataLabels plugin context type.
+	 */
+	DATALABELS("datalabels"),
+	/**
+	 * Labels plugin context type.
+	 */
+	LABELS("labels"),
+	/**
+	 * Annotation plugin context type.
+	 */
+	ANNOTATION("annotation"),
+	/**
 	 * Unknown context type.
 	 */
 	UNKNOWN("unknown");

@@ -77,9 +77,9 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(new DataLabelsScriptableContext(context)));
-		leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(new DataLabelsScriptableContext(context)));
-		clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(new DataLabelsScriptableContext(context)));
+		enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(new DataLabelsContext(context)));
+		leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(new DataLabelsContext(context)));
+		clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(new DataLabelsContext(context)));
 	}
 
 	/**
@@ -146,7 +146,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 * @param context native object as context.
 	 * @return a object property value, as boolean
 	 */
-	private boolean onClick(DataLabelsScriptableContext context) {
+	private boolean onClick(DataLabelsContext context) {
 		// gets callback
 		ClickEventHandler clickEventHandler = CLICK_EVENT_PROPERTY_HANDLER.getCallback(this);
 		// checks if the context and handler are consistent
@@ -164,7 +164,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 * @param context native object as context.
 	 * @return a object property value, as boolean
 	 */
-	private boolean onEnter(DataLabelsScriptableContext context) {
+	private boolean onEnter(DataLabelsContext context) {
 		// gets callback
 		EnterEventHandler enterEventHandler = ENTER_EVENT_PROPERTY_HANDLER.getCallback(this);
 		// checks if the context and handler are consistent
@@ -182,7 +182,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 * @param context native object as context.
 	 * @return a object property value, as boolean
 	 */
-	private boolean onLeave(DataLabelsScriptableContext context) {
+	private boolean onLeave(DataLabelsContext context) {
 		// gets callback
 		LeaveEventHandler leaveEventHandler = LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this);
 		// checks if the context and handler are consistent

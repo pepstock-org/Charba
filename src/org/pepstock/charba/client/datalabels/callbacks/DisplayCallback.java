@@ -17,7 +17,7 @@ package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.enums.Display;
 
 /**
@@ -26,6 +26,6 @@ import org.pepstock.charba.client.enums.Display;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface DisplayCallback extends Scriptable<Display, DataLabelsScriptableContext> {
+public interface DisplayCallback extends Scriptable<Display, DataLabelsContext> {
 
 }

@@ -17,7 +17,7 @@ package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.datalabels.DataLabelsScriptableContext;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.datalabels.Font;
 
 /**
@@ -26,6 +26,6 @@ import org.pepstock.charba.client.datalabels.Font;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface FontCallback extends Scriptable<Font, DataLabelsScriptableContext> {
+public interface FontCallback extends Scriptable<Font, DataLabelsContext> {
 
 }
