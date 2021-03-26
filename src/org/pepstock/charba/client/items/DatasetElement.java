@@ -60,7 +60,6 @@ public class DatasetElement extends NativeObjectContainer {
 		// bubble, line, radar
 		SKIP("skip"),
 		// line
-		// FIXME
 		CONTROL_POINT_PREVIOUS_X("controlPointPreviousX"),
 		CONTROL_POINT_PREVIOUS_Y("controlPointPreviousY"),
 		CONTROL_POINT_NEXT_X("controlPointNextX"),
