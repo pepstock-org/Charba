@@ -819,16 +819,16 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * Looks for the dataset that matches the current index.
+	 * Looks for the data set that matches the current index.
 	 * 
-	 * @param index dataset index
-	 * @return dataset item or <code>null</code> if the index is out of range of datasets count.
+	 * @param index data set index
+	 * @return data set item or <code>null</code> if the index is out of range of data sets count.
 	 */
 	@Override
 	public final DatasetItem getDatasetItem(int index) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
-		// checks consistency of chart and datasets
+		// checks consistency of chart and data sets
 		if (instance != null && isValidDatasetIndex(index)) {
 			// returns the array
 			return new DatasetItem(new ChartEnvelop<>(instance.getDatasetMeta(index), true));
@@ -854,7 +854,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// returns the array
 			return ArrayListHelper.unmodifiableList(array, DatasetReference.FACTORY);
 		}
-		// if here, chart and event npot consistent then returns an empty list
+		// if here, chart and event not consistent then returns an empty list
 		return Collections.emptyList();
 	}
 

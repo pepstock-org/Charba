@@ -26,14 +26,14 @@ import org.pepstock.charba.client.controllers.ControllersEnvelop;
 /**
  * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
  * The elements are mapped by this object.<br>
- * This is the CHART.JS item with all needed info about a selected dataset.<br>
+ * This is the CHART.JS item with all needed info about a selected data set.<br>
  * This object has been created and passed to event handler or callbacks to apply own logic.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public class DatasetElement extends NativeObjectContainer {
 
-	// static instance for the dataset item factory
+	// static instance for the data set item factory
 	static final DatasetItemFactory FACTORY = new DatasetItemFactory();
 
 	/**
@@ -60,10 +60,10 @@ public class DatasetElement extends NativeObjectContainer {
 		// bubble, line, radar
 		SKIP("skip"),
 		// line
-		CONTROL_POINT_PREVIOUS_X("controlPointPreviousX"),
-		CONTROL_POINT_PREVIOUS_Y("controlPointPreviousY"),
-		CONTROL_POINT_NEXT_X("controlPointNextX"),
-		CONTROL_POINT_NEXT_Y("controlPointNextY"),
+		CONTROL_POINT_PREVIOUS_X("cp1x"),
+		CONTROL_POINT_PREVIOUS_Y("cp1y"),
+		CONTROL_POINT_NEXT_X("cp2x"),
+		CONTROL_POINT_NEXT_Y("cp2y"),
 		// radar
 		ANGLE("angle");
 
@@ -187,9 +187,9 @@ public class DatasetElement extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the previous X control point of dataset item in pixel.
+	 * Returns the previous X control point of data set item in pixel.
 	 * 
-	 * @return the previous X control point of dataset item in pixel.
+	 * @return the previous X control point of data set item in pixel.
 	 */
 	public final double getControlPointPreviousX() {
 		return getValue(Property.CONTROL_POINT_PREVIOUS_X, UndefinedValues.DOUBLE);
