@@ -306,12 +306,13 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `tickColor` property to `Grid` configuration and options classes.
  * add `tickWidth` property to `Grid` configuration and options classes.
  * add `borderColor` and `borderWidth` properties to `Grid` options and configuration classes.
- * add `ScaleLineWidthCallback` interface to `Grid` or `RadialAngleLines` configuration in order to set `lineWidth` property at runtime.
- * add `ScaleColorCallback` interface to `Grid`, `RadialAngleLines` or `RadialLinearTick` configuration in order to set `color` and `backdropColor` property at runtime.
- * add `ScaleBorderDashOffsetCallback` interface to `Grid` or `RadialAngleLines` configuration in order to set `borderDashOffset` property at runtime.
- * add `ScaleBorderDashCallback` interface to `RadialAngleLines` configuration in order to set `borderDash` property at runtime.
- * add `ScaleFontCallback` interface to `RadialPointLabels` or `Tick` configuration in order to set `font` property at runtime.
- * add `ScaleShowLabelBackdropCallback` interface to `RadialLinearTick` or `Tick` configuration in order to set `showLabelBackdrop` property at runtime.
+ * add `WidthCallback` interface to `Grid` and `RadialAngleLines` configuration in order to set `lineWidth` property at runtime.
+ * add `ColorCallback` interface to `Grid`, `RadialAngleLines` and `RadialLinearTick` configuration in order to set `color` and `backdropColor` property at runtime.
+ * add `BorderDashOffsetCallback` interface to `Grid` and `RadialAngleLines` configuration in order to set `borderDashOffset` property at runtime.
+ * add `BorderDashCallback` interface to `RadialAngleLines` configuration in order to set `borderDash` property at runtime.
+ * add `FontCallback` interface to `RadialPointLabels` and `Tick` configuration in order to set `font` property at runtime.
+ * add `ShowLabelBackdropCallback` interface to `RadialLinearTick` or `Tick` configuration in order to set `showLabelBackdrop` property at runtime.
+ * add `SimplePaddingCallback` interface to `RadialPointLabels`configuration in order to set `padding` property at runtime.
  * add `format` property to all numeric ticks (cartesian linear and log, radial linear) in order to apply the number formatting by [ECMAScript Internationalization API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat), leveraging on **Charba INTL NumberFormat** implementation.
  * add the `center` axes position and the position of the axis with respect to a data value.
  * add `textStrokeColor` and `textStrokeWidth` properties to `Ticks` configuration and options classes.
@@ -375,15 +376,21 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `setEnabled` method for `DefaultPluginId` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title  * change `getXAxisID` method in `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
 in legend and title options, and `setEnabled` method for tooltips in tooltips options.
  * remove `CLEAR_SELECTION` constant from `DatasetRangeSelectionEvent` class because the event is containing the selected values and not the indexes anymore.
- * replace `Context` class with `LabelsScriptableContext` for `Labels` plugin.
  * change `LabelsPlugin` in order to :
    * add new `color` property for the font color, in order to be aligned with CHART.JS 3 implementation.
-   * change `FontColorCallback` in favor of `ColorCallback` where you can decide the font color.
    * use `font` object instead of the single properties.
+   * change `FontColorCallback` in favor of `ColorCallback` where you can decide the font color.
    * add `FontColorCallback` in favor of `FontCallback` where you can decide the whole content of font.
-   * pass a `Context` object instance as argument to the callback instead of `RenderItem` and `FontColorItem` ones.
+   * pass a `LabelsContext` object instance as argument to all plugin callbacks instead of `RenderItem` and `FontColorItem` ones.
  * remove `setOptions(List<T>)`, `getOptionsAsList` and `getOptionsType` methods from `Plugins` configuration and options classes.
- * move `Weight` enumeration from `org.pepstock.charba.client.datalabels.enums` to `org.pepstock.charba.client.enums` because new `Font` implementation must be used.
+ * change `DataLabelsPlugin` in order to :
+   * move `Weight` enumeration from `org.pepstock.charba.client.datalabels.enums` to `org.pepstock.charba.client.enums` because new `Font` implementation must be used.
+   * `org.pepstock.charba.client.datalabels.callbacks.ColorCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.ColorCallback` class to manage whatever scriptable option which manages colors.
+   * `org.pepstock.charba.client.datalabels.callbacks.OffsetCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.OffsetCallback` class to manage whatever scriptable option which manages offsets.
+   * `org.pepstock.charba.client.datalabels.callbacks.OffsetCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.OffsetCallback` class to manage whatever scriptable option which manages offsets.
+   * `org.pepstock.charba.client.datalabels.callbacks.TextShadowColorCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.ColorCallback` class to manage whatever scriptable option which manages colors.
+   * `org.pepstock.charba.client.datalabels.callbacks.TextStrokeColorCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.ColorCallback` class to manage whatever scriptable option which manages colors.
+   * `org.pepstock.charba.client.datalabels.callbacks.TextStrokeWidthCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.WidthCallback` class to manage whatever scriptable option which manages line widths.
 
 #### Features
  * change all methods of `Plugin` interface becoming all default ones.
@@ -445,6 +452,16 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
    * remove `getIndex` method from `ScriptableContext` class, use getDataIndex instead.
    * add type of the context.
    * remove `isHover` method from `ScriptableContext` class.
+ * creates new context classes based on the type of context:
+   * `ScriptableContext` which is mapping `chart`, `dataset` and `data` types.
+   * `ScaleScriptableContext` which is mapping `scale` and `tick` types.   
+   * `DataLabelsContext` which is mapping `datalabels` types, for callbacks invoked by `DataLabelsPlugin`.
+   * `LabelsContext` which is mapping `labels` types, for callbacks invoked by `DataLabelsPlugin`.  
+ * all scriptable options are extending the `Scriptable` interface which has changed own signature, accessing only 1 argument, the context defined as generic.
+ * `BackgroundColorCallback` and `BorderColorCallback` classes have been replaced by `ColorCallback` class to manage whatever scriptable option which manages colors.
+ * `BorderWidthCallback` class has been replaced by `WidthCallback` class to manage whatever scriptable option which manages line widths.
+ * rename `BorderCapStyleCallback` class to `CapStyleCallback`.
+ * rename `BorderJoinStyleCallback` class to `JoinStyleCallback`.
  * remove `LegendCallback` interface and its usage from `ConfigurationOptions` class because the prototype is not available anymore.
  * remove `hidden` attribute from `LegendItem` and `LegendLabelItem` classes because not supported anymore. Use new `isHidden(chart)` method of `LegendItem` class.
  * redesign of `TooltipModel` class in according with new Chart.js model.
