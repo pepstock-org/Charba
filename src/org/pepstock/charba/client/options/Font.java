@@ -228,7 +228,7 @@ public final class Font extends AbstractNode implements IsFont, IsFontProvider {
 	 * @return a font options instance filled with the values of the current font
 	 */
 	@Override
-	public FontItem createFont() {
+	public FontItem create() {
 		// clones the native object of current font
 		NativeObject clonedNativeObject = Helpers.get().clone(nativeObject());
 		// creates a new font options by cloned native object

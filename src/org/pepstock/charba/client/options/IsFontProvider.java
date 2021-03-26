@@ -29,6 +29,6 @@ public interface IsFontProvider  {
 	 * 
 	 * @return a font options instance using default or cloning current instance
 	 */
-	FontItem createFont();
+	FontItem create();
 
 }

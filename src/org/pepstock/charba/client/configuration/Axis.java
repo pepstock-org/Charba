@@ -588,11 +588,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			return result.nativeObject();
 		} else if (provider != null) {
 			// checks if provider is consistent
-			return provider.createFont().nativeObject();
+			return provider.create().nativeObject();
 		}
 		// if here, provider is not consistent
 		// then returns the defaults one
-		return Defaults.get().getGlobal().getFont().createFont().nativeObject();
+		return Defaults.get().getGlobal().getFont().create().nativeObject();
 	}
 
 	/**

@@ -1328,7 +1328,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 			return result.nativeObject();
 		}
 		// default result
-		return Defaults.get().getGlobal().getFont().createFont().nativeObject();
+		return Defaults.get().getGlobal().getFont().create().nativeObject();
 	}
 
 }
