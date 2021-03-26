@@ -140,11 +140,11 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		/**
 		 * Method of function to be called to render the chart returning the label(string) and the image to show.
 		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param item native object as callback context.
+		 * @param contextFunction context value of <code>this</code> to the execution context of function.
+		 * @param context native object as callback context.
 		 * @return image or string for rendering.
 		 */
-		Object call(CallbackFunctionContext context, NativeObject item);
+		Object call(CallbackFunctionContext contextFunction, NativeObject context);
 	}
 
 	/**
@@ -159,11 +159,11 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		/**
 		 * Method of function to be called to get the font of render in the chat.
 		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param item native object as callback context.
+		 * @param contextFunction context value of <code>this</code> to the execution context of function.
+		 * @param context native object as callback context.
 		 * @return the font instance.
 		 */
-		NativeObject call(CallbackFunctionContext context, NativeObject item);
+		NativeObject call(CallbackFunctionContext contextFunction, NativeObject context);
 	}
 
 	/**
@@ -178,11 +178,11 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		/**
 		 * Method of function to be called to get the font color of render in the chat.
 		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
-		 * @param item native object as callback context.
+		 * @param contextFunction context value of <code>this</code> to the execution context of function.
+		 * @param context native object as callback context.
 		 * @return the font color.
 		 */
-		String call(CallbackFunctionContext context, NativeObject item);
+		String call(CallbackFunctionContext contextFunction, NativeObject context);
 	}
 
 	// ---------------------------
@@ -312,10 +312,10 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(new LabelsContext(item)));
-		fontCallbackProxy.setCallback((context, item) -> onFontCallback(new LabelsContext(item)));
+		renderCallbackProxy.setCallback((contextFunction, context) -> onRenderCallback(new LabelsContext(this, context)));
+		fontCallbackProxy.setCallback((contextFunction, context) -> onFontCallback(new LabelsContext(this, context)));
 		// gets value calling callback
-		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(context), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
+		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(this, context), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
 	}
 
 	/**

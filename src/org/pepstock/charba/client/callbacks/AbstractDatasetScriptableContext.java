@@ -108,7 +108,7 @@ public abstract class AbstractDatasetScriptableContext extends AbstractScriptabl
 		// gets chart instance
 		IsChart chart = getChart();
 		// checks if context and chart re consistent
-		if (isConsistent() && IsChart.isValid(chart) && chart.isInitialized()) {
+		if (isConsistent() && IsChart.isValid(chart)) {
 			// gets data set item
 			return chart.getDatasetItem(getDatasetIndex());
 		}
@@ -132,9 +132,9 @@ public abstract class AbstractDatasetScriptableContext extends AbstractScriptabl
 			// gets the list of all data set elements
 			List<DatasetElement> elements = datasetItem.getElements();
 			// checks if the data index is consistent against the list
-			if (!datasetItem.getElements().isEmpty() && dataIndex >= 0 && dataIndex < elements.size()) {
+			if (!elements.isEmpty() && dataIndex >= 0 && dataIndex < elements.size()) {
 				// gets data set element
-				return datasetItem.getElements().get(dataIndex);
+				return elements.get(dataIndex);
 			}
 		}
 		// if here, data set index or data index are not consistent

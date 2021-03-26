@@ -27,7 +27,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  */
 public final class DataLabelsContext extends AbstractDatasetScriptableContext {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -58,13 +58,24 @@ public final class DataLabelsContext extends AbstractDatasetScriptableContext {
 		}
 	}
 
+	// instance of label
+	private final LabelItem label;
+
 	/**
-	 * Creates the object with public object instance to be wrapped.
+	 * Creates the object with native object instance to be wrapped and the label instance.
 	 * 
-	 * @param nativeObject public object instance to be wrapped.
+	 * @param label label configuration object
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	DataLabelsContext(NativeObject nativeObject) {
+	DataLabelsContext(LabelItem label, NativeObject nativeObject) {
 		super(nativeObject);
+		// checks if label is consistent
+		if (label == null) {
+			// exception!
+			throw new IllegalArgumentException("Label argument is null");
+		}
+		// stores label
+		this.label = label;
 		// as you can see from following rejected PR
 		// https://github.com/chartjs/chartjs-plugin-datalabels/pull/229
 		// data labels does not provide the context type
@@ -74,6 +85,15 @@ public final class DataLabelsContext extends AbstractDatasetScriptableContext {
 			// overrides and sets the data labels type
 			setValue(Property.TYPE, ContextType.DATALABELS);
 		}
+	}
+
+	/**
+	 * Returns the label options of plugin.
+	 * 
+	 * @return the label options of the plugin
+	 */
+	public LabelItem getLabel() {
+		return label;
 	}
 
 	/*

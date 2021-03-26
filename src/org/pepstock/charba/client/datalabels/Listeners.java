@@ -69,6 +69,11 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 */
 	Listeners(LabelItem parent, IsDefaultListeners defaultOptions, NativeObject nativeObject) {
 		super(nativeObject);
+		// checks if label is consistent
+		if (parent == null) {
+			// exception!
+			throw new IllegalArgumentException("Label argument is null");
+		}
 		// stores parent
 		this.parent = parent;
 		// checks if default value is consistent
@@ -77,9 +82,9 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(new DataLabelsContext(context)));
-		leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(new DataLabelsContext(context)));
-		clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(new DataLabelsContext(context)));
+		enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(new DataLabelsContext(this.parent, context)));
+		leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(new DataLabelsContext(this.parent, context)));
+		clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(new DataLabelsContext(this.parent, context)));
 	}
 
 	/**

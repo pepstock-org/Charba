@@ -275,47 +275,47 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		formatterCallbackProxy.setCallback((contextFunction, value, context) -> onFormatter(new DataLabelsContext(context), value));
+		formatterCallbackProxy.setCallback((contextFunction, value, context) -> onFormatter(new DataLabelsContext(this, context), value));
 		// gets value calling callback
-		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), getBackgroundColorAsString()));
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), getBackgroundColorAsString()));
 		// gets value calling callback
-		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(context), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), getBorderColorAsString()));
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), getBorderColorAsString()));
 		// gets value calling callback
-		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(context), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
+		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
 		// gets value calling callback
-		alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(context), ALIGN_PROPERTY_HANDLER.getCallback(this), getAlign()).value());
+		alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), ALIGN_PROPERTY_HANDLER.getCallback(this), getAlign()).value());
 		// gets value calling callback
-		anchorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(context), ANCHOR_PROPERTY_HANDLER.getCallback(this), getAnchor()).value());
+		anchorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), ANCHOR_PROPERTY_HANDLER.getCallback(this), getAnchor()).value());
 		// gets value calling callback
-		borderRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(context), BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this), getBorderRadius()).doubleValue());
+		borderRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this), getBorderRadius()).doubleValue());
 		// gets value calling callback
-		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(context), BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this), getBorderWidth()).intValue());
+		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this), getBorderWidth()).intValue());
 		// gets value calling callback
-		clampCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(context), CLAMP_PROPERTY_HANDLER.getCallback(this), isClamp()).booleanValue());
+		clampCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), CLAMP_PROPERTY_HANDLER.getCallback(this), isClamp()).booleanValue());
 		// gets value calling callback
-		clipCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(context), CLIP_PROPERTY_HANDLER.getCallback(this), isClip()).booleanValue());
+		clipCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), CLIP_PROPERTY_HANDLER.getCallback(this), isClip()).booleanValue());
 		// gets value calling callback
-		displayCallbackProxy.setCallback((contextFunction, context) -> onDisplay(new DataLabelsContext(context)));
+		displayCallbackProxy.setCallback((contextFunction, context) -> onDisplay(new DataLabelsContext(this, context)));
 		// gets value calling callback
-		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(context), OFFSET_PROPERTY_HANDLER.getCallback(this), getOffset()).intValue());
+		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), OFFSET_PROPERTY_HANDLER.getCallback(this), getOffset()).intValue());
 		// gets value calling callback
-		opacityCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(context), OPACITY_PROPERTY_HANDLER.getCallback(this), getOpacity()).doubleValue());
+		opacityCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), OPACITY_PROPERTY_HANDLER.getCallback(this), getOpacity()).doubleValue());
 		// gets value calling callback
-		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(context), ROTATION_PROPERTY_HANDLER.getCallback(this), getRotation()).doubleValue());
+		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), ROTATION_PROPERTY_HANDLER.getCallback(this), getRotation()).doubleValue());
 		// gets value calling callback
-		textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(context), TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this), getTextAlign()).value());
+		textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this), getTextAlign()).value());
 		// gets value calling callback
-		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(context), TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this), getTextStrokeColorAsString()));
+		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this), getTextStrokeColorAsString()));
 		// gets value calling callback
-		textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(context), TEXT_STROKE_WIDTH_PROPERTY_HANDLER.getCallback(this), getTextStrokeWidth()).intValue());
+		textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), TEXT_STROKE_WIDTH_PROPERTY_HANDLER.getCallback(this), getTextStrokeWidth()).intValue());
 		// gets value calling callback
-		textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(context), TEXT_SHADOW_BLUR_PROPERTY_HANDLER.getCallback(this), getTextShadowBlur()).doubleValue());
+		textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), TEXT_SHADOW_BLUR_PROPERTY_HANDLER.getCallback(this), getTextShadowBlur()).doubleValue());
 		// gets value calling callback
-		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(context), TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this), getTextShadowColorAsString()));
+		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this), getTextShadowColorAsString()));
 		// gets value calling callback
-		fontCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new DataLabelsContext(context), FONT_PROPERTY_HANDLER.getCallback(this)));
+		fontCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new DataLabelsContext(this, context), FONT_PROPERTY_HANDLER.getCallback(this)));
 		// gets value calling callback
-		paddingCallbackProxy.setCallback((contextFunction, context) -> onPadding(new DataLabelsContext(context), PADDING_PROPERTY_HANDLER.getCallback(this)));
+		paddingCallbackProxy.setCallback((contextFunction, context) -> onPadding(new DataLabelsContext(this, context), PADDING_PROPERTY_HANDLER.getCallback(this)));
 	}
 
 	/*

@@ -65,14 +65,24 @@ public final class LabelsContext extends AbstractDatasetScriptableContext {
 
 	// instance of data item to wrap the value
 	private final DataItem dataItem;
+	// instance of label
+	private final Label labelOptions;
 
 	/**
-	 * Creates the object with native object instance to be wrapped.
+	 * Creates the object with native object instance to be wrapped and the label instance.
 	 * 
+	 * @param labelOptions label configuration object
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	LabelsContext(NativeObject nativeObject) {
+	LabelsContext(Label labelOptions, NativeObject nativeObject) {
 		super(nativeObject);
+		// checks if label is consistent
+		if (labelOptions == null) {
+			// exception!
+			throw new IllegalArgumentException("Label options argument is null");
+		}
+		// stores label
+		this.labelOptions = labelOptions;
 		// gets the type of value
 		ObjectType type = type(Property.VALUE);
 		// object instance for data item
@@ -95,11 +105,20 @@ public final class LabelsContext extends AbstractDatasetScriptableContext {
 	}
 
 	/**
+	 * Returns the label options of plugin.
+	 * 
+	 * @return the label options of the plugin
+	 */
+	public Label getLabelOptions() {
+		return labelOptions;
+	}	
+	
+	/**
 	 * Returns the label for the data set.
 	 * 
 	 * @return the label for the data set.
 	 */
-	public final String getLabel() {
+	public String getLabel() {
 		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
 
@@ -108,7 +127,7 @@ public final class LabelsContext extends AbstractDatasetScriptableContext {
 	 * 
 	 * @return the percentage for the data set.
 	 */
-	public final double getPercentage() {
+	public double getPercentage() {
 		return getValue(Property.PERCENTAGE, UndefinedValues.DOUBLE);
 	}
 
@@ -117,7 +136,7 @@ public final class LabelsContext extends AbstractDatasetScriptableContext {
 	 * 
 	 * @return the value for the data set by a {@link DataItem}.
 	 */
-	public final DataItem getDataItem() {
+	public DataItem getDataItem() {
 		return dataItem;
 	}
 
