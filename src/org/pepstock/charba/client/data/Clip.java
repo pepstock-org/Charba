@@ -24,8 +24,8 @@ import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * Defines how to clip relative to chartArea.<br>
- * Positive value allows overflow, negative value clips that many pixels inside chartArea.<br>
+ * Defines how to clip relative to the chart area.<br>
+ * Positive value allows overflow, negative value clips that many pixels inside the chart area.<br>
  * If sets <code>false</code>, that means that CHART.JS will use chart area dimension.<br>
  * With <code>false</code> value, the properties will be:
  * <ul>

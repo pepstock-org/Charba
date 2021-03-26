@@ -708,10 +708,10 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Sets how to clip relative to chartArea.<br>
-	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.
+	 * Sets how to clip relative to the chart area.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area.
 	 * 
-	 * @param clip positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea
+	 * @param clip positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area
 	 */
 	public void setClip(double clip) {
 		// sets value
@@ -719,8 +719,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Sets how to clip relative to chartArea, by an object which configures clipping per side.<br>
-	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.
+	 * Sets how to clip relative to the chart area, by an object which configures clipping per side.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area.
 	 * 
 	 * @param clip object which configures clipping per side
 	 */
@@ -730,11 +730,11 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns how to clip relative to chartArea.<br>
-	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
+	 * Returns how to clip relative to the chart area.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area.<br>
 	 * If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}.
 	 * 
-	 * @return positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
+	 * @return positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area.<br>
 	 *         If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}
 	 */
 	public double getClip() {
@@ -749,11 +749,11 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns how to clip relative to chartArea.<br>
-	 * Positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
+	 * Returns how to clip relative to the chart area.<br>
+	 * Positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area.<br>
 	 * If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
 	 * 
-	 * @return clip positive value allows overflow, negative value clips that many pixels inside chartArea. 0 = clip at chartArea.<br>
+	 * @return clip positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area.<br>
 	 *         If the clip was NOT set by a {@link Clip} object, returns a {@link Clip} instance with the same values.
 	 */
 	public Clip getClipAsObject() {
