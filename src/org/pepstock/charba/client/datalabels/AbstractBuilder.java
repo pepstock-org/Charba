@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
@@ -26,7 +27,6 @@ import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClampCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClipCallback;
 import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
-import org.pepstock.charba.client.datalabels.callbacks.FontCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
 import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
@@ -585,7 +585,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param fontCallback the font callback to set
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setFont(FontCallback fontCallback) {
+	public final AbstractBuilder<T> setFont(FontCallback<DataLabelsContext> fontCallback) {
 		label.setFont(fontCallback);
 		return this;
 	}

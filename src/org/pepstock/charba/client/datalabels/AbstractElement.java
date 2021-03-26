@@ -17,8 +17,6 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.datalabels.callbacks.FontCallback;
-import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
 
 /**
  * Abstract element used by padding and font object in order to enable to provide these object instances as result of a callback.<br>
@@ -26,9 +24,6 @@ import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
  * 
  * @author Andrea "Stock" Stocchero
  * 
- * @see FontCallback
- * @see PaddingCallback
- *
  */
 abstract class AbstractElement extends NativeObjectContainer {
 

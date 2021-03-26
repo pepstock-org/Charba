@@ -379,7 +379,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * change `LabelsPlugin` in order to :
    * add new `color` property for the font color, in order to be aligned with CHART.JS 3 implementation.
    * use `font` object instead of the single properties.
-   * change `FontColorCallback` in favor of `ColorCallback` where you can decide the font color.
+   * change `FontColorCallback` in favor of `ColorCallback` where you can decide the color.
    * add `FontColorCallback` in favor of `FontCallback` where you can decide the whole content of font.
    * pass a `LabelsContext` object instance as argument to all plugin callbacks instead of `RenderItem` and `FontColorItem` ones.
  * remove `setOptions(List<T>)`, `getOptionsAsList` and `getOptionsType` methods from `Plugins` configuration and options classes.
@@ -391,6 +391,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
    * `org.pepstock.charba.client.datalabels.callbacks.TextShadowColorCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.ColorCallback` class to manage whatever scriptable option which manages colors.
    * `org.pepstock.charba.client.datalabels.callbacks.TextStrokeColorCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.ColorCallback` class to manage whatever scriptable option which manages colors.
    * `org.pepstock.charba.client.datalabels.callbacks.TextStrokeWidthCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.WidthCallback` class to manage whatever scriptable option which manages line widths.
+   * `org.pepstock.charba.client.datalabels.callbacks.FontCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.FontCallback` class to manage whatever scriptable option which manages colors.
 
 #### Features
  * change all methods of `Plugin` interface becoming all default ones.

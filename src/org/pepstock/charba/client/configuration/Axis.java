@@ -26,6 +26,9 @@ import org.pepstock.charba.client.callbacks.AxisFitCallback;
 import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -37,7 +40,9 @@ import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.AxisItem;
+import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.options.ExtendedScale;
+import org.pepstock.charba.client.options.IsFontProvider;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.ScaleTitle;
@@ -564,6 +569,30 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			getConfiguration().setCallback(Property.BEFORE_UPDATE, null);
 			getConfiguration().setCallback(Property.AFTER_UPDATE, null);
 		}
+	}
+	
+	/**
+	 * Returns a native object as font when the callback has been activated.
+	 * 
+	 * @param context native object as context
+	 * @param callback callback to invoke
+	 * @param provider font provider instance
+	 * @return a native object as font
+	 */
+	final NativeObject onFont(ScaleScriptableContext context, FontCallback<ScaleScriptableContext> callback, IsFontProvider provider) {
+		// gets value
+		FontItem result = ScriptableUtils.getOptionValue(context, callback);
+		// checks if result is consistent
+		if (result != null) {
+			// returns result
+			return result.nativeObject();
+		} else if (provider != null) {
+			// checks if provider is consistent
+			return provider.createFont().nativeObject();
+		}
+		// if here, provider is not consistent
+		// then returns the defaults one
+		return Defaults.get().getGlobal().getFont().createFont().nativeObject();
 	}
 
 	/**

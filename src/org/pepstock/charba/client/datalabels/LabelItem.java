@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.datalabels;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
@@ -37,7 +39,6 @@ import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClampCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClipCallback;
 import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
-import org.pepstock.charba.client.datalabels.callbacks.FontCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
 import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
@@ -49,6 +50,7 @@ import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.DataItem;
+import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 import jsinterop.annotations.JsFunction;
@@ -171,7 +173,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	// text shadow color callback instance
 	private static final CallbackPropertyHandler<ColorCallback<DataLabelsContext>> TEXT_SHADOW_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_SHADOW_COLOR);
 	// font callback instance
-	private static final CallbackPropertyHandler<FontCallback> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
+	private static final CallbackPropertyHandler<FontCallback<DataLabelsContext>> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
 	// padding callback instance
 	private static final CallbackPropertyHandler<PaddingCallback> PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.PADDING);
 
@@ -313,7 +315,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// gets value calling callback
 		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this), getTextShadowColorAsString()));
 		// gets value calling callback
-		fontCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(new DataLabelsContext(this, context), FONT_PROPERTY_HANDLER.getCallback(this)));
+		fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new DataLabelsContext(this, context), FONT_PROPERTY_HANDLER.getCallback(this)));
 		// gets value calling callback
 		paddingCallbackProxy.setCallback((contextFunction, context) -> onPadding(new DataLabelsContext(this, context), PADDING_PROPERTY_HANDLER.getCallback(this)));
 	}
@@ -1215,7 +1217,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final FontCallback getFontCallback() {
+	public final FontCallback<DataLabelsContext> getFontCallback() {
 		return FONT_PROPERTY_HANDLER.getCallback(this, defaultOptions.getFontCallback());
 	}
 
@@ -1224,7 +1226,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
-	public final void setFont(FontCallback fontCallback) {
+	public final void setFont(FontCallback<DataLabelsContext> fontCallback) {
 		FONT_PROPERTY_HANDLER.setCallback(this, getId(), fontCallback, fontCallbackProxy.getProxy());
 	}
 
@@ -1317,16 +1319,16 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param callback callback to invoke
 	 * @return a native object as font
 	 */
-	private NativeObject onFontOrPadding(DataLabelsContext context, Scriptable<Font, DataLabelsContext> callback) {
+	private NativeObject onFont(DataLabelsContext context, Scriptable<FontItem, DataLabelsContext> callback) {
 		// gets value
-		Font result = ScriptableUtils.getOptionValue(context, callback);
+		FontItem result = ScriptableUtils.getOptionValue(context, callback);
 		// checks if result is consistent
 		if (result != null) {
 			// returns result
 			return result.nativeObject();
 		}
 		// default result
-		return getFont().nativeObject();
+		return Defaults.get().getGlobal().getFont().createFont().nativeObject();
 	}
 
 }

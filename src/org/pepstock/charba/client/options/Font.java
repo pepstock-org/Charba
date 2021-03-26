@@ -20,17 +20,17 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.configuration.FontOptions;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.items.FontItem;
 
 /**
  * Base object to map font options for configuration.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Font extends AbstractNode implements IsFont {
+public final class Font extends AbstractNode implements IsFont, IsFontProvider {
 
 	// default font values
 	private final IsDefaultFont defaultValues;
@@ -227,11 +227,12 @@ public final class Font extends AbstractNode implements IsFont {
 	 * 
 	 * @return a font options instance filled with the values of the current font
 	 */
-	public FontOptions createOptions() {
+	@Override
+	public FontItem createFont() {
 		// clones the native object of current font
 		NativeObject clonedNativeObject = Helpers.get().clone(nativeObject());
 		// creates a new font options by cloned native object
-		return new FontOptions(this, new OptionsEnvelop<>(clonedNativeObject));
+		return new FontItem(this, new OptionsEnvelop<>(clonedNativeObject));
 	}
 
 	/**

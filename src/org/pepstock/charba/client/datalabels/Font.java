@@ -15,30 +15,19 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.datalabels.callbacks.FontCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.options.AbstractFont;
 
 /**
- * Base object to map font options for {@link DataLabelsPlugin#ID} plugin configuration.<br>
- * It can be used also in the callback for font generation at runtime.
+ * Base object to map font options for {@link DataLabelsPlugin#ID} plugin configuration.
  * 
  * @author Andrea "Stock" Stocchero
- * @see FontCallback
  */
 public final class Font extends AbstractFont {
 
 	/**
-	 * Creates an empty font to use for chart configuration when the font is created by a callback.
-	 */
-	public Font() {
-		super(Defaults.get().getGlobal().getFont());
-	}
-
-	/**
-	 * Creates a font to use for chart configuration when the font is created by a callback, using a clone of another font object.
+	 * Creates a font to use for chart configuration.
 	 * 
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties

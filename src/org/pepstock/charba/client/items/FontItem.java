@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.configuration;
+package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.IsEnvelop;
@@ -28,12 +28,12 @@ import org.pepstock.charba.client.options.OptionsEnvelop;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class FontOptions extends AbstractFont {
+public final class FontItem extends AbstractFont {
 
 	/**
 	 * Creates an empty font to use for chart configuration with global defaults.
 	 */
-	public FontOptions() {
+	public FontItem() {
 		this(Defaults.get().getGlobal().getFont());
 	}
 
@@ -42,7 +42,7 @@ public final class FontOptions extends AbstractFont {
 	 * 
 	 * @param defaultValues default provider
 	 */
-	public FontOptions(IsDefaultFont defaultValues) {
+	public FontItem(IsDefaultFont defaultValues) {
 		super(defaultValues);
 	}
 
@@ -53,7 +53,7 @@ public final class FontOptions extends AbstractFont {
 	 * @param defaultValues default provider
 	 * @param envelop envelop with native object to map java script properties
 	 */
-	public FontOptions(IsDefaultFont defaultValues, OptionsEnvelop<NativeObject> envelop) {
+	public FontItem(IsDefaultFont defaultValues, OptionsEnvelop<NativeObject> envelop) {
 		super(defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
@@ -62,7 +62,7 @@ public final class FontOptions extends AbstractFont {
 	 * 
 	 * @return the native object instance.
 	 */
-	final NativeObject nativeObject() {
+	public NativeObject nativeObject() {
 		return getObject();
 	}
 
