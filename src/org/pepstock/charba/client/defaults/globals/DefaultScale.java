@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.defaults.IsDefaultAdapters;
 import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
 import org.pepstock.charba.client.defaults.IsDefaultGrid;
@@ -61,6 +62,8 @@ public final class DefaultScale implements IsDefaultScale {
 	private static final double DEFAULT_SUGGESTED_MAX = Double.MAX_VALUE;
 
 	private static final double DEFAULT_SUGGESTED_MIN = Double.MIN_VALUE;
+
+	private static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.TRANSPARENT.toRGBA();
 
 	private final DefaultAngleLines angleLines = new DefaultAngleLines();
 
@@ -322,4 +325,15 @@ public final class DefaultScale implements IsDefaultScale {
 	public double getStartAngle() {
 		return DEFAULT_START_ANGLE;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getBackgroundColorAsString()
+	 */
+	@Override
+	public String getBackgroundColorAsString() {
+		return DEFAULT_BACKGROUND_COLOR;
+	}
+
 }

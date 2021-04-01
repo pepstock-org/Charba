@@ -633,7 +633,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param backgroundColor background color to use in the chart.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
-		setValue(Property.COLOR, backgroundColor);
+		setValue(Property.BACKGROUND_COLOR, backgroundColor);
 	}
 
 	/**
@@ -643,7 +643,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
-		return getValue(Property.COLOR, getDefaultValues().getBackgroundColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, getDefaultValues().getBackgroundColorAsString());
 	}
 
 	/**
@@ -670,7 +670,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param borderColor border color to use in the chart.
 	 */
 	public void setBorderColor(String borderColor) {
-		setValue(Property.COLOR, borderColor);
+		setValue(Property.BORDER_COLOR, borderColor);
 	}
 
 	/**
@@ -680,7 +680,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	@Override
 	public String getBorderColorAsString() {
-		return getValue(Property.COLOR, getDefaultValues().getBorderColorAsString());
+		return getValue(Property.BORDER_COLOR, getDefaultValues().getBorderColorAsString());
 	}
 
 	/**

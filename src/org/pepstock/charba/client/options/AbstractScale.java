@@ -17,6 +17,8 @@ package org.pepstock.charba.client.options;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -59,6 +61,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		DISPLAY("display"),
 		WEIGHT("weight"),
 		TICKS("ticks"),
+		BACKGROUND_COLOR("backgroundColor"), 
 		// cartesian
 		POSITION("position"),
 		OFFSET("offset"),
@@ -245,6 +248,43 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	@Override
 	public final boolean isBeginAtZero() {
 		return getValue(Property.BEGIN_AT_ZERO, getDefaultValues().isBeginAtZero());
+	}
+	
+	/**
+	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param backgroundColor background color to use in the chart.
+	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
+	}
+
+	/**
+	 * Sets the background color of the scale area.
+	 * 
+	 * @param backgroundColor the background color of the scale area.
+	 */
+	public void setBackgroundColor(String backgroundColor) {
+		setValue(Property.BACKGROUND_COLOR, backgroundColor);
+	}
+
+	/**
+	 * Returns the background color of the scale area.
+	 * 
+	 * @return the background color of the scale area.
+	 */
+	@Override
+	public String getBackgroundColorAsString() {
+		return getValue(Property.BACKGROUND_COLOR, getDefaultValues().getBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the background color of the scale area.
+	 * 
+	 * @return the background color of the scale area.
+	 */
+	public IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**

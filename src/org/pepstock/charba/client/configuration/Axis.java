@@ -29,6 +29,7 @@ import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -289,6 +290,42 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	public final Display getDisplay() {
 		return getScale().getDisplay();
+	}
+	
+	/**
+	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param backgroundColor background color to use in the chart.
+	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		getScale().setBackgroundColor(backgroundColor);
+	}
+
+	/**
+	 * Sets the background color of the scale area.
+	 * 
+	 * @param backgroundColor the background color of the scale area.
+	 */
+	public void setBackgroundColor(String backgroundColor) {
+		getScale().setBackgroundColor(backgroundColor);
+	}
+
+	/**
+	 * Returns the background color of the scale area.
+	 * 
+	 * @return the background color of the scale area.
+	 */
+	public String getBackgroundColorAsString() {
+		return getScale().getBackgroundColorAsString();
+	}
+
+	/**
+	 * Returns the background color of the scale area.
+	 * 
+	 * @return the background color of the scale area.
+	 */
+	public IsColor getBackgroundColor() {
+		return getScale().getBackgroundColor();
 	}
 
 	/**

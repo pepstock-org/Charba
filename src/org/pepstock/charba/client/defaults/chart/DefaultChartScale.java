@@ -308,4 +308,14 @@ public final class DefaultChartScale implements IsDefaultScale {
 		return scale.getStartAngle();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getBackgroundColorAsString()
+	 */
+	@Override
+	public String getBackgroundColorAsString() {
+		return scale.getBackgroundColorAsString();
+	}
+
 }

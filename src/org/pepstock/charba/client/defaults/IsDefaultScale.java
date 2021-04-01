@@ -197,5 +197,12 @@ public interface IsDefaultScale {
 	 * @return starting angle to draw arcs for the first item in a dataset.
 	 */
 	double getStartAngle();
+	
+	/**
+	 * Returns the background color of the scale area.
+	 * 
+	 * @return the background color of the scale area.
+	 */
+	String getBackgroundColorAsString();
 
 }
