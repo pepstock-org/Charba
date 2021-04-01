@@ -190,5 +190,12 @@ public interface IsDefaultScale {
 	 * @return whether to animate scaling the chart from the center.
 	 */
 	boolean isAnimate();
+	
+	/**
+	 * Returns the starting angle to draw arcs for the first item in a dataset.
+	 * 
+	 * @return starting angle to draw arcs for the first item in a dataset.
+	 */
+	double getStartAngle();
 
 }

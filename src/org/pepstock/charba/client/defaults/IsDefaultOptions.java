@@ -257,13 +257,6 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	double getCircumference();
 
 	/**
-	 * Returns the starting angle to draw arcs for the first item in a dataset.
-	 * 
-	 * @return starting angle to draw arcs for the first item in a dataset.
-	 */
-	double getStartAngle();
-
-	/**
 	 * Returns the base axis for the dataset, only for bar options.
 	 * 
 	 * @return the base axis for the dataset, only for bar options

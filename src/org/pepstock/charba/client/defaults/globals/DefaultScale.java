@@ -40,6 +40,8 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private static final double DEFAULT_WEIGHT = 0D;
 
+	private static final double DEFAULT_START_ANGLE = 0D;
+
 	private static final boolean DEFAULT_STACKED = false;
 
 	private static final boolean DEFAULT_SINGLE_STACKED = false;
@@ -311,4 +313,13 @@ public final class DefaultScale implements IsDefaultScale {
 		return DEFAULT_ANIMATE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getStartAngle()
+	 */
+	@Override
+	public double getStartAngle() {
+		return DEFAULT_START_ANGLE;
+	}
 }

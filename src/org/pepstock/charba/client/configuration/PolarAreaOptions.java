@@ -36,21 +36,4 @@ public class PolarAreaOptions extends ScalesOptions {
 		super(chart, defaultValues);
 	}
 
-	/**
-	 * Sets the starting angle to draw arcs for the first item in a dataset.
-	 * 
-	 * @param startAngle starting angle to draw arcs for the first item in a dataset.
-	 */
-	public void setStartAngle(double startAngle) {
-		getConfiguration().setStartAngle(startAngle);
-	}
-
-	/**
-	 * Returns the starting angle to draw arcs for the first item in a dataset.
-	 * 
-	 * @return starting angle to draw arcs for the first item in a dataset.
-	 */
-	public double getStartAngle() {
-		return getConfiguration().getStartAngle();
-	}
 }

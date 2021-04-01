@@ -49,7 +49,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final double DEFAULT_ASPECT_RATIO = 2D;
 
-	private static final double DEFAULT_RESIZE_DELAY = 0;
+	private static final double DEFAULT_RESIZE_DELAY = 0D;
 
 	private static final boolean DEFAULT_SHOW_LINE = true;
 
@@ -68,8 +68,6 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	private static final double DEFAULT_ROTATION = 0D;
 
 	private static final double DEFAULT_CIRCUMFERENCE = 360D;
-
-	private static final double DEFAULT_START_ANGLE = 0;
 
 	private static final boolean DEFAULT_DRAW_ON_ATTACH = true;
 
@@ -272,16 +270,6 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	@Override
 	public double getCircumference() {
 		return DEFAULT_CIRCUMFERENCE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.DefaultOptions#getStartAngle()
-	 */
-	@Override
-	public double getStartAngle() {
-		return DEFAULT_START_ANGLE;
 	}
 
 	/*

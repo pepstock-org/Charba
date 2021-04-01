@@ -107,7 +107,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		RADIUS("radius"),
 		ROTATION("rotation"),
 		CIRCUMFERENCE("circumference"),
-		START_ANGLE("startAngle"),
 		INDEX_AXIS("indexAxis"),
 		// internal key to store draw and destroy chart options
 		CHARBA_DRAW_ON_ATTACH("charbaDrawOnAttach"),
@@ -883,25 +882,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public double getCircumference() {
 		return getValue(Property.CIRCUMFERENCE, getDefaultValues().getCircumference());
-	}
-
-	/**
-	 * Sets the starting angle to draw arcs for the first item in a dataset.
-	 * 
-	 * @param startAngle starting angle to draw arcs for the first item in a dataset.
-	 */
-	public void setStartAngle(double startAngle) {
-		setValue(Property.START_ANGLE, startAngle);
-	}
-
-	/**
-	 * Returns the starting angle to draw arcs for the first item in a dataset.
-	 * 
-	 * @return starting angle to draw arcs for the first item in a dataset.
-	 */
-	@Override
-	public double getStartAngle() {
-		return getValue(Property.START_ANGLE, getDefaultValues().getStartAngle());
 	}
 
 	/**

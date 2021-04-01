@@ -236,16 +236,6 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getStartAngle()
-	 */
-	@Override
-	public final double getStartAngle() {
-		return options.getStartAngle();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isDrawOnAttach()
 	 */
 	@Override

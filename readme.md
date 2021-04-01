@@ -257,6 +257,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * move `min` property from time object to axis/scale.
  * move `max` property from time object to axis/scale.
  * move `labels` property from tick (cartesian category) object to axis/scale.
+ * move `startAngle` property from `PolarAreaOptions` class to `RadialAxis`.
  * remove `getCartesianType()` method from `CartesianAxis` class, use `getAxis` method.
  * rename `CartesianAxisType` class to `AxisKind` in order to manage axis type for radial linear and not only cartesian ones.
  * remove `fontSize`, `fontStyle`, `fontFamily`, `lineHeight` and add `color` property (to set font color) to the following options classes, because new `Font` implementation must be used:

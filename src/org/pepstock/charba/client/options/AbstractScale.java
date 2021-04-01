@@ -81,6 +81,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		POINT_LABELS("pointLabels"),
 		REVERSE("reverse"),
 		STACKED("stacked"),
+		START_ANGLE("startAngle"),
 		// internal property for min and max index in order to store as integer
 		CHARBA_MIN_INDEX("charbaMinIndex"),
 		CHARBA_MAX_INDEX("charbaMaxIndex");
@@ -754,6 +755,25 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	@Override
 	public final boolean isAnimate() {
 		return getValue(Property.ANIMATE, getDefaultValues().isAnimate());
+	}
+
+	/**
+	 * Sets the starting angle to draw arcs for the first item in a data set.
+	 * 
+	 * @param startAngle starting angle to draw arcs for the first item in a data set.
+	 */
+	public void setStartAngle(double startAngle) {
+		setValue(Property.START_ANGLE, startAngle);
+	}
+
+	/**
+	 * Returns the starting angle to draw arcs for the first item in a data set.
+	 * 
+	 * @return starting angle to draw arcs for the first item in a data set.
+	 */
+	@Override
+	public double getStartAngle() {
+		return getValue(Property.START_ANGLE, getDefaultValues().getStartAngle());
 	}
 
 }

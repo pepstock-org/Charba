@@ -117,5 +117,24 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 	public boolean isAnimate() {
 		return getConfiguration().isAnimate();
 	}
+	
+	/**
+	 * Sets the starting angle to draw arcs for the first item in a data set.
+	 * 
+	 * @param startAngle starting angle to draw arcs for the first item in a data set.
+	 */
+	public void setStartAngle(double startAngle) {
+		getConfiguration().setStartAngle(startAngle);
+	}
+
+	/**
+	 * Returns the starting angle to draw arcs for the first item in a data set.
+	 * 
+	 * @return starting angle to draw arcs for the first item in a data set.
+	 */
+	public double getStartAngle() {
+		return getConfiguration().getStartAngle();
+	}
+
 
 }

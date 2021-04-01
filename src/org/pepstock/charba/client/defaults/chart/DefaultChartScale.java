@@ -298,4 +298,14 @@ public final class DefaultChartScale implements IsDefaultScale {
 		return scale.isAnimate();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getStartAngle()
+	 */
+	@Override
+	public double getStartAngle() {
+		return scale.getStartAngle();
+	}
+
 }
