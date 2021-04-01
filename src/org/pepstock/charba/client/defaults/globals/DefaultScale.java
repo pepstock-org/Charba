@@ -24,8 +24,8 @@ import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
 import org.pepstock.charba.client.enums.AxisPosition;
-import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Bounds;
+import org.pepstock.charba.client.enums.Display;
 
 /**
  * CHART.JS default values for scale/axis element.
@@ -41,6 +41,8 @@ public final class DefaultScale implements IsDefaultScale {
 	private static final double DEFAULT_WEIGHT = 0D;
 
 	private static final boolean DEFAULT_STACKED = false;
+
+	private static final boolean DEFAULT_SINGLE_STACKED = false;
 
 	private static final boolean DEFAULT_BEGIN_AT_ZERO = true;
 
@@ -157,6 +159,16 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public boolean isStacked() {
 		return DEFAULT_STACKED;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isSingleStacked()
+	 */
+	@Override
+	public boolean isSingleStacked() {
+		return DEFAULT_SINGLE_STACKED;
 	}
 
 	/*

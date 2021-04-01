@@ -116,6 +116,24 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	public boolean isStacked() {
 		return getScale().isStacked();
 	}
+	
+	/**
+	 * Sets if you might want to stack positive and negative values together.
+	 * 
+	 * @param stacked if you might want to stack positive and negative values together
+	 */
+	public void setSingleStacked(boolean stacked) {
+		getScale().setSingleStacked(stacked);
+	}
+
+	/**
+	 * Returns if you might want to stack positive and negative values together.
+	 * 
+	 * @return if you might want to stack positive and negative values together
+	 */
+	public boolean isSingleStacked() {
+		return getScale().isSingleStacked();
+	}
 
 	/**
 	 * If true, extra space is added to the both edges and the axis is scaled to fit in the the chart area.<br>

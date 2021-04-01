@@ -25,8 +25,8 @@ import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.data.LabelsHandler;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.AxisPosition;
-import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Bounds;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -46,24 +46,9 @@ import org.pepstock.charba.client.items.UndefinedValues;
  *
  */
 public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScale> implements IsDefaultScale, HasLabels {
-
-	// adds sub elements
-	private final Grid grid;
-
-	private final Ticks ticks;
-
-	private final ScaleTitle title;
-
-	private final AngleLines angleLines;
-
-	private final PointLabels pointLabels;
-
-	private final Time time;
-
-	private final Adapters adapters;
-
-	// instance of labels option handler
-	private final LabelsHandler labelsHandler;
+	
+	// constants to activate the single stacked
+	private static final String SINGLE_STACKED = "single";
 
 	/**
 	 * Name of properties of native object.
@@ -123,6 +108,24 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		}
 
 	}
+
+	// adds sub elements
+	private final Grid grid;
+
+	private final Ticks ticks;
+
+	private final ScaleTitle title;
+
+	private final AngleLines angleLines;
+
+	private final PointLabels pointLabels;
+
+	private final Time time;
+
+	private final Adapters adapters;
+
+	// instance of labels option handler
+	private final LabelsHandler labelsHandler;
 
 	/**
 	 * Creates the object only with default provider and native object. This is used when the scale is the root element.
@@ -556,7 +559,27 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	public final boolean isStacked() {
 		return getValue(Property.STACKED, getDefaultValues().isStacked());
 	}
+	
+	/**
+	 * Sets if you might want to stack positive and negative values together.
+	 * 
+	 * @param stacked if you might want to stack positive and negative values together
+	 */
+	public final void setSingleStacked(boolean stacked) {
+		setValueAndAddToParent(Property.STACKED, SINGLE_STACKED);
+	}
 
+	/**
+	 * Returns if you might want to stack positive and negative values together.
+	 * 
+	 * @return if you might want to stack positive and negative values together
+	 */
+	@Override
+	public final boolean isSingleStacked() {
+		// checks if stacked is stored as single (string)
+		return isType(Property.STACKED, ObjectType.STRING);
+	}
+	
 	/**
 	 * The weight used to sort the axis. Higher weights are further away from the chart area.
 	 * 

@@ -24,8 +24,8 @@ import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
 import org.pepstock.charba.client.enums.AxisPosition;
-import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Bounds;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.options.Scale;
 
 /**
@@ -146,6 +146,16 @@ public final class DefaultChartScale implements IsDefaultScale {
 	@Override
 	public boolean isStacked() {
 		return scale.isStacked();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isSingleStacked()
+	 */
+	@Override
+	public boolean isSingleStacked() {
+		return scale.isSingleStacked();
 	}
 
 	/*

@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.AxisPosition;
-import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Bounds;
+import org.pepstock.charba.client.enums.Display;
 
 /**
  * Interface to define scale/axis object defaults.
@@ -139,6 +139,13 @@ public interface IsDefaultScale {
 	 * @return if the axis are stacked or not.
 	 */
 	boolean isStacked();
+	
+	/**
+	 * Returns if you might want to stack positive and negative values together.
+	 * 
+	 * @return if you might want to stack positive and negative values together
+	 */
+	boolean isSingleStacked();
 
 	/**
 	 * The weight used to sort the axis. Higher weights are further away from the chart area.
