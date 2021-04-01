@@ -37,7 +37,7 @@ public class DefaultTicks implements IsDefaultTicks {
 
 	private static final boolean DEFAULT_AUTO_SKIP = true;
 
-	private static final int DEFAULT_AUTO_SKIP_PADDING = 0;
+	private static final int DEFAULT_AUTO_SKIP_PADDING = 3;
 
 	private static final int DEFAULT_LABEL_OFFSET = 0;
 
