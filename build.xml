@@ -325,7 +325,6 @@
 			</classpath>
 			<link offline="false" href="https://docs.oracle.com/javase/8/docs/api/" />
 			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
-			<link offline="false" href="https://javadoc.io/doc/com.google.jsinterop/base/latest" />
 		</javadoc>
 	</target>
 
@@ -348,7 +347,6 @@
 			</packageset>
 			<link offline="false" href="https://docs.oracle.com/javase/8/docs/api/" />
 			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
-			<link offline="false" href="https://javadoc.io/doc/com.google.jsinterop/base/latest" />
 		</javadoc>
 	</target>
 
