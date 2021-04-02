@@ -4,11 +4,6 @@
 <module>
 	
 	<!-- 
-	-   Needed JsInteropBase
-	-->
-	<inherits name="jsinterop.base.Base" />
-	
-	<!-- 
 	-   Source path
 	-->
 	<source path="client" />

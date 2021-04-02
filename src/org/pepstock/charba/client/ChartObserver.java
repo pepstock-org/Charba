@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.dom.BaseElement;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.BaseNode;
@@ -39,6 +40,7 @@ final class ChartObserver {
 	// maps of all mutation handlers
 	// K = chart id, V = chart instance
 	private final Map<String, MutationHandler> handlers = new HashMap<>();
+	
 
 	/**
 	 * TO avoid any instantiation
@@ -57,8 +59,8 @@ final class ChartObserver {
 			// don't create any new observer
 			return null;
 		});
-		// creates initialization config for observer
-		MutationObserverInit mutationObserverInit = MutationObserverInit.create();
+		// creates initialization configuration for observer
+		MutationObserverInit mutationObserverInit = JsHelper.get().createMutationObserverInit();
 		// sets child list mutation and subtree
 		mutationObserverInit.setChildList(true);
 		mutationObserverInit.setSubtree(true);

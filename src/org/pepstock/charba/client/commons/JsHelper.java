@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.commons;
 
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.dom.MutationObserverInit;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -48,6 +49,28 @@ public final class JsHelper {
 	 */
 	public static JsHelper get() {
 		return INSTANCE;
+	}
+
+	/**
+	 * Performs unchecked cast to a type.<br>
+	 * Using this method can have an incorrect type of the object to the rest of the system which will result in hard to debug problems.
+	 * 
+	 * @param object object which must be cast
+	 * @return the object cast to another type
+	 */
+	public <T> T cast(Object object) {
+		return NativeJsHelper.cast(object);
+	}
+	
+	/**
+	 * Creates new instance of observer initialization options.
+	 * 
+	 * @return new instance of observer initialization options
+	 */
+	public MutationObserverInit createMutationObserverInit() {
+		// create new object
+		// casting it to an observer init
+		return cast(NativeObject.create());
 	}
 
 	/**

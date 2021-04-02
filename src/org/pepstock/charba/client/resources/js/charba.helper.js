@@ -73,6 +73,16 @@ CharbaJsObjectHelper.get = function(obj, key) {
  */
 function CharbaJsHelper() {}
 /**
+ * Performs unchecked cast to a type.<br>
+ * Using this method can have an incorrect type of the object to the rest of the system which will result in hard to debug problems.
+ * 
+ * @param object object which must be cast
+ * @return the object cast to another type
+ */
+CharbaJsHelper.cast = function(object) {
+  return object;
+}
+/**
  * Returns a boolean indicating whether the object has the specified property as its own property.
  *
  * @param {*} obj the object on which to search the property

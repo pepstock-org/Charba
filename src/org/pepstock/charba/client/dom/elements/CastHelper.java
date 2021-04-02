@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.dom.elements;
 
-import jsinterop.base.Js;
+import org.pepstock.charba.client.commons.JsHelper;
 
 /**
  * Utility to cast elements created in the other DOM tree engines in the a Charba one.
@@ -39,7 +39,7 @@ public final class CastHelper {
 	 * @return a {@link Div} object
 	 */
 	public static Div toDiv(Object object) {
-		return Js.cast(checkAndGetObject(object));
+		return JsHelper.get().cast(checkAndGetObject(object));
 	}
 
 	/**
@@ -49,7 +49,7 @@ public final class CastHelper {
 	 * @return a {@link Img} object
 	 */
 	public static Img toImg(Object object) {
-		return Js.cast(checkAndGetObject(object));
+		return JsHelper.get().cast(checkAndGetObject(object));
 	}
 
 	/**
@@ -59,7 +59,7 @@ public final class CastHelper {
 	 * @return a {@link CanvasPatternItem} object
 	 */
 	public static CanvasPatternItem toPattern(Object object) {
-		return Js.cast(checkAndGetObject(object));
+		return JsHelper.get().cast(checkAndGetObject(object));
 	}
 
 	/**
@@ -69,7 +69,7 @@ public final class CastHelper {
 	 * @return a {@link CanvasGradientItem} object
 	 */
 	public static CanvasGradientItem toGradient(Object object) {
-		return Js.cast(checkAndGetObject(object));
+		return JsHelper.get().cast(checkAndGetObject(object));
 	}
 
 	/**

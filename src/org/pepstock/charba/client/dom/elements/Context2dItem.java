@@ -37,7 +37,6 @@ import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import jsinterop.base.Js;
 
 /**
  * DOM object which provides the 2D rendering context for the drawing surface of a canvas element.<br>
@@ -1232,7 +1231,7 @@ public final class Context2dItem extends BaseHtmlElement {
 		// checks if value is a string
 		if (JsHelper.get().isCanvasGradient(value)) {
 			// casts and returns the value
-			return Js.cast(value);
+			return JsHelper.get().cast(value);
 		}
 		// if here is not a string
 		// then returns undefined value
@@ -1250,7 +1249,7 @@ public final class Context2dItem extends BaseHtmlElement {
 		// checks if value is a string
 		if (JsHelper.get().isCanvasPattern(value)) {
 			// casts and returns the value
-			return Js.cast(value);
+			return JsHelper.get().cast(value);
 		}
 		// if here is not a string
 		// then returns undefined value

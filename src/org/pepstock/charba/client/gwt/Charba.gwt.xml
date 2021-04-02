@@ -9,11 +9,6 @@
 	<inherits name="com.google.gwt.user.User" />
 	
 	<!-- 
-	-   Needed JsInteropBase
-	-->
-	<inherits name="jsinterop.base.Base" />
-
-	<!-- 
 	-   Source path
 	-->
 	<source path="client" />

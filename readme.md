@@ -154,6 +154,7 @@ Here you can find the list of enhancements and updates available on `master` bra
      * `Charba.enable()` or `Charba.enable(boolean)` for embedded resources
      * `DeferredCharba.enable(Runnable)` or `Charba.enable(Runnable, boolean)` for deferred resources
  * **Drop Internet Explorer 11 support**.
+ * remove `jsinterop-base` dependency.
 
 #### Features
  * import last CHART.JS version, [version 3.0.0-rc.4](https://github.com/chartjs/Chart.js/releases/tag/v3.0.0-rc.6) on April 1st, 2021.

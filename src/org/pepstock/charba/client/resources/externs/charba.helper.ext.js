@@ -39,6 +39,11 @@ CharbaJsObjectHelper.get = function(object, key) {};
 function CharbaJsHelper() {}
 /**
  * @param {*} object
+ * @return {*}
+ */
+CharbaJsHelper.cast = function(object) {};
+/**
+ * @param {*} object
  * @param {string} key 
  * @return {boolean}
  */

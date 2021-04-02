@@ -15,12 +15,9 @@
 */
 package org.pepstock.charba.client.dom;
 
-import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import jsinterop.base.Js;
-import jsinterop.base.JsPropertyMap;
 
 /**
  * A dictionary interface which describes the configuration of a mutation observer.<br>
@@ -31,17 +28,6 @@ import jsinterop.base.JsPropertyMap;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL)
 public interface MutationObserverInit {
-
-	/**
-	 * Creates new instance of observer initialization options.
-	 * 
-	 * @return new instance of observer initialization options
-	 */
-	@JsOverlay
-	static MutationObserverInit create() {
-		// leverage on js-interop base to create new object
-		return Js.uncheckedCast(JsPropertyMap.of());
-	}
 
 	/**
 	 * Set to true to watch for changes to the value of attributes on the node or nodes being monitored.<br>

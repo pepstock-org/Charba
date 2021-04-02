@@ -35,6 +35,15 @@ final class NativeJsHelper {
 	NativeJsHelper() {
 		// do nothing
 	}
+	
+	/**
+	 * Performs unchecked cast to a type.<br>
+	 * Using this method can have an incorrect type of the object to the rest of the system which will result in hard to debug problems.
+	 * 
+	 * @param object object which must be cast
+	 * @return the object cast to another type
+	 */
+	static native <T> T cast(Object object);
 
 	/**
 	 * Returns a boolean indicating whether the object has the specified property as its own property.

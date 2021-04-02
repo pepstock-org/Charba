@@ -34,7 +34,6 @@
         <dependency org="com.google.gwt" name="gwt-dev" rev="${depver.gwt}" conf="compile"/>
 
 		<!-- JS INTEROP --> 	
-        <dependency org="com.google.jsinterop" name="base" rev="${depver.jsinterop-base}" conf="compile; runtime"/>
         <dependency org="com.google.jsinterop" name="jsinterop-annotations" rev="${depver.jsinterop-annotations}" conf="compile"/>
         
         <!-- CLOSURE COMPILER (to minify javascript) -->

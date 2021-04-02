@@ -15,12 +15,12 @@
 */
 package org.pepstock.charba.client.dom;
 
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeName;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
-import jsinterop.base.Js;
 
 /**
  * Interface which is implemented to DOM elements or items which can be cast to other objects.<br>
@@ -40,7 +40,7 @@ public interface IsCastable {
 	 */
 	@JsOverlay
 	default <T> T as() {
-		return Js.cast(this);
+		return JsHelper.get().cast(this);
 	}
 
 }

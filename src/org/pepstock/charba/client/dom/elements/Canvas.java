@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.dom.elements;
 
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.IsCastable;
@@ -24,7 +25,6 @@ import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import jsinterop.base.Js;
 
 /**
  * Represents a DOM element that enables drawing graphics and animations with own the canvas scripting API.
@@ -113,7 +113,7 @@ public final class Canvas extends BaseHtmlElement implements IsCastable {
 	 */
 	@JsOverlay
 	public final Context2dItem getContext2d() {
-		return Js.cast(getContext(CONTEXT_2D));
+		return JsHelper.get().cast(getContext(CONTEXT_2D));
 	}
 
 	/**

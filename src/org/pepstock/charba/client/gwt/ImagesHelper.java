@@ -15,13 +15,12 @@
 */
 package org.pepstock.charba.client.gwt;
 
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.dom.elements.Img;
 
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
-
-import jsinterop.base.Js;
 
 /**
  * Utility to transform image GWT resources in the {@link Img} elements used by Charba.
@@ -112,7 +111,7 @@ public final class ImagesHelper {
 			// transform in the image element
 			ImageElement imageElement = ImageElement.as(image.getElement());
 			// casts and returns the img
-			return Js.cast(imageElement);
+			return JsHelper.get().cast(imageElement);
 		}
 		// if here, image argument is not consistent
 		// then returns null
