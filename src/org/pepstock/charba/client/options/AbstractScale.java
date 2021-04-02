@@ -607,7 +607,14 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param stacked if you might want to stack positive and negative values together
 	 */
 	public final void setSingleStacked(boolean stacked) {
-		setValueAndAddToParent(Property.STACKED, SINGLE_STACKED);
+		// checks if argument is true
+		if (stacked) {
+			// sets value as string 'single'
+			setValueAndAddToParent(Property.STACKED, SINGLE_STACKED);
+		} else {
+			// sets false
+			setStacked(false);
+		}
 	}
 
 	/**
