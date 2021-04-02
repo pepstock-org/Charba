@@ -121,18 +121,11 @@ public interface IsDefaultTicks extends IsDefaultFontContainer {
 	String getBackdropColorAsString();
 
 	/**
-	 * Returns the horizontal padding of label backdrop.
+	 * Returns the padding of label backdrop.
 	 * 
-	 * @return horizontal padding of label backdrop.
+	 * @return padding of label backdrop.
 	 */
-	int getBackdropPaddingX();
-
-	/**
-	 * Returns the vertical padding of label backdrop.
-	 * 
-	 * @return vertical padding of label backdrop.
-	 */
-	int getBackdropPaddingY();
+	IsDefaultPadding getBackdropPadding();
 
 	/**
 	 * If true, draw a background behind the tick labels.

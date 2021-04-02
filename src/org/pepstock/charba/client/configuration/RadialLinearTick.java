@@ -52,6 +52,8 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	private final LinearTickHandler<RadialLinearTick> tickHandler;
 	// number formatting manager
 	private final NumberFormatter numberFormatter;
+	// padding instance
+	private final Padding backdropPadding;
 
 	/**
 	 * Name of properties of native object.
@@ -94,6 +96,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		super(axis);
 		// creates handler and number format
 		this.tickHandler = new LinearTickHandler<>(axis, this);
+		this.backdropPadding = new Padding(() -> getAxis().getScale().getTicks().getBackdropPadding());
 		this.numberFormatter = new NumberFormatter(() -> getConfiguration().getNumberFormat());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
@@ -114,6 +117,15 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	@Override
 	public IsNumberFormat getNumberFormat() {
 		return numberFormatter;
+	}
+	
+	/**
+	 * Returns the padding of label backdrop.
+	 * 
+	 * @return padding of label backdrop.
+	 */
+	public Padding getBackdropPadding() {
+		return backdropPadding;
 	}
 
 	/**
@@ -156,42 +168,6 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 */
 	public IsColor getBackdropColor() {
 		return getConfiguration().getBackdropColor();
-	}
-
-	/**
-	 * Sets the horizontal padding of label backdrop.
-	 * 
-	 * @param backdropPaddingX horizontal padding of label backdrop.
-	 */
-	public void setBackdropPaddingX(int backdropPaddingX) {
-		getConfiguration().setBackdropPaddingX(backdropPaddingX);
-	}
-
-	/**
-	 * Returns the horizontal padding of label backdrop.
-	 * 
-	 * @return horizontal padding of label backdrop.
-	 */
-	public int getBackdropPaddingX() {
-		return getConfiguration().getBackdropPaddingX();
-	}
-
-	/**
-	 * Sets the vertical padding of label backdrop.
-	 * 
-	 * @param backdropPaddingY vertical padding of label backdrop.
-	 */
-	public void setBackdropPaddingY(int backdropPaddingY) {
-		getConfiguration().setBackdropPaddingY(backdropPaddingY);
-	}
-
-	/**
-	 * Returns the vertical padding of label backdrop.
-	 * 
-	 * @return vertical padding of label backdrop.
-	 */
-	public int getBackdropPaddingY() {
-		return getConfiguration().getBackdropPaddingY();
 	}
 
 	/**

@@ -20,6 +20,7 @@ import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultMajor;
 import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.CrossAlign;
 import org.pepstock.charba.client.enums.ElementAlign;
@@ -55,9 +56,7 @@ public class DefaultTicks implements IsDefaultTicks {
 
 	private static final String DEFAULT_BACKDROP_COLOR = "rgba(255,255,255,0.75)";
 
-	private static final int DEFAULT_BACKDROP_PADDING_X = 2;
-
-	private static final int DEFAULT_BACKDROP_PADDING_Y = 2;
+	private static final int DEFAULT_BACKDROP_PADDING = 2;
 
 	private static final boolean DEFAULT_SHOW_LABEL_BACKDROP = true;
 
@@ -72,6 +71,8 @@ public class DefaultTicks implements IsDefaultTicks {
 	private final DefaultMajor major = new DefaultMajor();
 
 	private final DefaultRoutedFont font = new DefaultRoutedFont();
+
+	private final DefaultPadding backdropPadding = new DefaultPadding(DEFAULT_BACKDROP_PADDING);
 
 	/**
 	 * To avoid any instantiation
@@ -88,6 +89,16 @@ public class DefaultTicks implements IsDefaultTicks {
 	@Override
 	public IsDefaultFont getFont() {
 		return font;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getBackdropPadding()
+	 */
+	@Override
+	public IsDefaultPadding getBackdropPadding() {
+		return backdropPadding;
 	}
 
 	/*
@@ -228,26 +239,6 @@ public class DefaultTicks implements IsDefaultTicks {
 	@Override
 	public String getBackdropColorAsString() {
 		return DEFAULT_BACKDROP_COLOR;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getBackdropPaddingX()
-	 */
-	@Override
-	public int getBackdropPaddingX() {
-		return DEFAULT_BACKDROP_PADDING_X;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getBackdropPaddingY()
-	 */
-	@Override
-	public int getBackdropPaddingY() {
-		return DEFAULT_BACKDROP_PADDING_Y;
 	}
 
 	/*

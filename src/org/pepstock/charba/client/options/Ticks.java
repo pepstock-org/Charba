@@ -33,13 +33,6 @@ import org.pepstock.charba.client.enums.TickSource;
  */
 public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> implements IsDefaultTicks, HasFont {
 
-	// instance of major
-	private final Major major;
-	// instance of font container
-	private final FontContainer fontContainer;
-	// instance of number format
-	private final TicksNumberFormat numberFormat;
-
 	/**
 	 * Name of properties of native object.
 	 */
@@ -70,8 +63,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		STEP_SIZE("stepSize"),
 		// linear radial
 		BACKDROP_COLOR("backdropColor"),
-		BACKDROP_PADDING_X("backdropPaddingX"),
-		BACKDROP_PADDING_Y("backdropPaddingY"),
+		BACKDROP_PADDING("backdropPadding"),
 		SHOW_LABEL_BACKDROP("showLabelBackdrop"),
 		// time ticks
 		SOURCE("source");
@@ -99,6 +91,15 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		}
 
 	}
+	
+	// instance of major
+	private final Major major;
+	// instance of font container
+	private final FontContainer fontContainer;
+	// instance of number format
+	private final TicksNumberFormat numberFormat;
+	// padding instance
+	private final Padding backdropPadding;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -113,8 +114,9 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		// gets sub elements
 		this.major = new Major(this, Property.MAJOR, getDefaultValues().getMajor(), getValue(Property.MAJOR));
 		this.numberFormat = new TicksNumberFormat(this, Property.FORMAT, getDefaultValues().getNumberFormat(), getValue(Property.FORMAT));
-		// creates font container
+		// creates font and backdrop padding containers
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
+		this.backdropPadding = new Padding(this, Property.BACKDROP_PADDING, getDefaultValues().getBackdropPadding(), getValue(Property.BACKDROP_PADDING));
 	}
 
 	/*
@@ -145,6 +147,16 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	@Override
 	public TicksNumberFormat getNumberFormat() {
 		return numberFormat;
+	}
+	
+	/**
+	 * Returns the padding of label backdrop.
+	 * 
+	 * @return the padding of label backdrop
+	 */
+	@Override
+	public Padding getBackdropPadding() {
+		return backdropPadding;
 	}
 
 	/**
@@ -379,44 +391,6 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 */
 	public IsColor getBackdropColor() {
 		return ColorBuilder.parse(getBackdropColorAsString());
-	}
-
-	/**
-	 * Sets the horizontal padding of label backdrop.
-	 * 
-	 * @param backdropPaddingX horizontal padding of label backdrop.
-	 */
-	public void setBackdropPaddingX(int backdropPaddingX) {
-		setValueAndAddToParent(Property.BACKDROP_PADDING_X, backdropPaddingX);
-	}
-
-	/**
-	 * Returns the horizontal padding of label backdrop.
-	 * 
-	 * @return horizontal padding of label backdrop.
-	 */
-	@Override
-	public int getBackdropPaddingX() {
-		return getValue(Property.BACKDROP_PADDING_X, getDefaultValues().getBackdropPaddingX());
-	}
-
-	/**
-	 * Sets the vertical padding of label backdrop.
-	 * 
-	 * @param backdropPaddingY vertical padding of label backdrop.
-	 */
-	public void setBackdropPaddingY(int backdropPaddingY) {
-		setValueAndAddToParent(Property.BACKDROP_PADDING_Y, backdropPaddingY);
-	}
-
-	/**
-	 * Returns the vertical padding of label backdrop.
-	 * 
-	 * @return vertical padding of label backdrop.
-	 */
-	@Override
-	public int getBackdropPaddingY() {
-		return getValue(Property.BACKDROP_PADDING_Y, getDefaultValues().getBackdropPaddingY());
 	}
 
 	/**

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultMajor;
 import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.CrossAlign;
 import org.pepstock.charba.client.enums.ElementAlign;
@@ -50,6 +51,16 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	@Override
 	public IsDefaultFont getFont() {
 		return ticks.getFont();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getBackdropPadding()
+	 */
+	@Override
+	public IsDefaultPadding getBackdropPadding() {
+		return ticks.getBackdropPadding();
 	}
 
 	/*
@@ -190,26 +201,6 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	@Override
 	public String getBackdropColorAsString() {
 		return ticks.getBackdropColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getBackdropPaddingX()
-	 */
-	@Override
-	public int getBackdropPaddingX() {
-		return ticks.getBackdropPaddingX();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getBackdropPaddingY()
-	 */
-	@Override
-	public int getBackdropPaddingY() {
-		return ticks.getBackdropPaddingY();
 	}
 
 	/*

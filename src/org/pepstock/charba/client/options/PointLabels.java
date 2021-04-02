@@ -80,7 +80,7 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	PointLabels(AbstractScale scale, Key childKey, IsDefaultPointLabels defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub element
-		this.backdropPadding = new Padding(this, Property.PADDING, getDefaultValues().getBackdropPadding(), getValue(Property.PADDING));
+		this.backdropPadding = new Padding(this, Property.BACKDROP_PADDING, getDefaultValues().getBackdropPadding(), getValue(Property.BACKDROP_PADDING));
 		// creates font container
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
 	}
