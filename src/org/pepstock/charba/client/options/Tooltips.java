@@ -24,6 +24,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.positioner.Positioner;
 
 /**
@@ -121,7 +122,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		super(options, childKey, defaultValues, nativeObject);
 		// gets sub elements
 		this.callbacks = new TooltipsCallbacks(this, Property.CALLBACKS, getDefaultValues(), getValue(Property.CALLBACKS));
-		this.padding = new Padding(this, Property.PADDING, defaultValues.getPadding(), getValue(Property.PADDING));
+		this.padding = new Padding(this, Property.PADDING, defaultValues.getPadding(), getValue(Property.PADDING), getValue(Property.PADDING, UndefinedValues.INTEGER));
 		// gets fonts definition
 		this.titleFont = new Font(this, Property.TITLE_FONT, getDefaultValues().getTitleFont(), getValue(Property.TITLE_FONT));
 		this.bodyFont = new Font(this, Property.BODY_FONT, getDefaultValues().getBodyFont(), getValue(Property.BODY_FONT));
@@ -172,7 +173,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	public TooltipsCallbacks getCallbacks() {
 		return callbacks;
 	}
-	
+
 	/**
 	 * Returns the padding element.
 	 * 

@@ -35,6 +35,26 @@ public interface IsPadding extends IsDefaultPadding {
 		setLeft(padding);
 		setRight(padding);
 	}
+	
+	/**
+	 * Sets the padding size to X dimensions (left and right).
+	 * 
+	 * @param padding padding size to X dimensions (left and right).
+	 */
+	default void setX(int padding) {
+		setLeft(padding);
+		setRight(padding);
+	}
+
+	/**
+	 * Sets the padding size to Y dimensions (top and bottom).
+	 * 
+	 * @param padding padding size to Y dimensions (top and bottom).
+	 */
+	default void setY(int padding) {
+		setTop(padding);
+		setBottom(padding);
+	}
 
 	/**
 	 * Sets the padding left in pixel.

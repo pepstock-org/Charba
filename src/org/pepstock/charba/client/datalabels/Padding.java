@@ -17,7 +17,9 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.options.IsPadding;
 
 /**
  * Base object to map font options for {@link DataLabelsPlugin#ID} plugin configuration.<br>
@@ -27,7 +29,7 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  * @see PaddingCallback
  */
-public final class Padding extends AbstractElement implements IsDefaultPadding {
+public final class Padding extends AbstractElement implements IsPadding {
 
 	/**
 	 * Default padding, <b>{@value DEFAULT_PADDING}</b>.
@@ -58,22 +60,11 @@ public final class Padding extends AbstractElement implements IsDefaultPadding {
 	}
 
 	/**
-	 * Sets the padding size to all dimensions.
-	 * 
-	 * @param padding padding size to apply to all dimensions.
-	 */
-	public void set(int padding) {
-		setTop(padding);
-		setBottom(padding);
-		setLeft(padding);
-		setRight(padding);
-	}
-
-	/**
 	 * Sets the padding left in pixel.
 	 * 
 	 * @param padding the padding left in pixel.
 	 */
+	@Override
 	public void setLeft(int padding) {
 		setValue(Position.LEFT, padding);
 	}
@@ -93,6 +84,7 @@ public final class Padding extends AbstractElement implements IsDefaultPadding {
 	 * 
 	 * @param padding the padding right in pixel.
 	 */
+	@Override
 	public void setRight(int padding) {
 		setValue(Position.RIGHT, padding);
 	}
@@ -112,6 +104,7 @@ public final class Padding extends AbstractElement implements IsDefaultPadding {
 	 * 
 	 * @param padding the padding top in pixel.
 	 */
+	@Override
 	public void setTop(int padding) {
 		setValue(Position.TOP, padding);
 	}
@@ -131,6 +124,7 @@ public final class Padding extends AbstractElement implements IsDefaultPadding {
 	 * 
 	 * @param padding the padding bottom in pixel.
 	 */
+	@Override
 	public void setBottom(int padding) {
 		setValue(Position.BOTTOM, padding);
 	}

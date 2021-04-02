@@ -85,7 +85,7 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	ScaleTitle(AbstractScale scale, Key childKey, IsDefaultScaleTitle defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub element
-		this.padding = new Padding(this, Property.PADDING, getDefaultValues().getPadding(), getValue(Property.PADDING));
+		this.padding = new Padding(this, Property.PADDING, getDefaultValues().getPadding(), getValue(Property.PADDING), getValue(Property.PADDING, UndefinedValues.INTEGER));
 		// creates font container
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
 	}
@@ -130,9 +130,11 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	}
 
 	/**
-	 * Sets the title text to display.<br>If specified as an array, text is rendered on multiple lines.
+	 * Sets the title text to display.<br>
+	 * If specified as an array, text is rendered on multiple lines.
 	 * 
-	 * @param text the title text to display.<br>If specified as an array, text is rendered on multiple lines.
+	 * @param text the title text to display.<br>
+	 *            If specified as an array, text is rendered on multiple lines.
 	 */
 	public void setText(String... text) {
 		setValueOrArrayAndAddToParent(Property.TEXT, text);

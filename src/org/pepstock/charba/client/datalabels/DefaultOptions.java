@@ -17,6 +17,8 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
+import org.pepstock.charba.client.defaults.globals.DefaultPadding;
 
 /**
  * {@link DataLabelsPlugin#ID} plugin default options.<br>
@@ -30,7 +32,7 @@ final class DefaultOptions implements IsDefaultDataLabelsOptions {
 	// defaults options instance
 	static final DefaultOptions INSTANCE = new DefaultOptions();
 	// default padding options
-	private final DefaultPadding padding = new DefaultPadding();
+	private final DefaultPadding padding = new DefaultPadding(Padding.DEFAULT_PADDING);
 	// default font options
 	private final DefaultListeners listeners = new DefaultListeners();
 	// default font options

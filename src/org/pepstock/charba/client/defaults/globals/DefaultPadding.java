@@ -32,10 +32,10 @@ public final class DefaultPadding implements IsDefaultPadding {
 	 * 
 	 * @param padding the default padding
 	 */
-	DefaultPadding(int padding) {
+	public DefaultPadding(int padding) {
 		this.padding = padding;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

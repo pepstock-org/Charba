@@ -23,6 +23,7 @@ import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.CrossAlign;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.TickSource;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * All configuration for ticks of a chart.<br>
@@ -91,7 +92,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		}
 
 	}
-	
+
 	// instance of major
 	private final Major major;
 	// instance of font container
@@ -116,7 +117,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		this.numberFormat = new TicksNumberFormat(this, Property.FORMAT, getDefaultValues().getNumberFormat(), getValue(Property.FORMAT));
 		// creates font and backdrop padding containers
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
-		this.backdropPadding = new Padding(this, Property.BACKDROP_PADDING, getDefaultValues().getBackdropPadding(), getValue(Property.BACKDROP_PADDING));
+		this.backdropPadding = new Padding(this, Property.BACKDROP_PADDING, getDefaultValues().getBackdropPadding(), getValue(Property.BACKDROP_PADDING), getValue(Property.BACKDROP_PADDING, UndefinedValues.INTEGER));
 	}
 
 	/*
@@ -148,7 +149,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	public TicksNumberFormat getNumberFormat() {
 		return numberFormat;
 	}
-	
+
 	/**
 	 * Returns the padding of label backdrop.
 	 * 

@@ -20,6 +20,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * It is used to configure the point labels that are shown on the perimeter of the scale.<br>
@@ -80,7 +81,7 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	PointLabels(AbstractScale scale, Key childKey, IsDefaultPointLabels defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub element
-		this.backdropPadding = new Padding(this, Property.BACKDROP_PADDING, getDefaultValues().getBackdropPadding(), getValue(Property.BACKDROP_PADDING));
+		this.backdropPadding = new Padding(this, Property.BACKDROP_PADDING, getDefaultValues().getBackdropPadding(), getValue(Property.BACKDROP_PADDING), getValue(Property.BACKDROP_PADDING, UndefinedValues.INTEGER));
 		// creates font container
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
 	}
@@ -123,7 +124,7 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
-	
+
 	/**
 	 * Sets the background color of the point label.
 	 * 

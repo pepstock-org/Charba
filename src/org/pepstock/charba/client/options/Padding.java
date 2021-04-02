@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Maps the additional space to apply to the sides of elements (left, top, right, bottom), in pixels.
@@ -28,10 +29,42 @@ import org.pepstock.charba.client.enums.Position;
  *
  */
 public final class Padding extends AbstractNode implements IsPadding {
-	
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		X("x"),
+		Y("y");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
 	// default font values
 	private final IsDefaultPadding defaultValues;
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
@@ -39,12 +72,45 @@ public final class Padding extends AbstractNode implements IsPadding {
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
+	 * @param originalPadding if the padding is stored in the parent object as number (CHART.JS uses this configuration), the parent provides the values or
+	 *            {@link UndefinedValues#INTEGER}.
 	 */
-	Padding(AbstractNode parent, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject) {
+	Padding(AbstractNode parent, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject, int originalPadding) {
 		super(parent, childKey, nativeObject);
 		// checks if default value is consistent
 		// stores defaults values
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
+		// checks if the padding was stored as number
+		// this could happen in the default of chart.js
+		if (originalPadding != UndefinedValues.INTEGER) {
+			// stores the values to all dimensions
+			set(originalPadding);
+		} else if (nativeObject != null) {
+			// checks if the padding was stored as object with X and Y
+			// this could happen in the default of chart.js
+			// normalizes for X
+			if (has(Property.X)) {
+				// stores in left and right
+				setX(getValue(Property.X, UndefinedValues.INTEGER));
+				// removes X property
+				remove(Property.X);
+			}
+			// normalizes for Y
+			if (has(Property.Y)) {
+				// stores in top and bottom
+				setX(getValue(Property.Y, UndefinedValues.INTEGER));
+				// removes Y property
+				remove(Property.Y);
+			}
+		} else {
+			// if here the object is empty then
+			// it applies the defaults
+			// sets defaults
+			setDefaultPadding(Position.TOP, defaultValues.getTop());
+			setDefaultPadding(Position.BOTTOM, defaultValues.getBottom());
+			setDefaultPadding(Position.LEFT, defaultValues.getLeft());
+			setDefaultPadding(Position.RIGHT, defaultValues.getRight());
+		}
 	}
 
 	/**
@@ -125,6 +191,19 @@ public final class Padding extends AbstractNode implements IsPadding {
 	@Override
 	public int getBottom() {
 		return getValue(Position.BOTTOM, defaultValues.getBottom());
+	}
+
+	/**
+	 * Sets the default padding in the embedded JavaScript object at specific dimensions.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param padding padding to be set
+	 */
+	private void setDefaultPadding(Key key, int padding) {
+		// checks if values is consistent
+		if (padding != UndefinedValues.INTEGER) {
+			setValue(key, padding);
+		}
 	}
 
 }

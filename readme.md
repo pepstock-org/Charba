@@ -201,14 +201,14 @@ Here you can find the list of enhancements and updates available on `master` bra
 #### Features
  * add `backgroundColor` and `borderColor` default options.
  * add `VerticalLine` chart, options and data set classes to manage this new kind of chart.
- * add `setDatasetVisibility` method to `AbstractChart` class in order to set the visibility for a given dataset. 
- * add `toggleDataVisibility` method to `AbstractChart` class in order to toggle the visibility of an item in all datasets.
- * add `isDataVisible` method to `AbstractChart` class in order to get the stored visibility state of an data index for all datasets. 
- * add `hide` method to `AbstractChart` class in order to hide a dataset. 
- * add `show` method to `AbstractChart` class in order to show a dataset. 
+ * add `setDatasetVisibility` method to `AbstractChart` class in order to set the visibility for a given data set. 
+ * add `toggleDataVisibility` method to `AbstractChart` class in order to toggle the visibility of an item in all data sets.
+ * add `isDataVisible` method to `AbstractChart` class in order to get the stored visibility state of an data index for all data sets. 
+ * add `hide` method to `AbstractChart` class in order to hide a data set. 
+ * add `show` method to `AbstractChart` class in order to show a data set. 
  * add `update(IsTransitionKey)` and `reconfigure(IsTransitionKey)` methods to `IsChart` interface in order to update the chart by an animation update mode.
  * add `resize(width height)` method to `IsChart` interface.
- * add `newDataset(boolean)` methods for all charts (by new `IsDatasetCreator` interface) in order to get new dataset with the initial visibility status.
+ * add `newDataset(boolean)` methods for all charts (by new `IsDatasetCreator` interface) in order to get new data set with the initial visibility status.
  * add `usePointStyle` property to `Tooltips` class for options and configuration.
  * add `boxWidth` and `boxHeight` properties to `Tooltips` options and configuration classes.
  * improve the tooltip callbacks management providing the right defaults.
@@ -217,8 +217,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `boxHeight` property to `LegendLabels` options and configuration classes.
  * add `align` property to `Title` options and configuration classes.
  * add `pointStyle` property to `Bar` element configuration and options classes.
- * add `Datasets` class in order to manage datasets options and configuration classes.
- * add `Interaction` class in order to manage datasets options and configuration classes.
+ * add `Datasets` class in order to manage data sets options and configuration classes.
+ * add `Interaction` class in order to manage data sets options and configuration classes.
  * implement `decimation` plugin options and configuration.
  * implement `filler` plugin options and configuration.
  * add `width` and `height` options to `ChartAreaNode` class
@@ -227,7 +227,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add new animation entities (collection of properties, transitions) and new namespaces where the options must be stored. 
    * add `delay` property to animation options.
    * add `loop` property to animation options.
-   * add `animation` options and configuration to datasets.
+   * add `animation` options and configuration to data sets.
    * add `animation` options and configuration to tooltips.
    * add `setAnimationEnabled` and `isAnimationEnabled` methods to animation containers to configuration, options and datasets.
  * add `skipNull` property to `BarOptions` configuration.
@@ -235,6 +235,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `cutout` property in the options and configuration classes, for pie and doughnut charts.
  * add `radius` and `radiusPercentage` properties in the options and configuration classes, for pie and doughnut charts.
  * add `resizeDelay` property to options and configuration.
+ * add `setX` and `setY` methods to `IsPadding` interface as shortcut to set X (left, right) and Y (top, bottom) dimensions. 
 
 ### _Scales_
 

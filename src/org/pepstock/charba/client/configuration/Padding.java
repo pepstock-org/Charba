@@ -35,16 +35,6 @@ public final class Padding extends AbstractDynamicConfiguration<IsPadding> imple
 	}
 
 	/**
-	 * Sets the padding size to all dimensions.
-	 * 
-	 * @param padding padding size to apply to all dimensions.
-	 */
-	@Override
-	public void set(int padding) {
-		checkAndGet().set(padding);
-	}
-
-	/**
 	 * Sets the padding left in pixel.
 	 * 
 	 * @param padding the padding left in pixel.

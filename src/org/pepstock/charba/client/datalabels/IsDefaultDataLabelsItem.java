@@ -36,6 +36,7 @@ import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.enums.Display;
 
 /**
