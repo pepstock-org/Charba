@@ -26,7 +26,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public final class DefaultDecimation implements IsDefaultDecimation {
 
-	private static final boolean DEFAULT_ENABLED = true;
+	private static final boolean DEFAULT_ENABLED = false;
 
 	private static final double DEFAULT_SAMPLES = UndefinedValues.DOUBLE;
 
