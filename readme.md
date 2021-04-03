@@ -224,13 +224,14 @@ Here you can find the list of enhancements and updates available on `master` bra
  * implement `filler` plugin options and configuration.
  * add `width` and `height` options to `ChartAreaNode` class
  * add `columnHeights` property to `LegendNode` class.
+ * add `grouped` property to `Datasets` bar options and configuration.
  * implement new animation options and configuration for new engine:
-   * add new animation entities (collection of properties, transitions) and new namespaces where the options must be stored. 
+   * add new animation entities (collection of properties, transitions) and new name spaces where the options must be stored. 
    * add `delay` property to animation options.
    * add `loop` property to animation options.
    * add `animation` options and configuration to data sets.
    * add `animation` options and configuration to tooltips.
-   * add `setAnimationEnabled` and `isAnimationEnabled` methods to animation containers to configuration, options and datasets.
+   * add `setAnimationEnabled` and `isAnimationEnabled` methods to animation containers to configuration, options and data sets.
  * add `skipNull` property to `BarOptions` configuration.
  * change `circumference` and `rotation` properties on `PieChart` and `DoughnutChart` options in order to set the value in degrees instead of radians.
  * add `cutout` property in the options and configuration classes, for pie and doughnut charts.
@@ -371,6 +372,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `borderAlign` property for `PieDataset`, `PolarAreaDataset` and `DoughnutDataset` in order to be set as indexable.
  * enable overriding the legend `pointStyle` (from dataset) using new `pointStyle` option.
  * improve the gradients and patterns management at dataset level in order to be managed by a callback instead of by a plugin in order to have the right chart area size for gradients.
+ * add `grouped` property to `BarDataset` class.
 
 ### _Plugins_
 

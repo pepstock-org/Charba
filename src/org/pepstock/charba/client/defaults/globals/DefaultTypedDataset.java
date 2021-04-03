@@ -61,6 +61,8 @@ public final class DefaultTypedDataset implements IsDefaultTypedDataset {
 
 	private static final int DEFAULT_MIN_BAR_LENGTH = 0;
 
+	private static final boolean DEFAULT_GROUPED = true;
+
 	private static final boolean DEFAULT_SHOW_LINE = true;
 
 	/**
@@ -148,6 +150,16 @@ public final class DefaultTypedDataset implements IsDefaultTypedDataset {
 	@Override
 	public int getMinBarLength() {
 		return DEFAULT_MIN_BAR_LENGTH;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBarDatasets#isGrouped()
+	 */
+	@Override
+	public boolean isGrouped() {
+		return DEFAULT_GROUPED;
 	}
 
 	/*

@@ -44,8 +44,9 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultTyp
 	protected enum Property implements Key
 	{
 		BAR_PERCENTAGE("barPercentage"),
-		CATEGORY_PERCENTAGE("categoryPercentage"),
 		BAR_THICKNESS("barThickness"),
+		CATEGORY_PERCENTAGE("categoryPercentage"),
+		GROUPED("grouped"),
 		MAX_BAR_THICKNESS("maxBarThickness"),
 		MIN_BAR_LENGTH("minBarLength");
 
@@ -200,6 +201,27 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultTyp
 	 */
 	int getMinBarLength() {
 		return getValue(Property.MIN_BAR_LENGTH, getDefaultValues().getMinBarLength());
+	}
+	
+	/**
+	 * When <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value.<br>
+	 * When <code>false</code>, each bar is placed on its actual index-axis value.
+	 * 
+	 * @param grouped if <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value
+	 */
+	void setGrouped(boolean grouped) {
+		setValueAndAddToParent(Property.GROUPED, grouped);
+	}
+
+	/**
+	 * When <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value.<br>
+	 * When <code>false</code>, each bar is placed on its actual index-axis value.
+	 * 
+	 * @return if <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value
+	 */
+	boolean isGrouped() {
+		// checks if handler is consistent
+		return getValue(Property.GROUPED, getDefaultValues().isGrouped());
 	}
 
 	/**

@@ -23,10 +23,11 @@ package org.pepstock.charba.client.defaults;
 public interface IsDefaultBarDatasets {
 
 	/**
-	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each
-	 * other.
+	 * Returns the percent (0-1) of the available width each bar should be within the category width.<br>
+	 * 1.0 will take the whole category width and put the bars right next to each other.
 	 * 
-	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
+	 * @return percent (0-1) of the available width each bar should be within the category width.<br>
+	 *         1.0 will take the whole category width and put the bars right next to each other.
 	 */
 	double getBarPercentage();
 
@@ -38,11 +39,14 @@ public interface IsDefaultBarDatasets {
 	double getCategoryPercentage();
 
 	/**
-	 * Returns the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars side by side. If not set, the base sample widths
-	 * are calculated automatically so that they take the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * Returns the width of each bar in pixels.<br>
+	 * If set to 'flex', it computes "optimal" sample widths that globally arrange bars side by side.<br>
+	 * If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap.<br>
+	 * Then, the bars are sized using barPercentage and categoryPercentage.
 	 * 
-	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap. Then, the
-	 *         bars are sized using barPercentage and categoryPercentage.
+	 * @return width of each bar in pixels.<br>
+	 *         If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap.<br>
+	 *         Then, the bars are sized using barPercentage and categoryPercentage.
 	 */
 	int getBarThickness();
 
@@ -59,5 +63,13 @@ public interface IsDefaultBarDatasets {
 	 * @return a minimum length in pixels.
 	 */
 	int getMinBarLength();
+
+	/**
+	 * When <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value.<br>
+	 * When <code>false</code>, each bar is placed on its actual index-axis value.
+	 * 
+	 * @return if <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value.
+	 */
+	boolean isGrouped();
 
 }

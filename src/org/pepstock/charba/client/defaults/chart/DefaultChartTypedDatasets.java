@@ -122,6 +122,16 @@ public final class DefaultChartTypedDatasets implements IsDefaultTypedDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBarDatasets#isGrouped()
+	 */
+	@Override
+	public boolean isGrouped() {
+		return dataset.isGrouped();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTypedDatasets#isShowLine()
 	 */
 	@Override

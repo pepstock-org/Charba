@@ -179,4 +179,34 @@ public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
 		// then returns the default
 		return Defaults.get().getGlobal().getDatasets().get(ChartType.BAR).getMinBarLength();
 	}
+	
+	/**
+	 * When <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value.<br>
+	 * When <code>false</code>, each bar is placed on its actual index-axis value.
+	 * 
+	 * @param grouped if <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value
+	 */
+	default void setGrouped(boolean grouped) {
+		// checks if handler is consistent
+		if (getDatasetOptionsHandler() != null) {
+			getDatasetOptionsHandler().setGrouped(grouped);
+		}
+	}
+
+	/**
+	 * When <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value.<br>
+	 * When <code>false</code>, each bar is placed on its actual index-axis value.
+	 * 
+	 * @return if <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value
+	 */
+	@Override
+	default boolean isGrouped() {
+		// checks if handler is consistent
+		if (getDatasetOptionsHandler() != null) {
+			return getDatasetOptionsHandler().isGrouped();
+		}
+		// if here, handler is not consistent
+		// then returns the default
+		return Defaults.get().getGlobal().getDatasets().get(ChartType.BAR).isGrouped();
+	}
 }
