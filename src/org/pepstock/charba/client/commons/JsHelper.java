@@ -56,6 +56,7 @@ public final class JsHelper {
 	 * Using this method can have an incorrect type of the object to the rest of the system which will result in hard to debug problems.
 	 * 
 	 * @param object object which must be cast
+	 * @param <T> type of the result
 	 * @return the object cast to another type
 	 */
 	public <T> T cast(Object object) {
