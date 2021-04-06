@@ -35,7 +35,8 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.BorderItemType;
 
 /**
- * FIXME
+ * Utility class which can provide methods to manage properties related to borders of the element.<br>
+ * Some options could be border width and border radius.
  * 
  * @author Andrea "Stock" Stocchero
  */
