@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.colors.CanvasObject;
 import org.pepstock.charba.client.colors.Gradient;
@@ -224,7 +224,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 		// property instance
 		private final CanvasObjectKey property;
 		// callback instance
-		private final Scriptable<Object, ScriptableContext> callback;
+		private final Scriptable<Object, DatasetContext> callback;
 		// default color
 		private final String defaultValue;
 
@@ -236,7 +236,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 		 * @param callback data set callback instance to manage the color
 		 * @param defaultValue default value for the data set property, being a color, always as string
 		 */
-		private CallbackWrapper(Dataset dataset, CanvasObjectKey property, Scriptable<Object, ScriptableContext> callback, String defaultValue) {
+		private CallbackWrapper(Dataset dataset, CanvasObjectKey property, Scriptable<Object, DatasetContext> callback, String defaultValue) {
 			this.dataset = dataset;
 			this.property = property;
 			this.callback = callback;
@@ -245,7 +245,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 			// -- SET CALLBACKS to PROXIES ---
 			// -------------------------------
 			// gets value calling callback
-			callbackProxy.setCallback((contextFunction, context) -> getDataset().invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), getCallback(), getProperty(), getDefaultValue()));
+			callbackProxy.setCallback((contextFunction, context) -> getDataset().invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), getCallback(), getProperty(), getDefaultValue()));
 		}
 
 		/**
@@ -280,7 +280,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 		 * 
 		 * @return the data set callback instance to manage the color
 		 */
-		private Scriptable<Object, ScriptableContext> getCallback() {
+		private Scriptable<Object, DatasetContext> getCallback() {
 			return callback;
 		}
 

@@ -24,6 +24,6 @@ import org.pepstock.charba.client.data.BarDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface BarBorderWidthCallback extends Scriptable<Object, ScriptableContext> {
+public interface BarBorderWidthCallback extends Scriptable<Object, DatasetContext> {
 
 }

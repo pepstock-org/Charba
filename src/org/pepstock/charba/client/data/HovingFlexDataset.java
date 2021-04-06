@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -112,7 +112,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(IsColor... backgroundColor) {
 		// resets callback
-		setBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setBackgroundColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setColors(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, backgroundColor);
 		// removes previous configuration to other containers
@@ -126,7 +126,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(String... backgroundColor) {
 		// resets callback
-		setBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setBackgroundColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setColors(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, backgroundColor);
 		// removes previous configuration to other containers
@@ -140,7 +140,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Pattern... backgroundColor) {
 		// resets callback
-		setBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setBackgroundColor((ColorCallback<DatasetContext>) null);
 		// sets value to patterns
 		getPatternsContainer().setObjects(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor), getDefaultBackgroundColorAsString());
 		// removes previous configuration to other containers
@@ -154,7 +154,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Gradient... backgroundColor) {
 		// resets callback
-		setBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setBackgroundColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor), getDefaultBackgroundColorAsString());
 		// removes previous configuration to other containers
@@ -235,7 +235,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderColor(IsColor... borderColor) {
 		// resets callback
-		setBorderColor((ColorCallback<ScriptableContext>) null);
+		setBorderColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setColors(Dataset.CanvasObjectProperty.BORDER_COLOR, borderColor);
 		// removes previous configuration to other containers
@@ -249,7 +249,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderColor(String... borderColor) {
 		// resets callback
-		setBorderColor((ColorCallback<ScriptableContext>) null);
+		setBorderColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setColors(Dataset.CanvasObjectProperty.BORDER_COLOR, borderColor);
 		// removes previous configuration to other containers
@@ -263,7 +263,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderColor(Gradient... borderColor) {
 		// resets callback
-		setBorderColor((ColorCallback<ScriptableContext>) null);
+		setBorderColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.BORDER_COLOR, ArrayObject.fromOrNull(borderColor), getDefaultBorderColorAsString());
 		// removes previous configuration to other containers

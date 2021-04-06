@@ -28,7 +28,7 @@ import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayDouble;
@@ -218,17 +218,17 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.borderSkippedCallbackProxy.setCallback((contextFunction, context) -> onBorderSkipped(new ScriptableContext(new DataEnvelop<>(context))));
+		this.borderSkippedCallbackProxy.setCallback((contextFunction, context) -> onBorderSkipped(new DatasetContext(new DataEnvelop<>(context))));
 		// gets value calling callback
-		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), borderRadiusCallback, BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
+		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new DatasetContext(new DataEnvelop<>(context)), borderRadiusCallback, BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
 		// gets value calling callback
-		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), borderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
+		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new DatasetContext(new DataEnvelop<>(context)), borderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// gets value calling callback
-		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
+		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderItem(new DatasetContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// gets value calling callback
-		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new ScriptableContext(new DataEnvelop<>(context))));
+		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new DatasetContext(new DataEnvelop<>(context))));
 		// gets value calling callback
-		this.baseCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), baseCallback, UndefinedValues.DOUBLE).doubleValue());
+		this.baseCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), baseCallback, UndefinedValues.DOUBLE).doubleValue());
 	}
 
 	/*
@@ -1024,7 +1024,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param context native object as context.
 	 * @return a object property value, as boolean or {@link BorderSkipped}.
 	 */
-	private Object onBorderSkipped(ScriptableContext context) {
+	private Object onBorderSkipped(DatasetContext context) {
 		// gets value
 		BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, borderSkippedCallback);
 		BorderSkipped result = value == null ? getDefaultValues().getElements().getBar().getBorderSkipped() : value;
@@ -1047,7 +1047,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param <T> type of border item object
 	 * @return a object property value, as integer or {@link AbstractBarBorderItem}
 	 */
-	private <T extends AbstractBarBorderItem> NativeObject onBorderItem(ScriptableContext context, Scriptable<Object, ScriptableContext> borderItemCallback, NativeObjectContainerFactory<T> factory, int defaultValue) {
+	private <T extends AbstractBarBorderItem> NativeObject onBorderItem(DatasetContext context, Scriptable<Object, DatasetContext> borderItemCallback, NativeObjectContainerFactory<T> factory, int defaultValue) {
 		// gets value
 		Object value = ScriptableUtils.getOptionValue(context, borderItemCallback);
 		// checks the type of result
@@ -1254,7 +1254,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param context native object as context.
 	 * @return a object property value, as {@link PointStyle} or {@link Img}
 	 */
-	private Object onPointStyle(ScriptableContext context) {
+	private Object onPointStyle(DatasetContext context) {
 		// gets value
 		Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
 		// checks result

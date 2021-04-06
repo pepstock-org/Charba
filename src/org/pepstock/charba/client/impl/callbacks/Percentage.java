@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.callbacks;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.AbstractDatasetScriptableContext;
+import org.pepstock.charba.client.callbacks.AbstractDatasetContext;
 import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.Dataset;
@@ -50,7 +50,7 @@ public final class Percentage {
 	 * @param context data labels plugin context
 	 * @return the percentage value, a double between 0 and 1. If the datasets does not contains any data, it will return {@link Double#NaN}.
 	 */
-	public static double compute(IsChart chart, double value, AbstractDatasetScriptableContext context) {
+	public static double compute(IsChart chart, double value, AbstractDatasetContext context) {
 		return compute(chart, value, context, false);
 	}
 
@@ -65,7 +65,7 @@ public final class Percentage {
 	 *            dataset index (single dataset)
 	 * @return the percentage value, a double between 0 and 1. If the datasets does not contains any data, it will return {@link Double#NaN}.
 	 */
-	public static double compute(IsChart chart, double value, AbstractDatasetScriptableContext context, boolean stacked) {
+	public static double compute(IsChart chart, double value, AbstractDatasetContext context, boolean stacked) {
 		// checks if arguments are consistent
 		if (!IsChart.isConsistent(chart) || context == null) {
 			// if not consistent
@@ -98,7 +98,7 @@ public final class Percentage {
 	 * @param context data labels plugin context
 	 * @return the total for data values for stacked dataset.
 	 */
-	private static double getTotalForStacked(IsChart chart, AbstractDatasetScriptableContext context) {
+	private static double getTotalForStacked(IsChart chart, AbstractDatasetContext context) {
 		// creates the total reference
 		double total = 0D;
 		// scans all datasets
@@ -138,7 +138,7 @@ public final class Percentage {
 	 * @param context data labels plugin context
 	 * @return the total for data values for NO stacked dataset.
 	 */
-	private static double getTotal(IsChart chart, AbstractDatasetScriptableContext context) {
+	private static double getTotal(IsChart chart, AbstractDatasetContext context) {
 		// creates the total reference
 		double total = 0D;
 		// if here, the argument of stack is false

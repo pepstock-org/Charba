@@ -23,6 +23,6 @@ import org.pepstock.charba.client.enums.CapStyle;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public interface CapStyleCallback extends Scriptable<CapStyle, ScriptableContext> {
+public interface CapStyleCallback extends Scriptable<CapStyle, DatasetContext> {
 
 }

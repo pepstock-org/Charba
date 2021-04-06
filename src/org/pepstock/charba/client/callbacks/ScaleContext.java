@@ -35,7 +35,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ScaleScriptableContext extends AbstractScriptableContext {
+public final class ScaleContext extends ChartContext {
 
 	/**
 	 * Name of properties of native object.
@@ -82,7 +82,7 @@ public final class ScaleScriptableContext extends AbstractScriptableContext {
 	 * @param axis axis instance where the callback must be invoked
 	 * @param envelop envelop of native object instance to be wrapped.
 	 */
-	public ScaleScriptableContext(Axis axis, ConfigurationEnvelop<NativeObject> envelop) {
+	public ScaleContext(Axis axis, ConfigurationEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 		// checks if axis is consistent
 		if (axis == null) {

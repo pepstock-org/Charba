@@ -23,6 +23,6 @@ import org.pepstock.charba.client.items.FontItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface FontCallback<C extends AbstractScriptableContext> extends Scriptable<FontItem, C> {
+public interface FontCallback<C extends ChartContext> extends Scriptable<FontItem, C> {
 
 }

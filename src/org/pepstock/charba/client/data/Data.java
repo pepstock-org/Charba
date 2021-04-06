@@ -20,7 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.colors.CanvasObject;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
@@ -485,7 +485,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param context legend item instance to get the data set related to.
 	 * @return a data set instance by scriptable context item or <code>null</code> if not found by scriptable context
 	 */
-	public final Dataset retrieveDataset(ScriptableContext context) {
+	public final Dataset retrieveDataset(DatasetContext context) {
 		// checks if scriptable context is consistent
 		// and if data set index is the locator
 		// and the data set index is less than size of data sets

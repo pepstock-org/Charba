@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.callbacks.AbstractDatasetScriptableContext;
+import org.pepstock.charba.client.callbacks.AbstractDatasetContext;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -77,7 +77,7 @@ public final class DatasetReference extends NativeObjectContainer {
 	 * @param context scriptable context instance
 	 * @param item dataset item to add to the object
 	 */
-	public DatasetReference(AbstractDatasetScriptableContext context, DatasetElement item) {
+	public DatasetReference(AbstractDatasetContext context, DatasetElement item) {
 		super(null);
 		// checks if context is consistent
 		if (context == null) {

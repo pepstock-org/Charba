@@ -23,6 +23,6 @@ import org.pepstock.charba.client.enums.BorderAlign;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface BorderAlignCallback extends Scriptable<BorderAlign, ScriptableContext> {
+public interface BorderAlignCallback extends Scriptable<BorderAlign, DatasetContext> {
 
 }

@@ -460,12 +460,13 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
 
 #### Breaking changes
  * change the structure of scriptable options context.
-   * remove `getIndex` method from `ScriptableContext` class, use getDataIndex instead.
+   * remove `getIndex` method from `DatasetContext` class, use getDataIndex instead.
    * add type of the context.
-   * remove `isHover` method from `ScriptableContext` class.
+   * remove `isHover` method from `DatasetContext` class.
  * creates new context classes based on the type of context:
-   * `ScriptableContext` which is mapping `chart`, `dataset` and `data` types.
-   * `ScaleScriptableContext` which is mapping `scale` and `tick` types.   
+   * create `ChartContext` class to map the context for configuration chart callbacks, type equals to `chart`.
+   * rename `ScriptableContext` class  to `DatasetContext` to map the context for configuration datasets callbacks, `dataset` and `data` types
+   * `ScaleContext` class to map the context for configuration scales callbacks, `scale` and `tick` types.   
    * `DataLabelsContext` which is mapping `datalabels` types, for callbacks invoked by `DataLabelsPlugin`.
    * `LabelsContext` which is mapping `labels` types, for callbacks invoked by `DataLabelsPlugin`.  
  * all scriptable options are extending the `Scriptable` interface which has changed own signature, accessing only 1 argument, the context defined as generic.

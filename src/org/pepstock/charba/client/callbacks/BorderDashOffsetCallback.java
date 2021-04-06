@@ -22,6 +22,6 @@ package org.pepstock.charba.client.callbacks;
  * 
  * @param <C> type of context to pass to the callback.
  */
-public interface BorderDashOffsetCallback<C extends AbstractScriptableContext> extends Scriptable<Double, C> {
+public interface BorderDashOffsetCallback<C extends ChartContext> extends Scriptable<Double, C> {
 
 }

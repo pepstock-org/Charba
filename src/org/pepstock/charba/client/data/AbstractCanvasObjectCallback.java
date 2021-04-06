@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.colors.CanvasObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
@@ -32,7 +32,7 @@ import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
  * @param <T> type of canvas object
  *
  */
-abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements ColorCallback<ScriptableContext> {
+abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements ColorCallback<DatasetContext> {
 
 	// key of the gradient
 	private final Key property;
@@ -55,10 +55,10 @@ abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements C
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.Scriptable#invoke(org.pepstock.charba.client.callbacks.AbstractScriptableContext)
+	 * @see org.pepstock.charba.client.callbacks.Scriptable#invoke(org.pepstock.charba.client.callbacks.ChartContext)
 	 */
 	@Override
-	public T invoke(ScriptableContext context) {
+	public T invoke(DatasetContext context) {
 		// gets chart
 		IsChart chart = context.getChart();
 		// checks if chart is consistent

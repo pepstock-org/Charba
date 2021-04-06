@@ -42,6 +42,6 @@ import org.pepstock.charba.client.colors.Pattern;
  * 
  * @param <C> type of context to pass to the callback.
  */
-public interface ColorCallback<C extends AbstractScriptableContext> extends Scriptable<Object, C> {
+public interface ColorCallback<C extends ChartContext> extends Scriptable<Object, C> {
 
 }

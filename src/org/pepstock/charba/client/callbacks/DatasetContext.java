@@ -27,14 +27,14 @@ import org.pepstock.charba.client.labels.LabelsEnvelop;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class ScriptableContext extends AbstractDatasetScriptableContext {
+public class DatasetContext extends AbstractDatasetContext {
 
 	/**
 	 * Creates the object with public object instance to be wrapped, called by <code>configuration</code> package.
 	 * 
 	 * @param envelop envelop of public object instance to be wrapped.
 	 */
-	public ScriptableContext(ConfigurationEnvelop<NativeObject> envelop) {
+	public DatasetContext(ConfigurationEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
@@ -43,7 +43,7 @@ public class ScriptableContext extends AbstractDatasetScriptableContext {
 	 * 
 	 * @param envelop envelop of public object instance to be wrapped.
 	 */
-	public ScriptableContext(DataEnvelop<NativeObject> envelop) {
+	public DatasetContext(DataEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
@@ -52,7 +52,7 @@ public class ScriptableContext extends AbstractDatasetScriptableContext {
 	 * 
 	 * @param envelop envelop of public object instance to be wrapped.
 	 */
-	public ScriptableContext(DataLabelsEnvelop<NativeObject> envelop) {
+	public DatasetContext(DataLabelsEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
@@ -61,7 +61,7 @@ public class ScriptableContext extends AbstractDatasetScriptableContext {
 	 * 
 	 * @param envelop envelop of public object instance to be wrapped.
 	 */
-	public ScriptableContext(LabelsEnvelop<NativeObject> envelop) {
+	public DatasetContext(LabelsEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
@@ -70,7 +70,7 @@ public class ScriptableContext extends AbstractDatasetScriptableContext {
 	 * 
 	 * @param nativeObject public object instance to be wrapped.
 	 */
-	private ScriptableContext(NativeObject nativeObject) {
+	private DatasetContext(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

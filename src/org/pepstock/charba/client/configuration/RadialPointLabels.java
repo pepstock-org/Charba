@@ -19,7 +19,7 @@ import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
-import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.SimplePaddingCallback;
@@ -84,13 +84,13 @@ public class RadialPointLabels extends AxisContainer {
 	// user callbacks implementation for point labels
 	private RadialPointLabelCallback callback = null;
 	// font callback instance
-	private FontCallback<ScaleScriptableContext> fontCallback = null;
+	private FontCallback<ScaleContext> fontCallback = null;
 	// color callback instance
-	private ColorCallback<ScaleScriptableContext> colorCallback = null;
+	private ColorCallback<ScaleContext> colorCallback = null;
 	// padding callback instance
 	private SimplePaddingCallback paddingCallback = null;
 	// color callback instance
-	private ColorCallback<ScaleScriptableContext> backdropColorCallback = null;
+	private ColorCallback<ScaleContext> backdropColorCallback = null;
 
 	// font instance
 	private final Font font;
@@ -155,15 +155,15 @@ public class RadialPointLabels extends AxisContainer {
 			return item;
 		});
 		// gets value calling callback
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> getAxis().onFont(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), fontCallback, getAxis().getScale().getPointLabels().getFont()));
+		this.fontCallbackProxy.setCallback((contextFunction, context) -> getAxis().onFont(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), fontCallback, getAxis().getScale().getPointLabels().getFont()));
 		// gets value calling callback
-		this.colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), colorCallback, getAxis().getDefaultValues().getPointLabels().getColorAsString()));
+		this.colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), colorCallback, getAxis().getDefaultValues().getPointLabels().getColorAsString()));
 		// gets value calling callback
 		this.backdropColorCallbackProxy
-				.setCallback((contextFunction, context) -> onColor(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropColorCallback, getAxis().getDefaultValues().getPointLabels().getBackdropColorAsString()));
+				.setCallback((contextFunction, context) -> onColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropColorCallback, getAxis().getDefaultValues().getPointLabels().getBackdropColorAsString()));
 		// gets value calling callback
 		this.paddingCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), paddingCallback, getAxis().getDefaultValues().getPointLabels().getPadding()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), paddingCallback, getAxis().getDefaultValues().getPointLabels().getPadding()).intValue());
 	}
 
 	/**
@@ -328,7 +328,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
-	public FontCallback<ScaleScriptableContext> getFontCallback() {
+	public FontCallback<ScaleContext> getFontCallback() {
 		return fontCallback;
 	}
 
@@ -337,7 +337,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
-	public void setFont(FontCallback<ScaleScriptableContext> fontCallback) {
+	public void setFont(FontCallback<ScaleContext> fontCallback) {
 		// sets the callback
 		this.fontCallback = fontCallback;
 		// checks if callback is consistent
@@ -382,7 +382,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @return the color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback<ScaleScriptableContext> getColorCallback() {
+	public ColorCallback<ScaleContext> getColorCallback() {
 		return colorCallback;
 	}
 
@@ -391,7 +391,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @param colorCallback the color callback to set
 	 */
-	public void setColor(ColorCallback<ScaleScriptableContext> colorCallback) {
+	public void setColor(ColorCallback<ScaleContext> colorCallback) {
 		// sets the callback
 		this.colorCallback = colorCallback;
 		// checks if callback is consistent
@@ -409,7 +409,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @return the backdrop color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback<ScaleScriptableContext> getBackdropColorCallback() {
+	public ColorCallback<ScaleContext> getBackdropColorCallback() {
 		return backdropColorCallback;
 	}
 
@@ -418,7 +418,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @param backdropColorCallback the backdrop color callback to set
 	 */
-	public void setBackdropColor(ColorCallback<ScaleScriptableContext> backdropColorCallback) {
+	public void setBackdropColor(ColorCallback<ScaleContext> backdropColorCallback) {
 		// sets the callback
 		this.backdropColorCallback = backdropColorCallback;
 		// checks if callback is consistent
@@ -439,7 +439,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * @param defaultValue default value of the color
 	 * @return a string as color
 	 */
-	private String onColor(ScaleScriptableContext context, ColorCallback<ScaleScriptableContext> callback, String defaultValue) {
+	private String onColor(ScaleContext context, ColorCallback<ScaleContext> callback, String defaultValue) {
 		// gets value
 		Object result = ScriptableUtils.getOptionValueAsColor(context, callback, defaultValue, false);
 		// checks if result is a string

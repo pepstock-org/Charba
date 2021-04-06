@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.callbacks.FillCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.AbstractNode;
@@ -58,7 +58,7 @@ final class LiningDatasetFillHandler extends FillHandler {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		this.fillCallbackProxy.setCallback((contextFunction, context) -> onFill(new ScriptableContext(new DataEnvelop<>(context))));
+		this.fillCallbackProxy.setCallback((contextFunction, context) -> onFill(new DatasetContext(new DataEnvelop<>(context))));
 	}
 
 	/*
@@ -138,7 +138,7 @@ final class LiningDatasetFillHandler extends FillHandler {
 	 * @param context native object as context.
 	 * @return a object property value
 	 */
-	private Object onFill(ScriptableContext context) {
+	private Object onFill(DatasetContext context) {
 		// gets value
 		Object result = ScriptableUtils.getOptionValue(context, fillCallback);
 		// checks result type

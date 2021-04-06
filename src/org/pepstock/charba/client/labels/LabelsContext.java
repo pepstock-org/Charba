@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.labels;
 
-import org.pepstock.charba.client.callbacks.AbstractDatasetScriptableContext;
+import org.pepstock.charba.client.callbacks.AbstractDatasetContext;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -29,7 +29,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LabelsContext extends AbstractDatasetScriptableContext {
+public final class LabelsContext extends AbstractDatasetContext {
 
 	/**
 	 * Name of properties of native object.
@@ -143,7 +143,7 @@ public final class LabelsContext extends AbstractDatasetScriptableContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.AbstractScriptableContext#isConsistent()
+	 * @see org.pepstock.charba.client.callbacks.ChartContext#isConsistent()
 	 */
 	@Override
 	protected boolean isConsistent() {

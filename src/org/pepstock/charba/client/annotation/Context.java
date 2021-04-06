@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.callbacks.AbstractScriptableContext;
+import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class Context extends AbstractScriptableContext {
+final class Context extends ChartContext {
 
 	/**
 	 * Creates the object with native object instance to be wrapped.

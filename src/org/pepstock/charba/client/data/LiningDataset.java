@@ -28,7 +28,7 @@ import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
@@ -115,41 +115,41 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// point background color callback instance
-	private ColorCallback<ScriptableContext> pointBackgroundColorCallback = null;
+	private ColorCallback<DatasetContext> pointBackgroundColorCallback = null;
 	// point border color callback instance
-	private ColorCallback<ScriptableContext> pointBorderColorCallback = null;
+	private ColorCallback<DatasetContext> pointBorderColorCallback = null;
 	// point borderWidth callback instance
-	private WidthCallback<ScriptableContext> pointBorderWidthCallback = null;
+	private WidthCallback<DatasetContext> pointBorderWidthCallback = null;
 	// point hover background color callback instance
-	private ColorCallback<ScriptableContext> pointHoverBackgroundColorCallback = null;
+	private ColorCallback<DatasetContext> pointHoverBackgroundColorCallback = null;
 	// point hover border color callback instance
-	private ColorCallback<ScriptableContext> pointHoverBorderColorCallback = null;
+	private ColorCallback<DatasetContext> pointHoverBorderColorCallback = null;
 	// point hover borderWidth callback instance
-	private WidthCallback<ScriptableContext> pointHoverBorderWidthCallback = null;
+	private WidthCallback<DatasetContext> pointHoverBorderWidthCallback = null;
 	// point radius callback instance
-	private RadiusCallback<ScriptableContext> pointRadiusCallback = null;
+	private RadiusCallback<DatasetContext> pointRadiusCallback = null;
 	// point hit radius callback instance
-	private RadiusCallback<ScriptableContext> pointHitRadiusCallback = null;
+	private RadiusCallback<DatasetContext> pointHitRadiusCallback = null;
 	// point hover radius callback instance
-	private RadiusCallback<ScriptableContext> pointHoverRadiusCallback = null;
+	private RadiusCallback<DatasetContext> pointHoverRadiusCallback = null;
 	// point rotation callback instance
-	private RotationCallback<ScriptableContext> pointRotationCallback = null;
+	private RotationCallback<DatasetContext> pointRotationCallback = null;
 	// point style callback instance
 	private PointStyleCallback pointStyleCallback = null;
 	// border cap style callback instance
 	private CapStyleCallback borderCapStyleCallback = null;
 	// border dash callback instance
-	private BorderDashCallback<ScriptableContext> borderDashCallback = null;
+	private BorderDashCallback<DatasetContext> borderDashCallback = null;
 	// border dash offset callback instance
-	private BorderDashOffsetCallback<ScriptableContext> borderDashOffsetCallback = null;
+	private BorderDashOffsetCallback<DatasetContext> borderDashOffsetCallback = null;
 	// border join style callback instance
 	private JoinStyleCallback borderJoinStyleCallback = null;
 	// hover border cap style callback instance
 	private CapStyleCallback hoverBorderCapStyleCallback = null;
 	// hover border dash callback instance
-	private BorderDashCallback<ScriptableContext> hoverBorderDashCallback = null;
+	private BorderDashCallback<DatasetContext> hoverBorderDashCallback = null;
 	// hover border dash offset callback instance
-	private BorderDashOffsetCallback<ScriptableContext> hoverBorderDashOffsetCallback = null;
+	private BorderDashOffsetCallback<DatasetContext> hoverBorderDashOffsetCallback = null;
 	// hover border join style callback instance
 	private JoinStyleCallback hoverBorderJoinStyleCallback = null;
 
@@ -274,54 +274,54 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		this.pointBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointBackgroundColorCallback, InternalCanvasObjectProperty.POINT_BACKGROUND_COLOR,
+		this.pointBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), pointBackgroundColorCallback, InternalCanvasObjectProperty.POINT_BACKGROUND_COLOR,
 				getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		// gets value calling callback
-		this.pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointBorderColorCallback, InternalCanvasObjectProperty.POINT_BORDER_COLOR,
+		this.pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), pointBorderColorCallback, InternalCanvasObjectProperty.POINT_BORDER_COLOR,
 				getDefaultValues().getElements().getPoint().getBorderColorAsString()));
 		// gets value calling callback
 		this.pointBorderWidthCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		this.pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointHoverBackgroundColorCallback,
+		this.pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), pointHoverBackgroundColorCallback,
 				InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		// gets value calling callback
-		this.pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), pointHoverBorderColorCallback, InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR,
+		this.pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), pointHoverBorderColorCallback, InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR,
 				getDefaultValues().getElements().getPoint().getBorderColorAsString()));
 		// gets value calling callback
 		this.pointHoverBorderWidthCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		this.pointRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
+		this.pointRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
 		// gets value calling callback
 		this.pointHitRadiusCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
 		// gets value calling callback
 		this.pointHoverRadiusCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
 		// gets value calling callback
 		this.pointRotationCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// gets value calling callback
-		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new ScriptableContext(new DataEnvelop<>(context))));
+		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new DatasetContext(new DataEnvelop<>(context))));
 		// gets value calling callback
-		this.borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new ScriptableContext(new DataEnvelop<>(context)), borderCapStyleCallback));
+		this.borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new DatasetContext(new DataEnvelop<>(context)), borderCapStyleCallback));
 		// gets value calling callback
-		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(new DataEnvelop<>(context)), borderDashCallback));
+		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new DatasetContext(new DataEnvelop<>(context)), borderDashCallback));
 		// gets value calling callback
 		this.borderDashOffsetCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), borderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), borderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
 		// gets value calling callback
-		this.borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(new DataEnvelop<>(context)), borderJoinStyleCallback));
+		this.borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new DatasetContext(new DataEnvelop<>(context)), borderJoinStyleCallback));
 		// gets value calling callback
-		this.hoverBorderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderCapStyleCallback));
+		this.hoverBorderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new DatasetContext(new DataEnvelop<>(context)), hoverBorderCapStyleCallback));
 		// gets value calling callback
-		this.hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderDashCallback));
+		this.hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new DatasetContext(new DataEnvelop<>(context)), hoverBorderDashCallback));
 		// gets value calling callback
 		this.hoverBorderDashOffsetCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), hoverBorderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
 		// gets value calling callback
-		this.hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderJoinStyleCallback));
+		this.hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new DatasetContext(new DataEnvelop<>(context)), hoverBorderJoinStyleCallback));
 	}
 
 	/*
@@ -400,7 +400,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setBackgroundColor(String backgroundColor) {
 		// resets callback
-		setBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setBackgroundColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValue(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, backgroundColor);
 		// removes the flag because default is string color
@@ -414,7 +414,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setBackgroundColor(Pattern backgroundColor) {
 		// resets callback
-		setBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setBackgroundColor((ColorCallback<DatasetContext>) null);
 		// sets value to patterns
 		getPatternsContainer().setObjects(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor), getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		// removes the property
@@ -428,7 +428,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setBackgroundColor(Gradient backgroundColor) {
 		// resets callback
-		setBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setBackgroundColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor), getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		// removes the property
@@ -524,7 +524,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setBorderColor(String borderColor) {
 		// resets callback
-		setBorderColor((ColorCallback<ScriptableContext>) null);
+		setBorderColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValue(Dataset.CanvasObjectProperty.BORDER_COLOR, borderColor);
 		// removes the flag because default is string color
@@ -538,7 +538,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setBorderColor(Gradient borderColor) {
 		// resets callback
-		setBorderColor((ColorCallback<ScriptableContext>) null);
+		setBorderColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.BORDER_COLOR, ArrayObject.fromOrNull(borderColor), getDefaultValues().getElements().getLine().getBorderColorAsString());
 		// removes the property
@@ -604,7 +604,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setBorderWidth(int borderWidth) {
 		// resets callback
-		setBorderWidth((WidthCallback<ScriptableContext>) null);
+		setBorderWidth((WidthCallback<DatasetContext>) null);
 		// stores value
 		setValue(Dataset.CommonProperty.BORDER_WIDTH, borderWidth);
 	}
@@ -629,7 +629,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the border width callback, if set, otherwise <code>null</code>.
 	 */
-	public WidthCallback<ScriptableContext> getBorderWidthCallback() {
+	public WidthCallback<DatasetContext> getBorderWidthCallback() {
 		return getInternalBorderWidthCallback();
 	}
 
@@ -638,7 +638,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param borderWidthCallback the border width callback to set
 	 */
-	public void setBorderWidth(WidthCallback<ScriptableContext> borderWidthCallback) {
+	public void setBorderWidth(WidthCallback<DatasetContext> borderWidthCallback) {
 		setInternalBorderWidth(borderWidthCallback);
 	}
 
@@ -649,7 +649,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setBorderDash(int... borderDash) {
 		// resets callback
-		setBorderDash((BorderDashCallback<ScriptableContext>) null);
+		setBorderDash((BorderDashCallback<DatasetContext>) null);
 		// stores value
 		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
@@ -677,7 +677,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setBorderDashOffset(double borderDashOffset) {
 		// resets callback
-		setBorderDashOffset((BorderDashOffsetCallback<ScriptableContext>) null);
+		setBorderDashOffset((BorderDashOffsetCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
@@ -798,7 +798,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setHoverBackgroundColor(String color) {
 		// resets callback
-		setHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setHoverBackgroundColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValue(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, color);
 		// removes the flag because default is string color
@@ -812,7 +812,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setHoverBackgroundColor(Pattern pattern) {
 		// resets callback
-		setHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setHoverBackgroundColor((ColorCallback<DatasetContext>) null);
 		// sets value to patterns
 		getPatternsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(pattern), getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		// removes the property
@@ -826,7 +826,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setHoverBackgroundColor(Gradient gradient) {
 		// resets callback
-		setHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setHoverBackgroundColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(gradient), getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		// removes previous configuration to other containers
@@ -915,7 +915,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setHoverBorderColor(String color) {
 		// resets callback
-		setHoverBorderColor((ColorCallback<ScriptableContext>) null);
+		setHoverBorderColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValue(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR, color);
 		// removes previous configuration to other containers
@@ -929,7 +929,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setHoverBorderColor(Gradient gradient) {
 		// resets callback
-		setHoverBorderColor((ColorCallback<ScriptableContext>) null);
+		setHoverBorderColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(gradient), getDefaultValues().getElements().getLine().getBorderColorAsString());
 		// removes previous configuration to other containers
@@ -989,7 +989,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setHoverBorderWidth(int width) {
 		// resets callback
-		setHoverBorderWidth((WidthCallback<ScriptableContext>) null);
+		setHoverBorderWidth((WidthCallback<DatasetContext>) null);
 		// stores value
 		setValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, width);
 	}
@@ -1014,7 +1014,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the hover border width callback, if set, otherwise <code>null</code>.
 	 */
-	public WidthCallback<ScriptableContext> getHoverBorderWidthCallback() {
+	public WidthCallback<DatasetContext> getHoverBorderWidthCallback() {
 		return getInternalHoverBorderWidthCallback();
 	}
 
@@ -1023,7 +1023,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param hoverBorderWidthCallback the hover border width callback to set
 	 */
-	public void setHoverBorderWidth(WidthCallback<ScriptableContext> hoverBorderWidthCallback) {
+	public void setHoverBorderWidth(WidthCallback<DatasetContext> hoverBorderWidthCallback) {
 		setInternalHoverBorderWidth(hoverBorderWidthCallback);
 	}
 
@@ -1036,7 +1036,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setHoverBorderDash(int... borderDash) {
 		// resets callback
-		setHoverBorderDash((BorderDashCallback<ScriptableContext>) null);
+		setHoverBorderDash((BorderDashCallback<DatasetContext>) null);
 		// stores value
 		setArrayValue(Property.HOVER_BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
@@ -1066,7 +1066,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setHoverBorderDashOffset(double borderDashOffset) {
 		// resets callback
-		setHoverBorderDashOffset((BorderDashOffsetCallback<ScriptableContext>) null);
+		setHoverBorderDashOffset((BorderDashOffsetCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.HOVER_BORDER_DASH_OFFSET, borderDashOffset);
 	}
@@ -1151,7 +1151,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointBackgroundColor(IsColor... pointBackgroundColor) {
 		// reset callback
-		setPointBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setPointBackgroundColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArray(InternalCanvasObjectProperty.POINT_BACKGROUND_COLOR, pointBackgroundColor);
 		// removes the flag because default is string color
@@ -1165,7 +1165,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointBackgroundColor(String... pointBackgroundColor) {
 		// reset callback
-		setPointBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setPointBackgroundColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArray(InternalCanvasObjectProperty.POINT_BACKGROUND_COLOR, pointBackgroundColor);
 		// removes the flag because default is string color
@@ -1179,7 +1179,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointBackgroundColor(Gradient... pointBackgroundColor) {
 		// reset callback
-		setPointBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setPointBackgroundColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(InternalCanvasObjectProperty.POINT_BACKGROUND_COLOR, ArrayObject.fromOrNull(pointBackgroundColor), getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 		// removes the property
@@ -1238,7 +1238,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointBorderColor(IsColor... pointBorderColor) {
 		// reset callback
-		setPointBorderColor((ColorCallback<ScriptableContext>) null);
+		setPointBorderColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArray(InternalCanvasObjectProperty.POINT_BORDER_COLOR, pointBorderColor);
 		// removes the flag because default is string color
@@ -1252,7 +1252,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointBorderColor(String... pointBorderColor) {
 		// reset callback
-		setPointBorderColor((ColorCallback<ScriptableContext>) null);
+		setPointBorderColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArray(InternalCanvasObjectProperty.POINT_BORDER_COLOR, pointBorderColor);
 		// removes the flag because default is string color
@@ -1266,7 +1266,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointBorderColor(Gradient... pointBorderColor) {
 		// reset callback
-		setPointBorderColor((ColorCallback<ScriptableContext>) null);
+		setPointBorderColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(InternalCanvasObjectProperty.POINT_BORDER_COLOR, ArrayObject.fromOrNull(pointBorderColor), getDefaultValues().getElements().getPoint().getBorderColorAsString());
 		// removes the property
@@ -1325,7 +1325,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointBorderWidth(int... pointBorderWidth) {
 		// reset callback
-		setPointBorderWidth((WidthCallback<ScriptableContext>) null);
+		setPointBorderWidth((WidthCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArray(Property.POINT_BORDER_WIDTH, pointBorderWidth);
 	}
@@ -1354,7 +1354,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointHitRadius(double... pointHitRadius) {
 		// reset callback
-		setPointHitRadius((RadiusCallback<ScriptableContext>) null);
+		setPointHitRadius((RadiusCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArray(Property.POINT_HIT_RADIUS, pointHitRadius);
 	}
@@ -1383,7 +1383,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointHoverBackgroundColor(IsColor... pointHoverBackgroundColor) {
 		// resets callback
-		setPointHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setPointHoverBackgroundColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArray(InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR, pointHoverBackgroundColor);
 		// removes the flag because default is string color
@@ -1397,7 +1397,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointHoverBackgroundColor(String... pointHoverBackgroundColor) {
 		// resets callback
-		setPointHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setPointHoverBackgroundColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArray(InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR, pointHoverBackgroundColor);
 		// removes the flag because default is string color
@@ -1411,7 +1411,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointHoverBackgroundColor(Gradient... pointHoverBackgroundColor) {
 		// resets callback
-		setPointHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setPointHoverBackgroundColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(pointHoverBackgroundColor), getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 		// removes the property
@@ -1475,7 +1475,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointHoverBorderColor(IsColor... pointHoverBorderColor) {
 		// resets callback
-		setPointHoverBorderColor((ColorCallback<ScriptableContext>) null);
+		setPointHoverBorderColor((ColorCallback<DatasetContext>) null);
 		// sets value
 		setValueOrArray(InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR, pointHoverBorderColor);
 		// removes the flag because default is string color
@@ -1489,7 +1489,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointHoverBorderColor(String... pointHoverBorderColor) {
 		// resets callback
-		setPointHoverBorderColor((ColorCallback<ScriptableContext>) null);
+		setPointHoverBorderColor((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArray(InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR, pointHoverBorderColor);
 		// removes the flag because default is string color
@@ -1503,7 +1503,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointHoverBorderColor(Gradient... pointHoverBorderColor) {
 		// resets callback
-		setPointHoverBorderColor((ColorCallback<ScriptableContext>) null);
+		setPointHoverBorderColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR, ArrayObject.fromOrNull(pointHoverBorderColor), getDefaultValues().getElements().getPoint().getBorderColorAsString());
 		// removes the property
@@ -1561,7 +1561,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointHoverBorderWidth(int... pointHoverBorderWidth) {
 		// resets callback
-		setPointHoverBorderWidth((WidthCallback<ScriptableContext>) null);
+		setPointHoverBorderWidth((WidthCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArray(Property.POINT_HOVER_BORDER_WIDTH, pointHoverBorderWidth);
 	}
@@ -1590,7 +1590,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointHoverRadius(double... pointHoverRadius) {
 		// resets callback
-		setPointHoverRadius((RadiusCallback<ScriptableContext>) null);
+		setPointHoverRadius((RadiusCallback<DatasetContext>) null);
 		// stores values
 		setValueOrArray(Property.POINT_HOVER_RADIUS, pointHoverRadius);
 	}
@@ -1620,7 +1620,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointRadius(double... pointRadius) {
 		// resets callback
-		setPointRadius((RadiusCallback<ScriptableContext>) null);
+		setPointRadius((RadiusCallback<DatasetContext>) null);
 		// stores values
 		setValueOrArray(Property.POINT_RADIUS, pointRadius);
 	}
@@ -1710,7 +1710,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setPointRotation(double... pointRotation) {
 		// resets callback
-		setPointRotation((RotationCallback<ScriptableContext>) null);
+		setPointRotation((RotationCallback<DatasetContext>) null);
 		// sets value
 		setValueOrArray(Property.POINT_ROTATION, pointRotation);
 	}
@@ -1737,7 +1737,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the point background color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback<ScriptableContext> getPointBackgroundColorCallback() {
+	public ColorCallback<DatasetContext> getPointBackgroundColorCallback() {
 		return pointBackgroundColorCallback;
 	}
 
@@ -1746,7 +1746,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointBackgroundColorCallback the point background color callback.
 	 */
-	public void setPointBackgroundColor(ColorCallback<ScriptableContext> pointBackgroundColorCallback) {
+	public void setPointBackgroundColor(ColorCallback<DatasetContext> pointBackgroundColorCallback) {
 		// sets the callback
 		this.pointBackgroundColorCallback = pointBackgroundColorCallback;
 		// checks if callback is consistent
@@ -1766,7 +1766,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the point border color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback<ScriptableContext> getPointBorderColorCallback() {
+	public ColorCallback<DatasetContext> getPointBorderColorCallback() {
 		return pointBorderColorCallback;
 	}
 
@@ -1775,7 +1775,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointBorderColorCallback the point border color callback.
 	 */
-	public void setPointBorderColor(ColorCallback<ScriptableContext> pointBorderColorCallback) {
+	public void setPointBorderColor(ColorCallback<DatasetContext> pointBorderColorCallback) {
 		// sets the callback
 		this.pointBorderColorCallback = pointBorderColorCallback;
 		// checks if callback is consistent
@@ -1795,7 +1795,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the point border width callback, if set, otherwise <code>null</code>.
 	 */
-	public WidthCallback<ScriptableContext> getPointBorderWidthCallback() {
+	public WidthCallback<DatasetContext> getPointBorderWidthCallback() {
 		return pointBorderWidthCallback;
 	}
 
@@ -1804,7 +1804,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointBorderWidthCallback the point border width callback to set
 	 */
-	public void setPointBorderWidth(WidthCallback<ScriptableContext> pointBorderWidthCallback) {
+	public void setPointBorderWidth(WidthCallback<DatasetContext> pointBorderWidthCallback) {
 		// sets the callback
 		this.pointBorderWidthCallback = pointBorderWidthCallback;
 		// checks if callback is consistent
@@ -1822,7 +1822,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the point hover background color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback<ScriptableContext> getPointHoverBackgroundColorCallback() {
+	public ColorCallback<DatasetContext> getPointHoverBackgroundColorCallback() {
 		return pointHoverBackgroundColorCallback;
 	}
 
@@ -1831,7 +1831,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointHoverBackgroundColorCallback the point hover background color callback.
 	 */
-	public void setPointHoverBackgroundColor(ColorCallback<ScriptableContext> pointHoverBackgroundColorCallback) {
+	public void setPointHoverBackgroundColor(ColorCallback<DatasetContext> pointHoverBackgroundColorCallback) {
 		// sets the callback
 		this.pointHoverBackgroundColorCallback = pointHoverBackgroundColorCallback;
 		// checks if callback is consistent
@@ -1851,7 +1851,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the point hover border color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback<ScriptableContext> getPointHoverBorderColorCallback() {
+	public ColorCallback<DatasetContext> getPointHoverBorderColorCallback() {
 		return pointHoverBorderColorCallback;
 	}
 
@@ -1860,7 +1860,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointHoverBorderColorCallback the point hover border color callback.
 	 */
-	public void setPointHoverBorderColor(ColorCallback<ScriptableContext> pointHoverBorderColorCallback) {
+	public void setPointHoverBorderColor(ColorCallback<DatasetContext> pointHoverBorderColorCallback) {
 		// sets the callback
 		this.pointHoverBorderColorCallback = pointHoverBorderColorCallback;
 		// checks if callback is consistent
@@ -1880,7 +1880,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the point hover border width callback, if set, otherwise <code>null</code>.
 	 */
-	public WidthCallback<ScriptableContext> getPointHoverBorderWidthCallback() {
+	public WidthCallback<DatasetContext> getPointHoverBorderWidthCallback() {
 		return pointHoverBorderWidthCallback;
 	}
 
@@ -1889,7 +1889,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointHoverBorderWidthCallback the point hover border width callback to set
 	 */
-	public void setPointHoverBorderWidth(WidthCallback<ScriptableContext> pointHoverBorderWidthCallback) {
+	public void setPointHoverBorderWidth(WidthCallback<DatasetContext> pointHoverBorderWidthCallback) {
 		// sets the callback
 		this.pointHoverBorderWidthCallback = pointHoverBorderWidthCallback;
 		// checks if callback is consistent
@@ -1907,7 +1907,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the point radius callback, if set, otherwise <code>null</code>.
 	 */
-	public RadiusCallback<ScriptableContext> getPointRadiusCallback() {
+	public RadiusCallback<DatasetContext> getPointRadiusCallback() {
 		return pointRadiusCallback;
 	}
 
@@ -1916,7 +1916,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointRadiusCallback the point radius callback to set
 	 */
-	public void setPointRadius(RadiusCallback<ScriptableContext> pointRadiusCallback) {
+	public void setPointRadius(RadiusCallback<DatasetContext> pointRadiusCallback) {
 		// sets the callback
 		this.pointRadiusCallback = pointRadiusCallback;
 		// checks if callback is consistent
@@ -1934,7 +1934,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the point hit radius callback, if set, otherwise <code>null</code>.
 	 */
-	public RadiusCallback<ScriptableContext> getPointHitRadiusCallback() {
+	public RadiusCallback<DatasetContext> getPointHitRadiusCallback() {
 		return pointHitRadiusCallback;
 	}
 
@@ -1943,7 +1943,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointHitRadiusCallback the point hit radius callback to set
 	 */
-	public void setPointHitRadius(RadiusCallback<ScriptableContext> pointHitRadiusCallback) {
+	public void setPointHitRadius(RadiusCallback<DatasetContext> pointHitRadiusCallback) {
 		// sets the callback
 		this.pointHitRadiusCallback = pointHitRadiusCallback;
 		// checks if callback is consistent
@@ -1961,7 +1961,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the point hover radius callback, if set, otherwise <code>null</code>.
 	 */
-	public RadiusCallback<ScriptableContext> getPointHoverRadiusCallback() {
+	public RadiusCallback<DatasetContext> getPointHoverRadiusCallback() {
 		return pointHoverRadiusCallback;
 	}
 
@@ -1970,7 +1970,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointHoverRadiusCallback the point hover radius callback to set
 	 */
-	public void setPointHoverRadius(RadiusCallback<ScriptableContext> pointHoverRadiusCallback) {
+	public void setPointHoverRadius(RadiusCallback<DatasetContext> pointHoverRadiusCallback) {
 		// sets the callback
 		this.pointHoverRadiusCallback = pointHoverRadiusCallback;
 		// checks if callback is consistent
@@ -1988,7 +1988,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the point rotation callback, if set, otherwise <code>null</code>.
 	 */
-	public RotationCallback<ScriptableContext> getPointRotationCallback() {
+	public RotationCallback<DatasetContext> getPointRotationCallback() {
 		return pointRotationCallback;
 	}
 
@@ -1997,7 +1997,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param pointRotationCallback the point rotation callback to set
 	 */
-	public void setPointRotation(RotationCallback<ScriptableContext> pointRotationCallback) {
+	public void setPointRotation(RotationCallback<DatasetContext> pointRotationCallback) {
 		// sets the callback
 		this.pointRotationCallback = pointRotationCallback;
 		// checks if callback is consistent
@@ -2098,7 +2098,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the border dash callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderDashCallback<ScriptableContext> getBorderDashCallback() {
+	public BorderDashCallback<DatasetContext> getBorderDashCallback() {
 		return borderDashCallback;
 	}
 
@@ -2107,7 +2107,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param borderDashCallback the border dash callback.
 	 */
-	public void setBorderDash(BorderDashCallback<ScriptableContext> borderDashCallback) {
+	public void setBorderDash(BorderDashCallback<DatasetContext> borderDashCallback) {
 		// sets the callback
 		this.borderDashCallback = borderDashCallback;
 		// checks if callback is consistent
@@ -2125,7 +2125,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the border dash offset callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderDashOffsetCallback<ScriptableContext> getBorderDashOffsetCallback() {
+	public BorderDashOffsetCallback<DatasetContext> getBorderDashOffsetCallback() {
 		return borderDashOffsetCallback;
 	}
 
@@ -2134,7 +2134,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param borderDashOffsetCallback the border dash offset callback.
 	 */
-	public void setBorderDashOffset(BorderDashOffsetCallback<ScriptableContext> borderDashOffsetCallback) {
+	public void setBorderDashOffset(BorderDashOffsetCallback<DatasetContext> borderDashOffsetCallback) {
 		// sets the callback
 		this.borderDashOffsetCallback = borderDashOffsetCallback;
 		// checks if callback is consistent
@@ -2206,7 +2206,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the border dash callback when element is hovered, if set, otherwise <code>null</code>.
 	 */
-	public BorderDashCallback<ScriptableContext> getHoverBorderDashCallback() {
+	public BorderDashCallback<DatasetContext> getHoverBorderDashCallback() {
 		return hoverBorderDashCallback;
 	}
 
@@ -2215,7 +2215,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param borderDashCallback the border dash callback when element is hovered.
 	 */
-	public void setHoverBorderDash(BorderDashCallback<ScriptableContext> borderDashCallback) {
+	public void setHoverBorderDash(BorderDashCallback<DatasetContext> borderDashCallback) {
 		// sets the callback
 		this.hoverBorderDashCallback = borderDashCallback;
 		// checks if callback is consistent
@@ -2233,7 +2233,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the border dash offset callback when element is hovered, if set, otherwise <code>null</code>.
 	 */
-	public BorderDashOffsetCallback<ScriptableContext> getHoverBorderDashOffsetCallback() {
+	public BorderDashOffsetCallback<DatasetContext> getHoverBorderDashOffsetCallback() {
 		return hoverBorderDashOffsetCallback;
 	}
 
@@ -2242,7 +2242,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param borderDashOffsetCallback the border dash offset callback when element is hovered.
 	 */
-	public void setHoverBorderDashOffset(BorderDashOffsetCallback<ScriptableContext> borderDashOffsetCallback) {
+	public void setHoverBorderDashOffset(BorderDashOffsetCallback<DatasetContext> borderDashOffsetCallback) {
 		// sets the callback
 		this.hoverBorderDashOffsetCallback = borderDashOffsetCallback;
 		// checks if callback is consistent
@@ -2309,7 +2309,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param context native object as context.
 	 * @return a object property value, as {@link PointStyle} or {@link Img}
 	 */
-	private Object onPointStyle(ScriptableContext context) {
+	private Object onPointStyle(DatasetContext context) {
 		// gets value
 		Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
 		// checks result
@@ -2332,7 +2332,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param borderCapStyleCallback border cap style callback instance
 	 * @return a object property value, as {@link CapStyle}
 	 */
-	private String onBorderCapStyle(ScriptableContext context, CapStyleCallback borderCapStyleCallback) {
+	private String onBorderCapStyle(DatasetContext context, CapStyleCallback borderCapStyleCallback) {
 		// gets value
 		CapStyle result = ScriptableUtils.getOptionValue(context, borderCapStyleCallback);
 		// checks result
@@ -2350,7 +2350,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param borderJoinStyleCallback border join style callback instance
 	 * @return a object property value, as {@link JoinStyle}
 	 */
-	private String onBorderJoinStyle(ScriptableContext context, JoinStyleCallback borderJoinStyleCallback) {
+	private String onBorderJoinStyle(DatasetContext context, JoinStyleCallback borderJoinStyleCallback) {
 		// gets value
 		JoinStyle result = ScriptableUtils.getOptionValue(context, borderJoinStyleCallback);
 		// checks result
@@ -2368,7 +2368,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param borderDashCallback border dash callback instance
 	 * @return an array of integer
 	 */
-	private Array onBorderDash(ScriptableContext context, BorderDashCallback<ScriptableContext> borderDashCallback) {
+	private Array onBorderDash(DatasetContext context, BorderDashCallback<DatasetContext> borderDashCallback) {
 		// gets value
 		List<Integer> result = ScriptableUtils.getOptionValue(context, borderDashCallback);
 		// default result

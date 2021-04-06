@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.ShowLabelBackdropCallback;
@@ -44,7 +44,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> showLabelBackdropCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// backdrop color callback instance
-	private ColorCallback<ScaleScriptableContext> backdropColorCallback = null;
+	private ColorCallback<ScaleContext> backdropColorCallback = null;
 	// show label backdrop callback instance
 	private ShowLabelBackdropCallback showLabelBackdropCallback = null;
 
@@ -103,10 +103,10 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		// -------------------------------
 		// gets value calling callback
 		backdropColorCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropColorCallback, getConfiguration().getBackdropColorAsString(), false));
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropColorCallback, getConfiguration().getBackdropColorAsString(), false));
 		// gets value calling callback
 		showLabelBackdropCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
 	}
 
 	/*
@@ -135,7 +135,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 */
 	public void setBackdropColor(IsColor backdropColor) {
 		// reset callbacks
-		setBackdropColor((ColorCallback<ScaleScriptableContext>) null);
+		setBackdropColor((ColorCallback<ScaleContext>) null);
 		// stores values
 		getConfiguration().setBackdropColor(backdropColor);
 	}
@@ -147,7 +147,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 */
 	public void setBackdropColor(String backdropColor) {
 		// reset callbacks
-		setBackdropColor((ColorCallback<ScaleScriptableContext>) null);
+		setBackdropColor((ColorCallback<ScaleContext>) null);
 		// stores values
 		getConfiguration().setBackdropColor(backdropColor);
 	}
@@ -214,7 +214,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 * 
 	 * @return the backdrop color callback instance
 	 */
-	public ColorCallback<ScaleScriptableContext> getBackdropColorCallback() {
+	public ColorCallback<ScaleContext> getBackdropColorCallback() {
 		return backdropColorCallback;
 	}
 
@@ -223,7 +223,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 * 
 	 * @param backdropColorCallback the backdrop color callback instance
 	 */
-	public void setBackdropColor(ColorCallback<ScaleScriptableContext> backdropColorCallback) {
+	public void setBackdropColor(ColorCallback<ScaleContext> backdropColorCallback) {
 		// stores callback
 		this.backdropColorCallback = backdropColorCallback;
 		// checks if consistent

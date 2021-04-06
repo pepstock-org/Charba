@@ -27,7 +27,7 @@ import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.FontCallback;
-import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -616,7 +616,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param provider font provider instance
 	 * @return a native object as font
 	 */
-	final NativeObject onFont(ScaleScriptableContext context, FontCallback<ScaleScriptableContext> callback, IsFontProvider provider) {
+	final NativeObject onFont(ScaleContext context, FontCallback<ScaleContext> callback, IsFontProvider provider) {
 		// gets value
 		FontItem result = ScriptableUtils.getOptionValue(context, callback);
 		// checks if result is consistent

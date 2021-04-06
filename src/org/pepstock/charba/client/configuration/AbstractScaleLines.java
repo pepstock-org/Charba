@@ -17,7 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
@@ -46,11 +46,11 @@ abstract class AbstractScaleLines extends AxisContainer {
 	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// color callback instance
-	private ColorCallback<ScaleScriptableContext> colorCallback = null;
+	private ColorCallback<ScaleContext> colorCallback = null;
 	// line width callback instance
-	private WidthCallback<ScaleScriptableContext> lineWidthCallback = null;
+	private WidthCallback<ScaleContext> lineWidthCallback = null;
 	// border dashoffset callback instance
-	private BorderDashOffsetCallback<ScaleScriptableContext> borderDashOffsetCallback = null;
+	private BorderDashOffsetCallback<ScaleContext> borderDashOffsetCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -102,12 +102,12 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), colorCallback, defaultValues.getColorAsString(), false));
+		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), colorCallback, defaultValues.getColorAsString(), false));
 		// gets value calling callback
-		lineWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), lineWidthCallback, defaultValues.getLineWidth()).intValue());
+		lineWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), lineWidthCallback, defaultValues.getLineWidth()).intValue());
 		// gets value calling callback
 		borderDashOffsetCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), borderDashOffsetCallback, defaultValues.getBorderDashOffset()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), borderDashOffsetCallback, defaultValues.getBorderDashOffset()).doubleValue());
 	}
 
 	/**
@@ -122,7 +122,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 * 
 	 * @return the color callback instance
 	 */
-	public ColorCallback<ScaleScriptableContext> getColorCallback() {
+	public ColorCallback<ScaleContext> getColorCallback() {
 		return colorCallback;
 	}
 
@@ -131,7 +131,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 * 
 	 * @param colorCallback the color callback instance
 	 */
-	public void setColor(ColorCallback<ScaleScriptableContext> colorCallback) {
+	public void setColor(ColorCallback<ScaleContext> colorCallback) {
 		// stores callback
 		this.colorCallback = colorCallback;
 		// checks if consistent
@@ -149,7 +149,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 * 
 	 * @return the line width callback instance
 	 */
-	public WidthCallback<ScaleScriptableContext> getLineWidthCallback() {
+	public WidthCallback<ScaleContext> getLineWidthCallback() {
 		return lineWidthCallback;
 	}
 
@@ -158,7 +158,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 * 
 	 * @param lineWidthCallback the line width callback instance.
 	 */
-	public void setLineWidth(WidthCallback<ScaleScriptableContext> lineWidthCallback) {
+	public void setLineWidth(WidthCallback<ScaleContext> lineWidthCallback) {
 		// stores callback
 		this.lineWidthCallback = lineWidthCallback;
 		// checks if consistent
@@ -176,7 +176,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 * 
 	 * @return the border dash offset callback instance
 	 */
-	public BorderDashOffsetCallback<ScaleScriptableContext> getBorderDashOffsetCallback() {
+	public BorderDashOffsetCallback<ScaleContext> getBorderDashOffsetCallback() {
 		return borderDashOffsetCallback;
 	}
 
@@ -185,7 +185,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 * 
 	 * @param borderDashOffsetCallback the border dash offset callback instance
 	 */
-	public void setBorderDashOffset(BorderDashOffsetCallback<ScaleScriptableContext> borderDashOffsetCallback) {
+	public void setBorderDashOffset(BorderDashOffsetCallback<ScaleContext> borderDashOffsetCallback) {
 		// stores callback
 		this.borderDashOffsetCallback = borderDashOffsetCallback;
 		// checks if consistent

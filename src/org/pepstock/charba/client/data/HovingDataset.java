@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -108,7 +108,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * 
 	 * @return the border width callback, if set, otherwise <code>null</code>
 	 */
-	public WidthCallback<ScriptableContext> getBorderWidthCallback() {
+	public WidthCallback<DatasetContext> getBorderWidthCallback() {
 		return getInternalBorderWidthCallback();
 	}
 
@@ -117,7 +117,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * 
 	 * @param borderWidthCallback the border width callback to set
 	 */
-	public void setBorderWidth(WidthCallback<ScriptableContext> borderWidthCallback) {
+	public void setBorderWidth(WidthCallback<DatasetContext> borderWidthCallback) {
 		setInternalBorderWidth(borderWidthCallback);
 	}
 
@@ -129,7 +129,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public void setHoverBackgroundColor(IsColor... colors) {
 		// resets callback
-		setHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setHoverBackgroundColor((ColorCallback<DatasetContext>) null);
 		// call super
 		super.setHoverBackgroundColor(colors);
 	}
@@ -142,7 +142,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public void setHoverBackgroundColor(String... colors) {
 		// resets callback
-		setHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setHoverBackgroundColor((ColorCallback<DatasetContext>) null);
 		// call super
 		super.setHoverBackgroundColor(colors);
 	}
@@ -155,7 +155,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public void setHoverBackgroundColor(Pattern... colors) {
 		// resets callback
-		setHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setHoverBackgroundColor((ColorCallback<DatasetContext>) null);
 		// call super
 		super.setHoverBackgroundColor(colors);
 	}
@@ -168,7 +168,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public void setHoverBackgroundColor(Gradient... colors) {
 		// resets callback
-		setHoverBackgroundColor((ColorCallback<ScriptableContext>) null);
+		setHoverBackgroundColor((ColorCallback<DatasetContext>) null);
 		// call super
 		super.setHoverBackgroundColor(colors);
 	}
@@ -239,7 +239,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public void setHoverBorderColor(IsColor... colors) {
 		// resets callback
-		setHoverBorderColor((ColorCallback<ScriptableContext>) null);
+		setHoverBorderColor((ColorCallback<DatasetContext>) null);
 		// call super
 		super.setHoverBorderColor(colors);
 	}
@@ -252,7 +252,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public void setHoverBorderColor(String... colors) {
 		// resets callback
-		setHoverBorderColor((ColorCallback<ScriptableContext>) null);
+		setHoverBorderColor((ColorCallback<DatasetContext>) null);
 		// call super
 		super.setHoverBorderColor(colors);
 	}
@@ -265,7 +265,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public void setHoverBorderColor(Gradient... colors) {
 		// resets callback
-		setHoverBorderColor((ColorCallback<ScriptableContext>) null);
+		setHoverBorderColor((ColorCallback<DatasetContext>) null);
 		// call super
 		super.setHoverBorderColor(colors);
 	}
@@ -328,7 +328,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * 
 	 * @return the hover border width callback, if set, otherwise <code>null</code>.
 	 */
-	public WidthCallback<ScriptableContext> getHoverBorderWidthCallback() {
+	public WidthCallback<DatasetContext> getHoverBorderWidthCallback() {
 		return getInternalHoverBorderWidthCallback();
 	}
 
@@ -337,7 +337,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * 
 	 * @param hoverBorderWidthCallback the hover border width callback to set
 	 */
-	public void setHoverBorderWidth(WidthCallback<ScriptableContext> hoverBorderWidthCallback) {
+	public void setHoverBorderWidth(WidthCallback<DatasetContext> hoverBorderWidthCallback) {
 		setInternalHoverBorderWidth(hoverBorderWidthCallback);
 	}
 

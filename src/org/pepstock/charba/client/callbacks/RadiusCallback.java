@@ -22,6 +22,6 @@ package org.pepstock.charba.client.callbacks;
  *
  * @param <C> type of context to pass to the callback.
  */
-public interface RadiusCallback<C extends AbstractScriptableContext> extends Scriptable<Double, C> {
+public interface RadiusCallback<C extends ChartContext> extends Scriptable<Double, C> {
 
 }

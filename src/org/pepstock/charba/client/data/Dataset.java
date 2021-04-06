@@ -27,7 +27,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
@@ -84,17 +84,17 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// hover background color callback instance
-	private ColorCallback<ScriptableContext> hoverBackgroundColorCallback = null;
+	private ColorCallback<DatasetContext> hoverBackgroundColorCallback = null;
 	// hover border color callback instance
-	private ColorCallback<ScriptableContext> hoverBorderColorCallback = null;
+	private ColorCallback<DatasetContext> hoverBorderColorCallback = null;
 	// hover borderWidth callback instance
-	private WidthCallback<ScriptableContext> hoverBorderWidthCallback = null;
+	private WidthCallback<DatasetContext> hoverBorderWidthCallback = null;
 	// background color callback instance
-	private ColorCallback<ScriptableContext> backgroundColorCallback = null;
+	private ColorCallback<DatasetContext> backgroundColorCallback = null;
 	// border color callback instance
-	private ColorCallback<ScriptableContext> borderColorCallback = null;
+	private ColorCallback<DatasetContext> borderColorCallback = null;
 	// borderWidth callback instance
-	private WidthCallback<ScriptableContext> borderWidthCallback = null;
+	private WidthCallback<DatasetContext> borderWidthCallback = null;
 
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
@@ -291,19 +291,19 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// -------------------------------
 		// gets value calling callback
 		this.backgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), backgroundColorCallback, CanvasObjectProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
+				.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), backgroundColorCallback, CanvasObjectProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
 		// gets value calling callback
-		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), borderColorCallback, CanvasObjectProperty.BORDER_COLOR, getDefaultBorderColorAsString()));
+		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), borderColorCallback, CanvasObjectProperty.BORDER_COLOR, getDefaultBorderColorAsString()));
 		// gets value calling callback
-		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), borderWidthCallback, getDefaultBorderWidth()).intValue());
+		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), borderWidthCallback, getDefaultBorderWidth()).intValue());
 		// gets value calling callback
 		this.hoverBackgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), hoverBackgroundColorCallback, CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
+				.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), hoverBackgroundColorCallback, CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
 		// gets value calling callback
 		this.hoverBorderColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderColorCallback, CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString()));
+				.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), hoverBorderColorCallback, CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString()));
 		// gets value calling callback
-		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
+		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
 	}
 
 	/*
@@ -468,7 +468,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the background color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback<ScriptableContext> getBackgroundColorCallback() {
+	public ColorCallback<DatasetContext> getBackgroundColorCallback() {
 		return backgroundColorCallback;
 	}
 
@@ -477,7 +477,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param backgroundColorCallback the background color callback.
 	 */
-	public void setBackgroundColor(ColorCallback<ScriptableContext> backgroundColorCallback) {
+	public void setBackgroundColor(ColorCallback<DatasetContext> backgroundColorCallback) {
 		// sets the callback
 		this.backgroundColorCallback = backgroundColorCallback;
 		// checks if callback is consistent
@@ -497,7 +497,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the border color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback<ScriptableContext> getBorderColorCallback() {
+	public ColorCallback<DatasetContext> getBorderColorCallback() {
 		return borderColorCallback;
 	}
 
@@ -506,7 +506,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param borderColorCallback the border color callback.
 	 */
-	public void setBorderColor(ColorCallback<ScriptableContext> borderColorCallback) {
+	public void setBorderColor(ColorCallback<DatasetContext> borderColorCallback) {
 		// sets the callback
 		this.borderColorCallback = borderColorCallback;
 		// checks if callback is consistent
@@ -526,7 +526,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the border width callback, if set, otherwise <code>null</code>.
 	 */
-	final WidthCallback<ScriptableContext> getInternalBorderWidthCallback() {
+	final WidthCallback<DatasetContext> getInternalBorderWidthCallback() {
 		return borderWidthCallback;
 	}
 
@@ -535,7 +535,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param borderWidthCallback the border width callback to set
 	 */
-	final void setInternalBorderWidth(WidthCallback<ScriptableContext> borderWidthCallback) {
+	final void setInternalBorderWidth(WidthCallback<DatasetContext> borderWidthCallback) {
 		// sets the callback
 		this.borderWidthCallback = borderWidthCallback;
 		// checks if callback is consistent
@@ -553,7 +553,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the hover background color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback<ScriptableContext> getHoverBackgroundColorCallback() {
+	public ColorCallback<DatasetContext> getHoverBackgroundColorCallback() {
 		return hoverBackgroundColorCallback;
 	}
 
@@ -562,7 +562,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param hoverBackgroundColorCallback the hover background color callback.
 	 */
-	public void setHoverBackgroundColor(ColorCallback<ScriptableContext> hoverBackgroundColorCallback) {
+	public void setHoverBackgroundColor(ColorCallback<DatasetContext> hoverBackgroundColorCallback) {
 		// sets the callback
 		this.hoverBackgroundColorCallback = hoverBackgroundColorCallback;
 		// checks if callback is consistent
@@ -582,7 +582,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the hover border color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback<ScriptableContext> getHoverBorderColorCallback() {
+	public ColorCallback<DatasetContext> getHoverBorderColorCallback() {
 		return hoverBorderColorCallback;
 	}
 
@@ -591,7 +591,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param hoverBorderColorCallback the hover border color callback.
 	 */
-	public void setHoverBorderColor(ColorCallback<ScriptableContext> hoverBorderColorCallback) {
+	public void setHoverBorderColor(ColorCallback<DatasetContext> hoverBorderColorCallback) {
 		// sets the callback
 		this.hoverBorderColorCallback = hoverBorderColorCallback;
 		// checks if callback is consistent
@@ -611,7 +611,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the hover border width callback, if set, otherwise <code>null</code>.
 	 */
-	final WidthCallback<ScriptableContext> getInternalHoverBorderWidthCallback() {
+	final WidthCallback<DatasetContext> getInternalHoverBorderWidthCallback() {
 		return hoverBorderWidthCallback;
 	}
 
@@ -620,7 +620,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param hoverBorderWidthCallback the hover border width callback to set
 	 */
-	final void setInternalHoverBorderWidth(WidthCallback<ScriptableContext> hoverBorderWidthCallback) {
+	final void setInternalHoverBorderWidth(WidthCallback<DatasetContext> hoverBorderWidthCallback) {
 		// sets the callback
 		this.hoverBorderWidthCallback = hoverBorderWidthCallback;
 		// checks if callback is consistent
@@ -1156,7 +1156,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
 	 * @return a value of property as color
 	 */
-	protected final Object invokeColorCallback(ScriptableContext context, Scriptable<?, ScriptableContext> callback, CanvasObjectKey property, String defaultValue) {
+	protected final Object invokeColorCallback(DatasetContext context, Scriptable<?, DatasetContext> callback, CanvasObjectKey property, String defaultValue) {
 		// checks if the context and chart are correct
 		if (context != null) {
 			// calls callback

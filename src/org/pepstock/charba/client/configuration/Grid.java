@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
@@ -47,11 +47,11 @@ public class Grid extends AbstractScaleLines {
 	// callback proxy to invoke the tick border dash offset function
 	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> tickBorderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// color callback instance
-	private ColorCallback<ScaleScriptableContext> tickColorCallback = null;
+	private ColorCallback<ScaleContext> tickColorCallback = null;
 	// tick line width callback instance
-	private WidthCallback<ScaleScriptableContext> tickWidthCallback = null;
+	private WidthCallback<ScaleContext> tickWidthCallback = null;
 	// tick border dash offset callback instance
-	private BorderDashOffsetCallback<ScaleScriptableContext> tickBorderDashOffsetCallback = null;
+	private BorderDashOffsetCallback<ScaleContext> tickBorderDashOffsetCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -98,13 +98,13 @@ public class Grid extends AbstractScaleLines {
 		// -------------------------------
 		// gets value calling callback
 		tickColorCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), tickColorCallback, getAxis().getDefaultValues().getGrid().getTickColorAsString(), false));
+				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickColorCallback, getAxis().getDefaultValues().getGrid().getTickColorAsString(), false));
 		// gets value calling callback
 		tickWidthCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), tickWidthCallback, getAxis().getDefaultValues().getGrid().getTickWidth()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickWidthCallback, getAxis().getDefaultValues().getGrid().getTickWidth()).intValue());
 		// gets value calling callback
 		tickBorderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils
-				.getOptionValue(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), tickBorderDashOffsetCallback, getAxis().getDefaultValues().getGrid().getTickBorderDashOffset()).doubleValue());
+				.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickBorderDashOffsetCallback, getAxis().getDefaultValues().getGrid().getTickBorderDashOffset()).doubleValue());
 	}
 
 	/*
@@ -162,7 +162,7 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public void setColor(IsColor... color) {
 		// reset callback if there is
-		setColor((ColorCallback<ScaleScriptableContext>) null);
+		setColor((ColorCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getGrid().setColor(color);
 	}
@@ -176,7 +176,7 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public void setColor(String... color) {
 		// reset callback if there is
-		setColor((ColorCallback<ScaleScriptableContext>) null);
+		setColor((ColorCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getGrid().setColor(color);
 	}
@@ -292,7 +292,7 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public void setBorderDashOffset(double borderDashOffset) {
 		// reset callback if there is
-		setBorderDashOffset((BorderDashOffsetCallback<ScaleScriptableContext>) null);
+		setBorderDashOffset((BorderDashOffsetCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getGrid().setBorderDashOffset(borderDashOffset);
 	}
@@ -313,7 +313,7 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public void setLineWidth(int... lineWidth) {
 		// reset callback if there is
-		setLineWidth((WidthCallback<ScaleScriptableContext>) null);
+		setLineWidth((WidthCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getGrid().setLineWidth(lineWidth);
 	}
@@ -470,7 +470,7 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public void setTickBorderDashOffset(double tickBorderDashOffset) {
 		// reset callback if there is
-		setTickBorderDashOffset((BorderDashOffsetCallback<ScaleScriptableContext>) null);
+		setTickBorderDashOffset((BorderDashOffsetCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getGrid().setTickBorderDashOffset(tickBorderDashOffset);
 	}
@@ -491,7 +491,7 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public void setTickColor(IsColor... color) {
 		// reset callback if there is
-		setTickColor((ColorCallback<ScaleScriptableContext>) null);
+		setTickColor((ColorCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getGrid().setTickColor(color);
 	}
@@ -503,7 +503,7 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public void setTickColor(String... color) {
 		// reset callback if there is
-		setTickColor((ColorCallback<ScaleScriptableContext>) null);
+		setTickColor((ColorCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getGrid().setTickColor(color);
 	}
@@ -544,7 +544,7 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public void setTickWidth(int... tickWidth) {
 		// reset callback if there is
-		setTickWidth((WidthCallback<ScaleScriptableContext>) null);
+		setTickWidth((WidthCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getGrid().setTickWidth(tickWidth);
 	}
@@ -574,7 +574,7 @@ public class Grid extends AbstractScaleLines {
 	 * 
 	 * @return the tick color callback instance
 	 */
-	public ColorCallback<ScaleScriptableContext> getTickColorCallback() {
+	public ColorCallback<ScaleContext> getTickColorCallback() {
 		return tickColorCallback;
 	}
 
@@ -583,7 +583,7 @@ public class Grid extends AbstractScaleLines {
 	 * 
 	 * @param tickColorCallback the tick color callback instance
 	 */
-	public void setTickColor(ColorCallback<ScaleScriptableContext> tickColorCallback) {
+	public void setTickColor(ColorCallback<ScaleContext> tickColorCallback) {
 		// stores callback
 		this.tickColorCallback = tickColorCallback;
 		// checks if consistent
@@ -601,7 +601,7 @@ public class Grid extends AbstractScaleLines {
 	 * 
 	 * @return the tick width callback instance
 	 */
-	public WidthCallback<ScaleScriptableContext> getTickWidthCallback() {
+	public WidthCallback<ScaleContext> getTickWidthCallback() {
 		return tickWidthCallback;
 	}
 
@@ -610,7 +610,7 @@ public class Grid extends AbstractScaleLines {
 	 * 
 	 * @param tickWidthCallback the tick width callback instance.
 	 */
-	public void setTickWidth(WidthCallback<ScaleScriptableContext> tickWidthCallback) {
+	public void setTickWidth(WidthCallback<ScaleContext> tickWidthCallback) {
 		// stores callback
 		this.tickWidthCallback = tickWidthCallback;
 		// checks if consistent
@@ -628,7 +628,7 @@ public class Grid extends AbstractScaleLines {
 	 * 
 	 * @return the tick border dash offset callback instance
 	 */
-	public BorderDashOffsetCallback<ScaleScriptableContext> getTickBorderDashOffsetCallback() {
+	public BorderDashOffsetCallback<ScaleContext> getTickBorderDashOffsetCallback() {
 		return tickBorderDashOffsetCallback;
 	}
 
@@ -637,7 +637,7 @@ public class Grid extends AbstractScaleLines {
 	 * 
 	 * @param tickBorderDashOffsetCallback the tick border dash offset callback instance
 	 */
-	public void setTickBorderDashOffset(BorderDashOffsetCallback<ScaleScriptableContext> tickBorderDashOffsetCallback) {
+	public void setTickBorderDashOffset(BorderDashOffsetCallback<ScaleContext> tickBorderDashOffsetCallback) {
 		// stores callback
 		this.tickBorderDashOffsetCallback = tickBorderDashOffsetCallback;
 		// checks if consistent

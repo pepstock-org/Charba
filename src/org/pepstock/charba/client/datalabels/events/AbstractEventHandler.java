@@ -29,7 +29,7 @@ public abstract class AbstractEventHandler implements EnterEventHandler, LeaveEv
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.ClickEventHandler#onClick(org.pepstock.charba.client.datalabels.DataLabelsScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.events.ClickEventHandler#onClick(org.pepstock.charba.client.datalabels.DataLabelsContext)
 	 */
 	@Override
 	public boolean onClick(DataLabelsContext context) {
@@ -39,7 +39,7 @@ public abstract class AbstractEventHandler implements EnterEventHandler, LeaveEv
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.LeaveEventHandler#onLeave(org.pepstock.charba.client.datalabels.DataLabelsScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.events.LeaveEventHandler#onLeave(org.pepstock.charba.client.datalabels.DataLabelsContext)
 	 */
 	@Override
 	public boolean onLeave(DataLabelsContext context) {
@@ -49,7 +49,7 @@ public abstract class AbstractEventHandler implements EnterEventHandler, LeaveEv
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.EnterEventHandler#onEnter(org.pepstock.charba.client.datalabels.DataLabelsScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.events.EnterEventHandler#onEnter(org.pepstock.charba.client.datalabels.DataLabelsContext)
 	 */
 	@Override
 	public boolean onEnter(DataLabelsContext context) {

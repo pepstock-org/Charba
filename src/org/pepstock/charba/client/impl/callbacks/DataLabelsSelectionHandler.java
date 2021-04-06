@@ -20,8 +20,8 @@ import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.DataLabelsContext;
+import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
@@ -87,7 +87,7 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.AbstractEventHandler#onClick(org.pepstock.charba.client.datalabels.DataLabelsScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.events.AbstractEventHandler#onClick(org.pepstock.charba.client.datalabels.DataLabelsContext)
 	 */
 	@Override
 	public boolean onClick(DataLabelsContext context) {

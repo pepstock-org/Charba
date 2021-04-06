@@ -31,7 +31,7 @@ import org.pepstock.charba.client.items.TooltipModel;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TooltipScriptableContext extends AbstractScriptableContext {
+public final class TooltipContext extends ChartContext {
 
 	/**
 	 * Name of properties of native object.
@@ -74,7 +74,7 @@ public final class TooltipScriptableContext extends AbstractScriptableContext {
 	 * 
 	 * @param envelop envelop of public object instance to be wrapped.
 	 */
-	public TooltipScriptableContext(ConfigurationEnvelop<NativeObject> envelop) {
+	public TooltipContext(ConfigurationEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
@@ -83,7 +83,7 @@ public final class TooltipScriptableContext extends AbstractScriptableContext {
 	 * 
 	 * @param nativeObject public object instance to be wrapped.
 	 */
-	private TooltipScriptableContext(NativeObject nativeObject) {
+	private TooltipContext(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

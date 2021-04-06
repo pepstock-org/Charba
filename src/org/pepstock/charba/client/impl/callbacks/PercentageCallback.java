@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.impl.callbacks;
 
 import org.pepstock.charba.client.commons.Constants;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.DataLabelsContext;
+import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.items.DataItem;
@@ -105,7 +105,7 @@ public final class PercentageCallback implements FormatterCallback {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.callbacks.FormatterCallback#invoke(org.pepstock.charba.client.datalabels.DataLabelsScriptableContext,
+	 * @see org.pepstock.charba.client.datalabels.callbacks.FormatterCallback#invoke(org.pepstock.charba.client.datalabels.DataLabelsContext,
 	 * org.pepstock.charba.client.items.DataItem)
 	 */
 	@Override

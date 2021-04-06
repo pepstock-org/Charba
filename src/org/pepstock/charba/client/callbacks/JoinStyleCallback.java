@@ -23,6 +23,6 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public interface JoinStyleCallback extends Scriptable<JoinStyle, ScriptableContext> {
+public interface JoinStyleCallback extends Scriptable<JoinStyle, DatasetContext> {
 
 }

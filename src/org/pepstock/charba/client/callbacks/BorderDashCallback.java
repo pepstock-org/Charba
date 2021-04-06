@@ -24,6 +24,6 @@ import java.util.List;
  * 
  * @param <C> type of context to pass to the callback.
  */
-public interface BorderDashCallback<C extends AbstractScriptableContext> extends Scriptable<List<Integer>, C> {
+public interface BorderDashCallback<C extends ChartContext> extends Scriptable<List<Integer>, C> {
 
 }

@@ -21,6 +21,6 @@ package org.pepstock.charba.client.callbacks;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public interface SimplePaddingCallback extends Scriptable<Integer, ScaleScriptableContext> {
+public interface SimplePaddingCallback extends Scriptable<Integer, ScaleContext> {
 
 }

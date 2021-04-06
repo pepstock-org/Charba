@@ -45,7 +45,7 @@ public final class ScriptableUtils {
 	 * @param context scriptable context
 	 * @return <code>true</code> if context is consistent, otherwise <code>false</code>
 	 */
-	public static boolean isContextConsistent(AbstractScriptableContext context) {
+	public static boolean isContextConsistent(ChartContext context) {
 		// checks if arguments are consistent
 		return context != null && context.isConsistent();
 	}
@@ -56,7 +56,7 @@ public final class ScriptableUtils {
 	 * @param context scriptable context
 	 * @return the chart instance, contained in the context if context is consistent
 	 */
-	public static IsChart retrieveChart(AbstractScriptableContext context) {
+	public static IsChart retrieveChart(ChartContext context) {
 		// checks if arguments are consistent
 		if (isContextConsistent(context)) {
 			// gets chart instance
@@ -79,7 +79,7 @@ public final class ScriptableUtils {
 	 * @param <C> type of context to pass to the callback
 	 * @return a value of property related to the enumeration value
 	 */
-	public static <T extends Key, C extends AbstractScriptableContext> T getOptionValueAsString(C context, Scriptable<T, C> callback) {
+	public static <T extends Key, C extends ChartContext> T getOptionValueAsString(C context, Scriptable<T, C> callback) {
 		// invokes the other methods with null as default value
 		return getOptionValueAsString(context, callback, null);
 	}
@@ -94,7 +94,7 @@ public final class ScriptableUtils {
 	 * @param <C> type of context to pass to the callback
 	 * @return a value of property related to the enumeration value
 	 */
-	public static <T extends Key, C extends AbstractScriptableContext> T getOptionValueAsString(C context, Scriptable<T, C> callback, T defaultValue) {
+	public static <T extends Key, C extends ChartContext> T getOptionValueAsString(C context, Scriptable<T, C> callback, T defaultValue) {
 		// checks if the chart is correct
 		if (isContextConsistent(context) && callback != null) {
 			// calls callback
@@ -118,7 +118,7 @@ public final class ScriptableUtils {
 	 * @param <C> type of context to pass to the callback
 	 * @return a value of property as result of callback invocation
 	 */
-	public static <T, C extends AbstractScriptableContext> T getOptionValue(C context, Scriptable<T, C> callback) {
+	public static <T, C extends ChartContext> T getOptionValue(C context, Scriptable<T, C> callback) {
 		return getOptionValue(context, callback, null);
 	}
 
@@ -132,7 +132,7 @@ public final class ScriptableUtils {
 	 * @param <C> type of context to pass to the callback
 	 * @return a value of property as result of callback invocation
 	 */
-	public static <T, C extends AbstractScriptableContext> T getOptionValue(C context, Scriptable<T, C> callback, T defaultValue) {
+	public static <T, C extends ChartContext> T getOptionValue(C context, Scriptable<T, C> callback, T defaultValue) {
 		// checks if the chart is correct
 		if (isContextConsistent(context) && callback != null) {
 			T result = callback.invoke(context);
@@ -155,7 +155,7 @@ public final class ScriptableUtils {
 	 * @param <C> type of context to pass to the callback
 	 * @return a value of property as color
 	 */
-	public static <C extends AbstractScriptableContext> Object getOptionValueAsColor(C context, Scriptable<?, C> callback, String defaultValue) {
+	public static <C extends ChartContext> Object getOptionValueAsColor(C context, Scriptable<?, C> callback, String defaultValue) {
 		return getOptionValueAsColor(context, callback, defaultValue, true);
 	}
 
@@ -169,7 +169,7 @@ public final class ScriptableUtils {
 	 * @param <C> type of context to pass to the callback
 	 * @return a value of property as color
 	 */
-	public static <C extends AbstractScriptableContext> Object getOptionValueAsColor(C context, Scriptable<?, C> callback, String defaultValue, boolean hasPattern) {
+	public static <C extends ChartContext> Object getOptionValueAsColor(C context, Scriptable<?, C> callback, String defaultValue, boolean hasPattern) {
 		// checks if the context is consistent
 		if (isContextConsistent(context) && callback != null) {
 			// calls callback
@@ -191,7 +191,7 @@ public final class ScriptableUtils {
 	 * @param <C> type of context to pass to the callback
 	 * @return a value of property as color
 	 */
-	public static <C extends AbstractScriptableContext> Object handleCallbackResultAsColor(C context, Object result, String defaultValue, boolean hasPattern) {
+	public static <C extends ChartContext> Object handleCallbackResultAsColor(C context, Object result, String defaultValue, boolean hasPattern) {
 		// checks if context is consistent
 		if (context == null) {
 			// exception!
@@ -200,10 +200,10 @@ public final class ScriptableUtils {
 		// invokes common handler
 		Object checkedResult = doHandleCallbackResultAsColor(context, result, defaultValue, hasPattern);
 		// checks if is a gradient
-		if (result instanceof Gradient && context instanceof AbstractDatasetScriptableContext) {
+		if (result instanceof Gradient && context instanceof AbstractDatasetContext) {
 			// cast the context to the data set context
 			// in order to get data and data set index
-			AbstractDatasetScriptableContext datasetContext = (AbstractDatasetScriptableContext) context;
+			AbstractDatasetContext datasetContext = (AbstractDatasetContext) context;
 			// is gradient instance
 			Gradient gradient = (Gradient) result;
 			// then it must be translated in the a canvas gradient
@@ -221,7 +221,7 @@ public final class ScriptableUtils {
 	 * @param hasPattern if <code>true</code> is able to manage also {@link Pattern} or {@link CanvasPatternItem}, otherwise it skips them.
 	 * @return a value of property as color
 	 */
-	private static Object doHandleCallbackResultAsColor(AbstractScriptableContext context, Object result, String defaultValue, boolean hasPattern) {
+	private static Object doHandleCallbackResultAsColor(ChartContext context, Object result, String defaultValue, boolean hasPattern) {
 		// checks if the context and chart are correct
 		if (context != null && IsChart.isValid(context.getChart()) && result != null) {
 			// gets chart instance

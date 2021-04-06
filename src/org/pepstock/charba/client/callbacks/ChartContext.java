@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.ContextType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractScriptableContext extends NativeObjectContainer{
+public class ChartContext extends NativeObjectContainer{
 
 	/**
 	 * Name of properties of native object.
@@ -65,7 +65,7 @@ public abstract class AbstractScriptableContext extends NativeObjectContainer{
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	protected AbstractScriptableContext(NativeObject nativeObject) {
+	protected ChartContext(NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if object is consistent
 		if (nativeObject == null) {

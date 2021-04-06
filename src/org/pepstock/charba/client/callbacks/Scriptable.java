@@ -23,7 +23,7 @@ package org.pepstock.charba.client.callbacks;
  * @param <T> type of result of invocation method.
  * @param <C> type of context to pass to the callback.
  */
-public interface Scriptable<T, C extends AbstractScriptableContext> {
+public interface Scriptable<T, C extends ChartContext> {
 
 	/**
 	 * Returns the value of property at runtime, using the chart instance and the context.

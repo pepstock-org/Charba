@@ -20,7 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.BorderDashCallback;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.ScaleScriptableContext;
+import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
@@ -48,7 +48,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	private final CallbackProxy<ScriptableFunctions.ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border dashoffset callback instance
-	private BorderDashCallback<ScaleScriptableContext> borderDashCallback = null;
+	private BorderDashCallback<ScaleContext> borderDashCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -90,7 +90,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 		super(axis, axis.getDefaultValues().getAngleLines());
 		// gets value calling callback
 		// gets value calling callback
-		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScaleScriptableContext(getAxis(), new ConfigurationEnvelop<>(context)), borderDashCallback));
+		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), borderDashCallback));
 	}
 
 	/*
@@ -128,7 +128,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	public void setColor(IsColor color) {
 		// reset callback if there is
-		setColor((ColorCallback<ScaleScriptableContext>) null);
+		setColor((ColorCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getAngleLines().setColor(color);
 	}
@@ -140,7 +140,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	public void setColor(String color) {
 		// reset callback if there is
-		setColor((ColorCallback<ScaleScriptableContext>) null);
+		setColor((ColorCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getAngleLines().setColor(color);
 	}
@@ -170,7 +170,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	public void setLineWidth(int lineWidth) {
 		// reset callback if there is
-		setLineWidth((WidthCallback<ScaleScriptableContext>) null);
+		setLineWidth((WidthCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getAngleLines().setLineWidth(lineWidth);
 	}
@@ -191,7 +191,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	public void setBorderDash(int... borderDash) {
 		// reset callback if there is
-		setBorderDash((BorderDashCallback<ScaleScriptableContext>) null);
+		setBorderDash((BorderDashCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getAngleLines().setBorderDash(borderDash);
 	}
@@ -212,7 +212,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	public void setBorderDashOffset(double borderDashOffset) {
 		// reset callback if there is
-		setBorderDashOffset((BorderDashOffsetCallback<ScaleScriptableContext>) null);
+		setBorderDashOffset((BorderDashOffsetCallback<ScaleContext>) null);
 		// stores value
 		getAxis().getScale().getAngleLines().setBorderDashOffset(borderDashOffset);
 	}
@@ -231,7 +231,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * 
 	 * @return the border dash callback when element is hovered, if set, otherwise <code>null</code>.
 	 */
-	public BorderDashCallback<ScaleScriptableContext> getBorderDashCallback() {
+	public BorderDashCallback<ScaleContext> getBorderDashCallback() {
 		return borderDashCallback;
 	}
 
@@ -240,7 +240,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * 
 	 * @param borderDashCallback the border dash callback when element is hovered.
 	 */
-	public void setBorderDash(BorderDashCallback<ScaleScriptableContext> borderDashCallback) {
+	public void setBorderDash(BorderDashCallback<ScaleContext> borderDashCallback) {
 		// sets the callback
 		this.borderDashCallback = borderDashCallback;
 		// checks if callback is consistent
@@ -260,7 +260,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * @param borderDashCallback border dash callback instance
 	 * @return an array of integer
 	 */
-	private Array onBorderDash(ScaleScriptableContext context, BorderDashCallback<ScaleScriptableContext> borderDashCallback) {
+	private Array onBorderDash(ScaleContext context, BorderDashCallback<ScaleContext> borderDashCallback) {
 		// gets value
 		List<Integer> result = ScriptableUtils.getOptionValue(context, borderDashCallback);
 		// default result

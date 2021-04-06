@@ -21,7 +21,7 @@ import java.util.List;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayInteger;
@@ -47,9 +47,9 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border offset callback instance
-	private OffsetCallback<ScriptableContext> offsetCallback = null;
+	private OffsetCallback<DatasetContext> offsetCallback = null;
 	// hover offset callback instance
-	private OffsetCallback<ScriptableContext> hoverOffsetCallback = null;
+	private OffsetCallback<DatasetContext> hoverOffsetCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -149,9 +149,9 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), offsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
+		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), offsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
 		// gets value calling callback
-		hoverOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScriptableContext(new DataEnvelop<>(context)), hoverOffsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
+		hoverOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), hoverOffsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
 	}
 
 	/*
@@ -241,7 +241,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @return the offset callback, if set, otherwise <code>null</code>.
 	 */
-	public OffsetCallback<ScriptableContext> getOffsetCallback() {
+	public OffsetCallback<DatasetContext> getOffsetCallback() {
 		return offsetCallback;
 	}
 
@@ -250,7 +250,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @param offsetCallback the offset callback.
 	 */
-	public void setOffset(OffsetCallback<ScriptableContext> offsetCallback) {
+	public void setOffset(OffsetCallback<DatasetContext> offsetCallback) {
 		// sets the callback
 		this.offsetCallback = offsetCallback;
 		// checks if callback is consistent
@@ -268,7 +268,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @return the offset callback, when dataset is hovered, if set, otherwise <code>null</code>.
 	 */
-	public OffsetCallback<ScriptableContext> getHoverOffsetCallback() {
+	public OffsetCallback<DatasetContext> getHoverOffsetCallback() {
 		return hoverOffsetCallback;
 	}
 
@@ -277,7 +277,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * 
 	 * @param hoverOffsetCallback the offset callback, when dataset is hovered.
 	 */
-	public void setHoverOffset(OffsetCallback<ScriptableContext> hoverOffsetCallback) {
+	public void setHoverOffset(OffsetCallback<DatasetContext> hoverOffsetCallback) {
 		// sets the callback
 		this.hoverOffsetCallback = hoverOffsetCallback;
 		// checks if callback is consistent

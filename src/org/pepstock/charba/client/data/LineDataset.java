@@ -21,7 +21,7 @@ import java.util.List;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.CubicInterpolationModeCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -154,7 +154,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		cubicInterpolationModeCallbackProxy.setCallback((contextFunction, context) -> onCubicInterpolationMode(new ScriptableContext(new DataEnvelop<>(context))));
+		cubicInterpolationModeCallbackProxy.setCallback((contextFunction, context) -> onCubicInterpolationMode(new DatasetContext(new DataEnvelop<>(context))));
 	}
 
 	/**
@@ -445,7 +445,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param context native object as context.
 	 * @return a object property value, as {@link CubicInterpolationMode}
 	 */
-	private String onCubicInterpolationMode(ScriptableContext context) {
+	private String onCubicInterpolationMode(DatasetContext context) {
 		// gets value
 		CubicInterpolationMode result = ScriptableUtils.getOptionValue(context, cubicInterpolationModeCallback);
 		// checks result

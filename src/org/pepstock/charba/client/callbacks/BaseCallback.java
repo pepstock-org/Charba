@@ -23,6 +23,6 @@ import org.pepstock.charba.client.data.BarDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface BaseCallback extends Scriptable<Double, ScriptableContext> {
+public interface BaseCallback extends Scriptable<Double, DatasetContext> {
 
 }

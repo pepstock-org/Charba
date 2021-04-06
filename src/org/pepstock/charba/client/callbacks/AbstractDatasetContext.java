@@ -29,7 +29,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractDatasetScriptableContext extends AbstractScriptableContext {
+public abstract class AbstractDatasetContext extends ChartContext {
 
 	/**
 	 * Name of properties of native object.
@@ -68,7 +68,7 @@ public abstract class AbstractDatasetScriptableContext extends AbstractScriptabl
 	 * 
 	 * @param nativeObject native object instance to be wrapped
 	 */
-	protected AbstractDatasetScriptableContext(NativeObject nativeObject) {
+	protected AbstractDatasetContext(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

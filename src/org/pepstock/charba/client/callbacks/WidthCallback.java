@@ -23,6 +23,6 @@ package org.pepstock.charba.client.callbacks;
  *
  * @param <C> type of context to pass to the callback.
  */
-public interface WidthCallback<C extends AbstractScriptableContext> extends Scriptable<Integer, C> {
+public interface WidthCallback<C extends ChartContext> extends Scriptable<Integer, C> {
 
 }
