@@ -321,6 +321,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `BorderDashCallback` interface to `RadialAngleLines` configuration in order to set `borderDash` property at runtime.
  * add `FontCallback` interface to `RadialPointLabels` and `Tick` configuration in order to set `font` property at runtime.
  * add `ShowLabelBackdropCallback` interface to `RadialLinearTick` or `Tick` configuration in order to set `showLabelBackdrop` property at runtime.
+ * add `count` property to `RadialLinearTick`, `CartesianLinearTick` and `Tick` configuration classes.
  * add `backdropPadding` property to `RadialLinearTick` and `Tick` configuration.
  * add `SimplePaddingCallback` interface to `RadialPointLabels`configuration in order to set `padding` property at runtime.
  * add `format` property to all numeric ticks (cartesian linear and log, radial linear) in order to apply the number formatting by [ECMAScript Internationalization API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat), leveraging on **Charba INTL NumberFormat** implementation.

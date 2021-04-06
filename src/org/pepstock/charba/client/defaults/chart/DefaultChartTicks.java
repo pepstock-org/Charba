@@ -136,6 +136,16 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getCount()
+	 */
+	@Override
+	public int getCount() {
+		return ticks.getCount();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMaxRotation()
 	 */
 	@Override

@@ -58,6 +58,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		SAMPLE_SIZE("sampleSize"),
 		// common linear
 		FORMAT("format"),
+		COUNT("count"),
 		// linear cartesian
 		MAX_TICKS_LIMIT("maxTicksLimit"),
 		PRECISION("precision"),
@@ -236,6 +237,29 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	@Override
 	public int getLabelOffset() {
 		return getValue(Property.LABEL_OFFSET, getDefaultValues().getLabelOffset());
+	}
+
+	/**
+	 * Sets the number of ticks to generate.<br>
+	 * If specified, this overrides the automatic generation.
+	 * 
+	 * @param count the number of ticks to generate.<br>
+	 *            If specified, this overrides the automatic generation
+	 */
+	public void setCount(int count) {
+		setValueAndAddToParent(Property.COUNT, count);
+	}
+
+	/**
+	 * Returns the number of ticks to generate.<br>
+	 * If specified, this overrides the automatic generation.
+	 * 
+	 * @return the number of ticks to generate.<br>
+	 *         If specified, this overrides the automatic generation
+	 */
+	@Override
+	public int getCount() {
+		return getValue(Property.COUNT, getDefaultValues().getCount());
 	}
 
 	/**

@@ -68,6 +68,8 @@ public class DefaultTicks implements IsDefaultTicks {
 
 	private static final int DEFAULT_TEXT_STROKE_WIDTH = 0;
 
+	private static final int DEFAULT_COUNT = UndefinedValues.INTEGER;
+
 	private final DefaultMajor major = new DefaultMajor();
 
 	private final DefaultRoutedFont font = new DefaultRoutedFont();
@@ -169,6 +171,16 @@ public class DefaultTicks implements IsDefaultTicks {
 	@Override
 	public int getLabelOffset() {
 		return DEFAULT_LABEL_OFFSET;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getCount()
+	 */
+	@Override
+	public int getCount() {
+		return DEFAULT_COUNT;
 	}
 
 	/*

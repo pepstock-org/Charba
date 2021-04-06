@@ -31,6 +31,36 @@ public interface IsLinearTick extends IsNumericTick {
 	 * @return the axis
 	 */
 	Axis getAxis();
+	
+	/**
+	 * Sets the number of ticks to generate.<br>
+	 * If specified, this overrides the automatic generation.
+	 * 
+	 * @param count the number of ticks to generate.<br>
+	 *            If specified, this overrides the automatic generation
+	 */
+	default void setCount(int count) {
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			getAxis().getScale().getTicks().setCount(count);
+		}
+	}
+
+	/**
+	 * Returns the number of ticks to generate.<br>
+	 * If specified, this overrides the automatic generation.
+	 * 
+	 * @return the number of ticks to generate.<br>
+	 *         If specified, this overrides the automatic generation
+	 */
+	default int getCount() {
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			return getAxis().getScale().getTicks().getCount();
+		}
+		// if here, axis is not consistent
+		return Defaults.get().getScale().getTicks().getCount();
+	}
 
 	/**
 	 * Sets the maximum number of ticks and grid to show.

@@ -68,6 +68,15 @@ public interface IsDefaultTicks extends IsDefaultFontContainer {
 	 * @return the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and the x direction for the y axis).
 	 */
 	int getLabelOffset();
+	
+	/**
+	 * Returns the number of ticks to generate.<br>
+	 * If specified, this overrides the automatic generation.
+	 * 
+	 * @return the number of ticks to generate.<br>
+	 *         If specified, this overrides the automatic generation
+	 */
+	int getCount();
 
 	/**
 	 * Returns the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
