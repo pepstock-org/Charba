@@ -34,7 +34,13 @@
       position: 'default',
       precision: 0,
       color: Chart.defaults.color,
-      font: Chart.helpers.clone(chart.options.font),
+      font: {
+        family: chart.options.font.family,
+        size: chart.options.font.size,
+        style: chart.options.font.style,
+        weight: chart.options.font.weight,
+        lineHeight: chart.options.font.lineHeight,
+      },
       shadowOffsetX: 3,
       shadowOffsetY: 3,
       shadowColor: 'rgba(0,0,0,0.3)',
@@ -79,6 +85,7 @@
     ctx.save();
 
 	this.font = typeof this.options.font === 'function' ? this.getFont(dataset, element, index) : this.options.font;
+
     ctx.font = Chart.helpers.toFontString(this.font);
     var renderInfo = this.getRenderInfo(element, label);
     if (!this.drawable(element, label, renderInfo)) {
