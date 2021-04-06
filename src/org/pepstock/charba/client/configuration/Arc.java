@@ -118,4 +118,22 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	public int getOffset() {
 		return getConfiguration().getElements().getArc().getOffset();
 	}
+
+	/**
+	 * Sets the arc border radius (in pixels).
+	 * 
+	 * @param borderRadius the arc border radius (in pixels).
+	 */
+	public void setBorderRadius(int borderRadius) {
+		getConfiguration().getElements().getArc().setBorderRadius(borderRadius);
+	}
+
+	/**
+	 * Returns the arc border radius (in pixels).
+	 * 
+	 * @return the arc border radius (in pixels).
+	 */
+	public int getBorderRadius() {
+		return getConfiguration().getElements().getArc().getBorderRadius();
+	}
 }

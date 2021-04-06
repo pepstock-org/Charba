@@ -36,7 +36,8 @@ public final class Arc extends AbstractElement<IsDefaultArc> implements IsDefaul
 		BORDER_ALIGN("borderAlign"),
 		WEIGHT("weight"),
 		ANGLE("angle"),
-		OFFSET("offset");
+		OFFSET("offset"),
+		BORDER_RADIUS("borderRadius");
 
 		// name value of property
 		private final String value;
@@ -150,5 +151,24 @@ public final class Arc extends AbstractElement<IsDefaultArc> implements IsDefaul
 	@Override
 	public int getOffset() {
 		return getValue(Property.OFFSET, getDefaultValues().getOffset());
+	}
+	
+	/**
+	 * Sets the arc border radius (in pixels).
+	 * 
+	 * @param borderRadius the arc border radius (in pixels).
+	 */
+	public void setBorderRadius(int borderRadius) {
+		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadius);
+	}
+
+	/**
+	 * Returns the arc border radius (in pixels).
+	 * 
+	 * @return the arc border radius (in pixels).
+	 */
+	@Override
+	public int getBorderRadius() {
+		return getValue(Property.BORDER_RADIUS, getDefaultValues().getBorderRadius());
 	}
 }

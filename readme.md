@@ -220,6 +220,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `textAlign` property to `LegendLabels` options and configuration classes. 
  * add `align` property to `Title` options and configuration classes.
  * add `pointStyle` property to `Bar` element configuration and options classes.
+ * add `borderRadius` property to `Arc` element configuration and options classes.
  * add `Datasets` class in order to manage data sets options and configuration classes.
  * add `Interaction` class in order to manage data sets options and configuration classes.
  * implement `decimation` plugin options and configuration.
@@ -355,6 +356,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `getXAxisID` and `getXAxisID` methods in `BarDataset` class in order to return a `IsScaleId` instance instead of a `String`.
  * add `BarBorderWidthCallback` interface to use for `borderWidth` and `hoverBorderWidth` callbacks in `BarDataset` class.
  * add `pointStyle` property to `BarDataset` class.
+ * add `borderRadius` property to `PieDataset` and `DoughnutDataset` classes.
  * enable the feature to manage floating bars on `time` or `timeseries` axes and bar charts adding to `DataPoint` class the possibility to add a `FloatingData` object as `Y` value.
  * remove `setT(Date)` and `Date getT` methods from `DataPoint` class. Use `setX(Date)` and `Date getXAsDate()` instead.
  * change `borderDashOffset` option from int to double in all classes where referenced.

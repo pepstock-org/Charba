@@ -20,8 +20,9 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.callbacks.OffsetCallback;
+import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayInteger;
@@ -37,6 +38,10 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  */
 public class PieDataset extends HovingDataset implements HasBorderAlign {
+	
+	// border radius array constant for set border radius from a list
+	private static final ArcBorderRadius[] BORDER_RADIUS_EMPTY_ARRAY = new ArcBorderRadius[0];
+
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -45,11 +50,15 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> offsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover offset function
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border radius function
+	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border offset callback instance
 	private OffsetCallback<DatasetContext> offsetCallback = null;
 	// hover offset callback instance
 	private OffsetCallback<DatasetContext> hoverOffsetCallback = null;
+	// border skipped callback instance
+	private BorderRadiusCallback borderRadiusCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -58,7 +67,10 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	{
 		WEIGHT("weight"),
 		OFFSET("offset"),
-		HOVER_OFFSET("hoverOffset");
+		HOVER_OFFSET("hoverOffset"),
+		BORDER_RADIUS("borderRadius"),
+		// internal to map the border radius type
+		CHARBA_BORDER_RADIUS_TYPE("charbaBorderRadiusType");
 
 		// name value of property
 		private final String value;
@@ -86,6 +98,8 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 
 	// instance of border align handler
 	private final BorderAlignHandler borderAlignHandler;
+	// border items handler instance
+	private final BorderItemsHandler borderItemsHandler;
 
 	/**
 	 * Creates a dataset.<br>
@@ -143,15 +157,20 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 */
 	protected PieDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
+		// creates the border items handler
+		this.borderItemsHandler = new BorderItemsHandler(getNativeObject());
 		// creates border align handler instance
 		this.borderAlignHandler = new BorderAlignHandler(getNativeObject(), getDefaultValues());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), offsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
+		this.offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), offsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
 		// gets value calling callback
-		hoverOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), hoverOffsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
+		this.hoverOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), hoverOffsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
+		// gets value calling callback
+		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), borderRadiusCallback, ArcBorderRadius.FACTORY, getDefaultValues().getElements().getArc().getBorderRadius()));
+
 	}
 
 	/*
@@ -235,6 +254,55 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		// then returns an empty list
 		return Collections.emptyList();
 	}
+	
+	/**
+	 * Sets the arc border radius (in pixels).
+	 * 
+	 * @param borderRadius the arc border radius (in pixels).
+	 */
+	public void setBorderRadius(int... borderRadius) {
+		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius);
+	}
+
+	/**
+	 * Sets the arc border radius (in pixels).
+	 * 
+	 * @param borderRadius the arc border radius (in pixels).
+	 */
+	public void setBorderRadius(ArcBorderRadius... borderRadius) {
+		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius);
+	}
+
+	/**
+	 * Sets the arc border radius (in pixels).
+	 * 
+	 * @param borderRadius the arc border radius (in pixels).
+	 */
+	public void setBorderRadius(List<ArcBorderRadius> borderRadius) {
+		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius, BORDER_RADIUS_EMPTY_ARRAY);
+	}
+
+	/**
+	 * Returns the list of arc border radius (in pixels).<br>
+	 * If a callback has been set, returns an empty list.
+	 * 
+	 * @return the list of arc border radius (in pixels).<br>
+	 *         If a callback has been set, returns an empty list
+	 */
+	public List<Integer> getBorderRadius() {
+		return borderItemsHandler.getBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, getDefaultValues().getElements().getArc().getBorderRadius());
+	}
+
+	/**
+	 * Returns the list of bar border radius (in pixels).<br>
+	 * If a callback or an array have been set, returns an empty object.
+	 * 
+	 * @return the list of bar border radius (in pixels).<br>
+	 *         If a callback or an array have been set, returns an empty object
+	 */
+	public List<ArcBorderRadius> getBorderRadiusAsObjects() {
+		return borderItemsHandler.getBorderItemAsObjects(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, ArcBorderRadius.FACTORY, getDefaultValues().getElements().getArc().getBorderRadius());
+	}
 
 	/**
 	 * Returns the offset callback, if set, otherwise <code>null</code>.
@@ -288,6 +356,27 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.HOVER_OFFSET);
 		}
+	}
+	
+	/**
+	 * Returns the border radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border radius callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderRadiusCallback getBorderRadiusCallback() {
+		return borderRadiusCallback;
+	}
+
+	/**
+	 * Sets the border radius callback.
+	 * 
+	 * @param borderRadiusCallback the border radius callback.
+	 */
+	public void setBorderRadius(BorderRadiusCallback borderRadiusCallback) {
+		// sets the callback
+		this.borderRadiusCallback = borderRadiusCallback;
+		// checks if callback is consistent
+		borderItemsHandler.setBorderItemCallback(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadiusCallback, borderRadiusCallbackProxy.getProxy());
 	}
 
 }

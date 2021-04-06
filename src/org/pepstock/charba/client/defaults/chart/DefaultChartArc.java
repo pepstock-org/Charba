@@ -106,4 +106,14 @@ public final class DefaultChartArc implements IsDefaultArc {
 		return arc.getOffset();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getBorderRadius()
+	 */
+	@Override
+	public int getBorderRadius() {
+		return arc.getBorderRadius();
+	}
+
 }
