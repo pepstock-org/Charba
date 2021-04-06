@@ -22,15 +22,16 @@ import org.pepstock.charba.client.configuration.Axis;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface RadialPointLabelCallback {
+public interface PointLabelCallback {
 
 	/**
 	 * Callback function to transform data labels to point labels. The default implementation simply returns the current string.
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param item label of current label
+	 * @param index index of the label
 	 * @return new label to apply to point label
 	 */
-	String onCallback(Axis axis, String item);
+	String onCallback(Axis axis, String item, int index);
 
 }

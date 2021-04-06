@@ -18,7 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
-import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
+import org.pepstock.charba.client.callbacks.PointLabelCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -58,9 +58,10 @@ public class RadialPointLabels extends AxisContainer {
 		 * 
 		 * @param context context context value of <code>this</code> to the execution context of function.
 		 * @param item label of the point
+		 * @param index index of the label
 		 * @return new label to show.
 		 */
-		String call(CallbackFunctionContext context, String item);
+		String call(CallbackFunctionContext context, String item, int index);
 	}
 
 	// ---------------------------
@@ -82,7 +83,7 @@ public class RadialPointLabels extends AxisContainer {
 	// -- USERS CALLBACKS ---
 	// ---------------------------
 	// user callbacks implementation for point labels
-	private RadialPointLabelCallback callback = null;
+	private PointLabelCallback callback = null;
 	// font callback instance
 	private FontCallback<ScaleContext> fontCallback = null;
 	// color callback instance
@@ -145,11 +146,11 @@ public class RadialPointLabels extends AxisContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.pointLabelCallbackProxy.setCallback((context, item) -> {
+		this.pointLabelCallbackProxy.setCallback((context, item, index) -> {
 			// checks if callback is consistent
 			if (callback != null) {
 				// invokes callback
-				return callback.onCallback(getAxis(), item);
+				return callback.onCallback(getAxis(), item, index);
 			}
 			// returns passed item
 			return item;
@@ -301,7 +302,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @return the callback
 	 */
-	public RadialPointLabelCallback getCallback() {
+	public PointLabelCallback getCallback() {
 		return callback;
 	}
 
@@ -310,7 +311,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @param callback the callback to set
 	 */
-	public void setCallback(RadialPointLabelCallback callback) {
+	public void setCallback(PointLabelCallback callback) {
 		// sets the callback
 		this.callback = callback;
 		// checks if callback is consistent

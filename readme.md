@@ -296,6 +296,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `CartesianPadding` options,  use `Padding` instead.
  * rename `ScaleBounds` class to `Bounds`.
  * rename `labelString` property name to `text` in `ScaleTitle` class for options and configuration.
+ * rename `RadialPointLabelCallback` interface to `PointLabelCallback` for `RadialPointLabels` configuration.
+ * add the index of the label to the signature of the `PointLabelCallback` interface method.
 
 #### Features
  * add axis id parameter to the cartesian axes classes constructor, by `IsScaleId` or a string.
