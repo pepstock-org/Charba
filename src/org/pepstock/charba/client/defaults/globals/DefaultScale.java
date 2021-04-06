@@ -35,6 +35,8 @@ import org.pepstock.charba.client.enums.Display;
  */
 public final class DefaultScale implements IsDefaultScale {
 
+	private static final boolean DEFAULT_ALIGN_TO_PIXEL = false;
+
 	private static final boolean DEFAULT_ANIMATE = true;
 
 	private static final boolean DEFAULT_OFFSET = false;
@@ -294,6 +296,16 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public double getSuggestedMin() {
 		return DEFAULT_SUGGESTED_MIN;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isAlignToPixels()
+	 */
+	@Override
+	public boolean isAlignToPixels() {
+		return DEFAULT_ALIGN_TO_PIXEL;
 	}
 
 	/*

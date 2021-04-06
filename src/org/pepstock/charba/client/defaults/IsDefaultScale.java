@@ -127,6 +127,13 @@ public interface IsDefaultScale {
 	double getSuggestedMin();
 
 	/**
+	 * Returns <code>true</code> to align pixel values to device pixels.
+	 * 
+	 * @return <code>true</code> to align pixel values to device pixels
+	 */
+	boolean isAlignToPixels();
+	
+	/**
 	 * Returns the reverses order of tick labels.
 	 * 
 	 * @return reverses order of tick labels.

@@ -58,6 +58,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	enum Property implements Key
 	{
 		// common scale
+		ALIGN_TO_PIXELS("alignToPixels"),
 		DISPLAY("display"),
 		WEIGHT("weight"),
 		TICKS("ticks"),
@@ -561,6 +562,25 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	@Override
 	public final double getSuggestedMin() {
 		return getValue(Property.SUGGESTED_MIN, getDefaultValues().getSuggestedMin());
+	}
+	
+	/**
+	 * Sets <code>true</code> to align pixel values to device pixels.
+	 * 
+	 * @param alignToPixels <code>true</code> to align pixel values to device pixels.
+	 */
+	public final void setAlignToPixels(boolean alignToPixels) {
+		setValueAndAddToParent(Property.ALIGN_TO_PIXELS, alignToPixels);
+	}
+
+	/**
+	 * Returns <code>true</code> to align pixel values to device pixels.
+	 * 
+	 * @return <code>true</code> to align pixel values to device pixels
+	 */
+	@Override
+	public final boolean isAlignToPixels() {
+		return getValue(Property.ALIGN_TO_PIXELS, getDefaultValues().isAlignToPixels());
 	}
 
 	/**

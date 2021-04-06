@@ -347,6 +347,24 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public double getWeight() {
 		return getScale().getWeight();
 	}
+	
+	/**
+	 * Sets <code>true</code> to align pixel values to device pixels.
+	 * 
+	 * @param alignToPixels <code>true</code> to align pixel values to device pixels.
+	 */
+	public void setAlignToPixels(boolean alignToPixels) {
+		getScale().setAlignToPixels(alignToPixels);
+	}
+
+	/**
+	 * Returns <code>true</code> to align pixel values to device pixels.
+	 * 
+	 * @return <code>true</code> to align pixel values to device pixels
+	 */
+	public boolean isAlignToPixels() {
+		return getScale().isAlignToPixels();
+	}
 
 	/**
 	 * Sets the reverses order of tick labels.

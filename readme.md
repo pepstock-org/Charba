@@ -302,6 +302,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change visibility of `CartesianAxis` class, now it is public.
  * add `CartesianTimeSeriesAxis` class in order to manage time series scales.
  * add `backgroundColor` property to `Axis` configuration and `Scale` options classes.
+ * add `alignToPixels` property to `Axis` configuration and `Scale` options classes.
  * add `singleStacked` property to `CartesianAxis` configuration and `Scale` options classes.
  * add `labels` property to `CartesianCategoryAxis` class.
  * add `minIndex` and `maxIndex` properties to `CartesianCategoryAxis` class in order to manage minimum and maximum by index of the label, instead of its content.

@@ -281,6 +281,16 @@ public final class DefaultChartScale implements IsDefaultScale {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isAlignToPixels()
+	 */
+	@Override
+	public boolean isAlignToPixels() {
+		return scale.isAlignToPixels();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isReverse()
 	 */
 	@Override
