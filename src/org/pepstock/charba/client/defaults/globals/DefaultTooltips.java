@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
@@ -84,7 +85,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	private static final boolean DEFAULT_RTL = false;
 
 	private static final boolean DEFAULT_USE_POINT_STYLE = false;
-	
+
 	private static final int DEFAULT_PADDING = 6;
 
 	private final IsDefaultAnimation animation = new DefaultAnimation();
@@ -92,8 +93,6 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	private final IsDefaultTransitions transitions = new DefaultTransitions();
 
 	private final IsDefaultAnimations animations = new InternalAnimations();
-
-	private final DefaultInteraction interaction = new DefaultInteraction();
 
 	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);
 
@@ -167,7 +166,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public InteractionMode getMode() {
-		return interaction.getMode();
+		return Defaults.get().getGlobal().getInteraction().getMode();
 	}
 
 	/*
@@ -177,7 +176,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public boolean isIntersect() {
-		return interaction.isIntersect();
+		return Defaults.get().getGlobal().getInteraction().isIntersect();
 	}
 
 	/*
