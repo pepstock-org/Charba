@@ -20,6 +20,7 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -136,6 +137,16 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	@Override
 	public Img getPointStyleAsImage() {
 		return DEFAULT_POINT_STYLE_IMG;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getTextAlign()
+	 */
+	@Override
+	public TextAlign getTextAlign() {
+		return TextAlign.CENTER;
 	}
 
 }

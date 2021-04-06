@@ -381,6 +381,7 @@ final class HtmlLegendGenerator {
 		// styling the cell with mandatory values
 		label.getStyle().setFont(Utilities.toCSSFontProperty(legendLabels.getFont()));
 		label.getStyle().setColor(legendLabels.getColor().toRGBA());
+		label.getStyle().setTextAlign(legendLabels.getTextAlign().value());
 		// checks text direction
 		if (legend.isRtl() || TextDirection.RIGHT_TO_LEFT.equals(legend.getTextDirection())) {
 			label.getStyle().setDirection(TextDirection.RIGHT_TO_LEFT.value());

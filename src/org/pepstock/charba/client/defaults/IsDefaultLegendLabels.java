@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.TextAlign;
+
 /**
  * Interface to define legend labels object defaults.
  * 
@@ -36,5 +38,12 @@ public interface IsDefaultLegendLabels extends IsDefaultBoxHandler, IsDefaultPoi
 	 * @return Padding to apply around labels. Only top and bottom are implemented.
 	 */
 	int getPadding();
+	
+	/**
+	 * Returns the the horizontal alignment of the label text.
+	 * 
+	 * @return the horizontal alignment of the label text.
+	 */
+	TextAlign getTextAlign();
 
 }

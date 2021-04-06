@@ -18,6 +18,7 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
+import org.pepstock.charba.client.enums.TextAlign;
 
 /**
  * This is the labels configuration of the legend.
@@ -32,6 +33,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	private enum Property implements Key
 	{
 		PADDING("padding"),
+		TEXT_ALIGN("textAlign"),
 		USE_POINT_STYLE("usePointStyle");
 
 		// name value of property
@@ -149,6 +151,25 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	@Override
 	public int getPadding() {
 		return getValue(Property.PADDING, getDefaultValues().getPadding());
+	}
+	
+	/**
+	 * Sets the horizontal alignment of the label text.
+	 * 
+	 * @param align the horizontal alignment of the label text.
+	 */
+	public void setTextAlign(TextAlign align) {
+		setValueAndAddToParent(Property.TEXT_ALIGN, align);
+	}
+
+	/**
+	 * Returns the the horizontal alignment of the label text.
+	 * 
+	 * @return the horizontal alignment of the label text.
+	 */
+	@Override
+	public TextAlign getTextAlign() {
+		return getValue(Property.TEXT_ALIGN, TextAlign.values(), getDefaultValues().getTextAlign());
 	}
 
 }

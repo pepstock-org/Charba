@@ -32,6 +32,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.LegendLabelItem;
 
 import jsinterop.annotations.JsFunction;
@@ -371,6 +372,24 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 	 */
 	public int getPadding() {
 		return getConfiguration().getLegend().getLabels().getPadding();
+	}
+
+	/**
+	 * Sets the horizontal alignment of the label text.
+	 * 
+	 * @param align the horizontal alignment of the label text.
+	 */
+	public void setTextAlign(TextAlign align) {
+		getConfiguration().getLegend().getLabels().setTextAlign(align);
+	}
+
+	/**
+	 * Returns the the horizontal alignment of the label text.
+	 * 
+	 * @return the horizontal alignment of the label text.
+	 */
+	public TextAlign getTextAlign() {
+		return getConfiguration().getLegend().getLabels().getTextAlign();
 	}
 
 	/**

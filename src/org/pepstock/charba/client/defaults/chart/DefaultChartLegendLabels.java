@@ -19,6 +19,7 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.TextAlign;
 
 /**
  * Defaults for legend labels option element, based on chart type.
@@ -126,6 +127,16 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	@Override
 	public Img getPointStyleAsImage() {
 		return labels.getPointStyleAsImage();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getTextAlign()
+	 */
+	@Override
+	public TextAlign getTextAlign() {
+		return labels.getTextAlign();
 	}
 
 }
