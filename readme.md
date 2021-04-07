@@ -217,7 +217,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `title` property to `Legend` options and configuration classes in order to manage a title on legend
  * add `maxWidth` and `maxHeight` properties to `Legend` options and configuration.
  * add `boxHeight` property to `LegendLabels` options and configuration classes.
- * add `textAlign` property to `LegendLabels` options and configuration classes. 
+ * add `textAlign` property to `LegendLabels` options and configuration classes.
+ * add `fontColor` property to `LegendItem` and `LegendLabelItem` classes.
  * add `align` property to `Title` options and configuration classes.
  * add `pointStyle` property to `Bar` element configuration and options classes.
  * add `borderRadius` property to `Arc` element configuration and options classes.

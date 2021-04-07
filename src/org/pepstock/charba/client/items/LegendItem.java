@@ -60,16 +60,17 @@ public class LegendItem extends NativeObjectContainer {
 	{
 		DATASET_INDEX("datasetIndex"),
 		INDEX("index"),
-		TEXT("text"),
 		FILL_STYLE("fillStyle"),
+		FONT_COLOR("fontColor"),
 		LINE_CAP("lineCap"),
 		LINE_DASH("lineDash"),
 		LINE_DASH_OFFSET("lineDashOffset"),
 		LINE_JOIN("lineJoin"),
 		LINE_WIDTH("lineWidth"),
-		STROKE_STYLE("strokeStyle"),
+		POINT_STYLE("pointStyle"),
 		ROTATION("rotation"),
-		POINT_STYLE("pointStyle");
+		STROKE_STYLE("strokeStyle"),
+		TEXT("text");
 
 		// name value of property
 		private final String value;
@@ -191,6 +192,21 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	public final boolean isFillStyleAsPattern() {
 		return JsItemsHelper.get().isCanvasPattern(this.nativeObject(), Property.FILL_STYLE);
+	}
+	
+	/**
+	 * Returns the font color of the legend or <code>null</code> if not set.
+	 * 
+	 * @return the font color of the legend or <code>null</code> if not set
+	 */
+	public final IsColor getFontColor() {
+		// checks if color is stored and is a string
+		if (isType(Property.FONT_COLOR, ObjectType.STRING)) {
+			return ColorBuilder.parse(getValue(Property.FONT_COLOR, Defaults.get().getGlobal().getColorAsString()));
+		}
+		// if here, the font color is not set
+		// then returns null
+		return null;
 	}
 
 	/**

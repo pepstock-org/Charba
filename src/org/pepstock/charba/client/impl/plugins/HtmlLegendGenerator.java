@@ -25,6 +25,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.HtmlLegendItemCallback;
 import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
 import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.commons.Constants;
@@ -380,8 +381,11 @@ final class HtmlLegendGenerator {
 		labelCell.appendChild(label);
 		// styling the cell with mandatory values
 		label.getStyle().setFont(Utilities.toCSSFontProperty(legendLabels.getFont()));
-		label.getStyle().setColor(legendLabels.getColor().toRGBA());
 		label.getStyle().setTextAlign(legendLabels.getTextAlign().value());
+		// gets color
+		IsColor fontColor = item.getFontColor();
+		// stores font color
+		label.getStyle().setColor(fontColor != null ? fontColor.toRGBA() : legendLabels.getColor().toRGBA());
 		// checks text direction
 		if (legend.isRtl() || TextDirection.RIGHT_TO_LEFT.equals(legend.getTextDirection())) {
 			label.getStyle().setDirection(TextDirection.RIGHT_TO_LEFT.value());

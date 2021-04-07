@@ -93,6 +93,24 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	public void setIndex(int index) {
 		setValue(LegendItem.Property.INDEX, index);
 	}
+	
+	/**
+	 * Sets the font color of the legend.
+	 * 
+	 * @param color the font color of the legend
+	 */
+	public void setFontColor(IsColor color) {
+		setFontColor(IsColor.checkAndGetValue(color));
+	}
+	
+	/**
+	 * Returns the font color of the legend.
+	 * 
+	 * @param color the font color of the legend
+	 */
+	public void setFontColor(String color) {
+		setValue(Property.FONT_COLOR, color);
+	}
 
 	/**
 	 * Sets the fill style of the legend box as color.
