@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.DefaultPluginId;
+import org.pepstock.charba.client.enums.DrawTime;
 
 /**
  * Interface to define {@link DefaultPluginId#FILLER} plugin defaults.
@@ -30,5 +31,12 @@ public interface IsDefaultFiller {
 	 * @return <code>true</code> if the fill area will be recursively extended to the visible target defined by the fill value of hidden data set targets
 	 */
 	boolean isPropagate();
+	
+	/**
+	 * Returns the draw time which defines when the filling will be applied.
+	 * 
+	 * @return the draw time which defines when the filling will be applied
+	 */
+	DrawTime getDrawTime();
 
 }

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFiller;
+import org.pepstock.charba.client.enums.DrawTime;
 
 /**
  * The filler plugin can be used to fill the datasets.
@@ -32,6 +33,7 @@ public final class Filler extends AbstractModel<Plugins, IsDefaultFiller> implem
 	 */
 	private enum Property implements Key
 	{
+		DRAW_TIME("drawTime"),
 		PROPAGATE("propagate");
 
 		// name value of property
@@ -87,6 +89,26 @@ public final class Filler extends AbstractModel<Plugins, IsDefaultFiller> implem
 	@Override
 	public boolean isPropagate() {
 		return getValue(Property.PROPAGATE, getDefaultValues().isPropagate());
+	}
+	
+	/**
+	 * Sets the draw time which defines when the filling will be applied.
+	 * 
+	 * @param drawTime the draw time which defines when the filling will be applied
+	 */
+	public void setDrawTime(DrawTime drawTime) {
+		// stores value
+		setValue(Property.DRAW_TIME, drawTime);
+	}
+
+	/**
+	 * Returns the draw time which defines when the filling will be applied.
+	 * 
+	 * @return the draw time which defines when the filling will be applied
+	 */
+	@Override
+	public DrawTime getDrawTime() {
+		return getValue(Property.DRAW_TIME, DrawTime.values(), getDefaultValues().getDrawTime());
 	}
 
 }

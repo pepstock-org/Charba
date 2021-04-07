@@ -13,45 +13,41 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.globals;
+package org.pepstock.charba.client.enums;
 
-import org.pepstock.charba.client.defaults.IsDefaultFiller;
-import org.pepstock.charba.client.enums.DrawTime;
+import org.pepstock.charba.client.commons.Key;
 
 /**
- * CHART.JS default values for FILLER plugin element.
+ * Defines when the filler will fill the datasets.
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-public final class DefaultFiller implements IsDefaultFiller {
+public enum DrawTime implements Key
+{
+	BEFORE_DATASET_DRAW("beforeDatasetDraw"),
+	BEFORE_DATASETS_DRAW("beforeDatasetsDraw");
 
-	private static final boolean DEFAULT_PROPAGATE = true;
+	// name value of property
+	private final String value;
 
 	/**
-	 * To avoid any instantiation
+	 * Creates a draw time property value to use in the native object.
+	 * 
+	 * @param value value of draw time property name
 	 */
-	DefaultFiller() {
-		// do nothing
+	private DrawTime(String value) {
+		this.value = value;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFiller#isPropagate()
+	 * @see org.pepstock.charba.client.commons.Key#value()
 	 */
 	@Override
-	public boolean isPropagate() {
-		return DEFAULT_PROPAGATE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFiller#getDrawTime()
-	 */
-	@Override
-	public DrawTime getDrawTime() {
-		return DrawTime.BEFORE_DATASET_DRAW;
+	public String value() {
+		return value;
 	}
 
 }

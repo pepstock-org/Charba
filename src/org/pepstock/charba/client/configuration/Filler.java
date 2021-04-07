@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.enums.DefaultPluginId;
+import org.pepstock.charba.client.enums.DrawTime;
 
 /**
  * The configuration for {@link DefaultPluginId#FILLER} plugin.
@@ -50,6 +51,24 @@ public class Filler extends ConfigurationOptionsContainer {
 	 */
 	public boolean isPropagate() {
 		return getConfiguration().getFiller().isPropagate();
+	}
+	
+	/**
+	 * Sets the draw time which defines when the filling will be applied.
+	 * 
+	 * @param drawTime the draw time which defines when the filling will be applied
+	 */
+	public void setDrawTime(DrawTime drawTime) {
+		getConfiguration().getFiller().setDrawTime(drawTime);
+	}
+
+	/**
+	 * Returns the draw time which defines when the filling will be applied.
+	 * 
+	 * @return the draw time which defines when the filling will be applied
+	 */
+	public DrawTime getDrawTime() {
+		return getConfiguration().getFiller().getDrawTime();
 	}
 
 }

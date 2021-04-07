@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFiller;
+import org.pepstock.charba.client.enums.DrawTime;
 
 /**
  * Defaults for filler plugin option element, based on chart type.
@@ -43,6 +44,16 @@ public final class DefaultChartFiller implements IsDefaultFiller {
 	@Override
 	public boolean isPropagate() {
 		return filler.isPropagate();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFiller#getDrawTime()
+	 */
+	@Override
+	public DrawTime getDrawTime() {
+		return filler.getDrawTime();
 	}
 
 }
