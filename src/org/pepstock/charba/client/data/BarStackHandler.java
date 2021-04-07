@@ -15,10 +15,10 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Utility to manage the stack option on bar/horizontal chart datasets.
@@ -83,6 +83,6 @@ final class BarStackHandler extends NativeObjectContainer {
 	 * @return the name of stack group.
 	 */
 	String getStackGroup() {
-		return getValue(Property.STACK, UndefinedValues.STRING);
+		return getValue(Property.STACK, ChartType.BAR.value());
 	}
 }

@@ -16,9 +16,7 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * The stacked area chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -27,37 +25,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  */
 public class StackedAreaDataset extends LineDataset {
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		STACK("stack");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
 
 	/**
 	 * Creates a dataset.<br>
@@ -115,24 +82,6 @@ public class StackedAreaDataset extends LineDataset {
 	 */
 	protected StackedAreaDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-	}
-
-	/**
-	 * Sets the name of stack group.
-	 * 
-	 * @param stackGroup name of stack group.
-	 */
-	public void setStackGroup(String stackGroup) {
-		setValue(Property.STACK, stackGroup);
-	}
-
-	/**
-	 * Returns the name of stack group.
-	 * 
-	 * @return the name of stack group.
-	 */
-	public String getStackGroup() {
-		return getValue(Property.STACK, UndefinedValues.STRING);
 	}
 
 }

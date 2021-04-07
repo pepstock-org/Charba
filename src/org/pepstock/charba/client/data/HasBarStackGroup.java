@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.ChartType;
 
 /**
  * Manages the stack properties for datasets which this property is required.
@@ -55,7 +55,7 @@ interface HasBarStackGroup {
 		}
 		// if here, bar stack handler is not consistent
 		// then returns the default
-		return UndefinedValues.STRING;
+		return ChartType.BAR.value();
 	}
 
 }
