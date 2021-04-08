@@ -210,7 +210,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			chart.getOptions().getTooltips().setEnabled(false);
 			// overrides the events configuration setting only the following
 			chart.getOptions().setEvents(Event.CLICK, Event.TOUCHSTART);
-			// checks if handler on legend to avoid to remove all datasets has been already added
+			// checks if handler on legend to avoid to remove all data sets has been already added
 			// and if legend is display
 			// checks if is chart is a abstract chart instance
 			if (!pluginEventsRegistrationHandlers.containsKey(chart.getId()) && chart.getOptions().getLegend().isDisplay()) {
