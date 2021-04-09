@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.zoom;
 
+import org.pepstock.charba.client.zoom.enums.ModifierKey;
+
 /**
  * {@link ZoomPlugin#ID} plugin default options interface for ZOOM element.<br>
  * It contains all default values for ZOOM.
@@ -56,6 +58,15 @@ interface IsDefaultZoom extends IsDefaultConfigurationItem {
 	 */
 	default double getSpeed() {
 		return Zoom.DEFAULT_SPEED;
+	}
+
+	/**
+	 * Returns the modifier key to activate zooming by wheeling.
+	 * 
+	 * @return the modifier key to activate zooming by wheeling
+	 */
+	default ModifierKey getWheelModifierKey() {
+		return null;
 	}
 
 }

@@ -13,26 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.zoom.callbacks;
-
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.zoom.AbstractConfigurationItem;
-import org.pepstock.charba.client.zoom.ZoomPlugin;
-
 /**
- * Callback interface of {@link ZoomPlugin#ID} plugin that is called once zooming or panning is completed.
+ * Contains the {@link org.pepstock.charba.client.zoom.ZoomPlugin#ID} plugin enumerations to configure the plugin itself.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface CompletedCallback {
-
-	/**
-	 * Method called once zooming or panning is completed.
-	 * 
-	 * @param chart chart instance
-	 * @param configurationItem configuration item of {@link ZoomPlugin} which generated the event
-	 */
-	void onCompleted(IsChart chart, AbstractConfigurationItem<?> configurationItem);
-
-}
+package org.pepstock.charba.client.zoom.enums;

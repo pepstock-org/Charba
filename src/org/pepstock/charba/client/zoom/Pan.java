@@ -18,8 +18,10 @@ package org.pepstock.charba.client.zoom;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.zoom.callbacks.CompleteCallback;
+import org.pepstock.charba.client.zoom.callbacks.CompletedCallback;
 import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
+import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
+import org.pepstock.charba.client.zoom.enums.ModifierKey;
 
 /**
  * Base object to map pan options for {@link ZoomPlugin#ID} plugin configuration.<br>
@@ -31,8 +33,10 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 
 	// progress callback
 	private static final CallbackPropertyHandler<ProgressCallback> PROGRESS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN);
-	// complete callback
-	private static final CallbackPropertyHandler<CompleteCallback> COMPLETE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_COMPLETE);
+	// completed callback
+	private static final CallbackPropertyHandler<CompletedCallback> COMPLETED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_COMPLETED);
+	// rejected callback
+	private static final CallbackPropertyHandler<RejectedCallback> REJECTED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_REJECTED);
 
 	/**
 	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.
@@ -51,8 +55,10 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	{
 		THRESHOLD("threshold"),
 		SPEED("speed"),
+		MODIFIER_KEY("modifierKey"),
 		ON_PAN("onPan"),
-		ON_PAN_COMPLETE("onPanComplete");
+		ON_PAN_COMPLETED("onPanComplete"),
+		ON_PAN_REJECTED("onPanRejected");
 
 		// name value of property
 		private final String value;
@@ -105,8 +111,18 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 * @see org.pepstock.charba.client.zoom.AbstractConfigurationItem#getCompletePropertyHandler()
 	 */
 	@Override
-	CallbackPropertyHandler<CompleteCallback> getCompletePropertyHandler() {
-		return COMPLETE_PROPERTY_HANDLER;
+	CallbackPropertyHandler<CompletedCallback> getCompletedPropertyHandler() {
+		return COMPLETED_PROPERTY_HANDLER;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.zoom.AbstractConfigurationItem#getRejectedPropertyHandler()
+	 */
+	@Override
+	CallbackPropertyHandler<RejectedCallback> getRejectedPropertyHandler() {
+		return REJECTED_PROPERTY_HANDLER;
 	}
 
 	/**
@@ -133,7 +149,7 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 * 
 	 * @param speed the threshold factor before applying pan, on category scale
 	 */
-	public final void setSpeed(double speed) {
+	public void setSpeed(double speed) {
 		setValue(Property.SPEED, speed);
 	}
 
@@ -143,8 +159,27 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 * @return the threshold factor before applying pan, on category scale
 	 */
 	@Override
-	public final double getSpeed() {
+	public double getSpeed() {
 		return getValue(Property.SPEED, getDefaultsOptions().getSpeed());
+	}
+
+	/**
+	 * Sets the modifier key to activate panning.
+	 * 
+	 * @param modifierKey the modifier key to activate panning
+	 */
+	public void setModifierKey(ModifierKey modifierKey) {
+		setValue(Property.MODIFIER_KEY, modifierKey);
+	}
+
+	/**
+	 * Returns the modifier key to activate panning.
+	 * 
+	 * @return the modifier key to activate panning
+	 */
+	@Override
+	public ModifierKey getModifierKey() {
+		return getValue(Property.MODIFIER_KEY, ModifierKey.values(), getDefaultsOptions().getModifierKey());
 	}
 
 }

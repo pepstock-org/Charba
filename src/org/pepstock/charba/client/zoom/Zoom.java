@@ -19,8 +19,10 @@ import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.zoom.callbacks.CompleteCallback;
+import org.pepstock.charba.client.zoom.callbacks.CompletedCallback;
 import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
+import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
+import org.pepstock.charba.client.zoom.enums.ModifierKey;
 
 /**
  * Base object to map zoom options for {@link ZoomPlugin#ID} plugin configuration.<br>
@@ -32,8 +34,10 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 
 	// progress callback
 	private static final CallbackPropertyHandler<ProgressCallback> PROGRESS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM);
-	// complete callback
-	private static final CallbackPropertyHandler<CompleteCallback> COMPLETE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM_COMPLETE);
+	// completed callback
+	private static final CallbackPropertyHandler<CompletedCallback> COMPLETED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM_COMPLETED);
+	// rejected callback
+	private static final CallbackPropertyHandler<RejectedCallback> REJECTED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM_REJECTED);
 
 	/**
 	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.
@@ -58,8 +62,10 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 		SENSITIVITY("sensitivity"),
 		SPEED("speed"),
 		DRAG("drag"),
+		WHEEL_MODIFIER_KEY("wheelModifierKey"),
 		ON_ZOOM("onZoom"),
-		ON_ZOOM_COMPLETE("onZoomComplete");
+		ON_ZOOM_COMPLETED("onZoomComplete"),
+		ON_ZOOM_REJECTED("onZoomRejected");
 
 		// name value of property
 		private final String value;
@@ -112,8 +118,18 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	 * @see org.pepstock.charba.client.zoom.AbstractConfigurationItem#getCompletePropertyHandler()
 	 */
 	@Override
-	CallbackPropertyHandler<CompleteCallback> getCompletePropertyHandler() {
-		return COMPLETE_PROPERTY_HANDLER;
+	CallbackPropertyHandler<CompletedCallback> getCompletedPropertyHandler() {
+		return COMPLETED_PROPERTY_HANDLER;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.zoom.AbstractConfigurationItem#getRejectedPropertyHandler()
+	 */
+	@Override
+	CallbackPropertyHandler<RejectedCallback> getRejectedPropertyHandler() {
+		return REJECTED_PROPERTY_HANDLER;
 	}
 
 	/**
@@ -210,6 +226,25 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	@Override
 	public double getSensitivity() {
 		return getValue(Property.SENSITIVITY, getDefaultsOptions().getSensitivity());
+	}
+
+	/**
+	 * Sets the modifier key to activate zooming by wheeling.
+	 * 
+	 * @param modifierKey the modifier key to activate zooming by wheeling
+	 */
+	public void setWheelModifierKey(ModifierKey modifierKey) {
+		setValue(Property.WHEEL_MODIFIER_KEY, modifierKey);
+	}
+
+	/**
+	 * Returns the modifier key to activate zooming by wheeling.
+	 * 
+	 * @return the modifier key to activate zooming by wheeling
+	 */
+	@Override
+	public ModifierKey getWheelModifierKey() {
+		return getValue(Property.WHEEL_MODIFIER_KEY, ModifierKey.values(), getDefaultsOptions().getWheelModifierKey());
 	}
 
 }

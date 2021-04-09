@@ -411,6 +411,8 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
    * `org.pepstock.charba.client.datalabels.callbacks.TextStrokeColorCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.ColorCallback` class to manage whatever scriptable option which manages colors.
    * `org.pepstock.charba.client.datalabels.callbacks.TextStrokeWidthCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.WidthCallback` class to manage whatever scriptable option which manages line widths.
    * `org.pepstock.charba.client.datalabels.callbacks.FontCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.FontCallback` class to manage whatever scriptable option which manages colors.
+   * rename `CompleteCallback` class to `CompletedCallback` (and the name of the method from `onComplete` to `onCompleted`) in the `ZoomPlugin`.
+   * rename `getCompleteCallback` and `setCompletedCallback` methods to `getCompleteCallback` and `setCompleteCallback` in the `Zoom` and `Pan` options in the `ZoomPlugin`.
 
 #### Features
  * change all methods of `Plugin` interface becoming all default ones.
@@ -449,6 +451,10 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * improve `Labels` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
  * improve `LabelsOptionsBuilder` class in order to manage the multi-labels configuration.
  * improve `Zoom` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
+ * add `RejectedCallback` class to `Zoom` and `Pan` options in the `ZoomPlugin` in order to manage the event when pan or zoom fail because modifier key was not detected.
+ * add `modifierKey` property to `Pan` options in the `ZoomPlugin` in order to enable pan only when modifier key was detected.
+ * add `wheelModifierKey` property to `Zoom` options in the `ZoomPlugin` in order to enable zoom only when modifier key was detected.
+ * add `overScaleMode` property to `Zoom` and `Pan` options in the `ZoomPlugin` in order to enable zoom only when modifier key was detected.
 
 ### _Controllers_
 

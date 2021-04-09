@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.zoom;
 
+import org.pepstock.charba.client.zoom.enums.ModifierKey;
+
 /**
  * {@link ZoomPlugin#ID} plugin default options interface for PAN element.<br>
  * It contains all default values for PAN.
@@ -40,6 +42,15 @@ interface IsDefaultPan extends IsDefaultConfigurationItem {
 	 */
 	default double getSpeed() {
 		return Pan.DEFAULT_SPEED;
+	}
+
+	/**
+	 * Returns the modifier key to activate panning.
+	 * 
+	 * @return the modifier key to activate panning
+	 */
+	default ModifierKey getModifierKey() {
+		return null;
 	}
 
 }

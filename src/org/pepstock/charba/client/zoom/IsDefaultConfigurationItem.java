@@ -16,9 +16,10 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.zoom.callbacks.CompleteCallback;
+import org.pepstock.charba.client.zoom.callbacks.CompletedCallback;
 import org.pepstock.charba.client.zoom.callbacks.ModeCallback;
 import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
+import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
 
 /**
  * Interface used by pan and zoom object in order to enable to provide the defaults values of properties.
@@ -47,11 +48,30 @@ interface IsDefaultConfigurationItem {
 	}
 
 	/**
+	 * Returns which of the enabled zooming directions should only be available when the mouse cursor is over one of scale.
+	 * 
+	 * @return which of the enabled zooming directions should only be available when the mouse cursor is over one of scale
+	 */
+	default InteractionAxis getOverScaleMode() {
+		return AbstractConfigurationItem.DEFAULT_OVER_SCALE_MODE;
+	}
+
+	/**
 	 * Returns the element (panning or zooming) directions callback, to set the mode at runtime.
 	 * 
 	 * @return the element (panning or zooming) directions callback
 	 */
 	default ModeCallback getModeCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the element (panning or zooming) directions callback, to set the mode at runtime, which of the enabled zooming directions should only be available when the mouse
+	 * cursor is over one of scale
+	 * 
+	 * @return the element (panning or zooming) directions callback
+	 */
+	default ModeCallback getOverScaleModeCallback() {
 		return null;
 	}
 
@@ -69,7 +89,16 @@ interface IsDefaultConfigurationItem {
 	 * 
 	 * @return the callback called once zooming or panning is completed
 	 */
-	default CompleteCallback getCompleteCallback() {
+	default CompletedCallback getCompletedCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called once zooming or panning is rejected.
+	 * 
+	 * @return the callback called once zooming or panning is rejected
+	 */
+	default RejectedCallback getRejectedCallback() {
 		return null;
 	}
 

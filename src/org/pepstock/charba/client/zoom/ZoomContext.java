@@ -19,18 +19,18 @@ import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * The callback or handler context, created and passed by {@link ZoomPlugin#ID} which contains the link to the native chart.
+ * The callback or handler context, created and passed by {@link ZoomPlugin#ID} which contains the link to the native chart and the event.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class Context extends ChartContext {
+final class ZoomContext extends ChartContext {
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Context(NativeObject nativeObject) {
+	ZoomContext(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

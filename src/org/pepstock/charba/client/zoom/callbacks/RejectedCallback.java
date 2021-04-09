@@ -20,19 +20,19 @@ import org.pepstock.charba.client.zoom.AbstractConfigurationItem;
 import org.pepstock.charba.client.zoom.ZoomPlugin;
 
 /**
- * Callback interface of {@link ZoomPlugin#ID} plugin that is called once zooming or panning is completed.
+ * Callback interface of {@link ZoomPlugin#ID} plugin that is called once zooming or panning is rejected.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface CompletedCallback {
+public interface RejectedCallback {
 
 	/**
-	 * Method called once zooming or panning is completed.
+	 * Method called once zooming or panning is rejected.
 	 * 
 	 * @param chart chart instance
 	 * @param configurationItem configuration item of {@link ZoomPlugin} which generated the event
 	 */
-	void onCompleted(IsChart chart, AbstractConfigurationItem<?> configurationItem);
+	void onRejected(IsChart chart, AbstractConfigurationItem<?> configurationItem);
 
 }
