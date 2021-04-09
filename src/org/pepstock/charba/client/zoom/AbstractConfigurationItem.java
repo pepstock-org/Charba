@@ -282,9 +282,9 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	public final void setOverScaleMode(InteractionAxis mode) {
 		// reset callback if there is
-		setMode((ModeCallback) null);
+		setOverScaleMode((ModeCallback) null);
 		// sets values
-		setValue(Property.MODE, mode);
+		setValue(Property.OVER_SCALE_MODE, mode);
 	}
 
 	/**
@@ -294,8 +294,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final InteractionAxis getOverScaleMode() {
-		// no callback
-		return getValue(Property.MODE, InteractionAxis.values(), defaultOptions.getOverScaleMode());
+		return getValue(Property.OVER_SCALE_MODE, InteractionAxis.values(), defaultOptions.getOverScaleMode());
 	}
 
 	/**
@@ -426,7 +425,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(modeCallback, context)) {
 			// invokes callback
-			InteractionAxis result = modeCallback.mode(context.getChart());
+			InteractionAxis result = modeCallback.mode(context.getChart(), this);
 			// checks if result is consistent
 			if (Key.isValid(result)) {
 				// returns the value of result of callback

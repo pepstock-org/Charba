@@ -33,11 +33,11 @@ import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
 public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> implements IsDefaultZoom {
 
 	// progress callback
-	private static final CallbackPropertyHandler<ProgressCallback> PROGRESS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM);
+	private static final CallbackPropertyHandler<ProgressCallback> ZOOM_PROGRESS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM);
 	// completed callback
-	private static final CallbackPropertyHandler<CompletedCallback> COMPLETED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM_COMPLETED);
+	private static final CallbackPropertyHandler<CompletedCallback> ZOOM_COMPLETED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM_COMPLETED);
 	// rejected callback
-	private static final CallbackPropertyHandler<RejectedCallback> REJECTED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM_REJECTED);
+	private static final CallbackPropertyHandler<RejectedCallback> ZOOM_REJECTED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM_REJECTED);
 
 	/**
 	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.
@@ -109,7 +109,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	 */
 	@Override
 	CallbackPropertyHandler<ProgressCallback> getProgessPropertyHandler() {
-		return PROGRESS_PROPERTY_HANDLER;
+		return ZOOM_PROGRESS_PROPERTY_HANDLER;
 	}
 
 	/*
@@ -119,7 +119,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	 */
 	@Override
 	CallbackPropertyHandler<CompletedCallback> getCompletedPropertyHandler() {
-		return COMPLETED_PROPERTY_HANDLER;
+		return ZOOM_COMPLETED_PROPERTY_HANDLER;
 	}
 
 	/*
@@ -129,7 +129,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	 */
 	@Override
 	CallbackPropertyHandler<RejectedCallback> getRejectedPropertyHandler() {
-		return REJECTED_PROPERTY_HANDLER;
+		return ZOOM_REJECTED_PROPERTY_HANDLER;
 	}
 
 	/**

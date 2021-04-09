@@ -413,6 +413,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
    * `org.pepstock.charba.client.datalabels.callbacks.FontCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.FontCallback` class to manage whatever scriptable option which manages colors.
    * rename `CompleteCallback` class to `CompletedCallback` (and the name of the method from `onComplete` to `onCompleted`) in the `ZoomPlugin`.
    * rename `getCompleteCallback` and `setCompletedCallback` methods to `getCompleteCallback` and `setCompleteCallback` in the `Zoom` and `Pan` options in the `ZoomPlugin`.
+   * change `ModeCallback` interface method signature adding new argument, the configuration element of the `Zoom` options.
 
 #### Features
  * change all methods of `Plugin` interface becoming all default ones.

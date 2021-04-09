@@ -32,11 +32,11 @@ import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
 public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implements IsDefaultPan {
 
 	// progress callback
-	private static final CallbackPropertyHandler<ProgressCallback> PROGRESS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN);
+	private static final CallbackPropertyHandler<ProgressCallback> PAN_PROGRESS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN);
 	// completed callback
-	private static final CallbackPropertyHandler<CompletedCallback> COMPLETED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_COMPLETED);
+	private static final CallbackPropertyHandler<CompletedCallback> PAN_COMPLETED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_COMPLETED);
 	// rejected callback
-	private static final CallbackPropertyHandler<RejectedCallback> REJECTED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_REJECTED);
+	private static final CallbackPropertyHandler<RejectedCallback> PAN_REJECTED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_REJECTED);
 
 	/**
 	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.
@@ -102,7 +102,7 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 */
 	@Override
 	CallbackPropertyHandler<ProgressCallback> getProgessPropertyHandler() {
-		return PROGRESS_PROPERTY_HANDLER;
+		return PAN_PROGRESS_PROPERTY_HANDLER;
 	}
 
 	/*
@@ -112,7 +112,7 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 */
 	@Override
 	CallbackPropertyHandler<CompletedCallback> getCompletedPropertyHandler() {
-		return COMPLETED_PROPERTY_HANDLER;
+		return PAN_COMPLETED_PROPERTY_HANDLER;
 	}
 
 	/*
@@ -122,7 +122,7 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 */
 	@Override
 	CallbackPropertyHandler<RejectedCallback> getRejectedPropertyHandler() {
-		return REJECTED_PROPERTY_HANDLER;
+		return PAN_REJECTED_PROPERTY_HANDLER;
 	}
 
 	/**
