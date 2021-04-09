@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.zoom;
 
-import org.pepstock.charba.client.zoom.enums.ModifierKey;
+import org.pepstock.charba.client.enums.ModifierKey;
 
 /**
  * {@link ZoomPlugin#ID} plugin default options interface for PAN element.<br>

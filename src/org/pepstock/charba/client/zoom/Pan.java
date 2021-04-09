@@ -18,10 +18,10 @@ package org.pepstock.charba.client.zoom;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.zoom.callbacks.CompletedCallback;
 import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
 import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
-import org.pepstock.charba.client.zoom.enums.ModifierKey;
 
 /**
  * Base object to map pan options for {@link ZoomPlugin#ID} plugin configuration.<br>
