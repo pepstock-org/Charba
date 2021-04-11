@@ -17,12 +17,10 @@ package org.pepstock.charba.client.intl;
 
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
-import org.pepstock.charba.client.commons.Id;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 
-import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
@@ -31,14 +29,14 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.NUMBER_FORMAT, namespace = NativeName.INTL)
+@JsType(isNative = true, name = NativeName.NUMBER_FORMAT, namespace = JsPackage.GLOBAL)
 final class NativeNumberFormat {
 
 	/**
 	 * Creates object that enables language sensitive number formatting, with default.<br>
 	 * Used only internally to retrieve the locale default of the platform.
 	 */
-	private NativeNumberFormat() {
+	NativeNumberFormat() {
 		// must be empty
 	}
 
@@ -87,21 +85,5 @@ final class NativeNumberFormat {
 	 * @return an array of objects containing the formatted number in parts.
 	 */
 	native ArrayObject formatToParts(double value);
-
-	/**
-	 * Returns the default locale, set in the the platform.
-	 * 
-	 * @param key key of resolved options to get the locale, usually is "locale".
-	 * @return the default locale, set in the the platform
-	 */
-	@JsOverlay
-	static String getDefaultLocale(Key key) {
-		// creates a number format
-		NativeNumberFormat format = new NativeNumberFormat();
-		// gets resolved options
-		NativeObject options = format.resolvedOptions();
-		// retrieves and returns the locale as string
-		return Id.getStringProperty(key, options);
-	}
 
 }

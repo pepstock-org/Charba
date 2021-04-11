@@ -16,24 +16,6 @@ CharbaCallbackProxy.prototype.proxy;
 CharbaCallbackProxy.prototype.callback;
 /**
  * @constructor
- * @return {CharbaJsObjectHelper}
- */
-function CharbaJsObjectHelper() {}
-/**
- * @param {Object} object
- * @param {string} key 
- * @param {*} value
- * @return {undefined}
- */
-CharbaJsObjectHelper.set = function(object, key, value) {};
-/**
- * @param {Object} object
- * @param {string} key 
- * @return {*}
- */
-CharbaJsObjectHelper.get = function(object, key) {};
-/**
- * @constructor
  * @return {CharbaJsHelper}
  */
 function CharbaJsHelper() {}
@@ -331,3 +313,188 @@ function CharbaJsDateAdapterHelper() {}
  * @return {CharbaChartAdaptersDate}
  */
 CharbaJsDateAdapterHelper.create = function(object) {};
+/**
+ * ---------------------------
+ * NativeJsObject* definitions
+ * ---------------------------
+ */
+/**
+ * @constructor
+ * @return {CharbaJsObjectArrayHelper}
+ */
+function CharbaJsObjectArrayHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {Array} value
+ * @return {undefined}
+ */
+CharbaJsObjectArrayHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {Array}
+ */
+CharbaJsObjectArrayHelper.get = function(object, key) {};
+/**
+ * @constructor
+ * @return {CharbaJsObjectBooleanHelper}
+ */
+function CharbaJsObjectBooleanHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {boolean} value
+ * @return {undefined}
+ */
+CharbaJsObjectBooleanHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {boolean}
+ */
+CharbaJsObjectBooleanHelper.get = function(object, key) {};
+/**
+ * @constructor
+ * @return {CharbaJsObjectCallbackProxyHelper}
+ */
+function CharbaJsObjectCallbackProxyHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {Function} value
+ * @return {undefined}
+ */
+CharbaJsObjectCallbackProxyHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {Function}
+ */
+CharbaJsObjectCallbackProxyHelper.get = function(object, key) {};
+/**
+ * @constructor
+ * @return {CharbaJsObjectChartHelper}
+ */
+function CharbaJsObjectChartHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {Chart} value
+ * @return {undefined}
+ */
+CharbaJsObjectChartHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {Chart}
+ */
+CharbaJsObjectChartHelper.get = function(object, key) {};
+/**
+ * @constructor
+ * @return {CharbaJsObjectDoubleHelper}
+ */
+function CharbaJsObjectDoubleHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {number} value
+ * @return {undefined}
+ */
+CharbaJsObjectDoubleHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {number}
+ */
+CharbaJsObjectDoubleHelper.get = function(object, key) {};
+/**
+ * @constructor
+ * @return {CharbaJsObjectGradientHelper}
+ */
+function CharbaJsObjectGradientHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {CanvasGradient} value
+ * @return {undefined}
+ */
+CharbaJsObjectGradientHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {CanvasGradient}
+ */
+CharbaJsObjectGradientHelper.get = function(object, key) {};
+/**
+ * @constructor
+ * @return {CharbaJsObjectImageHelper}
+ */
+function CharbaJsObjectImageHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {HTMLImageElement} value
+ * @return {undefined}
+ */
+CharbaJsObjectImageHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {HTMLImageElement}
+ */
+CharbaJsObjectImageHelper.get = function(object, key) {};
+/**
+ * @constructor
+ * @return {CharbaJsObjectObjectHelper}
+ */
+function CharbaJsObjectObjectHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {Object} value
+ * @return {undefined}
+ */
+CharbaJsObjectObjectHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {Object}
+ */
+CharbaJsObjectObjectHelper.get = function(object, key) {};
+/**
+ * @constructor
+ * @return {CharbaJsObjectPatternHelper}
+ */
+function CharbaJsObjectPatternHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {CanvasPattern} value
+ * @return {undefined}
+ */
+CharbaJsObjectPatternHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {CanvasPattern}
+ */
+CharbaJsObjectPatternHelper.get = function(object, key) {};
+/**
+ * @constructor
+ * @return {CharbaJsObjectStringHelper}
+ */
+function CharbaJsObjectStringHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {string} value
+ * @return {undefined}
+ */
+CharbaJsObjectStringHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {string}
+ */
+CharbaJsObjectStringHelper.get = function(object, key) {};

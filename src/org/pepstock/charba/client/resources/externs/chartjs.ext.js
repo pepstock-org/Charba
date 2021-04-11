@@ -9,8 +9,8 @@
  */
 function Chart(context, configuration) {}
 /**
- * @param {number} width
- * @param {number} height
+ * @param {number=} width
+ * @param {number=} height
  * @return {undefined}
  */
 Chart.prototype.resize = function(width, height) {};

@@ -15,10 +15,6 @@
 */
 package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.impl.plugins.HtmlLegend;
-import org.pepstock.charba.client.zoom.ZoomPlugin;
-
 /**
  * Constants with java script object name to use in the {@link jsinterop.annotations.JsType} native objects.
  * 
@@ -27,12 +23,12 @@ import org.pepstock.charba.client.zoom.ZoomPlugin;
 public final class NativeName {
 
 	/**
-	 * Constant to bind java script object as object with name <b>{@value OBJECT}</b>.
+	 * Constant to bind java script object {@link NativeObject} as object with name <b>{@value OBJECT}</b>.
 	 */
 	public static final String OBJECT = "Object";
 
 	/**
-	 * Constant to bind java script array with name <b>{@value ARRAY}</b>.
+	 * Constant to bind java script array {@link Array} with name <b>{@value ARRAY}</b>.
 	 */
 	public static final String ARRAY = "Array";
 
@@ -42,19 +38,64 @@ public final class NativeName {
 	public static final String FUNCTION = "Function";
 
 	/**
-	 * Constant to bind java script object as CallbackProxy with name <b>{@value JS_CALLBACK_PROXY}</b>, (internal of Charba).
+	 * Constant to bind java script object as {@link CallbackProxy} with name <b>{@value JS_CALLBACK_PROXY}</b>, (internal of Charba).
 	 */
 	public static final String JS_CALLBACK_PROXY = "CharbaCallbackProxy";
 
 	/**
-	 * Constant to bind java script object as JsHelper with name <b>{@value JS_HELPER}</b>, (internal of Charba).
+	 * Constant to bind java script object as {@link JsHelper} with name <b>{@value JS_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_HELPER = "CharbaJsHelper";
 
 	/**
-	 * Constant to bind java script object as different java instance (by property type) with name <b>{@value JS_OBJECT_HELPER}</b>, (internal of Charba).
+	 * Constant to bind java script object as {@link NativeJsObjectArray} with name <b>{@value JS_OBJECT_ARRAY_HELPER}</b>, (internal of Charba).
 	 */
-	public static final String JS_OBJECT_HELPER = "CharbaJsObjectHelper";
+	public static final String JS_OBJECT_ARRAY_HELPER = "CharbaJsObjectArrayHelper";
+
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectBoolean} with name <b>{@value JS_OBJECT_BOOLEAN_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_BOOLEAN_HELPER = "CharbaJsObjectBooleanHelper";
+
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectCallbackProxy} with name <b>{@value JS_OBJECT_CALLBACK_PROXY_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_CALLBACK_PROXY_HELPER = "CharbaJsObjectCallbackProxyHelper";
+
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectChart} with name <b>{@value JS_OBJECT_CHART_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_CHART_HELPER = "CharbaJsObjectChartHelper";
+
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectDouble} and {@link NativeJsObjectInteger} with name <b>{@value JS_OBJECT_DOUBLE_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_DOUBLE_HELPER = "CharbaJsObjectDoubleHelper";
+
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectGradient} with name <b>{@value JS_OBJECT_GRADIENT_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_GRADIENT_HELPER = "CharbaJsObjectGradientHelper";
+
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectImage} with name <b>{@value JS_OBJECT_IMAGE_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_IMAGE_HELPER = "CharbaJsObjectImageHelper";
+
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectObject} and {@link NativeJsObjectJavaObject} with name <b>{@value JS_OBJECT_NATIVE_OBJECT_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_OBJECT_HELPER = "CharbaJsObjectObjectHelper";
+	
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectPattern} with name <b>{@value JS_OBJECT_PATTERN_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_PATTERN_HELPER = "CharbaJsObjectPatternHelper";
+	
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectString} with name <b>{@value JS_OBJECT_STRING_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_STRING_HELPER = "CharbaJsObjectStringHelper";
 
 	/**
 	 * Constant to bind java script object as JsItemsHelper with name <b>{@value JS_ITEMS_HELPER}</b>, (internal of Charba).
@@ -92,18 +133,18 @@ public final class NativeName {
 	public static final String JS_DATE_ADAPTER_HELPER = "CharbaJsDateAdapterHelper";
 
 	/**
-	 * Constant to bind java script object as JsHtmlLegendBuilderHelper with name <b>{@value JS_HTML_LEGEND_BUILDER_HELPER}</b>, (internal of Charba), when {@link HtmlLegend} is
+	 * Constant to bind java script object as JsHtmlLegendBuilderHelper with name <b>{@value JS_HTML_LEGEND_BUILDER_HELPER}</b>, (internal of Charba), when <b>HtmlLegend</b> is
 	 * activated.
 	 */
 	public static final String JS_HTML_LEGEND_BUILDER_HELPER = "CharbaJsHtmlLegendBuilderHelper";
 
 	/**
-	 * Constant to bind java script object as JsZoomHelper with name <b>{@value JS_ZOOM_HELPER}</b>, (internal of Charba), when {@link ZoomPlugin} is activated.
+	 * Constant to bind java script object as JsZoomHelper with name <b>{@value JS_ZOOM_HELPER}</b>, (internal of Charba), when <b>ZoomPlugin</b> is activated.
 	 */
 	public static final String JS_ZOOM_HELPER = "CharbaJsZoomHelper";
 
 	/**
-	 * Constant to bind java script object as JsDataLabelsHelper with name <b>{@value JS_DATALABELS_HELPER}</b>, (internal of Charba), when {@link DataLabelsPlugin} is activated.
+	 * Constant to bind java script object as JsDataLabelsHelper with name <b>{@value JS_DATALABELS_HELPER}</b>, (internal of Charba), when <b>DataLabelsPlugin</b> is activated.
 	 */
 	public static final String JS_DATALABELS_HELPER = "CharbaJsDataLabelsHelper";
 
@@ -138,6 +179,11 @@ public final class NativeName {
 	 * Constant to bind java script object as window with name <b>{@value WINDOW}</b>.
 	 */
 	public static final String WINDOW = "window";
+
+	/**
+	 * Constant to bind java script object as console with name <b>{@value CONSOLE}</b>.
+	 */
+	public static final String CONSOLE = "console";
 
 	/**
 	 * Constant to bind java script object as DOM document with name <b>{@value DOM_DOCUMENT}</b>.
@@ -285,19 +331,14 @@ public final class NativeName {
 	public static final String DOM_TOUCH = "Touch";
 
 	/**
-	 * Constant to bind java script object name space for localization, <b>{@value INTL}</b>.
-	 */
-	public static final String INTL = "Intl";
-
-	/**
 	 * Constant to bind java script object number formatter for localization, <b>{@value NUMBER_FORMAT}</b>.
 	 */
-	public static final String NUMBER_FORMAT = "NumberFormat";
+	public static final String NUMBER_FORMAT = "Intl.NumberFormat";
 
 	/**
 	 * Constant to bind java script object date formatter for localization, <b>{@value DATETIME_FORMAT}</b>.
 	 */
-	public static final String DATETIME_FORMAT = "DateTimeFormat";
+	public static final String DATETIME_FORMAT = "Intl.DateTimeFormat";
 
 	/**
 	 * Constant to bind java script object date formatter for localization, <b>{@value DATETIME_FORMAT}</b>.

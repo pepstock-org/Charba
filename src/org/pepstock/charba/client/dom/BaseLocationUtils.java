@@ -35,7 +35,7 @@ final class BaseLocationUtils {
 	// REGEXP pattern for query string
 	private static final String REGEXP_QUERY_STRING_PATTERN = "([^?=&]+)(=([^&]*))?";
 	// REGEXP for query string
-	private static final RegExp REGEXP_QUERY_STRING = new RegExp(REGEXP_QUERY_STRING_PATTERN, "giu");
+	private static final RegExp REGEXP_QUERY_STRING = new RegExp(REGEXP_QUERY_STRING_PATTERN, "gi");
 	// static instance of list parameters
 	private static final Map<String, List<String>> QUERY_STRING_PARAMETERS_MAP = new HashMap<>();
 	// static instance of cached query string

@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
@@ -29,7 +30,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  * 
  */
-@JsType(isNative = true, name = NativeName.DATETIME_FORMAT, namespace = NativeName.INTL)
+@JsType(isNative = true, name = NativeName.DATETIME_FORMAT, namespace = JsPackage.GLOBAL)
 final class NativeDateTimeFormat {
 
 	/**

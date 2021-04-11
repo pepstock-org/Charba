@@ -36,21 +36,24 @@ var CharbaCallbackProxy = {
 }
 /**
  * ----------------------------------------------------------------------------
- * CharbaJsObjectHelper
+ * CharbaJsObjectHelper*
  * ----------------------------------------------------------------------------
+ * ----------------------------------------------------------------
+ * Array
+ * ----------------------------------------------------------------
  * This object is providing a set of static methods used as utility
  * to set and get properties from an object or proxy.   
  */
-function CharbaJsObjectHelper() {}
+function CharbaJsObjectArrayHelper() {}
 /**
  * Allows you to set a property on an object.
  *
  * @param {Object} obj the target object on which to set the property
  * @param {string} key the name of the property to set
- * @param {*} value the value to set
+ * @param {Array} value the value to set
  * @return {undefined}
  */
-CharbaJsObjectHelper.set = function(obj, key, value) {
+CharbaJsObjectArrayHelper.set = function(obj, key, value) {
   obj[key] = value;
 }
 /**
@@ -58,9 +61,270 @@ CharbaJsObjectHelper.set = function(obj, key, value) {
  *
  * @param {Object} obj the target object on which to get the property
  * @param {string} key the name of the property to get
- * @return {*} the value of the property
+ * @return {Array} the value of the property
  */
-CharbaJsObjectHelper.get = function(obj, key) {
+CharbaJsObjectArrayHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
+ * Boolean
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectBooleanHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {boolean} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectBooleanHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {boolean} the value of the property
+ */
+CharbaJsObjectBooleanHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
+ * CallbackProxy
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectCallbackProxyHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {Function} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectCallbackProxyHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {Function} the value of the property
+ */
+CharbaJsObjectCallbackProxyHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
+ * Chart
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectChartHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {Chart} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectChartHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {Chart} the value of the property
+ */
+CharbaJsObjectChartHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
+ * Double and integer
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectDoubleHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {number} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectDoubleHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {number} the value of the property
+ */
+CharbaJsObjectDoubleHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
+ * Gradient
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectGradientHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {CanvasGradient} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectGradientHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {CanvasGradient} the value of the property
+ */
+CharbaJsObjectGradientHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
+ * Image
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectImageHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {HTMLImageElement} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectImageHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {HTMLImageElement} the value of the property
+ */
+CharbaJsObjectImageHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
+ * Object
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectObjectHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {Object} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectObjectHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {Object} the value of the property
+ */
+CharbaJsObjectObjectHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
+ * Pattern
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectPatternHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {CanvasPattern} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectPatternHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {CanvasPattern} the value of the property
+ */
+CharbaJsObjectPatternHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
+ * String
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectStringHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {string} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectStringHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {string} the value of the property
+ */
+CharbaJsObjectStringHelper.get = function(obj, key) {
   return obj[key];
 }
 /**

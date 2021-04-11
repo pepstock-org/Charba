@@ -18,7 +18,9 @@ package org.pepstock.charba.client.intl;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseElement;
 import org.pepstock.charba.client.dom.DOM;
 import org.pepstock.charba.client.dom.NodeList;
@@ -301,7 +303,7 @@ public final class CLocale {
 			// extracts locale parameter from meta elements
 			String localeFromMetaElements = getLocaleFromMetaElement();
 			// extracts locale parameter from platform
-			String localeFromPlatform = NativeNumberFormat.getDefaultLocale(LOCALE_KEY);
+			String localeFromPlatform = getDefaultLocale(LOCALE_KEY);
 			// ---------------------
 			// CHECK QUERY STRING
 			// ---------------------
@@ -378,6 +380,22 @@ public final class CLocale {
 		// if here, the property is not found in the meta elements
 		// then returns null
 		return null;
+	}
+	
+
+	/**
+	 * Returns the default locale, set in the the platform.
+	 * 
+	 * @param key key of resolved options to get the locale, usually is "locale".
+	 * @return the default locale, set in the the platform
+	 */
+	private static String getDefaultLocale(Key key) {
+		// creates a number format
+		NativeNumberFormat format = new NativeNumberFormat();
+		// gets resolved options
+		NativeObject options = format.resolvedOptions();
+		// retrieves and returns the locale as string
+		return Id.getStringProperty(key, options);
 	}
 
 }
