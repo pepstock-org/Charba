@@ -444,6 +444,7 @@
 				<include name="**/*"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
 				<exclude name="org/pepstock/charba/client/gwt/**"/>
+				<exclude name="org/pepstock/charba/client/DeferredCharba*"/>
 				<exclude name="org/pepstock/charba/client/resources/DeferredResources*"/>
 				<exclude name="org/pepstock/charba/client/resources/EntryPointStarter*"/>
 				<exclude name="org/pepstock/charba/client/resources/InternalInjectableTextResource*"/>
