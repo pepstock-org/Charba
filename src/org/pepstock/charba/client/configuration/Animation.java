@@ -16,7 +16,15 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.DelayCallback;
+import org.pepstock.charba.client.callbacks.DurationCallback;
+import org.pepstock.charba.client.callbacks.EasingCallback;
+import org.pepstock.charba.client.callbacks.LoopCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -68,11 +76,28 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-
 	// callback proxy to invoke the animation complete function
 	private final CallbackProxy<ProxyAnimationCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the animation in progress function
 	private final CallbackProxy<ProxyAnimationCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the duration function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> durationCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the easing function
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> easingCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the delay function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> delayCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the loop function
+	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> loopCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// instance of duration callback
+	private DurationCallback durationCallback = null;
+	// instance of delay callback
+	private DelayCallback delayCallback = null;
+	// instance of loop callback
+	private LoopCallback loopCallback = null;
+	// instance of easing callback
+	private EasingCallback easingCallback = null;
+
 	// amount of handlers
 	private int onCompleteHandlers = 0;
 	// amount of handlers
@@ -84,7 +109,12 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	private enum Property implements Key
 	{
 		ON_PROGRESS("onProgress"),
-		ON_COMPLETE("onComplete");
+		ON_COMPLETE("onComplete"),
+		// properties for callbacks
+		DURATION("duration"),
+		EASING("easing"),
+		DELAY("delay"),
+		LOOP("loop");
 
 		// name value of property
 		private final String value;
@@ -133,7 +163,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		completeCallbackProxy.setCallback((context, nativeObject) -> {
+		this.completeCallbackProxy.setCallback((context, nativeObject) -> {
 			// checks consistency of argument
 			if (nativeObject != null) {
 				// creates animation item
@@ -142,7 +172,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 				onComplete(animationItem);
 			}
 		});
-		progressCallbackProxy.setCallback((context, nativeObject) -> {
+		this.progressCallbackProxy.setCallback((context, nativeObject) -> {
 			// checks consistency of argument
 			if (nativeObject != null) {
 				// creates animation item
@@ -151,6 +181,14 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 				onProgress(animationItem);
 			}
 		});
+		// gets value calling callback
+		this.durationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), durationCallback, Defaults.get().getGlobal().getAnimation().getDuration()).intValue());
+		// gets value calling callback
+		this.delayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), delayCallback, Defaults.get().getGlobal().getAnimation().getDelay()).intValue());
+		// gets value calling callback
+		this.loopCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), loopCallback, Defaults.get().getGlobal().getAnimation().isLoop()));
+		// gets value calling callback
+		this.easingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), easingCallback, Defaults.get().getGlobal().getAnimation().getEasing()).value());
 	}
 
 	/**
@@ -271,6 +309,24 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	@Override
 	public boolean isLoop() {
 		return checkAndGet().isLoop();
+	}
+
+	/**
+	 * Sets the number of milliseconds an animation takes by a callback.
+	 * 
+	 * @param durationCallback the callback instance to use
+	 */
+	public void setDuration(DurationCallback durationCallback) {
+		// sets the callback
+		this.durationCallback = durationCallback;
+		// checks if callback is consistent
+		if (durationCallback != null) {
+			// adds the callback proxy function to java script object
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DURATION, durationCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DURATION, null);
+		}
 	}
 
 	/*

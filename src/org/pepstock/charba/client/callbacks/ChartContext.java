@@ -16,9 +16,11 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.enums.ContextType;
 
 /**
@@ -58,6 +60,15 @@ public class ChartContext extends NativeObjectContainer{
 		public String value() {
 			return value;
 		}
+	}
+	
+	/**
+	 * Creates the object with public object instance to be wrapped, called by <code>configuration</code> package.
+	 * 
+	 * @param envelop envelop of public object instance to be wrapped.
+	 */
+	public ChartContext(ConfigurationEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
