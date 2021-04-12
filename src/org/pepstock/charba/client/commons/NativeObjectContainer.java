@@ -1343,25 +1343,6 @@ public abstract class NativeObjectContainer {
 	}
 	
 	// ------------------------------------------
-	// --- JAVA OBJECT
-	// ------------------------------------------
-	/**
-	 * Returns a value (Javaf Object) in the embedded JavaScript object at specific property.
-	 * 
-	 * @param key key of the property of Java object.
-	 * @return value of the property or <code>null</code> if not there
-	 */
-	protected final Object getValueAsJavaObject(Key key) {
-		// checks if the property exists
-		if (!has(key)) {
-			// if no, returns the default value
-			return null;
-		}
-		// returns value
-		return nativeObject.getJavaObjectProperty(key.value());
-	}
-
-	// ------------------------------------------
 	// --- UTILITIES for properties which can have
 	// --- different types
 	// ------------------------------------------

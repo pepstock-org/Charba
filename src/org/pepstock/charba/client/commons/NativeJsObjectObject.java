@@ -23,7 +23,7 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, name = NativeName.JS_OBJECT_OBJECT_HELPER, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.JS_OBJECT_NATIVE_OBJECT_HELPER, namespace = JsPackage.GLOBAL)
 final class NativeJsObjectObject {
 
 	/**

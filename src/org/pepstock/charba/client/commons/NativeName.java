@@ -68,9 +68,14 @@ public final class NativeName {
 	public static final String JS_OBJECT_CHART_HELPER = "CharbaJsObjectChartHelper";
 
 	/**
-	 * Constant to bind java script object as {@link NativeJsObjectDouble} and {@link NativeJsObjectInteger} with name <b>{@value JS_OBJECT_DOUBLE_HELPER}</b>, (internal of Charba).
+	 * Constant to bind java script object as {@link NativeJsObjectDouble} with name <b>{@value JS_OBJECT_DOUBLE_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_OBJECT_DOUBLE_HELPER = "CharbaJsObjectDoubleHelper";
+	
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectInteger} with name <b>{@value JS_OBJECT_INTEGER_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_INTEGER_HELPER = "CharbaJsObjectIntegerHelper";
 
 	/**
 	 * Constant to bind java script object as {@link NativeJsObjectGradient} with name <b>{@value JS_OBJECT_GRADIENT_HELPER}</b>, (internal of Charba).
@@ -83,9 +88,14 @@ public final class NativeName {
 	public static final String JS_OBJECT_IMAGE_HELPER = "CharbaJsObjectImageHelper";
 
 	/**
-	 * Constant to bind java script object as {@link NativeJsObjectObject} and {@link NativeJsObjectJavaObject} with name <b>{@value JS_OBJECT_NATIVE_OBJECT_HELPER}</b>, (internal of Charba).
+	 * Constant to bind java script object as {@link NativeJsObjectObject} with name <b>{@value JS_OBJECT_NATIVE_OBJECT_HELPER}</b>, (internal of Charba).
 	 */
-	public static final String JS_OBJECT_OBJECT_HELPER = "CharbaJsObjectObjectHelper";
+	public static final String JS_OBJECT_NATIVE_OBJECT_HELPER = "CharbaJsObjectNativeObjectHelper";
+	
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectEvent} with name <b>{@value JS_OBJECT_NATIVE_EVENT_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_NATIVE_EVENT_HELPER = "CharbaJsObjectNativeEventHelper";
 	
 	/**
 	 * Constant to bind java script object as {@link NativeJsObjectPattern} with name <b>{@value JS_OBJECT_PATTERN_HELPER}</b>, (internal of Charba).

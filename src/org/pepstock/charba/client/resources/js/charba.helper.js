@@ -155,7 +155,7 @@ CharbaJsObjectChartHelper.get = function(obj, key) {
 }
 /**
  * ----------------------------------------------------------------
- * Double and integer
+ * Double
  * ----------------------------------------------------------------
  * This object is providing a set of static methods used as utility
  * to set and get properties from an object or proxy.   
@@ -180,6 +180,35 @@ CharbaJsObjectDoubleHelper.set = function(obj, key, value) {
  * @return {number} the value of the property
  */
 CharbaJsObjectDoubleHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
+ * Integer
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectIntegerHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {number} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectIntegerHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {number} the value of the property
+ */
+CharbaJsObjectIntegerHelper.get = function(obj, key) {
   return obj[key];
 }
 /**
@@ -242,12 +271,12 @@ CharbaJsObjectImageHelper.get = function(obj, key) {
 }
 /**
  * ----------------------------------------------------------------
- * Object
+ * Native Object
  * ----------------------------------------------------------------
  * This object is providing a set of static methods used as utility
  * to set and get properties from an object or proxy.   
  */
-function CharbaJsObjectObjectHelper() {}
+function CharbaJsObjectNativeObjectHelper() {}
 /**
  * Allows you to set a property on an object.
  *
@@ -256,7 +285,7 @@ function CharbaJsObjectObjectHelper() {}
  * @param {Object} value the value to set
  * @return {undefined}
  */
-CharbaJsObjectObjectHelper.set = function(obj, key, value) {
+CharbaJsObjectNativeObjectHelper.set = function(obj, key, value) {
   obj[key] = value;
 }
 /**
@@ -266,7 +295,36 @@ CharbaJsObjectObjectHelper.set = function(obj, key, value) {
  * @param {string} key the name of the property to get
  * @return {Object} the value of the property
  */
-CharbaJsObjectObjectHelper.get = function(obj, key) {
+CharbaJsObjectNativeObjectHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
+ * Native Event
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectNativeEventHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {Object} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectNativeEventHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {Object} the value of the property
+ */
+CharbaJsObjectNativeEventHelper.get = function(obj, key) {
   return obj[key];
 }
 /**

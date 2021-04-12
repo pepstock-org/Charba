@@ -410,6 +410,24 @@ CharbaJsObjectDoubleHelper.set = function(object, key, value) {};
 CharbaJsObjectDoubleHelper.get = function(object, key) {};
 /**
  * @constructor
+ * @return {CharbaJsObjectIntegerHelper}
+ */
+function CharbaJsObjectIntegerHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {number} value
+ * @return {undefined}
+ */
+CharbaJsObjectIntegerHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {number}
+ */
+CharbaJsObjectIntegerHelper.get = function(object, key) {};
+/**
+ * @constructor
  * @return {CharbaJsObjectGradientHelper}
  */
 function CharbaJsObjectGradientHelper() {}
@@ -446,22 +464,40 @@ CharbaJsObjectImageHelper.set = function(object, key, value) {};
 CharbaJsObjectImageHelper.get = function(object, key) {};
 /**
  * @constructor
- * @return {CharbaJsObjectObjectHelper}
+ * @return {CharbaJsObjectNativeObjectHelper}
  */
-function CharbaJsObjectObjectHelper() {}
+function CharbaJsObjectNativeObjectHelper() {}
 /**
  * @param {Object} object
  * @param {string} key 
  * @param {Object} value
  * @return {undefined}
  */
-CharbaJsObjectObjectHelper.set = function(object, key, value) {};
+CharbaJsObjectNativeObjectHelper.set = function(object, key, value) {};
 /**
  * @param {Object} object
  * @param {string} key 
  * @return {Object}
  */
-CharbaJsObjectObjectHelper.get = function(object, key) {};
+CharbaJsObjectNativeObjectHelper.get = function(object, key) {};
+/**
+ * @constructor
+ * @return {CharbaJsObjectNativeEventHelper}
+ */
+function CharbaJsObjectNativeEventHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {Object} value
+ * @return {undefined}
+ */
+CharbaJsObjectNativeEventHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {Object}
+ */
+CharbaJsObjectNativeEventHelper.get = function(object, key) {};
 /**
  * @constructor
  * @return {CharbaJsObjectPatternHelper}
