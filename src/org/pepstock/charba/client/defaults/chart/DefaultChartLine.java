@@ -149,4 +149,34 @@ public final class DefaultChartLine implements IsDefaultLine {
 		return line.isStepped();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBackgroundColorAsString()
+	 */
+	@Override
+	public String getHoverBackgroundColorAsString() {
+		return line.getHoverBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBorderWidth()
+	 */
+	@Override
+	public int getHoverBorderWidth() {
+		return line.getHoverBorderWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBorderColorAsString()
+	 */
+	@Override
+	public String getHoverBorderColorAsString() {
+		return line.getHoverBorderColorAsString();
+	}
+
 }

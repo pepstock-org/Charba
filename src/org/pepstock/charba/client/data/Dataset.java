@@ -26,8 +26,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
@@ -659,6 +659,36 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * @return the default border width value based on type of chart.
 	 */
 	protected int getDefaultBorderWidth() {
+		// returns the ARC default value because is MOSTLY used
+		return getDefaultValues().getElements().getArc().getBorderWidth();
+	}
+	
+	/**
+	 * Returns the default background color value based on type of chart.
+	 * 
+	 * @return the default background color value based on type of chart.
+	 */
+	protected String getDefaultHoverBackgroundColorAsString()	{
+		// returns the ARC default value because is MOSTLY used
+		return getDefaultValues().getElements().getArc().getBackgroundColorAsString();
+	}
+
+	/**
+	 * Returns the default border color value based on type of chart.
+	 * 
+	 * @return the default border color value based on type of chart.
+	 */
+	protected String getDefaultHoverBorderColorAsString(){
+		// returns the ARC default value because is MOSTLY used
+		return getDefaultValues().getElements().getArc().getBorderColorAsString();
+	}
+
+	/**
+	 * Returns the default border width value based on type of chart.
+	 * 
+	 * @return the default border width value based on type of chart.
+	 */
+	protected int getDefaultHoverBorderWidth(){
 		// returns the ARC default value because is MOSTLY used
 		return getDefaultValues().getElements().getArc().getBorderWidth();
 	}

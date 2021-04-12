@@ -88,4 +88,14 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#getHoverBorderRadius()
+	 */
+	@Override
+	public int getHoverBorderRadius() {
+		return getBorderRadius();
+	}
+
 }

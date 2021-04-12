@@ -147,4 +147,24 @@ public final class DefaultChartPoint implements IsDefaultPoint {
 		return point.getPointStyleAsImage();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBackgroundColorAsString()
+	 */
+	@Override
+	public String getHoverBackgroundColorAsString() {
+		return point.getHoverBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBorderColorAsString()
+	 */
+	@Override
+	public String getHoverBorderColorAsString() {
+		return point.getHoverBorderColorAsString();
+	}
+
 }

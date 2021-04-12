@@ -285,7 +285,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		// checks if the callback has not been
 		if (getHoverOffsetCallback() == null) {
 			// returns the array
-			ArrayInteger array = getValueOrArray(Property.HOVER_OFFSET, getDefaultValues().getElements().getArc().getOffset());
+			ArrayInteger array = getValueOrArray(Property.HOVER_OFFSET, getDefaultValues().getElements().getArc().getHoverOffset());
 			return ArrayListHelper.list(array);
 		}
 		// if here, is a callback

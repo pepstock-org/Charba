@@ -21,10 +21,10 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayDouble;
@@ -199,6 +199,66 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	@Override
 	public OrderHandler getOrderHandler() {
 		return orderHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBackgroundColorAsString()
+	 */
+	@Override
+	protected String getDefaultBackgroundColorAsString() {
+		return getDefaultValues().getElements().getPoint().getBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderColorAsString()
+	 */
+	@Override
+	protected String getDefaultBorderColorAsString() {
+		return getDefaultValues().getElements().getPoint().getBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderWidth()
+	 */
+	@Override
+	protected int getDefaultBorderWidth() {
+		return getDefaultValues().getElements().getPoint().getBorderWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultHoverBackgroundColorAsString()
+	 */
+	@Override
+	protected String getDefaultHoverBackgroundColorAsString() {
+		return getDefaultValues().getElements().getPoint().getHoverBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultHoverBorderColorAsString()
+	 */
+	@Override
+	protected String getDefaultHoverBorderColorAsString() {
+		return getDefaultValues().getElements().getPoint().getHoverBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultHoverBorderWidth()
+	 */
+	@Override
+	protected int getDefaultHoverBorderWidth() {
+		return getDefaultValues().getElements().getPoint().getHoverBorderWidth();
 	}
 
 	/**

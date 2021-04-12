@@ -118,4 +118,44 @@ public final class DefaultChartBar implements IsDefaultBar {
 		return bar.getPointStyleAsImage();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBackgroundColorAsString()
+	 */
+	@Override
+	public String getHoverBackgroundColorAsString() {
+		return bar.getHoverBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBorderWidth()
+	 */
+	@Override
+	public int getHoverBorderWidth() {
+		return bar.getHoverBorderWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBorderColorAsString()
+	 */
+	@Override
+	public String getHoverBorderColorAsString() {
+		return bar.getHoverBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#getHoverBorderRadius()
+	 */
+	@Override
+	public int getHoverBorderRadius() {
+		return bar.getHoverBorderRadius();
+	}
+
 }

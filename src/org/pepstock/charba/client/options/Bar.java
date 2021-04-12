@@ -34,7 +34,8 @@ public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaul
 	private enum Property implements Key
 	{
 		BORDER_SKIPPED("borderSkipped"),
-		BORDER_RADIUS("borderRadius");
+		BORDER_RADIUS("borderRadius"),
+		HOVER_BORDER_RADIUS("hoverBorderRadius");
 
 		// name value of property
 		private final String value;
@@ -152,4 +153,23 @@ public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaul
 		return getValue(Property.BORDER_RADIUS, getDefaultValues().getBorderRadius());
 	}
 
+	/**
+	 * Sets the bar border radius (in pixels) when hovered.
+	 * 
+	 * @param borderRadius the bar border radius (in pixels) when hovered.
+	 */
+	public void setHoverBorderRadius(int borderRadius) {
+		setValueAndAddToParent(Property.HOVER_BORDER_RADIUS, borderRadius);
+	}
+
+	/**
+	 * Returns the bar border radius (in pixels) when hovered.
+	 * 
+	 * @return the bar border radius (in pixels) when hovered.
+	 */
+	@Override
+	public int getHoverBorderRadius() {
+		return getValue(Property.HOVER_BORDER_RADIUS, getDefaultValues().getHoverBorderRadius());
+	}
+	
 }

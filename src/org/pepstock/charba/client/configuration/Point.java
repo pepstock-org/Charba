@@ -147,24 +147,6 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	}
 
 	/**
-	 * Sets the border width of point when hovered.
-	 * 
-	 * @param hoverBorderWidth the border width of point when hovered.
-	 */
-	public void setHoverBorderWidth(int hoverBorderWidth) {
-		getConfiguration().getElements().getPoint().setHoverBorderWidth(hoverBorderWidth);
-	}
-
-	/**
-	 * Returns the border width of point when hovered.
-	 * 
-	 * @return the border width of point when hovered.
-	 */
-	public int getHoverBorderWidth() {
-		return getConfiguration().getElements().getPoint().getBorderWidth();
-	}
-
-	/**
 	 * Sets the point rotation (in degrees).
 	 * 
 	 * @param rotation the point rotation (in degrees).

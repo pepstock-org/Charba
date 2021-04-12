@@ -374,7 +374,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(Pattern... colors) {
 		// sets value to patterns
-		getPatternsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(colors), getDefaultBackgroundColorAsString());
+		getPatternsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(colors), getDefaultHoverBackgroundColorAsString());
 		// removes the property
 		resetBeingPatterns(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR);
 	}
@@ -386,7 +386,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(Gradient... colors) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(colors), getDefaultBackgroundColorAsString());
+		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(colors), getDefaultHoverBackgroundColorAsString());
 		// removes previous configuration to other containers
 		resetBeingGradients(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR);
 	}
@@ -402,7 +402,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// checks if the property is not a color (therefore a pattern or gradient)
 		if (hasColors(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR)) {
 			// returns list of colors
-			ArrayString array = getColors(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString());
+			ArrayString array = getColors(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultHoverBackgroundColorAsString());
 			return ArrayListHelper.list(array);
 		}
 		// if here, the property is not a color
@@ -487,7 +487,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBorderColor(Gradient... colors) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(colors), getDefaultBorderColorAsString());
+		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(colors), getDefaultHoverBorderColorAsString());
 		// removes previous configuration to other containers
 		resetBeingGradients(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR);
 	}
@@ -501,7 +501,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// checks if the property is not a color (therefore a gradient)
 		if (hasColors(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR)) {
 			// returns list of colors
-			ArrayString array = getColors(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString());
+			ArrayString array = getColors(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultHoverBorderColorAsString());
 			return ArrayListHelper.list(array);
 		}
 		// if here, the property is not a object
@@ -558,7 +558,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// checks if no callback has been set
 		if (getInternalBorderWidthCallback() == null) {
 			// returns list of border width
-			ArrayInteger array = getWidths(Dataset.CommonProperty.HOVER_BORDER_WIDTH, getDefaultBorderWidth());
+			ArrayInteger array = getWidths(Dataset.CommonProperty.HOVER_BORDER_WIDTH, getDefaultHoverBorderWidth());
 			return ArrayListHelper.list(array);
 		}
 		// if here, there is a callback

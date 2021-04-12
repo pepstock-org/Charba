@@ -38,7 +38,10 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	{
 		BACKGROUND_COLOR("backgroundColor"),
 		BORDER_WIDTH("borderWidth"),
-		BORDER_COLOR("borderColor");
+		BORDER_COLOR("borderColor"),
+		HOVER_BACKGROUND_COLOR("hoverBackgroundColor"),
+		HOVER_BORDER_WIDTH("hoverBorderWidth"),
+		HOVER_BORDER_COLOR("hoverBorderColor");
 
 		// name value of property
 		private final String value;
@@ -165,5 +168,100 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	public final IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
+	
+	// ------------------------------------------------------
+	// HOVER
+	// ------------------------------------------------------
+	
+	/**
+	 * Sets the background color when hovered.
+	 * 
+	 * @param backgroundColor the background color when hovered.
+	 */
+	public final void setHoverBackgroundColor(IsColor backgroundColor) {
+		setHoverBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
+	}
+
+	/**
+	 * Sets the background color when hovered.
+	 * 
+	 * @param backgroundColor the background color when hovered.
+	 */
+	public final void setHoverBackgroundColor(String backgroundColor) {
+		setValueAndAddToParent(Property.HOVER_BACKGROUND_COLOR, backgroundColor);
+	}
+
+	/**
+	 * Returns the background color when hovered.
+	 * 
+	 * @return the background color when hovered.
+	 */
+	public final String getHoverBackgroundColorAsString() {
+		return getValue(Property.HOVER_BACKGROUND_COLOR, getDefaultValues().getHoverBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the background color when hovered.
+	 * 
+	 * @return the background color when hovered.
+	 */
+	public final IsColor getHoverBackgroundColor() {
+		return ColorBuilder.parse(getHoverBackgroundColorAsString());
+	}
+	
+	/**
+	 * Sets the border width when hovered.
+	 * 
+	 * @param borderWidth the border width when hovered.
+	 */
+	public final void setHoverBorderWidth(int borderWidth) {
+		setValueAndAddToParent(Property.HOVER_BORDER_WIDTH, borderWidth);
+	}
+
+	/**
+	 * Returns the border width when hovered.
+	 * 
+	 * @return the border width when hovered.
+	 */
+	public final int getHoverBorderWidth() {
+		return getValue(Property.HOVER_BORDER_WIDTH, getDefaultValues().getHoverBorderWidth());
+	}
+
+	/**
+	 * Sets the border color when hovered.
+	 * 
+	 * @param borderColor the border color when hovered.
+	 */
+	public final void setHoverBorderColor(IsColor borderColor) {
+		setHoverBorderColor(IsColor.checkAndGetValue(borderColor));
+	}
+
+	/**
+	 * Sets the border color when hovered.
+	 * 
+	 * @param borderColor the border color when hovered.
+	 */
+	public final void setHoverBorderColor(String borderColor) {
+		setValueAndAddToParent(Property.HOVER_BORDER_COLOR, borderColor);
+	}
+
+	/**
+	 * Returns the border color when hovered.
+	 * 
+	 * @return the border color when hovered.
+	 */
+	public final String getHoverBorderColorAsString() {
+		return getValue(Property.HOVER_BORDER_COLOR, getDefaultValues().getHoverBorderColorAsString());
+	}
+
+	/**
+	 * Returns the border color when hovered.
+	 * 
+	 * @return the border color when hovered.
+	 */
+	public final IsColor getHoverBorderColor() {
+		return ColorBuilder.parse(getHoverBorderColorAsString());
+	}
+
 
 }

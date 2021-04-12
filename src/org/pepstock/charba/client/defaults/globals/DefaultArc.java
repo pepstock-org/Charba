@@ -93,4 +93,14 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 		return DEFAULT_BORDER_RADIUS;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getHoverOffset()
+	 */
+	@Override
+	public int getHoverOffset() {
+		return getOffset();
+	}
+
 }

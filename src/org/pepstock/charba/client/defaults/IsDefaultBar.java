@@ -37,5 +37,12 @@ public interface IsDefaultBar extends IsDefaultOptionsElement, IsDefaultPointSty
 	 * @return the bar border radius (in pixels).
 	 */
 	int getBorderRadius();
+	
+	/**
+	 * Returns the bar border radius (in pixels) when hovered.
+	 * 
+	 * @return the bar border radius (in pixels) when hovered.
+	 */
+	int getHoverBorderRadius();
 
 }

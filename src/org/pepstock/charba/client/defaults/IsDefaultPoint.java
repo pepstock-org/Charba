@@ -44,13 +44,6 @@ public interface IsDefaultPoint extends IsDefaultOptionsElement, IsDefaultPointS
 	double getHoverRadius();
 
 	/**
-	 * Returns the border width of point when hovered.
-	 * 
-	 * @return the border width of point when hovered.
-	 */
-	int getHoverBorderWidth();
-
-	/**
 	 * Returns the point rotation (in degrees).
 	 * 
 	 * @return the point rotation (in degrees).

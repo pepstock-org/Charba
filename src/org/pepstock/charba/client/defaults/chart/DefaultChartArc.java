@@ -116,4 +116,44 @@ public final class DefaultChartArc implements IsDefaultArc {
 		return arc.getBorderRadius();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBackgroundColorAsString()
+	 */
+	@Override
+	public String getHoverBackgroundColorAsString() {
+		return arc.getHoverBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBorderWidth()
+	 */
+	@Override
+	public int getHoverBorderWidth() {
+		return arc.getHoverBorderWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBorderColorAsString()
+	 */
+	@Override
+	public String getHoverBorderColorAsString() {
+		return arc.getHoverBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getHoverOffset()
+	 */
+	@Override
+	public int getHoverOffset() {
+		return arc.getHoverOffset();
+	}
+
 }

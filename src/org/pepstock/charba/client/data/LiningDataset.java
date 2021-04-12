@@ -23,12 +23,12 @@ import org.pepstock.charba.client.callbacks.BorderDashCallback;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.CapStyleCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.FillCallback;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
@@ -283,8 +283,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		this.pointBorderWidthCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// gets value calling callback
-		this.pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), pointHoverBackgroundColorCallback,
-				InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+		this.pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), pointHoverBackgroundColorCallback, InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR,
+				getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		// gets value calling callback
 		this.pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), pointHoverBorderColorCallback, InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR,
 				getDefaultValues().getElements().getPoint().getBorderColorAsString()));
@@ -828,7 +828,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setHoverBackgroundColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(gradient), getDefaultValues().getElements().getLine().getBackgroundColorAsString());
+		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(gradient), getDefaultValues().getElements().getLine().getHoverBackgroundColorAsString());
 		// removes previous configuration to other containers
 		resetBeingGradients(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR);
 	}
@@ -842,12 +842,12 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// checks if the property is not a pattern or gradient (therefore a color)
 		if (hasColors(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR) && getHoverBackgroundColorCallback() == null) {
 			// returns color as string
-			return getValue(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getLine().getBackgroundColorAsString());
+			return getValue(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getLine().getHoverBackgroundColorAsString());
 		} else {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
 			// returns default value
-			return getDefaultValues().getElements().getLine().getBackgroundColorAsString();
+			return getDefaultValues().getElements().getLine().getHoverBackgroundColorAsString();
 		}
 	}
 
@@ -931,7 +931,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// resets callback
 		setHoverBorderColor((ColorCallback<DatasetContext>) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(gradient), getDefaultValues().getElements().getLine().getBorderColorAsString());
+		getGradientsContainer().setObjects(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(gradient), getDefaultValues().getElements().getLine().getHoverBorderColorAsString());
 		// removes previous configuration to other containers
 		resetBeingGradients(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR);
 	}
@@ -945,12 +945,12 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// checks if the property is not a pattern or gradient (therefore a color)
 		if (hasColors(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR) && getBorderColorCallback() == null) {
 			// returns color as string
-			return getValue(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultValues().getElements().getLine().getBorderColorAsString());
+			return getValue(Dataset.CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultValues().getElements().getLine().getHoverBorderColorAsString());
 		} else {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
 			// returns default value
-			return getDefaultValues().getElements().getLine().getBorderColorAsString();
+			return getDefaultValues().getElements().getLine().getHoverBorderColorAsString();
 		}
 	}
 
@@ -1002,11 +1002,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	public int getHoverBorderWidth() {
 		// checks if a callback has been set for this property
 		if (getHoverBorderWidthCallback() == null) {
-			return getValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, getDefaultValues().getElements().getLine().getBorderWidth());
+			return getValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, getDefaultValues().getElements().getLine().getHoverBorderWidth());
 		}
 		// if here, the property is a callback
 		// then returns the default
-		return getDefaultValues().getElements().getLine().getBorderWidth();
+		return getDefaultValues().getElements().getLine().getHoverBorderWidth();
 	}
 
 	/**
@@ -2301,6 +2301,36 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	@Override
 	protected int getDefaultBorderWidth() {
 		return getDefaultValues().getElements().getLine().getBorderWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultHoverBackgroundColorAsString()
+	 */
+	@Override
+	protected String getDefaultHoverBackgroundColorAsString() {
+		return getDefaultValues().getElements().getLine().getHoverBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultHoverBorderColorAsString()
+	 */
+	@Override
+	protected String getDefaultHoverBorderColorAsString() {
+		return getDefaultValues().getElements().getLine().getHoverBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultHoverBorderWidth()
+	 */
+	@Override
+	protected int getDefaultHoverBorderWidth() {
+		return getDefaultValues().getElements().getLine().getHoverBorderWidth();
 	}
 
 	/**

@@ -37,6 +37,7 @@ public final class Arc extends AbstractElement<IsDefaultArc> implements IsDefaul
 		WEIGHT("weight"),
 		ANGLE("angle"),
 		OFFSET("offset"),
+		HOVER_OFFSET("hoverOffset"),
 		BORDER_RADIUS("borderRadius");
 
 		// name value of property
@@ -170,5 +171,24 @@ public final class Arc extends AbstractElement<IsDefaultArc> implements IsDefaul
 	@Override
 	public int getBorderRadius() {
 		return getValue(Property.BORDER_RADIUS, getDefaultValues().getBorderRadius());
+	}
+	
+	/**
+	 * Sets the arc offset (in pixels) when hovered.
+	 * 
+	 * @param offset the arc offset when hovered
+	 */
+	public void setHoverOffset(int offset) {
+		setValueAndAddToParent(Property.HOVER_OFFSET, offset);
+	}
+
+	/**
+	 * Returns the arc offset (in pixels) when hovered.
+	 * 
+	 * @return the arc offset when hovered
+	 */
+	@Override
+	public int getHoverOffset() {
+		return getValue(Property.HOVER_OFFSET, getDefaultValues().getHoverOffset());
 	}
 }

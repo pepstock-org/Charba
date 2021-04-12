@@ -34,7 +34,6 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 		RADIUS("radius"),
 		HIT_RADIUS("hitRadius"),
 		HOVER_RADIUS("hoverRadius"),
-		HOVER_BORDER_WIDTH("hoverBorderWidth"),
 		ROTATION("rotation");
 
 		// name value of property
@@ -144,25 +143,6 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	@Override
 	public double getHoverRadius() {
 		return getValue(Property.HOVER_RADIUS, getDefaultValues().getHoverRadius());
-	}
-
-	/**
-	 * Sets the border width of point when hovered.
-	 * 
-	 * @param hoverBorderWidth the border width of point when hovered.
-	 */
-	public void setHoverBorderWidth(int hoverBorderWidth) {
-		setValueAndAddToParent(Property.HOVER_BORDER_WIDTH, hoverBorderWidth);
-	}
-
-	/**
-	 * Returns the border width of point when hovered.
-	 * 
-	 * @return the border width of point when hovered.
-	 */
-	@Override
-	public int getHoverBorderWidth() {
-		return getValue(Property.HOVER_BORDER_WIDTH, getDefaultValues().getHoverBorderWidth());
 	}
 
 	/**

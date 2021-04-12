@@ -220,8 +220,11 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `textAlign` property to `LegendLabels` options and configuration classes.
  * add `fontColor` property to `LegendItem` and `LegendLabelItem` classes.
  * add `align` property to `Title` options and configuration classes.
+ * add `hoverBackgroundColor`, `hoverBorderWidth` and `hoverBorderColor` properties to `Bar`, `Arc`, `Line` and `Point` elements configuration and options classes.
  * add `pointStyle` property to `Bar` element configuration and options classes.
+ * add `hoverBorderRadius` property to `Bar` element configuration and options classes.
  * add `borderRadius` property to `Arc` element configuration and options classes.
+ * add `hoverOffset` property to `Arc` element configuration and options classes.
  * add `Datasets` class in order to manage data sets options and configuration classes.
  * add `Interaction` class in order to manage data sets options and configuration classes.
  * implement `decimation` plugin options and configuration.
@@ -241,7 +244,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `cutout` property in the options and configuration classes, for pie and doughnut charts.
  * add `radius` and `radiusPercentage` properties in the options and configuration classes, for pie and doughnut charts.
  * add `resizeDelay` property to options and configuration.
- * add `setX` and `setY` methods to `IsPadding` interface as shortcut to set X (left, right) and Y (top, bottom) dimensions. 
+ * add `setX` and `setY` methods to `IsPadding` interface as shortcut to set X (left, right) and Y (top, bottom) dimensions.
 
 ### _Scales_
 

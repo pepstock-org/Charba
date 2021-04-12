@@ -20,7 +20,7 @@ import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
 
 /**
- * CHART.JS default values for ARC element.
+ * CHART.JS default values for ARC, LINE, BAR and POINT elements.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -80,6 +80,36 @@ abstract class AbstractDefaultOptionsElement implements IsDefaultOptionsElement 
 	@Override
 	public final String getBorderColorAsString() {
 		return borderColor != null ? borderColor : Defaults.get().getGlobal().getBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBackgroundColorAsString()
+	 */
+	@Override
+	public String getHoverBackgroundColorAsString() {
+		return getBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBorderWidth()
+	 */
+	@Override
+	public int getHoverBorderWidth() {
+		return getBorderWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptionsElement#getHoverBorderColorAsString()
+	 */
+	@Override
+	public String getHoverBorderColorAsString() {
+		return getBorderColorAsString();
 	}
 
 }

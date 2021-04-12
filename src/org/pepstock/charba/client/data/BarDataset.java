@@ -217,7 +217,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// -------------------------------
 		this.borderSkippedCallbackProxy.setCallback((contextFunction, context) -> onBorderSkipped(new DatasetContext(new DataEnvelop<>(context))));
 		// gets value calling callback
-		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), borderRadiusCallback, BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
+		this.borderRadiusCallbackProxy
+				.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), borderRadiusCallback, BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
 		// gets value calling callback
 		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), borderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// gets value calling callback
@@ -276,6 +277,36 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	@Override
 	protected int getDefaultBorderWidth() {
 		return getDefaultValues().getElements().getBar().getBorderWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultHoverBackgroundColorAsString()
+	 */
+	@Override
+	protected String getDefaultHoverBackgroundColorAsString() {
+		return getDefaultValues().getElements().getBar().getHoverBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultHoverBorderColorAsString()
+	 */
+	@Override
+	protected String getDefaultHoverBorderColorAsString() {
+		return getDefaultValues().getElements().getBar().getHoverBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultHoverBorderWidth()
+	 */
+	@Override
+	protected int getDefaultHoverBorderWidth() {
+		return getDefaultValues().getElements().getBar().getHoverBorderWidth();
 	}
 
 	// -----------------
@@ -718,7 +749,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return the list of bar border radius (in pixels), when hovered.
 	 */
 	public List<Integer> getHoverBorderRadius() {
-		return borderItemsHandler.getBorderItem(Property.HOVER_BORDER_RADIUS, Property.CHARBA_HOVER_BORDER_RADIUS_TYPE, getDefaultValues().getElements().getBar().getBorderRadius());
+		return borderItemsHandler.getBorderItem(Property.HOVER_BORDER_RADIUS, Property.CHARBA_HOVER_BORDER_RADIUS_TYPE, getDefaultValues().getElements().getBar().getHoverBorderRadius());
 	}
 
 	/**
@@ -727,7 +758,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return the list of bar border radius (in pixels), when hovered.
 	 */
 	public List<BarBorderRadius> getHoverBorderRadiusAsObjects() {
-		return borderItemsHandler.getBorderItemAsObjects(Property.HOVER_BORDER_RADIUS, Property.CHARBA_HOVER_BORDER_RADIUS_TYPE, BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius());
+		return borderItemsHandler.getBorderItemAsObjects(Property.HOVER_BORDER_RADIUS, Property.CHARBA_HOVER_BORDER_RADIUS_TYPE, BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getHoverBorderRadius());
 	}
 
 	/**

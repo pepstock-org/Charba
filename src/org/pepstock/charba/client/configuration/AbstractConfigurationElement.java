@@ -133,5 +133,99 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	public IsColor getBorderColor() {
 		return getElement().getBorderColor();
 	}
+	
+	// ------------------------------------------------------
+	// HOVER
+	// ------------------------------------------------------
+	
+	/**
+	 * Sets the background color when hovered.
+	 * 
+	 * @param backgroundColor the background color when hovered.
+	 */
+	public void setHoverBackgroundColor(IsColor backgroundColor) {
+		getElement().setHoverBackgroundColor(backgroundColor);
+	}
+
+	/**
+	 * Sets the background color when hovered.
+	 * 
+	 * @param backgroundColor the background color when hovered.
+	 */
+	public void setHoverBackgroundColor(String backgroundColor) {
+		getElement().setHoverBackgroundColor(backgroundColor);
+	}
+
+	/**
+	 * Returns the background color when hovered.
+	 * 
+	 * @return the background color when hovered.
+	 */
+	public String getHoverBackgroundColorAsString() {
+		return getElement().getHoverBackgroundColorAsString();
+	}
+
+	/**
+	 * Returns the background color when hovered.
+	 * 
+	 * @return the background color when hovered.
+	 */
+	public IsColor getHoverBackgroundColor() {
+		return getElement().getHoverBackgroundColor();
+	}
+	
+	/**
+	 * Sets the border width when hovered.
+	 * 
+	 * @param borderWidth the border width when hovered.
+	 */
+	public void setHoverBorderWidth(int borderWidth) {
+		getElement().setHoverBorderWidth(borderWidth);
+	}
+
+	/**
+	 * Returns the border width when hovered.
+	 * 
+	 * @return the border width when hovered.
+	 */
+	public int getHoverBorderWidth() {
+		return getElement().getHoverBorderWidth();
+	}
+
+	/**
+	 * Sets the border color when hovered.
+	 * 
+	 * @param borderColor the border color when hovered.
+	 */
+	public void setHoverBorderColor(IsColor borderColor) {
+		getElement().setHoverBorderColor(borderColor);
+	}
+
+	/**
+	 * Sets the border color when hovered.
+	 * 
+	 * @param borderColor the border color when hovered.
+	 */
+	public void setHoverBorderColor(String borderColor) {
+		getElement().setHoverBorderColor(borderColor);
+	}
+
+	/**
+	 * Returns the border color when hovered.
+	 * 
+	 * @return the border color when hovered.
+	 */
+	public String getHoverBorderColorAsString() {
+		return getElement().getHoverBorderColorAsString();
+	}
+
+	/**
+	 * Returns the border color when hovered.
+	 * 
+	 * @return the border color when hovered.
+	 */
+	public IsColor getHoverBorderColor() {
+		return getElement().getHoverBorderColor();
+	}
 
 }
