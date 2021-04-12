@@ -382,6 +382,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable overriding the legend `pointStyle` (from dataset) using new `pointStyle` option.
  * improve the gradients and patterns management at dataset level in order to be managed by a callback instead of by a plugin in order to have the right chart area size for gradients.
  * add `grouped` property to `BarDataset` class.
+ * add `rotation` and `circumference` properties to `PieDataset` and `DoughnutDataset` classes.
 
 ### _Plugins_
 

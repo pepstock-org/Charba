@@ -68,7 +68,9 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		WEIGHT("weight"),
 		OFFSET("offset"),
 		HOVER_OFFSET("hoverOffset"),
-		BORDER_RADIUS("borderRadius"),
+		BORDER_RADIUS("borderRadius"),		
+		ROTATION("rotation"),
+		CIRCUMFERENCE("circumference"),
 		// internal to map the border radius type
 		CHARBA_BORDER_RADIUS_TYPE("charbaBorderRadiusType");
 
@@ -181,6 +183,42 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	@Override
 	public final BorderAlignHandler getBorderAlignHandler() {
 		return borderAlignHandler;
+	}
+	
+	/**
+	 * Sets the starting angle to draw arcs from.
+	 * 
+	 * @param rotation starting angle to draw arcs from.
+	 */
+	public void setRotation(double rotation) {
+		setValue(Property.ROTATION, rotation);
+	}
+
+	/**
+	 * Returns the starting angle to draw arcs from.
+	 * 
+	 * @return starting angle to draw arcs from.
+	 */
+	public double getRotation() {
+		return getValue(Property.ROTATION, getDefaultValues().getRotation());
+	}
+
+	/**
+	 * Sets the sweep to allow arcs to cover.
+	 * 
+	 * @param circumference the sweep to allow arcs to cover.
+	 */
+	public void setCircumference(double circumference) {
+		setValue(Property.CIRCUMFERENCE, circumference);
+	}
+
+	/**
+	 * Returns the the sweep to allow arcs to cover.
+	 * 
+	 * @return the sweep to allow arcs to cover.
+	 */
+	public double getCircumference() {
+		return getValue(Property.CIRCUMFERENCE, getDefaultValues().getCircumference());
 	}
 
 	/**

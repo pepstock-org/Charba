@@ -42,11 +42,11 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	public static final IsColor DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128);
 
-	private static final String DEFAULT_CUTOUT_PERCENTAGE = "90%";
-
 	private static final double DEFAULT_CIRCUMFERENCE = 360;
 
 	private static final double DEFAULT_ROTATION = 0;
+
+	private static final String DEFAULT_CUTOUT_PERCENTAGE = "90%";
 
 	private static final boolean DEFAULT_ANIMATED_DISPLAY = false;
 
@@ -77,6 +77,7 @@ public class MeterOptions extends AbstractPieOptions {
 		getTooltips().setEnabled(false);
 		// sets the 90% of cut out
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
+		// sets fixed circumference and rotation
 		super.setCircumference(DEFAULT_CIRCUMFERENCE);
 		super.setRotation(DEFAULT_ROTATION);
 	}
