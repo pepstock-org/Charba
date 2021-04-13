@@ -128,6 +128,16 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#isChartAttached()
+	 */
+	@Override
+	public final boolean isChartAttached() {
+		return chart.isChartAttached();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#getType()
 	 */
 	@Override

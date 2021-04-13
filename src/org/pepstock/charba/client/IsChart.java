@@ -179,6 +179,13 @@ public interface IsChart {
 	Div getChartElement();
 
 	/**
+	 * Returns <code>true</code> whether this chart is currently attached to the browser's document.
+	 * 
+	 * @return <code>true</code> whether this chart is currently attached to the browser's document
+	 */
+	boolean isChartAttached();
+
+	/**
 	 * Returns the options of chart.
 	 * 
 	 * @return the options of chart.
@@ -269,7 +276,7 @@ public interface IsChart {
 	 * @return the default options by a chart instance, merging global, chart type global and chart options
 	 */
 	IsDefaultScaledOptions getWholeOptions();
-	
+
 	/**
 	 * Returns a {@link CTimer} instance inside chart.
 	 * 

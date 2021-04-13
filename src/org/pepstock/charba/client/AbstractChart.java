@@ -78,7 +78,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	// ---------------------------
 	// callback proxy to invoke the mouse down function on canvas
 	private final CallbackProxy<EventListenerCallback> canvasCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// PCT standard for width
@@ -119,6 +119,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private final CursorType initialCursor;
 	// timer instance
 	private CTimer timer = null;
+	// status if attached
+	private boolean attached = false;
 
 	/**
 	 * Initializes simple panel and canvas which are used by CHART.JS.<br>
@@ -315,6 +317,16 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// cleans up the handler for mouse listener
 		canvas.removeEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());
 	}
+	
+	/**
+	 * Returns <code>true</code> whether this chart is currently attached to the browser's document.
+	 * 
+	 * @return <code>true</code> whether this chart is currently attached to the browser's document
+	 */
+	@Override
+	public final boolean isChartAttached() {
+		return attached;
+	}
 
 	/**
 	 * Returns the initial cursor of the chart.
@@ -409,7 +421,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			return getNode().getOptions();
 		} else if (getOptions() != null) {
 			// if here the chart is not initialized
-	 		// checks if options are consistent
+			// checks if options are consistent
 			// creates an envelop for options
 			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>();
 			// load the envelop
@@ -513,9 +525,13 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void onAttach(MutationItem item) {
 		// if item is consistent and
-		// if is not to be drawn on attach, doesn't draw
-		if (item != null && isDrawOnAttach()) {
-			draw();
+		if (item != null) {
+			// stores is attached
+			attached = true;
+			// if is not to be drawn on attach, doesn't draw
+			if (isDrawOnAttach()) {
+				draw();
+			}
 		}
 	}
 
@@ -527,10 +543,14 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void onDetach(MutationItem item) {
 		// if item is consistent and
-		// if is not to be destroyed on detach, doesn't destroy
-		if (item != null && isDestroyOnDetach()) {
-			// then destroy
-			destroy();
+		if (item != null) {
+			// stores is not attached
+			attached = false;
+			// if is not to be destroyed on detach, doesn't destroy
+			if (isDestroyOnDetach()) {
+				// then destroy
+				destroy();
+			}
 		}
 	}
 
@@ -1039,8 +1059,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void draw() {
-		// checks if canvas is supported and the chart is consistent
-		if (isCanvasSupported && IsChart.isConsistent(this)) {
+		// checks if canvas is supported, the element is attached and the chart is consistent
+		if (isCanvasSupported && isChartAttached() && IsChart.isConsistent(this)) {
 			// invokes the apply configuration
 			applyConfiguration();
 			// fires that chart is configuring
