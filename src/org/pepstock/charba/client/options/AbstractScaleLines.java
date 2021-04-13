@@ -91,9 +91,18 @@ abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> imp
 	 * 
 	 * @return the line dash pattern used when stroking lines
 	 */
+	@Override
 	public final List<Integer> getBorderDash() {
+		// gets array
 		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
-		return ArrayListHelper.list(array);
+		// checks if consistent
+		if (array != null) {
+			// exists then returns the value
+			return ArrayListHelper.list(array);
+		}
+		// if here, the options is missing
+		// the returns the defaults.
+		return getDefaultBorderDash();
 	}
 
 	/**
@@ -121,5 +130,12 @@ abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> imp
 	 * @return the default value for border dash offset.
 	 */
 	abstract double getDefaultBorderDashOffset();
+	
+	/**
+	 * Provides the default value for border dash.
+	 * 
+	 * @return the default value for border dash.
+	 */
+	abstract List<Integer> getDefaultBorderDash();
 
 }

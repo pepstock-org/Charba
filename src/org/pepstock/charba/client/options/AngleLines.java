@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.List;
+
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
@@ -157,5 +159,15 @@ public final class AngleLines extends AbstractScaleLines<IsDefaultAngleLines> im
 	@Override
 	double getDefaultBorderDashOffset() {
 		return getDefaultValues().getBorderDashOffset();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.AbstractScaleLines#getDefaultBorderDash()
+	 */
+	@Override
+	List<Integer> getDefaultBorderDash() {
+		return getDefaultValues().getBorderDash();
 	}
 }

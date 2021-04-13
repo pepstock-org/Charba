@@ -89,8 +89,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	RadialAngleLines(Axis axis) {
 		super(axis, axis.getDefaultValues().getAngleLines());
 		// gets value calling callback
-		// gets value calling callback
-		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), borderDashCallback));
+		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), borderDashCallback, getAxis().getDefaultValues().getAngleLines().getBorderDash()));
 	}
 
 	/*
@@ -258,13 +257,19 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 * 
 	 * @param context native object as context.
 	 * @param borderDashCallback border dash callback instance
+	 * @param defaultValue default value of options
 	 * @return an array of integer
 	 */
-	private Array onBorderDash(ScaleContext context, BorderDashCallback<ScaleContext> borderDashCallback) {
+	private Array onBorderDash(ScaleContext context, BorderDashCallback<ScaleContext> borderDashCallback, List<Integer> defaultValue) {
 		// gets value
 		List<Integer> result = ScriptableUtils.getOptionValue(context, borderDashCallback);
+		// checks if consistent
+		if (result != null) {
+			// returns result of callback
+			return ArrayInteger.fromOrEmpty(result);
+		}
 		// default result
-		return ArrayInteger.fromOrEmpty(result);
+		return ArrayInteger.fromOrEmpty(defaultValue);
 	}
 
 }

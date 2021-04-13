@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultGrid;
 
@@ -190,6 +193,16 @@ public final class DefaultGrid implements IsDefaultGrid {
 	@Override
 	public int getTickWidth() {
 		return getLineWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLines#getBorderDash()
+	 */
+	@Override
+	public List<Integer> getBorderDash() {
+		return Collections.emptyList();
 	}
 
 }

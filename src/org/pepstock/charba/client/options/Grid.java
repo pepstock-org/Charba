@@ -105,6 +105,16 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 		return getDefaultValues().getBorderDashOffset();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.AbstractScaleLines#getDefaultBorderDash()
+	 */
+	@Override
+	List<Integer> getDefaultBorderDash() {
+		return getDefaultValues().getBorderDash();
+	}
+
 	/**
 	 * If <code>false</code>, do not display grid for this axis.
 	 * 
@@ -353,8 +363,7 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	/**
 	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid are drawn.
 	 * 
-	 * @return If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid are
-	 *         drawn.
+	 * @return If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid are drawn.
 	 */
 	@Override
 	public boolean isDrawOnChartArea() {

@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
 
@@ -76,6 +79,16 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 	@Override
 	public double getBorderDashOffset() {
 		return DEFAULT_BORDER_DASH_OFFSET;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLines#getBorderDash()
+	 */
+	@Override
+	public List<Integer> getBorderDash() {
+		return Collections.emptyList();
 	}
 
 }

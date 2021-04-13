@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import java.util.List;
+
 import org.pepstock.charba.client.defaults.IsDefaultGrid;
 import org.pepstock.charba.client.options.Grid;
 
@@ -174,6 +176,16 @@ public final class DefaultChartGrid implements IsDefaultGrid {
 	@Override
 	public int getTickWidth() {
 		return grid.getTickWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLines#getBorderDash()
+	 */
+	@Override
+	public List<Integer> getBorderDash() {
+		return grid.getBorderDash();
 	}
 
 }
