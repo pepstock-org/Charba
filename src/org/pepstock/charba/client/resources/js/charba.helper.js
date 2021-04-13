@@ -395,7 +395,15 @@ CharbaJsObjectStringHelper.get = function(obj, key) {
  */
 function CharbaJsHelper() {}
 /**
- * Performs unchecked cast to a type.<br>
+ * Creates new object.
+ * 
+ * @return the object cast to another type
+ */
+CharbaJsHelper.create = function() {
+  return new Object();
+}
+/**
+ * Performs unchecked cast to a type.
  * Using this method can have an incorrect type of the object to the rest of the system which will result in hard to debug problems.
  * 
  * @param object object which must be cast

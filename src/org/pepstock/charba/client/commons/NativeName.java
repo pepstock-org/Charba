@@ -21,9 +21,15 @@ package org.pepstock.charba.client.commons;
  * @author Andrea "Stock" Stocchero
  */
 public final class NativeName {
+	
+	/**
+	 * Constant to bind java script object {@link NativeObject} as object with name <b>{@value GENERIC}</b>.<br>
+	 * Instead of {@value OBJECT}, it is mandatory for J2CL to use java script object without <code>prototype</code> and for java script <code>proxies</code>. 
+	 */
+	public static final String GENERIC = "?";
 
 	/**
-	 * Constant to bind java script object {@link NativeObject} as object with name <b>{@value OBJECT}</b>.
+	 * Constant to bind PLAIN java script object as object with name <b>{@value OBJECT}</b>.
 	 */
 	public static final String OBJECT = "Object";
 

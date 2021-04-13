@@ -24,7 +24,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public enum Id implements Key
 {
-
 	/**
 	 * Name of java script property
 	 */
@@ -76,9 +75,9 @@ public enum Id implements Key
 	 */
 	public static String get(NativeObject nativeObject) {
 		// checks if argument is consistent and property exists
-		if (nativeObject != null && nativeObject.hasProperty(CHARBA_ID.value())) {
+		if (nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, CHARBA_ID.value())) {
 			// returns value
-			return nativeObject.getStringProperty(CHARBA_ID.value(), UndefinedValues.STRING);
+			return NativeObjectUtils.getStringProperty(nativeObject, CHARBA_ID.value(), UndefinedValues.STRING);
 		}
 		// property doesn't exist
 		return UndefinedValues.STRING;
@@ -93,9 +92,9 @@ public enum Id implements Key
 	 */
 	public static int getIntegerProperty(Key key, NativeObject nativeObject) {
 		// checks if arguments are consistent and property exists
-		if (Key.isValid(key) && nativeObject != null && nativeObject.hasProperty(key.value())) {
+		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
 			// returns value
-			return nativeObject.getIntProperty(key.value(),UndefinedValues.INTEGER);
+			return NativeObjectUtils.getIntProperty(nativeObject, key.value(),UndefinedValues.INTEGER);
 		}
 		// property doesn't exist
 		return UndefinedValues.INTEGER;
@@ -110,9 +109,9 @@ public enum Id implements Key
 	 */
 	public static String getStringProperty(Key key, NativeObject nativeObject) {
 		// checks if arguments are consistent and property exists
-		if (Key.isValid(key) && nativeObject != null && nativeObject.hasProperty(key.value())) {
+		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
 			// if descriptor is consistent, return value
-			return nativeObject.getStringProperty(key.value(), UndefinedValues.STRING);
+			return NativeObjectUtils.getStringProperty(nativeObject, key.value(), UndefinedValues.STRING);
 		}
 		// property doesn't exist
 		return UndefinedValues.STRING;

@@ -44,7 +44,7 @@ public abstract class NativeObjectContainer {
 	 * Creates the object with an empty native object instance.
 	 */
 	protected NativeObjectContainer() {
-		this(NativeObject.create());
+		this(NativeObjectUtils.create());
 	}
 
 	/**
@@ -53,7 +53,7 @@ public abstract class NativeObjectContainer {
 	 * @param nativeObject native object instance to be wrapped.
 	 */
 	protected NativeObjectContainer(NativeObject nativeObject) {
-		this.nativeObject = (nativeObject == null ? NativeObject.create() : nativeObject);
+		this.nativeObject = (nativeObject == null ? NativeObjectUtils.create() : nativeObject);
 	}
 
 	// ------------------------------------------
@@ -119,7 +119,7 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final boolean empty() {
 		// gets the keys of properties of th native object
-		ArrayString keys = NativeObject.keys(nativeObject);
+		ArrayString keys = NativeUtils.keys(nativeObject);
 		// if the array of keys is consistent
 		if (keys != null) {
 			// returns if is empty
@@ -140,7 +140,7 @@ public abstract class NativeObjectContainer {
 		// checks arguments if consistent
 		// if not consistent, returns not found
 		if (Key.isValid(key)) {
-			return nativeObject.hasProperty(key.value());
+			return NativeObjectUtils.hasProperty(nativeObject, key.value());
 		}
 		// if here, key is not consistent
 		return false;
@@ -178,7 +178,7 @@ public abstract class NativeObjectContainer {
 		// creates the result
 		List<Key> keys = new ArrayList<>();
 		// scans all properties names of object
-		for (String key : nativeObject.propertiesKeys()) {
+		for (String key : NativeObjectUtils.propertiesKeys(nativeObject)) {
 			// adds a key object by name of the property
 			keys.add(Key.create(key));
 		}
@@ -223,7 +223,7 @@ public abstract class NativeObjectContainer {
 		// checks arguments if consistent
 		// if not consistent, do nothing
 		if (Key.isValid(key)) {
-			nativeObject.removeProperty(key.value());
+			NativeObjectUtils.removeProperty(nativeObject, key.value());
 		}
 	}
 
@@ -257,7 +257,7 @@ public abstract class NativeObjectContainer {
 		// if not, exception
 		Key.checkIfValid(key);
 		// if here, key is consistent
-		nativeObject.defineIntProperty(key.value(), value);
+		NativeObjectUtils.defineIntProperty(nativeObject, key.value(), value);
 	}
 
 	/**
@@ -274,7 +274,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getIntProperty(key.value(), defaultValue);
+		return NativeObjectUtils.getIntProperty(nativeObject, key.value(), defaultValue);
 	}
 
 	/**
@@ -339,7 +339,7 @@ public abstract class NativeObjectContainer {
 		// if not, exception
 		Key.checkIfValid(key);
 		// if here, key is consistent
-		nativeObject.defineDoubleProperty(key.value(), value);
+		NativeObjectUtils.defineDoubleProperty(nativeObject, key.value(), value);
 	}
 
 	/**
@@ -356,7 +356,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getDoubleProperty(key.value(), defaultValue);
+		return NativeObjectUtils.getDoubleProperty(nativeObject, key.value(), defaultValue);
 	}
 
 	/**
@@ -421,7 +421,7 @@ public abstract class NativeObjectContainer {
 		// if not, exception
 		Key.checkIfValid(key);
 		// if here, key is consistent
-		nativeObject.defineBooleanProperty(key.value(), value);
+		NativeObjectUtils.defineBooleanProperty(nativeObject, key.value(), value);
 	}
 
 	/**
@@ -438,7 +438,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getBooleanProperty(key.value(), defaultValue);
+		return NativeObjectUtils.getBooleanProperty(nativeObject, key.value(), defaultValue);
 	}
 
 	// ------------------------------------------
@@ -458,7 +458,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getStringProperty(key.value(), defaultValue);
+		return NativeObjectUtils.getStringProperty(nativeObject, key.value(), defaultValue);
 	}
 
 	/**
@@ -479,7 +479,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineStringProperty(key.value(), value);
+			NativeObjectUtils.defineStringProperty(nativeObject, key.value(), value);
 		}
 	}
 
@@ -548,7 +548,7 @@ public abstract class NativeObjectContainer {
 		// checks if property type
 		if (ObjectType.NUMBER.equals(type)) {
 			// gets descriptor
-			double value = nativeObject.getDoubleProperty(key.value(), UndefinedValues.DOUBLE);
+			double value = NativeObjectUtils.getDoubleProperty(nativeObject, key.value(), UndefinedValues.DOUBLE);
 			// checks if value is consistent
 			if (!Double.isNaN(value) && value > 0D) {
 				// creates and returns a date
@@ -594,7 +594,7 @@ public abstract class NativeObjectContainer {
 			return null;
 		}
 		// returns value
-		return nativeObject.getObjectProperty(key.value());
+		return NativeObjectUtils.getObjectProperty(nativeObject, key.value());
 	}
 
 	/**
@@ -615,7 +615,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineObjectProperty(key.value(), value);
+			NativeObjectUtils.defineObjectProperty(nativeObject, key.value(), value);
 		}
 	}
 
@@ -630,7 +630,7 @@ public abstract class NativeObjectContainer {
 		Key.checkIfValid(key);
 		// if here, key is consistent
 		// sets value
-		nativeObject.defineObjectProperty(key.value(), NativeObject.create());
+		NativeObjectUtils.defineObjectProperty(nativeObject, key.value(), NativeObjectUtils.create());
 	}
 
 	// ------------------------------------------
@@ -654,7 +654,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineObjectProperty(key.value(), value.getNativeObject());
+			NativeObjectUtils.defineObjectProperty(nativeObject, key.value(), value.getNativeObject());
 		}
 	}
 
@@ -700,7 +700,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineArrayProperty(key.value(), container.getArray());
+			NativeObjectUtils.defineArrayProperty(nativeObject, key.value(), container.getArray());
 		}
 	}
 
@@ -725,7 +725,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineArrayProperty(key.value(), value.getNativeArray());
+			NativeObjectUtils.defineArrayProperty(nativeObject, key.value(), value.getNativeArray());
 		}
 	}
 
@@ -747,7 +747,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineArrayProperty(key.value(), container.getArray());
+			NativeObjectUtils.defineArrayProperty(nativeObject, key.value(), container.getArray());
 		}
 	}
 
@@ -772,7 +772,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineCallbackProperty(key.value(), value);
+			NativeObjectUtils.defineCallbackProperty(nativeObject, key.value(), value);
 		}
 	}
 
@@ -793,7 +793,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getImageProperty(key.value(), defaultValue);
+		return NativeObjectUtils.getImageProperty(nativeObject, key.value(), defaultValue);
 	}
 
 	/**
@@ -814,7 +814,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineImageProperty(key.value(), value);
+			NativeObjectUtils.defineImageProperty(nativeObject, key.value(), value);
 		}
 	}
 
@@ -883,7 +883,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getGradientProperty(key.value(), defaultValue);
+		return NativeObjectUtils.getGradientProperty(nativeObject, key.value(), defaultValue);
 	}
 
 	/**
@@ -904,7 +904,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineGradientProperty(key.value(), value);
+			NativeObjectUtils.defineGradientProperty(nativeObject, key.value(), value);
 		}
 	}
 
@@ -973,7 +973,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// returns value
-		return nativeObject.getPatternProperty(key.value(), defaultValue);
+		return NativeObjectUtils.getPatternProperty(nativeObject, key.value(), defaultValue);
 	}
 
 	/**
@@ -994,7 +994,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.definePatternProperty(key.value(), value);
+			NativeObjectUtils.definePatternProperty(nativeObject, key.value(), value);
 		}
 	}
 
@@ -1090,7 +1090,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(value);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineStringProperty(key.value(), value.value());
+			NativeObjectUtils.defineStringProperty(nativeObject, key.value(), value.value());
 		}
 	}
 
@@ -1203,7 +1203,7 @@ public abstract class NativeObjectContainer {
 			return null;
 		}
 		// returns value
-		return nativeObject.getArrayProperty(key.value());
+		return NativeObjectUtils.getArrayProperty(nativeObject, key.value());
 	}
 
 	/**
@@ -1225,7 +1225,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineArrayProperty(key.value(), value);
+			NativeObjectUtils.defineArrayProperty(nativeObject, key.value(), value);
 		}
 	}
 
@@ -1280,7 +1280,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineChartProperty(key.value(), value);
+			NativeObjectUtils.defineChartProperty(nativeObject, key.value(), value);
 		}
 	}
 
@@ -1297,7 +1297,7 @@ public abstract class NativeObjectContainer {
 			return null;
 		}
 		// returns value
-		return nativeObject.getChartProperty(key.value());
+		return NativeObjectUtils.getChartProperty(nativeObject, key.value());
 	}
 
 	// ------------------------------------------
@@ -1322,7 +1322,7 @@ public abstract class NativeObjectContainer {
 			Key.checkIfValid(key);
 			// if here, key is consistent
 			// sets value
-			nativeObject.defineEventProperty(key.value(), value);
+			NativeObjectUtils.defineEventProperty(nativeObject, key.value(), value);
 		}
 	}
 
@@ -1339,7 +1339,7 @@ public abstract class NativeObjectContainer {
 			return null;
 		}
 		// returns value
-		return nativeObject.getEventProperty(key.value());
+		return NativeObjectUtils.getEventProperty(nativeObject, key.value());
 	}
 	
 	// ------------------------------------------

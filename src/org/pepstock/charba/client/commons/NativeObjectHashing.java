@@ -48,6 +48,6 @@ final class NativeObjectHashing {
 		// sets value
 		newDescriptor.setValue(nativeObject.hashCode());
 		// defines the property
-		NativeObject.defineProperty(nativeObject, HASH_CODE_PROPERTY, newDescriptor);
+		NativeUtils.defineProperty(nativeObject, HASH_CODE_PROPERTY, newDescriptor);
 	}
 }

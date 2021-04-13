@@ -217,14 +217,11 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 */
 	@Override
 	public int indexOf(Object object) {
-		// checks if argument is consistent
-		if (object instanceof NativeObject) {
-			NativeObject value = (NativeObject) object;
-			// check index of
-			return array.indexOf(value);
-		}
-		// if here, element is not consistent
-		return AbstractArrayList.NOT_FOUND;
+		// casts the object to native
+		// YOU CAN NOT use "instance of" because is a native interface
+		NativeObject value = JsHelper.get().cast(object);
+		// check index of
+		return array.indexOf(value);
 	}
 
 	/**
@@ -232,13 +229,10 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 */
 	@Override
 	public int lastIndexOf(Object object) {
-		// checks if argument is consistent
-		if (object instanceof NativeObject) {
-			NativeObject value = (NativeObject) object;
-			// check last index of
-			return array.lastIndexOf(value);
-		}
-		// if here, element is not consistent
-		return AbstractArrayList.NOT_FOUND;
+		// casts the object to native
+		// YOU CAN NOT use "instance of" because is a native interface
+		NativeObject value = JsHelper.get().cast(object);
+		// check last index of
+		return array.lastIndexOf(value);
 	}
 }

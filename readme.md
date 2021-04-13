@@ -591,6 +591,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * enable CI by GitHub Action, disabling Travis.
  * fix font and color fallbacks to the defaults values.
  * re-factor the `configuration` package in order to manage both configuration and chart options (at runtime).
+ * change the `NativeObject` from a class to an empty interface in order to skip `ClassCastException` in J2CL when the object, passed from CHART.JS, doesn't have any prototype or is a proxy.
 
 License
 -------

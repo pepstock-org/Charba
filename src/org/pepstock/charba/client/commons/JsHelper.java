@@ -50,6 +50,15 @@ public final class JsHelper {
 	public static JsHelper get() {
 		return INSTANCE;
 	}
+	
+	/**
+	 * Creates a native object instance.
+	 * 
+	 * @return new native object instance
+	 */
+	NativeObject create() {
+		return NativeJsHelper.create();
+	}
 
 	/**
 	 * Performs unchecked cast to a type.<br>
@@ -71,7 +80,7 @@ public final class JsHelper {
 	public MutationObserverInit createMutationObserverInit() {
 		// create new object
 		// casting it to an observer init
-		return cast(NativeObject.create());
+		return cast(NativeObjectUtils.create());
 	}
 
 	/**
@@ -188,7 +197,7 @@ public final class JsHelper {
 		// checks consistency of arguments
 		if (object != null && key != null) {
 			// returns the property value
-			return object.getIntProperty(key, UndefinedValues.INTEGER);
+			return NativeObjectUtils.getIntProperty(object, key, UndefinedValues.INTEGER);
 		}
 		// if here, arguments not consistent
 		return UndefinedValues.INTEGER;

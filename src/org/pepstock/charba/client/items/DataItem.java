@@ -17,7 +17,9 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.FloatingData;
@@ -51,29 +53,31 @@ public final class DataItem {
 	 * @param object object which represents the value.
 	 */
 	public DataItem(Object object) {
-		// checks if the value is a double
-		if (object instanceof Double) {
+		// gets the type of value
+		ObjectType type = JsHelper.get().typeOf(object);
+		// checks if is floating data
+		if (ObjectType.NUMBER.equals(type)) {
 			// sets double and null to floating data and string value
 			this.value = (Double) object;
 			this.valueAsFloatingData = null;
 			this.valueAsString = String.valueOf(value);
 			this.valueAsPoint = null;
 			this.dataType = DataType.NUMBERS;
-		} else if (object instanceof ArrayDouble) {
+		} else if (ObjectType.ARRAY.equals(type)) {
 			// sets floating data, getting the array double and set nan to value
 			this.value = UndefinedValues.DOUBLE;
 			this.valueAsFloatingData = BarDataset.FLOATING_BAR_DATA_FACTORY.create((ArrayDouble) object);
 			this.valueAsString = valueAsFloatingData.toString();
 			this.valueAsPoint = null;
 			this.dataType = DataType.ARRAYS;
-		} else if (object instanceof String) {
+		} else if (ObjectType.STRING.equals(type)) {
 			// uses the to string method of object and nan and null for other values
 			this.value = UndefinedValues.DOUBLE;
 			this.valueAsFloatingData = null;
 			this.valueAsString = object.toString();
 			this.valueAsPoint = null;
 			this.dataType = DataType.STRINGS;
-		} else if (object instanceof NativeObject) {
+		} else if (ObjectType.OBJECT.equals(type)) {
 			// uses the to string method of object and nan and null for other values
 			this.value = UndefinedValues.DOUBLE;
 			this.valueAsFloatingData = null;

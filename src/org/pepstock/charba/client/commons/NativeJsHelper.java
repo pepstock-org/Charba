@@ -35,6 +35,13 @@ final class NativeJsHelper {
 	NativeJsHelper() {
 		// do nothing
 	}
+
+	/**
+	 * Creates a native object instance.
+	 * 
+	 * @return new native object instance
+	 */
+	static native NativeObject create();
 	
 	/**
 	 * Performs unchecked cast to a type.<br>

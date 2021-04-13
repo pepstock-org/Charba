@@ -85,23 +85,22 @@ public final class LabelsContext extends AbstractDatasetContext {
 		this.labelOptions = labelOptions;
 		// gets the type of value
 		ObjectType type = type(Property.VALUE);
-		// object instance for data item
-		Object object = null;
 		// checks if is floating data
 		if (ObjectType.NUMBER.equals(type)) {
 			// get the value as double
-			object = getValue(Property.VALUE, UndefinedValues.DOUBLE);
+			this.dataItem = new DataItem(getValue(Property.VALUE, UndefinedValues.DOUBLE));
 		} else if (ObjectType.ARRAY.equals(type)) {
 			// get the value as array
 			ArrayDouble array = getArrayValue(Property.VALUE);
 			// sets object
-			object = array;
+			this.dataItem = new DataItem(array);
 		} else if (ObjectType.STRING.equals(type)) {
 			// get the value as string
-			object = getValue(Property.VALUE, UndefinedValues.STRING);
+			this.dataItem = new DataItem(getValue(Property.VALUE, UndefinedValues.STRING));
+		} else {
+			// a data item with unknown values
+			this.dataItem = new DataItem(UndefinedValues.STRING);
 		}
-		// stores the data item
-		this.dataItem = new DataItem(object);
 	}
 
 	/**

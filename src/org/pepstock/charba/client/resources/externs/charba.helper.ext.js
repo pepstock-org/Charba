@@ -20,6 +20,10 @@ CharbaCallbackProxy.prototype.callback;
  */
 function CharbaJsHelper() {}
 /**
+ * @return {Object}
+ */
+CharbaJsHelper.create = function() {};
+/**
  * @param {*} object
  * @return {*}
  */
