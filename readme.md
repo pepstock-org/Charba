@@ -157,7 +157,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `jsinterop-base` dependency.
 
 #### Features
- * import last CHART.JS version, [version 3.0.2](https://github.com/chartjs/Chart.js/releases/tag/v3.0.2) on April 6th, 2021.
+ * import last CHART.JS version, [version 3.1.0](https://github.com/chartjs/Chart.js/releases/tag/v3.1.0) on April 13th, 2021.
  * import last CHART.JS LUXON adapter version, [version v1.0.0](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v1.0.0) on April 6th, 2021.
  * import last LUXON library version, [version 1.26.0](https://github.com/moment/luxon/releases/tag/1.26.0) on March 9th, 2021.
  * import last CHART.JS Datalabels plugin version, [version v2.0.0-beta.1](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v2.0.0-beta.1) on March 12th, 2021.
@@ -476,6 +476,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
 #### Features
  * add `linkScales` and `buildOrUpdateElements` methods to Controller interface in order to have the complete mapping of CHART.JS controller interface.
  * implement easing value management for `Meter` and `Gauge` charts (and their controller) because in the new version of CHART.JS, easing value is not provided anymore.
+ * add `ControllerRegistrationHandler` interface to set to a `ControllerType` constructor in order to enable the notification before and after the controller registration to CHART.JS.
 
 ### _Callbacks_   
 
