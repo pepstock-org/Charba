@@ -37,6 +37,8 @@ public final class ControllerType implements Type {
 	private final boolean cloneDefaults;
 	// controller provider instance
 	private final ControllerProvider provider;
+	// controller registration handler
+	private final ControllerRegistrationHandler registrationHandler;
 
 	/**
 	 * Creates new chart type based on existing chart type, as extension.<br>
@@ -47,9 +49,22 @@ public final class ControllerType implements Type {
 	 * @param provider controller provider instance to use for controller registering
 	 */
 	public ControllerType(String type, Type chartType, ControllerProvider provider) {
-		this(type, chartType, provider, true);
+		this(type, chartType, provider, null);
 	}
-
+	
+	/**
+	 * Creates new chart type based on existing chart type, as extension.<br>
+	 * Scale type is the existing chart one.
+	 * 
+	 * @param type new chart type as string.
+	 * @param chartType existing chart type, as extension.
+	 * @param provider controller provider instance to use for controller registering
+	 * @param handler controller registration handler instance
+	 */
+	public ControllerType(String type, Type chartType, ControllerProvider provider, ControllerRegistrationHandler handler) {
+		this(type, chartType, provider, handler, true);
+	}
+	
 	/**
 	 * Creates new chart type based on existing chart type, as extension.<br>
 	 * Scale type is the existing chart one.
@@ -60,6 +75,20 @@ public final class ControllerType implements Type {
 	 * @param cloneDefaults if <code>true</code>, clones the default options of base chart type.
 	 */
 	public ControllerType(String type, Type chartType, ControllerProvider provider, boolean cloneDefaults) {
+		this(type, chartType, provider, null, cloneDefaults);
+	}
+
+	/**
+	 * Creates new chart type based on existing chart type, as extension.<br>
+	 * Scale type is the existing chart one.
+	 * 
+	 * @param type new chart type as string.
+	 * @param chartType existing chart type, as extension.
+	 * @param provider controller provider instance to use for controller registering
+	 * @param handler controller registration handler instance
+	 * @param cloneDefaults if <code>true</code>, clones the default options of base chart type.
+	 */
+	public ControllerType(String type, Type chartType, ControllerProvider provider, ControllerRegistrationHandler handler, boolean cloneDefaults) {
 		// checks type if consistent
 		if (type == null) {
 			throw new IllegalArgumentException("Type is null");
@@ -79,6 +108,7 @@ public final class ControllerType implements Type {
 		this.type = type;
 		this.chartType = chartType;
 		this.provider = provider;
+		this.registrationHandler = handler;
 		this.cloneDefaults = cloneDefaults;
 	}
 
@@ -133,8 +163,20 @@ public final class ControllerType implements Type {
 			// checks if controller is consistent
 			// checks if the controller type of controller is equals to this
 			if (controller != null && this.equals(controller.getType()) && Key.equals(chartType, controller.getType().getChartType())) {
+				// checks if handler is consistent
+				if (registrationHandler != null) {
+					// invokes before
+					registrationHandler.onBeforeRegister(this);
+				}
 				// if not, adds a controller
-				return Defaults.get().getControllers().register(controller);
+				boolean register = Defaults.get().getControllers().register(controller);
+				// checks if handler is consistent
+				if (registrationHandler != null) {
+					// invokes after
+					registrationHandler.onAfterRegister(this, register);
+				}
+				// returns the boolean if the controller has been added
+				return register;
 			}
 		}
 		// if here, already registered
