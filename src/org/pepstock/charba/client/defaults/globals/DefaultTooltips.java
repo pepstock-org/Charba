@@ -38,6 +38,7 @@ import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.enums.TooltipPosition;
+import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.options.IsAnimationCollectionKey;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
@@ -470,11 +471,11 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultRoutedFont#getWeight()
 		 */
 		@Override
-		public FontStyle getStyle() {
-			return FontStyle.BOLD;
+		public Weight getWeight() {
+			return Weight.BOLD;
 		}
 
 	}
@@ -510,11 +511,11 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultRoutedFont#getWeight()
 		 */
 		@Override
-		public FontStyle getStyle() {
-			return FontStyle.BOLD;
+		public Weight getWeight() {
+			return Weight.BOLD;
 		}
 
 	}

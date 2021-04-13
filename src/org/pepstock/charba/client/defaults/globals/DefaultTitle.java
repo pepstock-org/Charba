@@ -19,8 +19,8 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.enums.ElementAlign;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.Weight;
 
 /**
  * CHART.JS default values for TITLE element.
@@ -125,11 +125,11 @@ public final class DefaultTitle implements IsDefaultTitle {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultRoutedFont#getWeight()
 		 */
 		@Override
-		public FontStyle getStyle() {
-			return FontStyle.BOLD;
+		public Weight getWeight() {
+			return Weight.BOLD;
 		}
 
 	}
