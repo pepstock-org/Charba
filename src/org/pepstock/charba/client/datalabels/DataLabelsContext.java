@@ -18,8 +18,6 @@ package org.pepstock.charba.client.datalabels;
 import org.pepstock.charba.client.callbacks.AbstractDatasetContext;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.enums.ContextType;
 import org.pepstock.charba.client.items.UndefinedValues;
 
@@ -35,8 +33,7 @@ public final class DataLabelsContext extends AbstractDatasetContext {
 	 */
 	private enum Property implements Key
 	{
-		TYPE("type"),
-		OPTIONS("options");
+		TYPE("type");
 
 		// name value of property
 		private final String value;
@@ -97,48 +94,6 @@ public final class DataLabelsContext extends AbstractDatasetContext {
 	 */
 	public LabelItem getLabel() {
 		return label;
-	}
-	
-
-	/**
-	 * Sets the additional options.
-	 * 
-	 * @param options additional options instance.
-	 * @param <T> type of public object container to store
-	 */
-	public final <T extends NativeObjectContainer> void setOptions(T options) {
-		setValue(Property.OPTIONS, options);
-	}
-
-	/**
-	 * Checks if there is any options.
-	 * 
-	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
-	 */
-	public final boolean hasOptions() {
-		return has(Property.OPTIONS);
-	}
-
-	/**
-	 * Returns the options, if exist. It uses a factory instance to create a public object container.
-	 * 
-	 * @param factory factory instance to create a public object container.
-	 * @param <T> type of public object container to return
-	 * @return java script object used to map the options or an empty object if not exist.
-	 */
-	public final <T extends NativeObjectContainer> T getOptions(NativeObjectContainerFactory<T> factory) {
-		// checks if factory is consistent
-		if (factory != null) {
-			// checks if there is a options
-			if (hasOptions()) {
-				// creates and returns the object
-				return factory.create(getValue(Property.OPTIONS));
-			}
-			// if here, returns an empty object
-			return factory.create();
-		}
-		// if here, argument is not consistent
-		return null;
 	}
 
 	/*

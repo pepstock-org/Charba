@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.enums.ContextType;
 
@@ -37,7 +38,8 @@ public class ChartContext extends NativeObjectContainer{
 	private enum Property implements Key
 	{
 		CHART("chart"),
-		TYPE("type");
+		TYPE("type"),
+		OPTIONS("options");
 
 		// name value of property
 		private final String value;
@@ -105,6 +107,53 @@ public class ChartContext extends NativeObjectContainer{
 	 */
 	public final ContextType getType() {
 		return getValue(Property.TYPE, ContextType.values(), ContextType.UNKNOWN);
+	}
+	
+	
+
+	/**
+	 * Sets the additional options.
+	 * 
+	 * @param options additional options instance.
+	 * @param <T> type of public object container to store
+	 */
+	public final <T extends NativeObjectContainer> void setOptions(T options) {
+		setValue(Property.OPTIONS, options);
+	}
+
+	/**
+	 * Checks if there is any options.
+	 * 
+	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
+	 */
+	public final boolean hasOptions() {
+		return has(Property.OPTIONS);
+	}
+
+	/**
+	 * Returns the options, if exist. It uses a factory instance to create a public object container.
+	 * 
+	 * @param factory factory instance to create a public object container.
+	 * @param <T> type of public object container to return
+	 * @return java script object used to map the options or an empty object if not exist.
+	 */
+	public final <T extends NativeObjectContainer> T getOptions(NativeObjectContainerFactory<T> factory) {
+		// checks if factory is consistent
+		if (factory != null) {
+			// checks if there is a options
+			if (hasOptions()) {
+				// creates and returns the object
+				return factory.create(getValue(Property.OPTIONS));
+			}
+			// if here, creates an empty object
+			T options = factory.create();
+			// adds to the context
+			setValue(Property.OPTIONS, options);
+			// and then returns
+			return options;
+		}
+		// if here, argument is not consistent
+		return null;
 	}
 	
 	/**
