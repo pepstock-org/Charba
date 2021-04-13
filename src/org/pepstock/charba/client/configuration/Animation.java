@@ -198,6 +198,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 */
 	@Override
 	public void setEasing(Easing easing) {
+		// resets callback
+		setEasing((EasingCallback)null);
+		// sets value
 		checkAndGet().setEasing(easing);
 	}
 
@@ -218,6 +221,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 */
 	@Override
 	public void setDuration(int milliseconds) {
+		// resets callback
+		setDuration((DurationCallback)null);
+		// sets value
 		checkAndGet().setDuration(milliseconds);
 	}
 
@@ -278,6 +284,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 */
 	@Override
 	public void setDelay(int delay) {
+		// resets callback
+		setDelay((DelayCallback)null);
+		// sets value
 		checkAndGet().setDelay(delay);
 	}
 
@@ -298,6 +307,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 */
 	@Override
 	public void setLoop(boolean loop) {
+		// resets callback
+		setLoop((LoopCallback)null);
+		// sets value
 		checkAndGet().setLoop(loop);
 	}
 
@@ -309,6 +321,15 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	@Override
 	public boolean isLoop() {
 		return checkAndGet().isLoop();
+	}
+	
+	/**
+	 * Returns the callback to set the number of milliseconds an animation takes.
+	 * 
+	 * @return the callback instance to use
+	 */
+	public DurationCallback getDurationCallback() {
+		return durationCallback;
 	}
 
 	/**
@@ -329,6 +350,87 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 		}
 	}
 
+	/**
+	 * Returns the callback to set the delay before starting the animations.
+	 * 
+	 * @return the callback instance to use
+	 */
+	public DelayCallback getDelayCallback() {
+		return delayCallback;
+	}
+
+	/**
+	 * Sets the delay before starting the animations by a callback.
+	 * 
+	 * @param delayCallback the callback instance to use
+	 */
+	public void setDelay(DelayCallback delayCallback) {
+		// sets the callback
+		this.delayCallback = delayCallback;
+		// checks if callback is consistent
+		if (delayCallback != null) {
+			// adds the callback proxy function to java script object
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DELAY, delayCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DELAY, null);
+		}
+	}
+
+	/**
+	 * Returns the callback to loop the animations endlessly.
+	 * 
+	 * @return the callback instance to use
+	 */
+	public LoopCallback getLoopCallback() {
+		return loopCallback;
+	}
+
+	/**
+	 * Sets to loop the animations endlessly by a callback.
+	 * 
+	 * @param loopCallback the callback instance to use
+	 */
+	public void setLoop(LoopCallback loopCallback) {
+		// sets the callback
+		this.loopCallback = loopCallback;
+		// checks if callback is consistent
+		if (loopCallback != null) {
+			// adds the callback proxy function to java script object
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.LOOP, loopCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.LOOP, null);
+		}
+	}
+	
+	/**
+	 * Returns the callback to set the animation easing.
+	 * 
+	 * @return the callback instance to use
+	 */
+	public EasingCallback getEasingCallback() {
+		return easingCallback;
+	}
+
+	/**
+	 * Sets the animation easing by a callback.
+	 * 
+	 * @param easingCallback the callback instance to use
+	 */
+	public void setEasing(EasingCallback easingCallback) {
+		// sets the callback
+		this.easingCallback = easingCallback;
+		// checks if callback is consistent
+		if (easingCallback != null) {
+			// adds the callback proxy function to java script object
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.EASING, easingCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.EASING, null);
+		}
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
