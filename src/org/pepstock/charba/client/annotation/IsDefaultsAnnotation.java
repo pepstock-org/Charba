@@ -25,6 +25,10 @@ import org.pepstock.charba.client.annotation.listeners.ClickCallback;
 import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
 import org.pepstock.charba.client.annotation.listeners.EnterCallback;
 import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
+import org.pepstock.charba.client.callbacks.BorderDashCallback;
+import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin annotation DEFAULTS options.
@@ -137,4 +141,43 @@ interface IsDefaultsAnnotation {
 	default DisplayCallback getDisplayCallback() {
 		return null;
 	}
+
+	/**
+	 * Returns the callback called to set the color of the border of annotation.
+	 * 
+	 * @return the callback called to set the color of the border of annotation
+	 */
+	default ColorCallback<AnnotationContext> getBorderColorCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the width of the border in pixels.
+	 * 
+	 * @return the callback called to set the width of the border in pixels
+	 */
+	default WidthCallback<AnnotationContext> getBorderWidthCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
+	 * describe the pattern.
+	 * 
+	 * @return the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
+	 *         describe the pattern
+	 */
+	default BorderDashCallback<AnnotationContext> getBorderDashCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the line dash pattern offset.
+	 * 
+	 * @return the callback called to set the line dash pattern offset
+	 */
+	default BorderDashOffsetCallback<AnnotationContext> getBorderDashOffsetCallback() {
+		return null;
+	}
+	
 }

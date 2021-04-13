@@ -17,21 +17,51 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.ContextType;
 
 /**
  * The callback or handler context wrapper, created and passed by {@link AnnotationPlugin#ID} which contains the link to the native chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class Context extends ChartContext {
+public final class AnnotationContext extends ChartContext {
+
+	private final AbstractAnnotation annotation;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Context(NativeObject nativeObject) {
+	AnnotationContext(AbstractAnnotation annotation, NativeObject nativeObject) {
 		super(nativeObject);
+		// checks if label is consistent
+		if (annotation == null) {
+			// exception!
+			throw new IllegalArgumentException("Annotation argument is null");
+		}
+		// stores annotation
+		this.annotation = annotation;
+	}
+
+	/**
+	 * Returns the annotation of plugin.
+	 * 
+	 * @return the annotation of plugin
+	 */
+	public AbstractAnnotation getAnnotation() {
+		return annotation;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.callbacks.ChartContext#isConsistent()
+	 */
+	@Override
+	protected boolean isConsistent() {
+		// checks if the context types are chart or annotatiob
+		return ContextType.CHART.equals(getType()) || ContextType.ANNOTATION.equals(getType());
 	}
 
 }

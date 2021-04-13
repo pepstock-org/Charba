@@ -25,9 +25,20 @@ import org.pepstock.charba.client.annotation.listeners.ClickCallback;
 import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
 import org.pepstock.charba.client.annotation.listeners.EnterCallback;
 import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
+import org.pepstock.charba.client.callbacks.BorderDashCallback;
+import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -78,24 +89,6 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	}
 
 	/**
-	 * Java script FUNCTION callback called to provide the display options for the annotation.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyHandlerDisplayCallback {
-
-		/**
-		 * Method of function to be called to provide the display options for the annotation.
-		 * 
-		 * @param functionContext context value of <code>this</code> to the execution context of function
-		 * @param context plugin context which contains the options
-		 * @return <code>true</code> if the annotation must be shown, otherwise <code>false</code>
-		 */
-		boolean call(CallbackFunctionContext functionContext, NativeObject context);
-	}
-
-	/**
 	 * Name of properties of native object.
 	 */
 	enum Property implements Key
@@ -120,7 +113,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		//
 
 		/**
-		 * Creates with the property value to use in the  native object.
+		 * Creates with the property value to use in the native object.
 		 * 
 		 * @param value value of property name
 		 */
@@ -149,10 +142,18 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	private final CallbackProxy<ProxyHandlerEventsCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the CLICK function
 	private final CallbackProxy<ProxyHandlerEventsCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the CLICK function
+	// callback proxy to invoke the DBLCLICK function
 	private final CallbackProxy<ProxyHandlerEventsCallback> dblclickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the display function
-	private final CallbackProxy<ProxyHandlerDisplayCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyBooleanCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border color function
+	private final CallbackProxy<ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border width function
+	private final CallbackProxy<ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border dash function
+	private final CallbackProxy<ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border dash offset function
+	private final CallbackProxy<ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle click event
 	private static final CallbackPropertyHandler<ClickCallback> CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CLICK);
@@ -162,8 +163,16 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	private static final CallbackPropertyHandler<LeaveCallback> LEAVE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.LEAVE);
 	// callback instance to handle dblclick event
 	private static final CallbackPropertyHandler<DoubleClickCallback> DOUBLE_CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DOUBLE_CLICK);
-	// callback instance to handle display event
+	// callback instance to handle display options
 	private static final CallbackPropertyHandler<DisplayCallback> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
+	// callback instance to handle border color options
+	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> BORDER_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_COLOR);
+	// callback instance to handle border width options
+	private static final CallbackPropertyHandler<WidthCallback<AnnotationContext>> BORDER_WIDTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_WIDTH);
+	// callback instance to handle border dash options
+	private static final CallbackPropertyHandler<BorderDashCallback<AnnotationContext>> BORDER_DASH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH);
+	// callback instance to handle border dash offset options
+	private static final CallbackPropertyHandler<BorderDashOffsetCallback<AnnotationContext>> BORDER_DASH_OFFSET_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH_OFFSET);
 
 	private final IsDefaultsAnnotation defaultValues;
 	// draw time instance set at plugin startup
@@ -193,16 +202,28 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
+		// gets value calling callback
+		this.displayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), DISPLAY_PROPERTY_HANDLER.getCallback(this), defaultValues.isDisplay()));
+		// gets value calling callback
+		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderColorAsString()));
+		// gets value calling callback
+		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderWidth()).intValue());
+		// gets value calling callback
+		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new AnnotationContext(this, context), BORDER_DASH_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderDash()));
+		// gets value calling callback
+		this.borderDashOffsetCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), BORDER_DASH_OFFSET_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderDashOffset()).doubleValue());
+		// ------------------------------------------
+		// -- SET CALLBACKS to PROXIES for EVENTs ---
+		// ------------------------------------------
 		// sets proxy handler to callback proxy to invoke the ENTER function
-		enterCallbackProxy.setCallback(this::onEnter);
+		this.enterCallbackProxy.setCallback(this::onEnter);
 		// sets proxy handler to callback proxy to invoke the LEAVE function
-		leaveCallbackProxy.setCallback(this::onLeave);
+		this.leaveCallbackProxy.setCallback(this::onLeave);
 		// sets proxy handler to callback proxy to invoke the CLICK function
-		clickCallbackProxy.setCallback(this::onClick);
+		this.clickCallbackProxy.setCallback(this::onClick);
 		// sets proxy handler to callback proxy to invoke the DBLCLICK function
-		dblclickCallbackProxy.setCallback(this::onDblclick);
-		// sets proxy handler to callback proxy to invoke the display function
-		displayCallbackProxy.setCallback(this::onDisplay);
+		this.dblclickCallbackProxy.setCallback(this::onDblclick);
 	}
 
 	/**
@@ -395,13 +416,97 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	}
 
 	/**
-	 * Sets to set the display option at runtime.
+	 * Sets the callback to set the display option at runtime.
 	 * 
 	 * @param displayCallback to set the display option at runtime
 	 */
-	public final void setDisplayCallback(DisplayCallback displayCallback) {
+	public final void setDisplay(DisplayCallback displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, displayCallback, displayCallbackProxy.getProxy());
 	}
+
+	/**
+	 * Returns the callback called to set the color of the border of annotation.
+	 * 
+	 * @return the callback called to set the color of the border of annotation
+	 */
+	@Override
+	public final ColorCallback<AnnotationContext> getBorderColorCallback() {
+		return BORDER_COLOR_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderColorCallback());
+	}
+
+	/**
+	 * Sets the callback to set the color of the border of annotation.
+	 * 
+	 * @param borderColorCallback to set the color of the border of annotation
+	 */
+	public final void setBorderColor(ColorCallback<AnnotationContext> borderColorCallback) {
+		BORDER_COLOR_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, borderColorCallback, borderColorCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the callback called to set the width of the border in pixels.
+	 * 
+	 * @return the callback called to set the width of the border in pixels
+	 */
+	@Override
+	public final WidthCallback<AnnotationContext> getBorderWidthCallback() {
+		return BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderWidthCallback());
+	}
+
+	/**
+	 * Sets the callback to set the color of the width of the border in pixels.
+	 * 
+	 * @param borderWidthCallback to set the width of the border in pixels
+	 */
+	public final void setBorderWidth(WidthCallback<AnnotationContext> borderWidthCallback) {
+		BORDER_WIDTH_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, borderWidthCallback, borderWidthCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
+	 * describe the pattern.
+	 * 
+	 * @return the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
+	 *         describe the pattern
+	 */
+	@Override
+	public final BorderDashCallback<AnnotationContext> getBorderDashCallback() {
+		return BORDER_DASH_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderDashCallback());
+	}
+
+	/**
+	 * Sets the callback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the
+	 * pattern.
+	 * 
+	 * @param borderDashCallback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe
+	 *            the pattern
+	 */
+	public final void setBorderDash(BorderDashCallback<AnnotationContext> borderDashCallback) {
+		BORDER_DASH_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, borderDashCallback, borderDashCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the callback called to set the line dash pattern offset.
+	 * 
+	 * @return the callback called to set the line dash pattern offset
+	 */
+	@Override
+	public final BorderDashOffsetCallback<AnnotationContext> getBorderDashOffsetCallback() {
+		return BORDER_DASH_OFFSET_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderDashOffsetCallback());
+	}
+
+	/**
+	 * Sets the callback to set the line dash pattern offset.
+	 * 
+	 * @param borderDashOffsetCallback to set the line dash pattern offset
+	 */
+	public final void setBorderDashOffset(BorderDashOffsetCallback<AnnotationContext> borderDashOffsetCallback) {
+		BORDER_DASH_OFFSET_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, borderDashOffsetCallback, borderDashOffsetCallbackProxy.getProxy());
+	}
+
+	// ---------------------
+	// EVENTS
+	// ---------------------
 
 	/**
 	 * Returns the callback called when a "enter" event is occurring.
@@ -489,7 +594,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		// gets callback
 		EnterCallback enterCallback = ENTER_PROPERTY_HANDLER.getCallback(this);
 		// creates a context wrapper
-		Context internalContext = new Context(context);
+		AnnotationContext internalContext = new AnnotationContext(this, context);
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart, event and callback are consistent
@@ -509,7 +614,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		// gets callback
 		LeaveCallback leaveCallback = LEAVE_PROPERTY_HANDLER.getCallback(this);
 		// creates a context wrapper
-		Context internalContext = new Context(context);
+		AnnotationContext internalContext = new AnnotationContext(this, context);
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart is consistent
@@ -529,7 +634,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		// gets callback
 		ClickCallback clickCallback = CLICK_PROPERTY_HANDLER.getCallback(this);
 		// creates a context wrapper
-		Context internalContext = new Context(context);
+		AnnotationContext internalContext = new AnnotationContext(this, context);
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart is consistent
@@ -549,7 +654,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		// gets callback
 		DoubleClickCallback dblclickCallback = DOUBLE_CLICK_PROPERTY_HANDLER.getCallback(this);
 		// creates a context wrapper
-		Context internalContext = new Context(context);
+		AnnotationContext internalContext = new AnnotationContext(this, context);
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart is consistent
@@ -560,26 +665,23 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	}
 
 	/**
-	 * Manages the DISPLAY option in an annotation.
+	 * Returns an array of integer when the callback has been activated.
 	 * 
-	 * @param functionContext context value of <code>this</code> to the execution context of function
-	 * @param context plugin context which contains the options
-	 * @return <code>true</code> if the annotation must be shown, otherwise <code>false</code>
+	 * @param context native object as context.
+	 * @param borderDashCallback border dash callback instance
+	 * @param defaultValue default value of options
+	 * @return an array of integer
 	 */
-	private boolean onDisplay(CallbackFunctionContext functionContext, NativeObject context) {
-		// gets callback
-		DisplayCallback displayCallback = DISPLAY_PROPERTY_HANDLER.getCallback(this);
-		// creates a context wrapper
-		Context internalContext = new Context(context);
-		// gets chart instance from function context
-		IsChart chart = internalContext.getChart();
-		// checks if chart is consistent
-		if (IsChart.isValid(chart) && displayCallback != null) {
-			// invokes callback
-			return displayCallback.invoke(chart, this);
+	private Array onBorderDash(AnnotationContext context, BorderDashCallback<AnnotationContext> borderDashCallback, List<Integer> defaultValue) {
+		// gets value
+		List<Integer> result = ScriptableUtils.getOptionValue(context, borderDashCallback);
+		// checks if consistent
+		if (result != null) {
+			// returns result of callback
+			return ArrayInteger.fromOrEmpty(result);
 		}
-		// if here, returns the default
-		return defaultValues.isDisplay();
+		// default result
+		return ArrayInteger.fromOrEmpty(defaultValue);
 	}
 
 }

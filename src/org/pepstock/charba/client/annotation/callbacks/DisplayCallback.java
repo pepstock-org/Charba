@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.annotation.callbacks;
 
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.annotation.AbstractAnnotation;
+import org.pepstock.charba.client.annotation.AnnotationContext;
 import org.pepstock.charba.client.annotation.AnnotationPlugin;
+import org.pepstock.charba.client.callbacks.Scriptable;
 
 /**
  * Callback interface of {@link AnnotationPlugin#ID} plugin to set <code>display</code> property at runtime.
@@ -25,15 +25,6 @@ import org.pepstock.charba.client.annotation.AnnotationPlugin;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface DisplayCallback {
-
-	/**
-	 * Method called to set <code>display</code> property at runtime.
-	 * 
-	 * @param chart chart instance
-	 * @param annotation annotation instance where the option must be set
-	 * @return <code>true</code> if the annotation must be shown, otherwise <code>false</code>
-	 */
-	boolean invoke(IsChart chart, AbstractAnnotation annotation);
+public interface DisplayCallback extends Scriptable<Boolean, AnnotationContext> {
 
 }
