@@ -21,7 +21,7 @@ import org.pepstock.charba.client.callbacks.BorderDashCallback;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.IsColor;
@@ -45,7 +45,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the border dash function
-	private final CallbackProxy<ScriptableFunctions.ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border dashoffset callback instance
 	private BorderDashCallback<ScaleContext> borderDashCallback = null;

@@ -23,7 +23,8 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -38,20 +39,19 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  */
 public class PieDataset extends HovingDataset implements HasBorderAlign {
-	
+
 	// border radius array constant for set border radius from a list
 	private static final ArcBorderRadius[] BORDER_RADIUS_EMPTY_ARRAY = new ArcBorderRadius[0];
-
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the offset function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> offsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> offsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover offset function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> hoverOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border radius function
-	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border offset callback instance
 	private OffsetCallback<DatasetContext> offsetCallback = null;
@@ -68,7 +68,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		WEIGHT("weight"),
 		OFFSET("offset"),
 		HOVER_OFFSET("hoverOffset"),
-		BORDER_RADIUS("borderRadius"),		
+		BORDER_RADIUS("borderRadius"),
 		ROTATION("rotation"),
 		CIRCUMFERENCE("circumference"),
 		// internal to map the border radius type
@@ -171,7 +171,8 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		// gets value calling callback
 		this.hoverOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), hoverOffsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
 		// gets value calling callback
-		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), borderRadiusCallback, ArcBorderRadius.FACTORY, getDefaultValues().getElements().getArc().getBorderRadius()));
+		this.borderRadiusCallbackProxy
+				.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), borderRadiusCallback, ArcBorderRadius.FACTORY, getDefaultValues().getElements().getArc().getBorderRadius()));
 
 	}
 
@@ -184,7 +185,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	public final BorderAlignHandler getBorderAlignHandler() {
 		return borderAlignHandler;
 	}
-	
+
 	/**
 	 * Sets the starting angle to draw arcs from.
 	 * 
@@ -292,7 +293,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		// then returns an empty list
 		return Collections.emptyList();
 	}
-	
+
 	/**
 	 * Sets the arc border radius (in pixels).
 	 * 
@@ -395,7 +396,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 			remove(Property.HOVER_OFFSET);
 		}
 	}
-	
+
 	/**
 	 * Returns the border radius callback, if set, otherwise <code>null</code>.
 	 * 

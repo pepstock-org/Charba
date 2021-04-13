@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.data;
 
-import org.pepstock.charba.client.callbacks.FillCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.FillCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -40,7 +40,7 @@ final class LiningDatasetFillHandler extends FillHandler {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the fill function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> fillCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> fillCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// fill callback instance
 	private FillCallback fillCallback = null;

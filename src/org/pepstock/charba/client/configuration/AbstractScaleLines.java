@@ -18,7 +18,9 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
@@ -39,11 +41,11 @@ abstract class AbstractScaleLines extends AxisContainer {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the line width function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> lineWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> lineWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border dash offset function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// color callback instance
 	private ColorCallback<ScaleContext> colorCallback = null;
@@ -106,8 +108,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// gets value calling callback
 		lineWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), lineWidthCallback, defaultValues.getLineWidth()).intValue());
 		// gets value calling callback
-		borderDashOffsetCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), borderDashOffsetCallback, defaultValues.getBorderDashOffset()).doubleValue());
+		borderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), borderDashOffsetCallback, defaultValues.getBorderDashOffset()).doubleValue());
 	}
 
 	/**

@@ -31,6 +31,7 @@ public final class AnnotationContext extends ChartContext {
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
+	 * @param annotation annotation instance which is engaged as caller of callback.
 	 * @param nativeObject native object instance to be wrapped.
 	 */
 	AnnotationContext(AbstractAnnotation annotation, NativeObject nativeObject) {

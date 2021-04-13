@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.callbacks.BorderAlignCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
@@ -44,7 +44,7 @@ final class BorderAlignHandler extends NativeObjectContainer {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the border align function
-	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> borderAlignCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyStringCallback> borderAlignCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border align callback instance
 	private BorderAlignCallback borderAlignCallback = null;

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -43,11 +43,11 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the ENTER event function
-	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> enterEventCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyBooleanCallback> enterEventCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the LEAVE event function
-	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> leaveEventCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyBooleanCallback> leaveEventCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the CLICK event function
-	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> clickEventCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyBooleanCallback> clickEventCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// CLICK event handler instance
 	private static final CallbackPropertyHandler<ClickEventHandler> CLICK_EVENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Event.CLICK);

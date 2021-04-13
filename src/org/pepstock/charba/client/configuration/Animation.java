@@ -23,7 +23,9 @@ import org.pepstock.charba.client.callbacks.DelayCallback;
 import org.pepstock.charba.client.callbacks.DurationCallback;
 import org.pepstock.charba.client.callbacks.EasingCallback;
 import org.pepstock.charba.client.callbacks.LoopCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -81,13 +83,13 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	// callback proxy to invoke the animation in progress function
 	private final CallbackProxy<ProxyAnimationCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the duration function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> durationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> durationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the easing function
-	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> easingCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyStringCallback> easingCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the delay function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> delayCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> delayCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the loop function
-	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> loopCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyBooleanCallback> loopCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// instance of duration callback
 	private DurationCallback durationCallback = null;

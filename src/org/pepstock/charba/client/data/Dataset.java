@@ -28,7 +28,8 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.Gradient;
@@ -71,17 +72,17 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the background color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border width function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover background color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> hoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> hoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> hoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> hoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border width function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// hover background color callback instance
 	private ColorCallback<DatasetContext> hoverBackgroundColorCallback = null;
@@ -290,8 +291,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		this.backgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), backgroundColorCallback, CanvasObjectProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
+		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), backgroundColorCallback, CanvasObjectProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
 		// gets value calling callback
 		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), borderColorCallback, CanvasObjectProperty.BORDER_COLOR, getDefaultBorderColorAsString()));
 		// gets value calling callback
@@ -300,8 +300,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		this.hoverBackgroundColorCallbackProxy
 				.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), hoverBackgroundColorCallback, CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
 		// gets value calling callback
-		this.hoverBorderColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), hoverBorderColorCallback, CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString()));
+		this.hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), hoverBorderColorCallback, CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString()));
 		// gets value calling callback
 		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
 	}
@@ -662,13 +661,13 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// returns the ARC default value because is MOSTLY used
 		return getDefaultValues().getElements().getArc().getBorderWidth();
 	}
-	
+
 	/**
 	 * Returns the default background color value based on type of chart.
 	 * 
 	 * @return the default background color value based on type of chart.
 	 */
-	protected String getDefaultHoverBackgroundColorAsString()	{
+	protected String getDefaultHoverBackgroundColorAsString() {
 		// returns the ARC default value because is MOSTLY used
 		return getDefaultValues().getElements().getArc().getBackgroundColorAsString();
 	}
@@ -678,7 +677,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the default border color value based on type of chart.
 	 */
-	protected String getDefaultHoverBorderColorAsString(){
+	protected String getDefaultHoverBorderColorAsString() {
 		// returns the ARC default value because is MOSTLY used
 		return getDefaultValues().getElements().getArc().getBorderColorAsString();
 	}
@@ -688,7 +687,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the default border width value based on type of chart.
 	 */
-	protected int getDefaultHoverBorderWidth(){
+	protected int getDefaultHoverBorderWidth() {
 		// returns the ARC default value because is MOSTLY used
 		return getDefaultValues().getElements().getArc().getBorderWidth();
 	}

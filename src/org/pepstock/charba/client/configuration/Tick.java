@@ -18,7 +18,10 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -39,13 +42,13 @@ abstract class Tick extends AxisContainer {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the font function
-	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the color function
-	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyStringCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text stroke color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> textStrokeColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> textStrokeColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text stroke width function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> textStrokeWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> textStrokeWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// font callback instance
 	private FontCallback<ScaleContext> fontCallback = null;
@@ -116,8 +119,8 @@ abstract class Tick extends AxisContainer {
 		// gets value calling callback
 		this.textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), textStrokeColorCallback));
 		// gets value calling callback
-		this.textStrokeWidthCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), textStrokeWidthCallback, getAxis().getDefaultValues().getTicks().getTextStrokeWidth()).intValue());
+		this.textStrokeWidthCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), textStrokeWidthCallback, getAxis().getDefaultValues().getTicks().getTextStrokeWidth()).intValue());
 	}
 
 	/**

@@ -29,7 +29,11 @@ import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -76,43 +80,43 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the border cap style function
-	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> borderCapStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyStringCallback> borderCapStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border dash function
-	private final CallbackProxy<ScriptableFunctions.ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border dash offset function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border join style function
-	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border cap style function
-	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> hoverBorderCapStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyStringCallback> hoverBorderCapStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border dash function
-	private final CallbackProxy<ScriptableFunctions.ProxyArrayCallback> hoverBorderDashCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyArrayCallback> hoverBorderDashCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border dash offset function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> hoverBorderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> hoverBorderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border join style function
-	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> hoverBorderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyStringCallback> hoverBorderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point background color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> pointBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point border color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> pointBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point border width function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> pointBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> pointBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover background color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointHoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> pointHoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover border color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointHoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> pointHoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover border width function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> pointHoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> pointHoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point radius function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> pointRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hit radius function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointHitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> pointHitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover radius function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointHoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> pointHoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point rotation function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointRotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> pointRotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// point background color callback instance
 	private ColorCallback<DatasetContext> pointBackgroundColorCallback = null;

@@ -25,7 +25,8 @@ import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -49,15 +50,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the radius function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hit radius function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> hitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> hitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover radius function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> hoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> hoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the rotation function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// radius callback instance
 	private RadiusCallback<DatasetContext> radiusCallback = null;

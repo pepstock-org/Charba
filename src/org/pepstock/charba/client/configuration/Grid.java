@@ -20,7 +20,9 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.IsColor;
@@ -41,11 +43,11 @@ public class Grid extends AbstractScaleLines {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the tick color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> tickColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> tickColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the tick width function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> tickWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> tickWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the tick border dash offset function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> tickBorderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> tickBorderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// color callback instance
 	private ColorCallback<ScaleContext> tickColorCallback = null;
 	// tick line width callback instance
@@ -97,14 +99,14 @@ public class Grid extends AbstractScaleLines {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value calling callback
-		tickColorCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickColorCallback, getAxis().getDefaultValues().getGrid().getTickColorAsString(), false));
+		tickColorCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickColorCallback, getAxis().getDefaultValues().getGrid().getTickColorAsString(), false));
 		// gets value calling callback
 		tickWidthCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickWidthCallback, getAxis().getDefaultValues().getGrid().getTickWidth()).intValue());
 		// gets value calling callback
-		tickBorderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils
-				.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickBorderDashOffsetCallback, getAxis().getDefaultValues().getGrid().getTickBorderDashOffset()).doubleValue());
+		tickBorderDashOffsetCallbackProxy.setCallback(
+				(contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickBorderDashOffsetCallback, getAxis().getDefaultValues().getGrid().getTickBorderDashOffset()).doubleValue());
 	}
 
 	/*

@@ -20,9 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.DatasetContext;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.Scriptable;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.colors.CanvasObject;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
@@ -218,7 +218,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 		// -- CALLBACKS PROXIES ---
 		// ---------------------------
 		// callback proxy to invoke the background color function
-		private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> callbackProxy = JsHelper.get().newCallbackProxy();
+		private final CallbackProxy<ProxyObjectCallback> callbackProxy = JsHelper.get().newCallbackProxy();
 		// data set instance
 		private final Dataset dataset;
 		// property instance

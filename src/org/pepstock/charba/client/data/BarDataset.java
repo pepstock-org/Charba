@@ -28,7 +28,9 @@ import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayDoubleArray;
@@ -76,17 +78,17 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the border skipped function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> borderSkippedCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> borderSkippedCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border radius function
-	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border width function
-	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyNativeObjectCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border width function
-	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyNativeObjectCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
-	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> baseCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyDoubleCallback> baseCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;

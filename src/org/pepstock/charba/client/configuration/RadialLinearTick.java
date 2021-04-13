@@ -17,7 +17,8 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.ShowLabelBackdropCallback;
 import org.pepstock.charba.client.callbacks.TickCallback;
@@ -39,9 +40,9 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the backdrop color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> backdropColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> backdropColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the show label backdrop function
-	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> showLabelBackdropCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyBooleanCallback> showLabelBackdropCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// backdrop color callback instance
 	private ColorCallback<ScaleContext> backdropColorCallback = null;
@@ -105,8 +106,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		backdropColorCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropColorCallback, getConfiguration().getBackdropColorAsString(), false));
 		// gets value calling callback
-		showLabelBackdropCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
+		showLabelBackdropCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
 	}
 
 	/*
@@ -118,7 +118,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	public IsNumberFormat getNumberFormat() {
 		return numberFormatter;
 	}
-	
+
 	/**
 	 * Returns the padding of label backdrop.
 	 * 
