@@ -39,7 +39,7 @@ public class ChartContext extends NativeObjectContainer{
 	{
 		CHART("chart"),
 		TYPE("type"),
-		OPTIONS("options");
+		ATTRIBUTES("charbaAttributes");
 
 		// name value of property
 		private final String value;
@@ -112,43 +112,43 @@ public class ChartContext extends NativeObjectContainer{
 	
 
 	/**
-	 * Sets the additional options.
+	 * Sets the additional attributes.
 	 * 
-	 * @param options additional options instance.
+	 * @param attributes additional attributes instance.
 	 * @param <T> type of public object container to store
 	 */
-	public final <T extends NativeObjectContainer> void setOptions(T options) {
-		setValue(Property.OPTIONS, options);
+	public final <T extends NativeObjectContainer> void setAttributes(T attributes) {
+		setValue(Property.ATTRIBUTES, attributes);
 	}
 
 	/**
-	 * Checks if there is any options.
+	 * Checks if there is any attribute node.
 	 * 
-	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
+	 * @return <code>true</code> if there is an attributes node, otherwise <code>false</code>.
 	 */
-	public final boolean hasOptions() {
-		return has(Property.OPTIONS);
+	public final boolean hasAttributes() {
+		return has(Property.ATTRIBUTES);
 	}
 
 	/**
-	 * Returns the options, if exist. It uses a factory instance to create a public object container.
+	 * Returns the attributes, if exist. It uses a factory instance to create a public object container.
 	 * 
 	 * @param factory factory instance to create a public object container.
 	 * @param <T> type of public object container to return
-	 * @return java script object used to map the options or an empty object if not exist.
+	 * @return java script object used to map the attributes or an empty object if not exist.
 	 */
-	public final <T extends NativeObjectContainer> T getOptions(NativeObjectContainerFactory<T> factory) {
+	public final <T extends NativeObjectContainer> T getAttributes(NativeObjectContainerFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
 			// checks if there is a options
-			if (hasOptions()) {
+			if (hasAttributes()) {
 				// creates and returns the object
-				return factory.create(getValue(Property.OPTIONS));
+				return factory.create(getValue(Property.ATTRIBUTES));
 			}
 			// if here, creates an empty object
 			T options = factory.create();
 			// adds to the context
-			setValue(Property.OPTIONS, options);
+			setValue(Property.ATTRIBUTES, options);
 			// and then returns
 			return options;
 		}
