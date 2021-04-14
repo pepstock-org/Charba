@@ -165,7 +165,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
 		}
 		// creates a line label
-		label = new LineLabel(this.defaultValues.getLabel());
+		label = new LineLabel(this, this.defaultValues.getLabel());
 		// stores in the annotation
 		setValue(Property.LABEL, label);
 		// sets callbacks proxies
@@ -189,7 +189,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
 		}
 		// creates a line label
-		label = new LineLabel(getValue(Property.LABEL), this.defaultValues.getLabel());
+		label = new LineLabel(this, getValue(Property.LABEL), this.defaultValues.getLabel());
 		// sets callbacks proxies
 		initCallbacks();
 	}

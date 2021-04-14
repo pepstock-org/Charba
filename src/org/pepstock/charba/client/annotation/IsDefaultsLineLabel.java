@@ -15,7 +15,10 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.enums.LineLabelPosition;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -36,12 +39,12 @@ interface IsDefaultsLineLabel {
 	IsDefaultFont getFont();
 
 	/**
-	 * Returns <code>true</code> whether the label is enabled and should be displayed.
+	 * Returns <code>true</code> whether the label should be displayed.
 	 * 
-	 * @return <code>true</code> whether the label is enabled and should be displayed
+	 * @return <code>true</code> whether the label should be displayed
 	 */
-	default boolean isEnabled() {
-		return LineLabel.DEFAULT_ENABLED;
+	default boolean isDisplay() {
+		return LineLabel.DEFAULT_DISPLAY;
 	}
 
 	/**
@@ -169,6 +172,42 @@ interface IsDefaultsLineLabel {
 	 * @return the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
 	default String getWidthAsPercentage() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the color of the background of label.
+	 * 
+	 * @return the callback called to set the color of the background of label
+	 */
+	default ColorCallback<AnnotationContext> getBackgroundColorCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the color of the text of label.
+	 * 
+	 * @return the callback called to set the color of the text of label
+	 */
+	default ColorCallback<AnnotationContext> getColorCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the text to display in label as list.
+	 * 
+	 * @return the callback called to set the text to display in label as list
+	 */
+	default ContentCallback getContentCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the rotation of label in degrees.
+	 * 
+	 * @return the callback called to set the rotation of label in degrees
+	 */
+	default RotationCallback<AnnotationContext> getRotationCallback() {
 		return null;
 	}
 }

@@ -46,9 +46,9 @@ interface IsDefaultsAnnotation {
 	AnnotationType getType();
 
 	/**
-	 * Returns <code>true</code> whether the annotation is enabled and should be displayed.
+	 * Returns <code>true</code> whether the annotation should be displayed.
 	 * 
-	 * @return <code>true</code> whether the annotation is enabled and should be displayed
+	 * @return <code>true</code> whether the annotation should be displayed
 	 */
 	default boolean isDisplay() {
 		return AbstractAnnotation.DEFAULT_DISPLAY;

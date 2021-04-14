@@ -287,10 +287,10 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	/**
 	 * Sets <code>true</code> whether the annotation should be displayed.
 	 * 
-	 * @param enabled <code>true</code> whether the annotation should be displayed
+	 * @param display <code>true</code> whether the annotation should be displayed
 	 */
-	public final void setDisplay(boolean enabled) {
-		setValue(Property.DISPLAY, enabled);
+	public final void setDisplay(boolean display) {
+		setValue(Property.DISPLAY, display);
 	}
 
 	/**
@@ -719,7 +719,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 			// casts to date
 			Date date = (Date)result;
 			// returns the number
-			return date.getTime();
+			return (double)date.getTime();
 		}
 		// default result is undefined
 		return Window.undefined();

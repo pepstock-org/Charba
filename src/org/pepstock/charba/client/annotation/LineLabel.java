@@ -16,15 +16,24 @@
 package org.pepstock.charba.client.annotation;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.enums.LineLabelPosition;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -32,6 +41,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * Implements a <b>LABEL</b> to apply on a LINE annotation.
@@ -40,11 +50,16 @@ import org.pepstock.charba.client.items.UndefinedValues;
  *
  */
 public final class LineLabel extends NativeObjectContainer implements IsDefaultsLineLabel {
+	
+	/**
+	 * Constant to use to set AUTO rotation of the label, to use in the rotation callback.
+	 */
+	public static final double AUTO_ROTATION = Double.NaN;
 
 	/**
-	 * Default line label enabled, <b>{@value DEFAULT_ENABLED}</b>.
+	 * Default line label display, <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
-	public static final boolean DEFAULT_ENABLED = false;
+	public static final boolean DEFAULT_DISPLAY = false;
 
 	/**
 	 * Default line label background color, <b>rgba(0, 0, 0, 0.8)</b>.
@@ -107,7 +122,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	public static final double DEFAULT_ROTATION = 0D;
 
 	// auto rotation
-	private static final String AUTO_ROTATION = "auto";
+	private static final String AUTO_ROTATION_AS_STRING = "auto";
 
 	/**
 	 * Name of properties of native object.
@@ -118,7 +133,11 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		COLOR("color"),
 		CONTENT("content"),
 		CORNER_RADIUS("cornerRadius"),
-		ENABLED("enabled"),
+		// even if in the JS plugin the options is called "enabled"
+		// we think that "display" is more coherent with the scope of the option
+		// and then Charba use "display" in the method 
+		ENABLED("enabled"), 
+		// -
 		HEIGHT("height"),
 		WIDTH("width"),
 		FONT("font"),
@@ -152,7 +171,30 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		}
 
 	}
+	
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the background color function
+	private final CallbackProxy<ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the color function
+	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the content function
+	private final CallbackProxy<ProxyObjectCallback> contentCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the rotation function
+	private final CallbackProxy<ProxyObjectCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
 
+	// callback instance to handle background color options
+	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> BACKGROUND_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BACKGROUND_COLOR);
+	// callback instance to handle color options
+	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
+	// callback instance to handle content options
+	private static final CallbackPropertyHandler<ContentCallback> CONTENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CONTENT);
+	// callback instance to handle rotation options
+	private static final CallbackPropertyHandler<RotationCallback<AnnotationContext>> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
+
+	// line annotation parent instance
+	private final LineAnnotation parent;
 	// defaults options
 	private final IsDefaultsLineLabel defaultValues;
 	// font instance
@@ -161,25 +203,40 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	/**
 	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
 	 * 
+	 * @param parent {@link LineAnnotation} instance which contains the label
 	 * @param defaultValues default options instance
 	 */
-	LineLabel(IsDefaultsLineLabel defaultValues) {
-		this(null, defaultValues);
+	LineLabel(LineAnnotation parent, IsDefaultsLineLabel defaultValues) {
+		this(parent, null, defaultValues);
 	}
 
 	/**
 	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
 	 * 
+	 * @param parent {@link LineAnnotation} instance which contains the label
 	 * @param nativeObject native object to wrap, with all properties of a label
 	 * @param defaultValues default options instance
 	 */
-	LineLabel(NativeObject nativeObject, IsDefaultsLineLabel defaultValues) {
+	LineLabel(LineAnnotation parent, NativeObject nativeObject, IsDefaultsLineLabel defaultValues) {
 		super(nativeObject);
+		// stores line annotation parent
+		this.parent = parent;
 		// checks if default value is consistent
 		// stores default options
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
 		// gets font
 		this.font = new Font(defaultValues.getFont(), getValue(Property.FONT));
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this.parent, context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBackgroundColorAsString()));
+		// gets value calling callback
+		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this.parent, context), COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getColorAsString(), false));
+		// gets value calling callback
+		this.contentCallbackProxy.setCallback((contextFunction, context) -> onContent(new AnnotationContext(this.parent, context)));
+		// gets value calling callback
+		this.rotationCallbackProxy.setCallback((contextFunction, context) -> onRotation(new AnnotationContext(this.parent, context), defaultValues.getRotation()));
 	}
 
 	/**
@@ -193,22 +250,22 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	}
 
 	/**
-	 * Sets <code>true</code> whether the label is enabled and should be displayed.
+	 * Sets <code>true</code> whether the label should be displayed.
 	 * 
-	 * @param enabled <code>true</code> whether the label is enabled and should be displayed
+	 * @param display <code>true</code> whether the label should be displayed
 	 */
-	public void setEnabled(boolean enabled) {
-		setValue(Property.ENABLED, enabled);
+	public void setDisplay(boolean display) {
+		setValue(Property.ENABLED, display);
 	}
 
 	/**
-	 * Returns <code>true</code> whether the label is enabled and should be displayed.
+	 * Returns <code>true</code> whether the label should be displayed.
 	 * 
-	 * @return <code>true</code> whether the label is enabled and should be displayed
+	 * @return <code>true</code> whether the label should be displayed
 	 */
 	@Override
-	public boolean isEnabled() {
-		return getValue(Property.ENABLED, defaultValues.isEnabled());
+	public boolean isDisplay() {
+		return getValue(Property.ENABLED, defaultValues.isDisplay());
 	}
 
 	/**
@@ -430,7 +487,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	public void setAutoRotation(boolean autoRotation) {
 		// checks is enabling
 		if (autoRotation) {
-			setValue(Property.ROTATION, AUTO_ROTATION);
+			setValue(Property.ROTATION, AUTO_ROTATION_AS_STRING);
 		} else {
 			// otherwise removes the key
 			remove(Property.ROTATION);
@@ -624,6 +681,153 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		// if here is not a string then
 		// returns the default
 		return defaultValues.getWidthAsPercentage();
+	}
+	
+	// ---------------------
+	// CALLBACKS
+	// ---------------------
+
+	/**
+	 * Returns the callback called to set the color of the background of label.
+	 * 
+	 * @return the callback called to set the color of the background of label
+	 */
+	@Override
+	public ColorCallback<AnnotationContext> getBackgroundColorCallback() {
+		return BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this, defaultValues.getBackgroundColorCallback());
+	}
+
+	/**
+	 * Sets the callback to set the color of the background of label.
+	 * 
+	 * @param backgroundColorCallback to set the color of the background of label
+	 */
+	public void setBackgroundColor(ColorCallback<AnnotationContext> backgroundColorCallback) {
+		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set the color of the text of label.
+	 * 
+	 * @return the callback called to set the color of the text of label
+	 */
+	@Override
+	public ColorCallback<AnnotationContext> getColorCallback() {
+		return COLOR_PROPERTY_HANDLER.getCallback(this, defaultValues.getColorCallback());
+	}
+
+	/**
+	 * Sets the callback to set the color of the text of label.
+	 * 
+	 * @param colorCallback to set the color of the text of label
+	 */
+	public void setColor(ColorCallback<AnnotationContext> colorCallback) {
+		COLOR_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, colorCallback, colorCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set the text to display in label as list.
+	 * 
+	 * @return the callback called to set the text to display in label as list
+	 */
+	@Override
+	public ContentCallback getContentCallback() {
+		return CONTENT_PROPERTY_HANDLER.getCallback(this, defaultValues.getContentCallback());
+	}
+
+	/**
+	 * Sets the callback to set the text to display in label as list.
+	 * 
+	 * @param contentCallback to set the text to display in label as list
+	 */
+	public void setContent(ContentCallback contentCallback) {
+		CONTENT_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, contentCallback, contentCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set the rotation of label in degrees.
+	 * 
+	 * @return the callback called to set the rotation of label in degrees
+	 */
+	@Override
+	public RotationCallback<AnnotationContext> getRotationCallback() {
+		return ROTATION_PROPERTY_HANDLER.getCallback(this, defaultValues.getRotationCallback());
+	}
+
+	/**
+	 * Sets the callback to set the rotation of label in degrees.
+	 * 
+	 * @param rotationCallback to set the rotation of label in degrees
+	 */
+	public void setRotation(RotationCallback<AnnotationContext> rotationCallback) {
+		ROTATION_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, rotationCallback, rotationCallbackProxy.getProxy());
+	}
+	
+	// -----------------------
+	// INTERNALS for CALLBACKS
+	// -----------------------
+	
+	/**
+	 * Returns an object as string, array of string or {@link Img} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return an object as string, array of string or {@link Img}
+	 */
+	private Object onContent(AnnotationContext context) {
+		// gets value
+		Object result = ScriptableUtils.getOptionValue(context, getContentCallback());
+		// checks if consistent
+		if (result instanceof String) {
+			// returns the string
+			return (String)result;
+		} else if (result instanceof Img) {
+			// returns the string
+			return (Img)result;
+		} else if (result instanceof List<?>) {
+			// casts to list
+			List<?> list = (List<?>)result;
+			// checks if list is consistent
+			if (!list.isEmpty()) {
+				// creates the result array
+				final List<String> normalizedList = new LinkedList<>();
+				// scans list
+				for (Object textItem : list) {
+					// adds the string
+					// to normalized list
+					normalizedList.add(textItem.toString());
+				}
+				// checks if there is more than 
+				// returns the arrays of string for text
+				return normalizedList.size() == 1 ? normalizedList.get(0) : ArrayString.fromOrNull(normalizedList);
+			}
+		}
+		// default result is undefined
+		return Window.undefined();
+	}
+	
+	/**
+	 * Returns an object as string or double when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param defaultValue default value to apply if cllback returns an inconsistent value
+	 * @return an object as string or double
+	 */
+	private Object onRotation(AnnotationContext context, double defaultValue) {
+		// gets value
+		Double result = ScriptableUtils.getOptionValue(context, getRotationCallback(), defaultValue);
+		// checks if consistent
+		// if NaN or better AUTO_ROTATION,
+		// returns 'auto'
+		if (result != null && Double.isNaN(result)) {
+			// returns the string
+			return AUTO_ROTATION_AS_STRING;
+		} else if (result != null) {
+			// returns the string
+			return result.doubleValue();
+		}
+		// if here the result is null
+		// then returns the default
+		return defaultValue;
 	}
 
 }
