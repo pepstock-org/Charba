@@ -485,12 +485,14 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
    * remove `getIndex` method from `DatasetContext` class, use getDataIndex instead.
    * add type of the context.
    * remove `isHover` method from `DatasetContext` class.
+   * rename `options` property to `attributes` in the context classes to store custom options at runtime.
  * creates new context classes based on the type of context:
    * create `ChartContext` class to map the context for configuration chart callbacks, type equals to `chart`.
    * rename `ScriptableContext` class  to `DatasetContext` to map the context for configuration datasets callbacks, `dataset` and `data` types
    * `ScaleContext` class to map the context for configuration scales callbacks, `scale` and `tick` types.   
    * `DataLabelsContext` which is mapping `datalabels` types, for callbacks invoked by `DataLabelsPlugin`.
-   * `LabelsContext` which is mapping `labels` types, for callbacks invoked by `DataLabelsPlugin`.  
+   * `LabelsContext` which is mapping `labels` types, for callbacks invoked by `DataLabelsPlugin`.
+   * `AnnotationContext` which is mapping `annotation` types, for callbacks invoked by `AnnotationPlugin`.
  * all scriptable options are extending the `Scriptable` interface which has changed own signature, accessing only 1 argument, the context defined as generic.
  * `BackgroundColorCallback` and `BorderColorCallback` classes have been replaced by `ColorCallback` class to manage whatever scriptable option which manages colors.
  * `BorderWidthCallback` class has been replaced by `WidthCallback` class to manage whatever scriptable option which manages line widths.

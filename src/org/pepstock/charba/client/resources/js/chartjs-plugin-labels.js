@@ -29,6 +29,7 @@
     this.args = {};
     this.barTotal = {};
     this.font = {};
+    this.contexts = new Map();
     
     this.options = Chart.helpers.mergeIf(options, {
       position: 'default',
@@ -72,10 +73,29 @@
     }.bind(this));
   };
 
+  Label.prototype.getContext = function(dataset, element, index) {
+    const datasetIndex = this.chart.data.datasets.indexOf(dataset);
+    const key = datasetIndex * 1000 + index;
+    if (!this.contexts.has(key)) {
+      const context = {
+        type: 'labels',
+        label: this.chart.config.data.labels[index],
+        value: dataset.data[index],
+        percentage: this.getPercentage(dataset, element, index),
+        dataIndex: index,
+        datasetIndex: datasetIndex,
+        chart: this.chart
+      }
+      this.contexts.set(key, context);
+    }
+  	return this.contexts.get(key);
+  };
+
   Label.prototype.renderToElement = function (dataset, arg, element, index) {
     if (!this.shouldRenderToElement(arg.meta, element)) {
       return;
     }
+    
     this.percentage = null;
     var label = this.getLabel(dataset, element, index);
     if (!label) {
@@ -183,16 +203,7 @@
   Label.prototype.getLabel = function (dataset, element, index) {
     var label;
     if (typeof this.options.render === 'function') {
-      label = this.options.render({
-        type: 'labels',
-        label: this.chart.config.data.labels[index],
-        value: dataset.data[index],
-        percentage: this.getPercentage(dataset, element, index),
-        dataset: dataset,
-        dataIndex: index,
-        datasetIndex: this.chart.data.datasets.indexOf(dataset),
-		chart: this.chart
-      });
+      label = this.options.render(this.getContext(dataset, element, index));
     } else {
       switch (this.options.render) {
         case 'value':
@@ -219,30 +230,12 @@
   };
 
   Label.prototype.getFont = function (dataset, element, index) {
-  	const result = this.options.font({
-        type: 'labels',
-        label: this.chart.config.data.labels[index],
-        value: dataset.data[index],
-        percentage: this.getPercentage(dataset, element, index),
-        dataset: dataset,
-        dataIndex: index,
-        datasetIndex: this.chart.data.datasets.indexOf(dataset),
-		chart: this.chart
-      });
+  	const result = this.options.font(this.getContext(dataset, element, index));
     return Chart.helpers.mergeIf(!result ? {} : result, this.chart.options.font);
   };
   
   Label.prototype.getFontColor = function (dataset, element, index) {
-  	const result = this.options.color({
-        type: 'labels',
-        label: this.chart.config.data.labels[index],
-        value: dataset.data[index],
-        percentage: this.getPercentage(dataset, element, index),
-        dataset: dataset,
-        dataIndex: index,
-        datasetIndex: this.chart.data.datasets.indexOf(dataset),
-		chart: this.chart
-      });
+  	const result = this.options.color(this.getContext(dataset, element, index));
     return !result ? Chart.defaults.color : result;
   };
 
