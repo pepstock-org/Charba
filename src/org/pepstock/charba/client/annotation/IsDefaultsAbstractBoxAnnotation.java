@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.ColorCallback;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin BOX annotation DEFAULTS options.
@@ -52,6 +53,15 @@ interface IsDefaultsAbstractBoxAnnotation extends IsDefaultsXYAnnotation {
 	 */
 	default String getBackgroundColorAsString() {
 		return Defaults.get().getGlobal().getColorAsString();
+	}
+	
+	/**
+	 * Returns the callback called to set the color of the background of annotation.
+	 * 
+	 * @return the callback called to set the color of the background of annotation
+	 */
+	default ColorCallback<AnnotationContext> getBackgroundColorCallback() {
+		return null;
 	}
 
 }

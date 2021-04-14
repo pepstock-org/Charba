@@ -114,7 +114,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
 		}
-		// sets callbacks
+		// sets callbacks proxies
 		initCallbacks();
 	}
 
@@ -135,7 +135,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
 		}
-		// sets callbacks
+		// sets callbacks proxies
 		initCallbacks();
 	}
 	

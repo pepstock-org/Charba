@@ -213,7 +213,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		// gets value calling callback
 		this.displayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), DISPLAY_PROPERTY_HANDLER.getCallback(this), defaultValues.isDisplay()));
 		// gets value calling callback
-		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderColorAsString()));
+		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderColorAsString(), false));
 		// gets value calling callback
 		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderWidth()).intValue());
 		// gets value calling callback

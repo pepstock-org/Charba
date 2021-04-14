@@ -15,8 +15,14 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.utils.Utilities;
@@ -66,6 +72,16 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 		}
 
 	}
+	
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the background color function
+	private final CallbackProxy<ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// callback instance to handle background color options
+	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> BACKGROUND_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BACKGROUND_COLOR);
+
 
 	// defaults options
 	private final IsDefaultsAbstractBoxAnnotation defaultValues;
@@ -89,6 +105,8 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
 		}
+		// sets callbacks proxies
+		initCallbacks();
 	}
 
 	/**
@@ -108,6 +126,19 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
 		}
+		// sets callbacks proxies
+		initCallbacks();
+	}
+	
+	/**
+	 * Initializes the callbacks proxies for the options which can be scriptable.
+	 */
+	private void initCallbacks() {
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBackgroundColorAsString()));
 	}
 
 	/**
@@ -166,6 +197,29 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+	
+	// ---------------------
+	// CALLBACKS
+	// ---------------------
+
+	/**
+	 * Returns the callback called to set the color of the background of annotation.
+	 * 
+	 * @return the callback called to set the color of the background of annotation
+	 */
+	@Override
+	public final ColorCallback<AnnotationContext> getBackgroundColorCallback() {
+		return BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this, defaultValues.getBackgroundColorCallback());
+	}
+
+	/**
+	 * Sets the callback to set the color of the background of annotation.
+	 * 
+	 * @param backgroundColorCallback to set the color of the background of annotation
+	 */
+	public final void setBackgroundColor(ColorCallback<AnnotationContext> backgroundColorCallback) {
+		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
 	}
 
 }
