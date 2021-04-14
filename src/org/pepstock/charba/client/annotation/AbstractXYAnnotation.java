@@ -17,6 +17,11 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -33,7 +38,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		X_SCALE_ID("xScaleID"),
 		X_MIN("xMin"),
@@ -65,6 +70,27 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 		}
 
 	}
+	
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the xMin function
+	private final CallbackProxy<ProxyObjectCallback> xMinCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the xMax function
+	private final CallbackProxy<ProxyObjectCallback> xMaxCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the yMin function
+	private final CallbackProxy<ProxyObjectCallback> yMinCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the yMax function
+	private final CallbackProxy<ProxyObjectCallback> yMaxCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// callback instance to handle xMin options
+	private static final CallbackPropertyHandler<ValueCallback> X_MIN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_MIN);
+	// callback instance to handle xMax options
+	private static final CallbackPropertyHandler<ValueCallback> X_MAX_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_MAX);
+	// callback instance to handle yMin options
+	private static final CallbackPropertyHandler<ValueCallback> Y_MIN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_MIN);
+	// callback instance to handle yMax options
+	private static final CallbackPropertyHandler<ValueCallback> Y_MAX_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_MAX);
 
 	// defaults options
 	private final IsDefaultsXYAnnotation defaultValues;
@@ -88,6 +114,8 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
 		}
+		// sets callbacks
+		initCallbacks();
 	}
 
 	/**
@@ -107,6 +135,25 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
 		}
+		// sets callbacks
+		initCallbacks();
+	}
+	
+	/**
+	 * Initializes the callbacks proxies for the options which can be scriptable.
+	 */
+	private void initCallbacks() {
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		this.xMinCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), X_MIN_PROPERTY_HANDLER.getCallback(this)));
+		// gets value calling callback
+		this.xMaxCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), X_MAX_PROPERTY_HANDLER.getCallback(this)));
+		// gets value calling callback
+		this.yMinCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), Y_MIN_PROPERTY_HANDLER.getCallback(this)));
+		// gets value calling callback
+		this.yMaxCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), Y_MAX_PROPERTY_HANDLER.getCallback(this)));
 	}
 
 	/**
@@ -403,6 +450,88 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	@Override
 	public final Date getYMinAsDate() {
 		return getValueForMultipleKeyTypes(Property.Y_MIN, defaultValues.getYMinAsDate());
+	}
+	
+	// ---------------------
+	// CALLBACKS
+	// ---------------------
+
+	/**
+	 * Returns the callback called to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the callback called to set the left edge of the box, in units along the x axis
+	 */
+	@Override
+	public final ValueCallback getXMinCallback() {
+		return X_MIN_PROPERTY_HANDLER.getCallback(this, defaultValues.getXMinCallback());
+	}
+
+	/**
+	 * Sets the callback to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @param valueCallback to set the left edge of the box, in units along the x axis
+	 */
+	public final void setXMin(ValueCallback valueCallback) {
+		X_MIN_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, xMinCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the callback called to set the right edge of the box.
+	 * 
+	 * @return the callback called to set the right edge of the box
+	 */
+	@Override
+	public final ValueCallback getXMaxCallback() {
+		return X_MAX_PROPERTY_HANDLER.getCallback(this, defaultValues.getXMaxCallback());
+	}
+
+	/**
+	 * Sets the callback to set the right edge of the box.
+	 * 
+	 * @param valueCallback to set the right edge of the box
+	 */
+	public final void setXMax(ValueCallback valueCallback) {
+		X_MAX_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, xMaxCallbackProxy.getProxy());
+	}
+	
+	// Y
+
+	/**
+	 * Returns the callback called to set the bottom edge of the box.
+	 * 
+	 * @return the callback called to set the bottom edge of the box
+	 */
+	@Override
+	public final ValueCallback getYMinCallback() {
+		return Y_MIN_PROPERTY_HANDLER.getCallback(this, defaultValues.getYMinCallback());
+	}
+
+	/**
+	 * Sets the callback to set the bottom edge of the box.
+	 * 
+	 * @param valueCallback to set the bottom edge of the box
+	 */
+	public final void setYMin(ValueCallback valueCallback) {
+		Y_MIN_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, yMinCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the callback called to set the top edge of the box in units along the y axis.
+	 * 
+	 * @return the callback called to set the top edge of the box in units along the y axis
+	 */
+	@Override
+	public final ValueCallback getYMaxCallback() {
+		return Y_MAX_PROPERTY_HANDLER.getCallback(this, defaultValues.getYMaxCallback());
+	}
+
+	/**
+	 * Sets the callback to set the top edge of the box in units along the y axis.
+	 * 
+	 * @param valueCallback to set the top edge of the box in units along the y axis
+	 */
+	public final void setYMax(ValueCallback valueCallback) {
+		Y_MAX_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, yMaxCallbackProxy.getProxy());
 	}
 
 }

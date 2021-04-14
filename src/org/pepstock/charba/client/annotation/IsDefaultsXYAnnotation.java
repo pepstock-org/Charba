@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -152,6 +153,42 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	 * @return the bottom edge of the box
 	 */
 	default Date getYMinAsDate() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the callback called to set the left edge of the box, in units along the x axis
+	 */
+	default ValueCallback getXMinCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the right edge of the box.
+	 * 
+	 * @return the callback called to set the right edge of the box
+	 */
+	default ValueCallback getXMaxCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the callback called to set the left edge of the box, in units along the x axis
+	 */
+	default ValueCallback getYMinCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the right edge of the box.
+	 * 
+	 * @return the callback called to set the right edge of the box
+	 */
+	default ValueCallback getYMaxCallback() {
 		return null;
 	}
 

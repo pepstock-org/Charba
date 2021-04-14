@@ -41,12 +41,6 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 	 */
 	private enum Property implements Key
 	{
-		X_SCALE_ID("xScaleID"),
-		X_MIN("xMin"),
-		X_MAX("xMax"),
-		Y_SCALE_ID("yScaleID"),
-		Y_MIN("yMin"),
-		Y_MAX("yMax"),
 		BACKGROUND_COLOR("backgroundColor");
 
 		// name value of property

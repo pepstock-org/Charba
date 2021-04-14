@@ -15,11 +15,13 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
+import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.listeners.ClickCallback;
 import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
@@ -48,6 +50,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.utils.Window;
 
 import jsinterop.annotations.JsFunction;
 
@@ -136,14 +139,6 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// callback proxy to invoke the ENTER function
-	private final CallbackProxy<ProxyHandlerEventsCallback> enterCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the LEAVE function
-	private final CallbackProxy<ProxyHandlerEventsCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the CLICK function
-	private final CallbackProxy<ProxyHandlerEventsCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the DBLCLICK function
-	private final CallbackProxy<ProxyHandlerEventsCallback> dblclickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the display function
 	private final CallbackProxy<ProxyBooleanCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border color function
@@ -155,14 +150,6 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	// callback proxy to invoke the border dash offset function
 	private final CallbackProxy<ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// callback instance to handle click event
-	private static final CallbackPropertyHandler<ClickCallback> CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CLICK);
-	// callback instance to handle enter event
-	private static final CallbackPropertyHandler<EnterCallback> ENTER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENTER);
-	// callback instance to handle leave event
-	private static final CallbackPropertyHandler<LeaveCallback> LEAVE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.LEAVE);
-	// callback instance to handle dblclick event
-	private static final CallbackPropertyHandler<DoubleClickCallback> DOUBLE_CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DOUBLE_CLICK);
 	// callback instance to handle display options
 	private static final CallbackPropertyHandler<DisplayCallback> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
 	// callback instance to handle border color options
@@ -173,6 +160,27 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	private static final CallbackPropertyHandler<BorderDashCallback<AnnotationContext>> BORDER_DASH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH);
 	// callback instance to handle border dash offset options
 	private static final CallbackPropertyHandler<BorderDashOffsetCallback<AnnotationContext>> BORDER_DASH_OFFSET_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH_OFFSET);
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES EVENTS
+	// ---------------------------
+	// callback proxy to invoke the ENTER function
+	private final CallbackProxy<ProxyHandlerEventsCallback> enterCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the LEAVE function
+	private final CallbackProxy<ProxyHandlerEventsCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the CLICK function
+	private final CallbackProxy<ProxyHandlerEventsCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the DBLCLICK function
+	private final CallbackProxy<ProxyHandlerEventsCallback> dblclickCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// callback instance to handle click event
+	private static final CallbackPropertyHandler<ClickCallback> CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CLICK);
+	// callback instance to handle enter event
+	private static final CallbackPropertyHandler<EnterCallback> ENTER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENTER);
+	// callback instance to handle leave event
+	private static final CallbackPropertyHandler<LeaveCallback> LEAVE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.LEAVE);
+	// callback instance to handle dblclick event
+	private static final CallbackPropertyHandler<DoubleClickCallback> DOUBLE_CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DOUBLE_CLICK);
 
 	private final IsDefaultsAnnotation defaultValues;
 	// draw time instance set at plugin startup
@@ -404,6 +412,10 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	public double getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, defaultValues.getBorderDashOffset());
 	}
+	
+	// ---------------------
+	// CALLBACKS
+	// ---------------------
 
 	/**
 	 * Returns the callback called to set the display option at runtime.
@@ -682,6 +694,35 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		}
 		// default result
 		return ArrayInteger.fromOrEmpty(defaultValue);
+	}
+	
+	/**
+	 * Returns an object as double, string or date (as time) when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param valueCallback border dash callback instance
+	 * @return an object as double, string or date
+	 */
+	final Object onValue(AnnotationContext context, ValueCallback valueCallback) {
+		// gets value
+		Object result = ScriptableUtils.getOptionValue(context, valueCallback);
+		// checks if consistent
+		if (result instanceof Number) {
+			// casts to number
+			Number number = (Number)result;
+			// returns the number
+			return number.doubleValue();
+		} else if (result instanceof String) {
+			// returns the string
+			return (String)result;
+		} else if (result instanceof Date) {
+			// casts to date
+			Date date = (Date)result;
+			// returns the number
+			return date.getTime();
+		}
+		// default result is undefined
+		return Window.undefined();
 	}
 
 }
