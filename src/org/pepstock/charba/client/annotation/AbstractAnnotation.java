@@ -372,7 +372,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * 
 	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
-	public void setBorderDash(int... borderDash) {
+	public final void setBorderDash(int... borderDash) {
 		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
 
@@ -382,7 +382,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	@Override
-	public List<Integer> getBorderDash() {
+	public final List<Integer> getBorderDash() {
 		// checks if there is the property
 		if (has(Property.BORDER_DASH)) {
 			// gets the array
@@ -399,7 +399,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * 
 	 * @param borderDashOffset the line dash pattern offset.
 	 */
-	public void setBorderDashOffset(double borderDashOffset) {
+	public final void setBorderDashOffset(double borderDashOffset) {
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
@@ -409,7 +409,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @return the line dash pattern offset.
 	 */
 	@Override
-	public double getBorderDashOffset() {
+	public final double getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, defaultValues.getBorderDashOffset());
 	}
 	

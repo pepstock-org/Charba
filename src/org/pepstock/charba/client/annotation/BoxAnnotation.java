@@ -16,6 +16,12 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.utils.Utilities;
@@ -65,6 +71,15 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 		}
 
 	}
+	
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the corner radius function
+	private final CallbackProxy<ProxyDoubleCallback> cornerRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// callback instance to handle corner radius options
+	private static final CallbackPropertyHandler<RadiusCallback<AnnotationContext>> CORNER_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CORNER_RADIUS);
 
 	// defaults options
 	private final IsDefaultsBoxAnnotation defaultValues;
@@ -137,6 +152,8 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
 		}
+		// sets callbacks proxies
+		initCallbacks();
 	}
 
 	/**
@@ -155,6 +172,19 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
 		}
+		// sets callbacks proxies
+		initCallbacks();
+	}
+	
+	/**
+	 * Initializes the callbacks proxies for the options which can be scriptable.
+	 */
+	private void initCallbacks() {
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), CORNER_RADIUS_PROPERTY_HANDLER.getCallback(this), defaultValues.getCornerRadius()).doubleValue());
 	}
 
 	/**
@@ -174,5 +204,24 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 	@Override
 	public double getCornerRadius() {
 		return getValue(Property.CORNER_RADIUS, defaultValues.getCornerRadius());
+	}
+	
+	/**
+	 * Returns the callback called to set the corner radius.
+	 * 
+	 * @return the callback called to set the corner radius
+	 */
+	@Override
+	public final RadiusCallback<AnnotationContext> getCornerRadiusCallback() {
+		return CORNER_RADIUS_PROPERTY_HANDLER.getCallback(this, defaultValues.getCornerRadiusCallback());
+	}
+
+	/**
+	 * Sets the callback to set the corner radius.
+	 * 
+	 * @param cornerRadiusCallback to set the corner radius
+	 */
+	public final void setCornerRadius(RadiusCallback<AnnotationContext> cornerRadiusCallback) {
+		CORNER_RADIUS_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, cornerRadiusCallback, cornerRadiusCallbackProxy.getProxy());
 	}
 }
