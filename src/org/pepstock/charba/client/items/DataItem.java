@@ -86,7 +86,7 @@ public final class DataItem {
 			this.dataType = DataType.POINTS;
 		} else {
 			// if here is not a recognized object
-			// for data, then set nan and null.
+			// for data, then set NaN and null.
 			this.value = UndefinedValues.DOUBLE;
 			this.valueAsFloatingData = null;
 			this.valueAsString = Constants.NULL_STRING;
