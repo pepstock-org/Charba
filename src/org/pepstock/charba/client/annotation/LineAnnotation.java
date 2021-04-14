@@ -18,6 +18,11 @@ package org.pepstock.charba.client.annotation;
 import java.util.Date;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -70,6 +75,19 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 		}
 
 	}
+	
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the value function
+	private final CallbackProxy<ProxyObjectCallback> valueCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the end value function
+	private final CallbackProxy<ProxyObjectCallback> endValueCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// callback instance to handle value options
+	private static final CallbackPropertyHandler<ValueCallback> VALUE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.VALUE);
+	// callback instance to handle value options
+	private static final CallbackPropertyHandler<ValueCallback> END_VALUE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.END_VALUE);
 
 	// defaults options
 	private final IsDefaultsLineAnnotation defaultValues;
@@ -150,6 +168,8 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 		label = new LineLabel(this.defaultValues.getLabel());
 		// stores in the annotation
 		setValue(Property.LABEL, label);
+		// sets callbacks proxies
+		initCallbacks();
 	}
 
 	/**
@@ -170,6 +190,21 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 		}
 		// creates a line label
 		label = new LineLabel(getValue(Property.LABEL), this.defaultValues.getLabel());
+		// sets callbacks proxies
+		initCallbacks();
+	}
+	
+	/**
+	 * Initializes the callbacks proxies for the options which can be scriptable.
+	 */
+	private void initCallbacks() {
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		this.valueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), VALUE_PROPERTY_HANDLER.getCallback(this)));
+		// gets value calling callback
+		this.endValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), END_VALUE_PROPERTY_HANDLER.getCallback(this)));
 	}
 
 	/**
@@ -328,6 +363,48 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	@Override
 	public Date getEndValueAsDate() {
 		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsDate());
+	}
+	
+	// ---------------------
+	// CALLBACKS
+	// ---------------------
+
+	/**
+	 * Returns the callback called to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the callback called to set the left edge of the box, in units along the x axis
+	 */
+	@Override
+	public ValueCallback getValueCallback() {
+		return VALUE_PROPERTY_HANDLER.getCallback(this, defaultValues.getValueCallback());
+	}
+
+	/**
+	 * Sets the callback to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @param valueCallback to set the left edge of the box, in units along the x axis
+	 */
+	public void setValue(ValueCallback valueCallback) {
+		VALUE_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, valueCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the callback called to set the data value at which the line draw should end.
+	 * 
+	 * @return the callback called to set the data value at which the line draw should end
+	 */
+	@Override
+	public ValueCallback getEndValueCallback() {
+		return END_VALUE_PROPERTY_HANDLER.getCallback(this, defaultValues.getEndValueCallback());
+	}
+
+	/**
+	 * Sets the callback to set the data value at which the line draw should end.
+	 * 
+	 * @param valueCallback to set the data value at which the line draw should end
+	 */
+	public void setEndValue(ValueCallback valueCallback) {
+		END_VALUE_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, endValueCallbackProxy.getProxy());
 	}
 
 }

@@ -147,7 +147,7 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 	 * @return the color of the border of annotation
 	 */
 	@Override
-	public String getBorderColorAsString() {
+	public final String getBorderColorAsString() {
 		return getValue(AbstractAnnotation.Property.BORDER_COLOR, defaultValues.getBorderColorAsString());
 	}
 
@@ -157,7 +157,7 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 	 * @return the width of the border in pixels.
 	 */
 	@Override
-	public int getBorderWidth() {
+	public final int getBorderWidth() {
 		return getValue(AbstractAnnotation.Property.BORDER_WIDTH, defaultValues.getBorderWidth());
 	}
 
@@ -166,7 +166,7 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 	 * 
 	 * @param backgroundColor the color of the background of annotation
 	 */
-	public void setBackgroundColor(IsColor backgroundColor) {
+	public final void setBackgroundColor(IsColor backgroundColor) {
 		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
 	}
 
@@ -175,7 +175,7 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 	 * 
 	 * @param backgroundColor the color of the background of annotation
 	 */
-	public void setBackgroundColor(String backgroundColor) {
+	public final void setBackgroundColor(String backgroundColor) {
 		// stores value
 		setValue(Property.BACKGROUND_COLOR, backgroundColor);
 	}
@@ -186,7 +186,7 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 	 * @return the color of the background of annotation
 	 */
 	@Override
-	public String getBackgroundColorAsString() {
+	public final String getBackgroundColorAsString() {
 		return getValue(Property.BACKGROUND_COLOR, defaultValues.getBackgroundColorAsString());
 	}
 
@@ -195,7 +195,7 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 	 * 
 	 * @return the color of the background of annotation
 	 */
-	public IsColor getBackgroundColor() {
+	public final IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 	
