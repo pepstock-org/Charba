@@ -1090,8 +1090,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 			// returns the string
 			return AUTO_ROTATION_AS_STRING;
 		} else if (result != null) {
-			// returns the string
-			return result.doubleValue();
+			// returns the double value
+			return result;
 		}
 		// if here the result is null
 		// then returns the default
