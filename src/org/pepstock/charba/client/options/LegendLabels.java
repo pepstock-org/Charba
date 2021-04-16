@@ -159,7 +159,9 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 * @param align the horizontal alignment of the label text.
 	 */
 	public void setTextAlign(TextAlign align) {
-		setValueAndAddToParent(Property.TEXT_ALIGN, align);
+		// legend labels accept only right, left and center
+		// then use the left-right value
+		setValueAndAddToParent(Property.TEXT_ALIGN, Key.isValid(align) ? align.getLeftRightValue() :null);
 	}
 
 	/**

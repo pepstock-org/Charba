@@ -20,6 +20,7 @@ import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
@@ -30,17 +31,16 @@ import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
 import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
-import org.pepstock.charba.client.datalabels.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
-import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.datalabels.events.ClickEventHandler;
 import org.pepstock.charba.client.datalabels.events.EnterEventHandler;
 import org.pepstock.charba.client.datalabels.events.LeaveEventHandler;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.Weight;
 
 /**
@@ -530,7 +530,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 * @param textAlignCallback the text align callback to set
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setTextAlign(TextAlignCallback textAlignCallback) {
+	public final AbstractBuilder<T> setTextAlign(TextAlignCallback<DataLabelsContext> textAlignCallback) {
 		label.setTextAlign(textAlignCallback);
 		return this;
 	}

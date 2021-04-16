@@ -21,6 +21,7 @@ import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
@@ -30,14 +31,13 @@ import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
 import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
-import org.pepstock.charba.client.datalabels.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
-import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.enums.Display;
+import org.pepstock.charba.client.enums.TextAlign;
 
 /**
  * This is the base interface to map {@link DataLabelsPlugin#ID} plugin options, for a single label.
@@ -363,7 +363,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the text align callback.
 	 */
-	default TextAlignCallback getTextAlignCallback() {
+	default TextAlignCallback<DataLabelsContext> getTextAlignCallback() {
 		return null;
 	}
 

@@ -30,6 +30,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjec
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
@@ -47,13 +48,12 @@ import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
 import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
-import org.pepstock.charba.client.datalabels.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
-import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.enums.Display;
+import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -168,7 +168,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	// rotation callback instance
 	private static final CallbackPropertyHandler<RotationCallback<DataLabelsContext>> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
 	// text align callback instance
-	private static final CallbackPropertyHandler<TextAlignCallback> TEXT_ALIGN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_ALIGN);
+	private static final CallbackPropertyHandler<TextAlignCallback<DataLabelsContext>> TEXT_ALIGN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_ALIGN);
 	// text stroke color callback instance
 	private static final CallbackPropertyHandler<ColorCallback<DataLabelsContext>> TEXT_STROKE_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_STROKE_COLOR);
 	// text stroke width callback instance
@@ -1127,7 +1127,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the text align callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final TextAlignCallback getTextAlignCallback() {
+	public final TextAlignCallback<DataLabelsContext> getTextAlignCallback() {
 		return TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this, defaultOptions.getTextAlignCallback());
 	}
 
@@ -1136,7 +1136,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param textAlignCallback the text align callback to set
 	 */
-	public final void setTextAlign(TextAlignCallback textAlignCallback) {
+	public final void setTextAlign(TextAlignCallback<DataLabelsContext> textAlignCallback) {
 		TEXT_ALIGN_PROPERTY_HANDLER.setCallback(this, getId(), textAlignCallback, textAlignCallbackProxy.getProxy());
 	}
 

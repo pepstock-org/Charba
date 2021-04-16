@@ -409,6 +409,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * remove `setOptions(List<T>)`, `getOptionsAsList` and `getOptionsType` methods from `Plugins` configuration and options classes.
  * change `DataLabelsPlugin` in order to :
    * move `Weight` enumeration from `org.pepstock.charba.client.datalabels.enums` to `org.pepstock.charba.client.enums` because new `Font` implementation must be used.
+   * remove `TextAlign` enumeration from `org.pepstock.charba.client.datalabels.enums` and use  `TextAlign` in `org.pepstock.charba.client.enums` instead.
    * `org.pepstock.charba.client.datalabels.callbacks.ColorCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.ColorCallback` class to manage whatever scriptable option which manages colors.
    * `org.pepstock.charba.client.datalabels.callbacks.OffsetCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.OffsetCallback` class to manage whatever scriptable option which manages offsets.
    * `org.pepstock.charba.client.datalabels.callbacks.OffsetCallback` class  have been replaced by `org.pepstock.charba.client.callbacks.OffsetCallback` class to manage whatever scriptable option which manages offsets.

@@ -26,10 +26,10 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.enums.Repetition;
-import org.pepstock.charba.client.dom.enums.TextAlign;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
+import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 import jsinterop.annotations.JsMethod;

@@ -13,19 +13,16 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.datalabels.callbacks;
+package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.datalabels.DataLabelsContext;
-import org.pepstock.charba.client.datalabels.enums.TextAlign;
+import org.pepstock.charba.client.enums.TextAlign;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>textAlign</code> property at runtime, using the plugin context.
+ * Callback interface to set <code>rotation</code> or <code>textAlign</code> property at runtime
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface TextAlignCallback extends Scriptable<TextAlign, DataLabelsContext> {
+public interface TextAlignCallback<C extends ChartContext> extends Scriptable<TextAlign, C> {
 
 }

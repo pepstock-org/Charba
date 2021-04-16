@@ -25,28 +25,44 @@ import org.pepstock.charba.client.commons.Key;
 public enum TextAlign implements Key
 {
 	/**
-	 * the property sets the left text alignment.
+	 * The inline contents are centered within the line box.
 	 */
-	LEFT("left"),
+	CENTER("center", "center", "center"),
 	/**
-	 * the property sets the center text alignment.
+	 * The same as right if direction is left-to-right and left if direction is right-to-left.
 	 */
-	CENTER("center"),
+	END("end", "right", "end"),
 	/**
-	 * the property sets the right text alignment.
+	 * The inline contents are aligned to the left edge of the line box.
 	 */
-	RIGHT("right");
+	LEFT("left", "left", "start"),
+	/**
+	 * The inline contents are aligned to the right edge of the line box.
+	 */
+	RIGHT("right", "right", "end"),
+	/**
+	 * The same as left if direction is left-to-right and right if direction is right-to-left.
+	 */
+	START("start", "left", "start");
 
 	// name value of property
 	private final String value;
+	// value to use when only left and right is used
+	private final String leftRightValue;
+	// value to use when only start and end is used
+	private final String startEndValue;
 
 	/**
 	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
+	 * @param leftRightValue value to use when only left and right is used
+	 * @param startEndValue value to use when only start and end is used
 	 */
-	private TextAlign(String value) {
+	private TextAlign(String value, String leftRightValue, String startEndValue) {
 		this.value = value;
+		this.leftRightValue = leftRightValue;
+		this.startEndValue = startEndValue;
 	}
 
 	/*
@@ -57,6 +73,24 @@ public enum TextAlign implements Key
 	@Override
 	public String value() {
 		return value;
+	}
+
+	/**
+	 * Returns the value to use when only left and right is used.
+	 * 
+	 * @return the leftRightValue value to use when only left and right is used
+	 */
+	public String getLeftRightValue() {
+		return leftRightValue;
+	}
+
+	/**
+	 * Returns the value to use when only start and end is used.
+	 * 
+	 * @return the value to use when only start and end is used
+	 */
+	public String getStartEndValue() {
+		return startEndValue;
 	}
 
 }

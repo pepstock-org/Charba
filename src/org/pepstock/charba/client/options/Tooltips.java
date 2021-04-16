@@ -353,7 +353,9 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param align title alignment.
 	 */
 	public void setTitleAlign(TextAlign align) {
-		setValueAndAddToParent(Property.TITLE_ALIGN, align);
+		// tooltip accepts only right, left and center
+		// then use the left-right value
+		setValueAndAddToParent(Property.TITLE_ALIGN, Key.isValid(align) ? align.getLeftRightValue() :null);
 	}
 
 	/**
@@ -457,7 +459,9 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param align body alignment.
 	 */
 	public void setBodyAlign(TextAlign align) {
-		setValueAndAddToParent(Property.BODY_ALIGN, align);
+		// tooltip accepts only right, left and center
+		// then use the left-right value
+		setValueAndAddToParent(Property.BODY_ALIGN, Key.isValid(align) ? align.getLeftRightValue() :null);
 	}
 
 	/**
@@ -542,7 +546,9 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param align footer alignment.
 	 */
 	public void setFooterAlign(TextAlign align) {
-		setValueAndAddToParent(Property.FOOTER_ALIGN, align);
+		// tooltip accepts only right, left and center
+		// then use the left-right value
+		setValueAndAddToParent(Property.FOOTER_ALIGN, Key.isValid(align) ? align.getLeftRightValue() :null);
 	}
 
 	/**
