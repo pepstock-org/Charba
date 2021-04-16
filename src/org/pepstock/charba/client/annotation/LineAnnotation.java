@@ -201,9 +201,9 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.valueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), VALUE_PROPERTY_HANDLER.getCallback(this)));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.endValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), END_VALUE_PROPERTY_HANDLER.getCallback(this)));
 	}
 

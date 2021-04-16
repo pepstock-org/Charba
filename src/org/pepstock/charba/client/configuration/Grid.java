@@ -98,13 +98,13 @@ public class Grid extends AbstractScaleLines {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		tickColorCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickColorCallback, getAxis().getDefaultValues().getGrid().getTickColorAsString(), false));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		tickWidthCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickWidthCallback, getAxis().getDefaultValues().getGrid().getTickWidth()).intValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		tickBorderDashOffsetCallbackProxy.setCallback(
 				(contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickBorderDashOffsetCallback, getAxis().getDefaultValues().getGrid().getTickBorderDashOffset()).doubleValue());
 	}

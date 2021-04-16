@@ -275,31 +275,31 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this.parent, context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBackgroundColorAsString()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this.parent, context), COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getColorAsString(), false));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.contentCallbackProxy.setCallback((contextFunction, context) -> onContent(new AnnotationContext(this.parent, context)));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.displayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), DISPLAY_PROPERTY_HANDLER.getCallback(this), defaultValues.isDisplay()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.rotationCallbackProxy.setCallback((contextFunction, context) -> onRotation(new AnnotationContext(this.parent, context), defaultValues.getRotation()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), CORNER_RADIUS_PROPERTY_HANDLER.getCallback(this), defaultValues.getCornerRadius()).doubleValue());	
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.imageWidthCallbackProxy.setCallback((contextFunction, context) -> onImageSize(new AnnotationContext(this.parent, context), IMAGE_WIDTH_PROPERTY_HANDLER.getCallback(this), defaultValues.getImageWidth(), defaultValues.getImageWidthAsPercentage()));	
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.imageHeightCallbackProxy.setCallback((contextFunction, context) -> onImageSize(new AnnotationContext(this.parent, context), IMAGE_HEIGHT_PROPERTY_HANDLER.getCallback(this), defaultValues.getImageHeight(), defaultValues.getImageHeightAsPercentage()));	
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.positionCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new AnnotationContext(this.parent, context), POSITION_PROPERTY_HANDLER.getCallback(this), getPosition()).value());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.xPaddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), X_PADDING_PROPERTY_HANDLER.getCallback(this), defaultValues.getXPadding()).intValue());	
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.yPaddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), Y_PADDING_PROPERTY_HANDLER.getCallback(this), defaultValues.getYPadding()).intValue());	
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.xAdjustCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), X_ADJUST_PROPERTY_HANDLER.getCallback(this), defaultValues.getXAdjust()).doubleValue());	
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.yAdjustCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), Y_ADJUST_PROPERTY_HANDLER.getCallback(this), defaultValues.getYAdjust()).doubleValue());	
 	}
 

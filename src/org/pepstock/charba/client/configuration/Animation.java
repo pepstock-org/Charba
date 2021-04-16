@@ -183,13 +183,13 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 				onProgress(animationItem);
 			}
 		});
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.durationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), durationCallback, Defaults.get().getGlobal().getAnimation().getDuration()).intValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.delayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), delayCallback, Defaults.get().getGlobal().getAnimation().getDelay()).intValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.loopCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), loopCallback, Defaults.get().getGlobal().getAnimation().isLoop()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.easingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), easingCallback, Defaults.get().getGlobal().getAnimation().getEasing()).value());
 	}
 

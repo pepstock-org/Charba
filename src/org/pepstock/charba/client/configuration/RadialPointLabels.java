@@ -157,13 +157,13 @@ public class RadialPointLabels extends AxisContainer {
 			// returns passed item
 			return item;
 		});
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.fontCallbackProxy.setCallback((contextFunction, context) -> getAxis().onFont(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), fontCallback, getAxis().getScale().getPointLabels().getFont()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), colorCallback, getAxis().getDefaultValues().getPointLabels().getColorAsString()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.backdropColorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropColorCallback, getAxis().getDefaultValues().getPointLabels().getBackdropColorAsString()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.paddingCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), paddingCallback, getAxis().getDefaultValues().getPointLabels().getPadding()).intValue());
 	}

@@ -166,11 +166,11 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), offsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.hoverOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), hoverOffsetCallback, getDefaultValues().getElements().getArc().getOffset()).intValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.borderRadiusCallbackProxy
 				.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), borderRadiusCallback, ArcBorderRadius.FACTORY, getDefaultValues().getElements().getArc().getBorderRadius()));
 

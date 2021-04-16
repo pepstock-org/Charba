@@ -215,13 +215,13 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBackgroundColorAsString()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.radiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), RADIUS_PROPERTY_HANDLER.getCallback(this), defaultValues.getRadius()).doubleValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.xValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), X_VALUE_PROPERTY_HANDLER.getCallback(this)));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.yValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), Y_VALUE_PROPERTY_HANDLER.getCallback(this)));
 	}
 

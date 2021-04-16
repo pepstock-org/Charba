@@ -315,7 +315,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		// -------------------------------
 		this.renderCallbackProxy.setCallback((contextFunction, context) -> onRender(new LabelsContext(this, context)));
 		this.fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new LabelsContext(this, context)));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(this, context), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
 	}
 

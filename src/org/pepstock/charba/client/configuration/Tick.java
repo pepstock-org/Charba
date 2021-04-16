@@ -112,13 +112,13 @@ abstract class Tick extends AxisContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.fontCallbackProxy.setCallback((contextFunction, context) -> getAxis().onFont(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), fontCallback, getAxis().getScale().getPointLabels().getFont()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), colorCallback));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), textStrokeColorCallback));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.textStrokeWidthCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), textStrokeWidthCallback, getAxis().getDefaultValues().getTicks().getTextStrokeWidth()).intValue());
 	}

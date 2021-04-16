@@ -102,10 +102,10 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		backdropColorCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropColorCallback, getConfiguration().getBackdropColorAsString(), false));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		showLabelBackdropCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
 	}
 

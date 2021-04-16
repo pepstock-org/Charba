@@ -137,7 +137,7 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBackgroundColorAsString()));
 	}
 

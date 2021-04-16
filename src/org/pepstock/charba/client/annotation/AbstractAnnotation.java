@@ -210,15 +210,15 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.displayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), DISPLAY_PROPERTY_HANDLER.getCallback(this), defaultValues.isDisplay()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderColorAsString(), false));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderWidth()).intValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new AnnotationContext(this, context), BORDER_DASH_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderDash()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashOffsetCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), BORDER_DASH_OFFSET_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderDashOffset()).doubleValue());
 		// ------------------------------------------

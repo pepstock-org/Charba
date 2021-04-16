@@ -283,45 +283,45 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		this.formatterCallbackProxy.setCallback((contextFunction, value, context) -> onFormatter(new DataLabelsContext(this, context), value));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), getBackgroundColorAsString()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), getBorderColorAsString()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), ALIGN_PROPERTY_HANDLER.getCallback(this), getAlign()).value());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.anchorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), ANCHOR_PROPERTY_HANDLER.getCallback(this), getAnchor()).value());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this), getBorderRadius()).doubleValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this), getBorderWidth()).intValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.clampCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), CLAMP_PROPERTY_HANDLER.getCallback(this), isClamp()).booleanValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.clipCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), CLIP_PROPERTY_HANDLER.getCallback(this), isClip()).booleanValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.displayCallbackProxy.setCallback((contextFunction, context) -> onDisplay(new DataLabelsContext(this, context)));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), OFFSET_PROPERTY_HANDLER.getCallback(this), getOffset()).intValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.opacityCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), OPACITY_PROPERTY_HANDLER.getCallback(this), getOpacity()).doubleValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), ROTATION_PROPERTY_HANDLER.getCallback(this), getRotation()).doubleValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this), getTextAlign()).value());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this), getTextStrokeColorAsString()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), TEXT_STROKE_WIDTH_PROPERTY_HANDLER.getCallback(this), getTextStrokeWidth()).intValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), TEXT_SHADOW_BLUR_PROPERTY_HANDLER.getCallback(this), getTextShadowBlur()).doubleValue());
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this), getTextShadowColorAsString()));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new DataLabelsContext(this, context), FONT_PROPERTY_HANDLER.getCallback(this)));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.paddingCallbackProxy.setCallback((contextFunction, context) -> onPadding(new DataLabelsContext(this, context), PADDING_PROPERTY_HANDLER.getCallback(this)));
 	}
 

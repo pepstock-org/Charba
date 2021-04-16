@@ -146,13 +146,13 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.xMinCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), X_MIN_PROPERTY_HANDLER.getCallback(this)));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.xMaxCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), X_MAX_PROPERTY_HANDLER.getCallback(this)));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.yMinCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), Y_MIN_PROPERTY_HANDLER.getCallback(this)));
-		// gets value calling callback
+		// sets function to proxy callback in order to invoke the java interface
 		this.yMaxCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), Y_MAX_PROPERTY_HANDLER.getCallback(this)));
 	}
 
