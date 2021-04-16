@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.callbacks;
 
 /**
- * Callback interface to set <code>borderDashOffset</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>borderDashOffset</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  * 

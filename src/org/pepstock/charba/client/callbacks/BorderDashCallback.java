@@ -18,7 +18,7 @@ package org.pepstock.charba.client.callbacks;
 import java.util.List;
 
 /**
- * Callback interface to set <code>borderDash</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>borderDash</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  * 

@@ -32,7 +32,7 @@ import org.pepstock.charba.client.colors.Pattern;
  * <li><code>pointBackgroundColor</code>
  * <li><code>pointHoverBackgroundColor</code>
  * </ul>
- * property at runtime, using the chart instance and the context.
+ * property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *

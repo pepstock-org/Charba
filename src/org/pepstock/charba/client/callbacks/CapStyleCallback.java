@@ -18,7 +18,7 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.enums.CapStyle;
 
 /**
- * Callback interface to set <code>borderCapStyle</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>borderCapStyle</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  * 

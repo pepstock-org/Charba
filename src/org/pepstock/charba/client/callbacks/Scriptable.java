@@ -26,7 +26,7 @@ package org.pepstock.charba.client.callbacks;
 public interface Scriptable<T, C extends ChartContext> {
 
 	/**
-	 * Returns the value of property at runtime, using the chart instance and the context.
+	 * Returns the value of property at runtime.
 	 * 
 	 * @param context context instance
 	 * @return value of property to be applied

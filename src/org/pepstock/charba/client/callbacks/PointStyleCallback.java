@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * Callback interface to set <code>pointStyle</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>pointStyle</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *

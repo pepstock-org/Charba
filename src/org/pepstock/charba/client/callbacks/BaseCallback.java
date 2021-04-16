@@ -18,7 +18,7 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.data.BarDataset;
 
 /**
- * Callback interface to set <code>base</code> property at runtime for {@link BarDataset}, using the chart instance and the context.
+ * Callback interface to set <code>base</code> property at runtime for {@link BarDataset}.
  * 
  * @author Andrea "Stock" Stocchero
  *

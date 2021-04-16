@@ -18,7 +18,7 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.configuration.Animation;
 
 /**
- * Callback interface to set <code>loop</code>property of {@link Animation} at runtime, using the chart instance and the context.
+ * Callback interface to set <code>loop</code>property of {@link Animation} at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *
