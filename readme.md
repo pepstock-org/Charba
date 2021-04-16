@@ -446,6 +446,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
    * remove `mode` property from annotation line options because new plugin is using the `axis` property of scales for line orientation.
    * remove `events` property from annotation options because the event listeners will be added based on the callbacks definitions.
    * add `autoRotation` property to annotation line label options in order to enable the automatic calculation of label rotation.
+   * add `textAlign` property to annotation line label options in order to enable horizontal alignment when context text is multiple lines.
    * remove `name` property from annotation options because is not needed anymore. Use `id` property instead.
    * change `getScaleID` method in `LineAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
    * change `getXScaleID` and `getXScaleID` methods in `BoxAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.

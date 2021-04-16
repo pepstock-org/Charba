@@ -725,18 +725,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
-	 * Sets the text alignment being used when drawing the label text.
+	 * Sets the text alignment being used when drawing the label text when multiple lines.
 	 * 
-	 * @param textAlign the text alignment being used when drawing the label text.
+	 * @param textAlign the text alignment being used when drawing the label text when multiple lines
 	 */
 	public final void setTextAlign(TextAlign textAlign) {
 		setValue(Property.TEXT_ALIGN, textAlign);
 	}
 
 	/**
-	 * Returns the text alignment being used when drawing the label text.
+	 * Returns the text alignment being used when drawing the label text when multiple lines.
 	 * 
-	 * @return the text alignment being used when drawing the label text.
+	 * @return the text alignment being used when drawing the label text when multiple lines
 	 */
 	@Override
 	public final TextAlign getTextAlign() {

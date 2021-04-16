@@ -19,13 +19,15 @@ import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
-import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
+import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -133,6 +135,15 @@ interface IsDefaultsLineLabel {
 	 */
 	default double getRotation() {
 		return LineLabel.DEFAULT_ROTATION;
+	}
+	
+	/**
+	 * Returns the horizontal alignment of the label text.
+	 * 
+	 * @return the horizontal alignment of the label text
+	 */
+	default TextAlign getTextAlign() {
+		return LineLabel.DEFAULT_TEXT_ALIGN;
 	}
 
 	/**
@@ -285,6 +296,15 @@ interface IsDefaultsLineLabel {
 	 * @return the callback called to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative)
 	 */
 	default AdjustSizeCallback getYAdjustCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the horizontal alignment of the label text.
+	 * 
+	 * @return the callback called to set the horizontal alignment of the label text
+	 */
+	default TextAlignCallback<AnnotationContext> getTextAlignCallback() {
 		return null;
 	}
 }

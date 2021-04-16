@@ -23,8 +23,8 @@ import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
-import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
+import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
@@ -35,6 +35,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCall
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
@@ -50,6 +51,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.Window;
 
@@ -127,6 +129,11 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	public static final double DEFAULT_Y_ADJUST = 0D;
 
 	/**
+	 * Default text align for labels, <b>{@link TextAlign#CENTER}</b>.
+	 */
+	public static final TextAlign DEFAULT_TEXT_ALIGN = TextAlign.CENTER;
+	
+	/**
 	 * Default line label rotation, <b>{@value DEFAULT_ROTATION}</b>.
 	 */
 	public static final double DEFAULT_ROTATION = 0D;
@@ -153,6 +160,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		FONT("font"),
 		POSITION("position"),
 		ROTATION("rotation"),
+		TEXT_ALIGN("textAlign"),
 		X_PADDING("xPadding"),
 		Y_PADDING("yPadding"),
 		X_ADJUST("xAdjust"),
@@ -203,6 +211,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	private final CallbackProxy<ProxyObjectCallback> imageHeightCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the position function
 	private final CallbackProxy<ProxyStringCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the text align function
+	private final CallbackProxy<ProxyStringCallback> textAlignCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the xPadding function
 	private final CallbackProxy<ProxyIntegerCallback> xPaddingCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the yPadding function
@@ -230,6 +240,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	private static final CallbackPropertyHandler<ImageSizeCallback> IMAGE_HEIGHT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.HEIGHT);
 	// callback instance to handle position options
 	private static final CallbackPropertyHandler<LabelPositionCallback> POSITION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.POSITION);
+	// callback instance to handle text align options
+	private static final CallbackPropertyHandler<TextAlignCallback<AnnotationContext>> TEXT_ALIGN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TEXT_ALIGN);
 	// callback instance to handle xPadding options
 	private static final CallbackPropertyHandler<PaddingSizeCallback> X_PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_PADDING);
 	// callback instance to handle yPadding options
@@ -301,6 +313,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		this.xAdjustCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), X_ADJUST_PROPERTY_HANDLER.getCallback(this), defaultValues.getXAdjust()).doubleValue());	
 		// sets function to proxy callback in order to invoke the java interface
 		this.yAdjustCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), Y_ADJUST_PROPERTY_HANDLER.getCallback(this), defaultValues.getYAdjust()).doubleValue());	
+		// sets function to proxy callback in order to invoke the java interface
+		this.textAlignCallbackProxy.setCallback((contextFunction, context) -> onTextAlign(new AnnotationContext(this.parent, context), defaultValues.getTextAlign()));
 	}
 
 	/**
@@ -482,6 +496,25 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		return getValue(Property.POSITION, LabelPosition.values(), defaultValues.getPosition());
 	}
 
+	/**
+	 * Sets the horizontal alignment of the label text when multiple lines.
+	 * 
+	 * @param align the horizontal alignment of the label text when multiple lines
+	 */
+	public void setTextAlign(TextAlign align) {
+		setValue(Property.TEXT_ALIGN, Key.isValid(align) ? align.getStartEndValue() : null);
+	}
+
+	/**
+	 * Returns the horizontal alignment of the label text when multiple lines.
+	 * 
+	 * @return the horizontal alignment of the label text when multiple lines
+	 */
+	@Override
+	public TextAlign getTextAlign() {
+		return getValue(Property.TEXT_ALIGN, TextAlign.values(), defaultValues.getTextAlign());
+	}
+	
 	/**
 	 * Sets the adjustment along x-axis (left-right) of label relative to above number (can be negative).<br>
 	 * For horizontal lines positioned left or right, negative values move the label toward the edge, and positive values toward the center.
@@ -904,6 +937,25 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	}
 	
 	/**
+	 * Returns the callback called to set the horizontal alignment of the label text when multiple lines.
+	 * 
+	 * @return the callback called to set the horizontal alignment of the label text when multiple lines
+	 */
+	@Override
+	public TextAlignCallback<AnnotationContext> getTextAlignCallback() {
+		return TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this, defaultValues.getTextAlignCallback());
+	}
+
+	/**
+	 * Sets the callback to set the horizontal alignment of the label text when multiple lines.
+	 * 
+	 * @param alignCallback to the horizontal alignment of the label text when multiple lines
+	 */
+	public void setTextAlign(TextAlignCallback<AnnotationContext> alignCallback) {
+		TEXT_ALIGN_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, alignCallback, textAlignCallbackProxy.getProxy());
+	}
+	
+	/**
 	 * Returns the callback called to set the padding of label to add left and right.
 	 * 
 	 * @return the callback called to set the padding of label to add left and right
@@ -1071,6 +1123,26 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		// if here the result is null
 		// then returns the default
 		return defaultvalueAsPercentage != null ? defaultvalueAsPercentage : defaultValue != UndefinedValues.INTEGER ? defaultValue : Window.undefined();
+	}
+	
+	/**
+	 * Returns an object as string when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param defaultValue default value to apply if callback returns an inconsistent value
+	 * @return an object as string
+	 */
+	private String onTextAlign(AnnotationContext context, TextAlign defaultValue) {
+		// gets value
+		TextAlign result = ScriptableUtils.getOptionValue(context, getTextAlignCallback(), defaultValue);
+		// checks if consistent
+		if (Key.isValid(result)) {
+			// returns the value start-end 
+			return result.getStartEndValue();
+		}
+		// if here the result is null
+		// then returns the default
+		return defaultValue.value();
 	}
 
 }
