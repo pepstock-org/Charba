@@ -18,8 +18,17 @@ package org.pepstock.charba.client.annotation;
 import java.util.Date;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -78,6 +87,29 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		}
 
 	}
+	
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the background color function
+	private final CallbackProxy<ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the radius function
+	private final CallbackProxy<ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the xValue function
+	private final CallbackProxy<ProxyObjectCallback> xValueCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the yValue function
+	private final CallbackProxy<ProxyObjectCallback> yValueCallbackProxy = JsHelper.get().newCallbackProxy();
+
+
+	// callback instance to handle background color options
+	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> BACKGROUND_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BACKGROUND_COLOR);
+	// callback instance to handle radius options
+	private static final CallbackPropertyHandler<RadiusCallback<AnnotationContext>> RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.RADIUS);
+	// callback instance to handle xValue options
+	private static final CallbackPropertyHandler<ValueCallback> X_VALUE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_VALUE);
+	// callback instance to handle yValue options
+	private static final CallbackPropertyHandler<ValueCallback> Y_VALUE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_VALUE);
+
 
 	// defaults options
 	private final IsDefaultsPointAnnotation defaultValues;
@@ -152,6 +184,8 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
 		}
+		// sets callbacks proxies
+		initCallbacks();
 	}
 
 	/**
@@ -170,7 +204,27 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
 		}
+		// sets callbacks proxies
+		initCallbacks();
 	}
+	
+	/**
+	 * Initializes the callbacks proxies for the options which can be scriptable.
+	 */
+	private void initCallbacks() {
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBackgroundColorAsString()));
+		// gets value calling callback
+		this.radiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), RADIUS_PROPERTY_HANDLER.getCallback(this), defaultValues.getRadius()).doubleValue());
+		// gets value calling callback
+		this.xValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), X_VALUE_PROPERTY_HANDLER.getCallback(this)));
+		// gets value calling callback
+		this.yValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), Y_VALUE_PROPERTY_HANDLER.getCallback(this)));
+	}
+
 
 	/**
 	 * Sets the radius of the point shape.<br>
@@ -410,6 +464,86 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	@Override
 	public Date getYValueAsDate() {
 		return getValueForMultipleKeyTypes(Property.Y_VALUE, defaultValues.getYValueAsDate());
+	}
+	
+	// ---------------------
+	// CALLBACKS
+	// ---------------------
+
+	/**
+	 * Returns the callback called to set the color of the background of annotation.
+	 * 
+	 * @return the callback called to set the color of the background of annotation
+	 */
+	@Override
+	public ColorCallback<AnnotationContext> getBackgroundColorCallback() {
+		return BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this, defaultValues.getBackgroundColorCallback());
+	}
+
+	/**
+	 * Sets the callback to set the color of the background of annotation.
+	 * 
+	 * @param backgroundColorCallback to set the color of the background of annotation
+	 */
+	public void setBackgroundColor(ColorCallback<AnnotationContext> backgroundColorCallback) {
+		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set the radius.
+	 * 
+	 * @return the callback called to set the radius
+	 */
+	@Override
+	public RadiusCallback<AnnotationContext> getRadiusCallback() {
+		return RADIUS_PROPERTY_HANDLER.getCallback(this, defaultValues.getRadiusCallback());
+	}
+
+	/**
+	 * Sets the callback to set the radius.
+	 * 
+	 * @param radiusCallback to set the radius
+	 */
+	public void setCornerRadius(RadiusCallback<AnnotationContext> radiusCallback) {
+		RADIUS_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, radiusCallback, radiusCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set the data X value to draw the line at.
+	 * 
+	 * @return the callback called to set the data X value to draw the line at
+	 */
+	@Override
+	public ValueCallback getXValueCallback() {
+		return X_VALUE_PROPERTY_HANDLER.getCallback(this, defaultValues.getXValueCallback());
+	}
+
+	/**
+	 * Sets the callback to set the data X value to draw the line at.
+	 * 
+	 * @param valueCallback to set the data X value to draw the line at
+	 */
+	public void setXValue(ValueCallback valueCallback) {
+		X_VALUE_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, xValueCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set the data Y value to draw the line at.
+	 * 
+	 * @return the callback called to set the data Y value to draw the line at
+	 */
+	@Override
+	public ValueCallback getYValueCallback() {
+		return Y_VALUE_PROPERTY_HANDLER.getCallback(this, defaultValues.getYValueCallback());
+	}
+
+	/**
+	 * Sets the callback to set the data Y value to draw the line at.
+	 * 
+	 * @param valueCallback to set the data Y value to draw the line at
+	 */
+	public void setYValue(ValueCallback valueCallback) {
+		Y_VALUE_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, yValueCallbackProxy.getProxy());
 	}
 
 }

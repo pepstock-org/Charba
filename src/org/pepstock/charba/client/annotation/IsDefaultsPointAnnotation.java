@@ -18,6 +18,9 @@ package org.pepstock.charba.client.annotation;
 import java.util.Date;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -128,6 +131,42 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation {
 	 * @return the data Y value to draw the point at
 	 */
 	default Date getYValueAsDate() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the color of the background of annotation.
+	 * 
+	 * @return the callback called to set the color of the background of annotation
+	 */
+	default ColorCallback<AnnotationContext> getBackgroundColorCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the radius.
+	 * 
+	 * @return the callback called to set the radius
+	 */
+	default RadiusCallback<AnnotationContext> getRadiusCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the data X value to draw the line at.
+	 * 
+	 * @return the callback called to set the data X value to draw the line at
+	 */
+	default ValueCallback getXValueCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the data Y value to draw the line at.
+	 * 
+	 * @return the callback called to set the data Y value to draw the line at
+	 */
+	default ValueCallback getYValueCallback() {
 		return null;
 	}
 }

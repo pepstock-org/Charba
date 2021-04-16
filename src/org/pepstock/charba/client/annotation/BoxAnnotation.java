@@ -205,6 +205,10 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 	public double getCornerRadius() {
 		return getValue(Property.CORNER_RADIUS, defaultValues.getCornerRadius());
 	}
+
+	// ---------------------
+	// CALLBACKS
+	// ---------------------
 	
 	/**
 	 * Returns the callback called to set the corner radius.

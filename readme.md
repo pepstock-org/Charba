@@ -420,6 +420,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * rename `getCompleteCallback` and `setCompletedCallback` methods to `getCompleteCallback` and `setCompleteCallback` in the `Zoom` and `Pan` options in the `ZoomPlugin`.
  * change `ModeCallback` interface method signature adding new argument, the configuration element of the `Zoom` options.
  * rename `enabled` property to `display` in `LineLabel` configuration of `AnnotationPlugin`.
+ * move `AnnotationType` enumeration from `org.pepstock.charba.client.annotation.enums` to `org.pepstock.charba.client.annotation` in order to maintain the low visibility of internal classes of the annotation plugin implementation.
  * rename `LineLablePosition` class to `LablePosition` for `LineLabel` configuration of `AnnotationPlugin`.
 
 #### Features
@@ -447,8 +448,8 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
    * remove `name` property from annotation options because is not needed anymore. Use `id` property instead.
    * change `getScaleID` method in `LineAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.  
    * change `getXScaleID` and `getXScaleID` methods in `BoxAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.
-   * move `AnnotationType` enumeration from `org.pepstock.charba.client.annotation.enums` to `org.pepstock.charba.client.annotation` in order to maintain the low visibility of internal classes of the annotation plugin implementation.
-   * change the constructors of `LineAnnotation` and `BoxAnnotation` in order to set an ID to the object. This will enable the possibility to defines annotations items as default.
+   * change the constructors of `LineAnnotation` and `BoxAnnotation` in order to set an ID to the object. This will enable the possibility to define annotations items as default.
+   * enable the callback definitions for all scriptable options in all annotations.
  * add `enabled` property to `DatasetsItemsSelector` plugin in order to disable/enable the plugin at runtime.
  * add `setXAxisID` method to `DatasetsItemsSelectorOptions` class in order to set the scale id using `IsScaleId` implementation.
  * add new `DatasetRangeClearSelectionEvent` event for `DatasetsItemsSelector` plugin in to order to notify when a clear action has been performed on chart.
