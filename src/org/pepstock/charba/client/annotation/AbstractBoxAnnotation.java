@@ -106,7 +106,7 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
 		}
 		// sets callbacks proxies
-		initCallbacks();
+		initAbstractBoxCallbacks();
 	}
 
 	/**
@@ -127,13 +127,13 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
 		}
 		// sets callbacks proxies
-		initCallbacks();
+		initAbstractBoxCallbacks();
 	}
 	
 	/**
 	 * Initializes the callbacks proxies for the options which can be scriptable.
 	 */
-	private void initCallbacks() {
+	private void initAbstractBoxCallbacks() {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
