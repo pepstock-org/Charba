@@ -22,11 +22,12 @@ import org.pepstock.charba.client.annotation.LineLabel;
 import org.pepstock.charba.client.callbacks.Scriptable;
 
 /**
- * Callback interface of {@link AnnotationPlugin#ID} plugin to set <code>display</code> property at runtime, to {@link AbstractAnnotation} and {@link LineLabel}.
+ * Callback interface of {@link AnnotationPlugin#ID} plugin to set <code>xAdjust</code> and <code>yAdjust</code> property at runtime, to {@link AbstractAnnotation} and
+ * {@link LineLabel}.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface DisplayCallback extends Scriptable<Boolean, AnnotationContext> {
+public interface AdjustSizeCallback extends Scriptable<Double, AnnotationContext> {
 
 }

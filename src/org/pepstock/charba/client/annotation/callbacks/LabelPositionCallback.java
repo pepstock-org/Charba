@@ -15,18 +15,18 @@
 */
 package org.pepstock.charba.client.annotation.callbacks;
 
-import org.pepstock.charba.client.annotation.AbstractAnnotation;
 import org.pepstock.charba.client.annotation.AnnotationContext;
 import org.pepstock.charba.client.annotation.AnnotationPlugin;
 import org.pepstock.charba.client.annotation.LineLabel;
+import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.Scriptable;
 
 /**
- * Callback interface of {@link AnnotationPlugin#ID} plugin to set <code>display</code> property at runtime, to {@link AbstractAnnotation} and {@link LineLabel}.
+ * Callback interface of {@link AnnotationPlugin#ID} plugin to set <code>position</code> property at runtime, to {@link LineLabel}.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface DisplayCallback extends Scriptable<Boolean, AnnotationContext> {
+public interface LabelPositionCallback extends Scriptable<LabelPosition, AnnotationContext> {
 
 }

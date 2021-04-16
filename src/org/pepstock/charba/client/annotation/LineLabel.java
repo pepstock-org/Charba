@@ -19,11 +19,21 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
-import org.pepstock.charba.client.annotation.enums.LineLabelPosition;
+import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
+import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
+import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
+import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
+import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -102,9 +112,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	public static final double DEFAULT_CORNER_RADIUS = 6D;
 
 	/**
-	 * Default line label position, <b>{@link LineLabelPosition#CENTER}</b>.
+	 * Default line label position, <b>{@link LabelPosition#CENTER}</b>.
 	 */
-	public static final LineLabelPosition DEFAULT_POSITION = LineLabelPosition.CENTER;
+	public static final LabelPosition DEFAULT_POSITION = LabelPosition.CENTER;
 
 	/**
 	 * Default line label X adjust, <b>{@value DEFAULT_X_ADJUST}</b>.
@@ -181,8 +191,26 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the content function
 	private final CallbackProxy<ProxyObjectCallback> contentCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the display function
+	private final CallbackProxy<ProxyBooleanCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the rotation function
 	private final CallbackProxy<ProxyObjectCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the corner radius function
+	private final CallbackProxy<ProxyDoubleCallback> cornerRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the image width function
+	private final CallbackProxy<ProxyObjectCallback> imageWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the image height function
+	private final CallbackProxy<ProxyObjectCallback> imageHeightCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the position function
+	private final CallbackProxy<ProxyStringCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the xPadding function
+	private final CallbackProxy<ProxyIntegerCallback> xPaddingCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the yPadding function
+	private final CallbackProxy<ProxyIntegerCallback> yPaddingCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the xAdjust function
+	private final CallbackProxy<ProxyDoubleCallback> xAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the yAdjust function
+	private final CallbackProxy<ProxyDoubleCallback> yAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle background color options
 	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> BACKGROUND_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BACKGROUND_COLOR);
@@ -190,8 +218,26 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
 	// callback instance to handle content options
 	private static final CallbackPropertyHandler<ContentCallback> CONTENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CONTENT);
+	// callback instance to handle display options
+	private static final CallbackPropertyHandler<DisplayCallback> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
 	// callback instance to handle rotation options
 	private static final CallbackPropertyHandler<RotationCallback<AnnotationContext>> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
+	// callback instance to handle corner radius options
+	private static final CallbackPropertyHandler<RadiusCallback<AnnotationContext>> CORNER_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CORNER_RADIUS);
+	// callback instance to handle image width options
+	private static final CallbackPropertyHandler<ImageSizeCallback> IMAGE_WIDTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.WIDTH);
+	// callback instance to handle image height options
+	private static final CallbackPropertyHandler<ImageSizeCallback> IMAGE_HEIGHT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.HEIGHT);
+	// callback instance to handle position options
+	private static final CallbackPropertyHandler<LabelPositionCallback> POSITION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.POSITION);
+	// callback instance to handle xPadding options
+	private static final CallbackPropertyHandler<PaddingSizeCallback> X_PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_PADDING);
+	// callback instance to handle yPadding options
+	private static final CallbackPropertyHandler<PaddingSizeCallback> Y_PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_PADDING);
+	// callback instance to handle xAdjust options
+	private static final CallbackPropertyHandler<AdjustSizeCallback> X_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_ADJUST);
+	// callback instance to handle yAdjustg options
+	private static final CallbackPropertyHandler<AdjustSizeCallback> Y_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_ADJUST);
 
 	// line annotation parent instance
 	private final LineAnnotation parent;
@@ -236,7 +282,25 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		// gets value calling callback
 		this.contentCallbackProxy.setCallback((contextFunction, context) -> onContent(new AnnotationContext(this.parent, context)));
 		// gets value calling callback
+		this.displayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), DISPLAY_PROPERTY_HANDLER.getCallback(this), defaultValues.isDisplay()));
+		// gets value calling callback
 		this.rotationCallbackProxy.setCallback((contextFunction, context) -> onRotation(new AnnotationContext(this.parent, context), defaultValues.getRotation()));
+		// gets value calling callback
+		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), CORNER_RADIUS_PROPERTY_HANDLER.getCallback(this), defaultValues.getCornerRadius()).doubleValue());	
+		// gets value calling callback
+		this.imageWidthCallbackProxy.setCallback((contextFunction, context) -> onImageSize(new AnnotationContext(this.parent, context), IMAGE_WIDTH_PROPERTY_HANDLER.getCallback(this), defaultValues.getImageWidth(), defaultValues.getImageWidthAsPercentage()));	
+		// gets value calling callback
+		this.imageHeightCallbackProxy.setCallback((contextFunction, context) -> onImageSize(new AnnotationContext(this.parent, context), IMAGE_HEIGHT_PROPERTY_HANDLER.getCallback(this), defaultValues.getImageHeight(), defaultValues.getImageHeightAsPercentage()));	
+		// gets value calling callback
+		this.positionCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new AnnotationContext(this.parent, context), POSITION_PROPERTY_HANDLER.getCallback(this), getPosition()).value());
+		// gets value calling callback
+		this.xPaddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), X_PADDING_PROPERTY_HANDLER.getCallback(this), defaultValues.getXPadding()).intValue());	
+		// gets value calling callback
+		this.yPaddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), Y_PADDING_PROPERTY_HANDLER.getCallback(this), defaultValues.getYPadding()).intValue());	
+		// gets value calling callback
+		this.xAdjustCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), X_ADJUST_PROPERTY_HANDLER.getCallback(this), defaultValues.getXAdjust()).doubleValue());	
+		// gets value calling callback
+		this.yAdjustCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), Y_ADJUST_PROPERTY_HANDLER.getCallback(this), defaultValues.getYAdjust()).doubleValue());	
 	}
 
 	/**
@@ -404,7 +468,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @param position the anchor position of label on line
 	 */
-	public void setPosition(LineLabelPosition position) {
+	public void setPosition(LabelPosition position) {
 		setValue(Property.POSITION, position);
 	}
 
@@ -414,8 +478,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @return the anchor position of label on line
 	 */
 	@Override
-	public LineLabelPosition getPosition() {
-		return getValue(Property.POSITION, LineLabelPosition.values(), defaultValues.getPosition());
+	public LabelPosition getPosition() {
+		return getValue(Property.POSITION, LabelPosition.values(), defaultValues.getPosition());
 	}
 
 	/**
@@ -588,7 +652,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @param height the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
 	 */
-	public void setHeight(int height) {
+	public void setImageHeight(int height) {
 		setValue(Property.HEIGHT, height);
 	}
 
@@ -597,7 +661,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @param heightPercentage the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
-	public void setHeightAsPercentage(String heightPercentage) {
+	public void setImageHeightAsPercentage(String heightPercentage) {
 		setValue(Property.HEIGHT, heightPercentage);
 	}
 
@@ -607,14 +671,14 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @return the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
 	 */
 	@Override
-	public int getHeight() {
+	public int getImageHeight() {
 		// checks if the property is set as a number
 		if (isType(Property.HEIGHT, ObjectType.NUMBER)) {
-			return getValue(Property.HEIGHT, defaultValues.getHeight());
+			return getValue(Property.HEIGHT, defaultValues.getImageHeight());
 		}
 		// if here is not a number then
 		// returns the default
-		return defaultValues.getHeight();
+		return defaultValues.getImageHeight();
 	}
 
 	/**
@@ -623,14 +687,14 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @return the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
 	@Override
-	public String getHeightAsPercentage() {
+	public String getImageHeightAsPercentage() {
 		// checks if the property is set as a string
 		if (isType(Property.HEIGHT, ObjectType.STRING)) {
-			return getValue(Property.HEIGHT, defaultValues.getHeightAsPercentage());
+			return getValue(Property.HEIGHT, defaultValues.getImageHeightAsPercentage());
 		}
 		// if here is not a string then
 		// returns the default
-		return defaultValues.getHeightAsPercentage();
+		return defaultValues.getImageHeightAsPercentage();
 	}
 
 	/**
@@ -638,7 +702,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @param width the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
 	 */
-	public void setWidth(int width) {
+	public void setImageWidth(int width) {
 		setValue(Property.WIDTH, width);
 	}
 
@@ -647,7 +711,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * 
 	 * @param widthPercentage the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
-	public void setWidthAsPercentage(String widthPercentage) {
+	public void setImageWidthAsPercentage(String widthPercentage) {
 		setValue(Property.WIDTH, widthPercentage);
 	}
 
@@ -657,14 +721,14 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @return the width of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
 	 */
 	@Override
-	public int getWidth() {
+	public int getImageWidth() {
 		// checks if the property is set as a number
 		if (isType(Property.WIDTH, ObjectType.NUMBER)) {
-			return getValue(Property.WIDTH, defaultValues.getWidth());
+			return getValue(Property.WIDTH, defaultValues.getImageWidth());
 		}
 		// if here is not a number then
 		// returns the default
-		return defaultValues.getWidth();
+		return defaultValues.getImageWidth();
 	}
 
 	/**
@@ -673,14 +737,14 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @return the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
 	@Override
-	public String getWidthAsPercentage() {
+	public String getImageWidthAsPercentage() {
 		// checks if the property is set as a string
 		if (isType(Property.WIDTH, ObjectType.STRING)) {
-			return getValue(Property.WIDTH, defaultValues.getWidthAsPercentage());
+			return getValue(Property.WIDTH, defaultValues.getImageWidthAsPercentage());
 		}
 		// if here is not a string then
 		// returns the default
-		return defaultValues.getWidthAsPercentage();
+		return defaultValues.getImageWidthAsPercentage();
 	}
 	
 	// ---------------------
@@ -745,6 +809,25 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	}
 	
 	/**
+	 * Returns the callback called to set whether the label should be displayed.
+	 * 
+	 * @return the callback called to set whether the label should be displayed
+	 */
+	@Override
+	public DisplayCallback getDisplayCallback() {
+		return DISPLAY_PROPERTY_HANDLER.getCallback(this, defaultValues.getDisplayCallback());
+	}
+
+	/**
+	 * Sets the callback to set whether the label should be displayed.
+	 * 
+	 * @param displayCallback to set whether the label should be displayed
+	 */
+	public void setDisplay(DisplayCallback displayCallback) {
+		DISPLAY_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, displayCallback, displayCallbackProxy.getProxy());
+	}
+	
+	/**
 	 * Returns the callback called to set the rotation of label in degrees.
 	 * 
 	 * @return the callback called to set the rotation of label in degrees
@@ -761,6 +844,139 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	public void setRotation(RotationCallback<AnnotationContext> rotationCallback) {
 		ROTATION_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, rotationCallback, rotationCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @return the callback called to set the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	@Override
+	public ImageSizeCallback getImageHeightCallback() {
+		return IMAGE_HEIGHT_PROPERTY_HANDLER.getCallback(this, defaultValues.getImageHeightCallback());
+	}
+
+	/**
+	 * Sets the callback to set the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @param imageSizeCallback to set the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	public void setImageHeight(ImageSizeCallback imageSizeCallback) {
+		IMAGE_HEIGHT_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, imageSizeCallback, imageHeightCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @return the callback called to set the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	@Override
+	public ImageSizeCallback getImageWidthCallback() {
+		return IMAGE_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultValues.getImageWidthCallback());
+	}
+
+	/**
+	 * Sets the callback to set the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @param imageSizeCallback to set the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	public void setImageWidth(ImageSizeCallback imageSizeCallback) {
+		IMAGE_WIDTH_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, imageSizeCallback, imageWidthCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the callback called to set the anchor position of label on line.
+	 * 
+	 * @return the callback called to set the anchor position of label on line
+	 */
+	@Override
+	public LabelPositionCallback getPositionCallback() {
+		return POSITION_PROPERTY_HANDLER.getCallback(this, defaultValues.getPositionCallback());
+	}
+
+	/**
+	 * Sets the callback to set the anchor position of label on line.
+	 * 
+	 * @param positionCallback to set the anchor position of label on line
+	 */
+	public void setPosition(LabelPositionCallback positionCallback) {
+		POSITION_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, positionCallback, positionCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set the padding of label to add left and right.
+	 * 
+	 * @return the callback called to set the padding of label to add left and right
+	 */
+	@Override
+	public PaddingSizeCallback getXPaddingCallback() {
+		return X_PADDING_PROPERTY_HANDLER.getCallback(this, defaultValues.getXPaddingCallback());
+	}
+
+	/**
+	 * Sets the callback to set the padding of label to add left and right.
+	 * 
+	 * @param paddingCallback to set the padding of label to add left and right
+	 */
+	public void setXPadding(PaddingSizeCallback paddingCallback) {
+		X_PADDING_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, paddingCallback, xPaddingCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the callback called to set the padding of label to add top and bottom.
+	 * 
+	 * @return the callback called to set the padding of label to add top and bottom
+	 */
+	@Override
+	public PaddingSizeCallback getYPaddingCallback() {
+		return Y_PADDING_PROPERTY_HANDLER.getCallback(this, defaultValues.getYPaddingCallback());
+	}
+
+	/**
+	 * Sets the callback to set the padding of label to add top and bottom.
+	 * 
+	 * @param paddingCallback to set the padding of label to add top and bottom
+	 */
+	public void setYPadding(PaddingSizeCallback paddingCallback) {
+		Y_PADDING_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, paddingCallback, yPaddingCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set the adjustment along x-axis (left-right) of label relative to above number (can be negative).
+	 * 
+	 * @return the callback called to set the adjustment along x-axis (left-right) of label relative to above number (can be negative)
+	 */
+	@Override
+	public AdjustSizeCallback getXAdjustCallback() {
+		return X_ADJUST_PROPERTY_HANDLER.getCallback(this, defaultValues.getXAdjustCallback());
+	}
+
+	/**
+	 * Sets the callback to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).
+	 * 
+	 * @param adjustCallback to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative)
+	 */
+	public void setXAdjust(AdjustSizeCallback adjustCallback) {
+		X_ADJUST_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, adjustCallback, xAdjustCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the callback called to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).
+	 * 
+	 * @return the callback called to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative)
+	 */
+	@Override
+	public AdjustSizeCallback getYAdjustCallback() {
+		return Y_ADJUST_PROPERTY_HANDLER.getCallback(this, defaultValues.getYAdjustCallback());
+	}
+
+	/**
+	 * Sets the callback to set the adjustment along x-axis (left-right) of label relative to above number (can be negative).
+	 * 
+	 * @param adjustCallback to set the adjustment along x-axis (left-right) of label relative to above number (can be negative)
+	 */
+	public void setYAdjust(AdjustSizeCallback adjustCallback) {
+		Y_ADJUST_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, adjustCallback, yAdjustCallbackProxy.getProxy());
 	}
 	
 	// -----------------------
@@ -809,7 +1025,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * Returns an object as string or double when the callback has been activated.
 	 * 
 	 * @param context native object as context.
-	 * @param defaultValue default value to apply if cllback returns an inconsistent value
+	 * @param defaultValue default value to apply if callback returns an inconsistent value
 	 * @return an object as string or double
 	 */
 	private Object onRotation(AnnotationContext context, double defaultValue) {
@@ -828,6 +1044,33 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		// if here the result is null
 		// then returns the default
 		return defaultValue;
+	}
+	
+	/**
+	 * Returns an object as string or double when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param callback image size callback instance
+	 * @param defaultValue default value to apply if callback returns an inconsistent value
+	 * @param defaultvalueAsPercentage default value to apply if callback returns an inconsistent value and also the previous default value is not consistent
+	 * @return an object as string or double
+	 */
+	private Object onImageSize(AnnotationContext context, ImageSizeCallback callback, double defaultValue, String defaultvalueAsPercentage) {
+		// gets value
+		Object result = ScriptableUtils.getOptionValue(context, callback);
+		// checks if consistent
+		if (result instanceof Number) {
+			// casts to number
+			Number number = (Number)result;
+			// returns the number
+			return number.intValue();
+		} else if (result instanceof String) {
+			// returns the string
+			return (String)result;
+		}
+		// if here the result is null
+		// then returns the default
+		return defaultvalueAsPercentage != null ? defaultvalueAsPercentage : defaultValue != UndefinedValues.INTEGER ? defaultValue : Window.undefined();
 	}
 
 }

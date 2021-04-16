@@ -419,7 +419,8 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * rename `CompleteCallback` class to `CompletedCallback` (and the name of the method from `onComplete` to `onCompleted`) in the `ZoomPlugin`.
  * rename `getCompleteCallback` and `setCompletedCallback` methods to `getCompleteCallback` and `setCompleteCallback` in the `Zoom` and `Pan` options in the `ZoomPlugin`.
  * change `ModeCallback` interface method signature adding new argument, the configuration element of the `Zoom` options.
- * rename `enabled` property to `display` in `LineLabel` configuration of `AnnotationPlugin`.  
+ * rename `enabled` property to `display` in `LineLabel` configuration of `AnnotationPlugin`.
+ * rename `LineLablePosition` class to `LablePosition` for `LineLabel` configuration of `AnnotationPlugin`.
 
 #### Features
  * change all methods of `Plugin` interface becoming all default ones.

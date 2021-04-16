@@ -418,9 +418,9 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	// ---------------------
 
 	/**
-	 * Returns the callback called to set the display option at runtime.
+	 * Returns the callback called to set whether the annotation should be displayed.
 	 * 
-	 * @return the callback called to set the display option at runtime
+	 * @return the callback called to set whether the annotation should be displayed
 	 */
 	@Override
 	public final DisplayCallback getDisplayCallback() {
@@ -428,9 +428,9 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	}
 
 	/**
-	 * Sets the callback to set the display option at runtime.
+	 * Sets the callback to set whether the annotation should be displayed.
 	 * 
-	 * @param displayCallback to set the display option at runtime
+	 * @param displayCallback to set whether the annotation should be displayed
 	 */
 	public final void setDisplay(DisplayCallback displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, displayCallback, displayCallbackProxy.getProxy());

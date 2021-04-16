@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum LineLabelPosition implements Key
+public enum LabelPosition implements Key
 {
 	/**
 	 * The "center" property sets the line label at center of line. Default.
@@ -45,7 +45,7 @@ public enum LineLabelPosition implements Key
 	 * 
 	 * @param value value of property name
 	 */
-	private LineLabelPosition(String value) {
+	private LabelPosition(String value) {
 		this.value = value;
 	}
 

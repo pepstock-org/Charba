@@ -82,9 +82,9 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(new DataLabelsContext(this.parent, context)));
-		leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(new DataLabelsContext(this.parent, context)));
-		clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(new DataLabelsContext(this.parent, context)));
+		this.enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(new DataLabelsContext(this.parent, context)));
+		this.leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(new DataLabelsContext(this.parent, context)));
+		this.clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(new DataLabelsContext(this.parent, context)));
 	}
 
 	/**

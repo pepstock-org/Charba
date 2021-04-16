@@ -15,8 +15,13 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
-import org.pepstock.charba.client.annotation.enums.LineLabelPosition;
+import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
+import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
+import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
+import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
+import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
@@ -97,7 +102,7 @@ interface IsDefaultsLineLabel {
 	 * 
 	 * @return the anchor position of label on line
 	 */
-	default LineLabelPosition getPosition() {
+	default LabelPosition getPosition() {
 		return LineLabel.DEFAULT_POSITION;
 	}
 
@@ -144,7 +149,7 @@ interface IsDefaultsLineLabel {
 	 * 
 	 * @return the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
 	 */
-	default int getHeight() {
+	default int getImageHeight() {
 		return UndefinedValues.INTEGER;
 	}
 
@@ -153,7 +158,7 @@ interface IsDefaultsLineLabel {
 	 * 
 	 * @return the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
-	default String getHeightAsPercentage() {
+	default String getImageHeightAsPercentage() {
 		return null;
 	}
 
@@ -162,7 +167,7 @@ interface IsDefaultsLineLabel {
 	 * 
 	 * @return the width of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
 	 */
-	default int getWidth() {
+	default int getImageWidth() {
 		return UndefinedValues.INTEGER;
 	}
 
@@ -171,7 +176,7 @@ interface IsDefaultsLineLabel {
 	 * 
 	 * @return the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
-	default String getWidthAsPercentage() {
+	default String getImageWidthAsPercentage() {
 		return null;
 	}
 	
@@ -203,11 +208,83 @@ interface IsDefaultsLineLabel {
 	}
 	
 	/**
+	 * Returns the callback called to set whether the label should be displayed.
+	 * 
+	 * @return the callback called to set whether the label should be displayed
+	 */
+	default DisplayCallback getDisplayCallback() {
+		return null;
+	}
+	
+	/**
 	 * Returns the callback called to set the rotation of label in degrees.
 	 * 
 	 * @return the callback called to set the rotation of label in degrees
 	 */
 	default RotationCallback<AnnotationContext> getRotationCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @return the callback called to set the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	default ImageSizeCallback getImageHeightCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
+	 * 
+	 * @return the callback called to set the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
+	 */
+	default ImageSizeCallback getImageWidthCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the anchor position of label on line.
+	 * 
+	 * @return the callback called to set the anchor position of label on line
+	 */
+	default LabelPositionCallback getPositionCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the padding of label to add left and right.
+	 * 
+	 * @return the callback called to set the padding of label to add left and right
+	 */
+	default PaddingSizeCallback getXPaddingCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the padding of label to add top and bottom.
+	 * 
+	 * @return the callback called to set the padding of label to add top and bottom
+	 */
+	default PaddingSizeCallback getYPaddingCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the adjustment along x-axis (left-right) of label relative to above number (can be negative).
+	 * 
+	 * @return the callback called to set the adjustment along x-axis (left-right) of label relative to above number (can be negative)
+	 */
+	default AdjustSizeCallback getXAdjustCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).
+	 * 
+	 * @return the callback called to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative)
+	 */
+	default AdjustSizeCallback getYAdjustCallback() {
 		return null;
 	}
 }
