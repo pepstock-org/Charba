@@ -714,7 +714,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 			return number.doubleValue();
 		} else if (result instanceof String) {
 			// returns the string
-			return (String)result;
+			return result;
 		} else if (result instanceof Date) {
 			// casts to date
 			Date date = (Date)result;

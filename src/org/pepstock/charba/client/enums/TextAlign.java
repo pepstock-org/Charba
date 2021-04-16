@@ -27,30 +27,40 @@ public enum TextAlign implements Key
 	/**
 	 * The inline contents are centered within the line box.
 	 */
-	CENTER("center", "center", "center"),
+	CENTER("center"),
 	/**
 	 * The same as right if direction is left-to-right and left if direction is right-to-left.
 	 */
-	END("end", "right", "end"),
+	END("end", "right", null),
 	/**
 	 * The inline contents are aligned to the left edge of the line box.
 	 */
-	LEFT("left", "left", "start"),
+	LEFT("left", null, "start"),
 	/**
 	 * The inline contents are aligned to the right edge of the line box.
 	 */
-	RIGHT("right", "right", "end"),
+	RIGHT("right", null, "end"),
 	/**
 	 * The same as left if direction is left-to-right and right if direction is right-to-left.
 	 */
-	START("start", "left", "start");
-
+	START("start", null, "start");
+	
 	// name value of property
 	private final String value;
 	// value to use when only left and right is used
 	private final String leftRightValue;
 	// value to use when only start and end is used
 	private final String startEndValue;
+	
+	/**
+	 * Creates with the property value to use in the native object.<br>
+	 * Used only for CENTER.
+	 * 
+	 * @param value value of property name
+	 */
+	private TextAlign(String value) {
+		this(value, null, null);
+	}
 
 	/**
 	 * Creates with the property value to use in the native object.
@@ -61,8 +71,8 @@ public enum TextAlign implements Key
 	 */
 	private TextAlign(String value, String leftRightValue, String startEndValue) {
 		this.value = value;
-		this.leftRightValue = leftRightValue;
-		this.startEndValue = startEndValue;
+		this.leftRightValue = leftRightValue == null ? value : leftRightValue;
+		this.startEndValue = startEndValue == null ? value : startEndValue;
 	}
 
 	/*

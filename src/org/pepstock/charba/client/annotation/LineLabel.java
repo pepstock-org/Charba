@@ -1045,12 +1045,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		// gets value
 		Object result = ScriptableUtils.getOptionValue(context, getContentCallback());
 		// checks if consistent
-		if (result instanceof String) {
-			// returns the string
-			return (String)result;
-		} else if (result instanceof Img) {
-			// returns the string
-			return (Img)result;
+		if (result instanceof String || result instanceof Img) {
+			// returns the string or the image
+			return result;
 		} else if (result instanceof List<?>) {
 			// casts to list
 			List<?> list = (List<?>)result;
@@ -1118,11 +1115,21 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 			return number.intValue();
 		} else if (result instanceof String) {
 			// returns the string
-			return (String)result;
+			return result;
 		}
 		// if here the result is null
-		// then returns the default
-		return defaultvalueAsPercentage != null ? defaultvalueAsPercentage : defaultValue != UndefinedValues.INTEGER ? defaultValue : Window.undefined();
+		// checks if the default as percentage is consistent
+		if (defaultvalueAsPercentage != null) { 
+			// then returns the string as percentage
+			return defaultvalueAsPercentage;
+		} else if (defaultValue != UndefinedValues.INTEGER) {
+			// checks if the default as pixels is consistent
+			// then returns the double as pixels
+			return defaultValue;
+		}
+		// if here, there is not any default value
+		// the returns the undefined object
+		return Window.undefined();
 	}
 	
 	/**
