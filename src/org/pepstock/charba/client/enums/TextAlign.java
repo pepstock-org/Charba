@@ -43,7 +43,7 @@ public enum TextAlign implements Key
 	/**
 	 * The same as left if direction is left-to-right and right if direction is right-to-left.
 	 */
-	START("start", null, "start");
+	START("start", "left", null);
 	
 	// name value of property
 	private final String value;
