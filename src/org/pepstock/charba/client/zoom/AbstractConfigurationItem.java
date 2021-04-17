@@ -188,8 +188,8 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		modeCallbackProxy.setCallback((contextFunction, context) -> onMode(new ZoomContext(context), MODE_PROPERTY_HANDLER.getCallback(this)));
-		overScaleModeCallbackProxy.setCallback((contextFunction, context) -> onMode(new ZoomContext(context), OVER_SCALE_MODE_PROPERTY_HANDLER.getCallback(this)));
+		modeCallbackProxy.setCallback((contextFunction, context) -> onMode(new ZoomContext(context), getModeCallback()));
+		overScaleModeCallbackProxy.setCallback((contextFunction, context) -> onMode(new ZoomContext(context), getOverScaleModeCallback()));
 		progressCallbackProxy.setCallback((contextFunction, context) -> onProgress(new ZoomContext(context)));
 		completeCallbackProxy.setCallback((contextFunction, context) -> onCompleted(new ZoomContext(context)));
 		rejectCallbackProxy.setCallback((contextFunction, context) -> onRejected(new ZoomContext(context)));
@@ -444,7 +444,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	private void onProgress(ZoomContext context) {
 		// gets callback
-		ProgressCallback progressCallback = getProgessPropertyHandler().getCallback(this);
+		ProgressCallback progressCallback = getProgressCallback();
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(progressCallback, context)) {
 			// invokes callback
@@ -459,7 +459,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	private void onCompleted(ZoomContext context) {
 		// gets callback
-		CompletedCallback completeCallback = getCompletedPropertyHandler().getCallback(this);
+		CompletedCallback completeCallback = getCompletedCallback();
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(completeCallback, context)) {
 			// invokes callback
@@ -474,7 +474,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	private void onRejected(ZoomContext context) {
 		// gets callback
-		RejectedCallback rejectCallback = getRejectedPropertyHandler().getCallback(this);
+		RejectedCallback rejectCallback = getRejectedCallback();
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(rejectCallback, context)) {
 			// invokes callback

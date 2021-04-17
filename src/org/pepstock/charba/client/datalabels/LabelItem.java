@@ -56,6 +56,7 @@ import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.options.IsScriptableFontProvider;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 import jsinterop.annotations.JsFunction;
@@ -67,7 +68,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLabelsItem {
+public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLabelsItem, IsScriptableFontProvider<DataLabelsContext>{
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -267,7 +268,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 			// stores padding
 			setValue(Property.PADDING, padding);
 		}
-		this.font = new Font(this.defaultOptions.getFont(), getValue(Property.FONT));
+		this.font = new Font(this, this.defaultOptions.getFont(), getValue(Property.FONT));
 		// checks it has got the element
 		if (!has(Property.FONT)) {
 			// stores font
@@ -284,45 +285,45 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// -------------------------------
 		this.formatterCallbackProxy.setCallback((contextFunction, value, context) -> onFormatter(new DataLabelsContext(this, context), value));
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), getBackgroundColorAsString()));
+		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), getBackgroundColorCallback(), getBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), getBorderColorAsString()));
+		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), getBorderColorCallback(), getBorderColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
+		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), getColorCallback(), getColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), ALIGN_PROPERTY_HANDLER.getCallback(this), getAlign()).value());
+		this.alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), getAlignCallback(), getAlign()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.anchorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), ANCHOR_PROPERTY_HANDLER.getCallback(this), getAnchor()).value());
+		this.anchorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), getAnchorCallback(), getAnchor()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), BORDER_RADIUS_PROPERTY_HANDLER.getCallback(this), getBorderRadius()).doubleValue());
+		this.borderRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getBorderRadiusCallback(), getBorderRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this), getBorderWidth()).intValue());
+		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getBorderWidthCallback(), getBorderWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.clampCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), CLAMP_PROPERTY_HANDLER.getCallback(this), isClamp()).booleanValue());
+		this.clampCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getClampCallback(), isClamp()).booleanValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.clipCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), CLIP_PROPERTY_HANDLER.getCallback(this), isClip()).booleanValue());
+		this.clipCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getClipCallback(), isClip()).booleanValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.displayCallbackProxy.setCallback((contextFunction, context) -> onDisplay(new DataLabelsContext(this, context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), OFFSET_PROPERTY_HANDLER.getCallback(this), getOffset()).intValue());
+		this.offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getOffsetCallback(), getOffset()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.opacityCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), OPACITY_PROPERTY_HANDLER.getCallback(this), getOpacity()).doubleValue());
+		this.opacityCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getOpacityCallback(), getOpacity()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), ROTATION_PROPERTY_HANDLER.getCallback(this), getRotation()).doubleValue());
+		this.rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getRotationCallback(), getRotation()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), TEXT_ALIGN_PROPERTY_HANDLER.getCallback(this), getTextAlign()).value());
+		this.textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), getTextAlignCallback(), getTextAlign()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), TEXT_STROKE_COLOR_PROPERTY_HANDLER.getCallback(this), getTextStrokeColorAsString()));
+		this.textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), getTextStrokeColorCallback(), getTextStrokeColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), TEXT_STROKE_WIDTH_PROPERTY_HANDLER.getCallback(this), getTextStrokeWidth()).intValue());
+		this.textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getTextStrokeWidthCallback(), getTextStrokeWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), TEXT_SHADOW_BLUR_PROPERTY_HANDLER.getCallback(this), getTextShadowBlur()).doubleValue());
+		this.textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getTextShadowBlurCallback(), getTextShadowBlur()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), TEXT_SHADOW_COLOR_PROPERTY_HANDLER.getCallback(this), getTextShadowColorAsString()));
+		this.textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), getTextShadowColorCallback(), getTextShadowColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new DataLabelsContext(this, context), FONT_PROPERTY_HANDLER.getCallback(this)));
+		this.fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new DataLabelsContext(this, context), getFontCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy.setCallback((contextFunction, context) -> onPadding(new DataLabelsContext(this, context), PADDING_PROPERTY_HANDLER.getCallback(this)));
+		this.paddingCallbackProxy.setCallback((contextFunction, context) -> onPadding(new DataLabelsContext(this, context), getPaddingCallback()));
 	}
 
 	/*
@@ -394,6 +395,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param align the position of the label relative to the anchor point position and orientation.
 	 */
 	public final void setAlign(Align align) {
+		// resets callback
+		setAlign((AlignCallback)null);
+		// stores the value
 		setValue(Property.ALIGN, align);
 	}
 
@@ -413,6 +417,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param anchor the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
 	public final void setAnchor(Anchor anchor) {
+		// resets callback
+		setAnchor((AnchorCallback)null);
+		// stores the value
 		setValue(Property.ANCHOR, anchor);
 	}
 
@@ -441,6 +448,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param color the background color
 	 */
 	public final void setBackgroundColor(String color) {
+		// resets callback
+		setBackgroundColor((ColorCallback<DataLabelsContext>)null);
+		// stores the value
 		setValue(Property.BACKGROUND_COLOR, color);
 	}
 
@@ -460,7 +470,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the background color.
 	 */
 	public final IsColor getBackgroundColor() {
+		// gets value
 		String color = getBackgroundColorAsString();
+		// checks if consistent to avoid exception
 		return color != null ? ColorBuilder.parse(color) : null;
 	}
 
@@ -479,6 +491,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param color the border color
 	 */
 	public final void setBorderColor(String color) {
+		// resets callback
+		setBorderColor((ColorCallback<DataLabelsContext>)null);
+		// stores the value
 		setValue(Property.BORDER_COLOR, color);
 	}
 
@@ -498,7 +513,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the border color.
 	 */
 	public final IsColor getBorderColor() {
+		// gets value
 		String color = getBorderColorAsString();
+		// checks if consistent to avoid exception
 		return color != null ? ColorBuilder.parse(color) : null;
 	}
 
@@ -508,6 +525,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param radius the border radius.
 	 */
 	public final void setBorderRadius(double radius) {
+		// resets callback
+		setBorderRadius(null);
+		// stores the value
 		setValue(Property.BORDER_RADIUS, radius);
 	}
 
@@ -527,6 +547,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param width the border width.
 	 */
 	public final void setBorderWidth(int width) {
+		// resets callback
+		setBorderWidth(null);
+		// stores the value
 		setValue(Property.BORDER_WIDTH, width);
 	}
 
@@ -546,6 +569,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param clamp <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated element (i.e. part inside the chart area).
 	 */
 	public final void setClamp(boolean clamp) {
+		// resets callback
+		setClamp(null);
+		// stores the value
 		setValue(Property.CLAMP, clamp);
 	}
 
@@ -565,6 +591,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param clip when the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 */
 	public final void setClip(boolean clip) {
+		// resets callback
+		setClip(null);
+		// stores the value
 		setValue(Property.CLIP, clip);
 	}
 
@@ -593,6 +622,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param color the color
 	 */
 	public final void setColor(String color) {
+		// resets callback
+		setColor((ColorCallback<DataLabelsContext>)null);
+		// stores the value
 		setValue(Property.COLOR, color);
 	}
 
@@ -621,6 +653,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param display the visibility of labels.
 	 */
 	public final void setDisplay(boolean display) {
+		// resets callback
+		setDisplay((DisplayCallback)null);
+		// stores the value
 		setValue(Property.DISPLAY, display);
 	}
 
@@ -671,6 +706,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 *            'start', the label is moved in the opposite direction.
 	 */
 	public final void setOffset(int offset) {
+		// resets callback
+		setOffset(null);
+		// stores the value
 		setValue(Property.OFFSET, offset);
 	}
 
@@ -692,6 +730,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param opacity the opacity.
 	 */
 	public final void setOpacity(double opacity) {
+		// resets callback
+		setOpacity(null);
+		// stores the value
 		setValue(Property.OPACITY, opacity);
 	}
 
@@ -711,6 +752,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param rotation the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 */
 	public final void setRotation(double rotation) {
+		// resets callback
+		setRotation(null);
+		// stores the value
 		setValue(Property.ROTATION, rotation);
 	}
 
@@ -730,6 +774,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param textAlign the text alignment being used when drawing the label text when multiple lines
 	 */
 	public final void setTextAlign(TextAlign textAlign) {
+		// resets callback
+		setTextAlign((TextAlignCallback<DataLabelsContext>)null);
+		// stores the value
 		setValue(Property.TEXT_ALIGN, textAlign);
 	}
 
@@ -758,6 +805,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param color the text stroke color.
 	 */
 	public final void setTextStrokeColor(String color) {
+		// resets callback
+		setTextStrokeColor((ColorCallback<DataLabelsContext>)null);
+		// stores the value		
 		setValue(Property.TEXT_STROKE_COLOR, color);
 	}
 
@@ -786,6 +836,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param textStrokeWidth the text stroke width.
 	 */
 	public final void setTextStrokeWidth(int textStrokeWidth) {
+		// resets callback
+		setTextStrokeWidth(null);
+		// stores the value	
 		setValue(Property.TEXT_STROKE_WIDTH, textStrokeWidth);
 	}
 
@@ -805,6 +858,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param textShadowBlur the text shadow blur.
 	 */
 	public final void setTextShadowBlur(double textShadowBlur) {
+		// resets callback
+		setTextShadowBlur(null);
+		// stores the value	
 		setValue(Property.TEXT_SHADOW_BLUR, textShadowBlur);
 	}
 
@@ -833,6 +889,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param color the text shadow color color.
 	 */
 	public final void setTextShadowColor(String color) {
+		// resets callback
+		setTextShadowColor((ColorCallback<DataLabelsContext>)null);
+		// stores the value	
 		setValue(Property.TEXT_SHADOW_COLOR, color);
 	}
 
@@ -854,6 +913,10 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	public final IsColor getTextShadowColor() {
 		return ColorBuilder.parse(getTextShadowColorAsString());
 	}
+	
+	// --------------------
+	// CALLBACKS
+	// --------------------
 
 	/**
 	 * Returns the background color callback, if set, otherwise <code>null</code>.
@@ -1231,8 +1294,16 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
+	@Override
 	public final void setFont(FontCallback<DataLabelsContext> fontCallback) {
 		FONT_PROPERTY_HANDLER.setCallback(this, getId(), fontCallback, fontCallbackProxy.getProxy());
+		// checks if the callback is null
+		// because setting to null, the original font must be set again
+		// in the the options
+		if (fontCallback == null) {
+			// stores the font
+			setValue(Property.FONT, font);
+		}
 	}
 
 	/**
@@ -1243,6 +1314,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	@Override
 	public final PaddingCallback getPaddingCallback() {
 		return PADDING_PROPERTY_HANDLER.getCallback(this, defaultOptions.getPaddingCallback());
+
 	}
 
 	/**
@@ -1252,7 +1324,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setPadding(PaddingCallback paddingCallback) {
 		PADDING_PROPERTY_HANDLER.setCallback(this, getId(), paddingCallback, paddingCallbackProxy.getProxy());
+		// checks if the callback is null
+		// because setting to null, the original padding must be set again
+		// in the the options
+		if (paddingCallback == null) {
+			// stores the padding
+			setValue(Property.PADDING, padding);
+		}
 	}
+	
+	// ------------------------------
+	// INTERNAL methods for callbacks
+	// ------------------------------
 
 	/**
 	 * Returns a string as formatted value when the callback has been activated.
@@ -1263,7 +1346,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	private String onFormatter(DataLabelsContext context, Object value) {
 		// gets callback
-		FormatterCallback formatterCallback = FORMATTER_PROPERTY_HANDLER.getCallback(this);
+		FormatterCallback formatterCallback = getFormatterCallback();
 		// checks if the handler is set
 		if (ScriptableUtils.isContextConsistent(context) && formatterCallback != null) {
 			// calls callback
@@ -1285,7 +1368,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	private Object onDisplay(DataLabelsContext context) {
 		// gets value
-		Display value = ScriptableUtils.getOptionValueAsString(context, DISPLAY_PROPERTY_HANDLER.getCallback(this));
+		Display value = ScriptableUtils.getOptionValueAsString(context, getDisplayCallback());
 		Display result = value == null ? getDisplay() : value;
 		// checks if is boolean
 		// checks if it must return a boolean or string

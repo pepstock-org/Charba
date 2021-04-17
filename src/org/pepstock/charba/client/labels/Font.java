@@ -15,10 +15,9 @@
 */
 package org.pepstock.charba.client.labels;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
-import org.pepstock.charba.client.options.AbstractFont;
+import org.pepstock.charba.client.options.AbstractScriptableFont;
 
 /**
  * Base object to map font options for {@link LabelsPlugin#ID} plugin configuration.<br>
@@ -27,32 +26,17 @@ import org.pepstock.charba.client.options.AbstractFont;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Font extends AbstractFont {
-
-	/**
-	 * Creates an empty font to use for chart configuration when the font is created by a callback.
-	 */
-	public Font() {
-		super(Defaults.get().getGlobal().getFont());
-	}
+public final class Font extends AbstractScriptableFont<LabelsContext> {
 
 	/**
 	 * Creates a font to use for chart configuration when the font is created by a callback, using a clone of another font object.
 	 * 
+	 * @param parent label instance which contains this font item
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Font(IsDefaultFont defaultValues, NativeObject nativeObject) {
-		super(defaultValues, nativeObject);
-	}
-
-	/**
-	 * Returns the native object instance.
-	 * 
-	 * @return the native object instance.
-	 */
-	final NativeObject nativeObject() {
-		return getObject();
+	Font(Label parent, IsDefaultFont defaultValues, NativeObject nativeObject) {
+		super(parent, defaultValues, nativeObject);
 	}
 
 }

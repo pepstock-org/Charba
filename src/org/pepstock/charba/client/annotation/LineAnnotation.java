@@ -202,9 +202,9 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.valueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), VALUE_PROPERTY_HANDLER.getCallback(this)));
+		this.valueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), getValueCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.endValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), END_VALUE_PROPERTY_HANDLER.getCallback(this)));
+		this.endValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), getEndValueCallback()));
 	}
 
 	/**
@@ -257,6 +257,9 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param value the data value to draw the line at
 	 */
 	public void setValue(String value) {
+		// resets callback
+		setValue((ValueCallback)null);
+		// stores value
 		setValue(Property.VALUE, value);
 	}
 
@@ -266,6 +269,9 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param value the data value to draw the line at
 	 */
 	public void setValue(double value) {
+		// resets callback
+		setValue((ValueCallback)null);
+		// stores value
 		setValue(Property.VALUE, value);
 	}
 
@@ -275,6 +281,9 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param value the data value to draw the line at
 	 */
 	public void setValue(Date value) {
+		// resets callback
+		setValue((ValueCallback)null);
+		// stores value
 		setValue(Property.VALUE, value);
 	}
 
@@ -314,6 +323,9 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param endValue the data value at which the line draw should end
 	 */
 	public void setEndValue(String endValue) {
+		// resets callback
+		setEndValue((ValueCallback)null);
+		// stores value
 		setValue(Property.END_VALUE, endValue);
 	}
 
@@ -323,6 +335,9 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param endValue the data value at which the line draw should end
 	 */
 	public void setEndValue(double endValue) {
+		// resets callback
+		setEndValue((ValueCallback)null);
+		// stores value
 		setValue(Property.END_VALUE, endValue);
 	}
 
@@ -332,6 +347,9 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param endValue the data value at which the line draw should end
 	 */
 	public void setEndValue(Date endValue) {
+		// resets callback
+		setEndValue((ValueCallback)null);
+		// stores value
 		setValue(Property.END_VALUE, endValue);
 	}
 

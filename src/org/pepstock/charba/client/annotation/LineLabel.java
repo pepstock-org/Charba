@@ -288,31 +288,31 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this.parent, context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBackgroundColorAsString()));
+		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this.parent, context), getBackgroundColorCallback(), defaultValues.getBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this.parent, context), COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getColorAsString(), false));
+		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this.parent, context), getColorCallback(), defaultValues.getColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
 		this.contentCallbackProxy.setCallback((contextFunction, context) -> onContent(new AnnotationContext(this.parent, context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.displayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), DISPLAY_PROPERTY_HANDLER.getCallback(this), defaultValues.isDisplay()));
+		this.displayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getDisplayCallback(), defaultValues.isDisplay()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.rotationCallbackProxy.setCallback((contextFunction, context) -> onRotation(new AnnotationContext(this.parent, context), defaultValues.getRotation()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), CORNER_RADIUS_PROPERTY_HANDLER.getCallback(this), defaultValues.getCornerRadius()).doubleValue());	
+		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getCornerRadiusCallback(), defaultValues.getCornerRadius()).doubleValue());	
 		// sets function to proxy callback in order to invoke the java interface
-		this.imageWidthCallbackProxy.setCallback((contextFunction, context) -> onImageSize(new AnnotationContext(this.parent, context), IMAGE_WIDTH_PROPERTY_HANDLER.getCallback(this), defaultValues.getImageWidth(), defaultValues.getImageWidthAsPercentage()));	
+		this.imageWidthCallbackProxy.setCallback((contextFunction, context) -> onImageSize(new AnnotationContext(this.parent, context), getImageWidthCallback(), defaultValues.getImageWidth(), defaultValues.getImageWidthAsPercentage()));	
 		// sets function to proxy callback in order to invoke the java interface
-		this.imageHeightCallbackProxy.setCallback((contextFunction, context) -> onImageSize(new AnnotationContext(this.parent, context), IMAGE_HEIGHT_PROPERTY_HANDLER.getCallback(this), defaultValues.getImageHeight(), defaultValues.getImageHeightAsPercentage()));	
+		this.imageHeightCallbackProxy.setCallback((contextFunction, context) -> onImageSize(new AnnotationContext(this.parent, context), getImageHeightCallback(), defaultValues.getImageHeight(), defaultValues.getImageHeightAsPercentage()));	
 		// sets function to proxy callback in order to invoke the java interface
-		this.positionCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new AnnotationContext(this.parent, context), POSITION_PROPERTY_HANDLER.getCallback(this), getPosition()).value());
+		this.positionCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(new AnnotationContext(this.parent, context), getPositionCallback(), getPosition()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.xPaddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), X_PADDING_PROPERTY_HANDLER.getCallback(this), defaultValues.getXPadding()).intValue());	
+		this.xPaddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getXPaddingCallback(), defaultValues.getXPadding()).intValue());	
 		// sets function to proxy callback in order to invoke the java interface
-		this.yPaddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), Y_PADDING_PROPERTY_HANDLER.getCallback(this), defaultValues.getYPadding()).intValue());	
+		this.yPaddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getYPaddingCallback(), defaultValues.getYPadding()).intValue());	
 		// sets function to proxy callback in order to invoke the java interface
-		this.xAdjustCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), X_ADJUST_PROPERTY_HANDLER.getCallback(this), defaultValues.getXAdjust()).doubleValue());	
+		this.xAdjustCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getXAdjustCallback(), defaultValues.getXAdjust()).doubleValue());	
 		// sets function to proxy callback in order to invoke the java interface
-		this.yAdjustCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), Y_ADJUST_PROPERTY_HANDLER.getCallback(this), defaultValues.getYAdjust()).doubleValue());	
+		this.yAdjustCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getYAdjustCallback(), defaultValues.getYAdjust()).doubleValue());	
 		// sets function to proxy callback in order to invoke the java interface
 		this.textAlignCallbackProxy.setCallback((contextFunction, context) -> onTextAlign(new AnnotationContext(this.parent, context), defaultValues.getTextAlign()));
 	}
@@ -333,6 +333,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param display <code>true</code> whether the label should be displayed
 	 */
 	public void setDisplay(boolean display) {
+		// resets callback
+		setDisplay(null);
+		// stores value
 		setValue(Property.ENABLED, display);
 	}
 
@@ -361,6 +364,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param backgroundColor the background color of label
 	 */
 	public void setBackgroundColor(String backgroundColor) {
+		// resets callback
+		setBackgroundColor((ColorCallback<AnnotationContext>)null);
+		// stores value
 		setValue(Property.BACKGROUND_COLOR, backgroundColor);
 	}
 
@@ -398,6 +404,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param fontColor the color of text
 	 */
 	public void setColor(String fontColor) {
+		// resets callback
+		setColor((ColorCallback<AnnotationContext>)null);
+		// stores value
 		setValue(Property.COLOR, fontColor);
 	}
 
@@ -426,6 +435,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param xPadding the padding of label to add left and right
 	 */
 	public void setXPadding(int xPadding) {
+		// resets callback
+		setXPadding(null);
+		// stores value
 		setValue(Property.X_PADDING, xPadding);
 	}
 
@@ -445,6 +457,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param yPadding the padding of label to add top and bottom
 	 */
 	public void setYPadding(int yPadding) {
+		// resets callback
+		setYPadding(null);
+		// stores value
 		setValue(Property.Y_PADDING, yPadding);
 	}
 
@@ -464,6 +479,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param cornerRadius the radius of label rectangle
 	 */
 	public void setCornerRadius(double cornerRadius) {
+		// resets callback
+		setCornerRadius(null);
+		// stores value
 		setValue(Property.CORNER_RADIUS, cornerRadius);
 	}
 
@@ -483,6 +501,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param position the anchor position of label on line
 	 */
 	public void setPosition(LabelPosition position) {
+		// resets callback
+		setPosition((LabelPositionCallback)null);
+		// stores value
 		setValue(Property.POSITION, position);
 	}
 
@@ -502,6 +523,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param align the horizontal alignment of the label text when multiple lines
 	 */
 	public void setTextAlign(TextAlign align) {
+		// resets callback
+		setTextAlign((TextAlignCallback<AnnotationContext>)null);
+		// stores value
 		setValue(Property.TEXT_ALIGN, Key.isValid(align) ? align.getStartEndValue() : null);
 	}
 
@@ -522,6 +546,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param xAdjust the adjustment along x-axis (left-right) of label
 	 */
 	public void setXAdjust(double xAdjust) {
+		// resets callback
+		setXAdjust(null);
+		// stores value
 		setValue(Property.X_ADJUST, xAdjust);
 	}
 
@@ -543,6 +570,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param yAdjust the adjustment along y-axis (top-bottom) of label
 	 */
 	public void setYAdjust(double yAdjust) {
+		// resets callback
+		setYAdjust(null);
+		// stores value
 		setValue(Property.Y_ADJUST, yAdjust);
 	}
 
@@ -563,6 +593,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param rotation the rotation of label in degrees
 	 */
 	public void setRotation(double rotation) {
+		// resets callback
+		setRotation(null);
+		// stores value
 		setValue(Property.ROTATION, rotation);
 	}
 
@@ -582,8 +615,11 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param autoRotation <code>true</code> whether the rotation of label must calculates automatically
 	 */
 	public void setAutoRotation(boolean autoRotation) {
+		// resets callback
+		setRotation(null);
 		// checks is enabling
 		if (autoRotation) {
+			// stores value
 			setValue(Property.ROTATION, AUTO_ROTATION_AS_STRING);
 		} else {
 			// otherwise removes the key
@@ -608,6 +644,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param content the text to display in label as multi-line values
 	 */
 	public void setContent(List<String> content) {
+		// resets callback
+		setContent((ContentCallback)null);
 		// checks if argument is consistent
 		if (content != null) {
 			// stores it
@@ -626,6 +664,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param content the text to display in label
 	 */
 	public void setContent(String... content) {
+		// resets callback
+		setContent((ContentCallback)null);
+		// stores the value
 		setValueOrArray(Property.CONTENT, content);
 	}
 
@@ -635,6 +676,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param content the image to display in label
 	 */
 	public void setContent(Img content) {
+		// resets callback
+		setContent((ContentCallback)null);
+		// stores the value
 		setValue(Property.CONTENT, content);
 	}
 
@@ -653,8 +697,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @return the text to display in label as list
 	 */
 	public List<String> getContent() {
-		// checks if the context is a string
-		if (!isContentAsImage()) {
+		// checks if the context is a string or array (not an image of function for callback)
+		if (!isContentAsImage() && !isType(Property.CONTENT, ObjectType.FUNCTION)) {
 			// reads as array
 			// and returns it
 			ArrayString array = getValueOrArray(Property.CONTENT, UndefinedValues.STRING);
@@ -671,8 +715,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @return the text to display in label as list
 	 */
 	public Img getContentAsImage() {
-		// checks if the context is a image
-		if (isContentAsImage()) {
+		// checks if the context is a image (not an image of function for callback)
+		if (isContentAsImage() && !isType(Property.CONTENT, ObjectType.FUNCTION)) {
 			return getValue(Property.CONTENT, UndefinedValues.IMAGE_ELEMENT);
 		}
 		// if here, the content is not an image
@@ -686,6 +730,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param height the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
 	 */
 	public void setImageHeight(int height) {
+		// resets callback
+		setImageHeight((ImageSizeCallback)null);
+		// stores the value
 		setValue(Property.HEIGHT, height);
 	}
 
@@ -695,6 +742,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param heightPercentage the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
 	public void setImageHeightAsPercentage(String heightPercentage) {
+		// resets callback
+		setImageHeight((ImageSizeCallback)null);
+		// stores the value
 		setValue(Property.HEIGHT, heightPercentage);
 	}
 
@@ -736,6 +786,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param width the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
 	 */
 	public void setImageWidth(int width) {
+		// resets callback
+		setImageWidth((ImageSizeCallback)null);
+		// stores the value
 		setValue(Property.WIDTH, width);
 	}
 
@@ -745,6 +798,9 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param widthPercentage the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
 	public void setImageWidthAsPercentage(String widthPercentage) {
+		// resets callback
+		setImageWidth((ImageSizeCallback)null);
+		// stores the value
 		setValue(Property.WIDTH, widthPercentage);
 	}
 
@@ -820,6 +876,25 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 */
 	public void setColor(ColorCallback<AnnotationContext> colorCallback) {
 		COLOR_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, colorCallback, colorCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set the corner radius.
+	 * 
+	 * @return the callback called to set the corner radius
+	 */
+	@Override
+	public RadiusCallback<AnnotationContext> getCornerRadiusCallback() {
+		return CORNER_RADIUS_PROPERTY_HANDLER.getCallback(this, defaultValues.getCornerRadiusCallback());
+	}
+
+	/**
+	 * Sets the callback to set the corner radius.
+	 * 
+	 * @param cornerRadiusCallback to set the corner radius
+	 */
+	public void setCornerRadius(RadiusCallback<AnnotationContext> cornerRadiusCallback) {
+		CORNER_RADIUS_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, cornerRadiusCallback, cornerRadiusCallbackProxy.getProxy());
 	}
 	
 	/**

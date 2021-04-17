@@ -153,7 +153,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 */
 	private boolean onClick(DataLabelsContext context) {
 		// gets callback
-		ClickEventHandler clickEventHandler = CLICK_EVENT_PROPERTY_HANDLER.getCallback(this);
+		ClickEventHandler clickEventHandler = getClickEventHandler();
 		// checks if the context and handler are consistent
 		if (ScriptableUtils.isContextConsistent(context) && clickEventHandler != null) {
 			// calls handler
@@ -171,7 +171,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 */
 	private boolean onEnter(DataLabelsContext context) {
 		// gets callback
-		EnterEventHandler enterEventHandler = ENTER_EVENT_PROPERTY_HANDLER.getCallback(this);
+		EnterEventHandler enterEventHandler = getEnterEventHandler();
 		// checks if the context and handler are consistent
 		if (ScriptableUtils.isContextConsistent(context) && enterEventHandler != null) {
 			// calls handler
@@ -189,7 +189,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 */
 	private boolean onLeave(DataLabelsContext context) {
 		// gets callback
-		LeaveEventHandler leaveEventHandler = LEAVE_EVENT_PROPERTY_HANDLER.getCallback(this);
+		LeaveEventHandler leaveEventHandler = getLeaveEventHandler();
 		// checks if the context and handler are consistent
 		if (ScriptableUtils.isContextConsistent(context) && leaveEventHandler != null) {
 			// calls handler

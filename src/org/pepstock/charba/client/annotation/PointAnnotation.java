@@ -216,13 +216,13 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBackgroundColorAsString()));
+		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), getBackgroundColorCallback(), defaultValues.getBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.radiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), RADIUS_PROPERTY_HANDLER.getCallback(this), defaultValues.getRadius()).doubleValue());
+		this.radiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getRadiusCallback(), defaultValues.getRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.xValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), X_VALUE_PROPERTY_HANDLER.getCallback(this)));
+		this.xValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), getXValueCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.yValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), Y_VALUE_PROPERTY_HANDLER.getCallback(this)));
+		this.yValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), getYValueCallback()));
 	}
 
 
@@ -233,6 +233,9 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param radius array of the radius of the point shape.
 	 */
 	public void setRadius(double radius) {
+		// resets callback
+		setRadius(null);
+		// stores value
 		setValue(Property.RADIUS, radius);
 	}
 
@@ -261,6 +264,8 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param backgroundColor the color of the background of annotation
 	 */
 	public void setBackgroundColor(String backgroundColor) {
+		// resets callback
+		setBackgroundColor((ColorCallback<AnnotationContext>)null);
 		// stores value
 		setValue(Property.BACKGROUND_COLOR, backgroundColor);
 	}
@@ -358,6 +363,9 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param value the data X value to draw the line at
 	 */
 	public void setXValue(String value) {
+		// resets callback
+		setXValue((ValueCallback)null);
+		// stores value
 		setValue(Property.X_VALUE, value);
 	}
 
@@ -367,6 +375,9 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param value the data X value to draw the line at
 	 */
 	public void setXValue(double value) {
+		// resets callback
+		setXValue((ValueCallback)null);
+		// stores value		
 		setValue(Property.X_VALUE, value);
 	}
 
@@ -376,6 +387,9 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param value the data X value to draw the line at
 	 */
 	public void setXValue(Date value) {
+		// resets callback
+		setXValue((ValueCallback)null);
+		// stores value
 		setValue(Property.X_VALUE, value);
 	}
 
@@ -415,6 +429,9 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param value the data Y value to draw the line at
 	 */
 	public void setYValue(String value) {
+		// resets callback
+		setYValue((ValueCallback)null);
+		// stores value
 		setValue(Property.Y_VALUE, value);
 	}
 
@@ -424,6 +441,9 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param value the data Y value to draw the line at
 	 */
 	public void setYValue(double value) {
+		// resets callback
+		setYValue((ValueCallback)null);
+		// stores value
 		setValue(Property.Y_VALUE, value);
 	}
 
@@ -433,6 +453,9 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param value the data Y value to draw the line at
 	 */
 	public void setYValue(Date value) {
+		// resets callback
+		setYValue((ValueCallback)null);
+		// stores value
 		setValue(Property.Y_VALUE, value);
 	}
 
@@ -504,7 +527,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * 
 	 * @param radiusCallback to set the radius
 	 */
-	public void setCornerRadius(RadiusCallback<AnnotationContext> radiusCallback) {
+	public void setRadius(RadiusCallback<AnnotationContext> radiusCallback) {
 		RADIUS_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, radiusCallback, radiusCallbackProxy.getProxy());
 	}
 	

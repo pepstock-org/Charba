@@ -1402,5 +1402,44 @@ public abstract class NativeObjectContainer {
 		// then returns undefined value
 		return defaultsValue;
 	}
+	
+	// ------------------------------------------
+	// --- UTILITIES for unique id
+	// ------------------------------------------
+	
+	/**
+	 * Stores new incremental id if not previously stored.
+	 */
+	protected final void setNewIncrementalId() {
+		setNewIncrementalId(null);
+	}
+	
+	/**
+	 * Stores new incremental id if not previously stored.
+	 * 
+	 * @param clazz class instance to use as key for incremental counter
+	 */
+	protected final void setNewIncrementalId(Class<?> clazz) {
+		IncrementalIdHandler.get().checkAndSetId(this, clazz);
+	}
+
+	/**
+	 * Returns the incremental id of the object.
+	 * 
+	 * @return the incremental id of the object.
+	 */
+	protected final String getIncrementalId() {
+		return getIncrementalId(null);
+	}
+	
+	/**
+	 * Returns the incremental id of the object.
+	 * 
+	 * @param clazz class instance to use as key for incremental counter
+	 * @return the incremental id of the object.
+	 */
+	protected final String getIncrementalId(Class<?> clazz) {
+		return IncrementalIdHandler.get().getId(this, clazz);
+	}
 
 }

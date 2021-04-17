@@ -17,32 +17,24 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
-import org.pepstock.charba.client.options.AbstractFont;
+import org.pepstock.charba.client.options.AbstractScriptableFont;
 
 /**
  * Base object to map font options for {@link DataLabelsPlugin#ID} plugin configuration.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Font extends AbstractFont {
+public final class Font extends AbstractScriptableFont<DataLabelsContext> {
 
 	/**
 	 * Creates a font to use for chart configuration.
 	 * 
+	 * @param parent the label where this font belongs to
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Font(IsDefaultFont defaultValues, NativeObject nativeObject) {
-		super(defaultValues, nativeObject);
-	}
-
-	/**
-	 * Returns the native object instance.
-	 * 
-	 * @return the native object instance.
-	 */
-	final NativeObject nativeObject() {
-		return getObject();
+	Font(LabelItem parent, IsDefaultFont defaultValues, NativeObject nativeObject) {
+		super(parent, defaultValues, nativeObject);
 	}
 
 }

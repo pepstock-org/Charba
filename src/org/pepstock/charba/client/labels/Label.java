@@ -39,6 +39,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
+import org.pepstock.charba.client.options.IsScriptableFontProvider;
 
 import jsinterop.annotations.JsFunction;
 
@@ -48,12 +49,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Label extends NativeObjectContainer implements IsDefaultLabel {
-
-	/**
-	 * Default label id, <b>charbaDefaultLabelId</b>.
-	 */
-	public static final IsLabelId DEFAULT_ID = IsLabelId.create("charbaDefaultLabelId");
+public final class Label extends NativeObjectContainer implements IsDefaultLabel, IsScriptableFontProvider<LabelsContext> {
 
 	/**
 	 * Default rendering (what data must be showed), {@link Render#VALUE}.
@@ -202,6 +198,9 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	// font color callback instance
 	private static final CallbackPropertyHandler<ColorCallback<LabelsContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
 
+	// temporary id, used when the empty constructor is used
+	// the id will be change with an incremental id
+	private static final IsLabelId TEMPORARY_ID = IsLabelId.create("charbaTemporaryLabelId");
 	// defaults options instance
 	private final IsDefaultLabel defaultOptions;
 	// font instance
@@ -257,10 +256,10 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	}
 
 	/**
-	 * Creates new {@link DataLabelsPlugin#ID} plugin label, using default id, {@link Label#DEFAULT_ID}.
+	 * Creates new {@link DataLabelsPlugin#ID} plugin label, using an incremental id.
 	 */
 	public Label() {
-		this(DEFAULT_ID);
+		this(TEMPORARY_ID);
 	}
 
 	/**
@@ -291,10 +290,20 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	Label(IsLabelId id, IsDefaultLabel defaultOptions, NativeObject nativeObject) {
 		// creates an empty object
 		super(nativeObject);
+		// stores new incremental id
+		setNewIncrementalId();
 		// checks id
 		Key.checkIfValid(id);
-		// stores the ID
-		setValue(Property.ID, id);
+		// checks if is the temporary
+		if (Key.equals(TEMPORARY_ID, id)) {
+			// creates label id by incremental id
+			// stores in the object as id
+			setValue(Property.ID, IsLabelId.create(getIncrementalId()));			
+		} else {
+			// stores the ID
+			// passed as argument
+			setValue(Property.ID, id);
+		}
 		// checks if defaults options are consistent
 		if (defaultOptions == null) {
 			// get the default default global options
@@ -304,7 +313,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 			this.defaultOptions = defaultOptions;
 		}
 		// gets font
-		this.font = new Font(this.defaultOptions.getFont(), getValue(Property.FONT));
+		this.font = new Font(this, this.defaultOptions.getFont(), getValue(Property.FONT));
 		// checks if is already added
 		if (!has(Property.FONT)) {
 			// stores the font
@@ -316,7 +325,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		this.renderCallbackProxy.setCallback((contextFunction, context) -> onRender(new LabelsContext(this, context)));
 		this.fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new LabelsContext(this, context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(this, context), COLOR_PROPERTY_HANDLER.getCallback(this), getColorAsString()));
+		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(this, context), getColorCallback(), getColorAsString()));
 	}
 
 	/**
@@ -353,6 +362,9 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param color font color.
 	 */
 	public void setColor(String color) {
+		// resets callback
+		setColor((ColorCallback<LabelsContext>)null);
+		// stores the value
 		setValue(Property.COLOR, color);
 	}
 
@@ -381,6 +393,9 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param render what data must be showed.
 	 */
 	public void setRender(Render render) {
+		// resets callback
+		setRender((RenderCallback)null);
+		// stores the value
 		setValue(Property.RENDER, render);
 	}
 
@@ -679,6 +694,10 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		ArrayImage array = getArrayValue(Property.IMAGES);
 		return ArrayListHelper.list(array);
 	}
+	
+	// --------------------
+	// CALLBACKS
+	// --------------------
 
 	/**
 	 * Returns the render callback, if set, otherwise <code>null</code>.
@@ -696,7 +715,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param renderCallback the render callback to set
 	 */
 	public void setRender(RenderCallback renderCallback) {
-		RENDER_PROPERTY_HANDLER.setCallback(this, DEFAULT_ID.value(), renderCallback, renderCallbackProxy.getProxy());
+		RENDER_PROPERTY_HANDLER.setCallback(this, getIncrementalId(), renderCallback, renderCallbackProxy.getProxy());
 	}
 
 	/**
@@ -714,8 +733,9 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * 
 	 * @param fontCallback the font callback.
 	 */
+	@Override
 	public void setFont(FontCallback<LabelsContext> fontCallback) {
-		FONT_PROPERTY_HANDLER.setCallback(this, DEFAULT_ID.value(), fontCallback, fontCallbackProxy.getProxy());
+		FONT_PROPERTY_HANDLER.setCallback(this, getIncrementalId(), fontCallback, fontCallbackProxy.getProxy());
 		// checks if the callback is null
 		// because setting to null, the original font must be set again
 		// in the the options
@@ -741,8 +761,12 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param colorCallback the font color callback.
 	 */
 	public void setColor(ColorCallback<LabelsContext> colorCallback) {
-		COLOR_PROPERTY_HANDLER.setCallback(this, DEFAULT_ID.value(), colorCallback, colorCallbackProxy.getProxy());
+		COLOR_PROPERTY_HANDLER.setCallback(this, getIncrementalId(), colorCallback, colorCallbackProxy.getProxy());
 	}
+	
+	// ------------------------------
+	// INTERNAL methods for callbacks
+	// ------------------------------
 
 	/**
 	 * Invokes the RENDER callback.
@@ -752,7 +776,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	private Object onRender(LabelsContext context) {
 		// gets callback
-		RenderCallback renderCallback = RENDER_PROPERTY_HANDLER.getCallback(this);
+		RenderCallback renderCallback = getRenderCallback();
 		// checks if the context and callback are consistent
 		if (ScriptableUtils.isContextConsistent(context) && renderCallback != null) {
 			// calls callback
@@ -781,7 +805,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	private NativeObject onFont(LabelsContext context) {
 		// gets callback
-		FontCallback<LabelsContext> fontCallback = FONT_PROPERTY_HANDLER.getCallback(this);
+		FontCallback<LabelsContext> fontCallback = getFontCallback();
 		// checks if the context and callback are consistent
 		if (ScriptableUtils.isContextConsistent(context) && fontCallback != null) {
 			// calls callback

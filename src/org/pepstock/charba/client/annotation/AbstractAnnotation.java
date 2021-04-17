@@ -49,6 +49,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.Window;
 
@@ -67,6 +68,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * Default annotation display, <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
 	public static final boolean DEFAULT_DISPLAY = true;
+	
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// constants for the scope of callback management
@@ -211,16 +213,16 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.displayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), DISPLAY_PROPERTY_HANDLER.getCallback(this), defaultValues.isDisplay()));
+		this.displayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDisplayCallback(), defaultValues.isDisplay()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), BORDER_COLOR_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderColorAsString(), false));
+		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), getBorderColorCallback(), defaultValues.getBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderWidth()).intValue());
+		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getBorderWidthCallback(), defaultValues.getBorderWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new AnnotationContext(this, context), BORDER_DASH_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderDash()));
+		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new AnnotationContext(this, context), getBorderDashCallback(), defaultValues.getBorderDash()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashOffsetCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), BORDER_DASH_OFFSET_PROPERTY_HANDLER.getCallback(this), defaultValues.getBorderDashOffset()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset()).doubleValue());
 		// ------------------------------------------
 		// -- SET CALLBACKS to PROXIES for EVENTs ---
 		// ------------------------------------------
@@ -290,6 +292,9 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param display <code>true</code> whether the annotation should be displayed
 	 */
 	public final void setDisplay(boolean display) {
+		// resets callback
+		setDisplay(null);
+		// stores value
 		setValue(Property.DISPLAY, display);
 	}
 
@@ -346,6 +351,9 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param borderColor the color of the border of annotation
 	 */
 	public final void setBorderColor(String borderColor) {
+		// resets callback
+		setBorderColor((ColorCallback<AnnotationContext>)null);
+		// stores value
 		setValue(Property.BORDER_COLOR, borderColor);
 	}
 
@@ -364,6 +372,9 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param borderWidth the width of the border in pixels.
 	 */
 	public final void setBorderWidth(int borderWidth) {
+		// resets callback
+		setBorderWidth(null);
+		// stores value
 		setValue(Property.BORDER_WIDTH, borderWidth);
 	}
 
@@ -373,6 +384,9 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public final void setBorderDash(int... borderDash) {
+		// resets callback
+		setBorderDash((BorderDashCallback<AnnotationContext>)null);
+		// stores value
 		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
 
@@ -384,7 +398,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	@Override
 	public final List<Integer> getBorderDash() {
 		// checks if there is the property
-		if (has(Property.BORDER_DASH)) {
+		if (isType(Property.BORDER_DASH, ObjectType.ARRAY)) {
 			// gets the array
 			ArrayInteger array = getArrayValue(Property.BORDER_DASH);
 			// and transforms to a list
@@ -400,6 +414,9 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param borderDashOffset the line dash pattern offset.
 	 */
 	public final void setBorderDashOffset(double borderDashOffset) {
+		// resets callback
+		setBorderDashOffset(null);
+		// stores value
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
@@ -604,7 +621,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 */
 	private void onEnter(CallbackFunctionContext functionContext, NativeObject context) {
 		// gets callback
-		EnterCallback enterCallback = ENTER_PROPERTY_HANDLER.getCallback(this);
+		EnterCallback enterCallback = getEnterCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
 		// gets chart instance from function context
@@ -624,7 +641,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 */
 	private void onLeave(CallbackFunctionContext functionContext, NativeObject context) {
 		// gets callback
-		LeaveCallback leaveCallback = LEAVE_PROPERTY_HANDLER.getCallback(this);
+		LeaveCallback leaveCallback = getLeaveCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
 		// gets chart instance from function context
@@ -644,7 +661,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 */
 	private void onClick(CallbackFunctionContext functionContext, NativeObject context) {
 		// gets callback
-		ClickCallback clickCallback = CLICK_PROPERTY_HANDLER.getCallback(this);
+		ClickCallback clickCallback = getClickCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
 		// gets chart instance from function context
@@ -664,7 +681,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 */
 	private void onDblclick(CallbackFunctionContext functionContext, NativeObject context) {
 		// gets callback
-		DoubleClickCallback dblclickCallback = DOUBLE_CLICK_PROPERTY_HANDLER.getCallback(this);
+		DoubleClickCallback dblclickCallback = getDoubleClickCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
 		// gets chart instance from function context

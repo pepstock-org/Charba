@@ -147,13 +147,13 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.xMinCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), X_MIN_PROPERTY_HANDLER.getCallback(this)));
+		this.xMinCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), getXMinCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.xMaxCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), X_MAX_PROPERTY_HANDLER.getCallback(this)));
+		this.xMaxCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), getXMaxCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.yMinCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), Y_MIN_PROPERTY_HANDLER.getCallback(this)));
+		this.yMinCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), getYMinCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.yMaxCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), Y_MAX_PROPERTY_HANDLER.getCallback(this)));
+		this.yMaxCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), getYMaxCallback()));
 	}
 
 	/**
@@ -196,6 +196,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param max the right edge of the box
 	 */
 	public final void setXMax(String max) {
+		// resets callback
+		setXMax((ValueCallback)null);
+		// stores value
 		setValue(Property.X_MAX, max);
 	}
 
@@ -205,6 +208,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param max the right edge of the box
 	 */
 	public final void setXMax(double max) {
+		// resets callback
+		setXMax((ValueCallback)null);
+		// stores value
 		setValue(Property.X_MAX, max);
 	}
 
@@ -214,6 +220,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param max the right edge of the box
 	 */
 	public final void setXMax(Date max) {
+		// resets callback
+		setXMax((ValueCallback)null);
+		// stores value
 		setValue(Property.X_MAX, max);
 	}
 
@@ -253,6 +262,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param min the left edge of the box
 	 */
 	public final void setXMin(String min) {
+		// resets callback
+		setXMin((ValueCallback)null);
+		// stores value
 		setValue(Property.X_MIN, min);
 	}
 
@@ -262,6 +274,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param min the left edge of the box
 	 */
 	public final void setXMin(double min) {
+		// resets callback
+		setXMin((ValueCallback)null);
+		// stores value
 		setValue(Property.X_MIN, min);
 	}
 
@@ -271,6 +286,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param min the left edge of the box
 	 */
 	public final void setXMin(Date min) {
+		// resets callback
+		setXMin((ValueCallback)null);
+		// stores value
 		setValue(Property.X_MIN, min);
 	}
 
@@ -344,6 +362,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param max the top edge of the box in units along the y axis
 	 */
 	public final void setYMax(String max) {
+		// resets callback
+		setYMax((ValueCallback)null);
+		// stores value
 		setValue(Property.Y_MAX, max);
 	}
 
@@ -353,6 +374,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param max the top edge of the box in units along the y axis
 	 */
 	public final void setYMax(double max) {
+		// resets callback
+		setYMax((ValueCallback)null);
+		// stores value
 		setValue(Property.Y_MAX, max);
 	}
 
@@ -362,6 +386,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param max the top edge of the box in units along the y axis
 	 */
 	public final void setYMax(Date max) {
+		// resets callback
+		setYMax((ValueCallback)null);
+		// stores value
 		setValue(Property.Y_MAX, max);
 	}
 
@@ -401,6 +428,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param min the bottom edge of the box
 	 */
 	public final void setYMin(String min) {
+		// resets callback
+		setYMin((ValueCallback)null);
+		// stores value
 		setValue(Property.Y_MIN, min);
 	}
 
@@ -410,6 +440,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param min the bottom edge of the box
 	 */
 	public final void setYMin(double min) {
+		// resets callback
+		setYMin((ValueCallback)null);
+		// stores value
 		setValue(Property.Y_MIN, min);
 	}
 
@@ -419,6 +452,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param min the bottom edge of the box
 	 */
 	public final void setYMin(Date min) {
+		// resets callback
+		setYMin((ValueCallback)null);
+		// stores value
 		setValue(Property.Y_MIN, min);
 	}
 

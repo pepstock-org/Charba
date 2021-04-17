@@ -30,6 +30,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.options.IsScriptableFontProvider;
 
 import jsinterop.annotations.JsFunction;
 
@@ -40,7 +41,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class RadialPointLabels extends AxisContainer {
+public class RadialPointLabels extends AxisContainer implements IsScriptableFontProvider<ScaleContext>{
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -95,6 +96,7 @@ public class RadialPointLabels extends AxisContainer {
 	// color callback instance
 	private ColorCallback<ScaleContext> backdropColorCallback = null;
 
+	// FIXME must be reset when callback will be removed
 	// font instance
 	private final Font font;
 	// padding instance
@@ -330,6 +332,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public FontCallback<ScaleContext> getFontCallback() {
 		return fontCallback;
 	}
@@ -339,6 +342,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
+	@Override
 	public void setFont(FontCallback<ScaleContext> fontCallback) {
 		// sets the callback
 		this.fontCallback = fontCallback;

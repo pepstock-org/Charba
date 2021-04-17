@@ -29,6 +29,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.options.IsScriptableFontProvider;
 import org.pepstock.charba.client.options.Ticks;
 
 /**
@@ -36,7 +37,7 @@ import org.pepstock.charba.client.options.Ticks;
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class Tick extends AxisContainer {
+abstract class Tick extends AxisContainer implements IsScriptableFontProvider<ScaleContext>{
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -61,6 +62,8 @@ abstract class Tick extends AxisContainer {
 
 	// major tick instance
 	private final Major major;
+
+	// FIXME must be reset when callback will be removed
 	// font instance
 	private final Font font;
 
@@ -311,6 +314,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public FontCallback<ScaleContext> getFontCallback() {
 		return fontCallback;
 	}
@@ -401,6 +405,7 @@ abstract class Tick extends AxisContainer {
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
+	@Override
 	public void setFont(FontCallback<ScaleContext> fontCallback) {
 		// sets the callback
 		this.fontCallback = fontCallback;

@@ -184,7 +184,7 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), CORNER_RADIUS_PROPERTY_HANDLER.getCallback(this), defaultValues.getCornerRadius()).doubleValue());
+		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getCornerRadiusCallback(), defaultValues.getCornerRadius()).doubleValue());
 	}
 
 	/**
@@ -193,6 +193,9 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 	 * @param corner the border radius.
 	 */
 	public void setCornerRadius(double corner) {
+		// resets callback
+		setCornerRadius(null);
+		// stores value
 		setValue(Property.CORNER_RADIUS, corner);
 	}
 
