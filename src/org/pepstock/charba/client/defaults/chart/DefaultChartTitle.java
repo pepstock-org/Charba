@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
@@ -51,6 +52,16 @@ public final class DefaultChartTitle implements IsDefaultTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getPadding()
+	 */
+	@Override
+	public IsDefaultPadding getPadding() {
+		return title.getPadding();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getColorAsString()
 	 */
 	@Override
@@ -76,16 +87,6 @@ public final class DefaultChartTitle implements IsDefaultTitle {
 	@Override
 	public Position getPosition() {
 		return title.getPosition();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getPadding()
-	 */
-	@Override
-	public int getPadding() {
-		return title.getPadding();
 	}
 
 	/*

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
@@ -36,6 +37,8 @@ public final class DefaultTitle implements IsDefaultTitle {
 	private static final boolean DEFAULT_DISPLAY = false;
 
 	private final DefaultRoutedFont font = new InternalTitleFont();
+
+	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);
 
 	/**
 	 * To avoid any instantiation
@@ -57,6 +60,16 @@ public final class DefaultTitle implements IsDefaultTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getPadding()
+	 */
+	@Override
+	public IsDefaultPadding getPadding() {
+		return padding;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.title.IsDefaultTitle#isDisplay()
 	 */
 	@Override
@@ -72,16 +85,6 @@ public final class DefaultTitle implements IsDefaultTitle {
 	@Override
 	public Position getPosition() {
 		return Position.TOP;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.title.IsDefaultTitle#getPadding()
-	 */
-	@Override
-	public int getPadding() {
-		return DEFAULT_PADDING;
 	}
 
 	/*

@@ -27,7 +27,7 @@ public interface IsDefaultTitle extends IsDefaultPluginElement, IsDefaultFontCon
 	 * 
 	 * @return Padding to apply around labels. Only top and bottom are implemented.
 	 */
-	int getPadding();
+	IsDefaultPadding getPadding();
 
 	/**
 	 * Returns if marks that this box should take the full width/height of the canvas (moving other boxes).

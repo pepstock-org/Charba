@@ -32,6 +32,8 @@ public class Title extends ConfigurationOptionsContainer {
 
 	// font instance
 	private final Font font;
+	// instance of padding
+	private final Padding padding;
 
 	/**
 	 * Builds the object storing the root options element.
@@ -42,6 +44,7 @@ public class Title extends ConfigurationOptionsContainer {
 		super(options);
 		// gets embedded font
 		this.font = new Font(() -> getConfiguration().getTitle().getFont());
+		this.padding = new Padding(() -> getConfiguration().getTitle().getPadding());
 	}
 
 	/**
@@ -51,6 +54,15 @@ public class Title extends ConfigurationOptionsContainer {
 	 */
 	public Font getFont() {
 		return font;
+	}
+	
+	/**
+	 * Returns the padding element.
+	 * 
+	 * @return the padding
+	 */
+	public Padding getPadding() {
+		return padding;
 	}
 
 	/**
@@ -141,24 +153,6 @@ public class Title extends ConfigurationOptionsContainer {
 	 */
 	public Position getPosition() {
 		return getConfiguration().getTitle().getPosition();
-	}
-
-	/**
-	 * Sets the padding to apply around title. Only top and bottom are implemented.
-	 * 
-	 * @param padding Padding to apply around title. Only top and bottom are implemented.
-	 */
-	public void setPadding(int padding) {
-		getConfiguration().getTitle().setPadding(padding);
-	}
-
-	/**
-	 * Returns the padding to apply around title. Only top and bottom are implemented.
-	 * 
-	 * @return Padding to apply around title. Only top and bottom are implemented.
-	 */
-	public int getPadding() {
-		return getConfiguration().getTitle().getPadding();
 	}
 
 	/**

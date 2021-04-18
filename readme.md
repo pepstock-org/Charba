@@ -199,6 +199,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * rename `LegendAlign` class to `ElementAlign` in order to be able to use for `Title` options and configuration classes.
  * change `cutoutPercentage` property from double to string in order to manage a percentage `[number]%` format in the options and configuration classes, for pie and doughnut charts.
  * remove `Event.TOUCHEND` item
+ * change `padding` property to `Title` class for options and configuration in order to use `Padding` object instead of an integer.
 
 #### Features
  * add `backgroundColor` and `borderColor` default options.

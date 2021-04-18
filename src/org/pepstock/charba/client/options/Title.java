@@ -67,6 +67,8 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 
 	// instance of font container
 	private final FontContainer fontContainer;
+	// instance of padding
+	private final Padding padding;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -80,6 +82,7 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 		super(options, childKey, defaultValues, nativeObject);
 		// creates font container
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
+		this.padding = loadPadding(Property.PADDING, getDefaultValues().getPadding());
 	}
 
 	/*
@@ -91,24 +94,14 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	public FontContainer getFontContainer() {
 		return fontContainer;
 	}
-
-	/**
-	 * Sets the padding to apply around labels. Only top and bottom are implemented.
-	 * 
-	 * @param padding padding to apply around labels. Only top and bottom are implemented.
-	 */
-	public void setPadding(int padding) {
-		setValueAndAddToParent(Property.PADDING, padding);
-	}
-
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 
 	 * @return padding to apply around labels. Only top and bottom are implemented.
 	 */
 	@Override
-	public int getPadding() {
-		return getValue(Property.PADDING, getDefaultValues().getPadding());
+	public Padding getPadding() {
+		return padding;
 	}
 
 	/**
