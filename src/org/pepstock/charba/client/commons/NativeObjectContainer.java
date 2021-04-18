@@ -1417,10 +1417,10 @@ public abstract class NativeObjectContainer {
 	/**
 	 * Stores new incremental id if not previously stored.
 	 * 
-	 * @param clazz class instance to use as key for incremental counter
+	 * @param prefix prefix to add to the value of incremental id.
 	 */
-	protected final void setNewIncrementalId(Class<?> clazz) {
-		IncrementalIdHandler.get().checkAndSetId(this, clazz);
+	protected final void setNewIncrementalId(String prefix) {
+		IncrementalIdHandler.get().checkAndSetId(this, prefix);
 	}
 
 	/**
@@ -1429,17 +1429,7 @@ public abstract class NativeObjectContainer {
 	 * @return the incremental id of the object.
 	 */
 	protected final String getIncrementalId() {
-		return getIncrementalId(null);
-	}
-	
-	/**
-	 * Returns the incremental id of the object.
-	 * 
-	 * @param clazz class instance to use as key for incremental counter
-	 * @return the incremental id of the object.
-	 */
-	protected final String getIncrementalId(Class<?> clazz) {
-		return IncrementalIdHandler.get().getId(this, clazz);
+		return IncrementalIdHandler.get().getId(this);
 	}
 
 }

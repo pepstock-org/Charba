@@ -71,8 +71,6 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
-	// constants for the scope of callback management
-	static final String PLUGIN_SCOPE = "charbaAnnotationDefaultScope";
 	// exception pattern when the scale or scales methods is invoked and the scale type is not correct
 	static final String INVALID_DEFAULTS_VALUES_CLASS = "Defaults options are not invalid because is not a {0} annotation defaults";
 
@@ -207,6 +205,8 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 		setValue(Property.TYPE, type);
 		// stores the internal id for caching
 		setValue(Property.CHARBA_ANNOTATION_ID, COUNTER.getAndIncrement());
+		// stores incremental ID
+		setNewIncrementalId();
 		// cached it
 		AnnotationHelper.get().addAnnotation(this);
 		// -------------------------------
@@ -450,7 +450,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param displayCallback to set whether the annotation should be displayed
 	 */
 	public final void setDisplay(DisplayCallback displayCallback) {
-		DISPLAY_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, displayCallback, displayCallbackProxy.getProxy());
+		DISPLAY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
 	}
 
 	/**
@@ -469,7 +469,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param borderColorCallback to set the color of the border of annotation
 	 */
 	public final void setBorderColor(ColorCallback<AnnotationContext> borderColorCallback) {
-		BORDER_COLOR_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, borderColorCallback, borderColorCallbackProxy.getProxy());
+		BORDER_COLOR_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderColorCallback, borderColorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -488,7 +488,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param borderWidthCallback to set the width of the border in pixels
 	 */
 	public final void setBorderWidth(WidthCallback<AnnotationContext> borderWidthCallback) {
-		BORDER_WIDTH_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, borderWidthCallback, borderWidthCallbackProxy.getProxy());
+		BORDER_WIDTH_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderWidthCallback, borderWidthCallbackProxy.getProxy());
 	}
 
 	/**
@@ -511,7 +511,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 *            the pattern
 	 */
 	public final void setBorderDash(BorderDashCallback<AnnotationContext> borderDashCallback) {
-		BORDER_DASH_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, borderDashCallback, borderDashCallbackProxy.getProxy());
+		BORDER_DASH_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderDashCallback, borderDashCallbackProxy.getProxy());
 	}
 
 	/**
@@ -530,7 +530,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param borderDashOffsetCallback to set the line dash pattern offset
 	 */
 	public final void setBorderDashOffset(BorderDashOffsetCallback<AnnotationContext> borderDashOffsetCallback) {
-		BORDER_DASH_OFFSET_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, borderDashOffsetCallback, borderDashOffsetCallbackProxy.getProxy());
+		BORDER_DASH_OFFSET_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderDashOffsetCallback, borderDashOffsetCallbackProxy.getProxy());
 	}
 
 	// ---------------------
@@ -553,7 +553,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param enterCallback the callback called when a "enter" event is occurring
 	 */
 	public final void setEnterCallback(EnterCallback enterCallback) {
-		ENTER_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, enterCallback, enterCallbackProxy.getProxy());
+		ENTER_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, enterCallback, enterCallbackProxy.getProxy());
 	}
 
 	/**
@@ -572,7 +572,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param leaveCallback the callback called when a "leave" event is occurring
 	 */
 	public final void setLeaveCallback(LeaveCallback leaveCallback) {
-		LEAVE_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, leaveCallback, leaveCallbackProxy.getProxy());
+		LEAVE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, leaveCallback, leaveCallbackProxy.getProxy());
 	}
 
 	/**
@@ -591,7 +591,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param clickCallback the callback called when a "click" event is occurring
 	 */
 	public final void setClickCallback(ClickCallback clickCallback) {
-		CLICK_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, clickCallback, clickCallbackProxy.getProxy());
+		CLICK_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, clickCallback, clickCallbackProxy.getProxy());
 	}
 
 	/**
@@ -610,7 +610,7 @@ public abstract class AbstractAnnotation extends NativeObjectContainer implement
 	 * @param dblclickCallback the callback called when a "dblclick" event is occurring
 	 */
 	public final void setDoubleClickCallback(DoubleClickCallback dblclickCallback) {
-		DOUBLE_CLICK_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, dblclickCallback, dblclickCallbackProxy.getProxy());
+		DOUBLE_CLICK_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, dblclickCallback, dblclickCallbackProxy.getProxy());
 	}
 
 	/**

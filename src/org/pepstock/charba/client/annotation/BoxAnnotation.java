@@ -229,6 +229,6 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 	 * @param cornerRadiusCallback to set the corner radius
 	 */
 	public void setCornerRadius(RadiusCallback<AnnotationContext> cornerRadiusCallback) {
-		CORNER_RADIUS_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, cornerRadiusCallback, cornerRadiusCallbackProxy.getProxy());
+		CORNER_RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, cornerRadiusCallback, cornerRadiusCallbackProxy.getProxy());
 	}
 }

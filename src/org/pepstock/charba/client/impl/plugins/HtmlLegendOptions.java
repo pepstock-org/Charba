@@ -133,6 +133,8 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions implem
 			// stores default options
 			this.defaultOptions = defaultOptions;
 		}
+		// stores incremental ID
+		setNewIncrementalId();
 	}
 
 	/**

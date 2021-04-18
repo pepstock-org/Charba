@@ -221,7 +221,7 @@ abstract class AbstractBoxAnnotation extends AbstractXYAnnotation implements IsD
 	 * @param backgroundColorCallback to set the color of the background of annotation
 	 */
 	public final void setBackgroundColor(ColorCallback<AnnotationContext> backgroundColorCallback) {
-		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
+		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
 	}
 
 }

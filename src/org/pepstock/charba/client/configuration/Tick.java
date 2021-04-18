@@ -63,7 +63,6 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	// major tick instance
 	private final Major major;
 
-	// FIXME must be reset when callback will be removed
 	// font instance
 	private final Font font;
 

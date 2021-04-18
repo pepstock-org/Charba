@@ -65,8 +65,8 @@ final class IncrementalIdHandler {
 
 	}
 
-	// prefix of CHARBA internal id
-	private static final String INTERNAL_PREFIX_ID = "charba-internal-id-";
+	// default prefix of CHARBA internal id
+	private static final String DEFAULT_INTERNAL_PREFIX_ID = "charba-internal-id-";
 	// internal counters
 	// K = class name of native container, V = integer counter
 	private final Map<String, AtomicInteger> counters = new HashMap<>();
@@ -87,78 +87,75 @@ final class IncrementalIdHandler {
 	}
 
 	/**
-	 * Checks if the id already stored and if not, creates a new internal id in the native object container, using the class (passed as argument) name has key of the cache of
-	 * counter.
+	 * Checks if the id already stored and if not, creates a new internal id in the native object container counter.
 	 * 
 	 * @param container native object container where checks and stores the id
-	 * @param clazz the class instance where its name is used as key of the cache of counters.
 	 */
-	void checkAndSetId(NativeObjectContainer container, Class<?> clazz) {
-		// checks if container and class are consistent
-		Class<?> checkedClazz = checkAndGetClass(container, clazz);
+	void checkAndSetId(NativeObjectContainer container) {
+		checkAndSetId(container, DEFAULT_INTERNAL_PREFIX_ID);
+	}
+
+	/**
+	 * Checks if the id already stored and if not, creates a new internal id in the native object container counter.
+	 * 
+	 * @param container native object container where checks and stores the id
+	 * @param prefix prefix to add to the value of incremental id.
+	 */
+	void checkAndSetId(NativeObjectContainer container, String prefix) {
+		// checks if container is consistent
+		checkNativeObjectContainer(container);
 		// checks if container contains the internal object id
 		if (!container.has(Property.CHARBA_INTERNAL_INTERNAL_ID)) {
 			// creates and stores new id
-			setNewId(container, checkedClazz);
+			setNewId(container, prefix != null && !prefix.trim().isEmpty() ? prefix : DEFAULT_INTERNAL_PREFIX_ID);
 		}
 	}
 
 	/**
-	 * Returns the internal id, stored in the native object container, using the class (passed as argument) name has key of the cache of counter.<br>
-	 * If the id is not stores, it creates new one.
+	 * Returns the internal id, stored in the native object container.<br>
+	 * If id is not stored, throws an {@link IllegalArgumentException}.
 	 * 
 	 * @param container native object container where retrieves the id
-	 * @param clazz the class instance where its name is used as key of the cache of counters.
 	 * @return the internal id
 	 */
-	String getId(NativeObjectContainer container, Class<?> clazz) {
-		// checks if container and class are consistent
-		Class<?> checkedClazz = checkAndGetClass(container, clazz);
+	String getId(NativeObjectContainer container) {
+		// checks if container is consistent
+		checkNativeObjectContainer(container);
 		// checks if the property exists
 		if (!container.has(Property.CHARBA_INTERNAL_INTERNAL_ID)) {
-			// creates and stores new id
-			setNewId(container, checkedClazz);
+			// throws an exception because it must be set in advance
+			throw new IllegalArgumentException("The incremental id has not been stored. Invoke 'checkAndSetId' before calling 'getId'");
 		}
 		// returns value
 		return container.getValue(Property.CHARBA_INTERNAL_INTERNAL_ID, UndefinedValues.STRING);
 	}
 
 	/**
-	 * Creates new internal id in the native object container, using the class (passed as argument) name has key of the cache of counter.
+	 * Creates new internal id in the native object container.
 	 * 
 	 * @param container native object container where stores the id
-	 * @param clazz the class instance where its name is used as key of the cache of counters.
+	 * @param prefix prefix to add to the value of incremental id.
 	 */
-	private void setNewId(NativeObjectContainer container, Class<?> clazz) {
+	private void setNewId(NativeObjectContainer container, String prefix) {
 		// checks class has been stored
 		// creating new counter
-		AtomicInteger counter = counters.computeIfAbsent(clazz.getName(), mapKey -> new AtomicInteger(0));
+		AtomicInteger counter = counters.computeIfAbsent(container.getClass().getName(), mapKey -> new AtomicInteger(0));
 		// stores the internal id for caching
-		container.setValue(Property.CHARBA_INTERNAL_INTERNAL_ID, INTERNAL_PREFIX_ID + counter.getAndIncrement());
+		container.setValue(Property.CHARBA_INTERNAL_INTERNAL_ID, prefix + counter.getAndIncrement());
 	}
 
 	/**
-	 * Checks if the native object container instance and the class are consistent.
+	 * Checks if the native object container is consistent.
 	 * 
 	 * @param container native object container where checks and stores the id
-	 * @param clazz the class instance where its name is used as key of the cache of counters.
-	 * @return the class passed as argument or, if <code>null</code>, the class of the native object container
 	 */
-	private Class<?> checkAndGetClass(NativeObjectContainer container, Class<?> clazz) {
+	private void checkNativeObjectContainer(NativeObjectContainer container) {
 		// checks if container is consistent
 		if (container == null) {
 			// if here the container is not consistent
 			// then exception
 			throw new IllegalArgumentException("Container argument is null");
 		}
-		// checks if class is consistent
-		if (clazz == null) {
-			// if here returns the class of container
-			return container.getClass();
-		}
-		// if here, container and class consistent
-		// then returns the passed class
-		return clazz;
 	}
 
 }

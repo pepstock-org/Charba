@@ -79,6 +79,8 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 		// checks if default value is consistent
 		// stores default
 		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
+		// stores incremental ID
+		setNewIncrementalId();
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -103,7 +105,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 * @param clickEventHandler the click event handler to set
 	 */
 	public void setClickEventHandler(ClickEventHandler clickEventHandler) {
-		CLICK_EVENT_PROPERTY_HANDLER.setCallback(this, parent.getId(), clickEventHandler, clickEventCallbackProxy.getProxy());
+		CLICK_EVENT_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, clickEventHandler, clickEventCallbackProxy.getProxy());
 	}
 
 	/**
@@ -123,7 +125,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 * @param enterEventHandler the enter event handler to set
 	 */
 	public void setEnterEventHandler(EnterEventHandler enterEventHandler) {
-		ENTER_EVENT_PROPERTY_HANDLER.setCallback(this, parent.getId(), enterEventHandler, enterEventCallbackProxy.getProxy());
+		ENTER_EVENT_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, enterEventHandler, enterEventCallbackProxy.getProxy());
 	}
 
 	/**
@@ -142,7 +144,7 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 * @param leaveEventHandler the leave event handler to set
 	 */
 	public void setLeaveEventHandler(LeaveEventHandler leaveEventHandler) {
-		LEAVE_EVENT_PROPERTY_HANDLER.setCallback(this, parent.getId(), leaveEventHandler, leaveEventCallbackProxy.getProxy());
+		LEAVE_EVENT_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, leaveEventHandler, leaveEventCallbackProxy.getProxy());
 	}
 
 	/**

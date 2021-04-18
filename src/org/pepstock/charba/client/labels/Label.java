@@ -715,7 +715,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param renderCallback the render callback to set
 	 */
 	public void setRender(RenderCallback renderCallback) {
-		RENDER_PROPERTY_HANDLER.setCallback(this, getIncrementalId(), renderCallback, renderCallbackProxy.getProxy());
+		RENDER_PROPERTY_HANDLER.setCallback(this, LabelsPlugin.ID, renderCallback, renderCallbackProxy.getProxy());
 	}
 
 	/**
@@ -735,11 +735,11 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	@Override
 	public void setFont(FontCallback<LabelsContext> fontCallback) {
-		FONT_PROPERTY_HANDLER.setCallback(this, getIncrementalId(), fontCallback, fontCallbackProxy.getProxy());
+		FONT_PROPERTY_HANDLER.setCallback(this, LabelsPlugin.ID, fontCallback, fontCallbackProxy.getProxy());
 		// checks if the callback is null
 		// because setting to null, the original font must be set again
 		// in the the options
-		if (fontCallback == null) {
+		if (fontCallback == null && !has(Property.FONT)) {
 			// stores the font
 			setValue(Property.FONT, font);
 		}
@@ -761,7 +761,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param colorCallback the font color callback.
 	 */
 	public void setColor(ColorCallback<LabelsContext> colorCallback) {
-		COLOR_PROPERTY_HANDLER.setCallback(this, getIncrementalId(), colorCallback, colorCallbackProxy.getProxy());
+		COLOR_PROPERTY_HANDLER.setCallback(this, LabelsPlugin.ID, colorCallback, colorCallbackProxy.getProxy());
 	}
 	
 	// ------------------------------

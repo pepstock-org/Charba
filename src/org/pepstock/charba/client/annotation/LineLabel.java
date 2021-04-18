@@ -282,6 +282,8 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 		// checks if default value is consistent
 		// stores default options
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
+		// stores incremental ID
+		setNewIncrementalId();
 		// gets font
 		this.font = new Font(defaultValues.getFont(), getValue(Property.FONT));
 		// -------------------------------
@@ -856,7 +858,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param backgroundColorCallback to set the color of the background of label
 	 */
 	public void setBackgroundColor(ColorCallback<AnnotationContext> backgroundColorCallback) {
-		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
+		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -875,7 +877,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param colorCallback to set the color of the text of label
 	 */
 	public void setColor(ColorCallback<AnnotationContext> colorCallback) {
-		COLOR_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, colorCallback, colorCallbackProxy.getProxy());
+		COLOR_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, colorCallback, colorCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -894,7 +896,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param cornerRadiusCallback to set the corner radius
 	 */
 	public void setCornerRadius(RadiusCallback<AnnotationContext> cornerRadiusCallback) {
-		CORNER_RADIUS_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, cornerRadiusCallback, cornerRadiusCallbackProxy.getProxy());
+		CORNER_RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, cornerRadiusCallback, cornerRadiusCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -913,7 +915,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param contentCallback to set the text to display in label as list
 	 */
 	public void setContent(ContentCallback contentCallback) {
-		CONTENT_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, contentCallback, contentCallbackProxy.getProxy());
+		CONTENT_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, contentCallback, contentCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -932,7 +934,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param displayCallback to set whether the label should be displayed
 	 */
 	public void setDisplay(DisplayCallback displayCallback) {
-		DISPLAY_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, displayCallback, displayCallbackProxy.getProxy());
+		DISPLAY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -951,7 +953,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param rotationCallback to set the rotation of label in degrees
 	 */
 	public void setRotation(RotationCallback<AnnotationContext> rotationCallback) {
-		ROTATION_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, rotationCallback, rotationCallbackProxy.getProxy());
+		ROTATION_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, rotationCallback, rotationCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -970,7 +972,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param imageSizeCallback to set the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
 	public void setImageHeight(ImageSizeCallback imageSizeCallback) {
-		IMAGE_HEIGHT_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, imageSizeCallback, imageHeightCallbackProxy.getProxy());
+		IMAGE_HEIGHT_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, imageSizeCallback, imageHeightCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -989,7 +991,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param imageSizeCallback to set the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
 	public void setImageWidth(ImageSizeCallback imageSizeCallback) {
-		IMAGE_WIDTH_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, imageSizeCallback, imageWidthCallbackProxy.getProxy());
+		IMAGE_WIDTH_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, imageSizeCallback, imageWidthCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1008,7 +1010,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param positionCallback to set the anchor position of label on line
 	 */
 	public void setPosition(LabelPositionCallback positionCallback) {
-		POSITION_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, positionCallback, positionCallbackProxy.getProxy());
+		POSITION_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, positionCallback, positionCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -1027,7 +1029,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param alignCallback to the horizontal alignment of the label text when multiple lines
 	 */
 	public void setTextAlign(TextAlignCallback<AnnotationContext> alignCallback) {
-		TEXT_ALIGN_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, alignCallback, textAlignCallbackProxy.getProxy());
+		TEXT_ALIGN_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, alignCallback, textAlignCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -1046,7 +1048,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param paddingCallback to set the padding of label to add left and right
 	 */
 	public void setXPadding(PaddingSizeCallback paddingCallback) {
-		X_PADDING_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, paddingCallback, xPaddingCallbackProxy.getProxy());
+		X_PADDING_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, paddingCallback, xPaddingCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1065,7 +1067,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param paddingCallback to set the padding of label to add top and bottom
 	 */
 	public void setYPadding(PaddingSizeCallback paddingCallback) {
-		Y_PADDING_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, paddingCallback, yPaddingCallbackProxy.getProxy());
+		Y_PADDING_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, paddingCallback, yPaddingCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -1084,7 +1086,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param adjustCallback to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative)
 	 */
 	public void setXAdjust(AdjustSizeCallback adjustCallback) {
-		X_ADJUST_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, adjustCallback, xAdjustCallbackProxy.getProxy());
+		X_ADJUST_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustCallback, xAdjustCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1103,7 +1105,7 @@ public final class LineLabel extends NativeObjectContainer implements IsDefaults
 	 * @param adjustCallback to set the adjustment along x-axis (left-right) of label relative to above number (can be negative)
 	 */
 	public void setYAdjust(AdjustSizeCallback adjustCallback) {
-		Y_ADJUST_PROPERTY_HANDLER.setCallback(this, AbstractAnnotation.PLUGIN_SCOPE, adjustCallback, yAdjustCallbackProxy.getProxy());
+		Y_ADJUST_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustCallback, yAdjustCallbackProxy.getProxy());
 	}
 	
 	// -----------------------

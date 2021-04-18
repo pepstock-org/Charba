@@ -508,7 +508,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param valueCallback to set the left edge of the box, in units along the x axis
 	 */
 	public final void setXMin(ValueCallback valueCallback) {
-		X_MIN_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, xMinCallbackProxy.getProxy());
+		X_MIN_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, xMinCallbackProxy.getProxy());
 	}
 
 	/**
@@ -527,7 +527,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param valueCallback to set the right edge of the box
 	 */
 	public final void setXMax(ValueCallback valueCallback) {
-		X_MAX_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, xMaxCallbackProxy.getProxy());
+		X_MAX_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, xMaxCallbackProxy.getProxy());
 	}
 	
 	// Y
@@ -548,7 +548,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param valueCallback to set the bottom edge of the box
 	 */
 	public final void setYMin(ValueCallback valueCallback) {
-		Y_MIN_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, yMinCallbackProxy.getProxy());
+		Y_MIN_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yMinCallbackProxy.getProxy());
 	}
 
 	/**
@@ -567,7 +567,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param valueCallback to set the top edge of the box in units along the y axis
 	 */
 	public final void setYMax(ValueCallback valueCallback) {
-		Y_MAX_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, yMaxCallbackProxy.getProxy());
+		Y_MAX_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yMaxCallbackProxy.getProxy());
 	}
 
 }

@@ -142,8 +142,6 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 
 	}
 
-	// parent instance
-	private final ZoomOptions parent;
 	// default options
 	private final T defaultOptions;
 	// minimum range
@@ -154,17 +152,16 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @param parent zoom options, parent of this node
 	 * @param defaultOptions default options of element
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	AbstractConfigurationItem(ZoomOptions parent, T defaultOptions, NativeObject nativeObject) {
+	AbstractConfigurationItem(T defaultOptions, NativeObject nativeObject) {
 		super(nativeObject);
-		// stores parent
-		this.parent = parent;
 		// checks if defaults options is consistent
 		// stores defaults options
 		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
+		// stores new incremental id
+		setNewIncrementalId();
 		// checks if range min are already present
 		if (has(Property.RANGE_MIN)) {
 			// gets range min
@@ -313,7 +310,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 * @param modeCallback the element (panning or zooming) directions callback
 	 */
 	public final void setMode(ModeCallback modeCallback) {
-		MODE_PROPERTY_HANDLER.setCallback(this, parent.getId(), modeCallback, modeCallbackProxy.getProxy());
+		MODE_PROPERTY_HANDLER.setCallback(this, ZoomPlugin.ID, modeCallback, modeCallbackProxy.getProxy());
 	}
 
 	/**
@@ -334,7 +331,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 * @param modeCallback the element (panning or zooming) directions callback
 	 */
 	public final void setOverScaleMode(ModeCallback modeCallback) {
-		OVER_SCALE_MODE_PROPERTY_HANDLER.setCallback(this, parent.getId(), modeCallback, overScaleModeCallbackProxy.getProxy());
+		OVER_SCALE_MODE_PROPERTY_HANDLER.setCallback(this, ZoomPlugin.ID, modeCallback, overScaleModeCallbackProxy.getProxy());
 	}
 
 	/**
@@ -373,7 +370,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 * @param progressCallback the callback called while the user is zooming or panning
 	 */
 	public final void setProgressCallback(ProgressCallback progressCallback) {
-		getProgessPropertyHandler().setCallback(this, parent.getId(), progressCallback, progressCallbackProxy.getProxy());
+		getProgessPropertyHandler().setCallback(this, ZoomPlugin.ID, progressCallback, progressCallbackProxy.getProxy());
 	}
 
 	/**
@@ -392,7 +389,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 * @param completeCallback the callback called once zooming or panning is completed
 	 */
 	public final void setCompletedCallback(CompletedCallback completeCallback) {
-		getCompletedPropertyHandler().setCallback(this, parent.getId(), completeCallback, completeCallbackProxy.getProxy());
+		getCompletedPropertyHandler().setCallback(this, ZoomPlugin.ID, completeCallback, completeCallbackProxy.getProxy());
 	}
 
 	/**
@@ -411,7 +408,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 * @param rejectCallback the callback called once zooming or panning is rejected
 	 */
 	public final void setRejectedCallback(RejectedCallback rejectCallback) {
-		getRejectedPropertyHandler().setCallback(this, parent.getId(), rejectCallback, rejectCallbackProxy.getProxy());
+		getRejectedPropertyHandler().setCallback(this, ZoomPlugin.ID, rejectCallback, rejectCallbackProxy.getProxy());
 	}
 
 	/**

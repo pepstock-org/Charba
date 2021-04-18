@@ -509,7 +509,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param backgroundColorCallback to set the color of the background of annotation
 	 */
 	public void setBackgroundColor(ColorCallback<AnnotationContext> backgroundColorCallback) {
-		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
+		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -528,7 +528,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param radiusCallback to set the radius
 	 */
 	public void setRadius(RadiusCallback<AnnotationContext> radiusCallback) {
-		RADIUS_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, radiusCallback, radiusCallbackProxy.getProxy());
+		RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, radiusCallback, radiusCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -547,7 +547,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param valueCallback to set the data X value to draw the line at
 	 */
 	public void setXValue(ValueCallback valueCallback) {
-		X_VALUE_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, xValueCallbackProxy.getProxy());
+		X_VALUE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, xValueCallbackProxy.getProxy());
 	}
 	
 	/**
@@ -566,7 +566,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param valueCallback to set the data Y value to draw the line at
 	 */
 	public void setYValue(ValueCallback valueCallback) {
-		Y_VALUE_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, yValueCallbackProxy.getProxy());
+		Y_VALUE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yValueCallbackProxy.getProxy());
 	}
 
 }

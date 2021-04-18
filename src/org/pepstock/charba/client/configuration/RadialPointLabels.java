@@ -96,7 +96,6 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	// color callback instance
 	private ColorCallback<ScaleContext> backdropColorCallback = null;
 
-	// FIXME must be reset when callback will be removed
 	// font instance
 	private final Font font;
 	// padding instance

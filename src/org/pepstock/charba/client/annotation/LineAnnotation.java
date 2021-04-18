@@ -403,7 +403,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param valueCallback to set the left edge of the box, in units along the x axis
 	 */
 	public void setValue(ValueCallback valueCallback) {
-		VALUE_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, valueCallbackProxy.getProxy());
+		VALUE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, valueCallbackProxy.getProxy());
 	}
 
 	/**
@@ -422,7 +422,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param valueCallback to set the data value at which the line draw should end
 	 */
 	public void setEndValue(ValueCallback valueCallback) {
-		END_VALUE_PROPERTY_HANDLER.setCallback(this, PLUGIN_SCOPE, valueCallback, endValueCallbackProxy.getProxy());
+		END_VALUE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, endValueCallbackProxy.getProxy());
 	}
 
 }
