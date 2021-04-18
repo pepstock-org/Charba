@@ -85,7 +85,7 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	ScaleTitle(AbstractScale scale, Key childKey, IsDefaultScaleTitle defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub element
-		this.padding = new Padding(this, Property.PADDING, getDefaultValues().getPadding(), getValue(Property.PADDING), getValue(Property.PADDING, UndefinedValues.INTEGER));
+		this.padding = loadPadding(Property.PADDING, getDefaultValues().getPadding());
 		// creates font container
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
 	}

@@ -23,6 +23,7 @@ package org.pepstock.charba.client.configuration;
  */
 public class Layout extends ConfigurationOptionsContainer {
 
+	// instance of padding
 	private final Padding padding;
 
 	/**

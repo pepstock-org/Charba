@@ -19,6 +19,8 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Base class for all options, which will wraps a native object and manages the relations about parent and children elements.<br>
@@ -132,5 +134,27 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Ab
 	 */
 	protected final void resetCallbackToModel(AbstractNode model, Key key, AbstractNode options) {
 		resetInternalCallbackToModel(model, key, options);
+	}
+	
+	/**
+	 * Loads the padding size or object from the abstract model, replacing the property, if is a number, with the object which is returned.
+	 * 
+	 * @param property property where the padding is stored inside the model.
+	 * @param defaultPadding default padding instance
+	 * @return a padding object, attached to this model
+	 */
+	protected final Padding loadPadding(Key property, IsDefaultPadding defaultPadding) {
+		// checks key
+		Key.checkIfValid(property);
+		// loads padding as number
+		int paddingSize = getValue(property, UndefinedValues.INTEGER);
+		// checks if padding is a number
+		if (paddingSize != UndefinedValues.INTEGER) {
+			// removes the current node
+			// because it must update in an object
+			remove(property);
+		}
+		// loads and returns the padding
+		return new Padding(this, property, defaultPadding, getValue(property), paddingSize);
 	}
 }

@@ -18,7 +18,6 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLayout;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * The layout configuration is needed to set the padding.
@@ -71,8 +70,8 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	 */
 	Layout(Options options, Key childKey, IsDefaultLayout defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
-		// gets sub element
-		this.padding = new Padding(this, Property.PADDING, defaultValues.getPadding(), getValue(Property.PADDING), getValue(Property.PADDING, UndefinedValues.INTEGER));
+		// loads the padding
+		this.padding = loadPadding(Property.PADDING, getDefaultValues().getPadding());
 	}
 
 	/**
