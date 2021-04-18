@@ -171,6 +171,9 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	 * @param color font color.
 	 */
 	public void setColor(String color) {
+		// resets callback
+		setColor((ColorCallback<ScaleContext>)null);
+		// stores the value
 		getConfiguration().setColor(color);
 	}
 
@@ -238,7 +241,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	 * @param color the text stroke color
 	 */
 	public void setTextStrokeColor(IsColor color) {
-		getConfiguration().setTextStrokeColor(color);
+		setTextStrokeColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**
@@ -247,6 +250,9 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	 * @param color the text stroke color.
 	 */
 	public void setTextStrokeColor(String color) {
+		// resets callback
+		setTextStrokeColor((ColorCallback<ScaleContext>)null);
+		// stores the value
 		getConfiguration().setTextStrokeColor(color);
 	}
 
@@ -274,6 +280,10 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	 * @param textStrokeWidth the text stroke width.
 	 */
 	public void setTextStrokeWidth(int textStrokeWidth) {
+		// resets callback
+		setTextStrokeWidth((WidthCallback<ScaleContext>)null);
+		// stores the value
+
 		getConfiguration().setTextStrokeWidth(textStrokeWidth);
 	}
 
@@ -368,7 +378,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	 * 
 	 * @param textStrokeColorCallback the text stroke color callback to set
 	 */
-	public void setTextStrokeColorCallback(ColorCallback<ScaleContext> textStrokeColorCallback) {
+	public void setTextStrokeColor(ColorCallback<ScaleContext> textStrokeColorCallback) {
 		// sets the callback
 		this.textStrokeColorCallback = textStrokeColorCallback;
 		// checks if callback is consistent
@@ -386,7 +396,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	 * 
 	 * @param textStrokeWidthCallback the text stroke width callback to set
 	 */
-	public void setTextStrokeWidthCallback(WidthCallback<ScaleContext> textStrokeWidthCallback) {
+	public void setTextStrokeWidth(WidthCallback<ScaleContext> textStrokeWidthCallback) {
 		// sets the callback
 		this.textStrokeWidthCallback = textStrokeWidthCallback;
 		// checks if callback is consistent

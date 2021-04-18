@@ -248,6 +248,9 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * @param offset the arc offset
 	 */
 	public void setOffset(int... offset) {
+		// resets callback
+		setOffset((OffsetCallback<DatasetContext>)null);
+		// stores the value
 		setValueOrArray(Property.OFFSET, offset);
 	}
 
@@ -274,6 +277,9 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * @param offset the arc offset, when dataset if hovered
 	 */
 	public void setHoverOffset(int... offset) {
+		// resets callback
+		setHoverOffset((OffsetCallback<DatasetContext>)null);
+		// stores the value
 		setValueOrArray(Property.HOVER_OFFSET, offset);
 	}
 
@@ -300,6 +306,9 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * @param borderRadius the arc border radius (in pixels).
 	 */
 	public void setBorderRadius(int... borderRadius) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback)null);
+		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius);
 	}
 
@@ -309,6 +318,9 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * @param borderRadius the arc border radius (in pixels).
 	 */
 	public void setBorderRadius(ArcBorderRadius... borderRadius) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback)null);
+		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius);
 	}
 
@@ -318,6 +330,9 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * @param borderRadius the arc border radius (in pixels).
 	 */
 	public void setBorderRadius(List<ArcBorderRadius> borderRadius) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback)null);
+		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius, BORDER_RADIUS_EMPTY_ARRAY);
 	}
 

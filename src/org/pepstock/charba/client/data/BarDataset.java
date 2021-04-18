@@ -450,6 +450,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	@Override
 	public void setBorderWidth(int... borderWidth) {
+		// resets callback
+		setBorderWidth((BarBorderWidthCallback)null);
+		// stores value
 		borderItemsHandler.setBorderItem(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, borderWidth);
 	}
 
@@ -459,6 +462,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderWidth the stroke width of the bar in pixels.
 	 */
 	public void setBorderWidth(BarBorderWidth... borderWidth) {
+		// resets callback
+		setBorderWidth((BarBorderWidthCallback)null);
+		// stores value
 		borderItemsHandler.setBorderItem(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, borderWidth);
 	}
 
@@ -468,6 +474,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderWidth the stroke width of the bar in pixels.
 	 */
 	public void setBorderWidth(List<BarBorderWidth> borderWidth) {
+		// resets callback
+		setBorderWidth((BarBorderWidthCallback)null);
+		// stores value
 		borderItemsHandler.setBorderItem(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, borderWidth, BORDER_WIDTH_EMPTY_ARRAY);
 	}
 
@@ -501,6 +510,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	@Override
 	public void setHoverBorderWidth(int... borderWidth) {
+		// resets callback
+		setHoverBorderWidth((BarBorderWidthCallback)null);
+		// stores value
 		borderItemsHandler.setBorderItem(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, borderWidth);
 	}
 
@@ -510,6 +522,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderWidth the stroke width of the bar in pixels, when hovered
 	 */
 	public void setHoverBorderWidth(BarBorderWidth... borderWidth) {
+		// resets callback
+		setHoverBorderWidth((BarBorderWidthCallback)null);
+		// stores value
 		borderItemsHandler.setBorderItem(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, borderWidth);
 	}
 
@@ -519,6 +534,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderWidth the stroke width of the bar in pixels, when hovered
 	 */
 	public void setHoverBorderWidth(List<BarBorderWidth> borderWidth) {
+		// resets callback
+		setHoverBorderWidth((BarBorderWidthCallback)null);
+		// stores value
 		borderItemsHandler.setBorderItem(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, borderWidth, BORDER_WIDTH_EMPTY_ARRAY);
 	}
 
@@ -675,6 +693,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderRadius the bar border radius (in pixels).
 	 */
 	public void setBorderRadius(int... borderRadius) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback)null);
+		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius);
 	}
 
@@ -684,6 +705,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderRadius the bar border radius (in pixels).
 	 */
 	public void setBorderRadius(BarBorderRadius... borderRadius) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback)null);
+		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius);
 	}
 
@@ -693,6 +717,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param borderRadius the bar border radius (in pixels).
 	 */
 	public void setBorderRadius(List<BarBorderRadius> borderRadius) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback)null);
+		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius, BORDER_RADIUS_EMPTY_ARRAY);
 	}
 
