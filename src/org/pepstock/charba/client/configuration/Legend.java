@@ -137,7 +137,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 			// if java script property is missing
 			if (onClickHandlers == 0) {
 				// adds the java script function to catch the event
-				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_CLICK, clickCallbackProxy.getProxy());
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_CLICK, new ConfigurationEnvelop<>(clickCallbackProxy.getProxy()));
 			}
 			// increments amount of handlers
 			onClickHandlers++;
@@ -145,7 +145,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 			// if java script property is missing
 			if (onHoverHandlers == 0) {
 				// adds the java script function to catch the event
-				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_HOVER, hoverCallbackProxy.getProxy());
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_HOVER, new ConfigurationEnvelop<>(hoverCallbackProxy.getProxy()));
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
@@ -153,7 +153,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 			// if java script property is missing
 			if (onLeaveHandlers == 0) {
 				// adds the java script function to catch the event
-				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_LEAVE, leaveCallbackProxy.getProxy());
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_LEAVE, new ConfigurationEnvelop<>(leaveCallbackProxy.getProxy()));
 			}
 			// increments amount of handlers
 			onLeaveHandlers++;
@@ -174,7 +174,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 			// if there is not any handler
 			if (onClickHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_CLICK, null);
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_CLICK, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 			}
 		} else if (event.isRecognize(LegendHoverEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -182,7 +182,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 			// if there is not any handler
 			if (onHoverHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_HOVER, null);
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_HOVER, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 			}
 		} else if (event.isRecognize(LegendLeaveEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -190,7 +190,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 			// if there is not any handler
 			if (onLeaveHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_LEAVE, null);
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_LEAVE, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 			}
 		}
 	}

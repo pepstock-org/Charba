@@ -83,6 +83,9 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	// list of click event handler types
 	private static final List<EventType> CHART_CLICK_TYPES = Collections.unmodifiableList(Arrays.asList(DatasetSelectionEvent.TYPE, ChartClickEvent.TYPE, TitleClickEvent.TYPE, AxisClickEvent.TYPE));
 
+	// instance to reset the callback
+	static final ConfigurationEnvelop<CallbackProxy.Proxy> RESET_CALLBACK_ENVELOP = new ConfigurationEnvelop<>(null, true);
+	
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
@@ -587,7 +590,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any click event handler
 			if (onClickHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(ChartEventProperty.ON_CLICK, clickCallbackProxy.getProxy());
+				getConfiguration().setEvent(ChartEventProperty.ON_CLICK, new ConfigurationEnvelop<>(clickCallbackProxy.getProxy()));
 			}
 			// increments amount of handlers
 			onClickHandlers++;
@@ -614,7 +617,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any hover event handler
 			if (onHoverHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(ChartEventProperty.ON_HOVER, hoverCallbackProxy.getProxy());
+				getConfiguration().setEvent(ChartEventProperty.ON_HOVER, new ConfigurationEnvelop<>(hoverCallbackProxy.getProxy()));
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
@@ -622,7 +625,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any resize event handler
 			if (onResizeHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(ChartEventProperty.ON_RESIZE, resizeCallbackProxy.getProxy());
+				getConfiguration().setEvent(ChartEventProperty.ON_RESIZE, new ConfigurationEnvelop<>(resizeCallbackProxy.getProxy()));
 			}
 			// increments amount of handlers
 			onResizeHandlers++;
@@ -643,7 +646,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any handler
 			if (onClickHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(ChartEventProperty.ON_CLICK, null);
+				getConfiguration().setEvent(ChartEventProperty.ON_CLICK, RESET_CALLBACK_ENVELOP);
 			}
 			// check if a data set selection handler has been removed
 			if (event.isRecognize(DatasetSelectionEvent.TYPE)) {
@@ -670,7 +673,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any handler
 			if (onHoverHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(ChartEventProperty.ON_HOVER, null);
+				getConfiguration().setEvent(ChartEventProperty.ON_HOVER, RESET_CALLBACK_ENVELOP);
 			}
 		} else if (event.isRecognize(ChartResizeEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -678,7 +681,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any handler
 			if (onResizeHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(ChartEventProperty.ON_RESIZE, null);
+				getConfiguration().setEvent(ChartEventProperty.ON_RESIZE, RESET_CALLBACK_ENVELOP);
 			}
 		}
 	}

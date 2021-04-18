@@ -412,10 +412,10 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 		// checks if callback is consistent
 		if (filterCallback != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.FILTER, filterCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.FILTER, new ConfigurationEnvelop<>(filterCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.FILTER, null);
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.FILTER, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 
@@ -439,10 +439,10 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 		// checks if callback is consistent
 		if (labelsCallback != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.GENERATE_LABELS, labelsCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.GENERATE_LABELS, new ConfigurationEnvelop<>(labelsCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.GENERATE_LABELS, null);
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.GENERATE_LABELS, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 
@@ -466,10 +466,10 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 		// checks if callback is consistent
 		if (itemSortCallback != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.SORT, itemSortCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.SORT, new ConfigurationEnvelop<>(itemSortCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.SORT, null);
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.SORT, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 

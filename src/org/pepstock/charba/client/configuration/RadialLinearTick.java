@@ -229,10 +229,10 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		// checks if consistent
 		if (backdropColorCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, backdropColorCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, new ConfigurationEnvelop<>(backdropColorCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, null);
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 
@@ -256,10 +256,10 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		// checks if consistent
 		if (showLabelBackdropCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, showLabelBackdropCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, new ConfigurationEnvelop<>(showLabelBackdropCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, null);
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 

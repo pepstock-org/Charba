@@ -114,22 +114,22 @@ public final class ExtendedScale extends Scale {
 	/**
 	 * This method adds new callback function proxy to the element, as property of native java script object.
 	 * 
-	 * @param property property name.
-	 * @param proxy function proxy to activate.
+	 * @param property property name
+	 * @param envelop contains the function proxy to activate
 	 */
-	public void setCallback(Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(this, property, proxy);
+	public void setCallback(Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setCallbackToModel(this, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
 	 * Adds a callback proxy function to a element node instance.
 	 *
-	 * @param node element node instance.
-	 * @param property property name.
-	 * @param proxy function proxy to activate.
+	 * @param node element node instance
+	 * @param property property name
+	 * @param envelop contains the function proxy to activate
 	 */
-	public void setCallback(AbstractNode node, Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(node, property, proxy);
+	public void setCallback(AbstractNode node, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setCallbackToModel(node, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 }

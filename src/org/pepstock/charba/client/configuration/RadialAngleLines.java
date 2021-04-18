@@ -245,10 +245,10 @@ public class RadialAngleLines extends AbstractScaleLines {
 		// checks if callback is consistent
 		if (borderDashCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getAngleLines(), Property.BORDER_DASH, borderDashCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getAngleLines(), Property.BORDER_DASH, new ConfigurationEnvelop<>(borderDashCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getAngleLines(), Property.BORDER_DASH, null);
+			getAxis().getConfiguration().setCallback(getAxis().getScale().getAngleLines(), Property.BORDER_DASH, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 

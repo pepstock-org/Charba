@@ -138,10 +138,10 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// checks if consistent
 		if (colorCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.COLOR, colorCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.COLOR, new ConfigurationEnvelop<>(colorCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.COLOR, null);
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.COLOR, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 
@@ -165,10 +165,10 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// checks if consistent
 		if (lineWidthCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.LINE_WIDTH, lineWidthCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.LINE_WIDTH, new ConfigurationEnvelop<>(lineWidthCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.LINE_WIDTH, null);
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.LINE_WIDTH, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 
@@ -192,10 +192,10 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// checks if consistent
 		if (borderDashOffsetCallback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, new ConfigurationEnvelop<>(borderDashOffsetCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, null);
+			getAxis().getConfiguration().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 

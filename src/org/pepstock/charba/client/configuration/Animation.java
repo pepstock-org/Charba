@@ -201,7 +201,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	@Override
 	public void setEasing(Easing easing) {
 		// resets callback
-		setEasing((EasingCallback)null);
+		setEasing((EasingCallback) null);
 		// sets value
 		checkAndGet().setEasing(easing);
 	}
@@ -324,7 +324,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	public boolean isLoop() {
 		return checkAndGet().isLoop();
 	}
-	
+
 	/**
 	 * Returns the callback to set the number of milliseconds an animation takes.
 	 * 
@@ -345,10 +345,10 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 		// checks if callback is consistent
 		if (durationCallback != null) {
 			// adds the callback proxy function to java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DURATION, durationCallbackProxy.getProxy());
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DURATION, new ConfigurationEnvelop<>(durationCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DURATION, null);
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DURATION, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 
@@ -372,10 +372,10 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 		// checks if callback is consistent
 		if (delayCallback != null) {
 			// adds the callback proxy function to java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DELAY, delayCallbackProxy.getProxy());
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DELAY, new ConfigurationEnvelop<>(delayCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DELAY, null);
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DELAY, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 
@@ -399,13 +399,13 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 		// checks if callback is consistent
 		if (loopCallback != null) {
 			// adds the callback proxy function to java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.LOOP, loopCallbackProxy.getProxy());
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.LOOP, new ConfigurationEnvelop<>(loopCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.LOOP, null);
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.LOOP, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
-	
+
 	/**
 	 * Returns the callback to set the animation easing.
 	 * 
@@ -426,13 +426,13 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 		// checks if callback is consistent
 		if (easingCallback != null) {
 			// adds the callback proxy function to java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.EASING, easingCallbackProxy.getProxy());
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.EASING, new ConfigurationEnvelop<>(easingCallbackProxy.getProxy()));
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.EASING, null);
+			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.EASING, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -445,7 +445,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 			// checks if property exist
 			if (onCompleteHandlers == 0) {
 				// sets the java script code to get the event
-				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_COMPLETE, completeCallbackProxy.getProxy());
+				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_COMPLETE, new ConfigurationEnvelop<>(completeCallbackProxy.getProxy()));
 			}
 			// increments amount of handlers
 			onCompleteHandlers++;
@@ -453,7 +453,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 			// checks if property exist
 			if (onProgressHandlers == 0) {
 				// sets the java script code to get the event
-				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_PROGRESS, progressCallbackProxy.getProxy());
+				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_PROGRESS, new ConfigurationEnvelop<>(progressCallbackProxy.getProxy()));
 			}
 			// increments amount of handlers
 			onProgressHandlers++;
@@ -474,7 +474,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 			// if zero, no handler
 			if (onCompleteHandlers == 0) {
 				// therefore remove property
-				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_COMPLETE, null);
+				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_COMPLETE, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 			}
 		} else if (event.isRecognize(AnimationProgressEvent.TYPE)) {
 			// decrements amount of handlers
@@ -482,7 +482,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 			// if zero, no handler
 			if (onProgressHandlers == 0) {
 				// therefore remove property
-				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_PROGRESS, null);
+				this.chart.getOptions().getConfiguration().setEvent(options.getAnimation(), Property.ON_PROGRESS, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 			}
 		}
 	}

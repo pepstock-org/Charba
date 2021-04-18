@@ -116,30 +116,20 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * This method adds new event function proxy to the element, as property of native java script object.
 	 * 
 	 * @param property property name.
-	 * @param proxy function proxy to activate.
+	 * @param envelop contains the function proxy to activate.
 	 */
-	public void setEvent(Key property, CallbackProxy.Proxy proxy) {
-		setEventToModel(this, property, proxy);
+	public void setEvent(Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setEventToModel(this, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
 	 * This method adds new callback function proxy to the element, as property of native java script object.
 	 * 
 	 * @param property property name.
-	 * @param proxy function proxy to activate.
+	 * @param envelop contains the function proxy to activate.
 	 */
-	public void setCallback(Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(this, property, proxy);
-	}
-
-	/**
-	 * This method adds new callback function proxy to the element, as property of native java script object.
-	 * 
-	 * @param property property name.
-	 * @param options function proxy to activate.
-	 */
-	public void resetCallback(Key property, Animation options) {
-		resetCallbackToModel(this, property, options);
+	public void setCallback(Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setCallbackToModel(this, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -147,10 +137,10 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * 
 	 * @param animation animation element instance.
 	 * @param property property name.
-	 * @param proxy function proxy to activate.
+	 * @param envelop contains the function proxy to activate.
 	 */
-	public void setCallback(Animation animation, Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(animation, property, proxy);
+	public void setCallback(Animation animation, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setCallbackToModel(animation, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -158,10 +148,10 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * 
 	 * @param animation animation element instance.
 	 * @param property property name.
-	 * @param proxy function proxy to activate.
+	 * @param envelop contains the function proxy to activate.
 	 */
-	public void setEvent(Animation animation, Key property, CallbackProxy.Proxy proxy) {
-		setEventToModel(animation, property, proxy);
+	public void setEvent(Animation animation, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setEventToModel(animation, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -169,10 +159,10 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * 
 	 * @param legend legend element instance
 	 * @param property property name.
-	 * @param proxy function proxy to activate.
+	 * @param envelop contains the function proxy to activate.
 	 */
-	public void setEvent(Legend legend, Key property, CallbackProxy.Proxy proxy) {
-		setEventToModel(legend, property, proxy);
+	public void setEvent(Legend legend, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setEventToModel(legend, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -180,10 +170,10 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * 
 	 * @param labels legend labels element instance.
 	 * @param property property name.
-	 * @param proxy function proxy to activate.
+	 * @param envelop contains the function proxy to activate.
 	 */
-	public void setCallback(LegendLabels labels, Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(labels, property, proxy);
+	public void setCallback(LegendLabels labels, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setCallbackToModel(labels, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -191,10 +181,10 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * 
 	 * @param tooltips tooltips element instance.
 	 * @param property property name.
-	 * @param proxy function proxy to activate.
+	 * @param envelop contains the function proxy to activate.
 	 */
-	public void setCallback(Tooltips tooltips, Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(tooltips, property, proxy);
+	public void setCallback(Tooltips tooltips, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setCallbackToModel(tooltips, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -202,10 +192,10 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * 
 	 * @param tooltips tooltips callbacks element instance.
 	 * @param property property name.
-	 * @param proxy function proxy to activate.
+	 * @param envelop contains the function proxy to activate.
 	 */
-	public void setCallback(TooltipsCallbacks tooltips, Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(tooltips, property, proxy);
+	public void setCallback(TooltipsCallbacks tooltips, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setCallbackToModel(tooltips, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 }
