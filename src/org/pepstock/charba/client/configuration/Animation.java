@@ -224,7 +224,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	@Override
 	public void setDuration(int milliseconds) {
 		// resets callback
-		setDuration((DurationCallback)null);
+		setDuration(null);
 		// sets value
 		checkAndGet().setDuration(milliseconds);
 	}
@@ -287,7 +287,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	@Override
 	public void setDelay(int delay) {
 		// resets callback
-		setDelay((DelayCallback)null);
+		setDelay(null);
 		// sets value
 		checkAndGet().setDelay(delay);
 	}
@@ -310,7 +310,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	@Override
 	public void setLoop(boolean loop) {
 		// resets callback
-		setLoop((LoopCallback)null);
+		setLoop(null);
 		// sets value
 		checkAndGet().setLoop(loop);
 	}
