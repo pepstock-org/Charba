@@ -16,11 +16,11 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.options.AbstractFont;
-import org.pepstock.charba.client.options.OptionsEnvelop;
+import org.pepstock.charba.client.options.IsFont;
 
 /**
  * Font options to use at chart configuration level for scales.
@@ -36,7 +36,7 @@ public final class FontItem extends AbstractFont {
 	public FontItem() {
 		this(Defaults.get().getGlobal().getFont());
 	}
-
+	
 	/**
 	 * Creates an empty font to use for chart configuration when the font is created by a callback.
 	 * 
@@ -47,14 +47,22 @@ public final class FontItem extends AbstractFont {
 	}
 
 	/**
-	 * Creates a font to use for chart configuration when the font is created by a callback, using a clone of another font object.<br>
-	 * This is called by <code>options</code> packages.
+	 * Creates an font using another font as source, cloning it.
 	 * 
-	 * @param defaultValues default provider
-	 * @param envelop envelop with native object to map java script properties
+	 * @param font font instance, source for this object
 	 */
-	public FontItem(IsDefaultFont defaultValues, OptionsEnvelop<NativeObject> envelop) {
-		super(defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	public FontItem(IsFont font) {
+		this(font, Defaults.get().getGlobal().getFont());
+	}
+
+	/**
+	 * Creates an font using another font as source, cloning it.
+	 * 
+	 * @param font font instance, source for this object
+	 * @param defaultValues default provider
+	 */
+	public FontItem(IsFont font, IsDefaultFont defaultValues) {
+		super(defaultValues, font != null ? Helpers.get().clone(font.create().getNativeObject()) : null);
 	}
 
 	/**

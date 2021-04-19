@@ -43,7 +43,7 @@ import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.AxisItem;
 import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.options.ExtendedScale;
-import org.pepstock.charba.client.options.IsFontProvider;
+import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.ScaleTitle;
@@ -631,19 +631,19 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @param context native object as context
 	 * @param callback callback to invoke
-	 * @param provider font provider instance
+	 * @param font font instance
 	 * @return a native object as font
 	 */
-	final NativeObject onFont(ScaleContext context, FontCallback<ScaleContext> callback, IsFontProvider provider) {
+	final NativeObject onFont(ScaleContext context, FontCallback<ScaleContext> callback, IsFont font) {
 		// gets value
 		FontItem result = ScriptableUtils.getOptionValue(context, callback);
 		// checks if result is consistent
 		if (result != null) {
 			// returns result
 			return result.nativeObject();
-		} else if (provider != null) {
+		} else if (font != null) {
 			// checks if provider is consistent
-			return provider.create().nativeObject();
+			return font.create().nativeObject();
 		}
 		// if here, provider is not consistent
 		// then returns the defaults one

@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -30,7 +29,7 @@ import org.pepstock.charba.client.items.FontItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Font extends AbstractNode implements IsFont, IsFontProvider {
+public final class Font extends AbstractNode implements IsFont {
 
 	// default font values
 	private final IsDefaultFont defaultValues;
@@ -229,10 +228,7 @@ public final class Font extends AbstractNode implements IsFont, IsFontProvider {
 	 */
 	@Override
 	public FontItem create() {
-		// clones the native object of current font
-		NativeObject clonedNativeObject = Helpers.get().clone(nativeObject());
-		// creates a new font options by cloned native object
-		return new FontItem(this, new OptionsEnvelop<>(clonedNativeObject));
+		return new FontItem(this);
 	}
 
 	/**

@@ -17,6 +17,8 @@ package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Interface to define fomt object defaults.
@@ -66,5 +68,41 @@ public interface IsDefaultFont {
 	 * @return the height of an individual line of text as string.
 	 */
 	String getLineHeightAsString();
+	
+	/**
+	 * Creates a font options instance using default or cloning current instance.
+	 * 
+	 * @return a font options instance using default or cloning current instance
+	 */
+	default FontItem create() {
+		// creates new font item
+		FontItem result = new FontItem();
+		// gets size reference
+		int size = getSize();
+		// sets size checking if consistent
+		if (size != UndefinedValues.INTEGER) {
+			result.setSize(size);
+		}
+		// stores style, family and weight
+		result.setStyle(getStyle());
+		result.setFamily(getFamily());
+		result.setWeight(getWeight());
+		// gets line height reference
+		String lineHeightAsSttring = getLineHeightAsString();
+		// sets line height checking if consistent
+		if (lineHeightAsSttring != null) {
+			result.setLineHeight(lineHeightAsSttring);
+		} else {
+			// if here the line height could a number
+			// gets line height reference
+			double lineHeight = getLineHeight();
+			// sets line height checking if consistent
+			if (!Double.isNaN(lineHeight)) {
+				result.setLineHeight(lineHeight);
+			}
+		}
+		// returns font item
+		return result;
+	}
 
 }
