@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.globals;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 
 /**
  * CHART.JS default values for LEGENDTITLE element.
@@ -31,6 +32,8 @@ public final class DefaultLegendTitle implements IsDefaultLegendTitle {
 	private static final boolean DEFAULT_DISPLAY = false;
 
 	private final DefaultRoutedFont font = new DefaultRoutedFont();
+
+	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);
 
 	/**
 	 * To avoid any instantiation
@@ -62,11 +65,11 @@ public final class DefaultLegendTitle implements IsDefaultLegendTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.legend.labels.IsDefaultLegendLabels#getPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendTitle#getPadding()
 	 */
 	@Override
-	public int getPadding() {
-		return DEFAULT_PADDING;
+	public IsDefaultPadding getPadding() {
+		return padding;
 	}
 
 	/*

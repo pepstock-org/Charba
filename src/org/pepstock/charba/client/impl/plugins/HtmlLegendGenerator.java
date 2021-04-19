@@ -66,16 +66,29 @@ import org.pepstock.charba.client.utils.Utilities;
  * &lt;TABLE&gt;
  *   &lt;TR&gt;
  *     &lt;TD&gt;
- *       &lt;DIV legend title&gt;
+ *       &lt;TABLE&gt;
+ *         &lt;TR&gt;
+ *           &lt;TD&gt;
+ *             &lt;DIV legend title&gt;
+ *           &lt;/TD&gt;
+ *         &lt;/TR&gt;
+ *       &lt;/TABLE&gt;
  *     &lt;/TD&gt;
+ *   &lt;/TR&gt;
  *   &lt;TR&gt;
  *     &lt;TD&gt;
- *       &lt;DIV color for legend item&gt;
- *       &lt;DIV label for legend item&gt;
- *     &lt;/TD&gt;
- *     &lt;TD&gt;
- *       &lt;DIV color for legend item&gt;
- *       &lt;DIV label for legend item&gt;
+ *       &lt;TABLE&gt;
+ *         &lt;TR&gt;
+ *           &lt;TD&gt;
+ *             &lt;DIV color for legend item&gt;
+ *             &lt;DIV label for legend item&gt;
+ *           &lt;/TD&gt;
+ *           &lt;TD&gt;
+ *             &lt;DIV color for legend item&gt;
+ *             &lt;DIV label for legend item&gt;
+ *           &lt;/TD&gt;
+ *         &lt;/TR&gt;
+ *       &lt;/TABLE&gt;
  *     &lt;/TD&gt;
  *   &lt;/TR&gt;
  * &lt;/TABLE&gt;
@@ -133,10 +146,31 @@ final class HtmlLegendGenerator {
 		// gets legend and legend labels instances
 		final LegendLabels legendLabels = legend.getLabels();
 		// creates table as result
+		final Table mainTable = DOMBuilder.get().createTableElement();
+		// its has got only 1 colum and 2 row
+		// title - table
+		// legendItem - table
+		// manages finally the legend title
+		final Table titleTable = buildTitleCell(chart, legend, options.getLegendTitleCallback());
+		// checks if title is consistent
+		if (titleTable != null) {
+			// title row for title
+			TableRow titleRow = DOMBuilder.get().createTableRowElement();
+			// adds to title row
+			mainTable.appendChild(titleRow);
+			// title column
+			TableCell titleCell = DOMBuilder.get().createTableCellElement();
+			// adds to title
+			titleRow.appendChild(titleCell);
+			// adds title table column
+			titleCell.appendChild(titleTable);
+		}
+		// creates table as result
 		final Table table = DOMBuilder.get().createTableElement();
 		// resets padding and spacing
 		table.setCellPadding(String.valueOf(0));
 		table.setCellSpacing(String.valueOf(0));
+		table.getStyle().setBorderSpacing(Unit.PX.format(0));
 		// sets horizontal alignment
 		table.setAlign(legend.getAlign().getHorizontalAlignmentValue());
 		// retrieves the list of legend items
@@ -152,8 +186,6 @@ final class HtmlLegendGenerator {
 			}
 			// sets index to check when to have more lines
 			int index = 0;
-			// amount of columns of table
-			int columns = 0;
 			// instance of current row
 			// where adds new columns for each legend
 			TableRow current = null;
@@ -164,8 +196,6 @@ final class HtmlLegendGenerator {
 				// checks if new row must be created
 				// checking max legend items per row
 				if (index % maxColumns == 0) {
-					// stores the index in the column
-					columns = index;
 					// new row
 					TableRow newRow = DOMBuilder.get().createTableRowElement();
 					// appends to table
@@ -186,10 +216,24 @@ final class HtmlLegendGenerator {
 				// increments the amount of legend item index
 				index++;
 			}
-			// manages finally the legend title
-			buildTitleCell(chart, legend, table, columns == 0 ? index : columns, options.getLegendTitleCallback());
 		}
-		// returns the legend
+		// checks if to return the table with title or not
+		if (titleTable != null) {
+			// legend items row 
+			TableRow legendItemsRow = DOMBuilder.get().createTableRowElement();
+			// adds to legend items
+			mainTable.appendChild(legendItemsRow);
+			// legend items column
+			TableCell legendItemsCell = DOMBuilder.get().createTableCellElement();
+			// adds to tile
+			legendItemsRow.appendChild(legendItemsCell);
+			// adds legends items
+			legendItemsCell.appendChild(table);
+			// returns the legend
+			return mainTable;
+		}
+		// if here, the title is not present
+		// then returns ONLY the table of legend items
 		return table;
 	}
 
@@ -198,29 +242,28 @@ final class HtmlLegendGenerator {
 	 * 
 	 * @param chart chart instance related to legend to build
 	 * @param legend configuration legend instance
-	 * @param table HTML table that represents the legend
-	 * @param columns amount of columns to legend
 	 * @param callback callback instance which can be implemented to change the text of legend's title, as HTML
+	 * @return the table element which contains the title or <code>null</code> if the title is not displayed
 	 */
-	private void buildTitleCell(IsChart chart, Legend legend, Table table, int columns, HtmlLegendTitleCallback callback) {
+	private Table buildTitleCell(IsChart chart, Legend legend, HtmlLegendTitleCallback callback) {
 		// checks if the title must be shown
 		if (legend.getTitle().isDisplay()) {
+			// creates table as result
+			Table tableTitle = DOMBuilder.get().createTableElement();
 			// legend title
 			LegendTitle title = legend.getTitle();
 			// instance of title row
 			// new row
 			TableRow titleRow = DOMBuilder.get().createTableRowElement();
 			// appends to table
-			table.insertBefore(titleRow, table.getFirstChild());
+			tableTitle.appendChild(titleRow);
 			// result title cell
 			TableCell titleCell = DOMBuilder.get().createTableCellElement();
 			titleRow.appendChild(titleCell);
-			// colspan because I have got more columns
-			titleCell.setColSpan(columns * 2);
 			titleCell.setAlign(TextAlign.CENTER.value());
 			titleCell.setVAlign(TextBaseline.MIDDLE.value());
-			titleCell.getStyle().setPaddingTop(Unit.PX.format(title.getPadding()));
-			titleCell.getStyle().setPaddingBottom(Unit.PX.format(title.getPadding()));
+			titleCell.getStyle().setPaddingTop(Unit.PX.format(title.getPadding().getTop()));
+			titleCell.getStyle().setPaddingBottom(Unit.PX.format(title.getPadding().getBottom()));
 			// creates inner HTML element
 			// where to apply the title
 			Div titleText = legendTitleTextGenerator.createTextElement(chart, title, callback);
@@ -234,7 +277,12 @@ final class HtmlLegendGenerator {
 			} else {
 				titleText.getStyle().setDirection(TextDirection.LEFT_TO_RIGHT.value());
 			}
+			// returns the table of the title
+			return tableTitle;
 		}
+		// title is not displayed
+		// the returns null
+		return null;
 	}
 
 	/**
@@ -323,6 +371,7 @@ final class HtmlLegendGenerator {
 		colorCell.getStyle().setMarginRight(Unit.PX.format(legendLabels.getPadding() / 2D));
 		colorCell.getStyle().setMarginBottom(Unit.PX.format(legendLabels.getPadding()));
 		colorCell.getStyle().setDisplay(Display.BLOCK);
+		colorCell.getStyle().setBorderSpacing(Unit.PX.format(0));
 		// creates inner HTML element
 		// where to apply the color
 		Div color = DOMBuilder.get().createDivElement();

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 
 /**
  * Defaults for legend title option element, based on chart type.
@@ -49,6 +50,16 @@ public final class DefaultChartLegendTitle implements IsDefaultLegendTitle {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendTitle#getPadding()
+	 */
+	@Override
+	public IsDefaultPadding getPadding() {
+		return legendTitle.getPadding();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendTitle#getColorAsString()
 	 */
 	@Override
@@ -64,16 +75,6 @@ public final class DefaultChartLegendTitle implements IsDefaultLegendTitle {
 	@Override
 	public boolean isDisplay() {
 		return legendTitle.isDisplay();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendTitle#getPadding()
-	 */
-	@Override
-	public int getPadding() {
-		return legendTitle.getPadding();
 	}
 
 }

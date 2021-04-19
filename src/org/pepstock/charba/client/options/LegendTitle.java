@@ -62,6 +62,8 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 
 	// instance of font container
 	private final FontContainer fontContainer;
+	// instance of padding
+	private final Padding padding;
 	// legend text handler instance
 	private final LegendTextHandler legendTextHandler;
 
@@ -79,6 +81,7 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 		this.fontContainer = new FontContainer(this, getDefaultValues(), getNativeObject());
 		// creates the legend text handler
 		this.legendTextHandler = new LegendTextHandler(this, new OptionsEnvelop<>(getNativeObject()));
+		this.padding = loadPadding(Property.PADDING, getDefaultValues().getPadding());
 	}
 
 	/*
@@ -100,6 +103,16 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	public LegendTextHandler getLegendTextHandler() {
 		return legendTextHandler;
 	}
+	
+	/**
+	 * Returns the padding to apply around labels. Only top and bottom are implemented.
+	 * 
+	 * @return padding to apply around labels. Only top and bottom are implemented.
+	 */
+	@Override
+	public Padding getPadding() {
+		return padding;
+	}
 
 	/**
 	 * Sets <code>true</code> if the title is shown.
@@ -118,25 +131,6 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	@Override
 	public boolean isDisplay() {
 		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
-	}
-
-	/**
-	 * Sets the padding to apply around title.
-	 * 
-	 * @param padding padding to apply around title.
-	 */
-	public void setPadding(int padding) {
-		setValueAndAddToParent(Property.PADDING, padding);
-	}
-
-	/**
-	 * Returns the padding to apply around labels. Only top and bottom are implemented.
-	 * 
-	 * @return padding to apply around labels. Only top and bottom are implemented.
-	 */
-	@Override
-	public int getPadding() {
-		return getValue(Property.PADDING, getDefaultValues().getPadding());
 	}
 
 }

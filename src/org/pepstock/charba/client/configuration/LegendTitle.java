@@ -33,6 +33,8 @@ public class LegendTitle extends ConfigurationOptionsContainer implements HasLeg
 
 	// font instance
 	private final Font font;
+	// instance of padding
+	private final Padding padding;
 
 	/**
 	 * Builds the object storing the chart instance and the root options element.
@@ -43,6 +45,7 @@ public class LegendTitle extends ConfigurationOptionsContainer implements HasLeg
 		super(options);
 		// get embedded elements
 		this.font = new Font(() -> getConfiguration().getLegend().getTitle().getFont());
+		this.padding = new Padding(() -> getConfiguration().getLegend().getTitle().getPadding());
 	}
 
 	/*
@@ -53,6 +56,15 @@ public class LegendTitle extends ConfigurationOptionsContainer implements HasLeg
 	@Override
 	public LegendTextHandler getLegendTextHandler() {
 		return getConfiguration().getLegend().getTitle().getLegendTextHandler();
+	}
+	
+	/**
+	 * Returns the padding element.
+	 * 
+	 * @return the padding
+	 */
+	public Padding getPadding() {
+		return padding;
 	}
 
 	/**
@@ -116,24 +128,6 @@ public class LegendTitle extends ConfigurationOptionsContainer implements HasLeg
 	 */
 	public boolean isDisplay() {
 		return getConfiguration().getLegend().getTitle().isDisplay();
-	}
-
-	/**
-	 * Sets the padding to apply around title.
-	 * 
-	 * @param padding padding to apply around title.
-	 */
-	public void setPadding(int padding) {
-		getConfiguration().getLegend().getTitle().setPadding(padding);
-	}
-
-	/**
-	 * Returns the padding to apply around labels. Only top and bottom are implemented.
-	 * 
-	 * @return padding to apply around labels. Only top and bottom are implemented.
-	 */
-	public int getPadding() {
-		return getConfiguration().getLegend().getTitle().getPadding();
 	}
 
 	/**

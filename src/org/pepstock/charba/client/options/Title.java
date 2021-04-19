@@ -94,6 +94,7 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	public FontContainer getFontContainer() {
 		return fontContainer;
 	}
+	
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 

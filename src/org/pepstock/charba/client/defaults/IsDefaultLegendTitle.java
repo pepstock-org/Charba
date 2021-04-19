@@ -35,6 +35,6 @@ public interface IsDefaultLegendTitle extends IsDefaultFontContainer {
 	 * 
 	 * @return Padding to apply around title.
 	 */
-	int getPadding();
+	IsDefaultPadding getPadding();
 
 }
