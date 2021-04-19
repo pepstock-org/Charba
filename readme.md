@@ -247,6 +247,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `radius` and `radiusPercentage` properties in the options and configuration classes, for pie and doughnut charts.
  * add `resizeDelay` property to options and configuration.
  * add `setX` and `setY` methods to `IsPadding` interface as shortcut to set X (left, right) and Y (top, bottom) dimensions.
+ * add `color`, `borderColor`, `backgroundColor` and `font` properties to configuration of a single chart.
 
 ### _Scales_
 

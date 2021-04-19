@@ -105,6 +105,13 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	 * @return the plugins defaults.
 	 */
 	IsDefaultDatasets getDatasets();
+	
+	/**
+	 * Returns the font element.
+	 * 
+	 * @return the font
+	 */
+	IsDefaultFont getFont();
 
 	/**
 	 * Returns the browser events that the chart should listen to.

@@ -26,7 +26,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
@@ -199,7 +198,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		this.interaction = new Interaction(this, Property.INTERACTION, getDefaultValues().getInteraction(), getValue(Property.INTERACTION));
 		this.layout = new Layout(this, Property.LAYOUT, getDefaultValues().getLayout(), getValue(Property.LAYOUT));
 		this.plugins = new Plugins(this, Property.PLUGINS, getDefaultValues().getPlugins(), getValue(Property.PLUGINS));
-		this.font = new Font(this, Property.FONT, DefaultsBuilder.get().getOptions().getDefaultsFont(), getValue(Property.FONT));
+		this.font = new Font(this, Property.FONT, getDefaultValues().getFont(), getValue(Property.FONT));
 		this.datasets = new Datasets(this, Property.DATASETS, getDefaultValues().getDatasets(), getValue(Property.DATASETS));
 		// sets span gap handler
 		this.spanGapHandler = new SpanGapHandler(this, getDefaultValues(), getNativeObject());
@@ -219,12 +218,12 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Returns the font element.<br>
-	 * It contains the global defaults for font.
+	 * Returns the font element.
 	 * 
 	 * @return the font
 	 */
-	protected final Font getDefaultsFont() {
+	@Override
+	public final Font getFont() {
 		return font;
 	}
 

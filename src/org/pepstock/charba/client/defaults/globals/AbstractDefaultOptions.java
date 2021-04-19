@@ -134,13 +134,13 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.filler = new DefaultChartFiller(options.getFiller());
 	}
 
-	/**
-	 * Returns the font element.<br>
-	 * It contains the global defaults for font.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the font
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getFont()
 	 */
-	public final IsDefaultFont getDefaultsFont() {
+	@Override
+	public IsDefaultFont getFont() {
 		return font;
 	}
 

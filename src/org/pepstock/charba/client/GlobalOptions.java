@@ -21,7 +21,6 @@ import org.pepstock.charba.client.defaults.chart.DefaultGlobalOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.intl.CLocale;
-import org.pepstock.charba.client.options.Font;
 import org.pepstock.charba.client.options.Options;
 import org.pepstock.charba.client.options.Plugins;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -55,16 +54,6 @@ public final class GlobalOptions extends Options {
 		}
 		// stores the plugins wrapper
 		this.plugins = new GlobalPlugins(new ChartEnvelop<>(super.getPlugins()));
-	}
-
-	/**
-	 * Returns the font element.<br>
-	 * It contains the global defaults for font.
-	 * 
-	 * @return the font
-	 */
-	public Font getFont() {
-		return super.getDefaultsFont();
 	}
 
 	/**

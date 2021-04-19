@@ -42,7 +42,7 @@ public class Title extends ConfigurationOptionsContainer {
 	 */
 	Title(ConfigurationOptions options) {
 		super(options);
-		// gets embedded font
+		// gets embedded font and padding
 		this.font = new Font(() -> getConfiguration().getTitle().getFont());
 		this.padding = new Padding(() -> getConfiguration().getTitle().getPadding());
 	}

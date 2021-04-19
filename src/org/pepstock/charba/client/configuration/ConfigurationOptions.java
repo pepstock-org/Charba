@@ -26,6 +26,7 @@ import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -165,6 +166,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private final Plugins plugins;
 	
 	private final Datasets datasets;
+	
+	private final Font font;
 
 	// amount of data set selection event handlers
 	private int onDatasetSelectionHandlers = 0;
@@ -205,6 +208,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		this.plugins = new Plugins(this);
 		this.tooltips = new Tooltips(this);
 		this.filler = new Filler(this);
+		// gets font
+		this.font = new Font(() -> getConfiguration().getFont());
 		// sets charba ID
 		getConfiguration().setCharbaId(chart.getId());
 		// -------------------------------
@@ -375,6 +380,15 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	public Filler getFiller() {
 		return filler;
+	}
+
+	/**
+	 * Returns the font element.
+	 * 
+	 * @return the font element
+	 */
+	public Font getFont() {
+		return font;
 	}
 	
 	/**
@@ -549,6 +563,114 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	public void setDestroyOnDetach(boolean destroyOnDetach) {
 		getConfiguration().setDestroyOnDetach(destroyOnDetach);
+	}
+	
+	/**
+	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param color color to use in the chart.
+	 */
+	public void setColor(IsColor color) {
+		getConfiguration().setColor(color);
+	}
+
+	/**
+	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param color color to use in the chart.
+	 */
+	public void setColor(String color) {
+		getConfiguration().setColor(color);
+	}
+
+	/**
+	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return color to use in the chart.
+	 */
+	public String getColorAsString() {
+		return getConfiguration().getColorAsString();
+	}
+
+	/**
+	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return color to use in the chart.
+	 */
+	public IsColor getColor() {
+		return getConfiguration().getColor();
+	}
+
+	/**
+	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param backgroundColor background color to use in the chart.
+	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		getConfiguration().setBackgroundColor(backgroundColor);
+	}
+
+	/**
+	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param backgroundColor background color to use in the chart.
+	 */
+	public void setBackgroundColor(String backgroundColor) {
+		getConfiguration().setBackgroundColor(backgroundColor);
+	}
+
+	/**
+	 * Returns the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return background color to use in the chart.
+	 */
+	public String getBackgroundColorAsString() {
+		return getConfiguration().getBackgroundColorAsString();
+	}
+
+	/**
+	 * Returns the default background color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return background color to use in the chart.
+	 */
+	public IsColor getBackgroundColor() {
+		return getConfiguration().getBackgroundColor();
+	}
+
+	/**
+	 * Sets the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param borderColor border color to use in the chart.
+	 */
+	public void setBorderColor(IsColor borderColor) {
+		getConfiguration().setBorderColor(borderColor);
+	}
+
+	/**
+	 * Sets the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @param borderColor border color to use in the chart.
+	 */
+	public void setBorderColor(String borderColor) {
+		getConfiguration().setBorderColor(borderColor);
+	}
+
+	/**
+	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return border color to use in the chart.
+	 */
+	public String getBorderColorAsString() {
+		return getConfiguration().getBorderColorAsString();
+	}
+
+	/**
+	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return border color to use in the chart.
+	 */
+	public IsColor getBorderColor() {
+		return getConfiguration().getBorderColor();
 	}
 
 	/**
