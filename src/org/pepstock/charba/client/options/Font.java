@@ -221,14 +221,14 @@ public final class Font extends AbstractNode implements IsFont {
 		return defaultValue;
 	}
 
-	/**
-	 * Creates a font options instance cloning the values of the current font.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a font options instance filled with the values of the current font
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFont#create(org.pepstock.charba.client.defaults.IsDefaultFont)
 	 */
 	@Override
-	public FontItem create() {
-		return new FontItem(this);
+	public FontItem create(IsDefaultFont defaultValues) {
+		return IsFont.super.create(this.defaultValues);
 	}
 
 	/**

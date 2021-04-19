@@ -16,11 +16,9 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.options.AbstractFont;
-import org.pepstock.charba.client.options.IsFont;
 
 /**
  * Font options to use at chart configuration level for scales.
@@ -34,7 +32,7 @@ public final class FontItem extends AbstractFont {
 	 * Creates an empty font to use for chart configuration with global defaults.
 	 */
 	public FontItem() {
-		this(Defaults.get().getGlobal().getFont());
+		this(null);
 	}
 	
 	/**
@@ -43,26 +41,7 @@ public final class FontItem extends AbstractFont {
 	 * @param defaultValues default provider
 	 */
 	public FontItem(IsDefaultFont defaultValues) {
-		super(defaultValues);
-	}
-
-	/**
-	 * Creates an font using another font as source, cloning it.
-	 * 
-	 * @param font font instance, source for this object
-	 */
-	public FontItem(IsFont font) {
-		this(font, Defaults.get().getGlobal().getFont());
-	}
-
-	/**
-	 * Creates an font using another font as source, cloning it.
-	 * 
-	 * @param font font instance, source for this object
-	 * @param defaultValues default provider
-	 */
-	public FontItem(IsFont font, IsDefaultFont defaultValues) {
-		super(defaultValues, font != null ? Helpers.get().clone(font.create().getNativeObject()) : null);
+		super(defaultValues == null ? Defaults.get().getGlobal().getFont() : defaultValues);
 	}
 
 	/**
