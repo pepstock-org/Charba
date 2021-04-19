@@ -179,16 +179,12 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
-	 * Returns the font element.<br>
-	 * <b>Pay attention</b> that if the font callback has been set previously, the method returns <code>null</code>.
+	 * Returns the font element.
 	 * 
-	 * @return the font element.<br>
-	 *         <b>Pay attention</b> that if the font callback has been set previously, the method returns <code>null</code>
+	 * @return the font element
 	 */
 	public Font getFont() {
-		// checks if font is scriptable
-		// otherwise returns null
-		return getFontCallback() == null ? font : null;
+		return font;
 	}
 
 	/**

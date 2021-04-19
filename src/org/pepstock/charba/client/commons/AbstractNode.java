@@ -442,7 +442,10 @@ public abstract class AbstractNode extends NativeObjectContainer {
 			// if not exception
 			throw new IllegalArgumentException("Options model arguments is null");
 		}
-		model.setValueAndAddToParent(key, options);
+		// checks if property is missing
+		if (!has(key)) {
+			model.setValueAndAddToParent(key, options);
+		}
 	}
 
 	/**
