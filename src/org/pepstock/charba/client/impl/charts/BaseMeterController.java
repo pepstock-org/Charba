@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.Controller;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.controllers.AbstractController;
 import org.pepstock.charba.client.controllers.ControllerContext;
@@ -29,11 +28,10 @@ import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -46,9 +44,9 @@ final class BaseMeterController extends AbstractController {
 	// static reference of controller provider for meter charts
 	static final ControllerProvider PROVIDER = new BaseMeterControllerProvier();
 	// default font increment
-	private static final int FONT_SIZE_INCREMENT = 4;
+	private static final int FONT_SIZE_DECREMENT = 4;
 	// minimum font size
-	private static final int MINIMUM_FONT_SIZE = 12;
+	private static final int MINIMUM_FONT_SIZE = 8;
 	// default padding
 	private static final double PADDING = 4D;
 	// max percentage
@@ -219,6 +217,8 @@ final class BaseMeterController extends AbstractController {
 		// calculate the center point of the square
 		final double centerX = (area.getRight() - area.getLeft()) / 2D + area.getLeft();
 		final double centerY = (area.getBottom() - area.getTop()) / 2D + area.getTop();
+		final double x = centerX - (sideOfSquare / 2D);
+		final double y = centerY - (sideOfSquare / 2D);
 		// gets max value
 		final double maxValue = MeterDisplay.PERCENTAGE.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay()) ? MAX_PERCENTAGE : dataset.getMax();
 		// gets value
@@ -230,20 +230,26 @@ final class BaseMeterController extends AbstractController {
 		final String maxValueToShow = getFormattedValue(chart, options, maxValue, 1D);
 		// value to show with format required
 		final String valueToShow = getFormattedValue(chart, options, value, ease);
-		// gets font style
-		final FontStyle style = options.getFontStyle() == null ? FontStyle.NORMAL : options.getFontStyle();
-		// gets font family
-		final String fontFamily = options.getFontFamily() == null ? Defaults.get().getGlobal().getFont().getFamily() : options.getFontFamily();
+		// gets font
+		final FontItem font = options.getFontItem();
 		// gets font color
 		final String fontColor = options.getDisplayFontColor() == null ? MeterOptions.DEFAULT_DISPLAY_COLOR.toRGBA() : options.getDisplayFontColor().toRGBA();
 		// gets the label
 		final String label = dataset.getLabel();
 		// saves context
 		ctx.save();
+		// begins path and clip the area
+		ctx.beginPath();
+		ctx.rect(x, y, sideOfSquare, sideOfSquare);
+		ctx.clip();
+		// clip area
 		// clears the previous label
-		ctx.clearRect(centerX - (sideOfSquare / 2D), centerY - (sideOfSquare / 2D), sideOfSquare, sideOfSquare);
-		// calculates the font size
-		int fontSize = calculateFontSize(ctx, sideOfSquare, maxValueToShow, style, fontFamily);
+		ctx.clearRect(x, y, sideOfSquare, sideOfSquare);
+		// checks if auto font size is set
+		if (options.isAutoFontSize()) {
+			// calculates the font size
+			calculateFontSize(ctx, sideOfSquare, maxValueToShow, font);
+		}
 		// sets color to canvas
 		ctx.setFillColor(fontColor);
 		// sets alignment
@@ -251,14 +257,17 @@ final class BaseMeterController extends AbstractController {
 		// checks if it must draw also the label
 		if ((MeterDisplay.VALUE_AND_LABEL.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay())) && label != null) {
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(style, Weight.NORMAL, fontSize, fontFamily));
+			ctx.setFont(Utilities.toCSSFontProperty(font));
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.BOTTOM);
 			// draws text
 			ctx.fillText(valueToShow, centerX, centerY - PADDING);
-			// re-calculates the font size for label
-			fontSize = calculateFontSize(ctx, sideOfSquare, label, style, fontFamily);
-			ctx.setFont(Utilities.toCSSFontProperty(style, Weight.NORMAL, fontSize, fontFamily));
+			// checks if auto font size is set
+			if (options.isAutoFontSize()) {
+				// re-calculates the font size for label
+				calculateFontSize(ctx, sideOfSquare, label, font);
+			}
+			ctx.setFont(Utilities.toCSSFontProperty(font));
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
@@ -266,7 +275,7 @@ final class BaseMeterController extends AbstractController {
 		} else {
 			// if here it must draw ONLY the value
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(style, Weight.NORMAL, fontSize, fontFamily));
+			ctx.setFont(Utilities.toCSSFontProperty(font));
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.MIDDLE);
 			// draws text
@@ -274,6 +283,11 @@ final class BaseMeterController extends AbstractController {
 		}
 		// restores context
 		ctx.restore();
+		// checks if is the last draw
+		if (ease == 1D) {
+			// reset font item
+			options.resetFontItem();
+		}
 	}
 
 	/**
@@ -282,18 +296,18 @@ final class BaseMeterController extends AbstractController {
 	 * @param ctx canvas context
 	 * @param sideOfSquare side of square
 	 * @param value value to display
-	 * @param style font style
-	 * @param fontFamily font family
-	 * @return the font size to use
+	 * @param font font instance
 	 */
-	private int calculateFontSize(Context2dItem ctx, int sideOfSquare, String value, FontStyle style, String fontFamily) {
+	private void calculateFontSize(Context2dItem ctx, int sideOfSquare, String value, FontItem font) {
 		// half of side of square
 		int fontSize = sideOfSquare / 2;
 		boolean check = true;
 		// loop to calculate the size
 		while (check) {
+			// stores size
+			font.setSize(fontSize);
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(style, Weight.NORMAL, fontSize, fontFamily));
+			ctx.setFont(Utilities.toCSSFontProperty(font));
 			// gets metrics
 			TextMetricsItem metrics = ctx.measureText(value);
 			// if the width is inside of side (and padding) or
@@ -303,11 +317,9 @@ final class BaseMeterController extends AbstractController {
 				check = false;
 			} else {
 				// decrements the font size
-				fontSize = fontSize - FONT_SIZE_INCREMENT;
+				fontSize = fontSize - FONT_SIZE_DECREMENT;
 			}
 		}
-		// returns font size
-		return fontSize;
 	}
 
 	/**

@@ -104,22 +104,33 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 				throw new IllegalArgumentException("Controller stored for " + getControllerType().value() + " is not a " + BaseMeterController.class.getName());
 			}
 		}
+		// gets meter options
+		MeterOptions options;
+		// checks if options a meter on
+		if (getOptions() instanceof MeterOptions) {
+			// cats and store
+			options = (MeterOptions)getOptions();
+		} else {
+			// if here is not a meter options
+			// then exception
+			throw new IllegalArgumentException("Chart options are " + getOptions().getClass().getName() + " and not a " + MeterOptions.class.getName());
+		}
 		// disables legend
-		getOptions().getLegend().setDisplay(false);
+		options.getLegend().setDisplay(false);
 		// disables tooltips
-		getOptions().getTooltips().setEnabled(false);
+		options.getTooltips().setEnabled(false);
 		// disables tooltips external callback
-		getOptions().getTooltips().setExternalCallback(null);
+		options.getTooltips().setExternalCallback(null);
 		// creates a new mode every time
 		// because once it has been added to the options
 		// it could be changed by user
-		AnimationTransition disabledActiveMode = getOptions().getTransitions().create(DefaultTransitionKey.ACTIVE);
+		AnimationTransition disabledActiveMode = options.getTransitions().create(DefaultTransitionKey.ACTIVE);
 		// disables the animation mode
 		disabledActiveMode.getAnimation().setDuration(0);
 		// creates a new mode every time
 		// because once it has been added to the options
 		// it could be changed by user
-		AnimationTransition disabledResizeMode = getOptions().getTransitions().create(DefaultTransitionKey.RESIZE);
+		AnimationTransition disabledResizeMode = options.getTransitions().create(DefaultTransitionKey.RESIZE);
 		// disables the animation mode
 		disabledResizeMode.getAnimation().setDuration(0);
 		// scans all datasets
@@ -129,5 +140,7 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 			// disables animation mode resize
 			dataset.getTransitions().create(DefaultTransitionKey.RESIZE).getAnimation().setDuration(0);
 		}
+		// creates font item
+		options.resetFontItem();
 	}
 }

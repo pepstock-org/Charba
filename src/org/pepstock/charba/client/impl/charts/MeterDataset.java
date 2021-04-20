@@ -72,6 +72,10 @@ public class MeterDataset extends Dataset {
 	 * Minimum value is <b>{@value MINIMUM_VALUE}</b>.
 	 */
 	public static final double MINIMUM_VALUE = 0D;
+	
+	// -------------------------
+	// INSTANCES
+	// -------------------------
 
 	private final double max;
 

@@ -479,12 +479,14 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
    * reduce the visibility of `register` method of `Controller` class   
  * rename `extend` method of `Controllers` class to `register`.
  * change `setHoverStyle` and `removeHoverStyle` methods of `Controller` interface now additionally take the `datasetIndex` and `index` as arguments.
+ * remove `fontFamily` and `fontStyle` properties from meter and gauge options, use `font` instead.
 
 #### Features
  * add `linkScales` and `buildOrUpdateElements` methods to Controller interface in order to have the complete mapping of CHART.JS controller interface.
  * implement easing value management for `Meter` and `Gauge` charts (and their controller) because in the new version of CHART.JS, easing value is not provided anymore.
  * add `ControllerRegistrationHandler` interface to set to a `ControllerType` constructor in order to enable the notification before and after the controller registration to CHART.JS.
-
+ * add `autoFontSize` property to meter and gauge options in order to enable or disable auto calculation of font size and use the font size provided by the user.
+ 
 ### _Callbacks_   
 
 #### Breaking changes

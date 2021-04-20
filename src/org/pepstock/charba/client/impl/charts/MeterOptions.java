@@ -15,14 +15,13 @@
 */
 package org.pepstock.charba.client.impl.charts;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.MeterFormatCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.configuration.AbstractPieOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.items.FontItem;
 
 /**
  * Specific options for METER chart.
@@ -50,19 +49,25 @@ public class MeterOptions extends AbstractPieOptions {
 
 	private static final boolean DEFAULT_ANIMATED_DISPLAY = false;
 
+	private static final boolean DEFAULT_AUTO_FONT_SIZE = true;
+
+	// -------------------------
+	// INSTANCES
+	// -------------------------
+
 	private MeterDisplay display = MeterDisplay.VALUE;
 
 	private int precision = DEFAULT_PRECISION;
-
-	private String fontFamily = Defaults.get().getGlobal().getFont().getFamily();
-
-	private FontStyle fontStyle = FontStyle.NORMAL;
 
 	private IsColor displayFontColor = DEFAULT_DISPLAY_COLOR;
 
 	private boolean animatedDisplay = DEFAULT_ANIMATED_DISPLAY;
 
+	private boolean autoFontSize = DEFAULT_AUTO_FONT_SIZE;
+
 	private MeterFormatCallback formatCallback = null;
+
+	private FontItem fontItem = null;
 
 	/**
 	 * Builds the object storing the chart instance and defaults.
@@ -80,6 +85,23 @@ public class MeterOptions extends AbstractPieOptions {
 		// sets fixed circumference and rotation
 		super.setCircumference(DEFAULT_CIRCUMFERENCE);
 		super.setRotation(DEFAULT_ROTATION);
+		// load
+	}
+
+	/**
+	 * Returns the font item.
+	 * 
+	 * @return the font item
+	 */
+	final FontItem getFontItem() {
+		return fontItem;
+	}
+
+	/**
+	 * Resets the font item for next computation.
+	 */
+	final void resetFontItem() {
+		this.fontItem = getFont().create();
 	}
 
 	/*
@@ -163,42 +185,6 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
-	 * Returns the font family to apply to the display of value.
-	 * 
-	 * @return the fontFamily to apply to the display of value.
-	 */
-	public final String getFontFamily() {
-		return fontFamily;
-	}
-
-	/**
-	 * Sets the font family to apply to the display of value.
-	 * 
-	 * @param fontFamily the fontFamily to set
-	 */
-	public final void setFontFamily(String fontFamily) {
-		this.fontFamily = fontFamily == null ? Defaults.get().getGlobal().getFont().getFamily() : fontFamily;
-	}
-
-	/**
-	 * Returns the font style to apply to the display of value.
-	 * 
-	 * @return the fontStyle to apply to the display of value.
-	 */
-	public final FontStyle getFontStyle() {
-		return fontStyle;
-	}
-
-	/**
-	 * Sets the font style to apply to the display of value.
-	 * 
-	 * @param fontStyle the fontStyle to set
-	 */
-	public final void setFontStyle(FontStyle fontStyle) {
-		this.fontStyle = fontStyle == null ? FontStyle.NORMAL : fontStyle;
-	}
-
-	/**
 	 * Returns the font color to apply to the display of value.
 	 * 
 	 * @return the displayFontColor
@@ -228,10 +214,28 @@ public class MeterOptions extends AbstractPieOptions {
 	/**
 	 * Sets if the display will be shown based on the animation of chart.
 	 * 
-	 * @param animatedDisplay the animatedDisplay to set, <code>true</code> if animated, otherwise <code>false</code>
+	 * @param animatedDisplay the animatedDisplay to set, <code>truef</code> if animated, otherwise <code>false</code>
 	 */
 	public final void setAnimatedDisplay(boolean animatedDisplay) {
 		this.animatedDisplay = animatedDisplay;
+	}
+
+	/**
+	 * Returns <code>true</code> if the font size of the display will be automatically calculated, based on dimension of the area for display.
+	 * 
+	 * @return <code>true</code> if the font size of the display will be automatically calculated, based on dimension of the area for display
+	 */
+	public boolean isAutoFontSize() {
+		return autoFontSize;
+	}
+
+	/**
+	 * Sets <code>true</code> if the font size of the display will be automatically calculated, based on dimension of the area for display.
+	 * 
+	 * @param autoFontSize <code>true</code> if the font size of the display will be automatically calculated, based on dimension of the area for display
+	 */
+	public void setAutoFontSize(boolean autoFontSize) {
+		this.autoFontSize = autoFontSize;
 	}
 
 	/**
