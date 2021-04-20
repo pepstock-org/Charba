@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.impl.charts;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.MeterFormatCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
@@ -42,6 +43,9 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	public static final IsColor DEFAULT_FONT_COLOR = new Color(128, 128, 128);
 
+	// default color of render as string
+	static final String DEFAULT_FONT_COLOR_AS_STRING = DEFAULT_FONT_COLOR.toRGBA();
+
 	private static final double DEFAULT_CIRCUMFERENCE = 360;
 
 	private static final double DEFAULT_ROTATION = 0;
@@ -66,9 +70,17 @@ public class MeterOptions extends AbstractPieOptions {
 
 	private boolean autoFontSize = DEFAULT_AUTO_FONT_SIZE;
 
+	private FontItem fontItem = null;
+
+	// -------------------------
+	// CALLBACK
+	// -------------------------
+
+	private MeterContext context = null;
+
 	private MeterFormatCallback formatCallback = null;
 
-	private FontItem fontItem = null;
+	private ColorCallback<MeterContext> fontColorCallback = null;
 
 	/**
 	 * Builds the object storing the chart instance and defaults.
@@ -90,7 +102,8 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
-	 * Returns the font item.
+	 * Returns the font item.<br>
+	 * It's called from {@link BaseMeterController}.
 	 * 
 	 * @return the font item
 	 */
@@ -99,10 +112,27 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
-	 * Resets the font item for next computation.
+	 * Resets the font item for next computation.<br>
+	 * It's called from {@link BaseMeterChart#applyConfiguration()}.
 	 */
 	final void resetFontItem() {
 		this.fontItem = getFont().create();
+	}
+
+	/**
+	 * Returns the scriptable context for callbacks, creating it if does not exist.<br>
+	 * It's called from {@link BaseMeterController}.
+	 * 
+	 * @return the scriptable context for callbacks
+	 */
+	final MeterContext getContext() {
+		// checks if context is instantiated
+		if (context == null) {
+			// creates the context
+			context = new MeterContext(new BaseContext(getChart()));
+		}
+		// returns the context
+		return context;
 	}
 
 	/*
@@ -188,7 +218,7 @@ public class MeterOptions extends AbstractPieOptions {
 	/**
 	 * Returns the font color to apply to the render of value.
 	 * 
-	 * @return the displayFontColor
+	 * @return the font color to apply to the render of value
 	 */
 	public final IsColor getFontColor() {
 		return fontColor;
@@ -197,10 +227,13 @@ public class MeterOptions extends AbstractPieOptions {
 	/**
 	 * Sets the font color to apply to the render of value.
 	 * 
-	 * @param displayFontColor the displayFontColor to set
+	 * @param fontColor the displayFontColor to set
 	 */
-	public final void setFontColor(IsColor displayFontColor) {
-		this.fontColor = IsColor.isValid(displayFontColor) ? displayFontColor : DEFAULT_FONT_COLOR;
+	public final void setFontColor(IsColor fontColor) {
+		// resets callback
+		setFontColor((ColorCallback<MeterContext>)null);
+		// stores value
+		this.fontColor = IsColor.isValid(fontColor) ? fontColor : DEFAULT_FONT_COLOR;
 	}
 
 	/**
@@ -255,6 +288,27 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	public final void setFormatCallback(MeterFormatCallback formatCallback) {
 		this.formatCallback = formatCallback;
+	}
+
+	/**
+	 * Returns the callback to customize the font color for rendered label in the chart.
+	 * 
+	 * @return the callback to customize the font color for rendered label in the chart
+	 */
+	public final ColorCallback<MeterContext> getFontColorCallback() {
+		return fontColorCallback;
+	}
+
+	/**
+	 * Sets the callback to customize the font color for rendered label in the chart.
+	 * 
+	 * @param fontColorCallback the callback to customize the font color for rendered label in the chart
+	 */
+	public final void setFontColor(ColorCallback<MeterContext> fontColorCallback) {
+		// does not rest the font color because
+		// the test in base controller is always done before for callback
+		// and then to the color
+		this.fontColorCallback = fontColorCallback;
 	}
 
 }

@@ -61,6 +61,10 @@ public enum ContextType implements Key
 	 */
 	ANNOTATION("annotation"),
 	/**
+	 * Meter and gauge controllers context type.
+	 */
+	METER("meter"),
+	/**
 	 * Unknown context type.
 	 */
 	UNKNOWN("unknown");

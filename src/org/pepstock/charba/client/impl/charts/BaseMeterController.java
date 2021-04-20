@@ -20,6 +20,8 @@ import java.util.List;
 import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.controllers.AbstractController;
 import org.pepstock.charba.client.controllers.ControllerContext;
 import org.pepstock.charba.client.controllers.ControllerProvider;
@@ -175,25 +177,19 @@ final class BaseMeterController extends AbstractController {
 	 * @return easing of drawing (between 0 and 1) for animation
 	 */
 	private double calculateEase(IsChart chart, MeterOptions options, MeterDataset dataset) {
-		// checks if animation is required
-		if (options.isAnimated()) {
-			// calculate the max circumference for the data set
-			// transforming the value in degrees
-			// in order to compare with circumference of the element
-			double maxCircumference = dataset.getValueMaximumRatio() * 360D;
-			// gets the data set item of data set 0
-			DatasetItem item = chart.getDatasetItem(0);
-			// calculates the circumference in degree of element
-			double elemCircumference = item.getElements().get(0).getCircumference() * 180 / Math.PI;
-			// calculate the dividend
-			double dividend = Math.min(maxCircumference, elemCircumference);
-			double divider = Math.max(maxCircumference, elemCircumference);
-			// returns easing
-			return Math.min(dividend / divider, 1D);
-		}
-		// if here, no animation is requested
-		// then returns no easing
-		return 1D;
+		// calculate the max circumference for the data set
+		// transforming the value in degrees
+		// in order to compare with circumference of the element
+		double maxCircumference = dataset.getValueMaximumRatio() * 360D;
+		// gets the data set item of data set 0
+		DatasetItem item = chart.getDatasetItem(0);
+		// calculates the circumference in degree of element
+		double elemCircumference = item.getElements().get(0).getCircumference() * 180 / Math.PI;
+		// calculate the dividend
+		double dividend = Math.min(maxCircumference, elemCircumference);
+		double divider = Math.max(maxCircumference, elemCircumference);
+		// returns easing
+		return Math.min(dividend / divider, 1D);
 	}
 
 	/**
@@ -232,14 +228,23 @@ final class BaseMeterController extends AbstractController {
 		// here is calculating the value to showed
 		// based on easing of drawing
 		final double value = options.isAnimated() ? valueToCalculate * ease : valueToCalculate;
+		// gets context
+		MeterContext context = options.getContext();
+		// sets value and ease for context
+		// to execute the formatted value for max
+		context.setEasing(1D);
+		context.setValue(maxValue);
 		// gets max value in the string to check font size
-		final String maxValueToShow = getFormattedValue(chart, options, maxValue, 1D);
+		final String maxValueToShow = getFormattedValue(chart, options, context);
+		// sets to the right values
+		context.setEasing(ease);
+		context.setValue(value);
 		// value to show with format required
-		final String valueToShow = getFormattedValue(chart, options, value, ease);
+		final String valueToShow = getFormattedValue(chart, options, context);
 		// gets font
 		final FontItem font = options.getFontItem();
 		// gets font color
-		final String fontColor = options.getFontColor() == null ? MeterOptions.DEFAULT_FONT_COLOR.toRGBA() : options.getFontColor().toRGBA();
+		final String fontColor = getFontColor(chart, options, context);
 		// gets the label
 		final String label = dataset.getLabel();
 		// saves context
@@ -289,11 +294,6 @@ final class BaseMeterController extends AbstractController {
 		}
 		// restores context
 		ctx.restore();
-		// checks if is the last draw
-		if (ease == 1D) {
-			// reset font item
-			options.resetFontItem();
-		}
 	}
 
 	/**
@@ -327,21 +327,55 @@ final class BaseMeterController extends AbstractController {
 			}
 		}
 	}
+	
+	/**
+	 * Returns the color to apply to rendered label, invoking the callback if set.
+	 * 
+	 * @param chart chart instance
+	 * @param options options of the chart
+	 * @param context scriptable context of meter
+	 * @return the font color to apply to rendered label
+	 */
+	private String getFontColor(IsChart chart, MeterOptions options, MeterContext context) {
+		// checks if the options font color is set as callback
+		if (options.getFontColorCallback() != null) {
+			Object result = ScriptableUtils.getOptionValueAsColor(context, options.getFontColorCallback(), MeterOptions.DEFAULT_FONT_COLOR_AS_STRING, false);
+			// checks the result
+			if (result instanceof IsColor) {
+				// casts to color
+				IsColor color = (IsColor)result;
+				// returns as string
+				return color.toRGBA();
+			} else if (result instanceof String) {
+				// returns as string
+				return (String)result;
+			}
+			// if here, invalid returns object
+			// then goes to the end of this method
+			// to return the default
+		} else if (options.getFontColor() != null) {
+			// checks if the color has been as color 
+			return options.getFontColor().toRGBA();
+		}
+		// if here, invalid returns object from callback
+		// or font color is not set
+		// then returns the default
+		return MeterOptions.DEFAULT_FONT_COLOR_AS_STRING;
+	}
 
 	/**
 	 * Returns a formatted value of the chart applying the precision or invoking the value callback.
 	 * 
 	 * @param chart chart instance
-	 * @param options chart options instance
-	 * @param value value of the chart
-	 * @param easing the current animation status
+	 * @param options options of the chart
+	 * @param context scriptable context of meter
 	 * @return a formatted value of the chart
 	 */
-	private String getFormattedValue(IsChart chart, MeterOptions options, double value, double easing) {
+	private String getFormattedValue(IsChart chart, MeterOptions options, MeterContext context) {
 		// checks if options has got a callback
 		if (options.getFormatCallback() != null) {
 			// invokes callback
-			String result = options.getFormatCallback().onFormat(chart, value, easing);
+			String result = options.getFormatCallback().invoke(context);
 			// checks if result is consistent
 			if (result != null) {
 				// return this value
@@ -349,7 +383,7 @@ final class BaseMeterController extends AbstractController {
 			}
 		}
 		// if here, it sues the precision set in the options
-		return Utilities.applyPrecision(value, options.getPrecision());
+		return Utilities.applyPrecision(context.getValue(), options.getPrecision());
 	}
 
 	/**

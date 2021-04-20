@@ -15,25 +15,15 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.impl.charts.GaugeChart;
 import org.pepstock.charba.client.impl.charts.MeterChart;
+import org.pepstock.charba.client.impl.charts.MeterContext;
 
 /**
  * Interface to implement if wants to change the value to show inside of {@link MeterChart} or {@link GaugeChart}.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface MeterFormatCallback {
-
-	/**
-	 * Changes the value to show inside of {@link MeterChart} or {@link GaugeChart}.
-	 * 
-	 * @param chart chart instance where this callback as been defined
-	 * @param value value of meter or gauge chart
-	 * @param easing easing of drawing (between 0 and 1) for animation
-	 * @return the string representation of value to apply or if the callback returns <code>null</code> to use default.
-	 */
-	String onFormat(IsChart chart, double value, double easing);
+public interface MeterFormatCallback extends Scriptable<String, MeterContext>{
 
 }

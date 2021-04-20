@@ -108,8 +108,6 @@ public class ChartContext extends NativeObjectContainer{
 	public final ContextType getType() {
 		return getValue(Property.TYPE, ContextType.values(), ContextType.UNKNOWN);
 	}
-	
-	
 
 	/**
 	 * Sets the additional attributes.

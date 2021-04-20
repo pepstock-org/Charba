@@ -486,6 +486,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * rename `MeterDisplay` enumeration to `Render` and move from `org.pepstock.charba.client.impl.charts` package to `org.pepstock.charba.client.enums`.
  * rename `displayFontColor` property to `fontColor`  in meter and gauge options
  * rename `animatedDisplay` property to `animated`  in meter and gauge options
+ * change the signature of `MeterFormatCallback` interface in order to get only a `MeterContext` instance as argument. 
 
 #### Features
  * add `linkScales` and `buildOrUpdateElements` methods to Controller interface in order to have the complete mapping of CHART.JS controller interface.
@@ -493,6 +494,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * add `ControllerRegistrationHandler` interface to set to a `ControllerType` constructor in order to enable the notification before and after the controller registration to CHART.JS.
  * add `autoFontSize` property to meter and gauge options in order to enable or disable auto calculation of font size and use the font size provided by the user.
  * add `NONE` item in the `Render` enumeration in order to disable the label rendering in meter and gauge charts.
+ * enable `fontColor` property to be set by callback in meter and gauge charts.
  
 ### _Callbacks_   
 
