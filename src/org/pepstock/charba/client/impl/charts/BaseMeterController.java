@@ -177,19 +177,25 @@ final class BaseMeterController extends AbstractController {
 	 * @return easing of drawing (between 0 and 1) for animation
 	 */
 	private double calculateEase(IsChart chart, MeterOptions options, MeterDataset dataset) {
-		// calculate the max circumference for the data set
-		// transforming the value in degrees
-		// in order to compare with circumference of the element
-		double maxCircumference = dataset.getValueMaximumRatio() * 360D;
-		// gets the data set item of data set 0
-		DatasetItem item = chart.getDatasetItem(0);
-		// calculates the circumference in degree of element
-		double elemCircumference = item.getElements().get(0).getCircumference() * 180 / Math.PI;
-		// calculate the dividend
-		double dividend = Math.min(maxCircumference, elemCircumference);
-		double divider = Math.max(maxCircumference, elemCircumference);
-		// returns easing
-		return Math.min(dividend / divider, 1D);
+		// checks if animation is required
+		if (options.isAnimated()) {
+			// calculate the max circumference for the data set
+			// transforming the value in degrees
+			// in order to compare with circumference of the element
+			double maxCircumference = dataset.getValueMaximumRatio() * 360D;
+			// gets the data set item of data set 0
+			DatasetItem item = chart.getDatasetItem(0);
+			// calculates the circumference in degree of element
+			double elemCircumference = item.getElements().get(0).getCircumference() * 180 / Math.PI;
+			// calculate the dividend
+			double dividend = Math.min(maxCircumference, elemCircumference);
+			double divider = Math.max(maxCircumference, elemCircumference);
+			// returns easing
+			return Math.min(dividend / divider, 1D);
+		}
+		// if here, no animation is requested
+		// then returns no easing
+		return 1D;
 	}
 
 	/**
