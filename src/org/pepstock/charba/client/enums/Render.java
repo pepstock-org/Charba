@@ -39,7 +39,11 @@ public enum Render implements Key
 	/**
 	 * Shows percentage and label
 	 */
-	PERCENTAGE_AND_LABEL("percentageAndLabel");
+	PERCENTAGE_AND_LABEL("percentageAndLabel"),
+	/**
+	 * Doesn't show anything
+	 */
+	NONE("none");
 
 	// name value of property
 	private final String value;

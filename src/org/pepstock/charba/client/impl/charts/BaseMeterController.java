@@ -206,6 +206,11 @@ final class BaseMeterController extends AbstractController {
 	 * @param ease easing of drawing (between 0 and 1) for animation
 	 */
 	private void execute(IsChart chart, ChartNode item, MeterDataset dataset, MeterOptions options, double ease) {
+		// checks if the rendering of the label is disable
+		if (Render.NONE.equals(options.getRender())) {
+			// do nothing
+			return;
+		}
 		// gets data set item at index 0
 		// it can not be null
 		DatasetItem datasetMetaItem = chart.getDatasetItem(0);
