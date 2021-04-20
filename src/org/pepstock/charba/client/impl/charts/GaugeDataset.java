@@ -38,7 +38,7 @@ public final class GaugeDataset extends MeterDataset {
 	// list if thresholds
 	private final List<Threshold> thresholds = new LinkedList<>();
 	// current status related to threshold
-	private IsThreshold current = GaugeThreshold.NORMAL.getThreshold();
+	private IsThreshold current = DefaultThreshold.NORMAL.getThreshold();
 	// flag to understand if the absolute or percentage value must be used
 	// to compare thresholds
 	private boolean percentageThreshold = true;
@@ -66,7 +66,7 @@ public final class GaugeDataset extends MeterDataset {
 	public GaugeDataset(double max, IsDefaultOptions defaultValues) {
 		super(GaugeChart.CONTROLLER_TYPE, max, defaultValues);
 		// loads all gauge thresholds by default
-		for (GaugeThreshold t : GaugeThreshold.values()) {
+		for (DefaultThreshold t : DefaultThreshold.values()) {
 			thresholds.add(t.getThreshold());
 		}
 		// sets current color
@@ -83,7 +83,7 @@ public final class GaugeDataset extends MeterDataset {
 		// value color must be override because
 		// depends on threshold
 		// checking if consistent
-		super.setColor(IsColor.isConsistent(current.getColor()) ? current.getColor().toRGBA() : GaugeThreshold.NORMAL.getColor().toRGBA());
+		super.setColor(IsColor.isConsistent(current.getColor()) ? current.getColor().toRGBA() : DefaultThreshold.NORMAL.getColor().toRGBA());
 	}
 
 	/*
@@ -96,7 +96,7 @@ public final class GaugeDataset extends MeterDataset {
 		// value color must be override because
 		// depends on threshold
 		// checking if consistent
-		super.setColor(IsColor.isConsistent(current.getColor()) ? current.getColor().toRGBA() : GaugeThreshold.NORMAL.getColor().toRGBA());
+		super.setColor(IsColor.isConsistent(current.getColor()) ? current.getColor().toRGBA() : DefaultThreshold.NORMAL.getColor().toRGBA());
 	}
 
 	/**
@@ -203,7 +203,7 @@ public final class GaugeDataset extends MeterDataset {
 			return ((LinkedList<Threshold>) thresholds).getLast();
 		}
 		// default threshold is returned
-		return GaugeThreshold.NORMAL.getThreshold();
+		return DefaultThreshold.NORMAL.getThreshold();
 	}
 
 }

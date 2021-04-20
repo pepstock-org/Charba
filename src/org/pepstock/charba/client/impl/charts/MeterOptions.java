@@ -21,6 +21,7 @@ import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.configuration.AbstractPieOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.enums.Render;
 import org.pepstock.charba.client.items.FontItem;
 
 /**
@@ -32,14 +33,14 @@ import org.pepstock.charba.client.items.FontItem;
 public class MeterOptions extends AbstractPieOptions {
 
 	/**
-	 * Default precision <b>{@value DEFAULT_PRECISION}</b> to apply displaying the value or percentage.
+	 * Default precision <b>{@value DEFAULT_PRECISION}</b> to apply rendering the value or percentage.
 	 */
 	public static final int DEFAULT_PRECISION = 2;
 
 	/**
-	 * Default color of display, <b>rgb(128, 128, 128)</b>
+	 * Default color of render, <b>rgb(128, 128, 128)</b>
 	 */
-	public static final IsColor DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128);
+	public static final IsColor DEFAULT_FONT_COLOR = new Color(128, 128, 128);
 
 	private static final double DEFAULT_CIRCUMFERENCE = 360;
 
@@ -47,7 +48,7 @@ public class MeterOptions extends AbstractPieOptions {
 
 	private static final String DEFAULT_CUTOUT_PERCENTAGE = "90%";
 
-	private static final boolean DEFAULT_ANIMATED_DISPLAY = false;
+	private static final boolean DEFAULT_ANIMATED = false;
 
 	private static final boolean DEFAULT_AUTO_FONT_SIZE = true;
 
@@ -55,13 +56,13 @@ public class MeterOptions extends AbstractPieOptions {
 	// INSTANCES
 	// -------------------------
 
-	private MeterDisplay display = MeterDisplay.VALUE;
+	private Render render = Render.VALUE;
 
 	private int precision = DEFAULT_PRECISION;
 
-	private IsColor displayFontColor = DEFAULT_DISPLAY_COLOR;
+	private IsColor fontColor = DEFAULT_FONT_COLOR;
 
-	private boolean animatedDisplay = DEFAULT_ANIMATED_DISPLAY;
+	private boolean animated = DEFAULT_ANIMATED;
 
 	private boolean autoFontSize = DEFAULT_AUTO_FONT_SIZE;
 
@@ -148,26 +149,26 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
-	 * Returns the display type of data in chart.
+	 * Returns the render type of data in chart.
 	 * 
-	 * @return the display type of data in chart.
+	 * @return the render type of data in chart.
 	 */
-	public final MeterDisplay getDisplay() {
-		return display;
+	public final Render getRender() {
+		return render;
 	}
 
 	/**
-	 * Sets the display type of data in chart.
+	 * Sets the render type of data in chart.
 	 * 
-	 * @param display the display to set
+	 * @param render the render to set
 	 */
-	public final void setDisplay(MeterDisplay display) {
+	public final void setRender(Render render) {
 		// checks if consistent
-		this.display = display == null ? MeterDisplay.VALUE : display;
+		this.render = render == null ? Render.VALUE : render;
 	}
 
 	/**
-	 * Returns the decimal places to apply to display the value.
+	 * Returns the decimal places to apply to render the value.
 	 * 
 	 * @return the decimal places to apply to the value in chart
 	 */
@@ -176,7 +177,7 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
-	 * Sets the decimal places to apply to display the value.
+	 * Sets the decimal places to apply to render the value.
 	 * 
 	 * @param precision the decimal places to apply to the value in chart
 	 */
@@ -185,54 +186,54 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
-	 * Returns the font color to apply to the display of value.
+	 * Returns the font color to apply to the render of value.
 	 * 
 	 * @return the displayFontColor
 	 */
-	public final IsColor getDisplayFontColor() {
-		return displayFontColor;
+	public final IsColor getFontColor() {
+		return fontColor;
 	}
 
 	/**
-	 * Sets the font color to apply to the display of value.
+	 * Sets the font color to apply to the render of value.
 	 * 
 	 * @param displayFontColor the displayFontColor to set
 	 */
-	public final void setDisplayFontColor(IsColor displayFontColor) {
-		this.displayFontColor = IsColor.isValid(displayFontColor) ? displayFontColor : DEFAULT_DISPLAY_COLOR;
+	public final void setFontColor(IsColor displayFontColor) {
+		this.fontColor = IsColor.isValid(displayFontColor) ? displayFontColor : DEFAULT_FONT_COLOR;
 	}
 
 	/**
-	 * Returns if the display will be shown based on the animation of chart.
+	 * Returns if the render will be shown based on the animation of chart.
 	 * 
-	 * @return the animatedDisplay, <code>true</code> if animated, otherwise <code>false</code>
+	 * @return the <code>true</code> the rendering is animated, otherwise <code>false</code>
 	 */
-	public final boolean isAnimatedDisplay() {
-		return animatedDisplay;
+	public final boolean isAnimated() {
+		return animated;
 	}
 
 	/**
-	 * Sets if the display will be shown based on the animation of chart.
+	 * Sets if the render will be shown based on the animation of chart.
 	 * 
-	 * @param animatedDisplay the animatedDisplay to set, <code>truef</code> if animated, otherwise <code>false</code>
+	 * @param animated <code>true</code> if the rendering is animated, otherwise <code>false</code>
 	 */
-	public final void setAnimatedDisplay(boolean animatedDisplay) {
-		this.animatedDisplay = animatedDisplay;
+	public final void setAnimated(boolean animated) {
+		this.animated = animated;
 	}
 
 	/**
-	 * Returns <code>true</code> if the font size of the display will be automatically calculated, based on dimension of the area for display.
+	 * Returns <code>true</code> if the font size of the rendering will be automatically calculated, based on dimension of the area for rendering.
 	 * 
-	 * @return <code>true</code> if the font size of the display will be automatically calculated, based on dimension of the area for display
+	 * @return <code>true</code> if the font size of the rendering will be automatically calculated, based on dimension of the area for rendering
 	 */
 	public boolean isAutoFontSize() {
 		return autoFontSize;
 	}
 
 	/**
-	 * Sets <code>true</code> if the font size of the display will be automatically calculated, based on dimension of the area for display.
+	 * Sets <code>true</code> if the font size of the rendering will be automatically calculated, based on dimension of the area for rendering.
 	 * 
-	 * @param autoFontSize <code>true</code> if the font size of the display will be automatically calculated, based on dimension of the area for display
+	 * @param autoFontSize <code>true</code> if the font size of the rendering will be automatically calculated, based on dimension of the area for rendering
 	 */
 	public void setAutoFontSize(boolean autoFontSize) {
 		this.autoFontSize = autoFontSize;

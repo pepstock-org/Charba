@@ -25,7 +25,7 @@ import org.pepstock.charba.client.colors.IsColor;
  * @see IsThreshold
  *
  */
-public enum GaugeThreshold implements IsThreshold
+public enum DefaultThreshold implements IsThreshold
 {
 	/**
 	 * the normal threshold
@@ -51,7 +51,7 @@ public enum GaugeThreshold implements IsThreshold
 	 * @param value threshold value
 	 * @param color threshold color
 	 */
-	private GaugeThreshold(double value, IsColor color) {
+	private DefaultThreshold(double value, IsColor color) {
 		this.value = value;
 		this.color = color;
 	}

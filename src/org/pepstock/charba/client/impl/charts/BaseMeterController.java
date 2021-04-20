@@ -28,6 +28,7 @@ import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
+import org.pepstock.charba.client.enums.Render;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.DatasetItem;
@@ -175,7 +176,7 @@ final class BaseMeterController extends AbstractController {
 	 */
 	private double calculateEase(IsChart chart, MeterOptions options, MeterDataset dataset) {
 		// checks if animation is required
-		if (options.isAnimatedDisplay()) {
+		if (options.isAnimated()) {
 			// calculate the max circumference for the data set
 			// transforming the value in degrees
 			// in order to compare with circumference of the element
@@ -220,12 +221,12 @@ final class BaseMeterController extends AbstractController {
 		final double x = centerX - (sideOfSquare / 2D);
 		final double y = centerY - (sideOfSquare / 2D);
 		// gets max value
-		final double maxValue = MeterDisplay.PERCENTAGE.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay()) ? MAX_PERCENTAGE : dataset.getMax();
+		final double maxValue = Render.PERCENTAGE.equals(options.getRender()) || Render.PERCENTAGE_AND_LABEL.equals(options.getRender()) ? MAX_PERCENTAGE : dataset.getMax();
 		// gets value
-		final double valueToCalculate = MeterDisplay.PERCENTAGE.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay()) ? dataset.getValue() / dataset.getMax() : dataset.getValue();
+		final double valueToCalculate = Render.PERCENTAGE.equals(options.getRender()) || Render.PERCENTAGE_AND_LABEL.equals(options.getRender()) ? dataset.getValue() / dataset.getMax() : dataset.getValue();
 		// here is calculating the value to showed
 		// based on easing of drawing
-		final double value = options.isAnimatedDisplay() ? valueToCalculate * ease : valueToCalculate;
+		final double value = options.isAnimated() ? valueToCalculate * ease : valueToCalculate;
 		// gets max value in the string to check font size
 		final String maxValueToShow = getFormattedValue(chart, options, maxValue, 1D);
 		// value to show with format required
@@ -233,7 +234,7 @@ final class BaseMeterController extends AbstractController {
 		// gets font
 		final FontItem font = options.getFontItem();
 		// gets font color
-		final String fontColor = options.getDisplayFontColor() == null ? MeterOptions.DEFAULT_DISPLAY_COLOR.toRGBA() : options.getDisplayFontColor().toRGBA();
+		final String fontColor = options.getFontColor() == null ? MeterOptions.DEFAULT_FONT_COLOR.toRGBA() : options.getFontColor().toRGBA();
 		// gets the label
 		final String label = dataset.getLabel();
 		// saves context
@@ -255,7 +256,7 @@ final class BaseMeterController extends AbstractController {
 		// sets alignment
 		ctx.setTextAlign(TextAlign.CENTER);
 		// checks if it must draw also the label
-		if ((MeterDisplay.VALUE_AND_LABEL.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay())) && label != null) {
+		if ((Render.VALUE_AND_LABEL.equals(options.getRender()) || Render.PERCENTAGE_AND_LABEL.equals(options.getRender())) && label != null) {
 			// sets font
 			ctx.setFont(Utilities.toCSSFontProperty(font));
 			// sets alignment from center point

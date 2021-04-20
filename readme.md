@@ -482,6 +482,10 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
  * rename `extend` method of `Controllers` class to `register`.
  * change `setHoverStyle` and `removeHoverStyle` methods of `Controller` interface now additionally take the `datasetIndex` and `index` as arguments.
  * remove `fontFamily` and `fontStyle` properties from meter and gauge options, use `font` instead.
+ * rename `GaugeThreshold` enumeration to `DefaultThreshold`.
+ * rename `MeterDisplay` enumeration to `Render` and move from `org.pepstock.charba.client.impl.charts` package to `org.pepstock.charba.client.enums`.
+ * rename `displayFontColor` property to `fontColor`  in meter and gauge options
+ * rename `animatedDisplay` property to `animated`  in meter and gauge options
 
 #### Features
  * add `linkScales` and `buildOrUpdateElements` methods to Controller interface in order to have the complete mapping of CHART.JS controller interface.

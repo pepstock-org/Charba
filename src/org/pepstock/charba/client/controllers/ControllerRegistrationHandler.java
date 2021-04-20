@@ -36,7 +36,7 @@ public interface ControllerRegistrationHandler {
 	 * Invoked after the controller is registered to CHART.JS.
 	 * 
 	 * @param controllerType the controller type which is registering
-	 * @param registered <code>true</code> if the controller has been registered othewise <code>false</code>
+	 * @param registered <code>true</code> if the controller has been registered otherwise <code>false</code>
 	 */
 	default void onAfterRegister(ControllerType controllerType, boolean registered) {
 		// do nothing

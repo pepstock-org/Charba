@@ -13,16 +13,16 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.impl.charts;
+package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Determines which information must be displayed in the meter or gauge chart.
+ * Determines which information must be rendered in the meter or gauge chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum MeterDisplay implements Key
+public enum Render implements Key
 {
 	/**
 	 * Shows only the value
@@ -49,7 +49,7 @@ public enum MeterDisplay implements Key
 	 * 
 	 * @param value value of property name
 	 */
-	private MeterDisplay(String value) {
+	private Render(String value) {
 		this.value = value;
 	}
 
