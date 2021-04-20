@@ -81,6 +81,9 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 */
 	public static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
 
+    //default border color for area as string.
+	static final String DEFAULT_BORDER_COLOR_AS_STRING = DEFAULT_BORDER_COLOR.toRGBA();
+
 	// defaults global options instance
 	private IsDatasetsItemsSelectorDefaultOptions defaultOptions;
 	// clear selection item

@@ -22,10 +22,10 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
+import org.pepstock.charba.client.options.IsFont;
 
 /**
  * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have in the the chart a clickable element to clear the selection.
@@ -118,14 +118,12 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		DISPLAY("display"),
 		LABEL("label"),
-		FONT_SIZE("fontSize"),
-		FONT_FAMILY("fontFamily"),
-		FONT_COLOR("fontColor"),
-		FONT_STYLE("fontStyle"),
+		COLOR("color"),
+		FONT("font"),
 		ALIGN("align"),
 		POSITION("position"),
 		IMAGE("image"),
@@ -175,6 +173,9 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 
 	// defaults global options instance
 	private IsDatasetsItemsSelectorDefaultClearSelection defaultOptions;
+	// instance of font
+	private final ClearSelectionFont font;
+
 
 	/**
 	 * Creates new font element, using stored native object instance and the default values options.
@@ -184,7 +185,20 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	 */
 	ClearSelection(NativeObject nativeObject, IsDatasetsItemsSelectorDefaultClearSelection defaultOptions) {
 		super(nativeObject);
-		this.defaultOptions = defaultOptions;
+		// checks the default values
+		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
+		// gets font
+		this.font = new ClearSelectionFont(this.defaultOptions.getFont(), getValue(Property.FONT));
+	}
+	
+	/**
+	 * Returns the the font object.
+	 * 
+	 * @return the font object.
+	 */
+	@Override
+	public IsFont getFont() {
+		return font;
 	}
 
 	/**
@@ -226,60 +240,13 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Sets the font size.
+	 * Returns the the clear selection label font color.
 	 * 
-	 * @param fontSize the font size.
-	 */
-	public void setFontSize(int fontSize) {
-		setValue(Property.FONT_SIZE, fontSize);
-	}
-
-	/**
-	 * Returns the font size.
-	 * 
-	 * @return the font size.
+	 * @return the the clear selection label font color.
 	 */
 	@Override
-	public int getFontSize() {
-		return getValue(Property.FONT_SIZE, defaultOptions.getFontSize());
-	}
-
-	/**
-	 * Sets the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @param fontStyle Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	public void setFontStyle(FontStyle fontStyle) {
-		setValue(Property.FONT_STYLE, fontStyle);
-	}
-
-	/**
-	 * Returns the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 */
-	@Override
-	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.values(), defaultOptions.getFontStyle());
-	}
-
-	/**
-	 * Sets the font family, follows CSS font-family options.
-	 * 
-	 * @param fontFamily Font family, follows CSS font-family options.
-	 */
-	public void setFontFamily(String fontFamily) {
-		setValue(Property.FONT_FAMILY, fontFamily);
-	}
-
-	/**
-	 * Returns the font family, follows CSS font-family options.
-	 * 
-	 * @return Font family, follows CSS font-family options.
-	 */
-	@Override
-	public String getFontFamily() {
-		return getValue(Property.FONT_FAMILY, defaultOptions.getFontFamily());
+	public String getColorAsString() {
+		return getValue(Property.COLOR, defaultOptions.getColorAsString());
 	}
 
 	/**
@@ -287,18 +254,8 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	 * 
 	 * @return the the clear selection label font color.
 	 */
-	@Override
-	public String getFontColorAsString() {
-		return getValue(Property.FONT_COLOR, defaultOptions.getFontColorAsString());
-	}
-
-	/**
-	 * Returns the the clear selection label font color.
-	 * 
-	 * @return the the clear selection label font color.
-	 */
-	public IsColor getFontColor() {
-		return ColorBuilder.parse(getFontColorAsString());
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**
@@ -306,8 +263,8 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	 * 
 	 * @param color the clear selection label font color.
 	 */
-	public void setFontColor(String color) {
-		setValue(Property.FONT_COLOR, color);
+	public void setColor(String color) {
+		setValue(Property.COLOR, color);
 	}
 
 	/**
@@ -315,8 +272,8 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	 * 
 	 * @param color the clear selection label font color.
 	 */
-	public void setFontColor(IsColor color) {
-		setFontColor(IsColor.checkAndGetValue(color));
+	public void setColor(IsColor color) {
+		setColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**

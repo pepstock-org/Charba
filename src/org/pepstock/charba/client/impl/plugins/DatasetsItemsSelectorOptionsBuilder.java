@@ -200,7 +200,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontSize(int fontSize) {
-		options.getClearSelection().setFontSize(fontSize);
+		options.getClearSelection().getFont().setSize(fontSize);
 		return this;
 	}
 
@@ -211,7 +211,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontStyle(FontStyle fontStyle) {
-		options.getClearSelection().setFontStyle(fontStyle);
+		options.getClearSelection().getFont().setStyle(fontStyle);
 		return this;
 	}
 
@@ -222,7 +222,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontFamily(String fontFamily) {
-		options.getClearSelection().setFontFamily(fontFamily);
+		options.getClearSelection().getFont().setFamily(fontFamily);
 		return this;
 	}
 
@@ -233,7 +233,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontColor(String color) {
-		options.getClearSelection().setFontColor(color);
+		options.getClearSelection().setColor(color);
 		return this;
 	}
 
@@ -244,7 +244,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontColor(IsColor color) {
-		options.getClearSelection().setFontColor(color);
+		options.getClearSelection().setColor(color);
 		return this;
 	}
 

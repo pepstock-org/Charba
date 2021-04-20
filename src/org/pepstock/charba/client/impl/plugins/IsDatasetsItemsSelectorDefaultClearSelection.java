@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
@@ -49,30 +49,12 @@ interface IsDatasetsItemsSelectorDefaultClearSelection {
 	}
 
 	/**
-	 * Returns the clear selection label font size.
+	 * Returns the clear selection label font.
 	 * 
-	 * @return the clear selection label font size
+	 * @return the clear selection label font
 	 */
-	default int getFontSize() {
-		return Defaults.get().getGlobal().getFont().getSize();
-	}
-
-	/**
-	 * Returns the clear selection label font family.
-	 * 
-	 * @return the clear selection label font family
-	 */
-	default String getFontFamily() {
-		return Defaults.get().getGlobal().getFont().getFamily();
-	}
-
-	/**
-	 * Returns the clear selection label font style.
-	 * 
-	 * @return the clear selection label font style
-	 */
-	default FontStyle getFontStyle() {
-		return Defaults.get().getGlobal().getFont().getStyle();
+	default IsDefaultFont getFont() {
+		return Defaults.get().getGlobal().getFont();
 	}
 
 	/**
@@ -80,8 +62,8 @@ interface IsDatasetsItemsSelectorDefaultClearSelection {
 	 * 
 	 * @return the clear selection label font color.
 	 */
-	default String getFontColorAsString() {
-		return DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR.toRGBA();
+	default String getColorAsString() {
+		return DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR_AS_STRING;
 	}
 
 	/**

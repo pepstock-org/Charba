@@ -13,29 +13,28 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.labels;
+package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
-import org.pepstock.charba.client.options.AbstractScriptableFont;
+import org.pepstock.charba.client.options.AbstractFont;
 
 /**
- * Base object to map font options for {@link LabelsPlugin#ID} plugin configuration.
+ * Object to map font options for {@link ClearSelection} element of {@link DatasetsItemsSelector#ID} plugin configuration.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Font extends AbstractScriptableFont<LabelsContext> {
+final class ClearSelectionFont extends AbstractFont {
 
 	/**
-	 * Creates a font to use for chart configuration when the font is created by a callback, using a clone of another font object.
+	 * Creates a font to use for plugin.
 	 * 
-	 * @param parent label instance which contains this font item
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Font(Label parent, IsDefaultFont defaultValues, NativeObject nativeObject) {
-		super(parent, defaultValues, nativeObject);
+	ClearSelectionFont(IsDefaultFont defaultValues, NativeObject nativeObject) {
+		super(defaultValues, nativeObject);
 	}
 
 }

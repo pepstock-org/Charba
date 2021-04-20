@@ -32,7 +32,6 @@ import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
@@ -641,7 +640,7 @@ final class SelectionHandler {
 		} else {
 			// if here there is a label
 			// therefore the height is based on font size
-			double fontSize = clearSelection.getFontSize();
+			double fontSize = clearSelection.getFont().getSize();
 			// adds font size to height
 			height += fontSize;
 			// sets the height to image or
@@ -692,7 +691,7 @@ final class SelectionHandler {
 		// save context
 		ctx.save();
 		// sets font
-		ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), Weight.NORMAL, clearSelection.getFontSize(), clearSelection.getFontFamily()));
+		ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFont()));
 		// gets metrics
 		TextMetricsItem metrics = ctx.measureText(clearSelection.getLabel());
 		// stores the label width
@@ -972,18 +971,18 @@ final class SelectionHandler {
 		// checks based on render type what must be draw
 		if (Render.LABEL.equals(clearSelection.getRender())) {
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), Weight.NORMAL, clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFont()));
 			// sets color to canvas
-			ctx.setFillColor(clearSelection.getFontColorAsString());
+			ctx.setFillColor(clearSelection.getColorAsString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
 		} else if (Render.LABEL_IMAGE.equals(clearSelection.getRender())) {
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), Weight.NORMAL, clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFont()));
 			// sets color to canvas
-			ctx.setFillColor(clearSelection.getFontColorAsString());
+			ctx.setFillColor(clearSelection.getColorAsString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
@@ -994,9 +993,9 @@ final class SelectionHandler {
 			// draws scaled image
 			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), Weight.NORMAL, clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFont()));
 			// sets color to canvas
-			ctx.setFillColor(clearSelection.getFontColorAsString());
+			ctx.setFillColor(clearSelection.getColorAsString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text

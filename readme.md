@@ -402,6 +402,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `setEnabled` method for `DefaultPluginId` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title  * change `getXAxisID` method in `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
 in legend and title options, and `setEnabled` method for tooltips in tooltips options.
  * remove `CLEAR_SELECTION` constant from `DatasetRangeSelectionEvent` class because the event is containing the selected values and not the indexes anymore.
+ * remove `fontColor` property from `ClearSelection` options, use `color` instead.
+ * remove `fontSise`, `fontStyle` and `fontFamily` properties from `ClearSelection` options, use `font` object instead.
  * change `LabelsPlugin` in order to :
    * add new `color` property for the font color, in order to be aligned with CHART.JS 3 implementation.
    * use `font` object instead of the single properties.

@@ -24,7 +24,7 @@ import org.pepstock.charba.client.options.IsPadding;
 /**
  * Base object to map font options for {@link DataLabelsPlugin#ID} plugin configuration.<br>
  * It is applied to all sides of the chart (left, top, right, bottom).<br>
- * It can be used also in the callback for font generation at runtime.
+ * It can be used also in the callback for padding generation at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  * @see PaddingCallback
