@@ -37,7 +37,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsLineLabel {
+interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 
 	/**
 	 * Returns the font element.
@@ -53,15 +53,6 @@ interface IsDefaultsLineLabel {
 	 */
 	default boolean isDisplay() {
 		return LineLabel.DEFAULT_DISPLAY;
-	}
-
-	/**
-	 * Returns the background color of label.
-	 * 
-	 * @return the background color of label
-	 */
-	default String getBackgroundColorAsString() {
-		return LineLabel.DEFAULT_BACKGROUND_COLOR_AS_STRING;
 	}
 
 	/**
@@ -189,15 +180,6 @@ interface IsDefaultsLineLabel {
 	 * @return the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
 	 */
 	default String getImageWidthAsPercentage() {
-		return null;
-	}
-	
-	/**
-	 * Returns the callback called to set the color of the background of label.
-	 * 
-	 * @return the callback called to set the color of the background of label
-	 */
-	default ColorCallback<AnnotationContext> getBackgroundColorCallback() {
 		return null;
 	}
 	

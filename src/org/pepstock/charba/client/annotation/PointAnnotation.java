@@ -19,13 +19,10 @@ import java.util.Date;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
-import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -40,7 +37,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PointAnnotation extends AbstractAnnotation implements IsDefaultsPointAnnotation {
+public final class PointAnnotation extends AbstractAnnotation implements IsDefaultsPointAnnotation, HasBackgroundColor {
 
 	/**
 	 * Default point annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -61,8 +58,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		Y_SCALE_ID("yScaleID"),
 		X_VALUE("xValue"),
 		Y_VALUE("yValue"),
-		RADIUS("radius"),
-		BACKGROUND_COLOR("backgroundColor");
+		RADIUS("radius");
 
 		// name value of property
 		private final String value;
@@ -87,12 +83,10 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		}
 
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// callback proxy to invoke the background color function
-	private final CallbackProxy<ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the radius function
 	private final CallbackProxy<ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the xValue function
@@ -100,9 +94,6 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	// callback proxy to invoke the yValue function
 	private final CallbackProxy<ProxyObjectCallback> yValueCallbackProxy = JsHelper.get().newCallbackProxy();
 
-
-	// callback instance to handle background color options
-	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> BACKGROUND_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BACKGROUND_COLOR);
 	// callback instance to handle radius options
 	private static final CallbackPropertyHandler<RadiusCallback<AnnotationContext>> RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.RADIUS);
 	// callback instance to handle xValue options
@@ -110,9 +101,10 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	// callback instance to handle yValue options
 	private static final CallbackPropertyHandler<ValueCallback> Y_VALUE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_VALUE);
 
-
 	// defaults options
 	private final IsDefaultsPointAnnotation defaultValues;
+	// background color handler
+	private final BackgroundColorHandler backgroundColorHandler;
 
 	/**
 	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -184,6 +176,8 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
 		}
+		// creates background color handler
+		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initCallbacks();
 	}
@@ -204,10 +198,12 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
 		}
+		// creates background color handler
+		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initCallbacks();
 	}
-	
+
 	/**
 	 * Initializes the callbacks proxies for the options which can be scriptable.
 	 */
@@ -216,8 +212,6 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), getBackgroundColorCallback(), defaultValues.getBackgroundColorAsString()));
-		// sets function to proxy callback in order to invoke the java interface
 		this.radiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getRadiusCallback(), defaultValues.getRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.xValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), getXValueCallback()));
@@ -225,6 +219,15 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		this.yValueCallbackProxy.setCallback((contextFunction, context) -> onValue(new AnnotationContext(this, context), getYValueCallback()));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasBackgroundColor#getBackgroundColorHandler()
+	 */
+	@Override
+	public BackgroundColorHandler getBackgroundColorHandler() {
+		return backgroundColorHandler;
+	}
 
 	/**
 	 * Sets the radius of the point shape.<br>
@@ -247,50 +250,6 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	@Override
 	public double getRadius() {
 		return getValue(Property.RADIUS, defaultValues.getRadius());
-	}
-
-	/**
-	 * Sets the color of the background of annotation.
-	 * 
-	 * @param backgroundColor the color of the background of annotation
-	 */
-	public final void setBackgroundColor(IsColor backgroundColor) {
-		// sets final to avoid duplicate
-		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
-	}
-
-	/**
-	 * Sets the color of the background of annotation.
-	 * 
-	 * @param backgroundColor the color of the background of annotation
-	 */
-	public final void setBackgroundColor(String backgroundColor) {
-		// sets final to avoid duplicate
-		// resets callback
-		setBackgroundColor((ColorCallback<AnnotationContext>)null);
-		// stores value
-		setValue(Property.BACKGROUND_COLOR, backgroundColor);
-	}
-
-	/**
-	 * Returns the color of the background of annotation.
-	 * 
-	 * @return the color of the background of annotation
-	 */
-	@Override
-	public final String getBackgroundColorAsString() {
-		// sets final to avoid duplicate
-		return getValue(Property.BACKGROUND_COLOR, defaultValues.getBackgroundColorAsString());
-	}
-
-	/**
-	 * Returns the color of the background of annotation.
-	 * 
-	 * @return the color of the background of annotation
-	 */
-	public final IsColor getBackgroundColor() {
-		// sets final to avoid duplicate
-		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
@@ -368,7 +327,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setXValue(String value) {
 		// resets callback
-		setXValue((ValueCallback)null);
+		setXValue((ValueCallback) null);
 		// stores value
 		setValue(Property.X_VALUE, value);
 	}
@@ -380,8 +339,8 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setXValue(double value) {
 		// resets callback
-		setXValue((ValueCallback)null);
-		// stores value		
+		setXValue((ValueCallback) null);
+		// stores value
 		setValue(Property.X_VALUE, value);
 	}
 
@@ -392,7 +351,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setXValue(Date value) {
 		// resets callback
-		setXValue((ValueCallback)null);
+		setXValue((ValueCallback) null);
 		// stores value
 		setValue(Property.X_VALUE, value);
 	}
@@ -434,7 +393,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setYValue(String value) {
 		// resets callback
-		setYValue((ValueCallback)null);
+		setYValue((ValueCallback) null);
 		// stores value
 		setValue(Property.Y_VALUE, value);
 	}
@@ -446,7 +405,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setYValue(double value) {
 		// resets callback
-		setYValue((ValueCallback)null);
+		setYValue((ValueCallback) null);
 		// stores value
 		setValue(Property.Y_VALUE, value);
 	}
@@ -458,7 +417,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setYValue(Date value) {
 		// resets callback
-		setYValue((ValueCallback)null);
+		setYValue((ValueCallback) null);
 		// stores value
 		setValue(Property.Y_VALUE, value);
 	}
@@ -492,30 +451,11 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	public Date getYValueAsDate() {
 		return getValueForMultipleKeyTypes(Property.Y_VALUE, defaultValues.getYValueAsDate());
 	}
-	
+
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
 
-	/**
-	 * Returns the callback called to set the color of the background of annotation.
-	 * 
-	 * @return the callback called to set the color of the background of annotation
-	 */
-	@Override
-	public ColorCallback<AnnotationContext> getBackgroundColorCallback() {
-		return BACKGROUND_COLOR_PROPERTY_HANDLER.getCallback(this, defaultValues.getBackgroundColorCallback());
-	}
-
-	/**
-	 * Sets the callback to set the color of the background of annotation.
-	 * 
-	 * @param backgroundColorCallback to set the color of the background of annotation
-	 */
-	public void setBackgroundColor(ColorCallback<AnnotationContext> backgroundColorCallback) {
-		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
-	}
-	
 	/**
 	 * Returns the callback called to set the radius.
 	 * 
@@ -534,7 +474,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	public void setRadius(RadiusCallback<AnnotationContext> radiusCallback) {
 		RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, radiusCallback, radiusCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Returns the callback called to set the data X value to draw the line at.
 	 * 
@@ -553,7 +493,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	public void setXValue(ValueCallback valueCallback) {
 		X_VALUE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, xValueCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Returns the callback called to set the data Y value to draw the line at.
 	 * 

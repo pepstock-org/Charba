@@ -15,41 +15,22 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.ColorCallback;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin BOX annotation DEFAULTS options.
+ * This is the default options for items which provides background color property.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBoxAnnotation extends IsDefaultsAbstractBoxAnnotation {
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
-	 */
-	@Override
-	default AnnotationType getType() {
-		return null;
-	}
-
+interface IsDefaultsBackgroundColorHandler {
+	
 	/**
-	 * Returns the border radius.
+	 * Returns the callback called to set the color of the background of annotation.
 	 * 
-	 * @return the border radius.
+	 * @return the callback called to set the color of the background of annotation
 	 */
-	default double getCornerRadius() {
-		return BoxAnnotation.DEFAULT_CORNER_RADIUS;
-	}
-
-	/**
-	 * Returns the callback called to set the corner radius.
-	 * 
-	 * @return the callback called to set the corner radius
-	 */
-	default RadiusCallback<AnnotationContext> getCornerRadiusCallback() {
+	default ColorCallback<AnnotationContext> getBackgroundColorCallback() {
 		return null;
 	}
 

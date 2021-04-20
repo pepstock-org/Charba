@@ -17,9 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
-import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -31,7 +29,7 @@ import org.pepstock.charba.client.options.IsScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation {
+interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler {
 
 	/*
 	 * (non-Javadoc)
@@ -41,15 +39,6 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation {
 	@Override
 	default int getBorderWidth() {
 		return PointAnnotation.DEFAULT_BORDER_WIDTH;
-	}
-
-	/**
-	 * Returns the color of the background of annotation.
-	 * 
-	 * @return the color of the background of annotation
-	 */
-	default String getBackgroundColorAsString() {
-		return Defaults.get().getGlobal().getColorAsString();
 	}
 
 	/**
@@ -131,15 +120,6 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation {
 	 * @return the data Y value to draw the point at
 	 */
 	default Date getYValueAsDate() {
-		return null;
-	}
-	
-	/**
-	 * Returns the callback called to set the color of the background of annotation.
-	 * 
-	 * @return the callback called to set the color of the background of annotation
-	 */
-	default ColorCallback<AnnotationContext> getBackgroundColorCallback() {
 		return null;
 	}
 	
