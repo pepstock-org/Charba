@@ -241,16 +241,16 @@ final class BaseMeterController extends AbstractController {
 		context.setEasing(1D);
 		context.setValue(maxValue);
 		// gets max value in the string to check font size
-		final String maxValueToShow = getFormattedValue(chart, options, context);
+		final String maxValueToShow = getFormattedValue(options, context);
 		// sets to the right values
 		context.setEasing(ease);
 		context.setValue(value);
 		// value to show with format required
-		final String valueToShow = getFormattedValue(chart, options, context);
+		final String valueToShow = getFormattedValue(options, context);
 		// gets font
 		final FontItem font = options.getFontItem();
 		// gets font color
-		final String fontColor = getFontColor(chart, options, context);
+		final String fontColor = getFontColor(options, context);
 		// gets the label
 		final String label = dataset.getLabel();
 		// saves context
@@ -337,12 +337,11 @@ final class BaseMeterController extends AbstractController {
 	/**
 	 * Returns the color to apply to rendered label, invoking the callback if set.
 	 * 
-	 * @param chart chart instance
 	 * @param options options of the chart
 	 * @param context scriptable context of meter
 	 * @return the font color to apply to rendered label
 	 */
-	private String getFontColor(IsChart chart, MeterOptions options, MeterContext context) {
+	private String getFontColor(MeterOptions options, MeterContext context) {
 		// checks if the options font color is set as callback
 		if (options.getFontColorCallback() != null) {
 			Object result = ScriptableUtils.getOptionValueAsColor(context, options.getFontColorCallback(), MeterOptions.DEFAULT_FONT_COLOR_AS_STRING, false);
@@ -372,12 +371,11 @@ final class BaseMeterController extends AbstractController {
 	/**
 	 * Returns a formatted value of the chart applying the precision or invoking the value callback.
 	 * 
-	 * @param chart chart instance
 	 * @param options options of the chart
 	 * @param context scriptable context of meter
 	 * @return a formatted value of the chart
 	 */
-	private String getFormattedValue(IsChart chart, MeterOptions options, MeterContext context) {
+	private String getFormattedValue(MeterOptions options, MeterContext context) {
 		// checks if options has got a callback
 		if (options.getFormatCallback() != null) {
 			// invokes callback

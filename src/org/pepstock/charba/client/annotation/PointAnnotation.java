@@ -254,7 +254,8 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * 
 	 * @param backgroundColor the color of the background of annotation
 	 */
-	public void setBackgroundColor(IsColor backgroundColor) {
+	public final void setBackgroundColor(IsColor backgroundColor) {
+		// sets final to avoid duplicate
 		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
 	}
 
@@ -263,7 +264,8 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * 
 	 * @param backgroundColor the color of the background of annotation
 	 */
-	public void setBackgroundColor(String backgroundColor) {
+	public final void setBackgroundColor(String backgroundColor) {
+		// sets final to avoid duplicate
 		// resets callback
 		setBackgroundColor((ColorCallback<AnnotationContext>)null);
 		// stores value
@@ -276,7 +278,8 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @return the color of the background of annotation
 	 */
 	@Override
-	public String getBackgroundColorAsString() {
+	public final String getBackgroundColorAsString() {
+		// sets final to avoid duplicate
 		return getValue(Property.BACKGROUND_COLOR, defaultValues.getBackgroundColorAsString());
 	}
 
@@ -285,7 +288,8 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * 
 	 * @return the color of the background of annotation
 	 */
-	public IsColor getBackgroundColor() {
+	public final IsColor getBackgroundColor() {
+		// sets final to avoid duplicate
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
