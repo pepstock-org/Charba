@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
@@ -105,7 +106,7 @@ public final class CharacterShape extends AbstractShape {
 		// apply the stroke properties
 		applyFillProperties(context, shapeColor);
 		// sets font as string
-		context.setFont(Utilities.toCSSFontProperty(FontStyle.NORMAL, Weight.NORMAL, realFontSize, fontFamily));
+		context.setFont(Utilities.toCSSFontProperty(FontStyle.NORMAL, Weight.NORMAL, realFontSize, Constants.EMPTY_STRING, fontFamily));
 		// sets alignment from center point
 		context.setTextBaseline(TextBaseline.TOP);
 		// gets metrics
@@ -158,7 +159,7 @@ public final class CharacterShape extends AbstractShape {
 		// loop to calculate the size
 		while (check) {
 			// sets font
-			context.setFont(Utilities.toCSSFontProperty(style, Weight.NORMAL, calculatedFontSize, fontFamily));
+			context.setFont(Utilities.toCSSFontProperty(style, Weight.NORMAL, calculatedFontSize, Constants.EMPTY_STRING, fontFamily));
 			// gets metrics
 			TextMetricsItem metrics = context.measureText(value);
 			// if the width is inside of tile size

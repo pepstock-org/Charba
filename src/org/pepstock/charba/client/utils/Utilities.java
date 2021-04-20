@@ -74,6 +74,7 @@ public final class Utilities {
 	/**
 	 * Template to create CSS value of pattern, to use for <code>background</code> CSS shorthand property.<br>
 	 * The template for a pattern is: <br>
+	 * <br>
 	 * <code>
 	 * url(image-url) repetition
 	 * </code> <br>
@@ -82,16 +83,37 @@ public final class Utilities {
 	 * <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/background-image">https://developer.mozilla.org/en-US/docs/Web/CSS/background-image</a> <br>
 	 */
 	private static final String PATTERN_TEMPLATE = "url({0}) {1}";
+	/**
+	 * The CSS font template is the following:<br>
+	 * <br>
+	 * <code>
+	 * font-style  font-variant  font-weight  font-size/line-height  font-family
+	 * optional    optional      optional     mandatory optional     mandatory
+	 * </code>
+	 * <br>
+	 * See <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/font">https://developer.mozilla.org/en-US/docs/Web/CSS/font</a><br>
+	 * font-variant is not implemented, therefore, teh template is:<br>
+	 * <br>
+	 * <code>
+	 * font-style  "normal "    font-weight  font-size/line-height  font-family
+	 * optional    font-variant optional     mandatory optional     mandatory
+	 * </code>
+	 * <br>
+	 */
+	// minimun font size in pixels
+	private static final int MINIMUM_FONT_SIZE = 4;
 	// string format of font CSS style
-	private static final String FONT_TEMPLATE = "{0} normal {1} {2}px {3}";
+	private static final String FONT_TEMPLATE = "{0} normal {1} {2}px{3} {4}";
 	// string format of font style
 	private static final String REGEXP_FONT_STYLE_PATTERN = "{0}";
 	// string format of font size
 	private static final String REGEXP_FONT_WEIGHT_PATTERN = "{1}";
 	// string format of font size
 	private static final String REGEXP_FONT_SIZE_PATTERN = "{2}";
+	// string format of font line height
+	private static final String REGEXP_FONT_LINE_HEIGHT_PATTERN = "{3}";
 	// string format of font family
-	private static final String REGEXP_FONT_FAMILY_PATTERN = "{3}";
+	private static final String REGEXP_FONT_FAMILY_PATTERN = "{4}";
 	// canvas element to draw
 	private static final Canvas WORKING_CANVAS = DOMBuilder.get().isCanvasSupported() ? DOMBuilder.get().createCanvasElement() : null;
 	// internal comparator to sort colors by own offset
@@ -118,12 +140,41 @@ public final class Utilities {
 	public static String toCSSFontProperty(IsDefaultFont font) {
 		// checks if argument is consistent
 		if (font != null) {
-			return toCSSFontProperty(font.getStyle(), font.getWeight(), font.getSize(), font.getFamily());
+			// checks the type of line height
+			if (font.getLineHeightAsString() == null) {
+				// line height as double
+				return toCSSFontProperty(font.getStyle(), font.getWeight(), font.getSize(), font.getLineHeight(), font.getFamily());
+			}
+			// if here, line height as string
+			return toCSSFontProperty(font.getStyle(), font.getWeight(), font.getSize(), font.getLineHeightAsString(), font.getFamily());
 		}
 		// if here the font is not consistent
 		// and the returns the default font
 		Font globalFont = Defaults.get().getGlobal().getFont();
-		return toCSSFontProperty(globalFont.getStyle(), globalFont.getWeight(), globalFont.getSize(), globalFont.getFamily());
+		return toCSSFontProperty(globalFont);
+	}
+	
+	/**
+	 * Builds the font string (shorthand property of CSS font) to use in the canvas object.<br>
+	 * The format is [font-style] [font-variant] [font-weight] [font-size] [font-family].<br>
+	 * See <a href="https://www.w3schools.com/tags/canvas_font.asp">here</a> CSS specification.
+	 * 
+	 * @param style font style to use
+	 * @param weight font weight
+	 * @param size font size
+	 * @param lineHeight line height
+	 * @param family font family
+	 * @return the font string to use in the canvas object.
+	 */
+	public static String toCSSFontProperty(FontStyle style, Weight weight, int size, double lineHeight, String family) {
+		// gets string reference of line height
+		String lineHeightAsString = null;
+		// checks if line height is consistent
+		if (!Double.isNaN(lineHeight)) {
+			// then sets the double as string
+			lineHeightAsString = applyPrecision(lineHeight, 1);
+		}
+		return toCSSFontProperty(style, weight, size, lineHeightAsString, family);
 	}
 
 	/**
@@ -134,20 +185,29 @@ public final class Utilities {
 	 * @param style font style to use
 	 * @param weight font weight
 	 * @param size font size
+	 * @param lineHeight line height
 	 * @param family font family
 	 * @return the font string to use in the canvas object.
 	 */
-	public static String toCSSFontProperty(FontStyle style, Weight weight, int size, String family) {
+	public static String toCSSFontProperty(FontStyle style, Weight weight, int size, String lineHeight, String family) {
 		// gets template
 		final String result = FONT_TEMPLATE;
+		// checks font size
+		final int fontSize = Math.max(size, MINIMUM_FONT_SIZE);
 		// checks if font style is consistent
 		// setting style and weight CSS
 		final FontStyle fontStyle = style == null ? Defaults.get().getGlobal().getFont().getStyle() : style;
 		final Weight fontWeight = weight == null ? Defaults.get().getGlobal().getFont().getWeight() : weight;
 		// checks if font family is consistent
 		final String fontFamily = family == null ? Defaults.get().getGlobal().getFont().getFamily() : family;
+		// gets line height
+		final String fontLineHeight = lineHeight == null || lineHeight.trim().length() == 0 ? Constants.EMPTY_STRING : Constants.SLASH + lineHeight;
 		// by regex changes the value of format
-		return result.replace(REGEXP_FONT_STYLE_PATTERN, fontStyle.value()).replace(REGEXP_FONT_WEIGHT_PATTERN, fontWeight.value()).replace(REGEXP_FONT_SIZE_PATTERN, String.valueOf(size)).replace(REGEXP_FONT_FAMILY_PATTERN, fontFamily);
+		return result.replace(REGEXP_FONT_STYLE_PATTERN, fontStyle.value())
+				.replace(REGEXP_FONT_WEIGHT_PATTERN, fontWeight.value())
+				.replace(REGEXP_FONT_SIZE_PATTERN, String.valueOf(fontSize))
+				.replace(REGEXP_FONT_LINE_HEIGHT_PATTERN, String.valueOf(fontLineHeight))
+				.replace(REGEXP_FONT_FAMILY_PATTERN, fontFamily);
 	}
 
 	/**

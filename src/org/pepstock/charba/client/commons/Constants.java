@@ -27,6 +27,11 @@ public final class Constants {
 	 * Constant for EMPTY string, <b>{@value}</b>.
 	 */
 	public static final String EMPTY_STRING = "";
+	
+	/**
+	 * Constant for SLASH string, <b>{@value}</b>.
+	 */
+	public static final String SLASH = "/";
 
 	/**
 	 * Constant for NULL string, <b>"&lt;null&gt;"</b>.
