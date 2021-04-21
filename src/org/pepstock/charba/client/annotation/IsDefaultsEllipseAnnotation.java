@@ -21,6 +21,16 @@ package org.pepstock.charba.client.annotation;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsEllipseAnnotation extends IsDefaultsAbstractBoxAnnotation {
+interface IsDefaultsEllipseAnnotation extends IsDefaultsXYAnnotation, IsDefaultsBackgroundColorHandler {
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderWidth()
+	 */
+	@Override
+	default int getBorderWidth() {
+		return EllipseAnnotation.DEFAULT_BORDER_WIDTH;
+	}
 
 }

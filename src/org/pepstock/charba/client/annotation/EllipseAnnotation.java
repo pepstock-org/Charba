@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Implements a ELLIPSE annotation which draws a ellipse in the a chart.<br>
@@ -26,8 +27,18 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class EllipseAnnotation extends AbstractBoxAnnotation implements IsDefaultsEllipseAnnotation {
+public final class EllipseAnnotation extends AbstractXYAnnotation implements IsDefaultsEllipseAnnotation, HasBackgroundColor {
+	
+	/**
+	 * Default box annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
+	 */
+	public static final int DEFAULT_BORDER_WIDTH = 1;
 
+	// defaults options
+	private final IsDefaultsEllipseAnnotation defaultValues;
+	// background color handler
+	private final BackgroundColorHandler backgroundColorHandler;
+	
 	/**
 	 * Creates a ellipse annotation to be added to an {@link AnnotationOptions} instance.<br>
 	 * The annotation id is calculated automatically.
@@ -88,6 +99,16 @@ public final class EllipseAnnotation extends AbstractBoxAnnotation implements Is
 	 */
 	private EllipseAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
 		super(AnnotationType.ELLIPSE, id, defaultValues);
+		// checks if default are of the right class
+		if (getDefaultsValues() instanceof IsDefaultsEllipseAnnotation) {
+			// casts and stores it
+			this.defaultValues = (IsDefaultsEllipseAnnotation) getDefaultsValues();
+		} else {
+			// wrong class, exception!
+			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
+		}
+		// creates background color handler
+		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/**
@@ -98,5 +119,26 @@ public final class EllipseAnnotation extends AbstractBoxAnnotation implements Is
 	 */
 	EllipseAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
 		super(AnnotationType.ELLIPSE, nativeObject, defaultValues);
+		// checks if default are of the right class
+		if (getDefaultsValues() instanceof IsDefaultsEllipseAnnotation) {
+			// casts and stores it
+			this.defaultValues = (IsDefaultsEllipseAnnotation) getDefaultsValues();
+		} else {
+			// wrong class, exception!
+			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
+		}
+		// creates background color handler
+		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasBackgroundColor#getBackgroundColorHandler()
+	 */
+	@Override
+	public BackgroundColorHandler getBackgroundColorHandler() {
+		return backgroundColorHandler;
+	}
+	
 }

@@ -34,7 +34,12 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefaultsBoxAnnotation {
+public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefaultsBoxAnnotation, HasBackgroundColor {
+
+	/**
+	 * Default box annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
+	 */
+	public static final int DEFAULT_BORDER_WIDTH = 1;
 
 	/**
 	 * Default box annotation corner radius, <b>{@value DEFAULT_CORNER_RADIUS}</b>.
@@ -83,6 +88,8 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 
 	// defaults options
 	private final IsDefaultsBoxAnnotation defaultValues;
+	// background color handler
+	private final BackgroundColorHandler backgroundColorHandler;
 
 	/**
 	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -145,13 +152,15 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 	private BoxAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
 		super(AnnotationType.BOX, id, defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsAbstractBoxAnnotation) {
+		if (getDefaultsValues() instanceof IsDefaultsBoxAnnotation) {
 			// casts and stores it
 			this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
 		} else {
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
 		}
+		// creates background color handler
+		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initCallbacks();
 	}
@@ -165,13 +174,15 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 	BoxAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
 		super(AnnotationType.BOX, nativeObject, defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsAbstractBoxAnnotation) {
+		if (getDefaultsValues() instanceof IsDefaultsBoxAnnotation) {
 			// casts and stores it
 			this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
 		} else {
 			// wrong class, exception!
 			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
 		}
+		// creates background color handler
+		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initCallbacks();
 	}
@@ -185,6 +196,36 @@ public final class BoxAnnotation extends AbstractBoxAnnotation implements IsDefa
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
 		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getCornerRadiusCallback(), defaultValues.getCornerRadius()).doubleValue());
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasBackgroundColor#getBackgroundColorHandler()
+	 */
+	@Override
+	public BackgroundColorHandler getBackgroundColorHandler() {
+		return backgroundColorHandler;
+	}
+	
+	/**
+	 * Returns the color of the border of annotation.
+	 * 
+	 * @return the color of the border of annotation
+	 */
+	@Override
+	public final String getBorderColorAsString() {
+		return getValue(AbstractAnnotation.Property.BORDER_COLOR, defaultValues.getBorderColorAsString());
+	}
+
+	/**
+	 * Returns the width of the border in pixels.
+	 * 
+	 * @return the width of the border in pixels.
+	 */
+	@Override
+	public final int getBorderWidth() {
+		return getValue(AbstractAnnotation.Property.BORDER_WIDTH, defaultValues.getBorderWidth());
 	}
 
 	/**

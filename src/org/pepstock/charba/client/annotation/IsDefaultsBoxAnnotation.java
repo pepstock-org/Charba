@@ -23,7 +23,7 @@ import org.pepstock.charba.client.callbacks.RadiusCallback;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBoxAnnotation extends IsDefaultsAbstractBoxAnnotation {
+interface IsDefaultsBoxAnnotation extends IsDefaultsXYAnnotation, IsDefaultsBackgroundColorHandler {
 
 	/*
 	 * (non-Javadoc)
@@ -33,6 +33,16 @@ interface IsDefaultsBoxAnnotation extends IsDefaultsAbstractBoxAnnotation {
 	@Override
 	default AnnotationType getType() {
 		return null;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderWidth()
+	 */
+	@Override
+	default int getBorderWidth() {
+		return BoxAnnotation.DEFAULT_BORDER_WIDTH;
 	}
 
 	/**
