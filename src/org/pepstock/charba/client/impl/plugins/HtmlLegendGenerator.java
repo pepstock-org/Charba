@@ -147,6 +147,12 @@ final class HtmlLegendGenerator {
 		final LegendLabels legendLabels = legend.getLabels();
 		// creates table as result
 		final Table mainTable = DOMBuilder.get().createTableElement();
+		// resets padding and spacing
+		mainTable.setCellPadding(String.valueOf(0));
+		mainTable.setCellSpacing(String.valueOf(0));
+		mainTable.getStyle().setBorderSpacing(Unit.PX.format(0));
+		// sets horizontal alignment
+		mainTable.setAlign(legend.getAlign().getHorizontalAlignmentValue());
 		// its has got only 1 colum and 2 row
 		// title - table
 		// legendItem - table
