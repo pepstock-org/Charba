@@ -188,7 +188,7 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 		// checks the default values
 		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
 		// gets font
-		this.font = new ClearSelectionFont(this.defaultOptions.getFont(), getValue(Property.FONT));
+		this.font = new ClearSelectionFont(this.defaultOptions.getFont(), getNativeObject());
 	}
 	
 	/**

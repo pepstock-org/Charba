@@ -630,7 +630,9 @@ final class SelectionHandler {
 		if (Render.IMAGE.equals(clearSelection.getRender())) {
 			// if here is ONLY image
 			// gets image height
-			double imgHeight = clearSelection.getImage().getHeight();
+			// checks with max 16, the max height of default images, otherwise
+			// the height is not correctly calculated
+			double imgHeight = Math.max(clearSelection.getImage().getHeight(), 16);
 			// adds to total height
 			height += imgHeight;
 			// stores image height
