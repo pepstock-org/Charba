@@ -15,12 +15,13 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTypedDataset;
 
 /**
- * Contains the options for the datasets.
+ * Contains the options for the data sets.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -63,21 +64,25 @@ public class TypedDataset extends AbstractModel<Datasets, IsDefaultTypedDataset>
 	private final BarDatasetOptionsHandler barOptionsHandler;
 	// animation container
 	private final AnimationContainer animationContainer;
+	// chart type instance
+	private final Type type;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param options options of the chart.
-	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param type the property name of this element to use to add it to the parent and is the type of data set.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	TypedDataset(Datasets options, Key childKey, IsDefaultTypedDataset defaultValues, NativeObject nativeObject) {
-		super(options, childKey, defaultValues, nativeObject);
+	TypedDataset(Datasets options, Type type, IsDefaultTypedDataset defaultValues, NativeObject nativeObject) {
+		super(options, type, defaultValues, nativeObject);
+		// checks type consistency and stores it
+		this.type = Type.checkAndGetIfValid(type);
 		// creates the properties handlers
 		this.barOptionsHandler = new BarDatasetOptionsHandler(this, getDefaultValues(), getNativeObject());
 		// sets animation container
-		this.animationContainer = new AnimationContainer(options, childKey, getDefaultValues(), getNativeObject());
+		this.animationContainer = new AnimationContainer(options, this.type, getDefaultValues(), getNativeObject());
 	}
 
 	/*
@@ -101,18 +106,27 @@ public class TypedDataset extends AbstractModel<Datasets, IsDefaultTypedDataset>
 	}
 
 	/**
-	 * Sets if the line is not drawn for this dataset.
+	 * Returns the data set type.
 	 * 
-	 * @param showLine <code>false</code> if the line is not drawn for this dataset.
+	 * @return the data set type
+	 */
+	public final Type getType() {
+		return type;
+	}
+
+	/**
+	 * Sets if the line is not drawn for this data set.
+	 * 
+	 * @param showLine <code>false</code> if the line is not drawn for this data set.
 	 */
 	public void setShowLine(boolean showLine) {
 		setValueAndAddToParent(Property.SHOW_LINE, showLine);
 	}
 
 	/**
-	 * Returns if the line is not drawn for this dataset.
+	 * Returns if the line is not drawn for this data set.
 	 * 
-	 * @return <code>false</code> if the line is not drawn for this dataset.
+	 * @return <code>false</code> if the line is not drawn for this data set.
 	 */
 	@Override
 	public boolean isShowLine() {
