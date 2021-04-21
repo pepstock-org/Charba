@@ -30,45 +30,45 @@ import org.pepstock.charba.client.labels.LabelsEnvelop;
 public class DatasetContext extends AbstractDatasetContext {
 
 	/**
-	 * Creates the object with public object instance to be wrapped, called by <code>configuration</code> package.
+	 * Creates the object with native object instance to be wrapped, called by <code>configuration</code> package.
 	 * 
-	 * @param envelop envelop of public object instance to be wrapped.
+	 * @param envelop envelop of native object instance to be wrapped.
 	 */
 	public DatasetContext(ConfigurationEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Creates the object with public object instance to be wrapped, called by <code>data</code> package.
+	 * Creates the object with native object instance to be wrapped, called by <code>data</code> package.
 	 * 
-	 * @param envelop envelop of public object instance to be wrapped.
+	 * @param envelop envelop of native object instance to be wrapped.
 	 */
 	public DatasetContext(DataEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Creates the object with public object instance to be wrapped, called by <code>datalabels</code> package.
+	 * Creates the object with native object instance to be wrapped, called by <code>datalabels</code> package.
 	 * 
-	 * @param envelop envelop of public object instance to be wrapped.
+	 * @param envelop envelop of native object instance to be wrapped.
 	 */
 	public DatasetContext(DataLabelsEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Creates the object with public object instance to be wrapped, called by <code>labels</code> package.
+	 * Creates the object with native object instance to be wrapped, called by <code>labels</code> package.
 	 * 
-	 * @param envelop envelop of public object instance to be wrapped.
+	 * @param envelop envelop of native object instance to be wrapped.
 	 */
 	public DatasetContext(LabelsEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Creates the object with public object instance to be wrapped.
+	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @param nativeObject public object instance to be wrapped.
+	 * @param nativeObject native object instance to be wrapped.
 	 */
 	private DatasetContext(NativeObject nativeObject) {
 		super(nativeObject);

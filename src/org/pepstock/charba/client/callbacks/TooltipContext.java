@@ -70,18 +70,18 @@ public final class TooltipContext extends ChartContext {
 	private List<TooltipItem> items = null;
 
 	/**
-	 * Creates the object with public object instance to be wrapped, called by <code>configuration</code> package.
+	 * Creates the object with native object instance to be wrapped, called by <code>configuration</code> package.
 	 * 
-	 * @param envelop envelop of public object instance to be wrapped.
+	 * @param envelop envelop of native object instance to be wrapped.
 	 */
 	public TooltipContext(ConfigurationEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
-	 * Creates the object with public object instance to be wrapped.
+	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @param nativeObject public object instance to be wrapped.
+	 * @param nativeObject native object instance to be wrapped.
 	 */
 	private TooltipContext(NativeObject nativeObject) {
 		super(nativeObject);

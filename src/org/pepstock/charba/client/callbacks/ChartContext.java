@@ -65,9 +65,9 @@ public class ChartContext extends NativeObjectContainer{
 	}
 	
 	/**
-	 * Creates the object with public object instance to be wrapped, called by <code>configuration</code> package.
+	 * Creates the object with native object instance to be wrapped, called by <code>configuration</code> package.
 	 * 
-	 * @param envelop envelop of public object instance to be wrapped.
+	 * @param envelop envelop of native object instance to be wrapped.
 	 */
 	public ChartContext(ConfigurationEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
@@ -113,7 +113,7 @@ public class ChartContext extends NativeObjectContainer{
 	 * Sets the additional attributes.
 	 * 
 	 * @param attributes additional attributes instance.
-	 * @param <T> type of public object container to store
+	 * @param <T> type of native object container to store
 	 */
 	public final <T extends NativeObjectContainer> void setAttributes(T attributes) {
 		setValue(Property.ATTRIBUTES, attributes);
@@ -129,10 +129,10 @@ public class ChartContext extends NativeObjectContainer{
 	}
 
 	/**
-	 * Returns the attributes, if exist. It uses a factory instance to create a public object container.
+	 * Returns the attributes, if exist. It uses a factory instance to create a native object container.
 	 * 
-	 * @param factory factory instance to create a public object container.
-	 * @param <T> type of public object container to return
+	 * @param factory factory instance to create a native object container.
+	 * @param <T> type of native object container to return
 	 * @return java script object used to map the attributes or an empty object if not exist.
 	 */
 	public final <T extends NativeObjectContainer> T getAttributes(NativeObjectContainerFactory<T> factory) {
