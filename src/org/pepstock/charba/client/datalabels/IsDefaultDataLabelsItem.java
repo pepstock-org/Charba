@@ -19,6 +19,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
+import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
@@ -30,7 +31,6 @@ import org.pepstock.charba.client.datalabels.callbacks.ClipCallback;
 import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
-import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
@@ -417,7 +417,7 @@ interface IsDefaultDataLabelsItem {
 	 * 
 	 * @return the padding callback.
 	 */
-	default PaddingCallback getPaddingCallback() {
+	default PaddingCallback<DataLabelsContext> getPaddingCallback() {
 		return null;
 	}
 

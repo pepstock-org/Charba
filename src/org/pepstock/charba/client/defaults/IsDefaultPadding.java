@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.items.PaddingItem;
+
 /**
  * Interface to define padding object defaults.
  * 
@@ -49,5 +51,35 @@ public interface IsDefaultPadding {
 	 * @return the padding bottom in pixel.
 	 */
 	int getBottom();
+	
+	/**
+	 * Creates a padding options instance using default or cloning current instance.
+	 * 
+	 * @return a padding options instance using default or cloning current instance
+	 */
+	default PaddingItem create() {
+		return create(null);
+	}
+	
+	/**
+	 * Creates a padding options instance using default or cloning current instance.
+	 * 
+	 * @param defaultValues default provider
+	 * @return a padding options instance using default or cloning current instance
+	 */
+	default PaddingItem create(IsDefaultPadding defaultValues) {
+		// creates new padding item
+		PaddingItem result = new PaddingItem(defaultValues);
+		// sets left
+		result.setLeft(Math.max(getLeft(), 0));
+		// sets right
+		result.setRight(Math.max(getRight(), 0));
+		// sets top
+		result.setTop(Math.max(getTop(), 0));
+		// sets bottom
+		result.setBottom(Math.max(getBottom(), 0));
+		// returns padding item
+		return result;
+	}
 
 }

@@ -15,11 +15,11 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
+import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
@@ -47,7 +47,6 @@ import org.pepstock.charba.client.datalabels.callbacks.ClipCallback;
 import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
-import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
@@ -56,6 +55,7 @@ import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.items.PaddingItem;
 import org.pepstock.charba.client.options.IsScriptableFontProvider;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
@@ -181,7 +181,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	// font callback instance
 	private static final CallbackPropertyHandler<FontCallback<DataLabelsContext>> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
 	// padding callback instance
-	private static final CallbackPropertyHandler<PaddingCallback> PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.PADDING);
+	private static final CallbackPropertyHandler<PaddingCallback<DataLabelsContext>> PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.PADDING);
 
 	// defaults global options instance
 	private final IsDefaultDataLabelsItem defaultOptions;
@@ -1314,7 +1314,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the padding callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final PaddingCallback getPaddingCallback() {
+	public final PaddingCallback<DataLabelsContext> getPaddingCallback() {
 		return PADDING_PROPERTY_HANDLER.getCallback(this, defaultOptions.getPaddingCallback());
 
 	}
@@ -1324,7 +1324,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param paddingCallback the padding callback to set
 	 */
-	public final void setPadding(PaddingCallback paddingCallback) {
+	public final void setPadding(PaddingCallback<DataLabelsContext> paddingCallback) {
 		PADDING_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, paddingCallback, paddingCallbackProxy.getProxy());
 		// checks if the callback is null
 		// because setting to null, the original padding must be set again
@@ -1390,16 +1390,16 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @param callback callback to invoke
 	 * @return a native object as padding
 	 */
-	private NativeObject onPadding(DataLabelsContext context, Scriptable<Padding, DataLabelsContext> callback) {
+	private NativeObject onPadding(DataLabelsContext context, Scriptable<PaddingItem, DataLabelsContext> callback) {
 		// gets value
-		Padding result = ScriptableUtils.getOptionValue(context, callback);
+		PaddingItem result = ScriptableUtils.getOptionValue(context, callback);
 		// checks if result is consistent
 		if (result != null) {
 			// returns result
 			return result.nativeObject();
 		}
 		// default result
-		return getPadding().nativeObject();
+		return getPadding().create(getDefaultsOptions().getPadding()).nativeObject();
 	}
 
 	/**
@@ -1418,7 +1418,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 			return result.nativeObject();
 		}
 		// default result
-		return Defaults.get().getGlobal().getFont().create().nativeObject();
+		return getFont().create().nativeObject();
 	}
 
 }

@@ -205,5 +205,14 @@ public final class Padding extends AbstractNode implements IsPadding {
 			setValue(key, padding);
 		}
 	}
+	
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	NativeObject nativeObject() {
+		return getNativeObject();
+	}
 
 }

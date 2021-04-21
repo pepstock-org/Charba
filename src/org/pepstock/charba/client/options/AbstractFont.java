@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 
 /**
- * Object can be provided with additional configuration by callbacks to define font options at runtime.
+ * Base class to map the font properties of an element.
  * 
  * @author Andrea "Stock" Stocchero
  */

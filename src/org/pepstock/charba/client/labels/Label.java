@@ -817,7 +817,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		}
 		// defaults returns null
 		// and plugin will apply the default chart font
-		return null;
+		return getFont().create().nativeObject();
 	}
 
 }

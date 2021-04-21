@@ -13,19 +13,16 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.datalabels.callbacks;
+package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.datalabels.DataLabelsContext;
-import org.pepstock.charba.client.datalabels.Padding;
+import org.pepstock.charba.client.items.PaddingItem;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set a padding element at runtime, using the plugin context.
+ * Callback interface to set a padding element at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface PaddingCallback extends Scriptable<Padding, DataLabelsContext> {
+public interface PaddingCallback<C extends ChartContext>  extends Scriptable<PaddingItem, C> {
 
 }

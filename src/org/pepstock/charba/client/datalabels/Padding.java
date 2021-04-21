@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.datalabels;
 
+import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.IsPadding;
@@ -38,13 +38,6 @@ public final class Padding extends AbstractElement implements IsPadding {
 
 	// defaults global options instance
 	private IsDefaultPadding defaultOptions;
-
-	/**
-	 * Creates new padding element, using the default values options.
-	 */
-	public Padding() {
-		this(DefaultOptions.INSTANCE.getPadding(), null);
-	}
 
 	/**
 	 * Creates new padding element, using stored native object instance and the default values options.

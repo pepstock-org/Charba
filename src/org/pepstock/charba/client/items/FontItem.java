@@ -16,15 +16,16 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.options.AbstractFont;
 
 /**
- * Font options to use at chart configuration level for scales.
+ * Font options item to use mainly for callbacks.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @see FontCallback
  */
 public final class FontItem extends AbstractFont {
 
