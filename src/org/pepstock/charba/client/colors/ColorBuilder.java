@@ -24,7 +24,7 @@ import org.pepstock.charba.client.utils.RegExpResult;
 
 /**
  * Utility to create colors by red, green and blue values, HEX value and RGB and RGBA strings.<br>
- * It checks if the requested color is already dfined int HTML colors.
+ * It checks if the requested color is already defined in HTML colors.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -230,8 +230,9 @@ public final class ColorBuilder {
 	private static IsColor buildByRGBValue(String rgbvalue) {
 		// executes regular expression
 		RegExpResult matcher = REGEXP_RGB.exec(rgbvalue);
+		// checks if matcher instance is consistent
 		Checker.checkIfValid(matcher, "Invalid RGB format for color: " + rgbvalue);
-		// checks if matches
+		// checks if matcher is consistent
 		Checker.checkIfEqualTo(matcher.length(), 4, "Invalid RGB format for color: " + rgbvalue);
 		// initializes integers values
 		int red = 0;
@@ -267,9 +268,10 @@ public final class ColorBuilder {
 	private static IsColor buildByRGBAValue(String rgbavalue) {
 		// executes regular expression
 		RegExpResult matcher = REGEXP_RGBA.exec(rgbavalue);
-		boolean matchFound = matcher != null;
-		// checks if matches
-		Checker.assertCheck(matchFound && matcher.length() == 5, "Invalid RGBA format for color: " + rgbavalue);
+		// checks if matcher instance is consistent
+		Checker.checkIfValid(matcher, "Invalid RGBA format for color: " + rgbavalue);
+		// checks if matcher is consistent
+		Checker.checkIfEqualTo(matcher.length(), 5, "Invalid RGBA format for color: " + rgbavalue);
 		// initializes integers values
 		int red = 0;
 		int green = 0;
@@ -308,9 +310,10 @@ public final class ColorBuilder {
 	private static IsColor buildByHSLValue(String hslvalue) {
 		// executes regular expression
 		RegExpResult matcher = REGEXP_HSL.exec(hslvalue);
-		boolean matchFound = matcher != null;
-		// checks if matches
-		Checker.assertCheck(matchFound && matcher.length() == 4, "Invalid HSL format for color: " + hslvalue);
+		// checks if matcher instance is consistent
+		Checker.checkIfValid(matcher, "Invalid HSL format for color: " + hslvalue);
+		// checks if matcher is consistent
+		Checker.checkIfEqualTo(matcher.length(), 4, "Invalid HSL format for color: " + hslvalue);
 		// initializes integers values
 		int hue = 0;
 		int saturation = 0;
@@ -345,9 +348,10 @@ public final class ColorBuilder {
 	private static IsColor buildByHSLAValue(String hslavalue) {
 		// executes regular expression
 		RegExpResult matcher = REGEXP_HSLA.exec(hslavalue);
-		boolean matchFound = matcher != null;
-		// checks if matches
-		Checker.assertCheck(matchFound && matcher.length() == 5, "Invalid HSLA format for color: " + hslavalue);
+		// checks if matcher instance is consistent
+		Checker.checkIfValid(matcher, "Invalid HSLA format for color: " + hslavalue);
+		// checks if matcher is consistent
+		Checker.checkIfEqualTo(matcher.length(), 5, "HSLA HSL format for color: " + hslavalue);
 		// initializes integers values
 		int hue = 0;
 		int saturation = 0;
