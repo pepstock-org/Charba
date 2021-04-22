@@ -52,7 +52,7 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 		super(chart);
 		// checks if configuration is consistent
 		// and gets the instance
-		this.configuration = Checker.checkAndGetIfValid(configuration, "Configuration argument");;
+		this.configuration = Checker.checkAndGetIfValid(configuration, "Configuration argument");
 	}
 
 	/**
