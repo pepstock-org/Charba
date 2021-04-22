@@ -339,7 +339,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is positive number (zero is included)
 	 */
 	public static boolean isPositive(double value) {
-		return isValid(value) ? value >= 0 : false;
+		return isValid(value) && value >= 0;
 	}
 
 	/**
@@ -362,7 +362,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is positive number (zero is excluded)
 	 */
 	public static boolean isNegative(double value) {
-		return isValid(value) ? value < 0 : false;
+		return isValid(value) && value < 0;
 	}
 
 	/**
@@ -386,7 +386,7 @@ public final class Checker {
 	 * @return <code>true</code> if the arguments are not equals
 	 */
 	public static boolean isNotEqualTo(double value, double target) {
-		return isValid(value) && isValid(target) ? Double.compare(value, target) != 0 : false;
+		return isValid(value) && isValid(target) && Double.compare(value, target) != 0;
 	}
 
 	/**
@@ -411,7 +411,7 @@ public final class Checker {
 	 * @return <code>true</code> if the arguments are equals
 	 */
 	public static boolean isEqualTo(double value, double target) {
-		return isValid(value) && isValid(target) ? Double.compare(value, target) == 0 : false;
+		return isValid(value) && isValid(target) && Double.compare(value, target) == 0;
 	}
 
 	/**
@@ -436,7 +436,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is greater than the threshold (inclusive)
 	 */
 	public static boolean isGreaterThan(double value, double threshold) {
-		return isValid(value) && isValid(threshold) ? value >= threshold : false;
+		return isValid(value) && isValid(threshold) && value >= threshold;
 	}
 
 	/**
@@ -461,7 +461,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is less than the threshold (inclusive)
 	 */
 	public static boolean isLessThan(double value, double threshold) {
-		return isValid(value) && isValid(threshold) ? value <= threshold : false;
+		return isValid(value) && isValid(threshold) && value <= threshold;
 	}
 
 	/**
@@ -487,7 +487,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value passed as argument is between minimum and maximum values, passed as argument (inclusive
 	 */
 	public static boolean isBetween(double value, double minimum, double maximum) {
-		return isValid(value) && isValid(minimum) && isValid(maximum) ? value >= minimum && value <= maximum : false;
+		return isValid(value) && isValid(minimum) && isValid(maximum) && value >= minimum && value <= maximum;
 	}
 
 	/**
