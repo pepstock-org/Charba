@@ -18,6 +18,7 @@ package org.pepstock.charba.client.resources;
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.DeferredCharba;
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.IsEnvelop;
 
 import com.google.gwt.resources.client.ResourceCallback;
@@ -73,10 +74,7 @@ public final class EntryPointStarter {
 		// checks envelop
 		IsEnvelop.checkIfValid(envelop);
 		// checks if the entry point is consistent
-		if (runnable == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Runnable argument is null");
-		}
+		Checker.checkIfValid(runnable, "Runnable argument");
 		// gets resources
 		DeferredResources resources = envelop.getContent();
 		// sets deferred resources

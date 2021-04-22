@@ -141,6 +141,19 @@ public final class Checker {
 			throwIllegalArgumentException(POSITIVE_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
 	}
+
+	/**
+	 * Checks if value passed as argument is a positive number (zero is included).<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param value value to be checked
+	 * @param what name of the value to put in the exception message
+	 * @return the value passed as argument
+	 */
+	public static int checkAndGetIfPositive(int value, String what) {
+		checkIfPositive(value, what);
+		return value;
+	}
 	
 	/**
 	 * Checks if value passed as argument is a negative number (zero is excluded).
@@ -163,6 +176,19 @@ public final class Checker {
 		if (!isNegative(value)) {
 			throwIllegalArgumentException(NEGATIVE_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
+	}
+	
+	/**
+	 * Checks if value passed as argument is a negative number (zero is excluded).<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param value value to be checked
+	 * @param what name of the value to put in the exception message
+	 * @return the value passed as argument
+	 */
+	public static int checkAndGetIfNegative(int value, String what) {
+		checkIfNegative(value, what);
+		return value;
 	}
 
 	/**
@@ -241,6 +267,19 @@ public final class Checker {
 	}
 
 	/**
+	 * Checks if the value passed as argument is greater than the threshold passed as argument (inclusive).<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @param what name of the value to put in the exception message
+	 * @return the value passed as argument
+	 */
+	public static int checkAndGetIfGreaterThan(int value, int threshold, String what) {
+		checkIfGreaterThan(value, threshold, what);
+		return value;
+	}
+	/**
 	 * Checks if the value passed as argument is less than the threshold passed as argument (inclusive).
 	 *  
 	 * @param value value to be checked
@@ -263,6 +302,20 @@ public final class Checker {
 		if (!isLessThan(value, threshold)) {
 			throwIllegalArgumentException(LESS_EXCEPTION_MESSAGE_TEMPLATE, what, value, threshold);
 		}
+	}
+	
+	/**
+	 * Checks if the value passed as argument is less than the threshold passed as argument (inclusive).<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @param what name of the value to put in the exception message
+	 * @return the value passed as argument
+	 */
+	public static int checkAndGetIfLessThan(int value, int threshold, String what) {
+		checkIfLessThan(value, threshold, what);
+		return value;
 	}
 
 	/**
@@ -290,6 +343,21 @@ public final class Checker {
 		if (!isBetween(value, minimum, maximum)) {
 			throwIllegalArgumentException(BETWEEN_EXCEPTION_MESSAGE_TEMPLATE, what, value, minimum, maximum);
 		}
+	}
+	
+	/**
+	 * Checks if the value passed as argument is between minimum and maximum values, passed as argument (inclusive).<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param value value to be checked
+	 * @param minimum minimum limit to compare to the value
+	 * @param maximum maximum limit to compare to the value
+	 * @param what name of the value to put in the exception message
+	 * @return the value passed as argument
+	 */
+	public static int checkAndGetIfBetween(int value, int minimum, int maximum, String what) {
+		checkIfBetween(value, minimum, maximum, what);
+		return value;
 	}
 
 	// -----------------
@@ -354,6 +422,19 @@ public final class Checker {
 			throwIllegalArgumentException(POSITIVE_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
 	}
+	
+	/**
+	 * Checks if value passed as argument is a positive number (zero is included).<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param value value to be checked
+	 * @param what name of the value to put in the exception message
+	 * @return the value passed as argument
+	 */
+	public static double checkAndGetIfPositive(double value, String what) {
+		checkIfPositive(value, what);
+		return value;
+	}
 
 	/**
 	 * Checks if value passed as argument is a negative number (zero is excluded).
@@ -376,6 +457,19 @@ public final class Checker {
 		if (!isNegative(value)) {
 			throwIllegalArgumentException(NEGATIVE_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
+	}
+	
+	/**
+	 * Checks if value passed as argument is a negative number (zero is excluded).<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param value value to be checked
+	 * @param what name of the value to put in the exception message
+	 * @return the value passed as argument
+	 */
+	public static double checkAndGetIfNegative(double value, String what) {
+		checkIfNegative(value, what);
+		return value;
 	}
 
 	/**
@@ -452,6 +546,20 @@ public final class Checker {
 			throwIllegalArgumentException(GREATER_EXCEPTION_MESSAGE_TEMPLATE, what, value, threshold);
 		}
 	}
+	
+	/**
+	 * Checks if the value passed as argument is greater than the threshold passed as argument (inclusive).<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @param what name of the value to put in the exception message
+	 * @return the value passed as argument
+	 */
+	public static double checkAndGetIfGreaterThan(double value, double threshold, String what) {
+		checkIfGreaterThan(value, threshold, what);
+		return value;
+	}	
 
 	/**
 	 * Checks if the value passed as argument is less than the threshold passed as argument (inclusive).
@@ -476,6 +584,20 @@ public final class Checker {
 		if (!isLessThan(value, threshold)) {
 			throwIllegalArgumentException(LESS_EXCEPTION_MESSAGE_TEMPLATE, what, value, threshold);
 		}
+	}
+	
+	/**
+	 * Checks if the value passed as argument is less than the threshold passed as argument (inclusive).<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @param what name of the value to put in the exception message
+	 * @return the value passed as argument
+	 */
+	public static double checkAndGetIfLessThan(double value, double threshold, String what) {
+		checkIfLessThan(value, threshold, what);
+		return value;
 	}
 
 	/**
@@ -503,6 +625,21 @@ public final class Checker {
 		if (!isBetween(value, minimum, maximum)) {
 			throwIllegalArgumentException(BETWEEN_EXCEPTION_MESSAGE_TEMPLATE, what, value, minimum, maximum);
 		}
+	}
+	
+	/**
+	 * Checks if the value passed as argument is between minimum and maximum values, passed as argument (inclusive).<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param value value to be checked
+	 * @param minimum minimum limit to compare to the value
+	 * @param maximum maximum limit to compare to the value
+	 * @param what name of the value to put in the exception message
+	 * @return the value passed as argument
+	 */
+	public static double checkAndGetIfBetween(double value, double minimum, double maximum, String what) {
+		checkIfBetween(value, minimum, maximum, what);
+		return value;
 	}
 
 	// -----------------

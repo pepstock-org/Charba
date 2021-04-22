@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -202,7 +203,7 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultTyp
 	int getMinBarLength() {
 		return getValue(Property.MIN_BAR_LENGTH, getDefaultValues().getMinBarLength());
 	}
-	
+
 	/**
 	 * When <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value.<br>
 	 * When <code>false</code>, each bar is placed on its actual index-axis value.
@@ -225,16 +226,14 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultTyp
 	}
 
 	/**
-	 * Any double between 0.0d and 1.0d (inclusive) is valid.
+	 * Any double between 0d and 1d (inclusive) is valid.
 	 * 
 	 * @param percentage value between 0 and 1 for a percentage value
 	 * @param property property to be checked
 	 * @return the value passed as argument
 	 */
 	private double checkAndGetPercentage(double percentage, Property property) {
-		if (percentage < MINIMUM_PERCENTAGE || percentage > MAXIMUM_PERCENTAGE) {
-			throw new IllegalArgumentException(property.value + " argument (" + percentage + ") is not within bounds (0D-1D)");
-		}
+		Checker.checkIfBetween(percentage, MINIMUM_PERCENTAGE, MAXIMUM_PERCENTAGE, property.value + " argument");
 		// if here the value is correct
 		return percentage;
 	}

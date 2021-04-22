@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.utils;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -66,13 +67,9 @@ public final class CTimer {
 	 */
 	public CTimer(Runnable task, int interval) {
 		// checks if task is consistent
-		if (task == null) {
-			// exception!
-			throw new IllegalArgumentException("Task instance is null");
-		}
-		// stores arguments
-		this.interval = checkInterval(interval);
-		this.task = task;
+		this.task = Checker.checkAndGetIfValid(task, "Task instance");
+		// stores interval
+		this.interval = Checker.checkAndGetIfGreaterThan(interval, 1, "Interval");
 	}
 
 	/**
@@ -103,7 +100,7 @@ public final class CTimer {
 	 */
 	public void start(int interval) {
 		// checks interval
-		this.interval = checkInterval(interval);
+		this.interval = Checker.checkAndGetIfGreaterThan(interval, 1, "Interval");
 		// starts the timer.
 		start();
 	}
@@ -134,22 +131,6 @@ public final class CTimer {
 			// resets interval id
 			this.intervalID = UndefinedValues.INTEGER;
 		}
-	}
-
-	/**
-	 * Checks if the interval time is consistent or not.
-	 * 
-	 * @param interval the time, in milliseconds (thousands of a second), the timer should delay in between executions of the specified task
-	 * @return the interval time passed as argument
-	 */
-	private int checkInterval(int interval) {
-		// checks if the interval is greater than 0
-		if (interval <= 0) {
-			// if not, exception!
-			throw new IllegalArgumentException("The interval must be grater than 0");
-		}
-		// returns the argument
-		return interval;
 	}
 
 }

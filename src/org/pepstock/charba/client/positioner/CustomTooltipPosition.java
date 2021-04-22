@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.positioner;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TooltipPosition;
@@ -37,14 +38,9 @@ public final class CustomTooltipPosition implements IsTooltipPosition {
 	 */
 	public CustomTooltipPosition(String name) {
 		// checks if consistent
-		if (name == null) {
-			throw new IllegalArgumentException("The tooltip position argument is null");
-		}
+		this.name = Checker.checkAndGetIfValid(name, "Tooltip position argument");
 		// check is the name is the same of already out of the box ones
-		if (Key.hasKeyByValue(TooltipPosition.values(), name)) {
-			throw new IllegalArgumentException("The tooltip position '" + name + "' is already defined");
-		}
-		this.name = name;
+		Checker.assertCheck(!Key.hasKeyByValue(TooltipPosition.values(), name), "Tooltip position '" + name + "' is already defined");
 	}
 
 	/*

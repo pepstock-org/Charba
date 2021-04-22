@@ -18,6 +18,7 @@ package org.pepstock.charba.client.utils;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.BaseElement;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.BaseNode;
@@ -77,10 +78,7 @@ public final class AnnotationBuilder {
 	 */
 	public static Img build(BaseHtmlElement htmlXmlContent, double width, double height) {
 		// checks if argument element is consistent
-		if (htmlXmlContent == null) {
-			// if not exception
-			throw new IllegalArgumentException("Element argument is null");
-		}
+		Checker.checkIfValid(htmlXmlContent, "Element argument");
 		// inner html reference
 		final String innerHtml;
 		// checks if cached
@@ -144,10 +142,7 @@ public final class AnnotationBuilder {
 	 */
 	public static Img build(String htmlXmlContent, double width, double height) {
 		// checks if argument element is consistent
-		if (htmlXmlContent == null) {
-			// if not exception
-			throw new IllegalArgumentException("Element argument is null");
-		}
+		Checker.checkIfValid(htmlXmlContent, "Element argument");
 		// creates key
 		String key = getKey(htmlXmlContent, width, height);
 		// the result is a key of images created

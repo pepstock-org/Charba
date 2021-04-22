@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.callbacks.AbstractDatasetContext;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -24,14 +25,14 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 /**
  * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
  * The elements are mapped by this object.<br>
- * This is the CHART.JS item with all needed info about a selected dataset, provideing the right indexes to get the dataset.
+ * This is the CHART.JS item with all needed info about a selected data set, providing the right indexes to get the data set.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class DatasetReference extends NativeObjectContainer {
 
 	/**
-	 * Public factory to create a dataset item from a native object.
+	 * Public factory to create a data set item from a native object.
 	 */
 	public static final DatasetReferenceItemFactory FACTORY = new DatasetReferenceItemFactory();
 
@@ -72,29 +73,23 @@ public final class DatasetReference extends NativeObjectContainer {
 	private final DatasetElement element;
 
 	/**
-	 * Creates the item reference using a a scriptale context and a dataset item.
+	 * Creates the item reference using a a scriptale context and a data set item.
 	 * 
 	 * @param context scriptable context instance
-	 * @param item dataset item to add to the object
+	 * @param item data set item to add to the object
 	 */
 	public DatasetReference(AbstractDatasetContext context, DatasetElement item) {
 		super(null);
 		// checks if context is consistent
-		if (context == null) {
-			// exception
-			throw new IllegalArgumentException("The scriptable context argument is null");
-		}
-		// checks if dataset item is consistent
-		if (item == null) {
-			// exception
-			throw new IllegalArgumentException("The dataset item argument is null");
-		}
-		// stores dataset and data index by content
+		Checker.checkIfValid(context, "Scriptable context argument");
+		// checks if data set item is consistent
+		Checker.checkIfValid(item, "Dataset item argument");
+		// stores data set and data index by content
 		setValue(Property.DATASET_INDEX, context.getDatasetIndex());
 		setValue(Property.INDEX, context.getDataIndex());
-		// stores dataset item
+		// stores data set item
 		setValue(Property.ELEMENT, item);
-		// sets the dataset item element
+		// sets the data set item element
 		element = item;
 	}
 
@@ -110,41 +105,41 @@ public final class DatasetReference extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the dataset item element.
+	 * Returns the data set item element.
 	 *
-	 * @return the dataset element
+	 * @return the data set element
 	 */
 	public final DatasetElement getElement() {
 		return element;
 	}
 
 	/**
-	 * Returns the dataset item index.
+	 * Returns the data set item index.
 	 * 
-	 * @return the dataset item index.
+	 * @return the data set item index.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
-	 * Returns the dataset item data index.
+	 * Returns the data set item data index.
 	 * 
-	 * @return the dataset item data index.
+	 * @return the data set item data index.
 	 */
 	public final int getIndex() {
 		return getValue(Property.INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
-	 * Inner class to create dataset reference item by a native object.
+	 * Inner class to create data set reference item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	public static class DatasetReferenceItemFactory implements NativeObjectContainerFactory<DatasetReference> {
 
 		/**
-		 * To avoid any instatiation
+		 * To avoid any instantiation
 		 */
 		private DatasetReferenceItemFactory() {
 			// do nothing

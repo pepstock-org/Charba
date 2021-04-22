@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
@@ -164,10 +165,7 @@ public class Scale extends AbstractScale {
 	 */
 	public final AxisType getType() {
 		// checks if there is the type
-		if (!has(Property.TYPE)) {
-			// exception
-			throw new IllegalArgumentException("The scale does not contain the type");
-		}
+		Checker.assertCheck(has(Property.TYPE), "The scale does not contain the type");
 		// gets axis type
 		// uses linear as default even if it is useless
 		return getValue(Property.TYPE, AxisType.values(), AxisType.LINEAR);

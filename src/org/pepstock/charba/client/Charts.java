@@ -20,6 +20,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.Checker;
+
 /**
  * Is a static reference which collects all chart instances to be able to enable global plugins.
  * 
@@ -52,13 +54,8 @@ public final class Charts {
 	 */
 	public static void addLifecycleListener(ChartsLifecycleListener listener) {
 		// checks if listener is consistent
-		if (listener != null) {
-			LISTENERS.add(listener);
-		} else {
-			// if here, listener is not consistent
-			// then exception
-			throw new IllegalArgumentException("Chart lifecycle listener is null");
-		}
+		// and adds to list
+		LISTENERS.add(Checker.checkAndGetIfValid(listener, "Chart lifecycle listener"));
 	}
 
 	/**

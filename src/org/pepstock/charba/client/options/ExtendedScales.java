@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -126,9 +127,8 @@ public final class ExtendedScales extends Scales {
 		// checks if the id is already in the object
 		// that means there are 2 or more scales to add
 		// with the same id
-		if (has(id)) {
-			throw new IllegalArgumentException("A scale with id " + id.value() + " has been already added");
-		}
+		Checker.assertCheck(!has(id), "A scale with id " + id.value() + " has been already added");
+		// returns id
 		return id;
 	}
 

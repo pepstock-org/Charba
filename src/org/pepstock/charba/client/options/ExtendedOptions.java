@@ -18,6 +18,7 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
@@ -93,12 +94,9 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param id CHARBA id.
 	 */
 	public void setCharbaId(String id) {
-		// checks if charba id is consistent
-		if (id == null) {
-			// if inconsistent
-			// exception
-			throw new IllegalArgumentException("CHARBA id argument is null");
-		}
+		// checks if CHARBA id is consistent
+		Checker.checkIfValid(id, "CHARBA id argument");
+		// stores it
 		setValue(Id.CHARBA_ID, id);
 	}
 

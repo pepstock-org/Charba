@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -90,9 +91,7 @@ public class FillHandler extends PropertyHandler<IsFill> {
 	FillHandler(AbstractNode parent, IsFill defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
 		// checks default value instance
-		if (!IsFill.isValid(getDefaultValues())) {
-			throw new IllegalArgumentException("Default fill argument is null or not consistent");
-		}
+		Checker.assertCheck(IsFill.isValid(getDefaultValues()), "Default fill argument is null or not consistent");
 	}
 
 	/**

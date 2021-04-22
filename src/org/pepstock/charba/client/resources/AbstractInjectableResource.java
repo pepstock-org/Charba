@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.resources;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -49,15 +50,13 @@ public abstract class AbstractInjectableResource {
 	 */
 	protected AbstractInjectableResource(String name, String... content) {
 		// checks if name is consistent
-		if (name == null || name.length() == 0) {
-			// if not exception
-			throw new IllegalArgumentException("Name is not consistent");
-		}
+		// stores name
+		this.name = Checker.checkAndGetIfValid(name, "Name");
+		// checks length
+		Checker.checkIfNotEqualTo(this.name.trim().length(), 0, "Name length");
 		// checks if content is consistent
-		if (content == null || content.length == 0) {
-			// if not exception
-			throw new IllegalArgumentException("Content is not consistent");
-		}
+		Checker.checkIfValid(content, "Content");
+		Checker.checkIfNotEqualTo(content.length, 0, "Content size");
 		// checks if not an internal CHARBA class for deferred resources and
 		// the internals do not need any check because managed by CHARBA and correct by definition
 		if (!(this instanceof IsInternalInjectableTextResource)) {
@@ -70,8 +69,6 @@ public abstract class AbstractInjectableResource {
 				throw new IllegalArgumentException("Unable to override '" + resourceName.value() + "' with a custom implementation");
 			}
 		}
-		// stores name
-		this.name = name;
 		// scans the array
 		for (String line : content) {
 			// appending the strings in the a builder

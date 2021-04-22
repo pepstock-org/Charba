@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -53,11 +54,8 @@ public abstract class AbstractScriptableFont<T extends ChartContext> extends Abs
 	protected AbstractScriptableFont(IsScriptableFontProvider<T> scriptableFontProvider, IsDefaultFont defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
 		// checks if font container is consistent
-		if (scriptableFontProvider == null) {
-			throw new IllegalArgumentException("Scriptable font provider argument is null");
-		}
 		// stores font container
-		this.scriptableFontProvider = scriptableFontProvider;
+		this.scriptableFontProvider = Checker.checkAndGetIfValid(scriptableFontProvider, "Scriptable font provider argument");
 	}
 
 	/*

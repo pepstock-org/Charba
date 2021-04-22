@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.resources.AbstractInjectableResource;
 import org.pepstock.charba.client.resources.ResourceName;
@@ -78,11 +79,9 @@ final class InjectorPrefixHelper {
 	 */
 	String getPrefixPackageName(AbstractInjectableResource resource) {
 		// checks if resource is consistent
-		if (resource == null) {
-			throw new IllegalArgumentException("Injectable resource is null");
-		}
+		AbstractInjectableResource checkedResource = Checker.checkAndGetIfValid(resource, "Injectable resource");
 		// checks if the name of resource is a CHARBA one
-		Key key = Key.getKeyByValue(ResourceName.values(), resource.getName());
+		Key key = Key.getKeyByValue(ResourceName.values(), checkedResource.getName());
 		// if not null, is CHARBA
 		if (key != null) {
 			// then returns CHARBA prefix

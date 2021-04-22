@@ -21,6 +21,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -188,10 +189,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	protected Options(String scope, IsDefaultOptions defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
 		// checks if scope is consistent
-		if (scope == null) {
-			throw new IllegalArgumentException("Scope argument is not consistent");
-		}
-		this.scope = scope;
+		this.scope = Checker.checkAndGetIfValid(scope, "Scope argument");
 		// gets all sub elements
 		this.elements = new Elements(this, Property.ELEMENTS, getDefaultValues().getElements(), getValue(Property.ELEMENTS));
 		this.hover = new Hover(this, Property.HOVER, getDefaultValues().getHover(), getValue(Property.HOVER));

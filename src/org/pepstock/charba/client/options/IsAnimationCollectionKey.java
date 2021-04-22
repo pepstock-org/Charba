@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
@@ -57,30 +58,28 @@ public interface IsAnimationCollectionKey extends IsTypedAnimationKey {
 	 * @return new collection instance
 	 */
 	static IsAnimationCollectionKey create(String collection, IsAnimationPropertyKey... properties) {
+		// checks if properties instance is consistent
+		Checker.checkIfValid(properties, "Animation collection properties");
 		// checks if properties are consistent
-		if (properties != null && properties.length > 0) {
-			// get result reference
-			IsAnimationCollectionKey result = null;
-			// scans all properties
-			for (IsAnimationPropertyKey property : properties) {
-				// checks the consistency of property
-				IsAnimationPropertyKey.checkIfValid(property);
-				// checks if is the first property
-				if (result == null) {
-					// creates the collection to return
-					result = create(collection, property.type());
-				} else if (!result.type().equals(property.type())) {
-					// checks if they have got the same type
-					throw new IllegalArgumentException("Animation collection properties do not have the same type");
-				}
-				// adds property
-				result.properties().add(property);
+		Checker.checkIfNotEqualTo(properties.length, 0, "Inavlid amount of animation collection properties. It");
+		// get result reference
+		IsAnimationCollectionKey result = null;
+		// scans all properties
+		for (IsAnimationPropertyKey property : properties) {
+			// checks the consistency of property
+			IsAnimationPropertyKey.checkIfValid(property);
+			// checks if is the first property
+			if (result == null) {
+				// creates the collection to return
+				result = create(collection, property.type());
+			} else if (!result.type().equals(property.type())) {
+				// checks if they have got the same type
+				throw new IllegalArgumentException("Animation collection properties do not have the same type");
 			}
-			return result;
+			// adds property
+			result.properties().add(property);
 		}
-		// if here, the properties are not consistent
-		// then throw an exception
-		throw new IllegalArgumentException("Animation collection properties are not consistent");
+		return result;
 	}
 
 	/**

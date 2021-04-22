@@ -381,7 +381,6 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 	 */
 	private void checkPluginIdConsistency(Key pluginIdKey, AbstractPluginOptionsFactory<?> factory) {
 		// checks if arguments are consistent and the plugin ids are not equals
-
 		if (Key.isValid(pluginIdKey) && factory != null && !pluginIdKey.value().equals(factory.getPluginId())) {
 			// if here, the plugin ID is not equals to the option
 			// then exception

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.Charba;
 import org.pepstock.charba.client.ChartEnvelop;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.JsHelper;
 
@@ -53,29 +54,18 @@ public final class ResourcesType {
 		// checks envelop
 		IsEnvelop.checkIfValid(envelop);
 		// gets resources
-		AbstractResources resources = envelop.getContent();
-		// checks if argument is null
-		if (resources == null) {
-			// exception
-			throw new IllegalArgumentException("Resources type argument is null");
-		}
+		// checks if resource is consistent
+		AbstractResources resources = Checker.checkAndGetIfValid(envelop.getContent(), "Resources type argument");
 		// checks if is extending a correct abstract resource
-		if (resources instanceof IsResourceType) {
-			// checks if the resources type is already loaded
-			if (isInjected()) {
-				// exception
-				throw new IllegalArgumentException("Resources type is already loaded and can not be changed");
-			}
-			// stores the instance
-			ResourcesType.resources = resources;
-			// to be sure that CHARBA java script object is injected
-			// invoking the JsHelper
-			// PAY ATTENTION: MUST be called before injecting CHART.JS
-			JsHelper.get();
-		} else {
-			// exception
-			throw new IllegalArgumentException("Resources type is not correct. Must be an EmbeddedResources or DeferredResources instance");
-		}
+		Checker.assertCheck(resources instanceof IsResourceType, "Resources type is not correct. Must be an EmbeddedResources or DeferredResources instance");
+		// checks if the resources type is already loaded
+		Checker.assertCheck(!isInjected(), "Resources type is already loaded and can not be changed");
+		// stores the instance
+		ResourcesType.resources = resources;
+		// to be sure that CHARBA java script object is injected
+		// invoking the JsHelper
+		// PAY ATTENTION: MUST be called before injecting CHART.JS
+		JsHelper.get();
 	}
 
 	/**
@@ -88,7 +78,7 @@ public final class ResourcesType {
 		// checks if a type was already stored
 		if (ResourcesType.resources == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Resources type is invalid (not set). Must be set before using CHARBA");
+			throw new IllegalArgumentException("Resources type is invalid (not set). Must be set before using CHARBA by Charba.enable or DeferredCharba.enable");
 		}
 		// returns the instance
 		return ResourcesType.resources;

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.plugins;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.utils.RegExp;
@@ -26,13 +27,13 @@ import org.pepstock.charba.client.utils.RegExp;
  */
 public final class PluginIdChecker {
 
-	// regexp to check if there is an uppercase
+	// regexp to check if there is an upper fcase
 	private static final String REGEXP_HAS_UPPERCASE_PATTERN = "^.*[A-Z].*";
 	// regex instance for font style
 	private static final RegExp REGEXP_HAS_UPPERCASE = new RegExp(REGEXP_HAS_UPPERCASE_PATTERN);
 	// regexp pattern to have only letters and number
 	private static final String REGEXP_ID_PATTERN = "^[a-z0-9_]+$";
-	// regxp objetc to perform check
+	// regexp object to perform check
 	private static final RegExp REGEXP_ID = new RegExp(REGEXP_ID_PATTERN);
 
 	/**
@@ -56,18 +57,13 @@ public final class PluginIdChecker {
 	 */
 	public static void check(String id) {
 		// checks if is null
-		if (id == null) {
-			throw new IllegalArgumentException("Plugin id can not be null");
-		} else if (id.startsWith(Constants.DOT) || id.startsWith(Constants.UNDERSCORE)) {
-			// checks if is starting with DOT or underscore
-			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not start with a dot or an underscore "));
-		} else if (REGEXP_HAS_UPPERCASE.exec(id) != null) {
-			// checks if contains uppercase letters
-			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not contain uppercase letters "));
-		} else if (REGEXP_ID.exec(id) == null) {
-			// checks if is not safe URL
-			throw new IllegalArgumentException(buildMessage(id, "Plugin id can not contain any invalid characters "));
-		}
+		Checker.checkIfValid(id, "Plugin id");
+		// checks if is starting with DOT or underscore
+		Checker.assertCheck(!id.startsWith(Constants.DOT) && !id.startsWith(Constants.UNDERSCORE), buildMessage(id, "Plugin id can not start with a dot or an underscore "));
+		// checks if contains upper case letters
+		Checker.assertCheck(REGEXP_HAS_UPPERCASE.exec(id) == null, buildMessage(id, "Plugin id can not contain uppercase letters "));
+		// checks if is null
+		Checker.assertCheck(REGEXP_ID.exec(id) != null, buildMessage(id, "Plugin id can not contain any invalid characters "));
 	}
 
 	/**

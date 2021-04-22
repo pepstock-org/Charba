@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.utils;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -63,10 +64,7 @@ public final class CScheduler {
 	 */
 	public CSchedulerRegistration submit(Runnable task, int delay) {
 		// checks if command is consistent
-		if (task == null) {
-			// exception
-			throw new IllegalArgumentException("Task instance is null");
-		}
+		Checker.checkIfValid(task, "Task instance");
 		// normalized the delay
 		int normDelay = Math.max(delay, 0);
 		// creates the wrapper for task

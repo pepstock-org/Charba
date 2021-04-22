@@ -22,6 +22,7 @@ import java.util.List;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -456,15 +457,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public void createAndSetTimer(ChartTimerTask task, int interval) {
 		// checks if timer is already created
-		if (timer != null) {
-			// exception!
-			throw new IllegalArgumentException("Timer instance is already created and can not be overrided");
-		}
-		// checks if task is consistent
-		if (task == null) {
-			// exception!
-			throw new IllegalArgumentException("Task instance is null");
-		}
+		Checker.assertCheck(timer == null, "Timer instance is already created and can not be overrided");
 		// creates and stores the timer
 		this.timer = new CTimer(new ChartRunnableWrapper(this, task), interval);
 	}

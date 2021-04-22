@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -190,12 +191,8 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	 * @param speed the speed of element via mouse wheel
 	 */
 	public void setSpeed(double speed) {
-		// the speed must be a value between 0 and 1
-		if (speed < 0D || speed > 1D) {
-			throw new IllegalArgumentException("Speed value (" + speed + ") is not within bounds (0D-1D)");
-		}
 		// stores value
-		setValue(Property.SPEED, speed);
+		setValue(Property.SPEED, Checker.checkAndGetIfBetween(speed, 0D, 1D, "Speed value"));
 	}
 
 	/**
