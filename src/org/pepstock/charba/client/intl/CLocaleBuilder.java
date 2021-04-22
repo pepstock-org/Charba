@@ -129,9 +129,9 @@ public final class CLocaleBuilder {
 	 * @return a locale instance.
 	 */
 	public static CLocale build(String localeIdentifier) {
-		LocaleRegExpGroups groups = applyRegExp(localeIdentifier);
+		LocaleRegExpGroups uncheckedGroups = applyRegExp(localeIdentifier);
 		// checks if the groups instance is consistent
-		Checker.checkIfValid(groups, "Locale argument");
+		LocaleRegExpGroups groups = Checker.checkAndGetIfValid(uncheckedGroups, "Locale argument");
 		// checks if the groups is consistent
 		Checker.assertCheck(groups.isConsistent(), "Locale argument");
 		// gets the references
