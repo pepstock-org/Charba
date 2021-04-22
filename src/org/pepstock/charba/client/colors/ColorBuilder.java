@@ -230,9 +230,9 @@ public final class ColorBuilder {
 	private static IsColor buildByRGBValue(String rgbvalue) {
 		// executes regular expression
 		RegExpResult matcher = REGEXP_RGB.exec(rgbvalue);
-		boolean matchFound = matcher != null;
+		Checker.checkIfValid(matcher, "Invalid RGB format for color: " + rgbvalue);
 		// checks if matches
-		Checker.assertCheck(matchFound && matcher.length() == 4, "Invalid RGB format for color: " + rgbvalue);
+		Checker.checkIfEqualTo(matcher.length(), 4, "Invalid RGB format for color: " + rgbvalue);
 		// initializes integers values
 		int red = 0;
 		int green = 0;

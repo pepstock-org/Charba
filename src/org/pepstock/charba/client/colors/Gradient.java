@@ -247,8 +247,9 @@ public final class Gradient extends CanvasObject {
 			}
 		}
 		// checks starting colors are found otherwise exception
-		Checker.checkIfValid(startColor, "Unable to get the start and stop color based on passed offset " + offset);
-		if (endColor == null) {
+		if (startColor == null) {
+			throw new IllegalArgumentException("Unable to get the start and stop color based on passed offset " + offset);
+		} else if (endColor == null) {
 			// if end colors is not found, use the starting color
 			return startColor;
 		}
