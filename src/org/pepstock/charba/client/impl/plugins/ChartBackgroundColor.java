@@ -24,6 +24,7 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
@@ -105,12 +106,8 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	public ChartBackgroundColor(Gradient gradient) {
 		super(ID);
 		// checks if gradient is consistent
-		if (gradient == null) {
-			// if null, exception!
-			throw new IllegalArgumentException("Gradient argument is null");
-		}
 		// sets gradient
-		this.gradient = gradient;
+		this.gradient = Checker.checkAndGetIfValid(gradient, "Gradient argument");
 		// sets null other kind of background
 		this.color = null;
 		this.pattern = null;
@@ -124,12 +121,8 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	public ChartBackgroundColor(Pattern pattern) {
 		super(ID);
 		// checks if pattern is consistent
-		if (pattern == null) {
-			// if null, exception!
-			throw new IllegalArgumentException("Pattern argument is null");
-		}
 		// sets gradient
-		this.pattern = pattern;
+		this.pattern = Checker.checkAndGetIfValid(pattern, "Pattern argument");
 		// sets null other kind of background
 		this.color = null;
 		this.gradient = null;

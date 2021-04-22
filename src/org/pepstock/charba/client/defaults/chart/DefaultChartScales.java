@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
@@ -40,11 +41,7 @@ public final class DefaultChartScales implements IsDefaultScales {
 	 */
 	public DefaultChartScales(Scales scales) {
 		// checks if argument is consistent
-		if (scales == null) {
-			// exception
-			throw new IllegalArgumentException("Scales instance is not consistent");
-		}
-		this.scales = scales;
+		this.scales = Checker.checkAndGetIfValid(scales, "Scales instance");
 	}
 
 	/*

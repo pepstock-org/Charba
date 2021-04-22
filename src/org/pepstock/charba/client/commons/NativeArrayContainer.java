@@ -35,9 +35,7 @@ public abstract class NativeArrayContainer<T extends Array> {
 	 */
 	protected NativeArrayContainer(T nativeArray) {
 		// checks if argument is consistent
-		if (nativeArray == null) {
-			throw new IllegalArgumentException("Array instance is null");
-		}
+		Checker.checkIfValid(nativeArray, "Array instance");
 		// stores the array
 		this.nativeArray = nativeArray;
 	}

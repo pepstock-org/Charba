@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -62,12 +63,8 @@ abstract class ConfigurationOptionsContainer extends ChartContainer {
 	 */
 	private static ConfigurationOptions checkAndGet(ConfigurationOptions options) {
 		// checks if options are consistent
-		if (options == null) {
-			// not consistent exception!
-			throw new IllegalArgumentException("Configuration options argument is null");
-		}
 		// returns the argument
-		return options;
+		return Checker.checkAndGetIfValid(options, "Configuration options");
 	}
 
 }

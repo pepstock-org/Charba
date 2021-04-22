@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.pepstock.charba.client.colors.tiles.TilesFactoryDefaults;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -108,14 +109,9 @@ public final class PatternBuilder {
 	 */
 	public static PatternBuilder create(Img image, Repetition repetition) {
 		// checks if image is not consistent
-		if (image != null) {
-			// creates a pattern builder
-			return new PatternBuilder(image, repetition == null ? Repetition.REPEAT : repetition, image.getWidth(), image.getHeight());
-		} else {
-			// if here, image is null
-			// then exception
-			throw new IllegalArgumentException("Image argument is null");
-		}
+		Checker.checkIfValid(image, "Image argument");
+		// creates a pattern builder
+		return new PatternBuilder(image, repetition == null ? Repetition.REPEAT : repetition, image.getWidth(), image.getHeight());
 	}
 
 	/**
@@ -152,15 +148,9 @@ public final class PatternBuilder {
 	 */
 	public static PatternBuilder create(CanvasPatternItem canvasPattern, int width, int height) {
 		// checks if canvas pattern is not consistent
-		if (canvasPattern != null) {
-			// creates a pattern builder
-			return new PatternBuilder(canvasPattern, width, height);
-		} else {
-			// if here, canvas pattern is null
-			// then exception
-			throw new IllegalArgumentException("Canvas pattern argument is null");
-		}
-
+		Checker.checkIfValid(canvasPattern, "Canvas pattern argument");
+		// creates a pattern builder
+		return new PatternBuilder(canvasPattern, width, height);
 	}
 
 	/**
@@ -200,30 +190,23 @@ public final class PatternBuilder {
 	 */
 	public static Pattern build(NativeObject nativeObject) {
 		// checks if argument is consistent
-		if (nativeObject != null) {
-			// extracts the id from object
-			String id = Id.getStringProperty(CanvasObject.Property.CHARBA_OBJECT_ID, nativeObject);
-			if (id == null) {
-				// without the id, is not consistent
-				// exception!
-				throw new IllegalArgumentException(Utilities.applyTemplate(CanvasObject.MISSING_PROPERTY, CanvasObject.Property.CHARBA_OBJECT_ID.value()));
-			}
-			// checks if pattern is cached
-			if (PATTERNS.containsKey(id)) {
-				// returns the cached object
-				return PATTERNS.get(id);
-			}
-			// creates new pattern
-			Pattern result = new Pattern(nativeObject);
-			// stores the object in the the cache
-			PATTERNS.put(id, result);
-			// returns the instance
-			return result;
-		} else {
-			// if here, argument is null
-			// then exception
-			throw new IllegalArgumentException("Native object argument is null");
+		Checker.checkIfValid(nativeObject, "Native object argument");
+		// extracts the id from object
+		String id = Id.getStringProperty(CanvasObject.Property.CHARBA_OBJECT_ID, nativeObject);
+		// checks id consistency
+		Checker.assertCheck(id != null, Utilities.applyTemplate(CanvasObject.MISSING_PROPERTY, CanvasObject.Property.CHARBA_OBJECT_ID.value()));
+		// checks if pattern is cached
+		if (PATTERNS.containsKey(id)) {
+			// returns the cached object
+			return PATTERNS.get(id);
 		}
+		// creates new pattern
+		Pattern result = new Pattern(nativeObject);
+		// stores the object in the the cache
+		PATTERNS.put(id, result);
+		// returns the instance
+		return result;
+
 	}
 
 	/**

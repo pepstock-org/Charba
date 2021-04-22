@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -28,7 +29,7 @@ import org.pepstock.charba.client.utils.Utilities;
  *
  */
 public final class EllipseAnnotation extends AbstractXYAnnotation implements IsDefaultsEllipseAnnotation, HasBackgroundColor {
-	
+
 	/**
 	 * Default box annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
 	 */
@@ -38,7 +39,7 @@ public final class EllipseAnnotation extends AbstractXYAnnotation implements IsD
 	private final IsDefaultsEllipseAnnotation defaultValues;
 	// background color handler
 	private final BackgroundColorHandler backgroundColorHandler;
-	
+
 	/**
 	 * Creates a ellipse annotation to be added to an {@link AnnotationOptions} instance.<br>
 	 * The annotation id is calculated automatically.
@@ -100,13 +101,9 @@ public final class EllipseAnnotation extends AbstractXYAnnotation implements IsD
 	private EllipseAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
 		super(AnnotationType.ELLIPSE, id, defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsEllipseAnnotation) {
-			// casts and stores it
-			this.defaultValues = (IsDefaultsEllipseAnnotation) getDefaultsValues();
-		} else {
-			// wrong class, exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
-		}
+		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsEllipseAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.ELLIPSE.value()));
+		// casts and stores it
+		this.defaultValues = (IsDefaultsEllipseAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 	}
@@ -120,17 +117,13 @@ public final class EllipseAnnotation extends AbstractXYAnnotation implements IsD
 	EllipseAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
 		super(AnnotationType.ELLIPSE, nativeObject, defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsEllipseAnnotation) {
-			// casts and stores it
-			this.defaultValues = (IsDefaultsEllipseAnnotation) getDefaultsValues();
-		} else {
-			// wrong class, exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
-		}
+		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsEllipseAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.ELLIPSE.value()));
+		// casts and stores it
+		this.defaultValues = (IsDefaultsEllipseAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -140,5 +133,5 @@ public final class EllipseAnnotation extends AbstractXYAnnotation implements IsD
 	public BackgroundColorHandler getBackgroundColorHandler() {
 		return backgroundColorHandler;
 	}
-	
+
 }

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.ScaleItem;
@@ -48,12 +49,9 @@ public final class AxisClickEvent extends AbstractEvent {
 	 */
 	public AxisClickEvent(BaseNativeEvent nativeEvent, ScaleItem item, Axis axis, ScaleValueItem value) {
 		super(nativeEvent, TYPE);
-		// checks if item is consistent
-		if (item == null) {
-			throw new IllegalArgumentException("Scale item argument is null");
-		}
 		// stores arguments
-		this.item = item;
+		// checks if item is consistent
+		this.item = Checker.checkAndGetIfValid(item, "Scale item argument");
 		this.axis = axis;
 		this.value = value;
 	}

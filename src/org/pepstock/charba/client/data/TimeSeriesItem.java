@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
@@ -46,13 +47,8 @@ public final class TimeSeriesItem extends NativeObjectContainer {
 	public TimeSeriesItem(Date time, double value) {
 		// create with an empty native object
 		super(null);
-		// checks if time is consistent
-		if (time == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Time argument is null");
-		}
 		// sets time
-		setTime(time);
+		setTime(Checker.checkAndGetIfValid(time, "Time argument"));
 		// sets value
 		setValue(value);
 	}

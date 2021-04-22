@@ -17,6 +17,7 @@ package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.callbacks.AbstractDatasetContext;
 import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -77,12 +78,8 @@ public final class LabelsContext extends AbstractDatasetContext {
 	LabelsContext(Label labelOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if label is consistent
-		if (labelOptions == null) {
-			// exception!
-			throw new IllegalArgumentException("Label options argument is null");
-		}
 		// stores label
-		this.labelOptions = labelOptions;
+		this.labelOptions = Checker.checkAndGetIfValid(labelOptions, "Label options argument");
 		// gets the type of value
 		ObjectType type = type(Property.VALUE);
 		// checks if is floating data

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.intl;
 
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.Checker;
 
 /**
  * Defines for objects that enable language sensitive value formatting.<br>
@@ -38,11 +39,8 @@ abstract class AbtsractFormatWrapper<N, T, R> {
 	 */
 	AbtsractFormatWrapper(N nativeFormat) {
 		// checks if native format is consistent
-		if (nativeFormat == null) {
-			throw new IllegalArgumentException("Native format argument is null");
-		}
 		// stores the native format
-		this.nativeFormat = nativeFormat;
+		this.nativeFormat = Checker.checkAndGetIfValid(nativeFormat, "Native format argument");
 	}
 
 	/**

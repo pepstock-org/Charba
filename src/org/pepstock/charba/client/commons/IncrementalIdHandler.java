@@ -103,7 +103,7 @@ final class IncrementalIdHandler {
 	 */
 	void checkAndSetId(NativeObjectContainer container, String prefix) {
 		// checks if container is consistent
-		checkNativeObjectContainer(container);
+		Checker.checkIfValid(container, "Container argument");
 		// checks if container contains the internal object id
 		if (!container.has(Property.CHARBA_INTERNAL_INTERNAL_ID)) {
 			// creates and stores new id
@@ -120,12 +120,9 @@ final class IncrementalIdHandler {
 	 */
 	String getId(NativeObjectContainer container) {
 		// checks if container is consistent
-		checkNativeObjectContainer(container);
+		Checker.checkIfValid(container, "Container argument");
 		// checks if the property exists
-		if (!container.has(Property.CHARBA_INTERNAL_INTERNAL_ID)) {
-			// throws an exception because it must be set in advance
-			throw new IllegalArgumentException("The incremental id has not been stored. Invoke 'checkAndSetId' before calling 'getId'");
-		}
+		Checker.assertCheck(container.has(Property.CHARBA_INTERNAL_INTERNAL_ID),"The incremental id has not been stored. Invoke 'checkAndSetId' before calling 'getId'");
 		// returns value
 		return container.getValue(Property.CHARBA_INTERNAL_INTERNAL_ID, UndefinedValues.STRING);
 	}
@@ -142,20 +139,6 @@ final class IncrementalIdHandler {
 		AtomicInteger counter = counters.computeIfAbsent(container.getClass().getName(), mapKey -> new AtomicInteger(0));
 		// stores the internal id for caching
 		container.setValue(Property.CHARBA_INTERNAL_INTERNAL_ID, prefix + counter.getAndIncrement());
-	}
-
-	/**
-	 * Checks if the native object container is consistent.
-	 * 
-	 * @param container native object container where checks and stores the id
-	 */
-	private void checkNativeObjectContainer(NativeObjectContainer container) {
-		// checks if container is consistent
-		if (container == null) {
-			// if here the container is not consistent
-			// then exception
-			throw new IllegalArgumentException("Container argument is null");
-		}
 	}
 
 }

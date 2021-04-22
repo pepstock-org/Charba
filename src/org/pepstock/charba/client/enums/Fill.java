@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.enums;
 
+import org.pepstock.charba.client.commons.Checker;
+
 /**
- * Both line and radar charts support a fill option on the dataset object which can be used to create area between two datasets or a dataset and a boundary.<br>
+ * Both line and radar charts support a fill option on the data set object which can be used to create area between two data sets or a data set and a boundary.<br>
  * These are the constants of predefined filling mode values.
  * 
  * @author Andrea "Stock" Stocchero
@@ -114,40 +116,36 @@ public enum Fill implements IsFill
 	}
 
 	/**
-	 * Returns a fill, based on absolute dataset index, using the passed index.
+	 * Returns a fill, based on absolute data set index, using the passed index.
 	 * 
-	 * @param index absolute dataset index to use for filling
-	 * @return a fill object with tthe right configuration to set in the chart
+	 * @param index absolute data set index to use for filling
+	 * @return a fill object with the right configuration to set in the chart
 	 */
 	public static IsFill getFill(int index) {
 		return new AbsoluteDatasetIndexFill(index);
 	}
 
 	/**
-	 * Returns a fill, based on relative dataset index, using the passed index.<br>
-	 * If the passed argument is not a relative dataset index, checks if is predefined fill.
+	 * Returns a fill, based on relative data set index, using the passed index.<br>
+	 * If the passed argument is not a relative data set index, checks if is predefined fill.
 	 * 
-	 * @param index relative dataset index to use for filling
+	 * @param index relative data set index to use for filling
 	 * @return a fill object with the right configuration to set in the chart.
 	 */
 	public static IsFill getFill(String index) {
 		// checks if argument is consistent
-		if (index != null) {
-			// scans all predefined fill values
-			for (Fill fill : values()) {
-				// checks if argument is predefined
-				if (fill.value().equalsIgnoreCase(index)) {
-					// returns it
-					return fill;
-				}
+		Checker.checkIfValid(index, "Index argument");
+		// scans all predefined fill values
+		for (Fill fill : values()) {
+			// checks if argument is predefined
+			if (fill.value().equalsIgnoreCase(index)) {
+				// returns it
+				return fill;
 			}
-			// if here is not a predefined
-			// then returns a relative dataset index fill
-			return new RelativeDatasetIndexFill(index);
 		}
-		// if here
-		// the argument is null
-		throw new IllegalArgumentException("Index argument is null");
+		// if here is not a predefined
+		// then returns a relative data set index fill
+		return new RelativeDatasetIndexFill(index);
 	}
 
 }

@@ -22,6 +22,7 @@ import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -75,7 +76,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 		}
 
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -157,13 +158,9 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 		// if defaults is not consistent, the defaults defined for this annotation type is used
 		super(AnnotationType.LINE, id == null ? AnnotationType.LINE.createId() : id, defaultValues == null ? AnnotationType.LINE.getDefaultsValues() : defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsLineAnnotation) {
-			// casts and stores it
-			this.defaultValues = (IsDefaultsLineAnnotation) getDefaultsValues();
-		} else {
-			// wrong class, exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
-		}
+		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsLineAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
+		// casts and stores it
+		this.defaultValues = (IsDefaultsLineAnnotation) getDefaultsValues();
 		// creates a line label
 		label = new LineLabel(this, this.defaultValues.getLabel());
 		// stores in the annotation
@@ -181,19 +178,15 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	LineAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
 		super(AnnotationType.LINE, nativeObject, defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsLineAnnotation) {
-			// casts and stores it
-			this.defaultValues = (IsDefaultsLineAnnotation) getDefaultsValues();
-		} else {
-			// wrong class, exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
-		}
+		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsLineAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
+		// casts and stores it
+		this.defaultValues = (IsDefaultsLineAnnotation) getDefaultsValues();
 		// creates a line label
 		label = new LineLabel(this, getValue(Property.LABEL), this.defaultValues.getLabel());
 		// sets callbacks proxies
 		initCallbacks();
 	}
-	
+
 	/**
 	 * Initializes the callbacks proxies for the options which can be scriptable.
 	 */
@@ -258,7 +251,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 */
 	public void setValue(String value) {
 		// resets callback
-		setValue((ValueCallback)null);
+		setValue((ValueCallback) null);
 		// stores value
 		setValue(Property.VALUE, value);
 	}
@@ -270,7 +263,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 */
 	public void setValue(double value) {
 		// resets callback
-		setValue((ValueCallback)null);
+		setValue((ValueCallback) null);
 		// stores value
 		setValue(Property.VALUE, value);
 	}
@@ -282,7 +275,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 */
 	public void setValue(Date value) {
 		// resets callback
-		setValue((ValueCallback)null);
+		setValue((ValueCallback) null);
 		// stores value
 		setValue(Property.VALUE, value);
 	}
@@ -324,7 +317,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 */
 	public void setEndValue(String endValue) {
 		// resets callback
-		setEndValue((ValueCallback)null);
+		setEndValue((ValueCallback) null);
 		// stores value
 		setValue(Property.END_VALUE, endValue);
 	}
@@ -336,7 +329,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 */
 	public void setEndValue(double endValue) {
 		// resets callback
-		setEndValue((ValueCallback)null);
+		setEndValue((ValueCallback) null);
 		// stores value
 		setValue(Property.END_VALUE, endValue);
 	}
@@ -348,7 +341,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 */
 	public void setEndValue(Date endValue) {
 		// resets callback
-		setEndValue((ValueCallback)null);
+		setEndValue((ValueCallback) null);
 		// stores value
 		setValue(Property.END_VALUE, endValue);
 	}
@@ -382,7 +375,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	public Date getEndValueAsDate() {
 		return getValueForMultipleKeyTypes(Property.END_VALUE, defaultValues.getEndValueAsDate());
 	}
-	
+
 	// ---------------------
 	// CALLBACKS
 	// ---------------------

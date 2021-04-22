@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
 import org.pepstock.charba.client.items.ScaleValueItem;
@@ -46,15 +47,9 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent {
 	public DatasetRangeSelectionEvent(BaseNativeEvent nativeEvent, ScaleValueItem from, ScaleValueItem to) {
 		super(nativeEvent, TYPE);
 		// checks if arguments are consistent
-		if (from == null) {
-			throw new IllegalArgumentException("From scale value argument is null");
-		}
-		if (to == null) {
-			throw new IllegalArgumentException("To scale value argument is null");
-		}
 		// stores arguments
-		this.from = from;
-		this.to = to;
+		this.from = Checker.checkAndGetIfValid(from, "'From' scale value argument");
+		this.to = Checker.checkAndGetIfValid(to, "'To' scale value argument");
 	}
 
 	/**

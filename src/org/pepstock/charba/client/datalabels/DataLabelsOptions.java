@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.datalabels.enums.Align;
@@ -173,20 +174,17 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultDataL
 		// gets default
 		IsDefaultDataLabelsItem defaultValue = getDefaultsOptions();
 		// checks instance of defaults options if has got the right type
-		if (defaultValue instanceof IsDefaultDataLabelsOptions) {
-			// casts to the right type
-			IsDefaultDataLabelsOptions values = (IsDefaultDataLabelsOptions) defaultValue;
-			// creates and stores labels
-			this.labels = new Labels(this, values.getLabels(), getValue(Property.LABELS));
-			// checks it has got the element
-			if (!has(Property.LABELS)) {
-				// stores labels
-				setValue(Property.LABELS, labels);
-			}
-		} else {
-			// if here, the default does not have the same class
-			// which is needed for this object
-			throw new IllegalArgumentException("The default instance is not correct type, " + defaultValue.getClass().getName());
+		// the default must have the same class
+		// which is needed for this object
+		Checker.assertCheck(defaultValue instanceof IsDefaultDataLabelsOptions, "The default instance is not correct type, " + defaultValue.getClass().getName());
+		// casts to the right type
+		IsDefaultDataLabelsOptions values = (IsDefaultDataLabelsOptions) defaultValue;
+		// creates and stores labels
+		this.labels = new Labels(this, values.getLabels(), getValue(Property.LABELS));
+		// checks it has got the element
+		if (!has(Property.LABELS)) {
+			// stores labels
+			setValue(Property.LABELS, labels);
 		}
 	}
 

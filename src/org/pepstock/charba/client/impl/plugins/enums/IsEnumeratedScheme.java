@@ -24,6 +24,7 @@ import org.pepstock.charba.client.colors.GradientOrientation;
 import org.pepstock.charba.client.colors.GradientScope;
 import org.pepstock.charba.client.colors.GradientType;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.impl.plugins.ColorScheme;
 
 /**
@@ -49,12 +50,7 @@ interface IsEnumeratedScheme extends ColorScheme {
 	@Override
 	default String value() {
 		// checks if scheme is consistent
-		if (getScheme() != null) {
-			return getScheme().value();
-		} else {
-			// if not, exception
-			throw new IllegalArgumentException("Color scheme is null");
-		}
+		return Checker.checkAndGetIfValid(getScheme(), "Color scheme").value();
 	}
 
 	/*

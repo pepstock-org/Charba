@@ -816,10 +816,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	public void setData(double... values) {
 		// checks if it can use data as double
-		if (mustUseDataPoints()) {
-			// if not, exception
-			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
-		}
+		checkIfDataPointsMustBeUsed();
 		// set value. If null, removes key and then..
 		setArrayValue(InternalProperty.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
@@ -834,10 +831,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	public void setData(List<Double> values) {
 		// checks if it can use data as double
-		if (mustUseDataPoints()) {
-			// if not, exception
-			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
-		}
+		checkIfDataPointsMustBeUsed();
 		// set value. If null, removes key and then..
 		setArrayValue(InternalProperty.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
@@ -863,10 +857,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	public List<Double> getData(boolean binding) {
 		// checks if it can use data as double
-		if (mustUseDataPoints()) {
-			// if not, exception
-			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
-		}
+		checkIfDataPointsMustBeUsed();
 		// checks if is a numbers data type
 		if (has(InternalProperty.DATA) && DataType.NUMBERS.equals(getDataType())) {
 			// returns numbers
@@ -1228,6 +1219,17 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// because where the data set is not defined, the value is integer min value
 		sb.append(Math.max(index, 0));
 		return sb.toString();
+	}
+	
+	/**
+	 * Checks if it can use data as double.
+	 */
+	void checkIfDataPointsMustBeUsed() {
+		// checks if it can use data as double
+		if (mustUseDataPoints()) {
+			// if not, exception
+			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
+		}
 	}
 
 	/**

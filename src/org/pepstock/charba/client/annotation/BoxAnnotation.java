@@ -21,6 +21,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallb
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -76,7 +77,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 		}
 
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -152,13 +153,9 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	private BoxAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
 		super(AnnotationType.BOX, id, defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsBoxAnnotation) {
-			// casts and stores it
-			this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
-		} else {
-			// wrong class, exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
-		}
+		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsBoxAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
+		// casts and stores it
+		this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
@@ -174,19 +171,15 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	BoxAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
 		super(AnnotationType.BOX, nativeObject, defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsBoxAnnotation) {
-			// casts and stores it
-			this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
-		} else {
-			// wrong class, exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
-		}
+		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsBoxAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
+		// casts and stores it
+		this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initCallbacks();
 	}
-	
+
 	/**
 	 * Initializes the callbacks proxies for the options which can be scriptable.
 	 */
@@ -197,7 +190,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 		// sets function to proxy callback in order to invoke the java interface
 		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getCornerRadiusCallback(), defaultValues.getCornerRadius()).doubleValue());
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -207,7 +200,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	public BackgroundColorHandler getBackgroundColorHandler() {
 		return backgroundColorHandler;
 	}
-	
+
 	/**
 	 * Returns the color of the border of annotation.
 	 * 
@@ -253,7 +246,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
-	
+
 	/**
 	 * Returns the callback called to set the corner radius.
 	 * 

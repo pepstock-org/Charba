@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.enums;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -44,10 +45,7 @@ public final class AbsoluteDatasetIndexFill extends AbstractDatasetIndexFill {
 		// and undefined string for index as string (absolute ONLY integer)
 		super(FillingMode.ABSOLUTE_DATASET_INDEX, index, UndefinedValues.STRING);
 		// checks if the index is greater than 0
-		if (index <= 0) {
-			// if not, exception
-			throw new IllegalArgumentException("Index argument must be greater than 0");
-		}
+		Checker.checkIfGreaterThan(index, 1, "Index argument");
 		// creates the name to return
 		this.name = FillingMode.ABSOLUTE_DATASET_INDEX.value() + ":" + index;
 	}

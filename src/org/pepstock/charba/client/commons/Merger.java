@@ -370,8 +370,9 @@ public final class Merger {
 	 */
 	private void checkArgumentsConsistency(Object target, Object source, String property) {
 		// checks if arguments are not consistent
-		if (target == null || source == null || property == null || property.trim().length() == 0) {
-			throw new IllegalArgumentException("Argurments for merging are null or not consistent");
-		}
+		Checker.checkAndGetIfValid(target, "Target argument");
+		Checker.checkAndGetIfValid(source, "Source argument");
+		Checker.checkAndGetIfValid(property, "Property argument");
+		Checker.checkIfNotEqualTo(property.trim().length(), 0, "Property argument size");
 	}
 }

@@ -422,10 +422,8 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	 */
 	protected final void setInternalCallbackToModel(AbstractNode model, Key key, CallbackProxy.Proxy proxy) {
 		// checks if model is consistent
-		if (model == null) {
-			// if not exception
-			throw new IllegalArgumentException("Options model arguments is null");
-		}
+		Checker.checkIfValid(model, "Options model argument");
+		// stores callback
 		model.setValueAndAddToParent(key, proxy);
 	}
 
@@ -438,12 +436,10 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	 */
 	protected final void resetInternalCallbackToModel(AbstractNode model, Key key, NativeObjectContainer options) {
 		// checks if model is consistent
-		if (model == null) {
-			// if not exception
-			throw new IllegalArgumentException("Options model arguments is null");
-		}
+		Checker.checkIfValid(model, "Options model argument");
 		// checks if property is missing
 		if (!has(key)) {
+			// stores callback
 			model.setValueAndAddToParent(key, options);
 		}
 	}

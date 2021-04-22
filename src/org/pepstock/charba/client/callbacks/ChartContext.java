@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -81,14 +82,9 @@ public class ChartContext extends NativeObjectContainer{
 	protected ChartContext(NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if object is consistent
-		if (nativeObject == null) {
-			throw new IllegalArgumentException("Native context argument is null");
-		}
+		Checker.checkIfValid(nativeObject, "Native context argument");
 		// the chart must be there
-		if (!has(Property.CHART)) {
-			// if not, exception
-			throw new IllegalArgumentException("Unable to retrieve the chart instance and the context does not seem to be consistent");
-		}
+		Checker.assertCheck(has(Property.CHART), "Unable to retrieve the chart instance and the context does not seem to be consistent");
 	}
 
 	/**

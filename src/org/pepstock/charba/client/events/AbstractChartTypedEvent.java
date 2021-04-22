@@ -17,6 +17,7 @@ package org.pepstock.charba.client.events;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.items.DatasetReference;
 
@@ -41,11 +42,8 @@ abstract class AbstractChartTypedEvent extends AbstractChartEvent implements IsC
 	AbstractChartTypedEvent(ChartEventContext eventContext, EventType type, Key key, List<DatasetReference> items) {
 		super(eventContext, type, key);
 		// checks if argument is consistent
-		if (items == null) {
-			throw new IllegalArgumentException("Dataset references items list argument is null");
-		}
 		// stores argument
-		this.items = items;
+		this.items = Checker.checkAndGetIfValid(items, "Dataset references items list argument");
 	}
 
 	/**

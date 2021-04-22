@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.defaults.IsDefaultDatasets;
@@ -113,9 +114,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	 */
 	protected AbstractDefaultOptions(IsDefaultOptions options) {
 		// checks if options is consistent
-		if (options == null) {
-			throw new IllegalArgumentException("Default options argument is null");
-		}
+		Checker.checkIfValid(options, "Default options argument");
 		// stores all inner elements
 		this.animation = new DefaultChartAnimation(options.getAnimation());
 		this.animations = new DefaultChartAnimations(options.getAnimations());

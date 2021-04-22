@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.controllers;
 
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.utils.RegExp;
 
@@ -53,13 +54,9 @@ final class ControllerTypeChecker {
 		// checks if is consistent
 		Type.checkIfValid(type);
 		// checks if has got invalid chars
-		if (type.value().startsWith(Constants.DOT) || type.value().startsWith(Constants.UNDERSCORE)) {
-			// checks if is starting with DOT or underscore
-			throw new IllegalArgumentException(buildMessage(type.value(), "Controller type can not start with a dot or an underscore "));
-		} else if (REGEXP_ID.exec(type.value()) == null) {
-			// checks if is not safe URL
-			throw new IllegalArgumentException(buildMessage(type.value(), "Controller type can not contain any invalid characters "));
-		}
+		Checker.assertCheck(!type.value().startsWith(Constants.DOT) && !type.value().startsWith(Constants.UNDERSCORE), buildMessage(type.value(), "Controller type can not start with a dot or an underscore "));
+		// checks if is not safe URL
+		Checker.checkIfValid(REGEXP_ID.exec(type.value()), buildMessage(type.value(), "Controller type can not contain any invalid characters "));
 	}
 
 	/**

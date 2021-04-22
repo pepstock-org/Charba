@@ -19,6 +19,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCall
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -70,12 +71,8 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	Listeners(LabelItem parent, IsDefaultListeners defaultOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if label is consistent
-		if (parent == null) {
-			// exception!
-			throw new IllegalArgumentException("Label argument is null");
-		}
 		// stores parent
-		this.parent = parent;
+		this.parent = Checker.checkAndGetIfValid(parent, "Parent label argument");
 		// checks if default value is consistent
 		// stores default
 		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);

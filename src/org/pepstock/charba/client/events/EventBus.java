@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -49,10 +50,7 @@ final class EventBus {
 		// checks if event type is consistent
 		Key.checkIfValid(type);
 		// checks if handler is consistent
-		if (handler == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Event handler is null");
-		}
+		Checker.checkIfValid(handler, "Event handler");
 		// checks if some events are firing
 		if (eventsFiringQueue > 0) {
 			// if yes, stores the add handler in the actions list
@@ -73,10 +71,7 @@ final class EventBus {
 		// checks if event type is consistent
 		Key.checkIfValid(type);
 		// checks if handler is consistent
-		if (handler == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Event handler is null");
-		}
+		Checker.checkIfValid(handler, "Event handler");
 		// checks if some events are firing
 		if (eventsFiringQueue > 0) {
 			// if yes, stores the add handler in the actions list

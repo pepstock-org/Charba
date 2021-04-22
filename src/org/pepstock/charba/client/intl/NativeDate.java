@@ -17,6 +17,7 @@ package org.pepstock.charba.client.intl;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeName;
 
 import jsinterop.annotations.JsOverlay;
@@ -52,12 +53,8 @@ final class NativeDate {
 	@JsOverlay
 	static NativeDate create(Date date) {
 		// checks if date is consistent
-		if (date != null) {
-			// creates new date
-			return new NativeDate((double) date.getTime());
-		}
-		// if here, the argument is not consistent
-		// then exception
-		throw new IllegalArgumentException("Date argument is null");
+		Checker.checkIfValid(date, "Date argument");
+		// creates new date
+		return new NativeDate((double) date.getTime());
 	}
 }

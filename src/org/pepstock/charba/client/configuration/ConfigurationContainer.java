@@ -17,6 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -50,11 +51,8 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	protected ConfigurationContainer(IsChart chart, T configuration) {
 		super(chart);
 		// checks if configuration is consistent
-		if (configuration == null) {
-			// if not exception
-			throw new IllegalArgumentException("Configuration argument is null");
-		}
-		this.configuration = configuration;
+		// and gets the instance
+		this.configuration = Checker.checkAndGetIfValid(configuration, "Configuration argument");;
 	}
 
 	/**

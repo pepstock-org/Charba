@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.colors;
 
+import org.pepstock.charba.client.commons.Checker;
+
 /**
  * <a href="https://github.com/ghosh/uiGradients">uiGradients</a> is a community contributed collection of beautiful multi-color gradients.<br>
  * Enumerates the <a href="https://github.com/ghosh/uiGradients">uiGradients</a> items, with a set of predefined colors, in order to create Charba {@link Gradient}s.
@@ -2388,10 +2390,9 @@ public enum UiGradient
 	 */
 	public Gradient createGradient(GradientType type, GradientOrientation orientation, GradientScope scope) {
 		// checks if array of colors previously loaded is consistent
-		if (colors == null || colors.length < 2) {
-			// if not, exception
-			throw new IllegalArgumentException("Colors list is not consistent. Must have 2 colors at least");
-		}
+		Checker.checkIfValid(colors, "Colors list");
+		// and it must have more than 2 colors
+		Checker.checkIfGreaterThan(colors.length, 2, "Colors list size");
 		// creates a gradient builder
 		GradientBuilder builder = GradientBuilder.create(type, orientation, scope);
 		// sets the max length to use on after calculation

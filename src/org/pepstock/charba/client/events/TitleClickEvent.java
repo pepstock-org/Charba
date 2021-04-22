@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.options.Title;
 
@@ -41,10 +42,7 @@ public final class TitleClickEvent extends AbstractEvent {
 	public TitleClickEvent(BaseNativeEvent nativeEvent, Title item) {
 		super(nativeEvent, TYPE);
 		// checks if argument is consistent
-		if (item == null) {
-			throw new IllegalArgumentException("Title item argument is null");
-		}
-		this.item = item;
+		this.item = Checker.checkAndGetIfValid(item, "Title item argument");
 	}
 
 	/**

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.AnimationItem;
 
@@ -38,11 +39,8 @@ abstract class AbstractAnimationEvent extends AbstractEvent {
 	AbstractAnimationEvent(BaseNativeEvent nativeEvent, EventType type, AnimationItem item) {
 		super(nativeEvent, type);
 		// checks if item is consistent
-		if (item == null) {
-			throw new IllegalArgumentException("Animation item argument is null");
-		}
 		// stores argument
-		this.item = item;
+		this.item = Checker.checkAndGetIfValid(item, "Animation item argument");
 	}
 
 	/**

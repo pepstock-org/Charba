@@ -17,6 +17,7 @@ package org.pepstock.charba.client.intl;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.GlobalOptions;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
@@ -127,15 +128,12 @@ public final class CLocale {
 	 * @param variantAndExtension variant and extension part needed to define a locale
 	 */
 	CLocale(String identifier, Language language, Script script, Region region, String variantAndExtension) {
-		// checks if identifier is consistent
-		if (identifier == null) {
-			throw new IllegalArgumentException("Locale identifier argument is null");
-		}
 		// checks if language is consistent
 		// language is the only one which MUST be consistent
 		Key.checkIfValid(language);
-		// stores all values
-		this.identifier = identifier;
+		// checks if identifier is consistent
+		this.identifier = Checker.checkAndGetIfValid(identifier, "Locale identifier argument");
+		// stores other values
 		this.language = language;
 		this.script = script;
 		this.region = region;

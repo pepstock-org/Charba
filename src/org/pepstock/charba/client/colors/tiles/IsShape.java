@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -42,9 +43,7 @@ public interface IsShape extends Key {
 	 * @param shape shape to be checked
 	 */
 	static void checkIfValid(IsShape shape) {
-		if (!isValid(shape)) {
-			throw new IllegalArgumentException("Shape is null or not consistent");
-		}
+		Checker.assertCheck(isValid(shape), "Shape is null or not consistent");
 	}
 
 	/**

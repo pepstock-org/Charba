@@ -18,6 +18,7 @@ package org.pepstock.charba.client.colors;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.utils.RegExp;
 import org.pepstock.charba.client.utils.RegExpResult;
 
@@ -113,37 +114,36 @@ public final class ColorBuilder {
 	 */
 	public static IsColor parse(String value) {
 		// checks if the value is consistent
-		if (value != null) {
-			// removes blanks to be able to check
-			// if starting with a specific label
-			String newValue = value.trim();
-			// checks which type of color is passed
-			if (newValue.startsWith(ColorUtil.HEX_STARTING_CHAR)) {
-				// is a HEX
-				return buildByHexValue(newValue);
-			} else if (value.startsWith(ColorUtil.RGBA_STARTING_CHARS)) {
-				// is a RGBA. It must be checked before RGB
-				return buildByRGBAValue(newValue);
-			} else if (value.startsWith(ColorUtil.RGB_STARTING_CHARS)) {
-				// is a RGB
-				return buildByRGBValue(newValue);
-			} else if (value.startsWith(ColorUtil.HSLA_STARTING_CHARS)) {
-				// is a HSLA. It must be checked before HSL
-				return buildByHSLAValue(newValue);
-			} else if (value.startsWith(ColorUtil.HSL_STARTING_CHARS)) {
-				// is a HSL
-				return buildByHSLValue(newValue);
-			} else {
-				// search by color name
-				for (HtmlColor color : HtmlColor.values()) {
-					if (color.name().equalsIgnoreCase(newValue)) {
-						return color;
-					}
+		Checker.checkIfValid(value, "Color argument");
+		// removes blanks to be able to check
+		// if starting with a specific label
+		String newValue = value.trim();
+		// checks which type of color is passed
+		if (newValue.startsWith(ColorUtil.HEX_STARTING_CHAR)) {
+			// is a HEX
+			return buildByHexValue(newValue);
+		} else if (value.startsWith(ColorUtil.RGBA_STARTING_CHARS)) {
+			// is a RGBA. It must be checked before RGB
+			return buildByRGBAValue(newValue);
+		} else if (value.startsWith(ColorUtil.RGB_STARTING_CHARS)) {
+			// is a RGB
+			return buildByRGBValue(newValue);
+		} else if (value.startsWith(ColorUtil.HSLA_STARTING_CHARS)) {
+			// is a HSLA. It must be checked before HSL
+			return buildByHSLAValue(newValue);
+		} else if (value.startsWith(ColorUtil.HSL_STARTING_CHARS)) {
+			// is a HSL
+			return buildByHSLValue(newValue);
+		} else {
+			// search by color name
+			for (HtmlColor color : HtmlColor.values()) {
+				if (color.name().equalsIgnoreCase(newValue)) {
+					return color;
 				}
 			}
+			// if here, the string argument is not valid
+			throw new IllegalArgumentException("Invalid format for a color: " + value);
 		}
-		// if here, the string argument is not valid
-		throw new IllegalArgumentException("Color argument is invalid");
 	}
 
 	/**
@@ -217,7 +217,7 @@ public final class ColorBuilder {
 			return searchOnEnum ? build(red, green, blue) : new Color(red, green, blue, Color.DEFAULT_ALPHA);
 		} else {
 			// if here the hex value is not valid
-			throw new IllegalArgumentException("Color argument length in HEX format is not valid. Must have a length 3 or 6");
+			throw new IllegalArgumentException("Color length in HEX format is not valid. Must have a length of 3 or 6 charactes");
 		}
 	}
 
@@ -232,34 +232,30 @@ public final class ColorBuilder {
 		RegExpResult matcher = REGEXP_RGB.exec(rgbvalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
-		if (matchFound && matcher.length() == 4) {
-			// init int values
-			int red = 0;
-			int green = 0;
-			int blue = 0;
-			// scans all token. Starts by 1
-			for (int i = 1; i < matcher.length(); i++) {
-				String groupStr = matcher.get(i);
-				switch (i) {
-				case 1:
-					red = Integer.parseInt(groupStr);
-					break;
-				case 2:
-					green = Integer.parseInt(groupStr);
-					break;
-				case 3:
-					blue = Integer.parseInt(groupStr);
-					break;
-				default:
-					break;
-				}
+		Checker.assertCheck(matchFound && matcher.length() == 4, "Invalid RGB format for color: " + rgbvalue);
+		// initializes integers values
+		int red = 0;
+		int green = 0;
+		int blue = 0;
+		// scans all token. Starts by 1
+		for (int i = 1; i < matcher.length(); i++) {
+			String groupStr = matcher.get(i);
+			switch (i) {
+			case 1:
+				red = Integer.parseInt(groupStr);
+				break;
+			case 2:
+				green = Integer.parseInt(groupStr);
+				break;
+			case 3:
+				blue = Integer.parseInt(groupStr);
+				break;
+			default:
+				break;
 			}
-			// builds color
-			return build(red, green, blue);
-		} else {
-			// if here the rgb value is not valid
-			throw new IllegalArgumentException("Color argument in RGB format is not valid");
 		}
+		// builds color
+		return build(red, green, blue);
 	}
 
 	/**
@@ -273,38 +269,34 @@ public final class ColorBuilder {
 		RegExpResult matcher = REGEXP_RGBA.exec(rgbavalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
-		if (matchFound && matcher.length() == 5) {
-			// init int values
-			int red = 0;
-			int green = 0;
-			int blue = 0;
-			double alpha = Color.DEFAULT_ALPHA;
-			// scans all token. Starts by 1
-			for (int i = 1; i < matcher.length(); i++) {
-				String groupStr = matcher.get(i);
-				switch (i) {
-				case 1:
-					red = Integer.parseInt(groupStr);
-					break;
-				case 2:
-					green = Integer.parseInt(groupStr);
-					break;
-				case 3:
-					blue = Integer.parseInt(groupStr);
-					break;
-				case 4:
-					alpha = Double.parseDouble(groupStr);
-					break;
-				default:
-					break;
-				}
+		Checker.assertCheck(matchFound && matcher.length() == 5, "Invalid RGBA format for color: " + rgbavalue);
+		// initializes integers values
+		int red = 0;
+		int green = 0;
+		int blue = 0;
+		double alpha = Color.DEFAULT_ALPHA;
+		// scans all token. Starts by 1
+		for (int i = 1; i < matcher.length(); i++) {
+			String groupStr = matcher.get(i);
+			switch (i) {
+			case 1:
+				red = Integer.parseInt(groupStr);
+				break;
+			case 2:
+				green = Integer.parseInt(groupStr);
+				break;
+			case 3:
+				blue = Integer.parseInt(groupStr);
+				break;
+			case 4:
+				alpha = Double.parseDouble(groupStr);
+				break;
+			default:
+				break;
 			}
-			// builds color
-			return build(red, green, blue, alpha);
-		} else {
-			// if here the rgba value is not valid
-			throw new IllegalArgumentException("Color argument in RGBA format is not valid");
 		}
+		// builds color
+		return build(red, green, blue, alpha);
 	}
 
 	/**
@@ -318,34 +310,30 @@ public final class ColorBuilder {
 		RegExpResult matcher = REGEXP_HSL.exec(hslvalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
-		if (matchFound && matcher.length() == 4) {
-			// init int values
-			int hue = 0;
-			int saturation = 0;
-			int lightness = 0;
-			// scans all token. Starts by 1
-			for (int i = 1; i < matcher.length(); i++) {
-				String groupStr = matcher.get(i);
-				switch (i) {
-				case 1:
-					hue = Integer.parseInt(groupStr);
-					break;
-				case 2:
-					saturation = Integer.parseInt(groupStr);
-					break;
-				case 3:
-					lightness = Integer.parseInt(groupStr);
-					break;
-				default:
-					break;
-				}
+		Checker.assertCheck(matchFound && matcher.length() == 4, "Invalid HSL format for color: " + hslvalue);
+		// initializes integers values
+		int hue = 0;
+		int saturation = 0;
+		int lightness = 0;
+		// scans all token. Starts by 1
+		for (int i = 1; i < matcher.length(); i++) {
+			String groupStr = matcher.get(i);
+			switch (i) {
+			case 1:
+				hue = Integer.parseInt(groupStr);
+				break;
+			case 2:
+				saturation = Integer.parseInt(groupStr);
+				break;
+			case 3:
+				lightness = Integer.parseInt(groupStr);
+				break;
+			default:
+				break;
 			}
-			// builds color
-			return convertHSL2RGB(hue, saturation, lightness, Double.NaN);
-		} else {
-			// if here the rgb value is not valid
-			throw new IllegalArgumentException("Color argument in HSL format is not valid");
 		}
+		// builds color
+		return convertHSL2RGB(hue, saturation, lightness, Double.NaN);
 	}
 
 	/**
@@ -359,38 +347,34 @@ public final class ColorBuilder {
 		RegExpResult matcher = REGEXP_HSLA.exec(hslavalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
-		if (matchFound && matcher.length() == 5) {
-			// init int values
-			int hue = 0;
-			int saturation = 0;
-			int lightness = 0;
-			double alpha = Color.DEFAULT_ALPHA;
-			// scans all token. Starts by 1
-			for (int i = 1; i < matcher.length(); i++) {
-				String groupStr = matcher.get(i);
-				switch (i) {
-				case 1:
-					hue = Integer.parseInt(groupStr);
-					break;
-				case 2:
-					saturation = Integer.parseInt(groupStr);
-					break;
-				case 3:
-					lightness = Integer.parseInt(groupStr);
-					break;
-				case 4:
-					alpha = Double.parseDouble(groupStr);
-					break;
-				default:
-					break;
-				}
+		Checker.assertCheck(matchFound && matcher.length() == 5, "Invalid HSLA format for color: " + hslavalue);
+		// initializes integers values
+		int hue = 0;
+		int saturation = 0;
+		int lightness = 0;
+		double alpha = Color.DEFAULT_ALPHA;
+		// scans all token. Starts by 1
+		for (int i = 1; i < matcher.length(); i++) {
+			String groupStr = matcher.get(i);
+			switch (i) {
+			case 1:
+				hue = Integer.parseInt(groupStr);
+				break;
+			case 2:
+				saturation = Integer.parseInt(groupStr);
+				break;
+			case 3:
+				lightness = Integer.parseInt(groupStr);
+				break;
+			case 4:
+				alpha = Double.parseDouble(groupStr);
+				break;
+			default:
+				break;
 			}
-			// builds color
-			return convertHSL2RGB(hue, saturation, lightness, alpha);
-		} else {
-			// if here the rgb value is not valid
-			throw new IllegalArgumentException("Color argument in HSLA format is not valid");
 		}
+		// builds color
+		return convertHSL2RGB(hue, saturation, lightness, alpha);
 	}
 
 	/**
@@ -405,17 +389,11 @@ public final class ColorBuilder {
 	 */
 	private static IsColor convertHSL2RGB(int hue, int saturation, int lightness, double alpha) {
 		// checks if hue is in range
-		if (hue < 0 || saturation > 360) {
-			throw new IllegalArgumentException("Hue argument is not within bounds (0-360)");
-		}
+		Checker.checkIfBetween(hue, 0, 260, "Hue argument");
 		// saturation if saturation is in range
-		if (saturation < 0 || saturation > 100) {
-			throw new IllegalArgumentException("Saturation argument is not within bounds (0-100)");
-		}
+		Checker.checkIfBetween(saturation, 0, 100, "Saturation argument");
 		// lightness if saturation is in range
-		if (lightness < 0 || lightness > 100) {
-			throw new IllegalArgumentException("Lightness argument is not within bounds (0-100)");
-		}
+		Checker.checkIfBetween(lightness, 0, 100, "Lightness argument");
 		// transforms all values in the values between 0 and 1
 		// with maximum value of range
 		double transientHue = hue % 360D;
@@ -447,7 +425,7 @@ public final class ColorBuilder {
 		// checks if alpha is NaN
 		// builds the RGB color without alpha
 		// otherwise with alpha
-		return Double.isNaN(alpha) ? build(red, green, blue) : build(red, green, blue, alpha);
+		return Checker.isBetween(alpha, 0D, 1D) ? build(red, green, blue, alpha) : build(red, green, blue) ;
 	}
 
 	/**

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.adapters;
 import java.util.Date;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -74,10 +75,7 @@ public final class DateAdapter {
 		// in order to store them once
 		NativeObject nativeObject = nativeAdapter.formats();
 		// checks if formats are consistent
-		if (nativeObject == null) {
-			// if no, exception
-			throw new IllegalArgumentException("Default formats is null");
-		}
+		Checker.checkIfValid(nativeObject, "Default formats");
 		// creates and stores the formats
 		this.formats = new DateAdapterFormats(nativeObject);
 	}

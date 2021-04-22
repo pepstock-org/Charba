@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.elements.Canvas;
@@ -76,8 +77,10 @@ public abstract class CanvasObjectFactory {
 	 * @return a canvas pattern
 	 */
 	public final CanvasPatternItem createPattern(IsChart chart, Pattern pattern) {
-		// checks if arguments are consistent
-		checkArgumentsConsistency(chart, pattern);
+		// checks if chart is consistent
+		IsChart.checkIfValid(chart);
+		// checks if pattern is consistent
+		Checker.checkIfValid(pattern, "Pattern argument");
 		// map instance
 		final Map<String, CanvasPatternItem> patternsMap;
 		// checks if the pattern is already created
@@ -152,8 +155,10 @@ public abstract class CanvasObjectFactory {
 	 * @return a canvas gradient
 	 */
 	public final CanvasGradientItem createGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
-		// checks if arguments are consistent
-		checkArgumentsConsistency(chart, gradient);
+		// checks if chart is consistent
+		IsChart.checkIfValid(chart);
+		// checks if gradient is consistent
+		Checker.checkIfValid(gradient, "Gradient argument");
 		// checks if the gradient is already created
 		final Map<String, CanvasGradientItem> gradientsMap;
 		// creates the unique id
@@ -172,37 +177,33 @@ public abstract class CanvasObjectFactory {
 			gradientsCache.put(chart.getId(), gradientsMap);
 		}
 		// checks if chart is initialized
-		if (chart.isInitialized() || Charts.hasNative(chart.getId())) {
-			// creates the result instance
-			CanvasGradientItem result = null;
-			// checks if the gradient must be linear oe radial
-			if (GradientType.LINEAR.equals(gradient.getType())) {
-				// creates a linear
-				result = createLinearGradient(chart, gradient);
-			} else {
-				// creates a radial
-				result = createRadialGradient(chart, gradient, datasetIndex, index);
-			}
-			// checks if result is consistent
-			if (result != null) {
-				// stores id
-				gradient.store(result);
-				// scans all colors to add to gradient
-				for (GradientColor color : gradient.getColors()) {
-					// adds colors using offset and color
-					result.addColorStop(color.getOffset(), color.getColorAsString());
-				}
-				// stores canvas gradient in the cache
-				gradientsMap.put(uniqueId, result);
-			}
-			// returns result
-			return result;
+		// if chart is not initialized
+		// then throws an exception
+		Checker.assertCheck(chart.isInitialized() || Charts.hasNative(chart.getId()), "Chart is not initialized");
+		// creates the result instance
+		CanvasGradientItem result = null;
+		// checks if the gradient must be linear oe radial
+		if (GradientType.LINEAR.equals(gradient.getType())) {
+			// creates a linear
+			result = createLinearGradient(chart, gradient);
 		} else {
-			// if here,
-			// chart is not initialized
-			// then throws an exception
-			throw new IllegalArgumentException("Chart is not initialized");
+			// creates a radial
+			result = createRadialGradient(chart, gradient, datasetIndex, index);
 		}
+		// checks if result is consistent
+		if (result != null) {
+			// stores id
+			gradient.store(result);
+			// scans all colors to add to gradient
+			for (GradientColor color : gradient.getColors()) {
+				// adds colors using offset and color
+				result.addColorStop(color.getOffset(), color.getColorAsString());
+			}
+			// stores canvas gradient in the cache
+			gradientsMap.put(uniqueId, result);
+		}
+		// returns result
+		return result;
 	}
 
 	/**
@@ -232,11 +233,7 @@ public abstract class CanvasObjectFactory {
 		// bottom - the y coordinate of the ending point of the scope
 		final Area area = getArea(chart, gradient);
 		// checks if area is consistent
-		if (area == null) {
-			// if here, the area is invalid
-			// then exception
-			throw new IllegalArgumentException("Area for linear gradient is null");
-		}
+		Checker.checkIfValid(area, "Area for linear gradient");
 		final double top = area.getTop();
 		final double bottom = area.getBottom();
 		final double left = area.getLeft();
@@ -330,20 +327,12 @@ public abstract class CanvasObjectFactory {
 		// these are the coordinates of center and radius of scope
 		final Center center = getCenter(chart, gradient, datasetIndex, index);
 		// checks if center is consistent
-		if (center == null) {
-			// if here, the center is invalid
-			// then exception
-			throw new IllegalArgumentException("Center for radial gradient is null");
-		}
+		Checker.checkIfValid(center, "Center for radial gradient");
 		final double centerX = center.getX();
 		final double centerY = center.getY();
 		final Radius radius = getRadius(chart, gradient, datasetIndex, index);
 		// checks if radius is consistent
-		if (radius == null) {
-			// if here, the radius is invalid
-			// then exception
-			throw new IllegalArgumentException("Radius for radial gradient is null");
-		}
+		Checker.checkIfValid(radius, "Radius for radial gradient");
 		final double radius0 = radius.getInner();
 		final double radius1 = radius.getOuter();
 		// checks the orientation requires by gradient
@@ -374,23 +363,7 @@ public abstract class CanvasObjectFactory {
 		return context.createRadialGradient(x0, y0, r0, x1, y1, r1);
 	}
 
-	/**
-	 * Checks consistency of arguments if not <code>null</code>. If not consistent, throws an {@link IllegalArgumentException}.
-	 * 
-	 * @param chart chart instance
-	 * @param canvasObject cnavas object (patter or gradient) instance
-	 */
-	private void checkArgumentsConsistency(IsChart chart, CanvasObject canvasObject) {
-		// checks if chart is consistent
-		IsChart.checkIfValid(chart);
-		// checks if canvas object is consistent
-		if (canvasObject == null) {
-			// if here,
-			// canvas oObject is null
-			// then throws an exception
-			throw new IllegalArgumentException("CanvasObject argument is null");
-		}
-	}
+
 
 	/**
 	 * Creates the unique id for gradient using the scope.<br>

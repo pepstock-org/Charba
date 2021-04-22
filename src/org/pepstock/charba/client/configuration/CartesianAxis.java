@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.AxisType;
@@ -59,16 +60,10 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		super(chart, id, type, kind);
 		// checks if scale id of scale is consistent
 		// used for cartesian, it must not be set to unknown
-		if (DefaultScaleId.UNKNOWN.is(id.value())) {
-			// throw an exception
-			throw new IllegalArgumentException("The scale id is invalid. It must not be " + id.value());
-		}
+		Checker.assertCheck(!DefaultScaleId.UNKNOWN.is(id.value()), "The scale id is invalid. It must not be " + id.value());
 		// checks if axis kind of scale is consistent
 		// used for cartesian, it must not be set to R
-		if (AxisKind.R.equals(kind)) {
-			// throw an exception
-			throw new IllegalArgumentException("The axis kind is invalid. It must not be " + AxisKind.R.value());
-		}
+		Checker.assertCheck(!AxisKind.R.equals(kind), "The axis kind is invalid. It must not be " + AxisKind.R.value());
 		// sets to the objects
 		grid = new Grid(this);
 		title = new CartesianScaleTitle(this);

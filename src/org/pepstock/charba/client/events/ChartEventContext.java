@@ -17,6 +17,7 @@ package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -88,13 +89,9 @@ public final class ChartEventContext extends NativeObjectContainer {
 		// creates an empty native object
 		super(null);
 		// checks if chart is consistent
-		if (chart == null) {
-			throw new IllegalArgumentException("Chart argument is null");
-		}
+		Checker.checkIfValid(chart, "Chart argument");
 		// checks if event is consistent
-		if (event == null) {
-			throw new IllegalArgumentException("Event argument is null");
-		}
+		Checker.checkIfValid(event, "Event argument");
 		// stores chart and event
 		setValue(Property.CHART, chart);
 		setValue(Property.NATIVE, event);

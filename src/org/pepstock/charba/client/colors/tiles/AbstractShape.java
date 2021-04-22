@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
+import org.pepstock.charba.client.commons.Checker;
+
 /**
  * This is an abstract shape for shape not enumerated, like image and character.
  * 
@@ -35,11 +37,7 @@ abstract class AbstractShape extends ShapeDrawer implements IsShape {
 	 */
 	protected AbstractShape(String shapeName) {
 		// checks if name of shape is consistent
-		if (shapeName == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Name of shape is null");
-		}
-		this.shapeName = shapeName;
+		this.shapeName = Checker.checkAndGetIfValid(shapeName, "Context Name of shape");
 	}
 
 	/*

@@ -22,6 +22,7 @@ import java.util.List;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -103,25 +104,15 @@ public final class Gradient extends CanvasObject {
 	Gradient(String id, GradientType type, GradientOrientation orientation, GradientScope scope, List<GradientColor> colors) {
 		super(id);
 		// checks if type is consistent
-		if (type == null) {
-			// then throws an exception
-			throw new IllegalArgumentException("Gradient type argument is null");
-		}
+		Checker.checkIfValid(type, "Gradient type argument");
 		// checks if orientation is consistent
-		if (orientation == null) {
-			// then throws an exception
-			throw new IllegalArgumentException("Gradient orientation argument is null");
-		}
+		Checker.checkIfValid(orientation, "Gradient orientation argument");
 		// checks if scope is consistent
-		if (scope == null) {
-			// then throws an exception
-			throw new IllegalArgumentException("Gradient scope argument is null");
-		}
-		// checks if colors is consistent
-		if (colors == null || colors.isEmpty()) {
-			// then throws an exception
-			throw new IllegalArgumentException("Gradient colors argument is null or empty");
-		}
+		Checker.checkIfValid(scope, "Gradient scope argument");
+		// checks if colors instance is consistent
+		Checker.checkIfValid(colors, "Gradient colors argument");
+		// checks if colors are consistent
+		Checker.assertCheck(!colors.isEmpty(), "Gradient colors list is empty");
 		// creates new color list
 		this.colors = new ArrayObjectContainerList<>();
 		// stores the colors passed as argument
@@ -164,10 +155,7 @@ public final class Gradient extends CanvasObject {
 		// creates a list using the native object
 		this.colors = ArrayListHelper.list(array, GradientColor.FACTORY);
 		// checks if there is any color
-		if (colors.isEmpty()) {
-			// no color, exception
-			throw new IllegalArgumentException(MISSING_COLORS);
-		}
+		Checker.assertCheck(!colors.isEmpty(), MISSING_COLORS);
 	}
 
 	/**
@@ -259,9 +247,8 @@ public final class Gradient extends CanvasObject {
 			}
 		}
 		// checks starting colors are found otherwise exception
-		if (startColor == null) {
-			throw new IllegalArgumentException("Unable to get the start and stop color based on passed offset " + offset);
-		} else if (endColor == null) {
+		Checker.checkIfValid(startColor, "Unable to get the start and stop color based on passed offset " + offset);
+		if (endColor == null) {
 			// if end colors is not found, use the starting color
 			return startColor;
 		}

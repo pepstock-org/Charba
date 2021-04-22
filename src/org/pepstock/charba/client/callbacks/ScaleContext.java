@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -85,12 +86,8 @@ public final class ScaleContext extends ChartContext {
 	public ScaleContext(Axis axis, ConfigurationEnvelop<NativeObject> envelop) {
 		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 		// checks if axis is consistent
-		if (axis == null) {
-			// exception!!
-			throw new IllegalArgumentException("Axis argument is null");
-		}
 		// stores axis
-		this.axis = axis;
+		this.axis = Checker.checkAndGetIfValid(axis, "Axis argument");
 	}
 
 	/**

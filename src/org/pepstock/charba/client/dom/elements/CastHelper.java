@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.dom.elements;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 
 /**
@@ -81,12 +82,8 @@ public final class CastHelper {
 	 */
 	private static Object checkAndGetObject(Object object) {
 		// checks if object is consistent
-		if (object == null) {
-			// if here, exception
-			throw new IllegalArgumentException("Object to cast is null");
-		}
 		// returns the argument
-		return object;
+		return Checker.checkAndGetIfValid(object, "Object to cast");
 	}
 
 }

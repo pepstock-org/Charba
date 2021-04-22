@@ -56,4 +56,5 @@ public final class UndefinedValues {
 	private UndefinedValues() {
 		// do nothing
 	}
+
 }

@@ -63,12 +63,9 @@ final class PropertyKeyChecker {
 	 */
 	static void check(String id) {
 		// checks if is null
-		if (id == null) {
-			throw new IllegalArgumentException("Property key can not be null");
-		} else if (REGEXP_ID.exec(id) == null) {
-			// checks if is not safe URL
-			throw new IllegalArgumentException(buildMessage(id, "Property key can not contain any invalid characters "));
-		}
+		Checker.checkIfValid(id, "Property key");
+		// checks if is not safe URL
+		Checker.checkIfValid(REGEXP_ID.exec(id), buildMessage(id, "Property key can not contain any invalid characters"));
 	}
 
 	/**

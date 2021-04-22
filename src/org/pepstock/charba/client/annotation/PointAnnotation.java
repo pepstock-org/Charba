@@ -25,6 +25,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallb
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -169,13 +170,9 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		// if defaults is not consistent, the defaults defined for this annotation type is used
 		super(AnnotationType.POINT, id == null ? AnnotationType.POINT.createId() : id, defaultValues == null ? AnnotationType.POINT.getDefaultsValues() : defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsPointAnnotation) {
-			// casts and stores it
-			this.defaultValues = (IsDefaultsPointAnnotation) getDefaultsValues();
-		} else {
-			// wrong class, exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
-		}
+		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsPointAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
+		// casts and stores it
+		this.defaultValues = (IsDefaultsPointAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
@@ -191,13 +188,9 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	PointAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
 		super(nativeObject, defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsPointAnnotation) {
-			// casts and stores it
-			this.defaultValues = (IsDefaultsPointAnnotation) getDefaultsValues();
-		} else {
-			// wrong class, exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
-		}
+		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsPointAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
+		// casts and stores it
+		this.defaultValues = (IsDefaultsPointAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies

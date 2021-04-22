@@ -19,6 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -193,10 +194,7 @@ public final class ScriptableUtils {
 	 */
 	public static <C extends ChartContext> Object handleCallbackResultAsColor(C context, Object result, String defaultValue, boolean hasPattern) {
 		// checks if context is consistent
-		if (context == null) {
-			// exception!
-			throw new IllegalArgumentException("Context argument is null");
-		}
+		Checker.checkIfValid(context, "Context argument");
 		// invokes common handler
 		Object checkedResult = doHandleCallbackResultAsColor(context, result, defaultValue, hasPattern);
 		// checks if is a gradient

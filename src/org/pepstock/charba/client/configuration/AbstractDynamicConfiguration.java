@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.commons.Checker;
+
 /**
  * Base object to map configuration, by a provider, which can be reuse in all configuration items where this configuration can be set.
  * 
@@ -33,12 +35,8 @@ abstract class AbstractDynamicConfiguration<I> {
 	 */
 	AbstractDynamicConfiguration(IsProvider<I> provider) {
 		// checks if consistent
-		if (provider == null) {
-			// exception!
-			throw new IllegalArgumentException("Options provider argument is null");
-		}
 		// stores provider
-		this.provider = provider;
+		this.provider = Checker.checkAndGetIfValid(provider, "Options provider") ;
 	}
 
 	/**
@@ -47,13 +45,8 @@ abstract class AbstractDynamicConfiguration<I> {
 	 * @return the options element instance from provider
 	 */
 	final I checkAndGet() {
-		I options = provider.getElement();
 		// checks if consistent
-		if (options == null) {
-			// exception!
-			throw new IllegalArgumentException("Options element by provider is null");
-		}
-		return options;
+		return Checker.checkAndGetIfValid(provider.getElement(), "Options element");
 	}
 
 	/**

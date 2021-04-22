@@ -43,11 +43,10 @@ public final class ArrayDoubleArrayList<E extends NativeArrayContainer<ArrayDoub
 		// if null, creates a new array
 		if (array == null) {
 			this.array = new ArrayDoubleArray();
-		} else if (factory == null) {
+		} else {
 			// factory is not consistent and array is consistent EXCEPTION
 			// factory is mandatory to initialize the list creating the elements from native array
-			throw new IllegalArgumentException("Unable to create NativeArrayContainer without a factory which is null");
-		} else {
+			Checker.checkIfValid(factory, "Unable to create array list without a factory. The factory");
 			// uses an existing array
 			this.array = array;
 			// scans the array

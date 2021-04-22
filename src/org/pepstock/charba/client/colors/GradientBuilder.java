@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -116,20 +117,11 @@ public final class GradientBuilder {
 	 */
 	public static GradientBuilder create(GradientType type, GradientOrientation orientation, GradientScope scope) {
 		// checks if type is consistent
-		if (type == null) {
-			// then throws an exception
-			throw new IllegalArgumentException("Gradient type argument is null");
-		}
+		Checker.checkIfValid(type, "Gradient type argument");
 		// checks if orientation is consistent
-		if (orientation == null) {
-			// then throws an exception
-			throw new IllegalArgumentException("Gradient orientation argument is null");
-		}
+		Checker.checkIfValid(orientation, "Gradient orientation argument");
 		// checks if scope is consistent
-		if (scope == null) {
-			// then throws an exception
-			throw new IllegalArgumentException("Gradient scope argument is null");
-		}
+		Checker.checkIfValid(scope, "Gradient scope argument");
 		// creates the builder
 		return new GradientBuilder(type, orientation, scope);
 	}
@@ -204,10 +196,7 @@ public final class GradientBuilder {
 		// checks if argument is consistent
 		if (colors != null && colors.length > 0) {
 			// checks if array of colors previously loaded is consistent
-			if (colors.length < 2) {
-				// if not, exception
-				throw new IllegalArgumentException("Colors list is not consistent. Must have 2 colors at least");
-			}
+			Checker.checkIfGreaterThan(colors.length, 2, "Colors list");
 			// removes all previous colors
 			this.colors.clear();
 			// gets index of last calculated color
@@ -252,10 +241,7 @@ public final class GradientBuilder {
 	 */
 	public Gradient build() {
 		// checks if there is any color
-		if (colors.isEmpty()) {
-			// no color, exception
-			throw new IllegalArgumentException(Gradient.MISSING_COLORS);
-		}
+		Checker.assertCheck(!colors.isEmpty(), Gradient.MISSING_COLORS);
 		// sorts the color in order to have the list from less to greater
 		Collections.sort(colors, Gradient.COMPARATOR);
 		// generates id
@@ -281,30 +267,22 @@ public final class GradientBuilder {
 	 */
 	public static Gradient build(NativeObject nativeObject) {
 		// checks if argument is consistent
-		if (nativeObject != null) {
-			// extracts the id from object
-			String id = Id.getStringProperty(CanvasObject.Property.CHARBA_OBJECT_ID, nativeObject);
-			if (id == null) {
-				// without the id, is not consistent
-				// exception!
-				throw new IllegalArgumentException(Utilities.applyTemplate(CanvasObject.MISSING_PROPERTY, CanvasObject.Property.CHARBA_OBJECT_ID.value()));
-			}
-			// checks if gradient is cached
-			if (GRADIENTS.containsKey(id)) {
-				// returns the cached object
-				return GRADIENTS.get(id);
-			}
-			// creates new gradient
-			Gradient result = new Gradient(nativeObject);
-			// stores the object in the the cache
-			GRADIENTS.put(id, result);
-			// returns the instance
-			return result;
-		} else {
-			// if here, argument is null
-			// then exception
-			throw new IllegalArgumentException("Native object argument is null");
+		Checker.checkIfValid(nativeObject, "Native object argument");
+		// extracts the id from object
+		String id = Id.getStringProperty(CanvasObject.Property.CHARBA_OBJECT_ID, nativeObject);
+		// checks if id is consistent
+		Checker.assertCheck(id != null, Utilities.applyTemplate(CanvasObject.MISSING_PROPERTY, CanvasObject.Property.CHARBA_OBJECT_ID.value()));
+		// checks if gradient is cached
+		if (GRADIENTS.containsKey(id)) {
+			// returns the cached object
+			return GRADIENTS.get(id);
 		}
+		// creates new gradient
+		Gradient result = new Gradient(nativeObject);
+		// stores the object in the the cache
+		GRADIENTS.put(id, result);
+		// returns the instance
+		return result;
 	}
 
 	/**

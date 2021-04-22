@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
@@ -40,17 +41,11 @@ public abstract class AbstractEvent extends Event {
 	 */
 	protected AbstractEvent(BaseNativeEvent nativeEvent, EventType type) {
 		super();
-		// checks if native event is consistent
-		if (nativeEvent == null) {
-			throw new IllegalArgumentException("Native event argument is null");
-		}
-		// checks if event type is consistent
-		if (type == null) {
-			throw new IllegalArgumentException("Event type argument is null");
-		}
 		// stores arguments
-		this.nativeEvent = nativeEvent;
-		this.type = type;
+		// checks if native event is consistent
+		this.nativeEvent = Checker.checkAndGetIfValid(nativeEvent, "Native event argument");
+		// checks if event type is consistent
+		this.type = Checker.checkAndGetIfValid(type, "Event type argument");
 	}
 
 	/*

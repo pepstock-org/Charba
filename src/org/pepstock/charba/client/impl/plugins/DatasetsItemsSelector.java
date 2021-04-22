@@ -21,6 +21,7 @@ import java.util.Map;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.configuration.LineOptions;
 import org.pepstock.charba.client.data.BarDataset;
@@ -253,10 +254,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		if (mustBeActivated(chart)) {
 			// adds checks if there is any dataset selection handler in the option
 			// if yes exception
-			if (chart.getOptions().hasDatasetSelectionHandlers()) {
-				// throw exception
-				throw new IllegalArgumentException("Unable to activate plugin because a dataset selection handler has been defined");
-			} else if (pluginSelectionHandlers.containsKey(chart.getId())) {
+			Checker.assertCheck(!chart.getOptions().hasDatasetSelectionHandlers(), "Unable to activate plugin because a dataset selection handler has been defined");
+			if (pluginSelectionHandlers.containsKey(chart.getId())) {
 				// sets cursor wait because the chart is drawing and not selectable
 				chart.getCanvas().getStyle().setCursorType(CursorType.WAIT);
 			}

@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.data.BarBorderWidth;
 import org.pepstock.charba.client.data.BarDataset;
@@ -107,15 +108,9 @@ final class ColorSchemesUtil {
 	 */
 	String createKey(String category, String name) {
 		// if name is null
-		if (name == null) {
-			// exception
-			throw new IllegalArgumentException("Color scheme name is null");
-		}
+		Checker.checkIfValid(name, "Color scheme name");
 		// if category is null
-		if (category == null) {
-			// exception
-			throw new IllegalArgumentException("Color scheme category is null");
-		}
+		Checker.checkIfValid(category, "Color scheme category");
 		// creates a builder with category
 		StringBuilder sb = new StringBuilder(category);
 		// adds dot and name of color scheme

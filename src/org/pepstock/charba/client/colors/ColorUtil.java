@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.colors;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 
 /**
@@ -136,7 +137,7 @@ public final class ColorUtil {
 	 * @return <code>true</code> if any integer is between 0 and 255 (inclusive)
 	 */
 	static boolean isChannelWithinBounds(int channel) {
-		return channel >= 0 && channel <= 255;
+		return Checker.isBetween(channel, 0, 255);
 	}
 
 	/**
@@ -145,9 +146,7 @@ public final class ColorUtil {
 	 * @param channel channel to check, exception if the channel is nor within bounds
 	 */
 	static void checkChannelWithinBounds(int channel) {
-		if (!isChannelWithinBounds(channel)) {
-			throw new IllegalArgumentException("Channel value (" + channel + ") is not within bounds (0-255)");
-		}
+		Checker.checkIfBetween(channel, 0, 255, "Channel value");
 	}
 
 	/**
@@ -157,7 +156,7 @@ public final class ColorUtil {
 	 * @return <code>true</code> if any double is between 0.0d and 1.0d (inclusive)
 	 */
 	public static boolean isAlphaWithinBounds(double alpha) {
-		return alpha >= 0D && alpha <= 1D;
+		return Checker.isBetween(alpha, 0D, 1D);
 	}
 
 	/**
@@ -166,14 +165,12 @@ public final class ColorUtil {
 	 * @param alpha alpha value, exception if the channel is nor within bounds
 	 */
 	public static void checkAlphaWithinBounds(double alpha) {
-		if (!isAlphaWithinBounds(alpha)) {
-			throw new IllegalArgumentException("Alpha value (" + alpha + ") is not within bounds (0D-1D)");
-		}
+		Checker.checkIfBetween(alpha, 0D, 1D, "Alpha value");
 	}
 
 	/**
 	 * Convert a RGB Color to it corresponding HSL values.<br>
-	 * See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind colorspace conversions, RGB-HSL</a>.
+	 * See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind color space conversions, RGB-HSL</a>.
 	 * 
 	 * @param red red value
 	 * @param green green value

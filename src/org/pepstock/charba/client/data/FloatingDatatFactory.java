@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeArrayContainerFactory;
 
 /**
@@ -36,14 +37,12 @@ public final class FloatingDatatFactory implements NativeArrayContainerFactory<A
 		// checks consistency of array
 		if (nativeArray != null) {
 			// the array must contains and only 2 values
-			if (nativeArray.length() == 2) {
-				return new FloatingData(nativeArray);
-			}
-			// exception
-			throw new IllegalArgumentException("The array contains " + nativeArray.length() + " instead of 2");
+			Checker.checkIfEqualTo(nativeArray.length(), 2, "Array size");
+			// returns floating data
+			return new FloatingData(nativeArray);
 		}
 		// if here, the array is not consistent
-		// then it creates an array with nan values
+		// then it creates an array with NaN values
 		return new FloatingData(ArrayDouble.fromOrEmpty(Double.NaN, Double.NaN));
 	}
 

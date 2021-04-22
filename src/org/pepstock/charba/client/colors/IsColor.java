@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.colors;
 
+import org.pepstock.charba.client.commons.Checker;
+
 /**
  * Defines the methods that all colors must have and many of them have got already an implementation that usually does not need to be changed.
  * 
@@ -52,9 +54,7 @@ public interface IsColor {
 	 */
 	static void checkIfValid(IsColor color) {
 		// check if color is consistent
-		if (color == null) {
-			throw new IllegalArgumentException("Color is null");
-		}
+		Checker.checkIfValid(color, "Color");
 		// checks if values are consistent
 		ColorUtil.checkChannelWithinBounds(color.getRed());
 		ColorUtil.checkChannelWithinBounds(color.getGreen());

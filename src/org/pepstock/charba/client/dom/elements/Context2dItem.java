@@ -21,6 +21,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
@@ -748,16 +749,12 @@ public final class Context2dItem extends BaseHtmlElement {
 	@JsOverlay
 	public final CanvasPatternItem createPattern(Canvas canvas, Repetition repetition) {
 		// checks if argument is consistent
-		if (canvas != null) {
-			// gets the repetition checking if the argument is consistent
-			// if not, uses the default
-			Repetition checkedRepetition = Key.isValid(repetition) ? repetition : Repetition.NO_REPEAT;
-			// creates and returns the pattern
-			return createPattern(canvas, checkedRepetition.value());
-		}
-		// if here the argument is not consistent
-		// then exception
-		throw new IllegalArgumentException("Canvas element is null");
+		Checker.checkIfValid(canvas, "Canvas element");
+		// gets the repetition checking if the argument is consistent
+		// if not, uses the default
+		Repetition checkedRepetition = Key.isValid(repetition) ? repetition : Repetition.NO_REPEAT;
+		// creates and returns the pattern
+		return createPattern(canvas, checkedRepetition.value());
 	}
 
 	/**
@@ -770,16 +767,12 @@ public final class Context2dItem extends BaseHtmlElement {
 	@JsOverlay
 	public final CanvasPatternItem createPattern(Img image, Repetition repetition) {
 		// checks if argument is consistent
-		if (image != null) {
-			// gets the repetition checking if the argument is consistent
-			// if not, uses the default
-			Repetition checkedRepetition = Key.isValid(repetition) ? repetition : Repetition.NO_REPEAT;
-			// creates and returns the pattern
-			return createPattern(image, checkedRepetition.value());
-		}
-		// if here the argument is not consistent
-		// then exception
-		throw new IllegalArgumentException("Image element is null");
+		Checker.checkIfValid(image, "Image element");
+		// gets the repetition checking if the argument is consistent
+		// if not, uses the default
+		Repetition checkedRepetition = Key.isValid(repetition) ? repetition : Repetition.NO_REPEAT;
+		// creates and returns the pattern
+		return createPattern(image, checkedRepetition.value());
 	}
 
 	/**
@@ -975,12 +968,8 @@ public final class Context2dItem extends BaseHtmlElement {
 	@JsOverlay
 	private final <T> T checkAndGetDrawImageArgument(T object) {
 		// checks if argument is consistent
-		if (object == null) {
-			// if here, argument is null
-			throw new IllegalArgumentException("Object to draw is null");
-		}
 		// returns the argument
-		return object;
+		return Checker.checkAndGetIfValid(object, "Object to draw");
 	}
 
 	/**

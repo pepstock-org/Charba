@@ -22,6 +22,7 @@ import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.controllers.AbstractController;
 import org.pepstock.charba.client.controllers.ControllerContext;
 import org.pepstock.charba.client.controllers.ControllerProvider;
@@ -86,32 +87,22 @@ final class BaseMeterController extends AbstractController {
 	@Override
 	public void initialize(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart)) {
-			// gets the data set at index
-			Dataset dataset = chart.getData().getDatasets().get(context.getIndex());
-			// checks if is a meter data set (or gauge)
-			if (dataset instanceof MeterDataset) {
-				// casts to meter data set
-				MeterDataset meterDataset = (MeterDataset) dataset;
-				// meter or gauge charts must have only 1 data set
-				// checks if there is more than 1
-				if (context.getIndex() > 0) {
-					// if more than 1
-					// forces hidden data set
-					meterDataset.hide();
-				}
-				// invokes the initialization
-				super.initialize(context, chart);
-			} else {
-				// if not meter data set
-				// exception
-				throw new IllegalArgumentException("Dataset at index " + context.getIndex() + " is not a MeterDataset");
-			}
-		} else {
-			// if here, arguments are not consistent
-			// exception
-			throw new IllegalArgumentException("Initialize method arguments are not consistent");
+		Checker.assertCheck(Controller.isConsistent(this, context, chart), "Initialize method arguments are not consistent");
+		// gets the data set at index
+		Dataset dataset = chart.getData().getDatasets().get(context.getIndex());
+		// checks if is a meter data set (or gauge)
+		Checker.assertCheck(dataset instanceof MeterDataset, "Dataset at index " + context.getIndex() + " is not a MeterDataset");
+		// casts to meter data set
+		MeterDataset meterDataset = (MeterDataset) dataset;
+		// meter or gauge charts must have only 1 data set
+		// checks if there is more than 1
+		if (context.getIndex() > 0) {
+			// if more than 1
+			// forces hidden data set
+			meterDataset.hide();
 		}
+		// invokes the initialization
+		super.initialize(context, chart);
 	}
 
 	/*
@@ -124,19 +115,13 @@ final class BaseMeterController extends AbstractController {
 		// checks if arguments are consistent
 		// checks if the index is 0 because
 		// only the data set 0 contains my value
-		if (Controller.isConsistent(this, context, chart) && context.getIndex() == 0) {
-			// draw the doughnut chart
-			super.draw(context, chart);
-			// gets chart node
-			ChartNode node = context.getNode();
-			// draws labels
-			drawLabels(chart, node);
-			// closes here
-			return;
-		}
-		// if here, arguments are not consistent
-		// exception
-		throw new IllegalArgumentException("Draw method arguments are not consistent");
+		Checker.assertCheck(Controller.isConsistent(this, context, chart) && context.getIndex() == 0, "Draw method arguments are not consistent");
+		// draw the doughnut chart
+		super.draw(context, chart);
+		// gets chart node
+		ChartNode node = context.getNode();
+		// draws labels
+		drawLabels(chart, node);
 	}
 
 	/**
@@ -333,7 +318,7 @@ final class BaseMeterController extends AbstractController {
 			}
 		}
 	}
-	
+
 	/**
 	 * Returns the color to apply to rendered label, invoking the callback if set.
 	 * 
@@ -348,18 +333,18 @@ final class BaseMeterController extends AbstractController {
 			// checks the result
 			if (result instanceof IsColor) {
 				// casts to color
-				IsColor color = (IsColor)result;
+				IsColor color = (IsColor) result;
 				// returns as string
 				return color.toRGBA();
 			} else if (result instanceof String) {
 				// returns as string
-				return (String)result;
+				return (String) result;
 			}
 			// if here, invalid returns object
 			// then goes to the end of this method
 			// to return the default
 		} else if (options.getFontColor() != null) {
-			// checks if the color has been as color 
+			// checks if the color has been as color
 			return options.getFontColor().toRGBA();
 		}
 		// if here, invalid returns object from callback

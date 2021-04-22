@@ -18,6 +18,7 @@ package org.pepstock.charba.client.intl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -129,22 +130,20 @@ public final class CLocaleBuilder {
 	 */
 	public static CLocale build(String localeIdentifier) {
 		LocaleRegExpGroups groups = applyRegExp(localeIdentifier);
+		// checks if the groups instance is consistent
+		Checker.checkIfValid(groups, "Locale argument");
 		// checks if the groups is consistent
-		if (groups != null && groups.isConsistent()) {
-			// gets the references
-			// from groups
-			Language language = groups.getLanguage();
-			Script script = groups.getScript();
-			Region region = groups.getRegion();
-			String variantAndExtension = groups.getVariantAndExtension();
-			// creates the identifier
-			String identifier = createLocaleIdentifier(language, script, region, variantAndExtension);
-			// creates and returns the locale
-			return createLocale(identifier, language, script, region, variantAndExtension);
-		}
-		// if here the locale argument passed as argument
-		// is not consistent
-		throw new IllegalArgumentException("Locale argument is not consistent");
+		Checker.assertCheck(groups.isConsistent(), "Locale argument");
+		// gets the references
+		// from groups
+		Language language = groups.getLanguage();
+		Script script = groups.getScript();
+		Region region = groups.getRegion();
+		String variantAndExtension = groups.getVariantAndExtension();
+		// creates the identifier
+		String identifier = createLocaleIdentifier(language, script, region, variantAndExtension);
+		// creates and returns the locale
+		return createLocale(identifier, language, script, region, variantAndExtension);
 	}
 
 	/**
@@ -247,8 +246,8 @@ public final class CLocaleBuilder {
 	}
 
 	/**
-	 * Internal native object factory to pass to {@link RegExpResult#groups(NativeObjectContainerFactory)} method in order to read the regular expression tokens, by the key set
-	 * in the regular expression pattern.
+	 * Internal native object factory to pass to {@link RegExpResult#groups(NativeObjectContainerFactory)} method in order to read the regular expression tokens, by the key set in
+	 * the regular expression pattern.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *

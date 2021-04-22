@@ -25,6 +25,7 @@ import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLines;
@@ -96,10 +97,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	AbstractScaleLines(Axis axis, IsDefaultScaleLines defaultValues) {
 		super(axis);
 		// checks default value instance
-		if (defaultValues == null) {
-			// exception!
-			throw new IllegalArgumentException("Default value argument is null");
-		}
+		Checker.checkAndGetIfValid(defaultValues, "Default value argument");
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -205,13 +203,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 * @return the {@link AbstractNode} instance
 	 */
 	private AbstractNode checkAndGet() {
-		AbstractNode node = getElement();
-		// checks if consistent
-		if (node == null) {
-			// exception!
-			throw new IllegalArgumentException("Node element is null");
-		}
-		return node;
+		return Checker.checkAndGetIfValid(getElement(), "Node element");
 	}
 
 }

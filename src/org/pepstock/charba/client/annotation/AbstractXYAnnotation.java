@@ -21,6 +21,7 @@ import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -107,13 +108,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 		// if defaults is not consistent, the defaults defined for this annotation type is used
 		super(Key.checkAndGetIfValid(type), id == null ? type.createId() : id, defaultValues == null ? type.getDefaultsValues() : defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsXYAnnotation) {
-			// casts and stores it
-			this.defaultValues = (IsDefaultsXYAnnotation) getDefaultsValues();
-		} else {
-			// wrong class, exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
-		}
+		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsXYAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
+		// casts and stores it
+		this.defaultValues = (IsDefaultsXYAnnotation) getDefaultsValues();
 		// sets callbacks proxies
 		initAbstractXYCallbacks();
 	}
@@ -128,13 +125,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	AbstractXYAnnotation(AnnotationType type, NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
 		super(nativeObject, defaultValues);
 		// checks if default are of the right class
-		if (getDefaultsValues() instanceof IsDefaultsXYAnnotation) {
-			// casts and stores it
-			this.defaultValues = (IsDefaultsXYAnnotation) getDefaultsValues();
-		} else {
-			// wrong class, exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
-		}
+		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsXYAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
+		// casts and stores it
+		this.defaultValues = (IsDefaultsXYAnnotation) getDefaultsValues();
 		// sets callbacks proxies
 		initAbstractXYCallbacks();
 	}

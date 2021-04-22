@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.enums;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.RegExp;
-import org.pepstock.charba.client.utils.RegExpResult;
 
 /**
  * Fill object to configure chart to use a relative dataset index.<br>
@@ -51,12 +51,8 @@ public final class RelativeDatasetIndexFill extends AbstractDatasetIndexFill {
 		// and undefined integer for index as integer (relative ONLY string)
 		super(FillingMode.RELATIVE_DATASET_INDEX, UndefinedValues.INTEGER, index);
 		// applies the regex
-		RegExpResult matcher = RELATIVE_INDEX.exec(index);
 		// if does not match
-		if (matcher == null) {
-			// exception because is not in right format
-			throw new IllegalArgumentException("Index argument is not a valid relative index");
-		}
+		Checker.checkIfValid(RELATIVE_INDEX.exec(index), "Index argument is not a valid relative index. Index");
 		// creates the name to return
 		this.name = FillingMode.RELATIVE_DATASET_INDEX.value() + ":" + getValue();
 	}

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.items.LegendItem;
 
@@ -39,11 +40,8 @@ abstract class AbstractLegendEvent extends AbstractChartEvent implements IsLegen
 	AbstractLegendEvent(ChartEventContext eventContext, EventType type, Key key, LegendItem item) {
 		super(eventContext, type, key);
 		// checks if item is consistent
-		if (item == null) {
-			throw new IllegalArgumentException("Legend item argument is null");
-		}
 		// stores the item
-		this.item = item;
+		this.item = Checker.checkAndGetIfValid(item, "Legend item argument");
 	}
 
 	/**

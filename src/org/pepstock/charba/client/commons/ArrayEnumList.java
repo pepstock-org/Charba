@@ -41,10 +41,9 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	 */
 	ArrayEnumList(E[] values, ArrayString array) {
 		// checks class argument if consistent
-		if (values == null || values.length == 0) {
-			// if not, exception
-			throw new IllegalArgumentException("Values argument is null or empty");
-		}
+		Checker.checkIfValid(values, "Values argument");
+		// checks if values are consistent
+		Checker.checkIfNotEqualTo(values.length, 0, "Values argument size");
 		// sets all enumeration values
 		this.definedValues = values;
 		// if null, creates a new array

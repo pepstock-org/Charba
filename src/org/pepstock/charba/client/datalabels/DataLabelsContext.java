@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.callbacks.AbstractDatasetContext;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ContextType;
@@ -70,12 +71,8 @@ public final class DataLabelsContext extends AbstractDatasetContext {
 	DataLabelsContext(LabelItem label, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if label is consistent
-		if (label == null) {
-			// exception!
-			throw new IllegalArgumentException("Label argument is null");
-		}
 		// stores label
-		this.label = label;
+		this.label = Checker.checkAndGetIfValid(label, "Label argument");
 		// as you can see from following rejected PR
 		// https://github.com/chartjs/chartjs-plugin-datalabels/pull/229
 		// data labels does not provide the context type

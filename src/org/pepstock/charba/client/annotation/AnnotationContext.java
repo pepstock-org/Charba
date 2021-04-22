@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.callbacks.ChartContext;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ContextType;
 
@@ -36,13 +37,9 @@ public final class AnnotationContext extends ChartContext {
 	 */
 	AnnotationContext(AbstractAnnotation annotation, NativeObject nativeObject) {
 		super(nativeObject);
-		// checks if label is consistent
-		if (annotation == null) {
-			// exception!
-			throw new IllegalArgumentException("Annotation argument is null");
-		}
-		// stores annotation
-		this.annotation = annotation;
+		// checks if context is consistent
+		// and stores annotation
+		this.annotation = Checker.checkAndGetIfValid(annotation, "Annotation argument");
 	}
 
 	/**

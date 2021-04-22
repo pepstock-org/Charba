@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.colors;
 
 import org.pepstock.charba.client.colors.tiles.TilesFactoryDefaults;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -83,17 +84,12 @@ public final class Pattern extends CanvasObject {
 	Pattern(String id, Img image, Repetition repetition, int width, int height) {
 		super(id);
 		// checks if image is not consistent
-		if (image != null) {
-			// creates pattern
-			setValue(Property.CHARBA_PATTERN_IMG, image);
-			setValue(Property.CHARBA_PATTERN_WIDTH, width);
-			setValue(Property.CHARBA_PATTERN_HEIGHT, height);
-			setValue(Property.CHARBA_PATTERN_REPETITION, repetition == null ? Repetition.REPEAT : repetition);
-		} else {
-			// if here, image is null
-			// then exception
-			throw new IllegalArgumentException("Image argument is null");
-		}
+		Checker.checkIfValid(image, "Image argument");
+		// creates pattern
+		setValue(Property.CHARBA_PATTERN_IMG, image);
+		setValue(Property.CHARBA_PATTERN_WIDTH, width);
+		setValue(Property.CHARBA_PATTERN_HEIGHT, height);
+		setValue(Property.CHARBA_PATTERN_REPETITION, repetition == null ? Repetition.REPEAT : repetition);
 	}
 
 	/**
@@ -107,22 +103,17 @@ public final class Pattern extends CanvasObject {
 	Pattern(String id, CanvasPatternItem canvasPattern, int width, int height) {
 		super(id);
 		// checks if canvas pattern is not consistent
-		if (canvasPattern != null) {
-			// creates pattern
-			setValue(Property.CHARBA_PATTERN_CANVAS, canvasPattern);
-			// sets repetition even is not used
-			// to normalizes the properties
-			setValue(Property.CHARBA_PATTERN_REPETITION, Repetition.REPEAT);
-			// stores size checks the max value
-			setValue(Property.CHARBA_PATTERN_WIDTH, Math.max(width, TilesFactoryDefaults.DEFAULT_SIZE));
-			setValue(Property.CHARBA_PATTERN_HEIGHT, Math.max(height, TilesFactoryDefaults.DEFAULT_SIZE));
-			// stores the id in the pattern
-			store(canvasPattern);
-		} else {
-			// if here, image is null
-			// then exception
-			throw new IllegalArgumentException("Canvas pattern argument is null");
-		}
+		Checker.checkIfValid(canvasPattern, "Canvas pattern argument");
+		// creates pattern
+		setValue(Property.CHARBA_PATTERN_CANVAS, canvasPattern);
+		// sets repetition even is not used
+		// to normalizes the properties
+		setValue(Property.CHARBA_PATTERN_REPETITION, Repetition.REPEAT);
+		// stores size checks the max value
+		setValue(Property.CHARBA_PATTERN_WIDTH, Math.max(width, TilesFactoryDefaults.DEFAULT_SIZE));
+		setValue(Property.CHARBA_PATTERN_HEIGHT, Math.max(height, TilesFactoryDefaults.DEFAULT_SIZE));
+		// stores the id in the pattern
+		store(canvasPattern);
 	}
 
 	/**

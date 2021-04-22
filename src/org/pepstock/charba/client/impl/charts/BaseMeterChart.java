@@ -20,6 +20,7 @@ import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.enums.DefaultTransitionKey;
@@ -95,26 +96,16 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 			// then gets it
 			Controller controllerInstance = Defaults.get().getControllers().getController(type);
 			// checks if controller is a base meter controller
-			if (controllerInstance instanceof BaseMeterController) {
-				// casts to meter controller
-				meterController = (BaseMeterController) controllerInstance;
-			} else {
-				// if here is not a meter controller
-				// then exception
-				throw new IllegalArgumentException("Controller stored for " + getControllerType().value() + " is not a " + BaseMeterController.class.getName());
-			}
+			Checker.assertCheck(controllerInstance instanceof BaseMeterController, "Controller stored for " + getControllerType().value() + " is not a " + BaseMeterController.class.getName());
+			// casts to meter controller
+			meterController = (BaseMeterController) controllerInstance;
 		}
 		// gets meter options
 		MeterOptions options;
 		// checks if options a meter on
-		if (getOptions() instanceof MeterOptions) {
-			// cats and store
-			options = (MeterOptions)getOptions();
-		} else {
-			// if here is not a meter options
-			// then exception
-			throw new IllegalArgumentException("Chart options are " + getOptions().getClass().getName() + " and not a " + MeterOptions.class.getName());
-		}
+		Checker.assertCheck(getOptions() instanceof MeterOptions, "Chart options are " + getOptions().getClass().getName() + " and not a " + MeterOptions.class.getName());
+		// cats and store
+		options = (MeterOptions) getOptions();
 		// disables legend
 		options.getLegend().setDisplay(false);
 		// disables tooltips

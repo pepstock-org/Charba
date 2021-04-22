@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.charts;
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ChartContext;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -69,10 +70,7 @@ final class BaseContext extends NativeObjectContainer{
 	BaseContext(IsChart chart) {
 		super();
 		// checks if chart instance is loaded
-		if (!Charts.hasNative(chart)) {
-			// exception!
-			throw new IllegalArgumentException("Chart argument does not have any related native chart instance");
-		}
+		Checker.assertCheck(Charts.hasNative(chart), "Chart argument does not have any related native chart instance");
 		// stores the chart and type
 		setValue(Property.CHART, Charts.getNative(chart));
 		setValue(Property.TYPE, ContextType.METER);

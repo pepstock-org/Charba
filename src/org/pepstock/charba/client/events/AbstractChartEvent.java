@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -40,12 +41,11 @@ abstract class AbstractChartEvent extends AbstractEvent {
 	AbstractChartEvent(ChartEventContext eventContext, EventType type, Key key) {
 		super(eventContext != null ? eventContext.getNativeEvent() : null, type);
 		// checks if arguments are consistent
-		if (eventContext == null || eventContext.getNativeChart() == null) {
-			throw new IllegalArgumentException("Chart event context argument is null or not consistent");
-		}
-		Key.checkIfValid(key);
-		this.eventContext = eventContext;
-		this.key = key;
+		this.key = Key.checkAndGetIfValid(key);
+		// check contexts
+		this.eventContext = Checker.checkAndGetIfValid(eventContext, "Event context argument");
+		// checks native chart reference
+		Checker.checkIfValid(this.eventContext.getNativeChart(), "Native chart in the context");
 	}
 
 	/**

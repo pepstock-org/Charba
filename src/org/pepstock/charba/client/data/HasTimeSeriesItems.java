@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.enums.DataType;
 
 /**
@@ -50,10 +51,7 @@ public interface HasTimeSeriesItems extends HasDataPoints {
 		// scans all data points
 		for (DataPoint dp : datapoints) {
 			// checks if data point are time series item
-			if (!isTimeSeriesItem(dp)) {
-				// if not, exception
-				throw new IllegalArgumentException("Datapoint is not a time series item");
-			}
+			Checker.assertCheck(isTimeSeriesItem(dp), "Datapoint is not a time series item");
 		}
 	}
 

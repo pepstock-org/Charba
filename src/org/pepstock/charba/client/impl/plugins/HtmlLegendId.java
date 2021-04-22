@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
@@ -83,10 +84,7 @@ final class HtmlLegendId {
 	 */
 	private static HtmlLegendId get(String chartId, int datasetIndex, int index) {
 		// checks if chart id is consistent
-		if (chartId == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Chart id argument is null");
-		}
+		Checker.checkIfValid(chartId, "Chart id argument");
 		// creates the object
 		return new HtmlLegendId(chartId, datasetIndex, index);
 	}

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
@@ -76,15 +77,8 @@ public final class CharacterShape extends AbstractShape {
 	public CharacterShape(String character, String fontFamily) {
 		super(CHARACTER_SHAPE_NAME);
 		// checks the character is consistent
-		if (character == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Character argument is null");
-		}
-		// checks if there is only 1 char
-		if (character.trim().length() != 1) {
-			// if not, exception
-			throw new IllegalArgumentException("Character argument is invalid. Must be 1 char");
-		}
+		// must have only 1 character
+		Checker.checkIfEqualTo(Checker.checkAndGetIfValid(character, "Character argument").trim().length(), 1, "Character argument length");
 		// stores attributes
 		this.character = character;
 		this.fontFamily = fontFamily != null ? fontFamily : Defaults.get().getGlobal().getFont().getFamily();

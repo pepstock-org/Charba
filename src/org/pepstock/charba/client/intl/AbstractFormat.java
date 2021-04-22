@@ -21,6 +21,7 @@ import java.util.List;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -53,18 +54,12 @@ abstract class AbstractFormat<F extends AbtsractFormatWrapper<?, T, R>, O, T, R>
 	 */
 	AbstractFormat(CLocale locale, O options) {
 		// checks if locale is consistent
-		if (locale == null) {
-			throw new IllegalArgumentException("Locale argument is null");
-		}
 		// stores locale
-		this.locale = locale;
+		this.locale = Checker.checkAndGetIfValid(locale, "Locale argument");
 		// checks if the locale is supported
 		ArrayString supportedLocales = supportedLocalesOf(locale);
 		// checks if is supported
-		if (supportedLocales.length() == 0) {
-			// if not, exception
-			throw new IllegalArgumentException("Locale '" + locale.getIdentifier() + "' is not supported");
-		}
+		Checker.checkIfNotEqualTo(supportedLocales.length(), 0, "Locale '" + locale.getIdentifier() + "' is not supported. Locale array size");
 		// create the native format
 		this.formatter = createFormat(locale, options);
 	}

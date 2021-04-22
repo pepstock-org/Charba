@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.options.Scale;
 
@@ -62,10 +63,7 @@ public class Scales extends ConfigurationOptionsContainer {
 				// gets axis id
 				String axisChartId = axes[i].getChart().getId();
 				// checks if the axis is related to the same chart
-				if (!chartId.equalsIgnoreCase(axisChartId)) {
-					// exception!
-					throw new IllegalArgumentException("Chart id "+chartId+"' of axis '"+axes[i].getId().value()+"' is not the same of the options: "+chartId);
-				}
+				Checker.assertCheck(chartId.equalsIgnoreCase(axisChartId), "Chart id "+chartId+"' of axis '"+axes[i].getId().value()+"' is not the same of the options: "+chartId);
 				// adds to array
 				scales[i] = axes[i].getScale();
 				// adds to buffer

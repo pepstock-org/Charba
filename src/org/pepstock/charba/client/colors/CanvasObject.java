@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.colors;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -78,12 +79,8 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	CanvasObject(String id) {
 		super();
 		// checks if id is consistent
-		if (id == null) {
-			// exception
-			throw new IllegalArgumentException("Id argument is null");
-		}
 		// stores the id
-		setId(id);
+		setId(Checker.checkAndGetIfValid(id, "Id argument"));
 	}
 
 	/**
@@ -108,17 +105,11 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		// checks if value is consistent
 		Key.checkIfValid(property);
 		// checks if native object is consistent for a canvas object
-		if (!has(property)) {
-			// without the id, is not consistent
-			// exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(MISSING_PROPERTY, property.value()));
-		}
+		Checker.assertCheck(has(property), Utilities.applyTemplate(MISSING_PROPERTY, property.value()));
 		// checks if has got the correct type
-		if (!isType(property, type)) {
-			// without the mandatory is not consistent
-			// exception!
-			throw new IllegalArgumentException(Utilities.applyTemplate(WRONG_PROPERTY_TYPE, property.value()));
-		}
+		// without the mandatory is not consistent
+		// exception!
+		Checker.assertCheck(isType(property, type), Utilities.applyTemplate(WRONG_PROPERTY_TYPE, property.value()));
 	}
 
 	/**

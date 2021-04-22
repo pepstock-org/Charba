@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.items.SizeItem;
 
@@ -41,10 +42,7 @@ public final class ChartResizeEvent extends AbstractChartEvent {
 	public ChartResizeEvent(ChartEventContext eventContext, SizeItem size) {
 		super(eventContext, TYPE, ChartEventProperty.ON_RESIZE);
 		// checks if argument is consistent
-		if (size == null) {
-			throw new IllegalArgumentException("Size argument is null");
-		}
-		this.size = size;
+		this.size = Checker.checkAndGetIfValid(size, "Size argument");
 	}
 
 	/**

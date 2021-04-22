@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.Img;
 
@@ -56,16 +57,11 @@ public final class ImageShape extends AbstractShape {
 	public ImageShape(Img image) {
 		super(IMAGE_SHAPE_NAME);
 		// checks if image is not consistent
-		if (image != null) {
-			// stores the image
-			this.imageElement = image;
-			// key prefix for caching is NAME plus source of image
-			super.setKeyPrefix(IMAGE_SHAPE_NAME + imageElement.getSrc());
-		} else {
-			// if here, image is null
-			// then exception
-			throw new IllegalArgumentException("Image argument is not consitent or null");
-		}
+		Checker.checkIfValid(image, "Image argument");
+		// stores the image
+		this.imageElement = image;
+		// key prefix for caching is NAME plus source of image
+		super.setKeyPrefix(IMAGE_SHAPE_NAME + imageElement.getSrc());
 	}
 
 	/*

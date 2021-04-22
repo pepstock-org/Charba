@@ -43,11 +43,10 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 		// if null, creates a new array
 		if (array == null) {
 			this.array = new ArrayObject();
-		} else if (factory == null) {
-			// factory is not consistent and array is consistent EXCEPTION
-			// factory is mandatory to initialize the list creating the elements from native object
-			throw new IllegalArgumentException("Unable to create NativeObjectContainer without a factory which is null");
 		} else {
+			// factory is not consistent and array is consistent EXCEPTION
+			// factory is mandatory to initialize the list creating the elements from native array
+			Checker.checkIfValid(factory, "Unable to create array list without a factory. The factory");
 			// uses an existing array
 			this.array = array;
 			// scans the array

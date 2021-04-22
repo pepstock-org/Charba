@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.options.IsAnimations;
 
 /**
@@ -40,12 +41,7 @@ public interface HasAnimation{
 	 */
 	default Animation getAnimation() {
 		// checks if container is consistent
-		if (getAnimationContainer() != null) {
-			return getAnimationContainer().getAnimation();
-		}
-		// if here, the container is not consistent
-		// throws exception
-		throw new IllegalArgumentException("Animation container is null");
+		return Checker.checkAndGetIfValid(getAnimationContainer(), "Animation container").getAnimation();
 	}
 	
 	/**
@@ -55,12 +51,7 @@ public interface HasAnimation{
 	 */
 	default IsAnimations getAnimations() {
 		// checks if container is consistent
-		if (getAnimationContainer() != null) {
-			return getAnimationContainer().getAnimations();
-		}
-		// if here, the container is not consistent
-		// throws exception
-		throw new IllegalArgumentException("Animation container is null");
+		return Checker.checkAndGetIfValid(getAnimationContainer(), "Animation container").getAnimations();
 	}
 	
 	/**
@@ -70,12 +61,7 @@ public interface HasAnimation{
 	 */
 	default Transitions getTransitions() {
 		// checks if container is consistent
-		if (getAnimationContainer() != null) {
-			return getAnimationContainer().getTransitions();
-		}
-		// if here, the container is not consistent
-		// throws exception
-		throw new IllegalArgumentException("Animation container is null");
+		return Checker.checkAndGetIfValid(getAnimationContainer(), "Animation container").getTransitions();
 	}
 	
 	/**

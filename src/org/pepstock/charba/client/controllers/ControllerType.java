@@ -20,6 +20,7 @@ import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -90,19 +91,12 @@ public final class ControllerType implements Type {
 	 */
 	public ControllerType(String type, Type chartType, ControllerProvider provider, ControllerRegistrationHandler handler, boolean cloneDefaults) {
 		// checks type if consistent
-		if (type == null) {
-			throw new IllegalArgumentException("Type is null");
-		}
+		Checker.checkIfValid(type, "Type");
 		// checks if the controller type is already defined for a default chart type
 		// because a controller type can non called as a default one
-		if (Key.hasKeyByValue(ChartType.values(), type)) {
-			// if equals exception
-			throw new IllegalArgumentException("Type '" + type + "' is a default chart type");
-		}
+		Checker.assertCheck(!Key.hasKeyByValue(ChartType.values(), type), "Type '" + type + "' is a default chart type");
 		// checks if controller provider instance is consistent
-		if (provider == null) {
-			throw new IllegalArgumentException("Controller provider is null");
-		}
+		Checker.checkIfValid(provider, "Controller provider");
 		// checks chart type if is consistent
 		Type.checkIfValid(chartType);
 		this.type = type;

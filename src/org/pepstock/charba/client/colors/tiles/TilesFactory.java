@@ -22,6 +22,7 @@ import java.util.Map;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.PatternBuilder;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Canvas;
@@ -61,16 +62,11 @@ public final class TilesFactory {
 	 */
 	private TilesFactory() {
 		// checks if canvas is supported
-		if (isCanvasSupported) {
-			// creates a canvas
-			canvas = DOMBuilder.get().createCanvasElement();
-			// defaults configuration
-			defaults = new TilesFactoryDefaults();
-		} else {
-			// canvas not supported
-			// throws exception
-			throw new IllegalArgumentException(CANVAS_NOT_SUPPORTED_MESSAGE);
-		}
+		Checker.assertCheck(isCanvasSupported, CANVAS_NOT_SUPPORTED_MESSAGE);
+		// creates a canvas
+		canvas = DOMBuilder.get().createCanvasElement();
+		// defaults configuration
+		defaults = new TilesFactoryDefaults();
 	}
 
 	/**

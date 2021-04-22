@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -38,10 +39,7 @@ public final class EventType implements Key {
 	 */
 	public static <T extends Event> EventType create(Class<T> clazz) {
 		// checks if class is not null
-		if (clazz == null) {
-			// if here exception
-			throw new IllegalArgumentException("Class is null. Not able to create a event type");
-		}
+		Checker.checkIfValid(clazz, "Class, to create the event type,");
 		// creates and returns the event type
 		return new EventType(clazz.getName());
 	}

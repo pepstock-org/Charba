@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.defaults.IsDefaultBaseAnimation;
 import org.pepstock.charba.client.enums.Easing;
 
@@ -35,11 +36,8 @@ abstract class AbstractDefaultChartAnimation<T extends IsDefaultBaseAnimation> i
 	 */
 	AbstractDefaultChartAnimation(T animation) {
 		// checks if the argument is consistent
-		if (animation == null) {
-			throw new IllegalArgumentException("The animation wrapped object is null");
-		}
 		// stores reference
-		this.animation = animation;
+		this.animation = Checker.checkAndGetIfValid(animation, "Animation wrapped object");
 	}
 
 	/**

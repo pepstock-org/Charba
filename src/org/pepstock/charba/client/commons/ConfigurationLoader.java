@@ -39,15 +39,12 @@ public final class ConfigurationLoader {
 	 * @param options chart options
 	 */
 	public static void loadOptions(Configuration configuration, NativeObjectContainer options) {
-		// checks if arguments are consistent
-		if (configuration != null && options != null) {
-			// configures it
-			configuration.setOptions(options.getNativeObject());
-		} else {
-			// if here, arguments not consistent
-			// and then exception
-			throw new IllegalArgumentException("Configuration or options argument is null");
-		}
+		// checks if configuration is consistent
+		Checker.checkIfValid(configuration, "Configuration");
+		// checks if options are consistent
+		Checker.checkIfValid(options, "Options");
+		// configures it
+		configuration.setOptions(options.getNativeObject());
 	}
 
 	/**
@@ -57,15 +54,12 @@ public final class ConfigurationLoader {
 	 * @param data datasets configuration
 	 */
 	public static void loadData(Configuration configuration, NativeObjectContainer data) {
-		// checks if arguments are consistent
-		if (configuration != null && data != null) {
-			// configures it
-			configuration.setData(data.getNativeObject());
-		} else {
-			// if here, arguments not consistent
-			// and then exception
-			throw new IllegalArgumentException("Chart or dataset configuration argument is null");
-		}
+		// checks if configuration is consistent
+		Checker.checkIfValid(configuration, "Configuration");
+		// checks if data are consistent
+		Checker.checkIfValid(data, "Data configuration");
+		// configures it
+		configuration.setData(data.getNativeObject());
 	}
 
 }

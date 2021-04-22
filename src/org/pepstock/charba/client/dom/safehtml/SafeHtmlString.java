@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.dom.safehtml;
 
+import org.pepstock.charba.client.commons.Checker;
+
 /**
  * Implements a simple {@link SafeHtml} wrapping a string.
  * 
@@ -33,12 +35,8 @@ final class SafeHtmlString implements SafeHtml {
 	 */
 	SafeHtmlString(String html) {
 		// checks if html is consistent
-		if (html == null) {
-			// if not exception
-			throw new IllegalArgumentException("HTML argument is null");
-		}
-		// stores
-		this.html = html;
+		// stores it
+		this.html = Checker.checkAndGetIfValid(html, "HTML argument");
 	}
 
 	/*

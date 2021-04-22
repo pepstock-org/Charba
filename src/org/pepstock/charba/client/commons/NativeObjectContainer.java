@@ -70,12 +70,7 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final <T> T checkDefaultValuesArgument(T defaultValues) {
 		// checks if default value is consistent
-		if (defaultValues == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Default values argument is null");
-		}
-		// returns the value
-		return defaultValues;
+		return Checker.checkAndGetIfValid(defaultValues, "Default values argument");
 	}
 
 	/**
