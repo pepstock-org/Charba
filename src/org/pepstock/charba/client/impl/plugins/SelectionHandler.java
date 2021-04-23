@@ -630,9 +630,7 @@ final class SelectionHandler {
 		if (Render.IMAGE.equals(selectionCleaner.getRender())) {
 			// if here is ONLY image
 			// gets image height
-			// checks with max 16, the max height of default images, otherwise
-			// the height is not correctly calculated
-			double imgHeight = Math.max(selectionCleaner.getImage().getHeight(), 16);
+			double imgHeight = selectionCleaner.getImage() != null ? selectionCleaner.getImage().getHeight() : 0;
 			// adds to total height
 			height += imgHeight;
 			// stores image height
@@ -679,9 +677,13 @@ final class SelectionHandler {
 		// -----
 		// calculate IMAGE
 		// -----
-		double imgWidth = selectionCleaner.getImage().getWidth();
+		// gets image
+		Img image = selectionCleaner.getImage();
+		// check and gets the image size
+		double imgWidth = image != null ? image.getWidth() : 0;
+		double imgHeight = image != null ? image.getHeight() : 0;
 		// maintains the image aspect ratio
-		double aspectRatio = selectionCleaner.getImage().getHeight() / Math.max(imgWidth, 1);
+		double aspectRatio = imgHeight / Math.max(imgWidth, 1);
 		// calculates image width
 		imgWidth = imgWidth * aspectRatio;
 		// -----
@@ -989,11 +991,17 @@ final class SelectionHandler {
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
 			ctx.fillText(selectionCleaner.getLabel(), selectionCleaner.getLabelX(), selectionCleaner.getLabelY());
-			// draws scaled image
-			ctx.drawImage(selectionCleaner.getImage(), selectionCleaner.getImageX(), selectionCleaner.getImageY(), selectionCleaner.getImageWidth(), selectionCleaner.getImageHeight());
+			// checks if image is consistent
+			if (selectionCleaner.getImage() != null) {
+				// draws scaled image
+				ctx.drawImage(selectionCleaner.getImage(), selectionCleaner.getImageX(), selectionCleaner.getImageY(), selectionCleaner.getImageWidth(), selectionCleaner.getImageHeight());
+			}
 		} else if (Render.IMAGE_LABEL.equals(selectionCleaner.getRender())) {
-			// draws scaled image
-			ctx.drawImage(selectionCleaner.getImage(), selectionCleaner.getImageX(), selectionCleaner.getImageY(), selectionCleaner.getImageWidth(), selectionCleaner.getImageHeight());
+			// checks if image is consistent
+			if (selectionCleaner.getImage() != null) {
+				// draws scaled image
+				ctx.drawImage(selectionCleaner.getImage(), selectionCleaner.getImageX(), selectionCleaner.getImageY(), selectionCleaner.getImageWidth(), selectionCleaner.getImageHeight());
+			}
 			// sets font
 			ctx.setFont(Utilities.toCSSFontProperty(selectionCleaner.getFont()));
 			// sets color to canvas
@@ -1003,6 +1011,8 @@ final class SelectionHandler {
 			// draws text
 			ctx.fillText(selectionCleaner.getLabel(), selectionCleaner.getLabelX(), selectionCleaner.getLabelY());
 		} else if (Render.IMAGE.equals(selectionCleaner.getRender())) {
+			// with ONLY image is better to throw an exception
+			// instead of skip the the image draw
 			// draws scaled image
 			ctx.drawImage(selectionCleaner.getImage(), selectionCleaner.getImageX(), selectionCleaner.getImageY(), selectionCleaner.getImageWidth(), selectionCleaner.getImageHeight());
 		}

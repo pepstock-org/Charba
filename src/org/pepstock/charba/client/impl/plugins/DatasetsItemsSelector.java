@@ -76,7 +76,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	private final Map<String, SelectionHandler> pluginSelectionHandlers = new HashMap<>();
 	// set to maintain the status if legend click handler, if already added or not
 	private final Map<String, HandlerRegistration> pluginEventsRegistrationHandlers = new HashMap<>();
-	// click legend handler to avoid to remove all datasets
+	// click legend handler to avoid to remove all data sets
 	private final AtLeastOneDatasetHandler pluginLegendClickHandler = new AtLeastOneDatasetHandler();
 	// maps with the enablement if the plugin by chart instances
 	private final Map<String, Boolean> pluginChartEnablement = new HashMap<>();

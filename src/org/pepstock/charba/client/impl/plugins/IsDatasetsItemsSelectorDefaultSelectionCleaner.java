@@ -99,7 +99,7 @@ interface IsDatasetsItemsSelectorDefaultSelectionCleaner {
 	 * @return the selection cleaner image
 	 */
 	default Img getImage() {
-		return SelectionCleaner.DEFAULT_IMAGE;
+		return null;
 	}
 
 	/**
