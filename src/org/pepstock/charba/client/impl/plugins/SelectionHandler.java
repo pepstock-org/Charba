@@ -82,8 +82,8 @@ final class SelectionHandler {
 	private String previousDataURL = null;
 	// flag if do not send any event after refresh
 	private boolean skipNextFireEvent = false;
-	// cursor before hover the clear selection
-	private CursorType cursorOverClearSelection = null;
+	// cursor before hover the selection cleaner
+	private CursorType cursorOverSelectionCleaner = null;
 	// this is a flag to prevent click event after drawing
 	// of selection area
 	private boolean preventClickEvent = false;
@@ -113,33 +113,33 @@ final class SelectionHandler {
 		this.paddingTop = chart.getOptions().getLayout().getPadding().getTop();
 		this.paddingBottom = chart.getOptions().getLayout().getPadding().getBottom();
 		// gets selection item
-		ClearSelection clearSelection = options.getClearSelection();
+		SelectionCleaner selectionCleaner = options.getSelectionCleaner();
 		// checks if display is required
-		if (clearSelection.isDisplay()) {
+		if (selectionCleaner.isDisplay()) {
 			// calculates the height of element
-			calculateClearSelectionHeight();
+			calculateSelectionCleanerHeight();
 			// calculates the width of element
-			calculateClearSelectionWidth();
-			int additionalPadding = clearSelection.getMargin();
-			additionalPadding += clearSelection.getHeight();
-			additionalPadding += clearSelection.getMargin();
-			clearSelection.setLayoutPadding(additionalPadding);
+			calculateSelectionCleanerWidth();
+			int additionalPadding = selectionCleaner.getMargin();
+			additionalPadding += selectionCleaner.getHeight();
+			additionalPadding += selectionCleaner.getMargin();
+			selectionCleaner.setLayoutPadding(additionalPadding);
 			// based on the position, it must define space to show the label
 			// to clear the selection, leveraging on padding of chart layout
-			if (clearSelection.getPosition().equals(Position.TOP)) {
-				// if the clear selection must be set on TOP
+			if (selectionCleaner.getPosition().equals(Position.TOP)) {
+				// if the selection cleaner must be set on TOP
 				// gets the padding set by chart configuration
 				int padding = paddingTop;
-				// adds on required padding, the space needed to show the clear selection
+				// adds on required padding, the space needed to show the selection cleaner
 				// based on FONT SIZE, plus margins from border
 				padding = padding + additionalPadding;
 				// sets new padding top
 				chart.getOptions().getLayout().getPadding().setTop(padding);
 			} else {
-				// if the clear selection must be set on BOTTOM (other values of position are ignored)
+				// if the selection cleaner must be set on BOTTOM (other values of position are ignored)
 				// gets the padding set by chart configuration
 				int padding = paddingBottom;
-				// adds on required padding, the space needed to show the clear selection
+				// adds on required padding, the space needed to show the selection cleaner
 				// based on FONT SIZE, plus margins from border
 				padding = padding + additionalPadding;
 				// sets new padding bottom
@@ -231,22 +231,22 @@ final class SelectionHandler {
 		if (getStatus().equals(SelectionStatus.SELECTING)) {
 			// updates the selection in the canvas
 			updateSelection(event.getX(), false);
-		} else if (isEventInClearSelection(event) && getStatus().equals(SelectionStatus.SELECTED)) {
+		} else if (isEventInSelectionCleaner(event) && getStatus().equals(SelectionStatus.SELECTED)) {
 			// if here
-			// the mouse is hovering the clear selection
+			// the mouse is hovering the selection cleaner
 			// checks if was already hover
 			// using the cursor previously saved
-			if (cursorOverClearSelection == null) {
+			if (cursorOverSelectionCleaner == null) {
 				// gets cursor
-				cursorOverClearSelection = Utilities.getCursorOfChart(chart);
+				cursorOverSelectionCleaner = Utilities.getCursorOfChart(chart);
 			}
-			// sets cursor pointer because hover the clear selection
+			// sets cursor pointer because hover the selection cleaner
 			chart.getCanvas().getStyle().setCursorType(CursorType.POINTER);
-		} else if (cursorOverClearSelection != null) {
-			// if here, the mouse is not selecting and not hover the clear selection
-			// but before it was on clear selection therefore reset the cursor and the instance
-			chart.getCanvas().getStyle().setCursorType(cursorOverClearSelection);
-			cursorOverClearSelection = null;
+		} else if (cursorOverSelectionCleaner != null) {
+			// if here, the mouse is not selecting and not hover the selection cleaner
+			// but before it was on selection cleaner therefore reset the cursor and the instance
+			chart.getCanvas().getStyle().setCursorType(cursorOverSelectionCleaner);
+			cursorOverSelectionCleaner = null;
 		}
 	}
 
@@ -402,12 +402,12 @@ final class SelectionHandler {
 		applyAreaBorder(ctx);
 		// option instance
 		DatasetsItemsSelectorOptions pOptions = getOptions();
-		// gets clear selection configuration
-		ClearSelection clearSelection = pOptions.getClearSelection();
-		// checks if clear selection must be draw
-		if (clearSelection.isDisplay()) {
-			// draws clear selection
-			drawClearSelection();
+		// gets selection cleaner configuration
+		SelectionCleaner selectionCleaner = pOptions.getSelectionCleaner();
+		// checks if selection cleaner must be draw
+		if (selectionCleaner.isDisplay()) {
+			// draws selection cleaner
+			drawSelectionCleaner();
 		}
 		// restore context
 		ctx.restore();
@@ -601,11 +601,11 @@ final class SelectionHandler {
 	}
 
 	// -----------------------------------------
-	// CLEAR SELECTION methods
+	// SELECTION CLEANER methods
 	// -----------------------------------------
 
 	/**
-	 * Calculates the height of clear selection element and sets all values for label and image as well.<br>
+	 * Calculates the height of selection cleaner element and sets all values for label and image as well.<br>
 	 * Height is composed by:<br>
 	 * <ul>
 	 * <li>border width
@@ -615,53 +615,53 @@ final class SelectionHandler {
 	 * <li>border width
 	 * </ul>
 	 */
-	private void calculateClearSelectionHeight() {
+	private void calculateSelectionCleanerHeight() {
 		// option instance
 		DatasetsItemsSelectorOptions pOptions = getOptions();
-		// gets clear selection configuration
-		ClearSelection clearSelection = pOptions.getClearSelection();
+		// gets selection cleaner configuration
+		SelectionCleaner selectionCleaner = pOptions.getSelectionCleaner();
 		// creates an instance to stores the height
 		// adding the border width top
 		// and adding 1 to border width
-		double height = clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+		double height = selectionCleaner.isUseSelectionStyle() ? SelectionCleaner.BORDER_WIDTH + 1 : 0;
 		// adds padding top
-		height += clearSelection.getPadding();
+		height += selectionCleaner.getPadding();
 		// checking what must be rendered
-		if (Render.IMAGE.equals(clearSelection.getRender())) {
+		if (Render.IMAGE.equals(selectionCleaner.getRender())) {
 			// if here is ONLY image
 			// gets image height
 			// checks with max 16, the max height of default images, otherwise
 			// the height is not correctly calculated
-			double imgHeight = Math.max(clearSelection.getImage().getHeight(), 16);
+			double imgHeight = Math.max(selectionCleaner.getImage().getHeight(), 16);
 			// adds to total height
 			height += imgHeight;
 			// stores image height
-			clearSelection.setImageHeight(imgHeight);
+			selectionCleaner.setImageHeight(imgHeight);
 			// stores 0 for label height
-			clearSelection.setLabelHeight(ClearSelection.DEFAULT_VALUE);
+			selectionCleaner.setLabelHeight(SelectionCleaner.DEFAULT_VALUE);
 		} else {
 			// if here there is a label
 			// therefore the height is based on font size
-			double fontSize = clearSelection.getFont().getSize();
+			double fontSize = selectionCleaner.getFont().getSize();
 			// adds font size to height
 			height += fontSize;
 			// sets the height to image or
 			// 0 if there is ONLY a label to show
-			clearSelection.setImageHeight(Render.LABEL.equals(clearSelection.getRender()) ? ClearSelection.DEFAULT_VALUE : fontSize);
+			selectionCleaner.setImageHeight(Render.LABEL.equals(selectionCleaner.getRender()) ? SelectionCleaner.DEFAULT_VALUE : fontSize);
 			// stores label height
-			clearSelection.setLabelHeight(fontSize);
+			selectionCleaner.setLabelHeight(fontSize);
 		}
 		// adds padding bottom
-		height += clearSelection.getPadding();
+		height += selectionCleaner.getPadding();
 		// adds border width bottom
 		// and adding 1 to border width
-		height += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+		height += selectionCleaner.isUseSelectionStyle() ? SelectionCleaner.BORDER_WIDTH + 1 : 0;
 		// stores height
-		clearSelection.setHeight(height);
+		selectionCleaner.setHeight(height);
 	}
 
 	/**
-	 * Calculates the width of clear selection element and sets all values for label and image as well.<br>
+	 * Calculates the width of selection cleaner element and sets all values for label and image as well.<br>
 	 * Width is composed by:<br>
 	 * <ul>
 	 * <li>border width
@@ -671,17 +671,17 @@ final class SelectionHandler {
 	 * <li>border width
 	 * </ul>
 	 */
-	private void calculateClearSelectionWidth() {
+	private void calculateSelectionCleanerWidth() {
 		// option instance
 		DatasetsItemsSelectorOptions pOptions = getOptions();
-		// gets clear selection configuration
-		ClearSelection clearSelection = pOptions.getClearSelection();
+		// gets selection cleaner configuration
+		SelectionCleaner selectionCleaner = pOptions.getSelectionCleaner();
 		// -----
 		// calculate IMAGE
 		// -----
-		double imgWidth = clearSelection.getImage().getWidth();
+		double imgWidth = selectionCleaner.getImage().getWidth();
 		// maintains the image aspect ratio
-		double aspectRatio = clearSelection.getImage().getHeight() / Math.max(imgWidth, 1);
+		double aspectRatio = selectionCleaner.getImage().getHeight() / Math.max(imgWidth, 1);
 		// calculates image width
 		imgWidth = imgWidth * aspectRatio;
 		// -----
@@ -693,270 +693,270 @@ final class SelectionHandler {
 		// save context
 		ctx.save();
 		// sets font
-		ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFont()));
+		ctx.setFont(Utilities.toCSSFontProperty(selectionCleaner.getFont()));
 		// gets metrics
-		TextMetricsItem metrics = ctx.measureText(clearSelection.getLabel());
+		TextMetricsItem metrics = ctx.measureText(selectionCleaner.getLabel());
 		// stores the label width
 		double labelWidth = metrics.getWidth();
 		ctx.restore();
 		// -----
 		// calculate width
-		// clear selection element
+		// selection cleaner element
 		// -----
 		// adds border width left
 		// and adding 1 to border width
-		double width = clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+		double width = selectionCleaner.isUseSelectionStyle() ? SelectionCleaner.BORDER_WIDTH + 1 : 0;
 		// adds padding left
-		width += clearSelection.getPadding();
+		width += selectionCleaner.getPadding();
 		// checking what must be rendered
-		if (Render.IMAGE.equals(clearSelection.getRender())) {
+		if (Render.IMAGE.equals(selectionCleaner.getRender())) {
 			// if here is rendering only image
 			// adds image width
 			width += imgWidth;
 			// stores image width
-			clearSelection.setImageWidth(imgWidth);
+			selectionCleaner.setImageWidth(imgWidth);
 			// stores 0 for label width
-			clearSelection.setLabelWidth(ClearSelection.DEFAULT_VALUE);
-		} else if (Render.LABEL.equals(clearSelection.getRender())) {
+			selectionCleaner.setLabelWidth(SelectionCleaner.DEFAULT_VALUE);
+		} else if (Render.LABEL.equals(selectionCleaner.getRender())) {
 			// if here is rendering only label
 			// adds label width
 			width += labelWidth;
 			// stores 0 for image width
-			clearSelection.setImageWidth(ClearSelection.DEFAULT_VALUE);
+			selectionCleaner.setImageWidth(SelectionCleaner.DEFAULT_VALUE);
 			// stores label width
-			clearSelection.setLabelWidth(labelWidth);
+			selectionCleaner.setLabelWidth(labelWidth);
 		} else {
 			// if here, it draws both image and label
 			// it does not matter the sequence to calculate the width
 			// adds label width
 			width += labelWidth;
 			// adds spacing
-			width += clearSelection.getSpacing();
+			width += selectionCleaner.getSpacing();
 			// adds image width
 			width += imgWidth;
 			// stores image width
-			clearSelection.setImageWidth(imgWidth);
+			selectionCleaner.setImageWidth(imgWidth);
 			// stores label width
-			clearSelection.setLabelWidth(labelWidth);
+			selectionCleaner.setLabelWidth(labelWidth);
 		}
 		// adds padding right
-		width += clearSelection.getPadding();
+		width += selectionCleaner.getPadding();
 		// adds border width right
 		// and adding 1 to border width
-		width += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+		width += selectionCleaner.isUseSelectionStyle() ? SelectionCleaner.BORDER_WIDTH + 1 : 0;
 		// stores width
-		clearSelection.setWidth(width);
+		selectionCleaner.setWidth(width);
 	}
 
 	/**
-	 * Calculates X and Y coordinates for clear selection element and for image and label
+	 * Calculates X and Y coordinates for selection cleaner element and for image and label
 	 */
-	void calculateClearSelectionPositions() {
+	void calculateSelectionCleanerPositions() {
 		// option instance
 		DatasetsItemsSelectorOptions pOptions = getOptions();
-		// gets clear selection element
-		ClearSelection clearSelection = pOptions.getClearSelection();
+		// gets selection cleaner element
+		SelectionCleaner selectionCleaner = pOptions.getSelectionCleaner();
 		// checks if is enabled
-		if (clearSelection.isDisplay()) {
-			// checks position of clear selection
+		if (selectionCleaner.isDisplay()) {
+			// checks position of selection cleaner
 			// ---------------------------------
 			// calculate Y points
 			// ---------------------------------
-			calculatePointsY(clearSelection);
+			calculatePointsY(selectionCleaner);
 			// ---------------------------------
 			// calculate X points
 			// ---------------------------------
-			calculatePointsX(clearSelection);
+			calculatePointsX(selectionCleaner);
 		}
 	}
 
 	/**
-	 * Calculates X coordinates and items for clear selection element by alignment and rendering
+	 * Calculates X coordinates and items for selection cleaner element by alignment and rendering
 	 * 
-	 * @param clearSelection clear selection instance
+	 * @param selectionCleaner selection cleaner instance
 	 */
-	private void calculatePointsX(ClearSelection clearSelection) {
+	private void calculatePointsX(SelectionCleaner selectionCleaner) {
 		// ---------------------------------
 		// calculate X points
 		// ---------------------------------
 		// the X point depends on alignment required by configuration
 		double x = 0;
 		// checks all alignment types
-		if (Align.LEFT.equals(clearSelection.getAlign())) {
+		if (Align.LEFT.equals(selectionCleaner.getAlign())) {
 			// if left
 			// X is equals to margin
-			clearSelection.setX(clearSelection.getMargin());
-			// stores the x of clear selection element
-			x = clearSelection.getMargin();
-		} else if (Align.LEFT_CHART_AREA.equals(clearSelection.getAlign())) {
+			selectionCleaner.setX(selectionCleaner.getMargin());
+			// stores the x of selection cleaner element
+			x = selectionCleaner.getMargin();
+		} else if (Align.LEFT_CHART_AREA.equals(selectionCleaner.getAlign())) {
 			// gets chart AREA
 			ChartNode node = chart.getNode();
 			ChartAreaNode areaInstance = node.getChartArea();
-			// stores the x of clear selection element
+			// stores the x of selection cleaner element
 			// setting the left value of chart area
-			clearSelection.setX(areaInstance.getLeft());
+			selectionCleaner.setX(areaInstance.getLeft());
 			// sets to left for further calculations
 			x = areaInstance.getLeft();
-		} else if (Align.CENTER.equals(clearSelection.getAlign())) {
+		} else if (Align.CENTER.equals(selectionCleaner.getAlign())) {
 			// calculates the center of width
-			// by canvas width and clear selection element width
-			x = (chart.getCanvas().getOffsetWidth() - clearSelection.getWidth()) / 2;
-			// stores the x of clear selection element
-			clearSelection.setX(x);
-		} else if (Align.CENTER_CHART_AREA.equals(clearSelection.getAlign())) {
+			// by canvas width and selection cleaner element width
+			x = (chart.getCanvas().getOffsetWidth() - selectionCleaner.getWidth()) / 2;
+			// stores the x of selection cleaner element
+			selectionCleaner.setX(x);
+		} else if (Align.CENTER_CHART_AREA.equals(selectionCleaner.getAlign())) {
 			// gets chart AREA
 			ChartNode node = chart.getNode();
 			ChartAreaNode areaInstance = node.getChartArea();
 			// calculates the center of width
-			// by chart area width and clear selection element width
-			x = (areaInstance.getRight() - areaInstance.getLeft() - clearSelection.getWidth()) / 2;
-			// stores the x of clear selection element
-			clearSelection.setX(x);
-		} else if (Align.RIGHT_CHART_AREA.equals(clearSelection.getAlign())) {
+			// by chart area width and selection cleaner element width
+			x = (areaInstance.getRight() - areaInstance.getLeft() - selectionCleaner.getWidth()) / 2;
+			// stores the x of selection cleaner element
+			selectionCleaner.setX(x);
+		} else if (Align.RIGHT_CHART_AREA.equals(selectionCleaner.getAlign())) {
 			// gets chart AREA
 			ChartNode node = chart.getNode();
 			ChartAreaNode areaInstance = node.getChartArea();
 			// the x value is the right point of chart area minus
-			// width of clear selection element
-			x = areaInstance.getRight() - clearSelection.getWidth();
-			// stores the x of clear selection element
-			clearSelection.setX(x);
-		} else if (Align.RIGHT.equals(clearSelection.getAlign())) {
+			// width of selection cleaner element
+			x = areaInstance.getRight() - selectionCleaner.getWidth();
+			// stores the x of selection cleaner element
+			selectionCleaner.setX(x);
+		} else if (Align.RIGHT.equals(selectionCleaner.getAlign())) {
 			// the x value is the width of canvas minus
-			// width of clear selection element and margin
-			x = chart.getCanvas().getOffsetWidth() - clearSelection.getWidth() - clearSelection.getMargin();
-			// stores the x of clear selection element
-			clearSelection.setX(x);
+			// width of selection cleaner element and margin
+			x = chart.getCanvas().getOffsetWidth() - selectionCleaner.getWidth() - selectionCleaner.getMargin();
+			// stores the x of selection cleaner element
+			selectionCleaner.setX(x);
 		}
 		// for all elements
 		// adds border width left
 		// and adding 1 to border width
-		x += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+		x += selectionCleaner.isUseSelectionStyle() ? SelectionCleaner.BORDER_WIDTH + 1 : 0;
 		// adds padding left
 		// to have the X starting point
-		x += clearSelection.getPadding();
+		x += selectionCleaner.getPadding();
 		// calculates X by rendering
-		adjustPointsXByRender(clearSelection, x);
+		adjustPointsXByRender(selectionCleaner, x);
 	}
 
 	/**
-	 * Adjusts X coordinates and items for clear selection element by rendering, using x value calculated previously.
+	 * Adjusts X coordinates and items for selection cleaner element by rendering, using x value calculated previously.
 	 * 
-	 * @param clearSelection clear selection instance
+	 * @param selectionCleaner selection cleaner instance
 	 * @param x value calculated applying the alignment
 	 */
-	private void adjustPointsXByRender(ClearSelection clearSelection, double x) {
+	private void adjustPointsXByRender(SelectionCleaner selectionCleaner, double x) {
 		// calculates point X based on render type
-		if (Render.LABEL.equals(clearSelection.getRender())) {
+		if (Render.LABEL.equals(selectionCleaner.getRender())) {
 			// if here ONLY label
 			// stores to 0 the image
-			clearSelection.setImageX(ClearSelection.DEFAULT_VALUE);
+			selectionCleaner.setImageX(SelectionCleaner.DEFAULT_VALUE);
 			// stores X point for label
-			clearSelection.setLabelX(x);
-		} else if (Render.LABEL_IMAGE.equals(clearSelection.getRender())) {
+			selectionCleaner.setLabelX(x);
+		} else if (Render.LABEL_IMAGE.equals(selectionCleaner.getRender())) {
 			// if here, before label and then image
 			// stores X point for label
-			clearSelection.setLabelX(x);
+			selectionCleaner.setLabelX(x);
 			// adds label width
-			x += clearSelection.getLabelWidth();
+			x += selectionCleaner.getLabelWidth();
 			// adds spacing
-			x += clearSelection.getSpacing();
+			x += selectionCleaner.getSpacing();
 			// stores X point for image
-			clearSelection.setImageX(x);
-		} else if (Render.IMAGE_LABEL.equals(clearSelection.getRender())) {
+			selectionCleaner.setImageX(x);
+		} else if (Render.IMAGE_LABEL.equals(selectionCleaner.getRender())) {
 			// stores X point for image
-			clearSelection.setImageX(x);
+			selectionCleaner.setImageX(x);
 			// adds image width
-			x += clearSelection.getImageWidth();
+			x += selectionCleaner.getImageWidth();
 			// adds spacing
-			x += clearSelection.getSpacing();
+			x += selectionCleaner.getSpacing();
 			// stores X point for label
-			clearSelection.setLabelX(x);
-		} else if (Render.IMAGE.equals(clearSelection.getRender())) {
+			selectionCleaner.setLabelX(x);
+		} else if (Render.IMAGE.equals(selectionCleaner.getRender())) {
 			// if here ONLY image
 			// stores X point for image
-			clearSelection.setImageX(x);
+			selectionCleaner.setImageX(x);
 			// stores 0 to label point X
-			clearSelection.setLabelX(ClearSelection.DEFAULT_VALUE);
+			selectionCleaner.setLabelX(SelectionCleaner.DEFAULT_VALUE);
 		}
 	}
 
 	/**
-	 * Calculates Y coordinates and items for clear selection element by position.
+	 * Calculates Y coordinates and items for selection cleaner element by position.
 	 * 
-	 * @param clearSelection clear selection instance
+	 * @param selectionCleaner selection cleaner instance
 	 */
-	private void calculatePointsY(ClearSelection clearSelection) {
-		// checks position of clear selection
+	private void calculatePointsY(SelectionCleaner selectionCleaner) {
+		// checks position of selection cleaner
 		// ---------------------------------
 		// calculate Y points
 		// ---------------------------------
 		// if the position is top
-		if (clearSelection.getPosition().equals(Position.TOP)) {
+		if (selectionCleaner.getPosition().equals(Position.TOP)) {
 			// for all elements the Y value is equals to margin
 			// set in the configuration
-			double y = clearSelection.getMargin();
-			clearSelection.setY(y);
+			double y = selectionCleaner.getMargin();
+			selectionCleaner.setY(y);
 			// and adding 1 to border width
-			y += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+			y += selectionCleaner.isUseSelectionStyle() ? SelectionCleaner.BORDER_WIDTH + 1 : 0;
 			// adds padding top
-			y += clearSelection.getPadding();
-			clearSelection.setImageY(y);
-			clearSelection.setLabelY(y);
+			y += selectionCleaner.getPadding();
+			selectionCleaner.setImageY(y);
+			selectionCleaner.setLabelY(y);
 		} else {
 			// calculates the Y point from bottom, using the canvas dimension
-			// removing height of clear selection element and margin
-			double y = chart.getCanvas().getOffsetHeight() - clearSelection.getHeight() - clearSelection.getMargin();
+			// removing height of selection cleaner element and margin
+			double y = chart.getCanvas().getOffsetHeight() - selectionCleaner.getHeight() - selectionCleaner.getMargin();
 			// for all elements the Y value is equals
-			clearSelection.setY(y);
+			selectionCleaner.setY(y);
 			// and adding 1 to border width
-			y += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+			y += selectionCleaner.isUseSelectionStyle() ? SelectionCleaner.BORDER_WIDTH + 1 : 0;
 			// adds padding top
-			y += clearSelection.getPadding();
-			clearSelection.setImageY(y);
-			clearSelection.setLabelY(y);
+			y += selectionCleaner.getPadding();
+			selectionCleaner.setImageY(y);
+			selectionCleaner.setLabelY(y);
 		}
 	}
 
 	/**
 	 * Called when the selection is clearing
 	 */
-	void removeClearSelection() {
+	void removeSelectionCleaner() {
 		// option instance
 		DatasetsItemsSelectorOptions pOptions = getOptions();
-		// gets clear selection element
-		ClearSelection clearSelection = pOptions.getClearSelection();
-		// if clear selection element is enabled
-		if (clearSelection.isDisplay()) {
+		// gets selection cleaner element
+		SelectionCleaner selectionCleaner = pOptions.getSelectionCleaner();
+		// if selection cleaner element is enabled
+		if (selectionCleaner.isDisplay()) {
 			// gets context from canvas
 			Context2dItem ctx = chart.getCanvas().getContext2d();
 			// saves context
 			ctx.save();
-			// clear area from canvas of clear selection element
-			ctx.clearRect(clearSelection.getX(), clearSelection.getY(), clearSelection.getWidth(), clearSelection.getHeight());
+			// clear area from canvas of selection cleaner element
+			ctx.clearRect(selectionCleaner.getX(), selectionCleaner.getY(), selectionCleaner.getWidth(), selectionCleaner.getHeight());
 			// restores context
 			ctx.restore();
 		}
 	}
 
 	/**
-	 * Draws the clear selection element in the canvas of chart
+	 * Draws the selection cleaner element in the canvas of chart
 	 */
-	private void drawClearSelection() {
+	private void drawSelectionCleaner() {
 		// gets context from canvas
 		Context2dItem ctx = chart.getCanvas().getContext2d();
 		// option instance
 		DatasetsItemsSelectorOptions pOptions = getOptions();
-		// gets clear selection element
-		ClearSelection clearSelection = pOptions.getClearSelection();
-		if (clearSelection.isUseSelectionStyle()) {
+		// gets selection cleaner element
+		SelectionCleaner selectionCleaner = pOptions.getSelectionCleaner();
+		if (selectionCleaner.isUseSelectionStyle()) {
 			// sets the selecting color in the canvas
 			ctx.setFillColor(options.getColorAsString());
 			// draws the rectangle of area selection
-			ctx.fillRect(clearSelection.getX(), clearSelection.getY(), clearSelection.getWidth(), clearSelection.getHeight());
+			ctx.fillRect(selectionCleaner.getX(), selectionCleaner.getY(), selectionCleaner.getWidth(), selectionCleaner.getHeight());
 			// borders
 			if (options.getBorderWidth() > 0) {
-				ctx.setLineWidth(ClearSelection.BORDER_WIDTH);
+				ctx.setLineWidth(SelectionCleaner.BORDER_WIDTH);
 				List<Integer> borderDash = options.getBorderDash();
 				// sets the selecting color in the canvas
 				ctx.setStrokeColor(options.getBorderColorAsString());
@@ -965,63 +965,63 @@ final class SelectionHandler {
 				}
 				ctx.setLineDashOffset(options.getBorderDashOffset());
 				// gets increment
-				double borderIncrement = ClearSelection.BORDER_WIDTH / 2D;
+				double borderIncrement = SelectionCleaner.BORDER_WIDTH / 2D;
 				// draw border fixing the dimensions of rectangle
-				ctx.strokeRect(clearSelection.getX() + borderIncrement, clearSelection.getY() + borderIncrement, clearSelection.getWidth() - ClearSelection.BORDER_WIDTH, clearSelection.getHeight() - ClearSelection.BORDER_WIDTH);
+				ctx.strokeRect(selectionCleaner.getX() + borderIncrement, selectionCleaner.getY() + borderIncrement, selectionCleaner.getWidth() - SelectionCleaner.BORDER_WIDTH, selectionCleaner.getHeight() - SelectionCleaner.BORDER_WIDTH);
 			}
 		}
 		// checks based on render type what must be draw
-		if (Render.LABEL.equals(clearSelection.getRender())) {
+		if (Render.LABEL.equals(selectionCleaner.getRender())) {
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFont()));
+			ctx.setFont(Utilities.toCSSFontProperty(selectionCleaner.getFont()));
 			// sets color to canvas
-			ctx.setFillColor(clearSelection.getColorAsString());
+			ctx.setFillColor(selectionCleaner.getColorAsString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
-			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
-		} else if (Render.LABEL_IMAGE.equals(clearSelection.getRender())) {
+			ctx.fillText(selectionCleaner.getLabel(), selectionCleaner.getLabelX(), selectionCleaner.getLabelY());
+		} else if (Render.LABEL_IMAGE.equals(selectionCleaner.getRender())) {
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFont()));
+			ctx.setFont(Utilities.toCSSFontProperty(selectionCleaner.getFont()));
 			// sets color to canvas
-			ctx.setFillColor(clearSelection.getColorAsString());
+			ctx.setFillColor(selectionCleaner.getColorAsString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
-			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
+			ctx.fillText(selectionCleaner.getLabel(), selectionCleaner.getLabelX(), selectionCleaner.getLabelY());
 			// draws scaled image
-			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
-		} else if (Render.IMAGE_LABEL.equals(clearSelection.getRender())) {
+			ctx.drawImage(selectionCleaner.getImage(), selectionCleaner.getImageX(), selectionCleaner.getImageY(), selectionCleaner.getImageWidth(), selectionCleaner.getImageHeight());
+		} else if (Render.IMAGE_LABEL.equals(selectionCleaner.getRender())) {
 			// draws scaled image
-			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
+			ctx.drawImage(selectionCleaner.getImage(), selectionCleaner.getImageX(), selectionCleaner.getImageY(), selectionCleaner.getImageWidth(), selectionCleaner.getImageHeight());
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFont()));
+			ctx.setFont(Utilities.toCSSFontProperty(selectionCleaner.getFont()));
 			// sets color to canvas
-			ctx.setFillColor(clearSelection.getColorAsString());
+			ctx.setFillColor(selectionCleaner.getColorAsString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
-			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
-		} else if (Render.IMAGE.equals(clearSelection.getRender())) {
+			ctx.fillText(selectionCleaner.getLabel(), selectionCleaner.getLabelX(), selectionCleaner.getLabelY());
+		} else if (Render.IMAGE.equals(selectionCleaner.getRender())) {
 			// draws scaled image
-			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
+			ctx.drawImage(selectionCleaner.getImage(), selectionCleaner.getImageX(), selectionCleaner.getImageY(), selectionCleaner.getImageWidth(), selectionCleaner.getImageHeight());
 		}
 	}
 
 	/**
-	 * Checks if the coordinate of event is inside the clear selection element.
+	 * Checks if the coordinate of event is inside the selection cleaner element.
 	 * 
 	 * @param event event to be checked.
 	 * @return <code>true</code> if inside the element, otherwise <code>false</code>.
 	 */
-	private boolean isEventInClearSelection(BaseNativeEvent event) {
+	private boolean isEventInSelectionCleaner(BaseNativeEvent event) {
 		// option instance
 		DatasetsItemsSelectorOptions pOptions = getOptions();
-		// gets clear selection element
-		ClearSelection clearSelection = pOptions.getClearSelection();
+		// gets selection cleaner element
+		SelectionCleaner selectionCleaner = pOptions.getSelectionCleaner();
 		// checks if inside
-		boolean isX = event.getX() >= clearSelection.getX() && event.getX() <= (clearSelection.getX() + clearSelection.getWidth());
-		boolean isY = event.getY() >= clearSelection.getY() && event.getY() <= (clearSelection.getY() + clearSelection.getHeight());
+		boolean isX = event.getX() >= selectionCleaner.getX() && event.getX() <= (selectionCleaner.getX() + selectionCleaner.getWidth());
+		boolean isY = event.getY() >= selectionCleaner.getY() && event.getY() <= (selectionCleaner.getY() + selectionCleaner.getHeight());
 		return isX && isY;
 	}
 

@@ -33,7 +33,7 @@ import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
-import org.pepstock.charba.client.events.DatasetRangeClearSelectionEvent;
+import org.pepstock.charba.client.events.DatasetRangeCleanSelectionEvent;
 import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.impl.callbacks.AtLeastOneDatasetHandler;
@@ -98,11 +98,11 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	}
 
 	/**
-	 * Returns the padding height used by clear selection element if enabled.<br>
+	 * Returns the padding height used by selection cleaner element if enabled.<br>
 	 * This is very helpful when you have added padding for your purposes and you need to know the amount of space that the element allocated.
 	 * 
 	 * @param chart chart instance
-	 * @return the padding height used by clear selection element or <b>{@link ClearSelection#DEFAULT_VALUE}</b> if disabled
+	 * @return the padding height used by selection cleaner element or <b>{@link SelectionCleaner#DEFAULT_VALUE}</b> if disabled
 	 */
 	public double getPadding(IsChart chart) {
 		// checks if chart is consistent and there is a handler
@@ -111,16 +111,16 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// option instance
 			DatasetsItemsSelectorOptions pOptions = handler.getOptions();
-			// gets clear selection configuration
-			ClearSelection clearSelection = pOptions.getClearSelection();
+			// gets selection cleaner configuration
+			SelectionCleaner selectionCleaner = pOptions.getSelectionCleaner();
 			// checks if is enabled
-			if (clearSelection.isDisplay()) {
+			if (selectionCleaner.isDisplay()) {
 				// returns the used padding
-				return clearSelection.getLayoutPadding();
+				return selectionCleaner.getLayoutPadding();
 			}
 		}
 		// by defaults, returns 0
-		return ClearSelection.DEFAULT_VALUE;
+		return SelectionCleaner.DEFAULT_VALUE;
 	}
 
 	/**
@@ -128,16 +128,16 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * 
 	 * @param chart chart instance to clear the selection
 	 */
-	public void clearSelection(IsChart chart) {
+	public void cleanSelection(IsChart chart) {
 		// flag with default to false
 		boolean fireEvent = false;
 		// checks chart is consistent and for handler
 		if (IsChart.isValid(chart)) {
 			// checks in the options if fire event has been set
-			fireEvent = chart.isEventHandled(DatasetRangeClearSelectionEvent.TYPE);
+			fireEvent = chart.isEventHandled(DatasetRangeCleanSelectionEvent.TYPE);
 		}
 		// invoke reset using fire event of options or false by default
-		clearSelection(chart, fireEvent);
+		cleanSelection(chart, fireEvent);
 	}
 
 	/**
@@ -146,7 +146,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @param chart chart instance to clear the selection
 	 * @param fireEvent if <code>true</code> an event is fired otherwise not.
 	 */
-	public void clearSelection(IsChart chart, boolean fireEvent) {
+	public void cleanSelection(IsChart chart, boolean fireEvent) {
 		// checks if chart is consistent
 		if (!IsChart.isValid(chart)) {
 			// if not exit
@@ -159,7 +159,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// gets selection handler
 			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 			// clear the selection
-			handler.removeClearSelection();
+			handler.removeSelectionCleaner();
 			// checks if the selection was done
 			mustBeUpdated = !SelectionStatus.READY.equals(handler.getStatus());
 		}
@@ -170,7 +170,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks if it must fire the event
 		if (fireEvent) {
 			// fires the reset event
-			chart.fireEvent(new DatasetRangeClearSelectionEvent(DOMBuilder.get().createChangeEvent()));
+			chart.fireEvent(new DatasetRangeCleanSelectionEvent(DOMBuilder.get().createChangeEvent()));
 		}
 		// updates the chart only if the selection was done
 		if (mustBeUpdated) {
@@ -273,8 +273,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// gets selection handler
 			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
-			// calculates the coordinates of clear selection element
-			handler.calculateClearSelectionPositions();
+			// calculates the coordinates of selection cleaner element
+			handler.calculateSelectionCleanerPositions();
 			// checks if the draw if at the end of animation
 			// and if the selection is not already started
 			// the selection is managed
@@ -374,12 +374,12 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		Boolean isEnabled = pluginChartEnablement.get(chart.getId());
 		// checks if there is already an enabled
 		if (Boolean.TRUE.equals(isEnabled) && !pOptions.isEnabled()) {
-			// clear selection
+			// selection cleaner
 			if (pluginSelectionHandlers.containsKey(chart.getId())) {
 				// gets selection handler
 				SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
 				// clear the selection
-				handler.removeClearSelection();
+				handler.removeSelectionCleaner();
 			}
 			// here if the previous config enabled the plugin
 			// and then now it must be disabled
@@ -518,17 +518,17 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		if (Event.CLICK.value().equalsIgnoreCase(event.getType())) {
 			// option instance
 			DatasetsItemsSelectorOptions pOptions = handler.getOptions();
-			// get clear selection element
-			ClearSelection clearSelection = pOptions.getClearSelection();
+			// get selection cleaner element
+			SelectionCleaner selectionCleaner = pOptions.getSelectionCleaner();
 			// checks if is enabled
-			if (clearSelection.isDisplay()) {
-				// calculates if the events coordinates are hover of clear selection element
-				boolean isX = event.getLayerX() >= clearSelection.getX() && event.getLayerX() <= (clearSelection.getX() + clearSelection.getWidth());
-				boolean isY = event.getLayerY() >= clearSelection.getY() && event.getLayerY() <= (clearSelection.getY() + clearSelection.getHeight());
+			if (selectionCleaner.isDisplay()) {
+				// calculates if the events coordinates are hover of selection cleaner element
+				boolean isX = event.getLayerX() >= selectionCleaner.getX() && event.getLayerX() <= (selectionCleaner.getX() + selectionCleaner.getWidth());
+				boolean isY = event.getLayerY() >= selectionCleaner.getY() && event.getLayerY() <= (selectionCleaner.getY() + selectionCleaner.getHeight());
 				// checks if hover
 				if (isX && isY) {
-					// invokes the clear selection
-					clearSelection(chart);
+					// invokes the selection cleaner
+					cleanSelection(chart);
 					// and forces the event will be discarded.
 					return false;
 				}

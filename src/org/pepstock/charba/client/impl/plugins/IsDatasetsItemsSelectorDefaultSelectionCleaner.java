@@ -23,12 +23,12 @@ import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 
 /**
- * Maps {@link DatasetsItemsSelector#ID} plugin default options for CLEAR SELECTION element.
+ * Maps {@link DatasetsItemsSelector#ID} plugin default options for selection cleaner element.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDatasetsItemsSelectorDefaultClearSelection {
+interface IsDatasetsItemsSelectorDefaultSelectionCleaner {
 
 	/**
 	 * Returns <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>.
@@ -36,106 +36,106 @@ interface IsDatasetsItemsSelectorDefaultClearSelection {
 	 * @return <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>
 	 */
 	default boolean isDisplay() {
-		return ClearSelection.DEFAULT_DISPLAY;
+		return SelectionCleaner.DEFAULT_DISPLAY;
 	}
 
 	/**
-	 * Returns the clear selection label.
+	 * Returns the selection cleaner label.
 	 * 
-	 * @return the clear selection label
+	 * @return the selection cleaner label
 	 */
 	default String getLabel() {
-		return ClearSelection.DEFAULT_LABEL;
+		return SelectionCleaner.DEFAULT_LABEL;
 	}
 
 	/**
-	 * Returns the clear selection label font.
+	 * Returns the selection cleaner label font.
 	 * 
-	 * @return the clear selection label font
+	 * @return the selection cleaner label font
 	 */
 	default IsDefaultFont getFont() {
 		return Defaults.get().getGlobal().getFont();
 	}
 
 	/**
-	 * Returns the clear selection label font color.
+	 * Returns the selection cleaner label font color.
 	 * 
-	 * @return the clear selection label font color.
+	 * @return the selection cleaner label font color.
 	 */
 	default String getColorAsString() {
 		return DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR_AS_STRING;
 	}
 
 	/**
-	 * Returns the clear selection align.
+	 * Returns the selection cleaner align.
 	 * 
-	 * @return the clear selection align
+	 * @return the selection cleaner align
 	 */
 	default Align getAlign() {
-		return ClearSelection.DEFAULT_ALIGN;
+		return SelectionCleaner.DEFAULT_ALIGN;
 	}
 
 	/**
-	 * Returns the clear selection render.
+	 * Returns the selection cleaner render.
 	 * 
-	 * @return the clear selection render.
+	 * @return the selection cleaner render.
 	 */
 	default Render getRender() {
-		return ClearSelection.DEFAULT_RENDER;
+		return SelectionCleaner.DEFAULT_RENDER;
 	}
 
 	/**
-	 * Returns the clear selection position.
+	 * Returns the selection cleaner position.
 	 * 
-	 * @return the clear selection position
+	 * @return the selection cleaner position
 	 */
 	default Position getPosition() {
-		return ClearSelection.DEFAULT_POSITION;
+		return SelectionCleaner.DEFAULT_POSITION;
 	}
 
 	/**
-	 * Returns the clear selection image.
+	 * Returns the selection cleaner image.
 	 * 
-	 * @return the clear selection image
+	 * @return the selection cleaner image
 	 */
 	default Img getImage() {
-		return ClearSelection.DEFAULT_IMAGE;
+		return SelectionCleaner.DEFAULT_IMAGE;
 	}
 
 	/**
-	 * Returns the clear selection margin from canvas border.
+	 * Returns the selection cleaner margin from canvas border.
 	 * 
-	 * @return the clear selection margin from canvas border
+	 * @return the selection cleaner margin from canvas border
 	 */
 	default int getMargin() {
-		return ClearSelection.DEFAULT_MARGIN;
+		return SelectionCleaner.DEFAULT_MARGIN;
 	}
 
 	/**
-	 * Returns the clear selection padding.
+	 * Returns the selection cleaner padding.
 	 * 
-	 * @return the clear selection padding
+	 * @return the selection cleaner padding
 	 */
 	default int getPadding() {
-		return ClearSelection.DEFAULT_PADDING;
+		return SelectionCleaner.DEFAULT_PADDING;
 	}
 
 	/**
-	 * Returns the spacing between label and image for clear selection element.
+	 * Returns the spacing between label and image for selection cleaner element.
 	 * 
-	 * @return the spacing between label and image for clear selection element
+	 * @return the spacing between label and image for selection cleaner element
 	 */
 	default int getSpacing() {
-		return ClearSelection.DEFAULT_SPACING;
+		return SelectionCleaner.DEFAULT_SPACING;
 	}
 
 	/**
-	 * Returns <code>true</code> if clear selection element will apply style of selection area, otherwise <code>false</code>.
+	 * Returns <code>true</code> if selection cleaner element will apply style of selection area, otherwise <code>false</code>.
 	 * 
-	 * @return <code>true</code> if clear selection element will apply style of selection area, otherwise <code>false</code>
+	 * @return <code>true</code> if selection cleaner element will apply style of selection area, otherwise <code>false</code>
 	 */
 	default boolean isUseSelectionStyle() {
-		return ClearSelection.DEFAULT_USE_SELECTION_STYLE;
+		return SelectionCleaner.DEFAULT_USE_SELECTION_STYLE;
 	}
 
 }

@@ -18,17 +18,17 @@ package org.pepstock.charba.client.events;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
 
 /**
- * Event handler for chart area clearing, by {@link DatasetsItemsSelector#ID} plugin.
+ * Event handler for chart area cleaning, by {@link DatasetsItemsSelector#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface DatasetRangeClearSelectionEventHandler extends ChartEventHandler {
+public interface DatasetRangeCleanSelectionEventHandler extends ChartEventHandler {
 
 	/**
-	 * Invoked when the user clears an area on the chart.
+	 * Invoked when the user cleans an area on the chart.
 	 * 
-	 * @param event chart dataset clear selection event
+	 * @param event chart data set clean selection event
 	 */
-	void onClear(DatasetRangeClearSelectionEvent event);
+	void onClean(DatasetRangeCleanSelectionEvent event);
 
 }

@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.plugins.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Property to set the clear selection element alignment.
+ * Property to set the selection cleaner element alignment.
  * 
  * @author Andrea "Stock" Stocchero
  */

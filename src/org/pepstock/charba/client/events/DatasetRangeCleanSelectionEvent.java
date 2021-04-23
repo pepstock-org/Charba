@@ -19,24 +19,24 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
 
 /**
- * Event which is fired when the user clears an area on the chart, by {@link DatasetsItemsSelector#ID} plugin.
+ * Event which is fired when the user cleans an area on the chart, by {@link DatasetsItemsSelector#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DatasetRangeClearSelectionEvent extends AbstractEvent {
+public final class DatasetRangeCleanSelectionEvent extends AbstractEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final EventType TYPE = EventType.create(DatasetRangeClearSelectionEvent.class);
+	public static final EventType TYPE = EventType.create(DatasetRangeCleanSelectionEvent.class);
 
 	/**
 	 * Creates the event with native event.
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 */
-	public DatasetRangeClearSelectionEvent(BaseNativeEvent nativeEvent) {
+	public DatasetRangeCleanSelectionEvent(BaseNativeEvent nativeEvent) {
 		super(nativeEvent, TYPE);
 	}
 
@@ -48,11 +48,11 @@ public final class DatasetRangeClearSelectionEvent extends AbstractEvent {
 	@Override
 	protected void dispatch(EventHandler handler) {
 		// checks if handler is a correct instance
-		if (handler instanceof DatasetRangeClearSelectionEventHandler) {
+		if (handler instanceof DatasetRangeCleanSelectionEventHandler) {
 			// casts handler
-			DatasetRangeClearSelectionEventHandler myHandler = (DatasetRangeClearSelectionEventHandler) handler;
+			DatasetRangeCleanSelectionEventHandler myHandler = (DatasetRangeCleanSelectionEventHandler) handler;
 			// invokes
-			myHandler.onClear(this);
+			myHandler.onClean(this);
 		}
 	}
 

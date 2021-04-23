@@ -32,85 +32,85 @@ import org.pepstock.charba.client.options.IsFont;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ClearSelection extends NativeObjectContainer implements IsDatasetsItemsSelectorDefaultClearSelection {
+public final class SelectionCleaner extends NativeObjectContainer implements IsDatasetsItemsSelectorDefaultSelectionCleaner {
 
-	// clear selection image in the URL base 64
+	// selection cleaner image in the URL base 64
 	private static final String CLEAR_SELECTION_18 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAW0lEQVR4AWMYWUCAGmr4gfgeEPfjUdMPVcNPyLB2IP6Pw7B+qFw7bu2ENbSji5FqWAMQN8JdSSaYBjKAIkMQrkIYRKkhjQS9RnlgUx79jdRMkLzUyCKCDCMHAABoYiU8YS3zcAAAAABJRU5ErkJggg==";
-	// clear selection image in the URL base 64
+	// selection cleaner image in the URL base 64
 	private static final String CLEAR_SELECTION_24 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAd0lEQVR4AeWSAQbAMAxF3yFKUbBh97/AsM1uMBSqepKMgloa1AB9QPGanyTMzsaO44vjZKXLgRDxtHgiwkGXQEFIjeJJCIUAlpKqEvRLof7U9TRN6kzRHVm4qggRByPCYwhGpKwj/W96dKzDi7tGT2PjNo5vYW5esdREthFCWOcAAAAASUVORK5CYII=";
-	// clear selection image in the URL base 64
+	// selection cleaner image in the URL base 64
 	private static final String CLEAR_SELECTION_36 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAr0lEQVR4Ae2WgQbFMAxFmx+r9/ZF+4QNFFBggIJ957Yg4NrQ3TAqhwsscaZtmxQEQXDPTyNEvVgPF2bNqWkvpcRqD+tFkU1GY1L9NOiRE0mBhltH7Qa1JTlRUeqFTE2At1Qlvu2A/Gtehpcq/H7jwZOzaFZahkBQir8efKT2Bxn5SqjxQoMuGcqs/KYe5NjzF+OoT4f/4zrK+JFRxn9A40ZYhBthCf4OQ/6kCYIgQC66xpQeyjgZrwAAAABJRU5ErkJggg==";
 
 	/**
-	 * Default clear selection image, <img alt="Default image 18x" src=
+	 * Default selection cleaner image, <img alt="Default image 18x" src=
 	 * "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAW0lEQVR4AWMYWUCAGmr4gfgeEPfjUdMPVcNPyLB2IP6Pw7B+qFw7bu2ENbSji5FqWAMQN8JdSSaYBjKAIkMQrkIYRKkhjQS9RnlgUx79jdRMkLzUyCKCDCMHAABoYiU8YS3zcAAAAABJRU5ErkJggg==">.
 	 */
 	public static final Img DEFAULT_CLEAR_SELECTION_18 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_18);
 	/**
-	 * Default clear selection image, <img alt="Default image 24x" src=
+	 * Default selection cleaner image, <img alt="Default image 24x" src=
 	 * "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAd0lEQVR4AeWSAQbAMAxF3yFKUbBh97/AsM1uMBSqepKMgloa1AB9QPGanyTMzsaO44vjZKXLgRDxtHgiwkGXQEFIjeJJCIUAlpKqEvRLof7U9TRN6kzRHVm4qggRByPCYwhGpKwj/W96dKzDi7tGT2PjNo5vYW5esdREthFCWOcAAAAASUVORK5CYII=">.
 	 */
 	public static final Img DEFAULT_CLEAR_SELECTION_24 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_24);
 	/**
-	 * Default clear selection image, <img alt="Default image 18x" src=
+	 * Default selection cleaner image, <img alt="Default image 18x" src=
 	 * "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAr0lEQVR4Ae2WgQbFMAxFmx+r9/ZF+4QNFFBggIJ957Yg4NrQ3TAqhwsscaZtmxQEQXDPTyNEvVgPF2bNqWkvpcRqD+tFkU1GY1L9NOiRE0mBhltH7Qa1JTlRUeqFTE2At1Qlvu2A/Gtehpcq/H7jwZOzaFZahkBQir8efKT2Bxn5SqjxQoMuGcqs/KYe5NjzF+OoT4f/4zrK+JFRxn9A40ZYhBthCf4OQ/6kCYIgQC66xpQeyjgZrwAAAABJRU5ErkJggg==">.
 	 */
 	public static final Img DEFAULT_CLEAR_SELECTION_36 = DOMBuilder.get().createImageElement(CLEAR_SELECTION_36);
 	
 	/**
-	 * Default flag if clear selection must be showed in the chart, value is <b>{@value DEFAULT_DISPLAY}</b>.
+	 * Default flag if selection cleaner must be showed in the chart, value is <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
 	public static final boolean DEFAULT_DISPLAY = false;
 
 	/**
-	 * Default label for clear selection element, value is <b>{@value DEFAULT_LABEL}</b>.
+	 * Default label for selection cleaner element, value is <b>{@value DEFAULT_LABEL}</b>.
 	 */
 	public static final String DEFAULT_LABEL = "Reset selection";
 
 	/**
-	 * Default margin from canvas for clear selection element, value is <b>{@value DEFAULT_MARGIN}</b>.
+	 * Default margin from canvas for selection cleaner element, value is <b>{@value DEFAULT_MARGIN}</b>.
 	 */
 	public static final int DEFAULT_MARGIN = 2;
 
 	/**
-	 * Default padding for clear selection element, value is <b>{@value DEFAULT_PADDING}</b>.
+	 * Default padding for selection cleaner element, value is <b>{@value DEFAULT_PADDING}</b>.
 	 */
 	public static final int DEFAULT_PADDING = 4;
 
 	/**
-	 * Default spacing between label and image for clear selection element, value is <b>{@value DEFAULT_SPACING}</b>.
+	 * Default spacing between label and image for selection cleaner element, value is <b>{@value DEFAULT_SPACING}</b>.
 	 */
 	public static final int DEFAULT_SPACING = 3;
 
 	/**
-	 * Default image for clear selection element.
+	 * Default image for selection cleaner element.
 	 */
 	public static final Img DEFAULT_IMAGE = DEFAULT_CLEAR_SELECTION_18;
 
 	/**
-	 * Default flag if clear selection will use selection area style, value is <b>{@value DEFAULT_USE_SELECTION_STYLE}</b>.
+	 * Default flag if selection cleaner will use selection area style, value is <b>{@value DEFAULT_USE_SELECTION_STYLE}</b>.
 	 */
 	public static final boolean DEFAULT_USE_SELECTION_STYLE = false;
 
 	/**
-	 * Default clear selection box alignment, {@link Align#RIGHT}.
+	 * Default selection cleaner box alignment, {@link Align#RIGHT}.
 	 */
 	public static final Align DEFAULT_ALIGN = Align.RIGHT;
 
 	/**
-	 * Default clear selection rendering, {@link Render#IMAGE_LABEL}.
+	 * Default selection cleaner rendering, {@link Render#IMAGE_LABEL}.
 	 */
 	public static final Render DEFAULT_RENDER = Render.IMAGE_LABEL;
 
 	/**
-	 * Default clear selection box position, {@link Position#BOTTOM}.
+	 * Default selection cleaner box position, {@link Position#BOTTOM}.
 	 */
 	public static final Position DEFAULT_POSITION = Position.BOTTOM;
 
 	// defaults values for dimensions and locations
 	static final double DEFAULT_VALUE = 0D;
 	/**
-	 * Default border width of clear selection element<br>
+	 * Default border width of selection cleaner element<br>
 	 * Used only when use selection style is set to <code>true</code>.
 	 */
 	static final int BORDER_WIDTH = 1;
@@ -172,23 +172,23 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	// defaults global options instance
-	private IsDatasetsItemsSelectorDefaultClearSelection defaultOptions;
+	private IsDatasetsItemsSelectorDefaultSelectionCleaner defaultOptions;
 	// instance of font
-	private final ClearSelectionFont font;
+	private final SelectionCleanerFont font;
 
 
 	/**
 	 * Creates new font element, using stored native object instance and the default values options.
 	 * 
 	 * @param nativeObject stored font values in the native object to read.
-	 * @param defaultOptions default clear selection element options to returns the default when required.
+	 * @param defaultOptions default selection cleaner element options to returns the default when required.
 	 */
-	ClearSelection(NativeObject nativeObject, IsDatasetsItemsSelectorDefaultClearSelection defaultOptions) {
+	SelectionCleaner(NativeObject nativeObject, IsDatasetsItemsSelectorDefaultSelectionCleaner defaultOptions) {
 		super(nativeObject);
 		// checks the default values
 		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
 		// gets font
-		this.font = new ClearSelectionFont(this.defaultOptions.getFont(), getNativeObject());
+		this.font = new SelectionCleanerFont(this.defaultOptions.getFont(), getNativeObject());
 	}
 	
 	/**
@@ -221,18 +221,18 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Sets the clear selection label.
+	 * Sets the selection cleaner label.
 	 * 
-	 * @param label the clear selection label
+	 * @param label the selection cleaner label
 	 */
 	public void setLabel(String label) {
 		setValue(Property.LABEL, label);
 	}
 
 	/**
-	 * Returns the clear selection label.
+	 * Returns the selection cleaner label.
 	 * 
-	 * @return the clear selection label
+	 * @return the selection cleaner label
 	 */
 	@Override
 	public String getLabel() {
@@ -240,9 +240,9 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Returns the the clear selection label font color.
+	 * Returns the the selection cleaner label font color.
 	 * 
-	 * @return the the clear selection label font color.
+	 * @return the the selection cleaner label font color.
 	 */
 	@Override
 	public String getColorAsString() {
@@ -250,45 +250,45 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Returns the the clear selection label font color.
+	 * Returns the the selection cleaner label font color.
 	 * 
-	 * @return the the clear selection label font color.
+	 * @return the the selection cleaner label font color.
 	 */
 	public IsColor getColor() {
 		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**
-	 * Sets the clear selection label font color.
+	 * Sets the selection cleaner label font color.
 	 * 
-	 * @param color the clear selection label font color.
+	 * @param color the selection cleaner label font color.
 	 */
 	public void setColor(String color) {
 		setValue(Property.COLOR, color);
 	}
 
 	/**
-	 * Set the clear selection label font color.
+	 * Set the selection cleaner label font color.
 	 * 
-	 * @param color the clear selection label font color.
+	 * @param color the selection cleaner label font color.
 	 */
 	public void setColor(IsColor color) {
 		setColor(IsColor.checkAndGetValue(color));
 	}
 
 	/**
-	 * Sets the clear selection align.
+	 * Sets the selection cleaner align.
 	 * 
-	 * @param align the clear selection align
+	 * @param align the selection cleaner align
 	 */
 	public void setAlign(Align align) {
 		setValue(Property.ALIGN, align);
 	}
 
 	/**
-	 * Returns the clear selection align.
+	 * Returns the selection cleaner align.
 	 * 
-	 * @return the clear selection align
+	 * @return the selection cleaner align
 	 */
 	@Override
 	public Align getAlign() {
@@ -296,18 +296,18 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Sets the clear selection render.
+	 * Sets the selection cleaner render.
 	 * 
-	 * @param render the clear selection render
+	 * @param render the selection cleaner render
 	 */
 	public void setRender(Render render) {
 		setValue(Property.RENDER, render);
 	}
 
 	/**
-	 * Returns the clear selection render.
+	 * Returns the selection cleaner render.
 	 * 
-	 * @return the clear selection render
+	 * @return the selection cleaner render
 	 */
 	@Override
 	public Render getRender() {
@@ -315,18 +315,18 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Sets the clear selection label position.
+	 * Sets the selection cleaner label position.
 	 * 
-	 * @param position the clear selection label position
+	 * @param position the selection cleaner label position
 	 */
 	public void setPosition(Position position) {
 		setValue(Property.POSITION, position);
 	}
 
 	/**
-	 * Returns the clear selection label position.
+	 * Returns the selection cleaner label position.
 	 * 
-	 * @return the clear selection label position
+	 * @return the selection cleaner label position
 	 */
 	@Override
 	public Position getPosition() {
@@ -334,18 +334,18 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Sets the clear selection image.
+	 * Sets the selection cleaner image.
 	 * 
-	 * @param image the clear selection image
+	 * @param image the selection cleaner image
 	 */
 	public void setImage(Img image) {
 		setValue(Property.IMAGE, image);
 	}
 
 	/**
-	 * Returns the clear selection image.
+	 * Returns the selection cleaner image.
 	 * 
-	 * @return the clear selection image or <code>null</code> if not set
+	 * @return the selection cleaner image or <code>null</code> if not set
 	 */
 	@Override
 	public Img getImage() {
@@ -372,18 +372,18 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Sets the padding of clear selection element.
+	 * Sets the padding of selection cleaner element.
 	 * 
-	 * @param padding padding of clear selection element
+	 * @param padding padding of selection cleaner element
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.PADDING, padding);
 	}
 
 	/**
-	 * Returns the padding of clear selection element.
+	 * Returns the padding of selection cleaner element.
 	 * 
-	 * @return the padding of clear selection element
+	 * @return the padding of selection cleaner element
 	 */
 	@Override
 	public int getPadding() {
@@ -391,18 +391,18 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Sets the spacing between label and image for clear selection element.
+	 * Sets the spacing between label and image for selection cleaner element.
 	 * 
-	 * @param spacing spacing between label and image for clear selection element
+	 * @param spacing spacing between label and image for selection cleaner element
 	 */
 	public void setSpacing(int spacing) {
 		setValue(Property.SPACING, spacing);
 	}
 
 	/**
-	 * Returns the spacing between label and image for clear selection element.
+	 * Returns the spacing between label and image for selection cleaner element.
 	 * 
-	 * @return the spacing between label and image for clear selection element
+	 * @return the spacing between label and image for selection cleaner element
 	 */
 	@Override
 	public int getSpacing() {
@@ -419,9 +419,9 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Returns <code>true</code> if clear selection element will apply style of selection area, otherwise <code>false</code>.
+	 * Returns <code>true</code> if selection cleaner element will apply style of selection area, otherwise <code>false</code>.
 	 * 
-	 * @return <code>true</code> if clear selection element will apply style of selection area, otherwise <code>false</code>
+	 * @return <code>true</code> if selection cleaner element will apply style of selection area, otherwise <code>false</code>
 	 */
 	@Override
 	public boolean isUseSelectionStyle() {
@@ -429,180 +429,180 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Sets the X point of clear selection element.
+	 * Sets the X point of selection cleaner element.
 	 * 
-	 * @param x X point of clear selection element
+	 * @param x X point of selection cleaner element
 	 */
 	void setX(double x) {
 		setValue(Property.X, x);
 	}
 
 	/**
-	 * Returns the X point of clear selection element.
+	 * Returns the X point of selection cleaner element.
 	 * 
-	 * @return the X point of clear selection element or <code>0</code> if not set
+	 * @return the X point of selection cleaner element or <code>0</code> if not set
 	 */
 	double getX() {
 		return getValue(Property.X, DEFAULT_VALUE);
 	}
 
 	/**
-	 * Sets the Y point of clear selection element.
+	 * Sets the Y point of selection cleaner element.
 	 * 
-	 * @param y Y point of clear selection element
+	 * @param y Y point of selection cleaner element
 	 */
 	void setY(double y) {
 		setValue(Property.Y, y);
 	}
 
 	/**
-	 * Returns the Y point of clear selection element.
+	 * Returns the Y point of selection cleaner element.
 	 * 
-	 * @return the Y point of clear selection element or <code>0</code> if not set
+	 * @return the Y point of selection cleaner element or <code>0</code> if not set
 	 */
 	double getY() {
 		return getValue(Property.Y, DEFAULT_VALUE);
 	}
 
 	/**
-	 * Sets the width of clear selection element.
+	 * Sets the width of selection cleaner element.
 	 * 
-	 * @param width width of clear selection element
+	 * @param width width of selection cleaner element
 	 */
 	void setWidth(double width) {
 		setValue(Property.WIDTH, width);
 	}
 
 	/**
-	 * Returns the width of clear selection element.
+	 * Returns the width of selection cleaner element.
 	 * 
-	 * @return the width of clear selection element or <code>0</code> if not set
+	 * @return the width of selection cleaner element or <code>0</code> if not set
 	 */
 	double getWidth() {
 		return getValue(Property.WIDTH, DEFAULT_VALUE);
 	}
 
 	/**
-	 * Sets the height of clear selection element.
+	 * Sets the height of selection cleaner element.
 	 * 
-	 * @param height height of clear selection element
+	 * @param height height of selection cleaner element
 	 */
 	void setHeight(double height) {
 		setValue(Property.HEIGHT, height);
 	}
 
 	/**
-	 * Returns the height of clear selection element.
+	 * Returns the height of selection cleaner element.
 	 * 
-	 * @return the height of clear selection element or <code>0</code> if not set
+	 * @return the height of selection cleaner element or <code>0</code> if not set
 	 */
 	double getHeight() {
 		return getValue(Property.HEIGHT, DEFAULT_VALUE);
 	}
 
 	/**
-	 * Sets the X point of image for clear selection element.
+	 * Sets the X point of image for selection cleaner element.
 	 * 
-	 * @param x X point of image for clear selection element
+	 * @param x X point of image for selection cleaner element
 	 */
 	void setImageX(double x) {
 		setValue(Property.IMAGE_X, x);
 	}
 
 	/**
-	 * Returns the X point of image for clear selection element.
+	 * Returns the X point of image for selection cleaner element.
 	 * 
-	 * @return the X point of image for clear selection element or <code>0</code> if not set
+	 * @return the X point of image for selection cleaner element or <code>0</code> if not set
 	 */
 	double getImageX() {
 		return getValue(Property.IMAGE_X, DEFAULT_VALUE);
 	}
 
 	/**
-	 * Sets the Y point of image for clear selection element.
+	 * Sets the Y point of image for selection cleaner element.
 	 * 
-	 * @param y Y point of image for clear selection element
+	 * @param y Y point of image for selection cleaner element
 	 */
 	void setImageY(double y) {
 		setValue(Property.IMAGE_Y, y);
 	}
 
 	/**
-	 * Returns the Y point of image for clear selection element.
+	 * Returns the Y point of image for selection cleaner element.
 	 * 
-	 * @return the Y point of image for clear selection element or <code>0</code> if not set
+	 * @return the Y point of image for selection cleaner element or <code>0</code> if not set
 	 */
 	double getImageY() {
 		return getValue(Property.IMAGE_Y, DEFAULT_VALUE);
 	}
 
 	/**
-	 * Sets the width of image for clear selection element.
+	 * Sets the width of image for selection cleaner element.
 	 * 
-	 * @param width width of image for clear selection element
+	 * @param width width of image for selection cleaner element
 	 */
 	void setImageWidth(double width) {
 		setValue(Property.IMAGE_WIDTH, width);
 	}
 
 	/**
-	 * Returns the width of image for clear selection element.
+	 * Returns the width of image for selection cleaner element.
 	 * 
-	 * @return the width of image for clear selection element or <code>0</code> if not set
+	 * @return the width of image for selection cleaner element or <code>0</code> if not set
 	 */
 	double getImageWidth() {
 		return getValue(Property.IMAGE_WIDTH, DEFAULT_VALUE);
 	}
 
 	/**
-	 * Sets the height of image for clear selection element.
+	 * Sets the height of image for selection cleaner element.
 	 * 
-	 * @param height height of image for clear selection element
+	 * @param height height of image for selection cleaner element
 	 */
 	void setImageHeight(double height) {
 		setValue(Property.IMAGE_HEIGHT, height);
 	}
 
 	/**
-	 * Returns the height of image for clear selection element.
+	 * Returns the height of image for selection cleaner element.
 	 * 
-	 * @return the height of image for clear selection element or <code>0</code> if not set
+	 * @return the height of image for selection cleaner element or <code>0</code> if not set
 	 */
 	double getImageHeight() {
 		return getValue(Property.IMAGE_HEIGHT, DEFAULT_VALUE);
 	}
 
 	/**
-	 * Sets the X point of label for clear selection element.
+	 * Sets the X point of label for selection cleaner element.
 	 * 
-	 * @param x X point of label for clear selection element
+	 * @param x X point of label for selection cleaner element
 	 */
 	void setLabelX(double x) {
 		setValue(Property.LABEL_X, x);
 	}
 
 	/**
-	 * Returns the X point of label for clear selection element.
+	 * Returns the X point of label for selection cleaner element.
 	 * 
-	 * @return the X point of label for clear selection element or <code>0</code> if not set
+	 * @return the X point of label for selection cleaner element or <code>0</code> if not set
 	 */
 	double getLabelX() {
 		return getValue(Property.LABEL_X, DEFAULT_VALUE);
 	}
 
 	/**
-	 * Sets the Y point of label for clear selection element.
+	 * Sets the Y point of label for selection cleaner element.
 	 * 
-	 * @param y Y point of label for clear selection element
+	 * @param y Y point of label for selection cleaner element
 	 */
 	void setLabelY(double y) {
 		setValue(Property.LABEL_Y, y);
 	}
 
 	/**
-	 * Returns the Y point of label for clear selection element.
+	 * Returns the Y point of label for selection cleaner element.
 	 * 
-	 * @return the Y point of label for clear selection element or <code>0</code> if not set
+	 * @return the Y point of label for selection cleaner element or <code>0</code> if not set
 	 */
 
 	double getLabelY() {
@@ -610,9 +610,9 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Sets the width of label for clear selection element.
+	 * Sets the width of label for selection cleaner element.
 	 * 
-	 * @param width width of label for clear selection element
+	 * @param width width of label for selection cleaner element
 	 */
 
 	void setLabelWidth(double width) {
@@ -620,45 +620,45 @@ public final class ClearSelection extends NativeObjectContainer implements IsDat
 	}
 
 	/**
-	 * Returns the width of label for clear selection element.
+	 * Returns the width of label for selection cleaner element.
 	 * 
-	 * @return the width of label for clear selection element or <code>0</code> if not set
+	 * @return the width of label for selection cleaner element or <code>0</code> if not set
 	 */
 	double getLabelWidth() {
 		return getValue(Property.LABEL_WIDTH, DEFAULT_VALUE);
 	}
 
 	/**
-	 * Sets the height of label for clear selection element.
+	 * Sets the height of label for selection cleaner element.
 	 * 
-	 * @param height height of label for clear selection element
+	 * @param height height of label for selection cleaner element
 	 */
 	void setLabelHeight(double height) {
 		setValue(Property.LABEL_HEIGHT, height);
 	}
 
 	/**
-	 * Returns the height of label for clear selection element.
+	 * Returns the height of label for selection cleaner element.
 	 * 
-	 * @return the height of label for clear selection element or <code>0</code> if not set
+	 * @return the height of label for selection cleaner element or <code>0</code> if not set
 	 */
 	double getLabelHeight() {
 		return getValue(Property.LABEL_HEIGHT, DEFAULT_VALUE);
 	}
 
 	/**
-	 * Sets the chart layout padding reserve for clear selection element.
+	 * Sets the chart layout padding reserve for selection cleaner element.
 	 * 
-	 * @param layoutPadding the chart layout padding reserve for clear selection element
+	 * @param layoutPadding the chart layout padding reserve for selection cleaner element
 	 */
 	void setLayoutPadding(double layoutPadding) {
 		setValue(Property.LAYOUT_PADDING, layoutPadding);
 	}
 
 	/**
-	 * Returns the chart layout padding reserve for clear selection element.
+	 * Returns the chart layout padding reserve for selection cleaner element.
 	 * 
-	 * @return the chart layout padding reserve for clear selection element or <code>0</code> if not set
+	 * @return the chart layout padding reserve for selection cleaner element or <code>0</code> if not set
 	 */
 	double getLayoutPadding() {
 		return getValue(Property.LAYOUT_PADDING, DEFAULT_VALUE);

@@ -20,12 +20,12 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.options.AbstractFont;
 
 /**
- * Object to map font options for {@link ClearSelection} element of {@link DatasetsItemsSelector#ID} plugin configuration.
+ * Object to map font options for {@link SelectionCleaner} element of {@link DatasetsItemsSelector#ID} plugin configuration.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class ClearSelectionFont extends AbstractFont {
+final class SelectionCleanerFont extends AbstractFont {
 
 	/**
 	 * Creates a font to use for plugin.
@@ -33,7 +33,7 @@ final class ClearSelectionFont extends AbstractFont {
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	ClearSelectionFont(IsDefaultFont defaultValues, NativeObject nativeObject) {
+	SelectionCleanerFont(IsDefaultFont defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
 	}
 

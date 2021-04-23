@@ -86,8 +86,8 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 
 	// defaults global options instance
 	private IsDatasetsItemsSelectorDefaultOptions defaultOptions;
-	// clear selection item
-	private final ClearSelection clearSelection;
+	// selection cleaner item
+	private final SelectionCleaner selectionCleaner;
 
 	/**
 	 * Name of properties of native object.
@@ -101,7 +101,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 		BORDER_DASH("borderDash"),
 		BORDER_DASH_OFFSET("borderDashOffset"),
 		BORDER_WIDTH("borderWidth"),
-		CLEAR_SELECTION("clearSelection");
+		SELECTION_CLEANER("selectionCleaner");
 
 		// name value of property
 		private final String value;
@@ -173,23 +173,23 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 			this.defaultOptions = defaultOptions;
 		}
 		// sets inner elements
-		clearSelection = new ClearSelection(getValue(Property.CLEAR_SELECTION), this.defaultOptions.getClearSelection());
-		// checks if clear selection is not already stored
-		if (!has(Property.CLEAR_SELECTION)) {
-			// if here clear selection is not stored
+		selectionCleaner = new SelectionCleaner(getValue(Property.SELECTION_CLEANER), this.defaultOptions.getSelectionCleaner());
+		// checks if selection cleaner is not already stored
+		if (!has(Property.SELECTION_CLEANER)) {
+			// if here selection cleaner is not stored
 			// then adds it
-			setValue(Property.CLEAR_SELECTION, clearSelection);
+			setValue(Property.SELECTION_CLEANER, selectionCleaner);
 		}
 	}
 
 	/**
-	 * Returns the clear selection element.
+	 * Returns the selection cleaner element.
 	 * 
-	 * @return the clear selection element
+	 * @return the selection cleaner element
 	 */
 	@Override
-	public ClearSelection getClearSelection() {
-		return clearSelection;
+	public SelectionCleaner getSelectionCleaner() {
+		return selectionCleaner;
 	}
 
 	

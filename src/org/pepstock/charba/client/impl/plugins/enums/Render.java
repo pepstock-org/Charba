@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.plugins.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Enumeration of available render to use to configure clear selection element.
+ * Enumeration of available render to use to configure selection cleaner element.
  * 
  * @author Andrea "Stock" Stocchero
  *

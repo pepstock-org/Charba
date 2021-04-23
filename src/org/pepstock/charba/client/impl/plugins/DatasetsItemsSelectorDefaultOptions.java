@@ -26,7 +26,7 @@ final class DatasetsItemsSelectorDefaultOptions implements IsDatasetsItemsSelect
 	// defaults options instance
 	static final DatasetsItemsSelectorDefaultOptions INSTANCE = new DatasetsItemsSelectorDefaultOptions();
 	// clear options default instance
-	private final DatasetsItemsSelectorDefaultClearSelection clearSelection = new DatasetsItemsSelectorDefaultClearSelection();
+	private final DatasetsItemsSelectorDefaultSelectionCleaner selectionCleaner = new DatasetsItemsSelectorDefaultSelectionCleaner();
 
 	/**
 	 * To avoid any instantiation
@@ -38,11 +38,11 @@ final class DatasetsItemsSelectorDefaultOptions implements IsDatasetsItemsSelect
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.impl.plugins.IsDatasetsItemsSelectorDefaultOptions#getClearSelection()
+	 * @see org.pepstock.charba.client.impl.plugins.IsDatasetsItemsSelectorDefaultOptions#getSelectionCleaner()
 	 */
 	@Override
-	public IsDatasetsItemsSelectorDefaultClearSelection getClearSelection() {
-		return clearSelection;
+	public IsDatasetsItemsSelectorDefaultSelectionCleaner getSelectionCleaner() {
+		return selectionCleaner;
 	}
 
 }

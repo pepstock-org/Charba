@@ -28,11 +28,11 @@ import org.pepstock.charba.client.options.IsScaleId;
 interface IsDatasetsItemsSelectorDefaultOptions {
 
 	/**
-	 * Returns the clear selection item.
+	 * Returns the selection cleaner item.
 	 * 
-	 * @return the clear selection item
+	 * @return the selection cleaner item
 	 */
-	IsDatasetsItemsSelectorDefaultClearSelection getClearSelection();
+	IsDatasetsItemsSelectorDefaultSelectionCleaner getSelectionCleaner();
 	
 	/**
 	 * Returns <code>true</code> if plugin is enabled.

@@ -178,18 +178,18 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setDisplay(boolean display) {
-		options.getClearSelection().setDisplay(display);
+		options.getSelectionCleaner().setDisplay(display);
 		return this;
 	}
 
 	/**
-	 * Sets the clear selection label.
+	 * Sets the selection cleaner label.
 	 * 
-	 * @param label the clear selection label
+	 * @param label the selection cleaner label
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setLabel(String label) {
-		options.getClearSelection().setLabel(label);
+		options.getSelectionCleaner().setLabel(label);
 		return this;
 	}
 
@@ -200,7 +200,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontSize(int fontSize) {
-		options.getClearSelection().getFont().setSize(fontSize);
+		options.getSelectionCleaner().getFont().setSize(fontSize);
 		return this;
 	}
 
@@ -211,84 +211,84 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontStyle(FontStyle fontStyle) {
-		options.getClearSelection().getFont().setStyle(fontStyle);
+		options.getSelectionCleaner().getFont().setStyle(fontStyle);
 		return this;
 	}
 
 	/**
-	 * Sets the font family, follows CSS font-family options.getClearSelection().
+	 * Sets the font family, follows CSS font-family in selection cleaner.
 	 * 
-	 * @param fontFamily Font family, follows CSS font-family options.getClearSelection().
+	 * @param fontFamily Font family, follows CSS font-family in selection cleaner.
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontFamily(String fontFamily) {
-		options.getClearSelection().getFont().setFamily(fontFamily);
+		options.getSelectionCleaner().getFont().setFamily(fontFamily);
 		return this;
 	}
 
 	/**
-	 * Sets the clear selection label font color.
+	 * Sets the selection cleaner label font color.
 	 * 
-	 * @param color the clear selection label font color.
+	 * @param color the selection cleaner label font color.
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontColor(String color) {
-		options.getClearSelection().setColor(color);
+		options.getSelectionCleaner().setColor(color);
 		return this;
 	}
 
 	/**
-	 * Set the clear selection label font color.
+	 * Set the selection cleaner label font color.
 	 * 
-	 * @param color the clear selection label font color.
+	 * @param color the selection cleaner label font color.
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontColor(IsColor color) {
-		options.getClearSelection().setColor(color);
+		options.getSelectionCleaner().setColor(color);
 		return this;
 	}
 
 	/**
-	 * Sets the clear selection align.
+	 * Sets the selection cleaner align.
 	 * 
-	 * @param align the clear selection align
+	 * @param align the selection cleaner align
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setAlign(Align align) {
-		options.getClearSelection().setAlign(align);
+		options.getSelectionCleaner().setAlign(align);
 		return this;
 	}
 
 	/**
-	 * Sets the clear selection render.
+	 * Sets the selection cleaner render.
 	 * 
-	 * @param render the clear selection render
+	 * @param render the selection cleaner render
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setRender(Render render) {
-		options.getClearSelection().setRender(render);
+		options.getSelectionCleaner().setRender(render);
 		return this;
 	}
 
 	/**
-	 * Sets the clear selection label position.
+	 * Sets the selection cleaner label position.
 	 * 
-	 * @param position the clear selection label position
+	 * @param position the selection cleaner label position
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setPosition(Position position) {
-		options.getClearSelection().setPosition(position);
+		options.getSelectionCleaner().setPosition(position);
 		return this;
 	}
 
 	/**
-	 * Sets the clear selection image.
+	 * Sets the selection cleaner image.
 	 * 
-	 * @param image the clear selection image
+	 * @param image the selection cleaner image
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setImage(Img image) {
-		options.getClearSelection().setImage(image);
+		options.getSelectionCleaner().setImage(image);
 		return this;
 	}
 
@@ -299,29 +299,29 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setMargin(int margin) {
-		options.getClearSelection().setMargin(margin);
+		options.getSelectionCleaner().setMargin(margin);
 		return this;
 	}
 
 	/**
-	 * Sets the padding of clear selection element.
+	 * Sets the padding of selection cleaner element.
 	 * 
-	 * @param padding padding of clear selection element
+	 * @param padding padding of selection cleaner element
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setPadding(int padding) {
-		options.getClearSelection().setPadding(padding);
+		options.getSelectionCleaner().setPadding(padding);
 		return this;
 	}
 
 	/**
-	 * Sets the spacing between label and image for clear selection element.
+	 * Sets the spacing between label and image for selection cleaner element.
 	 * 
-	 * @param spacing spacing between label and image for clear selection element
+	 * @param spacing spacing between label and image for selection cleaner element
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setSpacing(int spacing) {
-		options.getClearSelection().setSpacing(spacing);
+		options.getSelectionCleaner().setSpacing(spacing);
 		return this;
 	}
 
@@ -332,7 +332,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setUseSelectionStyle(boolean useSelectionStyle) {
-		options.getClearSelection().setUseSelectionStyle(useSelectionStyle);
+		options.getSelectionCleaner().setUseSelectionStyle(useSelectionStyle);
 		return this;
 	}
 

@@ -16,17 +16,17 @@
 package org.pepstock.charba.client.impl.plugins;
 
 /**
- * {@link DatasetsItemsSelector#ID} plugin default options for CLEAR SELECTION element.
+ * {@link DatasetsItemsSelector#ID} plugin default options for SELECTION CLEANER element.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DatasetsItemsSelectorDefaultClearSelection implements IsDatasetsItemsSelectorDefaultClearSelection {
+final class DatasetsItemsSelectorDefaultSelectionCleaner implements IsDatasetsItemsSelectorDefaultSelectionCleaner {
 
 	/**
 	 * Creates an empty object.
 	 */
-	DatasetsItemsSelectorDefaultClearSelection() {
+	DatasetsItemsSelectorDefaultSelectionCleaner() {
 		// do nothing
 	}
 }

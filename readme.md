@@ -399,10 +399,16 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add the update mode to the `onAfterDatasetsUpdate`, `onAfterUpdate`, `onBeforeDatasetsUpdate`, and `onBeforeUpdate`methods of `Plugin` interface.
  * remove `AbstractPluginCachedOptions` and `AbstractPluginCachedOptionsFactory` classes. Use instead callbacks cache.
  * change `AbstractPlugin` class, removing all methods leaving only `getId` (because the `Plugin` interface has got all default methods) and new constructor where the plugin id is mandatory.  
- * remove `setEnabled` method for `DefaultPluginId` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title  * change `getXAxisID` method in `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
-in legend and title options, and `setEnabled` method for tooltips in tooltips options.
+ * remove `setEnabled` method for `DefaultPluginId` enum from `Plugin` options class in order to avoid an inconsistent default options of plugin. Use `setDisplay` method for legend and title in legend and title options, and `setEnabled` method for tooltips in tooltips options.
+ * change `getXAxisID` method in `DatasetsItemsSelectorOptions` class in order to return a `IsScaleId` instance instead of a `String`.
+ * rename `ClearSelection` class to `SelectionCleaner` in the `DatasetsItemsSelector` plugin.
+   * rename `clearSelection` methods to `cleanSelection` in the `DatasetsItemsSelector` class.
+   * rename `getClearSelection` method to `getSelectionCleaner` in the `DatasetsItemsSelectorOptions` class.
+   * rename `DatasetRangeClearSelectionEvent` class to `DatasetRangeCleanSelectionEvent`.
+   * rename `DatasetRangeCleanSelectionEventHandler` class to `DatasetRangeCleanSelectionEventHandler`.
+   * rename `onClear` method to `onClean` in `DatasetRangeCleanSelectionEventHandler` class.
  * remove `CLEAR_SELECTION` constant from `DatasetRangeSelectionEvent` class because the event is containing the selected values and not the indexes anymore.
- * remove `fontColor` property from `ClearSelection` options, use `color` instead.
+ * remove `fontColor` property from `SelectionCleaner` options, use `color` instead.
  * remove `fontSise`, `fontStyle` and `fontFamily` properties from `ClearSelection` options, use `font` object instead.
  * change `LabelsPlugin` in order to :
    * add new `color` property for the font color, in order to be aligned with CHART.JS 3 implementation.
