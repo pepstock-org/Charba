@@ -428,23 +428,6 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	}
 
 	/**
-	 * Reset the value previously set to a callback at the specific key.
-	 * 
-	 * @param model element where resetting the callback
-	 * @param key property name to use to reset the callback
-	 * @param options the object to store overriding the callback
-	 */
-	protected final void resetInternalCallbackToModel(AbstractNode model, Key key, NativeObjectContainer options) {
-		// checks if model is consistent
-		Checker.checkIfValid(model, "Options model argument");
-		// checks if property is missing
-		if (!has(key)) {
-			// stores callback
-			model.setValueAndAddToParent(key, options);
-		}
-	}
-
-	/**
 	 * Called recursively when a property has been set in the item.<br>
 	 * This is mandatory because it could happen that the parent item is not present, therefore it must be added.
 	 */
