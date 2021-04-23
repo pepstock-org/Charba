@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Manages the SPANGAPS property of options in order to use the same logic between line datasets and options/configuration.
@@ -128,6 +128,6 @@ public final class SpanGapHandler extends PropertyHandler<IsDefaultOptions> {
 	 * @return the value of the data if lines will be drawn between points with no or null data
 	 */
 	double getSpanGaps() {
-		return getValue(Property.SPAN_GAPS, UndefinedValues.DOUBLE);
+		return getValue(Property.SPAN_GAPS, Undefined.DOUBLE);
 	}
 }

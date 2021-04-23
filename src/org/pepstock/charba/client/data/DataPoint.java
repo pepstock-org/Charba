@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.ItemsEnvelop;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y properties.
@@ -36,11 +36,11 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public final class DataPoint extends NativeObjectContainer {
 
 	// default value for X. No private because it is used by time series item
-	static final double DEFAULT_X = UndefinedValues.DOUBLE;
+	static final double DEFAULT_X = Undefined.DOUBLE;
 	// default value for R. No private because it is used by time series item
-	static final double DEFAULT_R = UndefinedValues.DOUBLE;
+	static final double DEFAULT_R = Undefined.DOUBLE;
 	// default value for Y. No private because it is used by time series item
-	static final double DEFAULT_Y = UndefinedValues.DOUBLE;
+	static final double DEFAULT_Y = Undefined.DOUBLE;
 
 	/**
 	 * Name of properties of native object.<br>
@@ -175,16 +175,16 @@ public final class DataPoint extends NativeObjectContainer {
 	/**
 	 * Returns X value as string.
 	 * 
-	 * @return X value as string or {@link UndefinedValues#STRING} if is not set
+	 * @return X value as string or {@link Undefined#STRING} if is not set
 	 */
 	public String getXAsString() {
 		// checks if the stored data is a string
 		if (ObjectType.STRING.equals(getXObjectType())) {
-			return getValue(Property.X, UndefinedValues.STRING);
+			return getValue(Property.X, Undefined.STRING);
 		}
 		// if here the data is missing or a number
 		// then returns the default
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	// -------------
@@ -288,6 +288,6 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @return custom field value from data point.
 	 */
 	public double getAttribute(Key key) {
-		return getValue(key, UndefinedValues.DOUBLE);
+		return getValue(key, Undefined.DOUBLE);
 	}
 }

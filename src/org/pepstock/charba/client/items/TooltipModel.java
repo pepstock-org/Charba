@@ -129,7 +129,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the X align location.
 	 */
 	public String getXAlign() {
-		return getValue(Property.X_ALIGN, UndefinedValues.STRING);
+		return getValue(Property.X_ALIGN, Undefined.STRING);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the Y align location.
 	 */
 	public String getYAlign() {
-		return getValue(Property.Y_ALIGN, UndefinedValues.STRING);
+		return getValue(Property.Y_ALIGN, Undefined.STRING);
 	}
 
 	/**
@@ -147,7 +147,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the X location of tooltip.
 	 */
 	public int getX() {
-		return getValue(Property.X, UndefinedValues.INTEGER);
+		return getValue(Property.X, Undefined.INTEGER);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the Y location of tooltip.
 	 */
 	public int getY() {
-		return getValue(Property.Y, UndefinedValues.INTEGER);
+		return getValue(Property.Y, Undefined.INTEGER);
 	}
 
 	/**
@@ -165,7 +165,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the width of tooltip.
 	 */
 	public int getWidth() {
-		return getValue(Property.WIDTH, UndefinedValues.INTEGER);
+		return getValue(Property.WIDTH, Undefined.INTEGER);
 	}
 
 	/**
@@ -174,7 +174,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the height of tooltip.
 	 */
 	public int getHeight() {
-		return getValue(Property.HEIGHT, UndefinedValues.INTEGER);
+		return getValue(Property.HEIGHT, Undefined.INTEGER);
 	}
 
 	/**
@@ -183,7 +183,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the X location of the tooltip arrow.
 	 */
 	public int getCaretX() {
-		return getValue(Property.CARET_X, UndefinedValues.INTEGER);
+		return getValue(Property.CARET_X, Undefined.INTEGER);
 	}
 
 	/**
@@ -192,7 +192,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the Y location of the tooltip arrow.
 	 */
 	public int getCaretY() {
-		return getValue(Property.CARET_Y, UndefinedValues.INTEGER);
+		return getValue(Property.CARET_Y, Undefined.INTEGER);
 	}
 
 	/**
@@ -297,7 +297,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the opacity of tooltip.
 	 */
 	public double getOpacity() {
-		return getValue(Property.OPACITY, UndefinedValues.DOUBLE);
+		return getValue(Property.OPACITY, Undefined.DOUBLE);
 	}
 
 }

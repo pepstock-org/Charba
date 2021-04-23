@@ -109,11 +109,11 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	public Img getPointStyleAsImage() {
 		// checks if image as point style has been used
 		if (isType(Property.POINT_STYLE, ObjectType.OBJECT)) {
-			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
+			return getValue(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
 		}
 		// if here, means the point style as stored as strings
 		// returns undefined
-		return UndefinedValues.IMAGE_ELEMENT;
+		return Undefined.IMAGE_ELEMENT;
 	}
 
 	/**
@@ -158,7 +158,7 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	 * @return the rotation in degrees
 	 */
 	public double getRotation() {
-		return getValue(Property.ROTATION, UndefinedValues.INTEGER);
+		return getValue(Property.ROTATION, Undefined.INTEGER);
 	}
 
 	/**

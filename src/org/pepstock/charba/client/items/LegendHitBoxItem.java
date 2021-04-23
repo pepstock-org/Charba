@@ -45,7 +45,7 @@ public final class LegendHitBoxItem extends SizeItem {
 	 * @return the padding left in pixel.
 	 */
 	public double getLeft() {
-		return getValue(Position.LEFT, UndefinedValues.INTEGER);
+		return getValue(Position.LEFT, Undefined.INTEGER);
 	}
 
 	/**
@@ -54,7 +54,7 @@ public final class LegendHitBoxItem extends SizeItem {
 	 * @return the padding top in pixel.
 	 */
 	public double getTop() {
-		return getValue(Position.TOP, UndefinedValues.DOUBLE);
+		return getValue(Position.TOP, Undefined.DOUBLE);
 	}
 
 	/**

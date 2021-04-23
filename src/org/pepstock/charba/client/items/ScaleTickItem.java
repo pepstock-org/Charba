@@ -80,28 +80,28 @@ public final class ScaleTickItem extends NativeObjectContainer {
 	/**
 	 * Returns the label of the tick.
 	 * 
-	 * @return the label of the tick or {@link UndefinedValues#STRING} if missing.
+	 * @return the label of the tick or {@link Undefined#STRING} if missing.
 	 */
 	public final String getLabel() {
-		return getValue(Property.LABEL, UndefinedValues.STRING);
+		return getValue(Property.LABEL, Undefined.STRING);
 	}
 
 	/**
 	 * Returns the value of the tick as double.
 	 * 
-	 * @return the value of the tick or {@link UndefinedValues#DOUBLE} if missing or not a double.
+	 * @return the value of the tick or {@link Undefined#DOUBLE} if missing or not a double.
 	 */
 	public final double getValue() {
-		return getValueForMultipleKeyTypes(Property.VALUE, UndefinedValues.DOUBLE);
+		return getValueForMultipleKeyTypes(Property.VALUE, Undefined.DOUBLE);
 	}
 
 	/**
 	 * Returns the value of the tick as string.
 	 * 
-	 * @return the value of the tick or {@link UndefinedValues#STRING} if missing or not a string.
+	 * @return the value of the tick or {@link Undefined#STRING} if missing or not a string.
 	 */
 	public final String getValueAsString() {
-		return getValueForMultipleKeyTypes(Property.VALUE, UndefinedValues.STRING);
+		return getValueForMultipleKeyTypes(Property.VALUE, Undefined.STRING);
 	}
 
 	/**
@@ -114,12 +114,12 @@ public final class ScaleTickItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns <code>true</code> if is the major tick, otherwise {@link UndefinedValues#BOOLEAN}.
+	 * Returns <code>true</code> if is the major tick, otherwise {@link Undefined#BOOLEAN}.
 	 * 
-	 * @return <code>true</code> if is the major tick, otherwise {@link UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if is the major tick, otherwise {@link Undefined#BOOLEAN}.
 	 */
 	public boolean isMajor() {
-		return getValue(Property.MAJOR, UndefinedValues.BOOLEAN);
+		return getValue(Property.MAJOR, Undefined.BOOLEAN);
 	}
 
 	/**

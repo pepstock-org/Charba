@@ -58,7 +58,7 @@ import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.FillHandler;
 import org.pepstock.charba.client.options.HasFill;
 import org.pepstock.charba.client.options.HasSpanGaps;
@@ -1699,7 +1699,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// checks if image as point style has been used
 		if (getValue(Property.CHARBA_POINT_STYLE, false) && getPointStyleCallback() == null) {
 			// gets array
-			ArrayImage array = getValueOrArray(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
+			ArrayImage array = getValueOrArray(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, means the point style as stored as strings

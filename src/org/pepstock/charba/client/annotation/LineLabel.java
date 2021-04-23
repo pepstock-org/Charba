@@ -52,7 +52,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Window;
 
 /**
@@ -670,7 +670,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		if (!isContentAsImage() && !isType(Property.CONTENT, ObjectType.FUNCTION)) {
 			// reads as array
 			// and returns it
-			ArrayString array = getValueOrArray(Property.CONTENT, UndefinedValues.STRING);
+			ArrayString array = getValueOrArray(Property.CONTENT, Undefined.STRING);
 			return ArrayListHelper.list(array);
 		}
 		// if here the content is an image
@@ -686,11 +686,11 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public Img getContentAsImage() {
 		// checks if the context is a image (not an image of function for callback)
 		if (isContentAsImage() && !isType(Property.CONTENT, ObjectType.FUNCTION)) {
-			return getValue(Property.CONTENT, UndefinedValues.IMAGE_ELEMENT);
+			return getValue(Property.CONTENT, Undefined.IMAGE_ELEMENT);
 		}
 		// if here, the content is not an image
 		// then returns the undefined image
-		return UndefinedValues.IMAGE_ELEMENT;
+		return Undefined.IMAGE_ELEMENT;
 	}
 
 	/**
@@ -1147,7 +1147,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		if (defaultvalueAsPercentage != null) {
 			// then returns the string as percentage
 			return defaultvalueAsPercentage;
-		} else if (defaultValue != UndefinedValues.INTEGER) {
+		} else if (defaultValue != Undefined.INTEGER) {
 			// checks if the default as pixels is consistent
 			// then returns the double as pixels
 			return defaultValue;

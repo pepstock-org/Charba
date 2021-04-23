@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultBaseAnimation;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * CHART.JS default values for ANIMATION element.
@@ -28,7 +28,7 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 
 	private static final int DEFAULT_DURATION = 1000;
 
-	private static final int DEFAULT_DELAY = UndefinedValues.INTEGER;
+	private static final int DEFAULT_DELAY = Undefined.INTEGER;
 
 	private static final boolean DEFAULT_LOOP = false;
 

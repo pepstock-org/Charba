@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Base class for all options, which will wraps a native object and manages the relations about parent and children elements.<br>
@@ -147,9 +147,9 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Ab
 		// checks key
 		Key.checkIfValid(property);
 		// loads padding as number
-		int paddingSize = getValue(property, UndefinedValues.INTEGER);
+		int paddingSize = getValue(property, Undefined.INTEGER);
 		// checks if padding is a number
-		if (paddingSize != UndefinedValues.INTEGER) {
+		if (paddingSize != Undefined.INTEGER) {
 			// removes the current node
 			// because it must update in an object
 			remove(property);

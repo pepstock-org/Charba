@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Fill object to configure chart to use an absolute dataset index.<br>
@@ -43,7 +43,7 @@ public final class AbsoluteDatasetIndexFill extends AbstractDatasetIndexFill {
 	AbsoluteDatasetIndexFill(int index) {
 		// creates the abstract object passing the filling mode (always absolute filling mode
 		// and undefined string for index as string (absolute ONLY integer)
-		super(FillingMode.ABSOLUTE_DATASET_INDEX, index, UndefinedValues.STRING);
+		super(FillingMode.ABSOLUTE_DATASET_INDEX, index, Undefined.STRING);
 		// checks if the index is greater than 0
 		Checker.checkIfGreaterThan(index, 1, "Index argument");
 		// creates the name to return

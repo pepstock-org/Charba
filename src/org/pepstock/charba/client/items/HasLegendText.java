@@ -46,7 +46,7 @@ public interface HasLegendText {
 		}
 		// if here, legend text handler not consistent
 		// returns undefined
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -76,7 +76,7 @@ public interface HasLegendText {
 
 	/**
 	 * Returns the label that will be displayed, as HTML.<br>
-	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+	 * If is not HTML, returns {@link Undefined#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
 	 * 
 	 * @return the label that will be displayed, as HTML.
 	 */

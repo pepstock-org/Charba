@@ -29,7 +29,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Abstract plugin options where to set all the configuration needed to the plugin.
@@ -102,7 +102,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 * @return the unique ID of the options.
 	 */
 	public final String getId() {
-		return getValue(Property.CHARBA_OPTIONS_ID, UndefinedValues.STRING);
+		return getValue(Property.CHARBA_OPTIONS_ID, Undefined.STRING);
 	}
 
 	/**

@@ -19,7 +19,7 @@ import java.util.Date;
 
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.enums.DefaultScaleId;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
@@ -45,7 +45,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	 * @return the right edge of the box
 	 */
 	default String getXMaxAsString() {
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -54,7 +54,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	 * @return the right edge of the box
 	 */
 	default double getXMaxAsDouble() {
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -72,7 +72,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	 * @return the left edge of the box
 	 */
 	default String getXMinAsString() {
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -81,7 +81,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	 * @return the left edge of the box
 	 */
 	default double getXMinAsDouble() {
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -108,7 +108,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	 * @return the top edge of the box in units along the y axis
 	 */
 	default String getYMaxAsString() {
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -117,7 +117,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	 * @return the top edge of the box in units along the y axis
 	 */
 	default double getYMaxAsDouble() {
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -135,7 +135,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	 * @return the bottom edge of the box
 	 */
 	default String getYMinAsString() {
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -144,7 +144,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	 * @return the bottom edge of the box
 	 */
 	default double getYMinAsDouble() {
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**

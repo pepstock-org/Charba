@@ -85,7 +85,7 @@ public final class DatasetPoint extends NativeObjectContainer {
 	 * @return X value
 	 */
 	public double getX() {
-		return getValue(Property.X, UndefinedValues.DOUBLE);
+		return getValue(Property.X, Undefined.DOUBLE);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public final class DatasetPoint extends NativeObjectContainer {
 	 * @return Y value.
 	 */
 	public double getY() {
-		return getValue(Property.Y, UndefinedValues.DOUBLE);
+		return getValue(Property.Y, Undefined.DOUBLE);
 	}
 
 }

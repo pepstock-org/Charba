@@ -179,7 +179,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 			}
 		}
 		// otherwise if here is undefined
-		return UndefinedValues.INTEGER;
+		return Undefined.INTEGER;
 	}
 
 	/**
@@ -207,7 +207,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max value of scale.
 	 */
 	public final double getMax() {
-		return getValueForMultipleKeyTypes(Property.MAX, UndefinedValues.DOUBLE);
+		return getValueForMultipleKeyTypes(Property.MAX, Undefined.DOUBLE);
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the minimum value of scale.
 	 */
 	public final double getMin() {
-		return getValueForMultipleKeyTypes(Property.MIN, UndefinedValues.DOUBLE);
+		return getValueForMultipleKeyTypes(Property.MIN, Undefined.DOUBLE);
 	}
 
 	/**
@@ -225,7 +225,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max value of scale.
 	 */
 	public final String getMaxAsString() {
-		return getValueForMultipleKeyTypes(Property.MAX, UndefinedValues.STRING);
+		return getValueForMultipleKeyTypes(Property.MAX, Undefined.STRING);
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the minimum value of scale.
 	 */
 	public final String getMinAsString() {
-		return getValueForMultipleKeyTypes(Property.MIN, UndefinedValues.STRING);
+		return getValueForMultipleKeyTypes(Property.MIN, Undefined.STRING);
 	}
 
 	/**
@@ -287,7 +287,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the label rotation ratio.
 	 */
 	public final double getLabelRotation() {
-		return getValue(Property.LABEL_ROTATION, UndefinedValues.DOUBLE);
+		return getValue(Property.LABEL_ROTATION, Undefined.DOUBLE);
 	}
 
 	/**
@@ -296,7 +296,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the start value of scale.
 	 */
 	public final double getStart() {
-		return getValue(Property.START, UndefinedValues.DOUBLE);
+		return getValue(Property.START, Undefined.DOUBLE);
 	}
 
 	/**
@@ -305,7 +305,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the end value of scale.
 	 */
 	public final double getEnd() {
-		return getValue(Property.END, UndefinedValues.DOUBLE);
+		return getValue(Property.END, Undefined.DOUBLE);
 	}
 
 	/**
@@ -314,7 +314,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the X center of scale.
 	 */
 	public final int getXCenter() {
-		return getValue(Property.X_CENTER, UndefinedValues.INTEGER);
+		return getValue(Property.X_CENTER, Undefined.INTEGER);
 	}
 
 	/**
@@ -323,7 +323,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the Y center of scale.
 	 */
 	public final int getYCenter() {
-		return getValue(Property.Y_CENTER, UndefinedValues.INTEGER);
+		return getValue(Property.Y_CENTER, Undefined.INTEGER);
 	}
 
 	/**
@@ -332,7 +332,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the drawing area dimension of scale.
 	 */
 	public final int getDrawingArea() {
-		return getValue(Property.DRAWING_AREA, UndefinedValues.INTEGER);
+		return getValue(Property.DRAWING_AREA, Undefined.INTEGER);
 	}
 
 	/**
@@ -395,7 +395,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final String getPositionAsString() {
 		// gets the value of native object
-		String value = getValue(Property.POSITION, UndefinedValues.STRING);
+		String value = getValue(Property.POSITION, Undefined.STRING);
 		// if value is not consistent and not a enum item
 		if (value != null && !Key.hasKeyByValue(Position.values(), value)) {
 			// returns simply the string
@@ -558,7 +558,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 			return JsItemsHelper.get().getPixelForValue(this, value.getTime(), index);
 		}
 		// if here the argument is not consistent
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**

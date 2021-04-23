@@ -57,7 +57,7 @@ import org.pepstock.charba.client.events.HandlerManager;
 import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.IsTransitionKey;
 import org.pepstock.charba.client.plugins.Plugins;
@@ -626,7 +626,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	/**
 	 * Returns a base 64 encoded string of the chart in it's current state.
 	 * 
-	 * @return base 64 image or {@link UndefinedValues#STRING} if chart is not initialized.
+	 * @return base 64 image or {@link Undefined#STRING} if chart is not initialized.
 	 */
 	@Override
 	public final String toBase64Image() {
@@ -636,7 +636,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			return chart.toBase64Image();
 		}
 		// default
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -900,7 +900,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * Returns the amount of data sets which are visible
 	 * 
 	 * @return the amount of data sets which are visible.<br>
-	 *         If chart is not initialized, return {@link UndefinedValues#INTEGER}.
+	 *         If chart is not initialized, return {@link Undefined#INTEGER}.
 	 */
 	@Override
 	public final int getVisibleDatasetCount() {
@@ -912,7 +912,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			return instance.getVisibleDatasetCount();
 		}
 		// returns undefined
-		return UndefinedValues.INTEGER;
+		return Undefined.INTEGER;
 	}
 
 	/**

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Defines a configuration element which is managing the SPANGAPS property.<br>
@@ -85,7 +85,7 @@ public interface HasSpanGaps {
 		if (getSpanGapHandler() != null) {
 			return getSpanGapHandler().getSpanGaps();
 		}
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 }

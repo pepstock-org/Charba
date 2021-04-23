@@ -51,7 +51,7 @@ public final class ScaleValueItem {
 	 * @param label string representation of the value, showed on the scale
 	 */
 	ScaleValueItem(String value, String label) {
-		this.value = UndefinedValues.DOUBLE;
+		this.value = Undefined.DOUBLE;
 		this.valueAsDate = null;
 		this.valueAsString = value;
 		this.dataType = ScaleDataType.STRING;
@@ -67,7 +67,7 @@ public final class ScaleValueItem {
 	 */
 	ScaleValueItem(ImmutableDate value, String label) {
 		// checks if not null
-		this.value = value != null ? value.getTime() : UndefinedValues.DOUBLE;
+		this.value = value != null ? value.getTime() : Undefined.DOUBLE;
 		this.valueAsDate = value;
 		this.valueAsString = label;
 		this.dataType = ScaleDataType.DATE;
@@ -99,9 +99,9 @@ public final class ScaleValueItem {
 	}
 
 	/**
-	 * Returns the value for the scale if it is or {@link UndefinedValues#DOUBLE}.
+	 * Returns the value for the scale if it is or {@link Undefined#DOUBLE}.
 	 * 
-	 * @return the value for the scale if it is or {@link UndefinedValues#DOUBLE}
+	 * @return the value for the scale if it is or {@link Undefined#DOUBLE}
 	 */
 	public double getValue() {
 		return value;
@@ -117,9 +117,9 @@ public final class ScaleValueItem {
 	}
 
 	/**
-	 * Returns the value for the scale as string if it is or {@link UndefinedValues#STRING}.
+	 * Returns the value for the scale as string if it is or {@link Undefined#STRING}.
 	 * 
-	 * @return the value for the scale as string if it is or {@link UndefinedValues#STRING}.
+	 * @return the value for the scale as string if it is or {@link Undefined#STRING}.
 	 */
 	public String getValueAsString() {
 		return valueAsString;

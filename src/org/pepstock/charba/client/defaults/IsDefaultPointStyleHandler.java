@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Interface to define the point styles in the options elements.
@@ -53,7 +53,7 @@ public interface IsDefaultPointStyleHandler {
 	 *         If property is missing or not a image, returns <code>null</code>.
 	 */
 	default Img getPointStyleAsImage() {
-		return UndefinedValues.IMAGE_ELEMENT;
+		return Undefined.IMAGE_ELEMENT;
 	}
 
 }

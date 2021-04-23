@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.ContextType;
 import org.pepstock.charba.client.items.DataItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * This object is wrapping the native java script object provided by {@link LabelsPlugin#ID} plugin when the callback function is called.
@@ -85,7 +85,7 @@ public final class LabelsContext extends AbstractDatasetContext {
 		// checks if is floating data
 		if (ObjectType.NUMBER.equals(type)) {
 			// get the value as double
-			this.dataItem = new DataItem(getValue(Property.VALUE, UndefinedValues.DOUBLE));
+			this.dataItem = new DataItem(getValue(Property.VALUE, Undefined.DOUBLE));
 		} else if (ObjectType.ARRAY.equals(type)) {
 			// get the value as array
 			ArrayDouble array = getArrayValue(Property.VALUE);
@@ -93,10 +93,10 @@ public final class LabelsContext extends AbstractDatasetContext {
 			this.dataItem = new DataItem(array);
 		} else if (ObjectType.STRING.equals(type)) {
 			// get the value as string
-			this.dataItem = new DataItem(getValue(Property.VALUE, UndefinedValues.STRING));
+			this.dataItem = new DataItem(getValue(Property.VALUE, Undefined.STRING));
 		} else {
 			// a data item with unknown values
-			this.dataItem = new DataItem(UndefinedValues.STRING);
+			this.dataItem = new DataItem(Undefined.STRING);
 		}
 	}
 
@@ -115,7 +115,7 @@ public final class LabelsContext extends AbstractDatasetContext {
 	 * @return the label for the data set.
 	 */
 	public String getLabel() {
-		return getValue(Property.LABEL, UndefinedValues.STRING);
+		return getValue(Property.LABEL, Undefined.STRING);
 	}
 
 	/**
@@ -124,7 +124,7 @@ public final class LabelsContext extends AbstractDatasetContext {
 	 * @return the percentage for the data set.
 	 */
 	public double getPercentage() {
-		return getValue(Property.PERCENTAGE, UndefinedValues.DOUBLE);
+		return getValue(Property.PERCENTAGE, Undefined.DOUBLE);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public final class LabelsContext extends AbstractDatasetContext {
 	@Override
 	protected boolean isConsistent() {
 		// checks if the data index and data set index are consistent
-		boolean indexed = getDatasetIndex() != UndefinedValues.INTEGER && getDataIndex() != UndefinedValues.INTEGER;
+		boolean indexed = getDatasetIndex() != Undefined.INTEGER && getDataIndex() != Undefined.INTEGER;
 		// checks that all items are there
 		return indexed && ContextType.LABELS.equals(getType()) && has(Property.LABEL) && has(Property.PERCENTAGE);
 	}

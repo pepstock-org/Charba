@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.CrossAlign;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.TickSource;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * CHART.JS default values for TICKS element.
@@ -68,7 +68,7 @@ public class DefaultTicks implements IsDefaultTicks {
 
 	private static final int DEFAULT_TEXT_STROKE_WIDTH = 0;
 
-	private static final int DEFAULT_COUNT = UndefinedValues.INTEGER;
+	private static final int DEFAULT_COUNT = Undefined.INTEGER;
 
 	private final DefaultMajor major = new DefaultMajor();
 
@@ -300,7 +300,7 @@ public class DefaultTicks implements IsDefaultTicks {
 	 */
 	@Override
 	public int getSampleSize() {
-		return UndefinedValues.INTEGER;
+		return Undefined.INTEGER;
 	}
 
 	/*

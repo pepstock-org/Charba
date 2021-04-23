@@ -153,19 +153,19 @@ public final class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns if the dataset is visible.
 	 * 
-	 * @return <code>true</code> if the dataset is visible, otherwise is {@link UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if the dataset is visible, otherwise is {@link Undefined#BOOLEAN}.
 	 */
 	public boolean isVisible() {
-		return getValue(Property.VISIBLE, UndefinedValues.BOOLEAN);
+		return getValue(Property.VISIBLE, Undefined.BOOLEAN);
 	}
 
 	/**
 	 * Returns if the dataset is hidden.
 	 * 
-	 * @return <code>true</code> if the dataset is hidden, otherwise is {@link UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if the dataset is hidden, otherwise is {@link Undefined#BOOLEAN}.
 	 */
 	public boolean isHidden() {
-		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
+		return getValue(Property.HIDDEN, Undefined.BOOLEAN);
 	}
 
 	/**
@@ -174,7 +174,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	 * @return the dataset index.
 	 */
 	public int getIndex() {
-		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+		return getValue(Property.INDEX, Undefined.INTEGER);
 	}
 
 	/**
@@ -192,7 +192,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	 * @return the dataset order.
 	 */
 	public int getOrder() {
-		return getValue(Property.ORDER, UndefinedValues.INTEGER);
+		return getValue(Property.ORDER, Undefined.INTEGER);
 	}
 
 	/**
@@ -201,7 +201,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	 * @return the dataset label.
 	 */
 	public String getLabel() {
-		return getValue(Property.LABEL, UndefinedValues.STRING);
+		return getValue(Property.LABEL, Undefined.STRING);
 	}
 
 	/**
@@ -304,7 +304,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	 * @return the dataset total value of data.
 	 */
 	public double getTotal() {
-		return getValue(Property.TOTAL, UndefinedValues.DOUBLE);
+		return getValue(Property.TOTAL, Undefined.DOUBLE);
 	}
 
 	/**

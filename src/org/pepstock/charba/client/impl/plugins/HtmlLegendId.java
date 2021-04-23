@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.RegExp;
 import org.pepstock.charba.client.utils.RegExpResult;
 import org.pepstock.charba.client.utils.Utilities;
@@ -70,8 +70,8 @@ final class HtmlLegendId {
 		this.chartId = chartId;
 		// transform the undefined values, set as minimum integer
 		// as maximum integer value because by REGEXP it is easier to manage it
-		this.datasetIndex = datasetIndex == UndefinedValues.INTEGER ? Integer.MAX_VALUE : datasetIndex;
-		this.index = index == UndefinedValues.INTEGER ? Integer.MAX_VALUE : index;
+		this.datasetIndex = datasetIndex == Undefined.INTEGER ? Integer.MAX_VALUE : datasetIndex;
+		this.index = index == Undefined.INTEGER ? Integer.MAX_VALUE : index;
 	}
 
 	/**
@@ -105,8 +105,8 @@ final class HtmlLegendId {
 			if (matchFound && matcher.length() == 5) {
 				// sets the reference
 				String chartId = null;
-				int datasetIndex = UndefinedValues.INTEGER;
-				int index = UndefinedValues.INTEGER;
+				int datasetIndex = Undefined.INTEGER;
+				int index = Undefined.INTEGER;
 				// scans all token. Starts by 1
 				for (int i = 1; i < matcher.length(); i++) {
 					String groupStr = matcher.get(i);
@@ -216,8 +216,8 @@ final class HtmlLegendId {
 			for (LegendLabelItem item : legendItems) {
 				// transform the undefined values, set as minimum integer
 				// as maximum integer value because by REGEXP it is easier to manage it
-				int legendDatasetIndex = item.getDatasetIndex() == UndefinedValues.INTEGER ? Integer.MAX_VALUE : item.getDatasetIndex();
-				int legendIndex = item.getIndex() == UndefinedValues.INTEGER ? Integer.MAX_VALUE : item.getIndex();
+				int legendDatasetIndex = item.getDatasetIndex() == Undefined.INTEGER ? Integer.MAX_VALUE : item.getDatasetIndex();
+				int legendIndex = item.getIndex() == Undefined.INTEGER ? Integer.MAX_VALUE : item.getIndex();
 				// checks if indexes are matching with HTML legend id
 				if (legendDatasetIndex == datasetIndex && legendIndex == index) {
 					return item;

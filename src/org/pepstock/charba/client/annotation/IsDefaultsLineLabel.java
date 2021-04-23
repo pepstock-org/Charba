@@ -29,7 +29,7 @@ import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin LABEL of LINE annotation DEFAULTS options.
@@ -153,7 +153,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	 * @return the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
 	 */
 	default int getImageHeight() {
-		return UndefinedValues.INTEGER;
+		return Undefined.INTEGER;
 	}
 
 	/**
@@ -171,7 +171,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	 * @return the width of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
 	 */
 	default int getImageWidth() {
-		return UndefinedValues.INTEGER;
+		return Undefined.INTEGER;
 	}
 
 	/**

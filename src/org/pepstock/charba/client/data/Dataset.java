@@ -52,7 +52,7 @@ import org.pepstock.charba.client.defaults.IsDefaultTypedDataset;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultPluginId;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.AnimationContainer;
 import org.pepstock.charba.client.options.HasAnimationOptions;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -321,7 +321,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * @return the unique id of data sets
 	 */
 	public final int getId() {
-		return getValue(InternalProperty.CHARBA_ID, UndefinedValues.INTEGER);
+		return getValue(InternalProperty.CHARBA_ID, Undefined.INTEGER);
 	}
 
 	/**
@@ -733,7 +733,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * @return the label for the data set which appears in the legend and tooltips.
 	 */
 	public String getLabel() {
-		return getValue(InternalProperty.LABEL, UndefinedValues.STRING);
+		return getValue(InternalProperty.LABEL, Undefined.STRING);
 	}
 
 	/**
@@ -761,20 +761,20 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	/**
 	 * Returns how to clip relative to the chart area.<br>
 	 * Positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area.<br>
-	 * If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}.
+	 * If the clip was set by a {@link Clip} object, returns {@link Undefined#DOUBLE}.
 	 * 
 	 * @return positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area.<br>
-	 *         If the clip was set by a {@link Clip} object, returns {@link UndefinedValues#DOUBLE}
+	 *         If the clip was set by a {@link Clip} object, returns {@link Undefined#DOUBLE}
 	 */
 	public double getClip() {
 		// checks if previously was set to a clip object
 		// therefore NaN
 		if (isType(CommonProperty.CLIP, ObjectType.OBJECT)) {
 			// if object returns NaN
-			return UndefinedValues.DOUBLE;
+			return Undefined.DOUBLE;
 		}
 		// gets value as number
-		return getValue(CommonProperty.CLIP, UndefinedValues.DOUBLE);
+		return getValue(CommonProperty.CLIP, Undefined.DOUBLE);
 	}
 
 	/**

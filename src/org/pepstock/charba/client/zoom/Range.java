@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Entity of {@link ZoomPlugin#ID} configuration in order to set minimum and maximum values of X and Y scales.<br>
@@ -144,7 +144,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 			return getValue(Range.Property.X, defaultOptions.getX());
 		}
 		// if here, the value is not a string then returns undefined
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -159,7 +159,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 			return getValue(Range.Property.X, defaultOptions.getXAsDouble());
 		}
 		// if here, the value is not a double then returns undefined
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -216,7 +216,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 			return getValue(Range.Property.Y, defaultOptions.getY());
 		}
 		// if here, the value is not a double then returns undefined
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -231,7 +231,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 			return getValue(Range.Property.Y, defaultOptions.getYAsString());
 		}
 		// if here, the value is not a stirng then returns undefined
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**

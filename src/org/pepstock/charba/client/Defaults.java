@@ -53,7 +53,7 @@ import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.items.TooltipLabelPointStyle;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
@@ -472,7 +472,7 @@ public final class Defaults {
 	 */
 	private DatasetElementOptions retrieveDatasetElementOptions(IsChart chart, TooltipItem item) {
 		// checks if arguments are consistent
-		if (IsChart.isConsistent(chart) && item != null && item.getDatasetIndex() != UndefinedValues.INTEGER) {
+		if (IsChart.isConsistent(chart) && item != null && item.getDatasetIndex() != Undefined.INTEGER) {
 			// gets the dataset item at index
 			DatasetItem datasetItem = chart.getDatasetItem(item.getDatasetIndex());
 			// checks if consistent

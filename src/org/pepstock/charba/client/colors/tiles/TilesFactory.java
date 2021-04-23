@@ -30,7 +30,7 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.impl.plugins.HtmlLegendItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Builds tiles creating a CHARBA pattern or canvas pattern passing all needed arguments and leveraging on tiles factory defaults.
@@ -436,7 +436,7 @@ public final class TilesFactory {
 			}
 		}
 		// if here, arguments are not consistent
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**

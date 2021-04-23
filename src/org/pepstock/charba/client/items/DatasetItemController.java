@@ -79,7 +79,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	 * @return the dataset index.
 	 */
 	public int getIndex() {
-		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+		return getValue(Property.INDEX, Undefined.INTEGER);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	 * @return the outer radius of dataset item in pixel.
 	 */
 	public double getOuterRadius() {
-		return getValue(Property.OUTER_RADIUS, UndefinedValues.DOUBLE);
+		return getValue(Property.OUTER_RADIUS, Undefined.DOUBLE);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	 * @return the inner radius of dataset item in pixel.
 	 */
 	public double getInnerRadius() {
-		return getValue(Property.INNER_RADIUS, UndefinedValues.DOUBLE);
+		return getValue(Property.INNER_RADIUS, Undefined.DOUBLE);
 	}
 
 	/**
@@ -106,7 +106,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	 * @return the offset X.
 	 */
 	public double getOffsetX() {
-		return getValue(Property.OFFSET_X, UndefinedValues.DOUBLE);
+		return getValue(Property.OFFSET_X, Undefined.DOUBLE);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	 * @return the offset Y.
 	 */
 	public double getOffsetY() {
-		return getValue(Property.OFFSET_Y, UndefinedValues.DOUBLE);
+		return getValue(Property.OFFSET_Y, Undefined.DOUBLE);
 	}
 
 	/**

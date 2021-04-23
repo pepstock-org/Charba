@@ -80,7 +80,7 @@ public final class PluginDatasetArgument extends PluginUpdateArgument {
 	 * @return the index of the data inside the dataset.
 	 */
 	public int getIndex() {
-		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+		return getValue(Property.INDEX, Undefined.INTEGER);
 	}
 
 	/**

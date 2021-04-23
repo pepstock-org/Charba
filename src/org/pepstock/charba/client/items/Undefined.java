@@ -23,7 +23,7 @@ import org.pepstock.charba.client.dom.elements.Img;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class UndefinedValues {
+public final class Undefined {
 
 	/**
 	 * Default value for INTEGER instances, {@link Integer#MIN_VALUE}.
@@ -53,8 +53,38 @@ public final class UndefinedValues {
 	/**
 	 * To avoid any instantiation
 	 */
-	private UndefinedValues() {
+	private Undefined() {
 		// do nothing
+	}
+	
+	/**
+	 * Returns <code>true</code> if the value is not undefined.
+	 * 
+	 * @param value value to be checked
+	 * @return <code>true</code> if the value is not undefined
+	 */
+	public static boolean is(int value) {
+		return value != Undefined.INTEGER;
+	}
+	
+	/**
+	 * Returns <code>true</code> if the value is not undefined.
+	 * 
+	 * @param value value to be checked
+	 * @return <code>true</code> if the value is not undefined
+	 */
+	public static boolean is(double value) {
+		return !Double.isNaN(value) && !Double.isInfinite(value);
+	}
+	
+	/**
+	 * Returns <code>true</code> if the value is not undefined.
+	 * 
+	 * @param value value to be checked
+	 * @return <code>true</code> if the value is not undefined
+	 */
+	public static boolean is(Object value) {
+		return value != null;
 	}
 
 }

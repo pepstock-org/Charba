@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultArc;
 import org.pepstock.charba.client.enums.BorderAlign;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * CHART.JS default values for ARC element.
@@ -70,7 +70,7 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 	 */
 	@Override
 	public double getAngle() {
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/*

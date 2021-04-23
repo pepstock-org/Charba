@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.enums.AnimationType;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsAnimationCollectionKey;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
@@ -31,17 +31,17 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
  */
 public class DefaultAnimationCollection extends AbstractDefaultAnimation implements IsDefaultAnimationCollection {
 
-	private static final double DEFAULT_FROM = UndefinedValues.DOUBLE;
+	private static final double DEFAULT_FROM = Undefined.DOUBLE;
 
-	private static final boolean DEFAULT_FROM_AS_BOOLEAN = UndefinedValues.BOOLEAN;
+	private static final boolean DEFAULT_FROM_AS_BOOLEAN = Undefined.BOOLEAN;
 
-	private static final String DEFAULT_FROM_AS_STRING = UndefinedValues.STRING;
+	private static final String DEFAULT_FROM_AS_STRING = Undefined.STRING;
 
-	private static final double DEFAULT_TO = UndefinedValues.DOUBLE;
+	private static final double DEFAULT_TO = Undefined.DOUBLE;
 
-	private static final boolean DEFAULT_TO_AS_BOOLEAN = UndefinedValues.BOOLEAN;
+	private static final boolean DEFAULT_TO_AS_BOOLEAN = Undefined.BOOLEAN;
 
-	private static final String DEFAULT_TO_AS_STRING = UndefinedValues.STRING;
+	private static final String DEFAULT_TO_AS_STRING = Undefined.STRING;
 
 	private final IsAnimationCollectionKey collection;
 

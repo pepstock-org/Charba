@@ -25,7 +25,7 @@ import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Scale options used internally inside the chart configuration.<br>
@@ -108,7 +108,7 @@ public final class ExtendedScale extends Scale {
 	 * @return the unique id of scale
 	 */
 	public int getCharbaId() {
-		return getValue(Property.CHARBA_ID, UndefinedValues.INTEGER);
+		return getValue(Property.CHARBA_ID, Undefined.INTEGER);
 	}
 
 	/**

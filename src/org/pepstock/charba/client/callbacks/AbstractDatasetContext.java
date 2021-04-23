@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.DatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * The option context is used to give contextual information when resolving options where the data set locator (data and data set index) must be used.
@@ -87,7 +87,7 @@ public abstract class AbstractDatasetContext extends ChartContext {
 	 * @return the index of the current data set.
 	 */
 	public final int getDatasetIndex() {
-		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
+		return getValue(Property.DATASET_INDEX, Undefined.INTEGER);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public abstract class AbstractDatasetContext extends ChartContext {
 	 * @return the index of the current data.
 	 */
 	public final int getDataIndex() {
-		return getValue(Property.DATA_INDEX, UndefinedValues.INTEGER);
+		return getValue(Property.DATA_INDEX, Undefined.INTEGER);
 	}
 
 	/**

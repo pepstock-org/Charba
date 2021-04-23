@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Represents how to fill the area under the line. This is an interfaces implemented on different way, as CHART.JS has implemented.<br>
@@ -52,16 +52,16 @@ public interface IsFill extends Key {
 	FillingMode getMode();
 
 	/**
-	 * Returns the value as integer (valid ONLY for absolute dataset index), otherwise {@link UndefinedValues#INTEGER}.
+	 * Returns the value as integer (valid ONLY for absolute dataset index), otherwise {@link Undefined#INTEGER}.
 	 * 
-	 * @return the value as integer (valid ONLY for absolute dataset index), otherwise {@link UndefinedValues#INTEGER}.
+	 * @return the value as integer (valid ONLY for absolute dataset index), otherwise {@link Undefined#INTEGER}.
 	 */
 	int getValueAsInt();
 
 	/**
-	 * Returns the value as string (valid ONLY for relative dataset index and predefined), otherwise {@link UndefinedValues#STRING}.
+	 * Returns the value as string (valid ONLY for relative dataset index and predefined), otherwise {@link Undefined#STRING}.
 	 * 
-	 * @return the value as string (valid ONLY for relative dataset index and predefined), otherwise {@link UndefinedValues#STRING}.
+	 * @return the value as string (valid ONLY for relative dataset index and predefined), otherwise {@link Undefined#STRING}.
 	 */
 	String getValue();
 

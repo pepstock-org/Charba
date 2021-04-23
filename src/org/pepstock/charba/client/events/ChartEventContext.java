@@ -27,7 +27,7 @@ import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.items.ItemsEnvelop;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * This is the class which can wrap a CHART.JS event.
@@ -173,7 +173,7 @@ public final class ChartEventContext extends NativeObjectContainer {
 	 * @return the X location of event in pixel.
 	 */
 	public double getX() {
-		return getValue(Property.X, UndefinedValues.DOUBLE);
+		return getValue(Property.X, Undefined.DOUBLE);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public final class ChartEventContext extends NativeObjectContainer {
 	 * @return the Y location of event in pixel.
 	 */
 	public double getY() {
-		return getValue(Property.Y, UndefinedValues.DOUBLE);
+		return getValue(Property.Y, Undefined.DOUBLE);
 	}
 
 	/**
@@ -191,7 +191,7 @@ public final class ChartEventContext extends NativeObjectContainer {
 	 * @return the type of the event
 	 */
 	public String getType() {
-		return getValue(Property.TYPE, UndefinedValues.STRING);
+		return getValue(Property.TYPE, Undefined.STRING);
 	}
 
 	/**

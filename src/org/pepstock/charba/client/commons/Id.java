@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Enums the property ID used by CHARBA to identify the chart.
@@ -55,7 +55,7 @@ public enum Id implements Key
 	 * Returns the property value from java script object.
 	 * 
 	 * @param nativeObjectContainer java script object container
-	 * @return the property value or {@link UndefinedValues#STRING} if not exist
+	 * @return the property value or {@link Undefined#STRING} if not exist
 	 */
 	public static String get(NativeObjectContainer nativeObjectContainer) {
 		// checks if argument is consistent
@@ -64,23 +64,23 @@ public enum Id implements Key
 		}
 		// if here the argument is not consistent
 		// then returns null
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
 	 * Returns the property value from java script object.
 	 * 
 	 * @param nativeObject java script object
-	 * @return the property value or {@link UndefinedValues#STRING} if not exist
+	 * @return the property value or {@link Undefined#STRING} if not exist
 	 */
 	public static String get(NativeObject nativeObject) {
 		// checks if argument is consistent and property exists
 		if (nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, CHARBA_ID.value())) {
 			// returns value
-			return NativeObjectUtils.getStringProperty(nativeObject, CHARBA_ID.value(), UndefinedValues.STRING);
+			return NativeObjectUtils.getStringProperty(nativeObject, CHARBA_ID.value(), Undefined.STRING);
 		}
 		// property doesn't exist
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -88,16 +88,16 @@ public enum Id implements Key
 	 * 
 	 * @param key the key to search inside the object
 	 * @param nativeObject java script object
-	 * @return the property value or {@link UndefinedValues#INTEGER} if not exist
+	 * @return the property value or {@link Undefined#INTEGER} if not exist
 	 */
 	public static int getIntegerProperty(Key key, NativeObject nativeObject) {
 		// checks if arguments are consistent and property exists
 		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
 			// returns value
-			return NativeObjectUtils.getIntProperty(nativeObject, key.value(),UndefinedValues.INTEGER);
+			return NativeObjectUtils.getIntProperty(nativeObject, key.value(),Undefined.INTEGER);
 		}
 		// property doesn't exist
-		return UndefinedValues.INTEGER;
+		return Undefined.INTEGER;
 	}
 
 	/**
@@ -105,15 +105,15 @@ public enum Id implements Key
 	 * 
 	 * @param key the key to search inside the object
 	 * @param nativeObject java script object
-	 * @return the property value or {@link UndefinedValues#STRING} if not exist
+	 * @return the property value or {@link Undefined#STRING} if not exist
 	 */
 	public static String getStringProperty(Key key, NativeObject nativeObject) {
 		// checks if arguments are consistent and property exists
 		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
 			// if descriptor is consistent, return value
-			return NativeObjectUtils.getStringProperty(nativeObject, key.value(), UndefinedValues.STRING);
+			return NativeObjectUtils.getStringProperty(nativeObject, key.value(), Undefined.STRING);
 		}
 		// property doesn't exist
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 }

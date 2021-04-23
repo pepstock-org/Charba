@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.RegExp;
 
 /**
@@ -49,7 +49,7 @@ public final class RelativeDatasetIndexFill extends AbstractDatasetIndexFill {
 	RelativeDatasetIndexFill(String index) {
 		// creates the abstract object passing the filling mode (always relative filling mode
 		// and undefined integer for index as integer (relative ONLY string)
-		super(FillingMode.RELATIVE_DATASET_INDEX, UndefinedValues.INTEGER, index);
+		super(FillingMode.RELATIVE_DATASET_INDEX, Undefined.INTEGER, index);
 		// applies the regex
 		// if does not match
 		Checker.checkIfValid(RELATIVE_INDEX.exec(index), "Index argument is not a valid relative index. Index");

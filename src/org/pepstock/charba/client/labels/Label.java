@@ -35,7 +35,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.FontItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
@@ -334,7 +334,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @return the id of label
 	 */
 	public IsLabelId getId() {
-		return IsLabelId.create(getValue(Property.ID, UndefinedValues.STRING));
+		return IsLabelId.create(getValue(Property.ID, Undefined.STRING));
 	}
 
 	/**

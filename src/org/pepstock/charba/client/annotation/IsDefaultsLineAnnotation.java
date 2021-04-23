@@ -18,7 +18,7 @@ package org.pepstock.charba.client.annotation;
 import java.util.Date;
 
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
@@ -91,7 +91,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
 	 * @return the data value to draw the line at
 	 */
 	default String getValueAsString() {
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -100,7 +100,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
 	 * @return the data value to draw the line at
 	 */
 	default double getValueAsDouble() {
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -118,7 +118,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
 	 * @return the data value at which the line draw should end
 	 */
 	default String getEndValueAsString() {
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -127,7 +127,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
 	 * @return the data value at which the line draw should end
 	 */
 	default double getEndValueAsDouble() {
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**

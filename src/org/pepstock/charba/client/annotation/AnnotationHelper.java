@@ -21,7 +21,7 @@ import java.util.Map;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Helpers to provides utilities in the {@link AnnotationPlugin#ID} plugin.
@@ -58,7 +58,7 @@ final class AnnotationHelper {
 	 */
 	void addAnnotation(AbstractAnnotation annotation) {
 		// checks if annotation argument is consistent
-		if (annotation != null && annotation.getAnnotationId() != UndefinedValues.INTEGER) {
+		if (annotation != null && annotation.getAnnotationId() != Undefined.INTEGER) {
 			// stores the annotation configuration
 			annotationInstancesCache.put(annotation.getAnnotationId(), annotation);
 		}

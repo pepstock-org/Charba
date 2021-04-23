@@ -28,7 +28,7 @@ import org.pepstock.charba.client.intl.CLocaleBuilder;
 import org.pepstock.charba.client.intl.enums.Calendar;
 import org.pepstock.charba.client.intl.enums.NumberingSystem;
 import org.pepstock.charba.client.intl.enums.TimeZone;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Simple class to map LUXON options to provide to date time adapter.
@@ -120,7 +120,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 		// gets the default value
 		CLocale defaultLocale = defaultValues.getLocale();
 		// gets the value stored as string
-		String value = getValue(Property.LOCALE, defaultLocale == null ? UndefinedValues.STRING : defaultLocale.getIdentifier());
+		String value = getValue(Property.LOCALE, defaultLocale == null ? Undefined.STRING : defaultLocale.getIdentifier());
 		// checks if value is consistent
 		// if default is null or
 		// the identifier is not equals to value

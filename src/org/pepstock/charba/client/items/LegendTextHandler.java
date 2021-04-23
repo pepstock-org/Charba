@@ -134,7 +134,7 @@ public final class LegendTextHandler extends PropertyHandler<Boolean> {
 	 * @return the label that will be displayed.
 	 */
 	String getText() {
-		return getValue(Property.TEXT, UndefinedValues.STRING);
+		return getValue(Property.TEXT, Undefined.STRING);
 	}
 
 	/**
@@ -149,7 +149,7 @@ public final class LegendTextHandler extends PropertyHandler<Boolean> {
 
 	/**
 	 * Returns the label that will be displayed, as HTML.<br>
-	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+	 * If is not HTML, returns {@link Undefined#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
 	 * 
 	 * @return the label that will be displayed, as HTML.
 	 */

@@ -79,7 +79,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * @return the top of chart area.
 	 */
 	public final double getTop() {
-		return getValue(Property.TOP, UndefinedValues.DOUBLE);
+		return getValue(Property.TOP, Undefined.DOUBLE);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * @return the right of chart area.
 	 */
 	public final double getRight() {
-		return getValue(Property.RIGHT, UndefinedValues.DOUBLE);
+		return getValue(Property.RIGHT, Undefined.DOUBLE);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * @return the bottom of chart area.
 	 */
 	public final double getBottom() {
-		return getValue(Property.BOTTOM, UndefinedValues.DOUBLE);
+		return getValue(Property.BOTTOM, Undefined.DOUBLE);
 	}
 
 	/**
@@ -106,7 +106,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * @return the left of chart area.
 	 */
 	public final double getLeft() {
-		return getValue(Property.LEFT, UndefinedValues.DOUBLE);
+		return getValue(Property.LEFT, Undefined.DOUBLE);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * @return the width in pixel.
 	 */
 	public final double getWidth() {
-		return getValue(Property.WIDTH, UndefinedValues.DOUBLE);
+		return getValue(Property.WIDTH, Undefined.DOUBLE);
 	}
 
 	/**
@@ -124,7 +124,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * @return the height in pixel.
 	 */
 	public final double getHeight() {
-		return getValue(Property.HEIGHT, UndefinedValues.DOUBLE);
+		return getValue(Property.HEIGHT, Undefined.DOUBLE);
 	}
 
 	/**

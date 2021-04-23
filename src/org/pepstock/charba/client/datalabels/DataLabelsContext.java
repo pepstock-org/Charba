@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ContextType;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * The option context is used to give contextual information when resolving options for {@link DataLabelsPlugin}.
@@ -101,7 +101,7 @@ public final class DataLabelsContext extends AbstractDatasetContext {
 	@Override
 	protected boolean isConsistent() {
 		// checks if the data index and data set index are consistent
-		return ContextType.DATALABELS.equals(getType()) && getDatasetIndex() != UndefinedValues.INTEGER && getDataIndex() != UndefinedValues.INTEGER;
+		return ContextType.DATALABELS.equals(getType()) && getDatasetIndex() != Undefined.INTEGER && getDataIndex() != Undefined.INTEGER;
 	}
 
 }

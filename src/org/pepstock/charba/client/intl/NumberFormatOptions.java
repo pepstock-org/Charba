@@ -33,7 +33,7 @@ import org.pepstock.charba.client.intl.enums.MeasureUnitDisplay;
 import org.pepstock.charba.client.intl.enums.Notation;
 import org.pepstock.charba.client.intl.enums.SignDisplay;
 import org.pepstock.charba.client.intl.enums.Style;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * The object configures a number formatter.<br>
@@ -335,7 +335,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 */
 	@Override
 	public List<MeasureUnit> getUnitsOfMeasure() {
-		return parseCompoundUnitIdentifier(getValue(Property.UNIT, UndefinedValues.STRING));
+		return parseCompoundUnitIdentifier(getValue(Property.UNIT, Undefined.STRING));
 	}
 
 	/**
@@ -360,7 +360,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 		}
 		// if here the argument is not consistent
 		// then returns undefined value
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**

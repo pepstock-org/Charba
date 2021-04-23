@@ -31,7 +31,7 @@ import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsTransitionKey;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.utils.CTimer;
@@ -346,7 +346,7 @@ public interface IsChart {
 	/**
 	 * Returns a base 64 encoded string of the chart in it's current state.
 	 * 
-	 * @return base 64 image or {@link UndefinedValues#STRING} if chart is not initialized.
+	 * @return base 64 image or {@link Undefined#STRING} if chart is not initialized.
 	 */
 	String toBase64Image();
 
@@ -456,7 +456,7 @@ public interface IsChart {
 	/**
 	 * Returns the amount of datasets which are visible
 	 * 
-	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link UndefinedValues#INTEGER}.
+	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link Undefined#INTEGER}.
 	 */
 	int getVisibleDatasetCount();
 

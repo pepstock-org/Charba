@@ -24,7 +24,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.IsCastable;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -136,7 +136,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	 * @return the unique canvas object id.
 	 */
 	public final String getId() {
-		return getValue(Property.CHARBA_OBJECT_ID, UndefinedValues.STRING);
+		return getValue(Property.CHARBA_OBJECT_ID, Undefined.STRING);
 	}
 
 	/**

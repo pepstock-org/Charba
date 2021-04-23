@@ -21,7 +21,7 @@ import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.items.HasLegendText;
 import org.pepstock.charba.client.items.LegendTextHandler;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * This is the title configuration of the legend.
@@ -163,7 +163,7 @@ public class LegendTitle extends ConfigurationOptionsContainer implements HasLeg
 
 	/**
 	 * Returns the text that will be displayed, as HTML.<br>
-	 * If is not HTML, returns {@link UndefinedValues#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
+	 * If is not HTML, returns {@link Undefined#STRING}. This field is used ONLY by {@link HtmlLegend} plugin and not by CHART.js.
 	 * 
 	 * @return the text that will be displayed, as HTML.
 	 */

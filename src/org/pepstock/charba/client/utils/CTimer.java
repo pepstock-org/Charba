@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.utils;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Simple utility to execute repeatedly calls a {@link Runnable} with a fixed time delay between each call.
@@ -55,7 +55,7 @@ public final class CTimer {
 	// status of the timer
 	private Status status = Status.INITIALIZED;
 	// an interval ID which uniquely identifies the interval
-	private int intervalID = UndefinedValues.INTEGER;
+	private int intervalID = Undefined.INTEGER;
 
 	/**
 	 * Creates the timer with a {@link Runnable} to be executed repeatedly and the time, in milliseconds (thousands of a second), the timer should delay in between executions of
@@ -129,7 +129,7 @@ public final class CTimer {
 			// changes status
 			status = Status.STOPPED;
 			// resets interval id
-			this.intervalID = UndefinedValues.INTEGER;
+			this.intervalID = Undefined.INTEGER;
 		}
 	}
 

@@ -19,7 +19,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.FontItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Interface to define fomt object defaults.
@@ -91,7 +91,7 @@ public interface IsDefaultFont {
 		// gets size reference
 		int size = getSize();
 		// sets size checking if consistent
-		if (size != UndefinedValues.INTEGER) {
+		if (size != Undefined.INTEGER) {
 			result.setSize(size);
 		}
 		// stores style, family and weight

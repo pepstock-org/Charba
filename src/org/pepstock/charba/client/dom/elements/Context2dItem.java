@@ -31,7 +31,7 @@ import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -1186,7 +1186,7 @@ public final class Context2dItem extends BaseHtmlElement {
 		}
 		// if here is not a string
 		// then returns undefined value
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**

@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>
@@ -213,7 +213,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 		if (checkRange(index)) {
 			return array.remove(index);
 		}
-		return UndefinedValues.IMAGE_ELEMENT;
+		return Undefined.IMAGE_ELEMENT;
 	}
 
 	/**

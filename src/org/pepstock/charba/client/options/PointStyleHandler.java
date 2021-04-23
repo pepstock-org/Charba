@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Base object to to manage point style property in the the options.
@@ -128,10 +128,10 @@ final class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandler
 	Img getPointStyleAsImage() {
 		// checks if image as point style has been used
 		if (isType(Property.POINT_STYLE, ObjectType.OBJECT)) {
-			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
+			return getValue(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
 		}
 		// if here, means the point style as stored as strings
 		// returns undefined
-		return UndefinedValues.IMAGE_ELEMENT;
+		return Undefined.IMAGE_ELEMENT;
 	}
 }

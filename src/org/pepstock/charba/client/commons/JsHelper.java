@@ -19,7 +19,7 @@ import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.dom.MutationObserverInit;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script objects.
@@ -191,16 +191,16 @@ public final class JsHelper {
 	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
-	 * @return integer value or {@link UndefinedValues#INTEGER} if arguments are not consistent
+	 * @return integer value or {@link Undefined#INTEGER} if arguments are not consistent
 	 */
 	public int propertyAsInt(NativeObject object, String key) {
 		// checks consistency of arguments
 		if (object != null && key != null) {
 			// returns the property value
-			return NativeObjectUtils.getIntProperty(object, key, UndefinedValues.INTEGER);
+			return NativeObjectUtils.getIntProperty(object, key, Undefined.INTEGER);
 		}
 		// if here, arguments not consistent
-		return UndefinedValues.INTEGER;
+		return Undefined.INTEGER;
 	}
 
 }

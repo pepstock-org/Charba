@@ -54,7 +54,7 @@ import org.pepstock.charba.client.items.DatasetElementOptions;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -535,10 +535,10 @@ final class HtmlLegendGenerator {
 		// item index set to 0 for dataset index locator
 		int itemIndex = 0;
 		// based on the legend item location
-		if (item.getDatasetIndex() != UndefinedValues.INTEGER) {
+		if (item.getDatasetIndex() != Undefined.INTEGER) {
 			// retrieves the dataset set item by dataset index
 			datasetItem = chart.getDatasetItem(item.getDatasetIndex());
-		} else if (item.getIndex() != UndefinedValues.INTEGER) {
+		} else if (item.getIndex() != Undefined.INTEGER) {
 			// if here is looking for data index then it uses
 			// the first dataset
 			datasetItem = chart.getDatasetItem(0);

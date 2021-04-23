@@ -92,7 +92,7 @@ public final class PluginEventArgument extends NativeObjectContainer {
 	 * @return <code>true</code> if this event is replayed from {@link IsChart#update()}
 	 */
 	public boolean isReplay() {
-		return getValue(Property.REPLAY, UndefinedValues.BOOLEAN);
+		return getValue(Property.REPLAY, Undefined.BOOLEAN);
 	}
 
 }

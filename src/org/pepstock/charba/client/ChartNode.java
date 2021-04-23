@@ -23,7 +23,7 @@ import org.pepstock.charba.client.items.OptionsNode;
 import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.TitleNode;
 import org.pepstock.charba.client.items.TooltipNode;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.JSON;
 
 /**
@@ -141,7 +141,7 @@ public final class ChartNode {
 	 * @return the CHART JS chart ID.
 	 */
 	public int getId() {
-		return initialized ? check(chart.getId(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
+		return initialized ? check(chart.getId(), Undefined.INTEGER) : Undefined.INTEGER;
 	}
 
 	/**
@@ -150,7 +150,7 @@ public final class ChartNode {
 	 * @return the width in pixel.
 	 */
 	public int getWidth() {
-		return initialized ? check(chart.getWidth(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
+		return initialized ? check(chart.getWidth(), Undefined.INTEGER) : Undefined.INTEGER;
 	}
 
 	/**
@@ -159,7 +159,7 @@ public final class ChartNode {
 	 * @return the height in pixel.
 	 */
 	public int getHeight() {
-		return initialized ? check(chart.getHeight(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
+		return initialized ? check(chart.getHeight(), Undefined.INTEGER) : Undefined.INTEGER;
 	}
 
 	/**
@@ -168,7 +168,7 @@ public final class ChartNode {
 	 * @return the aspect ratio.
 	 */
 	public double getAspectRatio() {
-		return initialized ? check(chart.getAspectRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
+		return initialized ? check(chart.getAspectRatio(), Undefined.DOUBLE) : Undefined.DOUBLE;
 	}
 
 	/**
@@ -177,7 +177,7 @@ public final class ChartNode {
 	 * @return the current device pixel ratio.
 	 */
 	public double getCurrentDevicePixelRatio() {
-		return initialized ? check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
+		return initialized ? check(chart.getCurrentDevicePixelRatio(), Undefined.DOUBLE) : Undefined.DOUBLE;
 	}
 
 	/**

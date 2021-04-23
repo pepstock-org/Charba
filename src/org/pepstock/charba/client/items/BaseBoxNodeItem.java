@@ -83,7 +83,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return <code>true</code> if the element is active.
 	 */
 	public final boolean isActive() {
-		return getValue(Property.ACTIVE, UndefinedValues.BOOLEAN);
+		return getValue(Property.ACTIVE, Undefined.BOOLEAN);
 	}
 
 	/**
@@ -92,7 +92,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return <code>true</code> if marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
 	public final boolean isFullSize() {
-		return getValue(Property.FULL_SIZE, UndefinedValues.BOOLEAN);
+		return getValue(Property.FULL_SIZE, Undefined.BOOLEAN);
 	}
 
 	/**
@@ -110,7 +110,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the weight.
 	 */
 	public final double getWeight() {
-		return getValue(Property.WEIGHT, UndefinedValues.DOUBLE);
+		return getValue(Property.WEIGHT, Undefined.DOUBLE);
 	}
 
 	/**
@@ -119,7 +119,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the max width in pixel.
 	 */
 	public final double getMaxWidth() {
-		return getValue(Property.MAX_WIDTH, UndefinedValues.DOUBLE);
+		return getValue(Property.MAX_WIDTH, Undefined.DOUBLE);
 	}
 
 	/**
@@ -128,7 +128,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the max height in pixel.
 	 */
 	public final double getMaxHeight() {
-		return getValue(Property.MAX_HEIGHT, UndefinedValues.DOUBLE);
+		return getValue(Property.MAX_HEIGHT, Undefined.DOUBLE);
 	}
 
 	/**
@@ -137,7 +137,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the padding top in pixel.
 	 */
 	public final int getPaddingTop() {
-		return getValue(Property.PADDING_TOP, UndefinedValues.INTEGER);
+		return getValue(Property.PADDING_TOP, Undefined.INTEGER);
 	}
 
 	/**
@@ -146,7 +146,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the padding right in pixel.
 	 */
 	public final int getPaddingRight() {
-		return getValue(Property.PADDING_RIGHT, UndefinedValues.INTEGER);
+		return getValue(Property.PADDING_RIGHT, Undefined.INTEGER);
 	}
 
 	/**
@@ -155,7 +155,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the padding bottom in pixel.
 	 */
 	public final int getPaddingBottom() {
-		return getValue(Property.PADDING_BOTTOM, UndefinedValues.INTEGER);
+		return getValue(Property.PADDING_BOTTOM, Undefined.INTEGER);
 	}
 
 	/**
@@ -164,7 +164,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the padding left in pixel.
 	 */
 	public final int getPaddingLeft() {
-		return getValue(Property.PADDING_LEFT, UndefinedValues.INTEGER);
+		return getValue(Property.PADDING_LEFT, Undefined.INTEGER);
 	}
 
 }

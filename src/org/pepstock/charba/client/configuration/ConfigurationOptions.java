@@ -56,7 +56,7 @@ import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.SizeItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.ExtendedScale;
 
@@ -909,7 +909,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 				final int charbaIdOfScale = scaleItem.getCharbaId();
 				// checks if undefined
 				// means no axis configured in the chart
-				if (charbaIdOfScale != UndefinedValues.INTEGER) {
+				if (charbaIdOfScale != Undefined.INTEGER) {
 					// gets the axis by charba id
 					axis = getAxisById(charbaIdOfScale);
 				}

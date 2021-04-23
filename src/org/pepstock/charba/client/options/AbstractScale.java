@@ -29,7 +29,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Bounds;
 import org.pepstock.charba.client.enums.Display;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Scales are an integral part of a chart.<br>
@@ -508,13 +508,13 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * 
 	 * @param property CHART.JS property to store the index
 	 * @param charbaProperty CHARBA property to store the index
-	 * @return the index stored or {@link UndefinedValues#INTEGER} if the 2 properties contain 2 different values.
+	 * @return the index stored or {@link Undefined#INTEGER} if the 2 properties contain 2 different values.
 	 */
 	private int getIndex(Property property, Property charbaProperty) {
 		// gets charba index
-		int charbaIndex = getValue(charbaProperty, UndefinedValues.INTEGER);
+		int charbaIndex = getValue(charbaProperty, Undefined.INTEGER);
 		// gets value
-		int index = getValue(property, UndefinedValues.INTEGER);
+		int index = getValue(property, Undefined.INTEGER);
 		// checks if the 2 values are the same
 		if (charbaIndex == index) {
 			// equals then returns the index
@@ -523,7 +523,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		// if here the charba index is not
 		// equals to the index stored in the value
 		// that means that the value has been changed by another method
-		return UndefinedValues.INTEGER;
+		return Undefined.INTEGER;
 	}
 
 	/**

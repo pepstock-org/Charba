@@ -18,7 +18,7 @@ package org.pepstock.charba.client.positioner;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * This object is wrapping the native java script object provided by tooltip positioner to know the position of the event in canvas coordinates.
@@ -89,7 +89,7 @@ public final class Point extends NativeObjectContainer {
 	 * @return the X coordinate of the point.
 	 */
 	public double getX() {
-		return getValue(Property.X, UndefinedValues.DOUBLE);
+		return getValue(Property.X, Undefined.DOUBLE);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public final class Point extends NativeObjectContainer {
 	 * @return the Y coordinate of the point.
 	 */
 	public double getY() {
-		return getValue(Property.Y, UndefinedValues.DOUBLE);
+		return getValue(Property.Y, Undefined.DOUBLE);
 	}
 
 	/**

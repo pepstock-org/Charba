@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Maps the additional space to apply to the sides of elements (left, top, right, bottom), in pixels.
@@ -73,7 +73,7 @@ public final class Padding extends AbstractNode implements IsPadding {
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 * @param originalPadding if the padding is stored in the parent object as number (CHART.JS uses this configuration), the parent provides the values or
-	 *            {@link UndefinedValues#INTEGER}.
+	 *            {@link Undefined#INTEGER}.
 	 */
 	Padding(AbstractNode parent, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject, int originalPadding) {
 		super(parent, childKey, nativeObject);
@@ -82,7 +82,7 @@ public final class Padding extends AbstractNode implements IsPadding {
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
 		// checks if the padding was stored as number
 		// this could happen in the default of chart.js
-		if (originalPadding != UndefinedValues.INTEGER) {
+		if (originalPadding != Undefined.INTEGER) {
 			// stores the values to all dimensions
 			set(originalPadding);
 		} else if (nativeObject != null) {
@@ -91,14 +91,14 @@ public final class Padding extends AbstractNode implements IsPadding {
 			// normalizes for X
 			if (has(Property.X)) {
 				// stores in left and right
-				setX(getValue(Property.X, UndefinedValues.INTEGER));
+				setX(getValue(Property.X, Undefined.INTEGER));
 				// removes X property
 				remove(Property.X);
 			}
 			// normalizes for Y
 			if (has(Property.Y)) {
 				// stores in top and bottom
-				setX(getValue(Property.Y, UndefinedValues.INTEGER));
+				setX(getValue(Property.Y, Undefined.INTEGER));
 				// removes Y property
 				remove(Property.Y);
 			}
@@ -201,7 +201,7 @@ public final class Padding extends AbstractNode implements IsPadding {
 	 */
 	private void setDefaultPadding(Key key, int padding) {
 		// checks if values is consistent
-		if (padding != UndefinedValues.INTEGER) {
+		if (padding != Undefined.INTEGER) {
 			setValue(key, padding);
 		}
 	}

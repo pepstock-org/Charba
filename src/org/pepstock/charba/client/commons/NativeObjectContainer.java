@@ -26,7 +26,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.utils.JSON;
 
@@ -543,7 +543,7 @@ public abstract class NativeObjectContainer {
 		// checks if property type
 		if (ObjectType.NUMBER.equals(type)) {
 			// gets descriptor
-			double value = NativeObjectUtils.getDoubleProperty(nativeObject, key.value(), UndefinedValues.DOUBLE);
+			double value = NativeObjectUtils.getDoubleProperty(nativeObject, key.value(), Undefined.DOUBLE);
 			// checks if value is consistent
 			if (!Double.isNaN(value) && value > 0D) {
 				// creates and returns a date
@@ -1139,7 +1139,7 @@ public abstract class NativeObjectContainer {
 		} else {
 			// if here, the default not consistent
 			// gets the key by value by null as default
-			return Key.getKeyByValue(enumValues, getValue(key, UndefinedValues.STRING));
+			return Key.getKeyByValue(enumValues, getValue(key, Undefined.STRING));
 		}
 	}
 

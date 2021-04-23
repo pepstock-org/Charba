@@ -32,7 +32,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.TooltipItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * CHART.JS entity object to configure the data options of a chart.<br>
@@ -448,9 +448,9 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		if (legendItem != null) {
 			// checks if data set index is the locator
 			// and the index is less than size of data sets
-			if (legendItem.getDatasetIndex() != UndefinedValues.INTEGER && currentDatasets.size() > legendItem.getDatasetIndex()) {
+			if (legendItem.getDatasetIndex() != Undefined.INTEGER && currentDatasets.size() > legendItem.getDatasetIndex()) {
 				return getDatasets().get(legendItem.getDatasetIndex());
-			} else if (legendItem.getIndex() != UndefinedValues.INTEGER && !currentDatasets.isEmpty()) {
+			} else if (legendItem.getIndex() != Undefined.INTEGER && !currentDatasets.isEmpty()) {
 				// if here is looking for data index then it uses
 				// the first data set
 				return getDatasets().get(0);
@@ -471,7 +471,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// checks if tooltip item is consistent
 		// and if data set index is the locator
 		// and the data set index is less than size of data sets
-		if (tooltipItem != null && tooltipItem.getDatasetIndex() != UndefinedValues.INTEGER && currentDatasets.size() > tooltipItem.getDatasetIndex()) {
+		if (tooltipItem != null && tooltipItem.getDatasetIndex() != Undefined.INTEGER && currentDatasets.size() > tooltipItem.getDatasetIndex()) {
 			return getDatasets().get(tooltipItem.getDatasetIndex());
 		}
 		// if here, tooltip item is not consistent
@@ -489,7 +489,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// checks if scriptable context is consistent
 		// and if data set index is the locator
 		// and the data set index is less than size of data sets
-		if (context != null && context.getDatasetIndex() != UndefinedValues.INTEGER && currentDatasets.size() > context.getDatasetIndex()) {
+		if (context != null && context.getDatasetIndex() != Undefined.INTEGER && currentDatasets.size() > context.getDatasetIndex()) {
 			return getDatasets().get(context.getDatasetIndex());
 		}
 		// if here, tooltip item is not consistent
@@ -549,10 +549,10 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 			// gets all list of canvas object
 			List<T> objects = container.getObjects(property);
 			// the legend item is set by data set index
-			if (legendItem.getDatasetIndex() != UndefinedValues.INTEGER && !objects.isEmpty()) {
+			if (legendItem.getDatasetIndex() != Undefined.INTEGER && !objects.isEmpty()) {
 				// return the first item
 				return objects.get(0);
-			} else if (legendItem.getIndex() != UndefinedValues.INTEGER && objects.size() > legendItem.getIndex()) {
+			} else if (legendItem.getIndex() != Undefined.INTEGER && objects.size() > legendItem.getIndex()) {
 				// if here is looking for data index
 				return objects.get(legendItem.getIndex());
 			}

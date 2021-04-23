@@ -19,7 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.LegendLabelItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Object used to invoke {@link TilesFactory} in order to get the {@link PointStyle} representation for legend.<br>
@@ -129,6 +129,6 @@ public final class HtmlLegendItem {
 			return builder.toString();
 		}
 		// if here, legend item non consistent
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 }

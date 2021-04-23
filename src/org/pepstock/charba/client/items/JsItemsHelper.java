@@ -98,7 +98,7 @@ final class JsItemsHelper {
 			return NativeJsItemsHelper.getDecimalForPixel(scale.nativeObject(), pixel);
 		}
 		// if here, scale item not consistent
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -115,7 +115,7 @@ final class JsItemsHelper {
 			return NativeJsItemsHelper.getPixelForDecimal(scale.nativeObject(), decimal);
 		}
 		// if here, scale item not consistent
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -132,7 +132,7 @@ final class JsItemsHelper {
 			return NativeJsItemsHelper.getPixelForTick(scale.nativeObject(), index);
 		}
 		// if here, scale item not consistent
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -165,7 +165,7 @@ final class JsItemsHelper {
 			return NativeJsItemsHelper.getPixelForStringValue(scale.nativeObject(), value, index);
 		}
 		// if here, scale item not consistent
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -184,7 +184,7 @@ final class JsItemsHelper {
 			return NativeJsItemsHelper.getPixelForValue(scale.nativeObject(), value, index);
 		}
 		// if here, scale item not consistent
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -202,7 +202,7 @@ final class JsItemsHelper {
 			return NativeJsItemsHelper.getValueForPixel(scale.nativeObject(), pixel);
 		}
 		// if here, scale item not consistent
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -217,7 +217,7 @@ final class JsItemsHelper {
 			return NativeJsItemsHelper.getBaseValue(scale.nativeObject());
 		}
 		// if here, scale item not consistent
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -233,7 +233,7 @@ final class JsItemsHelper {
 			return NativeJsItemsHelper.getBasePixel(scale.nativeObject());
 		}
 		// if here, scale item not consistent
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**

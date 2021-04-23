@@ -65,21 +65,21 @@ public final class DataItem {
 			this.dataType = DataType.NUMBERS;
 		} else if (ObjectType.ARRAY.equals(type)) {
 			// sets floating data, getting the array double and set nan to value
-			this.value = UndefinedValues.DOUBLE;
+			this.value = Undefined.DOUBLE;
 			this.valueAsFloatingData = BarDataset.FLOATING_BAR_DATA_FACTORY.create((ArrayDouble) object);
 			this.valueAsString = valueAsFloatingData.toString();
 			this.valueAsPoint = null;
 			this.dataType = DataType.ARRAYS;
 		} else if (ObjectType.STRING.equals(type)) {
 			// uses the to string method of object and nan and null for other values
-			this.value = UndefinedValues.DOUBLE;
+			this.value = Undefined.DOUBLE;
 			this.valueAsFloatingData = null;
 			this.valueAsString = object.toString();
 			this.valueAsPoint = null;
 			this.dataType = DataType.STRINGS;
 		} else if (ObjectType.OBJECT.equals(type)) {
 			// uses the to string method of object and nan and null for other values
-			this.value = UndefinedValues.DOUBLE;
+			this.value = Undefined.DOUBLE;
 			this.valueAsFloatingData = null;
 			this.valueAsString = JSON.stringify(object, 3);
 			this.valueAsPoint = new DataPoint(new ItemsEnvelop<>((NativeObject)object));
@@ -87,7 +87,7 @@ public final class DataItem {
 		} else {
 			// if here is not a recognized object
 			// for data, then set NaN and null.
-			this.value = UndefinedValues.DOUBLE;
+			this.value = Undefined.DOUBLE;
 			this.valueAsFloatingData = null;
 			this.valueAsString = Constants.NULL_STRING;
 			this.valueAsPoint = null;
@@ -105,9 +105,9 @@ public final class DataItem {
 	}
 
 	/**
-	 * Returns the value for the data set if it is or {@link UndefinedValues#DOUBLE}.
+	 * Returns the value for the data set if it is or {@link Undefined#DOUBLE}.
 	 * 
-	 * @return the value for the data set if it is or {@link UndefinedValues#DOUBLE}
+	 * @return the value for the data set if it is or {@link Undefined#DOUBLE}
 	 */
 	public double getValue() {
 		return value;
@@ -123,9 +123,9 @@ public final class DataItem {
 	}
 
 	/**
-	 * Returns the value for the data set as string if it is or {@link UndefinedValues#STRING}.
+	 * Returns the value for the data set as string if it is or {@link Undefined#STRING}.
 	 * 
-	 * @return the value for the data set as string if it is or {@link UndefinedValues#STRING}.
+	 * @return the value for the data set as string if it is or {@link Undefined#STRING}.
 	 */
 	public String getValueAsString() {
 		return valueAsString;

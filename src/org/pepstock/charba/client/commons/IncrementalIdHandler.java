@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * IMternal utility to manage an incremental object id, stored in the {@link NativeObject} in a specific property of Charba.
@@ -124,7 +124,7 @@ final class IncrementalIdHandler {
 		// checks if the property exists
 		Checker.assertCheck(container.has(Property.CHARBA_INTERNAL_INTERNAL_ID),"The incremental id has not been stored. Invoke 'checkAndSetId' before calling 'getId'");
 		// returns value
-		return container.getValue(Property.CHARBA_INTERNAL_INTERNAL_ID, UndefinedValues.STRING);
+		return container.getValue(Property.CHARBA_INTERNAL_INTERNAL_ID, Undefined.STRING);
 	}
 
 	/**

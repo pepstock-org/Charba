@@ -124,7 +124,7 @@ public class LegendItem extends NativeObjectContainer {
 		// checks if chart is consistent
 		if (IsChart.isValid(chart)) {
 			// gets if is hidden depending on dataset or data index
-			return getDatasetIndex() != UndefinedValues.INTEGER ? !chart.isDatasetVisible(getDatasetIndex()) : !chart.isDataVisible(getIndex());
+			return getDatasetIndex() != Undefined.INTEGER ? !chart.isDatasetVisible(getDatasetIndex()) : !chart.isDataVisible(getIndex());
 		}
 		// if here, chart is not consistent
 		// returns always false
@@ -146,7 +146,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the dataset index of the chart.
 	 */
 	public final int getDatasetIndex() {
-		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
+		return getValue(Property.DATASET_INDEX, Undefined.INTEGER);
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the dataset index of the chart (for POLAR and PIE charts).
 	 */
 	public final int getIndex() {
-		return getValue(Property.INDEX, UndefinedValues.INTEGER);
+		return getValue(Property.INDEX, Undefined.INTEGER);
 	}
 
 	/**
@@ -164,7 +164,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the label that will be displayed.
 	 */
 	public final String getText() {
-		return getValue(Property.TEXT, UndefinedValues.STRING);
+		return getValue(Property.TEXT, Undefined.STRING);
 	}
 
 	/**
@@ -440,10 +440,10 @@ public class LegendItem extends NativeObjectContainer {
 	public final Img getPointStyleAsImage() {
 		// checks if is an point style and not an image
 		if (isPointStyleAsImage()) {
-			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
+			return getValue(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
 		}
 		// returns null because is a string
-		return UndefinedValues.IMAGE_ELEMENT;
+		return Undefined.IMAGE_ELEMENT;
 	}
 
 	/**

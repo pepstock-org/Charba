@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.RegExp;
 import org.pepstock.charba.client.utils.RegExpResult;
 
@@ -322,7 +322,7 @@ public final class CLocaleBuilder {
 		 * @return the language
 		 */
 		private Language getLanguage() {
-			return Language.getByCode(getValue(Property.LANGUAGE, UndefinedValues.STRING));
+			return Language.getByCode(getValue(Property.LANGUAGE, Undefined.STRING));
 		}
 
 		/**
@@ -349,7 +349,7 @@ public final class CLocaleBuilder {
 		 * @return the variant and extension part of locale
 		 */
 		private String getVariantAndExtension() {
-			return getValue(Property.VARIANT_AND_EXTENSION, UndefinedValues.STRING);
+			return getValue(Property.VARIANT_AND_EXTENSION, Undefined.STRING);
 		}
 
 		/**
@@ -359,16 +359,16 @@ public final class CLocaleBuilder {
 		 */
 		private boolean isConsistent() {
 			// checks if the mandatory language property is there
-			if (!isType(Property.LANGUAGE, ObjectType.STRING) || Language.getByCode(getValue(Property.LANGUAGE, UndefinedValues.STRING)) == null) {
+			if (!isType(Property.LANGUAGE, ObjectType.STRING) || Language.getByCode(getValue(Property.LANGUAGE, Undefined.STRING)) == null) {
 				return false;
 			}
 			// checks region, if exists it must be a recognized region
-			if (isType(Property.REGION, ObjectType.STRING) && !Key.hasKeyByValue(Region.values(), getValue(Property.REGION, UndefinedValues.STRING))) {
+			if (isType(Property.REGION, ObjectType.STRING) && !Key.hasKeyByValue(Region.values(), getValue(Property.REGION, Undefined.STRING))) {
 				return false;
 			}
 			// checks script, if exists it must be a recognized script
 			// it's the last check that is true is true all method
-			return !(isType(Property.SCRIPT, ObjectType.STRING) && !Key.hasKeyByValue(Script.values(), getValue(Property.SCRIPT, UndefinedValues.STRING)));
+			return !(isType(Property.SCRIPT, ObjectType.STRING) && !Key.hasKeyByValue(Script.values(), getValue(Property.SCRIPT, Undefined.STRING)));
 		}
 
 	}

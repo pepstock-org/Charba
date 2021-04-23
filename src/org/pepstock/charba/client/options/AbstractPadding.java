@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Base class to map the padding properties of an element.
@@ -80,7 +80,7 @@ public abstract class AbstractPadding extends NativeObjectContainer implements I
 	protected AbstractPadding(IsDefaultPadding defaultValues, NativeObject nativeObject) {
 		super(nativeObject);
 		// creates a font to wrap
-		this.padding = new Padding(null, Property.PADDING, defaultValues, getNativeObject(), UndefinedValues.INTEGER);
+		this.padding = new Padding(null, Property.PADDING, defaultValues, getNativeObject(), Undefined.INTEGER);
 	}
 	
 	/**

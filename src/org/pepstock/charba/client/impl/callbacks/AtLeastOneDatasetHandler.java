@@ -24,7 +24,7 @@ import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendClickEventHandler;
 import org.pepstock.charba.client.items.DatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Implementation of legend click handler which disable the capability to hide the last visible dataset.<br>
@@ -46,7 +46,7 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 			// get the chart instance form event
 			IsChart chart = event.getChart();
 			// checks if legend is related to a dataset or index
-			if (event.getItem().getDatasetIndex() != UndefinedValues.INTEGER) {
+			if (event.getItem().getDatasetIndex() != Undefined.INTEGER) {
 				// if the dataset is already hidden
 				// checks if there is ONLY 1 visible dataset
 				if (chart.isDatasetVisible(event.getItem().getDatasetIndex()) && !checkByDatasetIndex(chart, event.getItem().getDatasetIndex())) {
@@ -54,7 +54,7 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 				}
 				// invokes default click callbacks
 				Defaults.get().invokeLegendOnClick(event);
-			} else if (event.getItem().getIndex() != UndefinedValues.INTEGER) {
+			} else if (event.getItem().getIndex() != Undefined.INTEGER) {
 				// if the data is already hidden
 				// checks if there is ONLY 1 visible data
 				if (chart.isDataVisible(event.getItem().getIndex()) && !checkByIndex(chart, event.getItem().getIndex())) {

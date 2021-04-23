@@ -17,7 +17,7 @@ package org.pepstock.charba.client.zoom;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * {@link ZoomPlugin#ID} plugin default options interface for RANGE (min and max) elements.<br>
@@ -34,7 +34,7 @@ interface IsDefaultRange {
 	 * @return the X value of range as string
 	 */
 	default String getX() {
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -43,7 +43,7 @@ interface IsDefaultRange {
 	 * @return the X value of range as double
 	 */
 	default double getXAsDouble() {
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -61,7 +61,7 @@ interface IsDefaultRange {
 	 * @return the Y value of range as double
 	 */
 	default double getY() {
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -70,7 +70,7 @@ interface IsDefaultRange {
 	 * @return the Y value of range as string
 	 */
 	default String getYAsString() {
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**

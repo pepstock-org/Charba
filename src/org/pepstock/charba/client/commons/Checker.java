@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -78,20 +78,161 @@ public final class Checker {
 			throw new IllegalArgumentException(what == null ? ASSERT_EXCEPTION_MESSAGE : what);
 		}
 	}
-
+	
 	// -----------------
-	// INTEGER
+	// INTEGER setter
 	// -----------------
 
 	/**
-	 * Returns <code>true</code> if the value is not undefined.
+	 * Checks if the value is a positive number and returns it. If not a positive number, returns 0.
 	 * 
 	 * @param value value to be checked
-	 * @return <code>true</code> if the value is not undefined
+	 * @return the value passed as argument if is a positive number or 0.
 	 */
-	public static boolean isValid(int value) {
-		return value != UndefinedValues.INTEGER;
+	public static int positiveOrZero(int value) {
+		return positiveOrDefault(value, 0);
 	}
+
+	/**
+	 * Checks if the value is a positive number and returns it. If not a positive number, returns the default.
+	 * 
+	 * @param value value to be checked
+	 * @param defaultValue value to return if the value is not a positive number
+	 * @return the value passed as argument if is a positive number or the default.
+	 */
+	public static int positiveOrDefault(int value, int defaultValue) {
+		return isPositive(value) ? value : defaultValue;
+	}
+	
+	/**
+	 * Checks if the value is a negative number and returns it. If not a negative number, returns 0.
+	 * 
+	 * @param value value to be checked
+	 * @return the value passed as argument if is a negative number or 0.
+	 */
+	public static int negativeOrZero(int value) {
+		return isNegative(value) ? value : 0;
+	}
+	
+	/**
+	 * Checks if the value is a negative number and returns it. If not a negative number, returns the default.
+	 * 
+	 * @param value value to be checked
+	 * @param defaultValue value to return if the value is not a negative number
+	 * @return the value passed as argument if is a negative number or the default.
+	 */
+	public static int negativeOrDefault(int value, int defaultValue) {
+		return isNegative(value) ? value : defaultValue;
+	}
+	
+	/**
+	 * Checks if the value is greater than  number and returns it. If not greater than, returns 0.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @return the value passed as argument if is greater than the number or 0.
+	 */
+	public static int greaterThanOrZero(int value, int threshold) {
+		return greaterThanOrDefault(value, threshold, 0);
+	}
+
+	/**
+	 * Checks if the value is greater than  number and returns it. If not greater than, returns the threshold.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @return the value passed as argument if is greater than the number or the threshold.
+	 */
+	public static int greaterThanOrThreshold(int value, int threshold) {
+		return greaterThanOrDefault(value, threshold, threshold);
+	}
+
+	/**
+	 * Checks if the value is greater than number and returns it. If not greater than, returns the default.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @param defaultValue value to return if the value is not greater than the number
+	 * @return the value passed as argument if is greater than the number or the default.
+	 */
+	public static int greaterThanOrDefault(int value, int threshold, int defaultValue) {
+		return isGreaterThan(value, threshold) ? value : defaultValue;
+	}
+	
+	/**
+	 * Checks if the value is less than  number and returns it. If not less than, returns 0.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @return the value passed as argument if is less than the number or 0.
+	 */
+	public static int lessThanOrZero(int value, int threshold) {
+		return lessThanOrDefault(value, threshold, 0);
+	}
+
+	/**
+	 * Checks if the value is less than  number and returns it. If not less than, returns the threshold.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @return the value passed as argument if is less than the number or the threshold.
+	 */
+	public static int lessThanOrThreshold(int value, int threshold) {
+		return lessThanOrDefault(value, threshold, threshold);
+	}
+
+	/**
+	 * Checks if the value is less than number and returns it. If not less than, returns the default.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @param defaultValue value to return if the value is not less than the number
+	 * @return the value passed as argument if is less than the number or the default.
+	 */
+	public static int lessThanOrDefault(int value, int threshold, int defaultValue) {
+		return isLessThan(value, threshold) ? value : defaultValue;
+	}
+	
+	/**
+	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the maximum.
+	 *  
+	 * @param value value to be checked
+	 * @param minimum minimum limit to compare to the value
+	 * @param maximum maximum limit to compare to the value
+	 * @return the value passed as argument if is between minimum and maximum passed values or the maximum.
+	 */
+	public static int betweenOrMaximum(int value, int minimum, int maximum) {
+		return isBetween(value, minimum, maximum) ? value : maximum;
+	}
+	
+	/**
+	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the minimum.
+	 *  
+	 * @param value value to be checked
+	 * @param minimum minimum limit to compare to the value
+	 * @param maximum maximum limit to compare to the value
+	 * @return the value passed as argument if is between minimum and maximum passed values or the minimum.
+	 */
+	public static int betweenOrMinimum(int value, int minimum, int maximum) {
+		return isBetween(value, minimum, maximum) ? value : minimum;
+	}
+	
+	/**
+	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the default.
+	 *  
+	 * @param value value to be checked
+	 * @param minimum minimum limit to compare to the value
+	 * @param maximum maximum limit to compare to the value
+	 * @param defaultValue value to return if the value is not between minimum and maximum
+	 * @return the value passed as argument if is between minimum and maximum passed values or the default.
+	 */
+	public static int betweenOrDefault(int value, int minimum, int maximum, int defaultValue) {
+		return isBetween(value, minimum, maximum) ? value : defaultValue;
+	}
+	
+	// -----------------
+	// INTEGER
+	// -----------------
 
 	/**
 	 * Checks if value passed as argument is valid.<br>
@@ -101,7 +242,7 @@ public final class Checker {
 	 * @param what name of the value to put in the exception message
 	 */
 	public static void checkIfValid(int value, String what) {
-		if (!isValid(value)) {
+		if (!Undefined.is(value)) {
 			throwIllegalArgumentException(UNDEFINED_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
 	}
@@ -324,7 +465,7 @@ public final class Checker {
 	 * @param value value to be checked
 	 * @param minimum minimum limit to compare to the value
 	 * @param maximum maximum limit to compare to the value
-	 * @return <code>true</code> if the value passed as argument is between minimum and maximum values, passed as argument (inclusive
+	 * @return <code>true</code> if the value passed as argument is between minimum and maximum values, passed as argument (inclusive)
 	 */
 	public static boolean isBetween(int value, int minimum, int maximum) {
 		return value >= minimum && value <= maximum;
@@ -365,16 +506,6 @@ public final class Checker {
 	// -----------------
 
 	/**
-	 * Returns <code>true</code> if the value is not undefined.
-	 * 
-	 * @param value value to be checked
-	 * @return <code>true</code> if the value is not undefined
-	 */
-	public static boolean isValid(double value) {
-		return !Double.isNaN(value) && !Double.isInfinite(value);
-	}
-
-	/**
 	 * Checks if value passed as argument is valid.<br>
 	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
@@ -382,7 +513,7 @@ public final class Checker {
 	 * @param what name of the value to put in the exception message
 	 */
 	public static void checkIfValid(double value, String what) {
-		if (!isValid(value)) {
+		if (!Undefined.is(value)) {
 			throwIllegalArgumentException(UNDEFINED_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
 	}
@@ -407,7 +538,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is positive number (zero is included)
 	 */
 	public static boolean isPositive(double value) {
-		return isValid(value) && value >= 0;
+		return Undefined.is(value) && value >= 0;
 	}
 
 	/**
@@ -443,7 +574,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is positive number (zero is excluded)
 	 */
 	public static boolean isNegative(double value) {
-		return isValid(value) && value < 0;
+		return Undefined.is(value) && value < 0;
 	}
 
 	/**
@@ -480,7 +611,7 @@ public final class Checker {
 	 * @return <code>true</code> if the arguments are not equals
 	 */
 	public static boolean isNotEqualTo(double value, double target) {
-		return isValid(value) && isValid(target) && Double.compare(value, target) != 0;
+		return Undefined.is(value) && Undefined.is(target) && Double.compare(value, target) != 0;
 	}
 
 	/**
@@ -505,7 +636,7 @@ public final class Checker {
 	 * @return <code>true</code> if the arguments are equals
 	 */
 	public static boolean isEqualTo(double value, double target) {
-		return isValid(value) && isValid(target) && Double.compare(value, target) == 0;
+		return Undefined.is(value) && Undefined.is(target) && Double.compare(value, target) == 0;
 	}
 
 	/**
@@ -530,7 +661,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is greater than the threshold (inclusive)
 	 */
 	public static boolean isGreaterThan(double value, double threshold) {
-		return isValid(value) && isValid(threshold) && value >= threshold;
+		return Undefined.is(value) && Undefined.is(threshold) && value >= threshold;
 	}
 
 	/**
@@ -569,7 +700,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is less than the threshold (inclusive)
 	 */
 	public static boolean isLessThan(double value, double threshold) {
-		return isValid(value) && isValid(threshold) && value <= threshold;
+		return Undefined.is(value) && Undefined.is(threshold) && value <= threshold;
 	}
 
 	/**
@@ -609,7 +740,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value passed as argument is between minimum and maximum values, passed as argument (inclusive
 	 */
 	public static boolean isBetween(double value, double minimum, double maximum) {
-		return isValid(value) && isValid(minimum) && isValid(maximum) && value >= minimum && value <= maximum;
+		return Undefined.is(value) && Undefined.is(minimum) && Undefined.is(maximum) && value >= minimum && value <= maximum;
 	}
 
 	/**
@@ -647,16 +778,6 @@ public final class Checker {
 	// -----------------
 
 	/**
-	 * Returns <code>true</code> if the value is not undefined.
-	 * 
-	 * @param value value to be checked
-	 * @return <code>true</code> if the value is not undefined
-	 */
-	public static boolean isValid(Object value) {
-		return value != null;
-	}
-
-	/**
 	 * Checks if value passed as argument is valid.<br>
 	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
@@ -664,7 +785,7 @@ public final class Checker {
 	 * @param what name of the value to put in the exception message
 	 */
 	public static void checkIfValid(Object value, String what) {
-		if (!isValid(value)) {
+		if (!Undefined.is(value)) {
 			throwIllegalArgumentException(UNDEFINED_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
 	}

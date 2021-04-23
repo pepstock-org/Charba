@@ -22,7 +22,7 @@ import java.util.List;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Window;
 
 /**
@@ -57,11 +57,11 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final boolean DEFAULT_SPAN_GAPS = false;
 
-	private static final double DEFAULT_CUTOUT = UndefinedValues.DOUBLE;
+	private static final double DEFAULT_CUTOUT = Undefined.DOUBLE;
 
-	private static final String DEFAULT_CUTOUT_PERCENTAGE = UndefinedValues.STRING;
+	private static final String DEFAULT_CUTOUT_PERCENTAGE = Undefined.STRING;
 
-	private static final double DEFAULT_RADIUS = UndefinedValues.DOUBLE;
+	private static final double DEFAULT_RADIUS = Undefined.DOUBLE;
 
 	private static final String DEFAULT_RADIUS_PERCENTAGE = "100%";
 

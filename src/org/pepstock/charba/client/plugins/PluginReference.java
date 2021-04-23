@@ -18,7 +18,7 @@ package org.pepstock.charba.client.plugins;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * This class wraps the native object of plugins registered in the CHART.JS.<br>
@@ -71,10 +71,10 @@ final class PluginReference extends NativeObjectContainer {
 	/**
 	 * Returns the plugin id.
 	 * 
-	 * @return the plugin id if exists or an {@link UndefinedValues#STRING} if missing.
+	 * @return the plugin id if exists or an {@link Undefined#STRING} if missing.
 	 */
 	String getId() {
-		return getValue(Property.ID, UndefinedValues.STRING);
+		return getValue(Property.ID, Undefined.STRING);
 	}
 
 	/**

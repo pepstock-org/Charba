@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.items.ChartAreaNode;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Defines how to clip relative to the chart area.<br>
@@ -237,21 +237,21 @@ public final class Clip extends NativeObjectContainer {
 		}
 		// if here, a number has been stored
 		// then returns the number
-		return getValue(position, UndefinedValues.BOOLEAN);
+		return getValue(position, Undefined.BOOLEAN);
 	}
 
 	/**
-	 * Returns the value of clip for passed position or {@link UndefinedValues#DOUBLE} if is disable.
+	 * Returns the value of clip for passed position or {@link Undefined#DOUBLE} if is disable.
 	 * 
 	 * @param position position to check
-	 * @return the value of clip for passed position or {@link UndefinedValues#DOUBLE} if is disable
+	 * @return the value of clip for passed position or {@link Undefined#DOUBLE} if is disable
 	 */
 	private double getInternalValue(Position position) {
 		// checks if previously was set to a boolean
 		// therefore false
 		if (isType(position, ObjectType.BOOLEAN)) {
 			// if boolean returns NaN
-			return UndefinedValues.DOUBLE;
+			return Undefined.DOUBLE;
 		}
 		// if here, a number has been stored
 		// then returns the number

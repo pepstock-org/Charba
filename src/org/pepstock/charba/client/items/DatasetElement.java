@@ -129,7 +129,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return <code>true</code> if is an horizontal view.
 	 */
 	public final boolean isHorizontal() {
-		return getValue(Property.HORIZONTAL, UndefinedValues.BOOLEAN);
+		return getValue(Property.HORIZONTAL, Undefined.BOOLEAN);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the base value of dataset.
 	 */
 	public final double getBase() {
-		return getValue(Property.BASE, UndefinedValues.DOUBLE);
+		return getValue(Property.BASE, Undefined.DOUBLE);
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the X location of dataset item in pixel.
 	 */
 	public final double getX() {
-		return getValue(Property.X, UndefinedValues.DOUBLE);
+		return getValue(Property.X, Undefined.DOUBLE);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the Y location of dataset item in pixel.
 	 */
 	public final double getY() {
-		return getValue(Property.Y, UndefinedValues.DOUBLE);
+		return getValue(Property.Y, Undefined.DOUBLE);
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the width of dataset item in pixel.
 	 */
 	public final double getWidth() {
-		return getValue(Property.WIDTH, UndefinedValues.DOUBLE);
+		return getValue(Property.WIDTH, Undefined.DOUBLE);
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the height of dataset item in pixel.
 	 */
 	public final double getHeight() {
-		return getValue(Property.HEIGHT, UndefinedValues.DOUBLE);
+		return getValue(Property.HEIGHT, Undefined.DOUBLE);
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return <code>true</code> if skipped.
 	 */
 	public final boolean isSkipped() {
-		return getValue(Property.SKIP, UndefinedValues.BOOLEAN);
+		return getValue(Property.SKIP, Undefined.BOOLEAN);
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the previous X control point of data set item in pixel.
 	 */
 	public final double getControlPointPreviousX() {
-		return getValue(Property.CONTROL_POINT_PREVIOUS_X, UndefinedValues.DOUBLE);
+		return getValue(Property.CONTROL_POINT_PREVIOUS_X, Undefined.DOUBLE);
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the previous Y control point of dataset item in pixel.
 	 */
 	public final double getControlPointPreviousY() {
-		return getValue(Property.CONTROL_POINT_PREVIOUS_Y, UndefinedValues.DOUBLE);
+		return getValue(Property.CONTROL_POINT_PREVIOUS_Y, Undefined.DOUBLE);
 	}
 
 	/**
@@ -210,7 +210,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the next X control point of dataset item in pixel.
 	 */
 	public final double getControlPointNextX() {
-		return getValue(Property.CONTROL_POINT_NEXT_X, UndefinedValues.DOUBLE);
+		return getValue(Property.CONTROL_POINT_NEXT_X, Undefined.DOUBLE);
 	}
 
 	/**
@@ -219,7 +219,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the next Y control point of dataset item in pixel.
 	 */
 	public final double getControlPointNextY() {
-		return getValue(Property.CONTROL_POINT_NEXT_Y, UndefinedValues.DOUBLE);
+		return getValue(Property.CONTROL_POINT_NEXT_Y, Undefined.DOUBLE);
 	}
 
 	/**
@@ -228,7 +228,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the angle of dataset item.
 	 */
 	public final double getAngle() {
-		return getValue(Property.ANGLE, UndefinedValues.DOUBLE);
+		return getValue(Property.ANGLE, Undefined.DOUBLE);
 	}
 
 	/**
@@ -237,7 +237,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the start angle of dataset item.
 	 */
 	public final double getStartAngle() {
-		return getValue(Property.START_ANGLE, UndefinedValues.DOUBLE);
+		return getValue(Property.START_ANGLE, Undefined.DOUBLE);
 	}
 
 	/**
@@ -246,7 +246,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the end angle of dataset item.
 	 */
 	public double getEndAngle() {
-		return getValue(Property.END_ANGLE, UndefinedValues.DOUBLE);
+		return getValue(Property.END_ANGLE, Undefined.DOUBLE);
 	}
 
 	/**
@@ -264,7 +264,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the outer radius of dataset item in pixel.
 	 */
 	public double getOuterRadius() {
-		return getValue(Property.OUTER_RADIUS, UndefinedValues.DOUBLE);
+		return getValue(Property.OUTER_RADIUS, Undefined.DOUBLE);
 	}
 
 	/**
@@ -273,7 +273,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @return the inner radius of dataset item in pixel.
 	 */
 	public double getInnerRadius() {
-		return getValue(Property.INNER_RADIUS, UndefinedValues.DOUBLE);
+		return getValue(Property.INNER_RADIUS, Undefined.DOUBLE);
 	}
 
 	/**

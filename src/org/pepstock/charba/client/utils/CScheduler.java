@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.utils;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * This class provides asynchronous and delayed task scheduling, based
@@ -98,7 +98,7 @@ public final class CScheduler {
 		// delegate task to execute
 		private final Runnable task;
 		// timeout id instance
-		private int timeoutID = UndefinedValues.INTEGER;
+		private int timeoutID = Undefined.INTEGER;
 		// flag to store the status
 		// 0: not started, 1: running, 2: ended
 		private Status status = Status.NOT_STARTED;
@@ -152,7 +152,7 @@ public final class CScheduler {
 		 */
 		private void clear() {
 			// checks if timeout id is consistent
-			if (timeoutID != UndefinedValues.INTEGER) {
+			if (timeoutID != Undefined.INTEGER) {
 				// clears the timeout
 				Window.clearTimeout(timeoutID);
 			}

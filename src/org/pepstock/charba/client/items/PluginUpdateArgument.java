@@ -77,7 +77,7 @@ public class PluginUpdateArgument extends NativeObjectContainer {
 	 */
 	public final IsTransitionKey getMode() {
 		// gets string value
-		String mode = getValue(Property.MODE, UndefinedValues.STRING);
+		String mode = getValue(Property.MODE, Undefined.STRING);
 		// returns the update mode is consistent
 		return mode != null ? IsTransitionKey.create(mode) : null;
 	}

@@ -32,7 +32,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.ColorType;
 import org.pepstock.charba.client.impl.plugins.ChartBackgroundColorOptionsFactory.ChartBackgroundColorDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.PluginResizeArgument;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -199,7 +199,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 				applyBackgroundToChartElement(chart, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsPattern()));
 			} else if (ColorType.GRADIENT.equals(bgOptions.getColorType())) {
 				// creates the gradient
-				CanvasGradientItem canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), UndefinedValues.INTEGER, UndefinedValues.INTEGER);
+				CanvasGradientItem canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), Undefined.INTEGER, Undefined.INTEGER);
 				// set fill canvas color
 				ctx.setFillGradient(canvasGradient);
 				// sets back ground to chart HTML element

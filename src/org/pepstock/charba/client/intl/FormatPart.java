@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.intl.enums.FormatPartType;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Result of {@link NumberFormat#formatToParts(double)} which is containing the locale-specific tokens from which it possible to build custom strings while preserving the
@@ -86,7 +86,7 @@ public final class FormatPart extends NativeObjectContainer {
 	 * @return the value of the part
 	 */
 	public final String getValue() {
-		return getValue(Property.VALUE, UndefinedValues.STRING);
+		return getValue(Property.VALUE, Undefined.STRING);
 	}
 
 }

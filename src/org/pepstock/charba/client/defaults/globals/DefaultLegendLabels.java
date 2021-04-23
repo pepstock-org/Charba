@@ -21,7 +21,7 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * CHART.JS default values for LEGENDLABELS element.
@@ -38,7 +38,7 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 
 	private static final boolean DEFAULT_POINT_STYLE_AS_IMG = false;
 
-	private static final Img DEFAULT_POINT_STYLE_IMG = UndefinedValues.IMAGE_ELEMENT;
+	private static final Img DEFAULT_POINT_STYLE_IMG = Undefined.IMAGE_ELEMENT;
 
 	private final DefaultRoutedFont font = new DefaultRoutedFont();
 

@@ -27,7 +27,7 @@ import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.DefaultTransitionKey;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -81,7 +81,7 @@ public class MeterDataset extends Dataset {
 
 	private double value = MINIMUM_VALUE;
 
-	private double valueMaximumRatio = UndefinedValues.DOUBLE;
+	private double valueMaximumRatio = Undefined.DOUBLE;
 
 	/**
 	 * Creates a dataset setting the maximum value of dataset. It uses the global options has default.

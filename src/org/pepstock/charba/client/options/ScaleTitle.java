@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
 import org.pepstock.charba.client.enums.ScaleTitleAlign;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the axis.<br>
@@ -148,7 +148,7 @@ public final class ScaleTitle extends AbstractModel<AbstractScale, IsDefaultScal
 	public List<String> getText() {
 		// reads as array
 		// and returns it
-		ArrayString array = getValueOrArray(Property.TEXT, UndefinedValues.STRING);
+		ArrayString array = getValueOrArray(Property.TEXT, Undefined.STRING);
 		return ArrayListHelper.list(array);
 	}
 

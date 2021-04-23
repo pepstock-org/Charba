@@ -21,7 +21,7 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * CHART.JS default values for LEGEND element.
@@ -38,9 +38,9 @@ public final class DefaultLegend implements IsDefaultLegend {
 
 	private static final boolean DEFAULT_RTL = false;
 
-	private static final int DEFAULT_MAX_WIDTH = UndefinedValues.INTEGER;
+	private static final int DEFAULT_MAX_WIDTH = Undefined.INTEGER;
 
-	private static final int DEFAULT_MAX_HEIGHT = UndefinedValues.INTEGER;
+	private static final int DEFAULT_MAX_HEIGHT = Undefined.INTEGER;
 
 	private final DefaultLegendLabels legendLabels = new DefaultLegendLabels();
 

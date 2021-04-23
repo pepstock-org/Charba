@@ -50,7 +50,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Window;
 
 import jsinterop.annotations.JsFunction;
@@ -264,7 +264,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * @return the id of annotation for caching (internal)
 	 */
 	final int getAnnotationId() {
-		return getValue(Property.CHARBA_ANNOTATION_ID, UndefinedValues.INTEGER);
+		return getValue(Property.CHARBA_ANNOTATION_ID, Undefined.INTEGER);
 	}
 
 	/**
@@ -273,7 +273,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * @return the id of annotation
 	 */
 	public final IsAnnotationId getId() {
-		return IsAnnotationId.create(getValue(Property.ID, UndefinedValues.STRING));
+		return IsAnnotationId.create(getValue(Property.ID, Undefined.STRING));
 	}
 
 	/**

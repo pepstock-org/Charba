@@ -552,6 +552,7 @@ in legend and title options, and `setEnabled` method for tooltips in tooltips op
 #### Breaking changes
  * change `toFont` method to `Utilities` class in order to get the weight of the font.
  * remove `JsWindowHelper` class. Use `Window.enableResizeOnBeforePrint()`.
+ * rename `UndefinedValues` class to `Undefined`.
 
 #### Features
  * add `toFont` method to `Utilities` class in order to get a `Font` object as parameter.

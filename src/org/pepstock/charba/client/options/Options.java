@@ -32,7 +32,7 @@ import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.intl.CLocaleBuilder;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Base object which maps chart options.
@@ -378,7 +378,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the CHARBA id when the options are related to a chart instance.
 	 * 
-	 * @return the CHARBA id when the options are related to a chart instance otherwise {@link UndefinedValues#STRING}.
+	 * @return the CHARBA id when the options are related to a chart instance otherwise {@link Undefined#STRING}.
 	 */
 	public String getCharbaId() {
 		return Id.get(this);
@@ -431,7 +431,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public CLocale getLocale() {
 		// gets value as string
-		String localeIdentifier = getValue(CommonProperty.LOCALE, UndefinedValues.STRING);
+		String localeIdentifier = getValue(CommonProperty.LOCALE, Undefined.STRING);
 		// checks if consistent
 		if (localeIdentifier != null) {
 			return CLocaleBuilder.build(localeIdentifier);

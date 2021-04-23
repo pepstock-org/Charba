@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * It is managing property where can set a callback.<br>
@@ -90,7 +90,7 @@ public class CallbackPropertyHandler<T> {
 			// creates the full scope
 			String fullScope = createScope(container, scope);
 			// gets hash code property if exists
-			String value = container.getValue(hashCodeProperty, UndefinedValues.STRING);
+			String value = container.getValue(hashCodeProperty, Undefined.STRING);
 			// checks if hash code property already exists
 			// because it could be already defined with another callback
 			if (value != null) {
@@ -138,7 +138,7 @@ public class CallbackPropertyHandler<T> {
 		// checks if scope and container are consistent
 		if (container != null && container.has(hashCodeProperty)) {
 			// gets hash code property if exists
-			String value = container.getValue(hashCodeProperty, UndefinedValues.STRING);
+			String value = container.getValue(hashCodeProperty, Undefined.STRING);
 			// gets the wrappers
 			CallbackWrapper<T> wrapper = wrappers.get(value);
 			// checks if wrapper is consistent

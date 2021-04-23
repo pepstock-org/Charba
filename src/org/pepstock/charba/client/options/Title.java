@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Configures the default chart title which defines text to draw at the top of the chart.
@@ -141,7 +141,7 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	public List<String> getText() {
 		// reads as array
 		// and returns it
-		ArrayString array = getValueOrArray(Property.TEXT, UndefinedValues.STRING);
+		ArrayString array = getValueOrArray(Property.TEXT, Undefined.STRING);
 		return ArrayListHelper.list(array);
 	}
 }

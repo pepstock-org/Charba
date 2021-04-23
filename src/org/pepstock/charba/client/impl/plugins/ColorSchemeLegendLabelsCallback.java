@@ -26,7 +26,7 @@ import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.HovingFlexDataset;
 import org.pepstock.charba.client.data.LiningDataset;
 import org.pepstock.charba.client.items.LegendLabelItem;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Custom legend labels callback to change the colors when the a {@link ColorSchemes} plugin has been activated.<br>
@@ -122,12 +122,12 @@ final class ColorSchemeLegendLabelsCallback implements LegendLabelsCallback {
 		// calculates the max border width
 		int borderWidth = ColorSchemesUtil.get().getMaxBorderWidth(hovingFlexDataset);
 		// checks if bubble chart
-		if (item.getDatasetIndex() != UndefinedValues.INTEGER) {
+		if (item.getDatasetIndex() != Undefined.INTEGER) {
 			// sets background colors
 			item.setFillStyle(backgroundColors.get(0));
 			// sets border color
 			item.setStrokeStyle(borderColors.get(0));
-		} else if (item.getIndex() != UndefinedValues.INTEGER) {
+		} else if (item.getIndex() != Undefined.INTEGER) {
 			// sets background colors
 			item.setFillStyle(backgroundColors.get(item.getIndex()));
 			// sets border color

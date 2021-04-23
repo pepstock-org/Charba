@@ -21,7 +21,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -68,7 +68,7 @@ public final class ControllerContext {
 	public final int getIndex() {
 		// checks if there is the property
 		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "index"))) {
-			return UndefinedValues.INTEGER;
+			return Undefined.INTEGER;
 		}
 		return getNativeIndex();
 	}

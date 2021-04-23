@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultDecimation;
 import org.pepstock.charba.client.enums.DecimationAlgorithm;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * CHART.JS default values for DECIMATION plugin element.
@@ -28,7 +28,7 @@ public final class DefaultDecimation implements IsDefaultDecimation {
 
 	private static final boolean DEFAULT_ENABLED = false;
 
-	private static final double DEFAULT_SAMPLES = UndefinedValues.DOUBLE;
+	private static final double DEFAULT_SAMPLES = Undefined.DOUBLE;
 
 	/**
 	 * To avoid any instantiation

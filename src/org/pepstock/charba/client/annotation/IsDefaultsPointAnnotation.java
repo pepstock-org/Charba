@@ -20,7 +20,7 @@ import java.util.Date;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.enums.DefaultScaleId;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsScaleId;
 
 /**
@@ -74,7 +74,7 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation, IsDefaultsBack
 	 * @return the data X value to draw the point at
 	 */
 	default String getXValueAsString() {
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -83,7 +83,7 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation, IsDefaultsBack
 	 * @return the data X value to draw the point at
 	 */
 	default double getXValueAsDouble() {
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -101,7 +101,7 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation, IsDefaultsBack
 	 * @return the data Y value to draw the point at
 	 */
 	default String getYValueAsString() {
-		return UndefinedValues.STRING;
+		return Undefined.STRING;
 	}
 
 	/**
@@ -111,7 +111,7 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation, IsDefaultsBack
 	 */
 
 	default double getYValueAsDouble() {
-		return UndefinedValues.DOUBLE;
+		return Undefined.DOUBLE;
 	}
 
 	/**

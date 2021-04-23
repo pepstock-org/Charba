@@ -49,7 +49,7 @@ import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.BarDatasetOptionsHandler;
 import org.pepstock.charba.client.options.HasBarDatasetOptions;
 import org.pepstock.charba.client.options.IsScaleId;
@@ -228,7 +228,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new DatasetContext(new DataEnvelop<>(context))));
 		// sets function to proxy callback in order to invoke the java interface
-		this.baseCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), baseCallback, UndefinedValues.DOUBLE).doubleValue());
+		this.baseCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), baseCallback, Undefined.DOUBLE).doubleValue());
 	}
 
 	/*
@@ -341,7 +341,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		if (!isType(Property.BASE, ObjectType.FUNCTION) && getBaseCallback() == null) {
 			// is not a function therefore
 			// the property is an array or number
-			ArrayDouble array = getValueOrArray(Property.BASE, UndefinedValues.DOUBLE);
+			ArrayDouble array = getValueOrArray(Property.BASE, Undefined.DOUBLE);
 			return ArrayListHelper.list(array);
 		}
 		// if here, the property is missing
