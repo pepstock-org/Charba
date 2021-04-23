@@ -681,8 +681,8 @@ final class SelectionHandler {
 		// gets image
 		Img image = selectionCleaner.getImage();
 		// check and gets the image size
-		double imgWidth = image != null ? image.getWidth() : 0;
-		double imgHeight = image != null ? image.getHeight() : 0;
+		double imgWidth = image != null ? image.getWidth() : 1;
+		double imgHeight = image != null ? image.getHeight() : 1;
 		// maintains the image aspect ratio
 		double aspectRatio = imgHeight / Math.max(imgWidth, 1);
 		// calculates image width
