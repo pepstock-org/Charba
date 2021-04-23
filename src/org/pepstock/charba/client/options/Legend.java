@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
@@ -125,7 +126,7 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	 * @param maxWidth the maximum width of the legend, in pixels
 	 */
 	public void setMaxWidth(int maxWidth) {
-		setValueAndAddToParent(Property.MAX_WIDTH, maxWidth);
+		setValueAndAddToParent(Property.MAX_WIDTH, Checker.positiveOrZero(maxWidth));
 	}
 
 	/**
@@ -144,7 +145,7 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	 * @param maxHeight the maximum height of the legend, in pixels
 	 */
 	public void setMaxHeight(int maxHeight) {
-		setValueAndAddToParent(Property.MAX_HEIGHT, maxHeight);
+		setValueAndAddToParent(Property.MAX_HEIGHT, Checker.positiveOrZero(maxHeight));
 	}
 
 	/**

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -329,7 +330,7 @@ public final class SelectionCleaner extends NativeObjectContainer implements IsD
 	 * @param margin margin from canvas border
 	 */
 	public void setMargin(int margin) {
-		setValue(Property.MARGIN, margin);
+		setValue(Property.MARGIN, Checker.positiveOrZero(margin));
 	}
 
 	/**
@@ -348,7 +349,7 @@ public final class SelectionCleaner extends NativeObjectContainer implements IsD
 	 * @param padding padding of selection cleaner element
 	 */
 	public void setPadding(int padding) {
-		setValue(Property.PADDING, padding);
+		setValue(Property.PADDING, Checker.positiveOrZero(padding));
 	}
 
 	/**
@@ -367,7 +368,7 @@ public final class SelectionCleaner extends NativeObjectContainer implements IsD
 	 * @param spacing spacing between label and image for selection cleaner element
 	 */
 	public void setSpacing(int spacing) {
-		setValue(Property.SPACING, spacing);
+		setValue(Property.SPACING, Checker.positiveOrZero(spacing));
 	}
 
 	/**

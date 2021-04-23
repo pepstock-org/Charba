@@ -24,6 +24,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -287,7 +288,7 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	 * @param borderWidth if set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		setValueAndAddToParent(Property.BORDER_WIDTH, borderWidth);
+		setValueAndAddToParent(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**
@@ -395,7 +396,7 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	 * @param tickLength Length in pixels that the grid will draw in the the axis area.
 	 */
 	public void setTickLength(int tickLength) {
-		setValueAndAddToParent(Property.TICK_LENGTH, tickLength);
+		setValueAndAddToParent(Property.TICK_LENGTH, Checker.positiveOrZero(tickLength));
 	}
 
 	/**

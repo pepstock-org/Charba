@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -140,7 +141,7 @@ public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaul
 	 * @param borderRadius the bar border radius (in pixels).
 	 */
 	public void setBorderRadius(int borderRadius) {
-		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadius);
+		setValueAndAddToParent(Property.BORDER_RADIUS, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**
@@ -159,7 +160,7 @@ public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaul
 	 * @param borderRadius the bar border radius (in pixels) when hovered.
 	 */
 	public void setHoverBorderRadius(int borderRadius) {
-		setValueAndAddToParent(Property.HOVER_BORDER_RADIUS, borderRadius);
+		setValueAndAddToParent(Property.HOVER_BORDER_RADIUS, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**

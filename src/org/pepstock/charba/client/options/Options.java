@@ -152,7 +152,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	private final Tooltips tooltips;
 
 	private final Decimation decimation;
-	
+
 	private final Filler filler;
 
 	private final Plugins plugins;
@@ -304,7 +304,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public final Layout getLayout() {
 		return layout;
 	}
-	
+
 	/**
 	 * Returns the decimation plugin element.
 	 * 
@@ -501,16 +501,18 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Sets the delay the resize update by give amount of milliseconds.<br>This can ease the resize process by debouncing update of the elements.
+	 * Sets the delay the resize update by give amount of milliseconds.<br>
+	 * This can ease the resize process by debouncing update of the elements.
 	 * 
 	 * @param delay the delay the resize update by give amount of milliseconds
 	 */
 	public void setResizeDelay(int delay) {
-		setValue(Property.RESIZE_DELAY, delay);
+		setValue(Property.RESIZE_DELAY, Checker.positiveOrZero(0));
 	}
 
 	/**
-	 * Returns the delay the resize update by give amount of milliseconds.<br>This can ease the resize process by debouncing update of the elements.
+	 * Returns the delay the resize update by give amount of milliseconds.<br>
+	 * This can ease the resize process by debouncing update of the elements.
 	 * 
 	 * @return the delay the resize update by give amount of milliseconds
 	 */
@@ -784,7 +786,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		// returns the defaults
 		return getDefaultValues().getCutoutPercentage();
 	}
-	
+
 	/**
 	 * Sets the outer radius of the chart.<br>
 	 * As {@link Double}, it is considered to be pixels.

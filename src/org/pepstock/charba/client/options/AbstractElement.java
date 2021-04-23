@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
@@ -121,7 +122,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @param borderWidth the border width.
 	 */
 	public final void setBorderWidth(int borderWidth) {
-		setValueAndAddToParent(Property.BORDER_WIDTH, borderWidth);
+		setValueAndAddToParent(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**
@@ -215,7 +216,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @param borderWidth the border width when hovered.
 	 */
 	public final void setHoverBorderWidth(int borderWidth) {
-		setValueAndAddToParent(Property.HOVER_BORDER_WIDTH, borderWidth);
+		setValueAndAddToParent(Property.HOVER_BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**

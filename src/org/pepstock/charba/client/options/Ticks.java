@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
@@ -180,18 +181,22 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	}
 
 	/**
-	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what
+	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly.<br>
+	 * Turn it off to show all labels no matter what
 	 * 
-	 * @param autoSkip if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what
+	 * @param autoSkip if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly.<br>
+	 *            Turn it off to show all labels no matter what
 	 */
 	public void setAutoSkip(boolean autoSkip) {
 		setValueAndAddToParent(Property.AUTO_SKIP, autoSkip);
 	}
 
 	/**
-	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what
+	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly.<br>
+	 * Turn it off to show all labels no matter what
 	 * 
-	 * @return if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what.
+	 * @return if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly.<br>
+	 *         Turn it off to show all labels no matter what.
 	 */
 	@Override
 	public boolean isAutoSkip() {
@@ -199,18 +204,22 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	}
 
 	/**
-	 * Sets the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
+	 * Sets the padding between the ticks on the horizontal axis when autoSkip is enabled.<br>
+	 * Note: Only applicable to horizontal scales.
 	 * 
-	 * @param autoSkipPadding padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
+	 * @param autoSkipPadding padding between the ticks on the horizontal axis when autoSkip is enabled.<br>
+	 *            Note: Only applicable to horizontal scales.
 	 */
 	public void setAutoSkipPadding(int autoSkipPadding) {
-		setValueAndAddToParent(Property.AUTO_SKIP_PADDING, autoSkipPadding);
+		setValueAndAddToParent(Property.AUTO_SKIP_PADDING, Checker.positiveOrZero(autoSkipPadding));
 	}
 
 	/**
-	 * Returns the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
+	 * Returns the padding between the ticks on the horizontal axis when autoSkip is enabled.<br>
+	 * Note: Only applicable to horizontal scales.
 	 * 
-	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
+	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled.<br>
+	 *         Note: Only applicable to horizontal scales.
 	 */
 	@Override
 	public int getAutoSkipPadding() {
@@ -246,7 +255,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 *            If specified, this overrides the automatic generation
 	 */
 	public void setCount(int count) {
-		setValueAndAddToParent(Property.COUNT, count);
+		setValueAndAddToParent(Property.COUNT, Checker.positiveOrZero(count));
 	}
 
 	/**
@@ -262,19 +271,24 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	}
 
 	/**
-	 * Sets the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
+	 * Sets the maximum rotation for tick labels when rotating to condense labels.<br>
+	 * Note: Rotation doesn't occur until necessary.<br>
+	 * Note: Only applicable to horizontal scales.
 	 * 
-	 * @param maxRotation maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal
-	 *            scales.
+	 * @param maxRotation maximum rotation for tick labels when rotating to condense labels.<br>
+	 *            Note: Rotation doesn't occur until necessary.<br>
+	 *            Note: Only applicable to horizontal scales.
 	 */
 	public void setMaxRotation(int maxRotation) {
 		setValueAndAddToParent(Property.MAX_ROTATION, maxRotation);
 	}
 
 	/**
-	 * Returns the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
+	 * Returns the maximum rotation for tick labels when rotating to condense labels.<br>
+	 * Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
 	 * 
-	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
+	 * @return maximum rotation for tick labels when rotating to condense labels.<br>
+	 *         Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
 	 */
 	@Override
 	public int getMaxRotation() {
@@ -282,18 +296,22 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	}
 
 	/**
-	 * Sets the minimum rotation for tick labels. Note: Only applicable to horizontal scales.
+	 * Sets the minimum rotation for tick labels.<br>
+	 * Note: Only applicable to horizontal scales.
 	 * 
-	 * @param minRotation minimum rotation for tick labels. Note: Only applicable to horizontal scales.
+	 * @param minRotation minimum rotation for tick labels.<br>
+	 *            Note: Only applicable to horizontal scales.
 	 */
 	public void setMinRotation(int minRotation) {
 		setValueAndAddToParent(Property.MIN_ROTATION, minRotation);
 	}
 
 	/**
-	 * Returns the minimum rotation for tick labels. Note: Only applicable to horizontal scales.
+	 * Returns the minimum rotation for tick labels.<br>
+	 * Note: Only applicable to horizontal scales.
 	 * 
-	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.
+	 * @return minimum rotation for tick labels.<br>
+	 *         Note: Only applicable to horizontal scales.
 	 */
 	@Override
 	public int getMinRotation() {
@@ -301,18 +319,22 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	}
 
 	/**
-	 * Sets the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
+	 * Sets the flips tick labels around axis, displaying the labels inside the chart instead of outside.<br>
+	 * Note: Only applicable to vertical scales.
 	 * 
-	 * @param mirror flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
+	 * @param mirror flips tick labels around axis, displaying the labels inside the chart instead of outside.<br>
+	 *            Note: Only applicable to vertical scales.
 	 */
 	public void setMirror(boolean mirror) {
 		setValueAndAddToParent(Property.MIRROR, mirror);
 	}
 
 	/**
-	 * Returns the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
+	 * Returns the flips tick labels around axis, displaying the labels inside the chart instead of outside.<br>
+	 * Note: Only applicable to vertical scales.
 	 * 
-	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
+	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside.<br>
+	 *         Note: Only applicable to vertical scales.
 	 */
 	@Override
 	public boolean isMirror() {
@@ -320,22 +342,26 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	}
 
 	/**
-	 * Sets the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies
-	 * in the vertical (Y) direction.
+	 * Sets the padding between the tick label and the axis.<br>
+	 * When set on a vertical axis, this applies in the horizontal (X) direction.<br>
+	 * When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 * 
-	 * @param padding padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this
-	 *            applies in the vertical (Y) direction.
+	 * @param padding padding between the tick label and the axis.<br>
+	 *            When set on a vertical axis, this applies in the horizontal (X) direction.<br>
+	 *            When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 */
 	public void setPadding(int padding) {
-		setValueAndAddToParent(Property.PADDING, padding);
+		setValueAndAddToParent(Property.PADDING, Checker.positiveOrZero(padding));
 	}
 
 	/**
-	 * Returns the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this
-	 * applies in the vertical (Y) direction.
+	 * Returns the padding between the tick label and the axis.<br>
+	 * When set on a vertical axis, this applies in the horizontal (X) direction.<br>
+	 * When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 * 
-	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies
-	 *         in the vertical (Y) direction.
+	 * @return padding between the tick label and the axis.<br>
+	 *         When set on a vertical axis, this applies in the horizontal (X) direction.<br>
+	 *         When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 */
 	@Override
 	public int getPadding() {
@@ -348,7 +374,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param maxTicksLimit maximum number of ticks and grid to show.
 	 */
 	public void setMaxTicksLimit(int maxTicksLimit) {
-		setValueAndAddToParent(Property.MAX_TICKS_LIMIT, maxTicksLimit);
+		setValueAndAddToParent(Property.MAX_TICKS_LIMIT, Checker.positiveOrZero(maxTicksLimit));
 	}
 
 	/**
@@ -461,7 +487,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param precision if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
 	public void setPrecision(int precision) {
-		setValueAndAddToParent(Property.PRECISION, precision);
+		setValueAndAddToParent(Property.PRECISION, Checker.positiveOrZero(precision));
 	}
 
 	/**
@@ -504,7 +530,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param sampleSize the number of ticks to examine when deciding how many labels will fit.
 	 */
 	public void setSampleSize(int sampleSize) {
-		setValueAndAddToParent(Property.SAMPLE_SIZE, sampleSize);
+		setValueAndAddToParent(Property.SAMPLE_SIZE, Checker.positiveOrZero(sampleSize));
 	}
 
 	/**
@@ -599,7 +625,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param textStrokeWidth the text stroke width.
 	 */
 	public final void setTextStrokeWidth(int textStrokeWidth) {
-		setValue(Property.TEXT_STROKE_WIDTH, textStrokeWidth);
+		setValue(Property.TEXT_STROKE_WIDTH, Checker.positiveOrZero(textStrokeWidth));
 	}
 
 	/**

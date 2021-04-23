@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultBaseAnimation;
@@ -117,7 +118,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @param milliseconds the number of milliseconds an animation takes.
 	 */
 	public final void setDuration(int milliseconds) {
-		setValueAndAddToParent(Property.DURATION, milliseconds);
+		setValueAndAddToParent(Property.DURATION, Checker.positiveOrZero(milliseconds));
 	}
 
 	/**
@@ -136,7 +137,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @param delay the delay before starting the animations
 	 */
 	public final void setDelay(int delay) {
-		setValueAndAddToParent(Property.DELAY, delay);
+		setValueAndAddToParent(Property.DELAY, Checker.positiveOrZero(delay));
 	}
 
 	/**

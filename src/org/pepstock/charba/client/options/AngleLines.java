@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
@@ -138,7 +139,7 @@ public final class AngleLines extends AbstractScaleLines<IsDefaultAngleLines> im
 	 * @param lineWidth width of angled lines.
 	 */
 	public void setLineWidth(int lineWidth) {
-		setValueAndAddToParent(Property.LINE_WIDTH, lineWidth);
+		setValueAndAddToParent(Property.LINE_WIDTH, Checker.positiveOrZero(lineWidth));
 	}
 
 	/**

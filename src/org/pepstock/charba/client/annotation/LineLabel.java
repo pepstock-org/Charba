@@ -27,7 +27,7 @@ import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.CornerRadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
@@ -45,6 +45,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -111,7 +112,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	/**
 	 * Default line label corner radius, <b>{@value DEFAULT_CORNER_RADIUS}</b>.
 	 */
-	public static final double DEFAULT_CORNER_RADIUS = 6D;
+	public static final int DEFAULT_CORNER_RADIUS = 6;
 
 	/**
 	 * Default line label position, <b>{@link LabelPosition#CENTER}</b>.
@@ -201,7 +202,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	// callback proxy to invoke the rotation function
 	private final CallbackProxy<ProxyObjectCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the corner radius function
-	private final CallbackProxy<ProxyDoubleCallback> cornerRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> cornerRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the image width function
 	private final CallbackProxy<ProxyObjectCallback> imageWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the image height function
@@ -228,7 +229,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	// callback instance to handle rotation options
 	private static final CallbackPropertyHandler<RotationCallback<AnnotationContext>> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
 	// callback instance to handle corner radius options
-	private static final CallbackPropertyHandler<RadiusCallback<AnnotationContext>> CORNER_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CORNER_RADIUS);
+	private static final CallbackPropertyHandler<CornerRadiusCallback<AnnotationContext>> CORNER_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CORNER_RADIUS);
 	// callback instance to handle image width options
 	private static final CallbackPropertyHandler<ImageSizeCallback> IMAGE_WIDTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.WIDTH);
 	// callback instance to handle image height options
@@ -297,7 +298,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// sets function to proxy callback in order to invoke the java interface
 		this.rotationCallbackProxy.setCallback((contextFunction, context) -> onRotation(new AnnotationContext(this.parent, context), defaultValues.getRotation()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getCornerRadiusCallback(), defaultValues.getCornerRadius()).doubleValue());
+		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getCornerRadiusCallback(), defaultValues.getCornerRadius()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.imageWidthCallbackProxy.setCallback((contextFunction, context) -> onImageSize(new AnnotationContext(this.parent, context), getImageWidthCallback(), defaultValues.getImageWidth(), defaultValues.getImageWidthAsPercentage()));
 		// sets function to proxy callback in order to invoke the java interface
@@ -407,7 +408,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// resets callback
 		setXPadding(null);
 		// stores value
-		setValue(Property.X_PADDING, xPadding);
+		setValue(Property.X_PADDING, Checker.positiveOrZero(xPadding));
 	}
 
 	/**
@@ -429,7 +430,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// resets callback
 		setYPadding(null);
 		// stores value
-		setValue(Property.Y_PADDING, yPadding);
+		setValue(Property.Y_PADDING, Checker.positiveOrZero(yPadding));
 	}
 
 	/**
@@ -447,11 +448,11 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 * 
 	 * @param cornerRadius the radius of label rectangle
 	 */
-	public void setCornerRadius(double cornerRadius) {
+	public void setCornerRadius(int cornerRadius) {
 		// resets callback
 		setCornerRadius(null);
 		// stores value
-		setValue(Property.CORNER_RADIUS, cornerRadius);
+		setValue(Property.CORNER_RADIUS, Checker.positiveOrZero(cornerRadius));
 	}
 
 	/**
@@ -460,7 +461,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 * @return the radius of label rectangle
 	 */
 	@Override
-	public double getCornerRadius() {
+	public int getCornerRadius() {
 		return getValue(Property.CORNER_RADIUS, defaultValues.getCornerRadius());
 	}
 
@@ -702,7 +703,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// resets callback
 		setImageHeight((ImageSizeCallback) null);
 		// stores the value
-		setValue(Property.HEIGHT, height);
+		setValue(Property.HEIGHT, Checker.positiveOrZero(height));
 	}
 
 	/**
@@ -758,7 +759,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// resets callback
 		setImageWidth((ImageSizeCallback) null);
 		// stores the value
-		setValue(Property.WIDTH, width);
+		setValue(Property.WIDTH, Checker.positiveOrZero(width));
 	}
 
 	/**
@@ -834,7 +835,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 * @return the callback called to set the corner radius
 	 */
 	@Override
-	public RadiusCallback<AnnotationContext> getCornerRadiusCallback() {
+	public CornerRadiusCallback<AnnotationContext> getCornerRadiusCallback() {
 		return CORNER_RADIUS_PROPERTY_HANDLER.getCallback(this, defaultValues.getCornerRadiusCallback());
 	}
 
@@ -843,7 +844,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 * 
 	 * @param cornerRadiusCallback to set the corner radius
 	 */
-	public void setCornerRadius(RadiusCallback<AnnotationContext> cornerRadiusCallback) {
+	public void setCornerRadius(CornerRadiusCallback<AnnotationContext> cornerRadiusCallback) {
 		CORNER_RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, cornerRadiusCallback, cornerRadiusCallbackProxy.getProxy());
 	}
 

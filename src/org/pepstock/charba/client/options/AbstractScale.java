@@ -19,6 +19,7 @@ import java.util.Date;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -295,7 +296,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 * @param grace the value in pixels is added to the maximum data value and subtracted from the minimum data
 	 */
 	public final void setGrace(int grace) {
-		setValueAndAddToParent(Property.GRACE, grace);
+		setValueAndAddToParent(Property.GRACE, Checker.positiveOrZero(grace));
 	}
 
 	/**
@@ -497,7 +498,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	 */
 	private void setIndex(Property property, Property charbaProperty, int index) {
 		// checks if index is consistent
-		if (index >= 0) {
+		if (Checker.isPositive(index)) {
 			setValueAndAddToParent(property, index);
 			setValueAndAddToParent(charbaProperty, index);
 		}

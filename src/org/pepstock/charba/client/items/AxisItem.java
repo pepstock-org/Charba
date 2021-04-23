@@ -18,6 +18,7 @@ package org.pepstock.charba.client.items;
 import java.util.Date;
 
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
@@ -65,7 +66,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param maxWidth the max width of axis in pixel.
 	 */
 	public void setMaxWidth(int maxWidth) {
-		setValue(BaseBoxNodeItem.Property.MAX_WIDTH, maxWidth);
+		setValue(BaseBoxNodeItem.Property.MAX_WIDTH, Checker.positiveOrZero(maxWidth));
 	}
 
 	/**
@@ -74,7 +75,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param maxHeight the max height of the axis in pixel
 	 */
 	public void setMaxHeight(int maxHeight) {
-		setValue(BaseBoxNodeItem.Property.MAX_HEIGHT, maxHeight);
+		setValue(BaseBoxNodeItem.Property.MAX_HEIGHT, Checker.positiveOrZero(maxHeight));
 	}
 
 	/**
@@ -83,7 +84,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param height the height of axis in pixel.
 	 */
 	public void setHeight(int height) {
-		setValue(BaseBoxItem.Property.HEIGHT, height);
+		setValue(BaseBoxItem.Property.HEIGHT, Checker.positiveOrZero(height));
 	}
 
 	/**
@@ -92,7 +93,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param top the top location in pixel
 	 */
 	public void setTop(int top) {
-		setValue(BaseBoxItem.Property.TOP, top);
+		setValue(BaseBoxItem.Property.TOP, Checker.positiveOrZero(top));
 	}
 
 	/**
@@ -101,7 +102,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param bottom the bottom location in pixel
 	 */
 	public void setBottom(int bottom) {
-		setValue(BaseBoxItem.Property.BOTTOM, bottom);
+		setValue(BaseBoxItem.Property.BOTTOM, Checker.positiveOrZero(bottom));
 	}
 
 	/**
@@ -110,7 +111,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param paddingLeft the padding left in pixel
 	 */
 	public void setPaddingLeft(int paddingLeft) {
-		setValue(BaseBoxNodeItem.Property.PADDING_LEFT, paddingLeft);
+		setValue(BaseBoxNodeItem.Property.PADDING_LEFT, Checker.positiveOrZero(paddingLeft));
 	}
 
 	/**
@@ -119,7 +120,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param paddingTop the padding top in pixel
 	 */
 	public void setPaddingTop(int paddingTop) {
-		setValue(BaseBoxNodeItem.Property.PADDING_TOP, paddingTop);
+		setValue(BaseBoxNodeItem.Property.PADDING_TOP, Checker.positiveOrZero(paddingTop));
 	}
 
 	/**
@@ -128,7 +129,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param paddingRight the padding right in pixel
 	 */
 	public void setPaddingRight(int paddingRight) {
-		setValue(BaseBoxNodeItem.Property.PADDING_RIGHT, paddingRight);
+		setValue(BaseBoxNodeItem.Property.PADDING_RIGHT, Checker.positiveOrZero(paddingRight));
 	}
 
 	/**
@@ -137,7 +138,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param paddingBottom the padding bottom in pixel
 	 */
 	public void setPaddingBottom(int paddingBottom) {
-		setValue(BaseBoxNodeItem.Property.PADDING_BOTTOM, paddingBottom);
+		setValue(BaseBoxNodeItem.Property.PADDING_BOTTOM, Checker.positiveOrZero(paddingBottom));
 	}
 
 	/**
@@ -236,7 +237,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param width the width of axis
 	 */
 	public void setWidth(int width) {
-		setValue(BaseBoxItem.Property.WIDTH, width);
+		setValue(BaseBoxItem.Property.WIDTH, Checker.positiveOrZero(width));
 	}
 
 	/**
@@ -245,7 +246,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param left the left location in pixel
 	 */
 	public void setLeft(int left) {
-		setValue(BaseBoxItem.Property.LEFT, left);
+		setValue(BaseBoxItem.Property.LEFT, Checker.positiveOrZero(left));
 	}
 
 	/**
@@ -254,7 +255,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param right the right location in pixel
 	 */
 	public void setRight(int right) {
-		setValue(BaseBoxItem.Property.RIGHT, right);
+		setValue(BaseBoxItem.Property.RIGHT, Checker.positiveOrZero(right));
 	}
 
 	/**

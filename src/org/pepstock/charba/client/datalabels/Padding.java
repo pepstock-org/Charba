@@ -32,6 +32,7 @@ import org.pepstock.charba.client.options.IsPadding;
 public final class Padding extends AbstractElement implements IsPadding {
 
 	/**
+	 * FIXME
 	 * Default padding, <b>{@value DEFAULT_PADDING}</b>.
 	 */
 	public static final int DEFAULT_PADDING = 4;

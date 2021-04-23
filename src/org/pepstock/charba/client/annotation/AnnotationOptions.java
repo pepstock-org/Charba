@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -174,7 +175,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @param speed the double-click speed in milliseconds
 	 */
 	public void setDoubleClickSpeed(int speed) {
-		setValue(Property.DOUBLE_CLICK_SPEED, speed);
+		setValue(Property.DOUBLE_CLICK_SPEED, Checker.positiveOrZero(speed));
 	}
 
 	/**

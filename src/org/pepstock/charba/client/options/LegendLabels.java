@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
@@ -140,7 +141,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 * @param padding padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
-		setValueAndAddToParent(Property.PADDING, padding);
+		setValueAndAddToParent(Property.PADDING, Checker.positiveOrZero(padding));
 	}
 
 	/**

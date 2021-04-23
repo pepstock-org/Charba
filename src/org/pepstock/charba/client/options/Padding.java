@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
@@ -120,7 +121,7 @@ public final class Padding extends AbstractNode implements IsPadding {
 	 */
 	@Override
 	public void setLeft(int padding) {
-		setValueAndAddToParent(Position.LEFT, padding);
+		setValueAndAddToParent(Position.LEFT, Checker.positiveOrZero(padding));
 	}
 
 	/**
@@ -140,7 +141,7 @@ public final class Padding extends AbstractNode implements IsPadding {
 	 */
 	@Override
 	public void setRight(int padding) {
-		setValueAndAddToParent(Position.RIGHT, padding);
+		setValueAndAddToParent(Position.RIGHT, Checker.positiveOrZero(padding));
 	}
 
 	/**
@@ -160,7 +161,7 @@ public final class Padding extends AbstractNode implements IsPadding {
 	 */
 	@Override
 	public void setTop(int padding) {
-		setValueAndAddToParent(Position.TOP, padding);
+		setValueAndAddToParent(Position.TOP, Checker.positiveOrZero(padding));
 	}
 
 	/**
@@ -180,7 +181,7 @@ public final class Padding extends AbstractNode implements IsPadding {
 	 */
 	@Override
 	public void setBottom(int padding) {
-		setValueAndAddToParent(Position.BOTTOM, padding);
+		setValueAndAddToParent(Position.BOTTOM, Checker.positiveOrZero(padding));
 	}
 
 	/**
@@ -201,8 +202,8 @@ public final class Padding extends AbstractNode implements IsPadding {
 	 */
 	private void setDefaultPadding(Key key, int padding) {
 		// checks if values is consistent
-		if (padding != Undefined.INTEGER) {
-			setValue(key, padding);
+		if (!Undefined.is(padding)) {
+			setValue(key, Checker.positiveOrZero(padding));
 		}
 	}
 	

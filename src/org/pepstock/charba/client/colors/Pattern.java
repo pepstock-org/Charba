@@ -87,8 +87,8 @@ public final class Pattern extends CanvasObject {
 		Checker.checkIfValid(image, "Image argument");
 		// creates pattern
 		setValue(Property.CHARBA_PATTERN_IMG, image);
-		setValue(Property.CHARBA_PATTERN_WIDTH, width);
-		setValue(Property.CHARBA_PATTERN_HEIGHT, height);
+		setValue(Property.CHARBA_PATTERN_WIDTH, Checker.positiveOrZero(width));
+		setValue(Property.CHARBA_PATTERN_HEIGHT, Checker.positiveOrZero(height));
 		setValue(Property.CHARBA_PATTERN_REPETITION, repetition == null ? Repetition.REPEAT : repetition);
 	}
 

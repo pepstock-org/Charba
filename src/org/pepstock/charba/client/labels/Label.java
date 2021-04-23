@@ -28,6 +28,7 @@ import org.pepstock.charba.client.commons.ArrayImage;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -415,7 +416,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param precision the precision for percentage
 	 */
 	public void setPrecision(int precision) {
-		setValue(Property.PRECISION, precision);
+		setValue(Property.PRECISION, Checker.positiveOrZero(precision));
 	}
 
 	/**
@@ -642,7 +643,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param outsidePadding the padding when position is {@link Position#OUTSIDE}.
 	 */
 	public void setOutsidePadding(int outsidePadding) {
-		setValue(Property.OUTSIDE_PADDING, outsidePadding);
+		setValue(Property.OUTSIDE_PADDING, Checker.positiveOrZero(outsidePadding));
 	}
 
 	/**
@@ -661,7 +662,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 * @param textMargin the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 */
 	public void setTextMargin(int textMargin) {
-		setValue(Property.TEXT_MARGIN, textMargin);
+		setValue(Property.TEXT_MARGIN, Checker.positiveOrZero(textMargin));
 	}
 
 	/**

@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.RadiusCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.CornerRadiusCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -82,10 +82,10 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the corner radius function
-	private final CallbackProxy<ProxyDoubleCallback> cornerRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyIntegerCallback> cornerRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle corner radius options
-	private static final CallbackPropertyHandler<RadiusCallback<AnnotationContext>> CORNER_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CORNER_RADIUS);
+	private static final CallbackPropertyHandler<CornerRadiusCallback<AnnotationContext>> CORNER_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CORNER_RADIUS);
 
 	// defaults options
 	private final IsDefaultsBoxAnnotation defaultValues;
@@ -188,7 +188,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getCornerRadiusCallback(), defaultValues.getCornerRadius()).doubleValue());
+		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getCornerRadiusCallback(), defaultValues.getCornerRadius()).intValue());
 	}
 
 	/*
@@ -226,11 +226,11 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 * 
 	 * @param corner the border radius.
 	 */
-	public void setCornerRadius(double corner) {
+	public void setCornerRadius(int corner) {
 		// resets callback
 		setCornerRadius(null);
 		// stores value
-		setValue(Property.CORNER_RADIUS, corner);
+		setValue(Property.CORNER_RADIUS, Checker.positiveOrZero(corner));
 	}
 
 	/**
@@ -239,7 +239,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 * @return the border radius.
 	 */
 	@Override
-	public double getCornerRadius() {
+	public int getCornerRadius() {
 		return getValue(Property.CORNER_RADIUS, defaultValues.getCornerRadius());
 	}
 
@@ -253,7 +253,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 * @return the callback called to set the corner radius
 	 */
 	@Override
-	public RadiusCallback<AnnotationContext> getCornerRadiusCallback() {
+	public CornerRadiusCallback<AnnotationContext> getCornerRadiusCallback() {
 		return CORNER_RADIUS_PROPERTY_HANDLER.getCallback(this, defaultValues.getCornerRadiusCallback());
 	}
 
@@ -262,7 +262,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 * 
 	 * @param cornerRadiusCallback to set the corner radius
 	 */
-	public void setCornerRadius(RadiusCallback<AnnotationContext> cornerRadiusCallback) {
+	public void setCornerRadius(CornerRadiusCallback<AnnotationContext> cornerRadiusCallback) {
 		CORNER_RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, cornerRadiusCallback, cornerRadiusCallbackProxy.getProxy());
 	}
 }

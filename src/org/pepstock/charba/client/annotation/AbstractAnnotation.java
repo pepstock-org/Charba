@@ -46,6 +46,7 @@ import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -375,7 +376,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// resets callback
 		setBorderWidth(null);
 		// stores value
-		setValue(Property.BORDER_WIDTH, borderWidth);
+		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**

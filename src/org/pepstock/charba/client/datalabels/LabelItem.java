@@ -36,6 +36,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -552,7 +553,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// resets callback
 		setBorderWidth(null);
 		// stores the value
-		setValue(Property.BORDER_WIDTH, width);
+		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(width));
 	}
 
 	/**
@@ -841,7 +842,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// resets callback
 		setTextStrokeWidth(null);
 		// stores the value	
-		setValue(Property.TEXT_STROKE_WIDTH, textStrokeWidth);
+		setValue(Property.TEXT_STROKE_WIDTH, Checker.positiveOrZero(textStrokeWidth));
 	}
 
 	/**

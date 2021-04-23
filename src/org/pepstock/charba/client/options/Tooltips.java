@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
@@ -373,7 +374,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param titleSpacing spacing to add to top and bottom of each title line.
 	 */
 	public void setTitleSpacing(int titleSpacing) {
-		setValueAndAddToParent(Property.TITLE_SPACING, titleSpacing);
+		setValueAndAddToParent(Property.TITLE_SPACING, Checker.positiveOrZero(titleSpacing));
 	}
 
 	/**
@@ -392,7 +393,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param titleMarginBottom margin to add on bottom of title section.
 	 */
 	public void setTitleMarginBottom(int titleMarginBottom) {
-		setValueAndAddToParent(Property.TITLE_MARGIN_BOTTOM, titleMarginBottom);
+		setValueAndAddToParent(Property.TITLE_MARGIN_BOTTOM, Checker.positiveOrZero(titleMarginBottom));
 	}
 
 	/**
@@ -479,7 +480,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param bodySpacing spacing to add to top and bottom of each tooltip item.
 	 */
 	public void setBodySpacing(int bodySpacing) {
-		setValueAndAddToParent(Property.BODY_SPACING, bodySpacing);
+		setValueAndAddToParent(Property.BODY_SPACING, Checker.positiveOrZero(bodySpacing));
 	}
 
 	/**
@@ -566,7 +567,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param footerSpacing spacing to add to top and bottom of each footer line.
 	 */
 	public void setFooterSpacing(int footerSpacing) {
-		setValueAndAddToParent(Property.FOOTER_SPACING, footerSpacing);
+		setValueAndAddToParent(Property.FOOTER_SPACING, Checker.positiveOrZero(footerSpacing));
 	}
 
 	/**
@@ -585,7 +586,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param footerMarginTop margin to add before drawing the footer.
 	 */
 	public void setFooterMarginTop(int footerMarginTop) {
-		setValueAndAddToParent(Property.FOOTER_MARGIN_TOP, footerMarginTop);
+		setValueAndAddToParent(Property.FOOTER_MARGIN_TOP, Checker.positiveOrZero(footerMarginTop));
 	}
 
 	/**
@@ -604,7 +605,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param caretPadding extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 */
 	public void setCaretPadding(int caretPadding) {
-		setValueAndAddToParent(Property.CARET_PADDING, caretPadding);
+		setValueAndAddToParent(Property.CARET_PADDING, Checker.positiveOrZero(caretPadding));
 	}
 
 	/**
@@ -623,7 +624,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param caretSize size, in pixels, of the tooltip arrow.
 	 */
 	public void setCaretSize(int caretSize) {
-		setValueAndAddToParent(Property.CARET_SIZE, caretSize);
+		setValueAndAddToParent(Property.CARET_SIZE, Checker.positiveOrZero(caretSize));
 	}
 
 	/**
@@ -642,7 +643,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param cornerRadius radius of tooltip corner curves.
 	 */
 	public void setCornerRadius(int cornerRadius) {
-		setValueAndAddToParent(Property.CORNER_RADIUS, cornerRadius);
+		setValueAndAddToParent(Property.CORNER_RADIUS, Checker.positiveOrZero(cornerRadius));
 	}
 
 	/**
@@ -754,7 +755,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param borderWidth size of the border.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		setValueAndAddToParent(Property.BORDER_WIDTH, borderWidth);
+		setValueAndAddToParent(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**

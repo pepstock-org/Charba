@@ -231,6 +231,157 @@ public final class Checker {
 	}
 	
 	// -----------------
+	// DOUBLE setter
+	// -----------------
+
+	/**
+	 * Checks if the value is a positive number and returns it. If not a positive number, returns 0.
+	 * 
+	 * @param value value to be checked
+	 * @return the value passed as argument if is a positive number or 0.
+	 */
+	public static double positiveOrZero(double value) {
+		return positiveOrDefault(value, 0);
+	}
+
+	/**
+	 * Checks if the value is a positive number and returns it. If not a positive number, returns the default.
+	 * 
+	 * @param value value to be checked
+	 * @param defaultValue value to return if the value is not a positive number
+	 * @return the value passed as argument if is a positive number or the default.
+	 */
+	public static double positiveOrDefault(double value, double defaultValue) {
+		return isPositive(value) ? value : defaultValue;
+	}
+	
+	/**
+	 * Checks if the value is a negative number and returns it. If not a negative number, returns 0.
+	 * 
+	 * @param value value to be checked
+	 * @return the value passed as argument if is a negative number or 0.
+	 */
+	public static double negativeOrZero(double value) {
+		return isNegative(value) ? value : 0;
+	}
+	
+	/**
+	 * Checks if the value is a negative number and returns it. If not a negative number, returns the default.
+	 * 
+	 * @param value value to be checked
+	 * @param defaultValue value to return if the value is not a negative number
+	 * @return the value passed as argument if is a negative number or the default.
+	 */
+	public static double negativeOrDefault(double value, double defaultValue) {
+		return isNegative(value) ? value : defaultValue;
+	}
+	
+	/**
+	 * Checks if the value is greater than  number and returns it. If not greater than, returns 0.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @return the value passed as argument if is greater than the number or 0.
+	 */
+	public static double greaterThanOrZero(double value, double threshold) {
+		return greaterThanOrDefault(value, threshold, 0);
+	}
+
+	/**
+	 * Checks if the value is greater than  number and returns it. If not greater than, returns the threshold.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @return the value passed as argument if is greater than the number or the threshold.
+	 */
+	public static double greaterThanOrThreshold(double value, double threshold) {
+		return greaterThanOrDefault(value, threshold, threshold);
+	}
+
+	/**
+	 * Checks if the value is greater than number and returns it. If not greater than, returns the default.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @param defaultValue value to return if the value is not greater than the number
+	 * @return the value passed as argument if is greater than the number or the default.
+	 */
+	public static double greaterThanOrDefault(double value, double threshold, double defaultValue) {
+		return isGreaterThan(value, threshold) ? value : defaultValue;
+	}
+	
+	/**
+	 * Checks if the value is less than  number and returns it. If not less than, returns 0.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @return the value passed as argument if is less than the number or 0.
+	 */
+	public static double lessThanOrZero(double value, double threshold) {
+		return lessThanOrDefault(value, threshold, 0);
+	}
+
+	/**
+	 * Checks if the value is less than  number and returns it. If not less than, returns the threshold.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @return the value passed as argument if is less than the number or the threshold.
+	 */
+	public static double lessThanOrThreshold(double value, double threshold) {
+		return lessThanOrDefault(value, threshold, threshold);
+	}
+
+	/**
+	 * Checks if the value is less than number and returns it. If not less than, returns the default.
+	 * 
+	 * @param value value to be checked
+	 * @param threshold value to be compared to the value
+	 * @param defaultValue value to return if the value is not less than the number
+	 * @return the value passed as argument if is less than the number or the default.
+	 */
+	public static double lessThanOrDefault(double value, double threshold, double defaultValue) {
+		return isLessThan(value, threshold) ? value : defaultValue;
+	}
+	
+	/**
+	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the maximum.
+	 *  
+	 * @param value value to be checked
+	 * @param minimum minimum limit to compare to the value
+	 * @param maximum maximum limit to compare to the value
+	 * @return the value passed as argument if is between minimum and maximum passed values or the maximum.
+	 */
+	public static double betweenOrMaximum(double value, double minimum, double maximum) {
+		return isBetween(value, minimum, maximum) ? value : maximum;
+	}
+	
+	/**
+	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the minimum.
+	 *  
+	 * @param value value to be checked
+	 * @param minimum minimum limit to compare to the value
+	 * @param maximum maximum limit to compare to the value
+	 * @return the value passed as argument if is between minimum and maximum passed values or the minimum.
+	 */
+	public static double betweenOrMinimum(double value, double minimum, double maximum) {
+		return isBetween(value, minimum, maximum) ? value : minimum;
+	}
+	
+	/**
+	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the default.
+	 *  
+	 * @param value value to be checked
+	 * @param minimum minimum limit to compare to the value
+	 * @param maximum maximum limit to compare to the value
+	 * @param defaultValue value to return if the value is not between minimum and maximum
+	 * @return the value passed as argument if is between minimum and maximum passed values or the default.
+	 */
+	public static double betweenOrDefault(double value, double minimum, double maximum, double defaultValue) {
+		return isBetween(value, minimum, maximum) ? value : defaultValue;
+	}
+	
+	// -----------------
 	// INTEGER
 	// -----------------
 

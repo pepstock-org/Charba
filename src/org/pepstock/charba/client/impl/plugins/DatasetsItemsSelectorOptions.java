@@ -23,6 +23,7 @@ import org.pepstock.charba.client.colors.GwtMaterialColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.DefaultScaleId;
@@ -329,7 +330,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 * @param borderWidth the border width of the selection.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		setValue(Property.BORDER_WIDTH, borderWidth);
+		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -90,7 +91,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setSize(int size) {
-		setValueAndAddToParent(Property.SIZE, size);
+		setValueAndAddToParent(Property.SIZE, Checker.positiveOrZero(size));
 	}
 
 	/**
@@ -170,7 +171,7 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setLineHeight(double lineHeight) {
-		setValueAndAddToParent(Property.LINE_HEIGHT, lineHeight);
+		setValueAndAddToParent(Property.LINE_HEIGHT, Checker.positiveOrZero(lineHeight));
 	}
 
 	/**

@@ -22,6 +22,7 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
@@ -77,20 +78,26 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	}
 
 	/**
-	 * Sets the dataset index of the chart.
+	 * Sets the data set index of the chart.
 	 * 
-	 * @param datasetIndex the dataset index of the chart
+	 * @param datasetIndex the data set index of the chart
 	 */
 	public void setDatasetIndex(int datasetIndex) {
+		// checks if consistent
+		Checker.checkIfPositive(datasetIndex, "Dataset index");
+		// stores it
 		setValue(LegendItem.Property.DATASET_INDEX, datasetIndex);
 	}
 
 	/**
-	 * Sets the dataset index of the chart (for POLAR and PIE charts).
+	 * Sets the data set index of the chart (for POLAR and PIE charts).
 	 * 
-	 * @param index the dataset index of the chart (for POLAR and PIE charts)
+	 * @param index the data set index of the chart (for POLAR and PIE charts)
 	 */
 	public void setIndex(int index) {
+		// checks if consistent
+		Checker.checkIfPositive(index, "Index");
+		// stores it
 		setValue(LegendItem.Property.INDEX, index);
 	}
 	
@@ -237,7 +244,7 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 * @param lineWidth the width of box border in pixels.
 	 */
 	public void setLineWidth(int lineWidth) {
-		setValue(LegendItem.Property.LINE_WIDTH, lineWidth);
+		setValue(LegendItem.Property.LINE_WIDTH, Checker.positiveOrZero(lineWidth));
 	}
 
 	/**

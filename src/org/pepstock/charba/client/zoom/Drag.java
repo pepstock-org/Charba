@@ -17,6 +17,7 @@ package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -191,7 +192,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	 */
 	public void setBorderWidth(int borderWidth) {
 		// stores value
-		setValue(Property.BORDER_WIDTH, borderWidth);
+		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**
@@ -210,7 +211,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	 * @param milliseconds the number of milliseconds an animation takes.
 	 */
 	public void setAnimationDuration(int milliseconds) {
-		setValue(Property.ANIMATION_DURATION, milliseconds);
+		setValue(Property.ANIMATION_DURATION, Checker.positiveOrZero(milliseconds));
 	}
 
 	/**

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
@@ -167,7 +168,7 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	 * @param padding the padding between chart and point labels, in pixels.
 	 */
 	public void setPadding(int padding) {
-		setValueAndAddToParent(Property.PADDING, padding);
+		setValueAndAddToParent(Property.PADDING, Checker.positiveOrZero(padding));
 	}
 
 	/**

@@ -21,6 +21,7 @@ import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -200,7 +201,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions implem
 	 */
 	public void setMaximumLegendColumns(int maxColumns) {
 		// checks if max columns is consistent
-		setValue(Property.MAXIMUM_LEGEND_COLUMNS, maxColumns < 1 ? DEFAULT_MAXIMUM_LEGEND_COLUMNS : maxColumns);
+		setValue(Property.MAXIMUM_LEGEND_COLUMNS, Checker.greaterThanOrDefault(maxColumns, 1, DEFAULT_MAXIMUM_LEGEND_COLUMNS));
 	}
 
 	/**

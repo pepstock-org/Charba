@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultArc;
@@ -160,7 +161,7 @@ public final class Arc extends AbstractElement<IsDefaultArc> implements IsDefaul
 	 * @param borderRadius the arc border radius (in pixels).
 	 */
 	public void setBorderRadius(int borderRadius) {
-		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadius);
+		setValueAndAddToParent(Property.BORDER_RADIUS, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**

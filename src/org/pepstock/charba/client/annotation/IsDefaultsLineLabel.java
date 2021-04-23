@@ -23,7 +23,7 @@ import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.CornerRadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
@@ -87,7 +87,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	 * 
 	 * @return the radius of label rectangle
 	 */
-	default double getCornerRadius() {
+	default int getCornerRadius() {
 		return LineLabel.DEFAULT_CORNER_RADIUS;
 	}
 
@@ -197,7 +197,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	 * 
 	 * @return the callback called to set the corner radius
 	 */
-	default RadiusCallback<AnnotationContext> getCornerRadiusCallback() {
+	default CornerRadiusCallback<AnnotationContext> getCornerRadiusCallback() {
 		return null;
 	}
 	
