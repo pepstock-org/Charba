@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.enums.DataType;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Interface to define if a dataset can contains time series items.
@@ -38,7 +39,7 @@ public interface HasTimeSeriesItems extends HasDataPoints {
 	 */
 	static boolean isTimeSeriesItem(DataPoint datapoint) {
 		// checks if there is data point
-		return datapoint != null && datapoint.getXAsDate() != null && Double.isNaN(datapoint.getR());
+		return datapoint != null && datapoint.getXAsDate() != null && Undefined.is(datapoint.getR());
 	}
 
 	/**

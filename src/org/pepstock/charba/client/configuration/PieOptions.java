@@ -17,6 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Specific options for PIE chart. It contains all properties for this kind of chart.
@@ -49,7 +50,7 @@ public class PieOptions extends AbstractPieOptions {
 		double value = super.getCutout();
 		// checks if consistent
 		// if not, provides the doughnut default
-		if (Double.isNaN(value)) {
+		if (Undefined.is(value)) {
 			return DEFAULT_CUTOUT;
 		}
 		// returns the value

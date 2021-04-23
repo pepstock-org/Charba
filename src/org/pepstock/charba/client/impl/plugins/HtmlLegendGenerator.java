@@ -28,6 +28,7 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.LegendLabels;
@@ -483,23 +484,23 @@ final class HtmlLegendGenerator {
 			int size = Math.min(width, height);
 			// calculated a radius, predefined by size
 			double radius = (size - 2) / 2D;
-			// here is searching for radius set to dataset level
+			// here is searching for radius set to data set level
 			DatasetElementOptions datasetViewItem = lookForDatasetMetaItem(chart, item);
-			// checks if dataset item is consistent
+			// checks if data set item is consistent
 			if (datasetViewItem != null) {
-				// if dataset item is found
+				// if data set item is found
 				// gets the radius, taking the MAX value
 				// otherwise it could be small
 				radius = Math.max(datasetViewItem.getRadius(), radius);
 			}
 			// checks with default radius
 			// if consistent
-			if (radius < 0 || Double.isNaN(radius) || Math.max(radius, 0D) == 0D) {
+			if (Checker.isNegative(radius) || Undefined.is(radius)) {
 				radius = DEFAULT_RADIUS;
 			}
-			// ricalculate size
+			// recalculate size
 			size = (int) (radius * 2) + 2;
-			// update the html legend item settig the size and calulated radius
+			// update the HTML legend item setting the size and calculated radius
 			htmlLegendItem.setSize(size);
 			htmlLegendItem.setRadius(radius);
 			// invokes tiles factory to get a pattern as string
@@ -523,32 +524,32 @@ final class HtmlLegendGenerator {
 	}
 
 	/**
-	 * Returns a dataset element options instance using the legend item locator (dataset or data index) or <code>null</code> if not found.
+	 * Returns a data set element options instance using the legend item locator (data set or data index) or <code>null</code> if not found.
 	 * 
 	 * @param chart chart instance
-	 * @param item legend item to use as dataset locator
-	 * @return a dataset element options instance using the legend item locator (dataset or data index) or <code>null</code> if not found.
+	 * @param item legend item to use as data set locator
+	 * @return a data set element options instance using the legend item locator (data set or data index) or <code>null</code> if not found.
 	 */
 	private DatasetElementOptions lookForDatasetMetaItem(IsChart chart, LegendItem item) {
-		// prepares the dataset item instance
+		// prepares the data set item instance
 		DatasetItem datasetItem = null;
-		// item index set to 0 for dataset index locator
+		// item index set to 0 for data set index locator
 		int itemIndex = 0;
 		// based on the legend item location
-		if (item.getDatasetIndex() != Undefined.INTEGER) {
-			// retrieves the dataset set item by dataset index
+		if (Undefined.isNot(item.getDatasetIndex())) {
+			// retrieves the data set set item by data set index
 			datasetItem = chart.getDatasetItem(item.getDatasetIndex());
-		} else if (item.getIndex() != Undefined.INTEGER) {
+		} else if (Undefined.isNot(item.getIndex())) {
 			// if here is looking for data index then it uses
-			// the first dataset
+			// the first data set
 			datasetItem = chart.getDatasetItem(0);
-			// and gets the dataset index to use
+			// and gets the data set index to use
 			itemIndex = item.getIndex();
 		}
-		// checks if the searching of dataset item is consistent
+		// checks if the searching of data set item is consistent
 		// with the locator
 		if (datasetItem != null && datasetItem.getElements().size() > itemIndex) {
-			// gets dataset element by calculated index
+			// gets data set element by calculated index
 			DatasetElement datasetElement = datasetItem.getElements().get(itemIndex);
 			// checks if consistent
 			if (datasetElement != null) {
@@ -556,7 +557,7 @@ final class HtmlLegendGenerator {
 				return datasetElement.getOptions();
 			}
 		}
-		// if here, the locator is not able to get the right dataset item
+		// if here, the locator is not able to get the right data set item
 		// then returns null
 		return null;
 	}

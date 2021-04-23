@@ -58,7 +58,7 @@ final class AnnotationHelper {
 	 */
 	void addAnnotation(AbstractAnnotation annotation) {
 		// checks if annotation argument is consistent
-		if (annotation != null && annotation.getAnnotationId() != Undefined.INTEGER) {
+		if (annotation != null && Undefined.isNot(annotation.getAnnotationId())) {
 			// stores the annotation configuration
 			annotationInstancesCache.put(annotation.getAnnotationId(), annotation);
 		}

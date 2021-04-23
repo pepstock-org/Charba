@@ -17,12 +17,14 @@ package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.HtmlColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.impl.plugins.HtmlLegendItem;
 import org.pepstock.charba.client.items.LegendItem;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Implements a shape drawer in order to use {@link PointStyle} as shape for tiles.<br>
@@ -84,7 +86,7 @@ abstract class AbstractPointStyleShapeDrawer extends ShapeDrawer {
 		double radius = htmlLegendItem.getRadius();
 		int size = htmlLegendItem.getSize();
 		double rotation = htmlLegendItem.getLegendItem().getRotation();
-		if (Double.isNaN(rotation) || Math.max(rotation, 0D) == 0D) {
+		if (Undefined.is(rotation) || Checker.isNegative(rotation)) {
 			rotation = DEFAULT_ROTATION;
 		}
 		double rad = rotation * RAD_PER_DEG;

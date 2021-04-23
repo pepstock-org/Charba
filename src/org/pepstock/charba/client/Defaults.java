@@ -463,17 +463,17 @@ public final class Defaults {
 	}
 
 	/**
-	 * Returns a set of predefined style properties that should be used to represent the dataset or the data if the index is specified.
+	 * Returns a set of predefined style properties that should be used to represent the data set or the data if the index is specified.
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return a set of predefined style properties that should be used to represent the dataset or the data if the index is specified or <code>null</code> if arguments are not
+	 * @return a set of predefined style properties that should be used to represent the data set or the data if the index is specified or <code>null</code> if arguments are not
 	 *         consistent
 	 */
 	private DatasetElementOptions retrieveDatasetElementOptions(IsChart chart, TooltipItem item) {
 		// checks if arguments are consistent
-		if (IsChart.isConsistent(chart) && item != null && item.getDatasetIndex() != Undefined.INTEGER) {
-			// gets the dataset item at index
+		if (IsChart.isConsistent(chart) && item != null && Undefined.isNot(item.getDatasetIndex())) {
+			// gets the data set item at index
 			DatasetItem datasetItem = chart.getDatasetItem(item.getDatasetIndex());
 			// checks if consistent
 			if (datasetItem != null) {

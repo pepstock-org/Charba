@@ -433,7 +433,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final ScaleValueItem getValueAtPixel(double position) {
 		// checks if argument is consistent
-		if (!Double.isNaN(position)) {
+		if (Undefined.isNot(position)) {
 			// gets the value on the axis at that pixel
 			double value = getValueForPixel(position);
 			// gets also the label of the value
@@ -448,7 +448,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 			} else if (ScaleDataType.DATE.equals(getType().getDataType())) {
 				// if here, is a date
 				// creates the date object
-				ImmutableDate dateValue = Double.isNaN(value) ? null : new ImmutableDate((long) value);
+				ImmutableDate dateValue = Undefined.is(value) ? null : new ImmutableDate((long) value);
 				result = new ScaleValueItem(dateValue, label);
 			} else if (ScaleDataType.STRING.equals(getType().getDataType())) {
 				// if here, is a string

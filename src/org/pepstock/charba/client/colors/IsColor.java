@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.colors;
 
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Defines the methods that all colors must have and many of them have got already an implementation that usually does not need to be changed.
@@ -206,8 +207,8 @@ public interface IsColor {
 		// checks if color is consistent
 		checkIfValid(IsColor.this);
 		// checks which alpha must be applied
-		// if NaN uses the alpha of current color
-		double alphaToUse = Double.isNaN(alpha) ? getAlpha() : alpha;
+		// if undefined uses the alpha of current color
+		double alphaToUse = Undefined.is(alpha) ? getAlpha() : alpha;
 		ColorUtil.checkAlphaWithinBounds(alphaToUse);
 		// gets colors
 		int r = getRed();
@@ -273,7 +274,7 @@ public interface IsColor {
 		checkIfValid(IsColor.this);
 		// checks which alpha must be applied
 		// if NaN uses the alpha of current color
-		double alphaToUse = Double.isNaN(alpha) ? getAlpha() : alpha;
+		double alphaToUse = Undefined.is(alpha) ? getAlpha() : alpha;
 		ColorUtil.checkAlphaWithinBounds(alphaToUse);
 		// calculates the new RGB using the factor
 		int newRed = Math.max((int) (getRed() * ColorUtil.FACTOR), 0);

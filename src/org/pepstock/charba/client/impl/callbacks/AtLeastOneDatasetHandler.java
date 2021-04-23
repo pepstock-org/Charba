@@ -45,16 +45,16 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 		if (event != null && IsChart.isValid(event.getChart())) {
 			// get the chart instance form event
 			IsChart chart = event.getChart();
-			// checks if legend is related to a dataset or index
-			if (event.getItem().getDatasetIndex() != Undefined.INTEGER) {
-				// if the dataset is already hidden
+			// checks if legend is related to a data set or index
+			if (Undefined.isNot(event.getItem().getDatasetIndex())) {
+				// if the data set is already hidden
 				// checks if there is ONLY 1 visible dataset
 				if (chart.isDatasetVisible(event.getItem().getDatasetIndex()) && !checkByDatasetIndex(chart, event.getItem().getDatasetIndex())) {
 					return;
 				}
 				// invokes default click callbacks
 				Defaults.get().invokeLegendOnClick(event);
-			} else if (event.getItem().getIndex() != Undefined.INTEGER) {
+			} else if (Undefined.isNot(event.getItem().getIndex())) {
 				// if the data is already hidden
 				// checks if there is ONLY 1 visible data
 				if (chart.isDataVisible(event.getItem().getIndex()) && !checkByIndex(chart, event.getItem().getIndex())) {
@@ -67,20 +67,20 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 	}
 
 	/**
-	 * Checks if there is at least one dataset visible on top of the dataset index which must be hidden.
+	 * Checks if there is at least one data set visible on top of the data set index which must be hidden.
 	 * 
 	 * @param chart chart instance involved in this event.
-	 * @param datasetIndex dataset index related to this event.
-	 * @return <code>true</code> if there is at least one dataset visible on top of the dataset index which must be hidden.
+	 * @param datasetIndex data set index related to this event.
+	 * @return <code>true</code> if there is at least one data set visible on top of the data set index which must be hidden.
 	 */
 	private boolean checkByDatasetIndex(IsChart chart, int datasetIndex) {
-		// gets all datasets
+		// gets all data sets
 		List<Dataset> dss = chart.getData().getDatasets();
 		// scans them to have the index for retrieving
 		// the visibility
 		for (int i = 0; i < dss.size(); i++) {
 			// if visible return can be hidden
-			// ignoring the dataset index related to event
+			// ignoring the data set index related to event
 			if (i != datasetIndex && chart.isDatasetVisible(i)) {
 				return true;
 			}

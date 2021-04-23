@@ -152,7 +152,7 @@ public final class CScheduler {
 		 */
 		private void clear() {
 			// checks if timeout id is consistent
-			if (timeoutID != Undefined.INTEGER) {
+			if (Undefined.isNot(timeoutID)) {
 				// clears the timeout
 				Window.clearTimeout(timeoutID);
 			}

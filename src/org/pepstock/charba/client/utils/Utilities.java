@@ -41,6 +41,7 @@ import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.Repetition;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.Font;
 
 /**
@@ -170,7 +171,7 @@ public final class Utilities {
 		// gets string reference of line height
 		String lineHeightAsString = null;
 		// checks if line height is consistent
-		if (!Double.isNaN(lineHeight)) {
+		if (Undefined.isNot(lineHeight)) {
 			// then sets the double as string
 			lineHeightAsString = applyPrecision(lineHeight, 1);
 		}
@@ -509,7 +510,7 @@ public final class Utilities {
 	 */
 	public static String applyPrecision(double value, int precision) {
 		// checks if the value is consistent
-		if (!Double.isNaN(value)) {
+		if (Undefined.isNot(value)) {
 			// sets the max value because the precision must be greater than 0
 			int checkedPrecision = Math.max(precision, 0);
 			// creates a big decimal with value

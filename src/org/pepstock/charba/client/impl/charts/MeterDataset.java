@@ -249,8 +249,8 @@ public class MeterDataset extends Dataset {
 	 * @param value the value to set
 	 */
 	public void setValue(double value) {
-		// checks the value is Nan and greater than minimum and less than maximum
-		this.value = Double.isNaN(value) ? 0D : Math.max(Math.min(max, value), MINIMUM_VALUE);
+		// checks the value is undefined and greater than minimum and less than maximum
+		this.value = Undefined.is(value) ? 0D : Math.max(Math.min(max, value), MINIMUM_VALUE);
 		// sets the data
 		super.setData(this.value, Math.max(MINIMUM_VALUE, max - value));
 		// stores the ratio between value and max

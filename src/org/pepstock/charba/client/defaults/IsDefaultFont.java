@@ -91,7 +91,7 @@ public interface IsDefaultFont {
 		// gets size reference
 		int size = getSize();
 		// sets size checking if consistent
-		if (size != Undefined.INTEGER) {
+		if (Undefined.isNot(size)) {
 			result.setSize(size);
 		}
 		// stores style, family and weight
@@ -108,7 +108,7 @@ public interface IsDefaultFont {
 			// gets line height reference
 			double lineHeight = getLineHeight();
 			// sets line height checking if consistent
-			if (!Double.isNaN(lineHeight)) {
+			if (Undefined.isNot(lineHeight)) {
 				result.setLineHeight(lineHeight);
 			}
 		}

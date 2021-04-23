@@ -70,8 +70,8 @@ final class HtmlLegendId {
 		this.chartId = chartId;
 		// transform the undefined values, set as minimum integer
 		// as maximum integer value because by REGEXP it is easier to manage it
-		this.datasetIndex = datasetIndex == Undefined.INTEGER ? Integer.MAX_VALUE : datasetIndex;
-		this.index = index == Undefined.INTEGER ? Integer.MAX_VALUE : index;
+		this.datasetIndex = Undefined.is(datasetIndex) ? Integer.MAX_VALUE : datasetIndex;
+		this.index = Undefined.is(index) ? Integer.MAX_VALUE : index;
 	}
 
 	/**
@@ -216,8 +216,8 @@ final class HtmlLegendId {
 			for (LegendLabelItem item : legendItems) {
 				// transform the undefined values, set as minimum integer
 				// as maximum integer value because by REGEXP it is easier to manage it
-				int legendDatasetIndex = item.getDatasetIndex() == Undefined.INTEGER ? Integer.MAX_VALUE : item.getDatasetIndex();
-				int legendIndex = item.getIndex() == Undefined.INTEGER ? Integer.MAX_VALUE : item.getIndex();
+				int legendDatasetIndex = Undefined.is(item.getDatasetIndex()) ? Integer.MAX_VALUE : item.getDatasetIndex();
+				int legendIndex = Undefined.is(item.getIndex()) ? Integer.MAX_VALUE : item.getIndex();
 				// checks if indexes are matching with HTML legend id
 				if (legendDatasetIndex == datasetIndex && legendIndex == index) {
 					return item;

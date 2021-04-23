@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.items.ChartAreaNode;
@@ -141,7 +142,7 @@ public final class ChartNode {
 	 * @return the CHART JS chart ID.
 	 */
 	public int getId() {
-		return initialized ? check(chart.getId(), Undefined.INTEGER) : Undefined.INTEGER;
+		return initialized ? Checker.positiveOrDefault(chart.getId(), Undefined.INTEGER) : Undefined.INTEGER;
 	}
 
 	/**
@@ -150,7 +151,7 @@ public final class ChartNode {
 	 * @return the width in pixel.
 	 */
 	public int getWidth() {
-		return initialized ? check(chart.getWidth(), Undefined.INTEGER) : Undefined.INTEGER;
+		return initialized ? Checker.positiveOrDefault(chart.getWidth(), Undefined.INTEGER) : Undefined.INTEGER;
 	}
 
 	/**
@@ -159,7 +160,7 @@ public final class ChartNode {
 	 * @return the height in pixel.
 	 */
 	public int getHeight() {
-		return initialized ? check(chart.getHeight(), Undefined.INTEGER) : Undefined.INTEGER;
+		return initialized ? Checker.positiveOrDefault(chart.getHeight(), Undefined.INTEGER) : Undefined.INTEGER;
 	}
 
 	/**
@@ -168,7 +169,7 @@ public final class ChartNode {
 	 * @return the aspect ratio.
 	 */
 	public double getAspectRatio() {
-		return initialized ? check(chart.getAspectRatio(), Undefined.DOUBLE) : Undefined.DOUBLE;
+		return initialized ? Checker.positiveOrDefault(chart.getAspectRatio(), Undefined.DOUBLE) : Undefined.DOUBLE;
 	}
 
 	/**
@@ -177,7 +178,7 @@ public final class ChartNode {
 	 * @return the current device pixel ratio.
 	 */
 	public double getCurrentDevicePixelRatio() {
-		return initialized ? check(chart.getCurrentDevicePixelRatio(), Undefined.DOUBLE) : Undefined.DOUBLE;
+		return initialized ? Checker.positiveOrDefault(chart.getCurrentDevicePixelRatio(), Undefined.DOUBLE) : Undefined.DOUBLE;
 	}
 
 	/**
@@ -187,28 +188,6 @@ public final class ChartNode {
 	 */
 	public String toJSON() {
 		return JSON.stringifyWithReplacer(chart, 3);
-	}
-
-	/**
-	 * Checks 2 integers and returns the no-null one.
-	 * 
-	 * @param value original value
-	 * @param defaultValue default value
-	 * @return returns the no-null one.
-	 */
-	private int check(int value, int defaultValue) {
-		return Double.isNaN(value) ? defaultValue : value;
-	}
-
-	/**
-	 * Checks 2 doubles and returns the no-null one.
-	 * 
-	 * @param value original value
-	 * @param defaultValue default value
-	 * @return returns the no-null one.
-	 */
-	private double check(double value, double defaultValue) {
-		return Double.isNaN(value) ? defaultValue : value;
 	}
 
 }

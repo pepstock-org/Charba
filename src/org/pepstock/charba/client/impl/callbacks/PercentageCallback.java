@@ -21,6 +21,7 @@ import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.items.DataItem;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -119,7 +120,7 @@ public final class PercentageCallback implements FormatterCallback {
 			// computes the percentage
 			double percentage = Percentage.compute(context.getChart(), value, context, stacked);
 			// checks if consistent
-			if (Double.isNaN(percentage)) {
+			if (Undefined.is(percentage)) {
 				// if not, returns NaN as string
 				return NAN_AS_STRING;
 			}

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.NativeArrayDoubleContainer;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Specifies the dataset for a bar chart as a pair of two numbers.<br>
@@ -95,7 +96,7 @@ public final class FloatingData extends NativeArrayDoubleContainer {
 		double start = getStart();
 		double end = getEnd();
 		// checks if the values are consistent
-		if (Double.isNaN(start) || Double.isNaN(end)) {
+		if (Undefined.is(start) || Undefined.is(end)) {
 			// if not consistent, returns 0
 			return 0D;
 		}

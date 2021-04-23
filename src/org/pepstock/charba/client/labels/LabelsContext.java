@@ -144,7 +144,7 @@ public final class LabelsContext extends AbstractDatasetContext {
 	@Override
 	protected boolean isConsistent() {
 		// checks if the data index and data set index are consistent
-		boolean indexed = getDatasetIndex() != Undefined.INTEGER && getDataIndex() != Undefined.INTEGER;
+		boolean indexed = Undefined.isNot(getDatasetIndex()) && Undefined.isNot(getDataIndex());
 		// checks that all items are there
 		return indexed && ContextType.LABELS.equals(getType()) && has(Property.LABEL) && has(Property.PERCENTAGE);
 	}

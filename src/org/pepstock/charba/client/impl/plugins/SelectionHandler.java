@@ -37,6 +37,7 @@ import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -537,7 +538,7 @@ final class SelectionHandler {
 			// gets the pixel by value
 			double nextEndPixel = scaleItem.getPixelForValue(nextValueIndex);
 			// if the pixel is consistent
-			if (!Double.isNaN(nextEndPixel)) {
+			if (Undefined.isNot(nextEndPixel)) {
 				// calculates the gap
 				// if start value equals to 0 (first) then uses values from 0 to 1
 				// if start value greater than 0 (no first) then uses values from current value minus 1

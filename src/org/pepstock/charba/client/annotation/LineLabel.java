@@ -1107,9 +1107,9 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// gets value
 		Double result = ScriptableUtils.getOptionValue(context, getRotationCallback(), defaultValue);
 		// checks if consistent
-		// if NaN or better AUTO_ROTATION,
+		// if NaN or infinite then AUTO_ROTATION,
 		// returns 'auto'
-		if (result != null && Double.isNaN(result)) {
+		if (result != null && Undefined.is(result)) {
 			// returns the string
 			return AUTO_ROTATION_AS_STRING;
 		} else if (result != null) {
@@ -1148,7 +1148,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		if (defaultvalueAsPercentage != null) {
 			// then returns the string as percentage
 			return defaultvalueAsPercentage;
-		} else if (defaultValue != Undefined.INTEGER) {
+		} else if (Undefined.isNot(defaultValue)) {
 			// checks if the default as pixels is consistent
 			// then returns the double as pixels
 			return defaultValue;

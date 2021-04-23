@@ -83,7 +83,7 @@ public final class Padding extends AbstractNode implements IsPadding {
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
 		// checks if the padding was stored as number
 		// this could happen in the default of chart.js
-		if (originalPadding != Undefined.INTEGER) {
+		if (Undefined.isNot(originalPadding)) {
 			// stores the values to all dimensions
 			set(originalPadding);
 		} else if (nativeObject != null) {
@@ -202,7 +202,7 @@ public final class Padding extends AbstractNode implements IsPadding {
 	 */
 	private void setDefaultPadding(Key key, int padding) {
 		// checks if values is consistent
-		if (!Undefined.is(padding)) {
+		if (Undefined.isNot(padding)) {
 			setValue(key, Checker.positiveOrZero(padding));
 		}
 	}

@@ -58,12 +58,32 @@ public final class Undefined {
 	}
 	
 	/**
+	 * Returns <code>true</code> if the value is undefined.
+	 * 
+	 * @param value value to be checked
+	 * @return <code>true</code> if the value is undefined
+	 */
+	public static boolean is(int value) {
+		return !isNot(value);
+	}
+	
+	/**
+	 * Returns <code>true</code> if the value is undefined.
+	 * 
+	 * @param value value to be checked
+	 * @return <code>true</code> if the value is undefined
+	 */
+	public static boolean is(double value) {
+		return !isNot(value);
+	}
+	
+	/**
 	 * Returns <code>true</code> if the value is not undefined.
 	 * 
 	 * @param value value to be checked
 	 * @return <code>true</code> if the value is not undefined
 	 */
-	public static boolean is(int value) {
+	public static boolean isNot(int value) {
 		return value != Undefined.INTEGER;
 	}
 	
@@ -73,18 +93,8 @@ public final class Undefined {
 	 * @param value value to be checked
 	 * @return <code>true</code> if the value is not undefined
 	 */
-	public static boolean is(double value) {
+	public static boolean isNot(double value) {
 		return !Double.isNaN(value) && !Double.isInfinite(value);
 	}
 	
-	/**
-	 * Returns <code>true</code> if the value is not undefined.
-	 * 
-	 * @param value value to be checked
-	 * @return <code>true</code> if the value is not undefined
-	 */
-	public static boolean is(Object value) {
-		return value != null;
-	}
-
 }

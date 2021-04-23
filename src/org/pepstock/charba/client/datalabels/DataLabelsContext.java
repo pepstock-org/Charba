@@ -101,7 +101,7 @@ public final class DataLabelsContext extends AbstractDatasetContext {
 	@Override
 	protected boolean isConsistent() {
 		// checks if the data index and data set index are consistent
-		return ContextType.DATALABELS.equals(getType()) && getDatasetIndex() != Undefined.INTEGER && getDataIndex() != Undefined.INTEGER;
+		return ContextType.DATALABELS.equals(getType()) && Undefined.isNot(getDatasetIndex()) && Undefined.isNot(getDataIndex());
 	}
 
 }

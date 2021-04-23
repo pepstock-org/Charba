@@ -545,7 +545,7 @@ public abstract class NativeObjectContainer {
 			// gets descriptor
 			double value = NativeObjectUtils.getDoubleProperty(nativeObject, key.value(), Undefined.DOUBLE);
 			// checks if value is consistent
-			if (!Double.isNaN(value) && value > 0D) {
+			if (Checker.isGreaterThan(value, 1D)) {
 				// creates and returns a date
 				return new ImmutableDate((long) value);
 			}
@@ -1389,7 +1389,7 @@ public abstract class NativeObjectContainer {
 		// gets date value as number
 		double value = getValueForMultipleKeyTypes(key, Double.NaN);
 		// checks if number value is consistent with a date
-		if (!Double.isNaN(value) && value > 0D) {
+		if (Checker.isGreaterThan(value, 1D)) {
 			// creates and returns a date
 			return new ImmutableDate((long) value);
 		}

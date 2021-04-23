@@ -448,9 +448,9 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		if (legendItem != null) {
 			// checks if data set index is the locator
 			// and the index is less than size of data sets
-			if (legendItem.getDatasetIndex() != Undefined.INTEGER && currentDatasets.size() > legendItem.getDatasetIndex()) {
+			if (Undefined.isNot(legendItem.getDatasetIndex()) && currentDatasets.size() > legendItem.getDatasetIndex()) {
 				return getDatasets().get(legendItem.getDatasetIndex());
-			} else if (legendItem.getIndex() != Undefined.INTEGER && !currentDatasets.isEmpty()) {
+			} else if (Undefined.isNot(legendItem.getIndex()) && !currentDatasets.isEmpty()) {
 				// if here is looking for data index then it uses
 				// the first data set
 				return getDatasets().get(0);
@@ -471,7 +471,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// checks if tooltip item is consistent
 		// and if data set index is the locator
 		// and the data set index is less than size of data sets
-		if (tooltipItem != null && tooltipItem.getDatasetIndex() != Undefined.INTEGER && currentDatasets.size() > tooltipItem.getDatasetIndex()) {
+		if (tooltipItem != null && Undefined.isNot(tooltipItem.getDatasetIndex()) && currentDatasets.size() > tooltipItem.getDatasetIndex()) {
 			return getDatasets().get(tooltipItem.getDatasetIndex());
 		}
 		// if here, tooltip item is not consistent
@@ -489,7 +489,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// checks if scriptable context is consistent
 		// and if data set index is the locator
 		// and the data set index is less than size of data sets
-		if (context != null && context.getDatasetIndex() != Undefined.INTEGER && currentDatasets.size() > context.getDatasetIndex()) {
+		if (context != null && Undefined.isNot(context.getDatasetIndex()) && currentDatasets.size() > context.getDatasetIndex()) {
 			return getDatasets().get(context.getDatasetIndex());
 		}
 		// if here, tooltip item is not consistent
@@ -549,10 +549,10 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 			// gets all list of canvas object
 			List<T> objects = container.getObjects(property);
 			// the legend item is set by data set index
-			if (legendItem.getDatasetIndex() != Undefined.INTEGER && !objects.isEmpty()) {
+			if (Undefined.isNot(legendItem.getDatasetIndex()) && !objects.isEmpty()) {
 				// return the first item
 				return objects.get(0);
-			} else if (legendItem.getIndex() != Undefined.INTEGER && objects.size() > legendItem.getIndex()) {
+			} else if (Undefined.isNot(legendItem.getIndex()) && objects.size() > legendItem.getIndex()) {
 				// if here is looking for data index
 				return objects.get(legendItem.getIndex());
 			}
@@ -563,14 +563,14 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Returns a string representation for all datasets, in JSON format.
+	 * Returns a string representation for all data sets, in JSON format.
 	 * 
-	 * @return a string representation for all datasets, in JSON format.
+	 * @return a string representation for all data sets, in JSON format.
 	 */
 	String getDatasetsAsString() {
 		// creates the builder
 		StringBuilder sb = new StringBuilder();
-		// scans all datasets
+		// scans all data sets
 		for (Dataset ds : currentDatasets) {
 			// adds to builder the data in JSON string format
 			sb.append(ds.toFilteredJSON()).append(Constants.LINE_SEPARATOR);

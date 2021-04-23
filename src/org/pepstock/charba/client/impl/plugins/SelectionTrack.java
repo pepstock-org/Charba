@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import org.pepstock.charba.client.items.Undefined;
+
 /**
  * It maintains the start and end point of mouse selection at X level.
  * 
@@ -132,7 +134,7 @@ final class SelectionTrack {
 	 * @return <code>true</code> if start and end positions are consistent and that means an area has been selected
 	 */
 	boolean isValid() {
-		return !Double.isNaN(start) && !Double.isNaN(end);
+		return Undefined.isNot(start) && Undefined.isNot(end);
 	}
 
 	/*

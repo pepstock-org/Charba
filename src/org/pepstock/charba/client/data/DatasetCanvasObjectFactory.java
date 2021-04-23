@@ -31,6 +31,7 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.DatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Utility class which creates a canvas gradient and pattern java script objects using a Charba gradient or pattern.<br>
@@ -149,7 +150,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			// CANVAS
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
-			if (datasetItem != null && !Double.isNaN(datasetItem.getController().getInnerRadius()) && !Double.isNaN(datasetItem.getController().getOuterRadius())) {
+			if (datasetItem != null && Undefined.isNot(datasetItem.getController().getInnerRadius()) && Undefined.isNot(datasetItem.getController().getOuterRadius())) {
 				// manages radius by chart node
 				manageRadiusByChartNode(chart, datasetItem, datasetIndex, index, radius);
 			} else {
@@ -164,7 +165,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			// CHART
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
-			if (datasetItem != null && !Double.isNaN(datasetItem.getController().getInnerRadius()) && !Double.isNaN(datasetItem.getController().getOuterRadius())) {
+			if (datasetItem != null && Undefined.isNot(datasetItem.getController().getInnerRadius()) && Undefined.isNot(datasetItem.getController().getOuterRadius())) {
 				// manages radius by chart node
 				manageRadiusByChartNode(chart, datasetItem, datasetIndex, index, radius);
 			} else {
@@ -195,7 +196,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 		if (datasetItem != null && index < datasetItem.getElements().size() && index >= 0) {
 			DatasetElement item = datasetItem.getElements().get(index);
 			// checks if chart is circular or not
-			if (!Double.isNaN(item.getInnerRadius()) && !Double.isNaN(item.getOuterRadius())) {
+			if (Undefined.isNot(item.getInnerRadius()) && Undefined.isNot(item.getOuterRadius())) {
 				// uses the inner radius
 				radius.setInner(Math.max(item.getInnerRadius(), node.getController().getInnerRadius()));
 				// uses the outer radius

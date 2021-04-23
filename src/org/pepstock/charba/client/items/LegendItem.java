@@ -113,18 +113,18 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns <code>true</code> if this item represents a hidden dataset.<br>
+	 * Returns <code>true</code> if this item represents a hidden data set.<br>
 	 * Label will be rendered with a strike-through effect
 	 * 
-	 * @param chart chart instance to check if dataset or data are visible
-	 * @return <code>true</code> if this item represents a hidden dataset.<br>
+	 * @param chart chart instance to check if data set or data are visible
+	 * @return <code>true</code> if this item represents a hidden data set.<br>
 	 *         Label will be rendered with a strike-through effect.
 	 */
 	public final boolean isHidden(IsChart chart) {
 		// checks if chart is consistent
 		if (IsChart.isValid(chart)) {
-			// gets if is hidden depending on dataset or data index
-			return getDatasetIndex() != Undefined.INTEGER ? !chart.isDatasetVisible(getDatasetIndex()) : !chart.isDataVisible(getIndex());
+			// gets if is hidden depending on data set or data index
+			return Undefined.isNot(getDatasetIndex()) ? !chart.isDatasetVisible(getDatasetIndex()) : !chart.isDataVisible(getIndex());
 		}
 		// if here, chart is not consistent
 		// returns always false
@@ -141,18 +141,18 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the dataset index of the chart
+	 * Returns the data set index of the chart
 	 * 
-	 * @return the dataset index of the chart.
+	 * @return the data set index of the chart.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property.DATASET_INDEX, Undefined.INTEGER);
 	}
 
 	/**
-	 * Returns the dataset index of the chart (for POLAR and PIE charts)
+	 * Returns the data set index of the chart (for POLAR and PIE charts)
 	 * 
-	 * @return the dataset index of the chart (for POLAR and PIE charts).
+	 * @return the data set index of the chart (for POLAR and PIE charts).
 	 */
 	public final int getIndex() {
 		return getValue(Property.INDEX, Undefined.INTEGER);

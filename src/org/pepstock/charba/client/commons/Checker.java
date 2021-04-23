@@ -393,7 +393,7 @@ public final class Checker {
 	 * @param what name of the value to put in the exception message
 	 */
 	public static void checkIfValid(int value, String what) {
-		if (!Undefined.is(value)) {
+		if (Undefined.is(value)) {
 			throwIllegalArgumentException(UNDEFINED_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
 	}
@@ -664,7 +664,7 @@ public final class Checker {
 	 * @param what name of the value to put in the exception message
 	 */
 	public static void checkIfValid(double value, String what) {
-		if (!Undefined.is(value)) {
+		if (Undefined.is(value)) {
 			throwIllegalArgumentException(UNDEFINED_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
 	}
@@ -689,7 +689,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is positive number (zero is included)
 	 */
 	public static boolean isPositive(double value) {
-		return Undefined.is(value) && value >= 0;
+		return Undefined.isNot(value) && value >= 0;
 	}
 
 	/**
@@ -725,7 +725,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is positive number (zero is excluded)
 	 */
 	public static boolean isNegative(double value) {
-		return Undefined.is(value) && value < 0;
+		return Undefined.isNot(value) && value < 0;
 	}
 
 	/**
@@ -762,7 +762,7 @@ public final class Checker {
 	 * @return <code>true</code> if the arguments are not equals
 	 */
 	public static boolean isNotEqualTo(double value, double target) {
-		return Undefined.is(value) && Undefined.is(target) && Double.compare(value, target) != 0;
+		return Undefined.isNot(value) && Undefined.isNot(target) && Double.compare(value, target) != 0;
 	}
 
 	/**
@@ -787,7 +787,7 @@ public final class Checker {
 	 * @return <code>true</code> if the arguments are equals
 	 */
 	public static boolean isEqualTo(double value, double target) {
-		return Undefined.is(value) && Undefined.is(target) && Double.compare(value, target) == 0;
+		return Undefined.isNot(value) && Undefined.isNot(target) && Double.compare(value, target) == 0;
 	}
 
 	/**
@@ -812,7 +812,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is greater than the threshold (inclusive)
 	 */
 	public static boolean isGreaterThan(double value, double threshold) {
-		return Undefined.is(value) && Undefined.is(threshold) && value >= threshold;
+		return Undefined.isNot(value) && Undefined.isNot(threshold) && value >= threshold;
 	}
 
 	/**
@@ -851,7 +851,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value is less than the threshold (inclusive)
 	 */
 	public static boolean isLessThan(double value, double threshold) {
-		return Undefined.is(value) && Undefined.is(threshold) && value <= threshold;
+		return Undefined.isNot(value) && Undefined.isNot(threshold) && value <= threshold;
 	}
 
 	/**
@@ -891,7 +891,7 @@ public final class Checker {
 	 * @return <code>true</code> if the value passed as argument is between minimum and maximum values, passed as argument (inclusive
 	 */
 	public static boolean isBetween(double value, double minimum, double maximum) {
-		return Undefined.is(value) && Undefined.is(minimum) && Undefined.is(maximum) && value >= minimum && value <= maximum;
+		return Undefined.isNot(value) && Undefined.isNot(minimum) && Undefined.isNot(maximum) && value >= minimum && value <= maximum;
 	}
 
 	/**
@@ -936,7 +936,7 @@ public final class Checker {
 	 * @param what name of the value to put in the exception message
 	 */
 	public static void checkIfValid(Object value, String what) {
-		if (!Undefined.is(value)) {
+		if (value == null) {
 			throwIllegalArgumentException(UNDEFINED_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
 	}

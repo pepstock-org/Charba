@@ -138,7 +138,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Ab
 		// loads padding as number
 		int paddingSize = getValue(property, Undefined.INTEGER);
 		// checks if padding is a number
-		if (paddingSize != Undefined.INTEGER) {
+		if (Undefined.isNot(paddingSize)) {
 			// removes the current node
 			// because it must update in an object
 			remove(property);

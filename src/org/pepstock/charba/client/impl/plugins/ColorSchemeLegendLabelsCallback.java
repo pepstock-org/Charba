@@ -122,12 +122,12 @@ final class ColorSchemeLegendLabelsCallback implements LegendLabelsCallback {
 		// calculates the max border width
 		int borderWidth = ColorSchemesUtil.get().getMaxBorderWidth(hovingFlexDataset);
 		// checks if bubble chart
-		if (item.getDatasetIndex() != Undefined.INTEGER) {
+		if (Undefined.isNot(item.getDatasetIndex())) {
 			// sets background colors
 			item.setFillStyle(backgroundColors.get(0));
 			// sets border color
 			item.setStrokeStyle(borderColors.get(0));
-		} else if (item.getIndex() != Undefined.INTEGER) {
+		} else if (Undefined.isNot(item.getIndex())) {
 			// sets background colors
 			item.setFillStyle(backgroundColors.get(item.getIndex()));
 			// sets border color

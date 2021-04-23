@@ -909,7 +909,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 				final int charbaIdOfScale = scaleItem.getCharbaId();
 				// checks if undefined
 				// means no axis configured in the chart
-				if (charbaIdOfScale != Undefined.INTEGER) {
+				if (Undefined.isNot(charbaIdOfScale)) {
 					// gets the axis by charba id
 					axis = getAxisById(charbaIdOfScale);
 				}

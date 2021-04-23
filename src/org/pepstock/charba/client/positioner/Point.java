@@ -116,7 +116,7 @@ public final class Point extends NativeObjectContainer {
 	 * @return <code>true</code> if the coordinates are consistent and not <code>NaN</code>
 	 */
 	public boolean isConsistent() {
-		return !Double.isNaN(getX()) && !Double.isNaN(getY());
+		return Undefined.isNot(getX()) && Undefined.isNot(getY());
 	}
 
 	/**
