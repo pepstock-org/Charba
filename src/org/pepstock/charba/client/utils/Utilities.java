@@ -334,6 +334,8 @@ public final class Utilities {
 		WORKING_CANVAS.setHeight(height);
 		// gets the context
 		Context2dItem context = WORKING_CANVAS.getContext2d();
+		// save context
+		context.save();
 		// clears the canvas for new design
 		context.clearRect(0D, 0D, WORKING_CANVAS.getWidth(), WORKING_CANVAS.getHeight());
 		// sets the background color
@@ -344,8 +346,12 @@ public final class Utilities {
 		context.fillRect(0, 0, width, height);
 		// closes the path
 		context.closePath();
+		// gets data from context
+		String dataUrl = WORKING_CANVAS.toDataURL();
+		// restore context
+		context.restore();
 		// returns
-		return WORKING_CANVAS.toDataURL();
+		return dataUrl;
 	}
 
 	/**
