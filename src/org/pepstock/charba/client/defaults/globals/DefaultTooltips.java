@@ -461,7 +461,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	}
 
 	/**
-	 * Internal class extending {@link DefaultFont} to override some defaults for title.
+	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for title.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -481,7 +481,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	}
 
 	/**
-	 * Internal class extending {@link DefaultFont} to override some defaults for body.
+	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for body.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -501,7 +501,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	}
 
 	/**
-	 * Internal class extending {@link DefaultFont} to override some defaults for footer.
+	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for footer.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *

@@ -15,33 +15,33 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
-import org.pepstock.charba.client.options.AbstractFont;
+import org.pepstock.charba.client.options.AbstractScriptableFont;
 
 /**
  * Base object to map font options for {@link AnnotationPlugin#ID} plugin LINE LABEL configuration.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Font extends AbstractFont {
+public final class Font extends AbstractScriptableFont<AnnotationContext> {
+
+//	/**
+//	 * Creates an empty font to use for default configuration.
+//	 */
+//	Font() {
+//		super(Defaults.get().getGlobal().getFont());
+//	}
 
 	/**
-	 * Creates an empty font to use for default configuration.
-	 */
-	Font() {
-		super(Defaults.get().getGlobal().getFont());
-	}
-
-	/**
-	 * Creates a font to use for chart configuration when the font is created by a callback, using a clone of another font object.
+	 * Creates a font to use for chart configuration.
 	 * 
+	 * @param parent the label where this font belongs to
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Font(IsDefaultFont defaultValues, NativeObject nativeObject) {
-		super(defaultValues, nativeObject);
+	Font(LineLabel parent, IsDefaultFont defaultValues, NativeObject nativeObject) {
+		super(parent, defaultValues, nativeObject);
 	}
 
 }

@@ -26,12 +26,12 @@ import org.pepstock.charba.client.enums.Weight;
  * 
  * @author Andrea "Stock" Stocchero
  */
-class DefaultRoutedFont implements IsDefaultFont {
+public class DefaultRoutedFont implements IsDefaultFont {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	DefaultRoutedFont() {
+	protected DefaultRoutedFont() {
 		// do nothing
 	}
 

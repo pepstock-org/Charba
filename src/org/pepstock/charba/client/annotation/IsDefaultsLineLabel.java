@@ -24,6 +24,7 @@ import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.CornerRadiusCallback;
+import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
@@ -297,6 +298,15 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	 * @return the callback called to set the horizontal alignment of the label text
 	 */
 	default TextAlignCallback<AnnotationContext> getTextAlignCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the font callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the font callback, if set, otherwise <code>null</code>.
+	 */
+	default FontCallback<AnnotationContext> getFontCallback() {
 		return null;
 	}
 }

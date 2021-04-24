@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.defaults.globals.DefaultRoutedFont;
+import org.pepstock.charba.client.enums.FontStyle;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin LABEL of LINE annotation DEFAULTS options.
@@ -27,17 +29,14 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 
 	// defaults options instance
 	static final DefaultLineLabel INSTANCE = new DefaultLineLabel();
-
-	private Font font;
+	// default font instance
+	private final IsDefaultFont font = new InternalFont();
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private DefaultLineLabel() {
-		this.font = new Font();
-		// stores style
-		this.font.setStyle(LineLabel.DEFAULT_FONT_STYLE);
-
+		// do nothing
 	}
 
 	/*
@@ -48,6 +47,26 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	@Override
 	public IsDefaultFont getFont() {
 		return font;
+	}
+	
+	/**
+	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for body.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalFont extends DefaultRoutedFont {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.defaults.globals.DefaultFont#getStyle()
+		 */
+		@Override
+		public FontStyle getStyle() {
+			return LineLabel.DEFAULT_FONT_STYLE;
+		}
+
 	}
 
 }

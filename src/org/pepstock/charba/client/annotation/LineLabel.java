@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
@@ -28,10 +29,12 @@ import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.CornerRadiusCallback;
+import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -53,7 +56,9 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.IsScriptableFontProvider;
 import org.pepstock.charba.client.utils.Window;
 
 /**
@@ -62,7 +67,7 @@ import org.pepstock.charba.client.utils.Window;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel, HasBackgroundColor {
+public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel, HasBackgroundColor, IsScriptableFontProvider<AnnotationContext> {
 
 	/**
 	 * Constant to use to set AUTO rotation of the label, to use in the rotation callback.
@@ -219,6 +224,8 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	private final CallbackProxy<ProxyDoubleCallback> xAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the yAdjust function
 	private final CallbackProxy<ProxyDoubleCallback> yAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the content function
+	private final CallbackProxy<ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle color options
 	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
@@ -246,6 +253,8 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	private static final CallbackPropertyHandler<AdjustSizeCallback> X_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_ADJUST);
 	// callback instance to handle yAdjustg options
 	private static final CallbackPropertyHandler<AdjustSizeCallback> Y_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_ADJUST);
+	// callback instance to handle yAdjustg options
+	private static final CallbackPropertyHandler<FontCallback<AnnotationContext>> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
 
 	// line annotation parent instance
 	private final LineAnnotation parent;
@@ -283,7 +292,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// stores incremental ID
 		setNewIncrementalId();
 		// gets font
-		this.font = new Font(defaultValues.getFont(), getValue(Property.FONT));
+		this.font = new Font(this, this.defaultValues.getFont(), getValue(Property.FONT));
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(parent, this.defaultValues, getNativeObject(), DEFAULT_BACKGROUND_COLOR_AS_STRING);
 		// -------------------------------
@@ -315,6 +324,8 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		this.yAdjustCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getYAdjustCallback(), defaultValues.getYAdjust()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.textAlignCallbackProxy.setCallback((contextFunction, context) -> onTextAlign(new AnnotationContext(this.parent, context), defaultValues.getTextAlign()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new AnnotationContext(this.parent, context)));
 	}
 
 	/*
@@ -1056,6 +1067,33 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public void setYAdjust(AdjustSizeCallback adjustCallback) {
 		Y_ADJUST_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustCallback, yAdjustCallbackProxy.getProxy());
 	}
+	
+	/**
+	 * Returns the font callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the font callback, if set, otherwise <code>null</code>.
+	 */
+	@Override
+	public final FontCallback<AnnotationContext> getFontCallback() {
+		return FONT_PROPERTY_HANDLER.getCallback(this, defaultValues.getFontCallback());
+	}
+
+	/**
+	 * Sets the the font callback.
+	 * 
+	 * @param fontCallback the font callback to set
+	 */
+	@Override
+	public final void setFont(FontCallback<AnnotationContext> fontCallback) {
+		FONT_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, fontCallback, fontCallbackProxy.getProxy());
+		// checks if the callback is null
+		// because setting to null, the original font must be set again
+		// in the the options
+		if (fontCallback == null && !has(Property.FONT)) {
+			// stores the font
+			setValue(Property.FONT, font);
+		}
+	}
 
 	// -----------------------
 	// INTERNALS for CALLBACKS
@@ -1176,6 +1214,28 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// if here the result is null
 		// then returns the default
 		return defaultValue.value();
+	}
+	
+	/**
+	 * Returns a native object as font when the callback has been activated.
+	 * 
+	 * @param context native object as context
+	 * @return a native object as font
+	 */
+	final NativeObject onFont(AnnotationContext context) {
+		// gets value
+		FontItem result = ScriptableUtils.getOptionValue(context, getFontCallback());
+		// checks if result is consistent
+		if (result != null) {
+			// returns result
+			return result.nativeObject();
+		} else if (font != null) {
+			// checks if provider is consistent
+			return font.create().nativeObject();
+		}
+		// if here, provider is not consistent
+		// then returns the defaults one
+		return Defaults.get().getGlobal().getFont().create().nativeObject();
 	}
 
 }

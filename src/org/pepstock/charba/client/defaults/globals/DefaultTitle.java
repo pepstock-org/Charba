@@ -118,7 +118,7 @@ public final class DefaultTitle implements IsDefaultTitle {
 	}
 
 	/**
-	 * Internal class extending {@link DefaultFont} to override some defaults for title.
+	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for title.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
