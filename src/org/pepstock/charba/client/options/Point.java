@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
@@ -94,7 +95,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param radius array of the radius of the point shape.
 	 */
 	public void setRadius(double radius) {
-		setValueAndAddToParent(Property.RADIUS, radius);
+		setValueAndAddToParent(Property.RADIUS, Checker.positiveOrZero(radius));
 	}
 
 	/**
@@ -113,7 +114,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param hitRadius the pixel size of the non-displayed point.
 	 */
 	public void setHitRadius(double hitRadius) {
-		setValueAndAddToParent(Property.HIT_RADIUS, hitRadius);
+		setValueAndAddToParent(Property.HIT_RADIUS, Checker.positiveOrZero(hitRadius));
 	}
 
 	/**
@@ -132,7 +133,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param hoverRadius the radius of the point when hovered.
 	 */
 	public void setHoverRadius(double hoverRadius) {
-		setValueAndAddToParent(Property.HOVER_RADIUS, hoverRadius);
+		setValueAndAddToParent(Property.HOVER_RADIUS, Checker.positiveOrZero(hoverRadius));
 	}
 
 	/**

@@ -393,7 +393,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @param stepSize user defined fixed step size for the scale.
 	 */
 	public void setStepSize(double stepSize) {
-		setValueAndAddToParent(Property.STEP_SIZE, stepSize);
+		setValueAndAddToParent(Property.STEP_SIZE, Checker.positiveOrDefault(stepSize, getDefaultValues().getStepSize()));
 	}
 
 	/**

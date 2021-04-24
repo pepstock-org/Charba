@@ -232,7 +232,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		// resets callback
 		setRadius(null);
 		// stores value
-		setValue(Property.RADIUS, radius);
+		setValue(Property.RADIUS, Checker.positiveOrZero(radius));
 	}
 
 	/**

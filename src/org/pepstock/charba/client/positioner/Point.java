@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.positioner;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -80,7 +81,7 @@ public final class Point extends NativeObjectContainer {
 	 * @param x the X coordinate of the point.
 	 */
 	public void setX(double x) {
-		setValue(Property.X, x);
+		setValue(Property.X, Checker.positiveOrZero(x));
 	}
 
 	/**
@@ -98,7 +99,7 @@ public final class Point extends NativeObjectContainer {
 	 * @param y the Y coordinate of the point.
 	 */
 	public void setY(double y) {
-		setValue(Property.Y, y);
+		setValue(Property.Y, Checker.positiveOrZero(y));
 	}
 
 	/**

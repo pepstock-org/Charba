@@ -211,7 +211,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	 * @param sensitivity the minimal zoom level before actually applying zoom, on category scale
 	 */
 	public void setSensitivity(double sensitivity) {
-		setValue(Property.SENSITIVITY, sensitivity);
+		setValue(Property.SENSITIVITY, Checker.positiveOrZero(sensitivity));
 	}
 
 	/**

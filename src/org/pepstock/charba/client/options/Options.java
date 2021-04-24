@@ -486,7 +486,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param ratio the aspect ratio.
 	 */
 	public void setAspectRatio(double ratio) {
-		setValue(Property.ASPECT_RATIO, ratio);
+		setValue(Property.ASPECT_RATIO, Checker.positiveOrDefault(ratio, 1));
 	}
 
 	/**
@@ -528,7 +528,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param ratio the pixel ratio.
 	 */
 	public void setDevicePixelRatio(double ratio) {
-		setValue(Property.DEVICE_PIXEL_RATIO, ratio);
+		setValue(Property.DEVICE_PIXEL_RATIO, Checker.positiveOrDefault(ratio, 1));
 	}
 
 	/**
@@ -795,7 +795,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 *            As {@link Double}, it is considered to be pixels.
 	 */
 	public void setRadius(double radius) {
-		setValue(Property.RADIUS, radius);
+		setValue(Property.RADIUS, Checker.positiveOrZero(radius));
 	}
 
 	/**

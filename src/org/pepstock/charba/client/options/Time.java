@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -225,7 +226,7 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	 * @param stepSize number of units between grid.
 	 */
 	public void setStepSize(double stepSize) {
-		setValueAndAddToParent(Property.STEP_SIZE, stepSize);
+		setValueAndAddToParent(Property.STEP_SIZE, Checker.positiveOrDefault(stepSize, getDefaultValues().getStepSize()));
 	}
 
 	/**

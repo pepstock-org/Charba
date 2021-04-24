@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.CartesianLinearAxis;
@@ -130,7 +131,7 @@ public final class Decimation extends AbstractModel<Plugins, IsDefaultDecimation
 	 * @param samples the number of samples in the output data set
 	 */
 	public void setSamples(double samples) {
-		setValueAndAddToParent(Property.SAMPLES, samples);
+		setValueAndAddToParent(Property.SAMPLES, Checker.positiveOrZero(samples));
 	}
 
 	/**

@@ -119,7 +119,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 	 * 
 	 * @param x the X value of range as double
 	 */
-	public void setX(Double x) {
+	public void setX(double x) {
 		setValue(Property.X, x);
 	}
 
@@ -191,7 +191,7 @@ public final class Range extends NativeObjectContainer implements IsDefaultRange
 	 * 
 	 * @param y the Y value of range as double
 	 */
-	public void setY(Double y) {
+	public void setY(double y) {
 		setValue(Property.Y, y);
 	}
 

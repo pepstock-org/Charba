@@ -531,7 +531,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// resets callback
 		setBorderRadius(null);
 		// stores the value
-		setValue(Property.BORDER_RADIUS, radius);
+		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(radius));
 	}
 
 	/**
@@ -736,7 +736,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// resets callback
 		setOpacity(null);
 		// stores the value
-		setValue(Property.OPACITY, opacity);
+		setValue(Property.OPACITY, Checker.betweenOrMaximum(opacity, 0, 1));
 	}
 
 	/**

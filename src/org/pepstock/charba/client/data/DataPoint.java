@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
@@ -259,7 +260,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @param r the bubble radius in pixels (not scaled).
 	 */
 	public void setR(double r) {
-		setValue(Property.R, r);
+		setValue(Property.R, Checker.positiveOrZero(r));
 	}
 
 	/**

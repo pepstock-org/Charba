@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ModifierKey;
@@ -130,7 +131,7 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 * @param threshold the minimal pan distance required before actually applying pan
 	 */
 	public void setThreshold(double threshold) {
-		setValue(Pan.Property.THRESHOLD, threshold);
+		setValue(Pan.Property.THRESHOLD, Checker.positiveOrZero(threshold));
 	}
 
 	/**
@@ -149,7 +150,7 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 * @param speed the threshold factor before applying pan, on category scale
 	 */
 	public void setSpeed(double speed) {
-		setValue(Property.SPEED, speed);
+		setValue(Property.SPEED, Checker.positiveOrZero(speed));
 	}
 
 	/**
