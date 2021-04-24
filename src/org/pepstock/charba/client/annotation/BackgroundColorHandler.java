@@ -93,7 +93,7 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 	 * @param parent model which contains the background color handler.
 	 * @param defaultValues default value of background color to use when the properties do not exist
 	 * @param nativeObject native object where background color handler properties must be managed
-	 * @param defaultBackgroundColor default background color because not possible to use teh default of interface
+	 * @param defaultBackgroundColor default background color because not possible to use the default of interface
 	 */
 	BackgroundColorHandler(AbstractAnnotation parent, IsDefaultsBackgroundColorHandler defaultValues, NativeObject nativeObject, String defaultBackgroundColor) {
 		super(parent, defaultValues, nativeObject);

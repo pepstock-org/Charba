@@ -93,7 +93,7 @@ public final class Utilities {
 	 * </code>
 	 * <br>
 	 * See <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/font">https://developer.mozilla.org/en-US/docs/Web/CSS/font</a><br>
-	 * font-variant is not implemented, therefore, teh template is:<br>
+	 * font-variant is not implemented, therefore, the template is:<br>
 	 * <br>
 	 * <code>
 	 * font-style  "normal "    font-weight  font-size/line-height  font-family
