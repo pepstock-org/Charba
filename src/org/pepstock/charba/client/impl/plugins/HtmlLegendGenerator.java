@@ -375,7 +375,7 @@ final class HtmlLegendGenerator {
 		// styling the cell
 		colorCell.setId(legendId.getIdForColor());
 		colorCell.setVAlign(TextBaseline.TOP.value());
-		colorCell.getStyle().setMarginRight(Unit.PX.format(legendLabels.getPadding() / 2D));
+		colorCell.getStyle().setMarginRight(Unit.PX.format((int)(legendLabels.getPadding() / 2D)));
 		colorCell.getStyle().setMarginBottom(Unit.PX.format(legendLabels.getPadding()));
 		colorCell.getStyle().setDisplay(Display.BLOCK);
 		colorCell.getStyle().setBorderSpacing(Unit.PX.format(0));
