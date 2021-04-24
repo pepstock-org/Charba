@@ -937,7 +937,7 @@ public final class Checker {
 	 */
 	public static void checkIfValid(Object value, String what) {
 		if (value == null) {
-			throwIllegalArgumentException(UNDEFINED_EXCEPTION_MESSAGE_TEMPLATE, what, value);
+			throwIllegalArgumentException(UNDEFINED_EXCEPTION_MESSAGE_TEMPLATE, what, Constants.NULL_STRING);
 		}
 	}
 
