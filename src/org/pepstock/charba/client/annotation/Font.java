@@ -26,13 +26,6 @@ import org.pepstock.charba.client.options.AbstractScriptableFont;
  */
 public final class Font extends AbstractScriptableFont<AnnotationContext> {
 
-//	/**
-//	 * Creates an empty font to use for default configuration.
-//	 */
-//	Font() {
-//		super(Defaults.get().getGlobal().getFont());
-//	}
-
 	/**
 	 * Creates a font to use for chart configuration.
 	 * 
