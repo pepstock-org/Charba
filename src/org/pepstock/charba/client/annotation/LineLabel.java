@@ -26,6 +26,7 @@ import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
+import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.CornerRadiusCallback;
@@ -264,6 +265,8 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	private final Font font;
 	// background color handler
 	private final BackgroundColorHandler backgroundColorHandler;
+	// draw time instance of the parent
+	private DrawTime parentDrawTime = null;
 
 	/**
 	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
@@ -815,6 +818,35 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// if here is not a string then
 		// returns the default
 		return defaultValues.getImageWidthAsPercentage();
+	}
+	
+	/**
+	 * Sets the draw time defined as default in the options from the parent.
+	 * 
+	 * @param parentDrawTime the draw time defined as default in the options from the parent
+	 */
+	void setParentDrawTime(DrawTime parentDrawTime) {
+		this.parentDrawTime = parentDrawTime;
+	}
+
+	/**
+	 * Sets the draw time which defines when the annotations are drawn.
+	 * 
+	 * @param drawTime the draw time which defines when the annotations are drawn
+	 */
+	public void setDrawTime(DrawTime drawTime) {
+		// stores value
+		setValue(AnnotationOptions.Property.DRAW_TIME, drawTime);
+	}
+
+	/**
+	 * Returns the draw time which defines when the annotations are drawn.
+	 * 
+	 * @return the draw time which defines when the annotations are drawn
+	 */
+	@Override
+	public DrawTime getDrawTime() {
+		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), parentDrawTime != null ? parentDrawTime : defaultValues.getDrawTime());
 	}
 
 	// ---------------------

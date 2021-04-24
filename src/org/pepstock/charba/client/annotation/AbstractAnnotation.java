@@ -21,6 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
+import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.listeners.ClickCallback;
@@ -36,6 +37,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCall
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -69,7 +71,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * Default annotation display, <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
 	public static final boolean DEFAULT_DISPLAY = true;
-	
+
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// exception pattern when the scale or scales methods is invoked and the scale type is not correct
@@ -150,6 +152,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private final CallbackProxy<ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border dash offset function
 	private final CallbackProxy<ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the draw time function
+	private final CallbackProxy<ProxyStringCallback> drawTimeCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
 	private static final CallbackPropertyHandler<DisplayCallback> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
@@ -161,6 +165,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private static final CallbackPropertyHandler<BorderDashCallback<AnnotationContext>> BORDER_DASH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH);
 	// callback instance to handle border dash offset options
 	private static final CallbackPropertyHandler<BorderDashOffsetCallback<AnnotationContext>> BORDER_DASH_OFFSET_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH_OFFSET);
+	// callback instance to handle draw time options
+	private static final CallbackPropertyHandler<DrawTimeCallback> DRAW_TIME_PROPERTY_HANDLER = new CallbackPropertyHandler<>(AnnotationOptions.Property.DRAW_TIME);
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES EVENTS
@@ -185,7 +191,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 
 	private final IsDefaultsAnnotation defaultValues;
 	// draw time instance set at plugin startup
-	private DrawTime defaultDrawTime = null;
+	private DrawTime parentDrawTime = null;
 
 	/**
 	 * Creates the object with the type of annotation to handle.
@@ -222,8 +228,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new AnnotationContext(this, context), getBorderDashCallback(), defaultValues.getBorderDash()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashOffsetCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset()).doubleValue());
+		this.borderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset()).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.drawTimeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDrawTimeCallback(), defaultValues.getDrawTime()).value());
 		// ------------------------------------------
 		// -- SET CALLBACKS to PROXIES for EVENTs ---
 		// ------------------------------------------
@@ -310,12 +317,20 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the draw time defined as default in the options as top level.
+	 * Sets the draw time defined as default in the options from the parent.
 	 * 
-	 * @param drawTime the draw time defined as default in the options as top level
+	 * @param parentDrawTime the draw time defined as default in the options from the parent
 	 */
-	final void setDefaultDrawTime(DrawTime drawTime) {
-		this.defaultDrawTime = drawTime;
+	final void setParentDrawTime(DrawTime parentDrawTime) {
+		this.parentDrawTime = parentDrawTime;
+		// checks if is line annotations to propagate to the label
+		// and the draw current draw mustn't be set
+		if (this instanceof LineAnnotation && isType(AnnotationOptions.Property.DRAW_TIME, ObjectType.UNDEFINED)) {
+			// casts
+			LineAnnotation line = (LineAnnotation)this;
+			// stores the parent draw time
+			line.getLabel().setParentDrawTime(parentDrawTime);
+		}
 	}
 
 	/**
@@ -324,7 +339,17 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * @param drawTime the draw time which defines when the annotations are drawn
 	 */
 	public final void setDrawTime(DrawTime drawTime) {
+		// resets callback
+		setDrawTime((DrawTimeCallback) null);
+		// stores value
 		setValue(AnnotationOptions.Property.DRAW_TIME, drawTime);
+		// checks if is line annotations to propagate to the label
+		if (this instanceof LineAnnotation) {
+			// casts
+			LineAnnotation line = (LineAnnotation)this;
+			// stores the parent draw time
+			line.getLabel().setParentDrawTime(drawTime);
+		}
 	}
 
 	/**
@@ -334,7 +359,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	@Override
 	public final DrawTime getDrawTime() {
-		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), defaultDrawTime != null ? defaultDrawTime : defaultValues.getDrawTime());
+		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), parentDrawTime != null ? parentDrawTime : defaultValues.getDrawTime());
 	}
 
 	/**
@@ -353,7 +378,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderColor(String borderColor) {
 		// resets callback
-		setBorderColor((ColorCallback<AnnotationContext>)null);
+		setBorderColor((ColorCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.BORDER_COLOR, borderColor);
 	}
@@ -386,7 +411,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderDash(int... borderDash) {
 		// resets callback
-		setBorderDash((BorderDashCallback<AnnotationContext>)null);
+		setBorderDash((BorderDashCallback<AnnotationContext>) null);
 		// stores value
 		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
@@ -430,10 +455,29 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	public final double getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, defaultValues.getBorderDashOffset());
 	}
-	
+
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
+
+	/**
+	 * Returns the callback called to set the draw time which defines when the annotations are drawn.
+	 * 
+	 * @return the callback called to set the draw time which defines when the annotations are drawn
+	 */
+	@Override
+	public final DrawTimeCallback getDrawTimeCallback() {
+		return DRAW_TIME_PROPERTY_HANDLER.getCallback(this, defaultValues.getDrawTimeCallback());
+	}
+
+	/**
+	 * Sets the callback to set the draw time which defines when the annotations are drawn.
+	 * 
+	 * @param drawTimeCallback to set the draw time which defines when the annotations are drawn
+	 */
+	public final void setDrawTime(DrawTimeCallback drawTimeCallback) {
+		DRAW_TIME_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, drawTimeCallback, drawTimeCallbackProxy.getProxy());
+	}
 
 	/**
 	 * Returns the callback called to set whether the annotation should be displayed.
@@ -713,7 +757,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// default result
 		return ArrayInteger.fromOrEmpty(defaultValue);
 	}
-	
+
 	/**
 	 * Returns an object as double, string or date (as time) when the callback has been activated.
 	 * 
@@ -727,7 +771,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// checks if consistent
 		if (result instanceof Number) {
 			// casts to number
-			Number number = (Number)result;
+			Number number = (Number) result;
 			// returns the number
 			return number.doubleValue();
 		} else if (result instanceof String) {
@@ -735,9 +779,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 			return result;
 		} else if (result instanceof Date) {
 			// casts to date
-			Date date = (Date)result;
+			Date date = (Date) result;
 			// returns the number
-			return (double)date.getTime();
+			return (double) date.getTime();
 		}
 		// default result is undefined
 		return Window.undefined();

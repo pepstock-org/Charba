@@ -62,7 +62,7 @@ class AnnotationMap extends NativeObjectContainer {
 			// scans all annotations
 			for (AbstractAnnotation annotation : getAnnotations()) {
 				// sets default
-				annotation.setDefaultDrawTime(drawTime);
+				annotation.setParentDrawTime(drawTime);
 			}
 		}
 	}
@@ -104,7 +104,7 @@ class AnnotationMap extends NativeObjectContainer {
 			// scans all arguments
 			for (AbstractAnnotation annotation : annotations) {
 				// sets default
-				annotation.setDefaultDrawTime(drawTime);
+				annotation.setParentDrawTime(drawTime);
 				// adds annotation
 				IsAnnotationId id = annotation.getId();
 				// stores in the java script object

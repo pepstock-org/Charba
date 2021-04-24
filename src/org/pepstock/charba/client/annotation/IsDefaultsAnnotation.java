@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
+import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.listeners.ClickCallback;
 import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
@@ -130,6 +131,15 @@ interface IsDefaultsAnnotation {
 	 * @return the callback called when a "dblclick" event is occurring
 	 */
 	default DoubleClickCallback getDoubleClickCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set the draw time which defines when the annotations are drawn.
+	 * 
+	 * @return the callback called to set the draw time which defines when the annotations are drawn
+	 */
+	default DrawTimeCallback getDrawTimeCallback() {
 		return null;
 	}
 

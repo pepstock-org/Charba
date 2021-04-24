@@ -21,6 +21,7 @@ import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
+import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.CornerRadiusCallback;
@@ -55,6 +56,16 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default boolean isDisplay() {
 		return LineLabel.DEFAULT_DISPLAY;
 	}
+	
+	/**
+	 * Returns the draw time which defines when the annotations are drawn.
+	 * 
+	 * @return the draw time which defines when the annotations are drawn
+	 */
+	default DrawTime getDrawTime() {
+		return AnnotationOptions.DEFAULT_DRAW_TIME;
+	}
+	
 
 	/**
 	 * Returns the font color of text as string.

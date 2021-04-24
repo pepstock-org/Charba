@@ -53,7 +53,7 @@ final class AnnotationCachedMap extends AnnotationMap {
 			// scans all annotations
 			for (AbstractAnnotation annotation : annotationsCache.values()) {
 				// sets default
-				annotation.setDefaultDrawTime(drawTime);
+				annotation.setParentDrawTime(drawTime);
 			}
 		}
 	}

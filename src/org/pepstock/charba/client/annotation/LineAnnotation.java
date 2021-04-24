@@ -92,7 +92,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 
 	// defaults options
 	private final IsDefaultsLineAnnotation defaultValues;
-	// lable for line instance
+	// label for line instance
 	private final LineLabel label;
 
 	/**
