@@ -463,6 +463,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change `getXScaleID` and `getXScaleID` methods in `BoxAnnotation` class of Annotation plugin in order to return a `IsScaleId` instance instead of a `String`.
    * change the constructors of `LineAnnotation` and `BoxAnnotation` in order to set an ID to the object. This will enable the possibility to define annotations items as default.
    * enable the callback definitions for all scriptable options in all annotations.
+   * add `drawTime` property to `LineLabel` configuration of `AnnotationPlugin`.
  * add `enabled` property to `DatasetsItemsSelector` plugin in order to disable/enable the plugin at runtime.
  * add `setXAxisID` method to `DatasetsItemsSelectorOptions` class in order to set the scale id using `IsScaleId` implementation.
  * add new `DatasetRangeClearSelectionEvent` event for `DatasetsItemsSelector` plugin in to order to notify when a clear action has been performed on chart.
