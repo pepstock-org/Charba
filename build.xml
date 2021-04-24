@@ -369,7 +369,11 @@
 				<exclude name="org/pepstock/charba/client/resources/ResourceLoadException.java"/>
 				<exclude name="org/pepstock/charba/client/resources/js/**"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
-			</fileset>	
+			</fileset>
+			<!-- includes license -->
+			<fileset dir=".">
+			  <filename name="LICENSE-2.0.txt"/>
+			</fileset>
 		</jar>
 	</target>
 
@@ -399,7 +403,11 @@
 				<exclude name="org/pepstock/charba/codegen/**"/>
 				<exclude name="org/pepstock/charba/client/resources/externs/**"/>
 				<exclude name="org/pepstock/charba/client/gwt/Charba.gwt.xml"/>
-			</fileset>	
+			</fileset>
+			<!-- includes license -->
+			<fileset dir=".">
+			  <filename name="LICENSE-2.0.txt"/>
+			</fileset>
 		</jar>
 	</target>
 
@@ -412,6 +420,10 @@
 		<sequential>
 			<jar jarfile="@{file}" encoding="UTF-8">
 				<fileset dir="${javadoc.dir}" />
+				<!-- includes license -->
+				<fileset dir=".">
+				  <filename name="LICENSE-2.0.txt"/>
+				</fileset>
 				<manifest>
 					<section name="Charba">
 						<attribute name="Version" value="${ivy.pubrevision}" />
@@ -451,7 +463,11 @@
 				<exclude name="org/pepstock/charba/client/resources/InjectableTextResource*"/>
 				<exclude name="org/pepstock/charba/client/resources/ResourceLoadException*"/>
 				<exclude name="org/pepstock/charba/client/resources/js/**"/>
-			</fileset>	
+			</fileset>
+			<!-- includes license -->
+			<fileset dir=".">
+			  <filename name="LICENSE-2.0.txt"/>
+			</fileset>
 		</jar>
 	</target>
 
@@ -468,7 +484,11 @@
 				<exclude name="org/pepstock/charba/codegen/**"/>
 				<exclude name="org/pepstock/charba/client/resources/externs/**"/>
 				<exclude name="org/pepstock/charba/client/gwt/Charba.gwt.xml"/>
-			</fileset>	
+			</fileset>
+			<!-- includes license -->
+			<fileset dir=".">
+			  <filename name="LICENSE-2.0.txt"/>
+			</fileset>
 		</jar>
 	</target>
 
@@ -482,7 +502,11 @@
 				<include name="**/*"/>
 				<exclude name="**/*.class"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
-			</fileset>	
+			</fileset>
+			<!-- includes license -->
+			<fileset dir=".">
+			  <filename name="LICENSE-2.0.txt"/>
+			</fileset>
 		</zip>
 	</target>
 
