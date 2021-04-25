@@ -31,6 +31,7 @@ interface IsDefaultPan extends IsDefaultConfigurationItem {
 	 * 
 	 * @return the minimal pan distance required before actually applying pan
 	 */
+	@Override
 	default double getThreshold() {
 		return Pan.DEFAULT_THRESHOLD;
 	}

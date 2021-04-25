@@ -18,6 +18,7 @@ package org.pepstock.charba.client.zoom;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -116,7 +117,8 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		MODE("mode"),
 		OVER_SCALE_MODE("overScaleMode"),
 		RANGE_MIN("rangeMin"),
-		RANGE_MAX("rangeMax");
+		RANGE_MAX("rangeMax"),
+		THRESHOLD("threshold");
 
 		// name value of property
 		private final String value;
@@ -222,6 +224,27 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	abstract CallbackPropertyHandler<RejectedCallback> getRejectedPropertyHandler();
 
+
+	/**
+	 * Returns the minimum element (panning or zooming) range depending on scale type.
+	 * 
+	 * @return the minimum element (panning or zooming) range depending on scale type
+	 */
+	@Override
+	public final Range getRangeMin() {
+		return rangeMin;
+	}
+
+	/**
+	 * Returns the maximum element (panning or zooming) range depending on scale type.
+	 * 
+	 * @return the maximum element (panning or zooming) range depending on scale type
+	 */
+	@Override
+	public final Range getRangeMax() {
+		return rangeMax;
+	}
+	
 	/**
 	 * Sets <code>true</code> to enable element (panning or zooming).
 	 * 
@@ -293,6 +316,30 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	public final InteractionAxis getOverScaleMode() {
 		return getValue(Property.OVER_SCALE_MODE, InteractionAxis.values(), defaultOptions.getOverScaleMode());
 	}
+	
+
+	/**
+	 * Sets the minimal pan distance required before actually applying pan.
+	 * 
+	 * @param threshold the minimal pan distance required before actually applying pan
+	 */
+	public void setThreshold(double threshold) {
+		setValue(Property.THRESHOLD, Checker.positiveOrZero(threshold));
+	}
+
+	/**
+	 * Returns the minimal pan distance required before actually applying pan.
+	 * 
+	 * @return the minimal pan distance required before actually applying pan
+	 */
+	@Override
+	public double getThreshold() {
+		return getValue(Property.THRESHOLD, getDefaultsOptions().getThreshold());
+	}
+	
+	// -----------------------
+	// CALLBACKS
+	// -----------------------
 
 	/**
 	 * Returns the element (panning or zooming) directions callback, to set the mode at runtime.
@@ -332,26 +379,6 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	public final void setOverScaleMode(ModeCallback modeCallback) {
 		OVER_SCALE_MODE_PROPERTY_HANDLER.setCallback(this, ZoomPlugin.ID, modeCallback, overScaleModeCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Returns the minimum element (panning or zooming) range depending on scale type.
-	 * 
-	 * @return the minimum element (panning or zooming) range depending on scale type
-	 */
-	@Override
-	public final Range getRangeMin() {
-		return rangeMin;
-	}
-
-	/**
-	 * Returns the maximum element (panning or zooming) range depending on scale type.
-	 * 
-	 * @return the maximum element (panning or zooming) range depending on scale type
-	 */
-	@Override
-	public final Range getRangeMax() {
-		return rangeMax;
 	}
 
 	/**

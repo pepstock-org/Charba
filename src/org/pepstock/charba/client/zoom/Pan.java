@@ -54,7 +54,6 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 */
 	enum Property implements Key
 	{
-		THRESHOLD("threshold"),
 		SPEED("speed"),
 		MODIFIER_KEY("modifierKey"),
 		ON_PAN("onPan"),
@@ -123,25 +122,6 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	@Override
 	CallbackPropertyHandler<RejectedCallback> getRejectedPropertyHandler() {
 		return PAN_REJECTED_PROPERTY_HANDLER;
-	}
-
-	/**
-	 * Sets the minimal pan distance required before actually applying pan.
-	 * 
-	 * @param threshold the minimal pan distance required before actually applying pan
-	 */
-	public void setThreshold(double threshold) {
-		setValue(Pan.Property.THRESHOLD, Checker.positiveOrZero(threshold));
-	}
-
-	/**
-	 * Returns the minimal pan distance required before actually applying pan.
-	 * 
-	 * @return the minimal pan distance required before actually applying pan
-	 */
-	@Override
-	public double getThreshold() {
-		return getValue(Pan.Property.THRESHOLD, getDefaultsOptions().getThreshold());
 	}
 
 	/**

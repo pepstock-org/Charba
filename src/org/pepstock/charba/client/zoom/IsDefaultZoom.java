@@ -27,12 +27,13 @@ import org.pepstock.charba.client.enums.ModifierKey;
 interface IsDefaultZoom extends IsDefaultConfigurationItem {
 
 	/**
-	 * Returns the minimal zoom level before actually applying zoom, on category scale.
+	 * Returns the minimal pan distance required before actually applying pan.
 	 * 
-	 * @return the minimal zoom level before actually applying zoom, on category scale
+	 * @return the minimal pan distance required before actually applying pan
 	 */
-	default double getSensitivity() {
-		return Zoom.DEFAULT_SENSITIVITY;
+	@Override
+	default double getThreshold() {
+		return Zoom.DEFAULT_THRESHOLD;
 	}
 
 	/**

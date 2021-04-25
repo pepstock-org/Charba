@@ -55,6 +55,13 @@ interface IsDefaultConfigurationItem {
 	default InteractionAxis getOverScaleMode() {
 		return AbstractConfigurationItem.DEFAULT_OVER_SCALE_MODE;
 	}
+	
+	/**
+	 * Returns the minimal pan distance required before actually applying pan.
+	 * 
+	 * @return the minimal pan distance required before actually applying pan
+	 */
+	double getThreshold();
 
 	/**
 	 * Returns the element (panning or zooming) directions callback, to set the mode at runtime.

@@ -431,6 +431,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * rename `CompleteCallback` class to `CompletedCallback` (and the name of the method from `onComplete` to `onCompleted`) in the `ZoomPlugin`.
  * rename `getCompleteCallback` and `setCompletedCallback` methods to `getCompleteCallback` and `setCompleteCallback` in the `Zoom` and `Pan` options in the `ZoomPlugin`.
  * change `ModeCallback` interface method signature adding new argument, the configuration element of the `Zoom` options.
+ * remove `sensibility` property from `Zoom` configuration and options.
  * rename `enabled` property to `display` in `LineLabel` configuration of `AnnotationPlugin`.
  * move `AnnotationType` enumeration from `org.pepstock.charba.client.annotation.enums` to `org.pepstock.charba.client.annotation` in order to maintain the low visibility of internal classes of the annotation plugin implementation.
  * rename `LineLablePosition` class to `LablePosition` for `LineLabel` configuration of `AnnotationPlugin`.
@@ -474,6 +475,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve `Labels` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
  * improve `LabelsOptionsBuilder` class in order to manage the multi-labels configuration.
  * improve `Zoom` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
+ * add `threshold` property to `Zoom` configuration and options.
  * add `RejectedCallback` class to `Zoom` and `Pan` options in the `ZoomPlugin` in order to manage the event when pan or zoom fail because modifier key was not detected.
  * add `modifierKey` property to `Pan` options in the `ZoomPlugin` in order to enable pan only when modifier key was detected.
  * add `wheelModifierKey` property to `Zoom` options in the `ZoomPlugin` in order to enable zoom only when modifier key was detected.

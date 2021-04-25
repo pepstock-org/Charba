@@ -51,16 +51,15 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	public static final boolean DEFAULT_DRAG = false;
 
 	/**
-	 * Default sensitivity, <b>{@value DEFAULT_SENSITIVITY}</b>.
+	 * Default threshold, <b>{@value DEFAULT_THRESHOLD}</b>.
 	 */
-	public static final double DEFAULT_SENSITIVITY = 3D;
+	public static final double DEFAULT_THRESHOLD = 0D;
 
 	/**
 	 * Name of properties of native object.
 	 */
 	enum Property implements Key
 	{
-		SENSITIVITY("sensitivity"),
 		SPEED("speed"),
 		DRAG("drag"),
 		WHEEL_MODIFIER_KEY("wheelModifierKey"),
@@ -203,25 +202,6 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	@Override
 	public double getSpeed() {
 		return getValue(Property.SPEED, getDefaultsOptions().getSpeed());
-	}
-
-	/**
-	 * Sets the minimal zoom level before actually applying zoom, on category scale.
-	 * 
-	 * @param sensitivity the minimal zoom level before actually applying zoom, on category scale
-	 */
-	public void setSensitivity(double sensitivity) {
-		setValue(Property.SENSITIVITY, Checker.positiveOrZero(sensitivity));
-	}
-
-	/**
-	 * Returns the minimal zoom level before actually applying zoom, on category scale.
-	 * 
-	 * @return the minimal zoom level before actually applying zoom, on category scale
-	 */
-	@Override
-	public double getSensitivity() {
-		return getValue(Property.SENSITIVITY, getDefaultsOptions().getSensitivity());
 	}
 
 	/**
