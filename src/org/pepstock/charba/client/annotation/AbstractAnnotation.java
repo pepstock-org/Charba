@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
@@ -71,6 +72,11 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * Default annotation display, <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
 	public static final boolean DEFAULT_DISPLAY = true;
+	
+	/**
+	 * Default annotation adjust scale range, <b>{@value DEFAULT_ADJUST_SCALE_RANGE}</b>.
+	 */
+	public static final boolean DEFAULT_ADJUST_SCALE_RANGE = true;
 
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
@@ -99,13 +105,16 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	enum Property implements Key
 	{
+		// read only
 		TYPE("type"),
 		ID("id"),
-		DISPLAY("display"),
+		// options
+		ADJUST_SCALE_RANGE("adjustScaleRange"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth"),
 		BORDER_DASH("borderDash"),
 		BORDER_DASH_OFFSET("borderDashOffset"),
+		DISPLAY("display"),
 		// events properties
 		ENTER("enter"),
 		LEAVE("leave"),
@@ -154,6 +163,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private final CallbackProxy<ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the draw time function
 	private final CallbackProxy<ProxyStringCallback> drawTimeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the adjust scale range function
+	private final CallbackProxy<ProxyBooleanCallback> adjustScaleRangeCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
 	private static final CallbackPropertyHandler<DisplayCallback> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
@@ -167,6 +178,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private static final CallbackPropertyHandler<BorderDashOffsetCallback<AnnotationContext>> BORDER_DASH_OFFSET_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH_OFFSET);
 	// callback instance to handle draw time options
 	private static final CallbackPropertyHandler<DrawTimeCallback> DRAW_TIME_PROPERTY_HANDLER = new CallbackPropertyHandler<>(AnnotationOptions.Property.DRAW_TIME);
+	// callback instance to handle adjust scale range options
+	private static final CallbackPropertyHandler<AdjustScaleRangeCallback> ADJUST_SCALE_RANGE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ADJUST_SCALE_RANGE);
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES EVENTS
@@ -231,6 +244,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		this.borderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.drawTimeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDrawTimeCallback(), defaultValues.getDrawTime()).value());
+		// sets function to proxy callback in order to invoke the java interface
+		this.adjustScaleRangeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getAdjustScaleRangeCallback(), defaultValues.isAdjustScaleRange()));
 		// ------------------------------------------
 		// -- SET CALLBACKS to PROXIES for EVENTs ---
 		// ------------------------------------------
@@ -314,6 +329,29 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	@Override
 	public final boolean isDisplay() {
 		return getValue(Property.DISPLAY, defaultValues.isDisplay());
+	}
+	
+
+	/**
+	 * Sets <code>true</code> whether it should the scale range be adjusted if this annotation is out of range.
+	 * 
+	 * @param display <code>true</code> whether it should the scale range be adjusted if this annotation is out of range
+	 */
+	public final void setAdjustScaleRange(boolean display) {
+		// resets callback
+		setAdjustScaleRange(null);
+		// stores value
+		setValue(Property.ADJUST_SCALE_RANGE, display);
+	}
+
+	/**
+	 * Returns <code>true</code> whether it should the scale range be adjusted if this annotation is out of range.
+	 * 
+	 * @return <code>true</code> whether it should the scale range be adjusted if this annotation is out of range
+	 */
+	@Override
+	public final boolean isAdjustScaleRange() {
+		return getValue(Property.ADJUST_SCALE_RANGE, defaultValues.isAdjustScaleRange());
 	}
 
 	/**
@@ -576,6 +614,25 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderDashOffset(BorderDashOffsetCallback<AnnotationContext> borderDashOffsetCallback) {
 		BORDER_DASH_OFFSET_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderDashOffsetCallback, borderDashOffsetCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Returns the callback called to set whether it should the scale range be adjusted if this annotation is out of range.
+	 * 
+	 * @return the callback called to set whether it should the scale range be adjusted if this annotation is out of range
+	 */
+	@Override
+	public final AdjustScaleRangeCallback getAdjustScaleRangeCallback() {
+		return ADJUST_SCALE_RANGE_PROPERTY_HANDLER.getCallback(this, defaultValues.getAdjustScaleRangeCallback());
+	}
+
+	/**
+	 * Sets the callback to set whether it should the scale range be adjusted if this annotation is out of range.
+	 * 
+	 * @param adjustScaleRangeCallback to set whether it should the scale range be adjusted if this annotation is out of range
+	 */
+	public final void setAdjustScaleRange(AdjustScaleRangeCallback adjustScaleRangeCallback) {
+		ADJUST_SCALE_RANGE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustScaleRangeCallback, adjustScaleRangeCallbackProxy.getProxy());
 	}
 
 	// ---------------------

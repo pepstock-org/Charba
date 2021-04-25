@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
@@ -53,6 +54,15 @@ interface IsDefaultsAnnotation {
 	 */
 	default boolean isDisplay() {
 		return AbstractAnnotation.DEFAULT_DISPLAY;
+	}
+	
+	/**
+	 * Returns <code>true</code> whether it should the scale range be adjusted if this annotation is out of range.
+	 * 
+	 * @return <code>true</code> whether it should the scale range be adjusted if this annotation is out of range
+	 */
+	default boolean isAdjustScaleRange() {
+		return AbstractAnnotation.DEFAULT_ADJUST_SCALE_RANGE;
 	}
 
 	/**
@@ -187,6 +197,15 @@ interface IsDefaultsAnnotation {
 	 * @return the callback called to set the line dash pattern offset
 	 */
 	default BorderDashOffsetCallback<AnnotationContext> getBorderDashOffsetCallback() {
+		return null;
+	}
+	
+	/**
+	 * Returns the callback called to set whether it should the scale range be adjusted if this annotation is out of range.
+	 * 
+	 * @return the callback called to set whether it should the scale range be adjusted if this annotation is out of range
+	 */
+	default AdjustScaleRangeCallback getAdjustScaleRangeCallback() {
 		return null;
 	}
 	

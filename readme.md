@@ -435,6 +435,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * rename `enabled` property to `display` in `LineLabel` configuration of `AnnotationPlugin`.
  * move `AnnotationType` enumeration from `org.pepstock.charba.client.annotation.enums` to `org.pepstock.charba.client.annotation` in order to maintain the low visibility of internal classes of the annotation plugin implementation.
  * rename `LineLablePosition` class to `LablePosition` for `LineLabel` configuration of `AnnotationPlugin`.
+ * add `adjustScaleRange` options to all annotations element.
 
 #### Features
  * change all methods of `Plugin` interface becoming all default ones.
