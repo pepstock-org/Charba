@@ -55,11 +55,11 @@ interface IsDefaultsAnnotation {
 	default boolean isDisplay() {
 		return AbstractAnnotation.DEFAULT_DISPLAY;
 	}
-	
+
 	/**
-	 * Returns <code>true</code> whether it should the scale range be adjusted if this annotation is out of range.
+	 * Returns <code>true</code> whether the scale range should be adjusted if this annotation is out of range.
 	 * 
-	 * @return <code>true</code> whether it should the scale range be adjusted if this annotation is out of range
+	 * @return <code>true</code> whether the scale range should be adjusted if this annotation is out of range
 	 */
 	default boolean isAdjustScaleRange() {
 		return AbstractAnnotation.DEFAULT_ADJUST_SCALE_RANGE;
@@ -143,7 +143,7 @@ interface IsDefaultsAnnotation {
 	default DoubleClickCallback getDoubleClickCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the draw time which defines when the annotations are drawn.
 	 * 
@@ -170,7 +170,7 @@ interface IsDefaultsAnnotation {
 	default ColorCallback<AnnotationContext> getBorderColorCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the width of the border in pixels.
 	 * 
@@ -179,7 +179,7 @@ interface IsDefaultsAnnotation {
 	default WidthCallback<AnnotationContext> getBorderWidthCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
 	 * describe the pattern.
@@ -190,7 +190,7 @@ interface IsDefaultsAnnotation {
 	default BorderDashCallback<AnnotationContext> getBorderDashCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the line dash pattern offset.
 	 * 
@@ -199,14 +199,14 @@ interface IsDefaultsAnnotation {
 	default BorderDashOffsetCallback<AnnotationContext> getBorderDashOffsetCallback() {
 		return null;
 	}
-	
+
 	/**
-	 * Returns the callback called to set whether it should the scale range be adjusted if this annotation is out of range.
+	 * Returns the callback called to set whether the scale range should be adjusted if this annotation is out of range.
 	 * 
-	 * @return the callback called to set whether it should the scale range be adjusted if this annotation is out of range
+	 * @return the callback called to set whether the scale range should be adjusted if this annotation is out of range
 	 */
 	default AdjustScaleRangeCallback getAdjustScaleRangeCallback() {
 		return null;
 	}
-	
+
 }

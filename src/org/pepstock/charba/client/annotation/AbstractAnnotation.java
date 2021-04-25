@@ -333,9 +333,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	
 
 	/**
-	 * Sets <code>true</code> whether it should the scale range be adjusted if this annotation is out of range.
+	 * Sets <code>true</code> whether the scale range should be adjusted if this annotation is out of range.
 	 * 
-	 * @param display <code>true</code> whether it should the scale range be adjusted if this annotation is out of range
+	 * @param display <code>true</code> whether the scale range should be adjusted if this annotation is out of range
 	 */
 	public final void setAdjustScaleRange(boolean display) {
 		// resets callback
@@ -345,9 +345,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns <code>true</code> whether it should the scale range be adjusted if this annotation is out of range.
+	 * Returns <code>true</code> whether the scale range should be adjusted if this annotation is out of range.
 	 * 
-	 * @return <code>true</code> whether it should the scale range be adjusted if this annotation is out of range
+	 * @return <code>true</code> whether the scale range should be adjusted if this annotation is out of range
 	 */
 	@Override
 	public final boolean isAdjustScaleRange() {
@@ -617,9 +617,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 	
 	/**
-	 * Returns the callback called to set whether it should the scale range be adjusted if this annotation is out of range.
+	 * Returns the callback called to set whether the scale range should be adjusted if this annotation is out of range.
 	 * 
-	 * @return the callback called to set whether it should the scale range be adjusted if this annotation is out of range
+	 * @return the callback called to set whether the scale range should be adjusted if this annotation is out of range
 	 */
 	@Override
 	public final AdjustScaleRangeCallback getAdjustScaleRangeCallback() {
@@ -627,9 +627,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the callback to set whether it should the scale range be adjusted if this annotation is out of range.
+	 * Sets the callback to set whether the scale range should be adjusted if this annotation is out of range.
 	 * 
-	 * @param adjustScaleRangeCallback to set whether it should the scale range be adjusted if this annotation is out of range
+	 * @param adjustScaleRangeCallback to set whether the scale range should be adjusted if this annotation is out of range
 	 */
 	public final void setAdjustScaleRange(AdjustScaleRangeCallback adjustScaleRangeCallback) {
 		ADJUST_SCALE_RANGE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustScaleRangeCallback, adjustScaleRangeCallbackProxy.getProxy());
