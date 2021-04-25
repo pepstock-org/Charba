@@ -164,10 +164,13 @@ public final class Chart {
 	/**
 	 * Returns a base 64 encoded string of the chart in it's current state.
 	 * 
+	 * @param type indicating the image format
+	 * @param encoderOptions between 0 and 1 indicating the image quality to use for image formats that use lossy compression.<br>
+	 *            If this argument is anything else, the default value for image quality is used. The default value is 0.92.
 	 * @return base 64 image
 	 */
 	@JsMethod
-	native String toBase64Image();
+	native String toBase64Image(String type, double encoderOptions);
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>

@@ -47,6 +47,7 @@ import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.Position;
 import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.enums.DataType;
+import org.pepstock.charba.client.enums.ImageMimeType;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.events.AddHandlerEvent;
@@ -626,14 +627,20 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	/**
 	 * Returns a base 64 encoded string of the chart in it's current state.
 	 * 
+	 * @param type indicating the image format
+	 * @param encoderOptions between 0 and 1 indicating the image quality to use for image formats that use lossy compression.<br>
+	 *            If this argument is anything else, the default value for image quality is used. The default value is 0.92.
 	 * @return base 64 image or {@link Undefined#STRING} if chart is not initialized.
 	 */
 	@Override
-	public final String toBase64Image() {
+	public final String toBase64Image(ImageMimeType type, double encoderOptions) {
 		// checks if chart is created
 		if (isInitialized()) {
+			// checks if the type is consistent
+			ImageMimeType checkedImageMimeType = Key.isValid(type) ? type : ImageMimeType.PNG;
+			// gets the data from canvas
 			// then get the image
-			return chart.toBase64Image();
+			return chart.toBase64Image(checkedImageMimeType.value(), Checker.betweenOrDefault(encoderOptions, 0, 1, Canvas.DEFAULT_ENCODER_OPTIONS));
 		}
 		// default
 		return Undefined.STRING;

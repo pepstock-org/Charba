@@ -28,6 +28,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.enums.ImageMimeType;
 import org.pepstock.charba.client.events.Event;
 import org.pepstock.charba.client.events.EventHandler;
 import org.pepstock.charba.client.events.EventType;
@@ -345,14 +346,12 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 		chart.reset();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.IsChart#toBase64Image()
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.IsChart#toBase64Image(org.pepstock.charba.client.enums.ImageMimeType, double)
 	 */
 	@Override
-	public final String toBase64Image() {
-		return chart.toBase64Image();
+	public String toBase64Image(ImageMimeType type, double encoderOptions) {
+		return chart.toBase64Image(type, encoderOptions);
 	}
 
 	/*

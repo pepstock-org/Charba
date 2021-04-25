@@ -40,9 +40,11 @@ Chart.prototype.clear = function() {};
  */
 Chart.prototype.reset = function() {};
 /**
+ * @param {string=} type
+ * @param {number=} quality
  * @return {string}
  */
-Chart.prototype.toBase64Image = function() {};
+Chart.prototype.toBase64Image = function(type, quality) {};
 /**
  * @return {string}
  */

@@ -25,6 +25,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.enums.ImageMimeType;
 import org.pepstock.charba.client.events.Event;
 import org.pepstock.charba.client.events.EventHandler;
 import org.pepstock.charba.client.events.EventType;
@@ -342,13 +343,48 @@ public interface IsChart {
 	 * Reset the chart to it's state before the initial animation. A new animation can then be triggered using update.
 	 */
 	void reset();
+	
+	/**
+	 * Returns a data-URL containing a representation of the image in the PNG format and the image quality value is 0.92.
+	 * 
+	 * @return a data-URL containing a representation of the image in the PNG format
+	 */
+	default String toBase64Image() {
+		return toBase64Image(ImageMimeType.PNG);
+	}
+
+	/**
+	 * Returns a data-URL containing a representation of the image in the PNG format.<br>
+	 * The returned image is in a resolution of 96dpi.
+	 * 
+	 * @param encoderOptions between 0 and 1 indicating the image quality to use for image formats that use lossy compression.<br>
+	 *            If this argument is anything else, the default value for image quality is used. The default value is 0.92.
+	 * @return a data-URL containing a representation of the image in the PNG format
+	 */
+	default String toBase64Image(double encoderOptions) {
+		return toBase64Image(ImageMimeType.PNG, encoderOptions);
+	}
+
+	/**
+	 * Returns a data-URL containing a representation of the image format, passed as argument.<br>
+	 * The returned image is in a resolution of 96dpi and the image quality value is 0.92.
+	 * 
+	 * @param type indicating the image format
+	 * @return a data-URL containing a representation of the image format, passed as argument
+	 */
+	default String toBase64Image(ImageMimeType type) {
+		return toBase64Image(type, Canvas.DEFAULT_ENCODER_OPTIONS);
+	}
 
 	/**
 	 * Returns a base 64 encoded string of the chart in it's current state.
 	 * 
+	 * @param type indicating the image format
+	 * @param encoderOptions between 0 and 1 indicating the image quality to use for image formats that use lossy compression.<br>
+	 *            If this argument is anything else, the default value for image quality is used. The default value is 0.92.
 	 * @return base 64 image or {@link Undefined#STRING} if chart is not initialized.
 	 */
-	String toBase64Image();
+	String toBase64Image(ImageMimeType type, double encoderOptions);
 
 	/**
 	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called this method manually if you change the size of the

@@ -182,9 +182,9 @@ public final class Canvas extends BaseHtmlElement implements IsCastable {
 	@JsOverlay
 	public final String toDataURL(ImageMimeType type, double encoderOptions) {
 		// checks if the type is consistent
-		Key.checkIfValid(type);
+		ImageMimeType checkedImageMimeType = Key.isValid(type) ? type : ImageMimeType.PNG;
 		// gets the data from canvas
-		return nativeToDataURL(type.value(), Checker.betweenOrDefault(encoderOptions, 0, 1, DEFAULT_ENCODER_OPTIONS));
+		return nativeToDataURL(checkedImageMimeType.value(), Checker.betweenOrDefault(encoderOptions, 0, 1, DEFAULT_ENCODER_OPTIONS));
 	}
 
 }

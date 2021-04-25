@@ -28,11 +28,11 @@ public enum ImageMimeType implements Key
 	 * The ends of lines are squared off at the end points.<br>
 	 * Default.
 	 */
-	PNG("butt"),
+	PNG("image/png"),
 	/**
 	 * The ends of lines are rounded.
 	 */
-	JPEG("round");
+	JPEG("image/jpeg");
 
 	// name value of property
 	private final String value;
