@@ -15,10 +15,13 @@
 */
 package org.pepstock.charba.client.dom.elements;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.IsCastable;
+import org.pepstock.charba.client.enums.ImageMimeType;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -43,6 +46,8 @@ public final class Canvas extends BaseHtmlElement implements IsCastable {
 	// context id to retrieve
 	@JsOverlay
 	private static final String CONTEXT_2D = "2d";
+	@JsOverlay
+	public static final double DEFAULT_ENCODER_OPTIONS = 0.92;
 
 	/**
 	 * To avoid any instantiation
@@ -88,13 +93,16 @@ public final class Canvas extends BaseHtmlElement implements IsCastable {
 	public native void setWidth(int width);
 
 	/**
-	 * Returns a data-URL containing a representation of the image in the PNG format.<br>
+	 * Returns a data-URL containing a representation of the image in the image format, passed as argument.<br>
 	 * The returned image is in a resolution of 96dpi.
 	 * 
-	 * @return a data-URL containing a representation of the image in the PNG format
+	 * @param type indicating the image format
+	 * @param encoderOptions between 0 and 1 indicating the image quality to use for image formats that use lossy compression.<br>
+	 *            If this argument is anything else, the default value for image quality is used. The default value is 0.92.
+	 * @return a data-URL containing a representation of the image in the image format, passed as argument
 	 */
-	@JsMethod
-	public native String toDataURL();
+	@JsMethod(name = "toDataURL")
+	private native String nativeToDataURL(String type, double encoderOptions);
 
 	/**
 	 * Returns a drawing context on the canvas, or <code>null</code> if the context ID is not supported.<br>
@@ -125,6 +133,58 @@ public final class Canvas extends BaseHtmlElement implements IsCastable {
 	public final boolean isSupported() {
 		// checks if context is not null
 		return getContext(CONTEXT_2D) != null;
+	}
+
+	/**
+	 * Returns a data-URL containing a representation of the image in the PNG format and the image quality value is 0.92.
+	 * 
+	 * @return a data-URL containing a representation of the image in the PNG format
+	 */
+	@JsOverlay
+	public final String toDataURL() {
+		return toDataURL(ImageMimeType.PNG);
+	}
+
+	/**
+	 * Returns a data-URL containing a representation of the image in the PNG format.<br>
+	 * The returned image is in a resolution of 96dpi.
+	 * 
+	 * @param encoderOptions between 0 and 1 indicating the image quality to use for image formats that use lossy compression.<br>
+	 *            If this argument is anything else, the default value for image quality is used. The default value is 0.92.
+	 * @return a data-URL containing a representation of the image in the PNG format
+	 */
+	@JsOverlay
+	public final String toDataURL(double encoderOptions) {
+		return toDataURL(ImageMimeType.PNG, encoderOptions);
+	}
+
+	/**
+	 * Returns a data-URL containing a representation of the image format, passed as argument.<br>
+	 * The returned image is in a resolution of 96dpi and the image quality value is 0.92.
+	 * 
+	 * @param type indicating the image format
+	 * @return a data-URL containing a representation of the image format, passed as argument
+	 */
+	@JsOverlay
+	public final String toDataURL(ImageMimeType type) {
+		return toDataURL(type, DEFAULT_ENCODER_OPTIONS);
+	}
+	
+	/**
+	 * Returns a data-URL containing a representation of the image format, passed as argument.<br>
+	 * The returned image is in a resolution of 96dpi.
+	 * 
+	 * @param type indicating the image format
+	 * @param encoderOptions between 0 and 1 indicating the image quality to use for image formats that use lossy compression.<br>
+	 *            If this argument is anything else, the default value for image quality is used. The default value is 0.92.
+	 * @return a data-URL containing a representation of the image format, passed as argument
+	 */
+	@JsOverlay
+	public final String toDataURL(ImageMimeType type, double encoderOptions) {
+		// checks if the type is consistent
+		Key.checkIfValid(type);
+		// gets the data from canvas
+		return nativeToDataURL(type.value(), Checker.betweenOrDefault(encoderOptions, 0, 1, DEFAULT_ENCODER_OPTIONS));
 	}
 
 }

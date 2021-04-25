@@ -627,6 +627,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * re-factor the `configuration` package in order to manage both configuration and chart options (at runtime).
  * change the `NativeObject` from a class to an empty interface in order to skip `ClassCastException` in J2CL when the object, passed from CHART.JS, doesn't have any prototype or is a proxy.
  * add methods to `NativeObjectContainer` in order to manage a unique internal ID, as string.
+ * add image mime type and image quality to `toDataUrl` methods (with all combination and defaults) to `Canvas` object.
 
 License
 -------
