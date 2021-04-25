@@ -30,6 +30,7 @@ import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -648,6 +649,25 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if here, provider is not consistent
 		// then returns the defaults one
 		return Defaults.get().getGlobal().getFont().create().nativeObject();
+	}
+	
+	/**
+	 * Sets the callbacks that every element of axis can activate.
+	 * 
+	 * @param node element node instance
+	 * @param property property name
+	 * @param callBack the callback instance
+	 * @param proxy the proxy instance 
+	 */
+	final void setCallback(AbstractNode node, Key property, Object callBack, CallbackProxy.Proxy proxy) {
+		// checks if consistent
+		if (callBack != null) {
+			// adds the callback proxy function to java script object
+			getConfiguration().setCallback(node, property, new ConfigurationEnvelop<>(proxy));
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getConfiguration().setCallback(node, property, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
+		}
 	}
 
 	/**

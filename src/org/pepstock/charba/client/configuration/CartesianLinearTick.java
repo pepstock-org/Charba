@@ -29,6 +29,8 @@ public class CartesianLinearTick extends CartesianNumericTick implements IsLinea
 
 	// handler for callback for category axis
 	private final LinearTickHandler<CartesianLinearTick> tickHandler;
+	// options handler to manage the callbacks
+	private final LinearTickOptionsHandler optionsHandler;
 
 	/**
 	 * Builds the object storing the axis instance.
@@ -37,8 +39,19 @@ public class CartesianLinearTick extends CartesianNumericTick implements IsLinea
 	 */
 	CartesianLinearTick(Axis axis) {
 		super(axis);
-		// creates handler and number format
+		// creates handlers
 		this.tickHandler = new LinearTickHandler<>(axis, this);
+		this.optionsHandler = new LinearTickOptionsHandler(axis);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.IsLinearTick#getLinearTickOptionsHandler()
+	 */
+	@Override
+	public final LinearTickOptionsHandler getLinearTickOptionsHandler() {
+		return optionsHandler;
 	}
 
 	/**

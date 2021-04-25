@@ -312,14 +312,8 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	public void setCallback(PointLabelCallback callback) {
 		// sets the callback
 		this.callback = callback;
-		// checks if callback is consistent
-		if (callback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.CALLBACK, new ConfigurationEnvelop<>(pointLabelCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.CALLBACK, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.CALLBACK, callback, pointLabelCallbackProxy.getProxy());
 	}
 
 	/**
@@ -341,14 +335,8 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	public void setFont(FontCallback<ScaleContext> fontCallback) {
 		// sets the callback
 		this.fontCallback = fontCallback;
-		// checks if callback is consistent
-		if (fontCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.FONT, new ConfigurationEnvelop<>(fontCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.FONT, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.FONT, fontCallback, fontCallbackProxy.getProxy());
 	}
 
 	/**
@@ -368,14 +356,8 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	public void setPadding(SimplePaddingCallback paddingCallback) {
 		// sets the callback
 		this.paddingCallback = paddingCallback;
-		// checks if callback is consistent
-		if (paddingCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.PADDING, new ConfigurationEnvelop<>(paddingCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.PADDING, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.PADDING, paddingCallback, paddingCallbackProxy.getProxy());
 	}
 
 	/**
@@ -395,14 +377,8 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	public void setColor(ColorCallback<ScaleContext> colorCallback) {
 		// sets the callback
 		this.colorCallback = colorCallback;
-		// checks if callback is consistent
-		if (colorCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.COLOR, new ConfigurationEnvelop<>(colorCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.COLOR, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.COLOR, colorCallback, colorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -422,14 +398,8 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	public void setBackdropColor(ColorCallback<ScaleContext> backdropColorCallback) {
 		// sets the callback
 		this.backdropColorCallback = backdropColorCallback;
-		// checks if callback is consistent
-		if (backdropColorCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.BACKDROP_COLOR, new ConfigurationEnvelop<>(backdropColorCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.BACKDROP_COLOR, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.BACKDROP_COLOR, backdropColorCallback, backdropColorCallbackProxy.getProxy());
 	}
 
 	/**

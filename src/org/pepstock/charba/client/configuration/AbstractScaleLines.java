@@ -133,14 +133,8 @@ abstract class AbstractScaleLines extends AxisContainer {
 	public void setColor(ColorCallback<ScaleContext> colorCallback) {
 		// stores callback
 		this.colorCallback = colorCallback;
-		// checks if consistent
-		if (colorCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.COLOR, new ConfigurationEnvelop<>(colorCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.COLOR, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(checkAndGet(), Property.COLOR, colorCallback, colorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -160,14 +154,8 @@ abstract class AbstractScaleLines extends AxisContainer {
 	public void setLineWidth(WidthCallback<ScaleContext> lineWidthCallback) {
 		// stores callback
 		this.lineWidthCallback = lineWidthCallback;
-		// checks if consistent
-		if (lineWidthCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.LINE_WIDTH, new ConfigurationEnvelop<>(lineWidthCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.LINE_WIDTH, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(checkAndGet(), Property.LINE_WIDTH, lineWidthCallback, lineWidthCallbackProxy.getProxy());
 	}
 
 	/**
@@ -187,14 +175,8 @@ abstract class AbstractScaleLines extends AxisContainer {
 	public void setBorderDashOffset(BorderDashOffsetCallback<ScaleContext> borderDashOffsetCallback) {
 		// stores callback
 		this.borderDashOffsetCallback = borderDashOffsetCallback;
-		// checks if consistent
-		if (borderDashOffsetCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, new ConfigurationEnvelop<>(borderDashOffsetCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallback, borderDashOffsetCallbackProxy.getProxy());
 	}
 
 	/**

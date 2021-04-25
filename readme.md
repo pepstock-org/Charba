@@ -354,7 +354,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `getValueForPixel`
    * `getBaseValue`
    * `getBasePixel`
-
+ * enable `precision`, `maxTicksLimit` and `stepSize` scriptable options to linear ticks.
+ 
 ### _Datasets_
 
 #### Breaking changes

@@ -55,6 +55,8 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	private final NumberFormatter numberFormatter;
 	// padding instance
 	private final Padding backdropPadding;
+	// options handler to manage the callbacks
+	private final LinearTickOptionsHandler optionsHandler;
 
 	/**
 	 * Name of properties of native object.
@@ -99,14 +101,25 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		this.tickHandler = new LinearTickHandler<>(axis, this);
 		this.backdropPadding = new Padding(() -> getAxis().getScale().getTicks().getBackdropPadding());
 		this.numberFormatter = new NumberFormatter(() -> getConfiguration().getNumberFormat());
+		this.optionsHandler = new LinearTickOptionsHandler(axis);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		backdropColorCallbackProxy
+		this.backdropColorCallbackProxy
 				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropColorCallback, getConfiguration().getBackdropColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		showLabelBackdropCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
+		this.showLabelBackdropCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.IsLinearTick#getLinearTickOptionsHandler()
+	 */
+	@Override
+	public final LinearTickOptionsHandler getLinearTickOptionsHandler() {
+		return optionsHandler;
 	}
 
 	/*
@@ -226,14 +239,8 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	public void setBackdropColor(ColorCallback<ScaleContext> backdropColorCallback) {
 		// stores callback
 		this.backdropColorCallback = backdropColorCallback;
-		// checks if consistent
-		if (backdropColorCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, new ConfigurationEnvelop<>(backdropColorCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, backdropColorCallback, backdropColorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -253,14 +260,8 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	public void setShowLabelBackdrop(ShowLabelBackdropCallback showLabelBackdropCallback) {
 		// stores callback
 		this.showLabelBackdropCallback = showLabelBackdropCallback;
-		// checks if consistent
-		if (showLabelBackdropCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, new ConfigurationEnvelop<>(showLabelBackdropCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, showLabelBackdropCallback, showLabelBackdropCallbackProxy.getProxy());
 	}
 
 }

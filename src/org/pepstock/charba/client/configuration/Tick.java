@@ -359,14 +359,8 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	public void setColor(ColorCallback<ScaleContext> colorCallback) {
 		// sets the callback
 		this.colorCallback = colorCallback;
-		// checks if callback is consistent
-		if (colorCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getConfiguration(), Property.COLOR, new ConfigurationEnvelop<>(colorCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getConfiguration(), Property.COLOR, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getConfiguration(), Property.COLOR, colorCallback, colorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -377,14 +371,8 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	public void setTextStrokeColor(ColorCallback<ScaleContext> textStrokeColorCallback) {
 		// sets the callback
 		this.textStrokeColorCallback = textStrokeColorCallback;
-		// checks if callback is consistent
-		if (textStrokeColorCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getConfiguration(), Property.TEXT_STROKE_COLOR, new ConfigurationEnvelop<>(textStrokeColorCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getConfiguration(), Property.TEXT_STROKE_COLOR, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getConfiguration(), Property.TEXT_STROKE_COLOR, textStrokeColorCallback, textStrokeColorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -395,14 +383,8 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	public void setTextStrokeWidth(WidthCallback<ScaleContext> textStrokeWidthCallback) {
 		// sets the callback
 		this.textStrokeWidthCallback = textStrokeWidthCallback;
-		// checks if callback is consistent
-		if (textStrokeWidthCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getConfiguration(), Property.TEXT_STROKE_WIDTH, new ConfigurationEnvelop<>(textStrokeWidthCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getConfiguration(), Property.TEXT_STROKE_WIDTH, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getConfiguration(), Property.TEXT_STROKE_WIDTH, textStrokeWidthCallback, textStrokeWidthCallbackProxy.getProxy());
 	}
 
 	/**
@@ -414,14 +396,8 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	public void setFont(FontCallback<ScaleContext> fontCallback) {
 		// sets the callback
 		this.fontCallback = fontCallback;
-		// checks if callback is consistent
-		if (fontCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getConfiguration(), Property.FONT, new ConfigurationEnvelop<>(fontCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getConfiguration(), Property.FONT, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getConfiguration(), Property.FONT, fontCallback, fontCallbackProxy.getProxy());
 	}
 
 	/**

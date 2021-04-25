@@ -16,6 +16,10 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.CountCallback;
+import org.pepstock.charba.client.callbacks.MaxTicksLimitCallback;
+import org.pepstock.charba.client.callbacks.PrecisionCallback;
+import org.pepstock.charba.client.callbacks.StepSizeCallback;
 
 /**
  * Common methods for linear scale tick is use to chart numerical data.<br>
@@ -28,9 +32,16 @@ public interface IsLinearTick extends IsNumericTick {
 	/**
 	 * Returns the axis instance.
 	 * 
-	 * @return the axis
+	 * @return the axis instance
 	 */
 	Axis getAxis();
+	
+	/**
+	 * Returns the linear tick options handler instance, for callbacks.
+	 * 
+	 * @return the linear tick options handler instance, for callbacks
+	 */
+	LinearTickOptionsHandler getLinearTickOptionsHandler();
 	
 	/**
 	 * Sets the number of ticks to generate.<br>
@@ -138,5 +149,113 @@ public interface IsLinearTick extends IsNumericTick {
 		}
 		// if here, axis is not consistent
 		return Defaults.get().getScale().getTicks().getPrecision();
+	}
+	
+	/**
+	 * Returns the count callback instance.
+	 * 
+	 * @return the count callback instance
+	 */
+	default CountCallback getCountCallback() {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			return getLinearTickOptionsHandler().getCountCallback();
+		}
+		// if here, handler is not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Sets the count callback instance.
+	 * 
+	 * @param countCallback the count callback instance
+	 */
+	default void setCount(CountCallback countCallback) {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			getLinearTickOptionsHandler().setCount(countCallback);
+		}
+	}
+
+	/**
+	 * Returns the maxTicksLimit callback instance.
+	 * 
+	 * @return the maxTicksLimit callback instance
+	 */
+	default MaxTicksLimitCallback getMaxTicksLimitCallback() {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			return getLinearTickOptionsHandler().getMaxTicksLimitCallback();
+		}
+		// if here, handler is not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Sets the maxTicksLimit callback instance.
+	 * 
+	 * @param maxTicksLimitCallback the maxTicksLimit callback instance
+	 */
+	default void setMaxTicksLimit(MaxTicksLimitCallback maxTicksLimitCallback) {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			getLinearTickOptionsHandler().setMaxTicksLimit(maxTicksLimitCallback);
+		}
+	}
+	
+	/**
+	 * Returns the precision callback instance.
+	 * 
+	 * @return the precision callback instance
+	 */
+	default PrecisionCallback getPrecisionCallback() {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			return getLinearTickOptionsHandler().getPrecisionCallback();
+		}
+		// if here, handler is not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Sets the precision callback instance.
+	 * 
+	 * @param precisionCallback the precision callback instance
+	 */
+	default void setPrecision(PrecisionCallback precisionCallback) {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			getLinearTickOptionsHandler().setPrecision(precisionCallback);
+		}
+	}
+	
+	/**
+	 * Returns the stepSize callback instance.
+	 * 
+	 * @return the stepSize callback instance
+	 */
+	default StepSizeCallback getStepSizeCallback() {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			return getLinearTickOptionsHandler().getStepSizeCallback();
+		}
+		// if here, handler is not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Sets the stepSize callback instance.
+	 * 
+	 * @param stepSizeCallback the stepSize callback instance
+	 */
+	default void setStepSize(StepSizeCallback stepSizeCallback) {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			getLinearTickOptionsHandler().setStepSize(stepSizeCallback);
+		}
 	}
 }

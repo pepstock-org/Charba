@@ -588,14 +588,8 @@ public class Grid extends AbstractScaleLines {
 	public void setTickColor(ColorCallback<ScaleContext> tickColorCallback) {
 		// stores callback
 		this.tickColorCallback = tickColorCallback;
-		// checks if consistent
-		if (tickColorCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrid(), Property.TICK_COLOR, new ConfigurationEnvelop<>(tickColorCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrid(), Property.TICK_COLOR, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_COLOR, tickColorCallback, tickColorCallbackProxy.getProxy());
 	}
 
 	/**
@@ -615,14 +609,8 @@ public class Grid extends AbstractScaleLines {
 	public void setTickWidth(WidthCallback<ScaleContext> tickWidthCallback) {
 		// stores callback
 		this.tickWidthCallback = tickWidthCallback;
-		// checks if consistent
-		if (tickWidthCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrid(), Property.TICK_WIDTH, new ConfigurationEnvelop<>(tickWidthCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrid(), Property.TICK_WIDTH, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_WIDTH, tickWidthCallback, tickWidthCallbackProxy.getProxy());
 	}
 
 	/**
@@ -642,13 +630,7 @@ public class Grid extends AbstractScaleLines {
 	public void setTickBorderDashOffset(BorderDashOffsetCallback<ScaleContext> tickBorderDashOffsetCallback) {
 		// stores callback
 		this.tickBorderDashOffsetCallback = tickBorderDashOffsetCallback;
-		// checks if consistent
-		if (tickBorderDashOffsetCallback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrid(), Property.TICK_BORDER_DASH_OFFSET, new ConfigurationEnvelop<>(tickBorderDashOffsetCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(getAxis().getScale().getGrid(), Property.TICK_BORDER_DASH_OFFSET, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffsetCallback, tickBorderDashOffsetCallbackProxy.getProxy());
 	}
 }
