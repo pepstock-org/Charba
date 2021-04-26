@@ -183,19 +183,9 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	 * @return if set, used as the color of the border line.<br>
 	 *         If unset, the first color option is resolved and used.
 	 */
+	@Override
 	public String getBorderColorAsString() {
-		// checks if exist
-		if (!has(Property.BORDER_COLOR)) {
-			// gets the color sets
-			List<String> colors = getColorsAsString();
-			// checks if list of colors is consistent
-			if (!colors.isEmpty()) {
-				return getValue(Property.BORDER_COLOR, colors.get(0));
-			}
-		}
-		// if here, the colors are not consistent
-		// then uses the default color as default for border color
-		return getValue(Property.BORDER_COLOR, getDefaultValues().getColorAsString());
+		return getValue(Property.BORDER_COLOR, getDefaultValues().getBorderColorAsString());
 	}
 
 	/**
@@ -296,8 +286,9 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	 * 
 	 * @return if set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
 	 */
+	@Override
 	public int getBorderWidth() {
-		return getValue(Property.BORDER_WIDTH, getLineWidth());
+		return getValue(Property.BORDER_WIDTH, getDefaultValues().getBorderWidth());
 	}
 
 	/**

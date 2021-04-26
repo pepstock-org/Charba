@@ -23,30 +23,50 @@ package org.pepstock.charba.client.defaults;
 public interface IsDefaultGrid extends IsDefaultScaleLines {
 
 	/**
-	 * If false, do not display grid for this axis.
+	 * If <code>false</code>, do not display grid for this axis.
 	 * 
-	 * @return If false, do not display grid for this axis.
+	 * @return if <code>false</code>, do not display grid for this axis.
 	 */
 	boolean isDisplay();
 
 	/**
-	 * If true, draw border at the edge between the axis and the chart area.
+	 * If set, used as the width of the border line.<br>
+	 * If unset, the first lineWidth option is resolved and used.
 	 * 
-	 * @return If true, draw border at the edge between the axis and the chart area.
+	 * @return if set, used as the width of the border line.<br>
+	 *         If unset, the first lineWidth option is resolved and used.
+	 */
+	int getBorderWidth();
+	
+	/**
+	 * If set, used as the color of the border line.<br>
+	 * If unset, the first color option is resolved and used.
+	 * 
+	 * @return if set, used as the color of the border line.<br>
+	 *         If unset, the first color option is resolved and used.
+	 */
+	String getBorderColorAsString();
+
+	/**
+	 * If <code>true</code>, draw border at the edge between the axis and the chart area.
+	 * 
+	 * @return if <code>true</code>, draw border at the edge between the axis and the chart area.
 	 */
 	boolean isDrawBorder();
 
 	/**
-	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid are drawn.
+	 * If <code>true</code>, draw lines on the chart area inside the axis lines.<br>
+	 * This is useful when there are multiple axes and you need to control which grid are drawn.
 	 * 
-	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid are drawn.
+	 * @return if <code>true</code>, draw lines on the chart area inside the axis lines.<br>
+	 *         This is useful when there are multiple axes and you need to control which grid are drawn.
 	 */
 	boolean isDrawOnChartArea();
 
 	/**
-	 * If true, draw lines beside the ticks in the axis area beside the chart.
+	 * If <code>true</code>, draw lines beside the ticks in the axis area beside the chart.
 	 * 
-	 * @return If true, draw lines beside the ticks in the axis area beside the chart.
+	 * @return if <code>true</code>, draw lines beside the ticks in the axis area beside the chart.
 	 */
 	boolean isDrawTicks();
 
@@ -58,16 +78,16 @@ public interface IsDefaultGrid extends IsDefaultScaleLines {
 	int getTickLength();
 
 	/**
-	 * If true, grid will be shifted to be between labels. This is set to true in the bar chart by default.
+	 * If <code>true</code>, grid will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
 	 * 
-	 * @return If true, grid will be shifted to be between labels.
+	 * @return If <code>true</code>, grid will be shifted to be between labels.
 	 */
 	boolean isOffset();
 
 	/**
-	 * If true, grid are circular (on radar chart only).
+	 * If <code>true</code>, grid are circular (on radar chart only).
 	 * 
-	 * @return If true, grid are circular (on radar chart only).
+	 * @return If <code>true</code>, grid are circular (on radar chart only).
 	 */
 	boolean isCircular();
 

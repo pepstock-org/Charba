@@ -71,6 +71,26 @@ public final class DefaultChartGrid implements IsDefaultGrid {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getBorderWidth()
+	 */
+	@Override
+	public int getBorderWidth() {
+		return grid.getBorderWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getBorderColorAsString()
+	 */
+	@Override
+	public String getBorderColorAsString() {
+		return grid.getBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getLineWidth()
 	 */
 	@Override

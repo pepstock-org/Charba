@@ -32,6 +32,8 @@ public final class DefaultGrid implements IsDefaultGrid {
 
 	private static final double DEFAULT_BORDER_DASH_OFFSET = 0D;
 
+	private static final int DEFAULT_BORDER_WIDTH = 1;
+
 	private static final int DEFAULT_LINE_WIDTH = 1;
 
 	private static final boolean DEFAULT_DRAW_BORDER = true;
@@ -83,6 +85,26 @@ public final class DefaultGrid implements IsDefaultGrid {
 	@Override
 	public double getBorderDashOffset() {
 		return DEFAULT_BORDER_DASH_OFFSET;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getBorderWidth()
+	 */
+	@Override
+	public int getBorderWidth() {
+		return DEFAULT_BORDER_WIDTH;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getBorderColorAsString()
+	 */
+	@Override
+	public String getBorderColorAsString() {
+		return Defaults.get().getGlobal().getBorderColorAsString();
 	}
 
 	/*
