@@ -209,6 +209,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		if (mustBeActivated(chart)) {
 			// overrides the tooltip configuration disabling it
 			chart.getOptions().getTooltips().setEnabled(false);
+			// resets the padding callback
+			chart.getOptions().getLayout().setPadding(null);
 			// overrides the events configuration setting only the following
 			chart.getOptions().setEvents(Event.CLICK, Event.TOUCHSTART);
 			// checks if handler on legend to avoid to remove all data sets has been already added

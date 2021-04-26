@@ -140,6 +140,17 @@ public final class ExtendedOptions extends ScaledOptions {
 	public void setCallback(Animation animation, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
 		setCallbackToModel(animation, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
+	
+	/**
+	 * Adds a callback proxy function to layout element instance.
+	 * 
+	 * @param animation animation element instance.
+	 * @param property property name.
+	 * @param envelop contains the function proxy to activate.
+	 */
+	public void setCallback(Layout animation, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setCallbackToModel(animation, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
 
 	/**
 	 * Adds a event proxy function to animation element instance.
