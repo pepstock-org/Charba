@@ -58,7 +58,7 @@ public interface TooltipLabelCallback {
 	}
 
 	/**
-	 * Returns the colors to render for the tooltip item.<br>
+	 * Returns the colors and borders to render for the tooltip item.<br>
 	 * If returns <code>null</code>, it will be ignored.
 	 * 
 	 * @param chart chart instance

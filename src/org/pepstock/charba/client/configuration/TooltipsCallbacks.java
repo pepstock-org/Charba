@@ -501,17 +501,17 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 			TooltipLabelColor result = labelCallback.onLabelColor(getChart(), tooltipItem);
 			// checks if result is consistent
 			if (result != null) {
-				return result.getObject();
+				return result.nativeObject();
 			}
 		}
 		// instances to return
 		TooltipLabelColor defaultColor = Defaults.get().invokeTooltipsCallbackOnLabelColor(getChart(), tooltipItem);
 		// checks if instance is consistent
 		if (defaultColor != null) {
-			return defaultColor.getObject();
+			return defaultColor.nativeObject();
 		}
 		// default result
-		return DEFAULT_LABEL_COLOR.getObject();
+		return DEFAULT_LABEL_COLOR.nativeObject();
 	}
 
 	/**

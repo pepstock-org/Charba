@@ -215,6 +215,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `usePointStyle` property to `Tooltips` class for options and configuration.
  * add `boxWidth` and `boxHeight` properties to `Tooltips` options and configuration classes.
  * improve the tooltip callbacks management providing the right defaults.
+ * add `borderWidth`, `borderRadius` and `borderDash` properties to `TooltipLabelColor` item in order to improve the customization of tooltips by the callback.
  * add `title` property to `Legend` options and configuration classes in order to manage a title on legend
  * add `maxWidth` and `maxHeight` properties to `Legend` options and configuration.
  * add `boxHeight` property to `LegendLabels` options and configuration classes.
@@ -249,6 +250,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `setX` and `setY` methods to `IsPadding` interface as shortcut to set X (left, right) and Y (top, bottom) dimensions.
  * add `color`, `borderColor`, `backgroundColor` and `font` properties to configuration of a single chart.
  * add `toBase64Image(ImageMimeType, double)` methods (and all combinations) to `IsChart` interface in order to get the image form chart in different image format and with different image quality.
+ * enable `padding` property as scriptable in `Layout` configuration.
 
 ### _Scales_
 

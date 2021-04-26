@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.List;
+
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
@@ -22,6 +24,9 @@ import org.pepstock.charba.client.colors.GradientBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.PatternBuilder;
+import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -50,7 +55,10 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	private enum Property implements Key
 	{
 		BACKGROUND_COLOR("backgroundColor"),
-		BORDER_COLOR("borderColor");
+		BORDER_COLOR("borderColor"),
+		BORDER_WIDTH("borderWidth"),
+		BORDER_DASH("borderDash"),
+		BORDER_RADIUS("borderRadius");
 
 		// name value of property
 		private final String value;
@@ -187,7 +195,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @return <code>true</code> if the background color of the tooltip item is defined as gradient
 	 */
 	public boolean isBackgroundColorAsGradient() {
-		return JsItemsHelper.get().isCanvasGradient(this.getObject(), Property.BACKGROUND_COLOR);
+		return JsItemsHelper.get().isCanvasGradient(this.nativeObject(), Property.BACKGROUND_COLOR);
 	}
 
 	/**
@@ -196,7 +204,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @return <code>true</code> if the background color of the tooltip item is defined as canvas pattern
 	 */
 	public boolean isBackgroundColorAsPattern() {
-		return JsItemsHelper.get().isCanvasPattern(this.getObject(), Property.BACKGROUND_COLOR);
+		return JsItemsHelper.get().isCanvasPattern(this.nativeObject(), Property.BACKGROUND_COLOR);
 	}
 
 	/**
@@ -278,7 +286,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @return <code>true</code> if the border color of the tooltip item is defined as gradient
 	 */
 	public boolean isBorderColorAsGradient() {
-		return JsItemsHelper.get().isCanvasGradient(this.getObject(), Property.BORDER_COLOR);
+		return JsItemsHelper.get().isCanvasGradient(this.nativeObject(), Property.BORDER_COLOR);
 	}
 
 	/**
@@ -369,13 +377,68 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 		// if here, is not a color then returns null
 		return null;
 	}
+	
+	/**
+	 * Sets the border width.
+	 * 
+	 * @param borderWidth the border width.
+	 */
+	public void setBorderWidth(int borderWidth) {
+		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
+	}
+
+	/**
+	 * Returns the border width.
+	 * 
+	 * @return the border width.
+	 */
+	public int getBorderWidth() {
+		return getValue(Property.BORDER_WIDTH, Defaults.get().getGlobal().getTooltips().getBorderWidth());
+	}
+	
+	/**
+	 * Sets the bar border radius (in pixels).
+	 * 
+	 * @param borderRadius the bar border radius (in pixels).
+	 */
+	public void setBorderRadius(int borderRadius) {
+		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(borderRadius));
+	}
+
+	/**
+	 * Returns the bar border radius (in pixels).
+	 * 
+	 * @return the bar border radius (in pixels).
+	 */
+	public int getBorderRadius() {
+		return getValue(Property.BORDER_RADIUS, 0);
+	}
+	
+	/**
+	 * Sets the line dash pattern used when stroking borders, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
+	 * @param borderDash the line dash pattern used when stroking borders, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 */
+	public void setBorderDash(int... borderDash) {
+		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
+	}
+
+	/**
+	 * Returns the line dash pattern used when stroking borders, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking borders, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 */
+	public List<Integer> getBorderDash() {
+		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
+		return ArrayListHelper.list(array);
+	}
 
 	/**
 	 * Wraps the protected method to get the java script object in order to consume it.
 	 * 
 	 * @return the java script object in order to consume it.
 	 */
-	public NativeObject getObject() {
+	public NativeObject nativeObject() {
 		return getNativeObject();
 	}
 
