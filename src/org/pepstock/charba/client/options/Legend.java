@@ -15,10 +15,15 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.List;
+
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
+import org.pepstock.charba.client.enums.Event;
 
 /**
  * The chart legend displays data about the datasets that area appearing on the chart.
@@ -42,6 +47,7 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 		LABELS("labels"),
 		TITLE("title"),
 		// simple properties
+		EVENTS("events"),
 		MAX_WIDTH("maxWidth"),
 		MAX_HEIGHT("maxWidth"),
 		FULL_SIZE("fullSize"),
@@ -118,6 +124,29 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	@Override
 	public LegendTitle getTitle() {
 		return title;
+	}
+	
+	/**
+	 * Sets the browser events that the chart should listen to.
+	 * 
+	 * @param events the browser events that the chart should listen to.
+	 */
+	public void setEvents(Event... events) {
+		// sets the array of events
+		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(events));
+	}
+
+	/**
+	 * Returns the browser events that the chart should listen to.
+	 * 
+	 * @return the browser events that the chart should listen to.
+	 */
+	@Override
+	public List<Event> getEvents() {
+		// retrieves the array
+		ArrayString array = getArrayValue(Property.EVENTS);
+		// if the array is not consistent returns the default
+		return array != null ? ArrayListHelper.list(Event.values(), array) : getDefaultValues().getEvents();
 	}
 
 	/**

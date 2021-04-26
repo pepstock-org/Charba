@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import java.util.List;
+
+import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -39,6 +42,13 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 * @return if tooltips are enabled.
 	 */
 	boolean isEnabled();
+	
+	/**
+	 * Returns the browser events that the chart should listen to.
+	 * 
+	 * @return the browser events that the chart should listen to.
+	 */
+	List<Event> getEvents();
 
 	/**
 	 * Returns which elements appear in the tooltip.

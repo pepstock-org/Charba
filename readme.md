@@ -221,6 +221,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `boxHeight` property to `LegendLabels` options and configuration classes.
  * add `textAlign` property to `LegendLabels` options and configuration classes.
  * add `fontColor` property to `LegendItem` and `LegendLabelItem` classes.
+ * add `events` property to `Legend` and `Tooltips` options and configuration classes in order to enable the event filtering.
  * add `align` property to `Title` options and configuration classes.
  * add `hoverBackgroundColor`, `hoverBorderWidth` and `hoverBorderColor` properties to `Bar`, `Arc`, `Line` and `Point` elements configuration and options classes.
  * add `pointStyle` property to `Bar` element configuration and options classes.
@@ -449,6 +450,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `onReset` in order to enable to catch when a chart is resetting.
    * `onInstall`, `onStart`, `onStop`, `onUninstall` to manage plugin life-cycle.
    * `onBeforeDataLimits`, `onAfterDataLimits`, `onBeforeBuildTicks`, `onAfterBuildTicks` to manage scale setup.
+ * add `events` property to `AbstractPluginOptions` options classes in order to enable the event filtering for plugin.
  * improve the code of `HtmlLegend` plugin in order to manage texts (for legend items and title) in the same way.
  * manage new legend title in `HtmlLegend` plugin.
    * add `HtmlLegendTitleCallback` callback to apply a custom legend title in HTML.

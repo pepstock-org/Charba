@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.List;
+
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TooltipExternalCallback;
 import org.pepstock.charba.client.callbacks.TooltipFilterCallback;
@@ -27,6 +29,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -270,6 +273,24 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	 */
 	public boolean isEnabled() {
 		return getConfiguration().getTooltips().isEnabled();
+	}
+	
+	/**
+	 * Sets the browser events that the chart should listen to.
+	 * 
+	 * @param events the browser events that the chart should listen to.
+	 */
+	public void setEvents(Event... events) {
+		getConfiguration().getTooltips().setEvents(events);
+	}
+
+	/**
+	 * Returns the browser events that the chart should listen to.
+	 * 
+	 * @return the browser events that the chart should listen to.
+	 */
+	public List<Event> getEvents() {
+		return getConfiguration().getTooltips().getEvents();
 	}
 
 	/**

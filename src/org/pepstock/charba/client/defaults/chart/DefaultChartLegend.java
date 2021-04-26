@@ -15,10 +15,13 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import java.util.List;
+
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
 import org.pepstock.charba.client.enums.ElementAlign;
+import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
 
@@ -65,6 +68,16 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 	@Override
 	public IsDefaultLegendTitle getTitle() {
 		return title;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getEvents()
+	 */
+	@Override
+	public List<Event> getEvents() {
+		return legend.getEvents();
 	}
 
 	/*

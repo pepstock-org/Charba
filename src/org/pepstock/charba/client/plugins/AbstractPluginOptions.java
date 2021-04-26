@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.plugins;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.ChartEnvelop;
@@ -23,12 +26,15 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -41,6 +47,8 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 
 	// static counter. Starts from min value of integer
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
+	// list of catchable events
+	private static final List<Event> DEFAULT_EVENTS = Collections.unmodifiableList(Arrays.asList(Event.values()));
 	// plugin id
 	private final String pluginId;
 
@@ -49,6 +57,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 */
 	protected enum Property implements Key
 	{
+		EVENTS("events"),
 		// internal property to set unique id
 		CHARBA_OPTIONS_ID("charbaOptionsId");
 
@@ -112,6 +121,28 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 */
 	public final String getPluginId() {
 		return pluginId;
+	}
+	
+	/**
+	 * Sets the browser events that the chart should listen to.
+	 * 
+	 * @param events the browser events that the chart should listen to.
+	 */
+	public final void setEvents(Event... events) {
+		// sets the array of events
+		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(events));
+	}
+
+	/**
+	 * Returns the browser events that the chart should listen to.
+	 * 
+	 * @return the browser events that the chart should listen to.
+	 */
+	public final List<Event> getEvents() {
+		// retrieves the array
+		ArrayString array = getArrayValue(Property.EVENTS);
+		// if the array is not consistent returns the default
+		return array != null ? ArrayListHelper.list(Event.values(), array) : DEFAULT_EVENTS;
 	}
 
 	/**

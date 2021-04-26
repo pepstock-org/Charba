@@ -15,11 +15,14 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.List;
+
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ElementAlign;
+import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.LegendEventProperty;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
@@ -123,6 +126,24 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 	 */
 	public LegendTitle getTitle() {
 		return title;
+	}
+	
+	/**
+	 * Sets the browser events that the chart should listen to.
+	 * 
+	 * @param events the browser events that the chart should listen to.
+	 */
+	public void setEvents(Event... events) {
+		getConfiguration().getLegend().setEvents(events);
+	}
+
+	/**
+	 * Returns the browser events that the chart should listen to.
+	 * 
+	 * @return the browser events that the chart should listen to.
+	 */
+	public List<Event> getEvents() {
+		return getConfiguration().getLegend().getEvents();
 	}
 
 	/*

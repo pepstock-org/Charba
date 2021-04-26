@@ -32,6 +32,7 @@ import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
 import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
@@ -158,6 +159,16 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	@Override
 	public boolean isEnabled() {
 		return DEFAULT_ENABLED;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getEvents()
+	 */
+	@Override
+	public List<Event> getEvents() {
+		return Defaults.get().getGlobal().getEvents();
 	}
 
 	/*

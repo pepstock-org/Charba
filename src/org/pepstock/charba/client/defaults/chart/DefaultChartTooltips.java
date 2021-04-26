@@ -15,12 +15,15 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import java.util.List;
+
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.defaults.IsDefaultTransitions;
+import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -92,6 +95,16 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	@Override
 	public boolean isEnabled() {
 		return tooltips.isEnabled();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getEvents()
+	 */
+	@Override
+	public List<Event> getEvents() {
+		return tooltips.getEvents();
 	}
 
 	/*
