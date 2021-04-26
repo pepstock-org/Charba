@@ -129,18 +129,18 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 	}
 	
 	/**
-	 * Sets the browser events that the chart should listen to.
+	 * Sets the browser events that the legend should listen to.
 	 * 
-	 * @param events the browser events that the chart should listen to.
+	 * @param events the browser events that the legend should listen to.
 	 */
 	public void setEvents(Event... events) {
 		getConfiguration().getLegend().setEvents(events);
 	}
 
 	/**
-	 * Returns the browser events that the chart should listen to.
+	 * Returns the browser events that the legend should listen to.
 	 * 
-	 * @return the browser events that the chart should listen to.
+	 * @return the browser events that the legend should listen to.
 	 */
 	public List<Event> getEvents() {
 		return getConfiguration().getLegend().getEvents();

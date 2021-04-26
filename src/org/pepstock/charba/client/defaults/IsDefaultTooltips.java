@@ -44,9 +44,9 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	boolean isEnabled();
 	
 	/**
-	 * Returns the browser events that the chart should listen to.
+	 * Returns the browser events that the tooltip should listen to.
 	 * 
-	 * @return the browser events that the chart should listen to.
+	 * @return the browser events that the tooltip should listen to.
 	 */
 	List<Event> getEvents();
 

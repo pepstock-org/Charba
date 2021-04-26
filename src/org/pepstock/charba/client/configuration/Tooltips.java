@@ -276,18 +276,18 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	}
 	
 	/**
-	 * Sets the browser events that the chart should listen to.
+	 * Sets the browser events that the tooltip should listen to.
 	 * 
-	 * @param events the browser events that the chart should listen to.
+	 * @param events the browser events that the tooltip should listen to.
 	 */
 	public void setEvents(Event... events) {
 		getConfiguration().getTooltips().setEvents(events);
 	}
 
 	/**
-	 * Returns the browser events that the chart should listen to.
+	 * Returns the browser events that the tooltip should listen to.
 	 * 
-	 * @return the browser events that the chart should listen to.
+	 * @return the browser events that the tooltip should listen to.
 	 */
 	public List<Event> getEvents() {
 		return getConfiguration().getTooltips().getEvents();

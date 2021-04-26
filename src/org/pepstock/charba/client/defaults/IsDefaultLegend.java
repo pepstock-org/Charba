@@ -41,9 +41,9 @@ public interface IsDefaultLegend extends IsDefaultTextDirectionHandler, IsDefaul
 	IsDefaultLegendTitle getTitle();
 	
 	/**
-	 * Returns the browser events that the chart should listen to.
+	 * Returns the browser events that the legend should listen to.
 	 * 
-	 * @return the browser events that the chart should listen to.
+	 * @return the browser events that the legend should listen to.
 	 */
 	List<Event> getEvents();
 

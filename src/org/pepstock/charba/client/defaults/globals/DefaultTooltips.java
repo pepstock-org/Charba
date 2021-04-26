@@ -168,7 +168,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public List<Event> getEvents() {
-		return Defaults.get().getGlobal().getEvents();
+		return Collections.unmodifiableList(Defaults.get().getGlobal().getEvents());
 	}
 
 	/*

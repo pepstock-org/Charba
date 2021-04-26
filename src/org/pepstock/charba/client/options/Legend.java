@@ -127,9 +127,9 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	}
 	
 	/**
-	 * Sets the browser events that the chart should listen to.
+	 * Sets the browser events that the legend should listen to.
 	 * 
-	 * @param events the browser events that the chart should listen to.
+	 * @param events the browser events that the legend should listen to.
 	 */
 	public void setEvents(Event... events) {
 		// sets the array of events
@@ -137,9 +137,9 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	}
 
 	/**
-	 * Returns the browser events that the chart should listen to.
+	 * Returns the browser events that the legend should listen to.
 	 * 
-	 * @return the browser events that the chart should listen to.
+	 * @return the browser events that the legend should listen to.
 	 */
 	@Override
 	public List<Event> getEvents() {

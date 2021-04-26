@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
@@ -84,7 +85,7 @@ public final class DefaultLegend implements IsDefaultLegend {
 	 */
 	@Override
 	public List<Event> getEvents() {
-		return Defaults.get().getGlobal().getEvents();
+		return Collections.unmodifiableList(Defaults.get().getGlobal().getEvents());
 	}
 
 	/*

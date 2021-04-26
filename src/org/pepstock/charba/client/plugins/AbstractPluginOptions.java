@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.plugins;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -47,8 +46,6 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 
 	// static counter. Starts from min value of integer
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
-	// list of catchable events
-	private static final List<Event> DEFAULT_EVENTS = Collections.unmodifiableList(Arrays.asList(Event.values()));
 	// plugin id
 	private final String pluginId;
 
@@ -124,9 +121,9 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	}
 	
 	/**
-	 * Sets the browser events that the chart should listen to.
+	 * Sets the browser events that the plugins should listen to.
 	 * 
-	 * @param events the browser events that the chart should listen to.
+	 * @param events the browser events that the plugins should listen to.
 	 */
 	public final void setEvents(Event... events) {
 		// sets the array of events
@@ -134,15 +131,15 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the browser events that the chart should listen to.
+	 * Returns the browser events that the plugins should listen to.
 	 * 
-	 * @return the browser events that the chart should listen to.
+	 * @return the browser events that the plugins should listen to.
 	 */
 	public final List<Event> getEvents() {
 		// retrieves the array
 		ArrayString array = getArrayValue(Property.EVENTS);
 		// if the array is not consistent returns the default
-		return array != null ? ArrayListHelper.list(Event.values(), array) : DEFAULT_EVENTS;
+		return array != null ? ArrayListHelper.list(Event.values(), array) : Collections.unmodifiableList(Defaults.get().getGlobal().getEvents());
 	}
 
 	/**

@@ -18,7 +18,7 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * The events option defines the browser events that the chart should listen to.
+ * The events option defines the browser events that the chart, legend, tooltip or plugins should listen to.
  * 
  * @author Andrea "Stock" Stocchero
  */
