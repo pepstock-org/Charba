@@ -240,7 +240,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		// stores callback
 		this.backdropColorCallback = backdropColorCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, backdropColorCallback, backdropColorCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, backdropColorCallback, backdropColorCallbackProxy);
 	}
 
 	/**
@@ -261,7 +261,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		// stores callback
 		this.showLabelBackdropCallback = showLabelBackdropCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, showLabelBackdropCallback, showLabelBackdropCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, showLabelBackdropCallback, showLabelBackdropCallbackProxy);
 	}
 
 }

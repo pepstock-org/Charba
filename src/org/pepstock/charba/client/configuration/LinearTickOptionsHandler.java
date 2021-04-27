@@ -127,7 +127,7 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		// stores callback
 		this.countCallback = countCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.COUNT, countCallback, countCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.COUNT, countCallback, countCallbackProxy);
 	}
 
 	/**
@@ -148,7 +148,7 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		// stores callback
 		this.maxTicksLimitCallback = maxTicksLimitCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.MAX_TICKS_LIMIT, maxTicksLimitCallback, maxTicksLimitCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.MAX_TICKS_LIMIT, maxTicksLimitCallback, maxTicksLimitCallbackProxy);
 	}
 	
 	/**
@@ -169,7 +169,7 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		// stores callback
 		this.precisionCallback = precisionCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.PRECISION, precisionCallback, precisionCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.PRECISION, precisionCallback, precisionCallbackProxy);
 	}
 	
 	/**
@@ -190,7 +190,7 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		// stores callback
 		this.stepSizeCallback = stepSizeCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.STEP_SIZE, stepSizeCallback, stepSizeCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.STEP_SIZE, stepSizeCallback, stepSizeCallbackProxy);
 	}
 
 }

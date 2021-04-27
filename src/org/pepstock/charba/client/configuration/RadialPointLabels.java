@@ -313,7 +313,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		// sets the callback
 		this.callback = callback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.CALLBACK, callback, pointLabelCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.CALLBACK, callback, pointLabelCallbackProxy);
 	}
 
 	/**
@@ -336,7 +336,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		// sets the callback
 		this.fontCallback = fontCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.FONT, fontCallback, fontCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.FONT, fontCallback, fontCallbackProxy);
 	}
 
 	/**
@@ -357,7 +357,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		// sets the callback
 		this.paddingCallback = paddingCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.PADDING, paddingCallback, paddingCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.PADDING, paddingCallback, paddingCallbackProxy);
 	}
 
 	/**
@@ -378,7 +378,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		// sets the callback
 		this.colorCallback = colorCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.COLOR, colorCallback, colorCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.COLOR, colorCallback, colorCallbackProxy);
 	}
 
 	/**
@@ -399,7 +399,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		// sets the callback
 		this.backdropColorCallback = backdropColorCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.BACKDROP_COLOR, backdropColorCallback, backdropColorCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.BACKDROP_COLOR, backdropColorCallback, backdropColorCallbackProxy);
 	}
 
 	/**

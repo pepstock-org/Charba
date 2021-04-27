@@ -246,18 +246,12 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	public void setTitleCallback(TooltipTitleCallback titleCallback) {
 		// sets the callback
 		this.titleCallback = titleCallback;
-		// checks if callback is consistent
-		if (titleCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_TITLE, new ConfigurationEnvelop<>(beforeTitleCallbackProxy.getProxy()));
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.TITLE, new ConfigurationEnvelop<>(titleCallbackProxy.getProxy()));
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_TITLE, new ConfigurationEnvelop<>(afterTitleCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_TITLE, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.TITLE, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_TITLE, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_TITLE, titleCallback, beforeTitleCallbackProxy);
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.TITLE, titleCallback, titleCallbackProxy);
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_TITLE, titleCallback, afterTitleCallbackProxy);
 	}
 
 	/**
@@ -277,16 +271,10 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	public void setBodyCallback(TooltipBodyCallback bodyCallback) {
 		// sets the callback
 		this.bodyCallback = bodyCallback;
-		// checks if callback is consistent
-		if (bodyCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_BODY, new ConfigurationEnvelop<>(beforeBodyCallbackProxy.getProxy()));
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_BODY, new ConfigurationEnvelop<>(afterBodyCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_BODY, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_BODY, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_BODY, bodyCallback, beforeBodyCallbackProxy);
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_BODY, bodyCallback, afterBodyCallbackProxy);
 	}
 
 	/**
@@ -306,22 +294,16 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	public void setLabelCallback(TooltipLabelCallback labelCallback) {
 		// sets the callback
 		this.labelCallback = labelCallback;
-		// checks if callback is consistent
-		if (labelCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_LABEL, new ConfigurationEnvelop<>(beforeLabelCallbackProxy.getProxy()));
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL, new ConfigurationEnvelop<>(labelCallbackProxy.getProxy()));
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL_COLOR, new ConfigurationEnvelop<>(labelColorCallbackProxy.getProxy()));
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL_TEXT_COLOR, new ConfigurationEnvelop<>(labelTextColorCallbackProxy.getProxy()));
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_LABEL, new ConfigurationEnvelop<>(afterLabelCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_LABEL, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL_COLOR, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL_TEXT_COLOR, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_LABEL, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_LABEL, labelCallback, beforeLabelCallbackProxy);
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL, labelCallback, labelCallbackProxy);
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL_COLOR, labelCallback, labelColorCallbackProxy);
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.LABEL_TEXT_COLOR, labelCallback, labelTextColorCallbackProxy);
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_LABEL, labelCallback, afterLabelCallbackProxy);
 	}
 
 	/**
@@ -341,18 +323,12 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	public void setFooterCallback(TooltipFooterCallback footerCallback) {
 		// sets the callback
 		this.footerCallback = footerCallback;
-		// checks if callback is consistent
-		if (footerCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_FOOTER, new ConfigurationEnvelop<>(beforeFooterCallbackProxy.getProxy()));
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.FOOTER, new ConfigurationEnvelop<>(footerCallbackProxy.getProxy()));
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_FOOTER, new ConfigurationEnvelop<>(afterFooterCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_FOOTER, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.FOOTER, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_FOOTER, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.BEFORE_FOOTER, footerCallback, beforeFooterCallbackProxy);
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.FOOTER, footerCallback, footerCallbackProxy);
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_FOOTER, footerCallback, afterFooterCallbackProxy);
 	}
 
 	/**

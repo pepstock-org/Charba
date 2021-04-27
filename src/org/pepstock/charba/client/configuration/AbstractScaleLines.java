@@ -134,7 +134,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// stores callback
 		this.colorCallback = colorCallback;
 		// stores and manages callback
-		getAxis().setCallback(checkAndGet(), Property.COLOR, colorCallback, colorCallbackProxy.getProxy());
+		getAxis().setCallback(checkAndGet(), Property.COLOR, colorCallback, colorCallbackProxy);
 	}
 
 	/**
@@ -155,7 +155,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// stores callback
 		this.lineWidthCallback = lineWidthCallback;
 		// stores and manages callback
-		getAxis().setCallback(checkAndGet(), Property.LINE_WIDTH, lineWidthCallback, lineWidthCallbackProxy.getProxy());
+		getAxis().setCallback(checkAndGet(), Property.LINE_WIDTH, lineWidthCallback, lineWidthCallbackProxy);
 	}
 
 	/**
@@ -176,7 +176,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// stores callback
 		this.borderDashOffsetCallback = borderDashOffsetCallback;
 		// stores and manages callback
-		getAxis().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallback, borderDashOffsetCallbackProxy.getProxy());
+		getAxis().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallback, borderDashOffsetCallbackProxy);
 	}
 
 	/**

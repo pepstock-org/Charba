@@ -119,14 +119,8 @@ public class Layout extends ConfigurationOptionsContainer {
 	public void setPadding(PaddingCallback<ChartContext> paddingCallback) {
 		// sets the callback
 		this.paddingCallback = paddingCallback;
-		// checks if callback is consistent
-		if (paddingCallback != null) {
-			// adds the callback proxy function to java script object
-			getOptions().getConfiguration().setCallback(getOptions().getConfiguration().getLayout(), Property.PADDING, new ConfigurationEnvelop<>(paddingCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getOptions().getConfiguration().setCallback(getOptions().getConfiguration().getLayout(), Property.PADDING, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getOptions().setCallback(getOptions().getConfiguration().getLayout(), Property.PADDING, paddingCallback, paddingCallbackProxy);
 	}
 
 	/**

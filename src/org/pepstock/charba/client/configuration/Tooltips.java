@@ -933,14 +933,8 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	public void setExternalCallback(TooltipExternalCallback externalCallback) {
 		// sets the callback
 		this.externalCallback = externalCallback;
-		// checks if callback is consistent
-		if (externalCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.EXTERNAL, new ConfigurationEnvelop<>(externalCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.EXTERNAL, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips(), Property.EXTERNAL, externalCallback, externalCallbackProxy);
 	}
 
 	/**
@@ -960,14 +954,8 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	public void setItemSortCallback(TooltipItemSortCallback itemSortCallback) {
 		// sets the callback
 		this.itemSortCallback = itemSortCallback;
-		// checks if callback is consistent
-		if (itemSortCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.ITEM_SORT, new ConfigurationEnvelop<>(itemSortCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.ITEM_SORT, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips(), Property.ITEM_SORT, itemSortCallback, itemSortCallbackProxy);
 	}
 
 	/**
@@ -987,14 +975,8 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	public void setFilterCallback(TooltipFilterCallback filterCallback) {
 		// sets the callback
 		this.filterCallback = filterCallback;
-		// checks if callback is consistent
-		if (filterCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.FILTER, new ConfigurationEnvelop<>(filterCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.FILTER, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		getOptions().setCallback(getConfiguration().getTooltips(), Property.FILTER, filterCallback, filterCallbackProxy);
 	}
 
 	/**

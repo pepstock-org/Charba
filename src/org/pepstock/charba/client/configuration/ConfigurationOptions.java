@@ -27,12 +27,14 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
@@ -712,7 +714,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any click event handler
 			if (onClickHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(ChartEventProperty.ON_CLICK, new ConfigurationEnvelop<>(clickCallbackProxy.getProxy()));
+				getConfiguration().setEvent(getConfiguration(), ChartEventProperty.ON_CLICK, new ConfigurationEnvelop<>(clickCallbackProxy.getProxy()));
 			}
 			// increments amount of handlers
 			onClickHandlers++;
@@ -739,7 +741,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any hover event handler
 			if (onHoverHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(ChartEventProperty.ON_HOVER, new ConfigurationEnvelop<>(hoverCallbackProxy.getProxy()));
+				getConfiguration().setEvent(getConfiguration(), ChartEventProperty.ON_HOVER, new ConfigurationEnvelop<>(hoverCallbackProxy.getProxy()));
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
@@ -747,7 +749,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any resize event handler
 			if (onResizeHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(ChartEventProperty.ON_RESIZE, new ConfigurationEnvelop<>(resizeCallbackProxy.getProxy()));
+				getConfiguration().setEvent(getConfiguration(), ChartEventProperty.ON_RESIZE, new ConfigurationEnvelop<>(resizeCallbackProxy.getProxy()));
 			}
 			// increments amount of handlers
 			onResizeHandlers++;
@@ -768,7 +770,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any handler
 			if (onClickHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(ChartEventProperty.ON_CLICK, RESET_CALLBACK_ENVELOP);
+				getConfiguration().setEvent(getConfiguration(), ChartEventProperty.ON_CLICK, RESET_CALLBACK_ENVELOP);
 			}
 			// check if a data set selection handler has been removed
 			if (event.isRecognize(DatasetSelectionEvent.TYPE)) {
@@ -795,7 +797,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any handler
 			if (onHoverHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(ChartEventProperty.ON_HOVER, RESET_CALLBACK_ENVELOP);
+				getConfiguration().setEvent(getConfiguration(), ChartEventProperty.ON_HOVER, RESET_CALLBACK_ENVELOP);
 			}
 		} else if (event.isRecognize(ChartResizeEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -803,8 +805,38 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any handler
 			if (onResizeHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(ChartEventProperty.ON_RESIZE, RESET_CALLBACK_ENVELOP);
+				getConfiguration().setEvent(getConfiguration(), ChartEventProperty.ON_RESIZE, RESET_CALLBACK_ENVELOP);
 			}
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Configuration)
+	 */
+	@Override
+	public final void load(IsChart chart, Configuration configuration) {
+		// loads the native object in the configuration to pass to chart
+		ConfigurationLoader.loadOptions(configuration, getConfiguration());
+	}
+	
+	/**
+	 * Sets the callbacks that every element of options can activate.
+	 * 
+	 * @param node element node instance
+	 * @param property property name
+	 * @param callBack the callback instance
+	 * @param proxy the proxy instance 
+	 */
+	final void setCallback(AbstractNode node, Key property, Object callBack, CallbackProxy<?> callbackProxy) {
+		// checks if consistent
+		if (callBack != null) {
+			// adds the callback proxy function to java script object
+			getConfiguration().setCallback(node, property, new ConfigurationEnvelop<>(callbackProxy.getProxy()));
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getConfiguration().setCallback(node, property, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
 
@@ -828,17 +860,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 				getChart().getCanvas().removeEventListener(BaseEventTypes.CLICK, titleAndAxisClickCallbackProxy.getProxy());
 			}
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Configuration)
-	 */
-	@Override
-	public void load(IsChart chart, Configuration configuration) {
-		// loads the native object in the configuration to pass to chart
-		ConfigurationLoader.loadOptions(configuration, getConfiguration());
 	}
 
 	/**

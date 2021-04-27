@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Id;
@@ -36,7 +37,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  *
  */
 public final class ExtendedOptions extends ScaledOptions {
-	
+
 	// chart instance of the options
 	private final IsChart chart;
 	// extends scales instances
@@ -109,47 +110,16 @@ public final class ExtendedOptions extends ScaledOptions {
 	public ExtendedScales getScales() {
 		return scales;
 	}
-	
-	/**
-	 * This method adds new event function proxy to the element, as property of native java script object.
-	 * 
-	 * @param property property name.
-	 * @param envelop contains the function proxy to activate.
-	 */
-	public void setEvent(Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
-		setEventToModel(this, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
 
 	/**
-	 * This method adds new callback function proxy to the element, as property of native java script object.
-	 * 
-	 * @param property property name.
-	 * @param envelop contains the function proxy to activate.
+	 * Adds a callback proxy function to a element node instance.
+	 *
+	 * @param node element node instance
+	 * @param property property name
+	 * @param envelop contains the function proxy to activate
 	 */
-	public void setCallback(Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
-		setCallbackToModel(this, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
-	 * Adds a callback proxy function to animation element instance.
-	 * 
-	 * @param animation animation element instance.
-	 * @param property property name.
-	 * @param envelop contains the function proxy to activate.
-	 */
-	public void setCallback(Animation animation, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
-		setCallbackToModel(animation, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-	
-	/**
-	 * Adds a callback proxy function to layout element instance.
-	 * 
-	 * @param animation animation element instance.
-	 * @param property property name.
-	 * @param envelop contains the function proxy to activate.
-	 */
-	public void setCallback(Layout animation, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
-		setCallbackToModel(animation, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	public void setCallback(AbstractNode node, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setCallbackToModel(node, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -159,52 +129,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param property property name.
 	 * @param envelop contains the function proxy to activate.
 	 */
-	public void setEvent(Animation animation, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
-		setEventToModel(animation, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	public void setEvent(AbstractNode node, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
+		setEventToModel(node, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
-
-	/**
-	 * Adds a event proxy function to legend element instance.
-	 * 
-	 * @param legend legend element instance
-	 * @param property property name.
-	 * @param envelop contains the function proxy to activate.
-	 */
-	public void setEvent(Legend legend, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
-		setEventToModel(legend, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
-	 * Adds a event proxy function to legend labels element instance.
-	 * 
-	 * @param labels legend labels element instance.
-	 * @param property property name.
-	 * @param envelop contains the function proxy to activate.
-	 */
-	public void setCallback(LegendLabels labels, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
-		setCallbackToModel(labels, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
-	 * Adds a event proxy function to tooltips element instance.
-	 * 
-	 * @param tooltips tooltips element instance.
-	 * @param property property name.
-	 * @param envelop contains the function proxy to activate.
-	 */
-	public void setCallback(Tooltips tooltips, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
-		setCallbackToModel(tooltips, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
-	 * Adds a event proxy function to tooltips callbacks element instance.
-	 * 
-	 * @param tooltips tooltips callbacks element instance.
-	 * @param property property name.
-	 * @param envelop contains the function proxy to activate.
-	 */
-	public void setCallback(TooltipsCallbacks tooltips, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
-		setCallbackToModel(tooltips, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
 }

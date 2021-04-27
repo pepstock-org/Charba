@@ -589,7 +589,7 @@ public class Grid extends AbstractScaleLines {
 		// stores callback
 		this.tickColorCallback = tickColorCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_COLOR, tickColorCallback, tickColorCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_COLOR, tickColorCallback, tickColorCallbackProxy);
 	}
 
 	/**
@@ -610,7 +610,7 @@ public class Grid extends AbstractScaleLines {
 		// stores callback
 		this.tickWidthCallback = tickWidthCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_WIDTH, tickWidthCallback, tickWidthCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_WIDTH, tickWidthCallback, tickWidthCallbackProxy);
 	}
 
 	/**
@@ -631,6 +631,6 @@ public class Grid extends AbstractScaleLines {
 		// stores callback
 		this.tickBorderDashOffsetCallback = tickBorderDashOffsetCallback;
 		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffsetCallback, tickBorderDashOffsetCallbackProxy.getProxy());
+		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffsetCallback, tickBorderDashOffsetCallbackProxy);
 	}
 }

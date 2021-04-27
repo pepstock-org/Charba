@@ -441,16 +441,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public void setAxisCalculateTickRotationCallback(AxisCalculateTickRotationCallback axisCalculateTickRotationCallback) {
 		// sets the callback
 		this.axisCalculateTickRotationCallback = axisCalculateTickRotationCallback;
-		// checks if callback is consistent
-		if (axisCalculateTickRotationCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(Property.BEFORE_CALCULATE_TICK_ROTATION, new ConfigurationEnvelop<>(beforeCalculateTickRotationCallbackProxy.getProxy()));
-			getConfiguration().setCallback(Property.AFTER_CALCULATE_TICK_ROTATION, new ConfigurationEnvelop<>(afterCalculateTickRotationCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(Property.BEFORE_CALCULATE_TICK_ROTATION, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(Property.AFTER_CALCULATE_TICK_ROTATION, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.BEFORE_CALCULATE_TICK_ROTATION, axisCalculateTickRotationCallback, beforeCalculateTickRotationCallbackProxy);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.AFTER_CALCULATE_TICK_ROTATION, axisCalculateTickRotationCallback, afterCalculateTickRotationCallbackProxy);
 	}
 
 	/**
@@ -470,16 +464,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public void setAxisDataLimitsCallback(AxisDataLimitsCallback axisDataLimitsCallback) {
 		// sets the callback
 		this.axisDataLimitsCallback = axisDataLimitsCallback;
-		// checks if callback is consistent
-		if (axisDataLimitsCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(Property.BEFORE_DATA_LIMITS, new ConfigurationEnvelop<>(beforeDataLimitsCallbackProxy.getProxy()));
-			getConfiguration().setCallback(Property.AFTER_DATA_LIMITS, new ConfigurationEnvelop<>(afterDataLimitsCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(Property.BEFORE_DATA_LIMITS, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(Property.AFTER_DATA_LIMITS, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.BEFORE_DATA_LIMITS, axisDataLimitsCallback, beforeDataLimitsCallbackProxy);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.AFTER_DATA_LIMITS, axisDataLimitsCallback, afterDataLimitsCallbackProxy);
 	}
 
 	/**
@@ -499,16 +487,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public void setAxisDimensionsCallback(AxisDimensionsCallback axisDimensionsCallback) {
 		// sets the callback
 		this.axisDimensionsCallback = axisDimensionsCallback;
-		// checks if callback is consistent
-		if (axisDimensionsCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(Property.BEFORE_SET_DIMENSIONS, new ConfigurationEnvelop<>(beforeSetDimensionsCallbackProxy.getProxy()));
-			getConfiguration().setCallback(Property.AFTER_SET_DIMENSIONS, new ConfigurationEnvelop<>(afterSetDimensionsCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(Property.BEFORE_SET_DIMENSIONS, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(Property.AFTER_SET_DIMENSIONS, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.BEFORE_SET_DIMENSIONS, axisDimensionsCallback, beforeSetDimensionsCallbackProxy);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.AFTER_SET_DIMENSIONS, axisDimensionsCallback, afterSetDimensionsCallbackProxy);
 	}
 
 	/**
@@ -528,16 +510,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public void setAxisFitCallback(AxisFitCallback axisFitCallback) {
 		// sets the callback
 		this.axisFitCallback = axisFitCallback;
-		// checks if callback is consistent
-		if (axisFitCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(Property.BEFORE_FIT, new ConfigurationEnvelop<>(beforeFitCallbackProxy.getProxy()));
-			getConfiguration().setCallback(Property.AFTER_FIT, new ConfigurationEnvelop<>(afterFitCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(Property.BEFORE_FIT, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(Property.AFTER_FIT, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.BEFORE_FIT, axisFitCallback, beforeFitCallbackProxy);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.AFTER_FIT, axisFitCallback, afterFitCallbackProxy);
 	}
 
 	/**
@@ -557,16 +533,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public void setAxisTickToLabelConversionCallback(AxisTickToLabelConversionCallback axisTickToLabelConversionCallback) {
 		// sets the callback
 		this.axisTickToLabelConversionCallback = axisTickToLabelConversionCallback;
-		// checks if callback is consistent
-		if (axisTickToLabelConversionCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(Property.BEFORE_TICK_TO_LABEL_CONVERSION, new ConfigurationEnvelop<>(beforeTickToLabelConversionCallbackProxy.getProxy()));
-			getConfiguration().setCallback(Property.AFTER_TICK_TO_LABEL_CONVERSION, new ConfigurationEnvelop<>(afterTickToLabelConversionCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(Property.BEFORE_TICK_TO_LABEL_CONVERSION, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(Property.AFTER_TICK_TO_LABEL_CONVERSION, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.BEFORE_TICK_TO_LABEL_CONVERSION, axisTickToLabelConversionCallback, beforeTickToLabelConversionCallbackProxy);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.AFTER_TICK_TO_LABEL_CONVERSION, axisTickToLabelConversionCallback, afterTickToLabelConversionCallbackProxy);
 	}
 
 	/**
@@ -586,16 +556,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public void setAxisBuildTicksCallback(AxisBuildTicksCallback axisBuildTicksCallback) {
 		// sets the callback
 		this.axisBuildTicksCallback = axisBuildTicksCallback;
-		// checks if callback is consistent
-		if (axisBuildTicksCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(Property.BEFORE_BUILD_TICKS, new ConfigurationEnvelop<>(beforeBuildTicksCallbackProxy.getProxy()));
-			getConfiguration().setCallback(Property.AFTER_BUILD_TICKS, new ConfigurationEnvelop<>(afterBuildTicksCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(Property.BEFORE_BUILD_TICKS, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(Property.AFTER_BUILD_TICKS, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.BEFORE_BUILD_TICKS, axisBuildTicksCallback, beforeBuildTicksCallbackProxy);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.AFTER_BUILD_TICKS, axisBuildTicksCallback, afterBuildTicksCallbackProxy);
 	}
 
 	/**
@@ -615,16 +579,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public void setAxisUpdateCallback(AxisUpdateCallback axisUpdateCallback) {
 		// sets the callback
 		this.axisUpdateCallback = axisUpdateCallback;
-		// checks if callback is consistent
-		if (axisUpdateCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(Property.BEFORE_UPDATE, new ConfigurationEnvelop<>(beforeUpdateCallbackProxy.getProxy()));
-			getConfiguration().setCallback(Property.AFTER_UPDATE, new ConfigurationEnvelop<>(afterUpdateCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(Property.BEFORE_UPDATE, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-			getConfiguration().setCallback(Property.AFTER_UPDATE, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.BEFORE_UPDATE, axisUpdateCallback, beforeUpdateCallbackProxy);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.AFTER_UPDATE, axisUpdateCallback, afterUpdateCallbackProxy);
 	}
 	
 	/**
@@ -650,7 +608,19 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// then returns the defaults one
 		return Defaults.get().getGlobal().getFont().create().nativeObject();
 	}
-	
+
+	/**
+	 * Sets the callbacks that every element of axis can activate.
+	 * 
+	 * @param node element node instance
+	 * @param property property name
+	 * @param callBack the callback instance
+	 * @param callbackProxy the proxy instance 
+	 */
+	final void setCallback(AbstractNode node, Key property, Object callBack, CallbackProxy<?> callbackProxy) {
+		setCallback(node, property, callbackProxy, callbackProxy.getProxy());
+	}
+
 	/**
 	 * Sets the callbacks that every element of axis can activate.
 	 * 
@@ -669,7 +639,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			getConfiguration().setCallback(node, property, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
-
+	
 	/**
 	 * Invokes UPDATE axis callback.
 	 * 

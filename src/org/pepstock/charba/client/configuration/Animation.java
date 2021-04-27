@@ -342,14 +342,8 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	public void setDuration(DurationCallback durationCallback) {
 		// sets the callback
 		this.durationCallback = durationCallback;
-		// checks if callback is consistent
-		if (durationCallback != null) {
-			// adds the callback proxy function to java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DURATION, new ConfigurationEnvelop<>(durationCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DURATION, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		chart.getOptions().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DURATION, durationCallback, durationCallbackProxy);
 	}
 
 	/**
@@ -369,14 +363,8 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	public void setDelay(DelayCallback delayCallback) {
 		// sets the callback
 		this.delayCallback = delayCallback;
-		// checks if callback is consistent
-		if (delayCallback != null) {
-			// adds the callback proxy function to java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DELAY, new ConfigurationEnvelop<>(delayCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DELAY, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		chart.getOptions().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DELAY, delayCallback, delayCallbackProxy);
 	}
 
 	/**
@@ -396,14 +384,8 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	public void setLoop(LoopCallback loopCallback) {
 		// sets the callback
 		this.loopCallback = loopCallback;
-		// checks if callback is consistent
-		if (loopCallback != null) {
-			// adds the callback proxy function to java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.LOOP, new ConfigurationEnvelop<>(loopCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.LOOP, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		chart.getOptions().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.LOOP, loopCallback, loopCallbackProxy);
 	}
 
 	/**
@@ -423,14 +405,8 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	public void setEasing(EasingCallback easingCallback) {
 		// sets the callback
 		this.easingCallback = easingCallback;
-		// checks if callback is consistent
-		if (easingCallback != null) {
-			// adds the callback proxy function to java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.EASING, new ConfigurationEnvelop<>(easingCallbackProxy.getProxy()));
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			chart.getOptions().getConfiguration().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.EASING, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
-		}
+		// stores and manages callback
+		chart.getOptions().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.EASING, easingCallback, easingCallbackProxy);
 	}
 
 	/*

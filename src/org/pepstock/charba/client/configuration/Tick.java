@@ -360,7 +360,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// sets the callback
 		this.colorCallback = colorCallback;
 		// stores and manages callback
-		getAxis().setCallback(getConfiguration(), Property.COLOR, colorCallback, colorCallbackProxy.getProxy());
+		getAxis().setCallback(getConfiguration(), Property.COLOR, colorCallback, colorCallbackProxy);
 	}
 
 	/**
@@ -372,7 +372,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// sets the callback
 		this.textStrokeColorCallback = textStrokeColorCallback;
 		// stores and manages callback
-		getAxis().setCallback(getConfiguration(), Property.TEXT_STROKE_COLOR, textStrokeColorCallback, textStrokeColorCallbackProxy.getProxy());
+		getAxis().setCallback(getConfiguration(), Property.TEXT_STROKE_COLOR, textStrokeColorCallback, textStrokeColorCallbackProxy);
 	}
 
 	/**
@@ -384,7 +384,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// sets the callback
 		this.textStrokeWidthCallback = textStrokeWidthCallback;
 		// stores and manages callback
-		getAxis().setCallback(getConfiguration(), Property.TEXT_STROKE_WIDTH, textStrokeWidthCallback, textStrokeWidthCallbackProxy.getProxy());
+		getAxis().setCallback(getConfiguration(), Property.TEXT_STROKE_WIDTH, textStrokeWidthCallback, textStrokeWidthCallbackProxy);
 	}
 
 	/**
@@ -397,7 +397,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// sets the callback
 		this.fontCallback = fontCallback;
 		// stores and manages callback
-		getAxis().setCallback(getConfiguration(), Property.FONT, fontCallback, fontCallbackProxy.getProxy());
+		getAxis().setCallback(getConfiguration(), Property.FONT, fontCallback, fontCallbackProxy);
 	}
 
 	/**
