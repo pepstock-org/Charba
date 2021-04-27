@@ -31,6 +31,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.ArcBorderRadius;
 import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.data.BarBorderWidth;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -418,7 +419,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 *
 	 * @return the border radius of the dataset item in pixels as {@link BarBorderRadius}.
 	 */
-	public BarBorderRadius getBorderRadiusAsObject() {
+	public BarBorderRadius getBarBorderRadius() {
 		// checks if border radius is an object
 		if (isBorderRadiusAsObject()) {
 			// gets the border radius object
@@ -427,6 +428,22 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 		// if here, the border radius is a number or missing
 		// then returns a new object with same value
 		return new BarBorderRadius(getValue(Property.BORDER_RADIUS, Defaults.get().getGlobal().getElements().getBar().getBorderRadius()));
+	}
+
+	/**
+	 * Returns the border radius of the dataset item in pixels as {@link ArcBorderRadius}.
+	 *
+	 * @return the border radius of the dataset item in pixels as {@link ArcBorderRadius}.
+	 */
+	public ArcBorderRadius getArcBorderRadius() {
+		// checks if border radius is an object
+		if (isBorderRadiusAsObject()) {
+			// gets the border radius object
+			return ArcBorderRadius.FACTORY.create(getValue(Property.BORDER_RADIUS));
+		}
+		// if here, the border radius is a number or missing
+		// then returns a new object with same value
+		return new ArcBorderRadius(getValue(Property.BORDER_RADIUS, Defaults.get().getGlobal().getElements().getArc().getBorderRadius()));
 	}
 
 	/**

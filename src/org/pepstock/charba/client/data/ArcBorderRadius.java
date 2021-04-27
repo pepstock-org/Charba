@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -129,7 +130,7 @@ public final class ArcBorderRadius extends AbstractBarBorderItem {
 	 * @param borderRadius the border radius for outer-start corner of the arc, in pixel
 	 */
 	public void setOuterStart(int borderRadius) {
-		setValue(Property.OUTER_START, borderRadius);
+		setValue(Property.OUTER_START, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**
@@ -147,7 +148,7 @@ public final class ArcBorderRadius extends AbstractBarBorderItem {
 	 * @param borderRadius the border radius for outer-end corner of the arc, in pixel
 	 */
 	public void setOuterEnd(int borderRadius) {
-		setValue(Property.OUTER_END, borderRadius);
+		setValue(Property.OUTER_END, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**
@@ -165,7 +166,7 @@ public final class ArcBorderRadius extends AbstractBarBorderItem {
 	 * @param borderRadius the border radius for inner-start corner of the arc, in pixel
 	 */
 	public void setInnerStart(int borderRadius) {
-		setValue(Property.INNER_START, borderRadius);
+		setValue(Property.INNER_START, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**
@@ -183,7 +184,7 @@ public final class ArcBorderRadius extends AbstractBarBorderItem {
 	 * @param borderRadius the border radius for inner-end corner of the arc, in pixel
 	 */
 	public void setInnerEnd(int borderRadius) {
-		setValue(Property.INNER_END, borderRadius);
+		setValue(Property.INNER_END, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**

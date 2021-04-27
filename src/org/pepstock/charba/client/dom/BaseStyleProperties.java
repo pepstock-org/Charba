@@ -348,7 +348,7 @@ public final class BaseStyleProperties {
 	 * @return the CSS 'borderRadius' property
 	 */
 	@JsProperty
-	public native double getBorderRadius();
+	public native String getBorderRadius();
 
 	/**
 	 *
@@ -357,7 +357,7 @@ public final class BaseStyleProperties {
 	 * @param borderRadius the CSS 'borderRadius' property to set
 	 */
 	@JsProperty
-	public native void setBorderRadius(double borderRadius);
+	public native void setBorderRadius(String borderRadius);
 
 	/**
 	 *

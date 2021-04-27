@@ -13,34 +13,21 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.data;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 
 /**
- * Defines the border radius for BAR data set element, applies the corner radius to all corners of the rectangle (topLeft, topRight, bottomLeft, bottomRight).
+ * Defines the border radius for legend item element, applies the corner radius to all corners of the rectangle (topLeft, topRight, bottomLeft, bottomRight).
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BarBorderRadius extends AbstractBarBorderItem {
-
-	/**
-	 * Public factory to create a border radius object from a native object.
-	 */
-	public static final BarBorderRadiusFactory FACTORY = new BarBorderRadiusFactory();
-
-	// constants with a list of the managed keys
-	private static final List<Key> KEYS = Collections.unmodifiableList(Arrays.asList(Property.values()));
+public final class BorderRadiusItem extends AbstractNode {
 
 	/**
 	 * Name of properties of native object.
@@ -77,38 +64,14 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	}
 
 	/**
-	 * Creates the object with an empty native object instance.
-	 */
-	public BarBorderRadius() {
-		this(DefaultsBuilder.get().getOptions().getElements().getBar().getBorderRadius());
-	}
-
-	/**
-	 * Creates the object using the argument to set the border radius size to all corners of the rectangle.
-	 * 
-	 * @param borderRadius border radius to apply to all corners of the rectangle.
-	 */
-	public BarBorderRadius(int borderRadius) {
-		super(borderRadius);
-	}
-
-	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @param nativeObject native object instance to be wrapped.
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
 	 */
-	BarBorderRadius(NativeObject nativeObject) {
-		super(nativeObject);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.AbstractBarBorderItem#getKeys()
-	 */
-	@Override
-	List<Key> getKeys() {
-		return KEYS;
+	BorderRadiusItem(AbstractNode parent, Key childKey, NativeObject nativeObject) {
+		super(parent, childKey, nativeObject);
 	}
 
 	/**
@@ -116,7 +79,6 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	 * 
 	 * @param borderRadius border radius to apply to all corners of the rectangle.
 	 */
-	@Override
 	public void set(int borderRadius) {
 		setTopLeft(borderRadius);
 		setBottomLeft(borderRadius);
@@ -130,7 +92,7 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	 * @param borderRadius the border radius for top-left corner of the rectangle, in pixel
 	 */
 	public void setTopLeft(int borderRadius) {
-		setValue(Property.TOP_LEFT, Checker.positiveOrZero(borderRadius));
+		setValueAndAddToParent(Property.TOP_LEFT, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**
@@ -148,7 +110,7 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	 * @param borderRadius the border radius for top-right corner of the rectangle, in pixel
 	 */
 	public void setTopRight(int borderRadius) {
-		setValue(Property.TOP_RIGHT, Checker.positiveOrZero(borderRadius));
+		setValueAndAddToParent(Property.TOP_RIGHT, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**
@@ -166,7 +128,7 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	 * @param borderRadius the border radius for bottom-left corner of the rectangle, in pixel
 	 */
 	public void setBottomLeft(int borderRadius) {
-		setValue(Property.BOTTOM_LEFT, Checker.positiveOrZero(borderRadius));
+		setValueAndAddToParent(Property.BOTTOM_LEFT, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**
@@ -184,7 +146,7 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	 * @param borderRadius the border radius for bottom-right corner of the rectangle, in pixel
 	 */
 	public void setBottomRight(int borderRadius) {
-		setValue(Property.BOTTOM_RIGHT, Checker.positiveOrZero(borderRadius));
+		setValueAndAddToParent(Property.BOTTOM_RIGHT, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**
@@ -194,32 +156,6 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	 */
 	public int getBottomRight() {
 		return getValue(Property.BOTTOM_RIGHT, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
-	}
-
-	/**
-	 * Inner class to create bar border radius object by a native object.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	public static class BarBorderRadiusFactory implements NativeObjectContainerFactory<BarBorderRadius> {
-
-		/**
-		 * To avoid any instantiation
-		 */
-		private BarBorderRadiusFactory() {
-			// do nothing
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
-		 */
-		@Override
-		public BarBorderRadius create(NativeObject nativeObject) {
-			return new BarBorderRadius(nativeObject);
-		}
-
 	}
 
 }

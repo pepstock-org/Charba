@@ -39,8 +39,10 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.Repetition;
+import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.items.BorderRadiusItem;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.Font;
 
@@ -310,6 +312,33 @@ public final class Utilities {
 			return applyTemplate(PATTERN_TEMPLATE, image.getSrc(), Constants.EMPTY_STRING);
 		}
 		// if here, image not consistent
+		// then returns an empty string
+		return Constants.EMPTY_STRING;
+	}
+	
+	/**
+	 * Builds the border radius string (shorthand property of CSS font) to use in the canvas object or in DOM element.<br>
+	 * The format is [top-left | top-right | bottom-right | bottom-left].
+	 * 
+	 * @param borderRadius border radius item to use
+	 * @return the border radius string to use in the canvas object or in DOM element.
+	 */
+	public static String toCSSBorderRadiusProperty(BorderRadiusItem borderRadius) {
+		// checks if argument is consistent
+		if (borderRadius != null) {
+			// creates string builder
+			StringBuilder result = new StringBuilder();
+			// adds top left
+			result.append(Unit.PX.format(borderRadius.getTopLeft())).append(Constants.BLANK);
+			// adds top right
+			result.append(Unit.PX.format(borderRadius.getTopRight())).append(Constants.BLANK);
+			// adds bottom right
+			result.append(Unit.PX.format(borderRadius.getBottomRight())).append(Constants.BLANK);
+			// adds bottom left
+			result.append(Unit.PX.format(borderRadius.getBottomLeft()));
+			return result.toString();
+		}
+		// if here, item not consistent
 		// then returns an empty string
 		return Constants.EMPTY_STRING;
 	}

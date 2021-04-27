@@ -395,6 +395,8 @@ final class HtmlLegendGenerator {
 		color.getStyle().setHeight(Unit.PX.format(height));
 		// checks if must apply point style
 		if (!legendLabels.isUsePointStyle()) {
+			// applies border radius
+			colorCell.getStyle().setBorderRadius(Utilities.toCSSBorderRadiusProperty(item.getBorderRadius()));
 			// applies the background color
 			applyBackgroundColor(chart, item, color, width, height);
 			// applies the border width

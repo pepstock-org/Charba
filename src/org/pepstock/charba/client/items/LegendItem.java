@@ -26,12 +26,12 @@ import org.pepstock.charba.client.colors.GradientBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.PatternBuilder;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -46,7 +46,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class LegendItem extends NativeObjectContainer {
+public class LegendItem extends AbstractNode {
 
 	/**
 	 * Public factory to create a legend item from a native object.
@@ -62,6 +62,7 @@ public class LegendItem extends NativeObjectContainer {
 		INDEX("index"),
 		FILL_STYLE("fillStyle"),
 		FONT_COLOR("fontColor"),
+		BORDER_RADIUS("borderRadius"),
 		LINE_CAP("lineCap"),
 		LINE_DASH("lineDash"),
 		LINE_DASH_OFFSET("lineDashOffset"),
@@ -95,12 +96,16 @@ public class LegendItem extends NativeObjectContainer {
 		}
 
 	}
+	
+	// internal instance for border radius
+	private final BorderRadiusItem borderRadius;
 
 	/**
 	 * To avoid any user creation but provides an empty object.
 	 */
 	LegendItem() {
 		// do nothing
+		this((NativeObject)null);
 	}
 
 	/**
@@ -110,6 +115,23 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	LegendItem(NativeObject nativeObject) {
 		super(nativeObject);
+		// sets the border radius as undefined
+		int radius = Undefined.INTEGER;
+		// checks if border radius is set as number
+		if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
+			// gets the border radius
+			radius = getValue(Property.BORDER_RADIUS, Undefined.INTEGER);
+			// if yes, remove the property
+			remove(Property.BORDER_RADIUS);
+		}
+		// reads the border radius as object
+		this.borderRadius = new BorderRadiusItem(this, Property.BORDER_RADIUS, getValue(Property.BORDER_RADIUS));
+		// checks if the radius was set as number previously
+		// if yes, applies the radius to all dimensions
+		if (Undefined.isNot(radius)) {
+			// stores the border radius
+			this.borderRadius.set(radius);
+		}
 	}
 
 	/**
@@ -129,6 +151,15 @@ public class LegendItem extends NativeObjectContainer {
 		// if here, chart is not consistent
 		// returns always false
 		return false;
+	}
+	
+	/**
+	 * Returns the border radius of item.
+	 * 
+	 * @return the border radius of item.
+	 */
+	public final BorderRadiusItem getBorderRadius() {
+		return borderRadius;
 	}
 
 	/**
