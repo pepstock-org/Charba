@@ -228,7 +228,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	public boolean isEnabled() {
 		return getValue(Property.ENABLED, getDefaultValues().isEnabled());
 	}
-	
+
 	/**
 	 * Sets the browser events that the tooltip should listen to.
 	 * 
@@ -384,7 +384,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	public void setTitleAlign(TextAlign align) {
 		// tooltip accepts only right, left and center
 		// then use the left-right value
-		setValueAndAddToParent(Property.TITLE_ALIGN, Key.isValid(align) ? align.getLeftRightValue() :null);
+		setValueAndAddToParent(Property.TITLE_ALIGN, Key.isValid(align) ? align.getLeftRightValue() : null);
 	}
 
 	/**
@@ -490,7 +490,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	public void setBodyAlign(TextAlign align) {
 		// tooltip accepts only right, left and center
 		// then use the left-right value
-		setValueAndAddToParent(Property.BODY_ALIGN, Key.isValid(align) ? align.getLeftRightValue() :null);
+		setValueAndAddToParent(Property.BODY_ALIGN, Key.isValid(align) ? align.getLeftRightValue() : null);
 	}
 
 	/**
@@ -577,7 +577,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	public void setFooterAlign(TextAlign align) {
 		// tooltip accepts only right, left and center
 		// then use the left-right value
-		setValueAndAddToParent(Property.FOOTER_ALIGN, Key.isValid(align) ? align.getLeftRightValue() :null);
+		setValueAndAddToParent(Property.FOOTER_ALIGN, Key.isValid(align) ? align.getLeftRightValue() : null);
 	}
 
 	/**

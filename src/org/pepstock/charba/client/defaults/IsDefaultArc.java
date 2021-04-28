@@ -52,19 +52,19 @@ public interface IsDefaultArc extends IsDefaultOptionsElement {
 	 * @return the arc offset
 	 */
 	int getOffset();
-	
+
 	/**
 	 * Returns the arc border radius (in pixels).
 	 * 
 	 * @return the arc border radius (in pixels).
 	 */
 	int getBorderRadius();
-	
+
 	/**
 	 * Returns the arc offset (in pixels) when hovered.
 	 * 
 	 * @return the arc offset when hovered
 	 */
 	int getHoverOffset();
-	
+
 }

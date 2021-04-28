@@ -35,7 +35,7 @@ public final class FontItem extends AbstractFont {
 	public FontItem() {
 		this(null);
 	}
-	
+
 	/**
 	 * Creates an empty font to use for chart configuration when the font is created by a callback.
 	 * 

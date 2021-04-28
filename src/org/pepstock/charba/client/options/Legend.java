@@ -125,7 +125,7 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	public LegendTitle getTitle() {
 		return title;
 	}
-	
+
 	/**
 	 * Sets the browser events that the legend should listen to.
 	 * 

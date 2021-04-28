@@ -30,7 +30,7 @@ public final class DefaultPointLabels implements IsDefaultPointLabels {
 	private static final boolean DEFAULT_DISPLAY = false;
 
 	private static final int DEFAULT_PADDING = 5;
-	
+
 	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);
 
 	private final DefaultRoutedFont font = new DefaultRoutedFont();

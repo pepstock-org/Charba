@@ -206,7 +206,7 @@ public final class Padding extends AbstractNode implements IsPadding {
 			setValue(key, Checker.positiveOrZero(padding));
 		}
 	}
-	
+
 	/**
 	 * Returns the native object instance.
 	 * 

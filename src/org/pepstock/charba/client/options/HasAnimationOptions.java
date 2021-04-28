@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimationContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface HasAnimationOptions extends IsDefaultAnimationContainer{
+public interface HasAnimationOptions extends IsDefaultAnimationContainer {
 
 	/**
 	 * Returns an animation container instance to use in the default methods of this interface.
@@ -32,7 +32,7 @@ public interface HasAnimationOptions extends IsDefaultAnimationContainer{
 	 * @return an animation container instance
 	 */
 	AnimationContainer getAnimationContainer();
-	
+
 	/**
 	 * Returns the animation element.
 	 * 
@@ -47,7 +47,7 @@ public interface HasAnimationOptions extends IsDefaultAnimationContainer{
 		// if here, the container is not consistent
 		return Defaults.get().getGlobal().getAnimation();
 	}
-	
+
 	/**
 	 * Returns the animations collection element.
 	 * 
@@ -62,7 +62,7 @@ public interface HasAnimationOptions extends IsDefaultAnimationContainer{
 		// if here, the container is not consistent
 		return Defaults.get().getGlobal().getAnimations();
 	}
-	
+
 	/**
 	 * Returns the animation transition element.
 	 * 

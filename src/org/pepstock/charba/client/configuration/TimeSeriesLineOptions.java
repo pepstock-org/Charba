@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  *
  */
 public class TimeSeriesLineOptions extends TimeSeriesOptions implements HasLineOptions {
-	
+
 	// decimation instance
 	private final Decimation decimation;
 	// segment instance
@@ -53,7 +53,7 @@ public class TimeSeriesLineOptions extends TimeSeriesOptions implements HasLineO
 	public TimeSeriesOptions getOptions() {
 		return this;
 	}
-	
+
 	/**
 	 * Returns the decimation plugin element.
 	 * 
@@ -62,7 +62,7 @@ public class TimeSeriesLineOptions extends TimeSeriesOptions implements HasLineO
 	public Decimation getDecimation() {
 		return decimation;
 	}
-	
+
 	/**
 	 * Returns the segment element.
 	 * 

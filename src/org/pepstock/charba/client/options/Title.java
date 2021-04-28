@@ -94,7 +94,7 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	public FontContainer getFontContainer() {
 		return fontContainer;
 	}
-	
+
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 
@@ -125,9 +125,11 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	}
 
 	/**
-	 * Sets the title text to display.<br>If specified as an array, text is rendered on multiple lines.
+	 * Sets the title text to display.<br>
+	 * If specified as an array, text is rendered on multiple lines.
 	 * 
-	 * @param text the title text to display.<br>If specified as an array, text is rendered on multiple lines.
+	 * @param text the title text to display.<br>
+	 *            If specified as an array, text is rendered on multiple lines.
 	 */
 	public void setText(String... text) {
 		setValueOrArrayAndAddToParent(Property.TEXT, text);

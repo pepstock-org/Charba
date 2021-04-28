@@ -100,7 +100,7 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 		// stores it
 		setValue(LegendItem.Property.INDEX, index);
 	}
-	
+
 	/**
 	 * Sets the font color of the legend.
 	 * 
@@ -109,7 +109,7 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	public void setFontColor(IsColor color) {
 		setFontColor(IsColor.checkAndGetValue(color));
 	}
-	
+
 	/**
 	 * Returns the font color of the legend.
 	 * 

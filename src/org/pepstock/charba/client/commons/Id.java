@@ -94,7 +94,7 @@ public enum Id implements Key
 		// checks if arguments are consistent and property exists
 		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
 			// returns value
-			return NativeObjectUtils.getIntProperty(nativeObject, key.value(),Undefined.INTEGER);
+			return NativeObjectUtils.getIntProperty(nativeObject, key.value(), Undefined.INTEGER);
 		}
 		// property doesn't exist
 		return Undefined.INTEGER;

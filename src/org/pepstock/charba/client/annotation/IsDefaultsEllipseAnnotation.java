@@ -22,7 +22,7 @@ package org.pepstock.charba.client.annotation;
  *
  */
 interface IsDefaultsEllipseAnnotation extends IsDefaultsXYAnnotation, IsDefaultsBackgroundColorHandler {
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

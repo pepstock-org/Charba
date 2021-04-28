@@ -56,7 +56,7 @@ public final class Undefined {
 	private Undefined() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the value is undefined.
 	 * 
@@ -66,7 +66,7 @@ public final class Undefined {
 	public static boolean is(int value) {
 		return !isNot(value);
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the value is undefined.
 	 * 
@@ -76,7 +76,7 @@ public final class Undefined {
 	public static boolean is(double value) {
 		return !isNot(value);
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the value is not undefined.
 	 * 
@@ -86,7 +86,7 @@ public final class Undefined {
 	public static boolean isNot(int value) {
 		return value != Undefined.INTEGER;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the value is not undefined.
 	 * 
@@ -96,5 +96,5 @@ public final class Undefined {
 	public static boolean isNot(double value) {
 		return !Double.isNaN(value) && !Double.isInfinite(value);
 	}
-	
+
 }

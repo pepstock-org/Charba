@@ -28,7 +28,7 @@ public interface IsDefaultAnimationTransition {
 	 * @return the animation
 	 */
 	IsDefaultAnimation getAnimation();
-	
+
 	/**
 	 * Returns the animations collection element.
 	 * 

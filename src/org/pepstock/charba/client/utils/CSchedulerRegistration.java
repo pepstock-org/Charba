@@ -29,7 +29,7 @@ public final class CSchedulerRegistration {
 	/**
 	 * Creates a scheduler registration in order to enable the task removing.
 	 * 
-	 * @param timeoutID  the identifier of the timeout you want to cancel
+	 * @param timeoutID the identifier of the timeout you want to cancel
 	 */
 	CSchedulerRegistration(int timeoutID) {
 		this.timeoutID = timeoutID;

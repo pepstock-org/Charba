@@ -24,11 +24,10 @@ package org.pepstock.charba.client;
 public interface ChartTimerTask {
 
 	/**
-	 * Executes the task repeatedly, internally by the chart instance. 
+	 * Executes the task repeatedly, internally by the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
 	void execute(IsChart chart);
-
 
 }

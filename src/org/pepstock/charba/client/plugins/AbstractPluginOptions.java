@@ -119,7 +119,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	public final String getPluginId() {
 		return pluginId;
 	}
-	
+
 	/**
 	 * Sets the browser events that the plugins should listen to.
 	 * 

@@ -224,7 +224,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	public AnimationCollection get(IsAnimationCollectionKey collection) {
 		return transition.getAnimations().get(collection);
 	}
-	
+
 	/**
 	 * Sets an animation collection instance to store in the animation options.
 	 * 

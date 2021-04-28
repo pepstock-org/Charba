@@ -35,7 +35,7 @@ public interface IsDefaultPointLabels extends IsDefaultFontContainer {
 	 * @return if the title is shown.
 	 */
 	boolean isDisplay();
-	
+
 	/**
 	 * Returns the padding between chart and point labels, in pixels.
 	 * 

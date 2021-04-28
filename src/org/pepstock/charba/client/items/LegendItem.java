@@ -96,7 +96,7 @@ public class LegendItem extends AbstractNode {
 		}
 
 	}
-	
+
 	// internal instance for border radius
 	private final BorderRadiusItem borderRadius;
 
@@ -105,7 +105,7 @@ public class LegendItem extends AbstractNode {
 	 */
 	LegendItem() {
 		// do nothing
-		this((NativeObject)null);
+		this((NativeObject) null);
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class LegendItem extends AbstractNode {
 		// returns always false
 		return false;
 	}
-	
+
 	/**
 	 * Returns the border radius of item.
 	 * 
@@ -224,7 +224,7 @@ public class LegendItem extends AbstractNode {
 	public final boolean isFillStyleAsPattern() {
 		return JsItemsHelper.get().isCanvasPattern(this.nativeObject(), Property.FILL_STYLE);
 	}
-	
+
 	/**
 	 * Returns the font color of the legend or <code>null</code> if not set.
 	 * 

@@ -45,7 +45,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 		this.numberFormatter = new NumberFormatter(() -> getConfiguration().getNumberFormat());
 		this.optionsHandler = new LinearTickOptionsHandler(axis);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

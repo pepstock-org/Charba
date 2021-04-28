@@ -127,7 +127,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 	public LegendTitle getTitle() {
 		return title;
 	}
-	
+
 	/**
 	 * Sets the browser events that the legend should listen to.
 	 * 

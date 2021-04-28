@@ -53,7 +53,7 @@ public final class Chart {
 	 */
 	@JsProperty
 	static native NativeObject getOverrides();
-	
+
 	/**
 	 * Returns the <code>helpers</code> property by native object.
 	 * 

@@ -34,7 +34,7 @@ public class Filler extends ConfigurationOptionsContainer {
 	Filler(ConfigurationOptions options) {
 		super(options);
 	}
-	
+
 	/**
 	 * Sets <code>true</code> if the fill area will be recursively extended to the visible target defined by the fill value of hidden data set targets.
 	 * 
@@ -52,7 +52,7 @@ public class Filler extends ConfigurationOptionsContainer {
 	public boolean isPropagate() {
 		return getConfiguration().getFiller().isPropagate();
 	}
-	
+
 	/**
 	 * Sets the draw time which defines when the filling will be applied.
 	 * 

@@ -132,7 +132,7 @@ public interface IsDefaultScale {
 	 * @return <code>true</code> to align pixel values to device pixels
 	 */
 	boolean isAlignToPixels();
-	
+
 	/**
 	 * Returns the reverses order of tick labels.
 	 * 
@@ -146,7 +146,7 @@ public interface IsDefaultScale {
 	 * @return if the axis are stacked or not.
 	 */
 	boolean isStacked();
-	
+
 	/**
 	 * Returns if you might want to stack positive and negative values together.
 	 * 
@@ -197,14 +197,14 @@ public interface IsDefaultScale {
 	 * @return whether to animate scaling the chart from the center.
 	 */
 	boolean isAnimate();
-	
+
 	/**
 	 * Returns the starting angle to draw arcs for the first item in a dataset.
 	 * 
 	 * @return starting angle to draw arcs for the first item in a dataset.
 	 */
 	double getStartAngle();
-	
+
 	/**
 	 * Returns the background color of the scale area.
 	 * 

@@ -46,7 +46,6 @@ public final class DefaultChartAnimationCollection extends AbstractDefaultChartA
 	public List<IsAnimationPropertyKey> getProperties() {
 		return getDefaults().getProperties();
 	}
-	
 
 	/*
 	 * (non-Javadoc)

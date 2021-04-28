@@ -52,7 +52,7 @@ public final class ControllerType implements Type {
 	public ControllerType(String type, Type chartType, ControllerProvider provider) {
 		this(type, chartType, provider, null);
 	}
-	
+
 	/**
 	 * Creates new chart type based on existing chart type, as extension.<br>
 	 * Scale type is the existing chart one.
@@ -65,7 +65,7 @@ public final class ControllerType implements Type {
 	public ControllerType(String type, Type chartType, ControllerProvider provider, ControllerRegistrationHandler handler) {
 		this(type, chartType, provider, handler, true);
 	}
-	
+
 	/**
 	 * Creates new chart type based on existing chart type, as extension.<br>
 	 * Scale type is the existing chart one.

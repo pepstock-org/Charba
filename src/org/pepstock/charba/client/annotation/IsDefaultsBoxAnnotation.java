@@ -34,7 +34,7 @@ interface IsDefaultsBoxAnnotation extends IsDefaultsXYAnnotation, IsDefaultsBack
 	default AnnotationType getType() {
 		return null;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

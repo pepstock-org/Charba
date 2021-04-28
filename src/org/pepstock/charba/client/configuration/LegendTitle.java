@@ -57,7 +57,7 @@ public class LegendTitle extends ConfigurationOptionsContainer implements HasLeg
 	public LegendTextHandler getLegendTextHandler() {
 		return getConfiguration().getLegend().getTitle().getLegendTextHandler();
 	}
-	
+
 	/**
 	 * Returns the padding element.
 	 * 

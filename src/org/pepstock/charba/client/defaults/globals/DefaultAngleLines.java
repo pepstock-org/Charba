@@ -80,7 +80,7 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 	public double getBorderDashOffset() {
 		return DEFAULT_BORDER_DASH_OFFSET;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

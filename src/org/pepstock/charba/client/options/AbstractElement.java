@@ -169,11 +169,11 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	public final IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
-	
+
 	// ------------------------------------------------------
 	// HOVER
 	// ------------------------------------------------------
-	
+
 	/**
 	 * Sets the background color when hovered.
 	 * 
@@ -209,7 +209,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	public final IsColor getHoverBackgroundColor() {
 		return ColorBuilder.parse(getHoverBackgroundColorAsString());
 	}
-	
+
 	/**
 	 * Sets the border width when hovered.
 	 * 
@@ -263,6 +263,5 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	public final IsColor getHoverBorderColor() {
 		return ColorBuilder.parse(getHoverBorderColorAsString());
 	}
-
 
 }

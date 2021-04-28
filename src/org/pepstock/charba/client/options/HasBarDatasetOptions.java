@@ -179,7 +179,7 @@ public interface HasBarDatasetOptions extends IsDefaultBarDatasets {
 		// then returns the default
 		return Defaults.get().getGlobal().getDatasets().get(ChartType.BAR).getMinBarLength();
 	}
-	
+
 	/**
 	 * When <code>true</code>, all the data sets at same index value will be placed next to each other centering on that index value.<br>
 	 * When <code>false</code>, each bar is placed on its actual index-axis value.

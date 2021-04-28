@@ -34,7 +34,7 @@ import org.pepstock.charba.client.callbacks.Scriptable;
  * <li><code>yValue</code> for {@link PointAnnotation}
  * <li><code>value</code> for {@link LineAnnotation}, infinitive line
  * <li><code>endValue</code> for {@link LineAnnotation}, infinitive line
- * </ul> 
+ * </ul>
  * <br>
  * properties at runtime.
  * 

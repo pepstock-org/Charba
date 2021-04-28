@@ -100,7 +100,6 @@ public final class TooltipModel extends NativeObjectContainer {
 	public TooltipModel(CallbacksEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
-	
 
 	/**
 	 * Creates the item using a native java script object which contains all properties.

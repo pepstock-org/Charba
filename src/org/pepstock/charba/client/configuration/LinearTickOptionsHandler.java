@@ -104,9 +104,12 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
 		this.countCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), countCallback, getAxis().getDefaultValues().getTicks().getCount()).intValue());
-		this.maxTicksLimitCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), maxTicksLimitCallback, getAxis().getDefaultValues().getTicks().getMaxTicksLimit()).intValue());
-		this.precisionCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), precisionCallback, getAxis().getDefaultValues().getTicks().getPrecision()).intValue());
-		this.stepSizeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), stepSizeCallback, getAxis().getDefaultValues().getTicks().getStepSize()).doubleValue());
+		this.maxTicksLimitCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), maxTicksLimitCallback, getAxis().getDefaultValues().getTicks().getMaxTicksLimit()).intValue());
+		this.precisionCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), precisionCallback, getAxis().getDefaultValues().getTicks().getPrecision()).intValue());
+		this.stepSizeCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), stepSizeCallback, getAxis().getDefaultValues().getTicks().getStepSize()).doubleValue());
 	}
 
 	/**
@@ -150,7 +153,7 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.MAX_TICKS_LIMIT, maxTicksLimitCallback, maxTicksLimitCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the precision callback instance.
 	 * 
@@ -171,7 +174,7 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.PRECISION, precisionCallback, precisionCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the stepSize callback instance.
 	 * 

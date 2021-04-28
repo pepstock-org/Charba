@@ -39,7 +39,7 @@ public interface IsDefaultLegend extends IsDefaultTextDirectionHandler, IsDefaul
 	 * @return the title object instance
 	 */
 	IsDefaultLegendTitle getTitle();
-	
+
 	/**
 	 * Returns the browser events that the legend should listen to.
 	 * 

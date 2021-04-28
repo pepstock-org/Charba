@@ -819,7 +819,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// returns the default
 		return defaultValues.getImageWidthAsPercentage();
 	}
-	
+
 	/**
 	 * Sets the draw time defined as default in the options from the parent.
 	 * 
@@ -1099,7 +1099,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public void setYAdjust(AdjustSizeCallback adjustCallback) {
 		Y_ADJUST_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustCallback, yAdjustCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Returns the font callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1247,7 +1247,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// then returns the default
 		return defaultValue.value();
 	}
-	
+
 	/**
 	 * Returns a native object as font when the callback has been activated.
 	 * 

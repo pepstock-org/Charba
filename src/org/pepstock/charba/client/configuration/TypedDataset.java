@@ -38,7 +38,7 @@ public class TypedDataset extends ConfigurationOptionsContainer implements HasAn
 	TypedDataset(ConfigurationOptions options) {
 		this(options.getChart().getType(), options);
 	}
-	
+
 	/**
 	 * Builds the object storing the chart type and the root options element.
 	 * 

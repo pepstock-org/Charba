@@ -25,7 +25,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = NativeName.JS_OBJECT_ARRAY_HELPER, namespace = JsPackage.GLOBAL)
 final class NativeJsObjectArray {
-	
+
 	/**
 	 * To avoid any instantiation
 	 */

@@ -86,7 +86,7 @@ public final class UpdateConfigurationBuilder {
 		configuration.setLoop(loop);
 		return this;
 	}
-	
+
 	/**
 	 * If <code>true</code>, the chart will animate in with a rotation animation.
 	 * 

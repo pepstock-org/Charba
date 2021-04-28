@@ -363,8 +363,6 @@ public abstract class CanvasObjectFactory {
 		return context.createRadialGradient(x0, y0, r0, x1, y1, r1);
 	}
 
-
-
 	/**
 	 * Creates the unique id for gradient using the scope.<br>
 	 * This is important in order to use the dame gradient from different scope having different {@link CanvasGradientItem}.

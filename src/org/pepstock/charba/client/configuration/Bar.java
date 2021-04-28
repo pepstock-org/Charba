@@ -91,7 +91,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	public int getBorderRadius() {
 		return getConfiguration().getElements().getBar().getBorderRadius();
 	}
-	
+
 	/**
 	 * Sets the bar border radius (in pixels) when hovered.
 	 * 
@@ -154,7 +154,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	public Img getPointStyleAsImage() {
 		return getConfiguration().getElements().getBar().getPointStyleAsImage();
 	}
-	
+
 	/**
 	 * If <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack.
 	 * 

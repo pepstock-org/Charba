@@ -24,7 +24,7 @@ import org.pepstock.charba.client.callbacks.ColorCallback;
  *
  */
 interface IsDefaultsBackgroundColorHandler {
-	
+
 	/**
 	 * Returns the callback called to set the color of the background of annotation.
 	 * 

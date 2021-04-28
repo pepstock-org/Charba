@@ -107,8 +107,8 @@ public final class LabelsContext extends AbstractDatasetContext {
 	 */
 	public Label getLabelOptions() {
 		return labelOptions;
-	}	
-	
+	}
+
 	/**
 	 * Returns the label for the data set.
 	 * 

@@ -231,7 +231,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	public final void setFontColor(IsColor fontColor) {
 		// resets callback
-		setFontColor((ColorCallback<MeterContext>)null);
+		setFontColor((ColorCallback<MeterContext>) null);
 		// stores value
 		this.fontColor = IsColor.isValid(fontColor) ? fontColor : DEFAULT_FONT_COLOR;
 	}

@@ -34,7 +34,7 @@ public class Decimation extends ConfigurationOptionsContainer {
 	Decimation(ConfigurationOptions options) {
 		super(options);
 	}
-	
+
 	/**
 	 * Sets <code>true</code> if decimation are enabled.
 	 * 

@@ -49,7 +49,7 @@ import org.pepstock.charba.client.items.Undefined;
  *
  */
 public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScale> implements IsDefaultScale, HasLabels {
-	
+
 	// constants to activate the single stacked
 	private static final String SINGLE_STACKED = "single";
 
@@ -63,7 +63,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		DISPLAY("display"),
 		WEIGHT("weight"),
 		TICKS("ticks"),
-		BACKGROUND_COLOR("backgroundColor"), 
+		BACKGROUND_COLOR("backgroundColor"),
 		// cartesian
 		POSITION("position"),
 		OFFSET("offset"),
@@ -251,7 +251,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	public final boolean isBeginAtZero() {
 		return getValue(Property.BEGIN_AT_ZERO, getDefaultValues().isBeginAtZero());
 	}
-	
+
 	/**
 	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
@@ -564,7 +564,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	public final double getSuggestedMin() {
 		return getValue(Property.SUGGESTED_MIN, getDefaultValues().getSuggestedMin());
 	}
-	
+
 	/**
 	 * Sets <code>true</code> to align pixel values to device pixels.
 	 * 
@@ -621,7 +621,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	public final boolean isStacked() {
 		return getValue(Property.STACKED, getDefaultValues().isStacked());
 	}
-	
+
 	/**
 	 * Sets if you might want to stack positive and negative values together.
 	 * 
@@ -648,7 +648,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		// checks if stacked is stored as single (string)
 		return isType(Property.STACKED, ObjectType.STRING);
 	}
-	
+
 	/**
 	 * The weight used to sort the axis. Higher weights are further away from the chart area.
 	 * 

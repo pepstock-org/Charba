@@ -31,7 +31,7 @@ import org.pepstock.charba.client.enums.Weight;
  * @param <T> type of scriptable context
  */
 public abstract class AbstractScriptableFont<T extends ChartContext> extends AbstractFont {
-	
+
 	private final IsScriptableFontProvider<T> scriptableFontProvider;
 
 	/**

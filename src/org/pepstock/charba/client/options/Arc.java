@@ -154,7 +154,7 @@ public final class Arc extends AbstractElement<IsDefaultArc> implements IsDefaul
 	public int getOffset() {
 		return getValue(Property.OFFSET, getDefaultValues().getOffset());
 	}
-	
+
 	/**
 	 * Sets the arc border radius (in pixels).
 	 * 
@@ -173,7 +173,7 @@ public final class Arc extends AbstractElement<IsDefaultArc> implements IsDefaul
 	public int getBorderRadius() {
 		return getValue(Property.BORDER_RADIUS, getDefaultValues().getBorderRadius());
 	}
-	
+
 	/**
 	 * Sets the arc offset (in pixels) when hovered.
 	 * 

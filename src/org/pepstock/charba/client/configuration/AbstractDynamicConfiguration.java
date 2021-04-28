@@ -36,7 +36,7 @@ abstract class AbstractDynamicConfiguration<I> {
 	AbstractDynamicConfiguration(IsProvider<I> provider) {
 		// checks if consistent
 		// stores provider
-		this.provider = Checker.checkAndGetIfValid(provider, "Options provider") ;
+		this.provider = Checker.checkAndGetIfValid(provider, "Options provider");
 	}
 
 	/**

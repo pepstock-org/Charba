@@ -71,7 +71,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 		}
 
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -131,7 +131,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 		// sets callbacks proxies
 		initAbstractXYCallbacks();
 	}
-	
+
 	/**
 	 * Initializes the callbacks proxies for the options which can be scriptable.
 	 */
@@ -190,7 +190,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setXMax(String max) {
 		// resets callback
-		setXMax((ValueCallback)null);
+		setXMax((ValueCallback) null);
 		// stores value
 		setValue(Property.X_MAX, max);
 	}
@@ -202,7 +202,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setXMax(double max) {
 		// resets callback
-		setXMax((ValueCallback)null);
+		setXMax((ValueCallback) null);
 		// stores value
 		setValue(Property.X_MAX, max);
 	}
@@ -214,7 +214,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setXMax(Date max) {
 		// resets callback
-		setXMax((ValueCallback)null);
+		setXMax((ValueCallback) null);
 		// stores value
 		setValue(Property.X_MAX, max);
 	}
@@ -256,7 +256,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setXMin(String min) {
 		// resets callback
-		setXMin((ValueCallback)null);
+		setXMin((ValueCallback) null);
 		// stores value
 		setValue(Property.X_MIN, min);
 	}
@@ -268,7 +268,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setXMin(double min) {
 		// resets callback
-		setXMin((ValueCallback)null);
+		setXMin((ValueCallback) null);
 		// stores value
 		setValue(Property.X_MIN, min);
 	}
@@ -280,7 +280,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setXMin(Date min) {
 		// resets callback
-		setXMin((ValueCallback)null);
+		setXMin((ValueCallback) null);
 		// stores value
 		setValue(Property.X_MIN, min);
 	}
@@ -356,7 +356,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setYMax(String max) {
 		// resets callback
-		setYMax((ValueCallback)null);
+		setYMax((ValueCallback) null);
 		// stores value
 		setValue(Property.Y_MAX, max);
 	}
@@ -368,7 +368,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setYMax(double max) {
 		// resets callback
-		setYMax((ValueCallback)null);
+		setYMax((ValueCallback) null);
 		// stores value
 		setValue(Property.Y_MAX, max);
 	}
@@ -380,7 +380,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setYMax(Date max) {
 		// resets callback
-		setYMax((ValueCallback)null);
+		setYMax((ValueCallback) null);
 		// stores value
 		setValue(Property.Y_MAX, max);
 	}
@@ -422,7 +422,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setYMin(String min) {
 		// resets callback
-		setYMin((ValueCallback)null);
+		setYMin((ValueCallback) null);
 		// stores value
 		setValue(Property.Y_MIN, min);
 	}
@@ -434,7 +434,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setYMin(double min) {
 		// resets callback
-		setYMin((ValueCallback)null);
+		setYMin((ValueCallback) null);
 		// stores value
 		setValue(Property.Y_MIN, min);
 	}
@@ -446,7 +446,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setYMin(Date min) {
 		// resets callback
-		setYMin((ValueCallback)null);
+		setYMin((ValueCallback) null);
 		// stores value
 		setValue(Property.Y_MIN, min);
 	}
@@ -480,7 +480,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	public final Date getYMinAsDate() {
 		return getValueForMultipleKeyTypes(Property.Y_MIN, defaultValues.getYMinAsDate());
 	}
-	
+
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
@@ -522,7 +522,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	public final void setXMax(ValueCallback valueCallback) {
 		X_MAX_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, xMaxCallbackProxy.getProxy());
 	}
-	
+
 	// Y
 
 	/**

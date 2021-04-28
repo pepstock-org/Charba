@@ -261,8 +261,8 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only if
-	 * not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only
+	 * if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
@@ -278,8 +278,8 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only if
-	 * not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only
+	 * if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
@@ -295,8 +295,8 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only if
-	 * not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only
+	 * if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
@@ -312,8 +312,8 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only if
-	 * not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only
+	 * if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 
@@ -329,8 +329,8 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only if
-	 * not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) in the <code>target</code> only
+	 * if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
 	 * The property is
 	 * 

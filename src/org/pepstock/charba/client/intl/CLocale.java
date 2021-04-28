@@ -379,7 +379,6 @@ public final class CLocale {
 		// then returns null
 		return null;
 	}
-	
 
 	/**
 	 * Returns the default locale, set in the the platform.

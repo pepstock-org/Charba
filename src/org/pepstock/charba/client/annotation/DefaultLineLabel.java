@@ -48,7 +48,7 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	public IsDefaultFont getFont() {
 		return font;
 	}
-	
+
 	/**
 	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for body.
 	 * 

@@ -153,7 +153,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	public int getPadding() {
 		return getValue(Property.PADDING, getDefaultValues().getPadding());
 	}
-	
+
 	/**
 	 * Sets the horizontal alignment of the label text.
 	 * 
@@ -162,7 +162,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	public void setTextAlign(TextAlign align) {
 		// legend labels accept only right, left and center
 		// then use the left-right value
-		setValueAndAddToParent(Property.TEXT_ALIGN, Key.isValid(align) ? align.getLeftRightValue() :null);
+		setValueAndAddToParent(Property.TEXT_ALIGN, Key.isValid(align) ? align.getLeftRightValue() : null);
 	}
 
 	/**

@@ -26,7 +26,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 final class NativeUtils {
-	
+
 	/**
 	 * To avoid any instantiation
 	 */

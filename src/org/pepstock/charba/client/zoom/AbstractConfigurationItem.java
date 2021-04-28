@@ -224,7 +224,6 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	abstract CallbackPropertyHandler<RejectedCallback> getRejectedPropertyHandler();
 
-
 	/**
 	 * Returns the minimum element (panning or zooming) range depending on scale type.
 	 * 
@@ -244,7 +243,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	public final Range getRangeMax() {
 		return rangeMax;
 	}
-	
+
 	/**
 	 * Sets <code>true</code> to enable element (panning or zooming).
 	 * 
@@ -316,7 +315,6 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	public final InteractionAxis getOverScaleMode() {
 		return getValue(Property.OVER_SCALE_MODE, InteractionAxis.values(), defaultOptions.getOverScaleMode());
 	}
-	
 
 	/**
 	 * Sets the minimal pan distance required before actually applying pan.
@@ -336,7 +334,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	public double getThreshold() {
 		return getValue(Property.THRESHOLD, getDefaultsOptions().getThreshold());
 	}
-	
+
 	// -----------------------
 	// CALLBACKS
 	// -----------------------

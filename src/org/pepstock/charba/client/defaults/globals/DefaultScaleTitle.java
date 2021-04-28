@@ -29,7 +29,7 @@ import org.pepstock.charba.client.enums.ScaleTitleAlign;
 public final class DefaultScaleTitle implements IsDefaultScaleTitle {
 
 	private static final boolean DEFAULT_DISPLAY = false;
-	
+
 	private static final int DEFAULT_PADDING = 4;
 
 	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);

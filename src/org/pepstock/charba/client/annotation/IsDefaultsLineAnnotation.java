@@ -147,7 +147,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
 	default ValueCallback getValueCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the data value at which the line draw should end.
 	 * 

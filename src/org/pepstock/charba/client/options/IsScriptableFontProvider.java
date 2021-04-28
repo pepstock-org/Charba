@@ -32,7 +32,7 @@ public interface IsScriptableFontProvider<T extends ChartContext> {
 	 * @return the {@link FontCallback} if it has been set or <code>null</code>.
 	 */
 	FontCallback<T> getFontCallback();
-	
+
 	/**
 	 * Sets the font callback.
 	 * 

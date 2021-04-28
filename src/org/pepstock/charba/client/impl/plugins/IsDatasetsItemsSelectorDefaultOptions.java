@@ -33,7 +33,7 @@ interface IsDatasetsItemsSelectorDefaultOptions {
 	 * @return the selection cleaner item
 	 */
 	IsDatasetsItemsSelectorDefaultSelectionCleaner getSelectionCleaner();
-	
+
 	/**
 	 * Returns <code>true</code> if plugin is enabled.
 	 * 

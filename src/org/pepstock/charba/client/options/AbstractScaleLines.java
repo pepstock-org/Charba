@@ -130,7 +130,7 @@ abstract class AbstractScaleLines<D> extends AbstractModel<AbstractScale, D> imp
 	 * @return the default value for border dash offset.
 	 */
 	abstract double getDefaultBorderDashOffset();
-	
+
 	/**
 	 * Provides the default value for border dash.
 	 * 

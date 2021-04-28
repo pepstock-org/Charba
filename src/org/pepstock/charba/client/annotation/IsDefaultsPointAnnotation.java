@@ -122,7 +122,7 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation, IsDefaultsBack
 	default Date getYValueAsDate() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the radius.
 	 * 
@@ -131,7 +131,7 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation, IsDefaultsBack
 	default RadiusCallback<AnnotationContext> getRadiusCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the data X value to draw the line at.
 	 * 
@@ -140,7 +140,7 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation, IsDefaultsBack
 	default ValueCallback getXValueCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the data Y value to draw the line at.
 	 * 

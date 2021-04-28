@@ -82,7 +82,7 @@ public abstract class AbstractPadding extends NativeObjectContainer implements I
 		// creates a font to wrap
 		this.padding = new Padding(null, Property.PADDING, defaultValues, getNativeObject(), Undefined.INTEGER);
 	}
-	
+
 	/**
 	 * Sets the padding left in pixel.
 	 * 

@@ -38,7 +38,7 @@ final class Overrides extends NativeObjectContainer {
 	Overrides(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
 	/**
 	 * Returns the chart options defaults by chart type.
 	 * 
@@ -54,7 +54,7 @@ final class Overrides extends NativeObjectContainer {
 		// if here, the type doesn't exist
 		return null;
 	}
-	
+
 	/**
 	 * Returns an options instance, to use as default options, based of type of chart.
 	 * 

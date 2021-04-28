@@ -122,7 +122,7 @@ final class IncrementalIdHandler {
 		// checks if container is consistent
 		Checker.checkIfValid(container, "Container argument");
 		// checks if the property exists
-		Checker.assertCheck(container.has(Property.CHARBA_INTERNAL_INTERNAL_ID),"The incremental id has not been stored. Invoke 'checkAndSetId' before calling 'getId'");
+		Checker.assertCheck(container.has(Property.CHARBA_INTERNAL_INTERNAL_ID), "The incremental id has not been stored. Invoke 'checkAndSetId' before calling 'getId'");
 		// returns value
 		return container.getValue(Property.CHARBA_INTERNAL_INTERNAL_ID, Undefined.STRING);
 	}

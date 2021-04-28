@@ -92,16 +92,14 @@ public final class Utilities {
 	 * <code>
 	 * font-style  font-variant  font-weight  font-size/line-height  font-family
 	 * optional    optional      optional     mandatory optional     mandatory
-	 * </code>
-	 * <br>
+	 * </code> <br>
 	 * See <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/font">https://developer.mozilla.org/en-US/docs/Web/CSS/font</a><br>
 	 * font-variant is not implemented, therefore, the template is:<br>
 	 * <br>
 	 * <code>
 	 * font-style  "normal "    font-weight  font-size/line-height  font-family
 	 * optional    font-variant optional     mandatory optional     mandatory
-	 * </code>
-	 * <br>
+	 * </code> <br>
 	 */
 	// minimun font size in pixels
 	private static final int MINIMUM_FONT_SIZE = 4;
@@ -156,7 +154,7 @@ public final class Utilities {
 		Font globalFont = Defaults.get().getGlobal().getFont();
 		return toCSSFontProperty(globalFont);
 	}
-	
+
 	/**
 	 * Builds the font string (shorthand property of CSS font) to use in the canvas object.<br>
 	 * The format is [font-style] [font-variant] [font-weight] [font-size] [font-family].<br>
@@ -206,11 +204,8 @@ public final class Utilities {
 		// gets line height
 		final String fontLineHeight = lineHeight == null || lineHeight.trim().length() == 0 ? Constants.EMPTY_STRING : Constants.SLASH + lineHeight;
 		// by regex changes the value of format
-		return result.replace(REGEXP_FONT_STYLE_PATTERN, fontStyle.value())
-				.replace(REGEXP_FONT_WEIGHT_PATTERN, fontWeight.value())
-				.replace(REGEXP_FONT_SIZE_PATTERN, String.valueOf(fontSize))
-				.replace(REGEXP_FONT_LINE_HEIGHT_PATTERN, String.valueOf(fontLineHeight))
-				.replace(REGEXP_FONT_FAMILY_PATTERN, fontFamily);
+		return result.replace(REGEXP_FONT_STYLE_PATTERN, fontStyle.value()).replace(REGEXP_FONT_WEIGHT_PATTERN, fontWeight.value()).replace(REGEXP_FONT_SIZE_PATTERN, String.valueOf(fontSize))
+				.replace(REGEXP_FONT_LINE_HEIGHT_PATTERN, String.valueOf(fontLineHeight)).replace(REGEXP_FONT_FAMILY_PATTERN, fontFamily);
 	}
 
 	/**
@@ -315,7 +310,7 @@ public final class Utilities {
 		// then returns an empty string
 		return Constants.EMPTY_STRING;
 	}
-	
+
 	/**
 	 * Builds the border radius string (shorthand property of CSS font) to use in the canvas object or in DOM element.<br>
 	 * The format is [top-left | top-right | bottom-right | bottom-left].

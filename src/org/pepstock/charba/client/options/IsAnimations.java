@@ -48,7 +48,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	 */
 	@Override
 	AnimationCollection get(IsAnimationCollectionKey collection);
-	
+
 	/**
 	 * Sets an animation collection instance to store in the animation options.
 	 * 

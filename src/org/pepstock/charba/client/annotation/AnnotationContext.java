@@ -50,7 +50,7 @@ public final class AnnotationContext extends ChartContext {
 	public AbstractAnnotation getAnnotation() {
 		return annotation;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

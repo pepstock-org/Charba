@@ -70,7 +70,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	public List<IsAnimationPropertyKey> getProperties() {
 		return collection != null ? collection.properties() : Collections.emptyList();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -140,6 +140,5 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	public String getToAsString() {
 		return DEFAULT_TO_AS_STRING;
 	}
-
 
 }

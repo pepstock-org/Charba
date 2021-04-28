@@ -148,7 +148,6 @@ public final class SelectionCleaner extends NativeObjectContainer implements IsD
 	// instance of font
 	private final SelectionCleanerFont font;
 
-
 	/**
 	 * Creates new font element, using stored native object instance and the default values options.
 	 * 
@@ -162,7 +161,7 @@ public final class SelectionCleaner extends NativeObjectContainer implements IsD
 		// gets font
 		this.font = new SelectionCleanerFont(this.defaultOptions.getFont(), getNativeObject());
 	}
-	
+
 	/**
 	 * Returns the the font object.
 	 * 

@@ -35,7 +35,7 @@ public interface IsPadding extends IsDefaultPadding {
 		setLeft(padding);
 		setRight(padding);
 	}
-	
+
 	/**
 	 * Sets the padding size to X dimensions (left and right).
 	 * 
@@ -77,12 +77,11 @@ public interface IsPadding extends IsDefaultPadding {
 	 */
 	void setTop(int padding);
 
-
 	/**
 	 * Sets the padding bottom in pixel.
 	 * 
 	 * @param padding the padding bottom in pixel.
 	 */
 	void setBottom(int padding);
-	
+
 }

@@ -169,7 +169,7 @@ public final class Canvas extends BaseHtmlElement implements IsCastable {
 	public final String toDataURL(ImageMimeType type) {
 		return toDataURL(type, DEFAULT_ENCODER_OPTIONS);
 	}
-	
+
 	/**
 	 * Returns a data-URL containing a representation of the image format, passed as argument.<br>
 	 * The returned image is in a resolution of 96dpi.

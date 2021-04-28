@@ -124,7 +124,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Ab
 	protected final void setCallbackToModel(AbstractNode model, Key key, CallbackProxy.Proxy proxy) {
 		setInternalCallbackToModel(model, key, proxy);
 	}
-	
+
 	/**
 	 * Loads the padding size or object from the abstract model, replacing the property, if is a number, with the object which is returned.
 	 * 

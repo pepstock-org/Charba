@@ -21,10 +21,10 @@ package org.pepstock.charba.client.commons;
  * @author Andrea "Stock" Stocchero
  */
 public final class NativeName {
-	
+
 	/**
 	 * Constant to bind java script object {@link NativeObject} as object with name <b>{@value GENERIC}</b>.<br>
-	 * Instead of {@value OBJECT}, it is mandatory for J2CL to use java script object without <code>prototype</code> and for java script <code>proxies</code>. 
+	 * Instead of {@value OBJECT}, it is mandatory for J2CL to use java script object without <code>prototype</code> and for java script <code>proxies</code>.
 	 */
 	public static final String GENERIC = "?";
 
@@ -77,7 +77,7 @@ public final class NativeName {
 	 * Constant to bind java script object as {@link NativeJsObjectDouble} with name <b>{@value JS_OBJECT_DOUBLE_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_OBJECT_DOUBLE_HELPER = "CharbaJsObjectDoubleHelper";
-	
+
 	/**
 	 * Constant to bind java script object as {@link NativeJsObjectInteger} with name <b>{@value JS_OBJECT_INTEGER_HELPER}</b>, (internal of Charba).
 	 */
@@ -97,17 +97,17 @@ public final class NativeName {
 	 * Constant to bind java script object as {@link NativeJsObjectObject} with name <b>{@value JS_OBJECT_NATIVE_OBJECT_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_OBJECT_NATIVE_OBJECT_HELPER = "CharbaJsObjectNativeObjectHelper";
-	
+
 	/**
 	 * Constant to bind java script object as {@link NativeJsObjectEvent} with name <b>{@value JS_OBJECT_NATIVE_EVENT_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_OBJECT_NATIVE_EVENT_HELPER = "CharbaJsObjectNativeEventHelper";
-	
+
 	/**
 	 * Constant to bind java script object as {@link NativeJsObjectPattern} with name <b>{@value JS_OBJECT_PATTERN_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_OBJECT_PATTERN_HELPER = "CharbaJsObjectPatternHelper";
-	
+
 	/**
 	 * Constant to bind java script object as {@link NativeJsObjectString} with name <b>{@value JS_OBJECT_STRING_HELPER}</b>, (internal of Charba).
 	 */

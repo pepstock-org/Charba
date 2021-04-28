@@ -38,7 +38,7 @@ public interface IsAnimation extends IsDefaultAnimation {
 	 * @param animateScale If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	void setAnimateScale(boolean animateScale);
-	
+
 	/**
 	 * Sets the animation easing.
 	 * 

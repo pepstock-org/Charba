@@ -35,14 +35,14 @@ public interface IsLinearTick extends IsNumericTick {
 	 * @return the axis instance
 	 */
 	Axis getAxis();
-	
+
 	/**
 	 * Returns the linear tick options handler instance, for callbacks.
 	 * 
 	 * @return the linear tick options handler instance, for callbacks
 	 */
 	LinearTickOptionsHandler getLinearTickOptionsHandler();
-	
+
 	/**
 	 * Sets the number of ticks to generate.<br>
 	 * If specified, this overrides the automatic generation.
@@ -162,7 +162,7 @@ public interface IsLinearTick extends IsNumericTick {
 		// if here, axis is not consistent
 		return Defaults.get().getScale().getTicks().getPrecision();
 	}
-	
+
 	/**
 	 * Returns the count callback instance.
 	 * 
@@ -216,7 +216,7 @@ public interface IsLinearTick extends IsNumericTick {
 			getLinearTickOptionsHandler().setMaxTicksLimit(maxTicksLimitCallback);
 		}
 	}
-	
+
 	/**
 	 * Returns the precision callback instance.
 	 * 
@@ -243,7 +243,7 @@ public interface IsLinearTick extends IsNumericTick {
 			getLinearTickOptionsHandler().setPrecision(precisionCallback);
 		}
 	}
-	
+
 	/**
 	 * Returns the stepSize callback instance.
 	 * 

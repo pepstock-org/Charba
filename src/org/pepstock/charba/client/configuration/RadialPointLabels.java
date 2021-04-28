@@ -41,7 +41,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class RadialPointLabels extends AxisContainer implements IsScriptableFontProvider<ScaleContext>{
+public class RadialPointLabels extends AxisContainer implements IsScriptableFontProvider<ScaleContext> {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---

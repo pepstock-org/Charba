@@ -26,7 +26,7 @@ import org.pepstock.charba.client.options.IsAnimations;
  * 
  * @author Andrea "Stock" Stocchero
  */
-class Animations extends AbstractDynamicConfiguration<IsAnimations> implements IsAnimations{
+class Animations extends AbstractDynamicConfiguration<IsAnimations> implements IsAnimations {
 
 	/**
 	 * Builds the object by a animations provider used to get the animations element for storing properties.
@@ -80,7 +80,7 @@ class Animations extends AbstractDynamicConfiguration<IsAnimations> implements I
 	public AnimationCollection get(IsAnimationCollectionKey collection) {
 		return checkAndGet().get(collection);
 	}
-	
+
 	/**
 	 * Sets an animation collection instance to store in the animation options.
 	 * 
@@ -112,5 +112,5 @@ class Animations extends AbstractDynamicConfiguration<IsAnimations> implements I
 	public void remove(IsAnimationCollectionKey collection) {
 		checkAndGet().remove(collection);
 	}
-	
+
 }

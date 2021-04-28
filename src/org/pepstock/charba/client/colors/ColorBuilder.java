@@ -429,7 +429,7 @@ public final class ColorBuilder {
 		// checks if alpha is NaN
 		// builds the RGB color without alpha
 		// otherwise with alpha
-		return Checker.isBetween(alpha, 0D, 1D) ? build(red, green, blue, alpha) : build(red, green, blue) ;
+		return Checker.isBetween(alpha, 0D, 1D) ? build(red, green, blue, alpha) : build(red, green, blue);
 	}
 
 	/**

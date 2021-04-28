@@ -89,7 +89,7 @@ public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaul
 	public PointStyleHandler getPointStyleHandler() {
 		return pointStyleHandler;
 	}
-	
+
 	/**
 	 * If <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack.
 	 * 
@@ -192,5 +192,5 @@ public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaul
 	public int getHoverBorderRadius() {
 		return getValue(Property.HOVER_BORDER_RADIUS, getDefaultValues().getHoverBorderRadius());
 	}
-	
+
 }

@@ -72,7 +72,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * Default annotation display, <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
 	public static final boolean DEFAULT_DISPLAY = true;
-	
+
 	/**
 	 * Default annotation adjust scale range, <b>{@value DEFAULT_ADJUST_SCALE_RANGE}</b>.
 	 */
@@ -330,7 +330,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	public final boolean isDisplay() {
 		return getValue(Property.DISPLAY, defaultValues.isDisplay());
 	}
-	
 
 	/**
 	 * Sets <code>true</code> whether the scale range should be adjusted if this annotation is out of range.
@@ -365,7 +364,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// and the draw current draw mustn't be set
 		if (this instanceof LineAnnotation && isType(AnnotationOptions.Property.DRAW_TIME, ObjectType.UNDEFINED)) {
 			// casts
-			LineAnnotation line = (LineAnnotation)this;
+			LineAnnotation line = (LineAnnotation) this;
 			// stores the parent draw time
 			line.getLabel().setParentDrawTime(parentDrawTime);
 		}
@@ -384,7 +383,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// checks if is line annotations to propagate to the label
 		if (this instanceof LineAnnotation) {
 			// casts
-			LineAnnotation line = (LineAnnotation)this;
+			LineAnnotation line = (LineAnnotation) this;
 			// stores the parent draw time
 			line.getLabel().setParentDrawTime(drawTime);
 		}
@@ -615,7 +614,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	public final void setBorderDashOffset(BorderDashOffsetCallback<AnnotationContext> borderDashOffsetCallback) {
 		BORDER_DASH_OFFSET_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderDashOffsetCallback, borderDashOffsetCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Returns the callback called to set whether the scale range should be adjusted if this annotation is out of range.
 	 * 

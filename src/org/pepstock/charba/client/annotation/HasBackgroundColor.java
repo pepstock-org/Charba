@@ -26,7 +26,7 @@ import org.pepstock.charba.client.colors.IsColor;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface HasBackgroundColor extends IsDefaultsBackgroundColorHandler{
+interface HasBackgroundColor extends IsDefaultsBackgroundColorHandler {
 
 	/**
 	 * Returns a background color handler instance to use in the default methods of this interface.
@@ -80,7 +80,7 @@ interface HasBackgroundColor extends IsDefaultsBackgroundColorHandler{
 	default IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
-	
+
 	/**
 	 * Returns the callback called to set the color of the background of annotation.
 	 * 

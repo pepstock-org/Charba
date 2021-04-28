@@ -26,7 +26,7 @@ import org.pepstock.charba.client.options.IsTransitions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Transitions extends AbstractDynamicConfiguration<IsTransitions> implements IsTransitions{
+public class Transitions extends AbstractDynamicConfiguration<IsTransitions> implements IsTransitions {
 
 	/**
 	 * Builds the object by a animations provider used to get the transitions element for storing properties.
@@ -58,7 +58,7 @@ public class Transitions extends AbstractDynamicConfiguration<IsTransitions> imp
 	public AnimationTransition get(IsTransitionKey transition) {
 		return checkAndGet().get(transition);
 	}
-	
+
 	/**
 	 * Sets an animation transition instance to store in the animation options.
 	 * 

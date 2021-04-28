@@ -21,7 +21,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
 /**
  * Entry point to initialize and inject all Charba modules.<br>
  * This utility MUST be called as first statement before using Charba.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -33,7 +33,7 @@ public final class Charba {
 	private Charba() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Enables Charba in the application, injecting also the date time library.
 	 */

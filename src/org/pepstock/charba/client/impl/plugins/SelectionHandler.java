@@ -157,7 +157,7 @@ final class SelectionHandler {
 	DatasetsItemsSelectorOptions getOptions() {
 		return options;
 	}
-	
+
 	/**
 	 * Cleans up an handler which is going to be removed.
 	 */

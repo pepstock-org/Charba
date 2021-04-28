@@ -155,7 +155,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	default Date getYMinAsDate() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the left edge of the box, in units along the x axis.
 	 * 
@@ -164,7 +164,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	default ValueCallback getXMinCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the right edge of the box.
 	 * 
@@ -173,7 +173,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	default ValueCallback getXMaxCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the left edge of the box, in units along the x axis.
 	 * 
@@ -182,7 +182,7 @@ interface IsDefaultsXYAnnotation extends IsDefaultsAnnotation {
 	default ValueCallback getYMinCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the right edge of the box.
 	 * 

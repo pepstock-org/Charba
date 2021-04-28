@@ -377,7 +377,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 		// if here, is not a color then returns null
 		return null;
 	}
-	
+
 	/**
 	 * Sets the border width.
 	 * 
@@ -395,7 +395,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, Defaults.get().getGlobal().getTooltips().getBorderWidth());
 	}
-	
+
 	/**
 	 * Sets the bar border radius (in pixels).
 	 * 
@@ -413,7 +413,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	public int getBorderRadius() {
 		return getValue(Property.BORDER_RADIUS, 0);
 	}
-	
+
 	/**
 	 * Sets the line dash pattern used when stroking borders, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 

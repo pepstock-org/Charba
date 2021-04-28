@@ -40,7 +40,6 @@ final class ChartObserver {
 	// maps of all mutation handlers
 	// K = chart id, V = chart instance
 	private final Map<String, MutationHandler> handlers = new HashMap<>();
-	
 
 	/**
 	 * TO avoid any instantiation

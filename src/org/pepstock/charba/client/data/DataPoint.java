@@ -81,9 +81,9 @@ public final class DataPoint extends NativeObjectContainer {
 	 * Creates the object with an empty native object.
 	 */
 	public DataPoint() {
-		this((NativeObject)null);
+		this((NativeObject) null);
 	}
-	
+
 	/**
 	 * Creates the object with a native object passed as argument by and {@link Envelop}.<br>
 	 * This is called by the {@link DataItem}.

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.Defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsLinearAxis extends IsNumericAxis{
+public interface IsLinearAxis extends IsNumericAxis {
 
 	/**
 	 * If true, scale will include 0 if it is not already included.

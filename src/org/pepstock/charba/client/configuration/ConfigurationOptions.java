@@ -88,7 +88,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 
 	// instance to reset the callback
 	static final ConfigurationEnvelop<CallbackProxy.Proxy> RESET_CALLBACK_ENVELOP = new ConfigurationEnvelop<>(null, true);
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
@@ -154,7 +154,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private final Title title;
 
 	private final Tooltips tooltips;
-	
+
 	private final Filler filler;
 
 	private final Hover hover;
@@ -166,9 +166,9 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private final Elements elements;
 
 	private final Plugins plugins;
-	
+
 	private final Datasets datasets;
-	
+
 	private final Font font;
 
 	// amount of data set selection event handlers
@@ -392,7 +392,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	public Font getFont() {
 		return font;
 	}
-	
+
 	/**
 	 * Returns the axis by the unique CHARBA id of scale or <code>null</code> if not axis.
 	 * 
@@ -492,9 +492,10 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	public double getAspectRatio() {
 		return getConfiguration().getAspectRatio();
 	}
-	
+
 	/**
-	 * Sets the delay the resize update by give amount of milliseconds.<br>This can ease the resize process by debouncing update of the elements.
+	 * Sets the delay the resize update by give amount of milliseconds.<br>
+	 * This can ease the resize process by debouncing update of the elements.
 	 * 
 	 * @param delay the delay the resize update by give amount of milliseconds
 	 */
@@ -503,7 +504,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Returns the delay the resize update by give amount of milliseconds.<br>This can ease the resize process by debouncing update of the elements.
+	 * Returns the delay the resize update by give amount of milliseconds.<br>
+	 * This can ease the resize process by debouncing update of the elements.
 	 * 
 	 * @return the delay the resize update by give amount of milliseconds
 	 */
@@ -566,7 +568,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	public void setDestroyOnDetach(boolean destroyOnDetach) {
 		getConfiguration().setDestroyOnDetach(destroyOnDetach);
 	}
-	
+
 	/**
 	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
@@ -809,7 +811,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			}
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -820,14 +822,14 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// loads the native object in the configuration to pass to chart
 		ConfigurationLoader.loadOptions(configuration, getConfiguration());
 	}
-	
+
 	/**
 	 * Sets the callbacks that every element of options can activate.
 	 * 
 	 * @param node element node instance
 	 * @param property property name
 	 * @param callBack the callback instance
-	 * @param callbackProxy the callback proxy instance 
+	 * @param callbackProxy the callback proxy instance
 	 */
 	final void setCallback(AbstractNode node, Key property, Object callBack, CallbackProxy<?> callbackProxy) {
 		// checks if consistent

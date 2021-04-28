@@ -28,7 +28,7 @@ import org.pepstock.charba.client.defaults.IsDefaultDatasets;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implements IsDefaultDatasets{
+public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implements IsDefaultDatasets {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -41,7 +41,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 	Datasets(Options options, Key childKey, IsDefaultDatasets defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/**
 	 * Returns the data set by a chart type.
 	 * 
@@ -62,7 +62,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 		// returns the typed data set
 		return new TypedDataset(this, type, getDefaultValues().get(type), getDatasets(type));
 	}
-	
+
 	/**
 	 * Returns the data sets options by chart type.
 	 * 

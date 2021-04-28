@@ -89,7 +89,7 @@ public final class AnimationItem extends NativeObjectContainer {
 		// returns null
 		return null;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> for the initial animation of the chart.
 	 * 

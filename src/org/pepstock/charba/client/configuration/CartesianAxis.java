@@ -111,7 +111,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	public boolean isStacked() {
 		return getScale().isStacked();
 	}
-	
+
 	/**
 	 * Sets if you might want to stack positive and negative values together.
 	 * 

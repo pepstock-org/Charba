@@ -25,11 +25,12 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.ContextType;
 
 /**
- * Utility object which is creating a native object, setting chart and type, in order to be able to create a {@link ChartContext} without CHART.JS, for callbacks of meter and gauge charts. 
+ * Utility object which is creating a native object, setting chart and type, in order to be able to create a {@link ChartContext} without CHART.JS, for callbacks of meter and gauge
+ * charts.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class BaseContext extends NativeObjectContainer{
+final class BaseContext extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -61,7 +62,7 @@ final class BaseContext extends NativeObjectContainer{
 			return value;
 		}
 	}
-	
+
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
@@ -75,7 +76,7 @@ final class BaseContext extends NativeObjectContainer{
 		setValue(Property.CHART, Charts.getNative(chart));
 		setValue(Property.TYPE, ContextType.METER);
 	}
-	
+
 	/**
 	 * Returns the native object instance.
 	 * 

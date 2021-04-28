@@ -224,7 +224,6 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 	private static class ShowAndHideDefaultAnimationTransition extends DefaultAnimationTransition {
 
 		private final ShowAndHideDefaultAnimations animations;
-		
 
 		/**
 		 * Creates a default animation mode wrapping the {@link DefaultTransitionKey#SHOW} or {@link DefaultTransitionKey#HIDE}.
@@ -252,11 +251,11 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 		 *
 		 */
 		private static class ShowAndHideDefaultAnimations extends DefaultAnimations {
-			
+
 			private static final IsDefaultAnimationCollection DEFAULT_COLORS_COLLECTION = new ShowAndHideDefaultAnimationCollection();
 
 			private final IsDefaultAnimationCollection visibleCollection;
-		
+
 			/**
 			 * Creates a default animations wrapping the {@link DefaultTransitionKey#SHOW} or {@link DefaultTransitionKey#HIDE}.
 			 * 
@@ -265,7 +264,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 			private ShowAndHideDefaultAnimations(IsTransitionKey mode) {
 				this.visibleCollection = new ShowAndHideDefaultVisibleAnimationCollection(DefaultTransitionKey.SHOW.equals(mode));
 			}
-			
+
 			/*
 			 * (non-Javadoc)
 			 * 
@@ -327,7 +326,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 			}
 
 		}
-		
+
 		/**
 		 * {@link DefaultAnimationPropertyKey#VISIBLE} default animation property for {@link DefaultTransitionKey#SHOW} and {@link DefaultTransitionKey#HIDE} animation mode.
 		 * 
@@ -335,7 +334,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 		 *
 		 */
 		private static class ShowAndHideDefaultVisibleAnimationCollection extends DefaultAnimationCollection {
-			
+
 			private static final int DEFAULT_DURATION = 0;
 
 			private final boolean show;

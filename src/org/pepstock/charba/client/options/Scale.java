@@ -234,7 +234,7 @@ public class Scale extends AbstractScale {
 		// then returns base on scale id
 		return DefaultScaleId.getAxisKindByScaleId(getId(), getType().getDefaultScaleId().getAxisKind());
 	}
-	
+
 	/**
 	 * Returns the native object instance.
 	 * 
@@ -243,6 +243,5 @@ public class Scale extends AbstractScale {
 	final NativeObject nativeObject() {
 		return super.getNativeObject();
 	}
-	
 
 }

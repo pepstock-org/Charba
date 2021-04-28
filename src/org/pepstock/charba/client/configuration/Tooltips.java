@@ -274,7 +274,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	public boolean isEnabled() {
 		return getConfiguration().getTooltips().isEnabled();
 	}
-	
+
 	/**
 	 * Sets the browser events that the tooltip should listen to.
 	 * 

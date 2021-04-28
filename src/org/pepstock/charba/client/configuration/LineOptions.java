@@ -53,7 +53,7 @@ public class LineOptions extends ScalesOptions implements HasLineOptions {
 	public Decimation getDecimation() {
 		return decimation;
 	}
-	
+
 	/**
 	 * Returns the segment element.
 	 * 

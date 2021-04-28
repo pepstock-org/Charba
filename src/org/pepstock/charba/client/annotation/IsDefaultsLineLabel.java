@@ -39,7 +39,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
+interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler {
 
 	/**
 	 * Returns the font element.
@@ -56,7 +56,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default boolean isDisplay() {
 		return LineLabel.DEFAULT_DISPLAY;
 	}
-	
+
 	/**
 	 * Returns the draw time which defines when the annotations are drawn.
 	 * 
@@ -65,7 +65,6 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default DrawTime getDrawTime() {
 		return AnnotationOptions.DEFAULT_DRAW_TIME;
 	}
-	
 
 	/**
 	 * Returns the font color of text as string.
@@ -140,7 +139,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default double getRotation() {
 		return LineLabel.DEFAULT_ROTATION;
 	}
-	
+
 	/**
 	 * Returns the horizontal alignment of the label text.
 	 * 
@@ -194,7 +193,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default String getImageWidthAsPercentage() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the color of the text of label.
 	 * 
@@ -203,7 +202,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default ColorCallback<AnnotationContext> getColorCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the corner radius.
 	 * 
@@ -212,7 +211,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default CornerRadiusCallback<AnnotationContext> getCornerRadiusCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the text to display in label as list.
 	 * 
@@ -221,7 +220,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default ContentCallback getContentCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set whether the label should be displayed.
 	 * 
@@ -230,7 +229,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default DisplayCallback getDisplayCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the rotation of label in degrees.
 	 * 
@@ -239,7 +238,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default RotationCallback<AnnotationContext> getRotationCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
 	 * 
@@ -248,7 +247,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default ImageSizeCallback getImageHeightCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
 	 * 
@@ -257,7 +256,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default ImageSizeCallback getImageWidthCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the anchor position of label on line.
 	 * 
@@ -266,7 +265,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default LabelPositionCallback getPositionCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the padding of label to add left and right.
 	 * 
@@ -284,7 +283,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default PaddingSizeCallback getYPaddingCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the adjustment along x-axis (left-right) of label relative to above number (can be negative).
 	 * 
@@ -302,7 +301,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default AdjustSizeCallback getYAdjustCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called to set the horizontal alignment of the label text.
 	 * 
@@ -311,7 +310,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler{
 	default TextAlignCallback<AnnotationContext> getTextAlignCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the font callback, if set, otherwise <code>null</code>.
 	 * 

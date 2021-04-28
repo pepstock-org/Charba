@@ -71,7 +71,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 		// returns options
 		return options;
 	}
-	
+
 	/**
 	 * Sets <code>true</code> if plugin is enabled.
 	 * 

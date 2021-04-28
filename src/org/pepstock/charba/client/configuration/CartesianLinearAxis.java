@@ -114,7 +114,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	public CartesianLinearTick getTicks() {
 		return ticks;
 	}
-	
+
 	/**
 	 * Sets the value in pixels is added to the maximum data value and subtracted from the minimum data.<br>
 	 * This extends the scale range as if the data values were that much greater.

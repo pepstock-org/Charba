@@ -1220,7 +1220,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		sb.append(Math.max(index, 0));
 		return sb.toString();
 	}
-	
+
 	/**
 	 * Checks if it can use data as double.
 	 */

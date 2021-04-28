@@ -125,7 +125,7 @@ public abstract class AbstractDatasetContext extends ChartContext {
 	public final DatasetElement getDatasetElement() {
 		// gets data set item
 		DatasetItem datasetItem = getDatasetItem();
-		// checks if data set item is consistent 
+		// checks if data set item is consistent
 		if (datasetItem != null) {
 			// gets data index
 			int dataIndex = getDataIndex();

@@ -69,7 +69,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLabelsItem, IsScriptableFontProvider<DataLabelsContext>{
+public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLabelsItem, IsScriptableFontProvider<DataLabelsContext> {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -399,7 +399,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setAlign(Align align) {
 		// resets callback
-		setAlign((AlignCallback)null);
+		setAlign((AlignCallback) null);
 		// stores the value
 		setValue(Property.ALIGN, align);
 	}
@@ -421,7 +421,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setAnchor(Anchor anchor) {
 		// resets callback
-		setAnchor((AnchorCallback)null);
+		setAnchor((AnchorCallback) null);
 		// stores the value
 		setValue(Property.ANCHOR, anchor);
 	}
@@ -452,7 +452,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setBackgroundColor(String color) {
 		// resets callback
-		setBackgroundColor((ColorCallback<DataLabelsContext>)null);
+		setBackgroundColor((ColorCallback<DataLabelsContext>) null);
 		// stores the value
 		setValue(Property.BACKGROUND_COLOR, color);
 	}
@@ -495,7 +495,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setBorderColor(String color) {
 		// resets callback
-		setBorderColor((ColorCallback<DataLabelsContext>)null);
+		setBorderColor((ColorCallback<DataLabelsContext>) null);
 		// stores the value
 		setValue(Property.BORDER_COLOR, color);
 	}
@@ -626,7 +626,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setColor(String color) {
 		// resets callback
-		setColor((ColorCallback<DataLabelsContext>)null);
+		setColor((ColorCallback<DataLabelsContext>) null);
 		// stores the value
 		setValue(Property.COLOR, color);
 	}
@@ -657,7 +657,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setDisplay(boolean display) {
 		// resets callback
-		setDisplay((DisplayCallback)null);
+		setDisplay((DisplayCallback) null);
 		// stores the value
 		setValue(Property.DISPLAY, display);
 	}
@@ -778,7 +778,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setTextAlign(TextAlign textAlign) {
 		// resets callback
-		setTextAlign((TextAlignCallback<DataLabelsContext>)null);
+		setTextAlign((TextAlignCallback<DataLabelsContext>) null);
 		// stores the value
 		setValue(Property.TEXT_ALIGN, textAlign);
 	}
@@ -809,8 +809,8 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setTextStrokeColor(String color) {
 		// resets callback
-		setTextStrokeColor((ColorCallback<DataLabelsContext>)null);
-		// stores the value		
+		setTextStrokeColor((ColorCallback<DataLabelsContext>) null);
+		// stores the value
 		setValue(Property.TEXT_STROKE_COLOR, color);
 	}
 
@@ -841,7 +841,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	public final void setTextStrokeWidth(int textStrokeWidth) {
 		// resets callback
 		setTextStrokeWidth(null);
-		// stores the value	
+		// stores the value
 		setValue(Property.TEXT_STROKE_WIDTH, Checker.positiveOrZero(textStrokeWidth));
 	}
 
@@ -863,7 +863,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	public final void setTextShadowBlur(double textShadowBlur) {
 		// resets callback
 		setTextShadowBlur(null);
-		// stores the value	
+		// stores the value
 		setValue(Property.TEXT_SHADOW_BLUR, textShadowBlur);
 	}
 
@@ -893,8 +893,8 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setTextShadowColor(String color) {
 		// resets callback
-		setTextShadowColor((ColorCallback<DataLabelsContext>)null);
-		// stores the value	
+		setTextShadowColor((ColorCallback<DataLabelsContext>) null);
+		// stores the value
 		setValue(Property.TEXT_SHADOW_COLOR, color);
 	}
 
@@ -916,7 +916,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	public final IsColor getTextShadowColor() {
 		return ColorBuilder.parse(getTextShadowColorAsString());
 	}
-	
+
 	// --------------------
 	// CALLBACKS
 	// --------------------
@@ -1335,7 +1335,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 			setValue(Property.PADDING, padding);
 		}
 	}
-	
+
 	// ------------------------------
 	// INTERNAL methods for callbacks
 	// ------------------------------

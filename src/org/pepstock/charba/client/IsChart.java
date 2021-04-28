@@ -343,7 +343,7 @@ public interface IsChart {
 	 * Reset the chart to it's state before the initial animation. A new animation can then be triggered using update.
 	 */
 	void reset();
-	
+
 	/**
 	 * Returns a data-URL containing a representation of the image in the PNG format and the image quality value is 0.92.
 	 * 

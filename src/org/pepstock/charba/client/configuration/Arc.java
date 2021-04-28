@@ -136,7 +136,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	public int getBorderRadius() {
 		return getConfiguration().getElements().getArc().getBorderRadius();
 	}
-	
+
 	/**
 	 * Sets the arc offset (in pixels) when hovered.
 	 * 

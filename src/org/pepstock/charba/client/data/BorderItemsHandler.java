@@ -40,7 +40,7 @@ import org.pepstock.charba.client.enums.BorderItemType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class BorderItemsHandler extends NativeObjectContainer{
+final class BorderItemsHandler extends NativeObjectContainer {
 
 	/**
 	 * Creates the object with native object instance to be wrapped.

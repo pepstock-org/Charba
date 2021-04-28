@@ -64,7 +64,7 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 		}
 
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -75,7 +75,7 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> BACKGROUND_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BACKGROUND_COLOR);
 
 	private final String defaultBackgroundColor;
-	
+
 	/**
 	 * Creates a background color handler with the native object where background color properties must be managed and the default value to use when the property does not exist.
 	 * 
@@ -86,7 +86,7 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 	BackgroundColorHandler(AbstractAnnotation parent, IsDefaultsBackgroundColorHandler defaultValues, NativeObject nativeObject) {
 		this(parent, defaultValues, nativeObject, Defaults.get().getGlobal().getColorAsString());
 	}
-	
+
 	/**
 	 * Creates a background color handler with the native object where background color properties must be managed and the default value to use when the property does not exist.
 	 * 
@@ -110,7 +110,7 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 	 */
 	void setBackgroundColor(String backgroundColor) {
 		// resets callback
-		setBackgroundColor((ColorCallback<AnnotationContext>)null);
+		setBackgroundColor((ColorCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.BACKGROUND_COLOR, backgroundColor);
 	}
@@ -123,7 +123,7 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 	String getBackgroundColorAsString() {
 		return getValue(Property.BACKGROUND_COLOR, defaultBackgroundColor);
 	}
-	
+
 	/**
 	 * Returns the callback called to set the color of the background of annotation.
 	 * 

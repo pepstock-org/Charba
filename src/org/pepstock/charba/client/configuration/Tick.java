@@ -40,7 +40,7 @@ import org.pepstock.charba.client.options.Ticks;
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class Tick extends AxisContainer implements IsScriptableFontProvider<ScaleContext>{
+abstract class Tick extends AxisContainer implements IsScriptableFontProvider<ScaleContext> {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -204,7 +204,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	 */
 	public void setColor(String color) {
 		// resets callback
-		setColor((ColorCallback<ScaleContext>)null);
+		setColor((ColorCallback<ScaleContext>) null);
 		// stores the value
 		getConfiguration().setColor(color);
 	}
@@ -283,7 +283,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	 */
 	public void setTextStrokeColor(String color) {
 		// resets callback
-		setTextStrokeColor((ColorCallback<ScaleContext>)null);
+		setTextStrokeColor((ColorCallback<ScaleContext>) null);
 		// stores the value
 		getConfiguration().setTextStrokeColor(color);
 	}
@@ -313,7 +313,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	 */
 	public void setTextStrokeWidth(int textStrokeWidth) {
 		// resets callback
-		setTextStrokeWidth((WidthCallback<ScaleContext>)null);
+		setTextStrokeWidth((WidthCallback<ScaleContext>) null);
 		// stores the value
 
 		getConfiguration().setTextStrokeWidth(textStrokeWidth);
@@ -349,7 +349,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	public int getPadding() {
 		return getConfiguration().getPadding();
 	}
-	
+
 	/**
 	 * Sets the color of label backdrops.
 	 * 
@@ -391,7 +391,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	public IsColor getBackdropColor() {
 		return getConfiguration().getBackdropColor();
 	}
-	
+
 	/**
 	 * If true, draw a background behind the tick labels.
 	 * 
@@ -412,7 +412,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	public boolean isShowLabelBackdrop() {
 		return getConfiguration().isShowLabelBackdrop();
 	}
-	
+
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
@@ -511,7 +511,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// stores and manages callback
 		getAxis().setCallback(getConfiguration(), Property.FONT, fontCallback, fontCallbackProxy);
 	}
-	
+
 	/**
 	 * Sets the backdrop padding callback.
 	 * 
@@ -523,7 +523,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// stores and manages callback
 		getAxis().setCallback(getConfiguration(), Property.BACKDROP_PADDING, backdropPaddingCallback, backdropPaddingCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the backdrop color callback instance.
 	 * 
@@ -544,7 +544,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, backdropColorCallback, backdropColorCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the show label backdrop callback instance.
 	 * 
@@ -569,7 +569,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	// ------------------------------
 	// internal methods for callback
 	// ------------------------------
-	
+
 	/**
 	 * Returns a string as color when the callback has been activated.
 	 * 

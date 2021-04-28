@@ -77,7 +77,7 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	 * @return the filler defaults.
 	 */
 	IsDefaultFiller getFiller();
-	
+
 	/**
 	 * Returns the layout defaults.
 	 * 
@@ -105,7 +105,7 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	 * @return the plugins defaults.
 	 */
 	IsDefaultDatasets getDatasets();
-	
+
 	/**
 	 * Returns the font element.
 	 * 
@@ -155,9 +155,10 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	 * @return the aspect ratio.
 	 */
 	double getAspectRatio();
-	
+
 	/**
-	 * Returns the delay the resize update by give amount of milliseconds.<br>This can ease the resize process by debouncing update of the elements.
+	 * Returns the delay the resize update by give amount of milliseconds.<br>
+	 * This can ease the resize process by debouncing update of the elements.
 	 * 
 	 * @return the delay the resize update by give amount of milliseconds
 	 */

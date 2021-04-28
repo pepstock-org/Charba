@@ -31,7 +31,7 @@ public interface IsDefaultFiller {
 	 * @return <code>true</code> if the fill area will be recursively extended to the visible target defined by the fill value of hidden data set targets
 	 */
 	boolean isPropagate();
-	
+
 	/**
 	 * Returns the draw time which defines when the filling will be applied.
 	 * 

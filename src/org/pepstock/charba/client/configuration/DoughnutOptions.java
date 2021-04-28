@@ -27,7 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 public class DoughnutOptions extends AbstractPieOptions {
 
 	private static final String DEFAULT_CUTOUT_PERCENTAGE = "50%";
-	
+
 	/**
 	 * Builds the object storing the chart instance and default options.
 	 * 
@@ -38,7 +38,9 @@ public class DoughnutOptions extends AbstractPieOptions {
 		super(chart, defaultValues);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#getCutoutPercentage()
 	 */
 	@Override

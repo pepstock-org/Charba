@@ -66,7 +66,7 @@ public class AnimationTransition extends AbstractNode implements IsDefaultAnimat
 		}
 
 	}
-	
+
 	/**
 	 * Creates an animation transitions container for the {@link UpdateConfiguration}.
 	 * 
@@ -104,7 +104,7 @@ public class AnimationTransition extends AbstractNode implements IsDefaultAnimat
 	public final Animation getAnimation() {
 		return animation;
 	}
-	
+
 	/**
 	 * Returns the animations collection element.
 	 * 
@@ -114,7 +114,7 @@ public class AnimationTransition extends AbstractNode implements IsDefaultAnimat
 	public final Animations getAnimations() {
 		return animations;
 	}
-	
+
 	/**
 	 * Returns the native object instance.
 	 * 

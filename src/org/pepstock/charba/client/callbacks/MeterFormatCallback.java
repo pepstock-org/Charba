@@ -24,6 +24,6 @@ import org.pepstock.charba.client.impl.charts.MeterContext;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface MeterFormatCallback extends Scriptable<String, MeterContext>{
+public interface MeterFormatCallback extends Scriptable<String, MeterContext> {
 
 }

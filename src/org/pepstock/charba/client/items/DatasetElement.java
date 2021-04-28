@@ -99,7 +99,6 @@ public class DatasetElement extends NativeObjectContainer {
 	// parsed instance
 	private final Parsed parsed;
 
-	
 	/**
 	 * Creates the item using an envelop of the native java script object which contains all properties.
 	 * 
@@ -108,7 +107,7 @@ public class DatasetElement extends NativeObjectContainer {
 	protected DatasetElement(CallbacksEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
-	
+
 	/**
 	 * Creates the item using an envelop of the native java script object which contains all properties.
 	 * 
@@ -139,7 +138,7 @@ public class DatasetElement extends NativeObjectContainer {
 	public final DatasetElementOptions getOptions() {
 		return options;
 	}
-	
+
 	/**
 	 * Returns the parsed values.
 	 *
@@ -220,7 +219,7 @@ public class DatasetElement extends NativeObjectContainer {
 	public final boolean isStop() {
 		return getValue(Property.STOP, Undefined.BOOLEAN);
 	}
-	
+
 	/**
 	 * Returns the previous X control point of data set item in pixel.
 	 * 

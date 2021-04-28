@@ -50,7 +50,7 @@ public final class JsHelper {
 	public static JsHelper get() {
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Creates a native object instance.
 	 * 
@@ -71,7 +71,7 @@ public final class JsHelper {
 	public <T> T cast(Object object) {
 		return NativeJsHelper.cast(object);
 	}
-	
+
 	/**
 	 * Creates new instance of observer initialization options.
 	 * 

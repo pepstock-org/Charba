@@ -44,14 +44,14 @@ public enum TextAlign implements Key
 	 * The same as left if direction is left-to-right and right if direction is right-to-left.
 	 */
 	START("start", "left", null);
-	
+
 	// name value of property
 	private final String value;
 	// value to use when only left and right is used
 	private final String leftRightValue;
 	// value to use when only start and end is used
 	private final String startEndValue;
-	
+
 	/**
 	 * Creates with the property value to use in the native object.<br>
 	 * Used only for CENTER.

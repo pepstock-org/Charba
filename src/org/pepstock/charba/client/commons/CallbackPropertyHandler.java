@@ -206,7 +206,7 @@ public class CallbackPropertyHandler<T> {
 		// if callback is not consistent, returns null
 		return null;
 	}
-	
+
 	/**
 	 * Creates the scope which is to be stored in the callback wrapper in order to know where the callback is used.<br>
 	 * <br>

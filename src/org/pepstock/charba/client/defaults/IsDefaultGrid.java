@@ -37,7 +37,7 @@ public interface IsDefaultGrid extends IsDefaultScaleLines {
 	 *         If unset, the first lineWidth option is resolved and used.
 	 */
 	int getBorderWidth();
-	
+
 	/**
 	 * If set, used as the color of the border line.<br>
 	 * If unset, the first color option is resolved and used.

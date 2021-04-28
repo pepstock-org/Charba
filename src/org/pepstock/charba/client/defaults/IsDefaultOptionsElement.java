@@ -42,21 +42,21 @@ public interface IsDefaultOptionsElement {
 	 * @return the border color.
 	 */
 	String getBorderColorAsString();
-	
+
 	/**
 	 * Returns the background color when hovered.
 	 * 
 	 * @return the background color when hovered.
 	 */
 	String getHoverBackgroundColorAsString();
-	
+
 	/**
 	 * Returns the border width when hovered.
 	 * 
 	 * @return the border width when hovered.
 	 */
 	int getHoverBorderWidth();
-	
+
 	/**
 	 * Returns the border color when hovered.
 	 * 

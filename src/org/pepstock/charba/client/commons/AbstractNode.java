@@ -31,7 +31,7 @@ import org.pepstock.charba.client.dom.elements.Img;
  * 
  */
 public abstract class AbstractNode extends NativeObjectContainer {
-	
+
 	private final AbstractNode parent;
 
 	private final Key childKey;

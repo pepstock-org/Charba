@@ -1336,7 +1336,7 @@ public abstract class NativeObjectContainer {
 		// returns value
 		return NativeObjectUtils.getEventProperty(nativeObject, key.value());
 	}
-	
+
 	// ------------------------------------------
 	// --- UTILITIES for properties which can have
 	// --- different types
@@ -1397,18 +1397,18 @@ public abstract class NativeObjectContainer {
 		// then returns undefined value
 		return defaultsValue;
 	}
-	
+
 	// ------------------------------------------
 	// --- UTILITIES for unique id
 	// ------------------------------------------
-	
+
 	/**
 	 * Stores new incremental id if not previously stored.
 	 */
 	protected final void setNewIncrementalId() {
 		setNewIncrementalId(null);
 	}
-	
+
 	/**
 	 * Stores new incremental id if not previously stored.
 	 * 

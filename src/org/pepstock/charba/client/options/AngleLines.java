@@ -161,7 +161,7 @@ public final class AngleLines extends AbstractScaleLines<IsDefaultAngleLines> im
 	double getDefaultBorderDashOffset() {
 		return getDefaultValues().getBorderDashOffset();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

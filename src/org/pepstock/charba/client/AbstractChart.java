@@ -319,7 +319,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// cleans up the handler for mouse listener
 		canvas.removeEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Returns <code>true</code> whether this chart is currently attached to the browser's document.
 	 * 

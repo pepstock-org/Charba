@@ -32,7 +32,7 @@ public interface IsTransitions extends IsDefaultTransitions {
 	 */
 	@Override
 	AnimationTransition get(IsTransitionKey transition);
-	
+
 	/**
 	 * Sets an animation transition instance to store in the animation options.
 	 * 

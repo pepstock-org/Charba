@@ -63,7 +63,7 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
-	
+
 	private static final PaddingItem DEFAULT_PADDING_FOR_CALLBACK = new PaddingItem(0);
 
 	// ---------------------------
@@ -297,7 +297,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public final Display getDisplay() {
 		return getScale().getDisplay();
 	}
-	
+
 	/**
 	 * Sets the default background color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
@@ -353,7 +353,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public double getWeight() {
 		return getScale().getWeight();
 	}
-	
+
 	/**
 	 * Sets <code>true</code> to align pixel values to device pixels.
 	 * 
@@ -589,7 +589,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// stores and manages callback
 		setCallback(getConfiguration(), Property.AFTER_UPDATE, axisUpdateCallback, afterUpdateCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns a native object as font when the callback has been activated.
 	 * 
@@ -613,7 +613,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// then returns the defaults one
 		return Defaults.get().getGlobal().getFont().create().nativeObject();
 	}
-	
+
 	/**
 	 * Returns a native object as padding when the callback has been activated.
 	 * 
@@ -644,7 +644,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param node element node instance
 	 * @param property property name
 	 * @param callBack the callback instance
-	 * @param callbackProxy the proxy instance 
+	 * @param callbackProxy the proxy instance
 	 */
 	final void setCallback(AbstractNode node, Key property, Object callBack, CallbackProxy<?> callbackProxy) {
 		setCallback(node, property, callBack, callbackProxy.getProxy());
@@ -656,7 +656,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param node element node instance
 	 * @param property property name
 	 * @param callBack the callback instance
-	 * @param proxy the proxy instance 
+	 * @param proxy the proxy instance
 	 */
 	final void setCallback(AbstractNode node, Key property, Object callBack, CallbackProxy.Proxy proxy) {
 		// checks if consistent
@@ -668,7 +668,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			getConfiguration().setCallback(node, property, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
-	
+
 	/**
 	 * Invokes UPDATE axis callback.
 	 * 

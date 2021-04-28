@@ -90,7 +90,7 @@ public final class Filler extends AbstractModel<Plugins, IsDefaultFiller> implem
 	public boolean isPropagate() {
 		return getValue(Property.PROPAGATE, getDefaultValues().isPropagate());
 	}
-	
+
 	/**
 	 * Sets the draw time which defines when the filling will be applied.
 	 * 

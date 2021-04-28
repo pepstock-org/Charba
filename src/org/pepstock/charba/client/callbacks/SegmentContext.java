@@ -28,7 +28,7 @@ import org.pepstock.charba.client.items.DatasetElement;
  * @author Andrea "Stock" Stocchero
  */
 public final class SegmentContext extends ChartContext {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -59,10 +59,10 @@ public final class SegmentContext extends ChartContext {
 			return value;
 		}
 	}
-	
-	// instances for point 0 and point 1 
+
+	// instances for point 0 and point 1
 	private final DatasetElement point0;
-	
+
 	private final DatasetElement point1;
 
 	/**
@@ -76,7 +76,7 @@ public final class SegmentContext extends ChartContext {
 		this.point0 = new SegementDatasetElement(getValue(Property.P0));
 		this.point1 = new SegementDatasetElement(getValue(Property.P1));
 	}
-	
+
 	/**
 	 * Returns the {@link DatasetElement} related to the data as starting point of segment.
 	 * 
@@ -105,14 +105,14 @@ public final class SegmentContext extends ChartContext {
 		// checks if the context types are chart or segment
 		return ContextType.CHART.equals(getType()) || ContextType.SEGMENT.equals(getType());
 	}
-	
+
 	/**
 	 * Extends {@link DatasetElement} in order to wrap the points inside the context.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static final class SegementDatasetElement extends DatasetElement{
-		
+	private static final class SegementDatasetElement extends DatasetElement {
+
 		/**
 		 * Creates the object with native object instance to be wrapped.
 		 * 
@@ -123,6 +123,5 @@ public final class SegmentContext extends ChartContext {
 		}
 
 	}
-
 
 }

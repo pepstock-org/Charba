@@ -46,7 +46,7 @@ public final class PaddingItem extends AbstractPadding {
 	public PaddingItem(int padding) {
 		this(null, padding);
 	}
-	
+
 	/**
 	 * Creates an empty padding to use for chart configuration when the font is created by a callback.
 	 * 
@@ -55,8 +55,7 @@ public final class PaddingItem extends AbstractPadding {
 	public PaddingItem(IsDefaultPadding defaultValues) {
 		super(defaultValues == null ? DEFAULT_PADDING : defaultValues);
 	}
-	
-	
+
 	/**
 	 * Creates an empty padding to use for chart configuration when the font is created by a callback and setting the same size for all dimensions.
 	 * 
@@ -68,7 +67,7 @@ public final class PaddingItem extends AbstractPadding {
 		// sets initial padding
 		set(Math.max(padding, 0));
 	}
-	
+
 	/**
 	 * Returns the native object instance.
 	 * 

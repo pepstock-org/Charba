@@ -51,7 +51,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 * Default enabled options, <b>{@value DEFAULT_ENABLED}</b>.
 	 */
 	public static final boolean DEFAULT_ENABLED = true;
-	
+
 	/**
 	 * Default alpha of selecting/selection colors, <b>{@value DEFAULT_ALPHA}</b>.
 	 */
@@ -82,7 +82,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 */
 	public static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
 
-    //default border color for area as string.
+	// default border color for area as string.
 	static final String DEFAULT_BORDER_COLOR_AS_STRING = DEFAULT_BORDER_COLOR.toRGBA();
 
 	// defaults global options instance
@@ -193,7 +193,6 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 		return selectionCleaner;
 	}
 
-	
 	/**
 	 * Sets <code>true</code> if plugin is enabled.
 	 * 
@@ -212,7 +211,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	public boolean isEnabled() {
 		return getValue(Property.ENABLED, defaultOptions.isEnabled());
 	}
-	
+
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 

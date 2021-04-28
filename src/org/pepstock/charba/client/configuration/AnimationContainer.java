@@ -24,12 +24,12 @@ import org.pepstock.charba.client.options.HasAnimationOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnimationContainer extends AbstractDynamicConfiguration<HasAnimationOptions>{
-	
+public final class AnimationContainer extends AbstractDynamicConfiguration<HasAnimationOptions> {
+
 	private final Animation animation;
-	
+
 	private final Animations animations;
-	
+
 	private final Transitions transitions;
 
 	/**
@@ -45,7 +45,7 @@ public final class AnimationContainer extends AbstractDynamicConfiguration<HasAn
 		this.animations = new Animations(() -> checkAndGet().getAnimations());
 		this.transitions = new Transitions(() -> checkAndGet().getTransitions());
 	}
-	
+
 	/**
 	 * Returns the animation element.
 	 * 
@@ -63,7 +63,7 @@ public final class AnimationContainer extends AbstractDynamicConfiguration<HasAn
 	Animations getAnimations() {
 		return animations;
 	}
-	
+
 	/**
 	 * Returns the transitions element.
 	 * 
@@ -72,7 +72,7 @@ public final class AnimationContainer extends AbstractDynamicConfiguration<HasAn
 	Transitions getTransitions() {
 		return transitions;
 	}
-	
+
 	/**
 	 * Enables or disables the animation.
 	 * 
@@ -90,5 +90,5 @@ public final class AnimationContainer extends AbstractDynamicConfiguration<HasAn
 	boolean isAnimationEnabled() {
 		return checkAndGet().isAnimationEnabled();
 	}
-	
+
 }

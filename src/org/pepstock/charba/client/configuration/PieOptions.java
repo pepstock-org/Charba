@@ -26,7 +26,7 @@ import org.pepstock.charba.client.items.Undefined;
  *
  */
 public class PieOptions extends AbstractPieOptions {
-	
+
 	private static final double DEFAULT_CUTOUT = 0D;
 
 	/**

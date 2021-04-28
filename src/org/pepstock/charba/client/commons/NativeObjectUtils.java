@@ -30,14 +30,14 @@ import org.pepstock.charba.client.dom.elements.Img;
  * @author Andrea "Stock" Stocchero
  */
 final class NativeObjectUtils {
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
 	private NativeObjectUtils() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Creates a native object setting the hash code property in order it is not enumerable.
 	 * 

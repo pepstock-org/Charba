@@ -21,7 +21,7 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimationContainer extends IsDefaultAnimationTransition{
+public interface IsDefaultAnimationContainer extends IsDefaultAnimationTransition {
 
 	/**
 	 * Returns the animation transition element.

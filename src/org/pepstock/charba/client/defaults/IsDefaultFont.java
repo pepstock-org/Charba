@@ -69,7 +69,7 @@ public interface IsDefaultFont {
 	 * @return the height of an individual line of text as string.
 	 */
 	String getLineHeightAsString();
-	
+
 	/**
 	 * Creates a font options instance using default or cloning current instance.
 	 * 
@@ -78,7 +78,7 @@ public interface IsDefaultFont {
 	default FontItem create() {
 		return create(Defaults.get().getGlobal().getFont());
 	}
-	
+
 	/**
 	 * Creates a font options instance using default or cloning current instance.
 	 * 

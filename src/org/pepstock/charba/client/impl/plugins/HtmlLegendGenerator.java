@@ -226,7 +226,7 @@ final class HtmlLegendGenerator {
 		}
 		// checks if to return the table with title or not
 		if (titleTable != null) {
-			// legend items row 
+			// legend items row
 			TableRow legendItemsRow = DOMBuilder.get().createTableRowElement();
 			// adds to legend items
 			mainTable.appendChild(legendItemsRow);
@@ -375,7 +375,7 @@ final class HtmlLegendGenerator {
 		// styling the cell
 		colorCell.setId(legendId.getIdForColor());
 		colorCell.setVAlign(TextBaseline.TOP.value());
-		colorCell.getStyle().setMarginRight(Unit.PX.format((int)(legendLabels.getPadding() / 2D)));
+		colorCell.getStyle().setMarginRight(Unit.PX.format((int) (legendLabels.getPadding() / 2D)));
 		colorCell.getStyle().setMarginBottom(Unit.PX.format(legendLabels.getPadding()));
 		colorCell.getStyle().setDisplay(Display.BLOCK);
 		colorCell.getStyle().setBorderSpacing(Unit.PX.format(0));

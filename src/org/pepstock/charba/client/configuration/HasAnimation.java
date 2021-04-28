@@ -25,7 +25,7 @@ import org.pepstock.charba.client.options.IsAnimations;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface HasAnimation{
+public interface HasAnimation {
 
 	/**
 	 * Returns an animation container instance to use in the default methods of this interface.
@@ -33,7 +33,7 @@ public interface HasAnimation{
 	 * @return an animation container instance
 	 */
 	AnimationContainer getAnimationContainer();
-	
+
 	/**
 	 * Returns the animation element.
 	 * 
@@ -43,7 +43,7 @@ public interface HasAnimation{
 		// checks if container is consistent
 		return Checker.checkAndGetIfValid(getAnimationContainer(), "Animation container").getAnimation();
 	}
-	
+
 	/**
 	 * Returns the animations collection element.
 	 * 
@@ -53,7 +53,7 @@ public interface HasAnimation{
 		// checks if container is consistent
 		return Checker.checkAndGetIfValid(getAnimationContainer(), "Animation container").getAnimations();
 	}
-	
+
 	/**
 	 * Returns the animation transition element.
 	 * 
@@ -63,7 +63,7 @@ public interface HasAnimation{
 		// checks if container is consistent
 		return Checker.checkAndGetIfValid(getAnimationContainer(), "Animation container").getTransitions();
 	}
-	
+
 	/**
 	 * Enables or disables the animation.
 	 * 

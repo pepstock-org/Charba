@@ -103,7 +103,7 @@ public final class LegendTitle extends AbstractModel<Legend, IsDefaultLegendTitl
 	public LegendTextHandler getLegendTextHandler() {
 		return legendTextHandler;
 	}
-	
+
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 

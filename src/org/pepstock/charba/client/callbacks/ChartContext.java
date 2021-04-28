@@ -31,7 +31,7 @@ import org.pepstock.charba.client.enums.ContextType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class ChartContext extends NativeObjectContainer{
+public class ChartContext extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -64,7 +64,7 @@ public class ChartContext extends NativeObjectContainer{
 			return value;
 		}
 	}
-	
+
 	/**
 	 * Creates the object with native object instance to be wrapped, called by <code>configuration</code> package.
 	 * 
@@ -149,7 +149,7 @@ public class ChartContext extends NativeObjectContainer{
 		// if here, argument is not consistent
 		return null;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the context is consistent.<br>
 	 * Custom context (the plugin ones) should extend it and check if the context is consistent before invoking the callback.

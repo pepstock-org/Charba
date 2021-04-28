@@ -128,8 +128,10 @@ public abstract class AbstractController implements Controller {
 			JsControllerHelper.get().linkScales(getType(), context);
 		}
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.Controller#buildOrUpdateElements(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart, boolean)
 	 */
 	@Override

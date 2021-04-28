@@ -346,7 +346,9 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 		chart.reset();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#toBase64Image(org.pepstock.charba.client.enums.ImageMimeType, double)
 	 */
 	@Override

@@ -308,7 +308,7 @@ abstract class AbstractAnimationCollection<T extends Key, D extends IsDefaultAni
 		// then returns null
 		return null;
 	}
-	
+
 	/**
 	 * Sets the properties to be defined in the the animation collection.
 	 * 

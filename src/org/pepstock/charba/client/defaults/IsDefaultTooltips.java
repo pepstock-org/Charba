@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.TextAlign;
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefaultBoxHandler, IsDefaultAnimationContainer {
-	
+
 	/**
 	 * Returns padding object defaults.
 	 * 
@@ -42,7 +42,7 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 * @return if tooltips are enabled.
 	 */
 	boolean isEnabled();
-	
+
 	/**
 	 * Returns the browser events that the tooltip should listen to.
 	 * 

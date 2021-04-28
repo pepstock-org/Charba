@@ -117,7 +117,7 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 	public boolean isAnimate() {
 		return getConfiguration().isAnimate();
 	}
-	
+
 	/**
 	 * Sets the starting angle to draw arcs for the first item in a data set.
 	 * 
@@ -135,6 +135,5 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 	public double getStartAngle() {
 		return getConfiguration().getStartAngle();
 	}
-
 
 }

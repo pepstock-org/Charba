@@ -299,7 +299,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		if (Key.equals(TEMPORARY_ID, id)) {
 			// creates label id by incremental id
 			// stores in the object as id
-			setValue(Property.ID, IsLabelId.create(getIncrementalId()));			
+			setValue(Property.ID, IsLabelId.create(getIncrementalId()));
 		} else {
 			// stores the ID
 			// passed as argument
@@ -364,7 +364,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	public void setColor(String color) {
 		// resets callback
-		setColor((ColorCallback<LabelsContext>)null);
+		setColor((ColorCallback<LabelsContext>) null);
 		// stores the value
 		setValue(Property.COLOR, color);
 	}
@@ -395,7 +395,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	 */
 	public void setRender(Render render) {
 		// resets callback
-		setRender((RenderCallback)null);
+		setRender((RenderCallback) null);
 		// stores the value
 		setValue(Property.RENDER, render);
 	}
@@ -695,7 +695,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		ArrayImage array = getArrayValue(Property.IMAGES);
 		return ArrayListHelper.list(array);
 	}
-	
+
 	// --------------------
 	// CALLBACKS
 	// --------------------
@@ -764,7 +764,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	public void setColor(ColorCallback<LabelsContext> colorCallback) {
 		COLOR_PROPERTY_HANDLER.setCallback(this, LabelsPlugin.ID, colorCallback, colorCallbackProxy.getProxy());
 	}
-	
+
 	// ------------------------------
 	// INTERNAL methods for callbacks
 	// ------------------------------

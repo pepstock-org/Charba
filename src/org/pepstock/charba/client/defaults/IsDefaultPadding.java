@@ -51,7 +51,7 @@ public interface IsDefaultPadding {
 	 * @return the padding bottom in pixel.
 	 */
 	int getBottom();
-	
+
 	/**
 	 * Creates a padding options instance using default or cloning current instance.
 	 * 
@@ -60,7 +60,7 @@ public interface IsDefaultPadding {
 	default PaddingItem create() {
 		return create(null);
 	}
-	
+
 	/**
 	 * Creates a padding options instance using default or cloning current instance.
 	 * 

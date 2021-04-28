@@ -154,7 +154,7 @@ public class Segment extends ConfigurationOptionsContainer {
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new BaseContext(getChart(), context)));
 	}
-	
+
 	/**
 	 * Returns the background width callback, if set, otherwise <code>null</code>.
 	 * 
@@ -176,7 +176,6 @@ public class Segment extends ConfigurationOptionsContainer {
 		getOptions().setCallback(getConfiguration().getSegment(), Property.BACKGROUND_COLOR, backgroundColorCallback, backgroundColorCallbackProxy);
 	}
 
-	
 	/**
 	 * Returns the border width callback, if set, otherwise <code>null</code>.
 	 * 
@@ -239,7 +238,7 @@ public class Segment extends ConfigurationOptionsContainer {
 		// stores and manages callback
 		getOptions().setCallback(getConfiguration().getSegment(), Property.BORDER_CAP_STYLE, borderCapStyleCallback, borderCapStyleCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the border join-style callback, if set, otherwise <code>null</code>.
 	 * 
@@ -281,7 +280,7 @@ public class Segment extends ConfigurationOptionsContainer {
 		// stores and manages callback
 		getOptions().setCallback(getConfiguration().getSegment(), Property.BORDER_DASH, borderDashCallback, borderDashCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the border dash callback, if set, otherwise <code>null</code>.
 	 * 
@@ -304,7 +303,7 @@ public class Segment extends ConfigurationOptionsContainer {
 	}
 
 	// -------------------------------
-	// internal methods to manage the 
+	// internal methods to manage the
 	// callback invocation
 	// -------------------------------
 
@@ -317,21 +316,21 @@ public class Segment extends ConfigurationOptionsContainer {
 	private int onBorderWidth(BaseContext context) {
 		return ScriptableUtils.getOptionValue(new SegmentContext(new ConfigurationEnvelop<>(context.nativeObject())), borderWidthCallback, getOptions().getElements().getLine().getBorderWidth()).intValue();
 	}
-	
+
 	/**
 	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the property in color ones.
 	 * 
 	 * @param context scriptable context
 	 * @param callback color callback instance to invoke
 	 * @param defaultValue default color value to apply if callback not consistent
-	 * @param hasPattern if <code>true</code> the result could be also a {@link Pattern} 
+	 * @param hasPattern if <code>true</code> the result could be also a {@link Pattern}
 	 * @return a value of property as color
 	 */
 	protected final Object onColor(BaseContext context, ColorCallback<SegmentContext> callback, String defaultValue, boolean hasPattern) {
 		// PAY ATTENTION: Gradients are not managed due to Segment context where dataIndex and datasetIndex are missing
 		return ScriptableUtils.getOptionValueAsColor(new SegmentContext(new ConfigurationEnvelop<>(context.nativeObject())), callback, defaultValue, hasPattern);
 	}
-	
+
 	/**
 	 * Returns a {@link CapStyle} when the callback has been activated.
 	 * 
@@ -378,7 +377,7 @@ public class Segment extends ConfigurationOptionsContainer {
 		// default result
 		return ArrayInteger.fromOrEmpty(result);
 	}
-	
+
 	/**
 	 * Returns a native object as padding when the callback has been activated.
 	 * 
@@ -388,13 +387,13 @@ public class Segment extends ConfigurationOptionsContainer {
 	private double onBorderDashOffset(BaseContext context) {
 		return ScriptableUtils.getOptionValue(new SegmentContext(new ConfigurationEnvelop<>(context.nativeObject())), borderDashOffsetCallback, getOptions().getElements().getLine().getBorderDashOffset()).doubleValue();
 	}
-	
+
 	/**
-	 * Utility object which is creating a native object, setting chart and type, in order to be able to create a {@link ChartContext} without CHART.JS, for callbacks of segment. 
+	 * Utility object which is creating a native object, setting chart and type, in order to be able to create a {@link ChartContext} without CHART.JS, for callbacks of segment.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static final class BaseContext extends NativeObjectContainer{
+	private static final class BaseContext extends NativeObjectContainer {
 
 		/**
 		 * Creates the object with native object instance to be wrapped.
@@ -413,7 +412,7 @@ public class Segment extends ConfigurationOptionsContainer {
 				setValue(Property.CHART, Charts.getNative(chart));
 			}
 		}
-		
+
 		/**
 		 * Returns the native object instance.
 		 * 

@@ -42,7 +42,7 @@ final class NativeJsHelper {
 	 * @return new native object instance
 	 */
 	static native NativeObject create();
-	
+
 	/**
 	 * Performs unchecked cast to a type.<br>
 	 * Using this method can have an incorrect type of the object to the rest of the system which will result in hard to debug problems.

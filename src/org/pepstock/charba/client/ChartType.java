@@ -32,9 +32,9 @@ public enum ChartType implements Type
 	 */
 	BAR("bar", ScaleType.MULTI),
 	/**
-	 * Pie chart is probably the most commonly used chart. It is divided in the segments, the arc of each segment shows the proportional value of each piece of data. It is excellent
-	 * at showing the relational proportions between data. Pie and doughnut charts are effectively the same class in Chart.js, but have one different default value - their
-	 * cutoutPercentage. This equates what percentage of the inner should be cut out. This defaults to 0 for pie charts, and 50 for doughnuts.
+	 * Pie chart is probably the most commonly used chart. It is divided in the segments, the arc of each segment shows the proportional value of each piece of data. It is
+	 * excellent at showing the relational proportions between data. Pie and doughnut charts are effectively the same class in Chart.js, but have one different default value -
+	 * their cutoutPercentage. This equates what percentage of the inner should be cut out. This defaults to 0 for pie charts, and 50 for doughnuts.
 	 */
 	PIE("pie", ScaleType.NONE),
 	/**

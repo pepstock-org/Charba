@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * @author Andrea "Stock" Stocchero
  */
 public abstract class AbstractPieOptions extends ConfigurationOptions {
-	
+
 	/**
 	 * Builds the object storing the chart instance and defaults.
 	 * 
@@ -78,7 +78,7 @@ public abstract class AbstractPieOptions extends ConfigurationOptions {
 	public String getCutoutPercentage() {
 		return getConfiguration().getCutoutPercentage();
 	}
-	
+
 	/**
 	 * Sets the outer radius of the chart.<br>
 	 * As {@link Double}, it is considered to be pixels.

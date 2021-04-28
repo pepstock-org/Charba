@@ -55,7 +55,7 @@ public class Title extends ConfigurationOptionsContainer {
 	public Font getFont() {
 		return font;
 	}
-	
+
 	/**
 	 * Returns the padding element.
 	 * 

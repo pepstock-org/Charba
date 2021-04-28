@@ -78,7 +78,7 @@ public final class Checker {
 			throw new IllegalArgumentException(what == null ? ASSERT_EXCEPTION_MESSAGE : what);
 		}
 	}
-	
+
 	// -----------------
 	// INTEGER setter
 	// -----------------
@@ -103,7 +103,7 @@ public final class Checker {
 	public static int positiveOrDefault(int value, int defaultValue) {
 		return isPositive(value) ? value : defaultValue;
 	}
-	
+
 	/**
 	 * Checks if the value is a negative number and returns it. If not a negative number, returns 0.
 	 * 
@@ -113,7 +113,7 @@ public final class Checker {
 	public static int negativeOrZero(int value) {
 		return isNegative(value) ? value : 0;
 	}
-	
+
 	/**
 	 * Checks if the value is a negative number and returns it. If not a negative number, returns the default.
 	 * 
@@ -124,9 +124,9 @@ public final class Checker {
 	public static int negativeOrDefault(int value, int defaultValue) {
 		return isNegative(value) ? value : defaultValue;
 	}
-	
+
 	/**
-	 * Checks if the value is greater than  number and returns it. If not greater than, returns 0.
+	 * Checks if the value is greater than number and returns it. If not greater than, returns 0.
 	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
@@ -137,7 +137,7 @@ public final class Checker {
 	}
 
 	/**
-	 * Checks if the value is greater than  number and returns it. If not greater than, returns the threshold.
+	 * Checks if the value is greater than number and returns it. If not greater than, returns the threshold.
 	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
@@ -158,9 +158,9 @@ public final class Checker {
 	public static int greaterThanOrDefault(int value, int threshold, int defaultValue) {
 		return isGreaterThan(value, threshold) ? value : defaultValue;
 	}
-	
+
 	/**
-	 * Checks if the value is less than  number and returns it. If not less than, returns 0.
+	 * Checks if the value is less than number and returns it. If not less than, returns 0.
 	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
@@ -171,7 +171,7 @@ public final class Checker {
 	}
 
 	/**
-	 * Checks if the value is less than  number and returns it. If not less than, returns the threshold.
+	 * Checks if the value is less than number and returns it. If not less than, returns the threshold.
 	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
@@ -192,10 +192,10 @@ public final class Checker {
 	public static int lessThanOrDefault(int value, int threshold, int defaultValue) {
 		return isLessThan(value, threshold) ? value : defaultValue;
 	}
-	
+
 	/**
 	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the maximum.
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param minimum minimum limit to compare to the value
 	 * @param maximum maximum limit to compare to the value
@@ -204,10 +204,10 @@ public final class Checker {
 	public static int betweenOrMaximum(int value, int minimum, int maximum) {
 		return isBetween(value, minimum, maximum) ? value : maximum;
 	}
-	
+
 	/**
 	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the minimum.
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param minimum minimum limit to compare to the value
 	 * @param maximum maximum limit to compare to the value
@@ -216,10 +216,10 @@ public final class Checker {
 	public static int betweenOrMinimum(int value, int minimum, int maximum) {
 		return isBetween(value, minimum, maximum) ? value : minimum;
 	}
-	
+
 	/**
 	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the default.
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param minimum minimum limit to compare to the value
 	 * @param maximum maximum limit to compare to the value
@@ -229,7 +229,7 @@ public final class Checker {
 	public static int betweenOrDefault(int value, int minimum, int maximum, int defaultValue) {
 		return isBetween(value, minimum, maximum) ? value : defaultValue;
 	}
-	
+
 	// -----------------
 	// DOUBLE setter
 	// -----------------
@@ -254,7 +254,7 @@ public final class Checker {
 	public static double positiveOrDefault(double value, double defaultValue) {
 		return isPositive(value) ? value : defaultValue;
 	}
-	
+
 	/**
 	 * Checks if the value is a negative number and returns it. If not a negative number, returns 0.
 	 * 
@@ -264,7 +264,7 @@ public final class Checker {
 	public static double negativeOrZero(double value) {
 		return isNegative(value) ? value : 0;
 	}
-	
+
 	/**
 	 * Checks if the value is a negative number and returns it. If not a negative number, returns the default.
 	 * 
@@ -275,9 +275,9 @@ public final class Checker {
 	public static double negativeOrDefault(double value, double defaultValue) {
 		return isNegative(value) ? value : defaultValue;
 	}
-	
+
 	/**
-	 * Checks if the value is greater than  number and returns it. If not greater than, returns 0.
+	 * Checks if the value is greater than number and returns it. If not greater than, returns 0.
 	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
@@ -288,7 +288,7 @@ public final class Checker {
 	}
 
 	/**
-	 * Checks if the value is greater than  number and returns it. If not greater than, returns the threshold.
+	 * Checks if the value is greater than number and returns it. If not greater than, returns the threshold.
 	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
@@ -309,9 +309,9 @@ public final class Checker {
 	public static double greaterThanOrDefault(double value, double threshold, double defaultValue) {
 		return isGreaterThan(value, threshold) ? value : defaultValue;
 	}
-	
+
 	/**
-	 * Checks if the value is less than  number and returns it. If not less than, returns 0.
+	 * Checks if the value is less than number and returns it. If not less than, returns 0.
 	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
@@ -322,7 +322,7 @@ public final class Checker {
 	}
 
 	/**
-	 * Checks if the value is less than  number and returns it. If not less than, returns the threshold.
+	 * Checks if the value is less than number and returns it. If not less than, returns the threshold.
 	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
@@ -343,10 +343,10 @@ public final class Checker {
 	public static double lessThanOrDefault(double value, double threshold, double defaultValue) {
 		return isLessThan(value, threshold) ? value : defaultValue;
 	}
-	
+
 	/**
 	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the maximum.
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param minimum minimum limit to compare to the value
 	 * @param maximum maximum limit to compare to the value
@@ -355,10 +355,10 @@ public final class Checker {
 	public static double betweenOrMaximum(double value, double minimum, double maximum) {
 		return isBetween(value, minimum, maximum) ? value : maximum;
 	}
-	
+
 	/**
 	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the minimum.
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param minimum minimum limit to compare to the value
 	 * @param maximum maximum limit to compare to the value
@@ -367,10 +367,10 @@ public final class Checker {
 	public static double betweenOrMinimum(double value, double minimum, double maximum) {
 		return isBetween(value, minimum, maximum) ? value : minimum;
 	}
-	
+
 	/**
 	 * Checks if the value is between minimum and maximum passed values and returns it. If not between, returns the default.
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param minimum minimum limit to compare to the value
 	 * @param maximum maximum limit to compare to the value
@@ -380,7 +380,7 @@ public final class Checker {
 	public static double betweenOrDefault(double value, double minimum, double maximum, double defaultValue) {
 		return isBetween(value, minimum, maximum) ? value : defaultValue;
 	}
-	
+
 	// -----------------
 	// INTEGER
 	// -----------------
@@ -413,7 +413,7 @@ public final class Checker {
 
 	/**
 	 * Checks if value passed as argument is a positive number (zero is included).
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @return <code>true</code> if the value is positive number (zero is included)
 	 */
@@ -446,10 +446,10 @@ public final class Checker {
 		checkIfPositive(value, what);
 		return value;
 	}
-	
+
 	/**
 	 * Checks if value passed as argument is a negative number (zero is excluded).
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @return <code>true</code> if the value is positive number (zero is excluded)
 	 */
@@ -469,7 +469,7 @@ public final class Checker {
 			throwIllegalArgumentException(NEGATIVE_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
 	}
-	
+
 	/**
 	 * Checks if value passed as argument is a negative number (zero is excluded).<br>
 	 * If not, throw a {@link IllegalArgumentException}.
@@ -485,7 +485,7 @@ public final class Checker {
 
 	/**
 	 * Checks if both values passed as argument are not equals.
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param target value to be compared to the value
 	 * @return <code>true</code> if the arguments are not equals
@@ -510,7 +510,7 @@ public final class Checker {
 
 	/**
 	 * Checks if both values passed as argument are equals.
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param target value to be compared to the value
 	 * @return <code>true</code> if the arguments are equals
@@ -535,7 +535,7 @@ public final class Checker {
 
 	/**
 	 * Checks if the value passed as argument is greater than the threshold passed as argument (inclusive).
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
 	 * @return <code>true</code> if the value is greater than the threshold (inclusive)
@@ -571,9 +571,10 @@ public final class Checker {
 		checkIfGreaterThan(value, threshold, what);
 		return value;
 	}
+
 	/**
 	 * Checks if the value passed as argument is less than the threshold passed as argument (inclusive).
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
 	 * @return <code>true</code> if the value is less than the threshold (inclusive)
@@ -595,7 +596,7 @@ public final class Checker {
 			throwIllegalArgumentException(LESS_EXCEPTION_MESSAGE_TEMPLATE, what, value, threshold);
 		}
 	}
-	
+
 	/**
 	 * Checks if the value passed as argument is less than the threshold passed as argument (inclusive).<br>
 	 * If not, throw a {@link IllegalArgumentException}.
@@ -612,7 +613,7 @@ public final class Checker {
 
 	/**
 	 * Checks if the value passed as argument is between minimum and maximum values, passed as argument (inclusive).
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param minimum minimum limit to compare to the value
 	 * @param maximum maximum limit to compare to the value
@@ -636,7 +637,7 @@ public final class Checker {
 			throwIllegalArgumentException(BETWEEN_EXCEPTION_MESSAGE_TEMPLATE, what, value, minimum, maximum);
 		}
 	}
-	
+
 	/**
 	 * Checks if the value passed as argument is between minimum and maximum values, passed as argument (inclusive).<br>
 	 * If not, throw a {@link IllegalArgumentException}.
@@ -653,7 +654,7 @@ public final class Checker {
 	}
 
 	// -----------------
-	// DOUBLE 
+	// DOUBLE
 	// -----------------
 
 	/**
@@ -684,7 +685,7 @@ public final class Checker {
 
 	/**
 	 * Checks if value passed as argument is a positive number (zero is included).
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @return <code>true</code> if the value is positive number (zero is included)
 	 */
@@ -704,7 +705,7 @@ public final class Checker {
 			throwIllegalArgumentException(POSITIVE_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
 	}
-	
+
 	/**
 	 * Checks if value passed as argument is a positive number (zero is included).<br>
 	 * If not, throw a {@link IllegalArgumentException}.
@@ -720,7 +721,7 @@ public final class Checker {
 
 	/**
 	 * Checks if value passed as argument is a negative number (zero is excluded).
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @return <code>true</code> if the value is positive number (zero is excluded)
 	 */
@@ -740,7 +741,7 @@ public final class Checker {
 			throwIllegalArgumentException(NEGATIVE_EXCEPTION_MESSAGE_TEMPLATE, what, value);
 		}
 	}
-	
+
 	/**
 	 * Checks if value passed as argument is a negative number (zero is excluded).<br>
 	 * If not, throw a {@link IllegalArgumentException}.
@@ -756,7 +757,7 @@ public final class Checker {
 
 	/**
 	 * Checks if both values passed as argument are not equals.
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param target value to be compared to the value
 	 * @return <code>true</code> if the arguments are not equals
@@ -781,7 +782,7 @@ public final class Checker {
 
 	/**
 	 * Checks if both values passed as argument are equals.
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param target value to be compared to the value
 	 * @return <code>true</code> if the arguments are equals
@@ -806,7 +807,7 @@ public final class Checker {
 
 	/**
 	 * Checks if the value passed as argument is greater than the threshold passed as argument (inclusive).
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
 	 * @return <code>true</code> if the value is greater than the threshold (inclusive)
@@ -828,7 +829,7 @@ public final class Checker {
 			throwIllegalArgumentException(GREATER_EXCEPTION_MESSAGE_TEMPLATE, what, value, threshold);
 		}
 	}
-	
+
 	/**
 	 * Checks if the value passed as argument is greater than the threshold passed as argument (inclusive).<br>
 	 * If not, throw a {@link IllegalArgumentException}.
@@ -841,11 +842,11 @@ public final class Checker {
 	public static double checkAndGetIfGreaterThan(double value, double threshold, String what) {
 		checkIfGreaterThan(value, threshold, what);
 		return value;
-	}	
+	}
 
 	/**
 	 * Checks if the value passed as argument is less than the threshold passed as argument (inclusive).
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param threshold value to be compared to the value
 	 * @return <code>true</code> if the value is less than the threshold (inclusive)
@@ -867,7 +868,7 @@ public final class Checker {
 			throwIllegalArgumentException(LESS_EXCEPTION_MESSAGE_TEMPLATE, what, value, threshold);
 		}
 	}
-	
+
 	/**
 	 * Checks if the value passed as argument is less than the threshold passed as argument (inclusive).<br>
 	 * If not, throw a {@link IllegalArgumentException}.
@@ -884,7 +885,7 @@ public final class Checker {
 
 	/**
 	 * Checks if the value passed as argument is between minimum and maximum values, passed as argument (inclusive).
-	 *  
+	 * 
 	 * @param value value to be checked
 	 * @param minimum minimum limit to compare to the value
 	 * @param maximum maximum limit to compare to the value
@@ -908,7 +909,7 @@ public final class Checker {
 			throwIllegalArgumentException(BETWEEN_EXCEPTION_MESSAGE_TEMPLATE, what, value, minimum, maximum);
 		}
 	}
-	
+
 	/**
 	 * Checks if the value passed as argument is between minimum and maximum values, passed as argument (inclusive).<br>
 	 * If not, throw a {@link IllegalArgumentException}.
@@ -925,7 +926,7 @@ public final class Checker {
 	}
 
 	// -----------------
-	// OBJECT 
+	// OBJECT
 	// -----------------
 
 	/**
