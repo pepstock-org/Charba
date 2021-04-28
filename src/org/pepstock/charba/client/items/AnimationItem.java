@@ -38,7 +38,8 @@ public final class AnimationItem extends NativeObjectContainer {
 	{
 		CHART("chart"),
 		CURRENT_STEP("currentStep"),
-		NUM_STEPS("numSteps");
+		NUM_STEPS("numSteps"),
+		INITIAL("initial");
 
 		// name value of property
 		private final String value;
@@ -87,6 +88,15 @@ public final class AnimationItem extends NativeObjectContainer {
 		// if here the context is not consistent
 		// returns null
 		return null;
+	}
+	
+	/**
+	 * Returns <code>true</code> for the initial animation of the chart.
+	 * 
+	 * @return <code>true</code> for the initial animation of the chart
+	 */
+	public boolean isInitial() {
+		return getValue(Property.INITIAL, Undefined.BOOLEAN);
 	}
 
 	/**
