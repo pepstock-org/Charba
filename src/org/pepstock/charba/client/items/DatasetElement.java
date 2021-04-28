@@ -47,7 +47,7 @@ public class DatasetElement extends NativeObjectContainer {
 		X("x"),
 		Y("y"),
 		OPTIONS("options"),
-		PARSED("parsed"), // FIXME
+		PARSED("parsed"),
 		// for bar chart
 		BASE("base"),
 		HEIGHT("height"),
