@@ -22,7 +22,9 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * 
  * @author Andrea "Stock" Stocchero
  * 
+ * @param <C> type of context to pass to the callback.
+ * 
  */
-public interface JoinStyleCallback extends Scriptable<JoinStyle, DatasetContext> {
+public interface JoinStyleCallback<C extends ChartContext> extends Scriptable<JoinStyle, C> {
 
 }

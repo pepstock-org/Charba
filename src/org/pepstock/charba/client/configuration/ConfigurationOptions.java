@@ -827,7 +827,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @param node element node instance
 	 * @param property property name
 	 * @param callBack the callback instance
-	 * @param proxy the proxy instance 
+	 * @param callbackProxy the callback proxy instance 
 	 */
 	final void setCallback(AbstractNode node, Key property, Object callBack, CallbackProxy<?> callbackProxy) {
 		// checks if consistent

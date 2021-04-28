@@ -25,6 +25,7 @@ import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
+import org.pepstock.charba.client.configuration.LineOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
@@ -38,10 +39,43 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  */
 public final class ExtendedOptions extends ScaledOptions {
 
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		SEGMENT("segment");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
 	// chart instance of the options
 	private final IsChart chart;
 	// extends scales instances
 	private final ExtendedScales scales;
+	// segment instance for line options
+	private final Segment segment;
 
 	/**
 	 * Creates an options with default provider.
@@ -78,6 +112,8 @@ public final class ExtendedOptions extends ScaledOptions {
 		this.chart = chart;
 		// gets scales sub elements
 		this.scales = new ExtendedScales(this, ScaledOptions.Property.SCALES, defaultValues.getScales(), getValue(ScaledOptions.Property.SCALES));
+		// loads segment
+		this.segment = new Segment(this, Property.SEGMENT, defaultValues, getValue(Property.SEGMENT));
 	}
 
 	/**
@@ -112,6 +148,16 @@ public final class ExtendedOptions extends ScaledOptions {
 	}
 
 	/**
+	 * Returns the segment configuration for {@link LineOptions}.<br>
+	 * Line segment styles can be overridden by scriptable options in the segment object..
+	 * 
+	 * @return the segment configuration for {@link LineOptions}
+	 */
+	public Segment getSegment() {
+		return segment;
+	}
+
+	/**
 	 * Adds a callback proxy function to a element node instance.
 	 *
 	 * @param node element node instance
@@ -125,7 +171,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	/**
 	 * Adds a event proxy function to animation element instance.
 	 * 
-	 * @param animation animation element instance.
+	 * @param node options node element instance.
 	 * @param property property name.
 	 * @param envelop contains the function proxy to activate.
 	 */

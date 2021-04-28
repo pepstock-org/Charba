@@ -25,6 +25,11 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  *
  */
 public class TimeSeriesLineOptions extends TimeSeriesOptions implements HasLineOptions {
+	
+	// decimation instance
+	private final Decimation decimation;
+	// segment instance
+	private final Segment segment;
 
 	/**
 	 * Builds the object storing the chart instance and default values.
@@ -34,6 +39,9 @@ public class TimeSeriesLineOptions extends TimeSeriesOptions implements HasLineO
 	 */
 	public TimeSeriesLineOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
+		// stores decimation and segment
+		this.decimation = new Decimation(this);
+		this.segment = new Segment(this);
 	}
 
 	/*
@@ -44,6 +52,24 @@ public class TimeSeriesLineOptions extends TimeSeriesOptions implements HasLineO
 	@Override
 	public TimeSeriesOptions getOptions() {
 		return this;
+	}
+	
+	/**
+	 * Returns the decimation plugin element.
+	 * 
+	 * @return the decimation plugin element
+	 */
+	public Decimation getDecimation() {
+		return decimation;
+	}
+	
+	/**
+	 * Returns the segment element.
+	 * 
+	 * @return the segment element
+	 */
+	public Segment getSegment() {
+		return segment;
 	}
 
 }

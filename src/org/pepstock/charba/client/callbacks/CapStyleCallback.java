@@ -22,7 +22,8 @@ import org.pepstock.charba.client.enums.CapStyle;
  * 
  * @author Andrea "Stock" Stocchero
  * 
+ * @param <C> type of context to pass to the callback.
  */
-public interface CapStyleCallback extends Scriptable<CapStyle, DatasetContext> {
+public interface CapStyleCallback<C extends ChartContext> extends Scriptable<CapStyle, C> {
 
 }

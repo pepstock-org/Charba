@@ -27,7 +27,10 @@ import org.pepstock.charba.client.enums.IndexAxis;
  */
 public class LineOptions extends ScalesOptions implements HasLineOptions {
 
+	// decimation instance
 	private final Decimation decimation;
+	// segment instance
+	private final Segment segment;
 
 	/**
 	 * Builds the object storing the chart instance and default values.
@@ -37,8 +40,9 @@ public class LineOptions extends ScalesOptions implements HasLineOptions {
 	 */
 	public LineOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
-		// stores decimation
+		// stores decimation and segment
 		this.decimation = new Decimation(this);
+		this.segment = new Segment(this);
 	}
 
 	/**
@@ -48,6 +52,15 @@ public class LineOptions extends ScalesOptions implements HasLineOptions {
 	 */
 	public Decimation getDecimation() {
 		return decimation;
+	}
+	
+	/**
+	 * Returns the segment element.
+	 * 
+	 * @return the segment element
+	 */
+	public Segment getSegment() {
+		return segment;
 	}
 
 	/*

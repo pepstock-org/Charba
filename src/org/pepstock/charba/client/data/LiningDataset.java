@@ -141,21 +141,21 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	// point style callback instance
 	private PointStyleCallback pointStyleCallback = null;
 	// border cap style callback instance
-	private CapStyleCallback borderCapStyleCallback = null;
+	private CapStyleCallback<DatasetContext> borderCapStyleCallback = null;
 	// border dash callback instance
 	private BorderDashCallback<DatasetContext> borderDashCallback = null;
 	// border dash offset callback instance
 	private BorderDashOffsetCallback<DatasetContext> borderDashOffsetCallback = null;
 	// border join style callback instance
-	private JoinStyleCallback borderJoinStyleCallback = null;
+	private JoinStyleCallback<DatasetContext> borderJoinStyleCallback = null;
 	// hover border cap style callback instance
-	private CapStyleCallback hoverBorderCapStyleCallback = null;
+	private CapStyleCallback<DatasetContext> hoverBorderCapStyleCallback = null;
 	// hover border dash callback instance
 	private BorderDashCallback<DatasetContext> hoverBorderDashCallback = null;
 	// hover border dash offset callback instance
 	private BorderDashOffsetCallback<DatasetContext> hoverBorderDashOffsetCallback = null;
 	// hover border join style callback instance
-	private JoinStyleCallback hoverBorderJoinStyleCallback = null;
+	private JoinStyleCallback<DatasetContext> hoverBorderJoinStyleCallback = null;
 
 	/**
 	 * Name of common properties of native object related to a data set.
@@ -708,7 +708,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
 		// resets callback
-		setBorderCapStyle((CapStyleCallback) null);
+		setBorderCapStyle((CapStyleCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.BORDER_CAP_STYLE, borderCapStyle);
 	}
@@ -736,7 +736,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
 		// resets callback
-		setBorderJoinStyle((JoinStyleCallback) null);
+		setBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyle);
 	}
@@ -1097,7 +1097,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setHoverBorderCapStyle(CapStyle borderCapStyle) {
 		// resets callback
-		setHoverBorderCapStyle((CapStyleCallback) null);
+		setHoverBorderCapStyle((CapStyleCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.HOVER_BORDER_CAP_STYLE, borderCapStyle);
 	}
@@ -1126,7 +1126,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setHoverBorderJoinStyle(JoinStyle borderJoinStyle) {
 		// resets callback
-		setHoverBorderJoinStyle((JoinStyleCallback) null);
+		setHoverBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.HOVER_BORDER_JOIN_STYLE, borderJoinStyle);
 	}
@@ -2048,7 +2048,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the border cap style callback, if set, otherwise <code>null</code>.
 	 */
-	public CapStyleCallback getBorderCapStyleCallback() {
+	public CapStyleCallback<DatasetContext> getBorderCapStyleCallback() {
 		return borderCapStyleCallback;
 	}
 
@@ -2057,7 +2057,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param borderCapStyleCallback the border cap style callback.
 	 */
-	public void setBorderCapStyle(CapStyleCallback borderCapStyleCallback) {
+	public void setBorderCapStyle(CapStyleCallback<DatasetContext> borderCapStyleCallback) {
 		// sets the callback
 		this.borderCapStyleCallback = borderCapStyleCallback;
 		// checks if callback is consistent
@@ -2075,7 +2075,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the border join style callback, if set, otherwise <code>null</code>.
 	 */
-	public JoinStyleCallback getBorderJoinStyleCallback() {
+	public JoinStyleCallback<DatasetContext> getBorderJoinStyleCallback() {
 		return borderJoinStyleCallback;
 	}
 
@@ -2084,7 +2084,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param borderJoinStyleCallback the border join style callback.
 	 */
-	public void setBorderJoinStyle(JoinStyleCallback borderJoinStyleCallback) {
+	public void setBorderJoinStyle(JoinStyleCallback<DatasetContext> borderJoinStyleCallback) {
 		// sets the callback
 		this.borderJoinStyleCallback = borderJoinStyleCallback;
 		// checks if callback is consistent
@@ -2156,7 +2156,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the border cap style callback when element is hovered, if set, otherwise <code>null</code>
 	 */
-	public CapStyleCallback getHoverBorderCapStyleCallback() {
+	public CapStyleCallback<DatasetContext> getHoverBorderCapStyleCallback() {
 		return hoverBorderCapStyleCallback;
 	}
 
@@ -2165,7 +2165,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param borderCapStyleCallback the border cap style callback when element is hovered
 	 */
-	public void setHoverBorderCapStyle(CapStyleCallback borderCapStyleCallback) {
+	public void setHoverBorderCapStyle(CapStyleCallback<DatasetContext> borderCapStyleCallback) {
 		// sets the callback
 		this.hoverBorderCapStyleCallback = borderCapStyleCallback;
 		// checks if callback is consistent
@@ -2183,7 +2183,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @return the border join style callback when element is hovered, if set, otherwise <code>null</code>.
 	 */
-	public JoinStyleCallback getHoverBorderJoinStyleCallback() {
+	public JoinStyleCallback<DatasetContext> getHoverBorderJoinStyleCallback() {
 		return hoverBorderJoinStyleCallback;
 	}
 
@@ -2192,7 +2192,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * 
 	 * @param borderJoinStyleCallback the border join style callback when element is hovered.
 	 */
-	public void setHoverBorderJoinStyle(JoinStyleCallback borderJoinStyleCallback) {
+	public void setHoverBorderJoinStyle(JoinStyleCallback<DatasetContext> borderJoinStyleCallback) {
 		// sets the callback
 		this.hoverBorderJoinStyleCallback = borderJoinStyleCallback;
 		// checks if callback is consistent
@@ -2366,7 +2366,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param borderCapStyleCallback border cap style callback instance
 	 * @return a object property value, as {@link CapStyle}
 	 */
-	private String onBorderCapStyle(DatasetContext context, CapStyleCallback borderCapStyleCallback) {
+	private String onBorderCapStyle(DatasetContext context, CapStyleCallback<DatasetContext> borderCapStyleCallback) {
 		// gets value
 		CapStyle result = ScriptableUtils.getOptionValue(context, borderCapStyleCallback);
 		// checks result
@@ -2384,7 +2384,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param borderJoinStyleCallback border join style callback instance
 	 * @return a object property value, as {@link JoinStyle}
 	 */
-	private String onBorderJoinStyle(DatasetContext context, JoinStyleCallback borderJoinStyleCallback) {
+	private String onBorderJoinStyle(DatasetContext context, JoinStyleCallback<DatasetContext> borderJoinStyleCallback) {
 		// gets value
 		JoinStyle result = ScriptableUtils.getOptionValue(context, borderJoinStyleCallback);
 		// checks result

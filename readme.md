@@ -252,6 +252,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `color`, `borderColor`, `backgroundColor` and `font` properties to configuration of a single chart.
  * add `toBase64Image(ImageMimeType, double)` methods (and all combinations) to `IsChart` interface in order to get the image form chart in different image format and with different image quality.
  * enable `padding` property as scriptable in `Layout` configuration.
+ * add `segment` property to `LineOptions` options and configuration in order to manage the rendering of line segments.
 
 ### _Scales_
 

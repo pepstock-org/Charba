@@ -65,6 +65,10 @@ public enum ContextType implements Key
 	 */
 	METER("meter"),
 	/**
+	 * Segment line context type.
+	 */
+	SEGMENT("segment"),
+	/**
 	 * Unknown context type.
 	 */
 	UNKNOWN("unknown");

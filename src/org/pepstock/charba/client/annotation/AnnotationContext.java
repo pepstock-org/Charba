@@ -58,7 +58,7 @@ public final class AnnotationContext extends ChartContext {
 	 */
 	@Override
 	protected boolean isConsistent() {
-		// checks if the context types are chart or annotatiob
+		// checks if the context types are chart or annotation
 		return ContextType.CHART.equals(getType()) || ContextType.ANNOTATION.equals(getType());
 	}
 
