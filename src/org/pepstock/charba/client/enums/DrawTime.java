@@ -18,13 +18,14 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Defines when the filler will fill the datasets.
+ * Defines when the filler will fill the data sets.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum DrawTime implements Key
 {
+	BEFORE_DRAW("beforeDraw"),
 	BEFORE_DATASET_DRAW("beforeDatasetDraw"),
 	BEFORE_DATASETS_DRAW("beforeDatasetsDraw");
 
