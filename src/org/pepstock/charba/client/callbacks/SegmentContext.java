@@ -111,7 +111,7 @@ public final class SegmentContext extends ChartContext {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private final class SegementDatasetElement extends DatasetElement{
+	private static final class SegementDatasetElement extends DatasetElement{
 		
 		/**
 		 * Creates the object with native object instance to be wrapped.

@@ -394,7 +394,7 @@ public class Segment extends ConfigurationOptionsContainer {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private final class BaseContext extends NativeObjectContainer{
+	private static final class BaseContext extends NativeObjectContainer{
 
 		/**
 		 * Creates the object with native object instance to be wrapped.
