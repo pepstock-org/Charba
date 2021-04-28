@@ -36,6 +36,7 @@ public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaul
 	{
 		BORDER_SKIPPED("borderSkipped"),
 		BORDER_RADIUS("borderRadius"),
+		ENABLE_BORDER_RADIUS("enableBorderRadius"),
 		HOVER_BORDER_RADIUS("hoverBorderRadius");
 
 		// name value of property
@@ -87,6 +88,25 @@ public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaul
 	@Override
 	public PointStyleHandler getPointStyleHandler() {
 		return pointStyleHandler;
+	}
+	
+	/**
+	 * If <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack.
+	 * 
+	 * @param enableBorderRadius if <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack
+	 */
+	public void setEnableBorderRadius(boolean enableBorderRadius) {
+		setValueAndAddToParent(Property.ENABLE_BORDER_RADIUS, enableBorderRadius);
+	}
+
+	/**
+	 * If <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack.
+	 * 
+	 * @return if <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack
+	 */
+	@Override
+	public boolean isEnableBorderRadius() {
+		return getValue(Property.ENABLE_BORDER_RADIUS, getDefaultValues().isEnableBorderRadius());
 	}
 
 	/**

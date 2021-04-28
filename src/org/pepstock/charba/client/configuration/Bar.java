@@ -154,5 +154,23 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	public Img getPointStyleAsImage() {
 		return getConfiguration().getElements().getBar().getPointStyleAsImage();
 	}
+	
+	/**
+	 * If <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack.
+	 * 
+	 * @param enableBorderRadius if <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack
+	 */
+	public void setEnableBorderRadius(boolean enableBorderRadius) {
+		getConfiguration().getElements().getBar().setEnableBorderRadius(enableBorderRadius);
+	}
+
+	/**
+	 * If <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack.
+	 * 
+	 * @return if <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack
+	 */
+	public boolean isEnableBorderRadius() {
+		return getConfiguration().getElements().getBar().isEnableBorderRadius();
+	}
 
 }

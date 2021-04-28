@@ -27,6 +27,8 @@ import org.pepstock.charba.client.enums.PointStyle;
  */
 public final class DefaultBar extends AbstractDefaultOptionsElement implements IsDefaultBar {
 
+	private static final boolean DEFAULT_ENABLE_BORDER_RADIUS = true;
+
 	private static final int DEFAULT_BORDER_WIDTH = 0;
 
 	private static final int DEFAULT_BORDER_RADIUS = 0;
@@ -96,6 +98,16 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 	@Override
 	public int getHoverBorderRadius() {
 		return getBorderRadius();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#isEnableBorderRadius()
+	 */
+	@Override
+	public boolean isEnableBorderRadius() {
+		return DEFAULT_ENABLE_BORDER_RADIUS;
 	}
 
 }

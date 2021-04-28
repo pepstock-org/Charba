@@ -44,5 +44,12 @@ public interface IsDefaultBar extends IsDefaultOptionsElement, IsDefaultPointSty
 	 * @return the bar border radius (in pixels) when hovered.
 	 */
 	int getHoverBorderRadius();
+	
+	/**
+	 * If <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack.
+	 * 
+	 * @return if <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack
+	 */
+	boolean isEnableBorderRadius();
 
 }

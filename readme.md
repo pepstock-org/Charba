@@ -225,6 +225,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `align` property to `Title` options and configuration classes.
  * add `hoverBackgroundColor`, `hoverBorderWidth` and `hoverBorderColor` properties to `Bar`, `Arc`, `Line` and `Point` elements configuration and options classes.
  * add `pointStyle` property to `Bar` element configuration and options classes.
+ * add `enableBorderRadius` property to `Bar` element configuration and options classes.
  * add `hoverBorderRadius` property to `Bar` element configuration and options classes.
  * add `borderRadius` property to `Arc` element configuration and options classes.
  * add `hoverOffset` property to `Arc` element configuration and options classes.
@@ -388,6 +389,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `borderWidth` property for `BarDataset` in order to be set as indexable when set as an object.
  * add `borderRadius` and `hoverBorderRadius` properties to `BarDataset` class.
  * add `base` property to `BarDataset` configuration and to `Datasets` configuration and options classes.
+ * add `enableBorderRadius` property to `BarDataset` configuration class.
  * add `setXAxisID` and `setYAxisID` methods to `BarDataset` class in order to set the scale id using `IsScaleId` implementation.
  * add `offset` and `hoverOffset` properties to `PieDataset` and `DoughnutDataset` classes.
  * change `borderAlign` property for `PieDataset`, `PolarAreaDataset` and `DoughnutDataset` in order to be set as indexable.

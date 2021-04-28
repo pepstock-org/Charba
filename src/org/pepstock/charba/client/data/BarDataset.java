@@ -116,6 +116,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		HOVER_BORDER_RADIUS("hoverBorderRadius"),
 		INDEX_AXIS("indexAxis"),
 		POINT_STYLE("pointStyle"),
+		ENABLE_BORDER_RADIUS("enableBorderRadius"),
 		// internal to map the border width and radius type
 		CHARBA_BORDER_WIDTH_TYPE("charbaBorderWidthType"),
 		CHARBA_HOVER_BORDER_WIDTH_TYPE("charbaHoverBorderWidthType"),
@@ -927,6 +928,24 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// if here, the point style is set as string
 		// then returns the default
 		return getDefaultValues().getElements().getBar().getPointStyleAsImage();
+	}
+	
+	/**
+	 * If <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack.
+	 * 
+	 * @param enableBorderRadius if <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack
+	 */
+	public void setEnableBorderRadius(boolean enableBorderRadius) {
+		setValueAndAddToParent(Property.ENABLE_BORDER_RADIUS, enableBorderRadius);
+	}
+
+	/**
+	 * If <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack.
+	 * 
+	 * @return if <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack
+	 */
+	public boolean isEnableBorderRadius() {
+		return getValue(Property.ENABLE_BORDER_RADIUS, getDefaultValues().getElements().getBar().isEnableBorderRadius());
 	}
 
 	// -----------------

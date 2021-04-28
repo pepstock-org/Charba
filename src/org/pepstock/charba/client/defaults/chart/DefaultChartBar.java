@@ -158,4 +158,14 @@ public final class DefaultChartBar implements IsDefaultBar {
 		return bar.getHoverBorderRadius();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#isEnableBorderRadius()
+	 */
+	@Override
+	public boolean isEnableBorderRadius() {
+		return bar.isEnableBorderRadius();
+	}
+
 }
