@@ -27,6 +27,7 @@ import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
@@ -43,8 +44,10 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.AxisItem;
 import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.items.PaddingItem;
 import org.pepstock.charba.client.options.ExtendedScale;
 import org.pepstock.charba.client.options.IsFont;
+import org.pepstock.charba.client.options.IsPadding;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.ScaleTitle;
@@ -60,6 +63,8 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
+	
+	private static final PaddingItem DEFAULT_PADDING_FOR_CALLBACK = new PaddingItem(0);
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -607,6 +612,30 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// if here, provider is not consistent
 		// then returns the defaults one
 		return Defaults.get().getGlobal().getFont().create().nativeObject();
+	}
+	
+	/**
+	 * Returns a native object as padding when the callback has been activated.
+	 * 
+	 * @param context native object as context
+	 * @param callback callback to invoke
+	 * @param padding padding instance
+	 * @return a native object as font
+	 */
+	final NativeObject onPadding(ScaleContext context, PaddingCallback<ScaleContext> callback, IsPadding padding) {
+		// gets value
+		PaddingItem result = ScriptableUtils.getOptionValue(context, callback);
+		// checks if result is consistent
+		if (result != null) {
+			// returns result
+			return result.nativeObject();
+		} else if (padding != null) {
+			// checks if provider is consistent
+			return padding.create().nativeObject();
+		}
+		// if here, provider is not consistent
+		// then returns a zero padding
+		return DEFAULT_PADDING_FOR_CALLBACK.nativeObject();
 	}
 
 	/**
