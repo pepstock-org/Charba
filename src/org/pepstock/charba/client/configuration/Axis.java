@@ -647,7 +647,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param callbackProxy the proxy instance 
 	 */
 	final void setCallback(AbstractNode node, Key property, Object callBack, CallbackProxy<?> callbackProxy) {
-		setCallback(node, property, callbackProxy, callbackProxy.getProxy());
+		setCallback(node, property, callBack, callbackProxy.getProxy());
 	}
 
 	/**
