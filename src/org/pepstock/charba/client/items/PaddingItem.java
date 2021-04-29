@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.globals.DefaultPadding;
@@ -65,7 +66,7 @@ public final class PaddingItem extends AbstractPadding {
 	public PaddingItem(IsDefaultPadding defaultValues, int padding) {
 		this(defaultValues);
 		// sets initial padding
-		set(Math.max(padding, 0));
+		set(Checker.positiveOrZero(padding));
 	}
 
 	/**

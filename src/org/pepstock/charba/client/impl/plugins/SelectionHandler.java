@@ -70,7 +70,7 @@ final class SelectionHandler {
 	private final int paddingTop;
 	// stores the original bottom padding value
 	private final int paddingBottom;
-	// current selection dataset items
+	// current selection data set items
 	// current mouse track of selection
 	private SelectionTrack track = null;
 	// status if selected
@@ -79,7 +79,7 @@ final class SelectionHandler {
 	private Img snapshot = null;
 	// previous chart area
 	private String previousChartAreaAsString = null;
-	// previous data URL chart as png
+	// previous data URL chart as PNG
 	private String previousDataURL = null;
 	// flag if do not send any event after refresh
 	private boolean skipNextFireEvent = false;
@@ -135,7 +135,9 @@ final class SelectionHandler {
 				// based on FONT SIZE, plus margins from border
 				padding = padding + additionalPadding;
 				// sets new padding top
+				// on both nodes to be updated
 				chart.getOptions().getLayout().getPadding().setTop(padding);
+				chart.getNode().getOptions().getLayout().getPadding().setTop(padding);
 			} else {
 				// if the selection cleaner must be set on BOTTOM (other values of position are ignored)
 				// gets the padding set by chart configuration
@@ -144,7 +146,9 @@ final class SelectionHandler {
 				// based on FONT SIZE, plus margins from border
 				padding = padding + additionalPadding;
 				// sets new padding bottom
+				// on both nodes to be updated
 				chart.getOptions().getLayout().getPadding().setBottom(padding);
+				chart.getNode().getOptions().getLayout().getPadding().setBottom(padding);
 			}
 		}
 	}
