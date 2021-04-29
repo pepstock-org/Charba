@@ -117,16 +117,16 @@ Documentation
 
 All **Charba** documentation will be maintained in [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
 
-API JavaDoc is published [here](http://www.pepstock.org/Charba/3.3/index.html).
+API JavaDoc is published [here](https://www.pepstock.org/Charba/3.3/index.html).
 
 Showcase
 --------
 
-See [Charba showcase on GWT](http://www.pepstock.org/Charba-Showcase/Charba_Showcase.html) to have a look what you can do with it.
+See [Charba showcase on GWT](https://www.pepstock.org/Charba-Showcase/Charba_Showcase.html) to have a look what you can do with it.
 
 See also [Charba showcase GWT source code](https://github.com/pepstock-org/Charba-Showcase) on GitHub as starting point, if you are going to use on GWT.
 
-See [Charba showcase built by J2CL](http://www.pepstock.org/Charba-Showcase-J2CL/Charba_Showcase_J2CL.html) and based on [Google Elemental2](https://github.com/google/elemental2), to have a look what you can do with it.
+See [Charba showcase built by J2CL](https://www.pepstock.org/Charba-Showcase-J2CL/Charba_Showcase_J2CL.html) and based on [Google Elemental2](https://github.com/google/elemental2), to have a look what you can do with it.
 
 See also [Charba showcase J2CL source code](https://github.com/pepstock-org/Charba-Showcase-J2CL) on GitHub as starting point, if you are going to use on J2CL.
 
@@ -200,6 +200,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `cutoutPercentage` property from double to string in order to manage a percentage `[number]%` format in the options and configuration classes, for pie and doughnut charts.
  * remove `Event.TOUCHEND` item
  * change `padding` property to `Title` class for options and configuration in order to use `Padding` object instead of an integer.
+ * remove `AbstractChartsLifecycleListener` class. Use `ChartsLifecycleListener` interface where all methods has got the default now.
 
 #### Features
  * add `backgroundColor` and `borderColor` default options.
