@@ -75,7 +75,7 @@ final class SelectionHandler {
 	private SelectionTrack track = null;
 	// status if selected
 	private SelectionStatus status = SelectionStatus.READY;
-	// copy of chart canvas as image to apply when is drwaing in the canvas
+	// copy of chart canvas as image to apply when is drawing in the canvas
 	private Img snapshot = null;
 	// previous chart area
 	private String previousChartAreaAsString = null;
