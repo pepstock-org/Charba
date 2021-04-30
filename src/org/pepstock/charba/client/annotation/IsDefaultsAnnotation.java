@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
-import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.listeners.ClickCallback;
@@ -30,6 +29,7 @@ import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
 import org.pepstock.charba.client.callbacks.BorderDashCallback;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 
 /**
@@ -158,7 +158,7 @@ interface IsDefaultsAnnotation {
 	 * 
 	 * @return the callback called to set the display options
 	 */
-	default DisplayCallback getDisplayCallback() {
+	default DisplayCallback<AnnotationContext> getDisplayCallback() {
 		return null;
 	}
 

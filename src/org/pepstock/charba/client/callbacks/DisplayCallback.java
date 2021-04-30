@@ -13,20 +13,15 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.annotation.callbacks;
-
-import org.pepstock.charba.client.annotation.AbstractAnnotation;
-import org.pepstock.charba.client.annotation.AnnotationContext;
-import org.pepstock.charba.client.annotation.AnnotationPlugin;
-import org.pepstock.charba.client.annotation.LineLabel;
-import org.pepstock.charba.client.callbacks.Scriptable;
+package org.pepstock.charba.client.callbacks;
 
 /**
- * Callback interface of {@link AnnotationPlugin#ID} plugin to set <code>display</code> property at runtime, to {@link AbstractAnnotation} and {@link LineLabel}.
+ * Callback interface to set <code>display</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *
+ * @param <C> type of context to pass to the callback.
  */
-public interface DisplayCallback extends Scriptable<Boolean, AnnotationContext> {
+public interface DisplayCallback<C extends ChartContext> extends Scriptable<Boolean, C> {
 
 }

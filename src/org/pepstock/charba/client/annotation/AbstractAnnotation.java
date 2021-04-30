@@ -21,7 +21,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
-import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
@@ -33,6 +32,7 @@ import org.pepstock.charba.client.callbacks.BorderDashCallback;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
@@ -167,7 +167,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private final CallbackProxy<ProxyBooleanCallback> adjustScaleRangeCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
-	private static final CallbackPropertyHandler<DisplayCallback> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
+	private static final CallbackPropertyHandler<DisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
 	// callback instance to handle border color options
 	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> BORDER_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_COLOR);
 	// callback instance to handle border width options
@@ -522,7 +522,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * @return the callback called to set whether the annotation should be displayed
 	 */
 	@Override
-	public final DisplayCallback getDisplayCallback() {
+	public final DisplayCallback<AnnotationContext> getDisplayCallback() {
 		return DISPLAY_PROPERTY_HANDLER.getCallback(this, defaultValues.getDisplayCallback());
 	}
 
@@ -531,7 +531,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * 
 	 * @param displayCallback to set whether the annotation should be displayed
 	 */
-	public final void setDisplay(DisplayCallback displayCallback) {
+	public final void setDisplay(DisplayCallback<AnnotationContext> displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
 	}
 

@@ -17,7 +17,6 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
-import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
@@ -25,6 +24,7 @@ import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.CornerRadiusCallback;
+import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
@@ -226,7 +226,7 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler {
 	 * 
 	 * @return the callback called to set whether the label should be displayed
 	 */
-	default DisplayCallback getDisplayCallback() {
+	default DisplayCallback<AnnotationContext> getDisplayCallback() {
 		return null;
 	}
 

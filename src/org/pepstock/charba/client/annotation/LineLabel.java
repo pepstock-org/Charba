@@ -22,7 +22,6 @@ import java.util.List;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
-import org.pepstock.charba.client.annotation.callbacks.DisplayCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
@@ -30,6 +29,7 @@ import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.CornerRadiusCallback;
+import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
@@ -233,7 +233,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	// callback instance to handle content options
 	private static final CallbackPropertyHandler<ContentCallback> CONTENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CONTENT);
 	// callback instance to handle display options
-	private static final CallbackPropertyHandler<DisplayCallback> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
+	private static final CallbackPropertyHandler<DisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
 	// callback instance to handle rotation options
 	private static final CallbackPropertyHandler<RotationCallback<AnnotationContext>> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
 	// callback instance to handle corner radius options
@@ -916,7 +916,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 * @return the callback called to set whether the label should be displayed
 	 */
 	@Override
-	public DisplayCallback getDisplayCallback() {
+	public DisplayCallback<AnnotationContext> getDisplayCallback() {
 		return DISPLAY_PROPERTY_HANDLER.getCallback(this, defaultValues.getDisplayCallback());
 	}
 
@@ -925,7 +925,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 * 
 	 * @param displayCallback to set whether the label should be displayed
 	 */
-	public void setDisplay(DisplayCallback displayCallback) {
+	public void setDisplay(DisplayCallback<AnnotationContext> displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
 	}
 
