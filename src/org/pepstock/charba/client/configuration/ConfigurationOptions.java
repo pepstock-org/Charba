@@ -26,6 +26,7 @@ import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -850,7 +851,17 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			getConfiguration().setCallback(node, property, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
 		}
 	}
-
+	
+	/**
+	 * Creates a chart context for callback on configuration.
+	 * 
+	 * @param context native context, passed by CHART.JS
+	 * @return a chart context for callback on configuration
+	 */
+	final ChartContext createContext(NativeObject context) {
+		return new ChartContext(new ConfigurationEnvelop<>(context));
+	}
+	
 	/**
 	 * Checks and manage the canvas event listeners for title and axes click events.<br>
 	 * If the argument is <code>true</code>, it will add the event listener if is the first adding, otherwise it will remove the listener if is the last handler.

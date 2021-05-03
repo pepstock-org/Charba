@@ -291,18 +291,18 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), getBackgroundColorCallback(), CanvasObjectProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
+		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(createContext(context), getBackgroundColorCallback(), CanvasObjectProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), getBorderColorCallback(), CanvasObjectProperty.BORDER_COLOR, getDefaultBorderColorAsString()));
+		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(createContext(context), getBorderColorCallback(), CanvasObjectProperty.BORDER_COLOR, getDefaultBorderColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), borderWidthCallback, getDefaultBorderWidth()).intValue());
+		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), borderWidthCallback, getDefaultBorderWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverBackgroundColorCallbackProxy
-				.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), getHoverBackgroundColorCallback(), CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
+				.setCallback((contextFunction, context) -> invokeColorCallback(createContext(context), getHoverBackgroundColorCallback(), CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), getHoverBorderColorCallback(), CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString()));
+		this.hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(createContext(context), getHoverBorderColorCallback(), CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
+		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
 	}
 
 	/*
@@ -545,6 +545,16 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			// otherwise sets null which removes the properties from java script object
 			remove(CommonProperty.BORDER_WIDTH);
 		}
+	}
+	
+	/**
+	 * Creates a data set context for callback.
+	 * 
+	 * @param context native context, passed by CHART.JS
+	 * @return a data set context for callback
+	 */
+	final DatasetContext createContext(NativeObject context) {
+		return new DatasetContext(new DataEnvelop<>(context));
 	}
 
 	/**

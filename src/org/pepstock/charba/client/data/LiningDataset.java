@@ -278,54 +278,54 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), getPointBackgroundColorCallback(), InternalCanvasObjectProperty.POINT_BACKGROUND_COLOR,
+		this.pointBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(createContext(context), getPointBackgroundColorCallback(), InternalCanvasObjectProperty.POINT_BACKGROUND_COLOR,
 				getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), getPointBorderColorCallback(), InternalCanvasObjectProperty.POINT_BORDER_COLOR,
+		this.pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(createContext(context), getPointBorderColorCallback(), InternalCanvasObjectProperty.POINT_BORDER_COLOR,
 				getDefaultValues().getElements().getPoint().getBorderColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointBorderWidthCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getPointBorderWidthCallback(), getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getPointBorderWidthCallback(), getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), getPointHoverBackgroundColorCallback(), InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR,
+		this.pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(createContext(context), getPointHoverBackgroundColorCallback(), InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR,
 				getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), getPointHoverBorderColorCallback(), InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR,
+		this.pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> invokeColorCallback(createContext(context), getPointHoverBorderColorCallback(), InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR,
 				getDefaultValues().getElements().getPoint().getBorderColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointHoverBorderWidthCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getPointHoverBorderWidthCallback(), getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getPointHoverBorderWidthCallback(), getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getPointRadiusCallback(), getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
+		this.pointRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getPointRadiusCallback(), getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointHitRadiusCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getPointHitRadiusCallback(), getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getPointHitRadiusCallback(), getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointHoverRadiusCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getPointHoverRadiusCallback(), getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getPointHoverRadiusCallback(), getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointRotationCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getPointRotationCallback(), getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getPointRotationCallback(), getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new DatasetContext(new DataEnvelop<>(context))));
+		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new DatasetContext(new DataEnvelop<>(context)), getBorderCapStyleCallback()));
+		this.borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(createContext(context), getBorderCapStyleCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new DatasetContext(new DataEnvelop<>(context)), getBorderDashCallback()));
+		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(createContext(context), getBorderDashCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashOffsetCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getBorderDashOffsetCallback(), getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getBorderDashOffsetCallback(), getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new DatasetContext(new DataEnvelop<>(context)), getBorderJoinStyleCallback()));
+		this.borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(createContext(context), getBorderJoinStyleCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBorderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new DatasetContext(new DataEnvelop<>(context)), getHoverBorderCapStyleCallback()));
+		this.hoverBorderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(createContext(context), getHoverBorderCapStyleCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new DatasetContext(new DataEnvelop<>(context)), getHoverBorderDashCallback()));
+		this.hoverBorderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(createContext(context), getHoverBorderDashCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverBorderDashOffsetCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getHoverBorderDashOffsetCallback(), getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getHoverBorderDashOffsetCallback(), getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new DatasetContext(new DataEnvelop<>(context)), getHoverBorderJoinStyleCallback()));
+		this.hoverBorderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(createContext(context), getHoverBorderJoinStyleCallback()));
 	}
 
 	/*

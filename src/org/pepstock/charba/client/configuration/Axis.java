@@ -613,10 +613,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
-	 * Creates a scale context for callbacks on axis.
+	 * Creates a scale context for callback on axis.
 	 * 
 	 * @param context native context, passed by CHART.JS
-	 * @return a scale context for callbacks on axis
+	 * @return a scale context for callback on axis
 	 */
 	final ScaleContext createContext(NativeObject context) {
 		return new ScaleContext(this, new ConfigurationEnvelop<>(context));

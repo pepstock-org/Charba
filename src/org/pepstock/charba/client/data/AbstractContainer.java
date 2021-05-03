@@ -245,7 +245,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 			// -- SET CALLBACKS to PROXIES ---
 			// -------------------------------
 			// sets function to proxy callback in order to invoke the java interface
-			this.callbackProxy.setCallback((contextFunction, context) -> getDataset().invokeColorCallback(new DatasetContext(new DataEnvelop<>(context)), getCallback(), getProperty(), getDefaultValue()));
+			this.callbackProxy.setCallback((contextFunction, context) -> getDataset().invokeColorCallback(dataset.createContext(context), getCallback(), getProperty(), getDefaultValue()));
 		}
 
 		/**

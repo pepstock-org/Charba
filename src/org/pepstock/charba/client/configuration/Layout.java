@@ -87,7 +87,7 @@ public class Layout extends ConfigurationOptionsContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsPadding(new ChartContext(new ConfigurationEnvelop<>(context)), getPaddingCallback(), getOptions().getDefaultValues().getLayout().getPadding()).nativeObject());
+		this.paddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsPadding(getOptions().createContext(context), getPaddingCallback(), getOptions().getDefaultValues().getLayout().getPadding()).nativeObject());
 	}
 
 	/**
