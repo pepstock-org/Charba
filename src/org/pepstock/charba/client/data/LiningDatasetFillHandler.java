@@ -140,7 +140,7 @@ final class LiningDatasetFillHandler extends FillHandler {
 	 */
 	private Object onFill(DatasetContext context) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, fillCallback);
+		Object result = ScriptableUtils.getOptionValue(context, getFillCallback());
 		// checks result type
 		if (result instanceof Boolean) {
 			// is boolean

@@ -15,15 +15,13 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.items.FontItem;
-
 /**
- * Callback interface to set <code>font</code> property at runtime to scale instance.
+ * Callback interface to set <code>text</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * 
  * @param <C> type of context to pass to the callback.
  */
-public interface FontCallback<C extends ChartContext> extends Scriptable<FontItem, C> {
+public interface TextCallback<C extends ChartContext> extends Scriptable<Object, C> {
 
 }

@@ -22,8 +22,12 @@ import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.items.PaddingItem;
 
 /**
  * Sets of common methods as utilities to manage scriptable options by callback and java interfaces.
@@ -32,6 +36,8 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
  *
  */
 public final class ScriptableUtils {
+	
+	private static final PaddingItem DEFAULT_PADDING_FOR_CALLBACK = new PaddingItem(0);
 
 	/**
 	 * To avoid any instantiation
@@ -70,6 +76,35 @@ public final class ScriptableUtils {
 	// ------------------------------------
 	// --- OPTIONS callbacks management
 	// ------------------------------------
+	
+	/**
+	 * Returns the padding item value as value of the property by invoking a callback which is typed to a paddng item.
+	 * 
+	 * @param context native object as context
+	 * @param callback padding callback to execute
+	 * @param defaultValue default padding if the callback returns an inconsistent value
+	 * @param <C> type of context to pass to the callback
+	 * @return a value of property related to the padding value
+	 */
+	public static <C extends ChartContext> PaddingItem getOptionValueAsPadding(C context, Scriptable<PaddingItem, C> callback, IsDefaultPadding defaultValue) {
+		return ScriptableUtils.getOptionValue(context, callback, defaultValue != null ? defaultValue.create() : DEFAULT_PADDING_FOR_CALLBACK.create());
+	}
+
+	/**
+	 * Returns the font item value as value of the property by invoking a callback which is typed to a font item.
+	 * 
+	 * @param context native object as context
+	 * @param callback font callback to execute
+	 * @param defaultValue default font if the callback returns an inconsistent value
+	 * @param <C> type of context to pass to the callback
+	 * @return a value of property related to the font value
+	 */
+	public static <C extends ChartContext> FontItem getOptionValueAsFont(C context, Scriptable<FontItem, C> callback, IsDefaultFont defaultValue) {
+		// checks if padding is consistent
+		Checker.checkIfValid(defaultValue, "Default font item");
+		// gets value
+		return ScriptableUtils.getOptionValue(context, callback, defaultValue.create());
+	}
 
 	/**
 	 * Returns the enumeration value as value of the property by invoking a callback which is typed to a key.

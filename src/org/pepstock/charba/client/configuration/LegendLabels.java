@@ -179,7 +179,9 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		filterCallbackProxy.setCallback((context, item, nativeChart) -> {
+		this.filterCallbackProxy.setCallback((context, item, nativeChart) -> {
+			// gets callback
+			LegendFilterCallback filterCallback = getFilterCallback();
 			// checks if callback is consistent
 			if (filterCallback != null) {
 				// calls callback
@@ -187,7 +189,9 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 			}
 			return true;
 		});
-		itemSortCallbackProxy.setCallback((context, item1, item2, nativeChart) -> {
+		this.itemSortCallbackProxy.setCallback((context, item1, item2, nativeChart) -> {
+			// gets callback
+			LegendItemSortCallback itemSortCallback = getItemSortCallback();
 			// checks if callback is consistent
 			if (itemSortCallback != null) {
 				// calls callback
@@ -196,7 +200,9 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 			// default is 0 - equals
 			return 0;
 		});
-		labelsCallbackProxy.setCallback((context, nativeChart) -> {
+		this.labelsCallbackProxy.setCallback((context, nativeChart) -> {
+			// gets callback
+			LegendLabelsCallback labelsCallback = getLabelsCallback();
 			// checks if callback is consistent
 			if (labelsCallback != null) {
 				// calls callback

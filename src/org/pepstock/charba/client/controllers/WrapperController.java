@@ -253,7 +253,7 @@ final class WrapperController extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		initializeCallbackProxy.setCallback(context -> {
+		this.initializeCallbackProxy.setCallback(context -> {
 			// checks if context and native chart are consistent
 			// checks if chart is consistent
 			if (context != null && context.getNativeChart() != null && IsChart.isValid(context.getChart())) {
@@ -262,19 +262,19 @@ final class WrapperController extends NativeObjectContainer {
 			}
 		});
 		// invoke user method implementation
-		addElementsCallbackProxy.setCallback(context -> onAddElements(context, context.getChart()));
+		this.addElementsCallbackProxy.setCallback(context -> onAddElements(context, context.getChart()));
 		// invoke user method implementation
-		drawCallbackProxy.setCallback(context -> onDraw(context, context.getChart()));
+		this.drawCallbackProxy.setCallback(context -> onDraw(context, context.getChart()));
 		// invoke user method implementation
-		removeHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onRemoveHoverStyle(context, context.getChart(), element, datasetIndex, index));
+		this.removeHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onRemoveHoverStyle(context, context.getChart(), element, datasetIndex, index));
 		// invoke user method implementation
-		setHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onSetHoverStyle(context, context.getChart(), element, datasetIndex, index));
+		this.setHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onSetHoverStyle(context, context.getChart(), element, datasetIndex, index));
 		// invoke user method implementation
-		updateCallbackProxy.setCallback((context, mode) -> onUpdate(context, context.getChart(), mode));
+		this.updateCallbackProxy.setCallback((context, mode) -> onUpdate(context, context.getChart(), mode));
 		// invoke user method implementation
-		linkScalesCallbackProxy.setCallback(context -> onLinkScales(context, context.getChart()));
+		this.linkScalesCallbackProxy.setCallback(context -> onLinkScales(context, context.getChart()));
 		// invoke user method implementation
-		buildOrUpdateElements.setCallback((context, resetNewElements) -> onBuildOrUpdateElements(context, context.getChart(), resetNewElements));
+		this.buildOrUpdateElements.setCallback((context, resetNewElements) -> onBuildOrUpdateElements(context, context.getChart(), resetNewElements));
 		// adds all proxy functions to call the functions to the native object
 		setValue(Property.INITIALIZE, initializeCallbackProxy.getProxy());
 		setValue(Property.ADD_ELEMENTS, addElementsCallbackProxy.getProxy());

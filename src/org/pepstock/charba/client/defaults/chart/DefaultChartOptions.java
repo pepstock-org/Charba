@@ -15,9 +15,11 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
+import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
@@ -36,10 +38,10 @@ public final class DefaultChartOptions extends AbstractDefaultChartOptions imple
 	/**
 	 * Creates the default by an extended options instance, which represents the whole options of a chart.
 	 * 
-	 * @param chartOptions whole chart options instance.
+	 * @param envelop contains the whole chart options instance.
 	 */
-	public DefaultChartOptions(ExtendedOptions chartOptions) {
-		this(chartOptions, chartOptions.getChart().getType());
+	public DefaultChartOptions(ChartEnvelop<ExtendedOptions> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent(), IsEnvelop.checkAndGetIfValid(envelop).getContent().getChart().getType());
 	}
 
 	/**

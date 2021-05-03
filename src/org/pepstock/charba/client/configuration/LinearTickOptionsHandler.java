@@ -18,7 +18,6 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.callbacks.CountCallback;
 import org.pepstock.charba.client.callbacks.MaxTicksLimitCallback;
 import org.pepstock.charba.client.callbacks.PrecisionCallback;
-import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -103,13 +102,13 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.countCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), countCallback, getAxis().getDefaultValues().getTicks().getCount()).intValue());
+		this.countCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getCountCallback(), getAxis().getDefaultValues().getTicks().getCount()).intValue());
 		this.maxTicksLimitCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), maxTicksLimitCallback, getAxis().getDefaultValues().getTicks().getMaxTicksLimit()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getMaxTicksLimitCallback(), getAxis().getDefaultValues().getTicks().getMaxTicksLimit()).intValue());
 		this.precisionCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), precisionCallback, getAxis().getDefaultValues().getTicks().getPrecision()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getPrecisionCallback(), getAxis().getDefaultValues().getTicks().getPrecision()).intValue());
 		this.stepSizeCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), stepSizeCallback, getAxis().getDefaultValues().getTicks().getStepSize()).doubleValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getStepSizeCallback(), getAxis().getDefaultValues().getTicks().getStepSize()).doubleValue());
 	}
 
 	/**

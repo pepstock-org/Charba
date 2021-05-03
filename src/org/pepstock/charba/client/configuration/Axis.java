@@ -26,10 +26,7 @@ import org.pepstock.charba.client.callbacks.AxisFitCallback;
 import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
-import org.pepstock.charba.client.callbacks.FontCallback;
-import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -43,11 +40,7 @@ import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.AxisItem;
-import org.pepstock.charba.client.items.FontItem;
-import org.pepstock.charba.client.items.PaddingItem;
 import org.pepstock.charba.client.options.ExtendedScale;
-import org.pepstock.charba.client.options.IsFont;
-import org.pepstock.charba.client.options.IsPadding;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.ScaleTitle;
@@ -63,8 +56,6 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
-
-	private static final PaddingItem DEFAULT_PADDING_FOR_CALLBACK = new PaddingItem(0);
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -211,20 +202,20 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		beforeUpdateCallbackProxy.setCallback((context, item) -> onBeforeUpdateCallback(item));
-		beforeSetDimensionsCallbackProxy.setCallback((context, item) -> onBeforeSetDimensionsCallback(item));
-		afterSetDimensionsCallbackProxy.setCallback((context, item) -> onAfterSetDimensionsCallback(item));
-		beforeDataLimitsCallbackProxy.setCallback((context, item) -> onBeforeDataLimitsCallback(item));
-		afterDataLimitsCallbackProxy.setCallback((context, item) -> onAfterDataLimitsCallback(item));
-		beforeTickToLabelConversionCallbackProxy.setCallback((context, item) -> onBeforeTickToLabelConversionCallback(item));
-		afterTickToLabelConversionCallbackProxy.setCallback((context, item) -> onAfterTickToLabelConversionCallback(item));
-		beforeCalculateTickRotationCallbackProxy.setCallback((context, item) -> onBeforeCalculateTickRotationCallback(item));
-		afterCalculateTickRotationCallbackProxy.setCallback((context, item) -> onAfterCalculateTickRotationCallback(item));
-		beforeFitCallbackProxy.setCallback((context, item) -> onBeforeFitCallback(item));
-		afterFitCallbackProxy.setCallback((context, item) -> onAfterFitCallback(item));
-		afterUpdateCallbackProxy.setCallback((context, item) -> onAfterUpdateCallback(item));
-		beforeBuildTicksCallbackProxy.setCallback((context, item) -> onBeforeBuildTicksCallback(item));
-		afterBuildTicksCallbackProxy.setCallback((context, item) -> onAfterBuildTicksCallback(item));
+		this.beforeUpdateCallbackProxy.setCallback((context, item) -> onBeforeUpdateCallback(item));
+		this.beforeSetDimensionsCallbackProxy.setCallback((context, item) -> onBeforeSetDimensionsCallback(item));
+		this.afterSetDimensionsCallbackProxy.setCallback((context, item) -> onAfterSetDimensionsCallback(item));
+		this.beforeDataLimitsCallbackProxy.setCallback((context, item) -> onBeforeDataLimitsCallback(item));
+		this.afterDataLimitsCallbackProxy.setCallback((context, item) -> onAfterDataLimitsCallback(item));
+		this.beforeTickToLabelConversionCallbackProxy.setCallback((context, item) -> onBeforeTickToLabelConversionCallback(item));
+		this.afterTickToLabelConversionCallbackProxy.setCallback((context, item) -> onAfterTickToLabelConversionCallback(item));
+		this.beforeCalculateTickRotationCallbackProxy.setCallback((context, item) -> onBeforeCalculateTickRotationCallback(item));
+		this.afterCalculateTickRotationCallbackProxy.setCallback((context, item) -> onAfterCalculateTickRotationCallback(item));
+		this.beforeFitCallbackProxy.setCallback((context, item) -> onBeforeFitCallback(item));
+		this.afterFitCallbackProxy.setCallback((context, item) -> onAfterFitCallback(item));
+		this.afterUpdateCallbackProxy.setCallback((context, item) -> onAfterUpdateCallback(item));
+		this.beforeBuildTicksCallbackProxy.setCallback((context, item) -> onBeforeBuildTicksCallback(item));
+		this.afterBuildTicksCallbackProxy.setCallback((context, item) -> onAfterBuildTicksCallback(item));
 	}
 
 	/**
@@ -591,54 +582,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
-	 * Returns a native object as font when the callback has been activated.
-	 * 
-	 * @param context native object as context
-	 * @param callback callback to invoke
-	 * @param font font instance
-	 * @return a native object as font
-	 */
-	final NativeObject onFont(ScaleContext context, FontCallback<ScaleContext> callback, IsFont font) {
-		// gets value
-		FontItem result = ScriptableUtils.getOptionValue(context, callback);
-		// checks if result is consistent
-		if (result != null) {
-			// returns result
-			return result.nativeObject();
-		} else if (font != null) {
-			// checks if provider is consistent
-			return font.create().nativeObject();
-		}
-		// if here, provider is not consistent
-		// then returns the defaults one
-		return Defaults.get().getGlobal().getFont().create().nativeObject();
-	}
-
-	/**
-	 * Returns a native object as padding when the callback has been activated.
-	 * 
-	 * @param context native object as context
-	 * @param callback callback to invoke
-	 * @param padding padding instance
-	 * @return a native object as font
-	 */
-	final NativeObject onPadding(ScaleContext context, PaddingCallback<ScaleContext> callback, IsPadding padding) {
-		// gets value
-		PaddingItem result = ScriptableUtils.getOptionValue(context, callback);
-		// checks if result is consistent
-		if (result != null) {
-			// returns result
-			return result.nativeObject();
-		} else if (padding != null) {
-			// checks if provider is consistent
-			return padding.create().nativeObject();
-		}
-		// if here, provider is not consistent
-		// then returns a zero padding
-		return DEFAULT_PADDING_FOR_CALLBACK.nativeObject();
-	}
-
-	/**
 	 * Sets the callbacks that every element of axis can activate.
 	 * 
 	 * @param node element node instance
@@ -670,11 +613,23 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
+	 * Creates a scale context for callbacks on axis.
+	 * 
+	 * @param context native context, passed by CHART.JS
+	 * @return a scale context for callbacks on axis
+	 */
+	final ScaleContext createContext(NativeObject context) {
+		return new ScaleContext(this, new ConfigurationEnvelop<>(context));
+	}
+
+	/**
 	 * Invokes UPDATE axis callback.
 	 * 
 	 * @param item axis item instance
 	 */
 	private void onBeforeUpdateCallback(NativeObject item) {
+		// gets callback
+		AxisUpdateCallback axisUpdateCallback = getAxisUpdateCallback();
 		// if user callback is consistent
 		if (axisUpdateCallback != null) {
 			// then it is called
@@ -688,6 +643,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onBeforeSetDimensionsCallback(NativeObject item) {
+		// gets callback
+		AxisDimensionsCallback axisDimensionsCallback = getAxisDimensionsCallback();
 		// if user callback is consistent
 		if (axisDimensionsCallback != null) {
 			// then it is called
@@ -701,6 +658,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onAfterSetDimensionsCallback(NativeObject item) {
+		// gets callback
+		AxisDimensionsCallback axisDimensionsCallback = getAxisDimensionsCallback();
 		// if user callback is consistent
 		if (axisDimensionsCallback != null) {
 			// then it is called
@@ -714,6 +673,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onBeforeDataLimitsCallback(NativeObject item) {
+		// gets callback
+		AxisDataLimitsCallback axisDataLimitsCallback = getAxisDataLimitsCallback();
 		// if user callback is consistent
 		if (axisDataLimitsCallback != null) {
 			// then it is called
@@ -727,6 +688,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onAfterDataLimitsCallback(NativeObject item) {
+		// gets callback
+		AxisDataLimitsCallback axisDataLimitsCallback = getAxisDataLimitsCallback();
 		// if user callback is consistent
 		if (axisDataLimitsCallback != null) {
 			// then it is called
@@ -740,6 +703,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onBeforeTickToLabelConversionCallback(NativeObject item) {
+		// gets callback
+		AxisTickToLabelConversionCallback axisTickToLabelConversionCallback = getAxisTickToLabelConversionCallback();
 		// if user callback is consistent
 		if (axisTickToLabelConversionCallback != null) {
 			// then it is called
@@ -753,6 +718,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onAfterTickToLabelConversionCallback(NativeObject item) {
+		// gets callback
+		AxisTickToLabelConversionCallback axisTickToLabelConversionCallback = getAxisTickToLabelConversionCallback();
 		// if user callback is consistent
 		if (axisTickToLabelConversionCallback != null) {
 			// then it is called
@@ -766,6 +733,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onBeforeCalculateTickRotationCallback(NativeObject item) {
+		// gets callback
+		AxisCalculateTickRotationCallback axisCalculateTickRotationCallback = getAxisCalculateTickRotationCallback();
 		// if user callback is consistent
 		if (axisCalculateTickRotationCallback != null) {
 			// then it is called
@@ -779,6 +748,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onAfterCalculateTickRotationCallback(NativeObject item) {
+		// gets callback
+		AxisCalculateTickRotationCallback axisCalculateTickRotationCallback = getAxisCalculateTickRotationCallback();
 		// if user callback is consistent
 		if (axisCalculateTickRotationCallback != null) {
 			// then it is called
@@ -792,6 +763,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onBeforeFitCallback(NativeObject item) {
+		// gets callback
+		AxisFitCallback axisFitCallback = getAxisFitCallback();
 		// if user callback is consistent
 		if (axisFitCallback != null) {
 			// then it is called
@@ -805,6 +778,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onAfterFitCallback(NativeObject item) {
+		// gets callback
+		AxisFitCallback axisFitCallback = getAxisFitCallback();
 		// if user callback is consistent
 		if (axisFitCallback != null) {
 			// then it is called
@@ -818,6 +793,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onAfterUpdateCallback(NativeObject item) {
+		// gets callback
+		AxisUpdateCallback axisUpdateCallback = getAxisUpdateCallback();
 		// if user callback is consistent
 		if (axisUpdateCallback != null) {
 			// then it is called
@@ -831,10 +808,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onBeforeBuildTicksCallback(NativeObject item) {
+		// gets callback
+		AxisBuildTicksCallback axisBuildTicksCallback = getAxisBuildTicksCallback();
 		// if user callback is consistent
-		if (getAxisBuildTicksCallback() != null) {
+		if (axisBuildTicksCallback != null) {
 			// then it is called
-			getAxisBuildTicksCallback().onBeforeBuildTicks(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			axisBuildTicksCallback.onBeforeBuildTicks(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -844,10 +823,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param item axis item instance
 	 */
 	private void onAfterBuildTicksCallback(NativeObject item) {
+		// gets callback
+		AxisBuildTicksCallback axisBuildTicksCallback = getAxisBuildTicksCallback();
 		// if user callback is consistent
-		if (getAxisBuildTicksCallback() != null) {
+		if (axisBuildTicksCallback != null) {
 			// then it is called
-			getAxisBuildTicksCallback().onAfterBuildTicks(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			axisBuildTicksCallback.onAfterBuildTicks(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 

@@ -166,20 +166,20 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	protected BubbleDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
 		// sets new order handler
-		orderHandler = new OrderHandler(getNativeObject());
+		this.orderHandler = new OrderHandler(getNativeObject());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		radiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), radiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
+		this.radiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getRadiusCallback(), getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		hitRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), hitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
+		this.hitRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getHitRadiusCallback(), getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		hoverRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), hoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
+		this.hoverRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getHoverRadiusCallback(), getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), rotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
+		this.rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getRotationCallback(), getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new DatasetContext(new DataEnvelop<>(context))));
+		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new DatasetContext(new DataEnvelop<>(context))));
 	}
 
 	/*
@@ -551,7 +551,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 */
 	private String onPointStyle(DatasetContext context) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
+		Object result = ScriptableUtils.getOptionValue(context, getPointStyleCallback());
 		// checks result
 		if (result instanceof PointStyle) {
 			// is point style instance

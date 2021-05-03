@@ -328,7 +328,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// sets function to proxy callback in order to invoke the java interface
 		this.textAlignCallbackProxy.setCallback((contextFunction, context) -> onTextAlign(new AnnotationContext(this.parent, context), defaultValues.getTextAlign()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new AnnotationContext(this.parent, context)));
+		this.fontCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsFont(new AnnotationContext(this.parent, context), getFontCallback(), getFont()).nativeObject());
 	}
 
 	/*

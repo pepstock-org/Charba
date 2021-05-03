@@ -22,8 +22,6 @@ import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.items.PaddingItem;
 
 /**
  * The layout configuration is needed to set the padding.
@@ -70,7 +68,7 @@ public class Layout extends ConfigurationOptionsContainer {
 	// callback proxy to invoke the padding function
 	private final CallbackProxy<ProxyNativeObjectCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// instance of easing callback
+	// instance of padding callback
 	private PaddingCallback<ChartContext> paddingCallback = null;
 
 	// instance of padding
@@ -89,7 +87,7 @@ public class Layout extends ConfigurationOptionsContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy.setCallback((contextFunction, context) -> onPadding(new ChartContext(new ConfigurationEnvelop<>(context))));
+		this.paddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsPadding(new ChartContext(new ConfigurationEnvelop<>(context)), getPaddingCallback(), getOptions().getDefaultValues().getLayout().getPadding()).nativeObject());
 	}
 
 	/**
@@ -121,24 +119,6 @@ public class Layout extends ConfigurationOptionsContainer {
 		this.paddingCallback = paddingCallback;
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getLayout(), Property.PADDING, paddingCallback, paddingCallbackProxy);
-	}
-
-	/**
-	 * Returns a native object as padding when the callback has been activated.
-	 * 
-	 * @param context native object as context
-	 * @return a native object as padding
-	 */
-	private NativeObject onPadding(ChartContext context) {
-		// gets value
-		PaddingItem result = ScriptableUtils.getOptionValue(context, getPaddingCallback());
-		// checks if result is consistent
-		if (result != null) {
-			// returns result
-			return result.nativeObject();
-		}
-		// default result
-		return getPadding().create(getConfiguration().getLayout().getPadding()).nativeObject();
 	}
 
 }

@@ -135,21 +135,21 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> getAxis().onFont(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), fontCallback, getAxis().getScale().getTicks().getFont()));
+		this.fontCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsFont(getAxis().createContext(context), getFontCallback(), getAxis().getDefaultValues().getTicks().getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.backdropPaddingCallbackProxy.setCallback((contextFunction, context) -> getAxis().onPadding(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropPaddingCallback, getAxis().getScale().getTicks().getBackdropPadding()));
+		this.backdropPaddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsPadding(getAxis().createContext(context), getBackdropPaddingCallback(), getAxis().getDefaultValues().getTicks().getBackdropPadding()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), colorCallback));
+		this.colorCallbackProxy.setCallback((contextFunction, context) -> onColor(getAxis().createContext(context), getColorCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), textStrokeColorCallback));
+		this.textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> onColor(getAxis().createContext(context), getTextStrokeColorCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.textStrokeWidthCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), textStrokeWidthCallback, getAxis().getDefaultValues().getTicks().getTextStrokeWidth()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getTextStrokeWidthCallback(), getAxis().getDefaultValues().getTicks().getTextStrokeWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.backdropColorCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropColorCallback, getConfiguration().getBackdropColorAsString(), false));
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis().createContext(context), getBackdropColorCallback(), getAxis().getDefaultValues().getTicks().getBackdropColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.showLabelBackdropCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), showLabelBackdropCallback, getConfiguration().isShowLabelBackdrop()));
+		this.showLabelBackdropCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getShowLabelBackdropCallback() , getAxis().getDefaultValues().getTicks().isShowLabelBackdrop()));
 	}
 
 	/**
@@ -550,7 +550,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	 * 
 	 * @return the show label backdrop callback instance
 	 */
-	public ShowLabelBackdropCallback getShowLabelBackdrop() {
+	public ShowLabelBackdropCallback getShowLabelBackdropCallback() {
 		return showLabelBackdropCallback;
 	}
 

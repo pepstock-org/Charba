@@ -99,14 +99,14 @@ public class Grid extends AbstractScaleLines {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		tickColorCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickColorCallback, getAxis().getDefaultValues().getGrid().getTickColorAsString(), false));
+		this.tickColorCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getAxis().createContext(context), getTickColorCallback(), getAxis().getDefaultValues().getGrid().getTickColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		tickWidthCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickWidthCallback, getAxis().getDefaultValues().getGrid().getTickWidth()).intValue());
+		this.tickWidthCallbackProxy
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getTickWidthCallback(), getAxis().getDefaultValues().getGrid().getTickWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		tickBorderDashOffsetCallbackProxy.setCallback(
-				(contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), tickBorderDashOffsetCallback, getAxis().getDefaultValues().getGrid().getTickBorderDashOffset()).doubleValue());
+		this.tickBorderDashOffsetCallbackProxy.setCallback(
+				(contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getTickBorderDashOffsetCallback(), getAxis().getDefaultValues().getGrid().getTickBorderDashOffset()).doubleValue());
 	}
 
 	/*

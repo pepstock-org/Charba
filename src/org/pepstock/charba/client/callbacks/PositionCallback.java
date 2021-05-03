@@ -15,15 +15,15 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.enums.Position;
 
 /**
- * Callback interface to set <code>font</code> property at runtime to scale instance.
+ * Callback interface to set <code>position</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * 
  * @param <C> type of context to pass to the callback.
  */
-public interface FontCallback<C extends ChartContext> extends Scriptable<FontItem, C> {
+public interface PositionCallback<C extends ChartContext> extends Scriptable<Position, C> {
 
 }

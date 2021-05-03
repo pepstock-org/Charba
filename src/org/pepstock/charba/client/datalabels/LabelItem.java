@@ -22,7 +22,6 @@ import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
@@ -55,8 +54,6 @@ import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.DataItem;
-import org.pepstock.charba.client.items.FontItem;
-import org.pepstock.charba.client.items.PaddingItem;
 import org.pepstock.charba.client.options.IsScriptableFontProvider;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
@@ -324,9 +321,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// sets function to proxy callback in order to invoke the java interface
 		this.textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), getTextShadowColorCallback(), getTextShadowColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new DataLabelsContext(this, context), getFontCallback()));
+		this.fontCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsFont(new DataLabelsContext(this, context), getFontCallback(), getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy.setCallback((contextFunction, context) -> onPadding(new DataLabelsContext(this, context), getPaddingCallback()));
+		this.paddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsPadding(new DataLabelsContext(this, context), getPaddingCallback(), getPadding()).nativeObject());
 	}
 
 	/*
@@ -1382,44 +1379,6 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 			// returns boolean
 			return Display.TRUE.equals(result);
 		}
-	}
-
-	/**
-	 * Returns a native object as padding when the callback has been activated.
-	 * 
-	 * @param context native object as context
-	 * @param callback callback to invoke
-	 * @return a native object as padding
-	 */
-	private NativeObject onPadding(DataLabelsContext context, Scriptable<PaddingItem, DataLabelsContext> callback) {
-		// gets value
-		PaddingItem result = ScriptableUtils.getOptionValue(context, callback);
-		// checks if result is consistent
-		if (result != null) {
-			// returns result
-			return result.nativeObject();
-		}
-		// default result
-		return getPadding().create(getDefaultsOptions().getPadding()).nativeObject();
-	}
-
-	/**
-	 * Returns a native object as font when the callback has been activated.
-	 * 
-	 * @param context native object as context
-	 * @param callback callback to invoke
-	 * @return a native object as font
-	 */
-	private NativeObject onFont(DataLabelsContext context, Scriptable<FontItem, DataLabelsContext> callback) {
-		// gets value
-		FontItem result = ScriptableUtils.getOptionValue(context, callback);
-		// checks if result is consistent
-		if (result != null) {
-			// returns result
-			return result.nativeObject();
-		}
-		// default result
-		return getFont().create().nativeObject();
 	}
 
 }

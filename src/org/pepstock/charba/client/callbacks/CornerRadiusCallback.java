@@ -19,6 +19,8 @@ package org.pepstock.charba.client.callbacks;
  * Callback interface to set <code>cornerRadius</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
+ * 
+ * @param <C> type of context to pass to the callback.
  *
  */
 public interface CornerRadiusCallback<C extends ChartContext> extends Scriptable<Integer, C> {

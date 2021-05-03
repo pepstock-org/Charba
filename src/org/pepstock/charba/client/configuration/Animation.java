@@ -184,13 +184,13 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 			}
 		});
 		// sets function to proxy callback in order to invoke the java interface
-		this.durationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), durationCallback, Defaults.get().getGlobal().getAnimation().getDuration()).intValue());
+		this.durationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), getDurationCallback(), Defaults.get().getGlobal().getAnimation().getDuration()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.delayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), delayCallback, Defaults.get().getGlobal().getAnimation().getDelay()).intValue());
+		this.delayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), getDelayCallback(), Defaults.get().getGlobal().getAnimation().getDelay()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.loopCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), loopCallback, Defaults.get().getGlobal().getAnimation().isLoop()));
+		this.loopCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), getLoopCallback(), Defaults.get().getGlobal().getAnimation().isLoop()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.easingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), easingCallback, Defaults.get().getGlobal().getAnimation().getEasing()).value());
+		this.easingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), getEasingCallback(), Defaults.get().getGlobal().getAnimation().getEasing()).value());
 	}
 
 	/**
@@ -324,6 +324,10 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	public boolean isLoop() {
 		return checkAndGet().isLoop();
 	}
+	
+	// -------------------
+	// CALLBACKS
+	// -------------------
 
 	/**
 	 * Returns the callback to set the number of milliseconds an animation takes.

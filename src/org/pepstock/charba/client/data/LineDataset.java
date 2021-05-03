@@ -154,7 +154,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		cubicInterpolationModeCallbackProxy.setCallback((contextFunction, context) -> onCubicInterpolationMode(new DatasetContext(new DataEnvelop<>(context))));
+		this.cubicInterpolationModeCallbackProxy.setCallback((contextFunction, context) -> onCubicInterpolationMode(new DatasetContext(new DataEnvelop<>(context))));
 	}
 
 	/**
@@ -447,7 +447,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	private String onCubicInterpolationMode(DatasetContext context) {
 		// gets value
-		CubicInterpolationMode result = ScriptableUtils.getOptionValue(context, cubicInterpolationModeCallback);
+		CubicInterpolationMode result = ScriptableUtils.getOptionValue(context, getCubicInterpolationModeCallback());
 		// checks result
 		if (result != null) {
 			return result.value();

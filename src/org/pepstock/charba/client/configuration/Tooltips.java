@@ -121,14 +121,14 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	// ---------------------------
 	// -- USERS CALLBACKS ---
 	// ---------------------------
-	// user callbacks implementation for external tooltip
+	// user callback implementation for external tooltip
 	private TooltipExternalCallback externalCallback = null;
-	// user callbacks implementation for item sort tooltip
+	// user callback implementation for item sort tooltip
 	private TooltipItemSortCallback itemSortCallback = null;
-	// user callbacks implementation for filtering tooltip items
+	// user callback implementation for filtering tooltip items
 	private TooltipFilterCallback filterCallback = null;
 
-	// callbacks sub element of tooltip
+	// callback sub element of tooltip
 	private final TooltipsCallbacks callbacks;
 	// title font instance
 	private final Font titleFont;

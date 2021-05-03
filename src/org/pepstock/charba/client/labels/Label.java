@@ -35,7 +35,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
@@ -324,7 +323,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		this.renderCallbackProxy.setCallback((contextFunction, context) -> onRender(new LabelsContext(this, context)));
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> onFont(new LabelsContext(this, context)));
+		this.fontCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsFont(new LabelsContext(this, context), getFontCallback(), getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
 		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(this, context), getColorCallback(), getColorAsString()));
 	}
@@ -796,29 +795,6 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		}
 		// default value is percentage
 		return String.valueOf(context.getPercentage());
-	}
-
-	/**
-	 * Invokes the FONT callback.
-	 * 
-	 * @param context native object with callback context
-	 * @return the font instance
-	 */
-	private NativeObject onFont(LabelsContext context) {
-		// gets callback
-		FontCallback<LabelsContext> fontCallback = getFontCallback();
-		// checks if the context and callback are consistent
-		if (ScriptableUtils.isContextConsistent(context) && fontCallback != null) {
-			// calls callback
-			FontItem value = fontCallback.invoke(context);
-			// checks result
-			if (value != null) {
-				return value.nativeObject();
-			}
-		}
-		// defaults returns null
-		// and plugin will apply the default chart font
-		return getFont().create().nativeObject();
 	}
 
 }

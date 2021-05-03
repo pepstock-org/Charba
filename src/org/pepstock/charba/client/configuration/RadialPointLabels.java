@@ -150,6 +150,8 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		this.pointLabelCallbackProxy.setCallback((context, item, index) -> {
+			// gets callback
+			PointLabelCallback callback = getCallback();
 			// checks if callback is consistent
 			if (callback != null) {
 				// invokes callback
@@ -159,14 +161,14 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 			return item;
 		});
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> getAxis().onFont(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), fontCallback, getAxis().getScale().getPointLabels().getFont()));
+		this.fontCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsFont(getAxis().createContext(context), getFontCallback(), getAxis().getDefaultValues().getPointLabels().getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), colorCallback, getAxis().getDefaultValues().getPointLabels().getColorAsString()));
+		this.colorCallbackProxy.setCallback((contextFunction, context) -> onColor(getAxis().createContext(context), getColorCallback(), getAxis().getDefaultValues().getPointLabels().getColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.backdropColorCallbackProxy.setCallback((contextFunction, context) -> onColor(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), backdropColorCallback, getAxis().getDefaultValues().getPointLabels().getBackdropColorAsString()));
+		this.backdropColorCallbackProxy.setCallback((contextFunction, context) -> onColor(getAxis().createContext(context), getBackdropColorCallback(), getAxis().getDefaultValues().getPointLabels().getBackdropColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.paddingCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), new ConfigurationEnvelop<>(context)), paddingCallback, getAxis().getDefaultValues().getPointLabels().getPadding()).intValue());
+				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getPaddingCallback(), getAxis().getDefaultValues().getPointLabels().getPadding()).intValue());
 	}
 
 	/**

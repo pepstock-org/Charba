@@ -37,8 +37,8 @@ public final class Title extends AbstractDefaultPluginElement<IsDefaultTitle> im
 	 */
 	private enum Property implements Key
 	{
-		PADDING("padding"),
 		FULL_SIZE("fullSize"),
+		PADDING("padding"),
 		TEXT("text");
 
 		// name value of property

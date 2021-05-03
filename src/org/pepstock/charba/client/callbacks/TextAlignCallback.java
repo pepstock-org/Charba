@@ -18,10 +18,11 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.enums.TextAlign;
 
 /**
- * Callback interface to set <code>rotation</code> or <code>textAlign</code> property at runtime
+ * Callback interface to set <code>textAlign</code> property at runtime
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * 
+ * @param <C> type of context to pass to the callback.
  */
 public interface TextAlignCallback<C extends ChartContext> extends Scriptable<TextAlign, C> {
 

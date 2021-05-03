@@ -33,7 +33,6 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallb
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.SegmentContext;
 import org.pepstock.charba.client.callbacks.WidthCallback;
-import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -42,8 +41,6 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
  * The segment configuration for {@link LineOptions}.<br>
@@ -140,19 +137,19 @@ public class Segment extends ConfigurationOptionsContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> onColor(new BaseContext(getChart(), context), backgroundColorCallback, getOptions().getElements().getLine().getBackgroundColorAsString(), true));
+		this.backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getSegmentContext(context), getBackgroundColorCallback(), getOptions().getDefaultValues().getElements().getLine().getBackgroundColorAsString(), true));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> onColor(new BaseContext(getChart(), context), borderColorCallback, getOptions().getElements().getLine().getBorderColorAsString(), false));
+		this.borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getSegmentContext(context), getBorderColorCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> onBorderWidth(new BaseContext(getChart(), context)));
+		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getSegmentContext(context), getBorderWidthCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(new BaseContext(getChart(), context)));
+		this.borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getSegmentContext(context), getBorderCapStyleCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderCapStyle()).value());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(new BaseContext(getChart(), context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> onBorderDashOffset(new BaseContext(getChart(), context)));
+		this.borderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getSegmentContext(context), getBorderDashOffsetCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(new BaseContext(getChart(), context)));
+		this.borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getSegmentContext(context), getBorderJoinStyleCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderJoinStyle()).value());
 	}
 
 	/**
@@ -307,64 +304,11 @@ public class Segment extends ConfigurationOptionsContainer {
 	// callback invocation
 	// -------------------------------
 
-	/**
-	 * Returns a native object as padding when the callback has been activated.
-	 * 
-	 * @param context native object as context
-	 * @return a native object as padding
-	 */
-	private int onBorderWidth(BaseContext context) {
-		return ScriptableUtils.getOptionValue(new SegmentContext(new ConfigurationEnvelop<>(context.nativeObject())), borderWidthCallback, getOptions().getElements().getLine().getBorderWidth()).intValue();
+	private SegmentContext getSegmentContext(NativeObject context) {
+		BaseContext baseContext = new BaseContext(getChart(), context);
+		return new SegmentContext(new ConfigurationEnvelop<>(baseContext.nativeObject()));
 	}
-
-	/**
-	 * Returns a color value of property by a callback, checking all different types of object which can be used as value of the property in color ones.
-	 * 
-	 * @param context scriptable context
-	 * @param callback color callback instance to invoke
-	 * @param defaultValue default color value to apply if callback not consistent
-	 * @param hasPattern if <code>true</code> the result could be also a {@link Pattern}
-	 * @return a value of property as color
-	 */
-	protected final Object onColor(BaseContext context, ColorCallback<SegmentContext> callback, String defaultValue, boolean hasPattern) {
-		// PAY ATTENTION: Gradients are not managed due to Segment context where dataIndex and datasetIndex are missing
-		return ScriptableUtils.getOptionValueAsColor(new SegmentContext(new ConfigurationEnvelop<>(context.nativeObject())), callback, defaultValue, hasPattern);
-	}
-
-	/**
-	 * Returns a {@link CapStyle} when the callback has been activated.
-	 * 
-	 * @param context native object as context.
-	 * @return a object property value, as {@link CapStyle}
-	 */
-	private String onBorderCapStyle(BaseContext context) {
-		// gets value
-		CapStyle result = ScriptableUtils.getOptionValue(new SegmentContext(new ConfigurationEnvelop<>(context.nativeObject())), borderCapStyleCallback);
-		// checks result
-		if (result != null) {
-			return result.value();
-		}
-		// default result
-		return getOptions().getElements().getLine().getBorderCapStyle().value();
-	}
-
-	/**
-	 * Returns a {@link JoinStyle} when the callback has been activated.
-	 * 
-	 * @param context native object as context.
-	 * @return a object property value, as {@link JoinStyle}
-	 */
-	private String onBorderJoinStyle(BaseContext context) {
-		// gets value
-		JoinStyle result = ScriptableUtils.getOptionValue(new SegmentContext(new ConfigurationEnvelop<>(context.nativeObject())), borderJoinStyleCallback);
-		// checks result
-		if (result != null) {
-			return result.value();
-		}
-		// default result
-		return getOptions().getElements().getLine().getBorderJoinStyle().value();
-	}
-
+	
 	/**
 	 * Returns an array of integer when the callback has been activated.
 	 * 
@@ -373,19 +317,9 @@ public class Segment extends ConfigurationOptionsContainer {
 	 */
 	private Array onBorderDash(BaseContext context) {
 		// gets value
-		List<Integer> result = ScriptableUtils.getOptionValue(new SegmentContext(new ConfigurationEnvelop<>(context.nativeObject())), borderDashCallback);
+		List<Integer> result = ScriptableUtils.getOptionValue(new SegmentContext(new ConfigurationEnvelop<>(context.nativeObject())), getBorderDashCallback());
 		// default result
 		return ArrayInteger.fromOrEmpty(result);
-	}
-
-	/**
-	 * Returns a native object as padding when the callback has been activated.
-	 * 
-	 * @param context native object as context
-	 * @return a native object as padding
-	 */
-	private double onBorderDashOffset(BaseContext context) {
-		return ScriptableUtils.getOptionValue(new SegmentContext(new ConfigurationEnvelop<>(context.nativeObject())), borderDashOffsetCallback, getOptions().getElements().getLine().getBorderDashOffset()).doubleValue();
 	}
 
 	/**

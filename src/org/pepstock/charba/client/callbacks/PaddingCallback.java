@@ -22,6 +22,7 @@ import org.pepstock.charba.client.items.PaddingItem;
  * 
  * @author Andrea "Stock" Stocchero
  *
+ * @param <C> type of context to pass to the callback.
  */
 public interface PaddingCallback<C extends ChartContext> extends Scriptable<PaddingItem, C> {
 

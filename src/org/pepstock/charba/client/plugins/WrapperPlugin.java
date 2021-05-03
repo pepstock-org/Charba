@@ -360,124 +360,124 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// -- INIT
 		// ---------------------------
 		// invoke user method implementation
-		beforeInitCallbackProxy.setCallback((context, chart, args, options) -> onBeforeInit(chart.getChart()));
+		this.beforeInitCallbackProxy.setCallback((context, chart, args, options) -> onBeforeInit(chart.getChart()));
 		// invoke user method implementation
-		afterInitCallbackProxy.setCallback((context, chart, args, options) -> onAfterInit(chart.getChart(), chart));
+		this.afterInitCallbackProxy.setCallback((context, chart, args, options) -> onAfterInit(chart.getChart(), chart));
 		// ---------------------------
 		// -- UPDATE
 		// ---------------------------
 		// invoke user method implementation
-		afterUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
+		this.afterUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		beforeUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
+		this.beforeUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
 		// -- DATASETS UPDATE
 		// ---------------------------
 		// invoke user method implementation
-		beforeDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetsUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
+		this.beforeDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetsUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		afterDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetsUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
+		this.afterDatasetsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetsUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
 		// -- DATASET UPDATE
 		// ---------------------------
 		// invoke user method implementation
-		beforeDatasetUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
+		this.beforeDatasetUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		afterDatasetUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
+		this.afterDatasetUpdateCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
 		// -- ELEMENTS UPDATE
 		// ---------------------------
 		// invoke user method implementation
-		beforeElementsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeElementsUpdate(chart.getChart()));
+		this.beforeElementsUpdateCallbackProxy.setCallback((context, chart, args, options) -> onBeforeElementsUpdate(chart.getChart()));
 		// ---------------------------
 		// -- LAYOUT
 		// ---------------------------
 		// invoke user method implementation
-		beforeLayoutCallbackProxy.setCallback((context, chart, args, options) -> onBeforeLayout(chart.getChart()));
+		this.beforeLayoutCallbackProxy.setCallback((context, chart, args, options) -> onBeforeLayout(chart.getChart()));
 		// invoke user method implementation
-		afterLayoutCallbackProxy.setCallback((context, chart, args, options) -> onAfterLayout(chart.getChart()));
+		this.afterLayoutCallbackProxy.setCallback((context, chart, args, options) -> onAfterLayout(chart.getChart()));
 		// ---------------------------
 		// -- RENDER
 		// ---------------------------
 		// invoke user method implementation
-		beforeRenderCallbackProxy.setCallback((context, chart, args, options) -> onBeforeRender(chart.getChart()));
+		this.beforeRenderCallbackProxy.setCallback((context, chart, args, options) -> onBeforeRender(chart.getChart()));
 		// invoke user method implementation
-		afterRenderCallbackProxy.setCallback((context, chart, args, options) -> onAfterRender(chart.getChart()));
+		this.afterRenderCallbackProxy.setCallback((context, chart, args, options) -> onAfterRender(chart.getChart()));
 		// ---------------------------
 		// -- DRAW
 		// ---------------------------
 		// invoke user method implementation
-		beforeDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDraw(chart.getChart()));
+		this.beforeDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDraw(chart.getChart()));
 		// invoke user method implementation
-		afterDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDraw(chart.getChart()));
+		this.afterDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDraw(chart.getChart()));
 		// ---------------------------
 		// -- DATASETS DRAW
 		// ---------------------------
 		// invoke user method implementation
-		beforeDatasetsDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetsDraw(chart.getChart()));
+		this.beforeDatasetsDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetsDraw(chart.getChart()));
 		// invoke user method implementation
-		afterDatasetsDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetsDraw(chart.getChart()));
+		this.afterDatasetsDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetsDraw(chart.getChart()));
 		// ---------------------------
 		// -- DATASET DRAW
 		// ---------------------------
 		// invoke user method implementation
-		beforeDatasetDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetDraw(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
+		this.beforeDatasetDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDatasetDraw(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		afterDatasetDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetDraw(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
+		this.afterDatasetDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterDatasetDraw(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
 		// -- EVENT
 		// ---------------------------
 		// invoke user method implementation
-		beforeEventCallbackProxy.setCallback((context, chart, args, options) -> onBeforeEvent(chart.getChart(), new PluginEventArgument(new PluginsEnvelop<>(args, true))));
+		this.beforeEventCallbackProxy.setCallback((context, chart, args, options) -> onBeforeEvent(chart.getChart(), new PluginEventArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		afterEventCallbackProxy.setCallback((context, chart, args, options) -> onAfterEvent(chart.getChart(), new PluginEventArgument(new PluginsEnvelop<>(args, true))));
+		this.afterEventCallbackProxy.setCallback((context, chart, args, options) -> onAfterEvent(chart.getChart(), new PluginEventArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
 		// -- TOOLTIP
 		// ---------------------------
 		// invoke user method implementation
-		beforeTooltipDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeTooltipDraw(chart.getChart(), new PluginTooltipArgument(new PluginsEnvelop<>(args, true))));
+		this.beforeTooltipDrawCallbackProxy.setCallback((context, chart, args, options) -> onBeforeTooltipDraw(chart.getChart(), new PluginTooltipArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		afterTooltipDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterTooltipDraw(chart.getChart(), new PluginTooltipArgument(new PluginsEnvelop<>(args, true))));
+		this.afterTooltipDrawCallbackProxy.setCallback((context, chart, args, options) -> onAfterTooltipDraw(chart.getChart(), new PluginTooltipArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
 		// -- RESET
 		// ---------------------------
 		// invoke user method implementation
-		resetCallbackProxy.setCallback((context, chart, args, options) -> onReset(chart.getChart()));
+		this.resetCallbackProxy.setCallback((context, chart, args, options) -> onReset(chart.getChart()));
 		// ---------------------------
 		// -- RESIZE
 		// ---------------------------
 		// invoke user method implementation
-		resizeCallbackProxy.setCallback((context, chart, args, options) -> onResize(chart.getChart(), new PluginResizeArgument(new PluginsEnvelop<>(args, true))));
+		this.resizeCallbackProxy.setCallback((context, chart, args, options) -> onResize(chart.getChart(), new PluginResizeArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
 		// -- DESTROY
 		// ---------------------------
 		// invoke user method implementation
-		destroyCallbackProxy.setCallback((context, chart, args, options) -> onDestroy(chart.getChart()));
+		this.destroyCallbackProxy.setCallback((context, chart, args, options) -> onDestroy(chart.getChart()));
 		// ---------------------------
 		// -- PLUGIN LIFECYCLE
 		// ---------------------------
 		// invoke user method implementation
-		installCallbackProxy.setCallback((context, chart, args, options) -> onInstall(chart.getChart()));
+		this.installCallbackProxy.setCallback((context, chart, args, options) -> onInstall(chart.getChart()));
 		// invoke user method implementation
-		startCallbackProxy.setCallback((context, chart, args, options) -> onStart(chart.getChart()));
+		this.startCallbackProxy.setCallback((context, chart, args, options) -> onStart(chart.getChart()));
 		// invoke user method implementation
-		stopCallbackProxy.setCallback((context, chart, args, options) -> onStop(chart.getChart()));
+		this.stopCallbackProxy.setCallback((context, chart, args, options) -> onStop(chart.getChart()));
 		// invoke user method implementation
-		uninstallCallbackProxy.setCallback((context, chart, args, options) -> onUninstall(chart.getChart()));
+		this.uninstallCallbackProxy.setCallback((context, chart, args, options) -> onUninstall(chart.getChart()));
 		// ---------------------------
 		// -- SCALES DATA LIMITS
 		// ---------------------------
 		// invoke user method implementation
-		beforeDataLimitsCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDataLimits(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
+		this.beforeDataLimitsCallbackProxy.setCallback((context, chart, args, options) -> onBeforeDataLimits(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		afterDataLimitsCallbackProxy.setCallback((context, chart, args, options) -> onAfterDataLimits(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
+		this.afterDataLimitsCallbackProxy.setCallback((context, chart, args, options) -> onAfterDataLimits(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
 		// ---------------------------
 		// -- SCALES BUILD TICKS
 		// ---------------------------
 		// invoke user method implementation
-		beforeBuildTicksCallbackProxy.setCallback((context, chart, args, options) -> onBeforeBuildTicks(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
+		this.beforeBuildTicksCallbackProxy.setCallback((context, chart, args, options) -> onBeforeBuildTicks(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
 		// invoke user method implementation
-		afterBuildTicksCallbackProxy.setCallback((context, chart, args, options) -> onAfterBuildTicks(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
+		this.afterBuildTicksCallbackProxy.setCallback((context, chart, args, options) -> onAfterBuildTicks(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
 		// ------------------------------------
 		// -- SET ALL FUNCTIONS in the object ---
 		// ------------------------------------

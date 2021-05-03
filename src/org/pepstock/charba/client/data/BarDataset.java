@@ -221,15 +221,15 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		this.borderSkippedCallbackProxy.setCallback((contextFunction, context) -> onBorderSkipped(new DatasetContext(new DataEnvelop<>(context))));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderRadiusCallbackProxy
-				.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), borderRadiusCallback, BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
+				.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), getBorderRadiusCallback(), BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), borderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
+		this.borderWidthCallbackProxy.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), getBorderWidthCallback(), BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), hoverBorderWidthCallback, BarBorderWidth.FACTORY, getDefaultBorderWidth()));
+		this.hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> borderItemsHandler.onBorderItem(new DatasetContext(new DataEnvelop<>(context)), getHoverBorderWidthCallback(), BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(new DatasetContext(new DataEnvelop<>(context))));
 		// sets function to proxy callback in order to invoke the java interface
-		this.baseCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), baseCallback, Undefined.DOUBLE).doubleValue());
+		this.baseCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new DataEnvelop<>(context)), getBaseCallback(), Undefined.DOUBLE).doubleValue());
 	}
 
 	/*
@@ -1102,7 +1102,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	private Object onBorderSkipped(DatasetContext context) {
 		// gets value
-		BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, borderSkippedCallback);
+		BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, getBorderSkippedCallback());
+		// checks against the default
 		BorderSkipped result = value == null ? getDefaultValues().getElements().getBar().getBorderSkipped() : value;
 		// checks if is boolean
 		if (BorderSkipped.FALSE.equals(result)) {
@@ -1121,7 +1122,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	private Object onPointStyle(DatasetContext context) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
+		Object result = ScriptableUtils.getOptionValue(context, getPointStyleCallback());
 		// checks result
 		if (result instanceof PointStyle) {
 			// is point style instance

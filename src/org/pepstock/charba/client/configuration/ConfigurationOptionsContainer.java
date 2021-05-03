@@ -54,7 +54,7 @@ abstract class ConfigurationOptionsContainer extends ChartContainer {
 	protected final ExtendedOptions getConfiguration() {
 		return options.getConfiguration();
 	}
-
+	
 	/**
 	 * Checks if the configuration is consistent, otherwise will emit an {@link IllegalArgumentException}.
 	 * 

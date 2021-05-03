@@ -187,11 +187,11 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		modeCallbackProxy.setCallback((contextFunction, context) -> onMode(new ZoomContext(context), getModeCallback()));
-		overScaleModeCallbackProxy.setCallback((contextFunction, context) -> onMode(new ZoomContext(context), getOverScaleModeCallback()));
-		progressCallbackProxy.setCallback((contextFunction, context) -> onProgress(new ZoomContext(context)));
-		completeCallbackProxy.setCallback((contextFunction, context) -> onCompleted(new ZoomContext(context)));
-		rejectCallbackProxy.setCallback((contextFunction, context) -> onRejected(new ZoomContext(context)));
+		this.modeCallbackProxy.setCallback((contextFunction, context) -> onMode(new ZoomContext(context), getModeCallback()));
+		this.overScaleModeCallbackProxy.setCallback((contextFunction, context) -> onMode(new ZoomContext(context), getOverScaleModeCallback()));
+		this.progressCallbackProxy.setCallback((contextFunction, context) -> onProgress(new ZoomContext(context)));
+		this.completeCallbackProxy.setCallback((contextFunction, context) -> onCompleted(new ZoomContext(context)));
+		this.rejectCallbackProxy.setCallback((contextFunction, context) -> onRejected(new ZoomContext(context)));
 	}
 
 	/**

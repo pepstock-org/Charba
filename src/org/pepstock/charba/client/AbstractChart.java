@@ -431,7 +431,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// creates a chart options with complete configuration of chart
 			ExtendedOptions chartOptions = new ExtendedOptions(this, defaultChartOptions, envelop);
 			// returns a default option with all configuration
-			return new DefaultChartOptions(chartOptions);
+			return new DefaultChartOptions(new ChartEnvelop<>(chartOptions));
 		}
 		// if here, the options are not consistent then it will returns the default chartoptions
 		return getDefaultChartOptions();
