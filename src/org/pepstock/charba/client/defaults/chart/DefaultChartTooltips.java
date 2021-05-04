@@ -28,6 +28,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
+import org.pepstock.charba.client.enums.TooltipAlign;
 
 /**
  * Defaults for tooltips option element, based on chart type.
@@ -36,15 +37,15 @@ import org.pepstock.charba.client.enums.TextDirection;
  */
 public final class DefaultChartTooltips implements IsDefaultTooltips {
 
-	private final IsDefaultTooltips tooltips;
+	private final IsDefaultTooltips tooltip;
 
 	/**
-	 * Creates the object by tooltips option element instance.
+	 * Creates the object by tooltip option element instance.
 	 * 
-	 * @param tooltips tooltips option element instance.
+	 * @param tooltip tooltip option element instance.
 	 */
-	public DefaultChartTooltips(IsDefaultTooltips tooltips) {
-		this.tooltips = tooltips;
+	public DefaultChartTooltips(IsDefaultTooltips tooltip) {
+		this.tooltip = tooltip;
 	}
 
 	/*
@@ -54,7 +55,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public IsDefaultTransitions getTransitions() {
-		return tooltips.getTransitions();
+		return tooltip.getTransitions();
 	}
 
 	/*
@@ -64,7 +65,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public IsDefaultAnimation getAnimation() {
-		return tooltips.getAnimation();
+		return tooltip.getAnimation();
 	}
 
 	/*
@@ -74,7 +75,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public IsDefaultAnimations getAnimations() {
-		return tooltips.getAnimations();
+		return tooltip.getAnimations();
 	}
 
 	/*
@@ -84,7 +85,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public IsDefaultPadding getPadding() {
-		return tooltips.getPadding();
+		return tooltip.getPadding();
 	}
 
 	/*
@@ -94,7 +95,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public boolean isEnabled() {
-		return tooltips.isEnabled();
+		return tooltip.isEnabled();
 	}
 
 	/*
@@ -104,7 +105,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public List<Event> getEvents() {
-		return tooltips.getEvents();
+		return tooltip.getEvents();
 	}
 
 	/*
@@ -114,7 +115,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public InteractionMode getMode() {
-		return tooltips.getMode();
+		return tooltip.getMode();
 	}
 
 	/*
@@ -124,7 +125,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public boolean isIntersect() {
-		return tooltips.isIntersect();
+		return tooltip.isIntersect();
 	}
 
 	/*
@@ -134,7 +135,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public IsTooltipPosition getPosition() {
-		return tooltips.getPosition();
+		return tooltip.getPosition();
 	}
 
 	/*
@@ -144,7 +145,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
-		return tooltips.getBackgroundColorAsString();
+		return tooltip.getBackgroundColorAsString();
 	}
 
 	/*
@@ -154,7 +155,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public IsDefaultFont getTitleFont() {
-		return tooltips.getTitleFont();
+		return tooltip.getTitleFont();
 	}
 
 	/*
@@ -164,7 +165,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public String getTitleColorAsString() {
-		return tooltips.getTitleColorAsString();
+		return tooltip.getTitleColorAsString();
 	}
 
 	/*
@@ -174,7 +175,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public TextAlign getTitleAlign() {
-		return tooltips.getTitleAlign();
+		return tooltip.getTitleAlign();
 	}
 
 	/*
@@ -184,7 +185,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getTitleSpacing() {
-		return tooltips.getTitleSpacing();
+		return tooltip.getTitleSpacing();
 	}
 
 	/*
@@ -194,7 +195,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getTitleMarginBottom() {
-		return tooltips.getTitleMarginBottom();
+		return tooltip.getTitleMarginBottom();
 	}
 
 	/*
@@ -204,7 +205,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public IsDefaultFont getBodyFont() {
-		return tooltips.getBodyFont();
+		return tooltip.getBodyFont();
 	}
 
 	/*
@@ -214,7 +215,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public String getBodyColorAsString() {
-		return tooltips.getBodyColorAsString();
+		return tooltip.getBodyColorAsString();
 	}
 
 	/*
@@ -224,7 +225,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public TextAlign getBodyAlign() {
-		return tooltips.getBodyAlign();
+		return tooltip.getBodyAlign();
 	}
 
 	/*
@@ -234,7 +235,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getBodySpacing() {
-		return tooltips.getBodySpacing();
+		return tooltip.getBodySpacing();
 	}
 
 	/*
@@ -244,7 +245,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public IsDefaultFont getFooterFont() {
-		return tooltips.getFooterFont();
+		return tooltip.getFooterFont();
 	}
 
 	/*
@@ -254,7 +255,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public String getFooterColorAsString() {
-		return tooltips.getFooterColorAsString();
+		return tooltip.getFooterColorAsString();
 	}
 
 	/*
@@ -264,7 +265,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public TextAlign getFooterAlign() {
-		return tooltips.getFooterAlign();
+		return tooltip.getFooterAlign();
 	}
 
 	/*
@@ -274,7 +275,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getFooterSpacing() {
-		return tooltips.getFooterSpacing();
+		return tooltip.getFooterSpacing();
 	}
 
 	/*
@@ -284,7 +285,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getFooterMarginTop() {
-		return tooltips.getFooterMarginTop();
+		return tooltip.getFooterMarginTop();
 	}
 
 	/*
@@ -294,7 +295,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getCaretPadding() {
-		return tooltips.getCaretPadding();
+		return tooltip.getCaretPadding();
 	}
 
 	/*
@@ -304,7 +305,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getCaretSize() {
-		return tooltips.getCaretSize();
+		return tooltip.getCaretSize();
 	}
 
 	/*
@@ -314,7 +315,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getCornerRadius() {
-		return tooltips.getCornerRadius();
+		return tooltip.getCornerRadius();
 	}
 
 	/*
@@ -324,7 +325,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public String getMultiKeyBackgroundAsString() {
-		return tooltips.getMultiKeyBackgroundAsString();
+		return tooltip.getMultiKeyBackgroundAsString();
 	}
 
 	/*
@@ -334,7 +335,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public boolean isDisplayColors() {
-		return tooltips.isDisplayColors();
+		return tooltip.isDisplayColors();
 	}
 
 	/*
@@ -344,7 +345,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public String getBorderColorAsString() {
-		return tooltips.getBorderColorAsString();
+		return tooltip.getBorderColorAsString();
 	}
 
 	/*
@@ -354,7 +355,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getBorderWidth() {
-		return tooltips.getBorderWidth();
+		return tooltip.getBorderWidth();
 	}
 
 	/*
@@ -364,7 +365,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public boolean isRtl() {
-		return tooltips.isRtl();
+		return tooltip.isRtl();
 	}
 
 	/*
@@ -374,7 +375,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public TextDirection getTextDirection() {
-		return tooltips.getTextDirection();
+		return tooltip.getTextDirection();
 	}
 
 	/*
@@ -384,7 +385,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getBoxWidth() {
-		return tooltips.getBoxWidth();
+		return tooltip.getBoxWidth();
 	}
 
 	/*
@@ -394,7 +395,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public int getBoxHeight() {
-		return tooltips.getBoxHeight();
+		return tooltip.getBoxHeight();
 	}
 
 	/*
@@ -404,7 +405,25 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public boolean isUsePointStyle() {
-		return tooltips.isUsePointStyle();
+		return tooltip.isUsePointStyle();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getXAlign()
+	 */
+	@Override
+	public TooltipAlign getXAlign() {
+		return tooltip.getXAlign();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getYAlign()
+	 */
+	@Override
+	public TooltipAlign getYAlign() {
+		return tooltip.getYAlign();
+	}
+	
 }

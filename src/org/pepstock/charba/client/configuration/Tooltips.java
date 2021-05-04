@@ -34,6 +34,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
+import org.pepstock.charba.client.enums.TooltipAlign;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipModel;
 
@@ -915,7 +916,47 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	public boolean isUsePointStyle() {
 		return getConfiguration().getTooltips().isUsePointStyle();
 	}
+	
+	/**
+	 * Sets the alignment of the tooltip caret in the X direction.
+	 * 
+	 * @param align the alignment of the tooltip caret in the X direction.
+	 */
+	public void setXAlign(TooltipAlign align) {
+		getConfiguration().getTooltips().setXAlign(align);
+	}
 
+	/**
+	 * Returns the alignment of the tooltip caret in the X direction.
+	 * 
+	 * @return the alignment of the tooltip caret in the X direction
+	 */
+	public TooltipAlign getXAlign() {
+		return getConfiguration().getTooltips().getXAlign();
+	}
+	
+	/**
+	 * Sets the alignment of the tooltip caret in the Y direction.
+	 * 
+	 * @param align the alignment of the tooltip caret in the Y direction.
+	 */
+	public void setYAlign(TooltipAlign align) {
+		getConfiguration().getTooltips().setYAlign(align);
+	}
+
+	/**
+	 * Returns the alignment of the tooltip caret in the Y direction.
+	 * 
+	 * @return the alignment of the tooltip caret in the Y direction
+	 */
+	public TooltipAlign getYAlign() {
+		return getConfiguration().getTooltips().getYAlign();
+	}
+
+	// ---------------------------
+	// CALLBACKS
+	// ---------------------------
+	
 	/**
 	 * Returns the user external callback instance.
 	 * 

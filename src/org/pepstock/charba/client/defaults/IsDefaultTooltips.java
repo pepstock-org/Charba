@@ -21,6 +21,7 @@ import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.enums.TooltipAlign;
 
 /**
  * Interface to define tooltips object defaults.
@@ -227,11 +228,25 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	int getBorderWidth();
 
 	/**
-	 * Returns if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
+	 * Returns if to use the corresponding point style (from data set options) instead of color boxes (size is based on the minimum value between boxWidth and boxHeight).
 	 * 
-	 * @return <code>true</code> if to use the corresponding point style (from dataset options) instead of color boxes (size is based on the minimum value between boxWidth and
+	 * @return <code>true</code> if to use the corresponding point style (from data set options) instead of color boxes (size is based on the minimum value between boxWidth and
 	 *         boxHeight)
 	 */
 	boolean isUsePointStyle();
+	
+	/**
+	 * Returns the alignment of the tooltip caret in the X direction.
+	 * 
+	 * @return the alignment of the tooltip caret in the X direction
+	 */
+	TooltipAlign getXAlign();
+	
+	/**
+	 * Returns the alignment of the tooltip caret in the Y direction.
+	 * 
+	 * @return the alignment of the tooltip caret in the Y direction
+	 */
+	TooltipAlign getYAlign();
 
 }

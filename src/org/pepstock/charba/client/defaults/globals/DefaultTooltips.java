@@ -38,6 +38,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
+import org.pepstock.charba.client.enums.TooltipAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.options.IsAnimationCollectionKey;
@@ -470,6 +471,25 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	public boolean isUsePointStyle() {
 		return DEFAULT_USE_POINT_STYLE;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getXAlign()
+	 */
+	@Override
+	public TooltipAlign getXAlign() {
+		return TooltipAlign.AUTO;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getYAlign()
+	 */
+	@Override
+	public TooltipAlign getYAlign() {
+		return TooltipAlign.AUTO;
+	}
+
 
 	/**
 	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for title.

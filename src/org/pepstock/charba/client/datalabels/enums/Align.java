@@ -30,27 +30,27 @@ public enum Align implements Key
 	 */
 	CENTER("center"),
 	/**
-	 * The label is positioned before the anchor point, following the same direction
+	 * The label is positioned before the anchor point, following the same direction.
 	 */
 	START("start"),
 	/**
-	 * The label is positioned after the anchor point, following the same direction
+	 * The label is positioned after the anchor point, following the same direction.
 	 */
 	END("end"),
 	/**
-	 * The label is positioned to the right of the anchor point (0 degrees)
+	 * The label is positioned to the right of the anchor point (0 degrees).
 	 */
 	RIGHT("right"),
 	/**
-	 * The label is positioned to the bottom of the anchor point (90 degrees)
+	 * The label is positioned to the bottom of the anchor point (90 degrees).
 	 */
 	BOTTOM("bottom"),
 	/**
-	 * The label is positioned to the left of the anchor point (180 degrees)
+	 * The label is positioned to the left of the anchor point (180 degrees).
 	 */
 	LEFT("left"),
 	/**
-	 * The label is positioned to the top of the anchor point (270 degrees)
+	 * The label is positioned to the top of the anchor point (270 degrees).
 	 */
 	TOP("top");
 

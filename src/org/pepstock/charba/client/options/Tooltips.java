@@ -29,6 +29,7 @@ import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.enums.TooltipAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
 import org.pepstock.charba.client.positioner.Positioner;
 
@@ -50,6 +51,8 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		ENABLED("enabled"),
 		EVENTS("events"),
 		POSITION("position"),
+		X_ALIGN("xAlign"),
+		Y_ALIGN("yAlign"),
 		BACKGROUND_COLOR("backgroundColor"),
 		TITLE_COLOR("titleColor"),
 		TITLE_FONT("titleFont"),
@@ -327,6 +330,48 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+	
+	// FIXME
+	
+	/**
+	 * Sets the alignment of the tooltip caret in the X direction.
+	 * 
+	 * @param align the alignment of the tooltip caret in the X direction.
+	 */
+	public void setXAlign(TooltipAlign align) {
+		// x align accepts only right, left and center
+		setValueAndAddToParent(Property.X_ALIGN, Key.isValid(align) && align.isHorizontal() ? align : null);
+	}
+
+	/**
+	 * Returns the alignment of the tooltip caret in the X direction.
+	 * 
+	 * @return the alignment of the tooltip caret in the X direction
+	 */
+	@Override
+	public TooltipAlign getXAlign() {
+		return getValue(Property.X_ALIGN, TooltipAlign.values(), getDefaultValues().getXAlign());
+	}
+	
+	/**
+	 * Sets the alignment of the tooltip caret in the Y direction.
+	 * 
+	 * @param align the alignment of the tooltip caret in the Y direction.
+	 */
+	public void setYAlign(TooltipAlign align) {
+		// x align accepts only right, left and center
+		setValueAndAddToParent(Property.Y_ALIGN, Key.isValid(align) && align.isVertical() ? align : null);
+	}
+
+	/**
+	 * Returns the alignment of the tooltip caret in the Y direction.
+	 * 
+	 * @return the alignment of the tooltip caret in the Y direction
+	 */
+	@Override
+	public TooltipAlign getYAlign() {
+		return getValue(Property.Y_ALIGN, TooltipAlign.values(), getDefaultValues().getYAlign());
 	}
 
 	/**

@@ -26,6 +26,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
+import org.pepstock.charba.client.enums.TooltipAlign;
 
 /**
  * This object is passed by CHART.JS to the callback to manage tooltip custom callback.<br>
@@ -123,21 +124,21 @@ public final class TooltipModel extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the X align location.
+	 * Returns the alignment of the tooltip caret in the X direction.
 	 * 
-	 * @return the X align location.
+	 * @return the alignment of the tooltip caret in the X direction
 	 */
-	public String getXAlign() {
-		return getValue(Property.X_ALIGN, Undefined.STRING);
+	public TooltipAlign getXAlign() {
+		return getValue(Property.X_ALIGN, TooltipAlign.values(), TooltipAlign.AUTO);
 	}
 
 	/**
-	 * Returns the Y align location.
+	 * Returns the alignment of the tooltip caret in the Y direction.
 	 * 
-	 * @return the Y align location.
+	 * @return the alignment of the tooltip caret in the Y direction
 	 */
-	public String getYAlign() {
-		return getValue(Property.Y_ALIGN, Undefined.STRING);
+	public TooltipAlign getYAlign() {
+		return getValue(Property.Y_ALIGN, TooltipAlign.values(), TooltipAlign.AUTO);
 	}
 
 	/**

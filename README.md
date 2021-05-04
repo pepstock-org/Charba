@@ -195,6 +195,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `fill` default option for `Line` element from `Fill.ORIGIN` to `Fill.FALSE`.
  * rename `showLines` property to `showLine` property for line and radar chart options and configuration.
  * remove `xPadding` and `yPadding` properties from `Tooltips` class for options and configuration, use `Padding` instead.
+ * change `xAlign` and `yAlign` properties in `TooltipModel` class which are returning a `TooltipAlign` object instead of a string.
  * change `fullWidth` property to `fullSize` in `Title` and `Legend` classes for options and configuration.
  * rename `LegendAlign` class to `ElementAlign` in order to be able to use for `Title` options and configuration classes.
  * change `cutoutPercentage` property from double to string in order to manage a percentage `[number]%` format in the options and configuration classes, for pie and doughnut charts.
@@ -215,6 +216,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `newDataset(boolean)` methods for all charts (by new `IsDatasetCreator` interface) in order to get new data set with the initial visibility status.
  * add `usePointStyle` property to `Tooltips` class for options and configuration.
  * add `boxWidth` and `boxHeight` properties to `Tooltips` options and configuration classes.
+ * add `xAlign` and `yAlign` properties to `Tooltips` options and configuration classes.
  * improve the tooltip callbacks management providing the right defaults.
  * add `borderWidth`, `borderRadius` and `borderDash` properties to `TooltipLabelColor` item in order to improve the customization of tooltips by the callback.
  * add `title` property to `Legend` options and configuration classes in order to manage a title on legend
