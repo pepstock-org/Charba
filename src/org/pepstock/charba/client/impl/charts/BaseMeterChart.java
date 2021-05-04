@@ -124,7 +124,7 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		AnimationTransition disabledResizeMode = options.getTransitions().create(DefaultTransitionKey.RESIZE);
 		// disables the animation mode
 		disabledResizeMode.getAnimation().setDuration(0);
-		// scans all datasets
+		// scans all data sets
 		for (Dataset dataset : getData().getDatasets()) {
 			// disables animation mode active
 			dataset.getTransitions().create(DefaultTransitionKey.ACTIVE).getAnimation().setDuration(0);
