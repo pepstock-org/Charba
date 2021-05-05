@@ -16,6 +16,10 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
@@ -28,6 +32,7 @@ import org.pepstock.charba.client.zoom.callbacks.CompletedCallback;
 import org.pepstock.charba.client.zoom.callbacks.ModeCallback;
 import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
 import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
+import org.pepstock.charba.client.zoom.callbacks.StartCallback;
 
 import jsinterop.annotations.JsFunction;
 
@@ -38,24 +43,6 @@ import jsinterop.annotations.JsFunction;
  * @param <T> type of default
  */
 public abstract class AbstractConfigurationItem<T extends IsDefaultConfigurationItem> extends NativeObjectContainer implements IsDefaultConfigurationItem {
-
-	/**
-	 * Java script FUNCTION callback called to provide the mode (direction) of element.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyModeCallback {
-
-		/**
-		 * Method of function to be called to provide a string mode (direction) property.
-		 * 
-		 * @param contextFunction context value of <code>this</code> to the execution context of function
-		 * @param context wrapper of native chart instance
-		 * @return a string mode (direction) value
-		 */
-		String call(NativeObject contextFunction, NativeObject context);
-	}
 
 	/**
 	 * Java script FUNCTION callback called to provide onPan, onPanComplete, onPanRejected, onZoom, onZoomComplete and onZoomRejected handlers.
@@ -71,22 +58,24 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		 * @param contextFunction context value of <code>this</code> to the execution context of function
 		 * @param context native chart
 		 */
-		void call(NativeObject contextFunction, NativeObject context);
+		void call(CallbackFunctionContext contextFunction, NativeObject context);
 	}
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the MODE function
-	private final CallbackProxy<ProxyModeCallback> modeCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyStringCallback> modeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the MODE function
-	private final CallbackProxy<ProxyModeCallback> overScaleModeCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyStringCallback> overScaleModeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the PROGRESS function
 	private final CallbackProxy<ProxyHandlerCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the COMPLETED function
 	private final CallbackProxy<ProxyHandlerCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the REJECTED function
 	private final CallbackProxy<ProxyHandlerCallback> rejectCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the START function
+	private final CallbackProxy<ProxyBooleanCallback> startCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// mode callback
 	private static final CallbackPropertyHandler<ModeCallback> MODE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.MODE);
@@ -116,8 +105,6 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		ENABLED("enabled"),
 		MODE("mode"),
 		OVER_SCALE_MODE("overScaleMode"),
-		RANGE_MIN("rangeMin"),
-		RANGE_MAX("rangeMax"),
 		THRESHOLD("threshold");
 
 		// name value of property
@@ -146,10 +133,6 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 
 	// default options
 	private final T defaultOptions;
-	// minimum range
-	private final Range rangeMin;
-	// maximum range
-	private final Range rangeMax;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
@@ -164,34 +147,15 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
 		// stores new incremental id
 		setNewIncrementalId();
-		// checks if range min are already present
-		if (has(Property.RANGE_MIN)) {
-			// gets range min
-			this.rangeMin = new Range(defaultOptions.getRangeMin(), getValue(Property.RANGE_MIN));
-		} else {
-			// gets range min
-			this.rangeMin = new Range(defaultOptions.getRangeMin());
-			// stores new range
-			setValue(Property.RANGE_MIN, rangeMin);
-		}
-		// checks if range max are already present
-		if (has(Property.RANGE_MAX)) {
-			// gets range max
-			this.rangeMax = new Range(defaultOptions.getRangeMax(), getValue(Property.RANGE_MAX));
-		} else {
-			// gets range max
-			this.rangeMax = new Range(defaultOptions.getRangeMax());
-			// stores new range
-			setValue(Property.RANGE_MAX, rangeMax);
-		}
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.modeCallbackProxy.setCallback((contextFunction, context) -> onMode(new ZoomContext(context), getModeCallback()));
-		this.overScaleModeCallbackProxy.setCallback((contextFunction, context) -> onMode(new ZoomContext(context), getOverScaleModeCallback()));
-		this.progressCallbackProxy.setCallback((contextFunction, context) -> onProgress(new ZoomContext(context)));
-		this.completeCallbackProxy.setCallback((contextFunction, context) -> onCompleted(new ZoomContext(context)));
-		this.rejectCallbackProxy.setCallback((contextFunction, context) -> onRejected(new ZoomContext(context)));
+		this.modeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getModeCallback(), this.defaultOptions.getMode()).value());
+		this.overScaleModeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getOverScaleModeCallback(), this.defaultOptions.getOverScaleMode()).value());
+		this.progressCallbackProxy.setCallback((contextFunction, context) -> onProgress(createContext(context)));
+		this.completeCallbackProxy.setCallback((contextFunction, context) -> onCompleted(createContext(context)));
+		this.rejectCallbackProxy.setCallback((contextFunction, context) -> onRejected(createContext(context)));
+		this.startCallbackProxy.setCallback((contextFunction, context) -> onStart(createContext(context)));
 	}
 
 	/**
@@ -225,24 +189,11 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	abstract CallbackPropertyHandler<RejectedCallback> getRejectedPropertyHandler();
 
 	/**
-	 * Returns the minimum element (panning or zooming) range depending on scale type.
+	 * Returns the callback property handler for start event.
 	 * 
-	 * @return the minimum element (panning or zooming) range depending on scale type
+	 * @return the callback property handler for start event
 	 */
-	@Override
-	public final Range getRangeMin() {
-		return rangeMin;
-	}
-
-	/**
-	 * Returns the maximum element (panning or zooming) range depending on scale type.
-	 * 
-	 * @return the maximum element (panning or zooming) range depending on scale type
-	 */
-	@Override
-	public final Range getRangeMax() {
-		return rangeMax;
-	}
+	abstract CallbackPropertyHandler<StartCallback> getStartPropertyHandler();
 
 	/**
 	 * Sets <code>true</code> to enable element (panning or zooming).
@@ -437,26 +388,36 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	}
 
 	/**
-	 * Method of function to be called to provide a string mode (direction) property.
+	 * Returns the callback called once zooming or panning is started.
 	 * 
-	 * @param context wrapper of native chart instance.
-	 * @param modeCallback callback to be invoked
-	 * @return a string mode (direction) value.
+	 * @return the callback called once zooming or panning is started
 	 */
-	private String onMode(ZoomContext context, ModeCallback modeCallback) {
-		// checks if the callback must be invoked
-		if (isFunctionInvocationConsistent(modeCallback, context)) {
-			// invokes callback
-			InteractionAxis result = modeCallback.mode(context.getChart(), this);
-			// checks if result is consistent
-			if (Key.isValid(result)) {
-				// returns the value of result of callback
-				return result.value();
-			}
-		}
-		// defaults mode if here
-		// because some entities is not consistent
-		return defaultOptions.getMode().value();
+	@Override
+	public final StartCallback getStartCallback() {
+		return getStartPropertyHandler().getCallback(this, defaultOptions.getStartCallback());
+	}
+
+	/**
+	 * Sets the callback called once zooming or panning is started.
+	 * 
+	 * @param startCallback the callback called once zooming or panning is started
+	 */
+	public final void setStartCallback(StartCallback startCallback) {
+		getStartPropertyHandler().setCallback(this, ZoomPlugin.ID, startCallback, startCallbackProxy.getProxy());
+	}
+
+	// ------------------------------
+	// internal methods for callback
+	// ------------------------------
+
+	/**
+	 * Creates and returns the {@link ZoomPlugin} context.
+	 * 
+	 * @param context native context provided by zomm plugin
+	 * @return the {@link ZoomPlugin} context
+	 */
+	private ZoomContext createContext(NativeObject context) {
+		return new ZoomContext(this, context);
 	}
 
 	/**
@@ -470,7 +431,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(progressCallback, context)) {
 			// invokes callback
-			progressCallback.onProgress(context.getChart(), this);
+			progressCallback.onProgress(context);
 		}
 	}
 
@@ -485,7 +446,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(completeCallback, context)) {
 			// invokes callback
-			completeCallback.onCompleted(context.getChart(), this);
+			completeCallback.onCompleted(context);
 		}
 	}
 
@@ -500,8 +461,26 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		// checks if the callback must be invoked
 		if (isFunctionInvocationConsistent(rejectCallback, context)) {
 			// invokes callback
-			rejectCallback.onRejected(context.getChart(), this);
+			rejectCallback.onRejected(context);
 		}
+	}
+
+	/**
+	 * Method of function to be called to manage onPanStart or onZoomStart callbacks.
+	 * 
+	 * @param context wrapper of native plugin context instance.
+	 */
+	private boolean onStart(ZoomContext context) {
+		// gets callback
+		StartCallback startCallback = getStartCallback();
+		// checks if the callback must be invoked
+		if (isFunctionInvocationConsistent(startCallback, context)) {
+			// invokes callback
+			return startCallback.onStart(context);
+		}
+		// if here, the context is not consistent
+		// then returns true to go on
+		return true;
 	}
 
 	/**

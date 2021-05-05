@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.zoom.callbacks;
 
-import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.zoom.AbstractConfigurationItem;
+import org.pepstock.charba.client.zoom.ZoomContext;
 import org.pepstock.charba.client.zoom.ZoomPlugin;
 
 /**
@@ -26,15 +26,6 @@ import org.pepstock.charba.client.zoom.ZoomPlugin;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface ModeCallback {
-
-	/**
-	 * Called to set the mode (pan and zoom) directions at runtime.
-	 * 
-	 * @param chart chart instance
-	 * @param configurationItem configuration item of {@link ZoomPlugin} which generated the event
-	 * @return the mode (pan and zoom) directions
-	 */
-	InteractionAxis mode(IsChart chart, AbstractConfigurationItem<?> configurationItem);
+public interface ModeCallback extends Scriptable<InteractionAxis, ZoomContext>{
 
 }

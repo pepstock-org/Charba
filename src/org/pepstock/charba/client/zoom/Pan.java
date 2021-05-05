@@ -16,13 +16,13 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.zoom.callbacks.CompletedCallback;
 import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
 import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
+import org.pepstock.charba.client.zoom.callbacks.StartCallback;
 
 /**
  * Base object to map pan options for {@link ZoomPlugin#ID} plugin configuration.<br>
@@ -38,11 +38,8 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	private static final CallbackPropertyHandler<CompletedCallback> PAN_COMPLETED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_COMPLETED);
 	// rejected callback
 	private static final CallbackPropertyHandler<RejectedCallback> PAN_REJECTED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_REJECTED);
-
-	/**
-	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.
-	 */
-	public static final double DEFAULT_SPEED = 20D;
+	// start callback
+	private static final CallbackPropertyHandler<StartCallback> PAN_START_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_START);
 
 	/**
 	 * Default threshold, <b>{@value DEFAULT_THRESHOLD}</b>.
@@ -54,9 +51,9 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 */
 	enum Property implements Key
 	{
-		SPEED("speed"),
 		MODIFIER_KEY("modifierKey"),
 		ON_PAN("onPan"),
+		ON_PAN_START("onPanStart"),
 		ON_PAN_COMPLETED("onPanComplete"),
 		ON_PAN_REJECTED("onPanRejected");
 
@@ -124,23 +121,14 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 		return PAN_REJECTED_PROPERTY_HANDLER;
 	}
 
-	/**
-	 * Sets the threshold factor before applying pan, on category scale.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param speed the threshold factor before applying pan, on category scale
-	 */
-	public void setSpeed(double speed) {
-		setValue(Property.SPEED, Checker.positiveOrZero(speed));
-	}
-
-	/**
-	 * Returns the threshold factor before applying pan, on category scale.
-	 * 
-	 * @return the threshold factor before applying pan, on category scale
+	 * @see org.pepstock.charba.client.zoom.AbstractConfigurationItem#getStartPropertyHandler()
 	 */
 	@Override
-	public double getSpeed() {
-		return getValue(Property.SPEED, getDefaultsOptions().getSpeed());
+	CallbackPropertyHandler<StartCallback> getStartPropertyHandler() {
+		return PAN_START_PROPERTY_HANDLER;
 	}
 
 	/**

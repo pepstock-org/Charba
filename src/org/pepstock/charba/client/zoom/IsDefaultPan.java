@@ -37,15 +37,6 @@ interface IsDefaultPan extends IsDefaultConfigurationItem {
 	}
 
 	/**
-	 * Returns the threshold factor before applying pan, on category scale.
-	 * 
-	 * @return the threshold factor before applying pan, on category scale
-	 */
-	default double getSpeed() {
-		return Pan.DEFAULT_SPEED;
-	}
-
-	/**
 	 * Returns the modifier key to activate panning.
 	 * 
 	 * @return the modifier key to activate panning

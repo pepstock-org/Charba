@@ -15,24 +15,25 @@
 */
 package org.pepstock.charba.client.zoom;
 
-import org.pepstock.charba.client.callbacks.ChartContext;
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
- * The callback or handler context, created and passed by {@link ZoomPlugin#ID} which contains the link to the native chart and the event.
+ * This object is wrapping the native java script object provided by {@link ZoomContext} to know the position of the event when pan or zoom are about to start.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ZoomContext extends ChartContext {
+public final class Point extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		POINT("point");
+		X("x"),
+		Y("y");
 
 		// name value of property
 		private final String value;
@@ -57,40 +58,40 @@ public final class ZoomContext extends ChartContext {
 		}
 	}
 
-	private final AbstractConfigurationItem<?> zoomElement;
-
-	private final Point point;
-
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	ZoomContext(AbstractConfigurationItem<?> zoomElement, NativeObject nativeObject) {
+	Point(NativeObject nativeObject) {
 		super(nativeObject);
-		// checks if zoom options is consistent
-		// stores options
-		this.zoomElement = Checker.checkAndGetIfValid(zoomElement, "Zoom options argument");
-		// gets the point from context if there is
-		this.point = new Point(getValue(Property.POINT));
 	}
 
 	/**
-	 * Returns the {@link ZoomPlugin} configuration element.
+	 * Returns the X coordinate of the point.
 	 * 
-	 * @return the {@link ZoomPlugin} configuration element
+	 * @return the X coordinate of the point.
 	 */
-	public AbstractConfigurationItem<?> getElement() {
-		return zoomElement;
+	public double getX() {
+		return getValue(Property.X, Undefined.DOUBLE);
 	}
 
 	/**
-	 * Returns the position of the event when pan or zoom are about to start.
+	 * Returns the Y coordinate of the point.
 	 * 
-	 * @return the position of the event when pan or zoom are about to start
+	 * @return the Y coordinate of the point.
 	 */
-	public Point getPoint() {
-		return point;
+	public double getY() {
+		return getValue(Property.Y, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Returns <code>true</code> if the coordinates are consistent and not <code>NaN</code>.
+	 * 
+	 * @return <code>true</code> if the coordinates are consistent and not <code>NaN</code>
+	 */
+	public boolean isConsistent() {
+		return Undefined.isNot(getX()) && Undefined.isNot(getY());
 	}
 
 }

@@ -20,6 +20,7 @@ import org.pepstock.charba.client.zoom.callbacks.CompletedCallback;
 import org.pepstock.charba.client.zoom.callbacks.ModeCallback;
 import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
 import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
+import org.pepstock.charba.client.zoom.callbacks.StartCallback;
 
 /**
  * Interface used by pan and zoom object in order to enable to provide the defaults values of properties.
@@ -108,19 +109,14 @@ interface IsDefaultConfigurationItem {
 	default RejectedCallback getRejectedCallback() {
 		return null;
 	}
-
+	
 	/**
-	 * Returns the minimum element (panning or zooming) range depending on scale type.
+	 * Returns the callback called once zooming or panning is started.
 	 * 
-	 * @return the minimum element (panning or zooming) range depending on scale type
+	 * @return the callback called once zooming or panning is started
 	 */
-	IsDefaultRange getRangeMin();
-
-	/**
-	 * Returns the maximum element (panning or zooming) range depending on scale type.
-	 * 
-	 * @return the maximum element (panning or zooming) range depending on scale type
-	 */
-	IsDefaultRange getRangeMax();
+	default StartCallback getStartCallback() {
+		return null;
+	}
 
 }

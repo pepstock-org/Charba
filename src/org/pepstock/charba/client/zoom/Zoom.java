@@ -24,6 +24,7 @@ import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.zoom.callbacks.CompletedCallback;
 import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
 import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
+import org.pepstock.charba.client.zoom.callbacks.StartCallback;
 
 /**
  * Base object to map zoom options for {@link ZoomPlugin#ID} plugin configuration.<br>
@@ -39,6 +40,8 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	private static final CallbackPropertyHandler<CompletedCallback> ZOOM_COMPLETED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM_COMPLETED);
 	// rejected callback
 	private static final CallbackPropertyHandler<RejectedCallback> ZOOM_REJECTED_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM_REJECTED);
+	// rejected callback
+	private static final CallbackPropertyHandler<StartCallback> ZOOM_START_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM_START);
 
 	/**
 	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.
@@ -64,6 +67,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 		DRAG("drag"),
 		WHEEL_MODIFIER_KEY("wheelModifierKey"),
 		ON_ZOOM("onZoom"),
+		ON_ZOOM_START("onZoomStart"),
 		ON_ZOOM_COMPLETED("onZoomComplete"),
 		ON_ZOOM_REJECTED("onZoomRejected");
 
@@ -129,6 +133,16 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	@Override
 	CallbackPropertyHandler<RejectedCallback> getRejectedPropertyHandler() {
 		return ZOOM_REJECTED_PROPERTY_HANDLER;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.zoom.AbstractConfigurationItem#getStartPropertyHandler()
+	 */
+	@Override
+	CallbackPropertyHandler<StartCallback> getStartPropertyHandler() {
+		return ZOOM_START_PROPERTY_HANDLER;
 	}
 
 	/**
