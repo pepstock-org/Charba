@@ -30,7 +30,7 @@ public interface StartCallback {
 	/**
 	 * Method called when panning or zooming is about to start.
 	 * 
-	 * @param context {@link ZoomsPlugin#ID} plugin context instance
+	 * @param context {@link ZoomPlugin#ID} plugin context instance
 	 * @return if this callback returns <code>false</code>, panning or zooming is aborted and {@link RejectedCallback} is invoked.
 	 */
 	boolean onStart(ZoomContext context);

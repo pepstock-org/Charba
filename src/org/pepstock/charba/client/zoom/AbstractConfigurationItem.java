@@ -469,6 +469,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 * Method of function to be called to manage onPanStart or onZoomStart callbacks.
 	 * 
 	 * @param context wrapper of native plugin context instance.
+	 * @return if this callback returns <code>false</code>, panning or zooming is aborted and {@link RejectedCallback} is invoked.
 	 */
 	private boolean onStart(ZoomContext context) {
 		// gets callback

@@ -29,7 +29,7 @@ public interface CompletedCallback {
 	/**
 	 * Method called once zooming or panning is completed.
 	 * 
-	 * @param context {@link ZoomsPlugin#ID} plugin context instance
+	 * @param context {@link ZoomPlugin#ID} plugin context instance
 	 */
 	void onCompleted(ZoomContext context);
 

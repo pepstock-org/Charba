@@ -29,7 +29,7 @@ public interface ProgressCallback {
 	/**
 	 * Method called while the user is zooming or panning.
 	 * 
-	 * @param context {@link ZoomsPlugin#ID} plugin context instance
+	 * @param context {@link ZoomPlugin#ID} plugin context instance
 	 */
 	void onProgress(ZoomContext context);
 }

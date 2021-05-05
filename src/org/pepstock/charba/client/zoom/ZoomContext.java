@@ -57,13 +57,15 @@ public final class ZoomContext extends ChartContext {
 		}
 	}
 
+	// zoom configuration item instance
 	private final AbstractConfigurationItem<?> zoomElement;
-
+	// point instance, from native context
 	private final Point point;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
+	 * @param zoomElement zoom configuration item instance
 	 * @param nativeObject native object instance to be wrapped.
 	 */
 	ZoomContext(AbstractConfigurationItem<?> zoomElement, NativeObject nativeObject) {

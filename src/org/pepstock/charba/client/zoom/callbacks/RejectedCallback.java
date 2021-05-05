@@ -29,7 +29,7 @@ public interface RejectedCallback {
 	/**
 	 * Method called once zooming or panning is rejected.
 	 * 
-	 * @param context {@link ZoomsPlugin#ID} plugin context instance
+	 * @param context {@link ZoomPlugin#ID} plugin context instance
 	 */
 	void onRejected(ZoomContext context);
 
