@@ -419,6 +419,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// returns default scale
 		return Defaults.get().getScale(this.storeType);
 	}
+	
+	// -----------------------------
+	// CALLBACKS
+	// -----------------------------
 
 	/**
 	 * Returns the user callback that runs before/after tick rotation is determined.
@@ -580,9 +584,13 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// stores and manages callback
 		setCallback(getConfiguration(), Property.AFTER_UPDATE, axisUpdateCallback, afterUpdateCallbackProxy);
 	}
+	
+	// -----------------------------
+	// Common CALLBACKS storing
+	// -----------------------------
 
 	/**
-	 * Sets the callbacks that every element of axis can activate.
+	 * Sets the callback that every element of axis can activate.
 	 * 
 	 * @param node element node instance
 	 * @param property property name
@@ -594,7 +602,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
-	 * Sets the callbacks that every element of axis can activate.
+	 * Sets the callback that every element of axis can activate.
 	 * 
 	 * @param node element node instance
 	 * @param property property name
@@ -621,6 +629,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	final ScaleContext createContext(NativeObject context) {
 		return new ScaleContext(this, new ConfigurationEnvelop<>(context));
 	}
+	
+	// -----------------------------
+	// Internal CALLBACKS invocation
+	// -----------------------------
 
 	/**
 	 * Invokes UPDATE axis callback.
@@ -629,11 +641,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onBeforeUpdateCallback(NativeObject item) {
 		// gets callback
-		AxisUpdateCallback axisUpdateCallback = getAxisUpdateCallback();
+		AxisUpdateCallback callback = getAxisUpdateCallback();
 		// if user callback is consistent
-		if (axisUpdateCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisUpdateCallback.onBeforeUpdate(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onBeforeUpdate(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -644,11 +656,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onBeforeSetDimensionsCallback(NativeObject item) {
 		// gets callback
-		AxisDimensionsCallback axisDimensionsCallback = getAxisDimensionsCallback();
+		AxisDimensionsCallback callback = getAxisDimensionsCallback();
 		// if user callback is consistent
-		if (axisDimensionsCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisDimensionsCallback.onBeforeSetDimensions(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onBeforeSetDimensions(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -659,11 +671,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onAfterSetDimensionsCallback(NativeObject item) {
 		// gets callback
-		AxisDimensionsCallback axisDimensionsCallback = getAxisDimensionsCallback();
+		AxisDimensionsCallback callback = getAxisDimensionsCallback();
 		// if user callback is consistent
-		if (axisDimensionsCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisDimensionsCallback.onAfterSetDimensions(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onAfterSetDimensions(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -674,11 +686,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onBeforeDataLimitsCallback(NativeObject item) {
 		// gets callback
-		AxisDataLimitsCallback axisDataLimitsCallback = getAxisDataLimitsCallback();
+		AxisDataLimitsCallback callback = getAxisDataLimitsCallback();
 		// if user callback is consistent
-		if (axisDataLimitsCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisDataLimitsCallback.onBeforeDataLimits(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onBeforeDataLimits(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -689,11 +701,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onAfterDataLimitsCallback(NativeObject item) {
 		// gets callback
-		AxisDataLimitsCallback axisDataLimitsCallback = getAxisDataLimitsCallback();
+		AxisDataLimitsCallback callback = getAxisDataLimitsCallback();
 		// if user callback is consistent
-		if (axisDataLimitsCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisDataLimitsCallback.onAfterDataLimits(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onAfterDataLimits(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -704,11 +716,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onBeforeTickToLabelConversionCallback(NativeObject item) {
 		// gets callback
-		AxisTickToLabelConversionCallback axisTickToLabelConversionCallback = getAxisTickToLabelConversionCallback();
+		AxisTickToLabelConversionCallback callback = getAxisTickToLabelConversionCallback();
 		// if user callback is consistent
-		if (axisTickToLabelConversionCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisTickToLabelConversionCallback.onBeforeTickToLabelConversion(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onBeforeTickToLabelConversion(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -719,11 +731,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onAfterTickToLabelConversionCallback(NativeObject item) {
 		// gets callback
-		AxisTickToLabelConversionCallback axisTickToLabelConversionCallback = getAxisTickToLabelConversionCallback();
+		AxisTickToLabelConversionCallback callback = getAxisTickToLabelConversionCallback();
 		// if user callback is consistent
-		if (axisTickToLabelConversionCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisTickToLabelConversionCallback.onAfterTickToLabelConversion(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onAfterTickToLabelConversion(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -734,11 +746,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onBeforeCalculateTickRotationCallback(NativeObject item) {
 		// gets callback
-		AxisCalculateTickRotationCallback axisCalculateTickRotationCallback = getAxisCalculateTickRotationCallback();
+		AxisCalculateTickRotationCallback callback = getAxisCalculateTickRotationCallback();
 		// if user callback is consistent
-		if (axisCalculateTickRotationCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisCalculateTickRotationCallback.onBeforeCalculateTickRotation(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onBeforeCalculateTickRotation(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -749,11 +761,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onAfterCalculateTickRotationCallback(NativeObject item) {
 		// gets callback
-		AxisCalculateTickRotationCallback axisCalculateTickRotationCallback = getAxisCalculateTickRotationCallback();
+		AxisCalculateTickRotationCallback callback = getAxisCalculateTickRotationCallback();
 		// if user callback is consistent
-		if (axisCalculateTickRotationCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisCalculateTickRotationCallback.onAfterCalculateTickRotation(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onAfterCalculateTickRotation(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -764,11 +776,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onBeforeFitCallback(NativeObject item) {
 		// gets callback
-		AxisFitCallback axisFitCallback = getAxisFitCallback();
+		AxisFitCallback callback = getAxisFitCallback();
 		// if user callback is consistent
-		if (axisFitCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisFitCallback.onBeforeFit(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onBeforeFit(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -779,11 +791,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onAfterFitCallback(NativeObject item) {
 		// gets callback
-		AxisFitCallback axisFitCallback = getAxisFitCallback();
+		AxisFitCallback callback = getAxisFitCallback();
 		// if user callback is consistent
-		if (axisFitCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisFitCallback.onAfterFit(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onAfterFit(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -794,11 +806,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onAfterUpdateCallback(NativeObject item) {
 		// gets callback
-		AxisUpdateCallback axisUpdateCallback = getAxisUpdateCallback();
+		AxisUpdateCallback callback = getAxisUpdateCallback();
 		// if user callback is consistent
-		if (axisUpdateCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisUpdateCallback.onAfterUpdate(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onAfterUpdate(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -809,11 +821,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onBeforeBuildTicksCallback(NativeObject item) {
 		// gets callback
-		AxisBuildTicksCallback axisBuildTicksCallback = getAxisBuildTicksCallback();
+		AxisBuildTicksCallback callback = getAxisBuildTicksCallback();
 		// if user callback is consistent
-		if (axisBuildTicksCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisBuildTicksCallback.onBeforeBuildTicks(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onBeforeBuildTicks(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -824,11 +836,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	private void onAfterBuildTicksCallback(NativeObject item) {
 		// gets callback
-		AxisBuildTicksCallback axisBuildTicksCallback = getAxisBuildTicksCallback();
+		AxisBuildTicksCallback callback = getAxisBuildTicksCallback();
 		// if user callback is consistent
-		if (axisBuildTicksCallback != null) {
+		if (callback != null) {
 			// then it is called
-			axisBuildTicksCallback.onAfterBuildTicks(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onAfterBuildTicks(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
