@@ -64,7 +64,7 @@ public abstract class AbstractFont extends NativeObjectContainer implements IsFo
 	private final Font font;
 
 	/**
-	 * Creates an empty font to use for chart configuration when the font is created by a callback.
+	 * Creates an empty font to use for chart configuration.
 	 * 
 	 * @param defaultValues default provider
 	 */
@@ -73,7 +73,7 @@ public abstract class AbstractFont extends NativeObjectContainer implements IsFo
 	}
 
 	/**
-	 * Creates a font to use for chart configuration when the font is created by a callback, using a clone of another font object.
+	 * Creates a font to use for chart configuration, wrapping a native object instance.
 	 * 
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties

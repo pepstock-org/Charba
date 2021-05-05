@@ -63,7 +63,7 @@ public abstract class AbstractPadding extends NativeObjectContainer implements I
 	private final Padding padding;
 
 	/**
-	 * Creates an empty padding to use for chart configuration when the padding is created by a callback.
+	 * Creates an empty padding to use for chart configuration.
 	 * 
 	 * @param defaultValues default provider
 	 */
@@ -72,14 +72,14 @@ public abstract class AbstractPadding extends NativeObjectContainer implements I
 	}
 
 	/**
-	 * Creates a padding to use for chart configuration when the padding is created by a callback, using a clone of another font object.
+	 * Creates a padding to use for chart configuration, wrapping a native object instance.
 	 * 
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
 	protected AbstractPadding(IsDefaultPadding defaultValues, NativeObject nativeObject) {
 		super(nativeObject);
-		// creates a font to wrap
+		// creates a padding to wrap
 		this.padding = new Padding(null, Property.PADDING, defaultValues, getNativeObject(), Undefined.INTEGER);
 	}
 

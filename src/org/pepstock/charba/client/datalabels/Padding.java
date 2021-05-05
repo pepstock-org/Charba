@@ -17,7 +17,7 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
-import org.pepstock.charba.client.options.AbstractPadding;
+import org.pepstock.charba.client.options.AbstractScriptablePadding;
 
 /**
  * Base object to map padding options for {@link DataLabelsPlugin#ID} plugin configuration.<br>
@@ -25,7 +25,7 @@ import org.pepstock.charba.client.options.AbstractPadding;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Padding extends AbstractPadding {
+public final class Padding extends AbstractScriptablePadding<DataLabelsContext> {
 
 	/**
 	 * Default padding, <b>{@value DEFAULT_PADDING}</b>.
@@ -33,13 +33,14 @@ public final class Padding extends AbstractPadding {
 	public static final int DEFAULT_PADDING = 4;
 
 	/**
-	 * Creates new padding element, using stored native object instance and the default values options.
+	 * Creates new padding element, using label item instance (where the padding is stored), stored native object instance and the default values options.
 	 * 
-	 * @param nativeObject stored padding values in the native object to read.
-	 * @param defaultOptions default PADDING options to returns the default when required.
+	 * @param parent the {@link LabelItem} instance which padding is belonging to 
+	 * @param nativeObject stored padding values in the native object to read
+	 * @param defaultOptions default PADDING options to returns the default when required
 	 */
-	Padding(IsDefaultPadding defaultOptions, NativeObject nativeObject) {
-		super(defaultOptions, nativeObject);
+	Padding(LabelItem parent, IsDefaultPadding defaultOptions, NativeObject nativeObject) {
+		super(parent, defaultOptions, nativeObject);
 	}
 
 }

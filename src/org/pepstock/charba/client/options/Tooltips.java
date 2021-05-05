@@ -332,8 +332,6 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 	
-	// FIXME
-	
 	/**
 	 * Sets the alignment of the tooltip caret in the X direction.
 	 * 

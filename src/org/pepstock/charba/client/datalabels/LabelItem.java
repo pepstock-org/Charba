@@ -55,6 +55,7 @@ import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.options.IsScriptableFontProvider;
+import org.pepstock.charba.client.options.IsScriptablePaddingProvider;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 import jsinterop.annotations.JsFunction;
@@ -66,7 +67,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLabelsItem, IsScriptableFontProvider<DataLabelsContext> {
+public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLabelsItem, IsScriptableFontProvider<DataLabelsContext>,  IsScriptablePaddingProvider<DataLabelsContext>{
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -262,7 +263,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// stores incremental ID
 		setNewIncrementalId();
 		// sets inner elements
-		this.padding = new Padding(this.defaultOptions.getPadding(), getValue(Property.PADDING));
+		this.padding = new Padding(this, this.defaultOptions.getPadding(), getValue(Property.PADDING));
 		// checks it has got the element
 		if (!has(Property.PADDING)) {
 			// stores padding
@@ -1297,13 +1298,6 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	@Override
 	public final void setFont(FontCallback<DataLabelsContext> fontCallback) {
 		FONT_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, fontCallback, fontCallbackProxy.getProxy());
-		// checks if the callback is null
-		// because setting to null, the original font must be set again
-		// in the the options
-		if (fontCallback == null && !has(Property.FONT)) {
-			// stores the font
-			setValue(Property.FONT, font);
-		}
 	}
 
 	/**
@@ -1322,6 +1316,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param paddingCallback the padding callback to set
 	 */
+	@Override
 	public final void setPadding(PaddingCallback<DataLabelsContext> paddingCallback) {
 		PADDING_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, paddingCallback, paddingCallbackProxy.getProxy());
 		// checks if the callback is null

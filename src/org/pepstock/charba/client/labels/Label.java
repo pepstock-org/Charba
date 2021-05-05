@@ -323,7 +323,7 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		this.renderCallbackProxy.setCallback((contextFunction, context) -> onRender(new LabelsContext(this, context)));
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsFont(new LabelsContext(this, context), getFontCallback(), getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsFont(new LabelsContext(this, context), getFontCallback(), this.defaultOptions.getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
 		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(this, context), getColorCallback(), getColorAsString()));
 	}
@@ -736,13 +736,6 @@ public final class Label extends NativeObjectContainer implements IsDefaultLabel
 	@Override
 	public void setFont(FontCallback<LabelsContext> fontCallback) {
 		FONT_PROPERTY_HANDLER.setCallback(this, LabelsPlugin.ID, fontCallback, fontCallbackProxy.getProxy());
-		// checks if the callback is null
-		// because setting to null, the original font must be set again
-		// in the the options
-		if (fontCallback == null && !has(Property.FONT)) {
-			// stores the font
-			setValue(Property.FONT, font);
-		}
 	}
 
 	/**

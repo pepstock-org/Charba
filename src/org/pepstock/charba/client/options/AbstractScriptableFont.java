@@ -35,9 +35,9 @@ public abstract class AbstractScriptableFont<T extends ChartContext> extends Abs
 	private final IsScriptableFontProvider<T> scriptableFontProvider;
 
 	/**
-	 * Creates an empty font to use for chart configuration when the font is created by a callback.
+	 * Creates an empty font to use for chart configuration.
 	 * 
-	 * @param scriptableFontProvider the provider of font callback.
+	 * @param scriptableFontProvider the provider of font callback
 	 * @param defaultValues default provider
 	 */
 	protected AbstractScriptableFont(IsScriptableFontProvider<T> scriptableFontProvider, IsDefaultFont defaultValues) {
@@ -45,9 +45,9 @@ public abstract class AbstractScriptableFont<T extends ChartContext> extends Abs
 	}
 
 	/**
-	 * Creates a font to use for chart configuration when the font is created by a callback, using a clone of another font object.
+	 * Creates a font to use for chart configuration, wrapping a native object instance.
 	 * 
-	 * @param scriptableFontProvider the provider of font callback.
+	 * @param scriptableFontProvider the provider of font callback
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */

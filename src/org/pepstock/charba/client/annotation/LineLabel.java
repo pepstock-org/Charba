@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
@@ -57,7 +56,6 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsScriptableFontProvider;
 import org.pepstock.charba.client.utils.Window;
@@ -1116,15 +1114,8 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 * @param fontCallback the font callback to set
 	 */
 	@Override
-	public final void setFont(FontCallback<AnnotationContext> fontCallback) {
+	public void setFont(FontCallback<AnnotationContext> fontCallback) {
 		FONT_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, fontCallback, fontCallbackProxy.getProxy());
-		// checks if the callback is null
-		// because setting to null, the original font must be set again
-		// in the the options
-		if (fontCallback == null && !has(Property.FONT)) {
-			// stores the font
-			setValue(Property.FONT, font);
-		}
 	}
 
 	// -----------------------
@@ -1246,28 +1237,6 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// if here the result is null
 		// then returns the default
 		return defaultValue.value();
-	}
-
-	/**
-	 * Returns a native object as font when the callback has been activated.
-	 * 
-	 * @param context native object as context
-	 * @return a native object as font
-	 */
-	final NativeObject onFont(AnnotationContext context) {
-		// gets value
-		FontItem result = ScriptableUtils.getOptionValue(context, getFontCallback());
-		// checks if result is consistent
-		if (result != null) {
-			// returns result
-			return result.nativeObject();
-		} else if (font != null) {
-			// checks if provider is consistent
-			return font.create().nativeObject();
-		}
-		// if here, provider is not consistent
-		// then returns the defaults one
-		return Defaults.get().getGlobal().getFont().create().nativeObject();
 	}
 
 }
