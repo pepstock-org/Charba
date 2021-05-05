@@ -145,7 +145,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		super(axis);
 		// gets embedded elements
 		this.backdropPadding = new Padding(() -> getAxis().getScale().getPointLabels().getBackdropPadding());
-		this.font = new Font(() -> getAxis().getConfiguration().getPointLabels().getFont());
+		this.font = new Font(this, () -> getAxis().getConfiguration().getPointLabels().getFont());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

@@ -40,7 +40,7 @@ import org.pepstock.charba.client.options.Ticks;
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class Tick extends AxisContainer implements IsScriptableFontProvider<ScaleContext> {
+abstract class Tick extends AxisContainer implements IsScriptableFontProvider<ScaleContext>  {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -129,7 +129,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		super(axis);
 		// creates sub element
 		this.major = new Major(axis, this);
-		this.font = new Font(() -> getConfiguration().getFont());
+		this.font = new Font(this, () -> getConfiguration().getFont());
 		this.backdropPadding = new Padding(() -> getAxis().getScale().getTicks().getBackdropPadding());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---

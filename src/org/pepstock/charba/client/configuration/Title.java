@@ -39,6 +39,8 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.options.IsScriptableFontProvider;
+import org.pepstock.charba.client.options.IsScriptablePaddingProvider;
 import org.pepstock.charba.client.utils.Window;
 
 /**
@@ -47,7 +49,7 @@ import org.pepstock.charba.client.utils.Window;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Title extends ConfigurationOptionsContainer {
+public class Title extends ConfigurationOptionsContainer implements IsScriptableFontProvider<ChartContext>, IsScriptablePaddingProvider<ChartContext> {
 
 	/**
 	 * Name of properties of native object.
@@ -132,8 +134,8 @@ public class Title extends ConfigurationOptionsContainer {
 	Title(ConfigurationOptions options) {
 		super(options);
 		// gets embedded font and padding
-		this.font = new Font(() -> getConfiguration().getTitle().getFont());
-		this.padding = new Padding(() -> getConfiguration().getTitle().getPadding());
+		this.font = new Font(this, () -> getConfiguration().getTitle().getFont());
+		this.padding = new Padding(this, () -> getConfiguration().getTitle().getPadding());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -342,6 +344,7 @@ public class Title extends ConfigurationOptionsContainer {
 	 * 
 	 * @return the padding callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public PaddingCallback<ChartContext> getPaddingCallback() {
 		return paddingCallback;
 	}
@@ -351,6 +354,7 @@ public class Title extends ConfigurationOptionsContainer {
 	 * 
 	 * @param paddingCallback the padding callback to set
 	 */
+	@Override
 	public void setPadding(PaddingCallback<ChartContext> paddingCallback) {
 		// sets the callback
 		this.paddingCallback = paddingCallback;
@@ -363,6 +367,7 @@ public class Title extends ConfigurationOptionsContainer {
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public FontCallback<ChartContext> getFontCallback() {
 		return fontCallback;
 	}
@@ -372,6 +377,7 @@ public class Title extends ConfigurationOptionsContainer {
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
+	@Override
 	public void setFont(FontCallback<ChartContext> fontCallback) {
 		// sets the callback
 		this.fontCallback = fontCallback;

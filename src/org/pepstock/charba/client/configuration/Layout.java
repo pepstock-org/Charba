@@ -22,6 +22,7 @@ import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.options.IsScriptablePaddingProvider;
 
 /**
  * The layout configuration is needed to set the padding.
@@ -29,7 +30,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Layout extends ConfigurationOptionsContainer {
+public class Layout extends ConfigurationOptionsContainer implements IsScriptablePaddingProvider<ChartContext> {
 
 	/**
 	 * Name of properties of native object.
@@ -82,7 +83,7 @@ public class Layout extends ConfigurationOptionsContainer {
 	Layout(ConfigurationOptions options) {
 		super(options);
 		// sets the padding object
-		this.padding = new Padding(() -> getConfiguration().getLayout().getPadding());
+		this.padding = new Padding(this, () -> getConfiguration().getLayout().getPadding());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -104,6 +105,7 @@ public class Layout extends ConfigurationOptionsContainer {
 	 * 
 	 * @return the padding callback, if set, otherwise <code>null</code>.
 	 */
+	@Override
 	public PaddingCallback<ChartContext> getPaddingCallback() {
 		return paddingCallback;
 
@@ -114,6 +116,7 @@ public class Layout extends ConfigurationOptionsContainer {
 	 * 
 	 * @param paddingCallback the padding callback to set
 	 */
+	@Override
 	public void setPadding(PaddingCallback<ChartContext> paddingCallback) {
 		// sets the callback
 		this.paddingCallback = paddingCallback;

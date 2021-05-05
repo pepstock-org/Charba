@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.options.IsPadding;
+import org.pepstock.charba.client.options.IsScriptablePaddingProvider;
 
 /**
  * Maps the additional space to apply to the sides of elements (left, top, right, bottom), in pixels.
@@ -24,14 +26,29 @@ import org.pepstock.charba.client.options.IsPadding;
  *
  */
 public final class Padding extends AbstractDynamicConfiguration<IsPadding> implements IsPadding {
-
+	
+	// instance of scriptable padding configuration container
+	private final IsScriptablePaddingProvider<?> scriptablePaddingProvider;
+	
 	/**
 	 * Builds the object by a padding provider used to get the padding element for storing properties.
 	 * 
 	 * @param provider padding provider used to get the padding element for storing properties.
 	 */
 	Padding(IsProvider<IsPadding> provider) {
+		this(null, provider);
+	}
+
+	/**
+	 * Builds the object by a padding provider used to get the padding element for storing properties.
+	 * 
+	 * @param scriptablePaddingProvider the provider of padding callback
+	 * @param provider padding provider used to get the padding element for storing properties.
+	 */
+	Padding(IsScriptablePaddingProvider<?> scriptablePaddingProvider, IsProvider<IsPadding> provider) {
 		super(provider);
+		// stores padding container
+		this.scriptablePaddingProvider = scriptablePaddingProvider;
 	}
 
 	/**
@@ -41,6 +58,9 @@ public final class Padding extends AbstractDynamicConfiguration<IsPadding> imple
 	 */
 	@Override
 	public void setLeft(int padding) {
+		// resets callback
+		resetCallback();
+		// stores value
 		checkAndGet().setLeft(padding);
 	}
 
@@ -61,6 +81,9 @@ public final class Padding extends AbstractDynamicConfiguration<IsPadding> imple
 	 */
 	@Override
 	public void setRight(int padding) {
+		// resets callback
+		resetCallback();
+		// stores value
 		checkAndGet().setRight(padding);
 	}
 
@@ -81,6 +104,9 @@ public final class Padding extends AbstractDynamicConfiguration<IsPadding> imple
 	 */
 	@Override
 	public void setTop(int padding) {
+		// resets callback
+		resetCallback();
+		// stores value
 		checkAndGet().setTop(padding);
 	}
 
@@ -101,6 +127,9 @@ public final class Padding extends AbstractDynamicConfiguration<IsPadding> imple
 	 */
 	@Override
 	public void setBottom(int padding) {
+		// resets callback
+		resetCallback();
+		// stores value
 		checkAndGet().setBottom(padding);
 	}
 
@@ -112,6 +141,17 @@ public final class Padding extends AbstractDynamicConfiguration<IsPadding> imple
 	@Override
 	public int getBottom() {
 		return checkAndGet().getBottom();
+	}
+	
+	/**
+	 * Invokes when any property of the padding is being set, in order to reset the {@link PaddingCallback} if exists
+	 */
+	protected void resetCallback() {
+		// checks if the padding has been set previously as a callback
+		if (scriptablePaddingProvider != null && scriptablePaddingProvider.getPaddingCallback() != null) {
+			// if yes, resets it
+			scriptablePaddingProvider.setPadding(null);
+		}
 	}
 
 }

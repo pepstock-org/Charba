@@ -15,9 +15,11 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.options.IsFont;
+import org.pepstock.charba.client.options.IsScriptableFontProvider;
 
 /**
  * Base object to map font configuration.
@@ -25,6 +27,9 @@ import org.pepstock.charba.client.options.IsFont;
  * @author Andrea "Stock" Stocchero
  */
 public final class Font extends AbstractDynamicConfiguration<IsFont> implements IsFont {
+	
+	// instance of scriptable padding configuration container
+	private final IsScriptableFontProvider<?> scriptableFontProvider;
 
 	/**
 	 * Builds the object by a font provider used to get the font element for storing properties.
@@ -32,7 +37,19 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 	 * @param provider font provider used to get the font element for storing properties.
 	 */
 	Font(IsProvider<IsFont> provider) {
+		this(null, provider);
+	}
+
+	/**
+	 * Builds the object by a font provider used to get the font element for storing properties.
+	 * 
+	 * @param scriptableFontProvider the provider of font callback
+	 * @param provider font provider used to get the font element for storing properties.
+	 */
+	Font(IsScriptableFontProvider<?> scriptableFontProvider, IsProvider<IsFont> provider) {
 		super(provider);
+		// stores font container
+		this.scriptableFontProvider = scriptableFontProvider;
 	}
 
 	/**
@@ -42,6 +59,9 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 	 */
 	@Override
 	public void setSize(int size) {
+		// resets callback
+		resetCallback();
+		// stores value
 		checkAndGet().setSize(size);
 	}
 
@@ -62,6 +82,9 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 	 */
 	@Override
 	public void setStyle(FontStyle style) {
+		// resets callback
+		resetCallback();
+		// stores value
 		checkAndGet().setStyle(style);
 	}
 
@@ -82,6 +105,9 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 	 */
 	@Override
 	public void setFamily(String family) {
+		// resets callback
+		resetCallback();
+		// stores value
 		checkAndGet().setFamily(family);
 	}
 
@@ -102,6 +128,9 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 	 */
 	@Override
 	public void setWeight(Weight weight) {
+		// resets callback
+		resetCallback();
+		// stores value
 		checkAndGet().setWeight(weight);
 	}
 
@@ -122,6 +151,9 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 	 */
 	@Override
 	public void setLineHeight(double lineHeight) {
+		// resets callback
+		resetCallback();
+		// stores value
 		checkAndGet().setLineHeight(lineHeight);
 	}
 
@@ -132,6 +164,9 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 	 */
 	@Override
 	public void setLineHeight(String lineHeight) {
+		// resets callback
+		resetCallback();
+		// stores value
 		checkAndGet().setLineHeight(lineHeight);
 	}
 
@@ -153,6 +188,17 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 	@Override
 	public String getLineHeightAsString() {
 		return checkAndGet().getLineHeightAsString();
+	}
+	
+	/**
+	 * Invokes when any property of the font is being set, in order to reset the {@link FontCallback} if exists
+	 */
+	protected void resetCallback() {
+		// checks if the font has been set previously as a callback
+		if (scriptableFontProvider != null && scriptableFontProvider.getFontCallback() != null) {
+			// if yes, resets it
+			scriptableFontProvider.setFont(null);
+		}
 	}
 
 }
