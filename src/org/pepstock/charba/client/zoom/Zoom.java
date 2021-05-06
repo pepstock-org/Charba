@@ -32,7 +32,7 @@ import org.pepstock.charba.client.zoom.callbacks.StartCallback;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> implements IsDefaultZoom {
+public final class Zoom extends AbstractConfigurationItem implements IsDefaultZoom {
 
 	// progress callback
 	private static final CallbackPropertyHandler<ProgressCallback> ZOOM_PROGRESS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_ZOOM);
@@ -95,6 +95,9 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 
 	}
 
+	// default values instance
+	private final IsDefaultZoom defaultOptions;
+
 	/**
 	 * Creates new zooming element, using stored native object instance and the default values options.
 	 * 
@@ -102,7 +105,20 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	 * @param defaultOptions default ZOOM options to returns the default when required.
 	 */
 	Zoom(IsDefaultZoom defaultOptions, NativeObject nativeObject) {
-		super(defaultOptions, nativeObject);
+		super(nativeObject);
+		// checks if defaults options is consistent
+		// stores defaults options
+		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.zoom.AbstractConfigurationItem#getDefaultsOptions()
+	 */
+	@Override
+	IsDefaultConfigurationItem getDefaultsOptions() {
+		return defaultOptions;
 	}
 
 	/*
@@ -176,7 +192,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 			return true;
 		}
 		// returns the drag enabled boolean property
-		return getValue(Property.DRAG, getDefaultsOptions().isDrag());
+		return getValue(Property.DRAG, defaultOptions.isDrag());
 	}
 
 	/**
@@ -190,7 +206,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 		if (isType(Property.DRAG, ObjectType.OBJECT)) {
 			// returns the default object getting the native one
 			// from configuration
-			return new Drag(getValue(Property.DRAG), getDefaultsOptions().getDrag());
+			return new Drag(getValue(Property.DRAG), defaultOptions.getDrag());
 		}
 		// if here,the drag is not set or boolean
 		// then returns the default drag object
@@ -215,7 +231,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	 */
 	@Override
 	public double getSpeed() {
-		return getValue(Property.SPEED, getDefaultsOptions().getSpeed());
+		return getValue(Property.SPEED, defaultOptions.getSpeed());
 	}
 
 	/**
@@ -234,7 +250,7 @@ public final class Zoom extends AbstractConfigurationItem<IsDefaultZoom> impleme
 	 */
 	@Override
 	public ModifierKey getWheelModifierKey() {
-		return getValue(Property.WHEEL_MODIFIER_KEY, ModifierKey.values(), getDefaultsOptions().getWheelModifierKey());
+		return getValue(Property.WHEEL_MODIFIER_KEY, ModifierKey.values(), defaultOptions.getWheelModifierKey());
 	}
 
 }

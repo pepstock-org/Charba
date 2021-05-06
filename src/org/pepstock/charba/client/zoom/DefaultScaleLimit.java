@@ -16,18 +16,19 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options for RANGE (min and max) elements.<br>
- * It contains all default values for RANGE.
+ * {@link ZoomPlugin#ID} plugin default options for scale (min and max) elements.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultRange implements IsDefaultRange {
+final class DefaultScaleLimit implements IsDefaultScaleLimit {
+	
+	static final DefaultScaleLimit INSTANCE = new DefaultScaleLimit();
 
 	/**
 	 * Creates an empty object.
 	 */
-	DefaultRange() {
+	DefaultScaleLimit() {
 		// do nothing
 	}
 

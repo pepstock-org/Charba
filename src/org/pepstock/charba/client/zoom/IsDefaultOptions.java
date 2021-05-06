@@ -37,5 +37,12 @@ interface IsDefaultOptions {
 	 * @return the zoom element.
 	 */
 	IsDefaultZoom getZoom();
+	
+	/**
+	 * Returns the limit element.
+	 * 
+	 * @return the limit element.
+	 */
+	IsDefaultLimit getLimit();
 
 }

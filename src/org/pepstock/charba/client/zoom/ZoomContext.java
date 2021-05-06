@@ -19,6 +19,7 @@ import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.ContextType;
 
 /**
  * The callback or handler context, created and passed by {@link ZoomPlugin#ID} which contains the link to the native chart and the event.
@@ -32,7 +33,8 @@ public final class ZoomContext extends ChartContext {
 	 */
 	private enum Property implements Key
 	{
-		POINT("point");
+		POINT("point"),
+		TYPE("type");
 
 		// name value of property
 		private final String value;
@@ -58,7 +60,7 @@ public final class ZoomContext extends ChartContext {
 	}
 
 	// zoom configuration item instance
-	private final AbstractConfigurationItem<?> zoomElement;
+	private final AbstractConfigurationItem zoomElement;
 	// point instance, from native context
 	private final Point point;
 
@@ -68,13 +70,20 @@ public final class ZoomContext extends ChartContext {
 	 * @param zoomElement zoom configuration item instance
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	ZoomContext(AbstractConfigurationItem<?> zoomElement, NativeObject nativeObject) {
+	ZoomContext(AbstractConfigurationItem zoomElement, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if zoom options is consistent
 		// stores options
 		this.zoomElement = Checker.checkAndGetIfValid(zoomElement, "Zoom options argument");
 		// gets the point from context if there is
 		this.point = new Point(getValue(Property.POINT));
+		// zoom plugin does not provide the context type
+		// to normalize the structure of the context
+		// the type is added here
+		if (!has(Property.TYPE)) {
+			// overrides and sets the zoom type
+			setValue(Property.TYPE, ContextType.ZOOM);
+		}
 	}
 
 	/**
@@ -82,7 +91,7 @@ public final class ZoomContext extends ChartContext {
 	 * 
 	 * @return the {@link ZoomPlugin} configuration element
 	 */
-	public AbstractConfigurationItem<?> getElement() {
+	public AbstractConfigurationItem getElement() {
 		return zoomElement;
 	}
 
@@ -93,6 +102,17 @@ public final class ZoomContext extends ChartContext {
 	 */
 	public Point getPoint() {
 		return point;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.callbacks.ChartContext#isConsistent()
+	 */
+	@Override
+	protected boolean isConsistent() {
+		// checks if the context types are chart or zoom
+		return ContextType.CHART.equals(getType()) || ContextType.ZOOM.equals(getType());
 	}
 
 }

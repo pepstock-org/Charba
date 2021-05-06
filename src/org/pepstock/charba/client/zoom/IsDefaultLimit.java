@@ -16,39 +16,29 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options interface for DRAG element, in order to style the drag area.<br>
- * It contains all default values for DRAG.
+ * {@link ZoomPlugin#ID} plugin default options interface for limit elements.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultDrag {
+interface IsDefaultLimit {
 
 	/**
-	 * Returns the fill color during dragging.
+	 * Returns the limit for X scale.
 	 * 
-	 * @return the fill color during dragging
+	 * @return the limit for X scale
 	 */
-	default String getBackgroundColorAsString() {
-		return Drag.DEFAULT_BACKGROUND_COLOR;
+	default IsDefaultScaleLimit getX() {
+		return DefaultScaleLimit.INSTANCE;
 	}
 
 	/**
-	 * Returns the color of the border during dragging.
+	 * Returns the limit for Y scale.
 	 * 
-	 * @return the color of the border during dragging
+	 * @return the limit for Y scale
 	 */
-	default String getBorderColorAsString() {
-		return Drag.DEFAULT_BORDER_COLOR;
-	}
-
-	/**
-	 * Returns the width of the border in pixels.
-	 * 
-	 * @return the width of the border in pixels.
-	 */
-	default int getBorderWidth() {
-		return Drag.DEFAULT_BORDER_WIDTH;
+	default IsDefaultScaleLimit getY() {
+		return DefaultScaleLimit.INSTANCE;
 	}
 
 }

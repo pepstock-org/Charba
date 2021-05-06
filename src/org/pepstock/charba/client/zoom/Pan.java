@@ -30,7 +30,7 @@ import org.pepstock.charba.client.zoom.callbacks.StartCallback;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implements IsDefaultPan {
+public final class Pan extends AbstractConfigurationItem implements IsDefaultPan {
 
 	// progress callback
 	private static final CallbackPropertyHandler<ProgressCallback> PAN_PROGRESS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN);
@@ -81,6 +81,9 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 
 	}
 
+	// default values instance
+	private final IsDefaultPan defaultOptions;
+
 	/**
 	 * Creates new panning element, using stored native object instance and the default values options.
 	 * 
@@ -88,7 +91,20 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 * @param nativeObject stored panning values in the native object to read.
 	 */
 	Pan(IsDefaultPan defaultOptions, NativeObject nativeObject) {
-		super(defaultOptions, nativeObject);
+		super(nativeObject);
+		// checks if defaults options is consistent
+		// stores defaults options
+		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.zoom.AbstractConfigurationItem#getDefaultsOptions()
+	 */
+	@Override
+	IsDefaultConfigurationItem getDefaultsOptions() {
+		return defaultOptions;
 	}
 
 	/*
@@ -147,7 +163,7 @@ public final class Pan extends AbstractConfigurationItem<IsDefaultPan> implement
 	 */
 	@Override
 	public ModifierKey getModifierKey() {
-		return getValue(Property.MODIFIER_KEY, ModifierKey.values(), getDefaultsOptions().getModifierKey());
+		return getValue(Property.MODIFIER_KEY, ModifierKey.values(), defaultOptions.getModifierKey());
 	}
 
 }

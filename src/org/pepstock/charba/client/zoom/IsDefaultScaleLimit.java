@@ -20,65 +20,65 @@ import java.util.Date;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options interface for RANGE (min and max) elements.<br>
- * It contains all default values for RANGE.
+ * {@link ZoomPlugin#ID} plugin default options interface for scale limit (min and max) elements.<br>
+ * It contains all default values for scale limit.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultRange {
+interface IsDefaultScaleLimit {
 
 	/**
-	 * Returns the X value of range as string.
+	 * Returns the minimum value of limit as string.
 	 * 
-	 * @return the X value of range as string
+	 * @return the minimum value of limit as string
 	 */
-	default String getX() {
+	default String getMin() {
 		return Undefined.STRING;
 	}
 
 	/**
-	 * Returns the X value of range as double.
+	 * Returns the minimum value of limit as double.
 	 * 
-	 * @return the X value of range as double
+	 * @return the minimum value of limit as double
 	 */
-	default double getXAsDouble() {
+	default double getMinAsDouble() {
 		return Undefined.DOUBLE;
 	}
 
 	/**
-	 * Returns the X value of range as date.
+	 * Returns the minimum value of limit as date.
 	 * 
-	 * @return the X value of range as date
+	 * @return the minimum value of limit as date
 	 */
-	default Date getXAsDate() {
+	default Date getMinAsDate() {
 		return null;
 	}
 
 	/**
-	 * Returns the Y value of range as double.
+	 * Returns the maximum value of limit as double.
 	 * 
-	 * @return the Y value of range as double
+	 * @return the maximum value of limit as double
 	 */
-	default double getY() {
+	default double getMax() {
 		return Undefined.DOUBLE;
 	}
 
 	/**
-	 * Returns the Y value of range as string.
+	 * Returns the maximum value of limit as string.
 	 * 
-	 * @return the Y value of range as string
+	 * @return the maximum value of limit as string
 	 */
-	default String getYAsString() {
+	default String getMaxAsString() {
 		return Undefined.STRING;
 	}
 
 	/**
-	 * Returns the Y value of range as date.
+	 * Returns the maximum value of limit as date.
 	 * 
-	 * @return the Y value of range as date
+	 * @return the maximum value of limit as date
 	 */
-	default Date getYAsDate() {
+	default Date getMaxAsDate() {
 		return null;
 	}
 }

@@ -34,7 +34,8 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 	enum Property implements Key
 	{
 		PAN("pan"),
-		ZOOM("zoom");
+		ZOOM("zoom"),
+		LIMIT("limit");
 
 		// name value of property
 		private final String value;
@@ -66,6 +67,8 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 	private final Pan pan;
 	// zoom inner element
 	private final Zoom zoom;
+	// limit inner element
+	private final Limit limit;
 
 	/**
 	 * Creates new {@link ZoomPlugin#ID} plugin options.
@@ -114,6 +117,13 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 			// stores zoom
 			setValue(Property.ZOOM, zoom);
 		}
+		// sets inner elements
+		this.limit = new Limit(this.defaultOptions.getLimit(), getValue(Property.LIMIT));
+		// checks it has got the element
+		if (!has(Property.LIMIT)) {
+			// stores limit
+			setValue(Property.LIMIT, limit);
+		}
 	}
 
 	/*
@@ -144,6 +154,16 @@ public final class ZoomOptions extends AbstractPluginOptions implements IsDefaul
 	@Override
 	public Zoom getZoom() {
 		return zoom;
+	}
+	
+	/**
+	 * Returns the limit element.
+	 * 
+	 * @return the limit element.
+	 */
+	@Override
+	public Limit getLimit() {
+		return limit;
 	}
 
 }

@@ -46,19 +46,13 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	public static final int DEFAULT_BORDER_WIDTH = 0;
 
 	/**
-	 * Default animation duration, <b>{@value DEFAULT_ANIMATION_DURATION}</b>.
-	 */
-	public static final int DEFAULT_ANIMATION_DURATION = 0;
-
-	/**
 	 * Name of properties of native object.
 	 */
 	enum Property implements Key
 	{
 		BACKGROUND_COLOR("backgroundColor"),
 		BORDER_COLOR("borderColor"),
-		BORDER_WIDTH("borderWidth"),
-		ANIMATION_DURATION("animationDuration");
+		BORDER_WIDTH("borderWidth");
 
 		// name value of property
 		private final String value;
@@ -88,7 +82,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	private IsDefaultDrag defaultOptions;
 
 	/**
-	 * Creates new range element, using the default values options.
+	 * Creates new drag element, using the default values options.
 	 * 
 	 * @param defaultOptions default DRAG options to returns the default when required.
 	 */
@@ -97,9 +91,9 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	}
 
 	/**
-	 * Creates new range element, using stored native object instance and the default values options.
+	 * Creates new drag element, using stored native object instance and the default values options.
 	 * 
-	 * @param nativeObject stored range values in the native object to read.
+	 * @param nativeObject stored drag values in the native object to read.
 	 * @param defaultOptions default DRAG options to returns the default when required.
 	 */
 	Drag(NativeObject nativeObject, IsDefaultDrag defaultOptions) {
@@ -203,25 +197,6 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	@Override
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, defaultOptions.getBorderWidth());
-	}
-
-	/**
-	 * Sets the number of milliseconds an animation takes.
-	 * 
-	 * @param milliseconds the number of milliseconds an animation takes.
-	 */
-	public void setAnimationDuration(int milliseconds) {
-		setValue(Property.ANIMATION_DURATION, Checker.positiveOrZero(milliseconds));
-	}
-
-	/**
-	 * Returns the number of milliseconds an animation takes.
-	 * 
-	 * @return the number of milliseconds an animation takes.
-	 */
-	@Override
-	public int getAnimationDuration() {
-		return getValue(Property.ANIMATION_DURATION, defaultOptions.getAnimationDuration());
 	}
 
 }

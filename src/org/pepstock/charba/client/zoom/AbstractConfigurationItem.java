@@ -40,9 +40,8 @@ import jsinterop.annotations.JsFunction;
  * Abstract element used by pan and zoom object in order to enable to provide the configuration of {@link ZoomPlugin#ID}.
  * 
  * @author Andrea "Stock" Stocchero
- * @param <T> type of default
  */
-public abstract class AbstractConfigurationItem<T extends IsDefaultConfigurationItem> extends NativeObjectContainer implements IsDefaultConfigurationItem {
+public abstract class AbstractConfigurationItem extends NativeObjectContainer implements IsDefaultConfigurationItem {
 
 	/**
 	 * Java script FUNCTION callback called to provide onPan, onPanComplete, onPanRejected, onZoom, onZoomComplete and onZoomRejected handlers.
@@ -131,27 +130,20 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 
 	}
 
-	// default options
-	private final T defaultOptions;
-
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @param defaultOptions default options of element
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	AbstractConfigurationItem(T defaultOptions, NativeObject nativeObject) {
+	AbstractConfigurationItem(NativeObject nativeObject) {
 		super(nativeObject);
-		// checks if defaults options is consistent
-		// stores defaults options
-		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
 		// stores new incremental id
 		setNewIncrementalId();
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.modeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getModeCallback(), this.defaultOptions.getMode()).value());
-		this.overScaleModeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getOverScaleModeCallback(), this.defaultOptions.getOverScaleMode()).value());
+		this.modeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getModeCallback(), getDefaultsOptions().getMode()).value());
+		this.overScaleModeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getOverScaleModeCallback(), getDefaultsOptions().getOverScaleMode()).value());
 		this.progressCallbackProxy.setCallback((contextFunction, context) -> onProgress(createContext(context)));
 		this.completeCallbackProxy.setCallback((contextFunction, context) -> onCompleted(createContext(context)));
 		this.rejectCallbackProxy.setCallback((contextFunction, context) -> onRejected(createContext(context)));
@@ -163,9 +155,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 * 
 	 * @return the default options instance
 	 */
-	final T getDefaultsOptions() {
-		return defaultOptions;
-	}
+	abstract IsDefaultConfigurationItem getDefaultsOptions();
 
 	/**
 	 * Returns the callback property handler for progress event.
@@ -211,7 +201,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final boolean isEnabled() {
-		return getValue(Property.ENABLED, defaultOptions.isEnabled());
+		return getValue(Property.ENABLED, getDefaultsOptions().isEnabled());
 	}
 
 	/**
@@ -236,11 +226,11 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 		// checks if callback has been activated
 		if (getModeCallback() == null) {
 			// no callback
-			return getValue(Property.MODE, InteractionAxis.values(), defaultOptions.getMode());
+			return getValue(Property.MODE, InteractionAxis.values(), getDefaultsOptions().getMode());
 		}
 		// if here, mode callback has been activated
 		// then returns the default
-		return defaultOptions.getMode();
+		return getDefaultsOptions().getMode();
 	}
 
 	/**
@@ -264,7 +254,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final InteractionAxis getOverScaleMode() {
-		return getValue(Property.OVER_SCALE_MODE, InteractionAxis.values(), defaultOptions.getOverScaleMode());
+		return getValue(Property.OVER_SCALE_MODE, InteractionAxis.values(), getDefaultsOptions().getOverScaleMode());
 	}
 
 	/**
@@ -297,7 +287,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final ModeCallback getModeCallback() {
-		return MODE_PROPERTY_HANDLER.getCallback(this, defaultOptions.getModeCallback());
+		return MODE_PROPERTY_HANDLER.getCallback(this, getDefaultsOptions().getModeCallback());
 	}
 
 	/**
@@ -317,7 +307,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final ModeCallback getOverScaleModeCallback() {
-		return OVER_SCALE_MODE_PROPERTY_HANDLER.getCallback(this, defaultOptions.getOverScaleModeCallback());
+		return OVER_SCALE_MODE_PROPERTY_HANDLER.getCallback(this, getDefaultsOptions().getOverScaleModeCallback());
 	}
 
 	/**
@@ -337,7 +327,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final ProgressCallback getProgressCallback() {
-		return getProgessPropertyHandler().getCallback(this, defaultOptions.getProgressCallback());
+		return getProgessPropertyHandler().getCallback(this, getDefaultsOptions().getProgressCallback());
 	}
 
 	/**
@@ -356,7 +346,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final CompletedCallback getCompletedCallback() {
-		return getCompletedPropertyHandler().getCallback(this, defaultOptions.getCompletedCallback());
+		return getCompletedPropertyHandler().getCallback(this, getDefaultsOptions().getCompletedCallback());
 	}
 
 	/**
@@ -375,7 +365,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final RejectedCallback getRejectedCallback() {
-		return getRejectedPropertyHandler().getCallback(this, defaultOptions.getRejectedCallback());
+		return getRejectedPropertyHandler().getCallback(this, getDefaultsOptions().getRejectedCallback());
 	}
 
 	/**
@@ -394,7 +384,7 @@ public abstract class AbstractConfigurationItem<T extends IsDefaultConfiguration
 	 */
 	@Override
 	public final StartCallback getStartCallback() {
-		return getStartPropertyHandler().getCallback(this, defaultOptions.getStartCallback());
+		return getStartPropertyHandler().getCallback(this, getDefaultsOptions().getStartCallback());
 	}
 
 	/**

@@ -445,7 +445,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `ModeCallback` interface method signature adding new argument, the configuration element of the `Zoom` options.
  * remove `sensibility`, `rangeMin` and `rangeMax` properties from `Zoom` configuration and options.
  * remove `speed`, `rangeMin` and `rangeMax` properties from `Pan` configuration and options.
- * change signature for `Zoom` and `Pan` callbacks in order to be aligned with the other scriptable options, using only an argument, the context. 
+ * change signature for `Zoom` and `Pan` callbacks in order to be aligned with the other scriptable options, using only an argument, the context.
+ * remove the generic definition from `AbstractConfigurationItem` class in `ZoomPlugin`.
+ * remove `animationDuration` property from `Drag` class  in `ZoomPlugin`.
+ * remove `Range` class because is not longer used. Use `Limit` and `ScaleLimit` instead.
  * rename `enabled` property to `display` in `LineLabel` configuration of `AnnotationPlugin`.
  * move `AnnotationType` enumeration from `org.pepstock.charba.client.annotation.enums` to `org.pepstock.charba.client.annotation` in order to maintain the low visibility of internal classes of the annotation plugin implementation.
  * rename `LineLablePosition` class to `LablePosition` for `LineLabel` configuration of `AnnotationPlugin`.
@@ -497,6 +500,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `modifierKey` property to `Pan` options in the `ZoomPlugin` in order to enable pan only when modifier key was detected.
  * add `wheelModifierKey` property to `Zoom` options in the `ZoomPlugin` in order to enable zoom only when modifier key was detected.
  * add `overScaleMode` property to `Zoom` and `Pan` options in the `ZoomPlugin` in order to enable zoom only when modifier key was detected.
+ * add `Limit` and `ScaleLimit` configuration element to ZoomOptions configuration.
 
 ### _Controllers_
 

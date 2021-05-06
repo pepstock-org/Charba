@@ -61,6 +61,10 @@ public enum ContextType implements Key
 	 */
 	ANNOTATION("annotation"),
 	/**
+	 * Zoom plugin context type.
+	 */
+	ZOOM("zoom"),
+	/**
 	 * Meter and gauge controllers context type.
 	 */
 	METER("meter"),
