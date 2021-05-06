@@ -17,6 +17,9 @@ package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.IsTransitionKey;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -54,17 +57,88 @@ final class JsZoomHelper {
 	static JsZoomHelper get() {
 		return INSTANCE;
 	}
-
+	
 	/**
 	 * Reset the zoom of chart when {@link ZoomPlugin} is activated.
 	 * 
 	 * @param chart chart instance to invoke
+	 * @param transition update transition mode, could be <code>null</code>
 	 */
-	void resetZoom(Chart chart) {
+	void resetZoom(Chart chart, IsTransitionKey transition) {
 		// checks if chart is consistent
 		if (chart != null) {
-			// resets zoom
-			NativeJsZoomHelper.resetZoom(chart);
+			// checks if transition is consistent
+			if (IsTransitionKey.isValid(transition)) {
+				// resets zoom by transition key
+				NativeJsZoomHelper.resetZoom(chart, transition.value());
+			} else {
+				// resets zoom by transition key
+				NativeJsZoomHelper.resetZoom(chart);
+			}
+		}
+	}
+	
+	/**
+	 * Zooms the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of zoom to apply
+	 * @param transition update transition mode
+	 */
+	void zoom(Chart chart, Point amount, IsTransitionKey transition) {
+		// checks if chart and amount are consistent
+		if (chart != null && amount != null) {
+			// checks if transition is consistent
+			if (IsTransitionKey.isValid(transition)) {
+				// zooms by transition key
+				NativeJsZoomHelper.zoom(chart, amount.nativeObject(), transition.value());
+			} else {
+				// zooms by transition key
+				NativeJsZoomHelper.zoom(chart, amount.nativeObject());
+			}
+		}
+	}
+
+	/**
+	 * Zooms the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of zoom to apply
+	 * @param transition update transition mode
+	 */
+	void zoom(Chart chart, double amount, IsTransitionKey transition) {
+		// checks if chart and amount are consistent
+		if (chart != null && Undefined.isNot(amount)) {
+			// checks if transition is consistent
+			if (IsTransitionKey.isValid(transition)) {
+				// zooms by transition key
+				NativeJsZoomHelper.zoom(chart, amount, transition.value());
+			} else {
+				// zooms by transition key
+				NativeJsZoomHelper.zoom(chart, amount);
+			}
+		}
+	}
+	
+	/**
+	 * Zooms the chart scale on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param scaleId scale id to zoom
+	 * @param range range (min/max) of scale to zoom
+	 * @param transition update transition mode
+	 */
+	void zoomScale(Chart chart, IsScaleId scaleId, ScaleRange range, IsTransitionKey transition) {
+		// checks if chart and amount are consistent
+		if (chart != null && IsScaleId.isValid(scaleId) && range != null) {
+			// checks if transition is consistent
+			if (IsTransitionKey.isValid(transition)) {
+				// zooms by transition key
+				NativeJsZoomHelper.zoomScale(chart, scaleId.value(), range.nativeObject(), transition.value());
+			} else {
+				// zooms by transition key
+				NativeJsZoomHelper.zoomScale(chart, scaleId.value(), range.nativeObject());
+			}
 		}
 	}
 

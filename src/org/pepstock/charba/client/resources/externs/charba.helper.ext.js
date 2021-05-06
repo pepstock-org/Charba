@@ -217,10 +217,26 @@ CharbaJsChartHelper.invokeDefaultChartEvent = function(options, key, chart, even
  */	
 function CharbaJsZoomHelper() {}	    
 /**
- * @param {Chart} chart 
+ * @param {Chart} chart
+ * @param {string=} mode 
  * @return {undefined}
  */
-CharbaJsZoomHelper.resetZoom = function(chart) {};
+CharbaJsZoomHelper.resetZoom = function(chart, mode) {};
+/**
+ * @param {Chart} chart
+ * @param {number|Object} amount 
+ * @param {string=} mode 
+ * @return {undefined}
+ */
+CharbaJsZoomHelper.zoom = function(chart, amount, mode) {};
+/**
+ * @param {Chart} chart
+ * @param {string} scaleId 
+ * @param {Object} range 
+ * @param {string=} mode 
+ * @return {undefined}
+ */
+CharbaJsZoomHelper.zoomScale = function(chart, scaleId, range, mode) {};
 /**
  * @constructor
  * @return {CharbaJsDataLabelsHelper}

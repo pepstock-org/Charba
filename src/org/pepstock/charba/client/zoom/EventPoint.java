@@ -17,13 +17,15 @@ package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
- * This object is wrapping the native java script object provided by tooltip positioner to know the position of the event in canvas coordinates.
+ * This object is wrapping the native java script object provided by {@link ZoomContext} to know the position of the event when pan or zoom are about to start.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Point extends EventPoint {
+public class EventPoint extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -57,46 +59,39 @@ public final class Point extends EventPoint {
 	}
 
 	/**
-	 * Creates an empty object
-	 */
-	public Point() {
-		this(null);
-	}
-
-	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Point(NativeObject nativeObject) {
+	EventPoint(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
 	/**
-	 * Sets the X coordinate of the point.
+	 * Returns the X coordinate of the point.
 	 * 
-	 * @param x the X coordinate of the point.
+	 * @return the X coordinate of the point.
 	 */
-	public void setX(double x) {
-		setValue(Property.X, x);
+	public final double getX() {
+		return getValue(Property.X, Undefined.DOUBLE);
 	}
 
 	/**
-	 * Sets the Y coordinate of the point.
+	 * Returns the Y coordinate of the point.
 	 * 
-	 * @param y the Y coordinate of the point.
+	 * @return the Y coordinate of the point.
 	 */
-	public void setY(double y) {
-		setValue(Property.Y, y);
+	public final double getY() {
+		return getValue(Property.Y, Undefined.DOUBLE);
 	}
 
 	/**
-	 * Returns the native object instance.
+	 * Returns <code>true</code> if the coordinates are consistent and not <code>NaN</code>.
 	 * 
-	 * @return the native object instance.
+	 * @return <code>true</code> if the coordinates are consistent and not <code>NaN</code>
 	 */
-	NativeObject nativeObject() {
-		return getNativeObject();
+	public final boolean isConsistent() {
+		return Undefined.isNot(getX()) && Undefined.isNot(getY());
 	}
 
 }

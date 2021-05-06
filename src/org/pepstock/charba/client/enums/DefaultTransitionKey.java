@@ -27,11 +27,15 @@ import org.pepstock.charba.client.options.IsTransitionKey;
 public enum DefaultTransitionKey implements IsTransitionKey
 {
 	/**
+	 * Uses to configure the animation to the default.
+	 */
+	DEFAULT("default"),
+	/**
 	 * Uses to configure the animation when an element is hovering.
 	 */
 	ACTIVE("active"),
 	/**
-	 * Uses to configure the animation when a dataset is hidden using legend or {@link IsChart#hide(int)}.
+	 * Uses to configure the animation when a data set is hidden using legend or {@link IsChart#hide(int)}.
 	 */
 	HIDE("hide"),
 	/**
@@ -43,7 +47,7 @@ public enum DefaultTransitionKey implements IsTransitionKey
 	 */
 	RESIZE("resize"),
 	/**
-	 * Uses to configure the animation when a dataset is shown using legend or {@link IsChart#show(int)}.
+	 * Uses to configure the animation when a data set is shown using legend or {@link IsChart#show(int)}.
 	 */
 	SHOW("show"),
 	/**

@@ -20,6 +20,8 @@ import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.IsTransitionKey;
 import org.pepstock.charba.client.plugins.AbstractExtensionPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -44,6 +46,10 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * Zoom options factory
 	 */
 	public static final ZoomOptionsFactory FACTORY = new ZoomOptionsFactory();
+	/**
+	 * Custom transition mode to update the chart by API, "<b>zoom</b>".
+	 */
+	public static final IsTransitionKey ZOOM_TRANSITION_MODE = IsTransitionKey.create("zoom");
 	// internal defaults options factory
 	static final ZoomDefaultsOptionsFactory DEFAULTS_FACTORY = new ZoomDefaultsOptionsFactory();
 	// injectable resource for plugin
@@ -122,12 +128,105 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param chart chart instance to invoke
 	 */
 	public static void resetZoom(IsChart chart) {
-		// check if chart is consistent and zoom plugin is acitvated
-		if (IsChart.isConsistent(chart) && Charts.hasNative(chart) && chart.getOptions().getPlugins().isEnabled(ID)) {
+		resetZoom(chart, null);
+	}
+
+	/**
+	 * Reset the zoom of chart when {@link ZoomPlugin} is activated.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param transition update transition mode, could be <code>null</code>
+	 */
+	public static void resetZoom(IsChart chart, IsTransitionKey transition) {
+		// check if chart is consistent and zoom plugin is activated
+		if (isReadyForApi(chart)) {
 			// gets native chart instance
 			Chart nativeChart = Charts.getNative(chart);
 			// resets zoom
-			JsZoomHelper.get().resetZoom(nativeChart);
+			JsZoomHelper.get().resetZoom(nativeChart, transition);
+		}
+	}
+
+	/**
+	 * Zooms the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of zoom to apply
+	 */
+	public static void zoom(IsChart chart, Point amount) {
+		zoom(chart, amount, null);
+	}
+
+	/**
+	 * Zooms the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of zoom to apply
+	 * @param transition update transition mode
+	 */
+	public static void zoom(IsChart chart, Point amount, IsTransitionKey transition) {
+		// check if chart is consistent and zoom plugin is activated
+		if (isReadyForApi(chart)) {
+			// gets native chart instance
+			Chart nativeChart = Charts.getNative(chart);
+			// resets zoom
+			JsZoomHelper.get().zoom(nativeChart, amount, transition);
+		}
+	}
+
+	/**
+	 * Zooms the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of zoom to apply
+	 */
+	public static void zoom(IsChart chart, double amount) {
+		zoom(chart, amount, null);
+	}
+
+	/**
+	 * Zooms the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of zoom to apply
+	 * @param transition update transition mode
+	 */
+	public static void zoom(IsChart chart, double amount, IsTransitionKey transition) {
+		// check if chart is consistent and zoom plugin is activated
+		if (isReadyForApi(chart)) {
+			// gets native chart instance
+			Chart nativeChart = Charts.getNative(chart);
+			// zooms
+			JsZoomHelper.get().zoom(nativeChart, amount, transition);
+		}
+	}
+	
+	/**
+	 * Zooms the chart scale on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param scaleId scale id to zoom
+	 * @param range range (min/max) of scale to zoom
+	 */
+	public static void zoomScale(IsChart chart, IsScaleId scaleId, ScaleRange range) {
+		zoomScale(chart, scaleId, range, null);
+	}
+
+	/**
+	 * Zooms the chart scale on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param scaleId scale id to zoom
+	 * @param range range (min/max) of scale to zoom
+	 * @param transition update transition mode
+	 */
+	public static void zoomScale(IsChart chart, IsScaleId scaleId, ScaleRange range, IsTransitionKey transition) {
+		// check if chart is consistent and zoom plugin is activated
+		if (isReadyForApi(chart) && IsScaleId.isValid(scaleId) && chart.getNode().getScales().getItems().containsKey(scaleId.value())) {
+			// gets native chart instance
+			Chart nativeChart = Charts.getNative(chart);
+			// zooms scale
+			JsZoomHelper.get().zoomScale(nativeChart, scaleId, range, transition);
 		}
 	}
 
@@ -177,4 +276,14 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 		return new Drag(defaultValues.getZoom().getDrag());
 	}
 
+	/**
+	 * Checks if the chart is ready to perform the API.<br>
+	 * It searches if the chart is consistent and if the plugin has been activated for the chart.
+	 * 
+	 * @param chart chart instance to check
+	 * @return <code>true</code> if the chart is ready to perform the API
+	 */
+	private static boolean isReadyForApi(IsChart chart) {
+		return IsChart.isConsistent(chart) && Charts.hasNative(chart) && chart.getOptions().getPlugins().isEnabled(ID);
+	}
 }

@@ -765,11 +765,39 @@ function CharbaJsZoomHelper() {}
  * Invokes the chart reset zoom function if exists.
  * 
  * @param {Chart} chart chart instance
+ * @param {string=} mode update mode instance
  * @return {undefined}
  */
-CharbaJsZoomHelper.resetZoom = function(chart) {
+CharbaJsZoomHelper.resetZoom = function(chart, mode) {
   if (chart != null && typeof chart.resetZoom === 'function'){
-    chart.resetZoom.call(chart);
+    chart.resetZoom.call(chart, mode);
+  }
+}
+/**
+ * Zooms the chart on demand, programmatically.
+ *
+ * @param {Chart} chart
+ * @param {number|Object} amount 
+ * @param {string=} mode 
+ * @return {undefined}
+ */
+CharbaJsZoomHelper.zoom = function(chart, amount, mode) {
+  if (chart != null && typeof chart.zoom === 'function'){
+    chart.zoom.call(chart, amount, mode);
+  }
+}
+/**
+ * Zooms the chart scale on demand, programmatically.
+ *
+ * @param {Chart} chart
+ * @param {string} scaleId 
+ * @param {Object} range 
+ * @param {string=} mode 
+ * @return {undefined}
+ */
+CharbaJsZoomHelper.zoomScale = function(chart, scaleId, range, mode) {
+  if (chart != null && typeof chart.zoomScale === 'function'){
+    chart.zoomScale.call(chart, scaleId, range, mode);
   }
 }
 /**

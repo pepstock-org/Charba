@@ -62,7 +62,7 @@ public final class ZoomContext extends ChartContext {
 	// zoom configuration item instance
 	private final AbstractConfigurationItem zoomElement;
 	// point instance, from native context
-	private final Point point;
+	private final EventPoint point;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
@@ -76,7 +76,7 @@ public final class ZoomContext extends ChartContext {
 		// stores options
 		this.zoomElement = Checker.checkAndGetIfValid(zoomElement, "Zoom options argument");
 		// gets the point from context if there is
-		this.point = new Point(getValue(Property.POINT));
+		this.point = new EventPoint(getValue(Property.POINT));
 		// zoom plugin does not provide the context type
 		// to normalize the structure of the context
 		// the type is added here
@@ -100,7 +100,7 @@ public final class ZoomContext extends ChartContext {
 	 * 
 	 * @return the position of the event when pan or zoom are about to start
 	 */
-	public Point getPoint() {
+	public EventPoint getPoint() {
 		return point;
 	}
 	

@@ -501,6 +501,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `wheelModifierKey` property to `Zoom` options in the `ZoomPlugin` in order to enable zoom only when modifier key was detected.
  * add `overScaleMode` property to `Zoom` and `Pan` options in the `ZoomPlugin` in order to enable zoom only when modifier key was detected.
  * add `Limit` and `ScaleLimit` configuration element to ZoomOptions configuration.
+ * add new `resetZoom(IsChart, IsTransitionKey)` API to the `ZoomPlugin` class in order to set the update mode of updating chart.
+ * add `ZOOM_TRANSITION_MODE` constant to the `ZoomPlugin` class in order to get the custom transition mode provided by the plugin out-of-the-box.
 
 ### _Controllers_
 

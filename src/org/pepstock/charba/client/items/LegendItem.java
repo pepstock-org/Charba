@@ -494,7 +494,7 @@ public class LegendItem extends AbstractNode {
 	public static class LegendItemFactory implements NativeObjectContainerFactory<LegendItem> {
 
 		/**
-		 * To avoid any instatiation
+		 * To avoid any instantiation
 		 */
 		private LegendItemFactory() {
 			// do nothing

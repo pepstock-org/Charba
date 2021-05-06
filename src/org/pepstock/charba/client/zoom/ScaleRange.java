@@ -17,6 +17,7 @@ package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * Entity of {@link ZoomPlugin#ID} configuration in order to set minimum and maximum values of the scales for pan or zoom.<br>
@@ -25,14 +26,15 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ScaleLimit extends ScaleRange implements IsDefaultScaleLimit {
+public class ScaleRange extends NativeObjectContainer implements IsDefaultScaleRange {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		MIN_RANGE("minRange");
+		MIN("min"),
+		MAX("max");
 
 		// name value of property
 		private final String value;
@@ -59,42 +61,73 @@ public final class ScaleLimit extends ScaleRange implements IsDefaultScaleLimit 
 	}
 
 	// defaults global options instance
-	private IsDefaultScaleLimit defaultOptions;
+	private IsDefaultScaleRange defaultOptions;
+	
+	/**
+	 * Creates new scale range element.
+	 */
+	public ScaleRange() {
+		this(DefaultScaleRange.INSTANCE, null);
+	}
 
 	/**
-	 * Creates new scale limit element, using stored native object instance and the default values options.
+	 * Creates new scale range element, using stored native object instance and the default values options.
 	 * 
-	 * @param defaultOptions default scale limit options to returns the default when required.
-	 * @param nativeObject stored scale limit values in the native object to read.
+	 * @param defaultOptions default scale range options to returns the default when required.
+	 * @param nativeObject stored scale range values in the native object to read.
 	 */
-	ScaleLimit(IsDefaultScaleLimit defaultOptions, NativeObject nativeObject) {
-		super(defaultOptions, nativeObject);
+	ScaleRange(IsDefaultScaleRange defaultOptions, NativeObject nativeObject) {
+		super(nativeObject);
 		// checks if defaults options is consistent
 		// stores defaults options
 		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
 	}
 
 	/**
-	 * Sets the minimum allowed range.<br>
-	 * This defines the max zoom level.
+	 * Sets the minimum value of limit as double.
 	 * 
-	 * @param min the minimum allowed range.<br>
-	 *            This defines the max zoom level.
+	 * @param min the minimum value of limit as double
 	 */
-	public void setMinRange(double min) {
-		setValue(Property.MIN_RANGE, min);
+	public final void setMin(double min) {
+		setValue(Property.MIN, min);
 	}
 
 	/**
-	 * Returns the minimum allowed range.<br>
-	 * This defines the max zoom level.
+	 * Returns the minimum value of limit as double.
 	 * 
-	 * @return the minimum allowed range.<br>
-	 *         This defines the max zoom level.
+	 * @return the minimum value of limit as double
 	 */
 	@Override
-	public double getMinRange() {
-		return getValue(Property.MIN_RANGE, defaultOptions.getMinRange());
+	public final double getMin() {
+		return getValue(Property.MIN, defaultOptions.getMin());
 	}
 
+	/**
+	 * Sets the maximum value of limit as double.
+	 * 
+	 * @param max the maximum value of limit as double
+	 */
+	public final void setMax(double max) {
+		setValue(Property.MAX, max);
+	}
+
+	/**
+	 * Returns the maximum value of limit as double.
+	 * 
+	 * @return the maximum value of limit as double
+	 */
+	@Override
+	public final double getMax() {
+		return getValue(Property.MAX, defaultOptions.getMax());
+	}
+	
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	final NativeObject nativeObject() {
+		return getNativeObject();
+	}
+	
 }

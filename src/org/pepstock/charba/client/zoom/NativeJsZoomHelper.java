@@ -17,6 +17,7 @@ package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -45,5 +46,66 @@ final class NativeJsZoomHelper {
 	 * @param chart chart instance to invoke
 	 */
 	static native void resetZoom(Chart chart);
+
+	/**
+	 * Reset the zoom of chart when {@link ZoomPlugin} is activated.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param transition update transition mode
+	 */
+	static native void resetZoom(Chart chart, String transition);
+	
+	/**
+	 * Zooms the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of zoom to apply
+	 */
+	static native void zoom(Chart chart, NativeObject amount);
+
+	/**
+	 * Zooms the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of zoom to apply
+	 * @param transition update transition mode
+	 */
+	static native void zoom(Chart chart, NativeObject amount, String transition);
+
+	/**
+	 * Zooms the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of zoom to apply
+	 */
+	static native void zoom(Chart chart, double amount);
+
+	/**
+	 * Zooms the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of zoom to apply
+	 * @param transition update transition mode
+	 */
+	static native void zoom(Chart chart, double amount, String transition);
+	
+	/**
+	 * Zooms the chart scale on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param scaleId scale id to zoom
+	 * @param range range (min/max) of scale to zoom
+	 */
+	static native void zoomScale(Chart chart, String scaleId, NativeObject range);
+	
+	/**
+	 * Zooms the chart scale on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param scaleId scale id to zoom
+	 * @param range range (min/max) of scale to zoom
+	 * @param transition update transition mode
+	 */
+	static native void zoomScale(Chart chart, String scaleId, NativeObject range, String transition);
 
 }

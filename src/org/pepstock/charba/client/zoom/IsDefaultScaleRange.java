@@ -18,22 +18,28 @@ package org.pepstock.charba.client.zoom;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options interface for scale limit (min and max) elements.<br>
- * It contains all default values for scale limit.
+ * {@link ZoomPlugin#ID} plugin default options interface for scale range elements.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultScaleLimit extends IsDefaultScaleRange {
+interface IsDefaultScaleRange {
 
 	/**
-	 * Returns the minimum allowed range.<br>
-	 * This defines the max zoom level.
+	 * Returns the minimum value of range as double.
 	 * 
-	 * @return the minimum allowed range.<br>
-	 *         This defines the max zoom level.
+	 * @return the minimum value of range as double
 	 */
-	default double getMinRange() {
+	default double getMin() {
+		return Undefined.DOUBLE;
+	}
+
+	/**
+	 * Returns the maximum value of range as double.
+	 * 
+	 * @return the maximum value of range as double
+	 */
+	default double getMax() {
 		return Undefined.DOUBLE;
 	}
 
