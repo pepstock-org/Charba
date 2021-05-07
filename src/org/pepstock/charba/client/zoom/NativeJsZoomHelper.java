@@ -54,7 +54,41 @@ final class NativeJsZoomHelper {
 	 * @param transition update transition mode
 	 */
 	static native void resetZoom(Chart chart, String transition);
-	
+
+	/**
+	 * Pans the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of pan to apply
+	 */
+	static native void pan(Chart chart, NativeObject amount);
+
+	/**
+	 * Pans the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of pan to apply
+	 * @param transition update transition mode
+	 */
+	static native void pan(Chart chart, NativeObject amount, String transition);
+
+	/**
+	 * Pans the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of pan to apply
+	 */
+	static native void pan(Chart chart, double amount);
+
+	/**
+	 * Pans the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of pan to apply
+	 * @param transition update transition mode
+	 */
+	static native void pan(Chart chart, double amount, String transition);
+
 	/**
 	 * Zooms the chart on demand, programmatically.
 	 * 
@@ -88,7 +122,7 @@ final class NativeJsZoomHelper {
 	 * @param transition update transition mode
 	 */
 	static native void zoom(Chart chart, double amount, String transition);
-	
+
 	/**
 	 * Zooms the chart scale on demand, programmatically.
 	 * 
@@ -97,7 +131,7 @@ final class NativeJsZoomHelper {
 	 * @param range range (min/max) of scale to zoom
 	 */
 	static native void zoomScale(Chart chart, String scaleId, NativeObject range);
-	
+
 	/**
 	 * Zooms the chart scale on demand, programmatically.
 	 * 

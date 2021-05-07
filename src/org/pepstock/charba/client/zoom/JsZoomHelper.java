@@ -79,6 +79,48 @@ final class JsZoomHelper {
 	}
 	
 	/**
+	 * Pans the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of pan to apply
+	 * @param transition update transition mode
+	 */
+	void pan(Chart chart, Point amount, IsTransitionKey transition) {
+		// checks if chart and amount are consistent
+		if (chart != null && amount != null) {
+			// checks if transition is consistent
+			if (IsTransitionKey.isValid(transition)) {
+				// pans by transition key
+				NativeJsZoomHelper.pan(chart, amount.nativeObject(), transition.value());
+			} else {
+				// pans by transition key
+				NativeJsZoomHelper.pan(chart, amount.nativeObject());
+			}
+		}
+	}
+
+	/**
+	 * Pans the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of pan to apply
+	 * @param transition update transition mode
+	 */
+	void pan(Chart chart, double amount, IsTransitionKey transition) {
+		// checks if chart and amount are consistent
+		if (chart != null && Undefined.isNot(amount)) {
+			// checks if transition is consistent
+			if (IsTransitionKey.isValid(transition)) {
+				// pans by transition key
+				NativeJsZoomHelper.pan(chart, amount, transition.value());
+			} else {
+				// pans by transition key
+				NativeJsZoomHelper.pan(chart, amount);
+			}
+		}
+	}
+	
+	/**
 	 * Zooms the chart on demand, programmatically.
 	 * 
 	 * @param chart chart instance to invoke

@@ -774,6 +774,19 @@ CharbaJsZoomHelper.resetZoom = function(chart, mode) {
   }
 }
 /**
+ * Pans the chart on demand, programmatically.
+ *
+ * @param {Chart} chart
+ * @param {number|Object} amount 
+ * @param {string=} mode 
+ * @return {undefined}
+ */
+CharbaJsZoomHelper.pan = function(chart, amount, mode) {
+  if (chart != null && typeof chart.pan === 'function'){
+    chart.pan.call(chart, amount, undefined, mode);
+  }
+}
+/**
  * Zooms the chart on demand, programmatically.
  *
  * @param {Chart} chart

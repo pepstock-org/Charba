@@ -146,6 +146,60 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 			JsZoomHelper.get().resetZoom(nativeChart, transition);
 		}
 	}
+	
+	/**
+	 * Pans the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of pan to apply
+	 */
+	public static void pan(IsChart chart, Point amount) {
+		pan(chart, amount, null);
+	}
+
+	/**
+	 * Pans the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of pan to apply
+	 * @param transition update transition mode
+	 */
+	public static void pan(IsChart chart, Point amount, IsTransitionKey transition) {
+		// check if chart is consistent and zoom plugin is activated
+		if (isReadyForApi(chart)) {
+			// gets native chart instance
+			Chart nativeChart = Charts.getNative(chart);
+			// pans
+			JsZoomHelper.get().pan(nativeChart, amount, transition);
+		}
+	}
+
+	/**
+	 * Pans the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of pan to apply
+	 */
+	public static void pan(IsChart chart, double amount) {
+		pan(chart, amount, null);
+	}
+
+	/**
+	 * Pans the chart on demand, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param amount amount of pan to apply
+	 * @param transition update transition mode
+	 */
+	public static void pan(IsChart chart, double amount, IsTransitionKey transition) {
+		// check if chart is consistent and zoom plugin is activated
+		if (isReadyForApi(chart)) {
+			// gets native chart instance
+			Chart nativeChart = Charts.getNative(chart);
+			// pans
+			JsZoomHelper.get().pan(nativeChart, amount, transition);
+		}
+	}
 
 	/**
 	 * Zooms the chart on demand, programmatically.
@@ -169,7 +223,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 		if (isReadyForApi(chart)) {
 			// gets native chart instance
 			Chart nativeChart = Charts.getNative(chart);
-			// resets zoom
+			// zooms
 			JsZoomHelper.get().zoom(nativeChart, amount, transition);
 		}
 	}

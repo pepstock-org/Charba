@@ -228,6 +228,13 @@ CharbaJsZoomHelper.resetZoom = function(chart, mode) {};
  * @param {string=} mode 
  * @return {undefined}
  */
+CharbaJsZoomHelper.pan = function(chart, amount, mode) {};
+/**
+ * @param {Chart} chart
+ * @param {number|Object} amount 
+ * @param {string=} mode 
+ * @return {undefined}
+ */
 CharbaJsZoomHelper.zoom = function(chart, amount, mode) {};
 /**
  * @param {Chart} chart
