@@ -18,7 +18,6 @@ package org.pepstock.charba.client.plugins;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.utils.RegExp;
 
 /**
  * This utility checks if the plug ID is acceptable or not.
@@ -26,15 +25,6 @@ import org.pepstock.charba.client.utils.RegExp;
  * @author Andrea "Stock" Stocchero
  */
 public final class PluginIdChecker {
-
-	// regexp to check if there is an upper fcase
-	private static final String REGEXP_HAS_UPPERCASE_PATTERN = "^.*[A-Z].*";
-	// regex instance for font style
-	private static final RegExp REGEXP_HAS_UPPERCASE = new RegExp(REGEXP_HAS_UPPERCASE_PATTERN);
-	// regexp pattern to have only letters and number
-	private static final String REGEXP_ID_PATTERN = "^[a-z0-9_]+$";
-	// regexp object to perform check
-	private static final RegExp REGEXP_ID = new RegExp(REGEXP_ID_PATTERN);
 
 	/**
 	 * To avoid any instantiation
@@ -60,10 +50,8 @@ public final class PluginIdChecker {
 		Checker.checkIfValid(id, "Plugin id");
 		// checks if is starting with DOT or underscore
 		Checker.assertCheck(!id.startsWith(Constants.DOT) && !id.startsWith(Constants.UNDERSCORE), buildMessage(id, "Plugin id can not start with a dot or an underscore "));
-		// checks if contains upper case letters
-		Checker.assertCheck(REGEXP_HAS_UPPERCASE.exec(id) == null, buildMessage(id, "Plugin id can not contain uppercase letters "));
 		// checks if is null
-		Checker.assertCheck(REGEXP_ID.exec(id) != null, buildMessage(id, "Plugin id can not contain any invalid characters "));
+		Checker.assertCheck(Constants.REGEXP_ID.exec(id) != null, buildMessage(id, "Plugin id can not contain any invalid characters "));
 	}
 
 	/**

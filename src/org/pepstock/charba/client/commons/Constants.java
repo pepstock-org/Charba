@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.commons;
 
+import org.pepstock.charba.client.utils.RegExp;
+
 /**
  * Contains all constants where values can be used in different packages.
  * 
@@ -22,6 +24,13 @@ package org.pepstock.charba.client.commons;
  *
  */
 public final class Constants {
+	
+	// regexp pattern to have only letters and number
+	private static final String REGEXP_ID_PATTERN = "^[a-zA-Z0-9_]+$";
+	/**
+	 * Regular expression to check if a string can be used as controller type or plugin ID, <b>"^[a-zA-Z0-9_]+$"</b>
+	 */
+	public static final RegExp REGEXP_ID = new RegExp(REGEXP_ID_PATTERN);
 
 	/**
 	 * Constant for EMPTY string, <b>{@value}</b>.
