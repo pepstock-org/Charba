@@ -22,7 +22,7 @@ package org.pepstock.charba.client.zoom;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultPan extends DefaultConfigurationItem implements IsDefaultPan {
+final class DefaultPan implements IsDefaultPan {
 
 	/**
 	 * Creates an empty object.

@@ -22,7 +22,7 @@ package org.pepstock.charba.client.zoom;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultZoom extends DefaultConfigurationItem implements IsDefaultZoom {
+final class DefaultZoom implements IsDefaultZoom {
 
 	/**
 	 * Creates an empty object.
