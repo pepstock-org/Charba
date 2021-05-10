@@ -19,8 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * Entity of {@link ZoomPlugin#ID} configuration in order to set minimum and maximum values of the scales for pan or zoom.<br>
- * The values to set to the properties depends on the type of scales are used.
+ * Entity of {@link ZoomPlugin#ID} configuration in order to set minimum and maximum values of the scales for pan or zoom.
  * 
  * @author Andrea "Stock" Stocchero
  *

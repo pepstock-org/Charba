@@ -103,7 +103,7 @@ public final class ZoomContext extends ChartContext {
 	public EventPoint getPoint() {
 		return point;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

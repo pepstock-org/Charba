@@ -20,12 +20,12 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * Entity of {@link ZoomPlugin#ID} configuration in order to define the limit of X and Y scales for pan and zoom.
+ * Entity of {@link ZoomPlugin#ID} configuration in order to define the limits of X and Y scales for pan and zoom.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Limit extends NativeObjectContainer implements IsDefaultLimit {
+public final class Limits extends NativeObjectContainer implements IsDefaultLimits {
 
 	/**
 	 * Name of properties of native object.
@@ -60,7 +60,7 @@ public final class Limit extends NativeObjectContainer implements IsDefaultLimit
 	}
 
 	// default options instance
-	private final IsDefaultLimit defaultOptions;
+	private final IsDefaultLimits defaultOptions;
 	// limit for X scale instance
 	private final ScaleLimit xScaleLimit;
 	// limit for Y scale instance
@@ -69,10 +69,10 @@ public final class Limit extends NativeObjectContainer implements IsDefaultLimit
 	/**
 	 * Creates new limit element, using stored native object instance and the default values options.
 	 * 
-	 * @param defaultOptions default limit options to returns the default when required.
-	 * @param nativeObject stored limit values in the native object to read.
+	 * @param defaultOptions default limits options to returns the default when required.
+	 * @param nativeObject stored limits values in the native object to read.
 	 */
-	Limit(IsDefaultLimit defaultOptions, NativeObject nativeObject) {
+	Limits(IsDefaultLimits defaultOptions, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if defaults options is consistent
 		// stores defaults options

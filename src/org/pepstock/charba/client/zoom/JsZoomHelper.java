@@ -57,7 +57,7 @@ final class JsZoomHelper {
 	static JsZoomHelper get() {
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Reset the zoom of chart when {@link ZoomPlugin} is activated.
 	 * 
@@ -77,7 +77,7 @@ final class JsZoomHelper {
 			}
 		}
 	}
-	
+
 	/**
 	 * Pans the chart on demand, programmatically.
 	 * 
@@ -85,7 +85,7 @@ final class JsZoomHelper {
 	 * @param amount amount of pan to apply
 	 * @param transition update transition mode
 	 */
-	void pan(Chart chart, Point amount, IsTransitionKey transition) {
+	void pan(Chart chart, Amount amount, IsTransitionKey transition) {
 		// checks if chart and amount are consistent
 		if (chart != null && amount != null) {
 			// checks if transition is consistent
@@ -119,7 +119,7 @@ final class JsZoomHelper {
 			}
 		}
 	}
-	
+
 	/**
 	 * Zooms the chart on demand, programmatically.
 	 * 
@@ -127,7 +127,7 @@ final class JsZoomHelper {
 	 * @param amount amount of zoom to apply
 	 * @param transition update transition mode
 	 */
-	void zoom(Chart chart, Point amount, IsTransitionKey transition) {
+	void zoom(Chart chart, Amount amount, IsTransitionKey transition) {
 		// checks if chart and amount are consistent
 		if (chart != null && amount != null) {
 			// checks if transition is consistent
@@ -161,7 +161,7 @@ final class JsZoomHelper {
 			}
 		}
 	}
-	
+
 	/**
 	 * Zooms the chart scale on demand, programmatically.
 	 * 

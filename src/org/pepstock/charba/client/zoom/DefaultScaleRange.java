@@ -22,7 +22,7 @@ package org.pepstock.charba.client.zoom;
  *
  */
 final class DefaultScaleRange implements IsDefaultScaleRange {
-	
+
 	static final DefaultScaleRange INSTANCE = new DefaultScaleRange();
 
 	/**

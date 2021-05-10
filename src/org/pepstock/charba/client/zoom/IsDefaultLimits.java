@@ -16,12 +16,12 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options interface for limit elements.
+ * {@link ZoomPlugin#ID} plugin default options interface for limits elements.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultLimit {
+interface IsDefaultLimits {
 
 	/**
 	 * Returns the limit for X scale.

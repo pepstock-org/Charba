@@ -16,17 +16,17 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options for limit elements.
+ * {@link ZoomPlugin#ID} plugin default options for limits elements.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultLimit implements IsDefaultLimit {
+final class DefaultLimits implements IsDefaultLimits {
 
 	/**
 	 * Creates an empty object.
 	 */
-	DefaultLimit() {
+	DefaultLimits() {
 		// do nothing
 	}
 

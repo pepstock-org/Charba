@@ -30,8 +30,8 @@ final class DefaultOptions implements IsDefaultOptions {
 	private final DefaultPan pan = new DefaultPan();
 	// default Zoom options
 	private final DefaultZoom zoom = new DefaultZoom();
-	// default limit options
-	private final DefaultLimit limit = new DefaultLimit();
+	// default limits options
+	private final DefaultLimits limits = new DefaultLimits();
 
 	/**
 	 * Creates an empty options.
@@ -63,11 +63,11 @@ final class DefaultOptions implements IsDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.zoom.IsDefaultOptions#getLimit()
+	 * @see org.pepstock.charba.client.zoom.IsDefaultOptions#getLimits()
 	 */
 	@Override
-	public IsDefaultLimit getLimit() {
-		return limit;
+	public IsDefaultLimits getLimits() {
+		return limits;
 	}
 
 }

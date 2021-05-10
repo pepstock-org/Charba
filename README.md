@@ -449,6 +449,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove the generic definition from `AbstractConfigurationItem` class in `ZoomPlugin`.
  * remove `animationDuration` property from `Drag` class  in `ZoomPlugin`.
  * remove `Range` class because is not longer used. Use `Limit` and `ScaleLimit` instead.
+ * remove `rangeMin` and `rangeMax` properties from `Zoom` and `Pan` configuration and options. Use `Limit` and `ScaleLimit` instead.
+ * rename `resetZoom` method in `ZoomPlugin` class to `reset`. 
  * rename `enabled` property to `display` in `LineLabel` configuration of `AnnotationPlugin`.
  * move `AnnotationType` enumeration from `org.pepstock.charba.client.annotation.enums` to `org.pepstock.charba.client.annotation` in order to maintain the low visibility of internal classes of the annotation plugin implementation.
  * rename `LineLablePosition` class to `LablePosition` for `LineLabel` configuration of `AnnotationPlugin`.
@@ -501,7 +503,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `wheelModifierKey` property to `Zoom` options in the `ZoomPlugin` in order to enable zoom only when modifier key was detected.
  * add `overScaleMode` property to `Zoom` and `Pan` options in the `ZoomPlugin` in order to enable zoom only when modifier key was detected.
  * add `Limit` and `ScaleLimit` configuration element to ZoomOptions configuration.
- * add new `resetZoom(IsChart, IsTransitionKey)` API to the `ZoomPlugin` class in order to set the update mode of updating chart.
+ * add new `reset(IsChart, IsTransitionKey)` API methods to the `ZoomPlugin` class in order to set the update mode of updating chart.
+ * add new `zoom`, `pan` and `zoomScale` API methods (with different signatures) to the `ZoomPlugin` class in order to pan and zoom on chart programmatically.
  * add `ZOOM_TRANSITION_MODE` constant to the `ZoomPlugin` class in order to get the custom transition mode provided by the plugin out-of-the-box.
 
 ### _Controllers_

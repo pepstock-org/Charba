@@ -13,19 +13,16 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.zoom;
+package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * This object is wrapping the native java script object provided by {@link ZoomContext} to know the position of the event when pan or zoom are about to start.
+ * This object is wrapping the native java script object to map a point.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class EventPoint extends NativeObjectContainer {
+public abstract class AbstractPoint extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -59,12 +56,56 @@ public final class EventPoint extends NativeObjectContainer {
 	}
 
 	/**
+	 * Creates an empty object.
+	 */
+	protected AbstractPoint() {
+		this(Undefined.DOUBLE);
+	}
+
+	/**
+	 * Creates an object with X coordinate of the point
+	 * 
+	 * @param x the X coordinate of the point
+	 */
+	protected AbstractPoint(double x) {
+		this(x, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Creates an object with X and Y coordinates of the point
+	 * 
+	 * @param x the X coordinate of the point
+	 * @param y the Y coordinate of the point
+	 */
+	protected AbstractPoint(double x, double y) {
+		this(null);
+		// checks if arguments are consistent
+		if (Undefined.isNot(x)) {
+			// stores the value
+			setX(x);
+		}
+		if (Undefined.isNot(y)) {
+			// stores the value
+			setY(y);
+		}
+	}
+
+	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	EventPoint(NativeObject nativeObject) {
+	protected AbstractPoint(NativeObject nativeObject) {
 		super(nativeObject);
+	}
+
+	/**
+	 * Sets the X coordinate of the point.
+	 * 
+	 * @param x the X coordinate of the point.
+	 */
+	public final void setX(double x) {
+		setValue(Property.X, x);
 	}
 
 	/**
@@ -72,8 +113,17 @@ public final class EventPoint extends NativeObjectContainer {
 	 * 
 	 * @return the X coordinate of the point.
 	 */
-	public double getX() {
+	public final double getX() {
 		return getValue(Property.X, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Sets the Y coordinate of the point.
+	 * 
+	 * @param y the Y coordinate of the point.
+	 */
+	public final void setY(double y) {
+		setValue(Property.Y, y);
 	}
 
 	/**
@@ -81,8 +131,17 @@ public final class EventPoint extends NativeObjectContainer {
 	 * 
 	 * @return the Y coordinate of the point.
 	 */
-	public double getY() {
+	public final double getY() {
 		return getValue(Property.Y, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Returns <code>true</code> if the coordinates are consistent and not <code>NaN</code>.
+	 * 
+	 * @return <code>true</code> if the coordinates are consistent and not <code>NaN</code>
+	 */
+	public final boolean isConsistent() {
+		return Undefined.isNot(getX()) && Undefined.isNot(getY());
 	}
 
 }

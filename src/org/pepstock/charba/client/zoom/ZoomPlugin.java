@@ -127,8 +127,8 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * 
 	 * @param chart chart instance to invoke
 	 */
-	public static void resetZoom(IsChart chart) {
-		resetZoom(chart, null);
+	public static void reset(IsChart chart) {
+		reset(chart, null);
 	}
 
 	/**
@@ -137,7 +137,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param chart chart instance to invoke
 	 * @param transition update transition mode, could be <code>null</code>
 	 */
-	public static void resetZoom(IsChart chart, IsTransitionKey transition) {
+	public static void reset(IsChart chart, IsTransitionKey transition) {
 		// check if chart is consistent and zoom plugin is activated
 		if (isReadyForApi(chart)) {
 			// gets native chart instance
@@ -146,14 +146,14 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 			JsZoomHelper.get().resetZoom(nativeChart, transition);
 		}
 	}
-	
+
 	/**
 	 * Pans the chart on demand, programmatically.
 	 * 
 	 * @param chart chart instance to invoke
 	 * @param amount amount of pan to apply
 	 */
-	public static void pan(IsChart chart, Point amount) {
+	public static void pan(IsChart chart, Amount amount) {
 		pan(chart, amount, null);
 	}
 
@@ -164,7 +164,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param amount amount of pan to apply
 	 * @param transition update transition mode
 	 */
-	public static void pan(IsChart chart, Point amount, IsTransitionKey transition) {
+	public static void pan(IsChart chart, Amount amount, IsTransitionKey transition) {
 		// check if chart is consistent and zoom plugin is activated
 		if (isReadyForApi(chart)) {
 			// gets native chart instance
@@ -207,7 +207,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param chart chart instance to invoke
 	 * @param amount amount of zoom to apply
 	 */
-	public static void zoom(IsChart chart, Point amount) {
+	public static void zoom(IsChart chart, Amount amount) {
 		zoom(chart, amount, null);
 	}
 
@@ -218,7 +218,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param amount amount of zoom to apply
 	 * @param transition update transition mode
 	 */
-	public static void zoom(IsChart chart, Point amount, IsTransitionKey transition) {
+	public static void zoom(IsChart chart, Amount amount, IsTransitionKey transition) {
 		// check if chart is consistent and zoom plugin is activated
 		if (isReadyForApi(chart)) {
 			// gets native chart instance
@@ -254,7 +254,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 			JsZoomHelper.get().zoom(nativeChart, amount, transition);
 		}
 	}
-	
+
 	/**
 	 * Zooms the chart scale on demand, programmatically.
 	 * 

@@ -19,8 +19,8 @@ import org.pepstock.charba.client.zoom.ZoomContext;
 import org.pepstock.charba.client.zoom.ZoomPlugin;
 
 /**
- * Callback interface of {@link ZoomPlugin#ID} plugin that is called when panning or zooming is about to start.<br>
- * If this callback returns <code>false</code>, panning or zooming is aborted and {@link RejectedCallback} is invoked.
+ * Callback interface of {@link ZoomPlugin#ID} plugin that is called when pan or zoom is about to start.<br>
+ * If this callback returns <code>false</code>, pan or zoom is aborted and {@link RejectedCallback} is invoked.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -28,10 +28,10 @@ import org.pepstock.charba.client.zoom.ZoomPlugin;
 public interface StartCallback {
 
 	/**
-	 * Method called when panning or zooming is about to start.
+	 * Method called when pan or zoom is about to start.
 	 * 
 	 * @param context {@link ZoomPlugin#ID} plugin context instance
-	 * @return if this callback returns <code>false</code>, panning or zooming is aborted and {@link RejectedCallback} is invoked.
+	 * @return if this callback returns <code>false</code>, pan or zoom is aborted and {@link RejectedCallback} is invoked.
 	 */
 	boolean onStart(ZoomContext context);
 

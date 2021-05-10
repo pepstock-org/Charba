@@ -109,7 +109,7 @@ interface IsDefaultConfigurationItem {
 	default RejectedCallback getRejectedCallback() {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the callback called once zooming or panning is started.
 	 * 

@@ -13,41 +13,41 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.positioner;
+package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.AbstractPoint;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * This object is wrapping the native java script object provided by tooltip positioner to know the position of the event in canvas coordinates.
+ * This object is wrapping the native java script object to set the position to pan the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Point extends AbstractPoint {
+public final class Amount extends AbstractPoint {
 
 	/**
-	 * Creates an empty object.
+	 * Creates an empty object
 	 */
-	public Point() {
+	public Amount() {
 		super();
 	}
 
 	/**
-	 * Creates an object with X coordinate of the point
+	 * Creates an object with pan amount for x scale.
 	 * 
-	 * @param x the X coordinate of the point
+	 * @param x the X amount of pan
 	 */
-	public Point(double x) {
+	public Amount(double x) {
 		super(x);
 	}
 
 	/**
-	 * Creates an object with X and Y coordinates of the point
+	 * Creates an object with pan amount for x and y scales.
 	 * 
-	 * @param x the X coordinate of the point
-	 * @param y the Y coordinate of the point
+	 * @param x the X amount of pan
+	 * @param y the Y amount of pan
 	 */
-	public Point(double x, double y) {
+	public Amount(double x, double y) {
 		super(x, y);
 	}
 
@@ -56,7 +56,7 @@ public final class Point extends AbstractPoint {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Point(NativeObject nativeObject) {
+	Amount(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

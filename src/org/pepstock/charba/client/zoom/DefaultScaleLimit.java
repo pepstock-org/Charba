@@ -22,7 +22,7 @@ package org.pepstock.charba.client.zoom;
  *
  */
 final class DefaultScaleLimit implements IsDefaultScaleLimit {
-	
+
 	static final DefaultScaleLimit INSTANCE = new DefaultScaleLimit();
 
 	/**

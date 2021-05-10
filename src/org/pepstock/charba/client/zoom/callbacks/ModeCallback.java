@@ -26,6 +26,6 @@ import org.pepstock.charba.client.zoom.ZoomPlugin;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface ModeCallback extends Scriptable<InteractionAxis, ZoomContext>{
+public interface ModeCallback extends Scriptable<InteractionAxis, ZoomContext> {
 
 }

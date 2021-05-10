@@ -18,6 +18,7 @@ package org.pepstock.charba.client.zoom;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Entity of {@link ZoomPlugin#ID} configuration in order to set minimum and maximum values of the scales for pan or zoom.<br>
@@ -62,12 +63,40 @@ public class ScaleRange extends NativeObjectContainer implements IsDefaultScaleR
 
 	// defaults global options instance
 	private IsDefaultScaleRange defaultOptions;
-	
+
 	/**
 	 * Creates new scale range element.
 	 */
 	public ScaleRange() {
+		this(Undefined.DOUBLE);
+	}
+
+	/**
+	 * Creates scale range element with the minimum value.
+	 * 
+	 * @param min the minimum value of range
+	 */
+	public ScaleRange(double min) {
+		this(min, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Creates scale range element with the minimum and maximum values.
+	 * 
+	 * @param min the minimum value of range
+	 * @param max the maximum value of range
+	 */
+	public ScaleRange(double min, double max) {
 		this(DefaultScaleRange.INSTANCE, null);
+		// checks if arguments are consistent
+		if (Undefined.isNot(min)) {
+			// stores the value
+			setMin(min);
+		}
+		if (Undefined.isNot(max)) {
+			// stores the value
+			setMax(max);
+		}
 	}
 
 	/**
@@ -84,18 +113,18 @@ public class ScaleRange extends NativeObjectContainer implements IsDefaultScaleR
 	}
 
 	/**
-	 * Sets the minimum value of limit as double.
+	 * Sets the minimum value of range.
 	 * 
-	 * @param min the minimum value of limit as double
+	 * @param min the minimum value of range
 	 */
 	public final void setMin(double min) {
 		setValue(Property.MIN, min);
 	}
 
 	/**
-	 * Returns the minimum value of limit as double.
+	 * Returns the minimum value of range.
 	 * 
-	 * @return the minimum value of limit as double
+	 * @return the minimum value of range
 	 */
 	@Override
 	public final double getMin() {
@@ -103,24 +132,24 @@ public class ScaleRange extends NativeObjectContainer implements IsDefaultScaleR
 	}
 
 	/**
-	 * Sets the maximum value of limit as double.
+	 * Sets the maximum value of range.
 	 * 
-	 * @param max the maximum value of limit as double
+	 * @param max the maximum value of range
 	 */
 	public final void setMax(double max) {
 		setValue(Property.MAX, max);
 	}
 
 	/**
-	 * Returns the maximum value of limit as double.
+	 * Returns the maximum value of range.
 	 * 
-	 * @return the maximum value of limit as double
+	 * @return the maximum value of range
 	 */
 	@Override
 	public final double getMax() {
 		return getValue(Property.MAX, defaultOptions.getMax());
 	}
-	
+
 	/**
 	 * Returns the native object instance.
 	 * 
@@ -129,5 +158,5 @@ public class ScaleRange extends NativeObjectContainer implements IsDefaultScaleR
 	final NativeObject nativeObject() {
 		return getNativeObject();
 	}
-	
+
 }
