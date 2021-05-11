@@ -4,7 +4,7 @@
 # *************************************
 # Workflow name
 # 
-name: Deploy
+name: Deploy redirect page
 # 
 # Runs only on push events on branch 'deploy'
 # and then publishes to gh-pages
