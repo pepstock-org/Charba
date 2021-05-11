@@ -2,12 +2,14 @@
 <project name="Charba" default="loadJavadoc" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<property name="javadoc.dir" value="javadoc" />
+	<property name="javadoc.version" value="3.2-gwt" />
+	<property name="javadoc.file" value="charba-${javadoc.version}-javadoc.jar" />
 
 	<target name="loadJavadoc">
 		<mkdir dir="${javadoc.dir}"/>
-		<get src="https://repo1.maven.org/maven2/org/pepstock/charba/3.3-gwt/charba-3.3-gwt-javadoc.jar" dest="${javadoc.dir}/charba-3.3-gwt-javadoc.jar" />
-		<unzip src="${javadoc.dir}/charba-3.3-gwt-javadoc.jar" dest="${javadoc.dir}"/>
-		<delete file="${javadoc.dir}/charba-3.3-gwt-javadoc.jar"/>
+		<get src="https://repo1.maven.org/maven2/org/pepstock/charba/${javadoc.version}/${javadoc.file}" dest="${javadoc.dir}/${javadoc.file}" />
+		<unzip src="${javadoc.dir}/${javadoc.file}" dest="${javadoc.dir}"/>
+		<delete file="${javadoc.dir}/${javadoc.file}"/>
 		<replace dir="${javadoc.dir}" value="&lt;head&gt;&lt;script&gt;window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-46259978-1', 'auto');ga('send', 'pageview');&lt;/script&gt;&lt;script async src='https://www.google-analytics.com/analytics.js'&gt;&lt;/script&gt;">
 		  <include name="**/*.html"/>
 		  <replacetoken><![CDATA[<head>]]></replacetoken>

@@ -42,7 +42,7 @@ jobs:
            with:
              github_token: ${{ secrets.GITHUB_TOKEN }}
              publish_dir: ./javadoc
-             destination_dir: ./3.3
+             destination_dir: ./3.2
              enable_jekyll: false
              keep_files: false
-             full_commit_message: Load javadoc 3.3 to GitHub Pages
+             full_commit_message: Load javadoc 3.2 to GitHub Pages
