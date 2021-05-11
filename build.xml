@@ -354,7 +354,7 @@
         CHARBA - adds GA statement in javadoc
     -->
 	<target name="addGA" depends="javadocGwt">
-		<replace dir="${javadoc.dir}" value="&lt;head&gt;&lt;script async src='https://www.googletagmanager.com/gtag/js?id=UA-46259978-1'&gt;&lt;/script&gt;">
+		<replace dir="${javadoc.dir}" value="&lt;head&gt;&lt;script&gt;window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-46259978-1', 'auto');ga('send', 'pageview');&lt;/script&gt;&lt;script async src='https://www.google-analytics.com/analytics.js'&gt;&lt;/script&gt;">
 		  <include name="**/*.html"/>
 		  <replacetoken><![CDATA[<head>]]></replacetoken>
 		</replace>
