@@ -118,7 +118,7 @@ Documentation
 
 All **Charba** documentation will be maintained in [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
 
-API JavaDoc is published [here](https://www.pepstock.org/Charba/3.3/index.html).
+API JavaDoc is published [here](https://pepstock-org.github.io/Charba/3.3/index.html).
 
 Showcase
 --------
@@ -654,6 +654,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change the `NativeObject` from a class to an empty interface in order to skip `ClassCastException` in J2CL when the object, passed from CHART.JS, doesn't have any prototype or is a proxy.
  * add methods to `NativeObjectContainer` in order to manage a unique internal ID, as string.
  * add image mime type and image quality to `toDataUrl` methods (with all combination and defaults) to `Canvas` object.
+ * deploy javadoc (of all version) to GitHub Pages of [Charba](https://pepstock-org.github.io/Charba/3.3/) project.
 
 License
 -------

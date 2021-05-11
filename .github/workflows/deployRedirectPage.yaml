@@ -12,7 +12,7 @@ name: Deploy redirect page
 on:
    push:
       branches:
-         - stock
+         - deploy
 # 
 # Workflow environment and steps
 # 
