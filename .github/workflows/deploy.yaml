@@ -49,7 +49,7 @@ jobs:
            uses: actions/upload-artifact@v2
            with:
              name: javadoc
-             path: docs/build/javadoc
+             path: javadoc
              retention-days: 1
          # 
          # Deploy javadoc to GitHub Pages
@@ -59,7 +59,7 @@ jobs:
            uses: peaceiris/actions-gh-pages@v3
            with:
              github_token: ${{ secrets.GITHUB_TOKEN }}
-             publish_dir: ./docs/build/javadoc
+             publish_dir: ./javadoc
              destination_dir: 4.0
              enable_jekyll: false
              keep_files: false
