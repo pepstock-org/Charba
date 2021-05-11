@@ -12,7 +12,7 @@ name: Deploy redirect page
 on:
    push:
       branches:
-         - stock
+         - deploy
 # 
 # Workflow environment and steps
 # 
@@ -30,14 +30,19 @@ jobs:
              # Disabling shallow clone 
              fetch-depth: 0
          # 
+         # Run the build of project by ANT
+         # 
+         - name: Unload javadoc
+           run: ant -buildfile loadJavadoc.xml
+         # 
          # Deploy redirect page to GitHub Pages
          # 
          - name: Deploy to GitHub Pages
            uses: peaceiris/actions-gh-pages@v3
            with:
              github_token: ${{ secrets.GITHUB_TOKEN }}
-             publish_dir: ./docs
-             destination_dir: ./
+             publish_dir: ./javadoc
+             destination_dir: ./3.3
              enable_jekyll: false
-             keep_files: true
-             full_commit_message: Deploy redirect page to GitHub Pages
+             keep_files: false
+             full_commit_message: Load javadoc 3.3 to GitHub Pages

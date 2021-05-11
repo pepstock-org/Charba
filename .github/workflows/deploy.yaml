@@ -12,7 +12,7 @@ name: Deploy
 on:
    push:
       branches:
-         - deploy
+         - stock
 # 
 # Workflow environment and steps
 # 
