@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.10.3
+Created-By: 1.8.0_161-b12 (Oracle Corporation)
+
+Name: Charba
+Version: 1.5
+Built-By: www.pepstock.org
+Creation-time: 2018-08-28 10:28:38
+
