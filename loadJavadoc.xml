@@ -4,6 +4,7 @@
 	<property name="javadoc.dir" value="javadoc" />
 
 	<target name="loadJavadoc">
+		<mkdir dir="${javadoc.dir}"/>
 		<get src="https://repo1.maven.org/maven2/org/pepstock/charba/3.3-gwt/charba-3.3-gwt-javadoc.jar" dest="${javadoc.dir}/charba-3.3-gwt-javadoc.jar" />
 		<unzip src="${javadoc.dir}/charba-3.3-gwt-javadoc.jar" dest="${javadoc.dir}"/>
 		<delete file="${javadoc.dir}/charba-3.3-gwt-javadoc.jar"/>

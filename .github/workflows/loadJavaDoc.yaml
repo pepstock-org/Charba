@@ -4,7 +4,7 @@
 # *************************************
 # Workflow name
 # 
-name: Deploy redirect page
+name: Load existing javadoc
 # 
 # Runs only on push events on branch 'deploy'
 # and then publishes to gh-pages
