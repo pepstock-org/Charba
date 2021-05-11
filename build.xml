@@ -351,6 +351,15 @@
 	</target>
 
 	<!--
+        CHARBA - adds GA statement in javadoc
+    -->
+	<target name="addGA" depends="javadocGwt">
+		<replace dir="${javadoc.dir}" value="&lt;head&gt;&lt;script async src='https://www.googletagmanager.com/gtag/js?id=UA-46259978-1'&gt;&lt;/script&gt;">
+		  <include name="**/*.html"/>
+		  <replacetoken><![CDATA[<head>]]></replacetoken>
+		</replace>
+	</target>
+	<!--
         CHARBA - CREATE sources jar file for J2CL
     -->
 	<target name="createSources" depends="makeManifest">
@@ -530,7 +539,7 @@
         CHARBA - BUILD all jars artifacts: classes, sources and javadoc
         PAY attentio that the sequence of target dependencies MUST NOT be changed
     -->
-	<target name="deployJavadoc" depends="buildBinaryGwt, javadocGwt" />
+	<target name="deployJavadoc" depends="buildBinaryGwt, addGA" />
 
 	<!--
         CHARBA - Code generator to wrap the java script files into java classes
