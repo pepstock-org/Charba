@@ -2,7 +2,7 @@
 <project name="Charba" default="loadJavadoc" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<property name="javadoc.dir" value="javadoc" />
-	<property name="javadoc.version" value="2.0" />
+	<property name="javadoc.version" value="1.7" />
 	<property name="javadoc.file" value="charba-${javadoc.version}-javadoc.jar" />
 
 	<target name="loadJavadoc">
