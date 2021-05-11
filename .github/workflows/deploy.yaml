@@ -44,7 +44,7 @@ jobs:
            run: ant javadocGwt
          # 
          # Deploy javadoc to GitHub Pages
-         # "destination_dir" must be change to every deploy
+         # "destination_dir" must be change on every deploy
          # 
          - name: Deploy to GitHub Pages
            uses: peaceiris/actions-gh-pages@v3
