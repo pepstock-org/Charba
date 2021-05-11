@@ -31,11 +31,12 @@ jobs:
              fetch-depth: 0
          # 
          # Setup Java JDK
+         # uses JDK 8 because otherwise frames are not longer supported
          # 
          - name: Setup JDK
            uses: actions/setup-java@v2
            with:
-             java-version: '11'
+             java-version: '8'
              distribution: 'adopt'
          # 
          # Run the build of project by ANT
