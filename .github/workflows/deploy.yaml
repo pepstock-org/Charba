@@ -43,6 +43,15 @@ jobs:
          - name: Build
            run: ant buildAll
          # 
+         # Upload javadoc as artifact
+         # 
+         - name: Upload javadoc as artifact
+           uses: actions/upload-artifact@v2
+           with:
+             name: javadoc
+             path: docs/build/javadoc
+             retention-days: 1
+         # 
          # Deploy javadoc to GitHub Pages
          # "destination_dir" must be change on every deploy
          # 
@@ -50,7 +59,7 @@ jobs:
            uses: peaceiris/actions-gh-pages@v3
            with:
              github_token: ${{ secrets.GITHUB_TOKEN }}
-             publish_dir: ./javadoc
+             publish_dir: ./docs/build/javadoc
              destination_dir: 4.0
              enable_jekyll: false
              keep_files: false
