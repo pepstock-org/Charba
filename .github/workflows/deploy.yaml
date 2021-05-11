@@ -56,3 +56,15 @@ jobs:
              enable_jekyll: false
              keep_files: false
              full_commit_message: Deploy 4.0 javadoc to GitHub Pages
+         # 
+         # Deploy redirect page to GitHub Pages
+         # 
+         - name: Deploy redirect page to GitHub Pages
+           uses: peaceiris/actions-gh-pages@v3
+           with:
+             github_token: ${{ secrets.GITHUB_TOKEN }}
+             publish_dir: ./docs
+             destination_dir: ./
+             enable_jekyll: false
+             keep_files: false
+             full_commit_message: Deploy redirect page to GitHub Pages
