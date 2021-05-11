@@ -41,16 +41,7 @@ jobs:
          # Run the build of project by ANT
          # 
          - name: Build
-           run: ant buildAll
-         # 
-         # Upload javadoc as artifact
-         # 
-         - name: Upload javadoc as artifact
-           uses: actions/upload-artifact@v2
-           with:
-             name: javadoc
-             path: javadoc
-             retention-days: 1
+           run: ant deployJavadoc
          # 
          # Deploy javadoc to GitHub Pages
          # "destination_dir" must be change on every deploy
@@ -60,7 +51,7 @@ jobs:
            with:
              github_token: ${{ secrets.GITHUB_TOKEN }}
              publish_dir: ./javadoc
-             destination_dir: 4.0
+             destination_dir: ./4.0
              enable_jekyll: false
              keep_files: false
              full_commit_message: Deploy 4.0 javadoc to GitHub Pages

@@ -525,7 +525,13 @@
         PAY attentio that the sequence of target dependencies MUST NOT be changed
     -->
 	<target name="buildAll" depends="buildBinary, createSources, createJavadoc, createAllSources, buildBinaryGwt, createSourcesGwt, createJavadocGwt" />
-	
+
+	<!--
+        CHARBA - BUILD all jars artifacts: classes, sources and javadoc
+        PAY attentio that the sequence of target dependencies MUST NOT be changed
+    -->
+	<target name="deployJavadoc" depends="buildBinaryGwt, javadocGwt" />
+
 	<!--
         CHARBA - Code generator to wrap the java script files into java classes
     -->
