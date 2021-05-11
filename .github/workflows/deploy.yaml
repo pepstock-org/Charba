@@ -41,7 +41,7 @@ jobs:
          # Run the build of project by ANT
          # 
          - name: Build
-           run: ant javadocGwt
+           run: ant buildAll
          # 
          # Deploy javadoc to GitHub Pages
          # "destination_dir" must be change on every deploy
