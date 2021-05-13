@@ -23,6 +23,7 @@ import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.ElementAlignCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.FullSizeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.PositionCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
@@ -60,6 +61,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		DISPLAY("display"),
 		COLOR("color"),
 		FONT("font"),
+		FULL_SIZE("fullSize"),
 		PADDING("padding"),
 		POSITION("position"),
 		TEXT("text");
@@ -105,6 +107,8 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	private final CallbackProxy<ProxyStringCallback> alignCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the position function
 	private final CallbackProxy<ProxyStringCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the fullsize function
+	private final CallbackProxy<ProxyBooleanCallback> fullSizeCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// instance of padding callback
 	private PaddingCallback<ChartContext> paddingCallback = null;
@@ -120,6 +124,8 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	private ElementAlignCallback<ChartContext> alignCallback = null;
 	// instance of position callback
 	private PositionCallback<ChartContext> positionCallback = null;
+	// instance of display callback
+	private FullSizeCallback<ChartContext> fullSizeCallback = null;
 
 	// font instance
 	private final Font font;
@@ -153,6 +159,8 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		this.positionCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getPositionCallback(), getOptions().getDefaultValues().getTitle().getPosition()).value());
 		// sets function to proxy callback in order to invoke the java interface
 		this.alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getAlignCallback(), getOptions().getDefaultValues().getTitle().getAlign()).value());
+		// sets function to proxy callback in order to invoke the java interface
+		this.fullSizeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getFullSizeCallback(), getOptions().getDefaultValues().getTitle().isFullSize()));
 	}
 
 	/**
@@ -281,6 +289,9 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param fullSize Marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
 	public void setFullSize(boolean fullSize) {
+		// resets callback
+		setFullSize(null);
+		// stores the value
 		getConfiguration().getTitle().setFullSize(fullSize);
 	}
 
@@ -319,7 +330,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	// -------------------
 
 	/**
-	 * Returns the callback if the title is shown.
+	 * Returns the callback to set if the title is shown.
 	 * 
 	 * @return the callback instance to use
 	 */
@@ -337,6 +348,27 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		this.displayCallback = displayCallback;
 		// stores and manages callback
 		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.DISPLAY, displayCallback, displayCallbackProxy);
+	}
+	
+	/**
+	 * Returns the callback to set if marks that this box should take the full width/height of the canvas (moving other boxes).
+	 * 
+	 * @return the callback instance to use
+	 */
+	public FullSizeCallback<ChartContext> getFullSizeCallback() {
+		return fullSizeCallback;
+	}
+
+	/**
+	 * Sets if marks that this box should take the full width/height of the canvas (moving other boxes) is shown by a callback.
+	 * 
+	 * @param fullSizeCallback the callback instance to use
+	 */
+	public void setFullSize(FullSizeCallback<ChartContext> fullSizeCallback) {
+		// sets the callback
+		this.fullSizeCallback = fullSizeCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.FULL_SIZE, fullSizeCallback, fullSizeCallbackProxy);
 	}
 	
 	/**
