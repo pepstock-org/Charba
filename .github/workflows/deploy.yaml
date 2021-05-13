@@ -10,49 +10,63 @@ name: Deploy
 # and then publishes to gh-pages
 #
 on:
-   push:
-      branches:
-         - deploy
+  push:
+    branches:
+      - deploy
+      
+# Allows you to run this workflow manually from the Actions tab
+#  workflow_dispatch:
 # 
 # Workflow environment and steps
 # 
 jobs:
-   deploy:
-      runs-on: ubuntu-latest
-      
-      steps:
-         # 
-         # Checkout the repository content
-         # 
-         - name: Checkout
-           uses: actions/checkout@v2
-           with:
-             # Disabling shallow clone 
-             fetch-depth: 0
-         # 
-         # Setup Java JDK
-         # uses JDK 8 because otherwise frames are not supported anymore
-         # 
-         - name: Setup JDK
-           uses: actions/setup-java@v2
-           with:
-             java-version: '8'
-             distribution: 'adopt'
-         # 
-         # Run the build of project by ANT
-         # 
-         - name: Build
-           run: ant deployJavadoc
-         # 
-         # Deploy javadoc to GitHub Pages
-         # "destination_dir" must be change on every deploy
-         # 
-         - name: Deploy to GitHub Pages
-           uses: peaceiris/actions-gh-pages@v3
-           with:
-             github_token: ${{ secrets.GITHUB_TOKEN }}
-             publish_dir: ./javadoc
-             destination_dir: ./4.0
-             enable_jekyll: false
-             keep_files: false
-             full_commit_message: Deploy 4.0 javadoc to GitHub Pages
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 
+      # Checkout the repository content
+      # 
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # Disabling shallow clone 
+          fetch-depth: 0
+      # 
+      # Setup Java JDK
+      # uses JDK 8 because otherwise frames are not supported anymore
+      # 
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      # 
+      # Run the build of project by ANT
+      # 
+      - name: Build
+        run: ant deployJavadoc
+      # 
+      # Deploy javadoc to GitHub Pages
+      # "destination_dir" must be change on every deploy
+      # 
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./javadoc
+          destination_dir: ./4.0
+          enable_jekyll: false
+          keep_files: false
+          full_commit_message: Deploy 4.0 javadoc to GitHub Pages
+      # 
+      # Deploy javadoc to GitHub Pages as current version
+      # 
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./javadoc
+          destination_dir: ./current
+          enable_jekyll: false
+          keep_files: false
+          full_commit_message: Deploy javadoc to GitHub Pages as current version
