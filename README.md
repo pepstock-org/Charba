@@ -1,7 +1,7 @@
 Charba - J2CL and GWT Charts library based on CHART.JS
 ======================================================
 
-[![Release](https://img.shields.io/github/release/pepstock-org/Charba.svg)](https://github.com/pepstock-org/Charba/releases/latest) [![MvnRepo](https://maven-badges.herokuapp.com/maven-central/org.pepstock/charba/badge.svg)](https://mvnrepository.com/artifact/org.pepstock/charba) [![License](https://img.shields.io/github/license/pepstock-org/Charba.svg)](https://github.com/pepstock-org/Charba/blob/master/LICENSE) [![Build](https://github.com/pepstock-org/Charba/workflows/Build/badge.svg?branch=master)](https://github.com/pepstock-org/Charba/actions/) [![Javadoc](https://img.shields.io/static/v1?message=Javadoc&color=informational)](https://pepstock-org.github.io/Charba/3.3/) [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=alert_status)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) 
+[![Release](https://img.shields.io/github/release/pepstock-org/Charba.svg)](https://github.com/pepstock-org/Charba/releases/latest) [![MvnRepo](https://maven-badges.herokuapp.com/maven-central/org.pepstock/charba/badge.svg)](https://mvnrepository.com/artifact/org.pepstock/charba) [![License](https://img.shields.io/github/license/pepstock-org/Charba.svg)](https://github.com/pepstock-org/Charba/blob/master/LICENSE) [![Build](https://github.com/pepstock-org/Charba/workflows/Build/badge.svg?branch=master)](https://github.com/pepstock-org/Charba/actions/) [![Javadoc](https://img.shields.io/static/v1?message=Javadoc&color=informational)](https://pepstock-org.github.io/Charba/current/) [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=alert_status)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) 
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/chartjs/awesome) [![CodedIsArtAndPassion](https://img.shields.io/badge/coding%20is-art%20and%20passion-E760A4.svg)](https://img.shields.io/badge/coding%20is-art%20and%20passion-E760A4.svg)
 
 What's Charba
@@ -640,7 +640,6 @@ Here you can find the list of enhancements and updates available on `master` bra
  * `Window.enableResizeOnBeforePrint()` method has been fully implemented by JSINTEROP.
  * reduce visibility of property handler classes leveraging on the interface.
  * implement `ImmutableDate` class to use to return the date value stored to chart configuration and to callbacks.
- * change `Travis` configuration in order to use `JDK11` to compile the project and install `NodeJs12` in order to be compliant with new restrictions of `SonarCloud`.That means that Charba is compilable also on `JDK11` but it will be release on `JDK8` in order to be consumed by applications which are still using `JDK8`.
  * add `equals` and `hashCode` methods to standard keys implementation in `options` package.
  * add `BaseLocation` and `BaseNavigator` native object classes to get the location and navigator from `DOM`.
  * add `Meta` native object class to map a `<meta>` element from `DOM` document.
@@ -649,12 +648,16 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve the management of properties used cross classes or packages.
  * use new location for legend, title and tooltips options, in `plugins` options node.
  * enable CI by GitHub Action, disabling Travis.
+   * change GitHub Action workflow in order to use `JDK11` to compile the project and install `NodeJs12` in order to be compliant with new restrictions of `SonarCloud`.That means that Charba is compilable also on `JDK11` but it will be release on `JDK8` in order to be consumed by applications which are still using `JDK8`.
  * fix font and color fallbacks to the defaults values.
  * re-factor the `configuration` package in order to manage both configuration and chart options (at runtime).
  * change the `NativeObject` from a class to an empty interface in order to skip `ClassCastException` in J2CL when the object, passed from CHART.JS, doesn't have any prototype or is a proxy.
  * add methods to `NativeObjectContainer` in order to manage a unique internal ID, as string.
  * add image mime type and image quality to `toDataUrl` methods (with all combination and defaults) to `Canvas` object.
- * deploy javadoc (of all version) to GitHub Pages of [Charba](https://pepstock-org.github.io/Charba/3.3/) project.
+ * deploy javadoc (of all version) to GitHub Pages of [Charba](https://pepstock-org.github.io/Charba/current/) project.
+ * deploy new documentation (with 3.3 and 4.0 versions, based on [Docusaurus](https://docusaurus.io/)) to GitHub Pages of [Charba-Wiki](https://pepstock-org.github.io/Charba-Wiki/) project.
+ * deploy GWT showcase to GitHub Pages of [Charba-Showcase](https://pepstock-org.github.io/Charba-Showcase/) project.
+ * deploy J2CL showcase to GitHub Pages of [Charba-Showcase-J2CL](https://pepstock-org.github.io/Charba-Showcase-J2CL/) project.
 
 License
 -------
