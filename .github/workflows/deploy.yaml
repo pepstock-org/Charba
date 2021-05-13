@@ -6,13 +6,13 @@
 # 
 name: Deploy
 # 
-# Runs only on push events on branch 'deploy'
+# Runs only on new tag has been pushed
 # and then publishes to gh-pages
-#
+# 
 on:
   push:
-    branches:
-      - deploy
+    tags:
+      - '[0-9]+.[0-9]+'
       
 # Allows you to run this workflow manually from the Actions tab
 #  workflow_dispatch:
@@ -23,6 +23,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # 
+      # Gets the tag to use as version
+      # 
+      - name: Get version
+        id: version
+        run: |
+          echo ::set-output name=CHARBA_VERSION::${GITHUB_REF#refs/tags/} 
       # 
       # Checkout the repository content
       # 
@@ -54,10 +61,10 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./javadoc
-          destination_dir: ./4.0
+          destination_dir: ./${{ steps.version.outputs.CHARBA_VERSION }}
           enable_jekyll: false
           keep_files: false
-          full_commit_message: Deploy 4.0 javadoc to GitHub Pages
+          full_commit_message: Deploy ${{ steps.version.outputs.CHARBA_VERSION }} javadoc to GitHub Pages
       # 
       # Deploy javadoc to GitHub Pages as current version
       # 
