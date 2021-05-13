@@ -4,22 +4,23 @@
 # *************************************
 # Workflow name
 # 
-name: Build
+name: Build and deploy Next
 # 
 # Runs only on push events on branch 'master'
-# 
+# and then publishes to gh-pages
+#
 on:
   push:
     branches:
       - master
-
+      
 # Allows you to run this workflow manually from the Actions tab
 #  workflow_dispatch:
 # 
 # Workflow environment and steps
 # 
 jobs:
-  build:
+  buildNext:
     runs-on: ubuntu-latest
     steps:
       # 
@@ -31,40 +32,28 @@ jobs:
           # Disabling shallow clone 
           fetch-depth: 0
       # 
-      # Remove 'pom.xml' otherwise Sonar will fail forcing to use Maven   
-      # 
-      - name: Remove pom
-        run: rm -f pom.xml    
-      # 
       # Setup Java JDK
+      # uses JDK 8 because otherwise frames are not supported anymore
       # 
       - name: Setup JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
+          java-version: '8'
           distribution: 'adopt'
-      # 
-      # Setup Node.js (for Sonar)
-      # 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2    
-        with:
-          node-version: '12'         
       # 
       # Run the build of project by ANT
       # 
       - name: Build
-        run: ant buildAll
+        run: ant deployJavadoc
       # 
-      # Run the Sonar scan
+      # Deploy javadoc to GitHub Pages as next version
       # 
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@v1.6
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      # 
-      # Print out the artifacts list
-      # 
-      - name: Print artifacts
-        run: ls -R ./dist
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./javadoc
+          destination_dir: ./next
+          enable_jekyll: false
+          keep_files: false
+          full_commit_message: Deploy javadoc to GitHub Pages as next version
