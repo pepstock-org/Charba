@@ -359,6 +359,7 @@
 		  <replacetoken><![CDATA[<head>]]></replacetoken>
 		</replace>
 	</target>
+	
 	<!--
         CHARBA - CREATE sources jar file for J2CL
     -->
