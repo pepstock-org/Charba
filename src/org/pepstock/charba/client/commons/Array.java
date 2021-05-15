@@ -66,7 +66,7 @@ public abstract class Array {
 	 * @return a new string by concatenating all of the elements in an array
 	 */
 	@JsMethod(name = "join")
-	native final String nativeJoin(String separator);
+	final native String nativeJoin(String separator);
 	
 	/**
 	 * Creates and returns a new string by concatenating all of the elements in an array (or an array-like object), separated by commas.<br>

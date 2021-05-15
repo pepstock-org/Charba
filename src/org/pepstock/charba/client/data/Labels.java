@@ -185,9 +185,9 @@ public final class Labels {
 		// checks arguments
 		if (values != null && values.length > 0 && !isEmpty()) {
 			// creates an array
-			ArrayString array = ArrayString.fromOrEmpty(values);
+			ArrayString internalArray = ArrayString.fromOrEmpty(values);
 			// gets instance to search
-			String value = array.join(Constants.LINE_SEPARATOR);
+			String value = internalArray.join(Constants.LINE_SEPARATOR);
 			// scans array
 			for (int i = 0; i < size(); i++) {
 				// gets stored value
