@@ -22,6 +22,7 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.items.ScaleItem;
 
 import jsinterop.annotations.JsFunction;
 
@@ -57,7 +58,7 @@ final class CategoryTickHandler extends AbstractTickHandler<CartesianCategoryTic
 		 * @param values array with all values of ticks
 		 * @return string representation of tick
 		 */
-		String call(CallbackFunctionContext context, String value, int index, ArrayString values);
+		String call(CallbackFunctionContext context, double value, int index, ArrayString values);
 	}
 
 	// ---------------------------
@@ -78,13 +79,17 @@ final class CategoryTickHandler extends AbstractTickHandler<CartesianCategoryTic
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		tickCallbackProxy.setCallback((context, value, index, values) -> {
+			// gets scale item
+			ScaleItem scaleItem = getAxis().getScaleItem();
+			// gets value as string
+			String current = scaleItem.getLabelForValue(value);
 			// checks if user callback is consistent
 			if (getCallback() != null) {
 				// then calls user callback
-				return getCallback().onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
+				return getCallback().onCallback(getAxis(), current, index, ArrayListHelper.unmodifiableList(values));
 			}
 			// default tick is the tick value
-			return value;
+			return current;
 		});
 	}
 

@@ -40,6 +40,8 @@ import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.AxisItem;
+import org.pepstock.charba.client.items.ScaleItem;
+import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.options.ExtendedScale;
 import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.options.Scale;
@@ -392,6 +394,18 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
+	 * Returns the the scale item related to this axis.
+	 * 
+	 * @return the the scale item related to this axis
+	 */
+	final ScaleItem getScaleItem() {
+		// gets scales from chart node
+		ScalesNode scaleNode = getChart().getNode().getScales();
+		// gets scale item
+		return scaleNode.getItems().get(getId().value());
+	}
+
+	/**
 	 * Returns the default values of the axis.
 	 * 
 	 * @return the default values of the axis
@@ -419,7 +433,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// returns default scale
 		return Defaults.get().getScale(this.storeType);
 	}
-	
+
 	// -----------------------------
 	// CALLBACKS
 	// -----------------------------
@@ -584,7 +598,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// stores and manages callback
 		setCallback(getConfiguration(), Property.AFTER_UPDATE, axisUpdateCallback, afterUpdateCallbackProxy);
 	}
-	
+
 	// -----------------------------
 	// Common CALLBACKS storing
 	// -----------------------------
@@ -629,7 +643,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	final ScaleContext createContext(NativeObject context) {
 		return new ScaleContext(this, new ConfigurationEnvelop<>(context));
 	}
-	
+
 	// -----------------------------
 	// Internal CALLBACKS invocation
 	// -----------------------------
