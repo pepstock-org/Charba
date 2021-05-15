@@ -133,7 +133,7 @@ public final class Labels {
 	}
 
 	/**
-	 * Adds a multi line label
+	 * Adds a multi-line label
 	 * 
 	 * @param values array of string which represents a multi line label
 	 */
@@ -176,6 +176,34 @@ public final class Labels {
 	}
 
 	/**
+	 * Returns the index of the first occurrence of the specified element in the labels, or -1 if this labels instance does not contain the element.
+	 * 
+	 * @param values element to search for, if an array, the elements will be joined with {@link Constants#LINE_SEPARATOR}
+	 * @return the index of the first occurrence of the specified element in the labels, or -1 if this labels instance does not contain the element
+	 */
+	public int indexOf(String... values) {
+		// checks arguments
+		if (values != null && values.length > 0 && !isEmpty()) {
+			// creates an array
+			ArrayString array = ArrayString.fromOrEmpty(values);
+			// gets instance to search
+			String value = array.join(Constants.LINE_SEPARATOR);
+			// scans array
+			for (int i = 0; i < size(); i++) {
+				// gets stored value
+				String storedvalue = getString(i);
+				// checks if equals
+				if (value.equals(storedvalue)) {
+					// found and then returns index
+					return i;
+				}
+			}
+		}
+		// if here, not found
+		return -1;
+	}
+
+	/**
 	 * Returns a label at a specific index.<br>
 	 * If at index there is multi-line label, returns labels with {@link Constants#LINE_SEPARATOR} as separator.<br>
 	 * If the index is out of bounds, throws an exception.
@@ -187,19 +215,8 @@ public final class Labels {
 		ObjectType type = getType(index);
 		if (ObjectType.ARRAY.equals(type)) {
 			ArrayString internalArray = (ArrayString) array.get(index);
-			// creates an string builder
-			StringBuilder result = new StringBuilder();
-			// scans all values
-			for (int i = 0; i < internalArray.length(); i++) {
-				// adds separator after 1 element
-				if (i > 0) {
-					result.append(Constants.LINE_SEPARATOR);
-				}
-				// adds to builder
-				result.append(internalArray.get(i));
-			}
 			// returns string
-			return result.toString();
+			return internalArray.join(Constants.LINE_SEPARATOR);
 		}
 		// returns string
 		// string can not be null, because checked during loading
@@ -220,7 +237,7 @@ public final class Labels {
 		if (ObjectType.ARRAY.equals(type)) {
 			// gets array
 			ArrayString internalArray = (ArrayString) array.get(index);
-			// creates an unmodifiable string lsit
+			// creates an unmodifiable string list
 			return ArrayListHelper.unmodifiableList(internalArray);
 		}
 		// returns a list with single item

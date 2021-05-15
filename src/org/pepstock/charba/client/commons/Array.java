@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.commons;
 
+import org.pepstock.charba.client.utils.Window;
+
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -53,6 +56,46 @@ public abstract class Array {
 	public final boolean isEmpty() {
 		// checks the length
 		return length() == 0;
+	}
+	
+	/**
+	 * Creates and returns a new string by concatenating all of the elements in an array (or an array-like object), separated by commas or a specified separator string.<br>
+	 * If the array has only one item, then that item will be returned without using the separator.
+	 * 
+	 * @param separator separator string to apply in the join
+	 * @return a new string by concatenating all of the elements in an array
+	 */
+	@JsMethod(name = "join")
+	native final String nativeJoin(String separator);
+	
+	/**
+	 * Creates and returns a new string by concatenating all of the elements in an array (or an array-like object), separated by commas.<br>
+	 * If the array has only one item, then that item will be returned without using the separator.
+	 * 
+	 * @return a new string by concatenating all of the elements in an array
+	 */
+	@JsOverlay
+	public final String join() {
+		return nativeJoin(Window.undefined());
+		
+	}
+
+	/**
+	 * Creates and returns a new string by concatenating all of the elements in an array (or an array-like object), separated by commas or a specified separator string.<br>
+	 * If the array has only one item, then that item will be returned without using the separator.
+	 * 
+	 * @param separator separator string to apply in the join
+	 * @return a new string by concatenating all of the elements in an array
+	 */
+	@JsOverlay
+	public final String join(String separator) {
+		// checks if argument is consistent
+		if (separator != null) {
+			return nativeJoin(separator);
+		}
+		// if here the argument is not consistent
+		// then returns the default join
+		return join();
 	}
 
 }
