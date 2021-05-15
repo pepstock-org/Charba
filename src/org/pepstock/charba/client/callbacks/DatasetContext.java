@@ -21,6 +21,7 @@ import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.data.DataEnvelop;
 import org.pepstock.charba.client.datalabels.DataLabelsEnvelop;
 import org.pepstock.charba.client.labels.LabelsEnvelop;
+import org.pepstock.charba.client.options.OptionsEnvelop;
 
 /**
  * The option context is used to give contextual information when resolving options.
@@ -62,6 +63,15 @@ public class DatasetContext extends AbstractDatasetContext {
 	 * @param envelop envelop of native object instance to be wrapped.
 	 */
 	public DatasetContext(LabelsEnvelop<NativeObject> envelop) {
+		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	}
+	
+	/**
+	 * Creates the object with native object instance to be wrapped, called by <code>options</code> package.
+	 * 
+	 * @param envelop envelop of native object instance to be wrapped.
+	 */
+	public DatasetContext(OptionsEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 

@@ -133,7 +133,7 @@ public final class Animations extends AbstractNode implements IsAnimations {
 		// checks if is consistent
 		if (IsAnimationCollectionKey.isValid(collection)) {
 			// stores in the object
-			setValue(collection, animationCollection);
+			setValueAndAddToParent(collection, animationCollection);
 		}
 	}
 
@@ -147,7 +147,7 @@ public final class Animations extends AbstractNode implements IsAnimations {
 	public AnimationCollection create(IsAnimationCollectionKey collection) {
 		AnimationCollection options = new AnimationCollection(this, collection, defaultValues.get(collection), null);
 		// stores in the object
-		setValue(collection, options);
+		setValueAndAddToParent(collection, options);
 		// returns the animation options
 		return options;
 	}

@@ -26,6 +26,9 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
  * 
  */
 public final class AnimationCollection extends AbstractAnimationCollection<IsAnimationCollectionKey, IsDefaultAnimationCollection> {
+	
+	// key of collection
+	private final IsAnimationCollectionKey key;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -37,5 +40,26 @@ public final class AnimationCollection extends AbstractAnimationCollection<IsAni
 	 */
 	AnimationCollection(AbstractNode parent, IsAnimationCollectionKey childKey, IsDefaultAnimationCollection defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, defaultValues, nativeObject);
+		// stores key
+		this.key = childKey;
 	}
+	
+	/**
+	 * Returns the property name to use to add this element to its parent.
+	 * 
+	 * @return the childKey or <code>null</code> if is a root element.
+	 */
+	public IsAnimationCollectionKey getKey() {
+		return key;
+	}
+
+	/**
+	 * Returns the parent node.
+	 * 
+	 * @return the parent node or <code>null</code> if is a root node.
+	 */
+	AbstractNode getParent() {
+		return getParentNode();
+	}
+	
 }

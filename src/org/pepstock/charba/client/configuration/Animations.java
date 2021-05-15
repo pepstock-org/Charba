@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.options.AnimationCollection;
+import org.pepstock.charba.client.options.AnimationsItem;
 import org.pepstock.charba.client.options.IsAnimationCollectionKey;
 import org.pepstock.charba.client.options.IsAnimations;
 
@@ -26,7 +26,7 @@ import org.pepstock.charba.client.options.IsAnimations;
  * 
  * @author Andrea "Stock" Stocchero
  */
-class Animations extends AbstractDynamicConfiguration<IsAnimations> implements IsAnimations {
+public final class Animations extends AbstractDynamicConfiguration<IsAnimations> {
 
 	/**
 	 * Builds the object by a animations provider used to get the animations element for storing properties.
@@ -43,7 +43,6 @@ class Animations extends AbstractDynamicConfiguration<IsAnimations> implements I
 	 * @param collection collection instance used to check in the animation options
 	 * @param enabled if <code>true</code> it enables an animation collection
 	 */
-	@Override
 	public void setEnabled(IsAnimationCollectionKey collection, boolean enabled) {
 		checkAndGet().setEnabled(collection, enabled);
 	}
@@ -54,7 +53,6 @@ class Animations extends AbstractDynamicConfiguration<IsAnimations> implements I
 	 * @param collection collection instance used to check in the animation options
 	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
 	 */
-	@Override
 	public boolean isEnabled(IsAnimationCollectionKey collection) {
 		return checkAndGet().isEnabled(collection);
 	}
@@ -65,7 +63,6 @@ class Animations extends AbstractDynamicConfiguration<IsAnimations> implements I
 	 * @param collection collection instance used to check in the animation options
 	 * @return <code>true</code> if an animation collection instance is stored in the the animation options
 	 */
-	@Override
 	public boolean has(IsAnimationCollectionKey collection) {
 		return checkAndGet().has(collection);
 	}
@@ -76,9 +73,8 @@ class Animations extends AbstractDynamicConfiguration<IsAnimations> implements I
 	 * @param collection collection instance used to get for animation options
 	 * @return an animation collection instance or <code>null</code> if does not exists
 	 */
-	@Override
-	public AnimationCollection get(IsAnimationCollectionKey collection) {
-		return checkAndGet().get(collection);
+	public AnimationsItem get(IsAnimationCollectionKey collection) {
+		return new AnimationsItem(new ConfigurationEnvelop<>(checkAndGet().get(collection)));
 	}
 
 	/**
@@ -87,9 +83,8 @@ class Animations extends AbstractDynamicConfiguration<IsAnimations> implements I
 	 * @param collection collection instance used to get for animation options
 	 * @param animationCollection an animation collection instance to set
 	 */
-	@Override
-	public void set(IsAnimationCollectionKey collection, AnimationCollection animationCollection) {
-		checkAndGet().set(collection, animationCollection);
+	public void set(IsAnimationCollectionKey collection, AnimationsItem animationCollection) {
+		checkAndGet().set(collection, animationCollection.getAnimationCollection());
 	}
 
 	/**
@@ -98,9 +93,8 @@ class Animations extends AbstractDynamicConfiguration<IsAnimations> implements I
 	 * @param collection collection key used to create the animation collections
 	 * @return a collection animation options
 	 */
-	@Override
-	public AnimationCollection create(IsAnimationCollectionKey collection) {
-		return checkAndGet().create(collection);
+	public AnimationsItem create(IsAnimationCollectionKey collection) {
+		return new AnimationsItem(new ConfigurationEnvelop<>(checkAndGet().create(collection)));
 	}
 
 	/**
@@ -108,7 +102,6 @@ class Animations extends AbstractDynamicConfiguration<IsAnimations> implements I
 	 * 
 	 * @param collection collection instance used to remove from animation options
 	 */
-	@Override
 	public void remove(IsAnimationCollectionKey collection) {
 		checkAndGet().remove(collection);
 	}

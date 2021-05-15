@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.options.IsAnimations;
 
 /**
  * Defines a configuration element which is managing the ANIMATION options.<br>
@@ -49,7 +48,7 @@ public interface HasAnimation {
 	 * 
 	 * @return the animations collection
 	 */
-	default IsAnimations getAnimations() {
+	default Animations getAnimations() {
 		// checks if container is consistent
 		return Checker.checkAndGetIfValid(getAnimationContainer(), "Animation container").getAnimations();
 	}

@@ -41,7 +41,7 @@ abstract class AbstractAnimationCollection<T extends Key, D extends IsDefaultAni
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		PROPERTIES("properties"),
 		TYPE("type"),

@@ -248,6 +248,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add `animation` options and configuration to tooltips.
    * add `setAnimationEnabled` and `isAnimationEnabled` methods to animation containers to configuration, options and data sets.
    * enable `duration`, `delay`, `loop` and `easing` properties as scriptable options in `Animation` configuration.
+   * enable `from` and `to` properties as scriptable options in `AnimationsItem` configuration.
  * add `skipNull` property to `BarOptions` configuration.
  * change `circumference` and `rotation` properties on `PieChart` and `DoughnutChart` options in order to set the value in degrees instead of radians.
  * add `cutout` property in the options and configuration classes, for pie and doughnut charts.
