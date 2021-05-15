@@ -4,7 +4,7 @@
 # *************************************
 # Workflow name
 # 
-name: Build and deploy Next
+name: Build and deploy javadoc (next)
 # 
 # Runs only on push events on branch 'master'
 # and then publishes to gh-pages
