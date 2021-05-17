@@ -15,10 +15,10 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.options.AnimationsItem;
+import org.pepstock.charba.client.options.AnimationCollection;
 
 /**
- * Callback interface to set <code>to</code>property of {@link AnimationsItem} at runtime.
+ * Callback interface to set <code>to</code>property of {@link AnimationCollection} at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *

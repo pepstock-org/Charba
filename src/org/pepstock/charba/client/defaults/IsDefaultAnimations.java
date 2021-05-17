@@ -22,7 +22,7 @@ import org.pepstock.charba.client.options.IsAnimationCollectionKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultAnimations {
+public interface IsDefaultAnimations{
 
 	/**
 	 * Returns <code>true</code> if an animation collection instance is stored in the the animation options.

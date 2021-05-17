@@ -16,10 +16,13 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
+import org.pepstock.charba.client.defaults.globals.DefaultAnimationCollection;
 
 /**
  * It animates charts out of the box.<br>
@@ -29,7 +32,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimations;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animations extends AbstractNode implements IsAnimations {
+public final class Animations extends AbstractNode implements IsAnimations, HasCallbackScope {
 
 	// defaults instance
 	private final IsDefaultAnimations defaultValues;
@@ -46,6 +49,16 @@ public final class Animations extends AbstractNode implements IsAnimations {
 		super(parent, childKey, nativeObject);
 		// stores defaults which has been already checked on super class
 		this.defaultValues = defaultValues;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasCallbackScope#getScope()
+	 */
+	@Override
+	public String getScope() {
+		return HasCallbackScope.extractScope(this);
 	}
 
 	/**
@@ -114,8 +127,10 @@ public final class Animations extends AbstractNode implements IsAnimations {
 	public AnimationCollection get(IsAnimationCollectionKey collection) {
 		// checks if collection is consistent
 		if (has(collection)) {
-			// gets from the native object
-			return new AnimationCollection(this, collection, defaultValues.get(collection), getValue(collection));
+			// gets defaults
+			IsDefaultAnimationCollection defaultCollection = defaultValues.get(collection);
+			// creates the collection
+			return new AnimationCollection(this, collection, defaultCollection == null ? new DefaultAnimationCollection(collection) : defaultCollection, getValue(collection), getScope());
 		}
 		// if here, the collection is not valid
 		// then returns null
@@ -145,7 +160,10 @@ public final class Animations extends AbstractNode implements IsAnimations {
 	 */
 	@Override
 	public AnimationCollection create(IsAnimationCollectionKey collection) {
-		AnimationCollection options = new AnimationCollection(this, collection, defaultValues.get(collection), null);
+		// gets defaults
+		IsDefaultAnimationCollection defaultCollection = defaultValues.get(collection);
+		// creates the collection
+		AnimationCollection options = new AnimationCollection(this, collection, defaultCollection == null ? new DefaultAnimationCollection(collection) : defaultCollection, null, getScope());
 		// stores in the object
 		setValueAndAddToParent(collection, options);
 		// returns the animation options
@@ -165,4 +183,5 @@ public final class Animations extends AbstractNode implements IsAnimations {
 			remove(collection);
 		}
 	}
+
 }

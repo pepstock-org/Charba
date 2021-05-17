@@ -18,6 +18,8 @@ package org.pepstock.charba.client.defaults.globals;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.FromCallback;
+import org.pepstock.charba.client.callbacks.ToCallback;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.items.Undefined;
@@ -57,7 +59,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	 * 
 	 * @param collection a default animation collection to wrap
 	 */
-	DefaultAnimationCollection(IsAnimationCollectionKey collection) {
+	public DefaultAnimationCollection(IsAnimationCollectionKey collection) {
 		this.collection = IsAnimationCollectionKey.checkAndGetIfValid(collection);
 	}
 
@@ -139,6 +141,26 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	@Override
 	public String getToAsString() {
 		return DEFAULT_TO_AS_STRING;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getFromCallback()
+	 */
+	@Override
+	public FromCallback getFromCallback() {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getToCallback()
+	 */
+	@Override
+	public ToCallback getToCallback() {
+		return null;
 	}
 
 }

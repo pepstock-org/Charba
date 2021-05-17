@@ -75,8 +75,10 @@ public class DefaultAnimations implements IsDefaultAnimations {
 	 */
 	@Override
 	public IsDefaultAnimationCollection get(IsAnimationCollectionKey collection) {
+		// checks if collection key is consistent
+		IsAnimationCollectionKey.checkIfValid(collection);
 		// checks if collection is valid and is default one
-		if (IsAnimationCollectionKey.isValid(collection) && DefaultAnimationCollectionKey.is(collection)) {
+		if (DefaultAnimationCollectionKey.is(collection)) {
 			// checks if is color
 			if (Key.equals(collection, DefaultAnimationCollectionKey.COLORS)) {
 				return DEFAULT_COLLECTION_COLORS;
@@ -86,7 +88,7 @@ public class DefaultAnimations implements IsDefaultAnimations {
 			}
 		}
 		// if here, collection not valid or not a default
-		return null;
+		return new DefaultAnimationCollection(collection);
 	}
 
 }

@@ -15,7 +15,12 @@
 */
 package org.pepstock.charba.client.enums;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.options.IsAnimationCollectionKey;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
@@ -23,7 +28,7 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey
+public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey, IsAnimationCollectionKey
 {
 	/**
 	 * Uses to <b>x</b> property to animate the element.
@@ -66,6 +71,8 @@ public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey
 	private final String value;
 	// animation type
 	private final AnimationType type;
+	// list of properties with only the key
+	private List<IsAnimationPropertyKey> properties = null;
 
 	/**
 	 * Creates with the property value to use in the native object.
@@ -96,6 +103,22 @@ public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey
 	@Override
 	public AnimationType type() {
 		return type;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.IsAnimationCollectionKey#properties()
+	 */
+	@Override
+	public List<IsAnimationPropertyKey> properties() {
+		// checks if properties instance is initialized
+		if (properties == null) {
+			// stores the property itself in the properties list
+			// in order to act as animation collection key as well
+			this.properties = Collections.unmodifiableList(Arrays.asList(this));
+		}
+		return properties;
 	}
 
 	/**

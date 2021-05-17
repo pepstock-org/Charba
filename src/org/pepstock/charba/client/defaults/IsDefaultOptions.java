@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
@@ -27,7 +28,7 @@ import org.pepstock.charba.client.intl.CLocale;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultOptions extends IsDefaultAnimationContainer {
+public interface IsDefaultOptions extends IsDefaultAnimationContainer, HasCallbackScope {
 
 	/**
 	 * Returns the hover defaults.
@@ -126,13 +127,6 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	 * @return the locale instance
 	 */
 	CLocale getLocale();
-
-	/**
-	 * Returns the scope of the dataset, which is the options are used for defaults, chart defaults or chart.
-	 * 
-	 * @return the scope of the dataset
-	 */
-	String getScope();
 
 	/**
 	 * Returns the resizing of the chart canvas when its container does.

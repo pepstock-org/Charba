@@ -77,6 +77,15 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	protected final AbstractNode getParentNode() {
 		return parent;
 	}
+	
+	/**
+	 * Returns the root node.
+	 * 
+	 * @return the root node
+	 */
+	protected final AbstractNode getRootNode() {
+		return retrieveRoot();
+	}
 
 	/**
 	 * Sets a value (int) in the embedded JavaScript object at specific property.
@@ -442,4 +451,18 @@ public abstract class AbstractNode extends NativeObjectContainer {
 		}
 	}
 
+	/**
+	 * Called recursively till the root of nodes.
+	 * 
+	 * @return the root of the node
+	 */
+	protected final AbstractNode retrieveRoot() {
+		// checks if we are at root element
+		if (parent != null) {
+			// recursively call to parent of this node
+			return parent.retrieveRoot();
+		}
+		// returns the current node
+		return this;
+	}
 }

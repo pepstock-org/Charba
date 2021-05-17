@@ -17,6 +17,8 @@ package org.pepstock.charba.client.defaults.chart;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.FromCallback;
+import org.pepstock.charba.client.callbacks.ToCallback;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
@@ -115,6 +117,26 @@ public final class DefaultChartAnimationCollection extends AbstractDefaultChartA
 	@Override
 	public String getToAsString() {
 		return getDefaults().getToAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getFromCallback()
+	 */
+	@Override
+	public FromCallback getFromCallback() {
+		return getDefaults().getFromCallback();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getToCallback()
+	 */
+	@Override
+	public ToCallback getToCallback() {
+		return getDefaults().getToCallback();
 	}
 
 }

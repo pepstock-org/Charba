@@ -17,6 +17,8 @@ package org.pepstock.charba.client.defaults;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.FromCallback;
+import org.pepstock.charba.client.callbacks.ToCallback;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
@@ -82,5 +84,18 @@ public interface IsDefaultAnimationCollection extends IsDefaultBaseAnimation {
 	 * @return the properties defined in the the animation collection
 	 */
 	List<IsAnimationPropertyKey> getProperties();
+	
+	/**
+	 * Returns the callback to set the start value for the animation.
+	 * 
+	 * @return the callback instance to use to set the start value for the animation
+	 */
+	FromCallback getFromCallback();
 
+	/**
+	 * Returns the callback to set the end value for the animation.
+	 * 
+	 * @return the callback instance to use to set the end value for the animation
+	 */
+	ToCallback getToCallback();
 }
