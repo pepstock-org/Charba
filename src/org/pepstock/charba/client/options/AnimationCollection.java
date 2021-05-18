@@ -38,7 +38,6 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
-import org.pepstock.charba.client.utils.Console;
 
 import jsinterop.annotations.JsFunction;
 
@@ -135,10 +134,6 @@ public final class AnimationCollection extends AbstractAnimation<IsAnimationColl
 		super(parent, childKey, defaultValues, nativeObject);
 		// checks scope
 		this.scope = Checker.checkAndGetIfValid(scope, "Scope argument is not consistent");
-		
-		// FIXME 
-		Console.log("Scope: "+this.scope);
-		
 		// stores new incremental id
 		setNewIncrementalId();
 		// stores properties
