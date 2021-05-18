@@ -163,7 +163,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import last LUXON library version, [version 1.27.0](https://github.com/moment/luxon/releases/tag/1.27.0) on May 15th, 2021.
  * import last CHART.JS Datalabels plugin version, [version v2.0.0-rc](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v2.0.0-rc) on March 17th, 2021.
  * import last CHART.JS Annotation plugin version, [version v1.0.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.0.1) on April 25th, 2021.
- * import last CHART.JS Zoom plugin version, [version v1.0.0-beta.5](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.0.0-beta.5) on May 4th, 2021.
+ * import last CHART.JS Zoom plugin version, [version v1.0.0-rc](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.0.0-rc) on May 18th, 2021.
  * change dependency for Google Closure Compiler, [version v20210406](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20210505) on May 15th, 2021. 
 
 ### _Charts_
@@ -449,14 +449,15 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `speed`, `rangeMin` and `rangeMax` properties from `Pan` configuration and options.
  * change signature for `Zoom` and `Pan` callbacks in order to be aligned with the other scriptable options, using only an argument, the context.
  * remove the generic definition from `AbstractConfigurationItem` class in `ZoomPlugin`.
- * remove `animationDuration` property from `Drag` class  in `ZoomPlugin`.
  * remove `Range` class because is not longer used. Use `Limit` and `ScaleLimit` instead.
  * remove `rangeMin` and `rangeMax` properties from `Zoom` and `Pan` configuration and options. Use `Limit` and `ScaleLimit` instead.
  * rename `resetZoom` method in `ZoomPlugin` class to `reset`. 
+ * change `Drag` class in order drag configuration is a inner element of `Zoom` configuration instead of separated object.
+   * remove all methods from `ZoomPlugin` class to set the drag object to zoom configuration.  
+ * remove `animationDuration` property from `Drag` class  in `ZoomPlugin`.
  * rename `enabled` property to `display` in `LineLabel` configuration of `AnnotationPlugin`.
  * move `AnnotationType` enumeration from `org.pepstock.charba.client.annotation.enums` to `org.pepstock.charba.client.annotation` in order to maintain the low visibility of internal classes of the annotation plugin implementation.
  * rename `LineLablePosition` class to `LablePosition` for `LineLabel` configuration of `AnnotationPlugin`.
- * add `adjustScaleRange` options to all annotations element.
 
 #### Features
  * change all methods of `Plugin` interface becoming all default ones.
@@ -488,6 +489,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * change the constructors of `LineAnnotation` and `BoxAnnotation` in order to set an ID to the object. This will enable the possibility to define annotations items as default.
    * enable the callback definitions for all scriptable options in all annotations.
    * add `drawTime` property to `LineLabel` configuration of `AnnotationPlugin`.
+   * add `adjustScaleRange` options to all annotations element.
  * add `enabled` property to `DatasetsItemsSelector` plugin in order to disable/enable the plugin at runtime.
  * add `setXAxisID` method to `DatasetsItemsSelectorOptions` class in order to set the scale id using `IsScaleId` implementation.
  * add new `DatasetRangeClearSelectionEvent` event for `DatasetsItemsSelector` plugin in to order to notify when a clear action has been performed on chart.
@@ -498,13 +500,14 @@ Here you can find the list of enhancements and updates available on `master` bra
  * improve `Labels` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
  * improve `LabelsOptionsBuilder` class in order to manage the multi-labels configuration.
  * improve `Zoom` plugin in order to leverage on callbacks cache which enables the complete configuration also at default or chart type levels.
- * add `threshold` property to `Zoom` configuration and options.
  * add `RejectedCallback` class to `Zoom` and `Pan` options in the `ZoomPlugin` in order to manage the event when pan or zoom fail because modifier key was not detected.
  * add `StartCallback` class to `Zoom` and `Pan` options in the `ZoomPlugin` in order to manage the event when pan or zoom are about to start.
- * add `modifierKey` property to `Pan` options in the `ZoomPlugin` in order to enable pan only when modifier key was detected.
  * add `wheelModifierKey` property to `Zoom` options in the `ZoomPlugin` in order to enable zoom only when modifier key was detected.
  * add `overScaleMode` property to `Zoom` and `Pan` options in the `ZoomPlugin` in order to enable zoom only when modifier key was detected.
- * add `Limit` and `ScaleLimit` configuration element to ZoomOptions configuration.
+ * add `Limit` and `ScaleLimit` configuration element to `ZoomOptions` configuration.
+ * add `Drag`, `Wheel` and `Pinch` elements in `Zoom` configuration and options.
+ * add `threshold` property to `Wheel` configuration and options.
+ * add `modifierKey` property to `Pan`and `Wheel` options in the `ZoomPlugin` in order to enable pan and wheel only when modifier key was detected.
  * add new `reset(IsChart, IsTransitionKey)` API methods to the `ZoomPlugin` class in order to set the update mode of updating chart.
  * add new `zoom`, `pan` and `zoomScale` API methods (with different signatures) to the `ZoomPlugin` class in order to pan and zoom on chart programmatically.
  * add `ZOOM_TRANSITION_MODE` constant to the `ZoomPlugin` class in order to get the custom transition mode provided by the plugin out-of-the-box.
