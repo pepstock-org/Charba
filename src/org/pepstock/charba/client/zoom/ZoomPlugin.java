@@ -285,52 +285,6 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	}
 
 	/**
-	 * Creates new customized drag-to-zoom effect.
-	 * 
-	 * @param chart chart instance to relate to new drag object, for defaults
-	 * @return new customized drag-to-zoom effect
-	 */
-	public static Drag createDrag(IsChart chart) {
-		// checks if chart is consistent and if has got any options
-		if (IsChart.isConsistent(chart) && chart.getDefaultChartOptions().getPlugins().hasOptions(ZoomPlugin.ID)) {
-			// loads the plugin options from default options of chart
-			IsDefaultOptions defaultValues = chart.getDefaultChartOptions().getPlugins().getOptions(ZoomPlugin.ID, ZoomPlugin.DEFAULTS_FACTORY);
-			// creates a drag object by the default
-			return createDrag(defaultValues);
-		}
-		// creates a drag object with standard defaults
-		return createDrag(DefaultOptions.INSTANCE);
-	}
-
-	/**
-	 * Creates new customized drag-to-zoom effect.
-	 * 
-	 * @return new customized drag-to-zoom effect
-	 */
-	public static Drag createDrag() {
-		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(ID)) {
-			// reads the default default global options
-			IsDefaultOptions defaultOptions = Defaults.get().getGlobal().getPlugins().getOptions(ID, DEFAULTS_FACTORY);
-			// creates a drag object by the default
-			return createDrag(defaultOptions);
-		}
-		// creates a drag object with standard defaults
-		return createDrag(DefaultOptions.INSTANCE);
-	}
-
-	/**
-	 * Creates new customized drag-to-zoom effect.
-	 * 
-	 * @param defaultValues default options to use for drag initialization
-	 * @return new customized drag-to-zoom effect
-	 */
-	private static Drag createDrag(IsDefaultOptions defaultValues) {
-		// creates a drag object by the default if there is
-		return new Drag(defaultValues.getZoom().getDrag());
-	}
-
-	/**
 	 * Checks if the chart is ready to perform the API.<br>
 	 * It searches if the chart is consistent and if the plugin has been activated for the chart.
 	 * 

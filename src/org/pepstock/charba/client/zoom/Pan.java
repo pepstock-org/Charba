@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ModifierKey;
@@ -42,6 +43,11 @@ public final class Pan extends AbstractConfigurationItem implements IsDefaultPan
 	private static final CallbackPropertyHandler<StartCallback> PAN_START_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ON_PAN_START);
 
 	/**
+	 * Default enabled, <b>{@value DEFAULT_ENABLED}</b>.
+	 */
+	public static final boolean DEFAULT_ENABLED = false;
+	
+	/**
 	 * Default threshold, <b>{@value DEFAULT_THRESHOLD}</b>.
 	 */
 	public static final double DEFAULT_THRESHOLD = 10D;
@@ -51,11 +57,13 @@ public final class Pan extends AbstractConfigurationItem implements IsDefaultPan
 	 */
 	enum Property implements Key
 	{
+		ENABLED("enabled"),
 		MODIFIER_KEY("modifierKey"),
 		ON_PAN("onPan"),
 		ON_PAN_START("onPanStart"),
 		ON_PAN_COMPLETED("onPanComplete"),
-		ON_PAN_REJECTED("onPanRejected");
+		ON_PAN_REJECTED("onPanRejected"),
+		THRESHOLD("threshold");
 
 		// name value of property
 		private final String value;
@@ -146,6 +154,25 @@ public final class Pan extends AbstractConfigurationItem implements IsDefaultPan
 	CallbackPropertyHandler<StartCallback> getStartPropertyHandler() {
 		return PAN_START_PROPERTY_HANDLER;
 	}
+	
+	/**
+	 * Sets <code>true</code> to enable pan element.
+	 * 
+	 * @param enabled <code>true</code> to enable pan element
+	 */
+	public final void setEnabled(boolean enabled) {
+		setValueAndAddToParent(Property.ENABLED, enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> to enable pan element.
+	 * 
+	 * @return <code>true</code> to enable pan element
+	 */
+	@Override
+	public final boolean isEnabled() {
+		return getValue(Property.ENABLED, defaultOptions.isEnabled());
+	}
 
 	/**
 	 * Sets the modifier key to activate panning.
@@ -153,7 +180,7 @@ public final class Pan extends AbstractConfigurationItem implements IsDefaultPan
 	 * @param modifierKey the modifier key to activate panning
 	 */
 	public void setModifierKey(ModifierKey modifierKey) {
-		setValue(Property.MODIFIER_KEY, modifierKey);
+		setValueAndAddToParent(Property.MODIFIER_KEY, modifierKey);
 	}
 
 	/**
@@ -164,6 +191,25 @@ public final class Pan extends AbstractConfigurationItem implements IsDefaultPan
 	@Override
 	public ModifierKey getModifierKey() {
 		return getValue(Property.MODIFIER_KEY, ModifierKey.values(), defaultOptions.getModifierKey());
+	}
+	
+	/**
+	 * Sets the minimal pan distance required before actually applying pan.
+	 * 
+	 * @param threshold the minimal pan distance required before actually applying pan
+	 */
+	public void setThreshold(double threshold) {
+		setValueAndAddToParent(Property.THRESHOLD, Checker.positiveOrZero(threshold));
+	}
+
+	/**
+	 * Returns the minimal pan distance required before actually applying pan.
+	 * 
+	 * @return the minimal pan distance required before actually applying pan
+	 */
+	@Override
+	public double getThreshold() {
+		return getValue(Property.THRESHOLD, defaultOptions.getThreshold());
 	}
 
 }

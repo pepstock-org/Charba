@@ -20,13 +20,12 @@ import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.zoom.callbacks.CompletedCallback;
 import org.pepstock.charba.client.zoom.callbacks.ModeCallback;
@@ -41,7 +40,7 @@ import jsinterop.annotations.JsFunction;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractConfigurationItem extends NativeObjectContainer implements IsDefaultConfigurationItem {
+public abstract class AbstractConfigurationItem extends AbstractNode implements IsDefaultConfigurationItem {
 
 	/**
 	 * Java script FUNCTION callback called to provide onPan, onPanComplete, onPanRejected, onZoom, onZoomComplete and onZoomRejected handlers.
@@ -82,11 +81,6 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer im
 	private static final CallbackPropertyHandler<ModeCallback> OVER_SCALE_MODE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.OVER_SCALE_MODE);
 
 	/**
-	 * Default enabled, <b>{@value DEFAULT_ENABLED}</b>.
-	 */
-	public static final boolean DEFAULT_ENABLED = false;
-
-	/**
 	 * Default mode directions, <b>{@link InteractionAxis#XY}</b>.
 	 */
 	public static final InteractionAxis DEFAULT_MODE = InteractionAxis.XY;
@@ -99,12 +93,10 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer im
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
-		ENABLED("enabled"),
 		MODE("mode"),
-		OVER_SCALE_MODE("overScaleMode"),
-		THRESHOLD("threshold");
+		OVER_SCALE_MODE("overScaleMode");
 
 		// name value of property
 		private final String value;
@@ -186,25 +178,6 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer im
 	abstract CallbackPropertyHandler<StartCallback> getStartPropertyHandler();
 
 	/**
-	 * Sets <code>true</code> to enable element (panning or zooming).
-	 * 
-	 * @param enabled <code>true</code> to enable element (panning or zooming)
-	 */
-	public final void setEnabled(boolean enabled) {
-		setValue(Property.ENABLED, enabled);
-	}
-
-	/**
-	 * Returns <code>true</code> to enable element (panning or zooming).
-	 * 
-	 * @return <code>true</code> to enable element (panning or zooming)
-	 */
-	@Override
-	public final boolean isEnabled() {
-		return getValue(Property.ENABLED, getDefaultsOptions().isEnabled());
-	}
-
-	/**
 	 * Sets the element (panning or zooming) directions.
 	 * 
 	 * @param mode the element (panning or zooming) directions
@@ -255,25 +228,6 @@ public abstract class AbstractConfigurationItem extends NativeObjectContainer im
 	@Override
 	public final InteractionAxis getOverScaleMode() {
 		return getValue(Property.OVER_SCALE_MODE, InteractionAxis.values(), getDefaultsOptions().getOverScaleMode());
-	}
-
-	/**
-	 * Sets the minimal pan distance required before actually applying pan.
-	 * 
-	 * @param threshold the minimal pan distance required before actually applying pan
-	 */
-	public void setThreshold(double threshold) {
-		setValue(Property.THRESHOLD, Checker.positiveOrZero(threshold));
-	}
-
-	/**
-	 * Returns the minimal pan distance required before actually applying pan.
-	 * 
-	 * @return the minimal pan distance required before actually applying pan
-	 */
-	@Override
-	public double getThreshold() {
-		return getValue(Property.THRESHOLD, getDefaultsOptions().getThreshold());
 	}
 
 	// -----------------------

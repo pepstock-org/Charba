@@ -16,13 +16,23 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options interface for DRAG element, in order to style the drag area.<br>
+ * {@link ZoomPlugin#ID} plugin default options interface for DRAG element.<br>
  * It contains all default values for DRAG.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 interface IsDefaultDrag {
+	
+	/**
+	 * Returns <code>true</code> to enable element for dragging.
+	 * 
+	 * @return <code>true</code> to enable element for dragging
+	 */
+	default boolean isEnabled() {
+		return Drag.DEFAULT_ENABLED;
+	}
+
 
 	/**
 	 * Returns the fill color during dragging.

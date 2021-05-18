@@ -18,36 +18,36 @@ package org.pepstock.charba.client.zoom;
 import org.pepstock.charba.client.enums.ModifierKey;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options interface for PAN element.<br>
- * It contains all default values for PAN.
+ * {@link ZoomPlugin#ID} plugin default options interface for WHEEL element.<br>
+ * It contains all default values for  WHEEL.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultPan extends IsDefaultConfigurationItem {
+interface IsDefaultWheel {
 	
 	/**
-	 * Returns <code>true</code> to enable pan element.
+	 * Returns <code>true</code> to enable element for wheel zooming.
 	 * 
-	 * @return <code>true</code> to enable pan element
+	 * @return <code>true</code> to enable element for wheel zooming
 	 */
 	default boolean isEnabled() {
-		return Pan.DEFAULT_ENABLED;
+		return Wheel.DEFAULT_ENABLED;
 	}
 
 	/**
-	 * Returns the minimal pan distance required before actually applying pan.
+	 * Returns the speed of element via mouse wheel (percentage of element on a wheel event).
 	 * 
-	 * @return the minimal pan distance required before actually applying pan
+	 * @return the speed of element via mouse wheel
 	 */
-	default double getThreshold() {
-		return Pan.DEFAULT_THRESHOLD;
+	default double getSpeed() {
+		return Wheel.DEFAULT_SPEED;
 	}
 
 	/**
-	 * Returns the modifier key to activate panning.
+	 * Returns the modifier key to activate zooming by wheeling.
 	 * 
-	 * @return the modifier key to activate panning
+	 * @return the modifier key to activate zooming by wheeling
 	 */
 	default ModifierKey getModifierKey() {
 		return null;

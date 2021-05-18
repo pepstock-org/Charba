@@ -16,33 +16,20 @@
 package org.pepstock.charba.client.zoom;
 
 /**
- * {@link ZoomPlugin#ID} plugin default options interface for ZOOM element.<br>
- * It contains all default values for ZOOM.
+ * {@link ZoomPlugin#ID} plugin default options for WHEEL element.<br>
+ * It contains all default values for WHEEL.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultZoom extends IsDefaultConfigurationItem {
+final class DefaultWheel implements IsDefaultWheel {
+
+	static final DefaultWheel INSTANCE = new DefaultWheel();
 
 	/**
-	 * Returns the wheel-to-zoom effect.
-	 * 
-	 * @return the wheel-to-zoom effect
+	 * Creates an empty object.
 	 */
-	IsDefaultWheel getWheel();
-
-	/**
-	 * Returns the drag-to-zoom effect.
-	 * 
-	 * @return the drag-to-zoom effect
-	 */
-	IsDefaultDrag getDrag();
-
-	/**
-	 * Returns the pinch-to-zoom effect.
-	 * 
-	 * @return the pinch-to-zoom effect
-	 */
-	IsDefaultPinch getPinch();
-
+	private DefaultWheel() {
+		// do nothing
+	}
 }

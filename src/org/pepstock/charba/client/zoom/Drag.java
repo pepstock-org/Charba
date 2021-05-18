@@ -17,10 +17,10 @@ package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * Configuration item to define the style to apply to drag area, during zooming.
@@ -28,7 +28,12 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
+public final class Drag extends AbstractNode implements IsDefaultDrag {
+	
+	/**
+	 * Default enabled, <b>{@value DEFAULT_ENABLED}</b>.
+	 */
+	public static final boolean DEFAULT_ENABLED = false;
 
 	/**
 	 * Default background color, <b>{@value DEFAULT_BACKGROUND_COLOR}</b>.
@@ -48,11 +53,12 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		BACKGROUND_COLOR("backgroundColor"),
 		BORDER_COLOR("borderColor"),
-		BORDER_WIDTH("borderWidth");
+		BORDER_WIDTH("borderWidth"),
+		ENABLED("enabled");
 
 		// name value of property
 		private final String value;
@@ -82,23 +88,37 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	private IsDefaultDrag defaultOptions;
 
 	/**
-	 * Creates new drag element, using the default values options.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
-	 * @param defaultOptions default DRAG options to returns the default when required.
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultOptions default drag options to returns the default when required.
+	 * @param nativeObject native object to map java script properties
 	 */
-	Drag(IsDefaultDrag defaultOptions) {
-		this(null, defaultOptions);
+	Drag(AbstractNode parent, Key childKey, IsDefaultDrag defaultOptions, NativeObject nativeObject) {
+		super(parent, childKey, nativeObject);
+		// checks if defaults options is consistent
+		// stores defaults options
+		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
+	}
+	
+	/**
+	 * Sets <code>true</code> to enable element for drag zooming.
+	 * 
+	 * @param enabled <code>true</code> to enable element for drag zooming
+	 */
+	public void setEnabled(boolean enabled) {
+		setValueAndAddToParent(Property.ENABLED, enabled);
 	}
 
 	/**
-	 * Creates new drag element, using stored native object instance and the default values options.
+	 * Returns <code>true</code> to enable element for drag zooming.
 	 * 
-	 * @param nativeObject stored drag values in the native object to read.
-	 * @param defaultOptions default DRAG options to returns the default when required.
+	 * @return <code>true</code> to enable element for drag zooming
 	 */
-	Drag(NativeObject nativeObject, IsDefaultDrag defaultOptions) {
-		super(nativeObject);
-		this.defaultOptions = defaultOptions;
+	@Override
+	public boolean isEnabled() {
+		return getValue(Property.ENABLED, defaultOptions.isEnabled());
 	}
 
 	/**
@@ -116,8 +136,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	 * @param backgroundColor the fill color during dragging
 	 */
 	public void setBackgroundColor(String backgroundColor) {
-		// stores value
-		setValue(Property.BACKGROUND_COLOR, backgroundColor);
+		setValueAndAddToParent(Property.BACKGROUND_COLOR, backgroundColor);
 	}
 
 	/**
@@ -127,7 +146,6 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
-		// returns color as string
 		return getValue(Property.BACKGROUND_COLOR, defaultOptions.getBackgroundColorAsString());
 	}
 
@@ -155,8 +173,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	 * @param borderColor the color of the border during dragging
 	 */
 	public void setBorderColor(String borderColor) {
-		// stores value
-		setValue(Property.BORDER_COLOR, borderColor);
+		setValueAndAddToParent(Property.BORDER_COLOR, borderColor);
 	}
 
 	/**
@@ -166,7 +183,6 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	 */
 	@Override
 	public String getBorderColorAsString() {
-		// returns color as string
 		return getValue(Property.BORDER_COLOR, defaultOptions.getBorderColorAsString());
 	}
 
@@ -185,8 +201,7 @@ public final class Drag extends NativeObjectContainer implements IsDefaultDrag {
 	 * @param borderWidth the width of the border in pixels.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		// stores value
-		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
+		setValueAndAddToParent(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**

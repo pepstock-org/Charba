@@ -41,4 +41,24 @@ final class DefaultZoom implements IsDefaultZoom {
 		return DefaultDrag.INSTANCE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.zoom.IsDefaultZoom#getWheel()
+	 */
+	@Override
+	public IsDefaultWheel getWheel() {
+		return DefaultWheel.INSTANCE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.zoom.IsDefaultZoom#getPinch()
+	 */
+	@Override
+	public IsDefaultPinch getPinch() {
+		return DefaultPinch.INSTANCE;
+	}
+
 }

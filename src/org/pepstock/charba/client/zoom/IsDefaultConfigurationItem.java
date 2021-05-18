@@ -31,15 +31,6 @@ import org.pepstock.charba.client.zoom.callbacks.StartCallback;
 interface IsDefaultConfigurationItem {
 
 	/**
-	 * Returns <code>true</code> to enable element (panning or zooming).
-	 * 
-	 * @return <code>true</code> to enable element (panning or zooming)
-	 */
-	default boolean isEnabled() {
-		return AbstractConfigurationItem.DEFAULT_ENABLED;
-	}
-
-	/**
 	 * Returns the element (panning or zooming) directions.
 	 * 
 	 * @return the element (panning or zooming) directions
@@ -56,13 +47,6 @@ interface IsDefaultConfigurationItem {
 	default InteractionAxis getOverScaleMode() {
 		return AbstractConfigurationItem.DEFAULT_OVER_SCALE_MODE;
 	}
-
-	/**
-	 * Returns the minimal pan distance required before actually applying pan.
-	 * 
-	 * @return the minimal pan distance required before actually applying pan
-	 */
-	double getThreshold();
 
 	/**
 	 * Returns the element (panning or zooming) directions callback, to set the mode at runtime.
