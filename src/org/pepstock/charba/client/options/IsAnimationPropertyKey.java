@@ -24,7 +24,7 @@ import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsAnimationPropertyKey extends IsTypedAnimationKey {
+public interface IsAnimationPropertyKey extends IsAnimationCollectionKey {
 
 	/**
 	 * Returns a animation property instance by its string value.

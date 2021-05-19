@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.IsAnimationCollectionKey;
 import org.pepstock.charba.client.options.IsAnimationPropertyKey;
 
 /**
@@ -28,7 +27,7 @@ import org.pepstock.charba.client.options.IsAnimationPropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey, IsAnimationCollectionKey
+public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey
 {
 	/**
 	 * Uses to <b>x</b> property to animate the element.

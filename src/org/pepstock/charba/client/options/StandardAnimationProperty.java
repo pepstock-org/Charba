@@ -15,6 +15,10 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.enums.AnimationType;
 
 /**
@@ -24,6 +28,9 @@ import org.pepstock.charba.client.enums.AnimationType;
  *
  */
 public final class StandardAnimationProperty extends AbstractTypedAnimationKey implements IsAnimationPropertyKey {
+
+	// list of properties with only the key
+	private List<IsAnimationPropertyKey> properties = null;
 
 	/**
 	 * Builds the object with the property value as string and its type.
@@ -35,6 +42,22 @@ public final class StandardAnimationProperty extends AbstractTypedAnimationKey i
 		super(value, type);
 		// checks if argument is consistent
 		IsAnimationPropertyKey.checkIfValid(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.IsAnimationCollectionKey#properties()
+	 */
+	@Override
+	public List<IsAnimationPropertyKey> properties() {
+		// checks if properties instance is initialized
+		if (properties == null) {
+			// stores the property itself in the properties list
+			// in order to act as animation collection key as well
+			this.properties = Collections.unmodifiableList(Arrays.asList(this));
+		}
+		return properties;
 	}
 
 }
