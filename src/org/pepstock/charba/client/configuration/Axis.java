@@ -641,7 +641,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @return a scale context for callback on axis
 	 */
 	final ScaleContext createContext(NativeObject context) {
-		return new ScaleContext(this, new ConfigurationEnvelop<>(context));
+		return new ScaleContext(this, context);
 	}
 
 	// -----------------------------

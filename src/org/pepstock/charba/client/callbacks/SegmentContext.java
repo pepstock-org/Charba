@@ -17,7 +17,6 @@ package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.configuration.Segment;
 import org.pepstock.charba.client.enums.ContextType;
 import org.pepstock.charba.client.items.DatasetElement;
@@ -68,10 +67,10 @@ public final class SegmentContext extends ChartContext {
 	/**
 	 * Creates the object with native object instance to be wrapped, called by <code>configuration</code> package.
 	 * 
-	 * @param envelop envelop of native object instance to be wrapped.
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	public SegmentContext(ConfigurationEnvelop<NativeObject> envelop) {
-		super(envelop);
+	public SegmentContext(NativeObject nativeObject) {
+		super(nativeObject);
 		// loads point 0 and point 1
 		this.point0 = new SegementDatasetElement(getValue(Property.P0));
 		this.point1 = new SegementDatasetElement(getValue(Property.P1));

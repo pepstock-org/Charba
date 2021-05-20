@@ -306,7 +306,7 @@ public class Segment extends ConfigurationOptionsContainer {
 
 	private SegmentContext getSegmentContext(NativeObject context) {
 		BaseContext baseContext = new BaseContext(getChart(), context);
-		return new SegmentContext(new ConfigurationEnvelop<>(baseContext.nativeObject()));
+		return new SegmentContext(baseContext.nativeObject());
 	}
 	
 	/**
@@ -317,7 +317,7 @@ public class Segment extends ConfigurationOptionsContainer {
 	 */
 	private Array onBorderDash(BaseContext context) {
 		// gets value
-		List<Integer> result = ScriptableUtils.getOptionValue(new SegmentContext(new ConfigurationEnvelop<>(context.nativeObject())), getBorderDashCallback());
+		List<Integer> result = ScriptableUtils.getOptionValue(new SegmentContext(context.nativeObject()), getBorderDashCallback());
 		// default result
 		return ArrayInteger.fromOrEmpty(result);
 	}

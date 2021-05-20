@@ -556,7 +556,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * @return a data set context for callback
 	 */
 	final DatasetContext createContext(NativeObject context) {
-		return new DatasetContext(new DataEnvelop<>(context));
+		return new DatasetContext(context);
 	}
 
 	/**

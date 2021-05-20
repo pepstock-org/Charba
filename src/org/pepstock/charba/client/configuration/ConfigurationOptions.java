@@ -859,7 +859,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @return a chart context for callback on configuration
 	 */
 	final ChartContext createContext(NativeObject context) {
-		return new ChartContext(new ConfigurationEnvelop<>(context));
+		return new ChartContext(context);
 	}
 	
 	/**

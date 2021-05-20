@@ -58,7 +58,7 @@ final class LiningDatasetFillHandler extends FillHandler {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.fillCallbackProxy.setCallback((contextFunction, context) -> onFill(new DatasetContext(new DataEnvelop<>(context))));
+		this.fillCallbackProxy.setCallback((contextFunction, context) -> onFill(new DatasetContext(context)));
 	}
 
 	/*

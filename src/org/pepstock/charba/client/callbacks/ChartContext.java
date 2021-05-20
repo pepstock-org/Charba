@@ -17,12 +17,10 @@ package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.enums.ContextType;
 
 /**
@@ -66,20 +64,11 @@ public class ChartContext extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the object with native object instance to be wrapped, called by <code>configuration</code> package.
-	 * 
-	 * @param envelop envelop of native object instance to be wrapped.
-	 */
-	public ChartContext(ConfigurationEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	protected ChartContext(NativeObject nativeObject) {
+	public ChartContext(NativeObject nativeObject) {
 		super(nativeObject);
 		// checks if object is consistent
 		Checker.checkIfValid(nativeObject, "Native context argument");

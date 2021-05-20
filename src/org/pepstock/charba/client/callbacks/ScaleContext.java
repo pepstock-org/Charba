@@ -16,11 +16,9 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.Axis;
-import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScaleTickItem;
 import org.pepstock.charba.client.items.Undefined;
@@ -81,10 +79,10 @@ public final class ScaleContext extends ChartContext {
 	 * Creates the object with an envelop of the native object instance to be wrapped.
 	 * 
 	 * @param axis axis instance where the callback must be invoked
-	 * @param envelop envelop of native object instance to be wrapped.
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	public ScaleContext(Axis axis, ConfigurationEnvelop<NativeObject> envelop) {
-		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	public ScaleContext(Axis axis, NativeObject nativeObject) {
+		super(nativeObject);
 		// checks if axis is consistent
 		// stores axis
 		this.axis = Checker.checkAndGetIfValid(axis, "Axis argument");

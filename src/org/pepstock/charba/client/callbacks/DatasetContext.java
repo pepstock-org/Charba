@@ -15,72 +15,21 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
-import org.pepstock.charba.client.data.DataEnvelop;
-import org.pepstock.charba.client.datalabels.DataLabelsEnvelop;
-import org.pepstock.charba.client.labels.LabelsEnvelop;
-import org.pepstock.charba.client.options.OptionsEnvelop;
 
 /**
  * The option context is used to give contextual information when resolving options.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DatasetContext extends AbstractDatasetContext {
-
-	/**
-	 * Creates the object with native object instance to be wrapped, called by <code>configuration</code> package.
-	 * 
-	 * @param envelop envelop of native object instance to be wrapped.
-	 */
-	public DatasetContext(ConfigurationEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
-	 * Creates the object with native object instance to be wrapped, called by <code>data</code> package.
-	 * 
-	 * @param envelop envelop of native object instance to be wrapped.
-	 */
-	public DatasetContext(DataEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
-	 * Creates the object with native object instance to be wrapped, called by <code>datalabels</code> package.
-	 * 
-	 * @param envelop envelop of native object instance to be wrapped.
-	 */
-	public DatasetContext(DataLabelsEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
-	 * Creates the object with native object instance to be wrapped, called by <code>labels</code> package.
-	 * 
-	 * @param envelop envelop of native object instance to be wrapped.
-	 */
-	public DatasetContext(LabelsEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-	
-	/**
-	 * Creates the object with native object instance to be wrapped, called by <code>options</code> package.
-	 * 
-	 * @param envelop envelop of native object instance to be wrapped.
-	 */
-	public DatasetContext(OptionsEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
+public final class DatasetContext extends AbstractDatasetContext {
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	private DatasetContext(NativeObject nativeObject) {
+	public DatasetContext(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

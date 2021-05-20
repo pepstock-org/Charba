@@ -19,10 +19,8 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
-import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipModel;
 
@@ -70,20 +68,11 @@ public final class TooltipContext extends ChartContext {
 	private List<TooltipItem> items = null;
 
 	/**
-	 * Creates the object with native object instance to be wrapped, called by <code>configuration</code> package.
-	 * 
-	 * @param envelop envelop of native object instance to be wrapped.
-	 */
-	public TooltipContext(ConfigurationEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	private TooltipContext(NativeObject nativeObject) {
+	public TooltipContext(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
