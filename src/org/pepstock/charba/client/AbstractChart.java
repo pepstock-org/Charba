@@ -94,7 +94,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	// reference to Chart.js chart instance
 	private Chart chart = null;
 	// chart ID using generate unique id
-	private final String id = DOMBuilder.get().createUniqueId();
+	private final String id = DOMBuilder.get().createUniqueChartId();
 	// stores the type of chart
 	private final Type type;
 	// list of all handle registration when
