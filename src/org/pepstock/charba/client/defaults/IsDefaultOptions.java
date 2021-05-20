@@ -17,7 +17,6 @@ package org.pepstock.charba.client.defaults;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
@@ -28,7 +27,7 @@ import org.pepstock.charba.client.intl.CLocale;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultOptions extends IsDefaultAnimationContainer, HasCallbackScope {
+public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 
 	/**
 	 * Returns the hover defaults.

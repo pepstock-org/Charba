@@ -22,6 +22,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
@@ -141,7 +142,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		// creates the box handler
 		this.boxHandler = new BoxHandler(this, getDefaultValues(), getNativeObject());
 		// sets animation container
-		this.animationContainer = new AnimationContainer(options, childKey, getDefaultValues(), getNativeObject());
+		this.animationContainer = new AnimationContainer(options, childKey, getDefaultValues(), getNativeObject(), HasCallbackScope.extractScope(options));
 	}
 
 	/*

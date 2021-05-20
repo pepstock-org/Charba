@@ -15,6 +15,10 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.callbacks.DelayCallback;
+import org.pepstock.charba.client.callbacks.DurationCallback;
+import org.pepstock.charba.client.callbacks.EasingCallback;
+import org.pepstock.charba.client.callbacks.LoopCallback;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
@@ -51,5 +55,33 @@ public interface IsDefaultBaseAnimation {
 	 * @return <code>true</code> if loops the animations endlessly.
 	 */
 	boolean isLoop();
+	
+	/**
+	 * Returns the callback to set the number of milliseconds an animation takes.
+	 * 
+	 * @return the callback instance to use
+	 */
+	DurationCallback getDurationCallback();
+
+	/**
+	 * Returns the callback to set the delay before starting the animations.
+	 * 
+	 * @return the callback instance to use
+	 */
+	DelayCallback getDelayCallback();
+
+	/**
+	 * Returns the callback to loop the animations endlessly.
+	 * 
+	 * @return the callback instance to use
+	 */
+	LoopCallback getLoopCallback();
+
+	/**
+	 * Returns the callback to set the animation easing.
+	 * 
+	 * @return the callback instance to use
+	 */
+	EasingCallback getEasingCallback();
 
 }

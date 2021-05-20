@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -29,10 +31,12 @@ import org.pepstock.charba.client.defaults.IsDefaultTransitions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Transitions extends AbstractNode implements IsTransitions {
+public final class Transitions extends AbstractNode implements IsTransitions, HasCallbackScope {
 
 	// defaults instance
 	private final IsDefaultTransitions defaultValues;
+	// scope of the callbacks
+	private final String scope;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -41,11 +45,24 @@ public final class Transitions extends AbstractNode implements IsTransitions {
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
+	 * @param scope scope of the options
 	 */
-	Transitions(AbstractNode parent, Key childKey, IsDefaultTransitions defaultValues, NativeObject nativeObject) {
+	Transitions(AbstractNode parent, Key childKey, IsDefaultTransitions defaultValues, NativeObject nativeObject, String scope) {
 		super(parent, childKey, nativeObject);
 		// stores defaults which has been already checked on super class
 		this.defaultValues = defaultValues;
+		// checks if scope is consistent
+		this.scope = Checker.checkAndGetIfValid(scope, "Scope argument");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.HasCallbackScope#getScope()
+	 */
+	@Override
+	public String getScope() {
+		return scope;
 	}
 
 	/**
@@ -77,7 +94,7 @@ public final class Transitions extends AbstractNode implements IsTransitions {
 		// checks if transition is consistent
 		if (has(transition)) {
 			// gets from the native object
-			return new AnimationTransition(this, transition, defaultValues.get(transition), getValue(transition));
+			return new AnimationTransition(this, transition, defaultValues.get(transition), getValue(transition), getScope());
 		}
 		// if here, the transition is not valid
 		// then returns null
@@ -108,7 +125,7 @@ public final class Transitions extends AbstractNode implements IsTransitions {
 	@Override
 	public AnimationTransition create(IsTransitionKey transition) {
 		// gets from the native object
-		AnimationTransition options = new AnimationTransition(this, transition, defaultValues.get(transition), null);
+		AnimationTransition options = new AnimationTransition(this, transition, defaultValues.get(transition), null, getScope());
 		// stores in the object
 		setValue(transition, options);
 		// returns the animation options

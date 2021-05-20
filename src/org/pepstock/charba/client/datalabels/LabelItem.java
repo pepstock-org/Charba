@@ -275,7 +275,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 			// stores font
 			setValue(Property.FONT, font);
 		}
-		this.listeners = new Listeners(this, this.defaultOptions.getListeners(), getValue(Property.LISTENERS));
+		this.listeners = new Listeners(this, Property.LISTENERS, this.defaultOptions.getListeners(), getValue(Property.LISTENERS));
 		// checks it has got the element
 		if (!has(Property.LISTENERS)) {
 			// stores listeners

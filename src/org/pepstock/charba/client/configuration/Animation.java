@@ -16,17 +16,11 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.Chart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.DelayCallback;
 import org.pepstock.charba.client.callbacks.DurationCallback;
 import org.pepstock.charba.client.callbacks.EasingCallback;
 import org.pepstock.charba.client.callbacks.LoopCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -82,23 +76,6 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	private final CallbackProxy<ProxyAnimationCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the animation in progress function
 	private final CallbackProxy<ProxyAnimationCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the duration function
-	private final CallbackProxy<ProxyIntegerCallback> durationCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the easing function
-	private final CallbackProxy<ProxyStringCallback> easingCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the delay function
-	private final CallbackProxy<ProxyIntegerCallback> delayCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the loop function
-	private final CallbackProxy<ProxyBooleanCallback> loopCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	// instance of duration callback
-	private DurationCallback durationCallback = null;
-	// instance of delay callback
-	private DelayCallback delayCallback = null;
-	// instance of loop callback
-	private LoopCallback loopCallback = null;
-	// instance of easing callback
-	private EasingCallback easingCallback = null;
 
 	// amount of handlers
 	private int onCompleteHandlers = 0;
@@ -111,12 +88,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	private enum Property implements Key
 	{
 		ON_PROGRESS("onProgress"),
-		ON_COMPLETE("onComplete"),
-		// properties for callbacks
-		DURATION("duration"),
-		EASING("easing"),
-		DELAY("delay"),
-		LOOP("loop");
+		ON_COMPLETE("onComplete");
 
 		// name value of property
 		private final String value;
@@ -183,14 +155,6 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 				onProgress(animationItem);
 			}
 		});
-		// sets function to proxy callback in order to invoke the java interface
-		this.durationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), getDurationCallback(), Defaults.get().getGlobal().getAnimation().getDuration()).intValue());
-		// sets function to proxy callback in order to invoke the java interface
-		this.delayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), getDelayCallback(), Defaults.get().getGlobal().getAnimation().getDelay()).intValue());
-		// sets function to proxy callback in order to invoke the java interface
-		this.loopCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), getLoopCallback(), Defaults.get().getGlobal().getAnimation().isLoop()));
-		// sets function to proxy callback in order to invoke the java interface
-		this.easingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(new ConfigurationEnvelop<>(context)), getEasingCallback(), Defaults.get().getGlobal().getAnimation().getEasing()).value());
 	}
 
 	/**
@@ -200,9 +164,6 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 */
 	@Override
 	public void setEasing(Easing easing) {
-		// resets callback
-		setEasing((EasingCallback) null);
-		// sets value
 		checkAndGet().setEasing(easing);
 	}
 
@@ -223,9 +184,6 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 */
 	@Override
 	public void setDuration(int milliseconds) {
-		// resets callback
-		setDuration(null);
-		// sets value
 		checkAndGet().setDuration(milliseconds);
 	}
 
@@ -286,9 +244,6 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 */
 	@Override
 	public void setDelay(int delay) {
-		// resets callback
-		setDelay(null);
-		// sets value
 		checkAndGet().setDelay(delay);
 	}
 
@@ -309,9 +264,6 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 */
 	@Override
 	public void setLoop(boolean loop) {
-		// resets callback
-		setLoop(null);
-		// sets value
 		checkAndGet().setLoop(loop);
 	}
 
@@ -334,8 +286,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 * 
 	 * @return the callback instance to use
 	 */
+	@Override
 	public DurationCallback getDurationCallback() {
-		return durationCallback;
+		return checkAndGet().getDurationCallback();
 	}
 
 	/**
@@ -343,11 +296,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 * 
 	 * @param durationCallback the callback instance to use
 	 */
+	@Override
 	public void setDuration(DurationCallback durationCallback) {
-		// sets the callback
-		this.durationCallback = durationCallback;
-		// stores and manages callback
-		chart.getOptions().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DURATION, durationCallback, durationCallbackProxy);
+		checkAndGet().setDuration(durationCallback);
 	}
 
 	/**
@@ -355,8 +306,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 * 
 	 * @return the callback instance to use
 	 */
+	@Override
 	public DelayCallback getDelayCallback() {
-		return delayCallback;
+		return checkAndGet().getDelayCallback();
 	}
 
 	/**
@@ -364,11 +316,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 * 
 	 * @param delayCallback the callback instance to use
 	 */
+	@Override
 	public void setDelay(DelayCallback delayCallback) {
-		// sets the callback
-		this.delayCallback = delayCallback;
-		// stores and manages callback
-		chart.getOptions().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.DELAY, delayCallback, delayCallbackProxy);
+		checkAndGet().setDelay(delayCallback);
 	}
 
 	/**
@@ -376,8 +326,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 * 
 	 * @return the callback instance to use
 	 */
+	@Override
 	public LoopCallback getLoopCallback() {
-		return loopCallback;
+		return checkAndGet().getLoopCallback();
 	}
 
 	/**
@@ -385,11 +336,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 * 
 	 * @param loopCallback the callback instance to use
 	 */
+	@Override
 	public void setLoop(LoopCallback loopCallback) {
-		// sets the callback
-		this.loopCallback = loopCallback;
-		// stores and manages callback
-		chart.getOptions().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.LOOP, loopCallback, loopCallbackProxy);
+		checkAndGet().setLoop(loopCallback);
 	}
 
 	/**
@@ -397,8 +346,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 * 
 	 * @return the callback instance to use
 	 */
+	@Override
 	public EasingCallback getEasingCallback() {
-		return easingCallback;
+		return checkAndGet().getEasingCallback();
 	}
 
 	/**
@@ -406,11 +356,9 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 * 
 	 * @param easingCallback the callback instance to use
 	 */
+	@Override
 	public void setEasing(EasingCallback easingCallback) {
-		// sets the callback
-		this.easingCallback = easingCallback;
-		// stores and manages callback
-		chart.getOptions().setCallback(chart.getOptions().getConfiguration().getAnimation(), Property.EASING, easingCallback, easingCallbackProxy);
+		checkAndGet().setEasing(easingCallback);
 	}
 
 	/*

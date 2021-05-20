@@ -15,6 +15,10 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.callbacks.DelayCallback;
+import org.pepstock.charba.client.callbacks.DurationCallback;
+import org.pepstock.charba.client.callbacks.EasingCallback;
+import org.pepstock.charba.client.callbacks.LoopCallback;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.defaults.globals.DefaultTransitions;
@@ -35,6 +39,7 @@ import org.pepstock.charba.client.options.IsTransitionKey;
 public final class UpdateConfiguration extends NativeObjectContainer implements IsAnimation, IsAnimations {
 
 	// default key, usually used for update
+	// uses this string also as scope of possible callbacks
 	private static final String UPDATE_MODE_KEY = "charbaupdate";
 	/**
 	 * Default animation mode key, used for chart updating.
@@ -49,7 +54,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	public UpdateConfiguration() {
 		super();
 		// creates a mode to wrap
-		this.transition = new AnimationTransition(UPDATE, DefaultTransitions.DEFAULT_ANIMATION_TRANSITION, new ChartEnvelop<>(getNativeObject()));
+		this.transition = new AnimationTransition(UPDATE, DefaultTransitions.DEFAULT_ANIMATION_TRANSITION, new ChartEnvelop<>(getNativeObject()), UPDATE_MODE_KEY);
 	}
 
 	/**
@@ -179,6 +184,86 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	@Override
 	public boolean isAnimateScale() {
 		return transition.getAnimation().isAnimateScale();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getDurationCallback()
+	 */
+	@Override
+	public DurationCallback getDurationCallback() {
+		return transition.getAnimation().getDurationCallback();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getDelayCallback()
+	 */
+	@Override
+	public DelayCallback getDelayCallback() {
+		return transition.getAnimation().getDelayCallback();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getLoopCallback()
+	 */
+	@Override
+	public LoopCallback getLoopCallback() {
+		return transition.getAnimation().getLoopCallback();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getEasingCallback()
+	 */
+	@Override
+	public EasingCallback getEasingCallback() {
+		return transition.getAnimation().getEasingCallback();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.IsAnimation#setDuration(org.pepstock.charba.client.callbacks.DurationCallback)
+	 */
+	@Override
+	public void setDuration(DurationCallback durationCallback) {
+		transition.getAnimation().setDuration(durationCallback);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.IsAnimation#setDelay(org.pepstock.charba.client.callbacks.DelayCallback)
+	 */
+	@Override
+	public void setDelay(DelayCallback delayCallback) {
+		transition.getAnimation().setDelay(delayCallback);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.IsAnimation#setLoop(org.pepstock.charba.client.callbacks.LoopCallback)
+	 */
+	@Override
+	public void setLoop(LoopCallback loopCallback) {
+		transition.getAnimation().setLoop(loopCallback);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.IsAnimation#setEasing(org.pepstock.charba.client.callbacks.EasingCallback)
+	 */
+	@Override
+	public void setEasing(EasingCallback easingCallback) {
+		transition.getAnimation().setEasing(easingCallback);
 	}
 
 	/**

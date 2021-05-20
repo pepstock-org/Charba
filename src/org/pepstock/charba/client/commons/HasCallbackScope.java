@@ -41,7 +41,7 @@ public interface HasCallbackScope {
 		}
 		// if here, the root node is not a container of scope
 		// exceptions!
-		throw new IllegalArgumentException("Node instance is not "+HasCallbackScope.class.getName()+", but is "+node.getClass().getName());
+		throw new IllegalArgumentException("Node instance is not "+HasCallbackScope.class.getName()+", but is "+root.getClass().getName());
 	}
 	
 	/**
@@ -50,4 +50,5 @@ public interface HasCallbackScope {
 	 * @return the scope of the options
 	 */
 	String getScope();
+
 }

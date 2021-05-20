@@ -18,7 +18,6 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.chart.DefaultGlobalOptions;
-import org.pepstock.charba.client.defaults.globals.DefaultOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.options.Options;
@@ -31,6 +30,9 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  */
 public final class GlobalOptions extends Options {
+	
+	// default options scope for defaults options.
+	private static final String SCOPE = "defaultsGlobal";
 
 	// instance to store the global options as default
 	private final IsDefaultScaledOptions defaultOptions;
@@ -44,7 +46,7 @@ public final class GlobalOptions extends Options {
 	 */
 	GlobalOptions(NativeObject nativeObject) {
 		// uses the CHART.JS default options as default one
-		super(DefaultOptions.SCOPE, DefaultsBuilder.get().getOptions(), nativeObject);
+		super(SCOPE, DefaultsBuilder.get().getOptions(), nativeObject);
 		// stores default
 		this.defaultOptions = new DefaultGlobalOptions(this);
 		// checks if has got the locale
@@ -84,7 +86,7 @@ public final class GlobalOptions extends Options {
 	 */
 	private static final class GlobalPlugins extends Plugins {
 
-		private ChartEnvelop<String> envelop = new ChartEnvelop<>(DefaultOptions.SCOPE);
+		private ChartEnvelop<String> envelop = new ChartEnvelop<>(SCOPE);
 
 		/**
 		 * Creates the object getting the original instance of {@link Plugins}} in the {@link Options}, in order to override the <b>setOptions</b> method to force the merge.

@@ -71,8 +71,25 @@ public final class DOMBuilder {
 	 * 
 	 * @return an unique id for CHARBA charts id
 	 */
-	public String createUniqueId() {
+	public String createUniqueChartId() {
 		return CHART_PREFIX_ID + counter.getAndIncrement();
+	}
+
+	/**
+	 * Returns <code>true</code> if the passed id is a CHARBA charts id.
+	 * 
+	 * @param id an id instance to check
+	 * @return <code>true</code> if the passed id is a CHARBA charts id
+	 */
+	public boolean isUniqueChartId(String id) {
+		// checks if argument is consistent
+		if (id != null) {
+			// checks if has got the same prefix
+			return id.startsWith(CHART_PREFIX_ID);
+		}
+		// if here argument is not consistent
+		// then false
+		return false;
 	}
 
 	/**
@@ -162,7 +179,7 @@ public final class DOMBuilder {
 			// then sets it
 			image.setSrc(src);
 		}
-		// return sthe image
+		// returns the image
 		return image;
 	}
 
@@ -220,7 +237,7 @@ public final class DOMBuilder {
 	public BaseNativeEvent createChangeEvent() {
 		// creates a mouse event
 		BaseNativeEvent event = DOM.getDocument().createEvent(BaseEventTypes.EVENT_MOUSE);
-		// initializes it as contect menu
+		// initializes it as context menu
 		event.initEvent(BaseEventTypes.CONTEXT_MENU, true, false);
 		// returns event
 		return event;

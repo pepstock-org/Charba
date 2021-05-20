@@ -24,6 +24,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallb
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayImage;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -32,7 +33,6 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
@@ -49,7 +49,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Label extends NativeObjectContainer implements IsDefaultLabel, IsScriptableFontProvider<LabelsContext> {
+public final class Label extends AbstractNode implements IsDefaultLabel, IsScriptableFontProvider<LabelsContext> {
 
 	/**
 	 * Default rendering (what data must be showed), {@link Render#VALUE}.

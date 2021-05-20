@@ -30,7 +30,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -113,9 +113,9 @@ public final class AnimationCollection extends AbstractAnimation<IsAnimationColl
 	// callback proxy to invoke the to function
 	private final CallbackProxy<ProxyObjectCallback> toCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// render callback instance
+	// from callback instance
 	private static final CallbackPropertyHandler<FromCallback> FROM_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FROM);
-	// render callback instance
+	// to callback instance
 	private static final CallbackPropertyHandler<ToCallback> TO_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TO);
 	
 	// callback scope
@@ -128,14 +128,11 @@ public final class AnimationCollection extends AbstractAnimation<IsAnimationColl
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
- 	 * @param scope scope of the options
 	 */
-	AnimationCollection(Animations parent, IsAnimationCollectionKey childKey, IsDefaultAnimationCollection defaultValues, NativeObject nativeObject, String scope) {
+	AnimationCollection(Animations parent, IsAnimationCollectionKey childKey, IsDefaultAnimationCollection defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, defaultValues, nativeObject);
 		// checks scope
-		this.scope = Checker.checkAndGetIfValid(scope, "Scope argument is not consistent");
-		// stores new incremental id
-		setNewIncrementalId();
+		this.scope = HasCallbackScope.extractScope(parent);
 		// stores properties
 		setProperties(IsAnimationCollectionKey.checkAndGetIfValid(childKey).properties());
 		// -------------------------------

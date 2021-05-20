@@ -60,7 +60,7 @@ public class Datasets extends AbstractModel<Options, IsDefaultDatasets> implemen
 			controllerType.register();
 		}
 		// returns the typed data set
-		return new TypedDataset(this, type, getDefaultValues().get(type), getDatasets(type));
+		return new TypedDataset(this, type, getDefaultValues().get(type), getDatasets(type), getParent().getScope());
 	}
 
 	/**

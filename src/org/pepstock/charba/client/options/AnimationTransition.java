@@ -18,6 +18,8 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.UpdateConfiguration;
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -28,12 +30,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimationTransition;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class AnimationTransition extends AbstractNode implements IsDefaultAnimationTransition {
-
-	// animation instance
-	private final Animation animation;
-	// animations instance
-	private final Animations animations;
+public class AnimationTransition extends AbstractNode implements IsDefaultAnimationTransition, HasCallbackScope {
 
 	/**
 	 * Name of properties of native object.
@@ -66,6 +63,13 @@ public class AnimationTransition extends AbstractNode implements IsDefaultAnimat
 		}
 
 	}
+	
+	// scope of the callbacks
+	private final String scope;
+	// animation instance
+	private final Animation animation;
+	// animations instance
+	private final Animations animations;
 
 	/**
 	 * Creates an animation transitions container for the {@link UpdateConfiguration}.
@@ -73,9 +77,10 @@ public class AnimationTransition extends AbstractNode implements IsDefaultAnimat
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param envelop envelop which contains the native object to map java script properties
+	 * @param scope scope of the options
 	 */
-	public AnimationTransition(Key childKey, IsDefaultAnimationTransition defaultValues, ChartEnvelop<NativeObject> envelop) {
-		this(null, null, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	public AnimationTransition(Key childKey, IsDefaultAnimationTransition defaultValues, ChartEnvelop<NativeObject> envelop, String scope) {
+		this(null, null, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent(), scope);
 	}
 
 	/**
@@ -85,14 +90,27 @@ public class AnimationTransition extends AbstractNode implements IsDefaultAnimat
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
+	 * @param scope scope of the options
 	 */
-	AnimationTransition(AbstractNode parent, Key childKey, IsDefaultAnimationTransition defaultValues, NativeObject nativeObject) {
+	AnimationTransition(AbstractNode parent, Key childKey, IsDefaultAnimationTransition defaultValues, NativeObject nativeObject, String scope) {
 		super(parent, childKey, nativeObject);
 		// checks default value instance
 		checkDefaultValuesArgument(defaultValues);
+		// checks if scope is consistent
+		this.scope = Checker.checkAndGetIfValid(scope, "Scope argument");
 		// gets all sub elements
 		this.animation = new Animation(this, Property.ANIMATION, defaultValues.getAnimation(), getValue(Property.ANIMATION));
 		this.animations = new Animations(this, Property.ANIMATIONS, defaultValues.getAnimations(), getValue(Property.ANIMATIONS));
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasCallbackScope#getScope()
+	 */
+	@Override
+	public final String getScope() {
+		return scope;
 	}
 
 	/**

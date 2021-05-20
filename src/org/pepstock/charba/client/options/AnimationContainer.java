@@ -70,9 +70,10 @@ public final class AnimationContainer extends AnimationTransition {
 	 * 
 	 * @param defaultValues default provider
 	 * @param envelop envelop with a native object to map java script properties
+	 * @param scope scope of the options
 	 */
-	public AnimationContainer(IsDefaultAnimationContainer defaultValues, DataEnvelop<NativeObject> envelop) {
-		this(null, null, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	public AnimationContainer(IsDefaultAnimationContainer defaultValues, DataEnvelop<NativeObject> envelop, String scope) {
+		this(null, null, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent(), scope);
 	}
 
 	/**
@@ -81,9 +82,10 @@ public final class AnimationContainer extends AnimationTransition {
 	 * @param parent parent node to use to add this element where changed
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
+	 * @param scope scope of the options
 	 */
-	AnimationContainer(AbstractNode parent, IsDefaultAnimationContainer defaultValues, NativeObject nativeObject) {
-		this(parent, null, defaultValues, nativeObject);
+	AnimationContainer(AbstractNode parent, IsDefaultAnimationContainer defaultValues, NativeObject nativeObject, String scope) {
+		this(parent, null, defaultValues, nativeObject, scope);
 	}
 
 	/**
@@ -93,11 +95,12 @@ public final class AnimationContainer extends AnimationTransition {
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
+	 * @param scope scope of the options
 	 */
-	AnimationContainer(AbstractNode parent, Key childKey, IsDefaultAnimationContainer defaultValues, NativeObject nativeObject) {
-		super(parent, childKey, defaultValues, nativeObject);
+	AnimationContainer(AbstractNode parent, Key childKey, IsDefaultAnimationContainer defaultValues, NativeObject nativeObject, String scope) {
+		super(parent, childKey, defaultValues, nativeObject, scope);
 		// gets all sub elements
-		this.transitions = new Transitions(this, Property.TRANSITIONS, defaultValues.getTransitions(), getValue(Property.TRANSITIONS));
+		this.transitions = new Transitions(this, Property.TRANSITIONS, defaultValues.getTransitions(), getValue(Property.TRANSITIONS), scope);
 	}
 
 	/**

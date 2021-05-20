@@ -25,13 +25,13 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.items.Undefined;
@@ -42,7 +42,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractPluginOptions extends NativeObjectContainer {
+public abstract class AbstractPluginOptions extends AbstractNode {
 
 	// static counter. Starts from min value of integer
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
@@ -88,6 +88,18 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
 	protected AbstractPluginOptions(String pluginId, NativeObject nativeObject) {
+		this(pluginId, null, null, nativeObject);
+	}
+	
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * 
+	 * @param pluginId plugin ID
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
+	 */
+	protected AbstractPluginOptions(String pluginId, AbstractNode parent, Key childKey, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks plugin id
 		PluginIdChecker.check(pluginId);

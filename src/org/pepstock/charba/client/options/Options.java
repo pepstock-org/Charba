@@ -22,6 +22,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -39,7 +40,7 @@ import org.pepstock.charba.client.items.Undefined;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions, HasSpanGaps, HasAnimationOptions {
+public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions, HasSpanGaps, HasAnimationOptions, HasCallbackScope {
 
 	/**
 	 * Name of properties of native object.<br>
@@ -201,7 +202,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		// sets span gap handler
 		this.spanGapHandler = new SpanGapHandler(this, getDefaultValues(), getNativeObject());
 		// sets animation container
-		this.animationContainer = new AnimationContainer(this, getDefaultValues(), getNativeObject());
+		this.animationContainer = new AnimationContainer(this, getDefaultValues(), getNativeObject(), this.scope);
 		// the defaults of plugins provided by CHART.JS (legend, title and tooltip)
 		// set own default options in the defaults.plugin and not longer to the default node.
 		// then it reads the default plugins and copies (reference of object)

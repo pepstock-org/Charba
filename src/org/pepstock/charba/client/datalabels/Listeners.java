@@ -17,12 +17,13 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.datalabels.enums.Event;
 import org.pepstock.charba.client.datalabels.events.ClickEventHandler;
 import org.pepstock.charba.client.datalabels.events.EnterEventHandler;
@@ -38,7 +39,7 @@ import org.pepstock.charba.client.datalabels.events.LeaveEventHandler;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Listeners extends NativeObjectContainer implements IsDefaultListeners {
+public final class Listeners extends AbstractNode implements IsDefaultListeners {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -65,11 +66,12 @@ public final class Listeners extends NativeObjectContainer implements IsDefaultL
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param parent data labels options instance, parent of this node
+	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultOptions default options instance
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Listeners(LabelItem parent, IsDefaultListeners defaultOptions, NativeObject nativeObject) {
-		super(nativeObject);
+	Listeners(LabelItem parent, Key childKey, IsDefaultListeners defaultOptions, NativeObject nativeObject) {
+		super(parent, childKey, nativeObject);
 		// checks if label is consistent
 		// stores parent
 		this.parent = Checker.checkAndGetIfValid(parent, "Parent label argument");

@@ -15,6 +15,10 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.callbacks.DelayCallback;
+import org.pepstock.charba.client.callbacks.DurationCallback;
+import org.pepstock.charba.client.callbacks.EasingCallback;
+import org.pepstock.charba.client.callbacks.LoopCallback;
 import org.pepstock.charba.client.defaults.IsDefaultBaseAnimation;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.items.Undefined;
@@ -78,6 +82,46 @@ abstract class AbstractDefaultAnimation implements IsDefaultBaseAnimation {
 	@Override
 	public boolean isLoop() {
 		return DEFAULT_LOOP;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getDurationCallback()
+	 */
+	@Override
+	public DurationCallback getDurationCallback() {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getDelayCallback()
+	 */
+	@Override
+	public DelayCallback getDelayCallback() {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getLoopCallback()
+	 */
+	@Override
+	public LoopCallback getLoopCallback() {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseAnimation#getEasingCallback()
+	 */
+	@Override
+	public EasingCallback getEasingCallback() {
+		return null;
 	}
 
 }

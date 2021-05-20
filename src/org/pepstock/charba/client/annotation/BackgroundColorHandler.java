@@ -139,7 +139,7 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 	 * @param backgroundColorCallback to set the color of the background of annotation
 	 */
 	void setBackgroundColor(ColorCallback<AnnotationContext> backgroundColorCallback) {
-		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
+		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(getParent(), AnnotationPlugin.ID, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
 	}
 
 }

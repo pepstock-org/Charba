@@ -42,6 +42,7 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -66,7 +67,7 @@ import org.pepstock.charba.client.utils.JSON;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class Dataset extends AbstractNode implements HasDataset, HasAnimationOptions {
+public abstract class Dataset extends AbstractNode implements HasDataset, HasAnimationOptions, HasCallbackScope{
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -263,8 +264,10 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	protected Dataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(null);
 		this.defaultValues = defaultValues == null ? Defaults.get().getOptions(Type.checkAndGetIfValid(type)) : defaultValues;
+		// creates scope, checking form default
+		this.scope = createScope(getId());
 		// sets animation container
-		this.animationContainer = new AnimationContainer(getDefaultValues(), new DataEnvelop<>(getNativeObject()));
+		this.animationContainer = new AnimationContainer(getDefaultValues(), new DataEnvelop<>(getNativeObject()), this.scope);
 		// stores the type
 		this.type = type;
 		// stores the type
@@ -285,8 +288,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		setValue(InternalProperty.CHARBA_GRADIENTS, gradientsContainer);
 		// sets default data type
 		setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.UNKNOWN);
-		// creates scope, checking form default
-		this.scope = createScope(getId());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -329,6 +330,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @return the scope of the data set
 	 */
+	@Override
 	public final String getScope() {
 		return scope;
 	}
