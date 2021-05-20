@@ -83,9 +83,9 @@ public final class Listeners extends AbstractNode implements IsDefaultListeners 
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(new DataLabelsContext(this.parent, context)));
-		this.leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(new DataLabelsContext(this.parent, context)));
-		this.clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(new DataLabelsContext(this.parent, context)));
+		this.enterEventCallbackProxy.setCallback((context) -> onEnter(new DataLabelsContext(this.parent, context)));
+		this.leaveEventCallbackProxy.setCallback((context) -> onLeave(new DataLabelsContext(this.parent, context)));
+		this.clickEventCallbackProxy.setCallback((context) -> onClick(new DataLabelsContext(this.parent, context)));
 	}
 
 	/**

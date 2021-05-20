@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TooltipBodyCallback;
 import org.pepstock.charba.client.callbacks.TooltipFooterCallback;
 import org.pepstock.charba.client.callbacks.TooltipLabelCallback;
@@ -63,11 +62,10 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 		/**
 		 * Method of function to be called to invoke a tooltip callback on elements.
 		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param items tooltip items
 		 * @return array of strings
 		 */
-		ArrayString call(CallbackFunctionContext context, ArrayObject items);
+		ArrayString call(ArrayObject items);
 	}
 
 	/**
@@ -82,11 +80,10 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 		/**
 		 * Method of function to be called to manage the label.
 		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item tooltip item
 		 * @return string before item
 		 */
-		String call(CallbackFunctionContext context, NativeObject item);
+		String call(NativeObject item);
 	}
 
 	/**
@@ -101,11 +98,10 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 		/**
 		 * Method of function to be called to have label color for the item.
 		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item tooltip item
 		 * @return label color item
 		 */
-		NativeObject call(CallbackFunctionContext context, NativeObject item);
+		NativeObject call(NativeObject item);
 	}
 
 	// ---------------------------
@@ -213,20 +209,20 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.beforeTitleCallbackProxy.setCallback((context, items) -> onBeforeTitleCallback(items));
-		this.titleCallbackProxy.setCallback((context, items) -> onTitleCallback(items));
-		this.afterTitleCallbackProxy.setCallback((context, items) -> onAfterTitleCallback(items));
-		this.beforeBodyCallbackProxy.setCallback((context, items) -> onBeforeBodyCallback(items));
-		this.afterBodyCallbackProxy.setCallback((context, items) -> onAfterBodyCallback(items));
-		this.beforeLabelCallbackProxy.setCallback((context, item) -> onBeforeLabelCallback(item));
-		this.labelCallbackProxy.setCallback((context, item) -> onLabelCallback(item));
-		this.labelColorCallbackProxy.setCallback((context, item) -> onLabelColorCallback(item));
-		this.labelPointStyleCallbackProxy.setCallback((context, item) -> onLabelPointStyleCallback(item));
-		this.labelTextColorCallbackProxy.setCallback((context, item) -> onLabelTextColorCallback(item));
-		this.afterLabelCallbackProxy.setCallback((context, item) -> onAfterLabelCallback(item));
-		this.beforeFooterCallbackProxy.setCallback((context, items) -> onBeforeFooterCallback(items));
-		this.footerCallbackProxy.setCallback((context, items) -> onFooterCallback(items));
-		this.afterFooterCallbackProxy.setCallback((context, items) -> onAfterFooterCallback(items));
+		this.beforeTitleCallbackProxy.setCallback((items) -> onBeforeTitleCallback(items));
+		this.titleCallbackProxy.setCallback((items) -> onTitleCallback(items));
+		this.afterTitleCallbackProxy.setCallback((items) -> onAfterTitleCallback(items));
+		this.beforeBodyCallbackProxy.setCallback((items) -> onBeforeBodyCallback(items));
+		this.afterBodyCallbackProxy.setCallback((items) -> onAfterBodyCallback(items));
+		this.beforeLabelCallbackProxy.setCallback((item) -> onBeforeLabelCallback(item));
+		this.labelCallbackProxy.setCallback((item) -> onLabelCallback(item));
+		this.labelColorCallbackProxy.setCallback((item) -> onLabelColorCallback(item));
+		this.labelPointStyleCallbackProxy.setCallback((item) -> onLabelPointStyleCallback(item));
+		this.labelTextColorCallbackProxy.setCallback((item) -> onLabelTextColorCallback(item));
+		this.afterLabelCallbackProxy.setCallback((item) -> onAfterLabelCallback(item));
+		this.beforeFooterCallbackProxy.setCallback((items) -> onBeforeFooterCallback(items));
+		this.footerCallbackProxy.setCallback((items) -> onFooterCallback(items));
+		this.afterFooterCallbackProxy.setCallback((items) -> onAfterFooterCallback(items));
 	}
 
 	/**

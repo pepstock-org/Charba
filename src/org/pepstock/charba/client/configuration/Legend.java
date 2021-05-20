@@ -17,7 +17,6 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -60,12 +59,11 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 		/**
 		 * Method of function to be called when a event on the legend is raised.
 		 * 
-		 * @param context value of <code>this</code> to the execution context of function
 		 * @param event native event
 		 * @param item legend item affected by event
 		 * @param legend legend instance affected by event
 		 */
-		void call(CallbackFunctionContext context, NativeObject event, NativeObject item, NativeObject legend);
+		void call(NativeObject event, NativeObject item, NativeObject legend);
 	}
 
 	// ---------------------------
@@ -103,11 +101,11 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// fires the event
-		this.clickCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendClickEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
+		this.clickCallbackProxy.setCallback((event, item, legend) -> getChart().fireEvent(new LegendClickEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
 		// fires the event
-		this.hoverCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendHoverEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
+		this.hoverCallbackProxy.setCallback((event, item, legend) -> getChart().fireEvent(new LegendHoverEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
 		// fires the event
-		this.leaveCallbackProxy.setCallback((context, event, item, legend) -> getChart().fireEvent(new LegendLeaveEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
+		this.leaveCallbackProxy.setCallback((event, item, legend) -> getChart().fireEvent(new LegendLeaveEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
 	}
 
 	/**

@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendFilterCallback;
 import org.pepstock.charba.client.callbacks.LegendItemSortCallback;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
@@ -61,15 +60,14 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 		/**
 		 * Method of function to be called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
 		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart chart instance.
 		 * @return array of legend items.
 		 */
-		ArrayObject call(CallbackFunctionContext context, Chart chart);
+		ArrayObject call(Chart chart);
 	}
 
 	/**
-	 * Java script FUNCTION callback called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.<br>
+	 * Java script FUNCTION callback called to filter legend items out of the legend.
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -78,14 +76,13 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 	interface ProxyFilterCallback {
 
 		/**
-		 * Method of function to be called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.
+		 * Method of function to be called to filter legend items out of the legend.
 		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item legend item to check.
 		 * @param chart chart instance.
 		 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 		 */
-		boolean call(CallbackFunctionContext context, NativeObject item, Chart chart);
+		boolean call(NativeObject item, Chart chart);
 	}
 
 	/**
@@ -100,13 +97,12 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 		/**
 		 * Method of function to be called to allow sorting of legend items.
 		 * 
-		 * @param context context context value of <code>this</code> to the execution context of function.
 		 * @param item1 the first object to be compared.
 		 * @param item2 the second object to be compared.
 		 * @param chart chart instance.
 		 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
 		 */
-		int call(CallbackFunctionContext context, NativeObject item1, NativeObject item2, Chart chart);
+		int call(NativeObject item1, NativeObject item2, Chart chart);
 	}
 
 	// ---------------------------
@@ -179,7 +175,7 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.filterCallbackProxy.setCallback((context, item, nativeChart) -> {
+		this.filterCallbackProxy.setCallback((item, nativeChart) -> {
 			// gets callback
 			LegendFilterCallback filterCallback = getFilterCallback();
 			// checks if callback is consistent
@@ -189,7 +185,7 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 			}
 			return true;
 		});
-		this.itemSortCallbackProxy.setCallback((context, item1, item2, nativeChart) -> {
+		this.itemSortCallbackProxy.setCallback((item1, item2, nativeChart) -> {
 			// gets callback
 			LegendItemSortCallback itemSortCallback = getItemSortCallback();
 			// checks if callback is consistent
@@ -200,7 +196,7 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 			// default is 0 - equals
 			return 0;
 		});
-		this.labelsCallbackProxy.setCallback((context, nativeChart) -> {
+		this.labelsCallbackProxy.setCallback((nativeChart) -> {
 			// gets callback
 			LegendLabelsCallback labelsCallback = getLabelsCallback();
 			// checks if callback is consistent

@@ -89,7 +89,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	RadialAngleLines(Axis axis) {
 		super(axis, axis.getDefaultValues().getAngleLines());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(getAxis().createContext(context), getBorderDashCallback(), getAxis().getDefaultValues().getAngleLines().getBorderDash()));
+		this.borderDashCallbackProxy.setCallback((context) -> onBorderDash(getAxis().createContext(context), getBorderDashCallback(), getAxis().getDefaultValues().getAngleLines().getBorderDash()));
 	}
 
 	/*

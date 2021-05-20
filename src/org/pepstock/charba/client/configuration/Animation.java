@@ -15,16 +15,15 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.DelayCallback;
 import org.pepstock.charba.client.callbacks.DurationCallback;
 import org.pepstock.charba.client.callbacks.EasingCallback;
 import org.pepstock.charba.client.callbacks.LoopCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.enums.Easing;
@@ -36,8 +35,6 @@ import org.pepstock.charba.client.items.AnimationItem;
 import org.pepstock.charba.client.options.HasAnimationOptions;
 import org.pepstock.charba.client.options.IsAnimation;
 
-import jsinterop.annotations.JsFunction;
-
 /**
  * It animates charts out of the box.<br>
  * A number of options are provided to configure how the animation looks and how long it takes.<br>
@@ -48,34 +45,12 @@ import jsinterop.annotations.JsFunction;
 public class Animation extends AbstractDynamicConfiguration<IsAnimation> implements IsEventProvider, IsAnimation {
 
 	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
-
-	/**
-	 * Java script FUNCTION callback when animation is changing.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAnimationCallback {
-
-		/**
-		 * Method of function to be called when animation is changing.
-		 * 
-		 * @param context value of <code>this</code> to the execution context of function.
-		 * @param nativeObject java script object which contains animation object
-		 */
-		void call(Chart context, NativeObject nativeObject);
-	}
-
-	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the animation complete function
-	private final CallbackProxy<ProxyAnimationCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the animation in progress function
-	private final CallbackProxy<ProxyAnimationCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// amount of handlers
 	private int onCompleteHandlers = 0;
@@ -137,7 +112,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.completeCallbackProxy.setCallback((context, nativeObject) -> {
+		this.completeCallbackProxy.setCallback((nativeObject) -> {
 			// checks consistency of argument
 			if (nativeObject != null) {
 				// creates animation item
@@ -146,7 +121,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 				onComplete(animationItem);
 			}
 		});
-		this.progressCallbackProxy.setCallback((context, nativeObject) -> {
+		this.progressCallbackProxy.setCallback((nativeObject) -> {
 			// checks consistency of argument
 			if (nativeObject != null) {
 				// creates animation item

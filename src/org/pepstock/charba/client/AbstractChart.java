@@ -156,7 +156,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// -- SET CALLBACKS to PROXIES ---
 			// -------------------------------
 			// fires the event
-			canvasCallbackProxy.setCallback((context, event) -> event.preventDefault());
+			canvasCallbackProxy.setCallback((event) -> event.preventDefault());
 			// adds the listener to disable canvas selection
 			// removes the default behavior
 			canvas.addEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());

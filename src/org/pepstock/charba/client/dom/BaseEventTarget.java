@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.dom;
 
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.NativeName;
 
@@ -49,10 +48,9 @@ public abstract class BaseEventTarget {
 		/**
 		 * A function that is called whenever an event of the specified type occurs.
 		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param event a event object describing the event that has been fired and needs to be processed.
 		 */
-		void call(CallbackFunctionContext context, BaseNativeEvent event);
+		void call(BaseNativeEvent event);
 	}
 
 	/**

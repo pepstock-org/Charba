@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.AbstractNode;
@@ -33,31 +33,12 @@ import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
 import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
 import org.pepstock.charba.client.zoom.callbacks.StartCallback;
 
-import jsinterop.annotations.JsFunction;
-
 /**
  * Abstract element used by pan and zoom object in order to enable to provide the configuration of {@link ZoomPlugin#ID}.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public abstract class AbstractConfigurationItem extends AbstractNode implements IsDefaultConfigurationItem {
-
-	/**
-	 * Java script FUNCTION callback called to provide onPan, onPanComplete, onPanRejected, onZoom, onZoomComplete and onZoomRejected handlers.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyHandlerCallback {
-
-		/**
-		 * Method of function to be called to provide onPan, onPanComplete, onPanRejected, onZoom, onZoomComplete and onZoomRejected handlers.
-		 * 
-		 * @param contextFunction context value of <code>this</code> to the execution context of function
-		 * @param context native chart
-		 */
-		void call(CallbackFunctionContext contextFunction, NativeObject context);
-	}
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -134,12 +115,12 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.modeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getModeCallback(), getDefaultsOptions().getMode()).value());
-		this.overScaleModeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(createContext(context), getOverScaleModeCallback(), getDefaultsOptions().getOverScaleMode()).value());
-		this.progressCallbackProxy.setCallback((contextFunction, context) -> onProgress(createContext(context)));
-		this.completeCallbackProxy.setCallback((contextFunction, context) -> onCompleted(createContext(context)));
-		this.rejectCallbackProxy.setCallback((contextFunction, context) -> onRejected(createContext(context)));
-		this.startCallbackProxy.setCallback((contextFunction, context) -> onStart(createContext(context)));
+		this.modeCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(createContext(context), getModeCallback(), getDefaultsOptions().getMode()).value());
+		this.overScaleModeCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(createContext(context), getOverScaleModeCallback(), getDefaultsOptions().getOverScaleMode()).value());
+		this.progressCallbackProxy.setCallback((context) -> onProgress(createContext(context)));
+		this.completeCallbackProxy.setCallback((context) -> onCompleted(createContext(context)));
+		this.rejectCallbackProxy.setCallback((context) -> onRejected(createContext(context)));
+		this.startCallbackProxy.setCallback((context) -> onStart(createContext(context)));
 	}
 
 	/**

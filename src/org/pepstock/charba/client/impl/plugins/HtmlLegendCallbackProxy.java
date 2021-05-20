@@ -65,11 +65,11 @@ final class HtmlLegendCallbackProxy {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// fires the event
-		clickCallbackProxy.setCallback((context, event) -> handleEvent(event));
+		clickCallbackProxy.setCallback((event) -> handleEvent(event));
 		// fires the event
-		hoverCallbackProxy.setCallback((context, event) -> handleEvent(event));
+		hoverCallbackProxy.setCallback((event) -> handleEvent(event));
 		// fires the event
-		leaveCallbackProxy.setCallback((context, event) -> handleEvent(event));
+		leaveCallbackProxy.setCallback((event) -> handleEvent(event));
 	}
 
 	/**

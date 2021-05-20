@@ -88,7 +88,7 @@ public class Layout extends ConfigurationOptionsContainer implements IsScriptabl
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsPadding(getOptions().createContext(context), getPaddingCallback(), getOptions().getDefaultValues().getLayout().getPadding()).nativeObject());
+		this.paddingCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsPadding(getOptions().createContext(context), getPaddingCallback(), getOptions().getDefaultValues().getLayout().getPadding()).nativeObject());
 	}
 
 	/**

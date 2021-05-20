@@ -18,7 +18,6 @@ package org.pepstock.charba.client.options;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.FromCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
@@ -38,8 +37,6 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
-
-import jsinterop.annotations.JsFunction;
 
 /**
  * Is the base animation options with common properties for animation properties (property and collections of properties).
@@ -84,28 +81,6 @@ public final class AnimationCollection extends AbstractAnimation<IsAnimationColl
 	}
 
 	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
-
-	/**
-	 * Java script FUNCTION callback when animation is changing.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAnimationCallback {
-
-		/**
-		 * Method of function to be called when animation is changing.
-		 * 
-		 * @param context value of <code>this</code> to the execution context of function.
-		 * @param nativeObject java script object which contains animation object
-		 */
-		void call(Chart context, NativeObject nativeObject);
-	}
-
-	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the from function
@@ -139,9 +114,9 @@ public final class AnimationCollection extends AbstractAnimation<IsAnimationColl
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.fromCallbackProxy.setCallback((contextFunction, context) -> onCallback(new DatasetContext(context), getFromCallback(), Property.FROM));
+		this.fromCallbackProxy.setCallback((context) -> onCallback(new DatasetContext(context), getFromCallback(), Property.FROM));
 		// sets function to proxy callback in order to invoke the java interface
-		this.toCallbackProxy.setCallback((contextFunction, context) -> onCallback(new DatasetContext(context), getToCallback(), Property.TO));
+		this.toCallbackProxy.setCallback((context) -> onCallback(new DatasetContext(context), getToCallback(), Property.TO));
 	}
 
 	/**

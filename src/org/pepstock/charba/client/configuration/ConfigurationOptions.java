@@ -25,7 +25,6 @@ import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
@@ -106,12 +105,11 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		/**
 		 * Method of function to be called when a event on chart is triggered.
 		 * 
-		 * @param context value of <code>this</code> to the execution context of function.
 		 * @param event CHART.JS event which wraps the native event
 		 * @param items array of chart elements affected by the event
 		 * @param chart chart instance
 		 */
-		void call(CallbackFunctionContext context, NativeObject event, ArrayObject items, Chart chart);
+		void call(NativeObject event, ArrayObject items, Chart chart);
 	}
 
 	/**
@@ -126,11 +124,10 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		/**
 		 * Method of function to be called when a resize event on chart is triggered.
 		 * 
-		 * @param context value of <code>this</code> to the execution context of function.
 		 * @param chart java script chart instance
 		 * @param size new size of chart
 		 */
-		void call(CallbackFunctionContext context, Chart chart, NativeObject size);
+		void call(Chart chart, NativeObject size);
 	}
 
 	// ---------------------------
@@ -218,7 +215,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.clickCallbackProxy.setCallback((context, event, items, nativeChart) -> {
+		this.clickCallbackProxy.setCallback((event, items, nativeChart) -> {
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(new ConfigurationEnvelop<>(event));
 			// gets the native event
@@ -229,13 +226,13 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			getChart().fireEvent(new ChartClickEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReference.FACTORY)));
 		});
 		// fires the hover hover on the chart
-		this.hoverCallbackProxy.setCallback((context, event, items, nativeChart) -> {
+		this.hoverCallbackProxy.setCallback((event, items, nativeChart) -> {
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(new ConfigurationEnvelop<>(event));
 			// fires the hover event on the chart
 			getChart().fireEvent(new ChartHoverEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReference.FACTORY)));
 		});
-		this.resizeCallbackProxy.setCallback((context, nativeChart, size) -> {
+		this.resizeCallbackProxy.setCallback((nativeChart, size) -> {
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(nativeChart);
 			// fires the resize event on chart
@@ -245,7 +242,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// -- SET CALLBACK for title and axis click event ---
 		// --------------------------------------------------
 		// fires the event
-		this.titleAndAxisClickCallbackProxy.setCallback((context, event) -> handleClickEventOnElements(event));
+		this.titleAndAxisClickCallbackProxy.setCallback((event) -> handleClickEventOnElements(event));
 	}
 
 	/**

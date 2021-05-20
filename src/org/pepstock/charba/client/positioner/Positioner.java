@@ -82,6 +82,7 @@ public final class Positioner {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
+		positionerCallbackProxy.setIgnoreFunctionContext(false);
 		positionerCallbackProxy.setCallback(this::onToolipPosition);
 	}
 

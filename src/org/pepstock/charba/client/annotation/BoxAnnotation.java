@@ -188,7 +188,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.cornerRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getCornerRadiusCallback(), defaultValues.getCornerRadius()).intValue());
+		this.cornerRadiusCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getCornerRadiusCallback(), defaultValues.getCornerRadius()).intValue());
 	}
 
 	/*

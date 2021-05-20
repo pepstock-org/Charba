@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.DelayCallback;
 import org.pepstock.charba.client.callbacks.DurationCallback;
@@ -36,8 +35,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultBaseAnimation;
 import org.pepstock.charba.client.enums.Easing;
 
-import jsinterop.annotations.JsFunction;
-
 /**
  * Is the base animation options with common options for animation configuration, for ANIMATION and ANIMATIONS name spaces.
  * 
@@ -47,29 +44,7 @@ import jsinterop.annotations.JsFunction;
  * 
  */
 abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation> extends AbstractNode implements IsDefaultBaseAnimation, HasCallbackScope {
-	
-	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
 
-	/**
-	 * Java script FUNCTION callback when animation is changing.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAnimationCallback {
-
-		/**
-		 * Method of function to be called when animation is changing.
-		 * 
-		 * @param context value of <code>this</code> to the execution context of function.
-		 * @param nativeObject java script object which contains animation object
-		 */
-		void call(Chart context, NativeObject nativeObject);
-	}
-	
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -147,13 +122,13 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.durationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(context), getDurationCallback(), this.defaultValues.getDuration()).intValue());
+		this.durationCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(new DatasetContext(context), getDurationCallback(), this.defaultValues.getDuration()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.delayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(context), getDelayCallback(), this.defaultValues.getDelay()).intValue());
+		this.delayCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(new DatasetContext(context), getDelayCallback(), this.defaultValues.getDelay()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.loopCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(context), getLoopCallback(), this.defaultValues.isLoop()));
+		this.loopCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(new DatasetContext(context), getLoopCallback(), this.defaultValues.isLoop()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.easingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(new DatasetContext(context), getEasingCallback(), this.defaultValues.getEasing()).value());
+		this.easingCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(new DatasetContext(context), getEasingCallback(), this.defaultValues.getEasing()).value());
 	}
 
 	/**

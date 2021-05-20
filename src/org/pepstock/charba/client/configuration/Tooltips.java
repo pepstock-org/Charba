@@ -17,7 +17,6 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TooltipExternalCallback;
 import org.pepstock.charba.client.callbacks.TooltipFilterCallback;
 import org.pepstock.charba.client.callbacks.TooltipItemSortCallback;
@@ -64,14 +63,13 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 		/**
 		 * Method of function to be called to hook in the the tooltip rendering process so that you can render the tooltip in your own custom way.
 		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param tooltipContext all info about tooltip to create own HTML tooltip.
 		 */
-		void call(CallbackFunctionContext context, NativeObject tooltipContext);
+		void call(NativeObject tooltipContext);
 	}
 
 	/**
-	 * Java script FUNCTION callback called to filter tooltip items. Receives 1 parameter, a tooltip Item.<br>
+	 * Java script FUNCTION callback called to filter tooltip items.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -80,13 +78,12 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	interface ProxyFilterCallback {
 
 		/**
-		 * Method of function to be called to filter tooltip items. Receives 1 parameter, a tooltip Item.
+		 * Method of function to be called to filter tooltip items
 		 * 
-		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item tooltip item to check.
 		 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 		 */
-		boolean call(CallbackFunctionContext context, NativeObject item);
+		boolean call(NativeObject item);
 	}
 
 	/**
@@ -101,12 +98,11 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 		/**
 		 * Method of function to be called to allow sorting of tooltip items.
 		 * 
-		 * @param context context context value of <code>this</code> to the execution context of function.
 		 * @param item1 the first object to be compared.
 		 * @param item2 the second object to be compared.
 		 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
 		 */
-		int call(CallbackFunctionContext context, NativeObject item1, NativeObject item2);
+		int call(NativeObject item1, NativeObject item2);
 	}
 
 	// ---------------------------
@@ -195,7 +191,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.externalCallbackProxy.setCallback((context, tooltipContext) -> {
+		this.externalCallbackProxy.setCallback((tooltipContext) -> {
 			// gets callback
 			TooltipExternalCallback externalCallback = getExternalCallback();
 			// checks if callback is consistent
@@ -206,7 +202,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 				externalCallback.onExternal(getChart(), tempContext.getModel());
 			}
 		});
-		this.itemSortCallbackProxy.setCallback((context, item1, item2) -> {
+		this.itemSortCallbackProxy.setCallback((item1, item2) -> {
 			// gets callback
 			TooltipItemSortCallback itemSortCallback = getItemSortCallback();
 			// checks if callback is consistent
@@ -217,7 +213,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 			// default is 0 - equals
 			return 0;
 		});
-		this.filterCallbackProxy.setCallback((context, item) -> {
+		this.filterCallbackProxy.setCallback((item) -> {
 			// gets callback
 			TooltipFilterCallback filterCallback = getFilterCallback();
 			// checks if callback is consistent

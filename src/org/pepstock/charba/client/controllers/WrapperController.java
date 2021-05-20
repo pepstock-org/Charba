@@ -262,18 +262,25 @@ final class WrapperController extends NativeObjectContainer {
 			}
 		});
 		// invoke user method implementation
+		this.addElementsCallbackProxy.setIgnoreFunctionContext(false);
 		this.addElementsCallbackProxy.setCallback(context -> onAddElements(context, context.getChart()));
 		// invoke user method implementation
+		this.drawCallbackProxy.setIgnoreFunctionContext(false);
 		this.drawCallbackProxy.setCallback(context -> onDraw(context, context.getChart()));
 		// invoke user method implementation
+		this.removeHoverStyleCallbackProxy.setIgnoreFunctionContext(false);
 		this.removeHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onRemoveHoverStyle(context, context.getChart(), element, datasetIndex, index));
 		// invoke user method implementation
+		this.setHoverStyleCallbackProxy.setIgnoreFunctionContext(false);
 		this.setHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onSetHoverStyle(context, context.getChart(), element, datasetIndex, index));
 		// invoke user method implementation
+		this.updateCallbackProxy.setIgnoreFunctionContext(false);
 		this.updateCallbackProxy.setCallback((context, mode) -> onUpdate(context, context.getChart(), mode));
 		// invoke user method implementation
+		this.linkScalesCallbackProxy.setIgnoreFunctionContext(false);
 		this.linkScalesCallbackProxy.setCallback(context -> onLinkScales(context, context.getChart()));
 		// invoke user method implementation
+		this.buildOrUpdateElements.setIgnoreFunctionContext(false);
 		this.buildOrUpdateElements.setCallback((context, resetNewElements) -> onBuildOrUpdateElements(context, context.getChart(), resetNewElements));
 		// adds all proxy functions to call the functions to the native object
 		setValue(Property.INITIALIZE, initializeCallbackProxy.getProxy());

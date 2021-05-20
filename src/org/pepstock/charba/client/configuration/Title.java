@@ -65,7 +65,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		PADDING("padding"),
 		POSITION("position"),
 		TEXT("text");
-		
+
 		// name value of property
 		private final String value;
 
@@ -89,7 +89,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		}
 
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -146,21 +146,21 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.displayCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getDisplayCallback(), getOptions().getDefaultValues().getTitle().isDisplay()));
+		this.displayCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getDisplayCallback(), getOptions().getDefaultValues().getTitle().isDisplay()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsPadding(getOptions().createContext(context), getPaddingCallback(), getOptions().getDefaultValues().getTitle().getPadding()).nativeObject());
+		this.paddingCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsPadding(getOptions().createContext(context), getPaddingCallback(), getOptions().getDefaultValues().getTitle().getPadding()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsFont(getOptions().createContext(context), getFontCallback(), getOptions().getDefaultValues().getTitle().getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsFont(getOptions().createContext(context), getFontCallback(), getOptions().getDefaultValues().getTitle().getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(getOptions().createContext(context), getColorCallback(), getOptions().getDefaultValues().getTitle().getColorAsString()));
+		this.colorCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsColor(getOptions().createContext(context), getColorCallback(), getOptions().getDefaultValues().getTitle().getColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.textCallbackProxy.setCallback((contextFunction, context) -> onText(getOptions().createContext(context)));
+		this.textCallbackProxy.setCallback((context) -> onText(getOptions().createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.positionCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getPositionCallback(), getOptions().getDefaultValues().getTitle().getPosition()).value());
+		this.positionCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getPositionCallback(), getOptions().getDefaultValues().getTitle().getPosition()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getAlignCallback(), getOptions().getDefaultValues().getTitle().getAlign()).value());
+		this.alignCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getAlignCallback(), getOptions().getDefaultValues().getTitle().getAlign()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.fullSizeCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getFullSizeCallback(), getOptions().getDefaultValues().getTitle().isFullSize()));
+		this.fullSizeCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getFullSizeCallback(), getOptions().getDefaultValues().getTitle().isFullSize()));
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setColor(String color) {
 		// resets callback
-		setColor((ColorCallback<ChartContext>)null);
+		setColor((ColorCallback<ChartContext>) null);
 		// stores the value
 		getConfiguration().getTitle().setColor(color);
 	}
@@ -248,7 +248,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setText(String... text) {
 		// resets callback
-		setText((TextCallback<ChartContext>)null);
+		setText((TextCallback<ChartContext>) null);
 		// stores the value
 		getConfiguration().getTitle().setText(text);
 	}
@@ -269,7 +269,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setPosition(Position position) {
 		// resets callback
-		setPosition((PositionCallback<ChartContext>)null);
+		setPosition((PositionCallback<ChartContext>) null);
 		// stores the value
 		getConfiguration().getTitle().setPosition(position);
 	}
@@ -311,7 +311,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setAlign(ElementAlign alignment) {
 		// resets callback
-		setAlign((ElementAlignCallback<ChartContext>)null);
+		setAlign((ElementAlignCallback<ChartContext>) null);
 		// stores the value
 		getConfiguration().getTitle().setAlign(alignment);
 	}
@@ -324,7 +324,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	public ElementAlign getAlign() {
 		return getConfiguration().getTitle().getAlign();
 	}
-	
+
 	// -------------------
 	// CALLBACKS
 	// -------------------
@@ -349,7 +349,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		// stores and manages callback
 		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.DISPLAY, displayCallback, displayCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the callback to set if marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
@@ -370,7 +370,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		// stores and manages callback
 		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.FULL_SIZE, fullSizeCallback, fullSizeCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the padding callback, if set, otherwise <code>null</code>.
 	 * 
@@ -416,7 +416,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.FONT, fontCallback, fontCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the color callback, if set, otherwise <code>null</code>.
 	 * 
@@ -437,7 +437,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.COLOR, colorCallback, colorCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the text callback, if set, otherwise <code>null</code>.
 	 * 
@@ -458,7 +458,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.TEXT, textCallback, textCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the position callback, if set, otherwise <code>null</code>.
 	 * 
@@ -479,7 +479,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.POSITION, positionCallback, positionCallbackProxy);
 	}
-	
+
 	/**
 	 * Returns the align callback, if set, otherwise <code>null</code>.
 	 * 
@@ -500,11 +500,11 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.ALIGN, alignCallback, alignCallbackProxy);
 	}
-	
+
 	// -----------------------
 	// INTERNALS for CALLBACKS
 	// -----------------------
-	
+
 	/**
 	 * Returns an object as string or array of string when the callback has been activated.
 	 * 

@@ -18,7 +18,6 @@ package org.pepstock.charba.client.configuration;
 import java.util.Date;
 import java.util.List;
 
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TimeTickCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -56,13 +55,12 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 		/**
 		 * Method of function to be called when tick is created.
 		 * 
-		 * @param context value of <code>this</code> to the execution context of function.
 		 * @param label label of tick, passed by CHART.JS formatting the date by the selected {@link TimeUnit} and its display format.
 		 * @param index index of tick
 		 * @param values array with all values of ticks
 		 * @return string representation of tick
 		 */
-		String call(CallbackFunctionContext context, String label, int index, ArrayObject values);
+		String call(String label, int index, ArrayObject values);
 	}
 
 	// ---------------------------
@@ -82,7 +80,7 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		tickCallbackProxy.setCallback((context, label, index, values) -> {
+		tickCallbackProxy.setCallback((label, index, values) -> {
 			// checks if user callback is consistent
 			if (getCallback() != null) {
 				// gets as list the tick items

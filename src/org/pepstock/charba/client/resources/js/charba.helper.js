@@ -32,7 +32,11 @@ var CharbaCallbackProxy = {
   /**
    * @type {Function} contains a function which can call CALLBACk passing "this"
    */
-  proxy: null
+  proxy: null,
+  /**
+   * @type {boolean} if true, the function context is ignore and not passed to the CALLBACK
+   */
+  ignoreFunctionContext: true
 }
 /**
  * ----------------------------------------------------------------------------
@@ -472,16 +476,15 @@ CharbaJsHelper.newCallbackProxy = function() {
   // PROXY
   obj.proxy = function() {
     // checks if callback is a function
-    if (obj.callback != null && typeof obj.callback === 'function') {
+    if (typeof obj.callback === 'function') {
+      // checks if this context muts be ignore
+      if (obj.ignoreFunctionContext) {
+      	return obj.callback.apply(this, arguments);
+      } 
       // creates arguments for callbacks adding the "this" 
       var args = Array.of(this).concat(Array.prototype.slice.call(arguments));
       // calls CALLBACK
-      var result = obj.callback.apply(this, args);
-      if (result === null || result === undefined){
-        // do nothing
-      } else {
-        return result;
-      }
+      return obj.callback.apply(this, args);
     }
   };
   return obj;

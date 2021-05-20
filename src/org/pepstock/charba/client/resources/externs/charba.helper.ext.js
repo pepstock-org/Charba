@@ -14,6 +14,10 @@ CharbaCallbackProxy.prototype.proxy;
  * @type {Function}
  */
 CharbaCallbackProxy.prototype.callback;
+  /**
+   * @type {boolean}
+   */
+CharbaCallbackProxy.prototype.ignoreFunctionContext;
 /**
  * @constructor
  * @return {CharbaJsHelper}

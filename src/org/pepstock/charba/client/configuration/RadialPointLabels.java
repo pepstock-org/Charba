@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.PointLabelCallback;
@@ -59,12 +58,11 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		/**
 		 * Method of function to be called to transform data labels to point labels. The default implementation simply returns the current string.
 		 * 
-		 * @param context context context value of <code>this</code> to the execution context of function.
 		 * @param item label of the point
 		 * @param index index of the label
 		 * @return new label to show.
 		 */
-		String call(CallbackFunctionContext context, String item, int index);
+		String call(String item, int index);
 	}
 
 	// ---------------------------
@@ -149,7 +147,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.pointLabelCallbackProxy.setCallback((context, item, index) -> {
+		this.pointLabelCallbackProxy.setCallback((item, index) -> {
 			// gets callback
 			PointLabelCallback callback = getCallback();
 			// checks if callback is consistent
@@ -161,14 +159,13 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 			return item;
 		});
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsFont(getAxis().createContext(context), getFontCallback(), getAxis().getDefaultValues().getPointLabels().getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsFont(getAxis().createContext(context), getFontCallback(), getAxis().getDefaultValues().getPointLabels().getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((contextFunction, context) -> onColor(getAxis().createContext(context), getColorCallback(), getAxis().getDefaultValues().getPointLabels().getColorAsString()));
+		this.colorCallbackProxy.setCallback((context) -> onColor(getAxis().createContext(context), getColorCallback(), getAxis().getDefaultValues().getPointLabels().getColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.backdropColorCallbackProxy.setCallback((contextFunction, context) -> onColor(getAxis().createContext(context), getBackdropColorCallback(), getAxis().getDefaultValues().getPointLabels().getBackdropColorAsString()));
+		this.backdropColorCallbackProxy.setCallback((context) -> onColor(getAxis().createContext(context), getBackdropColorCallback(), getAxis().getDefaultValues().getPointLabels().getBackdropColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getPaddingCallback(), getAxis().getDefaultValues().getPointLabels().getPadding()).intValue());
+		this.paddingCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getPaddingCallback(), getAxis().getDefaultValues().getPointLabels().getPadding()).intValue());
 	}
 
 	/**

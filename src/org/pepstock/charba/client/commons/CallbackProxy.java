@@ -47,7 +47,7 @@ public final class CallbackProxy<T> {
 	/**
 	 * Returns the function <code>proxy</code> implemented in the additional java script source.
 	 * 
-	 * @return the proxy function <code>proxy</code> implemented in the additional java script source.
+	 * @return the proxy function <code>proxy</code> implemented in the additional java script source
 	 */
 	@JsProperty
 	public native Proxy getProxy();
@@ -55,15 +55,31 @@ public final class CallbackProxy<T> {
 	/**
 	 * Returns the function <code>callback</code> implemented in the additional java script source.
 	 * 
-	 * @return the function <code>callback</code> implemented in the additional java script source.
+	 * @return the function <code>callback</code> implemented in the additional java script source
 	 */
 	@JsProperty
 	public native T getCallback();
+	
+	/**
+	 * Sets <code>true</code> if the functional context must be ignored as argument to pass to callback.
+	 * 
+	 * @param ignore <code>true</code> if the functional context must be ignored as argument to pass to callback
+	 */
+	@JsProperty
+	public native void setIgnoreFunctionContext(boolean ignore);
+
+	/**
+	 * Returns <code>true</code> if the functional context must be ignored as argument to pass to callback.
+	 * 
+	 * @return <code>true</code> if the functional context must be ignored as argument to pass to callback
+	 */
+	@JsProperty
+	public native boolean isIgnoreFunctionContext();
 
 	/**
 	 * Sets the function <code>callback</code> implemented in the additional java script source.
 	 * 
-	 * @param callback the function <code>callback</code> implemented in the additional java script source.
+	 * @param callback the function <code>callback</code> implemented in the additional java script source
 	 */
 	@JsProperty
 	public native void setCallback(T callback);

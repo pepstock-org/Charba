@@ -17,9 +17,9 @@ package org.pepstock.charba.client.labels;
 
 import java.util.List;
 
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -40,8 +40,6 @@ import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
 import org.pepstock.charba.client.options.IsScriptableFontProvider;
-
-import jsinterop.annotations.JsFunction;
 
 /**
  * This is the object to map the {@link LabelsPlugin#ID} plugin options, both at chart and global level.
@@ -122,73 +120,12 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	public static final int DEFAULT_TEXT_MARGIN = 2;
 
 	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
-
-	/**
-	 * Java script FUNCTION callback called to render the chart returning the label(string) and the image to show.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyRenderCallback {
-
-		/**
-		 * Method of function to be called to render the chart returning the label(string) and the image to show.
-		 * 
-		 * @param contextFunction context value of <code>this</code> to the execution context of function.
-		 * @param context native object as callback context.
-		 * @return image or string for rendering.
-		 */
-		Object call(CallbackFunctionContext contextFunction, NativeObject context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to get the font of render in the chat.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyFontCallback {
-
-		/**
-		 * Method of function to be called to get the font of render in the chat.
-		 * 
-		 * @param contextFunction context value of <code>this</code> to the execution context of function.
-		 * @param context native object as callback context.
-		 * @return the font instance.
-		 */
-		NativeObject call(CallbackFunctionContext contextFunction, NativeObject context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to get the font color of render in the chat.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyColorCallback {
-
-		/**
-		 * Method of function to be called to get the font color of render in the chat.
-		 * 
-		 * @param contextFunction context value of <code>this</code> to the execution context of function.
-		 * @param context native object as callback context.
-		 * @return the font color.
-		 */
-		String call(CallbackFunctionContext contextFunction, NativeObject context);
-	}
-
-	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the render function
-	private final CallbackProxy<ProxyRenderCallback> renderCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> renderCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the font function
-	private final CallbackProxy<ProxyFontCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the font color function
 	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// render callback instance
@@ -322,10 +259,10 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.renderCallbackProxy.setCallback((contextFunction, context) -> onRender(new LabelsContext(this, context)));
-		this.fontCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsFont(new LabelsContext(this, context), getFontCallback(), this.defaultOptions.getFont()).nativeObject());
+		this.renderCallbackProxy.setCallback((context) -> onRender(new LabelsContext(this, context)));
+		this.fontCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsFont(new LabelsContext(this, context), getFontCallback(), this.defaultOptions.getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(this, context), getColorCallback(), getColorAsString()));
+		this.colorCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(this, context), getColorCallback(), getColorAsString()));
 	}
 
 	/**

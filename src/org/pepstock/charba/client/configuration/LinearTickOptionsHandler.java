@@ -102,13 +102,10 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.countCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getCountCallback(), getAxis().getDefaultValues().getTicks().getCount()).intValue());
-		this.maxTicksLimitCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getMaxTicksLimitCallback(), getAxis().getDefaultValues().getTicks().getMaxTicksLimit()).intValue());
-		this.precisionCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getPrecisionCallback(), getAxis().getDefaultValues().getTicks().getPrecision()).intValue());
-		this.stepSizeCallbackProxy
-				.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getStepSizeCallback(), getAxis().getDefaultValues().getTicks().getStepSize()).doubleValue());
+		this.countCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getCountCallback(), getAxis().getDefaultValues().getTicks().getCount()).intValue());
+		this.maxTicksLimitCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getMaxTicksLimitCallback(), getAxis().getDefaultValues().getTicks().getMaxTicksLimit()).intValue());
+		this.precisionCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getPrecisionCallback(), getAxis().getDefaultValues().getTicks().getPrecision()).intValue());
+		this.stepSizeCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getStepSizeCallback(), getAxis().getDefaultValues().getTicks().getStepSize()).doubleValue());
 	}
 
 	/**

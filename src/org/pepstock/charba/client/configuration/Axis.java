@@ -25,8 +25,8 @@ import org.pepstock.charba.client.callbacks.AxisDimensionsCallback;
 import org.pepstock.charba.client.callbacks.AxisFitCallback;
 import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
-import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.ScaleContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -47,8 +47,6 @@ import org.pepstock.charba.client.options.IsScaleId;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.ScaleTitle;
 
-import jsinterop.annotations.JsFunction;
-
 /**
  * Axes are an integral part of a chart.<br>
  * They are used to determine how data maps to a pixel value on the chart.<br>
@@ -60,58 +58,37 @@ import jsinterop.annotations.JsFunction;
 public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 
 	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
-	/**
-	 * Java script FUNCTION callback called to invoke a custom callback for axis.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAxisCallback {
-
-		/**
-		 * Method of function to be called to invoke a custom callback for axis.
-		 * 
-		 * @param context value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(CallbackFunctionContext context, NativeObject item);
-	}
-
-	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 
 	// callback proxy to invoke the before update function
-	private final CallbackProxy<ProxyAxisCallback> beforeUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> beforeUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before set dimension function
-	private final CallbackProxy<ProxyAxisCallback> beforeSetDimensionsCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> beforeSetDimensionsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after set dimension function
-	private final CallbackProxy<ProxyAxisCallback> afterSetDimensionsCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> afterSetDimensionsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before data limit function
-	private final CallbackProxy<ProxyAxisCallback> beforeDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> beforeDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after data limit function
-	private final CallbackProxy<ProxyAxisCallback> afterDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> afterDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before tick label conversion function
-	private final CallbackProxy<ProxyAxisCallback> beforeTickToLabelConversionCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> beforeTickToLabelConversionCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after tick label conversion function
-	private final CallbackProxy<ProxyAxisCallback> afterTickToLabelConversionCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> afterTickToLabelConversionCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before calculate tick rotation function
-	private final CallbackProxy<ProxyAxisCallback> beforeCalculateTickRotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> beforeCalculateTickRotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after calculate tick rotation function
-	private final CallbackProxy<ProxyAxisCallback> afterCalculateTickRotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> afterCalculateTickRotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before fit function
-	private final CallbackProxy<ProxyAxisCallback> beforeFitCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> beforeFitCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after fit function
-	private final CallbackProxy<ProxyAxisCallback> afterFitCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> afterFitCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after update function
-	private final CallbackProxy<ProxyAxisCallback> afterUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> afterUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before build tricks function
-	private final CallbackProxy<ProxyAxisCallback> beforeBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> beforeBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after build tricks function
-	private final CallbackProxy<ProxyAxisCallback> afterBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> afterBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------
 	// -- USERS CALLBACKS ---
@@ -204,20 +181,20 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.beforeUpdateCallbackProxy.setCallback((context, item) -> onBeforeUpdateCallback(item));
-		this.beforeSetDimensionsCallbackProxy.setCallback((context, item) -> onBeforeSetDimensionsCallback(item));
-		this.afterSetDimensionsCallbackProxy.setCallback((context, item) -> onAfterSetDimensionsCallback(item));
-		this.beforeDataLimitsCallbackProxy.setCallback((context, item) -> onBeforeDataLimitsCallback(item));
-		this.afterDataLimitsCallbackProxy.setCallback((context, item) -> onAfterDataLimitsCallback(item));
-		this.beforeTickToLabelConversionCallbackProxy.setCallback((context, item) -> onBeforeTickToLabelConversionCallback(item));
-		this.afterTickToLabelConversionCallbackProxy.setCallback((context, item) -> onAfterTickToLabelConversionCallback(item));
-		this.beforeCalculateTickRotationCallbackProxy.setCallback((context, item) -> onBeforeCalculateTickRotationCallback(item));
-		this.afterCalculateTickRotationCallbackProxy.setCallback((context, item) -> onAfterCalculateTickRotationCallback(item));
-		this.beforeFitCallbackProxy.setCallback((context, item) -> onBeforeFitCallback(item));
-		this.afterFitCallbackProxy.setCallback((context, item) -> onAfterFitCallback(item));
-		this.afterUpdateCallbackProxy.setCallback((context, item) -> onAfterUpdateCallback(item));
-		this.beforeBuildTicksCallbackProxy.setCallback((context, item) -> onBeforeBuildTicksCallback(item));
-		this.afterBuildTicksCallbackProxy.setCallback((context, item) -> onAfterBuildTicksCallback(item));
+		this.beforeUpdateCallbackProxy.setCallback((item) -> onBeforeUpdateCallback(item));
+		this.beforeSetDimensionsCallbackProxy.setCallback((item) -> onBeforeSetDimensionsCallback(item));
+		this.afterSetDimensionsCallbackProxy.setCallback((item) -> onAfterSetDimensionsCallback(item));
+		this.beforeDataLimitsCallbackProxy.setCallback((item) -> onBeforeDataLimitsCallback(item));
+		this.afterDataLimitsCallbackProxy.setCallback((item) -> onAfterDataLimitsCallback(item));
+		this.beforeTickToLabelConversionCallbackProxy.setCallback((item) -> onBeforeTickToLabelConversionCallback(item));
+		this.afterTickToLabelConversionCallbackProxy.setCallback((item) -> onAfterTickToLabelConversionCallback(item));
+		this.beforeCalculateTickRotationCallbackProxy.setCallback((item) -> onBeforeCalculateTickRotationCallback(item));
+		this.afterCalculateTickRotationCallbackProxy.setCallback((item) -> onAfterCalculateTickRotationCallback(item));
+		this.beforeFitCallbackProxy.setCallback((item) -> onBeforeFitCallback(item));
+		this.afterFitCallbackProxy.setCallback((item) -> onAfterFitCallback(item));
+		this.afterUpdateCallbackProxy.setCallback((item) -> onAfterUpdateCallback(item));
+		this.beforeBuildTicksCallbackProxy.setCallback((item) -> onBeforeBuildTicksCallback(item));
+		this.afterBuildTicksCallbackProxy.setCallback((item) -> onAfterBuildTicksCallback(item));
 	}
 
 	/**
