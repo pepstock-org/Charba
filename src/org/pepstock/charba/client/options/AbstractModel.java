@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Key;
@@ -125,6 +126,17 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Ab
 		setInternalCallbackToModel(model, key, proxy);
 	}
 
+	/**
+	 * Adds a native callback function to a model at the specific key.
+	 * 
+	 * @param model element where adding the function callback
+	 * @param key property name to use to add the function callback
+	 * @param callback the function callback instance to add
+	 */
+	protected final void setCallbackToModel(AbstractNode model, Key key, NativeCallback callback) {
+		setInternalCallbackToModel(model, key, callback);
+	}
+	
 	/**
 	 * Loads the padding size or object from the abstract model, replacing the property, if is a number, with the object which is returned.
 	 * 

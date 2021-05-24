@@ -18,6 +18,7 @@ package org.pepstock.charba.client.commons;
 import java.util.Date;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -252,6 +253,18 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected final void setValueAndAddToParent(Key key, CallbackProxy.Proxy value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		parent.checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets a value (callback function) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, NativeCallback value) {
 		setValue(key, value);
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();

@@ -26,6 +26,7 @@ import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.FillCallback;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
@@ -640,6 +641,15 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
+	 * Sets the border width callback.
+	 * 
+	 * @param borderWidthCallback the border width callback to set
+	 */
+	public void setBorderWidth(NativeCallback borderWidthCallback) {
+		setInternalBorderWidth(borderWidthCallback);
+	}
+
+	/**
 	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
 	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
@@ -1021,6 +1031,15 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param hoverBorderWidthCallback the hover border width callback to set
 	 */
 	public void setHoverBorderWidth(WidthCallback<DatasetContext> hoverBorderWidthCallback) {
+		setInternalHoverBorderWidth(hoverBorderWidthCallback);
+	}
+
+	/**
+	 * Sets the hover border width callback.
+	 * 
+	 * @param hoverBorderWidthCallback the hover border width callback to set
+	 */
+	public void setHoverBorderWidth(NativeCallback hoverBorderWidthCallback) {
 		setInternalHoverBorderWidth(hoverBorderWidthCallback);
 	}
 
@@ -1759,6 +1778,20 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
+	 * Sets the point background color callback.
+	 * 
+	 * @param pointBackgroundColorCallback the point background color callback.
+	 */
+	public void setPointBackgroundColor(NativeCallback pointBackgroundColorCallback) {
+		// resets callback
+		setPointBackgroundColor((ColorCallback<DatasetContext>) null);
+		// resets previous setting
+		resetBeingCallback(InternalCanvasObjectProperty.POINT_BACKGROUND_COLOR);
+		// stores value
+		setValue(InternalCanvasObjectProperty.POINT_BACKGROUND_COLOR, pointBackgroundColorCallback);
+	}
+
+	/**
 	 * Returns the point border color callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the point border color callback, if set, otherwise <code>null</code>.
@@ -1788,6 +1821,20 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
+	 * Sets the point border color callback.
+	 * 
+	 * @param pointBorderColorCallback the point border color callback.
+	 */
+	public void setPointBorderColor(NativeCallback pointBorderColorCallback) {
+		// resets callback
+		setPointBorderColor((ColorCallback<DatasetContext>) null);
+		// resets previous setting
+		resetBeingCallback(InternalCanvasObjectProperty.POINT_BORDER_COLOR);
+		// stores value
+		setValue(InternalCanvasObjectProperty.POINT_BORDER_COLOR, pointBorderColorCallback);
+	}
+
+	/**
 	 * Returns the point border width callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the point border width callback, if set, otherwise <code>null</code>.
@@ -1812,6 +1859,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.POINT_BORDER_WIDTH);
 		}
+	}
+
+	/**
+	 * Sets the point border width callback.
+	 * 
+	 * @param pointBorderWidthCallback the point border width callback to set
+	 */
+	public void setPointBorderWidth(NativeCallback pointBorderWidthCallback) {
+		// resets callback
+		setPointBorderWidth((WidthCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.POINT_BORDER_WIDTH, pointBorderWidthCallback);
 	}
 
 	/**
@@ -1844,6 +1903,20 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
+	 * Sets the point hover background color callback.
+	 * 
+	 * @param pointHoverBackgroundColorCallback the point hover background color callback.
+	 */
+	public void setPointHoverBackgroundColor(NativeCallback pointHoverBackgroundColorCallback) {
+		// resets callback
+		setPointHoverBackgroundColor((ColorCallback<DatasetContext>) null);
+		// resets previous setting
+		resetBeingCallback(InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR);
+		// stores value
+		setValue(InternalCanvasObjectProperty.POINT_HOVER_BACKGROUND_COLOR, pointHoverBackgroundColorCallback);
+	}
+
+	/**
 	 * Returns the point hover border color callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the point hover border color callback, if set, otherwise <code>null</code>.
@@ -1870,6 +1943,20 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// otherwise sets null which removes the properties from java script object
 			remove(InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR);
 		}
+	}
+
+	/**
+	 * Sets the point hover border color callback.
+	 * 
+	 * @param pointHoverBorderColorCallback the point hover border color callback.
+	 */
+	public void setPointHoverBorderColor(NativeCallback pointHoverBorderColorCallback) {
+		// resets callback
+		setPointHoverBorderColor((ColorCallback<DatasetContext>) null);
+		// resets previous setting
+		resetBeingCallback(InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR);
+		// stores value
+		setValue(InternalCanvasObjectProperty.POINT_HOVER_BORDER_COLOR, pointHoverBorderColorCallback);
 	}
 
 	/**
@@ -1900,6 +1987,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
+	 * Sets the point hover border width callback.
+	 * 
+	 * @param pointHoverBorderWidthCallback the point hover border width callback to set
+	 */
+	public void setPointHoverBorderWidth(NativeCallback pointHoverBorderWidthCallback) {
+		// resets callback
+		setPointHoverBorderWidth((WidthCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.POINT_HOVER_BORDER_WIDTH, pointHoverBorderWidthCallback);
+	}
+
+	/**
 	 * Returns the point radius callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the point radius callback, if set, otherwise <code>null</code>.
@@ -1924,6 +2023,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.POINT_RADIUS);
 		}
+	}
+
+	/**
+	 * Sets the point radius callback.
+	 * 
+	 * @param pointRadiusCallback the point radius callback to set
+	 */
+	public void setPointRadius(NativeCallback pointRadiusCallback) {
+		// resets callback
+		setPointRadius((RadiusCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.POINT_RADIUS, pointRadiusCallback);
 	}
 
 	/**
@@ -1954,6 +2065,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
+	 * Sets the point hit radius callback.
+	 * 
+	 * @param pointHitRadiusCallback the point hit radius callback to set
+	 */
+	public void setPointHitRadius(NativeCallback pointHitRadiusCallback) {
+		// resets callback
+		setPointHitRadius((RadiusCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.POINT_HIT_RADIUS, pointHitRadiusCallback);
+	}
+
+	/**
 	 * Returns the point hover radius callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the point hover radius callback, if set, otherwise <code>null</code>.
@@ -1981,6 +2104,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
+	 * Sets the point hover radius callback.
+	 * 
+	 * @param pointHoverRadiusCallback the point hover radius callback to set
+	 */
+	public void setPointHoverRadius(NativeCallback pointHoverRadiusCallback) {
+		// resets callback
+		setPointHoverRadius((RadiusCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.POINT_HOVER_RADIUS, pointHoverRadiusCallback);
+	}
+
+	/**
 	 * Returns the point rotation callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the point rotation callback, if set, otherwise <code>null</code>.
@@ -2005,6 +2140,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.POINT_ROTATION);
 		}
+	}
+
+	/**
+	 * Sets the point rotation callback.
+	 * 
+	 * @param pointRotationCallback the point rotation callback to set
+	 */
+	public void setPointRotation(NativeCallback pointRotationCallback) {
+		// resets callback
+		setPointRotation((RotationCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.POINT_ROTATION, pointRotationCallback);
 	}
 
 	/**
@@ -2037,6 +2184,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(NativeCallback pointStyleCallback) {
+		// resets callback
+		setPointStyle((PointStyleCallback) null);
+		// stores value
+		setValue(Property.POINT_STYLE, pointStyleCallback);
+	}
+	
+	/**
 	 * Returns the border cap style callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the border cap style callback, if set, otherwise <code>null</code>.
@@ -2061,6 +2220,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.BORDER_CAP_STYLE);
 		}
+	}
+	
+	/**
+	 * Sets the border cap style callback.
+	 * 
+	 * @param borderCapStyleCallback the border cap style callback.
+	 */
+	public void setBorderCapStyle(NativeCallback borderCapStyleCallback) {
+		// resets callback
+		setBorderCapStyle((CapStyleCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.BORDER_CAP_STYLE, borderCapStyleCallback);
 	}
 
 	/**
@@ -2091,6 +2262,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
+	 * Sets the border join style callback.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback.
+	 */
+	public void setBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
+		// resets callback
+		setBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyleCallback);
+	}
+
+	/**
 	 * Returns the border dash callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the border dash callback, if set, otherwise <code>null</code>.
@@ -2115,6 +2298,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.BORDER_DASH);
 		}
+	}
+
+	/**
+	 * Sets the border dash callback.
+	 * 
+	 * @param borderDashCallback the border dash callback.
+	 */
+	public void setBorderDash(NativeCallback borderDashCallback) {
+		// resets callback
+		setBorderDash((BorderDashCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.BORDER_DASH, borderDashCallback);
 	}
 
 	/**
@@ -2145,6 +2340,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
+	 * Sets the border dash offset callback.
+	 * 
+	 * @param borderDashOffsetCallback the border dash offset callback.
+	 */
+	public void setBorderDashOffset(NativeCallback borderDashOffsetCallback) {
+		// resets callback
+		setBorderDashOffset((BorderDashOffsetCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.BORDER_DASH_OFFSET, borderDashOffsetCallback);
+	}
+
+	/**
 	 * Returns the border cap style callback when element is hovered, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the border cap style callback when element is hovered, if set, otherwise <code>null</code>
@@ -2169,6 +2376,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.HOVER_BORDER_CAP_STYLE);
 		}
+	}
+
+	/**
+	 * Sets the border cap style callback when element is hovered.
+	 * 
+	 * @param borderCapStyleCallback the border cap style callback when element is hovered
+	 */
+	public void setHoverBorderCapStyle(NativeCallback borderCapStyleCallback) {
+		// resets callback
+		setHoverBorderCapStyle((CapStyleCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HOVER_BORDER_CAP_STYLE, borderCapStyleCallback);
 	}
 
 	/**
@@ -2197,6 +2416,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			remove(Property.HOVER_BORDER_JOIN_STYLE);
 		}
 	}
+	
+	/**
+	 * Sets the border join style callback when element is hovered.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback when element is hovered.
+	 */
+	public void setHoverBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
+		// resets callback
+		setHoverBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HOVER_BORDER_JOIN_STYLE, borderJoinStyleCallback);
+	}
 
 	/**
 	 * Returns the border dash callback when element is hovered, if set, otherwise <code>null</code>.
@@ -2223,6 +2454,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.HOVER_BORDER_DASH);
 		}
+	}
+	
+	/**
+	 * Sets the border dash callback when element is hovered.
+	 * 
+	 * @param borderDashCallback the border dash callback when element is hovered.
+	 */
+	public void setHoverBorderDash(NativeCallback borderDashCallback) {
+		// resets callback
+		setHoverBorderDash((BorderDashCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HOVER_BORDER_DASH, borderDashCallback);
 	}
 
 	/**
@@ -2251,6 +2494,18 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			remove(Property.HOVER_BORDER_DASH_OFFSET);
 		}
 	}
+	
+	/**
+	 * Sets the border dash offset callback when element is hovered.
+	 * 
+	 * @param borderDashOffsetCallback the border dash offset callback when element is hovered.
+	 */
+	public void setHoverBorderDashOffset(NativeCallback borderDashOffsetCallback) {
+		// resets callback
+		setHoverBorderDashOffset((BorderDashOffsetCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HOVER_BORDER_DASH_OFFSET, borderDashOffsetCallback);
+	}
 
 	/**
 	 * Returns the fill callback, if set, otherwise <code>null</code>.
@@ -2267,6 +2522,15 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param fillCallback the fill callback.
 	 */
 	public void setFill(FillCallback fillCallback) {
+		fillHandler.setFill(fillCallback);
+	}
+	
+	/**
+	 * Sets the fill callback.
+	 * 
+	 * @param fillCallback the fill callback.
+	 */
+	public void setFill(NativeCallback fillCallback) {
 		fillHandler.setFill(fillCallback);
 	}
 

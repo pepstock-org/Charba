@@ -17,6 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
@@ -138,6 +139,18 @@ abstract class AbstractScaleLines extends AxisContainer {
 	}
 
 	/**
+	 * Sets the color callback instance.
+	 * 
+	 * @param colorCallback the color callback instance
+	 */
+	public void setColor(NativeCallback colorCallback) {
+		// resets callback
+		setColor((ColorCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(checkAndGet(), Property.COLOR, colorCallback);
+	}
+
+	/**
 	 * Returns the line width callback instance.
 	 * 
 	 * @return the line width callback instance
@@ -159,6 +172,18 @@ abstract class AbstractScaleLines extends AxisContainer {
 	}
 
 	/**
+	 * Sets the line width callback instance.
+	 * 
+	 * @param lineWidthCallback the line width callback instance.
+	 */
+	public void setLineWidth(NativeCallback lineWidthCallback) {
+		// resets callback
+		setLineWidth((WidthCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(checkAndGet(), Property.LINE_WIDTH, lineWidthCallback);
+	}
+
+	/**
 	 * Returns the border dash offset callback instance.
 	 * 
 	 * @return the border dash offset callback instance
@@ -177,6 +202,18 @@ abstract class AbstractScaleLines extends AxisContainer {
 		this.borderDashOffsetCallback = borderDashOffsetCallback;
 		// stores and manages callback
 		getAxis().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallback, borderDashOffsetCallbackProxy);
+	}
+
+	/**
+	 * Sets the border dash offset callback instance.
+	 * 
+	 * @param borderDashOffsetCallback the border dash offset callback instance
+	 */
+	public void setBorderDashOffset(NativeCallback borderDashOffsetCallback) {
+		// resets callback
+		setBorderDashOffset((BorderDashOffsetCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallback);
 	}
 
 	/**

@@ -22,6 +22,7 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.CubicInterpolationModeCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -437,6 +438,18 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.CUBIC_INTERPOLATION_MODE);
 		}
+	}
+	
+	/**
+	 * Sets the border join style callback.
+	 * 
+	 * @param cubicInterpolationModeCallback the border join style callback.
+	 */
+	public void setCubicInterpolationMode(NativeCallback cubicInterpolationModeCallback) {
+		// resets callback
+		setCubicInterpolationMode((CubicInterpolationModeCallback) null);
+		// stores value
+		setValue(Property.CUBIC_INTERPOLATION_MODE, cubicInterpolationModeCallback);
 	}
 
 	/**

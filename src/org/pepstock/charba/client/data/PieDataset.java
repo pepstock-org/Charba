@@ -22,6 +22,7 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
@@ -384,6 +385,18 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	}
 
 	/**
+	 * Sets the offset callback.
+	 * 
+	 * @param offsetCallback the offset callback.
+	 */
+	public void setOffset(NativeCallback offsetCallback) {
+		// resets callback
+		setOffset((OffsetCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.OFFSET, offsetCallback);
+	}
+
+	/**
 	 * Returns the offset callback, when dataset is hovered, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the offset callback, when dataset is hovered, if set, otherwise <code>null</code>.
@@ -411,6 +424,18 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	}
 
 	/**
+	 * Sets the offset callback, when dataset is hovered.
+	 * 
+	 * @param hoverOffsetCallback the offset callback, when dataset is hovered.
+	 */
+	public void setHoverOffset(NativeCallback hoverOffsetCallback) {
+		// resets callback
+		setHoverOffset((OffsetCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HOVER_OFFSET, hoverOffsetCallback);
+	}
+	
+	/**
 	 * Returns the border radius callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the border radius callback, if set, otherwise <code>null</code>.
@@ -429,6 +454,18 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		this.borderRadiusCallback = borderRadiusCallback;
 		// checks if callback is consistent
 		borderItemsHandler.setBorderItemCallback(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadiusCallback, borderRadiusCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Sets the border radius callback.
+	 * 
+	 * @param borderRadiusCallback the border radius callback.
+	 */
+	public void setBorderRadius(NativeCallback borderRadiusCallback) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback) null);
+		// stores value
+		setValue(Property.BORDER_RADIUS, borderRadiusCallback);
 	}
 
 }

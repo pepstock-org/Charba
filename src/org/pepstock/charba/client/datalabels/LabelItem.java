@@ -17,6 +17,7 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
@@ -525,7 +526,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setBorderRadius(double radius) {
 		// resets callback
-		setBorderRadius(null);
+		setBorderRadius((RadiusCallback<DataLabelsContext>)null);
 		// stores the value
 		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(radius));
 	}
@@ -547,7 +548,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setBorderWidth(int width) {
 		// resets callback
-		setBorderWidth(null);
+		setBorderWidth((WidthCallback<DataLabelsContext>)null);
 		// stores the value
 		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(width));
 	}
@@ -569,7 +570,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setClamp(boolean clamp) {
 		// resets callback
-		setClamp(null);
+		setClamp((ClampCallback)null);
 		// stores the value
 		setValue(Property.CLAMP, clamp);
 	}
@@ -591,7 +592,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setClip(boolean clip) {
 		// resets callback
-		setClip(null);
+		setClip((ClipCallback)null);
 		// stores the value
 		setValue(Property.CLIP, clip);
 	}
@@ -706,7 +707,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setOffset(int offset) {
 		// resets callback
-		setOffset(null);
+		setOffset((OffsetCallback<DataLabelsContext>)null);
 		// stores the value
 		setValue(Property.OFFSET, offset);
 	}
@@ -730,7 +731,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setOpacity(double opacity) {
 		// resets callback
-		setOpacity(null);
+		setOpacity((OpacityCallback)null);
 		// stores the value
 		setValue(Property.OPACITY, Checker.betweenOrMaximum(opacity, 0, 1));
 	}
@@ -752,7 +753,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setRotation(double rotation) {
 		// resets callback
-		setRotation(null);
+		setRotation((RotationCallback<DataLabelsContext>)null);
 		// stores the value
 		setValue(Property.ROTATION, rotation);
 	}
@@ -836,7 +837,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setTextStrokeWidth(int textStrokeWidth) {
 		// resets callback
-		setTextStrokeWidth(null);
+		setTextStrokeWidth((WidthCallback<DataLabelsContext>)null);
 		// stores the value
 		setValue(Property.TEXT_STROKE_WIDTH, Checker.positiveOrZero(textStrokeWidth));
 	}
@@ -858,7 +859,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setTextShadowBlur(double textShadowBlur) {
 		// resets callback
-		setTextShadowBlur(null);
+		setTextShadowBlur((TextShadowBlurCallback)null);
 		// stores the value
 		setValue(Property.TEXT_SHADOW_BLUR, textShadowBlur);
 	}
@@ -937,6 +938,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the background color callback.
+	 * 
+	 * @param backgroundColorCallback the background color callback.
+	 */
+	public final void setBackgroundColor(NativeCallback backgroundColorCallback) {
+		// resets callback
+		setBackgroundColor((ColorCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.BACKGROUND_COLOR, backgroundColorCallback);
+	}
+	
+	/**
 	 * Returns the border color callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the border color callback, if set, otherwise <code>null</code>.
@@ -956,6 +969,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the border color callback.
+	 * 
+	 * @param borderColorCallback the border color callback.
+	 */
+	public final void setBorderColor(NativeCallback borderColorCallback) {
+		// resets callback
+		setBorderColor((ColorCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.BORDER_COLOR, borderColorCallback);
+	}
+	
+	/**
 	 * Returns the color callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the color callback, if set, otherwise <code>null</code>.
@@ -974,6 +999,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		COLOR_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, colorCallback, colorCallbackProxy.getProxy());
 	}
 
+	/**
+	 * Sets the color callback.
+	 * 
+	 * @param colorCallback the color callback.
+	 */
+	public final void setColor(NativeCallback colorCallback) {
+		// resets callback
+		setColor((ColorCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.COLOR, colorCallback);
+	}
+	
 	/**
 	 * Returns the formatter callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1013,6 +1050,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the align callback.
+	 * 
+	 * @param alignCallback the align callback to set
+	 */
+	public final void setAlign(NativeCallback alignCallback) {
+		// resets callback
+		setAlign((AlignCallback) null);
+		// stores value
+		setValue(Property.ALIGN, alignCallback);
+	}
+
+	/**
 	 * Returns the anchor callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the anchor callback, if set, otherwise <code>null</code>.
@@ -1029,6 +1078,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setAnchor(AnchorCallback anchorCallback) {
 		ANCHOR_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, anchorCallback, anchorCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the anchor callback.
+	 * 
+	 * @param anchorCallback the anchor callback to set
+	 */
+	public final void setAnchor(NativeCallback anchorCallback) {
+		// resets callback
+		setAnchor((AnchorCallback) null);
+		// stores value
+		setValue(Property.ANCHOR, anchorCallback);
 	}
 
 	/**
@@ -1051,6 +1112,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the border radius callback.
+	 * 
+	 * @param borderRadiusCallback the border radius callback to set
+	 */
+	public final void setBorderRadius(NativeCallback borderRadiusCallback) {
+		// resets callback
+		setBorderRadius((RadiusCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.BORDER_RADIUS, borderRadiusCallback);
+	}
+	
+	/**
 	 * Returns the border width callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the border width callback, if set, otherwise <code>null</code>.
@@ -1067,6 +1140,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setBorderWidth(WidthCallback<DataLabelsContext> borderWidthCallback) {
 		BORDER_WIDTH_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, borderWidthCallback, borderWidthCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the border width callback.
+	 * 
+	 * @param borderWidthCallback the border width callback to set
+	 */
+	public final void setBorderWidth(NativeCallback borderWidthCallback) {
+		// resets callback
+		setBorderWidth((WidthCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.BORDER_WIDTH, borderWidthCallback);
 	}
 
 	/**
@@ -1089,6 +1174,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the clamp callback.
+	 * 
+	 * @param clampCallback the clamp callback to set
+	 */
+	public final void setClamp(NativeCallback clampCallback) {
+		// resets callback
+		setClamp((ClampCallback) null);
+		// stores value
+		setValue(Property.CLAMP, clampCallback);
+	}
+
+	/**
 	 * Returns the clip callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the clip callback, if set, otherwise <code>null</code>.
@@ -1108,6 +1205,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the clip callback.
+	 * 
+	 * @param clipCallback the clip callback to set
+	 */
+	public final void setClip(NativeCallback clipCallback) {
+		// resets callback
+		setClip((ClipCallback) null);
+		// stores value
+		setValue(Property.CLIP, clipCallback);
+	}
+	
+	/**
 	 * Returns the display callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the display callback, if set, otherwise <code>null</code>.
@@ -1124,6 +1233,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setDisplay(DisplayCallback displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the display callback.
+	 * 
+	 * @param displayCallback the display callback to set
+	 */
+	public final void setDisplay(NativeCallback displayCallback) {
+		// resets callback
+		setDisplay((DisplayCallback) null);
+		// stores value
+		setValue(Property.DISPLAY, displayCallback);
 	}
 
 	/**
@@ -1146,6 +1267,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the offset callback.
+	 * 
+	 * @param offsetCallback the offset callback to set
+	 */
+	public final void setOffset(NativeCallback offsetCallback) {
+		// resets callback
+		setOffset((OffsetCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.OFFSET, offsetCallback);
+	}
+
+	/**
 	 * Returns the opacity callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the opacity callback, if set, otherwise <code>null</code>.
@@ -1162,6 +1295,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setOpacity(OpacityCallback opacityCallback) {
 		OPACITY_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, opacityCallback, opacityCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the opacity callback.
+	 * 
+	 * @param opacityCallback the opacity callback to set
+	 */
+	public final void setOpacity(NativeCallback opacityCallback) {
+		// resets callback
+		setOpacity((OpacityCallback) null);
+		// stores value
+		setValue(Property.OPACITY, opacityCallback);
 	}
 
 	/**
@@ -1184,6 +1329,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the rotation callback.
+	 * 
+	 * @param rotationCallback the rotation callback to set
+	 */
+	public final void setRotation(NativeCallback rotationCallback) {
+		// resets callback
+		setRotation((RotationCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.ROTATION, rotationCallback);
+	}
+
+	/**
 	 * Returns the text align callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the text align callback, if set, otherwise <code>null</code>.
@@ -1203,6 +1360,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the text align callback.
+	 * 
+	 * @param textAlignCallback the text align callback to set
+	 */
+	public final void setTextAlign(NativeCallback textAlignCallback) {
+		// resets callback
+		setTextAlign((TextAlignCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.TEXT_ALIGN, textAlignCallback);
+	}
+	
+	/**
 	 * Returns the text stroke color callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the text stroke color callback, if set, otherwise <code>null</code>.
@@ -1219,6 +1388,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setTextStrokeColor(ColorCallback<DataLabelsContext> textStrokeColorCallback) {
 		TEXT_STROKE_COLOR_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, textStrokeColorCallback, textStrokeColorCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Sets the text stroke color callback.
+	 * 
+	 * @param textStrokeColorCallback the text stroke color callback to set
+	 */
+	public final void setTextStrokeColor(NativeCallback textStrokeColorCallback) {
+		// resets callback
+		setTextStrokeColor((ColorCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.TEXT_STROKE_COLOR, textStrokeColorCallback);
 	}
 
 	/**
@@ -1241,6 +1422,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the text stroke width callback.
+	 * 
+	 * @param textStrokeWidthCallback the text stroke width callback to set
+	 */
+	public final void setTextStrokeWidth(NativeCallback textStrokeWidthCallback) {
+		// resets callback
+		setTextStrokeWidth((WidthCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.TEXT_STROKE_WIDTH, textStrokeWidthCallback);
+	}
+
+	/**
 	 * Returns the text shadow blur callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the text shadow blur callback, if set, otherwise <code>null</code>.
@@ -1257,6 +1450,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setTextShadowBlur(TextShadowBlurCallback textShadowBlurCallback) {
 		TEXT_SHADOW_BLUR_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, textShadowBlurCallback, textShadowBlurCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the text shadow blur callback.
+	 * 
+	 * @param textShadowBlurCallback the text shadow blur callback to set
+	 */
+	public final void setTextShadowBlur(NativeCallback textShadowBlurCallback) {
+		// resets callback
+		setTextShadowBlur((TextShadowBlurCallback) null);
+		// stores value
+		setValue(Property.TEXT_SHADOW_BLUR, textShadowBlurCallback);
 	}
 
 	/**
@@ -1279,6 +1484,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the text shadow color callback.
+	 * 
+	 * @param textShadowColorCallback the text shadow color callback to set
+	 */
+	public final void setTextShadowColor(NativeCallback textShadowColorCallback) {
+		// resets callback
+		setTextShadowColor((ColorCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.TEXT_SHADOW_COLOR, textShadowColorCallback);
+	}
+
+	/**
 	 * Returns the font callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
@@ -1296,6 +1513,19 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	@Override
 	public final void setFont(FontCallback<DataLabelsContext> fontCallback) {
 		FONT_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, fontCallback, fontCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the the font callback.
+	 * 
+	 * @param fontCallback the font callback to set
+	 */
+	@Override
+	public final void setFont(NativeCallback fontCallback) {
+		// resets callback
+		setFont((FontCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.FONT, fontCallback);
 	}
 
 	/**
@@ -1324,6 +1554,20 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 			// stores the padding
 			setValue(Property.PADDING, padding);
 		}
+	}
+	
+	/**
+	 * Sets the padding callback.
+	 * 
+	 * @param paddingCallback the padding callback to set
+	 */
+	@Override
+	public final void setPadding(NativeCallback paddingCallback) {
+		// resets callback
+		setPadding((PaddingCallback<DataLabelsContext>) null);
+		// stores value
+		setValue(Property.PADDING, paddingCallback);
+
 	}
 
 	// ------------------------------

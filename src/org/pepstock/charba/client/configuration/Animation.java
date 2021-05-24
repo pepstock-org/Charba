@@ -20,6 +20,7 @@ import org.pepstock.charba.client.callbacks.DelayCallback;
 import org.pepstock.charba.client.callbacks.DurationCallback;
 import org.pepstock.charba.client.callbacks.EasingCallback;
 import org.pepstock.charba.client.callbacks.LoopCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -277,6 +278,16 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	}
 
 	/**
+	 * Sets the number of milliseconds an animation takes by a callback.
+	 * 
+	 * @param durationCallback the callback instance to use
+	 */
+	@Override
+	public void setDuration(NativeCallback durationCallback) {
+		checkAndGet().setDuration(durationCallback);
+	}
+
+	/**
 	 * Returns the callback to set the delay before starting the animations.
 	 * 
 	 * @return the callback instance to use
@@ -296,6 +307,16 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 		checkAndGet().setDelay(delayCallback);
 	}
 
+	/**
+	 * Sets the delay before starting the animations by a callback.
+	 * 
+	 * @param delayCallback the callback instance to use
+	 */
+	@Override
+	public void setDelay(NativeCallback delayCallback) {
+		checkAndGet().setDelay(delayCallback);
+	}
+	
 	/**
 	 * Returns the callback to loop the animations endlessly.
 	 * 
@@ -317,6 +338,16 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	}
 
 	/**
+	 * Sets to loop the animations endlessly by a callback.
+	 * 
+	 * @param loopCallback the callback instance to use
+	 */
+	@Override
+	public void setLoop(NativeCallback loopCallback) {
+		checkAndGet().setLoop(loopCallback);
+	}
+	
+	/**
 	 * Returns the callback to set the animation easing.
 	 * 
 	 * @return the callback instance to use
@@ -336,6 +367,16 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 		checkAndGet().setEasing(easingCallback);
 	}
 
+	/**
+	 * Sets the animation easing by a callback.
+	 * 
+	 * @param easingCallback the callback instance to use
+	 */
+	@Override
+	public void setEasing(NativeCallback easingCallback) {
+		checkAndGet().setEasing(easingCallback);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

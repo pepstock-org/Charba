@@ -18,6 +18,7 @@ package org.pepstock.charba.client.commons;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
@@ -169,6 +170,17 @@ final class NativeObjectUtils {
 	 */
 	static void defineCallbackProperty(NativeObject object, String key, CallbackProxy.Proxy value) {
 		NativeJsObjectCallbackProxy.set(object, key, value);
+	}
+	
+	/**
+	 * Defines a new property directly on object object, or modifies an existing property.
+	 * 
+	 * @param object native object to be managed
+	 * @param key the name of the property to be defined or modified.
+	 * @param value the object associated with the property.
+	 */
+	static void defineCallbackProperty(NativeObject object, String key, NativeCallback value) {
+		NativeJsObjectCallback.set(object, key, value);
 	}
 
 	/**

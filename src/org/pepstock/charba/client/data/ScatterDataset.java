@@ -18,6 +18,7 @@ package org.pepstock.charba.client.data;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.FillCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
@@ -121,6 +122,17 @@ public final class ScatterDataset extends LineDataset {
 	 */
 	@Override
 	public void setFill(FillCallback fillCallback) {
+		// sets always to no fill
+		super.setFill(Fill.FALSE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.LiningDataset#setFill(org.pepstock.charba.client.callbacks.NativeCallback)
+	 */
+	@Override
+	public void setFill(NativeCallback fillCallback) {
 		// sets always to no fill
 		super.setFill(Fill.FALSE);
 	}

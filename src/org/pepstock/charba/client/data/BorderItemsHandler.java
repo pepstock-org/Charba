@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayInteger;
@@ -241,6 +242,16 @@ final class BorderItemsHandler extends NativeObjectContainer {
 	void setBorderItemCallback(Key property, Object borderItemCallback, Proxy proxy) {
 		setBorderItemCallback(property, null, borderItemCallback, proxy);
 	}
+	
+	/**
+	 * Sets the border item callback.
+	 * 
+	 * @param property property to use to store the values
+	 * @param borderItemCallback the border item callback to set
+	 */
+	void setBorderItemCallback(Key property, NativeCallback borderItemCallback) {
+		setBorderItemCallback(property, null, borderItemCallback);
+	}
 
 	/**
 	 * Sets the border item callback.
@@ -265,5 +276,29 @@ final class BorderItemsHandler extends NativeObjectContainer {
 			setValue(propertyType, BorderItemType.UNKNOWN);
 		}
 	}
+	
+	/**
+	 * Sets the border item callback.
+	 * 
+	 * @param property property to use to store the values
+	 * @param propertyType property to use to store the type
+	 * @param borderItemCallback the border item callback to set
+	 */
+	void setBorderItemCallback(Key property, Key propertyType, NativeCallback borderItemCallback) {
+		// checks if callback is consistent
+		if (borderItemCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(property, borderItemCallback);
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(property);
+		}
+		// checks if property type is valid
+		if (Key.isValid(propertyType)) {
+			// resets the flag about border with type
+			setValue(propertyType, BorderItemType.UNKNOWN);
+		}
+	}
+
 
 }

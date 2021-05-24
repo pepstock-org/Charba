@@ -18,6 +18,7 @@ package org.pepstock.charba.client.annotation;
 import java.util.Date;
 
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -505,6 +506,18 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	}
 
 	/**
+	 * Sets the callback to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @param valueCallback to set the left edge of the box, in units along the x axis
+	 */
+	public final void setXMin(NativeCallback valueCallback) {
+		// resets callback
+		setXMin((ValueCallback)null);
+		// stores values
+		setValueAndAddToParent(Property.X_MIN, valueCallback);
+	}
+
+	/**
 	 * Returns the callback called to set the right edge of the box.
 	 * 
 	 * @return the callback called to set the right edge of the box
@@ -523,7 +536,17 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 		X_MAX_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, xMaxCallbackProxy.getProxy());
 	}
 
-	// Y
+	/**
+	 * Sets the callback to set the right edge of the box.
+	 * 
+	 * @param valueCallback to set the right edge of the box
+	 */
+	public final void setXMax(NativeCallback valueCallback) {
+		// resets callback
+		setXMax((ValueCallback)null);
+		// stores values
+		setValueAndAddToParent(Property.X_MAX, valueCallback);
+	}
 
 	/**
 	 * Returns the callback called to set the bottom edge of the box.
@@ -543,6 +566,18 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	public final void setYMin(ValueCallback valueCallback) {
 		Y_MIN_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yMinCallbackProxy.getProxy());
 	}
+	
+	/**
+	 * Sets the callback to set the bottom edge of the box.
+	 * 
+	 * @param valueCallback to set the bottom edge of the box
+	 */
+	public final void setYMin(NativeCallback valueCallback) {
+		// resets callback
+		setYMin((ValueCallback)null);
+		// stores values
+		setValueAndAddToParent(Property.Y_MIN, valueCallback);
+	}
 
 	/**
 	 * Returns the callback called to set the top edge of the box in units along the y axis.
@@ -561,6 +596,18 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setYMax(ValueCallback valueCallback) {
 		Y_MAX_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yMaxCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the top edge of the box in units along the y axis.
+	 * 
+	 * @param valueCallback to set the top edge of the box in units along the y axis
+	 */
+	public final void setYMax(NativeCallback valueCallback) {
+		// resets callback
+		setYMax((ValueCallback)null);
+		// stores values
+		setValueAndAddToParent(Property.Y_MAX, valueCallback);
 	}
 
 }

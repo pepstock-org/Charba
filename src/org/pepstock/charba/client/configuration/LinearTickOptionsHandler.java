@@ -17,6 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.CountCallback;
 import org.pepstock.charba.client.callbacks.MaxTicksLimitCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PrecisionCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
@@ -130,6 +131,18 @@ final class LinearTickOptionsHandler extends AxisContainer {
 	}
 
 	/**
+	 * Sets the count callback instance.
+	 * 
+	 * @param countCallback the count callback instance
+	 */
+	void setCount(NativeCallback countCallback) {
+		// resets callback
+		setCount((CountCallback)null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.COUNT, countCallback);
+	}
+
+	/**
 	 * Returns the maxTicksLimit callback instance.
 	 * 
 	 * @return the maxTicksLimit callback instance
@@ -151,6 +164,18 @@ final class LinearTickOptionsHandler extends AxisContainer {
 	}
 
 	/**
+	 * Sets the maxTicksLimit callback instance.
+	 * 
+	 * @param maxTicksLimitCallback the maxTicksLimit callback instance
+	 */
+	void setMaxTicksLimit(NativeCallback maxTicksLimitCallback) {
+		// resets callback
+		setMaxTicksLimit((MaxTicksLimitCallback)null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.MAX_TICKS_LIMIT, maxTicksLimitCallback);
+	}
+	
+	/**
 	 * Returns the precision callback instance.
 	 * 
 	 * @return the precision callback instance
@@ -169,6 +194,18 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		this.precisionCallback = precisionCallback;
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.PRECISION, precisionCallback, precisionCallbackProxy);
+	}
+	
+	/**
+	 * Sets the precision callback instance.
+	 * 
+	 * @param precisionCallback the precision callback instance
+	 */
+	void setPrecision(NativeCallback precisionCallback) {
+		// resets callback
+		setPrecision((PrecisionCallback)null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.PRECISION, precisionCallback);
 	}
 
 	/**
@@ -190,6 +227,18 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		this.stepSizeCallback = stepSizeCallback;
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.STEP_SIZE, stepSizeCallback, stepSizeCallbackProxy);
+	}
+
+	/**
+	 * Sets the stepSize callback instance.
+	 * 
+	 * @param stepSizeCallback the stepSize callback instance
+	 */
+	void setStepSize(NativeCallback stepSizeCallback) {
+		// resets callback
+		setStepSize((StepSizeCallback)null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.STEP_SIZE, stepSizeCallback);
 	}
 
 }

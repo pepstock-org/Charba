@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.BorderAlignCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.enums.BorderAlign;
 
 /**
@@ -96,6 +97,18 @@ interface HasBorderAlign {
 	 * @param borderAlignCallback the border align callback to set
 	 */
 	default void setBorderAlign(BorderAlignCallback borderAlignCallback) {
+		// checks if border align handler is consistent
+		if (getBorderAlignHandler() != null) {
+			getBorderAlignHandler().setBorderAlign(borderAlignCallback);
+		}
+	}
+	
+	/**
+	 * Sets the border align callback.
+	 * 
+	 * @param borderAlignCallback the border align callback to set
+	 */
+	default void setBorderAlign(NativeCallback borderAlignCallback) {
 		// checks if border align handler is consistent
 		if (getBorderAlignHandler() != null) {
 			getBorderAlignHandler().setBorderAlign(borderAlignCallback);

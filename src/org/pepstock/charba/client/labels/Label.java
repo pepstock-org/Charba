@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -656,6 +657,18 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	}
 
 	/**
+	 * Sets the render callback.
+	 * 
+	 * @param renderCallback the render callback to set
+	 */
+	public void setRender(NativeCallback renderCallback) {
+		// resets callback
+		setRender((RenderCallback) null);
+		// stores value
+		setValue(Property.RENDER, renderCallback);
+	}
+
+	/**
 	 * Returns the font callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>
@@ -676,6 +689,19 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	}
 
 	/**
+	 * Sets the font callback.
+	 * 
+	 * @param fontCallback the font callback.
+	 */
+	@Override
+	public void setFont(NativeCallback fontCallback) {
+		// resets callback
+		setFont((FontCallback<LabelsContext>) null);
+		// stores value
+		setValue(Property.FONT, fontCallback);
+	}
+
+	/**
 	 * Returns the font color callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the font color callback, if set, otherwise <code>null</code>
@@ -692,6 +718,18 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	 */
 	public void setColor(ColorCallback<LabelsContext> colorCallback) {
 		COLOR_PROPERTY_HANDLER.setCallback(this, LabelsPlugin.ID, colorCallback, colorCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Sets the font color callback.
+	 * 
+	 * @param colorCallback the font color callback.
+	 */
+	public void setColor(NativeCallback colorCallback) {
+		// resets callback
+		setColor((ColorCallback<LabelsContext>) null);
+		// stores value
+		setValue(Property.COLOR, colorCallback);
 	}
 
 	// ------------------------------

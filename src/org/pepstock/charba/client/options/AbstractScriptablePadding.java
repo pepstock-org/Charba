@@ -115,7 +115,7 @@ public abstract class AbstractScriptablePadding<T extends ChartContext> extends 
 		// checks if the padding has been set previously as a callback
 		if (scriptablePaddingProvider.getPaddingCallback() != null) {
 			// if yes, resets it
-			scriptablePaddingProvider.setPadding(null);
+			scriptablePaddingProvider.setPadding((PaddingCallback<T>)null);
 		}
 	}
 

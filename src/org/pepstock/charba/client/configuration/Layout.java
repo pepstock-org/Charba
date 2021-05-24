@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.ChartContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -122,6 +123,19 @@ public class Layout extends ConfigurationOptionsContainer implements IsScriptabl
 		this.paddingCallback = paddingCallback;
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getLayout(), Property.PADDING, paddingCallback, paddingCallbackProxy);
+	}
+	
+	/**
+	 * Sets the padding callback.
+	 * 
+	 * @param paddingCallback the padding callback to set
+	 */
+	@Override
+	public void setPadding(NativeCallback paddingCallback) {
+		// resets callback
+		setPadding((PaddingCallback<ChartContext>)null);
+		// stores and manages callback
+		getOptions().setCallback(getOptions().getConfiguration().getLayout(), Property.PADDING, paddingCallback);
 	}
 
 }

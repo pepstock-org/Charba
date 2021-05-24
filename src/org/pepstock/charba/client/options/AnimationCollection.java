@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.FromCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -446,6 +447,18 @@ public final class AnimationCollection extends AbstractAnimation<IsAnimationColl
 	}
 
 	/**
+	 * Sets the start value for the animation by a callback.
+	 * 
+	 * @param fromCallback the callback instance to use to set the start value for the animation
+	 */
+	public void setFrom(NativeCallback fromCallback) {
+		// resets callback
+		setFrom((FromCallback) null);
+		// stores value
+		setValueAndAddToParent(Property.FROM, fromCallback);
+	}
+
+	/**
 	 * Returns the callback to set the end value for the animation.
 	 * 
 	 * @return the callback instance to use to set the end value for the animation
@@ -464,6 +477,18 @@ public final class AnimationCollection extends AbstractAnimation<IsAnimationColl
 		TO_PROPERTY_HANDLER.setCallback(this, scope, toCallback, toCallbackProxy.getProxy());
 	}
 
+	/**
+	 * Sets the end value for the animation by a callback.
+	 * 
+	 * @param toCallback the callback instance to use to set the end value for the animation
+	 */
+	public void setTo(NativeCallback toCallback) {
+		// resets callback
+		setTo((ToCallback) null);
+		// stores value
+		setValueAndAddToParent(Property.TO, toCallback);
+	}
+	
 	/**
 	 * Invokes the callback returning the value of from or to animations.
 	 * 

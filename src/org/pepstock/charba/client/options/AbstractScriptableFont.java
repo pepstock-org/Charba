@@ -143,7 +143,7 @@ public abstract class AbstractScriptableFont<T extends ChartContext> extends Abs
 		// checks if the font has been set previously as a callback
 		if (scriptableFontProvider.getFontCallback() != null) {
 			// if yes, resets it
-			scriptableFontProvider.setFont(null);
+			scriptableFontProvider.setFont((FontCallback<T>)null);
 		}
 	}
 

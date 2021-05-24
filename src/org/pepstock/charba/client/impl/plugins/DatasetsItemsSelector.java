@@ -21,6 +21,7 @@ import java.util.Map;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.configuration.LineOptions;
@@ -210,7 +211,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// overrides the tooltip configuration disabling it
 			chart.getOptions().getTooltips().setEnabled(false);
 			// resets the padding callback
-			chart.getOptions().getLayout().setPadding(null);
+			chart.getOptions().getLayout().setPadding((NativeCallback)null);
 			// overrides the events configuration setting only the following
 			chart.getOptions().setEvents(Event.CLICK, Event.TOUCHSTART);
 			// checks if handler on legend to avoid to remove all data sets has been already added

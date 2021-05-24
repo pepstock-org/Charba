@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.FillCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.AbstractNode;
@@ -130,6 +131,18 @@ final class LiningDatasetFillHandler extends FillHandler {
 		}
 		// remove if exist flag
 		remove(FillHandler.Property.CHARBA_FILLING_MODE);
+	}
+	
+	/**
+	 * Sets the fill callback.
+	 * 
+	 * @param fillCallback the fill callback.
+	 */
+	void setFill(NativeCallback fillCallback) {
+		// resets callback
+		setFill((FillCallback) null);
+		// stores value
+		setValue(FillHandler.Property.FILL, fillCallback);
 	}
 
 	/**

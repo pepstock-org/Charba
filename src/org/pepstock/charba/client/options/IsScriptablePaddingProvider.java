@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.callbacks.ChartContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 
 /**
@@ -40,4 +41,10 @@ public interface IsScriptablePaddingProvider<T extends ChartContext> {
 	 */
 	void setPadding(PaddingCallback<T> paddingCallback);
 
+	/**
+	 * Sets the padding callback.
+	 * 
+	 * @param paddingCallback the padding callback.
+	 */
+	void setPadding(NativeCallback paddingCallback);
 }

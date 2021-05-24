@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.options.IsFont;
@@ -197,7 +198,8 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 		// checks if the font has been set previously as a callback
 		if (scriptableFontProvider != null && scriptableFontProvider.getFontCallback() != null) {
 			// if yes, resets it
-			scriptableFontProvider.setFont(null);
+			// resets by native callback to avoid conflicts on generics
+			scriptableFontProvider.setFont((NativeCallback)null);
 		}
 	}
 

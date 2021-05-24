@@ -32,6 +32,7 @@ import org.pepstock.charba.client.callbacks.BorderDashCallback;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
@@ -297,7 +298,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setDisplay(boolean display) {
 		// resets callback
-		setDisplay(null);
+		setDisplay((DisplayCallback<AnnotationContext>)null);
 		// stores value
 		setValue(Property.DISPLAY, display);
 	}
@@ -319,7 +320,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setAdjustScaleRange(boolean display) {
 		// resets callback
-		setAdjustScaleRange(null);
+		setAdjustScaleRange((AdjustScaleRangeCallback)null);
 		// stores value
 		setValue(Property.ADJUST_SCALE_RANGE, display);
 	}
@@ -417,7 +418,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderWidth(int borderWidth) {
 		// resets callback
-		setBorderWidth(null);
+		setBorderWidth((WidthCallback<AnnotationContext>)null);
 		// stores value
 		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
@@ -459,7 +460,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderDashOffset(double borderDashOffset) {
 		// resets callback
-		setBorderDashOffset(null);
+		setBorderDashOffset((BorderDashOffsetCallback<AnnotationContext>)null);
 		// stores value
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
@@ -498,6 +499,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
+	 * Sets the callback to set the draw time which defines when the annotations are drawn.
+	 * 
+	 * @param drawTimeCallback to set the draw time which defines when the annotations are drawn
+	 */
+	public final void setDrawTime(NativeCallback drawTimeCallback) {
+		// resets callback
+		setDrawTime((DrawTimeCallback)null);
+		// stores values
+		setValueAndAddToParent(AnnotationOptions.Property.DRAW_TIME, drawTimeCallback);
+	}
+
+	/**
 	 * Returns the callback called to set whether the annotation should be displayed.
 	 * 
 	 * @return the callback called to set whether the annotation should be displayed
@@ -514,6 +527,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setDisplay(DisplayCallback<AnnotationContext> displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set whether the annotation should be displayed.
+	 * 
+	 * @param displayCallback to set whether the annotation should be displayed
+	 */
+	public final void setDisplay(NativeCallback displayCallback) {
+		// resets callback
+		setDisplay((DisplayCallback<AnnotationContext>)null);
+		// stores values
+		setValueAndAddToParent(Property.DISPLAY, displayCallback);
 	}
 
 	/**
@@ -536,6 +561,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
+	 * Sets the callback to set the color of the border of annotation.
+	 * 
+	 * @param borderColorCallback to set the color of the border of annotation
+	 */
+	public final void setBorderColor(NativeCallback borderColorCallback) {
+		// resets callback
+		setBorderColor((ColorCallback<AnnotationContext>)null);
+		// stores values
+		setValueAndAddToParent(Property.BORDER_COLOR, borderColorCallback);
+	}
+
+	/**
 	 * Returns the callback called to set the width of the border in pixels.
 	 * 
 	 * @return the callback called to set the width of the border in pixels
@@ -552,6 +589,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderWidth(WidthCallback<AnnotationContext> borderWidthCallback) {
 		BORDER_WIDTH_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderWidthCallback, borderWidthCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the color of the width of the border in pixels.
+	 * 
+	 * @param borderWidthCallback to set the width of the border in pixels
+	 */
+	public final void setBorderWidth(NativeCallback borderWidthCallback) {
+		// resets callback
+		setBorderWidth((WidthCallback<AnnotationContext>)null);
+		// stores values
+		setValueAndAddToParent(Property.BORDER_WIDTH, borderWidthCallback);
 	}
 
 	/**
@@ -578,6 +627,20 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
+	 * Sets the callback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the
+	 * pattern.
+	 * 
+	 * @param borderDashCallback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe
+	 *            the pattern
+	 */
+	public final void setBorderDash(NativeCallback borderDashCallback) {
+		// resets callback
+		setBorderDash((BorderDashCallback<AnnotationContext>)null);
+		// stores values
+		setValueAndAddToParent(Property.BORDER_DASH, borderDashCallback);
+	}
+
+	/**
 	 * Returns the callback called to set the line dash pattern offset.
 	 * 
 	 * @return the callback called to set the line dash pattern offset
@@ -597,6 +660,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
+	 * Sets the callback to set the line dash pattern offset.
+	 * 
+	 * @param borderDashOffsetCallback to set the line dash pattern offset
+	 */
+	public final void setBorderDashOffset(NativeCallback borderDashOffsetCallback) {
+		// resets callback
+		setBorderDashOffset((BorderDashOffsetCallback<AnnotationContext>)null);
+		// stores values
+		setValueAndAddToParent(Property.BORDER_DASH_OFFSET, borderDashOffsetCallback);
+	}
+
+	/**
 	 * Returns the callback called to set whether the scale range should be adjusted if this annotation is out of range.
 	 * 
 	 * @return the callback called to set whether the scale range should be adjusted if this annotation is out of range
@@ -613,6 +688,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setAdjustScaleRange(AdjustScaleRangeCallback adjustScaleRangeCallback) {
 		ADJUST_SCALE_RANGE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustScaleRangeCallback, adjustScaleRangeCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set whether the scale range should be adjusted if this annotation is out of range.
+	 * 
+	 * @param adjustScaleRangeCallback to set whether the scale range should be adjusted if this annotation is out of range
+	 */
+	public final void setAdjustScaleRange(NativeCallback adjustScaleRangeCallback) {
+		// resets callback
+		setAdjustScaleRange((AdjustScaleRangeCallback)null);
+		// stores values
+		setValueAndAddToParent(Property.ADJUST_SCALE_RANGE, adjustScaleRangeCallback);
 	}
 
 	// ---------------------

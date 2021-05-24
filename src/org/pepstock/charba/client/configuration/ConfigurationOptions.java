@@ -26,6 +26,7 @@ import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.ChartContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -842,13 +843,31 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// checks if consistent
 		if (callBack != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(node, property, new ConfigurationEnvelop<>(callbackProxy.getProxy()));
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, callbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(node, property, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (CallbackProxy.Proxy)null);
 		}
 	}
-	
+
+	/**
+	 * Sets the callbacks that every element of options can activate.
+	 * 
+	 * @param node element node instance
+	 * @param property property name
+	 * @param callBack the callback instance
+	 */
+	final void setCallback(AbstractNode node, Key property, NativeCallback callBack) {
+		// checks if consistent
+		if (callBack != null) {
+			// adds the callback proxy function to java script object
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, callBack);
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (NativeCallback)null);
+		}
+	}
+
 	/**
 	 * Creates a chart context for callback on configuration.
 	 * 

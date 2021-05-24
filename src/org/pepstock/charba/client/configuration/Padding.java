@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.options.IsPadding;
 import org.pepstock.charba.client.options.IsScriptablePaddingProvider;
@@ -150,7 +151,8 @@ public final class Padding extends AbstractDynamicConfiguration<IsPadding> imple
 		// checks if the padding has been set previously as a callback
 		if (scriptablePaddingProvider != null && scriptablePaddingProvider.getPaddingCallback() != null) {
 			// if yes, resets it
-			scriptablePaddingProvider.setPadding(null);
+			// resets by native callback to avoid conflicts on generics
+			scriptablePaddingProvider.setPadding((NativeCallback)null);
 		}
 	}
 

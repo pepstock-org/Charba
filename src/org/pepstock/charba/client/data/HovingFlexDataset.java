@@ -21,6 +21,7 @@ import java.util.List;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -321,7 +322,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderWidth(int... borderWidth) {
 		// resets callback
-		setInternalBorderWidth(null);
+		setInternalBorderWidth((WidthCallback<DatasetContext>)null);
 		// stores value
 		setWidths(Dataset.CommonProperty.BORDER_WIDTH, borderWidth);
 	}
@@ -544,7 +545,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBorderWidth(int... widths) {
 		// resets callback
-		setInternalHoverBorderWidth(null);
+		setInternalHoverBorderWidth((WidthCallback<DatasetContext>)null);
 		// stores values
 		setWidths(CommonProperty.HOVER_BORDER_WIDTH, widths);
 	}

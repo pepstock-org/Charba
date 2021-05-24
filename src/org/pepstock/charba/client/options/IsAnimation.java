@@ -19,6 +19,7 @@ import org.pepstock.charba.client.callbacks.DelayCallback;
 import org.pepstock.charba.client.callbacks.DurationCallback;
 import org.pepstock.charba.client.callbacks.EasingCallback;
 import org.pepstock.charba.client.callbacks.LoopCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.enums.Easing;
 
@@ -79,11 +80,25 @@ public interface IsAnimation extends IsDefaultAnimation {
 	void setDuration(DurationCallback durationCallback);
 
 	/**
+	 * Sets the number of milliseconds an animation takes by a callback.
+	 * 
+	 * @param durationCallback the callback instance to use
+	 */
+	void setDuration(NativeCallback durationCallback);
+
+	/**
 	 * Sets the delay before starting the animations by a callback.
 	 * 
 	 * @param delayCallback the callback instance to use
 	 */
 	void setDelay(DelayCallback delayCallback);
+
+	/**
+	 * Sets the delay before starting the animations by a callback.
+	 * 
+	 * @param delayCallback the callback instance to use
+	 */
+	void setDelay(NativeCallback delayCallback);
 
 	/**
 	 * Sets to loop the animations endlessly by a callback.
@@ -93,10 +108,24 @@ public interface IsAnimation extends IsDefaultAnimation {
 	void setLoop(LoopCallback loopCallback);
 
 	/**
+	 * Sets to loop the animations endlessly by a callback.
+	 * 
+	 * @param loopCallback the callback instance to use
+	 */
+	void setLoop(NativeCallback loopCallback);
+
+	/**
 	 * Sets the animation easing by a callback.
 	 * 
 	 * @param easingCallback the callback instance to use
 	 */
 	void setEasing(EasingCallback easingCallback);
+	
+	/**
+	 * Sets the animation easing by a callback.
+	 * 
+	 * @param easingCallback the callback instance to use
+	 */
+	void setEasing(NativeCallback easingCallback);
 
 }

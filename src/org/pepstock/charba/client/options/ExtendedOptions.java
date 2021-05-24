@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
@@ -160,12 +161,23 @@ public final class ExtendedOptions extends ScaledOptions {
 	/**
 	 * Adds a callback proxy function to a element node instance.
 	 *
-	 * @param node element node instance
+	 * @param envelop contains the element node to update 
 	 * @param property property name
-	 * @param envelop contains the function proxy to activate
+	 * @param proxy the function proxy to activate
 	 */
-	public void setCallback(AbstractNode node, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
-		setCallbackToModel(node, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+	public void setCallback(ConfigurationEnvelop<AbstractNode> envelop, Key property, CallbackProxy.Proxy proxy) {
+		setCallbackToModel(IsEnvelop.checkAndGetIfValid(envelop).getContent(), property, proxy);
+	}
+
+	/**
+	 * Adds a native callback function to a element node instance.
+	 *
+	 * @param envelop contains the element node to update 
+	 * @param property property name
+	 * @param callback the function callback to activate
+	 */
+	public void setCallback(ConfigurationEnvelop<AbstractNode> envelop, Key property, NativeCallback callback) {
+		setCallbackToModel(IsEnvelop.checkAndGetIfValid(envelop).getContent(), property, callback);
 	}
 
 	/**

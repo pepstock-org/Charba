@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -140,6 +141,18 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 	 */
 	void setBackgroundColor(ColorCallback<AnnotationContext> backgroundColorCallback) {
 		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(getParent(), AnnotationPlugin.ID, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Sets the callback to set the color of the background of annotation.
+	 * 
+	 * @param backgroundColorCallback to set the color of the background of annotation
+	 */
+	void setBackgroundColor(NativeCallback backgroundColorCallback) {
+		// resets callback
+		setBackgroundColor((ColorCallback<AnnotationContext>)null);
+		// stores values
+		setValueAndAddToParent(Property.BACKGROUND_COLOR, backgroundColorCallback);
 	}
 
 }

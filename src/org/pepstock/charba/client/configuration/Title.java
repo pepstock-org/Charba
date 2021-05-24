@@ -24,6 +24,7 @@ import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.ElementAlignCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.FullSizeCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.PositionCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
@@ -227,7 +228,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setDisplay(boolean display) {
 		// resets callback
-		setDisplay(null);
+		setDisplay((DisplayCallback<ChartContext>)null);
 		// stores value
 		getConfiguration().getTitle().setDisplay(display);
 	}
@@ -290,7 +291,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setFullSize(boolean fullSize) {
 		// resets callback
-		setFullSize(null);
+		setFullSize((FullSizeCallback<ChartContext>)null);
 		// stores the value
 		getConfiguration().getTitle().setFullSize(fullSize);
 	}
@@ -351,6 +352,18 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	}
 
 	/**
+	 * Sets if the title is shown by a callback.
+	 * 
+	 * @param displayCallback the callback instance to use
+	 */
+	public void setDisplay(NativeCallback displayCallback) {
+		// resets the callback
+		setDisplay((DisplayCallback<ChartContext>)null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.DISPLAY, displayCallback);
+	}
+
+	/**
 	 * Returns the callback to set if marks that this box should take the full width/height of the canvas (moving other boxes).
 	 * 
 	 * @return the callback instance to use
@@ -369,6 +382,18 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		this.fullSizeCallback = fullSizeCallback;
 		// stores and manages callback
 		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.FULL_SIZE, fullSizeCallback, fullSizeCallbackProxy);
+	}
+	
+	/**
+	 * Sets if marks that this box should take the full width/height of the canvas (moving other boxes) is shown by a callback.
+	 * 
+	 * @param fullSizeCallback the callback instance to use
+	 */
+	public void setFullSize(NativeCallback fullSizeCallback) {
+		// resets the callback
+		setFullSize((FullSizeCallback<ChartContext>)null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.FULL_SIZE, fullSizeCallback);
 	}
 
 	/**
@@ -395,6 +420,19 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	}
 
 	/**
+	 * Sets the padding callback.
+	 * 
+	 * @param paddingCallback the padding callback to set
+	 */
+	@Override
+	public void setPadding(NativeCallback paddingCallback) {
+		// resets callback
+		setPadding((PaddingCallback<ChartContext>)null);
+		// stores and manages callback
+		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.PADDING, paddingCallback);
+	}
+
+	/**
 	 * Returns the font callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
@@ -418,6 +456,19 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	}
 
 	/**
+	 * Sets the font callback.
+	 * 
+	 * @param fontCallback the font callback to set
+	 */
+	@Override
+	public void setFont(NativeCallback fontCallback) {
+		// resets callback
+		setFont((FontCallback<ChartContext>)null);
+		// stores callback
+		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.FONT, fontCallback);
+	}
+	
+	/**
 	 * Returns the color callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the color callback, if set, otherwise <code>null</code>.
@@ -439,6 +490,18 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	}
 
 	/**
+	 * Sets the color callback.
+	 * 
+	 * @param colorCallback the color callback to set
+	 */
+	public void setColor(NativeCallback colorCallback) {
+		// resets callback
+		setColor((ColorCallback<ChartContext>)null);
+		// stores and manages callback
+		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.COLOR, colorCallback);
+	}
+	
+	/**
 	 * Returns the text callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the text callback, if set, otherwise <code>null</code>.
@@ -457,6 +520,18 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		this.textCallback = textCallback;
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.TEXT, textCallback, textCallbackProxy);
+	}
+
+	/**
+	 * Sets the text callback.
+	 * 
+	 * @param textCallback the text callback to set
+	 */
+	public void setText(NativeCallback textCallback) {
+		// resets callback
+		setText((TextCallback<ChartContext>)null);
+		// stores and manages callback
+		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.TEXT, textCallback);
 	}
 
 	/**
@@ -481,6 +556,18 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	}
 
 	/**
+	 * Sets the position callback.
+	 * 
+	 * @param positionCallback the position callback to set
+	 */
+	public void setPosition(NativeCallback positionCallback) {
+		// resets callback
+		setPosition((PositionCallback<ChartContext>)null);
+		// stores and manages callback
+		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.POSITION, positionCallback);
+	}
+
+	/**
 	 * Returns the align callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the align callback, if set, otherwise <code>null</code>.
@@ -499,6 +586,18 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		this.alignCallback = alignCallback;
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.ALIGN, alignCallback, alignCallbackProxy);
+	}
+
+	/**
+	 * Sets the align callback.
+	 * 
+	 * @param alignCallback the align callback to set
+	 */
+	public void setAlign(NativeCallback alignCallback) {
+		// resets callback
+		setAlign((ElementAlignCallback<ChartContext>)null);
+		// stores and manages callback
+		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.ALIGN, alignCallback);
 	}
 
 	// -----------------------

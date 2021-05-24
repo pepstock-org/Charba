@@ -17,6 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
@@ -462,6 +463,24 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	}
 
 	/**
+	 * Returns the backdrop color callback instance.
+	 * 
+	 * @return the backdrop color callback instance
+	 */
+	public ColorCallback<ScaleContext> getBackdropColorCallback() {
+		return backdropColorCallback;
+	}
+	
+	/**
+	 * Returns the show label backdrop callback instance.
+	 * 
+	 * @return the show label backdrop callback instance
+	 */
+	public ShowLabelBackdropCallback getShowLabelBackdropCallback() {
+		return showLabelBackdropCallback;
+	}
+
+	/**
 	 * Sets the color callback.
 	 * 
 	 * @param colorCallback the color callback to set
@@ -471,6 +490,18 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		this.colorCallback = colorCallback;
 		// stores and manages callback
 		getAxis().setCallback(getConfiguration(), Property.COLOR, colorCallback, colorCallbackProxy);
+	}
+
+	/**
+	 * Sets the color callback.
+	 * 
+	 * @param colorCallback the color callback to set
+	 */
+	public void setColor(NativeCallback colorCallback) {
+		// resets the callback
+		setColor((ColorCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(getConfiguration(), Property.COLOR, colorCallback);
 	}
 
 	/**
@@ -486,6 +517,18 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	}
 
 	/**
+	 * Sets the text stroke color callback.
+	 * 
+	 * @param textStrokeColorCallback the text stroke color callback to set
+	 */
+	public void setTextStrokeColor(NativeCallback textStrokeColorCallback) {
+		// resets the callback
+		setTextStrokeColor((ColorCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(getConfiguration(), Property.TEXT_STROKE_COLOR, textStrokeColorCallback);
+	}
+
+	/**
 	 * Sets the text stroke width callback.
 	 * 
 	 * @param textStrokeWidthCallback the text stroke width callback to set
@@ -495,6 +538,18 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		this.textStrokeWidthCallback = textStrokeWidthCallback;
 		// stores and manages callback
 		getAxis().setCallback(getConfiguration(), Property.TEXT_STROKE_WIDTH, textStrokeWidthCallback, textStrokeWidthCallbackProxy);
+	}
+
+	/**
+	 * Sets the text stroke width callback.
+	 * 
+	 * @param textStrokeWidthCallback the text stroke width callback to set
+	 */
+	public void setTextStrokeWidth(NativeCallback textStrokeWidthCallback) {
+		// resets the callback
+		setTextStrokeWidth((WidthCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(getConfiguration(), Property.TEXT_STROKE_WIDTH, textStrokeWidthCallback);
 	}
 
 	/**
@@ -511,6 +566,19 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	}
 
 	/**
+	 * Sets the font callback.
+	 * 
+	 * @param fontCallback the font callback to set
+	 */
+	@Override
+	public void setFont(NativeCallback fontCallback) {
+		// resets callback
+		setFont((FontCallback<ScaleContext>)null);
+		// stores callback
+		getAxis().setCallback(getConfiguration(), Property.FONT, fontCallback);
+	}
+	
+	/**
 	 * Sets the backdrop padding callback.
 	 * 
 	 * @param backdropPaddingCallback the backdrop padding callback to set
@@ -523,12 +591,15 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	}
 
 	/**
-	 * Returns the backdrop color callback instance.
+	 * Sets the backdrop padding callback.
 	 * 
-	 * @return the backdrop color callback instance
+	 * @param backdropPaddingCallback the backdrop padding callback to set
 	 */
-	public ColorCallback<ScaleContext> getBackdropColorCallback() {
-		return backdropColorCallback;
+	public void setBackdropPadding(NativeCallback backdropPaddingCallback) {
+		// resets callback
+		setBackdropPadding((PaddingCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(getConfiguration(), Property.BACKDROP_PADDING, backdropPaddingCallback);
 	}
 
 	/**
@@ -544,12 +615,15 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	}
 
 	/**
-	 * Returns the show label backdrop callback instance.
+	 * Sets the backdrop color callback instance.
 	 * 
-	 * @return the show label backdrop callback instance
+	 * @param backdropColorCallback the backdrop color callback instance
 	 */
-	public ShowLabelBackdropCallback getShowLabelBackdropCallback() {
-		return showLabelBackdropCallback;
+	public void setBackdropColor(NativeCallback backdropColorCallback) {
+		// resets callback
+		setBackdropColor((ColorCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.BACKDROP_COLOR, backdropColorCallback);
 	}
 
 	/**
@@ -562,6 +636,18 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		this.showLabelBackdropCallback = showLabelBackdropCallback;
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, showLabelBackdropCallback, showLabelBackdropCallbackProxy);
+	}
+
+	/**
+	 * Sets the show label backdrop callback instance.
+	 * 
+	 * @param showLabelBackdropCallback the show label backdrop callback instance
+	 */
+	public void setShowLabelBackdrop(NativeCallback showLabelBackdropCallback) {
+		// resets callback
+		setShowLabelBackdrop((ShowLabelBackdropCallback)null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.SHOW_LABEL_BACKDROP, showLabelBackdropCallback);
 	}
 
 	// ------------------------------

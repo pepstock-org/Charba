@@ -405,6 +405,24 @@ CharbaJsObjectCallbackProxyHelper.set = function(object, key, value) {};
 CharbaJsObjectCallbackProxyHelper.get = function(object, key) {};
 /**
  * @constructor
+ * @return {CharbaJsObjectCallbackHelper}
+ */
+function CharbaJsObjectCallbackHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {Function} value
+ * @return {undefined}
+ */
+CharbaJsObjectCallbackHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {Function}
+ */
+CharbaJsObjectCallbackHelper.get = function(object, key) {};
+/**
+ * @constructor
  * @return {CharbaJsObjectChartHelper}
  */
 function CharbaJsObjectChartHelper() {}

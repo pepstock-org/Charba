@@ -18,6 +18,7 @@ package org.pepstock.charba.client.commons;
 import java.util.Date;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -270,7 +271,19 @@ public abstract class AbstractNode extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
-
+	
+	/**
+	 * Sets a value (callback function) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, NativeCallback value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
 	/**
 	 * Sets a value (image) in the embedded JavaScript object at specific property.
 	 * 
@@ -436,6 +449,20 @@ public abstract class AbstractNode extends NativeObjectContainer {
 		model.setValueAndAddToParent(key, proxy);
 	}
 
+	/**
+	 * Adds a native callback function to a model at the specific key.
+	 * 
+	 * @param model element where adding the function callback
+	 * @param key property name to use to add the function callback
+	 * @param callback the function callback instance to add
+	 */
+	protected final void setInternalCallbackToModel(AbstractNode model, Key key, NativeCallback callback) {
+		// checks if model is consistent
+		Checker.checkIfValid(model, "Options model argument");
+		// stores callback
+		model.setValueAndAddToParent(key, callback);
+	}
+	
 	/**
 	 * Called recursively when a property has been set in the item.<br>
 	 * This is mandatory because it could happen that the parent item is not present, therefore it must be added.

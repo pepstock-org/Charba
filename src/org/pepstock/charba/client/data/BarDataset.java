@@ -27,6 +27,7 @@ import org.pepstock.charba.client.callbacks.BaseCallback;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
@@ -974,6 +975,18 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	}
 
 	/**
+	 * Sets the border width callback.
+	 * 
+	 * @param borderWidthCallback the border width callback to set
+	 */
+	public void setBorderWidth(NativeCallback borderWidthCallback) {
+		// resets callback
+		setBorderWidth((BarBorderWidthCallback) null);
+		// stores value
+		borderItemsHandler.setBorderItemCallback(CommonProperty.BORDER_WIDTH, Property.CHARBA_BORDER_WIDTH_TYPE, borderWidthCallback);
+	}
+
+	/**
 	 * Returns the hover border width callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the hover border width callback, if set, otherwise <code>null</code>.
@@ -992,6 +1005,18 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		this.hoverBorderWidthCallback = hoverBorderWidthCallback;
 		// checks if callback is consistent
 		borderItemsHandler.setBorderItemCallback(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, hoverBorderWidthCallback, hoverBorderWidthCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Sets the hover border width callback.
+	 * 
+	 * @param hoverBorderWidthCallback the hover border width callback to set
+	 */
+	public void setHoverBorderWidth(NativeCallback hoverBorderWidthCallback) {
+		// resets callback
+		setHoverBorderWidth((BarBorderWidthCallback) null);
+		// stores value
+		borderItemsHandler.setBorderItemCallback(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, hoverBorderWidthCallback);
 	}
 
 	/**
@@ -1014,6 +1039,18 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// checks if callback is consistent
 		borderItemsHandler.setBorderItemCallback(Property.BORDER_SKIPPED, borderSkippedCallback, borderSkippedCallbackProxy.getProxy());
 	}
+	
+	/**
+	 * Sets the border skipped callback.
+	 * 
+	 * @param borderSkippedCallback the border skipped callback to set
+	 */
+	public void setBorderSkipped(NativeCallback borderSkippedCallback) {
+		// resets callback
+		setBorderSkipped((BorderSkippedCallback) null);
+		// stores value
+		borderItemsHandler.setBorderItemCallback(Property.BORDER_SKIPPED, borderSkippedCallback);
+	}
 
 	/**
 	 * Returns the border radius callback, if set, otherwise <code>null</code>.
@@ -1034,6 +1071,18 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		this.borderRadiusCallback = borderRadiusCallback;
 		// checks if callback is consistent
 		borderItemsHandler.setBorderItemCallback(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadiusCallback, borderRadiusCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Sets the border radius callback.
+	 * 
+	 * @param borderRadiusCallback the border radius callback to set
+	 */
+	public void setBorderRadius(NativeCallback borderRadiusCallback) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback) null);
+		// stores value
+		borderItemsHandler.setBorderItemCallback(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadiusCallback);
 	}
 
 	/**
@@ -1062,6 +1111,18 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			remove(Property.POINT_STYLE);
 		}
 	}
+	
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(NativeCallback pointStyleCallback) {
+		// resets callback
+		setPointStyle((PointStyleCallback) null);
+		// stores value
+		setValue(Property.POINT_STYLE, pointStyleCallback);
+	}
 
 	/**
 	 * Returns the base callback, if set, otherwise <code>null</code>.
@@ -1088,6 +1149,18 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.BASE);
 		}
+	}
+
+	/**
+	 * Sets the base callback.
+	 * 
+	 * @param baseCallback the base callback.
+	 */
+	public void setBase(NativeCallback baseCallback) {
+		// resets callback
+		setBase((BaseCallback) null);
+		// stores value
+		setValue(Property.BASE, baseCallback);
 	}
 
 	// ----------------------

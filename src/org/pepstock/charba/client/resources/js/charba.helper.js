@@ -130,6 +130,35 @@ CharbaJsObjectCallbackProxyHelper.get = function(obj, key) {
 }
 /**
  * ----------------------------------------------------------------
+ * NativeCallback
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectCallbackHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {Function} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectCallbackHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {Function} the value of the property
+ */
+CharbaJsObjectCallbackHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
  * Chart
  * ----------------------------------------------------------------
  * This object is providing a set of static methods used as utility

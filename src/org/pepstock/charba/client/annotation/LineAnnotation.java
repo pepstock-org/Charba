@@ -19,6 +19,7 @@ import java.util.Date;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -400,6 +401,18 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	}
 
 	/**
+	 * Sets the callback to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @param valueCallback to set the left edge of the box, in units along the x axis
+	 */
+	public void setValue(NativeCallback valueCallback) {
+		// resets callback
+		setValue((ValueCallback)null);
+		// stores values
+		setValueAndAddToParent(Property.VALUE, valueCallback);
+	}
+	
+	/**
 	 * Returns the callback called to set the data value at which the line draw should end.
 	 * 
 	 * @return the callback called to set the data value at which the line draw should end
@@ -416,6 +429,18 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 */
 	public void setEndValue(ValueCallback valueCallback) {
 		END_VALUE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, endValueCallbackProxy.getProxy());
+	}
+	
+	/**
+	 * Sets the callback to set the data value at which the line draw should end.
+	 * 
+	 * @param valueCallback to set the data value at which the line draw should end
+	 */
+	public void setEndValue(NativeCallback valueCallback) {
+		// resets callback
+		setEndValue((ValueCallback)null);
+		// stores values
+		setValueAndAddToParent(Property.END_VALUE, valueCallback);
 	}
 
 }

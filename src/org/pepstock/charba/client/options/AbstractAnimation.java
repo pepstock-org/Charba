@@ -20,6 +20,7 @@ import org.pepstock.charba.client.callbacks.DelayCallback;
 import org.pepstock.charba.client.callbacks.DurationCallback;
 import org.pepstock.charba.client.callbacks.EasingCallback;
 import org.pepstock.charba.client.callbacks.LoopCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
@@ -179,7 +180,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 */
 	public final void setDuration(int milliseconds) {
 		// resets callback
-		setDuration(null);
+		setDuration((DurationCallback)null);
 		// sets value
 		setValueAndAddToParent(Property.DURATION, Checker.positiveOrZero(milliseconds));
 	}
@@ -201,7 +202,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 */
 	public final void setDelay(int delay) {
 		// resets callback
-		setDelay(null);
+		setDelay((DelayCallback)null);
 		// sets value
 		setValueAndAddToParent(Property.DELAY, Checker.positiveOrZero(delay));
 	}
@@ -223,7 +224,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 */
 	public final void setLoop(boolean loop) {
 		// resets callback
-		setLoop(null);
+		setLoop((LoopCallback)null);
 		// sets value
 		setValueAndAddToParent(Property.LOOP, loop);
 	}
@@ -262,6 +263,18 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	}
 
 	/**
+	 * Sets the number of milliseconds an animation takes by a callback.
+	 * 
+	 * @param durationCallback the callback instance to use
+	 */
+	public void setDuration(NativeCallback durationCallback) {
+		// resets callback
+		setDuration((DurationCallback) null);
+		// stores value
+		setValueAndAddToParent(Property.DURATION, durationCallback);
+	}
+
+	/**
 	 * Returns the callback to set the delay before starting the animations.
 	 * 
 	 * @return the callback instance to use
@@ -278,6 +291,18 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 */
 	public void setDelay(DelayCallback delayCallback) {
 		DELAY_PROPERTY_HANDLER.setCallback(this, getScope(), delayCallback, delayCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the delay before starting the animations by a callback.
+	 * 
+	 * @param delayCallback the callback instance to use
+	 */
+	public void setDelay(NativeCallback delayCallback) {
+		// resets callback
+		setDelay((DelayCallback) null);
+		// stores value
+		setValueAndAddToParent(Property.DELAY, delayCallback);
 	}
 
 	/**
@@ -300,6 +325,18 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	}
 
 	/**
+	 * Sets to loop the animations endlessly by a callback.
+	 * 
+	 * @param loopCallback the callback instance to use
+	 */
+	public void setLoop(NativeCallback loopCallback) {
+		// resets callback
+		setLoop((LoopCallback) null);
+		// stores value
+		setValueAndAddToParent(Property.LOOP, loopCallback);
+	}
+	
+	/**
 	 * Returns the callback to set the animation easing.
 	 * 
 	 * @return the callback instance to use
@@ -316,6 +353,18 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 */
 	public void setEasing(EasingCallback easingCallback) {
 		EASING_PROPERTY_HANDLER.setCallback(this, getScope(), easingCallback, easingCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the animation easing by a callback.
+	 * 
+	 * @param easingCallback the callback instance to use
+	 */
+	public void setEasing(NativeCallback easingCallback) {
+		// resets callback
+		setEasing((EasingCallback) null);
+		// stores value
+		setValueAndAddToParent(Property.EASING, easingCallback);
 	}
 
 	/**

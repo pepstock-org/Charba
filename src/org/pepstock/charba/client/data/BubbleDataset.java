@@ -22,6 +22,7 @@ import java.util.List;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
@@ -434,6 +435,18 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 			remove(Property.RADIUS);
 		}
 	}
+	
+	/**
+	 * Sets the radius callback.
+	 * 
+	 * @param radiusCallback the radius callback to set
+	 */
+	public void setRadius(NativeCallback radiusCallback) {
+		// resets callback
+		setRadius((RadiusCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.RADIUS, radiusCallback);
+	}
 
 	/**
 	 * Returns the hit radius callback, if set, otherwise <code>null</code>.
@@ -460,6 +473,18 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.HIT_RADIUS);
 		}
+	}
+	
+	/**
+	 * Sets the hit radius callback.
+	 * 
+	 * @param hitRadiusCallback the hit radius callback to set
+	 */
+	public void setHitRadius(NativeCallback hitRadiusCallback) {
+		// resets callback
+		setHitRadius((RadiusCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HIT_RADIUS, hitRadiusCallback);
 	}
 
 	/**
@@ -488,6 +513,18 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 			remove(Property.HOVER_RADIUS);
 		}
 	}
+	
+	/**
+	 * Sets the hover radius callback.
+	 * 
+	 * @param hoverRadiusCallback the hover radius callback to set
+	 */
+	public void setHoverRadius(NativeCallback hoverRadiusCallback) {
+		// resets callback
+		setHoverRadius((RadiusCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HOVER_RADIUS, hoverRadiusCallback);
+	}
 
 	/**
 	 * Returns the rotation callback, if set, otherwise <code>null</code>.
@@ -515,6 +552,18 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 			remove(Property.ROTATION);
 		}
 	}
+	
+	/**
+	 * Sets the rotation callback.
+	 * 
+	 * @param rotationCallback the rotation callback to set
+	 */
+	public void setRotation(NativeCallback rotationCallback) {
+		// resets callback
+		setRotation((RotationCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.ROTATION, rotationCallback);
+	}
 
 	/**
 	 * Returns the point style callback, if set, otherwise <code>null</code>.
@@ -541,6 +590,18 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.POINT_STYLE);
 		}
+	}
+	
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(NativeCallback pointStyleCallback) {
+		// resets callback
+		setPointStyle((PointStyleCallback) null);
+		// stores value
+		setValue(Property.POINT_STYLE, pointStyleCallback);
 	}
 
 	/**

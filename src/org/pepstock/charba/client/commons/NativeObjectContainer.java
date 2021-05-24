@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.ChartEnvelop;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -756,6 +757,28 @@ public abstract class NativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected final void setValue(Key key, CallbackProxy.Proxy value) {
+		// if value is null
+		// try to remove the reference if exists
+		if (value == null) {
+			// removes property if the property exists
+			remove(key);
+		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
+			// sets value
+			NativeObjectUtils.defineCallbackProperty(nativeObject, key.value(), value);
+		}
+	}
+	
+	/**
+	 * Sets a value (native callback function) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValue(Key key, NativeCallback value) {
 		// if value is null
 		// try to remove the reference if exists
 		if (value == null) {

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
@@ -235,6 +236,18 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 	}
 
 	/**
+	 * Sets the element (panning or zooming) directions callback, to set the mode at runtime.
+	 * 
+	 * @param modeCallback the element (panning or zooming) directions callback
+	 */
+	public final void setMode(NativeCallback modeCallback) {
+		// resets callback
+		setMode((ModeCallback) null);
+		// stores value
+		setValue(Property.MODE, modeCallback);
+	}
+
+	/**
 	 * Returns the element (panning or zooming) directions callback, to set the mode at runtime, which of the enabled zooming directions should only be available when the mouse
 	 * cursor is over one of scale
 	 * 
@@ -255,6 +268,19 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 		OVER_SCALE_MODE_PROPERTY_HANDLER.setCallback(this, ZoomPlugin.ID, modeCallback, overScaleModeCallbackProxy.getProxy());
 	}
 
+	/**
+	 * Sets the element (panning or zooming) directions callback, to set the mode at runtime, which of the enabled zooming directions should only be available when the mouse cursor
+	 * is over one of scale
+	 * 
+	 * @param modeCallback the element (panning or zooming) directions callback
+	 */
+	public final void setOverScaleMode(NativeCallback modeCallback) {
+		// resets callback
+		setOverScaleMode((ModeCallback) null);
+		// stores value
+		setValue(Property.OVER_SCALE_MODE, modeCallback);
+	}
+	
 	/**
 	 * Returns the callback called while the user is zooming or panning.
 	 * 

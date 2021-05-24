@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
@@ -590,6 +591,18 @@ public class Grid extends AbstractScaleLines {
 	}
 
 	/**
+	 * Sets the tick color callback instance.
+	 * 
+	 * @param tickColorCallback the tick color callback instance
+	 */
+	public void setTickColor(NativeCallback tickColorCallback) {
+		// resets callback
+		setTickColor((ColorCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_COLOR, tickColorCallback);
+	}
+
+	/**
 	 * Returns the tick width callback instance.
 	 * 
 	 * @return the tick width callback instance
@@ -611,6 +624,18 @@ public class Grid extends AbstractScaleLines {
 	}
 
 	/**
+	 * Sets the tick width callback instance.
+	 * 
+	 * @param tickWidthCallback the tick width callback instance.
+	 */
+	public void setTickWidth(NativeCallback tickWidthCallback) {
+		// resets callback
+		setTickWidth((WidthCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_WIDTH, tickWidthCallback);
+	}
+
+	/**
 	 * Returns the tick border dash offset callback instance.
 	 * 
 	 * @return the tick border dash offset callback instance
@@ -629,5 +654,17 @@ public class Grid extends AbstractScaleLines {
 		this.tickBorderDashOffsetCallback = tickBorderDashOffsetCallback;
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffsetCallback, tickBorderDashOffsetCallbackProxy);
+	}
+	
+	/**
+	 * Sets the tick border dash offset callback instance.
+	 * 
+	 * @param tickBorderDashOffsetCallback the tick border dash offset callback instance
+	 */
+	public void setTickBorderDashOffset(NativeCallback tickBorderDashOffsetCallback) {
+		// resets callback
+		setTickBorderDashOffset((BorderDashOffsetCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffsetCallback);
 	}
 }

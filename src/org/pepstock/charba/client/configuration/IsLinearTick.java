@@ -18,6 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.CountCallback;
 import org.pepstock.charba.client.callbacks.MaxTicksLimitCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PrecisionCallback;
 import org.pepstock.charba.client.callbacks.StepSizeCallback;
 
@@ -54,7 +55,7 @@ public interface IsLinearTick extends IsNumericTick {
 		// checks if axis is consistent
 		if (getAxis() != null) {
 			// resets callback
-			setCount(null);
+			setCount((CountCallback)null);
 			// stores value
 			getAxis().getScale().getTicks().setCount(count);
 		}
@@ -85,7 +86,7 @@ public interface IsLinearTick extends IsNumericTick {
 		// checks if axis is consistent
 		if (getAxis() != null) {
 			// resets callback
-			setMaxTicksLimit(null);
+			setMaxTicksLimit((MaxTicksLimitCallback)null);
 			// stores value
 			getAxis().getScale().getTicks().setMaxTicksLimit(maxTicksLimit);
 		}
@@ -114,7 +115,7 @@ public interface IsLinearTick extends IsNumericTick {
 		// checks if axis is consistent
 		if (getAxis() != null) {
 			// resets callback
-			setStepSize(null);
+			setStepSize((StepSizeCallback)null);
 			// stores value
 			getAxis().getScale().getTicks().setStepSize(stepSize);
 		}
@@ -143,7 +144,7 @@ public interface IsLinearTick extends IsNumericTick {
 		// checks if axis is consistent
 		if (getAxis() != null) {
 			// resets callback
-			setPrecision(null);
+			setPrecision((PrecisionCallback)null);
 			// stores value
 			getAxis().getScale().getTicks().setPrecision(precision);
 		}
@@ -191,6 +192,18 @@ public interface IsLinearTick extends IsNumericTick {
 	}
 
 	/**
+	 * Sets the count callback instance.
+	 * 
+	 * @param countCallback the count callback instance
+	 */
+	default void setCount(NativeCallback countCallback) {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			getLinearTickOptionsHandler().setCount(countCallback);
+		}
+	}
+
+	/**
 	 * Returns the maxTicksLimit callback instance.
 	 * 
 	 * @return the maxTicksLimit callback instance
@@ -211,6 +224,18 @@ public interface IsLinearTick extends IsNumericTick {
 	 * @param maxTicksLimitCallback the maxTicksLimit callback instance
 	 */
 	default void setMaxTicksLimit(MaxTicksLimitCallback maxTicksLimitCallback) {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			getLinearTickOptionsHandler().setMaxTicksLimit(maxTicksLimitCallback);
+		}
+	}
+
+	/**
+	 * Sets the maxTicksLimit callback instance.
+	 * 
+	 * @param maxTicksLimitCallback the maxTicksLimit callback instance
+	 */
+	default void setMaxTicksLimit(NativeCallback maxTicksLimitCallback) {
 		// checks if options handler is consistent
 		if (getLinearTickOptionsHandler() != null) {
 			getLinearTickOptionsHandler().setMaxTicksLimit(maxTicksLimitCallback);
@@ -245,6 +270,18 @@ public interface IsLinearTick extends IsNumericTick {
 	}
 
 	/**
+	 * Sets the precision callback instance.
+	 * 
+	 * @param precisionCallback the precision callback instance
+	 */
+	default void setPrecision(NativeCallback precisionCallback) {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			getLinearTickOptionsHandler().setPrecision(precisionCallback);
+		}
+	}
+
+	/**
 	 * Returns the stepSize callback instance.
 	 * 
 	 * @return the stepSize callback instance
@@ -270,4 +307,17 @@ public interface IsLinearTick extends IsNumericTick {
 			getLinearTickOptionsHandler().setStepSize(stepSizeCallback);
 		}
 	}
+
+	/**
+	 * Sets the stepSize callback instance.
+	 * 
+	 * @param stepSizeCallback the stepSize callback instance
+	 */
+	default void setStepSize(NativeCallback stepSizeCallback) {
+		// checks if options handler is consistent
+		if (getLinearTickOptionsHandler() != null) {
+			getLinearTickOptionsHandler().setStepSize(stepSizeCallback);
+		}
+	}
+	
 }

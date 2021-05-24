@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 
 /**
  * Map an object which contains a font instance which can be set by callback, {@link FontCallback}.
@@ -39,5 +40,12 @@ public interface IsScriptableFontProvider<T extends ChartContext> {
 	 * @param fontCallback the font callback.
 	 */
 	void setFont(FontCallback<T> fontCallback);
+	
+	/**
+	 * Sets the font callback.
+	 * 
+	 * @param fontCallback the font callback.
+	 */
+	void setFont(NativeCallback fontCallback);
 
 }

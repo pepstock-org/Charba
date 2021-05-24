@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.BorderDashCallback;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -244,6 +245,18 @@ public class RadialAngleLines extends AbstractScaleLines {
 		this.borderDashCallback = borderDashCallback;
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getAngleLines(), Property.BORDER_DASH, borderDashCallback, borderDashCallbackProxy);
+	}
+
+	/**
+	 * Sets the border dash callback when element is hovered.
+	 * 
+	 * @param borderDashCallback the border dash callback when element is hovered.
+	 */
+	public void setBorderDash(NativeCallback borderDashCallback) {
+		// resets the callback
+		setBorderDash((BorderDashCallback<ScaleContext>)null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getAngleLines(), Property.BORDER_DASH, borderDashCallback);
 	}
 
 	/**

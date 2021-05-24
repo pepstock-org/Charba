@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 
@@ -103,6 +104,18 @@ interface HasBackgroundColor extends IsDefaultsBackgroundColorHandler {
 	 * @param backgroundColorCallback to set the color of the background of annotation
 	 */
 	default void setBackgroundColor(ColorCallback<AnnotationContext> backgroundColorCallback) {
+		// checks if handler is consistent
+		if (getBackgroundColorHandler() != null) {
+			getBackgroundColorHandler().setBackgroundColor(backgroundColorCallback);
+		}
+	}
+	
+	/**
+	 * Sets the callback to set the color of the background of annotation.
+	 * 
+	 * @param backgroundColorCallback to set the color of the background of annotation
+	 */
+	default void setBackgroundColor(NativeCallback backgroundColorCallback) {
 		// checks if handler is consistent
 		if (getBackgroundColorHandler() != null) {
 			getBackgroundColorHandler().setBackgroundColor(backgroundColorCallback);

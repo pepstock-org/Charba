@@ -25,6 +25,7 @@ import org.pepstock.charba.client.callbacks.AxisDimensionsCallback;
 import org.pepstock.charba.client.callbacks.AxisFitCallback;
 import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.colors.IsColor;
@@ -604,10 +605,28 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// checks if consistent
 		if (callBack != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(node, property, new ConfigurationEnvelop<>(proxy));
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, proxy);
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(node, property, ConfigurationOptions.RESET_CALLBACK_ENVELOP);
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (CallbackProxy.Proxy)null);
+		}
+	}
+
+	/**
+	 * Sets the native callback that every element of axis can activate.
+	 * 
+	 * @param node element node instance
+	 * @param property property name
+	 * @param callBack the native callback instance
+	 */
+	final void setCallback(AbstractNode node, Key property, NativeCallback callBack) {
+		// checks if consistent
+		if (callBack != null) {
+			// adds the callback proxy function to java script object
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, callBack);
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (NativeCallback)null);
 		}
 	}
 
