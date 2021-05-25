@@ -62,7 +62,7 @@ final class CallbackPropertyManager {
 	 * 
 	 * @return the set of registered handlers
 	 */
-	private Set<CallbackPropertyHandler<?>> getHandlers() {
+	Set<CallbackPropertyHandler<?>> getHandlers() {
 		return handlers;
 	}
 
