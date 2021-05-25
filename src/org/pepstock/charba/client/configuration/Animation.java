@@ -113,7 +113,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.completeCallbackProxy.setCallback((nativeObject) -> {
+		this.completeCallbackProxy.setCallback(nativeObject -> {
 			// checks consistency of argument
 			if (nativeObject != null) {
 				// creates animation item
@@ -122,7 +122,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 				onComplete(animationItem);
 			}
 		});
-		this.progressCallbackProxy.setCallback((nativeObject) -> {
+		this.progressCallbackProxy.setCallback(nativeObject -> {
 			// checks consistency of argument
 			if (nativeObject != null) {
 				// creates animation item
