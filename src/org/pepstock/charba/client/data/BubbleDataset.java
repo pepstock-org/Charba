@@ -39,7 +39,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The chart allows a number of properties to be specified for each data set. These are used to set display properties for a specific data set.<br>
  * The location of the bubble is determined by the first two dimensions and the corresponding horizontal and vertical axes.<br>
  * The third dimension is represented by the size of the individual bubbles.
  * 
@@ -111,7 +111,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	private final OrderHandler orderHandler;
 
 	/**
-	 * Creates a dataset.<br>
+	 * Creates a data set.<br>
 	 * It uses the global options has default.
 	 */
 	public BubbleDataset() {
@@ -119,7 +119,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	}
 
 	/**
-	 * Creates a dataset.<br>
+	 * Creates a data set.<br>
 	 * It uses the global options has default.
 	 * 
 	 * @param hidden if <code>true</code>, it will be initially hidden.
@@ -148,9 +148,9 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	}
 
 	/**
-	 * Creates the data set using chart type related to the dataset.
+	 * Creates the data set using chart type related to the data set.
 	 * 
-	 * @param type chart type related to the dataset
+	 * @param type chart type related to the data set
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
 	protected BubbleDataset(Type type, boolean hidden) {
@@ -158,9 +158,9 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	}
 
 	/**
-	 * Creates the data set using a default and chart type related to the dataset.
+	 * Creates the data set using a default and chart type related to the data set.
 	 * 
-	 * @param type chart type related to the dataset
+	 * @param type chart type related to the data set
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
@@ -573,6 +573,18 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	public PointStyleCallback getPointStyleCallback() {
 		return pointStyleCallback;
 	}
+	
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(NativeCallback pointStyleCallback) {
+		// resets callback
+		setPointStyle((PointStyleCallback) null);
+		// stores value
+		setValue(Property.POINT_STYLE, pointStyleCallback);
+	}
 
 	/**
 	 * Sets the point style callback.
@@ -590,18 +602,6 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.POINT_STYLE);
 		}
-	}
-	
-	/**
-	 * Sets the point style callback.
-	 * 
-	 * @param pointStyleCallback the point style callback.
-	 */
-	public void setPointStyle(NativeCallback pointStyleCallback) {
-		// resets callback
-		setPointStyle((PointStyleCallback) null);
-		// stores value
-		setValue(Property.POINT_STYLE, pointStyleCallback);
 	}
 
 	/**
