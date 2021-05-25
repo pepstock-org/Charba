@@ -243,7 +243,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// -- SET CALLBACK for title and axis click event ---
 		// --------------------------------------------------
 		// fires the event
-		this.titleAndAxisClickCallbackProxy.setCallback((event) -> handleClickEventOnElements(event));
+		this.titleAndAxisClickCallbackProxy.setCallback(this::handleClickEventOnElements);
 	}
 
 	/**

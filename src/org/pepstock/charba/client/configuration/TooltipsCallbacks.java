@@ -209,20 +209,20 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.beforeTitleCallbackProxy.setCallback((items) -> onBeforeTitleCallback(items));
-		this.titleCallbackProxy.setCallback((items) -> onTitleCallback(items));
-		this.afterTitleCallbackProxy.setCallback((items) -> onAfterTitleCallback(items));
-		this.beforeBodyCallbackProxy.setCallback((items) -> onBeforeBodyCallback(items));
-		this.afterBodyCallbackProxy.setCallback((items) -> onAfterBodyCallback(items));
-		this.beforeLabelCallbackProxy.setCallback((item) -> onBeforeLabelCallback(item));
-		this.labelCallbackProxy.setCallback((item) -> onLabelCallback(item));
-		this.labelColorCallbackProxy.setCallback((item) -> onLabelColorCallback(item));
-		this.labelPointStyleCallbackProxy.setCallback((item) -> onLabelPointStyleCallback(item));
-		this.labelTextColorCallbackProxy.setCallback((item) -> onLabelTextColorCallback(item));
-		this.afterLabelCallbackProxy.setCallback((item) -> onAfterLabelCallback(item));
-		this.beforeFooterCallbackProxy.setCallback((items) -> onBeforeFooterCallback(items));
-		this.footerCallbackProxy.setCallback((items) -> onFooterCallback(items));
-		this.afterFooterCallbackProxy.setCallback((items) -> onAfterFooterCallback(items));
+		this.beforeTitleCallbackProxy.setCallback(this::onBeforeTitleCallback);
+		this.titleCallbackProxy.setCallback(this::onTitleCallback);
+		this.afterTitleCallbackProxy.setCallback(this::onAfterTitleCallback);
+		this.beforeBodyCallbackProxy.setCallback(this::onBeforeBodyCallback);
+		this.afterBodyCallbackProxy.setCallback(this::onAfterBodyCallback);
+		this.beforeLabelCallbackProxy.setCallback(this::onBeforeLabelCallback);
+		this.labelCallbackProxy.setCallback(this::onLabelCallback);
+		this.labelColorCallbackProxy.setCallback(this::onLabelColorCallback);
+		this.labelPointStyleCallbackProxy.setCallback(this::onLabelPointStyleCallback);
+		this.labelTextColorCallbackProxy.setCallback(this::onLabelTextColorCallback);
+		this.afterLabelCallbackProxy.setCallback(this::onAfterLabelCallback);
+		this.beforeFooterCallbackProxy.setCallback(this::onBeforeFooterCallback);
+		this.footerCallbackProxy.setCallback(this::onFooterCallback);
+		this.afterFooterCallbackProxy.setCallback(this::onAfterFooterCallback);
 	}
 
 	/**

@@ -103,13 +103,13 @@ final class SelectionHandler {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// fires the event
-		this.mouseDownCallbackProxy.setCallback((event) -> onMouseDown(event));
+		this.mouseDownCallbackProxy.setCallback(this::onMouseDown);
 		// fires the event
-		this.mouseMoveCallbackProxy.setCallback((event) -> onMouseMove(event));
+		this.mouseMoveCallbackProxy.setCallback(this::onMouseMove);
 		// fires the event
-		this.mouseUpCallbackProxy.setCallback((event) -> onMouseUp(event));
+		this.mouseUpCallbackProxy.setCallback(this::onMouseUp);
 		// fires the event
-		this.mouseLeaveCallbackProxy.setCallback((event) -> onMouseLeave(event));
+		this.mouseLeaveCallbackProxy.setCallback(this::onMouseLeave);
 		// stores original padding values
 		this.paddingTop = chart.getOptions().getLayout().getPadding().getTop();
 		this.paddingBottom = chart.getOptions().getLayout().getPadding().getBottom();

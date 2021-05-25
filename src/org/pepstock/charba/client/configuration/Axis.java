@@ -182,20 +182,20 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.beforeUpdateCallbackProxy.setCallback((item) -> onBeforeUpdateCallback(item));
-		this.beforeSetDimensionsCallbackProxy.setCallback((item) -> onBeforeSetDimensionsCallback(item));
-		this.afterSetDimensionsCallbackProxy.setCallback((item) -> onAfterSetDimensionsCallback(item));
-		this.beforeDataLimitsCallbackProxy.setCallback((item) -> onBeforeDataLimitsCallback(item));
-		this.afterDataLimitsCallbackProxy.setCallback((item) -> onAfterDataLimitsCallback(item));
-		this.beforeTickToLabelConversionCallbackProxy.setCallback((item) -> onBeforeTickToLabelConversionCallback(item));
-		this.afterTickToLabelConversionCallbackProxy.setCallback((item) -> onAfterTickToLabelConversionCallback(item));
-		this.beforeCalculateTickRotationCallbackProxy.setCallback((item) -> onBeforeCalculateTickRotationCallback(item));
-		this.afterCalculateTickRotationCallbackProxy.setCallback((item) -> onAfterCalculateTickRotationCallback(item));
-		this.beforeFitCallbackProxy.setCallback((item) -> onBeforeFitCallback(item));
-		this.afterFitCallbackProxy.setCallback((item) -> onAfterFitCallback(item));
-		this.afterUpdateCallbackProxy.setCallback((item) -> onAfterUpdateCallback(item));
-		this.beforeBuildTicksCallbackProxy.setCallback((item) -> onBeforeBuildTicksCallback(item));
-		this.afterBuildTicksCallbackProxy.setCallback((item) -> onAfterBuildTicksCallback(item));
+		this.beforeUpdateCallbackProxy.setCallback(this::onBeforeUpdateCallback);
+		this.beforeSetDimensionsCallbackProxy.setCallback(this::onBeforeSetDimensionsCallback);
+		this.afterSetDimensionsCallbackProxy.setCallback(this::onAfterSetDimensionsCallback);
+		this.beforeDataLimitsCallbackProxy.setCallback(this::onBeforeDataLimitsCallback);
+		this.afterDataLimitsCallbackProxy.setCallback(this::onAfterDataLimitsCallback);
+		this.beforeTickToLabelConversionCallbackProxy.setCallback(this::onBeforeTickToLabelConversionCallback);
+		this.afterTickToLabelConversionCallbackProxy.setCallback(this::onAfterTickToLabelConversionCallback);
+		this.beforeCalculateTickRotationCallbackProxy.setCallback(this::onBeforeCalculateTickRotationCallback);
+		this.afterCalculateTickRotationCallbackProxy.setCallback(this::onAfterCalculateTickRotationCallback);
+		this.beforeFitCallbackProxy.setCallback(this::onBeforeFitCallback);
+		this.afterFitCallbackProxy.setCallback(this::onAfterFitCallback);
+		this.afterUpdateCallbackProxy.setCallback(this::onAfterUpdateCallback);
+		this.beforeBuildTicksCallbackProxy.setCallback(this::onBeforeBuildTicksCallback);
+		this.afterBuildTicksCallbackProxy.setCallback(this::onAfterBuildTicksCallback);
 	}
 
 	/**
