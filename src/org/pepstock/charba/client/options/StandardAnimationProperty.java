@@ -47,6 +47,26 @@ public final class StandardAnimationProperty extends AbstractTypedAnimationKey i
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.options.AbstractTypedAnimationKey#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.AbstractTypedAnimationKey#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.IsAnimationCollectionKey#properties()
 	 */
 	@Override
