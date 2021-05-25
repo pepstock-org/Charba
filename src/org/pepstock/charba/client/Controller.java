@@ -84,7 +84,7 @@ public interface Controller {
 	void initialize(ControllerContext context, IsChart chart);
 
 	/**
-	 * Parses the data into the controller meta data.
+	 * Invoked to parse the data into the controller meta data.
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
