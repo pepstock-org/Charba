@@ -36,7 +36,7 @@ final class CallbackPropertyManager {
 	private static final CallbackPropertyManager INSTANCE = new CallbackPropertyManager();
 
 	// caches with the callback handlers instance
-	private final Set<CallbackPropertyHandler<?>> handlers = new HashSet<>();
+	private final Set<IsCallbackPropertyHandler> handlers = new HashSet<>();
 	// notifier instance
 	private final CallbackPropertyNotifier notifier = new CallbackPropertyNotifier();
 
@@ -62,7 +62,7 @@ final class CallbackPropertyManager {
 	 * 
 	 * @return the set of registered handlers
 	 */
-	Set<CallbackPropertyHandler<?>> getHandlers() {
+	Set<IsCallbackPropertyHandler> getHandlers() {
 		return handlers;
 	}
 
@@ -71,7 +71,7 @@ final class CallbackPropertyManager {
 	 * 
 	 * @param handler new callback handler instance
 	 */
-	void addHandler(CallbackPropertyHandler<?> handler) {
+	void addHandler(IsCallbackPropertyHandler handler) {
 		// checks if handler is consistent
 		// and adds to list
 		handlers.add(Checker.checkAndGetIfValid(handler, "Callback property handler"));
@@ -82,7 +82,7 @@ final class CallbackPropertyManager {
 	 * 
 	 * @param handler callback handler instance
 	 */
-	void removeHandler(CallbackPropertyHandler<?> handler) {
+	void removeHandler(IsCallbackPropertyHandler handler) {
 		// checks if handler is consistent
 		// no exception because it is removing it
 		if (handler != null) {
@@ -111,11 +111,11 @@ final class CallbackPropertyManager {
 				// in async in order do not block the destroy of the chart
 				CScheduler.get().submit(() -> {
 					// gets iterator
-					Iterator<CallbackPropertyHandler<?>> iterator = CallbackPropertyManager.get().getHandlers().iterator();
+					Iterator<IsCallbackPropertyHandler> iterator = CallbackPropertyManager.get().getHandlers().iterator();
 					// scans all handlers
 					while (iterator.hasNext()) {
 						// gets the handler
-						CallbackPropertyHandler<?> handler = iterator.next();
+						IsCallbackPropertyHandler handler = iterator.next();
 						// invokes the removing of the scope
 						// and checks if it must be removed
 						// because the handler does not have any relation with charts
