@@ -219,18 +219,18 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.borderSkippedCallbackProxy.setCallback((context) -> onBorderSkipped(createContext(context)));
+		this.borderSkippedCallbackProxy.setCallback(context -> onBorderSkipped(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderRadiusCallbackProxy
-				.setCallback((context) -> borderItemsHandler.onBorderItem(createContext(context), getBorderRadiusCallback(), BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
+				.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getBorderRadiusCallback(), BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback((context) -> borderItemsHandler.onBorderItem(createContext(context), getBorderWidthCallback(), BarBorderWidth.FACTORY, getDefaultBorderWidth()));
+		this.borderWidthCallbackProxy.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getBorderWidthCallback(), BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBorderWidthCallbackProxy.setCallback((context) -> borderItemsHandler.onBorderItem(createContext(context), getHoverBorderWidthCallback(), BarBorderWidth.FACTORY, getDefaultBorderWidth()));
+		this.hoverBorderWidthCallbackProxy.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getHoverBorderWidthCallback(), BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointStyleCallbackProxy.setCallback((context) -> onPointStyle(createContext(context)));
+		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.baseCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(createContext(context), getBaseCallback(), Undefined.DOUBLE).doubleValue());
+		this.baseCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getBaseCallback(), Undefined.DOUBLE).doubleValue());
 	}
 
 	/*

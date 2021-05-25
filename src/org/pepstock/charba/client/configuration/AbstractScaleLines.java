@@ -103,11 +103,11 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsColor(getAxis().createContext(context), getColorCallback(), defaultValues.getColorAsString(), false));
+		this.colorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(getAxis().createContext(context), getColorCallback(), defaultValues.getColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.lineWidthCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getLineWidthCallback(), defaultValues.getLineWidth()).intValue());
+		this.lineWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getLineWidthCallback(), defaultValues.getLineWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashOffsetCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset()).doubleValue());
+		this.borderDashOffsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset()).doubleValue());
 	}
 
 	/**

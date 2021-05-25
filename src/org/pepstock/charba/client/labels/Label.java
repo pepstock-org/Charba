@@ -260,10 +260,10 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.renderCallbackProxy.setCallback((context) -> onRender(new LabelsContext(this, context)));
-		this.fontCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsFont(new LabelsContext(this, context), getFontCallback(), this.defaultOptions.getFont()).nativeObject());
+		this.renderCallbackProxy.setCallback(context -> onRender(new LabelsContext(this, context)));
+		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(new LabelsContext(this, context), getFontCallback(), this.defaultOptions.getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(this, context), getColorCallback(), getColorAsString()));
+		this.colorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(this, context), getColorCallback(), getColorAsString()));
 	}
 
 	/**

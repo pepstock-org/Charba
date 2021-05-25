@@ -172,15 +172,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.radiusCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(createContext(context), getRadiusCallback(), getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
+		this.radiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getRadiusCallback(), getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hitRadiusCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(createContext(context), getHitRadiusCallback(), getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
+		this.hitRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHitRadiusCallback(), getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverRadiusCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(createContext(context), getHoverRadiusCallback(), getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
+		this.hoverRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHoverRadiusCallback(), getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.rotationCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(createContext(context), getRotationCallback(), getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
+		this.rotationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getRotationCallback(), getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointStyleCallbackProxy.setCallback((context) -> onPointStyle(createContext(context)));
+		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context)));
 	}
 
 	/*

@@ -191,7 +191,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.externalCallbackProxy.setCallback((tooltipContext) -> {
+		this.externalCallbackProxy.setCallback(tooltipContext -> {
 			// gets callback
 			TooltipExternalCallback externalCallback = getExternalCallback();
 			// checks if callback is consistent
@@ -213,7 +213,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 			// default is 0 - equals
 			return 0;
 		});
-		this.filterCallbackProxy.setCallback((item) -> {
+		this.filterCallbackProxy.setCallback(item -> {
 			// gets callback
 			TooltipFilterCallback filterCallback = getFilterCallback();
 			// checks if callback is consistent

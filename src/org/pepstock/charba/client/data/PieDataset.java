@@ -168,11 +168,11 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.offsetCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(createContext(context), getOffsetCallback(), getDefaultValues().getElements().getArc().getOffset()).intValue());
+		this.offsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getOffsetCallback(), getDefaultValues().getElements().getArc().getOffset()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverOffsetCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(createContext(context), getHoverOffsetCallback(), getDefaultValues().getElements().getArc().getOffset()).intValue());
+		this.hoverOffsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHoverOffsetCallback(), getDefaultValues().getElements().getArc().getOffset()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderRadiusCallbackProxy.setCallback((context) -> borderItemsHandler.onBorderItem(createContext(context), getBorderRadiusCallback(), ArcBorderRadius.FACTORY, getDefaultValues().getElements().getArc().getBorderRadius()));
+		this.borderRadiusCallbackProxy.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getBorderRadiusCallback(), ArcBorderRadius.FACTORY, getDefaultValues().getElements().getArc().getBorderRadius()));
 	}
 
 	/*

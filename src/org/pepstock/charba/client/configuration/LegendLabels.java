@@ -196,7 +196,7 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 			// default is 0 - equals
 			return 0;
 		});
-		this.labelsCallbackProxy.setCallback((nativeChart) -> {
+		this.labelsCallbackProxy.setCallback(nativeChart -> {
 			// gets callback
 			LegendLabelsCallback labelsCallback = getLabelsCallback();
 			// checks if callback is consistent

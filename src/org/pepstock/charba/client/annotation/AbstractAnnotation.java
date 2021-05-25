@@ -215,19 +215,19 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.displayCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDisplayCallback(), defaultValues.isDisplay()));
+		this.displayCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDisplayCallback(), defaultValues.isDisplay()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderColorCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), getBorderColorCallback(), defaultValues.getBorderColorAsString(), false));
+		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), getBorderColorCallback(), defaultValues.getBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getBorderWidthCallback(), defaultValues.getBorderWidth()).intValue());
+		this.borderWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getBorderWidthCallback(), defaultValues.getBorderWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashCallbackProxy.setCallback((context) -> onBorderDash(new AnnotationContext(this, context), getBorderDashCallback(), defaultValues.getBorderDash()));
+		this.borderDashCallbackProxy.setCallback(context -> onBorderDash(new AnnotationContext(this, context), getBorderDashCallback(), defaultValues.getBorderDash()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashOffsetCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset()).doubleValue());
+		this.borderDashOffsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.drawTimeCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDrawTimeCallback(), defaultValues.getDrawTime()).value());
+		this.drawTimeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDrawTimeCallback(), defaultValues.getDrawTime()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.adjustScaleRangeCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getAdjustScaleRangeCallback(), defaultValues.isAdjustScaleRange()));
+		this.adjustScaleRangeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getAdjustScaleRangeCallback(), defaultValues.isAdjustScaleRange()));
 		// ------------------------------------------
 		// -- SET CALLBACKS to PROXIES for EVENTs ---
 		// ------------------------------------------

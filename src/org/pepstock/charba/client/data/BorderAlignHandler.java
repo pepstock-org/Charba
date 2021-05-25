@@ -96,7 +96,7 @@ final class BorderAlignHandler extends NativeObjectContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value and calls the callback
-		this.borderAlignCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsString(new DatasetContext(context), getBorderAlignCallback(), defaultValues.getElements().getArc().getBorderAlign()).value());
+		this.borderAlignCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(new DatasetContext(context), getBorderAlignCallback(), defaultValues.getElements().getArc().getBorderAlign()).value());
 	}
 
 	/**

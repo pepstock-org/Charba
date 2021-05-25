@@ -101,7 +101,7 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 		// stores background color
 		this.defaultBackgroundColor = defaultBackgroundColor;
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundColorCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(parent, context), getBackgroundColorCallback(), defaultBackgroundColor));
+		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(parent, context), getBackgroundColorCallback(), defaultBackgroundColor));
 	}
 
 	/**

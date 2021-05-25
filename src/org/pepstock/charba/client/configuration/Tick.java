@@ -136,19 +136,19 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsFont(getAxis().createContext(context), getFontCallback(), getAxis().getDefaultValues().getTicks().getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(getAxis().createContext(context), getFontCallback(), getAxis().getDefaultValues().getTicks().getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.backdropPaddingCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsPadding(getAxis().createContext(context), getBackdropPaddingCallback(), getAxis().getDefaultValues().getTicks().getBackdropPadding()).nativeObject());
+		this.backdropPaddingCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsPadding(getAxis().createContext(context), getBackdropPaddingCallback(), getAxis().getDefaultValues().getTicks().getBackdropPadding()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((context) -> onColor(getAxis().createContext(context), getColorCallback()));
+		this.colorCallbackProxy.setCallback(context -> onColor(getAxis().createContext(context), getColorCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.textStrokeColorCallbackProxy.setCallback((context) -> onColor(getAxis().createContext(context), getTextStrokeColorCallback()));
+		this.textStrokeColorCallbackProxy.setCallback(context -> onColor(getAxis().createContext(context), getTextStrokeColorCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.textStrokeWidthCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getTextStrokeWidthCallback(), getAxis().getDefaultValues().getTicks().getTextStrokeWidth()).intValue());
+		this.textStrokeWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getTextStrokeWidthCallback(), getAxis().getDefaultValues().getTicks().getTextStrokeWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.backdropColorCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsColor(getAxis().createContext(context), getBackdropColorCallback(), getAxis().getDefaultValues().getTicks().getBackdropColorAsString(), false));
+		this.backdropColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(getAxis().createContext(context), getBackdropColorCallback(), getAxis().getDefaultValues().getTicks().getBackdropColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.showLabelBackdropCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getShowLabelBackdropCallback(), getAxis().getDefaultValues().getTicks().isShowLabelBackdrop()));
+		this.showLabelBackdropCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getShowLabelBackdropCallback(), getAxis().getDefaultValues().getTicks().isShowLabelBackdrop()));
 	}
 
 	/**

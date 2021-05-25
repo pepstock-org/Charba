@@ -160,13 +160,13 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 			return item;
 		});
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValueAsFont(getAxis().createContext(context), getFontCallback(), getAxis().getDefaultValues().getPointLabels().getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(getAxis().createContext(context), getFontCallback(), getAxis().getDefaultValues().getPointLabels().getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback((context) -> onColor(getAxis().createContext(context), getColorCallback(), getAxis().getDefaultValues().getPointLabels().getColorAsString()));
+		this.colorCallbackProxy.setCallback(context -> onColor(getAxis().createContext(context), getColorCallback(), getAxis().getDefaultValues().getPointLabels().getColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.backdropColorCallbackProxy.setCallback((context) -> onColor(getAxis().createContext(context), getBackdropColorCallback(), getAxis().getDefaultValues().getPointLabels().getBackdropColorAsString()));
+		this.backdropColorCallbackProxy.setCallback(context -> onColor(getAxis().createContext(context), getBackdropColorCallback(), getAxis().getDefaultValues().getPointLabels().getBackdropColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getPaddingCallback(), getAxis().getDefaultValues().getPointLabels().getPadding()).intValue());
+		this.paddingCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getPaddingCallback(), getAxis().getDefaultValues().getPointLabels().getPadding()).intValue());
 	}
 
 	/**

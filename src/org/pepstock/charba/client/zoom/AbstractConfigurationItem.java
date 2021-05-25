@@ -116,12 +116,12 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.modeCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(createContext(context), getModeCallback(), getDefaultsOptions().getMode()).value());
-		this.overScaleModeCallbackProxy.setCallback((context) -> ScriptableUtils.getOptionValue(createContext(context), getOverScaleModeCallback(), getDefaultsOptions().getOverScaleMode()).value());
-		this.progressCallbackProxy.setCallback((context) -> onProgress(createContext(context)));
-		this.completeCallbackProxy.setCallback((context) -> onCompleted(createContext(context)));
-		this.rejectCallbackProxy.setCallback((context) -> onRejected(createContext(context)));
-		this.startCallbackProxy.setCallback((context) -> onStart(createContext(context)));
+		this.modeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getModeCallback(), getDefaultsOptions().getMode()).value());
+		this.overScaleModeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getOverScaleModeCallback(), getDefaultsOptions().getOverScaleMode()).value());
+		this.progressCallbackProxy.setCallback(context -> onProgress(createContext(context)));
+		this.completeCallbackProxy.setCallback(context -> onCompleted(createContext(context)));
+		this.rejectCallbackProxy.setCallback(context -> onRejected(createContext(context)));
+		this.startCallbackProxy.setCallback(context -> onStart(createContext(context)));
 	}
 
 	/**

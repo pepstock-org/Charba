@@ -115,9 +115,9 @@ public final class AnimationCollection extends AbstractAnimation<IsAnimationColl
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.fromCallbackProxy.setCallback((context) -> onCallback(new DatasetContext(context), getFromCallback(), Property.FROM));
+		this.fromCallbackProxy.setCallback(context -> onCallback(new DatasetContext(context), getFromCallback(), Property.FROM));
 		// sets function to proxy callback in order to invoke the java interface
-		this.toCallbackProxy.setCallback((context) -> onCallback(new DatasetContext(context), getToCallback(), Property.TO));
+		this.toCallbackProxy.setCallback(context -> onCallback(new DatasetContext(context), getToCallback(), Property.TO));
 	}
 
 	/**
