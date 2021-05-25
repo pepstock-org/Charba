@@ -98,8 +98,8 @@ public final class CallbackPropertyHandler<T> {
 	public void setCallback(AbstractNode container, String scope, T callback, Proxy proxy) {
 		// gets the scope if exists in the object
 		String currentScope = manageScope(container, scope);
-		// checks if scope and container are consistent
-		if (currentScope != null && container != null) {
+		// checks if scope is consistent (if yes, also container is consistent)
+		if (currentScope != null) {
 			// gets hash code property if exists
 			String value = container.getValue(hashCodeProperty, Undefined.STRING);
 			// checks if hash code property already exists
