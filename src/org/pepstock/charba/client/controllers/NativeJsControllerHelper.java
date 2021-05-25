@@ -58,13 +58,15 @@ final class NativeJsControllerHelper {
 	static native void initialize(String chartType, ControllerContext context);
 
 	/**
-	 * Invokes the default <code>AddElements</code> method.
+	 * Invokes the default <code>parse</code> method.
 	 * 
-	 * @param chartType extended chart type
+	 * @param chartType controller type
 	 * @param context context of controller
+	 * @param start start index of metadata
+	 * @param count count of metadata
 	 */
 	@JsMethod
-	static native void addElements(String chartType, ControllerContext context);
+	static native void parse(String chartType, ControllerContext context, int start, int count);
 
 	/**
 	 * Invokes the default <code>draw</code> method.
@@ -74,30 +76,6 @@ final class NativeJsControllerHelper {
 	 */
 	@JsMethod
 	static native void draw(String chartType, ControllerContext context);
-
-	/**
-	 * Invokes the default <code>removeHoverStyle</code> method.
-	 * 
-	 * @param chartType extended chart type
-	 * @param context context of controller
-	 * @param element element to be remove.
-	 * @param datasetIndex data set index
-	 * @param index data index
-	 */
-	@JsMethod
-	static native void removeHoverStyle(String chartType, ControllerContext context, NativeObject element, int datasetIndex, int index);
-
-	/**
-	 * Invokes the default <code>setHoverStyle</code> method.
-	 * 
-	 * @param chartType extended chart type
-	 * @param context context of controller
-	 * @param element element to be set.
-	 * @param datasetIndex data set index
-	 * @param index data index
-	 */
-	@JsMethod
-	static native void setHoverStyle(String chartType, ControllerContext context, NativeObject element, int datasetIndex, int index);
 
 	/**
 	 * Invokes the default <code>update</code> method.
@@ -117,15 +95,5 @@ final class NativeJsControllerHelper {
 	 */
 	@JsMethod
 	static native void linkScales(String chartType, ControllerContext context);
-
-	/**
-	 * Invokes the default <code>buildOrUpdateElements</code> method.
-	 * 
-	 * @param chartType extended chart type
-	 * @param context context of controller
-	 * @param resetNewElements <code>true</code> if the new elements must be reset
-	 */
-	@JsMethod
-	static native void buildOrUpdateElements(String chartType, ControllerContext context, boolean resetNewElements);
 
 }

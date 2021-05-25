@@ -82,13 +82,15 @@ final class JsControllerHelper {
 	}
 
 	/**
-	 * Invokes the default <code>AddElements</code> method.
+	 * Invokes the default <code>parse</code> method.
 	 * 
 	 * @param controllerType controller type
 	 * @param context context of controller
+	 * @param start start index of metadata
+	 * @param count count of metadata
 	 */
-	void addElements(ControllerType controllerType, ControllerContext context) {
-		NativeJsControllerHelper.addElements(controllerType.getChartType().value(), context);
+	void parse(ControllerType controllerType, ControllerContext context, int start, int count) {
+		NativeJsControllerHelper.parse(controllerType.getChartType().value(), context, start, count);
 	}
 
 	/**
@@ -99,32 +101,6 @@ final class JsControllerHelper {
 	 */
 	void draw(ControllerType controllerType, ControllerContext context) {
 		NativeJsControllerHelper.draw(controllerType.getChartType().value(), context);
-	}
-
-	/**
-	 * Invokes the default <code>removeHoverStyle</code> method.
-	 * 
-	 * @param controllerType controller type
-	 * @param context context of controller
-	 * @param element element to be remove
-	 * @param datasetIndex data set index
-	 * @param index data index
-	 */
-	void removeHoverStyle(ControllerType controllerType, ControllerContext context, NativeObject element, int datasetIndex, int index) {
-		NativeJsControllerHelper.removeHoverStyle(controllerType.getChartType().value(), context, element, datasetIndex, index);
-	}
-
-	/**
-	 * Invokes the default <code>setHoverStyle</code> method.
-	 * 
-	 * @param controllerType controller type
-	 * @param context context of controller
-	 * @param element element to be set.
-	 * @param datasetIndex data set index
-	 * @param index data index
-	 */
-	void setHoverStyle(ControllerType controllerType, ControllerContext context, NativeObject element, int datasetIndex, int index) {
-		NativeJsControllerHelper.setHoverStyle(controllerType.getChartType().value(), context, element, datasetIndex, index);
 	}
 
 	/**
@@ -146,17 +122,6 @@ final class JsControllerHelper {
 	 */
 	void linkScales(ControllerType controllerType, ControllerContext context) {
 		NativeJsControllerHelper.linkScales(controllerType.getChartType().value(), context);
-	}
-
-	/**
-	 * Invokes the default <code>buildOrUpdateElements</code> method.
-	 * 
-	 * @param controllerType controller type
-	 * @param context context of controller
-	 * @param resetNewElements <code>true</code> if the new elements must be reset
-	 */
-	void buildOrUpdateElements(ControllerType controllerType, ControllerContext context, boolean resetNewElements) {
-		NativeJsControllerHelper.buildOrUpdateElements(controllerType.getChartType().value(), context, resetNewElements);
 	}
 
 }

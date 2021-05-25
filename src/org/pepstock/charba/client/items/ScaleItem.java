@@ -34,7 +34,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.configuration.RadialAxis;
-import org.pepstock.charba.client.controllers.ControllersEnvelop;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
@@ -113,15 +112,6 @@ public class ScaleItem extends BaseBoxNodeItem {
 		IsScaleId.checkIfValid(scaleId);
 		// stores scale id
 		this.scaleId = scaleId;
-	}
-
-	/**
-	 * Creates the item using an envelop (from <code>controllers</code> package) of native java script object which contains all properties.
-	 * 
-	 * @param envelop envelop of native java script object which contains all properties.
-	 */
-	public ScaleItem(ControllersEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

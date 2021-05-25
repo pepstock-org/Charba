@@ -608,14 +608,16 @@ CharbaJsControllerHelper.initialize = function(controllerType, context) {
   Chart.controllers[controllerType].prototype.initialize.call(context);
 }
 /**
- * Invokes the default "AddElements" method.
+ * Invokes the default "parse" method.
  * 
  * @param {string} controllerType controller type
  * @param {Object} context context of controller
+ * @param {number} start start index of metadata
+ * @param {number} count count of metadata
  * @return {undefined}
  */
-CharbaJsControllerHelper.addElements = function(controllerType, context) {
-  Chart.controllers[controllerType].prototype.addElements.call(context);
+CharbaJsControllerHelper.parse = function(controllerType, context, start, count) {
+  Chart.controllers[controllerType].prototype.parse.call(context, start, count);
 }
 /**
  * Invokes the default "draw" method.
@@ -626,32 +628,6 @@ CharbaJsControllerHelper.addElements = function(controllerType, context) {
  */
 CharbaJsControllerHelper.draw = function(controllerType, context) {
   Chart.controllers[controllerType].prototype.draw.call(context);
-}
-/**
- * Invokes the default "removeHoverStyle" method.
- *
- * @param {string} controllerType controller type
- * @param {Object} context context of controller
- * @param {Object} element element to be remove
- * @param {number} datasetIndex dataset index
- * @param {number} index data index
- * @return {undefined}  
- */
-CharbaJsControllerHelper.removeHoverStyle = function(controllerType, context, element, datasetIndex, index) {
-  Chart.controllers[controllerType].prototype.removeHoverStyle.call(context, element, datasetIndex, index);
-}
-/**
- * Invokes the default "setHoverStyle" method.
- * 
- * @param {string} controllerType controller type
- * @param {Object} context context of controller
- * @param {Object} element element to be remove
- * @param {number} datasetIndex dataset index
- * @param {number} index data index
- * @return {undefined}  
- */
-CharbaJsControllerHelper.setHoverStyle = function(controllerType, context, element, datasetIndex, index) {
-  Chart.controllers[controllerType].prototype.setHoverStyle.call(context, element, datasetIndex, index);
 }
 /**
  * Invokes the default "update" method.
@@ -673,17 +649,6 @@ CharbaJsControllerHelper.update = function(controllerType, context, mode) {
  */
 CharbaJsControllerHelper.linkScales = function(controllerType, context) {
   Chart.controllers[controllerType].prototype.linkScales.call(context);
-}
-/**
- * Invokes the default "buildOrUpdateElements" method.
- *
- * @param {string} controllerType controller type
- * @param {Object} context context of controller
- * @parma {boolean} resetNewElements  true if resets new elements
- * @return {undefined}
- */
-CharbaJsControllerHelper.buildOrUpdateElements = function(controllerType, context, resetNewElements) {
-  Chart.controllers[controllerType].prototype.buildOrUpdateElements.call(context, resetNewElements);
 }
 /**
  * ----------------------------------------------------------------------------

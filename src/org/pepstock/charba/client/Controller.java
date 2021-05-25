@@ -17,7 +17,6 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerContext;
-import org.pepstock.charba.client.controllers.ControllerDatasetElement;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.options.IsTransitionKey;
 
@@ -85,12 +84,14 @@ public interface Controller {
 	void initialize(ControllerContext context, IsChart chart);
 
 	/**
-	 * Create elements for each piece of data in the dataset. Store elements in an array on the dataset.
+	 * Parses the data into the controller meta data.
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
+	 * @param start start index of metadata
+	 * @param count count of metadata
 	 */
-	void addElements(ControllerContext context, IsChart chart);
+	void parse(ControllerContext context, IsChart chart, int start, int count);
 
 	/**
 	 * Draw the representation of the dataset.
@@ -99,28 +100,6 @@ public interface Controller {
 	 * @param chart chart instance
 	 */
 	void draw(ControllerContext context, IsChart chart);
-
-	/**
-	 * Remove hover styling from the given element.
-	 * 
-	 * @param context context of controller
-	 * @param chart chart instance
-	 * @param element element to be removed.
-	 * @param datasetIndex dataset index
-	 * @param index data index
-	 */
-	void removeHoverStyle(ControllerContext context, IsChart chart, ControllerDatasetElement element, int datasetIndex, int index);
-
-	/**
-	 * Add hover styling to the given element.
-	 * 
-	 * @param context context of controller
-	 * @param chart chart instance
-	 * @param element element to be set.
-	 * @param datasetIndex dataset index
-	 * @param index data index
-	 */
-	void setHoverStyle(ControllerContext context, IsChart chart, ControllerDatasetElement element, int datasetIndex, int index);
 
 	/**
 	 * Update the elements in response to new data.
@@ -139,15 +118,5 @@ public interface Controller {
 	 * @param chart chart instance
 	 */
 	void linkScales(ControllerContext context, IsChart chart);
-
-	/**
-	 * Called by the main chart controller when an update is triggered.<br>
-	 * The default implementation handles the number of data points changing and creating elements appropriately.
-	 * 
-	 * @param context context of controller
-	 * @param chart chart instance
-	 * @param resetNewElements <code>true</code> if the new elements must be reset
-	 */
-	void buildOrUpdateElements(ControllerContext context, IsChart chart, boolean resetNewElements);
 
 }

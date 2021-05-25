@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.controllers.ControllersEnvelop;
 
 /**
  * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
@@ -105,15 +104,6 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @param envelop envelop of the nativeObject native java script object which contains all properties.
 	 */
 	protected DatasetElement(CallbacksEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
-	 * Creates the item using an envelop of the native java script object which contains all properties.
-	 * 
-	 * @param envelop envelop of the nativeObject native java script object which contains all properties.
-	 */
-	protected DatasetElement(ControllersEnvelop<NativeObject> envelop) {
 		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
 	}
 

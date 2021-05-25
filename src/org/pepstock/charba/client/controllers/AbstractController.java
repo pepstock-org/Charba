@@ -42,17 +42,15 @@ public abstract class AbstractController implements Controller {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Controller#addElements(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.IsChart)
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.Controller#parse(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart, int, int)
 	 */
 	@Override
-	public void addElements(ControllerContext context, IsChart chart) {
+	public void parse(ControllerContext context, IsChart chart, int start, int count) {
 		// checks if arguments are consistent
 		if (Controller.isConsistent(this, context, chart)) {
 			// invokes default
-			JsControllerHelper.get().addElements(getType(), context);
+			JsControllerHelper.get().parse(getType(), context, start, count);
 		}
 	}
 
@@ -67,36 +65,6 @@ public abstract class AbstractController implements Controller {
 		if (Controller.isConsistent(this, context, chart)) {
 			// invokes default
 			JsControllerHelper.get().draw(getType(), context);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Controller#removeHoverStyle(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.controllers.ControllerDatasetElement, int, int)
-	 */
-	@Override
-	public void removeHoverStyle(ControllerContext context, IsChart chart, ControllerDatasetElement element, int datasetIndex, int index) {
-		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart) && element != null) {
-			// invokes default
-			JsControllerHelper.get().removeHoverStyle(getType(), context, element.nativeObject(), datasetIndex, index);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Controller#setHoverStyle(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.controllers.ControllerDatasetElement, int, int)
-	 */
-	@Override
-	public void setHoverStyle(ControllerContext context, IsChart chart, ControllerDatasetElement element, int datasetIndex, int index) {
-		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart) && element != null) {
-			// invokes default
-			JsControllerHelper.get().setHoverStyle(getType(), context, element.nativeObject(), datasetIndex, index);
 		}
 	}
 
@@ -126,20 +94,6 @@ public abstract class AbstractController implements Controller {
 		if (Controller.isConsistent(this, context, chart)) {
 			// invokes default
 			JsControllerHelper.get().linkScales(getType(), context);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Controller#buildOrUpdateElements(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart, boolean)
-	 */
-	@Override
-	public void buildOrUpdateElements(ControllerContext context, IsChart chart, boolean resetNewElements) {
-		// checks if arguments are consistent
-		if (Controller.isConsistent(this, context, chart)) {
-			// invokes default
-			JsControllerHelper.get().buildOrUpdateElements(getType(), context, resetNewElements);
 		}
 	}
 

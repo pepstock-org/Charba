@@ -56,20 +56,21 @@ final class WrapperController extends NativeObjectContainer {
 	}
 
 	/**
-	 * Java script FUNCTION callback called to catch the chart add elements.
+	 * Java script FUNCTION callback called to catch the chart parse metadata.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyAddElementsCallback {
+	interface ProxyParseCallback {
 
 		/**
-		 * Create elements for each piece of data in the dataset.<br>
-		 * Store elements in an array on the dataset.
+		 * Create the meta data for data set.
 		 * 
 		 * @param context java script <code>this</code> function context.
+		 * @param start start index of metadata
+		 * @param count count of metadata
 		 */
-		void call(ControllerContext context);
+		void call(ControllerContext context, int start, int count);
 	}
 
 	/**
@@ -86,44 +87,6 @@ final class WrapperController extends NativeObjectContainer {
 		 * @param context java script <code>this</code> function context.
 		 */
 		void call(ControllerContext context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to catch the chart remove hover.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyRemoveHoverStyleCallback {
-
-		/**
-		 * Remove hover styling from the given element.
-		 * 
-		 * @param context java script <code>this</code> function context.
-		 * @param element element to be removed.
-		 * @param datasetIndex data set index
-		 * @param index data index
-		 */
-		void call(ControllerContext context, NativeObject element, int datasetIndex, int index);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to catch the chart set hover.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxySetHoverStyleCallback {
-
-		/**
-		 * Add hover styling to the given element.
-		 * 
-		 * @param context java script <code>this</code> function context.
-		 * @param element element to be set.
-		 * @param datasetIndex data set index
-		 * @param index data index
-		 */
-		void call(ControllerContext context, NativeObject element, int datasetIndex, int index);
 	}
 
 	/**
@@ -160,43 +123,19 @@ final class WrapperController extends NativeObjectContainer {
 		void call(ControllerContext context);
 	}
 
-	/**
-	 * Java script FUNCTION callback called to catch the chart build or update elements.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBuildOrUpdateElementsCallback {
-
-		/**
-		 * Called by the main chart controller when an update is triggered<br>
-		 * The default implementation handles the number of data points changing and creating elements appropriately.
-		 * 
-		 * @param context java script <code>this</code> function context.
-		 * @param resetNewElements <code>true</code> if the new elements must be reset
-		 */
-		void call(ControllerContext context, boolean resetNewElements);
-	}
-
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the initialize function
 	private final CallbackProxy<ProxyInitializeCallback> initializeCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the add elements function
-	private final CallbackProxy<ProxyAddElementsCallback> addElementsCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the parse function
+	private final CallbackProxy<ProxyParseCallback> parseCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the draw function
 	private final CallbackProxy<ProxyDrawCallback> drawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the remove hover function
-	private final CallbackProxy<ProxyRemoveHoverStyleCallback> removeHoverStyleCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the set hover function
-	private final CallbackProxy<ProxySetHoverStyleCallback> setHoverStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the update function
 	private final CallbackProxy<ProxyUpdateCallback> updateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the linkScales function
 	private final CallbackProxy<ProxyLinkScalesCallback> linkScalesCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the buildOrUpdateElements function
-	private final CallbackProxy<ProxyBuildOrUpdateElementsCallback> buildOrUpdateElements = JsHelper.get().newCallbackProxy();
 
 	// user implementation of controller
 	private final Controller delegation;
@@ -208,13 +147,10 @@ final class WrapperController extends NativeObjectContainer {
 	{
 		TYPE("type"),
 		INITIALIZE("initialize"),
-		ADD_ELEMENTS("addElements"),
+		PARSE("parse"),
 		DRAW("draw"),
-		REMOVE_HOVER_STYLE("removeHoverStyle"),
-		SET_HOVER_STYLE("setHoverStyle"),
 		UPDATE("update"),
-		LINK_SCALES("linkScales"),
-		BUILD_OR_UPDATE_ELEMENTS("buildOrUpdateElements");
+		LINK_SCALES("linkScales");
 
 		// name value of property
 		private final String value;
@@ -253,6 +189,8 @@ final class WrapperController extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
+		// invoke user method implementation
+		this.initializeCallbackProxy.setIgnoreFunctionContext(false);
 		this.initializeCallbackProxy.setCallback(context -> {
 			// checks if context and native chart are consistent
 			// checks if chart is consistent
@@ -262,35 +200,23 @@ final class WrapperController extends NativeObjectContainer {
 			}
 		});
 		// invoke user method implementation
-		this.addElementsCallbackProxy.setIgnoreFunctionContext(false);
-		this.addElementsCallbackProxy.setCallback(context -> onAddElements(context, context.getChart()));
+		this.parseCallbackProxy.setIgnoreFunctionContext(false);
+		this.parseCallbackProxy.setCallback((context, start, count) -> onParse(context, context.getChart(), start, count));
 		// invoke user method implementation
 		this.drawCallbackProxy.setIgnoreFunctionContext(false);
 		this.drawCallbackProxy.setCallback(context -> onDraw(context, context.getChart()));
-		// invoke user method implementation
-		this.removeHoverStyleCallbackProxy.setIgnoreFunctionContext(false);
-		this.removeHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onRemoveHoverStyle(context, context.getChart(), element, datasetIndex, index));
-		// invoke user method implementation
-		this.setHoverStyleCallbackProxy.setIgnoreFunctionContext(false);
-		this.setHoverStyleCallbackProxy.setCallback((context, element, datasetIndex, index) -> onSetHoverStyle(context, context.getChart(), element, datasetIndex, index));
 		// invoke user method implementation
 		this.updateCallbackProxy.setIgnoreFunctionContext(false);
 		this.updateCallbackProxy.setCallback((context, mode) -> onUpdate(context, context.getChart(), mode));
 		// invoke user method implementation
 		this.linkScalesCallbackProxy.setIgnoreFunctionContext(false);
 		this.linkScalesCallbackProxy.setCallback(context -> onLinkScales(context, context.getChart()));
-		// invoke user method implementation
-		this.buildOrUpdateElements.setIgnoreFunctionContext(false);
-		this.buildOrUpdateElements.setCallback((context, resetNewElements) -> onBuildOrUpdateElements(context, context.getChart(), resetNewElements));
 		// adds all proxy functions to call the functions to the native object
 		setValue(Property.INITIALIZE, initializeCallbackProxy.getProxy());
-		setValue(Property.ADD_ELEMENTS, addElementsCallbackProxy.getProxy());
+		setValue(Property.PARSE, parseCallbackProxy.getProxy());
 		setValue(Property.DRAW, drawCallbackProxy.getProxy());
-		setValue(Property.REMOVE_HOVER_STYLE, removeHoverStyleCallbackProxy.getProxy());
-		setValue(Property.SET_HOVER_STYLE, setHoverStyleCallbackProxy.getProxy());
 		setValue(Property.UPDATE, updateCallbackProxy.getProxy());
 		setValue(Property.LINK_SCALES, linkScalesCallbackProxy.getProxy());
-		setValue(Property.BUILD_OR_UPDATE_ELEMENTS, buildOrUpdateElements.getProxy());
 	}
 
 	/**
@@ -330,11 +256,13 @@ final class WrapperController extends NativeObjectContainer {
 	 * 
 	 * @param context context of controller
 	 * @param chart chart chart instance
+	 * @param start start index of metadata
+	 * @param count count of metadata
 	 */
-	void onAddElements(ControllerContext context, IsChart chart) {
+	void onParse(ControllerContext context, IsChart chart, int start, int count) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.addElements(context, chart);
+			delegation.parse(context, chart, start, count);
 		}
 	}
 
@@ -348,38 +276,6 @@ final class WrapperController extends NativeObjectContainer {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
 			delegation.draw(context, chart);
-		}
-	}
-
-	/**
-	 * Remove hover styling from the given element.
-	 * 
-	 * @param context context of controller
-	 * @param chart chart chart instance
-	 * @param object element to be removed.
-	 * @param datasetIndex data set index
-	 * @param index data index
-	 */
-	void onRemoveHoverStyle(ControllerContext context, IsChart chart, NativeObject object, int datasetIndex, int index) {
-		// if consistent, calls controller
-		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.removeHoverStyle(context, chart, new ControllerDatasetElement(object), datasetIndex, index);
-		}
-	}
-
-	/**
-	 * Add hover styling to the given element.
-	 * 
-	 * @param context context of controller
-	 * @param chart chart chart instance
-	 * @param object element to be set.
-	 * @param datasetIndex data set index
-	 * @param index data index
-	 */
-	void onSetHoverStyle(ControllerContext context, IsChart chart, NativeObject object, int datasetIndex, int index) {
-		// if consistent, calls controller
-		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.setHoverStyle(context, chart, new ControllerDatasetElement(object), datasetIndex, index);
 		}
 	}
 
@@ -414,21 +310,6 @@ final class WrapperController extends NativeObjectContainer {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
 			delegation.linkScales(context, chart);
-		}
-	}
-
-	/**
-	 * Called by the main chart controller when an update is triggered<br>
-	 * The default implementation handles the number of data points changing and creating elements appropriately.
-	 * 
-	 * @param context context of controller
-	 * @param chart chart chart instance
-	 * @param resetNewElements <code>true</code> if the new elements must be reset
-	 */
-	void onBuildOrUpdateElements(ControllerContext context, IsChart chart, boolean resetNewElements) {
-		// if consistent, calls controller
-		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.buildOrUpdateElements(context, chart, resetNewElements);
 		}
 	}
 
