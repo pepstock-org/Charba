@@ -76,47 +76,111 @@ public interface Controller {
 	ControllerType getType();
 
 	/**
-	 * Initializes the controller.
+	 * Called before it initializes the controller.
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
 	 */
-	void initialize(ControllerContext context, IsChart chart);
+	default void onBeforeInitialize(ControllerContext context, IsChart chart) {
+		// do nothing
+	}
 
 	/**
-	 * Invoked to parse the data into the controller meta data.
+	 * Called after it initializes the controller.
+	 * 
+	 * @param context context of controller
+	 * @param chart chart instance
+	 */
+	default void onAfterInitialize(ControllerContext context, IsChart chart) {
+		// do nothing
+	}
+	
+	/**
+	 * Called before it invokes to parse the data into the controller meta data.
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
 	 * @param start start index of metadata
 	 * @param count count of metadata
 	 */
-	void parse(ControllerContext context, IsChart chart, int start, int count);
+	default void onBeforeParse(ControllerContext context, IsChart chart, int start, int count) {
+		// do nothing
+	}
 
 	/**
-	 * Draw the representation of the dataset.
+	 * Called after it invokes to parse the data into the controller meta data.
+	 * 
+	 * @param context context of controller
+	 * @param chart chart instance
+	 * @param start start index of metadata
+	 * @param count count of metadata
+	 */
+	default void onAfterParse(ControllerContext context, IsChart chart, int start, int count) {
+		// do nothing
+	}
+
+	/**
+	 * Called before it draws the representation of the data set.
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
 	 */
-	void draw(ControllerContext context, IsChart chart);
+	default void onBeforeDraw(ControllerContext context, IsChart chart) {
+		// do nothing
+	}
 
 	/**
-	 * Update the elements in response to new data.
+	 * Called after it draws the representation of the data set.
+	 * 
+	 * @param context context of controller
+	 * @param chart chart instance
+	 */
+	default void onAfterDraw(ControllerContext context, IsChart chart) {
+		// do nothing
+	}
+
+	/**
+	 * Called before it updates the elements in response to new data.
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
 	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
 	 */
-	void update(ControllerContext context, IsChart chart, IsTransitionKey mode);
+	default void onBeforeUpdate(ControllerContext context, IsChart chart, IsTransitionKey mode) {
+		// do nothing
+	}
 
 	/**
-	 * Ensures that the dataset represented by this controller is linked to a scale.<br>
+	 * Called after it updates the elements in response to new data.
+	 * 
+	 * @param context context of controller
+	 * @param chart chart instance
+	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
+	 */
+	default void onAfterUpdate(ControllerContext context, IsChart chart, IsTransitionKey mode) {
+		// do nothing
+	}
+
+	/**
+	 * Called before it ensures that the data set represented by this controller is linked to a scale.<br>
 	 * Overridden to helpers.noop in the polar area and doughnut controllers as these chart types using a single scale.
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
 	 */
-	void linkScales(ControllerContext context, IsChart chart);
+	default void onBeforeLinkScales(ControllerContext context, IsChart chart) {
+		// do nothing
+	}
+
+	/**
+	 * Called after it ensures that the data set represented by this controller is linked to a scale.<br>
+	 * Overridden to helpers.noop in the polar area and doughnut controllers as these chart types using a single scale.
+	 * 
+	 * @param context context of controller
+	 * @param chart chart instance
+	 */
+	default void onAfterLinkScales(ControllerContext context, IsChart chart) {
+		// do nothing
+	}
 
 }

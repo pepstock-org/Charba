@@ -522,7 +522,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add an optional argument (boolean) in order to decide if the base default options of the chart which is being extended must be cloned or not. 
    * reduce the visibility of `register` method of `Controller` class   
  * rename `extend` method of `Controllers` class to `register`.
- * remove `addElements`, `setHoverStyle` and `removeHoverStyle`  methods from `Controller` interface.
+ * remove `initialize`, `draw`, `linkScales`, `update`, `addElements`, `setHoverStyle` and `removeHoverStyle`  methods from `Controller` interface.
+ * change `AbstractController` class in order to extend it only the the controller type and implementing only needed methods
  * remove `fontFamily` and `fontStyle` properties from meter and gauge options, use `font` instead.
  * rename `GaugeThreshold` enumeration to `DefaultThreshold`.
  * rename `MeterDisplay` enumeration to `Render` and move from `org.pepstock.charba.client.impl.charts` package to `org.pepstock.charba.client.enums`.
@@ -531,7 +532,12 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change the signature of `MeterFormatCallback` interface in order to get only a `MeterContext` instance as argument. 
 
 #### Features
- * add `linkScales` and `parse` methods to Controller interface in order to have the complete mapping of CHART.JS controller interface.
+ * implement new `Controller` interface in order to have methods before and after CHART.JS chart phases:
+   * _initialize_
+   * _draw_
+   * _linkScales_
+   * _update_
+   * _parse_     
  * implement easing value management for `Meter` and `Gauge` charts (and their controller) because in the new version of CHART.JS, easing value is not provided anymore.
  * add `ControllerRegistrationHandler` interface to set to a `ControllerType` constructor in order to enable the notification before and after the controller registration to CHART.JS.
  * add `autoFontSize` property to meter and gauge options in order to enable or disable auto calculation of font size and use the font size provided by the user.

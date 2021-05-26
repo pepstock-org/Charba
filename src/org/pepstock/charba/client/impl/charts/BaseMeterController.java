@@ -57,8 +57,6 @@ final class BaseMeterController extends AbstractController {
 	private static final double MAX_PERCENTAGE = 100D;
 	// SQRT of 2 to calculate the square inside the doughnut
 	private static final double SQRT_2 = Math.sqrt(2);
-	// controller type
-	private final ControllerType type;
 
 	/**
 	 * Creates the controller using the type passed as argument.
@@ -66,26 +64,16 @@ final class BaseMeterController extends AbstractController {
 	 * @param type controller type, could be meter or gauge.
 	 */
 	private BaseMeterController(ControllerType type) {
-		this.type = type;
+		super(type);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#getType()
+	 * @see org.pepstock.charba.client.Controller#onBeforeInitialize(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public ControllerType getType() {
-		return type;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.controllers.AbstractController#initialize(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void initialize(ControllerContext context, IsChart chart) {
+	public void onBeforeInitialize(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
 		Checker.assertCheck(Controller.isConsistent(this, context, chart), "Initialize method arguments are not consistent");
 		// gets the data set at index
@@ -101,23 +89,28 @@ final class BaseMeterController extends AbstractController {
 			// forces hidden data set
 			meterDataset.hide();
 		}
-		// invokes the initialization
-		super.initialize(context, chart);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.controllers.AbstractController#draw(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Controller#onBeforeDraw(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void draw(ControllerContext context, IsChart chart) {
+	public void onBeforeDraw(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
 		// checks if the index is 0 because
 		// only the data set 0 contains my value
 		Checker.assertCheck(Controller.isConsistent(this, context, chart) && context.getIndex() == 0, "Draw method arguments are not consistent");
-		// draw the doughnut chart
-		super.draw(context, chart);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Controller#onAfterDraw(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onAfterDraw(ControllerContext context, IsChart chart) {
 		// gets chart node
 		ChartNode node = context.getNode();
 		// draws labels

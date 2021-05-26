@@ -247,7 +247,12 @@ final class WrapperController extends NativeObjectContainer {
 	void onInitialize(ControllerContext context, IsChart chart) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.initialize(context, chart);
+			// invokes on before
+			delegation.onBeforeInitialize(context, chart);
+			// invokes default
+			JsControllerHelper.get().initialize(delegation.getType(), context);
+			// invokes on after
+			delegation.onAfterInitialize(context, chart);
 		}
 	}
 
@@ -262,7 +267,12 @@ final class WrapperController extends NativeObjectContainer {
 	void onParse(ControllerContext context, IsChart chart, int start, int count) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.parse(context, chart, start, count);
+			// invokes on before
+			delegation.onBeforeParse(context, chart, start, count);
+			// invokes default
+			JsControllerHelper.get().parse(delegation.getType(), context, start, count);
+			// invokes on after
+			delegation.onAfterParse(context, chart, start, count);
 		}
 	}
 
@@ -275,7 +285,12 @@ final class WrapperController extends NativeObjectContainer {
 	void onDraw(ControllerContext context, IsChart chart) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.draw(context, chart);
+			// invokes on before
+			delegation.onBeforeDraw(context, chart);
+			// invokes default
+			JsControllerHelper.get().draw(delegation.getType(), context);
+			// invokes on after
+			delegation.onAfterDraw(context, chart);
 		}
 	}
 
@@ -291,10 +306,22 @@ final class WrapperController extends NativeObjectContainer {
 		if (Controller.isConsistent(delegation, context, chart)) {
 			// checks if update mode is consistent
 			if (mode == null || mode.length() == 0) {
-				delegation.update(context, chart, null);
+				// invokes on before
+				delegation.onBeforeUpdate(context,chart, null);
+				// invokes default
+				JsControllerHelper.get().update(delegation.getType(), context, null);
+				// invokes on after
+				delegation.onAfterUpdate(context,chart, null);
 			} else {
 				// otherwise creates a mode by the string
-				delegation.update(context, chart, IsTransitionKey.create(mode));
+				// creates transition
+				IsTransitionKey transition = IsTransitionKey.create(mode);
+				// invokes on before
+				delegation.onBeforeUpdate(context,chart, transition);
+				// invokes default
+				JsControllerHelper.get().update(delegation.getType(), context, transition.value());
+				// invokes on after
+				delegation.onAfterUpdate(context,chart, transition);
 			}
 		}
 	}
@@ -309,7 +336,12 @@ final class WrapperController extends NativeObjectContainer {
 	void onLinkScales(ControllerContext context, IsChart chart) {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
-			delegation.linkScales(context, chart);
+			// invokes on before
+			delegation.onBeforeLinkScales(context,chart);
+			// invokes default
+			JsControllerHelper.get().linkScales(delegation.getType(), context);
+			// invokes on after
+			delegation.onAfterLinkScales(context,chart);
 		}
 	}
 
