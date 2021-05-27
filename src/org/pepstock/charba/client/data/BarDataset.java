@@ -53,7 +53,7 @@ import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.BarDatasetOptionsHandler;
 import org.pepstock.charba.client.options.HasBarDatasetOptions;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * The bar chart allows a number of properties to be specified for each data set. These are used to set display properties for a specific data set.<br>
@@ -369,7 +369,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	public void setXAxisID(String xAxisID) {
 		// checks if is valid scale id
-		IsScaleId.checkIfValid(xAxisID);
+		ScaleId.checkIfValid(xAxisID);
 		// stores
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
@@ -379,7 +379,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * 
 	 * @param xAxisID the ID of the x axis to plot this data set on.
 	 */
-	public void setXAxisID(IsScaleId xAxisID) {
+	public void setXAxisID(ScaleId xAxisID) {
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
 
@@ -390,7 +390,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return the ID of the x axis to plot this data set on.<br>
 	 *         If not specified, this defaults to the ID of {@link DefaultScaleId#X}
 	 */
-	public IsScaleId getXAxisID() {
+	public ScaleId getXAxisID() {
 		return getValue(Property.X_AXIS_ID, DefaultScaleId.X);
 	}
 
@@ -401,7 +401,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	public void setYAxisID(String yAxisID) {
 		// checks if is valid scale id
-		IsScaleId.checkIfValid(yAxisID);
+		ScaleId.checkIfValid(yAxisID);
 		// stores
 		setValue(Property.Y_AXIS_ID, yAxisID);
 	}
@@ -411,7 +411,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * 
 	 * @param yAxisID the ID of the y axis to plot this data set on.
 	 */
-	public void setYAxisID(IsScaleId yAxisID) {
+	public void setYAxisID(ScaleId yAxisID) {
 		setValue(Property.Y_AXIS_ID, yAxisID);
 	}
 
@@ -422,7 +422,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @return the ID of the y axis to plot this data set on.<br>
 	 *         If not specified, this defaults to the ID of {@link DefaultScaleId#Y}
 	 */
-	public IsScaleId getYAxisID() {
+	public ScaleId getYAxisID() {
 		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y);
 	}
 

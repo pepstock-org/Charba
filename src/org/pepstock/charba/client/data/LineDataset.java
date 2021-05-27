@@ -38,7 +38,7 @@ import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.enums.Stepped;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * The line chart allows a number of properties to be specified for each data set.<br>
@@ -166,7 +166,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	public void setXAxisID(String xAxisID) {
 		// checks if is valid scale id
-		IsScaleId.checkIfValid(xAxisID);
+		ScaleId.checkIfValid(xAxisID);
 		// stores
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
@@ -176,9 +176,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * 
 	 * @param xAxisID the ID of the x axis to plot this data set on.
 	 */
-	public void setXAxisID(IsScaleId xAxisID) {
+	public void setXAxisID(ScaleId xAxisID) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(xAxisID);
+		ScaleId.checkIfValid(xAxisID);
 		// stores the object
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
@@ -190,7 +190,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @return the ID of the x axis to plot this data set on.<br>
 	 *         If not specified, this defaults to the ID of {@link DefaultScaleId#X}
 	 */
-	public IsScaleId getXAxisID() {
+	public ScaleId getXAxisID() {
 		return getValue(Property.X_AXIS_ID, DefaultScaleId.X);
 	}
 
@@ -201,7 +201,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	public void setYAxisID(String yAxisID) {
 		// checks if is valid scale id
-		IsScaleId.checkIfValid(yAxisID);
+		ScaleId.checkIfValid(yAxisID);
 		// stores
 		setValue(Property.Y_AXIS_ID, yAxisID);
 	}
@@ -211,9 +211,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * 
 	 * @param yAxisID the ID of the y axis to plot this data set on.
 	 */
-	public void setYAxisID(IsScaleId yAxisID) {
+	public void setYAxisID(ScaleId yAxisID) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(yAxisID);
+		ScaleId.checkIfValid(yAxisID);
 		// stores the object
 		setValue(Property.Y_AXIS_ID, yAxisID);
 	}
@@ -225,7 +225,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @return the ID of the y axis to plot this data set on.<br>
 	 *         If not specified, this defaults to the ID of {@link DefaultScaleId#Y}
 	 */
-	public IsScaleId getYAxisID() {
+	public ScaleId getYAxisID() {
 		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y);
 	}
 

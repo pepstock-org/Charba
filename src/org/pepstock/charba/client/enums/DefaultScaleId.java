@@ -19,14 +19,14 @@ import java.util.Locale;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * Enumerates the default scale id.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultScaleId implements IsScaleId
+public enum DefaultScaleId implements ScaleId
 {
 	/**
 	 * Default scale id for X cartesian axis.
@@ -115,7 +115,7 @@ public enum DefaultScaleId implements IsScaleId
 	 * @param scaleId scale id to be checked
 	 * @return <code>true</code> if the scale id is related to this axis id
 	 */
-	public boolean is(IsScaleId scaleId) {
+	public boolean is(ScaleId scaleId) {
 		return is(Key.checkAndGetIfValid(scaleId).value());
 	}
 

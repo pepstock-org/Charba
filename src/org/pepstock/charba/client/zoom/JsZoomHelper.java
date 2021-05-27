@@ -18,7 +18,7 @@ package org.pepstock.charba.client.zoom;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.options.IsTransitionKey;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -170,9 +170,9 @@ final class JsZoomHelper {
 	 * @param range range (min/max) of scale to zoom
 	 * @param transition update transition mode
 	 */
-	void zoomScale(Chart chart, IsScaleId scaleId, ScaleRange range, IsTransitionKey transition) {
+	void zoomScale(Chart chart, ScaleId scaleId, ScaleRange range, IsTransitionKey transition) {
 		// checks if chart and amount are consistent
-		if (chart != null && IsScaleId.isValid(scaleId) && range != null) {
+		if (chart != null && ScaleId.isValid(scaleId) && range != null) {
 			// checks if transition is consistent
 			if (IsTransitionKey.isValid(transition)) {
 				// zooms by transition key

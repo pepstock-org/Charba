@@ -81,7 +81,7 @@ public final class ExtendedScale extends Scale {
 	 * @param kind kind of axis
 	 * @param defaultValues default provider.
 	 */
-	public ExtendedScale(ConfigurationEnvelop<IsScaleId> envelop, AxisType type, AxisKind kind, IsDefaultScale defaultValues) {
+	public ExtendedScale(ConfigurationEnvelop<ScaleId> envelop, AxisType type, AxisKind kind, IsDefaultScale defaultValues) {
 		super(type, defaultValues);
 		// checks if envelop is consistent
 		Envelop.checkIfValid(envelop);

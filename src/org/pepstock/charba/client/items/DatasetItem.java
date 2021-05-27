@@ -30,7 +30,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.IndexAxis;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
@@ -209,7 +209,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	 * 
 	 * @return the Y axis ID.
 	 */
-	public IsScaleId getYAxisID() {
+	public ScaleId getYAxisID() {
 		return getValue(Property.Y_AXIS_ID, DefaultScaleId.Y);
 	}
 
@@ -227,7 +227,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	 * 
 	 * @return the X axis ID.
 	 */
-	public IsScaleId getXAxisID() {
+	public ScaleId getXAxisID() {
 		return getValue(Property.X_AXIS_ID, DefaultScaleId.X);
 	}
 
@@ -245,7 +245,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	 * 
 	 * @return the R axis ID.
 	 */
-	public IsScaleId getRAxisID() {
+	public ScaleId getRAxisID() {
 		return getValue(Property.R_AXIS_ID, DefaultScaleId.R);
 	}
 
@@ -263,7 +263,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	 * 
 	 * @return the value axis ID.
 	 */
-	public IsScaleId getValueAxisID() {
+	public ScaleId getValueAxisID() {
 		return getValue(Property.V_AXIS_ID, DefaultScaleId.Y);
 	}
 
@@ -283,7 +283,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	 * 
 	 * @return the index axis ID.
 	 */
-	public IsScaleId getIndexAxisID() {
+	public ScaleId getIndexAxisID() {
 		return getValue(Property.I_AXIS_ID, DefaultScaleId.X);
 	}
 

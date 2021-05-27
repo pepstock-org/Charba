@@ -28,7 +28,7 @@ import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.utils.JSON;
 
 /**
@@ -1122,7 +1122,7 @@ public abstract class NativeObjectContainer {
 	 * @param defaultValue default value as key if the property is missing
 	 * @return value of the property
 	 */
-	protected final IsScaleId getValue(Key key, IsScaleId defaultValue) {
+	protected final ScaleId getValue(Key key, ScaleId defaultValue) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns the default value
@@ -1132,7 +1132,7 @@ public abstract class NativeObjectContainer {
 		Key.checkIfValid(defaultValue);
 		// gets the string value
 		// checks and gets the scale id
-		return IsScaleId.checkAndGetScaleID(getValue(key, defaultValue.value()), defaultValue);
+		return ScaleId.checkAndGetScaleID(getValue(key, defaultValue.value()), defaultValue);
 	}
 
 	// ------------------------------------------

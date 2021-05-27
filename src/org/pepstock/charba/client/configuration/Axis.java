@@ -44,7 +44,7 @@ import org.pepstock.charba.client.items.AxisItem;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.options.ExtendedScale;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.ScaleTitle;
 
@@ -166,10 +166,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param type axis type
 	 * @param kind axis kind to set the right position
 	 */
-	Axis(IsChart chart, IsScaleId id, AxisType type, AxisKind kind) {
+	Axis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
 		super(chart);
 		// checks if id is consistent
-		IsScaleId.checkIfValid(id);
+		ScaleId.checkIfValid(id);
 		// checks cartesian type
 		Key.checkIfValid(kind);
 		// stores internally the axis type
@@ -213,7 +213,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @return The ID is used to link datasets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
 	 */
-	public final IsScaleId getId() {
+	public final ScaleId getId() {
 		return getConfiguration().getId();
 	}
 
@@ -399,7 +399,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param kind axis kind instance
 	 * @return the global options for this chart.
 	 */
-	private IsDefaultScale getDefaultScale(IsScaleId scaleId, AxisKind kind) {
+	private IsDefaultScale getDefaultScale(ScaleId scaleId, AxisKind kind) {
 		// gets the global option for the chart.
 		IsDefaultScaledOptions options = getChart().getDefaultChartOptions();
 		// if is a a chart with scales

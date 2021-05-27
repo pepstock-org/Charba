@@ -20,7 +20,7 @@ import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.options.IsTransitionKey;
 import org.pepstock.charba.client.plugins.AbstractExtensionPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
@@ -262,7 +262,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param scaleId scale id to zoom
 	 * @param range range (min/max) of scale to zoom
 	 */
-	public static void zoomScale(IsChart chart, IsScaleId scaleId, ScaleRange range) {
+	public static void zoomScale(IsChart chart, ScaleId scaleId, ScaleRange range) {
 		zoomScale(chart, scaleId, range, null);
 	}
 
@@ -274,9 +274,9 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param range range (min/max) of scale to zoom
 	 * @param transition update transition mode
 	 */
-	public static void zoomScale(IsChart chart, IsScaleId scaleId, ScaleRange range, IsTransitionKey transition) {
+	public static void zoomScale(IsChart chart, ScaleId scaleId, ScaleRange range, IsTransitionKey transition) {
 		// check if chart is consistent and zoom plugin is activated
-		if (isReadyForApi(chart) && IsScaleId.isValid(scaleId) && chart.getNode().getScales().getItems().containsKey(scaleId.value())) {
+		if (isReadyForApi(chart) && ScaleId.isValid(scaleId) && chart.getNode().getScales().getItems().containsKey(scaleId.value())) {
 			// gets native chart instance
 			Chart nativeChart = Charts.getNative(chart);
 			// zooms scale

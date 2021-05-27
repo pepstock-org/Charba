@@ -89,7 +89,7 @@ public final class ExtendedScales extends Scales {
 					// it MUST
 					Key.checkIfValid(type);
 					// gets id as key
-					IsScaleId id = checkAndGetScaleId(scale);
+					ScaleId id = checkAndGetScaleId(scale);
 					// checks for radial
 					// must be the first one
 					// and must have only 1 scale being a radial
@@ -113,9 +113,9 @@ public final class ExtendedScales extends Scales {
 	 * @param scale scale instance to use for checking and getting
 	 * @return a scale id, retrieved from a scale instance
 	 */
-	private IsScaleId checkAndGetScaleId(Scale scale) {
+	private ScaleId checkAndGetScaleId(Scale scale) {
 		// gets id as key
-		IsScaleId id = scale.getId();
+		ScaleId id = scale.getId();
 		// checks if scale id of scale is consistent
 		// used for cartesian, it must not be set to unknown
 		if (DefaultScaleId.UNKNOWN.is(id)) {

@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -218,7 +218,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 */
 	public void setScaleID(String scaleId) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// stores it
 		setValue(LineAnnotation.Property.SCALE_ID, scaleId);
 	}
@@ -228,9 +228,9 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * 
 	 * @param scaleId the ID of the scale to bind onto
 	 */
-	public void setScaleID(IsScaleId scaleId) {
+	public void setScaleID(ScaleId scaleId) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// stores it
 		setValue(LineAnnotation.Property.SCALE_ID, scaleId);
 	}
@@ -241,7 +241,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @return the ID of the scale to bind onto
 	 */
 	@Override
-	public IsScaleId getScaleID() {
+	public ScaleId getScaleID() {
 		return getValue(Property.SCALE_ID, defaultValues.getScaleID());
 	}
 

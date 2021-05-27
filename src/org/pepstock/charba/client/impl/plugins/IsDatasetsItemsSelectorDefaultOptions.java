@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.Collections;
 import java.util.List;
 
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * Maps all configuration options of DEFAULT GLOBAL options of {@link DatasetsItemsSelector#ID} plugin.
@@ -50,7 +50,7 @@ interface IsDatasetsItemsSelectorDefaultOptions {
 	 * @return the ID of the x axis to plot this dataset on.<br>
 	 *         If not specified, this defaults to the ID of the first found x axis.
 	 */
-	default IsScaleId getXAxisID() {
+	default ScaleId getXAxisID() {
 		return DatasetsItemsSelectorOptions.DEFAULT_AXIS_ID;
 	}
 

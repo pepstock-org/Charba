@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * This object is used to map defined axis as time series. This is used to have time series charts.
@@ -47,7 +47,7 @@ public class CartesianTimeSeriesAxis extends CartesianTimeAxis {
 	 * @param id axis id
 	 */
 	public CartesianTimeSeriesAxis(IsChart chart, String id) {
-		this(chart, IsScaleId.create(id));
+		this(chart, ScaleId.create(id));
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class CartesianTimeSeriesAxis extends CartesianTimeAxis {
 	 * @param chart chart instance
 	 * @param id axis id
 	 */
-	public CartesianTimeSeriesAxis(IsChart chart, IsScaleId id) {
+	public CartesianTimeSeriesAxis(IsChart chart, ScaleId id) {
 		this(chart, id, null);
 	}
 
@@ -78,7 +78,7 @@ public class CartesianTimeSeriesAxis extends CartesianTimeAxis {
 	 * @param kind axis kind
 	 */
 	public CartesianTimeSeriesAxis(IsChart chart, String id, AxisKind kind) {
-		this(chart, IsScaleId.create(id), kind);
+		this(chart, ScaleId.create(id), kind);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class CartesianTimeSeriesAxis extends CartesianTimeAxis {
 	 * @param id axis id
 	 * @param kind axis kind
 	 */
-	public CartesianTimeSeriesAxis(IsChart chart, IsScaleId id, AxisKind kind) {
+	public CartesianTimeSeriesAxis(IsChart chart, ScaleId id, AxisKind kind) {
 		super(chart, id, AxisType.TIMESERIES, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 	}
 }

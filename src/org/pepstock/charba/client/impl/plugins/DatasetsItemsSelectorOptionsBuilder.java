@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * Comfortable object to create {@link DatasetsItemsSelector#ID} plugin options by a builder.
@@ -100,7 +100,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * @return builder instance
 	 */
-	public DatasetsItemsSelectorOptionsBuilder setXAxisID(IsScaleId xAxisID) {
+	public DatasetsItemsSelectorOptionsBuilder setXAxisID(ScaleId xAxisID) {
 		options.setXAxisID(xAxisID);
 		return this;
 	}

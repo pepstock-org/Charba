@@ -30,7 +30,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -253,7 +253,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setYScaleID(String scaleId) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// stores it
 		setValue(PointAnnotation.Property.Y_SCALE_ID, scaleId);
 	}
@@ -263,9 +263,9 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * 
 	 * @param scaleId the ID of the Y scale to bind onto
 	 */
-	public void setYScaleID(IsScaleId scaleId) {
+	public void setYScaleID(ScaleId scaleId) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// stores it
 		setValue(PointAnnotation.Property.Y_SCALE_ID, scaleId);
 	}
@@ -276,7 +276,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @return the ID of the Y scale to bind onto
 	 */
 	@Override
-	public IsScaleId getYScaleID() {
+	public ScaleId getYScaleID() {
 		return getValue(Property.Y_SCALE_ID, defaultValues.getYScaleID());
 	}
 
@@ -287,7 +287,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setXScaleID(String scaleId) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// stores it
 		setValue(PointAnnotation.Property.X_SCALE_ID, scaleId);
 	}
@@ -297,9 +297,9 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * 
 	 * @param scaleId the ID of the X scale to bind onto
 	 */
-	public void setXScaleID(IsScaleId scaleId) {
+	public void setXScaleID(ScaleId scaleId) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// stores it
 		setValue(PointAnnotation.Property.X_SCALE_ID, scaleId);
 	}
@@ -310,7 +310,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @return the ID of the X scale to bind onto
 	 */
 	@Override
-	public IsScaleId getXScaleID() {
+	public ScaleId getXScaleID() {
 		return getValue(Property.X_SCALE_ID, defaultValues.getXScaleID());
 	}
 

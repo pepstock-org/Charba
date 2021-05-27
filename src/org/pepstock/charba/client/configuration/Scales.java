@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.options.Scale;
 
 /**
@@ -90,9 +90,9 @@ public class Scales extends ConfigurationOptionsContainer {
 	 * @param scaleId scale id to check
 	 * @return the scale with the id passed as argument or <code>null</code> if not exist
 	 */
-	public Axis getAxisById(IsScaleId scaleId) {
+	public Axis getAxisById(ScaleId scaleId) {
 		// checks if the scale id is consistent
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// returns the object if exist
 		return storedAxes.get(scaleId.value());
 	}

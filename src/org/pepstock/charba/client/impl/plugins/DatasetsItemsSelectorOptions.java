@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.DefaultScaleId;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
@@ -219,7 +219,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 */
 	public void setXAxisID(String xAxisID) {
 		// checks if is valid scale id
-		IsScaleId.checkIfValid(xAxisID);
+		ScaleId.checkIfValid(xAxisID);
 		// stores
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
@@ -229,9 +229,9 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 * 
 	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
-	public void setXAxisID(IsScaleId xAxisID) {
+	public void setXAxisID(ScaleId xAxisID) {
 		// checks if is valid scale id
-		IsScaleId.checkIfValid(xAxisID);
+		ScaleId.checkIfValid(xAxisID);
 		// stores
 		setValue(Property.X_AXIS_ID, xAxisID);
 	}
@@ -242,7 +242,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	@Override
-	public IsScaleId getXAxisID() {
+	public ScaleId getXAxisID() {
 		return getValue(Property.X_AXIS_ID, defaultOptions.getXAxisID());
 	}
 

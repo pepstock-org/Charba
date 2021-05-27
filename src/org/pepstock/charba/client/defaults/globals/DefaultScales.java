@@ -18,7 +18,7 @@ package org.pepstock.charba.client.defaults.globals;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * CHART.JS default values for scale/axis element.
@@ -39,10 +39,10 @@ public final class DefaultScales implements IsDefaultScales {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getAxis(org.pepstock.charba.client.options.IsScaleId, org.pepstock.charba.client.enums.AxisKind)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getAxis(org.pepstock.charba.client.options.ScaleId, org.pepstock.charba.client.enums.AxisKind)
 	 */
 	@Override
-	public IsDefaultScale getAxis(IsScaleId scaleId, AxisKind kind) {
+	public IsDefaultScale getAxis(ScaleId scaleId, AxisKind kind) {
 		return scale;
 	}
 

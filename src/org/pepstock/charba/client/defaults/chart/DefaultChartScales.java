@@ -22,7 +22,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.DefaultScaleId;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -47,12 +47,12 @@ public final class DefaultChartScales implements IsDefaultScales {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getAxis(org.pepstock.charba.client.options.IsScaleId, org.pepstock.charba.client.enums.AxisKind)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getAxis(org.pepstock.charba.client.options.ScaleId, org.pepstock.charba.client.enums.AxisKind)
 	 */
 	@Override
-	public IsDefaultScale getAxis(IsScaleId scaleId, AxisKind kind) {
+	public IsDefaultScale getAxis(ScaleId scaleId, AxisKind kind) {
 		// checks if scale id is consistent
-		if (IsScaleId.isValid(scaleId)) {
+		if (ScaleId.isValid(scaleId)) {
 			// looks for scale id default
 			if (scales.hasAxis(scaleId)) {
 				// gets the stored axis as Y
@@ -80,7 +80,7 @@ public final class DefaultChartScales implements IsDefaultScales {
 	 * @param kind axis kind to use to retrieve the scale
 	 * @return the default scale or <code>null</code> if not found
 	 */
-	private DefaultChartScale searchByDefaultScaleId(IsScaleId scaleId, AxisKind kind) {
+	private DefaultChartScale searchByDefaultScaleId(ScaleId scaleId, AxisKind kind) {
 		// scans all defaults ids
 		for (DefaultScaleId defScaleId : DefaultScaleId.values()) {
 			// checks if default scale id matches with argument

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * Interface to define scales/axes object defaults.
@@ -32,6 +32,6 @@ public interface IsDefaultScales {
 	 * @param kind axis kind to use if the scale id is not recognizable
 	 * @return the default configuration for x axis.
 	 */
-	IsDefaultScale getAxis(IsScaleId scaleId, AxisKind kind);
+	IsDefaultScale getAxis(ScaleId scaleId, AxisKind kind);
 
 }

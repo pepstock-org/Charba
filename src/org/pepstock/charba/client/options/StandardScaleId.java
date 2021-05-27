@@ -21,7 +21,7 @@ package org.pepstock.charba.client.options;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardScaleId extends AbstractStandardKey implements IsScaleId {
+public final class StandardScaleId extends AbstractStandardKey implements ScaleId {
 
 	/**
 	 * Builds the object with the scale id value as string
@@ -31,7 +31,7 @@ public final class StandardScaleId extends AbstractStandardKey implements IsScal
 	StandardScaleId(String value) {
 		super(value);
 		// checks if argument is consistent
-		IsScaleId.checkIfValid(this);
+		ScaleId.checkIfValid(this);
 	}
 
 }

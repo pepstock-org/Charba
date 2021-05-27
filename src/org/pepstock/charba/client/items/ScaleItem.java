@@ -39,7 +39,7 @@ import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleDataType;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * Wraps the scale item of CHART JS chart.<br>
@@ -98,7 +98,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	// reference to scale id
-	private IsScaleId scaleId;
+	private ScaleId scaleId;
 
 	/**
 	 * Creates the item using a native java script object which contains all properties.
@@ -106,10 +106,10 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @param scaleId this is the scale id.
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	ScaleItem(IsScaleId scaleId, NativeObject nativeObject) {
+	ScaleItem(ScaleId scaleId, NativeObject nativeObject) {
 		super(nativeObject);
 		// checks scale id
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// stores scale id
 		this.scaleId = scaleId;
 	}
@@ -139,13 +139,13 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the id of scale.
 	 */
-	public final IsScaleId getId() {
+	public final ScaleId getId() {
 		// checks if scale has been previously set
 		if (scaleId == null) {
 			// gets the value
 			String storedId = getValue(Property.ID, getType().getDefaultScaleId().value());
 			// stores the scale id
-			scaleId = IsScaleId.create(storedId);
+			scaleId = ScaleId.create(storedId);
 		}
 		// returns the stored scale id
 		return scaleId;

@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * This object is used to map defined axis as time.
@@ -55,7 +55,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param id axis id
 	 */
 	public CartesianTimeAxis(IsChart chart, String id) {
-		this(chart, IsScaleId.create(id));
+		this(chart, ScaleId.create(id));
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param chart chart instance
 	 * @param id axis id
 	 */
-	public CartesianTimeAxis(IsChart chart, IsScaleId id) {
+	public CartesianTimeAxis(IsChart chart, ScaleId id) {
 		this(chart, id, null);
 	}
 
@@ -86,7 +86,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param kind axis kind
 	 */
 	public CartesianTimeAxis(IsChart chart, String id, AxisKind kind) {
-		this(chart, IsScaleId.create(id), kind);
+		this(chart, ScaleId.create(id), kind);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param id axis id
 	 * @param kind axis kind
 	 */
-	public CartesianTimeAxis(IsChart chart, IsScaleId id, AxisKind kind) {
+	public CartesianTimeAxis(IsChart chart, ScaleId id, AxisKind kind) {
 		this(chart, id, AxisType.TIME, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 	}
 
@@ -108,7 +108,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param type axis type
 	 * @param kind axis kind
 	 */
-	protected CartesianTimeAxis(IsChart chart, IsScaleId id, AxisType type, AxisKind kind) {
+	protected CartesianTimeAxis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
 		super(chart, id, AxisType.TIME, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 		// creates the time object
 		this.time = new Time(this);

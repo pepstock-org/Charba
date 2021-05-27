@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsScaleId extends PropertyKey {
+public interface ScaleId extends PropertyKey {
 
 	/**
 	 * Returns a key instance by its string value.
@@ -31,7 +31,7 @@ public interface IsScaleId extends PropertyKey {
 	 * @param id string value to use
 	 * @return new scale id instance
 	 */
-	static IsScaleId create(String id) {
+	static ScaleId create(String id) {
 		// checks if id as argument is a default one
 		for (DefaultScaleId defScaleId : DefaultScaleId.values()) {
 			// checks if id is equals to default
@@ -61,7 +61,7 @@ public interface IsScaleId extends PropertyKey {
 	 * @param id scale id to be checked
 	 * @return <code>true</code> if scale id passed as argument is not <code>null</code> and its value is not <code>null</code> as well and could be a valid scale id.
 	 */
-	static boolean isValid(IsScaleId id) {
+	static boolean isValid(ScaleId id) {
 		return PropertyKey.isValid(id);
 	}
 
@@ -71,7 +71,7 @@ public interface IsScaleId extends PropertyKey {
 	 * 
 	 * @param id scale id to be checked
 	 */
-	static void checkIfValid(IsScaleId id) {
+	static void checkIfValid(ScaleId id) {
 		PropertyKey.checkIfValid(id);
 	}
 
@@ -92,9 +92,9 @@ public interface IsScaleId extends PropertyKey {
 	 * @param defaultValue the default value if not exist
 	 * @return the ID of the scale
 	 */
-	static IsScaleId checkAndGetScaleID(String id, IsScaleId defaultValue) {
+	static ScaleId checkAndGetScaleID(String id, ScaleId defaultValue) {
 		// checks if default value is consistent
-		if (IsScaleId.isValid(id)) {
+		if (ScaleId.isValid(id)) {
 			// gets and checks if a default scale
 			// has been stored
 			// scans all defaults to check with the argument
@@ -105,7 +105,7 @@ public interface IsScaleId extends PropertyKey {
 				}
 			}
 			// creates new scale id with id stored in the the object
-			return IsScaleId.create(id);
+			return ScaleId.create(id);
 		}
 		// if here not, default value is not consistent
 		// then returns the default

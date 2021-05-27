@@ -19,7 +19,7 @@ import java.util.Date;
 
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin <b>LINE</b> annotation DEFAULTS options interface.
@@ -45,7 +45,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
 	 * @see org.pepstock.charba.client.annotation.IsDefaultsXYAnnotation#getXScaleID()
 	 */
 	@Override
-	default IsScaleId getXScaleID() {
+	default ScaleId getXScaleID() {
 		return IsDefaultsXYAnnotation.super.getXScaleID();
 	}
 
@@ -55,7 +55,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
 	 * @see org.pepstock.charba.client.annotation.IsDefaultsXYAnnotation#getYScaleID()
 	 */
 	@Override
-	default IsScaleId getYScaleID() {
+	default ScaleId getYScaleID() {
 		return IsDefaultsXYAnnotation.super.getYScaleID();
 	}
 
@@ -81,7 +81,7 @@ interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
 	 * 
 	 * @return the ID of the scale to bind onto
 	 */
-	default IsScaleId getScaleID() {
+	default ScaleId getScaleID() {
 		return null;
 	}
 

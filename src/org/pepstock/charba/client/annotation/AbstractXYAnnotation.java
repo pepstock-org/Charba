@@ -26,7 +26,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.options.IsScaleId;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -157,7 +157,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setXScaleID(String scaleId) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// stores it
 		setValue(Property.X_SCALE_ID, scaleId);
 	}
@@ -167,9 +167,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * 
 	 * @param scaleId the ID of the X scale to bind onto
 	 */
-	public final void setXScaleID(IsScaleId scaleId) {
+	public final void setXScaleID(ScaleId scaleId) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// stores it
 		setValue(Property.X_SCALE_ID, scaleId);
 	}
@@ -180,7 +180,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @return the ID of the X scale to bind onto
 	 */
 	@Override
-	public final IsScaleId getXScaleID() {
+	public final ScaleId getXScaleID() {
 		return getValue(Property.X_SCALE_ID, defaultValues.getXScaleID());
 	}
 
@@ -323,7 +323,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setYScaleID(String scaleId) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// stores it
 		setValue(Property.Y_SCALE_ID, scaleId);
 	}
@@ -333,9 +333,9 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * 
 	 * @param scaleId the ID of the Y scale to bind onto
 	 */
-	public final void setYScaleID(IsScaleId scaleId) {
+	public final void setYScaleID(ScaleId scaleId) {
 		// checks if scale id is valid
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// stores it
 		setValue(Property.Y_SCALE_ID, scaleId);
 	}
@@ -346,7 +346,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @return the ID of the Y scale to bind onto
 	 */
 	@Override
-	public final IsScaleId getYScaleID() {
+	public final ScaleId getYScaleID() {
 		return getValue(Property.Y_SCALE_ID, defaultValues.getYScaleID());
 	}
 

@@ -126,9 +126,9 @@ public class Scale extends AbstractScale {
 	 * 
 	 * @param id The ID is used to link datasets and scale axes together
 	 */
-	final void setId(IsScaleId id) {
+	final void setId(ScaleId id) {
 		// checks if key is consistent
-		IsScaleId.checkIfValid(id);
+		ScaleId.checkIfValid(id);
 		// if the scale id is UNKNWON (set by Charba)
 		// does not store
 		// this is for radial axis where id must miss
@@ -145,7 +145,7 @@ public class Scale extends AbstractScale {
 	 * 
 	 * @return The ID is used to link datasets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
 	 */
-	public final IsScaleId getId() {
+	public final ScaleId getId() {
 		return getValue(Property.ID, DefaultScaleId.UNKNOWN);
 	}
 
@@ -225,7 +225,7 @@ public class Scale extends AbstractScale {
 			return AxisKind.R;
 		}
 		// gets scale id
-		IsScaleId id = getId();
+		ScaleId id = getId();
 		// checks if the id is consistent
 		if (DefaultScaleId.UNKNOWN.equals(id)) {
 			// if not, returns the default axis kind for axis type

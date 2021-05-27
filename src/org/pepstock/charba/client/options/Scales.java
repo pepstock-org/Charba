@@ -53,7 +53,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * @return <code>true</code> if the scale with the id passed as argument exists
 	 */
 	public boolean hasAxis(String scaleId) {
-		return hasAxis(IsScaleId.create(scaleId));
+		return hasAxis(ScaleId.create(scaleId));
 	}
 
 	/**
@@ -62,9 +62,9 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * @param scaleId scale id to check
 	 * @return <code>true</code> if the scale with the id passed as argument exists
 	 */
-	public boolean hasAxis(IsScaleId scaleId) {
+	public boolean hasAxis(ScaleId scaleId) {
 		// checks if the scale id is consistent
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// checks if the scale id exist
 		return has(scaleId);
 	}
@@ -76,7 +76,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * @return the scale with the id passed as argument or <code>null</code> if not exist
 	 */
 	public Scale getAxis(String scaleId) {
-		return getAxis(IsScaleId.create(scaleId));
+		return getAxis(ScaleId.create(scaleId));
 	}
 
 	/**
@@ -85,9 +85,9 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * @param scaleId scale id to check
 	 * @return the scale with the id passed as argument or <code>null</code> if not exist
 	 */
-	public Scale getAxis(IsScaleId scaleId) {
+	public Scale getAxis(ScaleId scaleId) {
 		// checks if the scale id is consistent
-		IsScaleId.checkIfValid(scaleId);
+		ScaleId.checkIfValid(scaleId);
 		// checks if the scale id exist
 		if (has(scaleId)) {
 			// gets and creates the scale
@@ -117,10 +117,10 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getAxis(org.pepstock.charba.client.options.IsScaleId, org.pepstock.charba.client.enums.AxisKind)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getAxis(org.pepstock.charba.client.options.ScaleId, org.pepstock.charba.client.enums.AxisKind)
 	 */
 	@Override
-	public IsDefaultScale getAxis(IsScaleId scaleId, AxisKind kind) {
+	public IsDefaultScale getAxis(ScaleId scaleId, AxisKind kind) {
 		return getDefaultValues().getAxis(scaleId, kind);
 	}
 
@@ -132,7 +132,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 */
 	private Scale getAndCreate(Key propertyKey) {
 		// creates scale id
-		IsScaleId scaleId = IsScaleId.create(propertyKey.value());
+		ScaleId scaleId = ScaleId.create(propertyKey.value());
 		// gets native object
 		NativeObject nativeObject = getValue(propertyKey);
 		// gets temporary scale
@@ -144,7 +144,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 		// checks if scale has got the id
 		if (DefaultScaleId.UNKNOWN.is(scale.getId())) {
 			// sets id
-			scale.setId(IsScaleId.create(propertyKey.value()));
+			scale.setId(ScaleId.create(propertyKey.value()));
 		}
 		// returns scale
 		return scale;
