@@ -138,7 +138,131 @@ public class ChartContext extends NativeObjectContainer {
 		// if here, argument is not consistent
 		return null;
 	}
+	
+	/**
+	 * Sets a custom field to data point.
+	 * 
+	 * @param key key of java script object to set.
+	 * @param value value to set.
+	 */
+	public final void setAttribute(Key key, double value) {
+		// checks if key is valid
+		if (checkIfPropertyIsValid(key)) {
+			// stores the value
+			setValue(key, value);
+		}
+	}
 
+	/**
+	 * Returns a custom field value from data point.
+	 * 
+	 * @param key key of java script object to get.
+	 * @param defaultValue default value if the property is missing
+	 * @return custom field value from data point.
+	 */
+	public final double getAttribute(Key key, double defaultValue) {
+		// checks if key is valid
+		if (checkIfPropertyIsValid(key)) {
+			return getValue(key, defaultValue);
+		}
+		// if here, the key is not valid
+		// then returns default
+		return defaultValue;
+	}
+	
+	/**
+	 * Sets a custom field to data point.
+	 * 
+	 * @param key key of java script object to set.
+	 * @param value value to set.
+	 */
+	public final void setAttribute(Key key, boolean value) {
+		// checks if key is valid
+		if (checkIfPropertyIsValid(key)) {
+			// stores the value
+			setValue(key, value);
+		}
+	}
+
+	/**
+	 * Returns a custom field value from data point.
+	 * 
+	 * @param key key of java script object to get.
+	 * @param defaultValue default value if the property is missing
+	 * @return custom field value from data point.
+	 */
+	public final boolean getAttribute(Key key, boolean defaultValue) {
+		// checks if key is valid
+		if (checkIfPropertyIsValid(key)) {
+			return getValue(key, defaultValue);
+		}
+		// if here, the key is not valid
+		// then returns default
+		return defaultValue;
+	}
+	
+	/**
+	 * Sets a custom field to data point.
+	 * 
+	 * @param key key of java script object to set.
+	 * @param value value to set.
+	 */
+	public final void setAttribute(Key key, int value) {
+		// checks if key is valid
+		if (checkIfPropertyIsValid(key)) {
+			// stores the value
+			setValue(key, value);
+		}
+	}
+
+	/**
+	 * Returns a custom field value from data point.
+	 * 
+	 * @param key key of java script object to get.
+	 * @param defaultValue default value if the property is missing
+	 * @return custom field value from data point.
+	 */
+	public final int getAttribute(Key key, int defaultValue) {
+		// checks if key is valid
+		if (checkIfPropertyIsValid(key)) {
+			return getValue(key, defaultValue);
+		}
+		// if here, the key is not valid
+		// then returns default
+		return defaultValue;
+	}
+	
+	/**
+	 * Sets a custom field to data point.
+	 * 
+	 * @param key key of java script object to set.
+	 * @param value value to set.
+	 */
+	public final void setAttribute(Key key, String value) {
+		// checks if key is valid
+		if (checkIfPropertyIsValid(key)) {
+			// stores the value
+			setValue(key, value);
+		}
+	}
+
+	/**
+	 * Returns a custom field value from data point.
+	 * 
+	 * @param key key of java script object to get.
+	 * @param defaultValue default value if the property is missing
+	 * @return custom field value from data point.
+	 */
+	public final String getAttribute(Key key, String defaultValue) {
+		// checks if key is valid
+		if (checkIfPropertyIsValid(key)) {
+			return getValue(key, defaultValue);
+		}
+		// if here, the key is not valid
+		// then returns default
+		return defaultValue;
+	}
+	
 	/**
 	 * Returns <code>true</code> if the context is consistent.<br>
 	 * Custom context (the plugin ones) should extend it and check if the context is consistent before invoking the callback.
@@ -148,5 +272,21 @@ public class ChartContext extends NativeObjectContainer {
 	protected boolean isConsistent() {
 		return true;
 	}
-
+	
+	/**
+	 * Checks if the key passed as argument is a key already used for other context properties.
+	 * 
+	 * @param property property to use to store a custom attribute
+	 * @return <code>true</code> if the property can be used to store an attribute.
+	 */
+	protected boolean checkIfPropertyIsValid(Key property) {
+		// checks if key is valid
+		if (Key.isValid(property)) {
+			// checks if is NOT a value of defined properties
+			return !Key.hasKeyByValue(Property.values(), property.value());
+		}
+		// if here the property passed as argument 
+		// is not valid
+		return false;
+	}
 }

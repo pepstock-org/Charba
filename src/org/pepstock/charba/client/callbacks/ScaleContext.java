@@ -132,5 +132,22 @@ public final class ScaleContext extends ChartContext {
 		}
 		return tick;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.callbacks.ChartContext#checkIfPropertyIsValid(org.pepstock.charba.client.commons.Key)
+	 */
+	@Override
+	protected boolean checkIfPropertyIsValid(Key property) {
+		// checks if parent provide the validation on the property
+		if (super.checkIfPropertyIsValid(property)) {
+			// checks if is NOT a value of defined properties
+			return !Key.hasKeyByValue(Property.values(), property.value());
+		}
+		// if here, the property is not valid
+		// and try to override an existing one
+		return false;
+	}
 
 }

@@ -82,7 +82,7 @@ public abstract class AbstractDatasetContext extends ChartContext {
 	public final boolean isActive() {
 		return getValue(Property.ACTIVE, false);
 	}
-	
+
 	/**
 	 * Returns the update mode.
 	 * 
@@ -160,6 +160,23 @@ public abstract class AbstractDatasetContext extends ChartContext {
 		// if here, data set index or data index are not consistent
 		// then returns null
 		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.callbacks.ChartContext#checkIfPropertyIsValid(org.pepstock.charba.client.commons.Key)
+	 */
+	@Override
+	protected boolean checkIfPropertyIsValid(Key property) {
+		// checks if parent provide the validation on the property
+		if (super.checkIfPropertyIsValid(property)) {
+			// checks if is NOT a value of defined properties
+			return !Key.hasKeyByValue(Property.values(), property.value());
+		}
+		// if here, the property is not valid
+		// and try to override an existing one
+		return false;
 	}
 
 }
