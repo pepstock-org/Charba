@@ -31,7 +31,7 @@ interface IsDefaultOptions {
 	 * @param id label id to check
 	 * @return <code>true</code> if the label with the id passed as argument exists
 	 */
-	default boolean hasLabel(IsLabelId id) {
+	default boolean hasLabel(LabelId id) {
 		return false;
 	}
 
@@ -50,7 +50,7 @@ interface IsDefaultOptions {
 	 * @param id label id to use to retrieve the annotation
 	 * @return the label or <code>null</code> if not exist
 	 */
-	default Label getLabel(IsLabelId id) {
+	default Label getLabel(LabelId id) {
 		return null;
 	}
 }

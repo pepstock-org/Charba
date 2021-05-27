@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.PropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsLabelId extends PropertyKey {
+public interface LabelId extends PropertyKey {
 
 	/**
 	 * Returns a key instance by its string value.
@@ -30,7 +30,7 @@ public interface IsLabelId extends PropertyKey {
 	 * @param id string value to use
 	 * @return new label configuration object id instance
 	 */
-	static IsLabelId create(String id) {
+	static LabelId create(String id) {
 		// checks if passed id is consistent
 		PropertyKey.checkIfValid(id);
 		// creates new label id
@@ -45,7 +45,7 @@ public interface IsLabelId extends PropertyKey {
 	 * @return <code>true</code> if id passed as argument is not <code>null</code> and its value is not <code>null</code> as well and could be a valid label configuration object
 	 *         id.
 	 */
-	static boolean isValid(IsLabelId id) {
+	static boolean isValid(LabelId id) {
 		return PropertyKey.isValid(id);
 	}
 
@@ -55,7 +55,7 @@ public interface IsLabelId extends PropertyKey {
 	 * 
 	 * @param id label configuration object id to be checked
 	 */
-	static void checkIfValid(IsLabelId id) {
+	static void checkIfValid(LabelId id) {
 		PropertyKey.checkIfValid(id);
 	}
 

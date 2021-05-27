@@ -79,7 +79,7 @@ public final class LabelsOptionsBuilder {
 	 * @return new options builder for new label identified by id
 	 */
 	public LabelBuilder createLabel(String id) {
-		return createLabel(IsLabelId.create(id));
+		return createLabel(LabelId.create(id));
 	}
 
 	/**
@@ -88,9 +88,9 @@ public final class LabelsOptionsBuilder {
 	 * @param id id of the new label
 	 * @return new options builder for new label identified by id
 	 */
-	public LabelBuilder createLabel(IsLabelId id) {
+	public LabelBuilder createLabel(LabelId id) {
 		// checks if id is consistent
-		IsLabelId.checkIfValid(id);
+		LabelId.checkIfValid(id);
 		// creates new label and new labels builder
 		LabelBuilder builder = new LabelBuilder(this, options.createLabel(id));
 		// stores the options builder
@@ -108,7 +108,7 @@ public final class LabelsOptionsBuilder {
 	 * @return the options builder for label identified by id
 	 */
 	public LabelBuilder getLabel(String id) {
-		return getLabel(IsLabelId.create(id));
+		return getLabel(LabelId.create(id));
 	}
 
 	/**
@@ -117,9 +117,9 @@ public final class LabelsOptionsBuilder {
 	 * @param id id of the options
 	 * @return the options builder for label identified by id
 	 */
-	public LabelBuilder getLabel(IsLabelId id) {
+	public LabelBuilder getLabel(LabelId id) {
 		// checks if id is consistent
-		IsLabelId.checkIfValid(id);
+		LabelId.checkIfValid(id);
 		// checks if labels does not exist
 		if (labelBuilders.containsKey(id.value())) {
 			// it creates new one

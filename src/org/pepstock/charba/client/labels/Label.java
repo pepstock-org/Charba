@@ -138,7 +138,7 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 
 	// temporary id, used when the empty constructor is used
 	// the id will be change with an incremental id
-	private static final IsLabelId TEMPORARY_ID = IsLabelId.create("charbaTemporaryLabelId");
+	private static final LabelId TEMPORARY_ID = LabelId.create("charbaTemporaryLabelId");
 	// defaults options instance
 	private final IsDefaultLabel defaultOptions;
 	// font instance
@@ -206,7 +206,7 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	 * @param id id to apply to new label.
 	 */
 	public Label(String id) {
-		this(IsLabelId.create(id));
+		this(LabelId.create(id));
 	}
 
 	/**
@@ -214,7 +214,7 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	 * 
 	 * @param id id to apply to new label.
 	 */
-	public Label(IsLabelId id) {
+	public Label(LabelId id) {
 		this(id, DefaultLabel.INSTANCE, null);
 	}
 
@@ -225,7 +225,7 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	 * @param defaultOptions default options stored in the defaults global
 	 * @param nativeObject native object which represents the plugin options as native object
 	 */
-	Label(IsLabelId id, IsDefaultLabel defaultOptions, NativeObject nativeObject) {
+	Label(LabelId id, IsDefaultLabel defaultOptions, NativeObject nativeObject) {
 		// creates an empty object
 		super(nativeObject);
 		// stores new incremental id
@@ -236,7 +236,7 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 		if (Key.equals(TEMPORARY_ID, id)) {
 			// creates label id by incremental id
 			// stores in the object as id
-			setValue(Property.ID, IsLabelId.create(getIncrementalId()));
+			setValue(Property.ID, LabelId.create(getIncrementalId()));
 		} else {
 			// stores the ID
 			// passed as argument
@@ -271,8 +271,8 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	 * 
 	 * @return the id of label
 	 */
-	public IsLabelId getId() {
-		return IsLabelId.create(getValue(Property.ID, Undefined.STRING));
+	public LabelId getId() {
+		return LabelId.create(getValue(Property.ID, Undefined.STRING));
 	}
 
 	/**

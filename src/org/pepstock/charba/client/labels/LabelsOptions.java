@@ -79,7 +79,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	 * @return new empty label object
 	 */
 	public Label createLabel(String id) {
-		return createLabel(IsLabelId.create(id));
+		return createLabel(LabelId.create(id));
 	}
 
 	/**
@@ -88,7 +88,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	 * @param id label id to use
 	 * @return new empty label object
 	 */
-	public Label createLabel(IsLabelId id) {
+	public Label createLabel(LabelId id) {
 		// checks the consistency of ID
 		Key.checkIfValid(id);
 		// checks if already exists
@@ -111,7 +111,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	 * @return <code>true</code> if the label with the id passed as argument exists
 	 */
 	public boolean hasLabel(String id) {
-		return hasLabel(IsLabelId.create(id));
+		return hasLabel(LabelId.create(id));
 	}
 
 	/**
@@ -121,9 +121,9 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	 * @return <code>true</code> if the label with the id passed as argument exists
 	 */
 	@Override
-	public boolean hasLabel(IsLabelId id) {
+	public boolean hasLabel(LabelId id) {
 		// checks if the label id is consistent
-		IsLabelId.checkIfValid(id);
+		LabelId.checkIfValid(id);
 		// checks if the label id exist
 		return isType(id, ObjectType.OBJECT) || defaultOptions.hasLabel(id);
 	}
@@ -134,7 +134,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	 * @param id label id to check
 	 */
 	public void removeLabel(String id) {
-		removeLabel(IsLabelId.create(id));
+		removeLabel(LabelId.create(id));
 	}
 
 	/**
@@ -142,9 +142,9 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	 * 
 	 * @param id label id to check
 	 */
-	public void removeLabel(IsLabelId id) {
+	public void removeLabel(LabelId id) {
 		// checks if the label id is consistent
-		IsLabelId.checkIfValid(id);
+		LabelId.checkIfValid(id);
 		// checks if is an object
 		// if is a string, the property is the ID
 		if (isType(id, ObjectType.OBJECT)) {
@@ -168,7 +168,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 			// is an object
 			if (isType(key, ObjectType.OBJECT)) {
 				// gets label id
-				IsLabelId id = IsLabelId.create(key.value());
+				LabelId id = LabelId.create(key.value());
 				// gets and creates the label
 				Label label = new Label(id, defaultOptions.getLabel(id), getValue(key));
 				// adds to result
@@ -187,7 +187,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	 * @return the label or <code>null</code> if not exist
 	 */
 	public Label getLabel(String id) {
-		return getLabel(IsLabelId.create(id));
+		return getLabel(LabelId.create(id));
 	}
 
 	/**
@@ -197,9 +197,9 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	 * @return the label with the id passed as argument or <code>null</code> if not exist
 	 */
 	@Override
-	public Label getLabel(IsLabelId id) {
+	public Label getLabel(LabelId id) {
 		// checks if the label id is consistent
-		IsLabelId.checkIfValid(id);
+		LabelId.checkIfValid(id);
 		// checks if the label id exist
 		if (hasLabel(id) && isType(id, ObjectType.OBJECT)) {
 			// gets from the cache
