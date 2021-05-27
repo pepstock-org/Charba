@@ -1,8 +1,15 @@
 Charba - J2CL and GWT Charts library based on CHART.JS
 ======================================================
 
-[![Release](https://img.shields.io/github/release/pepstock-org/Charba.svg)](https://github.com/pepstock-org/Charba/releases/latest) [![MvnRepo](https://maven-badges.herokuapp.com/maven-central/org.pepstock/charba/badge.svg)](https://mvnrepository.com/artifact/org.pepstock/charba) [![License](https://img.shields.io/github/license/pepstock-org/Charba.svg)](https://github.com/pepstock-org/Charba/blob/master/LICENSE) [![Build](https://github.com/pepstock-org/Charba/workflows/Build/badge.svg?branch=master)](https://github.com/pepstock-org/Charba/actions/workflows/build.yaml) [![Javadoc](https://img.shields.io/static/v1?message=Javadoc&color=informational)](https://pepstock-org.github.io/Charba/3.3/) [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=alert_status)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) 
-[![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/chartjs/awesome) [![CodedIsArtAndPassion](https://img.shields.io/badge/coding%20is-art%20and%20passion-E760A4.svg)](https://img.shields.io/badge/coding%20is-art%20and%20passion-E760A4.svg)
+[![Release](https://img.shields.io/github/release/pepstock-org/Charba.svg)](https://github.com/pepstock-org/Charba/releases/latest) 
+[![MvnRepo](https://maven-badges.herokuapp.com/maven-central/org.pepstock/charba/badge.svg)](https://mvnrepository.com/artifact/org.pepstock/charba) 
+[![License](https://img.shields.io/github/license/pepstock-org/Charba.svg)](https://github.com/pepstock-org/Charba/blob/master/LICENSE) 
+[![Build](https://github.com/pepstock-org/Charba/workflows/Build/badge.svg?branch=master)](https://github.com/pepstock-org/Charba/actions/workflows/build.yaml) 
+[![JavadocCurrent](https://img.shields.io/static/v1?message=Last version javadoc&color=informational)](https://pepstock-org.github.io/Charba/3.3/) 
+[![JavadocNext](https://img.shields.io/static/v1?message=Next version javadoc&color=informational)](https://pepstock-org.github.io/Charba/next/) 
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=alert_status)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) 
+[![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/chartjs/awesome) 
+[![CodedIsArtAndPassion](https://img.shields.io/badge/coding%20is-art%20and%20passion-E760A4.svg)](https://github.com/pepstock-org/Charba)
 
 What's Charba
 --------
@@ -24,7 +31,7 @@ Even if **Charba** was born only as GWT chart library, since version **3**, **Ch
 
 Since version **3**, **Charba** has got an own DOM tree manager which allows to it to be independent from any other DOM tree frameworks (i.e. GWT, Elemental2 or Elemento) but it is providing a set of hooks in order to use it also over those frameworks.
 
-[![CharbaDiagram](https://github.com/pepstock-org/Charba/wiki/images/charbaDiagram.png)](https://github.com/pepstock-org/Charba/wiki/Integration)
+[![CharbaDiagram](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charbaDiagram.png)](https://github.com/pepstock-org/Charba/wiki/Integration)
     
 Building
 --------
