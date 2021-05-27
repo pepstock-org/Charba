@@ -96,7 +96,7 @@ public final class Merger {
 	 */
 	public void load(NativeObjectContainer options, ChartEnvelop<NativeObject> envelop) {
 		// checks if envelop is consistent
-		if (IsEnvelop.isValid(envelop)) {
+		if (Envelop.isValid(envelop)) {
 			// clones native object of native chart options
 			// on chart configuration
 			mergeNativeObjects(options.getNativeObject(), envelop.getContent());

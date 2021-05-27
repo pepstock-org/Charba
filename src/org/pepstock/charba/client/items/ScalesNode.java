@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.ChartEnvelop;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -42,7 +42,7 @@ public final class ScalesNode extends NativeObjectContainer {
 	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
 	public ScalesNode(ChartEnvelop<NativeObject> envelop) {
-		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		super(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

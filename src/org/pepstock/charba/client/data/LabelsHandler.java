@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.commons.ArrayMixedObject;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -67,7 +67,7 @@ public final class LabelsHandler extends NativeObjectContainer {
 	 * @param envelop passed empty, which will contain an native array.
 	 */
 	public LabelsHandler(OptionsEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

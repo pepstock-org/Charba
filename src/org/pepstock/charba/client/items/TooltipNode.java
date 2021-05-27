@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.ChartEnvelop;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
@@ -38,7 +38,7 @@ public final class TooltipNode {
 	 */
 	public TooltipNode(ChartEnvelop<NativeObject> envelop) {
 		// creates sub element
-		model = new TooltipModel(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		model = new TooltipModel(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

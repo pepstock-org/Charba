@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.ChartEnvelop;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
@@ -33,7 +33,7 @@ public final class TitleNode extends BaseBoxNodeItem {
 	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
 	public TitleNode(ChartEnvelop<NativeObject> envelop) {
-		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		super(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 }

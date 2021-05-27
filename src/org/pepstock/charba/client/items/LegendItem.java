@@ -29,7 +29,7 @@ import org.pepstock.charba.client.colors.PatternBuilder;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -168,7 +168,7 @@ public class LegendItem extends AbstractNode {
 	 * @param envelop envelop which contains legend item which contains all properties.
 	 */
 	public LegendItem(ChartEnvelop<LegendItem> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent().getNativeObject());
+		this(Envelop.checkAndGetIfValid(envelop).getContent().getNativeObject());
 	}
 
 	/**

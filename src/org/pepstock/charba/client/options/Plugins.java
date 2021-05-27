@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.GlobalOptions;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -54,8 +54,8 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 	 * @param envelop envelop passed by chart package in oredr to wrap another plugin.
 	 */
 	protected Plugins(ChartEnvelop<Plugins> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent().getParent(), IsEnvelop.checkAndGetIfValid(envelop).getContent().getChildKey(), IsEnvelop.checkAndGetIfValid(envelop).getContent().getDefaultValues(),
-				IsEnvelop.checkAndGetIfValid(envelop).getContent().getNativeObject());
+		this(Envelop.checkAndGetIfValid(envelop).getContent().getParent(), Envelop.checkAndGetIfValid(envelop).getContent().getChildKey(), Envelop.checkAndGetIfValid(envelop).getContent().getDefaultValues(),
+				Envelop.checkAndGetIfValid(envelop).getContent().getNativeObject());
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class Plugins extends AbstractModel<Options, IsDefaultPlugins> implements
 	 */
 	public final void setEnabled(ConfigurationEnvelop<DefaultPluginId> envelop, boolean enabled) {
 		// checks if envelop is valid
-		if (IsEnvelop.isValid(envelop)) {
+		if (Envelop.isValid(envelop)) {
 			setEnabled(envelop.getContent(), enabled, true);
 		}
 	}

@@ -17,7 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -83,7 +83,7 @@ public final class BarDatasetOptionsHandler extends PropertyHandler<IsDefaultTyp
 	 * @param envelop envelop of native object where bar options properties must be managed
 	 */
 	public BarDatasetOptionsHandler(AbstractNode parent, IsDefaultTypedDataset defaultValues, DataEnvelop<NativeObject> envelop) {
-		this(parent, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(parent, defaultValues, Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

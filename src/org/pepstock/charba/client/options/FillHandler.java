@@ -17,7 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.PropertyHandler;
@@ -78,7 +78,7 @@ public class FillHandler extends PropertyHandler<IsFill> {
 	 * @param envelop envelop of native object where FILL property must be managed
 	 */
 	protected FillHandler(AbstractNode parent, IsFill defaultValues, DataEnvelop<NativeObject> envelop) {
-		this(parent, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(parent, defaultValues, Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

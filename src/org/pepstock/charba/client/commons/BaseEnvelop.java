@@ -13,24 +13,22 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client;
-
-import org.pepstock.charba.client.commons.BaseEnvelop;
+package org.pepstock.charba.client.commons;
 
 /**
- * This object is a container of hidden object.<br>
- * It can not be instantiated in order that public methods can be invoked in safe mode.
+ * This object is a container of hidden object.
  * 
  * @author Andrea "Stock" Stocchero
  * 
  * @param <T> type of envelop content.
  */
-public final class ChartEnvelop<T> extends BaseEnvelop<T> {
+public abstract class BaseEnvelop<T> extends ImmutableEnvelop<T> {
 
 	/**
 	 * Create an envelop with a <code>null</code> content.
 	 */
-	ChartEnvelop() {
+	protected BaseEnvelop() {
+		this(null);
 	}
 
 	/**
@@ -38,27 +36,36 @@ public final class ChartEnvelop<T> extends BaseEnvelop<T> {
 	 * 
 	 * @param nullable if <code>true</code>, the content can be <code>null</code>
 	 */
-	ChartEnvelop(boolean nullable) {
-		super(nullable);
+	protected BaseEnvelop(boolean nullable) {
+		this(null, nullable);
 	}
 
 	/**
 	 * Create an envelop with the content passed as argument.
 	 * 
 	 * @param content content to set as initial value
-	 * @param nullable if <code>true</code>, the content can be <code>null</code>
 	 */
-	ChartEnvelop(T content, boolean nullable) {
-		super(content, nullable);
+	protected BaseEnvelop(T content) {
+		this(content, false);
 	}
 
 	/**
 	 * Create an envelop with the content passed as argument and a flag to set if the content can be nullable.
 	 * 
 	 * @param content content to set as initial value
+	 * @param nullable if <code>true</code>, the content can be <code>null</code>
 	 */
-	ChartEnvelop(T content) {
-		super(content);
+	protected BaseEnvelop(T content, boolean nullable) {
+		super(content, nullable);
+	}
+
+	/**
+	 * Stores the content of envelop.
+	 * 
+	 * @param content the content of envelop to store
+	 */
+	public final void setContent(T content) {
+		super.setContentInternally(content);
 	}
 
 }

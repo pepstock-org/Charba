@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -73,7 +73,7 @@ public final class AnimationContainer extends AnimationTransition {
 	 * @param scope scope of the options
 	 */
 	public AnimationContainer(IsDefaultAnimationContainer defaultValues, DataEnvelop<NativeObject> envelop, String scope) {
-		this(null, null, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent(), scope);
+		this(null, null, defaultValues, Envelop.checkAndGetIfValid(envelop).getContent(), scope);
 	}
 
 	/**

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.ChartEnvelop;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.options.ScaledOptions;
@@ -36,6 +36,6 @@ public final class OptionsNode extends ScaledOptions {
 	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
 	public OptionsNode(String chartId, IsDefaultScaledOptions defaultValues, ChartEnvelop<NativeObject> envelop) {
-		super(chartId, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent(), true);
+		super(chartId, defaultValues, Envelop.checkAndGetIfValid(envelop).getContent(), true);
 	}
 }

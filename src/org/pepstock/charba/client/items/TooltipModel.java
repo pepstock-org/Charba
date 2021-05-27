@@ -21,7 +21,7 @@ import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -90,7 +90,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
 	public TooltipModel(ConfigurationEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -99,7 +99,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
 	public TooltipModel(CallbacksEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

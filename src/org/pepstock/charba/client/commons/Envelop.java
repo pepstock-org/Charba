@@ -16,56 +16,64 @@
 package org.pepstock.charba.client.commons;
 
 /**
- * This object is a container of hidden object.
+ * This is the interface to map the envelop.<br>
+ * It adds helpful methods to check the envelop.
  * 
  * @author Andrea "Stock" Stocchero
  * 
- * @param <T> type of envelop content.
  */
-public abstract class Envelop<T> extends ImmutableEnvelop<T> {
+public interface Envelop {
 
 	/**
-	 * Create an envelop with a <code>null</code> content.
-	 */
-	protected Envelop() {
-		this(null);
-	}
-
-	/**
-	 * Create an envelop with a <code>null</code> content and a flag to set if the content can be nullable.
+	 * Returns <code>true</code> if envelop passed as argument is not <code>null</code> and its content is not <code>null</code> as well.
 	 * 
-	 * @param nullable if <code>true</code>, the content can be <code>null</code>
+	 * @param envelop envelop to be checked
+	 * @return <code>true</code> if envelop passed as argument is not <code>null</code> and its content is not <code>null</code> as well.
 	 */
-	protected Envelop(boolean nullable) {
-		this(null, nullable);
+	static boolean isValid(Envelop envelop) {
+		return envelop != null && (envelop.hasContent() || envelop.isNullable());
 	}
 
 	/**
-	 * Create an envelop with the content passed as argument.
+	 * Checks if envelop passed as argument is not <code>null</code> and its content is not <code>null</code> as well.<br>
+	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
-	 * @param content content to set as initial value
+	 * @param envelop envelop to be checked
 	 */
-	protected Envelop(T content) {
-		this(content, false);
+	static void checkIfValid(Envelop envelop) {
+		if (!isValid(envelop)) {
+			throw new IllegalArgumentException("Envelop is null or not consistent");
+		}
 	}
 
 	/**
-	 * Create an envelop with the content passed as argument and a flag to set if the content can be nullable.
+	 * Checks if envelop passed as argument is not <code>null</code> and its content is not <code>null</code> as well.<br>
+	 * If not, throw a {@link IllegalArgumentException}.
 	 * 
-	 * @param content content to set as initial value
-	 * @param nullable if <code>true</code>, the content can be <code>null</code>
+	 * @param envelop key to be checked
+	 * @param <T> type of envelop
+	 * @return the same key passed as argument
 	 */
-	protected Envelop(T content, boolean nullable) {
-		super(content, nullable);
+	static <T extends Envelop> T checkAndGetIfValid(T envelop) {
+		// checks if key is consistent
+		checkIfValid(envelop);
+		// if here, is consistent
+		// then returns the argument
+		return envelop;
 	}
 
 	/**
-	 * Stores the content of envelop.
+	 * Returns <code>true</code> if the content of envelop is not <code>null</code>.
 	 * 
-	 * @param content the content of envelop to store
+	 * @return <code>true</code> if the content of envelop is not <code>null</code>
 	 */
-	public final void setContent(T content) {
-		super.setContentInternally(content);
-	}
+	boolean hasContent();
+
+	/**
+	 * Returns <code>true</code> if the content of envelop can be <code>null</code>.
+	 * 
+	 * @return <code>true</code> if the content of envelop can be <code>null</code>
+	 */
+	boolean isNullable();
 
 }

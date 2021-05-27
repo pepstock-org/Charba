@@ -19,7 +19,7 @@ import java.util.Date;
 
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.enums.Position;
@@ -39,7 +39,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param envelop envelop of native java script object which contains all properties.
 	 */
 	public AxisItem(ConfigurationEnvelop<NativeObject> envelop) {
-		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		super(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

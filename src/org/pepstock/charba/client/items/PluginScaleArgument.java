@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -69,7 +69,7 @@ public final class PluginScaleArgument extends NativeObjectContainer {
 	 * @param envelop envelop of the native java script object which contains all properties.
 	 */
 	public PluginScaleArgument(PluginsEnvelop<NativeObject> envelop) {
-		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		super(Envelop.checkAndGetIfValid(envelop).getContent());
 		// gets size item
 		scaleItem = new ScaleItem(getValue(Property.SCALE));
 	}

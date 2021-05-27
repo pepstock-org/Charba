@@ -17,7 +17,7 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -104,7 +104,7 @@ public class DatasetElement extends NativeObjectContainer {
 	 * @param envelop envelop of the nativeObject native java script object which contains all properties.
 	 */
 	protected DatasetElement(CallbacksEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

@@ -92,7 +92,7 @@ public abstract class NativeObjectContainer {
 	 */
 	public final ChartEnvelop<NativeObject> loadNativeObject(ChartEnvelop<NativeObject> envelop) {
 		// checks if envelop is consistent
-		IsEnvelop.checkAndGetIfValid(envelop);
+		Envelop.checkAndGetIfValid(envelop);
 		// load native object to envelop
 		envelop.setContent(nativeObject);
 		// returns the envelop passed as argument

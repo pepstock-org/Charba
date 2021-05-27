@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Id;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
@@ -86,7 +86,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param envelop the envelop for options as native options
 	 */
 	public ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, ConfigurationEnvelop<NativeObject> envelop) {
-		this(chart, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(chart, defaultValues, Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -97,7 +97,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param envelop the envelop for options as native options
 	 */
 	public ExtendedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, ChartEnvelop<NativeObject> envelop) {
-		this(chart, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(chart, defaultValues, Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -166,7 +166,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param proxy the function proxy to activate
 	 */
 	public void setCallback(ConfigurationEnvelop<AbstractNode> envelop, Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(IsEnvelop.checkAndGetIfValid(envelop).getContent(), property, proxy);
+		setCallbackToModel(Envelop.checkAndGetIfValid(envelop).getContent(), property, proxy);
 	}
 
 	/**
@@ -177,7 +177,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param callback the function callback to activate
 	 */
 	public void setCallback(ConfigurationEnvelop<AbstractNode> envelop, Key property, NativeCallback callback) {
-		setCallbackToModel(IsEnvelop.checkAndGetIfValid(envelop).getContent(), property, callback);
+		setCallbackToModel(Envelop.checkAndGetIfValid(envelop).getContent(), property, callback);
 	}
 
 	/**
@@ -188,6 +188,6 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param envelop contains the function proxy to activate.
 	 */
 	public void setEvent(AbstractNode node, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
-		setEventToModel(node, property, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		setEventToModel(node, property, Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 }

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -72,7 +72,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	 * @param envelop envelop with native java script object which contains all properties.
 	 */
 	public AnimationItem(ConfigurationEnvelop<NativeObject> envelop) {
-		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		super(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

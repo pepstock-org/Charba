@@ -18,8 +18,8 @@ package org.pepstock.charba.client.data;
 import java.util.Date;
 
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.BaseEnvelop;
 import org.pepstock.charba.client.commons.Envelop;
-import org.pepstock.charba.client.commons.IsEnvelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -85,13 +85,13 @@ public final class DataPoint extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the object with a native object passed as argument by and {@link Envelop}.<br>
+	 * Creates the object with a native object passed as argument by and {@link BaseEnvelop}.<br>
 	 * This is called by the {@link DataItem}.
 	 * 
 	 * @param envelop envelop which contains a native object with a data point
 	 */
 	public DataPoint(ItemsEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

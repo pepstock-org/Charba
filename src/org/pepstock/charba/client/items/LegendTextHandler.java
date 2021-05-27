@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.PropertyHandler;
@@ -76,7 +76,7 @@ public final class LegendTextHandler extends PropertyHandler<Boolean> {
 	 * @param envelop envelop of the native object where TEXT property must be managed
 	 */
 	public LegendTextHandler(AbstractNode parent, OptionsEnvelop<NativeObject> envelop) {
-		this(parent, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(parent, Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

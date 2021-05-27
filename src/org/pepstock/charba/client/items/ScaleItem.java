@@ -28,7 +28,7 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.ImmutableDate;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -120,7 +120,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @param envelop envelop of native java script object which contains all properties.
 	 */
 	public ScaleItem(CallbacksEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

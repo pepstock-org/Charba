@@ -20,7 +20,7 @@ import org.pepstock.charba.client.UpdateConfiguration;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.HasCallbackScope;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationTransition;
@@ -80,7 +80,7 @@ public class AnimationTransition extends AbstractNode implements IsDefaultAnimat
 	 * @param scope scope of the options
 	 */
 	public AnimationTransition(Key childKey, IsDefaultAnimationTransition defaultValues, ChartEnvelop<NativeObject> envelop, String scope) {
-		this(null, null, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent(), scope);
+		this(null, null, defaultValues, Envelop.checkAndGetIfValid(envelop).getContent(), scope);
 	}
 
 	/**

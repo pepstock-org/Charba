@@ -21,7 +21,7 @@ import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
@@ -75,7 +75,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
 	public LegendNode(ChartEnvelop<NativeObject> envelop) {
-		super(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		super(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

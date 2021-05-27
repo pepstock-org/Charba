@@ -33,7 +33,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
@@ -270,7 +270,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	public final void setChartOptions(ChartEnvelop<NativeObject> envelop) {
 		// sets new configuration
-		setConfiguration(new ExtendedOptions(getChart(), defaultValues, new ConfigurationEnvelop<>(IsEnvelop.checkAndGetIfValid(envelop).getContent())));
+		setConfiguration(new ExtendedOptions(getChart(), defaultValues, new ConfigurationEnvelop<>(Envelop.checkAndGetIfValid(envelop).getContent())));
 		// checks if this configuration is prepared to have scales
 		if (this instanceof ScalesOptions) {
 			// casts to scales options

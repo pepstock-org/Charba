@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -67,7 +67,7 @@ public class SizeItem extends NativeObjectContainer {
 	 * @param envelop envelop of native java script object which contains all properties.
 	 */
 	public SizeItem(ConfigurationEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

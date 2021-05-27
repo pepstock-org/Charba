@@ -29,7 +29,7 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.data.Dataset;
@@ -187,7 +187,7 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 	 */
 	public final void applyingDefaults(ChartEnvelop<String> envelop) {
 		// checks if envelop id consistent
-		if (IsEnvelop.isValid(envelop)) {
+		if (Envelop.isValid(envelop)) {
 			// invokes the apply default method of the options.
 			applyingDefaults();
 		}

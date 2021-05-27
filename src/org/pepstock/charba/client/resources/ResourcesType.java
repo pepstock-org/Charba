@@ -18,7 +18,7 @@ package org.pepstock.charba.client.resources;
 import org.pepstock.charba.client.Charba;
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.JsHelper;
 
 /**
@@ -52,7 +52,7 @@ public final class ResourcesType {
 	 */
 	public static <T extends AbstractResources> void setResources(ChartEnvelop<T> envelop) {
 		// checks envelop
-		IsEnvelop.checkIfValid(envelop);
+		Envelop.checkIfValid(envelop);
 		// gets resources
 		// checks if resource is consistent
 		AbstractResources resources = Checker.checkAndGetIfValid(envelop.getContent(), "Resources type argument");

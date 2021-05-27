@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -72,7 +72,7 @@ public final class SpanGapHandler extends PropertyHandler<IsDefaultOptions> {
 	 * @param envelop envelop of the native object where SPANGAPS property must be managed
 	 */
 	public SpanGapHandler(AbstractNode parent, IsDefaultOptions defaultValues, DataEnvelop<NativeObject> envelop) {
-		this(parent, defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(parent, defaultValues, Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

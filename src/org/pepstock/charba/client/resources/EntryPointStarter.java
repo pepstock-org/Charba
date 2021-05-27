@@ -19,7 +19,7 @@ import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.DeferredCharba;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 
 import com.google.gwt.resources.client.ResourceCallback;
 import com.google.gwt.resources.client.ResourceException;
@@ -72,7 +72,7 @@ public final class EntryPointStarter {
 	 */
 	public static void run(final Runnable runnable, ChartEnvelop<DeferredResources> envelop) {
 		// checks envelop
-		IsEnvelop.checkIfValid(envelop);
+		Envelop.checkIfValid(envelop);
 		// checks if the entry point is consistent
 		Checker.checkIfValid(runnable, "Runnable argument");
 		// gets resources

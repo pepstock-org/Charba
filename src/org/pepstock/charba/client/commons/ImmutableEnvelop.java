@@ -22,7 +22,7 @@ package org.pepstock.charba.client.commons;
  * 
  * @param <T> type of envelop content.
  */
-public abstract class ImmutableEnvelop<T> implements IsEnvelop {
+public abstract class ImmutableEnvelop<T> implements Envelop {
 
 	// instance of enveloped content
 	private T content = null;
@@ -70,7 +70,7 @@ public abstract class ImmutableEnvelop<T> implements IsEnvelop {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.IsEnvelop#hasContent()
+	 * @see org.pepstock.charba.client.commons.Envelop#hasContent()
 	 */
 	@Override
 	public final boolean hasContent() {
@@ -80,7 +80,7 @@ public abstract class ImmutableEnvelop<T> implements IsEnvelop {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.IsEnvelop#isNullable()
+	 * @see org.pepstock.charba.client.commons.Envelop#isNullable()
 	 */
 	@Override
 	public final boolean isNullable() {

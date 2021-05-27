@@ -23,7 +23,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -102,7 +102,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
 	public DatasetItem(ChartEnvelop<NativeObject> envelop) {
-		this(IsEnvelop.checkAndGetIfValid(envelop).getContent());
+		this(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**

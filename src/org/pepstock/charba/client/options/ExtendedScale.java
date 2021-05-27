@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.IsEnvelop;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
@@ -84,7 +84,7 @@ public final class ExtendedScale extends Scale {
 	public ExtendedScale(ConfigurationEnvelop<IsScaleId> envelop, AxisType type, AxisKind kind, IsDefaultScale defaultValues) {
 		super(type, defaultValues);
 		// checks if envelop is consistent
-		IsEnvelop.checkIfValid(envelop);
+		Envelop.checkIfValid(envelop);
 		// sets kind if consistent
 		setAxis(Key.checkAndGetIfValid(kind));
 		// sets id
@@ -100,7 +100,7 @@ public final class ExtendedScale extends Scale {
 	 * @param defaultValues default provider.
 	 */
 	public ExtendedScale(ConfigurationEnvelop<Scale> envelop, IsDefaultScale defaultValues) {
-		super(defaultValues, IsEnvelop.checkAndGetIfValid(envelop).getContent().nativeObject());
+		super(defaultValues, Envelop.checkAndGetIfValid(envelop).getContent().nativeObject());
 	}
 
 	/**
@@ -120,7 +120,7 @@ public final class ExtendedScale extends Scale {
 	 * @param proxy the function proxy to activate
 	 */
 	public void setCallback(ConfigurationEnvelop<AbstractNode> envelop, Key property, CallbackProxy.Proxy proxy) {
-		setCallbackToModel(IsEnvelop.checkAndGetIfValid(envelop).getContent(), property, proxy);
+		setCallbackToModel(Envelop.checkAndGetIfValid(envelop).getContent(), property, proxy);
 	}
 
 	/**
@@ -131,6 +131,6 @@ public final class ExtendedScale extends Scale {
 	 * @param callback the function callback to activate
 	 */
 	public void setCallback(ConfigurationEnvelop<AbstractNode> envelop, Key property, NativeCallback callback) {
-		setCallbackToModel(IsEnvelop.checkAndGetIfValid(envelop).getContent(), property, callback);
+		setCallbackToModel(Envelop.checkAndGetIfValid(envelop).getContent(), property, callback);
 	}
 }
