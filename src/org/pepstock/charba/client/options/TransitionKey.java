@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.DefaultTransitionKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsTransitionKey extends Key {
+public interface TransitionKey extends Key {
 
 	/**
 	 * Returns a animation update mode (transition) instance by its string value.
@@ -31,7 +31,7 @@ public interface IsTransitionKey extends Key {
 	 * @param transition string value to use
 	 * @return new update mode (transition) instance
 	 */
-	static IsTransitionKey create(String transition) {
+	static TransitionKey create(String transition) {
 		// checks if mode as argument is a default one
 		for (DefaultTransitionKey defMode : DefaultTransitionKey.values()) {
 			// checks if mode is equals to default
@@ -51,7 +51,7 @@ public interface IsTransitionKey extends Key {
 	 * @param transition animation update mode (transition) to be checked
 	 * @return <code>true</code> if type passed as argument is not <code>null</code>
 	 */
-	static boolean isValid(IsTransitionKey transition) {
+	static boolean isValid(TransitionKey transition) {
 		return Key.isValid(transition);
 	}
 
@@ -61,7 +61,7 @@ public interface IsTransitionKey extends Key {
 	 * 
 	 * @param transition animation update mode (transition) to be checked
 	 */
-	static void checkIfValid(IsTransitionKey transition) {
+	static void checkIfValid(TransitionKey transition) {
 		if (!isValid(transition)) {
 			// gets the exception message
 			// additional check to throw the right exception message
@@ -78,7 +78,7 @@ public interface IsTransitionKey extends Key {
 	 * @param transition update mode (transition) to be checked
 	 * @return the same update mode (transition) passed as argument
 	 */
-	static IsTransitionKey checkAndGetIfValid(IsTransitionKey transition) {
+	static TransitionKey checkAndGetIfValid(TransitionKey transition) {
 		// checks if collection is consistent
 		checkIfValid(transition);
 		// if here, is consistent

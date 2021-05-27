@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.options.IsTransitionKey;
+import org.pepstock.charba.client.options.TransitionKey;
 
 /**
  * Interface to define animation node for update mode element defaults, TRANSITIONS name space.
@@ -30,7 +30,7 @@ public interface IsDefaultTransitions {
 	 * @param transition transition instance used to check in the animation options
 	 * @return <code>true</code> if an animation collection instance is stored in the the animation options
 	 */
-	boolean has(IsTransitionKey transition);
+	boolean has(TransitionKey transition);
 
 	/**
 	 * Returns an animation transition instance if stored in the the animation options.
@@ -38,6 +38,6 @@ public interface IsDefaultTransitions {
 	 * @param transition transition instance used to get for animation options
 	 * @return an animation transition instance or <code>null</code> if does not exists
 	 */
-	IsDefaultAnimationTransition get(IsTransitionKey transition);
+	IsDefaultAnimationTransition get(TransitionKey transition);
 
 }

@@ -18,7 +18,7 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerContext;
 import org.pepstock.charba.client.controllers.ControllerType;
-import org.pepstock.charba.client.options.IsTransitionKey;
+import org.pepstock.charba.client.options.TransitionKey;
 
 /**
  * This interface enables the capability to create a custom chart.
@@ -146,7 +146,7 @@ public interface Controller {
 	 * @param chart chart instance
 	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
 	 */
-	default void onBeforeUpdate(ControllerContext context, IsChart chart, IsTransitionKey mode) {
+	default void onBeforeUpdate(ControllerContext context, IsChart chart, TransitionKey mode) {
 		// do nothing
 	}
 
@@ -157,7 +157,7 @@ public interface Controller {
 	 * @param chart chart instance
 	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
 	 */
-	default void onAfterUpdate(ControllerContext context, IsChart chart, IsTransitionKey mode) {
+	default void onAfterUpdate(ControllerContext context, IsChart chart, TransitionKey mode) {
 		// do nothing
 	}
 

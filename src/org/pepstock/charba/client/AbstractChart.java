@@ -60,7 +60,7 @@ import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ExtendedOptions;
-import org.pepstock.charba.client.options.IsTransitionKey;
+import org.pepstock.charba.client.options.TransitionKey;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.CTimer;
@@ -682,7 +682,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void update() {
-		update((IsTransitionKey) null);
+		update((TransitionKey) null);
 	}
 
 	/**
@@ -695,11 +695,11 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
 	 */
 	@Override
-	public final void update(IsTransitionKey mode) {
+	public final void update(TransitionKey mode) {
 		// checks if chart is created
 		if (isInitialized()) {
 			// if mode is valid.. added check to null to avoid issue from code analysis
-			if (mode != null && IsTransitionKey.isValid(mode)) {
+			if (mode != null && TransitionKey.isValid(mode)) {
 				// invokes the apply configuration
 				applyConfiguration();
 				// then calls the update with animation mode
@@ -749,7 +749,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void reconfigure() {
-		reconfigure((IsTransitionKey) null);
+		reconfigure((TransitionKey) null);
 	}
 
 	/**
@@ -762,7 +762,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
 	 */
 	@Override
-	public final void reconfigure(IsTransitionKey mode) {
+	public final void reconfigure(TransitionKey mode) {
 		// checks and performs pre-reconfiguration
 		if (reconfigureOptions()) {
 			// if here, pre-reconfiguration has been done

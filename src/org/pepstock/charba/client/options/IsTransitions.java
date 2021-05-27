@@ -31,7 +31,7 @@ public interface IsTransitions extends IsDefaultTransitions {
 	 * @return an animation transition instance or <code>null</code> if does not exists
 	 */
 	@Override
-	AnimationTransition get(IsTransitionKey transition);
+	AnimationTransition get(TransitionKey transition);
 
 	/**
 	 * Sets an animation transition instance to store in the animation options.
@@ -39,7 +39,7 @@ public interface IsTransitions extends IsDefaultTransitions {
 	 * @param transition transition instance used to get for animation options
 	 * @param animationTransition an animation transition instance to set
 	 */
-	void set(IsTransitionKey transition, AnimationTransition animationTransition);
+	void set(TransitionKey transition, AnimationTransition animationTransition);
 
 	/**
 	 * Creates an animation transition instance and stores in the animation options.
@@ -47,13 +47,13 @@ public interface IsTransitions extends IsDefaultTransitions {
 	 * @param transition transition key used to create the animation transitions
 	 * @return a transition animation options
 	 */
-	AnimationTransition create(IsTransitionKey transition);
+	AnimationTransition create(TransitionKey transition);
 
 	/**
 	 * Removes an animation transition previously added.
 	 * 
 	 * @param transition transition instance used to remove from animation options
 	 */
-	void remove(IsTransitionKey transition);
+	void remove(TransitionKey transition);
 
 }

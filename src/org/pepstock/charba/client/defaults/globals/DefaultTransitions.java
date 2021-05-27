@@ -31,7 +31,7 @@ import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 import org.pepstock.charba.client.enums.DefaultTransitionKey;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.options.AnimationCollectionKey;
-import org.pepstock.charba.client.options.IsTransitionKey;
+import org.pepstock.charba.client.options.TransitionKey;
 
 /**
  * CHART.JS default values for ANIMATION element.
@@ -66,12 +66,12 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#has(org.pepstock.charba.client.options.IsTransitionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#has(org.pepstock.charba.client.options.TransitionKey)
 	 */
 	@Override
-	public boolean has(IsTransitionKey transition) {
+	public boolean has(TransitionKey transition) {
 		// checks if mode is valid and is default one
-		if (IsTransitionKey.isValid(transition)) {
+		if (TransitionKey.isValid(transition)) {
 			// scans all defaults
 			for (DefaultTransitionKey defaultMode : DEFAULT_ANIMATION_MODE_KEYS) {
 				// checks if equals
@@ -88,12 +88,12 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#get(org.pepstock.charba.client.options.IsTransitionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#get(org.pepstock.charba.client.options.TransitionKey)
 	 */
 	@Override
-	public IsDefaultAnimationTransition get(IsTransitionKey transition) {
+	public IsDefaultAnimationTransition get(TransitionKey transition) {
 		// checks if mode is valid and is default one
-		if (IsTransitionKey.isValid(transition) && DefaultTransitionKey.is(transition)) {
+		if (TransitionKey.isValid(transition) && DefaultTransitionKey.is(transition)) {
 			// checks which default mode is
 			if (Key.equals(transition, DefaultTransitionKey.ACTIVE)) {
 				// if here, is ACTIVE
@@ -230,7 +230,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 		 * 
 		 * @param mode update mode (transition) to set, can be {@link DefaultTransitionKey#SHOW} or {@link DefaultTransitionKey#HIDE}
 		 */
-		private ShowAndHideDefaultAnimationTransition(IsTransitionKey mode) {
+		private ShowAndHideDefaultAnimationTransition(TransitionKey mode) {
 			this.animations = new ShowAndHideDefaultAnimations(mode);
 		}
 
@@ -261,7 +261,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 			 * 
 			 * @param mode update mode (transition) to set, can be {@link DefaultTransitionKey#SHOW} or {@link DefaultTransitionKey#HIDE}
 			 */
-			private ShowAndHideDefaultAnimations(IsTransitionKey mode) {
+			private ShowAndHideDefaultAnimations(TransitionKey mode) {
 				this.visibleCollection = new ShowAndHideDefaultVisibleAnimationCollection(DefaultTransitionKey.SHOW.equals(mode));
 			}
 

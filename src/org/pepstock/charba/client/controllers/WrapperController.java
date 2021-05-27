@@ -24,7 +24,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.options.IsTransitionKey;
+import org.pepstock.charba.client.options.TransitionKey;
 
 import jsinterop.annotations.JsFunction;
 
@@ -315,7 +315,7 @@ final class WrapperController extends NativeObjectContainer {
 			} else {
 				// otherwise creates a mode by the string
 				// creates transition
-				IsTransitionKey transition = IsTransitionKey.create(mode);
+				TransitionKey transition = TransitionKey.create(mode);
 				// invokes on before
 				delegation.onBeforeUpdate(context,chart, transition);
 				// invokes default

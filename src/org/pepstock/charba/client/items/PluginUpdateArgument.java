@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.options.IsTransitionKey;
+import org.pepstock.charba.client.options.TransitionKey;
 import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
@@ -75,10 +75,10 @@ public class PluginUpdateArgument extends NativeObjectContainer {
 	 * 
 	 * @return the update mode.
 	 */
-	public final IsTransitionKey getMode() {
+	public final TransitionKey getMode() {
 		// gets string value
 		String mode = getValue(Property.MODE, Undefined.STRING);
 		// returns the update mode is consistent
-		return mode != null ? IsTransitionKey.create(mode) : null;
+		return mode != null ? TransitionKey.create(mode) : null;
 	}
 }

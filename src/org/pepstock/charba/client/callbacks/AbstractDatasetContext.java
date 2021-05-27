@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.DatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.options.IsTransitionKey;
+import org.pepstock.charba.client.options.TransitionKey;
 
 /**
  * The option context is used to give contextual information when resolving options where the data set locator (data and data set index) must be used.
@@ -88,13 +88,13 @@ public abstract class AbstractDatasetContext extends ChartContext {
 	 * 
 	 * @return the update mode
 	 */
-	public final IsTransitionKey getMode() {
+	public final TransitionKey getMode() {
 		// gets stored value
 		String mode = getValue(Property.MODE, Undefined.STRING);
 		// checks if consistent
 		if (mode != null) {
 			// creates and returns the mode
-			return IsTransitionKey.create(mode);
+			return TransitionKey.create(mode);
 		}
 		// if here, the mode does not exist
 		// then returns null

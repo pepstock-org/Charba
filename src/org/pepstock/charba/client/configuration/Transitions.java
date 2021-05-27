@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.options.AnimationTransition;
-import org.pepstock.charba.client.options.IsTransitionKey;
+import org.pepstock.charba.client.options.TransitionKey;
 import org.pepstock.charba.client.options.IsTransitions;
 
 /**
@@ -44,7 +44,7 @@ public class Transitions extends AbstractDynamicConfiguration<IsTransitions> imp
 	 * @return <code>true</code> if an animation transition instance is stored in the the animation options
 	 */
 	@Override
-	public boolean has(IsTransitionKey transition) {
+	public boolean has(TransitionKey transition) {
 		return checkAndGet().has(transition);
 	}
 
@@ -55,7 +55,7 @@ public class Transitions extends AbstractDynamicConfiguration<IsTransitions> imp
 	 * @return an animation transition instance or <code>null</code> if does not exists
 	 */
 	@Override
-	public AnimationTransition get(IsTransitionKey transition) {
+	public AnimationTransition get(TransitionKey transition) {
 		return checkAndGet().get(transition);
 	}
 
@@ -66,7 +66,7 @@ public class Transitions extends AbstractDynamicConfiguration<IsTransitions> imp
 	 * @param animationTransition an animation transition instance to set
 	 */
 	@Override
-	public void set(IsTransitionKey transition, AnimationTransition animationTransition) {
+	public void set(TransitionKey transition, AnimationTransition animationTransition) {
 		checkAndGet().set(transition, animationTransition);
 	}
 
@@ -77,7 +77,7 @@ public class Transitions extends AbstractDynamicConfiguration<IsTransitions> imp
 	 * @return a transition animation options
 	 */
 	@Override
-	public AnimationTransition create(IsTransitionKey transition) {
+	public AnimationTransition create(TransitionKey transition) {
 		return checkAndGet().create(transition);
 	}
 
@@ -87,7 +87,7 @@ public class Transitions extends AbstractDynamicConfiguration<IsTransitions> imp
 	 * @param transition transition instance used to remove from animation options
 	 */
 	@Override
-	public void remove(IsTransitionKey transition) {
+	public void remove(TransitionKey transition) {
 		checkAndGet().remove(transition);
 	}
 }
