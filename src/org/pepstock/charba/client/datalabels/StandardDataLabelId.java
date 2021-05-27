@@ -21,7 +21,7 @@ package org.pepstock.charba.client.datalabels;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class StandardDataLabelId implements IsDataLabelId {
+final class StandardDataLabelId implements DataLabelId {
 
 	// value instance
 	private final String value;

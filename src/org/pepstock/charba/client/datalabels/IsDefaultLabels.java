@@ -28,7 +28,7 @@ interface IsDefaultLabels {
 	 * @param key key of the options
 	 * @return the stored option or <code>null</code> if no options are stored for that key
 	 */
-	default LabelItem getLabel(IsDataLabelId key) {
+	default LabelItem getLabel(DataLabelId key) {
 		return null;
 	}
 
@@ -38,7 +38,7 @@ interface IsDefaultLabels {
 	 * @param key key of the options
 	 * @return <code>true</code> if there is a stored options for specific key
 	 */
-	default boolean hasLabel(IsDataLabelId key) {
+	default boolean hasLabel(DataLabelId key) {
 		return false;
 	}
 

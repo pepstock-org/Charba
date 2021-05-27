@@ -79,7 +79,7 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 	 * @return new options builder for new label identified by id
 	 */
 	public LabelItemBuilder createLabel(String id) {
-		return createLabel(IsDataLabelId.create(id));
+		return createLabel(DataLabelId.create(id));
 	}
 
 	/**
@@ -88,9 +88,9 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 	 * @param id id of the new label item
 	 * @return new options builder for new label identified by id
 	 */
-	public LabelItemBuilder createLabel(IsDataLabelId id) {
+	public LabelItemBuilder createLabel(DataLabelId id) {
 		// checks if id is consistent
-		IsDataLabelId.checkIfValid(id);
+		DataLabelId.checkIfValid(id);
 		// creates new label and new labels builder
 		LabelItemBuilder builder = new LabelItemBuilder(getLabel().getLabels().createLabel(id));
 		// stores the options builder
@@ -108,7 +108,7 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 	 * @return the options builder for label identified by id
 	 */
 	public LabelItemBuilder getLabel(String id) {
-		return getLabel(IsDataLabelId.create(id));
+		return getLabel(DataLabelId.create(id));
 	}
 
 	/**
@@ -117,9 +117,9 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 	 * @param id id of the options
 	 * @return the options builder for label identified by id
 	 */
-	public LabelItemBuilder getLabel(IsDataLabelId id) {
+	public LabelItemBuilder getLabel(DataLabelId id) {
 		// checks if id is consistent
-		IsDataLabelId.checkIfValid(id);
+		DataLabelId.checkIfValid(id);
 		// checks if labels does not exist
 		if (labelItemBuilders.containsKey(id.value())) {
 			// it creates new one

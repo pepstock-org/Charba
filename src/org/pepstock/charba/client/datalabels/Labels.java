@@ -58,7 +58,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	 * @return the new option for that id
 	 */
 	public LabelItem createLabel(String id) {
-		return createLabel(IsDataLabelId.create(id));
+		return createLabel(DataLabelId.create(id));
 	}
 
 	/**
@@ -67,9 +67,9 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	 * @param id id of the options
 	 * @return the new option for that id
 	 */
-	public LabelItem createLabel(IsDataLabelId id) {
+	public LabelItem createLabel(DataLabelId id) {
 		// checks consistency of key
-		IsDataLabelId.checkIfValid(id);
+		DataLabelId.checkIfValid(id);
 		// checks if exists
 		if (has(id)) {
 			// gets and returns the label item
@@ -91,7 +91,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	 * @return the stored option or <code>null</code> if no options are stored for that id
 	 */
 	public LabelItem getLabel(String id) {
-		return getLabel(IsDataLabelId.create(id));
+		return getLabel(DataLabelId.create(id));
 	}
 
 	/**
@@ -101,9 +101,9 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	 * @return the stored option or <code>null</code> if no options are stored for that id
 	 */
 	@Override
-	public LabelItem getLabel(IsDataLabelId id) {
+	public LabelItem getLabel(DataLabelId id) {
 		// checks consistency of key
-		IsDataLabelId.checkIfValid(id);
+		DataLabelId.checkIfValid(id);
 		// checks if exists
 		if (has(id)) {
 			// gets and returns the label item
@@ -121,7 +121,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	 * @return <code>true</code> if there is a stored options for specific id
 	 */
 	public boolean hasLabel(String id) {
-		return hasLabel(IsDataLabelId.create(id));
+		return hasLabel(DataLabelId.create(id));
 	}
 
 	/**
@@ -131,9 +131,9 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	 * @return <code>true</code> if there is a stored options for specific key
 	 */
 	@Override
-	public boolean hasLabel(IsDataLabelId id) {
+	public boolean hasLabel(DataLabelId id) {
 		// checks if the label id is consistent
-		IsDataLabelId.checkIfValid(id);
+		DataLabelId.checkIfValid(id);
 		// checks if the label id exist
 		return has(id) || defaultOptions.hasLabel(id);
 	}
@@ -144,7 +144,7 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	 * @param id id of the options
 	 */
 	public void removeLabel(String id) {
-		removeLabel(IsDataLabelId.create(id));
+		removeLabel(DataLabelId.create(id));
 	}
 
 	/**
@@ -152,9 +152,9 @@ public final class Labels extends AbstractElement implements IsDefaultLabels {
 	 * 
 	 * @param id key of the options
 	 */
-	public void removeLabel(IsDataLabelId id) {
+	public void removeLabel(DataLabelId id) {
 		// checks if the label id is consistent
-		IsDataLabelId.checkIfValid(id);
+		DataLabelId.checkIfValid(id);
 		// and then removes the label
 		remove(id);
 	}
