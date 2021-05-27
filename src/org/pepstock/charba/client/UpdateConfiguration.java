@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.options.AnimationCollection;
 import org.pepstock.charba.client.options.AnimationTransition;
 import org.pepstock.charba.client.options.IsAnimation;
-import org.pepstock.charba.client.options.IsAnimationCollectionKey;
+import org.pepstock.charba.client.options.AnimationCollectionKey;
 import org.pepstock.charba.client.options.IsAnimations;
 import org.pepstock.charba.client.options.IsTransitionKey;
 
@@ -314,7 +314,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	 * @param enabled if <code>true</code> it enables an animation collection
 	 */
 	@Override
-	public void setEnabled(IsAnimationCollectionKey collection, boolean enabled) {
+	public void setEnabled(AnimationCollectionKey collection, boolean enabled) {
 		transition.getAnimations().setEnabled(collection, enabled);
 	}
 
@@ -325,7 +325,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
 	 */
 	@Override
-	public boolean isEnabled(IsAnimationCollectionKey collection) {
+	public boolean isEnabled(AnimationCollectionKey collection) {
 		return transition.getAnimations().isEnabled(collection);
 	}
 
@@ -336,7 +336,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	 * @return <code>true</code> if an animation collection instance is stored in the the animation options
 	 */
 	@Override
-	public boolean has(IsAnimationCollectionKey collection) {
+	public boolean has(AnimationCollectionKey collection) {
 		return transition.getAnimations().has(collection);
 	}
 
@@ -347,7 +347,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	 * @return an animation collection instance or <code>null</code> if does not exists
 	 */
 	@Override
-	public AnimationCollection get(IsAnimationCollectionKey collection) {
+	public AnimationCollection get(AnimationCollectionKey collection) {
 		return transition.getAnimations().get(collection);
 	}
 
@@ -358,7 +358,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	 * @param animationCollection an animation collection instance to set
 	 */
 	@Override
-	public void set(IsAnimationCollectionKey collection, AnimationCollection animationCollection) {
+	public void set(AnimationCollectionKey collection, AnimationCollection animationCollection) {
 		transition.getAnimations().set(collection, animationCollection);
 	}
 
@@ -369,7 +369,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	 * @return a collection animation options
 	 */
 	@Override
-	public AnimationCollection create(IsAnimationCollectionKey collection) {
+	public AnimationCollection create(AnimationCollectionKey collection) {
 		// returns the animation options
 		return transition.getAnimations().create(collection);
 	}
@@ -380,7 +380,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	 * @param collection collection instance used to remove from animation options
 	 */
 	@Override
-	public void remove(IsAnimationCollectionKey collection) {
+	public void remove(AnimationCollectionKey collection) {
 		transition.getAnimations().remove(collection);
 	}
 

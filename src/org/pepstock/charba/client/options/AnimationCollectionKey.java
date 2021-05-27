@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsAnimationCollectionKey extends IsTypedAnimationKey {
+public interface AnimationCollectionKey extends IsTypedAnimationKey {
 
 	/**
 	 * Returns a animation collection instance by its string value.
@@ -36,7 +36,7 @@ public interface IsAnimationCollectionKey extends IsTypedAnimationKey {
 	 * @param type type of the properties
 	 * @return new collection instance
 	 */
-	static IsAnimationCollectionKey create(String collection, AnimationType type) {
+	static AnimationCollectionKey create(String collection, AnimationType type) {
 		// checks if mode as argument is a default one
 		for (DefaultAnimationCollectionKey defCollection : DefaultAnimationCollectionKey.values()) {
 			// checks if mode is equals to default
@@ -57,17 +57,17 @@ public interface IsAnimationCollectionKey extends IsTypedAnimationKey {
 	 * @param properties initial collection of properties
 	 * @return new collection instance
 	 */
-	static IsAnimationCollectionKey create(String collection, IsAnimationPropertyKey... properties) {
+	static AnimationCollectionKey create(String collection, AnimationPropertyKey... properties) {
 		// checks if properties instance is consistent
 		Checker.checkIfValid(properties, "Animation collection properties");
 		// checks if properties are consistent
 		Checker.checkIfNotEqualTo(properties.length, 0, "Inavlid amount of animation collection properties. It");
 		// get result reference
-		IsAnimationCollectionKey result = null;
+		AnimationCollectionKey result = null;
 		// scans all properties
-		for (IsAnimationPropertyKey property : properties) {
+		for (AnimationPropertyKey property : properties) {
 			// checks the consistency of property
-			IsAnimationPropertyKey.checkIfValid(property);
+			AnimationPropertyKey.checkIfValid(property);
 			// checks if is the first property
 			if (result == null) {
 				// creates the collection to return
@@ -88,7 +88,7 @@ public interface IsAnimationCollectionKey extends IsTypedAnimationKey {
 	 * @param collection animation collection to be checked
 	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 */
-	static boolean isValid(IsAnimationCollectionKey collection) {
+	static boolean isValid(AnimationCollectionKey collection) {
 		return Key.isValid(collection) && Key.isValid(collection.type());
 	}
 
@@ -98,7 +98,7 @@ public interface IsAnimationCollectionKey extends IsTypedAnimationKey {
 	 * 
 	 * @param collection animation collection to be checked
 	 */
-	static void checkIfValid(IsAnimationCollectionKey collection) {
+	static void checkIfValid(AnimationCollectionKey collection) {
 		if (!isValid(collection)) {
 			// gets the exception message
 			// additional check to throw the right exception message
@@ -115,7 +115,7 @@ public interface IsAnimationCollectionKey extends IsTypedAnimationKey {
 	 * @param collection collection to be checked
 	 * @return the same collection passed as argument
 	 */
-	static IsAnimationCollectionKey checkAndGetIfValid(IsAnimationCollectionKey collection) {
+	static AnimationCollectionKey checkAndGetIfValid(AnimationCollectionKey collection) {
 		// checks if collection is consistent
 		checkIfValid(collection);
 		// if here, is consistent
@@ -128,6 +128,6 @@ public interface IsAnimationCollectionKey extends IsTypedAnimationKey {
 	 * 
 	 * @return the animation properties related to the collection
 	 */
-	List<IsAnimationPropertyKey> properties();
+	List<AnimationPropertyKey> properties();
 
 }

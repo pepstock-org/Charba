@@ -27,10 +27,10 @@ import org.pepstock.charba.client.enums.AnimationType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardAnimationProperty extends AbstractTypedAnimationKey implements IsAnimationPropertyKey {
+public final class StandardAnimationProperty extends AbstractTypedAnimationKey implements AnimationPropertyKey {
 
 	// list of properties with only the key
-	private List<IsAnimationPropertyKey> properties = null;
+	private List<AnimationPropertyKey> properties = null;
 
 	/**
 	 * Builds the object with the property value as string and its type.
@@ -41,7 +41,7 @@ public final class StandardAnimationProperty extends AbstractTypedAnimationKey i
 	StandardAnimationProperty(String value, AnimationType type) {
 		super(value, type);
 		// checks if argument is consistent
-		IsAnimationPropertyKey.checkIfValid(this);
+		AnimationPropertyKey.checkIfValid(this);
 	}
 
 	/*
@@ -67,10 +67,10 @@ public final class StandardAnimationProperty extends AbstractTypedAnimationKey i
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.IsAnimationCollectionKey#properties()
+	 * @see org.pepstock.charba.client.options.AnimationCollectionKey#properties()
 	 */
 	@Override
-	public List<IsAnimationPropertyKey> properties() {
+	public List<AnimationPropertyKey> properties() {
 		// checks if properties instance is initialized
 		if (properties == null) {
 			// stores the property itself in the properties list

@@ -24,7 +24,7 @@ import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsAnimationPropertyKey extends IsAnimationCollectionKey {
+public interface AnimationPropertyKey extends AnimationCollectionKey {
 
 	/**
 	 * Returns a animation property instance by its string value.
@@ -33,7 +33,7 @@ public interface IsAnimationPropertyKey extends IsAnimationCollectionKey {
 	 * @param type type related to the typeof property
 	 * @return new property instance
 	 */
-	static IsAnimationPropertyKey create(String property, AnimationType type) {
+	static AnimationPropertyKey create(String property, AnimationType type) {
 		// checks if property as argument is a default one
 		if (DefaultAnimationPropertyKey.is(property)) {
 			// returns the value
@@ -51,7 +51,7 @@ public interface IsAnimationPropertyKey extends IsAnimationCollectionKey {
 	 * @param property animation property to be checked
 	 * @return <code>true</code> if type passed as argument is not <code>null</code> and its type is not <code>null</code> as well.
 	 */
-	static boolean isValid(IsAnimationPropertyKey property) {
+	static boolean isValid(AnimationPropertyKey property) {
 		return Key.isValid(property) && Key.isValid(property.type());
 	}
 
@@ -61,7 +61,7 @@ public interface IsAnimationPropertyKey extends IsAnimationCollectionKey {
 	 * 
 	 * @param property animation property to be checked
 	 */
-	static void checkIfValid(IsAnimationPropertyKey property) {
+	static void checkIfValid(AnimationPropertyKey property) {
 		if (!isValid(property)) {
 			// gets the exception message
 			// additional check to throw the right exception message
@@ -78,7 +78,7 @@ public interface IsAnimationPropertyKey extends IsAnimationCollectionKey {
 	 * @param property property to be checked
 	 * @return the same property passed as argument
 	 */
-	static IsAnimationPropertyKey checkAndGetIfValid(IsAnimationPropertyKey property) {
+	static AnimationPropertyKey checkAndGetIfValid(AnimationPropertyKey property) {
 		// checks if property is consistent
 		checkIfValid(property);
 		// if here, is consistent

@@ -30,7 +30,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	 * @param collection collection instance used to check in the animation options
 	 * @param enabled if <code>true</code> it enables an animation collection
 	 */
-	void setEnabled(IsAnimationCollectionKey collection, boolean enabled);
+	void setEnabled(AnimationCollectionKey collection, boolean enabled);
 
 	/**
 	 * Returns <code>true</code> if the animation collection is enabled, otherwise <code>false</code>.
@@ -38,7 +38,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	 * @param collection collection instance used to check in the animation options
 	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
 	 */
-	boolean isEnabled(IsAnimationCollectionKey collection);
+	boolean isEnabled(AnimationCollectionKey collection);
 
 	/**
 	 * Returns an animation collection instance if stored in the the animation options.
@@ -47,7 +47,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	 * @return an animation collection instance or <code>null</code> if does not exists
 	 */
 	@Override
-	AnimationCollection get(IsAnimationCollectionKey collection);
+	AnimationCollection get(AnimationCollectionKey collection);
 
 	/**
 	 * Sets an animation collection instance to store in the animation options.
@@ -55,7 +55,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	 * @param collection collection instance used to get for animation options
 	 * @param animationCollection an animation collection instance to set
 	 */
-	void set(IsAnimationCollectionKey collection, AnimationCollection animationCollection);
+	void set(AnimationCollectionKey collection, AnimationCollection animationCollection);
 
 	/**
 	 * Creates an animation collection instance and stores in the the animation options.
@@ -63,13 +63,13 @@ public interface IsAnimations extends IsDefaultAnimations {
 	 * @param collection collection key used to create the animation collections
 	 * @return a collection animation options
 	 */
-	AnimationCollection create(IsAnimationCollectionKey collection);
+	AnimationCollection create(AnimationCollectionKey collection);
 
 	/**
 	 * Removes an animation collection previously added.
 	 * 
 	 * @param collection collection instance used to remove from animation options
 	 */
-	void remove(IsAnimationCollectionKey collection);
+	void remove(AnimationCollectionKey collection);
 
 }

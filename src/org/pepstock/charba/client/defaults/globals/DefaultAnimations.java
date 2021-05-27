@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
-import org.pepstock.charba.client.options.IsAnimationCollectionKey;
+import org.pepstock.charba.client.options.AnimationCollectionKey;
 
 /**
  * CHART.JS default values for ANIMATION element.
@@ -48,12 +48,12 @@ public class DefaultAnimations implements IsDefaultAnimations {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#has(org.pepstock.charba.client.options.IsAnimationCollectionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#has(org.pepstock.charba.client.options.AnimationCollectionKey)
 	 */
 	@Override
-	public boolean has(IsAnimationCollectionKey collection) {
+	public boolean has(AnimationCollectionKey collection) {
 		// checks if collection is valid
-		if (IsAnimationCollectionKey.isValid(collection)) {
+		if (AnimationCollectionKey.isValid(collection)) {
 			// scans all defaults
 			for (DefaultAnimationCollectionKey defaultCollection : DEFAULT_ANIMATION_COLLECTION_KEYS) {
 				// checks if equals
@@ -71,12 +71,12 @@ public class DefaultAnimations implements IsDefaultAnimations {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#get(org.pepstock.charba.client.options.IsAnimationCollectionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#get(org.pepstock.charba.client.options.AnimationCollectionKey)
 	 */
 	@Override
-	public IsDefaultAnimationCollection get(IsAnimationCollectionKey collection) {
+	public IsDefaultAnimationCollection get(AnimationCollectionKey collection) {
 		// checks if collection key is consistent
-		IsAnimationCollectionKey.checkIfValid(collection);
+		AnimationCollectionKey.checkIfValid(collection);
 		// checks if collection is valid and is default one
 		if (DefaultAnimationCollectionKey.is(collection)) {
 			// checks if is color

@@ -20,14 +20,14 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.IsAnimationPropertyKey;
+import org.pepstock.charba.client.options.AnimationPropertyKey;
 
 /**
  * Cores animation properties, to use to animate, provided out of the box by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey
+public enum DefaultAnimationPropertyKey implements AnimationPropertyKey
 {
 	/**
 	 * Uses to <b>x</b> property to animate the element.
@@ -71,7 +71,7 @@ public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey
 	// animation type
 	private final AnimationType type;
 	// list of properties with only the key
-	private List<IsAnimationPropertyKey> properties = null;
+	private List<AnimationPropertyKey> properties = null;
 
 	/**
 	 * Creates with the property value to use in the native object.
@@ -107,10 +107,10 @@ public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.IsAnimationCollectionKey#properties()
+	 * @see org.pepstock.charba.client.options.AnimationCollectionKey#properties()
 	 */
 	@Override
-	public List<IsAnimationPropertyKey> properties() {
+	public List<AnimationPropertyKey> properties() {
 		// checks if properties instance is initialized
 		if (properties == null) {
 			// stores the property itself in the properties list
@@ -126,9 +126,9 @@ public enum DefaultAnimationPropertyKey implements IsAnimationPropertyKey
 	 * @param property the animation property to check
 	 * @return <code>true</code> if the argument is equals to a default animation property
 	 */
-	public static boolean is(IsAnimationPropertyKey property) {
+	public static boolean is(AnimationPropertyKey property) {
 		// checks if property is valid
-		if (IsAnimationPropertyKey.isValid(property)) {
+		if (AnimationPropertyKey.isValid(property)) {
 			// invokes the checking
 			return is(property.value());
 		}

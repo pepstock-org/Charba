@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
-import org.pepstock.charba.client.options.IsAnimationCollectionKey;
+import org.pepstock.charba.client.options.AnimationCollectionKey;
 
 /**
  * Defaults for animations option element, based on chart type.
@@ -40,20 +40,20 @@ public final class DefaultChartAnimations implements IsDefaultAnimations {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#has(org.pepstock.charba.client.options.IsAnimationCollectionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#has(org.pepstock.charba.client.options.AnimationCollectionKey)
 	 */
 	@Override
-	public boolean has(IsAnimationCollectionKey collection) {
+	public boolean has(AnimationCollectionKey collection) {
 		return animations.has(collection);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#get(org.pepstock.charba.client.options.IsAnimationCollectionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#get(org.pepstock.charba.client.options.AnimationCollectionKey)
 	 */
 	@Override
-	public IsDefaultAnimationCollection get(IsAnimationCollectionKey collection) {
+	public IsDefaultAnimationCollection get(AnimationCollectionKey collection) {
 		return animations.get(collection);
 	}
 

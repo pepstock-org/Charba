@@ -23,8 +23,8 @@ import org.pepstock.charba.client.callbacks.ToCallback;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.options.IsAnimationCollectionKey;
-import org.pepstock.charba.client.options.IsAnimationPropertyKey;
+import org.pepstock.charba.client.options.AnimationCollectionKey;
+import org.pepstock.charba.client.options.AnimationPropertyKey;
 
 /**
  * CHART.JS default values for animation collection.
@@ -45,7 +45,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 
 	private static final String DEFAULT_TO_AS_STRING = Undefined.STRING;
 
-	private final IsAnimationCollectionKey collection;
+	private final AnimationCollectionKey collection;
 
 	/**
 	 * To avoid any instantiation
@@ -55,12 +55,12 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	}
 
 	/**
-	 * Creates a default animation collection wrapping the {@link IsAnimationCollectionKey}.
+	 * Creates a default animation collection wrapping the {@link AnimationCollectionKey}.
 	 * 
 	 * @param collection a default animation collection to wrap
 	 */
-	public DefaultAnimationCollection(IsAnimationCollectionKey collection) {
-		this.collection = IsAnimationCollectionKey.checkAndGetIfValid(collection);
+	public DefaultAnimationCollection(AnimationCollectionKey collection) {
+		this.collection = AnimationCollectionKey.checkAndGetIfValid(collection);
 	}
 
 	/*
@@ -69,7 +69,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getProperties()
 	 */
 	@Override
-	public List<IsAnimationPropertyKey> getProperties() {
+	public List<AnimationPropertyKey> getProperties() {
 		return collection != null ? collection.properties() : Collections.emptyList();
 	}
 

@@ -21,7 +21,7 @@ import org.pepstock.charba.client.callbacks.FromCallback;
 import org.pepstock.charba.client.callbacks.ToCallback;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.enums.AnimationType;
-import org.pepstock.charba.client.options.IsAnimationPropertyKey;
+import org.pepstock.charba.client.options.AnimationPropertyKey;
 
 /**
  * CHART.JS default values for animation collection.
@@ -45,7 +45,7 @@ public final class DefaultChartAnimationCollection extends AbstractDefaultChartA
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getProperties()
 	 */
 	@Override
-	public List<IsAnimationPropertyKey> getProperties() {
+	public List<AnimationPropertyKey> getProperties() {
 		return getDefaults().getProperties();
 	}
 

@@ -20,15 +20,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.IsAnimationCollectionKey;
-import org.pepstock.charba.client.options.IsAnimationPropertyKey;
+import org.pepstock.charba.client.options.AnimationCollectionKey;
+import org.pepstock.charba.client.options.AnimationPropertyKey;
 
 /**
  * Cores animation collections names provided out of the box by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultAnimationCollectionKey implements IsAnimationCollectionKey
+public enum DefaultAnimationCollectionKey implements AnimationCollectionKey
 {
 	/**
 	 * Defines the default animation collection for colors.
@@ -48,7 +48,7 @@ public enum DefaultAnimationCollectionKey implements IsAnimationCollectionKey
 	// animation type
 	private final AnimationType type;
 	// animation properties
-	private final List<IsAnimationPropertyKey> properties = new LinkedList<>();
+	private final List<AnimationPropertyKey> properties = new LinkedList<>();
 
 	/**
 	 * Creates with the property value to use in the native object.
@@ -56,10 +56,10 @@ public enum DefaultAnimationCollectionKey implements IsAnimationCollectionKey
 	 * @param value value of property name
 	 * @param properties array of properties to use as default
 	 */
-	private DefaultAnimationCollectionKey(String value, IsAnimationPropertyKey... properties) {
+	private DefaultAnimationCollectionKey(String value, AnimationPropertyKey... properties) {
 		this.value = value;
 		// scans all properties
-		for (IsAnimationPropertyKey property : properties) {
+		for (AnimationPropertyKey property : properties) {
 			// adds to list
 			this.properties.add(property);
 		}
@@ -95,7 +95,7 @@ public enum DefaultAnimationCollectionKey implements IsAnimationCollectionKey
 	 * @see org.pepstock.charba.client.options.IsAnimationCollection#properties()
 	 */
 	@Override
-	public List<IsAnimationPropertyKey> properties() {
+	public List<AnimationPropertyKey> properties() {
 		return Collections.unmodifiableList(properties);
 	}
 
@@ -105,7 +105,7 @@ public enum DefaultAnimationCollectionKey implements IsAnimationCollectionKey
 	 * @param collection the animation collection to check
 	 * @return <code>true</code> if the argument is equals to a default animation collection
 	 */
-	public static boolean is(IsAnimationCollectionKey collection) {
+	public static boolean is(AnimationCollectionKey collection) {
 		// checks if collection is valid
 		if (Key.isValid(collection)) {
 			// invokes the checking
