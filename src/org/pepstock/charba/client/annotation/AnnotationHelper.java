@@ -82,12 +82,12 @@ final class AnnotationHelper {
 	 * @param chart chart instance to search the annotation object
 	 * @return the annotation configuration related to the id passed as argument
 	 */
-	IsDefaultsAnnotation getDefaultsAnnotationOptionsByChart(AnnotationType type, IsAnnotationId id, IsChart chart) {
+	IsDefaultsAnnotation getDefaultsAnnotationOptionsByChart(AnnotationType type, AnnotationId id, IsChart chart) {
 		// checks annotation type
 		// if not exception
 		Key.checkIfValid(type);
 		// checks if annotation type is consistent
-		if (IsChart.isConsistent(chart) && IsAnnotationId.isValid(id)) {
+		if (IsChart.isConsistent(chart) && AnnotationId.isValid(id)) {
 			// gets result, inspecting the chart options
 			return inspectChartToGetAnnotation(type, id, chart.getDefaultChartOptions().getPlugins().getOptions(AnnotationPlugin.ID, AnnotationPlugin.FACTORY));
 		}
@@ -103,7 +103,7 @@ final class AnnotationHelper {
 	 * @param id annotation id to use to get the annotation object
 	 * @return the annotation configuration related to the id passed as argument
 	 */
-	IsDefaultsAnnotation getDefaultsAnnotationOptionsByGlobal(AnnotationType type, IsAnnotationId id) {
+	IsDefaultsAnnotation getDefaultsAnnotationOptionsByGlobal(AnnotationType type, AnnotationId id) {
 		// checks annotation type
 		// if not exception
 		Key.checkIfValid(type);
@@ -119,9 +119,9 @@ final class AnnotationHelper {
 	 * @param options annotation options instance to inspect in order to retrieve the annotation object
 	 * @return the annotation configuration related to the id passed as argument
 	 */
-	private IsDefaultsAnnotation inspectChartToGetAnnotation(AnnotationType type, IsAnnotationId id, AnnotationOptions options) {
+	private IsDefaultsAnnotation inspectChartToGetAnnotation(AnnotationType type, AnnotationId id, AnnotationOptions options) {
 		// checks if annotation id and options are consistent
-		if (IsAnnotationId.isValid(id) && options != null && options.hasAnnotation(id)) {
+		if (AnnotationId.isValid(id) && options != null && options.hasAnnotation(id)) {
 			// stores the result
 			IsDefaultsAnnotation result = options.getAnnotation(id);
 			// checks if the result type and type passed as argument

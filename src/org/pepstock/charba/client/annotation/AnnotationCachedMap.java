@@ -65,7 +65,7 @@ final class AnnotationCachedMap extends AnnotationMap {
 	 * @return <code>true</code> if the annotation with the id passed as argument exists
 	 */
 	@Override
-	boolean hasAnnotation(IsAnnotationId id) {
+	boolean hasAnnotation(AnnotationId id) {
 		return super.hasAnnotation(id) && annotationsCache.containsKey(id.value());
 	}
 
@@ -75,7 +75,7 @@ final class AnnotationCachedMap extends AnnotationMap {
 	 * @param id annotation id to check
 	 */
 	@Override
-	void removeAnnotation(IsAnnotationId id) {
+	void removeAnnotation(AnnotationId id) {
 		// invokes super
 		super.removeAnnotation(id);
 		// removes from cache if the annotation id exist
@@ -97,7 +97,7 @@ final class AnnotationCachedMap extends AnnotationMap {
 			// scans all arguments
 			for (AbstractAnnotation annotation : annotations) {
 				// adds annotation
-				IsAnnotationId id = annotation.getId();
+				AnnotationId id = annotation.getId();
 				// stores in the java script object
 				annotationsCache.put(id.value(), annotation);
 			}

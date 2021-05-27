@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.PropertyKey;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsAnnotationId extends PropertyKey {
+public interface AnnotationId extends PropertyKey {
 
 	/**
 	 * Returns a key instance by its string value.
@@ -30,7 +30,7 @@ public interface IsAnnotationId extends PropertyKey {
 	 * @param id string value to use
 	 * @return new annotation configuration object id instance
 	 */
-	static IsAnnotationId create(String id) {
+	static AnnotationId create(String id) {
 		// checks if passed id is consistent
 		PropertyKey.checkIfValid(id);
 		// creates new annotation id
@@ -55,7 +55,7 @@ public interface IsAnnotationId extends PropertyKey {
 	 * @return <code>true</code> if id passed as argument is not <code>null</code> and its value is not <code>null</code> as well and could be a valid annotation configuration
 	 *         object id.
 	 */
-	static boolean isValid(IsAnnotationId id) {
+	static boolean isValid(AnnotationId id) {
 		return PropertyKey.isValid(id);
 	}
 
@@ -65,7 +65,7 @@ public interface IsAnnotationId extends PropertyKey {
 	 * 
 	 * @param id annotation configuration object id to be checked
 	 */
-	static void checkIfValid(IsAnnotationId id) {
+	static void checkIfValid(AnnotationId id) {
 		PropertyKey.checkIfValid(id);
 	}
 
@@ -86,11 +86,11 @@ public interface IsAnnotationId extends PropertyKey {
 	 * @param defaultValue the default value if the id parameter is not a valid, it can not be a annotation id due to its value.
 	 * @return the ID of the annotation
 	 */
-	static IsAnnotationId checkAndGetAnnotationID(String id, IsAnnotationId defaultValue) {
+	static AnnotationId checkAndGetAnnotationID(String id, AnnotationId defaultValue) {
 		// checks if default value is consistent
-		if (IsAnnotationId.isValid(id)) {
+		if (AnnotationId.isValid(id)) {
 			// creates new annotation configuration object id with id stored in the the object
-			return IsAnnotationId.create(id);
+			return AnnotationId.create(id);
 		}
 		// if here not, default value is not consistent
 		// then returns the default

@@ -95,11 +95,11 @@ public enum AnnotationType implements Key
 	 * 
 	 * @return a unique id for the annotation
 	 */
-	public IsAnnotationId createId() {
+	public AnnotationId createId() {
 		// gets a builder with annotation type as initial value
 		StringBuilder builder = new StringBuilder(value());
 		// adds minus and counter and creates an annotation id
-		return IsAnnotationId.create(builder.append(Constants.MINUS).append(counter.incrementAndGet()).toString());
+		return AnnotationId.create(builder.append(Constants.MINUS).append(counter.incrementAndGet()).toString());
 	}
 
 }

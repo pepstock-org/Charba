@@ -195,10 +195,10 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * @param id annotation id
 	 * @param defaultValues default options instance
 	 */
-	AbstractAnnotation(AnnotationType type, IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
+	AbstractAnnotation(AnnotationType type, AnnotationId id, IsDefaultsAnnotation defaultValues) {
 		this(null, defaultValues);
 		// checks if is is consistent
-		IsAnnotationId.checkIfValid(id);
+		AnnotationId.checkIfValid(id);
 		// checks if type is consistent
 		Key.checkIfValid(type);
 		// stores id
@@ -277,8 +277,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * 
 	 * @return the id of annotation
 	 */
-	public final IsAnnotationId getId() {
-		return IsAnnotationId.create(getValue(Property.ID, Undefined.STRING));
+	public final AnnotationId getId() {
+		return AnnotationId.create(getValue(Property.ID, Undefined.STRING));
 	}
 
 	/**

@@ -109,7 +109,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 * @param id annotation id to apply to the object, as string
 	 */
 	public BoxAnnotation(String id) {
-		this(IsAnnotationId.create(id));
+		this(AnnotationId.create(id));
 	}
 
 	/**
@@ -117,7 +117,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 * 
 	 * @param id annotation id to apply to the object
 	 */
-	public BoxAnnotation(IsAnnotationId id) {
+	public BoxAnnotation(AnnotationId id) {
 		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.BOX, id));
 	}
 
@@ -130,7 +130,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 * @param chart chart instance related to the plugin options
 	 */
 	public BoxAnnotation(String id, IsChart chart) {
-		this(IsAnnotationId.create(id), chart);
+		this(AnnotationId.create(id), chart);
 	}
 
 	/**
@@ -141,7 +141,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 * @param id annotation id to apply to the object
 	 * @param chart chart instance related to the plugin options
 	 */
-	public BoxAnnotation(IsAnnotationId id, IsChart chart) {
+	public BoxAnnotation(AnnotationId id, IsChart chart) {
 		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByChart(AnnotationType.BOX, id, chart));
 	}
 
@@ -151,7 +151,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 * @param id annotation id to apply to the object
 	 * @param defaultValues default options instance
 	 */
-	private BoxAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
+	private BoxAnnotation(AnnotationId id, IsDefaultsAnnotation defaultValues) {
 		super(AnnotationType.BOX, id, defaultValues);
 		// checks if default are of the right class
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsBoxAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));

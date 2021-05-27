@@ -124,7 +124,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param id annotation id to apply to the object, as string
 	 */
 	public PointAnnotation(String id) {
-		this(IsAnnotationId.create(id));
+		this(AnnotationId.create(id));
 	}
 
 	/**
@@ -132,7 +132,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * 
 	 * @param id annotation id to apply to the object
 	 */
-	public PointAnnotation(IsAnnotationId id) {
+	public PointAnnotation(AnnotationId id) {
 		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.POINT, id));
 	}
 
@@ -145,7 +145,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param chart chart instance related to the plugin options
 	 */
 	public PointAnnotation(String id, IsChart chart) {
-		this(IsAnnotationId.create(id), chart);
+		this(AnnotationId.create(id), chart);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param id annotation id to apply to the object
 	 * @param chart chart instance related to the plugin options
 	 */
-	public PointAnnotation(IsAnnotationId id, IsChart chart) {
+	public PointAnnotation(AnnotationId id, IsChart chart) {
 		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByChart(AnnotationType.POINT, id, chart));
 	}
 
@@ -166,7 +166,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 * @param id annotation id to apply to the object
 	 * @param defaultValues default options instance
 	 */
-	private PointAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
+	private PointAnnotation(AnnotationId id, IsDefaultsAnnotation defaultValues) {
 		// if id is not consistent, new one is created
 		// if defaults is not consistent, the defaults defined for this annotation type is used
 		super(AnnotationType.POINT, id == null ? AnnotationType.POINT.createId() : id, defaultValues == null ? AnnotationType.POINT.getDefaultsValues() : defaultValues);

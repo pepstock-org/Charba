@@ -73,9 +73,9 @@ class AnnotationMap extends NativeObjectContainer {
 	 * @param id annotation id to check
 	 * @return <code>true</code> if the annotation with the id passed as argument exists
 	 */
-	boolean hasAnnotation(IsAnnotationId id) {
+	boolean hasAnnotation(AnnotationId id) {
 		// checks if the annotation id is consistent
-		IsAnnotationId.checkIfValid(id);
+		AnnotationId.checkIfValid(id);
 		// checks if the annotation id exist
 		return has(id);
 	}
@@ -85,9 +85,9 @@ class AnnotationMap extends NativeObjectContainer {
 	 * 
 	 * @param id annotation id to check
 	 */
-	void removeAnnotation(IsAnnotationId id) {
+	void removeAnnotation(AnnotationId id) {
 		// checks if the annotation id is consistent
-		IsAnnotationId.checkIfValid(id);
+		AnnotationId.checkIfValid(id);
 		// removes from java script object if the annotation id exist
 		remove(id);
 	}
@@ -106,7 +106,7 @@ class AnnotationMap extends NativeObjectContainer {
 				// sets default
 				annotation.setParentDrawTime(drawTime);
 				// adds annotation
-				IsAnnotationId id = annotation.getId();
+				AnnotationId id = annotation.getId();
 				// stores in the java script object
 				setValue(id, annotation);
 			}
@@ -172,9 +172,9 @@ class AnnotationMap extends NativeObjectContainer {
 	 * @param id annotation id to check
 	 * @return the annotation with the id passed as argument or <code>null</code> if not exist
 	 */
-	AbstractAnnotation getAnnotation(IsAnnotationId id) {
+	AbstractAnnotation getAnnotation(AnnotationId id) {
 		// checks if the annotation id is consistent
-		IsAnnotationId.checkIfValid(id);
+		AnnotationId.checkIfValid(id);
 		// checks if the annotation id exist
 		if (hasAnnotation(id) && isType(id, ObjectType.OBJECT)) {
 			// gets from the cache

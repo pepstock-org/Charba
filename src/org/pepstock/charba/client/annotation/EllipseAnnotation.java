@@ -56,7 +56,7 @@ public final class EllipseAnnotation extends AbstractXYAnnotation implements IsD
 	 * @param id annotation id to apply to the object, as string
 	 */
 	public EllipseAnnotation(String id) {
-		this(IsAnnotationId.create(id));
+		this(AnnotationId.create(id));
 	}
 
 	/**
@@ -64,7 +64,7 @@ public final class EllipseAnnotation extends AbstractXYAnnotation implements IsD
 	 * 
 	 * @param id annotation id to apply to the object
 	 */
-	public EllipseAnnotation(IsAnnotationId id) {
+	public EllipseAnnotation(AnnotationId id) {
 		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.ELLIPSE, id));
 	}
 
@@ -77,7 +77,7 @@ public final class EllipseAnnotation extends AbstractXYAnnotation implements IsD
 	 * @param chart chart instance related to the plugin options
 	 */
 	public EllipseAnnotation(String id, IsChart chart) {
-		this(IsAnnotationId.create(id), chart);
+		this(AnnotationId.create(id), chart);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public final class EllipseAnnotation extends AbstractXYAnnotation implements IsD
 	 * @param id annotation id to apply to the object
 	 * @param chart chart instance related to the plugin options
 	 */
-	public EllipseAnnotation(IsAnnotationId id, IsChart chart) {
+	public EllipseAnnotation(AnnotationId id, IsChart chart) {
 		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByChart(AnnotationType.ELLIPSE, id, chart));
 	}
 
@@ -98,7 +98,7 @@ public final class EllipseAnnotation extends AbstractXYAnnotation implements IsD
 	 * @param id annotation id to apply to the object
 	 * @param defaultValues default options instance
 	 */
-	private EllipseAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
+	private EllipseAnnotation(AnnotationId id, IsDefaultsAnnotation defaultValues) {
 		super(AnnotationType.ELLIPSE, id, defaultValues);
 		// checks if default are of the right class
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsEllipseAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.ELLIPSE.value()));

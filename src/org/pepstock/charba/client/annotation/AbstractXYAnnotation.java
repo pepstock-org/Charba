@@ -104,7 +104,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 * @param id annotation id to apply to the object
 	 * @param defaultValues default options instance
 	 */
-	AbstractXYAnnotation(AnnotationType type, IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
+	AbstractXYAnnotation(AnnotationType type, AnnotationId id, IsDefaultsAnnotation defaultValues) {
 		// if id is not consistent, new one is created
 		// if defaults is not consistent, the defaults defined for this annotation type is used
 		super(Key.checkAndGetIfValid(type), id == null ? type.createId() : id, defaultValues == null ? type.getDefaultsValues() : defaultValues);

@@ -112,7 +112,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param id annotation id to apply to the object, as string
 	 */
 	public LineAnnotation(String id) {
-		this(IsAnnotationId.create(id));
+		this(AnnotationId.create(id));
 	}
 
 	/**
@@ -120,7 +120,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * 
 	 * @param id annotation id to apply to the object
 	 */
-	public LineAnnotation(IsAnnotationId id) {
+	public LineAnnotation(AnnotationId id) {
 		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.LINE, id));
 	}
 
@@ -133,7 +133,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param chart chart instance related to the plugin options
 	 */
 	public LineAnnotation(String id, IsChart chart) {
-		this(IsAnnotationId.create(id), chart);
+		this(AnnotationId.create(id), chart);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param id annotation id to apply to the object
 	 * @param chart chart instance related to the plugin options
 	 */
-	public LineAnnotation(IsAnnotationId id, IsChart chart) {
+	public LineAnnotation(AnnotationId id, IsChart chart) {
 		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByChart(AnnotationType.LINE, id, chart));
 	}
 
@@ -154,7 +154,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param id annotation id to apply to the object
 	 * @param defaultValues default options instance
 	 */
-	private LineAnnotation(IsAnnotationId id, IsDefaultsAnnotation defaultValues) {
+	private LineAnnotation(AnnotationId id, IsDefaultsAnnotation defaultValues) {
 		// if id is not consistent, new one is created
 		// if defaults is not consistent, the defaults defined for this annotation type is used
 		super(AnnotationType.LINE, id == null ? AnnotationType.LINE.createId() : id, defaultValues == null ? AnnotationType.LINE.getDefaultsValues() : defaultValues);

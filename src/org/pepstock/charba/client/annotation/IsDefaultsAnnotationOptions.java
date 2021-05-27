@@ -52,7 +52,7 @@ interface IsDefaultsAnnotationOptions {
 	 * @param id annotation id to check
 	 * @return <code>true</code> if the annotation with the id passed as argument exists
 	 */
-	default boolean hasAnnotation(IsAnnotationId id) {
+	default boolean hasAnnotation(AnnotationId id) {
 		return false;
 	}
 
@@ -71,7 +71,7 @@ interface IsDefaultsAnnotationOptions {
 	 * @param id annotation id to use to retrieve the annotation
 	 * @return the annotation or <code>null</code> if not exist
 	 */
-	default AbstractAnnotation getAnnotation(IsAnnotationId id) {
+	default AbstractAnnotation getAnnotation(AnnotationId id) {
 		return null;
 	}
 

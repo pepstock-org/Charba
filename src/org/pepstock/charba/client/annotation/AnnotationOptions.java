@@ -195,7 +195,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @return <code>true</code> if the annotation with the id passed as argument exists
 	 */
 	public boolean hasAnnotation(String id) {
-		return hasAnnotation(IsAnnotationId.create(id));
+		return hasAnnotation(AnnotationId.create(id));
 	}
 
 	/**
@@ -205,7 +205,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @return <code>true</code> if the annotation with the id passed as argument exists
 	 */
 	@Override
-	public boolean hasAnnotation(IsAnnotationId id) {
+	public boolean hasAnnotation(AnnotationId id) {
 		return annotationsMap.hasAnnotation(id) || defaultOptions.hasAnnotation(id);
 	}
 
@@ -215,7 +215,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @param id annotation id to check
 	 */
 	public void removeAnnotation(String id) {
-		removeAnnotation(IsAnnotationId.create(id));
+		removeAnnotation(AnnotationId.create(id));
 	}
 
 	/**
@@ -223,7 +223,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * 
 	 * @param id annotation id to check
 	 */
-	public void removeAnnotation(IsAnnotationId id) {
+	public void removeAnnotation(AnnotationId id) {
 		annotationsMap.removeAnnotation(id);
 	}
 
@@ -262,7 +262,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @return the annotation or <code>null</code> if not exist
 	 */
 	public AbstractAnnotation getAnnotation(String id) {
-		return getAnnotation(IsAnnotationId.create(id));
+		return getAnnotation(AnnotationId.create(id));
 	}
 
 	/**
@@ -272,7 +272,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @return the annotation with the id passed as argument or <code>null</code> if not exist
 	 */
 	@Override
-	public AbstractAnnotation getAnnotation(IsAnnotationId id) {
+	public AbstractAnnotation getAnnotation(AnnotationId id) {
 		// gets annotation instance
 		AbstractAnnotation result = annotationsMap.getAnnotation(id);
 		// if annotation is consistent
