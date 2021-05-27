@@ -144,7 +144,7 @@ public interface Controller {
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
-	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
+	 * @param mode update mode
 	 */
 	default void onBeforeUpdate(ControllerContext context, IsChart chart, TransitionKey mode) {
 		// do nothing
@@ -155,15 +155,14 @@ public interface Controller {
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
-	 * @param mode update mode, core calls this method using any of 'active', 'hide', 'reset', 'resize', 'show' or undefined
+	 * @param mode update mode
 	 */
 	default void onAfterUpdate(ControllerContext context, IsChart chart, TransitionKey mode) {
 		// do nothing
 	}
 
 	/**
-	 * Called before it ensures that the data set represented by this controller is linked to a scale.<br>
-	 * Overridden to helpers.noop in the polar area and doughnut controllers as these chart types using a single scale.
+	 * Called before it ensures that the data set represented by this controller is linked to a scale.
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
@@ -173,8 +172,7 @@ public interface Controller {
 	}
 
 	/**
-	 * Called after it ensures that the data set represented by this controller is linked to a scale.<br>
-	 * Overridden to helpers.noop in the polar area and doughnut controllers as these chart types using a single scale.
+	 * Called after it ensures that the data set represented by this controller is linked to a scale.
 	 * 
 	 * @param context context of controller
 	 * @param chart chart instance
