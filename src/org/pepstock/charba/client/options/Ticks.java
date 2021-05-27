@@ -51,6 +51,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 		AUTO_SKIP_PADDING("autoSkipPadding"),
 		ALIGN("align"),
 		CROSS_ALIGN("crossAlign"),
+		INCLUDE_BOUNDS("includeBounds"),
 		LABEL_OFFSET("labelOffset"),
 		MAX_ROTATION("maxRotation"),
 		MIN_ROTATION("minRotation"),
@@ -224,6 +225,25 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	@Override
 	public int getAutoSkipPadding() {
 		return getValue(Property.AUTO_SKIP_PADDING, getDefaultValues().getAutoSkipPadding());
+	}
+	
+	/**
+	 * If <code>true</code>, the defined min and maximum values should be presented as ticks even if they are not "nice"
+	 * 
+	 * @param includeBounds if <code>true</code>, the defined min and maximum values should be presented as ticks even if they are not "nice"
+	 */
+	public void setIncludeBounds(boolean includeBounds) {
+		setValueAndAddToParent(Property.INCLUDE_BOUNDS, includeBounds);
+	}
+
+	/**
+	 * If <code>true</code>, the defined minimum and maximum values should be presented as ticks even if they are not "nice".
+	 * 
+	 * @return if <code>true</code>, the defined min and maximum values should be presented as ticks even if they are not "nice"
+	 */
+	@Override
+	public boolean isIncludeBounds() {
+		return getValue(Property.INCLUDE_BOUNDS, getDefaultValues().isIncludeBounds());
 	}
 
 	/**

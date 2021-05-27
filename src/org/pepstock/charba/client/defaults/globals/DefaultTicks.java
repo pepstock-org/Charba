@@ -38,6 +38,8 @@ public class DefaultTicks implements IsDefaultTicks {
 
 	private static final boolean DEFAULT_AUTO_SKIP = true;
 
+	private static final boolean DEFAULT_INCLUDE_BOUNDS = true;
+
 	private static final int DEFAULT_AUTO_SKIP_PADDING = 3;
 
 	private static final int DEFAULT_LABEL_OFFSET = 0;
@@ -161,6 +163,16 @@ public class DefaultTicks implements IsDefaultTicks {
 	@Override
 	public int getAutoSkipPadding() {
 		return DEFAULT_AUTO_SKIP_PADDING;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isIncludeBounds()
+	 */
+	@Override
+	public boolean isIncludeBounds() {
+		return DEFAULT_INCLUDE_BOUNDS;
 	}
 
 	/*

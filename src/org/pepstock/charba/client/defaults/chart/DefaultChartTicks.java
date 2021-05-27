@@ -126,6 +126,16 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isIncludeBounds()
+	 */
+	@Override
+	public boolean isIncludeBounds() {
+		return ticks.isIncludeBounds();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getLabelOffset()
 	 */
 	@Override

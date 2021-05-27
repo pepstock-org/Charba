@@ -60,6 +60,13 @@ public interface IsDefaultTicks extends IsDefaultFontContainer {
 	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
 	 */
 	int getAutoSkipPadding();
+	
+	/**
+	 * If <code>true</code>, the defined minimum and maximum values should be presented as ticks even if they are not "nice".
+	 * 
+	 * @return if <code>true</code>, the defined min and maximum values should be presented as ticks even if they are not "nice"
+	 */
+	boolean isIncludeBounds();
 
 	/**
 	 * Returns the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and the x direction for the y axis).<br>

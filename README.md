@@ -352,7 +352,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `format` property to all numeric ticks (cartesian linear and log, radial linear) in order to apply the number formatting by [ECMAScript Internationalization API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat), leveraging on **Charba INTL NumberFormat** implementation.
  * add the `center` axes position and the position of the axis with respect to a data value.
  * add `textStrokeColor` and `textStrokeWidth` properties to `Ticks` configuration and options classes.
- * add `align` and `crossAlign` properties to cartesian ticks.
+ * add `includeBounds`, `align` and `crossAlign` properties to cartesian ticks.
  * add multiple text lines for `text` property of `ScaleTitle` class.
  * add `backdropColor`, `backdropPadding` and `padding` properties to `PointLabels` options and `RadialPointLabels` configuration classes.
  * add the selected value of the scale by the click event to the `AxisClickEvent` class.
