@@ -8,8 +8,20 @@ Charba - J2CL and GWT Charts library based on CHART.JS
 [![JavadocCurrent](https://img.shields.io/static/v1?message=Last version javadoc&color=informational)](https://pepstock-org.github.io/Charba/3.3/) 
 [![JavadocNext](https://img.shields.io/static/v1?message=Next version javadoc&color=informational)](https://pepstock-org.github.io/Charba/next/) 
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=alert_status)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) 
-[![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/chartjs/awesome) 
+[![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/chartjs/awesome)
 [![CodedIsArtAndPassion](https://img.shields.io/badge/coding%20is-art%20and%20passion-E760A4.svg)](https://github.com/pepstock-org/Charba)
+
+<p align="center">
+  <a href="https://github.com/pepstock-org/Charba/releases/latest"><img alt="Last release" src="https://img.shields.io/github/release/pepstock-org/Charba.svg"></a>
+  <a href="https://mvnrepository.com/artifact/org.pepstock/charba"><img alt="Mvn repo release" src="https://maven-badges.herokuapp.com/maven-central/org.pepstock/charba/badge.svg"></a>
+  <a href="https://github.com/pepstock-org/Charba/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/pepstock-org/Charba.svg"></a>
+  <a href="https://github.com/pepstock-org/Charba/actions/workflows/build.yaml"><img alt="Build" src="https://github.com/pepstock-org/Charba/workflows/Build/badge.svg?branch=master"></a>
+  <a href="https://pepstock-org.github.io/Charba/3.3/"><img alt="Current javadoc version" src="https://img.shields.io/static/v1?message=Last version javadoc&color=informational"></a>
+  <a href="https://pepstock-org.github.io/Charba/next/"><img alt="Next javadoc version" src="https://img.shields.io/static/v1?message=Next version javadoc&color=informational"></a>
+  <a href="https://sonarcloud.io/dashboard?id=pepstock-org_Charba"><img alt="Sonar cloud status" src="https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=alert_status"></a>
+  <a href="https://github.com/chartjs/awesome"><img alt="Chart.js awesome" src="https://awesome.re/badge-flat2.svg"></a>
+  <a href="https://github.com/pepstock-org/Charba"><img alt="Coding is art and passion" src="https://img.shields.io/badge/coding%20is-art%20and%20passion-E760A4.svg"></a>
+</p>
 
 What's Charba
 --------
