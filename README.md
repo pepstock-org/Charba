@@ -7,7 +7,7 @@ Charba - J2CL and GWT Charts library based on CHART.JS
   <a href="https://github.com/pepstock-org/Charba/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/pepstock-org/Charba.svg"></a>
   <a href="https://github.com/pepstock-org/Charba/actions/workflows/build.yaml"><img alt="Build" src="https://github.com/pepstock-org/Charba/workflows/Build/badge.svg?branch=master"></a>
   <a href="https://pepstock-org.github.io/Charba/3.3/"><img alt="Current javadoc version" src="https://img.shields.io/static/v1?message=Last%20version%20javadoc&color=informational"></a>
-  <a href="https://pepstock-org.github.io/Charba/next/"><img alt="Next javadoc version" src="https://img.shields.io/static/v1?message=Next%20version%20javadoc&color=informational"></a>
+  <a href="https://pepstock-org.github.io/Charba/next/"><img alt="Next javadoc version" src="https://img.shields.io/badge/Javadoc-Next%20version-E760A4.svg"></a>
   <a href="https://sonarcloud.io/dashboard?id=pepstock-org_Charba"><img alt="Sonar cloud status" src="https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=alert_status"></a>
   <a href="https://github.com/chartjs/awesome"><img alt="Chart.js awesome" src="https://awesome.re/badge-flat2.svg"></a>
   <a href="https://github.com/pepstock-org/Charba"><img alt="Coding is art and passion" src="https://img.shields.io/badge/coding%20is-art%20and%20passion-E760A4.svg"></a>
