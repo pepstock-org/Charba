@@ -56,7 +56,7 @@ public enum ResourceName implements Key
 	/**
 	 * Script element id for HAMMER JS library.
 	 */
-	HAMMER_LIBRARY("hammerjs", false, "org.pepstock.charba.client.zoom.ZoomPluginHammerResource"),
+	HAMMER_LIBRARY("hammerjs", true, "org.pepstock.charba.client.zoom.ZoomPluginHammerResource"),
 	/**
 	 * Script element id for CHART.JS LABELS plugin.
 	 */
