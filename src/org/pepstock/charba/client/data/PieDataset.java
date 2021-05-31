@@ -66,12 +66,12 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 */
 	private enum Property implements Key
 	{
-		WEIGHT("weight"),
-		OFFSET("offset"),
-		HOVER_OFFSET("hoverOffset"),
 		BORDER_RADIUS("borderRadius"),
-		ROTATION("rotation"),
 		CIRCUMFERENCE("circumference"),
+		HOVER_OFFSET("hoverOffset"),
+		OFFSET("offset"),
+		ROTATION("rotation"),
+		WEIGHT("weight"),
 		// internal to map the border radius type
 		CHARBA_BORDER_RADIUS_TYPE("charbaBorderRadiusType");
 
