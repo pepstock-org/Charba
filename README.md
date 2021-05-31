@@ -270,6 +270,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `segment` property to `LineOptions` options and configuration in order to manage the rendering of line segments.
  * enable `align`, `display`, `color`, `font`, `padding`, `position` and `text` properties in `Title` configuration to be set as scriptable options.
  * enable the scriptable options activation by `NativeCallback`, a callback which contains java script code.
+ * implement `setActiveElements`, `getActiveElements`, `setTooltipActiveElements` and `getTooltipActiveElements` methods on chart instances.
 
 ### _Scales_
 

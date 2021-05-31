@@ -106,4 +106,27 @@ final class JsChartHelper {
 		}
 	}
 
+	/**
+	 * Sets the active tooltip elements for the chart.
+	 * 
+	 * @param chart chart instance, used to get the tooltip
+	 * @param elements array of active tooltip elements
+	 */
+	void setTooltipActiveElements(Chart chart, ArrayObject elements) {
+		// checks if chart and elements are consistent
+		if (chart != null && elements != null) {
+			NativeJsChartHelper.setTooltipActiveElements(chart, elements);
+		}
+	}
+
+	/**
+	 * Returns the active tooltip elements for the chart.
+	 * 
+	 * @param chart chart instance, used to get the tooltip
+	 * @return the array of active tooltip elements
+	 */
+	ArrayObject getTooltipActiveElements(Chart chart) {
+		return NativeJsChartHelper.getTooltipActiveElements(chart);
+	}
+
 }

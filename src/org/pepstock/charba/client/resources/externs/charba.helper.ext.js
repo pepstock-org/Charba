@@ -195,6 +195,17 @@ CharbaJsChartHelper.invokeDefaultLegendEvent = function(options, key, chart, eve
  */
 CharbaJsChartHelper.invokeDefaultChartEvent = function(options, key, chart, event, items) {};
 /**
+ * @param {Chart} chart
+ * @param {Array} items
+ * @return {undefined}
+ */
+CharbaJsChartHelper.setTooltipActiveElements = function(chart, items) {};
+/**
+ * @param {Chart} chart
+ * @return {Array}
+ */
+CharbaJsChartHelper.getTooltipActiveElements = function(chart) {};
+/**
  * @constructor
  * @return {CharbaJsZoomHelper}
  */	

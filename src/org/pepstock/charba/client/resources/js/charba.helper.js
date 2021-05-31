@@ -751,6 +751,30 @@ CharbaJsChartHelper.invokeDefaultChartEvent = function(options, key, chart, even
   }
 }
 /**
+ * Sets the active tooltip elements for the chart.
+ *
+ * @param {Chart} chart chart instance, used to get the tooltip
+ * @param {Array} items array of active tooltip elements
+ * @return {undefined}
+ */
+CharbaJsChartHelper.setTooltipActiveElements = function(chart, items) {
+  if (chart != null && chart.tooltip != null){
+    chart.tooltip.setActiveElements(items);
+  }
+}
+/**
+ * Returns the active tooltip  elements for the chart.
+ *
+ * @param {Chart} chart chart instance, used to get the tooltip
+ * @return {Array} items array of active tooltip elements
+ */
+CharbaJsChartHelper.getTooltipActiveElements = function(chart) {
+  if (chart != null && chart.tooltip != null){
+    return chart.tooltip.getActiveElements();
+  }
+  return new Array();
+}
+/**
  * ----------------------------------------------------------------------------
  * CharbaJsZoomHelper
  * ----------------------------------------------------------------------------

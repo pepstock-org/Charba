@@ -98,6 +98,15 @@ Chart.prototype.hide = function(datasetIndex) {};
  */
 Chart.prototype.show = function(datasetIndex) {};
 /**
+ * @param {Array} elements
+ * @return {undefined}
+ */
+Chart.prototype.setActiveElements = function(elements) {};
+/**
+ * @return {Array}
+ */
+Chart.prototype.getActiveElements = function() {};
+/**
  * @type {number}
  */
 Chart.prototype.id;

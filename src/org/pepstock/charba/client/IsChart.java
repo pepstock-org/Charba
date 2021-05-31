@@ -30,6 +30,7 @@ import org.pepstock.charba.client.events.Event;
 import org.pepstock.charba.client.events.EventHandler;
 import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.HandlerRegistration;
+import org.pepstock.charba.client.items.ActiveDatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.Undefined;
@@ -322,6 +323,34 @@ public interface IsChart {
 	 * @param destroyOnDetach the destroyOnDetach to set
 	 */
 	void setDestroyOnDetach(boolean destroyOnDetach);
+	
+	/**
+	 * Sets the active (hovered) elements for the chart.
+	 * 
+	 * @param elements array of active elements
+	 */
+	void setActiveElements(ActiveDatasetElement... elements);
+	
+	/**
+	 * Returns the active (hovered) elements for the chart.
+	 * 
+	 * @return the list of active elements
+	 */
+	List<ActiveDatasetElement> getActiveElements();
+	
+	/**
+	 * Sets the active tooltip elements for the chart.
+	 * 
+	 * @param elements array of active tooltip elements
+	 */
+	void setTooltipActiveElements(ActiveDatasetElement... elements);
+	
+	/**
+	 * Returns the active tooltip  elements for the chart.
+	 * 
+	 * @return the array of active tooltip  elements
+	 */
+	List<ActiveDatasetElement> getTooltipActiveElements();
 
 	/**
 	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object within Chart.js, along with any associated event

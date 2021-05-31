@@ -56,6 +56,7 @@ import org.pepstock.charba.client.events.EventHandler;
 import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.HandlerManager;
 import org.pepstock.charba.client.events.HandlerRegistration;
+import org.pepstock.charba.client.items.ActiveDatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.Undefined;
@@ -547,7 +548,73 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			}
 		}
 	}
+	
+	/**
+	 * Sets the active (hovered) elements for the chart.
+	 * 
+	 * @param elements array of active elements
+	 */
+	@Override
+	public final void setActiveElements(ActiveDatasetElement... elements) {
+		// checks if chart is created
+		if (isInitialized()) {
+			ArrayObject array = ArrayObject.fromOrEmpty(elements);
+			// stores elements
+			chart.setActiveElements(array);
+		}
+	}
+	
+	/**
+	 * Returns the active (hovered) elements for the chart.
+	 * 
+	 * @return the array of active elements
+	 */
+	@Override
+	public final List<ActiveDatasetElement> getActiveElements() {
+		// checks if chart is created
+		if (isInitialized()) {
+			ArrayObject array = chart.getActiveElements();
+			// returns the array
+			return ArrayListHelper.list(array, ActiveDatasetElement.FACTORY);
+		}
+		// if here the chart is not initialized
+		// then returns an empty list
+		return Collections.emptyList();
+	}
 
+	/**
+	 * Sets the active tooltip elements for the chart.
+	 * 
+	 * @param elements array of active tooltip elements
+	 */
+	@Override
+	public final void setTooltipActiveElements(ActiveDatasetElement... elements) {
+		// checks if chart is created
+		if (isInitialized()) {
+			ArrayObject array = ArrayObject.fromOrEmpty(elements);
+			// stores elements
+			JsChartHelper.get().setTooltipActiveElements(chart, array);
+		}
+	}
+	
+	/**
+	 * Returns the active tooltip  elements for the chart.
+	 * 
+	 * @return the array of active tooltip  elements
+	 */
+	@Override
+	public final List<ActiveDatasetElement> getTooltipActiveElements() {
+		// checks if chart is created
+		if (isInitialized()) {
+			ArrayObject array = JsChartHelper.get().getTooltipActiveElements(chart);
+			// returns the array
+			return ArrayListHelper.list(array, ActiveDatasetElement.FACTORY);
+		}
+		// if here the chart is not initialized
+		// then returns an empty list
+		return Collections.emptyList();
+	}
+	
 	/**
 	 * Use this to destroy any chart instances that are created.<br>
 	 * This will clean up any references stored to the chart object within Chart.js, along with any associated event listeners attached by Chart.js.

@@ -33,6 +33,7 @@ import org.pepstock.charba.client.events.Event;
 import org.pepstock.charba.client.events.EventHandler;
 import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.HandlerRegistration;
+import org.pepstock.charba.client.items.ActiveDatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.options.TransitionKey;
@@ -314,6 +315,46 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	@Override
 	public final void setDestroyOnDetach(boolean destroyOnDetach) {
 		chart.setDestroyOnDetach(destroyOnDetach);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#setActiveElements(org.pepstock.charba.client.items.ActiveDatasetElement[])
+	 */
+	@Override
+	public void setActiveElements(ActiveDatasetElement... elements) {
+		chart.setActiveElements(elements);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#getActiveElements()
+	 */
+	@Override
+	public List<ActiveDatasetElement> getActiveElements() {
+		return chart.getActiveElements();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#setTooltipActiveElements(org.pepstock.charba.client.items.ActiveDatasetElement[])
+	 */
+	@Override
+	public void setTooltipActiveElements(ActiveDatasetElement... elements) {
+		chart.setTooltipActiveElements(elements);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#getTooltipActiveElements()
+	 */
+	@Override
+	public List<ActiveDatasetElement> getTooltipActiveElements() {
+		return chart.getTooltipActiveElements();
 	}
 
 	/*

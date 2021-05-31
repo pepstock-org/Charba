@@ -277,6 +277,22 @@ public final class Chart {
 	native void show(int datasetIndex);
 
 	/**
+	 * Sets the active (hovered) elements for the chart.
+	 * 
+	 * @param elements array of active elements
+	 */
+	@JsMethod
+	native void setActiveElements(ArrayObject elements);
+
+	/**
+	 * Returns the active (hovered) elements for the chart.
+	 * 
+	 * @return the array of active elements
+	 */
+	@JsMethod
+	native ArrayObject getActiveElements();
+
+	/**
 	 * Returns the CHART JS chart ID.
 	 * 
 	 * @return the CHART JS chart ID.
