@@ -18,7 +18,6 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
@@ -54,8 +53,6 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	private final CallbackProxy<ProxyObjectCallback> textStrokeColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text stroke width function
 	private final CallbackProxy<ProxyIntegerCallback> textStrokeWidthCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the backdrop padding function
-	private final CallbackProxy<ProxyNativeObjectCallback> backdropPaddingCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the backdrop color function
 	private final CallbackProxy<ProxyObjectCallback> backdropColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the show label backdrop function
@@ -69,8 +66,6 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	private ColorCallback<ScaleContext> textStrokeColorCallback = null;
 	// text width callback instance
 	private WidthCallback<ScaleContext> textStrokeWidthCallback = null;
-	// backdrop color callback instance
-	private PaddingCallback<ScaleContext> backdropPaddingCallback = null;
 	// backdrop color callback instance
 	private ColorCallback<ScaleContext> backdropColorCallback = null;
 	// show label backdrop callback instance
@@ -137,8 +132,6 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
 		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(getAxis().createContext(context), getFontCallback(), getAxis().getDefaultValues().getTicks().getFont()).nativeObject());
-		// sets function to proxy callback in order to invoke the java interface
-		this.backdropPaddingCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsPadding(getAxis().createContext(context), getBackdropPaddingCallback(), getAxis().getDefaultValues().getTicks().getBackdropPadding()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
 		this.colorCallbackProxy.setCallback(context -> onColor(getAxis().createContext(context), getColorCallback()));
 		// sets function to proxy callback in order to invoke the java interface
@@ -427,15 +420,6 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 	}
 
 	/**
-	 * Returns the backdrop padding callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the backdrop padding callback, if set, otherwise <code>null</code>.
-	 */
-	public PaddingCallback<ScaleContext> getBackdropPaddingCallback() {
-		return backdropPaddingCallback;
-	}
-
-	/**
 	 * Returns the color callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the color callback, if set, otherwise <code>null</code>.
@@ -578,30 +562,6 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		getAxis().setCallback(getConfiguration(), Property.FONT, fontCallback);
 	}
 	
-	/**
-	 * Sets the backdrop padding callback.
-	 * 
-	 * @param backdropPaddingCallback the backdrop padding callback to set
-	 */
-	public void setBackdropPadding(PaddingCallback<ScaleContext> backdropPaddingCallback) {
-		// sets the callback
-		this.backdropPaddingCallback = backdropPaddingCallback;
-		// stores and manages callback
-		getAxis().setCallback(getConfiguration(), Property.BACKDROP_PADDING, backdropPaddingCallback, backdropPaddingCallbackProxy);
-	}
-
-	/**
-	 * Sets the backdrop padding callback.
-	 * 
-	 * @param backdropPaddingCallback the backdrop padding callback to set
-	 */
-	public void setBackdropPadding(NativeCallback backdropPaddingCallback) {
-		// resets callback
-		setBackdropPadding((PaddingCallback<ScaleContext>)null);
-		// stores and manages callback
-		getAxis().setCallback(getConfiguration(), Property.BACKDROP_PADDING, backdropPaddingCallback);
-	}
-
 	/**
 	 * Sets the backdrop color callback instance.
 	 * 
