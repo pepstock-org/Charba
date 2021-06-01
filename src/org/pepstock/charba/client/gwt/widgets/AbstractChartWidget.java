@@ -320,11 +320,31 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#setActiveElements(java.util.List)
+	 */
+	@Override
+	public void setActiveElements(List<ActiveDatasetElement> elements) {
+		chart.setActiveElements(elements);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#setActiveElements(org.pepstock.charba.client.items.ActiveDatasetElement[])
 	 */
 	@Override
 	public void setActiveElements(ActiveDatasetElement... elements) {
 		chart.setActiveElements(elements);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#resetActiveElements()
+	 */
+	@Override
+	public void resetActiveElements() {
+		chart.resetActiveElements();
 	}
 
 	/*
@@ -340,11 +360,31 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#setTooltipActiveElements(java.util.List)
+	 */
+	@Override
+	public void setTooltipActiveElements(List<ActiveDatasetElement> elements) {
+		chart.setTooltipActiveElements(elements);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#setTooltipActiveElements(org.pepstock.charba.client.items.ActiveDatasetElement[])
 	 */
 	@Override
 	public void setTooltipActiveElements(ActiveDatasetElement... elements) {
 		chart.setTooltipActiveElements(elements);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#resetTooltipActiveElements()
+	 */
+	@Override
+	public void resetTooltipActiveElements() {
+		chart.resetTooltipActiveElements();
 	}
 
 	/*

@@ -36,6 +36,7 @@ import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayDoubleList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -68,7 +69,7 @@ import org.pepstock.charba.client.utils.JSON;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class Dataset extends AbstractNode implements HasDataset, HasAnimationOptions, HasCallbackScope{
+public abstract class Dataset extends AbstractNode implements HasDataset, HasAnimationOptions, HasCallbackScope {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -299,8 +300,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), borderWidthCallback, getDefaultBorderWidth()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBackgroundColorCallbackProxy
-				.setCallback(context -> invokeColorCallback(createContext(context), getHoverBackgroundColorCallback(), CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
+		this.hoverBackgroundColorCallbackProxy.setCallback(context -> invokeColorCallback(createContext(context), getHoverBackgroundColorCallback(), CanvasObjectProperty.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverBorderColorCallbackProxy.setCallback(context -> invokeColorCallback(createContext(context), getHoverBorderColorCallback(), CanvasObjectProperty.HOVER_BORDER_COLOR, getDefaultBorderColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
@@ -315,6 +315,18 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	@Override
 	public final AnimationContainer getAnimationContainer() {
 		return animationContainer;
+	}
+
+	/**
+	 * Returns the amount of data.
+	 * 
+	 * @return the amount of data
+	 */
+	public final int getDataCount() {
+		// gets the array
+		Array array = getArrayValue(InternalProperty.DATA);
+		// returns the length
+		return array != null ? array.length() : 0;
 	}
 
 	/**
@@ -493,7 +505,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			remove(CanvasObjectProperty.BACKGROUND_COLOR);
 		}
 	}
-	
+
 	/**
 	 * Sets the background color callback.
 	 * 
@@ -536,7 +548,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			remove(CanvasObjectProperty.BORDER_COLOR);
 		}
 	}
-	
+
 	/**
 	 * Sets the border color callback.
 	 * 
@@ -583,7 +595,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * 
 	 * @param borderWidthCallback the border width callback to set
 	 */
-	final void setInternalBorderWidth(NativeCallback  borderWidthCallback) {
+	final void setInternalBorderWidth(NativeCallback borderWidthCallback) {
 		// checks if callback is consistent
 		if (borderWidthCallback != null) {
 			// adds the callback proxy function to java script object
@@ -593,7 +605,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			remove(CommonProperty.BORDER_WIDTH);
 		}
 	}
-	
+
 	/**
 	 * Creates a data set context for callback.
 	 * 
@@ -632,7 +644,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			remove(CanvasObjectProperty.HOVER_BACKGROUND_COLOR);
 		}
 	}
-	
+
 	/**
 	 * Sets the hover background color callback.
 	 * 
@@ -675,6 +687,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			remove(CanvasObjectProperty.HOVER_BORDER_COLOR);
 		}
 	}
+
 	/**
 	 * Sets the hover border color callback.
 	 * 
@@ -715,7 +728,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 			remove(CommonProperty.HOVER_BORDER_WIDTH);
 		}
 	}
-	
+
 	/**
 	 * Sets the hover border width callback.
 	 * 

@@ -15,8 +15,11 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
@@ -28,15 +31,17 @@ import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.ActiveDatasetElement;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
  * CHART.JS entity object to configure the data options of a chart.<br>
- * It contains labels and datasets.
+ * It contains labels and data sets.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -48,8 +53,8 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	private enum Property implements Key
 	{
 		DATASETS("datasets"),
-		X_LABELS("xLabels"), // TO BE CHECK if needed
-		Y_LABELS("yLabels"); // TO BE CHECK if needed
+		X_LABELS("xLabels"),
+		Y_LABELS("yLabels");
 
 		// name value of property
 		private final String value;
@@ -75,7 +80,9 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	}
 
-	// maintains the list of datasets because needs to preserve the data set type
+	// chart instance
+	private final IsChart chart;
+	// maintains the list of data sets because needs to preserve the data set type
 	private final ArrayObjectContainerList<Dataset> currentDatasets = new ArrayObjectContainerList<>();
 	// instance of labels option handler
 	private final LabelsHandler labelsHandler;
@@ -84,9 +91,11 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	/**
 	 * Creates the object with an empty native object.
+	 * 
+	 * @param envelop envelop containing the chart instance
 	 */
-	public Data() {
-		// nothing
+	public Data(ChartEnvelop<IsChart> envelop) {
+		this.chart = Envelop.checkAndGetIfValid(envelop).getContent();
 		// creates the labels option manager
 		this.labelsHandler = new LabelsHandler(getNativeObject());
 	}
@@ -179,7 +188,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Sets the labels for Y axes of the data.
 	 * 
-	 * @param labels labels object to manage also multi-line labels
+	 * @param labels labels object to manage also multiple line labels
 	 */
 	public void setYLabels(Labels labels) {
 		// checks if argument is consistent
@@ -224,18 +233,18 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Sets a set of datasets for chart. If argument is <code>null</code>, removes all datasets.
+	 * Sets a set of data sets for chart. If argument is <code>null</code>, removes all data sets.
 	 * 
-	 * @param datasets set of dataset. If <code>null</code>, removes all datasets
+	 * @param datasets set of data set. If <code>null</code>, removes all data sets
 	 */
 	public void setDatasets(Dataset... datasets) {
 		// clear buffer
 		this.currentDatasets.clear();
 		// checks if arguments is consistent
 		if (datasets != null) {
-			// adds all datasets
+			// adds all data sets
 			this.currentDatasets.addAll(datasets);
-			// sets datasets to native object
+			// sets data sets to native object
 			setArrayValue(Property.DATASETS, this.currentDatasets);
 		} else {
 			// removes the existing property
@@ -244,34 +253,34 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Returns the list of datasets.
+	 * Returns the list of data sets.
 	 * 
-	 * @return the list of datasets
+	 * @return the list of data sets
 	 */
 	public List<Dataset> getDatasets() {
 		return getDatasets(false);
 	}
 
 	/**
-	 * Returns the list of datasets.
+	 * Returns the list of data sets.
 	 * 
 	 * @param binding if <code>true</code> binds the new array list in the container
-	 * @return the list of datasets
+	 * @return the list of data sets
 	 */
 	public List<Dataset> getDatasets(boolean binding) {
 		// there is not the property and the binding is requested
 		// then adds array to container
 		if (!has(Property.DATASETS) && binding) {
-			// sets datasets to native object
+			// sets data sets to native object
 			setArrayValue(Property.DATASETS, this.currentDatasets);
 		}
-		// returns datasets
+		// returns data sets
 		return this.currentDatasets;
 	}
 
 	/**
 	 * Returns <code>true</code> if the plugin to manage canvas object (gradients and patterns) has been forcedly disable.<br>
-	 * Pay attention that disabling the handler, your datasets configuration with gradients or patterns will e showed with default color.
+	 * <b>Pay attention</b> that disabling the handler, your data sets configuration with gradients or patterns will e showed with default color.
 	 * 
 	 * @return <code>true</code> if the plugin to manage canvas object (gradients and patterns) has been forcedly disable
 	 */
@@ -281,12 +290,87 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	/**
 	 * Sets <code>true</code> if the plugin to manage canvas object (gradients and patterns) have to be forcedly disable.<br>
-	 * Pay attention that disabling the handler, your data sets configuration with gradients or patterns will e showed with default color.
+	 * <b>Pay attention</b> that disabling the handler, your data sets configuration with gradients or patterns will e showed with default color.
 	 * 
 	 * @param canvasObjectHandling <code>true</code> if the plugin to manage canvas object (gradients and patterns) have to be forcedly disable
 	 */
 	public void setCanvasObjectHandling(boolean canvasObjectHandling) {
 		this.canvasObjectHandling = canvasObjectHandling;
+	}
+
+	/**
+	 * Creates a list of active elements instances by an array of data set indexes, for visible data sets.
+	 * 
+	 * @param datasetIndexes an array of data set indexes 
+	 * @return a list of active elements instances by an array of data set indexes
+	 */
+	public List<ActiveDatasetElement> createActiveElementsByDatasetIndex(int... datasetIndexes) {
+		// creates results
+		List<ActiveDatasetElement> result = new ArrayList<>();
+		// checks if argument is consistent
+		if (datasetIndexes != null && datasetIndexes.length > 0) {
+			// normalizes array
+			int[] indexes = Arrays.stream(datasetIndexes).distinct().toArray();
+			// scans indexes
+			for (int i = 0; i < indexes.length; i++) {
+				// gets index
+				int index = indexes[i];
+				// checks if the index is consistent
+				if (index >= 0 && index < currentDatasets.size() && chart.isDatasetVisible(index)) {
+					// gets data set
+					Dataset dataset = currentDatasets.get(index);
+					// scans to add active element
+					for (int k = 0; k < dataset.getDataCount(); k++) {
+						// creates and add active element
+						result.add(new ActiveDatasetElement(index, k));
+					}
+				}
+			}
+			return result;
+		}
+		// if here, argument is not consistent
+		// then returns an empty list
+		return result;
+	}
+
+	/**
+	 * Creates a list of active elements instances by an array of data indexes, for all visible data sets.
+	 * 
+	 * @param dataIndexes an array of data indexes 
+	 * @return a list of active elements instances by an array of data indexes
+	 */
+	public List<ActiveDatasetElement> createActiveElementsByDataIndex(int... dataIndexes) {
+		// creates results
+		List<ActiveDatasetElement> result = new ArrayList<>();
+		// checks if argument is consistent
+		if (dataIndexes != null && dataIndexes.length > 0) {
+			// normalizes array
+			int[] indexes = Arrays.stream(dataIndexes).distinct().toArray();
+			// data set index
+			int datasetIndex = 0;
+			// scans all data sets
+			for (Dataset dataset : currentDatasets) {
+				// checks if data set is visible
+				if (chart.isDatasetVisible(datasetIndex)) {
+					// scans all indexes
+					for (int i = 0; i < indexes.length; i++) {
+						// gets index
+						int index = indexes[i];
+						// checks if the index is consistent
+						if (index >= 0 && index < dataset.getDataCount()) {
+							// creates and add active element
+							result.add(new ActiveDatasetElement(datasetIndex, index));
+						}
+					}
+				}
+				// increments data set index
+				datasetIndex++;
+			}
+			return result;
+		}
+		// if here, argument is not consistent
+		// then returns an empty list
+		return result;
 	}
 
 	/**
@@ -521,7 +605,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @return a pattern instance or <code>null</code> if not found by legend item
 	 */
 	private Pattern retrievePattern(Dataset dataset, LegendItem legendItem, Key property) {
-		// search on callbacks cache
+		// search on callback cache
 		Pattern pattern = dataset.getCallbackPattern(property, legendItem.getDatasetIndex(), legendItem.getIndex());
 		// retrieves the object
 		return retrieveObject(dataset, dataset.getPatternsContainer(), legendItem, property, pattern);
@@ -539,7 +623,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @return a canvas object instance or <code>null</code> if not found by legend item
 	 */
 	private <T extends CanvasObject> T retrieveObject(Dataset dataset, AbstractContainer<T> container, LegendItem legendItem, Key property, T searchedOnCallback) {
-		// checks if the canvas object has been found in the callbacks cache
+		// checks if the canvas object has been found in the callback cache
 		if (searchedOnCallback != null) {
 			return searchedOnCallback;
 		}
@@ -558,7 +642,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 			}
 		}
 		// if here, arguments are not consistent
-		// or the locator of legend item is not able to locate any dataset
+		// or the locator of legend item is not able to locate any data set
 		return null;
 	}
 
@@ -617,7 +701,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @return <code>true</code> if plugin has been added, other wise <code>false</code>
 	 */
 	private boolean activateCanvasObjectHandlerPlugin(IsChart chart, Dataset dataset) {
-		// checks if dataset has got some patterns
+		// checks if data set has got some patterns
 		if (!dataset.getPatternsContainer().isEmpty() || !dataset.getGradientsContainer().isEmpty()) {
 			// if here
 			// there are some patterns to load

@@ -109,7 +109,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	// CHart configuration object
 	private final Configuration configuration = new Configuration();
 	// Data element of configuration
-	private final Data data = new Data();
+	private final Data data;
 	// plugins of this chart
 	private final Plugins plugins;
 	// gets if Canvas is supported
@@ -136,55 +136,57 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		Type.checkIfValid(type);
 		// stores type
 		this.type = type;
-		// creates the div element
-		element = DOMBuilder.get().createDivElement();
+		// creates data
+		this.data = new Data(new ChartEnvelop<>(this));
+		// creates the DIV element
+		this.element = DOMBuilder.get().createDivElement();
 		// creates DIV
-		element.setId(id);
+		this.element.setId(id);
 		// sets relative position
-		element.getStyle().setPosition(Position.RELATIVE);
+		this.element.getStyle().setPosition(Position.RELATIVE);
 		// sets default width values
-		element.getStyle().setWidth(Unit.PCT.format(DEFAULT_WIDTH));
-		element.getStyle().setHeight(Unit.PCT.format(DEFAULT_HEIGHT));
+		this.element.getStyle().setWidth(Unit.PCT.format(DEFAULT_WIDTH));
+		this.element.getStyle().setHeight(Unit.PCT.format(DEFAULT_HEIGHT));
 		// checks if canvas is supported
-		if (isCanvasSupported) {
+		if (this.isCanvasSupported) {
 			// creates a canvas
-			canvas = DOMBuilder.get().createCanvasElement();
+			this.canvas = DOMBuilder.get().createCanvasElement();
 			// set id to canvas
-			canvas.setId(id + SUFFIX_CANVAS_ELEMENT_ID);
+			this.canvas.setId(id + SUFFIX_CANVAS_ELEMENT_ID);
 			// adds to panel
-			element.appendChild(canvas);
+			this.element.appendChild(canvas);
 			// -------------------------------
 			// -- SET CALLBACKS to PROXIES ---
 			// -------------------------------
 			// fires the event
-			canvasCallbackProxy.setCallback(BaseNativeEvent::preventDefault);
+			this.canvasCallbackProxy.setCallback(BaseNativeEvent::preventDefault);
 			// adds the listener to disable canvas selection
 			// removes the default behavior
-			canvas.addEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());
+			this.canvas.addEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());
 		} else {
 			// creates a header element
 			Heading h = DOMBuilder.get().createHeadingElement();
 			// to show the error message
 			// because canvas is not supported
 			h.setTextContent(CANVAS_NOT_SUPPORTED_MESSAGE);
-			element.appendChild(h);
+			this.element.appendChild(h);
 			// resets canvas
-			canvas = null;
+			this.canvas = null;
 		}
 		// inject Chart.js and date library if not already loaded
 		ResourcesType.getResources().inject();
 		// creates plugins container
-		plugins = new Plugins();
+		this.plugins = new Plugins();
 		// creates defaults options for this chart type
 		// chart type is NOT checked here but when new chart options
 		// object is created
-		options = createChartOptions();
+		this.options = createChartOptions();
 		// returns a default option with all configuration
 		// it uses the default builder and the default scaled options
 		// because chart options is already a merge between global and chart global
-		defaultChartOptions = new DefaultChartOptions(options);
+		this.defaultChartOptions = new DefaultChartOptions(options);
 		// stores initial cursor
-		initialCursor = Utilities.getCursorOfChart(this);
+		this.initialCursor = Utilities.getCursorOfChart(this);
 		// adds chart observer to get on attach and detach
 		ChartObserver.get().addHandler(this);
 	}
@@ -548,7 +550,22 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			}
 		}
 	}
-	
+
+	/**
+	 * Sets the active (hovered) elements for the chart.
+	 * 
+	 * @param elements list of active elements
+	 */
+	@Override
+	public final void setActiveElements(List<ActiveDatasetElement> elements) {
+		// checks if chart is created
+		if (isInitialized()) {
+			ArrayObject array = ArrayObject.fromOrEmpty(elements);
+			// stores elements
+			chart.setActiveElements(array);
+		}
+	}
+
 	/**
 	 * Sets the active (hovered) elements for the chart.
 	 * 
@@ -563,7 +580,15 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			chart.setActiveElements(array);
 		}
 	}
-	
+
+	/**
+	 * Resets the active (hovered) elements for the chart.
+	 */
+	@Override
+	public final void resetActiveElements() {
+		chart.setActiveElements(ArrayObject.fromOrEmpty((NativeObjectContainer) null));
+	}
+
 	/**
 	 * Returns the active (hovered) elements for the chart.
 	 * 
@@ -585,6 +610,21 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	/**
 	 * Sets the active tooltip elements for the chart.
 	 * 
+	 * @param elements list of active tooltip elements
+	 */
+	@Override
+	public final void setTooltipActiveElements(List<ActiveDatasetElement> elements) {
+		// checks if chart is created
+		if (isInitialized()) {
+			ArrayObject array = ArrayObject.fromOrEmpty(elements);
+			// stores elements
+			JsChartHelper.get().setTooltipActiveElements(chart, array);
+		}
+	}
+
+	/**
+	 * Sets the active tooltip elements for the chart.
+	 * 
 	 * @param elements array of active tooltip elements
 	 */
 	@Override
@@ -596,11 +636,19 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			JsChartHelper.get().setTooltipActiveElements(chart, array);
 		}
 	}
-	
+
 	/**
-	 * Returns the active tooltip  elements for the chart.
+	 * Resets the active tooltip elements for the chart.
+	 */
+	@Override
+	public final void resetTooltipActiveElements() {
+		JsChartHelper.get().setTooltipActiveElements(chart, ArrayObject.fromOrEmpty((NativeObjectContainer) null));
+	}
+
+	/**
+	 * Returns the active tooltip elements for the chart.
 	 * 
-	 * @return the array of active tooltip  elements
+	 * @return the array of active tooltip elements
 	 */
 	@Override
 	public final List<ActiveDatasetElement> getTooltipActiveElements() {
@@ -614,7 +662,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// then returns an empty list
 		return Collections.emptyList();
 	}
-	
+
 	/**
 	 * Use this to destroy any chart instances that are created.<br>
 	 * This will clean up any references stored to the chart object within Chart.js, along with any associated event listeners attached by Chart.js.

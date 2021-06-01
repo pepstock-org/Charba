@@ -327,10 +327,22 @@ public interface IsChart {
 	/**
 	 * Sets the active (hovered) elements for the chart.
 	 * 
+	 * @param elements list of active elements
+	 */
+	void setActiveElements(List<ActiveDatasetElement> elements);
+
+	/**
+	 * Sets the active (hovered) elements for the chart.
+	 * 
 	 * @param elements array of active elements
 	 */
 	void setActiveElements(ActiveDatasetElement... elements);
-	
+
+	/**
+	 * Resets the active (hovered) elements for the chart.
+	 */
+	void resetActiveElements();
+
 	/**
 	 * Returns the active (hovered) elements for the chart.
 	 * 
@@ -341,10 +353,22 @@ public interface IsChart {
 	/**
 	 * Sets the active tooltip elements for the chart.
 	 * 
+	 * @param elements list of active tooltip elements
+	 */
+	void setTooltipActiveElements(List<ActiveDatasetElement> elements);
+
+	/**
+	 * Resets the active tooltip elements for the chart.
+	 */
+	void resetTooltipActiveElements();
+
+	/**
+	 * Sets the active tooltip elements for the chart.
+	 * 
 	 * @param elements array of active tooltip elements
 	 */
 	void setTooltipActiveElements(ActiveDatasetElement... elements);
-	
+
 	/**
 	 * Returns the active tooltip  elements for the chart.
 	 * 

@@ -100,8 +100,11 @@ public final class ArrayObject extends Array {
 		ArrayObject result = new ArrayObject();
 		// scans elements
 		for (E value : items) {
-			// adds element
-			result.push(value.getNativeObject());
+			// checks if value is consistent
+			if (value != null) {
+				// adds element
+				result.push(value.getNativeObject());
+			}
 		}
 		// returns the array
 		return result;
@@ -124,8 +127,11 @@ public final class ArrayObject extends Array {
 		}
 		// scans elements
 		for (E value : items) {
-			// adds element
-			result.push(value.getNativeObject());
+			// checks if value is consistent
+			if (value != null) {
+				// adds element
+				result.push(value.getNativeObject());
+			}
 		}
 		// returns the array
 		return result;
@@ -155,8 +161,11 @@ public final class ArrayObject extends Array {
 		ArrayObject result = new ArrayObject();
 		// scans elements
 		for (E value : items) {
-			// adds element
-			result.push(value.getNativeObject());
+			// checks if value is consistent
+			if (value != null) {
+				// adds element
+				result.push(value.getNativeObject());
+			}
 		}
 		// returns the array
 		return result;
@@ -186,8 +195,11 @@ public final class ArrayObject extends Array {
 		}
 		// scans elements
 		for (E value : items) {
-			// adds element
-			result.push(value.getNativeObject());
+			// checks if value is consistent
+			if (value != null) {
+				// adds element
+				result.push(value.getNativeObject());
+			}
 		}
 		// returns the array
 		return result;
