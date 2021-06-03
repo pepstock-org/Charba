@@ -350,19 +350,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 			int datasetIndex = 0;
 			// scans all data sets
 			for (Dataset dataset : currentDatasets) {
-				// checks if data set is visible
-				if (chart.isDatasetVisible(datasetIndex)) {
-					// scans all indexes
-					for (int i = 0; i < indexes.length; i++) {
-						// gets index
-						int index = indexes[i];
-						// checks if the index is consistent
-						if (index >= 0 && index < dataset.getDataCount()) {
-							// creates and add active element
-							result.add(new ActiveDatasetElement(datasetIndex, index));
-						}
-					}
-				}
+				checkAndLoadActiveElementForDataset(dataset, datasetIndex, indexes, result);
 				// increments data set index
 				datasetIndex++;
 			}
@@ -371,6 +359,30 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// if here, argument is not consistent
 		// then returns an empty list
 		return result;
+	}
+
+	/**
+	 * Manages every single data set adding a {@link ActiveDatasetElement} is consistent.
+	 * 
+	 * @param dataset data set instance to manage
+	 * @param datasetIndex data set index
+	 * @param indexes indexes required
+	 * @param result list of {@link ActiveDatasetElement} to return
+	 */
+	private void checkAndLoadActiveElementForDataset(Dataset dataset, int datasetIndex, int[] indexes, List<ActiveDatasetElement> result) {
+		// checks if data set is visible
+		if (chart.isDatasetVisible(datasetIndex)) {
+			// scans all indexes
+			for (int i = 0; i < indexes.length; i++) {
+				// gets index
+				int index = indexes[i];
+				// checks if the index is consistent
+				if (index >= 0 && index < dataset.getDataCount()) {
+					// creates and add active element
+					result.add(new ActiveDatasetElement(datasetIndex, index));
+				}
+			}
+		}
 	}
 
 	/**
