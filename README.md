@@ -33,7 +33,7 @@ Even if **Charba** was born only as GWT chart library, as of version 3, **Charba
 
 **Charba** has got an own DOM manager which allows to it to be independent from any other DOM frameworks (i.e. GWT, Elemental2 or Elemento) but it is providing a set of hooks in order to use it also over those frameworks.
 
-[![CharbaDiagram](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charbaDiagram.png)](https://github.com/pepstock-org/Charba/wiki/Integration)
+[![CharbaDiagram](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charbaDiagram.png)](https://pepstock-org.github.io/Charba-Wiki/docs/getting-started/Integration)
     
 Building
 --------
@@ -137,7 +137,7 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/4.0/charba.fbp) project to looking offline for bugs.
+In the project, it's also provided the [FindBugs](http://findbugs.sourceforge.net/) project to look for bugs.
 
 License
 -------
