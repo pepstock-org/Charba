@@ -35,15 +35,15 @@ public interface HasCallbackScope {
 		// checks if the root node is a container of scope
 		if (root instanceof HasCallbackScope) {
 			// casts to callback scope instance
-			HasCallbackScope hasCallbackScope = (HasCallbackScope)root;
+			HasCallbackScope hasCallbackScope = (HasCallbackScope) root;
 			// returns the scope
 			return hasCallbackScope.getScope();
 		}
 		// if here, the root node is not a container of scope
 		// exceptions!
-		throw new IllegalArgumentException("Node instance is not "+HasCallbackScope.class.getName()+", but is "+root.getClass().getName());
+		throw new IllegalArgumentException("Node instance is not " + HasCallbackScope.class.getName() + ", but is " + root.getClass().getName());
 	}
-	
+
 	/**
 	 * Returns the scope of the options, which is the options are used for defaults, chart defaults or chart.
 	 * 

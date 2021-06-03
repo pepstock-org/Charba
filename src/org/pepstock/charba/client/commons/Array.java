@@ -57,7 +57,7 @@ public abstract class Array {
 		// checks the length
 		return length() == 0;
 	}
-	
+
 	/**
 	 * Creates and returns a new string by concatenating all of the elements in an array (or an array-like object), separated by commas or a specified separator string.<br>
 	 * If the array has only one item, then that item will be returned without using the separator.
@@ -67,7 +67,7 @@ public abstract class Array {
 	 */
 	@JsMethod(name = "join")
 	final native String nativeJoin(String separator);
-	
+
 	/**
 	 * Creates and returns a new string by concatenating all of the elements in an array (or an array-like object), separated by commas.<br>
 	 * If the array has only one item, then that item will be returned without using the separator.
@@ -77,7 +77,7 @@ public abstract class Array {
 	@JsOverlay
 	public final String join() {
 		return nativeJoin(Window.undefined());
-		
+
 	}
 
 	/**

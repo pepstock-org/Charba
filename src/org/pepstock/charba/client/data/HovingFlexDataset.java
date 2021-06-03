@@ -322,7 +322,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderWidth(int... borderWidth) {
 		// resets callback
-		setInternalBorderWidth((WidthCallback<DatasetContext>)null);
+		setInternalBorderWidth((WidthCallback<DatasetContext>) null);
 		// stores value
 		setWidths(Dataset.CommonProperty.BORDER_WIDTH, borderWidth);
 	}
@@ -545,7 +545,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBorderWidth(int... widths) {
 		// resets callback
-		setInternalHoverBorderWidth((WidthCallback<DatasetContext>)null);
+		setInternalHoverBorderWidth((WidthCallback<DatasetContext>) null);
 		// stores values
 		setWidths(CommonProperty.HOVER_BORDER_WIDTH, widths);
 	}

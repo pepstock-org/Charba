@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.ModifierKey;
  * @author Andrea "Stock" Stocchero
  */
 public final class Wheel extends AbstractNode implements IsDefaultWheel {
-	
+
 	/**
 	 * Default enabled, <b>{@value DEFAULT_ENABLED}</b>.
 	 */
@@ -38,7 +38,6 @@ public final class Wheel extends AbstractNode implements IsDefaultWheel {
 	 * Default speed, <b>{@value DEFAULT_SPEED}</b>.
 	 */
 	public static final double DEFAULT_SPEED = 0.1D;
-
 
 	/**
 	 * Name of properties of native object.
@@ -109,7 +108,7 @@ public final class Wheel extends AbstractNode implements IsDefaultWheel {
 	public boolean isEnabled() {
 		return getValue(Property.ENABLED, defaultOptions.isEnabled());
 	}
-	
+
 	/**
 	 * Sets the speed of element via mouse wheel (percentage of element on a wheel event).<br>
 	 * Must be a value from 0 and 1.

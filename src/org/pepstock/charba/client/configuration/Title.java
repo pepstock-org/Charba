@@ -228,7 +228,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setDisplay(boolean display) {
 		// resets callback
-		setDisplay((DisplayCallback<ChartContext>)null);
+		setDisplay((DisplayCallback<ChartContext>) null);
 		// stores value
 		getConfiguration().getTitle().setDisplay(display);
 	}
@@ -291,7 +291,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setFullSize(boolean fullSize) {
 		// resets callback
-		setFullSize((FullSizeCallback<ChartContext>)null);
+		setFullSize((FullSizeCallback<ChartContext>) null);
 		// stores the value
 		getConfiguration().getTitle().setFullSize(fullSize);
 	}
@@ -358,7 +358,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setDisplay(NativeCallback displayCallback) {
 		// resets the callback
-		setDisplay((DisplayCallback<ChartContext>)null);
+		setDisplay((DisplayCallback<ChartContext>) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.DISPLAY, displayCallback);
 	}
@@ -383,7 +383,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		// stores and manages callback
 		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.FULL_SIZE, fullSizeCallback, fullSizeCallbackProxy);
 	}
-	
+
 	/**
 	 * Sets if marks that this box should take the full width/height of the canvas (moving other boxes) is shown by a callback.
 	 * 
@@ -391,7 +391,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setFullSize(NativeCallback fullSizeCallback) {
 		// resets the callback
-		setFullSize((FullSizeCallback<ChartContext>)null);
+		setFullSize((FullSizeCallback<ChartContext>) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.FULL_SIZE, fullSizeCallback);
 	}
@@ -427,7 +427,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	@Override
 	public void setPadding(NativeCallback paddingCallback) {
 		// resets callback
-		setPadding((PaddingCallback<ChartContext>)null);
+		setPadding((PaddingCallback<ChartContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.PADDING, paddingCallback);
 	}
@@ -463,11 +463,11 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	@Override
 	public void setFont(NativeCallback fontCallback) {
 		// resets callback
-		setFont((FontCallback<ChartContext>)null);
+		setFont((FontCallback<ChartContext>) null);
 		// stores callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.FONT, fontCallback);
 	}
-	
+
 	/**
 	 * Returns the color callback, if set, otherwise <code>null</code>.
 	 * 
@@ -496,11 +496,11 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setColor(NativeCallback colorCallback) {
 		// resets callback
-		setColor((ColorCallback<ChartContext>)null);
+		setColor((ColorCallback<ChartContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.COLOR, colorCallback);
 	}
-	
+
 	/**
 	 * Returns the text callback, if set, otherwise <code>null</code>.
 	 * 
@@ -529,7 +529,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setText(NativeCallback textCallback) {
 		// resets callback
-		setText((TextCallback<ChartContext>)null);
+		setText((TextCallback<ChartContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.TEXT, textCallback);
 	}
@@ -562,7 +562,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setPosition(NativeCallback positionCallback) {
 		// resets callback
-		setPosition((PositionCallback<ChartContext>)null);
+		setPosition((PositionCallback<ChartContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.POSITION, positionCallback);
 	}
@@ -595,7 +595,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	public void setAlign(NativeCallback alignCallback) {
 		// resets callback
-		setAlign((ElementAlignCallback<ChartContext>)null);
+		setAlign((ElementAlignCallback<ChartContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.ALIGN, alignCallback);
 	}

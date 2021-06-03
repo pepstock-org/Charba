@@ -19,13 +19,13 @@ import org.pepstock.charba.client.enums.ModifierKey;
 
 /**
  * {@link ZoomPlugin#ID} plugin default options interface for WHEEL element.<br>
- * It contains all default values for  WHEEL.
+ * It contains all default values for WHEEL.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 interface IsDefaultWheel {
-	
+
 	/**
 	 * Returns <code>true</code> to enable element for wheel zooming.
 	 * 

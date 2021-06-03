@@ -148,7 +148,7 @@ public final class LabelsContext extends AbstractDatasetContext {
 		// checks that all items are there
 		return indexed && ContextType.LABELS.equals(getType()) && has(Property.LABEL) && has(Property.PERCENTAGE);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -2194,7 +2194,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// stores value
 		setValue(Property.POINT_STYLE, pointStyleCallback);
 	}
-	
+
 	/**
 	 * Returns the border cap style callback, if set, otherwise <code>null</code>.
 	 * 
@@ -2221,7 +2221,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			remove(Property.BORDER_CAP_STYLE);
 		}
 	}
-	
+
 	/**
 	 * Sets the border cap style callback.
 	 * 
@@ -2416,7 +2416,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			remove(Property.HOVER_BORDER_JOIN_STYLE);
 		}
 	}
-	
+
 	/**
 	 * Sets the border join style callback when element is hovered.
 	 * 
@@ -2455,7 +2455,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			remove(Property.HOVER_BORDER_DASH);
 		}
 	}
-	
+
 	/**
 	 * Sets the border dash callback when element is hovered.
 	 * 
@@ -2494,7 +2494,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 			remove(Property.HOVER_BORDER_DASH_OFFSET);
 		}
 	}
-	
+
 	/**
 	 * Sets the border dash offset callback when element is hovered.
 	 * 
@@ -2524,7 +2524,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	public void setFill(FillCallback fillCallback) {
 		fillHandler.setFill(fillCallback);
 	}
-	
+
 	/**
 	 * Sets the fill callback.
 	 * 

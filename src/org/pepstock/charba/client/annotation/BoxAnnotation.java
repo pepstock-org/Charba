@@ -229,7 +229,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 */
 	public void setCornerRadius(int corner) {
 		// resets callback
-		setCornerRadius((CornerRadiusCallback<AnnotationContext>)null);
+		setCornerRadius((CornerRadiusCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.CORNER_RADIUS, Checker.positiveOrZero(corner));
 	}
@@ -266,7 +266,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	public void setCornerRadius(CornerRadiusCallback<AnnotationContext> cornerRadiusCallback) {
 		CORNER_RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, cornerRadiusCallback, cornerRadiusCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set the corner radius.
 	 * 
@@ -274,7 +274,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 */
 	public void setCornerRadius(NativeCallback cornerRadiusCallback) {
 		// resets callback
-		setCornerRadius((CornerRadiusCallback<AnnotationContext>)null);
+		setCornerRadius((CornerRadiusCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.CORNER_RADIUS, cornerRadiusCallback);
 	}

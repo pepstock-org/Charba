@@ -242,7 +242,7 @@ final class BorderItemsHandler extends NativeObjectContainer {
 	void setBorderItemCallback(Key property, Object borderItemCallback, Proxy proxy) {
 		setBorderItemCallback(property, null, borderItemCallback, proxy);
 	}
-	
+
 	/**
 	 * Sets the border item callback.
 	 * 
@@ -276,7 +276,7 @@ final class BorderItemsHandler extends NativeObjectContainer {
 			setValue(propertyType, BorderItemType.UNKNOWN);
 		}
 	}
-	
+
 	/**
 	 * Sets the border item callback.
 	 * 
@@ -299,6 +299,5 @@ final class BorderItemsHandler extends NativeObjectContainer {
 			setValue(propertyType, BorderItemType.UNKNOWN);
 		}
 	}
-
 
 }

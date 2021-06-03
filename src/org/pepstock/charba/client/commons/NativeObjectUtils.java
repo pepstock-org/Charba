@@ -171,7 +171,7 @@ final class NativeObjectUtils {
 	static void defineCallbackProperty(NativeObject object, String key, CallbackProxy.Proxy value) {
 		NativeJsObjectCallbackProxy.set(object, key, value);
 	}
-	
+
 	/**
 	 * Defines a new property directly on object object, or modifies an existing property.
 	 * 

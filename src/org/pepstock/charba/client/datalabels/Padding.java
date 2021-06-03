@@ -35,7 +35,7 @@ public final class Padding extends AbstractScriptablePadding<DataLabelsContext> 
 	/**
 	 * Creates new padding element, using label item instance (where the padding is stored), stored native object instance and the default values options.
 	 * 
-	 * @param parent the {@link LabelItem} instance which padding is belonging to 
+	 * @param parent the {@link LabelItem} instance which padding is belonging to
 	 * @param nativeObject stored padding values in the native object to read
 	 * @param defaultOptions default PADDING options to returns the default when required
 	 */

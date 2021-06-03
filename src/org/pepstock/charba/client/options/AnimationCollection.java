@@ -93,7 +93,7 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 	private static final CallbackPropertyHandler<FromCallback> FROM_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FROM);
 	// to callback instance
 	private static final CallbackPropertyHandler<ToCallback> TO_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.TO);
-	
+
 	// callback scope
 	private final String scope;
 
@@ -488,7 +488,7 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 		// stores value
 		setValueAndAddToParent(Property.TO, toCallback);
 	}
-	
+
 	/**
 	 * Invokes the callback returning the value of from or to animations.
 	 * 

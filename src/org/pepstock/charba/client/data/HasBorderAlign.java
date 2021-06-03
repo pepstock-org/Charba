@@ -102,7 +102,7 @@ interface HasBorderAlign {
 			getBorderAlignHandler().setBorderAlign(borderAlignCallback);
 		}
 	}
-	
+
 	/**
 	 * Sets the border align callback.
 	 * 

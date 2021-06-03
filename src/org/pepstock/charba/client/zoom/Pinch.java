@@ -26,12 +26,11 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  */
 public final class Pinch extends AbstractNode implements IsDefaultPinch {
-	
+
 	/**
 	 * Default enabled, <b>{@value DEFAULT_ENABLED}</b>.
 	 */
 	public static final boolean DEFAULT_ENABLED = false;
-
 
 	/**
 	 * Name of properties of native object.

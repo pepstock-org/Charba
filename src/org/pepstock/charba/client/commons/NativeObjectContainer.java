@@ -771,7 +771,7 @@ public abstract class NativeObjectContainer {
 			NativeObjectUtils.defineCallbackProperty(nativeObject, key.value(), value);
 		}
 	}
-	
+
 	/**
 	 * Sets a value (native callback function) in the embedded JavaScript object at specific property.
 	 * 

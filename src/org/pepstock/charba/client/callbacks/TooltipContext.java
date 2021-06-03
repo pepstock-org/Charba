@@ -105,7 +105,7 @@ public final class TooltipContext extends ChartContext {
 		}
 		return items;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -94,7 +94,7 @@ public interface Controller {
 	default void onAfterInitialize(ControllerContext context, IsChart chart) {
 		// do nothing
 	}
-	
+
 	/**
 	 * Called before it invokes to parse the data into the controller meta data.
 	 * 

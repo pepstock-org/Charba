@@ -152,7 +152,7 @@ public final class Zoom extends AbstractConfigurationItem implements IsDefaultZo
 	CallbackPropertyHandler<StartCallback> getStartPropertyHandler() {
 		return ZOOM_START_PROPERTY_HANDLER;
 	}
-	
+
 	/**
 	 * Returns the wheel-to-zoom effect.
 	 * 

@@ -23,7 +23,7 @@ package org.pepstock.charba.client.zoom;
  *
  */
 interface IsDefaultPinch {
-	
+
 	/**
 	 * Returns <code>true</code> to enable element for pinching.
 	 * 

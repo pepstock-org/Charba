@@ -434,7 +434,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		// stores value
 		setValue(Property.HOVER_OFFSET, hoverOffsetCallback);
 	}
-	
+
 	/**
 	 * Returns the border radius callback, if set, otherwise <code>null</code>.
 	 * 
@@ -455,7 +455,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		// checks if callback is consistent
 		borderItemsHandler.setBorderItemCallback(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadiusCallback, borderRadiusCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the border radius callback.
 	 * 

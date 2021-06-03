@@ -28,7 +28,7 @@ import org.pepstock.charba.client.options.IsScriptableFontProvider;
  * @author Andrea "Stock" Stocchero
  */
 public final class Font extends AbstractDynamicConfiguration<IsFont> implements IsFont {
-	
+
 	// instance of scriptable padding configuration container
 	private final IsScriptableFontProvider<?> scriptableFontProvider;
 
@@ -190,7 +190,7 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 	public String getLineHeightAsString() {
 		return checkAndGet().getLineHeightAsString();
 	}
-	
+
 	/**
 	 * Invokes when any property of the font is being set, in order to reset the {@link FontCallback} if exists
 	 */
@@ -199,7 +199,7 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 		if (scriptableFontProvider != null && scriptableFontProvider.getFontCallback() != null) {
 			// if yes, resets it
 			// resets by native callback to avoid conflicts on generics
-			scriptableFontProvider.setFont((NativeCallback)null);
+			scriptableFontProvider.setFont((NativeCallback) null);
 		}
 	}
 

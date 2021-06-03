@@ -226,7 +226,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	public int getAutoSkipPadding() {
 		return getValue(Property.AUTO_SKIP_PADDING, getDefaultValues().getAutoSkipPadding());
 	}
-	
+
 	/**
 	 * If <code>true</code>, the defined min and maximum values should be presented as ticks even if they are not "nice"
 	 * 

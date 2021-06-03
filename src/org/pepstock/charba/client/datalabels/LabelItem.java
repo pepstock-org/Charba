@@ -67,7 +67,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLabelsItem, IsScriptableFontProvider<DataLabelsContext>,  IsScriptablePaddingProvider<DataLabelsContext>{
+public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLabelsItem, IsScriptableFontProvider<DataLabelsContext>, IsScriptablePaddingProvider<DataLabelsContext> {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -526,7 +526,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setBorderRadius(double radius) {
 		// resets callback
-		setBorderRadius((RadiusCallback<DataLabelsContext>)null);
+		setBorderRadius((RadiusCallback<DataLabelsContext>) null);
 		// stores the value
 		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(radius));
 	}
@@ -548,7 +548,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setBorderWidth(int width) {
 		// resets callback
-		setBorderWidth((WidthCallback<DataLabelsContext>)null);
+		setBorderWidth((WidthCallback<DataLabelsContext>) null);
 		// stores the value
 		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(width));
 	}
@@ -570,7 +570,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setClamp(boolean clamp) {
 		// resets callback
-		setClamp((ClampCallback)null);
+		setClamp((ClampCallback) null);
 		// stores the value
 		setValue(Property.CLAMP, clamp);
 	}
@@ -592,7 +592,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setClip(boolean clip) {
 		// resets callback
-		setClip((ClipCallback)null);
+		setClip((ClipCallback) null);
 		// stores the value
 		setValue(Property.CLIP, clip);
 	}
@@ -707,7 +707,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setOffset(int offset) {
 		// resets callback
-		setOffset((OffsetCallback<DataLabelsContext>)null);
+		setOffset((OffsetCallback<DataLabelsContext>) null);
 		// stores the value
 		setValue(Property.OFFSET, offset);
 	}
@@ -731,7 +731,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setOpacity(double opacity) {
 		// resets callback
-		setOpacity((OpacityCallback)null);
+		setOpacity((OpacityCallback) null);
 		// stores the value
 		setValue(Property.OPACITY, Checker.betweenOrMaximum(opacity, 0, 1));
 	}
@@ -753,7 +753,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setRotation(double rotation) {
 		// resets callback
-		setRotation((RotationCallback<DataLabelsContext>)null);
+		setRotation((RotationCallback<DataLabelsContext>) null);
 		// stores the value
 		setValue(Property.ROTATION, rotation);
 	}
@@ -837,7 +837,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setTextStrokeWidth(int textStrokeWidth) {
 		// resets callback
-		setTextStrokeWidth((WidthCallback<DataLabelsContext>)null);
+		setTextStrokeWidth((WidthCallback<DataLabelsContext>) null);
 		// stores the value
 		setValue(Property.TEXT_STROKE_WIDTH, Checker.positiveOrZero(textStrokeWidth));
 	}
@@ -859,7 +859,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setTextShadowBlur(double textShadowBlur) {
 		// resets callback
-		setTextShadowBlur((TextShadowBlurCallback)null);
+		setTextShadowBlur((TextShadowBlurCallback) null);
 		// stores the value
 		setValue(Property.TEXT_SHADOW_BLUR, textShadowBlur);
 	}
@@ -948,7 +948,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// stores value
 		setValue(Property.BACKGROUND_COLOR, backgroundColorCallback);
 	}
-	
+
 	/**
 	 * Returns the border color callback, if set, otherwise <code>null</code>.
 	 * 
@@ -979,7 +979,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// stores value
 		setValue(Property.BORDER_COLOR, borderColorCallback);
 	}
-	
+
 	/**
 	 * Returns the color callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1010,7 +1010,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// stores value
 		setValue(Property.COLOR, colorCallback);
 	}
-	
+
 	/**
 	 * Returns the formatter callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1122,7 +1122,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// stores value
 		setValue(Property.BORDER_RADIUS, borderRadiusCallback);
 	}
-	
+
 	/**
 	 * Returns the border width callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1215,7 +1215,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// stores value
 		setValue(Property.CLIP, clipCallback);
 	}
-	
+
 	/**
 	 * Returns the display callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1370,7 +1370,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// stores value
 		setValue(Property.TEXT_ALIGN, textAlignCallback);
 	}
-	
+
 	/**
 	 * Returns the text stroke color callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1389,7 +1389,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	public final void setTextStrokeColor(ColorCallback<DataLabelsContext> textStrokeColorCallback) {
 		TEXT_STROKE_COLOR_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, textStrokeColorCallback, textStrokeColorCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the text stroke color callback.
 	 * 
@@ -1555,7 +1555,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 			setValue(Property.PADDING, padding);
 		}
 	}
-	
+
 	/**
 	 * Sets the padding callback.
 	 * 

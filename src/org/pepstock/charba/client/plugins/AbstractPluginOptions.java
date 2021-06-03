@@ -90,7 +90,7 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 	protected AbstractPluginOptions(String pluginId, NativeObject nativeObject) {
 		this(pluginId, null, null, nativeObject);
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 

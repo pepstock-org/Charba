@@ -482,14 +482,15 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		return TooltipAlign.AUTO;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getYAlign()
 	 */
 	@Override
 	public TooltipAlign getYAlign() {
 		return TooltipAlign.AUTO;
 	}
-
 
 	/**
 	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for title.

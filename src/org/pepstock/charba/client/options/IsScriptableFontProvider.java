@@ -40,7 +40,7 @@ public interface IsScriptableFontProvider<T extends ChartContext> {
 	 * @param fontCallback the font callback.
 	 */
 	void setFont(FontCallback<T> fontCallback);
-	
+
 	/**
 	 * Sets the font callback.
 	 * 

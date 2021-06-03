@@ -46,7 +46,7 @@ public final class Pan extends AbstractConfigurationItem implements IsDefaultPan
 	 * Default enabled, <b>{@value DEFAULT_ENABLED}</b>.
 	 */
 	public static final boolean DEFAULT_ENABLED = false;
-	
+
 	/**
 	 * Default threshold, <b>{@value DEFAULT_THRESHOLD}</b>.
 	 */
@@ -154,7 +154,7 @@ public final class Pan extends AbstractConfigurationItem implements IsDefaultPan
 	CallbackPropertyHandler<StartCallback> getStartPropertyHandler() {
 		return PAN_START_PROPERTY_HANDLER;
 	}
-	
+
 	/**
 	 * Sets <code>true</code> to enable pan element.
 	 * 
@@ -192,7 +192,7 @@ public final class Pan extends AbstractConfigurationItem implements IsDefaultPan
 	public ModifierKey getModifierKey() {
 		return getValue(Property.MODIFIER_KEY, ModifierKey.values(), defaultOptions.getModifierKey());
 	}
-	
+
 	/**
 	 * Sets the minimal pan distance required before actually applying pan.
 	 * 

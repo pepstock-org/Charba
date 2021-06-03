@@ -298,7 +298,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setDisplay(boolean display) {
 		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>)null);
+		setDisplay((DisplayCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.DISPLAY, display);
 	}
@@ -320,7 +320,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setAdjustScaleRange(boolean display) {
 		// resets callback
-		setAdjustScaleRange((AdjustScaleRangeCallback)null);
+		setAdjustScaleRange((AdjustScaleRangeCallback) null);
 		// stores value
 		setValue(Property.ADJUST_SCALE_RANGE, display);
 	}
@@ -418,7 +418,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderWidth(int borderWidth) {
 		// resets callback
-		setBorderWidth((WidthCallback<AnnotationContext>)null);
+		setBorderWidth((WidthCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
@@ -460,7 +460,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderDashOffset(double borderDashOffset) {
 		// resets callback
-		setBorderDashOffset((BorderDashOffsetCallback<AnnotationContext>)null);
+		setBorderDashOffset((BorderDashOffsetCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
@@ -505,7 +505,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setDrawTime(NativeCallback drawTimeCallback) {
 		// resets callback
-		setDrawTime((DrawTimeCallback)null);
+		setDrawTime((DrawTimeCallback) null);
 		// stores values
 		setValueAndAddToParent(AnnotationOptions.Property.DRAW_TIME, drawTimeCallback);
 	}
@@ -536,7 +536,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setDisplay(NativeCallback displayCallback) {
 		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>)null);
+		setDisplay((DisplayCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.DISPLAY, displayCallback);
 	}
@@ -567,7 +567,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderColor(NativeCallback borderColorCallback) {
 		// resets callback
-		setBorderColor((ColorCallback<AnnotationContext>)null);
+		setBorderColor((ColorCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.BORDER_COLOR, borderColorCallback);
 	}
@@ -598,7 +598,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderWidth(NativeCallback borderWidthCallback) {
 		// resets callback
-		setBorderWidth((WidthCallback<AnnotationContext>)null);
+		setBorderWidth((WidthCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.BORDER_WIDTH, borderWidthCallback);
 	}
@@ -635,7 +635,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderDash(NativeCallback borderDashCallback) {
 		// resets callback
-		setBorderDash((BorderDashCallback<AnnotationContext>)null);
+		setBorderDash((BorderDashCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.BORDER_DASH, borderDashCallback);
 	}
@@ -666,7 +666,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setBorderDashOffset(NativeCallback borderDashOffsetCallback) {
 		// resets callback
-		setBorderDashOffset((BorderDashOffsetCallback<AnnotationContext>)null);
+		setBorderDashOffset((BorderDashOffsetCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.BORDER_DASH_OFFSET, borderDashOffsetCallback);
 	}
@@ -697,7 +697,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setAdjustScaleRange(NativeCallback adjustScaleRangeCallback) {
 		// resets callback
-		setAdjustScaleRange((AdjustScaleRangeCallback)null);
+		setAdjustScaleRange((AdjustScaleRangeCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.ADJUST_SCALE_RANGE, adjustScaleRangeCallback);
 	}

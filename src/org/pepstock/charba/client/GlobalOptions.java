@@ -30,7 +30,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  */
 public final class GlobalOptions extends Options {
-	
+
 	// default options scope for defaults options.
 	private static final String SCOPE = "defaultsGlobal";
 

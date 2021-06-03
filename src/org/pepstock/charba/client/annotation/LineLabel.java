@@ -357,7 +357,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setDisplay(boolean display) {
 		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>)null);
+		setDisplay((DisplayCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.ENABLED, display);
 	}
@@ -419,7 +419,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setXPadding(int xPadding) {
 		// resets callback
-		setXPadding((PaddingSizeCallback)null);
+		setXPadding((PaddingSizeCallback) null);
 		// stores value
 		setValue(Property.X_PADDING, Checker.positiveOrZero(xPadding));
 	}
@@ -441,7 +441,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setYPadding(int yPadding) {
 		// resets callback
-		setYPadding((PaddingSizeCallback)null);
+		setYPadding((PaddingSizeCallback) null);
 		// stores value
 		setValue(Property.Y_PADDING, Checker.positiveOrZero(yPadding));
 	}
@@ -463,7 +463,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setCornerRadius(int cornerRadius) {
 		// resets callback
-		setCornerRadius((CornerRadiusCallback<AnnotationContext>)null);
+		setCornerRadius((CornerRadiusCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.CORNER_RADIUS, Checker.positiveOrZero(cornerRadius));
 	}
@@ -530,7 +530,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setXAdjust(double xAdjust) {
 		// resets callback
-		setXAdjust((AdjustSizeCallback)null);
+		setXAdjust((AdjustSizeCallback) null);
 		// stores value
 		setValue(Property.X_ADJUST, xAdjust);
 	}
@@ -554,7 +554,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setYAdjust(double yAdjust) {
 		// resets callback
-		setYAdjust((AdjustSizeCallback)null);
+		setYAdjust((AdjustSizeCallback) null);
 		// stores value
 		setValue(Property.Y_ADJUST, yAdjust);
 	}
@@ -577,7 +577,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setRotation(double rotation) {
 		// resets callback
-		setRotation((RotationCallback<AnnotationContext>)null);
+		setRotation((RotationCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.ROTATION, rotation);
 	}
@@ -599,7 +599,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setAutoRotation(boolean autoRotation) {
 		// resets callback
-		setRotation((RotationCallback<AnnotationContext>)null);
+		setRotation((RotationCallback<AnnotationContext>) null);
 		// checks is enabling
 		if (autoRotation) {
 			// stores value
@@ -870,7 +870,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public void setColor(ColorCallback<AnnotationContext> colorCallback) {
 		COLOR_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, colorCallback, colorCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set the color of the text of label.
 	 * 
@@ -878,11 +878,10 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setColor(NativeCallback colorCallback) {
 		// resets callback
-		setColor((ColorCallback<AnnotationContext>)null);
+		setColor((ColorCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.COLOR, colorCallback);
 	}
-
 
 	/**
 	 * Returns the callback called to set the corner radius.
@@ -910,11 +909,11 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setCornerRadius(NativeCallback cornerRadiusCallback) {
 		// resets callback
-		setCornerRadius((CornerRadiusCallback<AnnotationContext>)null);
+		setCornerRadius((CornerRadiusCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.CORNER_RADIUS, cornerRadiusCallback);
 	}
-	
+
 	/**
 	 * Returns the callback called to set the text to display in label as list.
 	 * 
@@ -933,7 +932,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public void setContent(ContentCallback contentCallback) {
 		CONTENT_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, contentCallback, contentCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set the text to display in label as list.
 	 * 
@@ -941,7 +940,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setContent(NativeCallback contentCallback) {
 		// resets callback
-		setContent((ContentCallback)null);
+		setContent((ContentCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.CONTENT, contentCallback);
 	}
@@ -964,7 +963,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public void setDisplay(DisplayCallback<AnnotationContext> displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set whether the label should be displayed.
 	 * 
@@ -972,7 +971,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setDisplay(NativeCallback displayCallback) {
 		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>)null);
+		setDisplay((DisplayCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.ENABLED, displayCallback);
 	}
@@ -995,7 +994,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public void setRotation(RotationCallback<AnnotationContext> rotationCallback) {
 		ROTATION_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, rotationCallback, rotationCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set the rotation of label in degrees.
 	 * 
@@ -1003,7 +1002,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setRotation(NativeCallback rotationCallback) {
 		// resets callback
-		setRotation((RotationCallback<AnnotationContext>)null);
+		setRotation((RotationCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.ROTATION, rotationCallback);
 	}
@@ -1026,7 +1025,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public void setImageHeight(ImageSizeCallback imageSizeCallback) {
 		IMAGE_HEIGHT_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, imageSizeCallback, imageHeightCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
 	 * 
@@ -1034,7 +1033,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setImageHeight(NativeCallback imageSizeCallback) {
 		// resets callback
-		setImageHeight((ImageSizeCallback)null);
+		setImageHeight((ImageSizeCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.HEIGHT, imageSizeCallback);
 	}
@@ -1057,7 +1056,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public void setImageWidth(ImageSizeCallback imageSizeCallback) {
 		IMAGE_WIDTH_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, imageSizeCallback, imageWidthCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
 	 * 
@@ -1065,7 +1064,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setImageWidth(NativeCallback imageSizeCallback) {
 		// resets callback
-		setImageWidth((ImageSizeCallback)null);
+		setImageWidth((ImageSizeCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.WIDTH, imageSizeCallback);
 	}
@@ -1096,7 +1095,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setPosition(NativeCallback positionCallback) {
 		// resets callback
-		setPosition((LabelPositionCallback)null);
+		setPosition((LabelPositionCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.POSITION, positionCallback);
 	}
@@ -1127,7 +1126,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setTextAlign(NativeCallback alignCallback) {
 		// resets callback
-		setTextAlign((TextAlignCallback<AnnotationContext>)null);
+		setTextAlign((TextAlignCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.TEXT_ALIGN, alignCallback);
 	}
@@ -1158,7 +1157,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setXPadding(NativeCallback paddingCallback) {
 		// resets callback
-		setXPadding((PaddingSizeCallback)null);
+		setXPadding((PaddingSizeCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.X_PADDING, paddingCallback);
 	}
@@ -1189,11 +1188,11 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setYPadding(NativeCallback paddingCallback) {
 		// resets callback
-		setYPadding((PaddingSizeCallback)null);
+		setYPadding((PaddingSizeCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.Y_PADDING, paddingCallback);
 	}
-	
+
 	/**
 	 * Returns the callback called to set the adjustment along x-axis (left-right) of label relative to above number (can be negative).
 	 * 
@@ -1220,7 +1219,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setXAdjust(NativeCallback adjustCallback) {
 		// resets callback
-		setXAdjust((AdjustSizeCallback)null);
+		setXAdjust((AdjustSizeCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.X_ADJUST, adjustCallback);
 	}
@@ -1243,7 +1242,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public void setYAdjust(AdjustSizeCallback adjustCallback) {
 		Y_ADJUST_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustCallback, yAdjustCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set the adjustment along x-axis (left-right) of label relative to above number (can be negative).
 	 * 
@@ -1251,7 +1250,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	public void setYAdjust(NativeCallback adjustCallback) {
 		// resets callback
-		setYAdjust((AdjustSizeCallback)null);
+		setYAdjust((AdjustSizeCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.Y_ADJUST, adjustCallback);
 	}
@@ -1275,7 +1274,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public void setFont(FontCallback<AnnotationContext> fontCallback) {
 		FONT_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, fontCallback, fontCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the the font callback.
 	 * 
@@ -1284,7 +1283,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	@Override
 	public void setFont(NativeCallback fontCallback) {
 		// resets callback
-		setFont((FontCallback<AnnotationContext>)null);
+		setFont((FontCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.FONT, fontCallback);
 	}

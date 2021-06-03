@@ -57,7 +57,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	private final CallbackProxy<ProxyIntegerCallback> delayCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the loop function
 	private final CallbackProxy<ProxyBooleanCallback> loopCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+
 	// from callback instance
 	private static final CallbackPropertyHandler<DurationCallback> DURATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DURATION);
 	// to callback instance
@@ -140,7 +140,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	protected final D getDefaultValues() {
 		return defaultValues;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -180,7 +180,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 */
 	public final void setDuration(int milliseconds) {
 		// resets callback
-		setDuration((DurationCallback)null);
+		setDuration((DurationCallback) null);
 		// sets value
 		setValueAndAddToParent(Property.DURATION, Checker.positiveOrZero(milliseconds));
 	}
@@ -202,7 +202,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 */
 	public final void setDelay(int delay) {
 		// resets callback
-		setDelay((DelayCallback)null);
+		setDelay((DelayCallback) null);
 		// sets value
 		setValueAndAddToParent(Property.DELAY, Checker.positiveOrZero(delay));
 	}
@@ -224,7 +224,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 */
 	public final void setLoop(boolean loop) {
 		// resets callback
-		setLoop((LoopCallback)null);
+		setLoop((LoopCallback) null);
 		// sets value
 		setValueAndAddToParent(Property.LOOP, loop);
 	}
@@ -238,7 +238,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	public final boolean isLoop() {
 		return getValue(Property.LOOP, defaultValues.isLoop());
 	}
-	
+
 	// -------------------
 	// CALLBACKS
 	// -------------------
@@ -335,7 +335,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 		// stores value
 		setValueAndAddToParent(Property.LOOP, loopCallback);
 	}
-	
+
 	/**
 	 * Returns the callback to set the animation easing.
 	 * 

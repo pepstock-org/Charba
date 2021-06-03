@@ -45,7 +45,7 @@ public final class Font extends AbstractNode implements IsFont {
 		STYLE("style"),
 		WEIGHT("weight"),
 		LINE_HEIGHT("lineHeight");
-		
+
 		// name value of property
 		private final String value;
 

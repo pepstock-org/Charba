@@ -418,12 +418,14 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 		return tooltip.getXAlign();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getYAlign()
 	 */
 	@Override
 	public TooltipAlign getYAlign() {
 		return tooltip.getYAlign();
 	}
-	
+
 }

@@ -912,7 +912,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	public boolean isUsePointStyle() {
 		return getConfiguration().getTooltips().isUsePointStyle();
 	}
-	
+
 	/**
 	 * Sets the alignment of the tooltip caret in the X direction.
 	 * 
@@ -930,7 +930,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	public TooltipAlign getXAlign() {
 		return getConfiguration().getTooltips().getXAlign();
 	}
-	
+
 	/**
 	 * Sets the alignment of the tooltip caret in the Y direction.
 	 * 
@@ -952,7 +952,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	// ---------------------------
 	// CALLBACKS
 	// ---------------------------
-	
+
 	/**
 	 * Returns the user external callback instance.
 	 * 

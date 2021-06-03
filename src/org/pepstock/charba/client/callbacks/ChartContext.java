@@ -138,7 +138,7 @@ public class ChartContext extends NativeObjectContainer {
 		// if here, argument is not consistent
 		return null;
 	}
-	
+
 	/**
 	 * Sets a custom field to data point.
 	 * 
@@ -169,7 +169,7 @@ public class ChartContext extends NativeObjectContainer {
 		// then returns default
 		return defaultValue;
 	}
-	
+
 	/**
 	 * Sets a custom field to data point.
 	 * 
@@ -200,7 +200,7 @@ public class ChartContext extends NativeObjectContainer {
 		// then returns default
 		return defaultValue;
 	}
-	
+
 	/**
 	 * Sets a custom field to data point.
 	 * 
@@ -231,7 +231,7 @@ public class ChartContext extends NativeObjectContainer {
 		// then returns default
 		return defaultValue;
 	}
-	
+
 	/**
 	 * Sets a custom field to data point.
 	 * 
@@ -262,7 +262,7 @@ public class ChartContext extends NativeObjectContainer {
 		// then returns default
 		return defaultValue;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the context is consistent.<br>
 	 * Custom context (the plugin ones) should extend it and check if the context is consistent before invoking the callback.
@@ -272,7 +272,7 @@ public class ChartContext extends NativeObjectContainer {
 	protected boolean isConsistent() {
 		return true;
 	}
-	
+
 	/**
 	 * Checks if the key passed as argument is a key already used for other context properties.
 	 * 
@@ -285,7 +285,7 @@ public class ChartContext extends NativeObjectContainer {
 			// checks if is NOT a value of defined properties
 			return !Key.hasKeyByValue(Property.values(), property.value());
 		}
-		// if here the property passed as argument 
+		// if here the property passed as argument
 		// is not valid
 		return false;
 	}

@@ -29,7 +29,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  *
  */
 public final class Drag extends AbstractNode implements IsDefaultDrag {
-	
+
 	/**
 	 * Default enabled, <b>{@value DEFAULT_ENABLED}</b>.
 	 */
@@ -101,7 +101,7 @@ public final class Drag extends AbstractNode implements IsDefaultDrag {
 		// stores defaults options
 		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
 	}
-	
+
 	/**
 	 * Sets <code>true</code> to enable element for drag zooming.
 	 * 

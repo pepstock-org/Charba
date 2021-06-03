@@ -846,7 +846,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, callbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (CallbackProxy.Proxy)null);
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (CallbackProxy.Proxy) null);
 		}
 	}
 
@@ -864,7 +864,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, callBack);
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (NativeCallback)null);
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (NativeCallback) null);
 		}
 	}
 
@@ -877,7 +877,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	final ChartContext createContext(NativeObject context) {
 		return new ChartContext(context);
 	}
-	
+
 	/**
 	 * Checks and manage the canvas event listeners for title and axes click events.<br>
 	 * If the argument is <code>true</code>, it will add the event listener if is the first adding, otherwise it will remove the listener if is the last handler.

@@ -92,7 +92,7 @@ abstract class AbstractDefaultChartAnimation<T extends IsDefaultBaseAnimation> i
 	public boolean isLoop() {
 		return animation.isLoop();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

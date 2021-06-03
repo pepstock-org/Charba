@@ -78,7 +78,7 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	protected final AbstractNode getParentNode() {
 		return parent;
 	}
-	
+
 	/**
 	 * Returns the root node.
 	 * 
@@ -271,7 +271,7 @@ public abstract class AbstractNode extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (callback function) in the embedded JavaScript object at specific property.
 	 * 
@@ -283,7 +283,7 @@ public abstract class AbstractNode extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (image) in the embedded JavaScript object at specific property.
 	 * 
@@ -462,7 +462,7 @@ public abstract class AbstractNode extends NativeObjectContainer {
 		// stores callback
 		model.setValueAndAddToParent(key, callback);
 	}
-	
+
 	/**
 	 * Called recursively when a property has been set in the item.<br>
 	 * This is mandatory because it could happen that the parent item is not present, therefore it must be added.

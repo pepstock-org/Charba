@@ -512,7 +512,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setXMin(NativeCallback valueCallback) {
 		// resets callback
-		setXMin((ValueCallback)null);
+		setXMin((ValueCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.X_MIN, valueCallback);
 	}
@@ -543,7 +543,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setXMax(NativeCallback valueCallback) {
 		// resets callback
-		setXMax((ValueCallback)null);
+		setXMax((ValueCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.X_MAX, valueCallback);
 	}
@@ -566,7 +566,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	public final void setYMin(ValueCallback valueCallback) {
 		Y_MIN_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yMinCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set the bottom edge of the box.
 	 * 
@@ -574,7 +574,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setYMin(NativeCallback valueCallback) {
 		// resets callback
-		setYMin((ValueCallback)null);
+		setYMin((ValueCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.Y_MIN, valueCallback);
 	}
@@ -605,7 +605,7 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 	 */
 	public final void setYMax(NativeCallback valueCallback) {
 		// resets callback
-		setYMax((ValueCallback)null);
+		setYMax((ValueCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.Y_MAX, valueCallback);
 	}

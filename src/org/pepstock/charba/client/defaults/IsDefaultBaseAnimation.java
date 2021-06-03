@@ -55,7 +55,7 @@ public interface IsDefaultBaseAnimation {
 	 * @return <code>true</code> if loops the animations endlessly.
 	 */
 	boolean isLoop();
-	
+
 	/**
 	 * Returns the callback to set the number of milliseconds an animation takes.
 	 * 

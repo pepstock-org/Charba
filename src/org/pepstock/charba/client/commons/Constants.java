@@ -24,7 +24,7 @@ import org.pepstock.charba.client.utils.RegExp;
  *
  */
 public final class Constants {
-	
+
 	// regexp pattern to have only letters and number
 	private static final String REGEXP_ID_PATTERN = "^[a-zA-Z0-9_]+$";
 	/**

@@ -55,7 +55,7 @@ public interface IsLinearTick extends IsNumericTick {
 		// checks if axis is consistent
 		if (getAxis() != null) {
 			// resets callback
-			setCount((CountCallback)null);
+			setCount((CountCallback) null);
 			// stores value
 			getAxis().getScale().getTicks().setCount(count);
 		}
@@ -86,7 +86,7 @@ public interface IsLinearTick extends IsNumericTick {
 		// checks if axis is consistent
 		if (getAxis() != null) {
 			// resets callback
-			setMaxTicksLimit((MaxTicksLimitCallback)null);
+			setMaxTicksLimit((MaxTicksLimitCallback) null);
 			// stores value
 			getAxis().getScale().getTicks().setMaxTicksLimit(maxTicksLimit);
 		}
@@ -115,7 +115,7 @@ public interface IsLinearTick extends IsNumericTick {
 		// checks if axis is consistent
 		if (getAxis() != null) {
 			// resets callback
-			setStepSize((StepSizeCallback)null);
+			setStepSize((StepSizeCallback) null);
 			// stores value
 			getAxis().getScale().getTicks().setStepSize(stepSize);
 		}
@@ -144,7 +144,7 @@ public interface IsLinearTick extends IsNumericTick {
 		// checks if axis is consistent
 		if (getAxis() != null) {
 			// resets callback
-			setPrecision((PrecisionCallback)null);
+			setPrecision((PrecisionCallback) null);
 			// stores value
 			getAxis().getScale().getTicks().setPrecision(precision);
 		}
@@ -319,5 +319,5 @@ public interface IsLinearTick extends IsNumericTick {
 			getLinearTickOptionsHandler().setStepSize(stepSizeCallback);
 		}
 	}
-	
+
 }

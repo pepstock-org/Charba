@@ -22,7 +22,7 @@ package org.pepstock.charba.client.commons;
  *
  */
 interface IsCallbackPropertyHandler {
-	
+
 	/**
 	 * Called by {@link CallbackPropertyManager} when a chart is destroy in order to remove the scope (and then teh callback if needed) from cache.
 	 * 

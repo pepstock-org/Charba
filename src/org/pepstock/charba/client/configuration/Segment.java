@@ -181,12 +181,11 @@ public class Segment extends ConfigurationOptionsContainer {
 	 */
 	public void setBackgroundColor(NativeCallback backgroundColorCallback) {
 		// resets the callback
-		setBackgroundColor((ColorCallback<SegmentContext>)null);
+		setBackgroundColor((ColorCallback<SegmentContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getConfiguration().getSegment(), Property.BACKGROUND_COLOR, backgroundColorCallback);
 	}
 
-	
 	/**
 	 * Returns the border width callback, if set, otherwise <code>null</code>.
 	 * 
@@ -207,7 +206,7 @@ public class Segment extends ConfigurationOptionsContainer {
 		// stores and manages callback
 		getOptions().setCallback(getConfiguration().getSegment(), Property.BORDER_WIDTH, borderWidthCallback, borderWidthCallbackProxy);
 	}
-	
+
 	/**
 	 * Sets the border width callback.
 	 * 
@@ -215,7 +214,7 @@ public class Segment extends ConfigurationOptionsContainer {
 	 */
 	public void setBorderWidth(NativeCallback borderWidthCallback) {
 		// resets the callback
-		setBorderWidth((WidthCallback<SegmentContext>)null);
+		setBorderWidth((WidthCallback<SegmentContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getConfiguration().getSegment(), Property.BORDER_WIDTH, borderWidthCallback);
 	}
@@ -248,7 +247,7 @@ public class Segment extends ConfigurationOptionsContainer {
 	 */
 	public void setBorderColor(NativeCallback borderColorCallback) {
 		// resets the callback
-		setBorderColor((ColorCallback<SegmentContext>)null);
+		setBorderColor((ColorCallback<SegmentContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getConfiguration().getSegment(), Property.BORDER_COLOR, borderColorCallback);
 	}
@@ -281,7 +280,7 @@ public class Segment extends ConfigurationOptionsContainer {
 	 */
 	public void setBorderCapStyle(NativeCallback borderCapStyleCallback) {
 		// resets the callback
-		setBorderCapStyle((CapStyleCallback<SegmentContext>)null);
+		setBorderCapStyle((CapStyleCallback<SegmentContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getConfiguration().getSegment(), Property.BORDER_CAP_STYLE, borderCapStyleCallback);
 	}
@@ -314,7 +313,7 @@ public class Segment extends ConfigurationOptionsContainer {
 	 */
 	public void setBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
 		// resets the callback
-		setBorderJoinStyle((JoinStyleCallback<SegmentContext>)null);
+		setBorderJoinStyle((JoinStyleCallback<SegmentContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getConfiguration().getSegment(), Property.BORDER_JOIN_STYLE, borderJoinStyleCallback);
 	}
@@ -347,7 +346,7 @@ public class Segment extends ConfigurationOptionsContainer {
 	 */
 	public void setBorderDash(NativeCallback borderDashCallback) {
 		// resets the callback
-		setBorderDash((BorderDashCallback<SegmentContext>)null);
+		setBorderDash((BorderDashCallback<SegmentContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getConfiguration().getSegment(), Property.BORDER_DASH, borderDashCallback);
 	}
@@ -380,7 +379,7 @@ public class Segment extends ConfigurationOptionsContainer {
 	 */
 	public void setBorderDashOffset(NativeCallback borderDashOffsetCallback) {
 		// resets the callback
-		setBorderDashOffset((BorderDashOffsetCallback<SegmentContext>)null);
+		setBorderDashOffset((BorderDashOffsetCallback<SegmentContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getConfiguration().getSegment(), Property.BORDER_DASH, borderDashOffsetCallback);
 	}
@@ -394,7 +393,7 @@ public class Segment extends ConfigurationOptionsContainer {
 		BaseContext baseContext = new BaseContext(getChart(), context);
 		return new SegmentContext(baseContext.nativeObject());
 	}
-	
+
 	/**
 	 * Returns an array of integer when the callback has been activated.
 	 * 

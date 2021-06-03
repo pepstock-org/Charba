@@ -280,7 +280,7 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 		// stores value
 		setValue(Property.OVER_SCALE_MODE, modeCallback);
 	}
-	
+
 	/**
 	 * Returns the callback called while the user is zooming or panning.
 	 * 

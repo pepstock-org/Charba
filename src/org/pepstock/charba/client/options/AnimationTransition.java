@@ -63,7 +63,7 @@ public class AnimationTransition extends AbstractNode implements IsDefaultAnimat
 		}
 
 	}
-	
+
 	// scope of the callbacks
 	private final String scope;
 	// animation instance
@@ -102,7 +102,7 @@ public class AnimationTransition extends AbstractNode implements IsDefaultAnimat
 		this.animation = new Animation(this, Property.ANIMATION, defaultValues.getAnimation(), getValue(Property.ANIMATION));
 		this.animations = new Animations(this, Property.ANIMATIONS, defaultValues.getAnimations(), getValue(Property.ANIMATIONS));
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

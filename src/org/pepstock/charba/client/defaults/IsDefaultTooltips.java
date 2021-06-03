@@ -234,14 +234,14 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 *         boxHeight)
 	 */
 	boolean isUsePointStyle();
-	
+
 	/**
 	 * Returns the alignment of the tooltip caret in the X direction.
 	 * 
 	 * @return the alignment of the tooltip caret in the X direction
 	 */
 	TooltipAlign getXAlign();
-	
+
 	/**
 	 * Returns the alignment of the tooltip caret in the Y direction.
 	 * 

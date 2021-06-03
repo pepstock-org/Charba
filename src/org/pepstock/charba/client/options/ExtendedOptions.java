@@ -161,7 +161,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	/**
 	 * Adds a callback proxy function to a element node instance.
 	 *
-	 * @param envelop contains the element node to update 
+	 * @param envelop contains the element node to update
 	 * @param property property name
 	 * @param proxy the function proxy to activate
 	 */
@@ -172,7 +172,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	/**
 	 * Adds a native callback function to a element node instance.
 	 *
-	 * @param envelop contains the element node to update 
+	 * @param envelop contains the element node to update
 	 * @param property property name
 	 * @param callback the function callback to activate
 	 */

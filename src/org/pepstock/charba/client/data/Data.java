@@ -301,7 +301,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Creates a list of active elements instances by an array of data set indexes, for visible data sets.
 	 * 
-	 * @param datasetIndexes an array of data set indexes 
+	 * @param datasetIndexes an array of data set indexes
 	 * @return a list of active elements instances by an array of data set indexes
 	 */
 	public List<ActiveDatasetElement> createActiveElementsByDatasetIndex(int... datasetIndexes) {
@@ -336,7 +336,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Creates a list of active elements instances by an array of data indexes, for all visible data sets.
 	 * 
-	 * @param dataIndexes an array of data indexes 
+	 * @param dataIndexes an array of data indexes
 	 * @return a list of active elements instances by an array of data indexes
 	 */
 	public List<ActiveDatasetElement> createActiveElementsByDataIndex(int... dataIndexes) {

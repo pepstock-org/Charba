@@ -56,7 +56,7 @@ final class CallbackPropertyManager {
 	static CallbackPropertyManager get() {
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Returns the set of registered handlers.
 	 * 

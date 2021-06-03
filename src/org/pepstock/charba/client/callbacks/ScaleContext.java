@@ -132,7 +132,7 @@ public final class ScaleContext extends ChartContext {
 		}
 		return tick;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

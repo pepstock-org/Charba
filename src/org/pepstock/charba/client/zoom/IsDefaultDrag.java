@@ -23,7 +23,7 @@ package org.pepstock.charba.client.zoom;
  *
  */
 interface IsDefaultDrag {
-	
+
 	/**
 	 * Returns <code>true</code> to enable element for dragging.
 	 * 
@@ -32,7 +32,6 @@ interface IsDefaultDrag {
 	default boolean isEnabled() {
 		return Drag.DEFAULT_ENABLED;
 	}
-
 
 	/**
 	 * Returns the fill color during dragging.

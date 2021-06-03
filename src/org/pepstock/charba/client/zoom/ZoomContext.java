@@ -114,7 +114,7 @@ public final class ZoomContext extends ChartContext {
 		// checks if the context types are chart or zoom
 		return ContextType.CHART.equals(getType()) || ContextType.ZOOM.equals(getType());
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

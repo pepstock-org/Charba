@@ -332,7 +332,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
-	
+
 	/**
 	 * Sets the alignment of the tooltip caret in the X direction.
 	 * 
@@ -352,7 +352,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	public TooltipAlign getXAlign() {
 		return getValue(Property.X_ALIGN, TooltipAlign.values(), getDefaultValues().getXAlign());
 	}
-	
+
 	/**
 	 * Sets the alignment of the tooltip caret in the Y direction.
 	 * 

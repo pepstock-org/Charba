@@ -231,7 +231,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setRadius(double radius) {
 		// resets callback
-		setRadius((RadiusCallback<AnnotationContext>)null);
+		setRadius((RadiusCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.RADIUS, Checker.positiveOrZero(radius));
 	}
@@ -468,7 +468,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	public void setRadius(RadiusCallback<AnnotationContext> radiusCallback) {
 		RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, radiusCallback, radiusCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set the radius.
 	 * 
@@ -476,7 +476,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setRadius(NativeCallback radiusCallback) {
 		// resets callback
-		setRadius((RadiusCallback<AnnotationContext>)null);
+		setRadius((RadiusCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.RADIUS, radiusCallback);
 	}
@@ -507,11 +507,11 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setXValue(NativeCallback valueCallback) {
 		// resets callback
-		setXValue((ValueCallback)null);
+		setXValue((ValueCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.X_VALUE, valueCallback);
 	}
-	
+
 	/**
 	 * Returns the callback called to set the data Y value to draw the line at.
 	 * 
@@ -530,7 +530,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	public void setYValue(ValueCallback valueCallback) {
 		Y_VALUE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yValueCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set the data Y value to draw the line at.
 	 * 
@@ -538,7 +538,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	public void setYValue(NativeCallback valueCallback) {
 		// resets callback
-		setYValue((ValueCallback)null);
+		setYValue((ValueCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.Y_VALUE, valueCallback);
 

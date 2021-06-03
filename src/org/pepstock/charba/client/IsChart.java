@@ -323,7 +323,7 @@ public interface IsChart {
 	 * @param destroyOnDetach the destroyOnDetach to set
 	 */
 	void setDestroyOnDetach(boolean destroyOnDetach);
-	
+
 	/**
 	 * Sets the active (hovered) elements for the chart.
 	 * 
@@ -349,7 +349,7 @@ public interface IsChart {
 	 * @return the list of active elements
 	 */
 	List<ActiveDatasetElement> getActiveElements();
-	
+
 	/**
 	 * Sets the active tooltip elements for the chart.
 	 * 
@@ -370,9 +370,9 @@ public interface IsChart {
 	void setTooltipActiveElements(ActiveDatasetElement... elements);
 
 	/**
-	 * Returns the active tooltip  elements for the chart.
+	 * Returns the active tooltip elements for the chart.
 	 * 
-	 * @return the array of active tooltip  elements
+	 * @return the array of active tooltip elements
 	 */
 	List<ActiveDatasetElement> getTooltipActiveElements();
 

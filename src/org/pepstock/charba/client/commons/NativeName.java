@@ -62,7 +62,7 @@ public final class NativeName {
 	 * Constant to bind java script object as {@link NativeJsObjectBoolean} with name <b>{@value JS_OBJECT_BOOLEAN_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_OBJECT_BOOLEAN_HELPER = "CharbaJsObjectBooleanHelper";
-	
+
 	/**
 	 * Constant to bind java script object as {@link NativeJsObjectCallback} with name <b>{@value JS_OBJECT_CALLBACK_HELPER}</b>, (internal of Charba).
 	 */

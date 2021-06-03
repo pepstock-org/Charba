@@ -130,7 +130,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	public void setBorderWidth(NativeCallback borderWidthCallback) {
 		setInternalBorderWidth(borderWidthCallback);
 	}
-	
+
 	/**
 	 * Sets the fill color of the arcs when hovered.
 	 * 

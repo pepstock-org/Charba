@@ -307,21 +307,21 @@ final class WrapperController extends NativeObjectContainer {
 			// checks if update mode is consistent
 			if (mode == null || mode.length() == 0) {
 				// invokes on before
-				delegation.onBeforeUpdate(context,chart, null);
+				delegation.onBeforeUpdate(context, chart, null);
 				// invokes default
 				JsControllerHelper.get().update(delegation.getType(), context, null);
 				// invokes on after
-				delegation.onAfterUpdate(context,chart, null);
+				delegation.onAfterUpdate(context, chart, null);
 			} else {
 				// otherwise creates a mode by the string
 				// creates transition
 				TransitionKey transition = TransitionKey.create(mode);
 				// invokes on before
-				delegation.onBeforeUpdate(context,chart, transition);
+				delegation.onBeforeUpdate(context, chart, transition);
 				// invokes default
 				JsControllerHelper.get().update(delegation.getType(), context, transition.value());
 				// invokes on after
-				delegation.onAfterUpdate(context,chart, transition);
+				delegation.onAfterUpdate(context, chart, transition);
 			}
 		}
 	}
@@ -337,11 +337,11 @@ final class WrapperController extends NativeObjectContainer {
 		// if consistent, calls controller
 		if (Controller.isConsistent(delegation, context, chart)) {
 			// invokes on before
-			delegation.onBeforeLinkScales(context,chart);
+			delegation.onBeforeLinkScales(context, chart);
 			// invokes default
 			JsControllerHelper.get().linkScales(delegation.getType(), context);
 			// invokes on after
-			delegation.onAfterLinkScales(context,chart);
+			delegation.onAfterLinkScales(context, chart);
 		}
 	}
 

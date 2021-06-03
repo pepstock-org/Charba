@@ -36,7 +36,7 @@ import org.pepstock.charba.client.items.PaddingItem;
  *
  */
 public final class ScriptableUtils {
-	
+
 	private static final PaddingItem DEFAULT_PADDING_FOR_CALLBACK = new PaddingItem(0);
 
 	/**
@@ -76,7 +76,7 @@ public final class ScriptableUtils {
 	// ------------------------------------
 	// --- OPTIONS callbacks management
 	// ------------------------------------
-	
+
 	/**
 	 * Returns the padding item value as value of the property by invoking a callback which is typed to a paddng item.
 	 * 

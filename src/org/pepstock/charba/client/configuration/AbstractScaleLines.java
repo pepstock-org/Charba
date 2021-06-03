@@ -145,7 +145,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 */
 	public void setColor(NativeCallback colorCallback) {
 		// resets callback
-		setColor((ColorCallback<ScaleContext>)null);
+		setColor((ColorCallback<ScaleContext>) null);
 		// stores and manages callback
 		getAxis().setCallback(checkAndGet(), Property.COLOR, colorCallback);
 	}
@@ -178,7 +178,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 */
 	public void setLineWidth(NativeCallback lineWidthCallback) {
 		// resets callback
-		setLineWidth((WidthCallback<ScaleContext>)null);
+		setLineWidth((WidthCallback<ScaleContext>) null);
 		// stores and manages callback
 		getAxis().setCallback(checkAndGet(), Property.LINE_WIDTH, lineWidthCallback);
 	}
@@ -211,7 +211,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	 */
 	public void setBorderDashOffset(NativeCallback borderDashOffsetCallback) {
 		// resets callback
-		setBorderDashOffset((BorderDashOffsetCallback<ScaleContext>)null);
+		setBorderDashOffset((BorderDashOffsetCallback<ScaleContext>) null);
 		// stores and manages callback
 		getAxis().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallback);
 	}

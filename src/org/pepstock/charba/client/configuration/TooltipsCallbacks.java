@@ -326,11 +326,10 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 		// stores and manages callback
 		getOptions().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.AFTER_FOOTER, footerCallback, afterFooterCallbackProxy);
 	}
-	
+
 	// -----------------------------
 	// Internal CALLBACKS invocation
 	// -----------------------------
-
 
 	/**
 	 * Manage the TITLE callback invocation
@@ -339,7 +338,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onBeforeTitleCallback(ArrayObject items) {
-		// gets callback 
+		// gets callback
 		TooltipTitleCallback callback = getTitleCallback();
 		// checks if callback is consistent
 		if (callback != null) {
@@ -358,7 +357,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onTitleCallback(ArrayObject items) {
-		// gets callback 
+		// gets callback
 		TooltipTitleCallback callback = getTitleCallback();
 		// reads tooltip items
 		List<TooltipItem> tooltipItems = ArrayListHelper.unmodifiableList(items, TooltipItem.FACTORY);
@@ -379,7 +378,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onAfterTitleCallback(ArrayObject items) {
-		// gets callback 
+		// gets callback
 		TooltipTitleCallback callback = getTitleCallback();
 		// checks if callback is consistent
 		if (callback != null) {
@@ -398,7 +397,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onBeforeBodyCallback(ArrayObject items) {
-		// gets callback 
+		// gets callback
 		TooltipBodyCallback callback = getBodyCallback();
 		// checks if callback is consistent
 		if (callback != null) {
@@ -417,7 +416,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onAfterBodyCallback(ArrayObject items) {
-		// gets callback 
+		// gets callback
 		TooltipBodyCallback callback = getBodyCallback();
 		// checks if callback is consistent
 		if (callback != null) {
@@ -436,7 +435,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return label to apply to tooltip item
 	 */
 	private String onBeforeLabelCallback(NativeObject item) {
-		// gets callback 
+		// gets callback
 		TooltipLabelCallback callback = getLabelCallback();
 		// checks if callback is consistent
 		if (callback != null) {
@@ -458,7 +457,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return label to apply to tooltip item
 	 */
 	private String onLabelCallback(NativeObject item) {
-		// gets callback 
+		// gets callback
 		TooltipLabelCallback callback = getLabelCallback();
 		// gets the items
 		TooltipItem tooltipItem = TooltipItem.FACTORY.create(item);
@@ -482,7 +481,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return label color object to apply to tooltip item
 	 */
 	private NativeObject onLabelColorCallback(NativeObject item) {
-		// gets callback 
+		// gets callback
 		TooltipLabelCallback callback = getLabelCallback();
 		// gets the items
 		TooltipItem tooltipItem = TooltipItem.FACTORY.create(item);
@@ -512,7 +511,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return label color object to apply to tooltip item
 	 */
 	private NativeObject onLabelPointStyleCallback(NativeObject item) {
-		// gets callback 
+		// gets callback
 		TooltipLabelCallback callback = getLabelCallback();
 		// gets the items
 		TooltipItem tooltipItem = TooltipItem.FACTORY.create(item);
@@ -542,7 +541,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return text label color object to apply to tooltip item
 	 */
 	private String onLabelTextColorCallback(NativeObject item) {
-		// gets callback 
+		// gets callback
 		TooltipLabelCallback callback = getLabelCallback();
 		// checks if callback is consistent
 		if (callback != null) {
@@ -564,7 +563,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return label to apply to tooltip item
 	 */
 	private String onAfterLabelCallback(NativeObject item) {
-		// gets callback 
+		// gets callback
 		TooltipLabelCallback callback = getLabelCallback();
 		// checks if callback is consistent
 		if (callback != null) {
@@ -586,7 +585,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onBeforeFooterCallback(ArrayObject items) {
-		// gets callback 
+		// gets callback
 		TooltipFooterCallback callback = getFooterCallback();
 		// checks if callback is consistent
 		if (callback != null) {
@@ -605,7 +604,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onFooterCallback(ArrayObject items) {
-		// gets callback 
+		// gets callback
 		TooltipFooterCallback callback = getFooterCallback();
 		// checks if callback is consistent
 		if (callback != null) {
@@ -624,7 +623,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @return array of tooltip items
 	 */
 	private ArrayString onAfterFooterCallback(ArrayObject items) {
-		// gets callback 
+		// gets callback
 		TooltipFooterCallback callback = getFooterCallback();
 		// checks if callback is consistent
 		if (callback != null) {

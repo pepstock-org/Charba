@@ -124,7 +124,7 @@ public class Layout extends ConfigurationOptionsContainer implements IsScriptabl
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getLayout(), Property.PADDING, paddingCallback, paddingCallbackProxy);
 	}
-	
+
 	/**
 	 * Sets the padding callback.
 	 * 
@@ -133,7 +133,7 @@ public class Layout extends ConfigurationOptionsContainer implements IsScriptabl
 	@Override
 	public void setPadding(NativeCallback paddingCallback) {
 		// resets callback
-		setPadding((PaddingCallback<ChartContext>)null);
+		setPadding((PaddingCallback<ChartContext>) null);
 		// stores and manages callback
 		getOptions().setCallback(getOptions().getConfiguration().getLayout(), Property.PADDING, paddingCallback);
 	}

@@ -84,7 +84,7 @@ public interface IsDefaultAnimationCollection extends IsDefaultBaseAnimation {
 	 * @return the properties defined in the the animation collection
 	 */
 	List<AnimationPropertyKey> getProperties();
-	
+
 	/**
 	 * Returns the callback to set the start value for the animation.
 	 * 

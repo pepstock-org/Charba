@@ -254,7 +254,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	public void setBorderDash(NativeCallback borderDashCallback) {
 		// resets the callback
-		setBorderDash((BorderDashCallback<ScaleContext>)null);
+		setBorderDash((BorderDashCallback<ScaleContext>) null);
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getAngleLines(), Property.BORDER_DASH, borderDashCallback);
 	}

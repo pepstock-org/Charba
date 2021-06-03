@@ -59,7 +59,7 @@ public final class CallbackProxy<T> {
 	 */
 	@JsProperty
 	public native T getCallback();
-	
+
 	/**
 	 * Sets <code>true</code> if the functional context must be ignored as argument to pass to callback.
 	 * 

@@ -252,7 +252,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	public boolean isLoop() {
 		return checkAndGet().isLoop();
 	}
-	
+
 	// -------------------
 	// CALLBACKS
 	// -------------------
@@ -316,7 +316,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	public void setDelay(NativeCallback delayCallback) {
 		checkAndGet().setDelay(delayCallback);
 	}
-	
+
 	/**
 	 * Returns the callback to loop the animations endlessly.
 	 * 
@@ -346,7 +346,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	public void setLoop(NativeCallback loopCallback) {
 		checkAndGet().setLoop(loopCallback);
 	}
-	
+
 	/**
 	 * Returns the callback to set the animation easing.
 	 * 
@@ -376,7 +376,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	public void setEasing(NativeCallback easingCallback) {
 		checkAndGet().setEasing(easingCallback);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

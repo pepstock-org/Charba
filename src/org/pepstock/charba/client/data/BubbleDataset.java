@@ -435,7 +435,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 			remove(Property.RADIUS);
 		}
 	}
-	
+
 	/**
 	 * Sets the radius callback.
 	 * 
@@ -474,7 +474,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 			remove(Property.HIT_RADIUS);
 		}
 	}
-	
+
 	/**
 	 * Sets the hit radius callback.
 	 * 
@@ -513,7 +513,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 			remove(Property.HOVER_RADIUS);
 		}
 	}
-	
+
 	/**
 	 * Sets the hover radius callback.
 	 * 
@@ -552,7 +552,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 			remove(Property.ROTATION);
 		}
 	}
-	
+
 	/**
 	 * Sets the rotation callback.
 	 * 
@@ -573,7 +573,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	public PointStyleCallback getPointStyleCallback() {
 		return pointStyleCallback;
 	}
-	
+
 	/**
 	 * Sets the point style callback.
 	 * 

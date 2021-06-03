@@ -104,7 +104,7 @@ public final class SegmentContext extends ChartContext {
 		// checks if the context types are chart or segment
 		return ContextType.CHART.equals(getType()) || ContextType.SEGMENT.equals(getType());
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

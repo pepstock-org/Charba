@@ -25,7 +25,7 @@ import org.pepstock.charba.client.enums.ModifierKey;
  *
  */
 interface IsDefaultPan extends IsDefaultConfigurationItem {
-	
+
 	/**
 	 * Returns <code>true</code> to enable pan element.
 	 * 

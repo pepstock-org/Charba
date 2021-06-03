@@ -439,7 +439,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 			remove(Property.CUBIC_INTERPOLATION_MODE);
 		}
 	}
-	
+
 	/**
 	 * Sets the border join style callback.
 	 * 

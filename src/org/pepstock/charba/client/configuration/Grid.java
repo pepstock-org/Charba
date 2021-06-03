@@ -597,7 +597,7 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public void setTickColor(NativeCallback tickColorCallback) {
 		// resets callback
-		setTickColor((ColorCallback<ScaleContext>)null);
+		setTickColor((ColorCallback<ScaleContext>) null);
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_COLOR, tickColorCallback);
 	}
@@ -630,7 +630,7 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public void setTickWidth(NativeCallback tickWidthCallback) {
 		// resets callback
-		setTickWidth((WidthCallback<ScaleContext>)null);
+		setTickWidth((WidthCallback<ScaleContext>) null);
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_WIDTH, tickWidthCallback);
 	}
@@ -655,7 +655,7 @@ public class Grid extends AbstractScaleLines {
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffsetCallback, tickBorderDashOffsetCallbackProxy);
 	}
-	
+
 	/**
 	 * Sets the tick border dash offset callback instance.
 	 * 
@@ -663,7 +663,7 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public void setTickBorderDashOffset(NativeCallback tickBorderDashOffsetCallback) {
 		// resets callback
-		setTickBorderDashOffset((BorderDashOffsetCallback<ScaleContext>)null);
+		setTickBorderDashOffset((BorderDashOffsetCallback<ScaleContext>) null);
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffsetCallback);
 	}

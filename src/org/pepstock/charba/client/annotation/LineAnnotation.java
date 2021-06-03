@@ -407,11 +407,11 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 */
 	public void setValue(NativeCallback valueCallback) {
 		// resets callback
-		setValue((ValueCallback)null);
+		setValue((ValueCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.VALUE, valueCallback);
 	}
-	
+
 	/**
 	 * Returns the callback called to set the data value at which the line draw should end.
 	 * 
@@ -430,7 +430,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	public void setEndValue(ValueCallback valueCallback) {
 		END_VALUE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, endValueCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the callback to set the data value at which the line draw should end.
 	 * 
@@ -438,7 +438,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 */
 	public void setEndValue(NativeCallback valueCallback) {
 		// resets callback
-		setEndValue((ValueCallback)null);
+		setEndValue((ValueCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.END_VALUE, valueCallback);
 	}

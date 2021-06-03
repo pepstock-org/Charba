@@ -109,7 +109,7 @@ interface HasBackgroundColor extends IsDefaultsBackgroundColorHandler {
 			getBackgroundColorHandler().setBackgroundColor(backgroundColorCallback);
 		}
 	}
-	
+
 	/**
 	 * Sets the callback to set the color of the background of annotation.
 	 * 

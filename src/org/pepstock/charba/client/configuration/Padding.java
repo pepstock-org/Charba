@@ -27,10 +27,10 @@ import org.pepstock.charba.client.options.IsScriptablePaddingProvider;
  *
  */
 public final class Padding extends AbstractDynamicConfiguration<IsPadding> implements IsPadding {
-	
+
 	// instance of scriptable padding configuration container
 	private final IsScriptablePaddingProvider<?> scriptablePaddingProvider;
-	
+
 	/**
 	 * Builds the object by a padding provider used to get the padding element for storing properties.
 	 * 
@@ -143,7 +143,7 @@ public final class Padding extends AbstractDynamicConfiguration<IsPadding> imple
 	public int getBottom() {
 		return checkAndGet().getBottom();
 	}
-	
+
 	/**
 	 * Invokes when any property of the padding is being set, in order to reset the {@link PaddingCallback} if exists
 	 */
@@ -152,7 +152,7 @@ public final class Padding extends AbstractDynamicConfiguration<IsPadding> imple
 		if (scriptablePaddingProvider != null && scriptablePaddingProvider.getPaddingCallback() != null) {
 			// if yes, resets it
 			// resets by native callback to avoid conflicts on generics
-			scriptablePaddingProvider.setPadding((NativeCallback)null);
+			scriptablePaddingProvider.setPadding((NativeCallback) null);
 		}
 	}
 

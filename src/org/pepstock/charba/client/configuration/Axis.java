@@ -608,7 +608,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, proxy);
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (CallbackProxy.Proxy)null);
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (CallbackProxy.Proxy) null);
 		}
 	}
 
@@ -626,7 +626,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, callBack);
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (NativeCallback)null);
+			getConfiguration().setCallback(new ConfigurationEnvelop<>(node), property, (NativeCallback) null);
 		}
 	}
 

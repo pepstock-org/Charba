@@ -120,7 +120,7 @@ public interface IsAnimation extends IsDefaultAnimation {
 	 * @param easingCallback the callback instance to use
 	 */
 	void setEasing(EasingCallback easingCallback);
-	
+
 	/**
 	 * Sets the animation easing by a callback.
 	 * 

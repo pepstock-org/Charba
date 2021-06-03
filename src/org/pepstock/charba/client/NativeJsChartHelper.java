@@ -87,10 +87,10 @@ final class NativeJsChartHelper {
 	static native void setTooltipActiveElements(Chart chart, ArrayObject elements);
 
 	/**
-	 * Returns the active tooltip  elements for the chart.
+	 * Returns the active tooltip elements for the chart.
 	 * 
 	 * @param chart chart instance, used to get the tooltip
-	 * @return the array of active tooltip  elements
+	 * @return the array of active tooltip elements
 	 */
 	static native ArrayObject getTooltipActiveElements(Chart chart);
 }

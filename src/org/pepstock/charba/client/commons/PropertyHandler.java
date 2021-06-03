@@ -257,7 +257,7 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (callback function) in the embedded JavaScript object at specific property.
 	 * 

@@ -33,7 +33,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @param <T> type of callback
  *
  */
-public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandler{
+public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandler {
 
 	// hash code property prefix.
 	private static final String HASHCODE_PROPERTY_SUFFIX = "CharbaCallbackKey";
@@ -206,7 +206,7 @@ public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandl
 			}
 		}
 	}
-	
+
 	/**
 	 * Called by {@link CallbackPropertyManager} when a chart is destroy in order to remove the scope (and then teh callback if needed) from cache.
 	 * 
@@ -332,7 +332,7 @@ public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandl
 		private Set<String> getScopes() {
 			return scopes;
 		}
-		
+
 		/**
 		 * Checks and returns <code>true</code> if there is a scope related to a chart instance.
 		 * 

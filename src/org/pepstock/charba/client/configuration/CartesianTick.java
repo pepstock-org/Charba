@@ -70,7 +70,7 @@ abstract class CartesianTick extends Tick {
 	public int getAutoSkipPadding() {
 		return getConfiguration().getAutoSkipPadding();
 	}
-	
+
 	/**
 	 * If <code>true</code>, the defined min and maximum values should be presented as ticks even if they are not "nice"
 	 * 

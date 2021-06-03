@@ -137,7 +137,7 @@ final class LinearTickOptionsHandler extends AxisContainer {
 	 */
 	void setCount(NativeCallback countCallback) {
 		// resets callback
-		setCount((CountCallback)null);
+		setCount((CountCallback) null);
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.COUNT, countCallback);
 	}
@@ -170,11 +170,11 @@ final class LinearTickOptionsHandler extends AxisContainer {
 	 */
 	void setMaxTicksLimit(NativeCallback maxTicksLimitCallback) {
 		// resets callback
-		setMaxTicksLimit((MaxTicksLimitCallback)null);
+		setMaxTicksLimit((MaxTicksLimitCallback) null);
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.MAX_TICKS_LIMIT, maxTicksLimitCallback);
 	}
-	
+
 	/**
 	 * Returns the precision callback instance.
 	 * 
@@ -195,7 +195,7 @@ final class LinearTickOptionsHandler extends AxisContainer {
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.PRECISION, precisionCallback, precisionCallbackProxy);
 	}
-	
+
 	/**
 	 * Sets the precision callback instance.
 	 * 
@@ -203,7 +203,7 @@ final class LinearTickOptionsHandler extends AxisContainer {
 	 */
 	void setPrecision(NativeCallback precisionCallback) {
 		// resets callback
-		setPrecision((PrecisionCallback)null);
+		setPrecision((PrecisionCallback) null);
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.PRECISION, precisionCallback);
 	}
@@ -236,7 +236,7 @@ final class LinearTickOptionsHandler extends AxisContainer {
 	 */
 	void setStepSize(NativeCallback stepSizeCallback) {
 		// resets callback
-		setStepSize((StepSizeCallback)null);
+		setStepSize((StepSizeCallback) null);
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.STEP_SIZE, stepSizeCallback);
 	}

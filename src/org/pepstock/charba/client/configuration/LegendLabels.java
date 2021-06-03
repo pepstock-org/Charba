@@ -67,8 +67,7 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 	}
 
 	/**
-	 * Java script FUNCTION callback called to filter legend items out of the legend.
-	 * Must be an interface with only 1 method.
+	 * Java script FUNCTION callback called to filter legend items out of the legend. Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */

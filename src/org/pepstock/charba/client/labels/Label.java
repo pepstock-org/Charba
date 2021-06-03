@@ -719,7 +719,7 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	public void setColor(ColorCallback<LabelsContext> colorCallback) {
 		COLOR_PROPERTY_HANDLER.setCallback(this, LabelsPlugin.ID, colorCallback, colorCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the font color callback.
 	 * 

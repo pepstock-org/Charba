@@ -221,8 +221,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// -------------------------------
 		this.borderSkippedCallbackProxy.setCallback(context -> onBorderSkipped(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderRadiusCallbackProxy
-				.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getBorderRadiusCallback(), BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
+		this.borderRadiusCallbackProxy.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getBorderRadiusCallback(), BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderWidthCallbackProxy.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getBorderWidthCallback(), BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// sets function to proxy callback in order to invoke the java interface
@@ -1006,7 +1005,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// checks if callback is consistent
 		borderItemsHandler.setBorderItemCallback(CommonProperty.HOVER_BORDER_WIDTH, Property.CHARBA_HOVER_BORDER_WIDTH_TYPE, hoverBorderWidthCallback, hoverBorderWidthCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the hover border width callback.
 	 * 
@@ -1039,7 +1038,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// checks if callback is consistent
 		borderItemsHandler.setBorderItemCallback(Property.BORDER_SKIPPED, borderSkippedCallback, borderSkippedCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the border skipped callback.
 	 * 
@@ -1072,7 +1071,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// checks if callback is consistent
 		borderItemsHandler.setBorderItemCallback(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadiusCallback, borderRadiusCallbackProxy.getProxy());
 	}
-	
+
 	/**
 	 * Sets the border radius callback.
 	 * 
@@ -1111,7 +1110,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			remove(Property.POINT_STYLE);
 		}
 	}
-	
+
 	/**
 	 * Sets the point style callback.
 	 * 
