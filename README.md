@@ -171,8 +171,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import CHART.JS LUXON adapter [version v1.0.0](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v1.0.0) on April 6th, 2021.
  * import LUXON library [version 1.27.0](https://github.com/moment/luxon/releases/tag/1.27.0) on May 15th, 2021.
  * import CHART.JS Datalabels plugin [version v2.0.0-rc.1](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v2.0.0-rc.1) on March 26th, 2021.
- * import CHART.JS Annotation plugin [version v1.0.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.0.1) on April 25th, 2021.
- * import CHART.JS Zoom plugin [version v1.0.0](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.0.0) on May 24th, 2021.
+ * import CHART.JS Annotation plugin [version v1.0.2](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.0.2) on June 3rd, 2021.
+ * import CHART.JS Zoom plugin [version v1.0.1](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.0.1) on June 3rd, 2021.
  * change dependency for Google Closure Compiler, [version v20210406](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20210505) on May 15th, 2021.
  * change dependency for [GWT Web toolkit](http://www.gwtproject.org/), [version 2.9.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_9_0) on June 1st, 2021.
 
