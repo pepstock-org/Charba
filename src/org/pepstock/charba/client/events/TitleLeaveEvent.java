@@ -19,24 +19,24 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.options.Title;
 
 /**
- * Event which is fired when the user clicks on the title of the chart.
+ * Event which is fired when the user leaves on the title of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TitleClickEvent extends AbstractTitleEvent {
+public final class TitleLeaveEvent extends AbstractTitleEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final EventType TYPE = EventType.create(TitleClickEvent.class);
+	public static final EventType TYPE = EventType.create(TitleLeaveEvent.class);
 
 	/**
-	 * Creates the event with title related to the click
+	 * Creates the event with title related to the leave
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param item title related to the click
+	 * @param item title related to the leave
 	 */
-	public TitleClickEvent(BaseNativeEvent nativeEvent, Title item) {
+	public TitleLeaveEvent(BaseNativeEvent nativeEvent, Title item) {
 		super(nativeEvent, TYPE, item);
 	}
 
@@ -48,11 +48,11 @@ public final class TitleClickEvent extends AbstractTitleEvent {
 	@Override
 	protected void dispatch(EventHandler handler) {
 		// checks if handler is a correct instance
-		if (handler instanceof TitleClickEventHandler) {
+		if (handler instanceof TitleLeaveEventHandler) {
 			// casts handler
-			TitleClickEventHandler myHandler = (TitleClickEventHandler) handler;
+			TitleLeaveEventHandler myHandler = (TitleLeaveEventHandler) handler;
 			// invokes
-			myHandler.onClick(this);
+			myHandler.onLeave(this);
 		}
 	}
 

@@ -15,45 +15,40 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.options.Title;
 
 /**
- * Event which is fired when the user clicks on the title of the chart.
+ * Event which is fired when the user action on the title of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TitleClickEvent extends AbstractTitleEvent {
+abstract class AbstractTitleEvent extends AbstractEvent {
+
+	// title item selected by clicking
+	private final Title item;
 
 	/**
-	 * Event type
-	 */
-	public static final EventType TYPE = EventType.create(TitleClickEvent.class);
-
-	/**
-	 * Creates the event with title related to the click
+	 * Creates the event with title related to the action
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param item title related to the click
+	 * @param type type of event
+	 * @param item title related to the action
 	 */
-	public TitleClickEvent(BaseNativeEvent nativeEvent, Title item) {
-		super(nativeEvent, TYPE, item);
+	AbstractTitleEvent(BaseNativeEvent nativeEvent, EventType type, Title item) {
+		super(nativeEvent, type);
+		// checks if argument is consistent
+		this.item = Checker.checkAndGetIfValid(item, "Title item argument");
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the title related to the click
 	 * 
-	 * @see org.pepstock.charba.client.events.Event#dispatch(org.pepstock.charba.client.events.EventHandler)
+	 * @return the title related to the click
 	 */
-	@Override
-	protected void dispatch(EventHandler handler) {
-		// checks if handler is a correct instance
-		if (handler instanceof TitleClickEventHandler) {
-			// casts handler
-			TitleClickEventHandler myHandler = (TitleClickEventHandler) handler;
-			// invokes
-			myHandler.onClick(this);
-		}
+	public final Title getItem() {
+		return item;
 	}
 
 }

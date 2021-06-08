@@ -139,6 +139,16 @@ At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/d
 
 In the project, it's also provided the [FindBugs](http://findbugs.sourceforge.net/) project to look for bugs.
 
+Going to next release
+---------------------
+
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
+
+### Features
+
+  * add `hover`, `enter` and `leave` axes events.  
+  * add `enter` and `leave` title events.  
+
 License
 -------
 

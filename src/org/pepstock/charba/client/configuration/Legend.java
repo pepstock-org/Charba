@@ -100,11 +100,11 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// fires the event
+		// sets function to proxy callback in order to invoke the java interface
 		this.clickCallbackProxy.setCallback((event, item, legend) -> getChart().fireEvent(new LegendClickEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
-		// fires the event
+		// sets function to proxy callback in order to invoke the java interface
 		this.hoverCallbackProxy.setCallback((event, item, legend) -> getChart().fireEvent(new LegendHoverEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
-		// fires the event
+		// sets function to proxy callback in order to invoke the java interface
 		this.leaveCallbackProxy.setCallback((event, item, legend) -> getChart().fireEvent(new LegendLeaveEvent(new ChartEventContext(new ConfigurationEnvelop<>(event)), LegendItem.FACTORY.create(item))));
 	}
 

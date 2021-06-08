@@ -158,7 +158,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// -------------------------------
 			// -- SET CALLBACKS to PROXIES ---
 			// -------------------------------
-			// fires the event
+			// sets function to proxy callback in order to invoke the java interface
 			this.canvasCallbackProxy.setCallback(BaseNativeEvent::preventDefault);
 			// adds the listener to disable canvas selection
 			// removes the default behavior

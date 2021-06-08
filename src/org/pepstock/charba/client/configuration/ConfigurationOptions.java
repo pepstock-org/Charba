@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
@@ -24,7 +22,6 @@ import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.IsColor;
@@ -39,27 +36,19 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
-import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.AddHandlerEvent;
-import org.pepstock.charba.client.events.AxisClickEvent;
 import org.pepstock.charba.client.events.ChartClickEvent;
 import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.ChartHoverEvent;
 import org.pepstock.charba.client.events.ChartResizeEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
-import org.pepstock.charba.client.events.EventType;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
-import org.pepstock.charba.client.events.TitleClickEvent;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.items.DatasetReference;
-import org.pepstock.charba.client.items.ScaleItem;
-import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.SizeItem;
-import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.ExtendedScale;
 
@@ -83,9 +72,6 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public abstract class ConfigurationOptions extends ConfigurationContainer<ExtendedOptions> implements ConfigurationElement, HasAnimation, IsEventProvider {
-
-	// list of click event handler types
-	private static final List<EventType> CHART_CLICK_TYPES = Collections.unmodifiableList(Arrays.asList(DatasetSelectionEvent.TYPE, ChartClickEvent.TYPE, TitleClickEvent.TYPE, AxisClickEvent.TYPE));
 
 	// instance to reset the callback
 	static final ConfigurationEnvelop<CallbackProxy.Proxy> RESET_CALLBACK_ENVELOP = new ConfigurationEnvelop<>(null, true);
@@ -141,8 +127,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private final CallbackProxy<ProxyChartEventCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover function
 	private final CallbackProxy<ProxyChartEventCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the click function for title and/or axis element
-	private final CallbackProxy<EventListenerCallback> titleAndAxisClickCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	private final IsDefaultScaledOptions defaultValues;
 
@@ -170,6 +154,10 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 
 	private final Font font;
 
+	// event axes handler
+	private final EventAxesHandler eventAxesHandler;
+	// event title handler
+	private final EventTitleHandler eventTitleHandler;
 	// amount of data set selection event handlers
 	private int onDatasetSelectionHandlers = 0;
 	// amount of click event handlers
@@ -178,10 +166,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private int onHoverHandlers = 0;
 	// amount of resize event handlers
 	private int onResizeHandlers = 0;
-	// amount of resize event handlers
-	private int onTitleClickHandlers = 0;
-	// amount of resize event handlers
-	private int onAxisClickHandlers = 0;
+	
 
 	/**
 	 * Builds the object storing the chart instance and defaults options.
@@ -196,6 +181,9 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		this.defaultValues = defaultValues;
 		// registers as event handler
 		IsEventProvider.register(chart, this);
+		// creates elements handler
+		this.eventAxesHandler = new EventAxesHandler(this);
+		this.eventTitleHandler = new EventTitleHandler(this);
 		// creates the animation configuration manager
 		this.animationContainer = new AnimationContainer(getChart(), this::getConfiguration);
 		// creates all sub elements
@@ -239,11 +227,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// fires the resize event on chart
 			getChart().fireEvent(new ChartResizeEvent(eventContext, new SizeItem(new ConfigurationEnvelop<>(size, true))));
 		});
-		// --------------------------------------------------
-		// -- SET CALLBACK for title and axis click event ---
-		// --------------------------------------------------
-		// fires the event
-		this.titleAndAxisClickCallbackProxy.setCallback(this::handleClickEventOnElements);
 	}
 
 	/**
@@ -700,7 +683,25 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @return <code>true</code> if there is any title click handler, otherwise <code>false</code>.
 	 */
 	public final boolean hasTitleClickHandlers() {
-		return onTitleClickHandlers > 0;
+		return eventTitleHandler.hasTitleClickHandlers();
+	}
+
+	/**
+	 * Returns <code>true</code> if there is any title enter handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any title enter handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasTitleEnterHandlers() {
+		return eventTitleHandler.hasTitleEnterHandlers();
+	}
+
+	/**
+	 * Returns <code>true</code> if there is any title leave handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any title leave handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasTitleLeaveHandlers() {
+		return eventTitleHandler.hasTitleLeaveHandlers();
 	}
 
 	/**
@@ -709,7 +710,34 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @return <code>true</code> if there is any axis click handler, otherwise <code>false</code>.
 	 */
 	public final boolean hasAxisClickHandlers() {
-		return onAxisClickHandlers > 0;
+		return eventAxesHandler.hasAxisClickHandlers();
+	}
+
+	/**
+	 * Returns <code>true</code> if there is any axis hover handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any axis hover handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasAxisHoverHandlers() {
+		return eventAxesHandler.hasAxisHoverHandlers();
+	}
+
+	/**
+	 * Returns <code>true</code> if there is any axis enter handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any axis enter handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasAxisEnterHandlers() {
+		return eventAxesHandler.hasAxisEnterHandlers();
+	}
+
+	/**
+	 * Returns <code>true</code> if there is any axis leave handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any axis leave handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasAxisLeaveHandlers() {
+		return eventAxesHandler.hasAxisLeaveHandlers();
 	}
 
 	/*
@@ -720,7 +748,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	@Override
 	public final void onAdd(AddHandlerEvent event) {
 		// checks if type of added event handler is data set selection or click
-		if (event.isRecognize(CHART_CLICK_TYPES)) {
+		if (event.isRecognize(ChartClickEvent.TYPE) || event.isRecognize(DatasetSelectionEvent.TYPE)) {
 			// if there is not any click event handler
 			if (onClickHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
@@ -732,20 +760,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			if (event.isRecognize(DatasetSelectionEvent.TYPE)) {
 				// increments handlers of data set selection
 				onDatasetSelectionHandlers++;
-			}
-			// check if a title click handler has been added
-			if (event.isRecognize(TitleClickEvent.TYPE)) {
-				// checks if is the first one in order to add the listeners to the canvas
-				checkAndManageCanvasListeners(true);
-				// increments handlers of title click
-				onTitleClickHandlers++;
-			}
-			// check if a axis click handler has been added
-			if (event.isRecognize(AxisClickEvent.TYPE)) {
-				// checks if is the first one in order to add the listeners to the canvas
-				checkAndManageCanvasListeners(true);
-				// increments handlers of axis click
-				onAxisClickHandlers++;
 			}
 		} else if (event.isRecognize(ChartHoverEvent.TYPE)) {
 			// if there is not any hover event handler
@@ -774,7 +788,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	@Override
 	public final void onRemove(RemoveHandlerEvent event) {
 		// checks if type of removed event handler is data set selection or click
-		if (event.isRecognize(CHART_CLICK_TYPES)) {
+		if (event.isRecognize(ChartClickEvent.TYPE) || event.isRecognize(DatasetSelectionEvent.TYPE)) {
 			// decrements the amount of handlers
 			onClickHandlers--;
 			// if there is not any handler
@@ -786,20 +800,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			if (event.isRecognize(DatasetSelectionEvent.TYPE)) {
 				// decrements handlers of data set selection
 				onDatasetSelectionHandlers--;
-			}
-			// check if a title click handler has been removed
-			if (event.isRecognize(TitleClickEvent.TYPE)) {
-				// decrements handlers of title click
-				onTitleClickHandlers--;
-				// checks if no handlers are defined
-				checkAndManageCanvasListeners(false);
-			}
-			// check if a axis click handler has been removed
-			if (event.isRecognize(AxisClickEvent.TYPE)) {
-				// decrements handlers of axis click
-				onAxisClickHandlers--;
-				// checks if no handlers are defined
-				checkAndManageCanvasListeners(false);
 			}
 		} else if (event.isRecognize(ChartHoverEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -879,28 +879,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Checks and manage the canvas event listeners for title and axes click events.<br>
-	 * If the argument is <code>true</code>, it will add the event listener if is the first adding, otherwise it will remove the listener if is the last handler.
-	 * 
-	 * @param isAdding if <code>true</code>, the handlers are added.
-	 */
-	private void checkAndManageCanvasListeners(boolean isAdding) {
-		// gets the amount of handlers already added
-		int amountOfHandlers = onAxisClickHandlers + onTitleClickHandlers;
-		// checks if total amount is 0 in order to apply the action on canvas
-		if (amountOfHandlers == 0) {
-			// checks if must be add
-			if (isAdding) {
-				// adds listener
-				getChart().getCanvas().addEventListener(BaseEventTypes.CLICK, titleAndAxisClickCallbackProxy.getProxy());
-			} else {
-				// removes listener
-				getChart().getCanvas().removeEventListener(BaseEventTypes.CLICK, titleAndAxisClickCallbackProxy.getProxy());
-			}
-		}
-	}
-
-	/**
 	 * Check if the click event on chart and manage it fire a CHARBA data set selection event.
 	 * 
 	 * @param event event generated on chart
@@ -912,69 +890,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		if (item != null && hasDatasetSelectionHandlers()) {
 			// fires the event for data set selection
 			getChart().fireEvent(new DatasetSelectionEvent(event, item));
-		}
-	}
-
-	/**
-	 * Check if the click event on title or axis of chart and manage it firing the event.
-	 * 
-	 * @param event event generated on chart
-	 */
-	private void handleClickEventOnElements(BaseNativeEvent event) {
-		// checks if the event is not title
-		if (handleTitleSelection(event)) {
-			// if here, is not consumed by title element
-			// then try on scale
-			handleScaleSelection(event);
-		}
-	}
-
-	/**
-	 * Check if the click event on chart and manage it fire a CHARBA title selection event.
-	 * 
-	 * @param event event generated on chart
-	 * @return <code>true</code> if the event is not consumed for title element
-	 */
-	private boolean handleTitleSelection(BaseNativeEvent event) {
-		// checks if title has been selected and there is any handler
-		if (hasTitleClickHandlers() && getChart().getNode().getTitle().isInside(event)) {
-			// fires the click event on the chart title
-			getChart().fireEvent(new TitleClickEvent(event, getChart().getNode().getOptions().getTitle()));
-			// if here, the click is on title
-			return false;
-		}
-		// if here the even is not consumed
-		// then it can be consumed for axis.
-		return true;
-	}
-
-	/**
-	 * Check if the click event on chart and manage it fire a CHARBA scale selection event.
-	 * 
-	 * @param event event generated on chart
-	 */
-	private void handleScaleSelection(BaseNativeEvent event) {
-		// checks if there is any handler, the event is not in chart area because if there is managed as chart click and the chart has got scales
-		if (hasAxisClickHandlers() && !getChart().getNode().getChartArea().isInside(event) && !ScaleType.NONE.equals(getChart().getType().scaleType())) {
-			// gets the scales
-			ScalesNode scales = getChart().getNode().getScales();
-			// checks if event is inside a scale box
-			if (scales.isInside(event)) {
-				// gets scale item
-				ScaleItem scaleItem = scales.getScaleIsInside(event);
-				// creates axis reference
-				Axis axis = null;
-				// gets charba id of scale
-				final int charbaIdOfScale = scaleItem.getCharbaId();
-				// checks if undefined
-				// means no axis configured in the chart
-				if (Undefined.isNot(charbaIdOfScale)) {
-					// gets the axis by charba id
-					axis = getAxisById(charbaIdOfScale);
-				}
-				// fires the click event on the chart scale
-				getChart().fireEvent(new AxisClickEvent(event, scaleItem, axis, scaleItem.getValueAtEvent(event)));
-			}
 		}
 	}
 

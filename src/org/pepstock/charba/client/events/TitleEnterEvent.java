@@ -19,24 +19,24 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.options.Title;
 
 /**
- * Event which is fired when the user clicks on the title of the chart.
+ * Event which is fired when the user enters on the title of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TitleClickEvent extends AbstractTitleEvent {
+public final class TitleEnterEvent extends AbstractTitleEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final EventType TYPE = EventType.create(TitleClickEvent.class);
+	public static final EventType TYPE = EventType.create(TitleEnterEvent.class);
 
 	/**
-	 * Creates the event with title related to the click
+	 * Creates the event with title related to the enter
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param item title related to the click
+	 * @param item title related to the enter
 	 */
-	public TitleClickEvent(BaseNativeEvent nativeEvent, Title item) {
+	public TitleEnterEvent(BaseNativeEvent nativeEvent, Title item) {
 		super(nativeEvent, TYPE, item);
 	}
 
@@ -48,11 +48,11 @@ public final class TitleClickEvent extends AbstractTitleEvent {
 	@Override
 	protected void dispatch(EventHandler handler) {
 		// checks if handler is a correct instance
-		if (handler instanceof TitleClickEventHandler) {
+		if (handler instanceof TitleEnterEventHandler) {
 			// casts handler
-			TitleClickEventHandler myHandler = (TitleClickEventHandler) handler;
+			TitleEnterEventHandler myHandler = (TitleEnterEventHandler) handler;
 			// invokes
-			myHandler.onClick(this);
+			myHandler.onEnter(this);
 		}
 	}
 

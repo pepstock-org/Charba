@@ -64,11 +64,11 @@ final class HtmlLegendCallbackProxy {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// fires the event
+		// sets function to proxy callback in order to invoke the java interface
 		clickCallbackProxy.setCallback(this::handleEvent);
-		// fires the event
+		// sets function to proxy callback in order to invoke the java interface
 		hoverCallbackProxy.setCallback(this::handleEvent);
-		// fires the event
+		// sets function to proxy callback in order to invoke the java interface
 		leaveCallbackProxy.setCallback(this::handleEvent);
 	}
 

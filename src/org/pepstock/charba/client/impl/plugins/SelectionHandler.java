@@ -102,13 +102,13 @@ final class SelectionHandler {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// fires the event
+		// sets function to proxy callback in order to invoke the java interface
 		this.mouseDownCallbackProxy.setCallback(this::onMouseDown);
-		// fires the event
+		// sets function to proxy callback in order to invoke the java interface
 		this.mouseMoveCallbackProxy.setCallback(this::onMouseMove);
-		// fires the event
+		// sets function to proxy callback in order to invoke the java interface
 		this.mouseUpCallbackProxy.setCallback(this::onMouseUp);
-		// fires the event
+		// sets function to proxy callback in order to invoke the java interface
 		this.mouseLeaveCallbackProxy.setCallback(this::onMouseLeave);
 		// stores original padding values
 		this.paddingTop = chart.getOptions().getLayout().getPadding().getTop();

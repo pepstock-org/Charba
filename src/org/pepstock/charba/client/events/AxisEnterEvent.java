@@ -18,42 +18,28 @@ package org.pepstock.charba.client.events;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.items.ScaleItem;
-import org.pepstock.charba.client.items.ScaleValueItem;
 
 /**
- * Event which is fired when the user clicks on the axis of the chart.
+ * Event which is fired when the user is entering on the axis of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AxisClickEvent extends AbstractAxisEvent {
+public final class AxisEnterEvent extends AbstractAxisEvent {
 
 	/**
 	 * Event type
 	 */
-	public static final EventType TYPE = EventType.create(AxisClickEvent.class);
-	// value selected on axis
-	private final ScaleValueItem value;
+	public static final EventType TYPE = EventType.create(AxisEnterEvent.class);
 
 	/**
-	 * Creates the event with axis related to the click
+	 * Creates the event with axis related to the enter
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param item scale item related to the click
+	 * @param item scale item related to the enter
 	 * @param axis axis configuration instance
-	 * @param value value instance selected on axis
 	 */
-	public AxisClickEvent(BaseNativeEvent nativeEvent, ScaleItem item, Axis axis, ScaleValueItem value) {
+	public AxisEnterEvent(BaseNativeEvent nativeEvent, ScaleItem item, Axis axis) {
 		super(nativeEvent, TYPE, item, axis);
-		this.value = value;
-	}
-
-	/**
-	 * Returns the scale value related to the click, or <code>null</code> if not consistent.
-	 * 
-	 * @return the scale value related to the click, or <code>null</code> if not consistent
-	 */
-	public ScaleValueItem getValue() {
-		return value;
 	}
 
 	/*
@@ -64,11 +50,11 @@ public final class AxisClickEvent extends AbstractAxisEvent {
 	@Override
 	protected void dispatch(EventHandler handler) {
 		// checks if handler is a correct instance
-		if (handler instanceof AxisClickEventHandler) {
+		if (handler instanceof AxisEnterEventHandler) {
 			// casts handler
-			AxisClickEventHandler myHandler = (AxisClickEventHandler) handler;
+			AxisEnterEventHandler myHandler = (AxisEnterEventHandler) handler;
 			// invokes
-			myHandler.onClick(this);
+			myHandler.onEnter(this);
 		}
 	}
 

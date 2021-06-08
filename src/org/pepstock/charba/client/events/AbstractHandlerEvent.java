@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.events;
 
-import java.util.List;
-
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -39,28 +37,6 @@ abstract class AbstractHandlerEvent extends Event {
 		// checks if argument is consistent
 		Key.checkIfValid(handlerType);
 		this.handlerType = handlerType;
-	}
-
-	/**
-	 * Returns <code>true</code> if the type of event handler is inside the list provided as argument, otherwise <code>false</code>.
-	 * 
-	 * @param types list of type to use checking if the type of event handler of event is in the list
-	 * @return <code>true</code> if the type of event handler is inside the list provided as argument, otherwise <code>false</code>
-	 */
-	public final boolean isRecognize(List<EventType> types) {
-		// checks if argument is consistent
-		if (types != null && !types.isEmpty()) {
-			// scans all types
-			for (EventType type : types) {
-				// if types is equals to the type of event
-				if (type.equals(handlerType)) {
-					return true;
-				}
-			}
-		}
-		// if here, the event handler type
-		// is not recognized
-		return false;
 	}
 
 	/**
