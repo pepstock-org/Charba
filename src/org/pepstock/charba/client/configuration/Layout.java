@@ -18,11 +18,6 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
-import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.options.IsScriptablePaddingProvider;
 
 /**
@@ -32,46 +27,6 @@ import org.pepstock.charba.client.options.IsScriptablePaddingProvider;
  *
  */
 public class Layout extends ConfigurationOptionsContainer implements IsScriptablePaddingProvider<ChartContext> {
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		PADDING("padding");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-	// callback proxy to invoke the padding function
-	private final CallbackProxy<ProxyNativeObjectCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	// instance of padding callback
-	private PaddingCallback<ChartContext> paddingCallback = null;
 
 	// instance of padding
 	private final Padding padding;
@@ -85,11 +40,6 @@ public class Layout extends ConfigurationOptionsContainer implements IsScriptabl
 		super(options);
 		// sets the padding object
 		this.padding = new Padding(this, () -> getConfiguration().getLayout().getPadding());
-		// -------------------------------
-		// -- SET CALLBACKS to PROXIES ---
-		// -------------------------------
-		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsPadding(getOptions().createContext(context), getPaddingCallback(), getOptions().getDefaultValues().getLayout().getPadding()).nativeObject());
 	}
 
 	/**
@@ -108,8 +58,7 @@ public class Layout extends ConfigurationOptionsContainer implements IsScriptabl
 	 */
 	@Override
 	public PaddingCallback<ChartContext> getPaddingCallback() {
-		return paddingCallback;
-
+		return getConfiguration().getLayout().getPaddingCallback();
 	}
 
 	/**
@@ -119,10 +68,7 @@ public class Layout extends ConfigurationOptionsContainer implements IsScriptabl
 	 */
 	@Override
 	public void setPadding(PaddingCallback<ChartContext> paddingCallback) {
-		// sets the callback
-		this.paddingCallback = paddingCallback;
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getLayout(), Property.PADDING, paddingCallback, paddingCallbackProxy);
+		getConfiguration().getLayout().setPadding(paddingCallback);
 	}
 
 	/**
@@ -132,10 +78,7 @@ public class Layout extends ConfigurationOptionsContainer implements IsScriptabl
 	 */
 	@Override
 	public void setPadding(NativeCallback paddingCallback) {
-		// resets callback
-		setPadding((PaddingCallback<ChartContext>) null);
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getLayout(), Property.PADDING, paddingCallback);
+		getConfiguration().getLayout().setPadding(paddingCallback);
 	}
 
 }

@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.callbacks.ChartContext;
+import org.pepstock.charba.client.callbacks.PaddingCallback;
+
 /**
  * Interface to define layout object defaults.
  * 
@@ -28,4 +31,11 @@ public interface IsDefaultLayout {
 	 * @return padding object defaults.
 	 */
 	IsDefaultPadding getPadding();
+	
+	/**
+	 * Returns the {@link PaddingCallback} if it has been set or <code>null</code>.
+	 * 
+	 * @return the {@link PaddingCallback} if it has been set or <code>null</code>.
+	 */
+	PaddingCallback<ChartContext> getPaddingCallback();
 }

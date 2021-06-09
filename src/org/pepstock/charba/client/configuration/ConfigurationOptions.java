@@ -877,7 +877,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	final ChartContext createContext(NativeObject context) {
 		return new ChartContext(context);
 	}
-
+	
 	/**
 	 * Check if the click event on chart and manage it fire a CHARBA data set selection event.
 	 * 
