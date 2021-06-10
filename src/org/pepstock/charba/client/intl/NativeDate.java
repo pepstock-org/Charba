@@ -55,6 +55,6 @@ final class NativeDate {
 		// checks if date is consistent
 		Checker.checkIfValid(date, "Date argument");
 		// creates new date
-		return new NativeDate((double) date.getTime());
+		return new NativeDate(date.getTime());
 	}
 }

@@ -211,13 +211,13 @@ class AnnotationMap extends NativeObjectContainer {
 		// -----------------------
 		// checks which type is in order to create the right annotation instance
 		if (AnnotationType.BOX.equals(type) && defaultOptions instanceof BoxAnnotation) {
-			return new BoxAnnotation(nativeObject, (BoxAnnotation) defaultOptions);
+			return new BoxAnnotation(nativeObject, defaultOptions);
 		} else if (AnnotationType.LINE.equals(type) && defaultOptions instanceof LineAnnotation) {
-			return new LineAnnotation(nativeObject, (LineAnnotation) defaultOptions);
+			return new LineAnnotation(nativeObject, defaultOptions);
 		} else if (AnnotationType.ELLIPSE.equals(type) && defaultOptions instanceof EllipseAnnotation) {
-			return new EllipseAnnotation(nativeObject, (EllipseAnnotation) defaultOptions);
+			return new EllipseAnnotation(nativeObject, defaultOptions);
 		} else if (AnnotationType.POINT.equals(type) && defaultOptions instanceof PointAnnotation) {
-			return new PointAnnotation(nativeObject, (PointAnnotation) defaultOptions);
+			return new PointAnnotation(nativeObject, defaultOptions);
 		}
 		// if here, the type is not consistent
 		// then returns null
