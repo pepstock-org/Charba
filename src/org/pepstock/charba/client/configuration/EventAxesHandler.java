@@ -195,36 +195,48 @@ final class EventAxesHandler extends AbstractEventElementHandler {
 			if (scaleItem != null) {
 				// gets axis instance
 				Axis axis = searchAxis(scaleItem);
-				// checks if axis was already hovered
-				if (hoveredAxis != null) {
-					// checks if is the same scale item
-					if (hoveredAxis.getId().equals(scaleItem.getId()) && hasAxisHoverHandlers()) {
-						// fires the hover event on the chart scale
-						getConfiguration().getChart().fireEvent(new AxisHoverEvent(event, scaleItem, axis));
-					} else if (!hoveredAxis.getId().equals(scaleItem.getId())) {
-						// leaves the stored one
-						handleLeaveEventOnElements(event);
-						// checks if events must be fired
-						if (hasAxisEnterHandlers()) {
-							// fires the enter event on the chart scale
-							getConfiguration().getChart().fireEvent(new AxisEnterEvent(event, scaleItem, axis));
-						}
-						// adds as hovered
-						hoveredAxis = scaleItem;
-					}
-				} else {
-					// checks if events must be fired
-					if (hasAxisEnterHandlers()) {
-						// fires the enter event on the chart scale
-						getConfiguration().getChart().fireEvent(new AxisEnterEvent(event, scaleItem, axis));
-					}
-					// adds as hovered
-					hoveredAxis = scaleItem;
-				}
+				// manages event on axis
+				manageHoverEventOnAxis(event, scaleItem, axis);
 			} else {
 				// checks and performs leave event
 				handleLeaveEventOnElements(event);
 			}
+		}
+	}
+
+	/**
+	 * Manages hover event on axis.
+	 * 
+	 * @param event hover event
+	 * @param scaleItem scale item instance
+	 * @param axis axis instance
+	 */
+	private void manageHoverEventOnAxis(BaseNativeEvent event, ScaleItem scaleItem, Axis axis) {
+		// checks if axis was already hovered
+		if (hoveredAxis != null) {
+			// checks if is the same scale item
+			if (hoveredAxis.getId().equals(scaleItem.getId()) && hasAxisHoverHandlers()) {
+				// fires the hover event on the chart scale
+				getConfiguration().getChart().fireEvent(new AxisHoverEvent(event, scaleItem, axis));
+			} else if (!hoveredAxis.getId().equals(scaleItem.getId())) {
+				// leaves the stored one
+				handleLeaveEventOnElements(event);
+				// checks if events must be fired
+				if (hasAxisEnterHandlers()) {
+					// fires the enter event on the chart scale
+					getConfiguration().getChart().fireEvent(new AxisEnterEvent(event, scaleItem, axis));
+				}
+				// adds as hovered
+				hoveredAxis = scaleItem;
+			}
+		} else {
+			// checks if events must be fired
+			if (hasAxisEnterHandlers()) {
+				// fires the enter event on the chart scale
+				getConfiguration().getChart().fireEvent(new AxisEnterEvent(event, scaleItem, axis));
+			}
+			// adds as hovered
+			hoveredAxis = scaleItem;
 		}
 	}
 
