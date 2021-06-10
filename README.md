@@ -10,7 +10,6 @@ Charba - J2CL and GWT Charts library based on CHART.JS
   <a href="https://github.com/chartjs/awesome"><img alt="Chart.js awesome" src="https://awesome.re/badge-flat2.svg"></a>
   <a href="https://pepstock-org.github.io/Charba/current/"><img alt="Last javadoc version" src="https://img.shields.io/badge/Javadoc-Last%20version-F27173.svg"></a>
   <a href="https://pepstock-org.github.io/Charba/next/"><img alt="Next javadoc version" src="https://img.shields.io/badge/Javadoc-Next%20version-F27173.svg"></a>
-  <a href="https://github.com/pepstock-org/Charba"><img alt="Coding is art and passion" src="https://img.shields.io/badge/coding%20is-art%20and%20passion-E760A4.svg"></a>
 </p>
 
 What's Charba
@@ -148,7 +147,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 
   * add `hover`, `enter` and `leave` axes events.
   * add `enter` and `leave` title events.
-  * enable `padding` callback at options level for layout.
+  * enable `padding` callback at options level for `Layout` element.
+  * enable all callbacks at options level for `Title` element.
 
 License
 -------

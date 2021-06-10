@@ -119,7 +119,6 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	@Override
 	public PaddingCallback<ChartContext> getPaddingCallback() {
 		return PADDING_PROPERTY_HANDLER.getCallback(this, getDefaultValues().getPaddingCallback());
-
 	}
 
 	/**

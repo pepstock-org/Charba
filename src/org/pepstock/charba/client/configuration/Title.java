@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.callbacks.ChartContext;
@@ -27,23 +26,13 @@ import org.pepstock.charba.client.callbacks.FullSizeCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.PositionCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.TextCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.ArrayString;
-import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.ElementAlign;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.IsScriptableFontProvider;
 import org.pepstock.charba.client.options.IsScriptablePaddingProvider;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * Configures the chart title which defines text to draw at the top of the chart.
@@ -52,81 +41,6 @@ import org.pepstock.charba.client.utils.Window;
  *
  */
 public class Title extends ConfigurationOptionsContainer implements IsScriptableFontProvider<ChartContext>, IsScriptablePaddingProvider<ChartContext> {
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		ALIGN("align"),
-		DISPLAY("display"),
-		COLOR("color"),
-		FONT("font"),
-		FULL_SIZE("fullSize"),
-		PADDING("padding"),
-		POSITION("position"),
-		TEXT("text");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-	// callback proxy to invoke the padding function
-	private final CallbackProxy<ProxyNativeObjectCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the font function
-	private final CallbackProxy<ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the display function
-	private final CallbackProxy<ProxyBooleanCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the color function
-	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the text function
-	private final CallbackProxy<ProxyObjectCallback> textCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the align function
-	private final CallbackProxy<ProxyStringCallback> alignCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the position function
-	private final CallbackProxy<ProxyStringCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the fullsize function
-	private final CallbackProxy<ProxyBooleanCallback> fullSizeCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	// instance of padding callback
-	private PaddingCallback<ChartContext> paddingCallback = null;
-	// instance of font callback
-	private FontCallback<ChartContext> fontCallback = null;
-	// instance of display callback
-	private DisplayCallback<ChartContext> displayCallback = null;
-	// instance of color callback
-	private ColorCallback<ChartContext> colorCallback = null;
-	// instance of text callback
-	private TextCallback<ChartContext> textCallback = null;
-	// instance of text callback
-	private ElementAlignCallback<ChartContext> alignCallback = null;
-	// instance of position callback
-	private PositionCallback<ChartContext> positionCallback = null;
-	// instance of display callback
-	private FullSizeCallback<ChartContext> fullSizeCallback = null;
 
 	// font instance
 	private final Font font;
@@ -143,25 +57,6 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 		// gets embedded font and padding
 		this.font = new Font(this, () -> getConfiguration().getTitle().getFont());
 		this.padding = new Padding(this, () -> getConfiguration().getTitle().getPadding());
-		// -------------------------------
-		// -- SET CALLBACKS to PROXIES ---
-		// -------------------------------
-		// sets function to proxy callback in order to invoke the java interface
-		this.displayCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getDisplayCallback(), getOptions().getDefaultValues().getTitle().isDisplay()));
-		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsPadding(getOptions().createContext(context), getPaddingCallback(), getOptions().getDefaultValues().getTitle().getPadding()).nativeObject());
-		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(getOptions().createContext(context), getFontCallback(), getOptions().getDefaultValues().getTitle().getFont()).nativeObject());
-		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(getOptions().createContext(context), getColorCallback(), getOptions().getDefaultValues().getTitle().getColorAsString()));
-		// sets function to proxy callback in order to invoke the java interface
-		this.textCallbackProxy.setCallback(context -> onText(getOptions().createContext(context)));
-		// sets function to proxy callback in order to invoke the java interface
-		this.positionCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getPositionCallback(), getOptions().getDefaultValues().getTitle().getPosition()).value());
-		// sets function to proxy callback in order to invoke the java interface
-		this.alignCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getAlignCallback(), getOptions().getDefaultValues().getTitle().getAlign()).value());
-		// sets function to proxy callback in order to invoke the java interface
-		this.fullSizeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getFullSizeCallback(), getOptions().getDefaultValues().getTitle().isFullSize()));
 	}
 
 	/**
@@ -197,9 +92,6 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param color font color.
 	 */
 	public void setColor(String color) {
-		// resets callback
-		setColor((ColorCallback<ChartContext>) null);
-		// stores the value
 		getConfiguration().getTitle().setColor(color);
 	}
 
@@ -227,9 +119,6 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param display if the title is shown.
 	 */
 	public void setDisplay(boolean display) {
-		// resets callback
-		setDisplay((DisplayCallback<ChartContext>) null);
-		// stores value
 		getConfiguration().getTitle().setDisplay(display);
 	}
 
@@ -248,9 +137,6 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
 	 */
 	public void setText(String... text) {
-		// resets callback
-		setText((TextCallback<ChartContext>) null);
-		// stores the value
 		getConfiguration().getTitle().setText(text);
 	}
 
@@ -269,9 +155,6 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param position the position of title.
 	 */
 	public void setPosition(Position position) {
-		// resets callback
-		setPosition((PositionCallback<ChartContext>) null);
-		// stores the value
 		getConfiguration().getTitle().setPosition(position);
 	}
 
@@ -290,9 +173,6 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param fullSize Marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
 	public void setFullSize(boolean fullSize) {
-		// resets callback
-		setFullSize((FullSizeCallback<ChartContext>) null);
-		// stores the value
 		getConfiguration().getTitle().setFullSize(fullSize);
 	}
 
@@ -311,9 +191,6 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param alignment alignment of the title.
 	 */
 	public void setAlign(ElementAlign alignment) {
-		// resets callback
-		setAlign((ElementAlignCallback<ChartContext>) null);
-		// stores the value
 		getConfiguration().getTitle().setAlign(alignment);
 	}
 
@@ -336,7 +213,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @return the callback instance to use
 	 */
 	public DisplayCallback<ChartContext> getDisplayCallback() {
-		return displayCallback;
+		return getConfiguration().getTitle().getDisplayCallback();
 	}
 
 	/**
@@ -345,10 +222,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param displayCallback the callback instance to use
 	 */
 	public void setDisplay(DisplayCallback<ChartContext> displayCallback) {
-		// sets the callback
-		this.displayCallback = displayCallback;
-		// stores and manages callback
-		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.DISPLAY, displayCallback, displayCallbackProxy);
+		getConfiguration().getTitle().setDisplay(displayCallback);
 	}
 
 	/**
@@ -357,10 +231,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param displayCallback the callback instance to use
 	 */
 	public void setDisplay(NativeCallback displayCallback) {
-		// resets the callback
-		setDisplay((DisplayCallback<ChartContext>) null);
-		// stores and manages callback
-		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.DISPLAY, displayCallback);
+		getConfiguration().getTitle().setDisplay(displayCallback);
 	}
 
 	/**
@@ -369,7 +240,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @return the callback instance to use
 	 */
 	public FullSizeCallback<ChartContext> getFullSizeCallback() {
-		return fullSizeCallback;
+		return getConfiguration().getTitle().getFullSizeCallback();
 	}
 
 	/**
@@ -378,10 +249,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param fullSizeCallback the callback instance to use
 	 */
 	public void setFullSize(FullSizeCallback<ChartContext> fullSizeCallback) {
-		// sets the callback
-		this.fullSizeCallback = fullSizeCallback;
-		// stores and manages callback
-		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.FULL_SIZE, fullSizeCallback, fullSizeCallbackProxy);
+		getConfiguration().getTitle().setFullSize(fullSizeCallback);
 	}
 
 	/**
@@ -390,10 +258,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param fullSizeCallback the callback instance to use
 	 */
 	public void setFullSize(NativeCallback fullSizeCallback) {
-		// resets the callback
-		setFullSize((FullSizeCallback<ChartContext>) null);
-		// stores and manages callback
-		getChart().getOptions().setCallback(getConfiguration().getTitle(), Property.FULL_SIZE, fullSizeCallback);
+		getConfiguration().getTitle().setFullSize(fullSizeCallback);
 	}
 
 	/**
@@ -403,7 +268,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	@Override
 	public PaddingCallback<ChartContext> getPaddingCallback() {
-		return paddingCallback;
+		return getConfiguration().getTitle().getPaddingCallback();
 	}
 
 	/**
@@ -413,10 +278,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	@Override
 	public void setPadding(PaddingCallback<ChartContext> paddingCallback) {
-		// sets the callback
-		this.paddingCallback = paddingCallback;
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.PADDING, paddingCallback, paddingCallbackProxy);
+		getConfiguration().getTitle().setPadding(paddingCallback);
 	}
 
 	/**
@@ -426,10 +288,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	@Override
 	public void setPadding(NativeCallback paddingCallback) {
-		// resets callback
-		setPadding((PaddingCallback<ChartContext>) null);
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.PADDING, paddingCallback);
+		getConfiguration().getTitle().setPadding(paddingCallback);
 	}
 
 	/**
@@ -439,7 +298,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	@Override
 	public FontCallback<ChartContext> getFontCallback() {
-		return fontCallback;
+		return getConfiguration().getTitle().getFontCallback();
 	}
 
 	/**
@@ -449,10 +308,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	@Override
 	public void setFont(FontCallback<ChartContext> fontCallback) {
-		// sets the callback
-		this.fontCallback = fontCallback;
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.FONT, fontCallback, fontCallbackProxy);
+		getConfiguration().getTitle().setFont(fontCallback);
 	}
 
 	/**
@@ -462,10 +318,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 */
 	@Override
 	public void setFont(NativeCallback fontCallback) {
-		// resets callback
-		setFont((FontCallback<ChartContext>) null);
-		// stores callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.FONT, fontCallback);
+		getConfiguration().getTitle().setFont(fontCallback);
 	}
 
 	/**
@@ -474,7 +327,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @return the color callback, if set, otherwise <code>null</code>.
 	 */
 	public ColorCallback<ChartContext> getColorCallback() {
-		return colorCallback;
+		return getConfiguration().getTitle().getColorCallback();
 	}
 
 	/**
@@ -483,10 +336,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param colorCallback the color callback to set
 	 */
 	public void setColor(ColorCallback<ChartContext> colorCallback) {
-		// sets the callback
-		this.colorCallback = colorCallback;
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.COLOR, colorCallback, colorCallbackProxy);
+		getConfiguration().getTitle().setColor(colorCallback);
 	}
 
 	/**
@@ -495,10 +345,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param colorCallback the color callback to set
 	 */
 	public void setColor(NativeCallback colorCallback) {
-		// resets callback
-		setColor((ColorCallback<ChartContext>) null);
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.COLOR, colorCallback);
+		getConfiguration().getTitle().setColor(colorCallback);
 	}
 
 	/**
@@ -507,7 +354,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @return the text callback, if set, otherwise <code>null</code>.
 	 */
 	public TextCallback<ChartContext> getTextCallback() {
-		return textCallback;
+		return getConfiguration().getTitle().getTextCallback();
 	}
 
 	/**
@@ -516,10 +363,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param textCallback the text callback to set
 	 */
 	public void setText(TextCallback<ChartContext> textCallback) {
-		// sets the callback
-		this.textCallback = textCallback;
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.TEXT, textCallback, textCallbackProxy);
+		getConfiguration().getTitle().setText(textCallback);
 	}
 
 	/**
@@ -528,10 +372,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param textCallback the text callback to set
 	 */
 	public void setText(NativeCallback textCallback) {
-		// resets callback
-		setText((TextCallback<ChartContext>) null);
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.TEXT, textCallback);
+		getConfiguration().getTitle().setText(textCallback);
 	}
 
 	/**
@@ -540,7 +381,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @return the position callback, if set, otherwise <code>null</code>.
 	 */
 	public PositionCallback<ChartContext> getPositionCallback() {
-		return positionCallback;
+		return getConfiguration().getTitle().getPositionCallback();
 	}
 
 	/**
@@ -549,10 +390,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param positionCallback the position callback to set
 	 */
 	public void setPosition(PositionCallback<ChartContext> positionCallback) {
-		// sets the callback
-		this.positionCallback = positionCallback;
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.POSITION, positionCallback, positionCallbackProxy);
+		getConfiguration().getTitle().setPosition(positionCallback);
 	}
 
 	/**
@@ -561,10 +399,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param positionCallback the position callback to set
 	 */
 	public void setPosition(NativeCallback positionCallback) {
-		// resets callback
-		setPosition((PositionCallback<ChartContext>) null);
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.POSITION, positionCallback);
+		getConfiguration().getTitle().setPosition(positionCallback);
 	}
 
 	/**
@@ -573,7 +408,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @return the align callback, if set, otherwise <code>null</code>.
 	 */
 	public ElementAlignCallback<ChartContext> getAlignCallback() {
-		return alignCallback;
+		return getConfiguration().getTitle().getAlignCallback();
 	}
 
 	/**
@@ -582,10 +417,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param alignCallback the align callback to set
 	 */
 	public void setAlign(ElementAlignCallback<ChartContext> alignCallback) {
-		// sets the callback
-		this.alignCallback = alignCallback;
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.ALIGN, alignCallback, alignCallbackProxy);
+		getConfiguration().getTitle().setAlign(alignCallback);
 	}
 
 	/**
@@ -594,49 +426,7 @@ public class Title extends ConfigurationOptionsContainer implements IsScriptable
 	 * @param alignCallback the align callback to set
 	 */
 	public void setAlign(NativeCallback alignCallback) {
-		// resets callback
-		setAlign((ElementAlignCallback<ChartContext>) null);
-		// stores and manages callback
-		getOptions().setCallback(getOptions().getConfiguration().getTitle(), Property.ALIGN, alignCallback);
-	}
-
-	// -----------------------
-	// INTERNALS for CALLBACKS
-	// -----------------------
-
-	/**
-	 * Returns an object as string or array of string when the callback has been activated.
-	 * 
-	 * @param context native object as context.
-	 * @return an object as string or array of string
-	 */
-	private Object onText(ChartContext context) {
-		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getTextCallback());
-		// checks if consistent
-		if (result instanceof String) {
-			// returns the string
-			return result;
-		} else if (result instanceof List<?>) {
-			// casts to list
-			List<?> list = (List<?>) result;
-			// checks if list is consistent
-			if (!list.isEmpty()) {
-				// creates the result array
-				final List<String> normalizedList = new LinkedList<>();
-				// scans list
-				for (Object textItem : list) {
-					// adds the string
-					// to normalized list
-					normalizedList.add(textItem.toString());
-				}
-				// checks if there is more than
-				// returns the arrays of string for text
-				return normalizedList.size() == 1 ? normalizedList.get(0) : ArrayString.fromOrNull(normalizedList);
-			}
-		}
-		// default result is undefined
-		return Window.undefined();
+		getConfiguration().getTitle().setAlign(alignCallback);
 	}
 
 }
