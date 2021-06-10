@@ -208,7 +208,7 @@ public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandl
 	}
 
 	/**
-	 * Called by {@link CallbackPropertyManager} when a chart is destroy in order to remove the scope (and then teh callback if needed) from cache.
+	 * Called by {@link CallbackPropertyManager} when a chart is destroy in order to remove the scope (and then the callback if needed) from cache.
 	 * 
 	 * @param scope the scope of the callback, is chart id
 	 * @return <code>true</code> if this callback handler has got 1 or more scope related to charts.
