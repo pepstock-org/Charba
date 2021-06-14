@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -27,8 +28,8 @@ import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
-import org.pepstock.charba.client.commons.ImmutableDate;
 import org.pepstock.charba.client.commons.Envelop;
+import org.pepstock.charba.client.commons.ImmutableDate;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -70,6 +71,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// override the key of parent
 		POSITION("position"),
 		OPTIONS("options"),
+		// chart
+		CHART("chart"),
 		// internal key to store a unique id
 		CHARBA_ID("charbaId");
 
@@ -132,6 +135,15 @@ public class ScaleItem extends BaseBoxNodeItem {
 		super(nativeObject);
 		// stores scale id
 		this.scaleId = null;
+	}
+	
+	/**
+	 * Returns the CHARBA chart instance.
+	 * 
+	 * @return the CHARBA chart instance
+	 */
+	public final IsChart getChart() {
+		return getNativeChart(Property.CHART).getChart();
 	}
 
 	/**
