@@ -16,15 +16,6 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.callbacks.ChartContext;
-import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
-import org.pepstock.charba.client.callbacks.ElementAlignCallback;
-import org.pepstock.charba.client.callbacks.FontCallback;
-import org.pepstock.charba.client.callbacks.FullSizeCallback;
-import org.pepstock.charba.client.callbacks.PaddingCallback;
-import org.pepstock.charba.client.callbacks.PositionCallback;
-import org.pepstock.charba.client.callbacks.TextCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
@@ -124,86 +115,6 @@ public final class DefaultTitle implements IsDefaultTitle {
 	@Override
 	public String getColorAsString() {
 		return Defaults.get().getGlobal().getColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getDisplayCallback()
-	 */
-	@Override
-	public DisplayCallback<ChartContext> getDisplayCallback() {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getFullSizeCallback()
-	 */
-	@Override
-	public FullSizeCallback<ChartContext> getFullSizeCallback() {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getPaddingCallback()
-	 */
-	@Override
-	public PaddingCallback<ChartContext> getPaddingCallback() {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getFontCallback()
-	 */
-	@Override
-	public FontCallback<ChartContext> getFontCallback() {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getColorCallback()
-	 */
-	@Override
-	public ColorCallback<ChartContext> getColorCallback() {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getTextCallback()
-	 */
-	@Override
-	public TextCallback<ChartContext> getTextCallback() {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getPositionCallback()
-	 */
-	@Override
-	public PositionCallback<ChartContext> getPositionCallback() {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTitle#getAlignCallback()
-	 */
-	@Override
-	public ElementAlignCallback<ChartContext> getAlignCallback() {
-		return null;
 	}
 
 	/**

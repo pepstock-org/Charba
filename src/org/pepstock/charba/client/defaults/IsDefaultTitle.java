@@ -15,16 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.callbacks.ChartContext;
-import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
-import org.pepstock.charba.client.callbacks.ElementAlignCallback;
-import org.pepstock.charba.client.callbacks.FontCallback;
-import org.pepstock.charba.client.callbacks.FullSizeCallback;
-import org.pepstock.charba.client.callbacks.PaddingCallback;
-import org.pepstock.charba.client.callbacks.PositionCallback;
-import org.pepstock.charba.client.callbacks.TextCallback;
-
 /**
  * Interface to define title object defaults.
  * 
@@ -45,61 +35,5 @@ public interface IsDefaultTitle extends IsDefaultPluginElement, IsDefaultFontCon
 	 * @return Marks that this box should take the full width/height of the canvas (moving other boxes)
 	 */
 	boolean isFullSize();
-	
-	/**
-	 * Returns the callback to set if the title is shown.
-	 * 
-	 * @return the callback instance to use
-	 */
-	DisplayCallback<ChartContext> getDisplayCallback();
-
-	/**
-	 * Returns the callback to set if marks that this box should take the full width/height of the canvas (moving other boxes).
-	 * 
-	 * @return the callback instance to use
-	 */
-	FullSizeCallback<ChartContext> getFullSizeCallback();
-
-	/**
-	 * Returns the padding callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the padding callback, if set, otherwise <code>null</code>.
-	 */
-	PaddingCallback<ChartContext> getPaddingCallback();
-
-	/**
-	 * Returns the font callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the font callback, if set, otherwise <code>null</code>.
-	 */
-	FontCallback<ChartContext> getFontCallback();
-
-	/**
-	 * Returns the color callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the color callback, if set, otherwise <code>null</code>.
-	 */
-	ColorCallback<ChartContext> getColorCallback();
-
-	/**
-	 * Returns the text callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the text callback, if set, otherwise <code>null</code>.
-	 */
-	TextCallback<ChartContext> getTextCallback();
-
-	/**
-	 * Returns the position callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the position callback, if set, otherwise <code>null</code>.
-	 */
-	PositionCallback<ChartContext> getPositionCallback();
-
-	/**
-	 * Returns the align callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the align callback, if set, otherwise <code>null</code>.
-	 */
-	ElementAlignCallback<ChartContext> getAlignCallback();
 
 }

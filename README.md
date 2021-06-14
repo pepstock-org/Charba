@@ -147,8 +147,6 @@ Here you can find the list of enhancements and updates available on `master` bra
 
   * add `hover`, `enter` and `leave` axes events.
   * add `enter` and `leave` title events.
-  * enable `padding` callback at options level for `Layout` element.
-  * enable all callbacks at options level for `Title` element.
 
 License
 -------

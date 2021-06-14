@@ -33,7 +33,7 @@ abstract class AbstractDefaultPluginElement<T extends IsDefaultPluginElement> ex
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		ALIGN("align"),
 		DISPLAY("display"),

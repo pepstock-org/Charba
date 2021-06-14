@@ -31,7 +31,7 @@ final class FontContainer extends PropertyHandler<IsDefaultFontContainer> {
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		COLOR("color"),
 		FONT("font");
