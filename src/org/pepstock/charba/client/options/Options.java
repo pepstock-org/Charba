@@ -17,7 +17,6 @@ package org.pepstock.charba.client.options;
 
 import java.util.List;
 
-import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -914,14 +913,4 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		return spanGapHandler.isSpanGaps();
 	}
 	
-	/**
-	 * Creates a chart context for callback on configuration.
-	 * 
-	 * @param context native context, passed by CHART.JS
-	 * @return a chart context for callback on configuration
-	 */
-	final ChartContext createContext(NativeObject context) {
-		return new ChartContext(context);
-	}
-
 }

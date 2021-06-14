@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.callbacks.ChartContext;
-import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.defaults.IsDefaultLayout;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 
@@ -47,15 +45,4 @@ public final class DefaultLayout implements IsDefaultLayout {
 	public IsDefaultPadding getPadding() {
 		return padding;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultLayout#getPaddingCallback()
-	 */
-	@Override
-	public PaddingCallback<ChartContext> getPaddingCallback() {
-		return null;
-	}
-
 }

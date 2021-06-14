@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.callbacks.ChartContext;
-import org.pepstock.charba.client.callbacks.PaddingCallback;
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.defaults.IsDefaultLayout;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 
@@ -28,7 +25,6 @@ import org.pepstock.charba.client.defaults.IsDefaultPadding;
  */
 public final class DefaultChartLayout implements IsDefaultLayout {
 
-	private final IsDefaultLayout layout;
 	private final DefaultChartPadding padding;
 
 	/**
@@ -37,9 +33,7 @@ public final class DefaultChartLayout implements IsDefaultLayout {
 	 * @param layout layout option element instance.
 	 */
 	public DefaultChartLayout(IsDefaultLayout layout) {
-		// checks if layout is consistent
-		this.layout = Checker.checkAndGetIfValid(layout, "Layout argument");
-		padding = new DefaultChartPadding(this.layout.getPadding());
+		padding = new DefaultChartPadding(layout.getPadding());
 	}
 
 	/*
@@ -51,15 +45,4 @@ public final class DefaultChartLayout implements IsDefaultLayout {
 	public IsDefaultPadding getPadding() {
 		return padding;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultLayout#getPaddingCallback()
-	 */
-	@Override
-	public PaddingCallback<ChartContext> getPaddingCallback() {
-		return layout.getPaddingCallback();
-	}
-
 }
