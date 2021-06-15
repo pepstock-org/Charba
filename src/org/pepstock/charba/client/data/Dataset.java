@@ -476,6 +476,10 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// remove from gradients
 		getGradientsContainer().removeObjects(key);
 	}
+	
+	// -----------------
+	// CALLBACK
+	// -----------------
 
 	/**
 	 * Returns the background color callback, if set, otherwise <code>null</code>.
