@@ -46,6 +46,16 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 		return getConfiguration().getElements().getPoint();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractConfigurationElement#getDefaultElement()
+	 */
+	@Override
+	protected IsDefaultPoint getDefaultElement() {
+		return getOptions().getDefaultValues().getElements().getPoint();
+	}
+
 	/**
 	 * Sets the radius of the point shape.<br>
 	 * If set to 0, the point is not rendered.

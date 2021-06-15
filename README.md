@@ -147,6 +147,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 
   * add `hover`, `enter` and `leave` axes events.
   * add `enter` and `leave` title events.
+  * add `backgroundColor`, `borderColor` and `borderWidth` scriptable options for all `Elements` configuration (bar, line, point, arc).
+  * add `hoverBackgroundColor`, `hoverBorderColor` and `hoverBorderWidth` scriptable options for all `Elements` configuration (bar, line, point, arc).
 
 License
 -------

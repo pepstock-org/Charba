@@ -50,6 +50,16 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		return getConfiguration().getElements().getLine();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractConfigurationElement#getDefaultElement()
+	 */
+	@Override
+	protected IsDefaultLine getDefaultElement() {
+		return getOptions().getDefaultValues().getElements().getLine();
+	}
+
 	/**
 	 * Returns the B\u00e9zier curve tension (0 for no B\u00e9zier curves).
 	 * 

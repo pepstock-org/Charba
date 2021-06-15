@@ -47,6 +47,16 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 		return getConfiguration().getElements().getBar();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractConfigurationElement#getDefaultElement()
+	 */
+	@Override
+	protected IsDefaultBar getDefaultElement() {
+		return getOptions().getDefaultValues().getElements().getBar();
+	}
+
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 

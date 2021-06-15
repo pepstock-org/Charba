@@ -45,6 +45,16 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		return getConfiguration().getElements().getArc();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractConfigurationElement#getDefaultElement()
+	 */
+	@Override
+	protected IsDefaultArc getDefaultElement() {
+		return getOptions().getDefaultValues().getElements().getArc();
+	}
+
 	/**
 	 * Sets the property to set the border alignment on chart datasets.
 	 * 
