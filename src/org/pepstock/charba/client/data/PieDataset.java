@@ -54,11 +54,11 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	// callback proxy to invoke the border radius function
 	private final CallbackProxy<ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// border offset callback instance
+	// offset callback instance
 	private OffsetCallback<DatasetContext> offsetCallback = null;
 	// hover offset callback instance
 	private OffsetCallback<DatasetContext> hoverOffsetCallback = null;
-	// border skipped callback instance
+	// border radius callback instance
 	private BorderRadiusCallback borderRadiusCallback = null;
 
 	/**
