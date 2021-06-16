@@ -88,7 +88,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private final CallbackProxy<ProxyNativeObjectCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
 	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the point style function
+	// callback proxy to invoke the base function
 	private final CallbackProxy<ProxyDoubleCallback> baseCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border skipped callback instance
@@ -219,6 +219,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
+		// sets function to proxy callback in order to invoke the java interface
 		this.borderSkippedCallbackProxy.setCallback(context -> onBorderSkipped(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderRadiusCallbackProxy.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getBorderRadiusCallback(), BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getBorderRadius()));
