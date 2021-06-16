@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
@@ -555,6 +556,33 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 		setHoverBorderWidth((WidthCallback<DatasetContext>) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.HOVER_BORDER_WIDTH, hoverBorderWidthCallback);
+	}
+	
+	// ------------------------
+	// INTERNALS for CALLBACKS
+	// ------------------------
+
+	/**
+	 * Returns an integer when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param callback {@link BorderRadiusCallback} instance to be invoked
+	 * @param defaultValue default value for this border radius.
+	 * @return a object property value, as integer
+	 */
+	final int onBorderRadius(DatasetContext context, BorderRadiusCallback callback, int defaultValue) {
+		// gets value
+		Object value = ScriptableUtils.getOptionValue(context, callback);
+		// checks if is an integer
+		if (value instanceof Number) {
+			// casts to number
+			Number number = (Number) value;
+			// returns the integer
+			return number.intValue();
+		}
+		// if here, the value of callback is not consistent
+		// returns the default value
+		return defaultValue;
 	}
 
 }

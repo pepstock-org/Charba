@@ -114,7 +114,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverOffsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHoverOffsetCallback(), getDefaultElement().getOffset()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderRadiusCallbackProxy.setCallback(context -> onBorderRadius(createContext(context), getDefaultElement().getBorderRadius()));
+		this.borderRadiusCallbackProxy.setCallback(context -> onBorderRadius(createContext(context), getBorderRadiusCallback(), getDefaultElement().getBorderRadius()));
 		// gets value and calls the callback
 		this.borderAlignCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(createContext(context), getBorderAlignCallback(), getDefaultElement().getBorderAlign()).value());
 		// sets function to proxy callback in order to invoke the java interface
@@ -435,29 +435,4 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		getChart().getOptions().setCallback(getElement(), Property.ANGLE, angleCallback);
 	}
 
-	// ------------------------
-	// INTERNALS for CALLBACKS
-	// ------------------------
-
-	/**
-	 * Returns an integer when the callback has been activated.
-	 * 
-	 * @param context native object as context.
-	 * @param defaultValue default value for this border radius.
-	 * @return a object property value, as integer
-	 */
-	private int onBorderRadius(DatasetContext context, int defaultValue) {
-		// gets value
-		Object value = ScriptableUtils.getOptionValue(context, getBorderRadiusCallback());
-		// checks if is an integer
-		if (value instanceof Number) {
-			// casts to number
-			Number number = (Number) value;
-			// returns the integer
-			return number.intValue();
-		}
-		// if here, the value of callback is not consistent
-		// returns the default value
-		return defaultValue;
-	}
 }
