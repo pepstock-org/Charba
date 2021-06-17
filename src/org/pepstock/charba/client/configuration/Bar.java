@@ -20,6 +20,7 @@ import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.EnableBorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
@@ -48,7 +49,8 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 		BORDER_SKIPPED("borderSkipped"),
 		BORDER_RADIUS("borderRadius"),
 		ENABLE_BORDER_RADIUS("enableBorderRadius"),
-		HOVER_BORDER_RADIUS("hoverBorderRadius");
+		HOVER_BORDER_RADIUS("hoverBorderRadius"),
+		POINT_STYLE("pointStyle");
 
 		// name value of property
 		private final String value;
@@ -85,6 +87,8 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	private final CallbackProxy<ProxyIntegerCallback> hoverBorderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the enable border radius function
 	private final CallbackProxy<ProxyBooleanCallback> enableBorderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point style function
+	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
@@ -94,6 +98,8 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	private BorderRadiusCallback hoverBorderRadiusCallback = null;
 	// borderWidth callback instance
 	private EnableBorderRadiusCallback enableBorderRadiusCallback = null;
+	// point style callback instance
+	private PointStyleCallback pointStyleCallback = null;
 
 	/**
 	 * Builds the object with options, root and setting the bar element.
@@ -113,6 +119,8 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 		this.borderSkippedCallbackProxy.setCallback(context -> onBorderSkipped(createContext(context), getDefaultElement().getBorderSkipped()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.enableBorderRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getEnableBorderRadiusCallback(), getDefaultElement().isEnableBorderRadius()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context), getPointStyleCallback(), getDefaultElement().getPointStyle()));
 	}
 
 	/*
@@ -216,6 +224,9 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
+		// resets callback
+		setPointStyle((PointStyleCallback)null);
+		// stores value
 		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
 	}
 
@@ -225,6 +236,9 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(Img pointStyle) {
+		// resets callback
+		setPointStyle((PointStyleCallback)null);
+		// stores value
 		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
 	}
 
@@ -410,6 +424,39 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 		setEnableBorderRadius((EnableBorderRadiusCallback) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.ENABLE_BORDER_RADIUS, enableBorderRadiusCallback);
+	}
+	
+	/**
+	 * Returns the point style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point style callback, if set, otherwise <code>null</code>.
+	 */
+	public PointStyleCallback getPointStyleCallback() {
+		return pointStyleCallback;
+	}
+
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(PointStyleCallback pointStyleCallback) {
+		// sets the callback
+		this.pointStyleCallback = pointStyleCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.POINT_STYLE, pointStyleCallback, pointStyleCallbackProxy);
+	}
+
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(NativeCallback pointStyleCallback) {
+		// resets callback
+		setPointStyle((PointStyleCallback) null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.POINT_STYLE, pointStyleCallback);
 	}
 	
 	// ----------------------

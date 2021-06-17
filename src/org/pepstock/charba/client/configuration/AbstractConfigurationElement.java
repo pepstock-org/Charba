@@ -19,16 +19,20 @@ import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
+import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.options.AbstractElement;
 
 /**
@@ -584,5 +588,32 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 		// returns the default value
 		return defaultValue;
 	}
+	
+	/**
+	 * Returns a {@link PointStyle} or {@link Img} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param callback callback instance to be invoked
+	 * @param defaultValue default point style value
+	 * @return a object property value, as {@link PointStyle} or {@link Img}
+	 */
+	final Object onPointStyle(DatasetContext context, PointStyleCallback callback, PointStyle defaultValue) {
+		// gets value
+		Object result = ScriptableUtils.getOptionValue(context, callback);
+		// checks result
+		if (result instanceof PointStyle) {
+			// is point style instance
+			PointStyle style = (PointStyle) result;
+			return style.value();
+		} else if (result instanceof Img) {
+			// is image element instance
+			return result;
+		}
+		// checks defaults
+		Checker.checkIfValid(defaultValue, "Default point style argument");
+		// default result
+		return defaultValue.value();
+	}
+
 
 }
