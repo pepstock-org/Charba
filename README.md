@@ -150,8 +150,9 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `backgroundColor`, `borderColor` and `borderWidth` scriptable options to all `Elements` configuration (bar, line, point, arc).
   * add `hoverBackgroundColor`, `hoverBorderColor` and `hoverBorderWidth` scriptable options to all `Elements` configuration (bar, line, point, arc).
   * add `borderAlign`, `borderRadius`, `angle`, `offset` and `hoverOffset` scriptable options to `Arc` configuration.
-  * add `borderSkipped`, `borderRadius`, `hoverBorderRadius` and `enableBorderRadius` scriptable options to `Bar` configuration.
-  
+  * add `pointStyle`, `borderSkipped`, `borderRadius`, `hoverBorderRadius` and `enableBorderRadius` scriptable options to `Bar` configuration.
+  * add `borderCapStyle`, `borderDash`, `borderDashOffset`, `borderJoinStyle`, `fill` and `cubicInterpolationMode` scriptable options to `Line` configuration.
+    
 License
 -------
 
