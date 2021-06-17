@@ -15,6 +15,17 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.PointStyleCallback;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
@@ -26,6 +37,63 @@ import org.pepstock.charba.client.options.AbstractElement;
  * @author Andrea "Stock" Stocchero
  */
 public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
+	
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		RADIUS("radius"),
+		HIT_RADIUS("hitRadius"),
+		HOVER_RADIUS("hoverRadius"),
+		POINT_STYLE("pointStyle"),
+		ROTATION("rotation");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+	
+	// callback proxy to invoke the point radius function
+	private final CallbackProxy<ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point hit radius function
+	private final CallbackProxy<ProxyDoubleCallback> hitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point hover radius function
+	private final CallbackProxy<ProxyDoubleCallback> hoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point rotation function
+	private final CallbackProxy<ProxyDoubleCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point style function
+	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// point radius callback instance
+	private RadiusCallback<DatasetContext> radiusCallback = null;
+	// point hit radius callback instance
+	private RadiusCallback<DatasetContext> hitRadiusCallback = null;
+	// point hover radius callback instance
+	private RadiusCallback<DatasetContext> hoverRadiusCallback = null;
+	// point rotation callback instance
+	private RotationCallback<DatasetContext> rotationCallback = null;
+	// point style callback instance
+	private PointStyleCallback pointStyleCallback = null;
 
 	/**
 	 * Builds the object storing the root options element.
@@ -34,6 +102,19 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 */
 	Point(ConfigurationOptions options) {
 		super(options);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// sets function to proxy callback in order to invoke the java interface
+		this.radiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getRadiusCallback(), getDefaultElement().getRadius()).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.hitRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHitRadiusCallback(), getDefaultElement().getHitRadius()).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.hoverRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHoverRadiusCallback(), getDefaultElement().getHoverRadius()).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.rotationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getRotationCallback(), getDefaultElement().getRotation()).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context), getPointStyleCallback(), getDefaultElement().getPointStyle()));
 	}
 
 	/*
@@ -63,6 +144,9 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 * @param radius array of the radius of the point shape.
 	 */
 	public void setRadius(double radius) {
+		// resets callback
+		setRadius((RadiusCallback<DatasetContext>) null);
+		// stores value
 		getConfiguration().getElements().getPoint().setRadius(radius);
 	}
 
@@ -81,6 +165,9 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
+		// resets callback
+		setPointStyle((PointStyleCallback) null);
+		// stores value
 		getConfiguration().getElements().getPoint().setPointStyle(pointStyle);
 	}
 
@@ -90,6 +177,9 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(Img pointStyle) {
+		// resets callback
+		setPointStyle((PointStyleCallback) null);
+		// stores value
 		getConfiguration().getElements().getPoint().setPointStyle(pointStyle);
 	}
 
@@ -126,6 +216,9 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 * @param hitRadius the pixel size of the non-displayed point.
 	 */
 	public void setHitRadius(double hitRadius) {
+		// resets callback
+		setHitRadius((RadiusCallback<DatasetContext>) null);
+		// stores value
 		getConfiguration().getElements().getPoint().setHitRadius(hitRadius);
 	}
 
@@ -144,6 +237,9 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 * @param hoverRadius the radius of the point when hovered.
 	 */
 	public void setHoverRadius(double hoverRadius) {
+		// resets callback
+		setHoverRadius((RadiusCallback<DatasetContext>) null);
+		// stores value
 		getConfiguration().getElements().getPoint().setHoverRadius(hoverRadius);
 	}
 
@@ -162,6 +258,9 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 * @param rotation the point rotation (in degrees).
 	 */
 	public void setRotation(double rotation) {
+		// resets callback
+		setRotation((RotationCallback<DatasetContext>) null);
+		// stores value
 		getConfiguration().getElements().getPoint().setRotation(rotation);
 	}
 
@@ -173,5 +272,173 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	public double getRotation() {
 		return getConfiguration().getElements().getPoint().getRotation();
 	}
+	
+	// ---------------
+	// CALLBACKS
+	// ---------------
+	
+	/**
+	 * Returns the point style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point style callback, if set, otherwise <code>null</code>.
+	 */
+	public PointStyleCallback getPointStyleCallback() {
+		return pointStyleCallback;
+	}
 
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(PointStyleCallback pointStyleCallback) {
+		// sets the callback
+		this.pointStyleCallback = pointStyleCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.POINT_STYLE, pointStyleCallback, pointStyleCallbackProxy);
+	}
+
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(NativeCallback pointStyleCallback) {
+		// resets callback
+		setPointStyle((PointStyleCallback) null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.POINT_STYLE, pointStyleCallback);
+	}
+	
+	/**
+	 * Returns the radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the radius callback, if set, otherwise <code>null</code>.
+	 */
+	public RadiusCallback<DatasetContext> getRadiusCallback() {
+		return radiusCallback;
+	}
+
+	/**
+	 * Sets the radius callback.
+	 * 
+	 * @param radiusCallback the radius callback.
+	 */
+	public void setRadius(RadiusCallback<DatasetContext> radiusCallback) {
+		// sets the callback
+		this.radiusCallback = radiusCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.RADIUS, radiusCallback, radiusCallbackProxy);
+	}
+
+	/**
+	 * Sets the radius callback.
+	 * 
+	 * @param radiusCallback the radius callback.
+	 */
+	public void setRadius(NativeCallback radiusCallback) {
+		// resets callback
+		setRadius((RadiusCallback<DatasetContext>) null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.RADIUS, radiusCallback);
+	}
+	
+	/**
+	 * Returns the hit radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the hit radius callback, if set, otherwise <code>null</code>.
+	 */
+	public RadiusCallback<DatasetContext> getHitRadiusCallback() {
+		return hitRadiusCallback;
+	}
+
+	/**
+	 * Sets the hit radius callback.
+	 * 
+	 * @param hitRadiusCallback the hit radius callback.
+	 */
+	public void setHitRadius(RadiusCallback<DatasetContext> hitRadiusCallback) {
+		// sets the callback
+		this.hitRadiusCallback = hitRadiusCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.HIT_RADIUS, hitRadiusCallback, hitRadiusCallbackProxy);
+	}
+
+	/**
+	 * Sets the hit radius callback.
+	 * 
+	 * @param hitRadiusCallback the hit radius callback.
+	 */
+	public void setHitRadius(NativeCallback hitRadiusCallback) {
+		// resets callback
+		setHitRadius((RadiusCallback<DatasetContext>) null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.HIT_RADIUS, hitRadiusCallback);
+	}
+	
+	/**
+	 * Returns the hover radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the hover radius callback, if set, otherwise <code>null</code>.
+	 */
+	public RadiusCallback<DatasetContext> getHoverRadiusCallback() {
+		return hoverRadiusCallback;
+	}
+
+	/**
+	 * Sets the hover radius callback.
+	 * 
+	 * @param hoverRadiusCallback the hover radius callback.
+	 */
+	public void setHoverRadius(RadiusCallback<DatasetContext> hoverRadiusCallback) {
+		// sets the callback
+		this.hoverRadiusCallback = hoverRadiusCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.HOVER_RADIUS, hoverRadiusCallback, hoverRadiusCallbackProxy);
+	}
+
+	/**
+	 * Sets the hover radius callback.
+	 * 
+	 * @param hoverRadiusCallback the hover radius callback.
+	 */
+	public void setHoverRadius(NativeCallback hoverRadiusCallback) {
+		// resets callback
+		setHoverRadius((RadiusCallback<DatasetContext>) null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.HOVER_RADIUS, hoverRadiusCallback);
+	}
+
+	/**
+	 * Returns the rotation callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the rotation callback, if set, otherwise <code>null</code>.
+	 */
+	public RotationCallback<DatasetContext> getRotationCallback() {
+		return rotationCallback;
+	}
+
+	/**
+	 * Sets the rotation callback.
+	 * 
+	 * @param rotationCallback the rotation callback.
+	 */
+	public void setRotation(RotationCallback<DatasetContext> rotationCallback) {
+		// sets the callback
+		this.rotationCallback = rotationCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.ROTATION, rotationCallback, rotationCallbackProxy);
+	}
+
+	/**
+	 * Sets the rotation callback.
+	 * 
+	 * @param rotationCallback the rotation callback.
+	 */
+	public void setRotation(NativeCallback rotationCallback) {
+		// resets callback
+		setRotation((RotationCallback<DatasetContext>) null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.ROTATION, rotationCallback);
+	}
 }
