@@ -38,14 +38,14 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 */
 	private enum Property implements Key
 	{
-		TENSION("tension"),
 		BORDER_CAP_STYLE("borderCapStyle"),
 		BORDER_DASH("borderDash"),
 		BORDER_DASH_OFFSET("borderDashOffset"),
 		BORDER_JOIN_STYLE("borderJoinStyle"),
 		CUBIC_INTERPOLATION_MODE("cubicInterpolationMode"),
 		CAP_BEZIER_POINTS("capBezierPoints"),
-		STEPPED("stepped");
+		STEPPED("stepped"),
+		TENSION("tension");
 
 		// name value of property
 		private final String value;
