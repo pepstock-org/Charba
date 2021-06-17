@@ -73,27 +73,27 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 
 	}
 	
-	// callback proxy to invoke the point radius function
+	// callback proxy to invoke the radius function
 	private final CallbackProxy<ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the point hit radius function
+	// callback proxy to invoke the hit radius function
 	private final CallbackProxy<ProxyDoubleCallback> hitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the point hover radius function
+	// callback proxy to invoke the hover radius function
 	private final CallbackProxy<ProxyDoubleCallback> hoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the point rotation function
+	// callback proxy to invoke the rotation function
 	private final CallbackProxy<ProxyDoubleCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
 	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// point radius callback instance
-	private RadiusCallback<DatasetContext> radiusCallback = null;
-	// point hit radius callback instance
-	private RadiusCallback<DatasetContext> hitRadiusCallback = null;
-	// point hover radius callback instance
-	private RadiusCallback<DatasetContext> hoverRadiusCallback = null;
-	// point rotation callback instance
-	private RotationCallback<DatasetContext> rotationCallback = null;
 	// point style callback instance
 	private PointStyleCallback pointStyleCallback = null;
+	// rotation callback instance
+	private RotationCallback<DatasetContext> rotationCallback = null;
+	// hover radius callback instance
+	private RadiusCallback<DatasetContext> hoverRadiusCallback = null;
+	// hit radius callback instance
+	private RadiusCallback<DatasetContext> hitRadiusCallback = null;
+	// radius callback instance
+	private RadiusCallback<DatasetContext> radiusCallback = null;
 
 	/**
 	 * Builds the object storing the root options element.
