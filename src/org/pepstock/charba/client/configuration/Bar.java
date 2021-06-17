@@ -141,6 +141,9 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * @param borderSkipped to set <code>false</code> as border skipped. If set <code>true</code>, is ignored
 	 */
 	public void setBorderSkipped(boolean borderSkipped) {
+		// resets callback
+		setBorderSkipped((BorderSkippedCallback)null);
+		// stores value
 		getConfiguration().getElements().getBar().setBorderSkipped(borderSkipped);
 	}
 
@@ -150,6 +153,9 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * @param borderSkipped the edge to skip drawing the border for.
 	 */
 	public void setBorderSkipped(BorderSkipped borderSkipped) {
+		// resets callback
+		setBorderSkipped((BorderSkippedCallback)null);
+		// stores value
 		getConfiguration().getElements().getBar().setBorderSkipped(borderSkipped);
 	}
 
@@ -168,6 +174,9 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * @param borderRadius the bar border radius (in pixels).
 	 */
 	public void setBorderRadius(int borderRadius) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback)null);
+		// stores value
 		getConfiguration().getElements().getBar().setBorderRadius(borderRadius);
 	}
 
@@ -186,6 +195,9 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * @param borderRadius the bar border radius (in pixels) when hovered.
 	 */
 	public void setHoverBorderRadius(int borderRadius) {
+		// resets callback
+		setHoverBorderRadius((BorderRadiusCallback)null);
+		// stores value
 		getConfiguration().getElements().getBar().setHoverBorderRadius(borderRadius);
 	}
 
@@ -249,6 +261,9 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * @param enableBorderRadius if <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack
 	 */
 	public void setEnableBorderRadius(boolean enableBorderRadius) {
+		// resets callback
+		setEnableBorderRadius((EnableBorderRadiusCallback)null);
+		// stores value
 		getConfiguration().getElements().getBar().setEnableBorderRadius(enableBorderRadius);
 	}
 
