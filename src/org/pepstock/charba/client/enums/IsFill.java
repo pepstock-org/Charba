@@ -43,6 +43,34 @@ public interface IsFill extends Key {
 	static boolean isValid(IsFill fill) {
 		return Key.isValid(fill) && fill.getMode() != null;
 	}
+	
+	/**
+	 * Transforms a {@link IsFill} instance in the a CHART.JS FILL property accepted value.
+	 * 
+	 * @param fill fill instance to transform
+	 * @return a CHART.JS FILL property accepted value
+	 */
+	static Object transform(IsFill fill) {
+		// checks if is no fill
+		if (Fill.FALSE.equals(fill)) {
+			// boolean
+			return false;
+		} else if (Fill.isPredefined(fill)) {
+			// is predefined
+			// returns the string
+			return fill.value();
+		} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(fill.getMode())) {
+			// is absolute
+			// returns the integer
+			return fill.getValueAsInt();
+		} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(fill.getMode())) {
+			// is relative
+			// returns the string
+			return fill.getValue();
+		}
+		// default result
+		return false;
+	}
 
 	/**
 	 * Returns the type of filling.

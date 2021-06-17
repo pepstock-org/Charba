@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.Fill;
-import org.pepstock.charba.client.enums.FillingMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.options.FillHandler;
 
@@ -164,50 +163,22 @@ final class LiningDatasetFillHandler extends FillHandler {
 			// cast to integer
 			Integer resultAsInt = (Integer) result;
 			// returns the absolute fill, passing thru a isFill
-			return transformFill(Fill.getFill(resultAsInt));
+			return IsFill.transform(Fill.getFill(resultAsInt));
 		} else if (result instanceof IsFill) {
 			// is a IsFill instance
 			// cast to IsFill
 			IsFill resultAsFill = (IsFill) result;
 			// returns the fill
-			return transformFill(resultAsFill);
+			return IsFill.transform(resultAsFill);
 		} else if (result != null) {
 			// use the string representation of object
 			// as relative fill
 			// returns the relative fill, passing thru a isFill
-			return transformFill(Fill.getFill(result.toString()));
+			return IsFill.transform(Fill.getFill(result.toString()));
 		}
 		// if here, result is null
 		// then returns default
-		return transformFill(getDefaultValues());
-	}
-
-	/**
-	 * Transforms a {@link IsFill} instance in the a CHART.JS FILL property accepted value.
-	 * 
-	 * @param fill fill instance to transform
-	 * @return a CHART.JS FILL property accepted value
-	 */
-	private Object transformFill(IsFill fill) {
-		// checks if is no fill
-		if (Fill.FALSE.equals(fill)) {
-			// boolean
-			return false;
-		} else if (Fill.isPredefined(fill)) {
-			// is predefined
-			// returns the string
-			return fill.value();
-		} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(fill.getMode())) {
-			// is absolute
-			// returns the integer
-			return fill.getValueAsInt();
-		} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(fill.getMode())) {
-			// is relative
-			// returns the string
-			return fill.getValue();
-		}
-		// default result
-		return false;
+		return IsFill.transform(getDefaultValues());
 	}
 
 }
