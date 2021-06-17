@@ -83,31 +83,31 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// callback proxy to invoke the background color function
-	private final CallbackProxy<ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the border color function
-	private final CallbackProxy<ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the border width function
-	private final CallbackProxy<ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover background color function
 	private final CallbackProxy<ProxyObjectCallback> hoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border color function
 	private final CallbackProxy<ProxyObjectCallback> hoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border width function
 	private final CallbackProxy<ProxyIntegerCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the background color function
+	private final CallbackProxy<ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border color function
+	private final CallbackProxy<ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border width function
+	private final CallbackProxy<ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// hover background color callback instance
-	private ColorCallback<DatasetContext> hoverBackgroundColorCallback = null;
-	// hover border color callback instance
-	private ColorCallback<DatasetContext> hoverBorderColorCallback = null;
-	// hover borderWidth callback instance
-	private WidthCallback<DatasetContext> hoverBorderWidthCallback = null;
 	// background color callback instance
 	private ColorCallback<DatasetContext> backgroundColorCallback = null;
 	// border color callback instance
 	private ColorCallback<DatasetContext> borderColorCallback = null;
 	// borderWidth callback instance
 	private WidthCallback<DatasetContext> borderWidthCallback = null;
+	// hover background color callback instance
+	private ColorCallback<DatasetContext> hoverBackgroundColorCallback = null;
+	// hover border color callback instance
+	private ColorCallback<DatasetContext> hoverBorderColorCallback = null;
+	// hover borderWidth callback instance
+	private WidthCallback<DatasetContext> hoverBorderWidthCallback = null;
 
 	/***
 	 * Builds the object with options.

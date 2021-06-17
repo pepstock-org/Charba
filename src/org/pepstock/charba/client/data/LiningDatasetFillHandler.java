@@ -24,7 +24,6 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.options.FillHandler;
 
@@ -153,28 +152,12 @@ final class LiningDatasetFillHandler extends FillHandler {
 	private Object onFill(DatasetContext context) {
 		// gets value
 		Object result = ScriptableUtils.getOptionValue(context, getFillCallback());
-		// checks result type
-		if (result instanceof Boolean) {
-			// is boolean
-			// cast to boolean
-			return result;
-		} else if (result instanceof Integer) {
-			// is integer and then wants an absolute fill
-			// cast to integer
-			Integer resultAsInt = (Integer) result;
-			// returns the absolute fill, passing thru a isFill
-			return IsFill.transform(Fill.getFill(resultAsInt));
-		} else if (result instanceof IsFill) {
-			// is a IsFill instance
-			// cast to IsFill
-			IsFill resultAsFill = (IsFill) result;
-			// returns the fill
-			return IsFill.transform(resultAsFill);
-		} else if (result != null) {
-			// use the string representation of object
-			// as relative fill
-			// returns the relative fill, passing thru a isFill
-			return IsFill.transform(Fill.getFill(result.toString()));
+		// checks and transforms result
+		Object transformed = IsFill.transform(result);
+		// checks if consistent
+		if (transformed != null) {
+			// returns the result
+			return transformed;
 		}
 		// if here, result is null
 		// then returns default

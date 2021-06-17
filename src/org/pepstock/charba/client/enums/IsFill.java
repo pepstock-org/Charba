@@ -45,12 +45,46 @@ public interface IsFill extends Key {
 	}
 	
 	/**
+	 * Returns a object which can be a boolean, integer, string or {@link IsFill} when the callback has been activated.
+	 * 
+	 * @param object object to be normalized.
+	 * @return a object property value
+	 */
+	static Object transform(Object object) {
+		// checks result type
+		if (object instanceof Boolean) {
+			// is boolean
+			// cast to boolean
+			return object;
+		} else if (object instanceof Integer) {
+			// is integer and then wants an absolute fill
+			// cast to integer
+			Integer resultAsInt = (Integer) object;
+			// returns the absolute fill, passing thru a isFill
+			return IsFill.toObject(Fill.getFill(resultAsInt));
+		} else if (object instanceof IsFill) {
+			// is a IsFill instance
+			// cast to IsFill
+			IsFill resultAsFill = (IsFill) object;
+			// returns the fill
+			return IsFill.toObject(resultAsFill);
+		} else if (object != null) {
+			// use the string representation of object
+			// as relative fill
+			// returns the relative fill, passing thru a isFill
+			return IsFill.toObject(Fill.getFill(object.toString()));
+		}
+		// if here, result is null
+		return null;
+	}
+	
+	/**
 	 * Transforms a {@link IsFill} instance in the a CHART.JS FILL property accepted value.
 	 * 
 	 * @param fill fill instance to transform
 	 * @return a CHART.JS FILL property accepted value
 	 */
-	static Object transform(IsFill fill) {
+	static Object toObject(IsFill fill) {
 		// checks if is no fill
 		if (Fill.FALSE.equals(fill)) {
 			// boolean

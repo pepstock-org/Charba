@@ -39,7 +39,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultLine;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
-import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.options.AbstractElement;
@@ -674,32 +673,16 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	 */
 	private Object onFill(DatasetContext context, FillCallback callback, IsFill defaultValue) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getFillCallback());
-		// checks result type
-		if (result instanceof Boolean) {
-			// is boolean
-			// cast to boolean
-			return result;
-		} else if (result instanceof Integer) {
-			// is integer and then wants an absolute fill
-			// cast to integer
-			Integer resultAsInt = (Integer) result;
-			// returns the absolute fill, passing thru a isFill
-			return IsFill.transform(Fill.getFill(resultAsInt));
-		} else if (result instanceof IsFill) {
-			// is a IsFill instance
-			// cast to IsFill
-			IsFill resultAsFill = (IsFill) result;
-			// returns the fill
-			return IsFill.transform(resultAsFill);
-		} else if (result != null) {
-			// use the string representation of object
-			// as relative fill
-			// returns the relative fill, passing thru a isFill
-			return IsFill.transform(Fill.getFill(result.toString()));
+		Object result = ScriptableUtils.getOptionValue(context, callback);
+		// checks and transforms result
+		Object transformed = IsFill.transform(result);
+		// checks if consistent
+		if (transformed != null) {
+			// returns the result
+			return transformed;
 		}
 		// if here, result is null
 		// then checks and returns default
-		return IsFill.transform(Checker.checkAndGetIfValid(defaultValue, "Default fill argument"));
+		return IsFill.toObject(Checker.checkAndGetIfValid(defaultValue, "Default fill argument"));
 	}
 }
