@@ -104,6 +104,10 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// default for hidden property
 	protected static final boolean DEFAULT_HIDDEN = false;
+	// default for parsing property
+	protected static final boolean DEFAULT_PARSING = true;
+	// default for normalized property
+	protected static final boolean DEFAULT_NORMALIZED = false;
 	// factory to create data points
 	static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
 	// factory to create time series items
@@ -116,10 +120,10 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	private final PatternsContainer patternsContainer;
 	// gradients container
 	private final GradientsContainer gradientsContainer;
-	// cache for gradients created by callbacks
+	// cache for gradients created by callback
 	// K = key + data set locator, V = gradient
 	private final Map<String, Gradient> callbackGradientsContainer = new HashMap<>();
-	// cache for patterns created by callbacks
+	// cache for patterns created by callback
 	// K = key + data set locator, V = pattern
 	private final Map<String, Pattern> callbackPatternsContainer = new HashMap<>();
 	// default options values
@@ -224,6 +228,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		DATA("data"),
 		TYPE("type"),
 		HIDDEN("hidden"),
+		PARSING("parsing"),
+		NORMALIZED("normalized"),
 		// internal key to store a unique id
 		CHARBA_ID("charbaId"),
 		// internal key to store patterns and gradients
@@ -476,7 +482,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// remove from gradients
 		getGradientsContainer().removeObjects(key);
 	}
-	
+
 	// -----------------
 	// CALLBACK
 	// -----------------
@@ -833,6 +839,70 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	public final boolean isHidden() {
 		return getValue(InternalProperty.HIDDEN, DEFAULT_HIDDEN);
+	}
+
+	/**
+	 * Sets how to parse the data set.<br>
+	 * The parsing can be disabled by specifying parsing: <code>false</code> at chart options or data set.<br>
+	 * If parsing is disabled, data must be sorted and in the formats the associated chart type and scales use internally.
+	 * 
+	 * @param parsing how to parse the data set.<br>
+	 *            The parsing can be disabled by specifying parsing: <code>false</code> at chart options or data set.<br>
+	 *            If parsing is disabled, data must be sorted and in the formats the associated chart type and scales use internally.
+	 */
+	public void setParsing(boolean parsing) {
+		// checks if is disabling parsing
+		if (!parsing) {
+			// then sets it
+			setValue(InternalProperty.PARSING, parsing);
+		} else {
+			// if is not parsing
+			// remove the property
+			remove(InternalProperty.PARSING);
+		}
+	}
+
+	/**
+	 * Returns how to parse the data set.<br>
+	 * The parsing can be disabled by specifying parsing: <code>false</code> at chart options or data set.<br>
+	 * If parsing is disabled, data must be sorted and in the formats the associated chart type and scales use internally.
+	 * 
+	 * @return how to parse the data set.<br>
+	 *         The parsing can be disabled by specifying parsing: <code>false</code> at chart options or data set.<br>
+	 *         If parsing is disabled, data must be sorted and in the formats the associated chart type and scales use internally.
+	 */
+	public boolean isParsing() {
+		return getValue(InternalProperty.PARSING, DEFAULT_PARSING);
+	}
+
+	/**
+	 * Sets if you provide data with indices that are unique, sorted, and consistent across data sets and provide the normalized: <code>true</code> option to let CHARBA know that
+	 * you have done so.
+	 * 
+	 * @param normalized if you provide data with indices that are unique, sorted, and consistent across data sets and provide the normalized: <code>true</code> option to let
+	 *            CHARBA know that you have done so.
+	 */
+	public void setNormalized(boolean normalized) {
+		// checks if is activating normalized
+		if (normalized) {
+			// then sets it
+			setValue(InternalProperty.NORMALIZED, normalized);
+		} else {
+			// if is not normalized
+			// remove the property
+			remove(InternalProperty.NORMALIZED);
+		}
+	}
+
+	/**
+	 * Returns if you provide data with indices that are unique, sorted, and consistent across data sets and provide the normalized: <code>true</code> option to let CHARBA know
+	 * that you have done so.
+	 * 
+	 * @return if you provide data with indices that are unique, sorted, and consistent across data sets and provide the normalized: <code>true</code> option to let CHARBA know
+	 *         that you have done so.
+	 */
+	public boolean isNormalized() {
+		return getValue(InternalProperty.NORMALIZED, DEFAULT_NORMALIZED);
 	}
 
 	/**

@@ -153,6 +153,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `pointStyle`, `borderSkipped`, `borderRadius`, `hoverBorderRadius` and `enableBorderRadius` scriptable options to `Bar` configuration.
   * add `borderCapStyle`, `borderDash`, `borderDashOffset`, `borderJoinStyle`, `fill` and `cubicInterpolationMode` scriptable options to `Line` configuration.
   * add `radius`, `hitRadius`, `hoverRadius`, `pointStyle` and `rotation` scriptable options to `Point` configuration.
+  * add `parsing` and `normalized` options to `Dataset` configuration.
     
 License
 -------
