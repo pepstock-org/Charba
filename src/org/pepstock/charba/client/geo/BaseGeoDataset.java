@@ -28,12 +28,7 @@ import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * FIXME
- * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
- * The minimum value of data is 0 (see {@link BaseGeoDataset#MINIMUM_VALUE}).<br>
- * The dataset will have always 2 data and setting the color of data, the first is the value color and the second is the empty one.<br>
- * To set the data, is mandatory to use {@link BaseGeoDataset#setValue(double)}) method.
- * 
+ * This is the base data set implementation for GEO charts.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -43,14 +38,14 @@ abstract class BaseGeoDataset extends Dataset implements HasCommonOptions{
 	private static final String INVALID_SET_DATA_CALL = "'setData' method is not invokable by a choropleth chart. Use 'setValues' method";
 	// exception string message for getting data
 	private static final String INVALID_GET_DATA_CALL = "'getData' method is not invokable by a choropleth chart. Use 'getValues' method";
-	// geo data factory instance
+	// GEO data factory instance
 	private static final GeoDataFactory FACTORY = new GeoDataFactory();
 	
 	
 	/**
-	 * Creates a dataset setting the maximum value of dataset and defaults value and the controller type in case of extension
+	 * Creates a data set.
 	 * 
-	 * @param type controller type related to the dataset
+	 * @param type controller type related to the data set
 	 * @param defaultValues default options
 	 */
 	BaseGeoDataset(ControllerType type, IsDefaultOptions defaultValues) {
@@ -132,7 +127,7 @@ abstract class BaseGeoDataset extends Dataset implements HasCommonOptions{
 	public List<GeoData> getValues(boolean binding) {
 		// checks if there is the data
 		if (has(CommonProperty.DATA)) {
-			// returns data ojects
+			// returns data objects
 			ArrayObject array = getArrayValue(CommonProperty.DATA);
 			// returns array
 			return ArrayListHelper.list(array, FACTORY);

@@ -20,7 +20,7 @@ import org.pepstock.charba.client.configuration.ScalesOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
- * Specific options for choropleth chart.
+ * Base options for GEO charts.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -38,9 +38,9 @@ abstract class GeoOptions extends ScalesOptions implements HasCommonOptions {
 	}
 
 	/**
-	 * Returns the getMapper() implementation for the specific chart type.
+	 * Returns the mapper implementation for the specific chart type.
 	 * 
-	 * @return the getMapper() implementation for the specific chart type
+	 * @return the mapper implementation for the specific chart type
 	 */
 	abstract GeoOptionsMapper getMapper();
 

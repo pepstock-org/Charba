@@ -22,13 +22,14 @@ import org.pepstock.charba.client.geo.enums.ClipMap;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
- * FIXME
+ * Common options mapper for GEO charts.<br>
+ * It can re-map the options of CHART.JS chart in order to add additional properties maintaining the same structure.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 abstract class GeoOptionsMapper extends AbstractNode {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -60,18 +61,25 @@ abstract class GeoOptionsMapper extends AbstractNode {
 
 	}
 
+	// options instance related to this mapper
 	private final ExtendedOptions options;
-	
+	// internal scale options instance to re-map the scales
 	private final InternalGeoScales scales;
 
+	/**
+	 * Creates the object with native object to map java script properties and the related {@link ExtendedOptions}, re-mapped by this class.
+	 * 
+	 * @param options options instance, related and re-mapped by this class.
+	 * @param nativeObject native object to map java script properties
+	 */
 	GeoOptionsMapper(ExtendedOptions options, NativeObject nativeObject) {
 		super(nativeObject);
 		// stores options
 		this.options = options;
-		// gets and stores scales
+		// gets and stores internal scales
 		this.scales = new InternalGeoScales(this, Property.SCALES, getValue(Property.SCALES));
 	}
-	
+
 	/**
 	 * Returns the default clip map for the specific chart type.
 	 * 
@@ -87,7 +95,7 @@ abstract class GeoOptionsMapper extends AbstractNode {
 	final ExtendedOptions getConfiguration() {
 		return options;
 	}
-	
+
 	/**
 	 * Returns the internal scales.
 	 * 

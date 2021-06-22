@@ -18,6 +18,8 @@ package org.pepstock.charba.client.geo;
 import org.pepstock.charba.client.configuration.Axis;
 
 /**
+ * Extends the scales configuration in order to avoid some operation, not consistent on GEO chart, and expose additional objects to configure GEO charts, as scales.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -52,7 +54,7 @@ public final class ChoroplethScales extends GeoScales {
 	public ColorScale getColorScale() {
 		return getScales().getColorScale();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -60,7 +62,6 @@ public final class ChoroplethScales extends GeoScales {
 	 */
 	@Override
 	public final void setAxes(Axis... axes) {
-		// do nothing
 		throw new UnsupportedOperationException(INVALID_SET_AXES_CALL);
 	}
 

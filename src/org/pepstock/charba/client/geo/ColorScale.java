@@ -19,11 +19,18 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.geo.callbacks.InterpolateCallback;
 import org.pepstock.charba.client.geo.enums.Interpolate;
 
+import jsinterop.annotations.JsFunction;
+
 /**
+ * Provides the elements, as colored legend, which can provide the how the values are distributed on map.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -38,6 +45,27 @@ public final class ColorScale extends LegendScale {
 	 * Default quantize options, <b>{@value DEFAULT_QUANTIZE}</b>.
 	 */
 	public static final int DEFAULT_QUANTIZE = 0;
+	
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+
+	/**
+	 * Java script FUNCTION callback called to interpolate the color on GEO chart.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyInterpolateCallback {
+
+		/**
+		 * Method of function to be called to interpolate the color on GEO chart.
+		 * 
+		 * @param normalizedValue normalized value of the data set.
+		 * @return a color as a string
+		 */
+		String call(double normalizedValue);
+	}
 	
 	/**
 	 * Name of properties of native object for projection scale.
@@ -71,9 +99,32 @@ public final class ColorScale extends LegendScale {
 		}
 
 	}
+	
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the interpolate function
+	private final CallbackProxy<ProxyInterpolateCallback> interpolateCallbackProxy = JsHelper.get().newCallbackProxy();
+	
+	// ---------------------------
+	// -- USERS CALLBACKS ---
+	// ---------------------------
+	// user callback implementation for filtering legend labels
+	private InterpolateCallback interpolateCallback = null;
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * 
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
+	 */
 	ColorScale(AbstractNode parent, Key childKey, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		this.interpolateCallbackProxy.setCallback(this::onColor);
 	}
 
 	/**
@@ -136,6 +187,9 @@ public final class ColorScale extends LegendScale {
 	 * @param interpolate the color interpolation of the scale
 	 */
 	public void setInterpolate(Interpolate interpolate) {
+		// resets callback
+		setInterpolate((InterpolateCallback)null);
+		// stores value
 		setValueAndAddToParent(Property.INTERPOLATE, interpolate);
 	}
 
@@ -148,4 +202,59 @@ public final class ColorScale extends LegendScale {
 		return getValue(Property.INTERPOLATE, Interpolate.values(), Interpolate.BLUES);
 	}
 
+	/**
+	 * Sets the color interpolation callback of the scale.
+	 * 
+	 * @param interpolate the color interpolation callback of the scale
+	 */
+	public void setInterpolate(InterpolateCallback interpolateCallback) {
+		// sets the callback
+		this.interpolateCallback = interpolateCallback;
+		// checks if consistent
+		if (interpolateCallback != null) {
+			// adds the callback proxy function to java script object
+			setValueAndAddToParent(Property.INTERPOLATE, interpolateCallbackProxy.getProxy());
+		} else {
+			// otherwise removes the properties from java script object
+			remove(Property.INTERPOLATE);
+		}
+	}
+
+	/**
+	 * Returns the color interpolation callback of the scale.
+	 * 
+	 * @return the color interpolation callback of the scale
+	 */
+	public InterpolateCallback getInterpolateCallback() {
+		return interpolateCallback;
+	}
+
+	/**
+	 * Returns a string as color when the callback has been activated.
+	 * 
+	 * @param normalizedValue normalized value of the dataset
+	 * @return a string as color
+	 */
+	private String onColor(double normalizedValue) {
+		// checks if callback is consistent
+		if (getInterpolateCallback() != null) {
+			// invokes callback
+			Object result = getInterpolateCallback().interpolate(normalizedValue);
+			// checks result
+			if (result instanceof IsColor) {
+				// is color instance
+				IsColor color = (IsColor) result;
+				// checks if the color is consistent
+				if (IsColor.isConsistent(color)) {
+					// then returns RGBA representation
+					return color.toRGBA();
+				}
+			} else if (result instanceof String) {
+				// returns result
+				return (String) result;
+			}
+		}
+		// default result
+		return DEFAULT_MISSING_COLOR;
+	}
 }

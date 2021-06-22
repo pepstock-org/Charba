@@ -61,10 +61,10 @@ final class JsGeoHelper {
 	/**FIXME
 	 * Register the {@link DataLabelsPlugin} plugin globally to Chart.js.
 	 */
-	ArrayObject feature(String topojson, String featureProperty) {
+	ArrayObject features(String topojson, String featureProperty) {
 		// checks if arguments are consistent
 		if (topojson != null && featureProperty != null) {
-			return NativeJsGeoHelper.feature(topojson, featureProperty);
+			return NativeJsGeoHelper.features(topojson, featureProperty);
 		}
 		// if here, arguments are not consistent
 		// then returns null

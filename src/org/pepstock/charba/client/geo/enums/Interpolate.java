@@ -18,7 +18,7 @@ package org.pepstock.charba.client.geo.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Enumerates the color interpolation for dataset and scale.
+ * Enumerates the color interpolation for data set and scale.
  * 
  * @author Andrea "Stock" Stocchero
  *

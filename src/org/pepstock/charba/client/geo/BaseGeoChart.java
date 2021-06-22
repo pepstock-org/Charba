@@ -24,12 +24,10 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.controllers.ControllerType;
 
 /**
- * FIXME
- * This is an abstract meter chart, inherited by a meter and gauge charts.
+ * This is the base chart definition for GEO charts.
  * 
  * @author Andrea "Stock" Stocchero
- *
- * @param <D> Dataset type for the specific chart, extends MeterDataset
+ * @param <D> data set type for the specific chart, extends BaseGeoDataset
  */
 abstract class BaseGeoChart<D extends BaseGeoDataset> extends AbstractChart implements IsDatasetCreator<D> {
 
@@ -37,7 +35,7 @@ abstract class BaseGeoChart<D extends BaseGeoDataset> extends AbstractChart impl
 	private BaseGeoController geoController = null;
 	// extending chart type
 	// this is a custom implementation because 
-	// geo controllers don't extend any existing chart type
+	// GEO controllers don't extend any existing chart type
 	static final GeoExtendedChartType GEO_EXTENDED_CHART_TYPE = new GeoExtendedChartType();
 
 	/**
@@ -73,26 +71,26 @@ abstract class BaseGeoChart<D extends BaseGeoDataset> extends AbstractChart impl
 	 */
 	@Override
 	protected final void applyConfiguration() {
-		// Because before creating chart options
+		// because before creating chart options
 		// new chart (by controller) must be defined
 		// gets the controller type
 		// could be choropleth or bubblemap
 		ControllerType type = getControllerType();
 		// registers the controller
 		// if not register
-		// checks for geo controller
+		// checks for GEO controller
 		if (type.register() && geoController == null) {
 			// if here the controller is registered
 			// then gets it
 			Controller controllerInstance = Defaults.get().getControllers().getController(type);
-			// checks if controller is a base geo controller
+			// checks if controller is a base GEO controller
 			Checker.assertCheck(controllerInstance instanceof BaseGeoController, "Controller stored for " + getControllerType().value() + " is not a " + BaseGeoController.class.getName());
-			// casts to geo controller
+			// casts to GEO controller
 			geoController = (BaseGeoController) controllerInstance;
 		}
-		// gets geo options
+		// gets GEO options
 		GeoOptions options;
-		// checks if options a meter on
+		// checks if options is a GEO one
 		Checker.assertCheck(getOptions() instanceof GeoOptions, "Chart options are " + getOptions().getClass().getName() + " and not a " + GeoOptions.class.getName());
 		// cats and store
 		options = (GeoOptions) getOptions();

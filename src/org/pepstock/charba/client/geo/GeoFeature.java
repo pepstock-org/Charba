@@ -27,16 +27,27 @@ import org.pepstock.charba.client.options.Bar;
 import org.pepstock.charba.client.options.Elements;
 
 /**
+ * The styling of the new element {@link GeoFeature} is based on {@link Bar} element with some additional options for the outline and graticule.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class GeoFeature extends Bar {
 	
-	private static final int DEFAULT_OUTLINE_BORDER_WIDTH = 0;
+	/**
+	 * Default outline border width options, <b>{@value DEFAULT_OUTLINE_BORDER_WIDTH}</b>.
+	 */
+	public static final int DEFAULT_OUTLINE_BORDER_WIDTH = 0;
 
-	private static final String DEFAULT_GRATICULE_BORDER_COLOR = "#CCCCCC";
+	/**
+	 * Default graticule border color options, <b>{@value DEFAULT_GRATICULE_BORDER_COLOR}</b>.
+	 */
+	public static final String DEFAULT_GRATICULE_BORDER_COLOR = "#CCCCCC";
 
-	private static final int DEFAULT_GRATICULE_BORDER_WIDTH = 0;
+	/**
+	 * Default graticule border width options, <b>{@value DEFAULT_OUTLINE_BORDER_WIDTH}</b>.
+	 */
+	public static final int DEFAULT_GRATICULE_BORDER_WIDTH = 0;
 
 	/**
 	 * Name of properties of native object.
@@ -73,6 +84,14 @@ public final class GeoFeature extends Bar {
 
 	}
 	
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * 
+	 * @param elements parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	GeoFeature(Elements elements, Key childKey, IsDefaultBar defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 	}
@@ -227,6 +246,5 @@ public final class GeoFeature extends Bar {
 	public IsColor getGraticuleBorderColor() {
 		return ColorBuilder.parse(getGraticuleBorderColorAsString());
 	}
-
 	
 }

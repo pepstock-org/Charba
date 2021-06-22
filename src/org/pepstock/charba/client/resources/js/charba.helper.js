@@ -1014,7 +1014,7 @@ function CharbaJsGeoHelper() {}
  * @param {String} featureProperty the name of property in the objects to get features
  * @return {Array} an array of features
  */
-CharbaJsGeoHelper.feature = function(topojson, featureProperty) {
+CharbaJsGeoHelper.features = function(topojson, featureProperty) {
   var topojsonObject = JSON.parse(topojson);
   console.log(topojsonObject);
   if (topojsonObject != null && typeof topojsonObject.objects !== 'undefined' && typeof topojsonObject.objects[featureProperty] !== 'undefined'){

@@ -65,8 +65,16 @@ abstract class LegendScale extends AbstractNode {
 
 	}
 	
+	// internal legend instance
 	private final Legend legend;
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * 
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
+	 */
 	LegendScale(AbstractNode parent, Key childKey, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
 		// overrides always the property, setting value

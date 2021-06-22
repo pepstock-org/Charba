@@ -29,7 +29,7 @@ public final class ChoroplethChart extends BaseGeoChart<ChoroplethDataset> {
 	 */
 	public static final String TYPE = "choropleth";
 	/**
-	 * Choropleth controller type
+	 * <b>Choropleth</b> controller type.
 	 */
 	public static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, BaseGeoChart.GEO_EXTENDED_CHART_TYPE, BaseGeoController.PROVIDER);
 	// chart options
@@ -61,7 +61,7 @@ public final class ChoroplethChart extends BaseGeoChart<ChoroplethDataset> {
 	 */
 	@Override
 	public ChoroplethDataset newDataset(boolean hidden) {
-		// hidden is ignored because a choropeth chart has got only 1 dataset
+		// hidden is ignored because a choropleth chart has got only 1 data set
 		return new ChoroplethDataset();
 	}
 

@@ -21,13 +21,13 @@ import org.pepstock.charba.client.geo.enums.ClipMap;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
- * FIXME
+ * This is the re-mapper of the CHART.JS options in order to manage the internal elements as GEO charts wants.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class ChoroplethOptionsMapper extends GeoOptionsMapper {
-	
+
 	// default clip map for choropleth chart
 	static final ClipMap DEFAULT_CLIP_MAP = ClipMap.TRUE;
 
@@ -62,12 +62,14 @@ final class ChoroplethOptionsMapper extends GeoOptionsMapper {
 
 	}
 
+	// internal instance of chart.js elements
 	private final GeoElements elements;
 
 	/**
+	 * Creates the object with native object to map java script properties and the options related to this re-mapping.
 	 * 
-	 * @param options
-	 * @param nativeObject
+	 * @param options options instance related to this re-mapping
+	 * @param nativeObject native object to map java script properties
 	 */
 	ChoroplethOptionsMapper(ExtendedOptions options, NativeObject nativeObject) {
 		super(options, nativeObject);
@@ -86,7 +88,9 @@ final class ChoroplethOptionsMapper extends GeoOptionsMapper {
 	}
 
 	/**
-	 * @return the elements
+	 * Returns the elements mapper in order to be able to manage GEO feature.
+	 * 
+	 * @return the elements mapper in order to be able to manage GEO feature
 	 */
 	GeoElements getElements() {
 		return elements;

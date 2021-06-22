@@ -19,7 +19,8 @@ import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
 
 /**
- * FIXME
+ * This is a fake controller in order to set it as extended chart type for GEO charts.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

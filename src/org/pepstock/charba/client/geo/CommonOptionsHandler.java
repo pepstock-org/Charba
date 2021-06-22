@@ -23,7 +23,7 @@ import org.pepstock.charba.client.geo.enums.ClipMap;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * FIXME
+ * Handles the common properties to configure GEO data set and options.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -32,7 +32,7 @@ final class CommonOptionsHandler extends AbstractNode {
 
 	// default value of show outline
 	static final boolean DEFAULT_SHOW_LINE = false;
-	
+	// default feature instance
 	static final Feature DEFAULT_FEATURE = new Feature();
 
 	/**
@@ -40,7 +40,6 @@ final class CommonOptionsHandler extends AbstractNode {
 	 */
 	private enum Property implements Key
 	{
-		// object properties
 		OUTLINE("outline"),
 		SHOW_OUTLINE("showOutline"),
 		SHOW_GRATICULE("showGraticule"),
@@ -70,21 +69,33 @@ final class CommonOptionsHandler extends AbstractNode {
 
 	}
 
+	// default clip map instance
+	// because choropleth and bubblemap charts have got different default
 	private final ClipMap defaultClipMap;
 
+	/**
+	 * Creates an handler at options level.
+	 * 
+	 * @param mapper instance of options mapper
+	 */
 	CommonOptionsHandler(GeoOptionsMapper mapper) {
 		this(mapper.nativeObject(), mapper.getDefaultClipMap());
 	}
 
+	/**
+	 * Creates an handler at data set level.
+	 * 
+	 * @param nativeObject native object of data set
+	 * @param defaultClipMap default clip map instance, different between choropleth and bubblemap.
+	 */
 	CommonOptionsHandler(NativeObject nativeObject, ClipMap defaultClipMap) {
 		super(nativeObject);
-		// stores options
+		// stores default clip map instance
 		this.defaultClipMap = defaultClipMap;
 	}
-	
+
 	/**
-	 * Sets the outline used to scale and centralize the projection in the chart area.
-	 * By default a sphere is used.
+	 * Sets the outline used to scale and centralize the projection in the chart area. By default a sphere is used.
 	 * 
 	 * @param outline the outline used to scale and centralize the projection in the chart area
 	 */
@@ -93,8 +104,7 @@ final class CommonOptionsHandler extends AbstractNode {
 	}
 
 	/**
-	 * Returns the outline used to scale and centralize the projection in the chart area.
-	 * By default a sphere is used.
+	 * Returns the outline used to scale and centralize the projection in the chart area. By default a sphere is used.
 	 * 
 	 * @return the outline used to scale and centralize the projection in the chart area
 	 */

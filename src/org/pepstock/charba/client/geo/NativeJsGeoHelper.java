@@ -43,6 +43,6 @@ final class NativeJsGeoHelper {
 	/**
 	 * FIXME
 	 */
-	static native ArrayObject feature(String topojson, String featureProperty);
+	static native ArrayObject features(String topojson, String featureProperty);
 
 }

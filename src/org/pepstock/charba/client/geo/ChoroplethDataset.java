@@ -20,11 +20,7 @@ import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * FIXME The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
- * The minimum value of data is 0 (see {@link ChoroplethDataset#MINIMUM_VALUE}).<br>
- * The dataset will have always 2 data and setting the color of data, the first is the value color and the second is the empty one.<br>
- * To set the data, is mandatory to use {@link ChoroplethDataset#setValue(double)}) method.
- * 
+ * The choropleth data set allows a region definition (by {@link Feature} and specific value to be specified.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -34,14 +30,15 @@ public final class ChoroplethDataset extends BaseGeoDataset {
 	private final CommonOptionsHandler optionsHandler;
 
 	/**
-	 * Creates a dataset. It uses the global options has default.
+	 * Creates a data set.<br>
+	 * It uses the global options has default.
 	 */
 	public ChoroplethDataset() {
 		this(Defaults.get().getGlobal());
 	}
 
 	/**
-	 * Creates a dataset setting the defaults value.
+	 * Creates a data set setting the defaults value.
 	 * 
 	 * @param defaultValues default options
 	 */
@@ -50,9 +47,9 @@ public final class ChoroplethDataset extends BaseGeoDataset {
 	}
 
 	/**
-	 * Creates a dataset setting the maximum value of dataset and defaults value and the controller type in case of extension
+	 * Creates a data set by defaults value and the controller type.
 	 * 
-	 * @param type controller type related to the dataset
+	 * @param type controller type related to the data set
 	 * @param defaultValues default options
 	 */
 	ChoroplethDataset(ControllerType type, IsDefaultOptions defaultValues) {

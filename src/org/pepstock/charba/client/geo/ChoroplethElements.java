@@ -18,15 +18,24 @@ package org.pepstock.charba.client.geo;
 import org.pepstock.charba.client.configuration.Elements;
 
 /**
+ * Extends {@link Elements} provided by CHART.JS in order to add the {@link GeoFeature} element to be configured for GEO charts.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ChoroplethElements extends Elements{
+public class ChoroplethElements extends Elements {
 
+	// elements wrapper instance
 	private final GeoElements elements;
-	
+
+	/**
+	 * Builds the object storing the default root options.
+	 * 
+	 * @param options default root options.
+	 */
 	ChoroplethElements(ChoroplethOptions options) {
 		super(options);
+		// gets the elements by the options mapper
 		this.elements = options.getMapper().getElements();
 	}
 

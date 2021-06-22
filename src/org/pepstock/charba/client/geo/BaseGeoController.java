@@ -29,7 +29,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
  */
 final class BaseGeoController extends AbstractController {
 
-	// static reference of controller provider for geo charts
+	// static reference of controller provider for GEO charts
 	static final ControllerProvider PROVIDER = new BaseGeoControllerProvier();
 	// injectable resource for controller
 	private static final GeoControllerResource RESOURCE = new GeoControllerResource();
@@ -50,12 +50,12 @@ final class BaseGeoController extends AbstractController {
 	 */
 	@Override
 	public boolean mustBeRegistered() {
-		// geo controller MUST NOT be registered
+		// GEO controller MUST NOT be registered
 		return false;
 	}
 
 	/**
-	 * Inner class which is implementing a {@link ControllerProvider} to create a base geo controller.
+	 * Inner class which is implementing a {@link ControllerProvider} to create a base GEO controller.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -71,7 +71,7 @@ final class BaseGeoController extends AbstractController {
 		public Controller provide(ControllerType controllerType) {
 			// inject Chart.js and date library if not already loaded
 			ResourcesType.getResources().inject();
-			// injects DATALABELS plugin
+			// injects CHARTJS-GEO controller
 			Injector.ensureInjected(RESOURCE);
 			// creates and returns an fake controller
 			return new BaseGeoController(controllerType);

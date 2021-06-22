@@ -23,7 +23,8 @@ import org.pepstock.charba.client.configuration.Scales;
 import org.pepstock.charba.client.options.ScaleId;
 
 /**
- * FIXME
+ * Extends the out of the box {@link Scales} configuration object disabling the standard methods to interact with axes instances.<br>
+ * GEO charts have got specific scales and they are managed as no-axes.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -44,7 +45,9 @@ abstract class GeoScales extends Scales {
 	}
 
 	/**
-	 * @return the scales
+	 * Returns the internal scales mapper.
+	 * 
+	 * @return the internal scales mapper
 	 */
 	final InternalGeoScales getScales() {
 		return scales;

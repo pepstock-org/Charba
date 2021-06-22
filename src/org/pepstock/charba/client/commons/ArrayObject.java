@@ -17,6 +17,7 @@ package org.pepstock.charba.client.commons;
 
 import java.util.List;
 
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -30,6 +31,47 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
 public final class ArrayObject extends Array {
+
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+
+	/**
+	 * Java script FUNCTION callback called to filter the array.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	public interface ArrayFilterCallback {
+
+		/**
+		 * Method of function to be called to filter the array.
+		 * 
+		 * @param element current element being processed in the array
+		 * @param index the index of the current element being processed in the array
+		 * @return a value that coerces to <code>true</code> to keep the element, or to <code>false</code> otherwise
+		 */
+		boolean call(NativeObject element, int index);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to find an element in the array.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	public interface ArrayFindCallback {
+
+		/**
+		 * Method of function to be called to find an element in the array.
+		 * 
+		 * @param element current element being processed in the array
+		 * @param index the index of the current element being processed in the array
+		 * @return the value of the first element in the array that satisfies the provided testing function.<br>
+		 *         Otherwise, undefined is returned.
+		 */
+		boolean call(NativeObject element, int index);
+	}
 
 	/**
 	 * This method creates new array instance with a variable number of <code>objects</code> arguments.
@@ -366,4 +408,24 @@ public final class ArrayObject extends Array {
 	void set(int index, NativeObject item) {
 		fill(item, index, index + 1);
 	}
+
+	/**
+	 * Creates a new array with all elements that pass the test implemented by the provided function.
+	 * 
+	 * @param callback is a predicate, to test each element of the array.<br>
+	 *            Return a value that coerces to true to keep the element, or to false otherwise.
+	 * @return a new array with the elements that pass the test.<br>
+	 *         If no elements pass the test, an empty array will be returned.
+	 */
+	public native ArrayObject filter(ArrayFilterCallback callback);
+
+	/**
+	 * Returns the value of the first element in the provided array that satisfies the provided testing function.<br>
+	 * If no values satisfy the testing function, undefined is returned.
+	 * 
+	 * @param callback function to execute on each value in the array,
+	 * @return the value of the first element in the array that satisfies the provided testing function.<br>
+	 *         Otherwise, undefined is returned.
+	 */
+	public native NativeObject find(ArrayFindCallback callback);
 }

@@ -1,0 +1,37 @@
+/**
+    Copyright 2017 Andrea "Stock" Stocchero
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+	    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+package org.pepstock.charba.client.geo.callbacks;
+
+import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.geo.ColorScale;
+
+/**
+ * Callback interface to be defined to customize the color on {@link ColorScale}.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
+public interface InterpolateCallback {
+	
+	/**
+	 * Returns a {@link IsColor} or {@link String} instance which is representing a color.
+	 * 
+	 * @param normalizedValue normalized value of the data set
+	 * @return a {@link IsColor} or {@link String} instance which is representing a color
+	 */
+	Object interpolate(double normalizedValue);
+
+}

@@ -22,9 +22,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.options.Elements;
 
 /**
- * FIXME
- * Options can be configured for four different types of elements: arc, lines, points, and bars.<br>
- * When set, these options apply to the configuration attached to a dataset.
+ * Extends the out of the box {@link Elements} object adding the {@link GeoFeature} element needed to configure the GEO chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -61,26 +59,28 @@ final class GeoElements extends AbstractNode {
 		}
 
 	}
-	// instance of geo feature element
+	// instance of GEO feature element
 	private final GeoFeature geoFeature;
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * Creates the object with the mapper, the key of this element, native object to map java script properties and the {@link Elements} instance.
 	 * 
-	 * @param options options of the chart.
+	 * @param mapper options mapper of the GEO chart.
 	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
+	 * @param elements elements instance needed to be wrapped to provide the out of the box elements options.
 	 */
 	GeoElements(ChoroplethOptionsMapper mapper, Key childKey, NativeObject nativeObject, Elements elements) {
 		super(mapper, childKey,  nativeObject);
-		// FIXME
+		// gets and stores the GEO feature configuration
+		// uses the default bar configuration
 		this.geoFeature = new GeoFeature(elements, Property.GEO_FEATURE, Defaults.get().getGlobal().getElements().getBar(), getValue(Property.GEO_FEATURE));
 	}
 
 	/**
-	 * FIXME
-	 * @return the geoFeature
+	 * Returns the {@link GeoFeature}.
+	 * 
+	 * @return the geoFeature instance
 	 */
 	GeoFeature getGeoFeature() {
 		return geoFeature;

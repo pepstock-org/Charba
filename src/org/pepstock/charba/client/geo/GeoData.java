@@ -22,7 +22,8 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * FIXME Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y properties.
+ * Used for GEO data sets to set the data to render.<br>
+ * A GEO data has to have a <code>feature</code> property containing the feature to render and a <code>value</code> property containing the value for the coloring.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -30,8 +31,7 @@ import org.pepstock.charba.client.items.Undefined;
 public final class GeoData extends NativeObjectContainer {
 
 	/**
-	 * Name of properties of native object.<br>
-	 * No private because it is used by time series item
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -70,6 +70,29 @@ public final class GeoData extends NativeObjectContainer {
 	}
 
 	/**
+	 * Creates the object with the assigned feature.
+	 * 
+	 * @param feature the feature object to identify the region.
+	 */
+	public GeoData(Feature feature) {
+		this();
+		// stores feature
+		setFeature(feature);
+	}
+
+	/**
+	 * Creates the object with the assigned feature and value.
+	 * 
+	 * @param feature the feature object to identify the region.
+	 * @param value the value for the coloring
+	 */
+	public GeoData(Feature feature, double value) {
+		this(feature);
+		// stores value
+		setValue(value);
+	}
+
+	/**
 	 * Creates the object with a native object passed as argument.
 	 * 
 	 * @param nativeObject native object which maps a data point
@@ -78,41 +101,37 @@ public final class GeoData extends NativeObjectContainer {
 		super(nativeObject);
 	}
 
-	// -------------
-	// X
-	// -------------
-
 	/**
-	 * Sets the value as double.
+	 * Sets the value for the coloring.
 	 * 
-	 * @param value the value as double
+	 * @param value the value for the coloring
 	 */
 	public void setValue(double value) {
 		setValue(Property.VALUE, value);
 	}
 
 	/**
-	 * Returns the value as double.
+	 * Returns the value for the coloring.
 	 * 
-	 * @return the value as double
+	 * @return the value for the coloring
 	 */
 	public double getValue() {
 		return getValue(Property.VALUE, Undefined.DOUBLE);
 	}
 
 	/**
-	 * Sets the feature object to identify the area.
+	 * Sets the feature object to identify the region.
 	 * 
-	 * @param feature the feature object to identify the area
+	 * @param feature the feature object to identify the region
 	 */
 	public void setFeature(Feature feature) {
 		setValue(Property.FEATURE, feature);
 	}
 
 	/**
-	 * Returns the feature object to identify the area.
+	 * Returns the feature object to identify the region.
 	 * 
-	 * @return the feature object to identify the area
+	 * @return the feature object to identify the region
 	 */
 	public Feature getFeature() {
 		// checks if the stored data is a object

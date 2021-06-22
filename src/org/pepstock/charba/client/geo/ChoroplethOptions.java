@@ -31,7 +31,7 @@ public final class ChoroplethOptions extends GeoOptions {
 	// mapper options factory instance
 	private final ChoroplethRemappedOptionsFactory factory;
 	// common options handler
-	private final CommonOptionsHandler optionsHandler;
+	private CommonOptionsHandler optionsHandler;
 	// mapper options instance
 	private ChoroplethOptionsMapper mapper;
 	// elements instance
@@ -100,17 +100,24 @@ public final class ChoroplethOptions extends GeoOptions {
 	}
 
 	/**
-	 * FIXME
+	 * Can create a options mapper in order to re-map the CHART.JS options where needed in order to add additional properties and nodes for GEO charts.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
 	private static class ChoroplethRemappedOptionsFactory extends ControllerMapperFactory<ChoroplethOptionsMapper> {
 
+		// instance of options where the mapper belongs to
 		private final ChoroplethOptions options;
 
+		/**
+		 * Creates the factory of the mapper
+		 * 
+		 * @param options instance of options where the mapper belongs to
+		 */
 		ChoroplethRemappedOptionsFactory(ChoroplethOptions options) {
 			super(ChoroplethChart.CONTROLLER_TYPE);
+			// stores the options
 			this.options = options;
 		}
 
