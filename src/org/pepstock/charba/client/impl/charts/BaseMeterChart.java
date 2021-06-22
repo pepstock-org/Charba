@@ -102,9 +102,9 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		}
 		// gets meter options
 		MeterOptions options;
-		// checks if options a meter on
+		// checks if options is a meter one
 		Checker.assertCheck(getOptions() instanceof MeterOptions, "Chart options are " + getOptions().getClass().getName() + " and not a " + MeterOptions.class.getName());
-		// cats and store
+		// cats and stores
 		options = (MeterOptions) getOptions();
 		// disables legend
 		options.getLegend().setDisplay(false);
