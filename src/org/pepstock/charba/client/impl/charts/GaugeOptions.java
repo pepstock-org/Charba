@@ -32,7 +32,7 @@ public final class GaugeOptions extends MeterOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults of chart
 	 */
-	public GaugeOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
+	GaugeOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

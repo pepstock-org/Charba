@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.controllers;
 
 import org.pepstock.charba.client.Controller;
-import org.pepstock.charba.client.commons.Checker;
 
 /**
  * Abstract implementation of a controller.
@@ -24,9 +23,7 @@ import org.pepstock.charba.client.commons.Checker;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractController implements Controller {
-
-	private final ControllerType type;
+public abstract class AbstractController extends AbstractControllerContainer implements Controller {
 
 	/**
 	 * Creates the controller by its type.
@@ -34,18 +31,7 @@ public abstract class AbstractController implements Controller {
 	 * @param type the type of this controller.
 	 */
 	protected AbstractController(ControllerType type) {
-		// checks if the controller is consistent
-		this.type = Checker.checkAndGetIfValid(type, "Controller type argument");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Controller#getType()
-	 */
-	@Override
-	public final ControllerType getType() {
-		return type;
+		super(type);
 	}
 
 }

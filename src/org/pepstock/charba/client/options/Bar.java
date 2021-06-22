@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.BorderSkipped;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar, HasPointStyle {
+public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar, HasPointStyle {
 
 	/**
 	 * Name of properties of native object.
@@ -74,7 +74,7 @@ public final class Bar extends AbstractElement<IsDefaultBar> implements IsDefaul
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Bar(Elements elements, Key childKey, IsDefaultBar defaultValues, NativeObject nativeObject) {
+	protected Bar(Elements elements, Key childKey, IsDefaultBar defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 		// creates point style handler
 		this.pointStyleHandler = new PointStyleHandler(this, getDefaultValues(), getNativeObject());

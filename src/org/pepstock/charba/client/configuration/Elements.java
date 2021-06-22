@@ -38,7 +38,7 @@ public class Elements extends ConfigurationOptionsContainer {
 	 * 
 	 * @param options default root options.
 	 */
-	Elements(ConfigurationOptions options) {
+	protected Elements(ConfigurationOptions options) {
 		super(options);
 		// creates the sub-options objects
 		this.point = new Point(getOptions());

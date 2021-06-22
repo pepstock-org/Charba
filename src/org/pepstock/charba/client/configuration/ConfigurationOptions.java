@@ -174,7 +174,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @param chart chart instance
 	 * @param defaultValues defaults options
 	 */
-	ConfigurationOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
+	protected ConfigurationOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		// uses the extended option internally (no override)
 		super(chart, new ExtendedOptions(chart, defaultValues, new ConfigurationEnvelop<>(null, true)));
 		// stores default

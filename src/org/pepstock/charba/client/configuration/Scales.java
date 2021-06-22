@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.options.Scale;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * The configuration element which contains all axes definitions.
@@ -40,7 +40,7 @@ public class Scales extends ConfigurationOptionsContainer {
 	 * 
 	 * @param options root options element.
 	 */
-	Scales(ScalesOptions options) {
+	protected Scales(ScalesOptions options) {
 		super(options);
 	}
 

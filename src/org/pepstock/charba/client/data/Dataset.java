@@ -191,6 +191,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	protected enum CommonProperty implements Key
 	{
 		CLIP("clip"),
+		DATA("data"),
 		BORDER_WIDTH("borderWidth"),
 		HOVER_BORDER_WIDTH("hoverBorderWidth");
 
@@ -225,7 +226,6 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	{
 		ANIMATION("animation"),
 		LABEL("label"),
-		DATA("data"),
 		TYPE("type"),
 		HIDDEN("hidden"),
 		PARSING("parsing"),
@@ -330,7 +330,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	public final int getDataCount() {
 		// gets the array
-		Array array = getArrayValue(InternalProperty.DATA);
+		Array array = getArrayValue(CommonProperty.DATA);
 		// returns the length
 		return array != null ? array.length() : 0;
 	}
@@ -1005,9 +1005,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if it can use data as double
 		checkIfDataPointsMustBeUsed();
 		// set value. If null, removes key and then..
-		setArrayValue(InternalProperty.DATA, ArrayDouble.fromOrNull(values));
+		setArrayValue(CommonProperty.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
-		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(CommonProperty.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -1020,9 +1020,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if it can use data as double
 		checkIfDataPointsMustBeUsed();
 		// set value. If null, removes key and then..
-		setArrayValue(InternalProperty.DATA, ArrayDouble.fromOrNull(values));
+		setArrayValue(CommonProperty.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
-		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(CommonProperty.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -1046,9 +1046,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// checks if it can use data as double
 		checkIfDataPointsMustBeUsed();
 		// checks if is a numbers data type
-		if (has(InternalProperty.DATA) && DataType.NUMBERS.equals(getDataType())) {
+		if (has(CommonProperty.DATA) && DataType.NUMBERS.equals(getDataType())) {
 			// returns numbers
-			ArrayDouble array = getArrayValue(InternalProperty.DATA);
+			ArrayDouble array = getArrayValue(CommonProperty.DATA);
 			// returns array
 			return ArrayListHelper.list(array);
 		}
@@ -1056,7 +1056,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		if (binding) {
 			ArrayDoubleList result = new ArrayDoubleList();
 			// set value
-			setArrayValue(InternalProperty.DATA, ArrayDouble.fromOrEmpty(result));
+			setArrayValue(CommonProperty.DATA, ArrayDouble.fromOrEmpty(result));
 			// sets data type
 			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.NUMBERS);
 			// returns list
@@ -1075,9 +1075,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	final List<DataPoint> getDataPoints(DataPointFactory factory, boolean binding) {
 		// checks if is a numbers data type
-		if (has(InternalProperty.DATA) && DataType.POINTS.equals(getDataType())) {
+		if (has(CommonProperty.DATA) && DataType.POINTS.equals(getDataType())) {
 			// gets array
-			ArrayObject array = getArrayValue(InternalProperty.DATA);
+			ArrayObject array = getArrayValue(CommonProperty.DATA);
 			// returns points
 			return ArrayListHelper.list(array, factory);
 		}
@@ -1085,7 +1085,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		if (binding) {
 			ArrayObjectContainerList<DataPoint> result = new ArrayObjectContainerList<>();
 			// set value
-			setArrayValue(InternalProperty.DATA, ArrayObject.fromOrEmpty(result));
+			setArrayValue(CommonProperty.DATA, ArrayObject.fromOrEmpty(result));
 			// sets data type
 			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.POINTS);
 			// returns list
@@ -1101,9 +1101,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * @param datapoints an array of data points
 	 */
 	final void setInternalDataPoints(DataPoint... datapoints) {
-		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(CommonProperty.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(CommonProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -1112,9 +1112,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 * @param datapoints a list of data points
 	 */
 	final void setInternalDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(CommonProperty.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(CommonProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -1126,9 +1126,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	 */
 	final List<TimeSeriesItem> getTimeSeriesItems(TimeSeriesItemFactory factory, boolean binding) {
 		// checks if is a points data type
-		if (has(InternalProperty.DATA) && DataType.POINTS.equals(getDataType())) {
+		if (has(CommonProperty.DATA) && DataType.POINTS.equals(getDataType())) {
 			// gets array
-			ArrayObject array = getArrayValue(InternalProperty.DATA);
+			ArrayObject array = getArrayValue(CommonProperty.DATA);
 			// returns points
 			return ArrayListHelper.list(array, factory);
 		}
@@ -1136,7 +1136,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		if (binding) {
 			ArrayObjectContainerList<TimeSeriesItem> result = new ArrayObjectContainerList<>();
 			// set value
-			setArrayValue(InternalProperty.DATA, ArrayObject.fromOrEmpty(result));
+			setArrayValue(CommonProperty.DATA, ArrayObject.fromOrEmpty(result));
 			// sets data type
 			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.POINTS);
 			// returns list
@@ -1156,9 +1156,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		if (timeSeriesItems != null) {
 			Arrays.sort(timeSeriesItems, COMPARATOR);
 		}
-		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(timeSeriesItems));
+		setArrayValue(CommonProperty.DATA, ArrayObject.fromOrNull(timeSeriesItems));
 		// sets data type checking if the key exists
-		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(CommonProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -1171,9 +1171,9 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		if (timeSeriesItems != null) {
 			Collections.sort(timeSeriesItems, COMPARATOR);
 		}
-		setArrayValue(InternalProperty.DATA, ArrayObject.fromOrNull(timeSeriesItems));
+		setArrayValue(CommonProperty.DATA, ArrayObject.fromOrNull(timeSeriesItems));
 		// sets data type checking if the key exists
-		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(CommonProperty.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/*

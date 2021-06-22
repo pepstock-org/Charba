@@ -21,12 +21,14 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Envelop;
+import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.configuration.LineOptions;
+import org.pepstock.charba.client.controllers.ControllerMapperFactory;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
@@ -189,5 +191,25 @@ public final class ExtendedOptions extends ScaledOptions {
 	 */
 	public void setEvent(AbstractNode node, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
 		setEventToModel(node, property, Envelop.checkAndGetIfValid(envelop).getContent());
+	}
+	
+	/**
+	 * Returns the options, mapped with a custom object, used for controllers to map the options.<br>
+	 * It uses a factory instance to create a customized options.<br>
+	 * If factory argument is not consistent, <code>null</code> is returned.
+	 * 
+	 * @param factory factory instance to create a customized options
+	 * @param <T> type of customized options to return
+	 * @return customized options.<br>
+	 *         If factory argument is not consistent, <code>null</code> is returned.
+	 */
+	public final <T extends NativeObjectContainer> T getRemappedOptions(ControllerMapperFactory<T> factory) {
+		// checks if factory is consistent
+		if (factory != null) {
+			// creates the object 
+			return factory.create(getNativeObject());
+		}
+		// if here factory is not consistent
+		return null;
 	}
 }

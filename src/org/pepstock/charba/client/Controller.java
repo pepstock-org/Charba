@@ -74,6 +74,15 @@ public interface Controller {
 	 * @return the controller id.
 	 */
 	ControllerType getType();
+	
+	/**
+	 * Returns <code>false</code> if the controller does not have to be registered because is a OUT-OF-THE-BOX controller (in javascript) and does not have to be transformed.
+	 * 
+	 * @return <code>false</code> if the controller does not have to be registered because is a OUT-OF-THE-BOX controller (in javascript) and does not have to be transformed
+	 */
+	default boolean mustBeRegistered() {
+		return true;
+	}
 
 	/**
 	 * Called before it initializes the controller.

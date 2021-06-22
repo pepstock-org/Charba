@@ -1000,3 +1000,28 @@ function CharbaJsDateAdapterHelper() {}
 CharbaJsDateAdapterHelper.create = function(options) {
   return new Chart._adapters._date(options);
 }
+/**
+ * ----------------------------------------------------------------------------
+ * CharbaJsGeoHelper
+ * ----------------------------------------------------------------------------
+ * JsGeoHelper is an object to transform topojson definition in feature for GEO charts.
+ */
+function CharbaJsGeoHelper() {} 
+/**
+ * Returns an array of features.
+ *
+ * @param {String} topojson topojson defintions as string 
+ * @param {String} featureProperty the name of property in the objects to get features
+ * @return {Array} an array of features
+ */
+CharbaJsGeoHelper.feature = function(topojson, featureProperty) {
+  var topojsonObject = JSON.parse(topojson);
+  console.log(topojsonObject);
+  if (topojsonObject != null && typeof topojsonObject.objects !== 'undefined' && typeof topojsonObject.objects[featureProperty] !== 'undefined'){
+    var parsedFeatures = ChartGeo.topojson.feature(topojsonObject, topojsonObject.objects[featureProperty]);
+    if (parsedFeatures != null){
+      return parsedFeatures.features;
+    }
+  }	
+  return null;
+}

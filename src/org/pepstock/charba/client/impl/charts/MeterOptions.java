@@ -88,7 +88,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults of chart
 	 */
-	public MeterOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
+	MeterOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
 		// disables legend and tooltips.
 		getLegend().setDisplay(false);

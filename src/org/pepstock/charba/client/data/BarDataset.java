@@ -809,9 +809,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	public List<FloatingData> getFloatingData(boolean binding) {
 		// checks if is a floating data type
-		if (has(InternalProperty.DATA) && DataType.ARRAYS.equals(getDataType())) {
+		if (has(CommonProperty.DATA) && DataType.ARRAYS.equals(getDataType())) {
 			// gets array
-			ArrayDoubleArray array = getArrayValue(InternalProperty.DATA);
+			ArrayDoubleArray array = getArrayValue(CommonProperty.DATA);
 			// returns floating data
 			return ArrayListHelper.list(array, FLOATING_BAR_DATA_FACTORY);
 		}
@@ -819,7 +819,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		if (binding) {
 			ArrayDoubleArrayList<FloatingData> result = new ArrayDoubleArrayList<>();
 			// set value
-			setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrEmpty(result));
+			setArrayValue(CommonProperty.DATA, ArrayDoubleArray.fromOrEmpty(result));
 			// sets data type
 			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.ARRAYS);
 			// returns list
@@ -849,7 +849,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		} else {
 			// if here the array is not consistent
 			// then removes the property
-			remove(InternalProperty.DATA);
+			remove(CommonProperty.DATA);
 			// sets data type as unknown
 			setValue(InternalProperty.CHARBA_DATA_TYPE, DataType.UNKNOWN);
 		}
@@ -861,9 +861,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param floatingData an array of floating data
 	 */
 	public void setFloatingData(FloatingData... floatingData) {
-		setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrNull(floatingData));
+		setArrayValue(CommonProperty.DATA, ArrayDoubleArray.fromOrNull(floatingData));
 		// sets data type checking if the key exists
-		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(CommonProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -872,9 +872,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param floatingData an array of floating data
 	 */
 	public void setFloatingData(List<FloatingData> floatingData) {
-		setArrayValue(InternalProperty.DATA, ArrayDoubleArray.fromOrNull(floatingData));
+		setArrayValue(CommonProperty.DATA, ArrayDoubleArray.fromOrNull(floatingData));
 		// sets data type checking if the key exists
-		setValue(InternalProperty.CHARBA_DATA_TYPE, has(InternalProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
+		setValue(InternalProperty.CHARBA_DATA_TYPE, has(CommonProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
 	}
 
 	/**

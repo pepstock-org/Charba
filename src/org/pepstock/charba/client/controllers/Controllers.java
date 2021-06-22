@@ -66,10 +66,13 @@ public final class Controllers {
 		WrapperController wController = check(controller);
 		// checks if consistent
 		if (wController != null) {
-			// gets the controller type
-			ControllerType type = controller.getType();
-			// extends an existing chart
-			JsControllerHelper.get().register(type, wController.nativeObject());
+			// checks if the controller must be registered
+			if (controller.mustBeRegistered()) {
+				// gets the controller type
+				ControllerType type = controller.getType();
+				// extends an existing chart
+				JsControllerHelper.get().register(type, wController.nativeObject());
+			}
 			return true;
 		}
 		// controller already exists

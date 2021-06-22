@@ -359,9 +359,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param data an array of strings
 	 */
 	public void setDataString(String... data) {
-		setArrayValue(Dataset.InternalProperty.DATA, ArrayString.fromOrNull(data));
+		setArrayValue(Dataset.CommonProperty.DATA, ArrayString.fromOrNull(data));
 		// sets data type checking if the key exists
-		setValue(Dataset.InternalProperty.CHARBA_DATA_TYPE, has(Dataset.InternalProperty.DATA) ? DataType.STRINGS : DataType.UNKNOWN);
+		setValue(Dataset.InternalProperty.CHARBA_DATA_TYPE, has(Dataset.CommonProperty.DATA) ? DataType.STRINGS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -370,9 +370,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param data a list of strings
 	 */
 	public void setDataString(List<String> data) {
-		setArrayValue(Dataset.InternalProperty.DATA, ArrayString.fromOrNull(data));
+		setArrayValue(Dataset.CommonProperty.DATA, ArrayString.fromOrNull(data));
 		// sets data type checking if the key exists
-		setValue(Dataset.InternalProperty.CHARBA_DATA_TYPE, has(Dataset.InternalProperty.DATA) ? DataType.STRINGS : DataType.UNKNOWN);
+		setValue(Dataset.InternalProperty.CHARBA_DATA_TYPE, has(Dataset.CommonProperty.DATA) ? DataType.STRINGS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -394,16 +394,16 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	public List<String> getDataString(boolean binding) {
 		// checks if is a string data type
-		if (has(Dataset.InternalProperty.DATA) && DataType.STRINGS.equals(getDataType())) {
+		if (has(Dataset.CommonProperty.DATA) && DataType.STRINGS.equals(getDataType())) {
 			/// returns strings
-			ArrayString array = getArrayValue(Dataset.InternalProperty.DATA);
+			ArrayString array = getArrayValue(Dataset.CommonProperty.DATA);
 			return ArrayListHelper.list(array);
 		}
 		// checks if wants to bind the array
 		if (binding) {
 			ArrayStringList result = new ArrayStringList();
 			// set value
-			setArrayValue(Dataset.InternalProperty.DATA, ArrayString.fromOrEmpty(result));
+			setArrayValue(Dataset.CommonProperty.DATA, ArrayString.fromOrEmpty(result));
 			// sets data type
 			setValue(Dataset.InternalProperty.CHARBA_DATA_TYPE, DataType.STRINGS);
 			// returns list
