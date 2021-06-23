@@ -29,6 +29,7 @@ import org.pepstock.charba.client.geo.enums.Interpolate;
 import jsinterop.annotations.JsFunction;
 
 /**
+ * The coloring of the nodes will be done with a special color scale.<br>
  * Provides the elements, as colored legend, which can provide the how the values are distributed on map.
  * 
  * @author Andrea "Stock" Stocchero
@@ -37,7 +38,7 @@ import jsinterop.annotations.JsFunction;
 public final class ColorScale extends LegendScale {
 	
 	/**
-	 * Default missing color options, <b>{@value DEFAULT_MISSING_COLOR}</b>.
+	 * Default missing color options, {@link HtmlColor#TRANSPARENT}.
 	 */
 	public static final String DEFAULT_MISSING_COLOR = HtmlColor.TRANSPARENT.toRGBA();
 
@@ -205,7 +206,7 @@ public final class ColorScale extends LegendScale {
 	/**
 	 * Sets the color interpolation callback of the scale.
 	 * 
-	 * @param interpolate the color interpolation callback of the scale
+	 * @param interpolateCallback the color interpolation callback of the scale
 	 */
 	public void setInterpolate(InterpolateCallback interpolateCallback) {
 		// sets the callback

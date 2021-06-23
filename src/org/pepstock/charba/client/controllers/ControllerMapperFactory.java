@@ -19,7 +19,8 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * FIXME
+ * Class to implement from controllers in order to extend the standard configuration of charts.<br>
+ * It takes the java script object of standard options passing it to a wrapper to manage additional properties.
  * 
  * @author Andrea "Stock" Stocchero
  *

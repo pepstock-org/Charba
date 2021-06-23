@@ -47,7 +47,19 @@ public final class ChoroplethOptions extends GeoOptions {
 	 */
 	ChoroplethOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
+		// creates mapper factory
 		this.factory = new ChoroplethRemappedOptionsFactory(this);
+		// initialized objects
+		this.afterConfigurationUpdate();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#afterConfigurationUpdate()
+	 */
+	@Override
+	protected final void afterConfigurationUpdate() {
 		// creates and stores mapper
 		this.mapper = getConfiguration().getRemappedOptions(factory);
 		// creates and stores elements

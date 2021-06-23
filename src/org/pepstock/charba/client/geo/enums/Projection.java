@@ -18,70 +18,70 @@ package org.pepstock.charba.client.geo.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Enumerates the possible values to clip the rendering to the chart area of the GEO graph.
+ * Enumerates the possible map projections which are a way to flatten a globe's surface into a plane in order to make a map.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public enum Projection implements Key
 {
 	/**
-	 * Projection 'azimuthalEqualArea'.
+	 * Projection <b>azimuthalEqualArea</b>.
 	 */
 	AZIMUTHAL_EQUAL_AREA("azimuthalEqualArea"),
 	/**
-	 * Projection 'azimuthalEquidistant'.
+	 * Projection <b>azimuthalEquidistant</b>.
 	 */
 	AZIMUTHAL_EQUIDISTANT("azimuthalEquidistant"),
 	/**
-	 * Projection 'gnomonic'.
+	 * Projection <b>gnomonic</b>.
 	 */
 	GNOMONIC("gnomonic"),
 	/**
-	 * Projection 'orthographic'.
+	 * Projection <b>orthographic</b>.
 	 */
 	ORTHOGRAPHIC("orthographic"),
 	/**
-	 * Projection 'stereographic'.
+	 * Projection <b>stereographic</b>.
 	 */
 	STEREOGRAPHIC("stereographic"),
 	/**
-	 * Projection 'equalEarth'.
+	 * Projection <b>equalEarth</b>.
 	 */
 	EQUAL_EARTH("equalEarth"),
 	/**
-	 * Projection 'albers'.
+	 * Projection <b>albers</b>.
 	 */
 	ALBERS("albers"),
 	/**
-	 * Projection 'albersUsa'.
+	 * Projection <b>albersUsa</b>.
 	 */
 	ALBERS_USA("albersUsa"),
 	/**
-	 * Projection 'conicConformal'.
+	 * Projection <b>conicConformal</b>.
 	 */
 	CONIC_CONFORMAL("conicConformal"),
 	/**
-	 * Projection 'conicEqualArea'.
+	 * Projection <b>conicEqualArea</b>.
 	 */
 	CONIC_EQUAL_AREA("conicEqualArea"),
 	/**
-	 * Projection 'conicEquidistant'.
+	 * Projection <b>conicEquidistant</b>.
 	 */
 	CONIC_EQUIDISTANT("conicEquidistant"),
 	/**
-	 * Projection 'equirectangular'.
+	 * Projection <b>equirectangular</b>.
 	 */
 	EQUIRECTANGULAR("equirectangular"),
 	/**
-	 * Projection 'mercator'.
+	 * Projection <b>mercator</b>.
 	 */
 	MERCATOR("mercator"),
 	/**
-	 * Projection 'transverseMercator'.
+	 * Projection <b>transverseMercator</b>.
 	 */
 	TRANSVERSE_MERCATOR("transverseMercator"),
 	/**
-	 * Projection 'naturalEarth1'.
+	 * Projection <b>naturalEarth1</b>.
 	 */
 	NATURAL_EARTH1("naturalEarth1");
 

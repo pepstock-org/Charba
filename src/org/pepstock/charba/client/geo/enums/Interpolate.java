@@ -26,155 +26,155 @@ import org.pepstock.charba.client.commons.Key;
 public enum Interpolate implements Key
 {
 	/**
-	 * Interpolate color 'blues'.
+	 * Interpolate color <b>blues</b>.
 	 */
 	BLUES("blues"),
 	/**
-	 * Interpolate color 'brBG'.
+	 * Interpolate color <b>brBG</b>.
 	 */
 	BR_B_G("brBG"),
 	/**
-	 * Interpolate color 'buGn'.
+	 * Interpolate color <b>buGn</b>.
 	 */
 	BU_GN("buGn"),
 	/**
-	 * Interpolate color 'buPu'.
+	 * Interpolate color <b>buPu</b>.
 	 */
 	BU_PU("buPu"),
 	/**
-	 * Interpolate color 'cividis'.
+	 * Interpolate color <b>cividis</b>.
 	 */
 	CIVIDIS("cividis"),
 	/**
-	 * Interpolate color 'cool'.
+	 * Interpolate color <b>cool</b>.
 	 */
 	COOL("cool"),
 	/**
-	 * Interpolate color 'cubehelixDefault'.
+	 * Interpolate color <b>cubehelixDefault</b>.
 	 */
 	CUBEHELIX_DEFAULT("cubehelixDefault"),
 	/**
-	 * Interpolate color 'gnBu'.
+	 * Interpolate color <b>gnBu</b>.
 	 */
 	GN_BU("gnBu"),
 	/**
-	 * Interpolate color 'greens'.
+	 * Interpolate color <b>greens</b>.
 	 */
 	GREENS("greens"),
 	/**
-	 * Interpolate color 'greys'.
+	 * Interpolate color <b>greys</b>.
 	 */
 	GREYS("greys"),
 	/**
-	 * Interpolate color 'inferno'.
+	 * Interpolate color <b>inferno</b>.
 	 */
 	INFERNO("inferno"),
 	/**
-	 * Interpolate color 'magma'.
+	 * Interpolate color <b>magma</b>.
 	 */
 	MAGMA("magma"),
 	/**
-	 * Interpolate color 'orRd'.
+	 * Interpolate color <b>orRd</b>.
 	 */
 	OR_RD("orRd"),
 	/**
-	 * Interpolate color 'oranges'.
+	 * Interpolate color <b>oranges</b>.
 	 */
 	ORANGES("oranges"),
 	/**
-	 * Interpolate color 'pRGn'.
+	 * Interpolate color <b>pRGn</b>.
 	 */
 	P_R_GN("pRGn"),
 	/**
-	 * Interpolate color 'piYG'.
+	 * Interpolate color <b>piYG</b>.
 	 */
 	PI_Y_G("piYG"),
 	/**
-	 * Interpolate color 'plasma'.
+	 * Interpolate color <b>plasma</b>.
 	 */
 	PLASMA("plasma"),
 	/**
-	 * Interpolate color 'puBu'.
+	 * Interpolate color <b>puBu</b>.
 	 */
 	PU_BU("puBu"),
 	/**
-	 * Interpolate color 'puBuGn'.
+	 * Interpolate color <b>puBuGn</b>.
 	 */
 	PU_BU_GN("puBuGn"),
 	/**
-	 * Interpolate color 'puOr'.
+	 * Interpolate color <b>puOr</b>.
 	 */
 	PU_OR("puOr"),
 	/**
-	 * Interpolate color 'puRd'.
+	 * Interpolate color <b>puRd</b>.
 	 */
 	PU_RD("puRd"),
 	/**
-	 * Interpolate color 'purples'.
+	 * Interpolate color <b>purples</b>.
 	 */
 	PURPLES("purples"),
 	/**
-	 * Interpolate color 'rainbow'.
+	 * Interpolate color <b>rainbow</b>.
 	 */
 	RAINBOW("rainbow"),
 	/**
-	 * Interpolate color 'rdBu'.
+	 * Interpolate color <b>rdBu</b>.
 	 */
 	RD_BU("rdBu"),
 	/**
-	 * Interpolate color 'rdGy'.
+	 * Interpolate color <b>rdGy</b>.
 	 */
 	RD_GY("rdGy"),
 	/**
-	 * Interpolate color 'rdPu'.
+	 * Interpolate color <b>rdPu</b>.
 	 */
 	RD_PU("rdPu"),
 	/**
-	 * Interpolate color 'rdYlBu'.
+	 * Interpolate color <b>rdYlBu</b>.
 	 */
 	RD_YL_BU("rdYlBu"),
 	/**
-	 * Interpolate color 'rdYlGn'.
+	 * Interpolate color <b>rdYlGn</b>.
 	 */
 	RD_YL_GN("rdYlGn"),
 	/**
-	 * Interpolate color 'reds'.
+	 * Interpolate color <b>reds</b>.
 	 */
 	REDS("reds"),
 	/**
-	 * Interpolate color 'sinebow'.
+	 * Interpolate color <b>sinebow</b>.
 	 */
 	SINEBOW("sinebow"),
 	/**
-	 * Interpolate color 'spectral'.
+	 * Interpolate color <b>spectral</b>.
 	 */
 	SPECTRAL("spectral"),
 	/**
-	 * Interpolate color 'turbo'.
+	 * Interpolate color <b>turbo</b>.
 	 */
 	TURBO("turbo"),
 	/**
-	 * Interpolate color 'viridis'.
+	 * Interpolate color <b>viridis</b>.
 	 */
 	VIRIDIS("viridis"),
 	/**
-	 * Interpolate color 'warm'.
+	 * Interpolate color <b>warm</b>.
 	 */
 	WARM("warm"),
 	/**
-	 * Interpolate color 'ylGn'.
+	 * Interpolate color <b>ylGn</b>.
 	 */
 	YL_GN("ylGn"),
 	/**
-	 * Interpolate color 'ylGnBu'.
+	 * Interpolate color <b>ylGnBu</b>.
 	 */
 	YL_GN_BU("ylGnBu"),
 	/**
-	 * Interpolate color 'ylOrBr'.
+	 * Interpolate color <b>ylOrBr</b>.
 	 */
 	YL_OR_BR("ylOrBr"),
 	/**
-	 * Interpolate color 'ylOrRd'.
+	 * Interpolate color <b>ylOrRd</b>.
 	 */
 	YL_OR_RD("ylOrRd");
 

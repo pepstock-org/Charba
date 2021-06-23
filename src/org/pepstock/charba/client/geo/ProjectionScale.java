@@ -15,17 +15,26 @@
 */
 package org.pepstock.charba.client.geo;
 
+import java.util.List;
+
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.geo.enums.Projection;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
+ * A map projection is a way to flatten a globe's surface into a plane in order to make a map.<br>
+ * This requires a systematic transformation of the latitudes and longitudes of locations from the surface of the globe into locations on a plane.<br>
+ * This is the scale which is managing the map projection.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class ProjectionScale extends AbstractNode {
-	
+
 	/**
 	 * Name of properties of native object for projection scale.
 	 */
@@ -59,26 +68,77 @@ public final class ProjectionScale extends AbstractNode {
 
 	}
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * 
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
+	 */
 	ProjectionScale(AbstractNode parent, Key childKey, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
 	}
-	
+
 	/**
-	 * FIXME Sets whether to clip the rendering to the chart area of the graph.
+	 * Sets a map projection which is a way to flatten a globe's surface into a plane in order to make a map.
 	 * 
-	 * @param projection whether to clip the rendering to the chart area of the graph
+	 * @param projection a map projection which is a way to flatten a globe's surface into a plane in order to make a map
 	 */
 	public void setProjection(Projection projection) {
 		setValueAndAddToParent(Property.PROJECTION, projection);
 	}
 
 	/**
-	 * FIXME Returns whether to clip the rendering to the chart area of the graph.
+	 * Returns a map projection which is a way to flatten a globe's surface into a plane in order to make a map.
 	 * 
-	 * @return whether to clip the rendering to the chart area of the graph
+	 * @return a map projection which is a way to flatten a globe's surface into a plane in order to make a map
 	 */
 	public Projection getProjection() {
 		return getValue(Property.PROJECTION, Projection.values(), Projection.ALBERS_USA);
 	}
+
+	/**
+	 * Sets a map projection scale value.
+	 * 
+	 * @param projectionScale a map projection scale value
+	 */
+	public void setProjectionScale(double projectionScale) {
+		setValueAndAddToParent(Property.PROJECTION_SCALE, projectionScale);
+	}
+
+	/**
+	 * Returns a map projection scale value.
+	 * 
+	 * @return a map projection scale value.
+	 */
+	public double getProjectionScale() {
+		return getValue(Property.PROJECTION_SCALE, Undefined.DOUBLE);
+	}
 	
+	/**
+	 * Sets a map projection offset value.
+	 * 
+	 * @param projectionOffset a map projection offset value
+	 */
+	public void setProjectionOffset(double... projectionOffset) {
+		// checks if argument is consistent
+		if (projectionOffset != null && projectionOffset.length == 2) {
+			// stores
+			setValueOrArrayAndAddToParent(Property.PROJECTION_OFFSET, projectionOffset);
+		} else {
+			// if here the argument is not consistent
+			// then removes the property
+			remove(Property.PROJECTION_OFFSET);
+		}
+	}
+
+	/**
+	 * Returns a map projection offset value.
+	 * 
+	 * @return a map projection offset value.
+	 */
+	public List<Double> getProjectionOffset() {
+		ArrayDouble array = getArrayValue(Property.PROJECTION_OFFSET);
+		return ArrayListHelper.list(array);
+	}
 }

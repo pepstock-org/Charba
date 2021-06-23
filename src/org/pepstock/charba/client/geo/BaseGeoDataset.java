@@ -75,7 +75,7 @@ abstract class BaseGeoDataset extends Dataset implements HasCommonOptions{
 	/**
 	 * Throws an exception because not available.
 	 * 
-	 * @returns nothing because will throw an exception
+	 * @return nothing because will throw an exception
 	 */
 	@Override
 	public List<Double> getData() {
@@ -85,7 +85,7 @@ abstract class BaseGeoDataset extends Dataset implements HasCommonOptions{
 	/**
 	 * Throws an exception because not available.
 	 * 
-	 * @returns nothing because will throw an exception
+	 * @return nothing because will throw an exception
 	 */
 	@Override
 	public List<Double> getData(boolean binding) {
@@ -122,6 +122,7 @@ abstract class BaseGeoDataset extends Dataset implements HasCommonOptions{
 	/**
 	 * Returns the data property of a data set for a chart is specified as an array of {@link GeoData}.
 	 * 
+	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return list of {@link GeoData}.
 	 */
 	public List<GeoData> getValues(boolean binding) {

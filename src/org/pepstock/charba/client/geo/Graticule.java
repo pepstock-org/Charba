@@ -24,12 +24,15 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * FIXME
+ * The network of intersecting lines of latitude and longitude is called the graticule.<br>
+ * It is imaginary on the earth, of course, but is drawn on globes and maps for reference.<br>
+ * The graticule of latitude and longitude lines is an angular measurement system.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Graticule extends NativeObjectContainer{
-	
+public final class Graticule extends NativeObjectContainer {
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -77,39 +80,43 @@ public final class Graticule extends NativeObjectContainer{
 	Graticule(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
 	/**
+	 * Sets the graticule lines distances in degrees. Only 2 values are allowed.
 	 * 
-	 * @param steps
+	 * @param steps the graticule lines distances in degrees
 	 */
 	public void setStepMajor(double... steps) {
 		setValues(Property.STEP_MAJOR, steps);
 	}
 
 	/**
+	 * Returns the graticule lines distances in degrees. Only 2 values are allowed.
 	 * 
-	 * @param steps
+	 * @return the graticule lines distances in degrees
 	 */
 	public List<Double> getStepMajor() {
 		return getValues(Property.STEP_MAJOR);
 	}
-	
+
 	/**
+	 * Sets the graticule lines distances in degrees. Only 2 values are allowed.
 	 * 
-	 * @param steps
+	 * @param steps the graticule lines distances in degrees
 	 */
 	public void setStepMinor(double... steps) {
 		setValues(Property.STEP_MINOR, steps);
 	}
 
 	/**
+	 * Returns the graticule lines distances in degrees. Only 2 values are allowed.
 	 * 
-	 * @param steps
+	 * @return the graticule lines distances in degrees
 	 */
 	public List<Double> getStepMinor() {
 		return getValues(Property.STEP_MINOR);
 	}
-	
+
 	/**
 	 * Returns the native object instance.
 	 * 
@@ -120,9 +127,10 @@ public final class Graticule extends NativeObjectContainer{
 	}
 
 	/**
-	 * 
-	 * @param property
-	 * @param steps
+	 * Checks the argument and stores the values.
+	 *  
+	 * @param property property of java script object to use for storing values
+	 * @param steps values to store
 	 */
 	private void setValues(Property property, double... steps) {
 		// checks if argument is consistent
@@ -137,13 +145,14 @@ public final class Graticule extends NativeObjectContainer{
 	}
 
 	/**
-	 * 
-	 * @param property
-	 * @return
+	 * Returns the stored values as a list.
+	 *  
+	 * @param property property of java script object to use for getting values
+	 * @return a list of stored values
 	 */
 	private List<Double> getValues(Property property) {
 		ArrayDouble array = getArrayValue(property);
 		return ArrayListHelper.list(array);
 	}
-	
+
 }

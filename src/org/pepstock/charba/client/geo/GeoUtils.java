@@ -352,8 +352,8 @@ public final class GeoUtils {
 	/**
 	 * Returns <code>true</code> if the string argument is not null and length greater than 0.
 	 * 
-	 * @param value
-	 * @return
+	 * @param value string value to check
+	 * @return <code>true</code> if the string argument is not null and length greater than 0
 	 */
 	private static boolean isConsistent(String value) {
 		return value != null && value.trim().length() > 0;

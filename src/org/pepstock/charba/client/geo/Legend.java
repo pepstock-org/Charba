@@ -23,7 +23,8 @@ import org.pepstock.charba.client.geo.enums.Align;
 import org.pepstock.charba.client.geo.enums.Position;
 
 /**
- * FIXME
+ * Legend configuration for GEO chart scale.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -82,6 +83,13 @@ public final class Legend extends AbstractNode {
 
 	}
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * 
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
+	 */
 	Legend(AbstractNode parent, Key childKey, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
 	}
@@ -147,8 +155,7 @@ public final class Legend extends AbstractNode {
 	}
 
 	/**
-	 * Sets the length of the legend.<br>
-	 * For a horizontal scale the width if a value < 1 is given, is it assume to be a ratio of the corresponding chart area.
+	 * Sets the length of the legend.
 	 * 
 	 * @param length the length of the legend
 	 */
@@ -157,9 +164,9 @@ public final class Legend extends AbstractNode {
 	}
 
 	/**
-	 * Returns the alignment of the scale.
+	 * Returns the length of the legend.
 	 * 
-	 * @return the alignment of the scale
+	 * @return the length of the legend
 	 */
 	public int getLength() {
 		return getValue(Property.LENGTH, DEFAULT_LENGTH);
@@ -167,7 +174,7 @@ public final class Legend extends AbstractNode {
 
 	/**
 	 * Sets how wide the scale is.<br>
-	 * For a horizontal scale the height if a value < 1 is given, is it assume to be a ratio of the corresponding chart area.
+	 * For a horizontal scale the height if a value less than 1 is given, is it assume to be a ratio of the corresponding chart area.
 	 * 
 	 * @param width how wide the scale is
 	 */
@@ -177,7 +184,7 @@ public final class Legend extends AbstractNode {
 
 	/**
 	 * Returns how wide the scale is.<br>
-	 * For a horizontal scale the height if a value < 1 is given, is it assume to be a ratio of the corresponding chart area.
+	 * For a horizontal scale the height if a value less than 1 is given, is it assume to be a ratio of the corresponding chart area.
 	 * 
 	 * @return how wide the scale is
 	 */

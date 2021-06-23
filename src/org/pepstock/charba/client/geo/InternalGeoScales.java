@@ -20,12 +20,16 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * FIXME
+ * Internal mapper of <code>SCALES</code> object.<br>
+ * In GEO charts, there are 3 types of scales that you can use.<br>
+ * To avoid mistakes to the user to set the right axis to the specific chart, the 3 types of axes are mapped and provided as normal options containers.<br>
+ * THis calls can re-map the scales configuration in order to set the configuration to the scales without having any axis class. 
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class InternalGeoScales extends AbstractNode {
-	
+
 	/**
 	 * Name of properties of native object for projection scale.
 	 */
@@ -61,11 +65,19 @@ final class InternalGeoScales extends AbstractNode {
 		}
 
 	}
-	
-	private final ProjectionScale projectionScale;
 
+	// projection scale instance
+	private final ProjectionScale projectionScale;
+	// color scale instance
 	private final ColorScale colorScale;
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * 
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
+	 */
 	InternalGeoScales(AbstractNode parent, Key childKey, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
 		// gets and stores projection scale
@@ -75,18 +87,18 @@ final class InternalGeoScales extends AbstractNode {
 	}
 
 	/**
-	 * FIXME Returns whether to clip the rendering to the chart area of the graph.
+	 * Returns the scale instance which manages the map projection.
 	 * 
-	 * @return whether to clip the rendering to the chart area of the graph
+	 * @return the scale instance which manages the map projection
 	 */
 	ProjectionScale getProjectionScale() {
 		return projectionScale;
 	}
 
 	/**
-	 * FIXME Returns whether to clip the rendering to the chart area of the graph.
+	 * Returns a special color scale which manages the coloring of the nodes. 
 	 * 
-	 * @return whether to clip the rendering to the chart area of the graph
+	 * @return a special color scale which manages the coloring of the nodes
 	 */
 	ColorScale getColorScale() {
 		return colorScale;

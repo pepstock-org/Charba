@@ -22,8 +22,7 @@ import org.pepstock.charba.client.geo.ChoroplethOptions;
 
 /**
  * CHOROPLETH chart GWT WIDGET implementation.<br>
- * FIXME A bar chart provides a way of showing data values represented as vertical bars.<br>
- * It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
+ * A choropleth chart is used to render maps with the area filled according to some numerical value.
  * 
  * @author Andrea "Stock" Stocchero
  */

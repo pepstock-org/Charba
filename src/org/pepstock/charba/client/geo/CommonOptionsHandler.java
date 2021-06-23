@@ -147,9 +147,9 @@ final class CommonOptionsHandler extends AbstractNode {
 	}
 
 	/**
-	 * Sets the graticule object to render a graticule in the background.
+	 * Sets the graticule object to render the lines in the background.
 	 *
-	 * @param showGraticule the graticule to render a graticule in the background
+	 * @param showGraticule the graticule to render the lines in the background
 	 */
 	void setShowGraticule(Graticule showGraticule) {
 		// checks if consistent
@@ -173,9 +173,9 @@ final class CommonOptionsHandler extends AbstractNode {
 	}
 
 	/**
-	 * Returns the graticule> to render a graticule in the background.
+	 * Returns the graticule to render the lines in the background.
 	 *
-	 * @return the graticule to render a graticule in the background or <code>null</code> is any object has been set
+	 * @return the graticule to render the lines in the background or <code>null</code> is any object has been set
 	 */
 	Graticule getShowGraticule() {
 		// checks the property is set as object

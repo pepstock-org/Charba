@@ -20,6 +20,9 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
+ * Base scale for color and size axes, needed for GOE charts implementation.<br>
+ * It contains all options needed to configure the scale with a legend.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

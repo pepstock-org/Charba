@@ -18,7 +18,7 @@ package org.pepstock.charba.client.geo;
 import org.pepstock.charba.client.geo.enums.ClipMap;
 
 /**
- * FIXME
+ * Maps all options which are common between GEO options and dataset.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -93,9 +93,9 @@ interface HasCommonOptions {
 	}
 
 	/**
-	 * Sets <code>true</code> to render a graticule in the background.
+	 * Sets <code>true</code> to render the lines in the background.
 	 *
-	 * @param showGraticule <code>true</code> to render a graticule in the background
+	 * @param showGraticule <code>true</code> to render the lines in the background
 	 */
 	default void setShowGraticule(boolean showGraticule) {
 		// checks if handler is consistent
@@ -106,9 +106,9 @@ interface HasCommonOptions {
 	}
 
 	/**
-	 * Sets the graticule object to render a graticule in the background.
+	 * Sets the graticule object to render the lines in the background.
 	 *
-	 * @param showGraticule the graticule to render a graticule in the background
+	 * @param showGraticule the graticule to render the lines in the background
 	 */
 	default void setShowGraticule(Graticule showGraticule) {
 		// checks if handler is consistent
@@ -135,9 +135,9 @@ interface HasCommonOptions {
 	}
 
 	/**
-	 * Returns the graticule> to render a graticule in the background.
+	 * Returns the graticule to render the lines in the background.
 	 *
-	 * @return the graticule to render a graticule in the background or <code>null</code> is any object has been set
+	 * @return the graticule to render the lines in the background or <code>null</code> is any object has been set
 	 */
 	default Graticule getShowGraticule() {
 		// checks if handler is consistent

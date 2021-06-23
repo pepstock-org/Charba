@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * FIXME .
+ * Defines the margin pixels for legend such that it doesn't stick to the edge of the chart .
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -60,20 +60,29 @@ public final class Margin extends NativeObjectContainer {
 	}
 
 	/**
-	 * FIXME
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates an empty margin object.
+	 */
+	public Margin() {
+		this(null);
+	}
+
+	/**
+	 * Creates an margin setting top-bottom and left-right initial values.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param topBottom a values to set top and bottom dimensions
+	 * @param leftRight a values to set left and right dimensions
 	 */
 	public Margin(int topBottom, int leftRight) {
 		this(topBottom, leftRight, topBottom, leftRight);
 	}
 
 	/**
-	 * FIXME
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates an margin setting top-bottom and left-right initial values.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @param top a values to set top dimension
+	 * @param right a values to set right dimension
+	 * @param bottom a values to set bottom dimension
+	 * @param left a values to set left dimension
 	 */
 	public Margin(int top, int right, int bottom, int left) {
 		this(null);
@@ -94,77 +103,77 @@ public final class Margin extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets the top of chart area.
+	 * Sets the margin top of legend.
 	 * 
-	 * @param top the top of chart area.
+	 * @param top the margin top of legend.
 	 */
 	public void setTop(int top) {
 		setValue(Property.TOP, top);
 	}
 
 	/**
-	 * Returns the top of chart area.
+	 * Returns the margin top of legend.
 	 * 
-	 * @return the top of chart area.
+	 * @return the margin top of legend.
 	 */
 	public int getTop() {
 		return getValue(Property.TOP, Legend.DEFAULT_MARGIN);
 	}
 
 	/**
-	 * Sets the right of chart area.
+	 * Sets the margin right of legend.
 	 * 
-	 * @param right the right of chart area.
+	 * @param right the margin right of legend.
 	 */
 	public void setRight(int right) {
 		setValue(Property.RIGHT, right);
 	}
 
 	/**
-	 * Returns the right of chart area.
+	 * Returns the margin right of legend.
 	 * 
-	 * @return the right of chart area.
+	 * @return the margin right of legend.
 	 */
 	public int getRight() {
 		return getValue(Property.RIGHT, Legend.DEFAULT_MARGIN);
 	}
 
 	/**
-	 * Sets the bottom of chart area.
+	 * Sets the margin bottom of legend.
 	 * 
-	 * @param bottom the bottom of chart area.
+	 * @param bottom the margin bottom of legend.
 	 */
 	public void setBottom(int bottom) {
 		setValue(Property.BOTTOM, bottom);
 	}
 
 	/**
-	 * Returns the bottom of chart area.
+	 * Returns the margin bottom of legend.
 	 * 
-	 * @return the bottom of chart area.
+	 * @return the margin bottom of legend.
 	 */
 	public int getBottom() {
 		return getValue(Property.BOTTOM, Legend.DEFAULT_MARGIN);
 	}
 
 	/**
-	 * Sets the left of chart area.
+	 * Sets the margin left of legend.
 	 * 
-	 * @param left the left of chart area.
+	 * @param left the margin left of legend.
 	 */
 	public void setLeft(int left) {
 		setValue(Property.LEFT, left);
 	}
 
 	/**
-	 * Returns the left of chart area.
+	 * Returns the margin left of legend.
 	 * 
-	 * @return the left of chart area.
+	 * @return the margin left of legend.
 	 */
 	public int getLeft() {
 		return getValue(Property.LEFT, Legend.DEFAULT_MARGIN);
 	}
-	
+
 	/**
 	 * Returns the native object instance.
 	 * 

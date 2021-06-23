@@ -17,15 +17,13 @@ package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.NativeName;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * FIXME Internal utility for {@link DataLabelsPlugin} to register the plugin globally to Chart.js.<br>
- * This is needed because from the plugin version for Chart.js 3, the plugin doesn't register itself golbally anymore and delegeate this operation to the user.<br>
- * To maintain the same capabilities of Charba, this object register the plugin globally.
+ * Internal utility for GEo charts to invoke <code>ChartGeo.topojson</code> utility provided by the controller package.<br>
+ * TopoJson is packaged with this plugin to convert data, it is exposed as  in the global context. 
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -41,7 +39,11 @@ final class NativeJsGeoHelper {
 	}
 
 	/**
-	 * FIXME
+	 * Parses the topoJson definition in order to create all features need to draw the regions.
+	 * 
+	 * @param topojson topoJson region definition
+	 * @param featureProperty property in the <code>objects</code> node of topoJson definition where all regions are defined
+	 * @return array with all parsed features
 	 */
 	static native ArrayObject features(String topojson, String featureProperty);
 
