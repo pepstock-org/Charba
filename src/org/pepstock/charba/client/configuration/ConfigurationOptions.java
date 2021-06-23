@@ -252,6 +252,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @param envelop envelop for chart options as native options
 	 */
 	public final void setChartOptions(ChartEnvelop<NativeObject> envelop) {
+		// invokes the notification method
+		beforeConfigurationUpdate();
 		// sets new configuration
 		setConfiguration(new ExtendedOptions(getChart(), defaultValues, new ConfigurationEnvelop<>(Envelop.checkAndGetIfValid(envelop).getContent())));
 		// checks if this configuration is prepared to have scales
@@ -260,12 +262,50 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			ScalesOptions options = (ScalesOptions) this;
 			// scans axes to set new configuration
 			for (Axis axis : options.getScales().getAxes()) {
+				// invokes the notification method
+				beforeAxisConfigurationUpdate(axis);
 				// stores new base object, the object of chart options
 				axis.setConfiguration(new ExtendedScale(new ConfigurationEnvelop<>(getConfiguration().getScales().getAxis(axis.getId())), axis.getDefaultValues()));
+				// invokes the notification method
+				afterAxisConfigurationUpdate(axis);
 			}
 		}
+		// invokes the notification method
+		afterConfigurationUpdate();
+	}
+	
+	/**
+	 * Invoked before the chart options are going to be updated.
+	 */
+	protected void beforeConfigurationUpdate() {
+		// do nothing
 	}
 
+	/**
+	 * Invoked after the chart options has been updated.
+	 */
+	protected void afterConfigurationUpdate() {
+		// do nothing
+	}
+
+	/**
+	 * Invoked before the axis options are going to be updated.
+	 * 
+	 * @param axis axis instance which is going to be updated
+	 */
+	protected void beforeAxisConfigurationUpdate(Axis axis) {
+		// do nothing
+	}
+
+	/**
+	 * Invoked after the axis options has been updated.
+	 * 
+	 * @param axis axis instance which has been updated
+	 */
+	protected void afterAxisConfigurationUpdate(Axis axis) {
+		// do nothing
+	}
+	
 	/**
 	 * Returns the defaults configuration.
 	 * 
