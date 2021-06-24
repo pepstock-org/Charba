@@ -17,8 +17,8 @@ package org.pepstock.charba.client.data;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.BaseEnvelop;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -82,6 +82,97 @@ public final class DataPoint extends NativeObjectContainer {
 	 */
 	public DataPoint() {
 		this((NativeObject) null);
+	}
+
+	/**
+	 * Creates the object with the passed point values.
+	 * 
+	 * @param x x value of data point
+	 * @param y y value of data point
+	 */
+	public DataPoint(double x, double y) {
+		this();
+		// stores values
+		setX(x);
+		setY(y);
+	}
+
+	/**
+	 * Creates the object with the passed point values.
+	 * 
+	 * @param x x value of data point
+	 * @param y y value of data point
+	 */
+	public DataPoint(Date x, double y) {
+		this();
+		// stores values
+		setX(x);
+		setY(y);
+	}
+
+	/**
+	 * Creates the object with the passed point values.
+	 * 
+	 * @param x x value of data point
+	 * @param y y value of data point
+	 */
+	public DataPoint(String x, double y) {
+		this();
+		// stores values
+		setX(x);
+		setY(y);
+	}
+
+	/**
+	 * Creates the object with the passed point values.
+	 * 
+	 * @param x x value of data point
+	 * @param y y value of data point
+	 */
+	public DataPoint(double x, FloatingData y) {
+		this();
+		// stores values
+		setX(x);
+		setY(y);
+	}
+
+	/**
+	 * Creates the object with the passed point values.
+	 * 
+	 * @param x x value of data point
+	 * @param y y value of data point
+	 */
+	public DataPoint(Date x, FloatingData y) {
+		this();
+		// stores values
+		setX(x);
+		setY(y);
+	}
+
+	/**
+	 * Creates the object with the passed point values.
+	 * 
+	 * @param x x value of data point
+	 * @param y y value of data point
+	 */
+	public DataPoint(String x, FloatingData y) {
+		this();
+		// stores values
+		setX(x);
+		setY(y);
+	}
+	
+	/**
+	 * Creates the object with the passed point values (for bubble).
+	 * 
+	 * @param x x value of data point
+	 * @param y y value of data point
+	 * @param r the bubble radius in pixels (not scaled).
+	 */
+	public DataPoint(double x, double y, double r) {
+		this(x, y);
+		// stores values
+		setR(r);
 	}
 
 	/**
