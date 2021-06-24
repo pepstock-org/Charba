@@ -1016,7 +1016,6 @@ function CharbaJsGeoHelper() {}
  */
 CharbaJsGeoHelper.features = function(topojson, featureProperty) {
   var topojsonObject = JSON.parse(topojson);
-  console.log(topojsonObject);
   if (topojsonObject != null && typeof topojsonObject.objects !== 'undefined' && typeof topojsonObject.objects[featureProperty] !== 'undefined'){
     var parsedFeatures = ChartGeo.topojson.feature(topojsonObject, topojsonObject.objects[featureProperty]);
     if (parsedFeatures != null){
