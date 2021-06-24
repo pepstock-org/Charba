@@ -26,7 +26,7 @@ import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.resources.ResourcesType;
 

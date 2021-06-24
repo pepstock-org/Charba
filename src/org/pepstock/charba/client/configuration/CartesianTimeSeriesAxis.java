@@ -18,7 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.options.ScaleId;
 
@@ -37,7 +37,7 @@ public class CartesianTimeSeriesAxis extends CartesianTimeAxis {
 	 */
 	public CartesianTimeSeriesAxis(IsChart chart) {
 		// uses X as axis id
-		this(chart, AxisType.TIMESERIES.getDefaultScaleId());
+		this(chart, ChartAxisType.TIMESERIES.getDefaultScaleId());
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class CartesianTimeSeriesAxis extends CartesianTimeAxis {
 	 * @param kind axis kind
 	 */
 	public CartesianTimeSeriesAxis(IsChart chart, AxisKind kind) {
-		this(chart, DefaultScaleId.getByAxisKind(kind, AxisType.TIMESERIES.getDefaultScaleId()), kind);
+		this(chart, DefaultScaleId.getByAxisKind(kind, ChartAxisType.TIMESERIES.getDefaultScaleId()), kind);
 	}
 
 	/**
@@ -89,6 +89,6 @@ public class CartesianTimeSeriesAxis extends CartesianTimeAxis {
 	 * @param kind axis kind
 	 */
 	public CartesianTimeSeriesAxis(IsChart chart, ScaleId id, AxisKind kind) {
-		super(chart, id, AxisType.TIMESERIES, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
+		super(chart, id, ChartAxisType.TIMESERIES, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 	}
 }

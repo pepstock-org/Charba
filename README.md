@@ -143,6 +143,9 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Breaking changes
+  * rename `AxisType` to `ChartAxisType` in order to enable custom axes type.
+
 ### Features
 
   * import CHART.JS GEO controller [version v3.1.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.1.0)
@@ -156,6 +159,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `borderCapStyle`, `borderDash`, `borderDashOffset`, `borderJoinStyle`, `fill` and `cubicInterpolationMode` scriptable options to `Line` configuration.
   * add `radius`, `hitRadius`, `hoverRadius`, `pointStyle` and `rotation` scriptable options to `Point` configuration.
   * add `parsing` and `normalized` options to `Dataset` configuration.
+  * enable the feature to create custom axes types (for injected controller)
     
 License
 -------

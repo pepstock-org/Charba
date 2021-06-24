@@ -101,7 +101,7 @@ public final class DefaultChartScales implements IsDefaultScales {
 	private DefaultChartScale searchByAxisKind(AxisKind kind) {
 		// checks consistency of kind
 		if (Key.isValid(kind)) {
-			DefaultScaleId defScaleId = DefaultScaleId.getByAxisKind(kind, DefaultScaleId.UNKNOWN);
+			ScaleId defScaleId = DefaultScaleId.getByAxisKind(kind, DefaultScaleId.UNKNOWN);
 			if (!DefaultScaleId.UNKNOWN.equals(defScaleId) && scales.hasAxis(defScaleId)) {
 				// gets the stored axis as Y
 				return new DefaultChartScale(scales.getAxis(defScaleId));

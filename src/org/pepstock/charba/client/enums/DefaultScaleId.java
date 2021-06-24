@@ -82,11 +82,12 @@ public enum DefaultScaleId implements ScaleId
 		return value;
 	}
 
-	/**
-	 * Returns the default axis kind for this default scale id.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the default axis kind for this default scale id
+	 * @see org.pepstock.charba.client.options.ScaleId#getAxisKind()
 	 */
+	@Override
 	public AxisKind getAxisKind() {
 		return axisKind;
 	}
@@ -126,7 +127,7 @@ public enum DefaultScaleId implements ScaleId
 	 * @param defaultValue default axis id to use if it's not matching
 	 * @return the default scale id instance, otherwise will return <code>null</code> if not found
 	 */
-	public static DefaultScaleId getByAxisKind(AxisKind kind, DefaultScaleId defaultValue) {
+	public static ScaleId getByAxisKind(AxisKind kind, ScaleId defaultValue) {
 		// checks if kind is consistent
 		if (Key.isValid(kind)) {
 			// scans all defaults to check with the argument

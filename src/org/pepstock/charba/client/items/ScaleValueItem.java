@@ -19,7 +19,7 @@ import java.util.Date;
 
 import org.pepstock.charba.client.commons.ImmutableDate;
 import org.pepstock.charba.client.data.FloatingData;
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.ScaleDataType;
 
 /**
@@ -45,7 +45,7 @@ public final class ScaleValueItem {
 
 	/**
 	 * Creates the object with the value retrieved from the scale, value as {@link String}.<br>
-	 * Used for {@link AxisType#CATEGORY} scale.
+	 * Used for {@link ChartAxisType#CATEGORY} scale.
 	 * 
 	 * @param value value on the scale
 	 * @param label string representation of the value, showed on the scale
@@ -60,7 +60,7 @@ public final class ScaleValueItem {
 
 	/**
 	 * Creates the object with the value retrieved from the scale, value as {@link Date}.<br>
-	 * Used for {@link AxisType#TIME} and {@link AxisType#TIMESERIES} scales.
+	 * Used for {@link ChartAxisType#TIME} and {@link ChartAxisType#TIMESERIES} scales.
 	 * 
 	 * @param value value on the scale
 	 * @param label string representation of the value, showed on the scale
@@ -76,7 +76,7 @@ public final class ScaleValueItem {
 
 	/**
 	 * Creates the object with the value retrieved from the scale, value as double.<br>
-	 * Used for {@link AxisType#LINEAR}, {@link AxisType#LOGARITHMIC} and {@link AxisType#RADIAL_LINEAR} scales.
+	 * Used for {@link ChartAxisType#LINEAR}, {@link ChartAxisType#LOGARITHMIC} and {@link ChartAxisType#RADIAL_LINEAR} scales.
 	 * 
 	 * @param value value on the scale
 	 * @param label string representation of the value, showed on the scale

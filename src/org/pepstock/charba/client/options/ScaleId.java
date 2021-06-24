@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.PropertyKey;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 
 /**
@@ -112,4 +113,10 @@ public interface ScaleId extends PropertyKey {
 		return defaultValue;
 	}
 
+	/**
+	 * Returns the default axis kind for this default scale id.
+	 * 
+	 * @return the default axis kind for this default scale id
+	 */
+	AxisKind getAxisKind();
 }

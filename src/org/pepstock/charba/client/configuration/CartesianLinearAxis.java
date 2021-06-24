@@ -18,7 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.options.ScaleId;
 
@@ -38,7 +38,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	 */
 	public CartesianLinearAxis(IsChart chart) {
 		// uses Y as axis id
-		this(chart, AxisType.LINEAR.getDefaultScaleId());
+		this(chart, ChartAxisType.LINEAR.getDefaultScaleId());
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	 * @param kind axis kind.
 	 */
 	public CartesianLinearAxis(IsChart chart, AxisKind kind) {
-		this(chart, DefaultScaleId.getByAxisKind(kind, AxisType.LINEAR.getDefaultScaleId()), kind);
+		this(chart, DefaultScaleId.getByAxisKind(kind, ChartAxisType.LINEAR.getDefaultScaleId()), kind);
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	 * @param kind axis kind.
 	 */
 	public CartesianLinearAxis(IsChart chart, ScaleId id, AxisKind kind) {
-		super(chart, id, AxisType.LINEAR, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.Y));
+		super(chart, id, ChartAxisType.LINEAR, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.Y));
 		// creates the ticks instance
 		this.ticks = new CartesianLinearTick(this);
 	}

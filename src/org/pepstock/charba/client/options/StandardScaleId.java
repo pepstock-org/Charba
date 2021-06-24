@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.enums.AxisKind;
+import org.pepstock.charba.client.enums.DefaultScaleId;
+
 /**
  * This is a standard implementation of a scale id
  * 
@@ -23,15 +26,31 @@ package org.pepstock.charba.client.options;
  */
 public final class StandardScaleId extends AbstractStandardKey implements ScaleId {
 
+	// default axis kind
+	private final AxisKind axisKind;
+
 	/**
 	 * Builds the object with the scale id value as string
 	 * 
 	 * @param value value of key as String
+	 * @param kind default axis kind for this default scale id
 	 */
 	StandardScaleId(String value) {
 		super(value);
 		// checks if argument is consistent
 		ScaleId.checkIfValid(this);
+		// gets the default axis kind
+		this.axisKind = DefaultScaleId.getAxisKindByScaleId(value, AxisKind.X);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.ScaleId#getAxisKind()
+	 */
+	@Override
+	public AxisKind getAxisKind() {
+		return axisKind;
 	}
 
 }

@@ -33,9 +33,10 @@ import org.pepstock.charba.client.utils.CScheduler;
  */
 final class CallbackPropertyManager {
 
+	// singleton instance
 	private static final CallbackPropertyManager INSTANCE = new CallbackPropertyManager();
 
-	// caches with the callback handlers instance
+	// caches with the callback handlers instances
 	private final Set<IsCallbackPropertyHandler> handlers = new HashSet<>();
 	// notifier instance
 	private final CallbackPropertyNotifier notifier = new CallbackPropertyNotifier();

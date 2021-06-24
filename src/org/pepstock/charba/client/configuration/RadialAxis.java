@@ -17,7 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 
 /**
@@ -46,7 +46,7 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 	 * @param chart chart instance
 	 */
 	public RadialAxis(IsChart chart) {
-		super(chart, DefaultScaleId.R, AxisType.RADIAL_LINEAR, AxisKind.R);
+		super(chart, DefaultScaleId.R, ChartAxisType.RADIAL_LINEAR, AxisKind.R);
 		// initialize sub elements
 		pointLabels = new RadialPointLabels(this);
 		grid = new Grid(this);

@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.enums;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.configuration.AxisType;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * Axes are an integral part of a chart. They are used to determine how data maps to a pixel value on the chart.<br>
@@ -23,7 +24,7 @@ import org.pepstock.charba.client.commons.Key;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum AxisType implements Key
+public enum ChartAxisType implements AxisType
 {
 	/**
 	 * The linear scale is use to chart numerical data. It can be placed on either the x or y axis.<br>
@@ -71,10 +72,40 @@ public enum AxisType implements Key
 	 * @param defaultScaleId default scale id for this axis type
 	 * @param dataType type of data which the scale can manage
 	 */
-	private AxisType(String value, DefaultScaleId defaultScaleId, ScaleDataType dataType) {
+	private ChartAxisType(String value, DefaultScaleId defaultScaleId, ScaleDataType dataType) {
 		this.value = value;
 		this.defaultScaleId = defaultScaleId;
 		this.dataType = dataType;
+	}
+	
+	/**
+	 * FIXME
+	 * @param type
+	 * @return
+	 */
+	public boolean is(AxisType type) {
+		// checks if argument is consistent
+		if (AxisType.isValid(type)) {
+			return is(type.value());
+		}
+		// if here, the type is not consistent
+		// then returns false
+		return false;
+	}
+
+	/**
+	 * FIXME
+	 * @param type
+	 * @return
+	 */
+	public boolean is(String type) {
+		// checks if argument is consistent
+		if (type != null) {
+			return value.equals(type);
+		}
+		// if here, the type is not consistent
+		// then returns false
+		return false;
 	}
 
 	/*
@@ -87,22 +118,32 @@ public enum AxisType implements Key
 		return value;
 	}
 
-	/**
-	 * Returns the default scale id for this axis type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the default scale id for this axis type
+	 * @see org.pepstock.charba.client.configuration.AxisType#getDefaultScaleId()
 	 */
-	public DefaultScaleId getDefaultScaleId() {
+	@Override
+	public ScaleId getDefaultScaleId() {
 		return defaultScaleId;
 	}
 
-	/**
-	 * Returns the type of managed data for this axis type.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the type of managed data for this axis type
+	 * @see org.pepstock.charba.client.configuration.AxisType#getDataType()
 	 */
+	@Override
 	public ScaleDataType getDataType() {
 		return dataType;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.configuration.AxisType#getBaseType()
+	 */
+	@Override
+	public AxisType getBaseType() {
+		return this;
+	}
+	
 }

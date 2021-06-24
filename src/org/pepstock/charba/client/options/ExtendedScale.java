@@ -22,10 +22,10 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.items.Undefined;
 
 /**

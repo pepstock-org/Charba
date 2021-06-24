@@ -20,7 +20,7 @@ import java.util.Date;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.options.ScaleId;
 
@@ -45,7 +45,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 */
 	public CartesianTimeAxis(IsChart chart) {
 		// uses X as axis id
-		this(chart, AxisType.TIME.getDefaultScaleId());
+		this(chart, ChartAxisType.TIME.getDefaultScaleId());
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param kind axis kind
 	 */
 	public CartesianTimeAxis(IsChart chart, AxisKind kind) {
-		this(chart, DefaultScaleId.getByAxisKind(kind, AxisType.TIME.getDefaultScaleId()), kind);
+		this(chart, DefaultScaleId.getByAxisKind(kind, ChartAxisType.TIME.getDefaultScaleId()), kind);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param kind axis kind
 	 */
 	public CartesianTimeAxis(IsChart chart, ScaleId id, AxisKind kind) {
-		this(chart, id, AxisType.TIME, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
+		this(chart, id, ChartAxisType.TIME, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param kind axis kind
 	 */
 	protected CartesianTimeAxis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
-		super(chart, id, AxisType.TIME, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
+		super(chart, id, ChartAxisType.TIME, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 		// creates the time object
 		this.time = new Time(this);
 		// creates the ticks instance

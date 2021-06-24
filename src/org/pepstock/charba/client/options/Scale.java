@@ -19,10 +19,12 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Scales are an integral part of a chart.<br>
@@ -165,10 +167,14 @@ public class Scale extends AbstractScale {
 	 */
 	public final AxisType getType() {
 		// checks if there is the type
-		Checker.assertCheck(has(Property.TYPE), "The scale does not contain the type");
+		Checker.assertCheck(has(Property.TYPE), "The scale does not contain any type");
+		// gets scale type value
+		String type = getValue(Property.TYPE, Undefined.STRING);
+		// checks if there is the type
+		Checker.checkIfValid(type, "The scale does not contain a consistent type");
 		// gets axis type
 		// uses linear as default even if it is useless
-		return getValue(Property.TYPE, AxisType.values(), AxisType.LINEAR);
+		return AxisType.checkAndGet(type);
 	}
 
 	/**
@@ -184,7 +190,7 @@ public class Scale extends AbstractScale {
 		// creates the reference of kind to store
 		AxisKind typeToStore = null;
 		// checks if axis type is radial
-		if (AxisType.RADIAL_LINEAR.equals(type)) {
+		if (ChartAxisType.RADIAL_LINEAR.equals(type.getBaseType())) {
 			// always R
 			typeToStore = AxisKind.R;
 		} else if (!AxisKind.R.equals(kind)) {
@@ -220,7 +226,7 @@ public class Scale extends AbstractScale {
 		// gets axis type
 		AxisType type = getType();
 		// checks if axis type is radial
-		if (AxisType.RADIAL_LINEAR.equals(type)) {
+		if (ChartAxisType.RADIAL_LINEAR.equals(type.getBaseType())) {
 			// always R
 			return AxisKind.R;
 		}

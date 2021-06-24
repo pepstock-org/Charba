@@ -27,6 +27,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.ImmutableDate;
@@ -34,10 +35,11 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.configuration.RadialAxis;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleDataType;
 import org.pepstock.charba.client.options.ScaleId;
@@ -200,7 +202,15 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the type of scale.
 	 */
 	public final AxisType getType() {
-		return getValue(Property.TYPE, AxisType.values(), AxisType.CATEGORY);
+		// checks if there is the type
+		Checker.assertCheck(has(Property.TYPE), "The scale does not contain any type");
+		// gets scale type value
+		String type = getValue(Property.TYPE, Undefined.STRING);
+		// checks if there is the type
+		Checker.checkIfValid(type, "The scale does not contain a consistent type");
+		// gets axis type
+		// uses linear as default even if it is useless
+		return AxisType.checkAndGet(type);
 	}
 
 	/**
@@ -246,7 +256,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final Date getMaxAsDate() {
 		// checks if the axis is a time one
-		if (AxisType.TIME.equals(getType()) || AxisType.TIMESERIES.equals(getType())) {
+		if (ChartAxisType.TIME.equals(getType().getBaseType()) || ChartAxisType.TIMESERIES.equals(getType().getBaseType())) {
 			// returns a date
 			return getValue(Property.MAX, (Date) null);
 		}
@@ -262,7 +272,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final Date getMinAsDate() {
 		// checks if the axis is a time one
-		if (AxisType.TIME.equals(getType()) || AxisType.TIMESERIES.equals(getType())) {
+		if (ChartAxisType.TIME.equals(getType().getBaseType()) || ChartAxisType.TIMESERIES.equals(getType().getBaseType())) {
 			// returns a date
 			return getValue(Property.MIN, (Date) null);
 		}

@@ -19,8 +19,9 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 
 /**
@@ -93,7 +94,7 @@ public final class ExtendedScales extends Scales {
 					// checks for radial
 					// must be the first one
 					// and must have only 1 scale being a radial
-					if (AxisType.RADIAL_LINEAR.equals(type) && (index > 0 || scales.length != 1)) {
+					if (ChartAxisType.RADIAL_LINEAR.equals(type.getBaseType()) && (index > 0 || scales.length != 1)) {
 						throw new IllegalArgumentException("A radial linear scale can not be added to a scales with other scales");
 					}
 					// stores scale

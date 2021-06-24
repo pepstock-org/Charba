@@ -21,7 +21,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.enums.AxisKind;
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.options.ScaleId;
 
@@ -41,7 +41,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 */
 	public CartesianCategoryAxis(IsChart chart) {
 		// uses X as axis id
-		this(chart, AxisType.CATEGORY.getDefaultScaleId());
+		this(chart, ChartAxisType.CATEGORY.getDefaultScaleId());
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * @param kind axis kind.
 	 */
 	public CartesianCategoryAxis(IsChart chart, AxisKind kind) {
-		this(chart, DefaultScaleId.getByAxisKind(kind, AxisType.CATEGORY.getDefaultScaleId()), kind);
+		this(chart, DefaultScaleId.getByAxisKind(kind, ChartAxisType.CATEGORY.getDefaultScaleId()), kind);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * @param kind axis kind.
 	 */
 	public CartesianCategoryAxis(IsChart chart, ScaleId id, AxisKind kind) {
-		super(chart, id, AxisType.CATEGORY, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
+		super(chart, id, ChartAxisType.CATEGORY, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 		// creates the ticks instance
 		this.ticks = new CartesianCategoryTick(this);
 	}

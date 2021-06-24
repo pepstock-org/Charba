@@ -19,7 +19,6 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisPosition;
-import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Bounds;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.options.ScaleId;
