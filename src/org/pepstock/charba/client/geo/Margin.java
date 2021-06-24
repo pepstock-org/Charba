@@ -88,7 +88,7 @@ public final class Margin extends NativeObjectContainer {
 		this(null);
 		// sets values
 		setTop(top);
-		setRight(top);
+		setRight(right);
 		setBottom(bottom);
 		setLeft(left);
 	}
