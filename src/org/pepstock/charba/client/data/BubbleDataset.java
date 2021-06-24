@@ -45,7 +45,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class BubbleDataset extends HovingDataset implements HasDataPoints, HasOrder {
+public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOrder {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---

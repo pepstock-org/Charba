@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.BorderAlign;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
+public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 
 	/**
 	 * Name of properties of native object.
@@ -73,7 +73,7 @@ public final class Arc extends AbstractElement<IsDefaultArc> implements IsDefaul
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Arc(Elements elements, Key childKey, IsDefaultArc defaultValues, NativeObject nativeObject) {
+	protected Arc(Elements elements, Key childKey, IsDefaultArc defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 	}
 

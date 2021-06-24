@@ -16,6 +16,7 @@
     "chartjs-plugin-datalabels": "2.0.0-rc.1",
     "chartjs-plugin-zoom": "1.0.1",
     "chartjs-plugin-annotation": "1.0.2",
+    "chartjs-chart-geo": "3.1.0",
     "luxon": "1.27.0",
     "hammerjs": "2.0.8"
   }

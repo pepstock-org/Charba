@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultPoint;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Point extends AbstractElement<IsDefaultPoint> implements IsDefaultPoint, HasPointStyle {
+public class Point extends AbstractElement<IsDefaultPoint> implements IsDefaultPoint, HasPointStyle {
 
 	/**
 	 * Name of properties of native object.
@@ -72,7 +72,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Point(Elements elements, Key childKey, IsDefaultPoint defaultValues, NativeObject nativeObject) {
+	protected Point(Elements elements, Key childKey, IsDefaultPoint defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 		// creates point style handler
 		this.pointStyleHandler = new PointStyleHandler(this, getDefaultValues(), getNativeObject());

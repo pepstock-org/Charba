@@ -192,7 +192,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	public void setEvent(AbstractNode node, Key property, ConfigurationEnvelop<CallbackProxy.Proxy> envelop) {
 		setEventToModel(node, property, Envelop.checkAndGetIfValid(envelop).getContent());
 	}
-	
+
 	/**
 	 * Returns the options, mapped with a custom object, used for controllers to map the options.<br>
 	 * It uses a factory instance to create a customized options.<br>
@@ -206,7 +206,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	public final <T extends NativeObjectContainer> T getRemappedOptions(ControllerMapperFactory<T> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
-			// creates the object 
+			// creates the object
 			return factory.create(getNativeObject());
 		}
 		// if here factory is not consistent

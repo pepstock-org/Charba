@@ -27,14 +27,14 @@ import org.pepstock.charba.client.commons.NativeObject;
  *
  */
 abstract class LegendScale extends AbstractNode {
-	
+
 	/**
 	 * Default display options, <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
 	public final static boolean DEFAULT_DISPLAY = true;
 	// the property must be always set to "value"
 	private final static String PROPERTY_VALUE = "value";
-	
+
 	/**
 	 * Name of properties of native object for projection scale.
 	 */
@@ -67,7 +67,7 @@ abstract class LegendScale extends AbstractNode {
 		}
 
 	}
-	
+
 	// internal legend instance
 	private final Legend legend;
 
@@ -85,7 +85,7 @@ abstract class LegendScale extends AbstractNode {
 		// gets and stores the legend
 		this.legend = new Legend(this, Property.LEGEND, getValue(Property.LEGEND));
 	}
-	
+
 	/**
 	 * Returns the legend configuration.
 	 * 
@@ -94,7 +94,7 @@ abstract class LegendScale extends AbstractNode {
 	public final Legend getLegend() {
 		return legend;
 	}
-	
+
 	/**
 	 * If <code>true</code>, renders a color legend.
 	 * 
@@ -112,6 +112,5 @@ abstract class LegendScale extends AbstractNode {
 	public final boolean isDisplay() {
 		return getValue(Property.DISPLAY, DEFAULT_DISPLAY);
 	}
-	
 
 }

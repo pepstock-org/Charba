@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.geo;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.geo.enums.ClipMap;
 
 /**
@@ -25,42 +28,53 @@ import org.pepstock.charba.client.geo.enums.ClipMap;
  */
 interface HasCommonOptions {
 
-/**
+	/**
 	 * Returns the common options handler.
 	 * 
 	 * @return the common options handler
 	 */
-	CommonOptionsHandler getCommonOptionsHandler();
+	CommonOptionsHandler getHandler();
 
 	/**
-	 * Sets the outline used to scale and centralize the projection in the chart area.
-	 * By default a sphere is used.
+	 * Sets the outline used to scale and centralize the projection in the chart area. By default a sphere is used.
 	 * 
 	 * @param outline the outline used to scale and centralize the projection in the chart area
 	 */
-	default void setOutline(Feature outline) {
+	default void setOutline(Feature... outline) {
 		// checks if handler is consistent
-		if (getCommonOptionsHandler() != null) {
+		if (getHandler() != null) {
 			// stores value
-			getCommonOptionsHandler().setOutline(outline);
+			getHandler().setOutline(outline);
 		}
 	}
 
 	/**
-	 * Returns the outline used to scale and centralize the projection in the chart area.
-	 * By default a sphere is used.
+	 * Sets the outline used to scale and centralize the projection in the chart area. By default a sphere is used.
+	 * 
+	 * @param outline the outline used to scale and centralize the projection in the chart area
+	 */
+	default void setOutline(List<Feature> outline) {
+		// checks if handler is consistent
+		if (getHandler() != null) {
+			// stores value
+			getHandler().setOutline(outline);
+		}
+	}
+
+	/**
+	 * Returns the outline used to scale and centralize the projection in the chart area. By default a sphere is used.
 	 * 
 	 * @return the outline used to scale and centralize the projection in the chart area
 	 */
-	default Feature getOutline() {
+	default List<Feature> getOutline() {
 		// checks if handler is consistent
-		if (getCommonOptionsHandler() != null) {
+		if (getHandler() != null) {
 			// returns value
-			return getCommonOptionsHandler().getOutline();
+			return getHandler().getOutline();
 		}
 		// if here, handler is not consistent
 		// then returns default
-		return CommonOptionsHandler.DEFAULT_FEATURE;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -70,9 +84,9 @@ interface HasCommonOptions {
 	 */
 	default void setShowOutline(boolean showOutline) {
 		// checks if handler is consistent
-		if (getCommonOptionsHandler() != null) {
+		if (getHandler() != null) {
 			// stores value
-			getCommonOptionsHandler().setShowOutline(showOutline);
+			getHandler().setShowOutline(showOutline);
 		}
 	}
 
@@ -83,9 +97,9 @@ interface HasCommonOptions {
 	 */
 	default boolean isShowOutline() {
 		// checks if handler is consistent
-		if (getCommonOptionsHandler() != null) {
+		if (getHandler() != null) {
 			// returns value
-			return getCommonOptionsHandler().isShowOutline();
+			return getHandler().isShowOutline();
 		}
 		// if here, handler is not consistent
 		// then returns default
@@ -99,9 +113,9 @@ interface HasCommonOptions {
 	 */
 	default void setShowGraticule(boolean showGraticule) {
 		// checks if handler is consistent
-		if (getCommonOptionsHandler() != null) {
+		if (getHandler() != null) {
 			// stores value
-			getCommonOptionsHandler().setShowGraticule(showGraticule);
+			getHandler().setShowGraticule(showGraticule);
 		}
 	}
 
@@ -112,9 +126,9 @@ interface HasCommonOptions {
 	 */
 	default void setShowGraticule(Graticule showGraticule) {
 		// checks if handler is consistent
-		if (getCommonOptionsHandler() != null) {
+		if (getHandler() != null) {
 			// stores value
-			getCommonOptionsHandler().setShowGraticule(showGraticule);
+			getHandler().setShowGraticule(showGraticule);
 		}
 	}
 
@@ -125,9 +139,9 @@ interface HasCommonOptions {
 	 */
 	default boolean isShowGraticule() {
 		// checks if handler is consistent
-		if (getCommonOptionsHandler() != null) {
+		if (getHandler() != null) {
 			// returns value
-			return getCommonOptionsHandler().isShowGraticule();
+			return getHandler().isShowGraticule();
 		}
 		// if here, handler is not consistent
 		// then returns default
@@ -141,9 +155,9 @@ interface HasCommonOptions {
 	 */
 	default Graticule getShowGraticule() {
 		// checks if handler is consistent
-		if (getCommonOptionsHandler() != null) {
+		if (getHandler() != null) {
 			// returns value
-			return getCommonOptionsHandler().getShowGraticule();
+			return getHandler().getShowGraticule();
 		}
 		// if here, handler is not consistent
 		// then returns default
@@ -157,9 +171,9 @@ interface HasCommonOptions {
 	 */
 	default void setClipMap(ClipMap clipMap) {
 		// checks if handler is consistent
-		if (getCommonOptionsHandler() != null) {
+		if (getHandler() != null) {
 			// stores value
-			getCommonOptionsHandler().setClipMap(clipMap);
+			getHandler().setClipMap(clipMap);
 		}
 	}
 
@@ -170,15 +184,15 @@ interface HasCommonOptions {
 	 */
 	default ClipMap getClipMap() {
 		// checks if handler is consistent
-		if (getCommonOptionsHandler() != null) {
+		if (getHandler() != null) {
 			// returns value
-			return getCommonOptionsHandler().getClipMap();
+			return getHandler().getClipMap();
 		}
 		// if here, handler is not consistent
 		// then returns default
 		return null;
 	}
-	
+
 	/**
 	 * Sets whether to clip the rendering to the chart area of the graph.
 	 * 

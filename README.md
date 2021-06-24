@@ -145,6 +145,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
+  * import CHART.JS GEO controller plugin [version v3.1.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.1.0)
+    * enable geographic map chart types such as choropleth and bubble map.
   * add `hover`, `enter` and `leave` axes events.
   * add `enter` and `leave` title events.
   * add `backgroundColor`, `borderColor` and `borderWidth` scriptable options to all `Elements` configuration (bar, line, point, arc).

@@ -15,45 +15,36 @@
 */
 package org.pepstock.charba.client.geo;
 
-import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.configuration.Elements;
 
 /**
- * This is a fake controller in order to set it as extended chart type for GEO charts.
+ * Extends {@link Elements} provided by CHART.JS in order to add the {@link BubbleMapPoint} element to be configured for GEO charts.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class GeoExtendedChartType implements Type {
+public final class BubbleMapElements extends Elements {
 
-	// name of this extended type
-	private static final String TYPE = "geo";
+	// elements wrapper instance
+	private final BaseGeoElements elements;
 
 	/**
-	 * To avoid any instantiation
-	 */
-	GeoExtendedChartType() {
-		// do nothing
-	}
-
-	/*
-	 * (non-Javadoc)
+	 * Builds the object storing the default root options.
 	 * 
-	 * @see org.pepstock.charba.client.commons.Key#value()
+	 * @param options default root options.
 	 */
-	@Override
-	public String value() {
-		return TYPE;
+	BubbleMapElements(BubbleMapOptions options) {
+		super(options);
+		// gets the elements by the options mapper
+		this.elements = options.getMapper().getElements();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the bubble map point element.
 	 * 
-	 * @see org.pepstock.charba.client.Type#scaleType()
+	 * @return the bubble map point element
 	 */
-	@Override
-	public ScaleType scaleType() {
-		return ScaleType.MULTI;
+	public BubbleMapPoint getBubbleMapPoint() {
+		return elements.getBubbleMapPoint();
 	}
-
 }

@@ -22,6 +22,7 @@ import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.data.Dataset;
 
 /**
  * This is the base chart definition for GEO charts.
@@ -29,12 +30,12 @@ import org.pepstock.charba.client.controllers.ControllerType;
  * @author Andrea "Stock" Stocchero
  * @param <D> data set type for the specific chart, extends BaseGeoDataset
  */
-abstract class BaseGeoChart<D extends BaseGeoDataset> extends AbstractChart implements IsDatasetCreator<D> {
+abstract class BaseGeoChart<D extends Dataset> extends AbstractChart implements IsDatasetCreator<D> {
 
 	// controller instance
 	private BaseGeoController geoController = null;
 	// extending chart type
-	// this is a custom implementation because 
+	// this is a custom implementation because
 	// GEO controllers don't extend any existing chart type
 	static final GeoExtendedChartType GEO_EXTENDED_CHART_TYPE = new GeoExtendedChartType();
 
@@ -63,7 +64,7 @@ abstract class BaseGeoChart<D extends BaseGeoDataset> extends AbstractChart impl
 	final BaseGeoController getController() {
 		return geoController;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -89,11 +90,11 @@ abstract class BaseGeoChart<D extends BaseGeoDataset> extends AbstractChart impl
 			geoController = (BaseGeoController) controllerInstance;
 		}
 		// gets GEO options
-		GeoOptions options;
+		BaseGeoOptions options;
 		// checks if options is a GEO one
-		Checker.assertCheck(getOptions() instanceof GeoOptions, "Chart options are " + getOptions().getClass().getName() + " and not a " + GeoOptions.class.getName());
+		Checker.assertCheck(getOptions() instanceof BaseGeoOptions, "Chart options are " + getOptions().getClass().getName() + " and not a " + BaseGeoOptions.class.getName());
 		// cats and store
-		options = (GeoOptions) getOptions();
+		options = (BaseGeoOptions) getOptions();
 		// disables legend
 		options.getLegend().setDisplay(false);
 	}

@@ -15,45 +15,30 @@
 */
 package org.pepstock.charba.client.geo;
 
-import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.Type;
-
 /**
- * This is a fake controller in order to set it as extended chart type for GEO charts.
+ * Extends the scales configuration in order to avoid some operation, not consistent on GEO chart, and expose additional objects to configure GEO charts, as scales.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class GeoExtendedChartType implements Type {
-
-	// name of this extended type
-	private static final String TYPE = "geo";
+public final class BubbleMapScales extends BaseGeoScales {
 
 	/**
-	 * To avoid any instantiation
+	 * Builds the object storing the root options element.
+	 * 
+	 * @param options root options element.
 	 */
-	GeoExtendedChartType() {
-		// do nothing
+	BubbleMapScales(BaseGeoOptions options) {
+		super(options);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the size scale.
 	 * 
-	 * @see org.pepstock.charba.client.commons.Key#value()
+	 * @return the size scale
 	 */
-	@Override
-	public String value() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Type#scaleType()
-	 */
-	@Override
-	public ScaleType scaleType() {
-		return ScaleType.MULTI;
+	public SizeScale getSizeScale() {
+		return getScales().getSizeScale();
 	}
 
 }

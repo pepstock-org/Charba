@@ -29,8 +29,11 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class GeoScales extends Scales {
+abstract class BaseGeoScales extends Scales {
 
+	// exception string message for setting axes
+	private static final String INVALID_SET_AXES_CALL = "'setAxes' method is not invokable by a choropleth chart because the axes are already defined. Use 'getProtectionScale', 'getSizeScale' or 'getColorScale'";
+	// internal scale instance
 	private final InternalGeoScales scales;
 
 	/**
@@ -38,7 +41,7 @@ abstract class GeoScales extends Scales {
 	 * 
 	 * @param options root options element.
 	 */
-	GeoScales(GeoOptions options) {
+	BaseGeoScales(BaseGeoOptions options) {
 		super(options);
 		// gets and stores the internal scales
 		this.scales = options.getMapper().getScales();
@@ -51,6 +54,25 @@ abstract class GeoScales extends Scales {
 	 */
 	final InternalGeoScales getScales() {
 		return scales;
+	}
+
+	/**
+	 * Returns the projection scale.
+	 * 
+	 * @return the projection scale
+	 */
+	public final ProjectionScale getProjectionScale() {
+		return getScales().getProjectionScale();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.Scales#setAxes(org.pepstock.charba.client.configuration.Axis[])
+	 */
+	@Override
+	public final void setAxes(Axis... axes) {
+		throw new UnsupportedOperationException(INVALID_SET_AXES_CALL);
 	}
 
 	/*

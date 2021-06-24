@@ -13,27 +13,37 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.geo;
+package org.pepstock.charba.client.geo.enums;
 
-import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Key;
 
 /**
- * This is a fake controller in order to set it as extended chart type for GEO charts.
+ * Enumerates the operation modes for the scale, area means that the area is linearly increasing whereas radius the radius is.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class GeoExtendedChartType implements Type {
+public enum Mode implements Key
+{
+	/**
+	 * The area is linearly increasing.
+	 */
+	AREA("area"),
+	/**
+	 * Uses the radius as is.
+	 */
+	RADIUS("radius");
 
-	// name of this extended type
-	private static final String TYPE = "geo";
+	// name value of property
+	private final String value;
 
 	/**
-	 * To avoid any instantiation
+	 * Creates with the property value to use in the native object.
+	 * 
+	 * @param value value of property name
 	 */
-	GeoExtendedChartType() {
-		// do nothing
+	private Mode(String value) {
+		this.value = value;
 	}
 
 	/*
@@ -43,17 +53,7 @@ final class GeoExtendedChartType implements Type {
 	 */
 	@Override
 	public String value() {
-		return TYPE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Type#scaleType()
-	 */
-	@Override
-	public ScaleType scaleType() {
-		return ScaleType.MULTI;
+		return value;
 	}
 
 }

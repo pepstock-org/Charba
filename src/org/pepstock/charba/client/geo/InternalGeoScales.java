@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * Internal mapper of <code>SCALES</code> object.<br>
  * In GEO charts, there are 3 types of scales that you can use.<br>
  * To avoid mistakes to the user to set the right axis to the specific chart, the 3 types of axes are mapped and provided as normal options containers.<br>
- * THis calls can re-map the scales configuration in order to set the configuration to the scales without having any axis class. 
+ * THis calls can re-map the scales configuration in order to set the configuration to the scales without having any axis class.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -70,6 +70,8 @@ final class InternalGeoScales extends AbstractNode {
 	private final ProjectionScale projectionScale;
 	// color scale instance
 	private final ColorScale colorScale;
+	// size scale instance
+	private final SizeScale sizeScale;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -82,8 +84,10 @@ final class InternalGeoScales extends AbstractNode {
 		super(parent, childKey, nativeObject);
 		// gets and stores projection scale
 		this.projectionScale = new ProjectionScale(this, Property.XY, getValue(Property.XY));
-		// gets and stores projection scale
+		// gets and stores color scale
 		this.colorScale = new ColorScale(this, Property.COLOR, getValue(Property.COLOR));
+		// gets and stores size scale
+		this.sizeScale = new SizeScale(this, Property.R, getValue(Property.R));
 	}
 
 	/**
@@ -96,7 +100,7 @@ final class InternalGeoScales extends AbstractNode {
 	}
 
 	/**
-	 * Returns a special color scale which manages the coloring of the nodes. 
+	 * Returns a special color scale which manages the coloring of the nodes.
 	 * 
 	 * @return a special color scale which manages the coloring of the nodes
 	 */
@@ -104,4 +108,12 @@ final class InternalGeoScales extends AbstractNode {
 		return colorScale;
 	}
 
+	/**
+	 * Returns a special size scale which manages the size of the nodes in the {@link BubbleMapChart}.
+	 * 
+	 * @return a special size scale which manages the size of the nodes in the {@link BubbleMapChart}.
+	 */
+	SizeScale getSizeScale() {
+		return sizeScale;
+	}
 }

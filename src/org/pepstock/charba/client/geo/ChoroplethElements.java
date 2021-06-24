@@ -18,15 +18,15 @@ package org.pepstock.charba.client.geo;
 import org.pepstock.charba.client.configuration.Elements;
 
 /**
- * Extends {@link Elements} provided by CHART.JS in order to add the {@link GeoFeature} element to be configured for GEO charts.
+ * Extends {@link Elements} provided by CHART.JS in order to add the {@link ChoroplethBar} element to be configured for GEO charts.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ChoroplethElements extends Elements {
+public final class ChoroplethElements extends Elements {
 
 	// elements wrapper instance
-	private final GeoElements elements;
+	private final BaseGeoElements elements;
 
 	/**
 	 * Builds the object storing the default root options.
@@ -40,11 +40,11 @@ public class ChoroplethElements extends Elements {
 	}
 
 	/**
-	 * Returns the GEO feature element.
+	 * Returns the choropleth bar element.
 	 * 
-	 * @return the GEO feature element
+	 * @return the choropleth bar element
 	 */
-	public GeoFeature getGeoFeature() {
-		return elements.getGeoFeature();
+	public ChoroplethBar getChoroplethBar() {
+		return elements.getChoroplethBar();
 	}
 }

@@ -36,7 +36,7 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public final class ColorScale extends LegendScale {
-	
+
 	/**
 	 * Default missing color options, {@link HtmlColor#TRANSPARENT}.
 	 */
@@ -46,7 +46,7 @@ public final class ColorScale extends LegendScale {
 	 * Default quantize options, <b>{@value DEFAULT_QUANTIZE}</b>.
 	 */
 	public static final int DEFAULT_QUANTIZE = 0;
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
@@ -67,7 +67,7 @@ public final class ColorScale extends LegendScale {
 		 */
 		String call(double normalizedValue);
 	}
-	
+
 	/**
 	 * Name of properties of native object for projection scale.
 	 */
@@ -100,13 +100,13 @@ public final class ColorScale extends LegendScale {
 		}
 
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the interpolate function
 	private final CallbackProxy<ProxyInterpolateCallback> interpolateCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+
 	// ---------------------------
 	// -- USERS CALLBACKS ---
 	// ---------------------------
@@ -181,7 +181,7 @@ public final class ColorScale extends LegendScale {
 	public int getQuantize() {
 		return getValue(Property.QUANTIZE, DEFAULT_QUANTIZE);
 	}
-	
+
 	/**
 	 * Sets the color interpolation of the scale.
 	 * 
@@ -189,7 +189,7 @@ public final class ColorScale extends LegendScale {
 	 */
 	public void setInterpolate(Interpolate interpolate) {
 		// resets callback
-		setInterpolate((InterpolateCallback)null);
+		setInterpolate((InterpolateCallback) null);
 		// stores value
 		setValueAndAddToParent(Property.INTERPOLATE, interpolate);
 	}

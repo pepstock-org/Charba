@@ -98,36 +98,37 @@ public final class ProjectionScale extends AbstractNode {
 	}
 
 	/**
-	 * Sets a map projection scale value.
+	 * Sets how much the map will be scaled.
 	 * 
-	 * @param projectionScale a map projection scale value
+	 * @param projectionScale how much the map will be scaled
 	 */
 	public void setProjectionScale(double projectionScale) {
 		setValueAndAddToParent(Property.PROJECTION_SCALE, projectionScale);
 	}
 
 	/**
-	 * Returns a map projection scale value.
+	 * Returns how much the map will be scaled.
 	 * 
-	 * @return a map projection scale value.
+	 * @return how much the map will be scaled
 	 */
 	public double getProjectionScale() {
 		return getValue(Property.PROJECTION_SCALE, Undefined.DOUBLE);
 	}
-	
+
 	/**
 	 * Sets a map projection offset value.
 	 * 
-	 * @param projectionOffset a map projection offset value
+	 * @param x x offset where the map has been placed
+	 * @param y y offset where the map has been placed
 	 */
-	public void setProjectionOffset(double... projectionOffset) {
-		// checks if argument is consistent
-		if (projectionOffset != null && projectionOffset.length == 2) {
+	public void setProjectionOffset(double x, double y) {
+		// checks if arguments re consistent
+		if (Undefined.isNot(x) && Undefined.isNot(y)) {
 			// stores
-			setValueOrArrayAndAddToParent(Property.PROJECTION_OFFSET, projectionOffset);
+			setValueOrArrayAndAddToParent(Property.PROJECTION_OFFSET, x, y);
 		} else {
-			// if here the argument is not consistent
-			// then removes the property
+			// if here the arguments are not consistent
+			// then removes the options
 			remove(Property.PROJECTION_OFFSET);
 		}
 	}

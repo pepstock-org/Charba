@@ -20,15 +20,15 @@ import org.pepstock.charba.client.geo.enums.ClipMap;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
- * This is the re-mapper of the CHART.JS options in order to manage the internal elements as choropleth charts wants.
+ * This is the re-mapper of the CHART.JS options in order to manage the internal elements as bubble map charts wants.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class ChoroplethOptionsMapper extends BaseGeoOptionsMapper {
+final class BubbleMapOptionsMapper extends BaseGeoOptionsMapper {
 
-	// default clip map for choropleth chart
-	static final ClipMap DEFAULT_CLIP_MAP = ClipMap.TRUE;
+	// default clip map for bubble map chart
+	static final ClipMap DEFAULT_CLIP_MAP = ClipMap.OUTLINE_GRATICULE;
 
 	/**
 	 * Creates the object with native object to map java script properties and the options related to this re-mapping.
@@ -36,7 +36,7 @@ final class ChoroplethOptionsMapper extends BaseGeoOptionsMapper {
 	 * @param options options instance related to this re-mapping
 	 * @param nativeObject native object to map java script properties
 	 */
-	ChoroplethOptionsMapper(ExtendedOptions options, NativeObject nativeObject) {
+	BubbleMapOptionsMapper(ExtendedOptions options, NativeObject nativeObject) {
 		super(options, nativeObject);
 	}
 

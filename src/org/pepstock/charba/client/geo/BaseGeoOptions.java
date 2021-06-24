@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class GeoOptions extends ScalesOptions implements HasCommonOptions {
+abstract class BaseGeoOptions extends ScalesOptions implements HasCommonOptions {
 
 	/**
 	 * Builds the object storing the chart instance and defaults.
@@ -33,7 +33,7 @@ abstract class GeoOptions extends ScalesOptions implements HasCommonOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults of chart
 	 */
-	GeoOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
+	BaseGeoOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues, false);
 	}
 
@@ -42,6 +42,6 @@ abstract class GeoOptions extends ScalesOptions implements HasCommonOptions {
 	 * 
 	 * @return the mapper implementation for the specific chart type
 	 */
-	abstract GeoOptionsMapper getMapper();
+	abstract BaseGeoOptionsMapper getMapper();
 
 }

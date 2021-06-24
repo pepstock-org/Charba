@@ -15,7 +15,11 @@
 */
 package org.pepstock.charba.client.geo;
 
+import java.util.List;
+
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -28,12 +32,10 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class CommonOptionsHandler extends AbstractNode {
+class CommonOptionsHandler extends AbstractNode {
 
 	// default value of show outline
 	static final boolean DEFAULT_SHOW_LINE = false;
-	// default feature instance
-	static final Feature DEFAULT_FEATURE = new Feature();
 
 	/**
 	 * Name of properties of native object.
@@ -78,7 +80,7 @@ final class CommonOptionsHandler extends AbstractNode {
 	 * 
 	 * @param mapper instance of options mapper
 	 */
-	CommonOptionsHandler(GeoOptionsMapper mapper) {
+	CommonOptionsHandler(BaseGeoOptionsMapper mapper) {
 		this(mapper.nativeObject(), mapper.getDefaultClipMap());
 	}
 
@@ -99,8 +101,31 @@ final class CommonOptionsHandler extends AbstractNode {
 	 * 
 	 * @param outline the outline used to scale and centralize the projection in the chart area
 	 */
-	void setOutline(Feature outline) {
-		setValue(Property.OUTLINE, outline);
+	final void setOutline(Feature... outline) {
+		setValueOrArray(Property.OUTLINE, outline);
+	}
+
+	/**
+	 * Sets the outline used to scale and centralize the projection in the chart area. By default a sphere is used.
+	 * 
+	 * @param outline the outline used to scale and centralize the projection in the chart area
+	 */
+	final void setOutline(List<Feature> outline) {
+		// checks if argument is consistent
+		if (outline != null) {
+			// creates array
+			Feature[] features = new Feature[outline.size()];
+			// loads all features in the array
+			for (int i = 0; i < outline.size(); i++) {
+				features[i] = outline.get(i);
+			}
+			// stores value
+			setValueOrArray(Property.OUTLINE, features);
+		} else {
+			// if here the argument is null
+			// then removes the property
+			remove(Property.OUTLINE);
+		}
 	}
 
 	/**
@@ -108,15 +133,9 @@ final class CommonOptionsHandler extends AbstractNode {
 	 * 
 	 * @return the outline used to scale and centralize the projection in the chart area
 	 */
-	Feature getOutline() {
-		// checks if is an object
-		if (isType(Property.OUTLINE, ObjectType.OBJECT)) {
-			// returns value
-			return new Feature(getValue(Property.OUTLINE));
-		}
-		// if here, the feature is not consistent or missing
-		// then returns default
-		return CommonOptionsHandler.DEFAULT_FEATURE;
+	final List<Feature> getOutline() {
+		ArrayObject array = getArrayValue(Property.OUTLINE);
+		return ArrayListHelper.list(array, Feature.FACTORY);
 	}
 
 	/**
@@ -124,7 +143,7 @@ final class CommonOptionsHandler extends AbstractNode {
 	 * 
 	 * @param showOutline <code>true</code> to render the outline in the background
 	 */
-	void setShowOutline(boolean showOutline) {
+	final void setShowOutline(boolean showOutline) {
 		setValue(Property.SHOW_OUTLINE, showOutline);
 	}
 
@@ -133,7 +152,7 @@ final class CommonOptionsHandler extends AbstractNode {
 	 * 
 	 * @return <code>true</code> to render the outline in the background
 	 */
-	boolean isShowOutline() {
+	final boolean isShowOutline() {
 		return getValue(Property.SHOW_OUTLINE, DEFAULT_SHOW_LINE);
 	}
 
@@ -142,7 +161,7 @@ final class CommonOptionsHandler extends AbstractNode {
 	 *
 	 * @param showGraticule <code>true</code> to render a graticule in the background
 	 */
-	void setShowGraticule(boolean showGraticule) {
+	final void setShowGraticule(boolean showGraticule) {
 		setValue(Property.SHOW_GRATICULE, showGraticule);
 	}
 
@@ -151,7 +170,7 @@ final class CommonOptionsHandler extends AbstractNode {
 	 *
 	 * @param showGraticule the graticule to render the lines in the background
 	 */
-	void setShowGraticule(Graticule showGraticule) {
+	final void setShowGraticule(Graticule showGraticule) {
 		// checks if consistent
 		if (showGraticule != null) {
 			setValue(Property.SHOW_GRATICULE, showGraticule);
@@ -167,7 +186,7 @@ final class CommonOptionsHandler extends AbstractNode {
 	 *
 	 * @return <code>true</code> to render a graticule in the background
 	 */
-	boolean isShowGraticule() {
+	final boolean isShowGraticule() {
 		// the default is based on the presence of the property
 		return getValue(Property.SHOW_GRATICULE, has(Property.SHOW_GRATICULE));
 	}
@@ -177,7 +196,7 @@ final class CommonOptionsHandler extends AbstractNode {
 	 *
 	 * @return the graticule to render the lines in the background or <code>null</code> is any object has been set
 	 */
-	Graticule getShowGraticule() {
+	final Graticule getShowGraticule() {
 		// checks the property is set as object
 		if (isType(Property.SHOW_GRATICULE, ObjectType.OBJECT)) {
 			return new Graticule(getValue(Property.SHOW_GRATICULE));
@@ -192,7 +211,7 @@ final class CommonOptionsHandler extends AbstractNode {
 	 * 
 	 * @param clipMap whether to clip the rendering to the chart area of the graph
 	 */
-	void setClipMap(ClipMap clipMap) {
+	final void setClipMap(ClipMap clipMap) {
 		// checks if clip map is consistent
 		if (Key.isValid(clipMap)) {
 			// checks if a boolean value must be set
@@ -218,7 +237,7 @@ final class CommonOptionsHandler extends AbstractNode {
 	 * 
 	 * @return whether to clip the rendering to the chart area of the graph
 	 */
-	ClipMap getClipMap() {
+	final ClipMap getClipMap() {
 		// checks if is a string
 		if (isType(Property.CLIP_MAP, ObjectType.STRING)) {
 			// the clip map is stored as string

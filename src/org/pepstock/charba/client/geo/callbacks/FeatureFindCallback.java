@@ -24,7 +24,7 @@ import org.pepstock.charba.client.geo.Feature;
  *
  */
 public interface FeatureFindCallback {
-	
+
 	/**
 	 * Return a value that coerces to <code>true</code> to find the {@link Feature}, or to <code>false</code> otherwise.
 	 * 

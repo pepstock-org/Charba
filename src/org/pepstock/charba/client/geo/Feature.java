@@ -34,8 +34,6 @@ public final class Feature extends NativeObjectContainer {
 
 	// factory instance to create features
 	static final FeatureFactory FACTORY = new FeatureFactory();
-	// the property must be always set to "value"
-	private final static String DEFAULT_TYPE_VALUE = "Sphere";
 
 	/**
 	 * Name of properties of native object.
@@ -74,16 +72,6 @@ public final class Feature extends NativeObjectContainer {
 	// this is not exposed to public but
 	// the class provides a set of methods to get the properties
 	private final Properties properties;
-
-	/**
-	 * Creates the object with new native object instance to be wrapped.<br>
-	 * Used for default.
-	 */
-	Feature() {
-		this(null);
-		// sets the type "Sphere" as default.
-		setValue(Property.TYPE, DEFAULT_TYPE_VALUE);
-	}
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
@@ -130,7 +118,7 @@ public final class Feature extends NativeObjectContainer {
 	 * @param key key of the property of java script object.
 	 * @return <code>true</code> if the properties contains an element at specific property
 	 */
-	public boolean hasProperty(String key) {		
+	public boolean hasProperty(String key) {
 		return hasProperty(Key.create(key));
 	}
 

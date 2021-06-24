@@ -20,13 +20,13 @@ import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.geo.Feature;
 
 /**
- * Callback to implement to get the label for each {@link Feature} to use in the {@link Labels} and {@link Tooltips}. 
+ * Callback to implement to get the label for each {@link Feature} to use in the {@link Labels} and {@link Tooltips}.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface FeatureLabelCallback {
-	
+
 	/**
 	 * Return a value that represents the name for the feature to use on {@link Labels} and {@link Tooltips}.
 	 * 

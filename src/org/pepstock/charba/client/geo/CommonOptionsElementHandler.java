@@ -16,38 +16,34 @@
 package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultBar;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.options.Bar;
-import org.pepstock.charba.client.options.Elements;
 
 /**
- * The styling of the new element {@link GeoFeature} is based on {@link Bar} element with some additional options for the outline and graticule.
+ * Handles the common properties to configure GEO data set and options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class GeoFeature extends Bar {
-	
+final class CommonOptionsElementHandler extends AbstractNode {
+
 	/**
 	 * Default outline border width options, <b>{@value DEFAULT_OUTLINE_BORDER_WIDTH}</b>.
 	 */
-	public static final int DEFAULT_OUTLINE_BORDER_WIDTH = 0;
+	static final int DEFAULT_OUTLINE_BORDER_WIDTH = 0;
 
 	/**
 	 * Default graticule border color options, <b>{@value DEFAULT_GRATICULE_BORDER_COLOR}</b>.
 	 */
-	public static final String DEFAULT_GRATICULE_BORDER_COLOR = "#CCCCCC";
+	static final String DEFAULT_GRATICULE_BORDER_COLOR = "#CCCCCC";
 
 	/**
 	 * Default graticule border width options, <b>{@value DEFAULT_OUTLINE_BORDER_WIDTH}</b>.
 	 */
-	public static final int DEFAULT_GRATICULE_BORDER_WIDTH = 0;
+	static final int DEFAULT_GRATICULE_BORDER_WIDTH = 0;
 
 	/**
 	 * Name of properties of native object.
@@ -83,26 +79,16 @@ public final class GeoFeature extends Bar {
 		}
 
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
-	 * @param elements parent node to use to add this element where changed
+	 * @param parent parent node to use to add this element where changed
 	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	GeoFeature(Elements elements, Key childKey, IsDefaultBar defaultValues, NativeObject nativeObject) {
-		super(elements, childKey, defaultValues, nativeObject);
-	}
-	
-	/**
-	 * Sets the outline background color.
-	 * 
-	 * @param backgroundColor the outline background color.
-	 */
-	public void setOutlineBackgroundColor(IsColor backgroundColor) {
-		setOutlineBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
+	CommonOptionsElementHandler(AbstractNode parent, Key childKey, NativeObject nativeObject) {
+		super(parent, childKey, nativeObject);
 	}
 
 	/**
@@ -110,7 +96,7 @@ public final class GeoFeature extends Bar {
 	 * 
 	 * @param backgroundColor the outline background color.
 	 */
-	public void setOutlineBackgroundColor(String backgroundColor) {
+	void setOutlineBackgroundColor(String backgroundColor) {
 		setValueAndAddToParent(Property.OUTLINE_BACKGROUND_COLOR, backgroundColor);
 	}
 
@@ -119,20 +105,8 @@ public final class GeoFeature extends Bar {
 	 * 
 	 * @return the outline background color.
 	 */
-	public String getOutlineBackgroundColorAsString() {
+	String getOutlineBackgroundColorAsString() {
 		return getValue(Property.OUTLINE_BACKGROUND_COLOR, Undefined.STRING);
-	}
-
-	/**
-	 * Returns the outline background color.
-	 * 
-	 * @return the outline background color.
-	 */
-	public IsColor getOutlineBackgroundColor() {
-		// gets color
-		String color = getOutlineBackgroundColorAsString();
-		// if color is consistent, parses to a color object
-		return color != null ? ColorBuilder.parse(color) : null;
 	}
 
 	/**
@@ -140,7 +114,7 @@ public final class GeoFeature extends Bar {
 	 * 
 	 * @param borderWidth the outline border width.
 	 */
-	public void setOutlineBorderWidth(int borderWidth) {
+	void setOutlineBorderWidth(int borderWidth) {
 		setValueAndAddToParent(Property.OUTLINE_BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
@@ -149,7 +123,7 @@ public final class GeoFeature extends Bar {
 	 * 
 	 * @return the outline border width.
 	 */
-	public int getOutlineBorderWidth() {
+	int getOutlineBorderWidth() {
 		return getValue(Property.OUTLINE_BORDER_WIDTH, DEFAULT_OUTLINE_BORDER_WIDTH);
 	}
 
@@ -158,16 +132,7 @@ public final class GeoFeature extends Bar {
 	 * 
 	 * @param borderColor the outline border color.
 	 */
-	public void setOutlineBorderColor(IsColor borderColor) {
-		setBorderColor(IsColor.checkAndGetValue(borderColor));
-	}
-
-	/**
-	 * Sets the outline border color.
-	 * 
-	 * @param borderColor the outline border color.
-	 */
-	public void setOutlineBorderColor(String borderColor) {
+	void setOutlineBorderColor(String borderColor) {
 		setValueAndAddToParent(Property.OUTLINE_BORDER_COLOR, borderColor);
 	}
 
@@ -176,17 +141,8 @@ public final class GeoFeature extends Bar {
 	 * 
 	 * @return the outline border color.
 	 */
-	public String getOutlineBorderColorAsString() {
+	String getOutlineBorderColorAsString() {
 		return getValue(Property.OUTLINE_BORDER_COLOR, Defaults.get().getGlobal().getBorderColorAsString());
-	}
-
-	/**
-	 * Returns the outline border color.
-	 * 
-	 * @return the outline border color.
-	 */
-	public IsColor getOutlineBorderColor() {
-		return ColorBuilder.parse(getOutlineBorderColorAsString());
 	}
 
 	// ------------------------------------------------------
@@ -198,7 +154,7 @@ public final class GeoFeature extends Bar {
 	 * 
 	 * @param borderWidth the graticule border width.
 	 */
-	public void setGraticuleBorderWidth(int borderWidth) {
+	void setGraticuleBorderWidth(int borderWidth) {
 		setValueAndAddToParent(Property.GRATICULE_BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
@@ -207,7 +163,7 @@ public final class GeoFeature extends Bar {
 	 * 
 	 * @return the graticule border width.
 	 */
-	public int getGraticuleBorderWidth() {
+	int getGraticuleBorderWidth() {
 		return getValue(Property.GRATICULE_BORDER_WIDTH, DEFAULT_GRATICULE_BORDER_WIDTH);
 	}
 
@@ -216,16 +172,7 @@ public final class GeoFeature extends Bar {
 	 * 
 	 * @param borderColor the graticule border color.
 	 */
-	public void setGraticuleBorderColor(IsColor borderColor) {
-		setGraticuleBorderColor(IsColor.checkAndGetValue(borderColor));
-	}
-
-	/**
-	 * Sets the graticule border color.
-	 * 
-	 * @param borderColor the graticule border color.
-	 */
-	public void setGraticuleBorderColor(String borderColor) {
+	void setGraticuleBorderColor(String borderColor) {
 		setValueAndAddToParent(Property.GRATICULE_BORDER_COLOR, borderColor);
 	}
 
@@ -234,17 +181,8 @@ public final class GeoFeature extends Bar {
 	 * 
 	 * @return the graticule border color.
 	 */
-	public String getGraticuleBorderColorAsString() {
+	String getGraticuleBorderColorAsString() {
 		return getValue(Property.GRATICULE_BORDER_COLOR, DEFAULT_GRATICULE_BORDER_COLOR);
 	}
 
-	/**
-	 * Returns the graticule border color.
-	 * 
-	 * @return the graticule border color.
-	 */
-	public IsColor getGraticuleBorderColor() {
-		return ColorBuilder.parse(getGraticuleBorderColorAsString());
-	}
-	
 }

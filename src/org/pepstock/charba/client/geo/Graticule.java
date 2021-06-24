@@ -22,6 +22,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * The network of intersecting lines of latitude and longitude is called the graticule.<br>
@@ -82,12 +83,13 @@ public final class Graticule extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets the graticule lines distances in degrees. Only 2 values are allowed.
+	 * Sets the graticule lines distances in degrees.
 	 * 
-	 * @param steps the graticule lines distances in degrees
+	 * @param start the start graticule line distance in degrees
+	 * @param end the end graticule line distance in degrees
 	 */
-	public void setStepMajor(double... steps) {
-		setValues(Property.STEP_MAJOR, steps);
+	public void setStepMajor(double start, double end) {
+		setValues(Property.STEP_MAJOR, start, end);
 	}
 
 	/**
@@ -102,10 +104,11 @@ public final class Graticule extends NativeObjectContainer {
 	/**
 	 * Sets the graticule lines distances in degrees. Only 2 values are allowed.
 	 * 
-	 * @param steps the graticule lines distances in degrees
+	 * @param start the start graticule line distance in degrees
+	 * @param end the end graticule line distance in degrees
 	 */
-	public void setStepMinor(double... steps) {
-		setValues(Property.STEP_MINOR, steps);
+	public void setStepMinor(double start, double end) {
+		setValues(Property.STEP_MINOR, start, end);
 	}
 
 	/**
@@ -128,15 +131,16 @@ public final class Graticule extends NativeObjectContainer {
 
 	/**
 	 * Checks the argument and stores the values.
-	 *  
+	 * 
 	 * @param property property of java script object to use for storing values
-	 * @param steps values to store
+	 * @param start the start graticule line distance in degrees
+	 * @param end the end graticule line distance in degrees
 	 */
-	private void setValues(Property property, double... steps) {
+	private void setValues(Property property, double start, double end) {
 		// checks if argument is consistent
-		if (steps != null && steps.length == 2) {
+		if (Undefined.isNot(start) && Undefined.isNot(end)) {
 			// stores
-			setValueOrArray(property, steps);
+			setValueOrArray(property, start, end);
 		} else {
 			// if here the argument is not consistent
 			// then removes the property
@@ -146,7 +150,7 @@ public final class Graticule extends NativeObjectContainer {
 
 	/**
 	 * Returns the stored values as a list.
-	 *  
+	 * 
 	 * @param property property of java script object to use for getting values
 	 * @return a list of stored values
 	 */

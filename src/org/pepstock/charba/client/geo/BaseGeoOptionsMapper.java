@@ -28,7 +28,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class GeoOptionsMapper extends AbstractNode {
+abstract class BaseGeoOptionsMapper extends AbstractNode {
 
 	/**
 	 * Name of properties of native object.
@@ -65,6 +65,8 @@ abstract class GeoOptionsMapper extends AbstractNode {
 	private final ExtendedOptions options;
 	// internal scale options instance to re-map the scales
 	private final InternalGeoScales scales;
+	// internal instance of chart.js elements
+	private final BaseGeoElements elements;
 
 	/**
 	 * Creates the object with native object to map java script properties and the related {@link ExtendedOptions}, re-mapped by this class.
@@ -72,12 +74,14 @@ abstract class GeoOptionsMapper extends AbstractNode {
 	 * @param options options instance, related and re-mapped by this class.
 	 * @param nativeObject native object to map java script properties
 	 */
-	GeoOptionsMapper(ExtendedOptions options, NativeObject nativeObject) {
+	BaseGeoOptionsMapper(ExtendedOptions options, NativeObject nativeObject) {
 		super(nativeObject);
 		// stores options
 		this.options = options;
 		// gets and stores internal scales
 		this.scales = new InternalGeoScales(this, Property.SCALES, getValue(Property.SCALES));
+		// creates and stores an element wrapper for GEO charts
+		this.elements = new BaseGeoElements(this, getValue(BaseGeoElements.CommonProperty.ELEMENTS), getConfiguration().getElements());
 	}
 
 	/**
@@ -103,6 +107,15 @@ abstract class GeoOptionsMapper extends AbstractNode {
 	 */
 	final InternalGeoScales getScales() {
 		return scales;
+	}
+
+	/**
+	 * Returns the elements mapper in order to be able to manage GEO elements.
+	 * 
+	 * @return the elements mapper in order to be able to manage GEO elements
+	 */
+	final BaseGeoElements getElements() {
+		return elements;
 	}
 
 	/**

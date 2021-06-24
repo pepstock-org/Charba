@@ -912,5 +912,5 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public boolean isSpanGaps() {
 		return spanGapHandler.isSpanGaps();
 	}
-	
+
 }

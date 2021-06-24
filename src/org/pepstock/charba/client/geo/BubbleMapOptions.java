@@ -21,23 +21,23 @@ import org.pepstock.charba.client.controllers.ControllerMapperFactory;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
- * Specific options for choropleth chart.
+ * Specific options for bubble map chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ChoroplethOptions extends BaseGeoOptions {
+public final class BubbleMapOptions extends BaseGeoOptions {
 
 	// mapper options factory instance
-	private final ChoroplethRemappedOptionsFactory factory;
+	private final BubbleMapRemappedOptionsFactory factory;
 	// common options handler
 	private CommonOptionsHandler optionsHandler;
 	// mapper options instance
-	private ChoroplethOptionsMapper mapper;
+	private BubbleMapOptionsMapper mapper;
 	// elements instance
-	private ChoroplethElements elements;
+	private BubbleMapElements elements;
 	// scales instance
-	private ChoroplethScales scales;
+	private BubbleMapScales scales;
 
 	/**
 	 * Builds the object storing the chart instance and defaults.
@@ -45,10 +45,10 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults of chart
 	 */
-	ChoroplethOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
+	BubbleMapOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
 		// creates mapper factory
-		this.factory = new ChoroplethRemappedOptionsFactory(this);
+		this.factory = new BubbleMapRemappedOptionsFactory(this);
 		// initialized objects
 		this.afterConfigurationUpdate();
 	}
@@ -63,10 +63,10 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 		// creates and stores mapper
 		this.mapper = getConfiguration().getRemappedOptions(factory);
 		// creates and stores elements
-		this.elements = new ChoroplethElements(this);
+		this.elements = new BubbleMapElements(this);
 		// before it requested do not create the scales
 		// because it must be wrapped
-		this.scales = new ChoroplethScales(this);
+		this.scales = new BubbleMapScales(this);
 		// creates and stores options handler
 		this.optionsHandler = new CommonOptionsHandler(mapper);
 	}
@@ -87,7 +87,7 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 	 * @see org.pepstock.charba.client.geo.GeoOptions#getMapper()
 	 */
 	@Override
-	ChoroplethOptionsMapper getMapper() {
+	BubbleMapOptionsMapper getMapper() {
 		return mapper;
 	}
 
@@ -97,7 +97,7 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getElements()
 	 */
 	@Override
-	public ChoroplethElements getElements() {
+	public BubbleMapElements getElements() {
 		return elements;
 	}
 
@@ -107,7 +107,7 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 	 * @see org.pepstock.charba.client.configuration.ScalesOptions#getScales()
 	 */
 	@Override
-	public ChoroplethScales getScales() {
+	public BubbleMapScales getScales() {
 		return scales;
 	}
 
@@ -117,18 +117,18 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class ChoroplethRemappedOptionsFactory extends ControllerMapperFactory<ChoroplethOptionsMapper> {
+	private static class BubbleMapRemappedOptionsFactory extends ControllerMapperFactory<BubbleMapOptionsMapper> {
 
 		// instance of options where the mapper belongs to
-		private final ChoroplethOptions options;
+		private final BubbleMapOptions options;
 
 		/**
 		 * Creates the factory of the mapper
 		 * 
 		 * @param options instance of options where the mapper belongs to
 		 */
-		ChoroplethRemappedOptionsFactory(ChoroplethOptions options) {
-			super(ChoroplethChart.CONTROLLER_TYPE);
+		BubbleMapRemappedOptionsFactory(BubbleMapOptions options) {
+			super(BubbleMapChart.CONTROLLER_TYPE);
 			// stores the options
 			this.options = options;
 		}
@@ -139,8 +139,8 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public ChoroplethOptionsMapper create(NativeObject nativeObject) {
-			return new ChoroplethOptionsMapper(options.getConfiguration(), nativeObject);
+		public BubbleMapOptionsMapper create(NativeObject nativeObject) {
+			return new BubbleMapOptionsMapper(options.getConfiguration(), nativeObject);
 		}
 
 	}

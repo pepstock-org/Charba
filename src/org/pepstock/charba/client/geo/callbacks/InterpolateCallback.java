@@ -25,7 +25,7 @@ import org.pepstock.charba.client.geo.ColorScale;
  *
  */
 public interface InterpolateCallback {
-	
+
 	/**
 	 * Returns a {@link IsColor} or {@link String} instance which is representing a color.
 	 * 

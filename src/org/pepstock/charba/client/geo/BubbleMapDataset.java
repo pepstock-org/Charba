@@ -22,26 +22,31 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.BubbleDataset;
+import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The choropleth data set allows a region definition (by {@link Feature}) and specific value to be specified.
+ * It is a {@link BubbleDataset} with additional options for bubble map charts.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChoroplethDataset extends BubbleDataset implements IsGeoDataset<ChoroplethDataPoint> {
+public final class BubbleMapDataset extends BubbleDataset implements IsGeoDataset<BubbleMapDataPoint> {
 
+	// exception string message for setting data
+	private static final String INVALID_SET_DATA_POINTS_CALL = "'setDataPoints' method is not invokable by a bubble map chart. Use 'setValues' method";
+	// exception string message for getting data
+	private static final String INVALID_GET_DATA_POINTS_CALL = "'getDataPoints' method is not invokable by a bubble map chart. Use 'getValues' method";
 	// data point factory
-	private static final ChoroplethDataPointFactory FACTORY = new ChoroplethDataPointFactory();
-	// dataset options handler instance
-	private final GeoDatasetHandler<ChoroplethDataPoint> handler;
+	private static final BubbleMapDataPointFactory FACTORY = new BubbleMapDataPointFactory();
+	// data set options handler instance
+	private final GeoDatasetHandler<BubbleMapDataPoint> handler;
 
 	/**
 	 * Creates a data set.<br>
 	 * It uses the global options has default.
 	 */
-	public ChoroplethDataset() {
+	public BubbleMapDataset() {
 		this(Defaults.get().getGlobal());
 	}
 
@@ -50,8 +55,8 @@ public final class ChoroplethDataset extends BubbleDataset implements IsGeoDatas
 	 * 
 	 * @param defaultValues default options
 	 */
-	public ChoroplethDataset(IsDefaultOptions defaultValues) {
-		this(ChoroplethChart.CONTROLLER_TYPE, defaultValues);
+	public BubbleMapDataset(IsDefaultOptions defaultValues) {
+		this(BubbleMapChart.CONTROLLER_TYPE, defaultValues);
 	}
 
 	/**
@@ -60,20 +65,40 @@ public final class ChoroplethDataset extends BubbleDataset implements IsGeoDatas
 	 * @param type controller type related to the data set
 	 * @param defaultValues default options
 	 */
-	ChoroplethDataset(ControllerType type, IsDefaultOptions defaultValues) {
+	BubbleMapDataset(ControllerType type, IsDefaultOptions defaultValues) {
 		super(type, defaultValues, Dataset.DEFAULT_HIDDEN);
 		// creates handler
-		this.handler = new GeoDatasetHandler<>(getNativeObject(), ChoroplethOptionsMapper.DEFAULT_CLIP_MAP, FACTORY);
+		this.handler = new GeoDatasetHandler<>(getNativeObject(), BubbleMapOptionsMapper.DEFAULT_CLIP_MAP, FACTORY);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.geo.IsGeoDataset#getHandler()
+	 * @see org.pepstock.charba.client.data.HasDataPoints#setDataPoints(org.pepstock.charba.client.data.DataPoint[])
 	 */
 	@Override
-	public GeoDatasetHandler<ChoroplethDataPoint> getHandler() {
-		return handler;
+	public void setDataPoints(DataPoint... datapoints) {
+		throw new UnsupportedOperationException(INVALID_SET_DATA_POINTS_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasDataPoints#setDataPoints(java.util.List)
+	 */
+	@Override
+	public void setDataPoints(List<DataPoint> datapoints) {
+		throw new UnsupportedOperationException(INVALID_SET_DATA_POINTS_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasDataPoints#getDataPoints(boolean)
+	 */
+	@Override
+	public List<DataPoint> getDataPoints(boolean binding) {
+		throw new UnsupportedOperationException(INVALID_GET_DATA_POINTS_CALL);
 	}
 
 	/*
@@ -106,12 +131,22 @@ public final class ChoroplethDataset extends BubbleDataset implements IsGeoDatas
 		return handler.getData(binding);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.geo.IsGeoDataset#getHandler()
+	 */
+	@Override
+	public GeoDatasetHandler<BubbleMapDataPoint> getHandler() {
+		return handler;
+	}
+
 	/**
 	 * Factory to create a data point from a native object, used for array container lists.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class ChoroplethDataPointFactory implements NativeObjectContainerFactory<ChoroplethDataPoint> {
+	private static class BubbleMapDataPointFactory implements NativeObjectContainerFactory<BubbleMapDataPoint> {
 
 		/*
 		 * (non-Javadoc)
@@ -119,8 +154,8 @@ public final class ChoroplethDataset extends BubbleDataset implements IsGeoDatas
 		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client. commons.NativeObject)
 		 */
 		@Override
-		public ChoroplethDataPoint create(NativeObject nativeObject) {
-			return new ChoroplethDataPoint(nativeObject);
+		public BubbleMapDataPoint create(NativeObject nativeObject) {
+			return new BubbleMapDataPoint(nativeObject);
 		}
 
 	}

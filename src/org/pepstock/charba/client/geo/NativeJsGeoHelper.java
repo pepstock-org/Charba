@@ -23,7 +23,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * Internal utility for GEo charts to invoke <code>ChartGeo.topojson</code> utility provided by the controller package.<br>
- * TopoJson is packaged with this plugin to convert data, it is exposed as  in the global context. 
+ * TopoJson is packaged with this plugin to convert data, it is exposed as in the global context.
  * 
  * @author Andrea "Stock" Stocchero
  *

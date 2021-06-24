@@ -31,7 +31,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLine, HasFill {
+public class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLine, HasFill {
 
 	/**
 	 * Name of properties of native object.
@@ -82,7 +82,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Line(Elements elements, Key childKey, IsDefaultLine defaultValues, NativeObject nativeObject) {
+	protected Line(Elements elements, Key childKey, IsDefaultLine defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 		// creates fill handler instance
 		this.fillHandler = new FillHandler(this, getDefaultValues().getFill(), getNativeObject());
