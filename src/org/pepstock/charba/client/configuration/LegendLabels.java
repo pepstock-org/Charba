@@ -117,11 +117,11 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 	// ---------------------------
 	// -- USERS CALLBACKS ---
 	// ---------------------------
-	// user callbacks implementation for filtering legend labels
+	// user callback implementation for filtering legend labels
 	private LegendFilterCallback filterCallback = null;
-	// user callbacks implementation for generating labels
+	// user callback implementation for generating labels
 	private LegendLabelsCallback labelsCallback = null;
-	// user callbacks implementation for item sort legend
+	// user callback implementation for item sort legend
 	private LegendItemSortCallback itemSortCallback = null;
 
 	// empty result

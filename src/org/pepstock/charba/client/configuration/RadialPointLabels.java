@@ -84,7 +84,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	// ---------------------------
 	// -- USERS CALLBACKS ---
 	// ---------------------------
-	// user callbacks implementation for point labels
+	// user callback implementation for point labels
 	private PointLabelCallback callback = null;
 	// font callback instance
 	private FontCallback<ScaleContext> fontCallback = null;

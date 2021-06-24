@@ -44,8 +44,8 @@ import org.pepstock.charba.client.items.AxisItem;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.options.ExtendedScale;
-import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.options.Scale;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.options.ScaleTitle;
 
 /**
@@ -94,17 +94,17 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	// ---------------------------
 	// -- USERS CALLBACKS ---
 	// ---------------------------
-	// user callbacks implementation for tick rotation calculation
+	// user callback implementation for tick rotation calculation
 	private AxisCalculateTickRotationCallback axisCalculateTickRotationCallback = null;
-	// user callbacks implementation for data limits
+	// user callback implementation for data limits
 	private AxisDataLimitsCallback axisDataLimitsCallback = null;
-	// user callbacks implementation for dimension set
+	// user callback implementation for dimension set
 	private AxisDimensionsCallback axisDimensionsCallback = null;
-	// user callbacks implementation for fit
+	// user callback implementation for fit
 	private AxisFitCallback axisFitCallback = null;
-	// user callbacks implementation for tick label conversion
+	// user callback implementation for tick label conversion
 	private AxisTickToLabelConversionCallback axisTickToLabelConversionCallback = null;
-	// user callbacks implementation for update
+	// user callback implementation for update
 	private AxisUpdateCallback axisUpdateCallback = null;
 	// user callback implementation for building ticks
 	private AxisBuildTicksCallback axisBuildTicksCallback = null;

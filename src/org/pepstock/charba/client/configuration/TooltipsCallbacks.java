@@ -146,13 +146,13 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	// ---------------------------
 	// -- USERS CALLBACKS ---
 	// ---------------------------
-	// user callbacks implementation for title
+	// user callback implementation for title
 	private TooltipTitleCallback titleCallback = null;
-	// user callbacks implementation for body
+	// user callback implementation for body
 	private TooltipBodyCallback bodyCallback = null;
-	// user callbacks implementation for labels
+	// user callback implementation for labels
 	private TooltipLabelCallback labelCallback = null;
-	// user callbacks implementation for footer
+	// user callback implementation for footer
 	private TooltipFooterCallback footerCallback = null;
 
 	/**
