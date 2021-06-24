@@ -31,9 +31,9 @@ abstract class LegendScale extends AbstractNode {
 	/**
 	 * Default display options, <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
-	public final static boolean DEFAULT_DISPLAY = true;
+	public static final boolean DEFAULT_DISPLAY = true;
 	// the property must be always set to "value"
-	private final static String PROPERTY_VALUE = "value";
+	private static final String PROPERTY_VALUE = "value";
 
 	/**
 	 * Name of properties of native object for projection scale.
