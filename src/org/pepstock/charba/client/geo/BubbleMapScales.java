@@ -15,13 +15,16 @@
 */
 package org.pepstock.charba.client.geo;
 
+import org.pepstock.charba.client.configuration.Axis;
+import org.pepstock.charba.client.configuration.Scales;
+
 /**
  * Extends the scales configuration in order to avoid some operation, not consistent on GEO chart, and expose additional objects to configure GEO charts, as scales.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BubbleMapScales extends BaseGeoScales {
+public final class BubbleMapScales extends Scales {
 
 	/**
 	 * Builds the object storing the root options element.
@@ -32,13 +35,34 @@ public final class BubbleMapScales extends BaseGeoScales {
 		super(options);
 	}
 
-	/**
-	 * Returns the size scale.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the size scale
+	 * @see org.pepstock.charba.client.configuration.Scales#setAxes(org.pepstock.charba.client.configuration.Axis[])
 	 */
-	public SizeScale getSizeScale() {
-		return getScales().getSizeScale();
+	@Override
+	public void setAxes(Axis... axes) {
+		// checks if the axis are consistent
+		// bubble map accepts ONLY size and projection axes
+		if (axes != null) {
+			// creates flags
+			boolean size = false;
+			boolean projection = false;
+			// scans axes
+			for (Axis axis : axes) {
+				// checks if projection
+				if (axis instanceof ProjectionAxis && !projection) {
+					projection = true;
+				} else if (axis instanceof SizeAxis && !size) {
+					size = true;
+				} else {
+					// if here, the set axes are not consistent
+					throw new IllegalArgumentException("Axes argument is not consistent: BubbleMap can have only 1 projection and 1 size axes");
+				}
+			}
+			// invokes the setting
+			super.setAxes(axes);
+		}
 	}
 
 }

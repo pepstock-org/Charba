@@ -58,10 +58,8 @@ public enum ChartAxisType implements AxisType
 
 	// name value of property
 	private final String value;
-
 	// default scale id
 	private final DefaultScaleId defaultScaleId;
-
 	// data type of scale
 	private final ScaleDataType dataType;
 
@@ -77,11 +75,12 @@ public enum ChartAxisType implements AxisType
 		this.defaultScaleId = defaultScaleId;
 		this.dataType = dataType;
 	}
-	
+
 	/**
-	 * FIXME
-	 * @param type
-	 * @return
+	 * Returns <code>true</code> if the passed type is the a default one.
+	 * 
+	 * @param type type to be checked
+	 * @return <code>true</code> if the passed type is the a default one
 	 */
 	public boolean is(AxisType type) {
 		// checks if argument is consistent
@@ -94,9 +93,10 @@ public enum ChartAxisType implements AxisType
 	}
 
 	/**
-	 * FIXME
-	 * @param type
-	 * @return
+	 * Returns <code>true</code> if the passed type is the a default one.
+	 * 
+	 * @param type type to be checked
+	 * @return <code>true</code> if the passed type is the a default one
 	 */
 	public boolean is(String type) {
 		// checks if argument is consistent
@@ -138,12 +138,14 @@ public enum ChartAxisType implements AxisType
 		return dataType;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.configuration.AxisType#getBaseType()
 	 */
 	@Override
 	public AxisType getBaseType() {
 		return this;
 	}
-	
+
 }

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.controllers.ControllerMapperFactory;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
@@ -69,6 +70,28 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 		this.scales = new BubbleMapScales(this);
 		// creates and stores options handler
 		this.optionsHandler = new CommonOptionsHandler(mapper);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#afterAxisConfigurationUpdate(org.pepstock.charba.client.configuration.Axis)
+	 */
+	@Override
+	protected void afterAxisConfigurationUpdate(Axis axis) {
+		// checks the type of axis
+		// checks if projection
+		if (axis instanceof ProjectionAxis) {
+			// casts to projection axis
+			ProjectionAxis pAxis = (ProjectionAxis) axis;
+			// resets axis
+			pAxis.afterAxisConfigurationUpdate();
+		} else if (axis instanceof SizeAxis) {
+			// casts to size axis
+			SizeAxis sAxis = (SizeAxis) axis;
+			// resets axis
+			sAxis.afterAxisConfigurationUpdate();
+		}
 	}
 
 	/*

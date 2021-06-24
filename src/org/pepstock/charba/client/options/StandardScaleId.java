@@ -33,7 +33,6 @@ public final class StandardScaleId extends AbstractStandardKey implements ScaleI
 	 * Builds the object with the scale id value as string
 	 * 
 	 * @param value value of key as String
-	 * @param kind default axis kind for this default scale id
 	 */
 	StandardScaleId(String value) {
 		super(value);

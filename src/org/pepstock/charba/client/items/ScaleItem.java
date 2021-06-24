@@ -208,8 +208,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		String type = getValue(Property.TYPE, Undefined.STRING);
 		// checks if there is the type
 		Checker.checkIfValid(type, "The scale does not contain a consistent type");
-		// gets axis type
-		// uses linear as default even if it is useless
+		// gets axis type by type and id
 		return AxisType.checkAndGet(type);
 	}
 

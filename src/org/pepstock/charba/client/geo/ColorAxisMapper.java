@@ -15,10 +15,7 @@
 */
 package org.pepstock.charba.client.geo;
 
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -35,17 +32,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ColorScale extends LegendScale {
-
-	/**
-	 * Default missing color options, {@link HtmlColor#TRANSPARENT}.
-	 */
-	public static final String DEFAULT_MISSING_COLOR = HtmlColor.TRANSPARENT.toRGBA();
-
-	/**
-	 * Default quantize options, <b>{@value DEFAULT_QUANTIZE}</b>.
-	 */
-	public static final int DEFAULT_QUANTIZE = 0;
+final class ColorAxisMapper extends LegendAxisMapper {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -114,14 +101,12 @@ public final class ColorScale extends LegendScale {
 	private InterpolateCallback interpolateCallback = null;
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @param parent parent node to use to add this element where changed
-	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param nativeObject native object to map java script properties
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	ColorScale(AbstractNode parent, Key childKey, NativeObject nativeObject) {
-		super(parent, childKey, nativeObject);
+	ColorAxisMapper(NativeObject nativeObject) {
+		super(nativeObject);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -133,17 +118,8 @@ public final class ColorScale extends LegendScale {
 	 * 
 	 * @param missingColor the missing color.
 	 */
-	public void setMissingColor(IsColor missingColor) {
-		setMissingColor(IsColor.checkAndGetValue(missingColor));
-	}
-
-	/**
-	 * Sets the missing color.
-	 * 
-	 * @param missingColor the missing color.
-	 */
-	public void setMissingColor(String missingColor) {
-		setValueAndAddToParent(Property.MISSING, missingColor);
+	void setMissingColor(String missingColor) {
+		setValue(Property.MISSING, missingColor);
 	}
 
 	/**
@@ -151,17 +127,8 @@ public final class ColorScale extends LegendScale {
 	 * 
 	 * @return the missing color.
 	 */
-	public String getMissingColorAsString() {
-		return getValue(Property.MISSING, DEFAULT_MISSING_COLOR);
-	}
-
-	/**
-	 * Returns the missing color.
-	 * 
-	 * @return the missing color.
-	 */
-	public IsColor getMissingColor() {
-		return ColorBuilder.parse(getMissingColorAsString());
+	String getMissingColorAsString() {
+		return getValue(Property.MISSING, ColorAxis.DEFAULT_MISSING_COLOR);
 	}
 
 	/**
@@ -169,8 +136,8 @@ public final class ColorScale extends LegendScale {
 	 * 
 	 * @param quantize the amount of pieces to allow to split the color scale in N quantized equal bins
 	 */
-	public void setQuantize(int quantize) {
-		setValueAndAddToParent(Property.QUANTIZE, quantize);
+	void setQuantize(int quantize) {
+		setValue(Property.QUANTIZE, quantize);
 	}
 
 	/**
@@ -178,8 +145,8 @@ public final class ColorScale extends LegendScale {
 	 * 
 	 * @return the amount of pieces to allow to split the color scale in N quantized equal bins
 	 */
-	public int getQuantize() {
-		return getValue(Property.QUANTIZE, DEFAULT_QUANTIZE);
+	int getQuantize() {
+		return getValue(Property.QUANTIZE, ColorAxis.DEFAULT_QUANTIZE);
 	}
 
 	/**
@@ -187,11 +154,11 @@ public final class ColorScale extends LegendScale {
 	 * 
 	 * @param interpolate the color interpolation of the scale
 	 */
-	public void setInterpolate(Interpolate interpolate) {
+	void setInterpolate(Interpolate interpolate) {
 		// resets callback
 		setInterpolate((InterpolateCallback) null);
 		// stores value
-		setValueAndAddToParent(Property.INTERPOLATE, interpolate);
+		setValue(Property.INTERPOLATE, interpolate);
 	}
 
 	/**
@@ -199,7 +166,7 @@ public final class ColorScale extends LegendScale {
 	 * 
 	 * @return the color interpolation of the scale
 	 */
-	public Interpolate getInterpolate() {
+	Interpolate getInterpolate() {
 		return getValue(Property.INTERPOLATE, Interpolate.values(), Interpolate.BLUES);
 	}
 
@@ -208,13 +175,13 @@ public final class ColorScale extends LegendScale {
 	 * 
 	 * @param interpolateCallback the color interpolation callback of the scale
 	 */
-	public void setInterpolate(InterpolateCallback interpolateCallback) {
+	void setInterpolate(InterpolateCallback interpolateCallback) {
 		// sets the callback
 		this.interpolateCallback = interpolateCallback;
 		// checks if consistent
 		if (interpolateCallback != null) {
 			// adds the callback proxy function to java script object
-			setValueAndAddToParent(Property.INTERPOLATE, interpolateCallbackProxy.getProxy());
+			setValue(Property.INTERPOLATE, interpolateCallbackProxy.getProxy());
 		} else {
 			// otherwise removes the properties from java script object
 			remove(Property.INTERPOLATE);
@@ -226,7 +193,7 @@ public final class ColorScale extends LegendScale {
 	 * 
 	 * @return the color interpolation callback of the scale
 	 */
-	public InterpolateCallback getInterpolateCallback() {
+	InterpolateCallback getInterpolateCallback() {
 		return interpolateCallback;
 	}
 
@@ -256,6 +223,6 @@ public final class ColorScale extends LegendScale {
 			}
 		}
 		// default result
-		return DEFAULT_MISSING_COLOR;
+		return ColorAxis.DEFAULT_MISSING_COLOR;
 	}
 }

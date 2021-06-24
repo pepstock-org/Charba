@@ -16,10 +16,10 @@
 package org.pepstock.charba.client.geo.callbacks;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.geo.ColorScale;
+import org.pepstock.charba.client.geo.ColorAxis;
 
 /**
- * Callback interface to be defined to customize the color on {@link ColorScale}.
+ * Callback interface to be defined to customize the color on {@link ColorAxis}.
  * 
  * @author Andrea "Stock" Stocchero
  *

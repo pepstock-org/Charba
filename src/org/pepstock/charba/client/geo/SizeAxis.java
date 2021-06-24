@@ -17,12 +17,15 @@ package org.pepstock.charba.client.geo;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.AxisType;
+import org.pepstock.charba.client.controllers.ControllerMapperFactory;
+import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.enums.ScaleDataType;
 import org.pepstock.charba.client.geo.enums.Mode;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * The scale is used to map the values to symbol radius size.<br>
@@ -31,7 +34,7 @@ import org.pepstock.charba.client.geo.enums.Mode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SizeScale extends LegendScale {
+public final class SizeAxis extends LegendAxis {
 
 	/**
 	 * Default missing radius options, {@value DEFAULT_MISSING_RADIUS}.
@@ -47,49 +50,56 @@ public final class SizeScale extends LegendScale {
 	 * Default maximum range options, <b>{@value DEFAULT_MAXIMUM_RANGE}</b>.
 	 */
 	public static final int DEFAULT_MAXIMUM_RANGE = 20;
+	
+	/**
+	 * Size axis id.
+	 */
+	public static final ScaleId ID = ScaleId.create("r");
+	
+	/**
+	 * Size axis type.
+	 */
+	public static final AxisType TYPE = AxisType.create("size", null, ID, ScaleDataType.NUMBER);
+	// projection mapper factory
+	private final SizeAxisRemappedOptionsFactory factory;
+	// projection mapper
+	private SizeAxisMapper mapper;
 
 	/**
-	 * Name of properties of native object for projection scale.
+	 * Builds the object storing the chart instance and axis type.
+	 * 
+	 * @param chart chart instance
 	 */
-	private enum Property implements Key
-	{
-		MISSING("missing"),
-		RANGE("range"),
-		MODE("mode");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
+	public SizeAxis(IsChart chart) {
+		super(chart, ID, TYPE);
+		// gets the controller type
+		ControllerType chartType = GeoUtils.checkAndGetControllerType(chart);
+		// chart must be only bubble map
+		Checker.assertCheck(BubbleMapChart.CONTROLLER_TYPE.equals(chartType), "Size axis must be used ONLY by bubble map chart");
+		// creates the factory
+		this.factory = new SizeAxisRemappedOptionsFactory(chartType);
+		// initializes the mapper
+		afterAxisConfigurationUpdate();
+	}
+	
+	/**
+	 * Reloads the extended scale
+	 */
+	void afterAxisConfigurationUpdate() {
+		// creates mapper
+		this.mapper = getConfiguration().getRemappedOptions(factory);
+		// resets legend
+		resetLegend();
 	}
 
-	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param parent parent node to use to add this element where changed
-	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param nativeObject native object to map java script properties
+	 * @see org.pepstock.charba.client.geo.LegendAxis#getMapper()
 	 */
-	SizeScale(AbstractNode parent, Key childKey, NativeObject nativeObject) {
-		super(parent, childKey, nativeObject);
+	@Override
+	SizeAxisMapper getMapper() {
+		return mapper;
 	}
 
 	/**
@@ -98,7 +108,7 @@ public final class SizeScale extends LegendScale {
 	 * @param missingRadius the radius to render for missing values
 	 */
 	public void setMissingRadius(double missingRadius) {
-		setValueAndAddToParent(Property.MISSING, missingRadius);
+		mapper.setMissingRadius(missingRadius);
 	}
 
 	/**
@@ -107,7 +117,7 @@ public final class SizeScale extends LegendScale {
 	 * @return the radius to render for missing values
 	 */
 	public double getMissingRadius() {
-		return getValue(Property.MISSING, DEFAULT_MISSING_RADIUS);
+		return mapper.getMissingRadius();
 	}
 
 	/**
@@ -116,7 +126,7 @@ public final class SizeScale extends LegendScale {
 	 * @param mode the operation modes for the scale, area means that the area is linearly increasing whereas radius the radius is
 	 */
 	public void setMode(Mode mode) {
-		setValueAndAddToParent(Property.MODE, mode);
+		mapper.setMode(mode);
 	}
 
 	/**
@@ -125,7 +135,7 @@ public final class SizeScale extends LegendScale {
 	 * @return the operation modes for the scale, area means that the area is linearly increasing whereas radius the radius is
 	 */
 	public Mode getMode() {
-		return getValue(Property.MODE, Mode.values(), Mode.AREA);
+		return mapper.getMode();
 	}
 
 	/**
@@ -135,7 +145,7 @@ public final class SizeScale extends LegendScale {
 	 * @param max maximum range in pixel
 	 */
 	public void setRange(int min, int max) {
-		setArrayValueAndAddToParent(Property.RANGE, ArrayInteger.fromOrEmpty(min, max));
+		mapper.setRange(min, max);
 	}
 
 	/**
@@ -146,8 +156,36 @@ public final class SizeScale extends LegendScale {
 	 *         between
 	 */
 	public List<Integer> getRange() {
-		ArrayInteger array = getArrayValue(Property.RANGE);
-		return ArrayListHelper.list(array);
+		return mapper.getRange();
+	}
+
+	/**
+	 * Can create a options mapper in order to re-map the CHART.JS options where needed in order to add additional properties and nodes for GEO charts.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class SizeAxisRemappedOptionsFactory extends ControllerMapperFactory<SizeAxisMapper> {
+
+		/**
+		 * Creates the factory of the mapper
+		 * 
+		 * @param type type of GEO chart
+		 */
+		private SizeAxisRemappedOptionsFactory(ControllerType chartType) {
+			super(chartType);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public SizeAxisMapper create(NativeObject nativeObject) {
+			return new SizeAxisMapper(nativeObject);
+		}
+
 	}
 
 }

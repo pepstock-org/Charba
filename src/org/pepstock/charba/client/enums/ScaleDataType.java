@@ -26,7 +26,6 @@ import org.pepstock.charba.client.configuration.RadialAxis;
  * Enumeration with all possible types of data set in the scale.
  * 
  * @author Andrea "Stock" Stocchero
- * @see AxisType
  */
 public enum ScaleDataType
 {

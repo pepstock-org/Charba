@@ -165,7 +165,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param type axis type
 	 * @param kind axis kind to set the right position
 	 */
-	Axis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
+	protected Axis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
 		super(chart);
 		// checks if id is consistent
 		ScaleId.checkIfValid(id);

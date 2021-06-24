@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.geo;
 
-import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.geo.enums.Align;
 import org.pepstock.charba.client.geo.enums.Position;
@@ -28,7 +28,7 @@ import org.pepstock.charba.client.geo.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Legend extends AbstractNode {
+public final class Legend extends NativeObjectContainer {
 
 	/**
 	 * Default length options, <b>{@value DEFAULT_LENGTH}</b>.
@@ -84,14 +84,12 @@ public final class Legend extends AbstractNode {
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @param parent parent node to use to add this element where changed
-	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param nativeObject native object to map java script properties
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Legend(AbstractNode parent, Key childKey, NativeObject nativeObject) {
-		super(parent, childKey, nativeObject);
+	Legend(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -100,7 +98,7 @@ public final class Legend extends AbstractNode {
 	 * @param position the location of the legend on the chart area
 	 */
 	public void setPosition(Position position) {
-		setValueAndAddToParent(Property.POSITION, position);
+		setValue(Property.POSITION, position);
 	}
 
 	/**
@@ -109,7 +107,7 @@ public final class Legend extends AbstractNode {
 	 * @param position the location of the legend on the chart area
 	 */
 	public void setPosition(PositionPoint position) {
-		setValueAndAddToParent(Property.POSITION, position);
+		setValue(Property.POSITION, position);
 	}
 
 	/**
@@ -142,7 +140,7 @@ public final class Legend extends AbstractNode {
 	 * @param align the alignment of the scale
 	 */
 	public void setAlign(Align align) {
-		setValueAndAddToParent(Property.ALIGN, align);
+		setValue(Property.ALIGN, align);
 	}
 
 	/**
@@ -160,7 +158,7 @@ public final class Legend extends AbstractNode {
 	 * @param length the length of the legend
 	 */
 	public void setLength(int length) {
-		setValueAndAddToParent(Property.LENGTH, length);
+		setValue(Property.LENGTH, length);
 	}
 
 	/**
@@ -179,7 +177,7 @@ public final class Legend extends AbstractNode {
 	 * @param width how wide the scale is
 	 */
 	public void setWidth(int width) {
-		setValueAndAddToParent(Property.WIDTH, width);
+		setValue(Property.WIDTH, width);
 	}
 
 	/**
@@ -198,7 +196,7 @@ public final class Legend extends AbstractNode {
 	 * @param width how many pixels should be used for the color bar
 	 */
 	public void setIndicatorWidth(int width) {
-		setValueAndAddToParent(Property.INDICATOR_WIDTH, width);
+		setValue(Property.INDICATOR_WIDTH, width);
 	}
 
 	/**
@@ -216,7 +214,7 @@ public final class Legend extends AbstractNode {
 	 * @param margin the margin pixels such that it doesn't stick to the edge of the chart
 	 */
 	public void setMargin(int margin) {
-		setValueAndAddToParent(Property.MARGIN, margin);
+		setValue(Property.MARGIN, margin);
 	}
 
 	/**
@@ -225,7 +223,7 @@ public final class Legend extends AbstractNode {
 	 * @param margin the margin pixels such that it doesn't stick to the edge of the chart
 	 */
 	public void setMargin(Margin margin) {
-		setValueAndAddToParent(Property.MARGIN, margin);
+		setValue(Property.MARGIN, margin);
 	}
 
 	/**

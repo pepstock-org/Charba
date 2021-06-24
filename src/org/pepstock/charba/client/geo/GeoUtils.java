@@ -18,10 +18,12 @@ package org.pepstock.charba.client.geo;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.geo.callbacks.FeatureFilterCallback;
 import org.pepstock.charba.client.geo.callbacks.FeatureFindCallback;
@@ -306,6 +308,34 @@ public final class GeoUtils {
 	 */
 	public static Labels loadLabels(List<Feature> features, FeatureLabelCallback labelCallback) {
 		return loadLabels(features, labelCallback, null);
+	}
+
+	/**
+	 * This utility method is invoked by GEO axis to check if the chart, passed as argument, is consistent.
+	 * 
+	 * @param chart chart instance to be checked
+	 * @return the controller type of the GEO chart
+	 */
+	static final ControllerType checkAndGetControllerType(IsChart chart) {
+		// checks if the chart is consistent with the scale
+		if (chart.getType() instanceof ControllerType) {
+			// casts to controller type
+			ControllerType chartType = (ControllerType) chart.getType();
+			// checks if is a god chart type
+			if (BubbleMapChart.CONTROLLER_TYPE.equals(chart.getType()) || ChoroplethChart.CONTROLLER_TYPE.equals(chartType)) {
+				// returns controller
+				return chartType;
+			} else {
+				// if here, the chart instance is not a GEO one
+				// the exception
+				throw new IllegalArgumentException("Chart argument is not an instance of " + BaseGeoChart.class.getName() + " but "+chart.getClass().getName());
+			}
+		} else {
+			// if here, the chart instance is not a GEO one
+			// the exception
+			throw new IllegalArgumentException("Chart argument is not a controller.");
+		}
+
 	}
 
 	/**

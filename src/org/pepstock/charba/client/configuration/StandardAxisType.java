@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.ScaleDataType;
 import org.pepstock.charba.client.options.ScaleId;
 
@@ -30,13 +29,10 @@ public final class StandardAxisType implements AxisType {
 
 	// type of scale
 	private final String type;
-
-	// type of scale
+	// type of extended scale
 	private final AxisType baseType;
-
 	// default scale id
-	private final DefaultScaleId defaultScaleId;
-
+	private final ScaleId defaultScaleId;
 	// data type of scale
 	private final ScaleDataType dataType;
 
@@ -48,7 +44,7 @@ public final class StandardAxisType implements AxisType {
 	 * @param defaultScaleId default scale id for this axis type
 	 * @param dataType type of data which the scale can manage
 	 */
-	StandardAxisType(String type, AxisType baseType, DefaultScaleId defaultScaleId, ScaleDataType dataType) {
+	StandardAxisType(String type, AxisType baseType, ScaleId defaultScaleId, ScaleDataType dataType) {
 		this.type = type;
 		this.defaultScaleId = defaultScaleId;
 		this.dataType = dataType;
@@ -56,7 +52,7 @@ public final class StandardAxisType implements AxisType {
 		// checks if argument is consistent
 		AxisType.checkIfValid(this);
 		// stores the type
-		AxisTypeManager.get().add(this);
+		AxisType.register(this);
 	}
 
 	/*

@@ -17,7 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.PropertyKey;
-import org.pepstock.charba.client.enums.DefaultScaleId;
+import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.ScaleDataType;
 import org.pepstock.charba.client.options.ScaleId;
 
@@ -29,7 +29,34 @@ import org.pepstock.charba.client.options.ScaleId;
 public interface AxisType extends PropertyKey {
 
 	/**
-	 * Returns a axis type by its string value.
+	 * Returns a axis type by its string value and extended existing axis type.<br>
+	 * It uses the {@link ScaleDataType} and default {@link ScaleId} of extended axis type.
+	 * 
+	 * @param type scale type
+	 * @param baseType base type (extended) for axis type
+	 * @return new scale type instance
+	 */
+	static AxisType create(String type, ChartAxisType baseType) {
+		// checks if base type is consistent and then use the data type of the base
+		return create(type, baseType, isValid(baseType) ? baseType.getDefaultScaleId() : null);
+	}
+
+	/**
+	 * Returns a axis type by its string value, extended existing axis type and default {@link ScaleId}.<br>
+	 * It uses the {@link ScaleDataType} of extended axis type.
+	 * 
+	 * @param type scale type
+	 * @param baseType base type (extended) for axis type
+	 * @param defaultScaleId default scale id for this axis type
+	 * @return new scale type instance
+	 */
+	static AxisType create(String type, ChartAxisType baseType, ScaleId defaultScaleId) {
+		// checks if base type is consistent and then use the data type of the base
+		return create(type, baseType, defaultScaleId, isValid(baseType) ? baseType.getDataType() : null);
+	}
+
+	/**
+	 * Returns a axis type by all needed objects to create a axis type.
 	 * 
 	 * @param type scale type
 	 * @param baseType base type (extended) for axis type
@@ -37,9 +64,9 @@ public interface AxisType extends PropertyKey {
 	 * @param dataType type of data which the scale can manage
 	 * @return new scale type instance
 	 */
-	static AxisType create(String type, AxisType baseType, DefaultScaleId defaultScaleId, ScaleDataType dataType) {
+	static AxisType create(String type, ChartAxisType baseType, ScaleId defaultScaleId, ScaleDataType dataType) {
 		// checks if type is already defined
-		AxisType resultType = AxisTypeManager.get().get(type);
+		AxisType resultType = AxisTypesManager.get().get(type);
 		// checks if result is consistent
 		if (resultType != null) {
 			// found
@@ -51,6 +78,30 @@ public interface AxisType extends PropertyKey {
 	}
 
 	/**
+	 * Registers the passed axis type.
+	 * 
+	 * @param type axis type
+	 * @return a stored scale type instance
+	 */
+	static void register(AxisType type) {
+		register(type, false);
+	}
+
+	/**
+	 * Registers the passed axis type, with possibility to force the registration if already registered.
+	 * 
+	 * @param type axis type
+	 * @param force if <code>true</code>, the axis type is register even if already registered.
+	 * @return a stored scale type instance
+	 */
+	static void register(AxisType type, boolean force) {
+		// checked if is register
+		if (force || (isValid(type) && !AxisTypesManager.get().has(type.value()))) {
+			AxisTypesManager.get().add(type);
+		}
+	}
+	
+	/**
 	 * Returns a stored axis type or {@link IllegalArgumentException}.
 	 * 
 	 * @param type scale type
@@ -58,7 +109,7 @@ public interface AxisType extends PropertyKey {
 	 */
 	static AxisType checkAndGet(String type) {
 		// checks if type is already defined
-		AxisType resultType = AxisTypeManager.get().get(type);
+		AxisType resultType = AxisTypesManager.get().get(type);
 		// checks if result is consistent
 		if (resultType != null) {
 			// found
@@ -66,7 +117,7 @@ public interface AxisType extends PropertyKey {
 		}
 		// if here the result type is not consistent
 		// then exception
-		throw new IllegalArgumentException("Axis type '" + type + "'is undefined");
+		throw new IllegalArgumentException("Axis type '" + type + "' is undefined");
 	}
 
 	/**
@@ -76,7 +127,7 @@ public interface AxisType extends PropertyKey {
 	 * @return <code>true</code> if scale type passed as argument is not <code>null</code> and its value is not <code>null</code> as well and could be a valid scale type.
 	 */
 	static boolean isValid(AxisType type) {
-		return Key.isValid(type) && type.getDataType() != null && ScaleId.isValid(type.getDefaultScaleId()) && isValid(type.getBaseType());
+		return Key.isValid(type) && type.getDataType() != null && ScaleId.isValid(type.getDefaultScaleId()) && type.getBaseType() != null;
 	}
 
 	/**
@@ -89,6 +140,22 @@ public interface AxisType extends PropertyKey {
 		if (!isValid(type)) {
 			throw new IllegalArgumentException("Axis type is null or not consistent");
 		}
+	}
+	
+	/**
+	 * Checks if key passed as argument is a valid {@link AxisType}.<br>
+	 * If not, throw a {@link IllegalArgumentException}, otherwise it returns the key.
+	 * 
+	 * @param type axis type to be checked
+	 * @param <T> type of axis
+	 * @return the same axis type passed as argument
+	 */
+	static <T extends AxisType> T checkAndGetIfValid(T key) {
+		// checks if key is consistent
+		checkIfValid(key);
+		// if here, is consistent
+		// then returns the argument
+		return key;
 	}
 
 	/**

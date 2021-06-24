@@ -90,11 +90,23 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	 * @param kind axis kind.
 	 */
 	public CartesianLinearAxis(IsChart chart, ScaleId id, AxisKind kind) {
-		super(chart, id, ChartAxisType.LINEAR, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.Y));
+		this(chart, id, ChartAxisType.LINEAR, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.Y));
+	}
+
+	/**
+	 * Builds the object storing the chart instance and cartesian axis type, to use to extend the axis.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 * @param type axis type
+	 * @param kind axis kind
+	 */
+	protected CartesianLinearAxis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
+		super(chart, id, AxisType.checkAndGetIfValid(type), Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.Y));
 		// creates the ticks instance
 		this.ticks = new CartesianLinearTick(this);
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -17,13 +17,16 @@ package org.pepstock.charba.client.geo;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.ArrayDouble;
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.Axis;
+import org.pepstock.charba.client.configuration.AxisType;
+import org.pepstock.charba.client.controllers.ControllerMapperFactory;
+import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.enums.AxisKind;
+import org.pepstock.charba.client.enums.ScaleDataType;
 import org.pepstock.charba.client.geo.enums.Projection;
-import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * A map projection is a way to flatten a globe's surface into a plane in order to make a map.<br>
@@ -33,40 +36,20 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ProjectionScale extends AbstractNode {
+public final class ProjectionAxis extends Axis {
 
 	/**
-	 * Name of properties of native object for projection scale.
+	 * Projection axis id.
 	 */
-	private enum Property implements Key
-	{
-		PROJECTION("projection"),
-		PROJECTION_SCALE("projectionScale"),
-		PROJECTION_OFFSET("projectionOffset");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
+	public static final ScaleId ID = ScaleId.create("xy");
+	/**
+	 * Projection axis type.
+	 */
+	public static final AxisType TYPE = AxisType.create("projection", null, ID, ScaleDataType.NUMBER);
+	// projection mapper factory
+	private final ProjectionAxisRemappedOptionsFactory factory;
+	// projection mapper
+	private ProjectionAxisMapper mapper;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -75,8 +58,22 @@ public final class ProjectionScale extends AbstractNode {
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param nativeObject native object to map java script properties
 	 */
-	ProjectionScale(AbstractNode parent, Key childKey, NativeObject nativeObject) {
-		super(parent, childKey, nativeObject);
+	public ProjectionAxis(IsChart chart) {
+		super(chart, ID, TYPE, AxisKind.X);
+		// gets the controller type
+		ControllerType chartType = GeoUtils.checkAndGetControllerType(chart);
+		// creates the factory
+		this.factory = new ProjectionAxisRemappedOptionsFactory(chartType);
+		// initializes the mapper
+		afterAxisConfigurationUpdate();
+	}
+
+	/**
+	 * Reloads the extended scale
+	 */
+	void afterAxisConfigurationUpdate() {
+		// creates mapper
+		this.mapper = getConfiguration().getRemappedOptions(factory);
 	}
 
 	/**
@@ -85,7 +82,7 @@ public final class ProjectionScale extends AbstractNode {
 	 * @param projection a map projection which is a way to flatten a globe's surface into a plane in order to make a map
 	 */
 	public void setProjection(Projection projection) {
-		setValueAndAddToParent(Property.PROJECTION, projection);
+		mapper.setProjection(projection);
 	}
 
 	/**
@@ -94,7 +91,7 @@ public final class ProjectionScale extends AbstractNode {
 	 * @return a map projection which is a way to flatten a globe's surface into a plane in order to make a map
 	 */
 	public Projection getProjection() {
-		return getValue(Property.PROJECTION, Projection.values(), Projection.ALBERS_USA);
+		return mapper.getProjection();
 	}
 
 	/**
@@ -103,7 +100,7 @@ public final class ProjectionScale extends AbstractNode {
 	 * @param projectionScale how much the map will be scaled
 	 */
 	public void setProjectionScale(double projectionScale) {
-		setValueAndAddToParent(Property.PROJECTION_SCALE, projectionScale);
+		mapper.setProjectionScale(projectionScale);
 	}
 
 	/**
@@ -112,7 +109,7 @@ public final class ProjectionScale extends AbstractNode {
 	 * @return how much the map will be scaled
 	 */
 	public double getProjectionScale() {
-		return getValue(Property.PROJECTION_SCALE, Undefined.DOUBLE);
+		return mapper.getProjectionScale();
 	}
 
 	/**
@@ -122,15 +119,7 @@ public final class ProjectionScale extends AbstractNode {
 	 * @param y y offset where the map has been placed
 	 */
 	public void setProjectionOffset(double x, double y) {
-		// checks if arguments re consistent
-		if (Undefined.isNot(x) && Undefined.isNot(y)) {
-			// stores
-			setValueOrArrayAndAddToParent(Property.PROJECTION_OFFSET, x, y);
-		} else {
-			// if here the arguments are not consistent
-			// then removes the options
-			remove(Property.PROJECTION_OFFSET);
-		}
+		mapper.setProjectionOffset(x, y);
 	}
 
 	/**
@@ -139,7 +128,36 @@ public final class ProjectionScale extends AbstractNode {
 	 * @return a map projection offset value.
 	 */
 	public List<Double> getProjectionOffset() {
-		ArrayDouble array = getArrayValue(Property.PROJECTION_OFFSET);
-		return ArrayListHelper.list(array);
+		return mapper.getProjectionOffset();
 	}
+
+	/**
+	 * Can create a options mapper in order to re-map the CHART.JS options where needed in order to add additional properties and nodes for GEO charts.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class ProjectionAxisRemappedOptionsFactory extends ControllerMapperFactory<ProjectionAxisMapper> {
+
+		/**
+		 * Creates the factory of the mapper
+		 * 
+		 * @param type type of GEO chart
+		 */
+		private ProjectionAxisRemappedOptionsFactory(ControllerType chartType) {
+			super(chartType);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public ProjectionAxisMapper create(NativeObject nativeObject) {
+			return new ProjectionAxisMapper(nativeObject);
+		}
+
+	}
+
 }

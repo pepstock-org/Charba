@@ -21,14 +21,15 @@ import java.util.Map;
 import org.pepstock.charba.client.enums.ChartAxisType;
 
 /**
- * FIXME
+ * Manages the customs axes types in order they will be always retrievable.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class AxisTypeManager {
-	
+final class AxisTypesManager {
+
 	// singleton instance
-	private static final AxisTypeManager INSTANCE = new AxisTypeManager();
+	private static final AxisTypesManager INSTANCE = new AxisTypesManager();
 
 	// caches with the axis type instances
 	private final Map<String, AxisType> types = new HashMap<>();
@@ -36,22 +37,23 @@ final class AxisTypeManager {
 	/**
 	 * To avoid any instantiation
 	 */
-	AxisTypeManager() {
+	AxisTypesManager() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns the singleton instance.
 	 * 
 	 * @return the singleton instance
 	 */
-	static AxisTypeManager get() {
+	static AxisTypesManager get() {
 		return INSTANCE;
 	}
 
 	/**
+	 * Adds a axis type to the cache.
 	 * 
-	 * @param type
+	 * @param type axis type to add
 	 */
 	void add(AxisType type) {
 		// checks if type is consistent
@@ -62,9 +64,10 @@ final class AxisTypeManager {
 	}
 
 	/**
+	 * Returns <code>true</code> if the axis type by its value has been previously stored.
 	 * 
-	 * @param type
-	 * @return
+	 * @param type axis type value to be checked
+	 * @return <code>true</code> if the axis type by its value has been previously stored
 	 */
 	boolean has(String type) {
 		// checks if argument is consistent
@@ -75,7 +78,14 @@ final class AxisTypeManager {
 		// then returns false
 		return false;
 	}
+
 	
+	/**
+	 * Returns the stored axis type otherwise <code>null</code> if not found.
+	 * 
+	 * @param type axis type value to be checked
+	 * @return the stored axis type otherwise <code>null</code> if not found
+	 */
 	AxisType get(String type) {
 		// checks and gets the ootb chart axis type
 		// checks if axis type as argument is a ootb chart one
@@ -94,5 +104,5 @@ final class AxisTypeManager {
 		// then returns null
 		return null;
 	}
-	
+
 }

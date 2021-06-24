@@ -142,10 +142,10 @@ public class Scale extends AbstractScale {
 
 	/**
 	 * Returns the id of scale.<br>
-	 * It is usually used to link datasets and scale axes together.<br>
+	 * It is usually used to link data sets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.
 	 * 
-	 * @return The ID is used to link datasets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
+	 * @return The ID is used to link data sets and scale axes together or {@link DefaultScaleId#UNKNOWN} if not set
 	 */
 	public final ScaleId getId() {
 		return getValue(Property.ID, DefaultScaleId.UNKNOWN);
@@ -172,8 +172,7 @@ public class Scale extends AbstractScale {
 		String type = getValue(Property.TYPE, Undefined.STRING);
 		// checks if there is the type
 		Checker.checkIfValid(type, "The scale does not contain a consistent type");
-		// gets axis type
-		// uses linear as default even if it is useless
+		// gets axis type by type
 		return AxisType.checkAndGet(type);
 	}
 

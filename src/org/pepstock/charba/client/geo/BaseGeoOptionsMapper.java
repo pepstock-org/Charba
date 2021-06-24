@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.geo.enums.ClipMap;
 import org.pepstock.charba.client.options.ExtendedOptions;
@@ -30,41 +29,8 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  */
 abstract class BaseGeoOptionsMapper extends AbstractNode {
 
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		SCALES("scales");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
 	// options instance related to this mapper
 	private final ExtendedOptions options;
-	// internal scale options instance to re-map the scales
-	private final InternalGeoScales scales;
 	// internal instance of chart.js elements
 	private final BaseGeoElements elements;
 
@@ -78,8 +44,6 @@ abstract class BaseGeoOptionsMapper extends AbstractNode {
 		super(nativeObject);
 		// stores options
 		this.options = options;
-		// gets and stores internal scales
-		this.scales = new InternalGeoScales(this, Property.SCALES, getValue(Property.SCALES));
 		// creates and stores an element wrapper for GEO charts
 		this.elements = new BaseGeoElements(this, getValue(BaseGeoElements.CommonProperty.ELEMENTS), getConfiguration().getElements());
 	}
@@ -98,15 +62,6 @@ abstract class BaseGeoOptionsMapper extends AbstractNode {
 	 */
 	final ExtendedOptions getConfiguration() {
 		return options;
-	}
-
-	/**
-	 * Returns the internal scales.
-	 * 
-	 * @return the internal scales instance
-	 */
-	final InternalGeoScales getScales() {
-		return scales;
 	}
 
 	/**

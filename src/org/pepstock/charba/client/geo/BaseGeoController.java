@@ -17,6 +17,7 @@ package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.controllers.AbstractController;
 import org.pepstock.charba.client.controllers.ControllerProvider;
 import org.pepstock.charba.client.controllers.ControllerType;
@@ -69,6 +70,10 @@ final class BaseGeoController extends AbstractController {
 		 */
 		@Override
 		public Controller provide(ControllerType controllerType) {
+			// registers the axes
+			AxisType.register(ProjectionAxis.TYPE);
+			AxisType.register(ColorAxis.TYPE);
+			AxisType.register(SizeAxis.TYPE);
 			// inject Chart.js and date library if not already loaded
 			ResourcesType.getResources().inject();
 			// injects CHARTJS-GEO controller
