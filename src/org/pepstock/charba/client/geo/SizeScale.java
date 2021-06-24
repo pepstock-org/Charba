@@ -25,19 +25,13 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.geo.enums.Mode;
 
 /**
- * FIXME The coloring of the nodes will be done with a special color scale.<br>
+ * The scale is used to map the values to symbol radius size.<br>
  * Provides the elements, as colored legend, which can provide the how the values are distributed on map.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class SizeScale extends LegendScale {
-
-	// FIXME
-	// align: 'bottom',
-	// length: 90,
-	// width: 70,
-	// indicatorWidth: 42,
 
 	/**
 	 * Default missing radius options, {@value DEFAULT_MISSING_RADIUS}.

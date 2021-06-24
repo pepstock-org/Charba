@@ -22,7 +22,8 @@ import org.pepstock.charba.client.geo.BubbleMapOptions;
 
 /**
  * BUBBLEMAP chart GWT WIDGET implementation.<br>
- * FIXME A choropleth chart is used to render maps with the area filled according to some numerical value.
+ * A Bubble Map, as known as Proportional Symbol is used to render maps with dots that are scaled according to some numerical value.<br>
+ * It is based on a regular bubble chart where the positioning is done using latitude and longitude to create a legend for the different radi.
  * 
  * @author Andrea "Stock" Stocchero
  */
