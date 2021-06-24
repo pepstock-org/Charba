@@ -22,7 +22,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * Internal utility for {@link DataLabelsPlugin} to register the plugin globally to Chart.js.<br>
- * This is needed because from the plugin version for Chart.js 3, the plugin doesn't register itself golbally anymore and delegeate this operation to the user.<br>
+ * This is needed because from the plugin version for Chart.js 3, the plugin doesn't register itself globally anymore and delegate this operation to the user.<br>
  * To maintain the same capabilities of Charba, this object register the plugin globally.
  * 
  * @author Andrea "Stock" Stocchero
