@@ -108,7 +108,7 @@ public final class BubbleMapDataset extends BubbleDataset implements IsGeoDatase
 	 */
 	@Override
 	public void setData(double... values) {
-		handler.setData(values);
+		throw new UnsupportedOperationException(GeoDatasetHandler.INVALID_SET_DATA_CALL);
 	}
 
 	/*
@@ -118,7 +118,7 @@ public final class BubbleMapDataset extends BubbleDataset implements IsGeoDatase
 	 */
 	@Override
 	public void setData(List<Double> values) {
-		handler.setData(values);
+		throw new UnsupportedOperationException(GeoDatasetHandler.INVALID_SET_DATA_CALL);
 	}
 
 	/*
@@ -128,7 +128,7 @@ public final class BubbleMapDataset extends BubbleDataset implements IsGeoDatase
 	 */
 	@Override
 	public List<Double> getData(boolean binding) {
-		return handler.getData(binding);
+		throw new UnsupportedOperationException(GeoDatasetHandler.INVALID_GET_DATA_CALL);
 	}
 
 	/*

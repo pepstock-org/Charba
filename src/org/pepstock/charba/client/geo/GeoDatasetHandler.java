@@ -35,9 +35,9 @@ import org.pepstock.charba.client.geo.enums.ClipMap;
 final class GeoDatasetHandler<T extends GeoDataPoint> extends CommonOptionsHandler {
 
 	// exception string message for setting data
-	private static final String INVALID_SET_DATA_CALL = "'setData' method is not invokable by a GEO chart. Use 'setValues' method";
+	static final String INVALID_SET_DATA_CALL = "'setData' method is not invokable by a GEO chart. Use 'setValues' method";
 	// exception string message for getting data
-	private static final String INVALID_GET_DATA_CALL = "'getData' method is not invokable by a GEO chart. Use 'getValues' method";
+	static final String INVALID_GET_DATA_CALL = "'getData' method is not invokable by a GEO chart. Use 'getValues' method";
 
 	/**
 	 * Name of properties of native object.
@@ -84,34 +84,6 @@ final class GeoDatasetHandler<T extends GeoDataPoint> extends CommonOptionsHandl
 		super(nativeObject, defaultClipMap);
 		// stores factory
 		this.factory = factory;
-	}
-
-	/**
-	 * Throws an exception because not available.
-	 * 
-	 * @param values ignored because will throw an exception
-	 */
-	void setData(double... values) {
-		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
-	}
-
-	/**
-	 * Throws an exception because not available.
-	 * 
-	 * @param values ignored because will throw an exception
-	 */
-	void setData(List<Double> values) {
-		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
-	}
-
-	/**
-	 * Throws an exception because not available.
-	 * 
-	 * @param binding not used
-	 * @return nothing because will throw an exception
-	 */
-	List<Double> getData(boolean binding) {
-		throw new UnsupportedOperationException(INVALID_GET_DATA_CALL);
 	}
 
 	/**

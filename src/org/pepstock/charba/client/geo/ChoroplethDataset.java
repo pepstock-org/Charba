@@ -83,7 +83,7 @@ public final class ChoroplethDataset extends BubbleDataset implements IsGeoDatas
 	 */
 	@Override
 	public void setData(double... values) {
-		handler.setData(values);
+		throw new UnsupportedOperationException(GeoDatasetHandler.INVALID_SET_DATA_CALL);
 	}
 
 	/*
@@ -93,7 +93,7 @@ public final class ChoroplethDataset extends BubbleDataset implements IsGeoDatas
 	 */
 	@Override
 	public void setData(List<Double> values) {
-		handler.setData(values);
+		throw new UnsupportedOperationException(GeoDatasetHandler.INVALID_SET_DATA_CALL);
 	}
 
 	/*
@@ -103,7 +103,7 @@ public final class ChoroplethDataset extends BubbleDataset implements IsGeoDatas
 	 */
 	@Override
 	public List<Double> getData(boolean binding) {
-		return handler.getData(binding);
+		throw new UnsupportedOperationException(GeoDatasetHandler.INVALID_GET_DATA_CALL);
 	}
 
 	/**
