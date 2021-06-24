@@ -76,30 +76,31 @@ public final class ChoroplethDataset extends BubbleDataset implements IsGeoDatas
 		return handler;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
+	 * @param values ignored because will throw an exception
 	 */
 	@Override
 	public void setData(double... values) {
 		throw new UnsupportedOperationException(GeoDatasetHandler.INVALID_SET_DATA_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
+	 * @param values ignored because will throw an exception
 	 */
 	@Override
 	public void setData(List<Double> values) {
 		throw new UnsupportedOperationException(GeoDatasetHandler.INVALID_SET_DATA_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getData(boolean)
+	 * @param binding ignored because will throw an exception
+	 * @return nothing because will throw an exception
 	 */
 	@Override
 	public List<Double> getData(boolean binding) {

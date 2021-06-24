@@ -74,71 +74,73 @@ public final class BubbleMapDataset extends BubbleDataset implements IsGeoDatase
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HasDataPoints#setDataPoints(org.pepstock.charba.client.data.DataPoint[])
+	 * @see org.pepstock.charba.client.geo.IsGeoDataset#getHandler()
+	 */
+	@Override
+	public GeoDatasetHandler<BubbleMapDataPoint> getHandler() {
+		return handler;
+	}
+
+	/**
+	 * Throws an exception because not available.
+	 * 
+	 * @param datapoints ignored because will throw an exception
 	 */
 	@Override
 	public void setDataPoints(DataPoint... datapoints) {
 		throw new UnsupportedOperationException(INVALID_SET_DATA_POINTS_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.data.HasDataPoints#setDataPoints(java.util.List)
+	 * @param datapoints ignored because will throw an exception
 	 */
 	@Override
 	public void setDataPoints(List<DataPoint> datapoints) {
 		throw new UnsupportedOperationException(INVALID_SET_DATA_POINTS_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.data.HasDataPoints#getDataPoints(boolean)
+	 * @param binding ignored because will throw an exception
+	 * @return nothing because will throw an exception
 	 */
 	@Override
 	public List<DataPoint> getDataPoints(boolean binding) {
 		throw new UnsupportedOperationException(INVALID_GET_DATA_POINTS_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
+	 * @param values ignored because will throw an exception
 	 */
 	@Override
 	public void setData(double... values) {
 		throw new UnsupportedOperationException(GeoDatasetHandler.INVALID_SET_DATA_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
+	 * @param values ignored because will throw an exception
 	 */
 	@Override
 	public void setData(List<Double> values) {
 		throw new UnsupportedOperationException(GeoDatasetHandler.INVALID_SET_DATA_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getData(boolean)
+	 * @param binding ignored because will throw an exception
+	 * @return nothing because will throw an exception
 	 */
 	@Override
 	public List<Double> getData(boolean binding) {
 		throw new UnsupportedOperationException(GeoDatasetHandler.INVALID_GET_DATA_CALL);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.geo.IsGeoDataset#getHandler()
-	 */
-	@Override
-	public GeoDatasetHandler<BubbleMapDataPoint> getHandler() {
-		return handler;
 	}
 
 	/**
