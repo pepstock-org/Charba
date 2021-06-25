@@ -63,10 +63,10 @@ final class JsGeoHelper {
 	 * @param featureProperty property in the <code>objects</code> node of topoJson definition where all regions are defined
 	 * @return array with all parsed features
 	 */
-	ArrayObject features(String topojson, String featureProperty) {
+	ArrayObject features(TopoJson topojson, String featureProperty) {
 		// checks if arguments are consistent
 		if (topojson != null && featureProperty != null) {
-			return NativeJsGeoHelper.features(topojson, featureProperty);
+			return NativeJsGeoHelper.features(topojson.nativeObject(), featureProperty);
 		}
 		// if here, arguments are not consistent
 		// then returns null

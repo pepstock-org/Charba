@@ -17,6 +17,7 @@ package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -45,6 +46,6 @@ final class NativeJsGeoHelper {
 	 * @param featureProperty property in the <code>objects</code> node of topoJson definition where all regions are defined
 	 * @return array with all parsed features
 	 */
-	static native ArrayObject features(String topojson, String featureProperty);
+	static native ArrayObject features(NativeObject topojson, String featureProperty);
 
 }

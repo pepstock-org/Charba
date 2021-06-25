@@ -579,7 +579,7 @@ CharbaJsObjectStringHelper.get = function(object, key) {};
  */
 function CharbaJsGeoHelper() {} 
 /**
- * @param {String} topojson 
+ * @param {Object} topojson 
  * @param {String} featureProperty 
  * @return {Array}
  */

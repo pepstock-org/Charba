@@ -29,6 +29,7 @@ import org.pepstock.charba.client.geo.callbacks.FeatureFilterCallback;
 import org.pepstock.charba.client.geo.callbacks.FeatureFindCallback;
 import org.pepstock.charba.client.geo.callbacks.FeatureLabelCallback;
 import org.pepstock.charba.client.resources.AbstractInjectableResource;
+import org.pepstock.charba.client.utils.JSON;
 
 /**
  * Utility to manage <a href="https://github.com/topojson/topojson">TopoJson</a> definitions.<br>
@@ -52,6 +53,42 @@ public final class GeoUtils {
 	 */
 	private GeoUtils() {
 		// do nothing
+	}
+	
+	// ---------------------------
+	// TOPOJSON
+	// ---------------------------
+
+	/**
+	 * Creates the {@link TopoJson} object definition from a topoJson text definition.
+	 * 
+	 * @param topojson topoJson definition.
+	 * @return the {@link TopoJson} object definition
+	 */
+	public static TopoJson createTopoJson(AbstractInjectableResource topojson) {
+		// checks if topojson is consistent
+		if (topojson != null) {
+			return createTopoJson(topojson.getContent());
+		}
+		// if here, the arguments or the feature parsing are not consistent
+		// then returns an empty object
+		return new TopoJson(null);
+	}
+
+	/**
+	 * Creates the {@link TopoJson} object definition from a topoJson text definition.
+	 * 
+	 * @param topojson topoJson definition.
+	 * @return the {@link TopoJson} object definition
+	 */
+	public static TopoJson createTopoJson(String topojson) {
+		// checks if topojson text is consistent
+		if (isConsistent(topojson) ) {
+			return new TopoJson(JSON.parse(topojson));
+		}
+		// if here, the arguments or the feature parsing are not consistent
+		// then returns an empty object
+		return new TopoJson(null);
 	}
 
 	// ---------------------------
@@ -166,7 +203,65 @@ public final class GeoUtils {
 	 */
 	public static List<Feature> features(String topojson, String featureProperty, FeatureFilterCallback filterCallback) {
 		// checks if arguments are consistent
-		if (isConsistent(topojson) && isConsistent(featureProperty)) {
+		if (isConsistent(topojson)) {
+			return features(new TopoJson(JSON.parse(topojson)), featureProperty, filterCallback);
+		}
+		// if here, the arguments or the feature parsing are not consistent
+		// then returns an empty list
+		return Collections.emptyList();
+	}
+	
+	/**
+	 * Reads the topoJson definition and creates a list of features to enable regions drawing.
+	 * 
+	 * @param topojson topoJson definition.
+	 * @param featureProperty property in the <code>objects</code> node of topoJson definition where all regions are defined.
+	 * @return a list of features to enable regions drawing
+	 */
+	public static List<Feature> features(TopoJson topojson, Key featureProperty) {
+		return features(topojson, featureProperty, null);
+	}
+
+	/**
+	 * Reads the topoJson definition and creates a list of features to enable regions drawing.
+	 * 
+	 * @param topojson topoJson definition.
+	 * @param featureProperty property in the <code>objects</code> node of topoJson definition where all regions are defined.
+	 * @return a list of features to enable regions drawing
+	 */
+	public static List<Feature> features(TopoJson topojson, String featureProperty) {
+		return features(topojson, featureProperty, null);
+	}
+
+	/**
+	 * Reads the topoJson definition and creates a list of features to enable regions drawing.
+	 * 
+	 * @param topojson topoJson definition.
+	 * @param featureProperty property in the <code>objects</code> node of topoJson definition where all regions are defined.
+	 * @param filterCallback callback instance to filter the features to draw
+	 * @return a list of features to enable regions drawing
+	 */
+	public static List<Feature> features(TopoJson topojson, Key featureProperty, FeatureFilterCallback filterCallback) {
+		// checks if property is consistent
+		if (Key.isValid(featureProperty)) {
+			return features(topojson, featureProperty.value(), filterCallback);
+		}
+		// if here, the arguments or the feature parsing are not consistent
+		// then returns an empty list
+		return Collections.emptyList();
+	}
+
+	/**
+	 * Reads the topoJson definition and creates a list of features to enable regions drawing.
+	 * 
+	 * @param topojson topoJson definition.
+	 * @param featureProperty property in the <code>objects</code> node of topoJson definition where all regions are defined.
+	 * @param filterCallback callback instance to filter the features to draw
+	 * @return a list of features to enable regions drawing
+	 */
+	public static List<Feature> features(TopoJson topojson, String featureProperty, FeatureFilterCallback filterCallback) {
+		// checks if arguments are consistent
+		if (topojson!= null && isConsistent(featureProperty)) {
 			// gets array of features
 			ArrayObject array = JsGeoHelper.get().features(topojson, featureProperty);
 			// checks if result is consistent
@@ -183,6 +278,7 @@ public final class GeoUtils {
 		// then returns an empty list
 		return Collections.emptyList();
 	}
+
 
 	// ---------------------------
 	// FEATURE
@@ -251,8 +347,44 @@ public final class GeoUtils {
 	 * @return a features instance to enable outline or <code>null</code>
 	 */
 	public static Feature feature(String topojson, String featureProperty, FeatureFindCallback findCallback) {
+		// checks if topojson text is consistent
+		if (isConsistent(topojson) ) {
+			return feature(new TopoJson(JSON.parse(topojson)), featureProperty, findCallback);
+		}
+		// if here, the arguments or the feature parsing are not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Reads the topoJson definition and find a specific feature to enable outline.
+	 * 
+	 * @param topojson topoJson definition.
+	 * @param featureProperty property in the <code>objects</code> node of topoJson definition where all regions are defined
+	 * @param findCallback callback instance to find the features to outline
+	 * @return a features instance to enable outline or <code>null</code>
+	 */
+	public static Feature feature(TopoJson topojson, Key featureProperty, FeatureFindCallback findCallback) {
+		// checks if property is consistent
+		if (Key.isValid(featureProperty)) {
+			return feature(topojson, featureProperty.value(), findCallback);
+		}
+		// if here, the arguments or the feature parsing are not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Reads the topoJson definition and find a specific feature to enable outline.
+	 * 
+	 * @param topojson topoJson definition.
+	 * @param featureProperty property in the <code>objects</code> node of topoJson definition where all regions are defined
+	 * @param findCallback callback instance to find the features to outline
+	 * @return a features instance to enable outline or <code>null</code>
+	 */
+	public static Feature feature(TopoJson topojson, String featureProperty, FeatureFindCallback findCallback) {
 		// checks if arguments are consistent
-		if (isConsistent(topojson) && isConsistent(featureProperty) && findCallback != null) {
+		if (topojson != null && isConsistent(featureProperty) && findCallback != null) {
 			// gets array of features
 			ArrayObject array = JsGeoHelper.get().features(topojson, featureProperty);
 			// finds the feature
@@ -266,7 +398,6 @@ public final class GeoUtils {
 		// then returns null
 		return null;
 	}
-
 	// ---------------------------
 	// LABELS
 	// ---------------------------

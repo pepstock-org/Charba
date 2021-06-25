@@ -1010,14 +1010,13 @@ function CharbaJsGeoHelper() {}
 /**
  * Returns an array of features.
  *
- * @param {String} topojson topojson defintions as string 
+ * @param {Object} topojson topojson defintions as object 
  * @param {String} featureProperty the name of property in the objects to get features
  * @return {Array} an array of features
  */
 CharbaJsGeoHelper.features = function(topojson, featureProperty) {
-  var topojsonObject = JSON.parse(topojson);
-  if (topojsonObject != null && typeof topojsonObject.objects !== 'undefined' && typeof topojsonObject.objects[featureProperty] !== 'undefined'){
-    var parsedFeatures = ChartGeo.topojson.feature(topojsonObject, topojsonObject.objects[featureProperty]);
+  if (typeof topojson.objects !== 'undefined' && typeof topojson.objects[featureProperty] !== 'undefined'){
+    var parsedFeatures = ChartGeo.topojson.feature(topojson, topojson.objects[featureProperty]);
     if (parsedFeatures != null){
       return parsedFeatures.features;
     }
