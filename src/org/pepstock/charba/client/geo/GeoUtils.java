@@ -21,6 +21,7 @@ import java.util.List;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.controllers.ControllerType;
@@ -30,6 +31,7 @@ import org.pepstock.charba.client.geo.callbacks.FeatureFindCallback;
 import org.pepstock.charba.client.geo.callbacks.FeatureLabelCallback;
 import org.pepstock.charba.client.resources.AbstractInjectableResource;
 import org.pepstock.charba.client.utils.JSON;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Utility to manage <a href="https://github.com/topojson/topojson">TopoJson</a> definitions.<br>
@@ -47,6 +49,9 @@ import org.pepstock.charba.client.utils.JSON;
  *
  */
 public final class GeoUtils {
+	
+	// exception pattern when the feature property is not present in topojson objects.
+	private static final String INVALID_FEATURE_PROPERTY = "Features '{0}' property is undefined.\nAvailble properties: {1}.";
 
 	/**
 	 * To avoid any instantiation
@@ -54,7 +59,7 @@ public final class GeoUtils {
 	private GeoUtils() {
 		// do nothing
 	}
-	
+
 	// ---------------------------
 	// TOPOJSON
 	// ---------------------------
@@ -83,7 +88,7 @@ public final class GeoUtils {
 	 */
 	public static TopoJson createTopoJson(String topojson) {
 		// checks if topojson text is consistent
-		if (isConsistent(topojson) ) {
+		if (isConsistent(topojson)) {
 			return new TopoJson(JSON.parse(topojson));
 		}
 		// if here, the arguments or the feature parsing are not consistent
@@ -210,7 +215,7 @@ public final class GeoUtils {
 		// then returns an empty list
 		return Collections.emptyList();
 	}
-	
+
 	/**
 	 * Reads the topoJson definition and creates a list of features to enable regions drawing.
 	 * 
@@ -261,7 +266,9 @@ public final class GeoUtils {
 	 */
 	public static List<Feature> features(TopoJson topojson, String featureProperty, FeatureFilterCallback filterCallback) {
 		// checks if arguments are consistent
-		if (topojson!= null && isConsistent(featureProperty)) {
+		if (topojson != null && isConsistent(featureProperty)) {
+			// checks if the feature is one of the objects
+			Checker.assertCheck(Key.hasKeyByValue(topojson.objectsKeys().toArray(new Key[0]), featureProperty), Utilities.applyTemplate(INVALID_FEATURE_PROPERTY, featureProperty, topojson.objectsKeysAsString()));
 			// gets array of features
 			ArrayObject array = JsGeoHelper.get().features(topojson, featureProperty);
 			// checks if result is consistent
@@ -278,7 +285,6 @@ public final class GeoUtils {
 		// then returns an empty list
 		return Collections.emptyList();
 	}
-
 
 	// ---------------------------
 	// FEATURE
@@ -348,7 +354,7 @@ public final class GeoUtils {
 	 */
 	public static Feature feature(String topojson, String featureProperty, FeatureFindCallback findCallback) {
 		// checks if topojson text is consistent
-		if (isConsistent(topojson) ) {
+		if (isConsistent(topojson)) {
 			return feature(new TopoJson(JSON.parse(topojson)), featureProperty, findCallback);
 		}
 		// if here, the arguments or the feature parsing are not consistent
@@ -385,6 +391,8 @@ public final class GeoUtils {
 	public static Feature feature(TopoJson topojson, String featureProperty, FeatureFindCallback findCallback) {
 		// checks if arguments are consistent
 		if (topojson != null && isConsistent(featureProperty) && findCallback != null) {
+			// checks if the feature is one of the objects
+			Checker.assertCheck(Key.hasKeyByValue(topojson.objectsKeys().toArray(new Key[0]), featureProperty), Utilities.applyTemplate(INVALID_FEATURE_PROPERTY, featureProperty, topojson.objectsKeysAsString()));
 			// gets array of features
 			ArrayObject array = JsGeoHelper.get().features(topojson, featureProperty);
 			// finds the feature
@@ -398,6 +406,7 @@ public final class GeoUtils {
 		// then returns null
 		return null;
 	}
+
 	// ---------------------------
 	// LABELS
 	// ---------------------------
@@ -459,7 +468,7 @@ public final class GeoUtils {
 			} else {
 				// if here, the chart instance is not a GEO one
 				// the exception
-				throw new IllegalArgumentException("Chart argument is not an instance of " + BaseGeoChart.class.getName() + " but "+chart.getClass().getName());
+				throw new IllegalArgumentException("Chart argument is not an instance of " + BaseGeoChart.class.getName() + " but " + chart.getClass().getName());
 			}
 		} else {
 			// if here, the chart instance is not a GEO one
@@ -519,5 +528,4 @@ public final class GeoUtils {
 	private static boolean isConsistent(String value) {
 		return value != null && value.trim().length() > 0;
 	}
-
 }
