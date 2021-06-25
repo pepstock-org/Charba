@@ -55,7 +55,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @param type axis type
 	 * @param kind axis kind
 	 */
-	CartesianAxis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
+	protected CartesianAxis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
 		super(chart, id, type, kind);
 		// checks if scale id of scale is consistent
 		// used for cartesian, it must not be set to unknown

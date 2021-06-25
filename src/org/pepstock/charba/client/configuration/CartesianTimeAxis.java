@@ -109,7 +109,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param kind axis kind
 	 */
 	protected CartesianTimeAxis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
-		super(chart, id, ChartAxisType.TIME, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
+		super(chart, id, type, kind);
 		// creates the time object
 		this.time = new Time(this);
 		// creates the ticks instance

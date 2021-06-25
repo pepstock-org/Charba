@@ -93,7 +93,19 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * @param kind axis kind.
 	 */
 	public CartesianCategoryAxis(IsChart chart, ScaleId id, AxisKind kind) {
-		super(chart, id, ChartAxisType.CATEGORY, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
+		this(chart, id, ChartAxisType.CATEGORY, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
+	}
+	
+	/**
+	 * Builds the object storing the chart instance and cartesian axis type, to use to extend the axis.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 * @param type axis type
+	 * @param kind axis kind
+	 */
+	protected CartesianCategoryAxis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
+		super(chart, id, type, kind);
 		// creates the ticks instance
 		this.ticks = new CartesianCategoryTick(this);
 	}

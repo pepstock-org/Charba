@@ -91,7 +91,19 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * @param kind axis kind
 	 */
 	public CartesianLogarithmicAxis(IsChart chart, ScaleId id, AxisKind kind) {
-		super(chart, id, ChartAxisType.LOGARITHMIC, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.Y));
+		this(chart, id, ChartAxisType.LOGARITHMIC, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.Y));
+	}
+	
+	/**
+	 * Builds the object storing the chart instance and cartesian axis type, to use to extend the axis.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 * @param type axis type
+	 * @param kind axis kind
+	 */
+	protected CartesianLogarithmicAxis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
+		super(chart, id, type, kind);
 		// creates the ticks instance
 		this.ticks = new CartesianLogarithmicTick(this);
 	}

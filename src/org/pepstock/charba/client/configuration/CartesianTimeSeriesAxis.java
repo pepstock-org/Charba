@@ -89,6 +89,19 @@ public class CartesianTimeSeriesAxis extends CartesianTimeAxis {
 	 * @param kind axis kind
 	 */
 	public CartesianTimeSeriesAxis(IsChart chart, ScaleId id, AxisKind kind) {
-		super(chart, id, ChartAxisType.TIMESERIES, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
+		this(chart, id, ChartAxisType.TIMESERIES, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 	}
+	
+	/**
+	 * Builds the object storing the chart instance and cartesian axis type.
+	 * 
+	 * @param chart chart instance
+	 * @param id axis id
+	 * @param type axis type
+	 * @param kind axis kind
+	 */
+	protected CartesianTimeSeriesAxis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
+		super(chart, id, type, kind);
+	}
+
 }

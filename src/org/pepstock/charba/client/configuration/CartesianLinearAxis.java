@@ -102,7 +102,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	 * @param kind axis kind
 	 */
 	protected CartesianLinearAxis(IsChart chart, ScaleId id, AxisType type, AxisKind kind) {
-		super(chart, id, AxisType.checkAndGetIfValid(type), Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.Y));
+		super(chart, id, type, kind);
 		// creates the ticks instance
 		this.ticks = new CartesianLinearTick(this);
 	}
