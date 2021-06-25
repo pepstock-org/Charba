@@ -85,9 +85,10 @@ public interface IsChart {
 	 * If not, throw a {@link IllegalArgumentException} or returns the chart instance.
 	 * 
 	 * @param chart chart to be checked
+	 * @param <T> type of the chart instance
 	 * @return the chart instance passed as argument
 	 */
-	static IsChart checkAndGetIfConsistent(IsChart chart) {
+	static <T extends IsChart> T checkAndGetIfConsistent(T chart) {
 		// checks if chart is consistent
 		checkIfConsistent(chart);
 		// if here is consistent then return it
