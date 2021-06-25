@@ -31,25 +31,29 @@ import org.pepstock.charba.client.commons.Key;
 public enum AxisPosition implements Key
 {
 	/**
-	 * the bottom property sets the bottom edge of an axis to a unit above/below its normal position.
+	 * Sets the edge of an axis to a unit center to its normal position.
 	 */
 	CENTER("center"),
 	/**
-	 * The top property sets the top edge of an axis to a unit above/below its normal position.
+	 * Sets the edge of an axis to a unit above to its normal position.
 	 */
 	TOP("top"),
 	/**
-	 * the left property sets the left edge of an axis to a unit to the left/right to its normal position.
+	 * Sets the edge of an axis to a unit to the left to to its normal position.
 	 */
 	LEFT("left"),
 	/**
-	 * the bottom property sets the bottom edge of an axis to a unit above/below its normal position.
+	 * Sets the edge of an axis to a unit below its normal position.
 	 */
 	BOTTOM("bottom"),
 	/**
-	 * the right property sets the right edge of an axis to a unit to the left/right to its normal position.
+	 * Sets the edge of an axis to a unit to the right to its normal position.
 	 */
-	RIGHT("right");
+	RIGHT("right"),
+	/**
+	 * Sets the edge of an axis to a unit to the chart area to its normal position.
+	 */
+	CHART_AREA("chartArea");
 
 	// name value of property
 	private final String value;
