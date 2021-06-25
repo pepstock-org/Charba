@@ -145,6 +145,11 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Breaking changes
   * rename `AxisType` to `ChartAxisType` in order to enable custom axes type.
+  * rename `AxisCalculateTickRotationCallback` class to `AxisCalculateLabelRotationCallback`.
+    * rename `onBeforeAxisCalculateTickRotation` method of the interface to `onBeforeAxisCalculateLabelRotation`.
+    * rename `onAfterAxisCalculateTickRotation` method of the interface to `onAfterAxisCalculateLabelRotation`.
+    * rename `setAxisCalculateTickRotation` method of the Axis class to `setAxisCalculateLabelRotation`.
+    * rename `getAxisCalculateTickRotation` method of the Axis class to `getAxisCalculateLabelRotation`.
 
 ### Features
 

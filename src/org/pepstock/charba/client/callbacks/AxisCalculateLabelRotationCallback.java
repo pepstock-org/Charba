@@ -23,7 +23,7 @@ import org.pepstock.charba.client.items.AxisItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface AxisCalculateTickRotationCallback {
+public interface AxisCalculateLabelRotationCallback {
 
 	/**
 	 * Callback that runs before tick rotation is determined.
@@ -31,7 +31,7 @@ public interface AxisCalculateTickRotationCallback {
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
 	 */
-	void onBeforeCalculateTickRotation(Axis axis, AxisItem item);
+	void onBeforeCalculateLabelRotation(Axis axis, AxisItem item);
 
 	/**
 	 * Callback that runs after tick rotation is determined.
@@ -39,6 +39,6 @@ public interface AxisCalculateTickRotationCallback {
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
 	 */
-	void onAfterCalculateTickRotation(Axis axis, AxisItem item);
+	void onAfterCalculateLabelRotation(Axis axis, AxisItem item);
 
 }

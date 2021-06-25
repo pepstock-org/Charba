@@ -19,7 +19,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
-import org.pepstock.charba.client.callbacks.AxisCalculateTickRotationCallback;
+import org.pepstock.charba.client.callbacks.AxisCalculateLabelRotationCallback;
 import org.pepstock.charba.client.callbacks.AxisDataLimitsCallback;
 import org.pepstock.charba.client.callbacks.AxisDimensionsCallback;
 import org.pepstock.charba.client.callbacks.AxisFitCallback;
@@ -76,9 +76,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	// callback proxy to invoke the after tick label conversion function
 	private final CallbackProxy<ProxyHandlerCallback> afterTickToLabelConversionCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before calculate tick rotation function
-	private final CallbackProxy<ProxyHandlerCallback> beforeCalculateTickRotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> beforeCalculateLabelRotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after calculate tick rotation function
-	private final CallbackProxy<ProxyHandlerCallback> afterCalculateTickRotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> afterCalculateLabelRotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before fit function
 	private final CallbackProxy<ProxyHandlerCallback> beforeFitCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after fit function
@@ -94,7 +94,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	// -- USERS CALLBACKS ---
 	// ---------------------------
 	// user callback implementation for tick rotation calculation
-	private AxisCalculateTickRotationCallback axisCalculateTickRotationCallback = null;
+	private AxisCalculateLabelRotationCallback axisCalculateLabelRotationCallback = null;
 	// user callback implementation for data limits
 	private AxisDataLimitsCallback axisDataLimitsCallback = null;
 	// user callback implementation for dimension set
@@ -128,8 +128,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		AFTER_BUILD_TICKS("afterBuildTicks"),
 		BEFORE_TICK_TO_LABEL_CONVERSION("beforeTickToLabelConversion"),
 		AFTER_TICK_TO_LABEL_CONVERSION("afterTickToLabelConversion"),
-		BEFORE_CALCULATE_TICK_ROTATION("beforeCalculateTickRotation"),
-		AFTER_CALCULATE_TICK_ROTATION("afterCalculateTickRotation"),
+		BEFORE_CALCULATE_LABEL_ROTATION("beforeCalculateLabelRotation"),
+		AFTER_CALCULATE_LABEL_ROTATION("afterCalculateLabelRotation"),
 		BEFORE_FIT("beforeFit"),
 		AFTER_FIT("afterFit");
 
@@ -188,8 +188,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		this.afterDataLimitsCallbackProxy.setCallback(this::onAfterDataLimitsCallback);
 		this.beforeTickToLabelConversionCallbackProxy.setCallback(this::onBeforeTickToLabelConversionCallback);
 		this.afterTickToLabelConversionCallbackProxy.setCallback(this::onAfterTickToLabelConversionCallback);
-		this.beforeCalculateTickRotationCallbackProxy.setCallback(this::onBeforeCalculateTickRotationCallback);
-		this.afterCalculateTickRotationCallbackProxy.setCallback(this::onAfterCalculateTickRotationCallback);
+		this.beforeCalculateLabelRotationCallbackProxy.setCallback(this::onBeforeCalculateLabelRotationCallback);
+		this.afterCalculateLabelRotationCallbackProxy.setCallback(this::onAfterCalculateLabelRotationCallback);
 		this.beforeFitCallbackProxy.setCallback(this::onBeforeFitCallback);
 		this.afterFitCallbackProxy.setCallback(this::onAfterFitCallback);
 		this.afterUpdateCallbackProxy.setCallback(this::onAfterUpdateCallback);
@@ -418,24 +418,24 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Returns the user callback that runs before/after tick rotation is determined.
 	 * 
-	 * @return the axisCalculateTickRotationCallback
+	 * @return the axisCalculateLabelRotationCallback
 	 */
-	public AxisCalculateTickRotationCallback getAxisCalculateTickRotationCallback() {
-		return axisCalculateTickRotationCallback;
+	public AxisCalculateLabelRotationCallback getAxisCalculateLabelRotationCallback() {
+		return axisCalculateLabelRotationCallback;
 	}
 
 	/**
 	 * Sets the user callback that runs before/after tick rotation is determined.
 	 * 
-	 * @param axisCalculateTickRotationCallback the axisCalculateTickRotationCallback to set
+	 * @param axisCalculateLabelRotationCallback the axisCalculateLabelRotationCallback to set
 	 */
-	public void setAxisCalculateTickRotationCallback(AxisCalculateTickRotationCallback axisCalculateTickRotationCallback) {
+	public void setAxisCalculateLabelRotationCallback(AxisCalculateLabelRotationCallback axisCalculateLabelRotationCallback) {
 		// sets the callback
-		this.axisCalculateTickRotationCallback = axisCalculateTickRotationCallback;
+		this.axisCalculateLabelRotationCallback = axisCalculateLabelRotationCallback;
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.BEFORE_CALCULATE_TICK_ROTATION, axisCalculateTickRotationCallback, beforeCalculateTickRotationCallbackProxy);
+		setCallback(getConfiguration(), Property.BEFORE_CALCULATE_LABEL_ROTATION, axisCalculateLabelRotationCallback, beforeCalculateLabelRotationCallbackProxy);
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.AFTER_CALCULATE_TICK_ROTATION, axisCalculateTickRotationCallback, afterCalculateTickRotationCallbackProxy);
+		setCallback(getConfiguration(), Property.AFTER_CALCULATE_LABEL_ROTATION, axisCalculateLabelRotationCallback, afterCalculateLabelRotationCallbackProxy);
 	}
 
 	/**
@@ -753,13 +753,13 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @param item axis item instance
 	 */
-	private void onBeforeCalculateTickRotationCallback(NativeObject item) {
+	private void onBeforeCalculateLabelRotationCallback(NativeObject item) {
 		// gets callback
-		AxisCalculateTickRotationCallback callback = getAxisCalculateTickRotationCallback();
+		AxisCalculateLabelRotationCallback callback = getAxisCalculateLabelRotationCallback();
 		// if user callback is consistent
 		if (callback != null) {
 			// then it is called
-			callback.onBeforeCalculateTickRotation(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onBeforeCalculateLabelRotation(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
@@ -768,13 +768,13 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @param item axis item instance
 	 */
-	private void onAfterCalculateTickRotationCallback(NativeObject item) {
+	private void onAfterCalculateLabelRotationCallback(NativeObject item) {
 		// gets callback
-		AxisCalculateTickRotationCallback callback = getAxisCalculateTickRotationCallback();
+		AxisCalculateLabelRotationCallback callback = getAxisCalculateLabelRotationCallback();
 		// if user callback is consistent
 		if (callback != null) {
 			// then it is called
-			callback.onAfterCalculateTickRotation(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
+			callback.onAfterCalculateLabelRotation(this, new AxisItem(new ConfigurationEnvelop<>(item, true)));
 		}
 	}
 
