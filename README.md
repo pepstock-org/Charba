@@ -159,11 +159,12 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `borderCapStyle`, `borderDash`, `borderDashOffset`, `borderJoinStyle`, `fill` and `cubicInterpolationMode` scriptable options to `Line` configuration.
   * add `radius`, `hitRadius`, `hoverRadius`, `pointStyle` and `rotation` scriptable options to `Point` configuration.
   * add `parsing` and `normalized` options to `Dataset` configuration.
-  * enable the feature to create custom axes types (for injected controller)
+  * enable the feature to create custom axes types (for injected controller).
 
 ### Developing
 
   * add `parse` method to `JSON` utility object.
+  * hide java script property visibility of `$H` hash code property in all java script object mapped by a `NativeObjectContainer`. 
     
 License
 -------

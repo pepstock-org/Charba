@@ -48,9 +48,8 @@ final class NativeObjectUtils {
 		// new object
 		NativeObject nativeObject = JsHelper.get().create();
 		// applies new hash code
-		NativeObjectHashing.handleHashCode(nativeObject);
-		// returns item
-		return nativeObject;
+		// and returns item
+		return NativeObjectHashing.handleHashCode(nativeObject);
 	}
 
 	/**
