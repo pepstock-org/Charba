@@ -38,6 +38,11 @@ public final class Constants {
 	public static final String EMPTY_STRING = "";
 
 	/**
+	 * Constant for APOSTROPHE string, <b>{@value}</b>.
+	 */
+	public static final String APOSTROPHE = "'";
+
+	/**
 	 * Constant for SLASH string, <b>{@value}</b>.
 	 */
 	public static final String SLASH = "/";
