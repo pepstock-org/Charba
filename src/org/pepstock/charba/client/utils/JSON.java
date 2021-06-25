@@ -85,6 +85,14 @@ public final class JSON {
 	static native String stringify(Object obj, Replacer function, int spaces);
 
 	/**
+	 * Parses a JSON string, constructing the JavaScript value or object described by the string.
+	 * 
+	 * @param text the string to parse as JSON. 
+	 * @return the object corresponding to the given JSON text.
+	 */
+	public static native NativeObject parse(String text);
+	
+	/**
 	 * Converts a JavaScript object or value to a JSON string. By default, the space value is set to -1 that no space should be used.
 	 * 
 	 * @param obj The value to convert to a JSON string.
