@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.geo;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.configuration.Elements;
 
 /**
@@ -25,8 +26,8 @@ import org.pepstock.charba.client.configuration.Elements;
  */
 public final class ChoroplethElements extends Elements {
 
-	// elements wrapper instance
-	private final BaseGeoElements elements;
+	// options wrapper instance
+	private final ChoroplethOptions options;
 
 	/**
 	 * Builds the object storing the default root options.
@@ -35,8 +36,8 @@ public final class ChoroplethElements extends Elements {
 	 */
 	ChoroplethElements(ChoroplethOptions options) {
 		super(options);
-		// gets the elements by the options mapper
-		this.elements = options.getMapper().getElements();
+		// stores options
+		this.options = Checker.checkAndGetIfValid(options, "Choropleth options argument");
 	}
 
 	/**
@@ -45,6 +46,6 @@ public final class ChoroplethElements extends Elements {
 	 * @return the choropleth bar element
 	 */
 	public ChoroplethBar getChoroplethBar() {
-		return elements.getChoroplethBar();
+		return options.getMapper().getElements().getChoroplethBar();
 	}
 }

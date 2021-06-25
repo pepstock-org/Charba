@@ -31,14 +31,14 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 
 	// mapper options factory instance
 	private final ChoroplethRemappedOptionsFactory factory;
+	// scales instance
+	private final ChoroplethScales scales;
+	// elements instance
+	private final ChoroplethElements elements;
 	// common options handler
 	private CommonOptionsHandler optionsHandler;
 	// mapper options instance
 	private ChoroplethOptionsMapper mapper;
-	// elements instance
-	private ChoroplethElements elements;
-	// scales instance
-	private ChoroplethScales scales;
 
 	/**
 	 * Builds the object storing the chart instance and defaults.
@@ -52,6 +52,10 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 		this.factory = new ChoroplethRemappedOptionsFactory(this);
 		// initialized objects
 		this.afterConfigurationUpdate();
+		// before requesting to add ONLY specific scales
+		this.scales = new ChoroplethScales(this);
+		// creates and stores elements
+		this.elements = new ChoroplethElements(this);
 	}
 
 	/*
@@ -63,11 +67,6 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 	protected final void afterConfigurationUpdate() {
 		// creates and stores mapper
 		this.mapper = getConfiguration().getRemappedOptions(factory);
-		// creates and stores elements
-		this.elements = new ChoroplethElements(this);
-		// before it requested do not create the scales
-		// because it must be wrapped
-		this.scales = new ChoroplethScales(this);
 		// creates and stores options handler
 		this.optionsHandler = new CommonOptionsHandler(mapper);
 	}

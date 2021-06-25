@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.geo;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.configuration.Elements;
 
 /**
@@ -25,8 +26,8 @@ import org.pepstock.charba.client.configuration.Elements;
  */
 public final class BubbleMapElements extends Elements {
 
-	// elements wrapper instance
-	private final BaseGeoElements elements;
+	// options wrapper instance
+	private final BubbleMapOptions options;
 
 	/**
 	 * Builds the object storing the default root options.
@@ -35,8 +36,8 @@ public final class BubbleMapElements extends Elements {
 	 */
 	BubbleMapElements(BubbleMapOptions options) {
 		super(options);
-		// gets the elements by the options mapper
-		this.elements = options.getMapper().getElements();
+		// stores options
+		this.options = Checker.checkAndGetIfValid(options, "Bubble map options argument");
 	}
 
 	/**
@@ -45,6 +46,6 @@ public final class BubbleMapElements extends Elements {
 	 * @return the bubble map point element
 	 */
 	public BubbleMapPoint getBubbleMapPoint() {
-		return elements.getBubbleMapPoint();
+		return options.getMapper().getElements().getBubbleMapPoint();
 	}
 }

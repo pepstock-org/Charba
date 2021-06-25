@@ -31,14 +31,14 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 
 	// mapper options factory instance
 	private final BubbleMapRemappedOptionsFactory factory;
+	// elements instance
+	private final BubbleMapElements elements;
+	// scales instance
+	private final BubbleMapScales scales;
 	// common options handler
 	private CommonOptionsHandler optionsHandler;
 	// mapper options instance
 	private BubbleMapOptionsMapper mapper;
-	// elements instance
-	private BubbleMapElements elements;
-	// scales instance
-	private BubbleMapScales scales;
 
 	/**
 	 * Builds the object storing the chart instance and defaults.
@@ -52,6 +52,10 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 		this.factory = new BubbleMapRemappedOptionsFactory(this);
 		// initialized objects
 		this.afterConfigurationUpdate();
+		// before requesting to add ONLY specific scales
+		this.scales = new BubbleMapScales(this);
+		// creates and stores elements
+		this.elements = new BubbleMapElements(this);
 	}
 
 	/*
@@ -63,11 +67,6 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 	protected final void afterConfigurationUpdate() {
 		// creates and stores mapper
 		this.mapper = getConfiguration().getRemappedOptions(factory);
-		// creates and stores elements
-		this.elements = new BubbleMapElements(this);
-		// before it requested do not create the scales
-		// because it must be wrapped
-		this.scales = new BubbleMapScales(this);
 		// creates and stores options handler
 		this.optionsHandler = new CommonOptionsHandler(mapper);
 	}
