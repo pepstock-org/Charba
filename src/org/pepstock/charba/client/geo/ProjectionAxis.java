@@ -52,11 +52,9 @@ public final class ProjectionAxis extends Axis {
 	private ProjectionAxisMapper mapper;
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * Builds the object storing the chart instance.
 	 * 
-	 * @param parent parent node to use to add this element where changed
-	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param nativeObject native object to map java script properties
+	 * @param chart chart instance
 	 */
 	public ProjectionAxis(IsChart chart) {
 		super(chart, ID, TYPE, AxisKind.X);
@@ -142,7 +140,7 @@ public final class ProjectionAxis extends Axis {
 		/**
 		 * Creates the factory of the mapper
 		 * 
-		 * @param type type of GEO chart
+		 * @param chartType type of GEO chart
 		 */
 		private ProjectionAxisRemappedOptionsFactory(ControllerType chartType) {
 			super(chartType);

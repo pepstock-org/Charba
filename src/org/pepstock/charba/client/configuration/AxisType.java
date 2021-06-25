@@ -81,7 +81,6 @@ public interface AxisType extends PropertyKey {
 	 * Registers the passed axis type.
 	 * 
 	 * @param type axis type
-	 * @return a stored scale type instance
 	 */
 	static void register(AxisType type) {
 		register(type, false);
@@ -92,7 +91,6 @@ public interface AxisType extends PropertyKey {
 	 * 
 	 * @param type axis type
 	 * @param force if <code>true</code>, the axis type is register even if already registered.
-	 * @return a stored scale type instance
 	 */
 	static void register(AxisType type, boolean force) {
 		// checked if is register
@@ -150,12 +148,12 @@ public interface AxisType extends PropertyKey {
 	 * @param <T> type of axis
 	 * @return the same axis type passed as argument
 	 */
-	static <T extends AxisType> T checkAndGetIfValid(T key) {
+	static <T extends AxisType> T checkAndGetIfValid(T type) {
 		// checks if key is consistent
-		checkIfValid(key);
+		checkIfValid(type);
 		// if here, is consistent
 		// then returns the argument
-		return key;
+		return type;
 	}
 
 	/**

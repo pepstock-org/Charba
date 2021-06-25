@@ -199,7 +199,7 @@ public final class ColorAxis extends LegendAxis {
 		/**
 		 * Creates the factory of the mapper
 		 * 
-		 * @param type type of GEO chart
+		 * @param chartType type of GEO chart
 		 */
 		private ColorAxisRemappedOptionsFactory(ControllerType chartType) {
 			super(chartType);

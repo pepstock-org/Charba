@@ -170,7 +170,7 @@ public final class SizeAxis extends LegendAxis {
 		/**
 		 * Creates the factory of the mapper
 		 * 
-		 * @param type type of GEO chart
+		 * @param chartType type of GEO chart
 		 */
 		private SizeAxisRemappedOptionsFactory(ControllerType chartType) {
 			super(chartType);
