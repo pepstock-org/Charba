@@ -23,7 +23,6 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.controllers.ControllerMapperFactory;
-import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.enums.ScaleDataType;
 import org.pepstock.charba.client.geo.callbacks.InterpolateCallback;
 import org.pepstock.charba.client.geo.enums.Interpolate;
@@ -68,12 +67,10 @@ public final class ColorAxis extends LegendAxis {
 	 */
 	public ColorAxis(IsChart chart) {
 		super(chart, ID, TYPE);
-		// gets the controller type
-		ControllerType chartType = GeoUtils.checkAndGetControllerType(chart);
 		// chart must be only choropleth
-		Checker.assertCheck(ChoroplethChart.CONTROLLER_TYPE.equals(chartType), "Color axis must be used ONLY by choropleth chart");
+		Checker.assertCheck(ChoroplethChart.CONTROLLER_TYPE.equals(chart.getType()), "Color axis must be used ONLY by choropleth chart");
 		// creates the factory
-		this.factory = new ColorAxisRemappedOptionsFactory(chartType);
+		this.factory = new ColorAxisRemappedOptionsFactory();
 		// initializes the mapper
 		afterAxisConfigurationUpdate();
 	}
@@ -201,8 +198,8 @@ public final class ColorAxis extends LegendAxis {
 		 * 
 		 * @param chartType type of GEO chart
 		 */
-		private ColorAxisRemappedOptionsFactory(ControllerType chartType) {
-			super(chartType);
+		private ColorAxisRemappedOptionsFactory() {
+			super(ChoroplethChart.CONTROLLER_TYPE);
 		}
 
 		/*

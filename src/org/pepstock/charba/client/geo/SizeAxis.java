@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.controllers.ControllerMapperFactory;
-import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.enums.ScaleDataType;
 import org.pepstock.charba.client.geo.enums.Mode;
 import org.pepstock.charba.client.options.ScaleId;
@@ -72,12 +71,10 @@ public final class SizeAxis extends LegendAxis {
 	 */
 	public SizeAxis(IsChart chart) {
 		super(chart, ID, TYPE);
-		// gets the controller type
-		ControllerType chartType = GeoUtils.checkAndGetControllerType(chart);
 		// chart must be only bubble map
-		Checker.assertCheck(BubbleMapChart.CONTROLLER_TYPE.equals(chartType), "Size axis must be used ONLY by bubble map chart");
+		Checker.assertCheck(BubbleMapChart.CONTROLLER_TYPE.equals(chart.getType()), "Size axis must be used ONLY by bubble map chart");
 		// creates the factory
-		this.factory = new SizeAxisRemappedOptionsFactory(chartType);
+		this.factory = new SizeAxisRemappedOptionsFactory();
 		// initializes the mapper
 		afterAxisConfigurationUpdate();
 	}
@@ -172,8 +169,8 @@ public final class SizeAxis extends LegendAxis {
 		 * 
 		 * @param chartType type of GEO chart
 		 */
-		private SizeAxisRemappedOptionsFactory(ControllerType chartType) {
-			super(chartType);
+		private SizeAxisRemappedOptionsFactory() {
+			super(BubbleMapChart.CONTROLLER_TYPE);
 		}
 
 		/*

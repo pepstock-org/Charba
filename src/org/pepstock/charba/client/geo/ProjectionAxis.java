@@ -59,7 +59,7 @@ public final class ProjectionAxis extends Axis {
 	public ProjectionAxis(IsChart chart) {
 		super(chart, ID, TYPE, AxisKind.X);
 		// gets the controller type
-		ControllerType chartType = GeoUtils.checkAndGetControllerType(chart);
+		ControllerType chartType = checkAndGetControllerType(chart);
 		// creates the factory
 		this.factory = new ProjectionAxisRemappedOptionsFactory(chartType);
 		// initializes the mapper
@@ -128,6 +128,34 @@ public final class ProjectionAxis extends Axis {
 	public List<Double> getProjectionOffset() {
 		return mapper.getProjectionOffset();
 	}
+	
+	/**
+	 * This utility method is invoked by GEO axis to check if the chart, passed as argument, is consistent.
+	 * 
+	 * @param chart chart instance to be checked
+	 * @return the controller type of the GEO chart
+	 */
+	private ControllerType checkAndGetControllerType(IsChart chart) {
+		// checks if the chart is consistent with the scale
+		if (chart.getType() instanceof ControllerType) {
+			// casts to controller type
+			ControllerType chartType = (ControllerType) chart.getType();
+			// checks if is a god chart type
+			if (BubbleMapChart.CONTROLLER_TYPE.equals(chart.getType()) || ChoroplethChart.CONTROLLER_TYPE.equals(chartType)) {
+				// returns controller
+				return chartType;
+			} else {
+				// if here, the chart instance is not a GEO one
+				// the exception
+				throw new IllegalArgumentException("Chart argument is not an instance of " + BaseGeoChart.class.getName() + " but " + chart.getClass().getName());
+			}
+		} else {
+			// if here, the chart instance is not a GEO one
+			// the exception
+			throw new IllegalArgumentException("Chart argument is not a controller.");
+		}
+	}
+
 
 	/**
 	 * Can create a options mapper in order to re-map the CHART.JS options where needed in order to add additional properties and nodes for GEO charts.
