@@ -17,6 +17,8 @@ package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -27,6 +29,11 @@ import org.pepstock.charba.client.items.Undefined;
  *
  */
 public final class BubbleMapDataPoint extends GeoDataPoint {
+
+	/**
+	 * Factory instance to create data points. To use by {@link DataItem} to get the data point for bubble map chart.
+	 */
+	public static final BubbleMapDataPointFactory FACTORY = new BubbleMapDataPointFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -136,6 +143,33 @@ public final class BubbleMapDataPoint extends GeoDataPoint {
 	 */
 	public double getLongitude() {
 		return getValue(Property.LONGITUDE, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Creates {@link BubbleMapDataPoint} form a {@link NativeObject}. This can be used by {@link DataItem}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	public static final class BubbleMapDataPointFactory implements NativeObjectContainerFactory<BubbleMapDataPoint> {
+
+		/**
+		 * To avoid any instantiation
+		 */
+		private BubbleMapDataPointFactory() {
+			// do nothing
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public BubbleMapDataPoint create(NativeObject nativeObject) {
+			return new BubbleMapDataPoint(nativeObject);
+		}
+
 	}
 
 }

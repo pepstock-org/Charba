@@ -17,7 +17,9 @@ package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.items.DataItem;
 
 /**
  * Used for GEO data sets to set the data to render.<br>
@@ -27,6 +29,11 @@ import org.pepstock.charba.client.commons.ObjectType;
  *
  */
 public final class ChoroplethDataPoint extends GeoDataPoint {
+	
+	/**
+	 * Factory instance to create data points. To use by {@link DataItem} to get the data point for choropleth chart.
+	 */
+	public static final ChoroplethDataPointFactory FACTORY  =new ChoroplethDataPointFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -120,6 +127,33 @@ public final class ChoroplethDataPoint extends GeoDataPoint {
 		// if here the feature is missing or not an object
 		// then returns null
 		return null;
+	}
+
+	/**
+	 * Creates {@link ChoroplethDataPoint} form a {@link NativeObject}. This can be used by {@link DataItem}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	public static final class ChoroplethDataPointFactory implements NativeObjectContainerFactory<ChoroplethDataPoint> {
+
+		/**
+		 * To avoid any instantiation
+		 */
+		private ChoroplethDataPointFactory() {
+			// do nothing
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public ChoroplethDataPoint create(NativeObject nativeObject) {
+			return new ChoroplethDataPoint(nativeObject);
+		}
+
 	}
 
 }

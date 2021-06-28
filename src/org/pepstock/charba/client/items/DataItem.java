@@ -19,6 +19,8 @@ import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.DataPoint;
@@ -46,6 +48,8 @@ public final class DataItem {
 	private final DataPoint valueAsPoint;
 	// data type instance
 	private final DataType dataType;
+	// native object instance if there is
+	private final NativeObject nativeObject;
 
 	/**
 	 * Creates the object with object which represents the value.
@@ -63,6 +67,7 @@ public final class DataItem {
 			this.valueAsString = String.valueOf(value);
 			this.valueAsPoint = null;
 			this.dataType = DataType.NUMBERS;
+			this.nativeObject = null;
 		} else if (ObjectType.ARRAY.equals(type)) {
 			// sets floating data, getting the array double and set nan to value
 			this.value = Undefined.DOUBLE;
@@ -70,6 +75,7 @@ public final class DataItem {
 			this.valueAsString = valueAsFloatingData.toString();
 			this.valueAsPoint = null;
 			this.dataType = DataType.ARRAYS;
+			this.nativeObject = null;
 		} else if (ObjectType.STRING.equals(type)) {
 			// uses the to string method of object and nan and null for other values
 			this.value = Undefined.DOUBLE;
@@ -77,12 +83,14 @@ public final class DataItem {
 			this.valueAsString = object.toString();
 			this.valueAsPoint = null;
 			this.dataType = DataType.STRINGS;
+			this.nativeObject = null;
 		} else if (ObjectType.OBJECT.equals(type)) {
 			// uses the to string method of object and nan and null for other values
+			this.nativeObject = (NativeObject)object;
 			this.value = Undefined.DOUBLE;
 			this.valueAsFloatingData = null;
 			this.valueAsString = JSON.stringify(object, 3);
-			this.valueAsPoint = new DataPoint(new ItemsEnvelop<>((NativeObject) object));
+			this.valueAsPoint = new DataPoint(new ItemsEnvelop<>(this.nativeObject));
 			this.dataType = DataType.POINTS;
 		} else {
 			// if here is not a recognized object
@@ -92,6 +100,7 @@ public final class DataItem {
 			this.valueAsString = Constants.NULL_STRING;
 			this.valueAsPoint = null;
 			this.dataType = DataType.UNKNOWN;
+			this.nativeObject = null;
 		}
 	}
 
@@ -138,6 +147,26 @@ public final class DataItem {
 	 */
 	public DataPoint getValueAsDataPoint() {
 		return valueAsPoint;
+	}
+	
+	/**
+	 * Returns a data point to be mapped for customization, like for out of the box controllers. 
+	 * It uses a factory instance to create a data point.<br>
+	 * If factory argument is not consistent, <code>null</code> is returned.
+	 * 
+	 * @param factory factory instance to create a data point
+	 * @param <T> type of data point to return
+	 * @return data point to be mapped for customization.
+	 *         If factory argument is not consistent, <code>null</code> is returned.
+	 */
+	public final <T extends NativeObjectContainer> T createDataPoint(NativeObjectContainerFactory<T> factory) {
+		// checks if factory is consistent
+		if (factory != null) {
+			// creates the object using the native object
+			return factory.create(nativeObject);
+		}
+		// if here factory is not consistent
+		return null;
 	}
 
 }
