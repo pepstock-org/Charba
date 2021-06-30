@@ -21,7 +21,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.controllers.ControllerType;
-import org.pepstock.charba.client.data.BubbleDataset;
+import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
@@ -30,7 +30,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChoroplethDataset extends BubbleDataset implements IsGeoDataset<ChoroplethDataPoint> {
+public final class ChoroplethDataset extends BarDataset implements IsGeoDataset<ChoroplethDataPoint> {
 
 	// data point factory
 	private static final ChoroplethDataPointFactory FACTORY = new ChoroplethDataPointFactory();
