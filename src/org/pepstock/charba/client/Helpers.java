@@ -16,6 +16,8 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.data.Clip;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -92,6 +94,39 @@ public final class Helpers {
 		}
 		// if here source is not consistent
 		return null;
+	}
+
+	/**
+	 * Clips an area on the canvas context.
+	 * 
+	 * @param context context of the canvas
+	 * @param area area to clip on the context
+	 */
+	public void clipArea(Context2dItem context, Clip area) {
+		// checks if context is consistent
+		if (context != null && area != null) {
+			// clips the area in the canvas
+			context.save();
+			// begins path
+			context.beginPath();
+			// selects the area
+			context.rect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
+			// clip
+			context.clip();
+		}
+	}
+	
+	/**
+	 * Unclips the area previously set.
+	 * 
+	 * @param context context of the canvas where an area has been clipped.
+	 */
+	public void unclipArea(Context2dItem context) {
+		// checks if context is consistent
+		if (context != null) {
+			// invokes "restore" to unclip
+			context.restore();
+		}
 	}
 
 }

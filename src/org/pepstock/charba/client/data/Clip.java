@@ -52,7 +52,7 @@ public final class Clip extends NativeObjectContainer {
 	 * 
 	 * @param clip clip value for all dimensions
 	 */
-	Clip(double clip) {
+	public Clip(double clip) {
 		this();
 		set(clip);
 	}
