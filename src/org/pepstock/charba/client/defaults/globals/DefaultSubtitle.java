@@ -29,7 +29,7 @@ public final class DefaultSubtitle extends AbstractDefaultTitle implements IsDef
 
 	private static final int DEFAULT_PADDING = 0;
 
-	private final DefaultRoutedFont font = new InternalTitleFont();
+	private final DefaultRoutedFont font = new InternalSubtitleFont();
 
 	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);
 
@@ -61,12 +61,12 @@ public final class DefaultSubtitle extends AbstractDefaultTitle implements IsDef
 	}
 
 	/**
-	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for title.
+	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for subtitle.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class InternalTitleFont extends DefaultRoutedFont {
+	private static class InternalSubtitleFont extends DefaultRoutedFont {
 
 		/*
 		 * (non-Javadoc)
