@@ -166,8 +166,6 @@ public final class SizeAxis extends LegendAxis {
 
 		/**
 		 * Creates the factory of the mapper
-		 * 
-		 * @param chartType type of GEO chart
 		 */
 		private SizeAxisRemappedOptionsFactory() {
 			super(BubbleMapChart.CONTROLLER_TYPE);

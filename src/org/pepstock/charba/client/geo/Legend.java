@@ -135,18 +135,18 @@ public final class Legend extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets the alignment of the scale.
+	 * Sets the alignment of the legend on the chart area.
 	 * 
-	 * @param align the alignment of the scale
+	 * @param align the alignment of the legend on the chart area
 	 */
 	public void setAlign(Align align) {
 		setValue(Property.ALIGN, align);
 	}
 
 	/**
-	 * Returns the alignment of the scale.
+	 * Returns the alignment of the legend on the chart area.
 	 * 
-	 * @return the alignment of the scale
+	 * @return the alignment of the legend on the chart area
 	 */
 	public Align getAlign() {
 		return getValue(Property.ALIGN, Align.values(), Align.RIGHT);

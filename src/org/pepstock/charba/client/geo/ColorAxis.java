@@ -195,8 +195,6 @@ public final class ColorAxis extends LegendAxis {
 
 		/**
 		 * Creates the factory of the mapper
-		 * 
-		 * @param chartType type of GEO chart
 		 */
 		private ColorAxisRemappedOptionsFactory() {
 			super(ChoroplethChart.CONTROLLER_TYPE);
