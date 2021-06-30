@@ -234,6 +234,7 @@ public abstract class CanvasObjectFactory {
 		final Area area = getArea(chart, gradient);
 		// checks if area is consistent
 		Checker.checkIfValid(area, "Area for linear gradient");
+		Checker.assertCheck(area.isConsistent(), "Area for linear gradient is not consistent");
 		final double top = area.getTop();
 		final double bottom = area.getBottom();
 		final double left = area.getLeft();

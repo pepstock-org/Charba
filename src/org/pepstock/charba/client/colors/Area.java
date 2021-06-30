@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.colors;
 
+import org.pepstock.charba.client.items.IsArea;
+
 /**
  * Contains the coordinates of an area.<br>
  * Used inside the canvas object factory.
@@ -22,7 +24,7 @@ package org.pepstock.charba.client.colors;
  * @author Andrea "Stock" Stocchero
  * @see CanvasObjectFactory
  */
-public final class Area {
+public final class Area implements IsArea {
 
 	private double left = 0D;
 
@@ -37,6 +39,7 @@ public final class Area {
 	 * 
 	 * @return the left coordinate
 	 */
+	@Override
 	public double getLeft() {
 		return left;
 	}
@@ -55,6 +58,7 @@ public final class Area {
 	 * 
 	 * @return the top coordinate
 	 */
+	@Override
 	public double getTop() {
 		return top;
 	}
@@ -73,6 +77,7 @@ public final class Area {
 	 * 
 	 * @return the right coordinate
 	 */
+	@Override
 	public double getRight() {
 		return right;
 	}
@@ -91,6 +96,7 @@ public final class Area {
 	 * 
 	 * @return the bottom coordinate
 	 */
+	@Override
 	public double getBottom() {
 		return bottom;
 	}

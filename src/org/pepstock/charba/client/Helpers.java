@@ -16,8 +16,10 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.data.Clip;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.items.ChartAreaNode;
+import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -97,20 +99,58 @@ public final class Helpers {
 	}
 
 	/**
+	 * Clips an area on the canvas context using the {@link ChartAreaNode} of the chart.
+	 * 
+	 * @param chart chart instance
+	 */
+	public void clipArea(IsChart chart) {
+		// checks if context is consistent
+		if (IsChart.isConsistent(chart)) {
+			clipArea(chart, chart.getNode().getChartArea());
+		}
+	}
+
+	/**
+	 * Clips an area on the canvas context, using the {@link Canvas} of the chart.
+	 * 
+	 * @param chart chart instance
+	 * @param area area to clip on the context
+	 */
+	public void clipArea(IsChart chart, IsArea area) {
+		// checks if context is consistent
+		if (IsChart.isConsistent(chart)) {
+			clipArea(chart.getCanvas(), area);
+		}
+	}
+
+	/**
+	 * Clips an area on the canvas context, using the {@link Context2dItem} of the canvas.
+	 * 
+	 * @param canvas canvas where to apply the clippping
+	 * @param area area to clip on the context
+	 */
+	public void clipArea(Canvas canvas, IsArea area) {
+		// checks if context is consistent
+		if (canvas != null) {
+			clipArea(canvas.getContext2d(), area);
+		}
+	}
+
+	/**
 	 * Clips an area on the canvas context.
 	 * 
 	 * @param context context of the canvas
 	 * @param area area to clip on the context
 	 */
-	public void clipArea(Context2dItem context, Clip area) {
+	public void clipArea(Context2dItem context, IsArea area) {
 		// checks if context is consistent
-		if (context != null && area != null) {
+		if (context != null && area != null && area.isConsistent()) {
 			// clips the area in the canvas
 			context.save();
 			// begins path
 			context.beginPath();
 			// selects the area
-			context.rect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
+			context.rect(area.getLeft(), area.getTop(), area.getWidth(), area.getHeight());
 			// clip
 			context.clip();
 		}

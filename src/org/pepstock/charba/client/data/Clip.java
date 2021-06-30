@@ -21,6 +21,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.items.ChartAreaNode;
+import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -38,7 +39,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  * @see ChartAreaNode
  */
-public final class Clip extends NativeObjectContainer {
+public final class Clip extends NativeObjectContainer implements IsArea {
 
 	/**
 	 * Creates the object with an empty native object instance.
@@ -101,6 +102,7 @@ public final class Clip extends NativeObjectContainer {
 	 * 
 	 * @return the clip left.
 	 */
+	@Override
 	public double getLeft() {
 		return getInternalValue(Position.LEFT);
 	}
@@ -137,6 +139,7 @@ public final class Clip extends NativeObjectContainer {
 	 * 
 	 * @return the clip right.
 	 */
+	@Override
 	public double getRight() {
 		return getInternalValue(Position.RIGHT);
 	}
@@ -173,6 +176,7 @@ public final class Clip extends NativeObjectContainer {
 	 * 
 	 * @return the clip top.
 	 */
+	@Override
 	public double getTop() {
 		return getInternalValue(Position.TOP);
 	}
@@ -209,6 +213,7 @@ public final class Clip extends NativeObjectContainer {
 	 * 
 	 * @return the clip bottom.
 	 */
+	@Override
 	public double getBottom() {
 		return getInternalValue(Position.BOTTOM);
 	}

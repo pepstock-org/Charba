@@ -37,16 +37,6 @@ public final class ChartAreaNode extends BaseBoxItem {
 		super(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
-	/**
-	 * Returns <code>true</code> if the empty has got all necessary properties otherwise <code>false</code>.<br>
-	 * This is helpful when the chart is still initializing and chart area is not consistent.
-	 * 
-	 * @return <code>true</code> if the empty has got all necessary properties otherwise <code>false</code>
-	 */
-	public boolean isConsistent() {
-		return has(BaseBoxItem.Property.TOP, BaseBoxItem.Property.RIGHT, BaseBoxItem.Property.BOTTOM, BaseBoxItem.Property.LEFT);
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

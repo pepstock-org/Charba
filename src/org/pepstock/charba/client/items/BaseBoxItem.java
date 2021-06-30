@@ -27,7 +27,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class BaseBoxItem extends NativeObjectContainer {
+public abstract class BaseBoxItem extends NativeObjectContainer implements IsArea {
 
 	/**
 	 * Name of properties of native object.
@@ -78,6 +78,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * 
 	 * @return the top of chart area.
 	 */
+	@Override
 	public final double getTop() {
 		return getValue(Property.TOP, Undefined.DOUBLE);
 	}
@@ -87,6 +88,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * 
 	 * @return the right of chart area.
 	 */
+	@Override
 	public final double getRight() {
 		return getValue(Property.RIGHT, Undefined.DOUBLE);
 	}
@@ -96,6 +98,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * 
 	 * @return the bottom of chart area.
 	 */
+	@Override
 	public final double getBottom() {
 		return getValue(Property.BOTTOM, Undefined.DOUBLE);
 	}
@@ -105,6 +108,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * 
 	 * @return the left of chart area.
 	 */
+	@Override
 	public final double getLeft() {
 		return getValue(Property.LEFT, Undefined.DOUBLE);
 	}
@@ -114,6 +118,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * 
 	 * @return the width in pixel.
 	 */
+	@Override
 	public final double getWidth() {
 		return getValue(Property.WIDTH, Undefined.DOUBLE);
 	}
@@ -123,6 +128,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * 
 	 * @return the height in pixel.
 	 */
+	@Override
 	public final double getHeight() {
 		return getValue(Property.HEIGHT, Undefined.DOUBLE);
 	}
@@ -134,10 +140,16 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * @return <code>true</code> if the chart event is inside of this box, otherwise <code>false</code>
 	 */
 	public final boolean isInside(BaseNativeEvent event) {
-		// checks X
-		boolean isX = event.getLayerX() >= getLeft() && event.getLayerX() <= getRight();
-		// checks Y
-		boolean isY = event.getLayerY() >= getTop() && event.getLayerY() <= getBottom();
-		return isX && isY;
+		// checks if consistent
+		if (isConsistent()) {
+			// checks X
+			final boolean isX = event.getLayerX() >= getLeft() && event.getLayerX() <= getRight();
+			// checks Y
+			final boolean isY = event.getLayerY() >= getTop() && event.getLayerY() <= getBottom();
+			return isX && isY;
+		}
+		// if here, the area is not consistent
+		// then returns false
+		return false;
 	}
 }
