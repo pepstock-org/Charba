@@ -136,6 +136,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 
 	private final Title title;
 
+	private final Subtitle subtitle;
+
 	private final Tooltips tooltips;
 
 	private final Filler filler;
@@ -191,6 +193,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		this.datasets = new Datasets(this);
 		this.legend = new Legend(this);
 		this.title = new Title(this);
+		this.subtitle = new Subtitle(this);
 		this.layout = new Layout(this);
 		this.hover = new Hover(this);
 		this.interaction = new Interaction(this);
@@ -368,6 +371,15 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	public Title getTitle() {
 		return title;
+	}
+
+	/**
+	 * Returns the subtitle element.
+	 * 
+	 * @return the subtitle
+	 */
+	public Subtitle getSubtitle() {
+		return subtitle;
 	}
 
 	/**

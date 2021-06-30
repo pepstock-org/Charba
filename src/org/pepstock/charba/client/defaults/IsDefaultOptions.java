@@ -51,6 +51,13 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	IsDefaultTitle getTitle();
 
 	/**
+	 * Returns the title defaults.
+	 * 
+	 * @return the title defaults.
+	 */
+	IsDefaultSubtitle getSubtitle();
+
+	/**
 	 * Returns the legend defaults.
 	 * 
 	 * @return the legend defaults.

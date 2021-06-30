@@ -20,6 +20,20 @@ package org.pepstock.charba.client.defaults;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTitle extends IsDefaultAbstractTitle {
+public interface IsDefaultAbstractTitle extends IsDefaultPluginElement, IsDefaultFontContainer {
+
+	/**
+	 * Returns the padding to apply around labels. Only top and bottom are implemented.
+	 * 
+	 * @return Padding to apply around labels. Only top and bottom are implemented.
+	 */
+	IsDefaultPadding getPadding();
+
+	/**
+	 * Returns if marks that this box should take the full width/height of the canvas (moving other boxes).
+	 * 
+	 * @return Marks that this box should take the full width/height of the canvas (moving other boxes)
+	 */
+	boolean isFullSize();
 
 }

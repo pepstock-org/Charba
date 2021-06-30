@@ -150,6 +150,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	private final Title title;
 
+	private final Subtitle subtitle;
+
 	private final Tooltips tooltips;
 
 	private final Decimation decimation;
@@ -211,6 +213,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		// loads default plugins
 		this.legend = new Legend(plugins, DefaultPluginId.LEGEND, getDefaultValues().getLegend(), plugins.getDefaultPluginOptions(DefaultPluginId.LEGEND));
 		this.title = new Title(plugins, DefaultPluginId.TITLE, getDefaultValues().getTitle(), plugins.getDefaultPluginOptions(DefaultPluginId.TITLE));
+		this.subtitle = new Subtitle(plugins, DefaultPluginId.SUBTITLE, getDefaultValues().getSubtitle(), plugins.getDefaultPluginOptions(DefaultPluginId.SUBTITLE));
 		this.tooltips = new Tooltips(plugins, DefaultPluginId.TOOLTIP, getDefaultValues().getTooltips(), plugins.getDefaultPluginOptions(DefaultPluginId.TOOLTIP));
 		this.decimation = new Decimation(plugins, DefaultPluginId.DECIMATION, getDefaultValues().getDecimation(), plugins.getDefaultPluginOptions(DefaultPluginId.DECIMATION));
 		this.filler = new Filler(plugins, DefaultPluginId.FILLER, getDefaultValues().getFiller(), plugins.getDefaultPluginOptions(DefaultPluginId.FILLER));
@@ -344,6 +347,16 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public final Title getTitle() {
 		return title;
+	}
+
+	/**
+	 * Returns the title element.
+	 * 
+	 * @return the title
+	 */
+	@Override
+	public final Subtitle getSubtitle() {
+		return subtitle;
 	}
 
 	/**

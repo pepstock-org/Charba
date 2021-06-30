@@ -42,6 +42,10 @@ public enum DefaultPluginId implements Key
 	 */
 	TITLE("title"),
 	/**
+	 * CHART.JS plugin to manage the subtitle.
+	 */
+	SUBTITLE("subtitle"),
+	/**
 	 * CHART.JS plugin to manage the tooltips.
 	 */
 	TOOLTIP("tooltip");

@@ -24,14 +24,14 @@ import org.pepstock.charba.client.options.IsTitle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Title extends AbstractTitle {
+public class Subtitle extends AbstractTitle {
 
 	/**
 	 * Builds the object storing the root options element.
 	 * 
 	 * @param options root options element.
 	 */
-	Title(ConfigurationOptions options) {
+	Subtitle(ConfigurationOptions options) {
 		super(options);
 	}
 
@@ -42,7 +42,7 @@ public class Title extends AbstractTitle {
 	 */
 	@Override
 	final IsTitle getTitleElement() {
-		return getConfiguration().getTitle();
+		return getConfiguration().getSubtitle();
 	}
 
 	/*
@@ -52,7 +52,7 @@ public class Title extends AbstractTitle {
 	 */
 	@Override
 	final AbstractNode getTitleNode() {
-		return getConfiguration().getTitle();
+		return getConfiguration().getSubtitle();
 	}
 
 }

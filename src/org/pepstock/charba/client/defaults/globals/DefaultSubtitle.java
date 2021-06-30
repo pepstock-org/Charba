@@ -17,17 +17,17 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
-import org.pepstock.charba.client.defaults.IsDefaultTitle;
+import org.pepstock.charba.client.defaults.IsDefaultSubtitle;
 import org.pepstock.charba.client.enums.Weight;
 
 /**
- * CHART.JS default values for TITLE element.
+ * CHART.JS default values for SUBTITLE element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultTitle extends AbstractDefaultTitle implements IsDefaultTitle {
-	
-	private static final int DEFAULT_PADDING = 10;
+public final class DefaultSubtitle extends AbstractDefaultTitle implements IsDefaultSubtitle {
+
+	private static final int DEFAULT_PADDING = 0;
 
 	private final DefaultRoutedFont font = new InternalTitleFont();
 
@@ -36,7 +36,7 @@ public final class DefaultTitle extends AbstractDefaultTitle implements IsDefaul
 	/**
 	 * To avoid any instantiation
 	 */
-	DefaultTitle() {
+	DefaultSubtitle() {
 		// do nothing
 	}
 	
@@ -60,7 +60,6 @@ public final class DefaultTitle extends AbstractDefaultTitle implements IsDefaul
 		return padding;
 	}
 
-
 	/**
 	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for title.
 	 * 
@@ -76,7 +75,7 @@ public final class DefaultTitle extends AbstractDefaultTitle implements IsDefaul
 		 */
 		@Override
 		public Weight getWeight() {
-			return Weight.BOLD;
+			return Weight.NORMAL;
 		}
 
 	}

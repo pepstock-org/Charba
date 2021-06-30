@@ -17,15 +17,15 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultTitle;
+import org.pepstock.charba.client.defaults.IsDefaultSubtitle;
 
 /**
- * Configures the default chart title which defines text to draw at the top of the chart.
+ * Configures the default chart subtitle which defines text to draw at the top of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Title extends AbstractTitle<IsDefaultTitle> implements IsDefaultTitle {
+public final class Subtitle extends AbstractTitle<IsDefaultSubtitle> implements IsDefaultSubtitle {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -35,7 +35,7 @@ public final class Title extends AbstractTitle<IsDefaultTitle> implements IsDefa
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Title(Plugins options, Key childKey, IsDefaultTitle defaultValues, NativeObject nativeObject) {
+	Subtitle(Plugins options, Key childKey, IsDefaultSubtitle defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
 

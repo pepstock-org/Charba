@@ -16,10 +16,10 @@
 package org.pepstock.charba.client.defaults;
 
 /**
- * Interface to define title object defaults.
+ * Interface to define subtitle object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTitle extends IsDefaultAbstractTitle {
+public interface IsDefaultSubtitle extends IsDefaultAbstractTitle {
 
 }

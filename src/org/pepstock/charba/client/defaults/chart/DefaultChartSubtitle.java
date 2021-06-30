@@ -15,21 +15,21 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.defaults.IsDefaultTitle;
+import org.pepstock.charba.client.defaults.IsDefaultSubtitle;
 
 /**
- * Defaults for title option element, based on chart type.
+ * Defaults for subtitle option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartTitle extends AbstractDefaultChartTitle implements IsDefaultTitle {
+public final class DefaultChartSubtitle extends AbstractDefaultChartTitle implements IsDefaultSubtitle {
 
 	/**
-	 * Creates the object by title option element instance.
+	 * Creates the object by subtitle option element instance.
 	 * 
-	 * @param title title option element instance.
+	 * @param subtitle subtitle option element instance.
 	 */
-	public DefaultChartTitle(IsDefaultTitle title) {
-		super(title);
+	public DefaultChartSubtitle(IsDefaultSubtitle subtitle) {
+		super(subtitle);
 	}
 }

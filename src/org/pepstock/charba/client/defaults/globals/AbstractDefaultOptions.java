@@ -28,6 +28,7 @@ import org.pepstock.charba.client.defaults.IsDefaultLayout;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.IsDefaultPlugins;
+import org.pepstock.charba.client.defaults.IsDefaultSubtitle;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.defaults.IsDefaultTransitions;
@@ -43,6 +44,7 @@ import org.pepstock.charba.client.defaults.chart.DefaultChartInteraction;
 import org.pepstock.charba.client.defaults.chart.DefaultChartLayout;
 import org.pepstock.charba.client.defaults.chart.DefaultChartLegend;
 import org.pepstock.charba.client.defaults.chart.DefaultChartPlugins;
+import org.pepstock.charba.client.defaults.chart.DefaultChartSubtitle;
 import org.pepstock.charba.client.defaults.chart.DefaultChartTitle;
 import org.pepstock.charba.client.defaults.chart.DefaultChartTooltips;
 import org.pepstock.charba.client.defaults.chart.DefaultChartTransitions;
@@ -69,6 +71,8 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	private final IsDefaultLayout layout;
 
 	private final IsDefaultTitle title;
+
+	private final IsDefaultSubtitle subtitle;
 
 	private final IsDefaultLegend legend;
 
@@ -98,6 +102,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.elements = new DefaultElements();
 		this.layout = new DefaultLayout();
 		this.title = new DefaultTitle();
+		this.subtitle = new DefaultSubtitle();
 		this.legend = new DefaultLegend();
 		this.tooltips = new DefaultTooltips();
 		this.plugins = new DefaultPlugins();
@@ -124,6 +129,7 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 		this.elements = new DefaultChartElements(options.getElements());
 		this.layout = new DefaultChartLayout(options.getLayout());
 		this.title = new DefaultChartTitle(options.getTitle());
+		this.subtitle = new DefaultChartSubtitle(options.getSubtitle());
 		this.legend = new DefaultChartLegend(options.getLegend());
 		this.tooltips = new DefaultChartTooltips(options.getTooltips());
 		this.plugins = new DefaultChartPlugins(options.getPlugins());
@@ -221,6 +227,16 @@ public abstract class AbstractDefaultOptions implements IsDefaultOptions {
 	@Override
 	public final IsDefaultTitle getTitle() {
 		return title;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getSubtitle()
+	 */
+	@Override
+	public IsDefaultSubtitle getSubtitle() {
+		return subtitle;
 	}
 
 	/*
