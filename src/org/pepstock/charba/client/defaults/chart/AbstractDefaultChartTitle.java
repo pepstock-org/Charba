@@ -35,7 +35,7 @@ abstract class AbstractDefaultChartTitle implements IsDefaultAbstractTitle {
 	 * 
 	 * @param title title or subtitle option element instance.
 	 */
-	public AbstractDefaultChartTitle(IsDefaultAbstractTitle title) {
+	protected AbstractDefaultChartTitle(IsDefaultAbstractTitle title) {
 		this.title = title;
 	}
 
