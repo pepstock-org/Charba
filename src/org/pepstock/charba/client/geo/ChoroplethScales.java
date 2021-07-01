@@ -53,7 +53,7 @@ public final class ChoroplethScales extends Scales {
 				// checks if projection
 				if (axis instanceof ProjectionAxis && !projection) {
 					projection = true;
-				} else if ((axis instanceof ColorAxis || axis instanceof ColorLogarithmicAxis) && !color) {
+				} else if (axis instanceof IsColorAxis && !color) {
 					color = true;
 				} else {
 					// if here, the set axes are not consistent

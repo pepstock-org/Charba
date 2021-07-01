@@ -53,7 +53,7 @@ public final class BubbleMapScales extends Scales {
 				// checks if projection
 				if (axis instanceof ProjectionAxis && !projection) {
 					projection = true;
-				} else if ((axis instanceof SizeAxis || axis instanceof SizeLogarithmicAxis) && !size) {
+				} else if (axis instanceof IsSizeAxis && !size) {
 					size = true;
 				} else {
 					// if here, the set axes are not consistent
