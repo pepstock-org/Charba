@@ -141,7 +141,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer implements IsAre
 	 */
 	public final boolean isInside(BaseNativeEvent event) {
 		// checks if consistent
-		if (isConsistent()) {
+		if (IsArea.isConsistent(this)) {
 			// checks X
 			final boolean isX = event.getLayerX() >= getLeft() && event.getLayerX() <= getRight();
 			// checks Y

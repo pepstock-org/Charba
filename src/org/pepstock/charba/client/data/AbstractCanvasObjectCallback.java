@@ -23,6 +23,7 @@ import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.colors.CanvasObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.Dataset.CanvasObjectKey;
+import org.pepstock.charba.client.items.IsArea;
 
 /**
  * Callback to set a {@link CanvasObject} as background color.<br>
@@ -62,7 +63,7 @@ abstract class AbstractCanvasObjectCallback<T extends CanvasObject> implements C
 		// gets chart
 		IsChart chart = context.getChart();
 		// checks if chart is consistent
-		if (IsChart.isValid(chart) && context.getDatasetIndex() >= 0 && chart.getNode().getChartArea().isConsistent()) {
+		if (IsChart.isValid(chart) && context.getDatasetIndex() >= 0 && IsArea.isConsistent(chart.getNode().getChartArea())) {
 			// checks if chart area is consistent
 			// retrieves data set
 			Dataset dataset = chart.getData().retrieveDataset(context);

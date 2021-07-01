@@ -23,6 +23,26 @@ package org.pepstock.charba.client.items;
 public interface IsArea {
 
 	/**
+	 * Returns <code>true</code> if the are is consistent, otherwise <code>false</code>.
+	 * 
+	 * @param area area instance to be checked
+	 * @return <code>true</code> if the are is consistent, otherwise <code>false</code>
+	 */
+	static boolean isConsistent(IsArea area) {
+		// checks if argument is consistent
+		if (area != null) {
+			// checks horizontal dimensions
+			final boolean x = Undefined.isNot(area.getLeft()) && Undefined.isNot(area.getRight()) && area.getWidth() >= 0;
+			// checks vertical dimensions
+			final boolean y = Undefined.isNot(area.getTop()) && Undefined.isNot(area.getBottom()) && area.getHeight() >= 0;
+			return x && y;
+		}
+		// if here, area is not consistent
+		// then returns false
+		return false;
+	}
+
+	/**
 	 * Returns the top of area.
 	 * 
 	 * @return the top of area.
@@ -56,7 +76,7 @@ public interface IsArea {
 	 * @return the width in pixel.
 	 */
 	default double getWidth() {
-		return isConsistent() ? getRight() - getLeft() : Undefined.DOUBLE;
+		return getRight() - getLeft();
 	}
 
 	/**
@@ -65,19 +85,7 @@ public interface IsArea {
 	 * @return the height in pixel.
 	 */
 	default double getHeight() {
-		return isConsistent() ? getBottom() - getTop() : Undefined.DOUBLE;
+		return getBottom() - getTop();
 	}
 
-	/**
-	 * Returns <code>true</code> if the are is consistent, otherwise <code>false</code>.
-	 * 
-	 * @return <code>true</code> if the are is consistent, otherwise <code>false</code>
-	 */
-	default boolean isConsistent() {
-		// checks horizontal dimensions
-		final boolean x = Undefined.isNot(getLeft()) && Undefined.isNot(getRight()) && getRight() >= getLeft(); 
-		// checks vertical dimensions
-		final boolean y = Undefined.isNot(getTop()) && Undefined.isNot(getBottom()) && getBottom() >= getTop(); 
-		return x && y;
-	}
 }

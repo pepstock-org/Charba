@@ -27,6 +27,7 @@ import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.items.IsArea;
 
 /**
  * Abstract utility class which creates a canvas gradient and pattern java script objects using a Charba gradient or pattern.<br>
@@ -234,7 +235,7 @@ public abstract class CanvasObjectFactory {
 		final Area area = getArea(chart, gradient);
 		// checks if area is consistent
 		Checker.checkIfValid(area, "Area for linear gradient");
-		Checker.assertCheck(area.isConsistent(), "Area for linear gradient is not consistent");
+		Checker.assertCheck(IsArea.isConsistent(area), "Area for linear gradient is not consistent");
 		final double top = area.getTop();
 		final double bottom = area.getBottom();
 		final double left = area.getLeft();

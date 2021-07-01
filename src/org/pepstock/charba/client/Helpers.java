@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
@@ -98,6 +99,10 @@ public final class Helpers {
 		return null;
 	}
 
+	// --------------
+	// CHART
+	// --------------
+
 	/**
 	 * Clips an area on the canvas context using the {@link ChartAreaNode} of the chart.
 	 * 
@@ -124,6 +129,43 @@ public final class Helpers {
 	}
 
 	/**
+	 * Clips an area on the canvas context, using the {@link Canvas} of the chart.<br>
+	 * The area is specified by size.<br>
+	 * Starting points are 0.
+	 * 
+	 * @param chart chart instance
+	 * @param width the rectangle's width. Positive values are to the right, and negative to the left
+	 * @param height the rectangle's height. Positive values are down, and negative are up
+	 */
+	public void clipArea(IsChart chart, double width, double height) {
+		// checks if context is consistent
+		if (IsChart.isConsistent(chart)) {
+			clipArea(chart.getCanvas(), width, height);
+		}
+	}
+
+	/**
+	 * Clips an area on the canvas context, using the {@link Canvas} of the chart.<br>
+	 * The area is specified by coordinates and size.
+	 * 
+	 * @param chart chart instance
+	 * @param x the x-axis coordinate of the rectangle's starting point
+	 * @param y the y-axis coordinate of the rectangle's starting point
+	 * @param width the rectangle's width. Positive values are to the right, and negative to the left
+	 * @param height the rectangle's height. Positive values are down, and negative are up
+	 */
+	public void clipArea(IsChart chart, double x, double y, double width, double height) {
+		// checks if context is consistent
+		if (IsChart.isConsistent(chart)) {
+			clipArea(chart.getCanvas(), x, y, width, height);
+		}
+	}
+
+	// --------------
+	// CANVAS
+	// --------------
+
+	/**
 	 * Clips an area on the canvas context, using the {@link Context2dItem} of the canvas.
 	 * 
 	 * @param canvas canvas where to apply the clippping
@@ -137,6 +179,43 @@ public final class Helpers {
 	}
 
 	/**
+	 * Clips an area on the canvas context, using the {@link Context2dItem} of the canvas.<br>
+	 * The area is specified by size.<br>
+	 * Starting points are 0.
+	 * 
+	 * @param canvas canvas where to apply the clippping
+	 * @param width the rectangle's width. Positive values are to the right, and negative to the left
+	 * @param height the rectangle's height. Positive values are down, and negative are up
+	 */
+	public void clipArea(Canvas canvas, double width, double height) {
+		// checks if context is consistent
+		if (canvas != null) {
+			clipArea(canvas.getContext2d(), width, height);
+		}
+	}
+
+	/**
+	 * Clips an area on the canvas context, using the {@link Context2dItem} of the canvas.<br>
+	 * The area is specified by coordinates and size.
+	 * 
+	 * @param canvas canvas where to apply the clippping
+	 * @param x the x-axis coordinate of the rectangle's starting point
+	 * @param y the y-axis coordinate of the rectangle's starting point
+	 * @param width the rectangle's width. Positive values are to the right, and negative to the left
+	 * @param height the rectangle's height. Positive values are down, and negative are up
+	 */
+	public void clipArea(Canvas canvas, double x, double y, double width, double height) {
+		// checks if context is consistent
+		if (canvas != null) {
+			clipArea(canvas.getContext2d(), x, y, width, height);
+		}
+	}
+
+	// --------------
+	// CONTEXT 2D
+	// --------------
+
+	/**
 	 * Clips an area on the canvas context.
 	 * 
 	 * @param context context of the canvas
@@ -144,18 +223,52 @@ public final class Helpers {
 	 */
 	public void clipArea(Context2dItem context, IsArea area) {
 		// checks if context is consistent
-		if (context != null && area != null && area.isConsistent()) {
+		if (area != null && IsArea.isConsistent(area)) {
+			clipArea(context, area.getLeft(), area.getTop(), area.getWidth(), area.getHeight());
+		}
+	}
+
+	/**
+	 * Clips an area on the canvas context.<br>
+	 * The area is specified by size.<br>
+	 * Starting points are 0.
+	 * 
+	 * @param context context of the canvas
+	 * @param width the rectangle's width. Positive values are to the right, and negative to the left
+	 * @param height the rectangle's height. Positive values are down, and negative are up
+	 */
+	public void clipArea(Context2dItem context, double width, double height) {
+		clipArea(context, 0, 0, width, height);
+	}
+
+	/**
+	 * Clips an area on the canvas context.<br>
+	 * The area is specified by coordinates and size.
+	 * 
+	 * @param context context of the canvas
+	 * @param x the x-axis coordinate of the rectangle's starting point
+	 * @param y the y-axis coordinate of the rectangle's starting point
+	 * @param width the rectangle's width. Positive values are to the right, and negative to the left
+	 * @param height the rectangle's height. Positive values are down, and negative are up
+	 */
+	public void clipArea(Context2dItem context, double x, double y, double width, double height) {
+		// checks if context is consistent
+		if (context != null && areValuesConsistent(x, y, width, height) && width >= 0 && height >= 0) {
 			// clips the area in the canvas
 			context.save();
 			// begins path
 			context.beginPath();
 			// selects the area
-			context.rect(area.getLeft(), area.getTop(), area.getWidth(), area.getHeight());
+			context.rect(x, y, width, height);
 			// clip
 			context.clip();
 		}
 	}
-	
+
+	// --------------
+	// UNCLIP
+	// --------------
+
 	/**
 	 * Unclips the area previously set.
 	 * 
@@ -167,6 +280,26 @@ public final class Helpers {
 			// invokes "restore" to unclip
 			context.restore();
 		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the values passed as argument are consistent.
+	 * 
+	 * @param values the values to be checked
+	 * @return <code>true</code> if the values passed as argument are consistent
+	 */
+	private boolean areValuesConsistent(double... values) {
+		// scans values
+		for (double value : values) {
+			// checks if value is consistent
+			if (Checker.isNegative(value)) {
+				// is not consistent
+				// then returns false
+				return false;
+			}
+		}
+		// if here, all values are consistent
+		return true;
 	}
 
 }

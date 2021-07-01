@@ -31,6 +31,7 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.DatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -78,7 +79,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 		// CHART AREA
 		ChartAreaNode chartArea = chart.getNode().getChartArea();
 		// depending of scope (canvas or chart area)
-		if (GradientScope.CANVAS.equals(gradient.getScope()) || !chartArea.isConsistent()) {
+		if (GradientScope.CANVAS.equals(gradient.getScope()) || !IsArea.isConsistent(chartArea)) {
 			// gets canvas
 			Canvas canvas = chart.getCanvas();
 			// sets the coordinates of scope
@@ -110,7 +111,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 		// gets chart area
 		ChartAreaNode chartArea = node.getChartArea();
 		// depending of scope (canvas or chart area)
-		if (GradientScope.CANVAS.equals(gradient.getScope()) || !chartArea.isConsistent()) {
+		if (GradientScope.CANVAS.equals(gradient.getScope()) || !IsArea.isConsistent(chartArea)) {
 			// gets canvas
 			Canvas canvas = chart.getCanvas();
 			// CANVAS
@@ -146,7 +147,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 		// gets dataset item at index 0
 		DatasetItem datasetItem = chart.getDatasetItem(datasetIndex);
 		// depending of scope (canvas or chart area)
-		if (GradientScope.CANVAS.equals(gradient.getScope()) || !chartArea.isConsistent()) {
+		if (GradientScope.CANVAS.equals(gradient.getScope()) || !IsArea.isConsistent(chartArea)) {
 			// CANVAS
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
