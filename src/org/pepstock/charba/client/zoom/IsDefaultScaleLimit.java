@@ -25,6 +25,24 @@ import org.pepstock.charba.client.items.Undefined;
  *
  */
 interface IsDefaultScaleLimit extends IsDefaultScaleRange {
+	
+	/**
+	 * Returns <code>true</code> to use whatever minimum limit the scale had when the chart was first displayed.
+	 * 
+	 * @return <code>true</code> to use whatever minimum limit the scale had when the chart was first displayed
+	 */
+	default boolean isOriginalMin() {
+		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> to use whatever maximum limit the scale had when the chart was first displayed.
+	 * 
+	 * @return <code>true</code> to use whatever maximum limit the scale had when the chart was first displayed
+	 */
+	default boolean isOriginalMax() {
+		return false;
+	}
 
 	/**
 	 * Returns the minimum allowed range.<br>

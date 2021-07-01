@@ -32,7 +32,7 @@ public class ScaleRange extends NativeObjectContainer implements IsDefaultScaleR
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		MIN("min"),
 		MAX("max");

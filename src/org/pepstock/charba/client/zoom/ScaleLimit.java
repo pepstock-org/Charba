@@ -17,6 +17,7 @@ package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 
 /**
  * Entity of {@link ZoomPlugin#ID} configuration in order to set minimum and maximum values of the scales for pan or zoom.
@@ -25,6 +26,9 @@ import org.pepstock.charba.client.commons.NativeObject;
  *
  */
 public final class ScaleLimit extends ScaleRange implements IsDefaultScaleLimit {
+
+	// string value to set is the roginal limits are set
+	private static final String ORIGINAL_LIMIT = "original";
 
 	/**
 	 * Name of properties of native object.
@@ -74,6 +78,44 @@ public final class ScaleLimit extends ScaleRange implements IsDefaultScaleLimit 
 	}
 
 	/**
+	 * Sets <code>true</code> to use whatever minimum limit the scale had when the chart was first displayed.
+	 * 
+	 * @param enable <code>true</code> to use whatever minimum limit the scale had when the chart was first displayed
+	 */
+	public final void setOriginalMin(boolean enable) {
+		setOringinal(ScaleRange.Property.MIN, enable);
+	}
+
+	/**
+	 * Returns <code>true</code> to use whatever minimum limit the scale had when the chart was first displayed.
+	 * 
+	 * @return <code>true</code> to use whatever minimum limit the scale had when the chart was first displayed
+	 */
+	@Override
+	public final boolean isOriginalMin() {
+		return isType(ScaleRange.Property.MIN, ObjectType.STRING) || defaultOptions.isOriginalMin();
+	}
+
+	/**
+	 * Sets <code>true</code> to use whatever maximum limit the scale had when the chart was first displayed.
+	 * 
+	 * @param enable <code>true</code> to use whatever maximum limit the scale had when the chart was first displayed
+	 */
+	public final void setOriginalMax(boolean enable) {
+		setOringinal(ScaleRange.Property.MAX, enable);
+	}
+
+	/**
+	 * Returns <code>true</code> to use whatever maximum limit the scale had when the chart was first displayed.
+	 * 
+	 * @return <code>true</code> to use whatever maximum limit the scale had when the chart was first displayed
+	 */
+	@Override
+	public final boolean isOriginalMax() {
+		return isType(ScaleRange.Property.MAX, ObjectType.STRING) || defaultOptions.isOriginalMax();
+	}
+
+	/**
 	 * Sets the minimum allowed range.<br>
 	 * This defines the max zoom level.
 	 * 
@@ -96,4 +138,20 @@ public final class ScaleLimit extends ScaleRange implements IsDefaultScaleLimit 
 		return getValue(Property.MIN_RANGE, defaultOptions.getMinRange());
 	}
 
+	/**
+	 * Manages the original value for the property passed.
+	 * 
+	 * @param property property of limit to set
+	 * @param enable <code>true</code> to use whatever whatever limits the scale had when the chart was first displayed
+	 */
+	private void setOringinal(Key property, boolean enable) {
+		// checks if is enabling
+		if (enable) {
+			setValue(property, ORIGINAL_LIMIT);
+		} else {
+			// if here, original just be disabled
+			// removing property and using default
+			remove(property);
+		}
+	}
 }
