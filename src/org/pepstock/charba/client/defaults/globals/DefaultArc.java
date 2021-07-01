@@ -36,6 +36,8 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 
 	private static final int DEFAULT_BORDER_RADIUS = 0;
 
+	private static final int DEFAULT_SPACING = 0;
+
 	/**
 	 * Creates a default arc
 	 */
@@ -101,6 +103,16 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 	@Override
 	public int getHoverOffset() {
 		return getOffset();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getSpacing()
+	 */
+	@Override
+	public int getSpacing() {
+		return DEFAULT_SPACING;
 	}
 
 }

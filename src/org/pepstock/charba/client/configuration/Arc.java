@@ -223,6 +223,26 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	public int getOffset() {
 		return getConfiguration().getElements().getArc().getOffset();
 	}
+	
+	/**
+	 * Sets the fixed arc offset (in pixels).<br>
+	 * Similar to <code>offset</code> but applies to all arcs.
+	 * 
+	 * @param spacing the fixed arc offset (in pixels)
+	 */
+	public void setSpacing(int spacing) {
+		getConfiguration().getElements().getArc().setSpacing(spacing);
+	}
+
+	/**
+	 * Returns the fixed arc offset (in pixels).<br>
+	 * Similar to <code>offset</code> but applies to all arcs.
+	 * 
+	 * @return the fixed arc offset (in pixels)
+	 */
+	public int getSpacing() {
+		return getConfiguration().getElements().getArc().getSpacing();
+	}
 
 	/**
 	 * Sets the arc border radius (in pixels).

@@ -39,7 +39,8 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 		ANGLE("angle"),
 		OFFSET("offset"),
 		HOVER_OFFSET("hoverOffset"),
-		BORDER_RADIUS("borderRadius");
+		BORDER_RADIUS("borderRadius"),
+		SPACING("spacing");
 
 		// name value of property
 		private final String value;
@@ -153,6 +154,27 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	@Override
 	public int getOffset() {
 		return getValue(Property.OFFSET, getDefaultValues().getOffset());
+	}
+	
+	/**
+	 * Sets the fixed arc offset (in pixels).<br>
+	 * Similar to <code>offset</code> but applies to all arcs.
+	 * 
+	 * @param spacing the fixed arc offset (in pixels)
+	 */
+	public void setSpacing(int spacing) {
+		setValueAndAddToParent(Property.SPACING, spacing);
+	}
+
+	/**
+	 * Returns the fixed arc offset (in pixels).<br>
+	 * Similar to <code>offset</code> but applies to all arcs.
+	 * 
+	 * @return the fixed arc offset (in pixels)
+	 */
+	@Override
+	public int getSpacing() {
+		return getValue(Property.SPACING, getDefaultValues().getSpacing());
 	}
 
 	/**

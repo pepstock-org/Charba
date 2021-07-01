@@ -170,6 +170,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * enable the feature to create custom axes types (for injected controller).
   * enable `enableBorderRadius` and `hoverBorderRadius` scriptable options on `BarDataset` class.
   * enable `stepped` scriptable option on `Line` element and `LineDataset` classes.
+  * add `spacing` property to `Arc` element and `PieDataset` and `DoughnutDataset` classes.
 
 ### Developing
 

@@ -67,4 +67,11 @@ public interface IsDefaultArc extends IsDefaultOptionsElement {
 	 */
 	int getHoverOffset();
 
+	/**
+	 * Returns the fixed arc offset (in pixels).<br>
+	 * Similar to <code>offset</code> but applies to all arcs.
+	 * 
+	 * @return the fixed arc offset (in pixels)
+	 */
+	int getSpacing();
 }

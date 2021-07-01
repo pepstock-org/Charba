@@ -71,6 +71,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 		HOVER_OFFSET("hoverOffset"),
 		OFFSET("offset"),
 		ROTATION("rotation"),
+		SPACING("spacing"),
 		WEIGHT("weight"),
 		// internal to map the border radius type
 		CHARBA_BORDER_RADIUS_TYPE("charbaBorderRadiusType");
@@ -201,6 +202,26 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 */
 	public double getRotation() {
 		return getValue(Property.ROTATION, getDefaultValues().getRotation());
+	}
+
+	/**
+	 * Sets the fixed arc offset (in pixels).<br>
+	 * Similar to <code>offset</code> but applies to all arcs.
+	 * 
+	 * @param spacing the fixed arc offset (in pixels)
+	 */
+	public void setSpacing(int spacing) {
+		setValue(Property.SPACING, spacing);
+	}
+
+	/**
+	 * Returns the fixed arc offset (in pixels).<br>
+	 * Similar to <code>offset</code> but applies to all arcs.
+	 * 
+	 * @return the fixed arc offset (in pixels)
+	 */
+	public int getSpacing() {
+		return getValue(Property.SPACING, getDefaultValues().getElements().getArc().getSpacing());
 	}
 
 	/**

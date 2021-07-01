@@ -156,4 +156,14 @@ public final class DefaultChartArc implements IsDefaultArc {
 		return arc.getHoverOffset();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getSpacing()
+	 */
+	@Override
+	public int getSpacing() {
+		return arc.getSpacing();
+	}
+
 }
