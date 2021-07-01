@@ -46,6 +46,7 @@ import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.Stepped;
 
 /**
  * This item provides all information about the view where a dataset has been displayed.<br>
@@ -512,12 +513,18 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * Returns if the line is shown as a stepped line.
 	 * 
-	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * @return If the line is shown as a stepped line.
 	 */
-	public boolean isStepped() {
-		return getValue(Property.STEPPED, Defaults.get().getGlobal().getElements().getLine().isStepped());
+	public Stepped isStepped() {
+		// checks if value of stepped line is a boolean
+		if (isType(Property.STEPPED, ObjectType.BOOLEAN)) {
+			return Stepped.FALSE;
+		} else {
+			// otherwise returns the stepped
+			return getValue(Property.STEPPED, Stepped.values(), Defaults.get().getGlobal().getElements().getLine().getStepped());
+		}
 	}
 
 	/**

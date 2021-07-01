@@ -21,10 +21,12 @@ import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultLine;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.JoinStyle;
+import org.pepstock.charba.client.enums.Stepped;
 
 /**
  * Line elements are used to represent the line in a line chart.
@@ -246,22 +248,53 @@ public class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLin
 	}
 
 	/**
-	 * Sets <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * Sets if the line is shown as a stepped line.<br>
+	 * If the stepped value is set to anything other than false, tension will be ignored.
 	 * 
-	 * @param stepped <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * @param line if the line is shown as a stepped line. <code>false</code> is no step interpolation
 	 */
-	public void setStepped(boolean stepped) {
-		setValueAndAddToParent(Property.STEPPED, stepped);
+	public void setStepped(boolean line) {
+		// checks if no stepped line
+		if (!line) {
+			// sets boolean value instead of string one
+			setValueAndAddToParent(Property.STEPPED, false);
+		} else {
+			// sets value before, equals to true
+			setValueAndAddToParent(Property.STEPPED, Stepped.BEFORE);
+		}
 	}
 
 	/**
-	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * Sets if the line is shown as a stepped line.<br>
+	 * If the stepped value is set to anything other than false, tension will be ignored.
 	 * 
-	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * @param line if the line is shown as a stepped line.
+	 */
+	public void setStepped(Stepped line) {
+		// checks if no stepped line
+		if (Stepped.FALSE.equals(line)) {
+			// sets boolean value instead of string one
+			setValueAndAddToParent(Property.STEPPED, false);
+		} else {
+			// sets value
+			setValueAndAddToParent(Property.STEPPED, line);
+		}
+	}
+
+	/**
+	 * Returns if the line is shown as a stepped line.
+	 * 
+	 * @return If the line is shown as a stepped line.
 	 */
 	@Override
-	public boolean isStepped() {
-		return getValue(Property.STEPPED, getDefaultValues().isStepped());
+	public Stepped getStepped() {
+		// checks if value of stepped line is a boolean
+		if (isType(Property.STEPPED, ObjectType.BOOLEAN)) {
+			return Stepped.FALSE;
+		} else {
+			// otherwise returns the stepped
+			return getValue(Property.STEPPED, Stepped.values(), getDefaultValues().getStepped());
+		}
 	}
 
 }

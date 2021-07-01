@@ -21,6 +21,7 @@ import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
+import org.pepstock.charba.client.enums.Stepped;
 
 /**
  * CHART.JS default values for LINE element.
@@ -37,8 +38,6 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	private static final double DEFAULT_BORDER_DASH_OFFSET = 0D;
 	// default cap bezier points
 	private static final boolean DEFAULT_CAP_BEZIER_POINTS = true;
-	// default stepped
-	private static final boolean DEFAULT_STEPPED = false;
 
 	/**
 	 * To avoid any instantiation
@@ -120,11 +119,11 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.elements.line.IsDefaultLine#isStepped()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getStepped()
 	 */
 	@Override
-	public boolean isStepped() {
-		return DEFAULT_STEPPED;
+	public Stepped getStepped() {
+		return Stepped.FALSE;
 	}
 
 }

@@ -20,6 +20,7 @@ import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
+import org.pepstock.charba.client.enums.Stepped;
 
 /**
  * Defaults for line option element, based on chart type.
@@ -142,11 +143,11 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#isStepped()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getStepped()
 	 */
 	@Override
-	public boolean isStepped() {
-		return line.isStepped();
+	public Stepped getStepped() {
+		return line.getStepped();
 	}
 
 	/*

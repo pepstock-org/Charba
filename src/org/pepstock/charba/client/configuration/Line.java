@@ -1,5 +1,5 @@
 /**
-    Copyright 2017 Andrea "Stock" Stocchero
+<    Copyright 2017 Andrea "Stock" Stocchero
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallb
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.SteppedCallback;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -41,6 +42,7 @@ import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
+import org.pepstock.charba.client.enums.Stepped;
 import org.pepstock.charba.client.options.AbstractElement;
 
 /**
@@ -60,6 +62,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		BORDER_DASH_OFFSET("borderDashOffset"),
 		BORDER_JOIN_STYLE("borderJoinStyle"),
 		CUBIC_INTERPOLATION_MODE("cubicInterpolationMode"),
+		STEPPED("stepped"),
 		FILL("fill");
 
 		// name value of property
@@ -101,6 +104,8 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	private final CallbackProxy<ProxyStringCallback> cubicInterpolationModeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the fill function
 	private final CallbackProxy<ProxyObjectCallback> fillCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the stepped function
+	private final CallbackProxy<ProxyObjectCallback> steppedCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border cap style callback instance
 	private CapStyleCallback<DatasetContext> borderCapStyleCallback = null;
@@ -114,6 +119,8 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	private CubicInterpolationModeCallback cubicInterpolationModeCallback = null;
 	// fill callback instance
 	private FillCallback fillCallback = null;
+	// stepped callback instance
+	private SteppedCallback steppedCallback = null;
 
 	/**
 	 * Builds the object with options, root and setting the line element.
@@ -137,6 +144,8 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		this.cubicInterpolationModeCallbackProxy.setCallback(context -> onCubicInterpolationMode(createContext(context), getCubicInterpolationModeCallback(), getDefaultElement().getCubicInterpolationMode()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.fillCallbackProxy.setCallback(context -> onFill(new DatasetContext(context), getFillCallback(), getDefaultElement().getFill()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.steppedCallbackProxy.setCallback(context -> onStepped(new DatasetContext(context), getSteppedCallback(), getDefaultElement().getStepped()));
 	}
 
 	/*
@@ -372,21 +381,38 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	}
 
 	/**
-	 * Sets <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * Sets if the line is shown as a stepped line.<br>
+	 * If the stepped value is set to anything other than false, tension will be ignored.
 	 * 
-	 * @param stepped <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * @param stepped if the line is shown as a stepped line. <code>false</code> is no step interpolation
 	 */
 	public void setStepped(boolean stepped) {
+		// resets callback
+		setStepped((SteppedCallback) null);
+		// stores value
 		getConfiguration().getElements().getLine().setStepped(stepped);
 	}
 
 	/**
-	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * Sets if the line is shown as a stepped line.<br>
+	 * If the stepped value is set to anything other than false, tension will be ignored.
 	 * 
-	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * @param stepped if the line is shown as a stepped line.
 	 */
-	public boolean isStepped() {
-		return getConfiguration().getElements().getLine().isStepped();
+	public void setStepped(Stepped stepped) {
+		// resets callback
+		setStepped((SteppedCallback) null);
+		// stores value
+		getConfiguration().getElements().getLine().setStepped(stepped);
+	}
+
+	/**
+	 * Returns if the line is shown as a stepped line.
+	 * 
+	 * @return If the line is shown as a stepped line.
+	 */
+	public Stepped getStepped() {
+		return getConfiguration().getElements().getLine().getStepped();
 	}
 
 	// ---------------
@@ -591,6 +617,39 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		getChart().getOptions().setCallback(getElement(), Property.FILL, fillCallback);
 	}
 	
+	/**
+	 * Returns the stepped callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the stepped callback, if set, otherwise <code>null</code>.
+	 */
+	public SteppedCallback getSteppedCallback() {
+		return steppedCallback;
+	}
+
+	/**
+	 * Sets the stepped callback.
+	 * 
+	 * @param steppedCallback the stepped callback.
+	 */
+	public void setStepped(SteppedCallback steppedCallback) {
+		// sets the callback
+		this.steppedCallback = steppedCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.STEPPED, steppedCallback, steppedCallbackProxy);
+	}
+
+	/**
+	 * Sets the stepped callback.
+	 * 
+	 * @param steppedCallback the stepped callback.
+	 */
+	public void setStepped(NativeCallback steppedCallback) {
+		// resets callback
+		setStepped((SteppedCallback) null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.STEPPED, steppedCallback);
+	}
+	
 	// ------------------------
 	// INTERNALS for CALLBACKS
 	// ------------------------
@@ -685,4 +744,28 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// then checks and returns default
 		return IsFill.toObject(Checker.checkAndGetIfValid(defaultValue, "Default fill argument"));
 	}
+	
+	/**
+	 * Returns a {@link Stepped} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param callback stepped callback instance
+	 * @param defaultValue default value of stepped
+	 * @return a object property value, as {@link Stepped}
+	 */
+	private Object onStepped(DatasetContext context, SteppedCallback callback, Stepped defaultValue) {
+		// gets value
+		Stepped result = ScriptableUtils.getOptionValue(context, callback);
+		// checks if consistent
+		if (Stepped.FALSE.equals(result)) {
+			// returns the result as boolean
+			return false;
+		} else if (result != null) {
+			// returns the result as string
+			return result.value();
+		}
+		// if here, result is null
+		// then checks and returns default
+		return Key.checkAndGetIfValid(defaultValue).value();
+	}	
 }

@@ -23,8 +23,10 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.CubicInterpolationModeCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.SteppedCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayStringList;
@@ -49,15 +51,6 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  */
 public class LineDataset extends LiningDataset implements HasDataPoints {
-
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-	// callback proxy to invoke the cubic interpolation mode function
-	private final CallbackProxy<ProxyStringCallback> cubicInterpolationModeCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	// cubic interpolation mode callback instance
-	private CubicInterpolationModeCallback cubicInterpolationModeCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -94,6 +87,19 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		}
 
 	}
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the cubic interpolation mode function
+	private final CallbackProxy<ProxyStringCallback> cubicInterpolationModeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the stepped function
+	private final CallbackProxy<ProxyObjectCallback> steppedCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// cubic interpolation mode callback instance
+	private CubicInterpolationModeCallback cubicInterpolationModeCallback = null;
+	// stepped callback instance
+	private SteppedCallback steppedCallback = null;
 
 	/**
 	 * Creates a dataset.<br>
@@ -156,6 +162,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
 		this.cubicInterpolationModeCallbackProxy.setCallback(context -> onCubicInterpolationMode(createContext(context)));
+		// sets function to proxy callback in order to invoke the java interface
+		this.steppedCallbackProxy.setCallback(context -> onStepped(createContext(context)));
 	}
 
 	/**
@@ -311,6 +319,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param line if the line is shown as a stepped line. <code>false</code> is no step interpolation
 	 */
 	public void setStepped(boolean line) {
+		// resets callback
+		setStepped((SteppedCallback) null);
 		// checks if no stepped line
 		if (!line) {
 			// sets boolean value instead of string one
@@ -328,6 +338,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param line if the line is shown as a stepped line.
 	 */
 	public void setStepped(Stepped line) {
+		// resets callback
+		setStepped((SteppedCallback) null);
 		// checks if no stepped line
 		if (Stepped.FALSE.equals(line)) {
 			// sets boolean value instead of string one
@@ -349,7 +361,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 			return Stepped.FALSE;
 		} else {
 			// otherwise returns the stepped
-			return getValue(Property.STEPPED, Stepped.values(), Stepped.FALSE);
+			return getValue(Property.STEPPED, Stepped.values(), getDefaultValues().getElements().getLine().getStepped());
 		}
 	}
 
@@ -451,6 +463,45 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		// stores value
 		setValue(Property.CUBIC_INTERPOLATION_MODE, cubicInterpolationModeCallback);
 	}
+	
+	/**
+	 * Returns the stepped callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the stepped callback, if set, otherwise <code>null</code>.
+	 */
+	public SteppedCallback getSteppedCallback() {
+		return steppedCallback;
+	}
+
+	/**
+	 * Sets the stepped callback.
+	 * 
+	 * @param steppedCallback the stepped callback.
+	 */
+	public void setStepped(SteppedCallback steppedCallback) {
+		// sets the callback
+		this.steppedCallback = steppedCallback;
+		// checks if callback is consistent
+		if (steppedCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.STEPPED, steppedCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.STEPPED);
+		}
+	}
+
+	/**
+	 * Sets the stepped callback.
+	 * 
+	 * @param steppedCallback the stepped callback.
+	 */
+	public void setStepped(NativeCallback steppedCallback) {
+		// resets callback
+		setStepped((SteppedCallback) null);
+		// stores and manages callback
+		setValue(Property.STEPPED, steppedCallback);
+	}
 
 	/**
 	 * Returns a {@link CubicInterpolationMode} when the callback has been activated.
@@ -469,4 +520,24 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		return getDefaultValues().getElements().getLine().getCubicInterpolationMode().value();
 	}
 
+	/**
+	 * Returns a {@link Stepped} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as {@link Stepped}
+	 */
+	private Object onStepped(DatasetContext context) {
+		// gets value
+		Stepped result = ScriptableUtils.getOptionValue(context, getSteppedCallback());
+		// checks if consistent
+		if (Stepped.FALSE.equals(result)) {
+			// returns the result as boolean
+			return false;
+		} else if (result != null) {
+			// returns the result as string
+			return result.value();
+		}
+		// default result
+		return getDefaultValues().getElements().getLine().getStepped().value();
+	}
 }

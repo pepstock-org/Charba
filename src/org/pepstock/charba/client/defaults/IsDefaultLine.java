@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.JoinStyle;
+import org.pepstock.charba.client.enums.Stepped;
 
 /**
  * Interface to define line object defaults.
@@ -70,10 +71,10 @@ public interface IsDefaultLine extends IsDefaultOptionsElement, IsDefaultFillHan
 	CubicInterpolationMode getCubicInterpolationMode();
 
 	/**
-	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * Returns if the line is shown as a stepped line.
 	 * 
-	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * @return If the line is shown as a stepped line.
 	 */
-	boolean isStepped();
+	Stepped getStepped();
 
 }
