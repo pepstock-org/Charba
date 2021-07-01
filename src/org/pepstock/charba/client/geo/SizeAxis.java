@@ -15,15 +15,14 @@
 */
 package org.pepstock.charba.client.geo;
 
-import java.util.List;
-
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.AxisType;
+import org.pepstock.charba.client.configuration.CartesianLinearAxis;
 import org.pepstock.charba.client.controllers.ControllerMapperFactory;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.ScaleDataType;
-import org.pepstock.charba.client.geo.enums.Mode;
 import org.pepstock.charba.client.options.ScaleId;
 
 /**
@@ -33,7 +32,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SizeAxis extends LegendAxis {
+public final class SizeAxis extends CartesianLinearAxis implements IsSizeAxis{
 
 	/**
 	 * Default missing radius options, {@value DEFAULT_MISSING_RADIUS}.
@@ -60,7 +59,7 @@ public final class SizeAxis extends LegendAxis {
 	 */
 	public static final AxisType TYPE = AxisType.create("size", null, ID, ScaleDataType.NUMBER);
 	// projection mapper factory
-	private final SizeAxisRemappedOptionsFactory factory;
+	final SizeAxisRemappedOptionsFactory factory;
 	// projection mapper
 	private SizeAxisMapper mapper;
 
@@ -70,7 +69,7 @@ public final class SizeAxis extends LegendAxis {
 	 * @param chart chart instance
 	 */
 	public SizeAxis(IsChart chart) {
-		super(chart, ID, TYPE);
+		super(chart, ID, TYPE, AxisKind.X);
 		// chart must be only bubble map
 		Checker.assertCheck(BubbleMapChart.CONTROLLER_TYPE.equals(chart.getType()), "Size axis must be used ONLY by bubble map chart");
 		// creates the factory
@@ -85,75 +84,14 @@ public final class SizeAxis extends LegendAxis {
 	void afterAxisConfigurationUpdate() {
 		// creates mapper
 		this.mapper = getConfiguration().getRemappedOptions(factory);
-		// resets legend
-		resetLegend();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.geo.LegendAxis#getMapper()
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.geo.IsSizeAxis#getMapper()
 	 */
 	@Override
-	SizeAxisMapper getMapper() {
+	public SizeAxisMapper getMapper() {
 		return mapper;
-	}
-
-	/**
-	 * Sets the radius to render for missing values.
-	 * 
-	 * @param missingRadius the radius to render for missing values
-	 */
-	public void setMissingRadius(double missingRadius) {
-		mapper.setMissingRadius(missingRadius);
-	}
-
-	/**
-	 * Returns the radius to render for missing values.
-	 * 
-	 * @return the radius to render for missing values
-	 */
-	public double getMissingRadius() {
-		return mapper.getMissingRadius();
-	}
-
-	/**
-	 * Sets the operation modes for the scale, area means that the area is linearly increasing whereas radius the radius is.
-	 * 
-	 * @param mode the operation modes for the scale, area means that the area is linearly increasing whereas radius the radius is
-	 */
-	public void setMode(Mode mode) {
-		mapper.setMode(mode);
-	}
-
-	/**
-	 * Returns the operation modes for the scale, area means that the area is linearly increasing whereas radius the radius is.
-	 * 
-	 * @return the operation modes for the scale, area means that the area is linearly increasing whereas radius the radius is
-	 */
-	public Mode getMode() {
-		return mapper.getMode();
-	}
-
-	/**
-	 * Sets the radius range in pixel, the minimal data value will be mapped to the first entry, the maximal one to the second and a linear interpolation for all values in between.
-	 * 
-	 * @param min minimum range in pixel
-	 * @param max maximum range in pixel
-	 */
-	public void setRange(int min, int max) {
-		mapper.setRange(min, max);
-	}
-
-	/**
-	 * Returns the radius range in pixel, the minimal data value will be mapped to the first entry, the maximal one to the second and a linear interpolation for all values in
-	 * between.
-	 * 
-	 * @return the radius range in pixel, the minimal data value will be mapped to the first entry, the maximal one to the second and a linear interpolation for all values in
-	 *         between
-	 */
-	public List<Integer> getRange() {
-		return mapper.getRange();
 	}
 
 	/**
@@ -162,12 +100,12 @@ public final class SizeAxis extends LegendAxis {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class SizeAxisRemappedOptionsFactory extends ControllerMapperFactory<SizeAxisMapper> {
+	static class SizeAxisRemappedOptionsFactory extends ControllerMapperFactory<SizeAxisMapper> {
 
 		/**
 		 * Creates the factory of the mapper
 		 */
-		private SizeAxisRemappedOptionsFactory() {
+		SizeAxisRemappedOptionsFactory() {
 			super(BubbleMapChart.CONTROLLER_TYPE);
 		}
 

@@ -16,16 +16,14 @@
 package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.AxisType;
+import org.pepstock.charba.client.configuration.CartesianLinearAxis;
 import org.pepstock.charba.client.controllers.ControllerMapperFactory;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.ScaleDataType;
-import org.pepstock.charba.client.geo.callbacks.InterpolateCallback;
-import org.pepstock.charba.client.geo.enums.Interpolate;
 import org.pepstock.charba.client.options.ScaleId;
 
 /**
@@ -35,7 +33,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ColorAxis extends LegendAxis {
+public final class ColorAxis extends CartesianLinearAxis implements IsColorAxis {
 
 	/**
 	 * Default missing color options, {@link HtmlColor#TRANSPARENT}.
@@ -56,7 +54,7 @@ public final class ColorAxis extends LegendAxis {
 	 */
 	public static final AxisType TYPE = AxisType.create("color", null, ID, ScaleDataType.NUMBER);
 	// projection mapper factory
-	private final ColorAxisRemappedOptionsFactory factory;
+	final ColorAxisRemappedOptionsFactory factory;
 	// projection mapper
 	private ColorAxisMapper mapper;
 
@@ -66,7 +64,7 @@ public final class ColorAxis extends LegendAxis {
 	 * @param chart chart instance
 	 */
 	public ColorAxis(IsChart chart) {
-		super(chart, ID, TYPE);
+		super(chart, ID, TYPE, AxisKind.X);
 		// chart must be only choropleth
 		Checker.assertCheck(ChoroplethChart.CONTROLLER_TYPE.equals(chart.getType()), "Color axis must be used ONLY by choropleth chart");
 		// creates the factory
@@ -81,108 +79,14 @@ public final class ColorAxis extends LegendAxis {
 	void afterAxisConfigurationUpdate() {
 		// creates mapper
 		this.mapper = getConfiguration().getRemappedOptions(factory);
-		// resets legend
-		resetLegend();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.geo.LegendAxis#getMapper()
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.geo.IsColorAxis#getMapper()
 	 */
 	@Override
-	ColorAxisMapper getMapper() {
+	public ColorAxisMapper getMapper() {
 		return mapper;
-	}
-
-	/**
-	 * Sets the missing color.
-	 * 
-	 * @param missingColor the missing color.
-	 */
-	public void setMissingColor(IsColor missingColor) {
-		setMissingColor(IsColor.checkAndGetValue(missingColor));
-	}
-
-	/**
-	 * Sets the missing color.
-	 * 
-	 * @param missingColor the missing color.
-	 */
-	public void setMissingColor(String missingColor) {
-		mapper.setMissingColor(missingColor);
-	}
-
-	/**
-	 * Returns the missing color.
-	 * 
-	 * @return the missing color.
-	 */
-	public String getMissingColorAsString() {
-		return mapper.getMissingColorAsString();
-	}
-
-	/**
-	 * Returns the missing color.
-	 * 
-	 * @return the missing color.
-	 */
-	public IsColor getMissingColor() {
-		return ColorBuilder.parse(getMissingColorAsString());
-	}
-
-	/**
-	 * Sets the amount of pieces to allow to split the color scale in N quantized equal bins.
-	 * 
-	 * @param quantize the amount of pieces to allow to split the color scale in N quantized equal bins
-	 */
-	public void setQuantize(int quantize) {
-		mapper.setQuantize(quantize);
-	}
-
-	/**
-	 * Returns the amount of pieces to allow to split the color scale in N quantized equal bins.
-	 * 
-	 * @return the amount of pieces to allow to split the color scale in N quantized equal bins
-	 */
-	public int getQuantize() {
-		return mapper.getQuantize();
-	}
-
-	/**
-	 * Sets the color interpolation of the scale.
-	 * 
-	 * @param interpolate the color interpolation of the scale
-	 */
-	public void setInterpolate(Interpolate interpolate) {
-		mapper.setInterpolate(interpolate);
-	}
-
-	/**
-	 * Returns the color interpolation of the scale.
-	 * 
-	 * @return the color interpolation of the scale
-	 */
-	public Interpolate getInterpolate() {
-		return mapper.getInterpolate();
-	}
-
-	/**
-	 * Sets the color interpolation callback of the scale.
-	 * 
-	 * @param interpolateCallback the color interpolation callback of the scale
-	 */
-	public void setInterpolate(InterpolateCallback interpolateCallback) {
-		mapper.setInterpolate(interpolateCallback);
-	}
-
-	/**
-	 * Returns the color interpolation callback of the scale.
-	 * 
-	 * @return the color interpolation callback of the scale
-	 */
-	public InterpolateCallback getInterpolateCallback() {
-		return mapper.getInterpolateCallback();
 	}
 
 	/**
@@ -191,12 +95,12 @@ public final class ColorAxis extends LegendAxis {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class ColorAxisRemappedOptionsFactory extends ControllerMapperFactory<ColorAxisMapper> {
+	static class ColorAxisRemappedOptionsFactory extends ControllerMapperFactory<ColorAxisMapper> {
 
 		/**
 		 * Creates the factory of the mapper
 		 */
-		private ColorAxisRemappedOptionsFactory() {
+		ColorAxisRemappedOptionsFactory() {
 			super(ChoroplethChart.CONTROLLER_TYPE);
 		}
 
