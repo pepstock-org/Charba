@@ -32,7 +32,6 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -90,7 +89,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	// callback proxy to invoke the hover border width function
 	private final CallbackProxy<ProxyNativeObjectCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border radius function
-	private final CallbackProxy<ProxyIntegerCallback> hoverBorderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyNativeObjectCallback> hoverBorderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
 	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the base function
@@ -100,7 +99,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
-	// border skipped callback instance
+	// border radius callback instance
 	private BorderRadiusCallback borderRadiusCallback = null;
 	// hover borderWidth callback instance
 	private BarBorderWidthCallback hoverBorderWidthCallback = null;
@@ -238,6 +237,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		this.borderWidthCallbackProxy.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getBorderWidthCallback(), BarBorderWidth.FACTORY, getDefaultBorderWidth()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverBorderWidthCallbackProxy.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getHoverBorderWidthCallback(), BarBorderWidth.FACTORY, getDefaultBorderWidth()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.hoverBorderRadiusCallbackProxy.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getHoverBorderRadiusCallback(), BarBorderRadius.FACTORY, getDefaultValues().getElements().getBar().getHoverBorderRadius()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
