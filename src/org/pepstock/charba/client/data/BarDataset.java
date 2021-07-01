@@ -27,9 +27,12 @@ import org.pepstock.charba.client.callbacks.BaseCallback;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.EnableBorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -86,10 +89,14 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private final CallbackProxy<ProxyNativeObjectCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border width function
 	private final CallbackProxy<ProxyNativeObjectCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover border radius function
+	private final CallbackProxy<ProxyIntegerCallback> hoverBorderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
 	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the base function
 	private final CallbackProxy<ProxyDoubleCallback> baseCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the enable border radius function
+	private final CallbackProxy<ProxyBooleanCallback> enableBorderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
@@ -99,6 +106,10 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	private BarBorderWidthCallback hoverBorderWidthCallback = null;
 	// borderWidth callback instance
 	private BarBorderWidthCallback borderWidthCallback = null;
+	// hover borderWidth callback instance
+	private BorderRadiusCallback hoverBorderRadiusCallback = null;
+	// borderWidth callback instance
+	private EnableBorderRadiusCallback enableBorderRadiusCallback = null;
 	// point style callback instance
 	private PointStyleCallback pointStyleCallback = null;
 	// base callback instance
@@ -231,6 +242,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
 		this.baseCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getBaseCallback(), Undefined.DOUBLE).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.enableBorderRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getEnableBorderRadiusCallback(), getDefaultValues().getElements().getBar().isEnableBorderRadius()));
 	}
 
 	/*
@@ -937,7 +950,10 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param enableBorderRadius if <code>true</code>, it only shows the borderRadius of a bar when the bar is at the end of the stack
 	 */
 	public void setEnableBorderRadius(boolean enableBorderRadius) {
-		setValueAndAddToParent(Property.ENABLE_BORDER_RADIUS, enableBorderRadius);
+		// resets callback
+		setEnableBorderRadius((EnableBorderRadiusCallback) null);
+	    // stores value
+		setValue(Property.ENABLE_BORDER_RADIUS, enableBorderRadius);
 	}
 
 	/**
@@ -1084,6 +1100,39 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// stores value
 		borderItemsHandler.setBorderItemCallback(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadiusCallback);
 	}
+	
+	/**
+	 * Returns the border radius callback, if set, otherwise <code>null</code>, when hovered.
+	 * 
+	 * @return the border radius callback, if set, otherwise <code>null</code>, when hovered.
+	 */
+	public BorderRadiusCallback getHoverBorderRadiusCallback() {
+		return hoverBorderRadiusCallback;
+	}
+
+	/**
+	 * Sets the border radius callback, when hovered.
+	 * 
+	 * @param hoverBorderRadiusCallback the border radius callback to set
+	 */
+	public void setHoverBorderRadius(BorderRadiusCallback hoverBorderRadiusCallback) {
+		// sets the callback
+		this.hoverBorderRadiusCallback = hoverBorderRadiusCallback;
+		// checks if callback is consistent
+		borderItemsHandler.setBorderItemCallback(Property.HOVER_BORDER_RADIUS, Property.CHARBA_HOVER_BORDER_RADIUS_TYPE, hoverBorderRadiusCallback, hoverBorderRadiusCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the border radius callback, when hovered.
+	 * 
+	 * @param hoverBorderRadiusCallback the border radius callback to set
+	 */
+	public void setHoverBorderRadius(NativeCallback hoverBorderRadiusCallback) {
+		// resets callback
+		setHoverBorderRadius((BorderRadiusCallback) null);
+		// stores value
+		borderItemsHandler.setBorderItemCallback(Property.HOVER_BORDER_RADIUS, Property.CHARBA_HOVER_BORDER_RADIUS_TYPE, hoverBorderRadiusCallback);
+	}
 
 	/**
 	 * Returns the point style callback, if set, otherwise <code>null</code>.
@@ -1162,6 +1211,46 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// stores value
 		setValue(Property.BASE, baseCallback);
 	}
+	
+	/**
+	 * Returns the enable border radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the enable border radius callback, if set, otherwise <code>null</code>.
+	 */
+	public EnableBorderRadiusCallback getEnableBorderRadiusCallback() {
+		return enableBorderRadiusCallback;
+	}
+
+	/**
+	 * Sets the enable border radius callback.
+	 * 
+	 * @param enableBorderRadiusCallback the enable border radius callback.
+	 */
+	public void setEnableBorderRadius(EnableBorderRadiusCallback enableBorderRadiusCallback) {
+		// sets the callback
+		this.enableBorderRadiusCallback = enableBorderRadiusCallback;
+		// checks if callback is consistent
+		if (enableBorderRadiusCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.ENABLE_BORDER_RADIUS, enableBorderRadiusCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.ENABLE_BORDER_RADIUS);
+		}
+	}
+
+	/**
+	 * Sets the enable border radius callback.
+	 * 
+	 * @param enableBorderRadiusCallback the enable border radius callback.
+	 */
+	public void setEnableBorderRadius(NativeCallback enableBorderRadiusCallback) {
+		// resets callback
+		setEnableBorderRadius((EnableBorderRadiusCallback) null);
+		// stores and manages callback
+		setValue(Property.ENABLE_BORDER_RADIUS, enableBorderRadiusCallback);
+	}
+
 
 	// ----------------------
 	// METHODS for JSFunction

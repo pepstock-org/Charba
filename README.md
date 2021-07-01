@@ -167,6 +167,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `radius`, `hitRadius`, `hoverRadius`, `pointStyle` and `rotation` scriptable options to `Point` configuration.
   * add `parsing` and `normalized` options to `Dataset` configuration.
   * enable the feature to create custom axes types (for injected controller).
+  * enable `enableBorderRadius` and `hoverBorderRadius` scriptable options on `BarDataset` class.
 
 ### Developing
 
