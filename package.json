@@ -13,7 +13,7 @@
   "dependencies": {
     "chart.js": "3.4.0",
     "chartjs-adapter-luxon": "1.0.0",
-    "chartjs-plugin-datalabels": "2.0.0-rc.1",
+    "chartjs-plugin-datalabels": "2.0.0",
     "chartjs-plugin-zoom": "1.0.1",
     "chartjs-plugin-annotation": "1.0.2",
     "chartjs-chart-geo": "3.1.0",
