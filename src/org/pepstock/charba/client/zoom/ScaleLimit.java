@@ -93,7 +93,7 @@ public final class ScaleLimit extends ScaleRange implements IsDefaultScaleLimit 
 	 */
 	@Override
 	public final boolean isOriginalMin() {
-		return isType(ScaleRange.Property.MIN, ObjectType.STRING) || defaultOptions.isOriginalMin();
+		return isType(ScaleRange.Property.MIN, ObjectType.STRING) || (!has(ScaleRange.Property.MIN) && defaultOptions.isOriginalMin());
 	}
 
 	/**
@@ -112,7 +112,7 @@ public final class ScaleLimit extends ScaleRange implements IsDefaultScaleLimit 
 	 */
 	@Override
 	public final boolean isOriginalMax() {
-		return isType(ScaleRange.Property.MAX, ObjectType.STRING) || defaultOptions.isOriginalMax();
+		return isType(ScaleRange.Property.MAX, ObjectType.STRING) || (!has(ScaleRange.Property.MAX) && defaultOptions.isOriginalMax());
 	}
 
 	/**
