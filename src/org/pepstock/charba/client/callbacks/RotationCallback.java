@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.callbacks;
 
 /**
- * Callback interface to set <code>rotation</code> or <code>pointRotation</code> property at runtime.
+ * Callback interface to set whatever <code>rotation</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *

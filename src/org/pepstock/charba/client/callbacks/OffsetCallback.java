@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.callbacks;
 
 /**
- * Callback interface to set <code>offset</code> and <code>hoverOffset</code> properties at runtime.
+ * Callback interface to set whatever <code>offset</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  * 

@@ -20,19 +20,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 
 /**
- * Callback interface to set <br>
- * <ul>
- * <li><code>borderColor</code>
- * <li><code>hoverBorderColor</code>
- * <li><code>pointBorderColor</code>
- * <li><code>pointHoverBorderColor</code>
- * <li><code>textStrokeColor</code>
- * <li><code>backgroundColor</code>
- * <li><code>hoverBackgroundColor</code>
- * <li><code>pointBackgroundColor</code>
- * <li><code>pointHoverBackgroundColor</code>
- * </ul>
- * property at runtime.
+ * Callback interface to set whatever <code>color</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *
