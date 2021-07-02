@@ -97,6 +97,22 @@ abstract class BaseGeoChart<D extends Dataset> extends AbstractChart implements 
 		options = (BaseGeoOptions) getOptions();
 		// disables legend
 		options.getLegend().setDisplay(false);
+		// checks if there is a data set
+		if (!getData().getDatasets().isEmpty()) {
+			// a geo chart must have only 1 data set
+			Checker.checkIfEqualTo(getData().getDatasets().size(), 1, "Datasets size");
+			// gets the data set (only 1)
+			Dataset dataset = getData().getDatasets().get(0);
+			// checks if a bubble map
+			if (BubbleMapChart.CONTROLLER_TYPE.equals(getType())) {
+				// checks if is a meter data set (or gauge)
+				Checker.assertCheck(dataset instanceof BubbleMapDataset, "Dataset is not a " + BubbleMapDataset.class.getName() + " but " + dataset.getClass().getName());
+			} else {
+				// checks if is a meter data set (or gauge)
+				Checker.assertCheck(dataset instanceof ChoroplethDataset, "Dataset is not a " + ChoroplethDataset.class.getName() + " but " + dataset.getClass().getName());
+			}
+		}
+
 	}
 
 }
