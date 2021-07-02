@@ -1,12 +1,12 @@
 <Project projectName="Charba">
-  <Jar>.\classes</Jar>
-  <AuxClasspathEntry>.\lib-ivy\compile\gwt-dev-2.9.0.jar</AuxClasspathEntry>
-  <AuxClasspathEntry>.\lib-ivy\compile\gwt-user-2.9.0.jar</AuxClasspathEntry>
-  <AuxClasspathEntry>.\lib-ivy\compile\closure-compiler-v20210505.jar</AuxClasspathEntry>
-  <AuxClasspathEntry>.\lib-ivy\compile\ivy-2.5.0.jar</AuxClasspathEntry>
-  <AuxClasspathEntry>.\lib-ivy\compile\jsinterop-annotations-2.0.0.jar</AuxClasspathEntry>
-  <SrcDir>.\src</SrcDir>
-  <SrcDir>.\codegen</SrcDir>
+  <Jar>.\.\classes</Jar>
+  <AuxClasspathEntry>.\.\lib-ivy\compile\gwt-dev-2.9.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\.\lib-ivy\compile\gwt-user-2.9.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\.\lib-ivy\compile\ivy-2.5.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\.\lib-ivy\compile\jsinterop-annotations-2.0.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\closure-compiler-v20210601.jar</AuxClasspathEntry>
+  <SrcDir>.\.\src</SrcDir>
+  <SrcDir>.\.\codegen</SrcDir>
   <SuppressionFilter>
     <LastVersion value="-1" relOp="NEQ"/>
   </SuppressionFilter>

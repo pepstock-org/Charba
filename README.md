@@ -178,6 +178,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Developing
 
+  * change dependency for Google Closure Compiler, [version v20210601](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20210601).
   * add `parse` method to `JSON` utility class.
   * add `clipArea` and `unclipArea` methods to `Helpers` utility class.
   * hide java script property visibility of `$H` hash code property in all java script object mapped by a `NativeObjectContainer`. 
