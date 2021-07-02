@@ -20,6 +20,7 @@ import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.options.TransitionKey;
 import org.pepstock.charba.client.plugins.AbstractExtensionPlugin;
@@ -120,6 +121,25 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 		// loads defaults
 		ZoomPlugin.get().loadDefaults(DEFAULTS_FACTORY);
+	}
+	
+	/**
+	 * Returns the zoom level when {@link ZoomPlugin} is activated.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @return the zoom level
+	 */
+	public static double getZoomLevel(IsChart chart) {
+		// check if chart is consistent and zoom plugin is activated
+		if (isReadyForApi(chart)) {
+			// gets native chart instance
+			Chart nativeChart = Charts.getNative(chart);
+			// resets zoom
+			return JsZoomHelper.get().getZoomLevel(nativeChart);
+		}
+		// if here, chart not consistent
+		// then returns undefined
+		return Undefined.DOUBLE;
 	}
 
 	/**

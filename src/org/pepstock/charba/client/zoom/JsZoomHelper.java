@@ -57,6 +57,22 @@ final class JsZoomHelper {
 	static JsZoomHelper get() {
 		return INSTANCE;
 	}
+	
+	/**
+	 * Returns the zoom level when {@link ZoomPlugin} is activated.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @return the zoom level
+	 */
+	double getZoomLevel(Chart chart) {
+		// checks if chart is consistent
+		if (chart != null) {
+			return NativeJsZoomHelper.getZoomLevel(chart);
+		}
+		// if here, chart not consistent
+		// then returns undefined
+		return Undefined.DOUBLE;
+	}
 
 	/**
 	 * Reset the zoom of chart when {@link ZoomPlugin} is activated.

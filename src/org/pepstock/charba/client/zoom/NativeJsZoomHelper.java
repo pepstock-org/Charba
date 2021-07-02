@@ -41,6 +41,14 @@ final class NativeJsZoomHelper {
 	}
 
 	/**
+	 * Returns the zoom level when {@link ZoomPlugin} is activated.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @return the zoom level
+	 */
+	static native double getZoomLevel(Chart chart);
+
+	/**
 	 * Reset the zoom of chart when {@link ZoomPlugin} is activated.
 	 * 
 	 * @param chart chart instance to invoke

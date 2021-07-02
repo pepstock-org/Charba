@@ -212,6 +212,11 @@ CharbaJsChartHelper.getTooltipActiveElements = function(chart) {};
 function CharbaJsZoomHelper() {}	    
 /**
  * @param {Chart} chart
+ * @return {number}
+ */
+CharbaJsZoomHelper.getZoomLevel = function(chart) {};
+/**
+ * @param {Chart} chart
  * @param {string=} mode 
  * @return {undefined}
  */

@@ -173,6 +173,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * enable `stepped` scriptable option on `Line` element and `LineDataset` classes.
   * add `spacing` property to `Arc` element and `PieDataset` and `DoughnutDataset` classes.
   * add `originalMin` and `originalMax` properties to `ScaleLimit` object in the `ZoomPlugin`.
+  * add `getZoomLevel` method to the `ZoomPlugin` class.
 
 ### Developing
 

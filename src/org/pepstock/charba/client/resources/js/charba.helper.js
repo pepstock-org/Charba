@@ -783,6 +783,18 @@ CharbaJsChartHelper.getTooltipActiveElements = function(chart) {
  */
 function CharbaJsZoomHelper() {} 
 /**
+ * Returns the zoom level.
+ *
+ * @param {Chart} chart chart instance
+ * @return {number}
+ */
+CharbaJsZoomHelper.getZoomLevel = function(chart) {
+  if (chart != null && typeof chart.getZoomLevel === 'function'){
+    return chart.getZoomLevel.call(chart);
+  }
+  return NaN;
+}
+/**
  * Invokes the chart reset zoom function if exists.
  * 
  * @param {Chart} chart chart instance
