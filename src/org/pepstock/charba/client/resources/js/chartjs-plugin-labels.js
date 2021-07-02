@@ -231,7 +231,16 @@
 
   Label.prototype.getFont = function (dataset, element, index) {
   	const result = this.options.font(this.getContext(dataset, element, index));
-    return Chart.helpers.mergeIf(!result ? {} : result, this.chart.options.font);
+  	if (Chart.helpers.isObject(result)) {
+  	  return {
+        family: typeof result.family === 'undefined' ? this.chart.options.font.family : result.family,
+        size: typeof result.size === 'undefined' ? this.chart.options.font.size : result.size,
+        style: typeof result.style === 'undefined' ? this.chart.options.font.style : result.style,
+        weight: typeof result.weight === 'undefined' ? this.chart.options.font.weight : result.weight,
+        lineHeight: typeof result.lineHeight === 'undefined' ? this.chart.options.font.lineHeight : result.lineHeight,
+      };
+  	}
+    return this.chart.options.font;
   };
   
   Label.prototype.getFontColor = function (dataset, element, index) {
