@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.zoom;
 
+import org.pepstock.charba.client.enums.ModifierKey;
+
 /**
  * {@link ZoomPlugin#ID} plugin default options interface for DRAG element.<br>
  * It contains all default values for DRAG.
@@ -58,6 +60,24 @@ interface IsDefaultDrag {
 	 */
 	default int getBorderWidth() {
 		return Drag.DEFAULT_BORDER_WIDTH;
+	}
+
+	/**
+	 * Returns the minimal zoom distance required before actually applying zoom.
+	 * 
+	 * @return the minimal zoom distance required before actually applying zoom
+	 */
+	default double getThreshold() {
+		return Drag.DEFAULT_THRESHOLD;
+	}
+
+	/**
+	 * Returns the modifier key to activate drag-to-zoom.
+	 * 
+	 * @return the modifier key to activate drag-to-zoomg
+	 */
+	default ModifierKey getModifierKey() {
+		return null;
 	}
 
 }

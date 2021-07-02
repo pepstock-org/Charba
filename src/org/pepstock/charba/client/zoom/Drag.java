@@ -21,6 +21,7 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.ModifierKey;
 
 /**
  * Configuration item to define the style to apply to drag area, during zooming.
@@ -51,6 +52,11 @@ public final class Drag extends AbstractNode implements IsDefaultDrag {
 	public static final int DEFAULT_BORDER_WIDTH = 0;
 
 	/**
+	 * Default threshold, <b>{@value DEFAULT_THRESHOLD}</b>.
+	 */
+	public static final double DEFAULT_THRESHOLD = 0D;
+
+	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
@@ -58,7 +64,9 @@ public final class Drag extends AbstractNode implements IsDefaultDrag {
 		BACKGROUND_COLOR("backgroundColor"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth"),
-		ENABLED("enabled");
+		ENABLED("enabled"),
+		MODIFIER_KEY("modifierKey"),
+		THRESHOLD("threshold");
 
 		// name value of property
 		private final String value;
@@ -212,6 +220,44 @@ public final class Drag extends AbstractNode implements IsDefaultDrag {
 	@Override
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, defaultOptions.getBorderWidth());
+	}
+	
+	/**
+	 * Sets the minimal zoom distance required before actually applying zoom.
+	 * 
+	 * @param threshold the minimal zoom distance required before actually applying zoom
+	 */
+	public void setThreshold(double threshold) {
+		setValueAndAddToParent(Property.THRESHOLD, Checker.positiveOrZero(threshold));
+	}
+
+	/**
+	 * Returns the minimal zoom distance required before actually applying zoom.
+	 * 
+	 * @return the minimal zoom distance required before actually applying zoom
+	 */
+	@Override
+	public double getThreshold() {
+		return getValue(Property.THRESHOLD, defaultOptions.getThreshold());
+	}
+
+	/**
+	 * Sets the modifier key to activate drag-to-zoom.
+	 * 
+	 * @param modifierKey the modifier key to activate drag-to-zoom
+	 */
+	public void setModifierKey(ModifierKey modifierKey) {
+		setValueAndAddToParent(Property.MODIFIER_KEY, modifierKey);
+	}
+
+	/**
+	 * Returns the modifier key to activate drag-to-zoom.
+	 * 
+	 * @return the modifier key to activate drag-to-zoom
+	 */
+	@Override
+	public ModifierKey getModifierKey() {
+		return getValue(Property.MODIFIER_KEY, ModifierKey.values(), defaultOptions.getModifierKey());
 	}
 
 }

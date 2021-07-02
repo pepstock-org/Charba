@@ -174,6 +174,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `spacing` property to `Arc` element and `PieDataset` and `DoughnutDataset` classes.
   * add `originalMin` and `originalMax` properties to `ScaleLimit` object in the `ZoomPlugin`.
   * add `getZoomLevel` method to the `ZoomPlugin` class.
+  * add `threshold` and `modifierKey` properties to `Drag` configuration in the `ZoomPlugin`.
 
 ### Developing
 
