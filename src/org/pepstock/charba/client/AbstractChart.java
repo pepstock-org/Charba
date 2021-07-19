@@ -1180,50 +1180,57 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void draw() {
-		// checks if canvas is supported, the element is attached and the chart is consistent
-		if (isCanvasSupported && isChartAttached() && IsChart.isConsistent(this)) {
-			// invokes the apply configuration
-			applyConfiguration();
-			// fires that chart is configuring
-			Charts.fireBeforeConfigure(this);
-			// calls plugins for onConfigure method
-			Defaults.get().getPlugins().onChartConfigure(configuration, this);
-			plugins.onChartConfigure(configuration, this);
-			// gets options
-			ConfigurationOptions internalOptions = getOptions();
-			// gets data
-			Data internalData = getData();
-			// sets all items to configuration item
-			configuration.setType(getType());
-			configuration.setOptions(this, internalOptions);
-			// PAY ATTENTION that the data configuration
-			// must be executed after PLUGINS on configure
-			// in order to be able to disable the canvas object handler plugin
-			// if required
-			configuration.setData(this, internalData);
-			// sets plugins
-			configuration.setPlugins(this, plugins);
-			// fires that chart has been configured
-			Charts.fireAfterConfigure(this);
-			// destroy chart if chart is already instantiated
-			// checks if chart is created
-			if (isInitialized()) {
-				// then destroy
-				chart.destroy();
-			}
-			// stores the chart instance in the collection
-			Charts.add(this);
-			// draws chart with configuration
-			chart = new Chart(canvas.getContext2d(), configuration.nativeObject());
-			// replaces the native object in the configuration
-			updateForReconfiguring();
-			// notify after init
-			Charts.fireAfterInit(this);
-			// cancel the timer if exist and it is
-			// still in initialized status
-			if (timer != null && CTimer.Status.INITIALIZED.equals(timer.getStatus())) {
-				// stops timer
-				timer.start();
+		// checks if canvas is supported and the element is attached
+		if (isCanvasSupported && isChartAttached()) {
+			// checks if consistent
+			if (IsChart.isConsistent(this)) {
+				// invokes the apply configuration
+				applyConfiguration();
+				// fires that chart is configuring
+				Charts.fireBeforeConfigure(this);
+				// calls plugins for onConfigure method
+				Defaults.get().getPlugins().onChartConfigure(configuration, this);
+				plugins.onChartConfigure(configuration, this);
+				// gets options
+				ConfigurationOptions internalOptions = getOptions();
+				// gets data
+				Data internalData = getData();
+				// sets all items to configuration item
+				configuration.setType(getType());
+				configuration.setOptions(this, internalOptions);
+				// PAY ATTENTION that the data configuration
+				// must be executed after PLUGINS on configure
+				// in order to be able to disable the canvas object handler plugin
+				// if required
+				configuration.setData(this, internalData);
+				// sets plugins
+				configuration.setPlugins(this, plugins);
+				// fires that chart has been configured
+				Charts.fireAfterConfigure(this);
+				// destroy chart if chart is already instantiated
+				// checks if chart is created
+				if (isInitialized()) {
+					// then destroy
+					chart.destroy();
+				}
+				// stores the chart instance in the collection
+				Charts.add(this);
+				// draws chart with configuration
+				chart = new Chart(canvas.getContext2d(), configuration.nativeObject());
+				// replaces the native object in the configuration
+				updateForReconfiguring();
+				// notify after init
+				Charts.fireAfterInit(this);
+				// cancel the timer if exist and it is
+				// still in initialized status
+				if (timer != null && CTimer.Status.INITIALIZED.equals(timer.getStatus())) {
+					// stops timer
+					timer.start();
+				}
+			} else {
+				// if here, the chart is already initialized
+				// and then updates it.
+				update();
 			}
 		}
 	}
