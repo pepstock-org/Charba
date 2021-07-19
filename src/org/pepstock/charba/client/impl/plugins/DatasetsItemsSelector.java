@@ -213,7 +213,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// resets the padding callback
 			chart.getOptions().getLayout().setPadding((NativeCallback) null);
 			// overrides the events configuration setting only the following
-			chart.getOptions().setEvents(Event.CLICK, Event.TOUCHSTART);
+			chart.getOptions().setEvents(Event.CLICK, Event.TOUCH_START);
 			// checks if handler on legend to avoid to remove all data sets has been already added
 			// and if legend is display
 			// checks if is chart is a abstract chart instance

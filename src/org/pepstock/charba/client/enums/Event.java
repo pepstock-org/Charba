@@ -27,11 +27,11 @@ public enum Event implements Key
 	/**
 	 * The user moves the mouse over an element
 	 */
-	MOUSEMOVE("mousemove"),
+	MOUSE_MOVE("mousemove"),
 	/**
 	 * The user moves the mouse away from an element
 	 */
-	MOUSEOUT("mouseout"),
+	MOUSE_OUT("mouseout"),
 	/**
 	 * The user clicks an element
 	 */
@@ -39,11 +39,47 @@ public enum Event implements Key
 	/**
 	 * The user touches a point is placed on the touch surface.
 	 */
-	TOUCHSTART("touchstart"),
+	TOUCH_START("touchstart"),
 	/**
 	 * The user touches a point is moved along the touch surface.
 	 */
-	TOUCHMOVE("touchmove");
+	TOUCH_MOVE("touchmove"),
+	/**
+	 * Fires when one or more touch points are removed from the touch surface.
+	 */
+	TOUCH_END("touchend"),
+	/**
+	 * Fires when a pointing device is moved into the hit test boundaries of an element or one of its descendants.
+	 */
+	POINTER_ENTER("pointerenter"),
+	/**
+	 * Fired when a pointer becomes active.<br>
+	 * For mouse, it is fired when the device transitions from no buttons depressed to at least one button depressed.<br>
+	 * For touch, it is fired when physical contact is made with the digitizer.<br>
+	 * For pen, it is fired when the stylus makes physical contact with the digitizer.
+	 */
+	POINTER_DOWN("pointerdown"),
+	/**
+	 * Fired when a pointer changes coordinates, and the pointer has not been canceled by a browser touch-action.
+	 */
+	POINTER_MOVE("pointermove"),
+	/**
+	 * Fired when a pointer is no longer active.
+	 */
+	POINTER_UP("pointerup"),
+	/**
+	 * Fired when a pointing device is moved out of the hit test boundaries of an element.<br>
+	 * For pen devices, this event is fired when the stylus leaves the hover range detectable by the digitizer.
+	 */
+	POINTER_LEAVE("pointerleave"),
+	/**
+	 * Fired for several reasons including:<br>
+	 * <ul>
+	 * <li>pointing device is moved out of the hit test boundaries of an element
+	 * <li>when a pen stylus leaves the hover range detectable by the digitizer
+	 * </ul>
+	 */
+	POINTER_OUT("pointerout");
 
 	// name value of property
 	private final String value;
