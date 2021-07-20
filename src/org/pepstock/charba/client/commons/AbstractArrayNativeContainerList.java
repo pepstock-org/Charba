@@ -248,4 +248,14 @@ abstract class AbstractArrayNativeContainerList<E, A extends Array> extends Abst
 		return delegate.toArray();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.List#toArray(java.lang.Object[])
+	 */
+	@Override
+	public final <T> T[] toArray(T[] a) {
+		return delegate.toArray(a);
+	}
+
 }

@@ -235,4 +235,22 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 		// check last index of
 		return array.lastIndexOf(value);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.List#toArray()
+	 */
+	@Override
+	public Object[] toArray() {
+		// creates the result
+		Object[] toArray = new Object[array.length()];
+		// scans the array string
+		for (int i = 0; i < array.length(); i++) {
+			// creates enumeration item and stores it in the array
+			toArray[i] = array.get(i);
+		}
+		// returns array
+		return toArray;
+	}
 }

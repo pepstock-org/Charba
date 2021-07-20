@@ -124,7 +124,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 		// checks range
 		if (checkRange(index)) {
 			String value = array.get(index);
-			return getByName(value);
+			return Key.getKeyByValue(definedValues, value);
 		}
 		return null;
 	}
@@ -139,7 +139,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 		if (Key.isValid(element) && checkRange(index)) {
 			// gets current element at that index
 			String old = array.get(index);
-			E oldValue = getByName(old);
+			E oldValue = Key.getKeyByValue(definedValues, old);
 			// replaces with new element
 			array.set(index, element.value());
 			// returns old
@@ -171,7 +171,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 		// checks range
 		if (checkRange(index)) {
 			String value = array.remove(index);
-			return getByName(value);
+			return Key.getKeyByValue(definedValues, value);
 		}
 		return null;
 	}
@@ -212,34 +212,21 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 		return AbstractArrayList.NOT_FOUND;
 	}
 
-	/**
-	 * Gets EnumValue by its name
-	 * 
-	 * @param name name to search
-	 * @return EnumValue instance or null if not found
-	 */
-	private E getByName(String name) {
-		// scans all EnumValues
-		for (E value : definedValues) {
-			// if equals returns it
-			if (value.value().equalsIgnoreCase(name)) {
-				return value;
-			}
-		}
-		return null;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#toArray()
 	 */
 	@Override
-	public Object[] toArray() {
+	public final Object[] toArray() {
+		// creates the result
 		Object[] toArray = new Object[array.length()];
+		// scans the array string
 		for (int i = 0; i < array.length(); i++) {
-			toArray[i] = getByName(array.get(i));
+			// creates enumeration item and stores it in the array
+			toArray[i] = Key.getKeyByValue(definedValues, array.get(i));
 		}
+		// returns array
 		return toArray;
 	}
 

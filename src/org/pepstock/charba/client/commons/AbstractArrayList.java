@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.commons;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -78,20 +79,14 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 		return new IteratorImpl<>(this);
 	}
 
-	/**
-	 * Not implemented
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.List#toArray(java.lang.Object[])
 	 */
 	@Override
-	public Object[] toArray() {
-		throw new UnsupportedOperationException(UNABLE_COPY_ARRAY_MESSAGE);
-	}
-
-	/**
-	 * Not implemented
-	 */
-	@Override
-	public final <T> T[] toArray(T[] array) {
-		throw new UnsupportedOperationException(UNABLE_COPY_ARRAY_MESSAGE);
+	public <T> T[] toArray(T[] a) {
+		return Arrays.asList(toArray()).toArray(a);
 	}
 
 	/**
