@@ -26,6 +26,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
+import org.pepstock.charba.client.dom.enums.GlobalCompositeOperation;
 import org.pepstock.charba.client.dom.enums.Repetition;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.CapStyle;
@@ -625,6 +626,50 @@ public final class Context2dItem extends BaseHtmlElement {
 		return Key.getKeyByValue(TextBaseline.values(), nativeGetTextBaseline(), TextBaseline.ALPHABETIC);
 	}
 
+	/**
+	 * Returns the type of compositing operation to apply when drawing new shapes.
+	 *
+	 * @return which of the compositing or blending mode operations to use
+	 */
+	@JsProperty(name = "globalCompositeOperation")
+	private native String nativeGetGlobalCompositeOperation();
+
+	/**
+	 * Sets the type of compositing operation to apply when drawing new shapes.
+	 *
+	 * @param globalCompositeOperation which of the compositing or blending mode operations to use
+	 */
+	@JsProperty(name = "globalCompositeOperation")
+	private native void nativeSetGlobalCompositeOperation(String globalCompositeOperation);
+	
+	/**
+	 * Sets the type of compositing operation to apply when drawing new shapes.
+	 *
+	 * @param globalCompositeOperation which of the compositing or blending mode operations to use
+	 */
+	@JsOverlay
+	public void setGlobalCompositeOperation(GlobalCompositeOperation globalCompositeOperation) {
+		// checks if argument is consistent
+		if (Key.isValid(globalCompositeOperation)) {
+			// stores the text baseline
+			nativeSetGlobalCompositeOperation(globalCompositeOperation.value());
+		}
+	}
+
+	/**
+	 * Returns the type of compositing operation to apply when drawing new shapes.
+	 *
+	 * @return which of the compositing or blending mode operations to use
+	 */
+	@JsOverlay
+	public GlobalCompositeOperation getGlobalCompositeOperation() {
+		return Key.getKeyByValue(GlobalCompositeOperation.values(), nativeGetGlobalCompositeOperation(), GlobalCompositeOperation.SOURCE_OVER);
+	}
+	
+	// ---------------------------------------
+	// METHODS
+	// ---------------------------------------
+	
 	/**
 	 * Adds a circular arc to the current sub-path.<br>
 	 * The arc method creates a circular arc centered at (x, y) with a radius of radius.<br>
