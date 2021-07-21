@@ -56,6 +56,10 @@ public final class Context2dItem extends BaseHtmlElement {
 	private Context2dItem() {
 		// do nothing
 	}
+	
+	// -----------------------
+	// PROPERTIES
+	// -----------------------
 
 	/**
 	 * Returns the canvas of the canvas rendering context 2D object.

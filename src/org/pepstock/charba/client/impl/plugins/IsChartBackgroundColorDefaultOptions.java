@@ -17,6 +17,7 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.dom.enums.GlobalCompositeOperation;
 import org.pepstock.charba.client.enums.ColorType;
 
 /**
@@ -60,6 +61,15 @@ interface IsChartBackgroundColorDefaultOptions {
 	 */
 	default Pattern getBackgroundColorAsPattern() {
 		return null;
+	}
+
+	/**
+	 * Returns the type of compositing operation to apply when drawing new shapes.
+	 *
+	 * @return which of the compositing or blending mode operations to use
+	 */
+	default GlobalCompositeOperation getGlobalCompositeOperation() {
+		return GlobalCompositeOperation.SOURCE_OVER;
 	}
 
 }

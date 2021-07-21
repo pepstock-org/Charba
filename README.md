@@ -176,6 +176,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `getZoomLevel` method to the `ZoomPlugin` class.
   * add `threshold` and `modifierKey` properties to `Drag` configuration in the `ZoomPlugin`.
   * add new events items to `Event` enumeration.
+  * add `globalCompositeOperation` property to `Context2dItem` and `ChartBackgroundColorOptions` plugin.
 
 ### Developing
 

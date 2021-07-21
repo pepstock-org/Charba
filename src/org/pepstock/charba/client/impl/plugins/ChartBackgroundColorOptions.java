@@ -24,6 +24,7 @@ import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.PatternBuilder;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.enums.GlobalCompositeOperation;
 import org.pepstock.charba.client.enums.ColorType;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
@@ -40,7 +41,8 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 	enum Property implements Key
 	{
 		BACKGROUND_COLOR("backgroundColor"),
-		COLOR_TYPE("colorType");
+		COLOR_TYPE("colorType"),
+		GLOBAL_COMPOSITE_OPERATION("globalCompositeOperation");
 
 		// name value of property
 		private final String value;
@@ -265,5 +267,24 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 			// removes type
 			remove(Property.COLOR_TYPE);
 		}
+	}
+	
+	/**
+	 * Sets the type of compositing operation to apply when drawing new shapes.
+	 *
+	 * @param globalCompositeOperation which of the compositing or blending mode operations to use
+	 */
+	public void setGlobalCompositeOperation(GlobalCompositeOperation globalCompositeOperation) {
+		setValue(Property.GLOBAL_COMPOSITE_OPERATION, globalCompositeOperation);
+	}
+	
+	/**
+	 * Returns the type of compositing operation to apply when drawing new shapes.
+	 *
+	 * @return which of the compositing or blending mode operations to use
+	 */
+	@Override
+	public GlobalCompositeOperation getGlobalCompositeOperation() {
+		return getValue(Property.GLOBAL_COMPOSITE_OPERATION, GlobalCompositeOperation.values(), defaultOptions.getGlobalCompositeOperation());
 	}
 }

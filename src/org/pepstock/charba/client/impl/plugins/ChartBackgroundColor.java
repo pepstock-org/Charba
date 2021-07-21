@@ -185,6 +185,9 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			Context2dItem ctx = chart.getCanvas().getContext2d();
 			// save context
 			ctx.save();
+			// sets global composite operation
+			ctx.setGlobalCompositeOperation(bgOptions.getGlobalCompositeOperation());
+			// checks color types
 			if (ColorType.COLOR.equals(bgOptions.getColorType())) {
 				// set fill canvas color
 				ctx.setFillColor(bgOptions.getBackgroundColorAsString());
