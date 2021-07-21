@@ -39,7 +39,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions impl
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		ELEMENTS("elements");
 

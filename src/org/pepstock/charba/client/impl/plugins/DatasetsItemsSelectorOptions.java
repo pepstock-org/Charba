@@ -93,7 +93,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		ENABLED("enabled"),
 		COLOR("color"),

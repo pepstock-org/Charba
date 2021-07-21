@@ -59,7 +59,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions implements 
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		SCHEME_SCOPE("schemeScope"),
 		SCHEME_CATEGORY("schemeCategory"),

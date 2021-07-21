@@ -46,7 +46,7 @@ public final class HtmlLegendOptions extends AbstractCursorPointerOptions implem
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		MAXIMUM_LEGEND_COLUMNS("maxLegendColumns"),
 		DISPLAY("display"),

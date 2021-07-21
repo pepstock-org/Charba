@@ -38,7 +38,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		BACKGROUND_COLOR("backgroundColor"),
 		COLOR_TYPE("colorType"),
