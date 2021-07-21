@@ -177,7 +177,8 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `threshold` and `modifierKey` properties to `Drag` configuration in the `ZoomPlugin`.
   * add new events items to `Event` enumeration.
   * add `globalCompositeOperation` property to `Context2dItem` and `ChartBackgroundColorOptions` plugin.
-
+  * add options builder for `ChartBackgroundColor` plugin.
+  
 ### Developing
 
   * change dependency for Google Closure Compiler, [version v20210601](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20210601).
