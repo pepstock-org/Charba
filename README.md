@@ -179,6 +179,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `globalCompositeOperation` property to `Context2dItem` and `ChartBackgroundColorOptions` plugin.
   * add options builder for `ChartBackgroundColor` plugin.
   * add options builder for `ChartPointer` plugin.
+  * add options builder for `HtmlLegend` plugin.
     
 ### Developing
 
