@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,20 +22,16 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.enums.PointStyle;
 
 /**
  * The chart allows a number of properties to be specified for each data set. These are used to set display properties for a specific data set.<br>
@@ -45,7 +40,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOrder {
+public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOrder, HasDataPointStyle {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -58,8 +53,6 @@ public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOr
 	private final CallbackProxy<ProxyDoubleCallback> hoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the rotation function
 	private final CallbackProxy<ProxyDoubleCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the point style function
-	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// radius callback instance
 	private RadiusCallback<DatasetContext> radiusCallback = null;
@@ -69,8 +62,6 @@ public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOr
 	private RadiusCallback<DatasetContext> hoverRadiusCallback = null;
 	// rotation callback instance
 	private RotationCallback<DatasetContext> rotationCallback = null;
-	// point style callback instance
-	private PointStyleCallback pointStyleCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -107,8 +98,10 @@ public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOr
 
 	}
 
-	// instance or order handler
+	// instance order handler
 	private final OrderHandler orderHandler;
+	// instance point style handler
+	private final DataPointStyleHandler pointStyleHandler;
 
 	/**
 	 * Creates a data set.<br>
@@ -168,6 +161,8 @@ public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOr
 		super(type, defaultValues, hidden);
 		// sets new order handler
 		this.orderHandler = new OrderHandler(getNativeObject());
+		// sets new point style handler
+		this.pointStyleHandler = new DataPointStyleHandler(this, getNativeObject(), getDefaultValues().getElements().getPoint());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -179,8 +174,6 @@ public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOr
 		this.hoverRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHoverRadiusCallback(), getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.rotationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getRotationCallback(), getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
-		// sets function to proxy callback in order to invoke the java interface
-		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context)));
 	}
 
 	/*
@@ -201,6 +194,16 @@ public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOr
 	@Override
 	public OrderHandler getOrderHandler() {
 		return orderHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasDataPointStyle#getPointStyleHandler()
+	 */
+	@Override
+	public DataPointStyleHandler getPointStyleHandler() {
+		return pointStyleHandler;
 	}
 
 	/*
@@ -261,35 +264,6 @@ public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOr
 	@Override
 	protected int getDefaultHoverBorderWidth() {
 		return getDefaultValues().getElements().getPoint().getHoverBorderWidth();
-	}
-
-	/**
-	 * Sets the style of the point.
-	 * 
-	 * @param pointStyle array of the style of the point.
-	 */
-	public void setPointStyle(PointStyle... pointStyle) {
-		// resets callback
-		setPointStyle((PointStyleCallback) null);
-		// stores value
-		setValueOrArray(Property.POINT_STYLE, pointStyle);
-	}
-
-	/**
-	 * Returns the style of the point.
-	 * 
-	 * @return list of the style of the point.
-	 */
-	public List<PointStyle> getPointStyle() {
-		// checks if the callback has not been set
-		if (getPointStyleCallback() == null) {
-			// returns the array
-			ArrayString array = getValueOrArray(Property.POINT_STYLE, getDefaultValues().getElements().getPoint().getPointStyle());
-			return ArrayListHelper.list(PointStyle.values(), array);
-		}
-		// if here, is a callback
-		// then returns a list with all values
-		return Arrays.asList(PointStyle.values());
 	}
 
 	/**
@@ -563,64 +537,6 @@ public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOr
 		setRotation((RotationCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.ROTATION, rotationCallback);
-	}
-
-	/**
-	 * Returns the point style callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the point style callback, if set, otherwise <code>null</code>.
-	 */
-	public PointStyleCallback getPointStyleCallback() {
-		return pointStyleCallback;
-	}
-
-	/**
-	 * Sets the point style callback.
-	 * 
-	 * @param pointStyleCallback the point style callback.
-	 */
-	public void setPointStyle(NativeCallback pointStyleCallback) {
-		// resets callback
-		setPointStyle((PointStyleCallback) null);
-		// stores value
-		setValue(Property.POINT_STYLE, pointStyleCallback);
-	}
-
-	/**
-	 * Sets the point style callback.
-	 * 
-	 * @param pointStyleCallback the point style callback.
-	 */
-	public void setPointStyle(PointStyleCallback pointStyleCallback) {
-		// sets the callback
-		this.pointStyleCallback = pointStyleCallback;
-		// checks if callback is consistent
-		if (pointStyleCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.POINT_STYLE, pointStyleCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.POINT_STYLE);
-		}
-	}
-
-	/**
-	 * Returns a {@link PointStyle} when the callback has been activated.
-	 * 
-	 * @param context native object as context.
-	 * @return a object property value, as {@link PointStyle}
-	 */
-	private String onPointStyle(DatasetContext context) {
-		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getPointStyleCallback());
-		// checks result
-		if (result instanceof PointStyle) {
-			// is point style instance
-			PointStyle style = (PointStyle) result;
-			return style.value();
-		}
-		// default result
-		return getDefaultValues().getElements().getPoint().getPointStyle().value();
 	}
 
 }

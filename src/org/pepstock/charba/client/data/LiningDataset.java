@@ -27,7 +27,6 @@ import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.FillCallback;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
@@ -42,9 +41,7 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Array;
-import org.pepstock.charba.client.commons.ArrayCanvas;
 import org.pepstock.charba.client.commons.ArrayDouble;
-import org.pepstock.charba.client.commons.ArrayImage;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -54,15 +51,10 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
-import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.enums.PointStyleType;
-import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.FillHandler;
 import org.pepstock.charba.client.options.HasFill;
 import org.pepstock.charba.client.options.HasSpanGaps;
@@ -76,7 +68,7 @@ import org.pepstock.charba.client.options.SpanGapHandler;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class LiningDataset extends Dataset implements HasFill, HasOrder, HasPointFillStrokeStyles, HasSpanGaps {
+public abstract class LiningDataset extends Dataset implements HasFill, HasOrder, HasPointFillStrokeStyles, HasSpanGaps, HasDataPointStyle {
 	// default label
 	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;
 
@@ -119,8 +111,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	private final CallbackProxy<ProxyDoubleCallback> pointHoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point rotation function
 	private final CallbackProxy<ProxyDoubleCallback> pointRotationCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the point style function
-	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// point background color callback instance
 	private ColorCallback<DatasetContext> pointBackgroundColorCallback = null;
@@ -142,8 +132,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	private RadiusCallback<DatasetContext> pointHoverRadiusCallback = null;
 	// point rotation callback instance
 	private RotationCallback<DatasetContext> pointRotationCallback = null;
-	// point style callback instance
-	private PointStyleCallback pointStyleCallback = null;
 	// border cap style callback instance
 	private CapStyleCallback<DatasetContext> borderCapStyleCallback = null;
 	// border dash callback instance
@@ -225,13 +213,10 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		TENSION("tension"),
 		POINT_BORDER_WIDTH("pointBorderWidth"),
 		POINT_RADIUS("pointRadius"),
-		POINT_STYLE("pointStyle"),
 		POINT_HIT_RADIUS("pointHitRadius"),
 		POINT_HOVER_BORDER_WIDTH("pointHoverBorderWidth"),
 		POINT_HOVER_RADIUS("pointHoverRadius"),
-		POINT_ROTATION("pointRotation"),
-		// internal key to store if point style is an image or not
-		CHARBA_POINT_STYLE("charbaPointStyle");
+		POINT_ROTATION("pointRotation");
 
 		// name value of property
 		private final String value;
@@ -263,6 +248,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	private final OrderHandler orderHandler;
 	// span gap handler instance
 	private final SpanGapHandler spanGapHandler;
+	// point style handler instance
+	private final DataPointStyleHandler pointStyleHandler;
 
 	/**
 	 * Creates the data set using a default and chart type related to the data set.
@@ -273,11 +260,13 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	LiningDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-		fillHandler = new LiningDatasetFillHandler(this, getDefaultValues().getElements().getLine().getFill(), getNativeObject());
+		this.fillHandler = new LiningDatasetFillHandler(this, getDefaultValues().getElements().getLine().getFill(), getNativeObject());
 		// sets new order handler
-		orderHandler = new OrderHandler(getNativeObject());
+		this.orderHandler = new OrderHandler(getNativeObject());
 		// sets span gap handler
 		this.spanGapHandler = new SpanGapHandler(this, getDefaultValues(), new DataEnvelop<>(getNativeObject(), true));
+		// sets new point style handler
+		this.pointStyleHandler = new DataPointStyleHandler(this, getNativeObject(), getDefaultValues().getElements().getPoint());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -305,8 +294,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		this.pointHoverRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getPointHoverRadiusCallback(), getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointRotationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getPointRotationCallback(), getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
-		// sets function to proxy callback in order to invoke the java interface
-		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderCapStyleCallbackProxy.setCallback(context -> onBorderCapStyle(createContext(context), getBorderCapStyleCallback()));
 		// sets function to proxy callback in order to invoke the java interface
@@ -353,6 +340,16 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	@Override
 	public SpanGapHandler getSpanGapHandler() {
 		return spanGapHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasDataPointStyle#getPointStyleHandler()
+	 */
+	@Override
+	public DataPointStyleHandler getPointStyleHandler() {
+		return pointStyleHandler;
 	}
 
 	/*
@@ -1660,125 +1657,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// then returns an empty list
 		return Collections.emptyList();
 	}
-	
-	/**
-	 * Returns the type of point style.
-	 * 
-	 * @return the type of point style
-	 */
-	public PointStyleType getPointStyleType() {
-		return getValue(Property.CHARBA_POINT_STYLE, PointStyleType.values(), PointStyleType.STRING);
-	}
-
-	/**
-	 * Sets the style of the point.
-	 * 
-	 * @param pointStyle array of the style of the point.
-	 */
-	public void setPointStyle(PointStyle... pointStyle) {
-		// resets callback and flags
-		setPointStyle((PointStyleCallback) null);
-		// stores value
-		setValueOrArray(Property.POINT_STYLE, pointStyle);
-		// manage type
-		managePointStyleType(PointStyleType.STRING);
-	}
-
-	/**
-	 * Returns the style of the point. If property is missing or not a point style, returns an empty list.
-	 * 
-	 * @return list of the style of the point. If property is missing or not a point style, returns an empty list.
-	 */
-	public List<PointStyle> getPointStyle() {
-		// checks if string as point style has been used
-		if (PointStyleType.STRING.equals(getPointStyleType()) && pointStyleCallback == null) {
-			// if not, returns point styles
-			ArrayString array = getValueOrArray(Property.POINT_STYLE, getDefaultValues().getElements().getPoint().getPointStyle());
-			return ArrayListHelper.list(PointStyle.values(), array);
-		} else {
-			// if here, means the point style as stored as images or callback or canvas
-			return ArrayListHelper.list(PointStyle.values(), new PointStyle[0]);
-		}
-	}
-
-	/**
-	 * Sets the style of the point as image.
-	 * 
-	 * @param pointStyle array of the style of the point as image.
-	 */
-	public void setPointStyle(Img... pointStyle) {
-		// resets callback and
-		// also flags
-		setPointStyle((PointStyleCallback) null);
-		// stores values
-		setValueOrArray(Property.POINT_STYLE, pointStyle);
-		// manage type
-		managePointStyleType(PointStyleType.IMAGE);
-	}
-
-	/**
-	 * Returns the style of the point as image. If property is missing or not an image, returns an empty list.
-	 * 
-	 * @return list of the style of the point as image. If property is missing or not a image, returns an empty list.
-	 */
-	public List<Img> getPointStyleAsImages() {
-		// checks if image as point style has been used
-		if (PointStyleType.IMAGE.equals(getPointStyleType()) && getPointStyleCallback() == null) {
-			// gets array
-			ArrayImage array = getValueOrArray(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
-			return ArrayListHelper.list(array);
-		} else {
-			// if here, means the point style as stored as string or canvas
-			return Collections.emptyList();
-		}
-	}
-	
-	/**
-	 * Sets the style of the point as canvas.
-	 * 
-	 * @param pointStyle array of the style of the point as canvas.
-	 */
-	public void setPointStyle(Canvas... pointStyle) {
-		// resets callback and
-		// also flags
-		setPointStyle((PointStyleCallback) null);
-		// stores values
-		setValueOrArray(Property.POINT_STYLE, pointStyle);
-		// manage type
-		managePointStyleType(PointStyleType.CANVAS);
-	}
-
-	/**
-	 * Returns the style of the point as canvas. If property is missing or not an canvas, returns an empty list.
-	 * 
-	 * @return list of the style of the point as canvas. If property is missing or not a canvas, returns an empty list.
-	 */
-	public List<Canvas> getPointStyleAsCanvas() {
-		// checks if canvas as point style has been used
-		if (PointStyleType.CANVAS.equals(getPointStyleType()) && getPointStyleCallback() == null) {
-			// gets array
-			ArrayCanvas array = getValueOrArray(Property.POINT_STYLE, Undefined.CANVAS_ELEMENT);
-			return ArrayListHelper.list(array);
-		} else {
-			// if here, means the point style as stored as string or image
-			return Collections.emptyList();
-		}
-	}
-	
-	/**
-	 * Manages the type of point style.
-	 * @param type the type to set
-	 */
-	private void managePointStyleType(PointStyleType type) {
-		// checks if options is stored
-		if (has(Property.POINT_STYLE)) {
-			setValue(Property.CHARBA_POINT_STYLE, type);
-		} else {
-			// if here, property is not there
-			// then remove property
-			remove(Property.CHARBA_POINT_STYLE);
-		}
-	}
 
 	/**
 	 * Sets the rotation of the point in degrees.
@@ -2216,47 +2094,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the point style callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the point style callback, if set, otherwise <code>null</code>.
-	 */
-	public PointStyleCallback getPointStyleCallback() {
-		return pointStyleCallback;
-	}
-
-	/**
-	 * Sets the point style callback.
-	 * 
-	 * @param pointStyleCallback the point style callback.
-	 */
-	public void setPointStyle(PointStyleCallback pointStyleCallback) {
-		// sets the callback
-		this.pointStyleCallback = pointStyleCallback;
-		// checks if callback is consistent
-		if (pointStyleCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.POINT_STYLE, pointStyleCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.POINT_STYLE);
-		}
-		// remove if exist flag
-		remove(Property.CHARBA_POINT_STYLE);
-	}
-
-	/**
-	 * Sets the point style callback.
-	 * 
-	 * @param pointStyleCallback the point style callback.
-	 */
-	public void setPointStyle(NativeCallback pointStyleCallback) {
-		// resets callback
-		setPointStyle((PointStyleCallback) null);
-		// stores value
-		setValue(Property.POINT_STYLE, pointStyleCallback);
-	}
-
-	/**
 	 * Returns the border cap style callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the border cap style callback, if set, otherwise <code>null</code>.
@@ -2653,31 +2490,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	@Override
 	protected int getDefaultHoverBorderWidth() {
 		return getDefaultValues().getElements().getLine().getHoverBorderWidth();
-	}
-
-	/**
-	 * Returns a {@link PointStyle} or {@link Img} when the callback has been activated.
-	 * 
-	 * @param context native object as context.
-	 * @return a object property value, as {@link PointStyle} or {@link Img}
-	 */
-	private Object onPointStyle(DatasetContext context) {
-		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getPointStyleCallback());
-		// checks result
-		if (result instanceof PointStyle) {
-			// is point style instance
-			PointStyle style = (PointStyle) result;
-			return style.value();
-		} else if (result instanceof Img) {
-			// is image element instance
-			return result;
-		} else if (result instanceof Canvas) {
-			// is canvas element instance
-			return result;
-		}
-		// default result
-		return getDefaultValues().getElements().getPoint().getPointStyle().value();
 	}
 
 	/**
