@@ -573,12 +573,7 @@ CharbaJsHelper.isCanvasGradient = function(obj) {
  * @return {boolean} true if the object is a HTMLCanvasElement
  */
 CharbaJsHelper.isCanvas = function(obj, key) {
-  const value = obj[key];
-  if (typeof value  === 'object'){
-  	const type = value.toString();
-	return type === '[object HTMLCanvasElement]';
-  } 
-  return false;
+  return obj[key] instanceof HTMLCanvasElement;
 } 
 /**
  * Returns true if the object is a HTMLImageElement.
@@ -588,12 +583,7 @@ CharbaJsHelper.isCanvas = function(obj, key) {
  * @return {boolean} true if the object is a HTMLImageElement
  */
 CharbaJsHelper.isImage = function(obj, key) {
-  const value = obj[key];
-  if (typeof value  === 'object'){
-  	const type = value.toString();
-	return type === '[object HTMLImageElement]';
-  } 
-  return false;
+  return obj[key] instanceof HTMLImageElement;
 }
 /**
  * ----------------------------------------------------------------------------
