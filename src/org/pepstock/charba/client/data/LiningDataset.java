@@ -244,7 +244,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 
 	// instance of fill handler
 	private final LiningDatasetFillHandler fillHandler;
-	// instance or order handler
+	// instance of order handler
 	private final OrderHandler orderHandler;
 	// span gap handler instance
 	private final SpanGapHandler spanGapHandler;

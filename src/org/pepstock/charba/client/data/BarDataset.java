@@ -160,7 +160,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 
 	}
 
-	// instance or order handler
+	// instance order handler
 	private final OrderHandler orderHandler;
 	// bar options handler instance
 	private final BarDatasetOptionsHandler barOptionsHandler;
