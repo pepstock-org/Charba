@@ -16,9 +16,11 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultBar;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 
 /**
  * Defaults for bar option element, based on chart type.
@@ -101,11 +103,21 @@ public final class DefaultChartBar implements IsDefaultBar {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#isPointStyleAsImage()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler#getPointStyleType()
 	 */
 	@Override
-	public boolean isPointStyleAsImage() {
-		return bar.isPointStyleAsImage();
+	public PointStyleType getPointStyleType() {
+		return bar.getPointStyleType();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler#getPointStyleAsCanvas()
+	 */
+	@Override
+	public Canvas getPointStyleAsCanvas() {
+		return bar.getPointStyleAsCanvas();
 	}
 
 	/*

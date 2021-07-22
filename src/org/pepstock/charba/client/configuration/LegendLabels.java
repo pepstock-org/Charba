@@ -29,8 +29,10 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.LegendLabelItem;
 
@@ -295,12 +297,22 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 	}
 
 	/**
-	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * Sets the style of the legend, overriding point style from dataset, as canvas.<br>
+	 * Only applies if {@link LegendLabels#setUsePointStyle(boolean)} is set to <code>true</code>.
 	 * 
-	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 * @param pointStyle the style of the legend, overriding point style from dataset.
 	 */
-	public boolean isPointStyleAsImage() {
-		return getConfiguration().getLegend().getLabels().isPointStyleAsImage();
+	public void setPointStyle(Canvas pointStyle) {
+		getConfiguration().getLegend().getLabels().setPointStyle(pointStyle);
+	}
+
+	/**
+	 * Returns the type of point style.
+	 * 
+	 * @return the type of point style
+	 */
+	public PointStyleType getPointStyleType() {
+		return getConfiguration().getLegend().getLabels().getPointStyleType();
 	}
 
 	/**
@@ -310,6 +322,15 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 	 */
 	public PointStyle getPointStyle() {
 		return getConfiguration().getLegend().getLabels().getPointStyle();
+	}
+	
+	/**
+	 * Returns the style of the point as canvas.
+	 * 
+	 * @return the style of the point as canvas.
+	 */
+	public Canvas getPointStyleAsCanvas() {
+		return getConfiguration().getLegend().getLabels().getPointStyleAsCanvas();
 	}
 
 	/**

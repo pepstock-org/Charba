@@ -24,6 +24,7 @@ import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
@@ -792,6 +793,96 @@ public abstract class NativeObjectContainer {
 			// sets value
 			NativeObjectUtils.defineCallbackProperty(nativeObject, key.value(), value);
 		}
+	}
+	
+	// ------------------------------------------
+	// --- CANVAS
+	// ------------------------------------------
+	/**
+	 * Returns a value (canvas) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the property is missing
+	 * @return value of the property
+	 */
+	protected final Canvas getValue(Key key, Canvas defaultValue) {
+		// checks if the property exists
+		if (!has(key)) {
+			// if no, returns the default value
+			return defaultValue;
+		}
+		// returns value
+		return NativeObjectUtils.getCanvasProperty(nativeObject, key.value(), defaultValue);
+	}
+
+	/**
+	 * Sets a value (canvas) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValue(Key key, Canvas value) {
+		// if value is null
+		// try to remove the reference if exists
+		if (value == null) {
+			// removes property if the property exists
+			remove(key);
+		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
+			// sets value
+			NativeObjectUtils.defineCanvasProperty(nativeObject, key.value(), value);
+		}
+	}
+
+	/**
+	 * Sets a value (array or canvas) in the embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a image.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values images to be set
+	 */
+	protected final void setValueOrArray(Key key, Canvas... values) {
+		// checks if values are consistent
+		if (values != null) {
+			// checks if there is only 1 element
+			if (values.length == 1) {
+				// if 1 element, sets the object
+				setValue(key, values[0]);
+			} else {
+				// if more than 1 element, sets the array
+				setArrayValue(key, ArrayCanvas.fromOrEmpty(values));
+			}
+		} else {
+			// if not consistent, remove the property
+			remove(key);
+		}
+	}
+
+	/**
+	 * Returns a value (array) in the embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a canvas.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the value was stored as single canvas value
+	 * @return value of the property (by array)
+	 */
+	protected final ArrayCanvas getValueOrArray(Key key, Canvas defaultValue) {
+		// gets object type of key
+		ObjectType type = type(key);
+		// checks if property type
+		if (ObjectType.OBJECT.equals(type)) {
+			// if here, is a single value, therefore creates an array
+			// with only 1 element
+			return ArrayCanvas.fromOrEmpty(getValue(key, defaultValue));
+		} else if (ObjectType.ARRAY.equals(type)) {
+			// if here, is an array, therefore return it
+			return getArrayValue(key);
+		}
+		// returns default array
+		return ArrayCanvas.fromOrEmpty(defaultValue);
 	}
 
 	// ------------------------------------------

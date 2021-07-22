@@ -16,8 +16,10 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 
 /**
  * Defaults for point option element, based on chart type.
@@ -130,11 +132,21 @@ public final class DefaultChartPoint implements IsDefaultPoint {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#isPointStyleAsImage()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler#getPointStyleType()
 	 */
 	@Override
-	public boolean isPointStyleAsImage() {
-		return point.isPointStyleAsImage();
+	public PointStyleType getPointStyleType() {
+		return point.getPointStyleType();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler#getPointStyleAsCanvas()
+	 */
+	@Override
+	public Canvas getPointStyleAsCanvas() {
+		return point.getPointStyleAsCanvas();
 	}
 
 	/*

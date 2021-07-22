@@ -31,6 +31,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.options.AbstractElement;
@@ -608,12 +609,14 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 		} else if (result instanceof Img) {
 			// is image element instance
 			return result;
+		} else if (result instanceof Canvas) {
+			// is canvas element instance
+			return result;
 		}
 		// checks defaults
 		Checker.checkIfValid(defaultValue, "Default point style argument");
 		// default result
 		return defaultValue.value();
 	}
-
 
 }

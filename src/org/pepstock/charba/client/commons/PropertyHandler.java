@@ -21,6 +21,7 @@ import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
@@ -266,6 +267,31 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 	 */
 	protected final void setValueAndAddToParent(Key key, NativeCallback value) {
 		setValue(key, value);
+		// checks if the node is already added to parent
+		parent.checkAndAddToParent();
+	}
+
+	/**
+	 * Sets a value (canvas) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, Canvas value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		parent.checkAndAddToParent();
+	}
+
+	/**
+	 * Sets a value (array or canvas) in the embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a canvas.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values canvas to be set
+	 */
+	protected final void setValueOrArrayAndAddToParent(Key key, Canvas... values) {
+		setValueOrArray(key, values);
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();
 	}

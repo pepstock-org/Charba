@@ -180,6 +180,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add options builder for `ChartBackgroundColor` plugin.
   * add options builder for `ChartPointer` plugin.
   * add options builder for `HtmlLegend` plugin.
+  * add `Canvas` object as possible value for `pointStyle` option to enable custom point styles.
     
 ### Developing
 

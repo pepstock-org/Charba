@@ -34,12 +34,14 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 
 /**
  * This is a wrapper of the CHART.JS item which contains the legend item.
@@ -441,12 +443,12 @@ public class LegendItem extends AbstractNode {
 	}
 
 	/**
-	 * Returns <code>true</code> if the point style is defined as image.
+	 * Returns the type of point style.
 	 * 
-	 * @return <code>true</code> if the point style is defined as image
+	 * @return the type of point style
 	 */
-	public final boolean isPointStyleAsImage() {
-		return isType(Property.POINT_STYLE, ObjectType.OBJECT);
+	public final PointStyleType getPointStyleType() {
+		return PointStyleType.getType(this, Property.POINT_STYLE);
 	}
 
 	/**
@@ -456,10 +458,10 @@ public class LegendItem extends AbstractNode {
 	 */
 	public final PointStyle getPointStyle() {
 		// checks if is an point style and not an image
-		if (!isPointStyleAsImage()) {
+		if (PointStyleType.STRING.equals(getPointStyleType())) {
 			return getValue(Property.POINT_STYLE, PointStyle.values(), Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 		}
-		// if here, the point style is undefined or an image
+		// if here, the point style is undefined or an image or canvas
 		return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
 	}
 
@@ -470,11 +472,25 @@ public class LegendItem extends AbstractNode {
 	 */
 	public final Img getPointStyleAsImage() {
 		// checks if is an point style and not an image
-		if (isPointStyleAsImage()) {
+		if (PointStyleType.IMAGE.equals(getPointStyleType())) {
 			return getValue(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
 		}
-		// returns null because is a string
+		// returns null because is a string or canvas
 		return Undefined.IMAGE_ELEMENT;
+	}
+
+	/**
+	 * Returns the style (as canvas) of the legend box (only used if usePointStyle is true)
+	 * 
+	 * @return the style (as canvas) of the legend box
+	 */
+	public final Canvas getPointStyleAsCanvas() {
+		// checks if is an point style and not an image
+		if (PointStyleType.CANVAS.equals(getPointStyleType())) {
+			return getValue(Property.POINT_STYLE, Undefined.CANVAS_ELEMENT);
+		}
+		// returns null because is a string or image
+		return Undefined.CANVAS_ELEMENT;
 	}
 
 	/**

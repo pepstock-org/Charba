@@ -34,6 +34,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.ArcBorderRadius;
 import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.data.BarBorderWidth;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
@@ -46,6 +47,7 @@ import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.enums.Stepped;
 
 /**
@@ -598,12 +600,12 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * Returns the type of point style.
 	 * 
-	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 * @return the type of point style
 	 */
-	public boolean isPointStyleAsImage() {
-		return isType(Property.POINT_STYLE, ObjectType.OBJECT);
+	public PointStyleType getPointStyleType() {
+		return PointStyleType.getType(this, Property.POINT_STYLE);
 	}
 
 	/**
@@ -615,12 +617,29 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 */
 	public Img getPointStyleAsImage() {
 		// checks if image as point style has been used
-		if (isType(Property.POINT_STYLE, ObjectType.OBJECT)) {
+		if (PointStyleType.IMAGE.equals(getPointStyleType())) {
 			return getValue(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
 		}
-		// if here, means the point style as stored as strings
+		// if here, means the point style as stored as string or canvas
 		// returns undefined
 		return Undefined.IMAGE_ELEMENT;
+	}
+
+	/**
+	 * Returns the style of the point as canvas.<br>
+	 * If property is missing or not an canvas, returns <code>null</code>.
+	 * 
+	 * @return canvas of the style of the point as canvas.<br>
+	 *         If property is missing or not a canvas, returns <code>null</code>.
+	 */
+	public Canvas getPointStyleAsCanvas() {
+		// checks if image as point style has been used
+		if (PointStyleType.CANVAS.equals(getPointStyleType())) {
+			return getValue(Property.POINT_STYLE, Undefined.CANVAS_ELEMENT);
+		}
+		// if here, means the point style as stored as string or image
+		// returns undefined
+		return Undefined.CANVAS_ELEMENT;
 	}
 
 	/**
@@ -629,11 +648,11 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	 * @return the style of the point
 	 */
 	public PointStyle getPointStyle() {
-		// checks if image as point style has been used
-		if (isType(Property.POINT_STYLE, ObjectType.STRING)) {
+		// checks if string as point style has been used
+		if (PointStyleType.STRING.equals(getPointStyleType())) {
 			return getValue(Property.POINT_STYLE, PointStyle.values(), Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 		}
-		// if here, means the point style as stored as images
+		// if here, means the point style as stored as image or canvas
 		// then returns the default
 		return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
 	}
@@ -646,10 +665,13 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	public TooltipLabelPointStyle createTooltipLabelPointStyle() {
 		// creates an empty label point style
 		TooltipLabelPointStyle result = new TooltipLabelPointStyle();
-		// checks if point style is an image
-		if (isPointStyleAsImage()) {
-			// stores as img
+		// checks if point style is an image or canvas
+		if (PointStyleType.IMAGE.equals(getPointStyleType())) {
+			// stores as image
 			result.setPointStyle(getPointStyleAsImage());
+		} else if (PointStyleType.CANVAS.equals(getPointStyleType())) {
+			// stores as canvas
+			result.setPointStyle(getPointStyleAsCanvas());
 		} else {
 			// stores as point sytle
 			result.setPointStyle(getPointStyle());

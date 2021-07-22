@@ -46,12 +46,14 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.BarDatasetOptionsHandler;
 import org.pepstock.charba.client.options.HasBarDatasetOptions;
@@ -890,6 +892,15 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// sets data type checking if the key exists
 		setValue(InternalProperty.CHARBA_DATA_TYPE, has(CommonProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
 	}
+	
+	/**
+	 * Returns the type of point style.
+	 * 
+	 * @return the type of point style
+	 */
+	public PointStyleType getPointStyleType() {
+		return PointStyleType.getType(this, Property.POINT_STYLE);
+	}
 
 	/**
 	 * Sets the style of the point for legend.
@@ -910,10 +921,10 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	public PointStyle getPointStyle() {
 		// checks if string as point style has been used
-		if (isType(Property.POINT_STYLE, ObjectType.STRING)) {
+		if (PointStyleType.STRING.equals(getPointStyleType())) {
 			return getValue(Property.POINT_STYLE, PointStyle.values(), getDefaultValues().getElements().getBar().getPointStyle());
 		}
-		// if here, the point style is set as image
+		// if here, the point style is set as image or canvas
 		// then returns the default
 		return getDefaultValues().getElements().getBar().getPointStyle();
 	}
@@ -937,12 +948,39 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 */
 	public Img getPointStyleAsImage() {
 		// checks if image as point style has been used
-		if (isType(Property.POINT_STYLE, ObjectType.OBJECT)) {
+		if (PointStyleType.IMAGE.equals(getPointStyleType())) {
 			return getValue(Property.POINT_STYLE, getDefaultValues().getElements().getBar().getPointStyleAsImage());
 		}
 		// if here, the point style is set as string
 		// then returns the default
 		return getDefaultValues().getElements().getBar().getPointStyleAsImage();
+	}
+
+	/**
+	 * Sets the style of the point for legend as canvas.
+	 * 
+	 * @param pointStyle the style of the point for legend as canvas.
+	 */
+	public void setPointStyle(Canvas pointStyle) {
+		// reset callback
+		setPointStyle((PointStyleCallback) null);
+		// stores value
+		setValue(Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
+	 * Returns the style of the point for legend as canvas.
+	 * 
+	 * @return the style of the point for legend as canvas.
+	 */
+	public Canvas getPointStyleAsCanvas() {
+		// checks if canvas as point style has been used
+		if (PointStyleType.CANVAS.equals(getPointStyleType())) {
+			return getValue(Property.POINT_STYLE, getDefaultValues().getElements().getBar().getPointStyleAsCanvas());
+		}
+		// if here, the point style is set as string or image
+		// then returns the default
+		return getDefaultValues().getElements().getBar().getPointStyleAsCanvas();
 	}
 
 	/**
@@ -1293,6 +1331,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 			return style.value();
 		} else if (result instanceof Img) {
 			// is image element instance
+			return result;
+		} else if (result instanceof Canvas) {
+			// is canvas element instance
 			return result;
 		}
 		// default result

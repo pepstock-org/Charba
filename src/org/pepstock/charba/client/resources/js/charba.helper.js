@@ -304,6 +304,35 @@ CharbaJsObjectImageHelper.get = function(obj, key) {
 }
 /**
  * ----------------------------------------------------------------
+ * Canvas
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectCanvasHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {HTMLCanvasElement} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectCanvasHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {HTMLCanvasElement} the value of the property
+ */
+CharbaJsObjectCanvasHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
  * Native Object
  * ----------------------------------------------------------------
  * This object is providing a set of static methods used as utility
@@ -535,6 +564,36 @@ CharbaJsHelper.isCanvasPattern = function(obj) {
  */
 CharbaJsHelper.isCanvasGradient = function(obj) {
   return obj instanceof CanvasGradient;
+}
+/**
+ * Returns true if the object is a HTMLCanvasElement.
+ *
+ * @param {*} obj the object to check
+ * @param {string} key the string name of the property to test
+ * @return {boolean} true if the object is a HTMLCanvasElement
+ */
+CharbaJsHelper.isCanvas = function(obj, key) {
+  const value = obj[key];
+  if (typeof value  === 'object'){
+  	const type = value.toString();
+	return type === '[object HTMLCanvasElement]';
+  } 
+  return false;
+} 
+/**
+ * Returns true if the object is a HTMLImageElement.
+ *  
+ * @param {*} obj the object to check
+ * @param {string} key the string name of the property to test
+ * @return {boolean} true if the object is a HTMLImageElement
+ */
+CharbaJsHelper.isImage = function(obj, key) {
+  const value = obj[key];
+  if (typeof value  === 'object'){
+  	const type = value.toString();
+	return type === '[object HTMLImageElement]';
+  } 
+  return false;
 }
 /**
  * ----------------------------------------------------------------------------

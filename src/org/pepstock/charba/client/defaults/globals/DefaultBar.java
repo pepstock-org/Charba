@@ -16,9 +16,12 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultBar;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * CHART.JS default values for BAR element.
@@ -73,11 +76,21 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#isPointStyleAsImage()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler#getPointStyleType()
 	 */
 	@Override
-	public boolean isPointStyleAsImage() {
-		return false;
+	public PointStyleType getPointStyleType() {
+		return PointStyleType.STRING;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler#getPointStyleAsCanvas()
+	 */
+	@Override
+	public Canvas getPointStyleAsCanvas() {
+		return Undefined.CANVAS_ELEMENT;
 	}
 
 	/*
@@ -87,7 +100,7 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 	 */
 	@Override
 	public Img getPointStyleAsImage() {
-		return null;
+		return Undefined.IMAGE_ELEMENT;
 	}
 
 	/*

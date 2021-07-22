@@ -28,6 +28,7 @@ import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.impl.plugins.HtmlLegendItem;
 import org.pepstock.charba.client.items.Undefined;
@@ -413,7 +414,7 @@ public final class TilesFactory {
 	public static String createHtmlLegendItem(HtmlLegendItem htmlLegendItem) {
 		// checks if html legend item is consistent
 		// and the point style is not an image
-		if (htmlLegendItem != null && htmlLegendItem.getLegendItem() != null && !htmlLegendItem.getLegendItem().isPointStyleAsImage()) {
+		if (htmlLegendItem != null && htmlLegendItem.getLegendItem() != null && PointStyleType.STRING.equals(htmlLegendItem.getLegendItem().getPointStyleType())) {
 			// gets unique key
 			String key = htmlLegendItem.toUniqueKey();
 			// checks if item is cached

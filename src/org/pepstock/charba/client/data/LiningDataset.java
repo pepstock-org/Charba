@@ -42,6 +42,7 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Array;
+import org.pepstock.charba.client.commons.ArrayCanvas;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayImage;
 import org.pepstock.charba.client.commons.ArrayInteger;
@@ -53,12 +54,14 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.FillHandler;
 import org.pepstock.charba.client.options.HasFill;
@@ -1657,6 +1660,15 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// then returns an empty list
 		return Collections.emptyList();
 	}
+	
+	/**
+	 * Returns the type of point style.
+	 * 
+	 * @return the type of point style
+	 */
+	public PointStyleType getPointStyleType() {
+		return getValue(Property.CHARBA_POINT_STYLE, PointStyleType.values(), PointStyleType.STRING);
+	}
 
 	/**
 	 * Sets the style of the point.
@@ -1668,6 +1680,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		setPointStyle((PointStyleCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_STYLE, pointStyle);
+		// manage type
+		managePointStyleType(PointStyleType.STRING);
 	}
 
 	/**
@@ -1676,13 +1690,13 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @return list of the style of the point. If property is missing or not a point style, returns an empty list.
 	 */
 	public List<PointStyle> getPointStyle() {
-		// checks if image as point style has been used
-		if (!getValue(Property.CHARBA_POINT_STYLE, false) && pointStyleCallback == null) {
+		// checks if string as point style has been used
+		if (PointStyleType.STRING.equals(getPointStyleType()) && pointStyleCallback == null) {
 			// if not, returns point styles
 			ArrayString array = getValueOrArray(Property.POINT_STYLE, getDefaultValues().getElements().getPoint().getPointStyle());
 			return ArrayListHelper.list(PointStyle.values(), array);
 		} else {
-			// if here, means the point style as stored as images or callback
+			// if here, means the point style as stored as images or callback or canvas
 			return ArrayListHelper.list(PointStyle.values(), new PointStyle[0]);
 		}
 	}
@@ -1698,8 +1712,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		setPointStyle((PointStyleCallback) null);
 		// stores values
 		setValueOrArray(Property.POINT_STYLE, pointStyle);
-		// sets flag
-		setValue(Property.CHARBA_POINT_STYLE, true);
+		// manage type
+		managePointStyleType(PointStyleType.IMAGE);
 	}
 
 	/**
@@ -1709,13 +1723,60 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public List<Img> getPointStyleAsImages() {
 		// checks if image as point style has been used
-		if (getValue(Property.CHARBA_POINT_STYLE, false) && getPointStyleCallback() == null) {
+		if (PointStyleType.IMAGE.equals(getPointStyleType()) && getPointStyleCallback() == null) {
 			// gets array
 			ArrayImage array = getValueOrArray(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
 			return ArrayListHelper.list(array);
 		} else {
-			// if here, means the point style as stored as strings
+			// if here, means the point style as stored as string or canvas
 			return Collections.emptyList();
+		}
+	}
+	
+	/**
+	 * Sets the style of the point as canvas.
+	 * 
+	 * @param pointStyle array of the style of the point as canvas.
+	 */
+	public void setPointStyle(Canvas... pointStyle) {
+		// resets callback and
+		// also flags
+		setPointStyle((PointStyleCallback) null);
+		// stores values
+		setValueOrArray(Property.POINT_STYLE, pointStyle);
+		// manage type
+		managePointStyleType(PointStyleType.CANVAS);
+	}
+
+	/**
+	 * Returns the style of the point as canvas. If property is missing or not an canvas, returns an empty list.
+	 * 
+	 * @return list of the style of the point as canvas. If property is missing or not a canvas, returns an empty list.
+	 */
+	public List<Canvas> getPointStyleAsCanvas() {
+		// checks if canvas as point style has been used
+		if (PointStyleType.CANVAS.equals(getPointStyleType()) && getPointStyleCallback() == null) {
+			// gets array
+			ArrayCanvas array = getValueOrArray(Property.POINT_STYLE, Undefined.CANVAS_ELEMENT);
+			return ArrayListHelper.list(array);
+		} else {
+			// if here, means the point style as stored as string or image
+			return Collections.emptyList();
+		}
+	}
+	
+	/**
+	 * Manages the type of point style.
+	 * @param type the type to set
+	 */
+	private void managePointStyleType(PointStyleType type) {
+		// checks if options is stored
+		if (has(Property.POINT_STYLE)) {
+			setValue(Property.CHARBA_POINT_STYLE, type);
+		} else {
+			// if here, property is not there
+			// then remove property
+			remove(Property.CHARBA_POINT_STYLE);
 		}
 	}
 

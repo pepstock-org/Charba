@@ -26,6 +26,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
@@ -342,6 +343,15 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 * @param pointStyle the style (as image) of the legend box
 	 */
 	public void setPointStyle(Img pointStyle) {
+		setValue(LegendItem.Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
+	 * Sets the style (as canvas) of the legend box (only used if usePointStyle is true)
+	 * 
+	 * @param pointStyle the style (as canvas) of the legend box
+	 */
+	public void setPointStyle(Canvas pointStyle) {
 		setValue(LegendItem.Property.POINT_STYLE, pointStyle);
 	}
 

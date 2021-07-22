@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
@@ -138,6 +139,17 @@ final class NativeObjectUtils {
 		NativeJsObjectImage.set(object, key, value);
 	}
 
+	/**
+	 * Defines a new property directly on object object, or modifies an existing property.
+	 * 
+	 * @param object native object to be managed
+	 * @param key the name of the property to be defined or modified.
+	 * @param value the object associated with the property.
+	 */
+	static void defineCanvasProperty(NativeObject object, String key, Canvas value) {
+		NativeJsObjectCanvas.set(object, key, value);
+	}
+	
 	/**
 	 * Defines a new property directly on object object, or modifies an existing property.
 	 * 
@@ -317,6 +329,24 @@ final class NativeObjectUtils {
 		return defaultValue;
 	}
 
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param object native object to be managed
+	 * @param key the name of the property to test.
+	 * @param defaultValue default value if the property is missing
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	static Canvas getCanvasProperty(NativeObject object, String key, Canvas defaultValue) {
+		// checks if the property is present
+		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
+			// returns the descriptor
+			return NativeJsObjectCanvas.get(object, key);
+		}
+		// if here, property does not exist
+		return defaultValue;
+	}
+	
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 

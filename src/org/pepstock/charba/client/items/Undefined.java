@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 
 /**
@@ -49,6 +50,11 @@ public final class Undefined {
 	 * Default value for ImageElement instances, <b>null</b>.
 	 */
 	public static final Img IMAGE_ELEMENT = null;
+
+	/**
+	 * Default value for HTMLCanvasElement instances, <b>null</b>.
+	 */
+	public static final Canvas CANVAS_ELEMENT = null;
 
 	/**
 	 * To avoid any instantiation

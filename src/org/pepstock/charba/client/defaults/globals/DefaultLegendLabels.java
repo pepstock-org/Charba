@@ -18,8 +18,10 @@ package org.pepstock.charba.client.defaults.globals;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -35,10 +37,6 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	private static final int DEFAULT_BOX_WIDTH = 40;
 
 	private static final boolean DEFAULT_USE_POINT_STYLE = false;
-
-	private static final boolean DEFAULT_POINT_STYLE_AS_IMG = false;
-
-	private static final Img DEFAULT_POINT_STYLE_IMG = Undefined.IMAGE_ELEMENT;
 
 	private final DefaultRoutedFont font = new DefaultRoutedFont();
 
@@ -122,11 +120,21 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#isPointStyleAsImage()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler#getPointStyleType()
 	 */
 	@Override
-	public boolean isPointStyleAsImage() {
-		return DEFAULT_POINT_STYLE_AS_IMG;
+	public PointStyleType getPointStyleType() {
+		return PointStyleType.STRING;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler#getPointStyleAsCanvas()
+	 */
+	@Override
+	public Canvas getPointStyleAsCanvas() {
+		return Undefined.CANVAS_ELEMENT;
 	}
 
 	/*
@@ -136,7 +144,7 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	 */
 	@Override
 	public Img getPointStyleAsImage() {
-		return DEFAULT_POINT_STYLE_IMG;
+		return Undefined.IMAGE_ELEMENT;
 	}
 
 	/*

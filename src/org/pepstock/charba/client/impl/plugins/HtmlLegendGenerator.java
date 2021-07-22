@@ -34,6 +34,8 @@ import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.LegendLabels;
 import org.pepstock.charba.client.configuration.LegendTitle;
 import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.elements.Canvas;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.elements.Span;
@@ -48,6 +50,7 @@ import org.pepstock.charba.client.dom.enums.TextDecoration;
 import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.dom.safehtml.SafeHtmlBuilder;
+import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.items.DatasetElement;
@@ -471,7 +474,7 @@ final class HtmlLegendGenerator {
 		// gets legend label item
 		LegendLabelItem item = htmlLegendItem.getLegendItem();
 		// checks if point style is an image
-		if (item.isPointStyleAsImage()) {
+		if (PointStyleType.IMAGE.equals(item.getPointStyleType())) {
 			// gets point style image
 			Img image = item.getPointStyleAsImage();
 			// if here, apply the point style as image
@@ -481,6 +484,19 @@ final class HtmlLegendGenerator {
 			// sets the image size to color element
 			color.getStyle().setWidth(Unit.PX.format(image.getWidth()));
 			color.getStyle().setHeight(Unit.PX.format(image.getHeight()));
+		} else if (PointStyleType.CANVAS.equals(item.getPointStyleType())) {
+			// checks if point style is an canvas
+			// gets point style canvas
+			Canvas canvas = item.getPointStyleAsCanvas();
+			// gets canvas pattern
+			CanvasPatternItem pattern = canvas.getContext2d().createPattern(canvas, Repetition.NO_REPEAT);
+			// if here, apply the point style as canvas
+			String canvasAsCss = Utilities.toCSSBackgroundProperty(Utilities.getImageURLFromCanvasPattern(pattern, canvas.getWidth(), canvas.getHeight()));
+			// applies the point style as background to color element
+			color.getStyle().setBackground(canvasAsCss);
+			// sets the canvas size to color element
+			color.getStyle().setWidth(Unit.PX.format(canvas.getWidth()));
+			color.getStyle().setHeight(Unit.PX.format(canvas.getHeight()));
 		} else {
 			// calculated size which is ALWAYS a square for point styles
 			int size = Math.min(width, height);

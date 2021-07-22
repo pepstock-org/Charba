@@ -76,6 +76,18 @@ CharbaJsHelper.isCanvasPattern = function(object) {};
  */
 CharbaJsHelper.isCanvasGradient = function(object) {};
 /**
+ * @param {*} obj 
+ * @param {string} key
+ * @return {boolean} 
+ */
+CharbaJsHelper.isCanvas = function(obj, key) {}; 
+/**
+ * @param {*} obj
+ * @param {string} key
+ * @return {boolean}
+ */
+CharbaJsHelper.isImage = function(obj, key) {};
+/**
  * @constructor
  * @return {CharbaJsPluginHelper}
  */
@@ -506,6 +518,24 @@ CharbaJsObjectImageHelper.set = function(object, key, value) {};
  * @return {HTMLImageElement}
  */
 CharbaJsObjectImageHelper.get = function(object, key) {};
+/**
+ * @constructor
+ * @return {CharbaJsObjectCanvasHelper}
+ */
+function CharbaJsObjectCanvasHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {HTMLCanvasElement} value
+ * @return {undefined}
+ */
+CharbaJsObjectCanvasHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {HTMLCanvasElement}
+ */
+CharbaJsObjectCanvasHelper.get = function(object, key) {};
 /**
  * @constructor
  * @return {CharbaJsObjectNativeObjectHelper}

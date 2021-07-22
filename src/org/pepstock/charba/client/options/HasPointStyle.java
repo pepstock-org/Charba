@@ -17,8 +17,10 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -77,19 +79,19 @@ interface HasPointStyle extends IsDefaultPointStyleHandler {
 	}
 
 	/**
-	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * Returns the type of point style.
 	 * 
-	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 * @return the type of point style
 	 */
 	@Override
-	default boolean isPointStyleAsImage() {
+	default PointStyleType getPointStyleType() {
 		// checks if point style handler is consistent
 		if (getPointStyleHandler() != null) {
-			return getPointStyleHandler().isPointStyleAsImage();
+			return getPointStyleHandler().getPointStyleType();
 		}
 		// if here, point style handler is not consistent
-		// uses the default false
-		return false;
+		// uses the default
+		return IsDefaultPointStyleHandler.super.getPointStyleType();
 	}
 
 	/**
@@ -109,4 +111,35 @@ interface HasPointStyle extends IsDefaultPointStyleHandler {
 		// uses undefined
 		return Undefined.IMAGE_ELEMENT;
 	}
+	
+	/**
+	 * Sets the style of the point as canvas.
+	 * 
+	 * @param pointStyle canvas element of the style of the point as canvas.
+	 */
+	default void setPointStyle(Canvas pointStyle) {
+		// checks if point style handler is consistent
+		if (getPointStyleHandler() != null) {
+			getPointStyleHandler().setPointStyle(pointStyle);
+		}
+	}
+	
+	/**
+	 * Returns the style of the point as canvas.<br>
+	 * If property is missing or not an canvas, returns <code>null</code>.
+	 * 
+	 * @return image of the style of the point as canvas.<br>
+	 *         If property is missing or not a canvas, returns <code>null</code>.
+	 */
+	@Override
+	default Canvas getPointStyleAsCanvas() {
+		// checks if point style handler is consistent
+		if (getPointStyleHandler() != null) {
+			return getPointStyleHandler().getPointStyleAsCanvas();
+		}
+		// if here, point style handler is not consistent
+		// uses undefined
+		return Undefined.CANVAS_ELEMENT;
+	}
+
 }

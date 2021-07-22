@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.commons;
 
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.Img;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -120,4 +122,21 @@ final class NativeJsHelper {
 	 */
 	static native boolean isCanvasGradient(Object object);
 
+	/**
+	 * Returns <code>true</code> if the object is a {@link Canvas}.
+	 * 
+	 * @param object the object instance on which to check
+	 * @param key the string name of the property to test.
+	 * @return <code>true</code> if the object is a {@link Canvas}
+	 */
+	static native boolean isCanvas(NativeObject object, String key);
+
+	/**
+	 * Returns <code>true</code> if the object is a {@link Img}.
+	 * 
+	 * @param object the object instance on which to check
+	 * @param key the string name of the property to test.
+	 * @return <code>true</code> if the object is a {@link Img}
+	 */
+	static native boolean isImage(NativeObject object, String key);
 }

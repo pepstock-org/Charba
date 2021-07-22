@@ -29,9 +29,11 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultBar;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.options.AbstractElement;
 
 /**
@@ -221,7 +223,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	/**
 	 * Sets the style of the point.
 	 * 
-	 * @param pointStyle array of the style of the point.
+	 * @param pointStyle the style of the point.
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		// resets callback
@@ -231,9 +233,9 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	}
 
 	/**
-	 * Sets the style of the point as image .
+	 * Sets the style of the point as image.
 	 * 
-	 * @param pointStyle array of the style of the point.
+	 * @param pointStyle the style of the point.
 	 */
 	public void setPointStyle(Img pointStyle) {
 		// resets callback
@@ -243,12 +245,24 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	}
 
 	/**
-	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * Sets the style of the point as canvas.
 	 * 
-	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 * @param pointStyle the style of the point.
 	 */
-	public boolean isPointStyleAsImage() {
-		return getConfiguration().getElements().getBar().isPointStyleAsImage();
+	public void setPointStyle(Canvas pointStyle) {
+		// resets callback
+		setPointStyle((PointStyleCallback)null);
+		// stores value
+		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
+	}
+	
+	/**
+	 * Returns the type of point style.
+	 * 
+	 * @return the type of point style
+	 */
+	public PointStyleType getPointStyleType() {
+		return getConfiguration().getElements().getBar().getPointStyleType();
 	}
 
 	/**
@@ -267,6 +281,15 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public Img getPointStyleAsImage() {
 		return getConfiguration().getElements().getBar().getPointStyleAsImage();
+	}
+
+	/**
+	 * Returns the style of the point as canvas.
+	 * 
+	 * @return the style of the point as canvas.
+	 */
+	public Canvas getPointStyleAsCanvas() {
+		return getConfiguration().getElements().getBar().getPointStyleAsCanvas();
 	}
 
 	/**

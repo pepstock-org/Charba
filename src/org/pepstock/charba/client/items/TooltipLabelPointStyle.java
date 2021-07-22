@@ -19,9 +19,10 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 
 /**
  * This object contains the point style info when a label in the tooltip.<br>
@@ -91,10 +92,10 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	 */
 	public PointStyle getPointStyle() {
 		// checks if image as point style has been used
-		if (isType(Property.POINT_STYLE, ObjectType.STRING)) {
+		if (PointStyleType.STRING.equals(getPointStyleType())) {
 			return getValue(Property.POINT_STYLE, PointStyle.values(), PointStyle.CIRCLE);
 		}
-		// if here, means the point style as stored as images
+		// if here, means the point style as stored as image or canvas
 		// then returns the default
 		return PointStyle.CIRCLE;
 	}
@@ -108,21 +109,40 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	 */
 	public Img getPointStyleAsImage() {
 		// checks if image as point style has been used
-		if (isType(Property.POINT_STYLE, ObjectType.OBJECT)) {
+		// checks if image as point style has been used
+		if (PointStyleType.IMAGE.equals(getPointStyleType())) {
 			return getValue(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
 		}
-		// if here, means the point style as stored as strings
+		// if here, means the point style as stored as string or canvas
 		// returns undefined
 		return Undefined.IMAGE_ELEMENT;
 	}
 
 	/**
-	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * Returns the style of the point as canvas.<br>
+	 * If property is missing or not an canvas, returns <code>null</code>.
 	 * 
-	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 * @return image of the style of the point as canvas.<br>
+	 *         If property is missing or not a canvas, returns <code>null</code>.
 	 */
-	public boolean isPointStyleAsImage() {
-		return isType(Property.POINT_STYLE, ObjectType.OBJECT);
+	public Canvas getPointStyleAsCanvas() {
+		// checks if image as point style has been used
+		// checks if image as point style has been used
+		if (PointStyleType.CANVAS.equals(getPointStyleType())) {
+			return getValue(Property.POINT_STYLE, Undefined.CANVAS_ELEMENT);
+		}
+		// if here, means the point style as stored as string or image
+		// returns undefined
+		return Undefined.CANVAS_ELEMENT;
+	}
+
+	/**
+	 * Returns the type of point style.
+	 * 
+	 * @return the type of point style
+	 */
+	public PointStyleType getPointStyleType() {
+		return PointStyleType.getType(this, Property.POINT_STYLE);
 	}
 
 	/**
@@ -143,6 +163,15 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 		setValue(Property.POINT_STYLE, pointStyle);
 	}
 
+	/**
+	 * Sets the style of the point as canvas.
+	 * 
+	 * @param pointStyle canvas element of the style of the point as canvas.
+	 */
+	public void setPointStyle(Canvas pointStyle) {
+		setValue(Property.POINT_STYLE, pointStyle);
+	}
+	
 	/**
 	 * Sets the rotation of label in degrees.
 	 * 

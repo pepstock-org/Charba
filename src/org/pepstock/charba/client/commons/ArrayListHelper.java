@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 
 /**
@@ -85,6 +86,19 @@ public final class ArrayListHelper {
 		// if values not consistent
 		// creates an empty list
 		return new ArrayImageList(values);
+	}
+
+	/**
+	 * Creates a array list of canvas by a java script array of canvas.
+	 * 
+	 * @param values array of elements to load when the list is creating.
+	 * @return a array list of canvas instance
+	 */
+	public static ArrayCanvasList list(ArrayCanvas values) {
+		// creates the list
+		// if values not consistent
+		// creates an empty list
+		return new ArrayCanvasList(values);
 	}
 
 	/**
@@ -212,9 +226,19 @@ public final class ArrayListHelper {
 	 * Creates a array list of images by a java script array of images.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance
+	 * @return a array list of images instance
 	 */
 	public static List<Img> unmodifiableList(ArrayImage values) {
+		return Collections.unmodifiableList(list(values));
+	}
+
+	/**
+	 * Creates a array list of canvas by a java script array of canvas.
+	 * 
+	 * @param values array of elements to load when the list is creating.
+	 * @return a array list of canvas instance
+	 */
+	public static List<Canvas> unmodifiableList(ArrayCanvas values) {
 		return Collections.unmodifiableList(list(values));
 	}
 

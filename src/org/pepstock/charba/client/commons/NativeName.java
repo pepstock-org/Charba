@@ -99,6 +99,11 @@ public final class NativeName {
 	public static final String JS_OBJECT_IMAGE_HELPER = "CharbaJsObjectImageHelper";
 
 	/**
+	 * Constant to bind java script object as {@link NativeJsObjectCanvas} with name <b>{@value JS_OBJECT_CANVAS_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_CANVAS_HELPER = "CharbaJsObjectCanvasHelper";
+
+	/**
 	 * Constant to bind java script object as {@link NativeJsObjectObject} with name <b>{@value JS_OBJECT_NATIVE_OBJECT_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_OBJECT_NATIVE_OBJECT_HELPER = "CharbaJsObjectNativeObjectHelper";

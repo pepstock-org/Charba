@@ -17,8 +17,10 @@ package org.pepstock.charba.client.commons;
 
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.dom.MutationObserverInit;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -183,6 +185,38 @@ public final class JsHelper {
 			return NativeJsHelper.isCanvasGradient(object);
 		}
 		// if here, argument is not consistent
+		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> if the object is a {@link Canvas}.
+	 * 
+	 * @param object the object instance on which to check
+	 * @param key the string name of the property to test.
+	 * @return <code>true</code> if the object is a {@link Canvas}
+	 */
+	public boolean isCanvas(NativeObjectContainer object, Key key) {
+		// checks consistency of arguments
+		if (object != null && Key.isValid(key) && object.has(key)) {
+			return NativeJsHelper.isCanvas(object.getNativeObject(), key.value());
+		}
+		// if here, arguments are not consistent
+		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> if the object is a {@link Img}.
+	 * 
+	 * @param object the object instance on which to check
+	 * @param key the string name of the property to test.
+	 * @return <code>true</code> if the object is a {@link Img}
+	 */
+	public boolean isImage(NativeObjectContainer object, Key key) {
+		// checks consistency of arguments
+		if (object != null && Key.isValid(key) && object.has(key)) {
+			return NativeJsHelper.isImage(object.getNativeObject(), key.value());
+		}
+		// if here, arguments are not consistent
 		return false;
 	}
 

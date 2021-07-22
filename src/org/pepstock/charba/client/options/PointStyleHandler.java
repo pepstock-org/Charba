@@ -18,11 +18,12 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -81,23 +82,8 @@ final class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandler
 	 * @param pointStyle array of the style of the point.
 	 */
 	void setPointStyle(PointStyle pointStyle) {
+		// stores value
 		setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
-	}
-
-	/**
-	 * Returns the style of the point.
-	 * 
-	 * @return the style of the point or <code>null</code> if point style is set as image
-	 */
-
-	PointStyle getPointStyle() {
-		// checks if image as point style has been used
-		if (isType(Property.POINT_STYLE, ObjectType.STRING)) {
-			return getValue(Property.POINT_STYLE, PointStyle.values(), getDefaultValues().getPointStyle());
-		}
-		// if here, means the point style as stored as images
-		// then returns the default
-		return getDefaultValues().getPointStyle();
 	}
 
 	/**
@@ -110,14 +96,38 @@ final class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandler
 	}
 
 	/**
-	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * Sets the style of the point as canvas.
 	 * 
-	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 * @param pointStyle canvas element of the style of the point as canvas.
 	 */
-	boolean isPointStyleAsImage() {
-		return isType(Property.POINT_STYLE, ObjectType.OBJECT);
+	void setPointStyle(Canvas pointStyle) {
+		setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
 	}
 
+	/**
+	 * Returns the type of point style.
+	 * 
+	 * @return the type of point style
+	 */
+	PointStyleType getPointStyleType() {
+		return PointStyleType.getType(getParent(), Property.POINT_STYLE);
+	}
+
+	/**
+	 * Returns the style of the point.
+	 * 
+	 * @return the style of the point or <code>null</code> if point style is set as image
+	 */
+	PointStyle getPointStyle() {
+		// checks if string as point style has been used
+		if (PointStyleType.STRING.equals(getPointStyleType())) {
+			return getValue(Property.POINT_STYLE, PointStyle.values(), getDefaultValues().getPointStyle());
+		}
+		// if here, means the point style as stored as image or canvas
+		// then returns the default
+		return getDefaultValues().getPointStyle();
+	}
+	
 	/**
 	 * Returns the style of the point as image.<br>
 	 * If property is missing or not an image, returns <code>null</code>.
@@ -127,11 +137,29 @@ final class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandler
 	 */
 	Img getPointStyleAsImage() {
 		// checks if image as point style has been used
-		if (isType(Property.POINT_STYLE, ObjectType.OBJECT)) {
-			return getValue(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
+		if (PointStyleType.IMAGE.equals(getPointStyleType())) {
+			return getValue(Property.POINT_STYLE, getDefaultValues().getPointStyleAsImage());
 		}
-		// if here, means the point style as stored as strings
-		// returns undefined
-		return Undefined.IMAGE_ELEMENT;
+		// if here, means the point style as stored as string or canvas
+		// returns undefined if the property is not set or default
+		return has(Property.POINT_STYLE) ? Undefined.IMAGE_ELEMENT : getDefaultValues().getPointStyleAsImage();
 	}
+
+	/**
+	 * Returns the style of the point as canvas.<br>
+	 * If property is missing or not an canvas, returns <code>null</code>.
+	 * 
+	 * @return canvas of the style of the point as canvas.<br>
+	 *         If property is missing or not a canvas, returns <code>null</code>.
+	 */
+	Canvas getPointStyleAsCanvas() {
+		// checks if canvas as point style has been used
+		if (PointStyleType.CANVAS.equals(getPointStyleType())) {
+			return getValue(Property.POINT_STYLE, getDefaultValues().getPointStyleAsCanvas());
+		}
+		// if here, means the point style as stored as string or image
+		// returns undefined if the property is not set or default
+		return has(Property.POINT_STYLE) ? Undefined.CANVAS_ELEMENT : getDefaultValues().getPointStyleAsCanvas();
+	}
+
 }

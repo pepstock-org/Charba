@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -37,12 +39,12 @@ public interface IsDefaultPointStyleHandler {
 	}
 
 	/**
-	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * Returns the type of point style.
 	 * 
-	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 * @return the type of point style
 	 */
-	default boolean isPointStyleAsImage() {
-		return false;
+	default PointStyleType getPointStyleType() {
+		return PointStyleType.STRING;
 	}
 
 	/**
@@ -54,6 +56,17 @@ public interface IsDefaultPointStyleHandler {
 	 */
 	default Img getPointStyleAsImage() {
 		return Undefined.IMAGE_ELEMENT;
+	}
+
+	/**
+	 * Returns the style of the point as canvas.<br>
+	 * If property is missing or not an canvas, returns <code>null</code>.
+	 * 
+	 * @return image of the style of the point as canvas.<br>
+	 *         If property is missing or not a canvas, returns <code>null</code>.
+	 */
+	default Canvas getPointStyleAsCanvas() {
+		return Undefined.CANVAS_ELEMENT;
 	}
 
 }

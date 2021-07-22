@@ -27,6 +27,7 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.options.AbstractElement;
@@ -162,7 +163,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	/**
 	 * Sets the style of the point.
 	 * 
-	 * @param pointStyle array of the style of the point.
+	 * @param pointStyle the style of the point.
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		// resets callback
@@ -172,11 +173,11 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	}
 
 	/**
-	 * Sets the style of the point as image .
+	 * Sets the style of the point as canvas.
 	 * 
-	 * @param pointStyle array of the style of the point.
+	 * @param pointStyle the style of the point.
 	 */
-	public void setPointStyle(Img pointStyle) {
+	public void setPointStyle(Canvas pointStyle) {
 		// resets callback
 		setPointStyle((PointStyleCallback) null);
 		// stores value
@@ -184,18 +185,30 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	}
 
 	/**
-	 * Returns <code>true</code> if the point style is set by an {@link Img}.
+	 * Sets the style of the point as image.
 	 * 
-	 * @return <code>true</code> if the point style is set by an {@link Img}
+	 * @param pointStyle the style of the point.
 	 */
-	public boolean isPointStyleAsImage() {
-		return getConfiguration().getElements().getPoint().isPointStyleAsImage();
+	public void setPointStyle(Img pointStyle) {
+		// resets callback
+		setPointStyle((PointStyleCallback) null);
+		// stores value
+		getConfiguration().getElements().getPoint().setPointStyle(pointStyle);
+	}
+	
+	/**
+	 * Returns the style of the point as canvas.
+	 * 
+	 * @return the style of the point as canvas.
+	 */
+	public Canvas getPointStyleAsCanvas() {
+		return getConfiguration().getElements().getPoint().getPointStyleAsCanvas();
 	}
 
 	/**
-	 * Returns the style of the point.
+	 * Returns the style of the legend.
 	 * 
-	 * @return the style of the point.
+	 * @return the style of the legend.
 	 */
 	public PointStyle getPointStyle() {
 		return getConfiguration().getElements().getPoint().getPointStyle();

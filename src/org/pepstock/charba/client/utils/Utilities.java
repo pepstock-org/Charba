@@ -240,7 +240,6 @@ public final class Utilities {
 	 * @param height height of image applied to canvasPattern
 	 */
 	public static String toCSSBackgroundProperty(Pattern pattern, int width, int height) {
-		// Math.max(width, TilesFactoryDefaults.DEFAULT_SIZE)
 		// checks if pattern argument is consistent
 		if (pattern != null) {
 			// gets image and canvas instance
@@ -346,7 +345,7 @@ public final class Utilities {
 	 * @param height height of image applied to canvasPattern
 	 * @return a data URL for the current content of the canvas pattern
 	 */
-	private static String getImageURLFromCanvasPattern(CanvasPatternItem pattern, int width, int height) {
+	public static String getImageURLFromCanvasPattern(CanvasPatternItem pattern, int width, int height) {
 		// checks if argument is consistent
 		// checks if canvas is created
 		// if not returns an empty string
