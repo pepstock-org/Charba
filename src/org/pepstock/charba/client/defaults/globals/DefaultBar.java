@@ -86,21 +86,21 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler#getPointStyleAsCanvas()
-	 */
-	@Override
-	public Canvas getPointStyleAsCanvas() {
-		return Undefined.CANVAS_ELEMENT;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyleAsImage()
 	 */
 	@Override
 	public Img getPointStyleAsImage() {
 		return Undefined.IMAGE_ELEMENT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler#getPointStyleAsCanvas()
+	 */
+	@Override
+	public Canvas getPointStyleAsCanvas() {
+		return Undefined.CANVAS_ELEMENT;
 	}
 
 	/*
