@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
 
@@ -25,6 +26,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  *
  * @see PointStyle
  * @see Img
+ * @see Canvas
  */
 public interface PointStyleCallback extends Scriptable<Object, DatasetContext> {
 

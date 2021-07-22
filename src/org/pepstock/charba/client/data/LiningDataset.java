@@ -2672,6 +2672,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		} else if (result instanceof Img) {
 			// is image element instance
 			return result;
+		} else if (result instanceof Canvas) {
+			// is canvas element instance
+			return result;
 		}
 		// default result
 		return getDefaultValues().getElements().getPoint().getPointStyle().value();
