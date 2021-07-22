@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 
 /**
- * Utility to cast elements created in the other DOM tree engines in the a Charba one.
+ * Utility to cast elements created in the other DOM tree engines in CHARBA elements.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -31,6 +31,16 @@ public final class CastHelper {
 	 */
 	private CastHelper() {
 		// do nothing
+	}
+
+	/**
+	 * Returns a {@link Canvas} object casting the argument.
+	 * 
+	 * @param object object to cast to a <b>canvas</b>
+	 * @return a {@link Canvas} object
+	 */
+	public static Canvas toCanvas(Object object) {
+		return JsHelper.get().cast(checkAndGetObject(object));
 	}
 
 	/**
