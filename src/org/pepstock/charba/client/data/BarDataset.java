@@ -255,7 +255,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @see org.pepstock.charba.client.data.HasOrder#getOrderHandler()
 	 */
 	@Override
-	public OrderHandler getOrderHandler() {
+	public final OrderHandler getOrderHandler() {
 		return orderHandler;
 	}
 
@@ -265,7 +265,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @see org.pepstock.charba.client.options.HasBarDatasetOptions#getDatasetOptionsHandler()
 	 */
 	@Override
-	public BarDatasetOptionsHandler getDatasetOptionsHandler() {
+	public final BarDatasetOptionsHandler getDatasetOptionsHandler() {
 		return barOptionsHandler;
 	}
 

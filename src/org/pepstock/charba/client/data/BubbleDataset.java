@@ -192,7 +192,7 @@ public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOr
 	 * @see org.pepstock.charba.client.data.HasOrder#getOrderHandler()
 	 */
 	@Override
-	public OrderHandler getOrderHandler() {
+	public final OrderHandler getOrderHandler() {
 		return orderHandler;
 	}
 
@@ -202,7 +202,7 @@ public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOr
 	 * @see org.pepstock.charba.client.data.HasDataPointStyle#getPointStyleHandler()
 	 */
 	@Override
-	public DataPointStyleHandler getPointStyleHandler() {
+	public final DataPointStyleHandler getPointStyleHandler() {
 		return pointStyleHandler;
 	}
 

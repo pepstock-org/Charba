@@ -328,7 +328,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @see org.pepstock.charba.client.data.HasOrder#getOrderHandler()
 	 */
 	@Override
-	public OrderHandler getOrderHandler() {
+	public final OrderHandler getOrderHandler() {
 		return orderHandler;
 	}
 
@@ -338,7 +338,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @see org.pepstock.charba.client.options.HasSpanGaps#getSpanGapHandler()
 	 */
 	@Override
-	public SpanGapHandler getSpanGapHandler() {
+	public final SpanGapHandler getSpanGapHandler() {
 		return spanGapHandler;
 	}
 
@@ -348,7 +348,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @see org.pepstock.charba.client.data.HasDataPointStyle#getPointStyleHandler()
 	 */
 	@Override
-	public DataPointStyleHandler getPointStyleHandler() {
+	public final DataPointStyleHandler getPointStyleHandler() {
 		return pointStyleHandler;
 	}
 
