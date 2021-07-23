@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.NumberFormatCallback;
 import org.pepstock.charba.client.options.IsNumberFormat;
 
 /**
@@ -24,6 +26,13 @@ import org.pepstock.charba.client.options.IsNumberFormat;
  *
  */
 public interface IsNumericTick {
+	
+	/**
+	 * Returns the linear tick options handler instance, for callbacks.
+	 * 
+	 * @return the linear tick options handler instance, for callbacks
+	 */
+	NumericTickOptionsHandler getTickOptionsHandler();
 
 	/**
 	 * Returns the number format instance.
@@ -31,5 +40,44 @@ public interface IsNumericTick {
 	 * @return the number format instance
 	 */
 	IsNumberFormat getNumberFormat();
+	
+	/**
+	 * Returns the callback to set the number formatting options.
+	 * 
+	 * @return the callback instance to use
+	 */
+	default NumberFormatCallback getNumberFormatCallback() {
+		// checks if options handler is consistent
+		if (getTickOptionsHandler() != null) {
+			return getTickOptionsHandler().getNumberFormatCallback();
+		}
+		// if here, handler is not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Sets the number formatting options.
+	 * 
+	 * @param numberFormatCallback the callback instance to use
+	 */
+	default void setNumberFormat(NumberFormatCallback numberFormatCallback) {
+		// checks if options handler is consistent
+		if (getTickOptionsHandler() != null) {
+			getTickOptionsHandler().setNumberFormat(numberFormatCallback);
+		}
+	}
+
+	/**
+	 * Sets the number formatting options.
+	 * 
+	 * @param numberFormatCallback the callback instance to use
+	 */
+	default void setNumberFormat(NativeCallback numberFormatCallback) {
+		// checks if options handler is consistent
+		if (getTickOptionsHandler() != null) {
+			getTickOptionsHandler().setNumberFormat(numberFormatCallback);
+		}
+	}
 
 }

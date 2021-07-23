@@ -49,13 +49,6 @@ public final class DefaultNumberFormatOptions extends DefaultBaseFormatOptions i
 
 	private static final int DEFAULT_MAXIMUM_SIGNIFICANT_DIGITS = 21;
 
-	/**
-	 * To avoid any instantiation
-	 */
-	DefaultNumberFormatOptions() {
-		// do nothing
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

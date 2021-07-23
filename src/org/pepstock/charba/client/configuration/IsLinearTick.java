@@ -42,7 +42,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 * 
 	 * @return the linear tick options handler instance, for callbacks
 	 */
-	LinearTickOptionsHandler getLinearTickOptionsHandler();
+	@Override
+	LinearTickOptionsHandler getTickOptionsHandler();
 
 	/**
 	 * Sets the number of ticks to generate.<br>
@@ -171,8 +172,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default CountCallback getCountCallback() {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			return getLinearTickOptionsHandler().getCountCallback();
+		if (getTickOptionsHandler() != null) {
+			return getTickOptionsHandler().getCountCallback();
 		}
 		// if here, handler is not consistent
 		// then returns null
@@ -186,8 +187,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default void setCount(CountCallback countCallback) {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			getLinearTickOptionsHandler().setCount(countCallback);
+		if (getTickOptionsHandler() != null) {
+			getTickOptionsHandler().setCount(countCallback);
 		}
 	}
 
@@ -198,8 +199,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default void setCount(NativeCallback countCallback) {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			getLinearTickOptionsHandler().setCount(countCallback);
+		if (getTickOptionsHandler() != null) {
+			getTickOptionsHandler().setCount(countCallback);
 		}
 	}
 
@@ -210,8 +211,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default MaxTicksLimitCallback getMaxTicksLimitCallback() {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			return getLinearTickOptionsHandler().getMaxTicksLimitCallback();
+		if (getTickOptionsHandler() != null) {
+			return getTickOptionsHandler().getMaxTicksLimitCallback();
 		}
 		// if here, handler is not consistent
 		// then returns null
@@ -225,8 +226,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default void setMaxTicksLimit(MaxTicksLimitCallback maxTicksLimitCallback) {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			getLinearTickOptionsHandler().setMaxTicksLimit(maxTicksLimitCallback);
+		if (getTickOptionsHandler() != null) {
+			getTickOptionsHandler().setMaxTicksLimit(maxTicksLimitCallback);
 		}
 	}
 
@@ -237,8 +238,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default void setMaxTicksLimit(NativeCallback maxTicksLimitCallback) {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			getLinearTickOptionsHandler().setMaxTicksLimit(maxTicksLimitCallback);
+		if (getTickOptionsHandler() != null) {
+			getTickOptionsHandler().setMaxTicksLimit(maxTicksLimitCallback);
 		}
 	}
 
@@ -249,8 +250,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default PrecisionCallback getPrecisionCallback() {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			return getLinearTickOptionsHandler().getPrecisionCallback();
+		if (getTickOptionsHandler() != null) {
+			return getTickOptionsHandler().getPrecisionCallback();
 		}
 		// if here, handler is not consistent
 		// then returns null
@@ -264,8 +265,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default void setPrecision(PrecisionCallback precisionCallback) {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			getLinearTickOptionsHandler().setPrecision(precisionCallback);
+		if (getTickOptionsHandler() != null) {
+			getTickOptionsHandler().setPrecision(precisionCallback);
 		}
 	}
 
@@ -276,8 +277,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default void setPrecision(NativeCallback precisionCallback) {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			getLinearTickOptionsHandler().setPrecision(precisionCallback);
+		if (getTickOptionsHandler() != null) {
+			getTickOptionsHandler().setPrecision(precisionCallback);
 		}
 	}
 
@@ -288,8 +289,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default StepSizeCallback getStepSizeCallback() {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			return getLinearTickOptionsHandler().getStepSizeCallback();
+		if (getTickOptionsHandler() != null) {
+			return getTickOptionsHandler().getStepSizeCallback();
 		}
 		// if here, handler is not consistent
 		// then returns null
@@ -303,8 +304,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default void setStepSize(StepSizeCallback stepSizeCallback) {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			getLinearTickOptionsHandler().setStepSize(stepSizeCallback);
+		if (getTickOptionsHandler() != null) {
+			getTickOptionsHandler().setStepSize(stepSizeCallback);
 		}
 	}
 
@@ -315,8 +316,8 @@ public interface IsLinearTick extends IsNumericTick {
 	 */
 	default void setStepSize(NativeCallback stepSizeCallback) {
 		// checks if options handler is consistent
-		if (getLinearTickOptionsHandler() != null) {
-			getLinearTickOptionsHandler().setStepSize(stepSizeCallback);
+		if (getTickOptionsHandler() != null) {
+			getTickOptionsHandler().setStepSize(stepSizeCallback);
 		}
 	}
 

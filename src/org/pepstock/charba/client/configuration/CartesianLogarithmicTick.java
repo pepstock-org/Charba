@@ -28,6 +28,8 @@ public class CartesianLogarithmicTick extends CartesianNumericTick {
 
 	// handler for callback for category axis
 	private final LinearTickHandler<CartesianLogarithmicTick> tickHandler;
+	// options handler to manage the callbacks
+	private final NumericTickOptionsHandler optionsHandler;
 
 	/**
 	 * Builds the object storing the axis instance.
@@ -38,6 +40,17 @@ public class CartesianLogarithmicTick extends CartesianNumericTick {
 		super(axis);
 		// creates handler and number format
 		this.tickHandler = new LinearTickHandler<>(axis, this);
+		this.optionsHandler = new NumericTickOptionsHandler(axis);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.IsNumericTick#getTickOptionsHandler()
+	 */
+	@Override
+	public final NumericTickOptionsHandler getTickOptionsHandler() {
+		return optionsHandler;
 	}
 
 	/**

@@ -33,7 +33,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class LinearTickOptionsHandler extends AxisContainer {
+final class LinearTickOptionsHandler extends NumericTickOptionsHandler {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---

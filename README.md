@@ -182,6 +182,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add options builder for `HtmlLegend` plugin.
   * add `Canvas` object as possible value for `pointStyle` option to enable custom point styles.
   * add `toCanvas` method to `CastHelper` class in order to enable casting `HTMLCanvasElement` instance to `Canvas` object.
+  * add `numberFormat` scriptable options to all numeric axes configuration (cartesian linear, cartesian logarithmic, radial linear).
     
 ### Developing
 

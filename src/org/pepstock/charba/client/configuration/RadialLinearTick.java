@@ -52,7 +52,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 * @see org.pepstock.charba.client.configuration.IsLinearTick#getLinearTickOptionsHandler()
 	 */
 	@Override
-	public final LinearTickOptionsHandler getLinearTickOptionsHandler() {
+	public final LinearTickOptionsHandler getTickOptionsHandler() {
 		return optionsHandler;
 	}
 

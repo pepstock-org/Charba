@@ -50,7 +50,7 @@ public class CartesianLinearTick extends CartesianNumericTick implements IsLinea
 	 * @see org.pepstock.charba.client.configuration.IsLinearTick#getLinearTickOptionsHandler()
 	 */
 	@Override
-	public final LinearTickOptionsHandler getLinearTickOptionsHandler() {
+	public final LinearTickOptionsHandler getTickOptionsHandler() {
 		return optionsHandler;
 	}
 

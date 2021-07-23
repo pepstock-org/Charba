@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.globals.DefaultNumberFormatOptions;
 import org.pepstock.charba.client.intl.NumberFormatOptions;
 import org.pepstock.charba.client.intl.enums.CompactDisplay;
 import org.pepstock.charba.client.intl.enums.Currency;
@@ -28,6 +29,7 @@ import org.pepstock.charba.client.intl.enums.MeasureUnitDisplay;
 import org.pepstock.charba.client.intl.enums.Notation;
 import org.pepstock.charba.client.intl.enums.SignDisplay;
 import org.pepstock.charba.client.intl.enums.Style;
+import org.pepstock.charba.client.items.NumberFormatItem;
 
 /**
  * Interface to define the number format options for internationalization.
@@ -194,5 +196,45 @@ public interface IsDefaultNumberFormatOptions extends IsDefaultBaseFormatOptions
 	 * @return the maximum number of significant digits to use
 	 */
 	int getMaximumSignificantDigits();
+	
+	/**
+	 * Creates a number format options instance using default or cloning current instance.
+	 * 
+	 * @return a number format options instance using default or cloning current instance
+	 */
+	default NumberFormatItem create() {
+		return create(new DefaultNumberFormatOptions());
+	}
+	
+	/**
+	 * Creates a number format options instance using default or cloning current instance.
+	 * 
+	 * @param defaultValues default provider
+	 * @return a number format options instance using default or cloning current instance
+	 */
+	default NumberFormatItem create(IsDefaultNumberFormatOptions defaultValues) {
+		// creates new number format item
+		NumberFormatItem result = new NumberFormatItem(defaultValues);
+		// loads number format
+		result.setLocaleMatcher(getLocaleMatcher());
+		result.setNumberingSystem(getNumberingSystem());
+		result.setCompactDisplay(getCompactDisplay());
+		result.setCurrency(getCurrency());
+		result.setCurrencyDisplay(getCurrencyDisplay());
+		result.setCurrencySign(getCurrencySign());
+		result.setNotation(getNotation());
+		result.setSignDisplay(getSignDisplay());
+		result.setStyle(getStyle());
+		result.setUnitsOfMeasure(getUnitsOfMeasure());
+		result.setUnitOfMeasureDisplay(getUnitOfMeasureDisplay());
+		result.setUseGrouping(isUseGrouping());
+		result.setMinimumIntegerDigits(getMinimumIntegerDigits());
+		result.setMinimumFractionDigits(getMinimumFractionDigits());
+		result.setMaximumFractionDigits(getMaximumFractionDigits());
+		result.setMinimumSignificantDigits(getMinimumIntegerDigits());
+		result.setMaximumSignificantDigits(getMinimumIntegerDigits());
+		// returns number format item
+		return result;
+	}
 
 }
