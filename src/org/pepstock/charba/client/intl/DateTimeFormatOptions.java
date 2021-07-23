@@ -32,14 +32,7 @@ import org.pepstock.charba.client.intl.enums.TimeZoneName;
 
 /**
  * The object configures a date time formatter.<br>
- * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat">MDN</a> for more details.<br>
- * <br>
- * <b style="font-size: 16px">PAY ATTENTION</b><br>
- * The following methods are not supported on Edge and Safari.<br>
- * <ul>
- * <li>{@link DateTimeFormatOptions#setDateStyle(DateTimeStyle)} and {@link DateTimeFormatOptions#getDateStyle()}
- * <li>{@link DateTimeFormatOptions#setTimeStyle(DateTimeStyle)} and {@link DateTimeFormatOptions#getTimeStyle()}
- * </ul>
+ * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat">MDN</a> for more details.
  * 
  * @author Andrea "Stock" Stocchero
  */

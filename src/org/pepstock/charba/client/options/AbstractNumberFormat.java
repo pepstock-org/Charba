@@ -123,10 +123,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 	}
 
 	/**
-	 * Set the compact display when {@link Notation#COMPACT} is set.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Set the compact display when {@link Notation#COMPACT} is set.
 	 * 
 	 * @param display the compact display when {@link Notation#COMPACT} is set
 	 */
@@ -138,10 +135,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 	}
 
 	/**
-	 * Returns the compact display when {@link Notation#COMPACT} is set.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Returns the compact display when {@link Notation#COMPACT} is set.
 	 * 
 	 * @return the compact display when {@link Notation#COMPACT} is set
 	 */
@@ -196,10 +190,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 
 	/**
 	 * In many locales, accounting format means to wrap the number with parentheses instead of appending a minus sign.<br>
-	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".
 	 * 
 	 * @param currencySign the currency format to use on formatting
 	 */
@@ -212,10 +203,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 
 	/**
 	 * In many locales, accounting format means to wrap the number with parentheses instead of appending a minus sign.<br>
-	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".
 	 * 
 	 * @return the currency format to use on formatting
 	 */
@@ -225,10 +213,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 	}
 
 	/**
-	 * Sets the formatting that should be displayed for the number.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Sets the formatting that should be displayed for the number.
 	 * 
 	 * @param notation the formatting that should be displayed for the number
 	 */
@@ -240,10 +225,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 	}
 
 	/**
-	 * Returns the formatting that should be displayed for the number.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Returns the formatting that should be displayed for the number.
 	 * 
 	 * @return the formatting that should be displayed for the number
 	 */
@@ -253,10 +235,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 	}
 
 	/**
-	 * Sets when to display the sign for the number.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Sets when to display the sign for the number.
 	 * 
 	 * @param signDisplay when to display the sign for the number
 	 */
@@ -268,10 +247,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 	}
 
 	/**
-	 * Returns when to display the sign for the number.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Returns when to display the sign for the number.
 	 * 
 	 * @return when to display the sign for the number
 	 */
@@ -304,10 +280,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 
 	/**
 	 * Sets the unit to use in unit formatting.<br>
-	 * If more that 1 unit has been passed, a compound unit has been created.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * If more that 1 unit has been passed, a compound unit has been created.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
@@ -320,10 +293,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 
 	/**
 	 * Sets the unit to use in unit formatting.<br>
-	 * If more that 1 unit has been passed, a compound unit has been created.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * If more that 1 unit has been passed, a compound unit has been created.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
@@ -335,10 +305,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 	}
 
 	/**
-	 * Returns an unmodifiable list of units to use in unit formatting.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Returns an unmodifiable list of units to use in unit formatting.
 	 * 
 	 * @return an unmodifiable list of unit to use in unit formatting
 	 */
@@ -348,10 +315,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 	}
 
 	/**
-	 * Sets the unit formatting style to use in unit formatting.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Sets the unit formatting style to use in unit formatting.
 	 * 
 	 * @param unitDisplay the unit formatting style to use in unit formatting
 	 */
@@ -363,10 +327,7 @@ public abstract class AbstractNumberFormat extends AbstractNode implements IsNum
 	}
 
 	/**
-	 * Returns the unit formatting style to use in unit formatting.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Returns the unit formatting style to use in unit formatting.
 	 * 
 	 * @return the unit formatting style to use in unit formatting
 	 */

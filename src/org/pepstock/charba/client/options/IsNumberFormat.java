@@ -53,10 +53,7 @@ public interface IsNumberFormat extends IsDefaultNumberFormatOptions {
 	void setNumberingSystem(NumberingSystem numberingSystem);
 
 	/**
-	 * Set the compact display when {@link Notation#COMPACT} is set.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Set the compact display when {@link Notation#COMPACT} is set.
 	 * 
 	 * @param display the compact display when {@link Notation#COMPACT} is set
 	 */
@@ -78,30 +75,21 @@ public interface IsNumberFormat extends IsDefaultNumberFormatOptions {
 
 	/**
 	 * In many locales, accounting format means to wrap the number with parentheses instead of appending a minus sign.<br>
-	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * You can enable this formatting by setting the currency sign option to "accounting" otherwise "standard".
 	 * 
 	 * @param currencySign the currency format to use on formatting
 	 */
 	void setCurrencySign(CurrencySign currencySign);
 
 	/**
-	 * Sets the formatting that should be displayed for the number.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Sets the formatting that should be displayed for the number.
 	 * 
 	 * @param notation the formatting that should be displayed for the number
 	 */
 	void setNotation(Notation notation);
 
 	/**
-	 * Sets when to display the sign for the number.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Sets when to display the sign for the number.
 	 * 
 	 * @param signDisplay when to display the sign for the number
 	 */
@@ -116,10 +104,7 @@ public interface IsNumberFormat extends IsDefaultNumberFormatOptions {
 
 	/**
 	 * Sets the unit to use in unit formatting.<br>
-	 * If more that 1 unit has been passed, a compound unit has been created.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * If more that 1 unit has been passed, a compound unit has been created.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
@@ -127,20 +112,14 @@ public interface IsNumberFormat extends IsDefaultNumberFormatOptions {
 
 	/**
 	 * Sets the unit to use in unit formatting.<br>
-	 * If more that 1 unit has been passed, a compound unit has been created.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * If more that 1 unit has been passed, a compound unit has been created.
 	 * 
 	 * @param units the units to use in units formatting
 	 */
 	void setUnitsOfMeasure(List<MeasureUnit> units);
 
 	/**
-	 * Sets the unit formatting style to use in unit formatting.<br>
-	 * <br>
-	 * <b style="font-size: 16px">PAY ATTENTION</b><br>
-	 * This method is not supported on Safari.
+	 * Sets the unit formatting style to use in unit formatting.
 	 * 
 	 * @param unitDisplay the unit formatting style to use in unit formatting
 	 */
