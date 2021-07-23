@@ -27,7 +27,7 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 
 /**
- * Base class for all options noides, which will wraps a native object and manages the relations about parent and children elements.
+ * Base class for all options nodes, which will wraps a native object and manages the relations about parent and children elements.
  * 
  * @author Andrea "Stock" Stocchero
  * 
