@@ -20,7 +20,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultNumberFormatOptions;
 import org.pepstock.charba.client.options.AbstractNumberFormat;
-import org.pepstock.charba.client.options.IsNumberFormat;
 
 /**
  * Number format options item to use for numeric tick callbacks.
@@ -28,7 +27,7 @@ import org.pepstock.charba.client.options.IsNumberFormat;
  * @author Andrea "Stock" Stocchero
  * @see FontCallback
  */
-public final class NumberFormatItem extends AbstractNumberFormat implements IsNumberFormat{
+public final class NumberFormatItem extends AbstractNumberFormat {
 
 	/**
 	 * Creates an empty font to use for chart configuration with global defaults.
