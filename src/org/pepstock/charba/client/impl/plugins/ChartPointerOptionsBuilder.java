@@ -26,7 +26,7 @@ import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
  *
  */
 public final class ChartPointerOptionsBuilder {
-	
+
 	// plugin options instance
 	private ChartPointerOptions options;
 
@@ -57,7 +57,7 @@ public final class ChartPointerOptionsBuilder {
 	public static ChartPointerOptionsBuilder create(IsChart chart) {
 		return new ChartPointerOptionsBuilder(chart);
 	}
-	
+
 	/**
 	 * Returns a configured plugin options.
 	 * 
@@ -67,7 +67,6 @@ public final class ChartPointerOptionsBuilder {
 		// returns options
 		return options;
 	}
-
 
 	/**
 	 * Sets the chart elements in scope to {@link ChartPointer#ID} plugin.

@@ -155,7 +155,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	public int getOffset() {
 		return getValue(Property.OFFSET, getDefaultValues().getOffset());
 	}
-	
+
 	/**
 	 * Sets the fixed arc offset (in pixels).<br>
 	 * Similar to <code>offset</code> but applies to all arcs.

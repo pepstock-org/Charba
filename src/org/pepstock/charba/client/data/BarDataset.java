@@ -892,7 +892,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// sets data type checking if the key exists
 		setValue(InternalProperty.CHARBA_DATA_TYPE, has(CommonProperty.DATA) ? DataType.ARRAYS : DataType.UNKNOWN);
 	}
-	
+
 	/**
 	 * Returns the type of point style.
 	 * 
@@ -991,7 +991,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public void setEnableBorderRadius(boolean enableBorderRadius) {
 		// resets callback
 		setEnableBorderRadius((EnableBorderRadiusCallback) null);
-	    // stores value
+		// stores value
 		setValue(Property.ENABLE_BORDER_RADIUS, enableBorderRadius);
 	}
 
@@ -1139,7 +1139,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// stores value
 		borderItemsHandler.setBorderItemCallback(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadiusCallback);
 	}
-	
+
 	/**
 	 * Returns the border radius callback, if set, otherwise <code>null</code>, when hovered.
 	 * 
@@ -1250,7 +1250,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// stores value
 		setValue(Property.BASE, baseCallback);
 	}
-	
+
 	/**
 	 * Returns the enable border radius callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1289,7 +1289,6 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		// stores and manages callback
 		setValue(Property.ENABLE_BORDER_RADIUS, enableBorderRadiusCallback);
 	}
-
 
 	// ----------------------
 	// METHODS for JSFunction

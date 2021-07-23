@@ -323,7 +323,7 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 	public PointStyle getPointStyle() {
 		return getConfiguration().getLegend().getLabels().getPointStyle();
 	}
-	
+
 	/**
 	 * Returns the style of the point as canvas.
 	 * 

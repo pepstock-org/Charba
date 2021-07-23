@@ -135,7 +135,7 @@ public final class ExtendedScale extends Scale {
 	public void setCallback(ConfigurationEnvelop<AbstractNode> envelop, Key property, NativeCallback callback) {
 		setCallbackToModel(Envelop.checkAndGetIfValid(envelop).getContent(), property, callback);
 	}
-	
+
 	/**
 	 * Returns the options, mapped with a custom object, used for controllers to map the options.<br>
 	 * It uses a factory instance to create a customized options.<br>

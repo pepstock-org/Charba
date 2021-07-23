@@ -34,7 +34,7 @@ import org.pepstock.charba.client.items.Undefined;
  *
  */
 final class ProjectionAxisMapper extends NativeObjectContainer {
-	
+
 	/**
 	 * Name of properties of native object for projection scale.
 	 */

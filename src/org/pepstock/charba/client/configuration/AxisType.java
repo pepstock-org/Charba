@@ -98,7 +98,7 @@ public interface AxisType extends PropertyKey {
 			AxisTypesManager.get().add(type);
 		}
 	}
-	
+
 	/**
 	 * Returns a stored axis type or {@link IllegalArgumentException}.
 	 * 
@@ -139,7 +139,7 @@ public interface AxisType extends PropertyKey {
 			throw new IllegalArgumentException("Axis type is null or not consistent");
 		}
 	}
-	
+
 	/**
 	 * Checks if key passed as argument is a valid {@link AxisType}.<br>
 	 * If not, throw a {@link IllegalArgumentException}, otherwise it returns the key.

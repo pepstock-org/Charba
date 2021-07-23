@@ -38,7 +38,7 @@ import org.pepstock.charba.client.options.AbstractElement;
  * @author Andrea "Stock" Stocchero
  */
 public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -73,7 +73,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		}
 
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -148,7 +148,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 */
 	public void setBorderAlign(BorderAlign align) {
 		// resets callback
-		setBorderAlign((BorderAlignCallback)null);
+		setBorderAlign((BorderAlignCallback) null);
 		// stores value
 		getConfiguration().getElements().getArc().setBorderAlign(align);
 	}
@@ -189,7 +189,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 */
 	public void setAngle(double angle) {
 		// resets callback
-		setAngle((AngleCallback)null);
+		setAngle((AngleCallback) null);
 		// stores value
 		getConfiguration().getElements().getArc().setAngle(angle);
 	}
@@ -210,7 +210,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 */
 	public void setOffset(int offset) {
 		// resets callback
-		setOffset((OffsetCallback<DatasetContext>)null);
+		setOffset((OffsetCallback<DatasetContext>) null);
 		// stores value
 		getConfiguration().getElements().getArc().setOffset(offset);
 	}
@@ -223,7 +223,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	public int getOffset() {
 		return getConfiguration().getElements().getArc().getOffset();
 	}
-	
+
 	/**
 	 * Sets the fixed arc offset (in pixels).<br>
 	 * Similar to <code>offset</code> but applies to all arcs.
@@ -251,7 +251,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 */
 	public void setBorderRadius(int borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback)null);
+		setBorderRadius((BorderRadiusCallback) null);
 		// stores value
 		getConfiguration().getElements().getArc().setBorderRadius(borderRadius);
 	}
@@ -272,7 +272,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 */
 	public void setHoverOffset(int offset) {
 		// resets callback
-		setHoverOffset((OffsetCallback<DatasetContext>)null);
+		setHoverOffset((OffsetCallback<DatasetContext>) null);
 		// stores value
 		getConfiguration().getElements().getArc().setHoverOffset(offset);
 	}
@@ -285,7 +285,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	public int getHoverOffset() {
 		return getConfiguration().getElements().getArc().getHoverOffset();
 	}
-	
+
 	// -----------------
 	// CALLBACK
 	// -----------------
@@ -355,7 +355,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.BORDER_RADIUS, borderRadiusCallback);
 	}
-	
+
 	/**
 	 * Returns the offset callback, if set, otherwise <code>null</code>.
 	 * 
@@ -388,7 +388,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.OFFSET, offsetCallback);
 	}
-	
+
 	/**
 	 * Returns the offset callback, if set, otherwise <code>null</code>.
 	 * 
@@ -421,7 +421,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.HOVER_OFFSET, hoverOffsetCallback);
 	}
-	
+
 	/**
 	 * Returns the angle callback, if set, otherwise <code>null</code>.
 	 * 

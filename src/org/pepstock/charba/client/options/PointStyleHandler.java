@@ -127,7 +127,7 @@ final class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandler
 		// then returns the default
 		return getDefaultValues().getPointStyle();
 	}
-	
+
 	/**
 	 * Returns the style of the point as image.<br>
 	 * If property is missing or not an image, returns <code>null</code>.

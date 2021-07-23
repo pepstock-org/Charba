@@ -168,7 +168,6 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private int onHoverHandlers = 0;
 	// amount of resize event handlers
 	private int onResizeHandlers = 0;
-	
 
 	/**
 	 * Builds the object storing the chart instance and defaults options.
@@ -276,7 +275,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// invokes the notification method
 		afterConfigurationUpdate();
 	}
-	
+
 	/**
 	 * Invoked before the chart options are going to be updated.
 	 */
@@ -308,7 +307,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	protected void afterAxisConfigurationUpdate(Axis axis) {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns the defaults configuration.
 	 * 
@@ -929,7 +928,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	final ChartContext createContext(NativeObject context) {
 		return new ChartContext(context);
 	}
-	
+
 	/**
 	 * Check if the click event on chart and manage it fire a CHARBA data set selection event.
 	 * 

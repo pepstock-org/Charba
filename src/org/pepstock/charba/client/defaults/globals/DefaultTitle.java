@@ -26,7 +26,7 @@ import org.pepstock.charba.client.enums.Weight;
  * @author Andrea "Stock" Stocchero
  */
 public final class DefaultTitle extends AbstractDefaultTitle implements IsDefaultTitle {
-	
+
 	private static final int DEFAULT_PADDING = 10;
 
 	private final DefaultRoutedFont font = new InternalTitleFont();
@@ -39,7 +39,7 @@ public final class DefaultTitle extends AbstractDefaultTitle implements IsDefaul
 	DefaultTitle() {
 		// do nothing
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -59,7 +59,6 @@ public final class DefaultTitle extends AbstractDefaultTitle implements IsDefaul
 	public IsDefaultPadding getPadding() {
 		return padding;
 	}
-
 
 	/**
 	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for title.

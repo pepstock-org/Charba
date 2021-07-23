@@ -70,7 +70,7 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 		// creates and stores options handler
 		this.optionsHandler = new CommonOptionsHandler(mapper);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -92,7 +92,6 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 			cAxis.afterAxisConfigurationUpdate();
 		}
 	}
-
 
 	/*
 	 * (non-Javadoc)

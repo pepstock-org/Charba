@@ -463,7 +463,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		// stores value
 		setValue(Property.CUBIC_INTERPOLATION_MODE, cubicInterpolationModeCallback);
 	}
-	
+
 	/**
 	 * Returns the stepped callback, if set, otherwise <code>null</code>.
 	 * 

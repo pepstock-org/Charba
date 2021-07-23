@@ -32,7 +32,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SizeAxis extends CartesianLinearAxis implements IsSizeAxis{
+public final class SizeAxis extends CartesianLinearAxis implements IsSizeAxis {
 
 	/**
 	 * Default missing radius options, {@value DEFAULT_MISSING_RADIUS}.
@@ -48,12 +48,12 @@ public final class SizeAxis extends CartesianLinearAxis implements IsSizeAxis{
 	 * Default maximum range options, <b>{@value DEFAULT_MAXIMUM_RANGE}</b>.
 	 */
 	public static final int DEFAULT_MAXIMUM_RANGE = 20;
-	
+
 	/**
 	 * Size axis id.
 	 */
 	public static final ScaleId ID = ScaleId.create("r");
-	
+
 	/**
 	 * Size axis type.
 	 */
@@ -77,7 +77,7 @@ public final class SizeAxis extends CartesianLinearAxis implements IsSizeAxis{
 		// initializes the mapper
 		afterAxisConfigurationUpdate();
 	}
-	
+
 	/**
 	 * Reloads the extended scale
 	 */
@@ -86,7 +86,9 @@ public final class SizeAxis extends CartesianLinearAxis implements IsSizeAxis{
 		this.mapper = getConfiguration().getRemappedOptions(factory);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.geo.IsSizeAxis#getMapper()
 	 */
 	@Override

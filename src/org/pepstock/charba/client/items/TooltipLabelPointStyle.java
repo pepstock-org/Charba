@@ -171,7 +171,7 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	public void setPointStyle(Canvas pointStyle) {
 		setValue(Property.POINT_STYLE, pointStyle);
 	}
-	
+
 	/**
 	 * Sets the rotation of label in degrees.
 	 * 

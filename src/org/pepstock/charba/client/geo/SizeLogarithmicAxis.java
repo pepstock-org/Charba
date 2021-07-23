@@ -29,8 +29,8 @@ import org.pepstock.charba.client.enums.ScaleDataType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class SizeLogarithmicAxis extends CartesianLogarithmicAxis implements IsSizeAxis{
-	
+public final class SizeLogarithmicAxis extends CartesianLogarithmicAxis implements IsSizeAxis {
+
 	/**
 	 * Size axis type.
 	 */
@@ -54,7 +54,7 @@ public final class SizeLogarithmicAxis extends CartesianLogarithmicAxis implemen
 		// initializes the mapper
 		afterAxisConfigurationUpdate();
 	}
-	
+
 	/**
 	 * Reloads the extended scale
 	 */
@@ -63,7 +63,9 @@ public final class SizeLogarithmicAxis extends CartesianLogarithmicAxis implemen
 		this.mapper = getConfiguration().getRemappedOptions(factory);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.geo.IsSizeAxis#getMapper()
 	 */
 	@Override

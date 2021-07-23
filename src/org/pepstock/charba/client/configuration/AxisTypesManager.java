@@ -79,7 +79,6 @@ final class AxisTypesManager {
 		return false;
 	}
 
-	
 	/**
 	 * Returns the stored axis type otherwise <code>null</code> if not found.
 	 * 

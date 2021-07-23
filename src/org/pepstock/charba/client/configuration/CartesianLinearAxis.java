@@ -106,7 +106,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 		// creates the ticks instance
 		this.ticks = new CartesianLinearTick(this);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

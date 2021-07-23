@@ -451,7 +451,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.BORDER_CAP_STYLE, borderCapStyleCallback);
 	}
-	
+
 	/**
 	 * Returns the border dash callback, if set, otherwise <code>null</code>.
 	 * 
@@ -484,7 +484,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.BORDER_DASH, borderDashCallback);
 	}
-	
+
 	/**
 	 * Returns the border dash offset callback, if set, otherwise <code>null</code>.
 	 * 
@@ -517,7 +517,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallback);
 	}
-	
+
 	/**
 	 * Returns the border join style callback, if set, otherwise <code>null</code>.
 	 * 
@@ -550,7 +550,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.BORDER_JOIN_STYLE, borderJoinStyleCallback);
 	}
-	
+
 	/**
 	 * Returns the cubic interpolation mode callback, if set, otherwise <code>null</code>.
 	 * 
@@ -583,7 +583,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.CUBIC_INTERPOLATION_MODE, cubicInterpolationModeCallback);
 	}
-	
+
 	/**
 	 * Returns the fill callback, if set, otherwise <code>null</code>.
 	 * 
@@ -616,7 +616,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.FILL, fillCallback);
 	}
-	
+
 	/**
 	 * Returns the stepped callback, if set, otherwise <code>null</code>.
 	 * 
@@ -649,11 +649,11 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.STEPPED, steppedCallback);
 	}
-	
+
 	// ------------------------
 	// INTERNALS for CALLBACKS
 	// ------------------------
-	
+
 	/**
 	 * Returns a {@link CapStyle} when the callback has been activated.
 	 * 
@@ -665,7 +665,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	private String onBorderCapStyle(DatasetContext context, CapStyleCallback<DatasetContext> callback, CapStyle defaultValue) {
 		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
 	}
-	
+
 	/**
 	 * Returns an array of integer when the callback has been activated.
 	 * 
@@ -679,7 +679,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// default result
 		return ArrayInteger.fromOrEmpty(result);
 	}
-	
+
 	/**
 	 * Returns a {@link JoinStyle} when the callback has been activated.
 	 * 
@@ -691,7 +691,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	private String onBorderJoinStyle(DatasetContext context, JoinStyleCallback<DatasetContext> callback, JoinStyle defaultValue) {
 		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
 	}
-	
+
 	/**
 	 * Returns a {@link CubicInterpolationMode} when the callback has been activated.
 	 * 
@@ -703,7 +703,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	private String onCubicInterpolationMode(DatasetContext context, CubicInterpolationModeCallback callback, CubicInterpolationMode defaultValue) {
 		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
 	}
-	
+
 	/**
 	 * Checks if the result is consistent, returning the value or default.
 	 * 
@@ -721,7 +721,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// default result
 		return defaultValue.value();
 	}
-	
+
 	/**
 	 * Returns a object which can be a boolean, integer, string or {@link IsFill} when the callback has been activated.
 	 * 
@@ -744,7 +744,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// then checks and returns default
 		return IsFill.toObject(Checker.checkAndGetIfValid(defaultValue, "Default fill argument"));
 	}
-	
+
 	/**
 	 * Returns a {@link Stepped} when the callback has been activated.
 	 * 
@@ -767,5 +767,5 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// if here, result is null
 		// then checks and returns default
 		return Key.checkAndGetIfValid(defaultValue).value();
-	}	
+	}
 }

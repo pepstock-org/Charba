@@ -128,7 +128,7 @@ public final class ProjectionAxis extends Axis {
 	public List<Double> getProjectionOffset() {
 		return mapper.getProjectionOffset();
 	}
-	
+
 	/**
 	 * This utility method is invoked by GEO axis to check if the chart, passed as argument, is consistent.
 	 * 
@@ -155,7 +155,6 @@ public final class ProjectionAxis extends Axis {
 			throw new IllegalArgumentException("Chart argument is not a controller.");
 		}
 	}
-
 
 	/**
 	 * Can create a options mapper in order to re-map the CHART.JS options where needed in order to add additional properties and nodes for GEO charts.

@@ -39,7 +39,7 @@ public final class DefaultSubtitle extends AbstractDefaultTitle implements IsDef
 	DefaultSubtitle() {
 		// do nothing
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

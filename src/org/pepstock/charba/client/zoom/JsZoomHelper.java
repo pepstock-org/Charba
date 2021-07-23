@@ -57,7 +57,7 @@ final class JsZoomHelper {
 	static JsZoomHelper get() {
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Returns the zoom level when {@link ZoomPlugin} is activated.
 	 * 

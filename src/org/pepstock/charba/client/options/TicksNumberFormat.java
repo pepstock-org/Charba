@@ -27,7 +27,7 @@ import org.pepstock.charba.client.intl.NumberFormatOptions;
  * @see NumberFormatOptions
  */
 public final class TicksNumberFormat extends AbstractNumberFormat {
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 

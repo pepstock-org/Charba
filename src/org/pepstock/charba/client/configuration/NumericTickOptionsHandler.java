@@ -35,14 +35,14 @@ import org.pepstock.charba.client.items.NumberFormatItem;
  *
  */
 class NumericTickOptionsHandler extends AxisContainer {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
 		FORMAT("format");
-		
+
 		// name value of property
 		private final String value;
 
@@ -72,7 +72,7 @@ class NumericTickOptionsHandler extends AxisContainer {
 	// ---------------------------
 	// callback proxy to invoke the padding function
 	private final CallbackProxy<ProxyNativeObjectCallback> numberFormatCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+
 	// instance of padding callback
 	private NumberFormatCallback numberFormatCallback = null;
 
@@ -89,7 +89,7 @@ class NumericTickOptionsHandler extends AxisContainer {
 		// sets function to proxy callback in order to invoke the java interface
 		this.numberFormatCallbackProxy.setCallback(context -> onNumberFormat(getAxis().createContext(context), getNumberFormatCallback(), getAxis().getDefaultValues().getTicks().getNumberFormat()));
 	}
-	
+
 	/**
 	 * Returns the callback to set the number formatting options.
 	 * 
@@ -122,7 +122,7 @@ class NumericTickOptionsHandler extends AxisContainer {
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.FORMAT, numberFormatCallback);
 	}
-	
+
 	/**
 	 * Returns a number format options when the callback has been activated.
 	 * 

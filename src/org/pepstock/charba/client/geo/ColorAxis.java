@@ -72,7 +72,7 @@ public final class ColorAxis extends CartesianLinearAxis implements IsColorAxis 
 		// initializes the mapper
 		afterAxisConfigurationUpdate();
 	}
-	
+
 	/**
 	 * Reloads the extended scale
 	 */
@@ -81,7 +81,9 @@ public final class ColorAxis extends CartesianLinearAxis implements IsColorAxis 
 		this.mapper = getConfiguration().getRemappedOptions(factory);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.geo.IsColorAxis#getMapper()
 	 */
 	@Override

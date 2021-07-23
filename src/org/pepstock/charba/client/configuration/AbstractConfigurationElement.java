@@ -44,7 +44,7 @@ import org.pepstock.charba.client.options.AbstractElement;
  * @author Andrea "Stock" Stocchero
  */
 abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> extends ConfigurationOptionsContainer {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -56,7 +56,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 		HOVER_BACKGROUND_COLOR("hoverBackgroundColor"),
 		HOVER_BORDER_WIDTH("hoverBorderWidth"),
 		HOVER_BORDER_COLOR("hoverBorderColor");
-		
+
 		// name value of property
 		private final String value;
 
@@ -80,7 +80,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 		}
 
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -147,7 +147,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	 * @return the element instance to be managed
 	 */
 	protected abstract D getDefaultElement();
-	
+
 	/**
 	 * Creates a data set context for callback.
 	 * 
@@ -165,7 +165,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
 		// resets callback
-		setBackgroundColor((ColorCallback<DatasetContext>)null);
+		setBackgroundColor((ColorCallback<DatasetContext>) null);
 		// stores new value
 		getElement().setBackgroundColor(backgroundColor);
 	}
@@ -177,7 +177,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	 */
 	public void setBackgroundColor(String backgroundColor) {
 		// resets callback
-		setBackgroundColor((ColorCallback<DatasetContext>)null);
+		setBackgroundColor((ColorCallback<DatasetContext>) null);
 		// stores new value
 		getElement().setBackgroundColor(backgroundColor);
 	}
@@ -207,7 +207,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	 */
 	public void setBorderWidth(int borderWidth) {
 		// resets callback
-		setBorderWidth((WidthCallback<DatasetContext>)null);
+		setBorderWidth((WidthCallback<DatasetContext>) null);
 		// stores new value
 		getElement().setBorderWidth(borderWidth);
 	}
@@ -228,7 +228,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	 */
 	public void setBorderColor(IsColor borderColor) {
 		// resets callback
-		setBorderColor((ColorCallback<DatasetContext>)null);
+		setBorderColor((ColorCallback<DatasetContext>) null);
 		// stores new value
 		getElement().setBorderColor(borderColor);
 	}
@@ -240,7 +240,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	 */
 	public void setBorderColor(String borderColor) {
 		// resets callback
-		setBorderColor((ColorCallback<DatasetContext>)null);
+		setBorderColor((ColorCallback<DatasetContext>) null);
 		// stores new value
 		getElement().setBorderColor(borderColor);
 	}
@@ -356,7 +356,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	public IsColor getHoverBorderColor() {
 		return getElement().getHoverBorderColor();
 	}
-	
+
 	// -----------------
 	// CALLBACK
 	// -----------------
@@ -459,11 +459,11 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.BORDER_WIDTH, borderWidthCallback);
 	}
-	
+
 	// -----------------
 	// CALLBACK
 	// -----------------
-	
+
 	/**
 	 * Returns the background color callback, if set, otherwise <code>null</code>.
 	 * 
@@ -562,7 +562,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.HOVER_BORDER_WIDTH, hoverBorderWidthCallback);
 	}
-	
+
 	// ------------------------
 	// INTERNALS for CALLBACKS
 	// ------------------------
@@ -589,7 +589,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 		// returns the default value
 		return defaultValue;
 	}
-	
+
 	/**
 	 * Returns a {@link PointStyle} or {@link Img} when the callback has been activated.
 	 * 

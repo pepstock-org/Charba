@@ -29,11 +29,11 @@ import org.pepstock.charba.client.items.DataItem;
  *
  */
 public final class ChoroplethDataPoint extends GeoDataPoint {
-	
+
 	/**
 	 * Factory instance to create data points. To use by {@link DataItem} to get the data point for choropleth chart.
 	 */
-	public static final ChoroplethDataPointFactory FACTORY  =new ChoroplethDataPointFactory();
+	public static final ChoroplethDataPointFactory FACTORY = new ChoroplethDataPointFactory();
 
 	/**
 	 * Name of properties of native object.

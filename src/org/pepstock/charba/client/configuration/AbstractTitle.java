@@ -180,7 +180,7 @@ abstract class AbstractTitle extends ConfigurationOptionsContainer implements Is
 	 * @return the options node for this title configuration item, which can be a title or subtitle
 	 */
 	abstract AbstractNode getTitleNode();
-	
+
 	/**
 	 * Gets the options element instance from provider checking if is consistent.
 	 * 

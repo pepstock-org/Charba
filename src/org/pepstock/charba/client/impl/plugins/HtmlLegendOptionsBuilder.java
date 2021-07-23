@@ -26,7 +26,7 @@ import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
  *
  */
 public final class HtmlLegendOptionsBuilder {
-	
+
 	// creates the options
 	private final HtmlLegendOptions options;
 

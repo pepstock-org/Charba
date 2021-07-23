@@ -56,7 +56,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	private Context2dItem() {
 		// do nothing
 	}
-	
+
 	// -----------------------
 	// PROPERTIES
 	// -----------------------
@@ -645,7 +645,7 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsProperty(name = "globalCompositeOperation")
 	private native void nativeSetGlobalCompositeOperation(String globalCompositeOperation);
-	
+
 	/**
 	 * Sets the type of compositing operation to apply when drawing new shapes.
 	 *
@@ -669,11 +669,11 @@ public final class Context2dItem extends BaseHtmlElement {
 	public GlobalCompositeOperation getGlobalCompositeOperation() {
 		return Key.getKeyByValue(GlobalCompositeOperation.values(), nativeGetGlobalCompositeOperation(), GlobalCompositeOperation.SOURCE_OVER);
 	}
-	
+
 	// ---------------------------------------
 	// METHODS
 	// ---------------------------------------
-	
+
 	/**
 	 * Adds a circular arc to the current sub-path.<br>
 	 * The arc method creates a circular arc centered at (x, y) with a radius of radius.<br>

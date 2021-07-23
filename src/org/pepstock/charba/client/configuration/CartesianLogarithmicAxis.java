@@ -93,7 +93,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	public CartesianLogarithmicAxis(IsChart chart, ScaleId id, AxisKind kind) {
 		this(chart, id, ChartAxisType.LOGARITHMIC, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.Y));
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and cartesian axis type, to use to extend the axis.
 	 * 

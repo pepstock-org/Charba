@@ -149,7 +149,7 @@ final class NativeObjectUtils {
 	static void defineCanvasProperty(NativeObject object, String key, Canvas value) {
 		NativeJsObjectCanvas.set(object, key, value);
 	}
-	
+
 	/**
 	 * Defines a new property directly on object object, or modifies an existing property.
 	 * 
@@ -346,7 +346,7 @@ final class NativeObjectUtils {
 		// if here, property does not exist
 		return defaultValue;
 	}
-	
+
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
 	 * 

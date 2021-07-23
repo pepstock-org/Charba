@@ -43,7 +43,7 @@ public interface IsFill extends Key {
 	static boolean isValid(IsFill fill) {
 		return Key.isValid(fill) && fill.getMode() != null;
 	}
-	
+
 	/**
 	 * Returns a object which can be a boolean, integer, string or {@link IsFill} when the callback has been activated.
 	 * 
@@ -77,7 +77,7 @@ public interface IsFill extends Key {
 		// if here, result is null
 		return null;
 	}
-	
+
 	/**
 	 * Transforms a {@link IsFill} instance in the a CHART.JS FILL property accepted value.
 	 * 

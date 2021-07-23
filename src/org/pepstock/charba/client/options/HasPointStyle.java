@@ -111,7 +111,7 @@ interface HasPointStyle extends IsDefaultPointStyleHandler {
 		// uses undefined
 		return Undefined.IMAGE_ELEMENT;
 	}
-	
+
 	/**
 	 * Sets the style of the point as canvas.
 	 * 
@@ -123,7 +123,7 @@ interface HasPointStyle extends IsDefaultPointStyleHandler {
 			getPointStyleHandler().setPointStyle(pointStyle);
 		}
 	}
-	
+
 	/**
 	 * Returns the style of the point as canvas.<br>
 	 * If property is missing or not an canvas, returns <code>null</code>.

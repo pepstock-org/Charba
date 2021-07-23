@@ -794,7 +794,7 @@ public abstract class NativeObjectContainer {
 			NativeObjectUtils.defineCallbackProperty(nativeObject, key.value(), value);
 		}
 	}
-	
+
 	// ------------------------------------------
 	// --- CANVAS
 	// ------------------------------------------

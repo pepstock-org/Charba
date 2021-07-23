@@ -42,7 +42,7 @@ import org.pepstock.charba.client.options.AbstractElement;
  * @author Andrea "Stock" Stocchero
  */
 public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -77,7 +77,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 		}
 
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -152,7 +152,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setBorderSkipped(boolean borderSkipped) {
 		// resets callback
-		setBorderSkipped((BorderSkippedCallback)null);
+		setBorderSkipped((BorderSkippedCallback) null);
 		// stores value
 		getConfiguration().getElements().getBar().setBorderSkipped(borderSkipped);
 	}
@@ -164,7 +164,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setBorderSkipped(BorderSkipped borderSkipped) {
 		// resets callback
-		setBorderSkipped((BorderSkippedCallback)null);
+		setBorderSkipped((BorderSkippedCallback) null);
 		// stores value
 		getConfiguration().getElements().getBar().setBorderSkipped(borderSkipped);
 	}
@@ -185,7 +185,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setBorderRadius(int borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback)null);
+		setBorderRadius((BorderRadiusCallback) null);
 		// stores value
 		getConfiguration().getElements().getBar().setBorderRadius(borderRadius);
 	}
@@ -206,7 +206,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setHoverBorderRadius(int borderRadius) {
 		// resets callback
-		setHoverBorderRadius((BorderRadiusCallback)null);
+		setHoverBorderRadius((BorderRadiusCallback) null);
 		// stores value
 		getConfiguration().getElements().getBar().setHoverBorderRadius(borderRadius);
 	}
@@ -227,7 +227,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		// resets callback
-		setPointStyle((PointStyleCallback)null);
+		setPointStyle((PointStyleCallback) null);
 		// stores value
 		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
 	}
@@ -239,7 +239,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setPointStyle(Img pointStyle) {
 		// resets callback
-		setPointStyle((PointStyleCallback)null);
+		setPointStyle((PointStyleCallback) null);
 		// stores value
 		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
 	}
@@ -251,11 +251,11 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setPointStyle(Canvas pointStyle) {
 		// resets callback
-		setPointStyle((PointStyleCallback)null);
+		setPointStyle((PointStyleCallback) null);
 		// stores value
 		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
 	}
-	
+
 	/**
 	 * Returns the type of point style.
 	 * 
@@ -299,7 +299,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setEnableBorderRadius(boolean enableBorderRadius) {
 		// resets callback
-		setEnableBorderRadius((EnableBorderRadiusCallback)null);
+		setEnableBorderRadius((EnableBorderRadiusCallback) null);
 		// stores value
 		getConfiguration().getElements().getBar().setEnableBorderRadius(enableBorderRadius);
 	}
@@ -312,11 +312,11 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	public boolean isEnableBorderRadius() {
 		return getConfiguration().getElements().getBar().isEnableBorderRadius();
 	}
-	
+
 	// ----------------------
 	// CALLBACKS
 	// ----------------------
-	
+
 	/**
 	 * Returns the border radius callback, if set, otherwise <code>null</code>.
 	 * 
@@ -448,7 +448,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.ENABLE_BORDER_RADIUS, enableBorderRadiusCallback);
 	}
-	
+
 	/**
 	 * Returns the point style callback, if set, otherwise <code>null</code>.
 	 * 
@@ -481,7 +481,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.POINT_STYLE, pointStyleCallback);
 	}
-	
+
 	// ----------------------
 	// METHODS for CALLBACKS
 	// ----------------------

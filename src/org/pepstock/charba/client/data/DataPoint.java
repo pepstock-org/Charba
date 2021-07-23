@@ -161,7 +161,7 @@ public final class DataPoint extends NativeObjectContainer {
 		setX(x);
 		setY(y);
 	}
-	
+
 	/**
 	 * Creates the object with the passed point values (for bubble).
 	 * 

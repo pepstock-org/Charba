@@ -25,7 +25,7 @@ import org.pepstock.charba.client.items.Undefined;
  *
  */
 interface IsDefaultScaleLimit extends IsDefaultScaleRange {
-	
+
 	/**
 	 * Returns <code>true</code> to use whatever minimum limit the scale had when the chart was first displayed.
 	 * 

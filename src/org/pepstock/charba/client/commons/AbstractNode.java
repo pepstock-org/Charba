@@ -284,7 +284,7 @@ public abstract class AbstractNode extends NativeObjectContainer {
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets a value (canvas) in the embedded JavaScript object at specific property.
 	 * 

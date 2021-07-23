@@ -86,7 +86,7 @@ public final class DataItem {
 			this.nativeObject = null;
 		} else if (ObjectType.OBJECT.equals(type)) {
 			// uses the to string method of object and nan and null for other values
-			this.nativeObject = (NativeObject)object;
+			this.nativeObject = (NativeObject) object;
 			this.value = Undefined.DOUBLE;
 			this.valueAsFloatingData = null;
 			this.valueAsString = JSON.stringify(object, 3);
@@ -148,16 +148,14 @@ public final class DataItem {
 	public DataPoint getValueAsDataPoint() {
 		return valueAsPoint;
 	}
-	
+
 	/**
-	 * Returns a data point to be mapped for customization, like for out of the box controllers. 
-	 * It uses a factory instance to create a data point.<br>
+	 * Returns a data point to be mapped for customization, like for out of the box controllers. It uses a factory instance to create a data point.<br>
 	 * If factory argument is not consistent, <code>null</code> is returned.
 	 * 
 	 * @param factory factory instance to create a data point
 	 * @param <T> type of data point to return
-	 * @return data point to be mapped for customization.
-	 *         If factory argument is not consistent, <code>null</code> is returned.
+	 * @return data point to be mapped for customization. If factory argument is not consistent, <code>null</code> is returned.
 	 */
 	public final <T extends NativeObjectContainer> T createDataPoint(NativeObjectContainerFactory<T> factory) {
 		// checks if factory is consistent

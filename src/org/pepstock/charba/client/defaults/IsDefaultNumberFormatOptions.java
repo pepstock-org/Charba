@@ -196,7 +196,7 @@ public interface IsDefaultNumberFormatOptions extends IsDefaultBaseFormatOptions
 	 * @return the maximum number of significant digits to use
 	 */
 	int getMaximumSignificantDigits();
-	
+
 	/**
 	 * Creates a number format options instance using default or cloning current instance.
 	 * 
@@ -205,7 +205,7 @@ public interface IsDefaultNumberFormatOptions extends IsDefaultBaseFormatOptions
 	default NumberFormatItem create() {
 		return create(new DefaultNumberFormatOptions());
 	}
-	
+
 	/**
 	 * Creates a number format options instance using default or cloning current instance.
 	 * 

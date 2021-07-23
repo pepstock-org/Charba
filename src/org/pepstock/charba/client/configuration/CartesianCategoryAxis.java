@@ -95,7 +95,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	public CartesianCategoryAxis(IsChart chart, ScaleId id, AxisKind kind) {
 		this(chart, id, ChartAxisType.CATEGORY, Key.isValid(kind) ? kind : DefaultScaleId.getAxisKindByScaleId(id, AxisKind.X));
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and cartesian axis type, to use to extend the axis.
 	 * 

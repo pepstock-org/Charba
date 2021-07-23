@@ -28,7 +28,7 @@ import org.pepstock.charba.client.dom.enums.GlobalCompositeOperation;
  *
  */
 public final class ChartBackgroundColorOptionsBuilder {
-	
+
 	// plugin options instance
 	private ChartBackgroundColorOptions options;
 
@@ -59,7 +59,7 @@ public final class ChartBackgroundColorOptionsBuilder {
 	public static ChartBackgroundColorOptionsBuilder create(IsChart chart) {
 		return new ChartBackgroundColorOptionsBuilder(chart);
 	}
-	
+
 	/**
 	 * Returns a configured plugin options.
 	 * 
@@ -69,7 +69,7 @@ public final class ChartBackgroundColorOptionsBuilder {
 		// returns options
 		return options;
 	}
-	
+
 	/**
 	 * Sets the background color.
 	 * 
@@ -113,7 +113,7 @@ public final class ChartBackgroundColorOptionsBuilder {
 		options.setBackgroundColor(pattern);
 		return this;
 	}
-	
+
 	/**
 	 * Sets the type of compositing operation to apply when drawing new shapes.
 	 *
@@ -124,5 +124,5 @@ public final class ChartBackgroundColorOptionsBuilder {
 		options.setGlobalCompositeOperation(globalCompositeOperation);
 		return this;
 	}
-	
+
 }

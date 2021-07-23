@@ -139,7 +139,7 @@ interface HasDataPointStyle {
 		// uses empty list
 		return Collections.emptyList();
 	}
-	
+
 	/**
 	 * Returns the point style callback, if set, otherwise <code>null</code>.
 	 * 

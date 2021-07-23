@@ -268,7 +268,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 			remove(Property.COLOR_TYPE);
 		}
 	}
-	
+
 	/**
 	 * Sets the type of compositing operation to apply when drawing new shapes.
 	 *
@@ -277,7 +277,7 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 	public void setGlobalCompositeOperation(GlobalCompositeOperation globalCompositeOperation) {
 		setValue(Property.GLOBAL_COMPOSITE_OPERATION, globalCompositeOperation);
 	}
-	
+
 	/**
 	 * Returns the type of compositing operation to apply when drawing new shapes.
 	 *

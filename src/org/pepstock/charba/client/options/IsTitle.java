@@ -64,14 +64,14 @@ public interface IsTitle extends IsDefaultAbstractTitle {
 	 *            If specified as an array, text is rendered on multiple lines.
 	 */
 	void setText(String... text);
-	
+
 	/**
 	 * Returns the title text to display, as a list of strings.
 	 * 
 	 * @return a list of strings or an empty list if not exist
 	 */
 	List<String> getText();
-	
+
 	/**
 	 * Sets the font color.
 	 * 

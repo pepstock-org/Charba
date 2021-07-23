@@ -20,7 +20,8 @@ import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 
 /**
  * This {@link DataLabelsPlugin#ID} plugin currently supports the below label events.<br>
- * Charba events that need to be enabled in order to get the associated label event working. Note that by default Charba enables "mousemove", "mouseout", "click", meaning that label events work out-of-the-box.
+ * Charba events that need to be enabled in order to get the associated label event working. Note that by default Charba enables "mousemove", "mouseout", "click", meaning that
+ * label events work out-of-the-box.
  * 
  * @author Andrea "Stock" Stocchero
  *

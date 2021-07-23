@@ -54,7 +54,7 @@ public final class ColorLogarithmicAxis extends CartesianLogarithmicAxis impleme
 		// initializes the mapper
 		afterAxisConfigurationUpdate();
 	}
-	
+
 	/**
 	 * Reloads the extended scale
 	 */
@@ -63,7 +63,9 @@ public final class ColorLogarithmicAxis extends CartesianLogarithmicAxis impleme
 		this.mapper = getConfiguration().getRemappedOptions(factory);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.geo.IsColorAxis#getMapper()
 	 */
 	@Override

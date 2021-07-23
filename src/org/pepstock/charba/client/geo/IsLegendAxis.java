@@ -23,7 +23,7 @@ package org.pepstock.charba.client.geo;
  *
  */
 interface IsLegendAxis {
-	
+
 	/**
 	 * Returns the legend axis mapper.
 	 * 

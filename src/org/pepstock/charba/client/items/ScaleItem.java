@@ -138,7 +138,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// stores scale id
 		this.scaleId = null;
 	}
-	
+
 	/**
 	 * Returns the CHARBA chart instance.
 	 * 

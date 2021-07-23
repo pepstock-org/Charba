@@ -45,7 +45,7 @@ import org.pepstock.charba.client.enums.PointStyleType;
  *
  */
 final class DataPointStyleHandler extends NativeObjectContainer {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -173,7 +173,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 			return Collections.emptyList();
 		}
 	}
-	
+
 	/**
 	 * Sets the style of the point as canvas.
 	 * 
@@ -205,7 +205,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 			return Collections.emptyList();
 		}
 	}
-	
+
 	/**
 	 * Returns the point style callback, if set, otherwise <code>null</code>.
 	 * 
@@ -246,9 +246,10 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 		// stores value
 		setValue(Property.POINT_STYLE, pointStyleCallback);
 	}
-	
+
 	/**
 	 * Manages the type of point style.
+	 * 
 	 * @param type the type to set
 	 */
 	private void managePointStyleType(PointStyleType type) {
@@ -261,7 +262,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 			remove(Property.CHARBA_POINT_STYLE);
 		}
 	}
-	
+
 	/**
 	 * Returns a {@link PointStyle}, {@link Img} or {@link Canvas} the callback has been activated.
 	 * 

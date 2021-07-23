@@ -38,7 +38,7 @@ import org.pepstock.charba.client.options.AbstractElement;
  * @author Andrea "Stock" Stocchero
  */
 public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -73,7 +73,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 		}
 
 	}
-	
+
 	// callback proxy to invoke the radius function
 	private final CallbackProxy<ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hit radius function
@@ -195,7 +195,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 		// stores value
 		getConfiguration().getElements().getPoint().setPointStyle(pointStyle);
 	}
-	
+
 	/**
 	 * Returns the style of the point as canvas.
 	 * 
@@ -285,11 +285,11 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	public double getRotation() {
 		return getConfiguration().getElements().getPoint().getRotation();
 	}
-	
+
 	// ---------------
 	// CALLBACKS
 	// ---------------
-	
+
 	/**
 	 * Returns the point style callback, if set, otherwise <code>null</code>.
 	 * 
@@ -322,7 +322,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.POINT_STYLE, pointStyleCallback);
 	}
-	
+
 	/**
 	 * Returns the radius callback, if set, otherwise <code>null</code>.
 	 * 
@@ -355,7 +355,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.RADIUS, radiusCallback);
 	}
-	
+
 	/**
 	 * Returns the hit radius callback, if set, otherwise <code>null</code>.
 	 * 
@@ -388,7 +388,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.HIT_RADIUS, hitRadiusCallback);
 	}
-	
+
 	/**
 	 * Returns the hover radius callback, if set, otherwise <code>null</code>.
 	 * 

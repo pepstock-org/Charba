@@ -122,7 +122,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 		// loads defaults
 		ZoomPlugin.get().loadDefaults(DEFAULTS_FACTORY);
 	}
-	
+
 	/**
 	 * Returns the zoom level when {@link ZoomPlugin} is activated.
 	 * 

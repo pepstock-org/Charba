@@ -221,7 +221,7 @@ public final class Drag extends AbstractNode implements IsDefaultDrag {
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, defaultOptions.getBorderWidth());
 	}
-	
+
 	/**
 	 * Sets the minimal zoom distance required before actually applying zoom.
 	 * 

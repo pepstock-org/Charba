@@ -26,7 +26,7 @@ import org.pepstock.charba.client.options.IsNumberFormat;
  *
  */
 public interface IsNumericTick {
-	
+
 	/**
 	 * Returns the linear tick options handler instance, for callbacks.
 	 * 
@@ -40,7 +40,7 @@ public interface IsNumericTick {
 	 * @return the number format instance
 	 */
 	IsNumberFormat getNumberFormat();
-	
+
 	/**
 	 * Returns the callback to set the number formatting options.
 	 * 

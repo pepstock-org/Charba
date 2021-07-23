@@ -47,7 +47,7 @@ import org.pepstock.charba.client.utils.Utilities;
  *
  */
 public final class GeoUtils {
-	
+
 	// exception pattern when the feature property is not present in topojson objects.
 	private static final String INVALID_FEATURE_PROPERTY = "Features '{0}' property is undefined.\nAvailble properties: {1}.";
 

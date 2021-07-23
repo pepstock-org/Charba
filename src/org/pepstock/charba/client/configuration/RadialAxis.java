@@ -49,7 +49,7 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 	public RadialAxis(IsChart chart) {
 		this(chart, DefaultScaleId.R, ChartAxisType.RADIAL_LINEAR, AxisKind.R);
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and cartesian axis type.
 	 * 
@@ -66,7 +66,6 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 		ticks = new RadialLinearTick(this);
 		angleLines = new RadialAngleLines(this);
 	}
-
 
 	/*
 	 * (non-Javadoc)
