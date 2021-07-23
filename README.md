@@ -156,6 +156,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * import CHART.JS [version 3.4.1](https://github.com/chartjs/Chart.js/releases/tag/v3.4.1).
   * import CHART.JS DATALABELS plugin [version 2.0.0](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v2.0.0).
   * import CHART.JS ZOOM plugin [version 1.1.1](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.1.1).
+  * import Luxon library [version 2.0.1](https://github.com/moment/luxon/releases/tag/2.0.1).
   * import CHART.JS GEO controller [version v3.1.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.1.0)
     * enable geographic map chart types such as choropleth and bubble map.
   * add `Subtitle` options and configuration items.  
