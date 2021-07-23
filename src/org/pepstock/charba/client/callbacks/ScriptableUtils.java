@@ -100,7 +100,7 @@ public final class ScriptableUtils {
 	 * @return a value of property related to the font value
 	 */
 	public static <C extends ChartContext> FontItem getOptionValueAsFont(C context, Scriptable<FontItem, C> callback, IsDefaultFont defaultValue) {
-		// checks if padding is consistent
+		// checks if default font is consistent
 		Checker.checkIfValid(defaultValue, "Default font item");
 		// gets value
 		return ScriptableUtils.getOptionValue(context, callback, defaultValue.create());
