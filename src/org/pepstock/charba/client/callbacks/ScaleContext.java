@@ -19,6 +19,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.Axis;
+import org.pepstock.charba.client.configuration.RadialPointLabels;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScaleTickItem;
 import org.pepstock.charba.client.items.Undefined;
@@ -29,7 +30,8 @@ import org.pepstock.charba.client.items.Undefined;
  * <ul>
  * <li><b>index</b>: index of the associated data
  * <li><b>scale</b>: scale instance which contains the element to configure
- * <li><b>tick</b>: tick item instance which contains data to be consumed configuring the element
+ * <li><b>tick</b>: tick item instance which contains data to be consumed configuring the element (only for ticks)
+ * <li><b>label</b>: label item to manage by callback (only for point label context)
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
@@ -43,6 +45,7 @@ public final class ScaleContext extends ChartContext {
 	{
 		SCALE("scale"),
 		INDEX("index"),
+		LABEL("label"),
 		TICK("tick");
 
 		// name value of property
@@ -131,6 +134,15 @@ public final class ScaleContext extends ChartContext {
 			this.tick = ScaleTickItem.FACTORY.create(getValue(Property.TICK));
 		}
 		return tick;
+	}
+	
+	/**
+	 * Returns the label that is shown on the perimeter of the scale. Only for {@link RadialPointLabels} callback.
+	 * 
+	 * @return the label that is shown on the perimeter of the scale. Only for {@link RadialPointLabels} callback.
+	 */
+	public String getLabel() {
+		return getValue(Property.LABEL, Undefined.STRING);
 	}
 
 	/*

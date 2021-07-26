@@ -186,6 +186,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `numberFormat` scriptable options to all numeric axes configuration (cartesian linear, cartesian logarithmic, radial linear).
   * add `threshold` option to `Decimation` configuration.
   * add `stack` and `stackWeight` options to `CartesianAxis` configuration.
+  * add `pointLabel` item to `ContextType` class.
     
 ### Developing
 

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.configuration.RadialPointLabels;
 
 /**
  * Enumerates the type of scriptable options context.
@@ -44,6 +45,10 @@ public enum ContextType implements Key
 	 * Tick of scale context type.
 	 */
 	TICK("tick"),
+	/**
+	 * Point label context type, only for {@link RadialPointLabels}.
+	 */
+	POINT_LABEL("pointLabel"),
 	/**
 	 * Tick of scale context type.
 	 */
