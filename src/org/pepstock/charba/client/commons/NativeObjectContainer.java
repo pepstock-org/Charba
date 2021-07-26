@@ -55,7 +55,7 @@ public abstract class NativeObjectContainer {
 	 * @param nativeObject native object instance to be wrapped.
 	 */
 	protected NativeObjectContainer(NativeObject nativeObject) {
-		this.nativeObject = (nativeObject == null ? NativeObjectUtils.create() : NativeObjectHashing.handleHashCode(nativeObject));
+		this.nativeObject = (nativeObject == null ? NativeObjectUtils.create() : nativeObject);
 	}
 
 	// ------------------------------------------
