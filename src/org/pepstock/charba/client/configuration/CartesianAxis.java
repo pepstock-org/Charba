@@ -188,5 +188,49 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	public Bounds getBounds() {
 		return getScale().getBounds();
 	}
+	
+	/**
+	 * Sets the stack group.<br>
+	 * Axes at the same position with same stack are stacked.
+	 * 
+	 * @param stack the stack group.<br>
+	 *            Axes at the same position with same stack are stacked
+	 */
+	public void setStack(String stack) {
+		getScale().setStack(stack);
+	}
+
+	/**
+	 * Returns the stack group.<br>
+	 * Axes at the same position with same stack are stacked.
+	 * 
+	 * @return the stack group.<br>
+	 *         Axes at the same position with same stack are stacked
+	 */
+	public String getStack() {
+		return getScale().getStack();
+	}
+	
+	/**
+	 * Sets the weight of the scale in stack group.<br>
+	 * Used to determine the amount of allocated space for the scale within the group.
+	 * 
+	 * @param stackWeight the weight of the scale in stack group.<br>
+	 *            Used to determine the amount of allocated space for the scale within the group.
+	 */
+	public void setStackWeight(double stackWeight) {
+		getScale().setStackWeight(stackWeight);
+	}
+
+	/**
+	 * Returns the weight of the scale in stack group.<br>
+	 * Used to determine the amount of allocated space for the scale within the group.
+	 * 
+	 * @return the weight of the scale in stack group.<br>
+	 *         Used to determine the amount of allocated space for the scale within the group
+	 */
+	public double getStackWeight() {
+		return getScale().getStackWeight();
+	}
 
 }

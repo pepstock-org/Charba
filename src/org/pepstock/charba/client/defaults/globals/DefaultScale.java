@@ -27,6 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultTime;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Bounds;
 import org.pepstock.charba.client.enums.Display;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * CHART.JS default values for scale/axis element.
@@ -66,6 +67,10 @@ public final class DefaultScale implements IsDefaultScale {
 	private static final double DEFAULT_SUGGESTED_MIN = Double.MIN_VALUE;
 
 	private static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.TRANSPARENT.toRGBA();
+
+	private static final String DEFAULT_STACK = Undefined.STRING;
+
+	private static final double DEFAULT_STACK_WEIGHT = 1D;
 
 	private final DefaultAngleLines angleLines = new DefaultAngleLines();
 
@@ -346,6 +351,26 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public String getBackgroundColorAsString() {
 		return DEFAULT_BACKGROUND_COLOR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getStack()
+	 */
+	@Override
+	public String getStack() {
+		return DEFAULT_STACK;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getStackWeight()
+	 */
+	@Override
+	public double getStackWeight() {
+		return DEFAULT_STACK_WEIGHT;
 	}
 
 }

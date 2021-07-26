@@ -328,4 +328,24 @@ public final class DefaultChartScale implements IsDefaultScale {
 		return scale.getBackgroundColorAsString();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getStack()
+	 */
+	@Override
+	public String getStack() {
+		return scale.getStack();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getStackWeight()
+	 */
+	@Override
+	public double getStackWeight() {
+		return scale.getStackWeight();
+	}
+
 }

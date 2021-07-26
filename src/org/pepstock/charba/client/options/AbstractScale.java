@@ -65,9 +65,12 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		TICKS("ticks"),
 		BACKGROUND_COLOR("backgroundColor"),
 		// cartesian
+		BOUNDS("bounds"),
 		POSITION("position"),
 		OFFSET("offset"),
 		GRID("grid"),
+		STACK("stack"),
+		STACK_WEIGHT("stackWeight"),
 		TITLE("title"),
 		// linear cartesian
 		BEGIN_AT_ZERO("beginAtZero"),
@@ -78,7 +81,6 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		SUGGESTED_MIN("suggestedMin"),
 		// time cartesian
 		ADAPTERS("adapters"),
-		BOUNDS("bounds"),
 		TIME("time"),
 		// radial linear
 		ANIMATE("animate"),
@@ -778,6 +780,52 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	@Override
 	public final Bounds getBounds() {
 		return getValue(Property.BOUNDS, Bounds.values(), getDefaultValues().getBounds());
+	}
+
+	/**
+	 * Sets the stack group.<br>
+	 * Axes at the same position with same stack are stacked.
+	 * 
+	 * @param stack the stack group.<br>
+	 *            Axes at the same position with same stack are stacked
+	 */
+	public final void setStack(String stack) {
+		setValueAndAddToParent(Property.STACK, stack);
+	}
+
+	/**
+	 * Returns the stack group.<br>
+	 * Axes at the same position with same stack are stacked.
+	 * 
+	 * @return the stack group.<br>
+	 *         Axes at the same position with same stack are stacked
+	 */
+	@Override
+	public final String getStack() {
+		return getValue(Property.STACK, getDefaultValues().getStack());
+	}
+
+	/**
+	 * Sets the weight of the scale in stack group.<br>
+	 * Used to determine the amount of allocated space for the scale within the group.
+	 * 
+	 * @param stackWeight the weight of the scale in stack group.<br>
+	 *            Used to determine the amount of allocated space for the scale within the group.
+	 */
+	public final void setStackWeight(double stackWeight) {
+		setValueAndAddToParent(Property.STACK_WEIGHT, stackWeight);
+	}
+
+	/**
+	 * Returns the weight of the scale in stack group.<br>
+	 * Used to determine the amount of allocated space for the scale within the group.
+	 * 
+	 * @return the weight of the scale in stack group.<br>
+	 *         Used to determine the amount of allocated space for the scale within the group
+	 */
+	@Override
+	public final double getStackWeight() {
+		return getValue(Property.STACK_WEIGHT, getDefaultValues().getStackWeight());
 	}
 
 	/**
