@@ -11,7 +11,7 @@
     "url": "https://github.com/pepstock-org/Charba.git"
   },
   "dependencies": {
-    "chart.js": "3.4.1",
+    "chart.js": "3.5.0",
     "chartjs-adapter-luxon": "1.0.0",
     "chartjs-plugin-datalabels": "2.0.0",
     "chartjs-plugin-zoom": "1.1.1",
