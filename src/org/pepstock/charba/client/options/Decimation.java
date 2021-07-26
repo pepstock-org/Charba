@@ -48,7 +48,8 @@ public final class Decimation extends AbstractModel<Plugins, IsDefaultDecimation
 	{
 		ENABLED("enabled"),
 		ALGORITHM("algorithm"),
-		SAMPLES("samples");
+		SAMPLES("samples"),
+		THRESHOLD("threshold");
 
 		// name value of property
 		private final String value;
@@ -143,5 +144,28 @@ public final class Decimation extends AbstractModel<Plugins, IsDefaultDecimation
 	@Override
 	public double getSamples() {
 		return getValue(Property.SAMPLES, getDefaultValues().getSamples());
+	}
+
+	/**
+	 * If the number of samples in the current axis range is above this value, the decimation will be triggered.<br>
+	 * Defaults to 4 times the canvas width.<br>
+	 * The number of point after decimation can be higher than the threshold value.
+	 * 
+	 * @param threshold the number of samples in the current axis range is above this value, the decimation will be triggered
+	 */
+	public void setThreshold(double threshold) {
+		setValueAndAddToParent(Property.THRESHOLD, Checker.positiveOrZero(threshold));
+	}
+
+	/**
+	 * If the number of samples in the current axis range is above this value, the decimation will be triggered.<br>
+	 * Defaults to 4 times the canvas width.<br>
+	 * The number of point after decimation can be higher than the threshold value.
+	 * 
+	 * @return the number of samples in the current axis range is above this value, the decimation will be triggered
+	 */
+	@Override
+	public double getThreshold() {
+		return getValue(Property.THRESHOLD, getDefaultValues().getThreshold());
 	}
 }

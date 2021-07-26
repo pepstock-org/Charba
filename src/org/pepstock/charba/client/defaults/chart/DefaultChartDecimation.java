@@ -66,4 +66,14 @@ public final class DefaultChartDecimation implements IsDefaultDecimation {
 		return decimation.getSamples();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultDecimation#getThreshold()
+	 */
+	@Override
+	public double getThreshold() {
+		return decimation.getThreshold();
+	}
+
 }

@@ -46,4 +46,14 @@ public interface IsDefaultDecimation {
 	 * @return the number of samples in the output data set
 	 */
 	double getSamples();
+	
+	/**
+	 * If the number of samples in the current axis range is above this value, the decimation will be triggered.<br>
+	 * Defaults to 4 times the canvas width.<br>
+	 * The number of point after decimation can be higher than the threshold value.
+	 * 
+	 * @return the number of samples in the current axis range is above this value, the decimation will be triggered
+	 */
+	double getThreshold();
+	
 }

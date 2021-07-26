@@ -30,6 +30,8 @@ public final class DefaultDecimation implements IsDefaultDecimation {
 
 	private static final double DEFAULT_SAMPLES = Undefined.DOUBLE;
 
+	private static final double DEFAULT_THRESHOLD = Undefined.DOUBLE;
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -65,6 +67,16 @@ public final class DefaultDecimation implements IsDefaultDecimation {
 	@Override
 	public double getSamples() {
 		return DEFAULT_SAMPLES;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultDecimation#getThreshold()
+	 */
+	@Override
+	public double getThreshold() {
+		return DEFAULT_THRESHOLD;
 	}
 
 }
