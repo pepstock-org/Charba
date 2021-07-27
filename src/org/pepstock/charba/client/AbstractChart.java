@@ -1110,6 +1110,23 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			instance.hide(datasetIndex);
 		}
 	}
+	
+	/**
+	 * Sets the hidden flag of that element index to <code>true</code> and updates the chart.
+	 * 
+	 * @param datasetIndex dataset index
+	 * @param dataIndex data index
+	 */
+	@Override
+	public final void hide(int datasetIndex, int dataIndex) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
+		// checks consistency of chart and indexes
+		if (instance != null && isValidDatasetIndex(datasetIndex) && dataIndex >= 0) {
+			// hides data at data index
+			instance.hide(datasetIndex, dataIndex);
+		}
+	}
 
 	/**
 	 * Sets the visibility for the given dataset to true.<br>
@@ -1126,6 +1143,23 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		if (instance != null && isValidDatasetIndex(datasetIndex)) {
 			// hides dataset
 			instance.show(datasetIndex);
+		}
+	}
+	
+	/**
+	 * Sets the hidden flag of that element index to <code>false</code> and updates the chart.
+	 * 
+	 * @param datasetIndex dataset index
+	 * @param dataIndex data index
+	 */
+	@Override
+	public final void show(int datasetIndex, int dataIndex) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
+		// checks consistency of chart and indexes
+		if (instance != null && isValidDatasetIndex(datasetIndex) && dataIndex >= 0) {
+			// shows data at data index
+			instance.show(datasetIndex, dataIndex);
 		}
 	}
 

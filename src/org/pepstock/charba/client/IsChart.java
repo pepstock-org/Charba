@@ -585,6 +585,14 @@ public interface IsChart {
 	 * @param datasetIndex dataset index
 	 */
 	void hide(int datasetIndex);
+	
+	/**
+	 * Sets the hidden flag of that element index to <code>true</code> and updates the chart.
+	 * 
+	 * @param datasetIndex dataset index
+	 * @param dataIndex data index
+	 */
+	void hide(int datasetIndex, int dataIndex);
 
 	/**
 	 * Sets the visibility for the given dataset to true.<br>
@@ -594,6 +602,14 @@ public interface IsChart {
 	 * @param datasetIndex dataset index
 	 */
 	void show(int datasetIndex);
+	
+	/**
+	 * Sets the hidden flag of that element index to <code>false</code> and updates the chart.
+	 * 
+	 * @param datasetIndex dataset index
+	 * @param dataIndex data index
+	 */
+	void show(int datasetIndex, int dataIndex);
 
 	/**
 	 * Calling on your chart instance passing an argument of an event, will return the single element at the event position.<br>

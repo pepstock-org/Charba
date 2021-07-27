@@ -89,14 +89,16 @@ Chart.prototype.toggleDataVisibility = function(index) {};
 Chart.prototype.getDataVisibility = function(index) {};
 /**
  * @param {number} datasetIndex
+ * @param {number=} dataIndex
  * @return {undefined}
  */
-Chart.prototype.hide = function(datasetIndex) {};
+Chart.prototype.hide = function(datasetIndex, dataIndex) {};
 /**
  * @param {number} datasetIndex
+ * @param {number=} dataIndex
  * @return {undefined}
  */
-Chart.prototype.show = function(datasetIndex) {};
+Chart.prototype.show = function(datasetIndex, dataIndex) {};
 /**
  * @param {Array} elements
  * @return {undefined}

@@ -189,6 +189,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `pointLabel` item to `ContextType` enumeration class.
   * add `middle` item to `BorderSkipped` enumeration class.
   * add `datasetIndex`, `startDataIndex` and `endDataIndex` properties to segment context for Segment callbacks.
+  * add `hide` and `show` methods to chart classes in order to hide and/or show specific data element. 
     
 ### Developing
 

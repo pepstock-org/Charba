@@ -610,11 +610,31 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#hide(int, int)
+	 */
+	@Override
+	public void hide(int datasetIndex, int dataIndex) {
+		chart.hide(datasetIndex, dataIndex);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#show(int)
 	 */
 	@Override
 	public void show(int datasetIndex) {
 		chart.show(datasetIndex);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#show(int, int)
+	 */
+	@Override
+	public void show(int datasetIndex, int dataIndex) {
+		chart.show(datasetIndex, dataIndex);
 	}
 
 	/*

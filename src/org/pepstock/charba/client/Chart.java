@@ -267,6 +267,15 @@ public final class Chart {
 	native void hide(int datasetIndex);
 
 	/**
+	 * Sets the hidden flag of that element index to <code>true</code> and updates the chart.
+	 * 
+	 * @param datasetIndex dataset index
+	 * @param dataIndex data index
+	 */
+	@JsMethod
+	native void hide(int datasetIndex, int dataIndex);
+
+	/**
 	 * Sets the visibility for the given dataset to true.<br>
 	 * Updates the chart and animates the dataset with 'show' mode.<br>
 	 * This animation can be configured under the show key in animation options.
@@ -276,6 +285,15 @@ public final class Chart {
 	@JsMethod
 	native void show(int datasetIndex);
 
+	/**
+	 * Sets the hidden flag of that element index to <code>false</code> and updates the chart.
+	 * 
+	 * @param datasetIndex dataset index
+	 * @param dataIndex data index
+	 */
+	@JsMethod
+	native void show(int datasetIndex, int dataIndex);
+	
 	/**
 	 * Sets the active (hovered) elements for the chart.
 	 * 
