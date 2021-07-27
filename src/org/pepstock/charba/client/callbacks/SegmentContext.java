@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.Segment;
 import org.pepstock.charba.client.enums.ContextType;
 import org.pepstock.charba.client.items.DatasetElement;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * The callback or handler context wrapper, created and passed by {@link Segment} which contains the line charts references.
@@ -33,7 +34,10 @@ public final class SegmentContext extends ChartContext {
 	 */
 	private enum Property implements Key
 	{
+		DATASET_INDEX("datasetIndex"),
+		P0_DATA_INDEX("p0DataIndex"),
 		P0("p0"),
+		P1_DATA_INDEX("p1DataIndex"),
 		P1("p1");
 
 		// name value of property
@@ -92,6 +96,33 @@ public final class SegmentContext extends ChartContext {
 	 */
 	public DatasetElement getEndPoint() {
 		return point1;
+	}
+
+	/**
+	 * Returns the index of the current data set.
+	 * 
+	 * @return the index of the current data set.
+	 */
+	public int getDatasetIndex() {
+		return getValue(Property.DATASET_INDEX, Undefined.INTEGER);
+	}
+
+	/**
+	 * Returns the index of the current data of starting point of segment.
+	 * 
+	 * @return the index of the current data of starting point of segment
+	 */
+	public int getStartDataIndex() {
+		return getValue(Property.P0_DATA_INDEX, Undefined.INTEGER);
+	}
+
+	/**
+	 * Returns the index of the current data of ending point of segment.
+	 * 
+	 * @return the index of the current data of ending point of segment
+	 */
+	public int getEndDataIndex() {
+		return getValue(Property.P1_DATA_INDEX, Undefined.INTEGER);
 	}
 
 	/*

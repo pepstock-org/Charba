@@ -188,6 +188,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `stack` and `stackWeight` options to `CartesianAxis` configuration.
   * add `pointLabel` item to `ContextType` enumeration class.
   * add `middle` item to `BorderSkipped` enumeration class.
+  * add `datasetIndex`, `startDataIndex` and `endDataIndex` properties to segment context for Segment callbacks.
     
 ### Developing
 
