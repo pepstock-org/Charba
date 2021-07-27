@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.data.StackedBarDataset;
 
 /**
  * Property to set the border position on chart datasets.<br>
@@ -40,19 +41,23 @@ public enum BorderSkipped implements Key
 	 */
 	TOP("top"),
 	/**
-	 * the left property sets the left edge of an element to a unit to the left/right to its normal position.
+	 * The left property sets the left edge of an element to a unit to the left/right to its normal position.
 	 */
 	LEFT("left"),
 	/**
-	 * the bottom property sets the bottom edge of an element to a unit above/below its normal position.
+	 * The bottom property sets the bottom edge of an element to a unit above/below its normal position.
 	 */
 	BOTTOM("bottom"),
 	/**
-	 * the right property sets the right edge of an element to a unit to the left/right to its normal position.
+	 * The right property sets the right edge of an element to a unit to the left/right to its normal position.
 	 */
 	RIGHT("right"),
 	/**
-	 * the property sets <code>false</code> to avoid drawing the bar stroke at the base of the fill.
+	 * The middle property sets the borders between bars are skipped. It's ONLY valid on stacked bars {@link StackedBarDataset}.
+	 */
+	MIDDLE("middle"),
+	/**
+	 * The property sets <code>false</code> to avoid drawing the bar stroke at the base of the fill.
 	 */
 	FALSE("false");
 
