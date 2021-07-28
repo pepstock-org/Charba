@@ -16,11 +16,11 @@
 package org.pepstock.charba.client.geo;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -120,7 +120,7 @@ final class GeoDatasetHandler<T extends GeoDataPoint> extends CommonOptionsHandl
 		}
 		// checks if wants to bind the array
 		if (binding) {
-			List<T> result = new LinkedList<>();
+			List<T> result = new ArrayObjectContainerList<>();
 			// set value
 			setArrayValue(Property.DATA, ArrayObject.fromOrEmpty(result));
 			// returns list
