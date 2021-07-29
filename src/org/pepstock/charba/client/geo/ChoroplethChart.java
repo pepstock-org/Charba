@@ -68,7 +68,7 @@ public final class ChoroplethChart extends BaseGeoChart<ChoroplethDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.impl.charts.BaseMeterChart#getControllerType()
+	 * @see org.pepstock.charba.client.geo.BaseGeoChart#getControllerType()
 	 */
 	@Override
 	ControllerType getControllerType() {

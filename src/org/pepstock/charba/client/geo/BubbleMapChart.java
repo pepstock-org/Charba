@@ -69,7 +69,7 @@ public final class BubbleMapChart extends BaseGeoChart<BubbleMapDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.impl.charts.BaseMeterChart#getControllerType()
+	 * @see org.pepstock.charba.client.geo.BaseGeoChart#getControllerType()
 	 */
 	@Override
 	ControllerType getControllerType() {
