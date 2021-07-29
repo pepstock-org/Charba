@@ -37,9 +37,9 @@ Even if **Charba** was born only as GWT chart library, as of version 3, **Charba
 Building
 --------
 
-To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/4.0/build.xml).
+To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/4.1/build.xml).
 
-The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/4.0/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
+The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/4.1/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
 
 The first distribution is a **Charba** file without any GWT dependency (but working on GWT anyway), consumable also in other [J2CL - JavaToClosure](https://github.com/google/j2cl) frameworks, like [Google Elemental2](https://github.com/google/elemental2) and [Elemento](https://github.com/hal/elemento).
 
@@ -53,7 +53,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
-[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_41.png)](https://github.com/pepstock-org/Charba-Showcase/blob/4.0/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_41.png)](https://github.com/pepstock-org/Charba-Showcase/blob/4.1/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------
@@ -68,26 +68,26 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>4.0</version>
+    <version>4.1</version>
     <!-- for GWT -->
-    <version>4.0-gwt</version>
+    <version>4.1-gwt</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="4.0"/>
+<dependency org="org.pepstock" name="charba" rev="4.1"/>
 <!-- for GWT -->
-<dependency org="org.pepstock" name="charba" rev="4.0-gwt"/>
+<dependency org="org.pepstock" name="charba" rev="4.1-gwt"/>
 ```
 
 If you are using [Gradle](https://gradle.org/):
 
 ```json
-compile group: 'org.pepstock', name: 'charba', version: '4.0'
+compile group: 'org.pepstock', name: 'charba', version: '4.1'
 
-compile group: 'org.pepstock', name: 'charba', version: '4.0-gwt'
+compile group: 'org.pepstock', name: 'charba', version: '4.1-gwt'
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration in your GWT project module configuration:
@@ -227,7 +227,7 @@ Documentation
 
 All **Charba** documentation will be maintained in [Charba-Wiki](https://github.com/pepstock-org/Charba-Wiki) project.
 
-API JavaDoc for version **4.0** is published [here](https://pepstock-org.github.io/Charba/4.0/index.html).
+API JavaDoc for version **4.1** is published [here](https://pepstock-org.github.io/Charba/4.1/index.html).
 
 You can also access the previous API JavaDoc, because every version is published to `https://pepstock-org.github.io/Charba/[version.release]`.
 
@@ -254,66 +254,6 @@ Continuous integration and quality gate
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
 In the project, it's also provided the [FindBugs](http://findbugs.sourceforge.net/) project to look for bugs.
-
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
-
-### Breaking changes
-  * rename `AxisType` to `ChartAxisType` in order to enable custom axes type.
-  * rename `AxisCalculateTickRotationCallback` class to `AxisCalculateLabelRotationCallback`.
-    * rename `onBeforeAxisCalculateTickRotation` method of the interface to `onBeforeAxisCalculateLabelRotation`.
-    * rename `onAfterAxisCalculateTickRotation` method of the interface to `onAfterAxisCalculateLabelRotation`.
-    * rename `setAxisCalculateTickRotation` method of the Axis class to `setAxisCalculateLabelRotation`.
-    * rename `getAxisCalculateTickRotation` method of the Axis class to `getAxisCalculateLabelRotation`.
-
-### Features
-
-  * import CHART.JS [version 3.5.0](https://github.com/chartjs/Chart.js/releases/tag/v3.5.0).
-  * import CHART.JS DATALABELS plugin [version 2.0.0](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v2.0.0).
-  * import CHART.JS ZOOM plugin [version 1.1.1](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.1.1).
-  * import Luxon library [version 2.0.1](https://github.com/moment/luxon/releases/tag/2.0.1).
-  * import CHART.JS GEO controller [version v3.1.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.1.0)
-    * enable geographic map chart types such as choropleth and bubble map.
-  * add `Subtitle` options and configuration items.  
-  * add `hover`, `enter` and `leave` axes events.
-  * add `enter` and `leave` title events.
-  * add `backgroundColor`, `borderColor` and `borderWidth` scriptable options to all `Elements` configuration (bar, line, point, arc).
-  * add `hoverBackgroundColor`, `hoverBorderColor` and `hoverBorderWidth` scriptable options to all `Elements` configuration (bar, line, point, arc).
-  * add `borderAlign`, `borderRadius`, `angle`, `offset` and `hoverOffset` scriptable options to `Arc` configuration.
-  * add `pointStyle`, `borderSkipped`, `borderRadius`, `hoverBorderRadius` and `enableBorderRadius` scriptable options to `Bar` configuration.
-  * add `borderCapStyle`, `borderDash`, `borderDashOffset`, `borderJoinStyle`, `fill` and `cubicInterpolationMode` scriptable options to `Line` configuration.
-  * add `radius`, `hitRadius`, `hoverRadius`, `pointStyle` and `rotation` scriptable options to `Point` configuration.
-  * add `parsing` and `normalized` options to `Dataset` configuration.
-  * enable the feature to create custom axes types (for injected controller).
-  * enable `enableBorderRadius` and `hoverBorderRadius` scriptable options on `BarDataset` class.
-  * enable `stepped` scriptable option on `Line` element and `LineDataset` classes.
-  * add `spacing` property to `Arc` element and `PieDataset` and `DoughnutDataset` classes.
-  * add `originalMin` and `originalMax` properties to `ScaleLimit` object in the `ZoomPlugin`.
-  * add `getZoomLevel` method to the `ZoomPlugin` class.
-  * add `threshold` and `modifierKey` properties to `Drag` configuration in the `ZoomPlugin`.
-  * add new events items to `Event` enumeration.
-  * add `globalCompositeOperation` property to `Context2dItem` and `ChartBackgroundColorOptions` plugin.
-  * add options builder for `ChartBackgroundColor` plugin.
-  * add options builder for `ChartPointer` plugin.
-  * add options builder for `HtmlLegend` plugin.
-  * add `Canvas` object as possible value for `pointStyle` option to enable custom point styles.
-  * add `toCanvas` method to `CastHelper` class in order to enable casting `HTMLCanvasElement` instance to `Canvas` object.
-  * add `numberFormat` scriptable options to all numeric axes configuration (cartesian linear, cartesian logarithmic, radial linear).
-  * add `threshold` option to `Decimation` configuration.
-  * add `stack` and `stackWeight` options to `CartesianAxis` configuration.
-  * add `pointLabel` item to `ContextType` enumeration class.
-  * add `middle` item to `BorderSkipped` enumeration class.
-  * add `datasetIndex`, `startDataIndex` and `endDataIndex` properties to segment context for Segment callbacks.
-  * add `hide` and `show` methods to chart classes in order to hide and/or show specific data element. 
-    
-### Developing
-
-  * change dependency for Google Closure Compiler, [version v20210601](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20210601).
-  * add `parse` method to `JSON` utility class.
-  * add `clipArea` and `unclipArea` methods to `Helpers` utility class.
-  * hide java script property visibility of `$H` hash code property in java script object mapped by a `NativeObjectContainer`, when new object has been created. 
     
 License
 -------
