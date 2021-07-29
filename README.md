@@ -12,6 +12,28 @@ Charba - J2CL and GWT Charts library based on CHART.JS
   <a href="https://pepstock-org.github.io/Charba/next/"><img alt="Next javadoc version" src="https://img.shields.io/badge/Javadoc-Next%20version-F27173.svg"></a>
 </p>
 
+What's Charba
+--------
+
+[GWT Web toolkit](http://www.gwtproject.org/) doesn't have charting library available out of the box.
+
+There are some open source charting libraries for GWT available to be used but with some constraints or unclear items:
+
+ * internet connection needed
+ * open source license not completely clear, sometimes with some obligations like to add specific labels
+ * old packages not longer maintained
+
+For all these reasons, **Charba** has been developed, leveraging on [Chart.JS](http://www.chartjs.org/) capabilities which are now available to GWT developers.
+
+Not only GWT
+------------
+
+Even if **Charba** was born only as GWT chart library, as of version 3, **Charba** has been changed in order to be used not only in GWT but also with other DOM frameworks, based on [J2CL - JavaToClosure](https://github.com/google/j2cl), like [Google Elemental2](https://github.com/google/elemental2) or [Elemento](https://github.com/hal/elemento).
+
+**Charba** has got an own DOM manager which allows to it to be independent from any other DOM frameworks (i.e. GWT, Elemental2 or Elemento) but it is providing a set of hooks in order to use it also over those frameworks.
+
+[![CharbaDiagram](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charbaDiagram.png)](https://pepstock-org.github.io/Charba-Wiki/docs/getting-started/Integration)
+
 Gallery
 --------
 
@@ -65,28 +87,6 @@ Gallery
     <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBubbleMap.png"></td>
   </tr>  
 </table>
-
-What's Charba
---------
-
-[GWT Web toolkit](http://www.gwtproject.org/) doesn't have charting library available out of the box.
-
-There are some open source charting libraries for GWT available to be used but with some constraints or unclear items:
-
- * internet connection needed
- * open source license not completely clear, sometimes with some obligations like to add specific labels
- * old packages not longer maintained
-
-For all these reasons, **Charba** has been developed, leveraging on [Chart.JS](http://www.chartjs.org/) capabilities which are now available to GWT developers.
-
-Not only GWT
-------------
-
-Even if **Charba** was born only as GWT chart library, as of version 3, **Charba** has been changed in order to be used not only in GWT but also with other DOM frameworks, based on [J2CL - JavaToClosure](https://github.com/google/j2cl), like [Google Elemental2](https://github.com/google/elemental2) or [Elemento](https://github.com/hal/elemento).
-
-**Charba** has got an own DOM manager which allows to it to be independent from any other DOM frameworks (i.e. GWT, Elemental2 or Elemento) but it is providing a set of hooks in order to use it also over those frameworks.
-
-[![CharbaDiagram](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charbaDiagram.png)](https://pepstock-org.github.io/Charba-Wiki/docs/getting-started/Integration)
     
 Building
 --------
