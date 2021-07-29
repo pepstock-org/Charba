@@ -165,7 +165,7 @@ public abstract class AbstractPieOptions extends ConfigurationOptions {
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getAxisById(int)
 	 */
 	@Override
-	Axis getAxisById(int id) {
+	protected final Axis getAxisById(int id) {
 		// no axis
 		return null;
 	}

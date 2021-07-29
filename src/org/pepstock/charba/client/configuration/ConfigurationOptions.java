@@ -441,7 +441,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @param id the unique CHARBA id of scale
 	 * @return the axis or <code>null</code> if not axis.
 	 */
-	abstract Axis getAxisById(int id);
+	protected abstract Axis getAxisById(int id);
 
 	/**
 	 * Sets the browser events that the chart should listen to.
