@@ -68,6 +68,8 @@
 	<property name="javascript.datalabels.minify.file" value="chartjs-plugin-datalabels.min.js" />
 	<property name="javascript.zoom.minify.file" value="chartjs-plugin-zoom.min.js" />
 	<property name="javascript.hammer.minify.file" value="hammer.min.js" />
+	<property name="javascript.geo.minify.file" value="chartjs-chart-geo.min.js" />
+	<property name="javascript.treemap.minify.file" value="chartjs-chart-treemap.min.js" />
 	<!-- 
 		CHART.JS date adapters 
 	-->
@@ -674,6 +676,24 @@
 			<fileset dir="${retrieve.dir}" includes="${javascript.luxon.minify.file}" />
 		</delete>
 		<get src="https://cdn.jsdelivr.net/npm/luxon@${depver.luxon}" dest="${retrieve.dir}/${javascript.luxon.minify.file}" />
+	</target>
+
+	<target name="retrieveOfficialGeo">
+		<echo>Retrieve GEO controller minify javascript resource - version ${depver.geo}</echo>
+		<mkdir dir="${retrieve.dir}" />
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${retrieve.dir}" includes="${javascript.geo.minify.file}" />
+		</delete>
+		<get src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@${depver.geo}" dest="${retrieve.dir}/${javascript.geo.minify.file}" />
+	</target>
+
+	<target name="retrieveOfficialTreeMap">
+		<echo>Retrieve TreeMap controller minify javascript resource - version ${depver.treemap}</echo>
+		<mkdir dir="${retrieve.dir}" />
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${retrieve.dir}" includes="${javascript.treemap.minify.file}" />
+		</delete>
+		<get src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@${depver.treemap}" dest="${retrieve.dir}/${javascript.treemap.minify.file}" />
 	</target>
 
 </project>
