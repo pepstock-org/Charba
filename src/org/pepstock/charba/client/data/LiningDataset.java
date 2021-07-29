@@ -258,7 +258,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	LiningDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+	protected LiningDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
 		this.fillHandler = new LiningDatasetFillHandler(this, getDefaultValues().getElements().getLine().getFill(), getNativeObject());
 		// sets new order handler

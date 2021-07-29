@@ -47,7 +47,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	HovingDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+	protected HovingDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
 	}
 
