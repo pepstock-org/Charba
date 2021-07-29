@@ -1011,8 +1011,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Sets the data property of a data set for a chart is specified as an array of numbers.<br>
-	 * Each point in the data array corresponds to the label at the same index on the x axis.
+	 * Sets the data property of a data set for a chart is specified as a list of numbers.<br>
+	 * Each point in the data list corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param values list of numbers.
 	 */
@@ -1026,8 +1026,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns the data property of a data set for a chart is specified as an array of numbers.<br>
-	 * Each point in the data array corresponds to the label at the same index on the x axis.
+	 * Returns the data property of a data set for a chart is specified as a list of numbers.<br>
+	 * Each point in the data list corresponds to the label at the same index on the x axis.
 	 * 
 	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
 	 */
@@ -1036,8 +1036,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	}
 
 	/**
-	 * Returns the data property of a data set for a chart is specified as an array of numbers.<br>
-	 * Each point in the data array corresponds to the label at the same index on the x axis.
+	 * Returns the data property of a data set for a chart is specified as a list of numbers.<br>
+	 * Each point in the data list corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param binding if <code>true</code> binds the new array list in the container
 	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
