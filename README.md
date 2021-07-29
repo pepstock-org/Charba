@@ -33,60 +33,6 @@ Even if **Charba** was born only as GWT chart library, as of version 3, **Charba
 **Charba** has got an own DOM manager which allows to it to be independent from any other DOM frameworks (i.e. GWT, Elemental2 or Elemento) but it is providing a set of hooks in order to use it also over those frameworks.
 
 [![CharbaDiagram](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charbaDiagram.png)](https://pepstock-org.github.io/Charba-Wiki/docs/getting-started/Integration)
-
-Gallery
---------
-
-<table>
-  <tr>
-    <td align="center">Bar</td>
-	<td align="center">Horizontal bar</td>
-	<td align="center">Line</td>
-	<td align="center">Vertical line</td>
-  </tr>
-  <tr>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBar.png"></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryHorizontalBar.png"></td>
-	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryLine.png"></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryVerticalLine.png"></td>
-  </tr>
-  <tr>
-    <td align="center">Scatter</td>
-	<td align="center">Doughnut</td>
-	<td align="center">Pie</td>
-	<td align="center">Polar area</td>
-  </tr>
-  <tr>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryScatter.png"></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryDoughnut.png"></td>
-	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryPie.png"></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryPolarArea.png"></td>
-  </tr>
-  <tr>
-    <td align="center">Radar</td>
-	<td align="center">Bubble</td>
-	<td align="center">Time series</td>
-	<td align="center">Stacked</td>
-  </tr>
-  <tr>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryRadar.png"></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBubble.png"></td>
-	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryTimeseries.png"></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryStacked.png"></td>
-  </tr>  
-  <tr>
-    <td align="center">Meter</td>
-	<td align="center">Gauge</td>
-	<td align="center">Choropleth</td>
-	<td align="center">Bubble map</td>
-  </tr>
-  <tr>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryMeter.png"></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryGauge.png"></td>
-	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryChoropleth.png"></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBubbleMap.png"></td>
-  </tr>  
-</table>
     
 Building
 --------
@@ -156,6 +102,59 @@ To install in your GWT project, both for GWT and for J2CL artifacts, you must th
 
 As the name suggests, JsInterop is a way of interoperating Java with JavaScript. It offers a better way of communication between the two using annotations instead of having to write java script in your classes (using JSNI).
 
+Gallery
+--------
+
+<table>
+  <tr>
+    <td align="center">Bar</td>
+	<td align="center">Horizontal bar</td>
+	<td align="center">Line</td>
+	<td align="center">Vertical line</td>
+  </tr>
+  <tr>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBar.png"></td>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryHorizontalBar.png"></td>
+	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryLine.png"></td>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryVerticalLine.png"></td>
+  </tr>
+  <tr>
+    <td align="center">Scatter</td>
+	<td align="center">Doughnut</td>
+	<td align="center">Pie</td>
+	<td align="center">Polar area</td>
+  </tr>
+  <tr>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryScatter.png"></td>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryDoughnut.png"></td>
+	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryPie.png"></td>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryPolarArea.png"></td>
+  </tr>
+  <tr>
+    <td align="center">Radar</td>
+	<td align="center">Bubble</td>
+	<td align="center">Time series</td>
+	<td align="center">Stacked</td>
+  </tr>
+  <tr>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryRadar.png"></td>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBubble.png"></td>
+	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryTimeseries.png"></td>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryStacked.png"></td>
+  </tr>  
+  <tr>
+    <td align="center">Meter</td>
+	<td align="center">Gauge</td>
+	<td align="center">Choropleth</td>
+	<td align="center">Bubble map</td>
+  </tr>
+  <tr>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryMeter.png"></td>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryGauge.png"></td>
+	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryChoropleth.png"></td>
+    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBubbleMap.png"></td>
+  </tr>  
+</table>
 
 Documentation
 -------------
