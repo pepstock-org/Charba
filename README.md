@@ -118,9 +118,21 @@ Gallery
         <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBar.png"/>
       </a>
     </td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryHorizontalBar.png"/></td>
-	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryLine.png"/></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryVerticalLine.png"/></td>
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=horizontalbar">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryHorizontalBar.png"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=line">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryLine.png"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=verticalline">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryVerticalLine.png"/>
+      </a>
+    </td>
   </tr>
   <tr>
     <td align="center">Scatter</td>
@@ -129,10 +141,26 @@ Gallery
 	<td align="center">Polar area</td>
   </tr>
   <tr>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryScatter.png"/></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryDoughnut.png"/></td>
-	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryPie.png"/></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryPolarArea.png"/></td>
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=scatter">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryScatter.png"/>
+      </a>
+    </td>  
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=doughnut">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryDoughnut.png"/>
+      </a>
+    </td>  
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=pie">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryPie.png"/>
+      </a>
+    </td>  
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=polararea">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryPolarArea.png"/>
+      </a>
+    </td>  
   </tr>
   <tr>
     <td align="center">Radar</td>
@@ -141,10 +169,26 @@ Gallery
 	<td align="center">Stacked</td>
   </tr>
   <tr>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryRadar.png"/></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBubble.png"/></td>
-	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryTimeseries.png"/></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryStacked.png"/></td>
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=radar">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryRadar.png"/>
+      </a>
+    </td>  
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=bubble">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBubble.png"/>
+      </a>
+    </td>      
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=timeseries">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryTimeseries.png"/>
+      </a>
+    </td>      
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=stacked">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryStacked.png"/>
+      </a>
+    </td>      
   </tr>  
   <tr>
     <td align="center">Meter</td>
@@ -153,10 +197,26 @@ Gallery
 	<td align="center">Bubble map</td>
   </tr>
   <tr>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryMeter.png"/></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryGauge.png"/></td>
-	<td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryChoropleth.png"/></td>
-    <td><img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBubbleMap.png"/></td>
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=meter">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryMeter.png"/>
+      </a>
+    </td>      
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=gauge">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryGauge.png"/>
+      </a>
+    </td>      
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=choropleth">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryChoropleth.png"/>
+      </a>
+    </td>      
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=bubblemap">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBubbleMap.png"/>
+      </a>
+    </td>      
   </tr>  
 </table>
 
