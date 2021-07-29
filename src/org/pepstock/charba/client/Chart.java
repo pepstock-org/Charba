@@ -293,7 +293,7 @@ public final class Chart {
 	 */
 	@JsMethod
 	native void show(int datasetIndex, int dataIndex);
-	
+
 	/**
 	 * Sets the active (hovered) elements for the chart.
 	 * 

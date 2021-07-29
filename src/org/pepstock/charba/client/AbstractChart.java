@@ -1110,7 +1110,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			instance.hide(datasetIndex);
 		}
 	}
-	
+
 	/**
 	 * Sets the hidden flag of that element index to <code>true</code> and updates the chart.
 	 * 
@@ -1145,7 +1145,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			instance.show(datasetIndex);
 		}
 	}
-	
+
 	/**
 	 * Sets the hidden flag of that element index to <code>false</code> and updates the chart.
 	 * 

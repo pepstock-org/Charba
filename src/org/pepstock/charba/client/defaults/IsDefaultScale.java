@@ -190,7 +190,7 @@ public interface IsDefaultScale {
 	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
 	Bounds getBounds();
-	
+
 	/**
 	 * Returns the stack group.<br>
 	 * Axes at the same position with same stack are stacked.
@@ -199,7 +199,7 @@ public interface IsDefaultScale {
 	 *         Axes at the same position with same stack are stacked
 	 */
 	String getStack();
-	
+
 	/**
 	 * Returns the weight of the scale in stack group.<br>
 	 * Used to determine the amount of allocated space for the scale within the group.

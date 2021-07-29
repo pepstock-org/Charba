@@ -585,7 +585,7 @@ public interface IsChart {
 	 * @param datasetIndex dataset index
 	 */
 	void hide(int datasetIndex);
-	
+
 	/**
 	 * Sets the hidden flag of that element index to <code>true</code> and updates the chart.
 	 * 
@@ -602,7 +602,7 @@ public interface IsChart {
 	 * @param datasetIndex dataset index
 	 */
 	void show(int datasetIndex);
-	
+
 	/**
 	 * Sets the hidden flag of that element index to <code>false</code> and updates the chart.
 	 * 

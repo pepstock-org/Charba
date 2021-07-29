@@ -135,7 +135,7 @@ public final class ScaleContext extends ChartContext {
 		}
 		return tick;
 	}
-	
+
 	/**
 	 * Returns the label that is shown on the perimeter of the scale. Only for {@link RadialPointLabels} callback.
 	 * 
