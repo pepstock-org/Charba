@@ -111,7 +111,7 @@ public final class JSON {
 	 * @return the object corresponding to the given JSON text.
 	 */
 	@JsOverlay
-	public static NativeObject toObject(String text) {
+	public static NativeObject parseForObject(String text) {
 		// checks text argument is consistent
 		if (text != null && text.trim().startsWith(Constants.OPEN_BRACE)) {
 			return parseToNativeObject(text);
@@ -128,7 +128,7 @@ public final class JSON {
 	 * @return the array corresponding to the given JSON text.
 	 */
 	@JsOverlay
-	public static <T extends Array> T toArray(String text) {
+	public static <T extends Array> T parseForArray(String text) {
 		// checks text argument is consistent
 		if (text != null && text.trim().startsWith(Constants.OPEN_SQUARE_BRACKET)) {
 			return parseToArray(text);

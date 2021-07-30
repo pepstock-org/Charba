@@ -87,7 +87,7 @@ public final class GeoUtils {
 	public static TopoJson createTopoJson(String topojson) {
 		// checks if topojson text is consistent
 		if (isConsistent(topojson)) {
-			return new TopoJson(JSON.parse(topojson));
+			return new TopoJson(JSON.parseForObject(topojson));
 		}
 		// if here, the arguments or the feature parsing are not consistent
 		// then returns an empty object
@@ -207,7 +207,7 @@ public final class GeoUtils {
 	public static List<Feature> features(String topojson, String featureProperty, FeatureFilterCallback filterCallback) {
 		// checks if arguments are consistent
 		if (isConsistent(topojson)) {
-			return features(new TopoJson(JSON.parse(topojson)), featureProperty, filterCallback);
+			return features(new TopoJson(JSON.parseForObject(topojson)), featureProperty, filterCallback);
 		}
 		// if here, the arguments or the feature parsing are not consistent
 		// then returns an empty list
@@ -353,7 +353,7 @@ public final class GeoUtils {
 	public static Feature feature(String topojson, String featureProperty, FeatureFindCallback findCallback) {
 		// checks if topojson text is consistent
 		if (isConsistent(topojson)) {
-			return feature(new TopoJson(JSON.parse(topojson)), featureProperty, findCallback);
+			return feature(new TopoJson(JSON.parseForObject(topojson)), featureProperty, findCallback);
 		}
 		// if here, the arguments or the feature parsing are not consistent
 		// then returns null
