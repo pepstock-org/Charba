@@ -109,7 +109,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	// default for normalized property
 	protected static final boolean DEFAULT_NORMALIZED = false;
 	// factory to create data points
-	static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
+	protected static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
 	// factory to create time series items
 	static final TimeSeriesItemFactory TIMESERIES_ITEMS_FACTORY = new TimeSeriesItemFactory();
 	// exception message when it's not using data points

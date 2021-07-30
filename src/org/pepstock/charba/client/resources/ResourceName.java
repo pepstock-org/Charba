@@ -66,6 +66,10 @@ public enum ResourceName implements Key
 	 */
 	ANNOTATION_PLUGIN("annotation", false, "org.pepstock.charba.client.annotation.AnnotationPluginResource"),
 	/**
+	 * Script element id for CHART.JS TREEMAP controller.
+	 */
+	TREEMAP_CONTROLLER("treemap", false, "org.pepstock.charba.client.treemap.TreeMapControllerResource"),
+	/**
 	 * Script element id for CHART.JS GEO controller.
 	 */
 	GEO_CONTROLLER("geo", false, "org.pepstock.charba.client.geo.GeoControllerResource");

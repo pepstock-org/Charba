@@ -260,6 +260,11 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Features
+
+  * import CHART.JS TREEMAP controller [version v1.0.2](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v1.0.2).
+    * enable tree map chart types.
+
 ### Developing
 
   * rename `parse` method of `JSON` class to `parseForObject`, to parse a string to a native object.
