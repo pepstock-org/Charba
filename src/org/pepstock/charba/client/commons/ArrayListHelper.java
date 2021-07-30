@@ -150,6 +150,16 @@ public final class ArrayListHelper {
 	}
 
 	/**
+	 * Creates a array list of {@link Key} values by an java script array of strings.
+	 * 
+	 * @param array array of strings to load when the list is creating.
+	 * @return a array list of {@link Key}.
+	 */
+	public static ArrayKeyList keys(ArrayString array) {
+		return new ArrayKeyList(array);
+	}
+
+	/**
 	 * Creates a array list of generic java script objects by a java script array.
 	 * 
 	 * @param values array of elements to load when the list is creating.
@@ -266,6 +276,16 @@ public final class ArrayListHelper {
 		return Collections.unmodifiableList(list(enumValues, array));
 	}
 
+	/**
+	 * Creates a unmodifiable array list of {@link Key} values by an java script array of strings.
+	 * 
+	 * @param array array of strings to load when the list is creating.
+	 * @return a array list of {@link Key}.
+	 */
+	public static List<Key> unmodifiableKeys(ArrayString array) {
+		return Collections.unmodifiableList(keys(array));
+	}
+	
 	/**
 	 * Creates an unmodifiable array list of generic java script objects by a java script array.
 	 * 
