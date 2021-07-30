@@ -254,6 +254,16 @@ Continuous integration and quality gate
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
 In the project, it's also provided the [FindBugs](http://findbugs.sourceforge.net/) project to look for bugs.
+
+Going to next release
+---------------------
+
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
+
+### Developing
+
+  * rename `parse` method of `JSON` class to `toObject`, to parse a string to a native object.
+  * add `toArray` method of `JSON` class to parse a string to an array.
     
 License
 -------

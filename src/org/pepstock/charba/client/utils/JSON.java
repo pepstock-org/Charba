@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -29,6 +30,7 @@ import org.pepstock.charba.client.dom.NamedNodeMap;
 import org.pepstock.charba.client.dom.enums.NodeType;
 
 import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -90,7 +92,51 @@ public final class JSON {
 	 * @param text the string to parse as JSON.
 	 * @return the object corresponding to the given JSON text.
 	 */
-	public static native NativeObject parse(String text);
+	@JsMethod(name = "parse")
+	private static native NativeObject parseToNativeObject(String text);
+
+	/**
+	 * Parses a JSON string, constructing the JavaScript array described by the string.
+	 * 
+	 * @param text the string to parse as JSON.
+	 * @return the array corresponding to the given JSON text.
+	 */
+	@JsMethod(name = "parse")
+	private static native <T extends Array> T parseToArray(String text);
+
+	/**
+	 * Parses a JSON string, constructing the JavaScript value or object described by the string.
+	 * 
+	 * @param text the string to parse as JSON.
+	 * @return the object corresponding to the given JSON text.
+	 */
+	@JsOverlay
+	public static NativeObject toObject(String text) {
+		// checks text argument is consistent
+		if (text != null && text.trim().startsWith(Constants.OPEN_BRACE)) {
+			return parseToNativeObject(text);
+		}
+		// if here, the argument is not consistent to parse to a object
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Parses a JSON string, constructing the JavaScript array described by the string.
+	 * 
+	 * @param text the string to parse as JSON.
+	 * @return the array corresponding to the given JSON text.
+	 */
+	@JsOverlay
+	public static <T extends Array> T toArray(String text) {
+		// checks text argument is consistent
+		if (text != null && text.trim().startsWith(Constants.OPEN_SQUARE_BRACKET)) {
+			return parseToArray(text);
+		}
+		// if here, the argument is not consistent to parse to a object
+		// then returns null
+		return null;
+	}
 
 	/**
 	 * Converts a JavaScript object or value to a JSON string. By default, the space value is set to -1 that no space should be used.
