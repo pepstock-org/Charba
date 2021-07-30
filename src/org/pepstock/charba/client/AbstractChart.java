@@ -29,11 +29,8 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
-import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.data.HasDataPoints;
-import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.chart.DefaultChartOptions;
 import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
@@ -46,7 +43,6 @@ import org.pepstock.charba.client.dom.elements.Heading;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.Position;
 import org.pepstock.charba.client.dom.enums.Unit;
-import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.ImageMimeType;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
@@ -1298,43 +1294,13 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		if (isValidDatasetIndex(datasetIndex)) {
 			// gets dataset instance
 			Dataset dataset = data.getDatasets().get(datasetIndex);
-			// get data type
-			DataType dataType = dataset.getDataType();
-			// checks all types of data
-			if (DataType.NUMBERS.equals(dataType)) {
-				// checks and returns if valid
-				return isInRange(dataset.getData(), index);
-			} else if (DataType.POINTS.equals(dataType) && dataset instanceof HasDataPoints) {
-				// casts to interface
-				HasDataPoints dataPoints = (HasDataPoints) dataset;
-				// checks and returns if valid
-				return isInRange(dataPoints.getDataPoints(), index);
-			} else if (DataType.ARRAYS.equals(dataType) && dataset instanceof BarDataset) {
-				// casts to bar dataset
-				BarDataset barDataset = (BarDataset) dataset;
-				// checks and returns if valid
-				return isInRange(barDataset.getFloatingData(), index);
-			} else if (DataType.STRINGS.equals(dataType) && dataset instanceof LineDataset) {
-				// casts to line dataset
-				LineDataset lineDataset = (LineDataset) dataset;
-				// checks and returns if valid
-				return isInRange(lineDataset.getDataString(), index);
-			}
+			// gets data count
+			int dataCount = dataset.getDataCount();
+			// checks and returns in the range
+			return dataCount > 0 && index >= 0 && index < dataCount;
 		}
 		// if here, the dataset index is not valid
 		return false;
-	}
-
-	/**
-	 * Returns <code>true</code> if the index, passed as argument, is in range of the list.
-	 * 
-	 * @param data list of element to use for checking
-	 * @param index index to check against the list
-	 * @return <code>true</code> if the index, passed as argument, is in range of the list
-	 */
-	private boolean isInRange(List<?> data, int index) {
-		// checks and returns if valid
-		return data != null && !data.isEmpty() && index < data.size() && index >= 0;
 	}
 
 	/**

@@ -25,14 +25,11 @@ import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.controllers.ControllerType;
-import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.data.HasDataPoints;
 import org.pepstock.charba.client.data.HovingDataset;
 import org.pepstock.charba.client.data.HovingFlexDataset;
 import org.pepstock.charba.client.data.LiningDataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.impl.charts.GaugeChart;
 import org.pepstock.charba.client.impl.charts.MeterChart;
 import org.pepstock.charba.client.impl.plugins.ColorSchemesOptionsFactory.ColorSchemesDefaultsOptionsFactory;
@@ -323,21 +320,7 @@ public final class ColorSchemes extends AbstractPlugin {
 		// gets the amount of colors
 		int amountOfColors = colors.size();
 		// gets the amount of data
-		int amountOfData = 0;
-		// gets data checking type
-		DataType type = dataset.getDataType();
-		// depending on data type, gets the amount of data
-		if (DataType.NUMBERS.equals(type)) {
-			amountOfData = dataset.getData().size();
-		} else if (DataType.POINTS.equals(type) && dataset instanceof HasDataPoints) {
-			// ONLY datasets which implements the interface have got the data POINTS
-			HasDataPoints dataPointsDataset = (HasDataPoints) dataset;
-			amountOfData = dataPointsDataset.getDataPoints().size();
-		} else if (DataType.ARRAYS.equals(type) && dataset instanceof BarDataset) {
-			// ONLY BAR datasets have got the data FLOATING
-			BarDataset barDataset = (BarDataset) dataset;
-			amountOfData = barDataset.getFloatingData().size();
-		}
+		int amountOfData = dataset.getDataCount();
 		// creates an array with the data dimension
 		IsColor[] colorsToSet = new IsColor[amountOfData];
 		// scans all data
