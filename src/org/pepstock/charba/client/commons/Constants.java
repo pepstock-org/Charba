@@ -98,6 +98,16 @@ public final class Constants {
 	public static final String CLOSE_SQUARE_BRACKET = "]";
 
 	/**
+	 * Constant for OPEN brace, <b>{@value}</b>.
+	 */
+	public static final String OPEN_BRACE = "{";
+
+	/**
+	 * Constant for CLOSE brace, <b>{@value}</b>.
+	 */
+	public static final String CLOSE_BRACE = "}";
+
+	/**
 	 * Constants for DOT, <b>{@value}</b>.
 	 */
 	public static final String DOT = ".";
