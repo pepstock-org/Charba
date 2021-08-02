@@ -113,22 +113,22 @@ Gallery
 	<td align="center">Vertical line</td>
   </tr>
   <tr>
-    <td>
+    <td style="background-color: white">
       <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=bar">
         <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBar.png"/>
       </a>
     </td>
-    <td>
+    <td style="background-color: white">
       <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=horizontalbar">
         <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryHorizontalBar.png"/>
       </a>
     </td>
-    <td>
+    <td style="background-color: white">
       <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=line">
         <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryLine.png"/>
       </a>
     </td>
-    <td>
+    <td style="background-color: white">
       <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=verticalline">
         <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryVerticalLine.png"/>
       </a>
