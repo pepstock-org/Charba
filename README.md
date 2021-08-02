@@ -107,12 +107,6 @@ Gallery
 
 <table>
   <tr>
-    <td align="center">Bar</td>
-	<td align="center">Horizontal bar</td>
-	<td align="center">Line</td>
-	<td align="center">Vertical line</td>
-  </tr>
-  <tr>
     <td style="background-color: 'white' !important">
       <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=bar">
         <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBar.png"/>
@@ -135,10 +129,10 @@ Gallery
     </td>
   </tr>
   <tr>
-    <td align="center">Scatter</td>
-	<td align="center">Doughnut</td>
-	<td align="center">Pie</td>
-	<td align="center">Polar area</td>
+    <td align="center">Bar</td>
+	<td align="center">Horizontal bar</td>
+	<td align="center">Line</td>
+	<td align="center">Vertical line</td>
   </tr>
   <tr>
     <td>
@@ -163,10 +157,10 @@ Gallery
     </td>  
   </tr>
   <tr>
-    <td align="center">Radar</td>
-	<td align="center">Bubble</td>
-	<td align="center">Time series</td>
-	<td align="center">Stacked</td>
+    <td align="center">Scatter</td>
+	<td align="center">Doughnut</td>
+	<td align="center">Pie</td>
+	<td align="center">Polar area</td>
   </tr>
   <tr>
     <td>
@@ -191,10 +185,10 @@ Gallery
     </td>      
   </tr>  
   <tr>
-    <td align="center">Meter</td>
-	<td align="center">Gauge</td>
-	<td align="center">Choropleth</td>
-	<td align="center">Bubble map</td>
+    <td align="center">Radar</td>
+	<td align="center">Bubble</td>
+	<td align="center">Time series</td>
+	<td align="center">Stacked</td>
   </tr>
   <tr>
     <td>
@@ -218,6 +212,12 @@ Gallery
       </a>
     </td>      
   </tr>  
+  <tr>
+    <td align="center">Meter</td>
+	<td align="center">Gauge</td>
+	<td align="center">Choropleth</td>
+	<td align="center">Bubble map</td>
+  </tr>
 </table>
 
 Documentation
