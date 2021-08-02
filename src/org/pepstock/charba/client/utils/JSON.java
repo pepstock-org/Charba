@@ -99,6 +99,7 @@ public final class JSON {
 	 * Parses a JSON string, constructing the JavaScript array described by the string.
 	 * 
 	 * @param text the string to parse as JSON.
+	 * @param <T> type of native array
 	 * @return the array corresponding to the given JSON text.
 	 */
 	@JsMethod(name = "parse")
@@ -125,6 +126,7 @@ public final class JSON {
 	 * Parses a JSON string, constructing the JavaScript array described by the string.
 	 * 
 	 * @param text the string to parse as JSON.
+	 * @param <T> type of native array
 	 * @return the array corresponding to the given JSON text.
 	 */
 	@JsOverlay

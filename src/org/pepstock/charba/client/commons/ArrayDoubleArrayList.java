@@ -18,7 +18,7 @@ package org.pepstock.charba.client.commons;
 /**
  * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a java script array as back-end to store objects (native array containers).<br>
+ * This implementation uses a java script array as back-end to store objects (native array of doubles).<br>
  * Elements are instances of {@link NativeArrayContainer}.<br>
  * <br>
  * Some methods are annotated with <code>\u0040SuppressWarnings(&quot;unusable-by-js&quot;)</code> because J2CL transpiler emits warnings as not usable in the javascript part but
