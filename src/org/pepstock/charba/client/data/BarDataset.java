@@ -77,7 +77,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	/**
 	 * Floating bars data factory to create {@link FloatingData}s.
 	 */
-	public static final FloatingDatatFactory FLOATING_BAR_DATA_FACTORY = new FloatingDatatFactory();
+	public static final FloatingDataFactory FLOATING_BAR_DATA_FACTORY = new FloatingDataFactory();
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---

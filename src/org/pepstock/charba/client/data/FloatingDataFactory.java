@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.NativeArrayContainerFactory;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class FloatingDatatFactory implements NativeArrayContainerFactory<ArrayDouble, FloatingData> {
+public final class FloatingDataFactory implements NativeArrayContainerFactory<ArrayDouble, FloatingData> {
 
 	/*
 	 * (non-Javadoc)
