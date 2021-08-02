@@ -31,7 +31,7 @@ public class Interaction extends ConfigurationOptionsContainer {
 	 * 
 	 * @param options root options element.
 	 */
-	Interaction(ConfigurationOptions options) {
+	protected Interaction(ConfigurationOptions options) {
 		super(options);
 	}
 

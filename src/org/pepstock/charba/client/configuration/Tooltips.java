@@ -176,7 +176,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	 * 
 	 * @param options root options element.
 	 */
-	Tooltips(ConfigurationOptions options) {
+	protected Tooltips(ConfigurationOptions options) {
 		super(options);
 		// sets callbacks sub element
 		this.callbacks = new TooltipsCallbacks(getOptions());

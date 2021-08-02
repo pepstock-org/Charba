@@ -57,7 +57,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @param key property key
 	 * @param colors colors value to be set
 	 */
-	void setColors(Key key, String... colors) {
+	protected void setColors(Key key, String... colors) {
 		// stores value
 		setValueOrArray(key, colors);
 	}
@@ -68,7 +68,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @param key property key
 	 * @param colors colors value to be set
 	 */
-	void setColors(Key key, IsColor... colors) {
+	protected void setColors(Key key, IsColor... colors) {
 		// stores value
 		setValueOrArray(key, colors);
 	}
@@ -80,7 +80,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @param defaultvalue default value if key does not exist
 	 * @return an array of colors
 	 */
-	ArrayString getColors(Key key, String defaultvalue) {
+	protected ArrayString getColors(Key key, String defaultvalue) {
 		return getValueOrArray(key, defaultvalue);
 	}
 
@@ -90,7 +90,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @param key property key
 	 * @param widths widths value to be set
 	 */
-	void setWidths(Key key, int... widths) {
+	protected void setWidths(Key key, int... widths) {
 		// stores value
 		setValueOrArray(key, widths);
 	}
@@ -102,7 +102,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @param defaultvalue default value if key does not exist
 	 * @return an array of widths
 	 */
-	ArrayInteger getWidths(Key key, int defaultvalue) {
+	protected ArrayInteger getWidths(Key key, int defaultvalue) {
 		return getValueOrArray(key, defaultvalue);
 	}
 

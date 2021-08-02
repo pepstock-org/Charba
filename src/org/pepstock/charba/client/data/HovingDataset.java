@@ -57,7 +57,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * @see org.pepstock.charba.client.data.HovingFlexDataset#setColors(org.pepstock.charba.client.commons.Key, java.lang.String[])
 	 */
 	@Override
-	void setColors(Key key, String... colors) {
+	protected void setColors(Key key, String... colors) {
 		// stores value
 		setArrayValue(key, ArrayString.fromOrEmpty(colors));
 	}
@@ -68,7 +68,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * @see org.pepstock.charba.client.data.HovingFlexDataset#setColors(org.pepstock.charba.client.commons.Key, org.pepstock.charba.client.colors.IsColor[])
 	 */
 	@Override
-	void setColors(Key key, IsColor... colors) {
+	protected void setColors(Key key, IsColor... colors) {
 		// stores value
 		setArrayValue(key, ArrayString.fromOrEmpty(colors));
 	}
@@ -79,7 +79,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * @see org.pepstock.charba.client.data.HovingFlexDataset#getColors(org.pepstock.charba.client.commons.Key, java.lang.String)
 	 */
 	@Override
-	ArrayString getColors(Key key, String defaultvalue) {
+	protected ArrayString getColors(Key key, String defaultvalue) {
 		return getArrayValue(key);
 	}
 
@@ -89,7 +89,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * @see org.pepstock.charba.client.data.HovingFlexDataset#setWidths(org.pepstock.charba.client.commons.Key, int[])
 	 */
 	@Override
-	void setWidths(Key key, int... widths) {
+	protected void setWidths(Key key, int... widths) {
 		// stores value
 		setArrayValue(key, ArrayInteger.fromOrEmpty(widths));
 	}
@@ -100,7 +100,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * @see org.pepstock.charba.client.data.HovingFlexDataset#getWidths(org.pepstock.charba.client.commons.Key, int)
 	 */
 	@Override
-	ArrayInteger getWidths(Key key, int defaultvalue) {
+	protected ArrayInteger getWidths(Key key, int defaultvalue) {
 		return getArrayValue(key);
 	}
 
