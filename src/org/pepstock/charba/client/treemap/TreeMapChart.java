@@ -24,7 +24,13 @@ import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 
 /**
- * A treemap chart is used for displaying hierarchical data using nested figures, usually rectangles.
+ * A treemap chart is used for displaying hierarchical data using nested rectangles.<br>
+ * Treemaps display hierarchical (tree-structured) data as a set of nested rectangles.<br>
+ * Each branch of the tree is given a rectangle, which is then tiled with smaller rectangles representing sub-branches.<br>
+ * A leaf node's rectangle has an area proportional to a specified dimension of the data.<br>
+ * When the color and size dimensions are correlated in some way with the tree structure, one can often easily see patterns that would be difficult to spot in other ways, such as
+ * whether a certain color is particularly relevant.<br>
+ * A second advantage of treemaps is that, by construction, they make efficient use of space. As a result, they can legibly display thousands of items on the screen simultaneously.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -102,12 +108,9 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 			Controller controllerInstance = Defaults.get().getControllers().getController(CONTROLLER_TYPE);
 			// checks if controller is a treemap controller
 			Checker.assertCheck(controllerInstance instanceof TreeMapController, "Controller stored for " + CONTROLLER_TYPE.value() + " is not a " + TreeMapController.class.getName());
-			// casts to GEO controller
+			// casts to treemap controller
 			treeMapController = (TreeMapController) controllerInstance;
 		}
-		// FIXME
-		// // disables legend
-		// options.getLegend().setDisplay(false);
 		// checks if there is a data set
 		if (!getData().getDatasets().isEmpty()) {
 			// a treemap chart must have only 1 data set
@@ -117,7 +120,6 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 			// checks if is a treemap data set
 			Checker.assertCheck(dataset instanceof TreeMapDataset, "Dataset is not a " + TreeMapDataset.class.getName() + " but " + dataset.getClass().getName());
 		}
-
 	}
 
 }
