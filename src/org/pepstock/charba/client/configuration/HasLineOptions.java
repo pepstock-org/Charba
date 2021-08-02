@@ -58,9 +58,9 @@ interface HasLineOptions {
 	}
 
 	/**
-	 * If false, NaN data causes a break in the line.
+	 * If false, {@link Double#NaN} data causes a break in the line.
 	 * 
-	 * @param spanGaps If false, NaN data causes a break in the line.
+	 * @param spanGaps If false, {@link Double#NaN} data causes a break in the line.
 	 */
 	default void setSpanGaps(boolean spanGaps) {
 		// checks if options is consistent
@@ -70,9 +70,9 @@ interface HasLineOptions {
 	}
 
 	/**
-	 * If false, NaN data causes a break in the line.
+	 * If false, {@link Double#NaN} data causes a break in the line.
 	 * 
-	 * @return If false, NaN data causes a break in the line.
+	 * @return If false, {@link Double#NaN} data causes a break in the line.
 	 */
 	default boolean isSpanGaps() {
 		// checks if options is consistent

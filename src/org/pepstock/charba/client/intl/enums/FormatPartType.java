@@ -59,7 +59,7 @@ public enum FormatPartType implements Key
 	 */
 	MINUS_SIGN("minusSign"),
 	/**
-	 * The NaN string ("NaN").
+	 * The {@link Double#NaN} string ("NaN").
 	 */
 	NAN("nan"),
 	/**

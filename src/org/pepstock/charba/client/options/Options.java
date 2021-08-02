@@ -717,7 +717,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * If <code>false</code>, the lines between points are not drawn.
 	 * 
-	 * @return if <code>false</code>, the lines between points are not drawn..
+	 * @return if <code>false</code>, the lines between points are not drawn.
 	 */
 	@Override
 	public boolean isShowLine() {

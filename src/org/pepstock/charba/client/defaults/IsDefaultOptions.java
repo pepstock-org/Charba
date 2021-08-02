@@ -208,9 +208,9 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	boolean isSkipNull();
 
 	/**
-	 * If false, NaN data causes a break in the line.
+	 * If false, {@link Double#NaN} data causes a break in the line.
 	 * 
-	 * @return If false, NaN data causes a break in the line.
+	 * @return If false, {@link Double#NaN} data causes a break in the line.
 	 */
 	boolean isSpanGaps();
 

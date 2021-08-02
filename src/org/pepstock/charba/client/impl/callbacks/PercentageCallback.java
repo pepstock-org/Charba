@@ -34,7 +34,7 @@ import org.pepstock.charba.client.utils.Utilities;
 public final class PercentageCallback implements FormatterCallback {
 
 	/**
-	 * Default value of NaN as string, <b>{@value NAN_AS_STRING}</b>.
+	 * Default value of {@link Double#NaN} as string, <b>{@value NAN_AS_STRING}</b>.
 	 */
 	public static final String NAN_AS_STRING = "NaN";
 	/**
