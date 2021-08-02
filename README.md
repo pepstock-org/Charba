@@ -113,7 +113,7 @@ Gallery
 	<td align="center">Vertical line</td>
   </tr>
   <tr>
-    <td style="background-color: white">
+    <td style="background-color: white !important">
       <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=bar">
         <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryBar.png"/>
       </a>
