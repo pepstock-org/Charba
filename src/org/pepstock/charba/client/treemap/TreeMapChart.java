@@ -22,6 +22,7 @@ import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.resources.ResourceName;
 
 /**
  * A treemap chart is used for displaying hierarchical data using nested rectangles.<br>
@@ -111,6 +112,8 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 			// casts to treemap controller
 			treeMapController = (TreeMapController) controllerInstance;
 		}
+		// disables DATALABELS plugin
+		getOptions().getPlugins().setEnabled(ResourceName.DATALABELS_PLUGIN.value(), false);
 		// checks if there is a data set
 		if (!getData().getDatasets().isEmpty()) {
 			// a treemap chart must have only 1 data set
