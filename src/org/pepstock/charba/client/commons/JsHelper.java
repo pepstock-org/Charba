@@ -219,22 +219,56 @@ public final class JsHelper {
 		// if here, arguments are not consistent
 		return false;
 	}
+	
+	/**
+	 * Returns the property value from java script object, when it is stored as integer.
+	 * 
+	 * @param key the key to search inside the object
+	 * @param nativeObject java script object
+	 * @return the property value or {@link Undefined#INTEGER} if not exist
+	 */
+	public int getIntegerProperty(Key key, NativeObject nativeObject) {
+		// checks if arguments are consistent and property exists
+		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
+			// returns value
+			return NativeObjectUtils.getIntProperty(nativeObject, key.value(), Undefined.INTEGER);
+		}
+		// property doesn't exist
+		return Undefined.INTEGER;
+	}
 
 	/**
-	 * Returns a property of java script object as integer.
+	 * Returns the property value from java script object, when it is stored as boolean.
 	 * 
-	 * @param object the object on which to define the property.
-	 * @param key the string name of the property to be defined or modified..
-	 * @return integer value or {@link Undefined#INTEGER} if arguments are not consistent
+	 * @param key the key to search inside the object
+	 * @param nativeObject java script object
+	 * @return the property value or {@link Undefined#BOOLEAN} if not exist
 	 */
-	public int propertyAsInt(NativeObject object, String key) {
-		// checks consistency of arguments
-		if (object != null && key != null) {
-			// returns the property value
-			return NativeObjectUtils.getIntProperty(object, key, Undefined.INTEGER);
+	public boolean getBooleanProperty(Key key, NativeObject nativeObject) {
+		// checks if arguments are consistent and property exists
+		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
+			// returns value
+			return NativeObjectUtils.getBooleanProperty(nativeObject, key.value(), Undefined.BOOLEAN);
 		}
-		// if here, arguments not consistent
-		return Undefined.INTEGER;
+		// property doesn't exist
+		return Undefined.BOOLEAN;
+	}
+
+	/**
+	 * Returns the property value from java script object, when the ID is stored as string.
+	 * 
+	 * @param key the key to search inside the object
+	 * @param nativeObject java script object
+	 * @return the property value or {@link Undefined#STRING} if not exist
+	 */
+	public String getStringProperty(Key key, NativeObject nativeObject) {
+		// checks if arguments are consistent and property exists
+		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
+			// if descriptor is consistent, return value
+			return NativeObjectUtils.getStringProperty(nativeObject, key.value(), Undefined.STRING);
+		}
+		// property doesn't exist
+		return Undefined.STRING;
 	}
 
 }

@@ -215,6 +215,16 @@ public final class NativeName {
 	 * Constant to bind java script object as console with name <b>{@value CONSOLE}</b>.
 	 */
 	public static final String CONSOLE = "console";
+	
+	/**
+	 * Constant to bind java script object as unit 8 array with name <b>{@value UINT8_CLAMPED_ARRAY}</b>.
+	 */
+	public static final String UINT8_CLAMPED_ARRAY = "Uint8ClampedArray";
+	
+	/**
+	 * Constant to bind java script object as iterator with name <b>{@value ITERATOR}</b>.
+	 */
+	public static final String ITERATOR = "Iterator";
 
 	/**
 	 * Constant to bind java script object as DOM document with name <b>{@value DOM_DOCUMENT}</b>.

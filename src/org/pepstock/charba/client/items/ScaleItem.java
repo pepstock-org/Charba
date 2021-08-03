@@ -179,7 +179,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 			// checks if the charba id exists and is a number
 			if (ObjectType.NUMBER.equals(JsHelper.get().typeOf(object, Property.CHARBA_ID.value()))) {
 				// returns the number
-				return JsHelper.get().propertyAsInt(object, Property.CHARBA_ID.value());
+				return JsHelper.get().getIntegerProperty(Property.CHARBA_ID, object);
 			}
 		}
 		// otherwise if here is undefined

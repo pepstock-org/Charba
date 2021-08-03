@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.annotation.enums.DrawTime;
-import org.pepstock.charba.client.commons.Id;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -198,14 +198,14 @@ class AnnotationMap extends NativeObjectContainer {
 		// gets the native object
 		NativeObject nativeObject = getValue(id);
 		// extracts the type of the annotation as string
-		String typeAsString = Id.getStringProperty(AbstractAnnotation.Property.TYPE, nativeObject);
+		String typeAsString = JsHelper.get().getStringProperty(AbstractAnnotation.Property.TYPE, nativeObject);
 		// gets the type as annotation type enumeration
 		AnnotationType type = Key.getKeyByValue(AnnotationType.values(), typeAsString);
 		// -----------------------
 		// for annotation defaults
 		// -----------------------
 		// extracts the internal annotation id
-		int annotationId = Id.getIntegerProperty(AbstractAnnotation.Property.CHARBA_ANNOTATION_ID, nativeObject);
+		int annotationId = JsHelper.get().getIntegerProperty(AbstractAnnotation.Property.CHARBA_ANNOTATION_ID, nativeObject);
 		// searches for cached annotation by its internal id
 		AbstractAnnotation defaultOptions = AnnotationHelper.get().getAnnotation(annotationId);
 		// -----------------------

@@ -19,7 +19,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
-import org.pepstock.charba.client.commons.Id;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseElement;
@@ -392,7 +392,7 @@ public final class CLocale {
 		// gets resolved options
 		NativeObject options = format.resolvedOptions();
 		// retrieves and returns the locale as string
-		return Id.getStringProperty(key, options);
+		return JsHelper.get().getStringProperty(key, options);
 	}
 
 }

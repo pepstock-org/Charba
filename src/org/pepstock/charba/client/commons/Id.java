@@ -83,37 +83,4 @@ public enum Id implements Key
 		return Undefined.STRING;
 	}
 
-	/**
-	 * Returns the property value from java script object, when it is stored as integer.
-	 * 
-	 * @param key the key to search inside the object
-	 * @param nativeObject java script object
-	 * @return the property value or {@link Undefined#INTEGER} if not exist
-	 */
-	public static int getIntegerProperty(Key key, NativeObject nativeObject) {
-		// checks if arguments are consistent and property exists
-		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
-			// returns value
-			return NativeObjectUtils.getIntProperty(nativeObject, key.value(), Undefined.INTEGER);
-		}
-		// property doesn't exist
-		return Undefined.INTEGER;
-	}
-
-	/**
-	 * Returns the property value from java script object, when the ID is stored as string.
-	 * 
-	 * @param key the key to search inside the object
-	 * @param nativeObject java script object
-	 * @return the property value or {@link Undefined#STRING} if not exist
-	 */
-	public static String getStringProperty(Key key, NativeObject nativeObject) {
-		// checks if arguments are consistent and property exists
-		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
-			// if descriptor is consistent, return value
-			return NativeObjectUtils.getStringProperty(nativeObject, key.value(), Undefined.STRING);
-		}
-		// property doesn't exist
-		return Undefined.STRING;
-	}
 }

@@ -19,8 +19,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.Id;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -37,7 +38,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.UINT8_CLAMPED_ARRAY, namespace = JsPackage.GLOBAL)
 final class Uint8ClampedArray {
 
 	// property key of iterator which contains the value
@@ -77,7 +78,7 @@ final class Uint8ClampedArray {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	@JsType(isNative = true, name = "Iterator", namespace = JsPackage.GLOBAL)
+	@JsType(isNative = true, name = NativeName.ITERATOR, namespace = JsPackage.GLOBAL)
 	private interface JsIterator {
 
 		/**
@@ -106,8 +107,8 @@ final class Uint8ClampedArray {
 			// gets object
 			NativeObject element = iterator.next();
 			// reads done and value property
-			done = Id.getBooleanProperty(DONE, element);
-			int value = Id.getIntegerProperty(VALUE, element);
+			done = JsHelper.get().getBooleanProperty(DONE, element);
+			int value = JsHelper.get().getIntegerProperty(VALUE, element);
 			// checks if the properties are consistent to add new element
 			// to result array
 			if (!done && Undefined.isNot(value)) {

@@ -24,6 +24,7 @@ import java.util.Map;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Id;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.utils.Utilities;
@@ -269,7 +270,7 @@ public final class GradientBuilder {
 		// checks if argument is consistent
 		Checker.checkIfValid(nativeObject, "Native object argument");
 		// extracts the id from object
-		String id = Id.getStringProperty(CanvasObject.Property.CHARBA_OBJECT_ID, nativeObject);
+		String id = JsHelper.get().getStringProperty(CanvasObject.Property.CHARBA_OBJECT_ID, nativeObject);
 		// checks if id is consistent
 		Checker.assertCheck(id != null, Utilities.applyTemplate(CanvasObject.MISSING_PROPERTY, CanvasObject.Property.CHARBA_OBJECT_ID.value()));
 		// checks if gradient is cached
