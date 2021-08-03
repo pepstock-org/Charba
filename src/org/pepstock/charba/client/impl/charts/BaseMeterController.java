@@ -29,6 +29,7 @@ import org.pepstock.charba.client.controllers.ControllerProvider;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.dom.elements.ImageData;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.Render;
@@ -135,13 +136,13 @@ final class BaseMeterController extends AbstractController {
 				MeterChart meterChart = (MeterChart) chart;
 				MeterOptions options = meterChart.getOptions();
 				// let's draw the value inside the doughnut
-				execute(chart, node, dataset, options, calculateEase(meterChart, options, dataset));
+				execute(meterChart, node, dataset, options, calculateEase(meterChart, options, dataset));
 			} else if (chart instanceof GaugeChart) {
 				// checks if meter chart
 				GaugeChart gaugeChart = (GaugeChart) chart;
 				GaugeOptions options = gaugeChart.getOptions();
 				// let's draw the value inside the doughnut
-				execute(chart, node, dataset, options, calculateEase(gaugeChart, options, dataset));
+				execute(gaugeChart, node, dataset, options, calculateEase(gaugeChart, options, dataset));
 			}
 		}
 	}
@@ -185,7 +186,7 @@ final class BaseMeterController extends AbstractController {
 	 * @param options the chart options
 	 * @param ease easing of drawing (between 0 and 1) for animation
 	 */
-	private void execute(IsChart chart, ChartNode item, MeterDataset dataset, MeterOptions options, double ease) {
+	private void execute(BaseMeterChart<?> chart, ChartNode item, MeterDataset dataset, MeterOptions options, double ease) {
 		// checks if the rendering of the label is disable
 		if (Render.NONE.equals(options.getRender())) {
 			// do nothing
@@ -195,7 +196,7 @@ final class BaseMeterController extends AbstractController {
 		// it can not be null
 		DatasetItem datasetMetaItem = chart.getDatasetItem(0);
 		// calculate the side of the square where to draw the value
-		final int sideOfSquare = (int) ((datasetMetaItem.getController().getInnerRadius() * 2) / SQRT_2);
+		final double sideOfSquare = (int) ((datasetMetaItem.getController().getInnerRadius() * 2) / SQRT_2);
 		// gets canvas context 2d
 		Context2dItem ctx = chart.getCanvas().getContext2d();
 		// gets the chart area of CHART.JS
@@ -236,10 +237,19 @@ final class BaseMeterController extends AbstractController {
 		// begins path and clip the area
 		ctx.beginPath();
 		ctx.rect(x, y, sideOfSquare, sideOfSquare);
-		ctx.clip();
 		// clip area
+		ctx.clip();
+		// checks if image data must be get
+		if (chart.getImageData() == null) {
+			// gets image data in the center, 1 pixel
+			ImageData data = ctx.getImageData(x, y, sideOfSquare, sideOfSquare + 1);
+			// stores the image data
+			chart.setImageData(data);
+		}
 		// clears the previous label
 		ctx.clearRect(x, y, sideOfSquare, sideOfSquare);
+		// sets stored image data to canvas
+		ctx.putImageData(chart.getImageData(), x, y);
 		// checks if auto font size is set
 		if (options.isAutoFontSize()) {
 			// calculates the font size
@@ -288,9 +298,9 @@ final class BaseMeterController extends AbstractController {
 	 * @param value value to display
 	 * @param font font instance
 	 */
-	private void calculateFontSize(Context2dItem ctx, int sideOfSquare, String value, FontItem font) {
+	private void calculateFontSize(Context2dItem ctx, double sideOfSquare, String value, FontItem font) {
 		// half of side of square
-		int fontSize = sideOfSquare / 2;
+		int fontSize = (int)(sideOfSquare / 2);
 		boolean check = true;
 		// loop to calculate the size
 		while (check) {

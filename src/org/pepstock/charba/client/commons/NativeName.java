@@ -352,6 +352,11 @@ public final class NativeName {
 	public static final String DOM_CANVAS_PATTERN = "CanvasPattern";
 
 	/**
+	 * Constant to bind java script object as DOM image data with name <b>{@value DOM_IMAGE_DATA}</b>.
+	 */
+	public static final String DOM_IMAGE_DATA = "ImageData";
+
+	/**
 	 * Constant to bind java script object as DOM text metrics with name <b>{@value DOM_TEXT_METRICS}</b>.
 	 */
 	public static final String DOM_TEXT_METRICS = "TextMetrics";

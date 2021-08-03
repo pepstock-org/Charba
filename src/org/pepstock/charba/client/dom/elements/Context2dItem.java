@@ -1219,6 +1219,28 @@ public final class Context2dItem extends BaseHtmlElement {
 	public native void translate(double x, double y);
 
 	/**
+	 * Returns an {@link ImageData} object representing the underlying pixel data for a specified portion of the canvas.
+	 * 
+	 * @param sx The x-axis coordinate of the top-left corner of the rectangle from which the {@link ImageData} will be extracted.
+	 * @param sy The y-axis coordinate of the top-left corner of the rectangle from which the {@link ImageData} will be extracted.
+	 * @param sw The width of the rectangle from which the {@link ImageData} will be extracted. Positive values are to the right, and negative to the left.
+	 * @param sh The height of the rectangle from which the {@link ImageData} will be extracted. Positive values are down, and negative are up.
+	 * @return an {@link ImageData} object representing the underlying pixel data for a specified portion of the canvas.
+	 */
+	@JsMethod
+	public native ImageData getImageData(double sx, double sy, double sw, double sh);
+
+	/**
+	 * Paints data from the given {@link ImageData} object onto the canvas.
+	 * 
+	 * @param imagedata An {@link ImageData} object containing the array of pixel values.
+	 * @param dx Horizontal position (x coordinate) at which to place the image data in the destination canvas.
+	 * @param dy Vertical position (y coordinate) at which to place the image data in the destination canvas.
+	 */
+	@JsMethod
+	public native void putImageData(ImageData imagedata, double dx, double dy);
+
+	/**
 	 * Returns the fill or stroke color is used for shapes.
 	 * 
 	 * @param value value stored inside the context
@@ -1250,7 +1272,7 @@ public final class Context2dItem extends BaseHtmlElement {
 		String valueAsString = getColorAsString(value);
 		// checks if value is consistent
 		if (valueAsString != null) {
-			// transforms as iscolor
+			// transforms as IsColor
 			return ColorBuilder.parse(valueAsString);
 		}
 		// if here is not a string

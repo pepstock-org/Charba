@@ -23,6 +23,7 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.dom.elements.ImageData;
 import org.pepstock.charba.client.enums.DefaultTransitionKey;
 import org.pepstock.charba.client.options.AnimationTransition;
 
@@ -41,6 +42,8 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	public static final double DEFAULT_MAX = 100D;
 	// controller instance
 	private BaseMeterController meterController = null;
+	// stores image data to apply on label square
+	private ImageData imageData = null;
 
 	/**
 	 * Builds the chart.<br>
@@ -74,6 +77,24 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	 */
 	final BaseMeterController getController() {
 		return meterController;
+	}
+
+	/**
+	 * Returns the image data, of chart label, previously stored, or <code>null</code>.
+	 * 
+	 * @return the image data, of chart label, previously stored, or <code>null</code>
+	 */
+	final ImageData getImageData() {
+		return imageData;
+	}
+
+	/**
+	 * Sets the image data, of chart label, previously stored, or <code>null</code>.
+	 * 
+	 * @param imageData the image data, of chart label, previously stored, or <code>null</code>
+	 */
+	final void setImageData(ImageData imageData) {
+		this.imageData = imageData;
 	}
 
 	/*
@@ -112,6 +133,8 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		options.getTooltips().setEnabled(false);
 		// disables tooltips external callback
 		options.getTooltips().setExternalCallback(null);
+		// resets image data
+		setImageData(null);
 		// creates a new mode every time
 		// because once it has been added to the options
 		// it could be changed by user
