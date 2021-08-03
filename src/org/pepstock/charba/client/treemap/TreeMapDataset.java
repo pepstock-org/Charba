@@ -234,7 +234,7 @@ public final class TreeMapDataset extends HovingFlexDataset {
 	 * @return the font object when hovered
 	 */
 	public IsFont getHoverFont() {
-		return font;
+		return hoverFont;
 	}
 
 	/**
