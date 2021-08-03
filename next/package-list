@@ -44,6 +44,7 @@ org.pepstock.charba.client.options
 org.pepstock.charba.client.plugins
 org.pepstock.charba.client.positioner
 org.pepstock.charba.client.resources
+org.pepstock.charba.client.treemap
 org.pepstock.charba.client.utils
 org.pepstock.charba.client.zoom
 org.pepstock.charba.client.zoom.callbacks
