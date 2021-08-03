@@ -177,24 +177,6 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
-	 */
-	@Override
-	public int indexOf(Object object) {
-		// checks if EnumValue
-		if (object instanceof Key) {
-			// cast
-			Key value = (Key) object;
-			// checks if is valid
-			if (Key.isValid(value)) {
-				// search
-				return array.indexOf(value.value());
-			}
-		}
-		return AbstractArrayList.NOT_FOUND;
-	}
-
-	/**
 	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
 	 */
 	@Override
@@ -207,6 +189,24 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 			if (Key.isValid(value)) {
 				// search
 				return array.lastIndexOf(value.value());
+			}
+		}
+		return AbstractArrayList.NOT_FOUND;
+	}
+	
+	/**
+	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
+	 */
+	@Override
+	public int indexOf(Object object) {
+		// checks if EnumValue
+		if (object instanceof Key) {
+			// cast
+			Key value = (Key) object;
+			// checks if is valid
+			if (Key.isValid(value)) {
+				// search
+				return array.indexOf(value.value());
 			}
 		}
 		return AbstractArrayList.NOT_FOUND;
