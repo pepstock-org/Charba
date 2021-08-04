@@ -15,9 +15,15 @@
 */
 package org.pepstock.charba.client.treemap;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -34,6 +40,8 @@ public final class TreeMapDataPoint extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
+		CHILDREN("children"),
+		DATA("_data"),
 		X("x"),
 		Y("y"),
 		W("w"),
@@ -78,6 +86,47 @@ public final class TreeMapDataPoint extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns the object in the user format of the data point.
+	 * 
+	 * @param factory instance of factory to create the native object
+	 * @param <T> type of user object
+	 * @return the object in the user format of the data point
+	 */
+	public <T extends NativeObjectContainer> T getData(NativeObjectContainerFactory<T> factory) {
+		// checks if the factory is consistent
+		if (factory != null) {
+			return factory.create(getValue(Property.DATA));
+		}
+		// if here, factory not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the unmodifiable list of tree user objects, related to this data point.
+	 * 
+	 * @param factory instance of factory to create the native object
+	 * @param <T> type of tree objects
+	 * @return unmodifiable list of objects, related to this data point
+	 */
+	public <T extends NativeObjectContainer> List<T> getTreeObjects(NativeObjectContainerFactory<T> factory) {
+		// checks if the factory is consistent
+		if (factory != null) {
+			// gets the data object
+			DataObject data = new DataObject(getValue(Property.DATA));
+			// gets children
+			ArrayObject array = data.getChildren();
+			// checks if children are consistent
+			if (array != null) {
+				// returns array
+				return ArrayListHelper.unmodifiableList(array, factory);
+			}
+		}
+		// returns an empty list
+		return Collections.emptyList();
+	}
+
+	/**
 	 * Returns X value.
 	 * 
 	 * @return X value
@@ -94,7 +143,7 @@ public final class TreeMapDataPoint extends NativeObjectContainer {
 	public double getY() {
 		return getValue(Property.Y, Undefined.DOUBLE);
 	}
-	
+
 	/**
 	 * Returns the width in pixel.
 	 * 
@@ -158,4 +207,32 @@ public final class TreeMapDataPoint extends NativeObjectContainer {
 		return getValue(Property.GS, Undefined.DOUBLE);
 	}
 
+	/**
+	 * Internal implementation of the object which is map the {@link Property#DATA} property.<br>
+	 * Inside this object there is an array of original object used by the user.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class DataObject extends NativeObjectContainer {
+
+		/**
+		 * Creates the object with native object instance to be wrapped.
+		 * 
+		 * @param nativeObject native object instance to be wrapped.
+		 */
+		private DataObject(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+
+		/**
+		 * Returns the array of object stored in the children property.
+		 * 
+		 * @return the array of object stored in the children property
+		 */
+		private ArrayObject getChildren() {
+			return getArrayValue(Property.CHILDREN);
+		}
+
+	}
 }
