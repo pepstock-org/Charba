@@ -23,7 +23,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.data.HovingFlexDataset;
+import org.pepstock.charba.client.data.HoverFlexDataset;
 import org.pepstock.charba.client.data.LiningDataset;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.Undefined;
@@ -86,9 +86,9 @@ final class ColorSchemeLegendLabelsCallback implements LegendLabelsCallback {
 				// gets the dataset related to legend items
 				Dataset dataset = chart.getData().retrieveDataset(item);
 				// if hoving flex dataset, like PIE, POLAR, DOUGHNUT, BAR or BUBBLE
-				if (dataset instanceof HovingFlexDataset) {
+				if (dataset instanceof HoverFlexDataset) {
 					// gets hoving flex dataset
-					HovingFlexDataset hovingDataset = (HovingFlexDataset) dataset;
+					HoverFlexDataset hovingDataset = (HoverFlexDataset) dataset;
 					// manages hoving flex dataset
 					manageHovingFlexDataset(hovingDataset, item);
 				} else if (dataset instanceof LiningDataset) {
@@ -115,7 +115,7 @@ final class ColorSchemeLegendLabelsCallback implements LegendLabelsCallback {
 	 * @param hovingFlexDataset hoving flex dataset instance
 	 * @param item legend item to change applying new colors
 	 */
-	private void manageHovingFlexDataset(HovingFlexDataset hovingFlexDataset, LegendLabelItem item) {
+	private void manageHovingFlexDataset(HoverFlexDataset hovingFlexDataset, LegendLabelItem item) {
 		// gets background colors, border colors
 		List<IsColor> backgroundColors = hovingFlexDataset.getBackgroundColor();
 		List<IsColor> borderColors = hovingFlexDataset.getBackgroundColor();

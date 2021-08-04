@@ -44,7 +44,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.data.HovingFlexDataset;
+import org.pepstock.charba.client.data.HoverFlexDataset;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.CapStyle;
@@ -57,7 +57,7 @@ import org.pepstock.charba.client.options.IsFont;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TreeMapDataset extends HovingFlexDataset {
+public final class TreeMapDataset extends HoverFlexDataset {
 
 	/**
 	 * Default color, <b>transparent</b>

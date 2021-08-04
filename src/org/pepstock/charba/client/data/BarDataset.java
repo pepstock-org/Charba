@@ -65,7 +65,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasOrder, HasBarDatasetOptions {
+public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOrder, HasBarDatasetOptions {
 
 	// default label
 	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;

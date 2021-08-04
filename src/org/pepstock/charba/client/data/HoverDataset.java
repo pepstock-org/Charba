@@ -38,7 +38,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class HovingDataset extends HovingFlexDataset {
+public abstract class HoverDataset extends HoverFlexDataset {
 
 	/**
 	 * Creates the data set using a default and chart type related to the data set.
@@ -47,7 +47,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected HovingDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+	protected HoverDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
 	}
 

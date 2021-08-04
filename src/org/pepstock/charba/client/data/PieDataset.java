@@ -39,7 +39,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class PieDataset extends HovingDataset implements HasBorderAlign {
+public class PieDataset extends HoverDataset implements HasBorderAlign {
 
 	// border radius array constant for set border radius from a list
 	private static final ArcBorderRadius[] BORDER_RADIUS_EMPTY_ARRAY = new ArcBorderRadius[0];

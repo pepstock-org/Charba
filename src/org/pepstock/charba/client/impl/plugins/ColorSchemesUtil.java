@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.data.BarBorderWidth;
 import org.pepstock.charba.client.data.BarDataset;
-import org.pepstock.charba.client.data.HovingFlexDataset;
+import org.pepstock.charba.client.data.HoverFlexDataset;
 
 /**
  * Color scheme utility to cache the usage of color schemes in order to avoid to search them when requested.<br>
@@ -125,7 +125,7 @@ final class ColorSchemesUtil {
 	 * @param hovingDataset dataset to use to calculate
 	 * @return the maximum border width defined in the dataset
 	 */
-	int getMaxBorderWidth(HovingFlexDataset hovingDataset) {
+	int getMaxBorderWidth(HoverFlexDataset hovingDataset) {
 		// gets the list border widths
 		List<Integer> borderWidths = hovingDataset.getBorderWidth();
 		// sets max

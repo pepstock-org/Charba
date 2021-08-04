@@ -40,7 +40,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BubbleDataset extends HovingDataset implements HasDataPoints, HasOrder, HasDataPointStyle {
+public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrder, HasDataPointStyle {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---

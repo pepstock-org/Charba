@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class PolarAreaDataset extends HovingDataset implements HasBorderAlign {
+public class PolarAreaDataset extends HoverDataset implements HasBorderAlign {
 
 	// instance of border align handler
 	private final BorderAlignHandler borderAlignHandler;

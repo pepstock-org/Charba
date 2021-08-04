@@ -26,8 +26,8 @@ import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.data.HovingDataset;
-import org.pepstock.charba.client.data.HovingFlexDataset;
+import org.pepstock.charba.client.data.HoverDataset;
+import org.pepstock.charba.client.data.HoverFlexDataset;
 import org.pepstock.charba.client.data.LiningDataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.impl.charts.GaugeChart;
@@ -194,14 +194,14 @@ public final class ColorSchemes extends AbstractPlugin {
 				// checks if reverse is requested to get the color
 				IsColor color = colors.get(options.isReverse() ? amountOfColors - colorIndex - 1 : colorIndex);
 				// if hoving dataset, like PIE, POLAR, DOUGHNUT
-				if (dataset instanceof HovingDataset) {
+				if (dataset instanceof HoverDataset) {
 					// casts the dataset
-					HovingDataset hovingDataset = (HovingDataset) dataset;
+					HoverDataset hovingDataset = (HoverDataset) dataset;
 					// manages hoving dataset
 					manageHovingDataset(chart, options, hovingDataset, color, colors);
-				} else if (dataset instanceof HovingFlexDataset) {
+				} else if (dataset instanceof HoverFlexDataset) {
 					// if hoving FLEX dataset, like BAR
-					HovingFlexDataset hovingDataset = (HovingFlexDataset) dataset;
+					HoverFlexDataset hovingDataset = (HoverFlexDataset) dataset;
 					// manages hoving flex dataset
 					manageHovingFlexDataset(options, hovingDataset, color, colors);
 				} else if (dataset instanceof LiningDataset) {
@@ -224,7 +224,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	 * @param color color selected by dataset position
 	 * @param colors list of colors of scheme
 	 */
-	private void manageHovingDataset(IsChart chart, ColorSchemesOptions options, HovingDataset hovingDataset, IsColor color, List<IsColor> colors) {
+	private void manageHovingDataset(IsChart chart, ColorSchemesOptions options, HoverDataset hovingDataset, IsColor color, List<IsColor> colors) {
 		// checks if bubble chart because the color will be selected by scheme, as for bar charts
 		if (ChartType.BUBBLE.equals(chart.getBaseType()) && SchemeScope.DATASET.equals(options.getSchemeScope())) {
 			// if here is at dataset level
@@ -260,7 +260,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	 * @param color color selected by dataset position
 	 * @param colors list of colors of scheme
 	 */
-	private void manageHovingFlexDataset(ColorSchemesOptions options, HovingFlexDataset hovingDataset, IsColor color, List<IsColor> colors) {
+	private void manageHovingFlexDataset(ColorSchemesOptions options, HoverFlexDataset hovingDataset, IsColor color, List<IsColor> colors) {
 		// checks if the scope to apply the colors is at data or dataset level
 		if (SchemeScope.DATA.equals(options.getSchemeScope())) {
 			// if here is at data level
