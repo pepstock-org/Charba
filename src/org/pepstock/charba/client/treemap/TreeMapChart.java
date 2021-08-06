@@ -112,8 +112,9 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 			// casts to treemap controller
 			treeMapController = (TreeMapController) controllerInstance;
 		}
-		// disables DATALABELS plugin
+		// disables DATALABELS and LABELS plugins
 		getOptions().getPlugins().setEnabled(ResourceName.DATALABELS_PLUGIN.value(), false);
+		getOptions().getPlugins().setEnabled(ResourceName.LABELS_PLUGIN.value(), false);
 		// checks if there is a data set
 		if (!getData().getDatasets().isEmpty()) {
 			// a treemap chart must have only 1 data set
