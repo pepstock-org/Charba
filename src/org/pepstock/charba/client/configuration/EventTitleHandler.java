@@ -32,9 +32,9 @@ final class EventTitleHandler extends AbstractEventElementHandler {
 
 	// amount of title click event handlers
 	private int onTitleClickHandlers = 0;
-	// amount of axis enter event handlers
+	// amount of title enter event handlers
 	private int onTitleEnterHandlers = 0;
-	// amount of axis leave event handlers
+	// amount of title leave event handlers
 	private int onTitleLeaveHandlers = 0;
 	// hovered title flag
 	private boolean hoveredTitle = false;

@@ -22,6 +22,7 @@ import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.LegendNode;
 import org.pepstock.charba.client.items.OptionsNode;
 import org.pepstock.charba.client.items.ScalesNode;
+import org.pepstock.charba.client.items.SubtitleNode;
 import org.pepstock.charba.client.items.TitleNode;
 import org.pepstock.charba.client.items.TooltipNode;
 import org.pepstock.charba.client.items.Undefined;
@@ -46,6 +47,8 @@ public final class ChartNode {
 	private final ChartAreaNode chartArea;
 
 	private final TitleNode title;
+	
+	private final SubtitleNode subtitle;
 
 	private final TooltipNode tooltip;
 
@@ -61,16 +64,17 @@ public final class ChartNode {
 		// stores native chart instance
 		this.chart = chart;
 		// sets if is initialized checking the CHART instance
-		initialized = chart != null;
+		this.initialized = chart != null;
 		// gets the defaults for options
-		IsDefaultScaledOptions defaultValues = initialized ? chart.getChart().getDefaultChartOptions() : DefaultsBuilder.get().getScaledOptions();
+		IsDefaultScaledOptions defaultValues = this.initialized ? chart.getChart().getDefaultChartOptions() : DefaultsBuilder.get().getScaledOptions();
 		// creates all sub elements
-		options = new OptionsNode(chartId, defaultValues, new ChartEnvelop<>(initialized ? chart.getOptions() : null, true));
-		legend = new LegendNode(new ChartEnvelop<>(initialized ? chart.getLegend() : null, true));
-		scales = new ScalesNode(new ChartEnvelop<>(initialized ? chart.getScales() : null, true));
-		chartArea = new ChartAreaNode(new ChartEnvelop<>(initialized ? chart.getChartArea() : null, true));
-		title = new TitleNode(new ChartEnvelop<>(initialized ? chart.getTitleBlock() : null, true));
-		tooltip = new TooltipNode(new ChartEnvelop<>(initialized ? chart.getTooltip() : null, true));
+		this.options = new OptionsNode(chartId, defaultValues, new ChartEnvelop<>(this.initialized ? chart.getOptions() : null, true));
+		this.legend = new LegendNode(new ChartEnvelop<>(this.initialized ? chart.getLegend() : null, true));
+		this.scales = new ScalesNode(new ChartEnvelop<>(this.initialized ? chart.getScales() : null, true));
+		this.chartArea = new ChartAreaNode(new ChartEnvelop<>(this.initialized ? chart.getChartArea() : null, true));
+		this.title = new TitleNode(new ChartEnvelop<>(this.initialized ? chart.getTitleBlock() : null, true));
+		this.subtitle = new SubtitleNode(new ChartEnvelop<>(this.initialized ? chart.getSubtitle() : null, true));
+		this.tooltip = new TooltipNode(new ChartEnvelop<>(this.initialized ? chart.getTooltip() : null, true));
 	}
 
 	/**
@@ -118,6 +122,15 @@ public final class ChartNode {
 		return chartArea;
 	}
 
+	/**
+	 * Returns the subtitle item.
+	 * 
+	 * @return the subtitle item.
+	 */
+	public SubtitleNode getSubtitle() {
+		return subtitle;
+	}
+	
 	/**
 	 * Returns the title item.
 	 * 

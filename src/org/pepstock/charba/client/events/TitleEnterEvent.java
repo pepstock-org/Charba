@@ -23,7 +23,7 @@ import org.pepstock.charba.client.options.Title;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TitleEnterEvent extends AbstractTitleEvent {
+public final class TitleEnterEvent extends AbstractTitleEvent<Title> {
 
 	/**
 	 * Event type

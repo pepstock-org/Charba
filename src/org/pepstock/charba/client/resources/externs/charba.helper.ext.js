@@ -218,6 +218,11 @@ CharbaJsChartHelper.setTooltipActiveElements = function(chart, items) {};
  */
 CharbaJsChartHelper.getTooltipActiveElements = function(chart) {};
 /**
+ * @param {Chart} chart
+ * @return {Object}
+ */
+CharbaJsChartHelper.getSubtitle = function(chart) {};
+/**
  * @constructor
  * @return {CharbaJsZoomHelper}
  */	

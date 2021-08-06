@@ -264,6 +264,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 
   * import CHART.JS TREEMAP controller [version v1.0.2](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v1.0.2).
     * enable tree map chart types.
+  * add `click`, `enter` and `leave` subtitle events.
+  * add `subtitle` item to `PointElement` enumeration for `ChartPointer` plugin, in order to enable the changing cursor when a click event handler has been set on subtitle element.
 
 ### Developing
 

@@ -160,6 +160,8 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	private final EventAxesHandler eventAxesHandler;
 	// event title handler
 	private final EventTitleHandler eventTitleHandler;
+	// event subtitle handler
+	private final EventSubtitleHandler eventSubtitleHandler;
 	// amount of data set selection event handlers
 	private int onDatasetSelectionHandlers = 0;
 	// amount of click event handlers
@@ -185,6 +187,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		// creates elements handler
 		this.eventAxesHandler = new EventAxesHandler(this);
 		this.eventTitleHandler = new EventTitleHandler(this);
+		this.eventSubtitleHandler = new EventSubtitleHandler(this);
 		// creates the animation configuration manager
 		this.animationContainer = new AnimationContainer(getChart(), this::getConfiguration);
 		// creates all sub elements
@@ -753,6 +756,33 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	public final boolean hasTitleLeaveHandlers() {
 		return eventTitleHandler.hasTitleLeaveHandlers();
+	}
+
+	/**
+	 * Returns <code>true</code> if there is any subtitle click handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any subtitle click handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasSubtitleClickHandlers() {
+		return eventSubtitleHandler.hasSubtitleClickHandlers();
+	}
+
+	/**
+	 * Returns <code>true</code> if there is any subtitle enter handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any subtitle enter handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasSubtitleEnterHandlers() {
+		return eventSubtitleHandler.hasSubtitleEnterHandlers();
+	}
+
+	/**
+	 * Returns <code>true</code> if there is any subtitle leave handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any subtitle leave handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasSubtitleLeaveHandlers() {
+		return eventSubtitleHandler.hasSubtitleLeaveHandlers();
 	}
 
 	/**

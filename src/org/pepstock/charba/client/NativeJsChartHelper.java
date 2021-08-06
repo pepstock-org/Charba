@@ -93,4 +93,13 @@ final class NativeJsChartHelper {
 	 * @return the array of active tooltip elements
 	 */
 	static native ArrayObject getTooltipActiveElements(Chart chart);
+
+	/**
+	 * Returns the subtitle elements from the chart.
+	 * 
+	 * @param chart chart instance, used to get the subtitle
+	 * @return the native object of subtitle
+	 */
+	static native NativeObject getSubtitle(Chart chart);
+
 }

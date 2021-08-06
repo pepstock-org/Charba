@@ -375,6 +375,16 @@ public final class Chart {
 	native NativeObject getTitleBlock();
 
 	/**
+	 * Returns the subtitle node, as native object.
+	 * 
+	 * @return the subtitle node.
+	 */
+	@JsOverlay
+	NativeObject getSubtitle() {
+		return JsChartHelper.get().getSubtitle(this);
+	}
+
+	/**
 	 * Returns the options node, as native object.
 	 * 
 	 * @return the options node.

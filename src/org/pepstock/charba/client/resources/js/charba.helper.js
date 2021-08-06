@@ -824,6 +824,18 @@ CharbaJsChartHelper.getTooltipActiveElements = function(chart) {
   return new Array();
 }
 /**
+ * Returns the subtitle element from the chart.
+ *
+ * @param {Chart} chart chart instance, used to get the subtitle
+ * @return {Object} subtitle element
+ */
+CharbaJsChartHelper.getSubtitle = function(chart) {
+  if (chart != null && chart.titleBlock != null && chart.boxes != null){
+    return chart.boxes.filter(box => box.constructor.name === chart.titleBlock.constructor.name && box !== chart.titleBlock).pop();
+  }
+  return null;
+}
+/**
  * ----------------------------------------------------------------------------
  * CharbaJsZoomHelper
  * ----------------------------------------------------------------------------

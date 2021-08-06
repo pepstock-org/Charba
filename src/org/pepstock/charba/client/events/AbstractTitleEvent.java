@@ -17,17 +17,17 @@ package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.options.Title;
+import org.pepstock.charba.client.options.AbstractTitle;
 
 /**
  * Event which is fired when the user action on the title of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class AbstractTitleEvent extends AbstractEvent {
+abstract class AbstractTitleEvent<T extends AbstractTitle<?>> extends AbstractEvent {
 
 	// title item selected by clicking
-	private final Title item;
+	private final T item;
 
 	/**
 	 * Creates the event with title related to the action
@@ -36,7 +36,7 @@ abstract class AbstractTitleEvent extends AbstractEvent {
 	 * @param type type of event
 	 * @param item title related to the action
 	 */
-	AbstractTitleEvent(BaseNativeEvent nativeEvent, EventType type, Title item) {
+	AbstractTitleEvent(BaseNativeEvent nativeEvent, EventType type, T item) {
 		super(nativeEvent, type);
 		// checks if argument is consistent
 		this.item = Checker.checkAndGetIfValid(item, "Title item argument");
@@ -47,7 +47,7 @@ abstract class AbstractTitleEvent extends AbstractEvent {
 	 * 
 	 * @return the title related to the click
 	 */
-	public final Title getItem() {
+	public final T getItem() {
 		return item;
 	}
 

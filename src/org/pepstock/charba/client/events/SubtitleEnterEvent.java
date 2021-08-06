@@ -16,27 +16,27 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.options.Title;
+import org.pepstock.charba.client.options.Subtitle;
 
 /**
- * Event which is fired when the user leaves on the title of the chart.
+ * Event which is fired when the user enters on the subtitle of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TitleLeaveEvent extends AbstractTitleEvent<Title> {
+public final class SubtitleEnterEvent extends AbstractTitleEvent<Subtitle> {
 
 	/**
 	 * Event type
 	 */
-	public static final EventType TYPE = EventType.create(TitleLeaveEvent.class);
+	public static final EventType TYPE = EventType.create(SubtitleEnterEvent.class);
 
 	/**
-	 * Creates the event with title related to the leave
+	 * Creates the event with subtitle related to the enter
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param item title related to the leave
+	 * @param item subtitle related to the enter
 	 */
-	public TitleLeaveEvent(BaseNativeEvent nativeEvent, Title item) {
+	public SubtitleEnterEvent(BaseNativeEvent nativeEvent, Subtitle item) {
 		super(nativeEvent, TYPE, item);
 	}
 
@@ -48,11 +48,11 @@ public final class TitleLeaveEvent extends AbstractTitleEvent<Title> {
 	@Override
 	protected void dispatch(EventHandler handler) {
 		// checks if handler is a correct instance
-		if (handler instanceof TitleLeaveEventHandler) {
+		if (handler instanceof SubtitleEnterEventHandler) {
 			// casts handler
-			TitleLeaveEventHandler myHandler = (TitleLeaveEventHandler) handler;
+			SubtitleEnterEventHandler myHandler = (SubtitleEnterEventHandler) handler;
 			// invokes
-			myHandler.onLeave(this);
+			myHandler.onEnter(this);
 		}
 	}
 

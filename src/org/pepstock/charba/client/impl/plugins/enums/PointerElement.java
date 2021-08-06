@@ -34,6 +34,10 @@ public enum PointerElement implements Key
 	 */
 	TITLE("title"),
 	/**
+	 * Changes the cursor when over to the subtitle.
+	 */
+	SUBTITLE("subtitle"),
+	/**
 	 * Changes the cursor when over to an axes.
 	 */
 	AXES("axes"),

@@ -30,7 +30,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  * @param <T> type of defaults for title or subtitle
  */
-abstract class AbstractTitle<T extends IsDefaultAbstractTitle> extends AbstractDefaultPluginElement<T> implements IsTitle, HasFont {
+public abstract class AbstractTitle<T extends IsDefaultAbstractTitle> extends AbstractDefaultPluginElement<T> implements IsTitle, HasFont {
 
 	/**
 	 * Name of properties of native object.

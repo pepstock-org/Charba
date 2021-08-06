@@ -119,6 +119,9 @@ public final class ChartPointer extends AbstractPlugin {
 			} else if (hasTitleSelection(chart, event, scope)) {
 				// TITLE SELECTION
 				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
+			} else if (hasSubtitleSelection(chart, event, scope)) {
+				// SUBTITLE SELECTION
+				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
 			} else if (hasScaleSelection(chart, event, scope)) {
 				// AXIS SELECTION
 				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
@@ -178,6 +181,22 @@ public final class ChartPointer extends AbstractPlugin {
 		// checks if there is any title click handler and title is in scope
 		// and the cursor is over the title element
 		return isTitleEnabled && chart.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.TITLE) && chart.getNode().getTitle().isInside(event);
+	}
+
+	/**
+	 * Returns <code>true</code> if the cursor is over to the subtitle, otherwise <code>false</code>.
+	 * 
+	 * @param chart chart instance
+	 * @param event event form CHART.js
+	 * @param scope the scope with all activated scope of the plugin
+	 * @return <code>true</code> if the cursor is over to the subtitle, otherwise <code>false</code>
+	 */
+	private boolean hasSubtitleSelection(IsChart chart, BaseNativeEvent event, List<PointerElement> scope) {
+		// checks if subtitle display is activated or subtitle plugin is activated
+		boolean isSubtitleEnabled = chart.getOptions().getSubtitle().isDisplay();
+		// checks if there is any subtitle click handler and subtitle is in scope
+		// and the cursor is over the subtitle element
+		return isSubtitleEnabled && chart.getOptions().hasSubtitleClickHandlers() && isElementInScope(scope, PointerElement.SUBTITLE) && chart.getNode().getSubtitle().isInside(event);
 	}
 
 	/**
