@@ -60,6 +60,10 @@ import org.pepstock.charba.client.options.IsFont;
 public final class TreeMapDataset extends HoverFlexDataset {
 
 	/**
+	 * Default border width, <b>{@value}</b>.
+	 */
+	public static final int DEFAULT_BORDER_WIDTH = 0;
+	/**
 	 * Default color, <b>transparent</b>
 	 */
 	public static final String DEFAULT_COLOR = HtmlColor.TRANSPARENT.toRGBA();
@@ -217,6 +221,16 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		this.colorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getColorCallback(), DEFAULT_COLOR, false));
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getHoverColorCallback(), DEFAULT_COLOR, false));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderWidth()
+	 */
+	@Override
+	protected int getDefaultBorderWidth() {
+		return DEFAULT_BORDER_WIDTH;
 	}
 
 	/**
@@ -951,7 +965,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		}
 
 	}
-	
+
 	/**
 	 * Factory to create a {@link Dash} from a native array, used for array container lists.
 	 * 
