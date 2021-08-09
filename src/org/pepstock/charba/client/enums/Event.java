@@ -85,7 +85,7 @@ public enum Event implements Key
 	/**
 	 * Key factory instance to use for array set reading.
 	 */
-	public static final KeyFactory<Event> FACTORY = (value) -> Key.getKeyByValue(Event.values(), value);
+	public static final KeyFactory<Event> FACTORY = keyValue -> Key.getKeyByValue(Event.values(), keyValue);
 
 	// name value of property
 	private final String value;

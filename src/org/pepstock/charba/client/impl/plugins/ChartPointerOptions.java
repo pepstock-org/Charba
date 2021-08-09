@@ -24,6 +24,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.ArraySetHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.KeyFactory;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 
@@ -37,6 +38,8 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions impl
 
 	// default list for elements
 	static final Set<PointerElement> DEFAULTS_ELEMENTS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(PointerElement.values())));
+	// key factory instance
+	private static final KeyFactory<PointerElement> KEY_FACTORY = value -> Key.getKeyByValue(PointerElement.values(), value);
 
 	/**
 	 * Name of properties of native object.
@@ -146,7 +149,7 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions impl
 		if (has(Property.ELEMENTS)) {
 			// reads the property
 			ArrayString array = getArrayValue(ChartPointerOptions.Property.ELEMENTS);
-			return ArraySetHelper.set(array, (value) -> Key.getKeyByValue(PointerElement.values(), value));
+			return ArraySetHelper.set(array, KEY_FACTORY);
 		}
 		// if here, there is not any property
 		// returns defaults elements
