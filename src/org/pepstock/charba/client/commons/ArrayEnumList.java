@@ -106,6 +106,19 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 		// and not added
 		return false;
 	}
+	
+	/**
+	 * Inserts the specified element at the specified position in this list.<br>
+	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
+	 */
+	@SuppressWarnings("unusable-by-js")
+	@Override
+	public void add(int index, E element) {
+		// checks if element is consistent
+		if (Key.isValid(element)) {
+			array.insertAt(index, element.value());
+		}
+	}
 
 	/**
 	 * Removes all of the elements from this list. The list will be empty after this call returns.
@@ -146,19 +159,6 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 			return oldValue;
 		}
 		return null;
-	}
-
-	/**
-	 * Inserts the specified element at the specified position in this list.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
-	 */
-	@SuppressWarnings("unusable-by-js")
-	@Override
-	public void add(int index, E element) {
-		// checks if element is consistent
-		if (Key.isValid(element)) {
-			array.insertAt(index, element.value());
-		}
 	}
 
 	/**
