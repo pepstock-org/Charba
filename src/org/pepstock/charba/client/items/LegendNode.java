@@ -24,6 +24,7 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
  * Wrapper of legend node of CHART.JS.<br>
@@ -146,4 +147,27 @@ public final class LegendNode extends BaseBoxNodeItem {
 		// returns list
 		return ArrayListHelper.unmodifiableList(array, LegendItem.FACTORY);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.items.BaseBoxItem#isInside(org.pepstock.charba.client.dom.BaseNativeEvent)
+	 */
+	@Override
+	public boolean isInside(BaseNativeEvent event) {
+		// checks if inside the legend
+		if (super.isInside(event)) {
+			// checks all hit boxes
+			for (LegendHitBoxItem hitBox : getHitBoxes()) {
+				// checks if inside
+				if (hitBox.isInside(event)) {
+					return true;
+				}
+			}
+		}
+		// if here, after scanning
+		// is NOT on hit box or is not on the legend
+		return false;
+	}
+
 }

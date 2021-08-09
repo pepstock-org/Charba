@@ -139,7 +139,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer implements IsAre
 	 * @param event event to check if inside the box
 	 * @return <code>true</code> if the chart event is inside of this box, otherwise <code>false</code>
 	 */
-	public final boolean isInside(BaseNativeEvent event) {
+	public boolean isInside(BaseNativeEvent event) {
 		// checks if consistent
 		if (IsArea.isConsistent(this)) {
 			// checks X
