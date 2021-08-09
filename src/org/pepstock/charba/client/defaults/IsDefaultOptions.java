@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
@@ -125,7 +125,7 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	 * 
 	 * @return the browser events that the chart should listen to.
 	 */
-	List<Event> getEvents();
+	Set<Event> getEvents();
 
 	/**
 	 * Returns the locale instance for internationalization.

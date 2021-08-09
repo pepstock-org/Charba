@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.KeyFactory;
 
 /**
  * The events option defines the browser events that the chart, legend, tooltip or plugins should listen to.
@@ -80,6 +81,11 @@ public enum Event implements Key
 	 * </ul>
 	 */
 	POINTER_OUT("pointerout");
+	
+	/**
+	 * Key factory instance to use for array set reading.
+	 */
+	public static final KeyFactory<Event> FACTORY = (value) -> Key.getKeyByValue(Event.values(), value);
 
 	// name value of property
 	private final String value;

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
@@ -49,7 +49,7 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 * 
 	 * @return the browser events that the tooltip should listen to.
 	 */
-	List<Event> getEvents();
+	Set<Event> getEvents();
 
 	/**
 	 * Returns which elements appear in the tooltip.

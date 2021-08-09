@@ -153,10 +153,12 @@ public final class ArrayListHelper {
 	 * Creates a array list of {@link Key} values by an java script array of strings.
 	 * 
 	 * @param array array of strings to load when the list is creating.
+	 * @param factory factory implementation to create keys by a single native object of the array.
+	 * @param <E> type of key
 	 * @return a array list of {@link Key}.
 	 */
-	public static ArrayKeyList keys(ArrayString array) {
-		return new ArrayKeyList(array);
+	public static <E extends Key> ArrayKeyList<E> keys(ArrayString array, KeyFactory<E> factory) {
+		return new ArrayKeyList<>(array, factory);
 	}
 
 	/**
@@ -280,12 +282,14 @@ public final class ArrayListHelper {
 	 * Creates a unmodifiable array list of {@link Key} values by an java script array of strings.
 	 * 
 	 * @param array array of strings to load when the list is creating.
+	 * @param factory factory implementation to create keys by a single native object of the array.
+	 * @param <E> type of key
 	 * @return a array list of {@link Key}.
 	 */
-	public static List<Key> unmodifiableKeys(ArrayString array) {
-		return Collections.unmodifiableList(keys(array));
+	public static <E extends Key> List<E> unmodifiableKeys(ArrayString array, KeyFactory<E> factory) {
+		return Collections.unmodifiableList(keys(array, factory));
 	}
-	
+
 	/**
 	 * Creates an unmodifiable array list of generic java script objects by a java script array.
 	 * 

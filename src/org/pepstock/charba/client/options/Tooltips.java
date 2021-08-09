@@ -15,11 +15,11 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArraySetHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.HasCallbackScope;
@@ -239,7 +239,15 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param events the browser events that the tooltip should listen to.
 	 */
 	public void setEvents(Event... events) {
-		// sets the array of events
+		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(true, events));
+	}
+
+	/**
+	 * Sets the browser events that the legend should listen to.
+	 * 
+	 * @param events the browser events that the legend should listen to.
+	 */
+	public void setEvents(Set<Event> events) {
 		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(events));
 	}
 
@@ -249,11 +257,11 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @return the browser events that the tooltip should listen to.
 	 */
 	@Override
-	public List<Event> getEvents() {
+	public Set<Event> getEvents() {
 		// retrieves the array
 		ArrayString array = getArrayValue(Property.EVENTS);
 		// if the array is not consistent returns the default
-		return array != null ? ArrayListHelper.list(Event.values(), array) : getDefaultValues().getEvents();
+		return array != null ? ArraySetHelper.set(array, Event.FACTORY) : getDefaultValues().getEvents();
 	}
 
 	/**

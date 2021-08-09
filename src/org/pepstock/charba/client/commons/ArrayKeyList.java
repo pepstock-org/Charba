@@ -24,19 +24,27 @@ package org.pepstock.charba.client.commons;
  * this collection must not be passed to any javascript code.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @param <E> type of key element
  */
-public final class ArrayKeyList extends AbstractArrayContainerList<Key, ArrayString> {
+public final class ArrayKeyList<E extends Key> extends AbstractArrayContainerList<E, ArrayString> {
 
 	// delegated array to store objects
 	private final ArrayString array;
+	// key factory instance
+	private final KeyFactory<E> factory;
 
 	/**
 	 * Internal constructor used to set an array instance as back-end of the list.
 	 * 
 	 * @param array java script array instance. If <code>null</code>, new empty array has been created
+	 * @param factory factory instance to create the key from a native one.
 	 */
-	ArrayKeyList(ArrayString array) {
+	ArrayKeyList(ArrayString array, KeyFactory<E> factory) {
+		// factory is not consistent and array is consistent EXCEPTION
+		// factory is mandatory to get and create the elements from native array
+		Checker.checkIfValid(factory, "Unable to create array list without a factory. The factory");
+		// stores factory
+		this.factory = factory;
 		// if null, creates a new array
 		if (array == null) {
 			this.array = new ArrayString();
@@ -48,9 +56,11 @@ public final class ArrayKeyList extends AbstractArrayContainerList<Key, ArrayStr
 
 	/**
 	 * Creates an empty list.
+	 * 
+	 * @param factory factory instance to create the key from a native one.
 	 */
-	public ArrayKeyList() {
-		this(null);
+	public ArrayKeyList(KeyFactory<E> factory) {
+		this(null, factory);
 	}
 
 	/*
@@ -64,15 +74,24 @@ public final class ArrayKeyList extends AbstractArrayContainerList<Key, ArrayStr
 	}
 
 	/**
+	 * Returns the {@link KeyFactory} instance.
+	 * 
+	 * @return the {@link KeyFactory} instance
+	 */
+	KeyFactory<E> getFactory() {
+		return factory;
+	}
+
+	/**
 	 * Loads an array of elements in the the list
 	 * 
 	 * @param values an array of elements to be loaded
 	 */
-	public void addAll(Key[] values) {
+	public void addAll(E[] values) {
 		// checks if arguments are consistent
 		if (values != null && values.length > 0) {
 			// scans all elements
-			for (Key val : values) {
+			for (E val : values) {
 				// adds
 				add(val);
 			}
@@ -84,7 +103,7 @@ public final class ArrayKeyList extends AbstractArrayContainerList<Key, ArrayStr
 	 */
 	@SuppressWarnings("unusable-by-js")
 	@Override
-	public boolean add(Key element) {
+	public boolean add(E element) {
 		// checks if element is consistent
 		if (Key.isValid(element)) {
 			// adds element
@@ -109,11 +128,11 @@ public final class ArrayKeyList extends AbstractArrayContainerList<Key, ArrayStr
 	 */
 	@SuppressWarnings("unusable-by-js")
 	@Override
-	public Key get(int index) {
+	public E get(int index) {
 		// checks range
 		if (checkRange(index)) {
 			String value = array.get(index);
-			return Key.create(value);
+			return factory.create(value);
 		}
 		return null;
 	}
@@ -123,12 +142,12 @@ public final class ArrayKeyList extends AbstractArrayContainerList<Key, ArrayStr
 	 */
 	@SuppressWarnings("unusable-by-js")
 	@Override
-	public Key set(int index, Key element) {
+	public E set(int index, E element) {
 		// checks element is consistent and in range
 		if (Key.isValid(element) && checkRange(index)) {
 			// gets current element at that index
 			String old = array.get(index);
-			Key oldValue = Key.create(old);
+			E oldValue = factory.create(old);
 			// replaces with new element
 			array.set(index, element.value());
 			// returns old
@@ -143,7 +162,7 @@ public final class ArrayKeyList extends AbstractArrayContainerList<Key, ArrayStr
 	 */
 	@SuppressWarnings("unusable-by-js")
 	@Override
-	public void add(int index, Key element) {
+	public void add(int index, E element) {
 		// checks if element is consistent
 		if (Key.isValid(element)) {
 			array.insertAt(index, element.value());
@@ -156,11 +175,11 @@ public final class ArrayKeyList extends AbstractArrayContainerList<Key, ArrayStr
 	 */
 	@SuppressWarnings("unusable-by-js")
 	@Override
-	public Key remove(int index) {
+	public E remove(int index) {
 		// checks range
 		if (checkRange(index)) {
 			String value = array.remove(index);
-			return Key.create(value);
+			return factory.create(value);
 		}
 		return null;
 	}

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.ChartEnvelop;
@@ -460,7 +460,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * 
 	 * @return the browser events that the chart should listen to.
 	 */
-	public List<Event> getEvents() {
+	public Set<Event> getEvents() {
 		return getConfiguration().getEvents();
 	}
 

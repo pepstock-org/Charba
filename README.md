@@ -260,6 +260,11 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Breaking changes
+
+  * change signature of `getEvents` method of `Options` (and `ConfigurationOptions`), `Legend`, `Tooltips` classes and all plugins instances, returning a `Set` of events instead of a `List`.
+  * change signature of `getElements` method of `ChartPointer` plugin, returning a `Set` of events instead of a `List`.
+
 ### Features
 
   * import CHART.JS TREEMAP controller [version v1.0.2](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v1.0.2).

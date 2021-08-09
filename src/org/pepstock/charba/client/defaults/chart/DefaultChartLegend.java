@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
@@ -76,7 +76,7 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getEvents()
 	 */
 	@Override
-	public List<Event> getEvents() {
+	public Set<Event> getEvents() {
 		return legend.getEvents();
 	}
 

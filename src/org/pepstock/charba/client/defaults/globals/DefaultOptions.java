@@ -17,7 +17,8 @@ package org.pepstock.charba.client.defaults.globals;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
@@ -67,8 +68,8 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	private static final boolean DEFAULT_DRAW_ON_ATTACH = true;
 
 	private static final boolean DEFAULT_DESTROY_ON_DETACH = true;
-
-	private static final List<Event> DEFAULT_EVENTS = Collections.unmodifiableList(Arrays.asList(Event.MOUSE_MOVE, Event.MOUSE_OUT, Event.CLICK, Event.TOUCH_MOVE, Event.TOUCH_START));
+	
+	private static final Set<Event> DEFAULT_EVENTS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(Event.MOUSE_MOVE, Event.MOUSE_OUT, Event.CLICK, Event.TOUCH_MOVE, Event.TOUCH_START)));
 
 	/**
 	 * To avoid any instantiation
@@ -83,7 +84,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getEvents()
 	 */
 	@Override
-	public List<Event> getEvents() {
+	public Set<Event> getEvents() {
 		return DEFAULT_EVENTS;
 	}
 

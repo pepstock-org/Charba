@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.globals;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
@@ -168,8 +169,8 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getEvents()
 	 */
 	@Override
-	public List<Event> getEvents() {
-		return Collections.unmodifiableList(Defaults.get().getGlobal().getEvents());
+	public Set<Event> getEvents() {
+		return Collections.unmodifiableSet(Defaults.get().getGlobal().getEvents());
 	}
 
 	/*

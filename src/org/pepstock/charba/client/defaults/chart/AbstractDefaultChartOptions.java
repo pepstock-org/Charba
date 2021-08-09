@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.AbstractDefaultOptions;
@@ -49,7 +49,7 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getEvents()
 	 */
 	@Override
-	public List<Event> getEvents() {
+	public Set<Event> getEvents() {
 		return options.getEvents();
 	}
 

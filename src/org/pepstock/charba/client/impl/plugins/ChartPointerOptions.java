@@ -16,10 +16,12 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArraySetHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -34,7 +36,7 @@ import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 public final class ChartPointerOptions extends AbstractCursorPointerOptions implements IsChartPointerDefaultOptions {
 
 	// default list for elements
-	static final List<PointerElement> DEFAULTS_ELEMENTS = Arrays.asList(PointerElement.values());
+	static final Set<PointerElement> DEFAULTS_ELEMENTS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(PointerElement.values())));
 
 	/**
 	 * Name of properties of native object.
@@ -121,7 +123,15 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions impl
 	 * @param elements the chart elements in scope to {@link ChartPointer#ID} plugin
 	 */
 	public void setElements(PointerElement... elements) {
-		// sets the array of events
+		setArrayValue(Property.ELEMENTS, ArrayString.fromOrNull(true, elements));
+	}
+
+	/**
+	 * Sets the chart elements in scope to {@link ChartPointer#ID} plugin.
+	 * 
+	 * @param elements the chart elements in scope to {@link ChartPointer#ID} plugin
+	 */
+	public void setElements(Set<PointerElement> elements) {
 		setArrayValue(Property.ELEMENTS, ArrayString.fromOrNull(elements));
 	}
 
@@ -131,12 +141,12 @@ public final class ChartPointerOptions extends AbstractCursorPointerOptions impl
 	 * @return the chart elements in scope to {@link ChartPointer#ID} plugin
 	 */
 	@Override
-	public List<PointerElement> getElements() {
+	public Set<PointerElement> getElements() {
 		// checks if there is the property
 		if (has(Property.ELEMENTS)) {
 			// reads the property
 			ArrayString array = getArrayValue(ChartPointerOptions.Property.ELEMENTS);
-			return ArrayListHelper.list(PointerElement.values(), array);
+			return ArraySetHelper.set(array, (value) -> Key.getKeyByValue(PointerElement.values(), value));
 		}
 		// if here, there is not any property
 		// returns defaults elements

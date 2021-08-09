@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.enums.Event;
 
@@ -45,7 +45,7 @@ public interface IsDefaultLegend extends IsDefaultTextDirectionHandler, IsDefaul
 	 * 
 	 * @return the browser events that the legend should listen to.
 	 */
-	List<Event> getEvents();
+	Set<Event> getEvents();
 
 	/**
 	 * Returns <code>true</code> if marks that this box should take the full width/height of the canvas (moving other boxes).

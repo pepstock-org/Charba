@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.commons;
 
 import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.colors.IsColor;
 
@@ -39,6 +40,14 @@ public final class ArrayString extends Array {
 	 * @return new array instance of strings.
 	 */
 	private static native ArrayString of(String... items);
+
+	/**
+	 * Creates a new, shallow-copied {@link ArrayString} instance from an {@link NativeSet} instance.
+	 * 
+	 * @param items an array-like or iterable object to convert to an array.
+	 * @return a new, shallow-copied {@link ArrayString} instance from an {@link NativeSet} instance
+	 */
+	static final native ArrayString from(NativeSet items);
 
 	/**
 	 * To avoid any instantiation
@@ -196,6 +205,18 @@ public final class ArrayString extends Array {
 	 */
 	@JsOverlay
 	public static ArrayString fromOrNull(Key... items) {
+		return fromOrNull(false, items);
+	}
+
+	/**
+	 * Creates a java script array of strings starting from array of keys.
+	 * 
+	 * @param items array of keys to load in the new java script array.
+	 * @param asSet if <code>true</code>, the array is build without duplicates, as a set
+	 * @return new array instance of strings or <code>null</code> if argument is <code>null</code> or length to 0
+	 */
+	@JsOverlay
+	public static ArrayString fromOrNull(boolean asSet, Key... items) {
 		// checks if array is null
 		if (items == null || items.length == 0) {
 			return null;
@@ -205,7 +226,7 @@ public final class ArrayString extends Array {
 		// scans items
 		for (Key key : items) {
 			// checks if key is consistent
-			if (Key.isValid(key)) {
+			if (Key.isValid(key) && (!asSet || result.indexOf(key.value()) == AbstractArrayList.NOT_FOUND)) {
 				// adds element
 				result.push(key.value());
 			}
@@ -222,10 +243,90 @@ public final class ArrayString extends Array {
 	 */
 	@JsOverlay
 	public static ArrayString fromOrEmpty(Key... items) {
+		return fromOrEmpty(false, items);
+	}
+
+	/**
+	 * Creates a java script array of strings starting from array of keys.
+	 * 
+	 * @param items array of keys to load in the new java script array.
+	 * @param asSet if <code>true</code>, the array is build without duplicates, as a set
+	 * @return new array instance of strings or an empty array if argument is <code>null</code> or length to 0
+	 */
+	@JsOverlay
+	public static ArrayString fromOrEmpty(boolean asSet, Key... items) {
 		// creates the array
 		ArrayString result = new ArrayString();
 		// checks if array is null
 		if (items == null || items.length == 0) {
+			return result;
+		}
+		// scans items
+		for (Key key : items) {
+			// checks if key is consistent
+			if (Key.isValid(key) && (!asSet || result.indexOf(key.value()) == AbstractArrayList.NOT_FOUND)) {
+				// adds element
+				result.push(key.value());
+			}
+		}
+		// returns the array
+		return result;
+	}
+
+	/**
+	 * Creates a java script array of strings starting from set of keys.
+	 * 
+	 * @param items set of keys to load in the new java script array.
+	 * @param <T> type of the key
+	 * @return new array instance of strings or <code>null</code> if argument is <code>null</code> or empty
+	 */
+	@JsOverlay
+	public static <T extends Key> ArrayString fromOrNull(Set<T> items) {
+		// checks if array is null
+		if (items == null || items.isEmpty()) {
+			return null;
+		}
+		// checks if is already a set with array
+		if (items instanceof ArrayKeySet) {
+			// casts to array list
+			ArrayKeySet<?> list = (ArrayKeySet<?>) items;
+			// returns array
+			return list.getArray();
+		}
+		// creates the array
+		ArrayString result = new ArrayString();
+		// scans items
+		for (Key key : items) {
+			// checks if key is consistent
+			if (Key.isValid(key)) {
+				// adds element
+				result.push(key.value());
+			}
+		}
+		// returns the array
+		return result;
+	}
+
+	/**
+	 * Creates a java script array of strings starting from set of keys.
+	 * 
+	 * @param items set of keys to load in the new java script array.
+	 * @param <T> type of the key
+	 * @return new array instance of strings or an empty array if argument is <code>null</code> or empty
+	 */
+	@JsOverlay
+	public static <T extends Key> ArrayString fromOrEmpty(Set<T> items) {
+		// checks if is already a set with array
+		if (items instanceof ArrayKeySet) {
+			// casts to array list
+			ArrayKeySet<?> list = (ArrayKeySet<?>) items;
+			// returns array
+			return list.getArray();
+		}
+		// creates the array
+		ArrayString result = new ArrayString();
+		// checks if array is null
+		if (items == null || items.isEmpty()) {
 			return result;
 		}
 		// scans items
@@ -401,4 +502,5 @@ public final class ArrayString extends Array {
 	void set(int index, String item) {
 		fill(item, index, index + 1);
 	}
+
 }

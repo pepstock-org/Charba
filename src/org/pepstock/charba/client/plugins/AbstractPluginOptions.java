@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.plugins;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.ChartEnvelop;
@@ -26,7 +26,7 @@ import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArraySetHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Envelop;
@@ -138,7 +138,15 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 	 * @param events the browser events that the plugins should listen to.
 	 */
 	public final void setEvents(Event... events) {
-		// sets the array of events
+		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(true, events));
+	}
+
+	/**
+	 * Sets the browser events that the legend should listen to.
+	 * 
+	 * @param events the browser events that the legend should listen to.
+	 */
+	public void setEvents(Set<Event> events) {
 		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(events));
 	}
 
@@ -147,11 +155,11 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 	 * 
 	 * @return the browser events that the plugins should listen to.
 	 */
-	public final List<Event> getEvents() {
+	public final Set<Event> getEvents() {
 		// retrieves the array
 		ArrayString array = getArrayValue(Property.EVENTS);
 		// if the array is not consistent returns the default
-		return array != null ? ArrayListHelper.list(Event.values(), array) : Collections.unmodifiableList(Defaults.get().getGlobal().getEvents());
+		return array != null ? ArraySetHelper.set(array, Event.FACTORY) : Collections.unmodifiableSet(Defaults.get().getGlobal().getEvents());
 	}
 
 	/**

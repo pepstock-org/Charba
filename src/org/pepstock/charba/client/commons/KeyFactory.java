@@ -13,26 +13,21 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.impl.plugins;
-
-import java.util.Set;
-
-import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
+package org.pepstock.charba.client.commons;
 
 /**
- * Maps default configuration options of {@link ChartPointer#ID} plugin.
+ * Interface to be implemented to load keys from an array of native object.
  * 
  * @author Andrea "Stock" Stocchero
  */
-interface IsChartPointerDefaultOptions extends IsDefaultCursorPointerOptions {
+public interface KeyFactory<T extends Key> {
 
 	/**
-	 * Returns the chart elements in scope to "cursorpointer" plugin.
+	 * Creates a key instance by a string.
 	 * 
-	 * @return the chart elements in scope to "cursorpointer" plugin
+	 * @param value value of the key
+	 * @return key instance
 	 */
-	default Set<PointerElement> getElements() {
-		return ChartPointerOptions.DEFAULTS_ELEMENTS;
-	}
+	T create(String value);
 
 }

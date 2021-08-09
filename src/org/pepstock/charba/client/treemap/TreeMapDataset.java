@@ -17,6 +17,7 @@ package org.pepstock.charba.client.treemap;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.ColorCallback;
@@ -33,10 +34,12 @@ import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
+import org.pepstock.charba.client.commons.ArraySetHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.KeyFactory;
 import org.pepstock.charba.client.commons.NativeArrayContainerFactory;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -108,6 +111,8 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	private static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
 	// factory to create dash items
 	private static final DashFactory DASH_FACTORY = new DashFactory();
+	// factory to create keys
+	private static final InternalKeyFactory KEY_FACTORY = new InternalKeyFactory();
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -471,8 +476,8 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 * 
 	 * @param groups the the keys of the object to use to group the values from a tree object
 	 */
-	public void setGroups(List<Key> groups) {
-		setArrayValue(Property.GROUPS, groups != null ? ArrayString.fromOrNull(groups.toArray(new Key[0])) : null);
+	public void setGroups(Set<Key> groups) {
+		setArrayValue(Property.GROUPS, groups != null ? ArrayString.fromOrNull(groups) : null);
 	}
 
 	/**
@@ -481,11 +486,11 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 * 
 	 * @return the the keys of the object to use to group the values from a tree object
 	 */
-	public List<String> getGroupsAsString() {
+	public Set<String> getGroupsAsString() {
 		// retrieves the array
 		ArrayString array = getArrayValue(Property.GROUPS);
 		// if the array is not consistent returns an empty list
-		return array != null ? ArrayListHelper.list(array) : Collections.emptyList();
+		return array != null ? ArraySetHelper.set(array) : Collections.emptySet();
 	}
 
 	/**
@@ -494,11 +499,11 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 * 
 	 * @return the the keys of the object to use to group the values from a tree object
 	 */
-	public List<Key> getGroups() {
+	public Set<Key> getGroups() {
 		// retrieves the array
 		ArrayString array = getArrayValue(Property.GROUPS);
 		// if the array is not consistent returns an empty list
-		return array != null ? ArrayListHelper.keys(array) : Collections.emptyList();
+		return array != null ? ArraySetHelper.set(array, KEY_FACTORY) : Collections.emptySet();
 	}
 
 	// ---------------------------
@@ -948,7 +953,27 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	}
 
 	/**
-	 * Factory to create a trem map data point from a native object, used for array container lists.
+	 * Factory to create a keys from a native array, used for array lists.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalKeyFactory implements KeyFactory<Key> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.KeyFactory#create(java.lang.String)
+		 */
+		@Override
+		public Key create(String value) {
+			return Key.create(value);
+		}
+
+	}
+
+	/**
+	 * Factory to create a tree map data point from a native object, used for array container lists.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */

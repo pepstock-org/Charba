@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
@@ -104,7 +104,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getEvents()
 	 */
 	@Override
-	public List<Event> getEvents() {
+	public Set<Event> getEvents() {
 		return tooltip.getEvents();
 	}
 

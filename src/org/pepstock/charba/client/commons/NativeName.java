@@ -39,6 +39,11 @@ public final class NativeName {
 	public static final String ARRAY = "Array";
 
 	/**
+	 * Constant to bind java script set {@link NativeSet} with name <b>{@value SET}</b>.
+	 */
+	public static final String SET = "Set";
+
+	/**
 	 * Constant to bind java script function with name <b>{@value FUNCTION}</b>.
 	 */
 	public static final String FUNCTION = "Function";
@@ -215,12 +220,12 @@ public final class NativeName {
 	 * Constant to bind java script object as console with name <b>{@value CONSOLE}</b>.
 	 */
 	public static final String CONSOLE = "console";
-	
+
 	/**
 	 * Constant to bind java script object as unit 8 array with name <b>{@value UINT8_CLAMPED_ARRAY}</b>.
 	 */
 	public static final String UINT8_CLAMPED_ARRAY = "Uint8ClampedArray";
-	
+
 	/**
 	 * Constant to bind java script object as iterator with name <b>{@value ITERATOR}</b>.
 	 */

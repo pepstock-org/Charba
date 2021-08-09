@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -140,7 +140,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 	 * 
 	 * @return the browser events that the legend should listen to.
 	 */
-	public List<Event> getEvents() {
+	public Set<Event> getEvents() {
 		return getConfiguration().getLegend().getEvents();
 	}
 

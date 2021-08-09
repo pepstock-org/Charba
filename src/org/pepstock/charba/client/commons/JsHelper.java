@@ -219,7 +219,7 @@ public final class JsHelper {
 		// if here, arguments are not consistent
 		return false;
 	}
-	
+
 	/**
 	 * Returns the property value from java script object, when it is stored as integer.
 	 * 
