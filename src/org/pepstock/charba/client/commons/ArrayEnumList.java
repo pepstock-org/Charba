@@ -75,22 +75,6 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Loads an array of elements in the the list
-	 * 
-	 * @param values an array of elements to be loaded
-	 */
-	public void addAll(E[] values) {
-		// checks if arguments are consistent
-		if (values != null && values.length > 0) {
-			// scans all elements
-			for (E val : values) {
-				// adds
-				add(val);
-			}
-		}
-	}
-
-	/**
 	 * Appends the specified element to the end of this list
 	 */
 	@SuppressWarnings("unusable-by-js")
@@ -106,7 +90,23 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 		// and not added
 		return false;
 	}
-	
+
+	/**
+	 * Loads an array of elements in the the list
+	 * 
+	 * @param values an array of elements to be loaded
+	 */
+	public void addAll(E[] values) {
+		// checks if arguments are consistent
+		if (values != null && values.length > 0) {
+			// scans all elements
+			for (E val : values) {
+				// adds
+				add(val);
+			}
+		}
+	}
+
 	/**
 	 * Inserts the specified element at the specified position in this list.<br>
 	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
