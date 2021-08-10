@@ -81,7 +81,7 @@ public enum Event implements Key
 	 * </ul>
 	 */
 	POINTER_OUT("pointerout");
-	
+
 	/**
 	 * Key factory instance to use for array set reading.
 	 */
