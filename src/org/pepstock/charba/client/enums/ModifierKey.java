@@ -34,21 +34,21 @@ public enum ModifierKey implements Key
 	/**
 	 * Used in combination with the numeric keypad for entering <b>Alt</b> codes, which output special characters;
 	 */
-	ALT("alt", event -> event.isAltKey()),
+	ALT("alt", BaseNativeEvent::isAltKey),
 	/**
 	 * Used for entering keyboard shortcuts.
 	 */
-	CTRL("ctrl", event -> event.isCtrlKey()),
+	CTRL("ctrl", BaseNativeEvent::isCtrlKey),
 	/**
 	 * Used for entering keyboard shortcuts.
 	 */
-	META("meta", event -> event.isMetaKey()),
+	META("meta", BaseNativeEvent::isMetaKey),
 	/**
 	 * Used for capitalizing letters and entering different types of symbols.
 	 */
-	SHIFT("shift", event -> event.isShiftKey());
+	SHIFT("shift", BaseNativeEvent::isShiftKey);
 
-	// CSS inline to show the modifier key by element
+	// CSS in-line to show the modifier key by element
 	private static final String CSS = "background: linear-gradient(180deg,#eee,#fff); background-color: rgba(0, 0, 0, 0); background-color: #eee; border: 1px solid #cdd5d7; border-radius: 6px; box-shadow: 0 1px 2px 1px #cdd5d7; "
 			+ "font-family: consolas,courier,monospace; font-size: .9rem; font-weight: 700; line-height: 1; margin: 3px; padding: 4px 6px; white-space: nowrap; color: black;";
 	// name value of property
@@ -88,7 +88,7 @@ public enum ModifierKey implements Key
 	public Div getElement() {
 		// checks if element has been instantiated
 		if (element == null) {
-			// creates the div with kdb inside
+			// creates the div with kbd inside
 			element = DOMBuilder.get().createDivElement();
 			element.setInnerHTML("<kbd style=\"" + CSS + "\">" + value() + "</kbd>");
 		}
