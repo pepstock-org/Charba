@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.pepstock.charba.client.colors.IsColor;
 
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -33,6 +34,28 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
 public final class ArrayString extends Array {
 
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+
+	/**
+	 * Java script FUNCTION callback called to filter the array.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	private interface ArrayFilterCallback {
+
+		/**
+		 * Method of function to be called to filter the array.
+		 * 
+		 * @param element current element being processed in the array
+		 * @param index the index of the current element being processed in the array
+		 * @return a value that coerces to <code>true</code> to keep the element, or to <code>false</code> otherwise
+		 */
+		boolean call(String element, int index);
+	}
+
 	/**
 	 * This method creates new array instance with a variable number of <code>string</code> arguments.
 	 * 
@@ -40,14 +63,6 @@ public final class ArrayString extends Array {
 	 * @return new array instance of strings.
 	 */
 	private static native ArrayString of(String... items);
-
-	/**
-	 * Creates a new, shallow-copied {@link ArrayString} instance from an {@link NativeSet} instance.
-	 * 
-	 * @param items an array-like or iterable object to convert to an array.
-	 * @return a new, shallow-copied {@link ArrayString} instance from an {@link NativeSet} instance
-	 */
-	static final native ArrayString from(NativeSet items);
 
 	/**
 	 * To avoid any instantiation
@@ -501,6 +516,27 @@ public final class ArrayString extends Array {
 	@JsOverlay
 	void set(int index, String item) {
 		fill(item, index, index + 1);
+	}
+
+	/**
+	 * Creates a new array with all elements that pass the test implemented by the provided function.
+	 * 
+	 * @param callback is a predicate, to test each element of the array.<br>
+	 *            Return a value that coerces to true to keep the element, or to false otherwise.
+	 * @return a new array with the elements that pass the test.<br>
+	 *         If no elements pass the test, an empty array will be returned.
+	 */
+	native ArrayString filter(ArrayFilterCallback callback);
+
+	/**
+	 * Creates new array without duplicated values.<br>
+	 * It's used for Set implementation.
+	 * 
+	 * @return an array containing the unique elements.
+	 */
+	@JsOverlay
+	ArrayString unique() {
+		return filter((value, index) -> this.indexOf(value) == index);
 	}
 
 }

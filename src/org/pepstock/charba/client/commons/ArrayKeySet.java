@@ -40,7 +40,7 @@ public final class ArrayKeySet<E extends Key> extends AbstractArraySet<E, ArrayK
 	ArrayKeySet(ArrayString array, KeyFactory<E> factory) {
 		// creates delegated list
 		// removing duplicates passing thru a java script set object
-		this.delegated = new ArrayKeyList<>(ArrayString.from(new NativeSet(array)), factory);
+		this.delegated = new ArrayKeyList<>(array != null ? array.unique() : null, factory);
 	}
 
 	/**

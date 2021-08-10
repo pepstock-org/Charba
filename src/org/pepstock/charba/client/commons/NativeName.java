@@ -39,11 +39,6 @@ public final class NativeName {
 	public static final String ARRAY = "Array";
 
 	/**
-	 * Constant to bind java script set {@link NativeSet} with name <b>{@value SET}</b>.
-	 */
-	public static final String SET = "Set";
-
-	/**
 	 * Constant to bind java script function with name <b>{@value FUNCTION}</b>.
 	 */
 	public static final String FUNCTION = "Function";

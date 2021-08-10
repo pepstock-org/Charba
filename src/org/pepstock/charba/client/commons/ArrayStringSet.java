@@ -39,7 +39,7 @@ public final class ArrayStringSet extends AbstractArraySet<String, ArrayStringLi
 	ArrayStringSet(ArrayString array) {
 		// creates delegated list
 		// removing duplicates passing thru a java script set object
-		this.delegated = new ArrayStringList(ArrayString.from(new NativeSet(array)));
+		this.delegated = new ArrayStringList(array != null ? array.unique() : null);
 	}
 
 	/**
