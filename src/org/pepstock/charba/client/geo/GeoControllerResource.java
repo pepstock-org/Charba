@@ -24,7 +24,7 @@ import org.pepstock.charba.client.resources.ResourceName;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class GeoControllerResource extends AbstractInjectableResource {
+final class GeoControllerResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chartjs-chart-geo.min.js
 	private static final String[] CONTENT = {

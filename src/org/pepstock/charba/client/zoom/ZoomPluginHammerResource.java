@@ -24,7 +24,7 @@ import org.pepstock.charba.client.resources.ResourceName;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ZoomPluginHammerResource extends AbstractInjectableResource {
+final class ZoomPluginHammerResource extends AbstractInjectableResource {
 
 	// encoded javascript content of hammer.min.js
 	private static final String[] CONTENT = {

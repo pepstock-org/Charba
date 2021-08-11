@@ -21,7 +21,7 @@ ${additionalPackages}
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ${className} extends AbstractInjectableResource {
+final class ${className} extends AbstractInjectableResource {
 
 	// encoded javascript content of ${javaScriptFile}
 	private static final String[] CONTENT = {

@@ -21,7 +21,7 @@ package org.pepstock.charba.client.resources;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ChartJsResource extends AbstractInjectableResource {
+final class ChartJsResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chart.min.js
 	private static final String[] CONTENT = {

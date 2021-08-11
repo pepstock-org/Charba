@@ -24,7 +24,7 @@ import org.pepstock.charba.client.resources.ResourceName;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataLabelsPluginResource extends AbstractInjectableResource {
+final class DataLabelsPluginResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chartjs-plugin-datalabels.min.js
 	private static final String[] CONTENT = {

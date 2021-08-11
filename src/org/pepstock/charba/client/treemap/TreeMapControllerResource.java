@@ -24,7 +24,7 @@ import org.pepstock.charba.client.resources.ResourceName;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TreeMapControllerResource extends AbstractInjectableResource {
+final class TreeMapControllerResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chartjs-chart-treemap.min.js
 	private static final String[] CONTENT = {

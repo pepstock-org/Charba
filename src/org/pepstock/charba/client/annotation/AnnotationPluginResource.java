@@ -24,7 +24,7 @@ import org.pepstock.charba.client.resources.ResourceName;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnnotationPluginResource extends AbstractInjectableResource {
+final class AnnotationPluginResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chartjs-plugin-annotation.min.js
 	private static final String[] CONTENT = {

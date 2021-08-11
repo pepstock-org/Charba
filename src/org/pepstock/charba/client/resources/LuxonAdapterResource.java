@@ -21,7 +21,7 @@ package org.pepstock.charba.client.resources;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LuxonAdapterResource extends AbstractInjectableResource {
+final class LuxonAdapterResource extends AbstractInjectableResource {
 
 	// encoded javascript content of chartjs-adapter-luxon.min.js
 	private static final String[] CONTENT = {
