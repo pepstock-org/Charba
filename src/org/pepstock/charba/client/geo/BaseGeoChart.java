@@ -85,14 +85,14 @@ abstract class BaseGeoChart<D extends Dataset> extends AbstractChart implements 
 			// then gets it
 			Controller controllerInstance = Defaults.get().getControllers().getController(type);
 			// checks if controller is a base GEO controller
-			Checker.assertCheck(controllerInstance instanceof BaseGeoController, "Controller stored for " + getControllerType().value() + " is not a " + BaseGeoController.class.getName());
+			Checker.assertCheck(controllerInstance instanceof BaseGeoController, "Controller stored for " + getControllerType().value() + " is not a BaseGeoController");
 			// casts to GEO controller
 			geoController = (BaseGeoController) controllerInstance;
 		}
 		// gets GEO options
 		BaseGeoOptions options;
 		// checks if options is a GEO one
-		Checker.assertCheck(getOptions() instanceof BaseGeoOptions, "Chart options are " + getOptions().getClass().getName() + " and not a " + BaseGeoOptions.class.getName());
+		Checker.assertCheck(getOptions() instanceof BaseGeoOptions, "Chart options are not a BaseGeoOptions instance");
 		// cats and store
 		options = (BaseGeoOptions) getOptions();
 		// disables legend
@@ -106,10 +106,10 @@ abstract class BaseGeoChart<D extends Dataset> extends AbstractChart implements 
 			// checks if a bubble map
 			if (BubbleMapChart.CONTROLLER_TYPE.equals(getType())) {
 				// checks if is a bubble map data set
-				Checker.assertCheck(dataset instanceof BubbleMapDataset, "Dataset is not a " + BubbleMapDataset.class.getName() + " but " + dataset.getClass().getName());
+				Checker.assertCheck(dataset instanceof BubbleMapDataset, "Dataset is not a BubbleMapDataset instance");
 			} else {
 				// checks if is a choropleth data set
-				Checker.assertCheck(dataset instanceof ChoroplethDataset, "Dataset is not a " + ChoroplethDataset.class.getName() + " but " + dataset.getClass().getName());
+				Checker.assertCheck(dataset instanceof ChoroplethDataset, "Dataset is not a ChoroplethDataset instance");
 			}
 		}
 

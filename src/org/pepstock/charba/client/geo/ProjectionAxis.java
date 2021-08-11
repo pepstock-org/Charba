@@ -147,7 +147,7 @@ public final class ProjectionAxis extends Axis {
 			} else {
 				// if here, the chart instance is not a GEO one
 				// the exception
-				throw new IllegalArgumentException("Chart argument is not an instance of " + BaseGeoChart.class.getName() + " but " + chart.getClass().getName());
+				throw new IllegalArgumentException("Chart argument is not an instance of BaseGeoChart");
 			}
 		} else {
 			// if here, the chart instance is not a GEO one

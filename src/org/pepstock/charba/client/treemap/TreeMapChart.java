@@ -108,7 +108,7 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 			// then gets it
 			Controller controllerInstance = Defaults.get().getControllers().getController(CONTROLLER_TYPE);
 			// checks if controller is a treemap controller
-			Checker.assertCheck(controllerInstance instanceof TreeMapController, "Controller stored for " + CONTROLLER_TYPE.value() + " is not a " + TreeMapController.class.getName());
+			Checker.assertCheck(controllerInstance instanceof TreeMapController, "Controller stored for " + CONTROLLER_TYPE.value() + " is not a TreeMapController");
 			// casts to treemap controller
 			treeMapController = (TreeMapController) controllerInstance;
 		}
@@ -122,7 +122,7 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 			// gets the data set (only 1)
 			Dataset dataset = getData().getDatasets().get(0);
 			// checks if is a treemap data set
-			Checker.assertCheck(dataset instanceof TreeMapDataset, "Dataset is not a " + TreeMapDataset.class.getName() + " but " + dataset.getClass().getName());
+			Checker.assertCheck(dataset instanceof TreeMapDataset, "Dataset is not a TreeMapDataset");
 		}
 	}
 

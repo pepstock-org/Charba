@@ -117,14 +117,14 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 			// then gets it
 			Controller controllerInstance = Defaults.get().getControllers().getController(type);
 			// checks if controller is a base meter controller
-			Checker.assertCheck(controllerInstance instanceof BaseMeterController, "Controller stored for " + getControllerType().value() + " is not a " + BaseMeterController.class.getName());
+			Checker.assertCheck(controllerInstance instanceof BaseMeterController, "Controller stored for " + getControllerType().value() + " is not a BaseMeterController");
 			// casts to meter controller
 			meterController = (BaseMeterController) controllerInstance;
 		}
 		// gets meter options
 		MeterOptions options;
 		// checks if options is a meter one
-		Checker.assertCheck(getOptions() instanceof MeterOptions, "Chart options are " + getOptions().getClass().getName() + " and not a " + MeterOptions.class.getName());
+		Checker.assertCheck(getOptions() instanceof MeterOptions, "Chart options are not a MeterOptions instance");
 		// cats and stores
 		options = (MeterOptions) getOptions();
 		// disables legend

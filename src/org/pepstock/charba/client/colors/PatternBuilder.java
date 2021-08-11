@@ -42,6 +42,10 @@ public final class PatternBuilder {
 	// cache for the patterns created in order to build only when needed
 	// K = canvas object id, V = pattern instance
 	private static final Map<String, Pattern> PATTERNS = new HashMap<>();
+	// image id prefix
+	private static final String IMG_PREFIX = "Img";
+	// pattern id prefix
+	private static final String CANVAS_PATTER_PREFIX = "Canvas";
 	// image instance
 	private final Img image;
 	// canvas pattern instance
@@ -254,12 +258,12 @@ public final class PatternBuilder {
 		if (image != null) {
 			// if here, is creating the pattern by an image
 			// uses the image class name and image hash code
-			sb.append(Img.class.getSimpleName()).append(Constants.MINUS);
+			sb.append(IMG_PREFIX).append(Constants.MINUS);
 			sb.append(image.hashCode()).append(Constants.MINUS);
 		} else {
 			// if here, is creating the pattern by a canvas pattern
 			// uses the pattern class name and pattern hash code
-			sb.append(CanvasPatternItem.class.getSimpleName()).append(Constants.MINUS);
+			sb.append(CANVAS_PATTER_PREFIX).append(Constants.MINUS);
 			sb.append(canvasPatternItem.hashCode()).append(Constants.MINUS);
 		}
 		// rest of the id is repetition, width and height.
