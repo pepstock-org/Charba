@@ -38,7 +38,6 @@ import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.dom.elements.Span;
 import org.pepstock.charba.client.dom.elements.Table;
 import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.dom.elements.TableRow;
@@ -123,16 +122,12 @@ final class HtmlLegendGenerator {
 	SafeHtml generateLegend(IsChart chart) {
 		// checks if chart is consistent
 		IsChart.checkIfValid(chart);
-		// creates a HTML element
-		// as container of result
-		// needed to get innerHTML property
-		Span container = DOMBuilder.get().createSpanElement();
 		// invokes the creation of legend
-		container.appendChild(buildLegend(chart));
-		// appends to safe html builder the innerHTML
-		// of container
+		Table table = buildLegend(chart);
+		// appends to safe html builder the outerHTML
+		// of table
 		// returns as safe html
-		return SafeHtmlBuilder.create().appendHtmlConstant(container.getInnerHTML()).toSafeHtml();
+		return SafeHtmlBuilder.create().appendHtmlConstant(table.getOuterHTML()).toSafeHtml();
 	}
 
 	/**

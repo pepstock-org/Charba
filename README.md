@@ -279,6 +279,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * rename `parse` method of `JSON` class to `parseForObject`, to parse a string to a native object.
   * add `parseForArray` method of `JSON` class to parse a string to an array.
   * move `getStringProperty` and `getIntegerProperty` from `Id` class to `JsHelper` one.
+  * use `outerHTML` property to get HTML string of an element instead of `innerHTML` with a temporary parent or a cloned instance.
     
 License
 -------

@@ -19,11 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.dom.BaseElement;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
-import org.pepstock.charba.client.dom.BaseNode;
-import org.pepstock.charba.client.dom.DOMBuilder;
-import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.Img;
 
 /**
@@ -54,8 +50,6 @@ public final class AnnotationBuilder {
 	// cache of the image created
 	// K = svg string argument (with width and height), V = image element
 	private static final Map<String, Img> IMAGES = new HashMap<>();
-	// K = element, V = inner HTML
-	private static final Map<BaseHtmlElement, String> ELEMENTS = new HashMap<>();
 	// template of data image URL to create the image from HTML content
 	private static final String TEMPLATE_IMAGE_URL = "data:image/svg+xml;charset=utf-8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"{1}\" height=\"{2}\">"
 			+ "<foreignObject width=\"100%\" height=\"100%\"><div xmlns=\"http://www.w3.org/1999/xhtml\">{0}</div></foreignObject></svg>";
@@ -80,47 +74,9 @@ public final class AnnotationBuilder {
 		// checks if argument element is consistent
 		Checker.checkIfValid(htmlXmlContent, "Element argument");
 		// inner html reference
-		final String innerHtml;
-		// checks if cached
-		if (ELEMENTS.containsKey(htmlXmlContent)) {
-			// gets the key
-			innerHtml = ELEMENTS.get(htmlXmlContent);
-		} else {
-			// creates a DIV wrapper, needed ONLY to get the inner HTML
-			// this element don't need for further computation
-			Div wrapper = DOMBuilder.get().createDivElement();
-			// checks if the elements has got a parent
-			// because adding to div element
-			// the element will loose the parent and removed from UI
-			if (htmlXmlContent.getParentNode() != null) {
-				// clones node
-				BaseNode clonedNode = htmlXmlContent.cloneNode(true);
-				// checks if is an element
-				if (clonedNode instanceof BaseElement) {
-					// casts to element
-					BaseElement clonedElement = (BaseElement) clonedNode;
-					// wraps the XML content
-					// adding the element
-					wrapper.appendChild(clonedElement);
-				} else {
-					// if here, the clone node is not a element
-					throw new IllegalArgumentException("Element passed as argument is not an element. Class: " + clonedNode.getClass().getName());
-				} // wraps the XML content
-			} else {
-				// wraps the XML content
-				// adding the element
-				wrapper.appendChild(htmlXmlContent);
-			}
-			// stores innerHTML
-			innerHtml = wrapper.getInnerHTML();
-			// removes all children to have a clean situation
-			// for the element passed as argument
-			wrapper.removeAllChildren();
-			// caches the elements and html
-			ELEMENTS.put(htmlXmlContent, innerHtml);
-		}
+		final String outerHtml = htmlXmlContent.getOuterHTML();
 		// creates key
-		String key = getKey(innerHtml, width, height);
+		String key = getKey(outerHtml, width, height);
 		// the result is a key of images created
 		// if already built
 		if (IMAGES.containsKey(key)) {
@@ -128,7 +84,7 @@ public final class AnnotationBuilder {
 			return IMAGES.get(key);
 		}
 		// builds the image and returns it
-		return buildWithValidatedContent(key, innerHtml, width, height);
+		return buildWithValidatedContent(key, outerHtml, width, height);
 	}
 
 	/**

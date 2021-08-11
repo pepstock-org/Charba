@@ -117,6 +117,14 @@ public abstract class BaseElement extends BaseNode {
 	 */
 	@JsProperty
 	public final native void setInnerHTML(String innerHTML);
+	
+	/**
+	 * Returns the serialized HTML fragment describing the element including its descendants.
+	 *
+	 * @return the serialized HTML fragment describing the element including its descendants
+	 */
+	@JsProperty
+	public final native String getOuterHTML();
 
 	/**
 	 * Returns the last node which is both a child of this element and is an element, or <code>null</code> if there is none.
