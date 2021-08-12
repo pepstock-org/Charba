@@ -271,7 +271,7 @@ Here you can find the list of enhancements and updates available on `master` bra
     * enable tree map chart types.
   * import CHART.JS GEO controller [version v3.5.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.5.0).
   * import CHART.JS LUXON adapter [version v1.1.0](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v1.1.0).
-  * import LUXON library [version 2.0.1](https://github.com/moment/luxon/releases/tag/2.0.2).
+  * import LUXON library [version 2.0.2](https://github.com/moment/luxon/releases/tag/2.0.2).
   * add `click`, `enter` and `leave` subtitle events.
   * add `subtitle` item to `PointElement` enumeration for `ChartPointer` plugin, in order to enable the changing cursor when a click event handler has been set on subtitle element.
   * add `isPressed(event)` methods to `ModifierKey` enumeration in order to enable the capability to filter the events if the modifier keys are pressed.
