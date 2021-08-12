@@ -69,7 +69,7 @@ final class IncrementalIdHandler {
 	private static final String DEFAULT_INTERNAL_PREFIX_ID = "charba-internal-id-";
 	// internal counters
 	// K = class name of native container, V = integer counter
-	private final Map<String, AtomicInteger> counters = new HashMap<>();
+	private final Map<Class<?>, AtomicInteger> counters = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -136,7 +136,7 @@ final class IncrementalIdHandler {
 	private void setNewId(NativeObjectContainer container, String prefix) {
 		// checks class has been stored
 		// creating new counter
-		AtomicInteger counter = counters.computeIfAbsent(container.getClass().getName(), mapKey -> new AtomicInteger(0));
+		AtomicInteger counter = counters.computeIfAbsent(container.getClass(), mapKey -> new AtomicInteger(0));
 		// stores the internal id for caching
 		container.setValue(Property.CHARBA_INTERNAL_INTERNAL_ID, prefix + counter.getAndIncrement());
 	}

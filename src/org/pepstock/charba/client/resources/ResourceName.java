@@ -18,80 +18,72 @@ package org.pepstock.charba.client.resources;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Enumerates the constants names to use as element id for scripts, mandatory to CHARBA to work properly.<br>
- * This resource names can not be used for any custom injectable resource.<br>
+ * Enumerates the constants names to use as element id for scripts, mandatory to CHARBA to work properly.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum ResourceName implements Key
 {
-	// -------------------
-	// PAY ATTENTION: it uses the class name as STRING to e able to manage the deferred resources and code splitting of GWT
-	// -------------------
 	/**
 	 * Script element id for CHART.JS source code.
 	 */
-	CHART("chartJs", false, "org.pepstock.charba.client.resources.ChartJsResource"),
+	CHART("chartJs", false),
 	/**
 	 * Script element id for CHART.JS date time adapter.
 	 */
-	DATE_TIME_ADAPTER("datetimeAdapter", false, "org.pepstock.charba.client.resources.LuxonAdapterResource"),
+	DATE_TIME_ADAPTER("datetimeAdapter", false),
 	/**
 	 * Script element id for CHART.JS date time library.
 	 */
-	DATE_TIME_LIBRARY("datetimeLibrary", true, "org.pepstock.charba.client.resources.LuxonLibraryResource"),
+	DATE_TIME_LIBRARY("datetimeLibrary", true),
 	/**
 	 * Script element id for CHARBA helper.
 	 */
-	CHARBA_HELPER("charbaHelper", false, "org.pepstock.charba.client.commons.JsHelperResource"),
+	CHARBA_HELPER("charbaHelper", false),
 	/**
 	 * Script element id for CHART.JS DATALABELS plugin.
 	 */
-	DATALABELS_PLUGIN("datalabels", false, "org.pepstock.charba.client.datalabels.DataLabelsPluginResource"),
+	DATALABELS_PLUGIN("datalabels", false),
 	/**
 	 * Script element id for CHART.JS ZOOM plugin.
 	 */
-	ZOOM_PLUGIN("zoom", false, "org.pepstock.charba.client.zoom.ZoomPluginResource"),
+	ZOOM_PLUGIN("zoom", false),
 	/**
 	 * Script element id for HAMMER JS library.
 	 */
-	HAMMER_LIBRARY("hammerjs", true, "org.pepstock.charba.client.zoom.ZoomPluginHammerResource"),
+	HAMMER_LIBRARY("hammerjs", true),
 	/**
 	 * Script element id for CHART.JS LABELS plugin.
 	 */
-	LABELS_PLUGIN("labels", false, "org.pepstock.charba.client.labels.LabelsPluginResource"),
+	LABELS_PLUGIN("labels", false),
 	/**
 	 * Script element id for CHART.JS ANNOTATION plugin.
 	 */
-	ANNOTATION_PLUGIN("annotation", false, "org.pepstock.charba.client.annotation.AnnotationPluginResource"),
+	ANNOTATION_PLUGIN("annotation", false),
 	/**
 	 * Script element id for CHART.JS TREEMAP controller.
 	 */
-	TREEMAP_CONTROLLER("treemap", false, "org.pepstock.charba.client.treemap.TreeMapControllerResource"),
+	TREEMAP_CONTROLLER("treemap", false),
 	/**
 	 * Script element id for CHART.JS GEO controller.
 	 */
-	GEO_CONTROLLER("geo", false, "org.pepstock.charba.client.geo.GeoControllerResource");
+	GEO_CONTROLLER("geo", false);
 
 	// name value of property
 	private final String value;
 	// flag to know if the resource can be override by user
 	private final boolean override;
-	// class name of CHARBA injectable resource implementation
-	private final String className;
 
 	/**
 	 * Creates with the value of resource name.
 	 * 
 	 * @param value the value of resource name
 	 * @param override <code>true</code> if the resource can be override by user
-	 * @param className class name of CHARBA injectable resource implementation
 	 */
-	private ResourceName(String value, boolean override, String className) {
+	private ResourceName(String value, boolean override) {
 		this.value = value;
 		this.override = override;
-		this.className = className;
 	}
 
 	/*
@@ -111,15 +103,6 @@ public enum ResourceName implements Key
 	 */
 	boolean isOverride() {
 		return override;
-	}
-
-	/**
-	 * Returns the class name of CHARBA injectable resource implementation.
-	 * 
-	 * @return class name of CHARBA injectable resource implementation
-	 */
-	String getClassName() {
-		return className;
 	}
 
 }

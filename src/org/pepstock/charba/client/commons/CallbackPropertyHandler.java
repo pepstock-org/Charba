@@ -35,9 +35,11 @@ import org.pepstock.charba.client.items.Undefined;
  */
 public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandler {
 
-	// hash code property prefix.
+	// id property prefix.
+	private static final String ID_PROPERTY_PREFIX = "CharbaCallbackId";
+	// hash code property suffix.
 	private static final String HASHCODE_PROPERTY_SUFFIX = "CharbaCallbackKey";
-	// scope property prefix.
+	// scope property suffix.
 	private static final String SCOPE_PROPERTY_SUFFIX = "CharbaCallbackScope";
 	// property key to manage and where storing the function callback proxy
 	private final Key property;
@@ -243,7 +245,7 @@ public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandl
 	}
 
 	/**
-	 * Creates the property key used to store the class name plus hash code, as key of callback instance in the cache.<br>
+	 * Creates the property key used to store a common prefix plus hash code, as key of callback instance in the cache.<br>
 	 * <br>
 	 * <code>[callbackClassName]-[callbackHashCode]</code> <br>
 	 * 
@@ -254,7 +256,7 @@ public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandl
 		// checks if callback is consistent
 		if (callback != null) {
 			// creates the unique key for callback
-			StringBuilder sb = new StringBuilder(callback.getClass().getName());
+			StringBuilder sb = new StringBuilder(ID_PROPERTY_PREFIX);
 			return sb.append(Constants.MINUS).append(callback.hashCode()).toString();
 		}
 		// if callback is not consistent, returns null

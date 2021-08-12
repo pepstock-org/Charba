@@ -30,27 +30,20 @@ final class InjectorPrefixHelper {
 
 	// suffix to use when the injected resource is not a Charba one
 	private static final String CUSTOM_SUFFIX = "_custom";
+	// package name to use to calculate the key of injected resources
+	private static final String PACKAGE_NAME_PREFIX = "org.pepstock.charba.client";
+	// package name to use to calculate the key of injected resources
+	private static final String CUSTOM_PACKAGE_NAME_PREFIX = PACKAGE_NAME_PREFIX + CUSTOM_SUFFIX;
 	// singleton instance created
 	// in order to manage a field with the package name of this class
 	// needed to improve the key calculation
 	private static final InjectorPrefixHelper INSTANCE = new InjectorPrefixHelper();
-	// package name to use to calculate the key of injected resources
-	private final String charbaPrefixPackageName;
-	// package name to use to calculate the key of injected resources
-	private final String customPrefixPackageName;
 
 	/**
 	 * To avoid any instantiation.
 	 */
 	private InjectorPrefixHelper() {
-		// gets full class name
-		String fullClassName = getClass().getName();
-		// gets short class name
-		String shortClassname = getClass().getSimpleName();
-		// stores the prefix package name
-		charbaPrefixPackageName = fullClassName.substring(0, fullClassName.indexOf(shortClassname));
-		// add "custom" suffix
-		customPrefixPackageName = charbaPrefixPackageName + CUSTOM_SUFFIX;
+		// nothing
 	}
 
 	/**
@@ -60,15 +53,6 @@ final class InjectorPrefixHelper {
 	 */
 	static InjectorPrefixHelper get() {
 		return INSTANCE;
-	}
-
-	/**
-	 * Returns the prefix to apply to CHARBA injectable resources DOM element id when they will injected.
-	 * 
-	 * @return the prefix to apply to CHARBA injectable resources DOM element id when they will injected
-	 */
-	String getCharbaPrefixPackageName() {
-		return charbaPrefixPackageName;
 	}
 
 	/**
@@ -85,10 +69,10 @@ final class InjectorPrefixHelper {
 		// if not null, is CHARBA
 		if (key != null) {
 			// then returns CHARBA prefix
-			return charbaPrefixPackageName;
+			return PACKAGE_NAME_PREFIX;
 		}
 		// if here, returns CUSTOM prefix
-		return customPrefixPackageName;
+		return CUSTOM_PACKAGE_NAME_PREFIX;
 	}
 
 }

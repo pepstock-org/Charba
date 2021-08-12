@@ -176,7 +176,7 @@ public final class DataLabelsOptions extends LabelItem implements IsDefaultDataL
 		// checks instance of defaults options if has got the right type
 		// the default must have the same class
 		// which is needed for this object
-		Checker.assertCheck(defaultValue instanceof IsDefaultDataLabelsOptions, "The default instance is not correct type, " + defaultValue.getClass().getName());
+		Checker.assertCheck(defaultValue instanceof IsDefaultDataLabelsOptions, "The default instance is a IsDefaultDataLabelsOptions instance");
 		// casts to the right type
 		IsDefaultDataLabelsOptions values = (IsDefaultDataLabelsOptions) defaultValue;
 		// creates and stores labels

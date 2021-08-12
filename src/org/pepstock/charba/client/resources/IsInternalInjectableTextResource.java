@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.resources;
 
 /**
- * Internal empty interface for an injectable resource related to a text resource and used by moudle out of the box provided by CHARBA for deferred resources.
+ * Internal empty interface for an injectable resource related to a text resource and used by module out of the box provided by CHARBA for deferred resources.
  * 
  * @author Andrea "Stock" Stocchero
  *

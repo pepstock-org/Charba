@@ -17,6 +17,7 @@ package org.pepstock.charba.client.resources;
 
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.utils.Hasher;
 
 /**
  * Defines an object which must inject script or CSS style objects in the DOM document, at runtime.<br>
@@ -63,10 +64,10 @@ public abstract class AbstractInjectableResource {
 			// checks if the name of resource is a CHARBA one
 			ResourceName resourceName = Key.getKeyByValue(ResourceName.values(), name);
 			// checks if it is a CHARBA resource and if it can be override
-			if (resourceName != null && !resourceName.isOverride() && !getClass().getName().equals(resourceName.getClassName())) {
+			if (resourceName != null && !resourceName.isOverride() && ResourceHash.hash(resourceName) != Hasher.hash(content)) {
 				// if here the the injectable resource is not a CHARBA class
 				// but try to override with a custom
-				throw new IllegalArgumentException("Unable to override '" + resourceName.value() + "' with a custom implementation");
+				throw new IllegalArgumentException("Unable to override '" + resourceName.value() + "' with a custom implementation. ");
 			}
 		}
 		// scans the array

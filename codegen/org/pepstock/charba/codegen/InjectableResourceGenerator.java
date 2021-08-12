@@ -24,12 +24,16 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.pepstock.charba.client.utils.Hasher;
 
 /**
  * Code generator (batch) which reads all java script files needed in Charba and creates the classes which will wrap the java script content of script in order to be able to inject
@@ -66,6 +70,12 @@ public class InjectableResourceGenerator {
 	private static final File PROPERTIES_FILE = new File("./codegen/org/pepstock/charba/codegen/InjectableResourceGenerator.properties");
 	// file where the java class template is stored
 	private static final File TEMPLATE_FILE = new File("./codegen/org/pepstock/charba/codegen/InjectableResource.template");
+	// file where the java class template for reosurce hash is stored
+	private static final File HASH_TEMPLATE_FILE = new File("./codegen/org/pepstock/charba/codegen/ResourceHash.template");
+	// resource hash java class name
+	private static final String HASH_CLASS_NAME = "ResourceHash";
+	// resource hash java class name
+	private static final String HASH_PACKAGE_NAME = "org.pepstock.charba.client.resources";
 	// threshold of amount of chars for any string array item
 	private static final int CHARS_PER_ARRAY_ITEM = 1000;
 	// defines the line separator
@@ -76,12 +86,22 @@ public class InjectableResourceGenerator {
 	private static final String COMMA_STRING = ",";
 	// defines the dot
 	private static final String DOT_STRING = ".";
+	// defines the semicolon
+	private static final String SEMICOLON_STRING = ";";
+	// defines the underscore
+	private static final String UNDERSCORE_STRING = "_";
+	// Constant for OPEN round bracket
+	private static final String OPEN_ROUND_BRACKET = "(";
+	// Constant for CLOSE round bracket
+	private static final String CLOSE_ROUND_BRACKET = ")";
 	// defines the file separator
 	private static final String FILE_SEPARATOR_STRING = "/";
 	// defines the line separator as string
 	private static final String LINE_SEPARATOR_STRING = "\n";
 	// defines the tab indent as string
 	private static final String TAB_INDENT_STRING = "\t\t";
+	// defines the single tab indent as string
+	private static final String SINGLE_TAB_INDENT_STRING = "\t";
 	// defines the quote as string
 	private static final String QUOTE_STRING = "\"";
 	// defines the backslash UTF char
@@ -110,6 +130,15 @@ public class InjectableResourceGenerator {
 	// defines the pattern to apply on replace all on the java class template
 	// for java script file content
 	private static final String ADDITIONAL_PACKAGES_VARIABLE = Pattern.quote("${additionalPackages}");
+	// defines the pattern to apply on replace all on the java class template
+	// for java script file content
+	private static final String HASH_ITEMS_VARIABLE = Pattern.quote("${hashItems}");
+	// defines the pattern to apply on replace all on the java class template
+	// for package name
+	private static final String HASH_PACKAGE_NAME_VARIABLE = Pattern.quote("${hashPackageName}");
+	// defines the pattern to apply on replace all on the java class template
+	// for class name
+	private static final String HASH_CLASS_NAME_VARIABLE = Pattern.quote("${hashClassName}");
 	// the package where the common classes for resources are stored
 	// it will use to check if additional imports must be performed
 	private static final String RESOURCES_PACKAGE = "org.pepstock.charba.client.resources";
@@ -119,6 +148,8 @@ public class InjectableResourceGenerator {
 	private static final String RESOURCE_NAME_PREFIX = "ResourceName.";
 	// additional import for classes not in resource package and they are also using the resource name enumeration
 	private static final String ADDITIONAL_RESOURCE_NAME_PACKAGE = "import org.pepstock.charba.client.resources.ResourceName;";
+	// collection of escape result
+	private static final Map<String, EscapeResult> ESCAPE_RESULTS = new HashMap<>();
 
 	/**
 	 * Main program of code generator.<br>
@@ -130,7 +161,9 @@ public class InjectableResourceGenerator {
 	 */
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// reads the template of java classes to create
-		StringBuilder templateSource = readTemplate();
+		StringBuilder templateSource = readTemplate(TEMPLATE_FILE);
+		// reads the template of hash enum java class to create
+		StringBuilder templateHashSource = readTemplate(HASH_TEMPLATE_FILE);
 		// reads the properties with items that the code gen must manage
 		Properties properties = readProperties();
 		// checks if properties are consistent
@@ -159,7 +192,7 @@ public class InjectableResourceGenerator {
 				byte[] buffer = readJavaScriptFile(javaScriptFile);
 				// escapes the java script content in order to be able to assign it
 				// to a java string
-				StringBuilder builder = escapeJavaScriptContent(buffer);
+				EscapeResult escapeResult = escapeJavaScriptContent(resourceName, buffer);
 				// gets new string from template
 				String templateInstance = templateSource.toString();
 				// replaces the package name into template
@@ -171,7 +204,7 @@ public class InjectableResourceGenerator {
 				// replaces the java script file name into template
 				changedTemplate = changedTemplate.replaceAll(JAVASCRIPT_FILE_VARIABLE, Matcher.quoteReplacement(javaScriptFileName));
 				// replaces the java script content into template
-				changedTemplate = changedTemplate.replaceAll(JAVASCRIPT_CONTENT_VARIABLE, Matcher.quoteReplacement(builder.toString()));
+				changedTemplate = changedTemplate.replaceAll(JAVASCRIPT_CONTENT_VARIABLE, Matcher.quoteReplacement(escapeResult.getBuilder().toString()));
 				// creates the import string
 				StringBuilder importBuilder = new StringBuilder();
 				// checks if the imports must be added
@@ -196,24 +229,40 @@ public class InjectableResourceGenerator {
 				// writes the java class
 				writeJavaClass(packageName, className, changedTemplate);
 				LOGGER.info("Code generation for '" + javaScriptFileName + "' is completed");
+				// stores escape result
+				ESCAPE_RESULTS.put(className, escapeResult);
 			} else {
 				// if here the source properties are wrong
 				LOGGER.warning("Property format for '" + javaScriptFileName + "' is not correct");
 			}
+		}
+		// --------------------------
+		// RESOURCE HASH ENUMERATION
+		// --------------------------
+		// checks if escape result map is consistent
+		if (!ESCAPE_RESULTS.isEmpty()) {
+			LOGGER.info("Started code generation code for '" + HASH_CLASS_NAME + JAVA_EXTENSION + "'");
+			// creates the resource hash enumeration
+			createResourceHash(templateHashSource);
+			LOGGER.info("Code generation for '" + HASH_CLASS_NAME + JAVA_EXTENSION + "' is completed");
+		} else {
+			// if here the escape result map is empty
+			LOGGER.warning("Escape result map is empty and the " + HASH_CLASS_NAME + " is not created");
 		}
 	}
 
 	/**
 	 * Reads the java class template, returning the content as a string builder.
 	 * 
+	 * @param template file template to read
 	 * @return the java class template
 	 * @throws FileNotFoundException occurs if the template file not exists
 	 */
-	private static StringBuilder readTemplate() throws FileNotFoundException {
+	private static StringBuilder readTemplate(File template) throws FileNotFoundException {
 		// creates a scanner to read the template
 		Scanner scanner = null;
 		try {
-			scanner = new Scanner(TEMPLATE_FILE, UTF8.name());
+			scanner = new Scanner(template, UTF8.name());
 			// creates a builder to maintain the template
 			StringBuilder templateSource = new StringBuilder();
 			// reads the content of template file
@@ -326,10 +375,11 @@ public class InjectableResourceGenerator {
 	/**
 	 * Reads the content of java script file escaping the character in order to be able to assign the content to a java string instance.
 	 * 
+	 * @param resourceName resource name of java script content
 	 * @param buffer array of bytes which are the content of java script file
 	 * @return a string builder with all escaped content of java script file
 	 */
-	private static StringBuilder escapeJavaScriptContent(byte[] buffer) {
+	private static EscapeResult escapeJavaScriptContent(String resourceName, byte[] buffer) {
 		// gets a instance with total amount of bytes
 		int bufferSize = buffer.length;
 		// creates a builder to be returned
@@ -339,6 +389,8 @@ public class InjectableResourceGenerator {
 		// gets a counter of chars managed
 		// in order to split when greater than the fixed value
 		int charCounter = 0;
+		// hash instance
+		int hash = 0;
 		// scans all buffer
 		for (byte b : buffer) {
 			if (b == QUOTE) {
@@ -347,12 +399,16 @@ public class InjectableResourceGenerator {
 				// increments the chars managed with length
 				// of replacement
 				charCounter += QUOTE_REPLACEMENT.length();
+				// calculates hash for byte
+				hash += Hasher.hash((char) QUOTE);
 			} else if (b == BACKSLASH) {
 				// if here the byte is a backslash
 				builder.append(BACKSLASH_REPLACEMENT);
 				// increments the chars managed with length
 				// of replacement
 				charCounter += BACKSLASH_REPLACEMENT.length();
+				// calculates hash for byte
+				hash += Hasher.hash((char) BACKSLASH);
 			} else if (b == LINE_SEPARATOR && bufferSize > 1) {
 				// if here, there is a line separator into java script
 				// but it's not at the end of the file
@@ -366,6 +422,8 @@ public class InjectableResourceGenerator {
 				// increments the chars by 1 because
 				// here no replacement
 				charCounter++;
+				// calculates hash for byte
+				hash += Hasher.hash((char) b);
 			}
 			// decrements buffer size
 			// because a byte has been managed
@@ -383,7 +441,7 @@ public class InjectableResourceGenerator {
 			}
 		}
 		// returns the string builder
-		return builder;
+		return new EscapeResult(resourceName, builder, hash);
 	}
 
 	/**
@@ -421,6 +479,130 @@ public class InjectableResourceGenerator {
 		}
 		// returns if all bytes are read
 		return length - remaining;
+	}
+
+	/**
+	 * Creates and writes the java class with all hash for each java script resource.
+	 * 
+	 * @param templateHashSource java class template for the enumeration
+	 * @throws IOException occurs if any errors occurred writing the stream
+	 */
+	private static void createResourceHash(StringBuilder templateHashSource) throws IOException {
+		// creates items buffer
+		final StringBuilder hashEnum = new StringBuilder();
+		// scans all escape results
+		for (Entry<String, EscapeResult> entry : ESCAPE_RESULTS.entrySet()) {
+			// gets the escape result instance
+			EscapeResult result = entry.getValue();
+			// if the buffer is not empty
+			// it must close the java statement with comma
+			if (hashEnum.length() > 0) {
+				hashEnum.append(COMMA_STRING).append(LINE_SEPARATOR_STRING);
+			}
+			// comment of the item
+			hashEnum.append(SINGLE_TAB_INDENT_STRING).append("/**").append(LINE_SEPARATOR_STRING);
+			hashEnum.append(SINGLE_TAB_INDENT_STRING).append(" * ").append("Hash item for '" + entry.getKey() + "' class.").append(LINE_SEPARATOR_STRING);
+			hashEnum.append(SINGLE_TAB_INDENT_STRING).append(" */").append(LINE_SEPARATOR_STRING);
+			// appends the enumeration item definition
+			hashEnum.append(SINGLE_TAB_INDENT_STRING).append(capitalize(entry.getKey())).append(OPEN_ROUND_BRACKET).append(result.getResourceName()).append(COMMA_STRING).append(BLANK_STRING).append(result.getHash()).append(CLOSE_ROUND_BRACKET);
+		}
+		// closes the items list with a semicolon as requested by java
+		hashEnum.append(SEMICOLON_STRING);
+		// gets new string from template
+		String templateHashInstance = templateHashSource.toString();
+		// replaces the package name into template
+		String changedTemplate = templateHashInstance.replaceAll(HASH_PACKAGE_NAME_VARIABLE, Matcher.quoteReplacement(HASH_PACKAGE_NAME));
+		// replaces the class name into template
+		changedTemplate = changedTemplate.replaceAll(HASH_CLASS_NAME_VARIABLE, Matcher.quoteReplacement(HASH_CLASS_NAME));
+		// replaces the enum items into template
+		changedTemplate = changedTemplate.replaceAll(HASH_ITEMS_VARIABLE, Matcher.quoteReplacement(hashEnum.toString()));
+		// writes the java class
+		writeJavaClass(HASH_PACKAGE_NAME, HASH_CLASS_NAME, changedTemplate);
+	}
+
+	/**
+	 * Normalizes the name of the resource hash enumeration item, putting everything in upper-case.
+	 * 
+	 * @param value resource hash enumeration item
+	 * @return resource hash enumeration item to upper-case
+	 */
+	private static String capitalize(String value) {
+		// creates the buffer
+		final StringBuilder builder = new StringBuilder();
+		// checks if the argument is consistent
+		if (value != null && value.length() > 0) {
+			// gets all chars of the string
+			char[] chars = value.toCharArray();
+			// scans all char
+			for (char c : chars) {
+				// if the char is already upper-case nad the buffer is not empty
+				// because the first chart should be already upper-case
+				if (Character.isUpperCase(c) && builder.length() > 0) {
+					// adds underscore before the original upper-case
+					builder.append(UNDERSCORE_STRING);
+				}
+				// adds char in upper-case
+				builder.append(Character.toUpperCase(c));
+			}
+		}
+		// returns result
+		return builder.toString();
+	}
+
+	/**
+	 * Result of escaping of the resource content.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static final class EscapeResult {
+
+		private final String resourceName;
+
+		private final StringBuilder builder;
+
+		private final int hash;
+
+		/**
+		 * Creates the object with the content and its hash.
+		 * 
+		 * @param resourceName resource name of java script content
+		 * @param builder content of the java script resource
+		 * @param hash hash of the content
+		 */
+		EscapeResult(String resourceName, StringBuilder builder, int hash) {
+			this.resourceName = resourceName;
+			this.builder = builder;
+			this.hash = hash;
+		}
+
+		/**
+		 * Returns the resource name of the java script resource.
+		 * 
+		 * @return the resource name of the java script resource
+		 */
+		String getResourceName() {
+			return resourceName;
+		}
+
+		/**
+		 * Returns the content of the java script resource.
+		 * 
+		 * @return the content of the java script resource
+		 */
+		StringBuilder getBuilder() {
+			return builder;
+		}
+
+		/**
+		 * Returns the hash of the content.
+		 * 
+		 * @return the hash of the content
+		 */
+		int getHash() {
+			return hash;
+		}
+
 	}
 
 }
