@@ -26,6 +26,10 @@ import org.pepstock.charba.client.adapters.DateAdapterModule;
  */
 public final class EmbeddedResources extends AbstractResources implements IsResourceType {
 
+	// date adapter java script wrapper
+	private static final LuxonAdapterResource DATE_ADAPTER = new LuxonAdapterResource();
+	// date library java script wrapper
+	private static final LuxonLibraryResource DATE_LIBRARY = new LuxonLibraryResource();
 	/**
 	 * Static reference to LUXON resources which is injecting the LUXON library.
 	 */
@@ -37,10 +41,6 @@ public final class EmbeddedResources extends AbstractResources implements IsReso
 	public static final EmbeddedResources INSTANCE_WITHOUT_DATE_LIBRARY = new EmbeddedResources(false);
 	// chart js source code
 	private static final ChartJsResource CHARTJS = new ChartJsResource();
-	// date adapter java script wrapper
-	private final LuxonAdapterResource dateAdapter = new LuxonAdapterResource();
-	// date library java script wrapper
-	private final LuxonLibraryResource dateLibrary = new LuxonLibraryResource();
 
 	/**
 	 * Creates a resource object by a flag.<br>
@@ -64,13 +64,13 @@ public final class EmbeddedResources extends AbstractResources implements IsReso
 			// checks if the library must be loaded
 			if (mustInjectDateLibrary()) {
 				// to be sure that date time library has been injected
-				ensureInjected(checkAndGetDateTimeResourceName(dateLibrary, ResourceName.DATE_TIME_LIBRARY));
+				ensureInjected(checkAndGetDateTimeResourceName(DATE_LIBRARY, ResourceName.DATE_TIME_LIBRARY));
 			} else {
 				// to be sure that date time library has been injected
 				ensureInjected(checkAndGetDateTimeResourceName(new EmptyResource(ResourceName.DATE_TIME_LIBRARY), ResourceName.DATE_TIME_LIBRARY));
 			}
 			// to be sure that date time chart.js adapter has been injected
-			ensureInjected(checkAndGetDateTimeResourceName(dateAdapter, ResourceName.DATE_TIME_ADAPTER));
+			ensureInjected(checkAndGetDateTimeResourceName(DATE_ADAPTER, ResourceName.DATE_TIME_ADAPTER));
 			// sets flags it has loaded
 			ResourcesType.setInjected(true);
 			// notify to module that has been injected
