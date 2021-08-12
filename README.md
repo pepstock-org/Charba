@@ -274,6 +274,10 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `subtitle` item to `PointElement` enumeration for `ChartPointer` plugin, in order to enable the changing cursor when a click event handler has been set on subtitle element.
   * add `isPressed(event)` methods to `ModifierKey` enumeration in order to enable the capability to filter the events if the modifier keys are pressed.
 
+### Fixed Bugs
+
+ * [#58](https://github.com/pepstock-org/Charba/issues/58) removes usage of `.getClass().*` and `.class.*` methods to get metadata in order to use CHARBA also with `-XdisableClassMetadata` or `-XnoclassMetadata` GWT compiler options. Thanks @MartinSchwarzbauer
+	
 ### Developing
 
   * rename `parse` method of `JSON` class to `parseForObject`, to parse a string to a native object.
