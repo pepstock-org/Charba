@@ -10,6 +10,7 @@ Charba - J2CL and GWT Charts library based on CHART.JS
   <a href="https://github.com/chartjs/awesome"><img alt="Chart.js awesome" src="https://awesome.re/badge-flat2.svg"></a>
   <a href="https://pepstock-org.github.io/Charba/current/"><img alt="Last javadoc version" src="https://img.shields.io/badge/Javadoc-Last%20version-F27173.svg"></a>
   <a href="https://pepstock-org.github.io/Charba/next/"><img alt="Next javadoc version" src="https://img.shields.io/badge/Javadoc-Next%20version-F27173.svg"></a>
+  <a href="https://pepstock-org.github.io/Charba-Wiki"><img alt="Documentation" src="https://img.shields.io/badge/static-Documentation-F27173.svg"></a>
 </p>
 
 What's Charba
