@@ -276,7 +276,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Fixed Bugs
 
- * [#58](https://github.com/pepstock-org/Charba/issues/58) removes usage of `.getClass().*` and `.class.*` methods to get metadata in order to use CHARBA also with `-XdisableClassMetadata` or `-XnoclassMetadata` GWT compiler options. Thanks @MartinSchwarzbauer
+ * [#58](https://github.com/pepstock-org/Charba/issues/58) removes usage of `.getClass().*` and `.class.*` methods to get metadata in order to use CHARBA also with `-XdisableClassMetadata` or `-XnoclassMetadata` GWT compiler options. Thanks @MartinSchwarzbauer.
 	
 ### Developing
 
