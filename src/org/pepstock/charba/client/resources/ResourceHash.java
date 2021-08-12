@@ -29,7 +29,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'LuxonLibraryResource' class.
 	 */
-	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 15735073),
+	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 15737955),
 	/**
 	 * Hash item for 'ChartJsResource' class.
 	 */
@@ -65,7 +65,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'LuxonAdapterResource' class.
 	 */
-	LUXON_ADAPTER_RESOURCE(ResourceName.DATE_TIME_ADAPTER, 165502),
+	LUXON_ADAPTER_RESOURCE(ResourceName.DATE_TIME_ADAPTER, 160328),
 	/**
 	 * Hash item for 'TreeMapControllerResource' class.
 	 */
