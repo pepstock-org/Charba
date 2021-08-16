@@ -185,6 +185,12 @@ CharbaChartHelpers.prototype.mergeIf = function(target, source){};
  */
 CharbaChartHelpers.prototype.clone = function(source){};
 /**
+ * @param {Object} event
+ * @param {Chart} chart
+ * @return {Object}
+ */
+CharbaChartHelpers.prototype.getRelativePosition = function(event, chart){};
+/**
  * @constructor
  * @return {CharbaChartAdaptersDate}
  */

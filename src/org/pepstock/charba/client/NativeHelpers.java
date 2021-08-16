@@ -17,6 +17,7 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -50,5 +51,18 @@ final class NativeHelpers {
 	 */
 	@JsMethod
 	native NativeObject clone(NativeObject source);
+	
+	/**
+	 * A common occurrence is taking an event, such as a click, and finding the data coordinates on the chart where the event occurred.
+	 * It provides the relative point on canvas.
+	 * 
+	 * @param event native event to be used for getting the point.
+	 * @param chart chart instance
+	 * @return a point object
+	 */
+	@JsMethod
+	native NativeObject getRelativePosition(BaseNativeEvent event, Chart chart);
+	
+	
 
 }

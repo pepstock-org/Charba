@@ -13,13 +13,13 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.zoom;
+package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * This object is wrapping the native java script object provided by {@link ZoomContext} to know the position of the event when pan or zoom are about to start.
+ * This object is wrapping the native java script object provided by {@link Helpers} to know the position of the event on the canvas.
  * 
  * @author Andrea "Stock" Stocchero
  */

@@ -277,6 +277,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `subtitle` item to `PointElement` enumeration for `ChartPointer` plugin, in order to enable the changing cursor when a click event handler has been set on subtitle element.
   * add `isPressed(event)` methods to `ModifierKey` enumeration in order to enable the capability to filter the events if the modifier keys are pressed.
   * add `align` property, as a double representing the clockwise angle (in degree), to `DataLabels` options in order to define the label box alignment relative to anchor.
+  * add `getRelativePosition` method to `Helpers` class in order to get the relative position of an event on the chart.
 
 ### Fixed Bugs
 

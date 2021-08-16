@@ -17,8 +17,10 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.events.AbstractEvent;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -31,6 +33,8 @@ import org.pepstock.charba.client.resources.ResourcesType;
  */
 public final class Helpers {
 
+	// private default event point
+	private static final EventPoint DEFAULT_EVENT_POINT = new EventPoint(null);
 	// singleton instance
 	private static final Helpers INSTANCE = new Helpers();
 	// native object of CHART.JS which represents the helpers
@@ -97,6 +101,41 @@ public final class Helpers {
 		}
 		// if here source is not consistent
 		return null;
+	}
+
+	/**
+	 * A common occurrence is taking an event, such as a click, and finding the data coordinates on the chart where the event occurred. It provides the relative point on canvas.
+	 * 
+	 * @param chart chart instance
+	 * @param event native event to be used for getting the point.
+	 * @return a point object
+	 */
+	public EventPoint getRelativePosition(IsChart chart, AbstractEvent event) {
+		// checks if even this consistent
+		if (event != null) {
+			return getRelativePosition(chart, event.getNativeEvent());
+		}
+		// if here, event is not consistent
+		// then returns the default
+		return DEFAULT_EVENT_POINT;
+	}
+
+	/**
+	 * A common occurrence is taking an event, such as a click, and finding the data coordinates on the chart where the event occurred. It provides the relative point on canvas.
+	 * 
+	 * @param chart chart instance
+	 * @param event native event to be used for getting the point.
+	 * @return a point object
+	 */
+	public EventPoint getRelativePosition(IsChart chart, BaseNativeEvent event) {
+		// checks if even this consistent
+		if (Charts.hasNative(chart) && event != null) {
+			// creates and returns the point
+			return new EventPoint(nativeObject.getRelativePosition(event, Charts.getNative(chart)));
+		}
+		// if here, event is not consistent
+		// then returns the default
+		return DEFAULT_EVENT_POINT;
 	}
 
 	// --------------

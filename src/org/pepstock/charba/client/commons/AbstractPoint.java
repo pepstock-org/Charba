@@ -22,38 +22,7 @@ import org.pepstock.charba.client.items.Undefined;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractPoint extends NativeObjectContainer {
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		X("x"),
-		Y("y");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-	}
+public abstract class AbstractPoint extends AbstractReadOnlyPoint {
 
 	/**
 	 * Creates an empty object.
@@ -109,39 +78,12 @@ public abstract class AbstractPoint extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the X coordinate of the point.
-	 * 
-	 * @return the X coordinate of the point.
-	 */
-	public final double getX() {
-		return getValue(Property.X, Undefined.DOUBLE);
-	}
-
-	/**
 	 * Sets the Y coordinate of the point.
 	 * 
 	 * @param y the Y coordinate of the point.
 	 */
 	public final void setY(double y) {
 		setValue(Property.Y, y);
-	}
-
-	/**
-	 * Returns the Y coordinate of the point.
-	 * 
-	 * @return the Y coordinate of the point.
-	 */
-	public final double getY() {
-		return getValue(Property.Y, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns <code>true</code> if the coordinates are consistent and not <code>NaN</code>.
-	 * 
-	 * @return <code>true</code> if the coordinates are consistent and not <code>NaN</code>
-	 */
-	public final boolean isConsistent() {
-		return Undefined.isNot(getX()) && Undefined.isNot(getY());
 	}
 
 }
