@@ -116,6 +116,17 @@ public class AbstractBuilder<T extends LabelItem> {
 	}
 
 	/**
+	 * Sets the position of the label relative to the anchor point position and orientation, by a number representing the clockwise angle (in degree).
+	 * 
+	 * @param align the position of the label relative to the anchor point position and orientation, by a number representing the clockwise angle (in degree)
+	 * @return builder instance
+	 */
+	public final AbstractBuilder<T> setAlign(double align) {
+		label.setAlign(align);
+		return this;
+	}
+
+	/**
 	 * Sets the anchor point, which is defined by an orientation vector and a position on the data element.
 	 * 
 	 * @param anchor the anchor point, which is defined by an orientation vector and a position on the data element.

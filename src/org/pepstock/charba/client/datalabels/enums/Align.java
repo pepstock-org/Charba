@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.datalabels.enums;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * The align option defines the position of the label relative to the anchor point position and orientation.
@@ -26,44 +27,48 @@ import org.pepstock.charba.client.commons.Key;
 public enum Align implements Key
 {
 	/**
-	 * is the default: the label is centered on the anchor point.
+	 * Is the default: the label is centered on the anchor point.
 	 */
-	CENTER("center"),
+	CENTER("center", Undefined.DOUBLE),
 	/**
 	 * The label is positioned before the anchor point, following the same direction.
 	 */
-	START("start"),
+	START("start", Undefined.DOUBLE),
 	/**
 	 * The label is positioned after the anchor point, following the same direction.
 	 */
-	END("end"),
+	END("end", Undefined.DOUBLE),
 	/**
 	 * The label is positioned to the right of the anchor point (0 degrees).
 	 */
-	RIGHT("right"),
+	RIGHT("right", 0),
 	/**
 	 * The label is positioned to the bottom of the anchor point (90 degrees).
 	 */
-	BOTTOM("bottom"),
+	BOTTOM("bottom", 90),
 	/**
 	 * The label is positioned to the left of the anchor point (180 degrees).
 	 */
-	LEFT("left"),
+	LEFT("left", 180),
 	/**
 	 * The label is positioned to the top of the anchor point (270 degrees).
 	 */
-	TOP("top");
+	TOP("top", 270);
 
 	// name value of property
 	private final String value;
+	// angle in degrees
+	private final double degrees;
 
 	/**
 	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
+	 * @param degrees a number representing the clockwise angle (in degree)
 	 */
-	private Align(String value) {
+	private Align(String value, double degrees) {
 		this.value = value;
+		this.degrees = degrees;
 	}
 
 	/*
@@ -74,6 +79,15 @@ public enum Align implements Key
 	@Override
 	public String value() {
 		return value;
+	}
+
+	/**
+	 * Returns a number representing the clockwise angle (in degree) which defines the label box alignment relative to "anchor".
+	 * 
+	 * @return a number representing the clockwise angle (in degree)
+	 */
+	public double getDegrees() {
+		return degrees;
 	}
 
 }

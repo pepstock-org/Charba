@@ -16,9 +16,8 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.DataLabelsContext;
-import org.pepstock.charba.client.datalabels.enums.Align;
+import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 
 /**
  * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>align</code> property at runtime, using the plugin context.
@@ -26,6 +25,6 @@ import org.pepstock.charba.client.datalabels.enums.Align;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface AlignCallback extends Scriptable<Align, DataLabelsContext> {
+public interface AlignCallback extends Scriptable<Object, DataLabelsContext> {
 
 }

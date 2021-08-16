@@ -104,7 +104,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	// callback proxy to invoke the color function
 	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the align function
-	private final CallbackProxy<ProxyStringCallback> alignCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> alignCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the anchor function
 	private final CallbackProxy<ProxyStringCallback> anchorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border radius function
@@ -291,7 +291,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// sets function to proxy callback in order to invoke the java interface
 		this.colorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), getColorCallback(), getColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.alignCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), getAlignCallback(), getAlign()).value());
+		this.alignCallbackProxy.setCallback(context -> onAlign(new DataLabelsContext(this, context), getAlign()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.anchorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), getAnchorCallback(), getAnchor()).value());
 		// sets function to proxy callback in order to invoke the java interface
@@ -402,6 +402,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
+	 * Sets the position of the label relative to the anchor point position and orientation, by a number representing the clockwise angle (in degree).
+	 * 
+	 * @param align the position of the label relative to the anchor point position and orientation, by a number representing the clockwise angle (in degree)
+	 */
+	public final void setAlign(double align) {
+		// resets callback
+		setAlign((AlignCallback) null);
+		// stores the value
+		setValue(Property.ALIGN, align);
+	}
+
+	/**
 	 * Returns the position of the label relative to the anchor point position and orientation.
 	 * 
 	 * @return the position of the label relative to the anchor point position and orientation.
@@ -411,6 +423,15 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		return getValue(Property.ALIGN, Align.values(), defaultOptions.getAlign());
 	}
 
+	/**
+	 * Returns the position of the label relative to the anchor point position and orientation, by a number representing the clockwise angle (in degree).
+	 * 
+	 * @return the position of the label relative to the anchor point position and orientation, by a number representing the clockwise angle (in degree)
+	 */
+	public final double getAlignDegrees() {
+		return getValue(Property.ALIGN, defaultOptions.getAlign().getDegrees());
+	}
+	
 	/**
 	 * Sets the anchor point, which is defined by an orientation vector and a position on the data element.
 	 * 
@@ -1618,4 +1639,34 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		}
 	}
 
+	/**
+	 * Returns a double or {@link Align} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param defaultValue default value to apply 
+	 * @return a object property value, as double or {@link Anchor}
+	 */
+	private Object onAlign(DataLabelsContext context, Align defaultValue) {
+		// gets callback
+		AlignCallback alignCallback = getAlignCallback();
+		// checks if the handler is set
+		if (ScriptableUtils.isContextConsistent(context) && alignCallback != null) {
+			// calls callback
+			Object result = alignCallback.invoke(context);
+			// checks result
+			if (result instanceof Align) {
+				// casts to align
+				Align align = (Align)result;
+				// returns value
+				return align.value();
+			} else if (result instanceof Number) {
+				// casts to a number
+				Number number = (Number)result;
+				// returns value
+				return number.doubleValue();
+			}
+		}
+		// default result
+		return Key.checkAndGetIfValid(defaultValue).value();
+	}
 }
