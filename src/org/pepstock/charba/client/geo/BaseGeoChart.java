@@ -23,6 +23,10 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.impl.plugins.ColorSchemes;
+import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
+import org.pepstock.charba.client.impl.plugins.HtmlLegend;
+import org.pepstock.charba.client.resources.ResourceName;
 
 /**
  * This is the base chart definition for GEO charts.
@@ -97,6 +101,13 @@ abstract class BaseGeoChart<D extends Dataset> extends AbstractChart implements 
 		options = (BaseGeoOptions) getOptions();
 		// disables legend
 		options.getLegend().setDisplay(false);
+		// disables plugins which can not work with this controller.
+		getOptions().getPlugins().setEnabled(ResourceName.LABELS_PLUGIN.value(), false);
+		getOptions().getPlugins().setEnabled(ResourceName.ZOOM_PLUGIN.value(), false);
+		getOptions().getPlugins().setEnabled(ResourceName.ANNOTATION_PLUGIN.value(), false);
+		getOptions().getPlugins().setEnabled(HtmlLegend.ID, false);
+		getOptions().getPlugins().setEnabled(DatasetsItemsSelector.ID, false);
+		getOptions().getPlugins().setEnabled(ColorSchemes.ID, false);
 		// checks if there is a data set
 		if (!getData().getDatasets().isEmpty()) {
 			// a geo chart must have only 1 data set
