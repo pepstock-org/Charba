@@ -15,8 +15,9 @@
 */
 package org.pepstock.charba.client.datalabels.events;
 
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.DataLabelsContext;
+import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
+import org.pepstock.charba.client.events.ChartEventContext;
 
 /**
  * Callback interface of {@link DataLabelsPlugin#ID} plugin to manage LEAVE events on labels.<br>
@@ -33,8 +34,9 @@ public interface LeaveEventHandler {
 	 * Invoked to manage LEAVE events on labels.
 	 * 
 	 * @param context {@link DataLabelsPlugin#ID} plugin context instance
+	 * @param event event instance
 	 * @return If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart re-rendered.
 	 */
-	boolean onLeave(DataLabelsContext context);
+	boolean onLeave(DataLabelsContext context, ChartEventContext event);
 
 }

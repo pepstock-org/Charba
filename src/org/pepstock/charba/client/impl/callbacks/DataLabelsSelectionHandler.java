@@ -21,8 +21,8 @@ import java.util.List;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.datalabels.DataLabelsContext;
-import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEventHandler;
 import org.pepstock.charba.client.items.DatasetElement;
@@ -86,10 +86,11 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.AbstractEventHandler#onClick(org.pepstock.charba.client.datalabels.DataLabelsContext)
+	 * @see org.pepstock.charba.client.datalabels.events.AbstractEventHandler#onClick(org.pepstock.charba.client.datalabels.DataLabelsContext,
+	 * org.pepstock.charba.client.events.ChartEventContext)
 	 */
 	@Override
-	public boolean onClick(DataLabelsContext context) {
+	public boolean onClick(DataLabelsContext context, ChartEventContext event) {
 		// gets chart
 		IsChart chart = ScriptableUtils.retrieveChart(context);
 		// consistency of argument
@@ -104,11 +105,11 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 				DatasetReference referenceElement = new DatasetReference(context, element);
 				// creates the event
 				// setting as native event new change event
-				DatasetSelectionEvent event = new DatasetSelectionEvent(DOMBuilder.get().createChangeEvent(), chart, referenceElement);
+				DatasetSelectionEvent selectionEvent = new DatasetSelectionEvent(event.getNativeEvent(), chart, referenceElement);
 				// scans the handlers
 				for (DatasetSelectionEventHandler handler : dataSelectionHandlers) {
 					// invoke the handler
-					handler.onSelect(event);
+					handler.onSelect(selectionEvent);
 				}
 			}
 		}

@@ -431,7 +431,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	public final double getAlignDegrees() {
 		return getValue(Property.ALIGN, defaultOptions.getAlign().getDegrees());
 	}
-	
+
 	/**
 	 * Sets the anchor point, which is defined by an orientation vector and a position on the data element.
 	 * 
@@ -1643,7 +1643,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * Returns a double or {@link Align} when the callback has been activated.
 	 * 
 	 * @param context native object as context.
-	 * @param defaultValue default value to apply 
+	 * @param defaultValue default value to apply
 	 * @return a object property value, as double or {@link Anchor}
 	 */
 	private Object onAlign(DataLabelsContext context, Align defaultValue) {
@@ -1656,12 +1656,12 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 			// checks result
 			if (result instanceof Align) {
 				// casts to align
-				Align align = (Align)result;
+				Align align = (Align) result;
 				// returns value
 				return align.value();
 			} else if (result instanceof Number) {
 				// casts to a number
-				Number number = (Number)result;
+				Number number = (Number) result;
 				// returns value
 				return number.doubleValue();
 			}

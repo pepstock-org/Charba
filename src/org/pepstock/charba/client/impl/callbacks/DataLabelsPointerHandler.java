@@ -20,6 +20,7 @@ import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.events.ChartEventContext;
 
 /**
  * DataLabelsPlugin event callback to change the cursor type when the labels are clickable.
@@ -65,10 +66,11 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.AbstractEventHandler#onLeave(org.pepstock.charba.client.datalabels.DataLabelsContext)
+	 * @see org.pepstock.charba.client.datalabels.events.AbstractEventHandler#onLeave(org.pepstock.charba.client.datalabels.DataLabelsContext,
+	 * org.pepstock.charba.client.events.ChartEventContext)
 	 */
 	@Override
-	public boolean onLeave(DataLabelsContext context) {
+	public boolean onLeave(DataLabelsContext context, ChartEventContext event) {
 		// gets chart
 		IsChart chart = ScriptableUtils.retrieveChart(context);
 		// checks consistency of arguments
@@ -81,10 +83,11 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.AbstractEventHandler#onEnter(org.pepstock.charba.client.datalabels.DataLabelsContext)
+	 * @see org.pepstock.charba.client.datalabels.events.AbstractEventHandler#onEnter(org.pepstock.charba.client.datalabels.DataLabelsContext,
+	 * org.pepstock.charba.client.events.ChartEventContext)
 	 */
 	@Override
-	public boolean onEnter(DataLabelsContext context) {
+	public boolean onEnter(DataLabelsContext context, ChartEventContext event) {
 		// gets chart
 		IsChart chart = ScriptableUtils.retrieveChart(context);
 		// checks consistency of arguments
