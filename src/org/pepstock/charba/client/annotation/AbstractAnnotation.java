@@ -794,12 +794,12 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		EnterCallback enterCallback = getEnterCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
-		// creates a chart event context
-		ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart, event and callback are consistent
 		if (IsChart.isValid(chart) && enterCallback != null) {
+			// creates a chart event context
+			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 			// invokes callback
 			enterCallback.onEnter(chart, this, eventContext);
 		}
@@ -816,12 +816,12 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		LeaveCallback leaveCallback = getLeaveCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
-		// creates a chart event context
-		ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart is consistent
 		if (IsChart.isValid(chart) && leaveCallback != null) {
+			// creates a chart event context
+			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 			// invokes callback
 			leaveCallback.onLeave(chart, this, eventContext);
 		}
@@ -838,12 +838,12 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		ClickCallback clickCallback = getClickCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
-		// creates a chart event context
-		ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart is consistent
 		if (IsChart.isValid(chart) && clickCallback != null) {
+			// creates a chart event context
+			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 			// invokes callback
 			clickCallback.onClick(chart, this, eventContext);
 		}
