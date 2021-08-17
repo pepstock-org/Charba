@@ -45,7 +45,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'AnnotationPluginResource' class.
 	 */
-	ANNOTATION_PLUGIN_RESOURCE(ResourceName.ANNOTATION_PLUGIN, 1237857),
+	ANNOTATION_PLUGIN_RESOURCE(ResourceName.ANNOTATION_PLUGIN, 1243091),
 	/**
 	 * Hash item for 'DataLabelsPluginResource' class.
 	 */

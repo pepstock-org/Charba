@@ -20,6 +20,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.events.AbstractEvent;
+import org.pepstock.charba.client.events.ChartEventContext;
 
 /**
  * A modifier key modifies the action of another key when the keys are pressed at the same time.
@@ -112,6 +113,22 @@ public enum ModifierKey implements Key
 	/**
 	 * Returns <code>true</code> if the modifier key is pressed when the event was emitted.
 	 * 
+	 * @param event instance of CHARBA event to be checked
+	 * @return <code>true</code> if the modifier key is pressed when the event was emitted
+	 */
+	public boolean isPressed(ChartEventContext event) {
+		// checks if event is consistent
+		if (event != null) {
+			return isPressed(event.getNativeEvent());
+		}
+		// if here, argument is not consistent
+		// then returns false
+		return false;
+	}
+	
+	/**
+	 * Returns <code>true</code> if the modifier key is pressed when the event was emitted.
+	 * 
 	 * @param event instance of native event to be checked
 	 * @return <code>true</code> if the modifier key is pressed when the event was emitted
 	 */
@@ -133,6 +150,23 @@ public enum ModifierKey implements Key
 	 * @return <code>true</code> if the modifier key is pressed when the event was emitted
 	 */
 	public static boolean arePressed(AbstractEvent event, ModifierKey... keys) {
+		// checks if event is consistent
+		if (event != null) {
+			return arePressed(event.getNativeEvent(), keys);
+		}
+		// if here argument is not consistent
+		// then returns false
+		return false;
+	}
+	
+	/**
+	 * Returns <code>true</code> if all modifier keys are pressed when the event was emitted.
+	 * 
+	 * @param event instance of CHARBA event to be checked
+	 * @param keys array of keys to be checked against the event
+	 * @return <code>true</code> if the modifier key is pressed when the event was emitted
+	 */
+	public static boolean arePressed(ChartEventContext event, ModifierKey... keys) {
 		// checks if event is consistent
 		if (event != null) {
 			return arePressed(event.getNativeEvent(), keys);

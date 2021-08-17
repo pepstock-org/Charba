@@ -36,7 +36,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerEvent;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
@@ -55,6 +55,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Window;
 
@@ -167,13 +168,13 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	// -- CALLBACKS PROXIES EVENTS
 	// ---------------------------
 	// callback proxy to invoke the ENTER function
-	private final CallbackProxy<ProxyHandlerCallback> enterCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerEvent> enterCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the LEAVE function
-	private final CallbackProxy<ProxyHandlerCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerEvent> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the CLICK function
-	private final CallbackProxy<ProxyHandlerCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerEvent> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the DBLCLICK function
-	private final CallbackProxy<ProxyHandlerCallback> dblclickCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerEvent> dblclickCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle click event
 	private static final CallbackPropertyHandler<ClickCallback> CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CLICK);
@@ -785,76 +786,88 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	/**
 	 * Manages the ENTER event invoking the callback is exists.
 	 * 
-	 * @param context plugin context which contains the element
+	 * @param context context instance
+	 * @param event event instance
 	 */
-	private void onEnter(NativeObject context) {
+	private void onEnter(NativeObject context, NativeObject event) {
 		// gets callback
 		EnterCallback enterCallback = getEnterCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
+		// creates a chart event context
+		ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart, event and callback are consistent
 		if (IsChart.isValid(chart) && enterCallback != null) {
 			// invokes callback
-			enterCallback.onEnter(chart, this);
+			enterCallback.onEnter(chart, this, eventContext);
 		}
 	}
 
 	/**
 	 * Manages the LEAVE event firing an annotation event.
 	 * 
-	 * @param context plugin context which contains the element
+	 * @param context context instance
+	 * @param event event instance
 	 */
-	private void onLeave(NativeObject context) {
+	private void onLeave(NativeObject context, NativeObject event) {
 		// gets callback
 		LeaveCallback leaveCallback = getLeaveCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
+		// creates a chart event context
+		ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart is consistent
 		if (IsChart.isValid(chart) && leaveCallback != null) {
 			// invokes callback
-			leaveCallback.onLeave(chart, this);
+			leaveCallback.onLeave(chart, this, eventContext);
 		}
 	}
 
 	/**
 	 * Manages the CLICK event firing an annotation event.
 	 * 
-	 * @param context plugin context which contains the element
+	 * @param context context instance
+	 * @param event event instance
 	 */
-	private void onClick(NativeObject context) {
+	private void onClick(NativeObject context, NativeObject event) {
 		// gets callback
 		ClickCallback clickCallback = getClickCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
+		// creates a chart event context
+		ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart is consistent
 		if (IsChart.isValid(chart) && clickCallback != null) {
 			// invokes callback
-			clickCallback.onClick(chart, this);
+			clickCallback.onClick(chart, this, eventContext);
 		}
 	}
 
 	/**
 	 * Manages the DBLCLICK event firing an annotation event.
 	 * 
-	 * @param context plugin context which contains the element
+	 * @param context context instance
+	 * @param event event instance
 	 */
-	private void onDblclick(NativeObject context) {
+	private void onDblclick(NativeObject context, NativeObject event) {
 		// gets callback
 		DoubleClickCallback dblclickCallback = getDoubleClickCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
+		// creates a chart event context
+		ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart is consistent
 		if (IsChart.isValid(chart) && dblclickCallback != null) {
 			// invokes callback
-			dblclickCallback.onDoubleClick(chart, this);
+			dblclickCallback.onDoubleClick(chart, this, eventContext);
 		}
 	}
 

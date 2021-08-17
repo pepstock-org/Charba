@@ -17,6 +17,7 @@ package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.annotation.AnnotationEnvelop;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
@@ -120,6 +121,15 @@ public final class ChartEventContext extends NativeObjectContainer {
 		super(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
+	/**
+	 * Creates the object with envelop envelop with the native object instance to be wrapped.
+	 * 
+	 * @param envelop envelop with the native object instance to be wrapped.
+	 */
+	public ChartEventContext(AnnotationEnvelop<NativeObject> envelop) {
+		super(Envelop.checkAndGetIfValid(envelop).getContent());
+	}
+	
 	/**
 	 * Returns the CHARBA chart instance.
 	 * 
