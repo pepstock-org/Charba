@@ -21,7 +21,6 @@ import java.util.List;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.datalabels.DataLabelsContext;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
@@ -30,7 +29,7 @@ import org.pepstock.charba.client.items.DatasetElement;
 import org.pepstock.charba.client.items.DatasetReference;
 
 /**
- * {@link DataLabelsPlugin#ID} event callbacks to invoke data set selection handlers if there were defined.<br>
+ * DataLabelsPlugin event callbacks to invoke data set selection handlers if there were defined.<br>
  * This can substitute the event handling at chart level.
  * 
  * @author Andrea "Stock" Stocchero

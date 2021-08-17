@@ -23,7 +23,6 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
@@ -38,7 +37,7 @@ public final class LabelsOptions extends AbstractPluginOptions implements IsDefa
 	private IsDefaultOptions defaultOptions;
 
 	/**
-	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
+	 * Creates new {@link LabelsPlugin#ID} plugin options.
 	 */
 	public LabelsOptions() {
 		this(null, null);

@@ -20,11 +20,9 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.events.AbstractEvent;
-import org.pepstock.charba.client.zoom.ZoomPlugin;
 
 /**
- * A modifier key modifies the action of another key when the keys are pressed at the same time.<br>
- * Below is a list of the common modifier keys to use to configure the {@link ZoomPlugin}.
+ * A modifier key modifies the action of another key when the keys are pressed at the same time.
  * 
  * @author Andrea "Stock" Stocchero
  *

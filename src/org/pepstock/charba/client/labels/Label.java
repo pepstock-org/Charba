@@ -34,7 +34,6 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
@@ -194,14 +193,14 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	}
 
 	/**
-	 * Creates new {@link DataLabelsPlugin#ID} plugin label, using an incremental id.
+	 * Creates new {@link LabelsPlugin#ID} plugin label, using an incremental id.
 	 */
 	public Label() {
 		this(TEMPORARY_ID);
 	}
 
 	/**
-	 * Creates new {@link DataLabelsPlugin#ID} plugin label, using the id passed as argument as label id.
+	 * Creates new {@link LabelsPlugin#ID} plugin label, using the id passed as argument as label id.
 	 * 
 	 * @param id id to apply to new label.
 	 */
@@ -210,7 +209,7 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	}
 
 	/**
-	 * Creates new {@link DataLabelsPlugin#ID} plugin label, using the id passed as argument as label id.
+	 * Creates new {@link LabelsPlugin#ID} plugin label, using the id passed as argument as label id.
 	 * 
 	 * @param id id to apply to new label.
 	 */

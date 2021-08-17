@@ -18,12 +18,11 @@ package org.pepstock.charba.client.impl.callbacks;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.datalabels.DataLabelsContext;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.dom.enums.CursorType;
 
 /**
- * {@link DataLabelsPlugin#ID} event callback to change the cursor type when the labels are clickable.
+ * DataLabelsPlugin event callback to change the cursor type when the labels are clickable.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -17,7 +17,6 @@ package org.pepstock.charba.client.impl.callbacks;
 
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.datalabels.DataLabelsContext;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.items.DataItem;
@@ -25,8 +24,8 @@ import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
- * Formatter implementation for {@link DataLabelsPlugin#ID} plugin in order to provide the percentage of the value.<br>
- * Setting this object to formatter callback of {@link DataLabelsPlugin#ID} options, it will return the percentage for each data index per dataset.
+ * Formatter implementation for DataLabelsPlugin plugin in order to provide the percentage of the value.<br>
+ * Setting this object to formatter callback of DataLabelsPlugin options, it will return the percentage for each data index per dataset.
  * 
  * @author Andrea "Stock" Stocchero
  *
