@@ -33,7 +33,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'ChartJsResource' class.
 	 */
-	CHART_JS_RESOURCE(ResourceName.CHART, 16853005),
+	CHART_JS_RESOURCE(ResourceName.CHART, 16860378),
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
