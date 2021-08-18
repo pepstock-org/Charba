@@ -27,6 +27,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.DefaultScaleId;
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
@@ -102,6 +103,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 		BORDER_DASH("borderDash"),
 		BORDER_DASH_OFFSET("borderDashOffset"),
 		BORDER_WIDTH("borderWidth"),
+		MODIFIER_KEY("modifierKey"),
 		SELECTION_CLEANER("selectionCleaner");
 
 		// name value of property
@@ -377,6 +379,25 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 */
 	public void setBorderColor(IsColor color) {
 		setBorderColor(IsColor.checkAndGetValue(color));
+	}
+	
+	/**
+	 * Sets the modifier key to activate selection.
+	 * 
+	 * @param modifierKey the modifier key to activate selection
+	 */
+	public void setModifierKey(ModifierKey modifierKey) {
+		setValue(Property.MODIFIER_KEY, modifierKey);
+	}
+
+	/**
+	 * Returns the modifier key to activate selection.
+	 * 
+	 * @return the modifier key to activate selection
+	 */
+	@Override
+	public ModifierKey getModifierKey() {
+		return getValue(Property.MODIFIER_KEY, ModifierKey.values(), defaultOptions.getModifierKey());
 	}
 
 }

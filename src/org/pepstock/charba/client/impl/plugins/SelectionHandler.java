@@ -31,6 +31,7 @@ import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.ChartAxisType;
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
@@ -205,9 +206,12 @@ final class SelectionHandler {
 		// removes the default behavior of mouse down on canvas
 		// this removes the canvas selection
 		event.preventDefault();
+		// gets modifier key options
+		ModifierKey modifier = options.getModifierKey();
 		// if the mouse down event points
 		// are in chart area and has got datasets items
-		if (isEventInChartArea(event)) {
+		// checking also if modifier key is configured and pressed
+		if (isEventInChartArea(event) && (modifier == null || modifier.isPressed(event))) {
 			// sets cursor
 			chart.getCanvas().getStyle().setCursorType(CursorType.CROSSHAIR);
 			// then start selection with X coordinate

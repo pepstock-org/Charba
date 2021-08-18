@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.options.ScaleId;
 
 /**
@@ -97,6 +98,15 @@ interface IsDatasetsItemsSelectorDefaultOptions {
 	 */
 	default String getBorderColorAsString() {
 		return DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR.toRGBA();
+	}
+	
+	/**
+	 * Returns the modifier key to activate selection.
+	 * 
+	 * @return the modifier key to activate selection
+	 */
+	default ModifierKey getModifierKey() {
+		return null;
 	}
 
 }

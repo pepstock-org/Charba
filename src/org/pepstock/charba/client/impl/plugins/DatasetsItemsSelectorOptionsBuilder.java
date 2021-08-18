@@ -19,6 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
@@ -168,6 +169,17 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setBorderColor(IsColor color) {
 		options.setBorderColor(color);
+		return this;
+	}
+	
+	/**
+	 * Sets the modifier key to activate selection.
+	 * 
+	 * @param modifierKey the modifier key to activate selection
+	 * @return builder instance
+	 */
+	public DatasetsItemsSelectorOptionsBuilder setModifierKey(ModifierKey modifierKey) {
+		options.setModifierKey(modifierKey);
 		return this;
 	}
 
