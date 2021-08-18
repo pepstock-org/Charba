@@ -78,6 +78,8 @@ public class InjectableResourceGenerator {
 	private static final String HASH_PACKAGE_NAME = "org.pepstock.charba.client.resources";
 	// threshold of amount of chars for any string array item
 	private static final int CHARS_PER_ARRAY_ITEM = 1000;
+	// defines the carriage return
+	private static final byte CARRIAGE_RETURN = '\r';
 	// defines the line separator
 	private static final byte LINE_SEPARATOR = '\n';
 	// defines the comma
@@ -416,7 +418,7 @@ public class InjectableResourceGenerator {
 				builder.append(QUOTE_STRING).append(COMMA_STRING).append(LINE_SEPARATOR_STRING).append(TAB_INDENT_STRING).append(QUOTE_STRING);
 				// resets the counter
 				charCounter = 0;
-			} else if (b != LINE_SEPARATOR) {
+			} else if (b != LINE_SEPARATOR && b != CARRIAGE_RETURN) {
 				// if here, is not the end of the file
 				builder.append((char) b);
 				// increments the chars by 1 because
