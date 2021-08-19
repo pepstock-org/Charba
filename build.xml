@@ -96,7 +96,7 @@
 	<property name="javadoc.source" value="8" />
 	
 	<!--
-		IVY targets for getting build dependencies and Travis CI needed libraries
+		IVY targets for getting build dependencies and GHA CI needed libraries
 	-->
 	<property name="ivy.file" value="ivy.xml"/>
 	<property name="ant.jar.dir" value="${user.home}/.ant/lib" />
