@@ -289,6 +289,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 	
 ### Developing
 
+  * change dependency for Google Closure Compiler, [version v20210808](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20210808).
   * rename `parse` method of `JSON` class to `parseForObject`, to parse a string to a native object.
   * add `parseForArray` method of `JSON` class to parse a string to an array.
   * move `getStringProperty` and `getIntegerProperty` from `Id` class to `JsHelper` one.
