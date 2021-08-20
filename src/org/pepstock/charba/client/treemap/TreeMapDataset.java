@@ -795,7 +795,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	}
 
 	// ---------------------------
-	// OVERRIDE METHODS
+	// CALLBACKS METHODS
 	// ---------------------------
 
 	/**
