@@ -27,7 +27,7 @@ import org.pepstock.charba.client.Type;
 final class TreeMapExtendedChartType implements Type {
 
 	// name of this extended type
-	private static final String TYPE = "treemaparent";
+	private static final String TYPE = "treemapparent";
 
 	/**
 	 * To avoid any instantiation
