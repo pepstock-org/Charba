@@ -218,7 +218,7 @@ public final class MatrixDataPoint extends AbstractDataPoint {
 	}
 
 	// -------------
-	// DOUBLE
+	// TYPE CHECKER
 	// -------------
 
 	/**
@@ -229,6 +229,19 @@ public final class MatrixDataPoint extends AbstractDataPoint {
 	public ObjectType getXObjectType() {
 		return type(Property.X);
 	}
+	
+	/**
+	 * Returns the object type of data stored as Y.
+	 * 
+	 * @return the object type of data stored as Y
+	 */
+	public ObjectType getYObjectType() {
+		return type(Property.Y);
+	}
+
+	// -------------
+	// DOUBLE
+	// -------------
 
 	/**
 	 * Sets X value as double (for scatter and bubble datasets).
@@ -253,6 +266,34 @@ public final class MatrixDataPoint extends AbstractDataPoint {
 		// then returns the default
 		return Undefined.DOUBLE;
 	}
+	
+	/**
+	 * Sets Y value.
+	 * 
+	 * @param y Y value.
+	 */
+	public void setY(double y) {
+		setValue(Property.Y, y);
+	}
+
+	/**
+	 * Returns Y value.
+	 * 
+	 * @return Y value.
+	 */
+	public double getY() {
+		// checks if the stored data is a number
+		if (ObjectType.NUMBER.equals(getYObjectType())) {
+			return getValue(Property.Y, Undefined.DOUBLE);
+		}
+		// if here the data is missing or an array
+		// then returns the default
+		return Undefined.DOUBLE;
+	}
+
+	// -------------
+	// DATE
+	// -------------
 
 	/**
 	 * Sets X value as date for time series.
@@ -279,67 +320,6 @@ public final class MatrixDataPoint extends AbstractDataPoint {
 	}
 
 	/**
-	 * Sets X value as string.
-	 * 
-	 * @param x X value as string
-	 */
-	public void setX(String x) {
-		setValue(Property.X, x);
-	}
-
-	/**
-	 * Returns X value as string.
-	 * 
-	 * @return X value as string or {@link Undefined#STRING} if is not set
-	 */
-	public String getXAsString() {
-		// checks if the stored data is a string
-		if (ObjectType.STRING.equals(getXObjectType())) {
-			return getValue(Property.X, Undefined.STRING);
-		}
-		// if here the data is missing or a number
-		// then returns the default
-		return Undefined.STRING;
-	}
-
-	// -------------
-	// Y
-	// -------------
-
-	/**
-	 * Returns the object type of data stored as Y.
-	 * 
-	 * @return the object type of data stored as Y
-	 */
-	public ObjectType getYObjectType() {
-		return type(Property.Y);
-	}
-
-	/**
-	 * Sets Y value.
-	 * 
-	 * @param y Y value.
-	 */
-	public void setY(double y) {
-		setValue(Property.Y, y);
-	}
-
-	/**
-	 * Returns Y value.
-	 * 
-	 * @return Y value.
-	 */
-	public double getY() {
-		// checks if the stored data is a number
-		if (ObjectType.NUMBER.equals(getYObjectType())) {
-			return getValue(Property.Y, Undefined.DOUBLE);
-		}
-		// if here the data is missing or an array
-		// then returns the default
-		return Undefined.DOUBLE;
-	}
-
-	/**
 	 * Sets Y value as date for time series.
 	 * 
 	 * @param y Y value as date for time series
@@ -361,6 +341,34 @@ public final class MatrixDataPoint extends AbstractDataPoint {
 		// if here the data is missing or a string
 		// then returns the default
 		return null;
+	}
+
+	// -------------
+	// STRING
+	// -------------
+
+	/**
+	 * Sets X value as string.
+	 * 
+	 * @param x X value as string
+	 */
+	public void setX(String x) {
+		setValue(Property.X, x);
+	}
+
+	/**
+	 * Returns X value as string.
+	 * 
+	 * @return X value as string or {@link Undefined#STRING} if is not set
+	 */
+	public String getXAsString() {
+		// checks if the stored data is a string
+		if (ObjectType.STRING.equals(getXObjectType())) {
+			return getValue(Property.X, Undefined.STRING);
+		}
+		// if here the data is missing or a number
+		// then returns the default
+		return Undefined.STRING;
 	}
 
 	/**
