@@ -24,6 +24,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.data.AbstractDataPoint;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -32,7 +33,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TreeMapDataPoint extends NativeObjectContainer {
+public final class TreeMapDataPoint extends AbstractDataPoint {
 
 	/**
 	 * Name of properties of native object.<br>
@@ -93,13 +94,7 @@ public final class TreeMapDataPoint extends NativeObjectContainer {
 	 * @return the object in the user format of the data point
 	 */
 	public <T extends NativeObjectContainer> T getData(NativeObjectContainerFactory<T> factory) {
-		// checks if the factory is consistent
-		if (factory != null) {
-			return factory.create(getValue(Property.DATA));
-		}
-		// if here, factory not consistent
-		// then returns null
-		return null;
+		return getAttributeAsObject(Property.DATA, factory);
 	}
 
 	/**

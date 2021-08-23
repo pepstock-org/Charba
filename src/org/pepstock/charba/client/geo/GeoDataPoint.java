@@ -17,7 +17,7 @@ package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.data.AbstractDataPoint;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -27,7 +27,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class GeoDataPoint extends NativeObjectContainer {
+abstract class GeoDataPoint extends AbstractDataPoint {
 
 	/**
 	 * Name of properties of native object.

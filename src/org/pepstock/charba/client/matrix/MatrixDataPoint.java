@@ -13,44 +13,33 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.data;
+package org.pepstock.charba.client.matrix;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.commons.BaseEnvelop;
-import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.items.DataItem;
-import org.pepstock.charba.client.items.ItemsEnvelop;
+import org.pepstock.charba.client.data.AbstractDataPoint;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y properties.
+ * Maps the data passed to a matrix dataset.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataPoint extends AbstractDataPoint {
-
-	// default value for X. No private because it is used by time series item
-	static final double DEFAULT_X = Undefined.DOUBLE;
-	// default value for R. No private because it is used by time series item
-	static final double DEFAULT_R = Undefined.DOUBLE;
-	// default value for Y. No private because it is used by time series item
-	static final double DEFAULT_Y = Undefined.DOUBLE;
+public final class MatrixDataPoint extends AbstractDataPoint {
 
 	/**
 	 * Name of properties of native object.<br>
 	 * No private because it is used by time series item
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		X("x"),
 		Y("y"),
-		R("r");
+		V("v");
 
 		// name value of property
 		private final String value;
@@ -79,7 +68,7 @@ public final class DataPoint extends AbstractDataPoint {
 	/**
 	 * Creates the object with an empty native object.
 	 */
-	public DataPoint() {
+	public MatrixDataPoint() {
 		this((NativeObject) null);
 	}
 
@@ -88,9 +77,10 @@ public final class DataPoint extends AbstractDataPoint {
 	 * 
 	 * @param x x value of data point
 	 * @param y y value of data point
+	 * @param value value of the data point
 	 */
-	public DataPoint(double x, double y) {
-		this();
+	public MatrixDataPoint(double x, double y, double value) {
+		this(value);
 		// stores values
 		setX(x);
 		setY(y);
@@ -101,9 +91,10 @@ public final class DataPoint extends AbstractDataPoint {
 	 * 
 	 * @param x x value of data point
 	 * @param y y value of data point
+	 * @param value value of the data point
 	 */
-	public DataPoint(Date x, double y) {
-		this();
+	public MatrixDataPoint(Date x, double y, double value) {
+		this(value);
 		// stores values
 		setX(x);
 		setY(y);
@@ -114,9 +105,10 @@ public final class DataPoint extends AbstractDataPoint {
 	 * 
 	 * @param x x value of data point
 	 * @param y y value of data point
+	 * @param value value of the data point
 	 */
-	public DataPoint(String x, double y) {
-		this();
+	public MatrixDataPoint(String x, double y, double value) {
+		this(value);
 		// stores values
 		setX(x);
 		setY(y);
@@ -127,9 +119,10 @@ public final class DataPoint extends AbstractDataPoint {
 	 * 
 	 * @param x x value of data point
 	 * @param y y value of data point
+	 * @param value value of the data point
 	 */
-	public DataPoint(double x, FloatingData y) {
-		this();
+	public MatrixDataPoint(double x, Date y, double value) {
+		this(value);
 		// stores values
 		setX(x);
 		setY(y);
@@ -140,9 +133,10 @@ public final class DataPoint extends AbstractDataPoint {
 	 * 
 	 * @param x x value of data point
 	 * @param y y value of data point
+	 * @param value value of the data point
 	 */
-	public DataPoint(Date x, FloatingData y) {
-		this();
+	public MatrixDataPoint(Date x, Date y, double value) {
+		this(value);
 		// stores values
 		setX(x);
 		setY(y);
@@ -153,35 +147,65 @@ public final class DataPoint extends AbstractDataPoint {
 	 * 
 	 * @param x x value of data point
 	 * @param y y value of data point
+	 * @param value value of the data point
 	 */
-	public DataPoint(String x, FloatingData y) {
-		this();
+	public MatrixDataPoint(String x, Date y, double value) {
+		this(value);
 		// stores values
 		setX(x);
 		setY(y);
 	}
 
 	/**
-	 * Creates the object with the passed point values (for bubble).
+	 * Creates the object with the passed point values.
 	 * 
 	 * @param x x value of data point
 	 * @param y y value of data point
-	 * @param r the bubble radius in pixels (not scaled).
+	 * @param value value of the data point
 	 */
-	public DataPoint(double x, double y, double r) {
-		this(x, y);
+	public MatrixDataPoint(double x, String y, double value) {
+		this(value);
 		// stores values
-		setR(r);
+		setX(x);
+		setY(y);
 	}
 
 	/**
-	 * Creates the object with a native object passed as argument by and {@link BaseEnvelop}.<br>
-	 * This is called by the {@link DataItem}.
+	 * Creates the object with the passed point values.
 	 * 
-	 * @param envelop envelop which contains a native object with a data point
+	 * @param x x value of data point
+	 * @param y y value of data point
+	 * @param value value of the data point
 	 */
-	public DataPoint(ItemsEnvelop<NativeObject> envelop) {
-		this(Envelop.checkAndGetIfValid(envelop).getContent());
+	public MatrixDataPoint(Date x, String y, double value) {
+		this(value);
+		// stores values
+		setX(x);
+		setY(y);
+	}
+
+	/**
+	 * Creates the object with the passed point values.
+	 * 
+	 * @param x x value of data point
+	 * @param y y value of data point
+	 * @param value value of the data point
+	 */
+	public MatrixDataPoint(String x, String y, double value) {
+		this(value);
+		// stores values
+		setX(x);
+		setY(y);
+	}
+
+	/**
+	 * Creates the object with the passed point values.
+	 * 
+	 * @param value value of data point
+	 */
+	private MatrixDataPoint(double value) {
+		this();
+		setValue(value);
 	}
 
 	/**
@@ -189,12 +213,12 @@ public final class DataPoint extends AbstractDataPoint {
 	 * 
 	 * @param nativeObject native object which maps a data point
 	 */
-	DataPoint(NativeObject nativeObject) {
+	MatrixDataPoint(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
 	// -------------
-	// X
+	// DOUBLE
 	// -------------
 
 	/**
@@ -223,11 +247,11 @@ public final class DataPoint extends AbstractDataPoint {
 	public double getX() {
 		// checks if the stored data is a number
 		if (ObjectType.NUMBER.equals(getXObjectType())) {
-			return getValue(Property.X, DEFAULT_X);
+			return getValue(Property.X, Undefined.DOUBLE);
 		}
 		// if here the data is missing or a string
 		// then returns the default
-		return DEFAULT_X;
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -308,57 +332,81 @@ public final class DataPoint extends AbstractDataPoint {
 	public double getY() {
 		// checks if the stored data is a number
 		if (ObjectType.NUMBER.equals(getYObjectType())) {
-			return getValue(Property.Y, DEFAULT_Y);
+			return getValue(Property.Y, Undefined.DOUBLE);
 		}
 		// if here the data is missing or an array
 		// then returns the default
-		return DEFAULT_Y;
+		return Undefined.DOUBLE;
 	}
 
 	/**
-	 * Sets Y value.
+	 * Sets Y value as date for time series.
 	 * 
-	 * @param y Y value.
+	 * @param y Y value as date for time series
 	 */
-	public void setY(FloatingData y) {
+	public void setY(Date y) {
 		setValue(Property.Y, y);
 	}
 
 	/**
-	 * Returns Y value.
+	 * Returns Y value as date for time series.
 	 * 
-	 * @return Y value.
+	 * @return Y value as date for time series
 	 */
-	public FloatingData getYAsFloatingData() {
-		// checks if the stored data is a array
-		if (ObjectType.ARRAY.equals(getYObjectType())) {
-			return new FloatingData(getArrayValue(Property.Y));
+	public Date getYAsDate() {
+		// checks if the stored data is a number
+		if (ObjectType.NUMBER.equals(getYObjectType())) {
+			return getValue(Property.Y, (Date) null);
 		}
-		// if here the data is missing or not a number
-		// then returns an empty data
-		return new FloatingData();
-	}
-
-	// -------------
-	// R
-	// -------------
-
-	/**
-	 * Sets the bubble radius in pixels (not scaled).<br>
-	 * It is not scaled by the chart, it is the raw radius in pixels of the bubble that is drawn on the canvas.
-	 * 
-	 * @param r the bubble radius in pixels (not scaled).
-	 */
-	public void setR(double r) {
-		setValue(Property.R, Checker.positiveOrZero(r));
+		// if here the data is missing or a string
+		// then returns the default
+		return null;
 	}
 
 	/**
-	 * Returns the bubble radius in pixels (not scaled).
+	 * Sets Y value as string.
 	 * 
-	 * @return the bubble radius in pixels (not scaled).
+	 * @param y Y value as string
 	 */
-	public double getR() {
-		return getValue(Property.R, DEFAULT_R);
+	public void setY(String y) {
+		setValue(Property.Y, y);
 	}
+
+	/**
+	 * Returns Y value as string.
+	 * 
+	 * @return Y value as string
+	 */
+	public String getYAsString() {
+		// checks if the stored data is a string
+		if (ObjectType.STRING.equals(getYObjectType())) {
+			return getValue(Property.Y, Undefined.STRING);
+		}
+		// if here the data is missing or a number
+		// then returns the default
+		return Undefined.STRING;
+	}
+
+	// -------------
+	// VALUE
+	// -------------
+
+	/**
+	 * Sets the value of matrix data point.
+	 * 
+	 * @param value the value of matrix data point
+	 */
+	public void setValue(double value) {
+		setValue(Property.V, value);
+	}
+
+	/**
+	 * Returns the value of matrix data point.
+	 * 
+	 * @return the value of matrix data point.
+	 */
+	public double getValue() {
+		return getValue(Property.V, Undefined.DOUBLE);
+	}
+
 }

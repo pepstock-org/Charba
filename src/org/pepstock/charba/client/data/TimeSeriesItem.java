@@ -19,7 +19,6 @@ import java.util.Date;
 
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * Default implementation for time series item interface in order to manage time series item (time and value).
@@ -27,7 +26,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  * @see DataPoint
  */
-public final class TimeSeriesItem extends NativeObjectContainer {
+public final class TimeSeriesItem extends AbstractDataPoint {
 
 	/**
 	 * Creates a time series item setting the time passed as argument. By default the value is {@link Double#NaN}.

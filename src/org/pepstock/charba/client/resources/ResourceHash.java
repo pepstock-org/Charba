@@ -63,6 +63,10 @@ enum ResourceHash {
 	 */
 	ZOOM_PLUGIN_HAMMER_RESOURCE(ResourceName.HAMMER_LIBRARY, 1881773),
 	/**
+	 * Hash item for 'MatrixControllerResource' class.
+	 */
+	MATRIX_CONTROLLER_RESOURCE(ResourceName.MATRIX_CONTROLLER, 297987),
+	/**
 	 * Hash item for 'LuxonAdapterResource' class.
 	 */
 	LUXON_ADAPTER_RESOURCE(ResourceName.DATE_TIME_ADAPTER, 160328),

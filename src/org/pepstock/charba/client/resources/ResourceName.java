@@ -66,6 +66,10 @@ public enum ResourceName implements Key
 	 */
 	TREEMAP_CONTROLLER("treemap", false),
 	/**
+	 * Script element id for CHART.JS MATRIX controller.
+	 */
+	MATRIX_CONTROLLER("matrix", false),
+	/**
 	 * Script element id for CHART.JS GEO controller.
 	 */
 	GEO_CONTROLLER("geo", false);
