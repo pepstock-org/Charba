@@ -302,7 +302,7 @@ final class BaseMeterController extends AbstractController {
 	 */
 	private void calculateFontSize(Context2dItem ctx, double sideOfSquare, String value, FontItem font) {
 		// half of side of square
-		int fontSize = (int)(sideOfSquare / 2);
+		int fontSize = (int) (sideOfSquare / 2);
 		boolean check = true;
 		// loop to calculate the size
 		while (check) {

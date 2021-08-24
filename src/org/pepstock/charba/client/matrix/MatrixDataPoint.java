@@ -229,7 +229,7 @@ public final class MatrixDataPoint extends AbstractDataPoint {
 	public ObjectType getXObjectType() {
 		return type(Property.X);
 	}
-	
+
 	/**
 	 * Returns the object type of data stored as Y.
 	 * 
@@ -266,7 +266,7 @@ public final class MatrixDataPoint extends AbstractDataPoint {
 		// then returns the default
 		return Undefined.DOUBLE;
 	}
-	
+
 	/**
 	 * Sets Y value.
 	 * 

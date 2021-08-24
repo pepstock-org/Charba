@@ -40,7 +40,7 @@ public final class ImageData {
 	private ImageData() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns the actual height, in pixels.
 	 *
@@ -64,7 +64,7 @@ public final class ImageData {
 	 */
 	@JsProperty(name = "data")
 	private native Uint8ClampedArray nativeGetData();
-	
+
 	/**
 	 * Returns the array which is representing a one-dimensional array containing the data in the RGBA order, with integer values between 0 and 255 (inclusive).
 	 * 
@@ -73,7 +73,7 @@ public final class ImageData {
 	@JsOverlay
 	public ArrayInteger getData() {
 		// checks if data are consistent, otherwise an empty array
-		return nativeGetData() != null ? nativeGetData().toArray() : ArrayInteger.fromOrEmpty((List<Integer>)null);
+		return nativeGetData() != null ? nativeGetData().toArray() : ArrayInteger.fromOrEmpty((List<Integer>) null);
 	}
-	
+
 }

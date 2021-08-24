@@ -171,7 +171,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 		options.setBorderColor(color);
 		return this;
 	}
-	
+
 	/**
 	 * Sets the modifier key to activate selection.
 	 * 

@@ -24,7 +24,8 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-enum ResourceHash {
+enum ResourceHash
+{
 
 	/**
 	 * Hash item for 'LuxonLibraryResource' class.
@@ -74,12 +75,12 @@ enum ResourceHash {
 	 * Hash item for 'TreeMapControllerResource' class.
 	 */
 	TREE_MAP_CONTROLLER_RESOURCE(ResourceName.TREEMAP_CONTROLLER, 859201);
-	
+
 	// resource name instance
 	private final ResourceName resourceName;
 	// resource name instance
 	private final int hash;
-		
+
 	/**
 	 * Creates with the resource name and hash of injectable javascript resource.
 	 * 
@@ -90,7 +91,7 @@ enum ResourceHash {
 		this.resourceName = resourceName;
 		this.hash = hash;
 	}
-	
+
 	/**
 	 * Returns the resource name of the java script resource.
 	 * 
@@ -108,7 +109,7 @@ enum ResourceHash {
 	int getHash() {
 		return hash;
 	}
-	
+
 	/**
 	 * Search the resource name and returns the calculated hash, when created.
 	 * 

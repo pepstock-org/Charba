@@ -68,7 +68,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	private static final boolean DEFAULT_DRAW_ON_ATTACH = true;
 
 	private static final boolean DEFAULT_DESTROY_ON_DETACH = true;
-	
+
 	private static final Set<Event> DEFAULT_EVENTS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(Event.MOUSE_MOVE, Event.MOUSE_OUT, Event.CLICK, Event.TOUCH_MOVE, Event.TOUCH_START)));
 
 	/**

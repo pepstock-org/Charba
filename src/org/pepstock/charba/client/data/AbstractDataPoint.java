@@ -132,5 +132,5 @@ public abstract class AbstractDataPoint extends NativeObjectContainer {
 		// then returns null
 		return null;
 	}
-	
+
 }

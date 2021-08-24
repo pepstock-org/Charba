@@ -22,7 +22,7 @@ import org.pepstock.charba.client.treemap.TreeMapOptions;
 
 /**
  * TREEMAP chart GWT WIDGET implementation.<br>
- * A treemap chart is used for displaying hierarchical data using nested figures, usually rectangles. 
+ * A treemap chart is used for displaying hierarchical data using nested figures, usually rectangles.
  * 
  * @author Andrea "Stock" Stocchero
  */

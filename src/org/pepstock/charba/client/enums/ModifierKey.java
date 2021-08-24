@@ -125,7 +125,7 @@ public enum ModifierKey implements Key
 		// then returns false
 		return false;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the modifier key is pressed when the event was emitted.
 	 * 
@@ -158,7 +158,7 @@ public enum ModifierKey implements Key
 		// then returns false
 		return false;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if all modifier keys are pressed when the event was emitted.
 	 * 
