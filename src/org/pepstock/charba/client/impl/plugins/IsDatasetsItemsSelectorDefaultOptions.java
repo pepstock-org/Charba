@@ -99,7 +99,7 @@ interface IsDatasetsItemsSelectorDefaultOptions {
 	default String getBorderColorAsString() {
 		return DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR.toRGBA();
 	}
-	
+
 	/**
 	 * Returns the modifier key to activate selection.
 	 * 

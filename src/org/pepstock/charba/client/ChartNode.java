@@ -47,7 +47,7 @@ public final class ChartNode {
 	private final ChartAreaNode chartArea;
 
 	private final TitleNode title;
-	
+
 	private final SubtitleNode subtitle;
 
 	private final TooltipNode tooltip;
@@ -130,7 +130,7 @@ public final class ChartNode {
 	public SubtitleNode getSubtitle() {
 		return subtitle;
 	}
-	
+
 	/**
 	 * Returns the title item.
 	 * 

@@ -128,7 +128,7 @@ final class JsChartHelper {
 	ArrayObject getTooltipActiveElements(Chart chart) {
 		return NativeJsChartHelper.getTooltipActiveElements(chart);
 	}
-	
+
 	/**
 	 * Returns the subtitle elements from the chart.
 	 * 

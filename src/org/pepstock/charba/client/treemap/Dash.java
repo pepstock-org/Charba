@@ -51,7 +51,7 @@ public final class Dash extends NativeArrayDoubleContainer {
 	 * @param nativeArray native array which maps a dash sequence
 	 */
 	Dash(ArrayDouble nativeArray) {
-		super(nativeArray == null ? ArrayDouble.fromOrEmpty((List<Double>)null) : nativeArray);
+		super(nativeArray == null ? ArrayDouble.fromOrEmpty((List<Double>) null) : nativeArray);
 	}
 
 	/**

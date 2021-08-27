@@ -102,7 +102,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 
 	/**
 	 * Sets the locale that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/intl.html">here</a> the details about locale in LUXON.
+	 * See <a href="https://moment.github.io/luxon/#/intl">here</a> the details about locale in LUXON.
 	 * 
 	 * @param locale the time zone that LUXON must use by the date adapter
 	 */
@@ -112,7 +112,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 
 	/**
 	 * Returns the locale that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/intl.html">here</a> the details about locale in LUXON.
+	 * See <a href="https://moment.github.io/luxon/#/intl">here</a> the details about locale in LUXON.
 	 * 
 	 * @return the locale that LUXON must use by the date adapter
 	 */
@@ -145,7 +145,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 
 	/**
 	 * Sets the zone that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/zones.html">here</a> the details about time zone in LUXON.
+	 * See <a href="https://moment.github.io/luxon/#/zones">here</a> the details about time zone in LUXON.
 	 * 
 	 * @param zone the zone that LUXON must use by the date adapter
 	 */
@@ -155,7 +155,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 
 	/**
 	 * Returns the zone that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/zones.html">here</a> the details about time zone in LUXON.
+	 * See <a href="https://moment.github.io/luxon/#/zones">here</a> the details about time zone in LUXON.
 	 * 
 	 * @return the zone that LUXON must use by the date adapter
 	 */
@@ -165,7 +165,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 
 	/**
 	 * Sets the name of calendaring systems that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/calendars.html">here</a> the list of implemented and available. output calendar systems.
+	 * See <a href="https://moment.github.io/luxon/#/calendars">here</a> the list of implemented and available. output calendar systems.
 	 * 
 	 * @param outputCalendar the name of calendaring systems that LUXON must use by the date adapter
 	 */
@@ -175,7 +175,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 
 	/**
 	 * Returns the name of calendaring systems that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/calendars.html">here</a> the list of implemented and available. output calendar systems.
+	 * See <a href="https://moment.github.io/luxon/#/calendars">here</a> the list of implemented and available. output calendar systems.
 	 * 
 	 * @return the name of calendaring systems that LUXON must use by the date adapter
 	 */
@@ -185,7 +185,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 
 	/**
 	 * Sets the name of numbering systems that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/intl.html">here</a> the details about numbering system in LUXON.
+	 * See <a href="https://moment.github.io/luxon/#/intl">here</a> the details about numbering system in LUXON.
 	 * 
 	 * @param numberingSystem the name of numbering systems that LUXON must use by the date adapter
 	 */
@@ -195,7 +195,7 @@ public final class DateAdapterOptions extends NativeObjectContainer {
 
 	/**
 	 * Returns the name of numbering systems that LUXON must use by the date adapter.<br>
-	 * See <a href="https://moment.github.io/luxon/docs/manual/intl.html">here</a> the details about numbering system in LUXON.
+	 * See <a href="https://moment.github.io/luxon/#/intl">here</a> the details about numbering system in LUXON.
 	 * 
 	 * @return the name of numbering systems that LUXON must use by the date adapter
 	 */

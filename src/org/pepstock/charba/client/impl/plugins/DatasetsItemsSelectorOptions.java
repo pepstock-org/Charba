@@ -380,7 +380,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	public void setBorderColor(IsColor color) {
 		setBorderColor(IsColor.checkAndGetValue(color));
 	}
-	
+
 	/**
 	 * Sets the modifier key to activate selection.
 	 * 

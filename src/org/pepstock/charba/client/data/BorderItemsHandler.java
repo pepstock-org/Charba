@@ -75,13 +75,13 @@ final class BorderItemsHandler extends NativeObjectContainer {
 			AbstractBarBorderItem result = (AbstractBarBorderItem) value;
 			// returns the native object
 			return result.nativeObject();
-		} else if (value instanceof Integer) {
-			// casts to integer
-			Integer intValue = (Integer) value;
+		} else if (value instanceof Number) {
+			// casts to number
+			Number number = (Number) value;
 			// creates a border item object
 			T result = factory.create();
 			// sets value
-			result.set(intValue);
+			result.set(number.intValue());
 			// returns the native object
 			return result.nativeObject();
 		}
