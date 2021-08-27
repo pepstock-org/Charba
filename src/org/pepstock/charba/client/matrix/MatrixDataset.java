@@ -325,7 +325,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 			// if here, the property is a object
 			BarBorderRadius object = getBorderRadiusAsObject();
 			// checks if there is the same value
-			if (object.areValuesEquals()) {
+			if (object != null && object.areValuesEquals()) {
 				// the returns the same value
 				// in whatever property
 				return object.getTopLeft();
