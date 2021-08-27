@@ -18,8 +18,11 @@ package org.pepstock.charba.client.matrix;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -29,7 +32,9 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.HoverFlexDataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
@@ -48,6 +53,10 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 * Default border width, <b>{@value}</b>.
 	 */
 	public static final int DEFAULT_BORDER_WIDTH = 0;
+	/**
+	 * Default border radius, <b>{@value}</b>.
+	 */
+	public static final int DEFAULT_BORDER_RADIUS = 0;
 	/**
 	 * Default width, in pixels, <b>{@value}</b>.
 	 */
@@ -71,6 +80,8 @@ public final class MatrixDataset extends HoverFlexDataset {
 	private final CallbackProxy<ProxyDoubleCallback> widthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the height function
 	private final CallbackProxy<ProxyDoubleCallback> heightCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border radius function
+	private final CallbackProxy<ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------
 	// -- USERS CALLBACKS ---
@@ -79,6 +90,8 @@ public final class MatrixDataset extends HoverFlexDataset {
 	private SizeCallback widthCallback = null;
 	// user callback implementation for height
 	private SizeCallback heightCallback = null;
+	// user callback implementation for border radius
+	private BorderRadiusCallback borderRadiusCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -87,6 +100,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	{
 		ANCHOR_X("anchorX"),
 		ANCHOR_Y("anchorY"),
+		BORDER_RADIUS("borderRadius"),
 		WIDTH("width"),
 		HEIGHT("height");
 
@@ -146,6 +160,8 @@ public final class MatrixDataset extends HoverFlexDataset {
 		this.widthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getWidthCallback(), DEFAULT_WIDTH).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.heightCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHeightCallback(), DEFAULT_HEIGHT).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderRadiusCallbackProxy.setCallback(context -> onBorderRadius(createContext(context)));
 	}
 
 	/*
@@ -272,6 +288,73 @@ public final class MatrixDataset extends HoverFlexDataset {
 		return getValue(Property.ANCHOR_Y, Anchor.values(), Anchor.CENTER);
 	}
 
+	/**
+	 * Sets the border radius (in pixels).
+	 * 
+	 * @param borderRadius the border radius (in pixels).
+	 */
+	public void setBorderRadius(int borderRadius) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback) null);
+		// stores the value
+		setValue(Property.BORDER_RADIUS, borderRadius);
+	}
+
+	/**
+	 * Sets the border radius (in pixels).
+	 * 
+	 * @param borderRadius the border radius (in pixels).
+	 */
+	public void setBorderRadius(BarBorderRadius borderRadius) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback) null);
+		// stores the value
+		setValue(Property.BORDER_RADIUS, borderRadius);
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	public int getBorderRadius() {
+		// checks if was stored as number
+		if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
+			return getValue(Property.BORDER_RADIUS, DEFAULT_BORDER_RADIUS);
+		} else if (isType(Property.BORDER_RADIUS, ObjectType.OBJECT)) {
+			// if here, the property is a object
+			BarBorderRadius object = getBorderRadiusAsObject();
+			// checks if there is the same value
+			if (object.areValuesEquals()) {
+				// the returns the same value
+				// in whatever property
+				return object.getTopLeft();
+			}
+		}
+		// if here, the property is missing
+		// then returns default
+		return DEFAULT_BORDER_RADIUS;
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	public BarBorderRadius getBorderRadiusAsObject() {
+		// checks if was stored as object
+		if (isType(Property.BORDER_RADIUS, ObjectType.OBJECT)) {
+			return BarBorderRadius.FACTORY.create(getValue(Property.BORDER_RADIUS));
+		} else if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
+			// if here, the property is a number
+			// then returns new border radius object
+			return new BarBorderRadius(getBorderRadius());
+		}
+		// if here, the property is missing
+		// then returns null
+		return null;
+	}
+
 	// ---------------------------
 	// CALLBACKS
 	// ---------------------------
@@ -354,6 +437,45 @@ public final class MatrixDataset extends HoverFlexDataset {
 		setValue(Property.HEIGHT, heightCallback);
 	}
 
+	/**
+	 * Sets the callback to set the border radius (in pixels).
+	 * 
+	 * @param borderRadiusCallback the border radius callback
+	 */
+	public void setBorderRadius(BorderRadiusCallback borderRadiusCallback) {
+		// sets the callback
+		this.borderRadiusCallback = borderRadiusCallback;
+		// checks if consistent
+		if (borderRadiusCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.BORDER_RADIUS, borderRadiusCallbackProxy.getProxy());
+		} else {
+			// otherwise removes the properties from java script object
+			remove(Property.BORDER_RADIUS);
+		}
+	}
+
+	/**
+	 * Returns the callback to set the border radius (in pixels).
+	 * 
+	 * @return the border radius callback
+	 */
+	public BorderRadiusCallback getBorderRadiustCallback() {
+		return borderRadiusCallback;
+	}
+
+	/**
+	 * Sets the callback to set the border radius (in pixels).
+	 * 
+	 * @param borderRadiusCallback the border radius callback
+	 */
+	public void setBorderRadius(NativeCallback borderRadiusCallback) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback) null);
+		// stores value
+		setValue(Property.BORDER_RADIUS, borderRadiusCallback);
+	}
+
 	// ---------------------------
 	// OVERRIDE METHODS
 	// ---------------------------
@@ -387,6 +509,39 @@ public final class MatrixDataset extends HoverFlexDataset {
 	@Override
 	public List<Double> getData(boolean binding) {
 		throw new UnsupportedOperationException(INVALID_GET_DATA_CALL);
+	}
+
+	// ---------------------------
+	// INTERNALS METHODS
+	// ---------------------------
+
+	/**
+	 * Returns an integer or {@link BarBorderRadius} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as integer or {@link BarBorderRadius}
+	 */
+	final NativeObject onBorderRadius(DatasetContext context) {
+		int valueToReturn = DEFAULT_BORDER_RADIUS;
+		// gets value
+		Object value = ScriptableUtils.getOptionValue(context, getBorderRadiustCallback());
+		// checks if is an integer
+		if (value instanceof BarBorderRadius) {
+			// casts to border radius object
+			BarBorderRadius object = (BarBorderRadius) value;
+			// returns the native object
+			return object.toNativeObject();
+		} else if (value instanceof Number) {
+			// checks if is an number
+			// casts to number
+			Number number = (Number) value;
+			// stores to result
+			valueToReturn = number.intValue();
+		}
+		// cats to a object
+		BarBorderRadius object = new BarBorderRadius(valueToReturn);
+		// returns the native object
+		return object.toNativeObject();
 	}
 
 	/**

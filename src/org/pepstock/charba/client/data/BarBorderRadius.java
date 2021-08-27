@@ -197,6 +197,15 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	}
 
 	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	public NativeObject toNativeObject() {
+		return super.getNativeObject();
+	}
+
+	/**
 	 * Inner class to create bar border radius object by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
