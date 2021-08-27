@@ -291,7 +291,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 	
 ### Developing
 
-  * [#65](https://github.com/pepstock-org/Charba/issues/#65) changes OpenJDK distribution in GitHub Actions, using now `Zulu`. Thanks @carldea.
+  * [#65](https://github.com/pepstock-org/Charba/pull/65) changes OpenJDK distribution in GitHub Actions, using now `Zulu`. Thanks @carldea.
   * change dependency for Google Closure Compiler, [version v20210808](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20210808).
   * rename `parse` method of `JSON` class to `parseForObject`, to parse a string to a native object.
   * add `parseForArray` method of `JSON` class to parse a string to an array.
