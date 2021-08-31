@@ -32,8 +32,7 @@ import org.pepstock.charba.client.items.Undefined;
 public final class MatrixDataPoint extends AbstractDataPoint {
 
 	/**
-	 * Name of properties of native object.<br>
-	 * No private because it is used by time series item
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
