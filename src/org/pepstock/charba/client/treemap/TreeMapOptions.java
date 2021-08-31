@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.treemap;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.configuration.Interaction;
 import org.pepstock.charba.client.configuration.Tooltips;
@@ -65,16 +64,6 @@ public final class TreeMapOptions extends ConfigurationOptions {
 	@Override
 	public Interaction getInteraction() {
 		return interaction;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getAxisById(int)
-	 */
-	@Override
-	protected final Axis getAxisById(int id) {
-		return null;
 	}
 
 }

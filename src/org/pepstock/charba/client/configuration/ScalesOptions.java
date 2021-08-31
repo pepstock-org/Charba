@@ -73,7 +73,7 @@ public abstract class ScalesOptions extends ConfigurationOptions {
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getAxisById(int)
 	 */
 	@Override
-	protected Axis getAxisById(int id) {
+	protected final Axis getAxisById(int id) {
 		// gets all axes
 		// uses the get scale method instead of simple reference
 		// because the scale object can be overrided
