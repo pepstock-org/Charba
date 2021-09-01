@@ -85,10 +85,50 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the object with an empty native object
+	 * Creates the object with an empty native object.
 	 */
 	public TooltipLabelColor() {
 		super();
+	}
+
+	/**
+	 * Creates the object with initial colors.
+	 * 
+	 * @param backgroundColor background color to be set
+	 */
+	public TooltipLabelColor(IsColor backgroundColor) {
+		this(backgroundColor, null);
+	}
+
+	/**
+	 * Creates the object with initial colors.
+	 * 
+	 * @param backgroundColor background color to be set
+	 * @param borderColor border color to be set
+	 */
+	public TooltipLabelColor(IsColor backgroundColor, IsColor borderColor) {
+		this(IsColor.checkAndGetValue(backgroundColor), IsColor.checkAndGetValue(borderColor));
+	}
+
+	/**
+	 * Creates the object with initial colors.
+	 * 
+	 * @param backgroundColor background color to be set
+	 */
+	public TooltipLabelColor(String backgroundColor) {
+		this(backgroundColor, null);
+	}
+
+	/**
+	 * Creates the object with initial colors.
+	 * 
+	 * @param backgroundColor background color to be set
+	 * @param borderColor border color to be set
+	 */
+	public TooltipLabelColor(String backgroundColor, String borderColor) {
+		this();
+		setBackgroundColor(backgroundColor);
+		setBorderColor(backgroundColor);
 	}
 
 	/**
@@ -105,7 +145,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * 
 	 * @param backgroundColor the background color of the tooltip item
 	 */
-	void setBackgroundColor(String backgroundColor) {
+	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.BACKGROUND_COLOR, backgroundColor);
 	}
 
@@ -212,7 +252,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * 
 	 * @return the background color of the label.
 	 */
-	private String getBackgroundColorAsString() {
+	public String getBackgroundColorAsString() {
 		return getValue(Property.BACKGROUND_COLOR, Defaults.get().getGlobal().getTooltips().getBackgroundColorAsString());
 	}
 
@@ -253,7 +293,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * 
 	 * @return the background color or <code>null</code> if is not a pattern
 	 */
-	public final Pattern getBackgroundColorAsPattern() {
+	public Pattern getBackgroundColorAsPattern() {
 		return PatternBuilder.retrieve(getBackgroundColorAsCanvasPattern());
 	}
 
@@ -262,7 +302,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * 
 	 * @return the background color or <code>null</code> if is not a canvas pattern
 	 */
-	public final CanvasPatternItem getBackgroundColorAsCanvasPattern() {
+	public CanvasPatternItem getBackgroundColorAsCanvasPattern() {
 		// checks if the the background color has been set as color
 		if (isBackgroundColorAsPattern()) {
 			return getValue(Property.BACKGROUND_COLOR, (CanvasPatternItem) null);
@@ -294,7 +334,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * 
 	 * @param borderColor border color
 	 */
-	void setBorderColor(String borderColor) {
+	public void setBorderColor(String borderColor) {
 		setValue(Property.BORDER_COLOR, borderColor);
 	}
 
@@ -312,7 +352,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * 
 	 * @param gradient the border color of the tooltip item as canvas gradient
 	 */
-	void setBorderColor(CanvasGradientItem gradient) {
+	public void setBorderColor(CanvasGradientItem gradient) {
 		setValue(Property.BORDER_COLOR, gradient);
 	}
 
@@ -342,7 +382,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * 
 	 * @return the border color of the label.
 	 */
-	private String getBorderColorAsString() {
+	public String getBorderColorAsString() {
 		return getValue(Property.BORDER_COLOR, Defaults.get().getGlobal().getTooltips().getBorderColorAsString());
 	}
 

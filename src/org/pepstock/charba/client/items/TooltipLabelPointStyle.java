@@ -77,6 +77,36 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	}
 
 	/**
+	 * Creates the object setting the point style argument
+	 * 
+	 * @param poitnStyle initial point style value
+	 */
+	public TooltipLabelPointStyle(PointStyle poitnStyle) {
+		this();
+		setPointStyle(poitnStyle);
+	}
+
+	/**
+	 * Creates the object setting the point style argument
+	 * 
+	 * @param poitnStyle initial point style value
+	 */
+	public TooltipLabelPointStyle(Img poitnStyle) {
+		this();
+		setPointStyle(poitnStyle);
+	}
+
+	/**
+	 * Creates the object setting the point style argument
+	 * 
+	 * @param poitnStyle initial point style value
+	 */
+	public TooltipLabelPointStyle(Canvas poitnStyle) {
+		this();
+		setPointStyle(poitnStyle);
+	}
+
+	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
