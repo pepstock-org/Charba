@@ -61,7 +61,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'SankeyControllerResource' class.
 	 */
-	SANKEY_CONTROLLER_RESOURCE(ResourceName.SANKEY_CONTROLLER, 812315),
+	SANKEY_CONTROLLER_RESOURCE(ResourceName.SANKEY_CONTROLLER, 814983),
 	/**
 	 * Hash item for 'GeoControllerResource' class.
 	 */
