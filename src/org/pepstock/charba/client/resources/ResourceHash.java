@@ -45,7 +45,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */
-	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1451863),
+	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1368013),
 	/**
 	 * Hash item for 'MatrixControllerResource' class.
 	 */

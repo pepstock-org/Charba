@@ -35,13 +35,7 @@
       position: 'default',
       precision: 0,
       color: Chart.defaults.color,
-      font: {
-        family: chart.options.font.family,
-        size: chart.options.font.size,
-        style: chart.options.font.style,
-        weight: chart.options.font.weight,
-        lineHeight: chart.options.font.lineHeight,
-      },
+      font: Chart.helpers.toFont(chart.options.font),
       shadowOffsetX: 3,
       shadowOffsetY: 3,
       shadowColor: 'rgba(0,0,0,0.3)',
@@ -104,9 +98,9 @@
     var ctx = this.ctx;
     ctx.save();
 
-	this.font = typeof this.options.font === 'function' ? this.getFont(dataset, element, index) : this.options.font;
+	this.font = Chart.helpers.toFont(typeof this.options.font === 'function' ? this.getFont(dataset, element, index) : this.options.font, this.chart.options.font);
 
-    ctx.font = Chart.helpers.toFontString(this.font);
+    ctx.font = this.font.string;
     var renderInfo = this.getRenderInfo(element, label);
     if (!this.drawable(element, label, renderInfo)) {
       ctx.restore();
@@ -230,17 +224,7 @@
   };
 
   Label.prototype.getFont = function (dataset, element, index) {
-  	const result = this.options.font(this.getContext(dataset, element, index));
-  	if (Chart.helpers.isObject(result)) {
-  	  return {
-        family: typeof result.family === 'undefined' ? this.chart.options.font.family : result.family,
-        size: typeof result.size === 'undefined' ? this.chart.options.font.size : result.size,
-        style: typeof result.style === 'undefined' ? this.chart.options.font.style : result.style,
-        weight: typeof result.weight === 'undefined' ? this.chart.options.font.weight : result.weight,
-        lineHeight: typeof result.lineHeight === 'undefined' ? this.chart.options.font.lineHeight : result.lineHeight,
-      };
-  	}
-    return this.chart.options.font;
+  	return this.options.font(this.getContext(dataset, element, index));
   };
   
   Label.prototype.getFontColor = function (dataset, element, index) {
