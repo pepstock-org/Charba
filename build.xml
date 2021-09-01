@@ -62,7 +62,7 @@
 	<property name="javascript.chartjs.minify.file" value="chart.min.js" />
 
 	<!-- 
-		EXTENSIONS CHART.JS plugins 
+		EXTENSIONS CHART.JS plugins and controllers
 	-->
 	<property name="javascript.annotations.minify.file" value="chartjs-plugin-annotation.min.js" />
 	<property name="javascript.datalabels.minify.file" value="chartjs-plugin-datalabels.min.js" />
@@ -70,6 +70,7 @@
 	<property name="javascript.hammer.minify.file" value="hammer.min.js" />
 	<property name="javascript.geo.minify.file" value="chartjs-chart-geo.min.js" />
 	<property name="javascript.treemap.minify.file" value="chartjs-chart-treemap.min.js" />
+	<property name="javascript.sankey.minify.file" value="chartjs-chart-sankey.min.js" />
 	<!-- 
 		CHART.JS date adapters 
 	-->
@@ -577,6 +578,7 @@
 		<!-- invokes code generator -->
 		<echo>Creating CHARBA injectable resources...</echo>
 		<java classname="org.pepstock.charba.codegen.InjectableResourceGenerator">
+		  <sysproperty key="java.util.logging.SimpleFormatter.format" value="%4$-7s %5$s %n"/>
 		  <classpath>
 		    <pathelement location="${classes.dir}"/>
 		  </classpath>
@@ -694,6 +696,15 @@
 			<fileset dir="${retrieve.dir}" includes="${javascript.treemap.minify.file}" />
 		</delete>
 		<get src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@${depver.treemap}" dest="${retrieve.dir}/${javascript.treemap.minify.file}" />
+	</target>
+
+	<target name="retrieveOfficialSankey">
+		<echo>Retrieve Sankey controller minify javascript resource - version ${depver.sankey}</echo>
+		<mkdir dir="${retrieve.dir}" />
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${retrieve.dir}" includes="${javascript.sankey.minify.file}" />
+		</delete>
+		<get src="https://cdn.jsdelivr.net/npm/chartjs-chart-sankey@${depver.sankey}" dest="${retrieve.dir}/${javascript.sankey.minify.file}" />
 	</target>
 
 </project>

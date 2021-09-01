@@ -24,6 +24,10 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -152,6 +156,10 @@ public class InjectableResourceGenerator {
 	private static final String ADDITIONAL_RESOURCE_NAME_PACKAGE = "import org.pepstock.charba.client.resources.ResourceName;";
 	// collection of escape result
 	private static final Map<String, EscapeResult> ESCAPE_RESULTS = new HashMap<>();
+	// digest algorithm
+	private static final String ALGORITHM = "SHA-256";
+	// message diget instance
+	private static MessageDigest DIGEST;
 
 	/**
 	 * Main program of code generator.<br>
@@ -160,8 +168,11 @@ public class InjectableResourceGenerator {
 	 * @param args no argument are need
 	 * @throws IOException occurs if any error occurs reading or writing the files
 	 * @throws FileNotFoundException occurs if the template, properties or java script files don't exist
+	 * @throws NoSuchAlgorithmException
 	 */
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+	public static void main(String[] args) throws FileNotFoundException, IOException, NoSuchAlgorithmException {
+		// creates message digest
+		DIGEST = MessageDigest.getInstance(ALGORITHM);
 		// reads the template of java classes to create
 		StringBuilder templateSource = readTemplate(TEMPLATE_FILE);
 		// reads the template of hash enum java class to create
@@ -191,7 +202,7 @@ public class InjectableResourceGenerator {
 				// start reading the java script file
 				File javaScriptFile = new File(javaScriptSourceFolder, javaScriptFileName);
 				// gets the content of java script file in bytes
-				byte[] buffer = readJavaScriptFile(javaScriptFile);
+				byte[] buffer = readFileToBuffer(javaScriptFile);
 				// escapes the java script content in order to be able to assign it
 				// to a java string
 				EscapeResult escapeResult = escapeJavaScriptContent(resourceName, buffer);
@@ -228,9 +239,13 @@ public class InjectableResourceGenerator {
 				}
 				// replaces the java script content into template
 				changedTemplate = changedTemplate.replaceAll(ADDITIONAL_PACKAGES_VARIABLE, Matcher.quoteReplacement(importBuilder.toString()));
-				// writes the java class
-				writeJavaClass(packageName, className, changedTemplate);
-				LOGGER.info("Code generation for '" + javaScriptFileName + "' is completed");
+				// writes the java class if changed
+				if (writeJavaClass(packageName, className, changedTemplate)) {
+					LOGGER.info("Code generation for '" + javaScriptFileName + "' is completed");
+				} else {
+					// if here, no changes
+					LOGGER.warning("Code generation for '" + javaScriptFileName + "' is skipped because no changes to apply");
+				}
 				// stores escape result
 				ESCAPE_RESULTS.put(className, escapeResult);
 			} else {
@@ -244,9 +259,13 @@ public class InjectableResourceGenerator {
 		// checks if escape result map is consistent
 		if (!ESCAPE_RESULTS.isEmpty()) {
 			LOGGER.info("Started code generation code for '" + HASH_CLASS_NAME + JAVA_EXTENSION + "'");
-			// creates the resource hash enumeration
-			createResourceHash(templateHashSource);
-			LOGGER.info("Code generation for '" + HASH_CLASS_NAME + JAVA_EXTENSION + "' is completed");
+			// creates the resource hash enumeration if change
+			if (createResourceHash(templateHashSource)) {
+				LOGGER.info("Code generation for '" + HASH_CLASS_NAME + JAVA_EXTENSION + "' is completed");
+			} else {
+				// if here, no changes
+				LOGGER.warning("Code generation for '" + HASH_CLASS_NAME + JAVA_EXTENSION + "' is skipped because no changes to apply");
+			}
 		} else {
 			// if here the escape result map is empty
 			LOGGER.warning("Escape result map is empty and the " + HASH_CLASS_NAME + " is not created");
@@ -311,20 +330,20 @@ public class InjectableResourceGenerator {
 	}
 
 	/**
-	 * Reads the java script file to wrap into the java class.
+	 * Reads the file to a buffer of bytes.
 	 * 
-	 * @param javaScriptFile java script file locator
-	 * @return an array of bytes which represents the content of java script file
-	 * @throws IOException occurs if the java script file not exists or any errors occurred reading the file
+	 * @param file java script file locator
+	 * @return an array of bytes which represents the content of file
+	 * @throws IOException occurs if the file not exists or any errors occurred reading the file
 	 */
-	private static byte[] readJavaScriptFile(File javaScriptFile) throws IOException {
+	private static byte[] readFileToBuffer(File file) throws IOException {
 		// creates reference java script file stream
 		FileInputStream javaScriptFileInputStream = null;
 		try {
 			// creates instance java script file stream
-			javaScriptFileInputStream = new FileInputStream(javaScriptFile);
+			javaScriptFileInputStream = new FileInputStream(file);
 			// gets the length of file
-			int fileSize = (int) javaScriptFile.length();
+			int fileSize = (int) file.length();
 			// creates an array of bytes with the file size dimension
 			byte[] buffer = new byte[fileSize];
 			// reads the java script file
@@ -346,15 +365,29 @@ public class InjectableResourceGenerator {
 	 * @param packageName package name of java class
 	 * @param className class name of java class
 	 * @param changedTemplate the content of the java class
+	 * @return <code>true</code> if the file has been changed and replaced
 	 * @throws IOException occurs if any errors writing the file
 	 */
-	private static final void writeJavaClass(String packageName, String className, String changedTemplate) throws IOException {
+	private static final boolean writeJavaClass(String packageName, String className, String changedTemplate) throws IOException {
 		// gets the folder where the java class must be stored
 		// SRC plus package name
 		File targetJavaPackageFolder = new File(SRC_FOLDER, packageName.replace(DOT_STRING, FILE_SEPARATOR_STRING));
 		// gets the whole file where the java class must be stored
 		// SRC plus package name plus class name plus java extension
 		File targetJavaClassFile = new File(targetJavaPackageFolder, className + JAVA_EXTENSION);
+		// reads existing file
+		if (targetJavaClassFile.exists()) {
+			// reads java file and encodes it
+			byte[] encodedHashOfExistingFile = DIGEST.digest(readFileToBuffer(targetJavaClassFile));
+			// reads the byte of template and encodes it
+			byte[] encodedhashOfNewFile = DIGEST.digest(changedTemplate.getBytes(StandardCharsets.UTF_8));
+			// checks if the bytes are equals
+			if (Arrays.equals(encodedHashOfExistingFile, encodedhashOfNewFile)) {
+				// files are equals
+				// skips it
+				return false;
+			}
+		}
 		// creates a print stream reference
 		PrintStream targetJavaClassFileOutputStream = null;
 		try {
@@ -362,6 +395,8 @@ public class InjectableResourceGenerator {
 			targetJavaClassFileOutputStream = new PrintStream(targetJavaClassFile, UTF8.name());
 			// writes the java class
 			targetJavaClassFileOutputStream.print(changedTemplate);
+			// returns true
+			return true;
 		} catch (UnsupportedEncodingException e) {
 			// charset not supported
 			throw new IOException(e);
@@ -487,9 +522,10 @@ public class InjectableResourceGenerator {
 	 * Creates and writes the java class with all hash for each java script resource.
 	 * 
 	 * @param templateHashSource java class template for the enumeration
+	 * @return <code>true</code> if the file has been changed and replaced
 	 * @throws IOException occurs if any errors occurred writing the stream
 	 */
-	private static void createResourceHash(StringBuilder templateHashSource) throws IOException {
+	private static boolean createResourceHash(StringBuilder templateHashSource) throws IOException {
 		// creates items buffer
 		final StringBuilder hashEnum = new StringBuilder();
 		// scans all escape results
@@ -519,7 +555,7 @@ public class InjectableResourceGenerator {
 		// replaces the enum items into template
 		changedTemplate = changedTemplate.replaceAll(HASH_ITEMS_VARIABLE, Matcher.quoteReplacement(hashEnum.toString()));
 		// writes the java class
-		writeJavaClass(HASH_PACKAGE_NAME, HASH_CLASS_NAME, changedTemplate);
+		return writeJavaClass(HASH_PACKAGE_NAME, HASH_CLASS_NAME, changedTemplate);
 	}
 
 	/**
