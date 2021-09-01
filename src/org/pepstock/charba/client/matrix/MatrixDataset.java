@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.matrix;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
@@ -26,6 +27,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjec
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -50,6 +52,10 @@ import org.pepstock.charba.client.matrix.enums.Anchor;
 public final class MatrixDataset extends HoverFlexDataset {
 
 	/**
+	 * Factory to create {@link MatrixDataPoint}s.
+	 */
+	public static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
+	/**
 	 * Default border width, <b>{@value}</b>.
 	 */
 	public static final int DEFAULT_BORDER_WIDTH = 0;
@@ -70,8 +76,6 @@ public final class MatrixDataset extends HoverFlexDataset {
 	private static final String INVALID_SET_DATA_CALL = "'setData' method is not invokable by a matrix chart. Use 'setDataPoints' method";
 	// exception string message for getting data
 	private static final String INVALID_GET_DATA_CALL = "'getData' method is not invokable by a matrix chart. Use 'getDataPoints' method";
-	// factory to create data points
-	private static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -191,17 +195,40 @@ public final class MatrixDataset extends HoverFlexDataset {
 	public void setDataPoints(List<MatrixDataPoint> datapoints) {
 		setArrayValue(CommonProperty.DATA, ArrayObject.fromOrNull(datapoints));
 	}
-
+	
 	/**
 	 * Returns the matrix data property of a dataset for a chart is specified as an array of matrix data points
 	 * 
 	 * @return a list of matrix data points or an empty list of data points.
 	 */
 	public List<MatrixDataPoint> getDataPoints() {
-		// gets array
-		ArrayObject array = getArrayValue(CommonProperty.DATA);
-		// returns points
-		return ArrayListHelper.list(array, DATAPOINTS_FACTORY);
+		return getDataPoints(false);
+	}
+
+	/**
+	 * Returns the matrix data property of a dataset for a chart is specified as an array of matrix data points
+	 * 
+	 * @param binding if <code>true</code> binds the new array list in the container
+	 * @return a list of matrix data points or an empty list of data points
+	 */
+	public List<MatrixDataPoint> getDataPoints(boolean binding) {
+		// checks if is a numbers data type
+		if (has(CommonProperty.DATA)) {
+			// gets array
+			ArrayObject array = getArrayValue(CommonProperty.DATA);
+			// returns points
+			return ArrayListHelper.list(array, DATAPOINTS_FACTORY);
+		}
+		// checks if wants to bind the array
+		if (binding) {
+			ArrayObjectContainerList<MatrixDataPoint> result = new ArrayObjectContainerList<>();
+			// set value
+			setArrayValue(CommonProperty.DATA, ArrayObject.fromOrEmpty(result));
+			// returns list
+			return result;
+		}
+		// returns an empty list
+		return Collections.emptyList();
 	}
 
 	/**

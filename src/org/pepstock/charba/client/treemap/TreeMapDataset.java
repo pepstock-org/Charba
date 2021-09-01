@@ -22,6 +22,7 @@ import java.util.Set;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -63,19 +64,23 @@ import org.pepstock.charba.client.options.IsFont;
 public final class TreeMapDataset extends HoverFlexDataset {
 
 	/**
+	 * Factory to create {@link TreeMapDataPoint}s.
+	 */
+	public static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
+	/**
 	 * Default border width, <b>{@value}</b>.
 	 */
 	public static final int DEFAULT_BORDER_WIDTH = 0;
 	/**
-	 * Default color, <b>transparent</b>
+	 * Default color, <b>{@link HtmlColor#TRANSPARENT}</b>
 	 */
 	public static final String DEFAULT_COLOR = HtmlColor.TRANSPARENT.toRGBA();
 	/**
-	 * Default divider capstyle, <b>butt</b>
+	 * Default divider capstyle, <b>{@link CapStyle#BUTT}</b>
 	 */
 	public static final CapStyle DEFAULT_DIVIDER_CAP_STYLE = CapStyle.BUTT;
 	/**
-	 * Default divider color, <b>black</b>
+	 * Default divider color, <b>{@link HtmlColor#BLACK}</b>
 	 */
 	public static final String DEFAULT_DIVIDER_COLOR = HtmlColor.BLACK.toRGBA();
 	/**
@@ -107,8 +112,6 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	private static final String INVALID_SET_DATA_CALL = "'setData' method is not invokable by a treemap chart. Use 'setTree' or 'setTreeObjects' methods";
 	// exception string message for getting data
 	private static final String INVALID_GET_DATA_CALL = "'getData' method is not invokable by a treemap chart. Use 'getTree' or 'getTreeObjects' methods";
-	// factory to create data points
-	private static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
 	// factory to create dash items
 	private static final DashFactory DASH_FACTORY = new DashFactory();
 	// factory to create keys
@@ -206,14 +209,14 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		super(type, defaultValues, Dataset.DEFAULT_HIDDEN);
 		// gets inner elements
 		// FONT
-		this.font = new Font(Defaults.get().getGlobal().getFont(), getValue(Property.FONT));
+		this.font = new Font(getDefaultValues().getFont(), getValue(Property.FONT));
 		// checks if already added
 		if (!has(Property.FONT)) {
 			// sets the font
 			setValue(Property.FONT, this.font);
 		}
 		// HOVER FONT
-		this.hoverFont = new Font(Defaults.get().getGlobal().getFont(), getValue(Property.HOVER_FONT));
+		this.hoverFont = new Font(getDefaultValues().getFont(), getValue(Property.HOVER_FONT));
 		// checks if already added
 		if (!has(Property.HOVER_FONT)) {
 			// sets the font
@@ -541,7 +544,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 */
 	public List<String> getColorAsString() {
 		// checks if the property is a color
-		if (isType(Property.COLOR, ObjectType.STRING) && getColorCallback() == null) {
+		if (isType(Property.COLOR, ObjectType.ARRAY, ObjectType.STRING) && getColorCallback() == null) {
 			ArrayString array = getColors(Property.COLOR, DEFAULT_COLOR);
 			return ArrayListHelper.list(array);
 		}
@@ -591,7 +594,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 */
 	public List<String> getHoverColorAsString() {
 		// checks if the property is a color
-		if (isType(Property.HOVER_COLOR, ObjectType.STRING) && getHoverColorCallback() == null) {
+		if (isType(Property.HOVER_COLOR, ObjectType.ARRAY, ObjectType.STRING) && getHoverColorCallback() == null) {
 			ArrayString array = getColors(Property.HOVER_COLOR, DEFAULT_COLOR);
 			return ArrayListHelper.list(array);
 		}
@@ -824,6 +827,18 @@ public final class TreeMapDataset extends HoverFlexDataset {
 			remove(Property.COLOR);
 		}
 	}
+	
+	/**
+	 * Sets the color callback.
+	 * 
+	 * @param colorCallback the color callback.
+	 */
+	public void setColor(NativeCallback colorCallback) {
+		// resets callback
+		setColor((ColorCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.COLOR, colorCallback);
+	}
 
 	/**
 	 * Returns the hover color callback, if set, otherwise <code>null</code>.
@@ -850,6 +865,18 @@ public final class TreeMapDataset extends HoverFlexDataset {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.HOVER_COLOR);
 		}
+	}
+	
+	/**
+	 * Sets the hover color callback.
+	 * 
+	 * @param hoverColorCallback the color callback.
+	 */
+	public void setHoverColor(NativeCallback hoverColorCallback) {
+		// resets callback
+		setHoverColor((ColorCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HOVER_COLOR, hoverColorCallback);
 	}
 
 	// ---------------------------
