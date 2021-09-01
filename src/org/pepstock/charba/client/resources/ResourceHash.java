@@ -31,21 +31,9 @@ enum ResourceHash {
 	 */
 	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 15737955),
 	/**
-	 * Hash item for 'ChartJsResource' class.
-	 */
-	CHART_JS_RESOURCE(ResourceName.CHART, 16860378),
-	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
 	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 985014),
-	/**
-	 * Hash item for 'GeoControllerResource' class.
-	 */
-	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 8961254),
-	/**
-	 * Hash item for 'AnnotationPluginResource' class.
-	 */
-	ANNOTATION_PLUGIN_RESOURCE(ResourceName.ANNOTATION_PLUGIN, 1243091),
 	/**
 	 * Hash item for 'DataLabelsPluginResource' class.
 	 */
@@ -59,21 +47,37 @@ enum ResourceHash {
 	 */
 	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1451863),
 	/**
-	 * Hash item for 'ZoomPluginHammerResource' class.
-	 */
-	ZOOM_PLUGIN_HAMMER_RESOURCE(ResourceName.HAMMER_LIBRARY, 1881773),
-	/**
 	 * Hash item for 'MatrixControllerResource' class.
 	 */
 	MATRIX_CONTROLLER_RESOURCE(ResourceName.MATRIX_CONTROLLER, 313331),
 	/**
-	 * Hash item for 'LuxonAdapterResource' class.
-	 */
-	LUXON_ADAPTER_RESOURCE(ResourceName.DATE_TIME_ADAPTER, 160328),
-	/**
 	 * Hash item for 'TreeMapControllerResource' class.
 	 */
-	TREE_MAP_CONTROLLER_RESOURCE(ResourceName.TREEMAP_CONTROLLER, 859201);
+	TREE_MAP_CONTROLLER_RESOURCE(ResourceName.TREEMAP_CONTROLLER, 859201),
+	/**
+	 * Hash item for 'ChartJsResource' class.
+	 */
+	CHART_JS_RESOURCE(ResourceName.CHART, 16860378),
+	/**
+	 * Hash item for 'SankeyControllerResource' class.
+	 */
+	SANKEY_CONTROLLER_RESOURCE(ResourceName.SANKEY_CONTROLLER, 812315),
+	/**
+	 * Hash item for 'GeoControllerResource' class.
+	 */
+	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 8961254),
+	/**
+	 * Hash item for 'AnnotationPluginResource' class.
+	 */
+	ANNOTATION_PLUGIN_RESOURCE(ResourceName.ANNOTATION_PLUGIN, 1243091),
+	/**
+	 * Hash item for 'ZoomPluginHammerResource' class.
+	 */
+	ZOOM_PLUGIN_HAMMER_RESOURCE(ResourceName.HAMMER_LIBRARY, 1881773),
+	/**
+	 * Hash item for 'LuxonAdapterResource' class.
+	 */
+	LUXON_ADAPTER_RESOURCE(ResourceName.DATE_TIME_ADAPTER, 160328);
 	
 	// resource name instance
 	private final ResourceName resourceName;
