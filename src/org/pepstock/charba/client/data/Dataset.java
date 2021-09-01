@@ -944,6 +944,8 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// sets value
 		setValue(CommonProperty.CLIP, clip);
 	}
+	
+	
 
 	/**
 	 * Returns how to clip relative to the chart area.<br>
