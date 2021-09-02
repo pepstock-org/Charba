@@ -19,6 +19,7 @@ import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.options.IsScriptableFontProvider;
 
@@ -189,6 +190,16 @@ public final class Font extends AbstractDynamicConfiguration<IsFont> implements 
 	@Override
 	public String getLineHeightAsString() {
 		return checkAndGet().getLineHeightAsString();
+	}
+
+	/**
+	 * Creates a font options instance using default or cloning current instance.
+	 * 
+	 * @return a font options instance using default or cloning current instance
+	 */
+	@Override
+	public FontItem create() {
+		return checkAndGet().create();
 	}
 
 	/**

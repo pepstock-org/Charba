@@ -44,6 +44,7 @@ public final class FontItem extends AbstractFont {
 	public FontItem(IsDefaultFont defaultValues) {
 		super(defaultValues == null ? Defaults.get().getGlobal().getFont() : defaultValues);
 	}
+	
 
 	/**
 	 * Returns the native object instance.

@@ -300,6 +300,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * move `getStringProperty` and `getIntegerProperty` from `Id` class to `JsHelper` one.
   * use `outerHTML` property to get HTML string of an element instead of `innerHTML` with a temporary parent or a cloned instance.
   * reduce visibility of the classes of injectable resources provided out-of-the-box.
+  * use `Chart.helpers.toFont` method of CHART.JS to normalize the font object and to get the CSS string.
     
 License
 -------

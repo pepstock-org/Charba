@@ -19,6 +19,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.items.FontItem;
 
 /**
  * CHART.JS default values for font items, defined inside to children element of defaults (i.e. legend, title).<br>
@@ -93,6 +94,16 @@ public class DefaultRoutedFont implements IsDefaultFont {
 	@Override
 	public String getLineHeightAsString() {
 		return Defaults.get().getGlobal().getFont().getLineHeightAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFont#create()
+	 */
+	@Override
+	public FontItem create() {
+		return Defaults.get().getGlobal().getFont().create();
 	}
 
 }

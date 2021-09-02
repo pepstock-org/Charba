@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.items.FontItem;
 
 /**
  * Defaults for font option element, based on chart type.
@@ -95,6 +96,16 @@ public final class DefaultChartFont implements IsDefaultFont {
 	@Override
 	public String getLineHeightAsString() {
 		return delegatedFont.getLineHeightAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFont#create()
+	 */
+	@Override
+	public FontItem create() {
+		return delegatedFont.create();
 	}
 
 }

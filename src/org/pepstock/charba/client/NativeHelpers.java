@@ -62,4 +62,12 @@ final class NativeHelpers {
 	@JsMethod
 	native NativeObject getRelativePosition(BaseNativeEvent event, Chart chart);
 
+	/**
+	 * Parses font options and returns the font object.
+	 * 
+	 * @param font a object that contains font options to be parsed.
+	 * @return a font object
+	 */
+	@JsMethod
+	native NativeObject toFont(NativeObject font);
 }

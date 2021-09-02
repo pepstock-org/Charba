@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.FontItem;
@@ -75,9 +74,7 @@ public interface IsDefaultFont {
 	 * 
 	 * @return a font options instance using default or cloning current instance
 	 */
-	default FontItem create() {
-		return create(Defaults.get().getGlobal().getFont());
-	}
+	FontItem create();
 
 	/**
 	 * Creates a font options instance using default or cloning current instance.

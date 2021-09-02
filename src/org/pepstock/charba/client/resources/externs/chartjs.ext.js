@@ -191,6 +191,11 @@ CharbaChartHelpers.prototype.clone = function(source){};
  */
 CharbaChartHelpers.prototype.getRelativePosition = function(event, chart){};
 /**
+ * @param {Object} font
+ * @return {Object}
+ */
+CharbaChartHelpers.prototype.toFont = function(font){};
+/**
  * @constructor
  * @return {CharbaChartAdaptersDate}
  */

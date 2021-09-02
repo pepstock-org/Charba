@@ -17,12 +17,17 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.events.AbstractEvent;
+import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.items.ChartAreaNode;
+import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.items.IsArea;
+import org.pepstock.charba.client.options.AbstractImmutableFont;
+import org.pepstock.charba.client.options.IsImmutableFont;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -106,12 +111,28 @@ public final class Helpers {
 	/**
 	 * A common occurrence is taking an event, such as a click, and finding the data coordinates on the chart where the event occurred. It provides the relative point on canvas.
 	 * 
+	 * @param eventContext event context to be used for getting the point.
+	 * @return a point object
+	 */
+	public EventPoint getRelativePosition(ChartEventContext eventContext) {
+		// checks if even context is consistent
+		if (eventContext != null) {
+			return getRelativePosition(eventContext.getChart(), eventContext.getNativeEvent());
+		}
+		// if here, event context is not consistent
+		// then returns the default
+		return DEFAULT_EVENT_POINT;
+	}
+	
+	/**
+	 * A common occurrence is taking an event, such as a click, and finding the data coordinates on the chart where the event occurred. It provides the relative point on canvas.
+	 * 
 	 * @param chart chart instance
 	 * @param event native event to be used for getting the point.
 	 * @return a point object
 	 */
 	public EventPoint getRelativePosition(IsChart chart, AbstractEvent event) {
-		// checks if even this consistent
+		// checks if even is consistent
 		if (event != null) {
 			return getRelativePosition(chart, event.getNativeEvent());
 		}
@@ -119,7 +140,7 @@ public final class Helpers {
 		// then returns the default
 		return DEFAULT_EVENT_POINT;
 	}
-
+	
 	/**
 	 * A common occurrence is taking an event, such as a click, and finding the data coordinates on the chart where the event occurred. It provides the relative point on canvas.
 	 * 
@@ -128,7 +149,7 @@ public final class Helpers {
 	 * @return a point object
 	 */
 	public EventPoint getRelativePosition(IsChart chart, BaseNativeEvent event) {
-		// checks if even this consistent
+		// checks if even is consistent
 		if (Charts.hasNative(chart) && event != null) {
 			// creates and returns the point
 			return new EventPoint(nativeObject.getRelativePosition(event, Charts.getNative(chart)));
@@ -138,6 +159,40 @@ public final class Helpers {
 		return DEFAULT_EVENT_POINT;
 	}
 
+	/**
+	 * Parses font options and returns a normalized font object.
+	 * 
+	 * @param font a object that contains font options to be parsed.
+	 * @return a font object
+	 */
+	public IsImmutableFont toFont(IsDefaultFont font) {
+		// checks if argument is consistent
+		if (font != null) {
+			// creates and returns the point
+			return toFont(font.create());
+		}
+		// if here, event is not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Parses font options and returns a normalized font object.
+	 * 
+	 * @param font a object that contains font options to be parsed.
+	 * @return a font object
+	 */
+	public IsImmutableFont toFont(FontItem font) {
+		// checks if argument is consistent
+		if (font != null) {
+			// creates and returns the point
+			return new ImmutableFont(nativeObject.toFont(font.nativeObject()));
+		}
+		// if here, event is not consistent
+		// then returns null
+		return null;
+	}
+	
 	// --------------
 	// CHART
 	// --------------
@@ -339,6 +394,24 @@ public final class Helpers {
 		}
 		// if here, all values are consistent
 		return true;
+	}
+	
+	/**
+	 * Maps a font element normalized by CHART.JS by {@link Helpers#toFont(org.pepstock.charba.client.items.FontItem)}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	private static class ImmutableFont extends AbstractImmutableFont {
+
+		/**
+		 * Creates a immutable font to use, wrapping a native object instance, and providing a CSS string.
+		 * 
+		 * @param nativeObject native object to map java script properties
+		 */
+		private ImmutableFont(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+		
 	}
 
 }
