@@ -159,7 +159,23 @@ public class InjectableResourceGenerator {
 	// digest algorithm
 	private static final String ALGORITHM = "SHA-256";
 	// message diget instance
-	private static MessageDigest DIGEST;
+	private static final MessageDigest DIGEST;
+	// instantiate the digest with a static code
+	static {
+		// gets the temporary assignment
+		MessageDigest temporaryAssignment = null;
+	    try {
+			// creates message digest
+	    	temporaryAssignment = MessageDigest.getInstance(ALGORITHM);
+	    } catch (NoSuchAlgorithmException e) {
+	    	// unable to create the digest
+	    	LOGGER.severe(e.getMessage());
+	    	// closes process
+	    	throw new RuntimeException(e);
+	    }
+	    // stores the digest
+	    DIGEST = temporaryAssignment;
+	}
 
 	/**
 	 * Main program of code generator.<br>
@@ -171,8 +187,6 @@ public class InjectableResourceGenerator {
 	 * @throws NoSuchAlgorithmException
 	 */
 	public static void main(String[] args) throws FileNotFoundException, IOException, NoSuchAlgorithmException {
-		// creates message digest
-		DIGEST = MessageDigest.getInstance(ALGORITHM);
 		// reads the template of java classes to create
 		StringBuilder templateSource = readTemplate(TEMPLATE_FILE);
 		// reads the template of hash enum java class to create
