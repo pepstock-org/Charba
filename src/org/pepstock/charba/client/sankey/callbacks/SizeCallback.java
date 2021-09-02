@@ -21,7 +21,7 @@ import org.pepstock.charba.client.sankey.SankeyDataset;
 import org.pepstock.charba.client.sankey.enums.Size;
 
 /**
- * Callback interface of SANKEY callback to set <code>size</code> properties at runtime, to {@link SankeyDataset}.
+ * Callback interface of SANKEY callback to set <code>size</code> property at runtime, to {@link SankeyDataset}.
  * 
  * @author Andrea "Stock" Stocchero
  *
