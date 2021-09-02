@@ -49,7 +49,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'MatrixControllerResource' class.
 	 */
-	MATRIX_CONTROLLER_RESOURCE(ResourceName.MATRIX_CONTROLLER, 313331),
+	MATRIX_CONTROLLER_RESOURCE(ResourceName.MATRIX_CONTROLLER, 313329),
 	/**
 	 * Hash item for 'TreeMapControllerResource' class.
 	 */
@@ -61,7 +61,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'SankeyControllerResource' class.
 	 */
-	SANKEY_CONTROLLER_RESOURCE(ResourceName.SANKEY_CONTROLLER, 814983),
+	SANKEY_CONTROLLER_RESOURCE(ResourceName.SANKEY_CONTROLLER, 837597),
 	/**
 	 * Hash item for 'GeoControllerResource' class.
 	 */

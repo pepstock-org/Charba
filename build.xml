@@ -70,6 +70,7 @@
 	<property name="javascript.hammer.minify.file" value="hammer.min.js" />
 	<property name="javascript.geo.minify.file" value="chartjs-chart-geo.min.js" />
 	<property name="javascript.treemap.minify.file" value="chartjs-chart-treemap.min.js" />
+	<property name="javascript.matrix.minify.file" value="chartjs-chart-matrix.min.js" />
 	<property name="javascript.sankey.minify.file" value="chartjs-chart-sankey.min.js" />
 	<!-- 
 		CHART.JS date adapters 
@@ -696,6 +697,15 @@
 			<fileset dir="${retrieve.dir}" includes="${javascript.treemap.minify.file}" />
 		</delete>
 		<get src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@${depver.treemap}" dest="${retrieve.dir}/${javascript.treemap.minify.file}" />
+	</target>
+
+	<target name="retrieveOfficialMatrix">
+		<echo>Retrieve Matrix controller minify javascript resource - version ${depver.matrix}</echo>
+		<mkdir dir="${retrieve.dir}" />
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${retrieve.dir}" includes="${javascript.matrix.minify.file}" />
+		</delete>
+		<get src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@${depver.matrix}" dest="${retrieve.dir}/${javascript.matrix.minify.file}" />
 	</target>
 
 	<target name="retrieveOfficialSankey">

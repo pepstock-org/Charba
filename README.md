@@ -273,9 +273,9 @@ Here you can find the list of enhancements and updates available on `master` bra
 
   * import CHART.JS TREEMAP controller [version v1.0.2](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v1.0.2).
     * enable tree map chart type.
-  * import CHART.JS MATRIX controller [version v1.0.2](https://github.com/kurkle/chartjs-chart-matrix/releases/tag/v1.0.2).
+  * import CHART.JS MATRIX controller [version v1.1.0](https://github.com/kurkle/chartjs-chart-matrix/releases/tag/v1.1.0).
     * enable matrix chart type.
-  * import CHART.JS SANKEY controller [version v0.7.1](https://github.com/kurkle/chartjs-chart-sankey/releases/tag/v0.7.1).
+  * import CHART.JS SANKEY controller [version v0.8.0](https://github.com/kurkle/chartjs-chart-sankey/releases/tag/v0.8.0).
     * enable sankey chart type.
   * import CHART.JS [version v3.5.1](https://github.com/chartjs/Chart.js/releases/tag/v3.5.1).
   * import CHART.JS GEO controller [version v3.5.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.5.1).

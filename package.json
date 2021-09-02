@@ -18,7 +18,8 @@
     "chartjs-plugin-annotation": "1.0.2",
     "chartjs-chart-geo": "3.5.1",
     "chartjs-chart-treemap": "1.0.2",
-    "chartjs-chart-matrix": "1.0.2",
+    "chartjs-chart-matrix": "1.1.0",
+    "chartjs-chart-sankey": "0.8.0",
     "luxon": "2.0.2",
     "hammerjs": "2.0.8"
   }
