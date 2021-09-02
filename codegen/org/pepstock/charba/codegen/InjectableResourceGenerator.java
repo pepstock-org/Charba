@@ -164,17 +164,17 @@ public class InjectableResourceGenerator {
 	static {
 		// gets the temporary assignment
 		MessageDigest temporaryAssignment = null;
-	    try {
+		try {
 			// creates message digest
-	    	temporaryAssignment = MessageDigest.getInstance(ALGORITHM);
-	    } catch (NoSuchAlgorithmException e) {
-	    	// unable to create the digest
-	    	LOGGER.severe(e.getMessage());
-	    	// closes process
-	    	throw new RuntimeException(e);
-	    }
-	    // stores the digest
-	    DIGEST = temporaryAssignment;
+			temporaryAssignment = MessageDigest.getInstance(ALGORITHM);
+		} catch (NoSuchAlgorithmException e) {
+			// unable to create the digest
+			LOGGER.severe(e.getMessage());
+			// closes process
+			throw new RuntimeException(e);
+		}
+		// stores the digest
+		DIGEST = temporaryAssignment;
 	}
 
 	/**
