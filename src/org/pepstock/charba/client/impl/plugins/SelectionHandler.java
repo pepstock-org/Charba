@@ -649,16 +649,18 @@ final class SelectionHandler {
 			// stores 0 for label height
 			selectionCleaner.setLabelHeight(SelectionCleaner.DEFAULT_VALUE);
 		} else {
+			// gets immutable font
+			IsImmutableFont font = Helpers.get().toFont(selectionCleaner.getFont());
 			// if here there is a label
-			// therefore the height is based on font size
-			double fontSize = selectionCleaner.getFont().getSize();
+			// therefore the height is based on line height
+			double lineHeight = font.getLineHeight();
 			// adds font size to height
-			height += fontSize;
+			height += lineHeight;
 			// sets the height to image or
 			// 0 if there is ONLY a label to show
-			selectionCleaner.setImageHeight(Render.LABEL.equals(selectionCleaner.getRender()) ? SelectionCleaner.DEFAULT_VALUE : fontSize);
+			selectionCleaner.setImageHeight(Render.LABEL.equals(selectionCleaner.getRender()) ? SelectionCleaner.DEFAULT_VALUE : lineHeight);
 			// stores label height
-			selectionCleaner.setLabelHeight(fontSize);
+			selectionCleaner.setLabelHeight(lineHeight);
 		}
 		// adds padding bottom
 		height += selectionCleaner.getPadding();
