@@ -117,9 +117,7 @@ public final class SankeyDataset extends Dataset {
 		FONT("font"),
 		NODE_WIDTH("nodeWidth"),
 		PADDING("padding"),
-		SIZE("size"),
-		// overrides options
-		CLIP("clip");
+		SIZE("size");
 
 		// name value of property
 		private final String value;
@@ -208,7 +206,7 @@ public final class SankeyDataset extends Dataset {
 		}
 		// sets overriding methods as default
 		setParsing(true);
-		setValue(Property.CLIP, false);
+		setClip(false);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -823,6 +821,17 @@ public final class SankeyDataset extends Dataset {
 	@Override
 	public void setParsing(boolean parsing) {
 		super.setParsing(true);
+	}
+
+	/**
+	 * Sets how to clip relative to the chart area.<br>
+	 * If <code>false</code> allows overflow, otherwise <code>true</code> clips that many pixels inside the chart area.
+	 * 
+	 * @param clip If <code>false</code> allows overflow, otherwise <code>true</code> clips that many pixels inside the chart area.
+	 */
+	@Override
+	public void setClip(boolean clip) {
+		super.setClip(false);
 	}
 
 	/**
