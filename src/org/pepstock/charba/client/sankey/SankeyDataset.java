@@ -364,7 +364,7 @@ public final class SankeyDataset extends Dataset {
 	 */
 	public List<String> getColorFromAsString() {
 		// checks if the property is a color
-		if (isType(Property.COLOR_FROM, ObjectType.ARRAY, ObjectType.STRING)) { // && getColorCallback() == null) {
+		if (isType(Property.COLOR_FROM, ObjectType.ARRAY, ObjectType.STRING)) {
 			ArrayString array = getValueOrArray(Property.COLOR_FROM, DEFAULT_COLOR_FROM);
 			return ArrayListHelper.list(array);
 		}
@@ -414,7 +414,7 @@ public final class SankeyDataset extends Dataset {
 	 */
 	public List<String> getColorToAsString() {
 		// checks if the property is a color
-		if (isType(Property.COLOR_TO, ObjectType.ARRAY, ObjectType.STRING)) { // && getColorCallback() == null) {
+		if (isType(Property.COLOR_TO, ObjectType.ARRAY, ObjectType.STRING)) {
 			ArrayString array = getValueOrArray(Property.COLOR_TO, DEFAULT_COLOR_TO);
 			return ArrayListHelper.list(array);
 		}
