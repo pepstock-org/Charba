@@ -47,7 +47,9 @@ import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.AbstractFont;
 import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.sankey.callbacks.ColorModeCallback;
+import org.pepstock.charba.client.sankey.callbacks.SizeCallback;
 import org.pepstock.charba.client.sankey.enums.ColorMode;
+import org.pepstock.charba.client.sankey.enums.Size;
 
 /**
  * Sankey charts are a type of flow diagram in which the width of the arrows is proportional to the flow rate.<br>
@@ -99,17 +101,18 @@ public final class SankeyDataset extends Dataset {
 	private enum Property implements Key
 	{
 		// flow colors
-		COLOR_MODE("colorMode"),
 		COLOR_FROM("colorFrom"),
+		COLOR_MODE("colorMode"),
 		COLOR_TO("colorTo"),
 		// inner objects
-		PRIORITY("priority"),
 		LABELS("labels"),
+		PRIORITY("priority"),
 		// sankey elements style
 		BORDER_COLOR("borderColor"),
 		COLOR("color"),
 		FONT("font"),
 		NODE_WIDTH("nodeWidth"),
+		SIZE("size"),
 		// overrides options
 		CLIP("clip");
 
@@ -146,6 +149,8 @@ public final class SankeyDataset extends Dataset {
 	private final CallbackProxy<ProxyObjectCallback> colorFromCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the color to function
 	private final CallbackProxy<ProxyObjectCallback> colorToCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the size function
+	private final CallbackProxy<ProxyStringCallback> sizeCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// colorTo callback instance
 	private ColorCallback<DatasetContext> colorToCallback = null;
@@ -153,6 +158,8 @@ public final class SankeyDataset extends Dataset {
 	private ColorCallback<DatasetContext> colorFromCallback = null;
 	// color mode callback instance
 	private ColorModeCallback colorModeCallback = null;
+	// size callback instance
+	private SizeCallback sizeCallback = null;
 	// font instance
 	private final Font font;
 
@@ -201,6 +208,8 @@ public final class SankeyDataset extends Dataset {
 		this.colorToCallbackProxy.setCallback(context -> invokeColorCallback(createContext(context), getColorToCallback(), DEFAULT_COLOR_TO));
 		// sets function to proxy callback in order to invoke the java interface
 		this.colorModeCallbackProxy.setCallback(context -> onColorMode(createContext(context)));
+		// sets function to proxy callback in order to invoke the java interface
+		this.sizeCallbackProxy.setCallback(context -> onSize(createContext(context)));
 	}
 
 	/**
@@ -316,11 +325,35 @@ public final class SankeyDataset extends Dataset {
 	}
 
 	/**
+	 * Sets {@link Size#MIN} if flow overlap is preferred.
+	 * 
+	 * @param size {@link Size#MIN} if flow overlap is preferred
+	 */
+	public void setSize(Size size) {
+		// resets callback
+		setSize((SizeCallback) null);
+		// stores value
+		setValue(Property.SIZE, size);
+	}
+
+	/**
+	 * Returns {@link Size#MIN} if flow overlap is preferred.
+	 * 
+	 * @return {@link Size#MIN} if flow overlap is preferred
+	 */
+	public Size getSize() {
+		return getValue(Property.SIZE, Size.values(), Size.MAX);
+	}
+
+	/**
 	 * Sets the color mode between sankey elements.
 	 * 
 	 * @param colorMode the color mode between sankey elements
 	 */
 	public void setColorMode(ColorMode colorMode) {
+		// resets callback
+		setColorMode((ColorModeCallback) null);
+		// stores value
 		setValue(Property.COLOR_MODE, colorMode);
 	}
 
@@ -662,6 +695,45 @@ public final class SankeyDataset extends Dataset {
 		setValue(Property.COLOR_MODE, colorModeCallback);
 	}
 
+	/**
+	 * Returns the size callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the size callback, if set, otherwise <code>null</code>.
+	 */
+	public SizeCallback getSizeCallback() {
+		return sizeCallback;
+	}
+
+	/**
+	 * Sets the size callback.
+	 * 
+	 * @param sizeCallback the size callback.
+	 */
+	public void setSize(SizeCallback sizeCallback) {
+		// sets the callback
+		this.sizeCallback = sizeCallback;
+		// checks if callback is consistent
+		if (sizeCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.SIZE, sizeCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.SIZE);
+		}
+	}
+
+	/**
+	 * Sets the size callback.
+	 * 
+	 * @param sizeCallback the size callback.
+	 */
+	public void setSize(NativeCallback sizeCallback) {
+		// resets callback
+		setSize((SizeCallback) null);
+		// stores value
+		setValue(Property.SIZE, sizeCallback);
+	}
+
 	// ---------------------------
 	// OVERRIDE METHODS
 	// ---------------------------
@@ -794,6 +866,23 @@ public final class SankeyDataset extends Dataset {
 		}
 		// default result
 		return ColorMode.GRADIENT.value();
+	}
+
+	/**
+	 * Returns a {@link Size} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as {@link Size}
+	 */
+	private String onSize(DatasetContext context) {
+		// gets value
+		Size result = ScriptableUtils.getOptionValue(context, getSizeCallback());
+		// checks result
+		if (result != null) {
+			return result.value();
+		}
+		// default result
+		return Size.MAX.value();
 	}
 
 	/**
