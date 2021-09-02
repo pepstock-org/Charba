@@ -19,9 +19,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -46,7 +48,9 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.AbstractFont;
 import org.pepstock.charba.client.options.IsFont;
+import org.pepstock.charba.client.options.IsImmutableFont;
 import org.pepstock.charba.client.sankey.callbacks.ColorModeCallback;
+import org.pepstock.charba.client.sankey.callbacks.PaddingCallback;
 import org.pepstock.charba.client.sankey.callbacks.SizeCallback;
 import org.pepstock.charba.client.sankey.enums.ColorMode;
 import org.pepstock.charba.client.sankey.enums.Size;
@@ -112,6 +116,7 @@ public final class SankeyDataset extends Dataset {
 		COLOR("color"),
 		FONT("font"),
 		NODE_WIDTH("nodeWidth"),
+		PADDING("padding"),
 		SIZE("size"),
 		// overrides options
 		CLIP("clip");
@@ -151,6 +156,8 @@ public final class SankeyDataset extends Dataset {
 	private final CallbackProxy<ProxyObjectCallback> colorToCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the size function
 	private final CallbackProxy<ProxyStringCallback> sizeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the padding function
+	private final CallbackProxy<ProxyDoubleCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// colorTo callback instance
 	private ColorCallback<DatasetContext> colorToCallback = null;
@@ -160,6 +167,9 @@ public final class SankeyDataset extends Dataset {
 	private ColorModeCallback colorModeCallback = null;
 	// size callback instance
 	private SizeCallback sizeCallback = null;
+	// padding callback instance
+	private PaddingCallback paddingCallback = null;
+
 	// font instance
 	private final Font font;
 
@@ -210,6 +220,8 @@ public final class SankeyDataset extends Dataset {
 		this.colorModeCallbackProxy.setCallback(context -> onColorMode(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
 		this.sizeCallbackProxy.setCallback(context -> onSize(createContext(context)));
+		// sets function to proxy callback in order to invoke the java interface
+		this.paddingCallbackProxy.setCallback(context -> onPadding(createContext(context)));
 	}
 
 	/**
@@ -574,6 +586,30 @@ public final class SankeyDataset extends Dataset {
 		return getValue(Property.NODE_WIDTH, DEFAULT_NODE_WIDTH);
 	}
 
+	/**
+	 * Sets the padding between the top of the node and the first label to draw, when multiple lines for labels are set, in pixels.
+	 * 
+	 * @param padding the padding between the top of the node and the first label to draw, when multiple lines for labels are set, in pixels
+	 */
+	public void setPadding(double padding) {
+		// resets callback
+		setPadding((PaddingCallback) null);
+		// stores value
+		setValue(Property.PADDING, padding);
+	}
+
+	/**
+	 * Returns the padding between the top of the node and the first label to draw, when multiple lines for labels are set, in pixels.
+	 * 
+	 * @return the padding between the top of the node and the first label to draw, when multiple lines for labels are set, in pixels.
+	 */
+	public double getPadding() {
+		// gets default based on font
+		IsImmutableFont immutableFont = Helpers.get().toFont(getFont());
+		// default is font.lineHeight divided by 2
+		return getValue(Property.PADDING, immutableFont.getLineHeight() / 2);
+	}
+
 	// ---------------------------
 	// CALLBACKS METHODS
 	// ---------------------------
@@ -734,6 +770,45 @@ public final class SankeyDataset extends Dataset {
 		setValue(Property.SIZE, sizeCallback);
 	}
 
+	/**
+	 * Returns the padding callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the padding callback, if set, otherwise <code>null</code>.
+	 */
+	public PaddingCallback getPaddingCallback() {
+		return paddingCallback;
+	}
+
+	/**
+	 * Sets the padding callback.
+	 * 
+	 * @param paddingCallback the padding callback.
+	 */
+	public void setPadding(PaddingCallback paddingCallback) {
+		// sets the callback
+		this.paddingCallback = paddingCallback;
+		// checks if callback is consistent
+		if (paddingCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.PADDING, paddingCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.PADDING);
+		}
+	}
+
+	/**
+	 * Sets the padding callback.
+	 * 
+	 * @param paddingCallback the padding callback.
+	 */
+	public void setPadding(NativeCallback paddingCallback) {
+		// resets callback
+		setPadding((PaddingCallback) null);
+		// stores value
+		setValue(Property.PADDING, paddingCallback);
+	}
+
 	// ---------------------------
 	// OVERRIDE METHODS
 	// ---------------------------
@@ -883,6 +958,26 @@ public final class SankeyDataset extends Dataset {
 		}
 		// default result
 		return Size.MAX.value();
+	}
+
+	/**
+	 * Returns a padding as double when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as padding as double
+	 */
+	private double onPadding(DatasetContext context) {
+		// gets value
+		Double result = ScriptableUtils.getOptionValue(context, getPaddingCallback());
+		// checks result
+		if (result != null) {
+			return result.doubleValue();
+		}
+		// default result
+		// gets default based on font
+		IsImmutableFont immutableFont = Helpers.get().toFont(getFont());
+		// default is font.lineHeight divided by 2
+		return immutableFont.getLineHeight() / 2;
 	}
 
 	/**
