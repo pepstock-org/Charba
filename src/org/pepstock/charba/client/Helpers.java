@@ -158,6 +158,10 @@ public final class Helpers {
 		// then returns the default
 		return DEFAULT_EVENT_POINT;
 	}
+	
+	// --------------
+	// CHART
+	// --------------
 
 	/**
 	 * Parses font options and returns a normalized font object.
@@ -167,13 +171,8 @@ public final class Helpers {
 	 */
 	public IsImmutableFont toFont(IsDefaultFont font) {
 		// checks if argument is consistent
-		if (font != null) {
-			// creates and returns the point
-			return toFont(font.create());
-		}
-		// if here, event is not consistent
-		// then returns null
-		return null;
+		// creates and returns the font
+		return toFont(font != null ? font.create() : Defaults.get().getGlobal().getFont().create());
 	}
 
 	/**
@@ -185,12 +184,38 @@ public final class Helpers {
 	public IsImmutableFont toFont(FontItem font) {
 		// checks if argument is consistent
 		if (font != null) {
-			// creates and returns the point
+			// creates and returns the font
 			return new ImmutableFont(nativeObject.toFont(font.nativeObject()));
 		}
 		// if here, event is not consistent
-		// then returns null
-		return null;
+		// then returns defaults
+		return new ImmutableFont(Defaults.get().getGlobal().getFont().create().nativeObject());
+	}
+	
+	/**
+	 * Builds the font string (shorthand property of CSS font) to use in the canvas object.<br>
+	 * See <a href="https://www.w3schools.com/tags/canvas_font.asp">here</a> CSS specification.
+	 * 
+	 * @param font a object that contains font options to be parsed.
+	 * @return the font string to use in the canvas object.
+	 */
+	public String toFontString(IsDefaultFont font) {
+		// checks if argument is consistent
+		// creates and returns the CSS string
+		return toFont(font).toCSSString();
+	}
+
+	/**
+	 * Builds the font string (shorthand property of CSS font) to use in the canvas object.<br>
+	 * See <a href="https://www.w3schools.com/tags/canvas_font.asp">here</a> CSS specification.
+	 * 
+	 * @param font a object that contains font options to be parsed.
+	 * @return the font string to use in the canvas object.
+	 */
+	public String toFontString(FontItem font) {
+		// checks if argument is consistent
+		// creates and returns the CSS string
+		return toFont(font).toCSSString();
 	}
 	
 	// --------------

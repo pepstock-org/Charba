@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.Controller;
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
@@ -37,6 +38,7 @@ import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.options.IsImmutableFont;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -261,10 +263,12 @@ final class BaseMeterController extends AbstractController {
 		ctx.setFillColor(fontColor);
 		// sets alignment
 		ctx.setTextAlign(TextAlign.CENTER);
+		// gets immutable font
+		IsImmutableFont immutableFont = Helpers.get().toFont(font);
 		// checks if it must draw also the label
 		if ((Render.VALUE_AND_LABEL.equals(options.getRender()) || Render.PERCENTAGE_AND_LABEL.equals(options.getRender())) && label != null) {
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(font));
+			ctx.setFont(immutableFont.toCSSString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.BOTTOM);
 			// draws text
@@ -274,7 +278,7 @@ final class BaseMeterController extends AbstractController {
 				// re-calculates the font size for label
 				calculateFontSize(ctx, sideOfSquare, label, font);
 			}
-			ctx.setFont(Utilities.toCSSFontProperty(font));
+			ctx.setFont(immutableFont.toCSSString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
@@ -282,7 +286,7 @@ final class BaseMeterController extends AbstractController {
 		} else {
 			// if here it must draw ONLY the value
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(font));
+			ctx.setFont(immutableFont.toCSSString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.MIDDLE);
 			// draws text
@@ -309,7 +313,7 @@ final class BaseMeterController extends AbstractController {
 			// stores size
 			font.setSize(fontSize);
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(font));
+			ctx.setFont(Helpers.get().toFontString(font));
 			// gets metrics
 			TextMetricsItem metrics = ctx.measureText(value);
 			// if the width is inside of side (and padding) or

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartNode;
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -39,6 +40,7 @@ import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.IsImmutableFont;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -704,7 +706,7 @@ final class SelectionHandler {
 		// save context
 		ctx.save();
 		// sets font
-		ctx.setFont(Utilities.toCSSFontProperty(selectionCleaner.getFont()));
+		ctx.setFont(Helpers.get().toFontString(selectionCleaner.getFont()));
 		// gets metrics
 		TextMetricsItem metrics = ctx.measureText(selectionCleaner.getLabel());
 		// stores the label width
@@ -981,10 +983,11 @@ final class SelectionHandler {
 				ctx.strokeRect(selectionCleaner.getX() + borderIncrement, selectionCleaner.getY() + borderIncrement, selectionCleaner.getWidth() - SelectionCleaner.BORDER_WIDTH, selectionCleaner.getHeight() - SelectionCleaner.BORDER_WIDTH);
 			}
 		}
+		IsImmutableFont immtableFont = Helpers.get().toFont(selectionCleaner.getFont());
 		// checks based on render type what must be draw
 		if (Render.LABEL.equals(selectionCleaner.getRender())) {
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(selectionCleaner.getFont()));
+			ctx.setFont(immtableFont.toCSSString());
 			// sets color to canvas
 			ctx.setFillColor(selectionCleaner.getColorAsString());
 			// sets alignment from center point
@@ -993,7 +996,7 @@ final class SelectionHandler {
 			ctx.fillText(selectionCleaner.getLabel(), selectionCleaner.getLabelX(), selectionCleaner.getLabelY());
 		} else if (Render.LABEL_IMAGE.equals(selectionCleaner.getRender())) {
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(selectionCleaner.getFont()));
+			ctx.setFont(immtableFont.toCSSString());
 			// sets color to canvas
 			ctx.setFillColor(selectionCleaner.getColorAsString());
 			// sets alignment from center point
@@ -1012,7 +1015,7 @@ final class SelectionHandler {
 				ctx.drawImage(selectionCleaner.getImage(), selectionCleaner.getImageX(), selectionCleaner.getImageY(), selectionCleaner.getImageWidth(), selectionCleaner.getImageHeight());
 			}
 			// sets font
-			ctx.setFont(Utilities.toCSSFontProperty(selectionCleaner.getFont()));
+			ctx.setFont(immtableFont.toCSSString());
 			// sets color to canvas
 			ctx.setFillColor(selectionCleaner.getColorAsString());
 			// sets alignment from center point

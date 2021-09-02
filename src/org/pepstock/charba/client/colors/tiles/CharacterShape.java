@@ -16,14 +16,13 @@
 package org.pepstock.charba.client.colors.tiles;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
-import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.enums.Weight;
-import org.pepstock.charba.client.utils.Utilities;
+import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.options.IsImmutableFont;
 
 /**
  * This is a shape which can draw a character on the tile.<br>
@@ -96,19 +95,20 @@ public final class CharacterShape extends AbstractShape {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// sets real font size
-		final int realFontSize = calculateFontSize(context, character, halfSize, FontStyle.NORMAL, fontFamily);
+		final IsImmutableFont font = calculateFont(context, character, halfSize, fontFamily);
 		// apply the stroke properties
 		applyFillProperties(context, shapeColor);
+		// create
 		// sets font as string
-		context.setFont(Utilities.toCSSFontProperty(FontStyle.NORMAL, Weight.NORMAL, realFontSize, Constants.EMPTY_STRING, fontFamily));
+		context.setFont(font.toCSSString());
 		// sets alignment from center point
 		context.setTextBaseline(TextBaseline.TOP);
 		// gets metrics
 		TextMetricsItem metrics = context.measureText(character);
 		// designs the shape in the A section
-		drawChar(context, size, 0, 0, character, realFontSize, metrics);
+		drawChar(context, size, 0, 0, character, font.getSize(), metrics);
 		// designs the shape in the B section
-		drawChar(context, size, halfSize, halfSize, character, realFontSize, metrics);
+		drawChar(context, size, halfSize, halfSize, character, font.getSize(), metrics);
 		// draws the current path with the current stroke style
 		context.fill();
 	}
@@ -136,24 +136,32 @@ public final class CharacterShape extends AbstractShape {
 	}
 
 	/**
-	 * Calculates the font size based on available space of the tile.
+	 * Calculates the font based on available space of the tile.
 	 * 
 	 * @param context context of canvas to design the shape
 	 * @param value character to draw
 	 * @param size size of tile
-	 * @param style font style to use to apply the char on tile
-	 * @param fontFamily font family to use to apply the char on tile
-	 * @return the font size to use
+	 * @param family font family to use to apply the char on tile
+	 * @return the immutable font
 	 */
-	private int calculateFontSize(Context2dItem context, String value, double size, FontStyle style, String fontFamily) {
+	private IsImmutableFont calculateFont(Context2dItem context, String value, double size, String family) {
+		// gets result value
+		IsImmutableFont result = null;
 		// creates an instance for font size
 		int calculatedFontSize = (int) size;
+		// creates a font item 
+		FontItem font = new FontItem();
+		// sets size and family
+		font.setSize(calculatedFontSize);
+		font.setFamily(family);
 		// flag to exit form loop
 		boolean check = true;
 		// loop to calculate the size
 		while (check) {
+			// calculates the normalized font
+			result = Helpers.get().toFont(font);
 			// sets font
-			context.setFont(Utilities.toCSSFontProperty(style, Weight.NORMAL, calculatedFontSize, Constants.EMPTY_STRING, fontFamily));
+			context.setFont(result.toCSSString());
 			// gets metrics
 			TextMetricsItem metrics = context.measureText(value);
 			// if the width is inside of tile size
@@ -163,10 +171,12 @@ public final class CharacterShape extends AbstractShape {
 			} else {
 				// decrements the font size
 				calculatedFontSize = calculatedFontSize - FONT_SIZE_DECREMENT;
+				// sets size
+				font.setSize(calculatedFontSize);
 			}
 		}
-		// returns font size
-		return calculatedFontSize;
+		// returns font
+		return result;
 	}
 
 }

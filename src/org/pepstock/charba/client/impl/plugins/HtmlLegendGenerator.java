@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.HtmlLegendItemCallback;
 import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
@@ -274,7 +275,7 @@ final class HtmlLegendGenerator {
 			Div titleText = legendTitleTextGenerator.createTextElement(chart, title, callback);
 			titleCell.appendChild(titleText);
 			// styling the cell with mandatory values
-			titleText.getStyle().setFont(Utilities.toCSSFontProperty(title.getFont()));
+			titleText.getStyle().setFont(Helpers.get().toFontString(title.getFont()));
 			titleText.getStyle().setColor(title.getColor().toRGBA());
 			// checks text direction
 			if (legend.isRtl() || TextDirection.RIGHT_TO_LEFT.equals(legend.getTextDirection())) {
@@ -436,7 +437,7 @@ final class HtmlLegendGenerator {
 		Div label = legendItemTextGenerator.createTextElement(chart, item, callback);
 		labelCell.appendChild(label);
 		// styling the cell with mandatory values
-		label.getStyle().setFont(Utilities.toCSSFontProperty(legendLabels.getFont()));
+		label.getStyle().setFont(Helpers.get().toFontString(legendLabels.getFont()));
 		label.getStyle().setTextAlign(legendLabels.getTextAlign().value());
 		// gets color
 		IsColor fontColor = item.getFontColor();

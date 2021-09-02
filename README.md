@@ -267,6 +267,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * change signature of `getElements` method of `ChartPointer` plugin, returning a `Set` of pointer elements instead of a `List`.
   * change signature of `ClickCallback`, `DoubleClickCallback`, `EnterCallback` and `LeaveCallback` classes of `AnnotationPlugin`, adding new event argument in order to get also the event generated on the canvas.
   * change signature of `ClickEventHandler`, `EnterEventHandler` and `LeaveEventHandler` classes of `DataLabelsPlugin`, adding new event argument in order to get also the event generated on the canvas.
+  * remove `toCSSFontProperty` methods from `Utilities` class. Use `Helpers.get().toFontString` instead.
 
 ### Features
 
