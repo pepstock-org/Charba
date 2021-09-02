@@ -266,29 +266,6 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the background color as gradient.
-	 * 
-	 * @return the background color or <code>null</code> if is not a gradient
-	 */
-	public Gradient getBackgroundColorAsGradient() {
-		return GradientBuilder.retrieve(getBackgroundColorAsCanvasGradient());
-	}
-
-	/**
-	 * Returns the background color as canvas gradient.
-	 * 
-	 * @return the background color or <code>null</code> if is not a canvas gradient
-	 */
-	public CanvasGradientItem getBackgroundColorAsCanvasGradient() {
-		// checks if the background color has been set as color
-		if (isBackgroundColorAsGradient()) {
-			return getValue(Property.BACKGROUND_COLOR, (CanvasGradientItem) null);
-		}
-		// if here, is not a color then returns null
-		return null;
-	}
-
-	/**
 	 * Returns the background color as pattern.
 	 * 
 	 * @return the background color or <code>null</code> if is not a pattern
@@ -306,6 +283,29 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 		// checks if the the background color has been set as color
 		if (isBackgroundColorAsPattern()) {
 			return getValue(Property.BACKGROUND_COLOR, (CanvasPatternItem) null);
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the background color as gradient.
+	 * 
+	 * @return the background color or <code>null</code> if is not a gradient
+	 */
+	public Gradient getBackgroundColorAsGradient() {
+		return GradientBuilder.retrieve(getBackgroundColorAsCanvasGradient());
+	}
+
+	/**
+	 * Returns the background color as canvas gradient.
+	 * 
+	 * @return the background color or <code>null</code> if is not a canvas gradient
+	 */
+	public CanvasGradientItem getBackgroundColorAsCanvasGradient() {
+		// checks if the background color has been set as color
+		if (isBackgroundColorAsGradient()) {
+			return getValue(Property.BACKGROUND_COLOR, (CanvasGradientItem) null);
 		}
 		// if here, is not a color then returns null
 		return null;
