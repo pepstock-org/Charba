@@ -15,14 +15,17 @@
 */
 package org.pepstock.charba.client.sankey;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
- * FIXME
+ * Is a map to user to apply a different priority to sankey node, priority used to layout calculation.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Priority extends AbstractRecord {
+public final class Priority extends NativeObjectContainer {
 
 	/**
 	 * Creates the object with an empty native object instance.
@@ -39,4 +42,54 @@ public final class Priority extends AbstractRecord {
 	Priority(NativeObject nativeObject) {
 		super(nativeObject);
 	}
+
+	/**
+	 * Returns <code>true</code> if there is at least a key, stored in the map.
+	 * 
+	 * @return <code>true</code> if there is at least a key, stored in the map
+	 */
+	public boolean isConsistent() {
+		return !empty();
+	}
+
+	/**
+	 * Sets a value in the map, by its key of the node.
+	 * 
+	 * @param nodeKey the key of sankey node
+	 * @param value the value to assign to the node.
+	 */
+	public void set(String nodeKey, int value) {
+		set(Key.create(nodeKey), value);
+	}
+
+	/**
+	 * Sets a value in the map, by its key of the node.
+	 * 
+	 * @param nodeKey the key of sankey node
+	 * @param value the value to assign to the node.
+	 */
+	public void set(Key nodeKey, int value) {
+		setValue(nodeKey, value);
+	}
+
+	/**
+	 * Returns the stored value in the map, by its key of the node.
+	 * 
+	 * @param nodeKey the key of sankey node
+	 * @return the value to assign to the node.
+	 */
+	public int get(String nodeKey) {
+		return get(Key.create(nodeKey));
+	}
+
+	/**
+	 * Returns the stored value in the map, by its key of the node.
+	 * 
+	 * @param nodeKey the key of sankey node
+	 * @return the value to assign to the node.
+	 */
+	public int get(Key nodeKey) {
+		return getValue(nodeKey, Undefined.INTEGER);
+	}
+
 }
