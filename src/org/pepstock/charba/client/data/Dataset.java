@@ -925,6 +925,17 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 
 	/**
 	 * Sets how to clip relative to the chart area.<br>
+	 * If <code>false</code> allows overflow, otherwise <code>true</code> clips that many pixels inside the chart area.
+	 * 
+	 * @param clip If <code>false</code> allows overflow, otherwise <code>true</code> clips that many pixels inside the chart area.
+	 */
+	public void setClip(boolean clip) {
+		// sets value
+		setValue(CommonProperty.CLIP, clip);
+	}
+
+	/**
+	 * Sets how to clip relative to the chart area.<br>
 	 * Positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area.
 	 * 
 	 * @param clip positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area
@@ -944,21 +955,28 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		// sets value
 		setValue(CommonProperty.CLIP, clip);
 	}
-	
-	
+
+	/**
+	 * Returns if clips relative to the chart area.
+	 * 
+	 * @return <code>true</code> if clips relative to the chart area.
+	 */
+	public boolean isClip() {
+		return getValue(CommonProperty.CLIP, Undefined.BOOLEAN);
+	}
 
 	/**
 	 * Returns how to clip relative to the chart area.<br>
 	 * Positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area.<br>
-	 * If the clip was set by a {@link Clip} object, returns {@link Undefined#DOUBLE}.
+	 * If the clip was set by a {@link Clip} object or boolean, returns {@link Undefined#DOUBLE}.
 	 * 
 	 * @return positive value allows overflow, negative value clips that many pixels inside the chart area. 0 = clip at the chart area.<br>
-	 *         If the clip was set by a {@link Clip} object, returns {@link Undefined#DOUBLE}
+	 *         If the clip was set by a {@link Clip} object or boolean, returns {@link Undefined#DOUBLE}
 	 */
 	public double getClip() {
-		// checks if previously was set to a clip object
+		// checks if previously was set to a clip object or boolean
 		// therefore NaN
-		if (isType(CommonProperty.CLIP, ObjectType.OBJECT)) {
+		if (isType(CommonProperty.CLIP, ObjectType.OBJECT, ObjectType.BOOLEAN)) {
 			// if object returns NaN
 			return Undefined.DOUBLE;
 		}
@@ -977,7 +995,7 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 	public Clip getClipAsObject() {
 		// checks if previously was set to a number
 		// therefore new object with the same values
-		if (isType(CommonProperty.CLIP, ObjectType.NUMBER)) {
+		if (isType(CommonProperty.CLIP, ObjectType.NUMBER, ObjectType.BOOLEAN)) {
 			// new object
 			// with the same value
 			return new Clip(getClip());
