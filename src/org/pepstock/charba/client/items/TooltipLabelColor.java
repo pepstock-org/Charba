@@ -128,7 +128,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	public TooltipLabelColor(String backgroundColor, String borderColor) {
 		this();
 		setBackgroundColor(backgroundColor);
-		setBorderColor(backgroundColor);
+		setBorderColor(borderColor);
 	}
 
 	/**
