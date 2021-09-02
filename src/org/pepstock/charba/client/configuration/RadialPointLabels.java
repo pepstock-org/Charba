@@ -253,7 +253,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	/**
 	 * Returns the padding between chart and point labels, in pixels.
 	 * 
-	 * @return padding the padding between chart and point labels, in pixels.
+	 * @return the padding between chart and point labels, in pixels.
 	 */
 	public int getPadding() {
 		return getAxis().getScale().getPointLabels().getPadding();
