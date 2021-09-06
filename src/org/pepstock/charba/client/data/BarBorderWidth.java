@@ -46,7 +46,7 @@ public final class BarBorderWidth extends AbstractBarBorderItem {
 	 * Creates the object with an empty native object instance.
 	 */
 	public BarBorderWidth() {
-		this(DefaultsBuilder.get().getOptions().getElements().getBar().getBorderRadius());
+		this(DefaultsBuilder.get().getOptions().getElements().getBar().getBorderWidth());
 	}
 
 	/**
