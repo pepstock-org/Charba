@@ -22,8 +22,10 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -156,6 +158,8 @@ public final class SankeyDataset extends Dataset {
 	private final CallbackProxy<ProxyStringCallback> sizeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the padding function
 	private final CallbackProxy<ProxyDoubleCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the font function
+	private final CallbackProxy<ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// colorTo callback instance
 	private ColorCallback<DatasetContext> colorToCallback = null;
@@ -167,6 +171,8 @@ public final class SankeyDataset extends Dataset {
 	private SizeCallback sizeCallback = null;
 	// padding callback instance
 	private PaddingCallback paddingCallback = null;
+	// font callback instance
+	private FontCallback<DatasetContext> fontCallback = null;
 
 	// font instance
 	private final Font font;
@@ -220,6 +226,8 @@ public final class SankeyDataset extends Dataset {
 		this.sizeCallbackProxy.setCallback(context -> onSize(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
 		this.paddingCallbackProxy.setCallback(context -> onPadding(createContext(context)));
+		// sets function to proxy callback in order to invoke the java interface
+		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(createContext(context), getFontCallback(), getDefaultValues().getFont()).nativeObject());
 	}
 
 	/**
@@ -805,6 +813,47 @@ public final class SankeyDataset extends Dataset {
 		setPadding((PaddingCallback) null);
 		// stores value
 		setValue(Property.PADDING, paddingCallback);
+	}
+
+	/**
+	 * Returns the font callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the font callback, if set, otherwise <code>null</code>.
+	 */
+	public FontCallback<DatasetContext> getFontCallback() {
+		return fontCallback;
+	}
+
+	/**
+	 * Sets the font callback.
+	 * 
+	 * @param fontCallback the font callback.
+	 */
+	public void setFont(FontCallback<DatasetContext> fontCallback) {
+		// sets the callback
+		this.fontCallback = fontCallback;
+		// checks if callback is consistent
+		if (fontCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.FONT, fontCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.FONT);
+			// sets the previous font
+			setValue(Property.FONT, font);
+		}
+	}
+
+	/**
+	 * Sets the font callback.
+	 * 
+	 * @param fontCallback the font callback.
+	 */
+	public void setFont(NativeCallback fontCallback) {
+		// resets callback
+		setFont((FontCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.FONT, fontCallback);
 	}
 
 	// ---------------------------
