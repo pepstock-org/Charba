@@ -130,7 +130,7 @@ abstract class AbstractBarBorderItem extends NativeObjectContainer {
 	 * 
 	 * @return the native object instance.
 	 */
-	final NativeObject nativeObject() {
+	public final NativeObject nativeObject() {
 		return super.getNativeObject();
 	}
 }

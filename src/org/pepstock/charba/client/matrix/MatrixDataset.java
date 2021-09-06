@@ -25,6 +25,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
@@ -37,6 +38,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.BarBorderRadius;
+import org.pepstock.charba.client.data.BarBorderWidth;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.HoverFlexDataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
@@ -86,6 +88,10 @@ public final class MatrixDataset extends HoverFlexDataset {
 	private final CallbackProxy<ProxyDoubleCallback> heightCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border radius function
 	private final CallbackProxy<ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border width function
+	private final CallbackProxy<ProxyNativeObjectCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover border width function
+	private final CallbackProxy<ProxyNativeObjectCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------
 	// -- USERS CALLBACKS ---
@@ -96,6 +102,10 @@ public final class MatrixDataset extends HoverFlexDataset {
 	private SizeCallback heightCallback = null;
 	// user callback implementation for border radius
 	private BorderRadiusCallback borderRadiusCallback = null;
+	// user callback implementation for border width
+	private WidthCallback<DatasetContext> borderWidthCallback = null;
+	// user callback implementation for hover border width
+	private WidthCallback<DatasetContext> hoverBorderWidthCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -166,6 +176,10 @@ public final class MatrixDataset extends HoverFlexDataset {
 		this.heightCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHeightCallback(), DEFAULT_HEIGHT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderRadiusCallbackProxy.setCallback(context -> onBorderRadius(createContext(context)));
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderWidthCallbackProxy.setCallback(context -> onBorderWidth(createContext(context), getBorderWidthCallback(), DEFAULT_BORDER_WIDTH));
+		// sets function to proxy callback in order to invoke the java interface
+		this.hoverBorderWidthCallbackProxy.setCallback(context -> onBorderWidth(createContext(context), getHoverBorderWidthCallback(), DEFAULT_BORDER_WIDTH));
 	}
 
 	/*
@@ -195,7 +209,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	public void setDataPoints(List<MatrixDataPoint> datapoints) {
 		setArrayValue(CommonProperty.DATA, ArrayObject.fromOrNull(datapoints));
 	}
-	
+
 	/**
 	 * Returns the matrix data property of a dataset for a chart is specified as an array of matrix data points
 	 * 
@@ -382,6 +396,68 @@ public final class MatrixDataset extends HoverFlexDataset {
 		return null;
 	}
 
+	/**
+	 * Sets the border width (in pixels).
+	 * 
+	 * @param borderWidth the border width (in pixels).
+	 */
+	public void setBorderWidth(BarBorderWidth borderWidth) {
+		// resets callback
+		setBorderWidth((WidthCallback<DatasetContext>) null);
+		// stores the value
+		setValue(Dataset.CommonProperty.BORDER_WIDTH, borderWidth);
+	}
+
+	/**
+	 * Returns the border width (in pixels).
+	 * 
+	 * @return the border width (in pixels).
+	 */
+	public BarBorderWidth getBorderWidthAsObject() {
+		// checks if was stored as object
+		if (isType(Dataset.CommonProperty.BORDER_WIDTH, ObjectType.OBJECT)) {
+			return BarBorderWidth.FACTORY.create(getValue(Dataset.CommonProperty.BORDER_WIDTH));
+		} else if (isType(Dataset.CommonProperty.BORDER_WIDTH, ObjectType.NUMBER)) {
+			// if here, the property is a number
+			// then returns new border width object
+			return new BarBorderWidth(getValue(Dataset.CommonProperty.BORDER_WIDTH, DEFAULT_BORDER_WIDTH));
+		}
+		// if here, the property is missing
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Sets the border width (in pixels), when hovered.
+	 * 
+	 * @param hoverBorderWidth the border width (in pixels), when hovered.
+	 */
+	public void setHoverBorderWidth(BarBorderWidth hoverBorderWidth) {
+		// resets callback
+		setBorderWidth((WidthCallback<DatasetContext>) null);
+		// stores the value
+		setValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, hoverBorderWidth);
+	}
+
+	/**
+	 * Returns the border width (in pixels), when hovered.
+	 * 
+	 * @return the border width (in pixels), when hovered.
+	 */
+	public BarBorderWidth getHoverBorderWidthAsObject() {
+		// checks if was stored as object
+		if (isType(Dataset.CommonProperty.HOVER_BORDER_WIDTH, ObjectType.OBJECT)) {
+			return BarBorderWidth.FACTORY.create(getValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH));
+		} else if (isType(Dataset.CommonProperty.HOVER_BORDER_WIDTH, ObjectType.NUMBER)) {
+			// if here, the property is a number
+			// then returns new border width object
+			return new BarBorderWidth(getValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, DEFAULT_BORDER_WIDTH));
+		}
+		// if here, the property is missing
+		// then returns null
+		return null;
+	}
+
 	// ---------------------------
 	// CALLBACKS
 	// ---------------------------
@@ -487,7 +563,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 * 
 	 * @return the border radius callback
 	 */
-	public BorderRadiusCallback getBorderRadiustCallback() {
+	public BorderRadiusCallback getBorderRadiusCallback() {
 		return borderRadiusCallback;
 	}
 
@@ -501,6 +577,84 @@ public final class MatrixDataset extends HoverFlexDataset {
 		setBorderRadius((BorderRadiusCallback) null);
 		// stores value
 		setValue(Property.BORDER_RADIUS, borderRadiusCallback);
+	}
+
+	/**
+	 * Sets the callback to set the border width (in pixels).
+	 * 
+	 * @param borderWidthCallback the border width callback
+	 */
+	public void setBorderWidth(WidthCallback<DatasetContext> borderWidthCallback) {
+		// sets the callback
+		this.borderWidthCallback = borderWidthCallback;
+		// checks if consistent
+		if (borderWidthCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Dataset.CommonProperty.BORDER_WIDTH, borderWidthCallbackProxy.getProxy());
+		} else {
+			// otherwise removes the properties from java script object
+			remove(Dataset.CommonProperty.BORDER_WIDTH);
+		}
+	}
+
+	/**
+	 * Returns the callback to set the border width (in pixels).
+	 * 
+	 * @return the border width callback
+	 */
+	public WidthCallback<DatasetContext> getBorderWidthCallback() {
+		return borderWidthCallback;
+	}
+
+	/**
+	 * Sets the callback to set the border width (in pixels).
+	 * 
+	 * @param borderWidthCallback the border width callback
+	 */
+	public void setBorderWidth(NativeCallback borderWidthCallback) {
+		// resets callback
+		setBorderWidth((WidthCallback<DatasetContext>) null);
+		// stores value
+		setValue(Dataset.CommonProperty.BORDER_WIDTH, borderWidthCallback);
+	}
+
+	/**
+	 * Sets the callback to set the border width (in pixels), when hovered.
+	 * 
+	 * @param hoverBorderWidthCallback the hover border width callback
+	 */
+	public void setHoverBorderWidth(WidthCallback<DatasetContext> hoverBorderWidthCallback) {
+		// sets the callback
+		this.hoverBorderWidthCallback = hoverBorderWidthCallback;
+		// checks if consistent
+		if (hoverBorderWidthCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, hoverBorderWidthCallbackProxy.getProxy());
+		} else {
+			// otherwise removes the properties from java script object
+			remove(Dataset.CommonProperty.HOVER_BORDER_WIDTH);
+		}
+	}
+
+	/**
+	 * Returns the callback to set the border width (in pixels), when hovered.
+	 * 
+	 * @return the hover border width callback
+	 */
+	public WidthCallback<DatasetContext> getHoverBorderWidthCallback() {
+		return hoverBorderWidthCallback;
+	}
+
+	/**
+	 * Sets the callback to set the border width (in pixels), when hovered.
+	 * 
+	 * @param hoverBorderWidthCallback the hover border width callback
+	 */
+	public void setHoverBorderWidth(NativeCallback hoverBorderWidthCallback) {
+		// resets callback
+		setHoverBorderWidth((WidthCallback<DatasetContext>) null);
+		// stores value
+		setValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, hoverBorderWidthCallback);
 	}
 
 	// ---------------------------
@@ -551,13 +705,13 @@ public final class MatrixDataset extends HoverFlexDataset {
 	final NativeObject onBorderRadius(DatasetContext context) {
 		int valueToReturn = DEFAULT_BORDER_RADIUS;
 		// gets value
-		Object value = ScriptableUtils.getOptionValue(context, getBorderRadiustCallback());
-		// checks if is an integer
+		Object value = ScriptableUtils.getOptionValue(context, getBorderRadiusCallback());
+		// checks if is an object
 		if (value instanceof BarBorderRadius) {
 			// casts to border radius object
 			BarBorderRadius object = (BarBorderRadius) value;
 			// returns the native object
-			return object.toNativeObject();
+			return object.nativeObject();
 		} else if (value instanceof Number) {
 			// checks if is an number
 			// casts to number
@@ -568,7 +722,38 @@ public final class MatrixDataset extends HoverFlexDataset {
 		// cats to a object
 		BarBorderRadius object = new BarBorderRadius(valueToReturn);
 		// returns the native object
-		return object.toNativeObject();
+		return object.nativeObject();
+	}
+
+	/**
+	 * Returns an integer or {@link BarBorderWidth} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param callback callback instance for the specific option.
+	 * @param defaultValue default value of the option
+	 * @return a object property value, as integer or {@link BarBorderWidth}
+	 */
+	final NativeObject onBorderWidth(DatasetContext context, WidthCallback<DatasetContext> callback, int defaultValue) {
+		int valueToReturn = defaultValue;
+		// gets value
+		Object value = ScriptableUtils.getOptionValue(context, callback);
+		// checks if is an object
+		if (value instanceof BarBorderWidth) {
+			// casts to border width object
+			BarBorderWidth object = (BarBorderWidth) value;
+			// returns the native object
+			return object.nativeObject();
+		} else if (value instanceof Number) {
+			// checks if is an number
+			// casts to number
+			Number number = (Number) value;
+			// stores to result
+			valueToReturn = number.intValue();
+		}
+		// cats to a object
+		BarBorderWidth object = new BarBorderWidth(valueToReturn);
+		// returns the native object
+		return object.nativeObject();
 	}
 
 	/**
