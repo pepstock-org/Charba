@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -96,7 +97,7 @@ public final class BarBorderWidth extends AbstractBarBorderItem {
 	 * @param borderWidth the border width left in pixel.
 	 */
 	public void setLeft(int borderWidth) {
-		setValue(Position.LEFT, borderWidth);
+		setValue(Position.LEFT, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**
@@ -114,7 +115,7 @@ public final class BarBorderWidth extends AbstractBarBorderItem {
 	 * @param borderWidth the border width right in pixel.
 	 */
 	public void setRight(int borderWidth) {
-		setValue(Position.RIGHT, borderWidth);
+		setValue(Position.RIGHT, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**
@@ -132,7 +133,7 @@ public final class BarBorderWidth extends AbstractBarBorderItem {
 	 * @param borderWidth the border width top in pixel.
 	 */
 	public void setTop(int borderWidth) {
-		setValue(Position.TOP, borderWidth);
+		setValue(Position.TOP, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**
@@ -150,7 +151,7 @@ public final class BarBorderWidth extends AbstractBarBorderItem {
 	 * @param borderWidth the border width bottom in pixel.
 	 */
 	public void setBottom(int borderWidth) {
-		setValue(Position.BOTTOM, borderWidth);
+		setValue(Position.BOTTOM, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**
