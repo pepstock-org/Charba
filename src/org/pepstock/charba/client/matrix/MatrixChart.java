@@ -20,6 +20,8 @@ import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.configuration.Axis;
+import org.pepstock.charba.client.configuration.CartesianAxis;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.resources.ResourceName;
@@ -119,6 +121,12 @@ public final class MatrixChart extends AbstractChart implements IsDatasetCreator
 			Dataset dataset = getData().getDatasets().get(0);
 			// checks if is a matrix data set
 			Checker.assertCheck(dataset instanceof MatrixDataset, "Dataset is not a MatrixDataset");
+		}
+		// checks all defined scales
+		for (Axis axis : getOptions().getScales().getAxes()) {
+			// checks type of axis
+			// only cartesian axes are accepted
+			Checker.assertCheck(axis instanceof CartesianAxis, "Axis is not a CartesianAxis");
 		}
 	}
 

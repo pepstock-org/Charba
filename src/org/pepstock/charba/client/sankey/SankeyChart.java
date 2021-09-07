@@ -21,6 +21,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.configuration.Axis;
+import org.pepstock.charba.client.configuration.CartesianLinearAxis;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
@@ -29,8 +30,8 @@ import org.pepstock.charba.client.resources.ResourceName;
 /**
  * Sankey charts are a type of flow diagram in which the width of the arrows is proportional to the flow rate.<br>
  * Sankey diagrams emphasize the major transfers or flows within a system.<br>
- * They help locate the most important contributions to a flow.<br> 
- * They often show conserved quantities within defined system boundaries. 
+ * They help locate the most important contributions to a flow.<br>
+ * They often show conserved quantities within defined system boundaries.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -130,6 +131,10 @@ public final class SankeyChart extends AbstractChart implements IsDatasetCreator
 		}
 		// hides all defined scales
 		for (Axis axis : getOptions().getScales().getAxes()) {
+			// checks type of axis
+			// only cartesian linear axes are accepted
+			Checker.assertCheck(axis instanceof CartesianLinearAxis, "Axis is not a CartesianLinearAxis");
+			// forces hiding of axis
 			axis.setDisplay(false);
 		}
 	}
