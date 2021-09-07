@@ -76,7 +76,7 @@ public class Scales extends ConfigurationOptionsContainer {
 		} else {
 			// removes all current one
 			// sets an empty array
-			getConfiguration().getScales().setAxes(new Scale[0]);
+			getConfiguration().getScales().setAxes();
 		}
 	}
 
