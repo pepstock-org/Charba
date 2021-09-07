@@ -1282,7 +1282,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// checks datasets types
 		if (datasets != null) {
 			// a geo chart must have only 1 data set
-			Checker.checkIfBetween(datasets.length, 1, getDatasetsCount(), "Datasets size");
+			Checker.checkIfBetween(datasets.length, 1, getMaximumDatasetsCount(), "Datasets size");
 			// scans datasets
 			for (Dataset dataset : datasets) {
 				Checker.assertCheck(checkDataset(dataset), "Dataset '" + dataset.getType().value() + "' is not manageable by a '" + getType().value() + "' chart");
@@ -1303,7 +1303,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * 
 	 * @return the maximum amount of datasets that the chart can manage.
 	 */
-	protected int getDatasetsCount() {
+	protected int getMaximumDatasetsCount() {
 		return Integer.MAX_VALUE;
 	}
 
