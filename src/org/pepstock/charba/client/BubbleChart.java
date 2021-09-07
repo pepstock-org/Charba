@@ -27,7 +27,7 @@ import org.pepstock.charba.client.data.Dataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BubbleChart extends AbstractChart implements IsDatasetCreator<BubbleDataset> {
+public class BubbleChart extends AbstractChart implements IsDatasetCreator<BubbleDataset>, HasCartesianAxes {
 
 	private final BubbleOptions options;
 
@@ -79,4 +79,5 @@ public class BubbleChart extends AbstractChart implements IsDatasetCreator<Bubbl
 	protected boolean checkDataset(Dataset dataset) {
 		return dataset instanceof BubbleDataset;
 	}
+
 }

@@ -17,6 +17,7 @@ package org.pepstock.charba.client;
 
 import java.util.List;
 
+import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
@@ -642,5 +643,13 @@ public interface IsChart {
 	 * @param datasets list of datasets to check.
 	 */
 	void checkDatasets(Dataset... datasets);
+
+	/**
+	 * Checks if axes, requested to be stored, are an acceptable type or amount.<br>
+	 * If a axis type or the amount of axes are not consistent for the chart, a {@link IllegalArgumentException} will be thrown.
+	 * 
+	 * @param axes list of axes to check.
+	 */
+	void checkAxes(Axis... axes);
 
 }

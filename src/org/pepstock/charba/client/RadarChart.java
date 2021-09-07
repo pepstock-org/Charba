@@ -26,7 +26,10 @@ import org.pepstock.charba.client.data.RadarDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class RadarChart extends AbstractChart implements IsDatasetCreator<RadarDataset> {
+public class RadarChart extends AbstractChart implements IsDatasetCreator<RadarDataset>, HasRadialAxis {
+
+	// maximum amount of axes
+	private static final int MAXIMUM_AXES_COUNT = 1;
 
 	private final RadarOptions options;
 
@@ -77,5 +80,15 @@ public class RadarChart extends AbstractChart implements IsDatasetCreator<RadarD
 	@Override
 	protected boolean checkDataset(Dataset dataset) {
 		return dataset instanceof RadarDataset;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#getMaximumAxesCount()
+	 */
+	@Override
+	protected final int getMaximumAxesCount() {
+		return MAXIMUM_AXES_COUNT;
 	}
 }

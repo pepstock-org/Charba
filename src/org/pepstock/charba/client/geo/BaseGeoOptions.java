@@ -34,7 +34,7 @@ abstract class BaseGeoOptions extends ScalesOptions implements HasCommonOptions 
 	 * @param defaultValues defaults of chart
 	 */
 	BaseGeoOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
-		super(chart, defaultValues, false);
+		super(chart, defaultValues);
 	}
 
 	/**

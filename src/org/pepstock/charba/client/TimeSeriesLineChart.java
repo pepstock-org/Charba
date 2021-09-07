@@ -28,7 +28,7 @@ import org.pepstock.charba.client.data.TimeSeriesLineDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class TimeSeriesLineChart extends AbstractChart implements IsDatasetCreator<TimeSeriesLineDataset> {
+public class TimeSeriesLineChart extends AbstractChart implements IsDatasetCreator<TimeSeriesLineDataset>, HasCartesianAxes {
 
 	private final TimeSeriesLineOptions options;
 

@@ -30,7 +30,7 @@ import org.pepstock.charba.client.data.ScatterDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LineChart extends AbstractChart implements IsDatasetCreator<LineDataset> {
+public class LineChart extends AbstractChart implements IsDatasetCreator<LineDataset>, HasCartesianAxes {
 
 	private final LineOptions options;
 

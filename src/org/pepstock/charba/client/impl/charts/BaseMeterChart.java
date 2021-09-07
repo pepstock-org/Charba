@@ -40,7 +40,7 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	 * Default of maximum value of data in the a dataset (percentage based), <b>{@value DEFAULT_MAX}</b>.
 	 */
 	public static final double DEFAULT_MAX = 100D;
-	// maximum amount of dataset
+	// maximum amount of datasets
 	private static final int MAXIMUM_DATASETS_COUNT = 1;
 	// controller instance
 	private BaseMeterController meterController = null;
@@ -166,7 +166,7 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	 * @see org.pepstock.charba.client.AbstractChart#getDatasetsCount()
 	 */
 	@Override
-	protected final int getDatasetsCount() {
+	protected final int getMaximumDatasetsCount() {
 		// maximum datasets
 		return MAXIMUM_DATASETS_COUNT;
 	}

@@ -29,7 +29,7 @@ import org.pepstock.charba.client.data.ScatterDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BarChart extends AbstractChart implements IsDatasetCreator<BarDataset> {
+public class BarChart extends AbstractChart implements IsDatasetCreator<BarDataset>, HasCartesianAxes {
 
 	private final BarOptions options;
 
@@ -92,4 +92,5 @@ public class BarChart extends AbstractChart implements IsDatasetCreator<BarDatas
 	protected boolean checkDataset(Dataset dataset) {
 		return dataset instanceof BarDataset || dataset instanceof LineDataset || dataset instanceof BubbleDataset || dataset instanceof ScatterDataset;
 	}
+
 }

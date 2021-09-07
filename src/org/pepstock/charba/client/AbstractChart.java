@@ -27,6 +27,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
@@ -70,7 +71,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public abstract class AbstractChart extends HandlerManager implements IsChart, MutationHandler {
+public abstract class AbstractChart extends HandlerManager implements IsChart, MutationHandler, HasAxes {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -1279,12 +1280,13 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void checkDatasets(Dataset... datasets) {
-		// checks datasets types
-		if (datasets != null) {
-			// a geo chart must have only 1 data set
-			Checker.checkIfBetween(datasets.length, 1, getMaximumDatasetsCount(), "Datasets size");
+		// checks if argument is consistent
+		if (datasets != null && datasets.length > 0) {
+			// checks the amount of datasets
+			Checker.checkIfBetween(datasets.length, 0, getMaximumDatasetsCount(), "Datasets size");
 			// scans datasets
 			for (Dataset dataset : datasets) {
+				// checks the type of dataset
 				Checker.assertCheck(checkDataset(dataset), "Dataset '" + dataset.getType().value() + "' is not manageable by a '" + getType().value() + "' chart");
 			}
 		}
@@ -1304,6 +1306,34 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return the maximum amount of datasets that the chart can manage.
 	 */
 	protected int getMaximumDatasetsCount() {
+		return Integer.MAX_VALUE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#checkAxes(org.pepstock.charba.client.configuration.Axis[])
+	 */
+	@Override
+	public void checkAxes(Axis... axes) {
+		// checks if argument is consistent
+		if (axes != null && axes.length > 0) {
+			// checks the amount of axes
+			Checker.checkIfBetween(axes.length, 0, getMaximumAxesCount(), "Axes size");
+			// scans axes
+			for (Axis axis : axes) {
+				// checks the type of axis
+				Checker.assertCheck(checkAxis(axis), "Axis '" + axis.getType().value() + "' is not manageable by a '" + getType().value() + "' chart");
+			}
+		}
+	}
+
+	/**
+	 * Returns the maximum amount of axes that the chart can manage.
+	 * 
+	 * @return the maximum amount of axes that the chart can manage.
+	 */
+	protected int getMaximumAxesCount() {
 		return Integer.MAX_VALUE;
 	}
 

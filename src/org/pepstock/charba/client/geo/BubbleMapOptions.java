@@ -33,8 +33,6 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 	private final BubbleMapRemappedOptionsFactory factory;
 	// elements instance
 	private final BubbleMapElements elements;
-	// scales instance
-	private final BubbleMapScales scales;
 	// common options handler
 	private CommonOptionsHandler optionsHandler;
 	// mapper options instance
@@ -52,8 +50,6 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 		this.factory = new BubbleMapRemappedOptionsFactory(this);
 		// initialized objects
 		this.afterConfigurationUpdate();
-		// before requesting to add ONLY specific scales
-		this.scales = new BubbleMapScales(this);
 		// creates and stores elements
 		this.elements = new BubbleMapElements(this);
 	}
@@ -121,16 +117,6 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 	@Override
 	public BubbleMapElements getElements() {
 		return elements;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.ScalesOptions#getScales()
-	 */
-	@Override
-	public BubbleMapScales getScales() {
-		return scales;
 	}
 
 	/**

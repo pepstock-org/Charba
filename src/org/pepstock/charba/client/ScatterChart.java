@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.configuration.Axis;
+import org.pepstock.charba.client.configuration.CartesianLinearAxis;
 import org.pepstock.charba.client.configuration.ScatterOptions;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.ScatterDataset;
@@ -27,7 +29,7 @@ import org.pepstock.charba.client.data.ScatterDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ScatterChart extends AbstractChart implements IsDatasetCreator<ScatterDataset> {
+public class ScatterChart extends AbstractChart implements IsDatasetCreator<ScatterDataset>, HasCartesianAxes {
 
 	private final ScatterOptions options;
 
@@ -78,5 +80,15 @@ public class ScatterChart extends AbstractChart implements IsDatasetCreator<Scat
 	@Override
 	protected boolean checkDataset(Dataset dataset) {
 		return dataset instanceof ScatterDataset;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.HasAxes#checkAxis(org.pepstock.charba.client.configuration.Axis)
+	 */
+	@Override
+	public boolean checkAxis(Axis axis) {
+		return axis instanceof CartesianLinearAxis;
 	}
 }

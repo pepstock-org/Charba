@@ -51,7 +51,7 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 	 * <b>TreeMap</b> controller type.
 	 */
 	public static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, TREEMAP_EXTENDED_CHART_TYPE, TreeMapController.PROVIDER);
-	// maximum amount of dataset
+	// maximum amount of datasets
 	private static final int MAXIMUM_DATASETS_COUNT = 1;
 	// controller instance
 	private TreeMapController treeMapController = null;
@@ -131,7 +131,7 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 	 * @see org.pepstock.charba.client.AbstractChart#getDatasetsCount()
 	 */
 	@Override
-	protected int getDatasetsCount() {
+	protected int getMaximumDatasetsCount() {
 		// maximum datasets
 		return MAXIMUM_DATASETS_COUNT;
 	}

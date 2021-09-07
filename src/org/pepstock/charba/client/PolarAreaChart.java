@@ -26,7 +26,10 @@ import org.pepstock.charba.client.data.PolarAreaDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class PolarAreaChart extends AbstractChart implements IsDatasetCreator<PolarAreaDataset> {
+public class PolarAreaChart extends AbstractChart implements IsDatasetCreator<PolarAreaDataset>, HasRadialAxis {
+
+	// maximum amount of axes
+	private static final int MAXIMUM_AXES_COUNT = 1;
 
 	private final PolarAreaOptions options;
 
@@ -77,5 +80,15 @@ public class PolarAreaChart extends AbstractChart implements IsDatasetCreator<Po
 	@Override
 	protected boolean checkDataset(Dataset dataset) {
 		return dataset instanceof PolarAreaDataset;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#getMaximumAxesCount()
+	 */
+	@Override
+	protected final int getMaximumAxesCount() {
+		return MAXIMUM_AXES_COUNT;
 	}
 }

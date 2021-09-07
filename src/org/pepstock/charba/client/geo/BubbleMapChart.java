@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.geo;
 
+import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 
@@ -86,4 +87,45 @@ public final class BubbleMapChart extends BaseGeoChart<BubbleMapDataset> {
 	protected boolean checkDataset(Dataset dataset) {
 		return dataset instanceof BubbleMapDataset;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.HasAxes#checkAxis(org.pepstock.charba.client.configuration.Axis)
+	 */
+	@Override
+	public boolean checkAxis(Axis axis) {
+		return axis instanceof ProjectionAxis || axis instanceof IsSizeAxis;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkAxes(org.pepstock.charba.client.configuration.Axis[])
+	 */
+	@Override
+	public void checkAxes(Axis... axes) {
+		// checks if the axis are consistent
+		// bubble map accepts ONLY size and projection axes
+		if (axes != null) {
+			// invokes the common checking
+			super.checkAxes(axes);
+			// creates flags
+			boolean size = false;
+			boolean projection = false;
+			// scans axes
+			for (Axis axis : axes) {
+				// checks if projection
+				if (axis instanceof ProjectionAxis && !projection) {
+					projection = true;
+				} else if (axis instanceof IsSizeAxis && !size) {
+					size = true;
+				} else {
+					// if here, the set axes are not consistent
+					throw new IllegalArgumentException("Axes argument is not consistent: BubbleMap can have only 1 projection and 1 size axes");
+				}
+			}
+		}
+	}
+
 }

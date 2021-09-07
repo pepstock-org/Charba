@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
-import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 
 /**
@@ -77,8 +76,6 @@ public final class ExtendedScales extends Scales {
 	private void setInternalAxes(Scale... scales) {
 		// checks if the arguments are consistent
 		if (scales != null && scales.length > 0) {
-			// sets a index
-			int index = 0;
 			// checks if is
 			// scans passed scales
 			for (Scale scale : scales) {
@@ -91,16 +88,8 @@ public final class ExtendedScales extends Scales {
 					Key.checkIfValid(type);
 					// gets id as key
 					ScaleId id = checkAndGetScaleId(scale);
-					// checks for radial
-					// must be the first one
-					// and must have only 1 scale being a radial
-					if (ChartAxisType.RADIAL_LINEAR.equals(type.getBaseType()) && (index > 0 || scales.length != 1)) {
-						throw new IllegalArgumentException("A radial linear scale can not be added to a scales with other scales");
-					}
 					// stores scale
 					setValue(id, scale);
-					// increments only if added
-					index++;
 				}
 			}
 			// checks if all parents are attached

@@ -303,6 +303,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * reduce visibility of the classes of injectable resources provided out-of-the-box.
   * use `Chart.helpers.toFont` method of CHART.JS to normalize the font object and to get the CSS string.
   * add additional checks about the consistency of datasets types and amount added to a chart.
+  * add additional checks about the consistency of axes types and amount added to a chart.
     
 License
 -------

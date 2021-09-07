@@ -22,6 +22,7 @@ import org.pepstock.charba.client.ChartTimerTask;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.UpdateConfiguration;
+import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
@@ -676,6 +677,16 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	@Override
 	public final void checkDatasets(Dataset... datasets) {
 		chart.checkDatasets(datasets);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#checkAxes(org.pepstock.charba.client.configuration.Axis[])
+	 */
+	@Override
+	public final void checkAxes(Axis... axes) {
+		chart.checkAxes(axes);
 	}
 
 }

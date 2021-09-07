@@ -18,6 +18,7 @@ package org.pepstock.charba.client.matrix;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.HasCartesianAxes;
 import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.configuration.Axis;
@@ -32,7 +33,7 @@ import org.pepstock.charba.client.resources.ResourceName;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class MatrixChart extends AbstractChart implements IsDatasetCreator<MatrixDataset> {
+public final class MatrixChart extends AbstractChart implements IsDatasetCreator<MatrixDataset>, HasCartesianAxes {
 
 	// extending chart type
 	// this is a custom implementation because
@@ -47,8 +48,10 @@ public final class MatrixChart extends AbstractChart implements IsDatasetCreator
 	 * <b>Matrix</b> controller type.
 	 */
 	public static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, MATRIX_EXTENDED_CHART_TYPE, MatrixController.PROVIDER);
-	// maximum amount of dataset
+	// maximum amount of datasets
 	private static final int MAXIMUM_DATASETS_COUNT = 1;
+	// maximum amount of axes
+	private static final int MAXIMUM_AXES_COUNT = 2;
 	// controller instance
 	private MatrixController matrixController = null;
 	// chart options
@@ -129,7 +132,7 @@ public final class MatrixChart extends AbstractChart implements IsDatasetCreator
 	 * @see org.pepstock.charba.client.AbstractChart#getDatasetsCount()
 	 */
 	@Override
-	protected int getDatasetsCount() {
+	protected int getMaximumDatasetsCount() {
 		// maximum datasets
 		return MAXIMUM_DATASETS_COUNT;
 	}
@@ -143,4 +146,15 @@ public final class MatrixChart extends AbstractChart implements IsDatasetCreator
 	protected boolean checkDataset(Dataset dataset) {
 		return dataset instanceof MatrixDataset;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#getMaximumAxesCount()
+	 */
+	@Override
+	protected final int getMaximumAxesCount() {
+		return MAXIMUM_AXES_COUNT;
+	}
+
 }

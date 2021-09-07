@@ -31,8 +31,6 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 
 	// mapper options factory instance
 	private final ChoroplethRemappedOptionsFactory factory;
-	// scales instance
-	private final ChoroplethScales scales;
 	// elements instance
 	private final ChoroplethElements elements;
 	// common options handler
@@ -52,8 +50,6 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 		this.factory = new ChoroplethRemappedOptionsFactory(this);
 		// initialized objects
 		this.afterConfigurationUpdate();
-		// before requesting to add ONLY specific scales
-		this.scales = new ChoroplethScales(this);
 		// creates and stores elements
 		this.elements = new ChoroplethElements(this);
 	}
@@ -121,16 +117,6 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 	@Override
 	public ChoroplethElements getElements() {
 		return elements;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.ScalesOptions#getScales()
-	 */
-	@Override
-	public ChoroplethScales getScales() {
-		return scales;
 	}
 
 	/**

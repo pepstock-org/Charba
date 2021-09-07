@@ -52,6 +52,8 @@ public class Scales extends ConfigurationOptionsContainer {
 	public void setAxes(Axis... axes) {
 		// checks consistency of arguments
 		if (axes != null && axes.length > 0) {
+			// checks consistency of scales
+			super.getOptions().getChart().checkAxes(axes);
 			// gets charts id
 			String chartId = getOptions().getChart().getId();
 			// clears the buffer
@@ -71,6 +73,10 @@ public class Scales extends ConfigurationOptionsContainer {
 			}
 			// sets the array
 			getConfiguration().getScales().setAxes(scales);
+		} else {
+			// removes all current one
+			// sets an empty array
+			getConfiguration().getScales().setAxes(new Scale[0]);
 		}
 	}
 

@@ -31,7 +31,7 @@ import org.pepstock.charba.client.data.StackedBarDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class StackedBarChart extends AbstractChart implements IsDatasetCreator<StackedBarDataset> {
+public class StackedBarChart extends AbstractChart implements IsDatasetCreator<StackedBarDataset>, HasCartesianAxes {
 
 	private final StackedOptions options;
 

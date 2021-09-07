@@ -42,8 +42,10 @@ abstract class BaseGeoChart<D extends Dataset> extends AbstractChart implements 
 	// this is a custom implementation because
 	// GEO controllers don't extend any existing chart type
 	static final GeoExtendedChartType GEO_EXTENDED_CHART_TYPE = new GeoExtendedChartType();
-	// maximum amount of dataset
+	// maximum amount of datasets
 	private static final int MAXIMUM_DATASETS_COUNT = 1;
+	// maximum amount of axes
+	private static final int MAXIMUM_AXES_COUNT = 2;
 
 	/**
 	 * Builds the chart.<br>
@@ -118,9 +120,19 @@ abstract class BaseGeoChart<D extends Dataset> extends AbstractChart implements 
 	 * @see org.pepstock.charba.client.AbstractChart#getDatasetsCount()
 	 */
 	@Override
-	protected final int getDatasetsCount() {
+	protected final int getMaximumDatasetsCount() {
 		// maximum datasets
 		return MAXIMUM_DATASETS_COUNT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#getMaximumAxesCount()
+	 */
+	@Override
+	protected final int getMaximumAxesCount() {
+		return MAXIMUM_AXES_COUNT;
 	}
 
 }
