@@ -338,7 +338,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 		// resets callback
 		setBorderRadius((BorderRadiusCallback) null);
 		// stores the value
-		setValue(Property.BORDER_RADIUS, borderRadius);
+		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**

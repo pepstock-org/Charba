@@ -38,6 +38,7 @@ import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArraySetHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.KeyFactory;
@@ -767,7 +768,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 * @param spacing the fixed spacing among rectangles
 	 */
 	public void setSpacing(double spacing) {
-		setValue(Property.SPACING, spacing);
+		setValue(Property.SPACING, Checker.positiveOrZero(spacing));
 	}
 
 	/**
@@ -827,7 +828,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 			remove(Property.COLOR);
 		}
 	}
-	
+
 	/**
 	 * Sets the color callback.
 	 * 
@@ -866,7 +867,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 			remove(Property.HOVER_COLOR);
 		}
 	}
-	
+
 	/**
 	 * Sets the hover color callback.
 	 * 

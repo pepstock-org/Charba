@@ -37,6 +37,7 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -562,7 +563,7 @@ public final class SankeyDataset extends Dataset {
 	 * @param borderWidth the width of the border in pixels of sankey elements
 	 */
 	public void setBorderWidth(int borderWidth) {
-		setValue(Dataset.CommonProperty.BORDER_WIDTH, borderWidth);
+		setValue(Dataset.CommonProperty.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**
@@ -580,7 +581,7 @@ public final class SankeyDataset extends Dataset {
 	 * @param nodeWidth the width of sankey elements
 	 */
 	public void setNodeWidth(int nodeWidth) {
-		setValue(Property.NODE_WIDTH, nodeWidth);
+		setValue(Property.NODE_WIDTH, Checker.positiveOrZero(nodeWidth));
 	}
 
 	/**
@@ -601,7 +602,7 @@ public final class SankeyDataset extends Dataset {
 		// resets callback
 		setPadding((PaddingCallback) null);
 		// stores value
-		setValue(Property.PADDING, padding);
+		setValue(Property.PADDING, Checker.positiveOrZero(padding));
 	}
 
 	/**
