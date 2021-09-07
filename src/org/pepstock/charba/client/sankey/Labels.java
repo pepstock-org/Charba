@@ -28,7 +28,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * Is a map to user to apply a different label to sankey node, node defined by {@link SankeyDataPoint#setFrom(Key)} or {@link SankeyDataPoint#setTo(Key)}.
+ * Is a map to apply a different label to sankey node, node defined by {@link SankeyDataPoint#setFrom(Key)} or {@link SankeyDataPoint#setTo(Key)}.
  * 
  * @author Andrea "Stock" Stocchero
  */
