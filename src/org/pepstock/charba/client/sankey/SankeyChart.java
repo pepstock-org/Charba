@@ -24,7 +24,9 @@ import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.CartesianLinearAxis;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.impl.plugins.ColorSchemes;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
+import org.pepstock.charba.client.impl.plugins.HtmlLegend;
 import org.pepstock.charba.client.resources.ResourceName;
 
 /**
@@ -114,12 +116,13 @@ public final class SankeyChart extends AbstractChart implements IsDatasetCreator
 			sankeyController = (SankeyController) controllerInstance;
 		}
 		// disables plugins which can not work with this controller.
-		// disables plugins which can not work with this controller.
 		getOptions().getPlugins().setEnabled(ResourceName.DATALABELS_PLUGIN.value(), false);
 		getOptions().getPlugins().setEnabled(ResourceName.LABELS_PLUGIN.value(), false);
 		getOptions().getPlugins().setEnabled(ResourceName.ZOOM_PLUGIN.value(), false);
 		getOptions().getPlugins().setEnabled(ResourceName.ANNOTATION_PLUGIN.value(), false);
+		getOptions().getPlugins().setEnabled(HtmlLegend.ID, false);
 		getOptions().getPlugins().setEnabled(DatasetsItemsSelector.ID, false);
+		getOptions().getPlugins().setEnabled(ColorSchemes.ID, false);
 		// checks if there is a data set
 		if (!getData().getDatasets().isEmpty()) {
 			// a sankey chart must have only 1 data set
