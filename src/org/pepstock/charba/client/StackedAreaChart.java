@@ -16,6 +16,11 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.configuration.StackedOptions;
+import org.pepstock.charba.client.data.BarDataset;
+import org.pepstock.charba.client.data.BubbleDataset;
+import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.data.LineDataset;
+import org.pepstock.charba.client.data.ScatterDataset;
 import org.pepstock.charba.client.data.StackedAreaDataset;
 
 /**
@@ -68,4 +73,13 @@ public class StackedAreaChart extends AbstractChart implements IsDatasetCreator<
 		return new StackedAreaDataset(getDefaultChartOptions(), hidden);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkDataset(org.pepstock.charba.client.data.Dataset)
+	 */
+	@Override
+	protected boolean checkDataset(Dataset dataset) {
+		return dataset instanceof LineDataset || dataset instanceof BarDataset || dataset instanceof BubbleDataset || dataset instanceof ScatterDataset;
+	}
 }

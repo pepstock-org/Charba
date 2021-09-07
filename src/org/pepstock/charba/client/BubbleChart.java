@@ -17,6 +17,7 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.configuration.BubbleOptions;
 import org.pepstock.charba.client.data.BubbleDataset;
+import org.pepstock.charba.client.data.Dataset;
 
 /**
  * BUBBLE chart implementation.<br>
@@ -69,4 +70,13 @@ public class BubbleChart extends AbstractChart implements IsDatasetCreator<Bubbl
 		return new BubbleDataset(getDefaultChartOptions(), hidden);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkDataset(org.pepstock.charba.client.data.Dataset)
+	 */
+	@Override
+	protected boolean checkDataset(Dataset dataset) {
+		return dataset instanceof BubbleDataset;
+	}
 }

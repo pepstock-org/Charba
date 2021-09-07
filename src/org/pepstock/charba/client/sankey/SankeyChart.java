@@ -52,6 +52,8 @@ public final class SankeyChart extends AbstractChart implements IsDatasetCreator
 	 * <b>Sankey</b> controller type.
 	 */
 	public static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, SANKEY_EXTENDED_CHART_TYPE, SankeyController.PROVIDER);
+	// maximum amount of dataset
+	private static final int MAXIMUM_DATASETS_COUNT = 1;
 	// controller instance
 	private SankeyController sankeyController = null;
 	// chart options
@@ -140,6 +142,27 @@ public final class SankeyChart extends AbstractChart implements IsDatasetCreator
 			// forces hiding of axis
 			axis.setDisplay(false);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#getDatasetsCount()
+	 */
+	@Override
+	protected int getDatasetsCount() {
+		// maximum datasets
+		return MAXIMUM_DATASETS_COUNT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkDataset(org.pepstock.charba.client.data.Dataset)
+	 */
+	@Override
+	protected boolean checkDataset(Dataset dataset) {
+		return dataset instanceof SankeyDataset;
 	}
 
 }

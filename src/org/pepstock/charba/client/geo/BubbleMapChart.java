@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.data.Dataset;
 
 /**
  * A Bubble Map, as known as Proportional Symbol is used to render maps with dots that are scaled according to some numerical value.<br>
@@ -76,4 +77,13 @@ public final class BubbleMapChart extends BaseGeoChart<BubbleMapDataset> {
 		return CONTROLLER_TYPE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkDataset(org.pepstock.charba.client.data.Dataset)
+	 */
+	@Override
+	protected boolean checkDataset(Dataset dataset) {
+		return dataset instanceof BubbleMapDataset;
+	}
 }

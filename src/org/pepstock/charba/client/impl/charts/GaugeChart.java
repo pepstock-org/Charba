@@ -17,6 +17,7 @@ package org.pepstock.charba.client.impl.charts;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.data.Dataset;
 
 /**
  * GAUGE chart implementation.
@@ -84,6 +85,16 @@ public final class GaugeChart extends BaseMeterChart<GaugeDataset> {
 	@Override
 	ControllerType getControllerType() {
 		return CONTROLLER_TYPE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkDataset(org.pepstock.charba.client.data.Dataset)
+	 */
+	@Override
+	protected boolean checkDataset(Dataset dataset) {
+		return dataset instanceof GaugeDataset;
 	}
 
 }

@@ -16,6 +16,9 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.configuration.TimeSeriesBarOptions;
+import org.pepstock.charba.client.data.BarDataset;
+import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.data.TimeSeriesBarDataset;
 
 /**
@@ -65,6 +68,16 @@ public class TimeSeriesBarChart extends AbstractChart implements IsDatasetCreato
 	@Override
 	public TimeSeriesBarDataset newDataset(boolean hidden) {
 		return new TimeSeriesBarDataset(getDefaultChartOptions(), hidden);
+	}
+
+	/*
+	 * /* (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkDataset(org.pepstock.charba.client.data.Dataset)
+	 */
+	@Override
+	protected boolean checkDataset(Dataset dataset) {
+		return dataset instanceof BarDataset || dataset instanceof LineDataset;
 	}
 
 }

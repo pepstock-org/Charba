@@ -42,6 +42,8 @@ abstract class BaseGeoChart<D extends Dataset> extends AbstractChart implements 
 	// this is a custom implementation because
 	// GEO controllers don't extend any existing chart type
 	static final GeoExtendedChartType GEO_EXTENDED_CHART_TYPE = new GeoExtendedChartType();
+	// maximum amount of dataset
+	private static final int MAXIMUM_DATASETS_COUNT = 1;
 
 	/**
 	 * Builds the chart.<br>
@@ -108,22 +110,17 @@ abstract class BaseGeoChart<D extends Dataset> extends AbstractChart implements 
 		getOptions().getPlugins().setEnabled(HtmlLegend.ID, false);
 		getOptions().getPlugins().setEnabled(DatasetsItemsSelector.ID, false);
 		getOptions().getPlugins().setEnabled(ColorSchemes.ID, false);
-		// checks if there is a data set
-		if (!getData().getDatasets().isEmpty()) {
-			// a geo chart must have only 1 data set
-			Checker.checkIfEqualTo(getData().getDatasets().size(), 1, "Datasets size");
-			// gets the data set (only 1)
-			Dataset dataset = getData().getDatasets().get(0);
-			// checks if a bubble map
-			if (BubbleMapChart.CONTROLLER_TYPE.equals(getType())) {
-				// checks if is a bubble map data set
-				Checker.assertCheck(dataset instanceof BubbleMapDataset, "Dataset is not a BubbleMapDataset instance");
-			} else {
-				// checks if is a choropleth data set
-				Checker.assertCheck(dataset instanceof ChoroplethDataset, "Dataset is not a ChoroplethDataset instance");
-			}
-		}
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#getDatasetsCount()
+	 */
+	@Override
+	protected final int getDatasetsCount() {
+		// maximum datasets
+		return MAXIMUM_DATASETS_COUNT;
 	}
 
 }

@@ -1272,6 +1272,41 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// do nothing
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#checkDatasets(org.pepstock.charba.client.data.Dataset[])
+	 */
+	@Override
+	public final void checkDatasets(Dataset... datasets) {
+		// checks datasets types
+		if (datasets != null) {
+			// a geo chart must have only 1 data set
+			Checker.checkIfBetween(datasets.length, 1, getDatasetsCount(), "Datasets size");
+			// scans datasets
+			for (Dataset dataset : datasets) {
+				Checker.assertCheck(checkDataset(dataset), "Dataset '" + dataset.getType().value() + "' is not manageable by a '" + getType().value() + "' chart");
+			}
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the dataset can be managed by a this chart type.
+	 * 
+	 * @param dataset dataset to check
+	 * @return <code>true</code> if the dataset can be managed by a this chart type
+	 */
+	protected abstract boolean checkDataset(Dataset dataset);
+
+	/**
+	 * Returns the maximum amount of datasets that the chart can manage.
+	 * 
+	 * @return the maximum amount of datasets that the chart can manage.
+	 */
+	protected int getDatasetsCount() {
+		return Integer.MAX_VALUE;
+	}
+
 	/**
 	 * Returns <code>true</code> if the dataset index, passed as argument, is a valid index.
 	 * 

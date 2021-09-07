@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
+import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
@@ -633,5 +634,13 @@ public interface IsChart {
 	 * Draws the chart
 	 */
 	void draw();
+
+	/**
+	 * Checks if datasets, requested to be stored, are an acceptable type or amount.<br>
+	 * If a dataset type or the amount of datasets are not consistent for the chart, a {@link IllegalArgumentException} will be thrown.
+	 * 
+	 * @param datasets list of datasets to check.
+	 */
+	void checkDatasets(Dataset... datasets);
 
 }

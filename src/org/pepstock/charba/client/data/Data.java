@@ -242,6 +242,8 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		this.currentDatasets.clear();
 		// checks if arguments is consistent
 		if (datasets != null) {
+			// checks datasets consistent
+			this.chart.checkDatasets(datasets);
 			// adds all data sets
 			this.currentDatasets.addAll(datasets);
 			// sets data sets to native object

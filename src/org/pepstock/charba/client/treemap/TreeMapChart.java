@@ -51,6 +51,8 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 	 * <b>TreeMap</b> controller type.
 	 */
 	public static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, TREEMAP_EXTENDED_CHART_TYPE, TreeMapController.PROVIDER);
+	// maximum amount of dataset
+	private static final int MAXIMUM_DATASETS_COUNT = 1;
 	// controller instance
 	private TreeMapController treeMapController = null;
 	// chart options
@@ -121,15 +123,27 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 		getOptions().getPlugins().setEnabled(ResourceName.ANNOTATION_PLUGIN.value(), false);
 		getOptions().getPlugins().setEnabled(HtmlLegend.ID, false);
 		getOptions().getPlugins().setEnabled(DatasetsItemsSelector.ID, false);
-		// checks if there is a data set
-		if (!getData().getDatasets().isEmpty()) {
-			// a treemap chart must have only 1 data set
-			Checker.checkIfEqualTo(getData().getDatasets().size(), 1, "Datasets size");
-			// gets the data set (only 1)
-			Dataset dataset = getData().getDatasets().get(0);
-			// checks if is a treemap data set
-			Checker.assertCheck(dataset instanceof TreeMapDataset, "Dataset is not a TreeMapDataset");
-		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#getDatasetsCount()
+	 */
+	@Override
+	protected int getDatasetsCount() {
+		// maximum datasets
+		return MAXIMUM_DATASETS_COUNT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkDataset(org.pepstock.charba.client.data.Dataset)
+	 */
+	@Override
+	protected boolean checkDataset(Dataset dataset) {
+		return dataset instanceof TreeMapDataset;
 	}
 
 }

@@ -16,7 +16,9 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.configuration.DoughnutOptions;
+import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.DoughnutDataset;
+import org.pepstock.charba.client.data.PieDataset;
 
 /**
  * DOUGHNUT chart implementation.<br>
@@ -67,4 +69,13 @@ public class DoughnutChart extends AbstractChart implements IsDatasetCreator<Dou
 		return new DoughnutDataset(getDefaultChartOptions(), hidden);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkDataset(org.pepstock.charba.client.data.Dataset)
+	 */
+	@Override
+	protected boolean checkDataset(Dataset dataset) {
+		return dataset instanceof DoughnutDataset || dataset instanceof PieDataset;
+	}
 }

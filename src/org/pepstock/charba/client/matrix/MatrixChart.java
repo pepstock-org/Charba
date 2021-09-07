@@ -47,6 +47,8 @@ public final class MatrixChart extends AbstractChart implements IsDatasetCreator
 	 * <b>Matrix</b> controller type.
 	 */
 	public static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, MATRIX_EXTENDED_CHART_TYPE, MatrixController.PROVIDER);
+	// maximum amount of dataset
+	private static final int MAXIMUM_DATASETS_COUNT = 1;
 	// controller instance
 	private MatrixController matrixController = null;
 	// chart options
@@ -113,15 +115,6 @@ public final class MatrixChart extends AbstractChart implements IsDatasetCreator
 		// disables plugins which can not work with this controller.
 		getOptions().getPlugins().setEnabled(ResourceName.DATALABELS_PLUGIN.value(), false);
 		getOptions().getPlugins().setEnabled(ResourceName.LABELS_PLUGIN.value(), false);
-		// checks if there is a data set
-		if (!getData().getDatasets().isEmpty()) {
-			// a matrix chart must have only 1 data set
-			Checker.checkIfEqualTo(getData().getDatasets().size(), 1, "Datasets size");
-			// gets the data set (only 1)
-			Dataset dataset = getData().getDatasets().get(0);
-			// checks if is a matrix data set
-			Checker.assertCheck(dataset instanceof MatrixDataset, "Dataset is not a MatrixDataset");
-		}
 		// checks all defined scales
 		for (Axis axis : getOptions().getScales().getAxes()) {
 			// checks type of axis
@@ -130,4 +123,24 @@ public final class MatrixChart extends AbstractChart implements IsDatasetCreator
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#getDatasetsCount()
+	 */
+	@Override
+	protected int getDatasetsCount() {
+		// maximum datasets
+		return MAXIMUM_DATASETS_COUNT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkDataset(org.pepstock.charba.client.data.Dataset)
+	 */
+	@Override
+	protected boolean checkDataset(Dataset dataset) {
+		return dataset instanceof MatrixDataset;
+	}
 }

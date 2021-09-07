@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.data.Dataset;
 
 /**
  * A choropleth chart is used to render maps with the area filled according to some numerical value.
@@ -73,6 +74,16 @@ public final class ChoroplethChart extends BaseGeoChart<ChoroplethDataset> {
 	@Override
 	ControllerType getControllerType() {
 		return CONTROLLER_TYPE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkDataset(org.pepstock.charba.client.data.Dataset)
+	 */
+	@Override
+	protected boolean checkDataset(Dataset dataset) {
+		return dataset instanceof ChoroplethDataset;
 	}
 
 }

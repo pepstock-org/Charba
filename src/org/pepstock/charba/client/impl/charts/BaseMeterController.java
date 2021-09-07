@@ -81,8 +81,6 @@ final class BaseMeterController extends AbstractController {
 		Checker.assertCheck(Controller.isConsistent(this, context, chart), "Initialize method arguments are not consistent");
 		// gets the data set at index
 		Dataset dataset = chart.getData().getDatasets().get(context.getIndex());
-		// checks if is a meter data set (or gauge)
-		Checker.assertCheck(dataset instanceof MeterDataset, "Dataset at index " + context.getIndex() + " is not a MeterDataset");
 		// casts to meter data set
 		MeterDataset meterDataset = (MeterDataset) dataset;
 		// meter or gauge charts must have only 1 data set

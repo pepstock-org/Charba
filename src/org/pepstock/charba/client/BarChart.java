@@ -17,6 +17,10 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.data.BarDataset;
+import org.pepstock.charba.client.data.BubbleDataset;
+import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.data.LineDataset;
+import org.pepstock.charba.client.data.ScatterDataset;
 
 /**
  * BAR chart implementation.<br>
@@ -79,4 +83,13 @@ public class BarChart extends AbstractChart implements IsDatasetCreator<BarDatas
 		return new BarDataset(getDefaultChartOptions(), hidden);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChart#checkDataset(org.pepstock.charba.client.data.Dataset)
+	 */
+	@Override
+	protected boolean checkDataset(Dataset dataset) {
+		return dataset instanceof BarDataset || dataset instanceof LineDataset || dataset instanceof BubbleDataset || dataset instanceof ScatterDataset;
+	}
 }
