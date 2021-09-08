@@ -54,7 +54,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
-[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_41.png)](https://github.com/pepstock-org/Charba-Showcase/blob/4.1/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_42.png)](https://github.com/pepstock-org/Charba-Showcase/blob/4.1/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------

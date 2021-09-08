@@ -252,7 +252,7 @@ public final class DOMBuilder {
 	 * @param eventInitDict event initialization dictionary to configure the event
 	 * @return a mouse event, internally used by {@link DatasetsItemsSelector} plugin
 	 */
-	public BaseNativeEvent createSelectionEvent(SelectEventInit eventInitDict) {
+	public BaseNativeMouseEvent createSelectionEvent(SelectEventInit eventInitDict) {
 		// checks if initialization dictionary is consistent
 		Checker.checkIfValid(eventInitDict, "Mouse event initialization dictionary");
 		// checks if event type is consistent

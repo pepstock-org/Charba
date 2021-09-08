@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.DOM_MOUSE_EVENT, namespace = JsPackage.GLOBAL)
-final class BaseNativeMouseEvent extends BaseNativeEvent {
+public final class BaseNativeMouseEvent extends BaseNativeEvent {
 
 	/**
 	 * Create a mouse event by its type and initialization configuration.

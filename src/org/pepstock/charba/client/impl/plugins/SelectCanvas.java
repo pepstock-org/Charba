@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.BaseEventTarget;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.BaseNativeMouseEvent;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -49,6 +50,6 @@ final class SelectCanvas {
 	 *         returns <code>true</code>.
 	 */
 	@JsMethod
-	native boolean dispatchEvent(BaseNativeEvent event);
+	native boolean dispatchEvent(BaseNativeMouseEvent event);
 
 }
