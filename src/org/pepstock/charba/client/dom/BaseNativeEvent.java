@@ -30,7 +30,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class BaseNativeEvent extends BaseEvent implements IsCastable {
+public class BaseNativeEvent extends BaseEvent implements IsCastable {
 
 	/**
 	 * To avoid any instantiation
@@ -44,7 +44,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return true if the alt key was down when the mouse event was fired
 	 */
 	@JsProperty
-	public native boolean isAltKey();
+	public final native boolean isAltKey();
 
 	/**
 	 * Returns the button number that was pressed (if applicable) when the mouse event was fired.
@@ -52,7 +52,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the button number that was pressed (if applicable) when the mouse event was fired
 	 */
 	@JsProperty
-	public native int getButton();
+	public final native int getButton();
 
 	/**
 	 * Returns the buttons being depressed (if any) when the mouse event was fired.
@@ -60,7 +60,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the buttons being depressed (if any) when the mouse event was fired
 	 */
 	@JsProperty
-	public native int getButtons();
+	public final native int getButtons();
 
 	/**
 	 * Returns the X coordinate of the mouse pointer in local (DOM content) coordinates.
@@ -68,7 +68,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the X coordinate of the mouse pointer in local (DOM content) coordinates
 	 */
 	@JsProperty
-	public native double getClientX();
+	public final native double getClientX();
 
 	/**
 	 * Returns the Y coordinate of the mouse pointer in local (DOM content) coordinates.
@@ -76,7 +76,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the Y coordinate of the mouse pointer in local (DOM content) coordinates
 	 */
 	@JsProperty
-	public native double getClientY();
+	public final native double getClientY();
 
 	/**
 	 * Returns true if the control key was down when the mouse event was fired.
@@ -84,7 +84,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return true if the control key was down when the mouse event was fired
 	 */
 	@JsProperty
-	public native boolean isCtrlKey();
+	public final native boolean isCtrlKey();
 
 	/**
 	 * Returns true if the meta key was down when the mouse event was fired.
@@ -92,7 +92,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return true if the meta key was down when the mouse event was fired
 	 */
 	@JsProperty
-	public native boolean isMetaKey();
+	public final native boolean isMetaKey();
 
 	/**
 	 * Returns the X coordinate of the mouse pointer relative to the position of the padding edge of the target node.
@@ -100,7 +100,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the X coordinate of the mouse pointer relative to the position of the padding edge of the target node
 	 */
 	@JsProperty
-	public native double getOffsetX();
+	public final native double getOffsetX();
 
 	/**
 	 * Returns the Y coordinate of the mouse pointer relative to the position of the padding edge of the target node.
@@ -108,7 +108,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the Y coordinate of the mouse pointer relative to the position of the padding edge of the target node
 	 */
 	@JsProperty
-	public native double getOffsetY();
+	public final native double getOffsetY();
 
 	/**
 	 * Returns the X coordinate of the mouse pointer relative to the whole document.
@@ -116,7 +116,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the X coordinate of the mouse pointer relative to the whole document
 	 */
 	@JsProperty
-	public native double getPageX();
+	public final native double getPageX();
 
 	/**
 	 * Returns the Y coordinate of the mouse pointer relative to the whole document.
@@ -124,7 +124,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the Y coordinate of the mouse pointer relative to the whole document
 	 */
 	@JsProperty
-	public native double getPageY();
+	public final native double getPageY();
 
 	/**
 	 * Returns the X coordinate of the mouse pointer in global (screen) coordinates.
@@ -132,7 +132,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the X coordinate of the mouse pointer in global (screen) coordinates
 	 */
 	@JsProperty
-	public native double getScreenX();
+	public final native double getScreenX();
 
 	/**
 	 * Returns the Y coordinate of the mouse pointer in global (screen) coordinates.
@@ -140,7 +140,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the Y coordinate of the mouse pointer in global (screen) coordinates
 	 */
 	@JsProperty
-	public native double getScreenY();
+	public final native double getScreenY();
 
 	/**
 	 * Returns true if the shift key was down when the mouse event was fired.
@@ -148,7 +148,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return true if the shift key was down when the mouse event was fired
 	 */
 	@JsProperty
-	public native boolean isShiftKey();
+	public final native boolean isShiftKey();
 
 	/**
 	 * Returns the secondary target for the event, if there is one.
@@ -156,7 +156,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the secondary target for the event, if there is one
 	 */
 	@JsProperty
-	public native BaseHtmlElement getRelatedTarget();
+	public final native BaseHtmlElement getRelatedTarget();
 
 	/**
 	 * Returns a list of all the touch objects representing individual points of contact whose states changed between the previous touch event and this one.
@@ -164,7 +164,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return a list of all the touch objects representing individual points of contact whose states changed between the previous touch event and this one
 	 */
 	@JsProperty
-	public native TouchList getChangedTouches();
+	public final native TouchList getChangedTouches();
 
 	/**
 	 * Returns a list of all the touch objects that are both currently in contact with the touch surface and were also started on the same element that is the target of the event.
@@ -172,7 +172,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return a list of all the touch objects that are both currently in contact with the touch surface and were also started on the same element that is the target of the event
 	 */
 	@JsProperty
-	public native TouchList getTargetTouches();
+	public final native TouchList getTargetTouches();
 
 	/**
 	 * Returns a list of all the touch objects representing all current points of contact with the surface, regardless of target or changed status.
@@ -180,7 +180,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return a list of all the touch objects representing all current points of contact with the surface, regardless of target or changed status
 	 */
 	@JsProperty
-	public native TouchList getTouches();
+	public final native TouchList getTouches();
 
 	/**
 	 * Returns the horizontal coordinate of the event relative to the current layer.
@@ -188,7 +188,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the horizontal coordinate of the event relative to the current layer
 	 */
 	@JsProperty
-	public native int getLayerX();
+	public final native int getLayerX();
 
 	/**
 	 * Returns the vertical coordinate of the event relative to the current layer.
@@ -196,7 +196,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the vertical coordinate of the event relative to the current layer
 	 */
 	@JsProperty
-	public native int getLayerY();
+	public final native int getLayerY();
 
 	/**
 	 * Returns the horizontal coordinate of the event relative to the current layer.
@@ -204,7 +204,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the horizontal coordinate of the event relative to the current layer
 	 */
 	@JsOverlay
-	public double getX() {
+	public final double getX() {
 		// gets the event target
 		BaseEventTarget target = getTarget();
 		// checks if is a html element
@@ -212,7 +212,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 			// casts to html element
 			BaseHtmlElement element = (BaseHtmlElement) target;
 			// extracts the scrolling element
-			BaseElement scrollElement = getScrollingElement(element.getOwnerDocument());
+			BaseElement scrollElement = element.getScrollingElement();
 			// calculates the real X coordinate
 			return getClientX() - element.getAbsoluteLeft() + element.getScrollLeft() + scrollElement.getScrollLeft();
 		}
@@ -227,7 +227,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the vertical coordinate of the event relative to the current layer
 	 */
 	@JsOverlay
-	public double getY() {
+	public final double getY() {
 		// gets the event target
 		BaseEventTarget target = getTarget();
 		// checks if is a html element
@@ -235,7 +235,7 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 			// casts to html element
 			BaseHtmlElement element = (BaseHtmlElement) target;
 			// extracts the scrolling element
-			BaseElement scrollElement = getScrollingElement(element.getOwnerDocument());
+			BaseElement scrollElement = element.getScrollingElement();
 			// calculates the real Y coordinate
 			return getClientY() - element.getAbsoluteTop() + element.getScrollTop() + scrollElement.getScrollTop();
 		}
@@ -243,22 +243,4 @@ public final class BaseNativeEvent extends BaseEvent implements IsCastable {
 		// then returns the client Y
 		return getClientY();
 	}
-
-	/**
-	 * Returns the scrolling element of the document, if there is, or the document element.
-	 * 
-	 * @param document document instance to check
-	 * @return the scrolling element of the document, if there is, or the document element
-	 */
-	@JsOverlay
-	private BaseElement getScrollingElement(BaseDocument document) {
-		// checks if document has got the scrolling
-		if (document.getScrollingElement() != null) {
-			// returns the scrolling element
-			return document.getScrollingElement();
-		}
-		// if not, returns the document element
-		return document.getDocumentElement();
-	}
-
 }

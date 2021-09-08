@@ -287,6 +287,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `align` property, as a double representing the clockwise angle (in degree), to `DataLabels` options in order to define the label box alignment relative to anchor.
   * add `getRelativePosition` method to `Helpers` class in order to get the relative position of an event on the chart.
   * add `modifierKey` property to `DatasetsItemsSelector` options plugin in order to enable the selection only when a modifier key is pressed.
+  * enable programmatically selection on a chart by `DatasetsItemsSelector` plugin.
 
 ### Fixed Bugs
 

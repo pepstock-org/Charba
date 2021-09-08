@@ -38,11 +38,18 @@ final class SelectionTrack {
 	 * Creates the object storing the original X point of mouse down.
 	 * 
 	 * @param starting the original X point of mouse down.
+	 * @param formerInstance former instance of the tracker
 	 */
-	SelectionTrack(double starting) {
+	SelectionTrack(double starting, SelectionTrack formerInstance) {
 		this.starting = starting;
 		// sets as start point as well
 		this.start = starting;
+		// checks if former instance is consistent
+		if (formerInstance != null) {
+			// stores the previous values
+			setStartValue(formerInstance.getStartValue());
+			setEndValue(formerInstance.getEndValue());
+		}
 	}
 
 	/**
@@ -144,7 +151,7 @@ final class SelectionTrack {
 	 */
 	@Override
 	public String toString() {
-		return "SelectionTrack [starting=" + starting + ", start=" + start + ", end=" + end + "]";
+		return "SelectionTrack [starting=" + starting + ", start=" + start + ", end=" + end + ", startValue=" + startValue + ", endValue=" + endValue + "]";
 	}
 
 }

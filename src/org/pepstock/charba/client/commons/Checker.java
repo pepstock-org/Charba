@@ -84,6 +84,27 @@ public final class Checker {
 	// -----------------
 
 	/**
+	 * Checks if the value is a consistent number and returns it. If not a consistent number, returns 0.
+	 * 
+	 * @param value value to be checked
+	 * @return the value passed as argument if is a consistent number or 0.
+	 */
+	public static int validOrZero(int value) {
+		return validOrDefault(value, 0);
+	}
+
+	/**
+	 * Checks if the value is a consistent number and returns it. If not a consistent number, returns the default.
+	 * 
+	 * @param value value to be checked
+	 * @param defaultValue value to return if the value is not a consistent number
+	 * @return the value passed as argument if is a consistent number or the default.
+	 */
+	public static int validOrDefault(int value, int defaultValue) {
+		return Undefined.is(value) ? defaultValue : value;
+	}
+
+	/**
 	 * Checks if the value is a positive number and returns it. If not a positive number, returns 0.
 	 * 
 	 * @param value value to be checked
@@ -233,6 +254,27 @@ public final class Checker {
 	// -----------------
 	// DOUBLE setter
 	// -----------------
+
+	/**
+	 * Checks if the value is a consistent number and returns it. If not a consistent number, returns 0.
+	 * 
+	 * @param value value to be checked
+	 * @return the value passed as argument if is a consistent number or 0.
+	 */
+	public static double validOrZero(double value) {
+		return validOrDefault(value, 0);
+	}
+
+	/**
+	 * Checks if the value is a consistent number and returns it. If not a consistent number, returns the default.
+	 * 
+	 * @param value value to be checked
+	 * @param defaultValue value to return if the value is not a consistent number
+	 * @return the value passed as argument if is a consistent number or the default.
+	 */
+	public static double validOrDefault(double value, double defaultValue) {
+		return Undefined.is(value) ? defaultValue : value;
+	}
 
 	/**
 	 * Checks if the value is a positive number and returns it. If not a positive number, returns 0.
@@ -928,6 +970,18 @@ public final class Checker {
 	// -----------------
 	// OBJECT
 	// -----------------
+
+	/**
+	 * Checks if the value is a consistent object and returns it. If not a consistent object, returns the default.
+	 * 
+	 * @param value value to be checked
+	 * @param defaultValue value to return if the value is not a consistent object
+	 * @param <T> type of the object to check
+	 * @return the value passed as argument if is a consistent object or the default.
+	 */
+	public static <T> T validOrDefault(T value, T defaultValue) {
+		return value == null ? defaultValue : value;
+	}
 
 	/**
 	 * Checks if value passed as argument is valid.<br>

@@ -21,25 +21,27 @@ import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.dom.BaseElement;
 import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
 import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
-import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.items.ChartAreaNode;
+import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.items.ScaleItem;
-import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsImmutableFont;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -51,6 +53,11 @@ import org.pepstock.charba.client.utils.Utilities;
  */
 final class SelectionHandler {
 
+	// custom event type for programmatically selection
+	static final String INTERNAL_MOUSE_DOWN = BaseEventTypes.MOUSE_DOWN + System.currentTimeMillis();
+	// custom event type for programmatically selection
+	static final String INTERNAL_MOUSE_UP = BaseEventTypes.MOUSE_UP + System.currentTimeMillis();
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -58,10 +65,14 @@ final class SelectionHandler {
 	private final CallbackProxy<EventListenerCallback> mouseDownCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover function
 	private final CallbackProxy<EventListenerCallback> mouseMoveCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the leave function
+	// callback proxy to invoke the up function
 	private final CallbackProxy<EventListenerCallback> mouseUpCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the leave function
 	private final CallbackProxy<EventListenerCallback> mouseLeaveCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the click function
+	private final CallbackProxy<EventListenerCallback> internalMouseDownCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the up function
+	private final CallbackProxy<EventListenerCallback> internalMouseUpCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// chart instance
 	private final IsChart chart;
@@ -84,8 +95,6 @@ final class SelectionHandler {
 	private String previousChartAreaAsString = null;
 	// previous data URL chart as PNG
 	private String previousDataURL = null;
-	// flag if do not send any event after refresh
-	private boolean skipNextFireEvent = false;
 	// cursor before hover the selection cleaner
 	private CursorType cursorOverSelectionCleaner = null;
 	// this is a flag to prevent click event after drawing
@@ -113,6 +122,10 @@ final class SelectionHandler {
 		this.mouseUpCallbackProxy.setCallback(this::onMouseUp);
 		// sets function to proxy callback in order to invoke the java interface
 		this.mouseLeaveCallbackProxy.setCallback(this::onMouseLeave);
+		// sets function to proxy callback in order to invoke the java interface
+		this.internalMouseDownCallbackProxy.setCallback(this::onMouseDown);
+		// sets function to proxy callback in order to invoke the java interface
+		this.internalMouseUpCallbackProxy.setCallback(this::onMouseUp);
 		// stores original padding values
 		this.paddingTop = chart.getOptions().getLayout().getPadding().getTop();
 		this.paddingBottom = chart.getOptions().getLayout().getPadding().getBottom();
@@ -186,6 +199,8 @@ final class SelectionHandler {
 		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
 		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_LEAVE, mouseLeaveCallbackProxy.getProxy());
 		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_UP, mouseUpCallbackProxy.getProxy());
+		chart.getCanvas().addEventListener(INTERNAL_MOUSE_DOWN, internalMouseDownCallbackProxy.getProxy());
+		chart.getCanvas().addEventListener(INTERNAL_MOUSE_UP, internalMouseUpCallbackProxy.getProxy());
 	}
 
 	/**
@@ -197,6 +212,8 @@ final class SelectionHandler {
 		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
 		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_LEAVE, mouseLeaveCallbackProxy.getProxy());
 		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_UP, mouseUpCallbackProxy.getProxy());
+		chart.getCanvas().removeEventListener(INTERNAL_MOUSE_DOWN, internalMouseDownCallbackProxy.getProxy());
+		chart.getCanvas().removeEventListener(INTERNAL_MOUSE_UP, internalMouseUpCallbackProxy.getProxy());
 	}
 
 	/**
@@ -331,15 +348,6 @@ final class SelectionHandler {
 	}
 
 	/**
-	 * Sets if next event firing should be skipped.
-	 * 
-	 * @param skipNextFireEvent the skipNextFireEvent to set
-	 */
-	void setSkipNextFireEvent(boolean skipNextFireEvent) {
-		this.skipNextFireEvent = skipNextFireEvent;
-	}
-
-	/**
 	 * Returns the image which is snapshot of chart.
 	 * 
 	 * @return the snapshot
@@ -371,8 +379,8 @@ final class SelectionHandler {
 		// always related to area dimension
 		area.setTop(chartArea.getTop());
 		area.setBottom(chartArea.getBottom());
-		// initializes the mouse track
-		track = new SelectionTrack(x);
+		// initializes the mouse track using the previous instance if exist
+		track = new SelectionTrack(x, track);
 	}
 
 	/**
@@ -482,7 +490,7 @@ final class SelectionHandler {
 	 * @param event event which will complete the selection
 	 */
 	void endSelection(BaseNativeEvent event) {
-		endSelection(event, false);
+		endSelection(event, true);
 	}
 
 	/**
@@ -490,25 +498,35 @@ final class SelectionHandler {
 	 * Can be invokes by mouse up or refresh of chart (like resizing).
 	 * 
 	 * @param event event which will complete the selection
-	 * @param skipNextFireEvent if <code>true</code>, does not send any event
+	 * @param fireEvent if <code>false</code>, does not send any event
 	 */
-	void endSelection(BaseNativeEvent event, boolean skipNextFireEvent) {
+	void endSelection(BaseNativeEvent event, boolean fireEvent) {
 		// sets status
 		setStatus(SelectionStatus.SELECTED);
 		// checks if it must send event
 		// and if an area has been selected
-		if (!skipNextFireEvent && track != null && track.isValid() && chart.isEventHandled(DatasetRangeSelectionEvent.TYPE)) {
-			// gets chart node
-			ChartNode node = chart.getNode();
-			// gets the scale element of chart
-			// using the X axis id of plugin options
-			ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID().value());
+		if (fireEvent && track != null && track.isValid() && chart.isEventHandled(DatasetRangeSelectionEvent.TYPE)) {
+			// gets scale
+			ScaleItem scaleItem = getScale();
 			// stores the values of selected area from scale
 			track.setStartValue(scaleItem.getValueForPixel(area.getLeft()));
 			track.setEndValue(scaleItem.getValueForPixel(area.getRight()));
 			// fires the event that scale items selection
 			chart.fireEvent(new DatasetRangeSelectionEvent(event, scaleItem.getValueAtPixel(area.getLeft()), scaleItem.getValueAtPixel(area.getRight())));
 		}
+	}
+
+	/**
+	 * Returns the scale related to the plugin.
+	 * 
+	 * @return the scale related to the plugin
+	 */
+	ScaleItem getScale() {
+		// gets chart node
+		ChartNode node = chart.getNode();
+		// gets the scale element of chart
+		// using the X axis id of plugin options
+		return node.getScales().getItems().get(options.getXAxisID().value());
 	}
 
 	/**
@@ -534,42 +552,64 @@ final class SelectionHandler {
 		if (endPixel > chartArea.getRight()) {
 			// changes the track accordingly
 			track.setCurrent(chartArea.getRight());
-			track.setEndValue(scaleItem.getValueForPixel(track.getEnd()));
 			// reset end pixel
 			endPixel = chartArea.getRight();
-		}
-		// workaround for category scale
-		// when only 1 label has been selected
-		if (ChartAxisType.CATEGORY.equals(scaleItem.getType().getBaseType()) && Double.compare(track.getStartValue(), track.getEndValue()) == 0) {
-			// gets a reference of next value
-			// if start value is 0 it will use the value 1 to get the pixels gap
-			// otherwise it will use the previous value
-			double nextValueIndex = (track.getStartValue() == 0D) ? 1D : track.getStartValue() - 1;
-			// gets the pixel by value
-			double nextEndPixel = scaleItem.getPixelForValue(nextValueIndex);
-			// if the pixel is consistent
-			if (Undefined.isNot(nextEndPixel)) {
-				// calculates the gap
-				// if start value equals to 0 (first) then uses values from 0 to 1
-				// if start value greater than 0 (no first) then uses values from current value minus 1
-				double gap = (track.getStartValue() == 0D) ? (nextEndPixel - startPixel) / 2D : (startPixel - nextEndPixel) / 2D;
-				// increments the start and end points
-				startPixel = startPixel - gap;
-				endPixel = endPixel + gap;
-			} else {
-				// if here the pixel of the other value is not consistent
-				// then uses the whole area
-				startPixel = chartArea.getLeft();
-				endPixel = chartArea.getRight();
-			}
 		}
 		// this is new start selection point
 		startSelection((int) Math.ceil(startPixel));
 		updateSelection((int) endPixel, true);
 		// when here, the area has been draw
 		// then complete the selection
-		endSelection(DOMBuilder.get().createChangeEvent(), skipNextFireEvent);
-		skipNextFireEvent = false;
+		endSelection(DOMBuilder.get().createChangeEvent(), false);
+	}
+
+	/**
+	 * Selects an area, invoked programmatically.
+	 * 
+	 * @param from starting scale value
+	 * @param to ending scale value
+	 */
+	void setSelection(double from, double to) {
+		// gets chart node
+		ChartNode node = chart.getNode();
+		// gets chart area
+		ChartAreaNode area = node.getChartArea();
+		// checks if area is consistent
+		if (!IsArea.isConsistent(area)) {
+			return;
+		}
+		// normalized the from and to passed
+		// if not consistent, uses the area
+		final double normalizedFrom = Checker.validOrDefault(from, area.getLeft());
+		final double normalizedTo = Checker.validOrDefault(to, area.getRight());
+		// gets canvas
+		Canvas canvas = chart.getCanvas();
+		// extracts the scrolling element
+		BaseElement scrollElement = canvas.getScrollingElement();
+		// gets canvas client coordinates
+		final double clientX = canvas.getAbsoluteLeft() + canvas.getScrollLeft() + scrollElement.getScrollLeft();
+		final double clientY = canvas.getAbsoluteTop() + canvas.getScrollTop() + scrollElement.getScrollTop();
+		// calculates the real FROM X coordinate
+		final double xFrom = normalizedFrom + clientX;
+		// calculates the real TO X coordinate
+		final double xTo = normalizedTo + clientX;
+		// calculates the real Y coordinate, mid of chart area
+		final double y = (area.getHeight() / 2) + clientY;
+		// gets canvas as internal one
+		SelectCanvas selectCanvas = canvas.as();
+		// creates an initialization dictionary to create mouse event
+		SelectEventInit init = new SelectEventInit();
+		// sets mouse down and client coordinates
+		init.setType(SelectionHandler.INTERNAL_MOUSE_DOWN);
+		init.setClientX(xFrom);
+		init.setClientY(y);
+		// creates and fires the event
+		selectCanvas.dispatchEvent(DOMBuilder.get().createSelectionEvent(init));
+		// sets mouse up and client coordinates
+		init.setType(SelectionHandler.INTERNAL_MOUSE_UP);
+		init.setClientX(xTo);
+		// creates and fires the event
+		selectCanvas.dispatchEvent(DOMBuilder.get().createSelectionEvent(init));
 	}
 
 	/**

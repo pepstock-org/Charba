@@ -342,6 +342,11 @@ public final class NativeName {
 	public static final String DOM_EVENT = "Event";
 
 	/**
+	 * Constant to bind java script object as DOM mouse event with name <b>{@value DOM_MOUSE_EVENT}</b>.
+	 */
+	public static final String DOM_MOUSE_EVENT = "MouseEvent";
+
+	/**
 	 * Constant to bind java script object as DOM location with name <b>{@value DOM_LOCATION}</b>.
 	 */
 	public static final String DOM_LOCATION = "Location";

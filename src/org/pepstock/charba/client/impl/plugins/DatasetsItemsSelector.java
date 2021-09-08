@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,11 @@ import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.configuration.BarOptions;
+import org.pepstock.charba.client.configuration.CartesianCategoryAxis;
+import org.pepstock.charba.client.configuration.CartesianLinearAxis;
+import org.pepstock.charba.client.configuration.CartesianLogarithmicAxis;
+import org.pepstock.charba.client.configuration.CartesianTimeAxis;
+import org.pepstock.charba.client.configuration.CartesianTimeSeriesAxis;
 import org.pepstock.charba.client.configuration.LineOptions;
 import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.Dataset;
@@ -40,6 +46,7 @@ import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.impl.callbacks.AtLeastOneDatasetHandler;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptionsFactory.DatasetsItemsSelectorDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.PluginEventArgument;
+import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.utils.Utilities;
@@ -181,19 +188,62 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	}
 
 	/**
-	 * Sets a flag to skip to send event after refresh. This is helpful for drill down implementation.
+	 * Selects an area, invoked programmatically.<br>
+	 * Values on axis are retrieved as string ({@link CartesianCategoryAxis}).
 	 * 
-	 * @param chart chart instance to apply the fire events skipping.
+	 * @param chart chart instance to use for selection
+	 * @param from starting axis value
+	 * @param to ending axis value
 	 */
-	public void skipNextRefreshFireEvent(IsChart chart) {
-		// checks is chart is consistent
-		// checks if the plugin has been invoked for LINE or BAR charts
-		// checks if we have already an handler
-		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
+	public void setSelection(IsChart chart, String from, String to) {
+		// checks if arguments are consistent
+		if (IsChart.isConsistent(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// gets selection handler
 			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
-			// sets the flag to skip next event after refresh
-			handler.setSkipNextFireEvent(true);
+			// gets scale
+			ScaleItem scaleItem = handler.getScale();
+			// sets selection
+			handler.setSelection(scaleItem.getPixelForStringValue(from), scaleItem.getPixelForStringValue(to));
+		}
+	}
+
+	/**
+	 * Selects an area, invoked programmatically.<br>
+	 * Values on axis are retrieved as number ({@link CartesianLinearAxis} or {@link CartesianLogarithmicAxis}).
+	 * 
+	 * @param chart chart instance to use for selection
+	 * @param from starting axis value
+	 * @param to ending axis value
+	 */
+	public void setSelection(IsChart chart, double from, double to) {
+		// checks if arguments are consistent
+		if (IsChart.isConsistent(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
+			// gets selection handler
+			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
+			// gets scale
+			ScaleItem scaleItem = handler.getScale();
+			// sets selection
+			handler.setSelection(scaleItem.getPixelForValue(from), scaleItem.getPixelForValue(to));
+		}
+	}
+
+	/**
+	 * Selects an area, invoked programmatically.<br>
+	 * Values on axis are retrieved as date ({@link CartesianTimeAxis} or {@link CartesianTimeSeriesAxis}).
+	 * 
+	 * @param chart chart instance to use for selection
+	 * @param from starting axis value
+	 * @param to ending axis value
+	 */
+	public void setSelection(IsChart chart, Date from, Date to) {
+		// checks if arguments are consistent
+		if (IsChart.isConsistent(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
+			// gets selection handler
+			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
+			// gets scale
+			ScaleItem scaleItem = handler.getScale();
+			// sets selection
+			handler.setSelection(scaleItem.getPixelForDateValue(from), scaleItem.getPixelForDateValue(to));
 		}
 	}
 

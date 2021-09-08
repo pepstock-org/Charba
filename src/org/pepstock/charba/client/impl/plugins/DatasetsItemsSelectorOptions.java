@@ -41,6 +41,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * <li>the border width
  * <li>the border dash
  * <li>the border dash offset
+ * <li>flag to fire event on update
  * <li>"clear" options
  * </ul>
  * 

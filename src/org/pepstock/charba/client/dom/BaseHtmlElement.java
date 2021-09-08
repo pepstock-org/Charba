@@ -226,4 +226,28 @@ public class BaseHtmlElement extends BaseElement {
 		}
 		return left;
 	}
+
+	/**
+	 * Returns the scrolling element of the document, if there is, or the document element.
+	 * 
+	 * @return the scrolling element of the document, if there is, or the document element
+	 */
+	@JsOverlay
+	public final BaseElement getScrollingElement() {
+		// gets own document
+		BaseDocument document = getOwnerDocument();
+		// checks if argument is consistent
+		if (document != null) {
+			// checks if document has got the scrolling
+			if (document.getScrollingElement() != null) {
+				// returns the scrolling element
+				return document.getScrollingElement();
+			}
+			// if not, returns the document element
+			return document.getDocumentElement();
+		}
+		// if here the argument is not consistent
+		// then returns null
+		return null;
+	}
 }
