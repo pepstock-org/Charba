@@ -19,13 +19,13 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.BarBorderWidthCallback;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
-import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
@@ -103,9 +103,9 @@ public final class MatrixDataset extends HoverFlexDataset {
 	// user callback implementation for border radius
 	private BorderRadiusCallback borderRadiusCallback = null;
 	// user callback implementation for border width
-	private WidthCallback<DatasetContext> borderWidthCallback = null;
+	private BarBorderWidthCallback borderWidthCallback = null;
 	// user callback implementation for hover border width
-	private WidthCallback<DatasetContext> hoverBorderWidthCallback = null;
+	private BarBorderWidthCallback hoverBorderWidthCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -403,7 +403,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 */
 	public void setBorderWidth(BarBorderWidth borderWidth) {
 		// resets callback
-		setBorderWidth((WidthCallback<DatasetContext>) null);
+		setBorderWidth((BarBorderWidthCallback) null);
 		// stores the value
 		setValue(Dataset.CommonProperty.BORDER_WIDTH, borderWidth);
 	}
@@ -434,7 +434,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 */
 	public void setHoverBorderWidth(BarBorderWidth hoverBorderWidth) {
 		// resets callback
-		setBorderWidth((WidthCallback<DatasetContext>) null);
+		setHoverBorderWidth((BarBorderWidthCallback) null);
 		// stores the value
 		setValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, hoverBorderWidth);
 	}
@@ -584,7 +584,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 * 
 	 * @param borderWidthCallback the border width callback
 	 */
-	public void setBorderWidth(WidthCallback<DatasetContext> borderWidthCallback) {
+	public void setBorderWidth(BarBorderWidthCallback borderWidthCallback) {
 		// sets the callback
 		this.borderWidthCallback = borderWidthCallback;
 		// checks if consistent
@@ -602,7 +602,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 * 
 	 * @return the border width callback
 	 */
-	public WidthCallback<DatasetContext> getBorderWidthCallback() {
+	public BarBorderWidthCallback getBorderWidthCallback() {
 		return borderWidthCallback;
 	}
 
@@ -613,7 +613,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 */
 	public void setBorderWidth(NativeCallback borderWidthCallback) {
 		// resets callback
-		setBorderWidth((WidthCallback<DatasetContext>) null);
+		setBorderWidth((BarBorderWidth) null);
 		// stores value
 		setValue(Dataset.CommonProperty.BORDER_WIDTH, borderWidthCallback);
 	}
@@ -623,7 +623,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 * 
 	 * @param hoverBorderWidthCallback the hover border width callback
 	 */
-	public void setHoverBorderWidth(WidthCallback<DatasetContext> hoverBorderWidthCallback) {
+	public void setHoverBorderWidth(BarBorderWidthCallback hoverBorderWidthCallback) {
 		// sets the callback
 		this.hoverBorderWidthCallback = hoverBorderWidthCallback;
 		// checks if consistent
@@ -641,7 +641,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 * 
 	 * @return the hover border width callback
 	 */
-	public WidthCallback<DatasetContext> getHoverBorderWidthCallback() {
+	public BarBorderWidthCallback getHoverBorderWidthCallback() {
 		return hoverBorderWidthCallback;
 	}
 
@@ -652,7 +652,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 */
 	public void setHoverBorderWidth(NativeCallback hoverBorderWidthCallback) {
 		// resets callback
-		setHoverBorderWidth((WidthCallback<DatasetContext>) null);
+		setHoverBorderWidth((BarBorderWidthCallback) null);
 		// stores value
 		setValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, hoverBorderWidthCallback);
 	}
@@ -733,7 +733,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 * @param defaultValue default value of the option
 	 * @return a object property value, as integer or {@link BarBorderWidth}
 	 */
-	final NativeObject onBorderWidth(DatasetContext context, WidthCallback<DatasetContext> callback, int defaultValue) {
+	final NativeObject onBorderWidth(DatasetContext context, BarBorderWidthCallback callback, int defaultValue) {
 		int valueToReturn = defaultValue;
 		// gets value
 		Object value = ScriptableUtils.getOptionValue(context, callback);

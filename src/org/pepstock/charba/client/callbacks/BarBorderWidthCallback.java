@@ -16,9 +16,10 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.data.BarDataset;
+import org.pepstock.charba.client.matrix.MatrixDataset;
 
 /**
- * Callback interface to set whatever <code>borderWidth</code> property at runtime, only for {@link BarDataset}.
+ * Callback interface to set whatever <code>borderWidth</code> or <code>hoverBorderWidth</code> properties at runtime, for {@link BarDataset} and {@link MatrixDataset}.
  * 
  * @author Andrea "Stock" Stocchero
  *
