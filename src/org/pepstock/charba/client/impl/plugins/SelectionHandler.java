@@ -573,15 +573,15 @@ final class SelectionHandler {
 		// gets chart node
 		ChartNode node = chart.getNode();
 		// gets chart area
-		ChartAreaNode area = node.getChartArea();
+		ChartAreaNode chartArea = node.getChartArea();
 		// checks if area is consistent
-		if (!IsArea.isConsistent(area)) {
+		if (!IsArea.isConsistent(chartArea)) {
 			return;
 		}
 		// normalized the from and to passed
 		// if not consistent, uses the area
-		final double normalizedFrom = Checker.validOrDefault(from, area.getLeft());
-		final double normalizedTo = Checker.validOrDefault(to, area.getRight());
+		final double normalizedFrom = Checker.validOrDefault(from, chartArea.getLeft());
+		final double normalizedTo = Checker.validOrDefault(to, chartArea.getRight());
 		// gets canvas
 		Canvas canvas = chart.getCanvas();
 		// extracts the scrolling element
@@ -594,7 +594,7 @@ final class SelectionHandler {
 		// calculates the real TO X coordinate
 		final double xTo = normalizedTo + clientX;
 		// calculates the real Y coordinate, mid of chart area
-		final double y = (area.getHeight() / 2) + clientY;
+		final double y = (chartArea.getHeight() / 2) + clientY;
 		// gets canvas as internal one
 		SelectCanvas selectCanvas = canvas.as();
 		// creates an initialization dictionary to create mouse event
