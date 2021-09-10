@@ -19,7 +19,8 @@ import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 
 /**
- * Interface to map a font element in read-only mode, normalized by CHART.JS by {@link Helpers#toFont(org.pepstock.charba.client.items.FontItem)}, providing also the CSS string of font itself.
+ * Interface to map a font element in read-only mode, normalized by CHART.JS by {@link Helpers#toFont(org.pepstock.charba.client.items.FontItem)}, providing also the CSS string of
+ * font itself.
  * 
  * @author Andrea "Stock" Stocchero
  */

@@ -106,5 +106,4 @@ public abstract class AbstractFont extends AbstractReadOnlyFont implements IsFon
 		getDelegated().setLineHeight(lineHeight);
 	}
 
-
 }

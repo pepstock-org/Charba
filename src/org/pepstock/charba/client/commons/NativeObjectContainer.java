@@ -193,7 +193,7 @@ public abstract class NativeObjectContainer {
 		// if not consistent, returns undefined
 		return Key.isValid(key) ? JsHelper.get().typeOf(nativeObject, key.value()) : ObjectType.UNDEFINED;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the type of the property is equals to one of the object types passed as argument.
 	 * 

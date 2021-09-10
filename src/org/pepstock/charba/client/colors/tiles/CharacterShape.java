@@ -149,7 +149,7 @@ public final class CharacterShape extends AbstractShape {
 		IsImmutableFont result = null;
 		// creates an instance for font size
 		int calculatedFontSize = (int) size;
-		// creates a font item 
+		// creates a font item
 		FontItem font = new FontItem();
 		// sets size and family
 		font.setSize(calculatedFontSize);

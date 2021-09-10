@@ -112,5 +112,5 @@ final class DefaultFont implements IsDefaultFont {
 	public FontItem create() {
 		return Defaults.get().getGlobal().getFont().create();
 	}
-	
+
 }

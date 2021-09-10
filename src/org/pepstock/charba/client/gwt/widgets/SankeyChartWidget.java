@@ -23,7 +23,7 @@ import org.pepstock.charba.client.sankey.SankeyOptions;
 /**
  * Sankey charts are a type of flow diagram in which the width of the arrows is proportional to the flow rate.<br>
  * Sankey diagrams emphasize the major transfers or flows within a system.<br>
- * They help locate the most important contributions to a flow.<br> 
+ * They help locate the most important contributions to a flow.<br>
  * They often show conserved quantities within defined system boundaries.
  * 
  * @author Andrea "Stock" Stocchero

@@ -123,7 +123,7 @@ public final class Helpers {
 		// then returns the default
 		return DEFAULT_EVENT_POINT;
 	}
-	
+
 	/**
 	 * A common occurrence is taking an event, such as a click, and finding the data coordinates on the chart where the event occurred. It provides the relative point on canvas.
 	 * 
@@ -140,7 +140,7 @@ public final class Helpers {
 		// then returns the default
 		return DEFAULT_EVENT_POINT;
 	}
-	
+
 	/**
 	 * A common occurrence is taking an event, such as a click, and finding the data coordinates on the chart where the event occurred. It provides the relative point on canvas.
 	 * 
@@ -158,7 +158,7 @@ public final class Helpers {
 		// then returns the default
 		return DEFAULT_EVENT_POINT;
 	}
-	
+
 	// --------------
 	// CHART
 	// --------------
@@ -191,7 +191,7 @@ public final class Helpers {
 		// then returns defaults
 		return new ImmutableFont(Defaults.get().getGlobal().getFont().create().nativeObject());
 	}
-	
+
 	/**
 	 * Builds the font string (shorthand property of CSS font) to use in the canvas object.<br>
 	 * See <a href="https://www.w3schools.com/tags/canvas_font.asp">here</a> CSS specification.
@@ -217,7 +217,7 @@ public final class Helpers {
 		// creates and returns the CSS string
 		return toFont(font).toCSSString();
 	}
-	
+
 	// --------------
 	// CHART
 	// --------------
@@ -420,7 +420,7 @@ public final class Helpers {
 		// if here, all values are consistent
 		return true;
 	}
-	
+
 	/**
 	 * Maps a font element normalized by CHART.JS by {@link Helpers#toFont(org.pepstock.charba.client.items.FontItem)}.
 	 * 
@@ -436,7 +436,7 @@ public final class Helpers {
 		private ImmutableFont(NativeObject nativeObject) {
 			super(nativeObject);
 		}
-		
+
 	}
 
 }
