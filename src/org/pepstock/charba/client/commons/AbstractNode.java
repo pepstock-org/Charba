@@ -20,6 +20,7 @@ import java.util.Date;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -457,6 +458,18 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	 */
 	protected final void setValueAndAddToParent(Key key, BaseNativeEvent value) {
 		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets a value (BaseHtmlElement) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setElementAndAddToParent(Key key, BaseHtmlElement value) {
+		setElement(key, value);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
