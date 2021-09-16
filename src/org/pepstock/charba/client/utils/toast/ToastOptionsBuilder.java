@@ -15,6 +15,7 @@
 * @return builder instance */
 package org.pepstock.charba.client.utils.toast;
 
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.ToastType;
 import org.pepstock.charba.client.utils.toast.events.ClickEventHandler;
@@ -199,6 +200,17 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setTimeout(int timeout) {
 		options.setTimeout(timeout);
+		return this;
+	}
+
+	/**
+	 * Sets the icon image set for toast.
+	 * 
+	 * @param icon the icon image set for toast
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setIcon(Img icon) {
+		options.setIcon(icon);
 		return this;
 	}
 

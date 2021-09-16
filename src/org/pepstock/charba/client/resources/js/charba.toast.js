@@ -59,10 +59,10 @@ CharbaToast = {
       // -------------------------------
       // ICON
       // -------------------------------
-      if (options.icon) {
+      if (options.icon && options.icon.src) {
         wrapper.classList += ' img';
         const icon = document.createElement('img');
-        icon.src = options.icon;
+        icon.src = options.icon.src;
         icon.className = 'ct-icon';
         wrapper.appendChild(icon);
       }
