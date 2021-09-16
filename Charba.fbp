@@ -1,12 +1,26 @@
 <Project projectName="Charba">
-  <Jar>.\.\.\classes</Jar>
-  <AuxClasspathEntry>.\.\.\lib-ivy\compile\gwt-dev-2.9.0.jar</AuxClasspathEntry>
-  <AuxClasspathEntry>.\.\.\lib-ivy\compile\gwt-user-2.9.0.jar</AuxClasspathEntry>
-  <AuxClasspathEntry>.\.\.\lib-ivy\compile\ivy-2.5.0.jar</AuxClasspathEntry>
-  <AuxClasspathEntry>.\.\.\lib-ivy\compile\jsinterop-annotations-2.0.0.jar</AuxClasspathEntry>
+  <Jar>.\.\.\.\classes</Jar>
+  <AuxClasspathEntry>.\lib-ivy\compile\args4j-2.0.26.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\cglib-nodep-2.2.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\closure-compiler-externs-v20160713.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\closure-compiler-unshaded-v20160713.jar</AuxClasspathEntry>
   <AuxClasspathEntry>.\lib-ivy\compile\closure-compiler-v20210808.jar</AuxClasspathEntry>
-  <SrcDir>.\.\.\src</SrcDir>
-  <SrcDir>.\.\.\codegen</SrcDir>
+  <AuxClasspathEntry>.\lib-ivy\compile\closure-stylesheets-1.5.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\easymock-3.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\gson-2.7.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\guava-20.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\gwt-dev-2.9.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\gwt-user-2.9.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\hamcrest-core-1.1.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\ivy-2.5.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\javacc-4.1.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\jsinterop-annotations-2.0.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\jsr305-3.0.1.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\mockito-core-1.10.19.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\objenesis-2.1.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\compile\protobuf-java-2.5.0.jar</AuxClasspathEntry>
+  <SrcDir>.\.\.\.\src</SrcDir>
+  <SrcDir>.\.\.\.\codegen</SrcDir>
   <SuppressionFilter>
     <LastVersion value="-1" relOp="NEQ"/>
   </SuppressionFilter>
