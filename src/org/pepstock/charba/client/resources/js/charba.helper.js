@@ -188,6 +188,35 @@ CharbaJsObjectChartHelper.get = function(obj, key) {
 }
 /**
  * ----------------------------------------------------------------
+ * Element
+ * ----------------------------------------------------------------
+ * This object is providing a set of static methods used as utility
+ * to set and get properties from an object or proxy.   
+ */
+function CharbaJsObjectElementHelper() {}
+/**
+ * Allows you to set a property on an object.
+ *
+ * @param {Object} obj the target object on which to set the property
+ * @param {string} key the name of the property to set
+ * @param {HTMLElement} value the value to set
+ * @return {undefined}
+ */
+CharbaJsObjectElementHelper.set = function(obj, key, value) {
+  obj[key] = value;
+}
+/**
+ * Allows you to get a property on an object.
+ *
+ * @param {Object} obj the target object on which to get the property
+ * @param {string} key the name of the property to get
+ * @return {HTMLElement} the value of the property
+ */
+CharbaJsObjectElementHelper.get = function(obj, key) {
+  return obj[key];
+}
+/**
+ * ----------------------------------------------------------------
  * Double
  * ----------------------------------------------------------------
  * This object is providing a set of static methods used as utility

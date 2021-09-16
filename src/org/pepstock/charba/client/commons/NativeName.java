@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.commons;
 
+import org.pepstock.charba.client.utils.toast.Toaster;
+
 /**
  * Constants with java script object name to use in the {@link jsinterop.annotations.JsType} native objects.
  * 
@@ -54,6 +56,11 @@ public final class NativeName {
 	public static final String JS_HELPER = "CharbaJsHelper";
 
 	/**
+	 * Constant to bind java script object as {@link Toaster} with name <b>{@value JS_TOAST}</b>, (internal of Charba).
+	 */
+	public static final String JS_TOAST = "CharbaToast";
+
+	/**
 	 * Constant to bind java script object as {@link NativeJsObjectArray} with name <b>{@value JS_OBJECT_ARRAY_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_OBJECT_ARRAY_HELPER = "CharbaJsObjectArrayHelper";
@@ -77,6 +84,11 @@ public final class NativeName {
 	 * Constant to bind java script object as {@link NativeJsObjectChart} with name <b>{@value JS_OBJECT_CHART_HELPER}</b>, (internal of Charba).
 	 */
 	public static final String JS_OBJECT_CHART_HELPER = "CharbaJsObjectChartHelper";
+
+	/**
+	 * Constant to bind java script object as {@link NativeJsObjectElement} with name <b>{@value JS_OBJECT_ELEMENT_HELPER}</b>, (internal of Charba).
+	 */
+	public static final String JS_OBJECT_ELEMENT_HELPER = "CharbaJsObjectElementHelper";
 
 	/**
 	 * Constant to bind java script object as {@link NativeJsObjectDouble} with name <b>{@value JS_OBJECT_DOUBLE_HELPER}</b>, (internal of Charba).

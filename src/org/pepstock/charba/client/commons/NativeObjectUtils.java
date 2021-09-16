@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -223,6 +224,17 @@ final class NativeObjectUtils {
 	 * @param key the name of the property to be defined or modified.
 	 * @param value the object associated with the property.
 	 */
+	static void defineElementProperty(NativeObject object, String key, BaseHtmlElement value) {
+		NativeJsObjectElement.set(object, key, value);
+	}
+
+	/**
+	 * Defines a new property directly on object object, or modifies an existing property.
+	 * 
+	 * @param object native object to be managed
+	 * @param key the name of the property to be defined or modified.
+	 * @param value the object associated with the property.
+	 */
 	static void defineEventProperty(NativeObject object, String key, BaseNativeEvent value) {
 		NativeJsObjectEvent.set(object, key, value);
 	}
@@ -411,6 +423,22 @@ final class NativeObjectUtils {
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
 			return NativeJsObjectChart.get(object, key);
+		}
+		return null;
+	}
+
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param object native object to be managed
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	static BaseHtmlElement getElementProperty(NativeObject object, String key) {
+		// checks if the property is present
+		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
+			// returns the descriptor
+			return NativeJsObjectElement.get(object, key);
 		}
 		return null;
 	}

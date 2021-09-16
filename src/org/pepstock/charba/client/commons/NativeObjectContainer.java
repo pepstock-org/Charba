@@ -23,6 +23,7 @@ import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
@@ -1416,6 +1417,48 @@ public abstract class NativeObjectContainer {
 		}
 		// returns value
 		return NativeObjectUtils.getChartProperty(nativeObject, key.value());
+	}
+
+	// ------------------------------------------
+	// --- ELEMENT
+	// ------------------------------------------
+
+	/**
+	 * Sets a value (BaseHtmlElement) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValue(Key key, BaseHtmlElement value) {
+		// if value is null
+		// try to remove the reference if exists
+		if (value == null) {
+			// removes property if the property exists
+			remove(key);
+		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
+			// sets value
+			NativeObjectUtils.defineElementProperty(nativeObject, key.value(), value);
+		}
+	}
+
+	/**
+	 * Returns a value (BaseHtmlElement) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @return value of the property
+	 */
+	protected final BaseHtmlElement getElement(Key key) {
+		// checks if the property exists
+		if (!has(key)) {
+			// if no, returns null
+			return null;
+		}
+		// returns value
+		return NativeObjectUtils.getElementProperty(nativeObject, key.value());
 	}
 
 	// ------------------------------------------

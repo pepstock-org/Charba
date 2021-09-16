@@ -453,6 +453,24 @@ CharbaJsObjectChartHelper.set = function(object, key, value) {};
 CharbaJsObjectChartHelper.get = function(object, key) {};
 /**
  * @constructor
+ * @return {CharbaJsObjectElementHelper}
+ */
+function CharbaJsObjectElementHelper() {}
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @param {HTMLElement} value
+ * @return {undefined}
+ */
+CharbaJsObjectElementHelper.set = function(object, key, value) {};
+/**
+ * @param {Object} object
+ * @param {string} key 
+ * @return {HTMLElement}
+ */
+CharbaJsObjectElementHelper.get = function(object, key) {};
+/**
+ * @constructor
  * @return {CharbaJsObjectDoubleHelper}
  */
 function CharbaJsObjectDoubleHelper() {}
