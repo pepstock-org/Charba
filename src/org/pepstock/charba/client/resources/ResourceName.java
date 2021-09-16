@@ -76,7 +76,15 @@ public enum ResourceName implements Key
 	/**
 	 * Script element id for CHART.JS GEO controller.
 	 */
-	GEO_CONTROLLER("geo", false);
+	GEO_CONTROLLER("geo", false),
+	/**
+	 * CSS file to use in the Charba toast utility.
+	 */
+	TOAST_CSS_UTIL("charbaToastCss", false),
+	/**
+	 * JS file to use in the Charba toast utility.
+	 */
+	TOAST_JS_UTIL("charbaToastJs", false);
 
 	// name value of property
 	private final String value;

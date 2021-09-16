@@ -24,8 +24,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-enum ResourceHash
-{
+enum ResourceHash {
 
 	/**
 	 * Hash item for 'LuxonLibraryResource' class.
@@ -34,7 +33,7 @@ enum ResourceHash
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
-	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 985014),
+	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1253852),
 	/**
 	 * Hash item for 'DataLabelsPluginResource' class.
 	 */
@@ -46,7 +45,7 @@ enum ResourceHash
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */
-	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1368013),
+	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1297860),
 	/**
 	 * Hash item for 'MatrixControllerResource' class.
 	 */
@@ -60,6 +59,10 @@ enum ResourceHash
 	 */
 	CHART_JS_RESOURCE(ResourceName.CHART, 16860378),
 	/**
+	 * Hash item for 'ToastJsUtilResource' class.
+	 */
+	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 417294),
+	/**
 	 * Hash item for 'SankeyControllerResource' class.
 	 */
 	SANKEY_CONTROLLER_RESOURCE(ResourceName.SANKEY_CONTROLLER, 837597),
@@ -72,6 +75,10 @@ enum ResourceHash
 	 */
 	ANNOTATION_PLUGIN_RESOURCE(ResourceName.ANNOTATION_PLUGIN, 1243091),
 	/**
+	 * Hash item for 'ToastCssUtilResource' class.
+	 */
+	TOAST_CSS_UTIL_RESOURCE(ResourceName.TOAST_CSS_UTIL, 288076),
+	/**
 	 * Hash item for 'ZoomPluginHammerResource' class.
 	 */
 	ZOOM_PLUGIN_HAMMER_RESOURCE(ResourceName.HAMMER_LIBRARY, 1881773),
@@ -79,12 +86,12 @@ enum ResourceHash
 	 * Hash item for 'LuxonAdapterResource' class.
 	 */
 	LUXON_ADAPTER_RESOURCE(ResourceName.DATE_TIME_ADAPTER, 160328);
-
+	
 	// resource name instance
 	private final ResourceName resourceName;
 	// resource name instance
 	private final int hash;
-
+		
 	/**
 	 * Creates with the resource name and hash of injectable javascript resource.
 	 * 
@@ -95,7 +102,7 @@ enum ResourceHash
 		this.resourceName = resourceName;
 		this.hash = hash;
 	}
-
+	
 	/**
 	 * Returns the resource name of the java script resource.
 	 * 
@@ -113,7 +120,7 @@ enum ResourceHash
 	int getHash() {
 		return hash;
 	}
-
+	
 	/**
 	 * Search the resource name and returns the calculated hash, when created.
 	 * 

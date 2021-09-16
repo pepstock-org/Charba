@@ -41,21 +41,31 @@
 	<property name="bin.gwt.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-gwt.jar" />
 	<property name="sources.gwt.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-gwt-sources.jar" />
 	<property name="javadoc.gwt.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-gwt-javadoc.jar" />
+	<property name="javascript.package" value="org/pepstock/charba/client/resources/js" />
+	<property name="javascript.src.dir" value="${src.dir}/${javascript.package}" />
+	<property name="javascript.dist.dir" value="${classes.dir}/${javascript.package}" />
+	<property name="css.package" value="org/pepstock/charba/client/resources/style" />
+	<property name="css.src.dir" value="${src.dir}/${css.package}" />
+	<property name="css.dist.dir" value="${classes.dir}/${css.package}" />
 
 	<!-- 
 		CHARBA target properties for java script files
 	-->
 	<property name="javascript.charba.file" value="charba.helper.js" />
 	<property name="javascript.charba.minify.file" value="charba.helper.min.js" />
-	<property name="javascript.package" value="org/pepstock/charba/client/resources/js" />
-	<property name="javascript.src.dir" value="${src.dir}/${javascript.package}" />
-	<property name="javascript.dist.dir" value="${classes.dir}/${javascript.package}" />
 
 	<!-- 
 		LABELS CHART.JS plugin
 	-->
 	<property name="javascript.labels.file" value="chartjs-plugin-labels.js" />
 	<property name="javascript.labels.minify.file" value="chartjs-plugin-labels.min.js" />
+	<!-- 
+		TOAST utility
+	-->
+	<property name="javascript.toast.file" value="charba.toast.js" />
+	<property name="javascript.toast.minify.file" value="charba.toast.min.js" />
+	<property name="css.toast.file" value="charba.toast.css" />
+	<property name="css.toast.minify.file" value="charba.toast.min.css" />
 	<!-- 
 		CHART.JS 
 	-->
@@ -256,10 +266,31 @@
 	</target>
 
 	<!--
+        CHARBA - CREATE CSS compiler
+    -->
+	<macrodef name="google-closure-stylesheets">
+		<attribute name="source" />
+		<attribute name="target" />
+		<sequential>
+			<echo>Minify file "@{source}" to "@{target}" </echo>
+			<java classname="com.google.common.css.compiler.commandline.ClosureCommandLineCompiler" fork="true">
+				<classpath>
+					<path refid="ivyPath-runtime" />
+					<path refid="ivyPath-compile"/>
+				</classpath>
+				<arg value="@{source}"/>
+				<arg value="--output-file"/>
+				<arg value="@{target}"/>
+			</java>
+		</sequential>
+	</macrodef>
+		
+	<!--
         CHARBA - JAVA compile, MINIFY CHARBA javascript helper, COPY resources into classes folder
     -->
 	<target name="compile" depends="clean, init, ivyRetrieveRuntime">
 		<mkdir dir="${classes.dir}"/>
+		<mkdir dir="${css.dist.dir}"/>
 		<javac includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
 			<src path="${src.dir}"/>
 			<src path="${codegen.dir}"/>	
@@ -282,12 +313,23 @@
 				<file name="${javascript.labels.file}" />
 			</sources>
 		</closure-compiler>
+		<!-- minify TOAST utility -->
+		<echo>Minify TOAST utility from file "${javascript.toast.file}" to "${javascript.toast.minify.file}" </echo>
+		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.toast.minify.file}" forceRecompile="true">
+			<sources dir="${javascript.src.dir}">
+				<file name="${javascript.toast.file}" />
+			</sources>
+		</closure-compiler>
+		<echo>Minify TOAST utility from file "${css.toast.file}" to "${css.toast.minify.file}" </echo>
+		<google-closure-stylesheets source="${css.src.dir}/${css.toast.file}" target="${css.dist.dir}/${css.toast.minify.file}"/>
 		<!-- copy all sources is necessary as J2CL-GWT needs sources: exclude charba.helper.js and labels plugin because already created by minify and package-info-->
 		<copy todir="${classes.dir}">
 			<fileset dir="${src.dir}">
 				<exclude name="**/package-info.java"/>
 				<exclude name="**/${javascript.charba.file}"/>
 				<exclude name="**/${javascript.labels.file}"/>
+				<exclude name="**/${javascript.toast.file}"/>
+				<exclude name="**/${css.toast.file}"/>
 			</fileset>
 			<fileset dir="${codegen.dir}"/>
 		</copy>
@@ -295,6 +337,12 @@
 		<copy todir="${javascript.dist.dir}">
 			<fileset dir="${resources.dir}">
 				<include name="**/*.js"/>
+			</fileset>
+		</copy>
+		<!-- css resources (all libraries embeddable into CHARBA) to classes folder -->
+		<copy todir="${css.dist.dir}">
+			<fileset dir="${resources.dir}">
+				<include name="**/*.css"/>
 			</fileset>
 		</copy>
 	</target>
@@ -312,6 +360,7 @@
 			<fileset dir="${src.dir}">
 				<include name="org/pepstock/**" />
 				<exclude name="**/*.js" />
+				<exclude name="**/*.css" />
 				<exclude name="**/*.xml" />
 				<exclude name="org/pepstock/charba/client/gwt/**"/>
 				<exclude name="org/pepstock/charba/client/DeferredCharba.java"/>
@@ -382,6 +431,7 @@
 				<exclude name="org/pepstock/charba/client/resources/InjectableTextResource.java"/>
 				<exclude name="org/pepstock/charba/client/resources/ResourceLoadException.java"/>
 				<exclude name="org/pepstock/charba/client/resources/js/**"/>
+				<exclude name="org/pepstock/charba/client/resources/style/**"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
 			</fileset>
 			<!-- includes license -->
@@ -477,6 +527,7 @@
 				<exclude name="org/pepstock/charba/client/resources/InjectableTextResource*"/>
 				<exclude name="org/pepstock/charba/client/resources/ResourceLoadException*"/>
 				<exclude name="org/pepstock/charba/client/resources/js/**"/>
+				<exclude name="org/pepstock/charba/client/resources/style/**"/>
 			</fileset>
 			<!-- includes license -->
 			<fileset dir=".">
@@ -570,10 +621,24 @@
 				<file name="${javascript.labels.file}" />
 			</sources>
 		</closure-compiler>
+		<!-- minify TOAST utility -->
+		<echo>Minify TOAST utility from file "${javascript.toast.file}" to "${javascript.toast.minify.file}" </echo>
+		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.toast.minify.file}" forceRecompile="true">
+			<sources dir="${javascript.src.dir}">
+				<file name="${javascript.toast.file}" />
+			</sources>
+		</closure-compiler>
+		<echo>Minify TOAST utility from file "${css.toast.file}" to "${css.toast.minify.file}" </echo>
+		<google-closure-stylesheets source="${css.src.dir}/${css.toast.file}" target="${css.dist.dir}/${css.toast.minify.file}"/>
 		<!-- copy all sources is necessary as J2CL-GWT needs sources: exclude charba.helper.js and labels plugin because already created by minify and package-info-->
 		<copy todir="${javascript.dist.dir}">
 			<fileset dir="${resources.dir}">
 				<include name="**/*.js"/>
+			</fileset>
+		</copy>
+		<copy todir="${css.dist.dir}">
+			<fileset dir="${resources.dir}">
+				<include name="**/*.css"/>
 			</fileset>
 		</copy>
 		<!-- invokes code generator -->

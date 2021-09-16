@@ -57,6 +57,11 @@
       <optional>true</optional>
     </dependency>
     <dependency>
+      <groupId>com.google.closure-stylesheets</groupId>
+      <artifactId>closure-stylesheets</artifactId>
+      <version>1.5.0</version>
+      <optional>true</optional>
+    </dependency>    <dependency>
       <groupId>org.apache.ivy</groupId>
       <artifactId>ivy</artifactId>
       <version>2.5.0</version>
