@@ -1429,7 +1429,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
 	 */
-	protected final void setValue(Key key, BaseHtmlElement value) {
+	protected final void setElement(Key key, BaseHtmlElement value) {
 		// if value is null
 		// try to remove the reference if exists
 		if (value == null) {
