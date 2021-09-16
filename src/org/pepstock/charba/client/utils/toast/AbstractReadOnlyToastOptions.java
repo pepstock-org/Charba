@@ -18,6 +18,7 @@ package org.pepstock.charba.client.utils.toast;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.ToastType;
 
@@ -38,6 +39,7 @@ abstract class AbstractReadOnlyToastOptions extends NativeObjectContainer implem
 		TITLE("title"),
 		TEXT("text"),
 		TYPE("type"),
+		ICON("icon"),
 		PROGRESS_BAR_TYPE("progressBarType"),
 		TIMEOUT("timeout"),
 		AUTO_HIDE("autoHide"),
@@ -158,6 +160,16 @@ abstract class AbstractReadOnlyToastOptions extends NativeObjectContainer implem
 	@Override
 	public final int getTimeout() {
 		return getValue(Property.TIMEOUT, defaultValues.getTimeout());
+	}
+
+	/**
+	 * Returns the icon image set for toast.
+	 * 
+	 * @return the icon image set for toast
+	 */
+	@Override
+	public final Img getIcon() {
+		return getValue(Property.ICON, defaultValues.getIcon());
 	}
 
 	/**

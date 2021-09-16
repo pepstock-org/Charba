@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.ToastType;
@@ -88,6 +89,15 @@ interface IsDefaultToastOptions {
 	 */
 	default int getTimeout() {
 		return ImmutableToastOptions.DEFAULT_TIMEOUT;
+	}
+
+	/**
+	 * Returns the icon image set for toast.
+	 * 
+	 * @return the icon image set for toast
+	 */
+	default Img getIcon() {
+		return null;
 	}
 
 }

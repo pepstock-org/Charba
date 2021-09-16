@@ -17,6 +17,7 @@ package org.pepstock.charba.client.utils.toast;
 
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.ToastType;
 
@@ -115,6 +116,15 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 	 */
 	public final void setTimeout(int timeout) {
 		setValue(Property.TIMEOUT, Checker.greaterThanOrDefault(timeout, 0, getDefaultValues().getTimeout()));
+	}
+
+	/**
+	 * Sets the icon image set for toast.
+	 * 
+	 * @param icon the icon image set for toast
+	 */
+	public final void setIcon(Img icon) {
+		setValue(Property.ICON, icon);
 	}
 
 }
