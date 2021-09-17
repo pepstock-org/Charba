@@ -36,14 +36,15 @@ abstract class AbstractReadOnlyToastOptions extends NativeObjectContainer implem
 	 */
 	enum Property implements Key
 	{
-		TITLE("title"),
-		TEXT("text"),
-		TYPE("type"),
+		AUTO_HIDE("autoHide"),
+		BORDER_RADIUS("borderRadius"),
+		HIDE_PROGRESS_BAR("hideProgressBar"),
 		ICON("icon"),
 		PROGRESS_BAR_TYPE("progressBarType"),
+		TEXT("text"),
 		TIMEOUT("timeout"),
-		AUTO_HIDE("autoHide"),
-		HIDE_PROGRESS_BAR("hideProgressBar");
+		TITLE("title"),
+		TYPE("type");
 
 		// name value of property
 		private final String value;
@@ -170,6 +171,16 @@ abstract class AbstractReadOnlyToastOptions extends NativeObjectContainer implem
 	@Override
 	public final Img getIcon() {
 		return getValue(Property.ICON, defaultValues.getIcon());
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	@Override
+	public int getBorderRadius() {
+		return getValue(Property.BORDER_RADIUS, defaultValues.getBorderRadius());
 	}
 
 	/**

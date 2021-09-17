@@ -92,6 +92,15 @@ interface IsDefaultToastOptions {
 	}
 
 	/**
+	 * Returns the border radius (in pixels) of toast container.
+	 * 
+	 * @return the border radius (in pixels) of toast container
+	 */
+	default int getBorderRadius() {
+		return ImmutableToastOptions.DEFAULT_BORDER_RADIUS;
+	}
+
+	/**
 	 * Returns the icon image set for toast.
 	 * 
 	 * @return the icon image set for toast

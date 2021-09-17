@@ -215,6 +215,17 @@ public final class ToastOptionsBuilder {
 	}
 
 	/**
+	 * Sets the border radius (in pixels) of toast container.
+	 * 
+	 * @param borderRadius the border radius (in pixels) of toast container
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setBorderRadius(int borderRadius) {
+		options.setBorderRadius(borderRadius);
+		return this;
+	}
+
+	/**
 	 * Sets the CLICK event hander.
 	 * 
 	 * @param clickEventHandler the CLICK event hander.

@@ -41,6 +41,10 @@ CharbaToast = {
       toasting.className = 'ct-toast';
       const wrapper = document.createElement('div');
       // -------------------------------
+      // BORDER RADIUS
+      // -------------------------------
+      wrapper.style.borderRadius = options.borderRadius + 'px';
+      // -------------------------------
       // TITLE
       // -------------------------------
       const title = document.createElement('h4');
@@ -52,6 +56,7 @@ CharbaToast = {
       // -------------------------------
       if (options.text) {
         const text = document.createElement('p');
+        text.style.color = 'black';
         text.className = 'ct-text';
         text.innerHTML = options.text;
         wrapper.appendChild(text);
@@ -164,6 +169,7 @@ CharbaToast = {
   },
   defaults: {
     autoHide: true,
+    borderRadius: 8,
     hideProgressBar: false,
     icon: undefined,
     onClick: undefined,

@@ -47,6 +47,10 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 	 * Default of timeout of the toast, <b>{@value DEFAULT_TIMEOUT}</b>.
 	 */
 	static final int DEFAULT_TIMEOUT = 4000;
+	/**
+	 * Default of border radius of the toast, <b>{@value DEFAULT_BORDER_RADIUS}</b>.
+	 */
+	static final int DEFAULT_BORDER_RADIUS = 8;
 	// static instance of default options
 	private static final IsDefaultToastOptions DEFAULT_VALUES = new DefaultValues();
 

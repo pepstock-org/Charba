@@ -127,4 +127,13 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 		setValue(Property.ICON, icon);
 	}
 
+	/**
+	 * Sets the border radius (in pixels) of toast container.
+	 * 
+	 * @param borderRadius the border radius (in pixels) of toast container
+	 */
+	public void setBorderRadius(int borderRadius) {
+		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(borderRadius));
+	}
+
 }
