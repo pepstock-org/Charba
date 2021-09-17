@@ -108,14 +108,14 @@
   background: #51C625;
 }
 #ct-container .ct-toast > div .ct-title {
-  font-weight: 700;
   font-size: 15px;
+  font-weight: 700;
   color: #616161;
 }
 #ct-container .ct-toast > div .ct-text {
   font-size: 14px;
-  line-height: 20px;
   font-weight: 400;
+  line-height: 20px;
   color: #616161;
 }
 #ct-container .ct-toast > div .ct-icon {

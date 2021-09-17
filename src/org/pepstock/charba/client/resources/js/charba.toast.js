@@ -31,7 +31,7 @@ CharbaToast = {
     CharbaToast.create = function (pId, pOptions) {
       // creates 
       const result = Object.assign({}, pOptions || {});
-      // manges options 
+      // manages options 
       const options = Object.assign({}, CharbaToast.defaults, CharbaToast.overrides, result);
       // -------------------------------
       // creates the element for toasting
@@ -49,16 +49,35 @@ CharbaToast = {
       // -------------------------------
       const title = document.createElement('h4');
       title.className = 'ct-title';
-      title.innerHTML = options.title;
+      title.innerHTML = options.title.content;
+      // title color
+      if (typeof options.title.color === 'string') {
+        title.style.color = options.title.color;
+      }
+      if (typeof options.title.font === 'object') {
+        // normalizes font 
+        const font = Object.assign({}, CharbaToast.defaults.titleFont, options.title.font);
+        const normFont = CharbaToast.helper.toFont.apply(this, [font]);
+        title.style.font = normFont.string;
+      }
       wrapper.appendChild(title);
       // -------------------------------
-      // TEXT
+      // LABEL
       // -------------------------------
-      if (options.text) {
+      if (Array.isArray(options.label.content)) {
         const text = document.createElement('p');
-        text.style.color = 'black';
         text.className = 'ct-text';
-        text.innerHTML = options.text;
+        text.innerHTML = options.label.content.join('<br/>');
+        // title color
+        if (typeof options.label.color === 'string') {
+          text.style.color = options.label.color;
+        }
+        if (typeof options.label.font === 'object') {
+          // normalizes font 
+          const font = Object.assign({}, CharbaToast.defaults.labelFont, options.label.font);
+          const normFont = CharbaToast.helper.toFont.apply(this, [font]);
+          text.style.font = normFont.string;
+        }
         wrapper.appendChild(text);
       }
       // -------------------------------
@@ -165,6 +184,58 @@ CharbaToast = {
   create: function () {
     console.error(['DOM has not finished loading.', '\tInvoke create method when DOM\s readyState is complete'].join('\n'));
   },
+  helper: {
+    lineHeightRegExp: new RegExp(/^(normal|(\d+(?:\.\d+)?)(px|em|%)?)$/),
+    fontStyleRegExp: new RegExp(/^(normal|italic|initial|inherit|unset|(oblique( -?[0-9]?[0-9]deg)?))$/), 
+    /**
+     * ToLineHeight
+     */
+    toLineHeight: function(value, size) {
+      const matches = ('' + value).match(CharbaToast.helper.lineHeightRegExp);
+      if (!matches || matches[1] === 'normal') {
+        return size * 1.2;
+      }
+      value = +matches[2];
+      switch (matches[3]) {
+      case 'px':
+        return value;
+      case '%':
+        value /= 100;
+        break;
+      default:
+        break;
+      }
+      return size * value;
+    },
+    /**
+     * ToFont
+     */
+    toFont: function(options) {
+      let size = options.size;
+      if (typeof size === 'string') {
+        size = parseInt(size, 10);
+      }
+      let style = options.style;
+      if (style && !('' + style).match(CharbaToast.helper.fontStyleRegExp)) {
+        console.warn('Invalid font style specified: "' + style + '"');
+        style = '';
+      }
+      const font = {
+        family: options.family,
+        lineHeight: CharbaToast.helper.toLineHeight.apply(this, [options.lineHeight, size]),
+        size,
+        style,
+        weight: options.weight,
+        string: ''
+      };
+      font.string = (font.style ? font.style + ' ' : '')
+		+ (font.weight ? font.weight + ' ' : '')
+		+ font.size + 'px '
+		+ font.family;
+		
+      return font;
+    }
+  },
   defaults: {
     autoHide: true,
     borderRadius: 8,
@@ -174,15 +245,38 @@ CharbaToast = {
     onClose: undefined,
     onOpen: undefined,
     progressBarType: undefined,
-    title: "Default title",
-    text: undefined,
+    title: {
+      content: "Default title",
+      color: undefined,
+      font: undefined
+    },
+    label: {
+      content: undefined,
+      color: undefined,
+      font: undefined
+    },
     timeout: 4000,
-    type: undefined
+    type: undefined,
+    titleFont: {
+      family: 'system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+      lineHeight: 1.2,
+      size: 15,
+      style: 'normal',
+      weight: 'bold',
+    },
+    labelFont: {
+      family: 'system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+      lineHeight: '20px',
+      size: 14,
+      style: 'normal',
+      weight: 'normal',
+    }
   },
   overrides: {}
 };
-// freeze defaults
+// freeze defaults and helper
 Object.freeze(CharbaToast.defaults);
+Object.freeze(CharbaToast.helper);
 // needs DOM to be ready
 if (document.readyState === 'complete') {
   CharbaToast.init();

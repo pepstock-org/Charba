@@ -15,6 +15,8 @@
 * @return builder instance */
 package org.pepstock.charba.client.utils.toast;
 
+import java.util.List;
+
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.ToastType;
@@ -82,7 +84,7 @@ public final class ToastOptionsBuilder {
 	 * Returns new builder instance, setting the text and text to the toast options.
 	 * 
 	 * @param title the title of the toast
-	 * @param text the text of the toast
+	 * @param label the label of the toast
 	 * @return new builder instance
 	 */
 	public static ToastOptionsBuilder create(String title, String text) {
@@ -90,23 +92,23 @@ public final class ToastOptionsBuilder {
 		ToastOptionsBuilder result = create();
 		// stores arguments and
 		// returns builder
-		return result.setTitle(title).setText(text);
+		return result.setTitle(title).setLabel(text);
 	}
 
 	/**
 	 * Returns new builder instance, setting the text, text and type to the toast options.
 	 * 
 	 * @param title the title of the toast
-	 * @param text the text of the toast
+	 * @param label the label of the toast
 	 * @param type the type of the toast
 	 * @return new builder instance
 	 */
-	public static ToastOptionsBuilder create(String title, String text, ToastType type) {
+	public static ToastOptionsBuilder create(String title, String label, ToastType type) {
 		// gets builder
 		ToastOptionsBuilder result = create();
 		// stores arguments and
 		// returns builder
-		return result.setTitle(title).setText(text).setType(type);
+		return result.setTitle(title).setLabel(label).setType(type);
 	}
 
 	/**
@@ -133,20 +135,33 @@ public final class ToastOptionsBuilder {
 	 * @return toast options builder instance
 	 */
 	public ToastOptionsBuilder setTitle(String title) {
-		options.setTitle(title);
+		options.getTitle().setContent(title);
 		return this;
 	}
 
 	/**
-	 * Sets the text of the toast.
+	 * Sets the label of the toast.
 	 * 
-	 * @param text the text of the toast
+	 * @param label the label of the toast
 	 * @return toast options builder instance
 	 */
-	public ToastOptionsBuilder setText(String text) {
-		options.setText(text);
+	public ToastOptionsBuilder setLabel(String... label) {
+		options.getLabel().setContent(label);
 		return this;
 	}
+
+	/**
+	 * Sets the label of the toast.
+	 * 
+	 * @param label the label of the toast
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setLabel(List<String> label) {
+		options.getLabel().setContent(label);
+		return this;
+	}
+
+	// FIXME manca il font e color
 
 	/**
 	 * Sets the type of the toast.

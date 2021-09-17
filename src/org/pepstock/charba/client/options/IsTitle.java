@@ -85,7 +85,7 @@ public interface IsTitle extends IsDefaultAbstractTitle {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultFontContainer#getFont()
 	 */
 	@Override
-	Font getFont();
+	IsFont getFont();
 
 	/*
 	 * (non-Javadoc)

@@ -16,6 +16,10 @@
 package org.pepstock.charba.client.utils.toast;
 
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.options.FontContainer;
+import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.ToastType;
 
@@ -27,32 +31,26 @@ import org.pepstock.charba.client.utils.toast.enums.ToastType;
  */
 final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 
-	/**
-	 * Default of toast type, {@link ToastType#DEFAULT}.
-	 */
+	// Default of toast type
 	static final ToastType DEFAULT_TYPE = ToastType.DEFAULT;
-	/**
-	 * Default of toast progress bar type, {@link ProgressBarType#DEFAULT}.
-	 */
+	// Default of toast progress bar type
 	static final ProgressBarType DEFAULT_PROGRESS_BAR_TYPE = ProgressBarType.DEFAULT;
-	/**
-	 * Default of auto hide of the toast, <b>{@value DEFAULT_AUTO_HIDE}</b>.
-	 */
+	// Default of auto hide of the toast
 	static final boolean DEFAULT_AUTO_HIDE = true;
-	/**
-	 * Default to hide the progress bar toast, <b>{@value DEFAULT_HIDE_PROGRESS_BAR}</b>.
-	 */
+	// Default to hide the progress bar toast
 	static final boolean DEFAULT_HIDE_PROGRESS_BAR = false;
-	/**
-	 * Default of timeout of the toast, <b>{@value DEFAULT_TIMEOUT}</b>.
-	 */
+	// Default of timeout of the toast
 	static final int DEFAULT_TIMEOUT = 4000;
-	/**
-	 * Default of border radius of the toast, <b>{@value DEFAULT_BORDER_RADIUS}</b>.
-	 */
+	// Default of border radius of the toast
 	static final int DEFAULT_BORDER_RADIUS = 8;
+	// default font family
+	static final String DEFAULT_FONT_FAMILY = "system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"";
+	// default font color
+	static final String DEFAULT_COLOR = "#616161";
+
 	// static instance of default options
 	private static final IsDefaultToastOptions DEFAULT_VALUES = new DefaultValues();
+	//
 
 	/**
 	 * Creates the configuration with native object instance to be wrapped.
@@ -71,6 +69,10 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 	 */
 	private static class DefaultValues implements IsDefaultToastOptions {
 
+		private final DefaultTitleValues title = new DefaultTitleValues();
+
+		private final DefaultLabelValues label = new DefaultLabelValues();
+
 		/**
 		 * To avoid any instantiation
 		 */
@@ -78,6 +80,107 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 			// do nothing
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultToastOptions#getTitle()
+		 */
+		@Override
+		public IsDefaultContentElement getTitle() {
+			return title;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultToastOptions#getLabel()
+		 */
+		@Override
+		public IsDefaultContentElement getLabel() {
+			return label;
+		}
+
 	}
 
+	/**
+	 * Class which implements the defaults for title
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class DefaultTitleValues implements IsDefaultContentElement {
+
+		private final FontItem font = new FontItem();
+
+		/**
+		 * To avoid any instantiation
+		 */
+		private DefaultTitleValues() {
+			font.setFamily(DEFAULT_FONT_FAMILY);
+			font.setWeight(Weight.BOLD);
+			font.setSize(15);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.options.HasFont#getFontContainer()
+		 */
+		@Override
+		public FontContainer getFontContainer() {
+			return null;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.options.HasFont#getFont()
+		 */
+		@Override
+		public IsFont getFont() {
+			return font;
+		}
+
+	}
+
+	/**
+	 * Class which implements the defaults for label
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class DefaultLabelValues implements IsDefaultContentElement {
+
+		private final FontItem font = new FontItem();
+
+		/**
+		 * To avoid any instantiation
+		 */
+		private DefaultLabelValues() {
+			font.setFamily(DEFAULT_FONT_FAMILY);
+			font.setWeight(Weight.NORMAL);
+			font.setSize(14);
+			font.setLineHeight("20px");
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.options.HasFont#getFontContainer()
+		 */
+		@Override
+		public FontContainer getFontContainer() {
+			return null;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.options.HasFont#getFont()
+		 */
+		@Override
+		public IsFont getFont() {
+			return font;
+		}
+	}
 }

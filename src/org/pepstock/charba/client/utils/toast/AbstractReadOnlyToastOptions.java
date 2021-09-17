@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.ToastType;
@@ -29,7 +29,7 @@ import org.pepstock.charba.client.utils.toast.enums.ToastType;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class AbstractReadOnlyToastOptions extends NativeObjectContainer implements IsDefaultToastOptions {
+abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDefaultToastOptions {
 
 	/**
 	 * Name of properties of native object.
@@ -41,10 +41,13 @@ abstract class AbstractReadOnlyToastOptions extends NativeObjectContainer implem
 		HIDE_PROGRESS_BAR("hideProgressBar"),
 		ICON("icon"),
 		PROGRESS_BAR_TYPE("progressBarType"),
-		TEXT("text"),
+		// TEXT("text"),
 		TIMEOUT("timeout"),
+		// TITLE("title"),
+		TYPE("type"),
+		// inner elements
 		TITLE("title"),
-		TYPE("type");
+		LABEL("label");
 
 		// name value of property
 		private final String value;
@@ -72,6 +75,10 @@ abstract class AbstractReadOnlyToastOptions extends NativeObjectContainer implem
 
 	// defaults instance
 	private final IsDefaultToastOptions defaultValues;
+	// title instance
+	private final Title title;
+	// label instance
+	private final Label label;
 
 	/**
 	 * Creates the configuration with native object instance to be wrapped.
@@ -82,6 +89,9 @@ abstract class AbstractReadOnlyToastOptions extends NativeObjectContainer implem
 	AbstractReadOnlyToastOptions(NativeObject nativeObject, IsDefaultToastOptions defaultValues) {
 		super(nativeObject);
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
+		// gets inner element
+		this.title = new Title(this, Property.TITLE, this.defaultValues.getTitle(), getValue(Property.TITLE));
+		this.label = new Label(this, Property.LABEL, this.defaultValues.getLabel(), getValue(Property.LABEL));
 	}
 
 	/**
@@ -99,18 +109,18 @@ abstract class AbstractReadOnlyToastOptions extends NativeObjectContainer implem
 	 * @return the title of the toast
 	 */
 	@Override
-	public final String getTitle() {
-		return getValue(Property.TITLE, defaultValues.getTitle());
+	public IsDefaultContentElement getTitle() {
+		return title;
 	}
 
 	/**
-	 * Returns the text of the toast.
+	 * Returns the label of the toast.
 	 * 
-	 * @return the text of the toast
+	 * @return the label of the toast
 	 */
 	@Override
-	public final String getText() {
-		return getValue(Property.TEXT, defaultValues.getText());
+	public IsDefaultContentElement getLabel() {
+		return label;
 	}
 
 	/**

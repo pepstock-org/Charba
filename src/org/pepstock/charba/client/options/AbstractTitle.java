@@ -121,7 +121,7 @@ public abstract class AbstractTitle<T extends IsDefaultAbstractTitle> extends Ab
 	 * @see org.pepstock.charba.client.options.IsTitle#getFont()
 	 */
 	@Override
-	public Font getFont() {
+	public IsFont getFont() {
 		return HasFont.super.getFont();
 	}
 

@@ -26,7 +26,7 @@ import org.pepstock.charba.client.defaults.IsDefaultFontContainer;
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class FontContainer extends PropertyHandler<IsDefaultFontContainer> {
+public class FontContainer extends PropertyHandler<IsDefaultFontContainer> {
 
 	/**
 	 * Name of properties of native object.

@@ -41,21 +41,23 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 	}
 
 	/**
-	 * Sets the title of the toast.
+	 * Returns the title element.
 	 * 
-	 * @param title the title of the toast
+	 * @return the title
 	 */
-	public final void setTitle(String title) {
-		setValue(Property.TITLE, title);
+	@Override
+	public final Title getTitle() {
+		return (Title) super.getTitle();
 	}
 
 	/**
-	 * Sets the text of the toast.
+	 * Returns the label element.
 	 * 
-	 * @param text the text of the toast
+	 * @return the label
 	 */
-	public final void setText(String text) {
-		setValue(Property.TEXT, text);
+	@Override
+	public final Label getLabel() {
+		return (Label) super.getLabel();
 	}
 
 	/**

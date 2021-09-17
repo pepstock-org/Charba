@@ -26,7 +26,7 @@ import org.pepstock.charba.client.defaults.IsDefaultFontContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface HasFont extends IsDefaultFontContainer {
+public interface HasFont extends IsDefaultFontContainer {
 
 	/**
 	 * Returns a font container instance to use in the default methods of this interface.
@@ -41,7 +41,7 @@ interface HasFont extends IsDefaultFontContainer {
 	 * @return the font
 	 */
 	@Override
-	default Font getFont() {
+	default IsFont getFont() {
 		// checks if font container is consistent
 		if (getFontContainer() != null) {
 			return getFontContainer().getFont();

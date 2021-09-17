@@ -33,9 +33,14 @@ interface IsDefaultToastOptions {
 	 * 
 	 * @return the title of the toast
 	 */
-	default String getTitle() {
-		return Undefined.STRING;
-	}
+	IsDefaultContentElement getTitle();
+
+	/**
+	 * Returns the label of the toast.
+	 * 
+	 * @return the label of the toast
+	 */
+	IsDefaultContentElement getLabel();
 
 	/**
 	 * Returns the text of the toast.
