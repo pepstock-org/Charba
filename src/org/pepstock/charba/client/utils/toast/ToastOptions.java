@@ -20,9 +20,9 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.utils.toast.events.ClickEventHandler;
-import org.pepstock.charba.client.utils.toast.events.CloseEventHandler;
-import org.pepstock.charba.client.utils.toast.events.OpenEventHandler;
+import org.pepstock.charba.client.utils.toast.handlers.ClickEventHandler;
+import org.pepstock.charba.client.utils.toast.handlers.CloseHandler;
+import org.pepstock.charba.client.utils.toast.handlers.OpenHandler;
 
 import jsinterop.annotations.JsFunction;
 
@@ -56,15 +56,32 @@ public final class ToastOptions extends AbstractToastOptions {
 		void call(NativeObject item, BaseNativeEvent event);
 	}
 
+	/**
+	 * Java script FUNCTION callback when an handler must engage for notification.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyHandlerCallback {
+
+		/**
+		 * Method of function to be called when an handler must engage for notification.
+		 * 
+		 * @param item toast item affected by event
+		 */
+		void call(NativeObject item);
+	}
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the click function
 	private final CallbackProxy<ProxyEventCallback> clickEventCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the open function
-	private final CallbackProxy<ProxyEventCallback> openEventCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> openCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the close function
-	private final CallbackProxy<ProxyEventCallback> closeEventCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerCallback> closeCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	/**
 	 * Name of properties of native object.
@@ -102,9 +119,9 @@ public final class ToastOptions extends AbstractToastOptions {
 	// handler for click on toast item
 	private ClickEventHandler clickEventHandler = null;
 	// handler for opening a toast item
-	private OpenEventHandler openEventHandler = null;
+	private OpenHandler openHandler = null;
 	// handler for closing a toast item
-	private CloseEventHandler closeEventHandler = null;
+	private CloseHandler closeHandler = null;
 
 	/**
 	 * Creates the object with an empty configuration instance.
@@ -135,23 +152,23 @@ public final class ToastOptions extends AbstractToastOptions {
 			}
 		});
 		// sets function to proxy callback in order to invoke the java interface
-		this.openEventCallbackProxy.setCallback((item, event) -> {
+		this.openCallbackProxy.setCallback(item -> {
 			// gets handler
-			OpenEventHandler handler = getOpenEventHandler();
+			OpenHandler handler = getOpenHandler();
 			// checks if handler is consistent
 			if (handler != null) {
 				// invokes handler
-				handler.onOpen(new ToastItem(item), event);
+				handler.onOpen(new ToastItem(item));
 			}
 		});
 		// sets function to proxy callback in order to invoke the java interface
-		this.closeEventCallbackProxy.setCallback((item, event) -> {
+		this.closeCallbackProxy.setCallback(item -> {
 			// gets handler
-			CloseEventHandler handler = getCloseEventHandler();
+			CloseHandler handler = getCloseHandler();
 			// checks if handler is consistent
 			if (handler != null) {
 				// invokes handler
-				handler.onClose(new ToastItem(item), event);
+				handler.onClose(new ToastItem(item));
 			}
 		});
 	}
@@ -184,26 +201,26 @@ public final class ToastOptions extends AbstractToastOptions {
 	}
 
 	/**
-	 * Returns the OPEN event hander, if set, otherwise <code>null</code>.
+	 * Returns the OPEN hander, if set, otherwise <code>null</code>.
 	 * 
-	 * @return the OPEN event hander, if set, otherwise <code>null</code>.
+	 * @return the OPEN hander, if set, otherwise <code>null</code>.
 	 */
-	public OpenEventHandler getOpenEventHandler() {
-		return openEventHandler;
+	public OpenHandler getOpenHandler() {
+		return openHandler;
 	}
 
 	/**
-	 * Sets the OPEN event hander.
+	 * Sets the OPEN hander.
 	 * 
-	 * @param openEventHandler the OPEN event hander.
+	 * @param openHandler the OPEN hander.
 	 */
-	public void setOpenEventHandler(OpenEventHandler openEventHandler) {
+	public void setOpenHandler(OpenHandler openHandler) {
 		// sets the handler
-		this.openEventHandler = openEventHandler;
+		this.openHandler = openHandler;
 		// checks if handler is consistent
-		if (openEventHandler != null) {
+		if (openHandler != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.ON_OPEN, openEventCallbackProxy.getProxy());
+			setValue(Property.ON_OPEN, openCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.ON_OPEN);
@@ -211,26 +228,26 @@ public final class ToastOptions extends AbstractToastOptions {
 	}
 
 	/**
-	 * Returns the CLOSE event hander, if set, otherwise <code>null</code>.
+	 * Returns the CLOSE hander, if set, otherwise <code>null</code>.
 	 * 
-	 * @return the CLOSE event hander, if set, otherwise <code>null</code>.
+	 * @return the CLOSE hander, if set, otherwise <code>null</code>.
 	 */
-	public CloseEventHandler getCloseEventHandler() {
-		return closeEventHandler;
+	public CloseHandler getCloseHandler() {
+		return closeHandler;
 	}
 
 	/**
-	 * Sets the CLOSE event hander.
+	 * Sets the CLOSE hander.
 	 * 
-	 * @param closeEventHandler the CLOSE event hander.
+	 * @param closeHandler the CLOSE hander.
 	 */
-	public void setCloseEventHandler(CloseEventHandler closeEventHandler) {
+	public void setCloseHandler(CloseHandler closeHandler) {
 		// sets the handler
-		this.closeEventHandler = closeEventHandler;
+		this.closeHandler = closeHandler;
 		// checks if handler is consistent
-		if (closeEventHandler != null) {
+		if (closeHandler != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.ON_CLOSE, closeEventCallbackProxy.getProxy());
+			setValue(Property.ON_CLOSE, closeCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.ON_CLOSE);

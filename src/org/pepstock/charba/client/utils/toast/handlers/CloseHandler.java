@@ -13,10 +13,24 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+package org.pepstock.charba.client.utils.toast.handlers;
+
+import org.pepstock.charba.client.utils.toast.ToastItem;
+import org.pepstock.charba.client.utils.toast.Toaster;
+
 /**
- * Contains all event handlers to configure the TOAST utility.
+ * Callback interface of {@link Toaster} utility to be notified of toast item closing.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-package org.pepstock.charba.client.utils.toast.events;
+public interface CloseHandler {
+
+	/**
+	 * Invoked to be notified of toast item closing.
+	 * 
+	 * @param item toast item affected
+	 */
+	void onClose(ToastItem item);
+
+}

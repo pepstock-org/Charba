@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.utils.toast.events;
+package org.pepstock.charba.client.utils.toast.handlers;
 
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.utils.toast.ToastItem;

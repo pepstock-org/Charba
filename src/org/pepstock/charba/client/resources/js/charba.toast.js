@@ -144,8 +144,7 @@ CharbaToast = {
         result.showing = false;
         // checks and calls callback
         if (typeof options.onClose === 'function') {
-          const event = new Event('toast-close');
-          options.onClose.apply(this, [result, event]);
+          options.onClose.apply(this, [result]);
         }
       }    
       // -------------------------------
@@ -158,8 +157,7 @@ CharbaToast = {
       result.element = toasting;
       // checks and calls callback
       if (typeof options.onOpen === 'function') {
-        const event = new Event('toast-open');
-        options.onOpen.apply(this, [result, event]);
+        options.onOpen.apply(this, [result]);
       }
       return result;
     }

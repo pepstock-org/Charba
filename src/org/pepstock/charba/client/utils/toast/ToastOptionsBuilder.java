@@ -18,9 +18,9 @@ package org.pepstock.charba.client.utils.toast;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.ToastType;
-import org.pepstock.charba.client.utils.toast.events.ClickEventHandler;
-import org.pepstock.charba.client.utils.toast.events.CloseEventHandler;
-import org.pepstock.charba.client.utils.toast.events.OpenEventHandler;
+import org.pepstock.charba.client.utils.toast.handlers.ClickEventHandler;
+import org.pepstock.charba.client.utils.toast.handlers.CloseHandler;
+import org.pepstock.charba.client.utils.toast.handlers.OpenHandler;
 
 /**
  * Comfortable object to create {@link Toaster} options by a builder.
@@ -237,24 +237,24 @@ public final class ToastOptionsBuilder {
 	}
 
 	/**
-	 * Sets the OPEN event hander.
+	 * Sets the OPEN hander.
 	 * 
-	 * @param openEventHandler the OPEN event hander.
+	 * @param openHandler the OPEN hander.
 	 * @return toast options builder instance
 	 */
-	public ToastOptionsBuilder setOpenEventHandler(OpenEventHandler openEventHandler) {
-		options.setOpenEventHandler(openEventHandler);
+	public ToastOptionsBuilder setOpenHandler(OpenHandler openHandler) {
+		options.setOpenHandler(openHandler);
 		return this;
 	}
 
 	/**
-	 * Sets the CLOSE event hander.
+	 * Sets the CLOSE hander.
 	 * 
-	 * @param closeEventHandler the CLOSE event hander.
+	 * @param closeHandler the CLOSE hander.
 	 * @return toast options builder instance
 	 */
-	public ToastOptionsBuilder setCloseEventHandler(CloseEventHandler closeEventHandler) {
-		options.setCloseEventHandler(closeEventHandler);
+	public ToastOptionsBuilder setCloseHandler(CloseHandler closeHandler) {
+		options.setCloseHandler(closeHandler);
 		return this;
 	}
 

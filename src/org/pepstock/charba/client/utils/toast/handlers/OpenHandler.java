@@ -13,26 +13,24 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.utils.toast.events;
+package org.pepstock.charba.client.utils.toast.handlers;
 
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.utils.toast.ToastItem;
 import org.pepstock.charba.client.utils.toast.Toaster;
 
 /**
- * Callback interface of {@link Toaster} utility to manage OPEN events on toast item.
+ * Callback interface of {@link Toaster} utility to be notified of toast item opening.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface OpenEventHandler {
+public interface OpenHandler {
 
 	/**
-	 * Invoked to manage OPEN events on toast item.
+	 * Invoked to be notified of toast item opening.
 	 * 
-	 * @param item toast item affected by event
-	 * @param event event fired on item
+	 * @param item toast item affected
 	 */
-	void onOpen(ToastItem item, BaseNativeEvent event);
+	void onOpen(ToastItem item);
 
 }
