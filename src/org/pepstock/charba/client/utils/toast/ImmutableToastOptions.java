@@ -20,7 +20,7 @@ import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.options.FontContainer;
 import org.pepstock.charba.client.options.IsFont;
-import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
+import org.pepstock.charba.client.utils.toast.enums.DefaultProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
 
 /**
@@ -34,7 +34,7 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 	// Default of toast type
 	static final DefaultToastType DEFAULT_TYPE = DefaultToastType.DEFAULT;
 	// Default of toast progress bar type
-	static final ProgressBarType DEFAULT_PROGRESS_BAR_TYPE = ProgressBarType.DEFAULT;
+	static final DefaultProgressBarType DEFAULT_PROGRESS_BAR_TYPE = DefaultProgressBarType.DEFAULT;
 	// Default of auto hide of the toast
 	static final boolean DEFAULT_AUTO_HIDE = true;
 	// Default to hide the progress bar toast

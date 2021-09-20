@@ -17,7 +17,6 @@ package org.pepstock.charba.client.utils.toast;
 
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 
 /**
  * Defines the toast options container, and the static defaults.
@@ -64,7 +63,7 @@ interface IsDefaultToastOptions {
 	 * 
 	 * @return the type of the toast progress bar
 	 */
-	default ProgressBarType getProgressBarType() {
+	default IsProgressBarType getProgressBarType() {
 		return ImmutableToastOptions.DEFAULT_PROGRESS_BAR_TYPE;
 	}
 

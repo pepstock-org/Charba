@@ -27,16 +27,19 @@ import org.pepstock.charba.client.resources.AbstractInjectableResource;
 final class CssInjectableResource extends AbstractInjectableResource {
 
 	// prefix of name of CSS injectable
-	private static final String NAME_PREFIX = "_toastCss";
+	private static final String NAME_TYPE_PREFIX = "_toastTypeCss";
+	// prefix of name of CSS injectable
+	private static final String NAME_PROGRESS_PREFIX = "_toastProgressCss";
 
 	/**
 	 * Creates new injectable resource for a specific toast type
 	 * 
 	 * @param type toast type to consumed to inject new CSS
+	 * @param progressBar if <code>true</code>, the resource is related to a custom progress bar type
 	 * @param content CSS content to inject
 	 */
-	CssInjectableResource(AbstractStandardType type, String... content) {
-		super(String.join(Constants.MINUS, NAME_PREFIX, type.value()), content);
+	CssInjectableResource(AbstractStandardType type, boolean progressBar, String... content) {
+		super(String.join(Constants.MINUS, progressBar ? NAME_PROGRESS_PREFIX : NAME_TYPE_PREFIX, type.value()), content);
 	}
 
 }

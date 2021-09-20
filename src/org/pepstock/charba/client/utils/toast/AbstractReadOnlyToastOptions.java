@@ -19,8 +19,9 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.utils.toast.enums.DefaultProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
-import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 
 /**
  * Entity to expose the configuration of a toast in read only mode.<br>
@@ -129,7 +130,19 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	 */
 	@Override
 	public final IsToastType getType() {
-		return getValue(Property.TYPE, DefaultToastType.values(), defaultValues.getType());
+		// search for default
+		IsToastType type = getValue(Property.TYPE, DefaultToastType.values(), null);
+		// checks if not consistent
+		if (type == null) {
+			// searches in the map stored in the builder
+			type = ToastTypeBuilder.get(getValue(Property.TYPE, Undefined.STRING));
+			// checks is still null
+			// then returns the default
+			if (type == null) {
+				return DefaultToastType.DEFAULT;
+			}
+		}
+		return type;
 	}
 
 	/**
@@ -138,8 +151,20 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	 * @return the type of the toast progress bar
 	 */
 	@Override
-	public final ProgressBarType getProgressBarType() {
-		return getValue(Property.PROGRESS_BAR_TYPE, ProgressBarType.values(), defaultValues.getProgressBarType());
+	public final IsProgressBarType getProgressBarType() {
+		// search for default
+		IsProgressBarType type = getValue(Property.PROGRESS_BAR_TYPE, DefaultProgressBarType.values(), null);
+		// checks if not consistent
+		if (type == null) {
+			// searches in the map stored in the builder
+			type = ProgressBarTypeBuilder.get(getValue(Property.PROGRESS_BAR_TYPE, Undefined.STRING));
+			// checks is still null
+			// then returns the default
+			if (type == null) {
+				return DefaultProgressBarType.DEFAULT;
+			}
+		}
+		return type;
 	}
 
 	/**

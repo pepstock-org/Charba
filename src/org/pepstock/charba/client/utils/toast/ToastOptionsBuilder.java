@@ -21,7 +21,6 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
-import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 import org.pepstock.charba.client.utils.toast.handlers.ClickEventHandler;
 import org.pepstock.charba.client.utils.toast.handlers.CloseHandler;
 import org.pepstock.charba.client.utils.toast.handlers.OpenHandler;
@@ -356,7 +355,7 @@ public final class ToastOptionsBuilder {
 	 * @param type the type of the toast progress bar
 	 * @return toast options builder instance
 	 */
-	public ToastOptionsBuilder setProgressBarType(ProgressBarType type) {
+	public ToastOptionsBuilder setProgressBarType(IsProgressBarType type) {
 		options.setProgressBarType(type);
 		return this;
 	}

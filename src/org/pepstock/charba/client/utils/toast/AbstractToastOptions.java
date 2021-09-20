@@ -18,8 +18,8 @@ package org.pepstock.charba.client.utils.toast;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.utils.toast.enums.DefaultProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
-import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
 
 /**
  * Entity to configure the toast options, enabling the setting of options.<br>
@@ -82,9 +82,9 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 	 * 
 	 * @param type the type of the toast progress bar
 	 */
-	public final void setProgressBarType(ProgressBarType type) {
+	public final void setProgressBarType(IsProgressBarType type) {
 		// checks if argument is default
-		if (!ProgressBarType.DEFAULT.equals(type)) {
+		if (!DefaultProgressBarType.DEFAULT.equals(type)) {
 			// if here is not default then must be stored
 			setValue(Property.PROGRESS_BAR_TYPE, type);
 		} else {
