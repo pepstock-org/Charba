@@ -50,7 +50,7 @@ public final class PluginIdChecker {
 		Checker.checkIfValid(id, "Plugin id");
 		// checks if is starting with DOT or underscore
 		Checker.assertCheck(!id.startsWith(Constants.DOT) && !id.startsWith(Constants.UNDERSCORE), buildMessage(id, "Plugin id can not start with a dot or an underscore "));
-		// checks if is null
+		// checks if is a consistent ID
 		Checker.assertCheck(Constants.REGEXP_ID.exec(id) != null, buildMessage(id, "Plugin id can not contain any invalid characters "));
 	}
 
