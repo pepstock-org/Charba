@@ -51,6 +51,10 @@ abstract class AbstractTypeBuilder {
 	AbstractTypeBuilder(Key name, IsColor backgroundColor) {
 		this.name = name;
 		this.backgroundColor = backgroundColor;
+		// imports the toast java script and CSS code
+		// adding CSS at runtime it's better
+		// that the common one is already injected
+		Toaster.get();
 	}
 
 	/**

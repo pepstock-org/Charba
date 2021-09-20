@@ -94,15 +94,6 @@ public final class Toaster {
 	}
 
 	/**
-	 * Creates and shows a default toast.
-	 * 
-	 * @return <code>true</code> if the toast has been shown
-	 */
-	public boolean show() {
-		return show(null);
-	}
-
-	/**
 	 * Creates and shows a toast configured by the passed options.
 	 * 
 	 * @param options configuration of the toast to show
