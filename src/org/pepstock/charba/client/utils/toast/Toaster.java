@@ -21,9 +21,11 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.utils.toast.ToastOptions.ProxyHandlerCallback;
 
 /**
  * Utility for displaying toast notifications with progress bars on the page.
@@ -45,10 +47,21 @@ public final class Toaster {
 	private final ImmutableToastOptions defaults;
 	// instance of overrides
 	private final DefaultToastOptions overrides;
-	// historical cache of toast item
+	// historical cache of toast items
 	private final List<ToastItem> historyItems = new LinkedList<>();
 	// max amount of history items
 	private int maxHistoryItems = 0;
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the close function
+	private final CallbackProxy<ProxyHandlerCallback> closeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// list of items in queue
+	private final List<AbstractReadOnlyToastOptions> queueItems = new LinkedList<>();
+	// current open item
+	private int currentOpenItems = 0;
+	// max amount of open items
+	private int maxOpenItems = Integer.MAX_VALUE;
 
 	/**
 	 * To avoid any instantiation
@@ -64,6 +77,23 @@ public final class Toaster {
 		this.defaults = new ImmutableToastOptions(NativeToasting.getDefaults());
 		// loads overrides
 		this.overrides = new DefaultToastOptions(NativeToasting.getOverrides(), defaults);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// sets function to proxy callback in order to invoke the java interface
+		this.closeCallbackProxy.setCallback(item -> {
+			// decrements the counter
+			currentOpenItems--;
+			// checks if open items are in wait
+			if (!queueItems.isEmpty()) {
+				// gets first
+				AbstractReadOnlyToastOptions queuedItem = queueItems.remove(0);
+				// shows item
+				showToast(queuedItem);
+			}
+		});
+		// stores handler
+		NativeToasting.setInternalCloseHandler(closeCallbackProxy.getProxy());
 	}
 
 	/**
@@ -112,24 +142,38 @@ public final class Toaster {
 	boolean showToast(AbstractReadOnlyToastOptions options) {
 		// checks if argument is consistent
 		if (options != null) {
-			// shows the toast
-			NativeObject result = NativeToasting.create(counter.getAndIncrement(), options.nativeObject());
-			// checks if consistent and
-			// the user wants to have an history
-			if (result != null && maxHistoryItems > 0) {
-				// gets the toast item
-				ToastItem item = new ToastItem(result);
-				// checks if it must be removed the older item
-				if (!historyItems.isEmpty() && historyItems.size() >= maxHistoryItems) {
-					// removes the last
-					historyItems.remove(historyItems.size() - 1);
+			// checks if the toast can be show
+			// because a maximum amount of toast is not reached
+			if (currentOpenItems < maxOpenItems) {
+				// shows the toast
+				NativeObject result = NativeToasting.create(counter.getAndIncrement(), options.nativeObject());
+				// checks if consistent and
+				// the user wants to have an history
+				if (result != null && maxHistoryItems > 0) {
+					// gets the toast item
+					ToastItem item = new ToastItem(result);
+					// checks if it must be removed the older item
+					if (!historyItems.isEmpty() && historyItems.size() >= maxHistoryItems) {
+						// removes the last
+						historyItems.remove(historyItems.size() - 1);
+					}
+					// stores in the history
+					// always at the beginning of list
+					historyItems.add(0, item);
 				}
-				// stores in the history
-				// always at the beginning of list
-				historyItems.add(0, item);
+				// sets if object is consistent
+				boolean shown = result != null;
+				// if shown, increment the counter of open items
+				if (shown) {
+					currentOpenItems++;
+				}
+				// returns if the toast is showing
+				return shown;
 			}
-			// returns if object is consistent
-			return result != null;
+			// if here
+			// maximum amount of toast items was reacher
+			// then puts the toast options in a queue
+			queueItems.add(options);
 		}
 		// if here, argument is not consistent
 		// then return false
@@ -175,6 +219,24 @@ public final class Toaster {
 			// removes the last
 			historyItems.remove(historyItems.size() - 1);
 		}
+	}
+
+	/**
+	 * Returns the maximum amount of open toast items you want to maintain on DOM.
+	 * 
+	 * @return the maximum amount of open toast items you want to maintain on DOM
+	 */
+	public int getMaxOpenItems() {
+		return maxOpenItems;
+	}
+
+	/**
+	 * Sets the maximum amount of open toast items you want to maintain on DOM.
+	 * 
+	 * @param maxOpenItems the maximum amount of open toast items you want to maintain on DOM
+	 */
+	public void setMaxOpenItems(int maxOpenItems) {
+		this.maxOpenItems = Checker.positiveOrZero(maxOpenItems);
 	}
 
 }

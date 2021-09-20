@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 
@@ -54,6 +55,14 @@ final class NativeToasting {
 	 */
 	@JsProperty
 	static native NativeObject getOverrides();
+
+	/**
+	 * Sets the internal close handler.
+	 * 
+	 * @param proxy the internal close handler
+	 */
+	@JsProperty(name = "onClose")
+	static native void setInternalCloseHandler(Proxy proxy);
 
 	/**
 	 * Creates and shows a toast configured by the passed options.

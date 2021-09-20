@@ -181,6 +181,10 @@ CharbaToast = {
         if (typeof options.onClose === 'function') {
           options.onClose.apply(this, [result]);
         }
+        // checks fo internal close handler
+        if (typeof CharbaToast.onClose === 'function') {
+          CharbaToast.onClose.apply(this, [result]);
+        }
       }    
       // -------------------------------
       // ADD to DOCUMENT
@@ -289,7 +293,8 @@ CharbaToast = {
       weight: 'normal',
     }
   },
-  overrides: {}
+  overrides: {},
+  onClose: undefined // internal use only
 };
 // freeze defaults and helper
 Object.freeze(CharbaToast.defaults);
