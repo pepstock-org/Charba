@@ -18,7 +18,6 @@ package org.pepstock.charba.client.utils.toast;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
-import org.pepstock.charba.client.utils.toast.enums.ToastType;
 
 /**
  * Defines the toast options container, and the static defaults.
@@ -56,7 +55,7 @@ interface IsDefaultToastOptions {
 	 * 
 	 * @return the type of the toast
 	 */
-	default ToastType getType() {
+	default IsToastType getType() {
 		return ImmutableToastOptions.DEFAULT_TYPE;
 	}
 
@@ -76,6 +75,15 @@ interface IsDefaultToastOptions {
 	 */
 	default boolean isHideProgressBar() {
 		return ImmutableToastOptions.DEFAULT_HIDE_PROGRESS_BAR;
+	}
+
+	/**
+	 * Returns <code>true</code> whether to hide the shadow of toast.
+	 * 
+	 * @return <code>true</code> whether to hide the shadow of toast
+	 */
+	default boolean isHideShadow() {
+		return ImmutableToastOptions.DEFAULT_HIDE_SHADOW;
 	}
 
 	/**

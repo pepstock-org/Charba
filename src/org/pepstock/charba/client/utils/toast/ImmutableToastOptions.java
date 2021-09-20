@@ -21,7 +21,7 @@ import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.options.FontContainer;
 import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
-import org.pepstock.charba.client.utils.toast.enums.ToastType;
+import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
 
 /**
  * Wraps the immutable default options of the toast.
@@ -32,13 +32,15 @@ import org.pepstock.charba.client.utils.toast.enums.ToastType;
 final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 
 	// Default of toast type
-	static final ToastType DEFAULT_TYPE = ToastType.DEFAULT;
+	static final DefaultToastType DEFAULT_TYPE = DefaultToastType.DEFAULT;
 	// Default of toast progress bar type
 	static final ProgressBarType DEFAULT_PROGRESS_BAR_TYPE = ProgressBarType.DEFAULT;
 	// Default of auto hide of the toast
 	static final boolean DEFAULT_AUTO_HIDE = true;
 	// Default to hide the progress bar toast
 	static final boolean DEFAULT_HIDE_PROGRESS_BAR = false;
+	// Default to hide the shadow of toast
+	static final boolean DEFAULT_HIDE_SHADOW = false;
 	// Default of timeout of the toast
 	static final int DEFAULT_TIMEOUT = 4000;
 	// Default of border radius of the toast

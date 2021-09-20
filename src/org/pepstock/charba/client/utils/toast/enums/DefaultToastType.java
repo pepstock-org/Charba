@@ -15,46 +15,61 @@
 */
 package org.pepstock.charba.client.utils.toast.enums;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.HtmlColor;
+import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.utils.toast.IsToastType;
 
 /**
- * Enumerates the list of notification type for toasting.
+ * Enumerates the list of default notification type for toasting.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum ToastType implements Key
+public enum DefaultToastType implements IsToastType
 {
 	/**
 	 * Default toast type.
 	 */
-	DEFAULT("default"),
+	DEFAULT("default", ColorBuilder.parse("#616161"), HtmlColor.WHITE),
 	/**
 	 * Success toast type, in green.
 	 */
-	SUCCESS("success"),
+	SUCCESS("success", HtmlColor.WHITE, ColorBuilder.parse("#51C625")),
 	/**
 	 * Success toast type, in amber.
 	 */
-	WARNING("warning"),
+	WARNING("warning", HtmlColor.WHITE, ColorBuilder.parse("#DB9215")),
 	/**
 	 * Error toast type, in red.
 	 */
-	ERROR("error"),
+	ERROR("error", HtmlColor.WHITE, ColorBuilder.parse("#DB2B1D")),
 	/**
-	 * Info toast type, in red.
+	 * Info toast type, in blue.
 	 */
-	INFO("info");
+	INFO("info", HtmlColor.WHITE, ColorBuilder.parse("#27ABDB")),
+	/**
+	 * Dark toast type, in black.
+	 */
+	DARK("dark", HtmlColor.WHITE, HtmlColor.BLACK);
 
 	// name value of property
 	private final String value;
+	// type color instance
+	private final IsColor color;
+	// type color instance
+	private final IsColor backgroundColor;
 
 	/**
-	 * Creates the toast type with its property name to use in the options.
+	 * Creates the toast type with its property name to use in the options and colors to apply.
 	 * 
 	 * @param value value to use inside the native object as name of property
+	 * @param color color of the toast type for text
+	 * @param backgroundColor background color of toast
 	 */
-	private ToastType(String value) {
+	private DefaultToastType(String value, IsColor color, IsColor backgroundColor) {
 		this.value = value;
+		this.color = color;
+		this.backgroundColor = backgroundColor;
 	}
 
 	/*
@@ -65,6 +80,26 @@ public enum ToastType implements Key
 	@Override
 	public String value() {
 		return value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.utils.toast.IsToastType#getColor()
+	 */
+	@Override
+	public IsColor getColor() {
+		return color;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.utils.toast.IsToastType#getBackgroundColor()
+	 */
+	@Override
+	public IsColor getBackgroundColor() {
+		return backgroundColor;
 	}
 
 }

@@ -41,7 +41,6 @@
   max-width: 400px;
   margin: 5px 20px;
   padding: 15px 15px;
-  /*border-radius: 8px;*/
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.19);
   position: relative;
   cursor: pointer;
@@ -76,6 +75,13 @@
 }
 #ct-container .ct-toast > div.ct-info .ct-title,
 #ct-container .ct-toast > div.ct-info .ct-text {
+  color: white;
+}
+#ct-container .ct-toast > div.ct-dark {
+  background-color: black;
+}
+#ct-container .ct-toast > div.ct-dark .ct-title,
+#ct-container .ct-toast > div.ct-dark .ct-text {
   color: white;
 }
 #ct-container .ct-toast > div .progress-bar {

@@ -18,8 +18,8 @@ package org.pepstock.charba.client.utils.toast;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
-import org.pepstock.charba.client.utils.toast.enums.ToastType;
 
 /**
  * Entity to configure the toast options, enabling the setting of options.<br>
@@ -65,9 +65,9 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 	 * 
 	 * @param type the type of the toast
 	 */
-	public final void setType(ToastType type) {
+	public final void setType(IsToastType type) {
 		// checks if argument is default
-		if (!ToastType.DEFAULT.equals(type)) {
+		if (!DefaultToastType.DEFAULT.equals(type)) {
 			// if here is not default then must be stored
 			setValue(Property.TYPE, type);
 		} else {
@@ -100,6 +100,15 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 	 */
 	public final void setHideProgressBar(boolean hide) {
 		setValue(Property.HIDE_PROGRESS_BAR, hide);
+	}
+
+	/**
+	 * Sets <code>true</code> whether to hide the shadow of toast.
+	 * 
+	 * @param hide <code>true</code> whether the shadow of toast
+	 */
+	public final void setHideShadow(boolean hide) {
+		setValue(Property.HIDE_SHADOW, hide);
 	}
 
 	/**

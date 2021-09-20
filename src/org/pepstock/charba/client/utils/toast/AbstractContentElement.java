@@ -22,7 +22,8 @@ import org.pepstock.charba.client.defaults.IsDefaultFontContainer;
 import org.pepstock.charba.client.options.FontContainer;
 
 /**
- * Configures the title at the top of the toast.
+ * Configures the title or the label of the toast.<br>
+ * Enables the management of font, color and content of an item.
  * 
  * @author Andrea "Stock" Stocchero
  * @param <T> type of content
@@ -60,6 +61,7 @@ public abstract class AbstractContentElement<T> extends AbstractNode implements 
 
 	}
 
+	// default values instance
 	private final IsDefaultFontContainer defaultValues;
 	// instance of font container
 	private final FontContainer fontContainer;
@@ -107,13 +109,20 @@ public abstract class AbstractContentElement<T> extends AbstractNode implements 
 	public abstract T getContent();
 
 	/**
-	 * FIXME
+	 * Internal class to extend the font container and manages the font inside the title or label.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
 	private static class InternalFontContainer extends FontContainer {
 
+		/**
+		 * Creates a font container with the native object where font properties must be managed and the default value to use when the property does not exist.
+		 * 
+		 * @param parent model which contains the font.
+		 * @param defaultValues default value of font and color to use when the properties do not exist
+		 * @param nativeObject native object where font properties must be managed
+		 */
 		private InternalFontContainer(AbstractNode parent, IsDefaultFontContainer defaultValues, NativeObject nativeObject) {
 			super(parent, defaultValues, nativeObject);
 		}

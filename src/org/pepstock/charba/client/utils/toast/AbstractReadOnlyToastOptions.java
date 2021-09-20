@@ -19,8 +19,8 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
-import org.pepstock.charba.client.utils.toast.enums.ToastType;
 
 /**
  * Entity to expose the configuration of a toast in read only mode.<br>
@@ -39,11 +39,10 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 		AUTO_HIDE("autoHide"),
 		BORDER_RADIUS("borderRadius"),
 		HIDE_PROGRESS_BAR("hideProgressBar"),
+		HIDE_SHADOW("hideShadow"),
 		ICON("icon"),
 		PROGRESS_BAR_TYPE("progressBarType"),
-		// TEXT("text"),
 		TIMEOUT("timeout"),
-		// TITLE("title"),
 		TYPE("type"),
 		// inner elements
 		TITLE("title"),
@@ -129,8 +128,8 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	 * @return the type of the toast
 	 */
 	@Override
-	public final ToastType getType() {
-		return getValue(Property.TYPE, ToastType.values(), defaultValues.getType());
+	public final IsToastType getType() {
+		return getValue(Property.TYPE, DefaultToastType.values(), defaultValues.getType());
 	}
 
 	/**
@@ -151,6 +150,16 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	@Override
 	public final boolean isHideProgressBar() {
 		return getValue(Property.HIDE_PROGRESS_BAR, defaultValues.isHideProgressBar());
+	}
+
+	/**
+	 * Returns <code>true</code> whether to hide the shadow of toast.
+	 * 
+	 * @return <code>true</code> whether to hide the shadow of toast
+	 */
+	@Override
+	public final boolean isHideShadow() {
+		return getValue(Property.HIDE_SHADOW, defaultValues.isHideShadow());
 	}
 
 	/**

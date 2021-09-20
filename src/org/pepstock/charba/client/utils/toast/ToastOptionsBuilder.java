@@ -17,9 +17,11 @@ package org.pepstock.charba.client.utils.toast;
 
 import java.util.List;
 
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.utils.toast.enums.ProgressBarType;
-import org.pepstock.charba.client.utils.toast.enums.ToastType;
 import org.pepstock.charba.client.utils.toast.handlers.ClickEventHandler;
 import org.pepstock.charba.client.utils.toast.handlers.CloseHandler;
 import org.pepstock.charba.client.utils.toast.handlers.OpenHandler;
@@ -52,58 +54,58 @@ public final class ToastOptionsBuilder {
 	}
 
 	/**
-	 * Returns new builder instance, setting the title to the toast options.
+	 * Returns new builder instance, setting the label to the toast options.
 	 * 
-	 * @param title the title of the toast
+	 * @param label the label of the toast
 	 * @return new builder instance
 	 */
-	public static ToastOptionsBuilder create(String title) {
+	public static ToastOptionsBuilder create(String label) {
 		// gets builder
 		ToastOptionsBuilder result = create();
 		// stores arguments and
 		// returns builder
-		return result.setTitle(title);
+		return result.setLabel(label);
 	}
 
 	/**
-	 * Returns new builder instance, setting the title and type to the toast options.
+	 * Returns new builder instance, setting the label and type to the toast options.
 	 * 
-	 * @param title the title of the toast
+	 * @param label the label of the toast
 	 * @param type the type of the toast
 	 * @return new builder instance
 	 */
-	public static ToastOptionsBuilder create(String title, ToastType type) {
+	public static ToastOptionsBuilder create(String label, IsToastType type) {
 		// gets builder
 		ToastOptionsBuilder result = create();
 		// stores arguments and
 		// returns builder
-		return result.setTitle(title).setType(type);
+		return result.setLabel(label).setType(type);
 	}
 
 	/**
-	 * Returns new builder instance, setting the text and text to the toast options.
+	 * Returns new builder instance, setting the title and label to the toast options.
 	 * 
 	 * @param title the title of the toast
 	 * @param label the label of the toast
 	 * @return new builder instance
 	 */
-	public static ToastOptionsBuilder create(String title, String text) {
+	public static ToastOptionsBuilder create(String title, String label) {
 		// gets builder
 		ToastOptionsBuilder result = create();
 		// stores arguments and
 		// returns builder
-		return result.setTitle(title).setLabel(text);
+		return result.setTitle(title).setLabel(label);
 	}
 
 	/**
-	 * Returns new builder instance, setting the text, text and type to the toast options.
+	 * Returns new builder instance, setting the title, text and type to the toast options.
 	 * 
 	 * @param title the title of the toast
 	 * @param label the label of the toast
 	 * @param type the type of the toast
 	 * @return new builder instance
 	 */
-	public static ToastOptionsBuilder create(String title, String label, ToastType type) {
+	public static ToastOptionsBuilder create(String title, String label, IsToastType type) {
 		// gets builder
 		ToastOptionsBuilder result = create();
 		// stores arguments and
@@ -140,6 +142,94 @@ public final class ToastOptionsBuilder {
 	}
 
 	/**
+	 * Sets the font color of title.
+	 * 
+	 * @param color font color of title
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setTitleColor(IsColor color) {
+		options.getTitle().setColor(color);
+		return this;
+	}
+
+	/**
+	 * Sets the font color of title.
+	 * 
+	 * @param color font color of title
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setTitleColor(String color) {
+		options.getTitle().setColor(color);
+		return this;
+	}
+
+	/**
+	 * Sets the font size of title.
+	 * 
+	 * @param size the font size of title.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setTitleFontSize(int size) {
+		options.getTitle().getFont().setSize(size);
+		return this;
+	}
+
+	/**
+	 * Sets the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit) of title.
+	 * 
+	 * @param style Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit) of title.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setTitleFontStyle(FontStyle style) {
+		options.getTitle().getFont().setStyle(style);
+		return this;
+	}
+
+	/**
+	 * Sets the font family, follows CSS font-family options of title.
+	 * 
+	 * @param family Font family, follows CSS font-family options of title.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setTitleFontFamily(String family) {
+		options.getTitle().getFont().setFamily(family);
+		return this;
+	}
+
+	/**
+	 * Sets the font weight, follows CSS font-style-weight options of title.
+	 * 
+	 * @param weight font weight, follows CSS font-style-weight options of title.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setTitleFontWeight(Weight weight) {
+		options.getTitle().getFont().setWeight(weight);
+		return this;
+	}
+
+	/**
+	 * Sets the line height of title.
+	 * 
+	 * @param lineHeight the line height of title.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setTitleFontLineHeight(double lineHeight) {
+		options.getTitle().getFont().setLineHeight(lineHeight);
+		return this;
+	}
+
+	/**
+	 * Sets the line height of title.
+	 * 
+	 * @param lineHeight the line height of title.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setTitleFontLineHeight(String lineHeight) {
+		options.getTitle().getFont().setLineHeight(lineHeight);
+		return this;
+	}
+
+	/**
 	 * Sets the label of the toast.
 	 * 
 	 * @param label the label of the toast
@@ -161,7 +251,93 @@ public final class ToastOptionsBuilder {
 		return this;
 	}
 
-	// FIXME manca il font e color
+	/**
+	 * Sets the font color of label.
+	 * 
+	 * @param color font color of label
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setLabelColor(IsColor color) {
+		options.getLabel().setColor(color);
+		return this;
+	}
+
+	/**
+	 * Sets the font color of label.
+	 * 
+	 * @param color font color of label
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setLabelColor(String color) {
+		options.getLabel().setColor(color);
+		return this;
+	}
+
+	/**
+	 * Sets the font size of label.
+	 * 
+	 * @param size the font size of label.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setLabelFontSize(int size) {
+		options.getLabel().getFont().setSize(size);
+		return this;
+	}
+
+	/**
+	 * Sets the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit) of label.
+	 * 
+	 * @param style Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit) of label.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setLabelFontStyle(FontStyle style) {
+		options.getLabel().getFont().setStyle(style);
+		return this;
+	}
+
+	/**
+	 * Sets the font family, follows CSS font-family options of label.
+	 * 
+	 * @param family Font family, follows CSS font-family options of label.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setLabelFontFamily(String family) {
+		options.getLabel().getFont().setFamily(family);
+		return this;
+	}
+
+	/**
+	 * Sets the font weight, follows CSS font-style-weight options of label.
+	 * 
+	 * @param weight font weight, follows CSS font-style-weight options of label.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setLabelFontWeight(Weight weight) {
+		options.getLabel().getFont().setWeight(weight);
+		return this;
+	}
+
+	/**
+	 * Sets the line height of label.
+	 * 
+	 * @param lineHeight the line height of label.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setLabelFontLineHeight(double lineHeight) {
+		options.getLabel().getFont().setLineHeight(lineHeight);
+		return this;
+	}
+
+	/**
+	 * Sets the line height of label.
+	 * 
+	 * @param lineHeight the line height of label.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setLabelFontLineHeight(String lineHeight) {
+		options.getLabel().getFont().setLineHeight(lineHeight);
+		return this;
+	}
 
 	/**
 	 * Sets the type of the toast.
@@ -169,7 +345,7 @@ public final class ToastOptionsBuilder {
 	 * @param type the type of the toast
 	 * @return toast options builder instance
 	 */
-	public ToastOptionsBuilder setType(ToastType type) {
+	public ToastOptionsBuilder setType(IsToastType type) {
 		options.setType(type);
 		return this;
 	}

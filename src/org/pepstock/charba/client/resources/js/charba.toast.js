@@ -33,6 +33,14 @@ CharbaToast = {
       const result = Object.assign({}, pOptions || {});
       // manages options 
       const options = Object.assign({}, CharbaToast.defaults, CharbaToast.overrides, result);
+      // checks consistenncy of toast
+      const hasTitle = typeof options.title.content === 'string';
+      const hasLabel = Array.isArray(options.label.content) && options.label.content.length > 0;
+      // If not consistent
+      // returns null
+      if (!hasTitle && !hasLabel) {
+        return null;
+      }
       // -------------------------------
       // creates the element for toasting
       // -------------------------------
@@ -45,26 +53,34 @@ CharbaToast = {
       // -------------------------------
       wrapper.style.borderRadius = options.borderRadius + 'px';
       // -------------------------------
+      // BOX SHADOW
+      // -------------------------------
+      if (options.hideShadow) {
+        wrapper.style.boxShadow = 'none';
+      }
+      // -------------------------------
       // TITLE
       // -------------------------------
-      const title = document.createElement('h4');
-      title.className = 'ct-title';
-      title.innerHTML = options.title.content;
-      // title color
-      if (typeof options.title.color === 'string') {
-        title.style.color = options.title.color;
+      if (hasTitle) {
+        const title = document.createElement('h4');
+        title.className = 'ct-title';
+        title.innerHTML = options.title.content;
+        // title color
+        if (typeof options.title.color === 'string') {
+          title.style.color = options.title.color;
+        }
+        if (typeof options.title.font === 'object') {
+          // normalizes font 
+          const font = Object.assign({}, CharbaToast.defaults.titleFont, options.title.font);
+          const normFont = CharbaToast.helper.toFont.apply(this, [font]);
+          title.style.font = normFont.string;
+        }
+        wrapper.appendChild(title);
       }
-      if (typeof options.title.font === 'object') {
-        // normalizes font 
-        const font = Object.assign({}, CharbaToast.defaults.titleFont, options.title.font);
-        const normFont = CharbaToast.helper.toFont.apply(this, [font]);
-        title.style.font = normFont.string;
-      }
-      wrapper.appendChild(title);
       // -------------------------------
       // LABEL
       // -------------------------------
-      if (Array.isArray(options.label.content)) {
+      if (hasLabel) {
         const text = document.createElement('p');
         text.className = 'ct-text';
         text.innerHTML = options.label.content.join('<br/>');
@@ -240,13 +256,14 @@ CharbaToast = {
     autoHide: true,
     borderRadius: 8,
     hideProgressBar: false,
+    hideShadow: false,
     icon: undefined,
     onClick: undefined,
     onClose: undefined,
     onOpen: undefined,
     progressBarType: undefined,
     title: {
-      content: "Default title",
+      content: undefined,
       color: undefined,
       font: undefined
     },
