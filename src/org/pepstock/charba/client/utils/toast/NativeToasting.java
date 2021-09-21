@@ -65,6 +65,14 @@ final class NativeToasting {
 	static native void setInternalCloseHandler(Proxy proxy);
 
 	/**
+	 * Returns the amount of current and shown toasts.
+	 * 
+	 * @return the amount of current and shown toasts
+	 */
+	@JsProperty
+	static native int getCurrentOpenItems();
+
+	/**
 	 * Creates and shows a toast configured by the passed options.
 	 * 
 	 * @param id unique id to use as element id.

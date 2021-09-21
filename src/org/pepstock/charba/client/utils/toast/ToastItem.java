@@ -38,7 +38,8 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	{
 		ID("id"),
 		SHOWING("showing"),
-		DATE_TIME("dateTime"),
+		OPEN_DATE_TIME("openDateTime"),
+		CLOSE_DATE_TIME("closeDateTime"),
 		ELEMENT("element");
 
 		// name value of property
@@ -84,12 +85,30 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	}
 
 	/**
+	 * Returns the date time when the toast item has been put in the queue.
+	 * 
+	 * @return the date time when the toast item has been put in the queue
+	 */
+	public Date getQueueDateTime() {
+		return getValue(AbstractReadOnlyToastOptions.Property.QUEUE_DATE_TIME, (Date) null);
+	}
+
+	/**
 	 * Returns the date time when the toast item has been opened.
 	 * 
 	 * @return the date time when the toast item has been opened
 	 */
-	public Date getDateTime() {
-		return getValue(Property.DATE_TIME, (Date) null);
+	public Date getOpenDateTime() {
+		return getValue(Property.OPEN_DATE_TIME, (Date) null);
+	}
+
+	/**
+	 * Returns the date time when the toast item has been closed.
+	 * 
+	 * @return the date time when the toast item has been close
+	 */
+	public Date getCloseDateTime() {
+		return getValue(Property.CLOSE_DATE_TIME, (Date) null);
 	}
 
 	/**
@@ -126,6 +145,16 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	 */
 	public boolean show() {
 		return Toaster.get().showToast(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ToastItem [id=" + getId() + ", queueDateTime=" + getQueueDateTime() + ", openDateTime=" + getOpenDateTime() + ", closeDateTime=" + getCloseDateTime() + ", type=" + getType().value() + "]";
 	}
 
 }

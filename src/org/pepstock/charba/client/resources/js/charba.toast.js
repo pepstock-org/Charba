@@ -177,6 +177,8 @@ CharbaToast = {
           style.remove();
         }
         result.showing = false;
+        result.closeDateTime = Date.now();
+        CharbaToast.currentOpenItems--;
         // checks and calls callback
         if (typeof options.onClose === 'function') {
           options.onClose.apply(this, [result]);
@@ -192,8 +194,9 @@ CharbaToast = {
       toasting.appendChild(wrapper);
       document.getElementById('ct-container').appendChild(toasting);
       result.id = pId;
-      result.dateTime = Date.now();
+      result.openDateTime = Date.now();
       result.element = toasting;
+      CharbaToast.currentOpenItems++;
       // checks and calls callback
       if (typeof options.onOpen === 'function') {
         options.onOpen.apply(this, [result]);
@@ -294,7 +297,8 @@ CharbaToast = {
     }
   },
   overrides: {},
-  onClose: undefined // internal use only
+  onClose: undefined, // internal use only
+  currentOpenItems : 0
 };
 // freeze defaults and helper
 Object.freeze(CharbaToast.defaults);

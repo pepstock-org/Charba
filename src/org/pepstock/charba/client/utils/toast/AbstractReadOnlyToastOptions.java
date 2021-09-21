@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import java.util.Date;
+
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -47,7 +49,9 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 		TYPE("type"),
 		// inner elements
 		TITLE("title"),
-		LABEL("label");
+		LABEL("label"),
+		// internal for queue date time
+		QUEUE_DATE_TIME("queueDateTime");
 
 		// name value of property
 		private final String value;
@@ -225,6 +229,15 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	@Override
 	public int getBorderRadius() {
 		return getValue(Property.BORDER_RADIUS, defaultValues.getBorderRadius());
+	}
+
+	/**
+	 * Sets the date time when the toast item has been put in the queue.
+	 * 
+	 * @param dateTime the date time when the toast item has been put in the queue
+	 */
+	final void setQueueDateTime(Date dateTime) {
+		setValue(Property.QUEUE_DATE_TIME, dateTime);
 	}
 
 	/**

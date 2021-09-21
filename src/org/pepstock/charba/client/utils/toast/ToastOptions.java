@@ -131,6 +131,18 @@ public final class ToastOptions extends AbstractToastOptions {
 	}
 
 	/**
+	 * Creates the object cloning the passed argument.
+	 * 
+	 * @param source source object to be cloned
+	 */
+	ToastOptions(ToastOptions source) {
+		this(source.nativeObject(), source.getDefaultValues());
+		setClickEventHandler(source.getClickEventHandler());
+		setOpenHandler(source.getOpenHandler());
+		setCloseHandler(source.getCloseHandler());
+	}
+
+	/**
 	 * Creates the configuration with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
