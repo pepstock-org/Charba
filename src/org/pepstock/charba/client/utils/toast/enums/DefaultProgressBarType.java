@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.utils.toast.enums;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.utils.toast.IsProgressBarType;
 
@@ -29,7 +30,7 @@ public enum DefaultProgressBarType implements IsProgressBarType
 	/**
 	 * Default toast type.
 	 */
-	DEFAULT("default", ColorBuilder.parse("#C0C0C0")),
+	DEFAULT("default", HtmlColor.BLACK),
 	/**
 	 * Success toast type, in green.
 	 */

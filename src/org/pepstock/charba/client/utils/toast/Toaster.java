@@ -28,6 +28,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.utils.toast.ToastOptions.ProxyHandlerCallback;
+import org.pepstock.charba.client.utils.toast.enums.MaximumOpenItemsPolicy;
 
 /**
  * Utility for displaying toast notifications with progress bars on the page.
@@ -66,6 +67,8 @@ public final class Toaster {
 	private final List<AbstractReadOnlyToastOptions> queueItems = new LinkedList<>();
 	// max amount of open items
 	private int maxOpenItems = MAXIMUM_OPEN_ITEMS;
+	// maximum items policy
+	private MaximumOpenItemsPolicy policy = MaximumOpenItemsPolicy.QUEUE;
 
 	/**
 	 * To avoid any instantiation
@@ -158,20 +161,23 @@ public final class Toaster {
 			}
 			// if here
 			// maximum amount of toast items was reacher
-			// then puts the toast options in a queue
-			// checks if the instance is a normal options
-			// if yes, it clones the instance
-			// because it can be changed in the meantime
-			if (options instanceof ToastOptions) {
-				// casts to normal options
-				ToastOptions normalOptions = (ToastOptions) options;
-				// stores queue time
-				normalOptions.setQueueDateTime(new Date());
-				queueItems.add(new ToastOptions(normalOptions));
-			} else {
-				// stores queue time
-				options.setQueueDateTime(new Date());
-				queueItems.add(options);
+			// checks if it must queue or discard
+			if (MaximumOpenItemsPolicy.QUEUE.equals(getMaxOpenItemsPolicy())) {
+				// then puts the toast options in a queue
+				// checks if the instance is a normal options
+				// if yes, it clones the instance
+				// because it can be changed in the meantime
+				if (options instanceof ToastOptions) {
+					// casts to normal options
+					ToastOptions normalOptions = (ToastOptions) options;
+					// stores queue time
+					normalOptions.setQueueDateTime(new Date());
+					queueItems.add(new ToastOptions(normalOptions));
+				} else {
+					// stores queue time
+					options.setQueueDateTime(new Date());
+					queueItems.add(options);
+				}
 			}
 		}
 		// if here, argument is not consistent
@@ -221,6 +227,26 @@ public final class Toaster {
 	}
 
 	/**
+	 * Returns the policy to apply when the maximum amount of open items is reached.
+	 * 
+	 * @return the policy to apply when the maximum amount of open items is reached
+	 */
+	public MaximumOpenItemsPolicy getMaxOpenItemsPolicy() {
+		return policy;
+	}
+
+	/**
+	 * Sets the policy to apply when the maximum amount of open items is reached.
+	 * 
+	 * @param policy the policy to apply when the maximum amount of open items is reached
+	 */
+	public void setMaxOpenItemsPolicy(MaximumOpenItemsPolicy policy) {
+		this.policy = policy == null ? MaximumOpenItemsPolicy.QUEUE : policy;
+		// setup queue configuration
+		setupQueueConfiguration();
+	}
+
+	/**
 	 * Returns the maximum amount of open toast items you want to maintain on DOM.
 	 * 
 	 * @return the maximum amount of open toast items you want to maintain on DOM
@@ -237,12 +263,25 @@ public final class Toaster {
 	 */
 	public void setMaxOpenItems(int maxOpenItems) {
 		this.maxOpenItems = Checker.betweenOrMaximum(maxOpenItems, 1, MAXIMUM_OPEN_ITEMS);
-		// checks if the handler must be set
-		Proxy proxy = this.maxHistoryItems < MAXIMUM_OPEN_ITEMS ? closeCallbackProxy.getProxy() : null;
-		// stores handler
-		NativeToasting.setInternalCloseHandler(proxy);
-		// checks the queue
-		checkAndCleanQueue();
+		// setup queue configuration
+		setupQueueConfiguration();
+	}
+
+	private void setupQueueConfiguration() {
+		// checks policy type
+		if (MaximumOpenItemsPolicy.QUEUE.equals(getMaxOpenItemsPolicy())) {
+			// checks if the handler must be set
+			Proxy proxy = this.maxHistoryItems < MAXIMUM_OPEN_ITEMS ? closeCallbackProxy.getProxy() : null;
+			// stores handler
+			NativeToasting.setInternalCloseHandler(proxy);
+			// checks the queue
+			checkAndCleanQueue();
+		} else {
+			// resets handler
+			NativeToasting.setInternalCloseHandler(null);
+			// clear the queue
+			queueItems.clear();
+		}
 	}
 
 	/**
