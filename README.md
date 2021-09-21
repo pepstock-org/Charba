@@ -281,6 +281,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * import CHART.JS GEO controller [version v3.5.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.5.1).
   * import CHART.JS LUXON adapter [version v1.1.0](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v1.1.0).
   * import LUXON library [version 2.0.2](https://github.com/moment/luxon/releases/tag/2.0.2).
+  * add toasting utility.
   * add `click`, `enter` and `leave` subtitle events.
   * add `subtitle` item to `PointElement` enumeration for `ChartPointer` plugin, in order to enable the changing cursor when a click event handler has been set on subtitle element.
   * add `isPressed(event)` methods to `ModifierKey` enumeration in order to enable the capability to filter the events if the modifier keys are pressed.
@@ -305,8 +306,8 @@ Here you can find the list of enhancements and updates available on `master` bra
   * use `Chart.helpers.toFont` method of CHART.JS to normalize the font object and to get the CSS string.
   * add additional checks about the consistency of datasets types and amount added to a chart.
   * add additional checks about the consistency of axes types and amount added to a chart.
-  * add toasting utility.
-    
+  * add additional checks on builder classes in order to be consistent with new object creation.
+      
 License
 -------
 

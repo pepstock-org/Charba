@@ -18,6 +18,8 @@ package org.pepstock.charba.client.utils.toast;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.AbstractBaseBuilder;
+import org.pepstock.charba.client.commons.IsBuilder;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
@@ -31,7 +33,7 @@ import org.pepstock.charba.client.utils.toast.handlers.OpenHandler;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ToastOptionsBuilder {
+public final class ToastOptionsBuilder extends AbstractBaseBuilder {
 
 	// toast options instance
 	private ToastOptions options;
@@ -118,6 +120,8 @@ public final class ToastOptionsBuilder {
 	 * @return a configured toast options.
 	 */
 	public ToastOptions build() {
+		// sets built status
+		setBuilt(true);
 		// returns options
 		return options;
 	}
@@ -126,7 +130,7 @@ public final class ToastOptionsBuilder {
 	 * Shows the configured toast.
 	 */
 	public void show() {
-		Toaster.get().show(build());
+		Toaster.get().show(options);
 	}
 
 	/**
@@ -137,7 +141,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setTitle(String title) {
 		options.getTitle().setContent(title);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -148,7 +152,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setTitleColor(IsColor color) {
 		options.getTitle().setColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -159,7 +163,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setTitleColor(String color) {
 		options.getTitle().setColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -170,7 +174,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setTitleFontSize(int size) {
 		options.getTitle().getFont().setSize(size);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -181,7 +185,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setTitleFontStyle(FontStyle style) {
 		options.getTitle().getFont().setStyle(style);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -192,7 +196,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setTitleFontFamily(String family) {
 		options.getTitle().getFont().setFamily(family);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -203,7 +207,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setTitleFontWeight(Weight weight) {
 		options.getTitle().getFont().setWeight(weight);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -214,7 +218,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setTitleFontLineHeight(double lineHeight) {
 		options.getTitle().getFont().setLineHeight(lineHeight);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -225,7 +229,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setTitleFontLineHeight(String lineHeight) {
 		options.getTitle().getFont().setLineHeight(lineHeight);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -236,7 +240,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setLabel(String... label) {
 		options.getLabel().setContent(label);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -247,7 +251,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setLabel(List<String> label) {
 		options.getLabel().setContent(label);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -258,7 +262,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setLabelColor(IsColor color) {
 		options.getLabel().setColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -269,7 +273,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setLabelColor(String color) {
 		options.getLabel().setColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -280,7 +284,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setLabelFontSize(int size) {
 		options.getLabel().getFont().setSize(size);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -291,7 +295,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setLabelFontStyle(FontStyle style) {
 		options.getLabel().getFont().setStyle(style);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -302,7 +306,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setLabelFontFamily(String family) {
 		options.getLabel().getFont().setFamily(family);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -313,7 +317,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setLabelFontWeight(Weight weight) {
 		options.getLabel().getFont().setWeight(weight);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -324,7 +328,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setLabelFontLineHeight(double lineHeight) {
 		options.getLabel().getFont().setLineHeight(lineHeight);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -335,7 +339,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setLabelFontLineHeight(String lineHeight) {
 		options.getLabel().getFont().setLineHeight(lineHeight);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -346,7 +350,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setType(IsToastType type) {
 		options.setType(type);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -357,7 +361,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setProgressBarType(IsProgressBarType type) {
 		options.setProgressBarType(type);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -368,7 +372,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setHideProgressBar(boolean hide) {
 		options.setHideProgressBar(hide);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -379,7 +383,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setAutoHide(boolean hide) {
 		options.setAutoHide(hide);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -390,7 +394,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setTimeout(int timeout) {
 		options.setTimeout(timeout);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -401,7 +405,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setIcon(Img icon) {
 		options.setIcon(icon);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -412,7 +416,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setBorderRadius(int borderRadius) {
 		options.setBorderRadius(borderRadius);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -423,7 +427,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setClickEventHandler(ClickEventHandler clickEventHandler) {
 		options.setClickEventHandler(clickEventHandler);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -434,7 +438,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setOpenHandler(OpenHandler openHandler) {
 		options.setOpenHandler(openHandler);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -445,7 +449,7 @@ public final class ToastOptionsBuilder {
 	 */
 	public ToastOptionsBuilder setCloseHandler(CloseHandler closeHandler) {
 		options.setCloseHandler(closeHandler);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 }

@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.AbstractBaseBuilder;
+import org.pepstock.charba.client.commons.IsBuilder;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
@@ -22,7 +24,7 @@ import org.pepstock.charba.client.enums.Easing;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class UpdateConfigurationBuilder {
+public final class UpdateConfigurationBuilder extends AbstractBaseBuilder {
 
 	// configuration instance
 	private final UpdateConfiguration configuration = new UpdateConfiguration();
@@ -51,7 +53,7 @@ public final class UpdateConfigurationBuilder {
 	 */
 	public UpdateConfigurationBuilder setEasing(Easing easing) {
 		configuration.setEasing(easing);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -62,7 +64,7 @@ public final class UpdateConfigurationBuilder {
 	 */
 	public UpdateConfigurationBuilder setDuration(int milliseconds) {
 		configuration.setDuration(milliseconds);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -73,7 +75,7 @@ public final class UpdateConfigurationBuilder {
 	 */
 	public UpdateConfigurationBuilder setDelay(int delay) {
 		configuration.setDelay(delay);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -84,7 +86,7 @@ public final class UpdateConfigurationBuilder {
 	 */
 	public UpdateConfigurationBuilder setLoop(boolean loop) {
 		configuration.setLoop(loop);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -95,7 +97,7 @@ public final class UpdateConfigurationBuilder {
 	 */
 	public UpdateConfigurationBuilder setAnimateRotate(boolean animateRotate) {
 		configuration.setAnimateRotate(animateRotate);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -106,7 +108,7 @@ public final class UpdateConfigurationBuilder {
 	 */
 	public UpdateConfigurationBuilder setAnimateScale(boolean animateScale) {
 		configuration.setAnimateScale(animateScale);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -115,6 +117,8 @@ public final class UpdateConfigurationBuilder {
 	 * @return a update configuration item
 	 */
 	public UpdateConfiguration build() {
+		// sets built status
+		setBuilt(true);
 		// returns configuration
 		return configuration;
 	}

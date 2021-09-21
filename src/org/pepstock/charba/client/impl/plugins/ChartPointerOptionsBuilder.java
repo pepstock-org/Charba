@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.AbstractBaseBuilder;
+import org.pepstock.charba.client.commons.IsBuilder;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 
@@ -25,7 +27,7 @@ import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ChartPointerOptionsBuilder {
+public final class ChartPointerOptionsBuilder extends AbstractBaseBuilder {
 
 	// plugin options instance
 	private ChartPointerOptions options;
@@ -64,6 +66,8 @@ public final class ChartPointerOptionsBuilder {
 	 * @return a configured plugin options.
 	 */
 	public ChartPointerOptions build() {
+		// sets built status
+		setBuilt(true);
 		// returns options
 		return options;
 	}
@@ -76,7 +80,7 @@ public final class ChartPointerOptionsBuilder {
 	 */
 	public ChartPointerOptionsBuilder setElements(PointerElement... elements) {
 		options.setElements(elements);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -87,6 +91,6 @@ public final class ChartPointerOptionsBuilder {
 	 */
 	public ChartPointerOptionsBuilder setCursorPointer(CursorType cursor) {
 		options.setCursorPointer(cursor);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 }

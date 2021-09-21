@@ -68,6 +68,8 @@ public final class DataLabelsOptionsBuilder extends AbstractBuilder<DataLabelsOp
 	 * @return a configured labels options.
 	 */
 	public DataLabelsOptions build() {
+		// sets built status
+		setBuilt(true);
 		// returns options
 		return getLabel();
 	}

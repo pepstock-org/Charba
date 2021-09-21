@@ -19,6 +19,8 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.AbstractBaseBuilder;
+import org.pepstock.charba.client.commons.IsBuilder;
 import org.pepstock.charba.client.dom.enums.GlobalCompositeOperation;
 
 /**
@@ -27,7 +29,7 @@ import org.pepstock.charba.client.dom.enums.GlobalCompositeOperation;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ChartBackgroundColorOptionsBuilder {
+public final class ChartBackgroundColorOptionsBuilder extends AbstractBaseBuilder {
 
 	// plugin options instance
 	private ChartBackgroundColorOptions options;
@@ -66,6 +68,8 @@ public final class ChartBackgroundColorOptionsBuilder {
 	 * @return a configured plugin options.
 	 */
 	public ChartBackgroundColorOptions build() {
+		// sets built status
+		setBuilt(true);
 		// returns options
 		return options;
 	}
@@ -78,7 +82,7 @@ public final class ChartBackgroundColorOptionsBuilder {
 	 */
 	public ChartBackgroundColorOptionsBuilder setBackgroundColor(String color) {
 		options.setBackgroundColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -89,7 +93,7 @@ public final class ChartBackgroundColorOptionsBuilder {
 	 */
 	public ChartBackgroundColorOptionsBuilder setBackgroundColor(IsColor color) {
 		options.setBackgroundColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -100,7 +104,7 @@ public final class ChartBackgroundColorOptionsBuilder {
 	 */
 	public ChartBackgroundColorOptionsBuilder setBackgroundColor(Gradient gradient) {
 		options.setBackgroundColor(gradient);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -111,7 +115,7 @@ public final class ChartBackgroundColorOptionsBuilder {
 	 */
 	public ChartBackgroundColorOptionsBuilder setBackgroundColor(Pattern pattern) {
 		options.setBackgroundColor(pattern);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -122,7 +126,7 @@ public final class ChartBackgroundColorOptionsBuilder {
 	 */
 	public ChartBackgroundColorOptionsBuilder setGlobalCompositeOperation(GlobalCompositeOperation globalCompositeOperation) {
 		options.setGlobalCompositeOperation(globalCompositeOperation);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 }

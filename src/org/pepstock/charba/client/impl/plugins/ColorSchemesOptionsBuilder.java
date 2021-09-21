@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.AbstractBaseBuilder;
+import org.pepstock.charba.client.commons.IsBuilder;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 
 /**
@@ -24,7 +26,7 @@ import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ColorSchemesOptionsBuilder {
+public final class ColorSchemesOptionsBuilder extends AbstractBaseBuilder {
 
 	// creates the options
 	private final ColorSchemesOptions options;
@@ -63,6 +65,8 @@ public final class ColorSchemesOptionsBuilder {
 	 * @return a configured plugin options.
 	 */
 	public ColorSchemesOptions build() {
+		// sets built status
+		setBuilt(true);
 		// returns options
 		return options;
 	}
@@ -75,7 +79,7 @@ public final class ColorSchemesOptionsBuilder {
 	 */
 	public ColorSchemesOptionsBuilder setSchemeScope(SchemeScope schemeScope) {
 		options.setSchemeScope(schemeScope);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -86,7 +90,7 @@ public final class ColorSchemesOptionsBuilder {
 	 */
 	public ColorSchemesOptionsBuilder setScheme(ColorScheme scheme) {
 		options.setScheme(scheme);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -97,7 +101,7 @@ public final class ColorSchemesOptionsBuilder {
 	 */
 	public ColorSchemesOptionsBuilder setBackgroundColorAlpha(double backgroundColorAlpha) {
 		options.setBackgroundColorAlpha(backgroundColorAlpha);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -108,6 +112,6 @@ public final class ColorSchemesOptionsBuilder {
 	 */
 	public ColorSchemesOptionsBuilder setReverse(boolean reverse) {
 		options.setReverse(reverse);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 }

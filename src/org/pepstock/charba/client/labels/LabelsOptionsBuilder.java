@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.AbstractBaseBuilder;
 
 /**
  * Comfortable object to create {@link LabelsPlugin#ID} plugin options by a builder.
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.IsChart;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LabelsOptionsBuilder {
+public final class LabelsOptionsBuilder extends AbstractBaseBuilder {
 
 	// maps with all labels builders
 	// K = label id, V = label builder
@@ -68,6 +69,8 @@ public final class LabelsOptionsBuilder {
 	 * @return a configured labels options.
 	 */
 	public LabelsOptions build() {
+		// sets built status
+		setBuilt(true);
 		// returns options
 		return options;
 	}

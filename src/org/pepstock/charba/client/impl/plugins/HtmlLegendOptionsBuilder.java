@@ -18,6 +18,8 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.HtmlLegendItemCallback;
 import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
+import org.pepstock.charba.client.commons.AbstractBaseBuilder;
+import org.pepstock.charba.client.commons.IsBuilder;
 
 /**
  * Comfortable object to create {@link HtmlLegend#ID} plugin options by a builder.
@@ -25,7 +27,7 @@ import org.pepstock.charba.client.callbacks.HtmlLegendTitleCallback;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class HtmlLegendOptionsBuilder {
+public final class HtmlLegendOptionsBuilder extends AbstractBaseBuilder {
 
 	// creates the options
 	private final HtmlLegendOptions options;
@@ -64,6 +66,8 @@ public final class HtmlLegendOptionsBuilder {
 	 * @return a configured plugin options.
 	 */
 	public HtmlLegendOptions build() {
+		// sets built status
+		setBuilt(true);
 		// returns options
 		return options;
 	}
@@ -76,7 +80,7 @@ public final class HtmlLegendOptionsBuilder {
 	 */
 	public HtmlLegendOptionsBuilder setDisplay(boolean display) {
 		options.setDisplay(display);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -87,7 +91,7 @@ public final class HtmlLegendOptionsBuilder {
 	 */
 	public HtmlLegendOptionsBuilder setLegendItemCallback(HtmlLegendItemCallback legendTextCallback) {
 		options.setLegendItemCallback(legendTextCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -98,7 +102,7 @@ public final class HtmlLegendOptionsBuilder {
 	 */
 	public HtmlLegendOptionsBuilder setLegendTitleCallback(HtmlLegendTitleCallback legendTitleCallback) {
 		options.setLegendTitleCallback(legendTitleCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -109,7 +113,7 @@ public final class HtmlLegendOptionsBuilder {
 	 */
 	public HtmlLegendOptionsBuilder setMaximumLegendColumns(int maxColumns) {
 		options.setMaximumLegendColumns(maxColumns);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 }

@@ -17,6 +17,8 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.AbstractBaseBuilder;
+import org.pepstock.charba.client.commons.IsBuilder;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.ModifierKey;
@@ -31,7 +33,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DatasetsItemsSelectorOptionsBuilder {
+public final class DatasetsItemsSelectorOptionsBuilder extends AbstractBaseBuilder {
 	// creates the options
 	private final DatasetsItemsSelectorOptions options;
 
@@ -69,6 +71,8 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return a configured plugin options.
 	 */
 	public DatasetsItemsSelectorOptions build() {
+		// sets built status
+		setBuilt(true);
 		// returns options
 		return options;
 	}
@@ -81,7 +85,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setEnabled(boolean enabled) {
 		options.setEnabled(enabled);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -92,7 +96,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setXAxisID(String xAxisID) {
 		options.setXAxisID(xAxisID);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -103,7 +107,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setXAxisID(ScaleId xAxisID) {
 		options.setXAxisID(xAxisID);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -114,7 +118,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setColor(String color) {
 		options.setColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -125,7 +129,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setColor(IsColor color) {
 		options.setColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -136,7 +140,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setBorderDash(int... borderDash) {
 		options.setBorderDash(borderDash);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -147,7 +151,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setBorderWidth(int borderWidth) {
 		options.setBorderWidth(borderWidth);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -158,7 +162,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setBorderColor(String color) {
 		options.setBorderColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -169,7 +173,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setBorderColor(IsColor color) {
 		options.setBorderColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -180,7 +184,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setModifierKey(ModifierKey modifierKey) {
 		options.setModifierKey(modifierKey);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -191,7 +195,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setDisplay(boolean display) {
 		options.getSelectionCleaner().setDisplay(display);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -202,7 +206,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setLabel(String label) {
 		options.getSelectionCleaner().setLabel(label);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -213,7 +217,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontSize(int fontSize) {
 		options.getSelectionCleaner().getFont().setSize(fontSize);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -224,7 +228,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontStyle(FontStyle fontStyle) {
 		options.getSelectionCleaner().getFont().setStyle(fontStyle);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -235,7 +239,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontFamily(String fontFamily) {
 		options.getSelectionCleaner().getFont().setFamily(fontFamily);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -246,7 +250,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontColor(String color) {
 		options.getSelectionCleaner().setColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -257,7 +261,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setFontColor(IsColor color) {
 		options.getSelectionCleaner().setColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -268,7 +272,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setAlign(Align align) {
 		options.getSelectionCleaner().setAlign(align);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -279,7 +283,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setRender(Render render) {
 		options.getSelectionCleaner().setRender(render);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -290,7 +294,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setPosition(Position position) {
 		options.getSelectionCleaner().setPosition(position);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -301,7 +305,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setImage(Img image) {
 		options.getSelectionCleaner().setImage(image);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -312,7 +316,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setMargin(int margin) {
 		options.getSelectionCleaner().setMargin(margin);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -323,7 +327,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setPadding(int padding) {
 		options.getSelectionCleaner().setPadding(padding);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -334,7 +338,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setSpacing(int spacing) {
 		options.getSelectionCleaner().setSpacing(spacing);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -345,7 +349,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setUseSelectionStyle(boolean useSelectionStyle) {
 		options.getSelectionCleaner().setUseSelectionStyle(useSelectionStyle);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 }

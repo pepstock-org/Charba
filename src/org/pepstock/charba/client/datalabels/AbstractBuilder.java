@@ -24,6 +24,8 @@ import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.AbstractBaseBuilder;
+import org.pepstock.charba.client.commons.IsBuilder;
 import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClampCallback;
@@ -49,7 +51,7 @@ import org.pepstock.charba.client.enums.Weight;
  * @author Andrea "Stock" Stocchero
  * @param <T> type of label item
  */
-public class AbstractBuilder<T extends LabelItem> {
+public abstract class AbstractBuilder<T extends LabelItem> extends AbstractBaseBuilder {
 
 	// label item instance
 	private final T label;
@@ -101,7 +103,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setListenersHandler(AbstractEventHandler handler) {
 		label.setListenersHandler(handler);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -112,7 +114,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setAlign(Align align) {
 		label.setAlign(align);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -123,7 +125,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setAlign(double align) {
 		label.setAlign(align);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -134,7 +136,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setAnchor(Anchor anchor) {
 		label.setAnchor(anchor);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -145,7 +147,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setBackgroundColor(IsColor color) {
 		label.setBackgroundColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -156,7 +158,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setBackgroundColor(String color) {
 		label.setBackgroundColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -167,7 +169,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setBorderColor(IsColor color) {
 		label.setBorderColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -178,7 +180,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setBorderColor(String color) {
 		label.setBorderColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -189,7 +191,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setBorderRadius(double radius) {
 		label.setBorderRadius(radius);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -200,7 +202,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setBorderWidth(int width) {
 		label.setBorderWidth(width);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -211,7 +213,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setClamp(boolean clamp) {
 		label.setClamp(clamp);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -222,7 +224,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setClip(boolean clip) {
 		label.setClip(clip);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -233,7 +235,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setColor(IsColor color) {
 		label.setColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -244,7 +246,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setColor(String color) {
 		label.setColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -255,7 +257,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setDisplay(boolean display) {
 		label.setDisplay(display);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -266,7 +268,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setDisplay(Display display) {
 		label.setDisplay(display);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -279,7 +281,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setOffset(int offset) {
 		label.setOffset(offset);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -290,7 +292,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setOpacity(double opacity) {
 		label.setOpacity(opacity);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -301,7 +303,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setRotation(double rotation) {
 		label.setRotation(rotation);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -312,7 +314,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextAlign(TextAlign textAlign) {
 		label.setTextAlign(textAlign);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -323,7 +325,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextStrokeColor(IsColor color) {
 		label.setTextStrokeColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -334,7 +336,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextStrokeColor(String color) {
 		label.setTextStrokeColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -345,7 +347,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextStrokeWidth(int textStrokeWidth) {
 		label.setTextStrokeWidth(textStrokeWidth);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -356,7 +358,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextShadowBlur(double textShadowBlur) {
 		label.setTextShadowBlur(textShadowBlur);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -367,7 +369,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextShadowColor(IsColor color) {
 		label.setTextShadowColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -378,7 +380,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextShadowColor(String color) {
 		label.setTextShadowColor(color);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -389,7 +391,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setBackgroundColor(ColorCallback<DataLabelsContext> backgroundColorCallback) {
 		label.setBackgroundColor(backgroundColorCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -400,7 +402,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setBorderColor(ColorCallback<DataLabelsContext> borderColorCallback) {
 		label.setBorderColor(borderColorCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -411,7 +413,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setColor(ColorCallback<DataLabelsContext> colorCallback) {
 		label.setColor(colorCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -422,7 +424,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setFormatter(FormatterCallback formatterCallback) {
 		label.setFormatter(formatterCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -433,7 +435,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setAlign(AlignCallback alignCallback) {
 		label.setAlign(alignCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -444,7 +446,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setAnchor(AnchorCallback anchorCallback) {
 		label.setAnchor(anchorCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -455,7 +457,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setBorderRadius(RadiusCallback<DataLabelsContext> borderRadiusCallback) {
 		label.setBorderRadius(borderRadiusCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -466,7 +468,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setBorderWidth(WidthCallback<DataLabelsContext> borderWidthCallback) {
 		label.setBorderWidth(borderWidthCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -477,7 +479,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setClamp(ClampCallback clampCallback) {
 		label.setClamp(clampCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -488,7 +490,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setClip(ClipCallback clipCallback) {
 		label.setClip(clipCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -499,7 +501,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setDisplay(DisplayCallback displayCallback) {
 		label.setDisplay(displayCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -510,7 +512,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setOffset(OffsetCallback<DataLabelsContext> offsetCallback) {
 		label.setOffset(offsetCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -521,7 +523,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setOpacity(OpacityCallback opacityCallback) {
 		label.setOpacity(opacityCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -532,7 +534,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setRotation(RotationCallback<DataLabelsContext> rotationCallback) {
 		label.setRotation(rotationCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -543,7 +545,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextAlign(TextAlignCallback<DataLabelsContext> textAlignCallback) {
 		label.setTextAlign(textAlignCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -554,7 +556,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextStrokeColor(ColorCallback<DataLabelsContext> textStrokeColorCallback) {
 		label.setTextStrokeColor(textStrokeColorCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -565,7 +567,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextStrokeWidth(WidthCallback<DataLabelsContext> textStrokeWidthCallback) {
 		label.setTextStrokeWidth(textStrokeWidthCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -576,7 +578,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextShadowBlur(TextShadowBlurCallback textShadowBlurCallback) {
 		label.setTextShadowBlur(textShadowBlurCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -587,7 +589,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setTextShadowColor(ColorCallback<DataLabelsContext> textShadowColorCallback) {
 		label.setTextShadowColor(textShadowColorCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -598,7 +600,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setFont(FontCallback<DataLabelsContext> fontCallback) {
 		label.setFont(fontCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -609,7 +611,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setPadding(PaddingCallback<DataLabelsContext> paddingCallback) {
 		label.setPadding(paddingCallback);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -620,7 +622,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setFontSize(int fontSize) {
 		label.getFont().setSize(fontSize);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -631,7 +633,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setFontStyle(FontStyle fontStyle) {
 		label.getFont().setStyle(fontStyle);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -642,7 +644,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setFontFamily(String fontFamily) {
 		label.getFont().setFamily(fontFamily);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -653,7 +655,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setFontWeight(Weight weight) {
 		label.getFont().setWeight(weight);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -664,7 +666,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setFontLineHeight(double lineHeight) {
 		label.getFont().setLineHeight(lineHeight);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -675,7 +677,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setFontLineHeight(String lineHeight) {
 		label.getFont().setLineHeight(lineHeight);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -686,7 +688,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setPadding(int padding) {
 		label.getPadding().set(padding);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -697,7 +699,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setPaddingLeft(int padding) {
 		label.getPadding().setLeft(padding);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -708,7 +710,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setPaddingRight(int padding) {
 		label.getPadding().setRight(padding);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -719,7 +721,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setPaddingTop(int padding) {
 		label.getPadding().setTop(padding);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -730,7 +732,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setPaddingBottom(int padding) {
 		label.getPadding().setBottom(padding);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -741,7 +743,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setClickEventHandler(ClickEventHandler clickEventHandler) {
 		label.getListeners().setClickEventHandler(clickEventHandler);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -752,7 +754,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setEnterEventHandler(EnterEventHandler enterEventHandler) {
 		label.getListeners().setEnterEventHandler(enterEventHandler);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -763,7 +765,7 @@ public class AbstractBuilder<T extends LabelItem> {
 	 */
 	public final AbstractBuilder<T> setLeaveEventHandler(LeaveEventHandler leaveEventHandler) {
 		label.getListeners().setLeaveEventHandler(leaveEventHandler);
-		return this;
+		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 }
