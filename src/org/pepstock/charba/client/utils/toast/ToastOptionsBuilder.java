@@ -23,6 +23,7 @@ import org.pepstock.charba.client.commons.IsBuilder;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.utils.toast.enums.Status;
 import org.pepstock.charba.client.utils.toast.handlers.ClickEventHandler;
 import org.pepstock.charba.client.utils.toast.handlers.CloseHandler;
 import org.pepstock.charba.client.utils.toast.handlers.OpenHandler;
@@ -128,9 +129,11 @@ public final class ToastOptionsBuilder extends AbstractBaseBuilder {
 
 	/**
 	 * Shows the configured toast.
+	 * 
+	 * @return the status if the toast has been shown
 	 */
-	public void show() {
-		Toaster.get().show(options);
+	public Status show() {
+		return Toaster.get().show(options);
 	}
 
 	/**

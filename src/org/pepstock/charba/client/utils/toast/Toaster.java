@@ -29,6 +29,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.utils.toast.ToastOptions.ProxyHandlerCallback;
 import org.pepstock.charba.client.utils.toast.enums.MaximumOpenItemsPolicy;
+import org.pepstock.charba.client.utils.toast.enums.Status;
 
 /**
  * Utility for displaying toast notifications with progress bars on the page.
@@ -122,9 +123,9 @@ public final class Toaster {
 	 * Creates and shows a toast configured by the passed options.
 	 * 
 	 * @param options configuration of the toast to show
-	 * @return <code>true</code> if the toast has been shown
+	 * @return the status if the toast has been shown
 	 */
-	public boolean show(ToastOptions options) {
+	public Status show(ToastOptions options) {
 		return showToast(options);
 	}
 
@@ -132,9 +133,9 @@ public final class Toaster {
 	 * Creates and shows a toast configured by the passed options.
 	 * 
 	 * @param options configuration of the toast to show
-	 * @return <code>true</code> if the toast has been shown
+	 * @return the status if the toast has been shown
 	 */
-	boolean showToast(AbstractReadOnlyToastOptions options) {
+	Status showToast(AbstractReadOnlyToastOptions options) {
 		// checks if argument is consistent
 		if (options != null) {
 			// checks if the toast can be show
@@ -142,47 +143,28 @@ public final class Toaster {
 			if (NativeToasting.getCurrentOpenItems() < maxOpenItems) {
 				// shows the toast
 				NativeObject result = NativeToasting.create(counter.getAndIncrement(), options.nativeObject());
-				// checks if consistent and
-				// the user wants to have an history
-				if (result != null && maxHistoryItems > 0) {
-					// gets the toast item
-					ToastItem item = new ToastItem(result);
-					// checks if it must be removed the older item
-					if (!historyItems.isEmpty() && historyItems.size() >= maxHistoryItems) {
-						// removes the last
-						historyItems.remove(historyItems.size() - 1);
-					}
-					// stores in the history
-					// always at the beginning of list
-					historyItems.add(0, item);
+				// checks if result is consistent
+				if (result == null) {
+					// sets invalid status
+					options.setStatus(Status.INVALID);
+					// stores history
+					storeHistory(options.nativeObject());
+					// returns invalid
+					return Status.INVALID;
+				} else {
+					// stores history
+					storeHistory(result);
+					// returns the status
+					return Status.SHOWING;
 				}
-				// returns if the toast is showing
-				return result != null;
 			}
 			// if here
 			// maximum amount of toast items was reacher
-			// checks if it must queue or discard
-			if (MaximumOpenItemsPolicy.QUEUE.equals(getMaxOpenItemsPolicy())) {
-				// then puts the toast options in a queue
-				// checks if the instance is a normal options
-				// if yes, it clones the instance
-				// because it can be changed in the meantime
-				if (options instanceof ToastOptions) {
-					// casts to normal options
-					ToastOptions normalOptions = (ToastOptions) options;
-					// stores queue time
-					normalOptions.setQueueDateTime(new Date());
-					queueItems.add(new ToastOptions(normalOptions));
-				} else {
-					// stores queue time
-					options.setQueueDateTime(new Date());
-					queueItems.add(options);
-				}
-			}
+			return manageQueue(options);
 		}
 		// if here, argument is not consistent
 		// then return false
-		return false;
+		return Status.INVALID;
 	}
 
 	/**
@@ -213,17 +195,6 @@ public final class Toaster {
 	 */
 	public List<ToastItem> getHistoryItems() {
 		return Collections.unmodifiableList(historyItems);
-	}
-
-	/**
-	 * Checks and cleans the history when the max amount of items is changed.
-	 */
-	private void checkAndCleanHistory() {
-		// cycles to remove useless items
-		while (historyItems.size() > maxHistoryItems) {
-			// removes the last
-			historyItems.remove(historyItems.size() - 1);
-		}
 	}
 
 	/**
@@ -267,6 +238,63 @@ public final class Toaster {
 		setupQueueConfiguration();
 	}
 
+	// ---------------------------------
+	// internal methods
+	// ---------------------------------
+
+	/**
+	 * Manages the options if it must put in the queue or discard.
+	 * 
+	 * @param options configuration of the toast to queue or discard
+	 * @return the status if the toast has been shown
+	 */
+	private Status manageQueue(AbstractReadOnlyToastOptions options) {
+		// checks if it must queue or discard
+		if (MaximumOpenItemsPolicy.QUEUE.equals(getMaxOpenItemsPolicy())) {
+			// then puts the toast options in a queue
+			// checks if the instance is a normal options
+			// if yes, it clones the instance
+			// because it can be changed in the meantime
+			if (options instanceof ToastOptions) {
+				// casts to normal options
+				ToastOptions normalOptions = (ToastOptions) options;
+				// clone object
+				ToastOptions clonedOptions = new ToastOptions(normalOptions);
+				// stores queue time
+				clonedOptions.setQueueDateTime(new Date());
+				queueItems.add(clonedOptions);
+			} else {
+				// stores queue time
+				options.setQueueDateTime(new Date());
+				queueItems.add(options);
+			}
+			// returns queued
+			return Status.QUEUED;
+		} else {
+			// here is discarded
+			// sets status
+			options.setStatus(Status.DISCARDED);
+			// but store to history
+			storeHistory(options.nativeObject());
+			// returns queued
+			return Status.DISCARDED;
+		}
+	}
+
+	/**
+	 * Checks and cleans the history when the max amount of items is changed.
+	 */
+	private void checkAndCleanHistory() {
+		// cycles to remove useless items
+		while (historyItems.size() > maxHistoryItems) {
+			// removes the last
+			historyItems.remove(historyItems.size() - 1);
+		}
+	}
+
+	/**
+	 * Setup the queue configuration.
+	 */
 	private void setupQueueConfiguration() {
 		// checks policy type
 		if (MaximumOpenItemsPolicy.QUEUE.equals(getMaxOpenItemsPolicy())) {
@@ -294,6 +322,28 @@ public final class Toaster {
 			AbstractReadOnlyToastOptions queuedItem = queueItems.remove(0);
 			// shows item
 			showToast(queuedItem);
+		}
+	}
+
+	/**
+	 * Stores in the history the toast.
+	 * 
+	 * @param result the native object of the toast to store
+	 */
+	private void storeHistory(NativeObject result) {
+		// checks if consistent and
+		// the user wants to have an history
+		if (result != null && maxHistoryItems > 0) {
+			// gets the toast item
+			ToastItem item = new ToastItem(result);
+			// checks if it must be removed the older item
+			if (!historyItems.isEmpty() && historyItems.size() >= maxHistoryItems) {
+				// removes the last
+				historyItems.remove(historyItems.size() - 1);
+			}
+			// stores in the history
+			// always at the beginning of list
+			historyItems.add(0, item);
 		}
 	}
 

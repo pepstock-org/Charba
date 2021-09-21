@@ -143,7 +143,7 @@ CharbaToast = {
         toasting.addEventListener('click', (event) => options.onClick.apply(this, [result, event]));
       }
       // sets status
-      result.showing = true;
+      result.status = 'showing';
       // -------------------------------
       // HIDING / AUTO HIDE
       // -------------------------------
@@ -176,7 +176,7 @@ CharbaToast = {
         if (style) {
           style.remove();
         }
-        result.showing = false;
+        result.status = 'shown';
         result.closeDateTime = Date.now();
         CharbaToast.currentOpenItems--;
         // checks and calls callback

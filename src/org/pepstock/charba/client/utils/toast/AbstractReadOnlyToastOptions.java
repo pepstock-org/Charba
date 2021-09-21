@@ -24,6 +24,7 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.toast.enums.DefaultProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
+import org.pepstock.charba.client.utils.toast.enums.Status;
 
 /**
  * Entity to expose the configuration of a toast in read only mode.<br>
@@ -50,8 +51,9 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 		// inner elements
 		TITLE("title"),
 		LABEL("label"),
-		// internal for queue date time
-		QUEUE_DATE_TIME("queueDateTime");
+		// internal for queue date time and status
+		QUEUE_DATE_TIME("queueDateTime"),
+		STATUS("status");
 
 		// name value of property
 		private final String value;
@@ -238,6 +240,15 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	 */
 	final void setQueueDateTime(Date dateTime) {
 		setValue(Property.QUEUE_DATE_TIME, dateTime);
+	}
+
+	/**
+	 * Sets the {@link Status} of the toast.
+	 * 
+	 * @param status the {@link Status} of the toast
+	 */
+	final void setStatus(Status status) {
+		setValue(Property.STATUS, status);
 	}
 
 	/**

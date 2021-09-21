@@ -22,6 +22,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.utils.toast.enums.Status;
 
 /**
  * Represents an toast instance, once it has been created and consumed, by {@link Toaster#show(ToastOptions)}.
@@ -37,7 +38,6 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	private enum Property implements Key
 	{
 		ID("id"),
-		SHOWING("showing"),
 		OPEN_DATE_TIME("openDateTime"),
 		CLOSE_DATE_TIME("closeDateTime"),
 		ELEMENT("element");
@@ -112,12 +112,12 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	}
 
 	/**
-	 * Returns <code>true</code> if the toast item is still shown, otherwise <code>false</code>.
+	 * Returns the status of the toast.
 	 * 
-	 * @return <code>true</code> if the toast item is still shown, otherwise <code>false</code>
+	 * @return the status of the toast
 	 */
-	public boolean isShowing() {
-		return getValue(Property.SHOWING, Undefined.BOOLEAN);
+	public Status getStatus() {
+		return getValue(AbstractReadOnlyToastOptions.Property.STATUS, Status.values(), Status.UNKNOWN);
 	}
 
 	/**
@@ -141,9 +141,9 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	/**
 	 * Creates and shows a toast configured by this toast item.
 	 * 
-	 * @return <code>true</code> if the toast has been shown
+	 * @return the status if the toast has been shown
 	 */
-	public boolean show() {
+	public Status show() {
 		return Toaster.get().showToast(this);
 	}
 
@@ -154,7 +154,7 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	 */
 	@Override
 	public String toString() {
-		return "ToastItem [id=" + getId() + ", queueDateTime=" + getQueueDateTime() + ", openDateTime=" + getOpenDateTime() + ", closeDateTime=" + getCloseDateTime() + ", type=" + getType().value() + "]";
+		return "ToastItem [getId()=" + getId() + ", getQueueDateTime()=" + getQueueDateTime() + ", getOpenDateTime()=" + getOpenDateTime() + ", getCloseDateTime()=" + getCloseDateTime() + ", getStatus()=" + getStatus() + "]";
 	}
 
 }
