@@ -27,13 +27,13 @@ import org.pepstock.charba.client.utils.toast.ToastItem;
 public enum Status implements Key
 {
 	/**
-	 * The toast is showing.
+	 * The toast is opened and showing.
 	 */
-	SHOWING("showing"),
+	OPENED("opened"),
 	/**
-	 * The toast is shown.
+	 * The toast is shown and closed.
 	 */
-	SHOWN("shown"),
+	CLOSED("closed"),
 	/**
 	 * The toast is in the queue.
 	 */

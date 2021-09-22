@@ -61,7 +61,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'ToastJsUtilResource' class.
 	 */
-	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 719032),
+	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 743355),
 	/**
 	 * Hash item for 'SankeyControllerResource' class.
 	 */

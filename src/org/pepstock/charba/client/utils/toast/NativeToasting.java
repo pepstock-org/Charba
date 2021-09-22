@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -76,10 +77,13 @@ final class NativeToasting {
 	 * Creates and shows a toast configured by the passed options.
 	 * 
 	 * @param id unique id to use as element id.
+	 * @param title title of the toast
+	 * @param label label of the toast
 	 * @param options configuration of the toast to show
+	 * @param dateTime date time object of the toast item (when queued or re-show)
 	 * @return the toast item created and showed
 	 */
 	@JsMethod
-	static native NativeObject create(int id, NativeObject options);
+	static native NativeObject create(int id, String title, ArrayString label, NativeObject options, NativeObject dateTime);
 
 }

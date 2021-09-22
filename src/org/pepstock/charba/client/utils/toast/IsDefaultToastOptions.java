@@ -24,7 +24,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultToastOptions {
+public interface IsDefaultToastOptions {
 
 	/**
 	 * Returns the title of the toast.

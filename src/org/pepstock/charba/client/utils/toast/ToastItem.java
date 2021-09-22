@@ -16,21 +16,25 @@
 package org.pepstock.charba.client.utils.toast;
 
 import java.util.Date;
+import java.util.List;
 
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.toast.enums.Status;
 
 /**
- * Represents an toast instance, once it has been created and consumed, by {@link Toaster#show(ToastOptions)}.
+ * Represents an toast instance, once it has been created and consumed.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ToastItem extends AbstractReadOnlyToastOptions {
+public final class ToastItem extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
@@ -38,9 +42,11 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	private enum Property implements Key
 	{
 		ID("id"),
-		OPEN_DATE_TIME("openDateTime"),
-		CLOSE_DATE_TIME("closeDateTime"),
-		ELEMENT("element");
+		TITLE("title"),
+		LABEL("label"),
+		DATE_TIME("dateTime"),
+		ELEMENT("element"),
+		STATUS("status");
 
 		// name value of property
 		private final String value;
@@ -66,13 +72,37 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 
 	}
 
+	// date time instance
+	private final DateTime dateTime;
+	// toast options instance
+	private final ToastItemOptions options;
+
+	/**
+	 * Creates the configuration with new native object instance to be wrapped.
+	 * 
+	 * @param options toast options
+	 */
+	ToastItem(ToastOptions options) {
+		this(null, options);
+	}
+
 	/**
 	 * Creates the configuration with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
+	 * @param options toast options
 	 */
-	ToastItem(NativeObject nativeObject) {
-		super(nativeObject, Toaster.get().getDefaults());
+	ToastItem(NativeObject nativeObject, ToastOptions options) {
+		super(nativeObject);
+		// stores options, cloning it
+		this.options = new ToastItemOptions(options);
+		// gets date time
+		this.dateTime = new DateTime(getValue(Property.DATE_TIME));
+		// checks if it must be added
+		if (!has(Property.DATE_TIME)) {
+			// stores date time
+			setValue(Property.DATE_TIME, this.dateTime);
+		}
 	}
 
 	/**
@@ -85,30 +115,24 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	}
 
 	/**
-	 * Returns the date time when the toast item has been put in the queue.
+	 * Returns the date time when the status was applied to the toast.
 	 * 
-	 * @return the date time when the toast item has been put in the queue
+	 * @param status the status to get the date time
+	 * @return the date time when the status was applied to the toast
 	 */
-	public Date getQueueDateTime() {
-		return getValue(AbstractReadOnlyToastOptions.Property.QUEUE_DATE_TIME, (Date) null);
+	public Date getDateTime(Status status) {
+		return dateTime.get(status);
 	}
 
 	/**
-	 * Returns the date time when the toast item has been opened.
+	 * Sets the {@link Status} of the toast.
 	 * 
-	 * @return the date time when the toast item has been opened
+	 * @param status the {@link Status} of the toast
 	 */
-	public Date getOpenDateTime() {
-		return getValue(Property.OPEN_DATE_TIME, (Date) null);
-	}
-
-	/**
-	 * Returns the date time when the toast item has been closed.
-	 * 
-	 * @return the date time when the toast item has been close
-	 */
-	public Date getCloseDateTime() {
-		return getValue(Property.CLOSE_DATE_TIME, (Date) null);
+	void setStatus(Status status) {
+		setValue(Property.STATUS, status);
+		// stores date time
+		this.dateTime.set(status, new Date());
 	}
 
 	/**
@@ -117,7 +141,7 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	 * @return the status of the toast
 	 */
 	public Status getStatus() {
-		return getValue(AbstractReadOnlyToastOptions.Property.STATUS, Status.values(), Status.UNKNOWN);
+		return getValue(Property.STATUS, Status.values(), Status.UNKNOWN);
 	}
 
 	/**
@@ -139,12 +163,69 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	}
 
 	/**
-	 * Creates and shows a toast configured by this toast item.
+	 * Sets the title of the toast.
+	 * 
+	 * @param title the title of the toast
+	 */
+	void setTitle(String title) {
+		setValue(Property.TITLE, title);
+	}
+
+	/**
+	 * Returns the title of the toast.
+	 * 
+	 * @return the title of the toast
+	 */
+	public String getTitle() {
+		return getValue(Property.TITLE, Undefined.STRING);
+	}
+
+	/**
+	 * Sets the label of toast.
+	 *
+	 * @param label the label of the toast
+	 */
+	void setLabel(ArrayString label) {
+		setArrayValue(Property.LABEL, label);
+	}
+
+	/**
+	 * Returns the label of toast.
+	 * 
+	 * @return the label of toast
+	 */
+	public List<String> getLabel() {
+		// reads as array
+		// and returns it
+		ArrayString array = getArrayValue(Property.LABEL);
+		return ArrayListHelper.unmodifiableList(array);
+	}
+
+	/**
+	 * Returns the toast options.
+	 * 
+	 * @return the toast options
+	 */
+	public ToastItemOptions getOptions() {
+		return options;
+	}
+
+	/**
+	 * Shows the toast item.
 	 * 
 	 * @return the status if the toast has been shown
 	 */
 	public Status show() {
-		return Toaster.get().showToast(this);
+		return Toaster.get().show(getOptions().getDelegated(), getTitle(), getLabel());
+	}
+
+	/**
+	 * Returns the native object instance of date time.
+	 * 
+	 * @return the native object instance of date time
+	 */
+	NativeObject getDateTime() {
+		return dateTime.nativeObject();
 	}
 
 	/*
@@ -154,7 +235,54 @@ public final class ToastItem extends AbstractReadOnlyToastOptions {
 	 */
 	@Override
 	public String toString() {
-		return "ToastItem [getId()=" + getId() + ", getQueueDateTime()=" + getQueueDateTime() + ", getOpenDateTime()=" + getOpenDateTime() + ", getCloseDateTime()=" + getCloseDateTime() + ", getStatus()=" + getStatus() + "]";
+		return "ToastItem [id: " + getId() + ", status: " + getStatus() + ", title: " + getTitle() + ", label: " + getLabel() + "]";
+	}
+
+	/**
+	 * Internal object of toast item where the status and the time, when the change status occurred, are store.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class DateTime extends NativeObjectContainer {
+
+		/**
+		 * Creates the object with native object instance to be wrapped.
+		 * 
+		 * @param nativeObject native object instance to be wrapped.
+		 */
+		private DateTime(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+
+		/**
+		 * Sets the date time for the specific status.
+		 * 
+		 * @param status status to set as key.
+		 * @param date date time to set for specific status
+		 */
+		private void set(Status status, Date date) {
+			setValue(status, date);
+		}
+
+		/**
+		 * Returns the date time for the specific status.
+		 * 
+		 * @param status status to get date time as key.
+		 * @return the date time for the specific status.
+		 */
+		private Date get(Status status) {
+			return getValue(status, (Date) null);
+		}
+
+		/**
+		 * Returns the native object instance.
+		 * 
+		 * @return the native object instance.
+		 */
+		private NativeObject nativeObject() {
+			return getNativeObject();
+		}
 	}
 
 }

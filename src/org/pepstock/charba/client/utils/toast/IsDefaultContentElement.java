@@ -22,7 +22,7 @@ import org.pepstock.charba.client.options.HasFont;
  * 
  * @author Andrea "Stock" Stocchero
  */
-interface IsDefaultContentElement extends HasFont {
+public interface IsDefaultContentElement extends HasFont {
 
 	/*
 	 * (non-Javadoc)

@@ -160,7 +160,7 @@ public final class ToastOptions extends AbstractToastOptions {
 			// checks if handler is consistent
 			if (handler != null) {
 				// invokes handler
-				handler.onClick(new ToastItem(item), event);
+				handler.onClick(new ToastItem(item, this), event);
 			}
 		});
 		// sets function to proxy callback in order to invoke the java interface
@@ -170,7 +170,7 @@ public final class ToastOptions extends AbstractToastOptions {
 			// checks if handler is consistent
 			if (handler != null) {
 				// invokes handler
-				handler.onOpen(new ToastItem(item));
+				handler.onOpen(new ToastItem(item, this));
 			}
 		});
 		// sets function to proxy callback in order to invoke the java interface
@@ -180,7 +180,7 @@ public final class ToastOptions extends AbstractToastOptions {
 			// checks if handler is consistent
 			if (handler != null) {
 				// invokes handler
-				handler.onClose(new ToastItem(item));
+				handler.onClose(new ToastItem(item, this));
 			}
 		});
 	}

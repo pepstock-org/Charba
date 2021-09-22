@@ -27,20 +27,41 @@ CharbaToast = {
     const container = document.createElement('div');
     container.id = 'ct-container';
     document.body.appendChild(container);
-    // replaces "create" method when DOM has finished loading
-    CharbaToast.create = function (pId, pOptions) {
-      // creates 
-      const result = Object.assign({}, pOptions || {});
-      // manages options 
-      const options = Object.assign({}, CharbaToast.defaults, CharbaToast.overrides, result);
+    /**
+     * Replaces "create" method when DOM has finished loading.
+     * Creates and show the toast.
+     *
+     * @param {number} pId unique identifier of toast
+     * @param {string} pTitle title to show
+     * @param {Array} pLabel label to show
+     * @param {Object} pOptions options to change look and feel of toast
+     * @param {Object} pDateTime date time of toast item when queued and re-shown
+     * @return {Object} object which represent the toast
+     */
+    // 
+    CharbaToast.create = function (pId, pTitle, pLabel, pOptions, pDateTime) {
+      // creates result
+      const result = {
+          id: pId,
+          title: pTitle,
+          label: pLabel,
+          dateTime: Object.assign({}, pDateTime || {})
+      };
       // checks consistenncy of toast
-      const hasTitle = typeof options.title.content === 'string';
-      const hasLabel = Array.isArray(options.label.content) && options.label.content.length > 0;
+      const hasTitle = typeof pTitle === 'string' && pTitle.trim().length > 0;
+      const hasLabel = Array.isArray(pLabel) && pLabel.length > 0;
       // If not consistent
       // returns null
       if (!hasTitle && !hasLabel) {
-        return null;
+        return Object.assign(result, {
+          status: 'invalid',
+          dateTime: {
+            invalid: Date.now()
+          }
+        });
       }
+      // manages options 
+      const options = Object.assign({}, CharbaToast.defaults, CharbaToast.overrides, pOptions || {});
       // -------------------------------
       // creates the element for toasting
       // -------------------------------
@@ -64,7 +85,7 @@ CharbaToast = {
       if (hasTitle) {
         const title = document.createElement('h4');
         title.className = 'ct-title';
-        title.innerHTML = options.title.content;
+        title.innerHTML = pTitle;
         // title color
         if (typeof options.title.color === 'string') {
           title.style.color = options.title.color;
@@ -83,7 +104,7 @@ CharbaToast = {
       if (hasLabel) {
         const text = document.createElement('p');
         text.className = 'ct-text';
-        text.innerHTML = options.label.content.join('<br/>');
+        text.innerHTML = pLabel.join('<br/>');
         // title color
         if (typeof options.label.color === 'string') {
           text.style.color = options.label.color;
@@ -142,8 +163,6 @@ CharbaToast = {
       if (typeof options.onClick === 'function') {
         toasting.addEventListener('click', (event) => options.onClick.apply(this, [result, event]));
       }
-      // sets status
-      result.status = 'showing';
       // -------------------------------
       // HIDING / AUTO HIDE
       // -------------------------------
@@ -176,8 +195,8 @@ CharbaToast = {
         if (style) {
           style.remove();
         }
-        result.status = 'shown';
-        result.closeDateTime = Date.now();
+        result.status = 'closed';
+        result.dateTime.closed = Date.now();
         CharbaToast.currentOpenItems--;
         // checks and calls callback
         if (typeof options.onClose === 'function') {
@@ -193,8 +212,9 @@ CharbaToast = {
       // -------------------------------
       toasting.appendChild(wrapper);
       document.getElementById('ct-container').appendChild(toasting);
-      result.id = pId;
-      result.openDateTime = Date.now();
+      // sets new filed to result
+      result.status = 'opened';
+      result.dateTime.opened = Date.now();
       result.element = toasting;
       CharbaToast.currentOpenItems++;
       // checks and calls callback
@@ -240,7 +260,6 @@ CharbaToast = {
       }
       let style = options.style;
       if (style && !('' + style).match(CharbaToast.helper.fontStyleRegExp)) {
-        console.warn('Invalid font style specified: "' + style + '"');
         style = '';
       }
       const font = {
@@ -270,12 +289,10 @@ CharbaToast = {
     onOpen: undefined,
     progressBarType: undefined,
     title: {
-      content: undefined,
       color: undefined,
       font: undefined
     },
     label: {
-      content: undefined,
       color: undefined,
       font: undefined
     },

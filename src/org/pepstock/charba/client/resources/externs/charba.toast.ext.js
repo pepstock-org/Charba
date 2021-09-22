@@ -15,8 +15,11 @@ CharbaToast.defaults;
  */
 CharbaToast.overrides;
 /**
- * @parma {number} id
- * @param {Object} object
+ * @param {number} id
+ * @param {string} title
+ * @param {Array} label
+ * @param {Object} options
+ * @param {Object} dateTime
  * @return {Object}
  */
-CharbaToast.create = function(id, object) {};
+CharbaToast.create = function(id, title, label, options, dateTime) {};

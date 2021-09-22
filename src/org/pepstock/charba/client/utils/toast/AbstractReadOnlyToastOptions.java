@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
-import java.util.Date;
-
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -24,7 +22,6 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.toast.enums.DefaultProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
-import org.pepstock.charba.client.utils.toast.enums.Status;
 
 /**
  * Entity to expose the configuration of a toast in read only mode.<br>
@@ -50,10 +47,7 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 		TYPE("type"),
 		// inner elements
 		TITLE("title"),
-		LABEL("label"),
-		// internal for queue date time and status
-		QUEUE_DATE_TIME("queueDateTime"),
-		STATUS("status");
+		LABEL("label");
 
 		// name value of property
 		private final String value;
@@ -231,24 +225,6 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	@Override
 	public int getBorderRadius() {
 		return getValue(Property.BORDER_RADIUS, defaultValues.getBorderRadius());
-	}
-
-	/**
-	 * Sets the date time when the toast item has been put in the queue.
-	 * 
-	 * @param dateTime the date time when the toast item has been put in the queue
-	 */
-	final void setQueueDateTime(Date dateTime) {
-		setValue(Property.QUEUE_DATE_TIME, dateTime);
-	}
-
-	/**
-	 * Sets the {@link Status} of the toast.
-	 * 
-	 * @param status the {@link Status} of the toast
-	 */
-	final void setStatus(Status status) {
-		setValue(Property.STATUS, status);
 	}
 
 	/**

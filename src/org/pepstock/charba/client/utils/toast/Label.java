@@ -15,10 +15,6 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
-import java.util.List;
-
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
@@ -28,7 +24,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Label extends AbstractContentElement<List<String>> {
+public final class Label extends AbstractContentElement {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -40,40 +36,6 @@ public final class Label extends AbstractContentElement<List<String>> {
 	 */
 	Label(AbstractReadOnlyToastOptions options, Key childKey, IsDefaultContentElement defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
-	}
-
-	/**
-	 * Sets the title content to display.<br>
-	 * If specified as an array, text is rendered on multiple lines.
-	 *
-	 * @param content the title text to display.<br>
-	 *            If specified as an array, text is rendered on multiple lines.
-	 */
-	public void setContent(String... content) {
-		setArrayValueAndAddToParent(Property.CONTENT, ArrayString.fromOrNull(content));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.utils.toast.AbstractContentElement#setContent(java.lang.Object)
-	 */
-	@Override
-	public void setContent(List<String> content) {
-		setArrayValueAndAddToParent(Property.CONTENT, ArrayString.fromOrNull(content));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.utils.toast.AbstractContentElement#getContent()
-	 */
-	@Override
-	public List<String> getContent() {
-		// reads as array
-		// and returns it
-		ArrayString array = getArrayValue(Property.CONTENT);
-		return ArrayListHelper.list(array);
 	}
 
 }

@@ -17,7 +17,6 @@ package org.pepstock.charba.client.utils.toast;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Configures the toast title.
@@ -25,7 +24,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Title extends AbstractContentElement<String> {
+public final class Title extends AbstractContentElement {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -39,23 +38,4 @@ public final class Title extends AbstractContentElement<String> {
 		super(options, childKey, defaultValues, nativeObject);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.utils.toast.AbstractContentElement#setContent(java.lang.Object)
-	 */
-	@Override
-	public void setContent(String content) {
-		setValueAndAddToParent(Property.CONTENT, content);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.utils.toast.AbstractContentElement#getContent()
-	 */
-	@Override
-	public String getContent() {
-		return getValue(Property.CONTENT, Undefined.STRING);
-	}
 }

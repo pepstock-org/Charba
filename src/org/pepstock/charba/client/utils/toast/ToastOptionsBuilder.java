@@ -15,15 +15,12 @@
 * @return builder instance */
 package org.pepstock.charba.client.utils.toast;
 
-import java.util.List;
-
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractBaseBuilder;
 import org.pepstock.charba.client.commons.IsBuilder;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
-import org.pepstock.charba.client.utils.toast.enums.Status;
 import org.pepstock.charba.client.utils.toast.handlers.ClickEventHandler;
 import org.pepstock.charba.client.utils.toast.handlers.CloseHandler;
 import org.pepstock.charba.client.utils.toast.handlers.OpenHandler;
@@ -56,63 +53,17 @@ public final class ToastOptionsBuilder extends AbstractBaseBuilder {
 	}
 
 	/**
-	 * Returns new builder instance, setting the label to the toast options.
+	 * Returns new builder instance, setting the toast type.
 	 * 
-	 * @param label the label of the toast
-	 * @return new builder instance
-	 */
-	public static ToastOptionsBuilder create(String label) {
-		// gets builder
-		ToastOptionsBuilder result = create();
-		// stores arguments and
-		// returns builder
-		return result.setLabel(label);
-	}
-
-	/**
-	 * Returns new builder instance, setting the label and type to the toast options.
-	 * 
-	 * @param label the label of the toast
 	 * @param type the type of the toast
 	 * @return new builder instance
 	 */
-	public static ToastOptionsBuilder create(String label, IsToastType type) {
+	public static ToastOptionsBuilder create(IsToastType type) {
 		// gets builder
 		ToastOptionsBuilder result = create();
 		// stores arguments and
 		// returns builder
-		return result.setLabel(label).setType(type);
-	}
-
-	/**
-	 * Returns new builder instance, setting the title and label to the toast options.
-	 * 
-	 * @param title the title of the toast
-	 * @param label the label of the toast
-	 * @return new builder instance
-	 */
-	public static ToastOptionsBuilder create(String title, String label) {
-		// gets builder
-		ToastOptionsBuilder result = create();
-		// stores arguments and
-		// returns builder
-		return result.setTitle(title).setLabel(label);
-	}
-
-	/**
-	 * Returns new builder instance, setting the title, text and type to the toast options.
-	 * 
-	 * @param title the title of the toast
-	 * @param label the label of the toast
-	 * @param type the type of the toast
-	 * @return new builder instance
-	 */
-	public static ToastOptionsBuilder create(String title, String label, IsToastType type) {
-		// gets builder
-		ToastOptionsBuilder result = create();
-		// stores arguments and
-		// returns builder
-		return result.setTitle(title).setLabel(label).setType(type);
+		return result.setType(type);
 	}
 
 	/**
@@ -125,26 +76,6 @@ public final class ToastOptionsBuilder extends AbstractBaseBuilder {
 		setBuilt(true);
 		// returns options
 		return options;
-	}
-
-	/**
-	 * Shows the configured toast.
-	 * 
-	 * @return the status if the toast has been shown
-	 */
-	public Status show() {
-		return Toaster.get().show(options);
-	}
-
-	/**
-	 * Sets the title of the toast.
-	 * 
-	 * @param title the title of the toast
-	 * @return toast options builder instance
-	 */
-	public ToastOptionsBuilder setTitle(String title) {
-		options.getTitle().setContent(title);
-		return IsBuilder.checkAndGetIfValid(this);
 	}
 
 	/**
@@ -232,28 +163,6 @@ public final class ToastOptionsBuilder extends AbstractBaseBuilder {
 	 */
 	public ToastOptionsBuilder setTitleFontLineHeight(String lineHeight) {
 		options.getTitle().getFont().setLineHeight(lineHeight);
-		return IsBuilder.checkAndGetIfValid(this);
-	}
-
-	/**
-	 * Sets the label of the toast.
-	 * 
-	 * @param label the label of the toast
-	 * @return toast options builder instance
-	 */
-	public ToastOptionsBuilder setLabel(String... label) {
-		options.getLabel().setContent(label);
-		return IsBuilder.checkAndGetIfValid(this);
-	}
-
-	/**
-	 * Sets the label of the toast.
-	 * 
-	 * @param label the label of the toast
-	 * @return toast options builder instance
-	 */
-	public ToastOptionsBuilder setLabel(List<String> label) {
-		options.getLabel().setContent(label);
 		return IsBuilder.checkAndGetIfValid(this);
 	}
 

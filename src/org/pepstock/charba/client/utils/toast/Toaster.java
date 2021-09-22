@@ -16,12 +16,12 @@
 package org.pepstock.charba.client.utils.toast;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.Checker;
@@ -65,7 +65,7 @@ public final class Toaster {
 	// callback proxy to invoke the close function
 	private final CallbackProxy<ProxyHandlerCallback> closeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// list of items in queue
-	private final List<AbstractReadOnlyToastOptions> queueItems = new LinkedList<>();
+	private final List<ToastItem> queueItems = new LinkedList<>();
 	// max amount of open items
 	private int maxOpenItems = MAXIMUM_OPEN_ITEMS;
 	// maximum items policy
@@ -122,49 +122,162 @@ public final class Toaster {
 	/**
 	 * Creates and shows a toast configured by the passed options.
 	 * 
-	 * @param options configuration of the toast to show
+	 * @param label label of the toast
 	 * @return the status if the toast has been shown
 	 */
-	public Status show(ToastOptions options) {
-		return showToast(options);
+	public Status show(String... label) {
+		return show((ToastOptions) null, label);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(List<String> label) {
+		return show((ToastOptions) null, label);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param type type of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(IsToastType type, String... label) {
+		return show(ToastOptionsBuilder.create(type).build(), label);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param type type of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(IsToastType type, List<String> label) {
+		return show(type, null, label);
 	}
 
 	/**
 	 * Creates and shows a toast configured by the passed options.
 	 * 
 	 * @param options configuration of the toast to show
+	 * @param label label of the toast
 	 * @return the status if the toast has been shown
 	 */
-	Status showToast(AbstractReadOnlyToastOptions options) {
-		// checks if argument is consistent
-		if (options != null) {
-			// checks if the toast can be show
-			// because a maximum amount of toast is not reached
-			if (NativeToasting.getCurrentOpenItems() < maxOpenItems) {
-				// shows the toast
-				NativeObject result = NativeToasting.create(counter.getAndIncrement(), options.nativeObject());
-				// checks if result is consistent
-				if (result == null) {
-					// sets invalid status
-					options.setStatus(Status.INVALID);
-					// stores history
-					storeHistory(options.nativeObject());
-					// returns invalid
-					return Status.INVALID;
-				} else {
-					// stores history
-					storeHistory(result);
-					// returns the status
-					return Status.SHOWING;
-				}
-			}
-			// if here
-			// maximum amount of toast items was reacher
-			return manageQueue(options);
+	public Status show(ToastOptions options, String... label) {
+		return show(options, null, ArrayString.fromOrNull(label), null);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param options configuration of the toast to show
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(ToastOptions options, List<String> label) {
+		return show(options, null, label);
+	}
+
+	/**
+	 * Creates and shows a toast with title and label.
+	 * 
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(String title, String label) {
+		return show((ToastOptions) null, title, label);
+	}
+
+	/**
+	 * Creates and shows a toast with title and label.
+	 * 
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(String title, List<String> label) {
+		return show((ToastOptions) null, title, label);
+	}
+
+	/**
+	 * Creates and shows a toast with title and label.
+	 * 
+	 * @param type type of the toast
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(IsToastType type, String title, String label) {
+		return show(ToastOptionsBuilder.create(type).build(), title, label);
+	}
+
+	/**
+	 * Creates and shows a toast with title and label.
+	 * 
+	 * @param type type of the toast
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(IsToastType type, String title, List<String> label) {
+		return show(ToastOptionsBuilder.create(type).build(), title, label);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param options configuration of the toast to show
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(ToastOptions options, String title, String label) {
+		return show(options, title, ArrayString.fromOrNull(label), null);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param options configuration of the toast to show
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(ToastOptions options, String title, List<String> label) {
+		return show(options, title, ArrayString.fromOrNull(label), null);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param options configuration of the toast to show
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @param dateTime date time object to maintain when a toast item is showing from the queue
+	 * @return the status if the toast has been shown
+	 */
+	private Status show(ToastOptions options, String title, ArrayString label, NativeObject dateTime) {
+		// checks if the toast can be show
+		// because a maximum amount of toast is not reached
+		if (NativeToasting.getCurrentOpenItems() < maxOpenItems) {
+			// shows the toast
+			NativeObject result = NativeToasting.create(counter.getAndIncrement(), title, label, options != null ? options.nativeObject() : null, dateTime);
+			// creates toast item
+			ToastItem item = new ToastItem(result, options);
+			// stores history
+			storeHistory(item);
+			// returns the status
+			return item.getStatus();
 		}
-		// if here, argument is not consistent
-		// then return false
-		return Status.INVALID;
+		// if here
+		// maximum amount of toast items was reacher
+		return manageQueue(options, title, label);
 	}
 
 	/**
@@ -245,40 +358,28 @@ public final class Toaster {
 	/**
 	 * Manages the options if it must put in the queue or discard.
 	 * 
-	 * @param options configuration of the toast to queue or discard
+	 * @param options configuration of the toast to show
+	 * @param title title of the toast
+	 * @param label label of the toast
 	 * @return the status if the toast has been shown
 	 */
-	private Status manageQueue(AbstractReadOnlyToastOptions options) {
+	private Status manageQueue(ToastOptions options, String title, ArrayString label) {
+		// creates toast item
+		ToastItem item = new ToastItem(options);
+		// stores title and label
+		item.setTitle(title);
+		item.setLabel(label);
 		// checks if it must queue or discard
 		if (MaximumOpenItemsPolicy.QUEUE.equals(getMaxOpenItemsPolicy())) {
-			// then puts the toast options in a queue
-			// checks if the instance is a normal options
-			// if yes, it clones the instance
-			// because it can be changed in the meantime
-			if (options instanceof ToastOptions) {
-				// casts to normal options
-				ToastOptions normalOptions = (ToastOptions) options;
-				// clone object
-				ToastOptions clonedOptions = new ToastOptions(normalOptions);
-				// stores queue time
-				clonedOptions.setQueueDateTime(new Date());
-				queueItems.add(clonedOptions);
-			} else {
-				// stores queue time
-				options.setQueueDateTime(new Date());
-				queueItems.add(options);
-			}
-			// returns queued
-			return Status.QUEUED;
+			item.setStatus(Status.QUEUED);
+			queueItems.add(item);
 		} else {
 			// here is discarded
 			// sets status
-			options.setStatus(Status.DISCARDED);
-			// but store to history
-			storeHistory(options.nativeObject());
-			// returns queued
-			return Status.DISCARDED;
+			item.setStatus(Status.DISCARDED);
+			storeHistory(item);
 		}
+		return item.getStatus();
 	}
 
 	/**
@@ -319,23 +420,23 @@ public final class Toaster {
 		// cycles to remove useless items
 		while (NativeToasting.getCurrentOpenItems() < maxOpenItems && !queueItems.isEmpty()) {
 			// gets first
-			AbstractReadOnlyToastOptions queuedItem = queueItems.remove(0);
+			ToastItem queuedItem = queueItems.remove(0);
 			// shows item
-			showToast(queuedItem);
+			// PAY attention: it must pass also the date time object
+			// to maintain the previous time
+			show(queuedItem.getOptions().getDelegated(), queuedItem.getTitle(), ArrayString.fromOrNull(queuedItem.getLabel()), queuedItem.getDateTime());
 		}
 	}
 
 	/**
 	 * Stores in the history the toast.
 	 * 
-	 * @param result the native object of the toast to store
+	 * @param item the toast item to store
 	 */
-	private void storeHistory(NativeObject result) {
+	private void storeHistory(ToastItem item) {
 		// checks if consistent and
 		// the user wants to have an history
-		if (result != null && maxHistoryItems > 0) {
-			// gets the toast item
-			ToastItem item = new ToastItem(result);
+		if (item != null && maxHistoryItems > 0) {
 			// checks if it must be removed the older item
 			if (!historyItems.isEmpty() && historyItems.size() >= maxHistoryItems) {
 				// removes the last

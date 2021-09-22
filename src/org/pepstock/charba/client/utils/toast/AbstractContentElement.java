@@ -26,40 +26,8 @@ import org.pepstock.charba.client.options.FontContainer;
  * Enables the management of font, color and content of an item.
  * 
  * @author Andrea "Stock" Stocchero
- * @param <T> type of content
  */
-public abstract class AbstractContentElement<T> extends AbstractNode implements IsDefaultContentElement {
-
-	/**
-	 * Name of properties of native object.
-	 */
-	enum Property implements Key
-	{
-		CONTENT("content");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
+public abstract class AbstractContentElement extends AbstractNode implements IsDefaultContentElement {
 
 	// default values instance
 	private final IsDefaultFontContainer defaultValues;
@@ -91,22 +59,6 @@ public abstract class AbstractContentElement<T> extends AbstractNode implements 
 	public final FontContainer getFontContainer() {
 		return fontContainer;
 	}
-
-	/**
-	 * Sets the title content to display.<br>
-	 * If specified as an array, text is rendered on multiple lines.
-	 * 
-	 * @param content the title text to display.<br>
-	 *            If specified as an array, text is rendered on multiple lines.
-	 */
-	public abstract void setContent(T content);
-
-	/**
-	 * Returns the title content to display, as a list of strings.
-	 * 
-	 * @return a list of strings or an empty list if not exist
-	 */
-	public abstract T getContent();
 
 	/**
 	 * Internal class to extend the font container and manages the font inside the title or label.
