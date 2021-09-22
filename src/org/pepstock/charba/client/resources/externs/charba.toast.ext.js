@@ -15,6 +15,14 @@ CharbaToast.defaults;
  */
 CharbaToast.overrides;
 /**
+ * @type {number}
+ */
+CharbaToast.currentOpenItems;
+/**
+ * @type {Function}
+ */
+CharbaToast.onClose;
+/**
  * @param {number} id
  * @param {string} title
  * @param {Array} label
