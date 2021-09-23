@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 
@@ -26,10 +27,17 @@ import org.pepstock.charba.client.commons.Key;
 public interface IsProgressBarType extends Key {
 
 	/**
-	 * Returns the background color of the progress bar.
+	 * Returns the background {@link IsColor} of the progress bar.
 	 * 
-	 * @return the background color of the progress bar
+	 * @return the background {@link IsColor} of the progress bar
 	 */
 	IsColor getBackgroundColor();
+
+	/**
+	 * Returns the background {@link Gradient} of the toast.
+	 * 
+	 * @return the background {@link Gradient} of the toast
+	 */
+	Gradient getBackgroundAsGradient();
 
 }

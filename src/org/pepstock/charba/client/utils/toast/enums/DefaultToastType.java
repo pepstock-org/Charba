@@ -16,8 +16,10 @@
 package org.pepstock.charba.client.utils.toast.enums;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.utils.toast.IsToastType;
 
 /**
@@ -112,6 +114,26 @@ public enum DefaultToastType implements IsToastType
 	@Override
 	public IsColor getBackgroundColor() {
 		return backgroundColor;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.utils.toast.IsToastType#getBackgroundAsPattern()
+	 */
+	@Override
+	public Pattern getBackgroundAsPattern() {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.utils.toast.IsToastType#getBackgroundAsGradient()
+	 */
+	@Override
+	public Gradient getBackgroundAsGradient() {
+		return null;
 	}
 
 }

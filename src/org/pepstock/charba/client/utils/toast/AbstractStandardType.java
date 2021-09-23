@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 
@@ -30,6 +31,8 @@ abstract class AbstractStandardType implements Key {
 	private final Key name;
 	// type color instance
 	private final IsColor backgroundColor;
+	// type gradient instance
+	private final Gradient gradient;
 	// flag is injected
 	private boolean injected = false;
 
@@ -38,11 +41,13 @@ abstract class AbstractStandardType implements Key {
 	 * 
 	 * @param name value to use inside the native object as name of property
 	 * @param backgroundColor background color of toast
+	 * @param gradient gradient instance as background
 	 */
-	AbstractStandardType(Key name, IsColor backgroundColor) {
+	AbstractStandardType(Key name, IsColor backgroundColor, Gradient gradient) {
 		// stores name
 		this.name = name;
 		this.backgroundColor = backgroundColor;
+		this.gradient = gradient;
 	}
 
 	/*
@@ -56,13 +61,29 @@ abstract class AbstractStandardType implements Key {
 	}
 
 	/**
-	 * Returns the background color of the toast.
+	 * Returns the background {@link IsColor} of the toast.
 	 * 
-	 * @return the background color of the toast
+	 * @return the background {@link IsColor} of the toast
 	 */
 	public final IsColor getBackgroundColor() {
 		return backgroundColor;
 	}
+
+	/**
+	 * Returns the background {@link Gradient} of the toast.
+	 * 
+	 * @return the background {@link Gradient} of the toast
+	 */
+	public final Gradient getBackgroundAsGradient() {
+		return gradient;
+	}
+
+	/**
+	 * Returns the CSS representation of background.
+	 * 
+	 * @return the CSS representation of background
+	 */
+	abstract String toCSSBackground();
 
 	/**
 	 * Returns <code>true</code> if the new CSS type has been injected.

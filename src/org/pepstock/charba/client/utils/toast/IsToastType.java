@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -33,10 +35,24 @@ public interface IsToastType extends Key {
 	IsColor getColor();
 
 	/**
-	 * Returns the background color of the toast.
+	 * Returns the background {@link IsColor} of the toast.
 	 * 
-	 * @return the background color of the toast
+	 * @return the background {@link IsColor} of the toast
 	 */
 	IsColor getBackgroundColor();
+
+	/**
+	 * Returns the background {@link Pattern} of the toast.
+	 * 
+	 * @return the background {@link Pattern} of the toast
+	 */
+	Pattern getBackgroundAsPattern();
+
+	/**
+	 * Returns the background {@link Gradient} of the toast.
+	 * 
+	 * @return the background {@link Gradient} of the toast
+	 */
+	Gradient getBackgroundAsGradient();
 
 }

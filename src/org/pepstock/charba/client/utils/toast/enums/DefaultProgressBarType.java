@@ -16,6 +16,10 @@
 package org.pepstock.charba.client.utils.toast.enums;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.GradientBuilder;
+import org.pepstock.charba.client.colors.GradientOrientation;
+import org.pepstock.charba.client.colors.GradientType;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.utils.toast.IsProgressBarType;
@@ -58,6 +62,9 @@ public enum DefaultProgressBarType implements IsProgressBarType
 	 */
 	RAINBOW("rainbow", null);
 
+	// gradient instance ONLY for rainbow
+	private static final Gradient RAINBOW_GRADIENT = GradientBuilder.create(GradientType.LINEAR, GradientOrientation.LEFT_RIGHT).addColorStop(0, "#002024").addColorStop(0.48, "#a72c86").addColorStop(1, "#00d4ff").build();
+
 	// name value of property
 	private final String value;
 	// type color instance
@@ -92,6 +99,21 @@ public enum DefaultProgressBarType implements IsProgressBarType
 	@Override
 	public IsColor getBackgroundColor() {
 		return backgroundColor;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.utils.toast.IsProgressBarType#getBackgroundAsGradient()
+	 */
+	@Override
+	public Gradient getBackgroundAsGradient() {
+		// checks if rainbow
+		if (RAINBOW.equals(this)) {
+			return RAINBOW_GRADIENT;
+		}
+		// if here, all other rainbow
+		return null;
 	}
 
 }

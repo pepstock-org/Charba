@@ -15,6 +15,7 @@
 * @return builder instance */
 package org.pepstock.charba.client.utils.toast;
 
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
@@ -41,16 +42,20 @@ abstract class AbstractTypeBuilder {
 	private final Key name;
 	// type color instance
 	private final IsColor backgroundColor;
+	// type gradient instance
+	private final Gradient gradient;
 
 	/**
 	 * To avoid any instantiation.
 	 * 
 	 * @param name name to use inside the native object as name of property
 	 * @param backgroundColor background color of toast
+	 * @param gradient gradient instance as background
 	 */
-	AbstractTypeBuilder(Key name, IsColor backgroundColor) {
+	AbstractTypeBuilder(Key name, IsColor backgroundColor, Gradient gradient) {
 		this.name = name;
 		this.backgroundColor = backgroundColor;
+		this.gradient = gradient;
 		// imports the toast java script and CSS code
 		// adding CSS at runtime it's better
 		// that the common one is already injected
@@ -67,12 +72,21 @@ abstract class AbstractTypeBuilder {
 	}
 
 	/**
-	 * Returns the background color of the toast type.
+	 * Returns the background {@link IsColor} of the toast.
 	 * 
-	 * @return the background color of the toast type
+	 * @return the background {@link IsColor} of the toast
 	 */
 	final IsColor getBackgroundColor() {
 		return backgroundColor;
+	}
+
+	/**
+	 * Returns the background {@link Gradient} of the toast.
+	 * 
+	 * @return the background {@link Gradient} of the toast
+	 */
+	final Gradient getBackgroundAsGradient() {
+		return gradient;
 	}
 
 	/**

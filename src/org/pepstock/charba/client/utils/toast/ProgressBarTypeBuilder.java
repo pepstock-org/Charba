@@ -20,7 +20,9 @@ import java.util.Map;
 
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.utils.Utilities;
 import org.pepstock.charba.client.utils.toast.enums.DefaultProgressBarType;
@@ -45,10 +47,15 @@ public final class ProgressBarTypeBuilder extends AbstractTypeBuilder {
 	 * 
 	 * @param name name to use inside the native object as name of property
 	 * @param backgroundColor background color of toast
+	 * @param gradient gradient instance as background
 	 */
-	private ProgressBarTypeBuilder(Key name, IsColor backgroundColor) {
-		super(name, backgroundColor);
+	private ProgressBarTypeBuilder(Key name, IsColor backgroundColor, Gradient gradient) {
+		super(name, backgroundColor, gradient);
 	}
+
+	// ----------------------------------
+	// BACKGROUND COLOR
+	// ----------------------------------
 
 	/**
 	 * Returns new builder instance, to build a custom toast type.
@@ -97,7 +104,55 @@ public final class ProgressBarTypeBuilder extends AbstractTypeBuilder {
 		IsColor.checkIfValid(backgroundColor);
 		// stores arguments and
 		// returns builder
-		return new ProgressBarTypeBuilder(name, backgroundColor);
+		return new ProgressBarTypeBuilder(name, backgroundColor, null);
+	}
+
+	// ----------------------------------
+	// GRADIENT
+	// ----------------------------------
+
+	/**
+	 * Returns new builder instance, to build a custom toast type.
+	 * 
+	 * @param name name to use inside the native object as name of property
+	 * @param gradient background gradient of toast
+	 * @return new builder instance
+	 */
+	public static ProgressBarTypeBuilder create(String name, Gradient gradient) {
+		return create(Key.create(name), gradient);
+	}
+
+	/**
+	 * Returns new builder instance, to build a custom toast type.
+	 * 
+	 * @param name name to use inside the native object as name of property
+	 * @param gradient background gradient of toast
+	 * @return new builder instance
+	 */
+	public static ProgressBarTypeBuilder create(Key name, Gradient gradient) {
+		// stores arguments and
+		// returns builder
+		return create(name, null, Checker.checkAndGetIfValid(gradient, "Gradient "));
+	}
+
+	// ----------------------------------
+	// COMMON builder
+	// ----------------------------------
+
+	/**
+	 * Returns new builder instance, to build a custom toast type.
+	 * 
+	 * @param name name to use inside the native object as name of property
+	 * @param backgroundColor background color of toast
+	 * @param gradient gradient instance as background
+	 * @return new builder instance
+	 */
+	private static ProgressBarTypeBuilder create(Key name, IsColor backgroundColor, Gradient gradient) {
+		// check if key is consistent
+		checkName(name);
+		// stores arguments and
+		// returns builder
+		return new ProgressBarTypeBuilder(name, backgroundColor, gradient);
 	}
 
 	/**
@@ -115,11 +170,11 @@ public final class ProgressBarTypeBuilder extends AbstractTypeBuilder {
 			}
 		}
 		// gets toast type from map
-		StandardProgressBarType type = CUSTOM_TYPES.computeIfAbsent(getName().value(), mapKey -> new StandardProgressBarType(getName(), getBackgroundColor()));
+		StandardProgressBarType type = CUSTOM_TYPES.computeIfAbsent(getName().value(), mapKey -> new StandardProgressBarType(getName(), getBackgroundColor(), getBackgroundAsGradient()));
 		// checks if it has been injected
 		if (!type.isInjected()) {
 			// creates CSS statement from template
-			String content = Utilities.applyTemplate(CSS_TEMPLATE, type.value(), type.getBackgroundColor().toRGBA());
+			String content = Utilities.applyTemplate(CSS_TEMPLATE, type.value(), type.toCSSBackground());
 			// injects CSS resource
 			Injector.ensureCssInjected(new CssInjectableResource(type, true, content));
 			// resets flag

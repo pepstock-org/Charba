@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * This is the standard implementation of a custom toast progress bas type.
@@ -31,9 +33,27 @@ final class StandardProgressBarType extends AbstractStandardType implements IsPr
 	 * 
 	 * @param name value to use inside the native object as name of property
 	 * @param backgroundColor background color of toast
+	 * @param gradient gradient instance as background
 	 */
-	StandardProgressBarType(Key name, IsColor backgroundColor) {
-		super(name, backgroundColor);
+	StandardProgressBarType(Key name, IsColor backgroundColor, Gradient gradient) {
+		super(name, backgroundColor, gradient);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.utils.toast.AbstractStandardType#toCSSBackground()
+	 */
+	@Override
+	String toCSSBackground() {
+		// checks if gradient
+		if (getBackgroundAsGradient() != null) {
+			// returns gradient CSS
+			return Utilities.toCSSBackgroundProperty(getBackgroundAsGradient());
+		}
+		// is a color
+		// the returns RGBA
+		return getBackgroundColor().toRGBA();
 	}
 
 }
