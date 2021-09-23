@@ -28,27 +28,39 @@ import org.pepstock.charba.client.utils.toast.IsToastType;
 public enum DefaultToastType implements IsToastType
 {
 	/**
-	 * Default toast type.
+	 * Default toast type -
+	 * <span style="border-radius: 8px; color:#616161; font-size:16px; line-height: 1.6; background-color:white; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;Toast
+	 * content&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEFAULT("default", ColorBuilder.parse("#616161"), HtmlColor.WHITE),
 	/**
-	 * Success toast type, in green.
+	 * Success toast type -
+	 * <span style="border-radius: 8px; color:white; font-size:16px; line-height: 1.6; background-color:#51C625; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;Toast
+	 * content&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	SUCCESS("success", HtmlColor.WHITE, ColorBuilder.parse("#51C625")),
 	/**
-	 * Success toast type, in amber.
+	 * Warning toast type -
+	 * <span style="border-radius: 8px; color:white; font-size:16px; line-height: 1.6; background-color:#DB9215; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;Toast
+	 * content&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	WARNING("warning", HtmlColor.WHITE, ColorBuilder.parse("#DB9215")),
 	/**
-	 * Error toast type, in red.
+	 * Error toast type -
+	 * <span style="border-radius: 8px; color:white; font-size:16px; line-height: 1.6; background-color:#DB2B1D; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;Toast
+	 * content&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	ERROR("error", HtmlColor.WHITE, ColorBuilder.parse("#DB2B1D")),
 	/**
-	 * Info toast type, in blue.
+	 * Info toast type -
+	 * <span style="border-radius: 8px; color:white; font-size:16px; line-height: 1.6; background-color:#27ABDB; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;Toast
+	 * content&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	INFO("info", HtmlColor.WHITE, ColorBuilder.parse("#27ABDB")),
 	/**
-	 * Dark toast type, in black.
+	 * Dark toast type -
+	 * <span style="border-radius: 8px; color:white; font-size:16px; line-height: 1.6; background-color:black; border-style: solid; border-width: 1px;">&nbsp;&nbsp;&nbsp;Toast
+	 * content&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DARK("dark", HtmlColor.WHITE, HtmlColor.BLACK);
 

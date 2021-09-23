@@ -28,27 +28,33 @@ import org.pepstock.charba.client.utils.toast.IsProgressBarType;
 public enum DefaultProgressBarType implements IsProgressBarType
 {
 	/**
-	 * Default toast type.
+	 * Default toast type - <span style="background:black; border-style: solid; height: 8px; border-width:
+	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	DEFAULT("default", HtmlColor.BLACK),
 	/**
-	 * Success toast type, in green.
+	 * Success toast type - <span style="background:#51C625; border-style: solid; height: 8px; border-width:
+	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	SUCCESS("success", ColorBuilder.parse("#51C625")),
 	/**
-	 * Success toast type, in amber.
+	 * Warning toast type - <span style="background:#DB9215; border-style: solid; height: 8px; border-width:
+	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	WARNING("warning", ColorBuilder.parse("#DB9215")),
 	/**
-	 * Error toast type, in red.
+	 * Error toast type - <span style="background:#DB2B1D; border-style: solid; height: 8px; border-width:
+	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	ERROR("error", ColorBuilder.parse("#DB2B1D")),
 	/**
-	 * Info toast type, in red.
+	 * Info toast type - <span style="background:#27ABDB; border-style: solid; height: 8px; border-width:
+	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	INFO("info", ColorBuilder.parse("#27ABDB")),
 	/**
-	 * Rainbow toast type, in red.
+	 * Rainbow toast type - <span style="background:linear-gradient(45deg, #002024 0%, #a72c86 48%, #00d4ff 100%); border-style: solid; height: 8px; border-width:
+	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	RAINBOW("rainbow", null);
 
