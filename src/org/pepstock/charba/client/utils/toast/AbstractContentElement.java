@@ -27,7 +27,7 @@ import org.pepstock.charba.client.options.FontContainer;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractContentElement extends AbstractNode implements IsDefaultContentElement {
+abstract class AbstractContentElement extends AbstractNode implements IsDefaultContentElement {
 
 	// default values instance
 	private final IsDefaultFontContainer defaultValues;
