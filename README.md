@@ -243,9 +243,9 @@ Gallery
   </tr>  
   <tr>
     <td align="center">Area</td>
-	<td align="center">Treemap<sup style:"color: red">from new version 4.2</sup></td>
-	<td align="center">Matrix<sup style:"color: red">from new version 4.2</sup></td>
-	<td align="center">Sankey<sup style:"color: red">from new version 4.2</sup></td>
+	<td align="center">Treemap<sup style="color: red">from new version 4.2</sup></td>
+	<td align="center">Matrix<sup style="color: red">from new version 4.2</sup></td>
+	<td align="center">Sankey<sup style="color: red">from new version 4.2</sup></td>
   </tr>
 </table>
 
