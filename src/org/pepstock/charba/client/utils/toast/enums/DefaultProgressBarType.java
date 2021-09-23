@@ -63,7 +63,7 @@ public enum DefaultProgressBarType implements IsProgressBarType
 	RAINBOW("rainbow", null);
 
 	// gradient instance ONLY for rainbow
-	private static final Gradient RAINBOW_GRADIENT = GradientBuilder.create(GradientType.LINEAR, GradientOrientation.LEFT_RIGHT).addColorStop(0, "#002024").addColorStop(0.48, "#a72c86").addColorStop(1, "#00d4ff").build();
+	private static final Gradient RAINBOW_GRADIENT = GradientBuilder.create(GradientType.LINEAR, GradientOrientation.BOTTOM_RIGHT).addColorStop(0, "#002024").addColorStop(0.48, "#a72c86").addColorStop(1, "#00d4ff").build();
 
 	// name value of property
 	private final String value;
