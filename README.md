@@ -219,6 +219,34 @@ Gallery
 	<td align="center">Choropleth</td>
 	<td align="center">Bubble map</td>
   </tr>
+  <tr>
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=area">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryArea.png"/>
+      </a>
+    </td>      
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=treemap">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryTreemap.png"/>
+      </a>
+    </td>      
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=matrix">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/galleryMatrix.png"/>
+      </a>
+    </td>      
+    <td>
+      <a href="https://pepstock-org.github.io/Charba-Showcase/index.html?gallery=sankey">
+        <img width="200px" src="https://raw.githubusercontent.com/pepstock-org/Charba-Wiki/master/static/img/gallerySankey.png"/>
+      </a>
+    </td>      
+  </tr>  
+  <tr>
+    <td align="center">Area</td>
+	<td align="center">Treemap</td>
+	<td align="center">Matrix</td>
+	<td align="center">Sankey</td>
+  </tr>
 </table>
 
 Documentation
