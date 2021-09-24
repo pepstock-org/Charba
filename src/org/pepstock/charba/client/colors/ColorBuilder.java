@@ -137,7 +137,7 @@ public final class ColorBuilder {
 		} else {
 			// search by color name
 			for (HtmlColor color : HtmlColor.values()) {
-				if (color.name().equalsIgnoreCase(newValue)) {
+				if (color.getHtmlColorName().equalsIgnoreCase(newValue)) {
 					return color;
 				}
 			}
