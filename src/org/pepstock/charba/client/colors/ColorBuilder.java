@@ -87,14 +87,24 @@ public final class ColorBuilder {
 	 */
 	public static IsColor build(int r, int g, int b) {
 		// checks if already exists the required color
-		// in the enum HTML color
+		// in the HTML color enumeration
 		for (HtmlColor color : HtmlColor.values()) {
 			// if equals returns the enum item
 			if (color.getRed() == r && color.getGreen() == g && color.getBlue() == b) {
 				return color;
 			}
 		}
+		// checks if already exists the required color
+		// in the GWT material color enumeration
 		for (GwtMaterialColor color : GwtMaterialColor.values()) {
+			// if equals returns the enum item
+			if (color.getRed() == r && color.getGreen() == g && color.getBlue() == b) {
+				return color;
+			}
+		}
+		// checks if already exists the required color
+		// in the Google chart color enumeration
+		for (GoogleChartColor color : GoogleChartColor.values()) {
 			// if equals returns the enum item
 			if (color.getRed() == r && color.getGreen() == g && color.getBlue() == b) {
 				return color;
