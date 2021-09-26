@@ -197,6 +197,7 @@ CharbaToast = {
         }
         result.status = 'closed';
         result.dateTime.closed = Date.now();
+        result.element = toasting;
         CharbaToast.currentOpenItems--;
         // checks and calls callback
         if (typeof options.onClose === 'function') {
@@ -215,7 +216,6 @@ CharbaToast = {
       // sets new filed to result
       result.status = 'opened';
       result.dateTime.opened = Date.now();
-      result.element = toasting;
       CharbaToast.currentOpenItems++;
       // checks and calls callback
       if (typeof options.onOpen === 'function') {
