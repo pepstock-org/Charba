@@ -19,6 +19,7 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.toast.enums.DefaultProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
@@ -42,6 +43,7 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 		HIDE_PROGRESS_BAR("hideProgressBar"),
 		HIDE_SHADOW("hideShadow"),
 		ICON("icon"),
+		MODIFIER_KEY("modifierKey"),
 		PROGRESS_BAR_TYPE("progressBarType"),
 		TIMEOUT("timeout"),
 		TYPE("type"),
@@ -225,6 +227,16 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	@Override
 	public int getBorderRadius() {
 		return getValue(Property.BORDER_RADIUS, defaultValues.getBorderRadius());
+	}
+
+	/**
+	 * Returns the modifier key to close the toast by clicking on it.
+	 * 
+	 * @return the modifier key to close the toast by clicking on it
+	 */
+	@Override
+	public ModifierKey getModifierKey() {
+		return getValue(Property.MODIFIER_KEY, ModifierKey.values(), defaultValues.getModifierKey());
 	}
 
 	/**

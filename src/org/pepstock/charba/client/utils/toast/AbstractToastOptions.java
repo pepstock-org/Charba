@@ -18,6 +18,7 @@ package org.pepstock.charba.client.utils.toast;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.utils.toast.enums.DefaultProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
 
@@ -145,6 +146,15 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 	 */
 	public void setBorderRadius(int borderRadius) {
 		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(borderRadius));
+	}
+
+	/**
+	 * Sets the modifier key to close the toast by clicking on it.
+	 * 
+	 * @param modifierKey the modifier key to close the toast by clicking on it
+	 */
+	public void setModifierKey(ModifierKey modifierKey) {
+		setValue(Property.MODIFIER_KEY, modifierKey);
 	}
 
 }

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.utils.toast;
 
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -118,6 +119,15 @@ public interface IsDefaultToastOptions {
 	 * @return the icon image set for toast
 	 */
 	default Img getIcon() {
+		return null;
+	}
+
+	/**
+	 * Returns the modifier key to close the toast by clicking on it.
+	 * 
+	 * @return the modifier key to close the toast by clicking on it
+	 */
+	default ModifierKey getModifierKey() {
 		return null;
 	}
 

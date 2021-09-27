@@ -166,13 +166,17 @@ CharbaToast = {
       // -------------------------------
       // HIDING / AUTO HIDE
       // -------------------------------
+      var timeoutId = undefined;
       toasting.hide = function () {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
         toasting.className += ' ct-fadeOut';
         toasting.addEventListener('animationend', removeToast, false);
         return null;
       };
       if (options.autoHide) {
-        setTimeout(toasting.hide, options.timeout + 200);
+        timeoutId = setTimeout(toasting.hide, options.timeout + 200);
       }
       // -------------------------------
       // TYPE
@@ -185,7 +189,14 @@ CharbaToast = {
       // -------------------------------
       // Internal CLICK EVENT callback
       // -------------------------------
-      toasting.addEventListener('click', toasting.hide);
+      toasting.addEventListener('click', (event) => {
+      	if (options.modifierKey && !event[options.modifierKey + 'Key']) {
+      	  // if here, modifier key is set but not pressed 
+          return;
+        }
+        // if here, modifier key not set or pressed
+        toasting.hide.call();
+  	  });
       // -------------------------------
       // REMOVE toast
       // -------------------------------
@@ -287,6 +298,7 @@ CharbaToast = {
     onClick: undefined,
     onClose: undefined,
     onOpen: undefined,
+    modifierKey: undefined,
     progressBarType: undefined,
     title: {
       color: undefined,
