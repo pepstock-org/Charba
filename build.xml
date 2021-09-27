@@ -467,6 +467,18 @@
 				<exclude name="org/pepstock/charba/codegen/**"/>
 				<exclude name="org/pepstock/charba/client/resources/externs/**"/>
 				<exclude name="org/pepstock/charba/client/gwt/Charba.gwt.xml"/>
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.charba.minify.file}"/>
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.labels.minify.file}"/>
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.toast.minify.file}"/>
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.annotations.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.datalabels.minify.file}"/>
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.zoom.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.hammer.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.geo.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.treemap.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.matrix.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.sankey.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/style/**"/>
 			</fileset>
 			<!-- includes license -->
 			<fileset dir=".">
@@ -549,6 +561,18 @@
 				<exclude name="org/pepstock/charba/codegen/**"/>
 				<exclude name="org/pepstock/charba/client/resources/externs/**"/>
 				<exclude name="org/pepstock/charba/client/gwt/Charba.gwt.xml"/>
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.charba.minify.file}"/>
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.labels.minify.file}"/>
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.toast.minify.file}"/>
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.annotations.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.datalabels.minify.file}"/>
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.zoom.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.hammer.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.geo.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.treemap.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.matrix.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.sankey.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/style/**"/>
 			</fileset>
 			<!-- includes license -->
 			<fileset dir=".">
