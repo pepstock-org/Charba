@@ -17,11 +17,7 @@ package org.pepstock.charba.client.utils.toast;
 
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.utils.RegExp;
-import org.pepstock.charba.client.utils.RegExpResult;
-import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Common builder methods of toast types.
@@ -30,13 +26,6 @@ import org.pepstock.charba.client.utils.Utilities;
  *
  */
 abstract class AbstractTypeBuilder {
-
-	// regexp pattern to have a correct CSS tag
-	private static final String REGEXP_NAME_PATTERN = "[a-zA-Z]+[_a-zA-Z0-9-]*";
-	// Regular expression to check if a string can be used as CSS tag
-	private static final RegExp REGEXP_NAME = new RegExp(REGEXP_NAME_PATTERN);
-	// exception template instance
-	private static final String EXCEPTION_TEMPLATE = "Unable to create a custom toast type because the name '{0}' is invalid";
 
 	// name name of property
 	private final Key name;
@@ -87,21 +76,6 @@ abstract class AbstractTypeBuilder {
 	 */
 	final Gradient getBackgroundAsGradient() {
 		return gradient;
-	}
-
-	/**
-	 * Checks if the name passed as argument is consistent to be a toast type.
-	 * 
-	 * @param name the name to be checked if consistent to be a toast type
-	 */
-	static void checkName(Key name) {
-		// check if key is consistent
-		Key.checkIfValid(name);
-		final String exception = Utilities.applyTemplate(EXCEPTION_TEMPLATE, name.value());
-		// checks name by regexp
-		RegExpResult result = REGEXP_NAME.exec(name.value());
-		Checker.assertCheck(result.length() == 1, exception);
-		Checker.assertCheck(name.value().equals(result.get(0)), exception);
 	}
 
 }

@@ -103,7 +103,7 @@ CharbaToast = {
       // -------------------------------
       if (hasLabel) {
         const text = document.createElement('p');
-        text.className = 'ct-text';
+        text.className = 'ct-label';
         text.innerHTML = pLabel.join('<br/>');
         // title color
         if (typeof options.label.color === 'string') {
@@ -126,6 +126,73 @@ CharbaToast = {
         icon.src = options.icon.src;
         icon.className = 'ct-icon';
         wrapper.appendChild(icon);
+      }
+      // -------------------------------
+      // ACTIONS
+      // -------------------------------
+      if (Array.isArray(options.actions) && options.actions.length > 0) {
+        const actionsContainer = document.createElement('div');
+        actionsContainer.className = 'ct-actions';
+        // action align
+        if (typeof options.align === 'string') {
+          actionsContainer.style.textAlign = options.align;
+        }
+        // scans actions
+        for (const item of options.actions) {
+          if (typeof item.id === 'string' && typeof item.content === 'string' && typeof item.onClick === 'function') {
+            // manages options 
+            const actionOption = Object.assign({}, options.action, item);
+            const itemElement = document.createElement('div');
+            itemElement.className = 'ct-action';
+            itemElement.innerHTML = actionOption.content;
+            // add listener
+            itemElement.addEventListener('click', (event) => {
+              // stores date time of action 
+              result.dateTime[actionOption.id] = Date.now();
+              // invokes custom callback passing toast id
+              const close = actionOption.onClick.apply(this, [pId, event]);
+              // checks if the user callback wants to close the toast
+              if (close) {
+                toasting.hide.call();
+              }
+            });
+            // action color
+            if (typeof actionOption.color === 'string') {
+               itemElement.style.color = actionOption.color;
+            }
+            // action background color
+            if (typeof actionOption.backgroundColor === 'string') {
+               itemElement.style.background = actionOption.backgroundColor;
+            }
+            // action border color
+            if (typeof actionOption.borderColor === 'string') {
+               itemElement.style.borderColor = actionOption.borderColor;
+            }
+            // action border width
+            const borderWidth = Math.max(actionOption.borderWidth, 0);
+            console.log("borderWidth " + borderWidth);
+            if (borderWidth > 0) {
+              itemElement.style.borderWidth = borderWidth + 'px';
+              // action border style
+              itemElement.style.borderStyle = 'solid';
+            }
+            // action border radius
+            itemElement.style.borderRadius = Math.max(actionOption.borderRadius, 0) + 'px';
+            // action color
+            if (typeof actionOption.color === 'string') {
+               itemElement.style.color = actionOption.color;
+            }
+            // action font
+            if (typeof actionOption.font === 'object') {
+              // normalizes font 
+              const font = Object.assign({}, CharbaToast.defaults.labelFont, actionOption.font);
+              const normFont = CharbaToast.helper.toFont.apply(this, [font]);
+              itemElement.style.font = normFont.string;
+            }
+            actionsContainer.appendChild(itemElement);
+          }
+        }
+        wrapper.appendChild(actionsContainer);
       }
       // -------------------------------
       // PROGRESS BAR
@@ -155,6 +222,9 @@ CharbaToast = {
         if (options.progressBarType) {
           progressBar.classList += ' ' + options.progressBarType;    
         }
+        if (options.progressBarHeight) {
+          progressBar.style.height = options.progressBarHeight + 'px';
+        }
         wrapper.appendChild(progressBar);
       }
       // -------------------------------
@@ -166,17 +236,16 @@ CharbaToast = {
       // -------------------------------
       // HIDING / AUTO HIDE
       // -------------------------------
-      var timeoutId = undefined;
       toasting.hide = function () {
-        if (timeoutId) {
-          clearTimeout(timeoutId);
+        if (toasting.timeoutId) {
+          clearTimeout(toasting.timeoutId);
         }
         toasting.className += ' ct-fadeOut';
         toasting.addEventListener('animationend', removeToast, false);
         return null;
       };
       if (options.autoHide) {
-        timeoutId = setTimeout(toasting.hide, options.timeout + 200);
+        toasting.timeoutId = setTimeout(toasting.hide, options.timeout + 200);
       }
       // -------------------------------
       // TYPE
@@ -190,6 +259,11 @@ CharbaToast = {
       // Internal CLICK EVENT callback
       // -------------------------------
       toasting.addEventListener('click', (event) => {
+        // checks if the click is coming from an action
+        if (event.target.className === 'ct-action') {
+          return;
+        }
+        // checks if modifier key asbeen set and pressed
       	if (options.modifierKey && !event[options.modifierKey + 'Key']) {
       	  // if here, modifier key is set but not pressed 
           return;
@@ -289,7 +363,12 @@ CharbaToast = {
       return font;
     }
   },
+  clone: function(source) {
+    return Object.assign({}, source || {});
+  },
   defaults: {
+    align: undefined,
+    actions: [],
     autoHide: true,
     borderRadius: 8,
     hideProgressBar: false,
@@ -299,6 +378,7 @@ CharbaToast = {
     onClose: undefined,
     onOpen: undefined,
     modifierKey: undefined,
+    progressBarHeight: undefined,
     progressBarType: undefined,
     title: {
       color: undefined,
@@ -308,17 +388,27 @@ CharbaToast = {
       color: undefined,
       font: undefined
     },
+    action: {
+      name: undefined,
+      onClick: undefined,
+      backgroundColor: undefined,
+      borderColor: undefined,
+      borderWidth: 0,
+      borderRadius: 0, 
+      color: undefined,
+      font: undefined
+    },
     timeout: 4000,
     type: undefined,
     titleFont: {
-      family: 'system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+      family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
       lineHeight: 1.2,
       size: 15,
       style: 'normal',
       weight: 'bold',
     },
     labelFont: {
-      family: 'system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+      family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
       lineHeight: '20px',
       size: 14,
       style: 'normal',

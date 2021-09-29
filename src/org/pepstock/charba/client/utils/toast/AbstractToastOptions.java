@@ -19,6 +19,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.ModifierKey;
+import org.pepstock.charba.client.utils.toast.enums.Align;
 import org.pepstock.charba.client.utils.toast.enums.DefaultProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
 
@@ -62,6 +63,16 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 	}
 
 	/**
+	 * Returns the actions element.
+	 * 
+	 * @return the actions
+	 */
+	@Override
+	public final Action getAction() {
+		return (Action) super.getAction();
+	}
+
+	/**
 	 * Sets the type of the toast.
 	 * 
 	 * @param type the type of the toast
@@ -92,6 +103,15 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 			// if default, remove the key
 			remove(Property.PROGRESS_BAR_TYPE);
 		}
+	}
+
+	/**
+	 * Sets the height (in pixels) of the toast progress bar.
+	 * 
+	 * @param height the height (in pixels) of the toast progress bar
+	 */
+	public final void setProgressBarHeight(int height) {
+		setValue(Property.PROGRESS_BAR_HEIGHT, Checker.greaterThanOrDefault(height, 0, getDefaultValues().getProgressBarHeight()));
 	}
 
 	/**
@@ -155,6 +175,15 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 	 */
 	public void setModifierKey(ModifierKey modifierKey) {
 		setValue(Property.MODIFIER_KEY, modifierKey);
+	}
+
+	/**
+	 * Sets the alignment of the toast action.
+	 * 
+	 * @param align the alignment of the toast action
+	 */
+	public final void setAlign(Align align) {
+		setValue(Property.ALIGN, align);
 	}
 
 }

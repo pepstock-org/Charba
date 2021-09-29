@@ -15,23 +15,39 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
-import org.pepstock.charba.client.defaults.IsDefaultFontContainer;
-
 /**
- * Interface to define content element, {@link Title} and {@link Label} object defaults for toast.
+ * Interface to define toast action object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultContentElement extends IsDefaultFontContainer {
+public interface IsDefaultAction extends IsDefaultContentElement {
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the background color.
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontContainer#getColorAsString()
+	 * @return the background color.
 	 */
-	@Override
-	default String getColorAsString() {
-		return ImmutableToastOptions.DEFAULT_COLOR;
-	}
+	String getBackgroundColorAsString();
+
+	/**
+	 * Returns the border width.
+	 * 
+	 * @return the border width.
+	 */
+	int getBorderWidth();
+
+	/**
+	 * Returns the border color.
+	 * 
+	 * @return the border color.
+	 */
+	String getBorderColorAsString();
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	int getBorderRadius();
 
 }

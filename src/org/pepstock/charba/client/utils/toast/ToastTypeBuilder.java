@@ -40,7 +40,7 @@ public final class ToastTypeBuilder extends AbstractTypeBuilder {
 	// {0} : name of toast type
 	// {1} : color of toast type
 	// {2} : background color of toast type
-	private static final String CSS_TEMPLATE = "#ct-container .ct-toast>div.ct-{0}{background:{2}}#ct-container .ct-toast>div.ct-{0} .ct-title,#ct-container .ct-toast>div.ct-{0} .ct-text{color:{1}}";
+	private static final String CSS_TEMPLATE = "#ct-container .ct-toast>div.ct-{0}{background:{2}}#ct-container .ct-toast>div.ct-{0} .ct-title,#ct-container .ct-toast > div.ct-{0} .ct-action,#ct-container .ct-toast>div.ct-{0} .ct-label{color:{1}}";
 	// stores all new custom toast types
 	private static final Map<String, StandardToastType> CUSTOM_TYPES = new HashMap<>();
 
@@ -337,7 +337,7 @@ public final class ToastTypeBuilder extends AbstractTypeBuilder {
 	 */
 	private static ToastTypeBuilder create(Key name, IsColor color, IsColor backgroundColor, Pattern pattern, Gradient gradient) {
 		// check if key is consistent
-		checkName(name);
+		NameChecker.checkName(name);
 		// stores arguments and
 		// returns builder
 		return new ToastTypeBuilder(name, color, backgroundColor, pattern, gradient);

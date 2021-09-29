@@ -86,4 +86,13 @@ final class NativeToasting {
 	@JsMethod
 	static native NativeObject create(int id, String title, ArrayString label, NativeObject options, NativeObject dateTime);
 
+	/**
+	 * Clones the argument.
+	 * 
+	 * @param source native object to be cloned
+	 * @return clone of the argument
+	 */
+	@JsMethod
+	static native NativeObject clone(NativeObject source);
+
 }

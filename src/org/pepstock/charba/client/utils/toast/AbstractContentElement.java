@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFontContainer;
 import org.pepstock.charba.client.options.FontContainer;
+import org.pepstock.charba.client.options.HasFont;
 
 /**
  * Configures the title or the label of the toast.<br>
@@ -27,7 +28,7 @@ import org.pepstock.charba.client.options.FontContainer;
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class AbstractContentElement extends AbstractNode implements IsDefaultContentElement {
+abstract class AbstractContentElement extends AbstractNode implements IsDefaultContentElement, HasFont {
 
 	// default values instance
 	private final IsDefaultFontContainer defaultValues;
@@ -42,7 +43,7 @@ abstract class AbstractContentElement extends AbstractNode implements IsDefaultC
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AbstractContentElement(AbstractReadOnlyToastOptions options, Key childKey, IsDefaultFontContainer defaultValues, NativeObject nativeObject) {
+	AbstractContentElement(AbstractReadOnlyToastOptions options, Key childKey, IsDefaultContentElement defaultValues, NativeObject nativeObject) {
 		super(options, childKey, nativeObject);
 		// checks and gets default
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
@@ -58,6 +59,16 @@ abstract class AbstractContentElement extends AbstractNode implements IsDefaultC
 	@Override
 	public final FontContainer getFontContainer() {
 		return fontContainer;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasFont#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return HasFont.super.getColorAsString();
 	}
 
 	/**

@@ -15,11 +15,12 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
-import org.pepstock.charba.client.items.FontItem;
-import org.pepstock.charba.client.options.FontContainer;
-import org.pepstock.charba.client.options.IsFont;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.toast.enums.DefaultProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
 
@@ -35,6 +36,8 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 	static final DefaultToastType DEFAULT_TYPE = DefaultToastType.DEFAULT;
 	// Default of toast progress bar type
 	static final DefaultProgressBarType DEFAULT_PROGRESS_BAR_TYPE = DefaultProgressBarType.DEFAULT;
+	// Default of toast progress bar height
+	static final int DEFAULT_PROGRESS_BAR_HEIGHT = 3;
 	// Default of auto hide of the toast
 	static final boolean DEFAULT_AUTO_HIDE = true;
 	// Default to hide the progress bar toast
@@ -46,7 +49,7 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 	// Default of border radius of the toast
 	static final int DEFAULT_BORDER_RADIUS = 8;
 	// default font family
-	static final String DEFAULT_FONT_FAMILY = "system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"";
+	static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 	// default font color
 	static final String DEFAULT_COLOR = "#616161";
 
@@ -75,6 +78,8 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 
 		private final DefaultLabelValues label = new DefaultLabelValues();
 
+		private final DefaultActionsValues actions = new DefaultActionsValues(label);
+
 		/**
 		 * To avoid any instantiation
 		 */
@@ -102,6 +107,16 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 			return label;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultToastOptions#getActions()
+		 */
+		@Override
+		public IsDefaultAction getAction() {
+			return actions;
+		}
+
 	}
 
 	/**
@@ -112,25 +127,13 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 	 */
 	private static class DefaultTitleValues implements IsDefaultContentElement {
 
-		private final FontItem font = new FontItem();
+		private final ImmutableFont font;
 
 		/**
 		 * To avoid any instantiation
 		 */
 		private DefaultTitleValues() {
-			font.setFamily(DEFAULT_FONT_FAMILY);
-			font.setWeight(Weight.BOLD);
-			font.setSize(15);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.options.HasFont#getFontContainer()
-		 */
-		@Override
-		public FontContainer getFontContainer() {
-			return null;
+			this.font = new ImmutableFont(15, FontStyle.NORMAL, DEFAULT_FONT_FAMILY, Weight.BOLD, Undefined.STRING);
 		}
 
 		/*
@@ -139,7 +142,7 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 		 * @see org.pepstock.charba.client.options.HasFont#getFont()
 		 */
 		@Override
-		public IsFont getFont() {
+		public IsDefaultFont getFont() {
 			return font;
 		}
 
@@ -153,26 +156,13 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 	 */
 	private static class DefaultLabelValues implements IsDefaultContentElement {
 
-		private final FontItem font = new FontItem();
+		private final ImmutableFont font;
 
 		/**
 		 * To avoid any instantiation
 		 */
 		private DefaultLabelValues() {
-			font.setFamily(DEFAULT_FONT_FAMILY);
-			font.setWeight(Weight.NORMAL);
-			font.setSize(14);
-			font.setLineHeight("20px");
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.options.HasFont#getFontContainer()
-		 */
-		@Override
-		public FontContainer getFontContainer() {
-			return null;
+			this.font = new ImmutableFont(14, FontStyle.NORMAL, DEFAULT_FONT_FAMILY, Weight.NORMAL, "20px");
 		}
 
 		/*
@@ -181,8 +171,82 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 		 * @see org.pepstock.charba.client.options.HasFont#getFont()
 		 */
 		@Override
-		public IsFont getFont() {
+		public IsDefaultFont getFont() {
 			return font;
 		}
 	}
+
+	/**
+	 * Class which implements the defaults for actions
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class DefaultActionsValues implements IsDefaultAction {
+
+		private static final String TRANSPARENT = HtmlColor.TRANSPARENT.toRGBA();
+
+		private final DefaultLabelValues label;
+
+		/**
+		 * To avoid any instantiation
+		 * 
+		 * @param label uses the default of labels as based
+		 */
+		private DefaultActionsValues(DefaultLabelValues label) {
+			this.label = label;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.options.HasFont#getFont()
+		 */
+		@Override
+		public IsDefaultFont getFont() {
+			return label.getFont();
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultAction#getBackgroundColorAsString()
+		 */
+		@Override
+		public String getBackgroundColorAsString() {
+			return TRANSPARENT;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultAction#getBorderWidth()
+		 */
+		@Override
+		public int getBorderWidth() {
+			return 0;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultAction#getBorderColorAsString()
+		 */
+		@Override
+		public String getBorderColorAsString() {
+			return TRANSPARENT;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultAction#getBorderRadius()
+		 */
+		@Override
+		public int getBorderRadius() {
+			return 0;
+		}
+
+	}
+
 }

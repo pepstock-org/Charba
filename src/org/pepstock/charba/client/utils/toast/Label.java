@@ -37,5 +37,4 @@ public final class Label extends AbstractContentElement {
 	Label(AbstractReadOnlyToastOptions options, Key childKey, IsDefaultContentElement defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
-
 }

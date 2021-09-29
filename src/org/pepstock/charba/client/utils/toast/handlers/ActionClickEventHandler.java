@@ -13,25 +13,27 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.utils.toast;
+package org.pepstock.charba.client.utils.toast.handlers;
 
-import org.pepstock.charba.client.defaults.IsDefaultFontContainer;
+import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.utils.toast.ActionItem;
+import org.pepstock.charba.client.utils.toast.ToastItem;
 
 /**
- * Interface to define content element, {@link Title} and {@link Label} object defaults for toast.
+ * Callback interface of {@link ActionItem} utility to manage CLICK events on toast action.
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-public interface IsDefaultContentElement extends IsDefaultFontContainer {
+public interface ActionClickEventHandler {
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Invoked to manage CLICK events on toast action.
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultFontContainer#getColorAsString()
+	 * @param item toast item affected by event
+	 * @param event event fired on item
+	 * @return <code>true</code> if the toaster must be close after click on action
 	 */
-	@Override
-	default String getColorAsString() {
-		return ImmutableToastOptions.DEFAULT_COLOR;
-	}
+	boolean onClick(ToastItem item, BaseNativeEvent event);
 
 }

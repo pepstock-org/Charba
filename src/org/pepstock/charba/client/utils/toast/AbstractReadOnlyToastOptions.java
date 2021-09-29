@@ -21,6 +21,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.utils.toast.enums.Align;
 import org.pepstock.charba.client.utils.toast.enums.DefaultProgressBarType;
 import org.pepstock.charba.client.utils.toast.enums.DefaultToastType;
 
@@ -38,18 +39,21 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	 */
 	enum Property implements Key
 	{
+		ALIGN("align"),
 		AUTO_HIDE("autoHide"),
 		BORDER_RADIUS("borderRadius"),
 		HIDE_PROGRESS_BAR("hideProgressBar"),
 		HIDE_SHADOW("hideShadow"),
 		ICON("icon"),
 		MODIFIER_KEY("modifierKey"),
+		PROGRESS_BAR_HEIGHT("progressBarHeight"),
 		PROGRESS_BAR_TYPE("progressBarType"),
 		TIMEOUT("timeout"),
 		TYPE("type"),
 		// inner elements
 		TITLE("title"),
-		LABEL("label");
+		LABEL("label"),
+		ACTION("action");
 
 		// name value of property
 		private final String value;
@@ -81,6 +85,8 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	private final Title title;
 	// label instance
 	private final Label label;
+	// actions instance
+	private final Action action;
 
 	/**
 	 * Creates the configuration with native object instance to be wrapped.
@@ -94,6 +100,7 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 		// gets inner element
 		this.title = new Title(this, Property.TITLE, this.defaultValues.getTitle(), getValue(Property.TITLE));
 		this.label = new Label(this, Property.LABEL, this.defaultValues.getLabel(), getValue(Property.LABEL));
+		this.action = new Action(this, Property.ACTION, this.defaultValues.getAction(), getValue(Property.ACTION));
 	}
 
 	/**
@@ -113,6 +120,16 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	@Override
 	public IsDefaultContentElement getTitle() {
 		return title;
+	}
+
+	/**
+	 * Returns the action of the toast.
+	 * 
+	 * @return the action of the toast
+	 */
+	@Override
+	public IsDefaultAction getAction() {
+		return action;
 	}
 
 	/**
@@ -167,6 +184,16 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 			}
 		}
 		return type;
+	}
+
+	/**
+	 * Returns the height (in pixels) of the toast progress bar.
+	 * 
+	 * @return the height (in pixels) of the toast progress bar
+	 */
+	@Override
+	public final int getProgressBarHeight() {
+		return getValue(Property.PROGRESS_BAR_HEIGHT, defaultValues.getProgressBarHeight());
 	}
 
 	/**
@@ -237,6 +264,16 @@ abstract class AbstractReadOnlyToastOptions extends AbstractNode implements IsDe
 	@Override
 	public ModifierKey getModifierKey() {
 		return getValue(Property.MODIFIER_KEY, ModifierKey.values(), defaultValues.getModifierKey());
+	}
+
+	/**
+	 * Returns the alignment of the toast action.
+	 * 
+	 * @return the alignment of the toast action
+	 */
+	@Override
+	public final Align getAlign() {
+		return getValue(Property.ALIGN, Align.values(), defaultValues.getAlign());
 	}
 
 	/**

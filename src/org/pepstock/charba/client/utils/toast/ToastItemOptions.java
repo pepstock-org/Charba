@@ -15,15 +15,13 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
-import org.pepstock.charba.client.colors.IsColor;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.enums.Weight;
-import org.pepstock.charba.client.items.FontItem;
-import org.pepstock.charba.client.options.FontContainer;
-import org.pepstock.charba.client.options.HasFont;
-import org.pepstock.charba.client.options.IsFont;
+import org.pepstock.charba.client.utils.toast.enums.Align;
 import org.pepstock.charba.client.utils.toast.handlers.ClickEventHandler;
 import org.pepstock.charba.client.utils.toast.handlers.CloseHandler;
 import org.pepstock.charba.client.utils.toast.handlers.OpenHandler;
@@ -42,6 +40,10 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	private final WrapperContentElement title;
 	// label instance by a wrapper
 	private final WrapperContentElement label;
+	// actions instance by a wrapper
+	private final WrapperAction action;
+	// list of actions
+	private final List<ToastItemAction> actions = new LinkedList<>();
 
 	/**
 	 * Creates the object which wraps the passed argument.
@@ -54,6 +56,15 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 				: new WrapperContentElement(Toaster.get().getDefaults().getTitle(), Toaster.get().getDefaults().getDefaultValues().getTitle());
 		this.label = delegated != null ? new WrapperContentElement(delegated.getLabel(), delegated.getDefaultValues().getLabel())
 				: new WrapperContentElement(Toaster.get().getDefaults().getLabel(), Toaster.get().getDefaults().getDefaultValues().getLabel());
+		this.action = delegated != null ? new WrapperAction(delegated.getAction(), delegated.getDefaultValues().getAction()) : new WrapperAction(Toaster.get().getDefaults().getAction(), Toaster.get().getDefaults().getDefaultValues().getAction());
+		// checks if delegated is consistent
+		if (this.delegated != null) {
+			// scans actions
+			for (ActionItem action : this.delegated.getActions()) {
+				// adds new toast action item
+				actions.add(new ToastItemAction(action));
+			}
+		}
 	}
 
 	/**
@@ -113,12 +124,31 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	}
 
 	/**
+	 * Returns the actions of the toast.
+	 * 
+	 * @return the actions of the toast
+	 */
+	@Override
+	public IsDefaultAction getAction() {
+		return action;
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @return
+	 */
+	public List<ToastItemAction> getActions() {
+		return Collections.unmodifiableList(actions);
+	}
+
+	/**
 	 * Returns the type of the toast.
 	 * 
 	 * @return the type of the toast
 	 */
 	@Override
-	public final IsToastType getType() {
+	public IsToastType getType() {
 		return delegated != null ? delegated.getType() : Toaster.get().getDefaults().getType();
 	}
 
@@ -128,8 +158,18 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	 * @return the type of the toast progress bar
 	 */
 	@Override
-	public final IsProgressBarType getProgressBarType() {
+	public IsProgressBarType getProgressBarType() {
 		return delegated != null ? delegated.getProgressBarType() : Toaster.get().getDefaults().getProgressBarType();
+	}
+
+	/**
+	 * Returns the height (in pixels) of the toast progress bar.
+	 * 
+	 * @return the height (in pixels) of the toast progress bar
+	 */
+	@Override
+	public int getProgressBarHeight() {
+		return delegated != null ? delegated.getProgressBarHeight() : Toaster.get().getDefaults().getProgressBarHeight();
 	}
 
 	/**
@@ -138,7 +178,7 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	 * @return <code>true</code> whether to hide the progress bar
 	 */
 	@Override
-	public final boolean isHideProgressBar() {
+	public boolean isHideProgressBar() {
 		return delegated != null ? delegated.isHideProgressBar() : Toaster.get().getDefaults().isHideProgressBar();
 	}
 
@@ -148,7 +188,7 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	 * @return <code>true</code> whether to hide the shadow of toast
 	 */
 	@Override
-	public final boolean isHideShadow() {
+	public boolean isHideShadow() {
 		return delegated != null ? delegated.isHideShadow() : Toaster.get().getDefaults().isHideShadow();
 	}
 
@@ -158,7 +198,7 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	 * @return whether to make the toast notification sticky, which means that the toast notification will never auto dismiss until clicked
 	 */
 	@Override
-	public final boolean isAutoHide() {
+	public boolean isAutoHide() {
 		return delegated != null ? delegated.isAutoHide() : Toaster.get().getDefaults().isAutoHide();
 	}
 
@@ -168,7 +208,7 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	 * @return how long the toast notification should last
 	 */
 	@Override
-	public final int getTimeout() {
+	public int getTimeout() {
 		return delegated != null ? delegated.getTimeout() : Toaster.get().getDefaults().getTimeout();
 	}
 
@@ -178,7 +218,7 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	 * @return the icon image set for toast
 	 */
 	@Override
-	public final Img getIcon() {
+	public Img getIcon() {
 		return delegated != null ? delegated.getIcon() : Toaster.get().getDefaults().getIcon();
 	}
 
@@ -193,6 +233,16 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	}
 
 	/**
+	 * Returns the alignment of the toast actions.
+	 * 
+	 * @return the alignment of the toast actions
+	 */
+	@Override
+	public Align getAlign() {
+		return delegated != null ? delegated.getAlign() : Toaster.get().getDefaults().getAlign();
+	}
+
+	/**
 	 * Is a wrapper of {@link Title} or {@link Label} in order to exposes only "get" methods.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -202,7 +252,7 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 
 		private final IsDefaultContentElement elementDelegated;
 
-		private final WrapperFont font;
+		private final ImmutableFont font;
 
 		/**
 		 * Creates the object wrapping the passed content element
@@ -212,37 +262,17 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 		 */
 		private WrapperContentElement(IsDefaultContentElement elementDelegated, IsDefaultContentElement defaultValues) {
 			this.elementDelegated = elementDelegated;
-			this.font = new WrapperFont(elementDelegated.getFont(), defaultValues.getFont());
+			this.font = new ImmutableFont(elementDelegated.getFont());
 		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.options.HasFont#getFontContainer()
+		 * @see org.pepstock.charba.client.defaults.IsDefaultFontContainer#getFont()
 		 */
 		@Override
-		public FontContainer getFontContainer() {
-			return null;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.options.HasFont#getFont()
-		 */
-		@Override
-		public IsFont getFont() {
+		public IsDefaultFont getFont() {
 			return font;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.options.HasFont#getColor()
-		 */
-		@Override
-		public IsColor getColor() {
-			return elementDelegated.getColor();
 		}
 
 		/*
@@ -258,158 +288,86 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	}
 
 	/**
-	 * Is a wrapper of {@link IsFont} in order to exposes only "get" methods.<br>
-	 * The "set" methods are still here, because the {@link HasFont} interface needs a {@link IsFont} instance and not {@link IsDefaultFont} but they don't do anything.
+	 * Is a wrapper of {@link ActionItem} in order to exposes only "get" methods.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class WrapperFont implements IsFont {
+	private static class WrapperAction implements IsDefaultAction {
 
-		// font instance to be wrap
-		private final IsFont fontDelegated;
-		// default font
-		private final IsDefaultFont defaultValues;
+		private final IsDefaultAction elementDelegated;
+
+		private final ImmutableFont font;
 
 		/**
-		 * Creates the object wrapping the passed font
+		 * Creates the object wrapping the passed content element
 		 * 
-		 * @param fontDelegated font to wrap
-		 * @param defaultValues default values to apply in case of creation of {@link FontItem}.
+		 * @param elementDelegated content element to wrap
+		 * @param defaultValues the default values of element
 		 */
-		private WrapperFont(IsFont fontDelegated, IsDefaultFont defaultValues) {
-			this.fontDelegated = fontDelegated;
-			this.defaultValues = defaultValues;
+		private WrapperAction(IsDefaultAction elementDelegated, IsDefaultAction defaultValues) {
+			this.elementDelegated = elementDelegated;
+			this.font = new ImmutableFont(elementDelegated.getFont());
 		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getSize()
+		 * @see org.pepstock.charba.client.defaults.IsDefaultFontContainer#getFont()
 		 */
 		@Override
-		public int getSize() {
-			return fontDelegated.getSize();
+		public IsDefaultFont getFont() {
+			return font;
 		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getStyle()
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultContentElement#getColorAsString()
 		 */
 		@Override
-		public FontStyle getStyle() {
-			return fontDelegated.getStyle();
+		public String getColorAsString() {
+			return elementDelegated.getColorAsString();
 		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getFamily()
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultAction#getBackgroundColorAsString()
 		 */
 		@Override
-		public String getFamily() {
-			return fontDelegated.getFamily();
+		public String getBackgroundColorAsString() {
+			return elementDelegated.getBackgroundColorAsString();
 		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getWeight()
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultAction#getBorderWidth()
 		 */
 		@Override
-		public Weight getWeight() {
-			return fontDelegated.getWeight();
+		public int getBorderWidth() {
+			return elementDelegated.getBorderWidth();
 		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getLineHeight()
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultAction#getBorderColorAsString()
 		 */
 		@Override
-		public double getLineHeight() {
-			return fontDelegated.getLineHeight();
+		public String getBorderColorAsString() {
+			return elementDelegated.getBorderColorAsString();
 		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultFont#getLineHeightAsString()
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultAction#getBorderRadius()
 		 */
 		@Override
-		public String getLineHeightAsString() {
-			return fontDelegated.getLineHeightAsString();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultFont#create()
-		 */
-		@Override
-		public FontItem create() {
-			return IsFont.super.create(defaultValues);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.options.IsFont#setSize(int)
-		 */
-		@Override
-		public void setSize(int size) {
-			// do nothing
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.options.IsFont#setStyle(org.pepstock.charba.client.enums.FontStyle)
-		 */
-		@Override
-		public void setStyle(FontStyle style) {
-			// do nothing
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.options.IsFont#setFamily(java.lang.String)
-		 */
-		@Override
-		public void setFamily(String family) {
-			// do nothing
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.options.IsFont#setWeight(org.pepstock.charba.client.enums.Weight)
-		 */
-		@Override
-		public void setWeight(Weight weight) {
-			// do nothing
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.options.IsFont#setLineHeight(double)
-		 */
-		@Override
-		public void setLineHeight(double lineHeight) {
-			// do nothing
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.options.IsFont#setLineHeight(java.lang.String)
-		 */
-		@Override
-		public void setLineHeight(String lineHeight) {
-			// do nothing
+		public int getBorderRadius() {
+			return elementDelegated.getBorderRadius();
 		}
 
 	}

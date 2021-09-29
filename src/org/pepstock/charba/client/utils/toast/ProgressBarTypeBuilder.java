@@ -98,13 +98,11 @@ public final class ProgressBarTypeBuilder extends AbstractTypeBuilder {
 	 * @return new builder instance
 	 */
 	public static ProgressBarTypeBuilder create(Key name, IsColor backgroundColor) {
-		// check if key is consistent
-		checkName(name);
 		// check if colors are consistent
 		IsColor.checkIfValid(backgroundColor);
 		// stores arguments and
 		// returns builder
-		return new ProgressBarTypeBuilder(name, backgroundColor, null);
+		return create(name, backgroundColor, null);
 	}
 
 	// ----------------------------------
@@ -149,7 +147,7 @@ public final class ProgressBarTypeBuilder extends AbstractTypeBuilder {
 	 */
 	private static ProgressBarTypeBuilder create(Key name, IsColor backgroundColor, Gradient gradient) {
 		// check if key is consistent
-		checkName(name);
+		NameChecker.checkName(name);
 		// stores arguments and
 		// returns builder
 		return new ProgressBarTypeBuilder(name, backgroundColor, gradient);

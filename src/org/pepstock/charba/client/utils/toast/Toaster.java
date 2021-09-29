@@ -16,14 +16,15 @@
 package org.pepstock.charba.client.utils.toast;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -45,25 +46,30 @@ public final class Toaster {
 	 * Maximum amount of open and shown toasts.
 	 */
 	public static final int MAXIMUM_OPEN_ITEMS = 100;
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the close function
+	private final CallbackProxy<ProxyHandlerCallback> closeCallbackProxy = JsHelper.get().newCallbackProxy();
+
 	// injectable JS resource for toasting
 	private final ToastJsUtilResource jsResource = new ToastJsUtilResource();
 	// injectable CSS resource for toasting
 	private final ToastCssUtilResource cssResource = new ToastCssUtilResource();
+
 	// internal counter for element id
 	private final AtomicInteger counter = new AtomicInteger();
 	// instance of defaults
 	private final ImmutableToastOptions defaults;
 	// instance of overrides
 	private final DefaultToastOptions overrides;
+	// stores the current toast items
+	private final Map<Integer, ToastItem> currentOpenItems = new HashMap<>();
 	// historical cache of toast items
 	private final List<ToastItem> historyItems = new LinkedList<>();
 	// max amount of history items
 	private int maxHistoryItems = 0;
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-	// callback proxy to invoke the close function
-	private final CallbackProxy<ProxyHandlerCallback> closeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// list of items in queue
 	private final List<ToastItem> queueItems = new LinkedList<>();
 	// max amount of open items
@@ -89,7 +95,9 @@ public final class Toaster {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.closeCallbackProxy.setCallback(item -> checkAndCleanQueue());
+		this.closeCallbackProxy.setCallback(this::closeActiveToast);
+		// stores handler
+		NativeToasting.setInternalCloseHandler(closeCallbackProxy.getProxy());
 	}
 
 	/**
@@ -270,6 +278,8 @@ public final class Toaster {
 			NativeObject result = NativeToasting.create(counter.getAndIncrement(), title, label, options != null ? options.nativeObject() : null, dateTime);
 			// creates toast item
 			ToastItem item = new ToastItem(result, options);
+			// stores in the current item
+			currentOpenItems.put(item.getId(), item);
 			// stores history
 			storeHistory(item);
 			// returns the status
@@ -399,15 +409,9 @@ public final class Toaster {
 	private void setupQueueConfiguration() {
 		// checks policy type
 		if (MaximumOpenItemsPolicy.QUEUE.equals(getMaxOpenItemsPolicy())) {
-			// checks if the handler must be set
-			Proxy proxy = this.maxHistoryItems < MAXIMUM_OPEN_ITEMS ? closeCallbackProxy.getProxy() : null;
-			// stores handler
-			NativeToasting.setInternalCloseHandler(proxy);
 			// checks the queue
 			checkAndCleanQueue();
 		} else {
-			// resets handler
-			NativeToasting.setInternalCloseHandler(null);
 			// clear the queue
 			queueItems.clear();
 		}
@@ -446,6 +450,30 @@ public final class Toaster {
 			// always at the beginning of list
 			historyItems.add(0, item);
 		}
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param object
+	 */
+	private void closeActiveToast(NativeObject object) {
+		// gets the id from toast item
+		int id = JsHelper.get().getIntegerProperty(ToastItem.CommonProperty.ID, object);
+		// removes from open items
+		currentOpenItems.remove(id);
+		// checks the queue
+		checkAndCleanQueue();
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param id
+	 * @return
+	 */
+	ToastItem getCurrentOpenItem(int id) {
+		return currentOpenItems.get(id);
 	}
 
 }

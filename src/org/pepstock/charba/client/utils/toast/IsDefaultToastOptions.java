@@ -18,6 +18,7 @@ package org.pepstock.charba.client.utils.toast;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.utils.toast.enums.Align;
 
 /**
  * Defines the toast options container, and the static defaults.
@@ -40,6 +41,22 @@ public interface IsDefaultToastOptions {
 	 * @return the label of the toast
 	 */
 	IsDefaultContentElement getLabel();
+
+	/**
+	 * Returns the actions of the toast.
+	 * 
+	 * @return the actions of the toast
+	 */
+	IsDefaultAction getAction();
+
+	/**
+	 * Returns the alignment of the toast actions.
+	 * 
+	 * @return the alignment of the toast actions
+	 */
+	default Align getAlign() {
+		return Align.LEFT;
+	}
 
 	/**
 	 * Returns the text of the toast.
@@ -66,6 +83,15 @@ public interface IsDefaultToastOptions {
 	 */
 	default IsProgressBarType getProgressBarType() {
 		return ImmutableToastOptions.DEFAULT_PROGRESS_BAR_TYPE;
+	}
+
+	/**
+	 * Returns the height (in pixels) of the toast progress bar.
+	 * 
+	 * @return the height (in pixels) of the toast progress bar
+	 */
+	default int getProgressBarHeight() {
+		return ImmutableToastOptions.DEFAULT_PROGRESS_BAR_HEIGHT;
 	}
 
 	/**

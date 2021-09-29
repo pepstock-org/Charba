@@ -39,9 +39,39 @@ public final class ToastItem extends NativeObjectContainer {
 	/**
 	 * Name of properties of native object.
 	 */
+	enum CommonProperty implements Key
+	{
+		ID("id");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private CommonProperty(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
+	/**
+	 * Name of properties of native object.
+	 */
 	private enum Property implements Key
 	{
-		ID("id"),
 		TITLE("title"),
 		LABEL("label"),
 		DATE_TIME("dateTime"),
@@ -111,7 +141,7 @@ public final class ToastItem extends NativeObjectContainer {
 	 * @return the unique id of toast item
 	 */
 	public int getId() {
-		return getValue(Property.ID, Undefined.INTEGER);
+		return getValue(CommonProperty.ID, Undefined.INTEGER);
 	}
 
 	/**
@@ -122,6 +152,38 @@ public final class ToastItem extends NativeObjectContainer {
 	 */
 	public Date getDateTime(Status status) {
 		return dateTime.get(status);
+	}
+
+	/**
+	 * Returns the date time when the action invocation was applied to the toast.
+	 * 
+	 * @param action the action to get the date time
+	 * @return the date time when the action invocation was applied to the toast
+	 */
+	public Date getDateTime(ActionItem action) {
+		// checks action
+		if (action != null) {
+			return dateTime.get(action.getId());
+		}
+		// if here, action not consistent
+		// the returns null
+		return null;
+	}
+
+	/**
+	 * Returns the date time when the action invocation was applied to the toast.
+	 * 
+	 * @param action the action to get the date time
+	 * @return the date time when the action invocation was applied to the toast
+	 */
+	public Date getDateTime(ToastItemAction action) {
+		// checks action
+		if (action != null) {
+			return dateTime.get(action.getId());
+		}
+		// if here, action not consistent
+		// the returns null
+		return null;
 	}
 
 	/**
@@ -266,13 +328,13 @@ public final class ToastItem extends NativeObjectContainer {
 		}
 
 		/**
-		 * Returns the date time for the specific status.
+		 * Returns the date time for the specific status or action invocation.
 		 * 
-		 * @param status status to get date time as key.
-		 * @return the date time for the specific status.
+		 * @param key status to get date time as key.
+		 * @return the date time for the specific status or action invocation
 		 */
-		private Date get(Status status) {
-			return getValue(status, (Date) null);
+		private Date get(Key key) {
+			return getValue(key, (Date) null);
 		}
 
 		/**

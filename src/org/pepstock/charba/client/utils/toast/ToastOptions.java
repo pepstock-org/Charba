@@ -15,6 +15,11 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -88,6 +93,7 @@ public final class ToastOptions extends AbstractToastOptions {
 	 */
 	private enum Property implements Key
 	{
+		ACTIONS("actions"),
 		ON_CLICK("onClick"),
 		ON_OPEN("onOpen"),
 		ON_CLOSE("onClose");
@@ -116,6 +122,8 @@ public final class ToastOptions extends AbstractToastOptions {
 
 	}
 
+	// list of actions
+	private final List<ActionItem> storedActions = new LinkedList<>();
 	// handler for click on toast item
 	private ClickEventHandler clickEventHandler = null;
 	// handler for opening a toast item
@@ -136,10 +144,11 @@ public final class ToastOptions extends AbstractToastOptions {
 	 * @param source source object to be cloned
 	 */
 	ToastOptions(ToastOptions source) {
-		this(source.nativeObject(), source.getDefaultValues());
+		this(NativeToasting.clone(source.nativeObject()), source.getDefaultValues());
 		setClickEventHandler(source.getClickEventHandler());
 		setOpenHandler(source.getOpenHandler());
 		setCloseHandler(source.getCloseHandler());
+		setActions(source.getActions());
 	}
 
 	/**
@@ -264,5 +273,55 @@ public final class ToastOptions extends AbstractToastOptions {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.ON_CLOSE);
 		}
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param actions
+	 */
+	public void setActions(ActionItem... actions) {
+		// clears stored actions
+		storedActions.clear();
+		// checks consistent of actions
+		if (actions != null && actions.length > 0) {
+			ArrayObject array = ArrayObject.fromOrEmpty(actions);
+			// stores array
+			setArrayValue(Property.ACTIONS, array);
+			// stores in the list
+			storedActions.addAll(Arrays.asList(actions));
+		} else {
+			// if here, the actions passed as argument
+			// are not consistent
+			// then removes from native object
+			remove(Property.ACTIONS);
+		}
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param actions
+	 */
+	public void setActions(List<ActionItem> actions) {
+		// sets array to store as empty
+		ActionItem[] array = new ActionItem[0];
+		// checks consistent of actions
+		if (actions != null && !actions.isEmpty()) {
+			// stores to array
+			array = actions.toArray(new ActionItem[0]);
+		}
+		//
+		// then invokes with empty array
+		setActions(array);
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @return
+	 */
+	public List<ActionItem> getActions() {
+		return storedActions;
 	}
 }
