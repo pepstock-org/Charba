@@ -52,17 +52,15 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	 */
 	ToastItemOptions(ToastOptions delegated) {
 		this.delegated = delegated;
-		this.title = delegated != null ? new WrapperContentElement(delegated.getTitle(), delegated.getDefaultValues().getTitle())
-				: new WrapperContentElement(Toaster.get().getDefaults().getTitle(), Toaster.get().getDefaults().getDefaultValues().getTitle());
-		this.label = delegated != null ? new WrapperContentElement(delegated.getLabel(), delegated.getDefaultValues().getLabel())
-				: new WrapperContentElement(Toaster.get().getDefaults().getLabel(), Toaster.get().getDefaults().getDefaultValues().getLabel());
-		this.action = delegated != null ? new WrapperAction(delegated.getAction(), delegated.getDefaultValues().getAction()) : new WrapperAction(Toaster.get().getDefaults().getAction(), Toaster.get().getDefaults().getDefaultValues().getAction());
+		this.title = delegated != null ? new WrapperContentElement(delegated.getTitle()) : new WrapperContentElement(Toaster.get().getDefaults().getTitle());
+		this.label = delegated != null ? new WrapperContentElement(delegated.getLabel()) : new WrapperContentElement(Toaster.get().getDefaults().getLabel());
+		this.action = delegated != null ? new WrapperAction(delegated.getAction()) : new WrapperAction(Toaster.get().getDefaults().getAction());
 		// checks if delegated is consistent
 		if (this.delegated != null) {
 			// scans actions
-			for (ActionItem action : this.delegated.getActions()) {
+			for (ActionItem actionItem : this.delegated.getActions()) {
 				// adds new toast action item
-				actions.add(new ToastItemAction(action));
+				actions.add(new ToastItemAction(actionItem));
 			}
 		}
 	}
@@ -258,9 +256,8 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 		 * Creates the object wrapping the passed content element
 		 * 
 		 * @param elementDelegated content element to wrap
-		 * @param defaultValues the default values of element
 		 */
-		private WrapperContentElement(IsDefaultContentElement elementDelegated, IsDefaultContentElement defaultValues) {
+		private WrapperContentElement(IsDefaultContentElement elementDelegated) {
 			this.elementDelegated = elementDelegated;
 			this.font = new ImmutableFont(elementDelegated.getFont());
 		}
@@ -303,9 +300,8 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 		 * Creates the object wrapping the passed content element
 		 * 
 		 * @param elementDelegated content element to wrap
-		 * @param defaultValues the default values of element
 		 */
-		private WrapperAction(IsDefaultAction elementDelegated, IsDefaultAction defaultValues) {
+		private WrapperAction(IsDefaultAction elementDelegated) {
 			this.elementDelegated = elementDelegated;
 			this.font = new ImmutableFont(elementDelegated.getFont());
 		}

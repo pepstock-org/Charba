@@ -234,7 +234,7 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 		 */
 		@Override
 		public String getBorderColorAsString() {
-			return TRANSPARENT;
+			return getBackgroundColorAsString();
 		}
 
 		/*

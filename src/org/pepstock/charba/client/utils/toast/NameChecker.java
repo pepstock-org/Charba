@@ -37,6 +37,13 @@ final class NameChecker {
 	private static final String EXCEPTION_TEMPLATE = "Unable to create a custom toast object because the name '{0}' is invalid";
 
 	/**
+	 * To avoid any instantiation
+	 */
+	private NameChecker() {
+		// do nothing
+	}
+
+	/**
 	 * Checks if the name passed as argument is consistent to be a toast object.
 	 * 
 	 * @param name the name to be checked if consistent to be a toast object
