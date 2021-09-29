@@ -153,6 +153,9 @@ CharbaToast = {
               const close = actionOption.onClick.apply(this, [pId, event]);
               // checks if the user callback wants to close the toast
               if (close) {
+                // stores in the result object
+                // the action id
+                result.actionId = actionOption.id;
                 toasting.hide.call();
               }
             });
@@ -170,7 +173,7 @@ CharbaToast = {
             }
             // action border width
             const borderWidth = Math.max(actionOption.borderWidth, 0);
-            console.log("borderWidth " + borderWidth);
+            // if border width consistent, apply border
             if (borderWidth > 0) {
               itemElement.style.borderWidth = borderWidth + 'px';
               // action border style

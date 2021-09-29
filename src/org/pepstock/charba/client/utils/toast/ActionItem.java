@@ -110,18 +110,61 @@ public final class ActionItem extends Action {
 	private final ActionClickEventHandler clickEventHandler;
 
 	/**
-	 * Creates the action with the content to show on the toast and the handler to invoke when the user will click on the action.
+	 * Creates the action with the id of the toast and the handler to invoke when the user will click on the action.<br>
+	 * The content is the value of the id.
+	 * 
+	 * @param id id of the toast
+	 * @param handler the handler to use when a click was performed on the toast
+	 */
+	public ActionItem(Key id, ActionClickEventHandler handler) {
+		this(id, Key.checkAndGetIfValid(id).value(), handler);
+	}
+
+	/**
+	 * Creates the action with the content to show on the toast and the handler to invoke when the user will click on the action.<br>
+	 * The id of the action has been created automatically.
 	 * 
 	 * @param content content to show on the toast
 	 * @param handler the handler to use when a click was performed on the toast
 	 */
 	public ActionItem(String content, ActionClickEventHandler handler) {
+		this((Key) null, content, handler);
+	}
+
+	/**
+	 * Creates the action with the id of the action, the content to show on the toast and the handler to invoke when the user will click on the action.
+	 * 
+	 * @param id id of the action
+	 * @param content content to show on the toast
+	 * @param handler the handler to use when a click was performed on the toast
+	 */
+	public ActionItem(String id, String content, ActionClickEventHandler handler) {
+		this(Key.create(id), content, handler);
+	}
+
+	/**
+	 * Creates the action with the id of the action, the content to show on the toast and the handler to invoke when the user will click on the action.
+	 * 
+	 * @param id id of the action
+	 * @param content content to show on the toast
+	 * @param handler the handler to use when a click was performed on the toast
+	 */
+	public ActionItem(Key id, String content, ActionClickEventHandler handler) {
 		super(null, null, Toaster.get().getDefaults().getAction(), null);
 		// checks arguments
 		this.content = Checker.checkAndGetIfValid(content, "Action content ");
 		this.clickEventHandler = Checker.checkAndGetIfValid(handler, "Action click event handler ");
-		// creates unique id
-		this.id = Key.create(PREFIX_ID + COUNTER.getAndIncrement());
+		// checks if id is not passed by user
+		// therefore must be calculated
+		if (!Key.isValid(id)) {
+			// creates unique id
+			this.id = Key.create(PREFIX_ID + COUNTER.getAndIncrement());
+		} else {
+			// checks if id is consistent
+			NameChecker.checkName(id);
+			// sets id
+			this.id = id;
+		}
 		// stores values
 		setValue(CommonProperty.ID, this.id);
 		setValue(Property.CONTENT, this.content);

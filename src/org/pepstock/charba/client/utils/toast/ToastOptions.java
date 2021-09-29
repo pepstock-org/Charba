@@ -96,7 +96,10 @@ public final class ToastOptions extends AbstractToastOptions {
 		ACTIONS("actions"),
 		ON_CLICK("onClick"),
 		ON_OPEN("onOpen"),
-		ON_CLOSE("onClose");
+		ON_CLOSE("onClose"),
+		// internally used to get the action id from
+		// native object passed to close handler
+		ACTION_ID("actionId");
 
 		// name value of property
 		private final String value;
@@ -188,8 +191,13 @@ public final class ToastOptions extends AbstractToastOptions {
 			CloseHandler handler = getCloseHandler();
 			// checks if handler is consistent
 			if (handler != null) {
+				// gets the action id if the toast has been closed
+				// by an action
+				String actionId = JsHelper.get().getStringProperty(Property.ACTION_ID, item);
+				// creates reference to action item
+				ActionItem actionItem = getActionItem(actionId);
 				// invokes handler
-				handler.onClose(new ToastItem(item, this));
+				handler.onClose(new ToastItem(item, this), actionItem);
 			}
 		});
 	}
@@ -323,5 +331,31 @@ public final class ToastOptions extends AbstractToastOptions {
 	 */
 	public List<ActionItem> getActions() {
 		return storedActions;
+	}
+
+	/**
+	 * Returns the {@link ActionItem} searched by the action id passed as argument or <code>null</code> if not found.
+	 * 
+	 * @param actionId action id as string
+	 * @return the {@link ActionItem} searched by the action id passed as argument or <code>null</code> if not found
+	 */
+	private ActionItem getActionItem(String actionId) {
+		// checks if id is consistent
+		if (actionId != null) {
+			// creates the action key
+			Key actionKey = Key.create(actionId);
+			// scans actions
+			for (ActionItem actionItem : getActions()) {
+				// checks if has got the same id
+				if (Key.equals(actionKey, actionItem.getId())) {
+					// found it!
+					return actionItem;
+				}
+			}
+		}
+		// if here, argument is not consistent or
+		// after searching, action is not found
+		// then returns null
+		return null;
 	}
 }
