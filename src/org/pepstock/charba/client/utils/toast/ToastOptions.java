@@ -276,9 +276,9 @@ public final class ToastOptions extends AbstractToastOptions {
 	}
 
 	/**
-	 * FIXME
+	 * Sets the actions to the toast.
 	 * 
-	 * @param actions
+	 * @param actions the actions to the toast
 	 */
 	public void setActions(ActionItem... actions) {
 		// clears stored actions
@@ -299,9 +299,9 @@ public final class ToastOptions extends AbstractToastOptions {
 	}
 
 	/**
-	 * FIXME
+	 * Sets the actions to the toast.
 	 * 
-	 * @param actions
+	 * @param actions the actions to the toast
 	 */
 	public void setActions(List<ActionItem> actions) {
 		// sets array to store as empty
@@ -317,9 +317,9 @@ public final class ToastOptions extends AbstractToastOptions {
 	}
 
 	/**
-	 * FIXME
+	 * Returns the actions to the toast.
 	 * 
-	 * @return
+	 * @return the actions to the toast.
 	 */
 	public List<ActionItem> getActions() {
 		return storedActions;

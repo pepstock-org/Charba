@@ -453,9 +453,9 @@ public final class Toaster {
 	}
 
 	/**
-	 * FIXME
+	 * Invoked when every toast has been closed, removing the item from the list of current open items, and checking the queue.
 	 * 
-	 * @param object
+	 * @param object toast item instance as native object
 	 */
 	private void closeActiveToast(NativeObject object) {
 		// gets the id from toast item
@@ -467,10 +467,10 @@ public final class Toaster {
 	}
 
 	/**
-	 * FIXME
+	 * Returns the {@link ToastItem}, currently open, by its id, or <code>null</code> if not in the map of open item.
 	 * 
-	 * @param id
-	 * @return
+	 * @param id the id of toast item
+	 * @return the {@link ToastItem}, currently open, by its id, or <code>null</code> if not in the map of open item
 	 */
 	ToastItem getCurrentOpenItem(int id) {
 		return currentOpenItems.get(id);

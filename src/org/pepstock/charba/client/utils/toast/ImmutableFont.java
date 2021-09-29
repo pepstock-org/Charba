@@ -22,13 +22,15 @@ import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * FIXME
+ * This is an read-only font class in order to re-used the same implementation in the default for all elements where font is needed.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class ImmutableFont implements IsDefaultFont {
 
+	// sets all references for all font
+	// options
 	private final int size;
 	private final FontStyle style;
 	private final String family;
@@ -36,10 +38,24 @@ final class ImmutableFont implements IsDefaultFont {
 	private final double lineHeight;
 	private final String lineHeightAsString;
 
+	/**
+	 * Creates a immutable font using a font instance as source.
+	 * 
+	 * @param source source of font instance
+	 */
 	ImmutableFont(IsDefaultFont source) {
 		this(source.getSize(), source.getStyle(), source.getFamily(), source.getWeight(), source.getLineHeight());
 	}
 
+	/**
+	 * Creates the font instance with all properties.
+	 * 
+	 * @param size font size
+	 * @param style font style
+	 * @param family font family
+	 * @param weight the weight of the font
+	 * @param lineHeightAsString the line height of font as string
+	 */
 	ImmutableFont(int size, FontStyle style, String family, Weight weight, String lineHeightAsString) {
 		this.size = size;
 		this.style = style;
@@ -49,6 +65,15 @@ final class ImmutableFont implements IsDefaultFont {
 		this.lineHeightAsString = lineHeightAsString;
 	}
 
+	/**
+	 * Creates the font instance with all properties.
+	 * 
+	 * @param size font size
+	 * @param style font style
+	 * @param family font family
+	 * @param weight the weight of the font
+	 * @param lineHeight the line height of font
+	 */
 	ImmutableFont(int size, FontStyle style, String family, Weight weight, double lineHeight) {
 		this.size = size;
 		this.style = style;

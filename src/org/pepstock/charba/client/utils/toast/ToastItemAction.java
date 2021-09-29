@@ -21,7 +21,7 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.utils.toast.handlers.ActionClickEventHandler;
 
 /**
- * FIXME
+ * Is a wrapper of {@link ActionItem} which represents an immutable action, after the toast closure.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -34,7 +34,9 @@ public final class ToastItemAction {
 	private final ImmutableFont font;
 
 	/**
-	 * FIXME
+	 * Wraps of {@link ActionItem} which represents an immutable action, after the toast closure.
+	 * 
+	 * @param source user action to be wrap
 	 */
 	ToastItemAction(ActionItem source) {
 		this.delegated = new ActionItem(source);
@@ -42,27 +44,27 @@ public final class ToastItemAction {
 	}
 
 	/**
-	 * FIXME
+	 * Returns the action unique id.
 	 * 
-	 * @return
+	 * @return the action unique id
 	 */
 	public Key getId() {
 		return delegated.getId();
 	}
 
 	/**
-	 * FIXME
+	 * Returns the content to show in the toast.
 	 * 
-	 * @return
+	 * @return the content to show in the toast
 	 */
 	public String getContent() {
 		return delegated.getContent();
 	}
 
 	/**
-	 * FIXME
+	 * Returns the action click event handler instance.
 	 * 
-	 * @return
+	 * @return the action click event handler instance
 	 */
 	public ActionClickEventHandler getClickEventHandler() {
 		return delegated.getClickEventHandler();

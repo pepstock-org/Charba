@@ -28,7 +28,7 @@ import org.pepstock.charba.client.utils.toast.handlers.ActionClickEventHandler;
 import jsinterop.annotations.JsFunction;
 
 /**
- * FIXME
+ * Defines user action to show on a toast in order to enable the user to act with the toast.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -110,14 +110,17 @@ public final class ActionItem extends Action {
 	private final ActionClickEventHandler clickEventHandler;
 
 	/**
-	 * FIXME
+	 * Creates the action with the content to show on the toast and the handler to invoke when the user will click on the action.
+	 * 
+	 * @param content content to show on the toast
+	 * @param handler the handler to use when a click was performed on the toast
 	 */
 	public ActionItem(String content, ActionClickEventHandler handler) {
 		super(null, null, Toaster.get().getDefaults().getAction(), null);
 		// checks arguments
 		this.content = Checker.checkAndGetIfValid(content, "Action content ");
 		this.clickEventHandler = Checker.checkAndGetIfValid(handler, "Action click event handler ");
-		// creates id
+		// creates unique id
 		this.id = Key.create(PREFIX_ID + COUNTER.getAndIncrement());
 		// stores values
 		setValue(CommonProperty.ID, this.id);
@@ -140,39 +143,41 @@ public final class ActionItem extends Action {
 	}
 
 	/**
-	 * FIXME
+	 * Creates the action cloning the action reference passed as argument.
 	 * 
-	 * @param source
+	 * @param source source to clone
 	 */
 	ActionItem(ActionItem source) {
+		// clones the native object
 		super(null, null, Toaster.get().getDefaults().getAction(), NativeToasting.clone(source.getNativeObject()));
+		// stores the properties from the source
 		this.id = source.getId();
 		this.content = source.getContent();
 		this.clickEventHandler = source.getClickEventHandler();
 	}
 
 	/**
-	 * FIXME
+	 * Returns the action unique id.
 	 * 
-	 * @return
+	 * @return the action unique id
 	 */
 	public Key getId() {
 		return id;
 	}
 
 	/**
-	 * FIXME
+	 * Returns the content to show in the toast.
 	 * 
-	 * @return
+	 * @return the content to show in the toast
 	 */
 	public String getContent() {
 		return content;
 	}
 
 	/**
-	 * FIXME
+	 * Returns the action click event handler instance.
 	 * 
-	 * @return
+	 * @return the action click event handler instance
 	 */
 	public ActionClickEventHandler getClickEventHandler() {
 		return clickEventHandler;

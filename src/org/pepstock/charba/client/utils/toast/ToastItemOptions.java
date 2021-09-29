@@ -134,9 +134,9 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 	}
 
 	/**
-	 * FIXME
+	 * Returns the actions to the toast.
 	 * 
-	 * @return
+	 * @return the actions to the toast.
 	 */
 	public List<ToastItemAction> getActions() {
 		return Collections.unmodifiableList(actions);
