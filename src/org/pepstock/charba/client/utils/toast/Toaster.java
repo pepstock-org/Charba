@@ -66,6 +66,8 @@ public final class Toaster {
 	private final DefaultToastOptions overrides;
 	// stores the current toast items
 	private final Map<Integer, ToastItem> currentOpenItems = new HashMap<>();
+	// stores the current toast contexts
+	private final Map<Integer, Map<String, Object>> currentContexts = new HashMap<>();
 	// historical cache of toast items
 	private final List<ToastItem> historyItems = new LinkedList<>();
 	// max amount of history items
@@ -127,6 +129,10 @@ public final class Toaster {
 		return overrides;
 	}
 
+	// ---------------------------------
+	// SHOW toast without CONTEXT
+	// ---------------------------------
+
 	/**
 	 * Creates and shows a toast configured by the passed options.
 	 * 
@@ -177,7 +183,7 @@ public final class Toaster {
 	 * @return the status if the toast has been shown
 	 */
 	public Status show(ToastOptions options, String... label) {
-		return show(options, null, ArrayString.fromOrNull(label), null);
+		return show(options, null, ArrayString.fromOrNull(label), null, null);
 	}
 
 	/**
@@ -246,7 +252,7 @@ public final class Toaster {
 	 * @return the status if the toast has been shown
 	 */
 	public Status show(ToastOptions options, String title, String label) {
-		return show(options, title, ArrayString.fromOrNull(label), null);
+		return show(options, title, ArrayString.fromOrNull(label), null, null);
 	}
 
 	/**
@@ -258,8 +264,162 @@ public final class Toaster {
 	 * @return the status if the toast has been shown
 	 */
 	public Status show(ToastOptions options, String title, List<String> label) {
-		return show(options, title, ArrayString.fromOrNull(label), null);
+		return show(options, title, ArrayString.fromOrNull(label), null, null);
 	}
+
+	// ---------------------------------
+	// SHOW toast with CONTEXT
+	// ---------------------------------
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param context context of toast execution
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, String... label) {
+		return show(context, (ToastOptions) null, label);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param context context of toast execution
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, List<String> label) {
+		return show(context, (ToastOptions) null, label);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param context context of toast execution
+	 * @param type type of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, IsToastType type, String... label) {
+		return show(context, ToastOptionsBuilder.create(type).build(), label);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param context context of toast execution
+	 * @param type type of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, IsToastType type, List<String> label) {
+		return show(context, type, null, label);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param context context of toast execution
+	 * @param options configuration of the toast to show
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, ToastOptions options, String... label) {
+		return show(options, null, ArrayString.fromOrNull(label), null, context);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param context context of toast execution
+	 * @param options configuration of the toast to show
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, ToastOptions options, List<String> label) {
+		return show(context, options, null, label);
+	}
+
+	/**
+	 * Creates and shows a toast with title and label.
+	 * 
+	 * @param context context of toast execution
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, String title, String label) {
+		return show(context, (ToastOptions) null, title, label);
+	}
+
+	/**
+	 * Creates and shows a toast with title and label.
+	 * 
+	 * @param context context of toast execution
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, String title, List<String> label) {
+		return show(context, (ToastOptions) null, title, label);
+	}
+
+	/**
+	 * Creates and shows a toast with title and label.
+	 * 
+	 * @param context context of toast execution
+	 * @param type type of the toast
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, IsToastType type, String title, String label) {
+		return show(context, ToastOptionsBuilder.create(type).build(), title, label);
+	}
+
+	/**
+	 * Creates and shows a toast with title and label.
+	 * 
+	 * @param context context of toast execution
+	 * @param type type of the toast
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, IsToastType type, String title, List<String> label) {
+		return show(context, ToastOptionsBuilder.create(type).build(), title, label);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param context context of toast execution
+	 * @param options configuration of the toast to show
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, ToastOptions options, String title, String label) {
+		return show(options, title, ArrayString.fromOrNull(label), null, context);
+	}
+
+	/**
+	 * Creates and shows a toast configured by the passed options.
+	 * 
+	 * @param context context of toast execution
+	 * @param options configuration of the toast to show
+	 * @param title title of the toast
+	 * @param label label of the toast
+	 * @return the status if the toast has been shown
+	 */
+	public Status show(Map<String, Object> context, ToastOptions options, String title, List<String> label) {
+		return show(options, title, ArrayString.fromOrNull(label), null, context);
+	}
+
+	// ---------------------------------
+	// INTERNAL SHOW toast
+	// ---------------------------------
 
 	/**
 	 * Creates and shows a toast configured by the passed options.
@@ -268,18 +428,28 @@ public final class Toaster {
 	 * @param title title of the toast
 	 * @param label label of the toast
 	 * @param dateTime date time object to maintain when a toast item is showing from the queue
+	 * @param context context of toast execution
 	 * @return the status if the toast has been shown
 	 */
-	private Status show(ToastOptions options, String title, ArrayString label, NativeObject dateTime) {
+	private Status show(ToastOptions options, String title, ArrayString label, NativeObject dateTime, Map<String, Object> context) {
+		// checks and normalized the context
+		final Map<String, Object> normalizedContext = context == null ? new HashMap<>() : context;
 		// checks if the toast can be show
 		// because a maximum amount of toast is not reached
 		if (NativeToasting.getCurrentOpenItems() < maxOpenItems) {
+			// gets id
+			int id = counter.getAndIncrement();
+			// stores context
+			// it's storing here because it's needed for open handler
+			// where toast item is not available
+			currentContexts.put(id, normalizedContext);
 			// shows the toast
-			NativeObject result = NativeToasting.create(counter.getAndIncrement(), title, label, options != null ? options.nativeObject() : null, dateTime);
+			NativeObject result = NativeToasting.create(id, title, label, options != null ? options.nativeObject() : null, dateTime);
 			// creates toast item
-			ToastItem item = new ToastItem(result, options);
+			ToastItem item = new ToastItem(result, options, normalizedContext);
 			// stores in the current item
 			currentOpenItems.put(item.getId(), item);
+			// stores context
 			// stores history
 			storeHistory(item);
 			// returns the status
@@ -287,7 +457,7 @@ public final class Toaster {
 		}
 		// if here
 		// maximum amount of toast items was reacher
-		return manageQueue(options, title, label);
+		return manageQueue(options, title, label, normalizedContext);
 	}
 
 	/**
@@ -371,11 +541,12 @@ public final class Toaster {
 	 * @param options configuration of the toast to show
 	 * @param title title of the toast
 	 * @param label label of the toast
+	 * @param context context of toast execution
 	 * @return the status if the toast has been shown
 	 */
-	private Status manageQueue(ToastOptions options, String title, ArrayString label) {
+	private Status manageQueue(ToastOptions options, String title, ArrayString label, Map<String, Object> context) {
 		// creates toast item
-		ToastItem item = new ToastItem(options);
+		ToastItem item = new ToastItem(options, context);
 		// stores title and label
 		item.setTitle(title);
 		item.setLabel(label);
@@ -428,7 +599,7 @@ public final class Toaster {
 			// shows item
 			// PAY attention: it must pass also the date time object
 			// to maintain the previous time
-			show(queuedItem.getOptions().getDelegated(), queuedItem.getTitle(), ArrayString.fromOrNull(queuedItem.getLabel()), queuedItem.getDateTime());
+			show(queuedItem.getOptions().getDelegated(), queuedItem.getTitle(), ArrayString.fromOrNull(queuedItem.getLabel()), queuedItem.getDateTime(), queuedItem.getContext());
 		}
 	}
 
@@ -462,6 +633,8 @@ public final class Toaster {
 		int id = JsHelper.get().getIntegerProperty(ToastItem.CommonProperty.ID, object);
 		// removes from open items
 		currentOpenItems.remove(id);
+		// removes from context
+		currentContexts.remove(id);
 		// checks the queue
 		checkAndCleanQueue();
 	}
@@ -476,4 +649,13 @@ public final class Toaster {
 		return currentOpenItems.get(id);
 	}
 
+	/**
+	 * Returns the toast context, currently open, by its id, or <code>null</code> if not in the map of contexts.
+	 * 
+	 * @param id the id of toast item
+	 * @return the toast context, currently open, by its id, or <code>null</code> if not in the map of contexts
+	 */
+	Map<String, Object> getCurrentContext(int id) {
+		return currentContexts.get(id);
+	}
 }

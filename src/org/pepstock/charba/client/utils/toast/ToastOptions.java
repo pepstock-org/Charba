@@ -25,6 +25,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.utils.toast.ToastItem.CommonProperty;
 import org.pepstock.charba.client.utils.toast.handlers.ClickEventHandler;
 import org.pepstock.charba.client.utils.toast.handlers.CloseHandler;
 import org.pepstock.charba.client.utils.toast.handlers.OpenHandler;
@@ -55,10 +56,10 @@ public final class ToastOptions extends AbstractToastOptions {
 		/**
 		 * Method of function to be called when an event is emitted on the toast item.
 		 * 
-		 * @param item toast item affected by event
+		 * @param itemId toast item id affected by event
 		 * @param event event fired on item
 		 */
-		void call(NativeObject item, BaseNativeEvent event);
+		void call(int itemId, BaseNativeEvent event);
 	}
 
 	/**
@@ -166,13 +167,16 @@ public final class ToastOptions extends AbstractToastOptions {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.clickEventCallbackProxy.setCallback((item, event) -> {
+		this.clickEventCallbackProxy.setCallback((itemId, event) -> {
+			// gets the toast item
+			ToastItem item = Toaster.get().getCurrentOpenItem(itemId);
 			// gets handler
 			ClickEventHandler handler = getClickEventHandler();
 			// checks if handler is consistent
-			if (handler != null) {
+			// checks if item is consistent
+			if (handler != null && item != null) {
 				// invokes handler
-				handler.onClick(new ToastItem(item, this), event);
+				handler.onClick(item, event);
 			}
 		});
 		// sets function to proxy callback in order to invoke the java interface
@@ -181,23 +185,29 @@ public final class ToastOptions extends AbstractToastOptions {
 			OpenHandler handler = getOpenHandler();
 			// checks if handler is consistent
 			if (handler != null) {
+				// gets id from item
+				int itemId = JsHelper.get().getIntegerProperty(CommonProperty.ID, item);
 				// invokes handler
-				handler.onOpen(new ToastItem(item, this));
+				handler.onOpen(new ToastItem(item, this, Toaster.get().getCurrentContext(itemId)));
 			}
 		});
 		// sets function to proxy callback in order to invoke the java interface
 		this.closeCallbackProxy.setCallback(item -> {
+			// gets id from item
+			int itemId = JsHelper.get().getIntegerProperty(CommonProperty.ID, item);
+			// gets the toast item
+			ToastItem toastItem = Toaster.get().getCurrentOpenItem(itemId);
 			// gets handler
 			CloseHandler handler = getCloseHandler();
 			// checks if handler is consistent
-			if (handler != null) {
+			if (handler != null && toastItem != null) {
 				// gets the action id if the toast has been closed
 				// by an action
 				String actionId = JsHelper.get().getStringProperty(Property.ACTION_ID, item);
 				// creates reference to action item
 				ActionItem actionItem = getActionItem(actionId);
 				// invokes handler
-				handler.onClose(new ToastItem(item, this), actionItem);
+				handler.onClose(toastItem, actionItem);
 			}
 		});
 	}

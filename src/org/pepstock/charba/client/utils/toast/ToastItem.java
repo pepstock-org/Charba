@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
@@ -106,14 +108,17 @@ public final class ToastItem extends NativeObjectContainer {
 	private final DateTime dateTime;
 	// toast options instance
 	private final ToastItemOptions options;
+	// context of toast execution
+	private final Map<String, Object> context;
 
 	/**
 	 * Creates the configuration with new native object instance to be wrapped.
 	 * 
 	 * @param options toast options
+	 * @param context context of toast execution
 	 */
-	ToastItem(ToastOptions options) {
-		this(null, options);
+	ToastItem(ToastOptions options, Map<String, Object> context) {
+		this(null, options, context);
 	}
 
 	/**
@@ -121,13 +126,16 @@ public final class ToastItem extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 * @param options toast options
+	 * @param context context of toast execution
 	 */
-	ToastItem(NativeObject nativeObject, ToastOptions options) {
+	ToastItem(NativeObject nativeObject, ToastOptions options, Map<String, Object> context) {
 		super(nativeObject);
 		// stores options, cloning it
 		this.options = new ToastItemOptions(options);
 		// gets date time
 		this.dateTime = new DateTime(getValue(Property.DATE_TIME));
+		// stores context
+		this.context = context != null ? Collections.unmodifiableMap(context) : Collections.emptyMap();
 		// checks if it must be added
 		if (!has(Property.DATE_TIME)) {
 			// stores date time
@@ -142,6 +150,15 @@ public final class ToastItem extends NativeObjectContainer {
 	 */
 	public int getId() {
 		return getValue(CommonProperty.ID, Undefined.INTEGER);
+	}
+
+	/**
+	 * Returns the unmodifiable toast context.
+	 * 
+	 * @return the unmodifiable toast context.
+	 */
+	public Map<String, Object> getContext() {
+		return context;
 	}
 
 	/**

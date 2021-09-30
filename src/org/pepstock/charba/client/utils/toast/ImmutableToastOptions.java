@@ -15,9 +15,14 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.dom.enums.BorderStyle;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.Undefined;
@@ -186,6 +191,8 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 
 		private static final String TRANSPARENT = HtmlColor.TRANSPARENT.toRGBA();
 
+		private static final List<BorderStyle> STYLES = Collections.unmodifiableList(Arrays.asList(BorderStyle.NONE));
+
 		private final DefaultLabelValues label;
 
 		/**
@@ -245,6 +252,16 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 		@Override
 		public int getBorderRadius() {
 			return 0;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultAction#getBorderStyle()
+		 */
+		@Override
+		public List<BorderStyle> getBorderStyle() {
+			return STYLES;
 		}
 
 	}

@@ -62,6 +62,12 @@ CharbaToast = {
       }
       // manages options 
       const options = Object.assign({}, CharbaToast.defaults, CharbaToast.overrides, pOptions || {});
+      // manages title options 
+      options.title = Object.assign({}, CharbaToast.defaults.title, CharbaToast.overrides.title, options.title);
+      // manages label options 
+      options.label = Object.assign({}, CharbaToast.defaults.label, CharbaToast.overrides.label, options.label);
+      // manages action options 
+      options.action = Object.assign({}, CharbaToast.defaults.action, CharbaToast.overrides.action, options.action);
       // -------------------------------
       // creates the element for toasting
       // -------------------------------
@@ -172,13 +178,9 @@ CharbaToast = {
                itemElement.style.borderColor = actionOption.borderColor;
             }
             // action border width
-            const borderWidth = Math.max(actionOption.borderWidth, 0);
-            // if border width consistent, apply border
-            if (borderWidth > 0) {
-              itemElement.style.borderWidth = borderWidth + 'px';
-              // action border style
-              itemElement.style.borderStyle = 'solid';
-            }
+            itemElement.style.borderWidth = Math.max(actionOption.borderWidth, 0) + 'px';
+            // action border style
+            itemElement.style.borderStyle = actionOption.borderStyle.join(' ');
             // action border radius
             itemElement.style.borderRadius = Math.max(actionOption.borderRadius, 0) + 'px';
             // action color
@@ -234,7 +236,14 @@ CharbaToast = {
       // Custom CLICK EVENT callback
       // -------------------------------
       if (typeof options.onClick === 'function') {
-        toasting.addEventListener('click', (event) => options.onClick.apply(this, [result, event]));
+        toasting.addEventListener('click', (event) => {
+          // checks if the click is coming from an action
+          if (event.target.className === 'ct-action') {
+            return;
+          }
+          // invokes the custom handler
+          options.onClick.apply(this, [pId, event])
+        });
       }
       // -------------------------------
       // HIDING / AUTO HIDE
@@ -397,6 +406,7 @@ CharbaToast = {
       backgroundColor: undefined,
       borderColor: undefined,
       borderWidth: 0,
+      borderStyle: ['none'],
       borderRadius: 0, 
       color: undefined,
       font: undefined

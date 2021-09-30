@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.enums.BorderStyle;
 import org.pepstock.charba.client.utils.toast.enums.Align;
 import org.pepstock.charba.client.utils.toast.handlers.ClickEventHandler;
 import org.pepstock.charba.client.utils.toast.handlers.CloseHandler;
@@ -364,6 +365,16 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 		@Override
 		public int getBorderRadius() {
 			return elementDelegated.getBorderRadius();
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.utils.toast.IsDefaultAction#getBorderStyle()
+		 */
+		@Override
+		public List<BorderStyle> getBorderStyle() {
+			return elementDelegated.getBorderStyle();
 		}
 
 	}

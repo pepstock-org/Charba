@@ -15,6 +15,10 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
+import java.util.List;
+
+import org.pepstock.charba.client.dom.enums.BorderStyle;
+
 /**
  * Interface to define toast action object defaults.
  * 
@@ -49,5 +53,12 @@ public interface IsDefaultAction extends IsDefaultContentElement {
 	 * @return the border radius (in pixels).
 	 */
 	int getBorderRadius();
+
+	/**
+	 * Returns the border styles set for the action element.
+	 * 
+	 * @return the border styles set for the action element
+	 */
+	List<BorderStyle> getBorderStyle();
 
 }
