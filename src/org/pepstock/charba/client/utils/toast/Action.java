@@ -15,12 +15,8 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
-import java.util.List;
-
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -199,77 +195,21 @@ public class Action extends AbstractContentElement implements IsDefaultAction {
 	}
 
 	/**
-	 * Sets the border styles set for the action element.<br>
-	 * This property can have from one to four values.<br>
-	 * Examples:<br>
-	 * <ul>
-	 * <li><b>setBorderStyle(BorderStyle.DOTTED, BorderStyle.SOLID, BorderStyle.DOUBLE, BorderStyle.DASHED);</b><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>top border is dotted</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>right border is solid</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>bottom border is double</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>left border is dashed</code><br>
-	 * <li><b>setBorderStyle(BorderStyle.DOTTED, BorderStyle.SOLID, BorderStyle.DOUBLE);</b><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>top border is dotted</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>right and left borders are solid</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>bottom border is double</code><br>
-	 * <li><b>setBorderStyle(BorderStyle.DOTTED, BorderStyle.SOLID);</b><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>top and bottom borders are dotted</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>right and left borders are solid</code><br>
-	 * <li><b>setBorderStyle(BorderStyle.DOTTED);</b><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>all four borders are dotted</code><br>
-	 * </ul>
+	 * Sets the border style for the action element.
 	 * 
-	 * @param style the border styles set for the action element.<br>
-	 *            This property can have from one to four values.
+	 * @param style the border style for the action element.
 	 */
-	public final void setBorderStyle(BorderStyle... style) {
-		setArrayValue(Property.BORDER_STYLE, ArrayString.fromOrEmpty(style));
+	public final void setBorderStyle(BorderStyle style) {
+		setValue(Property.BORDER_STYLE, style);
 	}
 
 	/**
-	 * Sets the border styles set for the action element.<br>
-	 * This property can have from one to four values.<br>
-	 * Examples:<br>
-	 * <ul>
-	 * <li><b>setBorderStyle(Arrays.asList(BorderStyle.DOTTED, BorderStyle.SOLID, BorderStyle.DOUBLE, BorderStyle.DASHED));</b><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>top border is dotted</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>right border is solid</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>bottom border is double</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>left border is dashed</code><br>
-	 * <li><b>setBorderStyle(Arrays.asList(BorderStyle.DOTTED, BorderStyle.SOLID, BorderStyle.DOUBLE));</b><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>top border is dotted</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>right and left borders are solid</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>bottom border is double</code><br>
-	 * <li><b>setBorderStyle(Arrays.asList(BorderStyle.DOTTED, BorderStyle.SOLID));</b><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>top and bottom borders are dotted</code><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>right and left borders are solid</code><br>
-	 * <li><b>setBorderStyle(Arrays.asList(BorderStyle.DOTTED));</b><br>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>all four borders are dotted</code><br>
-	 * </ul>
+	 * Returns the border style for the action element.
 	 * 
-	 * @param style the border styles set for the action element.<br>
-	 *            This property can have from one to four values.
-	 */
-	public final void setBorderStyle(List<BorderStyle> style) {
-		// checks if argument is consistent
-		if (style != null) {
-			// stores the array
-			setBorderStyle(style.toArray(new BorderStyle[0]));
-		} else {
-			// if here, the argument is null
-			// then removes the property
-			remove(Property.BORDER_STYLE);
-		}
-	}
-
-	/**
-	 * Returns the border styles set for the action element.
-	 * 
-	 * @return the border styles set for the action element
+	 * @return the border style for the action element
 	 */
 	@Override
-	public final List<BorderStyle> getBorderStyle() {
-		ArrayString array = getValueOrArray(Property.BORDER_STYLE, BorderStyle.NONE);
-		return ArrayListHelper.list(BorderStyle.values(), array);
+	public final BorderStyle getBorderStyle() {
+		return getValue(Property.BORDER_COLOR, BorderStyle.values(), defaultValues.getBorderStyle());
 	}
 }

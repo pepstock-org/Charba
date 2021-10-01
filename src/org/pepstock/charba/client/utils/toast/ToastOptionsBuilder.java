@@ -15,12 +15,17 @@
 * @return builder instance */
 package org.pepstock.charba.client.utils.toast;
 
+import java.util.List;
+
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractBaseBuilder;
 import org.pepstock.charba.client.commons.IsBuilder;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.enums.BorderStyle;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.enums.Weight;
+import org.pepstock.charba.client.utils.toast.enums.Align;
 import org.pepstock.charba.client.utils.toast.handlers.ClickEventHandler;
 import org.pepstock.charba.client.utils.toast.handlers.CloseHandler;
 import org.pepstock.charba.client.utils.toast.handlers.OpenHandler;
@@ -42,6 +47,10 @@ public final class ToastOptionsBuilder extends AbstractBaseBuilder {
 	private ToastOptionsBuilder() {
 		this.options = new ToastOptions();
 	}
+
+	// --------------------
+	// CREATE and BUILD
+	// --------------------
 
 	/**
 	 * Returns new builder instance.
@@ -77,6 +86,10 @@ public final class ToastOptionsBuilder extends AbstractBaseBuilder {
 		// returns options
 		return options;
 	}
+
+	// --------------------
+	// TITLE
+	// --------------------
 
 	/**
 	 * Sets the font color of title.
@@ -166,6 +179,10 @@ public final class ToastOptionsBuilder extends AbstractBaseBuilder {
 		return IsBuilder.checkAndGetIfValid(this);
 	}
 
+	// --------------------
+	// LABEL
+	// --------------------
+
 	/**
 	 * Sets the font color of label.
 	 * 
@@ -254,6 +271,179 @@ public final class ToastOptionsBuilder extends AbstractBaseBuilder {
 		return IsBuilder.checkAndGetIfValid(this);
 	}
 
+	// --------------------
+	// ACTION
+	// --------------------
+
+	/**
+	 * Sets the font color of action.
+	 * 
+	 * @param color font color of action
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionColor(IsColor color) {
+		options.getAction().setColor(color);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the font color of action.
+	 * 
+	 * @param color font color of action
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionColor(String color) {
+		options.getAction().setColor(color);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the font size of action.
+	 * 
+	 * @param size the font size of action.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionFontSize(int size) {
+		options.getAction().getFont().setSize(size);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit) of action.
+	 * 
+	 * @param style Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit) of action.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionFontStyle(FontStyle style) {
+		options.getAction().getFont().setStyle(style);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the font family, follows CSS font-family options of action.
+	 * 
+	 * @param family Font family, follows CSS font-family options of action.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionFontFamily(String family) {
+		options.getAction().getFont().setFamily(family);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the font weight, follows CSS font-style-weight options of action.
+	 * 
+	 * @param weight font weight, follows CSS font-style-weight options of action.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionFontWeight(Weight weight) {
+		options.getAction().getFont().setWeight(weight);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the line height of action.
+	 * 
+	 * @param lineHeight the line height of action.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionFontLineHeight(double lineHeight) {
+		options.getAction().getFont().setLineHeight(lineHeight);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the line height of action.
+	 * 
+	 * @param lineHeight the line height of action.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionFontLineHeight(String lineHeight) {
+		options.getAction().getFont().setLineHeight(lineHeight);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the background color of action.
+	 * 
+	 * @param backgroundColor the background color of action.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionBackgroundColor(IsColor backgroundColor) {
+		options.getAction().setBackgroundColor(backgroundColor);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the background color of action.
+	 * 
+	 * @param backgroundColor the background color of action.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionBackgroundColor(String backgroundColor) {
+		options.getAction().setBackgroundColor(backgroundColor);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the border width of action.
+	 * 
+	 * @param borderWidth the border width of action.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionBorderWidth(int borderWidth) {
+		options.getAction().setBorderWidth(borderWidth);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the border color of action.
+	 * 
+	 * @param borderColor the border color of action.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionBorderColor(IsColor borderColor) {
+		options.getAction().setBorderColor(borderColor);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the border color of action.
+	 * 
+	 * @param borderColor the border color of action.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionBorderColor(String borderColor) {
+		options.getAction().setBorderColor(borderColor);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the border radius (in pixels) of toast action.
+	 * 
+	 * @param borderRadius the border radius (in pixels) of toast action
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionBorderRadius(int borderRadius) {
+		options.getAction().setBorderRadius(borderRadius);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the border style set for the action element.
+	 * 
+	 * @param style the border styles set for the action element.
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActionBorderStyle(BorderStyle style) {
+		options.getAction().setBorderStyle(style);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	// --------------------
+	// BASE OPTIONS
+	// --------------------
+
 	/**
 	 * Sets the type of the toast.
 	 * 
@@ -330,6 +520,76 @@ public final class ToastOptionsBuilder extends AbstractBaseBuilder {
 		options.setBorderRadius(borderRadius);
 		return IsBuilder.checkAndGetIfValid(this);
 	}
+
+	/**
+	 * Sets the actions to the toast.
+	 * 
+	 * @param actions the actions to the toast
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActions(ActionItem... actions) {
+		options.setActions(actions);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the actions to the toast.
+	 * 
+	 * @param actions the actions to the toast
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setActions(List<ActionItem> actions) {
+		options.setActions(actions);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the height (in pixels) of the toast progress bar.
+	 * 
+	 * @param height the height (in pixels) of the toast progress bar
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setProgressBarHeight(int height) {
+		options.setProgressBarHeight(height);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets <code>true</code> whether to hide the shadow of toast.
+	 * 
+	 * @param hide <code>true</code> whether the shadow of toast
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setHideShadow(boolean hide) {
+		options.setHideShadow(hide);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the modifier key to close the toast by clicking on it.
+	 * 
+	 * @param modifierKey the modifier key to close the toast by clicking on it
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setModifierKey(ModifierKey modifierKey) {
+		options.setModifierKey(modifierKey);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the alignment of the toast action.
+	 * 
+	 * @param align the alignment of the toast action
+	 * @return toast options builder instance
+	 */
+	public ToastOptionsBuilder setAlign(Align align) {
+		options.setAlign(align);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	// --------------------
+	// HANDLERS
+	// --------------------
 
 	/**
 	 * Sets the CLICK event hander.

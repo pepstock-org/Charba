@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
-import java.util.List;
-
 import org.pepstock.charba.client.dom.enums.BorderStyle;
 
 /**
@@ -59,6 +57,6 @@ public interface IsDefaultAction extends IsDefaultContentElement {
 	 * 
 	 * @return the border styles set for the action element
 	 */
-	List<BorderStyle> getBorderStyle();
+	BorderStyle getBorderStyle();
 
 }

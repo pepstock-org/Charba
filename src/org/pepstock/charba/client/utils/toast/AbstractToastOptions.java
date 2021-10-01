@@ -164,7 +164,7 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 	 * 
 	 * @param borderRadius the border radius (in pixels) of toast container
 	 */
-	public void setBorderRadius(int borderRadius) {
+	public final void setBorderRadius(int borderRadius) {
 		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(borderRadius));
 	}
 
@@ -173,7 +173,7 @@ abstract class AbstractToastOptions extends AbstractReadOnlyToastOptions {
 	 * 
 	 * @param modifierKey the modifier key to close the toast by clicking on it
 	 */
-	public void setModifierKey(ModifierKey modifierKey) {
+	public final void setModifierKey(ModifierKey modifierKey) {
 		setValue(Property.MODIFIER_KEY, modifierKey);
 	}
 

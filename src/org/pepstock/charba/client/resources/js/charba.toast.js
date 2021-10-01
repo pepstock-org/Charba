@@ -1,4 +1,4 @@
-/**
+/*
   Copyright 2021 Andrea "Stock" Stocchero
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +19,10 @@
 // sets default create function in case
 // toasting creation is attempted before dom has finished loading
 CharbaToast = {
+  /*
+   * Initializes the toast container HTML element.
+   * @return {undefined}
+   */
   init: function() {
     // -------------------------------
     // creates the element for toasting
@@ -27,7 +31,7 @@ CharbaToast = {
     const container = document.createElement('div');
     container.id = 'ct-container';
     document.body.appendChild(container);
-    /**
+    /*
      * Replaces "create" method when DOM has finished loading.
      * Creates and show the toast.
      *
@@ -38,7 +42,6 @@ CharbaToast = {
      * @param {Object} pDateTime date time of toast item when queued and re-shown
      * @return {Object} object which represent the toast
      */
-    // 
     CharbaToast.create = function (pId, pTitle, pLabel, pOptions, pDateTime) {
       // creates result
       const result = {
@@ -180,7 +183,9 @@ CharbaToast = {
             // action border width
             itemElement.style.borderWidth = Math.max(actionOption.borderWidth, 0) + 'px';
             // action border style
-            itemElement.style.borderStyle = actionOption.borderStyle.join(' ');
+            if (typeof actionOption.borderStyle === 'string') {
+               itemElement.style.borderStyle = actionOption.borderStyle;
+            }
             // action border radius
             itemElement.style.borderRadius = Math.max(actionOption.borderRadius, 0) + 'px';
             // action color
@@ -256,6 +261,7 @@ CharbaToast = {
         toasting.addEventListener('animationend', removeToast, false);
         return null;
       };
+      // auto hide check
       if (options.autoHide) {
         toasting.timeoutId = setTimeout(toasting.hide, options.timeout + 200);
       }
@@ -321,15 +327,32 @@ CharbaToast = {
       return result;
     }
   },
+  /*
+   * Default creates and show method. If invoked, the CharbaToast is not initilized yet,
+   * then throw an exception.
+   */
   create: function () {
     console.error(['DOM has not finished loading.', '\tInvoke create method when DOM\s readyState is complete'].join('\n'));
   },
+  /*
+   * @type {Object} contains some helper functions and constants to manage font  
+   */
   helper: {
-    lineHeightRegExp: new RegExp(/^(normal|(\d+(?:\.\d+)?)(px|em|%)?)$/),
-    fontStyleRegExp: new RegExp(/^(normal|italic|initial|inherit|unset|(oblique( -?[0-9]?[0-9]deg)?))$/), 
-    /**
-     * ToLineHeight
+    /*
+     * @type {RegExp} contains regular expression to parse the lineHeight option
      */
+    lineHeightRegExp: new RegExp(/^(normal|(\d+(?:\.\d+)?)(px|em|%)?)$/),
+    /*
+     * @type {RegExp} contains regular expression to parse the fontStyle option
+     */
+    fontStyleRegExp: new RegExp(/^(normal|italic|initial|inherit|unset|(oblique( -?[0-9]?[0-9]deg)?))$/), 
+    /*
+     * Creates the normalized lineHeight property for a font.
+     *
+     * @param {number} value value of lineHeight option
+     * @param {number} size value fo fontSize option
+     * @return {number} the normalized lineHeight property for a font
+     */ 
     toLineHeight: function(value, size) {
       const matches = ('' + value).match(CharbaToast.helper.lineHeightRegExp);
       if (!matches || matches[1] === 'normal') {
@@ -347,18 +370,24 @@ CharbaToast = {
       }
       return size * value;
     },
-    /**
-     * ToFont
-     */
+    /*
+     * Creates the normalized font object, adding 'string' option to use for CSS setting.
+     *
+     * @param {Object} options font options defined in whatever configuration
+     * @return {Object} the normalized font object
+     */ 
     toFont: function(options) {
+      // manages size
       let size = options.size;
       if (typeof size === 'string') {
         size = parseInt(size, 10);
       }
+      // manages style
       let style = options.style;
       if (style && !('' + style).match(CharbaToast.helper.fontStyleRegExp)) {
         style = '';
       }
+      // creates result object normalizing data
       const font = {
         family: options.family,
         lineHeight: CharbaToast.helper.toLineHeight.apply(this, [options.lineHeight, size]),
@@ -375,9 +404,34 @@ CharbaToast = {
       return font;
     }
   },
+  /*
+   * Deep cloning an object
+   *
+   * @param {Object} source object to clone
+   * @return {Object} the cloned object
+   */ 
   clone: function(source) {
-    return Object.assign({}, source || {});
+    // clones array
+    if (Array.isArray(source)) {
+      return source.map(CharbaToast.clone);
+    }
+    // clones object by all its keys
+    if (typeof source === 'object') {
+      const target = {};
+      const keys = Object.keys(source);
+      const klen = keys.length;
+      let k = 0;
+      for (; k < klen; ++k) {
+        target[keys[k]] = CharbaToast.clone(source[keys[k]]);
+      }
+      return target;
+    }
+    // all other object types
+    return source;  
   },
+  /*
+   * @type {Object} contains the immutable defaults
+   */
   defaults: {
     align: undefined,
     actions: [],
@@ -406,7 +460,7 @@ CharbaToast = {
       backgroundColor: undefined,
       borderColor: undefined,
       borderWidth: 0,
-      borderStyle: ['none'],
+      borderStyle: 'none',
       borderRadius: 0, 
       color: undefined,
       font: undefined
@@ -428,9 +482,18 @@ CharbaToast = {
       weight: 'normal',
     }
   },
+  /*
+   * @type {Object} contains the defaults, updatable by user
+   */
   overrides: {},
+  /*
+   * @type {Function} contains the internal close handler instance, needed to cleanup internal structures
+   */
   onClose: undefined, // internal use only
-  currentOpenItems : 0
+  /*
+   * @type {number} contains the amount of the current open items
+   */
+  currentOpenItems : 0 // internal use only
 };
 // freeze defaults and helper
 Object.freeze(CharbaToast.defaults);

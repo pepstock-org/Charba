@@ -373,7 +373,7 @@ public final class ToastItemOptions implements IsDefaultToastOptions {
 		 * @see org.pepstock.charba.client.utils.toast.IsDefaultAction#getBorderStyle()
 		 */
 		@Override
-		public List<BorderStyle> getBorderStyle() {
+		public BorderStyle getBorderStyle() {
 			return elementDelegated.getBorderStyle();
 		}
 
