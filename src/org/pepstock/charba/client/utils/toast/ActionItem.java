@@ -226,4 +226,42 @@ public final class ActionItem extends Action {
 		return clickEventHandler;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// checks if object is equals
+		if (this == obj) {
+			return true;
+		}
+		// checks if passed argument is consistent
+		if (obj == null) {
+			return false;
+		}
+		// checks if they have the same class
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		// casts to action item
+		ActionItem other = (ActionItem) obj;
+		// checks if the ids are equals
+		return Key.equals(id, other.id);
+	}
+
 }

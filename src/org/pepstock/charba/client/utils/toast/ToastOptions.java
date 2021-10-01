@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.utils.toast;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -303,11 +302,17 @@ public final class ToastOptions extends AbstractToastOptions {
 		storedActions.clear();
 		// checks consistent of actions
 		if (actions != null && actions.length > 0) {
-			ArrayObject array = ArrayObject.fromOrEmpty(actions);
+			// checks if there is same instances
+			for (ActionItem action : actions) {
+				// checks if already added
+				if (!storedActions.contains(action)) {
+					// adds action
+					storedActions.add(action);
+				}
+			}
+			ArrayObject array = ArrayObject.fromOrEmpty(storedActions.toArray(new ActionItem[0]));
 			// stores array
 			setArrayValue(Property.ACTIONS, array);
-			// stores in the list
-			storedActions.addAll(Arrays.asList(actions));
 		} else {
 			// if here, the actions passed as argument
 			// are not consistent
