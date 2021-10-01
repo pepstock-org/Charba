@@ -140,7 +140,7 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.options.HasFont#getFont()
+		 * @see org.pepstock.charba.client.defaults.IsDefaultFontContainer#getFont()
 		 */
 		@Override
 		public IsDefaultFont getFont() {
@@ -169,7 +169,7 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.options.HasFont#getFont()
+		 * @see org.pepstock.charba.client.defaults.IsDefaultFontContainer#getFont()
 		 */
 		@Override
 		public IsDefaultFont getFont() {
@@ -203,7 +203,7 @@ final class ImmutableToastOptions extends AbstractReadOnlyToastOptions {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.options.HasFont#getFont()
+		 * @see org.pepstock.charba.client.defaults.IsDefaultFontContainer#getFont()
 		 */
 		@Override
 		public IsDefaultFont getFont() {
