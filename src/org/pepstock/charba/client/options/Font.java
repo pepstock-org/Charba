@@ -24,6 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Base object to map font options for configuration.
@@ -152,7 +153,18 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public void setWeight(Weight weight) {
-		setValueAndAddToParent(Property.WEIGHT, weight);
+		// checks if consistent
+		if (Key.isValid(weight)) {
+			// checks if a number must be stored
+			if (weight.isValueAsInt()) {
+				setValueAndAddToParent(Property.WEIGHT, weight.getValueAsInt());
+			} else {
+				setValueAndAddToParent(Property.WEIGHT, weight);
+			}
+		} else {
+			// if here the argument is not consistent
+			remove(Property.WEIGHT);
+		}
 	}
 
 	/**
@@ -162,6 +174,13 @@ public final class Font extends AbstractNode implements IsFont {
 	 */
 	@Override
 	public Weight getWeight() {
+		// checks if the value stored is a number
+		if (isType(Property.WEIGHT, ObjectType.NUMBER)) {
+			// extracts by number
+			return Weight.getByIntValue(getValue(Property.WEIGHT, Undefined.INTEGER), defaultValues.getWeight());
+		}
+		// if here, weight is defined as string or
+		// undefined
 		return getValue(Property.WEIGHT, Weight.values(), defaultValues.getWeight());
 	}
 
