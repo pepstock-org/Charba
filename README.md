@@ -243,9 +243,9 @@ Gallery
   </tr>  
   <tr>
     <td align="center">Area</td>
-	<td align="center">Treemap<b><sup>from new version 4.2</sup></b></td>
-	<td align="center">Matrix<b><sup>from new version 4.2</sup></b></td>
-	<td align="center">Sankey<b><sup>from new version 4.2</sup></b></td>
+	<td align="center">Treemap</td>
+	<td align="center">Matrix</td>
+	<td align="center">Sankey</td>
   </tr>
 </table>
 
@@ -284,58 +284,6 @@ At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/d
 
 In the project, it's also provided the [FindBugs](http://findbugs.sourceforge.net/) project to look for bugs.
 
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
-
-### Breaking changes
-
-  * change signature of `getEvents` method of `Options` (and `ConfigurationOptions`), `Legend`, `Tooltips` classes and all plugins instances, returning a `Set` of events instead of a `List`.
-  * change signature of `getElements` method of `ChartPointer` plugin, returning a `Set` of pointer elements instead of a `List`.
-  * change signature of `ClickCallback`, `DoubleClickCallback`, `EnterCallback` and `LeaveCallback` classes of `AnnotationPlugin`, adding new event argument in order to get also the event generated on the canvas.
-  * change signature of `ClickEventHandler`, `EnterEventHandler` and `LeaveEventHandler` classes of `DataLabelsPlugin`, adding new event argument in order to get also the event generated on the canvas.
-  * remove `toCSSFontProperty` methods from `Utilities` class. Use `Helpers.get().toFontString` instead.
-
-### Features
-
-  * import CHART.JS TREEMAP controller [version v1.0.2](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v1.0.2).
-    * enable tree map chart type.
-  * import CHART.JS MATRIX controller [version v1.1.0](https://github.com/kurkle/chartjs-chart-matrix/releases/tag/v1.1.0).
-    * enable matrix chart type.
-  * import CHART.JS SANKEY controller [version v0.8.0](https://github.com/kurkle/chartjs-chart-sankey/releases/tag/v0.8.0).
-    * enable sankey chart type.
-  * import CHART.JS [version v3.5.1](https://github.com/chartjs/Chart.js/releases/tag/v3.5.1).
-  * import CHART.JS GEO controller [version v3.5.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.5.1).
-  * import CHART.JS LUXON adapter [version v1.1.0](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v1.1.0).
-  * import LUXON library [version 2.0.2](https://github.com/moment/luxon/releases/tag/2.0.2).
-  * add toasting utility.
-  * add `click`, `enter` and `leave` subtitle events.
-  * add `subtitle` item to `PointElement` enumeration for `ChartPointer` plugin, in order to enable the changing cursor when a click event handler has been set on subtitle element.
-  * add `isPressed(event)` methods to `ModifierKey` enumeration in order to enable the capability to filter the events if the modifier keys are pressed.
-  * add `align` property, as a double representing the clockwise angle (in degree), to `DataLabels` options in order to define the label box alignment relative to anchor.
-  * add `getRelativePosition` method to `Helpers` class in order to get the relative position of an event on the chart.
-  * add `modifierKey` property to `DatasetsItemsSelector` options plugin in order to enable the selection only when a modifier key is pressed.
-  * enable programmatically selection on a chart by `DatasetsItemsSelector` plugin.
-
-### Fixed Bugs
-
- * [#58](https://github.com/pepstock-org/Charba/issues/58) removes usage of `.getClass().*` and `.class.*` methods to get metadata in order to use CHARBA also with `-XdisableClassMetadata` or `-XnoclassMetadata` GWT compiler options. Thanks @MartinSchwarzbauer.
-	
-### Developing
-
-  * [#65](https://github.com/pepstock-org/Charba/pull/65) changes OpenJDK distribution in GitHub Actions, using now `Zulu`. Thanks @carldea.
-  * change dependency for Google Closure Compiler, [version v20210808](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20210808).
-  * rename `parse` method of `JSON` class to `parseForObject`, to parse a string to a native object.
-  * add `parseForArray` method of `JSON` class to parse a string to an array.
-  * move `getStringProperty` and `getIntegerProperty` from `Id` class to `JsHelper` one.
-  * use `outerHTML` property to get HTML string of an element instead of `innerHTML` with a temporary parent or a cloned instance.
-  * reduce visibility of the classes of injectable resources provided out-of-the-box.
-  * use `Chart.helpers.toFont` method of CHART.JS to normalize the font object and to get the CSS string.
-  * add additional checks about the consistency of datasets types and amount added to a chart.
-  * add additional checks about the consistency of axes types and amount added to a chart.
-  * add additional checks on builder classes in order to be consistent with new object creation.
-      
 License
 -------
 
