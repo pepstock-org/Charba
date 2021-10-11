@@ -83,14 +83,6 @@ If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 <dependency org="org.pepstock" name="charba" rev="4.2-gwt"/>
 ```
 
-If you are using [Gradle](https://gradle.org/):
-
-```json
-compile group: 'org.pepstock', name: 'charba', version: '4.2'
-
-compile group: 'org.pepstock', name: 'charba', version: '4.2-gwt'
-```
-
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration in your GWT project module configuration:
 
 ```xml
