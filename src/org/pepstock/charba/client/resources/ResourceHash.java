@@ -33,7 +33,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
-	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1253852),
+	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1003691),
 	/**
 	 * Hash item for 'DataLabelsPluginResource' class.
 	 */
@@ -45,7 +45,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */
-	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1297860),
+	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1371113),
 	/**
 	 * Hash item for 'MatrixControllerResource' class.
 	 */
@@ -61,7 +61,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'ToastJsUtilResource' class.
 	 */
-	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 1600799),
+	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 1481555),
 	/**
 	 * Hash item for 'SankeyControllerResource' class.
 	 */

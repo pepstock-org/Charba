@@ -264,6 +264,23 @@
 		<!-- Define Google Closure task -->
     	<taskdef name="closure-compiler" classname="com.google.javascript.jscomp.ant.CompileTask" classpathref="ivyPath-compile" />
 	</target>
+	
+	<!--
+        CHARBA - CREATE JS compiler
+    -->
+	<macrodef name="google-closure-compiler">
+		<attribute name="source" />
+		<attribute name="sourceDir" />
+		<attribute name="target" />
+		<sequential>
+			<echo>Minify JAVASCRIPT file "@{source}" to "@{target}" </echo>
+			<closure-compiler compilationLevel="simple" debug="true" output="@{target}" forceRecompile="true">
+				<sources dir="@{sourceDir}">
+					<file name="@{source}" />
+				</sources>
+			</closure-compiler>
+		</sequential>
+	</macrodef>
 
 	<!--
         CHARBA - CREATE CSS compiler
@@ -272,7 +289,7 @@
 		<attribute name="source" />
 		<attribute name="target" />
 		<sequential>
-			<echo>Minify file "@{source}" to "@{target}" </echo>
+			<echo>Minify CSS file "@{source}" to "@{target}" </echo>
 			<java classname="com.google.common.css.compiler.commandline.ClosureCommandLineCompiler" fork="true">
 				<classpath>
 					<path refid="ivyPath-runtime" />
@@ -300,27 +317,11 @@
 			</classpath>
 		</javac>
 		<!-- minify CHARBA Helper-->
-		<echo>Minify CHARBA helper from file "${javascript.charba.file}" to "${javascript.charba.minify.file}" </echo>
-		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.charba.minify.file}" forceRecompile="true">
-			<sources dir="${javascript.src.dir}">
-				<file name="${javascript.charba.file}" />
-			</sources>
-		</closure-compiler>
+		<google-closure-compiler target="${javascript.dist.dir}/${javascript.charba.minify.file}" sourceDir="${javascript.src.dir}" source="${javascript.charba.file}" />
 		<!-- minify LABELS CHART.JS plugin -->
-		<echo>Minify LABELS plugin from file "${javascript.labels.file}" to "${javascript.labels.minify.file}" </echo>
-		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.labels.minify.file}" forceRecompile="true">
-			<sources dir="${javascript.src.dir}">
-				<file name="${javascript.labels.file}" />
-			</sources>
-		</closure-compiler>
+		<google-closure-compiler target="${javascript.dist.dir}/${javascript.labels.minify.file}" sourceDir="${javascript.src.dir}" source="${javascript.labels.file}" />
 		<!-- minify TOAST utility -->
-		<echo>Minify TOAST utility from file "${javascript.toast.file}" to "${javascript.toast.minify.file}" </echo>
-		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.toast.minify.file}" forceRecompile="true">
-			<sources dir="${javascript.src.dir}">
-				<file name="${javascript.toast.file}" />
-			</sources>
-		</closure-compiler>
-		<echo>Minify TOAST utility from file "${css.toast.file}" to "${css.toast.minify.file}" </echo>
+		<google-closure-compiler target="${javascript.dist.dir}/${javascript.toast.minify.file}" sourceDir="${javascript.src.dir}" source="${javascript.toast.file}" />
 		<google-closure-stylesheets source="${css.src.dir}/${css.toast.file}" target="${css.dist.dir}/${css.toast.minify.file}"/>
 		<!-- copy all sources is necessary as J2CL-GWT needs sources: exclude charba.helper.js and labels plugin because already created by minify and package-info-->
 		<copy todir="${classes.dir}">
@@ -632,27 +633,11 @@
 			</classpath>
 		</javac>
 		<!-- minify CHARBA Helper-->
-		<echo>Minify CHARBA helper from file "${javascript.charba.file}" to "${javascript.charba.minify.file}" </echo>
-		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.charba.minify.file}" forceRecompile="true">
-			<sources dir="${javascript.src.dir}">
-				<file name="${javascript.charba.file}" />
-			</sources>
-		</closure-compiler>
+		<google-closure-compiler target="${javascript.dist.dir}/${javascript.charba.minify.file}" sourceDir="${javascript.src.dir}" source="${javascript.charba.file}" />
 		<!-- minify LABELS CHART.JS plugin -->
-		<echo>Minify LABELS plugin from file "${javascript.labels.file}" to "${javascript.labels.minify.file}" </echo>
-		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.labels.minify.file}" forceRecompile="true">
-			<sources dir="${javascript.src.dir}">
-				<file name="${javascript.labels.file}" />
-			</sources>
-		</closure-compiler>
+		<google-closure-compiler target="${javascript.dist.dir}/${javascript.labels.minify.file}" sourceDir="${javascript.src.dir}" source="${javascript.labels.file}" />
 		<!-- minify TOAST utility -->
-		<echo>Minify TOAST utility from file "${javascript.toast.file}" to "${javascript.toast.minify.file}" </echo>
-		<closure-compiler compilationLevel="simple" debug="true" output="${javascript.dist.dir}/${javascript.toast.minify.file}" forceRecompile="true">
-			<sources dir="${javascript.src.dir}">
-				<file name="${javascript.toast.file}" />
-			</sources>
-		</closure-compiler>
-		<echo>Minify TOAST utility from file "${css.toast.file}" to "${css.toast.minify.file}" </echo>
+		<google-closure-compiler target="${javascript.dist.dir}/${javascript.toast.minify.file}" sourceDir="${javascript.src.dir}" source="${javascript.toast.file}" />
 		<google-closure-stylesheets source="${css.src.dir}/${css.toast.file}" target="${css.dist.dir}/${css.toast.minify.file}"/>
 		<!-- copy all sources is necessary as J2CL-GWT needs sources: exclude charba.helper.js and labels plugin because already created by minify and package-info-->
 		<copy todir="${javascript.dist.dir}">
