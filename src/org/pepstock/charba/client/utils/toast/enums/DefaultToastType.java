@@ -70,7 +70,7 @@ public enum DefaultToastType implements IsToastType
 	private final String value;
 	// type color instance
 	private final IsColor color;
-	// type color instance
+	// type background color instance
 	private final IsColor backgroundColor;
 
 	/**
