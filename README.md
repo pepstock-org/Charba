@@ -281,6 +281,10 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
 
+### Features
+
+  * import CHART.JS GEO controller [version v3.5.2](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.5.2).
+
 ### Developing
 
   * change dependency for Google Closure Compiler, [version v20211006](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20211006).

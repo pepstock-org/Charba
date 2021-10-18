@@ -69,7 +69,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'GeoControllerResource' class.
 	 */
-	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 8961254),
+	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 8969303),
 	/**
 	 * Hash item for 'AnnotationPluginResource' class.
 	 */

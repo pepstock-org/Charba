@@ -1,7 +1,7 @@
 {
   "name": "Charba",
   "description": "Charba, J2Cl and GWT Chart library based on CHART.JS",
-  "version": "4.2",
+  "version": "4.3",
   "author": "The Pepstock Team <info@pepstock.org>",
   "license": "Apache-2.0",
   "homepage": "https://github.com/pepstock-org/Charba/wiki",
@@ -16,7 +16,7 @@
     "chartjs-plugin-datalabels": "2.0.0",
     "chartjs-plugin-zoom": "1.1.1",
     "chartjs-plugin-annotation": "1.0.2",
-    "chartjs-chart-geo": "3.5.1",
+    "chartjs-chart-geo": "3.5.2",
     "chartjs-chart-treemap": "1.0.2",
     "chartjs-chart-matrix": "1.1.0",
     "chartjs-chart-sankey": "0.8.0",
