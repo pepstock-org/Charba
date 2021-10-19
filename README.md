@@ -274,8 +274,6 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-In the project, it's also provided the [FindBugs](http://findbugs.sourceforge.net/) project to look for bugs.
-
 Going to next release
 ---------------------
 
