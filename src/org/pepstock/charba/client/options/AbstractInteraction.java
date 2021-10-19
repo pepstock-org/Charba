@@ -24,7 +24,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * 
  * @author Andrea "Stock" Stocchero
  * 
- * @param <D> defaults provider class
+ * @param <P> parent model class
  * @param <D> defaults provider class
  */
 abstract class AbstractInteraction<P extends AbstractModel<?, ?>, D> extends AbstractModel<P, D> {
