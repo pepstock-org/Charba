@@ -50,7 +50,7 @@ public final class SizeLogarithmicAxis extends CartesianLogarithmicAxis implemen
 		// chart must be only bubble map
 		Checker.assertCheck(BubbleMapChart.CONTROLLER_TYPE.equals(chart.getType()), "Size logarithmic axis must be used ONLY by bubble map chart");
 		// creates the factory
-		this.factory = new SizeAxis.SizeAxisRemappedOptionsFactory();
+		this.factory = new SizeAxis.SizeAxisRemappedOptionsFactory(this);
 		// initializes the mapper
 		afterAxisConfigurationUpdate();
 	}

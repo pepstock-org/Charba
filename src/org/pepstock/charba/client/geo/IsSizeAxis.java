@@ -15,9 +15,12 @@
 */
 package org.pepstock.charba.client.geo;
 
-import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.ScaleContext;
+import org.pepstock.charba.client.geo.callbacks.ModeCallback;
+import org.pepstock.charba.client.geo.callbacks.RangeCallback;
 import org.pepstock.charba.client.geo.enums.Mode;
 
 /**
@@ -124,7 +127,97 @@ interface IsSizeAxis extends IsLegendAxis {
 		}
 		// if here, mapper is not consistent
 		// then returns default
-		return Collections.emptyList();
+		return SizeAxis.DEFAULT_RANGE;
+	}
+
+	/**
+	 * Sets the radius to render for missing values.
+	 * 
+	 * @param missingRadiusCallback the radius to render for missing values
+	 */
+	default void setMissingRadius(RadiusCallback<ScaleContext> missingRadiusCallback) {
+		// checks if mapper is consistent
+		if (getMapper() != null) {
+			// returns value
+			getMapper().setMissingRadius(missingRadiusCallback);
+		}
+	}
+
+	/**
+	 * Returns the radius callback to render for missing values.
+	 * 
+	 * @return the radius callback to render for missing values
+	 */
+	default RadiusCallback<ScaleContext> getMissingRadiusCallback() {
+		// checks if mapper is consistent
+		if (getMapper() != null) {
+			// returns value
+			return getMapper().getMissingRadiusCallback();
+		}
+		// if here, mapper is not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Sets the operation modes for the scale, area means that the area is linearly increasing whereas radius the radius is.
+	 * 
+	 * @param modeCallback the operation modes callback for the scale, area means that the area is linearly increasing whereas radius the radius is
+	 */
+	default void setMode(ModeCallback modeCallback) {
+		// checks if mapper is consistent
+		if (getMapper() != null) {
+			// returns value
+			getMapper().setMode(modeCallback);
+		}
+	}
+
+	/**
+	 * Returns the operation modes callback for the scale, area means that the area is linearly increasing whereas radius the radius is.
+	 * 
+	 * @return the operation modes callback for the scale, area means that the area is linearly increasing whereas radius the radius is
+	 */
+	default ModeCallback getModeCallback() {
+		// checks if mapper is consistent
+		if (getMapper() != null) {
+			// returns value
+			return getMapper().getModeCallback();
+		}
+		// if here, mapper is not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Sets the radius range callback, the minimal data value will be mapped to the first entry, the maximal one to the second and a linear interpolation for all values in between.
+	 * 
+	 * @param rangeCallback the radius range callback, the minimal data value will be mapped to the first entry, the maximal one to the second and a linear interpolation for all
+	 *            values in between.
+	 */
+	default void setRange(RangeCallback rangeCallback) {
+		// checks if mapper is consistent
+		if (getMapper() != null) {
+			// returns value
+			getMapper().setRange(rangeCallback);
+		}
+	}
+
+	/**
+	 * Returns the radius range callback, the minimal data value will be mapped to the first entry, the maximal one to the second and a linear interpolation for all values in
+	 * between.
+	 * 
+	 * @return the radius range callback, the minimal data value will be mapped to the first entry, the maximal one to the second and a linear interpolation for all values in
+	 *         between
+	 */
+	default RangeCallback getRangeCallback() {
+		// checks if mapper is consistent
+		if (getMapper() != null) {
+			// returns value
+			return getMapper().getRangeCallback();
+		}
+		// if here, mapper is not consistent
+		// then returns null
+		return null;
 	}
 
 }

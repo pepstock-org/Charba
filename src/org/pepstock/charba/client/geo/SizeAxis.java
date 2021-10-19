@@ -15,9 +15,14 @@
 */
 package org.pepstock.charba.client.geo;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.configuration.CartesianLinearAxis;
 import org.pepstock.charba.client.controllers.ControllerMapperFactory;
@@ -50,6 +55,11 @@ public final class SizeAxis extends CartesianLinearAxis implements IsSizeAxis {
 	public static final int DEFAULT_MAXIMUM_RANGE = 20;
 
 	/**
+	 * Default range options, <b>[{@value DEFAULT_MAXIMUM_RANGE}</b>, <b>{@value DEFAULT_MAXIMUM_RANGE}]</b>.
+	 */
+	public static final List<Integer> DEFAULT_RANGE = Collections.unmodifiableList(Arrays.asList(DEFAULT_MINIMUM_RANGE, DEFAULT_MAXIMUM_RANGE));
+
+	/**
 	 * Size axis id.
 	 */
 	public static final ScaleId ID = ScaleId.create("r");
@@ -73,7 +83,7 @@ public final class SizeAxis extends CartesianLinearAxis implements IsSizeAxis {
 		// chart must be only bubble map
 		Checker.assertCheck(BubbleMapChart.CONTROLLER_TYPE.equals(chart.getType()), "Size axis must be used ONLY by bubble map chart");
 		// creates the factory
-		this.factory = new SizeAxisRemappedOptionsFactory();
+		this.factory = new SizeAxisRemappedOptionsFactory(this);
 		// initializes the mapper
 		afterAxisConfigurationUpdate();
 	}
@@ -104,11 +114,16 @@ public final class SizeAxis extends CartesianLinearAxis implements IsSizeAxis {
 	 */
 	static class SizeAxisRemappedOptionsFactory extends ControllerMapperFactory<SizeAxisMapper> {
 
+		private final Axis parent;
+
 		/**
-		 * Creates the factory of the mapper
+		 * Creates the factory of the mapper.
+		 * 
+		 * @param parent axis which the mapper belongs to
 		 */
-		SizeAxisRemappedOptionsFactory() {
+		SizeAxisRemappedOptionsFactory(Axis parent) {
 			super(BubbleMapChart.CONTROLLER_TYPE);
+			this.parent = Checker.checkAndGetIfValid(parent, "Axis instance ");
 		}
 
 		/*
@@ -118,7 +133,7 @@ public final class SizeAxis extends CartesianLinearAxis implements IsSizeAxis {
 		 */
 		@Override
 		public SizeAxisMapper create(NativeObject nativeObject) {
-			return new SizeAxisMapper(nativeObject);
+			return new SizeAxisMapper(this.parent, nativeObject);
 		}
 
 	}

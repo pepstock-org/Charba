@@ -15,9 +15,12 @@
 */
 package org.pepstock.charba.client.geo;
 
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.geo.callbacks.InterpolateCallback;
+import org.pepstock.charba.client.geo.callbacks.QuantizeCallback;
 import org.pepstock.charba.client.geo.enums.Interpolate;
 
 /**
@@ -171,4 +174,63 @@ interface IsColorAxis extends IsLegendAxis {
 		return null;
 	}
 
+	/**
+	 * Sets the callback to get the amount of pieces to allow to split the color scale in N quantized equal bins.
+	 * 
+	 * @param quantizeCallback the callback to get the amount of pieces to allow to split the color scale in N quantized equal bins
+	 */
+	default void setQuantize(QuantizeCallback quantizeCallback) {
+		// checks if mapper is consistent
+		if (getMapper() != null) {
+			// returns value
+			getMapper().setQuantize(quantizeCallback);
+		}
+	}
+
+	/**
+	 * Returns the callback to get the amount of pieces to allow to split the color scale in N quantized equal bins.
+	 * 
+	 * @return the callback to get the amount of pieces to allow to split the color scale in N quantized equal bins
+	 */
+	default QuantizeCallback getQuantizeCallback() {
+		// checks if mapper is consistent
+		if (getMapper() != null) {
+			// returns value
+			return getMapper().getQuantizeCallback();
+		}
+		// if here, mapper is not consistent
+		// then returns default
+		return null;
+
+	}
+
+	/**
+	 * Sets the missing color callback.
+	 * 
+	 * @param missingColorCallback the missing color callback
+	 */
+	default void setMissingColor(ColorCallback<ScaleContext> missingColorCallback) {
+		// checks if mapper is consistent
+		if (getMapper() != null) {
+			// returns value
+			getMapper().setMissingColor(missingColorCallback);
+		}
+	}
+
+	/**
+	 * Returns the missing color callback.
+	 * 
+	 * @return the missing color callback
+	 */
+	default ColorCallback<ScaleContext> getMissingColorCallback() {
+		// checks if mapper is consistent
+		if (getMapper() != null) {
+			// returns value
+			return getMapper().getMissingColorCallback();
+		}
+		// if here, mapper is not consistent
+		// then returns default
+		return null;
+
+	}
 }

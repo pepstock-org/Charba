@@ -50,7 +50,7 @@ public final class ColorLogarithmicAxis extends CartesianLogarithmicAxis impleme
 		// chart must be only choropleth
 		Checker.assertCheck(ChoroplethChart.CONTROLLER_TYPE.equals(chart.getType()), "Color logarithmic axis must be used ONLY by choropleth chart");
 		// creates the factory
-		this.factory = new ColorAxis.ColorAxisRemappedOptionsFactory();
+		this.factory = new ColorAxis.ColorAxisRemappedOptionsFactory(this);
 		// initializes the mapper
 		afterAxisConfigurationUpdate();
 	}

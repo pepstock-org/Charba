@@ -15,9 +15,11 @@
 */
 package org.pepstock.charba.client.geo;
 
+import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.configuration.Axis;
 
 /**
  * Base scale for color and size axes, needed for GOE charts implementation.<br>
@@ -26,7 +28,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class LegendAxisMapper extends NativeObjectContainer {
+abstract class LegendAxisMapper extends AbstractNode {
 
 	// the property must be always set to "value"
 	private static final String PROPERTY_VALUE = "value";
@@ -63,25 +65,39 @@ abstract class LegendAxisMapper extends NativeObjectContainer {
 
 	}
 
+	// axis parent instance
+	private final Axis axis;
 	// internal legend instance
 	private final Legend legend;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
+	 * @param axis parent axis of the mapper
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	LegendAxisMapper(NativeObject nativeObject) {
+	LegendAxisMapper(Axis axis, NativeObject nativeObject) {
 		super(nativeObject);
+		// checks and get axis instance
+		this.axis = Checker.checkAndGetIfValid(axis, "Axis instance ");
 		// overrides always the property, setting value
 		setValue(Property.PROPERTY, PROPERTY_VALUE);
 		// gets and stores the legend
-		this.legend = new Legend(getValue(Property.LEGEND));
+		this.legend = new Legend(this, getValue(Property.LEGEND));
 		// checks if legend was not there
 		if (!has(Property.LEGEND)) {
 			// if not, add it
 			setValue(Property.LEGEND, this.legend);
 		}
+	}
+
+	/**
+	 * Returns the axis.
+	 * 
+	 * @return the axis
+	 */
+	final Axis getAxis() {
+		return axis;
 	}
 
 	/**

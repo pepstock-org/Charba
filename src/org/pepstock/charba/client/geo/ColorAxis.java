@@ -19,6 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.configuration.CartesianLinearAxis;
 import org.pepstock.charba.client.controllers.ControllerMapperFactory;
@@ -68,7 +69,7 @@ public final class ColorAxis extends CartesianLinearAxis implements IsColorAxis 
 		// chart must be only choropleth
 		Checker.assertCheck(ChoroplethChart.CONTROLLER_TYPE.equals(chart.getType()), "Color axis must be used ONLY by choropleth chart");
 		// creates the factory
-		this.factory = new ColorAxisRemappedOptionsFactory();
+		this.factory = new ColorAxisRemappedOptionsFactory(this);
 		// initializes the mapper
 		afterAxisConfigurationUpdate();
 	}
@@ -99,11 +100,16 @@ public final class ColorAxis extends CartesianLinearAxis implements IsColorAxis 
 	 */
 	static class ColorAxisRemappedOptionsFactory extends ControllerMapperFactory<ColorAxisMapper> {
 
+		private final Axis parent;
+
 		/**
 		 * Creates the factory of the mapper
+		 * 
+		 * @param parent axis which the mapper belongs to
 		 */
-		ColorAxisRemappedOptionsFactory() {
+		ColorAxisRemappedOptionsFactory(Axis parent) {
 			super(ChoroplethChart.CONTROLLER_TYPE);
+			this.parent = Checker.checkAndGetIfValid(parent, "Axis instance ");
 		}
 
 		/*
@@ -113,7 +119,7 @@ public final class ColorAxis extends CartesianLinearAxis implements IsColorAxis 
 		 */
 		@Override
 		public ColorAxisMapper create(NativeObject nativeObject) {
-			return new ColorAxisMapper(nativeObject);
+			return new ColorAxisMapper(parent, nativeObject);
 		}
 
 	}

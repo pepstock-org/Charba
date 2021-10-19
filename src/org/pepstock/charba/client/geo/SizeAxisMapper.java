@@ -17,10 +17,23 @@ package org.pepstock.charba.client.geo;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.ScaleContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.CallbackPropertyHandler;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.configuration.Axis;
+import org.pepstock.charba.client.geo.callbacks.ModeCallback;
+import org.pepstock.charba.client.geo.callbacks.RangeCallback;
 import org.pepstock.charba.client.geo.enums.Mode;
 
 /**
@@ -65,13 +78,43 @@ final class SizeAxisMapper extends LegendAxisMapper {
 
 	}
 
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the missing radius function
+	private final CallbackProxy<ProxyDoubleCallback> missingRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the mode function
+	private final CallbackProxy<ProxyStringCallback> modeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the range function
+	private final CallbackProxy<ProxyArrayCallback> rangeCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// ---------------------------
+	// -- USERS CALLBACKS ---
+	// ---------------------------
+	// user callback implementation for missing radius colors
+	private static final CallbackPropertyHandler<RadiusCallback<ScaleContext>> MISSING_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.MISSING);
+	// user callback implementation for mode
+	private static final CallbackPropertyHandler<ModeCallback> MODE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.MODE);
+	// user callback implementation for range
+	private static final CallbackPropertyHandler<RangeCallback> RANGE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.RANGE);
+
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
+	 * @param axis parent axis of the mapper
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	SizeAxisMapper(NativeObject nativeObject) {
-		super(nativeObject);
+	SizeAxisMapper(Axis axis, NativeObject nativeObject) {
+		super(axis, nativeObject);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// sets function to proxy callback in order to invoke the java interface
+		this.missingRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), context), getMissingRadiusCallback(), SizeAxis.DEFAULT_MISSING_RADIUS));
+		// sets function to proxy callback in order to invoke the java interface
+		this.modeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), context), getModeCallback(), Mode.AREA).value());
+		// sets function to proxy callback in order to invoke the java interface
+		this.rangeCallbackProxy.setCallback(context -> ArrayInteger.fromOrEmpty(ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), context), getRangeCallback(), SizeAxis.DEFAULT_RANGE)));
 	}
 
 	/**
@@ -80,6 +123,9 @@ final class SizeAxisMapper extends LegendAxisMapper {
 	 * @param missingRadius the radius to render for missing values
 	 */
 	void setMissingRadius(double missingRadius) {
+		// resets callback
+		setMissingRadius(null);
+		// stores value
 		setValue(Property.MISSING, missingRadius);
 	}
 
@@ -98,6 +144,9 @@ final class SizeAxisMapper extends LegendAxisMapper {
 	 * @param mode the operation modes for the scale, area means that the area is linearly increasing whereas radius the radius is
 	 */
 	void setMode(Mode mode) {
+		// resets callback
+		setMode((ModeCallback) null);
+		// stores value
 		setValue(Property.MODE, mode);
 	}
 
@@ -117,6 +166,9 @@ final class SizeAxisMapper extends LegendAxisMapper {
 	 * @param max maximum range in pixel
 	 */
 	void setRange(int min, int max) {
+		// resets callback
+		setRange(null);
+		// stores value
 		setArrayValue(Property.RANGE, ArrayInteger.fromOrEmpty(min, max));
 	}
 
@@ -128,8 +180,74 @@ final class SizeAxisMapper extends LegendAxisMapper {
 	 *         between
 	 */
 	List<Integer> getRange() {
-		ArrayInteger array = getArrayValue(Property.RANGE);
-		return ArrayListHelper.list(array);
+		// checks if the range is an array
+		if (isType(Property.RANGE, ObjectType.ARRAY)) {
+			ArrayInteger array = getArrayValue(Property.RANGE);
+			return ArrayListHelper.list(array);
+		}
+		// if here, the value is not an array,
+		// then returns the default
+		return SizeAxis.DEFAULT_RANGE;
 	}
 
+	// ------------------
+	// CALLBACKS
+	// ------------------
+
+	/**
+	 * Sets the radius to render for missing values.
+	 * 
+	 * @param missingRadiusCallback the radius to render for missing values
+	 */
+	void setMissingRadius(RadiusCallback<ScaleContext> missingRadiusCallback) {
+		MISSING_RADIUS_PROPERTY_HANDLER.setCallback(this, getAxis().getChart().getId(), missingRadiusCallback, missingRadiusCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the radius callback to render for missing values.
+	 * 
+	 * @return the radius callback to render for missing values
+	 */
+	RadiusCallback<ScaleContext> getMissingRadiusCallback() {
+		return MISSING_RADIUS_PROPERTY_HANDLER.getCallback(this, null);
+	}
+
+	/**
+	 * Sets the operation modes for the scale, area means that the area is linearly increasing whereas radius the radius is.
+	 * 
+	 * @param modeCallback the operation modes callback for the scale, area means that the area is linearly increasing whereas radius the radius is
+	 */
+	void setMode(ModeCallback modeCallback) {
+		MODE_PROPERTY_HANDLER.setCallback(this, getAxis().getChart().getId(), modeCallback, modeCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the operation modes callback for the scale, area means that the area is linearly increasing whereas radius the radius is.
+	 * 
+	 * @return the operation modes callback for the scale, area means that the area is linearly increasing whereas radius the radius is
+	 */
+	ModeCallback getModeCallback() {
+		return MODE_PROPERTY_HANDLER.getCallback(this, null);
+	}
+
+	/**
+	 * Sets the radius range callback, the minimal data value will be mapped to the first entry, the maximal one to the second and a linear interpolation for all values in between.
+	 * 
+	 * @param rangeCallback the radius range callback, the minimal data value will be mapped to the first entry, the maximal one to the second and a linear interpolation for all
+	 *            values in between.
+	 */
+	void setRange(RangeCallback rangeCallback) {
+		RANGE_PROPERTY_HANDLER.setCallback(this, getAxis().getChart().getId(), rangeCallback, rangeCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the radius range callback, the minimal data value will be mapped to the first entry, the maximal one to the second and a linear interpolation for all values in
+	 * between.
+	 * 
+	 * @return the radius range callback, the minimal data value will be mapped to the first entry, the maximal one to the second and a linear interpolation for all values in
+	 *         between
+	 */
+	RangeCallback getRangeCallback() {
+		return RANGE_PROPERTY_HANDLER.getCallback(this, null);
+	}
 }
