@@ -101,11 +101,11 @@
 	-->
 	<property name="javac.debug" value="true" />
 	<property name="javac.debuglevel" value="lines,vars,source" />
-	<property name="javac.source" value="1.8" />
-	<property name="javac.target" value="1.8" />
+	<property name="javac.source" value="11" />
+	<property name="javac.target" value="11" />
 	<property name="javac.includeantruntime" value="false" />
 	<property name="javac.nowarn" value="true" />
-	<property name="javadoc.source" value="8" />
+	<property name="javadoc.source" value="11" />
 	
 	<!--
 		IVY targets for getting build dependencies and GHA CI needed libraries
@@ -377,7 +377,7 @@
 				<fileset dir="${classes.dir}" />
 				<pathelement path="${java.class.path}" />
 			</classpath>
-			<link offline="false" href="https://docs.oracle.com/javase/8/docs/api/" />
+			<link offline="false" href="https://docs.oracle.com/en/java/javase/11/docs/api/" />
 			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
 		</javadoc>
 	</target>
@@ -399,7 +399,7 @@
 			<packageset dir="${src.dir}" defaultexcludes="yes">
 				<include name="org/pepstock/**" />
 			</packageset>
-			<link offline="false" href="https://docs.oracle.com/javase/8/docs/api/" />
+			<link offline="false" href="https://docs.oracle.com/en/java/javase/11/docs/api/" />
 			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
 		</javadoc>
 	</target>

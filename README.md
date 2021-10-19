@@ -281,6 +281,10 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
 
+### Breaking changes
+
+  * drop support for Java 8 going to Java 11 as minimum requirement.
+
 ### Features
 
   * import CHART.JS GEO controller [version v3.5.2](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.5.2).
