@@ -52,7 +52,7 @@ public final class ImmutableDate extends Date {
 	 * @param date the day of the month value between 1-31.
 	 * @deprecated As of JDK version 1.1.
 	 */
-	@Deprecated(since = "3.3", forRemoval = false)
+	@Deprecated
 	@Override
 	public void setDate(int date) {
 		throw new UnsupportedOperationException(IMMUTABLE_EXCEPTION_MESSAGE);
@@ -64,7 +64,7 @@ public final class ImmutableDate extends Date {
 	 * @param hours the hour value.
 	 * @deprecated As of JDK version 1.1.
 	 */
-	@Deprecated(since = "3.3", forRemoval = false)
+	@Deprecated
 	@Override
 	public void setHours(int hours) {
 		throw new UnsupportedOperationException(IMMUTABLE_EXCEPTION_MESSAGE);
@@ -76,7 +76,7 @@ public final class ImmutableDate extends Date {
 	 * @param minutes the value of the minutes.
 	 * @deprecated As of JDK version 1.1.
 	 */
-	@Deprecated(since = "3.3", forRemoval = false)
+	@Deprecated
 	@Override
 	public void setMinutes(int minutes) {
 		throw new UnsupportedOperationException(IMMUTABLE_EXCEPTION_MESSAGE);
@@ -88,7 +88,7 @@ public final class ImmutableDate extends Date {
 	 * @param month the month value between 0-11.
 	 * @deprecated As of JDK version 1.1.
 	 */
-	@Deprecated(since = "3.3", forRemoval = false)
+	@Deprecated
 	@Override
 	public void setMonth(int month) {
 		throw new UnsupportedOperationException(IMMUTABLE_EXCEPTION_MESSAGE);
@@ -100,7 +100,7 @@ public final class ImmutableDate extends Date {
 	 * @param seconds the seconds value.
 	 * @deprecated As of JDK version 1.1.
 	 */
-	@Deprecated(since = "3.3", forRemoval = false)
+	@Deprecated
 	@Override
 	public void setSeconds(int seconds) {
 		throw new UnsupportedOperationException(IMMUTABLE_EXCEPTION_MESSAGE);
@@ -112,7 +112,7 @@ public final class ImmutableDate extends Date {
 	 * @param time the number of milliseconds.
 	 * @deprecated As of JDK version 1.1.
 	 */
-	@Deprecated(since = "3.3", forRemoval = false)
+	@Deprecated
 	@Override
 	public void setTime(long time) {
 		throw new UnsupportedOperationException(IMMUTABLE_EXCEPTION_MESSAGE);
@@ -124,7 +124,7 @@ public final class ImmutableDate extends Date {
 	 * @param year the year value
 	 * @deprecated As of JDK version 1.1.
 	 */
-	@Deprecated(since = "3.3", forRemoval = false)
+	@Deprecated
 	@Override
 	public void setYear(int year) {
 		throw new UnsupportedOperationException(IMMUTABLE_EXCEPTION_MESSAGE);
