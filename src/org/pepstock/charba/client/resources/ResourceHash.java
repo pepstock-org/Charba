@@ -27,65 +27,65 @@ import org.pepstock.charba.client.items.Undefined;
 enum ResourceHash {
 
 	/**
-	 * Hash item for 'LuxonLibraryResource' class.
+	 * Hash item for 'AnnotationPluginResource' class.
 	 */
-	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 15737955),
-	/**
-	 * Hash item for 'JsHelperResource' class.
-	 */
-	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1003691),
-	/**
-	 * Hash item for 'DataLabelsPluginResource' class.
-	 */
-	DATA_LABELS_PLUGIN_RESOURCE(ResourceName.DATALABELS_PLUGIN, 1138320),
-	/**
-	 * Hash item for 'ZoomPluginResource' class.
-	 */
-	ZOOM_PLUGIN_RESOURCE(ResourceName.ZOOM_PLUGIN, 1016813),
-	/**
-	 * Hash item for 'LabelsPluginResource' class.
-	 */
-	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1371113),
-	/**
-	 * Hash item for 'MatrixControllerResource' class.
-	 */
-	MATRIX_CONTROLLER_RESOURCE(ResourceName.MATRIX_CONTROLLER, 313329),
-	/**
-	 * Hash item for 'TreeMapControllerResource' class.
-	 */
-	TREE_MAP_CONTROLLER_RESOURCE(ResourceName.TREEMAP_CONTROLLER, 859201),
+	ANNOTATION_PLUGIN_RESOURCE(ResourceName.ANNOTATION_PLUGIN, 1243091),
 	/**
 	 * Hash item for 'ChartJsResource' class.
 	 */
 	CHART_JS_RESOURCE(ResourceName.CHART, 16860378),
 	/**
-	 * Hash item for 'ToastJsUtilResource' class.
+	 * Hash item for 'DataLabelsPluginResource' class.
 	 */
-	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 1481555),
-	/**
-	 * Hash item for 'SankeyControllerResource' class.
-	 */
-	SANKEY_CONTROLLER_RESOURCE(ResourceName.SANKEY_CONTROLLER, 837597),
+	DATA_LABELS_PLUGIN_RESOURCE(ResourceName.DATALABELS_PLUGIN, 1138320),
 	/**
 	 * Hash item for 'GeoControllerResource' class.
 	 */
 	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 8969303),
 	/**
-	 * Hash item for 'AnnotationPluginResource' class.
+	 * Hash item for 'JsHelperResource' class.
 	 */
-	ANNOTATION_PLUGIN_RESOURCE(ResourceName.ANNOTATION_PLUGIN, 1243091),
+	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1003691),
+	/**
+	 * Hash item for 'LabelsPluginResource' class.
+	 */
+	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1371113),
+	/**
+	 * Hash item for 'LuxonAdapterResource' class.
+	 */
+	LUXON_ADAPTER_RESOURCE(ResourceName.DATE_TIME_ADAPTER, 160328),
+	/**
+	 * Hash item for 'LuxonLibraryResource' class.
+	 */
+	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 15737955),
+	/**
+	 * Hash item for 'MatrixControllerResource' class.
+	 */
+	MATRIX_CONTROLLER_RESOURCE(ResourceName.MATRIX_CONTROLLER, 313329),
+	/**
+	 * Hash item for 'SankeyControllerResource' class.
+	 */
+	SANKEY_CONTROLLER_RESOURCE(ResourceName.SANKEY_CONTROLLER, 837597),
 	/**
 	 * Hash item for 'ToastCssUtilResource' class.
 	 */
 	TOAST_CSS_UTIL_RESOURCE(ResourceName.TOAST_CSS_UTIL, 333726),
 	/**
+	 * Hash item for 'ToastJsUtilResource' class.
+	 */
+	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 1481555),
+	/**
+	 * Hash item for 'TreeMapControllerResource' class.
+	 */
+	TREE_MAP_CONTROLLER_RESOURCE(ResourceName.TREEMAP_CONTROLLER, 859201),
+	/**
 	 * Hash item for 'ZoomPluginHammerResource' class.
 	 */
 	ZOOM_PLUGIN_HAMMER_RESOURCE(ResourceName.HAMMER_LIBRARY, 1881773),
 	/**
-	 * Hash item for 'LuxonAdapterResource' class.
+	 * Hash item for 'ZoomPluginResource' class.
 	 */
-	LUXON_ADAPTER_RESOURCE(ResourceName.DATE_TIME_ADAPTER, 160328);
+	ZOOM_PLUGIN_RESOURCE(ResourceName.ZOOM_PLUGIN, 1016813);
 	
 	// resource name instance
 	private final ResourceName resourceName;

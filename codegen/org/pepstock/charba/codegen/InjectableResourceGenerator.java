@@ -33,6 +33,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -542,10 +544,12 @@ public class InjectableResourceGenerator {
 	private static boolean createResourceHash(StringBuilder templateHashSource) throws IOException {
 		// creates items buffer
 		final StringBuilder hashEnum = new StringBuilder();
+		// sorts the key
+		final SortedSet<String> keys = new TreeSet<>(ESCAPE_RESULTS.keySet());
 		// scans all escape results
-		for (Entry<String, EscapeResult> entry : ESCAPE_RESULTS.entrySet()) {
+		for (String key : keys) {
 			// gets the escape result instance
-			EscapeResult result = entry.getValue();
+			EscapeResult result = ESCAPE_RESULTS.get(key);
 			// if the buffer is not empty
 			// it must close the java statement with comma
 			if (hashEnum.length() > 0) {
@@ -553,10 +557,10 @@ public class InjectableResourceGenerator {
 			}
 			// comment of the item
 			hashEnum.append(SINGLE_TAB_INDENT_STRING).append("/**").append(LINE_SEPARATOR_STRING);
-			hashEnum.append(SINGLE_TAB_INDENT_STRING).append(" * ").append("Hash item for '" + entry.getKey() + "' class.").append(LINE_SEPARATOR_STRING);
+			hashEnum.append(SINGLE_TAB_INDENT_STRING).append(" * ").append("Hash item for '" + key + "' class.").append(LINE_SEPARATOR_STRING);
 			hashEnum.append(SINGLE_TAB_INDENT_STRING).append(" */").append(LINE_SEPARATOR_STRING);
 			// appends the enumeration item definition
-			hashEnum.append(SINGLE_TAB_INDENT_STRING).append(capitalize(entry.getKey())).append(OPEN_ROUND_BRACKET).append(result.getResourceName()).append(COMMA_STRING).append(BLANK_STRING).append(result.getHash()).append(CLOSE_ROUND_BRACKET);
+			hashEnum.append(SINGLE_TAB_INDENT_STRING).append(capitalize(key)).append(OPEN_ROUND_BRACKET).append(result.getResourceName()).append(COMMA_STRING).append(BLANK_STRING).append(result.getHash()).append(CLOSE_ROUND_BRACKET);
 		}
 		// closes the items list with a semicolon as requested by java
 		hashEnum.append(SEMICOLON_STRING);
