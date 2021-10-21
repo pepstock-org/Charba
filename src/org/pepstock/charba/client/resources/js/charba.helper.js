@@ -1125,3 +1125,31 @@ CharbaJsGeoHelper.features = function(topojson, featureProperty) {
   }	
   return null;
 }
+/**
+ * Transforms latitude and longitude in coordinates of the chart.
+ *
+ * @param {Chart} chart chart instance 
+ * @param {number} latitude latitude to search 
+ * @param {number} longitude longitude to search
+ * @return {Array} an array of doubles, index 0 is x, index 1 is y
+ */
+CharbaJsGeoHelper.projection = function(chart, latitude, longitude) {
+  // projection scale is always 'xy' as id 
+  return chart.scales.xy.projection([longitude, latitude]);
+}
+/**
+ * Transforms the cooredinates of a chart, x and y, in latitude and longitude.
+ *
+ * @param {Chart} chart chart instance
+ * @param {number} x coordinate x to search
+ * @param {number} y coordinate y to search
+ * @return {Array} an array of doubles, index 0 is longitude, index 1 is latitude
+ */
+CharbaJsGeoHelper.invert = function(chart, x, y) {
+  // projection scale is always 'xy' as id 
+  const projection = chart.scales.xy.geoPath.projection();
+  if (projection && typeof projection.invert === 'function') {
+    return chart.scales.xy.geoPath.projection().invert([p[0], p[1]]);
+  }
+  return null;
+}

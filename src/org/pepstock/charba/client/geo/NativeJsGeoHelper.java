@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.geo;
 
+import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -47,5 +49,25 @@ final class NativeJsGeoHelper {
 	 * @return array with all parsed features
 	 */
 	static native ArrayObject features(NativeObject topojson, String featureProperty);
+
+	/**
+	 * Translates latitude and longitude in coordinates of the canvas where the chart is drawn.
+	 * 
+	 * @param chart native chart instance
+	 * @param latitude latitude to use to get the Y point
+	 * @param longitude longitude to use to get the X point
+	 * @return an array of double with X (index 0) and Y (index 1)
+	 */
+	static native ArrayDouble projection(Chart chart, double latitude, double longitude);
+
+	/**
+	 * Translates X and Y coordinates of the canvas where the chart is drawn in latitude and longitude.
+	 * 
+	 * @param chart native chart instance
+	 * @param x coordinate X of the canvas to translate in longitude
+	 * @param y coordinate Y of the canvas to translate in latitude
+	 * @return an array of double with longitude (index 0) and latitude (index 1)
+	 */
+	static native ArrayDouble invert(Chart chart, double x, double y);
 
 }

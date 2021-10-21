@@ -19,6 +19,8 @@ import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.geo.ChoroplethChart;
 import org.pepstock.charba.client.geo.ChoroplethDataset;
 import org.pepstock.charba.client.geo.ChoroplethOptions;
+import org.pepstock.charba.client.geo.Coordinates;
+import org.pepstock.charba.client.geo.CoordinatesPoint;
 
 /**
  * CHOROPLETH chart GWT WIDGET implementation.<br>
@@ -63,6 +65,48 @@ public class ChoroplethChartWidget extends AbstractChartWidget<ChoroplethChart> 
 	@Override
 	public ChoroplethDataset newDataset(boolean hidden) {
 		return getChart().newDataset(hidden);
+	}
+
+	/**
+	 * Translates latitude and longitude in coordinates of the canvas where the chart is drawn.
+	 * 
+	 * @param latitude latitude to use to get the Y point
+	 * @param longitude longitude to use to get the X point
+	 * @return a {@link CoordinatesPoint} with X and Y, related to the passed latitude and longitude
+	 */
+	public final CoordinatesPoint projection(double latitude, double longitude) {
+		return getChart().projection(latitude, longitude);
+	}
+
+	/**
+	 * Translates latitude and longitude in coordinates of the canvas where the chart is drawn.
+	 * 
+	 * @param coordinates contains latitude and longitude to translate
+	 * @return a {@link CoordinatesPoint} with X and Y, related to the passed latitude and longitude
+	 */
+	public final CoordinatesPoint projection(Coordinates coordinates) {
+		return getChart().projection(coordinates);
+	}
+
+	/**
+	 * Translates X and Y coordinates of the canvas where the chart is drawn in latitude and longitude.
+	 * 
+	 * @param x coordinate X of the canvas to translate in longitude
+	 * @param y coordinate Y of the canvas to translate in latitude
+	 * @return a {@link Coordinates} with the latitude and longitude, related to the passed X and Y
+	 */
+	public final Coordinates invert(double x, double y) {
+		return getChart().invert(x, y);
+	}
+
+	/**
+	 * Translates X and Y coordinates of the canvas where the chart is drawn in latitude and longitude.
+	 * 
+	 * @param point contains X and Y coordinates to translate
+	 * @return a {@link Coordinates} with the latitude and longitude, related to the passed X and Y
+	 */
+	public final Coordinates invert(CoordinatesPoint point) {
+		return getChart().invert(point);
 	}
 
 }

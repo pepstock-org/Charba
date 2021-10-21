@@ -642,3 +642,17 @@ function CharbaJsGeoHelper() {}
  * @return {Array}
  */
 CharbaJsGeoHelper.features = function(topojson, featureProperty) {};
+/**
+ * @param {Chart} chart 
+ * @param {number} latitude 
+ * @param {number} longitude 
+ * @return {Array}
+ */
+CharbaJsGeoHelper.projection = function(chart, latitude, longitude) {};
+/**
+ * @param {Chart} chart 
+ * @param {number} latitude 
+ * @param {number} longitude 
+ * @return {Array}
+ */
+CharbaJsGeoHelper.invert = function(chart, x, y) {};

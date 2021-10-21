@@ -287,6 +287,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
   * import CHART.JS GEO controller [version v3.5.2](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.5.2).
   * enable all options of `SizeAxis` and `ColorAxis` (GEO charts) as scriptable ones.
+  * add `projection` and `invert` methods to GEO charts in order to translates latitude and longitude in XY coordinates and viceversa.
 
 ### Developing
 

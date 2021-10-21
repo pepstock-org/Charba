@@ -91,4 +91,14 @@ public abstract class AbstractReadOnlyPoint extends NativeObjectContainer {
 		return Undefined.isNot(getX()) && Undefined.isNot(getY());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public final String toString() {
+		return "Point [x=" + getX() + ", y=" + getY() + "]";
+	}
+
 }

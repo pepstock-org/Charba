@@ -188,7 +188,7 @@ public class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the horizontal coordinate of the event relative to the current layer
 	 */
 	@JsProperty
-	public final native int getLayerX();
+	public final native double getLayerX();
 
 	/**
 	 * Returns the vertical coordinate of the event relative to the current layer.
@@ -196,7 +196,7 @@ public class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the vertical coordinate of the event relative to the current layer
 	 */
 	@JsProperty
-	public final native int getLayerY();
+	public final native double getLayerY();
 
 	/**
 	 * Returns the horizontal coordinate of the event relative to the current layer.
