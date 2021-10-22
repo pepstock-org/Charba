@@ -75,8 +75,8 @@ public class BubbleMapChartWidget extends AbstractChartWidget<BubbleMapChart> im
 	 * @param y coordinate Y of the canvas to translate in latitude
 	 * @return a {@link Coordinates} with the latitude and longitude, related to the passed X and Y
 	 */
-	public final Coordinates invert(double x, double y) {
-		return getChart().invert(x, y);
+	public final Coordinates projectionInvert(double x, double y) {
+		return getChart().projectionInvert(x, y);
 	}
 
 	/**
@@ -85,8 +85,8 @@ public class BubbleMapChartWidget extends AbstractChartWidget<BubbleMapChart> im
 	 * @param point contains X and Y coordinates to translate
 	 * @return a {@link Coordinates} with the latitude and longitude, related to the passed X and Y
 	 */
-	public final Coordinates invert(CoordinatesPoint point) {
-		return getChart().invert(point);
+	public final Coordinates projectionInvert(CoordinatesPoint point) {
+		return getChart().projectionInvert(point);
 	}
 
 	/**

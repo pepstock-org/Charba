@@ -167,7 +167,7 @@ abstract class BaseGeoChart<D extends Dataset> extends AbstractChart implements 
 	 * @param y coordinate Y of the canvas to translate in latitude
 	 * @return a {@link Coordinates} with the latitude and longitude, related to the passed X and Y
 	 */
-	public final Coordinates invert(double x, double y) {
+	public final Coordinates projectionInvert(double x, double y) {
 		// checks if arguments are consistent
 		// and is chart is initialized
 		if (Charts.hasNative(this) && Undefined.isNot(y) && Undefined.isNot(x)) {
@@ -192,10 +192,10 @@ abstract class BaseGeoChart<D extends Dataset> extends AbstractChart implements 
 	 * @param point contains X and Y coordinates to translate
 	 * @return a {@link Coordinates} with the latitude and longitude, related to the passed X and Y
 	 */
-	public final Coordinates invert(CoordinatesPoint point) {
+	public final Coordinates projectionInvert(CoordinatesPoint point) {
 		// checks if argument is consistent
 		if (point != null && point.isConsistent()) {
-			return invert(point.getX(), point.getY());
+			return projectionInvert(point.getX(), point.getY());
 		}
 		// if here, argument is not consistent
 		// then returns an object with inconsistent coordinates

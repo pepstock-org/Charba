@@ -18,7 +18,7 @@ package org.pepstock.charba.client.geo;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * Contains the latitude and longitude, calculated by {@link ChoroplethChart#invert(CoordinatesPoint)} and {@link BubbleMapChart#invert(CoordinatesPoint)}.
+ * Contains the latitude and longitude, calculated by {@link ChoroplethChart#projectionInvert(CoordinatesPoint)} and {@link BubbleMapChart#projectionInvert(CoordinatesPoint)}.
  * 
  * @author Andrea "Stock" Stocchero
  *
