@@ -17,11 +17,15 @@ package org.pepstock.charba.client.geo;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.Charts;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.geo.callbacks.ModeCallback;
 import org.pepstock.charba.client.geo.callbacks.RangeCallback;
 import org.pepstock.charba.client.geo.enums.Mode;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * The scale is used to map the values to symbol radius size.<br>
@@ -220,4 +224,26 @@ interface IsSizeAxis extends IsLegendAxis {
 		return null;
 	}
 
+	/**
+	 * Returns the size for a specific data value.
+	 * 
+	 * @param value to use for searching
+	 * @return the size of the value
+	 */
+	default double getSizeForValue(double value) {
+		// checks if mapper is consistent
+		if (getMapper() != null && Undefined.isNot(value)) {
+			// gets chart
+			IsChart chart = getMapper().getAxis().getChart();
+			// gets if native object is consistent
+			if (Charts.hasNative(chart)) {
+				// gets native chart
+				Chart nativeChart = Charts.getNative(chart);
+				// gets color
+				return NativeJsGeoHelper.getSizeForValue(nativeChart, value);
+			}
+		}
+		// if here, chart is not consistent
+		return Undefined.DOUBLE;
+	}
 }

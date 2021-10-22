@@ -651,8 +651,20 @@ CharbaJsGeoHelper.features = function(topojson, featureProperty) {};
 CharbaJsGeoHelper.projection = function(chart, latitude, longitude) {};
 /**
  * @param {Chart} chart 
- * @param {number} latitude 
- * @param {number} longitude 
+ * @param {number} x 
+ * @param {number} y 
  * @return {Array}
  */
 CharbaJsGeoHelper.invert = function(chart, x, y) {};
+/**
+ * @param {Chart} chart 
+ * @param {number} value 
+ * @return {string}
+ */
+CharbaJsGeoHelper.getColorForValue = function(chart, value) {};
+/**
+ * @param {Chart} chart 
+ * @param {number} value 
+ * @return {number}
+ */
+CharbaJsGeoHelper.getSizeForValue = function(chart, value) {};

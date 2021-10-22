@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.geo;
 
+import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.Charts;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -22,6 +25,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.geo.callbacks.InterpolateCallback;
 import org.pepstock.charba.client.geo.callbacks.QuantizeCallback;
 import org.pepstock.charba.client.geo.enums.Interpolate;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * The coloring of the nodes will be done with a special color scale.<br>
@@ -199,7 +203,7 @@ interface IsColorAxis extends IsLegendAxis {
 			return getMapper().getQuantizeCallback();
 		}
 		// if here, mapper is not consistent
-		// then returns default
+		// then returns null
 		return null;
 
 	}
@@ -233,4 +237,46 @@ interface IsColorAxis extends IsLegendAxis {
 		return null;
 
 	}
+
+	/**
+	 * Returns the color for a specific data value.
+	 * 
+	 * @param value to use for searching
+	 * @return a color a string or {@link Undefined#STRING} if not recognized the value by the chart.
+	 */
+	default String getColorForValueAsString(double value) {
+		// checks if mapper is consistent
+		if (getMapper() != null && Undefined.isNot(value)) {
+			// gets chart
+			IsChart chart = getMapper().getAxis().getChart();
+			// gets if native object is consistent
+			if (Charts.hasNative(chart)) {
+				// gets native chart
+				Chart nativeChart = Charts.getNative(chart);
+				// gets color
+				return NativeJsGeoHelper.getColorForValue(nativeChart, value);
+			}
+		}
+		// if here, chart is not consistent
+		return Undefined.STRING;
+	}
+
+	/**
+	 * Returns the color for a specific data value.
+	 * 
+	 * @param value to use for searching
+	 * @return a color or <code>null</code> if not recognized the value by the chart.
+	 */
+	default IsColor getColorForValue(double value) {
+		// gets color as string
+		String color = getColorForValueAsString(value);
+		// checks if mapper is consistent
+		if (color != null) {
+			// returns color
+			return ColorBuilder.parse(color);
+		}
+		// if here, chart is not consistent
+		return null;
+	}
+
 }

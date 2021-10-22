@@ -1153,3 +1153,25 @@ CharbaJsGeoHelper.invert = function(chart, x, y) {
   }
   return null;
 }
+/**
+ * Returns the color for a specific data value.
+ * 
+ * @param {Chart} chart chart instance
+ * @param {number} value value to use for searching
+ * @return {string} a color a string
+ */
+CharbaJsGeoHelper.getColorForValue = function(chart, value) {
+  // color scale is always 'color' as id 
+  return chart.scales.color.getColorForValue(value);
+}
+/**
+ * Returns the size for a specific data value.
+ * 
+ * @param {Chart} chart chart instance
+ * @param {number} value value to use for searching
+ * @return {number} the size for the value
+ */
+CharbaJsGeoHelper.getSizeForValue = function(chart, value) {
+  // size scale is always 'r' as id 
+  return chart.scales.r.getSizeForValue(value);
+}

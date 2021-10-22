@@ -70,4 +70,22 @@ final class NativeJsGeoHelper {
 	 */
 	static native ArrayDouble invert(Chart chart, double x, double y);
 
+	/**
+	 * Returns the color for a specific data value.
+	 * 
+	 * @param chart chart instance
+	 * @param value to use for searching
+	 * @return a color a string
+	 */
+	static native String getColorForValue(Chart chart, double value);
+
+	/**
+	 * Returns the size for a specific data value.
+	 * 
+	 * @param chart chart instance
+	 * @param value to use for searching
+	 * @return the size of the value
+	 */
+	static native double getSizeForValue(Chart chart, double value);
+
 }

@@ -19,6 +19,7 @@ import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -107,6 +108,38 @@ final class JsGeoHelper {
 		}
 		// if here, chart is not consistent
 		return null;
-
 	}
+
+	/**
+	 * Returns the color for a specific data value.
+	 * 
+	 * @param chart chart instance
+	 * @param value to use for searching
+	 * @return a color a string
+	 */
+	String getColorForValue(Chart chart, double value) {
+		// checks chart argument if consistent
+		if (chart != null) {
+			return NativeJsGeoHelper.getColorForValue(chart, value);
+		}
+		// if here, chart is not consistent
+		return Undefined.STRING;
+	}
+
+	/**
+	 * Returns the size for a specific data value.
+	 * 
+	 * @param chart chart instance
+	 * @param value to use for searching
+	 * @return the size of the value
+	 */
+	double getSizeForValue(Chart chart, double value) {
+		// checks chart argument if consistent
+		if (chart != null) {
+			return NativeJsGeoHelper.getSizeForValue(chart, value);
+		}
+		// if here, chart is not consistent
+		return Undefined.DOUBLE;
+	}
+
 }
