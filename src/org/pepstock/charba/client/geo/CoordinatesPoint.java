@@ -18,7 +18,7 @@ package org.pepstock.charba.client.geo;
 import org.pepstock.charba.client.commons.AbstractPoint;
 
 /**
- * Contains the coordinates X and Y on the canvas, calculated by {@link ChoroplethChart#projection(Coordinates)} and {@link BubbleMapChart#projection(Coordinates)}.
+ * Contains the coordinates X and Y on the canvas, calculated by {@link ChoroplethChart#projection(Coordinates)} and {@link ChoroplethChart#projection(double, double)}.
  * 
  * @author Andrea "Stock" Stocchero
  */
