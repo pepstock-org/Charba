@@ -96,7 +96,7 @@ public enum Weight implements Key
 	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
-	 * @param intValue value of teh property as integer, where weight must be set as integer.
+	 * @param intValue value of the property as integer, where weight must be set as integer.
 	 */
 	private Weight(String value, int intValue) {
 		this.intValue = intValue;
