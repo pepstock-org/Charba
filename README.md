@@ -297,7 +297,8 @@ Here you can find the list of enhancements and updates available on `master` bra
   * enable the capability to set `cornerRadius` of the tooltip by `BarBorderRadius` object.
   * add `boxPadding` option to `Tooltips` options and configuration classes.
   * add `inflateAmount` option to `Bar` options and configuration classes and to `BarDataset` class.
-
+  * add `autoPadding` option to `Layout` options and configuration classes.
+  
 ### Developing
 
   * change dependency for Google Closure Compiler, [version v20211006](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20211006).

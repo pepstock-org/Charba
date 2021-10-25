@@ -25,6 +25,8 @@ import org.pepstock.charba.client.defaults.IsDefaultPadding;
  */
 public final class DefaultLayout implements IsDefaultLayout {
 
+	private static final boolean DEFAULT_AUTO_PADDING = true;
+
 	private static final int DEFAULT_PADDING = 0;
 
 	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);
@@ -45,4 +47,15 @@ public final class DefaultLayout implements IsDefaultLayout {
 	public IsDefaultPadding getPadding() {
 		return padding;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLayout#isAutoPadding()
+	 */
+	@Override
+	public boolean isAutoPadding() {
+		return DEFAULT_AUTO_PADDING;
+	}
+
 }

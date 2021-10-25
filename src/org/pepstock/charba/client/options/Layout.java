@@ -34,6 +34,7 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	 */
 	private enum Property implements Key
 	{
+		AUTO_PADDING("autoPadding"),
 		PADDING("padding");
 
 		// name value of property
@@ -82,6 +83,25 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	@Override
 	public Padding getPadding() {
 		return padding;
+	}
+
+	/**
+	 * Sets <code>true</code> to apply automatic padding so visible elements are completely drawn.
+	 * 
+	 * @param autoPadding <code>true</code> to apply automatic padding so visible elements are completely drawn
+	 */
+	public void setAutoPadding(boolean autoPadding) {
+		setValueAndAddToParent(Property.AUTO_PADDING, autoPadding);
+	}
+
+	/**
+	 * Returns <code>true</code> to apply automatic padding so visible elements are completely drawn.
+	 * 
+	 * @return <code>true</code> to apply automatic padding so visible elements are completely drawn
+	 */
+	@Override
+	public boolean isAutoPadding() {
+		return getValue(Property.AUTO_PADDING, getDefaultValues().isAutoPadding());
 	}
 
 }

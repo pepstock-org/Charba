@@ -28,4 +28,11 @@ public interface IsDefaultLayout {
 	 * @return padding object defaults.
 	 */
 	IsDefaultPadding getPadding();
+
+	/**
+	 * Returns <code>true</code> to apply automatic padding so visible elements are completely drawn.
+	 * 
+	 * @return <code>true</code> to apply automatic padding so visible elements are completely drawn
+	 */
+	boolean isAutoPadding();
 }

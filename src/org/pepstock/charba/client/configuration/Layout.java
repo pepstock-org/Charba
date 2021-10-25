@@ -102,6 +102,28 @@ public class Layout extends ConfigurationOptionsContainer implements IsScriptabl
 	}
 
 	/**
+	 * Sets <code>true</code> to apply automatic padding so visible elements are completely drawn.
+	 * 
+	 * @param autoPadding <code>true</code> to apply automatic padding so visible elements are completely drawn
+	 */
+	public void setAutoPadding(boolean autoPadding) {
+		getConfiguration().getLayout().setAutoPadding(autoPadding);
+	}
+
+	/**
+	 * Returns <code>true</code> to apply automatic padding so visible elements are completely drawn.
+	 * 
+	 * @return <code>true</code> to apply automatic padding so visible elements are completely drawn
+	 */
+	public boolean isAutoPadding() {
+		return getConfiguration().getLayout().isAutoPadding();
+	}
+
+	// ---------------------------
+	// CALLBACKS
+	// ---------------------------
+
+	/**
 	 * Returns the padding callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the padding callback, if set, otherwise <code>null</code>.
