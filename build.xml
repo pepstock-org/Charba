@@ -378,7 +378,7 @@
 				<pathelement path="${java.class.path}" />
 			</classpath>
 			<link offline="false" href="https://docs.oracle.com/en/java/javase/11/docs/api/" />
-			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
+			<!--link offline="false" href="http://www.gwtproject.org/javadoc/latest/" /-->
 		</javadoc>
 	</target>
 
@@ -400,7 +400,7 @@
 				<include name="org/pepstock/**" />
 			</packageset>
 			<link offline="false" href="https://docs.oracle.com/en/java/javase/11/docs/api/" />
-			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
+			<!--link offline="false" href="http://www.gwtproject.org/javadoc/latest/" /-->
 		</javadoc>
 	</target>
 
