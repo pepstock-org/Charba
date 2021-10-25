@@ -28,6 +28,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
@@ -705,12 +706,30 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	}
 
 	/**
+	 * Sets the radius of tooltip corner curves.
+	 * 
+	 * @param cornerRadius radius of tooltip corner curves.
+	 */
+	public void setCornerRadius(BarBorderRadius cornerRadius) {
+		getConfiguration().getTooltips().setCornerRadius(cornerRadius);
+	}
+
+	/**
 	 * Returns the radius of tooltip corner curves.
 	 * 
 	 * @return radius of tooltip corner curves.
 	 */
 	public int getCornerRadius() {
 		return getConfiguration().getTooltips().getCornerRadius();
+	}
+
+	/**
+	 * Returns the radius of tooltip corner curves.
+	 * 
+	 * @return radius of tooltip corner curves.
+	 */
+	public BarBorderRadius getCornerRadiusAsObject() {
+		return getConfiguration().getTooltips().getCornerRadiusAsObject();
 	}
 
 	/**

@@ -25,6 +25,8 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
@@ -728,13 +730,46 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	}
 
 	/**
+	 * Sets the radius of tooltip corner curves.
+	 * 
+	 * @param cornerRadius radius of tooltip corner curves.
+	 */
+	public void setCornerRadius(BarBorderRadius cornerRadius) {
+		setValueAndAddToParent(Property.CORNER_RADIUS, cornerRadius);
+	}
+
+	/**
 	 * Returns the radius of tooltip corner curves.
 	 * 
 	 * @return radius of tooltip corner curves.
 	 */
 	@Override
 	public int getCornerRadius() {
-		return getValue(Property.CORNER_RADIUS, getDefaultValues().getCornerRadius());
+		// checks if the radius is stored as number
+		if (isType(Property.CORNER_RADIUS, ObjectType.NUMBER)) {
+			// gets and returns the value
+			return getValue(Property.CORNER_RADIUS, getDefaultValues().getCornerRadius());
+		}
+		// if here, the value is not stored as number
+		// then returns default
+		return getDefaultValues().getCornerRadius();
+	}
+
+	/**
+	 * Returns the radius of tooltip corner curves.
+	 * 
+	 * @return radius of tooltip corner curves.
+	 */
+	public BarBorderRadius getCornerRadiusAsObject() {
+		// checks if the radius is stored as number
+		if (isType(Property.CORNER_RADIUS, ObjectType.OBJECT)) {
+			// gets and returns the value
+			return BarBorderRadius.FACTORY.create(getValue(Property.CORNER_RADIUS));
+		}
+		// if here, the value is not stored as number
+		// then returns default
+		// by number value
+		return new BarBorderRadius(getCornerRadius());
 	}
 
 	/**

@@ -294,6 +294,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `projection` and `projectionInvert` methods to GEO charts in order to translates latitude and longitude in XY coordinates and viceversa.
   * add `getColorForValue` and `getColorForValueAsString` methods to GEO color axis in order to get the color for a specific value.
   * add `getSizeForValue` method to GEO size axis in order to get the size for a specific value.
+  * enable the capability to set `cornerRadius` of the tooltip by `BarBorderRadius` object.
 
 ### Developing
 
