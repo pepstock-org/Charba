@@ -15,10 +15,12 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 
@@ -33,21 +35,11 @@ public abstract class AbstractTooltipLabelCallback implements TooltipLabelCallba
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onBeforeLabel(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.TooltipItem)
-	 */
-	@Override
-	public String onBeforeLabel(IsChart chart, TooltipItem item) {
-		return Constants.EMPTY_STRING;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onLabel(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.TooltipItem)
 	 */
 	@Override
-	public String onLabel(IsChart chart, TooltipItem item) {
-		return Constants.EMPTY_STRING;
+	public List<String> onLabel(IsChart chart, TooltipItem item) {
+		return Collections.emptyList();
 	}
 
 	/*
@@ -74,16 +66,6 @@ public abstract class AbstractTooltipLabelCallback implements TooltipLabelCallba
 		// if here, chart is not consistent
 		// then return the default font color
 		return Defaults.get().getGlobal().getColor();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback#onAfterLabel(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.TooltipItem)
-	 */
-	@Override
-	public String onAfterLabel(IsChart chart, TooltipItem item) {
-		return Constants.EMPTY_STRING;
 	}
 
 }

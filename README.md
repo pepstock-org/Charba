@@ -283,6 +283,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Breaking changes
 
   * drop support for Java 8 going to Java 11 as minimum requirement.
+  * change `onBeforeLabel`, `onLabel` and `onAfterLabel` methods to `TooltipLabelCallback` interface in order to return a `List<String>` instead of `String` instances to enable tooltip multilines labels.
+  * change `invokeTooltipsCallbackOnLabel` method to `Defaults` class in order to return a `List<String>` instead of `String` instances.
 
 ### Features
 

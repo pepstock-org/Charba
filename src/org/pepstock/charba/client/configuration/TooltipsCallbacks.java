@@ -28,7 +28,6 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -81,7 +80,25 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 		 * Method of function to be called to manage the label.
 		 * 
 		 * @param item tooltip item
-		 * @return string before item
+		 * @return list of string to apply as labels
+		 */
+		ArrayString call(NativeObject item);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to get text label color.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyLabelTextColorCallback {
+
+		/**
+		 * Method of function to be called to have text label color for the item.
+		 * 
+		 * @param item tooltip item
+		 * @return label color item as string
 		 */
 		String call(NativeObject item);
 	}
@@ -126,7 +143,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	// callback proxy to invoke the label point style function
 	private final CallbackProxy<ProxyLabelColorCallback> labelPointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text label color function
-	private final CallbackProxy<ProxyLabelCallback> labelTextColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyLabelTextColorCallback> labelTextColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after label function
 	private final CallbackProxy<ProxyLabelCallback> afterLabelCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before footer function
@@ -432,22 +449,19 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * Manage the LABEL callback invocation
 	 * 
 	 * @param item tooltip item
-	 * @return label to apply to tooltip item
+	 * @return labels to apply to tooltip item
 	 */
-	private String onBeforeLabelCallback(NativeObject item) {
+	private ArrayString onBeforeLabelCallback(NativeObject item) {
 		// gets callback
 		TooltipLabelCallback callback = getLabelCallback();
 		// checks if callback is consistent
 		if (callback != null) {
 			// invokes callback
-			String result = callback.onBeforeLabel(getChart(), TooltipItem.FACTORY.create(item));
-			// checks if result is consistent
-			if (result != null) {
-				return result;
-			}
+			List<String> result = callback.onBeforeLabel(getChart(), TooltipItem.FACTORY.create(item));
+			return ArrayString.fromOrEmpty(result);
 		}
 		// default result
-		return Constants.EMPTY_STRING;
+		return EMPTY_ARRAY_STRING;
 	}
 
 	/**
@@ -456,7 +470,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * @param item tooltip item
 	 * @return label to apply to tooltip item
 	 */
-	private String onLabelCallback(NativeObject item) {
+	private ArrayString onLabelCallback(NativeObject item) {
 		// gets callback
 		TooltipLabelCallback callback = getLabelCallback();
 		// gets the items
@@ -464,14 +478,14 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 		// checks if callback is consistent
 		if (callback != null) {
 			// invokes callback
-			String result = callback.onLabel(getChart(), tooltipItem);
-			// checks if result is consistent
-			if (result != null) {
-				return result;
+			List<String> result = callback.onLabel(getChart(), tooltipItem);
+			// checks if the result si consistent
+			if (result != null && !result.isEmpty()) {
+				return ArrayString.fromOrEmpty(result);
 			}
 		}
 		// default result
-		return Defaults.get().invokeTooltipsCallbackOnLabel(getChart(), tooltipItem);
+		return ArrayString.fromOrEmpty(Defaults.get().invokeTooltipsCallbackOnLabel(getChart(), tooltipItem));
 	}
 
 	/**
@@ -560,22 +574,19 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 	 * Manage the LABEL callback invocation
 	 * 
 	 * @param item tooltip item
-	 * @return label to apply to tooltip item
+	 * @return labels to apply to tooltip item
 	 */
-	private String onAfterLabelCallback(NativeObject item) {
+	private ArrayString onAfterLabelCallback(NativeObject item) {
 		// gets callback
 		TooltipLabelCallback callback = getLabelCallback();
 		// checks if callback is consistent
 		if (callback != null) {
 			// invokes callback
-			String result = callback.onAfterLabel(getChart(), TooltipItem.FACTORY.create(item));
-			// checks if result is consistent
-			if (result != null) {
-				return result;
-			}
+			List<String> result = callback.onAfterLabel(getChart(), TooltipItem.FACTORY.create(item));
+			return ArrayString.fromOrEmpty(result);
 		}
 		// default result
-		return Constants.EMPTY_STRING;
+		return EMPTY_ARRAY_STRING;
 	}
 
 	/**

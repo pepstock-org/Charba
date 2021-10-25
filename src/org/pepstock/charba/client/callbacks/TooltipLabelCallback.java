@@ -15,10 +15,12 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.items.TooltipLabelPointStyle;
@@ -35,14 +37,14 @@ public interface TooltipLabelCallback {
 	/**
 	 * Returns text to render before an individual label.<br>
 	 * This will be called for each item in the tooltip.<br>
-	 * If returns <code>null</code>, it will be ignored.
+	 * If returns <code>null</code> or empty list, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label to be applied.
+	 * @return list of labels to be applied.
 	 */
-	default String onBeforeLabel(IsChart chart, TooltipItem item) {
-		return Constants.EMPTY_STRING;
+	default List<String> onBeforeLabel(IsChart chart, TooltipItem item) {
+		return Collections.emptyList();
 	}
 
 	/**
@@ -53,7 +55,7 @@ public interface TooltipLabelCallback {
 	 * @param item tooltip item
 	 * @return label to be applied.
 	 */
-	default String onLabel(IsChart chart, TooltipItem item) {
+	default List<String> onLabel(IsChart chart, TooltipItem item) {
 		return Defaults.get().invokeTooltipsCallbackOnLabel(chart, item);
 	}
 
@@ -101,8 +103,8 @@ public interface TooltipLabelCallback {
 	 * @param item tooltip item
 	 * @return label to be applied.
 	 */
-	default String onAfterLabel(IsChart chart, TooltipItem item) {
-		return Constants.EMPTY_STRING;
+	default List<String> onAfterLabel(IsChart chart, TooltipItem item) {
+		return Collections.emptyList();
 	}
 
 }

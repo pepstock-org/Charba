@@ -396,9 +396,9 @@ public final class Defaults {
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
-	 * @return label to be applied.
+	 * @return labels to be applied.
 	 */
-	public String invokeTooltipsCallbackOnLabel(IsChart chart, TooltipItem item) {
+	public List<String> invokeTooltipsCallbackOnLabel(IsChart chart, TooltipItem item) {
 		// checks if arguments are consistent
 		if (IsChart.isConsistent(chart) && item != null) {
 			// gets the dataset
@@ -415,11 +415,11 @@ public final class Defaults {
 					label.append(item.getFormattedValue());
 				}
 			}
-			return label.toString();
+			return Arrays.asList(label.toString());
 		}
 		// if here, the arguments or the labels are not consistent
 		// then returns an empty string
-		return Constants.EMPTY_STRING;
+		return Arrays.asList(Constants.EMPTY_STRING);
 	}
 
 	/**
