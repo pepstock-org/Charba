@@ -180,4 +180,24 @@ public final class DefaultChartBar implements IsDefaultBar {
 		return bar.isEnableBorderRadius();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#isAutoInflateAmount()
+	 */
+	@Override
+	public boolean isAutoInflateAmount() {
+		return bar.isAutoInflateAmount();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#getInflateAmount()
+	 */
+	@Override
+	public int getInflateAmount() {
+		return bar.getInflateAmount();
+	}
+
 }

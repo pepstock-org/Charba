@@ -30,11 +30,19 @@ import org.pepstock.charba.client.items.Undefined;
  */
 public final class DefaultBar extends AbstractDefaultOptionsElement implements IsDefaultBar {
 
+	/**
+	 * Value to store in the CHART.JS configuration when the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated,
+	 * <b>{@value AUTO_INFLATE_AMOUNT}</b>.
+	 */
+	public static final String AUTO_INFLATE_AMOUNT = "auto";
+
 	private static final boolean DEFAULT_ENABLE_BORDER_RADIUS = true;
 
 	private static final int DEFAULT_BORDER_WIDTH = 0;
 
 	private static final int DEFAULT_BORDER_RADIUS = 0;
+
+	private static final boolean DEFAULT_AUTO_INFLATE_AMOUNT = true;
 
 	/**
 	 * To avoid any instantiation
@@ -121,6 +129,26 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 	@Override
 	public boolean isEnableBorderRadius() {
 		return DEFAULT_ENABLE_BORDER_RADIUS;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#isAutoInflateAmount()
+	 */
+	@Override
+	public boolean isAutoInflateAmount() {
+		return DEFAULT_AUTO_INFLATE_AMOUNT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#getInflateAmount()
+	 */
+	@Override
+	public int getInflateAmount() {
+		return Undefined.INTEGER;
 	}
 
 }

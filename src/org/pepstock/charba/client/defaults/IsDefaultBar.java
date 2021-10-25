@@ -52,4 +52,18 @@ public interface IsDefaultBar extends IsDefaultOptionsElement, IsDefaultPointSty
 	 */
 	boolean isEnableBorderRadius();
 
+	/**
+	 * Returns <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated.
+	 * 
+	 * @return <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated
+	 */
+	boolean isAutoInflateAmount();
+
+	/**
+	 * Returns the amount of pixels to inflate the bar rectangles, when drawing.
+	 * 
+	 * @return the amount of pixels to inflate the bar rectangles, when drawing
+	 */
+	int getInflateAmount();
+
 }

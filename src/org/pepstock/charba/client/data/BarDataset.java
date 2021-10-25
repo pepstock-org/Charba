@@ -28,6 +28,7 @@ import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.EnableBorderRadiusCallback;
+import org.pepstock.charba.client.callbacks.InflateAmountCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
@@ -41,11 +42,13 @@ import org.pepstock.charba.client.commons.ArrayDoubleArrayList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.defaults.globals.DefaultBar;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.BorderSkipped;
@@ -98,6 +101,8 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	private final CallbackProxy<ProxyDoubleCallback> baseCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the enable border radius function
 	private final CallbackProxy<ProxyBooleanCallback> enableBorderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point style function
+	private final CallbackProxy<ProxyObjectCallback> inflateAmountCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
@@ -115,6 +120,8 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	private PointStyleCallback pointStyleCallback = null;
 	// base callback instance
 	private BaseCallback baseCallback = null;
+	// inflate amount callback instance
+	private InflateAmountCallback inflateAmountCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -122,14 +129,15 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	private enum Property implements Key
 	{
 		BASE("base"),
-		X_AXIS_ID("xAxisID"),
-		Y_AXIS_ID("yAxisID"),
 		BORDER_SKIPPED("borderSkipped"),
 		BORDER_RADIUS("borderRadius"),
+		ENABLE_BORDER_RADIUS("enableBorderRadius"),
 		HOVER_BORDER_RADIUS("hoverBorderRadius"),
 		INDEX_AXIS("indexAxis"),
+		INFLATE_AMOUNT("inflateAmount"),
 		POINT_STYLE("pointStyle"),
-		ENABLE_BORDER_RADIUS("enableBorderRadius"),
+		X_AXIS_ID("xAxisID"),
+		Y_AXIS_ID("yAxisID"),
 		// internal to map the border width and radius type
 		CHARBA_BORDER_WIDTH_TYPE("charbaBorderWidthType"),
 		CHARBA_HOVER_BORDER_WIDTH_TYPE("charbaHoverBorderWidthType"),
@@ -247,6 +255,8 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		this.baseCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getBaseCallback(), Undefined.DOUBLE).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.enableBorderRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getEnableBorderRadiusCallback(), getDefaultValues().getElements().getBar().isEnableBorderRadius()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.inflateAmountCallbackProxy.setCallback(context -> onInflateAmount(createContext(context), getInflateAmountCallback()));
 	}
 
 	/*
@@ -1004,6 +1014,60 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		return getValue(Property.ENABLE_BORDER_RADIUS, getDefaultValues().getElements().getBar().isEnableBorderRadius());
 	}
 
+	/**
+	 * Sets <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated.
+	 * 
+	 * @param autoInflateAmount <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated
+	 */
+	public void setAutoInflateAmount(boolean autoInflateAmount) {
+		// checks if setting
+		if (autoInflateAmount) {
+			setValueAndAddToParent(Property.INFLATE_AMOUNT, DefaultBar.AUTO_INFLATE_AMOUNT);
+		} else {
+			// removes key
+			remove(Property.INFLATE_AMOUNT);
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated.
+	 * 
+	 * @return <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated
+	 */
+	public boolean isAutoInflateAmount() {
+		// checks if the property is NOT set as number
+		if (!isType(Property.INFLATE_AMOUNT, ObjectType.NUMBER)) {
+			return getValue(Property.INFLATE_AMOUNT, getDefaultValues().getElements().getBar().isAutoInflateAmount());
+		}
+		// if here, the inflate is a number
+		// then returns default
+		return getDefaultValues().getElements().getBar().isAutoInflateAmount();
+	}
+
+	/**
+	 * Sets the amount of pixels to inflate the bar rectangles, when drawing.
+	 * 
+	 * @param inflateAmount the amount of pixels to inflate the bar rectangles, when drawing
+	 */
+	public void setInflateAmount(int inflateAmount) {
+		setValueAndAddToParent(Property.INFLATE_AMOUNT, Checker.positiveOrZero(inflateAmount));
+	}
+
+	/**
+	 * Returns the amount of pixels to inflate the bar rectangles, when drawing.
+	 * 
+	 * @return the amount of pixels to inflate the bar rectangles, when drawing
+	 */
+	public int getInflateAmount() {
+		// checks if the property is NOT set as number
+		if (isType(Property.INFLATE_AMOUNT, ObjectType.NUMBER)) {
+			return getValue(Property.INFLATE_AMOUNT, getDefaultValues().getElements().getBar().getInflateAmount());
+		}
+		// if here, the inflate is a number
+		// then returns default
+		return getDefaultValues().getElements().getBar().getInflateAmount();
+	}
+
 	// -----------------
 	// CALLBACKS
 	// -----------------
@@ -1290,6 +1354,44 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		setValue(Property.ENABLE_BORDER_RADIUS, enableBorderRadiusCallback);
 	}
 
+	/**
+	 * Returns the inflate amount callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the inflate amount callback, if set, otherwise <code>null</code>.
+	 */
+	public InflateAmountCallback getInflateAmountCallback() {
+		return inflateAmountCallback;
+	}
+
+	/**
+	 * Sets the inflate amount callback.
+	 * 
+	 * @param inflateAmountCallback the inflate amount callback.
+	 */
+	public void setInflateAmount(InflateAmountCallback inflateAmountCallback) {
+		// sets the callback
+		this.inflateAmountCallback = inflateAmountCallback;
+		if (inflateAmountCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.INFLATE_AMOUNT, inflateAmountCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.INFLATE_AMOUNT);
+		}
+	}
+
+	/**
+	 * Sets the inflate amount callback.
+	 * 
+	 * @param inflateAmountCallback the inflate amount callback.
+	 */
+	public void setInflateAmount(NativeCallback inflateAmountCallback) {
+		// resets callback
+		setInflateAmount((InflateAmountCallback) null);
+		// stores and manages callback
+		setValue(Property.INFLATE_AMOUNT, inflateAmountCallback);
+	}
+
 	// ----------------------
 	// METHODS for JSFunction
 	// ----------------------
@@ -1337,6 +1439,26 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		}
 		// default result
 		return getDefaultValues().getElements().getBar().getPointStyle().value();
+	}
+
+	/**
+	 * Returns a string (id auto inflate amount) or a integer when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param callback callback instance to be invoked
+	 * @return a object property value, as string or integer
+	 */
+	private Object onInflateAmount(DatasetContext context, InflateAmountCallback callback) {
+		// gets value
+		int result = ScriptableUtils.getOptionValue(context, callback);
+		// checks result is undefined
+		if (Undefined.is(result)) {
+			// if here is undefined
+			// then set AUTO
+			return DefaultBar.AUTO_INFLATE_AMOUNT;
+		}
+		// returns the value checking the range
+		return Checker.positiveOrZero(result);
 	}
 
 }

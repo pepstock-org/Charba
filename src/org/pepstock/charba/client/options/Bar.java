@@ -20,7 +20,9 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultBar;
+import org.pepstock.charba.client.defaults.globals.DefaultBar;
 import org.pepstock.charba.client.enums.BorderSkipped;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Bar elements are used to represent the bars in a bar chart.
@@ -37,7 +39,8 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar, 
 		BORDER_SKIPPED("borderSkipped"),
 		BORDER_RADIUS("borderRadius"),
 		ENABLE_BORDER_RADIUS("enableBorderRadius"),
-		HOVER_BORDER_RADIUS("hoverBorderRadius");
+		HOVER_BORDER_RADIUS("hoverBorderRadius"),
+		INFLATE_AMOUNT("inflateAmount");
 
 		// name value of property
 		private final String value;
@@ -191,6 +194,62 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar, 
 	@Override
 	public int getHoverBorderRadius() {
 		return getValue(Property.HOVER_BORDER_RADIUS, getDefaultValues().getHoverBorderRadius());
+	}
+
+	/**
+	 * Sets <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated.
+	 * 
+	 * @param autoInflateAmount <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated
+	 */
+	public void setAutoInflateAmount(boolean autoInflateAmount) {
+		// checks if setting
+		if (autoInflateAmount) {
+			setValueAndAddToParent(Property.INFLATE_AMOUNT, DefaultBar.AUTO_INFLATE_AMOUNT);
+		} else {
+			// removes key
+			remove(Property.INFLATE_AMOUNT);
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated.
+	 * 
+	 * @return <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated
+	 */
+	@Override
+	public boolean isAutoInflateAmount() {
+		// checks if the property is NOT set as number
+		if (!isType(Property.INFLATE_AMOUNT, ObjectType.NUMBER)) {
+			return getValue(Property.INFLATE_AMOUNT, getDefaultValues().isAutoInflateAmount());
+		}
+		// if here, the inflate is a number
+		// then returns false
+		return false;
+	}
+
+	/**
+	 * Sets the amount of pixels to inflate the bar rectangles, when drawing.
+	 * 
+	 * @param inflateAmount the amount of pixels to inflate the bar rectangles, when drawing
+	 */
+	public void setInflateAmount(int inflateAmount) {
+		setValueAndAddToParent(Property.INFLATE_AMOUNT, Checker.positiveOrZero(inflateAmount));
+	}
+
+	/**
+	 * Returns the amount of pixels to inflate the bar rectangles, when drawing.
+	 * 
+	 * @return the amount of pixels to inflate the bar rectangles, when drawing
+	 */
+	@Override
+	public int getInflateAmount() {
+		// checks if the property is NOT set as number
+		if (isType(Property.INFLATE_AMOUNT, ObjectType.NUMBER)) {
+			return getValue(Property.INFLATE_AMOUNT, getDefaultValues().getInflateAmount());
+		}
+		// if here, the inflate is a number
+		// then returns false
+		return Undefined.INTEGER;
 	}
 
 }
