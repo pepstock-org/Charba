@@ -428,4 +428,14 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 		return tooltip.getYAlign();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBoxPadding()
+	 */
+	@Override
+	public int getBoxPadding() {
+		return tooltip.getBoxPadding();
+	}
+
 }

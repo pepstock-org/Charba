@@ -92,6 +92,8 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 
 	private static final int DEFAULT_PADDING = 6;
 
+	private static final int DEFAULT_BOX_PADDING = 1;
+
 	private final IsDefaultAnimation animation = new DefaultAnimation();
 
 	private final IsDefaultTransitions transitions = new DefaultTransitions();
@@ -491,6 +493,16 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	@Override
 	public TooltipAlign getYAlign() {
 		return TooltipAlign.AUTO;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBoxPadding()
+	 */
+	@Override
+	public int getBoxPadding() {
+		return DEFAULT_BOX_PADDING;
 	}
 
 	/**

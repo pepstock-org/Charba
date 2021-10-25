@@ -51,35 +51,36 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	{
 		CALLBACKS("callbacks"),
 		// simple properties
-		ENABLED("enabled"),
-		EVENTS("events"),
-		POSITION("position"),
-		X_ALIGN("xAlign"),
-		Y_ALIGN("yAlign"),
 		BACKGROUND_COLOR("backgroundColor"),
-		TITLE_COLOR("titleColor"),
-		TITLE_FONT("titleFont"),
-		TITLE_ALIGN("titleAlign"),
-		TITLE_SPACING("titleSpacing"),
-		TITLE_MARGIN_BOTTOM("titleMarginBottom"),
+		BODY_ALIGN("bodyAlign"),
 		BODY_COLOR("bodyColor"),
 		BODY_FONT("bodyFont"),
 		BODY_SPACING("bodySpacing"),
-		BODY_ALIGN("bodyAlign"),
-		FOOTER_COLOR("footerColor"),
-		FOOTER_FONT("footerFont"),
-		FOOTER_SPACING("footerSpacing"),
-		FOOTER_MARGIN_TOP("footerMarginTop"),
-		FOOTER_ALIGN("footerAlign"),
-		PADDING("padding"),
+		BORDER_COLOR("borderColor"),
+		BORDER_WIDTH("borderWidth"),
+		BOX_PADDING("boxPadding"),
 		CARET_PADDING("caretPadding"),
 		CARET_SIZE("caretSize"),
 		CORNER_RADIUS("cornerRadius"),
-		MULTI_KEY_BACKGROUND("multiKeyBackground"),
 		DISPLAY_COLORS("displayColors"),
-		BORDER_COLOR("borderColor"),
-		BORDER_WIDTH("borderWidth"),
-		USE_POINT_STYLE("usePointStyle");
+		ENABLED("enabled"),
+		EVENTS("events"),
+		FOOTER_ALIGN("footerAlign"),
+		FOOTER_COLOR("footerColor"),
+		FOOTER_FONT("footerFont"),
+		FOOTER_MARGIN_TOP("footerMarginTop"),
+		FOOTER_SPACING("footerSpacing"),
+		MULTI_KEY_BACKGROUND("multiKeyBackground"),
+		PADDING("padding"),
+		POSITION("position"),
+		TITLE_ALIGN("titleAlign"),
+		TITLE_COLOR("titleColor"),
+		TITLE_FONT("titleFont"),
+		TITLE_MARGIN_BOTTOM("titleMarginBottom"),
+		TITLE_SPACING("titleSpacing"),
+		USE_POINT_STYLE("usePointStyle"),
+		X_ALIGN("xAlign"),
+		Y_ALIGN("yAlign");
 
 		// name value of property
 		private final String value;
@@ -903,5 +904,24 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	@Override
 	public boolean isUsePointStyle() {
 		return getValue(Property.USE_POINT_STYLE, getDefaultValues().isUsePointStyle());
+	}
+
+	/**
+	 * Sets the padding between the color box and the text.
+	 * 
+	 * @param boxPadding padding between the color box and the text
+	 */
+	public void setBoxPadding(int boxPadding) {
+		setValueAndAddToParent(Property.BOX_PADDING, Checker.positiveOrZero(boxPadding));
+	}
+
+	/**
+	 * Returns the padding between the color box and the text.
+	 * 
+	 * @return padding between the color box and the text
+	 */
+	@Override
+	public int getBoxPadding() {
+		return getValue(Property.BOX_PADDING, getDefaultValues().getBoxPadding());
 	}
 }

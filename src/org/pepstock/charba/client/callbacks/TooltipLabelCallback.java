@@ -49,7 +49,7 @@ public interface TooltipLabelCallback {
 
 	/**
 	 * Returns text to render for an individual item in the tooltip.<br>
-	 * If returns <code>null</code>, it will be ignored.
+	 * If returns <code>null</code> or empty list, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
@@ -97,7 +97,7 @@ public interface TooltipLabelCallback {
 
 	/**
 	 * Returns text to render after an individual label.<br>
-	 * If returns <code>null</code>, it will be ignored.
+	 * If returns <code>null</code> or empty list, it will be ignored.
 	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item

@@ -968,6 +968,24 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 		return getConfiguration().getTooltips().getYAlign();
 	}
 
+	/**
+	 * Sets the padding between the color box and the text.
+	 * 
+	 * @param boxPadding padding between the color box and the text
+	 */
+	public void setBoxPadding(int boxPadding) {
+		getConfiguration().getTooltips().setBoxPadding(boxPadding);
+	}
+
+	/**
+	 * Returns the padding between the color box and the text.
+	 * 
+	 * @return padding between the color box and the text
+	 */
+	public int getBoxPadding() {
+		return getConfiguration().getTooltips().getBoxPadding();
+	}
+
 	// ---------------------------
 	// CALLBACKS
 	// ---------------------------

@@ -249,4 +249,11 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 */
 	TooltipAlign getYAlign();
 
+	/**
+	 * Returns the padding between the color box and the text.
+	 * 
+	 * @return padding between the color box and the text
+	 */
+	int getBoxPadding();
+
 }

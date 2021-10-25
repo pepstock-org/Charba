@@ -295,6 +295,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `getColorForValue` and `getColorForValueAsString` methods to GEO color axis in order to get the color for a specific value.
   * add `getSizeForValue` method to GEO size axis in order to get the size for a specific value.
   * enable the capability to set `cornerRadius` of the tooltip by `BarBorderRadius` object.
+  * add `boxPadding` option to `Tooltips` options and configuration classes.
 
 ### Developing
 
