@@ -47,6 +47,10 @@ public enum Status implements Key
 	 */
 	DISCARDED("discarded"),
 	/**
+	 * The toast has been removed from queue because the user decided to hide all toast items and cleared the queue.
+	 */
+	NOT_SHOWED("notShowed"),
+	/**
 	 * The status is unknown, default.
 	 */
 	UNKNOWN("unknown");

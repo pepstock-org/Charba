@@ -298,6 +298,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `boxPadding` option to `Tooltips` options and configuration classes.
   * add `inflateAmount` option to `Bar` options and configuration classes and to `BarDataset` class.
   * add `autoPadding` option to `Layout` options and configuration classes.
+  * enable the capability to hide the opened toast items programmatically.
   
 ### Developing
 

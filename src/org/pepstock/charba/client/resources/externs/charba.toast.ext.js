@@ -35,5 +35,9 @@ CharbaToast.create = function(id, title, label, options, dateTime) {};
  * @param {Object} source
  * @return {Object}
  */
-
 CharbaToast.clone = function(source) {};
+/**
+ * @param {Object} item
+ * @return {undefined}
+ */
+CharbaToast.close = function(item) {};

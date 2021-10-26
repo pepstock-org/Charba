@@ -17,6 +17,7 @@ package org.pepstock.charba.client.utils.toast;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -657,5 +658,43 @@ public final class Toaster {
 	 */
 	Map<String, Object> getCurrentContext(int id) {
 		return currentContexts.get(id);
+	}
+
+	/**
+	 * Closes all items which are opened and not closed yet.<br>
+	 * All toast items in queued will be removed.
+	 */
+	public void hideOpenItems() {
+		hideOpenItems(true);
+	}
+
+	/**
+	 * Closes all items which are opened and not closed yet.<br>
+	 * If the passed argument is <code>true</code>, it clears also the queue, without showing the items.
+	 * 
+	 * @param clearQueue if <code>true</code>, it clears also the queue, without showing the items.
+	 */
+	public void hideOpenItems(boolean clearQueue) {
+		// checks if the queue must be clear
+		if (clearQueue) {
+			// creates iterator
+			Iterator<ToastItem> iterator = queueItems.iterator();
+			// scans all open items
+			while (iterator.hasNext()) {
+				// gets item
+				ToastItem item = iterator.next();
+				// sets closed status
+				item.setStatus(Status.NOT_SHOWED);
+				// stores history
+				storeHistory(item);
+				// removes item
+				iterator.remove();
+			}
+		}
+		// scans all open items
+		for (ToastItem item : currentOpenItems.values()) {
+			// closes item
+			item.hide();
+		}
 	}
 }

@@ -324,6 +324,7 @@ CharbaToast = {
       if (typeof options.onOpen === 'function') {
         options.onOpen.apply(this, [result]);
       }
+      result.toasting = toasting;
       return result;
     }
   },
@@ -429,6 +430,18 @@ CharbaToast = {
     // all other object types
     return source;  
   },
+  /*
+   * Closes a toast
+   *
+   * @param {Object} item item to close
+   * @return {undefined}
+   */ 
+  close: function(item) {
+    // checks consistency
+    if (item && item.toasting && item.toasting.hide) {
+      item.toasting.hide.call();
+    }
+  },  
   /*
    * @type {Object} contains the immutable defaults
    */

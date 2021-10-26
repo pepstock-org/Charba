@@ -299,6 +299,17 @@ public final class ToastItem extends NativeObjectContainer {
 	}
 
 	/**
+	 * Closes the item if is opened.
+	 */
+	public void hide() {
+		// checks if still open
+		if (Status.OPENED.equals(getStatus())) {
+			// closes item
+			NativeToasting.close(getNativeObject());
+		}
+	}
+
+	/**
 	 * Returns the native object instance of date time.
 	 * 
 	 * @return the native object instance of date time

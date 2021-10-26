@@ -95,4 +95,12 @@ final class NativeToasting {
 	@JsMethod
 	static native NativeObject clone(NativeObject source);
 
+	/**
+	 * Closes the toast item.
+	 * 
+	 * @param item native object toast item to be closed
+	 */
+	@JsMethod
+	static native void close(NativeObject item);
+
 }
