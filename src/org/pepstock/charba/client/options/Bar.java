@@ -220,7 +220,16 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar, 
 	public boolean isAutoInflateAmount() {
 		// checks if the property is NOT set as number
 		if (!isType(Property.INFLATE_AMOUNT, ObjectType.NUMBER)) {
-			return getValue(Property.INFLATE_AMOUNT, getDefaultValues().isAutoInflateAmount());
+			// gets value
+			String value = getValue(Property.INFLATE_AMOUNT, Undefined.STRING);
+			// checks if the value is consistent
+			if (DefaultBar.AUTO_INFLATE_AMOUNT.equalsIgnoreCase(value) || value == null) {
+				// if here, the value is consistent or not exists
+				return true;
+			}
+			// if here, the stored value is not consistent
+			// then returns default
+			return getDefaultValues().isAutoInflateAmount();
 		}
 		// if here, the inflate is a number
 		// then returns false

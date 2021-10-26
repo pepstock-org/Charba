@@ -39,6 +39,7 @@ import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayDoubleArray;
 import org.pepstock.charba.client.commons.ArrayDoubleArrayList;
+import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -354,7 +355,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		// resets callback if exist
 		setBase((BaseCallback) null);
 		// stores values
-		setValueOrArrayAndAddToParent(Property.BASE, base);
+		setValueOrArray(Property.BASE, base);
 	}
 
 	/**
@@ -1020,9 +1021,12 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 * @param autoInflateAmount <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated
 	 */
 	public void setAutoInflateAmount(boolean autoInflateAmount) {
+		// resets callback
+		setInflateAmount((InflateAmountCallback) null);
 		// checks if setting
 		if (autoInflateAmount) {
-			setValueAndAddToParent(Property.INFLATE_AMOUNT, DefaultBar.AUTO_INFLATE_AMOUNT);
+			// stores value
+			setValue(Property.INFLATE_AMOUNT, DefaultBar.AUTO_INFLATE_AMOUNT);
 		} else {
 			// removes key
 			remove(Property.INFLATE_AMOUNT);
@@ -1036,8 +1040,14 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public boolean isAutoInflateAmount() {
 		// checks if the property is NOT set as number
-		if (!isType(Property.INFLATE_AMOUNT, ObjectType.NUMBER)) {
-			return getValue(Property.INFLATE_AMOUNT, getDefaultValues().getElements().getBar().isAutoInflateAmount());
+		if (isType(Property.INFLATE_AMOUNT, ObjectType.STRING) || isType(Property.INFLATE_AMOUNT, ObjectType.UNDEFINED)) {
+			// gets value
+			String value = getValue(Property.INFLATE_AMOUNT, Undefined.STRING);
+			// checks if the value is consistent
+			if (DefaultBar.AUTO_INFLATE_AMOUNT.equalsIgnoreCase(value) || value == null) {
+				// if here, the value is consistent or not exists
+				return true;
+			}
 		}
 		// if here, the inflate is a number
 		// then returns default
@@ -1049,8 +1059,11 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 * 
 	 * @param inflateAmount the amount of pixels to inflate the bar rectangles, when drawing
 	 */
-	public void setInflateAmount(int inflateAmount) {
-		setValueAndAddToParent(Property.INFLATE_AMOUNT, Checker.positiveOrZero(inflateAmount));
+	public void setInflateAmount(int... inflateAmount) {
+		// resets callback
+		setInflateAmount((InflateAmountCallback) null);
+		// stores value
+		setValueOrArray(Property.INFLATE_AMOUNT, inflateAmount);
 	}
 
 	/**
@@ -1058,14 +1071,10 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 * 
 	 * @return the amount of pixels to inflate the bar rectangles, when drawing
 	 */
-	public int getInflateAmount() {
-		// checks if the property is NOT set as number
-		if (isType(Property.INFLATE_AMOUNT, ObjectType.NUMBER)) {
-			return getValue(Property.INFLATE_AMOUNT, getDefaultValues().getElements().getBar().getInflateAmount());
-		}
-		// if here, the inflate is a number
-		// then returns default
-		return getDefaultValues().getElements().getBar().getInflateAmount();
+	public List<Integer> getInflateAmount() {
+		// gets array and returns list
+		ArrayInteger array = getValueOrArray(Property.INFLATE_AMOUNT, getDefaultValues().getElements().getBar().getInflateAmount());
+		return ArrayListHelper.list(array);
 	}
 
 	// -----------------
