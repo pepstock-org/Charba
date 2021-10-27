@@ -810,15 +810,13 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	public final void update(TransitionKey mode) {
 		// checks if chart is created
 		if (isInitialized()) {
+			// invokes the apply configuration
+			applyConfiguration();
 			// if mode is valid.. added check to null to avoid issue from code analysis
 			if (mode != null && TransitionKey.isValid(mode)) {
-				// invokes the apply configuration
-				applyConfiguration();
 				// then calls the update with animation mode
 				chart.update(mode.value());
 			} else {
-				// invokes the apply configuration
-				applyConfiguration();
 				// otherwise calls the update
 				chart.update();
 			}
