@@ -1241,6 +1241,30 @@ public final class Context2dItem extends BaseHtmlElement {
 	public native void putImageData(ImageData imagedata, double dx, double dy);
 
 	/**
+	 * Paints data from the given {@link ImageData} object onto the canvas.
+	 * 
+	 * @param imagedata An {@link ImageData} object containing the array of pixel values.
+	 * @param dx Horizontal position (x coordinate) at which to place the image data in the destination canvas.
+	 * @param dy Vertical position (y coordinate) at which to place the image data in the destination canvas.
+	 * @param dirtyX Horizontal position (x coordinate) of the top-left corner from which the image data will be extracted. Defaults to 0.
+	 * @param dirtyY Vertical position (y coordinate) of the top-left corner from which the image data will be extracted. Defaults to 0.
+	 * @param dirtyWidth Width of the rectangle to be painted. Defaults to the width of the image data.
+	 * @param dirtyHeight Height of the rectangle to be painted. Defaults to the height of the image data.
+	 */
+	@JsMethod
+	public native void putImageData(ImageData imagedata, double dx, double dy, double dirtyX, double dirtyY, double dirtyWidth, double dirtyHeight);
+
+	/**
+	 * Returns an empty {@link ImageData} object representing the underlying pixel data for a specified portion of the canvas.
+	 * 
+	 * @param width The width to give the new {@link ImageData} object. A negative value flips the rectangle around the vertical axis.
+	 * @param height The height to give the new {@link ImageData} object. A negative value flips the rectangle around the horizontal axis.
+	 * @return an {@link ImageData} object representing the underlying pixel data for a specified portion of the canvas.
+	 */
+	@JsMethod
+	public native ImageData createImageData(double width, double height);
+
+	/**
 	 * Returns the fill or stroke color is used for shapes.
 	 * 
 	 * @param value value stored inside the context
