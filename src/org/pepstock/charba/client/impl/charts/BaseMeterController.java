@@ -197,7 +197,7 @@ final class BaseMeterController extends AbstractController {
 		DatasetItem datasetMetaItem = chart.getDatasetItem(0);
 		// calculate the side of the square where to draw the value
 		// minus 1 because of the image data to put and the round management
-		final double sideOfSquare = ((datasetMetaItem.getController().getInnerRadius() * 2) / SQRT_2) - 1;
+		final double sideOfSquare = Math.floor((datasetMetaItem.getController().getInnerRadius() * 2) / SQRT_2) - 1;
 		// gets canvas context 2d
 		Context2dItem ctx = chart.getCanvas().getContext2d();
 		// gets the chart area of CHART.JS
