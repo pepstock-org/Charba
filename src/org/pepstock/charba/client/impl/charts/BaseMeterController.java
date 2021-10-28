@@ -137,13 +137,13 @@ final class BaseMeterController extends AbstractController {
 				MeterChart meterChart = (MeterChart) chart;
 				MeterOptions options = meterChart.getOptions();
 				// let's draw the value inside the doughnut
-				execute(meterChart, node, dataset, options, calculateEase(meterChart, options, dataset));
+				execute(meterChart, node, dataset, options, calculateEase(meterChart, dataset));
 			} else if (chart instanceof GaugeChart) {
 				// checks if meter chart
 				GaugeChart gaugeChart = (GaugeChart) chart;
 				GaugeOptions options = gaugeChart.getOptions();
 				// let's draw the value inside the doughnut
-				execute(gaugeChart, node, dataset, options, calculateEase(gaugeChart, options, dataset));
+				execute(gaugeChart, node, dataset, options, calculateEase(gaugeChart, dataset));
 			}
 		}
 	}
@@ -152,11 +152,10 @@ final class BaseMeterController extends AbstractController {
 	 * Calculates the easing based on circumference of the data set element.
 	 * 
 	 * @param chart chart instance to use for calculation
-	 * @param options the chart options
 	 * @param dataset meter data set to get the ratio between value and maximum
 	 * @return easing of drawing (between 0 and 1) for animation
 	 */
-	private double calculateEase(IsChart chart, MeterOptions options, MeterDataset dataset) {
+	private double calculateEase(IsChart chart, MeterDataset dataset) {
 		// checks if animation is required
 		if (dataset.getValueLabel().isAnimated()) {
 			// calculate the max circumference for the data set
