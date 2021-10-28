@@ -18,6 +18,9 @@ package org.pepstock.charba.client.impl.charts;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
@@ -77,6 +80,10 @@ public class MeterDataset extends Dataset {
 	// INSTANCES
 	// -------------------------
 
+	private final ValueLabel valueLabel;
+
+	private final DescriptionLabel label;
+
 	private final double max;
 
 	private double value = MINIMUM_VALUE;
@@ -114,6 +121,9 @@ public class MeterDataset extends Dataset {
 		// sets the max value between the max and minimum value
 		// max value must be higher than 0
 		this.max = Math.max(max, MINIMUM_VALUE);
+		// creates labels
+		this.valueLabel = new ValueLabel();
+		this.label = new DescriptionLabel();
 		// sets default dataset values
 		// removing borders
 		setArrayValue(Dataset.CommonProperty.BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
@@ -124,6 +134,24 @@ public class MeterDataset extends Dataset {
 		setArrayValue(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
 		// disables animation active mode
 		getTransitions().create(DefaultTransitionKey.ACTIVE).getAnimation().setDuration(0);
+	}
+
+	/**
+	 * Returns the value element of meter chart.
+	 *
+	 * @return the value element of meter chart
+	 */
+	public final ValueLabel getValueLabel() {
+		return valueLabel;
+	}
+
+	/**
+	 * Returns the description element of meter chart.
+	 *
+	 * @return the description element of meter chart
+	 */
+	public final DescriptionLabel getDescriptionLabel() {
+		return label;
 	}
 
 	/**
@@ -265,6 +293,10 @@ public class MeterDataset extends Dataset {
 		super.setHidden(true);
 	}
 
+	// ----------------------------------------
+	// OVERRIDES methods
+	// ----------------------------------------
+
 	/**
 	 * Throws an exception because not available.
 	 * 
@@ -283,6 +315,46 @@ public class MeterDataset extends Dataset {
 	@Override
 	public final void setData(List<Double> values) {
 		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#setBackgroundColor(org.pepstock.charba.client.callbacks.ColorCallback)
+	 */
+	@Override
+	public void setBackgroundColor(ColorCallback<DatasetContext> backgroundColorCallback) {
+		// ignores setting
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#setBackgroundColor(org.pepstock.charba.client.callbacks.NativeCallback)
+	 */
+	@Override
+	public void setBackgroundColor(NativeCallback backgroundColorCallback) {
+		// ignores setting
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#setHoverBackgroundColor(org.pepstock.charba.client.callbacks.ColorCallback)
+	 */
+	@Override
+	public void setHoverBackgroundColor(ColorCallback<DatasetContext> hoverBackgroundColorCallback) {
+		// ignores setting
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#setHoverBackgroundColor(org.pepstock.charba.client.callbacks.NativeCallback)
+	 */
+	@Override
+	public void setHoverBackgroundColor(NativeCallback hoverBackgroundColorCallback) {
+		// ignores setting
 	}
 
 }

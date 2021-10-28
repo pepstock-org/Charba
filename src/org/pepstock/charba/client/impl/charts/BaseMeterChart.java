@@ -24,7 +24,9 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.dom.elements.ImageData;
+import org.pepstock.charba.client.enums.BorderAlign;
 import org.pepstock.charba.client.enums.DefaultTransitionKey;
+import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.options.AnimationTransition;
 
 /**
@@ -32,7 +34,7 @@ import org.pepstock.charba.client.options.AnimationTransition;
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <D> Dataset type for the specific chart, extends MeterDataset
+ * @param <D> data set type for the specific chart, extends MeterDataset
  */
 abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart implements IsDatasetCreator<D> {
 
@@ -58,10 +60,10 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	}
 
 	/**
-	 * Returns a dataset with a maximum value.
+	 * Returns a data set with a maximum value.
 	 * 
-	 * @param max maximum value of dataset
-	 * @return dataset instance
+	 * @param max maximum value of data set
+	 * @return data set instance
 	 */
 	public abstract D newDataset(double max);
 
@@ -135,6 +137,13 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		options.getTooltips().setEnabled(false);
 		// disables tooltips external callback
 		options.getTooltips().setExternalCallback(null);
+		// overrides arc element options
+		options.getElements().getArc().setOffset(0);
+		options.getElements().getArc().setHoverOffset(0);
+		options.getElements().getArc().setBorderAlign(BorderAlign.CENTER);
+		options.getElements().getArc().setSpacing(0);
+		options.getElements().getArc().setBackgroundColor(MeterDataset.DEFAULT_EMPTY_VALUE_COLOR);
+		options.getElements().getArc().setHoverBackgroundColor(MeterDataset.DEFAULT_EMPTY_VALUE_COLOR);
 		// resets image data
 		setImageData(null);
 		// creates a new mode every time
@@ -155,9 +164,21 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 			dataset.getTransitions().create(DefaultTransitionKey.ACTIVE).getAnimation().setDuration(0);
 			// disables animation mode resize
 			dataset.getTransitions().create(DefaultTransitionKey.RESIZE).getAnimation().setDuration(0);
+			// ---
+			// resets font items
+			// ---
+			// casts to meter data set
+			MeterDataset meterDataset = (MeterDataset) dataset;
+			// gets elements
+			ValueLabel valueLabel = meterDataset.getValueLabel();
+			DescriptionLabel descriptionLabel = meterDataset.getDescriptionLabel();
+			// creating new font item
+			FontItem valueFontItem = valueLabel.getFont() == null ? options.getFont().create() : valueLabel.getFont().create();
+			FontItem descriptionFontItem = descriptionLabel.getFont() == null ? valueFontItem.create() : descriptionLabel.getFont().create();
+			// stores new font items
+			valueLabel.setFontItem(valueFontItem);
+			descriptionLabel.setFontItem(descriptionFontItem);
 		}
-		// creates font item
-		options.resetFontItem();
 	}
 
 	/*
@@ -167,7 +188,7 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	 */
 	@Override
 	protected final int getMaximumDatasetsCount() {
-		// maximum datasets
+		// maximum data sets
 		return MAXIMUM_DATASETS_COUNT;
 	}
 }

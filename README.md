@@ -285,6 +285,10 @@ Here you can find the list of enhancements and updates available on `master` bra
   * drop support for Java 8 going to Java 11 as minimum requirement.
   * change `onBeforeLabel`, `onLabel` and `onAfterLabel` methods to `TooltipLabelCallback` interface in order to return a `List<String>` instead of `String` instances to enable tooltip multilines labels.
   * change `invokeTooltipsCallbackOnLabel` method to `Defaults` class in order to return a `List<String>` instead of `String` instances.
+  * refactoring of `Meter` and `Gauge` controller:
+    * add `ValueLabel` and `DescriptionLabel` elements in the meter and gauge dataset in order to configure how to render the labels.
+    * move all methods to configure the value label from options to dataset class.
+    * remove `Render` enumeration because is not used anymore because the rendering as percentage can be set by `ValueLabel` and the label can be configured in `DescriptionLabel`.
 
 ### Features
 

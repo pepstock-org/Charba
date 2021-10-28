@@ -93,6 +93,7 @@ public final class GaugeDataset extends MeterDataset {
 	 */
 	@Override
 	public void setColor(String valueColor) {
+		// argument is ignored
 		// value color must be override because
 		// depends on threshold
 		// checking if consistent

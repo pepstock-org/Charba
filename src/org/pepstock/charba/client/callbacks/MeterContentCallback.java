@@ -20,10 +20,10 @@ import org.pepstock.charba.client.impl.charts.MeterChart;
 import org.pepstock.charba.client.impl.charts.MeterContext;
 
 /**
- * Interface to implement if wants to format the value to show inside of {@link MeterChart} or {@link GaugeChart}.
+ * Interface to implement if wants to change the description label content to show inside of {@link MeterChart} or {@link GaugeChart}.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface MeterFormatCallback extends Scriptable<String, MeterContext> {
+public interface MeterContentCallback extends Scriptable<String, MeterContext> {
 
 }

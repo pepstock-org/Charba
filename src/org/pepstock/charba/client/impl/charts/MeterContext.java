@@ -29,6 +29,8 @@ public final class MeterContext extends ChartContext {
 
 	private double easing = 0D;
 
+	private String datasetLabel = null;
+
 	/**
 	 * Creates a context getting the native object from {@link BaseContext} which is storing chart and type properties in order to be able to extend the {@link ChartContext}.
 	 * 
@@ -72,6 +74,24 @@ public final class MeterContext extends ChartContext {
 	 */
 	void setEasing(double easing) {
 		this.easing = easing;
+	}
+
+	/**
+	 * Returns the data set label.
+	 * 
+	 * @return the data set label
+	 */
+	public String getDatasetLabel() {
+		return datasetLabel;
+	}
+
+	/**
+	 * Sets the data set label.
+	 * 
+	 * @param datasetLabel the data set label
+	 */
+	void setDatasetLabel(String datasetLabel) {
+		this.datasetLabel = datasetLabel;
 	}
 
 	/**

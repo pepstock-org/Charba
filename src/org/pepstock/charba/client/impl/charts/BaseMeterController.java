@@ -24,6 +24,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.controllers.AbstractController;
 import org.pepstock.charba.client.controllers.ControllerContext;
 import org.pepstock.charba.client.controllers.ControllerProvider;
@@ -33,11 +34,11 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.ImageData;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
-import org.pepstock.charba.client.enums.Render;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.options.IsImmutableFont;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -51,7 +52,7 @@ final class BaseMeterController extends AbstractController {
 	// static reference of controller provider for meter charts
 	static final ControllerProvider PROVIDER = new BaseMeterControllerProvier();
 	// default font increment
-	private static final int FONT_SIZE_DECREMENT = 4;
+	private static final int FONT_SIZE_DECREMENT = 2;
 	// minimum font size
 	private static final int MINIMUM_FONT_SIZE = 8;
 	// default padding
@@ -157,7 +158,7 @@ final class BaseMeterController extends AbstractController {
 	 */
 	private double calculateEase(IsChart chart, MeterOptions options, MeterDataset dataset) {
 		// checks if animation is required
-		if (options.isAnimated()) {
+		if (dataset.getValueLabel().isAnimated()) {
 			// calculate the max circumference for the data set
 			// transforming the value in degrees
 			// in order to compare with circumference of the element
@@ -187,8 +188,11 @@ final class BaseMeterController extends AbstractController {
 	 * @param ease easing of drawing (between 0 and 1) for animation
 	 */
 	private void execute(BaseMeterChart<?> chart, ChartNode item, MeterDataset dataset, MeterOptions options, double ease) {
-		// checks if the rendering of the label is disable
-		if (Render.NONE.equals(options.getRender())) {
+		// gets elements
+		ValueLabel valueLabel = dataset.getValueLabel();
+		DescriptionLabel descriptionLabel = dataset.getDescriptionLabel();
+		// checks if the rendering of the value label is disable
+		if (!valueLabel.isDisplay()) {
 			// do nothing
 			return;
 		}
@@ -208,31 +212,49 @@ final class BaseMeterController extends AbstractController {
 		final double x = centerX - (sideOfSquare / 2D);
 		final double y = centerY - (sideOfSquare / 2D);
 		// gets max value
-		final double maxValue = Render.PERCENTAGE.equals(options.getRender()) || Render.PERCENTAGE_AND_LABEL.equals(options.getRender()) ? MAX_PERCENTAGE : dataset.getMax();
+		final double maxValue = valueLabel.isPercentage() ? MAX_PERCENTAGE : dataset.getMax();
 		// gets value
-		final double valueToCalculate = Render.PERCENTAGE.equals(options.getRender()) || Render.PERCENTAGE_AND_LABEL.equals(options.getRender()) ? dataset.getValue() / dataset.getMax() : dataset.getValue();
+		final double valueToCalculate = valueLabel.isPercentage() ? dataset.getValue() / dataset.getMax() : dataset.getValue();
 		// here is calculating the value to showed
 		// based on easing of drawing
-		final double value = options.isAnimated() ? valueToCalculate * ease : valueToCalculate;
+		final double value = valueLabel.isAnimated() ? valueToCalculate * ease : valueToCalculate;
+		// -------------------
+		// CONTEXT
+		// -------------------
 		// gets context
 		MeterContext context = options.getContext();
+		// sets data set label
+		context.setDatasetLabel(dataset.getLabel());
 		// sets value and ease for context
 		// to execute the formatted value for max
 		context.setEasing(1D);
 		context.setValue(maxValue);
 		// gets max value in the string to check font size
-		final String maxValueToShow = getFormattedValue(options, context);
+		final String maxValueToShow = getFormattedValue(valueLabel, context);
 		// sets to the right values
 		context.setEasing(ease);
 		context.setValue(value);
+		// -------------------
+		// VALUE LABEL
+		// -------------------
 		// value to show with format required
-		final String valueToShow = getFormattedValue(options, context);
-		// gets font
-		final FontItem font = options.getFontItem();
-		// gets font color
-		final String fontColor = getFontColor(options, context);
-		// gets the label
-		final String label = dataset.getLabel();
+		final String valueToShow = getFormattedValue(valueLabel, context);
+		// gets font of value
+		final IsFont valueFont = getFont(valueLabel, context);
+		// gets font color of value
+		final String valueFontColor = getColor(valueLabel, AbstractMeterElement.DEFAULT_FONT_COLOR_AS_STRING, context);
+		// -------------------
+		// DESCRIPTION LABEL
+		// -------------------
+		// gets the description content
+		final String descriptionToShow = getContent(descriptionLabel, context);
+		// gets font of description
+		final IsFont descriptionFont = getFont(descriptionLabel, context);
+		// gets font color of description
+		final String descriptionFontColor = getColor(descriptionLabel, valueFontColor, context);
+		// -------------------
+		// START DRAWING
+		// -------------------
 		// saves context
 		ctx.save();
 		// begins path and clip the area
@@ -253,38 +275,54 @@ final class BaseMeterController extends AbstractController {
 		// sets stored image data to canvas
 		ctx.putImageData(chart.getImageData(), x, y);
 		// checks if auto font size is set
-		if (options.isAutoFontSize()) {
+		if (valueLabel.isAutoFontSize()) {
 			// calculates the font size
-			calculateFontSize(ctx, sideOfSquare, maxValueToShow, font);
+			calculateFontSize(ctx, sideOfSquare, maxValueToShow, valueFont);
 		}
-		// sets color to canvas
-		ctx.setFillColor(fontColor);
 		// sets alignment
 		ctx.setTextAlign(TextAlign.CENTER);
 		// gets immutable font
-		IsImmutableFont immutableFont = Helpers.get().toFont(font);
+		IsImmutableFont immutableValueFont = Helpers.get().toFont(valueFont);
 		// checks if it must draw also the label
-		if ((Render.VALUE_AND_LABEL.equals(options.getRender()) || Render.PERCENTAGE_AND_LABEL.equals(options.getRender())) && label != null) {
+		if (descriptionLabel.isDisplay() && descriptionToShow != null) {
+			// -------------------
+			// DRAW VALUE
+			// -------------------
+			// sets color to canvas
+			ctx.setFillColor(valueFontColor);
 			// sets font
-			ctx.setFont(immutableFont.toCSSString());
+			ctx.setFont(immutableValueFont.toCSSString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.BOTTOM);
 			// draws text
 			ctx.fillText(valueToShow, centerX, centerY - PADDING);
+			// -------------------
+			// DRAW DESCRIPTION
+			// -------------------
 			// checks if auto font size is set
-			if (options.isAutoFontSize()) {
-				// re-calculates the font size for label
-				calculateFontSize(ctx, sideOfSquare, label, font);
+			if (descriptionLabel.isAutoFontSize()) {
+				// re-calculates the font size for description
+				calculateFontSize(ctx, sideOfSquare, descriptionToShow, descriptionFont);
 			}
-			ctx.setFont(immutableFont.toCSSString());
+			// sets color to canvas
+			ctx.setFillColor(descriptionFontColor);
+			// gets immutable font
+			IsImmutableFont immutableLabelFont = Helpers.get().toFont(descriptionFont);
+			// sets font
+			ctx.setFont(immutableLabelFont.toCSSString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
-			ctx.fillText(dataset.getLabel(), centerX, centerY + PADDING);
+			ctx.fillText(descriptionToShow, centerX, centerY + PADDING);
 		} else {
+			// -------------------
+			// DRAW VALUE
+			// -------------------
 			// if here it must draw ONLY the value
+			// sets color to canvas
+			ctx.setFillColor(valueFontColor);
 			// sets font
-			ctx.setFont(immutableFont.toCSSString());
+			ctx.setFont(immutableValueFont.toCSSString());
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.MIDDLE);
 			// draws text
@@ -302,7 +340,7 @@ final class BaseMeterController extends AbstractController {
 	 * @param value value to display
 	 * @param font font instance
 	 */
-	private void calculateFontSize(Context2dItem ctx, double sideOfSquare, String value, FontItem font) {
+	private void calculateFontSize(Context2dItem ctx, double sideOfSquare, String value, IsFont font) {
 		// half of side of square
 		int fontSize = (int) (sideOfSquare / 2);
 		boolean check = true;
@@ -329,14 +367,15 @@ final class BaseMeterController extends AbstractController {
 	/**
 	 * Returns the color to apply to rendered label, invoking the callback if set.
 	 * 
-	 * @param options options of the chart
+	 * @param options options of the element
+	 * @param defaultValue default color to use if the callback returns an unconsistent value
 	 * @param context scriptable context of meter
 	 * @return the font color to apply to rendered label
 	 */
-	private String getFontColor(MeterOptions options, MeterContext context) {
+	private String getColor(AbstractMeterElement options, String defaultValue, MeterContext context) {
 		// checks if the options font color is set as callback
-		if (options.getFontColorCallback() != null) {
-			Object result = ScriptableUtils.getOptionValueAsColor(context, options.getFontColorCallback(), MeterOptions.DEFAULT_FONT_COLOR_AS_STRING, false);
+		if (options.getColorCallback() != null) {
+			Object result = ScriptableUtils.getOptionValueAsColor(context, options.getColorCallback(), defaultValue, false);
 			// checks the result
 			if (result instanceof IsColor) {
 				// casts to color
@@ -349,25 +388,44 @@ final class BaseMeterController extends AbstractController {
 			}
 			// if here, invalid returns object
 			// then goes to the end of this method
-			// to return the default
-		} else if (options.getFontColor() != null) {
-			// checks if the color has been as color
-			return options.getFontColor().toRGBA();
+			// to return the color
 		}
-		// if here, invalid returns object from callback
-		// or font color is not set
-		// then returns the default
-		return MeterOptions.DEFAULT_FONT_COLOR_AS_STRING;
+		// gets color
+		String color = options.getColorAsString();
+		// checks if the color has been as color
+		return color == null ? defaultValue : color;
+	}
+
+	/**
+	 * Returns the font to apply to rendered label, invoking the callback if set.
+	 * 
+	 * @param options options of the element
+	 * @param context scriptable context of meter
+	 * @return the font to apply to rendered label
+	 */
+	private FontItem getFont(AbstractMeterElement options, MeterContext context) {
+		// checks if the options font is set as callback
+		if (options.getFontCallback() != null) {
+			FontItem result = ScriptableUtils.getOptionValueAsFont(context, options.getFontCallback(), options.getFontItem());
+			// checks the result
+			if (result != null) {
+				return result;
+			}
+			// if here, invalid returns object
+			// then goes to the end of this method
+			// to return the font
+		}
+		return options.getFontItem();
 	}
 
 	/**
 	 * Returns a formatted value of the chart applying the precision or invoking the value callback.
 	 * 
-	 * @param options options of the chart
+	 * @param options options of the element
 	 * @param context scriptable context of meter
 	 * @return a formatted value of the chart
 	 */
-	private String getFormattedValue(MeterOptions options, MeterContext context) {
+	private String getFormattedValue(ValueLabel options, MeterContext context) {
 		// checks if options has got a callback
 		if (options.getFormatCallback() != null) {
 			// invokes callback
@@ -378,8 +436,38 @@ final class BaseMeterController extends AbstractController {
 				return result;
 			}
 		}
-		// if here, it sues the precision set in the options
+		// checks if the rendering is percentage
+		if (options.isPercentage()) {
+			// calculates percentage and adds the percent char
+			return Utilities.applyPrecision(context.getValue() * 100, options.getPrecision()) + Constants.PERCENT;
+		}
+		// returns the formatted value
 		return Utilities.applyPrecision(context.getValue(), options.getPrecision());
+	}
+
+	/**
+	 * Returns the content of the description label of the chart.
+	 * 
+	 * @param options options of the element
+	 * @param context scriptable context of meter
+	 * @return the content of description label
+	 */
+	private String getContent(DescriptionLabel options, MeterContext context) {
+		// checks if options has got a callback
+		if (options.getContentCallback() != null) {
+			// invokes callback
+			String result = options.getContentCallback().invoke(context);
+			// checks if result is consistent
+			if (result != null) {
+				// return this value
+				return result;
+			}
+			// if here, the result is not consistent
+			// then returns the data set label
+		}
+		// checks if the content was set,
+		// otherwise returns the data set label
+		return options.getContent() != null ? options.getContent() : context.getDatasetLabel();
 	}
 
 	/**
