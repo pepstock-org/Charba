@@ -112,4 +112,15 @@ public class MeterOptions extends AbstractPieOptions {
 		super.setCircumference(DEFAULT_CIRCUMFERENCE);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#setRotation(double)
+	 */
+	@Override
+	public final void setRotation(double rotation) {
+		// ignore the passed value.
+		super.setRotation(DEFAULT_ROTATION);
+	}
+
 }
