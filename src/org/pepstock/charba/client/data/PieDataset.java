@@ -333,9 +333,9 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	}
 
 	/**
-	 * Sets the arc border radius (in pixels).
+	 * Sets the arc border radius objects.
 	 * 
-	 * @param borderRadius the arc border radius (in pixels).
+	 * @param borderRadius the arc border radius objects.
 	 */
 	public void setBorderRadius(ArcBorderRadius... borderRadius) {
 		// resets callback
@@ -345,9 +345,9 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	}
 
 	/**
-	 * Sets the arc border radius (in pixels).
+	 * Sets the arc border radius objects.
 	 * 
-	 * @param borderRadius the arc border radius (in pixels).
+	 * @param borderRadius the arc border radius objects.
 	 */
 	public void setBorderRadius(List<ArcBorderRadius> borderRadius) {
 		// resets callback
@@ -368,10 +368,10 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	}
 
 	/**
-	 * Returns the list of bar border radius (in pixels).<br>
+	 * Returns the list of arc border radius objects.<br>
 	 * If a callback or an array have been set, returns an empty object.
 	 * 
-	 * @return the list of bar border radius (in pixels).<br>
+	 * @return the list of arc border radius objects.<br>
 	 *         If a callback or an array have been set, returns an empty object
 	 */
 	public List<ArcBorderRadius> getBorderRadiusAsObjects() {
