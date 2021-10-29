@@ -25,10 +25,15 @@ import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.data.ArcBorderRadius;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.BorderItemType;
 import org.pepstock.charba.client.enums.DefaultTransitionKey;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -75,6 +80,46 @@ public class MeterDataset extends Dataset {
 	 * Minimum value is <b>{@value MINIMUM_VALUE}</b>.
 	 */
 	public static final double MINIMUM_VALUE = 0D;
+
+	// default border width
+	private static final int DEFAULT_BORDER_WIDTH = 0;
+	// default border radius
+	private static final int DEFAULT_BORDER_RADIUS = 0;
+	// default border radius object
+	private static final ArcBorderRadius DEFAULT_BORDER_RADIUS_OBJECT = new ArcBorderRadius(DEFAULT_BORDER_RADIUS);
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		BORDER_RADIUS("borderRadius"),
+		// internal to map the border radius type
+		CHARBA_BORDER_RADIUS_TYPE("charbaBorderRadiusType");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
 
 	// -------------------------
 	// INSTANCES
@@ -126,8 +171,8 @@ public class MeterDataset extends Dataset {
 		this.label = new DescriptionLabel();
 		// sets default dataset values
 		// removing borders
-		setArrayValue(Dataset.CommonProperty.BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
-		setArrayValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
+		setArrayValue(Dataset.CommonProperty.BORDER_WIDTH, ArrayInteger.fromOrNull(DEFAULT_BORDER_WIDTH, DEFAULT_BORDER_WIDTH));
+		setArrayValue(Dataset.CommonProperty.HOVER_BORDER_WIDTH, ArrayInteger.fromOrNull(DEFAULT_BORDER_WIDTH, DEFAULT_BORDER_WIDTH));
 		// sets the color of datasets.
 		setArrayValue(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
 		// disable hover back ground color
@@ -183,7 +228,7 @@ public class MeterDataset extends Dataset {
 	 * @return the fill color for value.
 	 */
 	public String getColorAsString() {
-		// returns list of colors
+		// gets array of colors
 		ArrayString array = getArrayValue(Dataset.CanvasObjectProperty.BACKGROUND_COLOR);
 		// returns color as string
 		return array.get(0);
@@ -226,7 +271,7 @@ public class MeterDataset extends Dataset {
 	 * @return the fill color for empty sector.
 	 */
 	public String getEmptyColorAsString() {
-		// returns list of colors
+		// gets array of colors
 		ArrayString array = getArrayValue(Dataset.CanvasObjectProperty.BACKGROUND_COLOR);
 		// checks if the array is consistent
 		if (array != null) {
@@ -294,6 +339,164 @@ public class MeterDataset extends Dataset {
 	}
 
 	// ----------------------------------------
+	// DOUGHNUT method, updated
+	// ----------------------------------------
+
+	/**
+	 * Sets the color of the arc border.
+	 * 
+	 * @param borderColor the color of the arc border
+	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(IsColor.checkAndGetValue(borderColor));
+	}
+
+	/**
+	 * Sets the color of the arc border.
+	 * 
+	 * @param borderColor the color of the arc border
+	 */
+	public void setBorderColor(String borderColor) {
+		// normalizes the color
+		String valueToSet = borderColor != null ? borderColor : getColorAsString();
+		// loads array
+		ArrayString array = ArrayString.fromOrEmpty(valueToSet, getEmptyColorAsString());
+		// stores array value
+		setArrayValue(Dataset.CanvasObjectProperty.BORDER_COLOR, array);
+	}
+
+	/**
+	 * Returns the color of the arc border, as string.
+	 * 
+	 * @return the color of the arc border.
+	 */
+	public String getBorderColorAsString() {
+		// gets array of colors
+		ArrayString array = getArrayValue(Dataset.CanvasObjectProperty.BORDER_COLOR);
+		// checks if the array is consistent
+		if (array != null) {
+			// returns color as string
+			return array.get(0);
+		} else {
+			return getColorAsString();
+		}
+	}
+
+	/**
+	 * Returns the color of the arc border.
+	 * 
+	 * @return the color of the arc border
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
+	/**
+	 * Sets the width of the arc border.
+	 * 
+	 * @param borderWidth the width of the arc border.
+	 */
+	public void setBorderWidth(int borderWidth) {
+		// loads array
+		ArrayInteger array = ArrayInteger.fromOrEmpty(Checker.positiveOrDefault(borderWidth, DEFAULT_BORDER_WIDTH), DEFAULT_BORDER_WIDTH);
+		// stores array value
+		setArrayValue(Dataset.CommonProperty.BORDER_WIDTH, array);
+	}
+
+	/**
+	 * Returns the width of the arc border.
+	 * 
+	 * @return the width of the arc border.
+	 */
+	public int getBorderWidth() {
+		// gets array of border width
+		ArrayInteger array = getArrayValue(Dataset.CommonProperty.BORDER_WIDTH);
+		// checks if the array is consistent
+		if (array != null) {
+			// returns border width of dataset 1
+			return array.get(0);
+		} else {
+			return DEFAULT_BORDER_WIDTH;
+		}
+	}
+
+	/**
+	 * Sets the arc border radius (in pixels).
+	 * 
+	 * @param borderRadius the arc border radius (in pixels).
+	 */
+	public void setBorderRadius(int borderRadius) {
+		// loads array
+		ArrayInteger array = ArrayInteger.fromOrEmpty(Checker.positiveOrDefault(borderRadius, DEFAULT_BORDER_RADIUS), DEFAULT_BORDER_RADIUS);
+		// stores array value
+		setArrayValue(Property.BORDER_RADIUS, array);
+		// stores type
+		setValue(Property.CHARBA_BORDER_RADIUS_TYPE, BorderItemType.INTEGERS);
+	}
+
+	/**
+	 * Sets the arc border radius (in pixels).
+	 * 
+	 * @param borderRadius the arc border radius (in pixels).
+	 */
+	public void setBorderRadius(ArcBorderRadius borderRadius) {
+		ArcBorderRadius valueToSet = borderRadius != null ? borderRadius : new ArcBorderRadius(DEFAULT_BORDER_RADIUS);
+		// loads array
+		ArrayObject array = ArrayObject.fromOrEmpty(new ArcBorderRadius[] { valueToSet, new ArcBorderRadius(DEFAULT_BORDER_RADIUS) });
+		// stores array value
+		setArrayValue(Property.BORDER_RADIUS, array);
+		// stores type
+		setValue(Property.CHARBA_BORDER_RADIUS_TYPE, BorderItemType.OBJECTS);
+	}
+
+	/**
+	 * Returns the arc border radius (in pixels).
+	 * 
+	 * @return the arc border radius (in pixels).
+	 */
+	public int getBorderRadius() {
+		// get border radius type
+		BorderItemType type = getValue(Property.CHARBA_BORDER_RADIUS_TYPE, BorderItemType.values(), BorderItemType.UNKNOWN);
+		// checks if type is integers
+		if (BorderItemType.INTEGERS.equals(type)) {
+			// gets array of radius
+			ArrayInteger array = getArrayValue(Property.BORDER_RADIUS);
+			// checks if the array is consistent
+			if (array != null) {
+				// returns border radius of dataset 1
+				return array.get(0);
+			}
+		}
+		return DEFAULT_BORDER_WIDTH;
+	}
+
+	/**
+	 * Returns the arc border radius, as object.
+	 * 
+	 * @return the arc border radius, as object
+	 */
+	public ArcBorderRadius getBorderRadiusAsObject() {
+		// get border radius type
+		BorderItemType type = getValue(Property.CHARBA_BORDER_RADIUS_TYPE, BorderItemType.values(), BorderItemType.UNKNOWN);
+		// checks if type is objects
+		if (BorderItemType.OBJECTS.equals(type)) {
+			// gets array of radius
+			ArrayObject array = getArrayValue(Property.BORDER_RADIUS);
+			// checks if the array is consistent
+			if (array != null) {
+				// returns border radius of dataset 1
+				return ArcBorderRadius.FACTORY.create(array.get(0));
+			}
+		} else if (BorderItemType.INTEGERS.equals(type)) {
+			// if here, border radius is stored as int
+			return new ArcBorderRadius(getBorderRadius());
+		}
+		// if here, radius is not stored
+		// then returns default
+		return DEFAULT_BORDER_RADIUS_OBJECT;
+	}
+
+	// ----------------------------------------
 	// OVERRIDES methods
 	// ----------------------------------------
 
@@ -354,6 +557,46 @@ public class MeterDataset extends Dataset {
 	 */
 	@Override
 	public void setHoverBackgroundColor(NativeCallback hoverBackgroundColorCallback) {
+		// ignores setting
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#setBorderColor(org.pepstock.charba.client.callbacks.ColorCallback)
+	 */
+	@Override
+	public void setBorderColor(ColorCallback<DatasetContext> borderColorCallback) {
+		// ignores setting
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#setBorderColor(org.pepstock.charba.client.callbacks.NativeCallback)
+	 */
+	@Override
+	public void setBorderColor(NativeCallback borderColorCallback) {
+		// ignores setting
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#setHoverBorderColor(org.pepstock.charba.client.callbacks.ColorCallback)
+	 */
+	@Override
+	public void setHoverBorderColor(ColorCallback<DatasetContext> hoverBorderColorCallback) {
+		// ignores setting
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#setHoverBorderColor(org.pepstock.charba.client.callbacks.NativeCallback)
+	 */
+	@Override
+	public void setHoverBorderColor(NativeCallback hoverBorderColorCallback) {
 		// ignores setting
 	}
 
