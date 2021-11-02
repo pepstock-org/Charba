@@ -167,8 +167,8 @@ public class MeterDataset extends Dataset {
 		// max value must be higher than 0
 		this.max = Math.max(max, MINIMUM_VALUE);
 		// creates labels
-		this.valueLabel = new ValueLabel();
-		this.label = new DescriptionLabel();
+		this.valueLabel = new ValueLabel(defaultValues.getFont());
+		this.label = new DescriptionLabel(this.valueLabel.getFont());
 		// sets default dataset values
 		// removing borders
 		setArrayValue(Dataset.CommonProperty.BORDER_WIDTH, ArrayInteger.fromOrNull(DEFAULT_BORDER_WIDTH, DEFAULT_BORDER_WIDTH));

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.impl.charts;
 
 import org.pepstock.charba.client.callbacks.MeterFormatCallback;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 
 /**
  * Meter element class to define the value label to render in the meter chart.
@@ -41,10 +42,12 @@ public final class ValueLabel extends AbstractMeterElement {
 	private MeterFormatCallback formatCallback = null;
 
 	/**
-	 * To avoid any instantiation
+	 * Creates the element getting the font defaults as argument.
+	 * 
+	 * @param defaultValues font defaults to use to initialize the font option
 	 */
-	ValueLabel() {
-		// do nothing
+	ValueLabel(IsDefaultFont defaultValues) {
+		super(defaultValues);
 	}
 
 	/**

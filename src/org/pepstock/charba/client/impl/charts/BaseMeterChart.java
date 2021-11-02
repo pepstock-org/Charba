@@ -173,8 +173,8 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 			ValueLabel valueLabel = meterDataset.getValueLabel();
 			DescriptionLabel descriptionLabel = meterDataset.getDescriptionLabel();
 			// creating new font item
-			FontItem valueFontItem = valueLabel.getFont() == null ? options.getFont().create() : valueLabel.getFont().create();
-			FontItem descriptionFontItem = descriptionLabel.getFont() == null ? valueFontItem.create() : descriptionLabel.getFont().create();
+			FontItem valueFontItem = valueLabel.getFont().create();
+			FontItem descriptionFontItem = descriptionLabel.getFont().create();
 			// stores new font items
 			valueLabel.setFontItem(valueFontItem);
 			descriptionLabel.setFontItem(descriptionFontItem);

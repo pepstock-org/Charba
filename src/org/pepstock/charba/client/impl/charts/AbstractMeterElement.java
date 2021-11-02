@@ -20,6 +20,7 @@ import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.options.IsFont;
 
@@ -39,9 +40,9 @@ abstract class AbstractMeterElement {
 	// default color of render as string
 	static final String DEFAULT_FONT_COLOR_AS_STRING = DEFAULT_FONT_COLOR.toRGBA();
 
-	private boolean display = true;
+	private final IsFont font;
 
-	private IsFont font = null;
+	private boolean display = true;
 
 	private boolean autoFontSize = true;
 
@@ -57,10 +58,13 @@ abstract class AbstractMeterElement {
 	private FontItem fontItem = null;
 
 	/**
-	 * To avoid any instantiation
+	 * Creates the element getting the font defaults as argument.
+	 * 
+	 * @param defaultValues font defaults to use to initialize the font option
 	 */
-	AbstractMeterElement() {
-		// do nothing
+	AbstractMeterElement(IsDefaultFont defaultValues) {
+		// checks and creates the font
+		this.font = new FontItem(defaultValues);
 	}
 
 	/**
@@ -99,18 +103,6 @@ abstract class AbstractMeterElement {
 	 */
 	public final boolean isDisplay() {
 		return display;
-	}
-
-	/**
-	 * Sets the font of the label.
-	 * 
-	 * @param font the font of the label
-	 */
-	public final void setFont(IsFont font) {
-		// resets callback
-		setFont((FontCallback<MeterContext>) null);
-		// stores value
-		this.font = font;
 	}
 
 	/**
