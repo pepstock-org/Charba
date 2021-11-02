@@ -27,13 +27,11 @@ import org.pepstock.charba.client.commons.Checker;
 public enum ScriptableIntegerChecker implements ScriptableResultChecker<Integer>
 {
 	VALID_OR_ZERO((value, defaultValue) -> Checker.validOrZero(value)),
-	VALID_OR_DEFAULT((value, defaultValue) -> Checker.validOrDefault(value, defaultValue)),
+	VALID_OR_DEFAULT(Checker::validOrDefault),
 	POSITIVE_OR_ZERO((value, defaultValue) -> Checker.positiveOrZero(value)),
-	POSITIVE_OR_DEFAULT((value, defaultValue) -> Checker.positiveOrDefault(value, defaultValue)),
+	POSITIVE_OR_DEFAULT(Checker::positiveOrDefault),
 	NEGATIVE_OR_ZERO((value, defaultValue) -> Checker.negativeOrZero(value)),
-	NEGATIVE_OR_DEFAULT((value, defaultValue) -> Checker.negativeOrDefault(value, defaultValue)),
-	GREATER_THAN_OR_ZERO((value, defaultValue) -> Checker.greaterThanOrZero(value, defaultValue)),
-	LESS_THAN_OR_ZERO((value, defaultValue) -> Checker.lessThanOrZero(value, defaultValue));
+	NEGATIVE_OR_DEFAULT(Checker::negativeOrDefault);
 
 	private final ScriptableResultChecker<Integer> checker;
 
