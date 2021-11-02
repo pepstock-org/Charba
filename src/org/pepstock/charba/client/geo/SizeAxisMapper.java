@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
+import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
@@ -110,7 +111,8 @@ final class SizeAxisMapper extends LegendAxisMapper {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.missingRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), context), getMissingRadiusCallback(), SizeAxis.DEFAULT_MISSING_RADIUS));
+		this.missingRadiusCallbackProxy
+				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new ScaleContext(getAxis(), context), getMissingRadiusCallback(), SizeAxis.DEFAULT_MISSING_RADIUS, ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.modeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), context), getModeCallback(), Mode.AREA).value());
 		// sets function to proxy callback in order to invoke the java interface

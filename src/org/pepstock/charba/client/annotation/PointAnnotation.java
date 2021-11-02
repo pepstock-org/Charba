@@ -21,6 +21,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -206,7 +207,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.radiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getRadiusCallback(), defaultValues.getRadius()).doubleValue());
+		this.radiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getRadiusCallback(), defaultValues.getRadius(), ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.xValueCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getXValueCallback()));
 		// sets function to proxy callback in order to invoke the java interface

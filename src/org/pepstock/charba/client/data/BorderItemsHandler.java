@@ -28,6 +28,7 @@ import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -81,7 +82,7 @@ final class BorderItemsHandler extends NativeObjectContainer {
 			// creates a border item object
 			T result = factory.create();
 			// sets value
-			result.set(number.intValue());
+			result.set(Checker.positiveOrDefault(number.intValue(), defaultValue));
 			// returns the native object
 			return result.nativeObject();
 		}

@@ -22,6 +22,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.IsColor;
@@ -125,13 +126,14 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getBorderColorCallback(), getDefaultElement().getBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getBorderWidthCallback(), getDefaultElement().getBorderWidth()).intValue());
+		this.borderWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getBorderWidthCallback(), getDefaultElement().getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverBackgroundColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getHoverBackgroundColorCallback(), getDefaultElement().getHoverBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverBorderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getHoverBorderColorCallback(), getDefaultElement().getHoverBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBorderWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHoverBorderWidthCallback(), getDefaultElement().getHoverBorderWidth()).intValue());
+		this.hoverBorderWidthCallbackProxy
+				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHoverBorderWidthCallback(), getDefaultElement().getHoverBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 	}
 
 	/**
@@ -583,7 +585,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 			// casts to number
 			Number number = (Number) value;
 			// returns the integer
-			return number.intValue();
+			return Checker.positiveOrDefault(number.intValue(), defaultValue);
 		}
 		// if here, the value of callback is not consistent
 		// returns the default value

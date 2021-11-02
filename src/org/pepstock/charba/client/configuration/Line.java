@@ -25,6 +25,7 @@ import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.FillCallback;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
@@ -137,7 +138,8 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashCallbackProxy.setCallback(context -> onBorderDash(createContext(context), getBorderDashCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashOffsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getBorderDashOffsetCallback(), getDefaultElement().getBorderDashOffset()).doubleValue());
+		this.borderDashOffsetCallbackProxy
+				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getBorderDashOffsetCallback(), getDefaultElement().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getBorderJoinStyleCallback(), getDefaultElement().getBorderJoinStyle()));
 		// sets function to proxy callback in order to invoke the java interface

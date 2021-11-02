@@ -23,6 +23,7 @@ import org.pepstock.charba.client.callbacks.BarBorderWidthCallback;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -171,9 +172,9 @@ public final class MatrixDataset extends HoverFlexDataset {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.widthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getWidthCallback(), DEFAULT_WIDTH).doubleValue());
+		this.widthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getWidthCallback(), DEFAULT_WIDTH, ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.heightCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHeightCallback(), DEFAULT_HEIGHT).doubleValue());
+		this.heightCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHeightCallback(), DEFAULT_HEIGHT, ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderRadiusCallbackProxy.setCallback(context -> onBorderRadius(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
@@ -717,7 +718,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 			// casts to number
 			Number number = (Number) value;
 			// stores to result
-			valueToReturn = number.intValue();
+			valueToReturn = Checker.positiveOrZero(number.intValue());
 		}
 		// cats to a object
 		BarBorderRadius object = new BarBorderRadius(valueToReturn);
@@ -748,7 +749,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 			// casts to number
 			Number number = (Number) value;
 			// stores to result
-			valueToReturn = number.intValue();
+			valueToReturn = Checker.positiveOrZero(number.intValue());
 		}
 		// cats to a object
 		BarBorderWidth object = new BarBorderWidth(valueToReturn);

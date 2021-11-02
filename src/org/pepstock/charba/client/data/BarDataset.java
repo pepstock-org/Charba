@@ -31,6 +31,7 @@ import org.pepstock.charba.client.callbacks.EnableBorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.InflateAmountCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
@@ -253,7 +254,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.baseCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getBaseCallback(), Undefined.DOUBLE).doubleValue());
+		this.baseCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getBaseCallback(), Undefined.DOUBLE, ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.enableBorderRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getEnableBorderRadiusCallback(), getDefaultValues().getElements().getBar().isEnableBorderRadius()));
 		// sets function to proxy callback in order to invoke the java interface

@@ -19,6 +19,7 @@ import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
+import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -133,7 +134,7 @@ final class ColorAxisMapper extends LegendAxisMapper {
 		// sets function to proxy callback in order to invoke the java interface
 		this.missingColorCallbackProxy.setCallback(this::onMissingColor);
 		// sets function to proxy callback in order to invoke the java interface
-		this.quantizeCallbackProxy.setCallback(context -> Checker.positiveOrDefault(ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), context), getQuantizeCallback(), ColorAxis.DEFAULT_QUANTIZE), ColorAxis.DEFAULT_QUANTIZE));
+		this.quantizeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new ScaleContext(getAxis(), context), getQuantizeCallback(), ColorAxis.DEFAULT_QUANTIZE, ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 	}
 
 	/**

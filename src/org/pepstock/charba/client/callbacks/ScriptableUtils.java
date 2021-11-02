@@ -146,8 +146,53 @@ public final class ScriptableUtils {
 	}
 
 	/**
-	 * Returns the value of the property as result of callback (the same type).
+	 * Returns the value, as {@link Number}, of the property as result of callback (the same type), passing a default value.
 	 * 
+	 * @param context scriptable context
+	 * @param callback callback to invoke
+	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
+	 * @param <T> type of callback result, as {@link Number}
+	 * @param <C> type of context to pass to the callback
+	 * @return a value of property as result of callback invocation
+	 */
+	public static <T extends Number, C extends ChartContext> T getOptionValueAsNumber(C context, Scriptable<T, C> callback, T defaultValue) {
+		// if here, chart, callback or result of callback are not consistent
+		return getOptionValueAsNumber(context, callback, defaultValue, null);
+	}
+
+	/**
+	 * Returns the value, as {@link Number}, of the property as result of callback (the same type), passing a default value and a {@link ScriptableResultChecker} to check the
+	 * consistency of the result.
+	 * 
+	 * @param context scriptable context
+	 * @param callback callback to invoke
+	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.
+	 * @param checker {@link ScriptableResultChecker} to check the consistency of the value
+	 * @param <T> type of callback result, as {@link Number}
+	 * @param <C> type of context to pass to the callback
+	 * @return a value of property as result of callback invocation
+	 */
+	public static <T extends Number, C extends ChartContext> T getOptionValueAsNumber(C context, Scriptable<T, C> callback, T defaultValue, ScriptableResultChecker<T> checker) {
+		// checks if the chart is correct
+		if (isContextConsistent(context) && callback != null) {
+			T result = callback.invoke(context);
+			// checks if consistent
+			if (checker != null) {
+				// passes thru the checker
+				return checker.checkAndGet(result, defaultValue);
+			} else if (result != null) {
+				// if here, checker is not passed
+				// then returns result
+				return result;
+			}
+		}
+		// if here, chart, callback or result of callback are not consistent
+		return defaultValue;
+	}
+
+	/**
+	 * Returns the value of the property as result of callback (the same type).
+	 *
 	 * @param context scriptable context
 	 * @param callback callback to invoke
 	 * @param <T> type of callback result
@@ -160,7 +205,7 @@ public final class ScriptableUtils {
 
 	/**
 	 * Returns the value of the property as result of callback (the same type), passing a default value.
-	 * 
+	 *
 	 * @param context scriptable context
 	 * @param callback callback to invoke
 	 * @param defaultValue default value to return in case of chart, callback or result of callback are not consistent.

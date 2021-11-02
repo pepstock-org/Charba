@@ -24,6 +24,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
+import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -123,9 +124,9 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.durationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new DatasetContext(context), getDurationCallback(), this.defaultValues.getDuration()).intValue());
+		this.durationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new DatasetContext(context), getDurationCallback(), this.defaultValues.getDuration(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.delayCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new DatasetContext(context), getDelayCallback(), this.defaultValues.getDelay()).intValue());
+		this.delayCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new DatasetContext(context), getDelayCallback(), this.defaultValues.getDelay(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.loopCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new DatasetContext(context), getLoopCallback(), this.defaultValues.isLoop()));
 		// sets function to proxy callback in order to invoke the java interface

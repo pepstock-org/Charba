@@ -22,12 +22,14 @@ import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
+import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
@@ -295,9 +297,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// sets function to proxy callback in order to invoke the java interface
 		this.anchorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), getAnchorCallback(), getAnchor()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getBorderRadiusCallback(), getBorderRadius()).doubleValue());
+		this.borderRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new DataLabelsContext(this, context), getBorderRadiusCallback(), getBorderRadius(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getBorderWidthCallback(), getBorderWidth()).intValue());
+		this.borderWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new DataLabelsContext(this, context), getBorderWidthCallback(), getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.clampCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getClampCallback(), isClamp()).booleanValue());
 		// sets function to proxy callback in order to invoke the java interface
@@ -305,19 +307,19 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		// sets function to proxy callback in order to invoke the java interface
 		this.displayCallbackProxy.setCallback(context -> onDisplay(new DataLabelsContext(this, context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.offsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getOffsetCallback(), getOffset()).intValue());
+		this.offsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new DataLabelsContext(this, context), getOffsetCallback(), getOffset()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.opacityCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getOpacityCallback(), getOpacity()).doubleValue());
+		this.opacityCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new DataLabelsContext(this, context), getOpacityCallback(), getOpacity(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.rotationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getRotationCallback(), getRotation()).doubleValue());
+		this.rotationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new DataLabelsContext(this, context), getRotationCallback(), getRotation()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.textAlignCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(new DataLabelsContext(this, context), getTextAlignCallback(), getTextAlign()).value());
 		// sets function to proxy callback in order to invoke the java interface
 		this.textStrokeColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), getTextStrokeColorCallback(), getTextStrokeColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.textStrokeWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getTextStrokeWidthCallback(), getTextStrokeWidth()).intValue());
+		this.textStrokeWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new DataLabelsContext(this, context), getTextStrokeWidthCallback(), getTextStrokeWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.textShadowBlurCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new DataLabelsContext(this, context), getTextShadowBlurCallback(), getTextShadowBlur()).doubleValue());
+		this.textShadowBlurCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new DataLabelsContext(this, context), getTextShadowBlurCallback(), getTextShadowBlur()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.textShadowColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new DataLabelsContext(this, context), getTextShadowColorCallback(), getTextShadowColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface

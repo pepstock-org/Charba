@@ -38,6 +38,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCall
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
+import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.colors.Color;
@@ -309,7 +310,8 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// sets function to proxy callback in order to invoke the java interface
 		this.rotationCallbackProxy.setCallback(context -> onRotation(new AnnotationContext(this.parent, context), defaultValues.getRotation()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.cornerRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getCornerRadiusCallback(), defaultValues.getCornerRadius()).intValue());
+		this.cornerRadiusCallbackProxy
+				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getCornerRadiusCallback(), defaultValues.getCornerRadius(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.imageWidthCallbackProxy.setCallback(context -> onImageSize(new AnnotationContext(this.parent, context), getImageWidthCallback(), defaultValues.getImageWidth(), defaultValues.getImageWidthAsPercentage()));
 		// sets function to proxy callback in order to invoke the java interface
@@ -317,13 +319,13 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		// sets function to proxy callback in order to invoke the java interface
 		this.positionCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(new AnnotationContext(this.parent, context), getPositionCallback(), getPosition()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.xPaddingCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getXPaddingCallback(), defaultValues.getXPadding()).intValue());
+		this.xPaddingCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getXPaddingCallback(), defaultValues.getXPadding()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.yPaddingCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getYPaddingCallback(), defaultValues.getYPadding()).intValue());
+		this.yPaddingCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getYPaddingCallback(), defaultValues.getYPadding()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.xAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getXAdjustCallback(), defaultValues.getXAdjust()).doubleValue());
+		this.xAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getXAdjustCallback(), defaultValues.getXAdjust()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.yAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getYAdjustCallback(), defaultValues.getYAdjust()).doubleValue());
+		this.yAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getYAdjustCallback(), defaultValues.getYAdjust()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.textAlignCallbackProxy.setCallback(context -> onTextAlign(new AnnotationContext(this.parent, context), defaultValues.getTextAlign()));
 		// sets function to proxy callback in order to invoke the java interface

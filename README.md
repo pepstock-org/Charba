@@ -307,6 +307,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Developing
 
   * change dependency for Google Closure Compiler, [version v20211006](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20211006).
+  * add consistent checking for scriptable options which are returning a number.
 
 License
 -------

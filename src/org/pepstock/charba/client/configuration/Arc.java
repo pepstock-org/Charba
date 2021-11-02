@@ -110,15 +110,15 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.offsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getOffsetCallback(), getDefaultElement().getOffset()).intValue());
+		this.offsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getOffsetCallback(), getDefaultElement().getOffset()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverOffsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getHoverOffsetCallback(), getDefaultElement().getOffset()).intValue());
+		this.hoverOffsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHoverOffsetCallback(), getDefaultElement().getOffset()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderRadiusCallbackProxy.setCallback(context -> onBorderRadius(createContext(context), getBorderRadiusCallback(), getDefaultElement().getBorderRadius()));
 		// gets value and calls the callback
 		this.borderAlignCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(createContext(context), getBorderAlignCallback(), getDefaultElement().getBorderAlign()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.angleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getAngleCallback(), getDefaultElement().getAngle()).doubleValue());
+		this.angleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getAngleCallback(), getDefaultElement().getAngle()).doubleValue());
 	}
 
 	/*

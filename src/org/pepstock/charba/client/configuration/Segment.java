@@ -26,11 +26,13 @@ import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
+import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.SegmentContext;
 import org.pepstock.charba.client.callbacks.WidthCallback;
@@ -142,13 +144,15 @@ public class Segment extends ConfigurationOptionsContainer {
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(getSegmentContext(context), getBorderColorCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getSegmentContext(context), getBorderWidthCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderWidth()).intValue());
+		this.borderWidthCallbackProxy.setCallback(
+				context -> ScriptableUtils.getOptionValueAsNumber(getSegmentContext(context), getBorderWidthCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderCapStyleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getSegmentContext(context), getBorderCapStyleCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderCapStyle()).value());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashCallbackProxy.setCallback(context -> onBorderDash(new BaseContext(getChart(), context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashOffsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getSegmentContext(context), getBorderDashOffsetCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderDashOffset()).doubleValue());
+		this.borderDashOffsetCallbackProxy.setCallback(context -> ScriptableUtils
+				.getOptionValueAsNumber(getSegmentContext(context), getBorderDashOffsetCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderJoinStyleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getSegmentContext(context), getBorderJoinStyleCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderJoinStyle()).value());
 	}
