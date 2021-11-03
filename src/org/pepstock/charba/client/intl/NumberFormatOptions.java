@@ -19,6 +19,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.ChartEnvelop;
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -514,6 +516,20 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	@Override
 	public int getMaximumSignificantDigits() {
 		return getValue(Property.MAXIMUM_SIGNIFICANT_DIGITS, getDefaultValues().getMaximumSignificantDigits());
+	}
+
+	/**
+	 * Loads the {@link NativeObject} in the envelop passed as argument.<br>
+	 * This method is called from {@link Helpers#formatNumber(double, CLocale, NumberFormatOptions)}.
+	 * 
+	 * @param envelop envelop where loads the {@link NativeObject}
+	 */
+	public void load(ChartEnvelop<NativeObject> envelop) {
+		// checks if envelop is consistent
+		if (envelop != null) {
+			// stored native object in the envelop
+			envelop.setContent(getNativeObject());
+		}
 	}
 
 	/**

@@ -70,4 +70,16 @@ final class NativeHelpers {
 	 */
 	@JsMethod
 	native NativeObject toFont(NativeObject font);
+
+	/**
+	 * Format a number using a localized number formatter.
+	 * 
+	 * @param number the number to format
+	 * @param locale the locale to pass to the <code>Intl.NumberFormat</code> constructor
+	 * @param options <code>Intl</code> number format options
+	 * @return a number formatted string
+	 */
+	@JsMethod
+	native String formatNumber(double number, String locale, NativeObject options);
+
 }

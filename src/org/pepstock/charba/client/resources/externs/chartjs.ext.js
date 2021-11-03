@@ -196,6 +196,13 @@ CharbaChartHelpers.prototype.getRelativePosition = function(event, chart){};
  */
 CharbaChartHelpers.prototype.toFont = function(font){};
 /**
+ * @param {number} number
+ * @param {string=} locale
+ * @param {Object=} options
+ * @return {string}
+ */
+CharbaChartHelpers.prototype.formatNumber = function(number, locale, options);
+/**
  * @constructor
  * @return {CharbaChartAdaptersDate}
  */

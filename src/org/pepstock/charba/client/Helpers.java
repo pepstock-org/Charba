@@ -23,12 +23,15 @@ import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.events.AbstractEvent;
 import org.pepstock.charba.client.events.ChartEventContext;
+import org.pepstock.charba.client.intl.CLocale;
+import org.pepstock.charba.client.intl.NumberFormatOptions;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.options.AbstractImmutableFont;
 import org.pepstock.charba.client.options.IsImmutableFont;
 import org.pepstock.charba.client.resources.ResourcesType;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * Singleton object to use the helpers utility of CHART.JS.<br>
@@ -419,6 +422,82 @@ public final class Helpers {
 		}
 		// if here, all values are consistent
 		return true;
+	}
+
+	// ----------------
+	// INTL by CHARTJS
+	// ----------------
+
+	/**
+	 * Format a number using a localized number formatter.<br>
+	 * It uses the locale of the browser.
+	 * 
+	 * @param number the number to format
+	 * @return a number formatted string
+	 */
+	public String formatNumber(double number) {
+		return formatNumber(number, (String) null);
+	}
+
+	/**
+	 * Format a number using a localized number formatter.
+	 * 
+	 * @param number the number to format
+	 * @param locale the locale to pass to the <code>Intl.NumberFormat</code> constructor
+	 * @return a number formatted string
+	 */
+	public String formatNumber(double number, CLocale locale) {
+		return formatNumber(number, locale, null);
+	}
+
+	/**
+	 * Format a number using a localized number formatter.
+	 * 
+	 * @param number the number to format
+	 * @param locale the locale to pass to the <code>Intl.NumberFormat</code> constructor
+	 * @return a number formatted string
+	 */
+	public String formatNumber(double number, String locale) {
+		return formatNumber(number, locale, null);
+	}
+
+	/**
+	 * Format a number using a localized number formatter.
+	 * 
+	 * @param number the number to format
+	 * @param locale the locale to pass to the <code>Intl.NumberFormat</code> constructor
+	 * @param options <code>Intl</code> number format options
+	 * @return a number formatted string
+	 */
+	public String formatNumber(double number, CLocale locale, NumberFormatOptions options) {
+		// invokes the native methods to format the number
+		return formatNumber(number, locale != null ? locale.getIdentifier() : Window.undefined(), options);
+	}
+
+	/**
+	 * Format a number using a localized number formatter.
+	 * 
+	 * @param number the number to format
+	 * @param locale the locale to pass to the <code>Intl.NumberFormat</code> constructor
+	 * @param options <code>Intl</code> number format options
+	 * @return a number formatted string
+	 */
+	public String formatNumber(double number, String locale, NumberFormatOptions options) {
+		// checks if options are consistent
+		NativeObject optionsToPass;
+		if (options != null) {
+			// creates envelop
+			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>(true);
+			// loads native object from options
+			options.load(envelop);
+			// stores options to pass to native method of chart helpers
+			optionsToPass = envelop.getContent();
+		} else {
+			// sets as undefined
+			optionsToPass = Window.undefined();
+		}
+		// invokes the native methods to format the number
+		return nativeObject.formatNumber(number, locale != null ? locale : Window.undefined(), optionsToPass);
 	}
 
 	/**
