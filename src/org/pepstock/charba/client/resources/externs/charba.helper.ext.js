@@ -261,6 +261,11 @@ CharbaJsZoomHelper.zoom = function(chart, amount, mode) {};
  */
 CharbaJsZoomHelper.zoomScale = function(chart, scaleId, range, mode) {};
 /**
+ * @param {Chart} chart
+ * @return {boolean}
+ */
+CharbaJsZoomHelper.isZoomedOrPanned = function(chart) {};
+/**
  * @constructor
  * @return {CharbaJsDataLabelsHelper}
  */	

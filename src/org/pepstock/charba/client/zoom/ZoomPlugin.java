@@ -134,12 +134,31 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 		if (isReadyForApi(chart)) {
 			// gets native chart instance
 			Chart nativeChart = Charts.getNative(chart);
-			// resets zoom
+			// gets zoom level
 			return JsZoomHelper.get().getZoomLevel(nativeChart);
 		}
 		// if here, chart not consistent
 		// then returns undefined
 		return Undefined.DOUBLE;
+	}
+
+	/**
+	 * Returns whether the chart has been zoomed or panned, for instance whether the initial scale of any axis is different to the one used currently.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @return <code>true</code> if the chart has been zoomed or panned
+	 */
+	public static boolean isZoomedOrPanned(IsChart chart) {
+		// check if chart is consistent and zoom plugin is activated
+		if (isReadyForApi(chart)) {
+			// gets native chart instance
+			Chart nativeChart = Charts.getNative(chart);
+			// resets zoom
+			return JsZoomHelper.get().isZoomedOrPanned(nativeChart);
+		}
+		// if here, chart not consistent
+		// then returns undefined
+		return Undefined.BOOLEAN;
 	}
 
 	/**

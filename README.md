@@ -294,6 +294,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
   * import CHART.JS [version v3.6.0](https://github.com/chartjs/Chart.js/releases/tag/v3.6.0).
   * import CHART.JS GEO controller [version v3.6.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.6.0).
+  * import CHART.JS ZOOM plugin [version v1.2.0](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.2.0).
   * enable all options of `SizeAxis` and `ColorAxis` (GEO charts) as scriptable ones.
   * add `projection` and `projectionInvert` methods to GEO charts in order to translates latitude and longitude in XY coordinates and viceversa.
   * add `getColorForValue` and `getColorForValueAsString` methods to GEO color axis in order to get the color for a specific value.
@@ -304,6 +305,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `autoPadding` option to `Layout` options and configuration classes.
   * enable the capability to hide the opened toast items programmatically.
   * add `formatNumber` methods to Helpers, provided out-of-the-box by CHART.JS.
+  * add `isZoomedOrPanned` method to `ZoomPlugin` in order to get if the chart is zoomed or panned.
   
 ### Developing
 

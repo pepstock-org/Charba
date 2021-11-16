@@ -75,6 +75,22 @@ final class JsZoomHelper {
 	}
 
 	/**
+	 * Returns whether the chart has been zoomed or panned, for instance whether the initial scale of any axis is different to the one used currently.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @return <code>true</code> if the chart has been zoomed or panned
+	 */
+	boolean isZoomedOrPanned(Chart chart) {
+		// checks if chart is consistent
+		if (chart != null) {
+			return NativeJsZoomHelper.isZoomedOrPanned(chart);
+		}
+		// if here, chart not consistent
+		// then returns undefined
+		return Undefined.BOOLEAN;
+	}
+
+	/**
 	 * Reset the zoom of chart when {@link ZoomPlugin} is activated.
 	 * 
 	 * @param chart chart instance to invoke

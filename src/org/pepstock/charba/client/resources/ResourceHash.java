@@ -45,7 +45,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
-	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1059466),
+	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1074682),
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */
@@ -85,7 +85,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'ZoomPluginResource' class.
 	 */
-	ZOOM_PLUGIN_RESOURCE(ResourceName.ZOOM_PLUGIN, 1016813);
+	ZOOM_PLUGIN_RESOURCE(ResourceName.ZOOM_PLUGIN, 1054322);
 	
 	// resource name instance
 	private final ResourceName resourceName;

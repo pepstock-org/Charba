@@ -937,6 +937,18 @@ CharbaJsZoomHelper.zoomScale = function(chart, scaleId, range, mode) {
   }
 }
 /**
+ * Returns whether the chart has been zoomed or panned - i.e. whether the initial scale of any axis is different to the one used currently.
+ *
+ * @param {Chart} chart
+ * @return {boolean}
+ */
+CharbaJsZoomHelper.isZoomedOrPanned = function(chart) {
+  if (chart != null && typeof chart.isZoomedOrPanned === 'function'){
+    return chart.isZoomedOrPanned.call(chart);
+  }
+  return false;
+}
+/**
  * ----------------------------------------------------------------------------
  * CharbaJsDataLabelsHelper
  * ----------------------------------------------------------------------------
