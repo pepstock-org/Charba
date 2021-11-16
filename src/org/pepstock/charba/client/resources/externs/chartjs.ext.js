@@ -201,7 +201,7 @@ CharbaChartHelpers.prototype.toFont = function(font){};
  * @param {Object=} options
  * @return {string}
  */
-CharbaChartHelpers.prototype.formatNumber = function(number, locale, options);
+CharbaChartHelpers.prototype.formatNumber = function(number, locale, options) {};
 /**
  * @constructor
  * @return {CharbaChartAdaptersDate}
