@@ -43,4 +43,14 @@ final class DefaultBox implements IsDefaultsBoxAnnotation {
 		return AnnotationType.BOX;
 	}
 
+	/**
+	 * Returns the border radius.
+	 * 
+	 * @return the border radius.
+	 */
+	@Override
+	public int getBorderRadius() {
+		return BoxAnnotation.DEFAULT_BORDER_RADIUS;
+	}
+
 }

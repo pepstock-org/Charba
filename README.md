@@ -289,6 +289,9 @@ Here you can find the list of enhancements and updates available on `master` bra
     * add `ValueLabel` and `DescriptionLabel` elements in the meter and gauge dataset in order to configure how to render the labels.
     * move all methods to configure the value label from options to dataset class.
     * remove `Render` enumeration because is not used anymore because the rendering as percentage can be set by `ValueLabel` and the label can be configured in `DescriptionLabel`.
+  * remove `CornerRadiusCallback` class. Use `BorderRadiusCallback` one.
+  * change signature of `BorderRadiusCallback`, adding the generic for scriptable options context class.
+  * rename `cornerRadius` option to `borderRadius` in `LineLabel` and `BoxAnnotation` classes.
 
 ### Features
 
@@ -308,6 +311,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `formatNumber` methods to Helpers, provided out-of-the-box by CHART.JS.
   * add `isZoomedOrPanned` method to `ZoomPlugin` in order to get if the chart is zoomed or panned.
   * add `rotation` option to `EllipseAnnotation` class.
+  * enable to set a `BarBorderRadius` object to `borderRadius` option in `LineLabel` and `BoxAnnotation` classes. 
   
 ### Developing
 

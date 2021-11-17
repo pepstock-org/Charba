@@ -69,7 +69,7 @@ interface HasBackgroundColor extends IsDefaultsBackgroundColorHandler {
 			return getBackgroundColorHandler().getBackgroundColorAsString();
 		}
 		// if here, handler is not consistent
-		// uses the default of of super interface
+		// uses the default
 		return Defaults.get().getGlobal().getColorAsString();
 	}
 
@@ -94,7 +94,7 @@ interface HasBackgroundColor extends IsDefaultsBackgroundColorHandler {
 			return getBackgroundColorHandler().getBackgroundColorCallback();
 		}
 		// if here, handler is not consistent
-		// uses the default of of super interface
+		// uses the default of super interface
 		return IsDefaultsBackgroundColorHandler.super.getBackgroundColorCallback();
 	}
 

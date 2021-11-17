@@ -577,7 +577,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	 * @param defaultValue default value for this border radius.
 	 * @return a object property value, as integer
 	 */
-	final int onBorderRadius(DatasetContext context, BorderRadiusCallback callback, int defaultValue) {
+	final int onBorderRadius(DatasetContext context, BorderRadiusCallback<DatasetContext> callback, int defaultValue) {
 		// gets value
 		Object value = ScriptableUtils.getOptionValue(context, callback);
 		// checks if is an integer

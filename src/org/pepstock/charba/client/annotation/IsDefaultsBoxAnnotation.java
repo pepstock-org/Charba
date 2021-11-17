@@ -15,15 +15,13 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.callbacks.CornerRadiusCallback;
-
 /**
  * This is the {@link AnnotationPlugin#ID} plugin BOX annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBoxAnnotation extends IsDefaultsXYAnnotation, IsDefaultsBackgroundColorHandler {
+interface IsDefaultsBoxAnnotation extends IsDefaultsXYAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler {
 
 	/*
 	 * (non-Javadoc)
@@ -43,24 +41,6 @@ interface IsDefaultsBoxAnnotation extends IsDefaultsXYAnnotation, IsDefaultsBack
 	@Override
 	default int getBorderWidth() {
 		return BoxAnnotation.DEFAULT_BORDER_WIDTH;
-	}
-
-	/**
-	 * Returns the border radius.
-	 * 
-	 * @return the border radius.
-	 */
-	default int getCornerRadius() {
-		return BoxAnnotation.DEFAULT_CORNER_RADIUS;
-	}
-
-	/**
-	 * Returns the callback called to set the corner radius.
-	 * 
-	 * @return the callback called to set the corner radius
-	 */
-	default CornerRadiusCallback<AnnotationContext> getCornerRadiusCallback() {
-		return null;
 	}
 
 }

@@ -13,16 +13,32 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.callbacks;
+package org.pepstock.charba.client.annotation;
+
+import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 
 /**
- * Callback interface to set <code>cornerRadius</code> property at runtime.
+ * This is the default options for items which provides background color property.
  * 
  * @author Andrea "Stock" Stocchero
- * 
- * @param <C> type of context to pass to the callback.
  *
  */
-public interface CornerRadiusCallback<C extends ChartContext> extends Scriptable<Integer, C> {
+interface IsDefaultsBorderRadiusHandler {
+
+	/**
+	 * Returns the border radius.
+	 * 
+	 * @return the border radius.
+	 */
+	int getBorderRadius();
+
+	/**
+	 * Returns the callback called to set the border radius.
+	 * 
+	 * @return the callback called to set the border radius
+	 */
+	default BorderRadiusCallback<AnnotationContext> getBorderRadiusCallback() {
+		return null;
+	}
 
 }

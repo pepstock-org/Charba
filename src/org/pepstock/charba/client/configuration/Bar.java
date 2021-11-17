@@ -102,9 +102,9 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
 	// border skipped callback instance
-	private BorderRadiusCallback borderRadiusCallback = null;
+	private BorderRadiusCallback<DatasetContext> borderRadiusCallback = null;
 	// hover borderWidth callback instance
-	private BorderRadiusCallback hoverBorderRadiusCallback = null;
+	private BorderRadiusCallback<DatasetContext> hoverBorderRadiusCallback = null;
 	// borderWidth callback instance
 	private EnableBorderRadiusCallback enableBorderRadiusCallback = null;
 	// point style callback instance
@@ -196,7 +196,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setBorderRadius(int borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores value
 		getConfiguration().getElements().getBar().setBorderRadius(borderRadius);
 	}
@@ -217,7 +217,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setHoverBorderRadius(int borderRadius) {
 		// resets callback
-		setHoverBorderRadius((BorderRadiusCallback) null);
+		setHoverBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores value
 		getConfiguration().getElements().getBar().setHoverBorderRadius(borderRadius);
 	}
@@ -375,7 +375,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * 
 	 * @return the border radius callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderRadiusCallback getBorderRadiusCallback() {
+	public BorderRadiusCallback<DatasetContext> getBorderRadiusCallback() {
 		return borderRadiusCallback;
 	}
 
@@ -384,7 +384,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * 
 	 * @param borderRadiusCallback the border radius callback.
 	 */
-	public void setBorderRadius(BorderRadiusCallback borderRadiusCallback) {
+	public void setBorderRadius(BorderRadiusCallback<DatasetContext> borderRadiusCallback) {
 		// sets the callback
 		this.borderRadiusCallback = borderRadiusCallback;
 		// stores and manages callback
@@ -398,7 +398,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setBorderRadius(NativeCallback borderRadiusCallback) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.BORDER_RADIUS, borderRadiusCallback);
 	}
@@ -408,7 +408,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * 
 	 * @return the border radius callback, when hovered, if set, otherwise <code>null</code>.
 	 */
-	public BorderRadiusCallback getHoverBorderRadiusCallback() {
+	public BorderRadiusCallback<DatasetContext> getHoverBorderRadiusCallback() {
 		return hoverBorderRadiusCallback;
 	}
 
@@ -417,7 +417,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * 
 	 * @param hoverBorderRadiusCallback the border radius callback, when hovered.
 	 */
-	public void setHoverBorderRadius(BorderRadiusCallback hoverBorderRadiusCallback) {
+	public void setHoverBorderRadius(BorderRadiusCallback<DatasetContext> hoverBorderRadiusCallback) {
 		// sets the callback
 		this.hoverBorderRadiusCallback = hoverBorderRadiusCallback;
 		// stores and manages callback
@@ -431,7 +431,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setHoverBorderRadius(NativeCallback hoverBorderRadiusCallback) {
 		// resets callback
-		setHoverBorderRadius((BorderRadiusCallback) null);
+		setHoverBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.HOVER_BORDER_RADIUS, hoverBorderRadiusCallback);
 	}

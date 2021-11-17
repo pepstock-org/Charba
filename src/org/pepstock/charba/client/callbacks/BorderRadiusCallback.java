@@ -20,7 +20,8 @@ package org.pepstock.charba.client.callbacks;
  * 
  * @author Andrea "Stock" Stocchero
  *
+ * @param <C> type of context to pass to the callback.
  */
-public interface BorderRadiusCallback extends Scriptable<Object, DatasetContext> {
+public interface BorderRadiusCallback<C extends ChartContext> extends Scriptable<Object, C> {
 
 }

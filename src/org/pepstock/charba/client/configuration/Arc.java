@@ -97,7 +97,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	// hover offset callback instance
 	private OffsetCallback<DatasetContext> hoverOffsetCallback = null;
 	// border radius callback instance
-	private BorderRadiusCallback borderRadiusCallback = null;
+	private BorderRadiusCallback<DatasetContext> borderRadiusCallback = null;
 
 	/**
 	 * Builds the object setting the java script options object and defaults options for arc.
@@ -251,7 +251,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 */
 	public void setBorderRadius(int borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores value
 		getConfiguration().getElements().getArc().setBorderRadius(borderRadius);
 	}
@@ -328,7 +328,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 * 
 	 * @return the border radius callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderRadiusCallback getBorderRadiusCallback() {
+	public BorderRadiusCallback<DatasetContext> getBorderRadiusCallback() {
 		return borderRadiusCallback;
 	}
 
@@ -337,7 +337,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 * 
 	 * @param borderRadiusCallback the border radius callback.
 	 */
-	public void setBorderRadius(BorderRadiusCallback borderRadiusCallback) {
+	public void setBorderRadius(BorderRadiusCallback<DatasetContext> borderRadiusCallback) {
 		// sets the callback
 		this.borderRadiusCallback = borderRadiusCallback;
 		// stores and manages callback
@@ -351,7 +351,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 */
 	public void setBorderRadius(NativeCallback borderRadiusCallback) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.BORDER_RADIUS, borderRadiusCallback);
 	}

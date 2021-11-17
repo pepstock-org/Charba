@@ -109,13 +109,13 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
 	// border radius callback instance
-	private BorderRadiusCallback borderRadiusCallback = null;
+	private BorderRadiusCallback<DatasetContext> borderRadiusCallback = null;
 	// hover borderWidth callback instance
 	private BarBorderWidthCallback hoverBorderWidthCallback = null;
 	// borderWidth callback instance
 	private BarBorderWidthCallback borderWidthCallback = null;
 	// hover borderWidth callback instance
-	private BorderRadiusCallback hoverBorderRadiusCallback = null;
+	private BorderRadiusCallback<DatasetContext> hoverBorderRadiusCallback = null;
 	// borderWidth callback instance
 	private EnableBorderRadiusCallback enableBorderRadiusCallback = null;
 	// point style callback instance
@@ -724,7 +724,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public void setBorderRadius(int... borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius);
 	}
@@ -736,7 +736,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public void setBorderRadius(BarBorderRadius... borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius);
 	}
@@ -748,7 +748,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public void setBorderRadius(List<BarBorderRadius> borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius, BORDER_RADIUS_EMPTY_ARRAY);
 	}
@@ -1186,7 +1186,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 * 
 	 * @return the border radius callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderRadiusCallback getBorderRadiusCallback() {
+	public BorderRadiusCallback<DatasetContext> getBorderRadiusCallback() {
 		return borderRadiusCallback;
 	}
 
@@ -1195,7 +1195,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 * 
 	 * @param borderRadiusCallback the border radius callback to set
 	 */
-	public void setBorderRadius(BorderRadiusCallback borderRadiusCallback) {
+	public void setBorderRadius(BorderRadiusCallback<DatasetContext> borderRadiusCallback) {
 		// sets the callback
 		this.borderRadiusCallback = borderRadiusCallback;
 		// checks if callback is consistent
@@ -1209,7 +1209,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public void setBorderRadius(NativeCallback borderRadiusCallback) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores value
 		borderItemsHandler.setBorderItemCallback(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadiusCallback);
 	}
@@ -1219,7 +1219,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 * 
 	 * @return the border radius callback, if set, otherwise <code>null</code>, when hovered.
 	 */
-	public BorderRadiusCallback getHoverBorderRadiusCallback() {
+	public BorderRadiusCallback<DatasetContext> getHoverBorderRadiusCallback() {
 		return hoverBorderRadiusCallback;
 	}
 
@@ -1228,7 +1228,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 * 
 	 * @param hoverBorderRadiusCallback the border radius callback to set
 	 */
-	public void setHoverBorderRadius(BorderRadiusCallback hoverBorderRadiusCallback) {
+	public void setHoverBorderRadius(BorderRadiusCallback<DatasetContext> hoverBorderRadiusCallback) {
 		// sets the callback
 		this.hoverBorderRadiusCallback = hoverBorderRadiusCallback;
 		// checks if callback is consistent
@@ -1242,7 +1242,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public void setHoverBorderRadius(NativeCallback hoverBorderRadiusCallback) {
 		// resets callback
-		setHoverBorderRadius((BorderRadiusCallback) null);
+		setHoverBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores value
 		borderItemsHandler.setBorderItemCallback(Property.HOVER_BORDER_RADIUS, Property.CHARBA_HOVER_BORDER_RADIUS_TYPE, hoverBorderRadiusCallback);
 	}

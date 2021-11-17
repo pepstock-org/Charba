@@ -59,7 +59,7 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	// hover offset callback instance
 	private OffsetCallback<DatasetContext> hoverOffsetCallback = null;
 	// border radius callback instance
-	private BorderRadiusCallback borderRadiusCallback = null;
+	private BorderRadiusCallback<DatasetContext> borderRadiusCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -327,7 +327,7 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	 */
 	public void setBorderRadius(int... borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius);
 	}
@@ -339,7 +339,7 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	 */
 	public void setBorderRadius(ArcBorderRadius... borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius);
 	}
@@ -351,7 +351,7 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	 */
 	public void setBorderRadius(List<ArcBorderRadius> borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores the value
 		borderItemsHandler.setBorderItem(Property.BORDER_RADIUS, Property.CHARBA_BORDER_RADIUS_TYPE, borderRadius, BORDER_RADIUS_EMPTY_ARRAY);
 	}
@@ -461,7 +461,7 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	 * 
 	 * @return the border radius callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderRadiusCallback getBorderRadiusCallback() {
+	public BorderRadiusCallback<DatasetContext> getBorderRadiusCallback() {
 		return borderRadiusCallback;
 	}
 
@@ -470,7 +470,7 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	 * 
 	 * @param borderRadiusCallback the border radius callback.
 	 */
-	public void setBorderRadius(BorderRadiusCallback borderRadiusCallback) {
+	public void setBorderRadius(BorderRadiusCallback<DatasetContext> borderRadiusCallback) {
 		// sets the callback
 		this.borderRadiusCallback = borderRadiusCallback;
 		// checks if callback is consistent
@@ -484,7 +484,7 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	 */
 	public void setBorderRadius(NativeCallback borderRadiusCallback) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.BORDER_RADIUS, borderRadiusCallback);
 	}

@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.PropertyHandler;
 
 /**
  * Base object to map the background color options.
@@ -33,7 +32,7 @@ import org.pepstock.charba.client.commons.PropertyHandler;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundColorHandler> {
+final class BackgroundColorHandler extends AbstractAnnotationPropertyHandler<IsDefaultsBackgroundColorHandler> {
 
 	/**
 	 * Name of properties of native object.
@@ -140,7 +139,7 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 	 * @param backgroundColorCallback to set the color of the background of annotation
 	 */
 	void setBackgroundColor(ColorCallback<AnnotationContext> backgroundColorCallback) {
-		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(getParent(), AnnotationPlugin.ID, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
+		BACKGROUND_COLOR_PROPERTY_HANDLER.setCallback(getNodeWrapper(), AnnotationPlugin.ID, backgroundColorCallback, backgroundColorCallbackProxy.getProxy());
 	}
 
 	/**

@@ -16,16 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.CornerRadiusCallback;
-import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
-import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
-import org.pepstock.charba.client.commons.CallbackPropertyHandler;
-import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -37,7 +28,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefaultsBoxAnnotation, HasBackgroundColor {
+public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefaultsBoxAnnotation, HasBackgroundColor, HasBorderRadius {
 
 	/**
 	 * Default box annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -45,54 +36,16 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	public static final int DEFAULT_BORDER_WIDTH = 1;
 
 	/**
-	 * Default box annotation corner radius, <b>{@value DEFAULT_CORNER_RADIUS}</b>.
+	 * Default box annotation border radius, <b>{@value DEFAULT_BORDER_RADIUS}</b>.
 	 */
-	public static final int DEFAULT_CORNER_RADIUS = 0;
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		CORNER_RADIUS("cornerRadius");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-	// callback proxy to invoke the corner radius function
-	private final CallbackProxy<ProxyIntegerCallback> cornerRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	// callback instance to handle corner radius options
-	private static final CallbackPropertyHandler<CornerRadiusCallback<AnnotationContext>> CORNER_RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CORNER_RADIUS);
+	public static final int DEFAULT_BORDER_RADIUS = 0;
 
 	// defaults options
 	private final IsDefaultsBoxAnnotation defaultValues;
 	// background color handler
 	private final BackgroundColorHandler backgroundColorHandler;
+	// border radius handler
+	private final BorderRadiusHandler borderRadiusHandler;
 
 	/**
 	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -160,8 +113,8 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 		this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
-		// sets callbacks proxies
-		initCallbacks();
+		// creates border radius handler
+		this.borderRadiusHandler = new BorderRadiusHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/**
@@ -178,19 +131,8 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 		this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
-		// sets callbacks proxies
-		initCallbacks();
-	}
-
-	/**
-	 * Initializes the callbacks proxies for the options which can be scriptable.
-	 */
-	private void initCallbacks() {
-		// -------------------------------
-		// -- SET CALLBACKS to PROXIES ---
-		// -------------------------------
-		// sets function to proxy callback in order to invoke the java interface
-		this.cornerRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getCornerRadiusCallback(), defaultValues.getCornerRadius(), ScriptableIntegerChecker.POSITIVE_OR_ZERO).intValue());
+		// creates border radius handler
+		this.borderRadiusHandler = new BorderRadiusHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/*
@@ -201,6 +143,16 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	@Override
 	public BackgroundColorHandler getBackgroundColorHandler() {
 		return backgroundColorHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasBorderRadius#getBorderRadiusHandler()
+	 */
+	@Override
+	public BorderRadiusHandler getBorderRadiusHandler() {
+		return borderRadiusHandler;
 	}
 
 	/**
@@ -221,62 +173,5 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	@Override
 	public final int getBorderWidth() {
 		return getValue(AbstractAnnotation.Property.BORDER_WIDTH, defaultValues.getBorderWidth());
-	}
-
-	/**
-	 * Sets the corner radius.
-	 * 
-	 * @param corner the border radius.
-	 */
-	public void setCornerRadius(int corner) {
-		// resets callback
-		setCornerRadius((CornerRadiusCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.CORNER_RADIUS, Checker.positiveOrZero(corner));
-	}
-
-	/**
-	 * Returns the border radius.
-	 * 
-	 * @return the border radius.
-	 */
-	@Override
-	public int getCornerRadius() {
-		return getValue(Property.CORNER_RADIUS, defaultValues.getCornerRadius());
-	}
-
-	// ---------------------
-	// CALLBACKS
-	// ---------------------
-
-	/**
-	 * Returns the callback called to set the corner radius.
-	 * 
-	 * @return the callback called to set the corner radius
-	 */
-	@Override
-	public CornerRadiusCallback<AnnotationContext> getCornerRadiusCallback() {
-		return CORNER_RADIUS_PROPERTY_HANDLER.getCallback(this, defaultValues.getCornerRadiusCallback());
-	}
-
-	/**
-	 * Sets the callback to set the corner radius.
-	 * 
-	 * @param cornerRadiusCallback to set the corner radius
-	 */
-	public void setCornerRadius(CornerRadiusCallback<AnnotationContext> cornerRadiusCallback) {
-		CORNER_RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, cornerRadiusCallback, cornerRadiusCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the corner radius.
-	 * 
-	 * @param cornerRadiusCallback to set the corner radius
-	 */
-	public void setCornerRadius(NativeCallback cornerRadiusCallback) {
-		// resets callback
-		setCornerRadius((CornerRadiusCallback<AnnotationContext>) null);
-		// stores values
-		setValueAndAddToParent(Property.CORNER_RADIUS, cornerRadiusCallback);
 	}
 }

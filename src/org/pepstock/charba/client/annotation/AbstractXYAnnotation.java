@@ -609,5 +609,4 @@ abstract class AbstractXYAnnotation extends AbstractAnnotation implements IsDefa
 		// stores values
 		setValueAndAddToParent(Property.Y_MAX, valueCallback);
 	}
-
 }

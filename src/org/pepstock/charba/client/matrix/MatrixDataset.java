@@ -102,7 +102,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	// user callback implementation for height
 	private SizeCallback heightCallback = null;
 	// user callback implementation for border radius
-	private BorderRadiusCallback borderRadiusCallback = null;
+	private BorderRadiusCallback<DatasetContext> borderRadiusCallback = null;
 	// user callback implementation for border width
 	private BarBorderWidthCallback borderWidthCallback = null;
 	// user callback implementation for hover border width
@@ -337,7 +337,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 */
 	public void setBorderRadius(int borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores the value
 		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(borderRadius));
 	}
@@ -349,7 +349,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 */
 	public void setBorderRadius(BarBorderRadius borderRadius) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores the value
 		setValue(Property.BORDER_RADIUS, borderRadius);
 	}
@@ -546,7 +546,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 * 
 	 * @param borderRadiusCallback the border radius callback
 	 */
-	public void setBorderRadius(BorderRadiusCallback borderRadiusCallback) {
+	public void setBorderRadius(BorderRadiusCallback<DatasetContext> borderRadiusCallback) {
 		// sets the callback
 		this.borderRadiusCallback = borderRadiusCallback;
 		// checks if consistent
@@ -564,7 +564,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 * 
 	 * @return the border radius callback
 	 */
-	public BorderRadiusCallback getBorderRadiusCallback() {
+	public BorderRadiusCallback<DatasetContext> getBorderRadiusCallback() {
 		return borderRadiusCallback;
 	}
 
@@ -575,7 +575,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	 */
 	public void setBorderRadius(NativeCallback borderRadiusCallback) {
 		// resets callback
-		setBorderRadius((BorderRadiusCallback) null);
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.BORDER_RADIUS, borderRadiusCallback);
 	}

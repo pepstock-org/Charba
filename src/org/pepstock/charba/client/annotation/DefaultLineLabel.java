@@ -50,6 +50,16 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	}
 
 	/**
+	 * Returns the radius of label rectangle.
+	 * 
+	 * @return the radius of label rectangle
+	 */
+	@Override
+	public int getBorderRadius() {
+		return LineLabel.DEFAULT_BORDER_RADIUS;
+	}
+
+	/**
 	 * Internal class extending {@link DefaultRoutedFont} to override some defaults for body.
 	 * 
 	 * @author Andrea "Stock" Stocchero
