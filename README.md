@@ -307,6 +307,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * enable the capability to hide the opened toast items programmatically.
   * add `formatNumber` methods to Helpers, provided out-of-the-box by CHART.JS.
   * add `isZoomedOrPanned` method to `ZoomPlugin` in order to get if the chart is zoomed or panned.
+  * add `rotation` option to `EllipseAnnotation` class.
   
 ### Developing
 
