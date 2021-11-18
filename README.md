@@ -312,6 +312,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `isZoomedOrPanned` method to `ZoomPlugin` in order to get if the chart is zoomed or panned.
   * add `rotation` option to `EllipseAnnotation` class.
   * enable to set a `BarBorderRadius` object to `borderRadius` option in `LineLabel` and `BoxAnnotation` classes. 
+  * add `borderCapStyle`, `borderColor`, `borderDash`,`borderDashOffset`, `borderJoinStyle` and `borderWidth` options to `LineLabel` class.
   
 ### Developing
 

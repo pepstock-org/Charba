@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
@@ -29,6 +32,8 @@ import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -183,6 +188,65 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler, IsDefaul
 	default String getImageWidthAsPercentage() {
 		return null;
 	}
+
+	/**
+	 * Returns how the end points of every line are drawn.
+	 * 
+	 * @return how the end points of every line are drawn.
+	 */
+	default CapStyle getBorderCapStyle() {
+		return LineLabel.DEFAULT_BORDER_CAP_STYLE;
+	}
+
+	/**
+	 * Returns the color of the border of annotation.
+	 * 
+	 * @return the color of the border of annotation
+	 */
+	default String getBorderColorAsString() {
+		return LineLabel.DEFAULT_BORDER_COLOR_AS_STRING;
+	}
+
+	/**
+	 * Returns the width of the border in pixels.
+	 * 
+	 * @return the width of the border in pixels.
+	 */
+	default int getBorderWidth() {
+		return LineLabel.DEFAULT_BORDER_WIDTH;
+	}
+
+	/**
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 */
+	default List<Integer> getBorderDash() {
+		return Collections.emptyList();
+	}
+
+	/**
+	 * Returns the line dash pattern offset.
+	 * 
+	 * @return the line dash pattern offset.
+	 */
+	default double getBorderDashOffset() {
+		return LineLabel.DEFAULT_BORDER_DASH_OFFSET;
+	}
+
+	/**
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	default JoinStyle getBorderJoinStyle() {
+		return LineLabel.DEFAULT_BORDER_JOIN_STYLE;
+	}
+
+	// ----------------
+	// CALLBACKS
+	// ----------------
 
 	/**
 	 * Returns the callback called to set the color of the text of label.

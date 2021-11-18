@@ -44,6 +44,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -54,7 +55,9 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsScriptableFontProvider;
@@ -114,9 +117,39 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	public static final int DEFAULT_Y_PADDING = 6;
 
 	/**
+	 * Default line label background color, <b>black</b>.
+	 */
+	public static final IsColor DEFAULT_BORDER_COLOR = HtmlColor.BLACK;
+
+	/**
+	 * Default line label background color as string, <b>black</b>.
+	 */
+	public static final String DEFAULT_BORDER_COLOR_AS_STRING = DEFAULT_BORDER_COLOR.toRGBA();
+
+	/**
+	 * Default line label border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
+	 */
+	public static final int DEFAULT_BORDER_WIDTH = 1;
+
+	/**
 	 * Default line label border radius, <b>{@value DEFAULT_BORDER_RADIUS}</b>.
 	 */
 	public static final int DEFAULT_BORDER_RADIUS = 6;
+
+	/**
+	 * Default line label border cap style, <b>{@link CapStyle#BUTT}</b>.
+	 */
+	public static final CapStyle DEFAULT_BORDER_CAP_STYLE = CapStyle.BUTT;
+
+	/**
+	 * Default line label border join style, <b>{@link JoinStyle#MITER}</b>.
+	 */
+	public static final JoinStyle DEFAULT_BORDER_JOIN_STYLE = JoinStyle.MITER;
+
+	/**
+	 * Default line label border dash offset, <b>{@value DEFAULT_BORDER_DASH_OFFSET}</b>.
+	 */
+	public static final int DEFAULT_BORDER_DASH_OFFSET = 0;
 
 	/**
 	 * Default line label position, <b>{@link LabelPosition#CENTER}</b>.
@@ -151,6 +184,12 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 */
 	private enum Property implements Key
 	{
+		BORDER_COLOR("borderColor"),
+		BORDER_CAP_STYLE("borderCapStyle"),
+		BORDER_DASH("borderDash"),
+		BORDER_DASH_OFFSET("borderDashOffset"),
+		BORDER_JOIN_STYLE("borderJoinStyle"),
+		BORDER_WIDTH("borderWidth"),
 		COLOR("color"),
 		CONTENT("content"),
 		// even if in the JS plugin the options is called "enabled"
@@ -830,6 +869,148 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	@Override
 	public DrawTime getDrawTime() {
 		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), parentDrawTime != null ? parentDrawTime : defaultValues.getDrawTime());
+	}
+
+	/**
+	 * Sets the color of the border of label.
+	 * 
+	 * @param borderColor the color of the border of label
+	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(IsColor.checkAndGetValue(borderColor));
+	}
+
+	/**
+	 * Sets the color of the border of label.
+	 * 
+	 * @param borderColor the color of the border of label
+	 */
+	public void setBorderColor(String borderColor) {
+		setValue(Property.BORDER_COLOR, borderColor);
+	}
+
+	/**
+	 * Returns the color of the border of annotation.
+	 * 
+	 * @return the color of the border of annotation
+	 */
+	@Override
+	public String getBorderColorAsString() {
+		return getValue(Property.BORDER_COLOR, defaultValues.getBorderColorAsString());
+	}
+
+	/**
+	 * Returns the color of the border of label.
+	 * 
+	 * @return the color of the border of label
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
+	/**
+	 * Sets the width of the border in pixels.
+	 * 
+	 * @param borderWidth the width of the border in pixels.
+	 */
+	public void setBorderWidth(int borderWidth) {
+		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
+	}
+
+	/**
+	 * Returns the width of the border in pixels.
+	 * 
+	 * @return the width of the border in pixels.
+	 */
+	@Override
+	public int getBorderWidth() {
+		return getValue(Property.BORDER_WIDTH, defaultValues.getBorderWidth());
+	}
+
+	/**
+	 * Sets how the end points of every line are drawn.
+	 * 
+	 * @param borderCapStyle how the end points of every line are drawn.
+	 */
+	public void setBorderCapStyle(CapStyle borderCapStyle) {
+		setValue(Property.BORDER_CAP_STYLE, borderCapStyle);
+	}
+
+	/**
+	 * Returns how the end points of every line are drawn.
+	 * 
+	 * @return how the end points of every line are drawn.
+	 */
+	@Override
+	public CapStyle getBorderCapStyle() {
+		return getValue(Property.BORDER_CAP_STYLE, CapStyle.values(), defaultValues.getBorderCapStyle());
+	}
+
+	/**
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 */
+	public void setBorderDash(int... borderDash) {
+		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
+	}
+
+	/**
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 */
+	@Override
+	public List<Integer> getBorderDash() {
+		// checks if there is the property
+		if (isType(Property.BORDER_DASH, ObjectType.ARRAY)) {
+			// gets the array
+			ArrayInteger array = getArrayValue(Property.BORDER_DASH);
+			// and transforms to a list
+			return ArrayListHelper.list(array);
+		}
+		// if here, the property is missing
+		return defaultValues.getBorderDash();
+	}
+
+	/**
+	 * Sets the line dash pattern offset.
+	 * 
+	 * @param borderDashOffset the line dash pattern offset.
+	 */
+	public void setBorderDashOffset(double borderDashOffset) {
+		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
+	}
+
+	/**
+	 * Returns the line dash pattern offset.
+	 * 
+	 * @return the line dash pattern offset.
+	 */
+	@Override
+	public double getBorderDashOffset() {
+		return getValue(Property.BORDER_DASH_OFFSET, defaultValues.getBorderDashOffset());
+	}
+
+	/**
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @param borderJoinStyle how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
+		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyle);
+	}
+
+	/**
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	@Override
+	public JoinStyle getBorderJoinStyle() {
+		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), defaultValues.getBorderJoinStyle());
 	}
 
 	// ---------------------
