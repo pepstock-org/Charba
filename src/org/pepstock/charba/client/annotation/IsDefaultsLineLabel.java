@@ -25,11 +25,16 @@ import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
+import org.pepstock.charba.client.callbacks.BorderDashCallback;
+import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
+import org.pepstock.charba.client.callbacks.CapStyleCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
@@ -362,6 +367,62 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler, IsDefaul
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
 	default FontCallback<AnnotationContext> getFontCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the width of the border in pixels.
+	 * 
+	 * @return the callback called to set the width of the border in pixels
+	 */
+	default WidthCallback<AnnotationContext> getBorderWidthCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the color of the border of annotation.
+	 * 
+	 * @return the callback called to set the color of the border of annotation
+	 */
+	default ColorCallback<AnnotationContext> getBorderColorCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the line dash pattern offset.
+	 * 
+	 * @return the callback called to set the line dash pattern offset
+	 */
+	default BorderDashOffsetCallback<AnnotationContext> getBorderDashOffsetCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
+	 * describe the pattern.
+	 * 
+	 * @return the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
+	 *         describe the pattern
+	 */
+	default BorderDashCallback<AnnotationContext> getBorderDashCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the border capstyle callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border capstyle callback, if set, otherwise <code>null</code>.
+	 */
+	default CapStyleCallback<AnnotationContext> getBorderCapStyleCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the border join style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border join style callback, if set, otherwise <code>null</code>.
+	 */
+	default JoinStyleCallback<AnnotationContext> getBorderJoinStyleCallback() {
 		return null;
 	}
 }

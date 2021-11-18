@@ -26,19 +26,27 @@ import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
+import org.pepstock.charba.client.callbacks.BorderDashCallback;
+import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
+import org.pepstock.charba.client.callbacks.CapStyleCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
+import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
+import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
@@ -235,6 +243,18 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
+	// callback proxy to invoke the border color function
+	private final CallbackProxy<ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border width function
+	private final CallbackProxy<ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border dash function
+	private final CallbackProxy<ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border dash offset function
+	private final CallbackProxy<ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border cap style function
+	private final CallbackProxy<ProxyStringCallback> borderCapStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border join style function
+	private final CallbackProxy<ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the color function
 	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the content function
@@ -264,6 +284,18 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 
 	// callback instance to handle color options
 	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
+	// callback instance to handle border color options
+	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> BORDER_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_COLOR);
+	// callback instance to handle border width options
+	private static final CallbackPropertyHandler<WidthCallback<AnnotationContext>> BORDER_WIDTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_WIDTH);
+	// callback instance to handle border dash options
+	private static final CallbackPropertyHandler<BorderDashCallback<AnnotationContext>> BORDER_DASH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH);
+	// callback instance to handle border dash offset options
+	private static final CallbackPropertyHandler<BorderDashOffsetCallback<AnnotationContext>> BORDER_DASH_OFFSET_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH_OFFSET);
+	// callback instance to handle border cap style options
+	private static final CallbackPropertyHandler<CapStyleCallback<AnnotationContext>> BORDER_CAP_STYLE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_CAP_STYLE);
+	// callback instance to handle border join style options
+	private static final CallbackPropertyHandler<JoinStyleCallback<AnnotationContext>> BORDER_JOIN_STYLE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_JOIN_STYLE);
 	// callback instance to handle content options
 	private static final CallbackPropertyHandler<ContentCallback> CONTENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CONTENT);
 	// callback instance to handle display options
@@ -363,6 +395,20 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		this.textAlignCallbackProxy.setCallback(context -> onTextAlign(new AnnotationContext(this.parent, context), defaultValues.getTextAlign()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(new AnnotationContext(this.parent, context), getFontCallback(), getFont()).nativeObject());
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this.parent, context), getBorderColorCallback(), defaultValues.getBorderColorAsString(), false));
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderWidthCallbackProxy
+				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getBorderWidthCallback(), defaultValues.getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderDashCallbackProxy.setCallback(context -> this.parent.onBorderDash(new AnnotationContext(this.parent, context), getBorderDashCallback(), defaultValues.getBorderDash()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderDashOffsetCallbackProxy
+				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderCapStyleCallbackProxy.setCallback(context -> onBorderCapStyle(new AnnotationContext(this.parent, context), getBorderCapStyleCallback(), defaultValues.getBorderCapStyle()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(new AnnotationContext(this.parent, context), getBorderJoinStyleCallback(), defaultValues.getBorderJoinStyle()));
 	}
 
 	/*
@@ -886,6 +932,9 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 * @param borderColor the color of the border of label
 	 */
 	public void setBorderColor(String borderColor) {
+		// resets callback
+		setBorderColor((ColorCallback<AnnotationContext>) null);
+		// stores value
 		setValue(Property.BORDER_COLOR, borderColor);
 	}
 
@@ -914,6 +963,9 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 * @param borderWidth the width of the border in pixels.
 	 */
 	public void setBorderWidth(int borderWidth) {
+		// resets callback
+		setBorderWidth((WidthCallback<AnnotationContext>) null);
+		// stores value
 		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
@@ -952,6 +1004,9 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
+		// resets callback
+		setBorderDash((BorderDashCallback<AnnotationContext>) null);
+		// stores value
 		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
 
@@ -979,6 +1034,9 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	 * @param borderDashOffset the line dash pattern offset.
 	 */
 	public void setBorderDashOffset(double borderDashOffset) {
+		// resets callback
+		setBorderDashOffset((BorderDashOffsetCallback<AnnotationContext>) null);
+		// stores value
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
@@ -1422,6 +1480,198 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		setValueAndAddToParent(Property.FONT, fontCallback);
 	}
 
+	/**
+	 * Returns the callback called to set the width of the border in pixels.
+	 * 
+	 * @return the callback called to set the width of the border in pixels
+	 */
+	@Override
+	public WidthCallback<AnnotationContext> getBorderWidthCallback() {
+		return BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderWidthCallback());
+	}
+
+	/**
+	 * Sets the callback to set the color of the width of the border in pixels.
+	 * 
+	 * @param borderWidthCallback to set the width of the border in pixels
+	 */
+	public void setBorderWidth(WidthCallback<AnnotationContext> borderWidthCallback) {
+		BORDER_WIDTH_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderWidthCallback, borderWidthCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the color of the width of the border in pixels.
+	 * 
+	 * @param borderWidthCallback to set the width of the border in pixels
+	 */
+	public void setBorderWidth(NativeCallback borderWidthCallback) {
+		// resets callback
+		setBorderWidth((WidthCallback<AnnotationContext>) null);
+		// stores values
+		setValueAndAddToParent(Property.BORDER_WIDTH, borderWidthCallback);
+	}
+
+	/**
+	 * Returns the callback called to set the color of the border of annotation.
+	 * 
+	 * @return the callback called to set the color of the border of annotation
+	 */
+	@Override
+	public ColorCallback<AnnotationContext> getBorderColorCallback() {
+		return BORDER_COLOR_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderColorCallback());
+	}
+
+	/**
+	 * Sets the callback to set the color of the border of annotation.
+	 * 
+	 * @param borderColorCallback to set the color of the border of annotation
+	 */
+	public void setBorderColor(ColorCallback<AnnotationContext> borderColorCallback) {
+		BORDER_COLOR_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderColorCallback, borderColorCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the color of the border of annotation.
+	 * 
+	 * @param borderColorCallback to set the color of the border of annotation
+	 */
+	public void setBorderColor(NativeCallback borderColorCallback) {
+		// resets callback
+		setBorderColor((ColorCallback<AnnotationContext>) null);
+		// stores values
+		setValueAndAddToParent(Property.BORDER_COLOR, borderColorCallback);
+	}
+
+	/**
+	 * Returns the callback called to set the line dash pattern offset.
+	 * 
+	 * @return the callback called to set the line dash pattern offset
+	 */
+	@Override
+	public BorderDashOffsetCallback<AnnotationContext> getBorderDashOffsetCallback() {
+		return BORDER_DASH_OFFSET_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderDashOffsetCallback());
+	}
+
+	/**
+	 * Sets the callback to set the line dash pattern offset.
+	 * 
+	 * @param borderDashOffsetCallback to set the line dash pattern offset
+	 */
+	public void setBorderDashOffset(BorderDashOffsetCallback<AnnotationContext> borderDashOffsetCallback) {
+		BORDER_DASH_OFFSET_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderDashOffsetCallback, borderDashOffsetCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the line dash pattern offset.
+	 * 
+	 * @param borderDashOffsetCallback to set the line dash pattern offset
+	 */
+	public void setBorderDashOffset(NativeCallback borderDashOffsetCallback) {
+		// resets callback
+		setBorderDashOffset((BorderDashOffsetCallback<AnnotationContext>) null);
+		// stores values
+		setValueAndAddToParent(Property.BORDER_DASH_OFFSET, borderDashOffsetCallback);
+	}
+
+	/**
+	 * Returns the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
+	 * describe the pattern.
+	 * 
+	 * @return the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
+	 *         describe the pattern
+	 */
+	@Override
+	public BorderDashCallback<AnnotationContext> getBorderDashCallback() {
+		return BORDER_DASH_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderDashCallback());
+	}
+
+	/**
+	 * Sets the callback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the
+	 * pattern.
+	 * 
+	 * @param borderDashCallback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe
+	 *            the pattern
+	 */
+	public void setBorderDash(BorderDashCallback<AnnotationContext> borderDashCallback) {
+		BORDER_DASH_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderDashCallback, borderDashCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the
+	 * pattern.
+	 * 
+	 * @param borderDashCallback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe
+	 *            the pattern
+	 */
+	public void setBorderDash(NativeCallback borderDashCallback) {
+		// resets callback
+		setBorderDash((BorderDashCallback<AnnotationContext>) null);
+		// stores values
+		setValueAndAddToParent(Property.BORDER_DASH, borderDashCallback);
+	}
+
+	/**
+	 * Returns the border capstyle callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border capstyle callback, if set, otherwise <code>null</code>.
+	 */
+	@Override
+	public CapStyleCallback<AnnotationContext> getBorderCapStyleCallback() {
+		return BORDER_CAP_STYLE_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderCapStyleCallback());
+	}
+
+	/**
+	 * Sets the border capstyle callback.
+	 * 
+	 * @param borderCapStyleCallback the border capstyle callback.
+	 */
+	public void setBorderCapStyle(CapStyleCallback<AnnotationContext> borderCapStyleCallback) {
+		BORDER_CAP_STYLE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderCapStyleCallback, borderCapStyleCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the border capstyle callback.
+	 * 
+	 * @param borderCapStyleCallback the border capstyle callback.
+	 */
+	public void setBorderCapStyle(NativeCallback borderCapStyleCallback) {
+		// resets callback
+		setBorderCapStyle((CapStyleCallback<AnnotationContext>) null);
+		// stores and manages callback
+		setValueAndAddToParent(Property.BORDER_CAP_STYLE, borderCapStyleCallback);
+	}
+
+	/**
+	 * Returns the border join style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border join style callback, if set, otherwise <code>null</code>.
+	 */
+	@Override
+	public JoinStyleCallback<AnnotationContext> getBorderJoinStyleCallback() {
+		return BORDER_JOIN_STYLE_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderJoinStyleCallback());
+	}
+
+	/**
+	 * Sets the border join style callback.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback.
+	 */
+	public void setBorderJoinStyle(JoinStyleCallback<AnnotationContext> borderJoinStyleCallback) {
+		BORDER_JOIN_STYLE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderJoinStyleCallback, borderJoinStyleCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the border join style callback.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback.
+	 */
+	public void setBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
+		// resets callback
+		setBorderJoinStyle((JoinStyleCallback<AnnotationContext>) null);
+		// stores and manages callback
+		setValueAndAddToParent(Property.BORDER_JOIN_STYLE, borderJoinStyleCallback);
+	}
+
 	// -----------------------
 	// INTERNALS for CALLBACKS
 	// -----------------------
@@ -1543,4 +1793,45 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 		return defaultValue.value();
 	}
 
+	/**
+	 * Returns a {@link CapStyle} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param callback border cap style callback instance
+	 * @param defaultValue default value of cap style
+	 * @return a object property value, as {@link CapStyle}
+	 */
+	private String onBorderCapStyle(AnnotationContext context, CapStyleCallback<AnnotationContext> callback, CapStyle defaultValue) {
+		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
+	}
+
+	/**
+	 * Returns a {@link JoinStyle} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param callback border join style callback instance
+	 * @param defaultValue default value of join style
+	 * @return a object property value, as {@link JoinStyle}
+	 */
+	private String onBorderJoinStyle(AnnotationContext context, JoinStyleCallback<AnnotationContext> callback, JoinStyle defaultValue) {
+		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
+	}
+
+	/**
+	 * Checks if the result is consistent, returning the value or default.
+	 * 
+	 * @param result result of callback to be checked and returned if consistent
+	 * @param defaultValue default value for the callback invocation, used only if the result is <code>null</code>
+	 * @return the value of key or the default.
+	 */
+	private String checkCallbackResult(Key result, Key defaultValue) {
+		// checks result
+		if (result != null) {
+			return result.value();
+		}
+		// checks defaults
+		Checker.checkIfValid(defaultValue, "Default value argument");
+		// default result
+		return defaultValue.value();
+	}
 }

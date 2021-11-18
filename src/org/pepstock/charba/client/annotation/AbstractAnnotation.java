@@ -882,7 +882,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * @param defaultValue default value of options
 	 * @return an array of integer
 	 */
-	private Array onBorderDash(AnnotationContext context, BorderDashCallback<AnnotationContext> borderDashCallback, List<Integer> defaultValue) {
+	final Array onBorderDash(AnnotationContext context, BorderDashCallback<AnnotationContext> borderDashCallback, List<Integer> defaultValue) {
 		// gets value
 		List<Integer> result = ScriptableUtils.getOptionValue(context, borderDashCallback);
 		// checks if consistent
