@@ -26,6 +26,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.data.BarBorderRadius;
 
 /**
@@ -34,7 +35,7 @@ import org.pepstock.charba.client.data.BarBorderRadius;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class BorderRadiusHandler extends AbstractAnnotationPropertyHandler<IsDefaultsBorderRadiusHandler> {
+final class BorderRadiusHandler extends PropertyHandler<IsDefaultsBorderRadiusHandler> {
 
 	/**
 	 * Name of properties of native object.
@@ -181,7 +182,7 @@ final class BorderRadiusHandler extends AbstractAnnotationPropertyHandler<IsDefa
 	 * @param borderRadiusCallback to set the border radius
 	 */
 	void setBorderRadius(BorderRadiusCallback<AnnotationContext> borderRadiusCallback) {
-		BORDER_RADIUS_PROPERTY_HANDLER.setCallback(getNodeWrapper(), AnnotationPlugin.ID, borderRadiusCallback, borderRadiusCallbackProxy.getProxy());
+		BORDER_RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderRadiusCallback, borderRadiusCallbackProxy.getProxy());
 	}
 
 	/**

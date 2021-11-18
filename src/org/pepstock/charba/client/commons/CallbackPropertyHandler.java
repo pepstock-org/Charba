@@ -72,6 +72,16 @@ public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandl
 	}
 
 	/**
+	 * Returns the wrapper of this node, as {@link AbstractNode}.
+	 * 
+	 * @param container container instance of native object to use to store the properties
+	 * @return the wrapper of this node
+	 */
+	AbstractNode getNodeWrapper(NativeObjectContainer container) {
+		return new NodeWrapper(container);
+	}
+
+	/**
 	 * Returns the property key to manage
 	 * 
 	 * @return the property key to manage
@@ -87,6 +97,18 @@ public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandl
 	 */
 	public Key getHashCodeProperty() {
 		return hashCodeProperty;
+	}
+
+	/**
+	 * Stores the callback in the the cache, storing the proxy function and the hash code property key (unique id of callback) in the native object.
+	 * 
+	 * @param container container instance of native object to use to store the properties
+	 * @param scope the scope of callback, could be the default, chart type options, chart options, plugin objects, data sets
+	 * @param callback the java callback instance to cache
+	 * @param proxy the proxy java script function to store in the native object
+	 */
+	public void setCallback(NativeObjectContainer container, String scope, T callback, Proxy proxy) {
+		setCallback(getNodeWrapper(container), scope, callback, proxy);
 	}
 
 	/**
@@ -291,6 +313,26 @@ public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandl
 		}
 		// if here the object container is not consistent
 		return null;
+	}
+
+	/**
+	 * The class is needed to wrap a {@link NativeObject} by a {@link AbstractNode} class.<br>
+	 * This is needed for scriptable options, see {@link CallbackPropertyHandler#setCallback(AbstractNode, String, Object, org.pepstock.charba.client.commons.CallbackProxy.Proxy)}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class NodeWrapper extends AbstractNode {
+
+		/**
+		 * Creates the object with native object to map java script properties.
+		 * 
+		 * @param container container instance of native object to use to store the properties
+		 */
+		protected NodeWrapper(NativeObjectContainer container) {
+			super(container != null ? container.getNativeObject() : null);
+		}
+
 	}
 
 	/**
