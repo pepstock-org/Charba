@@ -137,7 +137,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	/**
 	 * Default line label border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
 	 */
-	public static final int DEFAULT_BORDER_WIDTH = 1;
+	public static final int DEFAULT_BORDER_WIDTH = 0;
 
 	/**
 	 * Default line label border radius, <b>{@value DEFAULT_BORDER_RADIUS}</b>.
