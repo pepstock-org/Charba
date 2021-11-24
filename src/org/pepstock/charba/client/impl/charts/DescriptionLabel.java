@@ -19,7 +19,7 @@ import org.pepstock.charba.client.callbacks.MeterContentCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 
 /**
- * Meter element class to define the description to render in teh meter chart under the {@link ValueLabel}.
+ * Meter element class to define the description to render in the meter chart under the {@link ValueLabel}.
  * 
  * @author Andrea "Stock" Stocchero
  *
