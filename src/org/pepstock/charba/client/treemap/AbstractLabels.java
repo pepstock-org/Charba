@@ -609,7 +609,7 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 				// new result list
 				List<String> list = new LinkedList<>();
 				// scans all values getting and storing the string
-				castedList.forEach((element) -> list.add(element.toString()));
+				castedList.forEach(element -> list.add(element.toString()));
 				// returns as array of string
 				return ArrayString.fromOrEmpty(list);
 			} else if (result != null) {
