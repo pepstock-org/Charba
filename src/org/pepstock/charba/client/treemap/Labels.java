@@ -99,6 +99,16 @@ public final class Labels extends AbstractLabels {
 		this.positionCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(new DatasetContext(context), getPositionCallback(), DEFAULT_POSITION).value());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.treemap.AbstractLabels#isMultilineLabel()
+	 */
+	@Override
+	boolean isMultilineLabel() {
+		return true;
+	}
+
 	/**
 	 * Sets the text vertical alignment used when drawing the label.
 	 * 

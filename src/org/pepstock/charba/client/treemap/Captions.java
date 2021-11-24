@@ -43,4 +43,15 @@ public final class Captions extends AbstractLabels {
 	Captions(AbstractNode parent, Key childKey, IsDefaultOptions defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, defaultValues, nativeObject, DEFAULT_DISPLAY);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.treemap.AbstractLabels#isMultilineLabel()
+	 */
+	@Override
+	boolean isMultilineLabel() {
+		return false;
+	}
+
 }

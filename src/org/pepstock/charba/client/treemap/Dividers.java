@@ -21,7 +21,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.ArrayDoubleArray;
+import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -165,8 +165,8 @@ public final class Dividers extends AbstractDatasetNode {
 	 * 
 	 * @param dividerDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
-	public void setLineDash(Dash... dividerDash) {
-		setArrayValueAndAddToParent(Property.LINE_DASH, ArrayDoubleArray.fromOrNull(dividerDash));
+	public void setLineDash(int... dividerDash) {
+		setArrayValueAndAddToParent(Property.LINE_DASH, ArrayInteger.fromOrNull(dividerDash));
 	}
 
 	/**
@@ -174,10 +174,9 @@ public final class Dividers extends AbstractDatasetNode {
 	 * 
 	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
-	public List<Dash> getLineDash() {
-		ArrayDoubleArray array = getArrayValue(Property.LINE_DASH);
-		// returns dash data
-		return ArrayListHelper.list(array, Dash.FACTORY);
+	public List<Integer> getLineDash() {
+		ArrayInteger array = getArrayValue(Property.LINE_DASH);
+		return ArrayListHelper.list(array);
 	}
 
 	/**

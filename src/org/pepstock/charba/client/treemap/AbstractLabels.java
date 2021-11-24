@@ -15,14 +15,13 @@
 */
 package org.pepstock.charba.client.treemap;
 
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
@@ -34,6 +33,7 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -118,7 +118,7 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	// callback proxy to invoke the hover font function
 	private final CallbackProxy<ProxyNativeObjectCallback> hoverFontCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the formatter function
-	private final CallbackProxy<ProxyArrayCallback> formatterCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> formatterCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// color callback instance
 	private ColorCallback<DatasetContext> colorCallback = null;
@@ -497,7 +497,7 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
-	public void setFont(FontCallback<DatasetContext> fontCallback) {
+	public final void setFont(FontCallback<DatasetContext> fontCallback) {
 		// sets the callback
 		this.fontCallback = fontCallback;
 		// checks if consistent
@@ -515,7 +515,7 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
-	public void setFont(NativeCallback fontCallback) {
+	public final void setFont(NativeCallback fontCallback) {
 		// checks if consistent
 		if (fontCallback != null) {
 			// resets callback
@@ -542,7 +542,7 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	 * 
 	 * @param hoverFontCallback the hover font callback to set
 	 */
-	public void setHoverFont(FontCallback<DatasetContext> hoverFontCallback) {
+	public final void setHoverFont(FontCallback<DatasetContext> hoverFontCallback) {
 		// sets the callback
 		this.hoverFontCallback = hoverFontCallback;
 		// checks if consistent
@@ -560,7 +560,7 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	 * 
 	 * @param hoverFontCallback the hover font callback to set
 	 */
-	public void setHoverFont(NativeCallback hoverFontCallback) {
+	public final void setHoverFont(NativeCallback hoverFontCallback) {
 		// checks if consistent
 		if (hoverFontCallback != null) {
 			// resets callback
@@ -574,6 +574,17 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	}
 
 	// ------------------------------
+	// METHODS to override for callbacks
+	// ------------------------------
+
+	/**
+	 * Returns <code>true</code> if the label node which extends this, can manage multiline label text.
+	 * 
+	 * @return <code>true</code> if the label node which extends this, can manage multiline label text.
+	 */
+	abstract boolean isMultilineLabel();
+
+	// ------------------------------
 	// INTERNAL methods for callbacks
 	// ------------------------------
 
@@ -583,17 +594,31 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	 * @param context native object as context.
 	 * @return an array of string as formatted value
 	 */
-	private ArrayString onFormatter(DatasetContext context) {
+	private Object onFormatter(DatasetContext context) {
 		// gets callback
 		FormatterCallback callback = getFormatterCallback();
 		// checks if the handler is set
 		if (ScriptableUtils.isContextConsistent(context) && callback != null) {
 			// calls callback
-			List<String> result = callback.invoke(context);
-			return ArrayString.fromOrEmpty(result);
+			Object result = callback.invoke(context);
+			// checks type of result
+			if (result instanceof List<?> && isMultilineLabel()) {
+				// Multiple line!
+				// casts to the list
+				List<?> castedList = (List<?>) result;
+				// new result list
+				List<String> list = new LinkedList<>();
+				// scans all values getting and storing the string
+				castedList.forEach((element) -> list.add(element.toString()));
+				// returns as array of string
+				return ArrayString.fromOrEmpty(list);
+			} else if (result != null) {
+				// returns as string
+				return result.toString();
+			}
 		}
-		// default result
-		return ArrayString.fromOrEmpty(Collections.emptyList());
+		// default result, empty
+		return Constants.EMPTY_STRING;
 	}
 
 	// ----------------------------

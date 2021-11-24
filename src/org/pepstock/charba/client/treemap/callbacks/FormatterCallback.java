@@ -26,11 +26,10 @@ import org.pepstock.charba.client.treemap.TreeMapChart;
  * Data values are converted to string.<br>
  * If values are grouped, the value of the group and the value (as string) are shown.<br>
  * This default behavior can be overridden by this interface implementation.<br>
- * It can return a {@link List}. The list must contain 1 element (for a single line) or more instances of strings (for multiple lines, where each item represents a new line).
+ * A formatter can return a {@link String} (for a single line) or a {@link List} of {@link String}s (for multiple lines, where each item represents a new line).
  * 
  * @author Andrea "Stock" Stocchero
- *
  */
-public interface FormatterCallback extends Scriptable<List<String>, DatasetContext> {
+public interface FormatterCallback extends Scriptable<Object, DatasetContext> {
 
 }

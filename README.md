@@ -294,6 +294,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * rename `cornerRadius` option to `borderRadius` in `LineLabel` and `BoxAnnotation` classes.
   * remove `divider*` and `groupDividers` options from `TreemapDataset` class in favor of `Dividers` node.
   * remove `font`, `hoverFont`, `color`, `hoverColor` and `groupLabels` options from `TreemapDataset` class in favor of `Labels` and `Captions` nodes.
+  * remove `Dash` class from `TreemapDataset` because not needed anymore.
 
 ### Features
 
