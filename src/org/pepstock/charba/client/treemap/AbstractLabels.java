@@ -585,11 +585,11 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	 */
 	private ArrayString onFormatter(DatasetContext context) {
 		// gets callback
-		FormatterCallback formatterCallback = getFormatterCallback();
+		FormatterCallback callback = getFormatterCallback();
 		// checks if the handler is set
-		if (ScriptableUtils.isContextConsistent(context) && formatterCallback != null) {
+		if (ScriptableUtils.isContextConsistent(context) && callback != null) {
 			// calls callback
-			List<String> result = formatterCallback.invoke(context);
+			List<String> result = callback.invoke(context);
 			return ArrayString.fromOrEmpty(result);
 		}
 		// default result
