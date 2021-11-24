@@ -28,7 +28,7 @@ import org.pepstock.charba.client.options.IsImmutableFont;
  * This is a shape which can draw a character on the tile.<br>
  * This object is also a shape drawer.<br>
  * The font size is calculated automatically based on tile size.<br>
- * It designs a char in the the following tile sections (A and B):<br>
+ * It designs a char in the following tile sections (A and B):<br>
  * 
  * <pre>
  * +---------+---------+

@@ -24,7 +24,7 @@ import org.pepstock.charba.client.plugins.PluginsEnvelop;
 /**
  * Contains all info for every item of tooltip.<br>
  * Created and passed by CHART.JS.<br>
- * It uses in the the PLUGINS.
+ * It uses in the PLUGINS.
  * 
  * @author Andrea "Stock" Stocchero
  */

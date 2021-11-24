@@ -382,18 +382,18 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	}
 
 	/**
-	 * Sets the length in pixels that the grid will draw in the the axis area.
+	 * Sets the length in pixels that the grid will draw in the axis area.
 	 * 
-	 * @param tickLength Length in pixels that the grid will draw in the the axis area.
+	 * @param tickLength Length in pixels that the grid will draw in the axis area.
 	 */
 	public void setTickLength(int tickLength) {
 		setValueAndAddToParent(Property.TICK_LENGTH, Checker.positiveOrZero(tickLength));
 	}
 
 	/**
-	 * Returns the length in pixels that the grid will draw in the the axis area.
+	 * Returns the length in pixels that the grid will draw in the axis area.
 	 * 
-	 * @return Length in pixels that the grid will draw in the the axis area.
+	 * @return Length in pixels that the grid will draw in the axis area.
 	 */
 	@Override
 	public int getTickLength() {

@@ -41,7 +41,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	boolean isEnabled(AnimationCollectionKey collection);
 
 	/**
-	 * Returns an animation collection instance if stored in the the animation options.
+	 * Returns an animation collection instance if stored in the animation options.
 	 * 
 	 * @param collection collection instance used to get for animation options
 	 * @return an animation collection instance or <code>null</code> if does not exists
@@ -58,7 +58,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	void set(AnimationCollectionKey collection, AnimationCollection animationCollection);
 
 	/**
-	 * Creates an animation collection instance and stores in the the animation options.
+	 * Creates an animation collection instance and stores in the animation options.
 	 * 
 	 * @param collection collection key used to create the animation collections
 	 * @return a collection animation options

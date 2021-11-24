@@ -1066,7 +1066,7 @@ final class SelectionHandler {
 			ctx.fillText(selectionCleaner.getLabel(), selectionCleaner.getLabelX(), selectionCleaner.getLabelY());
 		} else if (Render.IMAGE.equals(selectionCleaner.getRender())) {
 			// with ONLY image is better to throw an exception
-			// instead of skip the the image draw
+			// instead of skip the image draw
 			// draws scaled image
 			ctx.drawImage(selectionCleaner.getImage(), selectionCleaner.getImageX(), selectionCleaner.getImageY(), selectionCleaner.getImageWidth(), selectionCleaner.getImageHeight());
 		}

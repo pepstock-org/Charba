@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * Double DIAGONAL drawer to design a set of diagonals in the tile.<br>
- * It designs a set of diagonals in the the following tile sections (B, C and A-D):<br>
+ * It designs a set of diagonals in the following tile sections (B, C and A-D):<br>
  * <br>
  * 
  * <pre>

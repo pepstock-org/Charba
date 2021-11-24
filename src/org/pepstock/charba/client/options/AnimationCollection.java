@@ -364,9 +364,9 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 	}
 
 	/**
-	 * Sets the properties to be defined in the the animation collection.
+	 * Sets the properties to be defined in the animation collection.
 	 * 
-	 * @param properties the properties to be defined in the the animation collection
+	 * @param properties the properties to be defined in the animation collection
 	 */
 	public void setProperties(AnimationPropertyKey... properties) {
 		// checks if argument is consistent
@@ -379,9 +379,9 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 	}
 
 	/**
-	 * Sets the properties to be defined in the the animation collection.
+	 * Sets the properties to be defined in the animation collection.
 	 * 
-	 * @param properties the properties to be defined in the the animation collection
+	 * @param properties the properties to be defined in the animation collection
 	 */
 	public void setProperties(List<AnimationPropertyKey> properties) {
 		// checks if argument is consistent
@@ -394,9 +394,9 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 	}
 
 	/**
-	 * Returns the properties defined in the the animation collection.
+	 * Returns the properties defined in the animation collection.
 	 * 
-	 * @return the properties defined in the the animation collection
+	 * @return the properties defined in the animation collection
 	 */
 	@Override
 	public List<AnimationPropertyKey> getProperties() {

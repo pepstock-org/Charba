@@ -66,10 +66,10 @@ public final class Transitions extends AbstractNode implements IsTransitions, Ha
 	}
 
 	/**
-	 * Returns <code>true</code> if an animation transition instance is stored in the the animation options.
+	 * Returns <code>true</code> if an animation transition instance is stored in the animation options.
 	 * 
 	 * @param transition transition instance used to check in the animation options
-	 * @return <code>true</code> if an animation transition instance is stored in the the animation options
+	 * @return <code>true</code> if an animation transition instance is stored in the animation options
 	 */
 	@Override
 	public boolean has(TransitionKey transition) {
@@ -84,7 +84,7 @@ public final class Transitions extends AbstractNode implements IsTransitions, Ha
 	}
 
 	/**
-	 * Returns an animation transition instance if stored in the the animation options.
+	 * Returns an animation transition instance if stored in the animation options.
 	 * 
 	 * @param transition transition instance used to get for animation options
 	 * @return an animation transition instance or <code>null</code> if does not exists
@@ -117,7 +117,7 @@ public final class Transitions extends AbstractNode implements IsTransitions, Ha
 	}
 
 	/**
-	 * Creates an animation transition instance and stores in the the animation options.
+	 * Creates an animation transition instance and stores in the animation options.
 	 * 
 	 * @param transition transition key used to create the animation transitions
 	 * @return a transition animation options

@@ -68,7 +68,7 @@ public final class MeterContext extends ChartContext {
 	}
 
 	/**
-	 * Sets the the easing of drawing (between 0 and 1) for animation.
+	 * Sets the easing of drawing (between 0 and 1) for animation.
 	 * 
 	 * @param easing the easing of drawing (between 0 and 1) for animation
 	 */

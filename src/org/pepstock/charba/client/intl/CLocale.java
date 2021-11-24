@@ -381,10 +381,10 @@ public final class CLocale {
 	}
 
 	/**
-	 * Returns the default locale, set in the the platform.
+	 * Returns the default locale, set in the platform.
 	 * 
 	 * @param key key of resolved options to get the locale, usually is "locale".
-	 * @return the default locale, set in the the platform
+	 * @return the default locale, set in the platform
 	 */
 	private static String getDefaultLocale(Key key) {
 		// creates a number format

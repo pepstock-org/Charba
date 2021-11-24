@@ -280,7 +280,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @return the background color or <code>null</code> if is not a canvas pattern
 	 */
 	public CanvasPatternItem getBackgroundColorAsCanvasPattern() {
-		// checks if the the background color has been set as color
+		// checks if the background color has been set as color
 		if (isBackgroundColorAsPattern()) {
 			return getValue(Property.BACKGROUND_COLOR, (CanvasPatternItem) null);
 		}

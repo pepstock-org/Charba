@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * Base object to to manage point style property in the the options.
+ * Base object to to manage point style property in the options.
  * 
  * @author Andrea "Stock" Stocchero
  *

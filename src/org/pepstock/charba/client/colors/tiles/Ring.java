@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * RING drawer to design a ring in the tile.<br>
- * It designs a ring in the the following tile sections (A and B):<br>
+ * It designs a ring in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

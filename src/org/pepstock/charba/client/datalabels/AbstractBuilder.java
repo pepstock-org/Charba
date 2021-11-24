@@ -593,7 +593,7 @@ public abstract class AbstractBuilder<T extends LabelItem> extends AbstractBaseB
 	}
 
 	/**
-	 * Sets the the font callback.
+	 * Sets the font callback.
 	 * 
 	 * @param fontCallback the font callback to set
 	 * @return builder instance

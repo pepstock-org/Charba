@@ -697,7 +697,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Loads the background color in the the {@link TooltipLabelColor} instance.
+	 * Loads the background color in the {@link TooltipLabelColor} instance.
 	 * 
 	 * @param labelColor {@link TooltipLabelColor} instance to be filled
 	 */
@@ -716,7 +716,7 @@ public final class DatasetElementOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Loads the border color in the the {@link TooltipLabelColor} instance.
+	 * Loads the border color in the {@link TooltipLabelColor} instance.
 	 * 
 	 * @param labelColor {@link TooltipLabelColor} instance to be filled
 	 */

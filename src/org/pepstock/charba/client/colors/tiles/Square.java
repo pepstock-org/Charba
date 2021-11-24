@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * SQUARE drawer to design a square in the tile.<br>
- * It designs a square in the the following tile sections (A and B):<br>
+ * It designs a square in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

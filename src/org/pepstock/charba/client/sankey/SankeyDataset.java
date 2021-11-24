@@ -232,7 +232,7 @@ public final class SankeyDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the the font object.
+	 * Returns the font object.
 	 * 
 	 * @return the font object.
 	 */

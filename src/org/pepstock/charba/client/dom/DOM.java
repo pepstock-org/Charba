@@ -22,7 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * The DOM object provide a static reference to the document attached in the the window.
+ * The DOM object provide a static reference to the document attached in the window.
  * 
  * @author Andrea "Stock" Stocchero
  */

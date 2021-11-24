@@ -57,7 +57,7 @@ final class ColorSchemesUtil {
 	}
 
 	/**
-	 * Stores a color scheme in the the cache.
+	 * Stores a color scheme in the cache.
 	 * 
 	 * @param scheme a color scheme
 	 */

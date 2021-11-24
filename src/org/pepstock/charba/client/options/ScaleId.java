@@ -105,7 +105,7 @@ public interface ScaleId extends PropertyKey {
 					return scaleId;
 				}
 			}
-			// creates new scale id with id stored in the the object
+			// creates new scale id with id stored in the object
 			return ScaleId.create(id);
 		}
 		// if here not, default value is not consistent

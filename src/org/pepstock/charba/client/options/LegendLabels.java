@@ -166,7 +166,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	}
 
 	/**
-	 * Returns the the horizontal alignment of the label text.
+	 * Returns the horizontal alignment of the label text.
 	 * 
 	 * @return the horizontal alignment of the label text.
 	 */

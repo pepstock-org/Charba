@@ -1529,7 +1529,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
-	 * Sets the the font callback.
+	 * Sets the font callback.
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
@@ -1539,7 +1539,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	}
 
 	/**
-	 * Sets the the font callback.
+	 * Sets the font callback.
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
@@ -1572,7 +1572,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		PADDING_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, paddingCallback, paddingCallbackProxy.getProxy());
 		// checks if the callback is null
 		// because setting to null, the original padding must be set again
-		// in the the options
+		// in the options
 		if (paddingCallback == null && !has(Property.PADDING)) {
 			// stores the padding
 			setValue(Property.PADDING, padding);

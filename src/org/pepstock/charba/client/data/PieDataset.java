@@ -234,7 +234,7 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	}
 
 	/**
-	 * Returns the the sweep to allow arcs to cover.
+	 * Returns the sweep to allow arcs to cover.
 	 * 
 	 * @return the sweep to allow arcs to cover.
 	 */

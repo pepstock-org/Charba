@@ -28,7 +28,7 @@ import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.options.IsFont;
 
 /**
- * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have in the the chart a clickable element to clear the selection.
+ * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have in the chart a clickable element to clear the selection.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -163,7 +163,7 @@ public final class SelectionCleaner extends NativeObjectContainer implements IsD
 	}
 
 	/**
-	 * Returns the the font object.
+	 * Returns the font object.
 	 * 
 	 * @return the font object.
 	 */
@@ -211,9 +211,9 @@ public final class SelectionCleaner extends NativeObjectContainer implements IsD
 	}
 
 	/**
-	 * Returns the the selection cleaner label font color.
+	 * Returns the selection cleaner label font color.
 	 * 
-	 * @return the the selection cleaner label font color.
+	 * @return the selection cleaner label font color.
 	 */
 	@Override
 	public String getColorAsString() {
@@ -221,9 +221,9 @@ public final class SelectionCleaner extends NativeObjectContainer implements IsD
 	}
 
 	/**
-	 * Returns the the selection cleaner label font color.
+	 * Returns the selection cleaner label font color.
 	 * 
-	 * @return the the selection cleaner label font color.
+	 * @return the selection cleaner label font color.
 	 */
 	public IsColor getColor() {
 		return ColorBuilder.parse(getColorAsString());

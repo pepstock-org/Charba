@@ -338,40 +338,40 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	}
 
 	/**
-	 * Sets the the key of the object to use to get data value from a tree object.<br>
+	 * Sets the key of the object to use to get data value from a tree object.<br>
 	 * It's needed ONLY when tree data is set by a list of objects.
 	 * 
-	 * @param key the the key of the object to use to get data value from a tree object
+	 * @param key the key of the object to use to get data value from a tree object
 	 */
 	public void setKey(String key) {
 		setValue(Property.KEY, key);
 	}
 
 	/**
-	 * Sets the the key of the object to use to get data value from a tree object.<br>
+	 * Sets the key of the object to use to get data value from a tree object.<br>
 	 * It's needed ONLY when tree data is set by a list of objects.
 	 * 
-	 * @param key the the key of the object to use to get data value from a tree object
+	 * @param key the key of the object to use to get data value from a tree object
 	 */
 	public void setKey(Key key) {
 		setValue(Property.KEY, key);
 	}
 
 	/**
-	 * Returns the the key of the object to use to get data value from a tree object.<br>
+	 * Returns the key of the object to use to get data value from a tree object.<br>
 	 * It's needed ONLY when tree data is set by a list of objects.
 	 * 
-	 * @return the the key of the object to use to get data value from a tree object
+	 * @return the key of the object to use to get data value from a tree object
 	 */
 	public String getKeyAsString() {
 		return getValue(Property.KEY, Undefined.STRING);
 	}
 
 	/**
-	 * Returns the the key of the object to use to get data value from a tree object.<br>
+	 * Returns the key of the object to use to get data value from a tree object.<br>
 	 * It's needed ONLY when tree data is set by a list of objects.
 	 * 
-	 * @return the the key of the object to use to get data value from a tree object
+	 * @return the key of the object to use to get data value from a tree object
 	 */
 	public Key getKey() {
 		// gets string value
@@ -381,40 +381,40 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	}
 
 	/**
-	 * Sets the the keys of the object to use to group the values from a tree object.<br>
+	 * Sets the keys of the object to use to group the values from a tree object.<br>
 	 * It's needed ONLY when tree data is set by a list of objects.
 	 * 
-	 * @param groups the the keys of the object to use to group the values from a tree object
+	 * @param groups the keys of the object to use to group the values from a tree object
 	 */
 	public void setGroups(String... groups) {
 		setArrayValue(Property.GROUPS, ArrayString.fromOrNull(groups));
 	}
 
 	/**
-	 * Sets the the keys of the object to use to group the values from a tree object.<br>
+	 * Sets the keys of the object to use to group the values from a tree object.<br>
 	 * It's needed ONLY when tree data is set by a list of objects.
 	 * 
-	 * @param groups the the keys of the object to use to group the values from a tree object
+	 * @param groups the keys of the object to use to group the values from a tree object
 	 */
 	public void setGroups(Key... groups) {
 		setArrayValue(Property.GROUPS, ArrayString.fromOrNull(groups));
 	}
 
 	/**
-	 * Sets the the keys of the object to use to group the values from a tree object.<br>
+	 * Sets the keys of the object to use to group the values from a tree object.<br>
 	 * It's needed ONLY when tree data is set by a list of objects.
 	 * 
-	 * @param groups the the keys of the object to use to group the values from a tree object
+	 * @param groups the keys of the object to use to group the values from a tree object
 	 */
 	public void setGroups(Set<Key> groups) {
 		setArrayValue(Property.GROUPS, groups != null ? ArrayString.fromOrNull(groups) : null);
 	}
 
 	/**
-	 * Returns the the keys of the object to use to group the values from a tree object.<br>
+	 * Returns the keys of the object to use to group the values from a tree object.<br>
 	 * It's needed ONLY when tree data is set by a list of objects.
 	 * 
-	 * @return the the keys of the object to use to group the values from a tree object
+	 * @return the keys of the object to use to group the values from a tree object
 	 */
 	public Set<String> getGroupsAsString() {
 		// retrieves the array
@@ -424,10 +424,10 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	}
 
 	/**
-	 * Returns the the keys of the object to use to group the values from a tree object.<br>
+	 * Returns the keys of the object to use to group the values from a tree object.<br>
 	 * It's needed ONLY when tree data is set by a list of objects.
 	 * 
-	 * @return the the keys of the object to use to group the values from a tree object
+	 * @return the keys of the object to use to group the values from a tree object
 	 */
 	public Set<Key> getGroups() {
 		// retrieves the array

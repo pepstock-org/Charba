@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * STAR drawer to design a star in the tile.<br>
- * It designs a star in the the following tile sections (only A):<br>
+ * It designs a star in the following tile sections (only A):<br>
  * <br>
  * 
  * <pre>

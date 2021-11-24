@@ -27,7 +27,7 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 
 /**
- * Base object to to manage common properties in the the options or configuration.<br>
+ * Base object to to manage common properties in the options or configuration.<br>
  * To reduce the duplication of code, this calls helps to manage the same property or properties on different objects, without extending them.
  * 
  * @author Andrea "Stock" Stocchero

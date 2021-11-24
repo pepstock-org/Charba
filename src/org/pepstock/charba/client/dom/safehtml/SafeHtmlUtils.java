@@ -40,7 +40,7 @@ final class SafeHtmlUtils {
 		SINGLE_QUOTE("\'", "&#39;"),
 		DOUBLE_QUOTE("\"", "&quot;");
 
-		// value to find in the the string
+		// value to find in the string
 		private final String value;
 		// replacement of the value if found
 		private final String replacement;
@@ -48,7 +48,7 @@ final class SafeHtmlUtils {
 		/**
 		 * Creates the object by the value to find and the replacement.
 		 * 
-		 * @param value string value to find in the the string
+		 * @param value string value to find in the string
 		 * @param replacement replacement when the value has been found
 		 */
 		private CharacterToEscape(String value, String replacement) {
@@ -57,18 +57,18 @@ final class SafeHtmlUtils {
 		}
 
 		/**
-		 * Returns the value to find in the the string.
+		 * Returns the value to find in the string.
 		 * 
-		 * @return the value to find in the the string
+		 * @return the value to find in the string
 		 */
 		String getValue() {
 			return value;
 		}
 
 		/**
-		 * Returns the replacement string to apply every time the value is found in the the string.
+		 * Returns the replacement string to apply every time the value is found in the string.
 		 * 
-		 * @return the replacement string to apply every time the value is found in the the string
+		 * @return the replacement string to apply every time the value is found in the string
 		 */
 		String getReplacement() {
 			return replacement;

@@ -71,9 +71,9 @@ public interface IsDefaultGrid extends IsDefaultScaleLines {
 	boolean isDrawTicks();
 
 	/**
-	 * Returns the length in pixels that the grid will draw in the the axis area.
+	 * Returns the length in pixels that the grid will draw in the axis area.
 	 * 
-	 * @return Length in pixels that the grid will draw in the the axis area.
+	 * @return Length in pixels that the grid will draw in the axis area.
 	 */
 	int getTickLength();
 

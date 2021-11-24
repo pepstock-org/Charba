@@ -128,7 +128,7 @@ public final class AnnotationBuilder {
 	/**
 	 * Creates the images to be returned, managing the cache of them.
 	 * 
-	 * @param key unique key to store the element in the the cache
+	 * @param key unique key to store the element in the cache
 	 * @param validatedhtmlXmlContent HTML content, already checked and well-formed
 	 * @param width width of image to be created
 	 * @param height height of image to be created

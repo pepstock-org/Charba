@@ -380,7 +380,7 @@ public final class Utilities {
 	 * {0} ... {1} ... {n}
 	 * </pre>
 	 * 
-	 * where the value in the the brackets represents the index of the obecjt in the the array, passed as argument.
+	 * where the value in the brackets represents the index of the obecjt in the array, passed as argument.
 	 * 
 	 * @param template template of message
 	 * @param values values to apply in the template

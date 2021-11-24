@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * SLASH drawer to design a slash in the tile.<br>
- * It designs a slash in the the following tile sections (A, B and C):<br>
+ * It designs a slash in the following tile sections (A, B and C):<br>
  * <br>
  * 
  * <pre>

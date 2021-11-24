@@ -142,7 +142,7 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	boolean isResponsive();
 
 	/**
-	 * Returns the the maintaining of the original canvas aspect ratio (width / height) when resizing.
+	 * Returns the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 * 
 	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 */
@@ -258,7 +258,7 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	double getRotation();
 
 	/**
-	 * Returns the the sweep to allow arcs to cover.
+	 * Returns the sweep to allow arcs to cover.
 	 * 
 	 * @return the sweep to allow arcs to cover.
 	 */

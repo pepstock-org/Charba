@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * TRIANGLE drawer to design a triangle in the tile.<br>
- * It designs a triangle in the the following tile sections (A and B):<br>
+ * It designs a triangle in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

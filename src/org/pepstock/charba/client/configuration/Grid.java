@@ -390,18 +390,18 @@ public class Grid extends AbstractScaleLines {
 	}
 
 	/**
-	 * Sets the length in pixels that the grid will draw in the the axis area.
+	 * Sets the length in pixels that the grid will draw in the axis area.
 	 * 
-	 * @param tickLength Length in pixels that the grid will draw in the the axis area.
+	 * @param tickLength Length in pixels that the grid will draw in the axis area.
 	 */
 	public void setTickLength(int tickLength) {
 		getAxis().getScale().getGrid().setTickLength(tickLength);
 	}
 
 	/**
-	 * Returns the length in pixels that the grid will draw in the the axis area.
+	 * Returns the length in pixels that the grid will draw in the axis area.
 	 * 
-	 * @return Length in pixels that the grid will draw in the the axis area.
+	 * @return Length in pixels that the grid will draw in the axis area.
 	 */
 	public int getTickLength() {
 		return getAxis().getScale().getGrid().getTickLength();

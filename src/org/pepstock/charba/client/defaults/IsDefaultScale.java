@@ -169,7 +169,7 @@ public interface IsDefaultScale {
 	Display getDisplay();
 
 	/**
-	 * If true, extra space is added to the both edges and the axis is scaled to fit in the the chart area.
+	 * If true, extra space is added to the both edges and the axis is scaled to fit in the chart area.
 	 * 
 	 * @return extra space of axis.
 	 */

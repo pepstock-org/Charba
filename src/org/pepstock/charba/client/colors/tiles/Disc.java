@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * DISC drawer to design a disc in the tile.<br>
- * It designs a disc in the the following tile sections (A and B):<br>
+ * It designs a disc in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

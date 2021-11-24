@@ -100,7 +100,7 @@ public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandl
 	}
 
 	/**
-	 * Stores the callback in the the cache, storing the proxy function and the hash code property key (unique id of callback) in the native object.
+	 * Stores the callback in the cache, storing the proxy function and the hash code property key (unique id of callback) in the native object.
 	 * 
 	 * @param container container instance of native object to use to store the properties
 	 * @param scope the scope of callback, could be the default, chart type options, chart options, plugin objects, data sets
@@ -112,7 +112,7 @@ public final class CallbackPropertyHandler<T> implements IsCallbackPropertyHandl
 	}
 
 	/**
-	 * Stores the callback in the the cache, storing the proxy function and the hash code property key (unique id of callback) in the native object.
+	 * Stores the callback in the cache, storing the proxy function and the hash code property key (unique id of callback) in the native object.
 	 * 
 	 * @param container container instance of native object to use to store the properties
 	 * @param scope the scope of callback, could be the default, chart type options, chart options, plugin objects, data sets

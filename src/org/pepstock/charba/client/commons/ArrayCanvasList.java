@@ -69,7 +69,7 @@ public final class ArrayCanvasList extends AbstractArrayList<Canvas, ArrayCanvas
 	}
 
 	/**
-	 * Loads an array of elements in the the list
+	 * Loads an array of elements in the list
 	 * 
 	 * @param values an array of elements to be loaded
 	 */

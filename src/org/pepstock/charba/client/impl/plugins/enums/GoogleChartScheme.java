@@ -196,7 +196,7 @@ public enum GoogleChartScheme implements IsEnumeratedScheme
 	 */
 	private GoogleChartScheme(IsColor... hexColors) {
 		scheme = new EnumeratedScheme(CATEGORY, name());
-		// adds them in the the list
+		// adds them in the list
 		scheme.addAll(Arrays.asList(hexColors));
 	}
 

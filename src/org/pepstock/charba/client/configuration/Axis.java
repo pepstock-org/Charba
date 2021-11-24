@@ -371,9 +371,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
-	 * Returns the the scale item related to this axis.
+	 * Returns the scale item related to this axis.
 	 * 
-	 * @return the the scale item related to this axis
+	 * @return the scale item related to this axis
 	 */
 	final ScaleItem getScaleItem() {
 		// gets scales from chart node

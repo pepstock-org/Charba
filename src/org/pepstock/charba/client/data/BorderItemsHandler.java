@@ -109,7 +109,7 @@ final class BorderItemsHandler extends NativeObjectContainer {
 	void setBorderItem(Key property, Key propertyType, int... array) {
 		// stores value
 		setValueOrArray(property, array);
-		// stores the type depending on if the the property exist
+		// stores the type depending on if the property exist
 		// if property does not exist means that the argument of this method is null
 		setValue(propertyType, has(property) ? BorderItemType.INTEGERS : BorderItemType.UNKNOWN);
 	}
@@ -125,7 +125,7 @@ final class BorderItemsHandler extends NativeObjectContainer {
 	<T extends AbstractBarBorderItem> void setBorderItem(Key property, Key propertyType, T[] array) {
 		// stores value
 		setValueOrArray(property, array);
-		// stores the type depending on if the the property exist
+		// stores the type depending on if the property exist
 		// if property does not exist means that the argument of this method is null
 		setValue(propertyType, has(property) ? BorderItemType.OBJECTS : BorderItemType.UNKNOWN);
 	}

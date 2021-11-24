@@ -512,7 +512,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
-	 * Returns the the maintaining of the original canvas aspect ratio (width / height) when resizing.
+	 * Returns the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 * 
 	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 */

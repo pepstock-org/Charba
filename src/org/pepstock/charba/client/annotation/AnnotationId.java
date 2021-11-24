@@ -89,7 +89,7 @@ public interface AnnotationId extends PropertyKey {
 	static AnnotationId checkAndGetAnnotationID(String id, AnnotationId defaultValue) {
 		// checks if default value is consistent
 		if (AnnotationId.isValid(id)) {
-			// creates new annotation configuration object id with id stored in the the object
+			// creates new annotation configuration object id with id stored in the object
 			return AnnotationId.create(id);
 		}
 		// if here not, default value is not consistent

@@ -58,7 +58,7 @@ interface IsDefaultLabel {
 	}
 
 	/**
-	 * Returns the the font color.
+	 * Returns the font color.
 	 * 
 	 * @return the font color.
 	 */
@@ -67,7 +67,7 @@ interface IsDefaultLabel {
 	}
 
 	/**
-	 * Returns the the font object.
+	 * Returns the font object.
 	 * 
 	 * @return the font object.
 	 */

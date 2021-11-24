@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * DASH drawer to design a dash in the tile.<br>
- * It designs a dash in the the following tile sections (A and B):<br>
+ * It designs a dash in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

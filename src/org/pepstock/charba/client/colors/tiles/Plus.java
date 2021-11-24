@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * PLUS drawer to design a plus in the tile.<br>
- * It designs a plus in the the following tile sections (A and B):<br>
+ * It designs a plus in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

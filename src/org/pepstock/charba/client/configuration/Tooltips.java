@@ -53,7 +53,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	// ---------------------------
 
 	/**
-	 * Java script FUNCTION callback called to hook in the the tooltip rendering process so that you can render the tooltip in your own custom way.<br>
+	 * Java script FUNCTION callback called to hook in the tooltip rendering process so that you can render the tooltip in your own custom way.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -62,7 +62,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	interface ProxyExternalCallback {
 
 		/**
-		 * Method of function to be called to hook in the the tooltip rendering process so that you can render the tooltip in your own custom way.
+		 * Method of function to be called to hook in the tooltip rendering process so that you can render the tooltip in your own custom way.
 		 * 
 		 * @param tooltipContext all info about tooltip to create own HTML tooltip.
 		 */

@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * DIAMOND drawer to design a diamond in the tile.<br>
- * It designs a diamond in the the following tile sections (A and B):<br>
+ * It designs a diamond in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

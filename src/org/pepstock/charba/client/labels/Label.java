@@ -275,7 +275,7 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 	}
 
 	/**
-	 * Returns the the font object.
+	 * Returns the font object.
 	 * 
 	 * @return the font object.
 	 */

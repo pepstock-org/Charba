@@ -329,7 +329,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
-	 * Sets the the font callback.
+	 * Sets the font callback.
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
@@ -342,7 +342,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
-	 * Sets the the font callback.
+	 * Sets the font callback.
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
@@ -364,7 +364,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
-	 * Sets the the padding callback.
+	 * Sets the padding callback.
 	 * 
 	 * @param paddingCallback the padding callback to set
 	 */
@@ -376,7 +376,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
-	 * Sets the the padding callback.
+	 * Sets the padding callback.
 	 * 
 	 * @param paddingCallback the padding callback to set
 	 */
@@ -397,7 +397,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
-	 * Sets the the color callback.
+	 * Sets the color callback.
 	 * 
 	 * @param colorCallback the color callback to set
 	 */
@@ -409,7 +409,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
-	 * Sets the the color callback.
+	 * Sets the color callback.
 	 * 
 	 * @param colorCallback the color callback to set
 	 */
@@ -430,7 +430,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
-	 * Sets the the backdrop color callback.
+	 * Sets the backdrop color callback.
 	 * 
 	 * @param backdropColorCallback the backdrop color callback to set
 	 */
@@ -442,7 +442,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
-	 * Sets the the backdrop color callback.
+	 * Sets the backdrop color callback.
 	 * 
 	 * @param backdropColorCallback the backdrop color callback to set
 	 */

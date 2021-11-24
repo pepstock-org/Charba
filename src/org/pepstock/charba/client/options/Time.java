@@ -119,7 +119,7 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 	public IsoWeekDay getIsoWeekday() {
 		// gets week day as number
 		int isoWeekday = getValue(Property.ISO_WEEKDAY, IsoWeekDay.SUNDAY.value());
-		// searches the value in the the enumeration
+		// searches the value in the enumeration
 		return IsoWeekDay.getIsoWeekDayByValue(isoWeekday);
 	}
 

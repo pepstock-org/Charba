@@ -715,7 +715,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	}
 
 	/**
-	 * If <code>true</code>, extra space is added to the both edges and the axis is scaled to fit in the the chart area.
+	 * If <code>true</code>, extra space is added to the both edges and the axis is scaled to fit in the chart area.
 	 * 
 	 * @param offset extra space of axis
 	 */
@@ -724,7 +724,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	}
 
 	/**
-	 * If <code>true</code>, extra space is added to the both edges and the axis is scaled to fit in the the chart area.
+	 * If <code>true</code>, extra space is added to the both edges and the axis is scaled to fit in the chart area.
 	 * 
 	 * @return extra space of axis.
 	 */

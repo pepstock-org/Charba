@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * DIAGONAL drawer to design a diagonal in the tile.<br>
- * It designs a diagonal in the the following tile sections (A and B):<br>
+ * It designs a diagonal in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

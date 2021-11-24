@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * WEAVE drawer to design a weave in the tile.<br>
- * It designs a weave in the the following tile sections (A and B):<br>
+ * It designs a weave in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

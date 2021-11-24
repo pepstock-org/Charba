@@ -60,10 +60,10 @@ public final class Animations extends AbstractDynamicConfiguration<IsAnimations>
 	}
 
 	/**
-	 * Returns <code>true</code> if an animation collection instance is stored in the the animation options.
+	 * Returns <code>true</code> if an animation collection instance is stored in the animation options.
 	 * 
 	 * @param collection collection instance used to check in the animation options
-	 * @return <code>true</code> if an animation collection instance is stored in the the animation options
+	 * @return <code>true</code> if an animation collection instance is stored in the animation options
 	 */
 	@Override
 	public boolean has(AnimationCollectionKey collection) {
@@ -71,7 +71,7 @@ public final class Animations extends AbstractDynamicConfiguration<IsAnimations>
 	}
 
 	/**
-	 * Returns an animation collection instance if stored in the the animation options.
+	 * Returns an animation collection instance if stored in the animation options.
 	 * 
 	 * @param collection collection instance used to get for animation options
 	 * @return an animation collection instance or <code>null</code> if does not exists
@@ -93,7 +93,7 @@ public final class Animations extends AbstractDynamicConfiguration<IsAnimations>
 	}
 
 	/**
-	 * Creates an animation collection instance and stores in the the animation options.
+	 * Creates an animation collection instance and stores in the animation options.
 	 * 
 	 * @param collection collection key used to create the animation collections
 	 * @return a collection animation options

@@ -254,7 +254,7 @@ public final class GradientBuilder {
 		}
 		// gets gradient reference
 		Gradient result = new Gradient(id, type, orientation, scope, colors);
-		// stores the object in the the cache
+		// stores the object in the cache
 		GRADIENTS.put(id, result);
 		// returns the instance
 		return result;
@@ -280,7 +280,7 @@ public final class GradientBuilder {
 		}
 		// creates new gradient
 		Gradient result = new Gradient(nativeObject);
-		// stores the object in the the cache
+		// stores the object in the cache
 		GRADIENTS.put(id, result);
 		// returns the instance
 		return result;

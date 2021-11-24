@@ -32,7 +32,7 @@ interface MutationHandler {
 	String getId();
 
 	/**
-	 * Invoked by mutation observer when a chart has been attached in the the DOM tree.
+	 * Invoked by mutation observer when a chart has been attached in the DOM tree.
 	 * 
 	 * @param item can not be instantiated out of this package to avoid that anyone (apart the observer) will invoke the method.
 	 */

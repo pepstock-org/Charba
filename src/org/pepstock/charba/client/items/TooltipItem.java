@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 /**
  * Contains all info for every item of tooltip.<br>
  * Created and passed by CHART.JS.<br>
- * It uses in the the tooltips callbacks.
+ * It uses in the tooltips callbacks.
  * 
  * @author Andrea "Stock" Stocchero
  *

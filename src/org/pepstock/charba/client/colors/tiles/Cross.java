@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * CROSS drawer to design a cross in the tile.<br>
- * It designs a cross in the the following tile sections (A and B):<br>
+ * It designs a cross in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

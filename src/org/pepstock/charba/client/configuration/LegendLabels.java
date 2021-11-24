@@ -406,7 +406,7 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 	}
 
 	/**
-	 * Returns the the horizontal alignment of the label text.
+	 * Returns the horizontal alignment of the label text.
 	 * 
 	 * @return the horizontal alignment of the label text.
 	 */

@@ -181,7 +181,7 @@ public final class PatternBuilder {
 			// if here, is creating the pattern by a canvas pattern
 			result = new Pattern(id, canvasPatternItem, width, height);
 		}
-		// stores the object in the the cache
+		// stores the object in the cache
 		PATTERNS.put(id, result);
 		// returns the instance
 		return result;
@@ -207,7 +207,7 @@ public final class PatternBuilder {
 		}
 		// creates new pattern
 		Pattern result = new Pattern(nativeObject);
-		// stores the object in the the cache
+		// stores the object in the cache
 		PATTERNS.put(id, result);
 		// returns the instance
 		return result;

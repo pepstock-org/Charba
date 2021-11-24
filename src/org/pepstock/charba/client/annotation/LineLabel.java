@@ -1458,7 +1458,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	}
 
 	/**
-	 * Sets the the font callback.
+	 * Sets the font callback.
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
@@ -1468,7 +1468,7 @@ public final class LineLabel extends AbstractNode implements IsDefaultsLineLabel
 	}
 
 	/**
-	 * Sets the the font callback.
+	 * Sets the font callback.
 	 * 
 	 * @param fontCallback the font callback to set
 	 */

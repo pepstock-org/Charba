@@ -19,7 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipModel;
 
 /**
- * External tooltips callback allow you to hook in the the tooltip rendering process so that you can render the tooltip in your own custom way.<br>
+ * External tooltips callback allow you to hook in the tooltip rendering process so that you can render the tooltip in your own custom way.<br>
  * Generally this is used to create an HTML tooltip instead of an on canvas one.
  * 
  * @author Andrea "Stock" Stocchero
@@ -27,7 +27,7 @@ import org.pepstock.charba.client.items.TooltipModel;
 public interface TooltipExternalCallback {
 
 	/**
-	 * External tooltips callback allows you to hook in the the tooltip rendering process so that you can render the tooltip in your own custom way.
+	 * External tooltips callback allows you to hook in the tooltip rendering process so that you can render the tooltip in your own custom way.
 	 * 
 	 * @param chart chart instance
 	 * @param model all info about tooltip to create own HTML tooltip.

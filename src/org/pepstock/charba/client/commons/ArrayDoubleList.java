@@ -66,7 +66,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	}
 
 	/**
-	 * Loads an array of elements in the the list
+	 * Loads an array of elements in the list
 	 * 
 	 * @param values an array of elements to be loaded
 	 */

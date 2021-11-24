@@ -65,7 +65,7 @@ public abstract class AbstractInjectableResource {
 			ResourceName resourceName = Key.getKeyByValue(ResourceName.values(), name);
 			// checks if it is a CHARBA resource and if it can be override
 			if (resourceName != null && !resourceName.isOverride() && ResourceHash.hash(resourceName) != Hasher.hash(content)) {
-				// if here the the injectable resource is not a CHARBA class
+				// if here the injectable resource is not a CHARBA class
 				// but try to override with a custom
 				throw new IllegalArgumentException("Unable to override '" + resourceName.value() + "' with a custom implementation. ");
 			}

@@ -92,7 +92,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	}
 
 	/**
-	 * Loads an array of elements in the the list
+	 * Loads an array of elements in the list
 	 * 
 	 * @param values an array of elements to be loaded
 	 */

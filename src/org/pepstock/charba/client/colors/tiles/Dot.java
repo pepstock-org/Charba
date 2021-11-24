@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * DOT drawer to design a dot in the tile.<br>
- * It designs a dot in the the following tile sections (A and B):<br>
+ * It designs a dot in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

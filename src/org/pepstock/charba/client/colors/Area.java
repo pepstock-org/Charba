@@ -102,7 +102,7 @@ public final class Area implements IsArea {
 	}
 
 	/**
-	 * Sets the the bottom coordinate.
+	 * Sets the bottom coordinate.
 	 * 
 	 * @param bottom the bottom to set
 	 */

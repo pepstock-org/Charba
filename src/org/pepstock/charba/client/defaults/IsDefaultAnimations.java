@@ -25,15 +25,15 @@ import org.pepstock.charba.client.options.AnimationCollectionKey;
 public interface IsDefaultAnimations {
 
 	/**
-	 * Returns <code>true</code> if an animation collection instance is stored in the the animation options.
+	 * Returns <code>true</code> if an animation collection instance is stored in the animation options.
 	 * 
 	 * @param collection collection instance used to check in the animation options
-	 * @return <code>true</code> if an animation collection instance is stored in the the animation options
+	 * @return <code>true</code> if an animation collection instance is stored in the animation options
 	 */
 	boolean has(AnimationCollectionKey collection);
 
 	/**
-	 * Returns an animation collection instance if stored in the the animation options.
+	 * Returns an animation collection instance if stored in the animation options.
 	 * 
 	 * @param collection collection instance used to get for animation options
 	 * @return an animation collection instance or <code>null</code> if does not exists

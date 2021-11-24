@@ -217,7 +217,7 @@ public final class Gradient extends CanvasObject {
 	/**
 	 * Returns a color using the gradient as source of colors.
 	 * 
-	 * @param offset offset to search in the the gradient colors
+	 * @param offset offset to search in the gradient colors
 	 * @return a color based on offset.
 	 */
 	public IsColor getInterpolatedColorByOffset(double offset) {

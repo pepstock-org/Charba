@@ -52,7 +52,7 @@ import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
- * Enables the datasets items selection directly in the the canvas.<br>
+ * Enables the datasets items selection directly in the canvas.<br>
  * It works only for line and bar chart instances and if ZoomPlugin is disable.<br>
  * It will add mouser listeners to canvas.<br>
  * Tooltips will be disable to avoid events conflicts.<br>

@@ -39,7 +39,7 @@ public final class DeferredResources extends AbstractResources implements IsReso
 	public static final DeferredResources INSTANCE_WITHOUT_DATE_LIBRARY = new DeferredResources(false);
 
 	/**
-	 * Path in the the project where the java script resources are stored, <b>{@value}</b>.
+	 * Path in the project where the java script resources are stored, <b>{@value}</b>.
 	 */
 	static final String JAVASCRIPT_RESOURCES_PATH = "org/pepstock/charba/client/resources/js/";
 

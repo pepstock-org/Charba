@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * ZIGZAG drawer to design a zigzag line in the tile.<br>
- * It designs a zigzag line in the the following tile sections (A and B):<br>
+ * It designs a zigzag line in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>

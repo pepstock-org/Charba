@@ -19,7 +19,7 @@ import org.pepstock.charba.client.dom.elements.Context2dItem;
 
 /**
  * LINE drawer to design a line in the tile.<br>
- * It designs a line in the the following tile sections (A and B):<br>
+ * It designs a line in the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>
