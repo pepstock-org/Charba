@@ -51,6 +51,8 @@ org.pepstock.charba.client.sankey
 org.pepstock.charba.client.sankey.callbacks
 org.pepstock.charba.client.sankey.enums
 org.pepstock.charba.client.treemap
+org.pepstock.charba.client.treemap.callbacks
+org.pepstock.charba.client.treemap.enums
 org.pepstock.charba.client.utils
 org.pepstock.charba.client.utils.toast
 org.pepstock.charba.client.utils.toast.enums
