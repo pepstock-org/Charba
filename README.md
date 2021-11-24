@@ -292,11 +292,14 @@ Here you can find the list of enhancements and updates available on `master` bra
   * remove `CornerRadiusCallback` class. Use `BorderRadiusCallback` one.
   * change signature of `BorderRadiusCallback`, adding the generic for scriptable options context class.
   * rename `cornerRadius` option to `borderRadius` in `LineLabel` and `BoxAnnotation` classes.
+  * remove `divider*` and `groupDividers` options from `TreemapDataset` class in favor of `Dividers` node.
+  * remove `font`, `hoverFont`, `color`, `hoverColor` and `groupLabels` options from `TreemapDataset` class in favor of `Labels` and `Captions` nodes.
 
 ### Features
 
   * import CHART.JS [version v3.6.0](https://github.com/chartjs/Chart.js/releases/tag/v3.6.0).
   * import CHART.JS GEO controller [version v3.6.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.6.0).
+  * import CHART.JS TREEMAP controller [version v2.0.0](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.0.0).
   * import CHART.JS ZOOM plugin [version v1.2.0](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.2.0).
   * import CHART.JS ANNOTATION plugin [version v1.1.0](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.1.0).
   * enable all options of `SizeAxis` and `ColorAxis` (GEO charts) as scriptable ones.
@@ -312,8 +315,10 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `isZoomedOrPanned` method to `ZoomPlugin` in order to get if the chart is zoomed or panned.
   * add `rotation` option to `EllipseAnnotation` class.
   * enable to set a `BarBorderRadius` object to `borderRadius` option in `LineLabel` and `BoxAnnotation` classes. 
-  * add `borderCapStyle`, `borderColor`, `borderDash`,`borderDashOffset`, `borderJoinStyle` and `borderWidth` options to `LineLabel` class.
-  
+  * add `borderCapStyle`, `borderColor`, `borderDash`, `borderDashOffset`, `borderJoinStyle` and `borderWidth` options to `LineLabel` class.
+  * add `align`, `position` and `formatter` options to `Labels` node in `TreemapDataset` class in order to improve labels rendering.
+  * add `align` and `formatter` options to `Captions` node in `TreemapDataset` class in order to improve captions rendering.
+    
 ### Developing
 
   * change dependency for Google Closure Compiler, [version v20211006](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20211006).

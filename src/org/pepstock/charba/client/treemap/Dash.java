@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.NativeArrayContainerFactory;
 import org.pepstock.charba.client.commons.NativeArrayDoubleContainer;
 
 /**
@@ -28,6 +29,9 @@ import org.pepstock.charba.client.commons.NativeArrayDoubleContainer;
  *
  */
 public final class Dash extends NativeArrayDoubleContainer {
+
+	// factory to create dash items
+	static final DashFactory FACTORY = new DashFactory();
 
 	/**
 	 * Creates an empty object.
@@ -72,4 +76,22 @@ public final class Dash extends NativeArrayDoubleContainer {
 		return ArrayListHelper.list(getNativeArray());
 	}
 
+	/**
+	 * Factory to create a {@link Dash} from a native array, used for array container lists.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	static class DashFactory implements NativeArrayContainerFactory<ArrayDouble, Dash> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeArrayContainerFactory#create(org.pepstock.charba.client.commons.Array)
+		 */
+		@Override
+		public Dash create(ArrayDouble nativeArray) {
+			return new Dash(nativeArray);
+		}
+
+	}
 }

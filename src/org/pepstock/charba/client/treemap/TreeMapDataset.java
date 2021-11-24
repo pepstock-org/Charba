@@ -20,42 +20,24 @@ import java.util.List;
 import java.util.Set;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.DatasetContext;
-import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.HtmlColor;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayDouble;
-import org.pepstock.charba.client.commons.ArrayDoubleArray;
 import org.pepstock.charba.client.commons.ArrayDoubleList;
-import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArraySetHelper;
 import org.pepstock.charba.client.commons.ArrayString;
-import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.KeyFactory;
-import org.pepstock.charba.client.commons.NativeArrayContainerFactory;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.HoverFlexDataset;
-import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.options.AbstractFont;
-import org.pepstock.charba.client.options.IsFont;
 
 /**
  * The treemap data set allows to specify the values for displaying hierarchical data using nested rectangles.
@@ -73,34 +55,6 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 */
 	public static final int DEFAULT_BORDER_WIDTH = 0;
 	/**
-	 * Default color, <b>{@link HtmlColor#TRANSPARENT}</b>
-	 */
-	public static final String DEFAULT_COLOR = HtmlColor.TRANSPARENT.toRGBA();
-	/**
-	 * Default divider capstyle, <b>{@link CapStyle#BUTT}</b>
-	 */
-	public static final CapStyle DEFAULT_DIVIDER_CAP_STYLE = CapStyle.BUTT;
-	/**
-	 * Default divider color, <b>{@link HtmlColor#BLACK}</b>
-	 */
-	public static final String DEFAULT_DIVIDER_COLOR = HtmlColor.BLACK.toRGBA();
-	/**
-	 * Default divider dash offset, <b>{@value}</b>.
-	 */
-	public static final double DEFAULT_DIVIDER_DASH_OFFSET = 0;
-	/**
-	 * Default divider width, <b>{@value}</b>.
-	 */
-	public static final int DEFAULT_DIVIDER_WIDTH = 1;
-	/**
-	 * Default group dividers, <b>{@value}</b>.
-	 */
-	public static final boolean DEFAULT_GROUP_DIVIDER = false;
-	/**
-	 * Default group labels, <b>{@value}</b>.
-	 */
-	public static final boolean DEFAULT_GROUP_LABELS = true;
-	/**
 	 * Default spacing, <b>{@value}</b>.
 	 */
 	public static final double DEFAULT_SPACING = 0.5;
@@ -113,18 +67,8 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	private static final String INVALID_SET_DATA_CALL = "'setData' method is not invokable by a treemap chart. Use 'setTree' or 'setTreeObjects' methods";
 	// exception string message for getting data
 	private static final String INVALID_GET_DATA_CALL = "'getData' method is not invokable by a treemap chart. Use 'getTree' or 'getTreeObjects' methods";
-	// factory to create dash items
-	private static final DashFactory DASH_FACTORY = new DashFactory();
 	// factory to create keys
 	private static final InternalKeyFactory KEY_FACTORY = new InternalKeyFactory();
-
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-	// callback proxy to invoke the color function
-	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the hover color function
-	private final CallbackProxy<ProxyObjectCallback> hoverColorCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	/**
 	 * Name of properties of native object.
@@ -134,19 +78,12 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		TREE("tree"),
 		KEY("key"),
 		GROUPS("groups"),
-		COLOR("color"),
-		HOVER_COLOR("hoverColor"),
-		DIVIDER_CAP_STYLE("dividerCapStyle"),
-		DIVIDER_COLOR("dividerColor"),
-		DIVIDER_DASH("dividerDash"),
-		DIVIDER_DASH_OFFSET("dividerDashOffset"),
-		DIVIDER_WIDTH("dividerWidth"),
-		FONT("font"),
-		HOVER_FONT("hoverFont"),
-		GROUP_DIVIDERS("groupDividers"),
-		GROUP_LABELS("groupLabels"),
 		SPACING("spacing"),
 		RTL("rtl"),
+		// inner elements
+		DIVIDERS("dividers"),
+		CAPTIONS("captions"),
+		LABELS("labels"),
 		// internal key to store data type
 		CHARBA_TREE_TYPE("charbaTreeType");
 
@@ -174,14 +111,12 @@ public final class TreeMapDataset extends HoverFlexDataset {
 
 	}
 
-	// color callback instance
-	private ColorCallback<DatasetContext> colorCallback = null;
-	// hover color callback instance
-	private ColorCallback<DatasetContext> hoverColorCallback = null;
-	// font instance
-	private final Font font;
-	// font instance
-	private final Font hoverFont;
+	// dividers instance
+	private final Dividers dividers;
+	// captions instance
+	private final Captions captions;
+	// labels instance
+	private final Labels labels;
 
 	/**
 	 * Creates a data set.<br>
@@ -208,28 +143,10 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 */
 	TreeMapDataset(ControllerType type, IsDefaultOptions defaultValues) {
 		super(type, defaultValues, Dataset.DEFAULT_HIDDEN);
-		// gets inner elements
-		// FONT
-		this.font = new Font(getDefaultValues().getFont(), getValue(Property.FONT));
-		// checks if already added
-		if (!has(Property.FONT)) {
-			// sets the font
-			setValue(Property.FONT, this.font);
-		}
-		// HOVER FONT
-		this.hoverFont = new Font(getDefaultValues().getFont(), getValue(Property.HOVER_FONT));
-		// checks if already added
-		if (!has(Property.HOVER_FONT)) {
-			// sets the font
-			setValue(Property.HOVER_FONT, this.hoverFont);
-		}
-		// -------------------------------
-		// -- SET CALLBACKS to PROXIES ---
-		// -------------------------------
-		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getColorCallback(), DEFAULT_COLOR, false));
-		// sets function to proxy callback in order to invoke the java interface
-		this.hoverColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getHoverColorCallback(), DEFAULT_COLOR, false));
+		// gets the inner element
+		this.dividers = new Dividers(this, Property.DIVIDERS, getValue(Property.DIVIDERS));
+		this.captions = new Captions(this, Property.CAPTIONS, getDefaultValues(), getValue(Property.CAPTIONS));
+		this.labels = new Labels(this, Property.LABELS, getDefaultValues(), getValue(Property.LABELS));
 	}
 
 	/*
@@ -243,21 +160,30 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	}
 
 	/**
-	 * Returns the the font object.
+	 * Returns the dividers object.
 	 * 
-	 * @return the font object.
+	 * @return the dividers object.
 	 */
-	public IsFont getFont() {
-		return font;
+	public Dividers getDividers() {
+		return dividers;
 	}
 
 	/**
-	 * Returns the the font object when hovered.
+	 * Returns the captions object.
 	 * 
-	 * @return the font object when hovered
+	 * @return the captions object.
 	 */
-	public IsFont getHoverFont() {
-		return hoverFont;
+	public Captions getCaptions() {
+		return captions;
+	}
+
+	/**
+	 * Returns the labels object.
+	 * 
+	 * @return the labels object.
+	 */
+	public Labels getLabels() {
+		return labels;
 	}
 
 	/**
@@ -510,258 +436,6 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		return array != null ? ArraySetHelper.set(array, KEY_FACTORY) : Collections.emptySet();
 	}
 
-	// ---------------------------
-	// STYLE METHODS
-	// ---------------------------
-
-	/**
-	 * Sets the color of the rectangle.
-	 * 
-	 * @param color the color of the rectangle
-	 */
-	public void setColor(IsColor... color) {
-		// resets callback
-		setColor((ColorCallback<DatasetContext>) null);
-		// stores value
-		setColors(Property.COLOR, color);
-	}
-
-	/**
-	 * Sets the color of the rectangle.
-	 * 
-	 * @param color the color of the rectangle
-	 */
-	public void setColor(String... color) {
-		// resets callback
-		setColor((ColorCallback<DatasetContext>) null);
-		// stores value
-		setColors(Property.COLOR, color);
-	}
-
-	/**
-	 * Returns the color of the rectangle.
-	 * 
-	 * @return list of the color of the rectangle
-	 */
-	public List<String> getColorAsString() {
-		// checks if the property is a color
-		if (isType(Property.COLOR, ObjectType.ARRAY, ObjectType.STRING) && getColorCallback() == null) {
-			ArrayString array = getColors(Property.COLOR, DEFAULT_COLOR);
-			return ArrayListHelper.list(array);
-		}
-		// if here, the property is not a string
-		// or the property is missing or a gradient
-		// returns empty list
-		return Collections.emptyList();
-	}
-
-	/**
-	 * Returns the color of the rectangle.
-	 * 
-	 * @return list of the color of the rectangle
-	 */
-	public List<IsColor> getColor() {
-		return ColorBuilder.parse(getColorAsString());
-	}
-
-	/**
-	 * Sets the hover color of the rectangle.
-	 * 
-	 * @param hoverColor the hover color of the rectangle
-	 */
-	public void setHoverColor(IsColor... hoverColor) {
-		// resets callback
-		setHoverColor((ColorCallback<DatasetContext>) null);
-		// stores value
-		setColors(Property.HOVER_COLOR, hoverColor);
-	}
-
-	/**
-	 * Sets the hover color of the rectangle.
-	 * 
-	 * @param hoverColor the hover color of the rectangle
-	 */
-	public void setHoverColor(String... hoverColor) {
-		// resets callback
-		setHoverColor((ColorCallback<DatasetContext>) null);
-		// stores value
-		setColors(Property.HOVER_COLOR, hoverColor);
-	}
-
-	/**
-	 * Returns the hover color of the rectangle.
-	 * 
-	 * @return list of the hover color of the rectangle
-	 */
-	public List<String> getHoverColorAsString() {
-		// checks if the property is a color
-		if (isType(Property.HOVER_COLOR, ObjectType.ARRAY, ObjectType.STRING) && getHoverColorCallback() == null) {
-			ArrayString array = getColors(Property.HOVER_COLOR, DEFAULT_COLOR);
-			return ArrayListHelper.list(array);
-		}
-		// if here, the property is not a string
-		// or the property is missing or a gradient
-		// returns empty list
-		return Collections.emptyList();
-	}
-
-	/**
-	 * Returns the hover color of the rectangle.
-	 * 
-	 * @return list of the hover color of the rectangle
-	 */
-	public List<IsColor> getHoverColor() {
-		return ColorBuilder.parse(getHoverColorAsString());
-	}
-
-	/**
-	 * Sets how the end points of every line are drawn.
-	 * 
-	 * @param dividerCapStyle how the end points of every line are drawn.
-	 */
-	public void setDividerCapStyle(CapStyle dividerCapStyle) {
-		setValue(Property.DIVIDER_CAP_STYLE, dividerCapStyle);
-	}
-
-	/**
-	 * Returns how the end points of every line are drawn.
-	 * 
-	 * @return how the end points of every line are drawn.
-	 */
-	public CapStyle getDividerCapStyle() {
-		return getValue(Property.DIVIDER_CAP_STYLE, CapStyle.values(), DEFAULT_DIVIDER_CAP_STYLE);
-	}
-
-	/**
-	 * Sets the divider color of the rectangle.
-	 * 
-	 * @param dividerColor the divider color of the rectangle
-	 */
-	public void setDividerColor(IsColor... dividerColor) {
-		setColors(Property.DIVIDER_COLOR, dividerColor);
-	}
-
-	/**
-	 * Sets the divider color of the rectangle.
-	 * 
-	 * @param dividerColor the divider color of the rectangle
-	 */
-	public void setDividerColor(String... dividerColor) {
-		setColors(Property.DIVIDER_COLOR, dividerColor);
-	}
-
-	/**
-	 * Returns the divider color of the rectangle.
-	 * 
-	 * @return list of the divider color of the rectangle
-	 */
-	public List<String> getDividerColorAsString() {
-		ArrayString array = getColors(Property.COLOR, DEFAULT_COLOR);
-		return ArrayListHelper.list(array);
-	}
-
-	/**
-	 * Returns the divider color of the rectangle.
-	 * 
-	 * @return list of the divider color of the rectangle
-	 */
-	public List<IsColor> getDividerColor() {
-		return ColorBuilder.parse(getDividerColorAsString());
-	}
-
-	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @param dividerDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 */
-	public void setDividerDash(Dash... dividerDash) {
-		setArrayValue(Property.DIVIDER_DASH, ArrayDoubleArray.fromOrNull(dividerDash));
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 */
-	public List<Dash> getDividerDash() {
-		ArrayDoubleArray array = getArrayValue(Property.DIVIDER_DASH);
-		// returns dash data
-		return ArrayListHelper.list(array, DASH_FACTORY);
-	}
-
-	/**
-	 * Sets the line dash pattern offset of the divider.
-	 * 
-	 * @param dividerDashOffset the line dash pattern offset of the divider
-	 */
-	public void setDividerDashOffset(double dividerDashOffset) {
-		setValue(Property.DIVIDER_DASH_OFFSET, dividerDashOffset);
-	}
-
-	/**
-	 * Returns the line dash pattern offset of the divider.
-	 * 
-	 * @return the line dash pattern offset of the divider
-	 */
-	public double getDividerDashOffset() {
-		return getValue(Property.DIVIDER_DASH_OFFSET, DEFAULT_DIVIDER_DASH_OFFSET);
-	}
-
-	/**
-	 * Sets the width of the divider line in pixels.
-	 * 
-	 * @param dividerWidth the width of the divider line in pixels.
-	 */
-	public void setDividerWidth(int... dividerWidth) {
-		setWidths(Property.DIVIDER_WIDTH, dividerWidth);
-	}
-
-	/**
-	 * Returns the width of the divider line in pixels.
-	 * 
-	 * @return the width of the divider line in pixels.
-	 */
-	public List<Integer> getDividerWidth() {
-		ArrayInteger array = getWidths(Property.DIVIDER_WIDTH, DEFAULT_DIVIDER_WIDTH);
-		return ArrayListHelper.list(array);
-	}
-
-	/**
-	 * If <code>false</code>, the divider between groups are not drawn.
-	 * 
-	 * @param groupDivider if <code>false</code>, the divider between groups are not drawn
-	 */
-	public void setGroupDividers(boolean groupDivider) {
-		setValue(Property.GROUP_DIVIDERS, groupDivider);
-	}
-
-	/**
-	 * If <code>false</code>, the divider between groups are not drawn.
-	 * 
-	 * @return if <code>false</code>, the divider between groups are not drawn
-	 */
-	public boolean isGroupDividers() {
-		return getValue(Property.GROUP_DIVIDERS, DEFAULT_GROUP_DIVIDER);
-	}
-
-	/**
-	 * If <code>false</code>, the labels groups are not drawn.
-	 * 
-	 * @param groupLabels if <code>false</code>, the labels groups are not drawn
-	 */
-	public void setGroupLabels(boolean groupLabels) {
-		setValue(Property.GROUP_LABELS, groupLabels);
-	}
-
-	/**
-	 * If <code>false</code>, the labels groups are not drawn.
-	 * 
-	 * @return if <code>false</code>, the labels groups are not drawn
-	 */
-	public boolean isGroupLabels() {
-		return getValue(Property.GROUP_LABELS, DEFAULT_GROUP_LABELS);
-	}
-
 	/**
 	 * Sets the fixed spacing among rectangles.
 	 * 
@@ -796,88 +470,6 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 */
 	public boolean isRtl() {
 		return getValue(Property.RTL, DEFAULT_RTL);
-	}
-
-	// ---------------------------
-	// CALLBACKS METHODS
-	// ---------------------------
-
-	/**
-	 * Returns the color callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the color callback, if set, otherwise <code>null</code>.
-	 */
-	public ColorCallback<DatasetContext> getColorCallback() {
-		return colorCallback;
-	}
-
-	/**
-	 * Sets the color callback.
-	 * 
-	 * @param colorCallback the color callback.
-	 */
-	public void setColor(ColorCallback<DatasetContext> colorCallback) {
-		// sets the callback
-		this.colorCallback = colorCallback;
-		// checks if callback is consistent
-		if (colorCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.COLOR, colorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.COLOR);
-		}
-	}
-
-	/**
-	 * Sets the color callback.
-	 * 
-	 * @param colorCallback the color callback.
-	 */
-	public void setColor(NativeCallback colorCallback) {
-		// resets callback
-		setColor((ColorCallback<DatasetContext>) null);
-		// stores value
-		setValue(Property.COLOR, colorCallback);
-	}
-
-	/**
-	 * Returns the hover color callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the hover color callback, if set, otherwise <code>null</code>.
-	 */
-	public ColorCallback<DatasetContext> getHoverColorCallback() {
-		return hoverColorCallback;
-	}
-
-	/**
-	 * Sets the hover color callback.
-	 * 
-	 * @param hoverColorCallback the hover color callback.
-	 */
-	public void setHoverColor(ColorCallback<DatasetContext> hoverColorCallback) {
-		// sets the callback
-		this.hoverColorCallback = hoverColorCallback;
-		// checks if callback is consistent
-		if (hoverColorCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.HOVER_COLOR, hoverColorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.HOVER_COLOR);
-		}
-	}
-
-	/**
-	 * Sets the hover color callback.
-	 * 
-	 * @param hoverColorCallback the color callback.
-	 */
-	public void setHoverColor(NativeCallback hoverColorCallback) {
-		// resets callback
-		setHoverColor((ColorCallback<DatasetContext>) null);
-		// stores value
-		setValue(Property.HOVER_COLOR, hoverColorCallback);
 	}
 
 	// ---------------------------
@@ -961,26 +553,6 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	}
 
 	/**
-	 * Object to map font options for treemap dataset configuration.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private static class Font extends AbstractFont {
-
-		/**
-		 * Creates a font to use for plugin.
-		 * 
-		 * @param defaultValues default provider
-		 * @param nativeObject native object to map java script properties
-		 */
-		Font(IsDefaultFont defaultValues, NativeObject nativeObject) {
-			super(defaultValues, nativeObject);
-		}
-
-	}
-
-	/**
 	 * Factory to create a keys from a native array, used for array lists.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -1019,22 +591,4 @@ public final class TreeMapDataset extends HoverFlexDataset {
 
 	}
 
-	/**
-	 * Factory to create a {@link Dash} from a native array, used for array container lists.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	private static class DashFactory implements NativeArrayContainerFactory<ArrayDouble, Dash> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.NativeArrayContainerFactory#create(org.pepstock.charba.client.commons.Array)
-		 */
-		@Override
-		public Dash create(ArrayDouble nativeArray) {
-			return new Dash(nativeArray);
-		}
-
-	}
 }
