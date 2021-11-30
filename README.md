@@ -298,7 +298,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
-  * import CHART.JS [version v3.6.0](https://github.com/chartjs/Chart.js/releases/tag/v3.6.0).
+  * import CHART.JS [version v3.6.1](https://github.com/chartjs/Chart.js/releases/tag/v3.6.1).
   * import CHART.JS GEO controller [version v3.6.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.6.0).
   * import CHART.JS TREEMAP controller [version v2.0.0](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.0.0).
   * import CHART.JS ZOOM plugin [version v1.2.0](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.2.0).
