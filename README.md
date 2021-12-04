@@ -39,9 +39,9 @@ Even if **Charba** was born only as GWT chart library, as of version 3, **Charba
 Building
 --------
 
-To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/4.2/build.xml).
+To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.0/build.xml).
 
-The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/4.2/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
+The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.0/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
 
 The first distribution is a **Charba** file without any GWT dependency (but working on GWT anyway), consumable also in other [J2CL - JavaToClosure](https://github.com/google/j2cl) frameworks, like [Google Elemental2](https://github.com/google/elemental2) and [Elemento](https://github.com/hal/elemento).
 
@@ -55,7 +55,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
-[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_42.png)](https://github.com/pepstock-org/Charba-Showcase/blob/4.2/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_50.png)](https://github.com/pepstock-org/Charba-Showcase/blob/5.0/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------
@@ -70,18 +70,18 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>4.2</version>
+    <version>5.0</version>
     <!-- for GWT -->
-    <version>4.2-gwt</version>
+    <version>5.0-gwt</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="4.2"/>
+<dependency org="org.pepstock" name="charba" rev="5.0"/>
 <!-- for GWT -->
-<dependency org="org.pepstock" name="charba" rev="4.2-gwt"/>
+<dependency org="org.pepstock" name="charba" rev="5.0-gwt"/>
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration in your GWT project module configuration:
@@ -249,7 +249,7 @@ Documentation
 
 All **Charba** documentation will be maintained in [Charba-Wiki](https://github.com/pepstock-org/Charba-Wiki) project.
 
-API JavaDoc for version **4.2** is published [here](https://pepstock-org.github.io/Charba/4.2/index.html).
+API JavaDoc for version **5.0** is published [here](https://pepstock-org.github.io/Charba/5.0/index.html).
 
 You can also access the previous API JavaDoc, because every version is published to `https://pepstock-org.github.io/Charba/[version.release]`.
 
@@ -275,57 +275,7 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
-
-### Breaking changes
-
-  * drop support for Java 8 going to Java 11 as minimum requirement.
-  * change `onBeforeLabel`, `onLabel` and `onAfterLabel` methods to `TooltipLabelCallback` interface in order to return a `List<String>` instead of `String` instances to enable tooltip multilines labels.
-  * change `invokeTooltipsCallbackOnLabel` method to `Defaults` class in order to return a `List<String>` instead of `String` instances.
-  * refactoring of `Meter` and `Gauge` controller:
-    * add `ValueLabel` and `DescriptionLabel` elements in the meter and gauge dataset in order to configure how to render the labels.
-    * move all methods to configure the value label from options to dataset class.
-    * remove `Render` enumeration because is not used anymore because the rendering as percentage can be set by `ValueLabel` and the label can be configured in `DescriptionLabel`.
-  * remove `CornerRadiusCallback` class. Use `BorderRadiusCallback` one.
-  * change signature of `BorderRadiusCallback`, adding the generic for scriptable options context class.
-  * rename `cornerRadius` option to `borderRadius` in `LineLabel` and `BoxAnnotation` classes.
-  * remove `divider*` and `groupDividers` options from `TreemapDataset` class in favor of `Dividers` node.
-  * remove `font`, `hoverFont`, `color`, `hoverColor` and `groupLabels` options from `TreemapDataset` class in favor of `Labels` and `Captions` nodes.
-  * remove `Dash` class from `TreemapDataset` because not needed anymore.
-
-### Features
-
-  * import CHART.JS [version v3.6.1](https://github.com/chartjs/Chart.js/releases/tag/v3.6.1).
-  * import CHART.JS GEO controller [version v3.6.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.6.0).
-  * import CHART.JS TREEMAP controller [version v2.0.0](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.0.0).
-  * import CHART.JS ZOOM plugin [version v1.2.0](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.2.0).
-  * import CHART.JS ANNOTATION plugin [version v1.1.0](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.1.0).
-  * enable all options of `SizeAxis` and `ColorAxis` (GEO charts) as scriptable ones.
-  * add `projection` and `projectionInvert` methods to GEO charts in order to translates latitude and longitude in XY coordinates and viceversa.
-  * add `getColorForValue` and `getColorForValueAsString` methods to GEO color axis in order to get the color for a specific value.
-  * add `getSizeForValue` method to GEO size axis in order to get the size for a specific value.
-  * enable the capability to set `cornerRadius` of the tooltip by `BarBorderRadius` object.
-  * add `boxPadding` option to `Tooltips` options and configuration classes.
-  * add `inflateAmount` option to `Bar` options and configuration classes and to `BarDataset` class.
-  * add `autoPadding` option to `Layout` options and configuration classes.
-  * enable the capability to hide the opened toast items programmatically.
-  * add `formatNumber` methods to Helpers, provided out-of-the-box by CHART.JS.
-  * add `isZoomedOrPanned` method to `ZoomPlugin` in order to get if the chart is zoomed or panned.
-  * add `rotation` option to `EllipseAnnotation` class.
-  * enable to set a `BarBorderRadius` object to `borderRadius` option in `LineLabel` and `BoxAnnotation` classes. 
-  * add `borderCapStyle`, `borderColor`, `borderDash`, `borderDashOffset`, `borderJoinStyle` and `borderWidth` options to `LineLabel` class.
-  * add `align`, `position` and `formatter` options to `Labels` node in `TreemapDataset` class in order to improve labels rendering.
-  * add `align` and `formatter` options to `Captions` node in `TreemapDataset` class in order to improve captions rendering.
-    
-### Developing
-
-  * change dependency for Google Closure Compiler, [version v20211107](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20211107).
-  * add consistent checking for scriptable options which are returning a number.
-
 License
 -------
 
- **Charba** is available under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0).
+**Charba** is available under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0).
