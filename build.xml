@@ -407,13 +407,22 @@
 	<!--
         CHARBA - adds GA statement in javadoc
     -->
-	<target name="addGA" depends="javadocGwt">
+	<target name="addGA" depends="javadocGwt, fixJavadoc">
 		<replace dir="${javadoc.dir}" value="&lt;head&gt;&lt;script&gt;window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-46259978-1', 'auto');ga('send', 'pageview');&lt;/script&gt;&lt;script async src='https://www.google-analytics.com/analytics.js'&gt;&lt;/script&gt;">
 		  <include name="**/*.html"/>
 		  <replacetoken><![CDATA[<head>]]></replacetoken>
 		</replace>
 	</target>
 	
+	<!--
+        CHARBA - adds workaroung to fix issues on JAVADOC 11:
+        - https://stackoverflow.com/questions/52326318/maven-javadoc-search-redirects-to-undefined-url
+        - This bug should be fixed in JDK 12: https://bugs.openjdk.java.net/browse/JDK-8215291 
+    -->
+	<target name="fixJavadoc">
+		<echo file="${javadoc.dir}/search.js" append="true">getURLPrefix = function(ui) { return ""; };</echo>
+	</target>
+
 	<!--
         CHARBA - CREATE sources jar file for J2CL
     -->
