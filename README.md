@@ -283,7 +283,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * import CHART.JS version [v3.6.2](https://github.com/chartjs/Chart.js/releases/tag/v3.6.2).
-
+ * import CHART.JS TREEMAP controller version [v2.0.1](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.0.1).
+ 
 License
 -------
 

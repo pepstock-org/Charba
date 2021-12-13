@@ -77,7 +77,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'TreeMapControllerResource' class.
 	 */
-	TREE_MAP_CONTROLLER_RESOURCE(ResourceName.TREEMAP_CONTROLLER, 967990),
+	TREE_MAP_CONTROLLER_RESOURCE(ResourceName.TREEMAP_CONTROLLER, 974921),
 	/**
 	 * Hash item for 'ZoomPluginHammerResource' class.
 	 */
