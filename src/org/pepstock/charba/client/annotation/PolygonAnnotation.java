@@ -181,7 +181,7 @@ public final class PolygonAnnotation extends AbstractPointedAnnotation implement
 		// casts and stores it
 		this.defaultValues = (IsDefaultsPolygonAnnotation) getDefaultsValues();
 		// sets callbacks proxies
-		initCallbacks();
+		initPolygonCallbacks();
 	}
 
 	/**
@@ -197,13 +197,13 @@ public final class PolygonAnnotation extends AbstractPointedAnnotation implement
 		// casts and stores it
 		this.defaultValues = (IsDefaultsPolygonAnnotation) getDefaultsValues();
 		// sets callbacks proxies
-		initCallbacks();
+		initPolygonCallbacks();
 	}
 
 	/**
 	 * Initializes the callbacks proxies for the options which can be scriptable.
 	 */
-	private void initCallbacks() {
+	private void initPolygonCallbacks() {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

@@ -165,8 +165,8 @@ public final class PointAnnotation extends AbstractPointedAnnotation implements 
 		this.defaultValues = (IsDefaultsPointAnnotation) getDefaultsValues();
 		// creates point style handler
 		this.pointStyleHandler = new InternalPointStyleHandler(this, this.defaultValues, getNativeObject());
-		// sets callbacks proxies
-		initCallbacks();
+		// sets function to proxy callback in order to invoke the java interface
+		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(new AnnotationContext(this, context), getPointStyleCallback(), this.defaultValues.getPointStyle()));
 	}
 
 	/**
@@ -183,19 +183,8 @@ public final class PointAnnotation extends AbstractPointedAnnotation implements 
 		this.defaultValues = (IsDefaultsPointAnnotation) getDefaultsValues();
 		// creates point style handler
 		this.pointStyleHandler = new InternalPointStyleHandler(this, this.defaultValues, getNativeObject());
-		// sets callbacks proxies
-		initCallbacks();
-	}
-
-	/**
-	 * Initializes the callbacks proxies for the options which can be scriptable.
-	 */
-	private void initCallbacks() {
-		// -------------------------------
-		// -- SET CALLBACKS to PROXIES ---
-		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(new AnnotationContext(this, context), getPointStyleCallback(), defaultValues.getPointStyle()));
+		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(new AnnotationContext(this, context), getPointStyleCallback(), this.defaultValues.getPointStyle()));
 	}
 
 	/*
