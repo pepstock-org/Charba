@@ -87,7 +87,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// point style callback instance
-	private PointStyleCallback pointStyleCallback = null;
+	private PointStyleCallback<DatasetContext> pointStyleCallback = null;
 	// rotation callback instance
 	private RotationCallback<DatasetContext> rotationCallback = null;
 	// hover radius callback instance
@@ -168,7 +168,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		// resets callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		getConfiguration().getElements().getPoint().setPointStyle(pointStyle);
 	}
@@ -180,7 +180,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 */
 	public void setPointStyle(Canvas pointStyle) {
 		// resets callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		getConfiguration().getElements().getPoint().setPointStyle(pointStyle);
 	}
@@ -192,7 +192,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 */
 	public void setPointStyle(Img pointStyle) {
 		// resets callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		getConfiguration().getElements().getPoint().setPointStyle(pointStyle);
 	}
@@ -296,7 +296,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 * 
 	 * @return the point style callback, if set, otherwise <code>null</code>.
 	 */
-	public PointStyleCallback getPointStyleCallback() {
+	public PointStyleCallback<DatasetContext> getPointStyleCallback() {
 		return pointStyleCallback;
 	}
 
@@ -305,7 +305,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 * 
 	 * @param pointStyleCallback the point style callback.
 	 */
-	public void setPointStyle(PointStyleCallback pointStyleCallback) {
+	public void setPointStyle(PointStyleCallback<DatasetContext> pointStyleCallback) {
 		// sets the callback
 		this.pointStyleCallback = pointStyleCallback;
 		// stores and manages callback
@@ -319,7 +319,7 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	 */
 	public void setPointStyle(NativeCallback pointStyleCallback) {
 		// resets callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.POINT_STYLE, pointStyleCallback);
 	}

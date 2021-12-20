@@ -600,7 +600,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	 * @param defaultValue default point style value
 	 * @return a object property value, as {@link PointStyle} or {@link Img}
 	 */
-	final Object onPointStyle(DatasetContext context, PointStyleCallback callback, PointStyle defaultValue) {
+	final Object onPointStyle(DatasetContext context, PointStyleCallback<DatasetContext> callback, PointStyle defaultValue) {
 		// gets value
 		Object result = ScriptableUtils.getOptionValue(context, callback);
 		// checks result

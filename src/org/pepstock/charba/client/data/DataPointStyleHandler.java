@@ -83,7 +83,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// point style callback instance
-	private PointStyleCallback pointStyleCallback = null;
+	private PointStyleCallback<DatasetContext> pointStyleCallback = null;
 	// default options
 	private final IsDefaultPoint defaultValues;
 
@@ -118,7 +118,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 	 */
 	void setPointStyle(PointStyle... pointStyle) {
 		// resets callback and flags
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArray(Property.POINT_STYLE, pointStyle);
 		// manage type
@@ -150,7 +150,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 	void setPointStyle(Img... pointStyle) {
 		// resets callback and
 		// also flags
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores values
 		setValueOrArray(Property.POINT_STYLE, pointStyle);
 		// manage type
@@ -182,7 +182,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 	void setPointStyle(Canvas... pointStyle) {
 		// resets callback and
 		// also flags
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores values
 		setValueOrArray(Property.POINT_STYLE, pointStyle);
 		// manage type
@@ -211,7 +211,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 	 * 
 	 * @return the point style callback, if set, otherwise <code>null</code>.
 	 */
-	PointStyleCallback getPointStyleCallback() {
+	PointStyleCallback<DatasetContext> getPointStyleCallback() {
 		return pointStyleCallback;
 	}
 
@@ -220,7 +220,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 	 * 
 	 * @param pointStyleCallback the point style callback.
 	 */
-	void setPointStyle(PointStyleCallback pointStyleCallback) {
+	void setPointStyle(PointStyleCallback<DatasetContext> pointStyleCallback) {
 		// sets the callback
 		this.pointStyleCallback = pointStyleCallback;
 		// checks if callback is consistent
@@ -242,7 +242,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 	 */
 	void setPointStyle(NativeCallback pointStyleCallback) {
 		// resets callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.POINT_STYLE, pointStyleCallback);
 	}

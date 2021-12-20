@@ -119,7 +119,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	// borderWidth callback instance
 	private EnableBorderRadiusCallback enableBorderRadiusCallback = null;
 	// point style callback instance
-	private PointStyleCallback pointStyleCallback = null;
+	private PointStyleCallback<DatasetContext> pointStyleCallback = null;
 	// base callback instance
 	private BaseCallback baseCallback = null;
 	// inflate amount callback instance
@@ -921,7 +921,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		// reset callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.POINT_STYLE, pointStyle);
 	}
@@ -948,7 +948,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public void setPointStyle(Img pointStyle) {
 		// reset callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.POINT_STYLE, pointStyle);
 	}
@@ -975,7 +975,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public void setPointStyle(Canvas pointStyle) {
 		// reset callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.POINT_STYLE, pointStyle);
 	}
@@ -1252,7 +1252,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 * 
 	 * @return the point style callback, if set, otherwise <code>null</code>.
 	 */
-	public PointStyleCallback getPointStyleCallback() {
+	public PointStyleCallback<DatasetContext> getPointStyleCallback() {
 		return pointStyleCallback;
 	}
 
@@ -1261,7 +1261,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 * 
 	 * @param pointStyleCallback the point style callback.
 	 */
-	public void setPointStyle(PointStyleCallback pointStyleCallback) {
+	public void setPointStyle(PointStyleCallback<DatasetContext> pointStyleCallback) {
 		// sets the callback
 		this.pointStyleCallback = pointStyleCallback;
 		// checks if callback is consistent
@@ -1281,7 +1281,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public void setPointStyle(NativeCallback pointStyleCallback) {
 		// resets callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.POINT_STYLE, pointStyleCallback);
 	}

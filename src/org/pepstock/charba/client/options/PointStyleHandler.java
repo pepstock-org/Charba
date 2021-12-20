@@ -32,7 +32,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandler> {
+public class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandler> {
 
 	/**
 	 * Name of properties of native object.
@@ -72,7 +72,7 @@ final class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandler
 	 * @param defaultValues default value of point style to use when the properties do not exist
 	 * @param nativeObject native object where point style handler properties must be managed
 	 */
-	PointStyleHandler(AbstractNode parent, IsDefaultPointStyleHandler defaultValues, NativeObject nativeObject) {
+	protected PointStyleHandler(AbstractNode parent, IsDefaultPointStyleHandler defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
 	}
 

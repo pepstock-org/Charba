@@ -29,7 +29,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface HasPointStyle extends IsDefaultPointStyleHandler {
+public interface HasPointStyle extends IsDefaultPointStyleHandler {
 
 	/**
 	 * Returns a point style handler instance to use in the default methods of this interface.

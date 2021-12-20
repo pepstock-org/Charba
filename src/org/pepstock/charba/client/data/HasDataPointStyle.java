@@ -18,6 +18,7 @@ package org.pepstock.charba.client.data;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.dom.elements.Canvas;
@@ -145,7 +146,7 @@ interface HasDataPointStyle {
 	 * 
 	 * @return the point style callback, if set, otherwise <code>null</code>.
 	 */
-	default PointStyleCallback getPointStyleCallback() {
+	default PointStyleCallback<DatasetContext> getPointStyleCallback() {
 		// checks if point style handler is consistent
 		if (getPointStyleHandler() != null) {
 			return getPointStyleHandler().getPointStyleCallback();
@@ -160,7 +161,7 @@ interface HasDataPointStyle {
 	 * 
 	 * @param pointStyleCallback the point style callback.
 	 */
-	default void setPointStyle(PointStyleCallback pointStyleCallback) {
+	default void setPointStyle(PointStyleCallback<DatasetContext> pointStyleCallback) {
 		// checks if point style handler is consistent
 		if (getPointStyleHandler() != null) {
 			getPointStyleHandler().setPointStyle(pointStyleCallback);

@@ -108,7 +108,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	// borderWidth callback instance
 	private EnableBorderRadiusCallback enableBorderRadiusCallback = null;
 	// point style callback instance
-	private PointStyleCallback pointStyleCallback = null;
+	private PointStyleCallback<DatasetContext> pointStyleCallback = null;
 	// inflate amount callback instance
 	private InflateAmountCallback inflateAmountCallback = null;
 
@@ -238,7 +238,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		// resets callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
 	}
@@ -250,7 +250,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setPointStyle(Img pointStyle) {
 		// resets callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
 	}
@@ -262,7 +262,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setPointStyle(Canvas pointStyle) {
 		// resets callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores value
 		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
 	}
@@ -507,7 +507,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * 
 	 * @return the point style callback, if set, otherwise <code>null</code>.
 	 */
-	public PointStyleCallback getPointStyleCallback() {
+	public PointStyleCallback<DatasetContext> getPointStyleCallback() {
 		return pointStyleCallback;
 	}
 
@@ -516,7 +516,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * 
 	 * @param pointStyleCallback the point style callback.
 	 */
-	public void setPointStyle(PointStyleCallback pointStyleCallback) {
+	public void setPointStyle(PointStyleCallback<DatasetContext> pointStyleCallback) {
 		// sets the callback
 		this.pointStyleCallback = pointStyleCallback;
 		// stores and manages callback
@@ -530,7 +530,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	public void setPointStyle(NativeCallback pointStyleCallback) {
 		// resets callback
-		setPointStyle((PointStyleCallback) null);
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.POINT_STYLE, pointStyleCallback);
 	}
