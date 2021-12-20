@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.annotation.enums.DrawTime;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin DEFAULTS options interface, in order to define the attributes of main annotations options.
@@ -27,6 +28,15 @@ import org.pepstock.charba.client.annotation.enums.DrawTime;
  *
  */
 interface IsDefaultsAnnotationOptions {
+
+	/**
+	 * Returns if clips relative to the chart area.
+	 * 
+	 * @return <code>true</code> if clips relative to the chart area.
+	 */
+	default boolean isClip() {
+		return Undefined.BOOLEAN;
+	}
 
 	/**
 	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.

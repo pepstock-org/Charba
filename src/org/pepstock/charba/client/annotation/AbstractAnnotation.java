@@ -59,6 +59,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.utils.Window;
 
 /**
@@ -105,6 +106,13 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		LEAVE("leave"),
 		CLICK("click"),
 		DOUBLE_CLICK("dblclick"),
+		// scales definitions
+		X_SCALE_ID("xScaleID"),
+		X_MIN("xMin"),
+		X_MAX("xMax"),
+		Y_SCALE_ID("yScaleID"),
+		Y_MIN("yMin"),
+		Y_MAX("yMax"),
 		// internal property to set an unique id for caching
 		CHARBA_ANNOTATION_ID("charbaAnnotationId");
 
@@ -150,6 +158,14 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private final CallbackProxy<ProxyStringCallback> drawTimeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the adjust scale range function
 	private final CallbackProxy<ProxyBooleanCallback> adjustScaleRangeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the xMin function
+	private final CallbackProxy<ProxyObjectCallback> xMinCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the xMax function
+	private final CallbackProxy<ProxyObjectCallback> xMaxCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the yMin function
+	private final CallbackProxy<ProxyObjectCallback> yMinCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the yMax function
+	private final CallbackProxy<ProxyObjectCallback> yMaxCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
 	private static final CallbackPropertyHandler<DisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
@@ -165,6 +181,14 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private static final CallbackPropertyHandler<DrawTimeCallback> DRAW_TIME_PROPERTY_HANDLER = new CallbackPropertyHandler<>(AnnotationOptions.Property.DRAW_TIME);
 	// callback instance to handle adjust scale range options
 	private static final CallbackPropertyHandler<AdjustScaleRangeCallback> ADJUST_SCALE_RANGE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ADJUST_SCALE_RANGE);
+	// callback instance to handle xMin options
+	private static final CallbackPropertyHandler<ValueCallback> X_MIN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_MIN);
+	// callback instance to handle xMax options
+	private static final CallbackPropertyHandler<ValueCallback> X_MAX_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_MAX);
+	// callback instance to handle yMin options
+	private static final CallbackPropertyHandler<ValueCallback> Y_MIN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_MIN);
+	// callback instance to handle yMax options
+	private static final CallbackPropertyHandler<ValueCallback> Y_MAX_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_MAX);
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES EVENTS
@@ -232,6 +256,14 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		this.drawTimeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDrawTimeCallback(), defaultValues.getDrawTime()).value());
 		// sets function to proxy callback in order to invoke the java interface
 		this.adjustScaleRangeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getAdjustScaleRangeCallback(), defaultValues.isAdjustScaleRange()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.xMinCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getXMinCallback()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.xMaxCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getXMaxCallback()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.yMinCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getYMinCallback()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.yMaxCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getYMaxCallback()));
 		// ------------------------------------------
 		// -- SET CALLBACKS to PROXIES for EVENTs ---
 		// ------------------------------------------
@@ -477,6 +509,338 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	@Override
 	public final double getBorderDashOffset() {
 		return getValue(Property.BORDER_DASH_OFFSET, defaultValues.getBorderDashOffset());
+	}
+
+	/**
+	 * Sets the ID of the X scale to bind onto.
+	 * 
+	 * @param scaleId the ID of the X scale to bind onto
+	 */
+	public final void setXScaleID(String scaleId) {
+		// checks if scale id is valid
+		ScaleId.checkIfValid(scaleId);
+		// stores it
+		setValue(Property.X_SCALE_ID, scaleId);
+	}
+
+	/**
+	 * Sets the ID of the X scale to bind onto.
+	 * 
+	 * @param scaleId the ID of the X scale to bind onto
+	 */
+	public final void setXScaleID(ScaleId scaleId) {
+		// checks if scale id is valid
+		ScaleId.checkIfValid(scaleId);
+		// stores it
+		setValue(Property.X_SCALE_ID, scaleId);
+	}
+
+	/**
+	 * Returns the ID of the X scale to bind onto.
+	 * 
+	 * @return the ID of the X scale to bind onto
+	 */
+	@Override
+	public final ScaleId getXScaleID() {
+		return getValue(Property.X_SCALE_ID, defaultValues.getXScaleID());
+	}
+
+	/**
+	 * Sets the right edge of the box.
+	 * 
+	 * @param max the right edge of the box
+	 */
+	public final void setXMax(String max) {
+		// resets callback
+		setXMax((ValueCallback) null);
+		// stores value
+		setValue(Property.X_MAX, max);
+	}
+
+	/**
+	 * Sets the right edge of the box.
+	 * 
+	 * @param max the right edge of the box
+	 */
+	public final void setXMax(double max) {
+		// resets callback
+		setXMax((ValueCallback) null);
+		// stores value
+		setValue(Property.X_MAX, max);
+	}
+
+	/**
+	 * Sets the right edge of the box.
+	 * 
+	 * @param max the right edge of the box
+	 */
+	public final void setXMax(Date max) {
+		// resets callback
+		setXMax((ValueCallback) null);
+		// stores value
+		setValue(Property.X_MAX, max);
+	}
+
+	/**
+	 * Returns the right edge of the box.
+	 * 
+	 * @return the right edge of the box
+	 */
+	@Override
+	public final String getXMaxAsString() {
+		return getValueForMultipleKeyTypes(Property.X_MAX, defaultValues.getXMaxAsString());
+	}
+
+	/**
+	 * Returns the right edge of the box.
+	 * 
+	 * @return the right edge of the box
+	 */
+	@Override
+	public final double getXMaxAsDouble() {
+		return getValueForMultipleKeyTypes(Property.X_MAX, defaultValues.getXMaxAsDouble());
+	}
+
+	/**
+	 * Returns the right edge of the box.
+	 * 
+	 * @return the right edge of the box
+	 */
+	@Override
+	public final Date getXMaxAsDate() {
+		return getValueForMultipleKeyTypes(Property.X_MAX, defaultValues.getXMaxAsDate());
+	}
+
+	/**
+	 * Sets the left edge of the box, in units along the x axis.
+	 * 
+	 * @param min the left edge of the box
+	 */
+	public final void setXMin(String min) {
+		// resets callback
+		setXMin((ValueCallback) null);
+		// stores value
+		setValue(Property.X_MIN, min);
+	}
+
+	/**
+	 * Sets the left edge of the box, in units along the x axis.
+	 * 
+	 * @param min the left edge of the box
+	 */
+	public final void setXMin(double min) {
+		// resets callback
+		setXMin((ValueCallback) null);
+		// stores value
+		setValue(Property.X_MIN, min);
+	}
+
+	/**
+	 * Sets the left edge of the box, in units along the x axis.
+	 * 
+	 * @param min the left edge of the box
+	 */
+	public final void setXMin(Date min) {
+		// resets callback
+		setXMin((ValueCallback) null);
+		// stores value
+		setValue(Property.X_MIN, min);
+	}
+
+	/**
+	 * Returns the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the left edge of the box
+	 */
+	@Override
+	public final String getXMinAsString() {
+		return getValueForMultipleKeyTypes(Property.X_MIN, defaultValues.getXMinAsString());
+	}
+
+	/**
+	 * Returns the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the left edge of the box
+	 */
+	@Override
+	public final double getXMinAsDouble() {
+		return getValueForMultipleKeyTypes(Property.X_MIN, defaultValues.getXMinAsDouble());
+	}
+
+	/**
+	 * Returns the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the left edge of the box
+	 */
+	@Override
+	public final Date getXMinAsDate() {
+		return getValueForMultipleKeyTypes(Property.X_MIN, defaultValues.getXMinAsDate());
+	}
+
+	/**
+	 * Sets the ID of the Y scale to bind onto.
+	 * 
+	 * @param scaleId the ID of the Y scale to bind onto
+	 */
+	public final void setYScaleID(String scaleId) {
+		// checks if scale id is valid
+		ScaleId.checkIfValid(scaleId);
+		// stores it
+		setValue(Property.Y_SCALE_ID, scaleId);
+	}
+
+	/**
+	 * Sets the ID of the Y scale to bind onto.
+	 * 
+	 * @param scaleId the ID of the Y scale to bind onto
+	 */
+	public final void setYScaleID(ScaleId scaleId) {
+		// checks if scale id is valid
+		ScaleId.checkIfValid(scaleId);
+		// stores it
+		setValue(Property.Y_SCALE_ID, scaleId);
+	}
+
+	/**
+	 * Returns the ID of the Y scale to bind onto.
+	 * 
+	 * @return the ID of the Y scale to bind onto
+	 */
+	@Override
+	public final ScaleId getYScaleID() {
+		return getValue(Property.Y_SCALE_ID, defaultValues.getYScaleID());
+	}
+
+	/**
+	 * Sets the top edge of the box in units along the y axis.
+	 * 
+	 * @param max the top edge of the box in units along the y axis
+	 */
+	public final void setYMax(String max) {
+		// resets callback
+		setYMax((ValueCallback) null);
+		// stores value
+		setValue(Property.Y_MAX, max);
+	}
+
+	/**
+	 * Sets the top edge of the box in units along the y axis.
+	 * 
+	 * @param max the top edge of the box in units along the y axis
+	 */
+	public final void setYMax(double max) {
+		// resets callback
+		setYMax((ValueCallback) null);
+		// stores value
+		setValue(Property.Y_MAX, max);
+	}
+
+	/**
+	 * Sets the top edge of the box in units along the y axis.
+	 * 
+	 * @param max the top edge of the box in units along the y axis
+	 */
+	public final void setYMax(Date max) {
+		// resets callback
+		setYMax((ValueCallback) null);
+		// stores value
+		setValue(Property.Y_MAX, max);
+	}
+
+	/**
+	 * Returns the top edge of the box in units along the y axis.
+	 * 
+	 * @return the top edge of the box in units along the y axis
+	 */
+	@Override
+	public final String getYMaxAsString() {
+		return getValueForMultipleKeyTypes(Property.Y_MAX, defaultValues.getYMaxAsString());
+	}
+
+	/**
+	 * Returns the top edge of the box in units along the y axis.
+	 * 
+	 * @return the top edge of the box in units along the y axis
+	 */
+	@Override
+	public final double getYMaxAsDouble() {
+		return getValueForMultipleKeyTypes(Property.Y_MAX, defaultValues.getYMaxAsDouble());
+	}
+
+	/**
+	 * Returns the top edge of the box in units along the y axis.
+	 * 
+	 * @return the top edge of the box in units along the y axis
+	 */
+	@Override
+	public final Date getYMaxAsDate() {
+		return getValueForMultipleKeyTypes(Property.Y_MAX, defaultValues.getYMaxAsDate());
+	}
+
+	/**
+	 * Sets the bottom edge of the box.
+	 * 
+	 * @param min the bottom edge of the box
+	 */
+	public final void setYMin(String min) {
+		// resets callback
+		setYMin((ValueCallback) null);
+		// stores value
+		setValue(Property.Y_MIN, min);
+	}
+
+	/**
+	 * Sets the bottom edge of the box.
+	 * 
+	 * @param min the bottom edge of the box
+	 */
+	public final void setYMin(double min) {
+		// resets callback
+		setYMin((ValueCallback) null);
+		// stores value
+		setValue(Property.Y_MIN, min);
+	}
+
+	/**
+	 * Sets the bottom edge of the box.
+	 * 
+	 * @param min the bottom edge of the box
+	 */
+	public final void setYMin(Date min) {
+		// resets callback
+		setYMin((ValueCallback) null);
+		// stores value
+		setValue(Property.Y_MIN, min);
+	}
+
+	/**
+	 * Returns the bottom edge of the box.
+	 * 
+	 * @return the bottom edge of the box
+	 */
+	@Override
+	public final String getYMinAsString() {
+		return getValueForMultipleKeyTypes(Property.Y_MIN, defaultValues.getYMinAsString());
+	}
+
+	/**
+	 * Returns the bottom edge of the box.
+	 * 
+	 * @return the bottom edge of the box
+	 */
+	@Override
+	public final double getYMinAsDouble() {
+		return getValueForMultipleKeyTypes(Property.Y_MIN, defaultValues.getYMinAsDouble());
+	}
+
+	/**
+	 * Returns the bottom edge of the box.
+	 * 
+	 * @return the bottom edge of the box
+	 */
+	@Override
+	public final Date getYMinAsDate() {
+		return getValueForMultipleKeyTypes(Property.Y_MIN, defaultValues.getYMinAsDate());
 	}
 
 	// ---------------------
@@ -784,6 +1148,130 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public final void setDoubleClickCallback(DoubleClickCallback dblclickCallback) {
 		DOUBLE_CLICK_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, dblclickCallback, dblclickCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Returns the callback called to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the callback called to set the left edge of the box, in units along the x axis
+	 */
+	@Override
+	public final ValueCallback getXMinCallback() {
+		return X_MIN_PROPERTY_HANDLER.getCallback(this, defaultValues.getXMinCallback());
+	}
+
+	/**
+	 * Sets the callback to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @param valueCallback to set the left edge of the box, in units along the x axis
+	 */
+	public final void setXMin(ValueCallback valueCallback) {
+		X_MIN_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, xMinCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @param valueCallback to set the left edge of the box, in units along the x axis
+	 */
+	public final void setXMin(NativeCallback valueCallback) {
+		// resets callback
+		setXMin((ValueCallback) null);
+		// stores values
+		setValueAndAddToParent(Property.X_MIN, valueCallback);
+	}
+
+	/**
+	 * Returns the callback called to set the right edge of the box.
+	 * 
+	 * @return the callback called to set the right edge of the box
+	 */
+	@Override
+	public final ValueCallback getXMaxCallback() {
+		return X_MAX_PROPERTY_HANDLER.getCallback(this, defaultValues.getXMaxCallback());
+	}
+
+	/**
+	 * Sets the callback to set the right edge of the box.
+	 * 
+	 * @param valueCallback to set the right edge of the box
+	 */
+	public final void setXMax(ValueCallback valueCallback) {
+		X_MAX_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, xMaxCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the right edge of the box.
+	 * 
+	 * @param valueCallback to set the right edge of the box
+	 */
+	public final void setXMax(NativeCallback valueCallback) {
+		// resets callback
+		setXMax((ValueCallback) null);
+		// stores values
+		setValueAndAddToParent(Property.X_MAX, valueCallback);
+	}
+
+	/**
+	 * Returns the callback called to set the bottom edge of the box.
+	 * 
+	 * @return the callback called to set the bottom edge of the box
+	 */
+	@Override
+	public final ValueCallback getYMinCallback() {
+		return Y_MIN_PROPERTY_HANDLER.getCallback(this, defaultValues.getYMinCallback());
+	}
+
+	/**
+	 * Sets the callback to set the bottom edge of the box.
+	 * 
+	 * @param valueCallback to set the bottom edge of the box
+	 */
+	public final void setYMin(ValueCallback valueCallback) {
+		Y_MIN_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yMinCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the bottom edge of the box.
+	 * 
+	 * @param valueCallback to set the bottom edge of the box
+	 */
+	public final void setYMin(NativeCallback valueCallback) {
+		// resets callback
+		setYMin((ValueCallback) null);
+		// stores values
+		setValueAndAddToParent(Property.Y_MIN, valueCallback);
+	}
+
+	/**
+	 * Returns the callback called to set the top edge of the box in units along the y axis.
+	 * 
+	 * @return the callback called to set the top edge of the box in units along the y axis
+	 */
+	@Override
+	public final ValueCallback getYMaxCallback() {
+		return Y_MAX_PROPERTY_HANDLER.getCallback(this, defaultValues.getYMaxCallback());
+	}
+
+	/**
+	 * Sets the callback to set the top edge of the box in units along the y axis.
+	 * 
+	 * @param valueCallback to set the top edge of the box in units along the y axis
+	 */
+	public final void setYMax(ValueCallback valueCallback) {
+		Y_MAX_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yMaxCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the top edge of the box in units along the y axis.
+	 * 
+	 * @param valueCallback to set the top edge of the box in units along the y axis
+	 */
+	public final void setYMax(NativeCallback valueCallback) {
+		// resets callback
+		setYMax((ValueCallback) null);
+		// stores values
+		setValueAndAddToParent(Property.Y_MAX, valueCallback);
 	}
 
 	/**

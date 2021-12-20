@@ -47,6 +47,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 */
 	enum Property implements Key
 	{
+		CLIP("clip"),
 		DRAW_TIME("drawTime"),
 		DOUBLE_CLICK_SPEED("dblClickSpeed"),
 		ANNOTATIONS("annotations");
@@ -144,6 +145,26 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	@Override
 	protected void applyingDefaults() {
 		AnnotationPlugin.get().mergeDefaults(this);
+	}
+
+	/**
+	 * Sets how to clip relative to the chart area.<br>
+	 * If <code>false</code> allows overflow, otherwise <code>true</code> clips that many pixels inside the chart area.
+	 * 
+	 * @param clip If <code>false</code> allows overflow, otherwise <code>true</code> clips that many pixels inside the chart area.
+	 */
+	public void setClip(boolean clip) {
+		setValue(Property.CLIP, clip);
+	}
+
+	/**
+	 * Returns if clips relative to the chart area.
+	 * 
+	 * @return <code>true</code> if clips relative to the chart area.
+	 */
+	@Override
+	public boolean isClip() {
+		return getValue(Property.CLIP, defaultOptions.isClip());
 	}
 
 	/**

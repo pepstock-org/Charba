@@ -16,11 +16,13 @@
 package org.pepstock.charba.client.annotation;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
+import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.listeners.ClickCallback;
 import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
@@ -31,6 +33,9 @@ import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
+import org.pepstock.charba.client.enums.DefaultScaleId;
+import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.ScaleId;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin annotation DEFAULTS options.
@@ -209,4 +214,165 @@ interface IsDefaultsAnnotation {
 		return null;
 	}
 
+	/**
+	 * Returns the ID of the X scale to bind onto.
+	 * 
+	 * @return the ID of the X scale to bind onto
+	 */
+	default ScaleId getXScaleID() {
+		return DefaultScaleId.X;
+	}
+
+	/**
+	 * Returns the right edge of the box.
+	 * 
+	 * @return the right edge of the box
+	 */
+	default String getXMaxAsString() {
+		return Undefined.STRING;
+	}
+
+	/**
+	 * Returns the right edge of the box.
+	 * 
+	 * @return the right edge of the box
+	 */
+	default double getXMaxAsDouble() {
+		return Undefined.DOUBLE;
+	}
+
+	/**
+	 * Returns the right edge of the box.
+	 * 
+	 * @return the right edge of the box
+	 */
+	default Date getXMaxAsDate() {
+		return null;
+	}
+
+	/**
+	 * Returns the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the left edge of the box
+	 */
+	default String getXMinAsString() {
+		return Undefined.STRING;
+	}
+
+	/**
+	 * Returns the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the left edge of the box
+	 */
+	default double getXMinAsDouble() {
+		return Undefined.DOUBLE;
+	}
+
+	/**
+	 * Returns the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the left edge of the box
+	 */
+	default Date getXMinAsDate() {
+		return null;
+	}
+
+	/**
+	 * Returns the ID of the Y scale to bind onto.
+	 * 
+	 * @return the ID of the Y scale to bind onto
+	 */
+	default ScaleId getYScaleID() {
+		return DefaultScaleId.Y;
+	}
+
+	/**
+	 * Returns the top edge of the box in units along the y axis.
+	 * 
+	 * @return the top edge of the box in units along the y axis
+	 */
+	default String getYMaxAsString() {
+		return Undefined.STRING;
+	}
+
+	/**
+	 * Returns the top edge of the box in units along the y axis.
+	 * 
+	 * @return the top edge of the box in units along the y axis
+	 */
+	default double getYMaxAsDouble() {
+		return Undefined.DOUBLE;
+	}
+
+	/**
+	 * Returns the top edge of the box in units along the y axis.
+	 * 
+	 * @return the top edge of the box in units along the y axis
+	 */
+	default Date getYMaxAsDate() {
+		return null;
+	}
+
+	/**
+	 * Returns the bottom edge of the box.
+	 * 
+	 * @return the bottom edge of the box
+	 */
+	default String getYMinAsString() {
+		return Undefined.STRING;
+	}
+
+	/**
+	 * Returns the bottom edge of the box.
+	 * 
+	 * @return the bottom edge of the box
+	 */
+	default double getYMinAsDouble() {
+		return Undefined.DOUBLE;
+	}
+
+	/**
+	 * Returns the bottom edge of the box.
+	 * 
+	 * @return the bottom edge of the box
+	 */
+	default Date getYMinAsDate() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the callback called to set the left edge of the box, in units along the x axis
+	 */
+	default ValueCallback getXMinCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the right edge of the box.
+	 * 
+	 * @return the callback called to set the right edge of the box
+	 */
+	default ValueCallback getXMaxCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the left edge of the box, in units along the x axis.
+	 * 
+	 * @return the callback called to set the left edge of the box, in units along the x axis
+	 */
+	default ValueCallback getYMinCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the right edge of the box.
+	 * 
+	 * @return the callback called to set the right edge of the box
+	 */
+	default ValueCallback getYMaxCallback() {
+		return null;
+	}
 }

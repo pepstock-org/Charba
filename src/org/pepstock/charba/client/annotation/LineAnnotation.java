@@ -37,7 +37,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LineAnnotation extends AbstractXYAnnotation implements IsDefaultsLineAnnotation {
+public final class LineAnnotation extends AbstractAnnotation implements IsDefaultsLineAnnotation {
 
 	/**
 	 * Default line annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -177,7 +177,7 @@ public final class LineAnnotation extends AbstractXYAnnotation implements IsDefa
 	 * @param defaultValues default options instance
 	 */
 	LineAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
-		super(AnnotationType.LINE, nativeObject, defaultValues);
+		super(nativeObject, defaultValues);
 		// checks if default are of the right class
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsLineAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.LINE.value()));
 		// casts and stores it

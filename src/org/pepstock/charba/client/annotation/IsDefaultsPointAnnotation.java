@@ -15,13 +15,8 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import java.util.Date;
-
-import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
-import org.pepstock.charba.client.callbacks.RadiusCallback;
-import org.pepstock.charba.client.enums.DefaultScaleId;
-import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.options.ScaleId;
+import org.pepstock.charba.client.callbacks.PointStyleCallback;
+import org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin <b>POINT</b> annotation DEFAULTS options interface.
@@ -29,7 +24,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler {
+interface IsDefaultsPointAnnotation extends IsDefaultsAbstractPointedAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultPointStyleHandler {
 
 	/*
 	 * (non-Javadoc)
@@ -46,107 +41,18 @@ interface IsDefaultsPointAnnotation extends IsDefaultsAnnotation, IsDefaultsBack
 	 * 
 	 * @return the radius of the point.
 	 */
+	@Override
 	default double getRadius() {
 		return PointAnnotation.DEFAULT_RADIUS;
 	}
 
 	/**
-	 * Returns the ID of the X scale to bind onto.
+	 * Returns the point style callback, if set, otherwise <code>null</code>.
 	 * 
-	 * @return the ID of the X scale to bind onto
+	 * @return the point style callback, if set, otherwise <code>null</code>.
 	 */
-	default ScaleId getXScaleID() {
-		return DefaultScaleId.X;
-	}
-
-	/**
-	 * Returns the ID of the Y scale to bind onto.
-	 * 
-	 * @return the ID of the Y scale to bind onto
-	 */
-	default ScaleId getYScaleID() {
-		return DefaultScaleId.Y;
-	}
-
-	/**
-	 * Returns the data X value to draw the point at.
-	 * 
-	 * @return the data X value to draw the point at
-	 */
-	default String getXValueAsString() {
-		return Undefined.STRING;
-	}
-
-	/**
-	 * Returns the data X value to draw the point at.
-	 * 
-	 * @return the data X value to draw the point at
-	 */
-	default double getXValueAsDouble() {
-		return Undefined.DOUBLE;
-	}
-
-	/**
-	 * Returns the data X value to draw the point at.
-	 * 
-	 * @return the data X value to draw the point at
-	 */
-	default Date getXValueAsDate() {
+	default PointStyleCallback<AnnotationContext> getPointStyleCallback() {
 		return null;
 	}
 
-	/**
-	 * Returns the data Y value to draw the point at.
-	 * 
-	 * @return the data Y value to draw the point at
-	 */
-	default String getYValueAsString() {
-		return Undefined.STRING;
-	}
-
-	/**
-	 * Returns the data Y value to draw the point at.
-	 * 
-	 * @return the data Y value to draw the point at
-	 */
-
-	default double getYValueAsDouble() {
-		return Undefined.DOUBLE;
-	}
-
-	/**
-	 * Returns the data Y value to draw the point at.
-	 * 
-	 * @return the data Y value to draw the point at
-	 */
-	default Date getYValueAsDate() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the radius.
-	 * 
-	 * @return the callback called to set the radius
-	 */
-	default RadiusCallback<AnnotationContext> getRadiusCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the data X value to draw the line at.
-	 * 
-	 * @return the callback called to set the data X value to draw the line at
-	 */
-	default ValueCallback getXValueCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the data Y value to draw the line at.
-	 * 
-	 * @return the callback called to set the data Y value to draw the line at
-	 */
-	default ValueCallback getYValueCallback() {
-		return null;
-	}
 }

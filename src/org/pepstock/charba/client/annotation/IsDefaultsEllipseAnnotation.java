@@ -23,7 +23,7 @@ import org.pepstock.charba.client.callbacks.RotationCallback;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsEllipseAnnotation extends IsDefaultsXYAnnotation, IsDefaultsBackgroundColorHandler {
+interface IsDefaultsEllipseAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler {
 
 	/*
 	 * (non-Javadoc)

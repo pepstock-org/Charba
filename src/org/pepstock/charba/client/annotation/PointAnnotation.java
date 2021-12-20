@@ -15,23 +15,24 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import java.util.Date;
-
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.RadiusCallback;
-import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.options.ScaleId;
+import org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler;
+import org.pepstock.charba.client.dom.elements.Canvas;
+import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.options.HasPointStyle;
+import org.pepstock.charba.client.options.PointStyleHandler;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -40,12 +41,12 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PointAnnotation extends AbstractAnnotation implements IsDefaultsPointAnnotation, HasBackgroundColor {
+public final class PointAnnotation extends AbstractPointedAnnotation implements IsDefaultsPointAnnotation, HasPointStyle {
 
 	/**
 	 * Default point annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
 	 */
-	public static final int DEFAULT_BORDER_WIDTH = 2;
+	public static final int DEFAULT_BORDER_WIDTH = 1;
 
 	/**
 	 * Default point annotation radius, <b>{@value DEFAULT_RADIUS}</b>.
@@ -57,11 +58,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	 */
 	private enum Property implements Key
 	{
-		X_SCALE_ID("xScaleID"),
-		Y_SCALE_ID("yScaleID"),
-		X_VALUE("xValue"),
-		Y_VALUE("yValue"),
-		RADIUS("radius");
+		POINT_STYLE("pointStyle");
 
 		// name value of property
 		private final String value;
@@ -90,27 +87,18 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// callback proxy to invoke the radius function
-	private final CallbackProxy<ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the xValue function
-	private final CallbackProxy<ProxyObjectCallback> xValueCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the yValue function
-	private final CallbackProxy<ProxyObjectCallback> yValueCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	// callback instance to handle radius options
-	private static final CallbackPropertyHandler<RadiusCallback<AnnotationContext>> RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.RADIUS);
-	// callback instance to handle xValue options
-	private static final CallbackPropertyHandler<ValueCallback> X_VALUE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_VALUE);
-	// callback instance to handle yValue options
-	private static final CallbackPropertyHandler<ValueCallback> Y_VALUE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_VALUE);
+	// callback proxy to invoke the point style function
+	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback instance to handle yAdjustg options
+	private static final CallbackPropertyHandler<PointStyleCallback<AnnotationContext>> POINT_STYLE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.POINT_STYLE);
 
 	// defaults options
 	private final IsDefaultsPointAnnotation defaultValues;
-	// background color handler
-	private final BackgroundColorHandler backgroundColorHandler;
+	// instance of style of points manager
+	private final InternalPointStyleHandler pointStyleHandler;
 
 	/**
-	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance.<br>
+	 * Creates a point annotation to be added to an {@link AnnotationOptions} instance.<br>
 	 * The annotation id is calculated automatically.
 	 * 
 	 * @see AnnotationType#createId()
@@ -120,7 +108,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	}
 
 	/**
-	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.
+	 * Creates a point annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.
 	 * 
 	 * @param id annotation id to apply to the object, as string
 	 */
@@ -129,7 +117,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	}
 
 	/**
-	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.
+	 * Creates a point annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.
 	 * 
 	 * @param id annotation id to apply to the object
 	 */
@@ -138,7 +126,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	}
 
 	/**
-	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.<br>
+	 * Creates a point annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.<br>
 	 * The chart instance, passed as argument, must be the chart where the annotations will be applied and is used to get the whole default options in order to get the default for
 	 * this object.
 	 * 
@@ -150,7 +138,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	}
 
 	/**
-	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.<br>
+	 * Creates a point annotation to be added to an {@link AnnotationOptions} instance, using the ID passed as argument.<br>
 	 * The chart instance, passed as argument, must be the chart where the annotations will be applied and is used to get the whole default options in order to get the default for
 	 * this object.
 	 * 
@@ -162,7 +150,7 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 	}
 
 	/**
-	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance, using the native object and defaults passed as argument.
+	 * Creates a point annotation to be added to an {@link AnnotationOptions} instance, using the native object and defaults passed as argument.
 	 * 
 	 * @param id annotation id to apply to the object
 	 * @param defaultValues default options instance
@@ -175,8 +163,8 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsPointAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsPointAnnotation) getDefaultsValues();
-		// creates background color handler
-		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
+		// creates point style handler
+		this.pointStyleHandler = new InternalPointStyleHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initCallbacks();
 	}
@@ -193,8 +181,8 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsPointAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsPointAnnotation) getDefaultsValues();
-		// creates background color handler
-		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
+		// creates point style handler
+		this.pointStyleHandler = new InternalPointStyleHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initCallbacks();
 	}
@@ -207,342 +195,144 @@ public final class PointAnnotation extends AbstractAnnotation implements IsDefau
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.radiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getRadiusCallback(), defaultValues.getRadius(), ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
-		// sets function to proxy callback in order to invoke the java interface
-		this.xValueCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getXValueCallback()));
-		// sets function to proxy callback in order to invoke the java interface
-		this.yValueCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getYValueCallback()));
+		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(new AnnotationContext(this, context), getPointStyleCallback(), defaultValues.getPointStyle()));
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.annotation.HasBackgroundColor#getBackgroundColorHandler()
+	 * @see org.pepstock.charba.client.options.HasPointStyle#getPointStyleHandler()
 	 */
 	@Override
-	public BackgroundColorHandler getBackgroundColorHandler() {
-		return backgroundColorHandler;
-	}
-
-	/**
-	 * Sets the radius of the point shape.<br>
-	 * If set to 0, the point is not rendered.
-	 * 
-	 * @param radius array of the radius of the point shape.
-	 */
-	public void setRadius(double radius) {
-		// resets callback
-		setRadius((RadiusCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.RADIUS, Checker.positiveOrZero(radius));
-	}
-
-	/**
-	 * Returns the radius of the point.
-	 * 
-	 * @return the radius of the point.
-	 */
-	@Override
-	public double getRadius() {
-		return getValue(Property.RADIUS, defaultValues.getRadius());
-	}
-
-	/**
-	 * Sets the ID of the Y scale to bind onto.
-	 * 
-	 * @param scaleId the ID of the Y scale to bind onto
-	 */
-	public void setYScaleID(String scaleId) {
-		// checks if scale id is valid
-		ScaleId.checkIfValid(scaleId);
-		// stores it
-		setValue(PointAnnotation.Property.Y_SCALE_ID, scaleId);
-	}
-
-	/**
-	 * Sets the ID of the Y scale to bind onto.
-	 * 
-	 * @param scaleId the ID of the Y scale to bind onto
-	 */
-	public void setYScaleID(ScaleId scaleId) {
-		// checks if scale id is valid
-		ScaleId.checkIfValid(scaleId);
-		// stores it
-		setValue(PointAnnotation.Property.Y_SCALE_ID, scaleId);
-	}
-
-	/**
-	 * Returns the ID of the Y scale to bind onto.
-	 * 
-	 * @return the ID of the Y scale to bind onto
-	 */
-	@Override
-	public ScaleId getYScaleID() {
-		return getValue(Property.Y_SCALE_ID, defaultValues.getYScaleID());
-	}
-
-	/**
-	 * Sets the ID of the X scale to bind onto.
-	 * 
-	 * @param scaleId the ID of the X scale to bind onto
-	 */
-	public void setXScaleID(String scaleId) {
-		// checks if scale id is valid
-		ScaleId.checkIfValid(scaleId);
-		// stores it
-		setValue(PointAnnotation.Property.X_SCALE_ID, scaleId);
-	}
-
-	/**
-	 * Sets the ID of the X scale to bind onto.
-	 * 
-	 * @param scaleId the ID of the X scale to bind onto
-	 */
-	public void setXScaleID(ScaleId scaleId) {
-		// checks if scale id is valid
-		ScaleId.checkIfValid(scaleId);
-		// stores it
-		setValue(PointAnnotation.Property.X_SCALE_ID, scaleId);
-	}
-
-	/**
-	 * Returns the ID of the X scale to bind onto.
-	 * 
-	 * @return the ID of the X scale to bind onto
-	 */
-	@Override
-	public ScaleId getXScaleID() {
-		return getValue(Property.X_SCALE_ID, defaultValues.getXScaleID());
-	}
-
-	/**
-	 * Sets the data X value to draw the line at.
-	 * 
-	 * @param value the data X value to draw the line at
-	 */
-	public void setXValue(String value) {
-		// resets callback
-		setXValue((ValueCallback) null);
-		// stores value
-		setValue(Property.X_VALUE, value);
-	}
-
-	/**
-	 * Sets the data X value to draw the line at.
-	 * 
-	 * @param value the data X value to draw the line at
-	 */
-	public void setXValue(double value) {
-		// resets callback
-		setXValue((ValueCallback) null);
-		// stores value
-		setValue(Property.X_VALUE, value);
-	}
-
-	/**
-	 * Sets the data X value to draw the line at.
-	 * 
-	 * @param value the data X value to draw the line at
-	 */
-	public void setXValue(Date value) {
-		// resets callback
-		setXValue((ValueCallback) null);
-		// stores value
-		setValue(Property.X_VALUE, value);
-	}
-
-	/**
-	 * Returns the data X value to draw the line at.
-	 * 
-	 * @return the data X value to draw the line at
-	 */
-	@Override
-	public String getXValueAsString() {
-		return getValueForMultipleKeyTypes(Property.X_VALUE, defaultValues.getXValueAsString());
-	}
-
-	/**
-	 * Returns the data X value to draw the line at.
-	 * 
-	 * @return the data X value to draw the line at
-	 */
-	@Override
-	public double getXValueAsDouble() {
-		return getValueForMultipleKeyTypes(Property.X_VALUE, defaultValues.getXValueAsDouble());
-	}
-
-	/**
-	 * Returns the data X value to draw the line at.
-	 * 
-	 * @return the data X value to draw the line at
-	 */
-	@Override
-	public Date getXValueAsDate() {
-		return getValueForMultipleKeyTypes(Property.X_VALUE, defaultValues.getXValueAsDate());
-	}
-
-	/**
-	 * Sets the data Y value to draw the line at.
-	 * 
-	 * @param value the data Y value to draw the line at
-	 */
-	public void setYValue(String value) {
-		// resets callback
-		setYValue((ValueCallback) null);
-		// stores value
-		setValue(Property.Y_VALUE, value);
-	}
-
-	/**
-	 * Sets the data Y value to draw the line at.
-	 * 
-	 * @param value the data Y value to draw the line at
-	 */
-	public void setYValue(double value) {
-		// resets callback
-		setYValue((ValueCallback) null);
-		// stores value
-		setValue(Property.Y_VALUE, value);
-	}
-
-	/**
-	 * Sets the data Y value to draw the line at.
-	 * 
-	 * @param value the data Y value to draw the line at
-	 */
-	public void setYValue(Date value) {
-		// resets callback
-		setYValue((ValueCallback) null);
-		// stores value
-		setValue(Property.Y_VALUE, value);
-	}
-
-	/**
-	 * Returns the data Y value to draw the line at.
-	 * 
-	 * @return the data Y value to draw the line at
-	 */
-	@Override
-	public String getYValueAsString() {
-		return getValueForMultipleKeyTypes(Property.Y_VALUE, defaultValues.getYValueAsString());
-	}
-
-	/**
-	 * Returns the data Y value to draw the line at.
-	 * 
-	 * @return the data Y value to draw the line at
-	 */
-	@Override
-	public double getYValueAsDouble() {
-		return getValueForMultipleKeyTypes(Property.Y_VALUE, defaultValues.getYValueAsDouble());
-	}
-
-	/**
-	 * Returns the data Y value to draw the line at.
-	 * 
-	 * @return the data Y value to draw the line at
-	 */
-	@Override
-	public Date getYValueAsDate() {
-		return getValueForMultipleKeyTypes(Property.Y_VALUE, defaultValues.getYValueAsDate());
+	public PointStyleHandler getPointStyleHandler() {
+		return pointStyleHandler;
 	}
 
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
 
-	/**
-	 * Returns the callback called to set the radius.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the callback called to set the radius
+	 * @see org.pepstock.charba.client.options.HasPointStyle#setPointStyle(org.pepstock.charba.client.enums.PointStyle)
 	 */
 	@Override
-	public RadiusCallback<AnnotationContext> getRadiusCallback() {
-		return RADIUS_PROPERTY_HANDLER.getCallback(this, defaultValues.getRadiusCallback());
-	}
-
-	/**
-	 * Sets the callback to set the radius.
-	 * 
-	 * @param radiusCallback to set the radius
-	 */
-	public void setRadius(RadiusCallback<AnnotationContext> radiusCallback) {
-		RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, radiusCallback, radiusCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the radius.
-	 * 
-	 * @param radiusCallback to set the radius
-	 */
-	public void setRadius(NativeCallback radiusCallback) {
-		// resets callback
-		setRadius((RadiusCallback<AnnotationContext>) null);
+	public void setPointStyle(PointStyle pointStyle) {
+		// reset callback
+		setPointStyle((PointStyleCallback<AnnotationContext>) null);
 		// stores values
-		setValueAndAddToParent(Property.RADIUS, radiusCallback);
+		HasPointStyle.super.setPointStyle(pointStyle);
 	}
 
-	/**
-	 * Returns the callback called to set the data X value to draw the line at.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the callback called to set the data X value to draw the line at
+	 * @see org.pepstock.charba.client.options.HasPointStyle#setPointStyle(org.pepstock.charba.client.dom.elements.Img)
 	 */
 	@Override
-	public ValueCallback getXValueCallback() {
-		return X_VALUE_PROPERTY_HANDLER.getCallback(this, defaultValues.getXValueCallback());
-	}
-
-	/**
-	 * Sets the callback to set the data X value to draw the line at.
-	 * 
-	 * @param valueCallback to set the data X value to draw the line at
-	 */
-	public void setXValue(ValueCallback valueCallback) {
-		X_VALUE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, xValueCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the data X value to draw the line at.
-	 * 
-	 * @param valueCallback to set the data X value to draw the line at
-	 */
-	public void setXValue(NativeCallback valueCallback) {
-		// resets callback
-		setXValue((ValueCallback) null);
+	public void setPointStyle(Img pointStyle) {
+		// reset callback
+		setPointStyle((PointStyleCallback<AnnotationContext>) null);
 		// stores values
-		setValueAndAddToParent(Property.X_VALUE, valueCallback);
+		HasPointStyle.super.setPointStyle(pointStyle);
 	}
 
-	/**
-	 * Returns the callback called to set the data Y value to draw the line at.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the callback called to set the data Y value to draw the line at
+	 * @see org.pepstock.charba.client.options.HasPointStyle#setPointStyle(org.pepstock.charba.client.dom.elements.Canvas)
 	 */
 	@Override
-	public ValueCallback getYValueCallback() {
-		return Y_VALUE_PROPERTY_HANDLER.getCallback(this, defaultValues.getYValueCallback());
-	}
-
-	/**
-	 * Sets the callback to set the data Y value to draw the line at.
-	 * 
-	 * @param valueCallback to set the data Y value to draw the line at
-	 */
-	public void setYValue(ValueCallback valueCallback) {
-		Y_VALUE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yValueCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the data Y value to draw the line at.
-	 * 
-	 * @param valueCallback to set the data Y value to draw the line at
-	 */
-	public void setYValue(NativeCallback valueCallback) {
-		// resets callback
-		setYValue((ValueCallback) null);
+	public void setPointStyle(Canvas pointStyle) {
+		// reset callback
+		setPointStyle((PointStyleCallback<AnnotationContext>) null);
 		// stores values
-		setValueAndAddToParent(Property.Y_VALUE, valueCallback);
-
+		HasPointStyle.super.setPointStyle(pointStyle);
 	}
 
+	/**
+	 * Returns the point style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point style callback, if set, otherwise <code>null</code>.
+	 */
+	@Override
+	public PointStyleCallback<AnnotationContext> getPointStyleCallback() {
+		return POINT_STYLE_PROPERTY_HANDLER.getCallback(this, defaultValues.getPointStyleCallback());
+	}
+
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(PointStyleCallback<AnnotationContext> pointStyleCallback) {
+		POINT_STYLE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, pointStyleCallback, pointStyleCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(NativeCallback pointStyleCallback) {
+		// resets callback
+		setPointStyle((PointStyleCallback<AnnotationContext>) null);
+		// stores values
+		setValue(Property.POINT_STYLE, pointStyleCallback);
+	}
+
+	// ---------------------
+	// INTERNALS
+	// ---------------------
+
+	/**
+	 * Returns a {@link PointStyle} or {@link Img} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param callback callback instance to be invoked
+	 * @param defaultValue default point style value
+	 * @return a object property value, as {@link PointStyle} or {@link Img}
+	 */
+	final Object onPointStyle(AnnotationContext context, PointStyleCallback<AnnotationContext> callback, PointStyle defaultValue) {
+		// gets value
+		Object result = ScriptableUtils.getOptionValue(context, callback);
+		// checks result
+		if (result instanceof PointStyle) {
+			// is point style instance
+			PointStyle style = (PointStyle) result;
+			return style.value();
+		} else if (result instanceof Img) {
+			// is image element instance
+			return result;
+		} else if (result instanceof Canvas) {
+			// is canvas element instance
+			return result;
+		}
+		// checks defaults
+		Checker.checkIfValid(defaultValue, "Default point style argument");
+		// default result
+		return defaultValue.value();
+	}
+
+	/**
+	 * Internal class to implement a point style handler.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalPointStyleHandler extends PointStyleHandler {
+
+		/**
+		 * Creates a point style handler with the native object where POINTSTYLE property must be managed and the default value to use when the property does not exist.
+		 * 
+		 * @param parent model which contains the point style handler.
+		 * @param defaultValues default value of point style to use when the properties do not exist
+		 * @param nativeObject native object where point style handler properties must be managed
+		 */
+		protected InternalPointStyleHandler(AbstractNode parent, IsDefaultPointStyleHandler defaultValues, NativeObject nativeObject) {
+			super(parent, defaultValues, nativeObject);
+		}
+
+	}
 }

@@ -35,7 +35,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class EllipseAnnotation extends AbstractXYAnnotation implements IsDefaultsEllipseAnnotation, HasBackgroundColor {
+public final class EllipseAnnotation extends AbstractAnnotation implements IsDefaultsEllipseAnnotation, HasBackgroundColor {
 
 	/**
 	 * Default ellipse annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -166,7 +166,7 @@ public final class EllipseAnnotation extends AbstractXYAnnotation implements IsD
 	 * @param defaultValues default options instance
 	 */
 	EllipseAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
-		super(AnnotationType.ELLIPSE, nativeObject, defaultValues);
+		super(nativeObject, defaultValues);
 		// checks if default are of the right class
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsEllipseAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.ELLIPSE.value()));
 		// casts and stores it

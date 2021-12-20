@@ -43,7 +43,11 @@ public enum AnnotationType implements Key
 	/**
 	 * Defines a <b>POINT</b> annotation which draws a point in the a chart.
 	 */
-	POINT("point", DefaultPoint.INSTANCE);
+	POINT("point", DefaultPoint.INSTANCE),
+	/**
+	 * Defines a <b>POLYGON</b> annotation which draws a polygon in the a chart.
+	 */
+	POLYGON("polygon", DefaultPolygon.INSTANCE);
 
 	// name value of property
 	private final String value;

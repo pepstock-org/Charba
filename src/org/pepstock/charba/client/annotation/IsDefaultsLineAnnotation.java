@@ -27,7 +27,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
+interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 
 	/*
 	 * (non-Javadoc)
@@ -37,26 +37,6 @@ interface IsDefaultsLineAnnotation extends IsDefaultsXYAnnotation {
 	@Override
 	default AnnotationType getType() {
 		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsXYAnnotation#getXScaleID()
-	 */
-	@Override
-	default ScaleId getXScaleID() {
-		return IsDefaultsXYAnnotation.super.getXScaleID();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsXYAnnotation#getYScaleID()
-	 */
-	@Override
-	default ScaleId getYScaleID() {
-		return IsDefaultsXYAnnotation.super.getYScaleID();
 	}
 
 	/*

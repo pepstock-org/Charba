@@ -16,12 +16,22 @@
 package org.pepstock.charba.client.annotation;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin BOX annotation DEFAULTS options.
+ * This is the {@link AnnotationPlugin#ID} plugin POLYGON annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler {
+final class DefaultPolygon implements IsDefaultsPolygonAnnotation {
+
+	// defaults options instance
+	static final DefaultPolygon INSTANCE = new DefaultPolygon();
+
+	/**
+	 * To avoid any instantiation
+	 */
+	private DefaultPolygon() {
+		// do nothing
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -29,18 +39,8 @@ interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgr
 	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
 	 */
 	@Override
-	default AnnotationType getType() {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderWidth()
-	 */
-	@Override
-	default int getBorderWidth() {
-		return BoxAnnotation.DEFAULT_BORDER_WIDTH;
+	public AnnotationType getType() {
+		return AnnotationType.POLYGON;
 	}
 
 }

@@ -28,7 +28,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefaultsBoxAnnotation, HasBackgroundColor, HasBorderRadius {
+public final class BoxAnnotation extends AbstractAnnotation implements IsDefaultsBoxAnnotation, HasBackgroundColor, HasBorderRadius {
 
 	/**
 	 * Default box annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -124,7 +124,7 @@ public final class BoxAnnotation extends AbstractXYAnnotation implements IsDefau
 	 * @param defaultValues default options instance
 	 */
 	BoxAnnotation(NativeObject nativeObject, IsDefaultsAnnotation defaultValues) {
-		super(AnnotationType.BOX, nativeObject, defaultValues);
+		super(nativeObject, defaultValues);
 		// checks if default are of the right class
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsBoxAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
 		// casts and stores it

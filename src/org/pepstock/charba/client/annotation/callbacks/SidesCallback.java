@@ -13,34 +13,19 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.annotation;
+package org.pepstock.charba.client.annotation.callbacks;
+
+import org.pepstock.charba.client.annotation.AnnotationContext;
+import org.pepstock.charba.client.annotation.AnnotationPlugin;
+import org.pepstock.charba.client.annotation.PolygonAnnotation;
+import org.pepstock.charba.client.callbacks.Scriptable;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin BOX annotation DEFAULTS options.
+ * Callback interface of {@link AnnotationPlugin#ID} plugin to set <code>sides</code> property at runtime, to {@link PolygonAnnotation}.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler {
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
-	 */
-	@Override
-	default AnnotationType getType() {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderWidth()
-	 */
-	@Override
-	default int getBorderWidth() {
-		return BoxAnnotation.DEFAULT_BORDER_WIDTH;
-	}
+public interface SidesCallback extends Scriptable<Integer, AnnotationContext> {
 
 }
