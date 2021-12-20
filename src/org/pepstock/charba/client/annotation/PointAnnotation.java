@@ -165,8 +165,8 @@ public final class PointAnnotation extends AbstractPointedAnnotation implements 
 		this.defaultValues = (IsDefaultsPointAnnotation) getDefaultsValues();
 		// creates point style handler
 		this.pointStyleHandler = new InternalPointStyleHandler(this, this.defaultValues, getNativeObject());
-		// sets function to proxy callback in order to invoke the java interface
-		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(new AnnotationContext(this, context), getPointStyleCallback(), this.defaultValues.getPointStyle()));
+		// init callbacks
+		initPointCallbacks();
 	}
 
 	/**
@@ -183,8 +183,19 @@ public final class PointAnnotation extends AbstractPointedAnnotation implements 
 		this.defaultValues = (IsDefaultsPointAnnotation) getDefaultsValues();
 		// creates point style handler
 		this.pointStyleHandler = new InternalPointStyleHandler(this, this.defaultValues, getNativeObject());
+		// init callbacks
+		initPointCallbacks();
+	}
+
+	/**
+	 * Initializes the callbacks proxies for the options which can be scriptable.
+	 */
+	private void initPointCallbacks() {
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(new AnnotationContext(this, context), getPointStyleCallback(), this.defaultValues.getPointStyle()));
+		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(new AnnotationContext(this, context), getPointStyleCallback()));
 	}
 
 	/*
@@ -283,7 +294,7 @@ public final class PointAnnotation extends AbstractPointedAnnotation implements 
 	 * @param defaultValue default point style value
 	 * @return a object property value, as {@link PointStyle} or {@link Img}
 	 */
-	final Object onPointStyle(AnnotationContext context, PointStyleCallback<AnnotationContext> callback, PointStyle defaultValue) {
+	final Object onPointStyle(AnnotationContext context, PointStyleCallback<AnnotationContext> callback) {
 		// gets value
 		Object result = ScriptableUtils.getOptionValue(context, callback);
 		// checks result
@@ -298,10 +309,8 @@ public final class PointAnnotation extends AbstractPointedAnnotation implements 
 			// is canvas element instance
 			return result;
 		}
-		// checks defaults
-		Checker.checkIfValid(defaultValue, "Default point style argument");
 		// default result
-		return defaultValue.value();
+		return defaultValues.getPointStyle().value();
 	}
 
 	/**
