@@ -28,6 +28,7 @@ import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.Undefined;
@@ -172,6 +173,19 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	}
 
 	/**
+	 * Sets the canvas to display in label.
+	 * 
+	 * @param content the canvas to display in label
+	 */
+	default void setContent(Canvas content) {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			// stores value
+			getLabelHandler().setContent(content);
+		}
+	}
+
+	/**
 	 * Returns the text to display in label as list.
 	 * 
 	 * @return the text to display in label as list
@@ -201,6 +215,22 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 		// if here, handler is not consistent
 		// then returns the default
 		return Undefined.IMAGE_ELEMENT;
+	}
+
+	/**
+	 * Returns the text to display in label as {@link Canvas}.
+	 * 
+	 * @return the text to display in label as {@link Canvas}
+	 */
+	@Override
+	default Canvas getContentAsCanvas() {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			return getLabelHandler().getContentAsCanvas();
+		}
+		// if here, handler is not consistent
+		// then returns the default
+		return Undefined.CANVAS_ELEMENT;
 	}
 
 	/**

@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
-import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.BorderDashCallback;
@@ -190,24 +189,6 @@ interface IsDefaultsLineLabel extends IsDefaultsLabelHandler, IsDefaultsBackgrou
 	 * @return the callback called to set the anchor position of label on line
 	 */
 	default LabelPositionCallback getPositionCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the padding of label to add left and right.
-	 * 
-	 * @return the callback called to set the padding of label to add left and right
-	 */
-	default PaddingSizeCallback getXPaddingCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the padding of label to add top and bottom.
-	 * 
-	 * @return the callback called to set the padding of label to add top and bottom
-	 */
-	default PaddingSizeCallback getYPaddingCallback() {
 		return null;
 	}
 

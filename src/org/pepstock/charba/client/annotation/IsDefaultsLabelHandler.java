@@ -26,6 +26,7 @@ import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.Undefined;
@@ -69,12 +70,21 @@ interface IsDefaultsLabelHandler {
 	}
 
 	/**
-	 * Returns the text to display in label as list.
+	 * Returns the text to display in label as {@link Img}.
 	 * 
-	 * @return the text to display in label as list
+	 * @return the text to display in label as {@link Img}
 	 */
 	default Img getContentAsImage() {
 		return Undefined.IMAGE_ELEMENT;
+	}
+
+	/**
+	 * Returns the text to display in label as {@link Canvas}.
+	 * 
+	 * @return the text to display in label as {@link Canvas}
+	 */
+	default Canvas getContentAsCanvas() {
+		return Undefined.CANVAS_ELEMENT;
 	}
 
 	/**

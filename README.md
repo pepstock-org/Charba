@@ -296,7 +296,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `pointStyle` and `rotation` properties to `PointAnnotation` options.
  * add new `PolygonAnnotation` class in order to draw a polygon.
  * add point positioning by box options for `PointAnnotation` class.
-   
+ * enable to set a content by `Canvas` instance to `LineLabel` options.
+    
 License
 -------
 

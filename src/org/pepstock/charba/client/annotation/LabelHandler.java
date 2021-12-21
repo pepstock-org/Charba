@@ -40,6 +40,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.commons.PropertyHandler;
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.PaddingItem;
@@ -54,8 +55,8 @@ import org.pepstock.charba.client.utils.Window;
  */
 final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 
-	// internal padding default
-	static final PaddingItem PADDING = new PaddingItem(6);
+	// internal padding default using line label default
+	static final PaddingItem PADDING = new PaddingItem(LineLabel.DEFAULT_PADDING);
 
 	/**
 	 * Name of properties of native object.
@@ -211,15 +212,6 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	}
 
 	/**
-	 * Returns <code>true</code> if the content is set by an {@link Img}.
-	 * 
-	 * @return <code>true</code> if the content is set by an {@link Img}
-	 */
-	boolean isContentAsImage() {
-		return isType(Property.CONTENT, ObjectType.OBJECT);
-	}
-
-	/**
 	 * Sets the text to display in label.<br>
 	 * Provide a list to display values on a new line.
 	 * 
@@ -265,21 +257,15 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	}
 
 	/**
-	 * Returns the text to display in label as list.
+	 * Sets the canvas to display in label.
 	 * 
-	 * @return the text to display in label as list
+	 * @param content the canvas to display in label
 	 */
-	List<String> getContent() {
-		// checks if the context is a string or array (not an image of function for callback)
-		if (!isContentAsImage() && !isType(Property.CONTENT, ObjectType.FUNCTION)) {
-			// reads as array
-			// and returns it
-			ArrayString array = getValueOrArray(Property.CONTENT, Undefined.STRING);
-			return ArrayListHelper.list(array);
-		}
-		// if here the content is an image
-		// then returns an empty list
-		return Collections.emptyList();
+	void setContent(Canvas content) {
+		// resets callback
+		setContent((ContentCallback) null);
+		// stores the value
+		setValueAndAddToParent(Property.CONTENT, content);
 	}
 
 	/**
@@ -287,14 +273,57 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 * 
 	 * @return the text to display in label as list
 	 */
+	List<String> getContent() {
+		// gets type
+		ContentType type = ContentType.get(this);
+		// checks if the context is a string or array
+		if (ContentType.ARRAY.equals(type) || ContentType.STRING.equals(type)) {
+			// reads as array
+			// and returns it
+			ArrayString array = getValueOrArray(Property.CONTENT, Undefined.STRING);
+			return ArrayListHelper.list(array);
+		}
+		// if here the content is not a text
+		// then returns an empty list
+		return Collections.emptyList();
+	}
+
+	/**
+	 * Returns the text to display in label as {@link Img}.
+	 * 
+	 * @return the text to display in label as {@link Img}
+	 */
 	Img getContentAsImage() {
-		// checks if the context is a image (not an image of function for callback)
-		if (isContentAsImage() && !isType(Property.CONTENT, ObjectType.FUNCTION)) {
+		// gets type
+		ContentType type = ContentType.get(this);
+		// checks if the context is a string or array
+		if (ContentType.IMAGE.equals(type)) {
+			// reads as image
+			// and returns it
 			return getValue(Property.CONTENT, Undefined.IMAGE_ELEMENT);
 		}
 		// if here, the content is not an image
 		// then returns the undefined image
 		return Undefined.IMAGE_ELEMENT;
+	}
+
+	/**
+	 * Returns the text to display in label as {@link Canvas}.
+	 * 
+	 * @return the text to display in label as {@link Canvas}
+	 */
+	Canvas getContentAsCanvas() {
+		// gets type
+		ContentType type = ContentType.get(this);
+		// checks if the context is a string or array
+		if (ContentType.CANVAS.equals(type)) {
+			// reads as image
+			// and returns it
+			return getValue(Property.CONTENT, Undefined.CANVAS_ELEMENT);
+		}
+		// if here, the content is not an canvas
+		// then returns the undefined canvas
+		return Undefined.CANVAS_ELEMENT;
 	}
 
 	/**
@@ -653,7 +682,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// gets value
 		Object result = ScriptableUtils.getOptionValue(context, getContentCallback());
 		// checks if consistent
-		if (result instanceof String || result instanceof Img) {
+		if (result instanceof String || result instanceof Img || result instanceof Canvas) {
 			// returns the string or the image
 			return result;
 		} else if (result instanceof List<?>) {
@@ -733,6 +762,46 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// if here the result is null
 		// then returns the default
 		return defaultValue.value();
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private enum ContentType
+	{
+		STRING,
+		ARRAY,
+		IMAGE,
+		CANVAS,
+		CALLBACK;
+
+		/**
+		 * FIXME
+		 * 
+		 * @param object
+		 * @return
+		 */
+		private static ContentType get(LabelHandler object) {
+			// checks if is a image
+			if (JsHelper.get().isImage(object, Property.CONTENT)) {
+				return IMAGE;
+			} else if (JsHelper.get().isCanvas(object, Property.CONTENT)) {
+				// checks if is a canvas
+				return CANVAS;
+			} else if (object.isType(Property.CONTENT, ObjectType.ARRAY)) {
+				// checks if is an array
+				return ARRAY;
+			} else if (object.isType(Property.CONTENT, ObjectType.FUNCTION)) {
+				// checks if is a callback
+				return CALLBACK;
+			}
+			// if here, can be only a string or undefined
+			return STRING;
+		}
+
 	}
 
 }
