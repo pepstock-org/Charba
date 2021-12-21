@@ -16,8 +16,11 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.defaults.IsDefaultFont;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
+import org.pepstock.charba.client.defaults.globals.DefaultPadding;
 import org.pepstock.charba.client.defaults.globals.DefaultRoutedFont;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.TextAlign;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin LABEL of LINE annotation DEFAULTS options.
@@ -31,6 +34,8 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	static final DefaultLineLabel INSTANCE = new DefaultLineLabel();
 	// default font instance
 	private final IsDefaultFont font = new InternalFont();
+	// default padding instance
+	private final IsDefaultPadding padding = new DefaultPadding(LineLabel.DEFAULT_PADDING);
 
 	/**
 	 * To avoid any instantiation
@@ -49,6 +54,16 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 		return font;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsLabelHandler#getPadding()
+	 */
+	@Override
+	public IsDefaultPadding getPadding() {
+		return padding;
+	}
+
 	/**
 	 * Returns the radius of label rectangle.
 	 * 
@@ -57,6 +72,26 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	@Override
 	public int getBorderRadius() {
 		return LineLabel.DEFAULT_BORDER_RADIUS;
+	}
+
+	/**
+	 * Returns the font color of text as string.
+	 * 
+	 * @return the font color of text
+	 */
+	@Override
+	public String getColorAsString() {
+		return LineLabel.DEFAULT_FONT_COLOR_AS_STRING;
+	}
+
+	/**
+	 * Returns the horizontal alignment of the label text.
+	 * 
+	 * @return the horizontal alignment of the label text
+	 */
+	@Override
+	public TextAlign getTextAlign() {
+		return LineLabel.DEFAULT_TEXT_ALIGN;
 	}
 
 	/**

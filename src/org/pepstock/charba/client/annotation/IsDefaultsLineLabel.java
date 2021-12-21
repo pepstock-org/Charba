@@ -19,8 +19,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
-import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
-import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.PaddingSizeCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
@@ -30,17 +28,11 @@ import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.CapStyleCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
-import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
-import org.pepstock.charba.client.defaults.IsDefaultFont;
-import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.items.Undefined;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin LABEL of LINE annotation DEFAULTS options.
@@ -48,14 +40,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler {
-
-	/**
-	 * Returns the font element.
-	 * 
-	 * @return the font element.
-	 */
-	IsDefaultFont getFont();
+interface IsDefaultsLineLabel extends IsDefaultsLabelHandler, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler {
 
 	/**
 	 * Returns <code>true</code> whether the label should be displayed.
@@ -73,33 +58,6 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler, IsDefaul
 	 */
 	default DrawTime getDrawTime() {
 		return AnnotationOptions.DEFAULT_DRAW_TIME;
-	}
-
-	/**
-	 * Returns the font color of text as string.
-	 * 
-	 * @return the font color of text
-	 */
-	default String getColorAsString() {
-		return LineLabel.DEFAULT_FONT_COLOR_AS_STRING;
-	}
-
-	/**
-	 * Returns the padding of label to add left and right.
-	 * 
-	 * @return the padding of label to add left and right
-	 */
-	default int getXPadding() {
-		return LineLabel.DEFAULT_X_PADDING;
-	}
-
-	/**
-	 * Returns the padding of label to add top and bottom.
-	 * 
-	 * @return the padding of label to add top and bottom
-	 */
-	default int getYPadding() {
-		return LineLabel.DEFAULT_Y_PADDING;
 	}
 
 	/**
@@ -141,57 +99,12 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler, IsDefaul
 	}
 
 	/**
-	 * Returns the horizontal alignment of the label text.
-	 * 
-	 * @return the horizontal alignment of the label text
-	 */
-	default TextAlign getTextAlign() {
-		return LineLabel.DEFAULT_TEXT_ALIGN;
-	}
-
-	/**
 	 * Returns <code>true</code> whether the rotation of label must calculates automatically.
 	 * 
 	 * @return <code>true</code> whether the rotation of label must calculates automatically
 	 */
 	default boolean isAutoRotation() {
 		return false;
-	}
-
-	/**
-	 * Returns the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn.
-	 * 
-	 * @return the height of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
-	 */
-	default int getImageHeight() {
-		return Undefined.INTEGER;
-	}
-
-	/**
-	 * Returns the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
-	 * 
-	 * @return the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
-	 */
-	default String getImageHeightAsPercentage() {
-		return null;
-	}
-
-	/**
-	 * Returns the width of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn.
-	 * 
-	 * @return the width of label content, when is set as {@link Img}, in pixels in order to scale the image when drawn
-	 */
-	default int getImageWidth() {
-		return Undefined.INTEGER;
-	}
-
-	/**
-	 * Returns the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
-	 * 
-	 * @return the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
-	 */
-	default String getImageWidthAsPercentage() {
-		return null;
 	}
 
 	/**
@@ -254,24 +167,6 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler, IsDefaul
 	// ----------------
 
 	/**
-	 * Returns the callback called to set the color of the text of label.
-	 * 
-	 * @return the callback called to set the color of the text of label
-	 */
-	default ColorCallback<AnnotationContext> getColorCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the text to display in label as list.
-	 * 
-	 * @return the callback called to set the text to display in label as list
-	 */
-	default ContentCallback getContentCallback() {
-		return null;
-	}
-
-	/**
 	 * Returns the callback called to set whether the label should be displayed.
 	 * 
 	 * @return the callback called to set whether the label should be displayed
@@ -286,24 +181,6 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler, IsDefaul
 	 * @return the callback called to set the rotation of label in degrees
 	 */
 	default RotationCallback<AnnotationContext> getRotationCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
-	 * 
-	 * @return the callback called to set the height of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
-	 */
-	default ImageSizeCallback getImageHeightCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn.
-	 * 
-	 * @return the callback called to set the width of label content, when is set as {@link Img}, in percentage (format is "{n}%") in order to scale the image when drawn
-	 */
-	default ImageSizeCallback getImageWidthCallback() {
 		return null;
 	}
 
@@ -349,24 +226,6 @@ interface IsDefaultsLineLabel extends IsDefaultsBackgroundColorHandler, IsDefaul
 	 * @return the callback called to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative)
 	 */
 	default AdjustSizeCallback getYAdjustCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the horizontal alignment of the label text.
-	 * 
-	 * @return the callback called to set the horizontal alignment of the label text
-	 */
-	default TextAlignCallback<AnnotationContext> getTextAlignCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the font callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the font callback, if set, otherwise <code>null</code>.
-	 */
-	default FontCallback<AnnotationContext> getFontCallback() {
 		return null;
 	}
 

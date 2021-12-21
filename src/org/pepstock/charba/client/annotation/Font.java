@@ -18,9 +18,10 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.options.AbstractScriptableFont;
+import org.pepstock.charba.client.options.IsScriptableFontProvider;
 
 /**
- * Base object to map font options for {@link AnnotationPlugin#ID} plugin LINE LABEL configuration.
+ * Base object to map font options for {@link AnnotationPlugin#ID} plugin for label configuration.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -33,7 +34,7 @@ public final class Font extends AbstractScriptableFont<AnnotationContext> {
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Font(LineLabel parent, IsDefaultFont defaultValues, NativeObject nativeObject) {
+	Font(IsScriptableFontProvider<AnnotationContext> parent, IsDefaultFont defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
 	}
 
