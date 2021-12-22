@@ -48,7 +48,7 @@ import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Window;
 
 /**
- * Base object to map the common labels options.
+ * Manages the common labels options among the annotations and labels.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -108,7 +108,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	private final CallbackProxy<ProxyObjectCallback> imageWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text align function
 	private final CallbackProxy<ProxyStringCallback> textAlignCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the xPadding function
+	// callback proxy to invoke the padding function
 	private final CallbackProxy<ProxyNativeObjectCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the content function
 	private final CallbackProxy<ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
@@ -765,7 +765,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	}
 
 	/**
-	 * FIXME
+	 * Enumerates the types of the content option of the label.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -779,22 +779,22 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		CALLBACK;
 
 		/**
-		 * FIXME
+		 * Returns the content type reading the content property.
 		 * 
-		 * @param object
-		 * @return
+		 * @param handler the label handler to use to get the content
+		 * @return the content type of the content option
 		 */
-		private static ContentType get(LabelHandler object) {
+		private static ContentType get(LabelHandler handler) {
 			// checks if is a image
-			if (JsHelper.get().isImage(object, Property.CONTENT)) {
+			if (JsHelper.get().isImage(handler, Property.CONTENT)) {
 				return IMAGE;
-			} else if (JsHelper.get().isCanvas(object, Property.CONTENT)) {
+			} else if (JsHelper.get().isCanvas(handler, Property.CONTENT)) {
 				// checks if is a canvas
 				return CANVAS;
-			} else if (object.isType(Property.CONTENT, ObjectType.ARRAY)) {
+			} else if (handler.isType(Property.CONTENT, ObjectType.ARRAY)) {
 				// checks if is an array
 				return ARRAY;
-			} else if (object.isType(Property.CONTENT, ObjectType.FUNCTION)) {
+			} else if (handler.isType(Property.CONTENT, ObjectType.FUNCTION)) {
 				// checks if is a callback
 				return CALLBACK;
 			}

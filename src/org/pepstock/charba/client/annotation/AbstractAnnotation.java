@@ -398,12 +398,12 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		setDrawTime((DrawTimeCallback) null);
 		// stores value
 		setValue(AnnotationOptions.Property.DRAW_TIME, drawTime);
-		// checks if is line annotations to propagate to the label
-		if (this instanceof LineAnnotation) {
+		// checks if is an annotations with the label to propagate to the label
+		if (this instanceof IsLabelContainer) {
 			// casts
-			LineAnnotation line = (LineAnnotation) this;
+			IsLabelContainer<?> labelContainer = (IsLabelContainer<?>) this;
 			// stores the parent draw time
-			line.getLabel().setParentDrawTime(drawTime);
+			labelContainer.getLabel().setParentDrawTime(drawTime);
 		}
 	}
 

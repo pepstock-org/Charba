@@ -18,15 +18,12 @@ package org.pepstock.charba.client.annotation;
 import java.util.Collections;
 import java.util.List;
 
-import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
-import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.BorderDashCallback;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.CapStyleCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
@@ -39,25 +36,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsLineLabel extends IsDefaultsLabelHandler, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler {
-
-	/**
-	 * Returns <code>true</code> whether the label should be displayed.
-	 * 
-	 * @return <code>true</code> whether the label should be displayed
-	 */
-	default boolean isDisplay() {
-		return LineLabel.DEFAULT_DISPLAY;
-	}
-
-	/**
-	 * Returns the draw time which defines when the annotations are drawn.
-	 * 
-	 * @return the draw time which defines when the annotations are drawn
-	 */
-	default DrawTime getDrawTime() {
-		return AnnotationOptions.DEFAULT_DRAW_TIME;
-	}
+interface IsDefaultsLineLabel extends IsDefaultsInnerLabel, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler {
 
 	/**
 	 * Returns the anchor position of label on line.
@@ -66,26 +45,6 @@ interface IsDefaultsLineLabel extends IsDefaultsLabelHandler, IsDefaultsBackgrou
 	 */
 	default LabelPosition getPosition() {
 		return LineLabel.DEFAULT_POSITION;
-	}
-
-	/**
-	 * Returns the adjustment along x-axis (left-right) of label relative to above number (can be negative).<br>
-	 * For horizontal lines positioned left or right, negative values move the label toward the edge, and positive values toward the center.
-	 * 
-	 * @return the adjustment along x-axis (left-right) of label
-	 */
-	default double getXAdjust() {
-		return LineLabel.DEFAULT_X_ADJUST;
-	}
-
-	/**
-	 * Returns the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).<br>
-	 * For vertical lines positioned top or bottom, negative values move the label toward the edge, and positive values toward the center.
-	 * 
-	 * @return the adjustment along y-axis (top-bottom) of label
-	 */
-	default double getYAdjust() {
-		return LineLabel.DEFAULT_Y_ADJUST;
 	}
 
 	/**
@@ -166,15 +125,6 @@ interface IsDefaultsLineLabel extends IsDefaultsLabelHandler, IsDefaultsBackgrou
 	// ----------------
 
 	/**
-	 * Returns the callback called to set whether the label should be displayed.
-	 * 
-	 * @return the callback called to set whether the label should be displayed
-	 */
-	default DisplayCallback<AnnotationContext> getDisplayCallback() {
-		return null;
-	}
-
-	/**
 	 * Returns the callback called to set the rotation of label in degrees.
 	 * 
 	 * @return the callback called to set the rotation of label in degrees
@@ -189,24 +139,6 @@ interface IsDefaultsLineLabel extends IsDefaultsLabelHandler, IsDefaultsBackgrou
 	 * @return the callback called to set the anchor position of label on line
 	 */
 	default LabelPositionCallback getPositionCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the adjustment along x-axis (left-right) of label relative to above number (can be negative).
-	 * 
-	 * @return the callback called to set the adjustment along x-axis (left-right) of label relative to above number (can be negative)
-	 */
-	default AdjustSizeCallback getXAdjustCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).
-	 * 
-	 * @return the callback called to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative)
-	 */
-	default AdjustSizeCallback getYAdjustCallback() {
 		return null;
 	}
 

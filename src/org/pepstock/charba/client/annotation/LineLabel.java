@@ -17,21 +17,17 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.List;
 
-import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
-import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.BorderDashCallback;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.CapStyleCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
@@ -43,7 +39,6 @@ import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -65,7 +60,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LineLabel extends AbstractNode implements HasLabel, IsDefaultsLineLabel, HasBackgroundColor, HasBorderRadius {
+public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, HasBackgroundColor, HasBorderRadius {
 
 	/**
 	 * Constant to use to set AUTO rotation of the label, to use in the rotation callback.
@@ -181,15 +176,9 @@ public final class LineLabel extends AbstractNode implements HasLabel, IsDefault
 		BORDER_DASH_OFFSET("borderDashOffset"),
 		BORDER_JOIN_STYLE("borderJoinStyle"),
 		BORDER_WIDTH("borderWidth"),
-		// even if in the JS plugin the options is called "enabled"
-		// we think that "display" is more coherent with the scope of the option
-		// and then Charba use "display" in the method
-		ENABLED("enabled"),
 		// -
 		POSITION("position"),
-		ROTATION("rotation"),
-		X_ADJUST("xAdjust"),
-		Y_ADJUST("yAdjust");
+		ROTATION("rotation");
 
 		// name value of property
 		private final String value;
@@ -230,16 +219,10 @@ public final class LineLabel extends AbstractNode implements HasLabel, IsDefault
 	private final CallbackProxy<ProxyStringCallback> borderCapStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border join style function
 	private final CallbackProxy<ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the display function
-	private final CallbackProxy<ProxyBooleanCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the rotation function
 	private final CallbackProxy<ProxyObjectCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the position function
 	private final CallbackProxy<ProxyStringCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the xAdjust function
-	private final CallbackProxy<ProxyDoubleCallback> xAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the yAdjust function
-	private final CallbackProxy<ProxyDoubleCallback> yAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle border color options
 	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> BORDER_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_COLOR);
@@ -253,29 +236,19 @@ public final class LineLabel extends AbstractNode implements HasLabel, IsDefault
 	private static final CallbackPropertyHandler<CapStyleCallback<AnnotationContext>> BORDER_CAP_STYLE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_CAP_STYLE);
 	// callback instance to handle border join style options
 	private static final CallbackPropertyHandler<JoinStyleCallback<AnnotationContext>> BORDER_JOIN_STYLE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_JOIN_STYLE);
-	// callback instance to handle display options
-	private static final CallbackPropertyHandler<DisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
 	// callback instance to handle rotation options
 	private static final CallbackPropertyHandler<RotationCallback<AnnotationContext>> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
 	// callback instance to handle position options
 	private static final CallbackPropertyHandler<LabelPositionCallback> POSITION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.POSITION);
-	// callback instance to handle xAdjust options
-	private static final CallbackPropertyHandler<AdjustSizeCallback> X_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_ADJUST);
-	// callback instance to handle yAdjustg options
-	private static final CallbackPropertyHandler<AdjustSizeCallback> Y_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_ADJUST);
 
 	// line annotation parent instance
 	private final LineAnnotation parent;
 	// defaults options
 	private final IsDefaultsLineLabel defaultValues;
-	// label handler
-	private final LabelHandler labelHandler;
 	// background color handler
 	private final BackgroundColorHandler backgroundColorHandler;
 	// border radius handler
 	private final BorderRadiusHandler borderRadiusHandler;
-	// draw time instance of the parent
-	private DrawTime parentDrawTime = null;
 
 	/**
 	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
@@ -295,33 +268,23 @@ public final class LineLabel extends AbstractNode implements HasLabel, IsDefault
 	 * @param defaultValues default options instance
 	 */
 	LineLabel(LineAnnotation parent, NativeObject nativeObject, IsDefaultsLineLabel defaultValues) {
-		super(nativeObject);
+		super(parent, nativeObject, defaultValues);
 		// stores line annotation parent
 		this.parent = parent;
 		// checks if default value is consistent
 		// stores default options
-		this.defaultValues = checkDefaultValuesArgument(defaultValues);
-		// stores incremental ID
-		setNewIncrementalId();
+		this.defaultValues = defaultValues;
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this.parent, this.defaultValues, getNativeObject(), DEFAULT_BACKGROUND_COLOR_AS_STRING);
 		// creates border radius handler
 		this.borderRadiusHandler = new BorderRadiusHandler(this.parent, this.defaultValues, getNativeObject());
-		// creates label handler
-		this.labelHandler = new LabelHandler(this.parent, this, this.defaultValues, getNativeObject());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.displayCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getDisplayCallback(), defaultValues.isDisplay()));
-		// sets function to proxy callback in order to invoke the java interface
 		this.rotationCallbackProxy.setCallback(context -> onRotation(new AnnotationContext(this.parent, context), defaultValues.getRotation()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.positionCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(new AnnotationContext(this.parent, context), getPositionCallback(), getPosition()).value());
-		// sets function to proxy callback in order to invoke the java interface
-		this.xAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getXAdjustCallback(), defaultValues.getXAdjust()).doubleValue());
-		// sets function to proxy callback in order to invoke the java interface
-		this.yAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getYAdjustCallback(), defaultValues.getYAdjust()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this.parent, context), getBorderColorCallback(), defaultValues.getBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
@@ -358,38 +321,6 @@ public final class LineLabel extends AbstractNode implements HasLabel, IsDefault
 		return borderRadiusHandler;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.HasLabel#getLabelHandler()
-	 */
-	@Override
-	public LabelHandler getLabelHandler() {
-		return labelHandler;
-	}
-
-	/**
-	 * Sets <code>true</code> whether the label should be displayed.
-	 * 
-	 * @param display <code>true</code> whether the label should be displayed
-	 */
-	public void setDisplay(boolean display) {
-		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.ENABLED, display);
-	}
-
-	/**
-	 * Returns <code>true</code> whether the label should be displayed.
-	 * 
-	 * @return <code>true</code> whether the label should be displayed
-	 */
-	@Override
-	public boolean isDisplay() {
-		return getValue(Property.ENABLED, defaultValues.isDisplay());
-	}
-
 	/**
 	 * Sets the anchor position of label on line.
 	 * 
@@ -410,54 +341,6 @@ public final class LineLabel extends AbstractNode implements HasLabel, IsDefault
 	@Override
 	public LabelPosition getPosition() {
 		return getValue(Property.POSITION, LabelPosition.values(), defaultValues.getPosition());
-	}
-
-	/**
-	 * Sets the adjustment along x-axis (left-right) of label relative to above number (can be negative).<br>
-	 * For horizontal lines positioned left or right, negative values move the label toward the edge, and positive values toward the center.
-	 * 
-	 * @param xAdjust the adjustment along x-axis (left-right) of label
-	 */
-	public void setXAdjust(double xAdjust) {
-		// resets callback
-		setXAdjust((AdjustSizeCallback) null);
-		// stores value
-		setValue(Property.X_ADJUST, xAdjust);
-	}
-
-	/**
-	 * Returns the adjustment along x-axis (left-right) of label relative to above number (can be negative).<br>
-	 * For horizontal lines positioned left or right, negative values move the label toward the edge, and positive values toward the center.
-	 * 
-	 * @return the adjustment along x-axis (left-right) of label
-	 */
-	@Override
-	public double getXAdjust() {
-		return getValue(Property.X_ADJUST, defaultValues.getXAdjust());
-	}
-
-	/**
-	 * Sets the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).<br>
-	 * For vertical lines positioned top or bottom, negative values move the label toward the edge, and positive values toward the center.
-	 * 
-	 * @param yAdjust the adjustment along y-axis (top-bottom) of label
-	 */
-	public void setYAdjust(double yAdjust) {
-		// resets callback
-		setYAdjust((AdjustSizeCallback) null);
-		// stores value
-		setValue(Property.Y_ADJUST, yAdjust);
-	}
-
-	/**
-	 * Returns the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).<br>
-	 * For vertical lines positioned top or bottom, negative values move the label toward the edge, and positive values toward the center.
-	 * 
-	 * @return the adjustment along y-axis (top-bottom) of label
-	 */
-	@Override
-	public double getYAdjust() {
-		return getValue(Property.Y_ADJUST, defaultValues.getYAdjust());
 	}
 
 	/**
@@ -508,35 +391,6 @@ public final class LineLabel extends AbstractNode implements HasLabel, IsDefault
 	@Override
 	public boolean isAutoRotation() {
 		return isType(Property.ROTATION, ObjectType.STRING);
-	}
-
-	/**
-	 * Sets the draw time defined as default in the options from the parent.
-	 * 
-	 * @param parentDrawTime the draw time defined as default in the options from the parent
-	 */
-	void setParentDrawTime(DrawTime parentDrawTime) {
-		this.parentDrawTime = parentDrawTime;
-	}
-
-	/**
-	 * Sets the draw time which defines when the annotations are drawn.
-	 * 
-	 * @param drawTime the draw time which defines when the annotations are drawn
-	 */
-	public void setDrawTime(DrawTime drawTime) {
-		// stores value
-		setValue(AnnotationOptions.Property.DRAW_TIME, drawTime);
-	}
-
-	/**
-	 * Returns the draw time which defines when the annotations are drawn.
-	 * 
-	 * @return the draw time which defines when the annotations are drawn
-	 */
-	@Override
-	public DrawTime getDrawTime() {
-		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), parentDrawTime != null ? parentDrawTime : defaultValues.getDrawTime());
 	}
 
 	/**
@@ -698,37 +552,6 @@ public final class LineLabel extends AbstractNode implements HasLabel, IsDefault
 	// ---------------------
 
 	/**
-	 * Returns the callback called to set whether the label should be displayed.
-	 * 
-	 * @return the callback called to set whether the label should be displayed
-	 */
-	@Override
-	public DisplayCallback<AnnotationContext> getDisplayCallback() {
-		return DISPLAY_PROPERTY_HANDLER.getCallback(this, defaultValues.getDisplayCallback());
-	}
-
-	/**
-	 * Sets the callback to set whether the label should be displayed.
-	 * 
-	 * @param displayCallback to set whether the label should be displayed
-	 */
-	public void setDisplay(DisplayCallback<AnnotationContext> displayCallback) {
-		DISPLAY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set whether the label should be displayed.
-	 * 
-	 * @param displayCallback to set whether the label should be displayed
-	 */
-	public void setDisplay(NativeCallback displayCallback) {
-		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>) null);
-		// stores values
-		setValueAndAddToParent(Property.ENABLED, displayCallback);
-	}
-
-	/**
 	 * Returns the callback called to set the rotation of label in degrees.
 	 * 
 	 * @return the callback called to set the rotation of label in degrees
@@ -788,68 +611,6 @@ public final class LineLabel extends AbstractNode implements HasLabel, IsDefault
 		setPosition((LabelPositionCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.POSITION, positionCallback);
-	}
-
-	/**
-	 * Returns the callback called to set the adjustment along x-axis (left-right) of label relative to above number (can be negative).
-	 * 
-	 * @return the callback called to set the adjustment along x-axis (left-right) of label relative to above number (can be negative)
-	 */
-	@Override
-	public AdjustSizeCallback getXAdjustCallback() {
-		return X_ADJUST_PROPERTY_HANDLER.getCallback(this, defaultValues.getXAdjustCallback());
-	}
-
-	/**
-	 * Sets the callback to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).
-	 * 
-	 * @param adjustCallback to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative)
-	 */
-	public void setXAdjust(AdjustSizeCallback adjustCallback) {
-		X_ADJUST_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustCallback, xAdjustCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).
-	 * 
-	 * @param adjustCallback to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative)
-	 */
-	public void setXAdjust(NativeCallback adjustCallback) {
-		// resets callback
-		setXAdjust((AdjustSizeCallback) null);
-		// stores values
-		setValueAndAddToParent(Property.X_ADJUST, adjustCallback);
-	}
-
-	/**
-	 * Returns the callback called to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).
-	 * 
-	 * @return the callback called to set the adjustment along y-axis (top-bottom) of label relative to above number (can be negative)
-	 */
-	@Override
-	public AdjustSizeCallback getYAdjustCallback() {
-		return Y_ADJUST_PROPERTY_HANDLER.getCallback(this, defaultValues.getYAdjustCallback());
-	}
-
-	/**
-	 * Sets the callback to set the adjustment along x-axis (left-right) of label relative to above number (can be negative).
-	 * 
-	 * @param adjustCallback to set the adjustment along x-axis (left-right) of label relative to above number (can be negative)
-	 */
-	public void setYAdjust(AdjustSizeCallback adjustCallback) {
-		Y_ADJUST_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustCallback, yAdjustCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the adjustment along x-axis (left-right) of label relative to above number (can be negative).
-	 * 
-	 * @param adjustCallback to set the adjustment along x-axis (left-right) of label relative to above number (can be negative)
-	 */
-	public void setYAdjust(NativeCallback adjustCallback) {
-		// resets callback
-		setYAdjust((AdjustSizeCallback) null);
-		// stores values
-		setValueAndAddToParent(Property.Y_ADJUST, adjustCallback);
 	}
 
 	/**

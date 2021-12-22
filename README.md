@@ -293,7 +293,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import CHART.JS ANNOTATION plugin version [v1.2.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.2.1).
  * import LUXON library version [v2.2.0](https://github.com/moment/luxon/releases/tag/2.2.0).
  * add `clip` property to annotation options.
- * add `pointStyle` and `rotation` properties to `PointAnnotation` options.
+ * add `pointStyle`, `rotation`, `xAdjust` and `yAdjust` properties to `PointAnnotation` options.
  * add new `PolygonAnnotation` class in order to draw a polygon.
  * add point positioning by box options for `PointAnnotation` class.
  * enable to set a content by `Canvas` instance to `LineLabel` options.

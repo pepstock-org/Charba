@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.globals.DefaultPadding;
@@ -92,6 +93,48 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	@Override
 	public TextAlign getTextAlign() {
 		return LineLabel.DEFAULT_TEXT_ALIGN;
+	}
+
+	/**
+	 * Returns <code>true</code> whether the label should be displayed.
+	 * 
+	 * @return <code>true</code> whether the label should be displayed
+	 */
+	@Override
+	public boolean isDisplay() {
+		return LineLabel.DEFAULT_DISPLAY;
+	}
+
+	/**
+	 * Returns the draw time which defines when the annotations are drawn.
+	 * 
+	 * @return the draw time which defines when the annotations are drawn
+	 */
+	@Override
+	public DrawTime getDrawTime() {
+		return AnnotationOptions.DEFAULT_DRAW_TIME;
+	}
+
+	/**
+	 * Returns the adjustment along x-axis (left-right) of label relative to above number (can be negative).<br>
+	 * For horizontal lines positioned left or right, negative values move the label toward the edge, and positive values toward the center.
+	 * 
+	 * @return the adjustment along x-axis (left-right) of label
+	 */
+	@Override
+	public double getXAdjust() {
+		return LineLabel.DEFAULT_X_ADJUST;
+	}
+
+	/**
+	 * Returns the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).<br>
+	 * For vertical lines positioned top or bottom, negative values move the label toward the edge, and positive values toward the center.
+	 * 
+	 * @return the adjustment along y-axis (top-bottom) of label
+	 */
+	@Override
+	public double getYAdjust() {
+		return LineLabel.DEFAULT_Y_ADJUST;
 	}
 
 	/**

@@ -37,7 +37,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LineAnnotation extends AbstractAnnotation implements IsDefaultsLineAnnotation {
+public final class LineAnnotation extends AbstractAnnotation implements IsDefaultsLineAnnotation, IsLabelContainer<LineLabel> {
 
 	/**
 	 * Default line annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
