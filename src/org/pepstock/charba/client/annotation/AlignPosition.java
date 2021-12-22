@@ -133,7 +133,7 @@ public final class AlignPosition extends AbstractNode implements IsDefaultsAlign
 	 * @param position the anchor position of label on horizontal dimension
 	 */
 	public void setX(LabelPosition position) {
-		setValue(Property.X, position);
+		setValueAndAddToParent(Property.X, position);
 	}
 
 	/**
@@ -142,7 +142,7 @@ public final class AlignPosition extends AbstractNode implements IsDefaultsAlign
 	 * @param position the anchor position of label on vertical dimension
 	 */
 	public void setY(LabelPosition position) {
-		setValue(Property.Y, position);
+		setValueAndAddToParent(Property.Y, position);
 	}
 
 	/**
@@ -151,7 +151,7 @@ public final class AlignPosition extends AbstractNode implements IsDefaultsAlign
 	 * @param percentage the position of label by the percentage (value between 0 and 1) of the horizontal dimension
 	 */
 	public void setXAsPercentage(double percentage) {
-		setValue(Property.X, LabelPosition.getAsPercentage(percentage));
+		setValueAndAddToParent(Property.X, LabelPosition.getAsPercentage(percentage));
 	}
 
 	/**
@@ -160,7 +160,7 @@ public final class AlignPosition extends AbstractNode implements IsDefaultsAlign
 	 * @param percentage the position of label by the percentage (value between 0 and 1) of the vertical dimension
 	 */
 	public void setYAsPercentage(double percentage) {
-		setValue(Property.Y, LabelPosition.getAsPercentage(percentage));
+		setValueAndAddToParent(Property.Y, LabelPosition.getAsPercentage(percentage));
 	}
 
 	/**
