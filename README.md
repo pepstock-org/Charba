@@ -297,7 +297,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add new `PolygonAnnotation` class in order to draw a polygon.
  * add point positioning by box options for `PointAnnotation` class.
  * enable to set a content by `Canvas` instance to `LineLabel` options.
-    
+ * enable to set the `position` of the `LineLabel` options as percentage of the line dimension.
+ 
 License
 -------
 

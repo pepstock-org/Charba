@@ -29,6 +29,7 @@ import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin LABEL of LINE annotation DEFAULTS options.
@@ -45,6 +46,15 @@ interface IsDefaultsLineLabel extends IsDefaultsInnerLabel, IsDefaultsBackground
 	 */
 	default LabelPosition getPosition() {
 		return LineLabel.DEFAULT_POSITION;
+	}
+
+	/**
+	 * Returns the position of label on line by the percentage (value between 0 and 1) of the line dimension.
+	 * 
+	 * @return the position of label on line by the percentage (value between 0 and 1) of the line dimension
+	 */
+	default double getPositionAsPercentage() {
+		return Undefined.DOUBLE;
 	}
 
 	/**

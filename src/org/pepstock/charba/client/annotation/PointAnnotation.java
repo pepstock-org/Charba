@@ -195,7 +195,7 @@ public final class PointAnnotation extends AbstractPointedAnnotation implements 
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(new AnnotationContext(this, context), getPointStyleCallback()));
+		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(new AnnotationContext(this, context), getPointStyleCallback(), getPointStyle()));
 	}
 
 	/*
@@ -287,14 +287,14 @@ public final class PointAnnotation extends AbstractPointedAnnotation implements 
 	// ---------------------
 
 	/**
-	 * Returns a {@link PointStyle} or {@link Img} when the callback has been activated.
+	 * Returns a {@link PointStyle}, {@link Img} or {@link Canvas} when the callback has been activated.
 	 * 
 	 * @param context native object as context.
 	 * @param callback callback instance to be invoked
 	 * @param defaultValue default point style value
-	 * @return a object property value, as {@link PointStyle} or {@link Img}
+	 * @return a object property value, as {@link PointStyle}, {@link Img} or {@link Canvas}
 	 */
-	final Object onPointStyle(AnnotationContext context, PointStyleCallback<AnnotationContext> callback) {
+	final Object onPointStyle(AnnotationContext context, PointStyleCallback<AnnotationContext> callback, PointStyle defaultValue) {
 		// gets value
 		Object result = ScriptableUtils.getOptionValue(context, callback);
 		// checks result
@@ -310,7 +310,7 @@ public final class PointAnnotation extends AbstractPointedAnnotation implements 
 			return result;
 		}
 		// default result
-		return defaultValues.getPointStyle().value();
+		return defaultValue.value();
 	}
 
 	/**

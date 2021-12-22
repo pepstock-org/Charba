@@ -18,7 +18,6 @@ package org.pepstock.charba.client.annotation.callbacks;
 import org.pepstock.charba.client.annotation.AnnotationContext;
 import org.pepstock.charba.client.annotation.AnnotationPlugin;
 import org.pepstock.charba.client.annotation.LineLabel;
-import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.Scriptable;
 
 /**
@@ -27,6 +26,6 @@ import org.pepstock.charba.client.callbacks.Scriptable;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface LabelPositionCallback extends Scriptable<LabelPosition, AnnotationContext> {
+public interface LabelPositionCallback extends Scriptable<Object, AnnotationContext> {
 
 }

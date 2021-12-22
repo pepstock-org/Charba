@@ -44,6 +44,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -53,6 +54,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Implements a <b>LABEL</b> to apply on a LINE annotation.
@@ -164,6 +166,9 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 
 	// auto rotation
 	private static final String AUTO_ROTATION_AS_STRING = "auto";
+
+	// percentage position
+	private static final String PERCENTAGE_TEMPLATE = "{0}%";
 
 	/**
 	 * Name of properties of native object.
@@ -284,7 +289,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		// sets function to proxy callback in order to invoke the java interface
 		this.rotationCallbackProxy.setCallback(context -> onRotation(new AnnotationContext(this.parent, context), defaultValues.getRotation()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.positionCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(new AnnotationContext(this.parent, context), getPositionCallback(), getPosition()).value());
+		this.positionCallbackProxy.setCallback(context -> onPosition(new AnnotationContext(this.parent, context), getPosition()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this.parent, context), getBorderColorCallback(), defaultValues.getBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
@@ -341,6 +346,37 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	@Override
 	public LabelPosition getPosition() {
 		return getValue(Property.POSITION, LabelPosition.values(), defaultValues.getPosition());
+	}
+
+	/**
+	 * Sets the position of label on line by the percentage (value between 0 and 1) of the line dimension.
+	 * 
+	 * @param percentage the position of label on line by the percentage (value between 0 and 1) of the line dimension
+	 */
+	public void setPositionAsPercentage(double percentage) {
+		// resets callback
+		setPosition((LabelPositionCallback) null);
+		// stores value
+		setValue(Property.POSITION, Utilities.applyTemplate(PERCENTAGE_TEMPLATE, Checker.betweenOrDefault(percentage, 0, 1, 0.5) * 100));
+	}
+
+	/**
+	 * Returns the position of label on line by the percentage (value between 0 and 1) of the line dimension.
+	 * 
+	 * @return the position of label on line by the percentage (value between 0 and 1) of the line dimension
+	 */
+	@Override
+	public double getPositionAsPercentage() {
+		// gets value
+		String value = getValue(Property.POSITION, Undefined.STRING);
+		// checks if stored as percentage
+		if (value != null && value.endsWith(Constants.PERCENT)) {
+			// reads the percentage
+			String doubleValue = value.substring(0, value.indexOf(Constants.PERCENT));
+			// returns as double divided by 100
+			return Double.parseDouble(doubleValue) / 100;
+		}
+		return Undefined.DOUBLE;
 	}
 
 	/**
@@ -832,6 +868,34 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		// if here the result is null
 		// then returns the default
 		return defaultValue;
+	}
+
+	/**
+	 * Returns an object as string when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param defaultValue default value to apply if callback returns an inconsistent value
+	 * @return an object as string
+	 */
+	private String onPosition(AnnotationContext context, LabelPosition defaultValue) {
+		// gets value
+		Object result = ScriptableUtils.getOptionValue(context, getPositionCallback(), defaultValue);
+		// checks if consistent
+		if (result instanceof LabelPosition) {
+			// casts
+			LabelPosition position = (LabelPosition) result;
+			// returns the string
+			return position.value();
+		} else if (result instanceof Number) {
+			// is a percentage
+			// casts
+			Number number = (Number) result;
+			// returns the double value
+			return Utilities.applyTemplate(PERCENTAGE_TEMPLATE, Checker.betweenOrDefault(number.doubleValue(), 0, 1, 0.5) * 100);
+		}
+		// if here the result is null
+		// then returns the default
+		return defaultValue.value();
 	}
 
 	/**
