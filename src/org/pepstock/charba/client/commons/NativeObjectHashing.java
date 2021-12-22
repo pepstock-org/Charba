@@ -24,7 +24,7 @@ package org.pepstock.charba.client.commons;
 final class NativeObjectHashing {
 
 	// property name used by GWT to store hashcode
-	private static final String HASH_CODE_PROPERTY = "$H";
+	static final String HASH_CODE_PROPERTY = "$H";
 
 	/**
 	 * To avoid any instantiation

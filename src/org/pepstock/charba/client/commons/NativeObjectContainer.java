@@ -177,8 +177,11 @@ public abstract class NativeObjectContainer {
 		List<Key> keys = new ArrayList<>();
 		// scans all properties names of object
 		for (String key : NativeObjectUtils.propertiesKeys(nativeObject)) {
-			// adds a key object by name of the property
-			keys.add(Key.create(key));
+			// checks to avoid the hash number
+			if (!key.equals(NativeObjectHashing.HASH_CODE_PROPERTY)) {
+				// adds a key object by name of the property
+				keys.add(Key.create(key));
+			}
 		}
 		return keys;
 	}
