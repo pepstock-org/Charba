@@ -122,7 +122,7 @@ public final class AlignPosition extends AbstractNode implements IsDefaultsAlign
 	 * @param defaultValues default values instance
 	 */
 	AlignPosition(AbstractNode parent, Key childKey, NativeObject nativeObject, IsDefaultsAlignPosition defaultValues) {
-		super(nativeObject);
+		super(parent, childKey, nativeObject);
 		// checks and stores default
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
 	}

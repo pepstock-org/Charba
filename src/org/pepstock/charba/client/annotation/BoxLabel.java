@@ -216,31 +216,31 @@ public final class BoxLabel extends InnerLabel implements IsDefaultsBoxLabel {
 	 */
 	private NativeObject onPosition(AnnotationContext context) {
 		// prepares the result
-		AlignPosition position = null;
+		AlignPosition resultPosition = null;
 		// gets value
 		Object result = ScriptableUtils.getOptionValue(context, getPositionCallback());
 		// checks if consistent
 		if (result instanceof AlignPosition) {
 			// casts
-			position = (AlignPosition) result;
+			resultPosition = (AlignPosition) result;
 		} else if (result instanceof LabelPosition) {
 			// casts
 			LabelPosition labelPosition = (LabelPosition) result;
 			// create align position
-			position = new AlignPosition(labelPosition);
+			resultPosition = new AlignPosition(labelPosition);
 		} else if (result instanceof Number) {
 			// is a percentage
 			// casts
 			Number number = (Number) result;
 			// create align position
-			position = new AlignPosition(number.doubleValue());
+			resultPosition = new AlignPosition(number.doubleValue());
 		} else {
 			// if here the result is not consistent
 			// then returns the default
-			position = new AlignPosition();
+			resultPosition = new AlignPosition();
 		}
 		// returns the object
-		return position.nativeObject();
+		return resultPosition.nativeObject();
 	}
 
 }
