@@ -351,28 +351,6 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 	}
 
 	/**
-	 * Sets the adjustment along x-axis (left-right) of annotation relative to above number (can be negative).
-	 * 
-	 * @param xAdjust the adjustment along x-axis (left-right) of annotation
-	 */
-	public final void setXAdjust(double xAdjust) {
-		// resets callback
-		setXAdjust((AdjustSizeCallback) null);
-		// stores value
-		setValue(Property.X_ADJUST, xAdjust);
-	}
-
-	/**
-	 * Returns the adjustment along x-axis (left-right) of annotation relative to above number (can be negative).
-	 * 
-	 * @return the adjustment along x-axis (left-right) of annotation
-	 */
-	@Override
-	public final double getXAdjust() {
-		return getValue(Property.X_ADJUST, defaultValues.getXAdjust());
-	}
-
-	/**
 	 * Sets the adjustment along y-axis (top-bottom) of annotation relative to above number (can be negative).
 	 * 
 	 * @param yAdjust the adjustment along y-axis (top-bottom) of annotation
@@ -392,6 +370,28 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 	@Override
 	public final double getYAdjust() {
 		return getValue(Property.Y_ADJUST, defaultValues.getYAdjust());
+	}
+
+	/**
+	 * Sets the adjustment along x-axis (left-right) of annotation relative to above number (can be negative).
+	 * 
+	 * @param xAdjust the adjustment along x-axis (left-right) of annotation
+	 */
+	public final void setXAdjust(double xAdjust) {
+		// resets callback
+		setXAdjust((AdjustSizeCallback) null);
+		// stores value
+		setValue(Property.X_ADJUST, xAdjust);
+	}
+
+	/**
+	 * Returns the adjustment along x-axis (left-right) of annotation relative to above number (can be negative).
+	 * 
+	 * @return the adjustment along x-axis (left-right) of annotation
+	 */
+	@Override
+	public final double getXAdjust() {
+		return getValue(Property.X_ADJUST, defaultValues.getXAdjust());
 	}
 
 	/**
@@ -546,6 +546,37 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 	}
 
 	/**
+	 * Returns the callback called to set the adjustment along y-axis (top-bottom) of annotation relative to above number (can be negative).
+	 * 
+	 * @return the callback called to set the adjustment along y-axis (top-bottom) of annotation relative to above number (can be negative)
+	 */
+	@Override
+	public final AdjustSizeCallback getYAdjustCallback() {
+		return Y_ADJUST_PROPERTY_HANDLER.getCallback(this, defaultValues.getYAdjustCallback());
+	}
+
+	/**
+	 * Sets the callback to set the adjustment along x-axis (left-right) of annotation relative to above number (can be negative).
+	 * 
+	 * @param adjustCallback to set the adjustment along x-axis (left-right) of annotation relative to above number (can be negative)
+	 */
+	public final void setYAdjust(AdjustSizeCallback adjustCallback) {
+		Y_ADJUST_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustCallback, yAdjustCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the adjustment along x-axis (left-right) of annotation relative to above number (can be negative).
+	 * 
+	 * @param adjustCallback to set the adjustment along x-axis (left-right) of annotation relative to above number (can be negative)
+	 */
+	public final void setYAdjust(NativeCallback adjustCallback) {
+		// resets callback
+		setYAdjust((AdjustSizeCallback) null);
+		// stores values
+		setValue(Property.Y_ADJUST, adjustCallback);
+	}
+
+	/**
 	 * Returns the callback called to set the adjustment along x-axis (left-right) of annotation relative to above number (can be negative).
 	 * 
 	 * @return the callback called to set the adjustment along x-axis (left-right) of annotation relative to above number (can be negative)
@@ -576,34 +607,4 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 		setValue(Property.X_ADJUST, adjustCallback);
 	}
 
-	/**
-	 * Returns the callback called to set the adjustment along y-axis (top-bottom) of annotation relative to above number (can be negative).
-	 * 
-	 * @return the callback called to set the adjustment along y-axis (top-bottom) of annotation relative to above number (can be negative)
-	 */
-	@Override
-	public final AdjustSizeCallback getYAdjustCallback() {
-		return Y_ADJUST_PROPERTY_HANDLER.getCallback(this, defaultValues.getYAdjustCallback());
-	}
-
-	/**
-	 * Sets the callback to set the adjustment along x-axis (left-right) of annotation relative to above number (can be negative).
-	 * 
-	 * @param adjustCallback to set the adjustment along x-axis (left-right) of annotation relative to above number (can be negative)
-	 */
-	public final void setYAdjust(AdjustSizeCallback adjustCallback) {
-		Y_ADJUST_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, adjustCallback, yAdjustCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the adjustment along x-axis (left-right) of annotation relative to above number (can be negative).
-	 * 
-	 * @param adjustCallback to set the adjustment along x-axis (left-right) of annotation relative to above number (can be negative)
-	 */
-	public final void setYAdjust(NativeCallback adjustCallback) {
-		// resets callback
-		setYAdjust((AdjustSizeCallback) null);
-		// stores values
-		setValue(Property.Y_ADJUST, adjustCallback);
-	}
 }
