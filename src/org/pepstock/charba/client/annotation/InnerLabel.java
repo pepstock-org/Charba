@@ -91,7 +91,7 @@ abstract class InnerLabel extends AbstractNode implements HasLabel, IsDefaultsIn
 	private static final CallbackPropertyHandler<AdjustSizeCallback> Y_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_ADJUST);
 
 	// line annotation parent instance
-	private final LineAnnotation parent;
+	private final AbstractAnnotation parent;
 	// defaults options
 	private final IsDefaultsInnerLabel defaultValues;
 	// label handler
@@ -106,7 +106,7 @@ abstract class InnerLabel extends AbstractNode implements HasLabel, IsDefaultsIn
 	 * @param nativeObject native object to wrap, with all properties of a label
 	 * @param defaultValues default options instance
 	 */
-	InnerLabel(LineAnnotation parent, NativeObject nativeObject, IsDefaultsInnerLabel defaultValues) {
+	InnerLabel(AbstractAnnotation parent, NativeObject nativeObject, IsDefaultsInnerLabel defaultValues) {
 		super(nativeObject);
 		// stores line annotation parent
 		this.parent = parent;

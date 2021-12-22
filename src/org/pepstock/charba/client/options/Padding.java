@@ -86,7 +86,7 @@ public final class Padding extends AbstractNode implements IsPadding {
 		if (Undefined.isNot(originalPadding)) {
 			// stores the values to all dimensions
 			set(originalPadding);
-		} else if (nativeObject != null) {
+		} else if (nativeObject != null && !keys().isEmpty()) {
 			// checks if the padding was stored as object with X and Y
 			// this could happen in the default of chart.js
 			// normalizes for X

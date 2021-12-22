@@ -151,8 +151,18 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		Checker.assertCheck(labelContainer != null, "Label container is not consistent");
 		// gets font
 		this.font = new Font(labelContainer, this.defaultValues.getFont(), getValue(Property.FONT));
+		// checks if it must be added
+		if (!has(Property.FONT)) {
+			// stores instance
+			setValue(Property.FONT, font);
+		}
 		// creates padding
 		this.padding = new Padding(labelContainer, this.defaultValues.getPadding(), getValue(Property.PADDING));
+		// checks if it must be added
+		if (!has(Property.PADDING)) {
+			// stores instance
+			setValue(Property.PADDING, padding);
+		}
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -675,7 +685,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	/**
 	 * Returns an object as string, array of string or {@link Img} when the callback has been activated.
 	 * 
-	 * @param context native object as context.
+	 * @param context annotation context instance.
 	 * @return an object as string, array of string or {@link Img}
 	 */
 	private Object onContent(AnnotationContext context) {
@@ -710,7 +720,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	/**
 	 * Returns an object as string or double when the callback has been activated.
 	 * 
-	 * @param context native object as context.
+	 * @param context annotation context instance.
 	 * @param callback image size callback instance
 	 * @param defaultValue default value to apply if callback returns an inconsistent value
 	 * @param defaultvalueAsPercentage default value to apply if callback returns an inconsistent value and also the previous default value is not consistent
@@ -747,7 +757,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	/**
 	 * Returns an object as string when the callback has been activated.
 	 * 
-	 * @param context native object as context.
+	 * @param context annotation context instance.
 	 * @param defaultValue default value to apply if callback returns an inconsistent value
 	 * @return an object as string
 	 */

@@ -1365,7 +1365,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	/**
 	 * Returns an array of integer when the callback has been activated.
 	 * 
-	 * @param context native object as context.
+	 * @param context annotation context instance
 	 * @param borderDashCallback border dash callback instance
 	 * @param defaultValue default value of options
 	 * @return an array of integer
@@ -1385,7 +1385,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	/**
 	 * Returns an object as double, string or date (as time) when the callback has been activated.
 	 * 
-	 * @param context native object as context.
+	 * @param context annotation context instance.
 	 * @param valueCallback border dash callback instance
 	 * @return an object as double, string or date
 	 */

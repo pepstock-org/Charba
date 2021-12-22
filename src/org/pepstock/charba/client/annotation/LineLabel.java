@@ -44,17 +44,15 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Implements a <b>LABEL</b> to apply on a LINE annotation.
@@ -85,9 +83,9 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	public static final String DEFAULT_BACKGROUND_COLOR_AS_STRING = DEFAULT_BACKGROUND_COLOR.toRGBA();
 
 	/**
-	 * Default line label font style, <b>{@link FontStyle#BOLD}</b>.
+	 * Default line label font weight, <b>{@link Weight#BOLD}</b>.
 	 */
-	public static final FontStyle DEFAULT_FONT_STYLE = FontStyle.BOLD;
+	public static final Weight DEFAULT_FONT_WEIGHT = Weight.BOLD;
 
 	/**
 	 * Default line label text color, <b>{@link HtmlColor#WHITE}</b>.
@@ -166,9 +164,6 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 
 	// auto rotation
 	private static final String AUTO_ROTATION_AS_STRING = "auto";
-
-	// percentage position
-	private static final String PERCENTAGE_TEMPLATE = "{0}%";
 
 	/**
 	 * Name of properties of native object.
@@ -357,7 +352,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		// resets callback
 		setPosition((LabelPositionCallback) null);
 		// stores value
-		setValue(Property.POSITION, Utilities.applyTemplate(PERCENTAGE_TEMPLATE, Checker.betweenOrDefault(percentage, 0, 1, 0.5) * 100));
+		setValue(Property.POSITION, LabelPosition.getAsPercentage(percentage));
 	}
 
 	/**
@@ -367,16 +362,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	 */
 	@Override
 	public double getPositionAsPercentage() {
-		// gets value
-		String value = getValue(Property.POSITION, Undefined.STRING);
-		// checks if stored as percentage
-		if (value != null && value.endsWith(Constants.PERCENT)) {
-			// reads the percentage
-			String doubleValue = value.substring(0, value.indexOf(Constants.PERCENT));
-			// returns as double divided by 100
-			return Double.parseDouble(doubleValue) / 100;
-		}
-		return Undefined.DOUBLE;
+		return LabelPosition.getAsPercentage(getValue(Property.POSITION, Undefined.STRING), defaultValues.getPositionAsPercentage());
 	}
 
 	/**
@@ -848,7 +834,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	/**
 	 * Returns an object as string or double when the callback has been activated.
 	 * 
-	 * @param context native object as context.
+	 * @param context annotation context instance.
 	 * @param defaultValue default value to apply if callback returns an inconsistent value
 	 * @return an object as string or double
 	 */
@@ -873,7 +859,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	/**
 	 * Returns an object as string when the callback has been activated.
 	 * 
-	 * @param context native object as context.
+	 * @param context annotation context instance.
 	 * @param defaultValue default value to apply if callback returns an inconsistent value
 	 * @return an object as string
 	 */
@@ -891,7 +877,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 			// casts
 			Number number = (Number) result;
 			// returns the double value
-			return Utilities.applyTemplate(PERCENTAGE_TEMPLATE, Checker.betweenOrDefault(number.doubleValue(), 0, 1, 0.5) * 100);
+			return LabelPosition.getAsPercentage(number.doubleValue());
 		}
 		// if here the result is null
 		// then returns the default
@@ -901,7 +887,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	/**
 	 * Returns a {@link CapStyle} when the callback has been activated.
 	 * 
-	 * @param context native object as context.
+	 * @param context annotation context instance.
 	 * @param callback border cap style callback instance
 	 * @param defaultValue default value of cap style
 	 * @return a object property value, as {@link CapStyle}
@@ -913,7 +899,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	/**
 	 * Returns a {@link JoinStyle} when the callback has been activated.
 	 * 
-	 * @param context native object as context.
+	 * @param context annotation context instance.
 	 * @param callback border join style callback instance
 	 * @param defaultValue default value of join style
 	 * @return a object property value, as {@link JoinStyle}

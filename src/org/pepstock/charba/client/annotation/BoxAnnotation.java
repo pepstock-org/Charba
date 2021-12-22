@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -28,7 +29,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BoxAnnotation extends AbstractAnnotation implements IsDefaultsBoxAnnotation, HasBackgroundColor, HasBorderRadius {
+public final class BoxAnnotation extends AbstractAnnotation implements IsDefaultsBoxAnnotation, IsLabelContainer<BoxLabel>, HasBackgroundColor, HasBorderRadius {
 
 	/**
 	 * Default box annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -40,12 +41,45 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 */
 	public static final int DEFAULT_BORDER_RADIUS = 0;
 
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		LABEL("label");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
 	// defaults options
 	private final IsDefaultsBoxAnnotation defaultValues;
 	// background color handler
 	private final BackgroundColorHandler backgroundColorHandler;
 	// border radius handler
 	private final BorderRadiusHandler borderRadiusHandler;
+	// label for box instance
+	private final BoxLabel label;
 
 	/**
 	 * Creates a box annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -111,6 +145,10 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsBoxAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
+		// creates a line label
+		this.label = new BoxLabel(this, this.defaultValues.getLabel());
+		// stores in the annotation
+		setValue(Property.LABEL, label);
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// creates border radius handler
@@ -129,6 +167,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsBoxAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
+		// creates a line label
+		this.label = new BoxLabel(this, this.defaultValues.getLabel());
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// creates border radius handler
@@ -153,6 +193,16 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	@Override
 	public BorderRadiusHandler getBorderRadiusHandler() {
 		return borderRadiusHandler;
+	}
+
+	/**
+	 * Returns the label on the line.
+	 * 
+	 * @return the label on the line
+	 */
+	@Override
+	public BoxLabel getLabel() {
+		return label;
 	}
 
 	/**

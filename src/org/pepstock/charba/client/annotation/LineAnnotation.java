@@ -163,7 +163,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		// casts and stores it
 		this.defaultValues = (IsDefaultsLineAnnotation) getDefaultsValues();
 		// creates a line label
-		label = new LineLabel(this, this.defaultValues.getLabel());
+		this.label = new LineLabel(this, this.defaultValues.getLabel());
 		// stores in the annotation
 		setValue(Property.LABEL, label);
 		// sets callbacks proxies
@@ -183,7 +183,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		// casts and stores it
 		this.defaultValues = (IsDefaultsLineAnnotation) getDefaultsValues();
 		// creates a line label
-		label = new LineLabel(this, getValue(Property.LABEL), this.defaultValues.getLabel());
+		this.label = new LineLabel(this, getValue(Property.LABEL), this.defaultValues.getLabel());
 		// sets callbacks proxies
 		initCallbacks();
 	}

@@ -24,24 +24,24 @@ import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.Weight;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin LABEL of LINE annotation DEFAULTS options.
+ * This is the {@link AnnotationPlugin#ID} plugin LABEL of BOX annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultLineLabel implements IsDefaultsLineLabel {
+final class DefaultBoxLabel implements IsDefaultsBoxLabel {
 
 	// defaults options instance
-	static final DefaultLineLabel INSTANCE = new DefaultLineLabel();
+	static final DefaultBoxLabel INSTANCE = new DefaultBoxLabel();
 	// default font instance
 	private final IsDefaultFont font = new InternalFont();
 	// default padding instance
-	private final IsDefaultPadding padding = new DefaultPadding(LineLabel.DEFAULT_PADDING);
+	private final IsDefaultPadding padding = new DefaultPadding(BoxLabel.DEFAULT_PADDING);
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private DefaultLineLabel() {
+	private DefaultBoxLabel() {
 		// do nothing
 	}
 
@@ -65,14 +65,14 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 		return padding;
 	}
 
-	/**
-	 * Returns the radius of label rectangle.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the radius of label rectangle
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBoxLabel#getPosition()
 	 */
 	@Override
-	public int getBorderRadius() {
-		return LineLabel.DEFAULT_BORDER_RADIUS;
+	public IsDefaultsAlignPosition getPosition() {
+		return DefaultAlignPosition.INSTANCE;
 	}
 
 	/**
@@ -82,7 +82,7 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	 */
 	@Override
 	public String getColorAsString() {
-		return LineLabel.DEFAULT_FONT_COLOR_AS_STRING;
+		return BoxLabel.DEFAULT_FONT_COLOR_AS_STRING;
 	}
 
 	/**
@@ -92,7 +92,7 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	 */
 	@Override
 	public TextAlign getTextAlign() {
-		return LineLabel.DEFAULT_TEXT_ALIGN;
+		return BoxLabel.DEFAULT_TEXT_ALIGN;
 	}
 
 	/**
@@ -102,7 +102,7 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	 */
 	@Override
 	public boolean isDisplay() {
-		return LineLabel.DEFAULT_DISPLAY;
+		return BoxLabel.DEFAULT_DISPLAY;
 	}
 
 	/**
@@ -123,7 +123,7 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	 */
 	@Override
 	public double getXAdjust() {
-		return LineLabel.DEFAULT_X_ADJUST;
+		return BoxLabel.DEFAULT_X_ADJUST;
 	}
 
 	/**
@@ -134,7 +134,7 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	 */
 	@Override
 	public double getYAdjust() {
-		return LineLabel.DEFAULT_Y_ADJUST;
+		return BoxLabel.DEFAULT_Y_ADJUST;
 	}
 
 	/**
@@ -152,8 +152,9 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 		 */
 		@Override
 		public Weight getWeight() {
-			return LineLabel.DEFAULT_FONT_WEIGHT;
+			return BoxLabel.DEFAULT_FONT_WEIGHT;
 		}
+
 	}
 
 }

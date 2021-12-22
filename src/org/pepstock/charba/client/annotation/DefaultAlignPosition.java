@@ -16,38 +16,21 @@
 package org.pepstock.charba.client.annotation;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin BOX annotation DEFAULTS options.
+ * This is the {@link AnnotationPlugin#ID} plugin align position DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler {
+final class DefaultAlignPosition implements IsDefaultsAlignPosition {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
-	 */
-	@Override
-	default AnnotationType getType() {
-		return null;
-	}
+	// defaults options instance
+	static final DefaultAlignPosition INSTANCE = new DefaultAlignPosition();
 
 	/**
-	 * Returns the label on the line.
-	 * 
-	 * @return the label on the line
+	 * To avoid any instantiation
 	 */
-	IsDefaultsBoxLabel getLabel();
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderWidth()
-	 */
-	@Override
-	default int getBorderWidth() {
-		return BoxAnnotation.DEFAULT_BORDER_WIDTH;
+	private DefaultAlignPosition() {
+		// do nothing
 	}
 
 }

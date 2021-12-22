@@ -43,6 +43,16 @@ final class DefaultBox implements IsDefaultsBoxAnnotation {
 		return AnnotationType.BOX;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBoxAnnotation#getLabel()
+	 */
+	@Override
+	public IsDefaultsBoxLabel getLabel() {
+		return DefaultBoxLabel.INSTANCE;
+	}
+
 	/**
 	 * Returns the border radius.
 	 * 

@@ -15,39 +15,34 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallback;
+
 /**
- * This is the {@link AnnotationPlugin#ID} plugin BOX annotation DEFAULTS options.
+ * This is the {@link AnnotationPlugin#ID} plugin LABEL of BOX annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler {
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
-	 */
-	@Override
-	default AnnotationType getType() {
-		return null;
-	}
+interface IsDefaultsBoxLabel extends IsDefaultsInnerLabel {
 
 	/**
-	 * Returns the label on the line.
+	 * Returns the anchor position of label in the box.
 	 * 
-	 * @return the label on the line
+	 * @return the anchor position of label in the box
 	 */
-	IsDefaultsBoxLabel getLabel();
+	IsDefaultsAlignPosition getPosition();
 
-	/*
-	 * (non-Javadoc)
+	// ----------------
+	// CALLBACKS
+	// ----------------
+
+	/**
+	 * Returns the callback called to set the anchor position of label in the box.
 	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderWidth()
+	 * @return the callback called to set the anchor position of label in the box
 	 */
-	@Override
-	default int getBorderWidth() {
-		return BoxAnnotation.DEFAULT_BORDER_WIDTH;
+	default LabelAlignPositionCallback getPositionCallback() {
+		return null;
 	}
 
 }

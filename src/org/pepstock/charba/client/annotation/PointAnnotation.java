@@ -289,7 +289,7 @@ public final class PointAnnotation extends AbstractPointedAnnotation implements 
 	/**
 	 * Returns a {@link PointStyle}, {@link Img} or {@link Canvas} when the callback has been activated.
 	 * 
-	 * @param context native object as context.
+	 * @param context annotation context instance.
 	 * @param callback callback instance to be invoked
 	 * @param defaultValue default point style value
 	 * @return a object property value, as {@link PointStyle}, {@link Img} or {@link Canvas}
