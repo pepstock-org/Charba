@@ -81,7 +81,7 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 		}
 		// if here, handler is not consistent
 		// then returns the default
-		return LabelHandler.PADDING;
+		return LabelHandler.INTERNAL_DEFAULT_PADDING;
 	}
 
 	/**

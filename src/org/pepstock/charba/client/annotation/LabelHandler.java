@@ -56,7 +56,7 @@ import org.pepstock.charba.client.utils.Window;
 final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 
 	// internal padding default using line label default
-	static final PaddingItem PADDING = new PaddingItem(LineLabel.DEFAULT_PADDING);
+	static final PaddingItem INTERNAL_DEFAULT_PADDING = new PaddingItem(LineLabel.DEFAULT_PADDING);
 
 	/**
 	 * Name of properties of native object.
