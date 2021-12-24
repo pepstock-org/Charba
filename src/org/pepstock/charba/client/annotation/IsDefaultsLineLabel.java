@@ -15,18 +15,11 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
-import org.pepstock.charba.client.callbacks.BorderDashCallback;
-import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.CapStyleCallback;
-import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.items.Undefined;
@@ -37,7 +30,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsLineLabel extends IsDefaultsInnerLabel, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler {
+interface IsDefaultsLineLabel extends IsDefaultsInnerLabel, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler, IsDefaultsBorderOptionsHandler {
 
 	/**
 	 * Returns the anchor position of label on line.
@@ -85,42 +78,6 @@ interface IsDefaultsLineLabel extends IsDefaultsInnerLabel, IsDefaultsBackground
 	}
 
 	/**
-	 * Returns the color of the border of annotation.
-	 * 
-	 * @return the color of the border of annotation
-	 */
-	default String getBorderColorAsString() {
-		return LineLabel.DEFAULT_BORDER_COLOR_AS_STRING;
-	}
-
-	/**
-	 * Returns the width of the border in pixels.
-	 * 
-	 * @return the width of the border in pixels.
-	 */
-	default int getBorderWidth() {
-		return LineLabel.DEFAULT_BORDER_WIDTH;
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 */
-	default List<Integer> getBorderDash() {
-		return Collections.emptyList();
-	}
-
-	/**
-	 * Returns the line dash pattern offset.
-	 * 
-	 * @return the line dash pattern offset.
-	 */
-	default double getBorderDashOffset() {
-		return LineLabel.DEFAULT_BORDER_DASH_OFFSET;
-	}
-
-	/**
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
 	 * end points and control points are exactly at the same position, are skipped).
 	 * 
@@ -149,44 +106,6 @@ interface IsDefaultsLineLabel extends IsDefaultsInnerLabel, IsDefaultsBackground
 	 * @return the callback called to set the anchor position of label on line
 	 */
 	default LabelPositionCallback getPositionCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the width of the border in pixels.
-	 * 
-	 * @return the callback called to set the width of the border in pixels
-	 */
-	default WidthCallback<AnnotationContext> getBorderWidthCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the color of the border of annotation.
-	 * 
-	 * @return the callback called to set the color of the border of annotation
-	 */
-	default ColorCallback<AnnotationContext> getBorderColorCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the line dash pattern offset.
-	 * 
-	 * @return the callback called to set the line dash pattern offset
-	 */
-	default BorderDashOffsetCallback<AnnotationContext> getBorderDashOffsetCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
-	 * describe the pattern.
-	 * 
-	 * @return the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
-	 *         describe the pattern
-	 */
-	default BorderDashCallback<AnnotationContext> getBorderDashCallback() {
 		return null;
 	}
 

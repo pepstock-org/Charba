@@ -29,16 +29,6 @@ import org.pepstock.charba.client.enums.JoinStyle;
  */
 interface IsDefaultsPolygonAnnotation extends IsDefaultsAbstractPointedAnnotation, IsDefaultsBackgroundColorHandler {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderWidth()
-	 */
-	@Override
-	default int getBorderWidth() {
-		return PolygonAnnotation.DEFAULT_BORDER_WIDTH;
-	}
-
 	/**
 	 * Returns the radius of the point.
 	 * 

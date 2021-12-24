@@ -71,9 +71,6 @@ final class BorderRadiusHandler extends PropertyHandler<IsDefaultsBorderRadiusHa
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
 	// callback proxy to invoke the border radius function
 	private final CallbackProxy<ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 

@@ -43,4 +43,13 @@ final class DefaultPolygon implements IsDefaultsPolygonAnnotation {
 		return AnnotationType.POLYGON;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBorderOptionsHandler#getBorderWidth()
+	 */
+	@Override
+	public int getBorderWidth() {
+		return PolygonAnnotation.DEFAULT_BORDER_WIDTH;
+	}
 }

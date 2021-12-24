@@ -43,4 +43,13 @@ final class DefaultEllipse implements IsDefaultsEllipseAnnotation {
 		return AnnotationType.ELLIPSE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBorderOptionsHandler#getBorderWidth()
+	 */
+	@Override
+	public int getBorderWidth() {
+		return EllipseAnnotation.DEFAULT_BORDER_WIDTH;
+	}
 }

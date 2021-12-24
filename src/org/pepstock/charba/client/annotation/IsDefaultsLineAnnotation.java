@@ -39,16 +39,6 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderWidth()
-	 */
-	@Override
-	default int getBorderWidth() {
-		return LineAnnotation.DEFAULT_BORDER_WIDTH;
-	}
-
 	/**
 	 * Returns the label on the line.
 	 * 

@@ -53,10 +53,20 @@ final class DefaultBox implements IsDefaultsBoxAnnotation {
 		return DefaultBoxLabel.INSTANCE;
 	}
 
-	/**
-	 * Returns the border radius.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the border radius.
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBoxAnnotation#getBorderWidth()
+	 */
+	@Override
+	public int getBorderWidth() {
+		return BoxAnnotation.DEFAULT_BORDER_WIDTH;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBorderRadiusHandler#getBorderRadius()
 	 */
 	@Override
 	public int getBorderRadius() {

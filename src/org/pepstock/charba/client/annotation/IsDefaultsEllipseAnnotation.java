@@ -25,16 +25,6 @@ import org.pepstock.charba.client.callbacks.RotationCallback;
  */
 interface IsDefaultsEllipseAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderWidth()
-	 */
-	@Override
-	default int getBorderWidth() {
-		return EllipseAnnotation.DEFAULT_BORDER_WIDTH;
-	}
-
 	/**
 	 * Returns the rotation of label in degrees.
 	 * 

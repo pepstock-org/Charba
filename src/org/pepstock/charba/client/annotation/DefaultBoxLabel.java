@@ -82,7 +82,7 @@ final class DefaultBoxLabel implements IsDefaultsBoxLabel {
 	 */
 	@Override
 	public String getColorAsString() {
-		return BoxLabel.DEFAULT_FONT_COLOR_AS_STRING;
+		return BoxLabel.DEFAULT_COLOR_AS_STRING;
 	}
 
 	/**

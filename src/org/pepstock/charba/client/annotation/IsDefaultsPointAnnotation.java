@@ -26,16 +26,6 @@ import org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler;
  */
 interface IsDefaultsPointAnnotation extends IsDefaultsAbstractPointedAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultPointStyleHandler {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderWidth()
-	 */
-	@Override
-	default int getBorderWidth() {
-		return PointAnnotation.DEFAULT_BORDER_WIDTH;
-	}
-
 	/**
 	 * Returns the radius of the point.
 	 * 

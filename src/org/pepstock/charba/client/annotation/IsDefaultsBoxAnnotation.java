@@ -40,14 +40,4 @@ interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgr
 	 */
 	IsDefaultsBoxLabel getLabel();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getBorderWidth()
-	 */
-	@Override
-	default int getBorderWidth() {
-		return BoxAnnotation.DEFAULT_BORDER_WIDTH;
-	}
-
 }

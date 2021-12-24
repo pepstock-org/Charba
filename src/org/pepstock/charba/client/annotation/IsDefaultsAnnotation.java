@@ -15,11 +15,8 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
@@ -28,11 +25,7 @@ import org.pepstock.charba.client.annotation.listeners.ClickCallback;
 import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
 import org.pepstock.charba.client.annotation.listeners.EnterCallback;
 import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
-import org.pepstock.charba.client.callbacks.BorderDashCallback;
-import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
-import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
-import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
@@ -43,7 +36,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsAnnotation {
+interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler {
 
 	/**
 	 * Returns the type of annotation.
@@ -77,40 +70,6 @@ interface IsDefaultsAnnotation {
 	 */
 	default DrawTime getDrawTime() {
 		return AnnotationOptions.DEFAULT_DRAW_TIME;
-	}
-
-	/**
-	 * Returns the color of the border of annotation.
-	 * 
-	 * @return the color of the border of annotation
-	 */
-	default String getBorderColorAsString() {
-		return Defaults.get().getGlobal().getBorderColorAsString();
-	}
-
-	/**
-	 * Returns the width of the border in pixels.
-	 * 
-	 * @return the width of the border in pixels.
-	 */
-	int getBorderWidth();
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern
-	 */
-	default List<Integer> getBorderDash() {
-		return Collections.emptyList();
-	}
-
-	/**
-	 * Returns the line dash pattern offset.
-	 * 
-	 * @return the line dash pattern offset
-	 */
-	default double getBorderDashOffset() {
-		return Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset();
 	}
 
 	/**
@@ -164,44 +123,6 @@ interface IsDefaultsAnnotation {
 	 * @return the callback called to set the display options
 	 */
 	default DisplayCallback<AnnotationContext> getDisplayCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the color of the border of annotation.
-	 * 
-	 * @return the callback called to set the color of the border of annotation
-	 */
-	default ColorCallback<AnnotationContext> getBorderColorCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the width of the border in pixels.
-	 * 
-	 * @return the callback called to set the width of the border in pixels
-	 */
-	default WidthCallback<AnnotationContext> getBorderWidthCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
-	 * describe the pattern.
-	 * 
-	 * @return the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
-	 *         describe the pattern
-	 */
-	default BorderDashCallback<AnnotationContext> getBorderDashCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the line dash pattern offset.
-	 * 
-	 * @return the callback called to set the line dash pattern offset
-	 */
-	default BorderDashOffsetCallback<AnnotationContext> getBorderDashOffsetCallback() {
 		return null;
 	}
 

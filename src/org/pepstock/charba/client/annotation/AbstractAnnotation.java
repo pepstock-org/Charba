@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.IsChart;
@@ -28,31 +27,16 @@ import org.pepstock.charba.client.annotation.listeners.ClickCallback;
 import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
 import org.pepstock.charba.client.annotation.listeners.EnterCallback;
 import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
-import org.pepstock.charba.client.callbacks.BorderDashCallback;
-import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
-import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerEvent;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
-import org.pepstock.charba.client.callbacks.WidthCallback;
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.Array;
-import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -69,7 +53,7 @@ import org.pepstock.charba.client.utils.Window;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractAnnotation extends AbstractNode implements IsDefaultsAnnotation {
+public abstract class AbstractAnnotation extends AbstractNode implements IsDefaultsAnnotation, HasBorderOptions {
 
 	/**
 	 * Default annotation display, <b>{@value DEFAULT_DISPLAY}</b>.
@@ -96,10 +80,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		ID("id"),
 		// options
 		ADJUST_SCALE_RANGE("adjustScaleRange"),
-		BORDER_COLOR("borderColor"),
-		BORDER_WIDTH("borderWidth"),
-		BORDER_DASH("borderDash"),
-		BORDER_DASH_OFFSET("borderDashOffset"),
 		DISPLAY("display"),
 		// events properties
 		ENTER("enter"),
@@ -146,14 +126,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	// ---------------------------
 	// callback proxy to invoke the display function
 	private final CallbackProxy<ProxyBooleanCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the border color function
-	private final CallbackProxy<ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the border width function
-	private final CallbackProxy<ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the border dash function
-	private final CallbackProxy<ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the border dash offset function
-	private final CallbackProxy<ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the draw time function
 	private final CallbackProxy<ProxyStringCallback> drawTimeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the adjust scale range function
@@ -169,14 +141,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 
 	// callback instance to handle display options
 	private static final CallbackPropertyHandler<DisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
-	// callback instance to handle border color options
-	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> BORDER_COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_COLOR);
-	// callback instance to handle border width options
-	private static final CallbackPropertyHandler<WidthCallback<AnnotationContext>> BORDER_WIDTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_WIDTH);
-	// callback instance to handle border dash options
-	private static final CallbackPropertyHandler<BorderDashCallback<AnnotationContext>> BORDER_DASH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH);
-	// callback instance to handle border dash offset options
-	private static final CallbackPropertyHandler<BorderDashOffsetCallback<AnnotationContext>> BORDER_DASH_OFFSET_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH_OFFSET);
 	// callback instance to handle draw time options
 	private static final CallbackPropertyHandler<DrawTimeCallback> DRAW_TIME_PROPERTY_HANDLER = new CallbackPropertyHandler<>(AnnotationOptions.Property.DRAW_TIME);
 	// callback instance to handle adjust scale range options
@@ -211,7 +175,10 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	// callback instance to handle dblclick event
 	private static final CallbackPropertyHandler<DoubleClickCallback> DOUBLE_CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DOUBLE_CLICK);
 
+	// default values instance
 	private final IsDefaultsAnnotation defaultValues;
+	// border options handler
+	private final BorderOptionsHandler borderOptionsHandler;
 	// draw time instance set at plugin startup
 	private DrawTime parentDrawTime = null;
 
@@ -243,15 +210,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
 		this.displayCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDisplayCallback(), defaultValues.isDisplay()));
-		// sets function to proxy callback in order to invoke the java interface
-		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(this, context), getBorderColorCallback(), defaultValues.getBorderColorAsString(), false));
-		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getBorderWidthCallback(), defaultValues.getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
-		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashCallbackProxy.setCallback(context -> onBorderDash(new AnnotationContext(this, context), getBorderDashCallback(), defaultValues.getBorderDash()));
-		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashOffsetCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.drawTimeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDrawTimeCallback(), defaultValues.getDrawTime()).value());
 		// sets function to proxy callback in order to invoke the java interface
@@ -288,6 +246,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// checks if default value is consistent
 		// stores default options
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
+		// loads handler
+		this.borderOptionsHandler = new BorderOptionsHandler(this, this.defaultValues, getNativeObject());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasBorderOptions#getBorderOptionsHandler()
+	 */
+	@Override
+	public final BorderOptionsHandler getBorderOptionsHandler() {
+		return borderOptionsHandler;
 	}
 
 	/**
@@ -415,100 +385,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	@Override
 	public final DrawTime getDrawTime() {
 		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), parentDrawTime != null ? parentDrawTime : defaultValues.getDrawTime());
-	}
-
-	/**
-	 * Sets the color of the border of annotation.
-	 * 
-	 * @param borderColor the color of the border of annotation
-	 */
-	public final void setBorderColor(IsColor borderColor) {
-		setBorderColor(IsColor.checkAndGetValue(borderColor));
-	}
-
-	/**
-	 * Sets the color of the border of annotation.
-	 * 
-	 * @param borderColor the color of the border of annotation
-	 */
-	public final void setBorderColor(String borderColor) {
-		// resets callback
-		setBorderColor((ColorCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.BORDER_COLOR, borderColor);
-	}
-
-	/**
-	 * Returns the color of the border of annotation.
-	 * 
-	 * @return the color of the border of annotation
-	 */
-	public final IsColor getBorderColor() {
-		return ColorBuilder.parse(getBorderColorAsString());
-	}
-
-	/**
-	 * Sets the width of the border in pixels.
-	 * 
-	 * @param borderWidth the width of the border in pixels.
-	 */
-	public final void setBorderWidth(int borderWidth) {
-		// resets callback
-		setBorderWidth((WidthCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
-	}
-
-	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 */
-	public final void setBorderDash(int... borderDash) {
-		// resets callback
-		setBorderDash((BorderDashCallback<AnnotationContext>) null);
-		// stores value
-		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 */
-	@Override
-	public final List<Integer> getBorderDash() {
-		// checks if there is the property
-		if (isType(Property.BORDER_DASH, ObjectType.ARRAY)) {
-			// gets the array
-			ArrayInteger array = getArrayValue(Property.BORDER_DASH);
-			// and transforms to a list
-			return ArrayListHelper.list(array);
-		}
-		// if here, the property is missing
-		return defaultValues.getBorderDash();
-	}
-
-	/**
-	 * Sets the line dash pattern offset.
-	 * 
-	 * @param borderDashOffset the line dash pattern offset.
-	 */
-	public final void setBorderDashOffset(double borderDashOffset) {
-		// resets callback
-		setBorderDashOffset((BorderDashOffsetCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
-	}
-
-	/**
-	 * Returns the line dash pattern offset.
-	 * 
-	 * @return the line dash pattern offset.
-	 */
-	@Override
-	public final double getBorderDashOffset() {
-		return getValue(Property.BORDER_DASH_OFFSET, defaultValues.getBorderDashOffset());
 	}
 
 	/**
@@ -910,136 +786,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the callback called to set the color of the border of annotation.
-	 * 
-	 * @return the callback called to set the color of the border of annotation
-	 */
-	@Override
-	public final ColorCallback<AnnotationContext> getBorderColorCallback() {
-		return BORDER_COLOR_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderColorCallback());
-	}
-
-	/**
-	 * Sets the callback to set the color of the border of annotation.
-	 * 
-	 * @param borderColorCallback to set the color of the border of annotation
-	 */
-	public final void setBorderColor(ColorCallback<AnnotationContext> borderColorCallback) {
-		BORDER_COLOR_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderColorCallback, borderColorCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the color of the border of annotation.
-	 * 
-	 * @param borderColorCallback to set the color of the border of annotation
-	 */
-	public final void setBorderColor(NativeCallback borderColorCallback) {
-		// resets callback
-		setBorderColor((ColorCallback<AnnotationContext>) null);
-		// stores values
-		setValueAndAddToParent(Property.BORDER_COLOR, borderColorCallback);
-	}
-
-	/**
-	 * Returns the callback called to set the width of the border in pixels.
-	 * 
-	 * @return the callback called to set the width of the border in pixels
-	 */
-	@Override
-	public final WidthCallback<AnnotationContext> getBorderWidthCallback() {
-		return BORDER_WIDTH_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderWidthCallback());
-	}
-
-	/**
-	 * Sets the callback to set the color of the width of the border in pixels.
-	 * 
-	 * @param borderWidthCallback to set the width of the border in pixels
-	 */
-	public final void setBorderWidth(WidthCallback<AnnotationContext> borderWidthCallback) {
-		BORDER_WIDTH_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderWidthCallback, borderWidthCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the color of the width of the border in pixels.
-	 * 
-	 * @param borderWidthCallback to set the width of the border in pixels
-	 */
-	public final void setBorderWidth(NativeCallback borderWidthCallback) {
-		// resets callback
-		setBorderWidth((WidthCallback<AnnotationContext>) null);
-		// stores values
-		setValueAndAddToParent(Property.BORDER_WIDTH, borderWidthCallback);
-	}
-
-	/**
-	 * Returns the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
-	 * describe the pattern.
-	 * 
-	 * @return the callback called to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which
-	 *         describe the pattern
-	 */
-	@Override
-	public final BorderDashCallback<AnnotationContext> getBorderDashCallback() {
-		return BORDER_DASH_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderDashCallback());
-	}
-
-	/**
-	 * Sets the callback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the
-	 * pattern.
-	 * 
-	 * @param borderDashCallback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe
-	 *            the pattern
-	 */
-	public final void setBorderDash(BorderDashCallback<AnnotationContext> borderDashCallback) {
-		BORDER_DASH_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderDashCallback, borderDashCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the
-	 * pattern.
-	 * 
-	 * @param borderDashCallback to set the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe
-	 *            the pattern
-	 */
-	public final void setBorderDash(NativeCallback borderDashCallback) {
-		// resets callback
-		setBorderDash((BorderDashCallback<AnnotationContext>) null);
-		// stores values
-		setValueAndAddToParent(Property.BORDER_DASH, borderDashCallback);
-	}
-
-	/**
-	 * Returns the callback called to set the line dash pattern offset.
-	 * 
-	 * @return the callback called to set the line dash pattern offset
-	 */
-	@Override
-	public final BorderDashOffsetCallback<AnnotationContext> getBorderDashOffsetCallback() {
-		return BORDER_DASH_OFFSET_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderDashOffsetCallback());
-	}
-
-	/**
-	 * Sets the callback to set the line dash pattern offset.
-	 * 
-	 * @param borderDashOffsetCallback to set the line dash pattern offset
-	 */
-	public final void setBorderDashOffset(BorderDashOffsetCallback<AnnotationContext> borderDashOffsetCallback) {
-		BORDER_DASH_OFFSET_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderDashOffsetCallback, borderDashOffsetCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the line dash pattern offset.
-	 * 
-	 * @param borderDashOffsetCallback to set the line dash pattern offset
-	 */
-	public final void setBorderDashOffset(NativeCallback borderDashOffsetCallback) {
-		// resets callback
-		setBorderDashOffset((BorderDashOffsetCallback<AnnotationContext>) null);
-		// stores values
-		setValueAndAddToParent(Property.BORDER_DASH_OFFSET, borderDashOffsetCallback);
-	}
-
-	/**
 	 * Returns the callback called to set whether the scale range should be adjusted if this annotation is out of range.
 	 * 
 	 * @return the callback called to set whether the scale range should be adjusted if this annotation is out of range
@@ -1360,26 +1106,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 			// invokes callback
 			dblclickCallback.onDoubleClick(chart, this, eventContext);
 		}
-	}
-
-	/**
-	 * Returns an array of integer when the callback has been activated.
-	 * 
-	 * @param context annotation context instance
-	 * @param borderDashCallback border dash callback instance
-	 * @param defaultValue default value of options
-	 * @return an array of integer
-	 */
-	final Array onBorderDash(AnnotationContext context, BorderDashCallback<AnnotationContext> borderDashCallback, List<Integer> defaultValue) {
-		// gets value
-		List<Integer> result = ScriptableUtils.getOptionValue(context, borderDashCallback);
-		// checks if consistent
-		if (result != null) {
-			// returns result of callback
-			return ArrayInteger.fromOrEmpty(result);
-		}
-		// default result
-		return ArrayInteger.fromOrEmpty(defaultValue);
 	}
 
 	/**

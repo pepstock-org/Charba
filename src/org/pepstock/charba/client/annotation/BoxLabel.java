@@ -56,7 +56,7 @@ public final class BoxLabel extends InnerLabel implements IsDefaultsBoxLabel {
 	/**
 	 * Default box label font color as string, <b>rgb(255, 255, 255)</b>.
 	 */
-	public static final String DEFAULT_FONT_COLOR_AS_STRING = DEFAULT_COLOR.toRGB();
+	public static final String DEFAULT_COLOR_AS_STRING = DEFAULT_COLOR.toRGB();
 
 	/**
 	 * Default box label padding, <b>{@value DEFAULT_PADDING}</b>.

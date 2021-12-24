@@ -53,4 +53,14 @@ final class DefaultLine implements IsDefaultsLineAnnotation {
 		return DefaultLineLabel.INSTANCE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBorderOptionsHandler#getBorderWidth()
+	 */
+	@Override
+	public int getBorderWidth() {
+		return LineAnnotation.DEFAULT_BORDER_WIDTH;
+	}
+
 }

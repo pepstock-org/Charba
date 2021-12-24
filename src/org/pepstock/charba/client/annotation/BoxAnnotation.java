@@ -205,23 +205,4 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		return label;
 	}
 
-	/**
-	 * Returns the color of the border of annotation.
-	 * 
-	 * @return the color of the border of annotation
-	 */
-	@Override
-	public final String getBorderColorAsString() {
-		return getValue(AbstractAnnotation.Property.BORDER_COLOR, defaultValues.getBorderColorAsString());
-	}
-
-	/**
-	 * Returns the width of the border in pixels.
-	 * 
-	 * @return the width of the border in pixels.
-	 */
-	@Override
-	public final int getBorderWidth() {
-		return getValue(AbstractAnnotation.Property.BORDER_WIDTH, defaultValues.getBorderWidth());
-	}
 }

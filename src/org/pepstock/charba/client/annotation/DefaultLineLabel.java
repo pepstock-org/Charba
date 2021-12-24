@@ -65,76 +65,104 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 		return padding;
 	}
 
-	/**
-	 * Returns the radius of label rectangle.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the radius of label rectangle
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBorderRadiusHandler#getBorderRadius()
 	 */
 	@Override
 	public int getBorderRadius() {
 		return LineLabel.DEFAULT_BORDER_RADIUS;
 	}
 
-	/**
-	 * Returns the font color of text as string.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the font color of text
-	 */
-	@Override
-	public String getColorAsString() {
-		return LineLabel.DEFAULT_FONT_COLOR_AS_STRING;
-	}
-
-	/**
-	 * Returns the horizontal alignment of the label text.
-	 * 
-	 * @return the horizontal alignment of the label text
-	 */
-	@Override
-	public TextAlign getTextAlign() {
-		return LineLabel.DEFAULT_TEXT_ALIGN;
-	}
-
-	/**
-	 * Returns <code>true</code> whether the label should be displayed.
-	 * 
-	 * @return <code>true</code> whether the label should be displayed
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsInnerLabel#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
 		return LineLabel.DEFAULT_DISPLAY;
 	}
 
-	/**
-	 * Returns the draw time which defines when the annotations are drawn.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the draw time which defines when the annotations are drawn
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsInnerLabel#getDrawTime()
 	 */
 	@Override
 	public DrawTime getDrawTime() {
 		return AnnotationOptions.DEFAULT_DRAW_TIME;
 	}
 
-	/**
-	 * Returns the adjustment along x-axis (left-right) of label relative to above number (can be negative).<br>
-	 * For horizontal lines positioned left or right, negative values move the label toward the edge, and positive values toward the center.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the adjustment along x-axis (left-right) of label
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsInnerLabel#getXAdjust()
 	 */
 	@Override
 	public double getXAdjust() {
 		return LineLabel.DEFAULT_X_ADJUST;
 	}
 
-	/**
-	 * Returns the adjustment along y-axis (top-bottom) of label relative to above number (can be negative).<br>
-	 * For vertical lines positioned top or bottom, negative values move the label toward the edge, and positive values toward the center.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the adjustment along y-axis (top-bottom) of label
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsInnerLabel#getYAdjust()
 	 */
 	@Override
 	public double getYAdjust() {
 		return LineLabel.DEFAULT_Y_ADJUST;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsLabelHandler#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return LineLabel.DEFAULT_COLOR_AS_STRING;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsLabelHandler#getTextAlign()
+	 */
+	@Override
+	public TextAlign getTextAlign() {
+		return LineLabel.DEFAULT_TEXT_ALIGN;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBorderOptionsHandler#getBorderWidth()
+	 */
+	@Override
+	public int getBorderWidth() {
+		return LineLabel.DEFAULT_BORDER_WIDTH;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBorderOptionsHandler#getBorderColorAsString()
+	 */
+	@Override
+	public String getBorderColorAsString() {
+		return LineLabel.DEFAULT_BORDER_COLOR_AS_STRING;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBorderOptionsHandler#getBorderDashOffset()
+	 */
+	@Override
+	public double getBorderDashOffset() {
+		return LineLabel.DEFAULT_BORDER_DASH_OFFSET;
 	}
 
 	/**

@@ -43,4 +43,13 @@ final class DefaultPoint implements IsDefaultsPointAnnotation {
 		return AnnotationType.POINT;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsBorderOptionsHandler#getBorderWidth()
+	 */
+	@Override
+	public int getBorderWidth() {
+		return PointAnnotation.DEFAULT_BORDER_WIDTH;
+	}
 }
