@@ -37,7 +37,7 @@ interface IsDefaultsBorderOptionsHandler {
 	 * @return the color of the border of annotation
 	 */
 	default String getBorderColorAsString() {
-		return Defaults.get().getGlobal().getBorderColorAsString(); // FIXME checks with defaults
+		return Defaults.get().getGlobal().getColorAsString();
 	}
 
 	/**

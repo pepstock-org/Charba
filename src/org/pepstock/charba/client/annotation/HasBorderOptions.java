@@ -75,7 +75,7 @@ interface HasBorderOptions extends IsDefaultsBorderOptionsHandler {
 		}
 		// if here, handler is not consistent
 		// uses the default
-		return Defaults.get().getGlobal().getBorderColorAsString();
+		return Defaults.get().getGlobal().getColorAsString();
 	}
 
 	/**
