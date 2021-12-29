@@ -17,11 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
-import org.pepstock.charba.client.callbacks.CapStyleCallback;
-import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -30,7 +26,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsLineLabel extends IsDefaultsInnerLabel, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler, IsDefaultsBorderOptionsHandler {
+interface IsDefaultsLineLabel extends IsDefaultsInnerLabel, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler, IsDefaultsBorderOptionsHandler, IsDefaultsExtendedBorderOptionsHandler {
 
 	/**
 	 * Returns the anchor position of label on line.
@@ -68,25 +64,6 @@ interface IsDefaultsLineLabel extends IsDefaultsInnerLabel, IsDefaultsBackground
 		return false;
 	}
 
-	/**
-	 * Returns how the end points of every line are drawn.
-	 * 
-	 * @return how the end points of every line are drawn.
-	 */
-	default CapStyle getBorderCapStyle() {
-		return LineLabel.DEFAULT_BORDER_CAP_STYLE;
-	}
-
-	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
-	 * end points and control points are exactly at the same position, are skipped).
-	 * 
-	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 */
-	default JoinStyle getBorderJoinStyle() {
-		return LineLabel.DEFAULT_BORDER_JOIN_STYLE;
-	}
-
 	// ----------------
 	// CALLBACKS
 	// ----------------
@@ -106,24 +83,6 @@ interface IsDefaultsLineLabel extends IsDefaultsInnerLabel, IsDefaultsBackground
 	 * @return the callback called to set the anchor position of label on line
 	 */
 	default LabelPositionCallback getPositionCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the border capstyle callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the border capstyle callback, if set, otherwise <code>null</code>.
-	 */
-	default CapStyleCallback<AnnotationContext> getBorderCapStyleCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the border join style callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the border join style callback, if set, otherwise <code>null</code>.
-	 */
-	default JoinStyleCallback<AnnotationContext> getBorderJoinStyleCallback() {
 		return null;
 	}
 }

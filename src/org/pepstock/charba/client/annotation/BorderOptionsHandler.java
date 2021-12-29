@@ -42,12 +42,12 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.commons.PropertyHandler;
 
 /**
- * Base object to map the border radius options.
+ * Base object to map the border options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-class BorderOptionsHandler extends PropertyHandler<IsDefaultsBorderOptionsHandler> {
+final class BorderOptionsHandler extends PropertyHandler<IsDefaultsBorderOptionsHandler> {
 
 	/**
 	 * Name of properties of native object.
@@ -105,11 +105,11 @@ class BorderOptionsHandler extends PropertyHandler<IsDefaultsBorderOptionsHandle
 	private static final CallbackPropertyHandler<BorderDashOffsetCallback<AnnotationContext>> BORDER_DASH_OFFSET_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_DASH_OFFSET);
 
 	/**
-	 * Creates a border radius handler with the native object where border radius properties must be managed and the default value to use when the property does not exist.
+	 * Creates a border options handler with the native object where border options properties must be managed and the default value to use when the property does not exist.
 	 * 
-	 * @param parent model which contains the border radius handler.
-	 * @param defaultValues default value of border radius to use when the properties do not exist
-	 * @param nativeObject native object where border radius handler properties must be managed
+	 * @param parent model which contains the border options handler.
+	 * @param defaultValues default value of border options to use when the properties do not exist
+	 * @param nativeObject native object where border options handler properties must be managed
 	 */
 	BorderOptionsHandler(AbstractAnnotation parent, IsDefaultsBorderOptionsHandler defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
@@ -117,15 +117,15 @@ class BorderOptionsHandler extends PropertyHandler<IsDefaultsBorderOptionsHandle
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(parent, context), getBorderColorCallback(), defaultValues.getBorderColorAsString(), false));
+		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(parent, context), getBorderColorCallback(), getDefaultValues().getBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderWidthCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(parent, context), getBorderWidthCallback(), defaultValues.getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(parent, context), getBorderWidthCallback(), getDefaultValues().getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashCallbackProxy.setCallback(context -> onBorderDash(new AnnotationContext(parent, context), getBorderDashCallback(), defaultValues.getBorderDash()));
+		this.borderDashCallbackProxy.setCallback(context -> onBorderDash(new AnnotationContext(parent, context), getBorderDashCallback(), getDefaultValues().getBorderDash()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashOffsetCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(parent, context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(parent, context), getBorderDashOffsetCallback(), getDefaultValues().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 	}
 
 	/**
@@ -137,7 +137,7 @@ class BorderOptionsHandler extends PropertyHandler<IsDefaultsBorderOptionsHandle
 		// resets callback
 		setBorderColor((ColorCallback<AnnotationContext>) null);
 		// stores value
-		setValue(Property.BORDER_COLOR, borderColor);
+		setValueAndAddToParent(Property.BORDER_COLOR, borderColor);
 	}
 
 	/**
@@ -158,7 +158,7 @@ class BorderOptionsHandler extends PropertyHandler<IsDefaultsBorderOptionsHandle
 		// resets callback
 		setBorderWidth((WidthCallback<AnnotationContext>) null);
 		// stores value
-		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
+		setValueAndAddToParent(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**
@@ -179,7 +179,7 @@ class BorderOptionsHandler extends PropertyHandler<IsDefaultsBorderOptionsHandle
 		// resets callback
 		setBorderDash((BorderDashCallback<AnnotationContext>) null);
 		// stores value
-		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
+		setArrayValueAndAddToParent(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
 
 	/**
@@ -208,7 +208,7 @@ class BorderOptionsHandler extends PropertyHandler<IsDefaultsBorderOptionsHandle
 		// resets callback
 		setBorderDashOffset((BorderDashOffsetCallback<AnnotationContext>) null);
 		// stores value
-		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
+		setValueAndAddToParent(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
 	/**

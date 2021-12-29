@@ -20,6 +20,8 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.globals.DefaultPadding;
 import org.pepstock.charba.client.defaults.globals.DefaultRoutedFont;
+import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.Weight;
 
@@ -163,6 +165,26 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	@Override
 	public double getBorderDashOffset() {
 		return LineLabel.DEFAULT_BORDER_DASH_OFFSET;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsExtendedBorderOptionsHandler#getBorderCapStyle()
+	 */
+	@Override
+	public CapStyle getBorderCapStyle() {
+		return LineLabel.DEFAULT_BORDER_CAP_STYLE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsExtendedBorderOptionsHandler#getBorderJoinStyle()
+	 */
+	@Override
+	public JoinStyle getBorderJoinStyle() {
+		return LineLabel.DEFAULT_BORDER_JOIN_STYLE;
 	}
 
 	/**

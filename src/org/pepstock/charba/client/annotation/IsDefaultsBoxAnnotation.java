@@ -21,7 +21,7 @@ package org.pepstock.charba.client.annotation;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler {
+interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler, IsDefaultsExtendedBorderOptionsHandler {
 
 	/*
 	 * (non-Javadoc)

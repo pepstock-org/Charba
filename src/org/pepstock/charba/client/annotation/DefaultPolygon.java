@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.JoinStyle;
+
 /**
  * This is the {@link AnnotationPlugin#ID} plugin POLYGON annotation DEFAULTS options.
  * 
@@ -52,4 +55,25 @@ final class DefaultPolygon implements IsDefaultsPolygonAnnotation {
 	public int getBorderWidth() {
 		return PolygonAnnotation.DEFAULT_BORDER_WIDTH;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsExtendedBorderOptionsHandler#getBorderCapStyle()
+	 */
+	@Override
+	public CapStyle getBorderCapStyle() {
+		return PolygonAnnotation.DEFAULT_BORDER_CAP_STYLE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsExtendedBorderOptionsHandler#getBorderJoinStyle()
+	 */
+	@Override
+	public JoinStyle getBorderJoinStyle() {
+		return PolygonAnnotation.DEFAULT_BORDER_JOIN_STYLE;
+	}
+
 }

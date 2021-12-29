@@ -102,7 +102,7 @@ final class BorderRadiusHandler extends PropertyHandler<IsDefaultsBorderRadiusHa
 		// resets callback
 		setBorderRadius((BorderRadiusCallback<AnnotationContext>) null);
 		// stores value
-		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(radius));
+		setValueAndAddToParent(Property.BORDER_RADIUS, Checker.positiveOrZero(radius));
 	}
 
 	/**
@@ -114,7 +114,7 @@ final class BorderRadiusHandler extends PropertyHandler<IsDefaultsBorderRadiusHa
 		// resets callback
 		setBorderRadius((BorderRadiusCallback<AnnotationContext>) null);
 		// stores the value
-		setValue(Property.BORDER_RADIUS, borderRadius);
+		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadius);
 	}
 
 	/**
@@ -191,7 +191,7 @@ final class BorderRadiusHandler extends PropertyHandler<IsDefaultsBorderRadiusHa
 		// resets callback
 		setBorderRadius((BorderRadiusCallback<AnnotationContext>) null);
 		// stores values
-		setValue(Property.BORDER_RADIUS, borderRadiusCallback);
+		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadiusCallback);
 	}
 
 	// ------------------------

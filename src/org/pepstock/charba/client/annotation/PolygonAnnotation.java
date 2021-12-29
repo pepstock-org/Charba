@@ -17,11 +17,8 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.SidesCallback;
-import org.pepstock.charba.client.callbacks.CapStyleCallback;
-import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -39,7 +36,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PolygonAnnotation extends AbstractPointedAnnotation implements IsDefaultsPolygonAnnotation {
+public final class PolygonAnnotation extends AbstractPointedAnnotation implements IsDefaultsPolygonAnnotation, HasExtendedBorderOptions {
 
 	/**
 	 * Default polygon annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -50,6 +47,16 @@ public final class PolygonAnnotation extends AbstractPointedAnnotation implement
 	 * Default polygon annotation radius, <b>{@value DEFAULT_RADIUS}</b>.
 	 */
 	public static final double DEFAULT_RADIUS = 10D;
+
+	/**
+	 * Default box annotation border cap style, <b>{@link CapStyle#BUTT}</b>.
+	 */
+	public static final CapStyle DEFAULT_BORDER_CAP_STYLE = CapStyle.BUTT;
+
+	/**
+	 * Default box annotation border join style, <b>{@link JoinStyle#MITER}</b>.
+	 */
+	public static final JoinStyle DEFAULT_BORDER_JOIN_STYLE = JoinStyle.MITER;
 
 	/**
 	 * Default polygon annotation sides, <b>{@value DEFAULT_SIDES}</b>.
@@ -66,8 +73,6 @@ public final class PolygonAnnotation extends AbstractPointedAnnotation implement
 	 */
 	private enum Property implements Key
 	{
-		BORDER_CAP_STYLE("borderCapStyle"),
-		BORDER_JOIN_STYLE("borderJoinStyle"),
 		SIDES("sides");
 
 		// name value of property
@@ -97,22 +102,16 @@ public final class PolygonAnnotation extends AbstractPointedAnnotation implement
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// callback proxy to invoke the capstyle function
-	private final CallbackProxy<ProxyStringCallback> capStyleCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the joinstyle function
-	private final CallbackProxy<ProxyStringCallback> joinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the sides function
 	private final CallbackProxy<ProxyIntegerCallback> sidesCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// callback instance to handle capstyle options
-	private static final CallbackPropertyHandler<CapStyleCallback<AnnotationContext>> BORDER_CAP_STYLE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_CAP_STYLE);
-	// callback instance to handle joinstyle options
-	private static final CallbackPropertyHandler<JoinStyleCallback<AnnotationContext>> BORDER_JOIN_STYLE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_JOIN_STYLE);
 	// callback instance to handle sides options
 	private static final CallbackPropertyHandler<SidesCallback> SIDES_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.SIDES);
 
 	// defaults options
 	private final IsDefaultsPolygonAnnotation defaultValues;
+	// extended border options handler
+	private final ExtendedBorderOptionsHandler extendedBorderOptionsHandler;
 
 	/**
 	 * Creates a polygon annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -180,6 +179,8 @@ public final class PolygonAnnotation extends AbstractPointedAnnotation implement
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsPolygonAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POLYGON.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsPolygonAnnotation) getDefaultsValues();
+		// creates border options handler
+		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initPolygonCallbacks();
 	}
@@ -196,6 +197,8 @@ public final class PolygonAnnotation extends AbstractPointedAnnotation implement
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsPolygonAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POLYGON.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsPolygonAnnotation) getDefaultsValues();
+		// creates border options handler
+		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initPolygonCallbacks();
 	}
@@ -208,11 +211,17 @@ public final class PolygonAnnotation extends AbstractPointedAnnotation implement
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.capStyleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getBorderCapStyleCallback(), defaultValues.getBorderCapStyle()).value());
-		// sets function to proxy callback in order to invoke the java interface
-		this.joinStyleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getBorderJoinStyleCallback(), defaultValues.getBorderJoinStyle()).value());
-		// sets function to proxy callback in order to invoke the java interface
 		this.sidesCallbackProxy.setCallback(context -> Math.max(ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getSidesCallback(), defaultValues.getSides()).intValue(), MINIMUM_SIDES));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasExtendedBorderOptions#getExtendedBorderOptionsHandler()
+	 */
+	@Override
+	public ExtendedBorderOptionsHandler getExtendedBorderOptionsHandler() {
+		return extendedBorderOptionsHandler;
 	}
 
 	/**
@@ -237,117 +246,9 @@ public final class PolygonAnnotation extends AbstractPointedAnnotation implement
 		return getValue(Property.SIDES, defaultValues.getSides());
 	}
 
-	/**
-	 * Sets how the end points of every line are drawn.
-	 * 
-	 * @param borderCapStyle how the end points of every line are drawn.
-	 */
-	public void setBorderCapStyle(CapStyle borderCapStyle) {
-		// resets callback
-		setBorderCapStyle((CapStyleCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.BORDER_CAP_STYLE, borderCapStyle);
-	}
-
-	/**
-	 * Returns how the end points of every line are drawn.
-	 * 
-	 * @return how the end points of every line are drawn.
-	 */
-	@Override
-	public CapStyle getBorderCapStyle() {
-		return getValue(Property.BORDER_CAP_STYLE, CapStyle.values(), defaultValues.getBorderCapStyle());
-	}
-
-	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
-	 * points and control points are exactly at the same position, are skipped).
-	 * 
-	 * @param borderJoinStyle how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 */
-	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
-		// resets callback
-		setBorderJoinStyle((JoinStyleCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyle);
-	}
-
-	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
-	 * end points and control points are exactly at the same position, are skipped).
-	 * 
-	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 */
-	@Override
-	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), defaultValues.getBorderJoinStyle());
-	}
-
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
-
-	/**
-	 * Returns the callback called to set the border capstyle.
-	 * 
-	 * @return the callback called to set the border capstyle
-	 */
-	@Override
-	public CapStyleCallback<AnnotationContext> getBorderCapStyleCallback() {
-		return BORDER_CAP_STYLE_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderCapStyleCallback());
-	}
-
-	/**
-	 * Sets the callback to set the border capstyle.
-	 * 
-	 * @param capStyleCallback to set the border capstyle
-	 */
-	public void setBorderCapStyle(CapStyleCallback<AnnotationContext> capStyleCallback) {
-		BORDER_CAP_STYLE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, capStyleCallback, capStyleCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the border capstyle.
-	 * 
-	 * @param capStyleCallback to set the border capstyle
-	 */
-	public void setBorderCapStyle(NativeCallback capStyleCallback) {
-		// resets callback
-		setBorderCapStyle((CapStyleCallback<AnnotationContext>) null);
-		// stores values
-		setValue(Property.BORDER_CAP_STYLE, capStyleCallback);
-	}
-
-	/**
-	 * Returns the callback called to set the border joinstyle.
-	 * 
-	 * @return the callback called to set the border joinstyle
-	 */
-	@Override
-	public JoinStyleCallback<AnnotationContext> getBorderJoinStyleCallback() {
-		return BORDER_JOIN_STYLE_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderJoinStyleCallback());
-	}
-
-	/**
-	 * Sets the callback to set the border joinstyle.
-	 * 
-	 * @param joinStyleCallback to set the border joinstyle
-	 */
-	public void setBorderJoinStyle(JoinStyleCallback<AnnotationContext> joinStyleCallback) {
-		BORDER_JOIN_STYLE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, joinStyleCallback, joinStyleCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the border joinstyle.
-	 * 
-	 * @param joinStyleCallback to set the border joinstyle
-	 */
-	public void setBorderJoinStyle(NativeCallback joinStyleCallback) {
-		// resets callback
-		setBorderJoinStyle((JoinStyleCallback<AnnotationContext>) null);
-		// stores values
-		setValue(Property.BORDER_JOIN_STYLE, joinStyleCallback);
-	}
 
 	/**
 	 * Returns the callback called to set the border sides.

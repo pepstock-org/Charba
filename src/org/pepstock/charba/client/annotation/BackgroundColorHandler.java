@@ -113,7 +113,7 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 		// resets callback
 		setBackgroundColor((ColorCallback<AnnotationContext>) null);
 		// stores value
-		setValue(Property.BACKGROUND_COLOR, backgroundColor);
+		setValueAndAddToParent(Property.BACKGROUND_COLOR, backgroundColor);
 	}
 
 	/**

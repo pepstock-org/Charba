@@ -19,6 +19,8 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -29,7 +31,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BoxAnnotation extends AbstractAnnotation implements IsDefaultsBoxAnnotation, IsLabelContainer<BoxLabel>, HasBackgroundColor, HasBorderRadius {
+public final class BoxAnnotation extends AbstractAnnotation implements IsDefaultsBoxAnnotation, IsLabelContainer<BoxLabel>, HasBackgroundColor, HasBorderRadius, HasExtendedBorderOptions {
 
 	/**
 	 * Default box annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -40,6 +42,16 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * Default box annotation border radius, <b>{@value DEFAULT_BORDER_RADIUS}</b>.
 	 */
 	public static final int DEFAULT_BORDER_RADIUS = 0;
+
+	/**
+	 * Default box annotation border cap style, <b>{@link CapStyle#BUTT}</b>.
+	 */
+	public static final CapStyle DEFAULT_BORDER_CAP_STYLE = CapStyle.BUTT;
+
+	/**
+	 * Default box annotation border join style, <b>{@link JoinStyle#MITER}</b>.
+	 */
+	public static final JoinStyle DEFAULT_BORDER_JOIN_STYLE = JoinStyle.MITER;
 
 	/**
 	 * Name of properties of native object.
@@ -78,6 +90,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	private final BackgroundColorHandler backgroundColorHandler;
 	// border radius handler
 	private final BorderRadiusHandler borderRadiusHandler;
+	// extended border options handler
+	private final ExtendedBorderOptionsHandler extendedBorderOptionsHandler;
 	// label for box instance
 	private final BoxLabel label;
 
@@ -153,6 +167,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// creates border radius handler
 		this.borderRadiusHandler = new BorderRadiusHandler(this, this.defaultValues, getNativeObject());
+		// creates border options handler
+		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/**
@@ -173,6 +189,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// creates border radius handler
 		this.borderRadiusHandler = new BorderRadiusHandler(this, this.defaultValues, getNativeObject());
+		// creates border options handler
+		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/*
@@ -193,6 +211,16 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	@Override
 	public BorderRadiusHandler getBorderRadiusHandler() {
 		return borderRadiusHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasExtendedBorderOptions#getExtendedBorderOptionsHandler()
+	 */
+	@Override
+	public ExtendedBorderOptionsHandler getExtendedBorderOptionsHandler() {
+		return extendedBorderOptionsHandler;
 	}
 
 	/**

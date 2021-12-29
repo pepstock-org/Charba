@@ -17,8 +17,6 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.LabelPositionCallback;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
-import org.pepstock.charba.client.callbacks.CapStyleCallback;
-import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
@@ -29,7 +27,6 @@ import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -46,7 +43,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, HasBackgroundColor, HasBorderRadius, HasBorderOptions {
+public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, HasBackgroundColor, HasBorderRadius, HasBorderOptions, HasExtendedBorderOptions {
 
 	/**
 	 * Constant to use to set AUTO rotation of the label, to use in the rotation callback.
@@ -156,8 +153,6 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	 */
 	private enum Property implements Key
 	{
-		BORDER_CAP_STYLE("borderCapStyle"),
-		BORDER_JOIN_STYLE("borderJoinStyle"),
 		// -
 		POSITION("position"),
 		ROTATION("rotation");
@@ -189,19 +184,11 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// callback proxy to invoke the border cap style function
-	private final CallbackProxy<ProxyStringCallback> borderCapStyleCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the border join style function
-	private final CallbackProxy<ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the rotation function
 	private final CallbackProxy<ProxyObjectCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the position function
 	private final CallbackProxy<ProxyStringCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// callback instance to handle border cap style options
-	private static final CallbackPropertyHandler<CapStyleCallback<AnnotationContext>> BORDER_CAP_STYLE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_CAP_STYLE);
-	// callback instance to handle border join style options
-	private static final CallbackPropertyHandler<JoinStyleCallback<AnnotationContext>> BORDER_JOIN_STYLE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BORDER_JOIN_STYLE);
 	// callback instance to handle rotation options
 	private static final CallbackPropertyHandler<RotationCallback<AnnotationContext>> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
 	// callback instance to handle position options
@@ -217,6 +204,8 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	private final BorderRadiusHandler borderRadiusHandler;
 	// border options handler
 	private final BorderOptionsHandler borderOptionsHandler;
+	// extended border options handler
+	private final ExtendedBorderOptionsHandler extendedBorderOptionsHandler;
 
 	/**
 	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
@@ -248,6 +237,8 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		this.borderRadiusHandler = new BorderRadiusHandler(this.parent, this.defaultValues, getNativeObject());
 		// creates border options handler
 		this.borderOptionsHandler = new BorderOptionsHandler(this.parent, this.defaultValues, getNativeObject());
+		// creates border options handler
+		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this.parent, this.defaultValues, getNativeObject());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -255,10 +246,6 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		this.rotationCallbackProxy.setCallback(context -> onRotation(new AnnotationContext(this.parent, context), defaultValues.getRotation()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.positionCallbackProxy.setCallback(context -> onPosition(new AnnotationContext(this.parent, context), getPosition()));
-		// sets function to proxy callback in order to invoke the java interface
-		this.borderCapStyleCallbackProxy.setCallback(context -> onBorderCapStyle(new AnnotationContext(this.parent, context), getBorderCapStyleCallback(), defaultValues.getBorderCapStyle()));
-		// sets function to proxy callback in order to invoke the java interface
-		this.borderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(new AnnotationContext(this.parent, context), getBorderJoinStyleCallback(), defaultValues.getBorderJoinStyle()));
 	}
 
 	/*
@@ -289,6 +276,16 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	@Override
 	public BorderOptionsHandler getBorderOptionsHandler() {
 		return borderOptionsHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasExtendedBorderOptions#getExtendedBorderOptionsHandler()
+	 */
+	@Override
+	public ExtendedBorderOptionsHandler getExtendedBorderOptionsHandler() {
+		return extendedBorderOptionsHandler;
 	}
 
 	/**
@@ -385,46 +382,6 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		return isType(Property.ROTATION, ObjectType.STRING);
 	}
 
-	/**
-	 * Sets how the end points of every line are drawn.
-	 * 
-	 * @param borderCapStyle how the end points of every line are drawn.
-	 */
-	public void setBorderCapStyle(CapStyle borderCapStyle) {
-		setValue(Property.BORDER_CAP_STYLE, borderCapStyle);
-	}
-
-	/**
-	 * Returns how the end points of every line are drawn.
-	 * 
-	 * @return how the end points of every line are drawn.
-	 */
-	@Override
-	public CapStyle getBorderCapStyle() {
-		return getValue(Property.BORDER_CAP_STYLE, CapStyle.values(), defaultValues.getBorderCapStyle());
-	}
-
-	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
-	 * points and control points are exactly at the same position, are skipped).
-	 * 
-	 * @param borderJoinStyle how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 */
-	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
-		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyle);
-	}
-
-	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
-	 * end points and control points are exactly at the same position, are skipped).
-	 * 
-	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 */
-	@Override
-	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), defaultValues.getBorderJoinStyle());
-	}
-
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
@@ -491,68 +448,6 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		setValueAndAddToParent(Property.POSITION, positionCallback);
 	}
 
-	/**
-	 * Returns the border capstyle callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the border capstyle callback, if set, otherwise <code>null</code>.
-	 */
-	@Override
-	public CapStyleCallback<AnnotationContext> getBorderCapStyleCallback() {
-		return BORDER_CAP_STYLE_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderCapStyleCallback());
-	}
-
-	/**
-	 * Sets the border capstyle callback.
-	 * 
-	 * @param borderCapStyleCallback the border capstyle callback.
-	 */
-	public void setBorderCapStyle(CapStyleCallback<AnnotationContext> borderCapStyleCallback) {
-		BORDER_CAP_STYLE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderCapStyleCallback, borderCapStyleCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the border capstyle callback.
-	 * 
-	 * @param borderCapStyleCallback the border capstyle callback.
-	 */
-	public void setBorderCapStyle(NativeCallback borderCapStyleCallback) {
-		// resets callback
-		setBorderCapStyle((CapStyleCallback<AnnotationContext>) null);
-		// stores and manages callback
-		setValueAndAddToParent(Property.BORDER_CAP_STYLE, borderCapStyleCallback);
-	}
-
-	/**
-	 * Returns the border join style callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the border join style callback, if set, otherwise <code>null</code>.
-	 */
-	@Override
-	public JoinStyleCallback<AnnotationContext> getBorderJoinStyleCallback() {
-		return BORDER_JOIN_STYLE_PROPERTY_HANDLER.getCallback(this, defaultValues.getBorderJoinStyleCallback());
-	}
-
-	/**
-	 * Sets the border join style callback.
-	 * 
-	 * @param borderJoinStyleCallback the border join style callback.
-	 */
-	public void setBorderJoinStyle(JoinStyleCallback<AnnotationContext> borderJoinStyleCallback) {
-		BORDER_JOIN_STYLE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, borderJoinStyleCallback, borderJoinStyleCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the border join style callback.
-	 * 
-	 * @param borderJoinStyleCallback the border join style callback.
-	 */
-	public void setBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
-		// resets callback
-		setBorderJoinStyle((JoinStyleCallback<AnnotationContext>) null);
-		// stores and manages callback
-		setValueAndAddToParent(Property.BORDER_JOIN_STYLE, borderJoinStyleCallback);
-	}
-
 	// -----------------------
 	// INTERNALS for CALLBACKS
 	// -----------------------
@@ -607,48 +502,6 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		}
 		// if here the result is null
 		// then returns the default
-		return defaultValue.value();
-	}
-
-	/**
-	 * Returns a {@link CapStyle} when the callback has been activated.
-	 * 
-	 * @param context annotation context instance.
-	 * @param callback border cap style callback instance
-	 * @param defaultValue default value of cap style
-	 * @return a object property value, as {@link CapStyle}
-	 */
-	private String onBorderCapStyle(AnnotationContext context, CapStyleCallback<AnnotationContext> callback, CapStyle defaultValue) {
-		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
-	}
-
-	/**
-	 * Returns a {@link JoinStyle} when the callback has been activated.
-	 * 
-	 * @param context annotation context instance.
-	 * @param callback border join style callback instance
-	 * @param defaultValue default value of join style
-	 * @return a object property value, as {@link JoinStyle}
-	 */
-	private String onBorderJoinStyle(AnnotationContext context, JoinStyleCallback<AnnotationContext> callback, JoinStyle defaultValue) {
-		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
-	}
-
-	/**
-	 * Checks if the result is consistent, returning the value or default.
-	 * 
-	 * @param result result of callback to be checked and returned if consistent
-	 * @param defaultValue default value for the callback invocation, used only if the result is <code>null</code>
-	 * @return the value of key or the default.
-	 */
-	private String checkCallbackResult(Key result, Key defaultValue) {
-		// checks result
-		if (result != null) {
-			return result.value();
-		}
-		// checks defaults
-		Checker.checkIfValid(defaultValue, "Default value argument");
-		// default result
 		return defaultValue.value();
 	}
 
