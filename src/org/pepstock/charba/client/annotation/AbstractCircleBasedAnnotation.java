@@ -105,7 +105,7 @@ abstract class AbstractCircleBasedAnnotation extends AbstractPointedAnnotation i
 		// casts and stores it
 		this.defaultValues = (IsDefaultsAbstractCircleBasedAnnotation) getDefaultsValues();
 		// sets callbacks proxies
-		initCallbacks();
+		initCircleBasedCallbacks();
 	}
 
 	/**
@@ -121,13 +121,13 @@ abstract class AbstractCircleBasedAnnotation extends AbstractPointedAnnotation i
 		// casts and stores it
 		this.defaultValues = (IsDefaultsAbstractCircleBasedAnnotation) getDefaultsValues();
 		// sets callbacks proxies
-		initCallbacks();
+		initCircleBasedCallbacks();
 	}
 
 	/**
 	 * Initializes the callbacks proxies for the options which can be scriptable.
 	 */
-	private void initCallbacks() {
+	private void initCircleBasedCallbacks() {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
