@@ -19,8 +19,6 @@ import java.util.Date;
 
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
-import org.pepstock.charba.client.callbacks.RadiusCallback;
-import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -30,13 +28,6 @@ import org.pepstock.charba.client.items.Undefined;
  *
  */
 interface IsDefaultsAbstractPointedAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler {
-
-	/**
-	 * Returns the radius of the annotation.
-	 * 
-	 * @return the radius of the annotation.
-	 */
-	double getRadius();
 
 	/**
 	 * Returns the data X value to draw the annotation at.
@@ -94,15 +85,6 @@ interface IsDefaultsAbstractPointedAnnotation extends IsDefaultsAnnotation, IsDe
 	}
 
 	/**
-	 * Returns the callback called to set the radius.
-	 * 
-	 * @return the callback called to set the radius
-	 */
-	default RadiusCallback<AnnotationContext> getRadiusCallback() {
-		return null;
-	}
-
-	/**
 	 * Returns the callback called to set the data X value to draw the annotation at.
 	 * 
 	 * @return the callback called to set the data X value to draw the annotation at
@@ -136,24 +118,6 @@ interface IsDefaultsAbstractPointedAnnotation extends IsDefaultsAnnotation, IsDe
 	 */
 	default double getYAdjust() {
 		return AbstractPointedAnnotation.DEFAULT_Y_ADJUST;
-	}
-
-	/**
-	 * Returns the rotation of annotation in degrees.
-	 * 
-	 * @return the rotation of annotation in degrees
-	 */
-	default double getRotation() {
-		return AbstractPointedAnnotation.DEFAULT_ROTATION;
-	}
-
-	/**
-	 * Returns the callback called to set the rotation of annotation in degrees.
-	 * 
-	 * @return the callback called to set the rotation of annotation in degrees
-	 */
-	default RotationCallback<AnnotationContext> getRotationCallback() {
-		return null;
 	}
 
 	/**

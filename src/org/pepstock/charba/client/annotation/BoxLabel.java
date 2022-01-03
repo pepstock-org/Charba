@@ -74,7 +74,7 @@ public final class BoxLabel extends InnerLabel implements IsDefaultsBoxLabel {
 	public static final double DEFAULT_Y_ADJUST = 0D;
 
 	/**
-	 * Default text align for labels, <b>{@link TextAlign#CENTER}</b>.
+	 * Default text align for labels, <b>{@link TextAlign#START}</b>.
 	 */
 	public static final TextAlign DEFAULT_TEXT_ALIGN = TextAlign.START;
 

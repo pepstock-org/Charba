@@ -41,7 +41,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PointAnnotation extends AbstractPointedAnnotation implements IsDefaultsPointAnnotation, HasPointStyle {
+public final class PointAnnotation extends AbstractCircleBasedAnnotation implements IsDefaultsPointAnnotation, HasPointStyle {
 
 	/**
 	 * Default point annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.

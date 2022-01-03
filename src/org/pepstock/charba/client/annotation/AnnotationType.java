@@ -33,6 +33,10 @@ public enum AnnotationType implements Key
 	 */
 	LINE("line", DefaultLine.INSTANCE),
 	/**
+	 * Defines a <b>LABEL</b> annotation which draws a content in the a chart.
+	 */
+	LABEL("label", DefaultLabel.INSTANCE),
+	/**
 	 * Defines a <b>BOX</b> annotation which draws a box in the a chart.
 	 */
 	BOX("box", DefaultBox.INSTANCE),

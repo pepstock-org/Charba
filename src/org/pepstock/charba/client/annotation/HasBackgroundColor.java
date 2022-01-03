@@ -63,6 +63,7 @@ interface HasBackgroundColor extends IsDefaultsBackgroundColorHandler {
 	 * 
 	 * @return the color of the background of annotation
 	 */
+	@Override
 	default String getBackgroundColorAsString() {
 		// checks if handler is consistent
 		if (getBackgroundColorHandler() != null) {

@@ -23,16 +23,6 @@ package org.pepstock.charba.client.annotation;
  */
 interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler, IsDefaultsExtendedBorderOptionsHandler {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
-	 */
-	@Override
-	default AnnotationType getType() {
-		return null;
-	}
-
 	/**
 	 * Returns the label on the line.
 	 * 

@@ -29,16 +29,6 @@ import org.pepstock.charba.client.options.ScaleId;
  */
 interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
-	 */
-	@Override
-	default AnnotationType getType() {
-		return null;
-	}
-
 	/**
 	 * Returns the label on the line.
 	 * 

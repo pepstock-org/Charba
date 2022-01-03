@@ -295,6 +295,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `clip` property to annotation options.
  * add `pointStyle`, `rotation`, `xAdjust` and `yAdjust` properties to `PointAnnotation` options.
  * add new `PolygonAnnotation` class in order to draw a polygon.
+ * add new `LabelAnnotation` class in order to draw a content (text, image or canvas) on the chart.
  * add point positioning by box options for `PointAnnotation` class.
  * add label options to `BoxAnnotation` class. 
  * enable to set a content by `Canvas` instance to `LineLabel` options.

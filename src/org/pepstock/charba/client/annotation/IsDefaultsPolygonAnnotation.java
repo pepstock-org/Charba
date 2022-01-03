@@ -23,7 +23,7 @@ import org.pepstock.charba.client.annotation.callbacks.SidesCallback;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsPolygonAnnotation extends IsDefaultsAbstractPointedAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsExtendedBorderOptionsHandler {
+interface IsDefaultsPolygonAnnotation extends IsDefaultsAbstractCircleBasedAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsExtendedBorderOptionsHandler {
 
 	/**
 	 * Returns the radius of the point.

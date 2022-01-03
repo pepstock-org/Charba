@@ -20,9 +20,6 @@ import java.util.Date;
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.RadiusCallback;
-import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -43,11 +40,6 @@ import org.pepstock.charba.client.utils.Utilities;
 abstract class AbstractPointedAnnotation extends AbstractAnnotation implements IsDefaultsAbstractPointedAnnotation, HasBackgroundColor {
 
 	/**
-	 * Default annotation rotation, <b>{@value DEFAULT_ROTATION}</b>.
-	 */
-	public static final double DEFAULT_ROTATION = 0D;
-
-	/**
 	 * Default annotation X adjust, <b>{@value DEFAULT_X_ADJUST}</b>.
 	 */
 	public static final double DEFAULT_X_ADJUST = 0D;
@@ -62,8 +54,6 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 	 */
 	private enum Property implements Key
 	{
-		RADIUS("radius"),
-		ROTATION("rotation"),
 		X_ADJUST("xAdjust"),
 		X_VALUE("xValue"),
 		Y_ADJUST("yAdjust"),
@@ -96,8 +86,6 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// callback proxy to invoke the radius function
-	private final CallbackProxy<ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the xValue function
 	private final CallbackProxy<ProxyObjectCallback> xValueCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the yValue function
@@ -106,11 +94,7 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 	private final CallbackProxy<ProxyDoubleCallback> xAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the yAdjust function
 	private final CallbackProxy<ProxyDoubleCallback> yAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the rotation function
-	private final CallbackProxy<ProxyObjectCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// callback instance to handle radius options
-	private static final CallbackPropertyHandler<RadiusCallback<AnnotationContext>> RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.RADIUS);
 	// callback instance to handle xValue options
 	private static final CallbackPropertyHandler<ValueCallback> X_VALUE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_VALUE);
 	// callback instance to handle yValue options
@@ -119,8 +103,6 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 	private static final CallbackPropertyHandler<AdjustSizeCallback> X_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_ADJUST);
 	// callback instance to handle yAdjustg options
 	private static final CallbackPropertyHandler<AdjustSizeCallback> Y_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_ADJUST);
-	// callback instance to handle rotation options
-	private static final CallbackPropertyHandler<RotationCallback<AnnotationContext>> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
 
 	// defaults options
 	private final IsDefaultsAbstractPointedAnnotation defaultValues;
@@ -172,8 +154,6 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.radiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getRadiusCallback(), defaultValues.getRadius(), ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
-		// sets function to proxy callback in order to invoke the java interface
 		this.xValueCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getXValueCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.yValueCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getYValueCallback()));
@@ -181,8 +161,6 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 		this.xAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getXAdjustCallback(), defaultValues.getXAdjust()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.yAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getYAdjustCallback(), defaultValues.getYAdjust()).doubleValue());
-		// sets function to proxy callback in order to invoke the java interface
-		this.rotationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getRotationCallback(), defaultValues.getRotation()).doubleValue());
 	}
 
 	/*
@@ -193,29 +171,6 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 	@Override
 	public final BackgroundColorHandler getBackgroundColorHandler() {
 		return backgroundColorHandler;
-	}
-
-	/**
-	 * Sets the radius of the annotation shape.<br>
-	 * If set to 0, the annotation is not rendered.
-	 * 
-	 * @param radius array of the radius of the point shape.
-	 */
-	public final void setRadius(double radius) {
-		// resets callback
-		setRadius((RadiusCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.RADIUS, Checker.positiveOrZero(radius));
-	}
-
-	/**
-	 * Returns the radius of the annotation.
-	 * 
-	 * @return the radius of the annotation.
-	 */
-	@Override
-	public final double getRadius() {
-		return getValue(Property.RADIUS, defaultValues.getRadius());
 	}
 
 	/**
@@ -394,62 +349,9 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 		return getValue(Property.X_ADJUST, defaultValues.getXAdjust());
 	}
 
-	/**
-	 * Sets the rotation of annotation in degrees.
-	 * 
-	 * @param rotation the rotation of annotation in degrees
-	 */
-	public final void setRotation(double rotation) {
-		// resets callback
-		setRotation((RotationCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.ROTATION, rotation);
-	}
-
-	/**
-	 * Returns the rotation of annotation in degrees.
-	 * 
-	 * @return the rotation of annotation in degrees
-	 */
-	@Override
-	public final double getRotation() {
-		return getValue(Property.ROTATION, defaultValues.getRotation());
-	}
-
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
-
-	/**
-	 * Returns the callback called to set the radius.
-	 * 
-	 * @return the callback called to set the radius
-	 */
-	@Override
-	public final RadiusCallback<AnnotationContext> getRadiusCallback() {
-		return RADIUS_PROPERTY_HANDLER.getCallback(this, defaultValues.getRadiusCallback());
-	}
-
-	/**
-	 * Sets the callback to set the radius.
-	 * 
-	 * @param radiusCallback to set the radius
-	 */
-	public final void setRadius(RadiusCallback<AnnotationContext> radiusCallback) {
-		RADIUS_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, radiusCallback, radiusCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the radius.
-	 * 
-	 * @param radiusCallback to set the radius
-	 */
-	public final void setRadius(NativeCallback radiusCallback) {
-		// resets callback
-		setRadius((RadiusCallback<AnnotationContext>) null);
-		// stores values
-		setValue(Property.RADIUS, radiusCallback);
-	}
 
 	/**
 	 * Returns the callback called to set the data X value to draw the annotation at.
@@ -512,37 +414,6 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 		// stores values
 		setValue(Property.Y_VALUE, valueCallback);
 
-	}
-
-	/**
-	 * Returns the callback called to set the rotation of label in degrees.
-	 * 
-	 * @return the callback called to set the rotation of label in degrees
-	 */
-	@Override
-	public final RotationCallback<AnnotationContext> getRotationCallback() {
-		return ROTATION_PROPERTY_HANDLER.getCallback(this, defaultValues.getRotationCallback());
-	}
-
-	/**
-	 * Sets the callback to set the rotation of label in degrees.
-	 * 
-	 * @param rotationCallback to set the rotation of label in degrees
-	 */
-	public final void setRotation(RotationCallback<AnnotationContext> rotationCallback) {
-		ROTATION_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, rotationCallback, rotationCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the rotation of label in degrees.
-	 * 
-	 * @param rotationCallback to set the rotation of label in degrees
-	 */
-	public final void setRotation(NativeCallback rotationCallback) {
-		// resets callback
-		setRotation((RotationCallback<AnnotationContext>) null);
-		// stores values
-		setValue(Property.ROTATION, rotationCallback);
 	}
 
 	/**

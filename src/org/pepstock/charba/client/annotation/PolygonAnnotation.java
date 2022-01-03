@@ -36,7 +36,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PolygonAnnotation extends AbstractPointedAnnotation implements IsDefaultsPolygonAnnotation, HasExtendedBorderOptions {
+public final class PolygonAnnotation extends AbstractCircleBasedAnnotation implements IsDefaultsPolygonAnnotation, HasExtendedBorderOptions {
 
 	/**
 	 * Default polygon annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.

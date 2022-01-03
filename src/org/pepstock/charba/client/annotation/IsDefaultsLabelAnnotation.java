@@ -15,33 +15,33 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallback;
 
 /**
- * This is the default options for items which provides background color property.
+ * This is the {@link AnnotationPlugin#ID} plugin LABEL annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBackgroundColorHandler {
+interface IsDefaultsLabelAnnotation extends IsDefaultsAbstractPointedAnnotation, IsDefaultsLabelHandler, IsDefaultsBorderRadiusHandler, IsDefaultsExtendedBorderOptionsHandler {
 
 	/**
-	 * Returns the color of the background of annotation.
+	 * Returns the anchor position of label in the box.
 	 * 
-	 * @return the color of the background of annotation
+	 * @return the anchor position of label in the box
 	 */
-	default String getBackgroundColorAsString() {
-		return Defaults.get().getGlobal().getColorAsString();
-	}
+	IsDefaultsAlignPosition getPosition();
+
+	// ----------------
+	// CALLBACKS
+	// ----------------
 
 	/**
-	 * Returns the callback called to set the color of the background of annotation.
+	 * Returns the callback called to set the anchor position of label in the box.
 	 * 
-	 * @return the callback called to set the color of the background of annotation
+	 * @return the callback called to set the anchor position of label in the box
 	 */
-	default ColorCallback<AnnotationContext> getBackgroundColorCallback() {
+	default LabelAlignPositionCallback getPositionCallback() {
 		return null;
 	}
-
 }
