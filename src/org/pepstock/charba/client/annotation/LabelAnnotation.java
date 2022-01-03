@@ -92,6 +92,15 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	 */
 	public static final TextAlign DEFAULT_TEXT_ALIGN = TextAlign.CENTER;
 
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the position function
+	private final CallbackProxy<ProxyNativeObjectCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// callback instance to handle position options
+	private static final CallbackPropertyHandler<LabelAlignPositionCallback> POSITION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.POSITION);
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -122,15 +131,6 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		}
 
 	}
-
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-	// callback proxy to invoke the position function
-	private final CallbackProxy<ProxyNativeObjectCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	// callback instance to handle position options
-	private static final CallbackPropertyHandler<LabelAlignPositionCallback> POSITION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.POSITION);
 
 	// defaults options
 	private final IsDefaultsLabelAnnotation defaultValues;
