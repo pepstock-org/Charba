@@ -301,39 +301,9 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		return position;
 	}
 
-	// ---------------------
-	// CALLBACKS
-	// ---------------------
-	/**
-	 * Returns the callback called to set the anchor position of label on box.
-	 * 
-	 * @return the callback called to set the anchor position of label on box
-	 */
-	@Override
-	public LabelAlignPositionCallback getPositionCallback() {
-		return POSITION_PROPERTY_HANDLER.getCallback(this, defaultValues.getPositionCallback());
-	}
-
-	/**
-	 * Sets the callback to set the anchor position of label on box.
-	 * 
-	 * @param positionCallback to set the anchor position of label on box
-	 */
-	public void setPosition(LabelAlignPositionCallback positionCallback) {
-		POSITION_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, positionCallback, positionCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the anchor position of label on box.
-	 * 
-	 * @param positionCallback to set the anchor position of label on box
-	 */
-	public void setPosition(NativeCallback positionCallback) {
-		// resets callback
-		setPosition((LabelAlignPositionCallback) null);
-		// stores values
-		setValueAndAddToParent(Property.POSITION, positionCallback);
-	}
+	// --------------------
+	// INTERNALS
+	// --------------------
 
 	/**
 	 * Returns a native object of a {@link AlignPosition} when the callback has been activated.
@@ -369,4 +339,39 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		// returns the object
 		return resultPosition.nativeObject();
 	}
+
+	// ---------------------
+	// CALLBACKS
+	// ---------------------
+	/**
+	 * Returns the callback called to set the anchor position of label on box.
+	 * 
+	 * @return the callback called to set the anchor position of label on box
+	 */
+	@Override
+	public LabelAlignPositionCallback getPositionCallback() {
+		return POSITION_PROPERTY_HANDLER.getCallback(this, defaultValues.getPositionCallback());
+	}
+
+	/**
+	 * Sets the callback to set the anchor position of label on box.
+	 * 
+	 * @param positionCallback to set the anchor position of label on box
+	 */
+	public void setPosition(LabelAlignPositionCallback positionCallback) {
+		POSITION_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, positionCallback, positionCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the anchor position of label on box.
+	 * 
+	 * @param positionCallback to set the anchor position of label on box
+	 */
+	public void setPosition(NativeCallback positionCallback) {
+		// resets callback
+		setPosition((LabelAlignPositionCallback) null);
+		// stores values
+		setValueAndAddToParent(Property.POSITION, positionCallback);
+	}
+
 }
