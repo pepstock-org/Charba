@@ -233,7 +233,6 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsLabelAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.POINT.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsLabelAnnotation) getDefaultsValues();
-		// FIXME background color default
 		// creates label handler
 		this.labelHandler = new LabelHandler(this, this, this.defaultValues, getNativeObject());
 		// creates border radius handler
