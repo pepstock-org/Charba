@@ -16,10 +16,8 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallback;
-import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -160,7 +158,7 @@ public final class BoxLabel extends InnerLabel implements IsDefaultsBoxLabel {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.positionCallbackProxy.setCallback(context -> onPosition(new AnnotationContext(this.parent, context)));
+		this.positionCallbackProxy.setCallback(context -> this.parent.onPosition(new AnnotationContext(this.parent, context), getPositionCallback()));
 	}
 
 	/**
@@ -206,41 +204,6 @@ public final class BoxLabel extends InnerLabel implements IsDefaultsBoxLabel {
 		setPosition((LabelAlignPositionCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.POSITION, positionCallback);
-	}
-
-	/**
-	 * Returns a native object of a {@link AlignPosition} when the callback has been activated.
-	 * 
-	 * @param context annotation context instance.
-	 * @return a native object of a {@link AlignPosition}
-	 */
-	private NativeObject onPosition(AnnotationContext context) {
-		// prepares the result
-		AlignPosition resultPosition = null;
-		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getPositionCallback());
-		// checks if consistent
-		if (result instanceof AlignPosition) {
-			// casts
-			resultPosition = (AlignPosition) result;
-		} else if (result instanceof LabelPosition) {
-			// casts
-			LabelPosition labelPosition = (LabelPosition) result;
-			// create align position
-			resultPosition = new AlignPosition(labelPosition);
-		} else if (result instanceof Number) {
-			// is a percentage
-			// casts
-			Number number = (Number) result;
-			// create align position
-			resultPosition = new AlignPosition(number.doubleValue());
-		} else {
-			// if here the result is not consistent
-			// then returns the default
-			resultPosition = new AlignPosition();
-		}
-		// returns the object
-		return resultPosition.nativeObject();
 	}
 
 }
