@@ -17,10 +17,8 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallback;
-import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -258,7 +256,7 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.positionCallbackProxy.setCallback(context -> onPosition(new AnnotationContext(this, context)));
+		this.positionCallbackProxy.setCallback(context -> onPosition(new AnnotationContext(this, context), getPositionCallback()));
 	}
 
 	/*
@@ -301,56 +299,20 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		return position;
 	}
 
-	// --------------------
-	// INTERNALS
-	// --------------------
-
-	/**
-	 * Returns a native object of a {@link AlignPosition} when the callback has been activated.
-	 * 
-	 * @param context annotation context instance.
-	 * @return a native object of a {@link AlignPosition}
-	 */
-	private NativeObject onPosition(AnnotationContext context) {
-		// prepares the result
-		AlignPosition resultPosition = null;
-		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getPositionCallback());
-		// checks if consistent
-		if (result instanceof AlignPosition) {
-			// casts
-			resultPosition = (AlignPosition) result;
-		} else if (result instanceof LabelPosition) {
-			// casts
-			LabelPosition labelPosition = (LabelPosition) result;
-			// create align position
-			resultPosition = new AlignPosition(labelPosition);
-		} else if (result instanceof Number) {
-			// is a percentage
-			// casts
-			Number number = (Number) result;
-			// create align position
-			resultPosition = new AlignPosition(number.doubleValue());
-		} else {
-			// if here the result is not consistent
-			// then returns the default
-			resultPosition = new AlignPosition();
-		}
-		// returns the object
-		return resultPosition.nativeObject();
-	}
-
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
+
 	/**
-	 * Returns the callback called to set the anchor position of label on box.
+	 * Sets the callback to set the anchor position of label on box.
 	 * 
-	 * @return the callback called to set the anchor position of label on box
+	 * @param positionCallback to set the anchor position of label on box
 	 */
-	@Override
-	public LabelAlignPositionCallback getPositionCallback() {
-		return POSITION_PROPERTY_HANDLER.getCallback(this, defaultValues.getPositionCallback());
+	public void setPosition(NativeCallback positionCallback) {
+		// resets callback
+		setPosition((LabelAlignPositionCallback) null);
+		// stores values
+		setValue(Property.POSITION, positionCallback);
 	}
 
 	/**
@@ -363,15 +325,13 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	}
 
 	/**
-	 * Sets the callback to set the anchor position of label on box.
+	 * Returns the callback called to set the anchor position of label on box.
 	 * 
-	 * @param positionCallback to set the anchor position of label on box
+	 * @return the callback called to set the anchor position of label on box
 	 */
-	public void setPosition(NativeCallback positionCallback) {
-		// resets callback
-		setPosition((LabelAlignPositionCallback) null);
-		// stores values
-		setValueAndAddToParent(Property.POSITION, positionCallback);
+	@Override
+	public LabelAlignPositionCallback getPositionCallback() {
+		return POSITION_PROPERTY_HANDLER.getCallback(this, defaultValues.getPositionCallback());
 	}
 
 }

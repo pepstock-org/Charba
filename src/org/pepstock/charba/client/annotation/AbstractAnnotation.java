@@ -21,8 +21,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
+import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
+import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.annotation.listeners.ClickCallback;
 import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
 import org.pepstock.charba.client.annotation.listeners.EnterCallback;
@@ -1135,6 +1137,42 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		}
 		// default result is undefined
 		return Window.undefined();
+	}
+
+	/**
+	 * Returns a native object of a {@link AlignPosition} when the callback has been activated.
+	 * 
+	 * @param context annotation context instance.
+	 * @param callback callback instance
+	 * @return a native object of a {@link AlignPosition}
+	 */
+	final NativeObject onPosition(AnnotationContext context, LabelAlignPositionCallback callback) {
+		// prepares the result
+		AlignPosition resultPosition = null;
+		// gets value
+		Object result = ScriptableUtils.getOptionValue(context, callback);
+		// checks if consistent
+		if (result instanceof AlignPosition) {
+			// casts
+			resultPosition = (AlignPosition) result;
+		} else if (result instanceof LabelPosition) {
+			// casts
+			LabelPosition labelPosition = (LabelPosition) result;
+			// create align position
+			resultPosition = new AlignPosition(labelPosition);
+		} else if (result instanceof Number) {
+			// is a percentage
+			// casts
+			Number number = (Number) result;
+			// create align position
+			resultPosition = new AlignPosition(number.doubleValue());
+		} else {
+			// if here the result is not consistent
+			// then returns the default
+			resultPosition = new AlignPosition();
+		}
+		// returns the object
+		return resultPosition.nativeObject();
 	}
 
 }
