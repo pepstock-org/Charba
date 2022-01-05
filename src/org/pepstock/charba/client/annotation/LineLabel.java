@@ -36,6 +36,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.Weight;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Implements a <b>LABEL</b> to apply on a LINE annotation.
@@ -319,7 +320,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		// resets callback
 		setPosition((LabelPositionCallback) null);
 		// stores value
-		setValue(Property.POSITION, LabelPosition.getAsPercentage(percentage));
+		setValue(Property.POSITION, Utilities.getAsPercentage(percentage));
 	}
 
 	/**
@@ -329,7 +330,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	 */
 	@Override
 	public double getPositionAsPercentage() {
-		return LabelPosition.getAsPercentage(getValue(Property.POSITION, Undefined.STRING), defaultValues.getPositionAsPercentage());
+		return Utilities.getAsPercentage(getValue(Property.POSITION, Undefined.STRING), defaultValues.getPositionAsPercentage());
 	}
 
 	/**
@@ -498,7 +499,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 			// casts
 			Number number = (Number) result;
 			// returns the double value
-			return LabelPosition.getAsPercentage(number.doubleValue());
+			return Utilities.getAsPercentage(number.doubleValue());
 		}
 		// if here the result is null
 		// then returns the default

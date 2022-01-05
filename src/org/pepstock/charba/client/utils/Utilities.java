@@ -28,6 +28,7 @@ import org.pepstock.charba.client.colors.GradientColor;
 import org.pepstock.charba.client.colors.GradientOrientation;
 import org.pepstock.charba.client.colors.GradientType;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.DOMBuilder;
@@ -81,6 +82,8 @@ public final class Utilities {
 	 * <a href= "https://developer.mozilla.org/en-US/docs/Web/CSS/background-image">https://developer.mozilla.org/en-US/docs/Web/CSS/background-image</a> <br>
 	 */
 	private static final String PATTERN_TEMPLATE = "url({0}) {1}";
+	// percentage position
+	private static final String PERCENTAGE_TEMPLATE = "{0}%";
 	// canvas element to draw
 	private static final Canvas WORKING_CANVAS = DOMBuilder.get().isCanvasSupported() ? DOMBuilder.get().createCanvasElement() : null;
 	// internal comparator to sort colors by own offset
@@ -432,6 +435,34 @@ public final class Utilities {
 		// if here the value is not consistent
 		// then returns an empty string
 		return Constants.NULL_STRING;
+	}
+
+	/**
+	 * Transforms the percentage value (between 0 and 1) in a string with format <code>{number}%</code>.
+	 * 
+	 * @param value the percentage value (between 0 and 1)
+	 * @return the string representation of the percentage.
+	 */
+	public static String getAsPercentage(double value) {
+		return Utilities.applyTemplate(PERCENTAGE_TEMPLATE, Checker.betweenOrDefault(value, 0, 1, 0.5) * 100);
+	}
+
+	/**
+	 * Transforms the percentage value as string with format <code>{number}%</code> in a number (between 0 and 1).
+	 * 
+	 * @param value the string representation of the percentage.
+	 * @param defaultValue the default value to use when the string format is not correct
+	 * @return a percentage number (between 0 and 1)
+	 */
+	public static double getAsPercentage(String value, double defaultValue) {
+		// checks if stored as percentage
+		if (value != null && value.endsWith(Constants.PERCENT)) {
+			// reads the percentage
+			String doubleValue = value.substring(0, value.indexOf(Constants.PERCENT));
+			// returns as double divided by 100
+			return Double.parseDouble(doubleValue) / 100;
+		}
+		return defaultValue;
 	}
 
 }

@@ -104,6 +104,7 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	 */
 	private enum Property implements Key
 	{
+		CALLOUT("callout"),
 		POSITION("position");
 
 		// name value of property
@@ -140,6 +141,8 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	private final ExtendedBorderOptionsHandler extendedBorderOptionsHandler;
 	// position instance
 	private final AlignPosition position;
+	// callout instance
+	private final Callout callout;
 
 	/**
 	 * Creates a label annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -215,6 +218,8 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
 		// loads position
 		this.position = new AlignPosition(this, Property.POSITION, getValue(Property.POSITION), this.defaultValues.getPosition());
+		// loads callout
+		this.callout = new Callout(this, getValue(Property.CALLOUT), this.defaultValues.getCallout());
 		// initialized
 		initLabelAnnotation();
 	}
@@ -239,6 +244,8 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
 		// loads position
 		this.position = new AlignPosition(this, Property.POSITION, getValue(Property.POSITION), this.defaultValues.getPosition());
+		// loads callout
+		this.callout = new Callout(this, getValue(Property.CALLOUT), this.defaultValues.getCallout());
 		// initialized
 		initLabelAnnotation();
 	}
@@ -251,6 +258,11 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		if (!has(Property.POSITION)) {
 			// stores position
 			setValue(Property.POSITION, this.position);
+		}
+		// checks if already stored
+		if (!has(Property.CALLOUT)) {
+			// stores position
+			setValue(Property.CALLOUT, this.callout);
 		}
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
@@ -297,6 +309,16 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	@Override
 	public AlignPosition getPosition() {
 		return position;
+	}
+
+	/**
+	 * Returns the callout node.
+	 * 
+	 * @return the callout node
+	 */
+	@Override
+	public Callout getCallout() {
+		return callout;
 	}
 
 	// ---------------------

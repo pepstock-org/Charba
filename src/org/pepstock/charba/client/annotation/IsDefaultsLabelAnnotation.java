@@ -26,6 +26,13 @@ import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallbac
 interface IsDefaultsLabelAnnotation extends IsDefaultsAbstractPointedAnnotation, IsDefaultsLabelHandler, IsDefaultsBorderRadiusHandler, IsDefaultsExtendedBorderOptionsHandler {
 
 	/**
+	 * Returns the callout node.
+	 * 
+	 * @return the callout node
+	 */
+	IsDefaultsCallout getCallout();
+
+	/**
 	 * Returns the anchor position of label in the box.
 	 * 
 	 * @return the anchor position of label in the box

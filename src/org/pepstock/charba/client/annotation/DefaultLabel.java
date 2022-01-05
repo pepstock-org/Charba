@@ -56,6 +56,16 @@ final class DefaultLabel implements IsDefaultsLabelAnnotation {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsLabelAnnotation#getCallout()
+	 */
+	@Override
+	public IsDefaultsCallout getCallout() {
+		return DefaultCallout.INSTANCE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.annotation.IsDefaultsBackgroundColorHandler#getBackgroundColorAsString()
 	 */
 	@Override

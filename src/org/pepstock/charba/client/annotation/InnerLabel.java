@@ -35,7 +35,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class InnerLabel extends AbstractNode implements HasLabel, IsDefaultsInnerLabel {
+abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, HasLabel {
 
 	/**
 	 * Name of properties of native object.

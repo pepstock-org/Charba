@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * This object is to set the position of a label, setting the horizontal and vertical position.
@@ -151,7 +152,7 @@ public final class AlignPosition extends AbstractNode implements IsDefaultsAlign
 	 * @param percentage the position of label by the percentage (value between 0 and 1) of the horizontal dimension
 	 */
 	public void setXAsPercentage(double percentage) {
-		setValueAndAddToParent(Property.X, LabelPosition.getAsPercentage(percentage));
+		setValueAndAddToParent(Property.X, Utilities.getAsPercentage(percentage));
 	}
 
 	/**
@@ -160,7 +161,7 @@ public final class AlignPosition extends AbstractNode implements IsDefaultsAlign
 	 * @param percentage the position of label by the percentage (value between 0 and 1) of the vertical dimension
 	 */
 	public void setYAsPercentage(double percentage) {
-		setValueAndAddToParent(Property.Y, LabelPosition.getAsPercentage(percentage));
+		setValueAndAddToParent(Property.Y, Utilities.getAsPercentage(percentage));
 	}
 
 	/**
@@ -190,7 +191,7 @@ public final class AlignPosition extends AbstractNode implements IsDefaultsAlign
 	 */
 	@Override
 	public double getXAsPercentage() {
-		return LabelPosition.getAsPercentage(getValue(Property.X, Undefined.STRING), defaultValues.getXAsPercentage());
+		return Utilities.getAsPercentage(getValue(Property.X, Undefined.STRING), defaultValues.getXAsPercentage());
 	}
 
 	/**
@@ -200,7 +201,7 @@ public final class AlignPosition extends AbstractNode implements IsDefaultsAlign
 	 */
 	@Override
 	public double getYAsPercentage() {
-		return LabelPosition.getAsPercentage(getValue(Property.Y, Undefined.STRING), defaultValues.getYAsPercentage());
+		return Utilities.getAsPercentage(getValue(Property.Y, Undefined.STRING), defaultValues.getYAsPercentage());
 	}
 
 	/**
