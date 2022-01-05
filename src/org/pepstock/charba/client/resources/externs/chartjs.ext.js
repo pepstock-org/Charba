@@ -22,6 +22,10 @@ Chart.prototype.update = function(configuration) {};
 /**
  * @return {undefined}
  */
+Chart.prototype.draw = function() {};
+/**
+ * @return {undefined}
+ */
 Chart.prototype.render = function() {};
 /**
  * @return {undefined}

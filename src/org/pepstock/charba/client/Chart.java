@@ -134,6 +134,13 @@ public final class Chart {
 	native void render();
 
 	/**
+	 * Triggers a redraw of all chart elements.<br>
+	 * It just clears the canvas and draws all the elements again, without doing layout and other stuff.
+	 */
+	@JsMethod
+	native void draw();
+
+	/**
 	 * Use this to destroy any chart instances that are created.<br>
 	 * This will clean up any references stored to the chart object within Chart.js, along with any associated event listeners attached by Chart.js.
 	 */

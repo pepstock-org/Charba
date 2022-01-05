@@ -61,8 +61,7 @@ public interface IsChart {
 		if (isValid(chart)) {
 			// here checks all mandatory methods of interface to check
 			// if results are consistent
-			return chart.getChartElement() != null && chart.getOptions() != null && Type.isValid(chart.getType()) && chart.getCanvas() != null && chart.getNode() != null && chart.getData() != null && chart.getPlugins() != null
-					&& chart.getDefaultChartOptions() != null;
+			return chart.getChartElement() != null && chart.getOptions() != null && Type.isValid(chart.getType()) && chart.getCanvas() != null && chart.getData() != null && chart.getPlugins() != null && chart.getDefaultChartOptions() != null;
 		}
 		return false;
 	}

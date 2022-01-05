@@ -1212,7 +1212,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// checks if canvas is supported and the element is attached
 		if (isCanvasSupported && isChartAttached()) {
 			// checks if consistent
-			if (IsChart.isConsistent(this)) {
+			if (!isInitialized() && IsChart.isConsistent(this)) {
 				// invokes the apply configuration
 				applyConfiguration();
 				// fires that chart is configuring
@@ -1256,10 +1256,10 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 					// stops timer
 					timer.start();
 				}
-			} else {
+			} else if (isInitialized()) {
 				// if here, the chart is already initialized
-				// and then updates it.
-				update();
+				// and then draw it again.
+				chart.draw();
 			}
 		}
 	}
