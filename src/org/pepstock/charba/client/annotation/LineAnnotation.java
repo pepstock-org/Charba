@@ -31,8 +31,7 @@ import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
- * Implements a LINE annotation which draws a line in the a chart.<br>
- * Vertical or horizontal lines are supported.
+ * Implements a LINE annotation which draws a line in the a chart.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -30,7 +30,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * Implements a <b>LABEL</b> to apply on a LINE annotation.
+ * base object to map all label options for instances which belongs to another container.
  * 
  * @author Andrea "Stock" Stocchero
  *

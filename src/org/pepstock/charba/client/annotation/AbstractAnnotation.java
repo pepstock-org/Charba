@@ -69,7 +69,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
-	// exception pattern when the scale or scales methods is invoked and the scale type is not correct
+	// exception pattern when the annotation default is wrong type
 	static final String INVALID_DEFAULTS_VALUES_CLASS = "Defaults options are not invalid because is not a {0} annotation defaults";
 
 	/**
