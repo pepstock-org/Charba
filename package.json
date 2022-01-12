@@ -19,7 +19,7 @@
     "chartjs-chart-geo": "3.6.0",
     "chartjs-chart-treemap": "2.0.2",
     "chartjs-chart-matrix": "1.1.1",
-    "chartjs-chart-sankey": "0.8.0",
+    "chartjs-chart-sankey": "0.8.1",
     "luxon": "2.3.0",
     "hammerjs": "2.0.8"
   }
