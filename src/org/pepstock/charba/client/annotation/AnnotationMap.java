@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -49,22 +48,6 @@ class AnnotationMap extends NativeObjectContainer {
 	 */
 	AnnotationMap(NativeObject nativeObject) {
 		super(nativeObject);
-	}
-
-	/**
-	 * The draw time has been changed and then it changes all inner annotations.
-	 * 
-	 * @param drawTime draw time instance of parent
-	 */
-	void resetDrawTime(DrawTime drawTime) {
-		// checks if there is any annotation
-		if (!empty()) {
-			// scans all annotations
-			for (AbstractAnnotation annotation : getAnnotations()) {
-				// sets default
-				annotation.setParentDrawTime(drawTime);
-			}
-		}
 	}
 
 	/**
@@ -98,13 +81,11 @@ class AnnotationMap extends NativeObjectContainer {
 	 * @param drawTime draw time instance of parent
 	 * @param annotations set of annotations.
 	 */
-	void addAnnotations(DrawTime drawTime, AbstractAnnotation... annotations) {
+	void addAnnotations(AbstractAnnotation... annotations) {
 		// checks if array argument is consistent
 		if (annotations != null && annotations.length > 0) {
 			// scans all arguments
 			for (AbstractAnnotation annotation : annotations) {
-				// sets default
-				annotation.setParentDrawTime(drawTime);
 				// adds annotation
 				AnnotationId id = annotation.getId();
 				// stores in the java script object
@@ -121,11 +102,11 @@ class AnnotationMap extends NativeObjectContainer {
 	 * @param annotations set of annotations.<br>
 	 *            If <code>null</code>, removes all annotations
 	 */
-	void setAnnotations(DrawTime drawTime, AbstractAnnotation... annotations) {
+	void setAnnotations(AbstractAnnotation... annotations) {
 		// clear existing object
 		clear();
 		// adds annotation
-		addAnnotations(drawTime, annotations);
+		addAnnotations(annotations);
 	}
 
 	/**

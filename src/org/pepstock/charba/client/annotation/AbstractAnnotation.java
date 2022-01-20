@@ -42,7 +42,6 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
@@ -344,23 +343,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the draw time defined as default in the options from the parent.
-	 * 
-	 * @param parentDrawTime the draw time defined as default in the options from the parent
-	 */
-	final void setParentDrawTime(DrawTime parentDrawTime) {
-		this.parentDrawTime = parentDrawTime;
-		// checks if is line annotations to propagate to the label
-		// and the draw current draw mustn't be set
-		if (this instanceof LineAnnotation && isType(AnnotationOptions.Property.DRAW_TIME, ObjectType.UNDEFINED)) {
-			// casts
-			LineAnnotation line = (LineAnnotation) this;
-			// stores the parent draw time
-			line.getLabel().setParentDrawTime(parentDrawTime);
-		}
-	}
-
-	/**
 	 * Sets the draw time which defines when the annotations are drawn.
 	 * 
 	 * @param drawTime the draw time which defines when the annotations are drawn
@@ -370,13 +352,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		setDrawTime((DrawTimeCallback) null);
 		// stores value
 		setValue(AnnotationOptions.Property.DRAW_TIME, drawTime);
-		// checks if is an annotations with the label to propagate to the label
-		if (this instanceof IsLabelContainer) {
-			// casts
-			IsLabelContainer<?> labelContainer = (IsLabelContainer<?>) this;
-			// stores the parent draw time
-			labelContainer.getLabel().setParentDrawTime(drawTime);
-		}
 	}
 
 	/**

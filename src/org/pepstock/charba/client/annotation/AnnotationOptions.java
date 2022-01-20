@@ -175,9 +175,6 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	public void setDrawTime(DrawTime drawTime) {
 		// stores value
 		setValue(Property.DRAW_TIME, drawTime);
-		// checks if it must change the draw time default
-		// in all inner annotations
-		annotationsMap.resetDrawTime(drawTime);
 	}
 
 	/**
@@ -254,7 +251,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @param annotations set of annotations.
 	 */
 	public void addAnnotations(AbstractAnnotation... annotations) {
-		annotationsMap.addAnnotations(getDrawTime(), annotations);
+		annotationsMap.addAnnotations(annotations);
 	}
 
 	/**
@@ -263,7 +260,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @param annotations set of annotations. If <code>null</code>, removes all annotations
 	 */
 	public void setAnnotations(AbstractAnnotation... annotations) {
-		annotationsMap.setAnnotations(getDrawTime(), annotations);
+		annotationsMap.setAnnotations(annotations);
 	}
 
 	/**

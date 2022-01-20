@@ -18,7 +18,6 @@ package org.pepstock.charba.client.annotation;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -37,25 +36,6 @@ final class AnnotationCachedMap extends AnnotationMap {
 	 */
 	AnnotationCachedMap() {
 		super();
-	}
-
-	/**
-	 * The draw time has been changed and then it changes all inner annotations.
-	 * 
-	 * @param drawTime draw time instance of parent
-	 */
-	@Override
-	void resetDrawTime(DrawTime drawTime) {
-		// invokes super
-		super.resetDrawTime(drawTime);
-		// checks if there is any annotation
-		if (!empty()) {
-			// scans all annotations
-			for (AbstractAnnotation annotation : annotationsCache.values()) {
-				// sets default
-				annotation.setParentDrawTime(drawTime);
-			}
-		}
 	}
 
 	/**
@@ -89,9 +69,9 @@ final class AnnotationCachedMap extends AnnotationMap {
 	 * @param annotations set of annotations.
 	 */
 	@Override
-	void addAnnotations(DrawTime drawTime, AbstractAnnotation... annotations) {
+	void addAnnotations(AbstractAnnotation... annotations) {
 		// invokes super
-		super.addAnnotations(drawTime, annotations);
+		super.addAnnotations(annotations);
 		// checks if array argument is consistent
 		if (annotations != null && annotations.length > 0) {
 			// scans all arguments

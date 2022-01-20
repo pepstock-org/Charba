@@ -96,8 +96,6 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	private final IsDefaultsInnerLabel defaultValues;
 	// label handler
 	private final LabelHandler labelHandler;
-	// draw time instance of the parent
-	private DrawTime parentDrawTime = null;
 
 	/**
 	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
@@ -209,15 +207,6 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	}
 
 	/**
-	 * Sets the draw time defined as default in the options from the parent.
-	 * 
-	 * @param parentDrawTime the draw time defined as default in the options from the parent
-	 */
-	final void setParentDrawTime(DrawTime parentDrawTime) {
-		this.parentDrawTime = parentDrawTime;
-	}
-
-	/**
 	 * Sets the draw time which defines when the annotations are drawn.
 	 * 
 	 * @param drawTime the draw time which defines when the annotations are drawn
@@ -234,7 +223,7 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	 */
 	@Override
 	public final DrawTime getDrawTime() {
-		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), parentDrawTime != null ? parentDrawTime : defaultValues.getDrawTime());
+		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), defaultValues.getDrawTime());
 	}
 
 	// ---------------------
