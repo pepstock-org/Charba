@@ -284,6 +284,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  
  * change `PointStyleCallback` class, adding context as generic.
  * remove `xPadding` and `yPadding` options from `LineLabel` options. Use padding instead.
+ * remove `onDestroy` method from `Plugin` interface. Use `onBeforeDestroy` instead.
  
 ### Features
 
@@ -302,6 +303,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable to set a content by `Canvas` instance to `LineLabel` options.
  * enable to set the `position` of the `LineLabel` options as percentage of the line dimension.
  * add `drawActiveElementsOnTop` property to point options and configuration, and to lining and bubble datasets.
+ * add `onBeforeDestroy` and `onAfterDestroy` methods to `Plugin` interface.
  
 License
 -------

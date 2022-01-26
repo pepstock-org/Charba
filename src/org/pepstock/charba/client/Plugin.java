@@ -324,11 +324,19 @@ public interface Plugin {
 	}
 
 	/**
-	 * Called after the chart as been destroyed.
+	 * Called before the chart is being destroyed.
 	 * 
 	 * @param chart the chart instance.
 	 */
-	default void onDestroy(IsChart chart) {
+	default void onBeforeDestroy(IsChart chart) {
+	}
+
+	/**
+	 * Called after the chart has been destroyed.
+	 * 
+	 * @param chart the chart instance.
+	 */
+	default void onAfterDestroy(IsChart chart) {
 	}
 
 	/**

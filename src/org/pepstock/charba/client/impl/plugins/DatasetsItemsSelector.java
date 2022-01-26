@@ -172,7 +172,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			mustBeUpdated = !SelectionStatus.READY.equals(handler.getStatus());
 		}
 		// destroy the current configuration
-		onDestroy(chart);
+		onBeforeDestroy(chart);
 		// recreates the selections handler
 		onConfigure(chart);
 		// checks if it must fire the event
@@ -338,10 +338,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onDestroy(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onDestroy(IsChart chart) {
+	public void onBeforeDestroy(IsChart chart) {
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart)) {
 			// resets configuration

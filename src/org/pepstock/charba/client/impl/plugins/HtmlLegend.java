@@ -240,10 +240,10 @@ public final class HtmlLegend extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onDestroy(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onDestroy(IsChart chart) {
+	public void onBeforeDestroy(IsChart chart) {
 		// checks if argument is consistent
 		if (IsChart.isValid(chart)) {
 			// resets all status items

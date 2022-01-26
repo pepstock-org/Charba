@@ -137,10 +137,10 @@ public final class ColorSchemes extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onDestroy(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onDestroy(IsChart chart) {
+	public void onBeforeDestroy(IsChart chart) {
 		// checks if chart is consistent and if the plugin should be applicable to
 		// this chart
 		if (IsChart.isValid(chart) && mustBeActivated(chart)) {

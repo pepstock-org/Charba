@@ -165,7 +165,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// ---------------------------
 		// -- DESTROY
 		// ---------------------------
-		DESTROY("destroy"),
+		BEFORE_DESTROY("beforeDestroy"),
+		AFTER_DESTROY("afterDestroy"),
 		// ---------------------------
 		// -- SCALES DATA LIMITS
 		// ---------------------------
@@ -306,8 +307,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 	// ---------------------------
 	// -- DESTROY
 	// ---------------------------
-	// callback proxy to invoke the destroy function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> destroyCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the before destroy function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> beforeDestroyCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the after destroy function
+	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDestroyCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ---------------------------
 	// -- SCALES DATA LIMITS
 	// ---------------------------
@@ -449,7 +452,9 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// -- DESTROY
 		// ---------------------------
 		// invoke user method implementation
-		this.destroyCallbackProxy.setCallback((chart, args, options) -> onDestroy(chart.getChart()));
+		this.beforeDestroyCallbackProxy.setCallback((chart, args, options) -> onBeforeDestroy(chart.getChart()));
+		// invoke user method implementation
+		this.afterDestroyCallbackProxy.setCallback((chart, args, options) -> onAfterDestroy(chart.getChart()));
 		// ---------------------------
 		// -- PLUGIN LIFECYCLE
 		// ---------------------------
@@ -530,8 +535,10 @@ final class WrapperPlugin extends NativeObjectContainer {
 		setValue(Property.BEFORE_TOOLTIP_DRAW, beforeTooltipDrawCallbackProxy.getProxy());
 		// sets proxy instance in the beforeUpdate property
 		setValue(Property.BEFORE_UPDATE, beforeUpdateCallbackProxy.getProxy());
-		// sets proxy instance in the destroy property
-		setValue(Property.DESTROY, destroyCallbackProxy.getProxy());
+		// sets proxy instance in the before destroy property
+		setValue(Property.BEFORE_DESTROY, beforeDestroyCallbackProxy.getProxy());
+		// sets proxy instance in the after destroy property
+		setValue(Property.AFTER_DESTROY, afterDestroyCallbackProxy.getProxy());
 		// sets proxy instance in the resize property
 		setValue(Property.RESIZE, resizeCallbackProxy.getProxy());
 		// sets proxy instance in the reset property
@@ -983,17 +990,32 @@ final class WrapperPlugin extends NativeObjectContainer {
 	}
 
 	/**
-	 * Called after the chart as been destroyed.
+	 * Called before the chart is being destroyed.
 	 * 
 	 * @param chart chart instance
 	 */
-	void onDestroy(IsChart chart) {
+	void onBeforeDestroy(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// removes the counter
 			drawingStatus.remove(chart.getId());
 			// invokes the destroy of plugin
-			delegation.onDestroy(chart);
+			delegation.onBeforeDestroy(chart);
+		}
+	}
+
+	/**
+	 * Called after the chart has been destroyed.
+	 * 
+	 * @param chart chart instance
+	 */
+	void onAfterDestroy(IsChart chart) {
+		// if consistent, calls plugin
+		if (IsChart.isValid(chart)) {
+			// removes the counter
+			drawingStatus.remove(chart.getId());
+			// invokes the destroy of plugin
+			delegation.onAfterDestroy(chart);
 		}
 	}
 
@@ -1039,7 +1061,7 @@ final class WrapperPlugin extends NativeObjectContainer {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the stop of plugin
-			delegation.onDestroy(chart);
+			delegation.onStop(chart);
 		}
 	}
 
