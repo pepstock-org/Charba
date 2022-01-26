@@ -314,6 +314,18 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 	 * 
 	 * @param drawActiveElementsOnTopCallback the callback, if draws the active points of a dataset over the other points of the dataset.
 	 */
+	public void setDrawActiveElementsOnTop(NativeCallback drawActiveElementsOnTopCallback) {
+		// resets callback
+		setDrawActiveElementsOnTop((DrawActiveElementsOnTopCallback) null);
+		// stores value
+		setValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, drawActiveElementsOnTopCallback);
+	}
+
+	/**
+	 * Sets the callback, if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @param drawActiveElementsOnTopCallback the callback, if draws the active points of a dataset over the other points of the dataset.
+	 */
 	public void setDrawActiveElementsOnTop(DrawActiveElementsOnTopCallback drawActiveElementsOnTopCallback) {
 		// sets the callback
 		this.drawActiveElementsOnTopCallback = drawActiveElementsOnTopCallback;
@@ -325,18 +337,6 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP);
 		}
-	}
-
-	/**
-	 * Sets the callback, if draws the active points of a dataset over the other points of the dataset.
-	 * 
-	 * @param drawActiveElementsOnTopCallback the callback, if draws the active points of a dataset over the other points of the dataset.
-	 */
-	public void setDrawActiveElementsOnTop(NativeCallback drawActiveElementsOnTopCallback) {
-		// resets callback
-		setDrawActiveElementsOnTop((DrawActiveElementsOnTopCallback) null);
-		// stores value
-		setValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, drawActiveElementsOnTopCallback);
 	}
 
 	/**
