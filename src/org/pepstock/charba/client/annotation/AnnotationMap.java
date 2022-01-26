@@ -78,7 +78,6 @@ class AnnotationMap extends NativeObjectContainer {
 	/**
 	 * Adds an annotations for plugin.
 	 * 
-	 * @param drawTime draw time instance of parent
 	 * @param annotations set of annotations.
 	 */
 	void addAnnotations(AbstractAnnotation... annotations) {
@@ -98,7 +97,6 @@ class AnnotationMap extends NativeObjectContainer {
 	 * Sets a set of annotations for plugin.<br>
 	 * If argument is <code>null</code>, removes all annotations.
 	 * 
-	 * @param drawTime draw time instance of parent
 	 * @param annotations set of annotations.<br>
 	 *            If <code>null</code>, removes all annotations
 	 */

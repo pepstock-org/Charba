@@ -65,7 +65,6 @@ final class AnnotationCachedMap extends AnnotationMap {
 	/**
 	 * Adds an annotations for plugin.
 	 * 
-	 * @param drawTime draw time instance of parent
 	 * @param annotations set of annotations.
 	 */
 	@Override
