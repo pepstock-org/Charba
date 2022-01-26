@@ -23,7 +23,8 @@ import org.pepstock.charba.client.configuration.CartesianLogarithmicAxis;
 import org.pepstock.charba.client.configuration.RadialAxis;
 
 /**
- * Interface to implement if wants to change the tick marks to include information about the data type, for axes which are showing data as numbers.
+ * Interface to implement if wants to change the tick marks to include information about the data type, for axes which are showing data as numbers.<br>
+ * It can return a {@link List} of strings (for multiple lines).
  * 
  * @author Andrea "Stock" Stocchero
  * @see CartesianLinearAxis
@@ -39,8 +40,9 @@ public interface TickCallback {
 	 * @param value value of tick
 	 * @param index index of tick
 	 * @param values list of all tick values
-	 * @return the tick to apply or if the callback returns <code>null</code> the associated grid line will be hidden.
+	 * @return the tick to apply or if the callback returns <code>null</code> the associated grid line will be hidden.<br>
+	 *         It can return a {@link List} of strings (for multiple lines) or a string (for single line).
 	 */
-	String onCallback(Axis axis, double value, int index, List<Double> values);
+	Object onCallback(Axis axis, double value, int index, List<Double> values);
 
 }

@@ -53,9 +53,9 @@ final class LinearTickHandler<T extends Tick> extends AbstractTickHandler<T, Tic
 		 * @param value value of the tick
 		 * @param index index of tick
 		 * @param values array with all values of ticks
-		 * @return string representation of tick
+		 * @return string or array of strings representation of tick
 		 */
-		String call(double value, int index, ArrayDouble values);
+		Object call(double value, int index, ArrayDouble values);
 	}
 
 	// ---------------------------
@@ -77,13 +77,17 @@ final class LinearTickHandler<T extends Tick> extends AbstractTickHandler<T, Tic
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		tickCallbackProxy.setCallback((value, index, values) -> {
+			// get default
+			String current = String.valueOf(value);
 			// checks if user callback is consistent
 			if (getCallback() != null) {
 				// then calls user callback
-				return getCallback().onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
+				Object result = getCallback().onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
+				// parses and returns the result
+				return parseCallbackResult(result, current);
 			}
 			// default tick is the string representation of the tick value
-			return String.valueOf(value);
+			return current;
 		});
 	}
 

@@ -54,9 +54,9 @@ final class CategoryTickHandler extends AbstractTickHandler<CartesianCategoryTic
 		 * @param value value of the tick
 		 * @param index index of tick
 		 * @param values array with all values of ticks
-		 * @return string representation of tick
+		 * @return string or array string representation of tick
 		 */
-		String call(double value, int index, ArrayString values);
+		Object call(double value, int index, ArrayString values);
 	}
 
 	// ---------------------------
@@ -84,7 +84,9 @@ final class CategoryTickHandler extends AbstractTickHandler<CartesianCategoryTic
 			// checks if user callback is consistent
 			if (getCallback() != null) {
 				// then calls user callback
-				return getCallback().onCallback(getAxis(), current, index, ArrayListHelper.unmodifiableList(values));
+				Object result = getCallback().onCallback(getAxis(), current, index, ArrayListHelper.unmodifiableList(values));
+				// parses and returns the result
+				return parseCallbackResult(result, current);
 			}
 			// default tick is the tick value
 			return current;

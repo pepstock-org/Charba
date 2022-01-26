@@ -304,7 +304,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable to set the `position` of the `LineLabel` options as percentage of the line dimension.
  * add `drawActiveElementsOnTop` property to point options and configuration, and to lining and bubble datasets.
  * add `onBeforeDestroy` and `onAfterDestroy` methods to `Plugin` interface.
- 
+ * enable all tick callbacks to return a `List` of strings in order to have ticks multiple lines.
+  
 License
 -------
 

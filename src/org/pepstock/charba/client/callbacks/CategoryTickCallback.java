@@ -21,7 +21,8 @@ import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.CartesianCategoryAxis;
 
 /**
- * Interface to implement if wants to change the tick marks to include information about the data type, for cartesian category axes.
+ * Interface to implement if wants to change the tick marks to include information about the data type, for cartesian category axes.<br>
+ * It can return a {@link List} of strings (for multiple lines).
  * 
  * @author Andrea "Stock" Stocchero
  * @see CartesianCategoryAxis
@@ -35,8 +36,9 @@ public interface CategoryTickCallback {
 	 * @param value value of tick
 	 * @param index index of tick
 	 * @param values list of all tick values
-	 * @return the tick to apply or if the callback returns <code>null</code> the associated grid line will be hidden.
+	 * @return the ticks to apply or if the callback returns <code>null</code> the associated grid line will be hidden.<br>
+	 *         It can return a {@link List} of strings (for multiple lines) or a string (for single line).
 	 */
-	String onCallback(Axis axis, String value, int index, List<String> values);
+	Object onCallback(Axis axis, String value, int index, List<String> values);
 
 }

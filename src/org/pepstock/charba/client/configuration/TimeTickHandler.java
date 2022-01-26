@@ -58,9 +58,9 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 		 * @param label label of tick, passed by CHART.JS formatting the date by the selected {@link TimeUnit} and its display format.
 		 * @param index index of tick
 		 * @param values array with all values of ticks
-		 * @return string representation of tick
+		 * @return string or array of strings representation of tick
 		 */
-		String call(String label, int index, ArrayObject values);
+		Object call(String label, int index, ArrayObject values);
 	}
 
 	// ---------------------------
@@ -88,7 +88,9 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 				// retrieves the current value
 				Date value = tickItems.get(index).getValueAsDate();
 				// then calls user callback
-				return getCallback().onCallback(getAxis(), value, label, index, getTickItems(values));
+				Object result = getCallback().onCallback(getAxis(), value, label, index, getTickItems(values));
+				// parses and returns the result
+				return parseCallbackResult(result, label);
 			}
 			// default tick is the tick label
 			return label;
