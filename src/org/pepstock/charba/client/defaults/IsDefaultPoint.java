@@ -50,11 +50,4 @@ public interface IsDefaultPoint extends IsDefaultOptionsElement, IsDefaultPointS
 	 */
 	double getRotation();
 
-	/**
-	 * Returns if draws the active points of a dataset over the other points of the dataset.
-	 * 
-	 * @return if draws the active points of a dataset over the other points of the dataset.
-	 */
-	boolean isDrawActiveElementsOnTop();
-
 }

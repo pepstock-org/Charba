@@ -75,6 +75,8 @@ import org.pepstock.charba.client.options.SpanGapHandler;
 public abstract class LiningDataset extends Dataset implements HasFill, HasOrder, HasPointFillStrokeStyles, HasSpanGaps, HasDataPointStyle {
 	// default label
 	private static final String DEFAULT_LABEL = Constants.EMPTY_STRING;
+	// default for "drawActiveElementsOnTop" options
+	private static final boolean DEFAULT_DRAW_ACTIVE_ELEMENTS_ON_TOP = true;
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -327,7 +329,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverBorderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getHoverBorderJoinStyleCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.drawActiveElementsOnTopCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getDrawActiveElementsOnTopCallback(), getDefaultValues().getElements().getPoint().isDrawActiveElementsOnTop()));
+		this.drawActiveElementsOnTopCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getDrawActiveElementsOnTopCallback(), DEFAULT_DRAW_ACTIVE_ELEMENTS_ON_TOP));
 	}
 
 	/*
@@ -415,7 +417,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 * @return if draws the active points of a dataset over the other points of the dataset.
 	 */
 	public boolean isDrawActiveElementsOnTop() {
-		return getValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, getDefaultValues().getElements().getPoint().isDrawActiveElementsOnTop());
+		return getValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, DEFAULT_DRAW_ACTIVE_ELEMENTS_ON_TOP);
 	}
 
 	/**

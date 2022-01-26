@@ -45,6 +45,9 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  */
 public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrder, HasDataPointStyle {
 
+	// default for "drawActiveElementsOnTop" options
+	private static final boolean DEFAULT_DRAW_ACTIVE_ELEMENTS_ON_TOP = true;
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -186,7 +189,7 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 		// sets function to proxy callback in order to invoke the java interface
 		this.rotationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getRotationCallback(), getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.drawActiveElementsOnTopCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getDrawActiveElementsOnTopCallback(), getDefaultValues().getElements().getPoint().isDrawActiveElementsOnTop()));
+		this.drawActiveElementsOnTopCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getDrawActiveElementsOnTopCallback(), DEFAULT_DRAW_ACTIVE_ELEMENTS_ON_TOP));
 	}
 
 	/*
@@ -297,7 +300,7 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 	 * @return if draws the active points of a dataset over the other points of the dataset.
 	 */
 	public boolean isDrawActiveElementsOnTop() {
-		return getValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, getDefaultValues().getElements().getPoint().isDrawActiveElementsOnTop());
+		return getValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, DEFAULT_DRAW_ACTIVE_ELEMENTS_ON_TOP);
 	}
 
 	/**

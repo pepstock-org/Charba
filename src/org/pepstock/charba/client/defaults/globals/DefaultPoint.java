@@ -36,8 +36,6 @@ public final class DefaultPoint extends AbstractDefaultOptionsElement implements
 
 	private static final double DEFAULT_ROTATION = 0D;
 
-	private static final boolean DEFAULT_DRAW_ACTIVE_ELEMENTS_ON_TOP = true;
-
 	/**
 	 * To avoid any instantiation
 	 */
@@ -95,13 +93,4 @@ public final class DefaultPoint extends AbstractDefaultOptionsElement implements
 		return DEFAULT_ROTATION;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPoint#isDrawActiveElementsOnTop()
-	 */
-	@Override
-	public boolean isDrawActiveElementsOnTop() {
-		return DEFAULT_DRAW_ACTIVE_ELEMENTS_ON_TOP;
-	}
 }

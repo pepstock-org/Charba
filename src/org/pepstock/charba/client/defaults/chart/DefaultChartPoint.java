@@ -179,14 +179,4 @@ public final class DefaultChartPoint implements IsDefaultPoint {
 		return point.getHoverBorderColorAsString();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPoint#isDrawActiveElementsOnTop()
-	 */
-	@Override
-	public boolean isDrawActiveElementsOnTop() {
-		return point.isDrawActiveElementsOnTop();
-	}
-
 }
