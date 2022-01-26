@@ -37,7 +37,8 @@ public final class PluginEventArgument extends NativeObjectContainer {
 	private enum Property implements Key
 	{
 		EVENT("event"),
-		REPLAY("replay");
+		REPLAY("replay"),
+		IN_CHART_AREA("inChartArea");
 
 		// name value of property
 		private final String value;
@@ -95,4 +96,12 @@ public final class PluginEventArgument extends NativeObjectContainer {
 		return getValue(Property.REPLAY, Undefined.BOOLEAN);
 	}
 
+	/**
+	 * Returns <code>true</code> if this event is in chart area.
+	 * 
+	 * @return <code>true</code> if this event is in chart area
+	 */
+	public boolean isInChartArea() {
+		return getValue(Property.IN_CHART_AREA, Undefined.BOOLEAN);
+	}
 }
