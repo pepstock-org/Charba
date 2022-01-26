@@ -301,6 +301,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add label options to `BoxAnnotation` class. 
  * enable to set a content by `Canvas` instance to `LineLabel` options.
  * enable to set the `position` of the `LineLabel` options as percentage of the line dimension.
+ * add `drawActiveElementsOnTop` property to point options and configuration, and to lining and bubble datasets.
  
 License
 -------

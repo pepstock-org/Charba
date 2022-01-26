@@ -35,7 +35,8 @@ public class Point extends AbstractElement<IsDefaultPoint> implements IsDefaultP
 		RADIUS("radius"),
 		HIT_RADIUS("hitRadius"),
 		HOVER_RADIUS("hoverRadius"),
-		ROTATION("rotation");
+		ROTATION("rotation"),
+		DRAW_ACTIVE_ELEMENTS_ON_TOP("drawActiveElementsOnTop");
 
 		// name value of property
 		private final String value;
@@ -163,6 +164,25 @@ public class Point extends AbstractElement<IsDefaultPoint> implements IsDefaultP
 	@Override
 	public double getRotation() {
 		return getValue(Property.ROTATION, getDefaultValues().getRotation());
+	}
+
+	/**
+	 * Sets if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @param drawActiveElementsOnTop if <code>true</code>, draws the active points of a dataset over the other points of the dataset
+	 */
+	public void setDrawActiveElementsOnTop(boolean drawActiveElementsOnTop) {
+		setValueAndAddToParent(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, drawActiveElementsOnTop);
+	}
+
+	/**
+	 * Returns if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @return if draws the active points of a dataset over the other points of the dataset.
+	 */
+	@Override
+	public boolean isDrawActiveElementsOnTop() {
+		return getValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, getDefaultValues().isDrawActiveElementsOnTop());
 	}
 
 }

@@ -21,10 +21,12 @@ import java.util.List;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.DrawActiveElementsOnTopCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayDouble;
@@ -54,6 +56,8 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 	private final CallbackProxy<ProxyDoubleCallback> hoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the rotation function
 	private final CallbackProxy<ProxyDoubleCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the "drawActiveElementsOnTop" function
+	private final CallbackProxy<ProxyBooleanCallback> drawActiveElementsOnTopCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// radius callback instance
 	private RadiusCallback<DatasetContext> radiusCallback = null;
@@ -63,12 +67,15 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 	private RadiusCallback<DatasetContext> hoverRadiusCallback = null;
 	// rotation callback instance
 	private RotationCallback<DatasetContext> rotationCallback = null;
+	// "drawActiveElementsOnTop" callback instance
+	private DrawActiveElementsOnTopCallback drawActiveElementsOnTopCallback = null;
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
+		DRAW_ACTIVE_ELEMENTS_ON_TOP("drawActiveElementsOnTop"),
 		HOVER_RADIUS("hoverRadius"),
 		HIT_RADIUS("hitRadius"),
 		POINT_STYLE("pointStyle"),
@@ -178,6 +185,8 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHoverRadiusCallback(), getDefaultValues().getElements().getPoint().getHoverRadius(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.rotationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getRotationCallback(), getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.drawActiveElementsOnTopCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getDrawActiveElementsOnTopCallback(), getDefaultValues().getElements().getPoint().isDrawActiveElementsOnTop()));
 	}
 
 	/*
@@ -268,6 +277,66 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 	@Override
 	protected int getDefaultHoverBorderWidth() {
 		return getDefaultValues().getElements().getPoint().getHoverBorderWidth();
+	}
+
+	/**
+	 * Sets if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @param drawActiveElementsOnTop if <code>true</code>, draws the active points of a dataset over the other points of the dataset
+	 */
+	public void setDrawActiveElementsOnTop(boolean drawActiveElementsOnTop) {
+		// resets callback
+		setDrawActiveElementsOnTop((DrawActiveElementsOnTopCallback) null);
+		// stores value
+		setValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, drawActiveElementsOnTop);
+	}
+
+	/**
+	 * Returns if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @return if draws the active points of a dataset over the other points of the dataset.
+	 */
+	public boolean isDrawActiveElementsOnTop() {
+		return getValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, getDefaultValues().getElements().getPoint().isDrawActiveElementsOnTop());
+	}
+
+	/**
+	 * Returns the callback, if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @return the callback, if draws the active points of a dataset over the other points of the dataset
+	 */
+	public DrawActiveElementsOnTopCallback getDrawActiveElementsOnTopCallback() {
+		return drawActiveElementsOnTopCallback;
+	}
+
+	/**
+	 * Sets the callback, if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @param drawActiveElementsOnTopCallback the callback, if draws the active points of a dataset over the other points of the dataset.
+	 */
+	public void setDrawActiveElementsOnTop(DrawActiveElementsOnTopCallback drawActiveElementsOnTopCallback) {
+		// sets the callback
+		this.drawActiveElementsOnTopCallback = drawActiveElementsOnTopCallback;
+		// checks if callback is consistent
+		if (drawActiveElementsOnTopCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, drawActiveElementsOnTopCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP);
+		}
+	}
+
+	/**
+	 * Sets the callback, if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @param drawActiveElementsOnTopCallback the callback, if draws the active points of a dataset over the other points of the dataset.
+	 */
+	public void setDrawActiveElementsOnTop(NativeCallback drawActiveElementsOnTopCallback) {
+		// resets callback
+		setDrawActiveElementsOnTop((DrawActiveElementsOnTopCallback) null);
+		// stores value
+		setValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, drawActiveElementsOnTopCallback);
 	}
 
 	/**

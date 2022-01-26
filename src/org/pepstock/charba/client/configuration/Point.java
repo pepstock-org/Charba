@@ -16,11 +16,13 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.DrawActiveElementsOnTopCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -49,7 +51,8 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 		HIT_RADIUS("hitRadius"),
 		HOVER_RADIUS("hoverRadius"),
 		POINT_STYLE("pointStyle"),
-		ROTATION("rotation");
+		ROTATION("rotation"),
+		DRAW_ACTIVE_ELEMENTS_ON_TOP("drawActiveElementsOnTop");
 
 		// name value of property
 		private final String value;
@@ -85,6 +88,8 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	private final CallbackProxy<ProxyDoubleCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
 	private final CallbackProxy<ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the "drawActiveElementsOnTop" function
+	private final CallbackProxy<ProxyBooleanCallback> drawActiveElementsOnTopCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// point style callback instance
 	private PointStyleCallback<DatasetContext> pointStyleCallback = null;
@@ -96,6 +101,8 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 	private RadiusCallback<DatasetContext> hitRadiusCallback = null;
 	// radius callback instance
 	private RadiusCallback<DatasetContext> radiusCallback = null;
+	// "drawActiveElementsOnTop" callback instance
+	private DrawActiveElementsOnTopCallback drawActiveElementsOnTopCallback = null;
 
 	/**
 	 * Builds the object storing the root options element.
@@ -287,6 +294,25 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 		return getConfiguration().getElements().getPoint().getRotation();
 	}
 
+	/**
+	 * Sets if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @param drawActiveElementsOnTop if <code>true</code>, draws the active points of a dataset over the other points of the dataset
+	 */
+	public void setDrawActiveElementsOnTop(boolean drawActiveElementsOnTop) {
+		// stores value
+		getConfiguration().getElements().getPoint().setDrawActiveElementsOnTop(drawActiveElementsOnTop);
+	}
+
+	/**
+	 * Returns if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @return if draws the active points of a dataset over the other points of the dataset.
+	 */
+	public boolean isDrawActiveElementsOnTop() {
+		return getConfiguration().getElements().getPoint().isDrawActiveElementsOnTop();
+	}
+
 	// ---------------
 	// CALLBACKS
 	// ---------------
@@ -454,5 +480,38 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 		setRotation((RotationCallback<DatasetContext>) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.ROTATION, rotationCallback);
+	}
+
+	/**
+	 * Returns the callback, if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @return the callback, if draws the active points of a dataset over the other points of the dataset
+	 */
+	public DrawActiveElementsOnTopCallback getDrawActiveElementsOnTopCallback() {
+		return drawActiveElementsOnTopCallback;
+	}
+
+	/**
+	 * Sets the callback, if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @param drawActiveElementsOnTopCallback the callback, if draws the active points of a dataset over the other points of the dataset.
+	 */
+	public void setDrawActiveElementsOnTop(DrawActiveElementsOnTopCallback drawActiveElementsOnTopCallback) {
+		// sets the callback
+		this.drawActiveElementsOnTopCallback = drawActiveElementsOnTopCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, drawActiveElementsOnTopCallback, drawActiveElementsOnTopCallbackProxy);
+	}
+
+	/**
+	 * Sets the callback, if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @param drawActiveElementsOnTopCallback the callback, if draws the active points of a dataset over the other points of the dataset.
+	 */
+	public void setDrawActiveElementsOnTop(NativeCallback drawActiveElementsOnTopCallback) {
+		// resets callback
+		setDrawActiveElementsOnTop((DrawActiveElementsOnTopCallback) null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, drawActiveElementsOnTopCallback);
 	}
 }

@@ -24,6 +24,7 @@ import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.CapStyleCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.DrawActiveElementsOnTopCallback;
 import org.pepstock.charba.client.callbacks.FillCallback;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
@@ -31,6 +32,7 @@ import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
@@ -113,6 +115,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	private final CallbackProxy<ProxyDoubleCallback> pointHoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point rotation function
 	private final CallbackProxy<ProxyDoubleCallback> pointRotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the "drawActiveElementsOnTop" function
+	private final CallbackProxy<ProxyBooleanCallback> drawActiveElementsOnTopCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// point background color callback instance
 	private ColorCallback<DatasetContext> pointBackgroundColorCallback = null;
@@ -150,6 +154,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	private BorderDashOffsetCallback<DatasetContext> hoverBorderDashOffsetCallback = null;
 	// hover border join style callback instance
 	private JoinStyleCallback<DatasetContext> hoverBorderJoinStyleCallback = null;
+	// "drawActiveElementsOnTop" callback instance
+	private DrawActiveElementsOnTopCallback drawActiveElementsOnTopCallback = null;
 
 	/**
 	 * Name of common properties of native object related to a data set.
@@ -208,6 +214,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		BORDER_DASH_OFFSET("borderDashOffset"),
 		BORDER_CAP_STYLE("borderCapStyle"),
 		BORDER_JOIN_STYLE("borderJoinStyle"),
+		DRAW_ACTIVE_ELEMENTS_ON_TOP("drawActiveElementsOnTop"),
 		HOVER_BORDER_DASH("hoverBorderDash"),
 		HOVER_BORDER_DASH_OFFSET("hoverBorderDashOffset"),
 		HOVER_BORDER_CAP_STYLE("hoverBorderCapStyle"),
@@ -319,6 +326,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 				context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHoverBorderDashOffsetCallback(), getDefaultValues().getElements().getLine().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverBorderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getHoverBorderJoinStyleCallback()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.drawActiveElementsOnTopCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getDrawActiveElementsOnTopCallback(), getDefaultValues().getElements().getPoint().isDrawActiveElementsOnTop()));
 	}
 
 	/*
@@ -389,6 +398,24 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	@Override
 	public String getLabel() {
 		return getValue(Dataset.InternalProperty.LABEL, DEFAULT_LABEL);
+	}
+
+	/**
+	 * Sets if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @param drawActiveElementsOnTop if <code>true</code>, draws the active points of a dataset over the other points of the dataset
+	 */
+	public void setDrawActiveElementsOnTop(boolean drawActiveElementsOnTop) {
+		setValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, drawActiveElementsOnTop);
+	}
+
+	/**
+	 * Returns if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @return if draws the active points of a dataset over the other points of the dataset.
+	 */
+	public boolean isDrawActiveElementsOnTop() {
+		return getValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, getDefaultValues().getElements().getPoint().isDrawActiveElementsOnTop());
 	}
 
 	/**
@@ -2439,6 +2466,45 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public void setFill(NativeCallback fillCallback) {
 		fillHandler.setFill(fillCallback);
+	}
+
+	/**
+	 * Returns the callback, if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @return the callback, if draws the active points of a dataset over the other points of the dataset
+	 */
+	public DrawActiveElementsOnTopCallback getDrawActiveElementsOnTopCallback() {
+		return drawActiveElementsOnTopCallback;
+	}
+
+	/**
+	 * Sets the callback, if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @param drawActiveElementsOnTopCallback the callback, if draws the active points of a dataset over the other points of the dataset.
+	 */
+	public void setDrawActiveElementsOnTop(DrawActiveElementsOnTopCallback drawActiveElementsOnTopCallback) {
+		// sets the callback
+		this.drawActiveElementsOnTopCallback = drawActiveElementsOnTopCallback;
+		// checks if callback is consistent
+		if (drawActiveElementsOnTopCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, drawActiveElementsOnTopCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP);
+		}
+	}
+
+	/**
+	 * Sets the callback, if draws the active points of a dataset over the other points of the dataset.
+	 * 
+	 * @param drawActiveElementsOnTopCallback the callback, if draws the active points of a dataset over the other points of the dataset.
+	 */
+	public void setDrawActiveElementsOnTop(NativeCallback drawActiveElementsOnTopCallback) {
+		// resets callback
+		setDrawActiveElementsOnTop((DrawActiveElementsOnTopCallback) null);
+		// stores value
+		setValue(Property.DRAW_ACTIVE_ELEMENTS_ON_TOP, drawActiveElementsOnTopCallback);
 	}
 
 	/*
