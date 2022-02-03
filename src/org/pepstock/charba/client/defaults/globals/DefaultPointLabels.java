@@ -31,6 +31,8 @@ public final class DefaultPointLabels implements IsDefaultPointLabels {
 
 	private static final int DEFAULT_PADDING = 5;
 
+	private static final boolean DEFAULT_CENTER_POINT_LABELS = false;
+
 	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);
 
 	private final DefaultRoutedFont font = new DefaultRoutedFont();
@@ -100,6 +102,16 @@ public final class DefaultPointLabels implements IsDefaultPointLabels {
 	@Override
 	public String getBackdropColorAsString() {
 		return Defaults.get().getGlobal().getBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#isCentered()
+	 */
+	@Override
+	public boolean isCentered() {
+		return DEFAULT_CENTER_POINT_LABELS;
 	}
 
 }

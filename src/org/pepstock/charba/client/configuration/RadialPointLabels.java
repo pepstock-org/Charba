@@ -298,6 +298,24 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
+	 * Sets <code>true</code> if point labels are centered.
+	 * 
+	 * @param centered <code>true</code> if point labels are centered.
+	 */
+	public void setCentered(boolean centered) {
+		getAxis().getScale().getPointLabels().setCentered(centered);
+	}
+
+	/**
+	 * Returns if point labels are centered.
+	 * 
+	 * @return if point labels are centered
+	 */
+	public boolean isCentered() {
+		return getAxis().getScale().getPointLabels().isCentered();
+	}
+
+	/**
 	 * Returns the user callback to change point labels.
 	 * 
 	 * @return the callback

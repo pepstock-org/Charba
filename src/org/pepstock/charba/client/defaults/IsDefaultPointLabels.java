@@ -50,4 +50,11 @@ public interface IsDefaultPointLabels extends IsDefaultFontContainer {
 	 */
 	String getBackdropColorAsString();
 
+	/**
+	 * Returns if point labels are centered.
+	 * 
+	 * @return if point labels are centered
+	 */
+	boolean isCentered();
+
 }

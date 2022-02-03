@@ -37,6 +37,7 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	private enum Property implements Key
 	{
 		DISPLAY("display"),
+		CENTER_POINT_LABELS("centerPointLabels"),
 		BACKDROP_COLOR("backdropColor"),
 		BACKDROP_PADDING("backdropPadding"),
 		PADDING("padding");
@@ -179,6 +180,25 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	@Override
 	public int getPadding() {
 		return getValue(Property.PADDING, getDefaultValues().getPadding());
+	}
+
+	/**
+	 * Sets <code>true</code> if point labels are centered.
+	 * 
+	 * @param centered <code>true</code> if point labels are centered.
+	 */
+	public void setCentered(boolean centered) {
+		setValueAndAddToParent(Property.CENTER_POINT_LABELS, centered);
+	}
+
+	/**
+	 * Returns if point labels are centered.
+	 * 
+	 * @return if point labels are centered
+	 */
+	@Override
+	public boolean isCentered() {
+		return getValue(Property.CENTER_POINT_LABELS, getDefaultValues().isCentered());
 	}
 
 }

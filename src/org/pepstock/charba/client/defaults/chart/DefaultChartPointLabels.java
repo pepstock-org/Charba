@@ -98,4 +98,13 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 		return pointLabels.getBackdropColorAsString();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#isCentered()
+	 */
+	@Override
+	public boolean isCentered() {
+		return pointLabels.isCentered();
+	}
 }

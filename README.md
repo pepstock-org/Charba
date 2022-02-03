@@ -308,6 +308,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable all tick callbacks to return a `List` of strings in order to have ticks multiple lines.
  * add `inCharArea` option to `PluginEventArgument` class.
  * add `r` item to `InteractionAxis` class.
+ * add `centered` option to `PointLabels` and `RadialPointLabels` classes.
   
 License
 -------
