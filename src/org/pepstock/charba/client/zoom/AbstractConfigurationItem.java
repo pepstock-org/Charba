@@ -27,12 +27,12 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.zoom.callbacks.CompletedCallback;
 import org.pepstock.charba.client.zoom.callbacks.ModeCallback;
 import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
 import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
 import org.pepstock.charba.client.zoom.callbacks.StartCallback;
+import org.pepstock.charba.client.zoom.enums.Mode;
 
 /**
  * Abstract element used by pan and zoom object in order to enable to provide the configuration of {@link ZoomPlugin#ID}.
@@ -63,14 +63,14 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 	private static final CallbackPropertyHandler<ModeCallback> OVER_SCALE_MODE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.OVER_SCALE_MODE);
 
 	/**
-	 * Default mode directions, <b>{@link InteractionAxis#XY}</b>.
+	 * Default mode directions, <b>{@link Mode#XY}</b>.
 	 */
-	public static final InteractionAxis DEFAULT_MODE = InteractionAxis.XY;
+	public static final Mode DEFAULT_MODE = Mode.XY;
 
 	/**
-	 * Default mode directions, when over the scale, <b>{@link InteractionAxis#XY}</b>.
+	 * Default mode directions, when over the scale, <b>{@link Mode#XY}</b>.
 	 */
-	public static final InteractionAxis DEFAULT_OVER_SCALE_MODE = InteractionAxis.XY;
+	public static final Mode DEFAULT_OVER_SCALE_MODE = Mode.XY;
 
 	/**
 	 * Name of properties of native object.
@@ -164,7 +164,7 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 	 * 
 	 * @param mode the element (panning or zooming) directions
 	 */
-	public final void setMode(InteractionAxis mode) {
+	public final void setMode(Mode mode) {
 		// reset callback if there is
 		setMode((ModeCallback) null);
 		// sets values
@@ -177,11 +177,11 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 	 * @return the element (panning or zooming) directions
 	 */
 	@Override
-	public final InteractionAxis getMode() {
+	public final Mode getMode() {
 		// checks if callback has been activated
 		if (getModeCallback() == null) {
 			// no callback
-			return getValue(Property.MODE, InteractionAxis.values(), getDefaultsOptions().getMode());
+			return getValue(Property.MODE, Mode.values(), getDefaultsOptions().getMode());
 		}
 		// if here, mode callback has been activated
 		// then returns the default
@@ -195,7 +195,7 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 	 * 
 	 * @param mode which of the enabled zooming directions should only be available when the mouse cursor is over one of scale
 	 */
-	public final void setOverScaleMode(InteractionAxis mode) {
+	public final void setOverScaleMode(Mode mode) {
 		// reset callback if there is
 		setOverScaleMode((ModeCallback) null);
 		// sets values
@@ -208,8 +208,8 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 	 * @return which of the enabled zooming directions should only be available when the mouse cursor is over one of scale
 	 */
 	@Override
-	public final InteractionAxis getOverScaleMode() {
-		return getValue(Property.OVER_SCALE_MODE, InteractionAxis.values(), getDefaultsOptions().getOverScaleMode());
+	public final Mode getOverScaleMode() {
+		return getValue(Property.OVER_SCALE_MODE, Mode.values(), getDefaultsOptions().getOverScaleMode());
 	}
 
 	// -----------------------

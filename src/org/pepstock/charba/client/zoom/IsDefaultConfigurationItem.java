@@ -15,12 +15,12 @@
 */
 package org.pepstock.charba.client.zoom;
 
-import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.zoom.callbacks.CompletedCallback;
 import org.pepstock.charba.client.zoom.callbacks.ModeCallback;
 import org.pepstock.charba.client.zoom.callbacks.ProgressCallback;
 import org.pepstock.charba.client.zoom.callbacks.RejectedCallback;
 import org.pepstock.charba.client.zoom.callbacks.StartCallback;
+import org.pepstock.charba.client.zoom.enums.Mode;
 
 /**
  * Interface used by pan and zoom object in order to enable to provide the defaults values of properties.
@@ -35,7 +35,7 @@ interface IsDefaultConfigurationItem {
 	 * 
 	 * @return the element (panning or zooming) directions
 	 */
-	default InteractionAxis getMode() {
+	default Mode getMode() {
 		return AbstractConfigurationItem.DEFAULT_MODE;
 	}
 
@@ -44,7 +44,7 @@ interface IsDefaultConfigurationItem {
 	 * 
 	 * @return which of the enabled zooming directions should only be available when the mouse cursor is over one of scale
 	 */
-	default InteractionAxis getOverScaleMode() {
+	default Mode getOverScaleMode() {
 		return AbstractConfigurationItem.DEFAULT_OVER_SCALE_MODE;
 	}
 

@@ -13,19 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.zoom.callbacks;
-
-import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.zoom.ZoomContext;
-import org.pepstock.charba.client.zoom.ZoomPlugin;
-import org.pepstock.charba.client.zoom.enums.Mode;
-
 /**
- * Callback interface of {@link ZoomPlugin#ID} plugin to set the mode (pan and zoom) directions at runtime.
+ * Contains the {@link org.pepstock.charba.client.zoom.ZoomPlugin#ID} plugin enumerations to configure the plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface ModeCallback extends Scriptable<Mode, ZoomContext> {
-
-}
+package org.pepstock.charba.client.zoom.enums;

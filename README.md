@@ -285,6 +285,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `PointStyleCallback` class, adding context as generic.
  * remove `xPadding` and `yPadding` options from `LineLabel` options. Use padding instead.
  * remove `onDestroy` method from `Plugin` interface. Use `onBeforeDestroy` instead.
+ * change type to `mode` and `overScaleMode` options in Zoom plugin configuration, from `org.pepstock.charba.client.enums.InteractionAxis` to `org.pepstock.charba.client.zoom.enums.Mode` class. 
  
 ### Features
 
