@@ -18,14 +18,18 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Can be set to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
- * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
+ * Defines which directions are used in calculating distances, interacting on the chart.<br>
+ * Defaults to {@link InteractionAxis#X} for {@link InteractionMode#INDEX} mode and {@link InteractionAxis#XY} in {@link InteractionMode#DATASET} and
+ * {@link InteractionMode#NEAREST} modes.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public enum InteractionAxis implements Key
 {
-
+	/**
+	 * Radial directions are used in calculating distances.
+	 */
+	R("r"),
 	/**
 	 * X directions are used in calculating distances.
 	 */

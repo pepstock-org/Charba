@@ -72,8 +72,7 @@ public class Interaction extends ConfigurationOptionsContainer {
 	}
 
 	/**
-	 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
-	 * Defaults to 'x' for index mode and 'xy' in data set and nearest modes.
+	 * Sets which directions are used in calculating distances.
 	 * 
 	 * @param axis define which directions are used in calculating distances.
 	 */
@@ -82,7 +81,7 @@ public class Interaction extends ConfigurationOptionsContainer {
 	}
 
 	/**
-	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
+	 * Returns which directions are used in calculating distances.
 	 * 
 	 * @return define which directions are used in calculating distances.
 	 */

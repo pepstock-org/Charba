@@ -40,7 +40,7 @@ public interface IsDefaultInteraction {
 	boolean isIntersect();
 
 	/**
-	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
+	 * Returns which directions are used in calculating distances.
 	 * 
 	 * @return define which directions are used in calculating distances.
 	 */
