@@ -590,6 +590,18 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	 * 
 	 * @param borderJoinStyleCallback the border join style callback.
 	 */
+	public void setBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
+		// resets callback
+		setBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyleCallback);
+	}
+
+	/**
+	 * Sets the border join style callback.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback.
+	 */
 	public void setBorderJoinStyle(JoinStyleCallback<DatasetContext> borderJoinStyleCallback) {
 		// sets the callback
 		this.borderJoinStyleCallback = borderJoinStyleCallback;
@@ -604,24 +616,24 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	}
 
 	/**
-	 * Sets the border join style callback.
-	 * 
-	 * @param borderJoinStyleCallback the border join style callback.
-	 */
-	public void setBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
-		// resets callback
-		setBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
-		// stores value
-		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyleCallback);
-	}
-
-	/**
 	 * Returns the border join style callback when element is hovered, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the border join style callback when element is hovered, if set, otherwise <code>null</code>.
 	 */
 	public JoinStyleCallback<DatasetContext> getHoverBorderJoinStyleCallback() {
 		return hoverBorderJoinStyleCallback;
+	}
+
+	/**
+	 * Sets the border join style callback when element is hovered.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback when element is hovered.
+	 */
+	public void setHoverBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
+		// resets callback
+		setHoverBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HOVER_BORDER_JOIN_STYLE, borderJoinStyleCallback);
 	}
 
 	/**
@@ -640,18 +652,6 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.HOVER_BORDER_JOIN_STYLE);
 		}
-	}
-
-	/**
-	 * Sets the border join style callback when element is hovered.
-	 * 
-	 * @param borderJoinStyleCallback the border join style callback when element is hovered.
-	 */
-	public void setHoverBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
-		// resets callback
-		setHoverBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
-		// stores value
-		setValue(Property.HOVER_BORDER_JOIN_STYLE, borderJoinStyleCallback);
 	}
 
 }
