@@ -59,3 +59,4 @@ org.pepstock.charba.client.utils.toast.enums
 org.pepstock.charba.client.utils.toast.handlers
 org.pepstock.charba.client.zoom
 org.pepstock.charba.client.zoom.callbacks
+org.pepstock.charba.client.zoom.enums
