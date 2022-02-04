@@ -136,10 +136,9 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 			// if not, returns point styles
 			ArrayString array = getValueOrArray(Property.POINT_STYLE, defaultValues.getPointStyle());
 			return ArrayListHelper.list(PointStyle.values(), array);
-		} else {
-			// if here, means the point style as stored as images or callback or canvas
-			return ArrayListHelper.list(PointStyle.values(), new PointStyle[0]);
 		}
+		// if here, means the point style as stored as images or callback or canvas
+		return ArrayListHelper.list(PointStyle.values(), new PointStyle[0]);
 	}
 
 	/**

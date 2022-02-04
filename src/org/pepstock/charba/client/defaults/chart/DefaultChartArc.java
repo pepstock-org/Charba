@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultArc;
 import org.pepstock.charba.client.enums.BorderAlign;
+import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
  * Defaults for arc option element, based on chart type.
@@ -74,6 +75,16 @@ public final class DefaultChartArc implements IsDefaultArc {
 	@Override
 	public BorderAlign getBorderAlign() {
 		return arc.getBorderAlign();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getBorderJoinStyle()
+	 */
+	@Override
+	public JoinStyle getBorderJoinStyle() {
+		return arc.getBorderJoinStyle();
 	}
 
 	/*

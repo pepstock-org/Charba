@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.BorderAlign;
+import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
  * Interface to define arc object defaults.
@@ -30,6 +31,14 @@ public interface IsDefaultArc extends IsDefaultOptionsElement {
 	 * @return the property to set the border alignment on chart datasets.
 	 */
 	BorderAlign getBorderAlign();
+
+	/**
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	JoinStyle getBorderJoinStyle();
 
 	/**
 	 * Returns the relative thickness of the dataset.<br>

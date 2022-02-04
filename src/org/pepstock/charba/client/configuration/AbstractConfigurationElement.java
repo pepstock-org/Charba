@@ -18,6 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
@@ -34,6 +35,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.options.AbstractElement;
 
@@ -617,6 +619,36 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 		}
 		// checks defaults
 		Checker.checkIfValid(defaultValue, "Default point style argument");
+		// default result
+		return defaultValue.value();
+	}
+
+	/**
+	 * Returns a {@link JoinStyle} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param callback border join style callback instance
+	 * @param defaultValue default value of join style
+	 * @return a object property value, as {@link JoinStyle}
+	 */
+	final String onBorderJoinStyle(DatasetContext context, JoinStyleCallback<DatasetContext> callback, JoinStyle defaultValue) {
+		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
+	}
+
+	/**
+	 * Checks if the result is consistent, returning the value or default.
+	 * 
+	 * @param result result of callback to be checked and returned if consistent
+	 * @param defaultValue default value for the callback invocation, used only if the result is <code>null</code>
+	 * @return the value of key or the default.
+	 */
+	final String checkCallbackResult(Key result, Key defaultValue) {
+		// checks result
+		if (result != null) {
+			return result.value();
+		}
+		// checks defaults
+		Checker.checkIfValid(defaultValue, "Default value argument");
 		// default result
 		return defaultValue.value();
 	}

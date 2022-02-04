@@ -309,6 +309,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `inCharArea` option to `PluginEventArgument` class.
  * add `r` item to `InteractionAxis` class.
  * add `centered` option to `PointLabels` and `RadialPointLabels` classes.
+ * add `borderJoinStyle` option to `Arc` element options and configuration, to `PieDataset` and `DoughnutDataset` classes.
   
 License
 -------

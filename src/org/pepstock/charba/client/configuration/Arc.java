@@ -19,6 +19,7 @@ import org.pepstock.charba.client.callbacks.AngleCallback;
 import org.pepstock.charba.client.callbacks.BorderAlignCallback;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
@@ -30,6 +31,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultArc;
 import org.pepstock.charba.client.enums.BorderAlign;
+import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.options.AbstractElement;
 
 /**
@@ -44,11 +46,12 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 */
 	private enum Property implements Key
 	{
-		BORDER_ALIGN("borderAlign"),
 		ANGLE("angle"),
-		OFFSET("offset"),
+		BORDER_ALIGN("borderAlign"),
+		BORDER_JOIN_STYLE("borderJoinStyle"),
+		BORDER_RADIUS("borderRadius"),
 		HOVER_OFFSET("hoverOffset"),
-		BORDER_RADIUS("borderRadius");
+		OFFSET("offset");
 
 		// name value of property
 		private final String value;
@@ -87,6 +90,8 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	private final CallbackProxy<ProxyIntegerCallback> hoverOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border radius function
 	private final CallbackProxy<ProxyIntegerCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border join style function
+	private final CallbackProxy<ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border align callback instance
 	private BorderAlignCallback borderAlignCallback = null;
@@ -98,6 +103,8 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	private OffsetCallback<DatasetContext> hoverOffsetCallback = null;
 	// border radius callback instance
 	private BorderRadiusCallback<DatasetContext> borderRadiusCallback = null;
+	// border join style callback instance
+	private JoinStyleCallback<DatasetContext> borderJoinStyleCallback = null;
 
 	/**
 	 * Builds the object setting the java script options object and defaults options for arc.
@@ -119,6 +126,8 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		this.borderAlignCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(createContext(context), getBorderAlignCallback(), getDefaultElement().getBorderAlign()).value());
 		// sets function to proxy callback in order to invoke the java interface
 		this.angleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getAngleCallback(), getDefaultElement().getAngle()).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getBorderJoinStyleCallback(), getDefaultElement().getBorderJoinStyle()));
 	}
 
 	/*
@@ -160,6 +169,29 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 */
 	public BorderAlign getBorderAlign() {
 		return getConfiguration().getElements().getArc().getBorderAlign();
+	}
+
+	/**
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @param borderJoinStyle how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
+		// resets callback
+		setBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores value
+		getConfiguration().getElements().getLine().setBorderJoinStyle(borderJoinStyle);
+	}
+
+	/**
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	public JoinStyle getBorderJoinStyle() {
+		return getConfiguration().getElements().getLine().getBorderJoinStyle();
 	}
 
 	/**
@@ -321,6 +353,39 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		setBorderAlign((BorderAlignCallback) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.BORDER_ALIGN, borderAlignCallback);
+	}
+
+	/**
+	 * Returns the border join style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border join style callback, if set, otherwise <code>null</code>.
+	 */
+	public JoinStyleCallback<DatasetContext> getBorderJoinStyleCallback() {
+		return borderJoinStyleCallback;
+	}
+
+	/**
+	 * Sets the border join style callback.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback.
+	 */
+	public void setBorderJoinStyle(JoinStyleCallback<DatasetContext> borderJoinStyleCallback) {
+		// sets the callback
+		this.borderJoinStyleCallback = borderJoinStyleCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.BORDER_JOIN_STYLE, borderJoinStyleCallback, borderJoinStyleCallbackProxy);
+	}
+
+	/**
+	 * Sets the border join style callback.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback.
+	 */
+	public void setBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
+		// resets callback
+		setBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.BORDER_JOIN_STYLE, borderJoinStyleCallback);
 	}
 
 	/**

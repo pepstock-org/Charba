@@ -683,18 +683,6 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	}
 
 	/**
-	 * Returns a {@link JoinStyle} when the callback has been activated.
-	 * 
-	 * @param context native object as context.
-	 * @param callback border join style callback instance
-	 * @param defaultValue default value of join style
-	 * @return a object property value, as {@link JoinStyle}
-	 */
-	private String onBorderJoinStyle(DatasetContext context, JoinStyleCallback<DatasetContext> callback, JoinStyle defaultValue) {
-		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
-	}
-
-	/**
 	 * Returns a {@link CubicInterpolationMode} when the callback has been activated.
 	 * 
 	 * @param context native object as context.
@@ -704,24 +692,6 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	 */
 	private String onCubicInterpolationMode(DatasetContext context, CubicInterpolationModeCallback callback, CubicInterpolationMode defaultValue) {
 		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
-	}
-
-	/**
-	 * Checks if the result is consistent, returning the value or default.
-	 * 
-	 * @param result result of callback to be checked and returned if consistent
-	 * @param defaultValue default value for the callback invocation, used only if the result is <code>null</code>
-	 * @return the value of key or the default.
-	 */
-	private String checkCallbackResult(Key result, Key defaultValue) {
-		// checks result
-		if (result != null) {
-			return result.value();
-		}
-		// checks defaults
-		Checker.checkIfValid(defaultValue, "Default value argument");
-		// default result
-		return defaultValue.value();
 	}
 
 	/**

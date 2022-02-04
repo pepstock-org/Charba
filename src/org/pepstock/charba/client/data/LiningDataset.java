@@ -318,7 +318,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		this.borderDashOffsetCallbackProxy.setCallback(
 				context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getBorderDashOffsetCallback(), getDefaultValues().getElements().getLine().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getBorderJoinStyleCallback()));
+		this.borderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getBorderJoinStyleCallback(), getDefaultValues().getElements().getLine().getBorderJoinStyle()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverBorderCapStyleCallbackProxy.setCallback(context -> onBorderCapStyle(createContext(context), getHoverBorderCapStyleCallback()));
 		// sets function to proxy callback in order to invoke the java interface
@@ -327,7 +327,7 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		this.hoverBorderDashOffsetCallbackProxy.setCallback(
 				context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHoverBorderDashOffsetCallback(), getDefaultValues().getElements().getLine().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBorderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getHoverBorderJoinStyleCallback()));
+		this.hoverBorderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getHoverBorderJoinStyleCallback(), getDefaultValues().getElements().getLine().getBorderJoinStyle()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.drawActiveElementsOnTopCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getDrawActiveElementsOnTopCallback(), DEFAULT_DRAW_ACTIVE_ELEMENTS_ON_TOP));
 	}
@@ -2585,24 +2585,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		}
 		// default result
 		return getDefaultValues().getElements().getLine().getBorderCapStyle().value();
-	}
-
-	/**
-	 * Returns a {@link JoinStyle} when the callback has been activated.
-	 * 
-	 * @param context native object as context.
-	 * @param borderJoinStyleCallback border join style callback instance
-	 * @return a object property value, as {@link JoinStyle}
-	 */
-	private String onBorderJoinStyle(DatasetContext context, JoinStyleCallback<DatasetContext> borderJoinStyleCallback) {
-		// gets value
-		JoinStyle result = ScriptableUtils.getOptionValue(context, borderJoinStyleCallback);
-		// checks result
-		if (result != null) {
-			return result.value();
-		}
-		// default result
-		return getDefaultValues().getElements().getLine().getBorderJoinStyle().value();
 	}
 
 	/**

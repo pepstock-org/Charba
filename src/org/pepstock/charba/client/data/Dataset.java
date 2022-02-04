@@ -27,6 +27,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
@@ -56,6 +57,7 @@ import org.pepstock.charba.client.defaults.IsDefaultTypedDataset;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.DefaultPluginId;
+import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.AnimationContainer;
 import org.pepstock.charba.client.options.HasAnimationOptions;
@@ -1465,6 +1467,25 @@ public abstract class Dataset extends AbstractNode implements HasDataset, HasAni
 		StringBuilder sb = new StringBuilder("dataset-");
 		// formats the key and returns it
 		return sb.append(id).toString();
+	}
+
+	/**
+	 * Returns a {@link JoinStyle} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param borderJoinStyleCallback border join style callback instance
+	 * @param defaultValue default value if callback returns an inconsistent result
+	 * @return a object property value, as {@link JoinStyle}
+	 */
+	final String onBorderJoinStyle(DatasetContext context, JoinStyleCallback<DatasetContext> borderJoinStyleCallback, JoinStyle defaultValue) {
+		// gets value
+		JoinStyle result = ScriptableUtils.getOptionValue(context, borderJoinStyleCallback);
+		// checks result
+		if (result != null) {
+			return result.value();
+		}
+		// default result
+		return defaultValue.value();
 	}
 
 	/**

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,17 +23,21 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
  * The pie chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.
@@ -53,6 +58,10 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	private final CallbackProxy<ProxyIntegerCallback> hoverOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border radius function
 	private final CallbackProxy<ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border join style function
+	private final CallbackProxy<ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover border join style function
+	private final CallbackProxy<ProxyStringCallback> hoverBorderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// offset callback instance
 	private OffsetCallback<DatasetContext> offsetCallback = null;
@@ -60,14 +69,20 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	private OffsetCallback<DatasetContext> hoverOffsetCallback = null;
 	// border radius callback instance
 	private BorderRadiusCallback<DatasetContext> borderRadiusCallback = null;
+	// border join style callback instance
+	private JoinStyleCallback<DatasetContext> borderJoinStyleCallback = null;
+	// hover border join style callback instance
+	private JoinStyleCallback<DatasetContext> hoverBorderJoinStyleCallback = null;
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
+		BORDER_JOIN_STYLE("borderJoinStyle"),
 		BORDER_RADIUS("borderRadius"),
 		CIRCUMFERENCE("circumference"),
+		HOVER_BORDER_JOIN_STYLE("hoverBorderJoinStyle"),
 		HOVER_OFFSET("hoverOffset"),
 		OFFSET("offset"),
 		ROTATION("rotation"),
@@ -174,6 +189,10 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 		this.hoverOffsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHoverOffsetCallback(), getDefaultValues().getElements().getArc().getOffset()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderRadiusCallbackProxy.setCallback(context -> borderItemsHandler.onBorderItem(createContext(context), getBorderRadiusCallback(), ArcBorderRadius.FACTORY, getDefaultValues().getElements().getArc().getBorderRadius()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getBorderJoinStyleCallback(), getDefaultValues().getElements().getArc().getBorderJoinStyle()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.hoverBorderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getHoverBorderJoinStyleCallback(), getDefaultValues().getElements().getArc().getBorderJoinStyle()));
 	}
 
 	/*
@@ -379,6 +398,74 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	}
 
 	/**
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @param borderJoinStyle how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	public void setBorderJoinStyle(JoinStyle... borderJoinStyle) {
+		// resets callback
+		setBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores value
+		setValueOrArray(Property.BORDER_JOIN_STYLE, borderJoinStyle);
+	}
+
+	/**
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	public List<JoinStyle> getBorderJoinStyle() {
+		// checks if a callback has been set for this property
+		if (getBorderJoinStyleCallback() == null) {
+			// if not, returns point styles
+			ArrayString array = getValueOrArray(Property.BORDER_JOIN_STYLE, getDefaultValues().getElements().getArc().getBorderJoinStyle());
+			return ArrayListHelper.list(JoinStyle.values(), array);
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return Arrays.asList(getDefaultValues().getElements().getArc().getBorderJoinStyle());
+	}
+
+	/**
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped), when element is hovered.<br>
+	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * 
+	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
+	 */
+	public void setHoverBorderJoinStyle(JoinStyle... borderJoinStyle) {
+		// resets callback
+		setHoverBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores value
+		setValueOrArray(Property.HOVER_BORDER_JOIN_STYLE, borderJoinStyle);
+	}
+
+	/**
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped), when element is hovered.<br>
+	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * 
+	 * @return There are three possible values for this property: round, bevel and miter.
+	 */
+	public List<JoinStyle> getHoverBorderJoinStyle() {
+		// checks if a callback has been set for this property
+		if (getHoverBorderJoinStyleCallback() == null) {
+			// if not, returns point styles
+			ArrayString array = getValueOrArray(Property.HOVER_BORDER_JOIN_STYLE, getDefaultValues().getElements().getArc().getBorderJoinStyle());
+			return ArrayListHelper.list(JoinStyle.values(), array);
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return Arrays.asList(getDefaultValues().getElements().getArc().getBorderJoinStyle());
+	}
+
+	// --------------------------
+	// CALLBACK
+	// --------------------------
+
+	/**
 	 * Returns the offset callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the offset callback, if set, otherwise <code>null</code>.
@@ -487,6 +574,84 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.BORDER_RADIUS, borderRadiusCallback);
+	}
+
+	/**
+	 * Returns the border join style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border join style callback, if set, otherwise <code>null</code>.
+	 */
+	public JoinStyleCallback<DatasetContext> getBorderJoinStyleCallback() {
+		return borderJoinStyleCallback;
+	}
+
+	/**
+	 * Sets the border join style callback.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback.
+	 */
+	public void setBorderJoinStyle(JoinStyleCallback<DatasetContext> borderJoinStyleCallback) {
+		// sets the callback
+		this.borderJoinStyleCallback = borderJoinStyleCallback;
+		// checks if callback is consistent
+		if (borderJoinStyleCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.BORDER_JOIN_STYLE, borderJoinStyleCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.BORDER_JOIN_STYLE);
+		}
+	}
+
+	/**
+	 * Sets the border join style callback.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback.
+	 */
+	public void setBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
+		// resets callback
+		setBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyleCallback);
+	}
+
+	/**
+	 * Returns the border join style callback when element is hovered, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border join style callback when element is hovered, if set, otherwise <code>null</code>.
+	 */
+	public JoinStyleCallback<DatasetContext> getHoverBorderJoinStyleCallback() {
+		return hoverBorderJoinStyleCallback;
+	}
+
+	/**
+	 * Sets the border join style callback when element is hovered.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback when element is hovered.
+	 */
+	public void setHoverBorderJoinStyle(JoinStyleCallback<DatasetContext> borderJoinStyleCallback) {
+		// sets the callback
+		this.hoverBorderJoinStyleCallback = borderJoinStyleCallback;
+		// checks if callback is consistent
+		if (borderJoinStyleCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.HOVER_BORDER_JOIN_STYLE, hoverBorderJoinStyleCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.HOVER_BORDER_JOIN_STYLE);
+		}
+	}
+
+	/**
+	 * Sets the border join style callback when element is hovered.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback when element is hovered.
+	 */
+	public void setHoverBorderJoinStyle(NativeCallback borderJoinStyleCallback) {
+		// resets callback
+		setHoverBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HOVER_BORDER_JOIN_STYLE, borderJoinStyleCallback);
 	}
 
 }

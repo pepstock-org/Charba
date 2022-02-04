@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultArc;
 import org.pepstock.charba.client.enums.BorderAlign;
+import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
  * Arcs are used in the polar area, doughnut and pie charts.
@@ -35,6 +36,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	private enum Property implements Key
 	{
 		BORDER_ALIGN("borderAlign"),
+		BORDER_JOIN_STYLE("borderJoinStyle"),
 		WEIGHT("weight"),
 		ANGLE("angle"),
 		OFFSET("offset"),
@@ -95,6 +97,27 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	@Override
 	public BorderAlign getBorderAlign() {
 		return getValue(Property.BORDER_ALIGN, BorderAlign.values(), getDefaultValues().getBorderAlign());
+	}
+
+	/**
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @param borderJoinStyle how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
+		setValueAndAddToParent(Property.BORDER_JOIN_STYLE, borderJoinStyle);
+	}
+
+	/**
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	@Override
+	public JoinStyle getBorderJoinStyle() {
+		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), getDefaultValues().getBorderJoinStyle());
 	}
 
 	/**
