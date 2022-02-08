@@ -274,9 +274,8 @@ public final class GeoUtils {
 				// checks if callback must be applied
 				if (filterCallback != null) {
 					return ArrayListHelper.unmodifiableList(array.filter((element, index) -> filterCallback.filter(new Feature(element), index)), Feature.FACTORY);
-				} else {
-					return ArrayListHelper.unmodifiableList(array, Feature.FACTORY);
 				}
+				return ArrayListHelper.unmodifiableList(array, Feature.FACTORY);
 			}
 		}
 		// if here, the arguments or the feature parsing are not consistent

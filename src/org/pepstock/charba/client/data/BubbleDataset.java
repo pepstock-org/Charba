@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
@@ -360,15 +359,8 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 	 * @return list of the pixel size of the non-displayed point.
 	 */
 	public List<Double> getHitRadius() {
-		// checks if the callback has not been set
-		if (getHitRadiusCallback() == null) {
-			// returns the array
-			ArrayDouble array = getValueOrArray(Property.HIT_RADIUS, getDefaultValues().getElements().getPoint().getHitRadius());
-			return ArrayListHelper.list(array);
-		}
-		// if here, is a callback
-		// then returns an empty list
-		return Collections.emptyList();
+		ArrayDouble array = getValueOrArray(Property.HIT_RADIUS, getDefaultValues().getElements().getPoint().getHitRadius());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -389,15 +381,8 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 	 * @return list of the radius of the point when hovered.
 	 */
 	public List<Double> getHoverRadius() {
-		// checks if the callback has not been set
-		if (getHoverRadiusCallback() == null) {
-			// returns the array
-			ArrayDouble array = getValueOrArray(Property.HOVER_RADIUS, getDefaultValues().getElements().getPoint().getHoverRadius());
-			return ArrayListHelper.list(array);
-		}
-		// if here, is a callback
-		// then returns an empty list
-		return Collections.emptyList();
+		ArrayDouble array = getValueOrArray(Property.HOVER_RADIUS, getDefaultValues().getElements().getPoint().getHoverRadius());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -419,15 +404,8 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 	 * @return list of the radius of the point shape.
 	 */
 	public List<Double> getRadius() {
-		// checks if the callback has not been set
-		if (getRadiusCallback() == null) {
-			// returns the array
-			ArrayDouble array = getValueOrArray(Property.RADIUS, getDefaultValues().getElements().getPoint().getRadius());
-			return ArrayListHelper.list(array);
-		}
-		// if here, is a callback
-		// then returns an empty list
-		return Collections.emptyList();
+		ArrayDouble array = getValueOrArray(Property.RADIUS, getDefaultValues().getElements().getPoint().getRadius());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -448,15 +426,8 @@ public class BubbleDataset extends HoverDataset implements HasDataPoints, HasOrd
 	 * @return list of the rotation of the point in degrees.
 	 */
 	public List<Double> getRotation() {
-		// checks if the callback has not been set
-		if (getRotationCallback() == null) {
-			// returns the array
-			ArrayDouble array = getValueOrArray(Property.ROTATION, getDefaultValues().getElements().getPoint().getRotation());
-			return ArrayListHelper.list(array);
-		}
-		// if here, is a callback
-		// then returns an empty list
-		return Collections.emptyList();
+		ArrayDouble array = getValueOrArray(Property.ROTATION, getDefaultValues().getElements().getPoint().getRotation());
+		return ArrayListHelper.list(array);
 	}
 
 	/**

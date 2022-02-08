@@ -317,23 +317,6 @@ public abstract class HoverDataset extends HoverFlexDataset {
 	}
 
 	/**
-	 * Returns the stroke width of the arcs when hovered.
-	 * 
-	 * @return list of the stroke width of the arcs when hovered.
-	 */
-	@Override
-	public List<Integer> getHoverBorderWidth() {
-		// checks if the callback has not been set
-		if (getHoverBorderWidthCallback() == null) {
-			// call super
-			return super.getHoverBorderWidth();
-		}
-		// if here, is a callback
-		// then returns an empty list
-		return Collections.emptyList();
-	}
-
-	/**
 	 * Returns the hover border width callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the hover border width callback, if set, otherwise <code>null</code>.

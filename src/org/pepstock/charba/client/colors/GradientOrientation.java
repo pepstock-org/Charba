@@ -117,10 +117,9 @@ public enum GradientOrientation implements Key
 		// checks if is linear
 		if (GradientType.LINEAR.equals(type)) {
 			return TOP_DOWN;
-		} else {
-			// if here, is radial
-			return IN_OUT;
 		}
+		// if here, is radial
+		return IN_OUT;
 	}
 
 	/**

@@ -86,22 +86,6 @@ final class LiningDatasetFillHandler extends FillHandler {
 		super.setFill(fill);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.FillHandler#getFill()
-	 */
-	@Override
-	public IsFill getFill() {
-		// checks if a callback has been set for this property
-		if (getFillCallback() == null) {
-			return super.getFill();
-		}
-		// if here, the property is a callback
-		// then returns the default
-		return getDefaultValues();
-	}
-
 	/**
 	 * Returns the fill callback, if set, otherwise <code>null</code>.
 	 * 

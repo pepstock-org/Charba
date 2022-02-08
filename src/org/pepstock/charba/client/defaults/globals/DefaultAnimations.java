@@ -82,10 +82,9 @@ public class DefaultAnimations implements IsDefaultAnimations {
 			// checks if is color
 			if (Key.equals(collection, DefaultAnimationCollectionKey.COLORS)) {
 				return DEFAULT_COLLECTION_COLORS;
-			} else {
-				// if here, is numbers
-				return DEFAULT_COLLECTION_NUMBERS;
 			}
+			// if here, is numbers
+			return DEFAULT_COLLECTION_NUMBERS;
 		}
 		// if here, collection not valid or not a default
 		return new DefaultAnimationCollection(collection);

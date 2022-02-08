@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
@@ -299,15 +297,8 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	 * @return the arc offset
 	 */
 	public List<Integer> getOffset() {
-		// checks if the callback has not been
-		if (getOffsetCallback() == null) {
-			// returns the array
-			ArrayInteger array = getValueOrArray(Property.OFFSET, getDefaultValues().getElements().getArc().getOffset());
-			return ArrayListHelper.list(array);
-		}
-		// if here, is a callback
-		// then returns an empty list
-		return Collections.emptyList();
+		ArrayInteger array = getValueOrArray(Property.OFFSET, getDefaultValues().getElements().getArc().getOffset());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -328,15 +319,8 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	 * @return the arc offset, when dataset if hovered
 	 */
 	public List<Integer> getHoverOffset() {
-		// checks if the callback has not been
-		if (getHoverOffsetCallback() == null) {
-			// returns the array
-			ArrayInteger array = getValueOrArray(Property.HOVER_OFFSET, getDefaultValues().getElements().getArc().getHoverOffset());
-			return ArrayListHelper.list(array);
-		}
-		// if here, is a callback
-		// then returns an empty list
-		return Collections.emptyList();
+		ArrayInteger array = getValueOrArray(Property.HOVER_OFFSET, getDefaultValues().getElements().getArc().getHoverOffset());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -417,15 +401,8 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 */
 	public List<JoinStyle> getBorderJoinStyle() {
-		// checks if a callback has been set for this property
-		if (getBorderJoinStyleCallback() == null) {
-			// if not, returns point styles
-			ArrayString array = getValueOrArray(Property.BORDER_JOIN_STYLE, getDefaultValues().getElements().getArc().getBorderJoinStyle());
-			return ArrayListHelper.list(JoinStyle.values(), array);
-		}
-		// if here, the property is a callback
-		// then returns the default
-		return Arrays.asList(getDefaultValues().getElements().getArc().getBorderJoinStyle());
+		ArrayString array = getValueOrArray(Property.BORDER_JOIN_STYLE, getDefaultValues().getElements().getArc().getBorderJoinStyle());
+		return ArrayListHelper.list(JoinStyle.values(), array);
 	}
 
 	/**
@@ -450,15 +427,8 @@ public class PieDataset extends HoverDataset implements HasBorderAlign {
 	 * @return There are three possible values for this property: round, bevel and miter.
 	 */
 	public List<JoinStyle> getHoverBorderJoinStyle() {
-		// checks if a callback has been set for this property
-		if (getHoverBorderJoinStyleCallback() == null) {
-			// if not, returns point styles
-			ArrayString array = getValueOrArray(Property.HOVER_BORDER_JOIN_STYLE, getDefaultValues().getElements().getArc().getBorderJoinStyle());
-			return ArrayListHelper.list(JoinStyle.values(), array);
-		}
-		// if here, the property is a callback
-		// then returns the default
-		return Arrays.asList(getDefaultValues().getElements().getArc().getBorderJoinStyle());
+		ArrayString array = getValueOrArray(Property.HOVER_BORDER_JOIN_STYLE, getDefaultValues().getElements().getArc().getBorderJoinStyle());
+		return ArrayListHelper.list(JoinStyle.values(), array);
 	}
 
 	// --------------------------

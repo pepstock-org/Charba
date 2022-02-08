@@ -1635,10 +1635,9 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 		if (Display.AUTO.equals(result)) {
 			// returns string
 			return Display.AUTO.value();
-		} else {
-			// returns boolean
-			return Display.TRUE.equals(result);
 		}
+		// returns boolean
+		return Display.TRUE.equals(result);
 	}
 
 	/**

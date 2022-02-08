@@ -171,7 +171,7 @@ public abstract class HoverFlexDataset extends Dataset {
 	 */
 	public List<String> getBackgroundColorAsString() {
 		// checks if the property is not a color (therefore a pattern or gradient) and no callback
-		if (hasColors(Dataset.CanvasObjectProperty.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
+		if (hasColors(Dataset.CanvasObjectProperty.BACKGROUND_COLOR)) {
 			// returns list of colors
 			ArrayString array = getColors(Dataset.CanvasObjectProperty.BACKGROUND_COLOR, getDefaultBackgroundColorAsString());
 			return ArrayListHelper.list(array);
@@ -202,7 +202,7 @@ public abstract class HoverFlexDataset extends Dataset {
 	 */
 	public List<Pattern> getBackgroundColorAsPatterns() {
 		// checks if the property is not a pattern (therefore a color) and no callback
-		if (hasPatterns(Dataset.CanvasObjectProperty.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
+		if (hasPatterns(Dataset.CanvasObjectProperty.BACKGROUND_COLOR)) {
 			return getPatternsContainer().getObjects(Dataset.CanvasObjectProperty.BACKGROUND_COLOR);
 		}
 		// if here, the property is not a object
@@ -220,7 +220,7 @@ public abstract class HoverFlexDataset extends Dataset {
 	 */
 	public List<Gradient> getBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern) and no callback
-		if (hasGradients(Dataset.CanvasObjectProperty.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
+		if (hasGradients(Dataset.CanvasObjectProperty.BACKGROUND_COLOR)) {
 			return getGradientsContainer().getObjects(Dataset.CanvasObjectProperty.BACKGROUND_COLOR);
 		}
 		// if here, the property is not a gradient
@@ -278,7 +278,7 @@ public abstract class HoverFlexDataset extends Dataset {
 	 */
 	public List<String> getBorderColorAsString() {
 		// checks if the property is not a color (therefore a gradient)
-		if (hasColors(Dataset.CanvasObjectProperty.BORDER_COLOR) && getBorderColorCallback() == null) {
+		if (hasColors(Dataset.CanvasObjectProperty.BORDER_COLOR)) {
 			ArrayString array = getColors(Dataset.CanvasObjectProperty.BORDER_COLOR, getDefaultBorderColorAsString());
 			return ArrayListHelper.list(array);
 		}
@@ -306,7 +306,7 @@ public abstract class HoverFlexDataset extends Dataset {
 	 */
 	public List<Gradient> getBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
-		if (hasGradients(Dataset.CanvasObjectProperty.BORDER_COLOR) && getBorderColorCallback() == null) {
+		if (hasGradients(Dataset.CanvasObjectProperty.BORDER_COLOR)) {
 			return getGradientsContainer().getObjects(Dataset.CanvasObjectProperty.BORDER_COLOR);
 		}
 		// if here, the property is not a gradient
@@ -335,15 +335,8 @@ public abstract class HoverFlexDataset extends Dataset {
 	 *         If a callback has been set, returns an empty list.
 	 */
 	public List<Integer> getBorderWidth() {
-		// checks if no callback has been set
-		if (getInternalBorderWidthCallback() == null) {
-			// returns list of borders width
-			ArrayInteger array = getWidths(Dataset.CommonProperty.BORDER_WIDTH, getDefaultBorderWidth());
-			return ArrayListHelper.list(array);
-		}
-		// if here, there is a callback
-		// then returns an empty list
-		return Collections.emptyList();
+		ArrayInteger array = getWidths(Dataset.CommonProperty.BORDER_WIDTH, getDefaultBorderWidth());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -556,15 +549,8 @@ public abstract class HoverFlexDataset extends Dataset {
 	 * @return list of the stroke width of the elements when hovered
 	 */
 	public List<Integer> getHoverBorderWidth() {
-		// checks if no callback has been set
-		if (getInternalBorderWidthCallback() == null) {
-			// returns list of border width
-			ArrayInteger array = getWidths(Dataset.CommonProperty.HOVER_BORDER_WIDTH, getDefaultHoverBorderWidth());
-			return ArrayListHelper.list(array);
-		}
-		// if here, there is a callback
-		// then returns an empty list
-		return Collections.emptyList();
+		ArrayInteger array = getWidths(Dataset.CommonProperty.HOVER_BORDER_WIDTH, getDefaultHoverBorderWidth());
+		return ArrayListHelper.list(array);
 	}
 
 }

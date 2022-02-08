@@ -132,7 +132,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 	 */
 	List<PointStyle> getPointStyle() {
 		// checks if string as point style has been used
-		if (PointStyleType.STRING.equals(getPointStyleType()) && pointStyleCallback == null) {
+		if (PointStyleType.STRING.equals(getPointStyleType())) {
 			// if not, returns point styles
 			ArrayString array = getValueOrArray(Property.POINT_STYLE, defaultValues.getPointStyle());
 			return ArrayListHelper.list(PointStyle.values(), array);
@@ -163,14 +163,13 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 	 */
 	List<Img> getPointStyleAsImages() {
 		// checks if image as point style has been used
-		if (PointStyleType.IMAGE.equals(getPointStyleType()) && getPointStyleCallback() == null) {
+		if (PointStyleType.IMAGE.equals(getPointStyleType())) {
 			// gets array
 			ArrayImage array = getValueOrArray(Property.POINT_STYLE, defaultValues.getPointStyleAsImage());
 			return ArrayListHelper.list(array);
-		} else {
-			// if here, means the point style as stored as string or canvas
-			return Collections.emptyList();
 		}
+		// if here, means the point style as stored as string or canvas
+		return Collections.emptyList();
 	}
 
 	/**
@@ -195,14 +194,13 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 	 */
 	List<Canvas> getPointStyleAsCanvas() {
 		// checks if canvas as point style has been used
-		if (PointStyleType.CANVAS.equals(getPointStyleType()) && getPointStyleCallback() == null) {
+		if (PointStyleType.CANVAS.equals(getPointStyleType())) {
 			// gets array
 			ArrayCanvas array = getValueOrArray(Property.POINT_STYLE, defaultValues.getPointStyleAsCanvas());
 			return ArrayListHelper.list(array);
-		} else {
-			// if here, means the point style as stored as string or image
-			return Collections.emptyList();
 		}
+		// if here, means the point style as stored as string or image
+		return Collections.emptyList();
 	}
 
 	/**

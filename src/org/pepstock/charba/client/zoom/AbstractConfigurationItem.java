@@ -178,14 +178,7 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 	 */
 	@Override
 	public final Mode getMode() {
-		// checks if callback has been activated
-		if (getModeCallback() == null) {
-			// no callback
-			return getValue(Property.MODE, Mode.values(), getDefaultsOptions().getMode());
-		}
-		// if here, mode callback has been activated
-		// then returns the default
-		return getDefaultsOptions().getMode();
+		return getValue(Property.MODE, Mode.values(), getDefaultsOptions().getMode());
 	}
 
 	/**

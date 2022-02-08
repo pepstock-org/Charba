@@ -587,10 +587,9 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 		// checks if is boolean
 		if (BorderSkipped.FALSE.equals(result)) {
 			return false;
-		} else {
-			// returns the string value
-			return result.value();
 		}
+		// returns the string value
+		return result.value();
 	}
 
 	/**

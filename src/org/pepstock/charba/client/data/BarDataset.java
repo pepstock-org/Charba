@@ -368,7 +368,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public List<Double> getBase() {
 		// checks if there is the callback
-		if (!isType(Property.BASE, ObjectType.FUNCTION) && getBaseCallback() == null) {
+		if (!isType(Property.BASE, ObjectType.FUNCTION)) {
 			// is not a function therefore
 			// the property is an array or number
 			ArrayDouble array = getValueOrArray(Property.BASE, Undefined.DOUBLE);

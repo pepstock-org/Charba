@@ -285,13 +285,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
 	 */
 	public CubicInterpolationMode getCubicInterpolationMode() {
-		// checks if a callback has been set for this property
-		if (getCubicInterpolationModeCallback() == null) {
-			return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.values(), getDefaultValues().getElements().getLine().getCubicInterpolationMode());
-		}
-		// if here, the property is a callback
-		// then returns the default
-		return getDefaultValues().getElements().getLine().getCubicInterpolationMode();
+		return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.values(), getDefaultValues().getElements().getLine().getCubicInterpolationMode());
 	}
 
 	/**
