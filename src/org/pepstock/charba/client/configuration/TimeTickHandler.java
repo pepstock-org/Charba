@@ -18,6 +18,7 @@ package org.pepstock.charba.client.configuration;
 import java.util.Date;
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.TimeTickCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -90,7 +91,7 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 				// then calls user callback
 				Object result = getCallback().onCallback(getAxis(), value, label, index, getTickItems(values));
 				// parses and returns the result
-				return parseCallbackResult(result, label);
+				return ScriptableUtils.parseCallbackResult(result, label);
 			}
 			// default tick is the tick label
 			return label;

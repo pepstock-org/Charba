@@ -15,10 +15,14 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
@@ -333,6 +337,41 @@ public final class ScriptableUtils {
 			}
 		}
 		// if here, chart, callback or result of callback are not consistent
+		return defaultValue;
+	}
+
+	/**
+	 * Parses the result of a {@link TickCallback} or {@link PointLabelCallback} callbacks, checking if it's a string or a list of strings.
+	 * 
+	 * @param result the result of callback to check
+	 * @param defaultValue default value to return if the result fo callback is not consistent.
+	 * @return return a string or a list of strings (multiline) or <code>default</code> if result is not consistent
+	 */
+	public static Object parseCallbackResult(Object result, String defaultValue) {
+		// checks if a single string
+		if (result instanceof String) {
+			// returns the string
+			return result;
+		} else if (result instanceof List<?>) {
+			// casts to list
+			List<?> list = (List<?>) result;
+			// checks if list is consistent
+			if (!list.isEmpty()) {
+				// creates the result array
+				final List<String> normalizedList = new LinkedList<>();
+				// scans list
+				for (Object textItem : list) {
+					// adds the string
+					// to normalized list
+					normalizedList.add(textItem.toString());
+				}
+				// checks if there is more than
+				// returns the arrays of string for text
+				return normalizedList.size() == 1 ? normalizedList.get(0) : ArrayString.fromOrNull(normalizedList);
+			}
+		}
+		// if here, result is not consistent
+		// then returns default
 		return defaultValue;
 	}
 }

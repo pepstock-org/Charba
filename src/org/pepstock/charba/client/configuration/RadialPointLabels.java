@@ -64,7 +64,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		 * @param index index of the label
 		 * @return new label to show.
 		 */
-		String call(String item, int index);
+		Object call(String item, int index);
 	}
 
 	// ---------------------------
@@ -155,7 +155,9 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 			// checks if callback is consistent
 			if (callback != null) {
 				// invokes callback
-				return callback.onCallback(getAxis(), item, index);
+				Object result = callback.onCallback(getAxis(), item, index);
+				// parses the result
+				return ScriptableUtils.parseCallbackResult(result, item);
 			}
 			// returns passed item
 			return item;

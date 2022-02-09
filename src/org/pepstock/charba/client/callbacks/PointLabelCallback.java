@@ -15,10 +15,13 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.List;
+
 import org.pepstock.charba.client.configuration.Axis;
 
 /**
- * Callback function to transform data labels to point labels.
+ * Callback function to transform data labels to point labels.<br>
+ * It can return a {@link List} of strings (for multiple lines).
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -30,8 +33,9 @@ public interface PointLabelCallback {
 	 * @param axis axis instance where this callback as been defined
 	 * @param item label of current label
 	 * @param index index of the label
-	 * @return new label to apply to point label
+	 * @return new label to apply to point label.<br>
+	 *         It can return a {@link List} of strings (for multiple lines) or a string (for single line).
 	 */
-	String onCallback(Axis axis, String item, int index);
+	Object onCallback(Axis axis, String item, int index);
 
 }
