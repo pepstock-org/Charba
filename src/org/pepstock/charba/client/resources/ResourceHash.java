@@ -29,7 +29,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'AnnotationPluginResource' class.
 	 */
-	ANNOTATION_PLUGIN_RESOURCE(ResourceName.ANNOTATION_PLUGIN, 2014532),
+	ANNOTATION_PLUGIN_RESOURCE(ResourceName.ANNOTATION_PLUGIN, 2347187),
 	/**
 	 * Hash item for 'ChartJsResource' class.
 	 */
@@ -45,11 +45,11 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
-	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1074682),
+	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1340518),
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */
-	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1371113),
+	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1297860),
 	/**
 	 * Hash item for 'LuxonAdapterResource' class.
 	 */
@@ -73,7 +73,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'ToastJsUtilResource' class.
 	 */
-	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 1493320),
+	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 1614338),
 	/**
 	 * Hash item for 'TreeMapControllerResource' class.
 	 */
