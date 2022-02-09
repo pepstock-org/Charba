@@ -38,7 +38,9 @@ public interface IsDefaultArc extends IsDefaultOptionsElement {
 	 * 
 	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 */
-	JoinStyle getBorderJoinStyle();
+	default JoinStyle getBorderJoinStyle() {
+		return BorderAlign.INNER.equals(getBorderAlign()) ? JoinStyle.ROUND : JoinStyle.BEVEL;
+	}
 
 	/**
 	 * Returns the relative thickness of the dataset.<br>

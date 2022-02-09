@@ -17,7 +17,6 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultArc;
 import org.pepstock.charba.client.enums.BorderAlign;
-import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -54,16 +53,6 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 	@Override
 	public BorderAlign getBorderAlign() {
 		return BorderAlign.CENTER;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getBorderJoinStyle()
-	 */
-	@Override
-	public JoinStyle getBorderJoinStyle() {
-		return JoinStyle.MITER;
 	}
 
 	/*
