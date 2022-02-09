@@ -35,14 +35,15 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 */
 	private enum Property implements Key
 	{
+		ANGLE("angle"),
 		BORDER_ALIGN("borderAlign"),
 		BORDER_JOIN_STYLE("borderJoinStyle"),
-		WEIGHT("weight"),
-		ANGLE("angle"),
-		OFFSET("offset"),
-		HOVER_OFFSET("hoverOffset"),
 		BORDER_RADIUS("borderRadius"),
-		SPACING("spacing");
+		HOVER_BORDER_JOIN_STYLE("hoverBorderJoinStyle"),
+		HOVER_OFFSET("hoverOffset"),
+		OFFSET("offset"),
+		SPACING("spacing"),
+		WEIGHT("weight");
 
 		// name value of property
 		private final String value;
@@ -118,6 +119,27 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	@Override
 	public JoinStyle getBorderJoinStyle() {
 		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), getDefaultValues().getBorderJoinStyle());
+	}
+
+	/**
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped), when hovered.
+	 * 
+	 * @param borderJoinStyle how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	public void setHoverBorderJoinStyle(JoinStyle borderJoinStyle) {
+		setValueAndAddToParent(Property.HOVER_BORDER_JOIN_STYLE, borderJoinStyle);
+	}
+
+	/**
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped), when hovered.
+	 * 
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	@Override
+	public JoinStyle getHoverBorderJoinStyle() {
+		return getValue(Property.HOVER_BORDER_JOIN_STYLE, JoinStyle.values(), getDefaultValues().getHoverBorderJoinStyle());
 	}
 
 	/**

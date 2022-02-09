@@ -79,6 +79,16 @@ public interface IsDefaultArc extends IsDefaultOptionsElement {
 	int getHoverOffset();
 
 	/**
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped), when hovered.
+	 * 
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	default JoinStyle getHoverBorderJoinStyle() {
+		return getBorderJoinStyle();
+	}
+
+	/**
 	 * Returns the fixed arc offset (in pixels).<br>
 	 * Similar to <code>offset</code> but applies to all arcs.
 	 * 

@@ -50,6 +50,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		BORDER_ALIGN("borderAlign"),
 		BORDER_JOIN_STYLE("borderJoinStyle"),
 		BORDER_RADIUS("borderRadius"),
+		HOVER_BORDER_JOIN_STYLE("hoverBorderJoinStyle"),
 		HOVER_OFFSET("hoverOffset"),
 		OFFSET("offset");
 
@@ -92,6 +93,8 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	private final CallbackProxy<ProxyIntegerCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border join style function
 	private final CallbackProxy<ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover border join style function
+	private final CallbackProxy<ProxyStringCallback> hoverBorderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border align callback instance
 	private BorderAlignCallback borderAlignCallback = null;
@@ -105,6 +108,8 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	private BorderRadiusCallback<DatasetContext> borderRadiusCallback = null;
 	// border join style callback instance
 	private JoinStyleCallback<DatasetContext> borderJoinStyleCallback = null;
+	// hover border join style callback instance
+	private JoinStyleCallback<DatasetContext> hoverBorderJoinStyleCallback = null;
 
 	/**
 	 * Builds the object setting the java script options object and defaults options for arc.
@@ -128,6 +133,8 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		this.angleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getAngleCallback(), getDefaultElement().getAngle()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getBorderJoinStyleCallback(), getDefaultElement().getBorderJoinStyle()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.hoverBorderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getHoverBorderJoinStyleCallback(), getDefaultElement().getHoverBorderJoinStyle()));
 	}
 
 	/*
@@ -181,7 +188,7 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		// resets callback
 		setBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
 		// stores value
-		getConfiguration().getElements().getLine().setBorderJoinStyle(borderJoinStyle);
+		getConfiguration().getElements().getArc().setBorderJoinStyle(borderJoinStyle);
 	}
 
 	/**
@@ -191,7 +198,30 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return getConfiguration().getElements().getLine().getBorderJoinStyle();
+		return getConfiguration().getElements().getArc().getBorderJoinStyle();
+	}
+
+	/**
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @param borderJoinStyle how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	public void setHoverBorderJoinStyle(JoinStyle borderJoinStyle) {
+		// resets callback
+		setHoverBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores value
+		getConfiguration().getElements().getArc().setHoverBorderJoinStyle(borderJoinStyle);
+	}
+
+	/**
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified
+	 * end points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @return how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	public JoinStyle getHoverBorderJoinStyle() {
+		return getConfiguration().getElements().getArc().getHoverBorderJoinStyle();
 	}
 
 	/**
@@ -386,6 +416,39 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		setBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.BORDER_JOIN_STYLE, borderJoinStyleCallback);
+	}
+
+	/**
+	 * Returns the hover border join style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the hover border join style callback, if set, otherwise <code>null</code>.
+	 */
+	public JoinStyleCallback<DatasetContext> getHoverBorderJoinStyleCallback() {
+		return hoverBorderJoinStyleCallback;
+	}
+
+	/**
+	 * Sets the hover border join style callback.
+	 * 
+	 * @param hoverBorderJoinStyleCallback the hover border join style callback.
+	 */
+	public void setHoverBorderJoinStyle(JoinStyleCallback<DatasetContext> hoverBorderJoinStyleCallback) {
+		// sets the callback
+		this.hoverBorderJoinStyleCallback = hoverBorderJoinStyleCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.HOVER_BORDER_JOIN_STYLE, hoverBorderJoinStyleCallback, hoverBorderJoinStyleCallbackProxy);
+	}
+
+	/**
+	 * Sets the hover border join style callback.
+	 * 
+	 * @param hoverBorderJoinStyleCallback the hover border join style callback.
+	 */
+	public void setHoverBorderJoinStyle(NativeCallback hoverBorderJoinStyleCallback) {
+		// resets callback
+		setHoverBorderJoinStyle((JoinStyleCallback<DatasetContext>) null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getElement(), Property.HOVER_BORDER_JOIN_STYLE, hoverBorderJoinStyleCallback);
 	}
 
 	/**
