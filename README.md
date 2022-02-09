@@ -311,6 +311,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `r` item to `InteractionAxis` class.
  * add `centered` option to `PointLabels` and `RadialPointLabels` classes.
  * add `borderJoinStyle` option to `Arc` element options and configuration, to `PolarAreaDataset`, `PieDataset` and `DoughnutDataset` classes.
+
+### Developing
+
+ * change dependency for Google Closure Compiler, [version v20220202](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20220202).
   
 License
 -------
