@@ -15,32 +15,35 @@
 */
 package org.pepstock.charba.client.annotation;
 
-import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.ColorCallback;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin ELLIPSE annotation DEFAULTS options.
+ * This is the default extended options for items which provides shadow properties.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsEllipseAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsExtendedShadowOptionsHandler {
+interface IsDefaultsExtendedShadowOptionsHandler {
 
 	/**
-	 * Returns the rotation of label in degrees.
+	 * Returns the color of the shadow of annotation.
 	 * 
-	 * @return the rotation of label in degrees
+	 * @return the color of the shadow of annotation
 	 */
-	default double getRotation() {
-		return EllipseAnnotation.DEFAULT_ROTATION;
+	default String getBackgroundShadowColorAsString() {
+		return ExtendedShadowOptionsHandler.DEFAULT_BACKGROUND_SHADOW_COLOR_AS_STRING;
 	}
 
+	// ----------------------
+	// CALLBACKS
+	// ----------------------
+
 	/**
-	 * Returns the callback called to set the rotation of label in degrees.
+	 * Returns the callback called to set the color of the shadow of annotation.
 	 * 
-	 * @return the callback called to set the rotation of label in degrees
+	 * @return the callback called to set the color of the shadow of annotation
 	 */
-	default RotationCallback<AnnotationContext> getRotationCallback() {
+	default ColorCallback<AnnotationContext> getBackgroundShadowColorCallback() {
 		return null;
 	}
-
 }

@@ -27,7 +27,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsAbstractPointedAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler {
+interface IsDefaultsAbstractPointedAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsExtendedShadowOptionsHandler {
 
 	/**
 	 * Returns the data X value to draw the annotation at.

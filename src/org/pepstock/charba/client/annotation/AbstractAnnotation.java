@@ -54,7 +54,7 @@ import org.pepstock.charba.client.utils.Window;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractAnnotation extends AbstractNode implements IsDefaultsAnnotation, HasBorderOptions {
+public abstract class AbstractAnnotation extends AbstractNode implements IsDefaultsAnnotation, HasBorderOptions, HasShadowOptions {
 
 	/**
 	 * Default annotation display, <b>{@value DEFAULT_DISPLAY}</b>.
@@ -180,6 +180,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private final IsDefaultsAnnotation defaultValues;
 	// border options handler
 	private final BorderOptionsHandler borderOptionsHandler;
+	// shadow options handler
+	private final ShadowOptionsHandler shadowOptionsHandler;
 	// draw time instance set at plugin startup
 	private DrawTime parentDrawTime = null;
 
@@ -247,8 +249,10 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// checks if default value is consistent
 		// stores default options
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
-		// loads handler
+		// loads border handler
 		this.borderOptionsHandler = new BorderOptionsHandler(this, this.defaultValues, getNativeObject());
+		// loads shadow handler
+		this.shadowOptionsHandler = new ShadowOptionsHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/*
@@ -259,6 +263,16 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	@Override
 	public final BorderOptionsHandler getBorderOptionsHandler() {
 		return borderOptionsHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasShadowOptions#getShadowOptionsHandler()
+	 */
+	@Override
+	public ShadowOptionsHandler getShadowOptionsHandler() {
+		return shadowOptionsHandler;
 	}
 
 	/**

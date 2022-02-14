@@ -37,7 +37,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class AbstractPointedAnnotation extends AbstractAnnotation implements IsDefaultsAbstractPointedAnnotation, HasBackgroundColor {
+abstract class AbstractPointedAnnotation extends AbstractAnnotation implements IsDefaultsAbstractPointedAnnotation, HasBackgroundColor, HasExtendedShadowOptions {
 
 	/**
 	 * Default annotation X adjust, <b>{@value DEFAULT_X_ADJUST}</b>.
@@ -108,6 +108,8 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 	private final IsDefaultsAbstractPointedAnnotation defaultValues;
 	// background color handler
 	private final BackgroundColorHandler backgroundColorHandler;
+	// extended shadow options handler
+	private final ExtendedShadowOptionsHandler extendedShadowOptionsHandler;
 
 	/**
 	 * Creates the object with the type of annotation to handle.
@@ -124,6 +126,8 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 		this.defaultValues = (IsDefaultsAbstractPointedAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
+		// creates shadow options handler
+		this.extendedShadowOptionsHandler = new ExtendedShadowOptionsHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initCallbacks();
 	}
@@ -142,6 +146,8 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 		this.defaultValues = (IsDefaultsAbstractPointedAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
+		// creates shadow options handler
+		this.extendedShadowOptionsHandler = new ExtendedShadowOptionsHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initCallbacks();
 	}
@@ -171,6 +177,16 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 	@Override
 	public final BackgroundColorHandler getBackgroundColorHandler() {
 		return backgroundColorHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasExtendedShadowOptions#getExtendedShadowOptionsHandler()
+	 */
+	@Override
+	public final ExtendedShadowOptionsHandler getExtendedShadowOptionsHandler() {
+		return extendedShadowOptionsHandler;
 	}
 
 	/**

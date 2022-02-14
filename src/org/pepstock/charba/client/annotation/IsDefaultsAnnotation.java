@@ -36,7 +36,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler {
+interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefaultsShadowOptionsHandler {
 
 	/**
 	 * Returns the type of annotation.

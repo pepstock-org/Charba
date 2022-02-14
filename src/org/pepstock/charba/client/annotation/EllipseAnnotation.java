@@ -35,7 +35,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class EllipseAnnotation extends AbstractAnnotation implements IsDefaultsEllipseAnnotation, HasBackgroundColor {
+public final class EllipseAnnotation extends AbstractAnnotation implements IsDefaultsEllipseAnnotation, HasBackgroundColor, HasExtendedShadowOptions {
 
 	/**
 	 * Default ellipse annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -90,6 +90,8 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 	private final IsDefaultsEllipseAnnotation defaultValues;
 	// background color handler
 	private final BackgroundColorHandler backgroundColorHandler;
+	// extended shadow options handler
+	private final ExtendedShadowOptionsHandler extendedShadowOptionsHandler;
 
 	/**
 	 * Creates a ellipse annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -157,6 +159,8 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 		this.defaultValues = (IsDefaultsEllipseAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
+		// creates shadow options handler
+		this.extendedShadowOptionsHandler = new ExtendedShadowOptionsHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/**
@@ -173,6 +177,8 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 		this.defaultValues = (IsDefaultsEllipseAnnotation) getDefaultsValues();
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
+		// creates shadow options handler
+		this.extendedShadowOptionsHandler = new ExtendedShadowOptionsHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/*
@@ -183,6 +189,16 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 	@Override
 	public BackgroundColorHandler getBackgroundColorHandler() {
 		return backgroundColorHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasExtendedShadowOptions#getExtendedShadowOptionsHandler()
+	 */
+	@Override
+	public ExtendedShadowOptionsHandler getExtendedShadowOptionsHandler() {
+		return extendedShadowOptionsHandler;
 	}
 
 	/**

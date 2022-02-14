@@ -44,7 +44,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, HasBackgroundColor, HasBorderRadius, HasBorderOptions, HasExtendedBorderOptions {
+public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, HasBackgroundColor, HasBorderRadius, HasBorderOptions, HasExtendedBorderOptions, HasShadowOptions, HasExtendedShadowOptions {
 
 	/**
 	 * Constant to use to set AUTO rotation of the label, to use in the rotation callback.
@@ -207,6 +207,10 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	private final BorderOptionsHandler borderOptionsHandler;
 	// extended border options handler
 	private final ExtendedBorderOptionsHandler extendedBorderOptionsHandler;
+	// shadow options handler
+	private final ShadowOptionsHandler shadowOptionsHandler;
+	// extended shadow options handler
+	private final ExtendedShadowOptionsHandler extendedShadowOptionsHandler;
 
 	/**
 	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
@@ -240,6 +244,10 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		this.borderOptionsHandler = new BorderOptionsHandler(this.parent, this.defaultValues, getNativeObject());
 		// creates border options handler
 		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this.parent, this.defaultValues, getNativeObject());
+		// creates shadow options handler
+		this.shadowOptionsHandler = new ShadowOptionsHandler(this.parent, this.defaultValues, getNativeObject());
+		// creates shadow options handler
+		this.extendedShadowOptionsHandler = new ExtendedShadowOptionsHandler(this.parent, this.defaultValues, getNativeObject());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -287,6 +295,26 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	@Override
 	public ExtendedBorderOptionsHandler getExtendedBorderOptionsHandler() {
 		return extendedBorderOptionsHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasShadowOptions#getShadowOptionsHandler()
+	 */
+	@Override
+	public ShadowOptionsHandler getShadowOptionsHandler() {
+		return shadowOptionsHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasExtendedShadowOptions#getExtendedShadowOptionsHandler()
+	 */
+	@Override
+	public ExtendedShadowOptionsHandler getExtendedShadowOptionsHandler() {
+		return extendedShadowOptionsHandler;
 	}
 
 	/**

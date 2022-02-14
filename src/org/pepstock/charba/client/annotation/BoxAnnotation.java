@@ -31,7 +31,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BoxAnnotation extends AbstractAnnotation implements IsDefaultsBoxAnnotation, IsLabelContainer<BoxLabel>, HasBackgroundColor, HasBorderRadius, HasExtendedBorderOptions {
+public final class BoxAnnotation extends AbstractAnnotation implements IsDefaultsBoxAnnotation, IsLabelContainer<BoxLabel>, HasBackgroundColor, HasBorderRadius, HasExtendedBorderOptions, HasExtendedShadowOptions {
 
 	/**
 	 * Default box annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -92,6 +92,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	private final BorderRadiusHandler borderRadiusHandler;
 	// extended border options handler
 	private final ExtendedBorderOptionsHandler extendedBorderOptionsHandler;
+	// extended shadow options handler
+	private final ExtendedShadowOptionsHandler extendedShadowOptionsHandler;
 	// label for box instance
 	private final BoxLabel label;
 
@@ -169,6 +171,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		this.borderRadiusHandler = new BorderRadiusHandler(this, this.defaultValues, getNativeObject());
 		// creates border options handler
 		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
+		// creates shadow options handler
+		this.extendedShadowOptionsHandler = new ExtendedShadowOptionsHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/**
@@ -191,6 +195,8 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		this.borderRadiusHandler = new BorderRadiusHandler(this, this.defaultValues, getNativeObject());
 		// creates border options handler
 		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
+		// creates shadow options handler
+		this.extendedShadowOptionsHandler = new ExtendedShadowOptionsHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/*
@@ -221,6 +227,16 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	@Override
 	public ExtendedBorderOptionsHandler getExtendedBorderOptionsHandler() {
 		return extendedBorderOptionsHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasExtendedShadowOptions#getExtendedShadowOptionsHandler()
+	 */
+	@Override
+	public ExtendedShadowOptionsHandler getExtendedShadowOptionsHandler() {
+		return extendedShadowOptionsHandler;
 	}
 
 	/**

@@ -26,7 +26,8 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsLineLabel extends IsDefaultsInnerLabel, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler, IsDefaultsBorderOptionsHandler, IsDefaultsExtendedBorderOptionsHandler {
+interface IsDefaultsLineLabel
+		extends IsDefaultsInnerLabel, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler, IsDefaultsBorderOptionsHandler, IsDefaultsExtendedBorderOptionsHandler, IsDefaultsShadowOptionsHandler, IsDefaultsExtendedShadowOptionsHandler {
 
 	/**
 	 * Returns the anchor position of label on line.

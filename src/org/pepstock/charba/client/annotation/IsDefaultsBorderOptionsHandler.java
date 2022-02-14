@@ -24,7 +24,7 @@ import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 
 /**
- * This is the default options for items which provides background color property.
+ * This is the default options for items which provides border properties.
  * 
  * @author Andrea "Stock" Stocchero
  *

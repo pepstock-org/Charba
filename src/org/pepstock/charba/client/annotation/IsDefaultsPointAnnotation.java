@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsPointAnnotation extends IsDefaultsAbstractCircleBasedAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultPointStyleHandler {
+interface IsDefaultsPointAnnotation extends IsDefaultsAbstractCircleBasedAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultPointStyleHandler, IsDefaultsExtendedShadowOptionsHandler {
 
 	/**
 	 * Returns the radius of the point.

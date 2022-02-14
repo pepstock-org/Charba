@@ -13,21 +13,18 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.annotation;
+package org.pepstock.charba.client.annotation.callbacks;
+
+import org.pepstock.charba.client.annotation.AnnotationContext;
+import org.pepstock.charba.client.annotation.AnnotationPlugin;
+import org.pepstock.charba.client.callbacks.Scriptable;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin BOX annotation DEFAULTS options.
+ * Callback interface of {@link AnnotationPlugin#ID} plugin to set <code>shadowBlur</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler, IsDefaultsExtendedBorderOptionsHandler, IsDefaultsExtendedShadowOptionsHandler {
-
-	/**
-	 * Returns the label on the line.
-	 * 
-	 * @return the label on the line
-	 */
-	IsDefaultsBoxLabel getLabel();
+public interface ShadowBlurCallback extends Scriptable<Double, AnnotationContext> {
 
 }
