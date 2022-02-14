@@ -75,6 +75,15 @@ public final class ProjectionAxis extends Axis {
 	}
 
 	/**
+	 * Returns the padding applied during auto scaling of the map in pixels, i.e. the chart size is reduce by the padding before fitting the map.
+	 * 
+	 * @return the padding applied during auto scaling of the map in pixels
+	 */
+	public Padding getPadding() {
+		return mapper.getPadding();
+	}
+
+	/**
 	 * Sets a map projection which is a way to flatten a globe's surface into a plane in order to make a map.
 	 * 
 	 * @param projection a map projection which is a way to flatten a globe's surface into a plane in order to make a map

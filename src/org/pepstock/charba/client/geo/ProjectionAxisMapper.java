@@ -22,6 +22,8 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.defaults.IsDefaultPadding;
+import org.pepstock.charba.client.defaults.globals.DefaultPadding;
 import org.pepstock.charba.client.geo.enums.Projection;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -40,6 +42,7 @@ final class ProjectionAxisMapper extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
+		PADDING("padding"),
 		PROJECTION("projection"),
 		PROJECTION_SCALE("projectionScale"),
 		PROJECTION_OFFSET("projectionOffset");
@@ -68,6 +71,13 @@ final class ProjectionAxisMapper extends NativeObjectContainer {
 
 	}
 
+	// defualt value of padding
+	private static final int DEFAULT_PADDING = 0;
+	// default padding instance
+	private final IsDefaultPadding defaultPadding = new DefaultPadding(DEFAULT_PADDING);
+
+	private final Padding padding;
+
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
@@ -75,6 +85,22 @@ final class ProjectionAxisMapper extends NativeObjectContainer {
 	 */
 	ProjectionAxisMapper(NativeObject nativeObject) {
 		super(nativeObject);
+		// loads padding
+		this.padding = new Padding(defaultPadding, getValue(Property.PADDING));
+		// checks if padding is set
+		if (!has(Property.PADDING)) {
+			// stores padding
+			setValue(Property.PADDING, this.padding);
+		}
+	}
+
+	/**
+	 * Returns the padding applied during auto scaling of the map in pixels, i.e. the chart size is reduce by the padding before fitting the map.
+	 * 
+	 * @return the padding applied during auto scaling of the map in pixels
+	 */
+	Padding getPadding() {
+		return padding;
 	}
 
 	/**

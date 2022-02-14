@@ -312,6 +312,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `r` item to `InteractionAxis` class.
  * add `centered` option to `PointLabels` and `RadialPointLabels` classes.
  * add `borderJoinStyle` option to `Arc` element options and configuration, to `PolarAreaDataset`, `PieDataset` and `DoughnutDataset` classes.
+ * add `padding` option to `ProjectionAxis` class.
 
 ### Developing
 
