@@ -38,7 +38,8 @@ public final class PluginEventArgument extends NativeObjectContainer {
 	{
 		EVENT("event"),
 		REPLAY("replay"),
-		IN_CHART_AREA("inChartArea");
+		IN_CHART_AREA("inChartArea"),
+		CHANGED("changed");
 
 		// name value of property
 		private final String value;
@@ -104,4 +105,23 @@ public final class PluginEventArgument extends NativeObjectContainer {
 	public boolean isInChartArea() {
 		return getValue(Property.IN_CHART_AREA, Undefined.BOOLEAN);
 	}
+
+	/**
+	 * Set to <code>true</code> if the plugin needs a render.
+	 * 
+	 * @param changed <code>true</code> if the plugin needs a render
+	 */
+	public void setChanged(boolean changed) {
+		setValue(Property.CHANGED, changed);
+	}
+
+	/**
+	 * Returns <code>true</code> if the plugin needs a render.
+	 * 
+	 * @return <code>true</code> if the plugin needs a render.
+	 */
+	public boolean isChanged() {
+		return getValue(Property.CHANGED, Undefined.BOOLEAN);
+	}
+
 }

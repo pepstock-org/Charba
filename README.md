@@ -313,6 +313,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `centered` option to `PointLabels` and `RadialPointLabels` classes.
  * add `borderJoinStyle` option to `Arc` element options and configuration, to `PolarAreaDataset`, `PieDataset` and `DoughnutDataset` classes.
  * add `padding` option to `ProjectionAxis` class.
+ * add `changed` option to `PluginEventArgument` class in order to enable the rendering of the chart after event processing.
 
 ### Developing
 
