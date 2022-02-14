@@ -41,7 +41,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'GeoControllerResource' class.
 	 */
-	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 8969303),
+	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 8980570),
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
