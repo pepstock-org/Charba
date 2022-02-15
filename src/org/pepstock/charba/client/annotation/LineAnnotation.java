@@ -48,6 +48,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 */
 	private enum Property implements Key
 	{
+		ARROW_HEADS("arrowHeads"),
 		VALUE("value"),
 		END_VALUE("endValue"),
 		SCALE_ID("scaleID"),
@@ -94,6 +95,8 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	private final IsDefaultsLineAnnotation defaultValues;
 	// label for line instance
 	private final LineLabel label;
+	// arraow heads instance
+	private final ArrowHeads arrowHeads;
 
 	/**
 	 * Creates a line annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -165,6 +168,10 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		this.label = new LineLabel(this, this.defaultValues.getLabel());
 		// stores in the annotation
 		setValue(Property.LABEL, label);
+		// creates arrow heads
+		this.arrowHeads = new ArrowHeads(this, getValue(Property.ARROW_HEADS), this.defaultValues.getArrowHeads());
+		// stores in the annotation
+		setValue(Property.ARROW_HEADS, arrowHeads);
 		// sets callbacks proxies
 		initCallbacks();
 	}
@@ -183,6 +190,8 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		this.defaultValues = (IsDefaultsLineAnnotation) getDefaultsValues();
 		// creates a line label
 		this.label = new LineLabel(this, getValue(Property.LABEL), this.defaultValues.getLabel());
+		// creates arrow heads
+		this.arrowHeads = new ArrowHeads(this, getValue(Property.ARROW_HEADS), this.defaultValues.getArrowHeads());
 		// sets callbacks proxies
 		initCallbacks();
 	}
@@ -208,6 +217,16 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	@Override
 	public LineLabel getLabel() {
 		return label;
+	}
+
+	/**
+	 * Returns the arrow heads of annotation.
+	 * 
+	 * @return the arrow heads of annotation
+	 */
+	@Override
+	public ArrowHeads getArrowHeads() {
+		return arrowHeads;
 	}
 
 	/**

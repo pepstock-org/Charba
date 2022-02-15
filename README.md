@@ -305,6 +305,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable to set a content by `Canvas` instance to `LineLabel` options.
  * enable to set the `position` of the `LineLabel` options as percentage of the line dimension.
  * add `borderShadowColor`, `backgroundShadowColor`, `shadowBlur`, `shadowOffsetX` and `shadowOffsetY` to annotations and line label options in order to enable the shadowing.
+ * add `arrowHeads` option to `LineAnnotation` class options in order to enable the arrows drawing to the line.
  * add `drawActiveElementsOnTop` property to lining and bubble datasets.
  * add `onBeforeDestroy` and `onAfterDestroy` methods to `Plugin` interface.
  * enable all tick callbacks to return a `List` of strings in order to have ticks multiple lines.

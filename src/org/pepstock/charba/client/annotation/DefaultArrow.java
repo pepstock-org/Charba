@@ -16,51 +16,18 @@
 package org.pepstock.charba.client.annotation;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin LINE annotation DEFAULTS options.
+ * This is the {@link AnnotationPlugin#ID} plugin LINE annotation ARROWHEADS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultLine implements IsDefaultsLineAnnotation {
-
-	// defaults options instance
-	static final DefaultLine INSTANCE = new DefaultLine();
+class DefaultArrow implements IsDefaultsArrow {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private DefaultLine() {
+	DefaultArrow() {
 		// do nothing
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotation#getType()
-	 */
-	@Override
-	public AnnotationType getType() {
-		return AnnotationType.LINE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsLineAnnotation#getLabel()
-	 */
-	@Override
-	public IsDefaultsLineLabel getLabel() {
-		return DefaultLineLabel.INSTANCE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsLineAnnotation#getArrowHeads()
-	 */
-	@Override
-	public IsDefaultsArrowHeads getArrowHeads() {
-		return DefaultArrowHeads.INSTANCE;
 	}
 
 	/*

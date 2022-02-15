@@ -37,6 +37,13 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	IsDefaultsLineLabel getLabel();
 
 	/**
+	 * Returns the arrow heads of annotation.
+	 * 
+	 * @return the arrow heads of annotation
+	 */
+	IsDefaultsArrowHeads getArrowHeads();
+
+	/**
 	 * Returns the ID of the scale to bind onto.
 	 * 
 	 * @return the ID of the scale to bind onto

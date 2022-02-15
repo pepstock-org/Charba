@@ -156,7 +156,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 	// callback instance to handle position options
 	private static final CallbackPropertyHandler<CalloutPositionCallback> POSITION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.POSITION);
 
-	// line annotation parent instance
+	// label annotation parent instance
 	private final AbstractAnnotation parent;
 	// defaults options
 	private final IsDefaultsCallout defaultValues;
