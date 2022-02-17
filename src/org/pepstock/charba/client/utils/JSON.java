@@ -298,7 +298,6 @@ public final class JSON {
 			}
 		}
 		return null;
-
 	}
 
 	/**
