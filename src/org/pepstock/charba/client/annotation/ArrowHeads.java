@@ -42,7 +42,7 @@ public final class ArrowHeads extends Arrow implements IsDefaultsArrowHeads {
 	public static final int DEFAULT_WIDTH = 6;
 
 	/**
-	 * Default fill options in order to fill teh arrows, <b>{@value DEFAULT_FILL}</b>.
+	 * Default fill options in order to fill the arrows, <b>{@value DEFAULT_FILL}</b>.
 	 */
 	public static final boolean DEFAULT_FILL = false;
 

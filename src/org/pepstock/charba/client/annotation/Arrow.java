@@ -114,7 +114,7 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	/**
 	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
 	 * 
-	 * @param annotation {@link LineAnnotation} which teh arrow heads node belongs to
+	 * @param annotation {@link LineAnnotation} which the arrow heads node belongs to
 	 * @param nativeObject native object to wrap, with all properties of a arrow
 	 * @param defaultValues default options instance
 	 */
