@@ -422,20 +422,20 @@ public class OptionsElement extends BaseElement {
 	}
 
 	/**
-	 * Sets the style of the point as image.
-	 * 
-	 * @param pointStyle image element of the style of the point as image.
-	 */
-	public void setPointStyle(Img pointStyle) {
-		setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
-	}
-
-	/**
 	 * Sets the style of the point as canvas.
 	 * 
 	 * @param pointStyle canvas element of the style of the point as canvas.
 	 */
 	public void setPointStyle(Canvas pointStyle) {
+		setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
+	 * Sets the style of the point as image.
+	 * 
+	 * @param pointStyle image element of the style of the point as image.
+	 */
+	public void setPointStyle(Img pointStyle) {
 		setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
 	}
 
@@ -464,23 +464,6 @@ public class OptionsElement extends BaseElement {
 	}
 
 	/**
-	 * Returns the style of the point as image.<br>
-	 * If property is missing or not an image, returns <code>null</code>.
-	 * 
-	 * @return image of the style of the point as image.<br>
-	 *         If property is missing or not a image, returns <code>null</code>.
-	 */
-	public Img getPointStyleAsImage() {
-		// checks if image as point style has been used
-		if (PointStyleType.IMAGE.equals(getPointStyleType())) {
-			return getValue(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
-		}
-		// if here, means the point style as stored as string or canvas
-		// returns undefined
-		return Undefined.IMAGE_ELEMENT;
-	}
-
-	/**
 	 * Returns the style of the point as canvas.<br>
 	 * If property is missing or not an canvas, returns <code>null</code>.
 	 * 
@@ -495,6 +478,23 @@ public class OptionsElement extends BaseElement {
 		// if here, means the point style as stored as string or image
 		// returns undefined
 		return Undefined.CANVAS_ELEMENT;
+	}
+
+	/**
+	 * Returns the style of the point as image.<br>
+	 * If property is missing or not an image, returns <code>null</code>.
+	 * 
+	 * @return image of the style of the point as image.<br>
+	 *         If property is missing or not a image, returns <code>null</code>.
+	 */
+	public Img getPointStyleAsImage() {
+		// checks if image as point style has been used
+		if (PointStyleType.IMAGE.equals(getPointStyleType())) {
+			return getValue(Property.POINT_STYLE, Undefined.IMAGE_ELEMENT);
+		}
+		// if here, means the point style as stored as string or canvas
+		// returns undefined
+		return Undefined.IMAGE_ELEMENT;
 	}
 
 	/**

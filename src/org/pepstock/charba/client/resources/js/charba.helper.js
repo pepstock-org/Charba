@@ -745,8 +745,7 @@ function CharbaJsPositionerHelper() {}
  */
 CharbaJsPositionerHelper.register = function(name, module) {
   if (module != null && typeof module === 'function'){
-    const tooltipPlugin = Chart.registry.getPlugin('tooltip');
-    tooltipPlugin.positioners[name] = module;
+    Chart.Tooltip.positioners[name] = module;
   }
 }
 /**
@@ -756,9 +755,9 @@ CharbaJsPositionerHelper.register = function(name, module) {
  * @return {undefined}
  */
 CharbaJsPositionerHelper.unregister = function(name) {
-  const tooltipPlugin = Chart.registry.getPlugin('tooltip');
-  if (tooltipPlugin.positioners[name] != 'undefined'){
-    delete tooltipPlugin.positioners[name];
+  const positioners = Chart.Tooltip.positioners;
+  if (positioners[name] != 'undefined'){
+    delete positioners[name];
   }
 }
 /**
@@ -771,9 +770,9 @@ CharbaJsPositionerHelper.unregister = function(name) {
  * @return {Object} the point calculated by positioner or <code>null</code> if positioner does not exist
  */
 CharbaJsPositionerHelper.invoke = function(name, context, elements, eventPoint) {
-  const tooltipPlugin = Chart.registry.getPlugin('tooltip');
-  if (tooltipPlugin.positioners[name]  != 'undefined'){
-    return tooltipPlugin.positioners[name].apply(context, Array.of(elements, eventPoint));
+  const positioners = Chart.Tooltip.positioners;
+  if (positioners[name]  != 'undefined'){
+    return positioners[name].apply(context, Array.of(elements, eventPoint));
   }
   return null;
 }
