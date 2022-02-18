@@ -13,26 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.annotation.listeners;
-
-import org.pepstock.charba.client.annotation.AnnotationContext;
-import org.pepstock.charba.client.annotation.AnnotationPlugin;
-import org.pepstock.charba.client.events.ChartEventContext;
-
 /**
- * Callback interface of {@link AnnotationPlugin#ID} plugin that is called once leave is fired.
+ * Contains the {@link org.pepstock.charba.client.annotation.AnnotationPlugin#ID} plugin elements interfaces to use in the callbacks and events.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface LeaveCallback {
-
-	/**
-	 * Method called once leave is fired.
-	 * 
-	 * @param context context instance
-	 * @param event event instance
-	 */
-	void onLeave(AnnotationContext context, ChartEventContext event);
-
-}
+package org.pepstock.charba.client.annotation.elements;

@@ -148,6 +148,15 @@ public class DatasetElement extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns if element is active.
+	 * 
+	 * @return <code>true</code> if the element is active.
+	 */
+	public final boolean isActive() {
+		return getValue(Property.ACTIVE, Undefined.BOOLEAN);
+	}
+
+	/**
 	 * Returns the base value of data set.
 	 * 
 	 * @return the base value of data set.

@@ -413,9 +413,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the right edge of the box.
+	 * Sets the right edge of the annotation.
 	 * 
-	 * @param max the right edge of the box
+	 * @param max the right edge of the annotation
 	 */
 	public final void setXMax(String max) {
 		// resets callback
@@ -425,9 +425,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the right edge of the box.
+	 * Sets the right edge of the annotation.
 	 * 
-	 * @param max the right edge of the box
+	 * @param max the right edge of the annotation
 	 */
 	public final void setXMax(double max) {
 		// resets callback
@@ -437,9 +437,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the right edge of the box.
+	 * Sets the right edge of the annotation.
 	 * 
-	 * @param max the right edge of the box
+	 * @param max the right edge of the annotation
 	 */
 	public final void setXMax(Date max) {
 		// resets callback
@@ -449,9 +449,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the right edge of the box.
+	 * Returns the right edge of the annotation.
 	 * 
-	 * @return the right edge of the box
+	 * @return the right edge of the annotation
 	 */
 	@Override
 	public final String getXMaxAsString() {
@@ -459,9 +459,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the right edge of the box.
+	 * Returns the right edge of the annotation.
 	 * 
-	 * @return the right edge of the box
+	 * @return the right edge of the annotation
 	 */
 	@Override
 	public final double getXMaxAsDouble() {
@@ -469,9 +469,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the right edge of the box.
+	 * Returns the right edge of the annotation.
 	 * 
-	 * @return the right edge of the box
+	 * @return the right edge of the annotation
 	 */
 	@Override
 	public final Date getXMaxAsDate() {
@@ -479,9 +479,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the left edge of the box, in units along the x axis.
+	 * Sets the left edge of the annotation, in units along the x axis.
 	 * 
-	 * @param min the left edge of the box
+	 * @param min the left edge of the annotation
 	 */
 	public final void setXMin(String min) {
 		// resets callback
@@ -491,9 +491,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the left edge of the box, in units along the x axis.
+	 * Sets the left edge of the annotation, in units along the x axis.
 	 * 
-	 * @param min the left edge of the box
+	 * @param min the left edge of the annotation
 	 */
 	public final void setXMin(double min) {
 		// resets callback
@@ -503,9 +503,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the left edge of the box, in units along the x axis.
+	 * Sets the left edge of the annotation, in units along the x axis.
 	 * 
-	 * @param min the left edge of the box
+	 * @param min the left edge of the annotation
 	 */
 	public final void setXMin(Date min) {
 		// resets callback
@@ -515,9 +515,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the left edge of the box, in units along the x axis.
+	 * Returns the left edge of the annotation, in units along the x axis.
 	 * 
-	 * @return the left edge of the box
+	 * @return the left edge of the annotation
 	 */
 	@Override
 	public final String getXMinAsString() {
@@ -525,9 +525,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the left edge of the box, in units along the x axis.
+	 * Returns the left edge of the annotation, in units along the x axis.
 	 * 
-	 * @return the left edge of the box
+	 * @return the left edge of the annotation
 	 */
 	@Override
 	public final double getXMinAsDouble() {
@@ -535,9 +535,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the left edge of the box, in units along the x axis.
+	 * Returns the left edge of the annotation, in units along the x axis.
 	 * 
-	 * @return the left edge of the box
+	 * @return the left edge of the annotation
 	 */
 	@Override
 	public final Date getXMinAsDate() {
@@ -579,9 +579,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the top edge of the box in units along the y axis.
+	 * Sets the top edge of the annotation in units along the y axis.
 	 * 
-	 * @param max the top edge of the box in units along the y axis
+	 * @param max the top edge of the annotation in units along the y axis
 	 */
 	public final void setYMax(String max) {
 		// resets callback
@@ -591,9 +591,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the top edge of the box in units along the y axis.
+	 * Sets the top edge of the annotation in units along the y axis.
 	 * 
-	 * @param max the top edge of the box in units along the y axis
+	 * @param max the top edge of the annotation in units along the y axis
 	 */
 	public final void setYMax(double max) {
 		// resets callback
@@ -603,9 +603,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the top edge of the box in units along the y axis.
+	 * Sets the top edge of the annotation in units along the y axis.
 	 * 
-	 * @param max the top edge of the box in units along the y axis
+	 * @param max the top edge of the annotation in units along the y axis
 	 */
 	public final void setYMax(Date max) {
 		// resets callback
@@ -615,9 +615,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the top edge of the box in units along the y axis.
+	 * Returns the top edge of the annotation in units along the y axis.
 	 * 
-	 * @return the top edge of the box in units along the y axis
+	 * @return the top edge of the annotation in units along the y axis
 	 */
 	@Override
 	public final String getYMaxAsString() {
@@ -625,9 +625,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the top edge of the box in units along the y axis.
+	 * Returns the top edge of the annotation in units along the y axis.
 	 * 
-	 * @return the top edge of the box in units along the y axis
+	 * @return the top edge of the annotation in units along the y axis
 	 */
 	@Override
 	public final double getYMaxAsDouble() {
@@ -635,9 +635,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the top edge of the box in units along the y axis.
+	 * Returns the top edge of the annotation in units along the y axis.
 	 * 
-	 * @return the top edge of the box in units along the y axis
+	 * @return the top edge of the annotation in units along the y axis
 	 */
 	@Override
 	public final Date getYMaxAsDate() {
@@ -645,9 +645,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the bottom edge of the box.
+	 * Sets the bottom edge of the annotation.
 	 * 
-	 * @param min the bottom edge of the box
+	 * @param min the bottom edge of the annotation
 	 */
 	public final void setYMin(String min) {
 		// resets callback
@@ -657,9 +657,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the bottom edge of the box.
+	 * Sets the bottom edge of the annotation.
 	 * 
-	 * @param min the bottom edge of the box
+	 * @param min the bottom edge of the annotation
 	 */
 	public final void setYMin(double min) {
 		// resets callback
@@ -669,9 +669,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the bottom edge of the box.
+	 * Sets the bottom edge of the annotation.
 	 * 
-	 * @param min the bottom edge of the box
+	 * @param min the bottom edge of the annotation
 	 */
 	public final void setYMin(Date min) {
 		// resets callback
@@ -681,9 +681,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the bottom edge of the box.
+	 * Returns the bottom edge of the annotation.
 	 * 
-	 * @return the bottom edge of the box
+	 * @return the bottom edge of the annotation
 	 */
 	@Override
 	public final String getYMinAsString() {
@@ -691,9 +691,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the bottom edge of the box.
+	 * Returns the bottom edge of the annotation.
 	 * 
-	 * @return the bottom edge of the box
+	 * @return the bottom edge of the annotation
 	 */
 	@Override
 	public final double getYMinAsDouble() {
@@ -701,9 +701,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the bottom edge of the box.
+	 * Returns the bottom edge of the annotation.
 	 * 
-	 * @return the bottom edge of the box
+	 * @return the bottom edge of the annotation
 	 */
 	@Override
 	public final Date getYMinAsDate() {
@@ -888,9 +888,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the callback called to set the left edge of the box, in units along the x axis.
+	 * Returns the callback called to set the left edge of the annotation, in units along the x axis.
 	 * 
-	 * @return the callback called to set the left edge of the box, in units along the x axis
+	 * @return the callback called to set the left edge of the annotation, in units along the x axis
 	 */
 	@Override
 	public final ValueCallback getXMinCallback() {
@@ -898,18 +898,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the callback to set the left edge of the box, in units along the x axis.
+	 * Sets the callback to set the left edge of the annotation, in units along the x axis.
 	 * 
-	 * @param valueCallback to set the left edge of the box, in units along the x axis
+	 * @param valueCallback to set the left edge of the annotation, in units along the x axis
 	 */
 	public final void setXMin(ValueCallback valueCallback) {
 		X_MIN_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, xMinCallbackProxy.getProxy());
 	}
 
 	/**
-	 * Sets the callback to set the left edge of the box, in units along the x axis.
+	 * Sets the callback to set the left edge of the annotation, in units along the x axis.
 	 * 
-	 * @param valueCallback to set the left edge of the box, in units along the x axis
+	 * @param valueCallback to set the left edge of the annotation, in units along the x axis
 	 */
 	public final void setXMin(NativeCallback valueCallback) {
 		// resets callback
@@ -919,9 +919,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the callback called to set the right edge of the box.
+	 * Returns the callback called to set the right edge of the annotation.
 	 * 
-	 * @return the callback called to set the right edge of the box
+	 * @return the callback called to set the right edge of the annotation
 	 */
 	@Override
 	public final ValueCallback getXMaxCallback() {
@@ -929,18 +929,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the callback to set the right edge of the box.
+	 * Sets the callback to set the right edge of the annotation.
 	 * 
-	 * @param valueCallback to set the right edge of the box
+	 * @param valueCallback to set the right edge of the annotation
 	 */
 	public final void setXMax(ValueCallback valueCallback) {
 		X_MAX_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, xMaxCallbackProxy.getProxy());
 	}
 
 	/**
-	 * Sets the callback to set the right edge of the box.
+	 * Sets the callback to set the right edge of the annotation.
 	 * 
-	 * @param valueCallback to set the right edge of the box
+	 * @param valueCallback to set the right edge of the annotation
 	 */
 	public final void setXMax(NativeCallback valueCallback) {
 		// resets callback
@@ -950,9 +950,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the callback called to set the bottom edge of the box.
+	 * Returns the callback called to set the bottom edge of the annotation.
 	 * 
-	 * @return the callback called to set the bottom edge of the box
+	 * @return the callback called to set the bottom edge of the annotation
 	 */
 	@Override
 	public final ValueCallback getYMinCallback() {
@@ -960,18 +960,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the callback to set the bottom edge of the box.
+	 * Sets the callback to set the bottom edge of the annotation.
 	 * 
-	 * @param valueCallback to set the bottom edge of the box
+	 * @param valueCallback to set the bottom edge of the annotation
 	 */
 	public final void setYMin(ValueCallback valueCallback) {
 		Y_MIN_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yMinCallbackProxy.getProxy());
 	}
 
 	/**
-	 * Sets the callback to set the bottom edge of the box.
+	 * Sets the callback to set the bottom edge of the annotation.
 	 * 
-	 * @param valueCallback to set the bottom edge of the box
+	 * @param valueCallback to set the bottom edge of the annotation
 	 */
 	public final void setYMin(NativeCallback valueCallback) {
 		// resets callback
@@ -981,9 +981,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Returns the callback called to set the top edge of the box in units along the y axis.
+	 * Returns the callback called to set the top edge of the annotation in units along the y axis.
 	 * 
-	 * @return the callback called to set the top edge of the box in units along the y axis
+	 * @return the callback called to set the top edge of the annotation in units along the y axis
 	 */
 	@Override
 	public final ValueCallback getYMaxCallback() {
@@ -991,18 +991,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * Sets the callback to set the top edge of the box in units along the y axis.
+	 * Sets the callback to set the top edge of the annotation in units along the y axis.
 	 * 
-	 * @param valueCallback to set the top edge of the box in units along the y axis
+	 * @param valueCallback to set the top edge of the annotation in units along the y axis
 	 */
 	public final void setYMax(ValueCallback valueCallback) {
 		Y_MAX_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, valueCallback, yMaxCallbackProxy.getProxy());
 	}
 
 	/**
-	 * Sets the callback to set the top edge of the box in units along the y axis.
+	 * Sets the callback to set the top edge of the annotation in units along the y axis.
 	 * 
-	 * @param valueCallback to set the top edge of the box in units along the y axis
+	 * @param valueCallback to set the top edge of the annotation in units along the y axis
 	 */
 	public final void setYMax(NativeCallback valueCallback) {
 		// resets callback
@@ -1029,7 +1029,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 			// creates a chart event context
 			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 			// invokes callback
-			enterCallback.onEnter(chart, this, eventContext);
+			enterCallback.onEnter(internalContext, eventContext);
 		}
 	}
 
@@ -1051,7 +1051,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 			// creates a chart event context
 			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 			// invokes callback
-			leaveCallback.onLeave(chart, this, eventContext);
+			leaveCallback.onLeave(internalContext, eventContext);
 		}
 	}
 
@@ -1073,7 +1073,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 			// creates a chart event context
 			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 			// invokes callback
-			clickCallback.onClick(chart, this, eventContext);
+			clickCallback.onClick(internalContext, eventContext);
 		}
 	}
 
@@ -1088,14 +1088,14 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		DoubleClickCallback dblclickCallback = getDoubleClickCallback();
 		// creates a context wrapper
 		AnnotationContext internalContext = new AnnotationContext(this, context);
-		// creates a chart event context
-		ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 		// gets chart instance from function context
 		IsChart chart = internalContext.getChart();
 		// checks if chart is consistent
 		if (IsChart.isValid(chart) && dblclickCallback != null) {
+			// creates a chart event context
+			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 			// invokes callback
-			dblclickCallback.onDoubleClick(chart, this, eventContext);
+			dblclickCallback.onDoubleClick(internalContext, eventContext);
 		}
 	}
 

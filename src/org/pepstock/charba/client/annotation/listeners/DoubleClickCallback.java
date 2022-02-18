@@ -15,8 +15,7 @@
 */
 package org.pepstock.charba.client.annotation.listeners;
 
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.annotation.AbstractAnnotation;
+import org.pepstock.charba.client.annotation.AnnotationContext;
 import org.pepstock.charba.client.annotation.AnnotationPlugin;
 import org.pepstock.charba.client.events.ChartEventContext;
 
@@ -31,10 +30,9 @@ public interface DoubleClickCallback {
 	/**
 	 * Method called once dblclick is fired.
 	 * 
-	 * @param chart chart instance
-	 * @param annotation annotation instance where event has been performed
+	 * @param context context instance
 	 * @param event event instance
 	 */
-	void onDoubleClick(IsChart chart, AbstractAnnotation annotation, ChartEventContext event);
+	void onDoubleClick(AnnotationContext context, ChartEventContext event);
 
 }

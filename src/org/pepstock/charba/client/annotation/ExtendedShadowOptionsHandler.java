@@ -97,13 +97,13 @@ final class ExtendedShadowOptionsHandler extends PropertyHandler<IsDefaultsExten
 	/**
 	 * Sets the color of the shadow of annotation.
 	 * 
-	 * @param borderShadowColor the shadow of the border of annotation
+	 * @param backgroundShadowColor the shadow of the border of annotation
 	 */
-	void setBackgroundShadowColor(String borderShadowColor) {
+	void setBackgroundShadowColor(String backgroundShadowColor) {
 		// resets callback
 		setBackgroundShadowColor((ColorCallback<AnnotationContext>) null);
 		// stores value
-		setValueAndAddToParent(Property.BACKGROUND_SHADOW_COLOR, borderShadowColor);
+		setValueAndAddToParent(Property.BACKGROUND_SHADOW_COLOR, backgroundShadowColor);
 	}
 
 	/**

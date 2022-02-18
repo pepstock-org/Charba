@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
+import org.pepstock.charba.client.annotation.enums.ContentType;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
@@ -154,14 +155,14 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// checks if it must be added
 		if (!has(Property.FONT)) {
 			// stores instance
-			setValue(Property.FONT, font);
+			setValueAndAddToParent(Property.FONT, font);
 		}
 		// creates padding
 		this.padding = new Padding(labelContainer, this.defaultValues.getPadding(), getValue(Property.PADDING));
 		// checks if it must be added
 		if (!has(Property.PADDING)) {
 			// stores instance
-			setValue(Property.PADDING, padding);
+			setValueAndAddToParent(Property.PADDING, padding);
 		}
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
@@ -345,7 +346,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// resets callback
 		setImageHeight((ImageSizeCallback) null);
 		// stores the value
-		setValue(Property.HEIGHT, Checker.positiveOrZero(height));
+		setValueAndAddToParent(Property.HEIGHT, Checker.positiveOrZero(height));
 	}
 
 	/**
@@ -357,7 +358,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// resets callback
 		setImageHeight((ImageSizeCallback) null);
 		// stores the value
-		setValue(Property.HEIGHT, heightPercentage);
+		setValueAndAddToParent(Property.HEIGHT, heightPercentage);
 	}
 
 	/**
@@ -399,7 +400,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// resets callback
 		setImageWidth((ImageSizeCallback) null);
 		// stores the value
-		setValue(Property.WIDTH, Checker.positiveOrZero(width));
+		setValueAndAddToParent(Property.WIDTH, Checker.positiveOrZero(width));
 	}
 
 	/**
@@ -411,7 +412,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// resets callback
 		setImageWidth((ImageSizeCallback) null);
 		// stores the value
-		setValue(Property.WIDTH, widthPercentage);
+		setValueAndAddToParent(Property.WIDTH, widthPercentage);
 	}
 
 	/**
@@ -453,7 +454,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// resets callback
 		setTextAlign((TextAlignCallback<AnnotationContext>) null);
 		// stores value
-		setValue(Property.TEXT_ALIGN, Key.isValid(align) ? align.getStartEndValue() : null);
+		setValueAndAddToParent(Property.TEXT_ALIGN, Key.isValid(align) ? align.getStartEndValue() : null);
 	}
 
 	/**
@@ -464,6 +465,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	TextAlign getTextAlign() {
 		return getValue(Property.TEXT_ALIGN, TextAlign.values(), defaultValues.getTextAlign());
 	}
+
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
@@ -772,46 +774,6 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// if here the result is null
 		// then returns the default
 		return defaultValue.value();
-	}
-
-	/**
-	 * Enumerates the types of the content option of the label.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private enum ContentType
-	{
-		STRING,
-		ARRAY,
-		IMAGE,
-		CANVAS,
-		CALLBACK;
-
-		/**
-		 * Returns the content type reading the content property.
-		 * 
-		 * @param handler the label handler to use to get the content
-		 * @return the content type of the content option
-		 */
-		private static ContentType get(LabelHandler handler) {
-			// checks if is a image
-			if (JsHelper.get().isImage(handler, Property.CONTENT)) {
-				return IMAGE;
-			} else if (JsHelper.get().isCanvas(handler, Property.CONTENT)) {
-				// checks if is a canvas
-				return CANVAS;
-			} else if (handler.isType(Property.CONTENT, ObjectType.ARRAY)) {
-				// checks if is an array
-				return ARRAY;
-			} else if (handler.isType(Property.CONTENT, ObjectType.FUNCTION)) {
-				// checks if is a callback
-				return CALLBACK;
-			}
-			// if here, can be only a string or undefined
-			return STRING;
-		}
-
 	}
 
 }

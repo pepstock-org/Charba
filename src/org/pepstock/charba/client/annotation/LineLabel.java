@@ -146,8 +146,10 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	 */
 	public static final double DEFAULT_ROTATION = 0D;
 
-	// auto rotation
-	private static final String AUTO_ROTATION_AS_STRING = "auto";
+	/**
+	 * Value to set when auto rotation is requested, <b>{@value AUTO_ROTATION_AS_STRING}</b>.
+	 */
+	public static final String AUTO_ROTATION_AS_STRING = "auto";
 
 	/**
 	 * Name of properties of native object.

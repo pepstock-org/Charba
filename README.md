@@ -285,7 +285,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `PointStyleCallback` class, adding context as generic.
  * remove `xPadding` and `yPadding` options from `LineLabel` options. Use padding instead.
  * remove `onDestroy` method from `Plugin` interface. Use `onBeforeDestroy` instead.
- * change type to `mode` and `overScaleMode` options in Zoom plugin configuration, from `org.pepstock.charba.client.enums.InteractionAxis` to `org.pepstock.charba.client.zoom.enums.Mode` class. 
+ * change type to `mode` and `overScaleMode` options in Zoom plugin configuration, from `org.pepstock.charba.client.enums.InteractionAxis` to `org.pepstock.charba.client.zoom.enums.Mode` class.
+ * change signature of `EnterCallback`, `LeaveCallback`, `ClickCallback` and `DoubleClickCallback` interfaces of annotation plugin in order to get an `AnnotationContext` as argument instead of a chart and annotation options instances.
  
 ### Features
 
@@ -306,6 +307,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable to set the `position` of the `LineLabel` options as percentage of the line dimension.
  * add `borderShadowColor`, `backgroundShadowColor`, `shadowBlur`, `shadowOffsetX` and `shadowOffsetY` to annotations and line label options in order to enable the shadowing.
  * add `arrowHeads` option to `LineAnnotation` class options in order to enable the arrows drawing to the line.
+ * add the annotation element to the `AnnotationContext` in order to pass to the user the dimension and options of annotation (i.e for gradient).
  * add `drawActiveElementsOnTop` property to lining and bubble datasets.
  * add `onBeforeDestroy` and `onAfterDestroy` methods to `Plugin` interface.
  * enable all tick callbacks to return a `List` of strings in order to have ticks multiple lines.

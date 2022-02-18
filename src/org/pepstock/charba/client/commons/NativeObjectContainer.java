@@ -205,7 +205,7 @@ public abstract class NativeObjectContainer {
 	 * @param types types to check against the type of the property.
 	 * @return the java script type of the property.
 	 */
-	protected final boolean isType(Key key, ObjectType... types) {
+	public final boolean isType(Key key, ObjectType... types) {
 		// checks arguments if consistent
 		if (types != null && types.length > 0) {
 			// gets property type

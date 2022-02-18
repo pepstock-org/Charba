@@ -38,21 +38,21 @@ interface HasExtendedShadowOptions extends IsDefaultsExtendedShadowOptionsHandle
 	/**
 	 * Sets the color of the shadow of annotation.
 	 * 
-	 * @param borderColor the color of the shadow of annotation
+	 * @param backgroundColor the color of the shadow of annotation
 	 */
-	default void setBackgroundShadowColor(IsColor borderColor) {
-		setBackgroundShadowColor(IsColor.checkAndGetValue(borderColor));
+	default void setBackgroundShadowColor(IsColor backgroundColor) {
+		setBackgroundShadowColor(IsColor.checkAndGetValue(backgroundColor));
 	}
 
 	/**
 	 * Sets the color of the shadow of annotation.
 	 * 
-	 * @param borderColor the color of the shadow of annotation
+	 * @param backgroundColor the color of the shadow of annotation
 	 */
-	default void setBackgroundShadowColor(String borderColor) {
+	default void setBackgroundShadowColor(String backgroundColor) {
 		// checks if handler is consistent
 		if (getExtendedShadowOptionsHandler() != null) {
-			getExtendedShadowOptionsHandler().setBackgroundShadowColor(borderColor);
+			getExtendedShadowOptionsHandler().setBackgroundShadowColor(backgroundColor);
 		}
 	}
 

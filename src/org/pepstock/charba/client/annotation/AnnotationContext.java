@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.annotation.elements.AnnotationElement;
 import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ContextType;
 
@@ -27,7 +29,42 @@ import org.pepstock.charba.client.enums.ContextType;
  */
 public final class AnnotationContext extends ChartContext {
 
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		// for all chart types
+		ELEMENT("element");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
+	// annotation instance
 	private final AbstractAnnotation annotation;
+	// element instance
+	private final AnnotationElement element;
 
 	/**
 	 * Creates the object with native object instance to be wrapped.
@@ -40,6 +77,8 @@ public final class AnnotationContext extends ChartContext {
 		// checks if context is consistent
 		// and stores annotation
 		this.annotation = Checker.checkAndGetIfValid(annotation, "Annotation argument");
+		// loads element
+		this.element = new AnnotationElement(new AnnotationEnvelop<>(getValue(Property.ELEMENT), true));
 	}
 
 	/**
@@ -49,6 +88,15 @@ public final class AnnotationContext extends ChartContext {
 	 */
 	public AbstractAnnotation getAnnotation() {
 		return annotation;
+	}
+
+	/**
+	 * Returns the annotation element of plugin.
+	 * 
+	 * @return the annotation element of plugin
+	 */
+	public AnnotationElement getElement() {
+		return element;
 	}
 
 	/*
