@@ -53,8 +53,7 @@ public interface TooltipPositioner {
 	 * @param chart chart instance
 	 * @param items list of dataset reference items
 	 * @param eventPoint the point of event when the method has been invoked
-	 * @return the point where the tooltip must be showed. If <code>null</code>, the default tooltip positioner will be used to provide a consistent point where tooltip will be
-	 *         showed
+	 * @return the point where the tooltip must be showed. If <code>null</code>, the tooltip will be closed.
 	 */
 	Point computePosition(IsChart chart, List<DatasetReference> items, Point eventPoint);
 

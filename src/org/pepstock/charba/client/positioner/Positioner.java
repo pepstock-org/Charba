@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -61,9 +60,9 @@ public final class Positioner {
 		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param datasetItems dataset elements of tooltips.
 		 * @param eventPoint point on the canvas where the event occurred.
-		 * @return point to show the tooltip
+		 * @return point to show the tooltip or <code>false</code> if result of positioner is <code>null</code>.
 		 */
-		NativeObject call(NativeObject context, ArrayObject datasetItems, NativeObject eventPoint);
+		Object call(NativeObject context, ArrayObject datasetItems, NativeObject eventPoint);
 	}
 
 	// ---------------------------
@@ -163,14 +162,44 @@ public final class Positioner {
 	}
 
 	/**
+	 * Invokes an existing positioner to get the point.
+	 * 
+	 * @param position position of tooltips to be invoked
+	 * @param chart chart instance
+	 * @param items list of dataset reference items
+	 * @param eventPoint the point of event when the method has been invoked
+	 * @return the point calculated by positioner or <code>null</code> if positioner does not exist or the result of invoked positioner is <code>null</code>
+	 */
+	public Point invokePositioner(IsTooltipPosition position, IsChart chart, List<DatasetReference> items, Point eventPoint) {
+		// checks if the chart is consistent
+		if (IsChart.isValid(chart) && position != null && eventPoint != null && eventPoint.isConsistent()) {
+			// creates context
+			PositionerContext context = new PositionerContext();
+			// stores chart
+			context.setChart(chart);
+			// gets array of objects
+			ArrayObject datasetItems = ArrayObject.fromOrEmpty(items);
+			// invokes actively the helper
+			NativeObject pointAsObject = NativeJsPositionerHelper.invoke(position.value(), context.nativeObject(), datasetItems, eventPoint.nativeObject());
+			// checks if consistent
+			if (pointAsObject != null) {
+				return new Point(pointAsObject);
+			}
+		}
+		// if here, the object is not consistent
+		// then return null
+		return null;
+	}
+
+	/**
 	 * Returns the point where the tooltip will appear.
 	 * 
 	 * @param context context value of <code>this</code> to the execution context of function.
 	 * @param datasetItems dataset elements of tooltips.
 	 * @param eventPoint point on the canvas where the event occurred.
-	 * @return point to show the tooltip
+	 * @return point to show the tooltip or <code>false</code> if result of positioner is <code>null</code>.
 	 */
-	private NativeObject onToolipPosition(NativeObject context, ArrayObject datasetItems, NativeObject eventPoint) {
+	private Object onToolipPosition(NativeObject context, ArrayObject datasetItems, NativeObject eventPoint) {
 		// creates the context
 		PositionerContext internalContext = new PositionerContext(context);
 		// creates the point
@@ -196,13 +225,6 @@ public final class Positioner {
 				}
 			}
 		}
-		// if here, is not able to get the chart or the positioner is not defined
-		// or the result of custom positioner is not consistent
-		// then gets the default tooltip position
-		IsTooltipPosition defaultValue = Defaults.get().getGlobal().getTooltips().getPosition();
-		// invokes the positioner of the default one getting the point
-		Point defaultPoint = JsPositionerHelper.get().invoke(defaultValue, internalContext, datasetItems, internalPoint);
-		// if the result is ok, return it otherwise returns the point of event
-		return defaultPoint != null ? defaultPoint.nativeObject() : eventPoint;
+		return false;
 	}
 }

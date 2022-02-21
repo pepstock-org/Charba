@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.positioner;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -59,12 +60,31 @@ public final class PositionerContext extends NativeObjectContainer {
 	}
 
 	/**
+	 * Creates an empty context and it will fill with the chart.<br>
+	 * Used by {@link Positioner#invokePositioner(org.pepstock.charba.client.enums.IsTooltipPosition, IsChart, java.util.List, Point)}.
+	 */
+	PositionerContext() {
+		this(null);
+	}
+
+	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
 	PositionerContext(NativeObject nativeObject) {
 		super(nativeObject);
+	}
+
+	/**
+	 * Sets the chart in the context.
+	 * 
+	 * @param chart chart instance to store.
+	 */
+	void setChart(IsChart chart) {
+		// gets native chart
+		Chart nativeChart = Charts.getNative(chart);
+		setValue(Property.CHART, nativeChart);
 	}
 
 	/**
