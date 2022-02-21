@@ -209,9 +209,10 @@ CharbaJsChartHelper.invokeDefaultChartEvent = function(options, key, chart, even
 /**
  * @param {Chart} chart
  * @param {Array} items
+ * @param {Object} point
  * @return {undefined}
  */
-CharbaJsChartHelper.setTooltipActiveElements = function(chart, items) {};
+CharbaJsChartHelper.setTooltipActiveElements = function(chart, items, point) {};
 /**
  * @param {Chart} chart
  * @return {Array}

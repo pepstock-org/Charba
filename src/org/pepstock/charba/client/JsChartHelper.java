@@ -111,11 +111,12 @@ final class JsChartHelper {
 	 * 
 	 * @param chart chart instance, used to get the tooltip
 	 * @param elements array of active tooltip elements
+	 * @param point synthetic event position used in positioning
 	 */
-	void setTooltipActiveElements(Chart chart, ArrayObject elements) {
+	void setTooltipActiveElements(Chart chart, ArrayObject elements, NativeObject point) {
 		// checks if chart and elements are consistent
 		if (chart != null && elements != null) {
-			NativeJsChartHelper.setTooltipActiveElements(chart, elements);
+			NativeJsChartHelper.setTooltipActiveElements(chart, elements, point);
 		}
 	}
 

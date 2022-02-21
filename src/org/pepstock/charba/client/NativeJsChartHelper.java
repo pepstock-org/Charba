@@ -83,8 +83,9 @@ final class NativeJsChartHelper {
 	 * 
 	 * @param chart chart instance, used to get the tooltip
 	 * @param elements array of active tooltip elements
+	 * @param point synthetic event position used in positioning
 	 */
-	static native void setTooltipActiveElements(Chart chart, ArrayObject elements);
+	static native void setTooltipActiveElements(Chart chart, ArrayObject elements, NativeObject point);
 
 	/**
 	 * Returns the active tooltip elements for the chart.

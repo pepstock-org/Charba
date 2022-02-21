@@ -832,11 +832,12 @@ CharbaJsChartHelper.invokeDefaultChartEvent = function(options, key, chart, even
  *
  * @param {Chart} chart chart instance, used to get the tooltip
  * @param {Array} items array of active tooltip elements
+ * @param {Object} point synthetic event position used in positioning
  * @return {undefined}
  */
-CharbaJsChartHelper.setTooltipActiveElements = function(chart, items) {
+CharbaJsChartHelper.setTooltipActiveElements = function(chart, items, point) {
   if (chart != null && chart.tooltip != null){
-    chart.tooltip.setActiveElements(items);
+    chart.tooltip.setActiveElements(items, point);
   }
 }
 /**

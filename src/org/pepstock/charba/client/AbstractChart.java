@@ -19,10 +19,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.commons.AbstractPoint;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.IsPoint;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -611,12 +613,20 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void setTooltipActiveElements(List<ActiveDatasetElement> elements) {
-		// checks if chart is created
-		if (isInitialized()) {
-			ArrayObject array = ArrayObject.fromOrEmpty(elements);
-			// stores elements
-			JsChartHelper.get().setTooltipActiveElements(chart, array);
-		}
+		setTooltipActiveElements(null, elements);
+	}
+
+	/**
+	 * Sets the active tooltip elements for the chart.
+	 * 
+	 * @param point synthetic event position used in positioning
+	 * @param elements list of active tooltip elements
+	 */
+	@Override
+	public final void setTooltipActiveElements(IsPoint point, List<ActiveDatasetElement> elements) {
+		ArrayObject array = ArrayObject.fromOrEmpty(elements);
+		// stores elements
+		setTooltipActiveElements(point, array);
 	}
 
 	/**
@@ -626,11 +636,41 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void setTooltipActiveElements(ActiveDatasetElement... elements) {
+		setTooltipActiveElements(null, elements);
+	}
+
+	/**
+	 * Sets the active tooltip elements for the chart.
+	 * 
+	 * @param point synthetic event position used in positioning
+	 * @param elements array of active tooltip elements
+	 */
+	@Override
+	public final void setTooltipActiveElements(IsPoint point, ActiveDatasetElement... elements) {
+		ArrayObject array = ArrayObject.fromOrEmpty(elements);
+		// stores elements
+		setTooltipActiveElements(point, array);
+	}
+
+	/**
+	 * Sets the active tooltip elements for the chart.
+	 * 
+	 * @param point synthetic event position used in positioning
+	 * @param elements array of active tooltip elements
+	 */
+	private void setTooltipActiveElements(IsPoint point, ArrayObject elements) {
 		// checks if chart is created
 		if (isInitialized()) {
-			ArrayObject array = ArrayObject.fromOrEmpty(elements);
+			NativeObject nativePoint = null;
+			// checks if point is consistent
+			if (point != null && point.isConsistent()) {
+				// gets inner point
+				ActiveElementsPoint innerPoint = new ActiveElementsPoint(point.getX(), point.getY());
+				// stores native point
+				nativePoint = innerPoint.nativeObject();
+			}
 			// stores elements
-			JsChartHelper.get().setTooltipActiveElements(chart, array);
+			JsChartHelper.get().setTooltipActiveElements(chart, elements, nativePoint);
 		}
 	}
 
@@ -639,7 +679,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void resetTooltipActiveElements() {
-		JsChartHelper.get().setTooltipActiveElements(chart, ArrayObject.fromOrEmpty((NativeObjectContainer) null));
+		JsChartHelper.get().setTooltipActiveElements(chart, ArrayObject.fromOrEmpty((NativeObjectContainer) null), null);
 	}
 
 	/**
@@ -1364,6 +1404,36 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		}
 		// if here, the dataset index is not valid
 		return false;
+	}
+
+	/**
+	 * Maps a point needed when {@link AbstractChart#setTooltipActiveElements(IsPoint, ArrayObject)} is invoked.
+	 * 
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class ActiveElementsPoint extends AbstractPoint {
+
+		/**
+		 * Creates an object with X and Y coordinates of the point
+		 * 
+		 * @param x the X coordinate of the point
+		 * @param y the Y coordinate of the point
+		 */
+		private ActiveElementsPoint(double x, double y) {
+			super(x, y);
+		}
+
+		/**
+		 * Returns the native object instance.
+		 * 
+		 * @return the native object instance.
+		 */
+		private NativeObject nativeObject() {
+			return getNativeObject();
+		}
+
 	}
 
 	/**

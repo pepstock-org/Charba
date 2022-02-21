@@ -22,6 +22,7 @@ import org.pepstock.charba.client.ChartTimerTask;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.UpdateConfiguration;
+import org.pepstock.charba.client.commons.IsPoint;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
@@ -377,6 +378,26 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	@Override
 	public void setTooltipActiveElements(ActiveDatasetElement... elements) {
 		chart.setTooltipActiveElements(elements);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#setTooltipActiveElements(org.pepstock.charba.client.commons.IsPoint, java.util.List)
+	 */
+	@Override
+	public void setTooltipActiveElements(IsPoint point, List<ActiveDatasetElement> elements) {
+		chart.setTooltipActiveElements(point, elements);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#setTooltipActiveElements(org.pepstock.charba.client.commons.IsPoint, org.pepstock.charba.client.items.ActiveDatasetElement[])
+	 */
+	@Override
+	public void setTooltipActiveElements(IsPoint point, ActiveDatasetElement... elements) {
+		chart.setTooltipActiveElements(point, elements);
 	}
 
 	/*

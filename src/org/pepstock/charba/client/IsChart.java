@@ -17,6 +17,7 @@ package org.pepstock.charba.client;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.IsPoint;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
@@ -360,6 +361,14 @@ public interface IsChart {
 	void setTooltipActiveElements(List<ActiveDatasetElement> elements);
 
 	/**
+	 * Sets the active tooltip elements for the chart.
+	 * 
+	 * @param point synthetic event position used in positioning
+	 * @param elements list of active tooltip elements
+	 */
+	void setTooltipActiveElements(IsPoint point, List<ActiveDatasetElement> elements);
+
+	/**
 	 * Resets the active tooltip elements for the chart.
 	 */
 	void resetTooltipActiveElements();
@@ -370,6 +379,14 @@ public interface IsChart {
 	 * @param elements array of active tooltip elements
 	 */
 	void setTooltipActiveElements(ActiveDatasetElement... elements);
+
+	/**
+	 * Sets the active tooltip elements for the chart.
+	 * 
+	 * @param point synthetic event position used in positioning
+	 * @param elements array of active tooltip elements
+	 */
+	void setTooltipActiveElements(IsPoint point, ActiveDatasetElement... elements);
 
 	/**
 	 * Returns the active tooltip elements for the chart.
