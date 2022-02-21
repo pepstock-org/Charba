@@ -29,7 +29,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class LabelElement extends BaseElement {
+public final class LabelElement extends BaseElement {
 
 	/**
 	 * Name of properties of native object.

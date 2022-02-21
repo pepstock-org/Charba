@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -43,7 +44,18 @@ public abstract class AbstractFont extends AbstractReadOnlyFont implements IsFon
 	 * @param nativeObject native object to map java script properties
 	 */
 	protected AbstractFont(IsDefaultFont defaultValues, NativeObject nativeObject) {
-		super(defaultValues, nativeObject);
+		this(null, defaultValues, nativeObject);
+	}
+
+	/**
+	 * Creates a font to use for chart configuration, wrapping a native object instance.
+	 * 
+	 * @param parent the native object container which font belongs to.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
+	protected AbstractFont(AbstractNode parent, IsDefaultFont defaultValues, NativeObject nativeObject) {
+		super(parent, defaultValues, nativeObject);
 	}
 
 	/*

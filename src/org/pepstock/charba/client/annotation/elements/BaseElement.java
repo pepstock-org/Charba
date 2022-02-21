@@ -124,18 +124,8 @@ abstract class BaseElement extends AbstractNode {
 	BaseElement(AbstractNode parent, Key childKey, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
 		// loads inner element
-		this.font = new InnerFontItem(getValue(Property.FONT));
-		this.padding = new InnerPaddingItem(getValue(Property.PADDING));
-		// checks if font exists
-		if (!has(Property.FONT)) {
-			// stores value
-			setValueAndAddToParent(Property.FONT, this.font);
-		}
-		// checks if padding exists
-		if (!has(Property.PADDING)) {
-			// stores value
-			setValueAndAddToParent(Property.PADDING, this.padding);
-		}
+		this.font = new InnerFontItem(this, getValue(Property.FONT));
+		this.padding = new InnerPaddingItem(this, getValue(Property.PADDING));
 	}
 
 	/**
@@ -845,10 +835,11 @@ abstract class BaseElement extends AbstractNode {
 		/**
 		 * Creates the object with native object instance to be wrapped.
 		 * 
+		 * @param parent the native object container which font belongs to.
 		 * @param nativeObject native object instance to be wrapped.
 		 */
-		private InnerFontItem(NativeObject nativeObject) {
-			super(Defaults.get().getGlobal().getFont(), nativeObject);
+		private InnerFontItem(AbstractNode parent, NativeObject nativeObject) {
+			super(parent, Defaults.get().getGlobal().getFont(), nativeObject);
 		}
 	}
 
@@ -866,10 +857,11 @@ abstract class BaseElement extends AbstractNode {
 		/**
 		 * Creates the object with native object instance to be wrapped.
 		 * 
-		 * @param nativeObject native object instance to be wrapped.
+		 * @param parent the native object container which font belongs to.
+		 * @param nativeObject native object instance to be wrapped
 		 */
-		private InnerPaddingItem(NativeObject nativeObject) {
-			super(DEFAULT_PADDING, nativeObject);
+		private InnerPaddingItem(AbstractNode parent, NativeObject nativeObject) {
+			super(parent, DEFAULT_PADDING, nativeObject);
 		}
 
 	}

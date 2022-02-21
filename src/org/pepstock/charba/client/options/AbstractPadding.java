@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -78,9 +79,20 @@ public abstract class AbstractPadding extends NativeObjectContainer implements I
 	 * @param nativeObject native object to map java script properties
 	 */
 	protected AbstractPadding(IsDefaultPadding defaultValues, NativeObject nativeObject) {
+		this(null, defaultValues, nativeObject);
+	}
+
+	/**
+	 * Creates a padding to use for chart configuration, wrapping a native object instance.
+	 * 
+	 * @param parent the native object container which font belongs to.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
+	protected AbstractPadding(AbstractNode parent, IsDefaultPadding defaultValues, NativeObject nativeObject) {
 		super(nativeObject);
 		// creates a padding to wrap
-		this.padding = new Padding(null, Property.PADDING, defaultValues, getNativeObject(), Undefined.INTEGER);
+		this.padding = new Padding(parent, Property.PADDING, defaultValues, getNativeObject(), Undefined.INTEGER);
 	}
 
 	/**

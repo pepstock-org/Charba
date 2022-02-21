@@ -36,13 +36,15 @@ import org.pepstock.charba.client.options.ScaleId;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class OptionsElement extends BaseElement {
+public final class OptionsElement extends BaseElement {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
+		ARROW_HEADS("arrowHeads"),
+		CALLOUT("callout"),
 		LABEL("label"),
 		// options
 		ADJUST_SCALE_RANGE("adjustScaleRange"),
@@ -92,6 +94,10 @@ public class OptionsElement extends BaseElement {
 
 	// label instance
 	private final LabelElement label;
+	// arrow heads options
+	private final ArrowHeadsElement arrowHeads;
+	// callout options
+	private final CalloutElement callout;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -104,6 +110,8 @@ public class OptionsElement extends BaseElement {
 		super(parent, childKey, nativeObject);
 		// loads inner elements
 		this.label = new LabelElement(this, Property.LABEL, getValue(Property.LABEL));
+		this.arrowHeads = new ArrowHeadsElement(this, Property.ARROW_HEADS, getValue(Property.ARROW_HEADS));
+		this.callout = new CalloutElement(this, Property.CALLOUT, getValue(Property.CALLOUT));
 	}
 
 	/**
@@ -113,6 +121,24 @@ public class OptionsElement extends BaseElement {
 	 */
 	public LabelElement getLabel() {
 		return label;
+	}
+
+	/**
+	 * Returns the callout options of the element.
+	 * 
+	 * @return the callout options of the element
+	 */
+	public CalloutElement getCallout() {
+		return callout;
+	}
+
+	/**
+	 * Returns the arrow heads options of the element.
+	 * 
+	 * @return the arrow heads options of the element
+	 */
+	public ArrowHeadsElement getArrowHeads() {
+		return arrowHeads;
 	}
 
 	/**

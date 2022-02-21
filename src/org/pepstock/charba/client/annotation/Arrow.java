@@ -33,7 +33,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * Implements a <b>ARROWHEADS</b> to apply on a LINE annotation.
+ * Implements a <b>ARROWHEADS</b>, and its start and end nodes, to apply on a LINE annotation.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -190,9 +190,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Sets <code>true</code> whether the label should be displayed.
+	 * Sets <code>true</code> whether the arrow head should be displayed.
 	 * 
-	 * @param display <code>true</code> whether the label should be displayed
+	 * @param display <code>true</code> whether the arrow head should be displayed
 	 */
 	public final void setDisplay(boolean display) {
 		// resets callback
@@ -202,9 +202,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Returns <code>true</code> whether the label should be displayed.
+	 * Returns <code>true</code> whether the arrow head should be displayed.
 	 * 
-	 * @return <code>true</code> whether the label should be displayed
+	 * @return <code>true</code> whether the arrow head should be displayed
 	 */
 	@Override
 	public final boolean isDisplay() {
@@ -212,9 +212,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Sets <code>true</code> whether the arrow must be closed and filled.
+	 * Sets <code>true</code> whether the arrow head must be closed and filled.
 	 * 
-	 * @param fill <code>true</code> whether the arrow must be closed and filled.
+	 * @param fill <code>true</code> whether the arrow head must be closed and filled.
 	 */
 	public final void setFill(boolean fill) {
 		// resets callback
@@ -224,9 +224,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Returns <code>true</code> whether the arrow must be closed and filled.
+	 * Returns <code>true</code> whether the arrow head must be closed and filled.
 	 * 
-	 * @return <code>true</code> whether the arrow must be closed and filled.
+	 * @return <code>true</code> whether the arrow head must be closed and filled.
 	 */
 	@Override
 	public final boolean isFill() {
@@ -234,9 +234,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Sets the amount of pixels of the length of the arrow.
+	 * Sets the amount of pixels of the length of the arrow head.
 	 * 
-	 * @param length the amount of pixels of the length of the arrow.
+	 * @param length the amount of pixels of the length of the arrow head.
 	 */
 	public final void setLength(int length) {
 		// resets callback
@@ -246,9 +246,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Returns the amount of pixels of the length of the arrow.
+	 * Returns the amount of pixels of the length of the arrow head.
 	 * 
-	 * @return the amount of pixels of the length of the arrow.
+	 * @return the amount of pixels of the length of the arrow head.
 	 */
 	@Override
 	public final int getLength() {
@@ -256,9 +256,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Sets the amount of pixels of the width of the arrow.
+	 * Sets the amount of pixels of the width of the arrow head.
 	 * 
-	 * @param width the amount of pixels of the width of the arrow
+	 * @param width the amount of pixels of the width of the arrow head
 	 */
 	public final void setWidth(int width) {
 		// resets callback
@@ -268,9 +268,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Returns the width of the starter line of callout pointer.
+	 * Returns the width of the arrow head.
 	 * 
-	 * @return the width of the starter line of callout pointer
+	 * @return the width of the arrow head
 	 */
 	@Override
 	public final int getWidth() {
@@ -282,9 +282,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	// ---------------------
 
 	/**
-	 * Returns the callback called to set whether the label should be displayed.
+	 * Returns the callback called to set whether the arrow head should be displayed.
 	 * 
-	 * @return the callback called to set whether the label should be displayed
+	 * @return the callback called to set whether the arrow head should be displayed
 	 */
 	@Override
 	public final DisplayCallback<AnnotationContext> getDisplayCallback() {
@@ -292,18 +292,18 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Sets the callback to set whether the label should be displayed.
+	 * Sets the callback to set whether the arrow head should be displayed.
 	 * 
-	 * @param displayCallback to set whether the label should be displayed
+	 * @param displayCallback to set whether the arrow head should be displayed
 	 */
 	public final void setDisplay(DisplayCallback<AnnotationContext> displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
 	}
 
 	/**
-	 * Sets the callback to set whether the label should be displayed.
+	 * Sets the callback to set whether the arrow head should be displayed.
 	 * 
-	 * @param displayCallback to set whether the label should be displayed
+	 * @param displayCallback to set whether the arrow head should be displayed
 	 */
 	public final void setDisplay(NativeCallback displayCallback) {
 		// resets callback
@@ -313,9 +313,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Returns the callback called to set the amount of pixels of the length of the arrow.
+	 * Returns the callback called to set the amount of pixels of the length of the arrow head.
 	 * 
-	 * @return the callback called to set the amount of pixels of the length of the arrow.
+	 * @return the callback called to set the amount of pixels of the length of the arrow head.
 	 */
 	@Override
 	public final LengthCallback getLengthCallback() {
@@ -323,18 +323,18 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Sets the callback to set the amount of pixels of the length of the arrow.
+	 * Sets the callback to set the amount of pixels of the length of the arrow head.
 	 * 
-	 * @param lengthCallback to set the amount of pixels of the length of the arrow.
+	 * @param lengthCallback to set the amount of pixels of the length of the arrow head.
 	 */
 	public final void setLength(LengthCallback lengthCallback) {
 		LENGTH_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, lengthCallback, lengthCallbackProxy.getProxy());
 	}
 
 	/**
-	 * Sets the callback to set the amount of pixels of the length of the arrow.
+	 * Sets the callback to set the amount of pixels of the length of the arrow head.
 	 * 
-	 * @param lengthCallback to set the amount of pixels of the length of the arrow.
+	 * @param lengthCallback to set the amount of pixels of the length of the arrow head.
 	 */
 	public final void setLength(NativeCallback lengthCallback) {
 		// resets callback
@@ -344,9 +344,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Returns the callback called to set the amount of pixels of the width of the arrow.
+	 * Returns the callback called to set the amount of pixels of the width of the arrow head.
 	 * 
-	 * @return the callback called to set the amount of pixels of the width of the arrow.
+	 * @return the callback called to set the amount of pixels of the width of the arrow head.
 	 */
 	@Override
 	public final WidthCallback<AnnotationContext> getWidthCallback() {
@@ -354,18 +354,18 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Sets the callback to set the amount of pixels of the width of the arrow.
+	 * Sets the callback to set the amount of pixels of the width of the arrow head.
 	 * 
-	 * @param widthCallback to set the amount of pixels of the width of the arrow.
+	 * @param widthCallback to set the amount of pixels of the width of the arrow head.
 	 */
 	public final void setWidth(WidthCallback<AnnotationContext> widthCallback) {
 		WIDTH_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, widthCallback, widthCallbackProxy.getProxy());
 	}
 
 	/**
-	 * Sets the callback to set the amount of pixels of the width of the arrow.
+	 * Sets the callback to set the amount of pixels of the width of the arrow head.
 	 * 
-	 * @param widthCallback to set the amount of pixels of the width of the arrow.
+	 * @param widthCallback to set the amount of pixels of the width of the arrow head.
 	 */
 	public final void setWidth(NativeCallback widthCallback) {
 		// resets callback
@@ -375,9 +375,9 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Returns the callback called to set <code>true</code> whether the arrow must be closed and filled.
+	 * Returns the callback called to set <code>true</code> whether the arrow head must be closed and filled.
 	 * 
-	 * @return the callback called to set <code>true</code> whether the arrow must be closed and filled.
+	 * @return the callback called to set <code>true</code> whether the arrow head must be closed and filled.
 	 */
 	@Override
 	public final FillCallback getFillCallback() {
@@ -385,18 +385,18 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	}
 
 	/**
-	 * Sets the callback to set whether <code>true</code> whether the arrow must be closed and filled.
+	 * Sets the callback to set whether <code>true</code> whether the arrow head must be closed and filled.
 	 * 
-	 * @param fillCallback to set whether <code>true</code> whether the arrow must be closed and filled.
+	 * @param fillCallback to set whether <code>true</code> whether the arrow head must be closed and filled.
 	 */
 	public final void setFill(FillCallback fillCallback) {
 		FILL_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, fillCallback, fillCallbackProxy.getProxy());
 	}
 
 	/**
-	 * Sets the callback to set whether <code>true</code> whether the arrow must be closed and filled.
+	 * Sets the callback to set whether <code>true</code> whether the arrow head must be closed and filled.
 	 * 
-	 * @param fillCallback to set whether <code>true</code> whether the arrow must be closed and filled.
+	 * @param fillCallback to set whether <code>true</code> whether the arrow head must be closed and filled.
 	 */
 	public final void setFill(NativeCallback fillCallback) {
 		// resets callback
