@@ -1431,7 +1431,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		 * @return the native object instance.
 		 */
 		private NativeObject nativeObject() {
-			return getNativeObject();
+			return super.getNativeObject();
 		}
 
 	}
