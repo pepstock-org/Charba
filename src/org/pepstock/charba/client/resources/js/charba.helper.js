@@ -949,6 +949,42 @@ CharbaJsZoomHelper.isZoomedOrPanned = function(chart) {
 }
 /**
  * ----------------------------------------------------------------------------
+ * CharbaJsAnnotationHelper
+ * ----------------------------------------------------------------------------
+ * JsAnnotationHelpers is an object with a set of static methods used as utility
+ * on annotation element.   
+ */
+function CharbaJsAnnotationHelper() {} 
+/**
+ * Returns the center point of the element.
+ *
+ * @param {Object} element annotation element instance
+ * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+ * @return {Object}
+ */
+CharbaJsAnnotationHelper.getCenterPoint = function(element, useFinalPosition) {
+  if (element != null){
+    return element.getCenterPoint(useFinalPosition);
+  }
+  return null;
+}
+/**
+ * Returns whether the coordinates, passed as arguments, are inside the element or not.
+ *
+ * @param {Object} element annotation element instance
+ * @param {number} x coordinate x of the point to check.
+ * @param {number} y coordinate y of the point to check.
+ * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+ * @return {boolean}
+ */
+CharbaJsAnnotationHelper.inRange = function(element, x, y, useFinalPosition) {
+  if (element != null){
+    return element.inRange(x, y, useFinalPosition);
+  }
+  return false;
+}
+/**
+ * ----------------------------------------------------------------------------
  * CharbaJsDataLabelsHelper
  * ----------------------------------------------------------------------------
  * JsDatalabelsHelpers is an object with a set of static methods used as utility

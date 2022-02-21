@@ -17,13 +17,14 @@ package org.pepstock.charba.client.annotation.elements;
 
 import org.pepstock.charba.client.annotation.AnnotationEnvelop;
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * maps all properties of the annotation element, the implementation of the annotation options in the plugin.<br>
+ * Maps all properties of the annotation element, the implementation of the annotation options in the plugin.<br>
  * It provides all dimensions of the element and sub elements.
  * 
  * @author Andrea "Stock" Stocchero
@@ -98,6 +99,69 @@ public final class AnnotationElement extends AbstractNode {
 			// if not there, is null
 			this.options = null;
 		}
+	}
+
+	/**
+	 * Returns the center point of the element.
+	 * 
+	 * @return the center point of the element.
+	 */
+	public AbstractReadOnlyPoint getCenterPoint() {
+		return getCenterPoint(true);
+	}
+
+	/**
+	 * Returns the center point of the element.
+	 * 
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return the center point of the element.
+	 */
+	public AbstractReadOnlyPoint getCenterPoint(boolean useFinalPosition) {
+		return new InternalCenterPoint(NativeJsAnnotationHelper.getCenterPoint(getNativeObject(), useFinalPosition));
+	}
+
+	/**
+	 * Returns whether the coordinates, passed as arguments, are inside the element or not.
+	 * 
+	 * @param point the point instance to check.
+	 * @return <code>true</code> if point is inside the element
+	 */
+	public boolean inRange(AbstractReadOnlyPoint point) {
+		return inRange(point, true);
+	}
+
+	/**
+	 * Returns whether the coordinates, passed as arguments, are inside the element or not.
+	 * 
+	 * @param point the point instance to check.
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return <code>true</code> if point is inside the element
+	 */
+	public boolean inRange(AbstractReadOnlyPoint point, boolean useFinalPosition) {
+		return point != null && point.isConsistent() && inRange(point.getX(), point.getY(), useFinalPosition);
+	}
+
+	/**
+	 * Returns whether the coordinates, passed as arguments, are inside the element or not.
+	 * 
+	 * @param x coordinate x of the point to check.
+	 * @param y coordinate y of the point to check.
+	 * @return <code>true</code> if point is inside the element
+	 */
+	public boolean inRange(double x, double y) {
+		return inRange(x, y, true);
+	}
+
+	/**
+	 * Returns whether the coordinates, passed as arguments, are inside the element or not.
+	 * 
+	 * @param x coordinate x of the point to check.
+	 * @param y coordinate y of the point to check.
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return <code>true</code> if point is inside the element
+	 */
+	public boolean inRange(double x, double y, boolean useFinalPosition) {
+		return Undefined.isNot(x) && Undefined.isNot(y) && NativeJsAnnotationHelper.inRange(getNativeObject(), x, y, useFinalPosition);
 	}
 
 	/**
@@ -233,6 +297,20 @@ public final class AnnotationElement extends AbstractNode {
 	 */
 	public final double getPointY() {
 		return getValue(Property.POINT_Y, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Maps the center point of the element.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalCenterPoint extends AbstractReadOnlyPoint {
+
+		InternalCenterPoint(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+
 	}
 
 }

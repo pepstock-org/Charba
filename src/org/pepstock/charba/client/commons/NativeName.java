@@ -182,6 +182,11 @@ public final class NativeName {
 	public static final String JS_ZOOM_HELPER = "CharbaJsZoomHelper";
 
 	/**
+	 * Constant to bind java script object as JsAnnotationHelper with name <b>{@value JS_ANNOTATION_HELPER}</b>, (internal of Charba), when <b>AnnotationPlugin</b> is activated.
+	 */
+	public static final String JS_ANNOTATION_HELPER = "CharbaJsAnnotationHelper";
+
+	/**
 	 * Constant to bind java script object as JsDataLabelsHelper with name <b>{@value JS_DATALABELS_HELPER}</b>, (internal of Charba), when <b>DataLabelsPlugin</b> is activated.
 	 */
 	public static final String JS_DATALABELS_HELPER = "CharbaJsDataLabelsHelper";

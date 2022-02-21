@@ -267,6 +267,25 @@ CharbaJsZoomHelper.zoomScale = function(chart, scaleId, range, mode) {};
 CharbaJsZoomHelper.isZoomedOrPanned = function(chart) {};
 /**
  * @constructor
+ * @return {CharbaJsAnnotationHelper}
+ */	
+function CharbaJsAnnotationHelper() {} 
+/**
+ * @param {Object} element
+ * @param {boolean} useFinalPosition
+ * @return {Object}
+ */
+CharbaJsAnnotationHelper.getCenterPoint = function(element, useFinalPosition) {};
+/**
+ * @param {Object} element
+ * @param {number} x
+ * @param {number} y
+ * @param {boolean} useFinalPosition
+ * @return {boolean}
+ */
+CharbaJsAnnotationHelper.inRange = function(element, x, y, useFinalPosition) {}
+/**
+ * @constructor
  * @return {CharbaJsDataLabelsHelper}
  */	
 function CharbaJsDataLabelsHelper() {}	    
