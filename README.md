@@ -294,7 +294,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import CHART.JS TREEMAP controller version [v2.0.2](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.0.2).
  * import CHART.JS MATRIX controller version [v1.1.1](https://github.com/kurkle/chartjs-chart-matrix/releases/tag/v1.1.1).
  * import CHART.JS SANKEY controller version [v0.8.2](https://github.com/kurkle/chartjs-chart-sankey/releases/tag/v0.8.1).
- * import CHART.JS GEO controller [version v3.7.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.7.0).
+ * import CHART.JS GEO controller [version v3.7.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.7.1).
  * import CHART.JS ANNOTATION plugin version [v1.3.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.3.1).
  * import LUXON library version [v2.3.0](https://github.com/moment/luxon/releases/tag/2.3.0).
  * add `clip` property to annotation options.
