@@ -20,6 +20,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.AnnotationEnvelop;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Envelop;
+import org.pepstock.charba.client.commons.IsPoint;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -36,7 +37,7 @@ import org.pepstock.charba.client.items.Undefined;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartEventContext extends NativeObjectContainer {
+public final class ChartEventContext extends NativeObjectContainer implements IsPoint {
 
 	/**
 	 * Name of properties of native object.
@@ -192,6 +193,7 @@ public final class ChartEventContext extends NativeObjectContainer {
 	 * 
 	 * @return the X location of event in pixel.
 	 */
+	@Override
 	public double getX() {
 		return getValue(Property.X, Undefined.DOUBLE);
 	}
@@ -201,6 +203,7 @@ public final class ChartEventContext extends NativeObjectContainer {
 	 * 
 	 * @return the Y location of event in pixel.
 	 */
+	@Override
 	public double getY() {
 		return getValue(Property.Y, Undefined.DOUBLE);
 	}

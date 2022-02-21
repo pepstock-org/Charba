@@ -16,10 +16,9 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
+import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
 import org.pepstock.charba.client.commons.Envelop;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * It wraps the parsed data values for the given item point.
@@ -27,39 +26,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DatasetPoint extends NativeObjectContainer {
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		X("x"),
-		Y("y");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
+public final class DatasetPoint extends AbstractReadOnlyPoint {
 
 	/**
 	 * Creates the object with a native object passed as argument.
@@ -77,24 +44,6 @@ public final class DatasetPoint extends NativeObjectContainer {
 	 */
 	DatasetPoint(NativeObject nativeObject) {
 		super(nativeObject);
-	}
-
-	/**
-	 * Returns X value.
-	 * 
-	 * @return X value
-	 */
-	public double getX() {
-		return getValue(Property.X, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns Y value.
-	 * 
-	 * @return Y value.
-	 */
-	public double getY() {
-		return getValue(Property.Y, Undefined.DOUBLE);
 	}
 
 }

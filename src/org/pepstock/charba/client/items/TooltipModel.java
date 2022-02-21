@@ -18,13 +18,13 @@ package org.pepstock.charba.client.items;
 import java.util.List;
 
 import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
+import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.enums.TooltipAlign;
 
@@ -34,7 +34,7 @@ import org.pepstock.charba.client.enums.TooltipAlign;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TooltipModel extends NativeObjectContainer {
+public final class TooltipModel extends AbstractReadOnlyPoint {
 
 	/**
 	 * Name of properties of native object.
@@ -44,8 +44,6 @@ public final class TooltipModel extends NativeObjectContainer {
 		DATA_POINTS("dataPoints"),
 		X_ALIGN("xAlign"),
 		Y_ALIGN("yAlign"),
-		X("x"),
-		Y("y"),
 		WIDTH("width"),
 		HEIGHT("height"),
 		CARET_X("caretX"),
@@ -139,24 +137,6 @@ public final class TooltipModel extends NativeObjectContainer {
 	 */
 	public TooltipAlign getYAlign() {
 		return getValue(Property.Y_ALIGN, TooltipAlign.values(), TooltipAlign.AUTO);
-	}
-
-	/**
-	 * Returns the X location of tooltip.
-	 * 
-	 * @return the X location of tooltip.
-	 */
-	public int getX() {
-		return getValue(Property.X, Undefined.INTEGER);
-	}
-
-	/**
-	 * Returns the Y location of tooltip.
-	 * 
-	 * @return the Y location of tooltip.
-	 */
-	public int getY() {
-		return getValue(Property.Y, Undefined.INTEGER);
 	}
 
 	/**

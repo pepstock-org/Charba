@@ -17,10 +17,10 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
+import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
@@ -31,7 +31,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DatasetElement extends NativeObjectContainer {
+public class DatasetElement extends AbstractReadOnlyPoint {
 
 	// static instance for the data set item factory
 	static final DatasetItemFactory FACTORY = new DatasetItemFactory();
@@ -43,8 +43,6 @@ public class DatasetElement extends NativeObjectContainer {
 	{
 		// for all chart types
 		ACTIVE("active"),
-		X("x"),
-		Y("y"),
 		OPTIONS("options"),
 		PARSED("parsed"),
 		// for bar chart
@@ -163,24 +161,6 @@ public class DatasetElement extends NativeObjectContainer {
 	 */
 	public final double getBase() {
 		return getValue(Property.BASE, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns the X location of data set item in pixel.
-	 * 
-	 * @return the X location of data set item in pixel.
-	 */
-	public final double getX() {
-		return getValue(Property.X, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns the Y location of data set item in pixel.
-	 * 
-	 * @return the Y location of data set item in pixel.
-	 */
-	public final double getY() {
-		return getValue(Property.Y, Undefined.DOUBLE);
 	}
 
 	/**

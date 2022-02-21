@@ -22,7 +22,7 @@ import org.pepstock.charba.client.items.Undefined;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractReadOnlyPoint extends NativeObjectContainer {
+public abstract class AbstractReadOnlyPoint extends NativeObjectContainer implements IsPoint {
 
 	/**
 	 * Name of properties of native object.
@@ -69,6 +69,7 @@ public abstract class AbstractReadOnlyPoint extends NativeObjectContainer {
 	 * 
 	 * @return the X coordinate of the point.
 	 */
+	@Override
 	public final double getX() {
 		return getValue(Property.X, Undefined.DOUBLE);
 	}
@@ -78,17 +79,9 @@ public abstract class AbstractReadOnlyPoint extends NativeObjectContainer {
 	 * 
 	 * @return the Y coordinate of the point.
 	 */
+	@Override
 	public final double getY() {
 		return getValue(Property.Y, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns <code>true</code> if the coordinates are consistent and not <code>NaN</code>.
-	 * 
-	 * @return <code>true</code> if the coordinates are consistent and not <code>NaN</code>
-	 */
-	public final boolean isConsistent() {
-		return Undefined.isNot(getX()) && Undefined.isNot(getY());
 	}
 
 	/*

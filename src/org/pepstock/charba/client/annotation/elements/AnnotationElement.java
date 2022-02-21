@@ -19,6 +19,7 @@ import org.pepstock.charba.client.annotation.AnnotationEnvelop;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
 import org.pepstock.charba.client.commons.Envelop;
+import org.pepstock.charba.client.commons.IsPoint;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.Undefined;
@@ -29,7 +30,7 @@ import org.pepstock.charba.client.items.Undefined;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AnnotationElement extends AbstractNode {
+public final class AnnotationElement extends AbstractNode implements IsPoint {
 
 	/**
 	 * Name of properties of native object.
@@ -106,7 +107,7 @@ public final class AnnotationElement extends AbstractNode {
 	 * 
 	 * @return the center point of the element.
 	 */
-	public AbstractReadOnlyPoint getCenterPoint() {
+	public IsPoint getCenterPoint() {
 		return getCenterPoint(true);
 	}
 
@@ -116,7 +117,7 @@ public final class AnnotationElement extends AbstractNode {
 	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
 	 * @return the center point of the element.
 	 */
-	public AbstractReadOnlyPoint getCenterPoint(boolean useFinalPosition) {
+	public IsPoint getCenterPoint(boolean useFinalPosition) {
 		return new InternalCenterPoint(NativeJsAnnotationHelper.getCenterPoint(getNativeObject(), useFinalPosition));
 	}
 
@@ -126,7 +127,7 @@ public final class AnnotationElement extends AbstractNode {
 	 * @param point the point instance to check.
 	 * @return <code>true</code> if point is inside the element
 	 */
-	public boolean inRange(AbstractReadOnlyPoint point) {
+	public boolean inRange(IsPoint point) {
 		return inRange(point, true);
 	}
 
@@ -137,7 +138,7 @@ public final class AnnotationElement extends AbstractNode {
 	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
 	 * @return <code>true</code> if point is inside the element
 	 */
-	public boolean inRange(AbstractReadOnlyPoint point, boolean useFinalPosition) {
+	public boolean inRange(IsPoint point, boolean useFinalPosition) {
 		return point != null && point.isConsistent() && inRange(point.getX(), point.getY(), useFinalPosition);
 	}
 
@@ -196,6 +197,7 @@ public final class AnnotationElement extends AbstractNode {
 	 * 
 	 * @return the X location of element in pixel.
 	 */
+	@Override
 	public final double getX() {
 		return getValue(Property.X, Undefined.DOUBLE);
 	}
@@ -205,6 +207,7 @@ public final class AnnotationElement extends AbstractNode {
 	 * 
 	 * @return the Y location of element in pixel.
 	 */
+	@Override
 	public final double getY() {
 		return getValue(Property.Y, Undefined.DOUBLE);
 	}
