@@ -39,9 +39,9 @@ Even if **Charba** was born only as GWT chart library, as of version 3, **Charba
 Building
 --------
 
-To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.0/build.xml).
+To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.1/build.xml).
 
-The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.0/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
+The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.1/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
 
 The first distribution is a **Charba** file without any GWT dependency (but working on GWT anyway), consumable also in other [J2CL - JavaToClosure](https://github.com/google/j2cl) frameworks, like [Google Elemental2](https://github.com/google/elemental2) and [Elemento](https://github.com/hal/elemento).
 
@@ -55,7 +55,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
-[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_50.png)](https://github.com/pepstock-org/Charba-Showcase/blob/5.0/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_51.png)](https://github.com/pepstock-org/Charba-Showcase/blob/5.1/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------
@@ -70,18 +70,18 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>5.0</version>
+    <version>5.1</version>
     <!-- for GWT -->
-    <version>5.0-gwt</version>
+    <version>5.1-gwt</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="5.0"/>
+<dependency org="org.pepstock" name="charba" rev="5.1"/>
 <!-- for GWT -->
-<dependency org="org.pepstock" name="charba" rev="5.0-gwt"/>
+<dependency org="org.pepstock" name="charba" rev="5.1-gwt"/>
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration in your GWT project module configuration:
@@ -249,7 +249,7 @@ Documentation
 
 All **Charba** documentation will be maintained in [Charba-Wiki](https://github.com/pepstock-org/Charba-Wiki) project.
 
-API JavaDoc for version **5.0** is published [here](https://pepstock-org.github.io/Charba/5.0/index.html).
+API JavaDoc for version **5.1** is published [here](https://pepstock-org.github.io/Charba/5.1/index.html).
 
 You can also access the previous API JavaDoc, because every version is published to `https://pepstock-org.github.io/Charba/[version.release]`.
 
@@ -274,55 +274,6 @@ Continuous integration and quality gate
 **Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
-
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
-
-### Breaking changes
- 
- * change `PointStyleCallback` class, adding context as generic.
- * remove `xPadding` and `yPadding` options from `LineLabel` options. Use padding instead.
- * remove `onDestroy` method from `Plugin` interface. Use `onBeforeDestroy` instead.
- * change type to `mode` and `overScaleMode` options in Zoom plugin configuration, from `org.pepstock.charba.client.enums.InteractionAxis` to `org.pepstock.charba.client.zoom.enums.Mode` class.
- * change signature of `EnterCallback`, `LeaveCallback`, `ClickCallback` and `DoubleClickCallback` interfaces of annotation plugin in order to get an `AnnotationContext` as argument instead of a chart and annotation options instances.
- 
-### Features
-
- * import CHART.JS version [v3.7.1](https://github.com/chartjs/Chart.js/releases/tag/v3.7.1).
- * import CHART.JS TREEMAP controller version [v2.0.2](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.0.2).
- * import CHART.JS MATRIX controller version [v1.1.1](https://github.com/kurkle/chartjs-chart-matrix/releases/tag/v1.1.1).
- * import CHART.JS SANKEY controller version [v0.8.2](https://github.com/kurkle/chartjs-chart-sankey/releases/tag/v0.8.1).
- * import CHART.JS GEO controller [version v3.7.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.7.1).
- * import CHART.JS ANNOTATION plugin version [v1.3.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.3.1).
- * import LUXON library version [v2.3.0](https://github.com/moment/luxon/releases/tag/2.3.0).
- * add `clip` property to annotation options.
- * add `pointStyle`, `rotation`, `xAdjust` and `yAdjust` properties to `PointAnnotation` options.
- * add new `PolygonAnnotation` class in order to draw a polygon.
- * add new `LabelAnnotation` class in order to draw a content (text, image or canvas) on the chart.
- * add point positioning by box options for `PointAnnotation` class.
- * add label options to `BoxAnnotation` class. 
- * enable to set a content by `Canvas` instance to `LineLabel` options.
- * enable to set the `position` of the `LineLabel` options as percentage of the line dimension.
- * add `borderShadowColor`, `backgroundShadowColor`, `shadowBlur`, `shadowOffsetX` and `shadowOffsetY` to annotations and line label options in order to enable the shadowing.
- * add `arrowHeads` option to `LineAnnotation` class options in order to enable the arrows drawing to the line.
- * add the annotation element to the `AnnotationContext` in order to pass to the user the dimension and options of annotation (i.e for gradient).
- * add `drawActiveElementsOnTop` property to lining and bubble datasets.
- * add `onBeforeDestroy` and `onAfterDestroy` methods to `Plugin` interface.
- * enable all tick callbacks to return a `List` of strings in order to have ticks multiple lines.
- * enable `PointLabelCallback` class to return a `List` of strings in order to have ticks multiple lines.
- * add `inCharArea` option to `PluginEventArgument` class.
- * add `r` item to `InteractionAxis` class.
- * add `centered` option to `PointLabels` and `RadialPointLabels` classes.
- * add `borderJoinStyle` option to `Arc` element options and configuration, to `PolarAreaDataset`, `PieDataset` and `DoughnutDataset` classes.
- * add `padding` option to `ProjectionAxis` class.
- * add `changed` option to `PluginEventArgument` class in order to enable the rendering of the chart after event processing.
- * add a `IsPoint` instance argument to the `setTooltipActiveElements` method in the chart.  
-
-### Developing
-
- * change dependency for Google Closure Compiler, [version v20220202](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20220202).
   
 License
 -------
