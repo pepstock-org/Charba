@@ -790,15 +790,18 @@ final class WrapperPlugin extends NativeObjectContainer {
 		if (IsChart.isValid(chart)) {
 			// invokes after render
 			delegation.onAfterRender(chart);
-			// gets the counter
-			AtomicInteger counter = drawingStatus.get(chart.getId());
-			// checks if counter is consistent, greater than 1
-			if (counter.intValue() > 0) {
-				// invokes the end drawing
-				delegation.onEndDrawing(chart);
+			// checks if counter exists
+			if (drawingStatus.containsKey(chart.getId())) {
+				// gets the counter
+				AtomicInteger counter = drawingStatus.get(chart.getId());
+				// greater than 1
+				if (counter.intValue() > 0) {
+					// invokes the end drawing
+					delegation.onEndDrawing(chart);
+				}
+				// reset to 0
+				counter.set(0);
 			}
-			// reset to 0
-			counter.set(0);
 		}
 	}
 
@@ -980,10 +983,13 @@ final class WrapperPlugin extends NativeObjectContainer {
 	void onReset(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
-			// gets the counter
-			AtomicInteger counter = drawingStatus.get(chart.getId());
-			// reset to 0
-			counter.set(0);
+			// checks if counter is stored
+			if (drawingStatus.containsKey(chart.getId())) {
+				// gets the counter
+				AtomicInteger counter = drawingStatus.get(chart.getId());
+				// reset to 0
+				counter.set(0);
+			}
 			// invokes the reset of plugin
 			delegation.onReset(chart);
 		}
