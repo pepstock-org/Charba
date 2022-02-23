@@ -20,7 +20,8 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
  * The stacked area chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
- * Extends the line dataset setting <code>stack</code> property.
+ * Extends the line dataset setting <code>stack</code> property.<br>
+ * Being an stack area dataset, it sets the <code>fill</code> option initial value to <code>true</code>.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -61,6 +62,9 @@ public class StackedAreaDataset extends LineDataset {
 	 */
 	public StackedAreaDataset(IsDefaultOptions defaultValues, boolean hidden) {
 		super(defaultValues, hidden);
+		// sets initial value of fill to true
+		// being an area dataset
+		super.setFill(true);
 	}
 
 	/**
@@ -82,6 +86,9 @@ public class StackedAreaDataset extends LineDataset {
 	 */
 	protected StackedAreaDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
+		// sets initial value of fill to true
+		// being an area dataset
+		super.setFill(true);
 	}
 
 }
