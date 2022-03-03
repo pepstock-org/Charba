@@ -19,19 +19,19 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The stacked area chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The stacked line chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * Extends the line dataset setting <code>stack</code> property.<br>
  * Being an stack area dataset, it sets the <code>fill</code> option initial value to <code>true</code>.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class StackedAreaDataset extends StackedLineDataset {
+public class StackedLineDataset extends LineDataset {
 
 	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
 	 */
-	public StackedAreaDataset() {
+	public StackedLineDataset() {
 		this(Dataset.DEFAULT_HIDDEN);
 	}
 
@@ -41,7 +41,7 @@ public class StackedAreaDataset extends StackedLineDataset {
 	 * 
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	public StackedAreaDataset(boolean hidden) {
+	public StackedLineDataset(boolean hidden) {
 		this((IsDefaultOptions) null, hidden);
 	}
 
@@ -50,7 +50,7 @@ public class StackedAreaDataset extends StackedLineDataset {
 	 * 
 	 * @param defaultValues default options
 	 */
-	public StackedAreaDataset(IsDefaultOptions defaultValues) {
+	public StackedLineDataset(IsDefaultOptions defaultValues) {
 		this(defaultValues, Dataset.DEFAULT_HIDDEN);
 	}
 
@@ -60,8 +60,8 @@ public class StackedAreaDataset extends StackedLineDataset {
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	public StackedAreaDataset(IsDefaultOptions defaultValues, boolean hidden) {
-		super(defaultValues, hidden, true);
+	public StackedLineDataset(IsDefaultOptions defaultValues, boolean hidden) {
+		this(defaultValues, hidden, false);
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class StackedAreaDataset extends StackedLineDataset {
 	 * @param type chart type related to the dataset
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected StackedAreaDataset(Type type, boolean hidden) {
+	protected StackedLineDataset(Type type, boolean hidden) {
 		this(type, null, hidden);
 	}
 
@@ -81,8 +81,34 @@ public class StackedAreaDataset extends StackedLineDataset {
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected StackedAreaDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
-		super(type, defaultValues, hidden, true);
+	protected StackedLineDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+		this(type, defaultValues, hidden, false);
 	}
 
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 * @param fill if <code>true</code>, the dataset sets the fill option to true
+	 */
+	StackedLineDataset(IsDefaultOptions defaultValues, boolean hidden, boolean fill) {
+		super(defaultValues, hidden);
+		// sets initial value of fill
+		super.setFill(fill);
+	}
+
+	/**
+	 * Creates the dataset using a default and chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 * @param defaultValues default options
+	 * @param hidden if <code>true</code>, it will be initially hidden.
+	 * @param fill if <code>true</code>, the dataset sets the fill option to true
+	 */
+	StackedLineDataset(Type type, IsDefaultOptions defaultValues, boolean hidden, boolean fill) {
+		super(type, defaultValues, hidden);
+		// sets initial value of fill
+		super.setFill(fill);
+	}
 }
