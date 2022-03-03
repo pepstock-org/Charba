@@ -84,17 +84,10 @@ final class SelectionHandler {
 	private final int paddingTop;
 	// stores the original bottom padding value
 	private final int paddingBottom;
-	// current selection data set items
 	// current mouse track of selection
 	private SelectionTrack track = null;
 	// status if selected
 	private SelectionStatus status = SelectionStatus.READY;
-	// copy of chart canvas as image to apply when is drawing in the canvas
-	private Img snapshot = null;
-	// previous chart area
-	private String previousChartAreaAsString = null;
-	// previous data URL chart as PNG
-	private String previousDataURL = null;
 	// cursor before hover the selection cleaner
 	private CursorType cursorOverSelectionCleaner = null;
 	// this is a flag to prevent click event after drawing
@@ -258,7 +251,8 @@ final class SelectionHandler {
 		// means that mouse down is already done
 		if (getStatus().equals(SelectionStatus.SELECTING)) {
 			// updates the selection in the canvas
-			updateSelection(event.getX(), false);
+			updateSelection(event.getX());
+			chart.draw();
 		} else if (isEventInSelectionCleaner(event) && getStatus().equals(SelectionStatus.SELECTED)) {
 			// if here
 			// the mouse is hovering the selection cleaner
@@ -308,7 +302,8 @@ final class SelectionHandler {
 			// sets the cursor
 			chart.getCanvas().getStyle().setCursorType(CursorType.DEFAULT);
 			// updates the selection in the canvas
-			updateSelection(event.getX(), false);
+			updateSelection(event.getX());
+			chart.draw();
 			endSelection(event);
 		}
 	}
@@ -348,22 +343,6 @@ final class SelectionHandler {
 	}
 
 	/**
-	 * Returns the image which is snapshot of chart.
-	 * 
-	 * @return the snapshot
-	 */
-	Img getSnapshot() {
-		return snapshot;
-	}
-
-	/**
-	 * @param snapshot the snapshot to set
-	 */
-	void setSnapshot(Img snapshot) {
-		this.snapshot = snapshot;
-	}
-
-	/**
 	 * Start selection on canvas by the starting X coordinate.<br>
 	 * Can be invokes by mouse down or refresh of chart (like resizing).
 	 * 
@@ -375,31 +354,24 @@ final class SelectionHandler {
 		// gets chart AREA
 		ChartNode node = chart.getNode();
 		ChartAreaNode chartArea = node.getChartArea();
+		// initializes the mouse track using the previous instance if exist
+		track = new SelectionTrack(x, track);
 		// sets TOP and BOTTOM
 		// always related to area dimension
 		area.setTop(chartArea.getTop());
 		area.setBottom(chartArea.getBottom());
-		// initializes the mouse track using the previous instance if exist
-		track = new SelectionTrack(x, track);
+		// sets the left part of selection area
+		area.setLeft(track.getStart());
+		// sets the right part of selection area, max must be right of chart area
+		area.setRight(track.getStart());
 	}
 
 	/**
-	 * Update an existing selection on canvas by new X coordinate.<br>
-	 * Can be invokes by mouse move or refresh of chart (like resizing).
+	 * Update an existing selection on canvas by new X coordinate.
 	 * 
 	 * @param x new X coordinate.
-	 * @param refresh if <code>true</code> the chart is refreshing therefore it doesn't clear the canvas
 	 */
-	void updateSelection(double x, boolean refresh) {
-		// gets context
-		Context2dItem ctx = chart.getCanvas().getContext2d();
-		// save context
-		ctx.save();
-		// the snapshot is the image of chart (without any selection).
-		// Every time the selection is updating, it removes the previous
-		// selection putting the original chart (image snapshot) and then
-		// draws new selection
-		applySnapshot(ctx, refresh);
+	void updateSelection(double x) {
 		// gets chart AREA
 		ChartNode node = chart.getNode();
 		ChartAreaNode chartArea = node.getChartArea();
@@ -413,6 +385,16 @@ final class SelectionHandler {
 		area.setLeft(track.getStart());
 		// sets the right part of selection area, max must be right of chart area
 		area.setRight(track.getEnd());
+	}
+
+	/**
+	 * Draws an existing selection on canvas.
+	 */
+	void draw() {
+		// gets context
+		Context2dItem ctx = chart.getCanvas().getContext2d();
+		// save context
+		ctx.save();
 		// sets the selecting color in the canvas
 		ctx.setFillColor(options.getColorAsString());
 		// draws the rectangle of area selection
@@ -455,31 +437,6 @@ final class SelectionHandler {
 			ctx.setLineDashOffset(options.getBorderDashOffset());
 			// draws the border of selected area
 			ctx.strokeRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
-		}
-	}
-
-	/**
-	 * The snapshot is the image of chart (without any selection).<br>
-	 * Every time the selection is updating, it removes the previous selection putting the original chart (image snapshot) and then draws new selection.
-	 * 
-	 * @param ctx rendering interface used to draw on a canvas
-	 * @param refresh if is called during a refresh
-	 */
-	private void applySnapshot(Context2dItem ctx, boolean refresh) {
-		// the snapshot is the image of chart (without any selection).
-		// Every time the selection is updating, it removes the previous
-		// selection putting the original chart (image snapshot) and then
-		// draws new selection
-		if (snapshot != null) {
-			// checks if is doing a refresh
-			// in case of refresh, it doesn't clear the canvas
-			if (!refresh) {
-				// clears the canvas because the chart could have a transparent background color therefore
-				// before to apply the image/snapshot, must clear the canvas (related to issue #26)
-				ctx.clearRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
-			}
-			// draws a scaled image setting width and height
-			ctx.drawImage(snapshot, 0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 		}
 	}
 
@@ -557,7 +514,10 @@ final class SelectionHandler {
 		}
 		// this is new start selection point
 		startSelection((int) Math.ceil(startPixel));
-		updateSelection((int) endPixel, true);
+		// updates pointer
+		updateSelection((int) endPixel);
+		// draws selection
+		draw();
 		// when here, the area has been draw
 		// then complete the selection
 		endSelection(DOMBuilder.get().createChangeEvent(), false);
@@ -610,45 +570,6 @@ final class SelectionHandler {
 		init.setClientX(xTo);
 		// creates and fires the event
 		selectCanvas.dispatchEvent(DOMBuilder.get().createSelectionEvent(init));
-	}
-
-	/**
-	 * Checks if the chart is changed.<br>
-	 * It checks:<br>
-	 * <ul>
-	 * <li>the dimension of chart
-	 * <li>data image of chart
-	 * </ul>
-	 * 
-	 * @param dataUrl data image for chart
-	 * @return <code>true</code> if chart is changed, otherwise <code>false</code>.
-	 */
-	boolean isChartChanged(String dataUrl) {
-		// gets the chart area in json format
-		String chartAreaAsString = chart.getNode().getChartArea().toString();
-		// checks if previous values are null (first round)
-		if (previousDataURL == null && previousChartAreaAsString == null) {
-			// saves the current data image and dimensions of chart
-			previousDataURL = dataUrl;
-			previousChartAreaAsString = chartAreaAsString;
-			return true;
-		}
-		// checks if dimension of chart is changed
-		if (!chartAreaAsString.equalsIgnoreCase(previousChartAreaAsString)) {
-			// saves the current data image and dimensions of chart
-			previousDataURL = dataUrl;
-			previousChartAreaAsString = chartAreaAsString;
-			return true;
-		}
-		// checks if data image of chart is changed
-		if (!dataUrl.equalsIgnoreCase(previousDataURL)) {
-			// saves the current data image and dimensions of chart
-			previousDataURL = dataUrl;
-			previousChartAreaAsString = chartAreaAsString;
-			return true;
-		}
-		// if here the chart is NOT changed
-		return false;
 	}
 
 	// -----------------------------------------

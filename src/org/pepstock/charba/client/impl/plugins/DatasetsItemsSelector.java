@@ -49,7 +49,6 @@ import org.pepstock.charba.client.items.PluginEventArgument;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
-import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Enables the datasets items selection directly in the canvas.<br>
@@ -318,10 +317,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onEndDrawing(IsChart chart) {
+	public void onAfterDraw(IsChart chart) {
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// gets selection handler
@@ -597,19 +596,12 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @param handler selection handler instance
 	 */
 	private void manageSelection(IsChart chart, SelectionHandler handler) {
-		// gets the image from canvas
-		String dataUrl = chart.getCanvas().toDataURL();
-		// checks if chart is changed
-		if (handler.isChartChanged(dataUrl)) {
-			// this is necessary to apply every time the handler
-			// will draw directly in the canvas
-			// stores image setting size
-			handler.setSnapshot(Utilities.toImageElement(dataUrl, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight()));
-		}
 		// if the selections is already present
 		// it refreshes all the calculation of existing selection
 		if (handler.getStatus().equals(SelectionStatus.SELECTED)) {
 			handler.refresh();
+		} else if (handler.getStatus().equals(SelectionStatus.SELECTING)) {
+			handler.draw();
 		}
 		// the drawing of chart is completed and set the default cursor
 		// removing the "wait" one.
