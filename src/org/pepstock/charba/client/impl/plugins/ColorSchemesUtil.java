@@ -126,19 +126,10 @@ final class ColorSchemesUtil {
 	 * @return the maximum border width defined in the dataset
 	 */
 	int getMaxBorderWidth(HoverFlexDataset hovingDataset) {
-		// gets the list border widths
-		List<Integer> borderWidths = hovingDataset.getBorderWidth();
 		// sets max
 		int maxBorderWidth = 0;
-		// if list is not empty
-		if (!borderWidths.isEmpty()) {
-			// means border widths are defined
-			// then scans all to calculate the max
-			for (Integer borderWidth : borderWidths) {
-				// max
-				maxBorderWidth = Math.max(maxBorderWidth, borderWidth);
-			}
-		} else if (hovingDataset instanceof BarDataset) {
+		// checks if is bar dataset
+		if (hovingDataset instanceof BarDataset) {
 			// if here, the list of border widths is empty
 			// but BAR dataset can have BarBorderWidth object to set the border width
 			BarDataset barDataset = (BarDataset) hovingDataset;
@@ -151,6 +142,18 @@ final class ColorSchemesUtil {
 				maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getBottom());
 				maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getLeft());
 				maxBorderWidth = Math.max(maxBorderWidth, borderWidth.getRight());
+			}
+			return maxBorderWidth;
+		}
+		// gets the list border widths
+		List<Integer> borderWidths = hovingDataset.getBorderWidth();
+		// if list is not empty
+		if (!borderWidths.isEmpty()) {
+			// means border widths are defined
+			// then scans all to calculate the max
+			for (Integer borderWidth : borderWidths) {
+				// max
+				maxBorderWidth = Math.max(maxBorderWidth, borderWidth);
 			}
 		}
 		return maxBorderWidth;

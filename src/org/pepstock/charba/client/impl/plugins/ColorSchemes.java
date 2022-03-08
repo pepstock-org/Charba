@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.colors.Color;
@@ -44,7 +45,7 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ColorSchemes extends AbstractPlugin {
+public final class ColorSchemes extends CharbaPluginContainer {
 
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
@@ -59,6 +60,8 @@ public final class ColorSchemes extends AbstractPlugin {
 	static final ColorSchemesDefaultsOptionsFactory DEFAULTS_FACTORY = new ColorSchemesDefaultsOptionsFactory();
 	// singleton instance
 	private static final ColorSchemes INSTANCE = new ColorSchemes();
+	// instance of the plugin
+	private final ColorSchemesPlugin pluginInstance = new ColorSchemesPlugin();
 	// callback instance for legend to solve the issue when the scheme is changed when a chart is already
 	// initialized and legend is not changed
 	private final ColorSchemeLegendLabelsCallback pluginLegendLabelsCallback = new ColorSchemeLegendLabelsCallback();
@@ -67,7 +70,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	 * To avoid any instantiation
 	 */
 	private ColorSchemes() {
-		super(ID);
+		// do nothing
 	}
 
 	/**
@@ -82,72 +85,11 @@ public final class ColorSchemes extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.impl.plugins.CharbaPluginContainer#getPluginInstance()
 	 */
 	@Override
-	public void onConfigure(IsChart chart) {
-		// checks if chart is consistent and if the plugin should be applicable to
-		// this chart
-		if (IsChart.isConsistent(chart) && mustBeActivated(chart)) {
-			// disable the canvas object hanlder because with color scheme
-			// you can use ONLY colors
-			chart.getData().setCanvasObjectHandling(false);
-			// gets the legend labels callback
-			// this is done because changing colors by plugin
-			// the legend does not change accordingly
-			LegendLabelsCallback legendLabelsCallback = chart.getOptions().getLegend().getLabels().getLabelsCallback();
-			// checks if the legend callbacks is not a color scheme ones and is consistent
-			if (!(legendLabelsCallback instanceof ColorSchemeLegendLabelsCallback) && legendLabelsCallback != null) {
-				// uses the color scheme callback to wrap the existing callback
-				pluginLegendLabelsCallback.setDelegatedCallback(chart, legendLabelsCallback);
-			}
-			// applies the color scheme callback to chart
-			chart.getOptions().getLegend().getLabels().setLabelsCallback(pluginLegendLabelsCallback);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
-	 */
-	@Override
-	public boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
-		// checks if chart is consistent and if the plugin should be applicable to
-		// this chart
-		if (IsChart.isConsistent(chart) && mustBeActivated(chart)) {
-			// gets options from chart options
-			ColorSchemesOptions options = getOptions(chart);
-			// gets scheme
-			ColorScheme scheme = options.getScheme();
-			// if null, skips all logic
-			if (scheme != null) {
-				// gets the list of colors
-				List<IsColor> colors = scheme.getColors();
-				// checks if the list colors is consistent, if not skips the logic
-				if (colors != null && !colors.isEmpty()) {
-					scanDatasets(chart, options, colors);
-				}
-			}
-		}
-		// always true
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void onBeforeDestroy(IsChart chart) {
-		// checks if chart is consistent and if the plugin should be applicable to
-		// this chart
-		if (IsChart.isValid(chart) && mustBeActivated(chart)) {
-			// clear the color scheme callback cache
-			// for this chart
-			pluginLegendLabelsCallback.removeDelegatedCallback(chart);
-		}
+	Plugin getPluginInstance() {
+		return pluginInstance;
 	}
 
 	/**
@@ -354,5 +296,93 @@ public final class ColorSchemes extends AbstractPlugin {
 			pOptions = new ColorSchemesOptions(ColorSchemesDefaultOptions.INSTANCE);
 		}
 		return pOptions;
+	}
+
+	/**
+	 * Internal plugin in order to avoid to expose the public methods of the plugin itself.
+	 * 
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private class ColorSchemesPlugin extends AbstractPlugin {
+
+		/**
+		 * Creates the plugin.
+		 */
+		private ColorSchemesPlugin() {
+			super(ID);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public void onConfigure(IsChart chart) {
+			// checks if chart is consistent and if the plugin should be applicable to
+			// this chart
+			if (IsChart.isConsistent(chart) && mustBeActivated(chart)) {
+				// disable the canvas object handler because with color scheme
+				// you can use ONLY colors
+				chart.getData().setCanvasObjectHandling(false);
+				// gets the legend labels callback
+				// this is done because changing colors by plugin
+				// the legend does not change accordingly
+				LegendLabelsCallback legendLabelsCallback = chart.getOptions().getLegend().getLabels().getLabelsCallback();
+				// checks if the legend callbacks is not a color scheme ones and is consistent
+				if (!(legendLabelsCallback instanceof ColorSchemeLegendLabelsCallback) && legendLabelsCallback != null) {
+					// uses the color scheme callback to wrap the existing callback
+					pluginLegendLabelsCallback.setDelegatedCallback(chart, legendLabelsCallback);
+				}
+				// applies the color scheme callback to chart
+				chart.getOptions().getLegend().getLabels().setLabelsCallback(pluginLegendLabelsCallback);
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
+		 */
+		@Override
+		public boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
+			// checks if chart is consistent and if the plugin should be applicable to
+			// this chart
+			if (IsChart.isConsistent(chart) && mustBeActivated(chart)) {
+				// gets options from chart options
+				ColorSchemesOptions options = getOptions(chart);
+				// gets scheme
+				ColorScheme scheme = options.getScheme();
+				// if null, skips all logic
+				if (scheme != null) {
+					// gets the list of colors
+					List<IsColor> colors = scheme.getColors();
+					// checks if the list colors is consistent, if not skips the logic
+					if (colors != null && !colors.isEmpty()) {
+						scanDatasets(chart, options, colors);
+					}
+				}
+			}
+			// always true
+			return true;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public void onBeforeDestroy(IsChart chart) {
+			// checks if chart is consistent and if the plugin should be applicable to
+			// this chart
+			if (IsChart.isValid(chart) && mustBeActivated(chart)) {
+				// clear the color scheme callback cache
+				// for this chart
+				pluginLegendLabelsCallback.removeDelegatedCallback(chart);
+			}
+		}
 	}
 }

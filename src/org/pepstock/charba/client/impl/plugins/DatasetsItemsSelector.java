@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.commons.Checker;
@@ -61,7 +62,7 @@ import org.pepstock.charba.client.resources.ResourceName;
  * @author Andrea "Stock" Stocchero
  * @see AtLeastOneDatasetHandler
  */
-public final class DatasetsItemsSelector extends AbstractPlugin {
+public final class DatasetsItemsSelector extends CharbaPluginContainer {
 
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
@@ -79,6 +80,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	// to avoid to load zoom and hammer JS if not needed
 	// it must always aligned with value in the zoom plugin model
 	private static final String ZOOM_PLUIGIN_ID = ResourceName.ZOOM_PLUGIN.value();
+	// instance of the plugin
+	private final DatasetsItemsSelectorPlugin pluginInstance = new DatasetsItemsSelectorPlugin();
 	// map to maintain the selectors handler for every chart
 	private final Map<String, SelectionHandler> pluginSelectionHandlers = new HashMap<>();
 	// set to maintain the status if legend click handler, if already added or not
@@ -92,7 +95,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * To avoid any instantiation
 	 */
 	private DatasetsItemsSelector() {
-		super(ID);
+		// do nothing
 	}
 
 	/**
@@ -102,6 +105,16 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	public static DatasetsItemsSelector get() {
 		return INSTANCE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.impl.plugins.CharbaPluginContainer#getPluginInstance()
+	 */
+	@Override
+	Plugin getPluginInstance() {
+		return pluginInstance;
 	}
 
 	/**
@@ -171,9 +184,9 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			mustBeUpdated = !SelectionStatus.READY.equals(handler.getStatus());
 		}
 		// destroy the current configuration
-		onBeforeDestroy(chart);
+		pluginInstance.onBeforeDestroy(chart);
 		// recreates the selections handler
-		onConfigure(chart);
+		pluginInstance.onConfigure(chart);
 		// checks if it must fire the event
 		if (fireEvent) {
 			// fires the reset event
@@ -244,143 +257,6 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// sets selection
 			handler.setSelection(scaleItem.getPixelForDateValue(from), scaleItem.getPixelForDateValue(to));
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client. AbstractChart)
-	 */
-	@Override
-	public void onConfigure(IsChart chart) {
-		// gets options in order to store the enablement of the plugin
-		storePluginEnablement(chart);
-		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
-		if (mustBeActivated(chart)) {
-			// overrides the tooltip configuration disabling it
-			chart.getOptions().getTooltips().setEnabled(false);
-			// resets the padding callback
-			chart.getOptions().getLayout().setPadding((NativeCallback) null);
-			// overrides the events configuration setting only the following
-			chart.getOptions().setEvents(Event.CLICK, Event.TOUCH_START);
-			// checks if handler on legend to avoid to remove all data sets has been already added
-			// and if legend is display
-			// checks if is chart is a abstract chart instance
-			if (!pluginEventsRegistrationHandlers.containsKey(chart.getId()) && chart.getOptions().getLegend().isDisplay()) {
-				// if not, adds handler
-				HandlerRegistration registratrion = chart.addHandler(pluginLegendClickHandler, LegendClickEvent.TYPE);
-				// stores flag in the map
-				pluginEventsRegistrationHandlers.put(chart.getId(), registratrion);
-			}
-			// checks if chart has got already an handler
-			if (pluginSelectionHandlers.containsKey(chart.getId())) {
-				// gets selection handler
-				SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
-				// cleans up the handler
-				handler.destroy();
-				// removes previous handler
-				pluginSelectionHandlers.remove(chart.getId());
-			}
-			// option instance
-			DatasetsItemsSelectorOptions pOptions = getOptions(chart);
-			// creates the handler of selection
-			// by chart instance and the options stored in the options (if exists).
-			SelectionHandler handler = new SelectionHandler(chart, pOptions);
-			// removes the default mouse down listener
-			chart.removeCanvasPreventDefault();
-			// adds all mouse listeners to canvas
-			handler.addListeners();
-			// stores selection handler
-			pluginSelectionHandlers.put(chart.getId(), handler);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeginDrawing(org.pepstock.charba.client.IsChart, boolean)
-	 */
-	@Override
-	public void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate) {
-		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
-		if (mustBeActivated(chart)) {
-			// adds checks if there is any data set selection handler in the option
-			// if yes exception
-			Checker.assertCheck(!chart.getOptions().hasDatasetSelectionHandlers(), "Unable to activate plugin because a dataset selection handler has been defined");
-			if (pluginSelectionHandlers.containsKey(chart.getId())) {
-				// sets cursor wait because the chart is drawing and not selectable
-				chart.getCanvas().getStyle().setCursorType(CursorType.WAIT);
-			}
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void onAfterDraw(IsChart chart) {
-		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
-		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
-			// gets selection handler
-			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
-			// calculates the coordinates of selection cleaner element
-			handler.calculateSelectionCleanerPositions();
-			// checks if the draw if at the end of animation
-			// and if the selection is not already started
-			// the selection is managed
-			manageSelection(chart, handler);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void onBeforeDestroy(IsChart chart) {
-		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
-		if (mustBeActivated(chart)) {
-			// resets configuration
-			resetPluginConfiguration(chart);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginEventArgument)
-	 */
-	@Override
-	public boolean onBeforeEvent(IsChart chart, PluginEventArgument argument) {
-		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
-		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
-			// gets native event
-			BaseNativeEvent event = argument.getEventContext().getNativeEvent();
-			// gets selection handler
-			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
-			// manages event
-			// if returns false
-			// does not continue
-			// avoiding to propagate the event
-			if (!manageClickEvent(chart, event, handler)) {
-				return false;
-			}
-			// This control has been added because a click event is always fired
-			// by canvas when mouse up (of selection handler) is performed
-			// but to avoid to refresh the chart every time
-			// selection handler sets a flag to check this condition
-			if (handler.isPreventClickEvent()) {
-				// resets flag
-				handler.resetPreventClickEvent();
-				// and forces the event will be discarded.
-				return false;
-			}
-		}
-		// if here, propagates the event to other listeners
-		return true;
 	}
 
 	/**
@@ -608,4 +484,157 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		chart.getCanvas().getStyle().setCursorType(CursorType.DEFAULT);
 	}
 
+	/**
+	 * Internal plugin in order to avoid to expose the public methods of the plugin itself.
+	 * 
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private class DatasetsItemsSelectorPlugin extends AbstractPlugin {
+
+		/**
+		 * Creates the plugin.
+		 */
+		private DatasetsItemsSelectorPlugin() {
+			super(ID);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client. AbstractChart)
+		 */
+		@Override
+		public void onConfigure(IsChart chart) {
+			// gets options in order to store the enablement of the plugin
+			storePluginEnablement(chart);
+			// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
+			if (mustBeActivated(chart)) {
+				// overrides the tooltip configuration disabling it
+				chart.getOptions().getTooltips().setEnabled(false);
+				// resets the padding callback
+				chart.getOptions().getLayout().setPadding((NativeCallback) null);
+				// overrides the events configuration setting only the following
+				chart.getOptions().setEvents(Event.CLICK, Event.TOUCH_START);
+				// checks if handler on legend to avoid to remove all data sets has been already added
+				// and if legend is display
+				// checks if is chart is a abstract chart instance
+				if (!pluginEventsRegistrationHandlers.containsKey(chart.getId()) && chart.getOptions().getLegend().isDisplay()) {
+					// if not, adds handler
+					HandlerRegistration registratrion = chart.addHandler(pluginLegendClickHandler, LegendClickEvent.TYPE);
+					// stores flag in the map
+					pluginEventsRegistrationHandlers.put(chart.getId(), registratrion);
+				}
+				// checks if chart has got already an handler
+				if (pluginSelectionHandlers.containsKey(chart.getId())) {
+					// gets selection handler
+					SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
+					// cleans up the handler
+					handler.destroy();
+					// removes previous handler
+					pluginSelectionHandlers.remove(chart.getId());
+				}
+				// option instance
+				DatasetsItemsSelectorOptions pOptions = getOptions(chart);
+				// creates the handler of selection
+				// by chart instance and the options stored in the options (if exists).
+				SelectionHandler handler = new SelectionHandler(chart, pOptions);
+				// removes the default mouse down listener
+				chart.removeCanvasPreventDefault();
+				// adds all mouse listeners to canvas
+				handler.addListeners();
+				// stores selection handler
+				pluginSelectionHandlers.put(chart.getId(), handler);
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onBeginDrawing(org.pepstock.charba.client.IsChart, boolean)
+		 */
+		@Override
+		public void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate) {
+			// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
+			if (mustBeActivated(chart)) {
+				// adds checks if there is any data set selection handler in the option
+				// if yes exception
+				Checker.assertCheck(!chart.getOptions().hasDatasetSelectionHandlers(), "Unable to activate plugin because a dataset selection handler has been defined");
+				if (pluginSelectionHandlers.containsKey(chart.getId())) {
+					// sets cursor wait because the chart is drawing and not selectable
+					chart.getCanvas().getStyle().setCursorType(CursorType.WAIT);
+				}
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public void onAfterDraw(IsChart chart) {
+			// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
+			if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
+				// gets selection handler
+				SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
+				// calculates the coordinates of selection cleaner element
+				handler.calculateSelectionCleanerPositions();
+				// checks if the draw if at the end of animation
+				// and if the selection is not already started
+				// the selection is managed
+				manageSelection(chart, handler);
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public void onBeforeDestroy(IsChart chart) {
+			// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
+			if (mustBeActivated(chart)) {
+				// resets configuration
+				resetPluginConfiguration(chart);
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onBeforeEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginEventArgument)
+		 */
+		@Override
+		public boolean onBeforeEvent(IsChart chart, PluginEventArgument argument) {
+			// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
+			if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
+				// gets native event
+				BaseNativeEvent event = argument.getEventContext().getNativeEvent();
+				// gets selection handler
+				SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
+				// manages event
+				// if returns false
+				// does not continue
+				// avoiding to propagate the event
+				if (!manageClickEvent(chart, event, handler)) {
+					return false;
+				}
+				// This control has been added because a click event is always fired
+				// by canvas when mouse up (of selection handler) is performed
+				// but to avoid to refresh the chart every time
+				// selection handler sets a flag to check this condition
+				if (handler.isPreventClickEvent()) {
+					// resets flag
+					handler.resetPreventClickEvent();
+					// and forces the event will be discarded.
+					return false;
+				}
+			}
+			// if here, propagates the event to other listeners
+			return true;
+		}
+	}
 }

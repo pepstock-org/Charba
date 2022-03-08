@@ -30,7 +30,7 @@ public abstract class AbstractPlugin implements Plugin {
 	private final String pluginId;
 
 	/**
-	 * Creates the plugin sing the id passed as argument.
+	 * Creates the plugin using the id passed as argument.
 	 * 
 	 * @param pluginId plugin id to use
 	 */

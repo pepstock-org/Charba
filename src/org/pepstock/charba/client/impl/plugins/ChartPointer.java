@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
@@ -39,7 +40,7 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
  * @author Andrea "Stock" Stocchero
  * @see CursorType
  */
-public final class ChartPointer extends AbstractPlugin {
+public final class ChartPointer extends CharbaPluginContainer {
 
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
@@ -53,6 +54,8 @@ public final class ChartPointer extends AbstractPlugin {
 	private static final ChartPointer INSTANCE = new ChartPointer();
 	// defaults global options factory
 	static final ChartPointerDefaultsOptionsFactory DEFAULTS_FACTORY = new ChartPointerDefaultsOptionsFactory();
+	// instance of the plugin
+	private final ChartPointerPlugin pluginInstance = new ChartPointerPlugin();
 	// cache to store options in order do not load every time the options
 	private final Map<String, ChartPointerOptions> pluginOptions = new HashMap<>();
 
@@ -60,7 +63,7 @@ public final class ChartPointer extends AbstractPlugin {
 	 * To avoid any instantiation
 	 */
 	private ChartPointer() {
-		super(ID);
+		// do nothing
 	}
 
 	/**
@@ -75,79 +78,11 @@ public final class ChartPointer extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
+	 * @see org.pepstock.charba.client.impl.plugins.CharbaPluginContainer#getPluginInstance()
 	 */
 	@Override
-	public boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
-		// checks if chart is consistent
-		if (IsChart.isConsistent(chart)) {
-			// creates options instance
-			ChartPointerOptions pOptions = null;
-			// loads chart options for the chart
-			IsDefaultScaledOptions options = chart.getWholeOptions();
-			// creates the plugin options checking if exists ot not
-			if (options.getPlugins().hasOptions(ID)) {
-				pOptions = options.getPlugins().getOptions(ID, FACTORY);
-			} else {
-				pOptions = new ChartPointerOptions(ChartPointerDefaultOptions.INSTANCE);
-			}
-			// stores option on the cache
-			pluginOptions.put(chart.getId(), pOptions);
-			// sets the initial cursor of chart
-			pOptions.setCurrentCursor(chart.getInitialCursor());
-		}
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onAfterEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginEventArgument)
-	 */
-	@Override
-	public void onAfterEvent(IsChart chart, PluginEventArgument argument) {
-		// checks if chart is consistent and options of plugin has been stored
-		if (IsChart.isConsistent(chart) && pluginOptions.containsKey(chart.getId())) {
-			// gets base native event
-			BaseNativeEvent event = argument.getEventContext().getNativeEvent();
-			// gets options instance
-			ChartPointerOptions pOptions = pluginOptions.get(chart.getId());
-			// gets the scope
-			Set<PointerElement> scope = pOptions.getElements();
-			// DATASET SELECTION
-			if (hasDatasetSelection(chart, event, scope)) {
-				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
-			} else if (hasTitleSelection(chart, event, scope)) {
-				// TITLE SELECTION
-				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
-			} else if (hasSubtitleSelection(chart, event, scope)) {
-				// SUBTITLE SELECTION
-				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
-			} else if (hasScaleSelection(chart, event, scope)) {
-				// AXIS SELECTION
-				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
-			} else if (hasLegendSelection(chart, event, scope)) {
-				// LEGEND SELECTION
-				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
-			} else {
-				// if null, sets the default cursor
-				chart.getChartElement().getStyle().setCursorType(chart.getInitialCursor());
-			}
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void onBeforeDestroy(IsChart chart) {
-		// checks if chart is valid
-		if (IsChart.isValid(chart)) {
-			// removes the stored options for chart
-			pluginOptions.remove(chart.getId());
-		}
+	Plugin getPluginInstance() {
+		return pluginInstance;
 	}
 
 	/**
@@ -262,4 +197,99 @@ public final class ChartPointer extends AbstractPlugin {
 		return false;
 	}
 
+	/**
+	 * Internal plugin in order to avoid to expose the public methods of the plugin itself.
+	 * 
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private class ChartPointerPlugin extends AbstractPlugin {
+
+		/**
+		 * Creates the plugin.
+		 */
+		private ChartPointerPlugin() {
+			super(ID);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onBeforeUpdate(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginUpdateArgument)
+		 */
+		@Override
+		public boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
+			// checks if chart is consistent
+			if (IsChart.isConsistent(chart)) {
+				// creates options instance
+				ChartPointerOptions pOptions = null;
+				// loads chart options for the chart
+				IsDefaultScaledOptions options = chart.getWholeOptions();
+				// creates the plugin options checking if exists ot not
+				if (options.getPlugins().hasOptions(ID)) {
+					pOptions = options.getPlugins().getOptions(ID, FACTORY);
+				} else {
+					pOptions = new ChartPointerOptions(ChartPointerDefaultOptions.INSTANCE);
+				}
+				// stores option on the cache
+				pluginOptions.put(chart.getId(), pOptions);
+				// sets the initial cursor of chart
+				pOptions.setCurrentCursor(chart.getInitialCursor());
+			}
+			return true;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onAfterEvent(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginEventArgument)
+		 */
+		@Override
+		public void onAfterEvent(IsChart chart, PluginEventArgument argument) {
+			// checks if chart is consistent and options of plugin has been stored
+			if (IsChart.isConsistent(chart) && pluginOptions.containsKey(chart.getId())) {
+				// gets base native event
+				BaseNativeEvent event = argument.getEventContext().getNativeEvent();
+				// gets options instance
+				ChartPointerOptions pOptions = pluginOptions.get(chart.getId());
+				// gets the scope
+				Set<PointerElement> scope = pOptions.getElements();
+				// DATASET SELECTION
+				if (hasDatasetSelection(chart, event, scope)) {
+					chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
+				} else if (hasTitleSelection(chart, event, scope)) {
+					// TITLE SELECTION
+					chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
+				} else if (hasSubtitleSelection(chart, event, scope)) {
+					// SUBTITLE SELECTION
+					chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
+				} else if (hasScaleSelection(chart, event, scope)) {
+					// AXIS SELECTION
+					chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
+				} else if (hasLegendSelection(chart, event, scope)) {
+					// LEGEND SELECTION
+					chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
+				} else {
+					// if null, sets the default cursor
+					chart.getChartElement().getStyle().setCursorType(chart.getInitialCursor());
+				}
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public void onBeforeDestroy(IsChart chart) {
+			// checks if chart is valid
+			if (IsChart.isValid(chart)) {
+				// removes the stored options for chart
+				pluginOptions.remove(chart.getId());
+			}
+		}
+
+	}
 }

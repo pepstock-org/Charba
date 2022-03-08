@@ -116,6 +116,16 @@ public class Plugins extends ConfigurationOptionsContainer {
 	}
 
 	/**
+	 * Sets an empty configuration for the plugin.<br>
+	 * The plugin will use the default configuration
+	 * 
+	 * @param pluginId plugin id.
+	 */
+	public void setEmptyOptions(String pluginId) {
+		getConfiguration().getPlugins().setEmptyOptions(pluginId);
+	}
+
+	/**
 	 * Sets the plugin options.
 	 * 
 	 * @param options plugin options used to configure the plugin

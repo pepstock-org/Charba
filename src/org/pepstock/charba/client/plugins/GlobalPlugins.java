@@ -55,6 +55,26 @@ public final class GlobalPlugins {
 	}
 
 	/**
+	 * Registers a plugin as global, to apply to all charts, by a container
+	 * 
+	 * @param container plugin container instance
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
+	 */
+	public boolean register(PluginContainer container) {
+		// checks if plugin container is consistent
+		if (container != null) {
+			// creates envelop
+			PluginsEnvelop<Plugin> envelop = new PluginsEnvelop<>();
+			// loads the plugin by container
+			container.loadPlugin(envelop);
+			// registers plugin
+			return register(envelop.getContent());
+		}
+		// if here, plugin container instance is not consistent
+		return false;
+	}
+
+	/**
 	 * Registers a plugin as global, to apply to all charts.
 	 * 
 	 * @param plugin plugin instance

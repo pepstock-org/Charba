@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.plugins;
 
-import org.pepstock.charba.client.commons.ImmutableEnvelop;
+import org.pepstock.charba.client.commons.BaseEnvelop;
 
 /**
  * This object is a container of hidden object to pass to other packages.<br>
@@ -25,10 +25,27 @@ import org.pepstock.charba.client.commons.ImmutableEnvelop;
  * @param <T> type of envelop content.
  * 
  */
-public final class PluginsEnvelop<T> extends ImmutableEnvelop<T> {
+public final class PluginsEnvelop<T> extends BaseEnvelop<T> {
 
 	/**
-	 * Create an envelop with the content passed as argument.
+	 * Create an envelop with a <code>null</code> content.
+	 */
+	PluginsEnvelop() {
+		this(null);
+	}
+
+	/**
+	 * Create an envelop with a <code>null</code> content and a flag to set if the content can be nullable.
+	 * 
+	 * @param nullable if <code>true</code>, the content can be <code>null</code>
+	 */
+	PluginsEnvelop(boolean nullable) {
+		this(null, nullable);
+	}
+
+	/**
+	 * 
+	 * /** Create an envelop with the content passed as argument.
 	 * 
 	 * @param content content to set as initial value
 	 */

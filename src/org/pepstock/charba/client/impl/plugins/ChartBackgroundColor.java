@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.HtmlColor;
@@ -43,7 +44,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ChartBackgroundColor extends AbstractPlugin {
+public final class ChartBackgroundColor extends CharbaPluginContainer {
 
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
@@ -61,6 +62,8 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	static final ChartBackgroundColorDefaultsOptionsFactory DEFAULTS_FACTORY = new ChartBackgroundColorDefaultsOptionsFactory();
 	// cache to store options in order do not load every time the options
 	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
+	// instance of the plugin
+	private final ChartBackgroundColorPlugin pluginInstance = new ChartBackgroundColorPlugin();
 	// color instance
 	private final String color;
 	// gradient instance
@@ -90,7 +93,6 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @param color background default color for all charts.
 	 */
 	public ChartBackgroundColor(String color) {
-		super(ID);
 		// sets default color if null
 		this.color = (color != null) ? color : DEFAULT_BACKGROUND_COLOR;
 		// sets null other kind of background
@@ -104,7 +106,6 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @param gradient background default gradient for all charts.
 	 */
 	public ChartBackgroundColor(Gradient gradient) {
-		super(ID);
 		// checks if gradient is consistent
 		// sets gradient
 		this.gradient = Checker.checkAndGetIfValid(gradient, "Gradient argument");
@@ -119,7 +120,6 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @param pattern background default pattern for all charts.
 	 */
 	public ChartBackgroundColor(Pattern pattern) {
-		super(ID);
 		// checks if pattern is consistent
 		// sets gradient
 		this.pattern = Checker.checkAndGetIfValid(pattern, "Pattern argument");
@@ -173,108 +173,11 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDraw(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.impl.plugins.CharbaPluginContainer#getPluginInstance()
 	 */
 	@Override
-	public boolean onBeforeDraw(IsChart chart) {
-		// checks if chart is consistent
-		if (IsChart.isConsistent(chart)) {
-			// gets options
-			ChartBackgroundColorOptions bgOptions = getOptions(chart);
-			// gets the canvas
-			Context2dItem ctx = chart.getCanvas().getContext2d();
-			// save context
-			ctx.save();
-			// sets global composite operation
-			ctx.setGlobalCompositeOperation(bgOptions.getGlobalCompositeOperation());
-			// checks color types
-			if (ColorType.COLOR.equals(bgOptions.getColorType())) {
-				// set fill canvas color
-				ctx.setFillColor(bgOptions.getBackgroundColorAsString());
-				// sets back ground to chart HTML element
-				applyBackgroundColorToChartElement(chart, bgOptions.getBackgroundColorAsString());
-			} else if (ColorType.PATTERN.equals(bgOptions.getColorType())) {
-				// creates the pattern
-				CanvasPatternItem canvasPattern = ChartBackgroundGradientFactory.get().createPattern(chart, bgOptions.getBackgroundColorAsPattern());
-				// set fill canvas pattern
-				ctx.setFillPattern(canvasPattern);
-				// sets back ground to chart HTML element
-				applyBackgroundToChartElement(chart, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsPattern()));
-			} else if (ColorType.GRADIENT.equals(bgOptions.getColorType())) {
-				// creates the gradient
-				CanvasGradientItem canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), Undefined.INTEGER, Undefined.INTEGER);
-				// set fill canvas color
-				ctx.setFillGradient(canvasGradient);
-				// sets back ground to chart HTML element
-				applyBackgroundImageToChartElement(chart, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsGradient()));
-			}
-			// fills back ground
-			ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
-			// restore context
-			ctx.restore();
-		}
-		// always TRUE
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void onEndDrawing(IsChart chart) {
-		// checks if chart is consistent
-		if (IsChart.isValid(chart)) {
-			// when the draw is completed
-			// remove the options from cache in order to reload it
-			// when chart is re drawing for whatever reason.
-			// in this way if options are updating during chart's life cycle
-			// the updates can be applied.
-			OPTIONS.remove(chart.getId());
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
-	 */
-	@Override
-	public void onResize(IsChart chart, PluginResizeArgument argument) {
-		// checks if chart is consistent
-		if (IsChart.isConsistent(chart)) {
-			// gets options
-			ChartBackgroundColorOptions bgOptions = getOptions(chart);
-			// if gradient has been set
-			if (ColorType.GRADIENT.equals(bgOptions.getColorType())) {
-				// Due to gradients are created based on dimension of
-				// canvas or chart area, every time a resize is occurring
-				// gradients must be recreated
-				// because gradients must be recreated
-				// the cache of gradients must be clear
-				ChartBackgroundGradientFactory.get().resetGradients(chart);
-			}
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void onBeforeDestroy(IsChart chart) {
-		// checks if chart is consistent
-		if (IsChart.isValid(chart)) {
-			// removes the options from the cache
-			// even if it could not be needed
-			// because the options should be remove after draw
-			OPTIONS.remove(chart.getId());
-			// because chart is destroy
-			// clears the cache of patterns and gradients of the chart
-			ChartBackgroundGradientFactory.get().clear(chart);
-		}
+	Plugin getPluginInstance() {
+		return pluginInstance;
 	}
 
 	/**
@@ -359,4 +262,128 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		}
 	}
 
+	/**
+	 * Internal plugin in order to avoid to expose the public methods of the plugin itself.
+	 * 
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private class ChartBackgroundColorPlugin extends AbstractPlugin {
+
+		/**
+		 * Creates the plugin.
+		 */
+		private ChartBackgroundColorPlugin() {
+			super(ID);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onBeforeDraw(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public boolean onBeforeDraw(IsChart chart) {
+			// checks if chart is consistent
+			if (IsChart.isConsistent(chart)) {
+				// gets options
+				ChartBackgroundColorOptions bgOptions = getOptions(chart);
+				// gets the canvas
+				Context2dItem ctx = chart.getCanvas().getContext2d();
+				// save context
+				ctx.save();
+				// sets global composite operation
+				ctx.setGlobalCompositeOperation(bgOptions.getGlobalCompositeOperation());
+				// checks color types
+				if (ColorType.COLOR.equals(bgOptions.getColorType())) {
+					// set fill canvas color
+					ctx.setFillColor(bgOptions.getBackgroundColorAsString());
+					// sets back ground to chart HTML element
+					applyBackgroundColorToChartElement(chart, bgOptions.getBackgroundColorAsString());
+				} else if (ColorType.PATTERN.equals(bgOptions.getColorType())) {
+					// creates the pattern
+					CanvasPatternItem canvasPattern = ChartBackgroundGradientFactory.get().createPattern(chart, bgOptions.getBackgroundColorAsPattern());
+					// set fill canvas pattern
+					ctx.setFillPattern(canvasPattern);
+					// sets back ground to chart HTML element
+					applyBackgroundToChartElement(chart, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsPattern()));
+				} else if (ColorType.GRADIENT.equals(bgOptions.getColorType())) {
+					// creates the gradient
+					CanvasGradientItem canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), Undefined.INTEGER, Undefined.INTEGER);
+					// set fill canvas color
+					ctx.setFillGradient(canvasGradient);
+					// sets back ground to chart HTML element
+					applyBackgroundImageToChartElement(chart, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsGradient()));
+				}
+				// fills back ground
+				ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+				// restore context
+				ctx.restore();
+			}
+			// always TRUE
+			return true;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public void onEndDrawing(IsChart chart) {
+			// checks if chart is consistent
+			if (IsChart.isValid(chart)) {
+				// when the draw is completed
+				// remove the options from cache in order to reload it
+				// when chart is re drawing for whatever reason.
+				// in this way if options are updating during chart's life cycle
+				// the updates can be applied.
+				OPTIONS.remove(chart.getId());
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
+		 */
+		@Override
+		public void onResize(IsChart chart, PluginResizeArgument argument) {
+			// checks if chart is consistent
+			if (IsChart.isConsistent(chart)) {
+				// gets options
+				ChartBackgroundColorOptions bgOptions = getOptions(chart);
+				// if gradient has been set
+				if (ColorType.GRADIENT.equals(bgOptions.getColorType())) {
+					// Due to gradients are created based on dimension of
+					// canvas or chart area, every time a resize is occurring
+					// gradients must be recreated
+					// because gradients must be recreated
+					// the cache of gradients must be clear
+					ChartBackgroundGradientFactory.get().resetGradients(chart);
+				}
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public void onBeforeDestroy(IsChart chart) {
+			// checks if chart is consistent
+			if (IsChart.isValid(chart)) {
+				// removes the options from the cache
+				// even if it could not be needed
+				// because the options should be remove after draw
+				OPTIONS.remove(chart.getId());
+				// because chart is destroy
+				// clears the cache of patterns and gradients of the chart
+				ChartBackgroundGradientFactory.get().clear(chart);
+			}
+		}
+
+	}
 }

@@ -40,6 +40,23 @@ public final class Plugins implements ConfigurationElement {
 	private final List<WrapperPlugin> pluginsInstances = new LinkedList<>();
 
 	/**
+	 * Adds a new plugin to the chart, by a container
+	 * 
+	 * @param container plugin container instance
+	 */
+	public void add(PluginContainer container) {
+		// checks if plugin container is consistent
+		if (container != null) {
+			// creates envelop
+			PluginsEnvelop<Plugin> envelop = new PluginsEnvelop<>();
+			// loads the plugin by container
+			container.loadPlugin(envelop);
+			// registers plugin
+			add(envelop.getContent());
+		}
+	}
+
+	/**
 	 * Adds a new plugin to the chart.<br>
 	 * If another plugin instance with the same id has been already loaded, it will remove, storing the new one.<br>
 	 * If the chart is already initialized, to get this update the chart must be drawn again.
@@ -158,6 +175,9 @@ public final class Plugins implements ConfigurationElement {
 				if (!globalPluginIds.contains(plugin.getId())) {
 					// if not, adds plugin
 					pluginsListToSet.add(plugin);
+					// checks and add missing configuration
+					// if needed
+					checkAndAddEmptyConfiguration(chart, plugin.getId());
 				} else {
 					// removes it if already set in the global
 					iter.remove();
@@ -171,4 +191,18 @@ public final class Plugins implements ConfigurationElement {
 		}
 	}
 
+	/**
+	 * Checks if there is any plugin configuration already set.<br>
+	 * If not, adds an empty object.
+	 * 
+	 * @param chart chart instance
+	 * @param id the plugin id
+	 */
+	private void checkAndAddEmptyConfiguration(IsChart chart, String id) {
+		// checks if configuration has been loaded
+		if (!chart.getOptions().getPlugins().hasOptions(id)) {
+			// stores an empty configuration
+			chart.getOptions().getPlugins().setEmptyOptions(id);
+		}
+	}
 }

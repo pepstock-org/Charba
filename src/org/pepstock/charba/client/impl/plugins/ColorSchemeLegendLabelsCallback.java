@@ -119,8 +119,6 @@ final class ColorSchemeLegendLabelsCallback implements LegendLabelsCallback {
 		// gets background colors, border colors
 		List<IsColor> backgroundColors = hovingFlexDataset.getBackgroundColor();
 		List<IsColor> borderColors = hovingFlexDataset.getBackgroundColor();
-		// calculates the max border width
-		int borderWidth = ColorSchemesUtil.get().getMaxBorderWidth(hovingFlexDataset);
 		// checks if bubble chart
 		if (Undefined.isNot(item.getDatasetIndex())) {
 			// sets background colors
@@ -133,8 +131,6 @@ final class ColorSchemeLegendLabelsCallback implements LegendLabelsCallback {
 			// sets border color
 			item.setStrokeStyle(borderColors.get(item.getIndex()));
 		}
-		// sets border width
-		item.setLineWidth(borderWidth);
 	}
 
 	/**
@@ -148,8 +144,6 @@ final class ColorSchemeLegendLabelsCallback implements LegendLabelsCallback {
 		item.setFillStyle(liningDataset.getBackgroundColorAsString());
 		// sets border color
 		item.setStrokeStyle(liningDataset.getBorderColorAsString());
-		// sets border color
-		item.setLineWidth(liningDataset.getBorderWidth());
 	}
 
 }

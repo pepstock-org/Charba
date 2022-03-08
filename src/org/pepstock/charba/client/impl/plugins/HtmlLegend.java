@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
@@ -46,7 +47,7 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class HtmlLegend extends AbstractPlugin {
+public final class HtmlLegend extends CharbaPluginContainer {
 
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
@@ -64,6 +65,8 @@ public final class HtmlLegend extends AbstractPlugin {
 	private static final String SUFFIX_LEGEND_ELEMENT_ID = "_legend";
 	// static instance to generate legend in the HTML
 	private static final HtmlLegendGenerator GENERATOR = new HtmlLegendGenerator();
+	// instance of the plugin
+	private final HtmlLegendPlugin pluginInstance = new HtmlLegendPlugin();
 	// cache to store options in order do not load every time the options
 	private final Map<String, HtmlLegendOptions> pluginOptions = new HashMap<>();
 	// cache to store legend items managed by chart
@@ -82,7 +85,7 @@ public final class HtmlLegend extends AbstractPlugin {
 	 * To avoid any instantiation
 	 */
 	private HtmlLegend() {
-		super(ID);
+		// do nothing
 	}
 
 	/**
@@ -97,164 +100,11 @@ public final class HtmlLegend extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client. AbstractChart)
+	 * @see org.pepstock.charba.client.impl.plugins.CharbaPluginContainer#getPluginInstance()
 	 */
 	@Override
-	public void onConfigure(IsChart chart) {
-		// checks if argument is consistent
-		if (IsChart.isConsistent(chart)) {
-			// adds in the a map the callback proxy instance
-			// to catch events form legend
-			if (!pluginCallbackProxies.containsKey(chart.getId())) {
-				pluginCallbackProxies.put(chart.getId(), new HtmlLegendCallbackProxy());
-			}
-			HtmlLegendOptions pOptions = null;
-			// loads chart options for the chart
-			IsDefaultScaledOptions options = chart.getWholeOptions();
-			// if not, loads and cache
-			// creates the plugin options using the java script object
-			// passing also the default color set at constructor.
-			if (options.getPlugins().hasOptions(ID)) {
-				pOptions = options.getPlugins().getOptions(ID, FACTORY);
-			} else {
-				pOptions = new HtmlLegendOptions(HtmlLegendDefaultOptions.INSTANCE);
-			}
-			pluginOptions.put(chart.getId(), pOptions);
-			pOptions.setCurrentCursor(chart.getInitialCursor());
-			// checks if the plugin is configured to show legend
-			if (pOptions.isDisplay()) {
-				// if the legend is set do not display
-				// or the OOTB legend plugin has been disable
-				// it respects it then ignore it and the plugin in
-				// will be disable
-				manageLegendDisplay(chart, pOptions);
-			} else {
-				// resets status of plugin
-				// because display is false
-				resetStatus(chart);
-			}
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeginDrawing(org.pepstock.charba.client.IsChart, boolean)
-	 */
-	@Override
-	public void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate) {
-		// checks if argument is consistent
-		if (mustBeDisplay(chart)) {
-			// checks if reloading during previous drawing
-			// if the previous stored easing is greater than the current one her
-			// means that the is chart is updating without waiting for ending
-			// the previous update
-			if (overridePreviousUpdate) {
-				// removes the item
-				// in order to after draw to create the legend
-				pluginAddedLegendStatus.remove(chart.getId());
-			}
-			// gets the legend
-			Legend legend = chart.getOptions().getLegend();
-			// creates legend DIV element reference
-			Div legendElement = null;
-			// checks if element is alreayd created
-			if (!pluginDivElements.containsKey(chart.getId())) {
-				// if new
-				// creates a DIV element
-				legendElement = DOMBuilder.get().createDivElement();
-				// sets the id by chart instance
-				legendElement.setId(formatLegendElementId(chart));
-				// stores in the map
-				pluginDivElements.put(chart.getId(), legendElement);
-			} else {
-				// if here, DIV element already exists then it retrieves it
-				legendElement = pluginDivElements.get(chart.getId());
-			}
-			// checks if there is a parent
-			if (legendElement.getParentNode() == null) {
-				// if no parent, means new object to add to chart element
-				addLegendElement(chart.getChartElement(), legendElement, legend.getPosition(), legend.getLabels().getPadding());
-			} else {
-				// removes the item
-				// in order to after draw to create the legend
-				pluginAddedLegendStatus.remove(chart.getId());
-				// if here, the div has got the parent
-				// then it checks if the position is the same when it has been created
-				// otherwise it will move to the right position
-				manageLegendElement(chart, legendElement, legend.getPosition());
-			}
-			// checks if is full width has been set
-			if (legend.isFullSize()) {
-				// sets 100% of width
-				legendElement.getStyle().setWidth(Unit.PCT.format(100));
-			}
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client. AbstractChart)
-	 */
-	@Override
-	public void onAfterDraw(IsChart chart) {
-		// checks if argument is consistent
-		// and checks if the legend must be created
-		// the legend will be created if there is the legend element
-		// and the chart is is NOT in the set
-		if (mustBeDisplay(chart) && pluginDivElements.containsKey(chart.getId()) && !pluginAddedLegendStatus.contains(chart.getId())) {
-			// gets div element
-			Div legendElement = pluginDivElements.get(chart.getId());
-			// invokes the legend generator to have the HTML of legend
-			SafeHtml html = GENERATOR.generateLegend(chart);
-			// removes all children of div element
-			legendElement.removeAllChildren();
-			// sets as inner HTML
-			legendElement.setInnerHTML(html.asString());
-			// removes all listeners
-			removeListeners(chart, legendElement);
-			// adds the event listeners to element
-			addListeners(chart, legendElement);
-			// adds in the set
-			// in order do not add the inner html every easing
-			pluginAddedLegendStatus.add(chart.getId());
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void onEndDrawing(IsChart chart) {
-		// checks if argument is consistent
-		if (mustBeDisplay(chart)) {
-			// removes chart for items
-			// in order to add next cycle
-			pluginAddedLegendStatus.remove(chart.getId());
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void onBeforeDestroy(IsChart chart) {
-		// checks if argument is consistent
-		if (IsChart.isValid(chart)) {
-			// resets all status items
-			resetStatus(chart);
-			// removes status of legend display
-			pluginLegendDisplayStatus.remove(chart.getId());
-			// removes callback proxies
-			pluginCallbackProxies.remove(chart.getId());
-			// removes the chart from options
-			pluginOptions.remove(chart.getId());
-		}
+	Plugin getPluginInstance() {
+		return pluginInstance;
 	}
 
 	/**
@@ -540,6 +390,187 @@ public final class HtmlLegend extends AbstractPlugin {
 	 */
 	Map<String, Div> getPluginDivElements() {
 		return pluginDivElements;
+	}
+
+	/**
+	 * Internal plugin in order to avoid to expose the public methods of the plugin itself.
+	 * 
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private class HtmlLegendPlugin extends AbstractPlugin {
+
+		/**
+		 * Creates the plugin.
+		 */
+		private HtmlLegendPlugin() {
+			super(ID);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client. AbstractChart)
+		 */
+		@Override
+		public void onConfigure(IsChart chart) {
+			// checks if argument is consistent
+			if (IsChart.isConsistent(chart)) {
+				// adds in the a map the callback proxy instance
+				// to catch events form legend
+				if (!pluginCallbackProxies.containsKey(chart.getId())) {
+					pluginCallbackProxies.put(chart.getId(), new HtmlLegendCallbackProxy());
+				}
+				HtmlLegendOptions pOptions = null;
+				// loads chart options for the chart
+				IsDefaultScaledOptions options = chart.getWholeOptions();
+				// if not, loads and cache
+				// creates the plugin options using the java script object
+				// passing also the default color set at constructor.
+				if (options.getPlugins().hasOptions(ID)) {
+					pOptions = options.getPlugins().getOptions(ID, FACTORY);
+				} else {
+					pOptions = new HtmlLegendOptions(HtmlLegendDefaultOptions.INSTANCE);
+				}
+				pluginOptions.put(chart.getId(), pOptions);
+				pOptions.setCurrentCursor(chart.getInitialCursor());
+				// checks if the plugin is configured to show legend
+				if (pOptions.isDisplay()) {
+					// if the legend is set do not display
+					// or the OOTB legend plugin has been disable
+					// it respects it then ignore it and the plugin in
+					// will be disable
+					manageLegendDisplay(chart, pOptions);
+				} else {
+					// resets status of plugin
+					// because display is false
+					resetStatus(chart);
+				}
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onBeginDrawing(org.pepstock.charba.client.IsChart, boolean)
+		 */
+		@Override
+		public void onBeginDrawing(IsChart chart, boolean overridePreviousUpdate) {
+			// checks if argument is consistent
+			if (mustBeDisplay(chart)) {
+				// checks if reloading during previous drawing
+				// if the previous stored easing is greater than the current one her
+				// means that the is chart is updating without waiting for ending
+				// the previous update
+				if (overridePreviousUpdate) {
+					// removes the item
+					// in order to after draw to create the legend
+					pluginAddedLegendStatus.remove(chart.getId());
+				}
+				// gets the legend
+				Legend legend = chart.getOptions().getLegend();
+				// creates legend DIV element reference
+				Div legendElement = null;
+				// checks if element is alreayd created
+				if (!pluginDivElements.containsKey(chart.getId())) {
+					// if new
+					// creates a DIV element
+					legendElement = DOMBuilder.get().createDivElement();
+					// sets the id by chart instance
+					legendElement.setId(formatLegendElementId(chart));
+					// stores in the map
+					pluginDivElements.put(chart.getId(), legendElement);
+				} else {
+					// if here, DIV element already exists then it retrieves it
+					legendElement = pluginDivElements.get(chart.getId());
+				}
+				// checks if there is a parent
+				if (legendElement.getParentNode() == null) {
+					// if no parent, means new object to add to chart element
+					addLegendElement(chart.getChartElement(), legendElement, legend.getPosition(), legend.getLabels().getPadding());
+				} else {
+					// removes the item
+					// in order to after draw to create the legend
+					pluginAddedLegendStatus.remove(chart.getId());
+					// if here, the div has got the parent
+					// then it checks if the position is the same when it has been created
+					// otherwise it will move to the right position
+					manageLegendElement(chart, legendElement, legend.getPosition());
+				}
+				// checks if is full width has been set
+				if (legend.isFullSize()) {
+					// sets 100% of width
+					legendElement.getStyle().setWidth(Unit.PCT.format(100));
+				}
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client. AbstractChart)
+		 */
+		@Override
+		public void onAfterDraw(IsChart chart) {
+			// checks if argument is consistent
+			// and checks if the legend must be created
+			// the legend will be created if there is the legend element
+			// and the chart is is NOT in the set
+			if (mustBeDisplay(chart) && pluginDivElements.containsKey(chart.getId()) && !pluginAddedLegendStatus.contains(chart.getId())) {
+				// gets div element
+				Div legendElement = pluginDivElements.get(chart.getId());
+				// invokes the legend generator to have the HTML of legend
+				SafeHtml html = GENERATOR.generateLegend(chart);
+				// removes all children of div element
+				legendElement.removeAllChildren();
+				// sets as inner HTML
+				legendElement.setInnerHTML(html.asString());
+				// removes all listeners
+				removeListeners(chart, legendElement);
+				// adds the event listeners to element
+				addListeners(chart, legendElement);
+				// adds in the set
+				// in order do not add the inner html every easing
+				pluginAddedLegendStatus.add(chart.getId());
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public void onEndDrawing(IsChart chart) {
+			// checks if argument is consistent
+			if (mustBeDisplay(chart)) {
+				// removes chart for items
+				// in order to add next cycle
+				pluginAddedLegendStatus.remove(chart.getId());
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
+		 */
+		@Override
+		public void onBeforeDestroy(IsChart chart) {
+			// checks if argument is consistent
+			if (IsChart.isValid(chart)) {
+				// resets all status items
+				resetStatus(chart);
+				// removes status of legend display
+				pluginLegendDisplayStatus.remove(chart.getId());
+				// removes callback proxies
+				pluginCallbackProxies.remove(chart.getId());
+				// removes the chart from options
+				pluginOptions.remove(chart.getId());
+			}
+		}
+
 	}
 
 }
