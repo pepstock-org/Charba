@@ -279,9 +279,14 @@ Going to next release
 ---------------------
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
 
+### Breaking changes
+
+ * hide public methods of Charba out-of-the-box plugins (ChartBackgroundColor, ChartPointer, ColorSchemes, HtmlLegend and DatasetsItemsSelector).
+
 ### Features
 
  * add `StackedLineChart` class in order to manage the stacked chart for line (no filled).
+ * add `PlginContainer` interface in order to set plugin implementations without exposing the plugin public methods.
 
 ### Fixed Bugs
 
