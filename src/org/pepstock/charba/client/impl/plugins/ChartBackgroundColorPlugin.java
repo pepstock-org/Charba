@@ -1,0 +1,247 @@
+/**
+    Copyright 2017 Andrea "Stock" Stocchero
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+	    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+package org.pepstock.charba.client.impl.plugins;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
+import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.enums.ColorType;
+import org.pepstock.charba.client.items.PluginResizeArgument;
+import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.plugins.AbstractPlugin;
+import org.pepstock.charba.client.plugins.PluginContainer;
+import org.pepstock.charba.client.utils.Utilities;
+
+/**
+ * A plugin implementation to set the background color, gradient or pattern of chart.<br>
+ * If added to defaults, without any configuration, the chart will have a {@link ChartBackgroundColor#DEFAULT_BACKGROUND_COLOR} background color.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
+final class ChartBackgroundColorPlugin extends AbstractPlugin {
+
+	// cache to store options in order do not load every time the options
+	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
+	// container instance
+	private final ChartBackgroundColor container;
+
+	/**
+	 * Creates the plugin.
+	 * 
+	 * @param container the {@link PluginContainer} of this plugin
+	 */
+	ChartBackgroundColorPlugin(ChartBackgroundColor container) {
+		super(ChartBackgroundColor.ID);
+		// stores container
+		this.container = container;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDraw(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public boolean onBeforeDraw(IsChart chart) {
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart)) {
+			// gets options
+			ChartBackgroundColorOptions bgOptions = getOptions(chart);
+			// gets the canvas
+			Context2dItem ctx = chart.getCanvas().getContext2d();
+			// save context
+			ctx.save();
+			// sets global composite operation
+			ctx.setGlobalCompositeOperation(bgOptions.getGlobalCompositeOperation());
+			// checks color types
+			if (ColorType.COLOR.equals(bgOptions.getColorType())) {
+				// set fill canvas color
+				ctx.setFillColor(bgOptions.getBackgroundColorAsString());
+				// sets back ground to chart HTML element
+				applyBackgroundColorToChartElement(chart, bgOptions.getBackgroundColorAsString());
+			} else if (ColorType.PATTERN.equals(bgOptions.getColorType())) {
+				// creates the pattern
+				CanvasPatternItem canvasPattern = ChartBackgroundGradientFactory.get().createPattern(chart, bgOptions.getBackgroundColorAsPattern());
+				// set fill canvas pattern
+				ctx.setFillPattern(canvasPattern);
+				// sets back ground to chart HTML element
+				applyBackgroundToChartElement(chart, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsPattern()));
+			} else if (ColorType.GRADIENT.equals(bgOptions.getColorType())) {
+				// creates the gradient
+				CanvasGradientItem canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), Undefined.INTEGER, Undefined.INTEGER);
+				// set fill canvas color
+				ctx.setFillGradient(canvasGradient);
+				// sets back ground to chart HTML element
+				applyBackgroundImageToChartElement(chart, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsGradient()));
+			}
+			// fills back ground
+			ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+			// restore context
+			ctx.restore();
+		}
+		// always TRUE
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onEndDrawing(IsChart chart) {
+		// checks if chart is consistent
+		if (IsChart.isValid(chart)) {
+			// when the draw is completed
+			// remove the options from cache in order to reload it
+			// when chart is re drawing for whatever reason.
+			// in this way if options are updating during chart's life cycle
+			// the updates can be applied.
+			OPTIONS.remove(chart.getId());
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Plugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
+	 */
+	@Override
+	public void onResize(IsChart chart, PluginResizeArgument argument) {
+		// checks if chart is consistent
+		if (IsChart.isConsistent(chart)) {
+			// gets options
+			ChartBackgroundColorOptions bgOptions = getOptions(chart);
+			// if gradient has been set
+			if (ColorType.GRADIENT.equals(bgOptions.getColorType())) {
+				// Due to gradients are created based on dimension of
+				// canvas or chart area, every time a resize is occurring
+				// gradients must be recreated
+				// because gradients must be recreated
+				// the cache of gradients must be clear
+				ChartBackgroundGradientFactory.get().resetGradients(chart);
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onBeforeDestroy(IsChart chart) {
+		// checks if chart is consistent
+		if (IsChart.isValid(chart)) {
+			// removes the options from the cache
+			// even if it could not be needed
+			// because the options should be remove after draw
+			OPTIONS.remove(chart.getId());
+			// because chart is destroy
+			// clears the cache of patterns and gradients of the chart
+			ChartBackgroundGradientFactory.get().clear(chart);
+		}
+	}
+
+	/**
+	 * Reads the plugin options at chart level, if exists, puts in cache if needed and returns it.
+	 * 
+	 * @param chart chart instances where to extract options from.
+	 * @return the options of plugin
+	 */
+	private ChartBackgroundColorOptions getOptions(IsChart chart) {
+		// checks if options are in cache
+		if (OPTIONS.containsKey(chart.getId())) {
+			// returns from cache
+			return OPTIONS.get(chart.getId());
+		}
+		// options instance
+		ChartBackgroundColorOptions bgOptions = null;
+		// loads chart options for the chart
+		IsDefaultScaledOptions options = chart.getWholeOptions();
+		// creates the plugin options using the java script object
+		// passing also the default color set at constructor.
+		if (options.getPlugins().hasOptions(ChartBackgroundColor.ID)) {
+			bgOptions = options.getPlugins().getOptions(ChartBackgroundColor.ID, ChartBackgroundColor.FACTORY);
+		} else {
+			// no options, creates new one with global/defaults values
+			bgOptions = new ChartBackgroundColorOptions(ChartBackgroundColorDefaultOptions.INSTANCE);
+			// if configured with a color
+			if (container.getColorAsString() != null) {
+				bgOptions.setBackgroundColor(container.getColorAsString());
+			} else if (container.getPattern() != null) {
+				// if configured with a pattern
+				bgOptions.setBackgroundColor(container.getPattern());
+			} else if (container.getGradient() != null) {
+				// if configured with a gradient
+				bgOptions.setBackgroundColor(container.getGradient());
+			}
+		}
+		// stores in the cache
+		OPTIONS.put(chart.getId(), bgOptions);
+		// returns it
+		return bgOptions;
+	}
+
+	/**
+	 * Applies the background CSS property in the chart HTML element.
+	 * 
+	 * @param chart chart instance to use to apply CSS property
+	 * @param value value of CSS property to set
+	 */
+	private void applyBackgroundToChartElement(IsChart chart, String value) {
+		// checks if chart, name and value of CSS property are consistent
+		if (IsChart.isValid(chart) && value != null) {
+			// sets style property
+			chart.getChartElement().getStyle().setBackground(value);
+		}
+	}
+
+	/**
+	 * Applies the background color CSS property in the chart HTML element.
+	 * 
+	 * @param chart chart instance to use to apply CSS property
+	 * @param value value of CSS property to set
+	 */
+	private void applyBackgroundColorToChartElement(IsChart chart, String value) {
+		// checks if chart, name and value of CSS property are consistent
+		if (IsChart.isValid(chart) && value != null) {
+			// sets style property
+			chart.getChartElement().getStyle().setBackgroundColor(value);
+		}
+	}
+
+	/**
+	 * Applies the background image CSS property in the chart HTML element.
+	 * 
+	 * @param chart chart instance to use to apply CSS property
+	 * @param value value of CSS property to set
+	 */
+	private void applyBackgroundImageToChartElement(IsChart chart, String value) {
+		// checks if chart, name and value of CSS property are consistent
+		if (IsChart.isValid(chart) && value != null) {
+			// sets style property
+			chart.getChartElement().getStyle().setBackgroundImage(value);
+		}
+	}
+
+}

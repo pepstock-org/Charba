@@ -57,10 +57,17 @@ final class HtmlLegendCallbackProxy {
 	// callback proxy to invoke the leave function
 	private final CallbackProxy<EventListenerCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
 
+	// plugin instace
+	private final HtmlLegendPlugin plugin;
+
 	/**
 	 * Creates the object configuring the callbacks for the events.
+	 * 
+	 * @param plugin plugin instance
 	 */
-	HtmlLegendCallbackProxy() {
+	HtmlLegendCallbackProxy(HtmlLegendPlugin plugin) {
+		// stores plugin
+		this.plugin = plugin;
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -130,7 +137,7 @@ final class HtmlLegendCallbackProxy {
 					// retrieves the chart instance
 					IsChart chart = Charts.get(chartId);
 					// creates a reference with a list of legend labels
-					List<LegendLabelItem> legendItems = HtmlLegend.get().getPluginLegendLabelsItems().get(chartId);
+					List<LegendLabelItem> legendItems = plugin.getPluginLegendLabelsItems().get(chartId);
 					// by HTML legend ID object, extract the legend item
 					// to pass to event
 					LegendItem selectedItem = legendId.lookForLegendItem(legendItems);
@@ -205,7 +212,7 @@ final class HtmlLegendCallbackProxy {
 		// removes the chart id because
 		// usually the click set hidden which needs an update of chart
 		// and removing here the legend will be created to next update
-		HtmlLegend.get().getPluginAddedLegendStatus().remove(chart.getId());
+		plugin.getPluginAddedLegendStatus().remove(chart.getId());
 		// creates the event
 		LegendClickEvent eventToFire = new LegendClickEvent(eventContext, selectedItem);
 		// checks if there is any event handler
@@ -278,11 +285,11 @@ final class HtmlLegendCallbackProxy {
 	 */
 	private void setCursorOnLegend(IsChart chart, boolean setPointer) {
 		// checks if there is legend element
-		if (HtmlLegend.get().getPluginDivElements().containsKey(chart.getId())) {
+		if (plugin.getPluginDivElements().containsKey(chart.getId())) {
 			// gets legend element
-			Div legendElement = HtmlLegend.get().getPluginDivElements().get(chart.getId());
+			Div legendElement = plugin.getPluginDivElements().get(chart.getId());
 			// get options
-			HtmlLegendOptions options = HtmlLegend.get().getPluginOptions().get(chart.getId());
+			HtmlLegendOptions options = plugin.getPluginOptions().get(chart.getId());
 			// sets cursor
 			legendElement.getStyle().setCursorType(setPointer ? options.getCursorPointer() : options.getCurrentCursor());
 		}
