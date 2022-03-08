@@ -274,7 +274,20 @@ Continuous integration and quality gate
 **Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
-  
+
+Going to next release
+---------------------
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
+
+### Features
+
+ * add `StackedLineChart` class in order to manage the stacked chart for line (no filled).
+
+### Fixed Bugs
+
+ * [#69](https://github.com/pepstock-org/Charba/issues/69) set `fill` option to `true` as initial value on `StackeAreaChart` class in order to have the area chart by default. Thanks @salmonb.
+ * [#70](https://github.com/pepstock-org/Charba/issues/70) add an empty configuration when a plugin is added without any initial configuration.
+
 License
 -------
 
