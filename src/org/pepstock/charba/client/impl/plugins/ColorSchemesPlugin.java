@@ -22,6 +22,7 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
+import org.pepstock.charba.client.callbacks.TooltipLabelCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.controllers.ControllerType;
@@ -48,6 +49,8 @@ final class ColorSchemesPlugin extends AbstractPlugin {
 	// callback instance for legend to solve the issue when the scheme is changed when a chart is already
 	// initialized and legend is not changed
 	private final ColorSchemeLegendLabelsCallback pluginLegendLabelsCallback = new ColorSchemeLegendLabelsCallback();
+	// callback instance for tooltip to solve the issue about bar boder width issue
+	private final ColorSchemeTooltipLabelCallback pluginTooltipLabelsCallback = new ColorSchemeTooltipLabelCallback();
 
 	/**
 	 * To avoid any instantiation
@@ -80,6 +83,15 @@ final class ColorSchemesPlugin extends AbstractPlugin {
 			}
 			// applies the color scheme callback to chart
 			chart.getOptions().getLegend().getLabels().setLabelsCallback(pluginLegendLabelsCallback);
+			// gets the tooltip labels callback
+			TooltipLabelCallback toltipLabelsCallback = chart.getOptions().getTooltips().getCallbacks().getLabelCallback();
+			// checks if the tooltip callbacks is not a color scheme ones and is consistent
+			if (!(toltipLabelsCallback instanceof ColorSchemeTooltipLabelCallback) && toltipLabelsCallback != null) {
+				// uses the color scheme callback to wrap the existing callback
+				pluginTooltipLabelsCallback.setDelegatedCallback(chart, toltipLabelsCallback);
+			}
+			// applies the color scheme callback to chart
+			chart.getOptions().getTooltips().getCallbacks().setLabelCallback(pluginTooltipLabelsCallback);
 		}
 	}
 
@@ -124,6 +136,9 @@ final class ColorSchemesPlugin extends AbstractPlugin {
 			// clear the color scheme callback cache
 			// for this chart
 			pluginLegendLabelsCallback.removeDelegatedCallback(chart);
+			// clear the color scheme callback cache
+			// for this chart
+			pluginTooltipLabelsCallback.removeDelegatedCallback(chart);
 		}
 	}
 
