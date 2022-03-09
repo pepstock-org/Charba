@@ -40,6 +40,8 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 	 */
 	private enum Property implements Key
 	{
+		AREA_BACKGROUND_COLOR("areaBackgroundColor"),
+		AREA_COLOR_TYPE("areaColorType"),
 		BACKGROUND_COLOR("backgroundColor"),
 		COLOR_TYPE("colorType"),
 		GLOBAL_COMPOSITE_OPERATION("globalCompositeOperation");
@@ -127,10 +129,10 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 
 	/**
 	 * Returns the background color.<br>
-	 * If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
+	 * If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color.
 	 * 
 	 * @return the background color.<br>
-	 *         If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
+	 *         If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color.
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -144,10 +146,10 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 
 	/**
 	 * Returns the background color.<br>
-	 * If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
+	 * If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color.
 	 * 
 	 * @return the background color.<br>
-	 *         If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "white".
+	 *         If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color.
 	 */
 	public IsColor getBackgroundColor() {
 		// checks if color has been set
@@ -266,6 +268,164 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 			// if here, the pattern is not consistent
 			// removes type
 			remove(Property.COLOR_TYPE);
+		}
+	}
+
+	// -----
+	// AREA
+	// -----
+
+	/**
+	 * Returns the type of background color has been set.
+	 * 
+	 * @return the type of background color has been set.
+	 */
+	@Override
+	public ColorType getAreaColorType() {
+		return getValue(Property.AREA_COLOR_TYPE, ColorType.values(), defaultOptions.getAreaColorType());
+	}
+
+	/**
+	 * Returns the area background color.<br>
+	 * If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color, "transparent".
+	 * 
+	 * @return the area background color.<br>
+	 *         If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color.
+	 */
+	@Override
+	public String getAreaBackgroundColorAsString() {
+		// checks if color has been set
+		if (ColorType.COLOR.equals(getAreaColorType())) {
+			return getValue(Property.AREA_BACKGROUND_COLOR, defaultOptions.getAreaBackgroundColorAsString());
+		}
+		// otherwise returns defaults
+		return defaultOptions.getAreaBackgroundColorAsString();
+	}
+
+	/**
+	 * Returns the area background color.<br>
+	 * If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color.
+	 * 
+	 * @return the area background color.<br>
+	 *         If it has been set a gradient or pattern, returns <code>null</code>, otherwise the default color.
+	 */
+	public IsColor getAreaBackgroundColor() {
+		// checks if color has been set
+		if (ColorType.COLOR.equals(getAreaColorType())) {
+			return ColorBuilder.parse(getAreaBackgroundColorAsString());
+		}
+		// otherwise returns defaults
+		return ColorBuilder.parse(defaultOptions.getAreaBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the area background gradient. <br>
+	 * If it has been set a color or pattern, returns <code>null</code>.
+	 * 
+	 * @return the area background gradient. <br>
+	 *         If it has been set a color or pattern, returns <code>null</code>
+	 */
+	@Override
+	public Gradient getAreaBackgroundColorAsGradient() {
+		// checks if gradient has been set
+		if (ColorType.GRADIENT.equals(getAreaColorType())) {
+			// checks if the gradient has been set in the this object or in the defaults
+			if (has(Property.AREA_BACKGROUND_COLOR)) {
+				// if here, the gradient has been set in the this options
+				return GradientBuilder.build(getValue(Property.AREA_BACKGROUND_COLOR));
+			} else {
+				// if here, the gradient has been set in the defaults options
+				return defaultOptions.getAreaBackgroundColorAsGradient();
+			}
+		}
+		// otherwise returns null
+		return null;
+	}
+
+	/**
+	 * Returns the area background pattern.<br>
+	 * If it has been set a color or gradient, returns <code>null</code>.
+	 * 
+	 * @return the area background pattern. <br>
+	 *         If it has been set a color or pattern, returns <code>null</code>
+	 */
+	@Override
+	public Pattern getAreaBackgroundColorAsPattern() {
+		// checks if pattern has been set
+		if (ColorType.PATTERN.equals(getAreaColorType())) {
+			// checks if the pattern has been set in the this object or in the defaults
+			if (has(Property.AREA_BACKGROUND_COLOR)) {
+				// if here, the pattern has been set in the this options
+				return PatternBuilder.build(getValue(Property.AREA_BACKGROUND_COLOR));
+			} else {
+				// if here, the pattern has been set in the defaults options
+				return defaultOptions.getAreaBackgroundColorAsPattern();
+			}
+		}
+		// otherwise returns null
+		return null;
+	}
+
+	/**
+	 * Sets the area background color.
+	 * 
+	 * @param color the area background color.
+	 */
+	public void setAreaBackgroundColor(String color) {
+		setValue(Property.AREA_BACKGROUND_COLOR, color);
+		// checks if color is consistent
+		if (color != null) {
+			// sets the color type
+			setValue(Property.AREA_COLOR_TYPE, ColorType.COLOR);
+		} else {
+			// if here, the color is not consistent
+			// removes type
+			remove(Property.AREA_COLOR_TYPE);
+		}
+	}
+
+	/**
+	 * Sets the area background color.
+	 * 
+	 * @param color the area background color.
+	 */
+	public void setAreaBackgroundColor(IsColor color) {
+		setAreaBackgroundColor(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the area background gradient.
+	 * 
+	 * @param gradient the area background gradient.
+	 */
+	public void setAreaBackgroundColor(Gradient gradient) {
+		setValue(Property.AREA_BACKGROUND_COLOR, gradient);
+		// checks if argument is consistent
+		if (gradient != null) {
+			// sets the color type
+			setValue(Property.AREA_COLOR_TYPE, ColorType.GRADIENT);
+		} else {
+			// if here, the gradient is not consistent
+			// removes type
+			remove(Property.AREA_COLOR_TYPE);
+		}
+	}
+
+	/**
+	 * Sets the area background pattern.
+	 * 
+	 * @param pattern the area background pattern.
+	 */
+	public void setAreaBackgroundColor(Pattern pattern) {
+		setValue(Property.AREA_BACKGROUND_COLOR, pattern);
+		// checks if argument is consistent
+		if (pattern != null) {
+			// sets the color type
+			setValue(Property.AREA_COLOR_TYPE, ColorType.PATTERN);
+		} else {
+			// if here, the pattern is not consistent
+			// removes type
+			remove(Property.AREA_COLOR_TYPE);
 		}
 	}
 

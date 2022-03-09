@@ -119,6 +119,50 @@ public final class ChartBackgroundColorOptionsBuilder extends AbstractBaseBuilde
 	}
 
 	/**
+	 * Sets the area background color.
+	 * 
+	 * @param color the area background color.
+	 * @return new builder instance
+	 */
+	public ChartBackgroundColorOptionsBuilder setAreaBackgroundColor(String color) {
+		options.setAreaBackgroundColor(color);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the area background color.
+	 * 
+	 * @param color the area background color.
+	 * @return new builder instance
+	 */
+	public ChartBackgroundColorOptionsBuilder setAreaBackgroundColor(IsColor color) {
+		options.setAreaBackgroundColor(color);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the area background gradient.
+	 * 
+	 * @param gradient the area background gradient.
+	 * @return new builder instance
+	 */
+	public ChartBackgroundColorOptionsBuilder setAreaBackgroundColor(Gradient gradient) {
+		options.setAreaBackgroundColor(gradient);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the area background pattern.
+	 * 
+	 * @param pattern the area background pattern.
+	 * @return new builder instance
+	 */
+	public ChartBackgroundColorOptionsBuilder setAreaBackgroundColor(Pattern pattern) {
+		options.setAreaBackgroundColor(pattern);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
 	 * Sets the type of compositing operation to apply when drawing new shapes.
 	 *
 	 * @param globalCompositeOperation which of the compositing or blending mode operations to use

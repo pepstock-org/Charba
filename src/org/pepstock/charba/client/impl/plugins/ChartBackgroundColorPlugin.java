@@ -19,11 +19,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.colors.CanvasObjectFactory;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.enums.ColorType;
+import org.pepstock.charba.client.items.ChartAreaNode;
+import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.items.PluginResizeArgument;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
@@ -66,37 +69,10 @@ final class ChartBackgroundColorPlugin extends AbstractPlugin {
 		if (IsChart.isConsistent(chart)) {
 			// gets options
 			ChartBackgroundColorOptions bgOptions = getOptions(chart);
-			// gets the canvas
-			Context2dItem ctx = chart.getCanvas().getContext2d();
-			// save context
-			ctx.save();
-			// sets global composite operation
-			ctx.setGlobalCompositeOperation(bgOptions.getGlobalCompositeOperation());
-			// checks color types
-			if (ColorType.COLOR.equals(bgOptions.getColorType())) {
-				// set fill canvas color
-				ctx.setFillColor(bgOptions.getBackgroundColorAsString());
-				// sets back ground to chart HTML element
-				applyBackgroundColorToChartElement(chart, bgOptions.getBackgroundColorAsString());
-			} else if (ColorType.PATTERN.equals(bgOptions.getColorType())) {
-				// creates the pattern
-				CanvasPatternItem canvasPattern = ChartBackgroundGradientFactory.get().createPattern(chart, bgOptions.getBackgroundColorAsPattern());
-				// set fill canvas pattern
-				ctx.setFillPattern(canvasPattern);
-				// sets back ground to chart HTML element
-				applyBackgroundToChartElement(chart, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsPattern()));
-			} else if (ColorType.GRADIENT.equals(bgOptions.getColorType())) {
-				// creates the gradient
-				CanvasGradientItem canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), Undefined.INTEGER, Undefined.INTEGER);
-				// set fill canvas color
-				ctx.setFillGradient(canvasGradient);
-				// sets back ground to chart HTML element
-				applyBackgroundImageToChartElement(chart, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsGradient()));
-			}
-			// fills back ground
-			ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
-			// restore context
-			ctx.restore();
+			// fills chart background
+			fillChart(chart, bgOptions);
+			// fills chart area background
+			fillChartArea(chart, bgOptions);
 		}
 		// always TRUE
 		return true;
@@ -131,15 +107,10 @@ final class ChartBackgroundColorPlugin extends AbstractPlugin {
 		if (IsChart.isConsistent(chart)) {
 			// gets options
 			ChartBackgroundColorOptions bgOptions = getOptions(chart);
-			// if gradient has been set
-			if (ColorType.GRADIENT.equals(bgOptions.getColorType())) {
-				// Due to gradients are created based on dimension of
-				// canvas or chart area, every time a resize is occurring
-				// gradients must be recreated
-				// because gradients must be recreated
-				// the cache of gradients must be clear
-				ChartBackgroundGradientFactory.get().resetGradients(chart);
-			}
+			// resets gradients for chart background
+			resetGradients(chart, bgOptions.getColorType(), ChartBackgroundGradientFactory.get());
+			// resets gradients for chart area background
+			resetGradients(chart, bgOptions.getAreaColorType(), ChartAreaBackgroundGradientFactory.get());
 		}
 	}
 
@@ -159,6 +130,102 @@ final class ChartBackgroundColorPlugin extends AbstractPlugin {
 			// because chart is destroy
 			// clears the cache of patterns and gradients of the chart
 			ChartBackgroundGradientFactory.get().clear(chart);
+		}
+	}
+
+	/**
+	 * Resets the gradients, stored in cache for the chart instance.
+	 * 
+	 * @param chart chart instance
+	 * @param type type of color set in the options
+	 * @param factory the gradient factory to invoke for resetting
+	 */
+	private void resetGradients(IsChart chart, ColorType type, CanvasObjectFactory factory) {
+		// if gradient has been set
+		if (ColorType.GRADIENT.equals(type)) {
+			// Due to gradients are created based on dimension of
+			// canvas or chart area, every time a resize is occurring
+			// gradients must be recreated
+			// because gradients must be recreated
+			// the cache of gradients must be clear
+			factory.resetGradients(chart);
+		}
+	}
+
+	/**
+	 * Fills the chart background.
+	 * 
+	 * @param chart chart instance
+	 * @param options plugin options
+	 */
+	private void fillChart(IsChart chart, ChartBackgroundColorOptions options) {
+		// gets the canvas
+		Context2dItem ctx = chart.getCanvas().getContext2d();
+		// save context
+		ctx.save();
+		// sets global composite operation
+		ctx.setGlobalCompositeOperation(options.getGlobalCompositeOperation());
+		// checks color types
+		if (ColorType.COLOR.equals(options.getColorType())) {
+			// set fill canvas color
+			ctx.setFillColor(options.getBackgroundColorAsString());
+			// sets background to chart HTML element
+			applyBackgroundColorToChartElement(chart, options.getBackgroundColorAsString());
+		} else if (ColorType.PATTERN.equals(options.getColorType())) {
+			// creates the pattern
+			CanvasPatternItem canvasPattern = ChartBackgroundGradientFactory.get().createPattern(chart, options.getBackgroundColorAsPattern());
+			// set fill canvas pattern
+			ctx.setFillPattern(canvasPattern);
+			// sets background to chart HTML element
+			applyBackgroundToChartElement(chart, Utilities.toCSSBackgroundProperty(options.getBackgroundColorAsPattern()));
+		} else if (ColorType.GRADIENT.equals(options.getColorType())) {
+			// creates the gradient
+			CanvasGradientItem canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, options.getBackgroundColorAsGradient(), Undefined.INTEGER, Undefined.INTEGER);
+			// set fill canvas color
+			ctx.setFillGradient(canvasGradient);
+			// sets background to chart HTML element
+			applyBackgroundImageToChartElement(chart, Utilities.toCSSBackgroundProperty(options.getBackgroundColorAsGradient()));
+		}
+		// fills background
+		ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+		// restore context
+		ctx.restore();
+	}
+
+	/**
+	 * Fills the chart background.
+	 * 
+	 * @param chart chart instance
+	 * @param options plugin options
+	 */
+	private void fillChartArea(IsChart chart, ChartBackgroundColorOptions options) {
+		// gets chart area
+		ChartAreaNode chartArea = chart.getNode().getChartArea();
+		// checks if area is consistent
+		if (IsArea.isConsistent(chartArea)) {
+			// gets the canvas
+			Context2dItem ctx = chart.getCanvas().getContext2d();
+			// save context
+			ctx.save();
+			// checks color types
+			if (ColorType.COLOR.equals(options.getAreaColorType())) {
+				// set fill canvas color
+				ctx.setFillColor(options.getAreaBackgroundColorAsString());
+			} else if (ColorType.PATTERN.equals(options.getAreaColorType())) {
+				// creates the pattern
+				CanvasPatternItem canvasPattern = ChartAreaBackgroundGradientFactory.get().createPattern(chart, options.getAreaBackgroundColorAsPattern());
+				// set fill canvas pattern
+				ctx.setFillPattern(canvasPattern);
+			} else if (ColorType.GRADIENT.equals(options.getAreaColorType())) {
+				// creates the gradient
+				CanvasGradientItem canvasGradient = ChartAreaBackgroundGradientFactory.get().createGradient(chart, options.getAreaBackgroundColorAsGradient(), Undefined.INTEGER, Undefined.INTEGER);
+				// set fill canvas color
+				ctx.setFillGradient(canvasGradient);
+			}
+			// fills background area
+			ctx.fillRect(chartArea.getLeft(), chartArea.getTop(), chartArea.getWidth(), chartArea.getHeight());
+			// restore context
+			ctx.restore();
 		}
 	}
 

@@ -29,7 +29,8 @@ import org.pepstock.charba.client.dom.elements.Div;
 /**
  * Utility used by CHART {@link ChartBackgroundColor#ID} PLUGIN.<br>
  * Utility class which creates a canvas gradient java script object using a Charba gradient.<br>
- * A Charba gradient describes how a DOM canvas gradient must be created.
+ * A Charba gradient describes how a DOM canvas gradient must be created.<br>
+ * The area used is the {@link Canvas}.
  * 
  * @author Andrea "Stock" Stocchero
  * 
@@ -49,7 +50,7 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 	/**
 	 * Singleton method to get instance.
 	 * 
-	 * @return signleton instance
+	 * @return singleton instance
 	 */
 	static ChartBackgroundGradientFactory get() {
 		return INSTANCE;

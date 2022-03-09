@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.dom.enums.GlobalCompositeOperation;
 import org.pepstock.charba.client.enums.ColorType;
@@ -60,6 +61,42 @@ interface IsChartBackgroundColorDefaultOptions {
 	 * @return the background pattern. If it has been set a color or pattern, returns <code>null</code>
 	 */
 	default Pattern getBackgroundColorAsPattern() {
+		return null;
+	}
+
+	/**
+	 * Returns the type of area background color has been set.
+	 * 
+	 * @return the type of area background color has been set
+	 */
+	default ColorType getAreaColorType() {
+		return ColorType.COLOR;
+	}
+
+	/**
+	 * Returns the area background color as string.
+	 * 
+	 * @return the area background color
+	 */
+	default String getAreaBackgroundColorAsString() {
+		return HtmlColor.TRANSPARENT.toRGBA();
+	}
+
+	/**
+	 * Returns the area background gradient. If it has been set a color or pattern, returns <code>null</code>.
+	 * 
+	 * @return the area background gradient. If it has been set a color or pattern, returns <code>null</code>
+	 */
+	default Gradient getAreaBackgroundColorAsGradient() {
+		return null;
+	}
+
+	/**
+	 * Returns the area background pattern. If it has been set a color or gradient, returns <code>null</code>.
+	 * 
+	 * @return the area background pattern. If it has been set a color or pattern, returns <code>null</code>
+	 */
+	default Pattern getAreaBackgroundColorAsPattern() {
 		return null;
 	}
 
