@@ -48,7 +48,7 @@ public final class ChartEventContext extends NativeObjectContainer implements Is
 		NATIVE("native"),
 		TYPE("type"),
 		X("x"),
-		Y("x");
+		Y("y");
 
 		// name value of property
 		private final String value;

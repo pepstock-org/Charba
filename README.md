@@ -294,6 +294,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
  * [#69](https://github.com/pepstock-org/Charba/issues/69) set `fill` option to `true` as initial value on `StackeAreaChart` class in order to have the area chart by default. Thanks @salmonb.
  * [#70](https://github.com/pepstock-org/Charba/issues/70) add an empty configuration when a plugin is added without any initial configuration.
+ * [#71](https://github.com/pepstock-org/Charba/issues/71) fixes the value of the property because was wrong.
 
 License
 -------
