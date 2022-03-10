@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import java.util.Map;
+
 import org.pepstock.charba.client.annotation.elements.AnnotationElement;
 import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.commons.Checker;
@@ -97,6 +99,16 @@ public final class AnnotationContext extends ChartContext {
 	 */
 	public AnnotationElement getElement() {
 		return element;
+	}
+
+	/**
+	 * Returns a map with shared instances in the plugin instance.<br>
+	 * This object instance is cross all annotations for the same chart instance.
+	 * 
+	 * @return a map with shared instances in the plugin instance
+	 */
+	public Map<String, Object> getShared() {
+		return AnnotationSharedObjects.get().getSharedObjects(getChart());
 	}
 
 	/*
