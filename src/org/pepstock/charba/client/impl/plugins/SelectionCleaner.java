@@ -149,9 +149,9 @@ public final class SelectionCleaner extends NativeObjectContainer implements IsD
 	private final SelectionCleanerFont font;
 
 	/**
-	 * Creates new font element, using stored native object instance and the default values options.
+	 * Creates new selection cleaner element, using stored native object instance and the default values options.
 	 * 
-	 * @param nativeObject stored font values in the native object to read.
+	 * @param nativeObject stored selection cleaner values in the native object to read.
 	 * @param defaultOptions default selection cleaner element options to returns the default when required.
 	 */
 	SelectionCleaner(NativeObject nativeObject, IsDatasetsItemsSelectorDefaultSelectionCleaner defaultOptions) {
@@ -173,9 +173,9 @@ public final class SelectionCleaner extends NativeObjectContainer implements IsD
 	}
 
 	/**
-	 * Sets <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>.
+	 * Sets <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>.
 	 * 
-	 * @param display <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>
+	 * @param display <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.DISPLAY, display);
@@ -381,9 +381,9 @@ public final class SelectionCleaner extends NativeObjectContainer implements IsD
 	}
 
 	/**
-	 * Sets <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>.
+	 * Sets <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>.
 	 * 
-	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>
+	 * @param useSelectionStyle <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>
 	 */
 	public void setUseSelectionStyle(boolean useSelectionStyle) {
 		setValue(Property.USE_SELECTION_STYLE, useSelectionStyle);

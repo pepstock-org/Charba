@@ -289,7 +289,7 @@ final class HtmlLegendCallbackProxy {
 			// gets legend element
 			Div legendElement = plugin.getPluginDivElements().get(chart.getId());
 			// get options
-			HtmlLegendOptions options = plugin.getPluginOptions().get(chart.getId());
+			HtmlLegendOptions options = plugin.getOptions(chart);
 			// sets cursor
 			legendElement.getStyle().setCursorType(setPointer ? options.getCursorPointer() : options.getCurrentCursor());
 		}

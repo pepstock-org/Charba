@@ -147,6 +147,14 @@ final class NativeJsItemsHelper {
 	static native double getBasePixel(NativeObject scale);
 
 	/**
+	 * Returns <code>true</code> if the scale is horizontal.
+	 * 
+	 * @param scale scale native object instance
+	 * @return <code>true</code> if the scale is horizontal
+	 */
+	static native boolean isHorizontal(NativeObject scale);
+
+	/**
 	 * Returns a set of predefined style properties that should be used to represent the dataset or the data if the index is specified.
 	 * 
 	 * @param controller controller instance

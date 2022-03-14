@@ -17,6 +17,7 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -25,8 +26,9 @@ import org.pepstock.charba.client.enums.Position;
  * Implements all <code>get</code> methods to change java script object properties.
  * 
  * @author Andrea "Stock" Stocchero
+ * @param <T> type of position, {@link Position} of {@link AxisPosition}
  */
-public abstract class BaseBoxNodeItem extends BaseBoxItem {
+public abstract class BaseBoxNodeItem<T extends Key> extends BaseBoxItem {
 
 	/**
 	 * Name of properties of native object.
@@ -68,13 +70,23 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 
 	}
 
+	// position instances
+	private final T[] positionValues;
+	// default position
+	private final T positionDefaultValue;
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
+	 * @param positionValues enumeration values of valid positions
+	 * @param positionDefaultValue default value of the position
 	 */
-	BaseBoxNodeItem(NativeObject nativeObject) {
+	BaseBoxNodeItem(NativeObject nativeObject, T[] positionValues, T positionDefaultValue) {
 		super(nativeObject);
+		// stores position values
+		this.positionValues = positionValues;
+		this.positionDefaultValue = positionDefaultValue;
 	}
 
 	/**
@@ -100,8 +112,8 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * 
 	 * @return the position of node.
 	 */
-	public final Position getPosition() {
-		return getValue(Property.POSITION, Position.values(), Position.TOP);
+	public final T getPosition() {
+		return getValue(Property.POSITION, positionValues, positionDefaultValue);
 	}
 
 	/**

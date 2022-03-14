@@ -285,6 +285,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
+ * add new `Crosshair` Charba plugin in order to enable the crosshair on the charts with cartesian axes.
  * add `StackedLineChart` class in order to manage the stacked chart for line (no filled).
  * add `PlginContainer` interface in order to set plugin implementations without exposing the plugin public methods.
  * add `areaBackgroundColor` option to chart background color plugin (ChartBackgroundColor) in order to enable the coloring of the chart area as well.

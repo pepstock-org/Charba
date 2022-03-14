@@ -25,6 +25,7 @@ import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.enums.Position;
 
 /**
  * Wrapper of legend node of CHART.JS.<br>
@@ -32,7 +33,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendNode extends BaseBoxNodeItem {
+public final class LegendNode extends BaseBoxNodeItem<Position> {
 
 	/**
 	 * Name of properties of native object.
@@ -76,7 +77,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
 	public LegendNode(ChartEnvelop<NativeObject> envelop) {
-		super(Envelop.checkAndGetIfValid(envelop).getContent());
+		super(Envelop.checkAndGetIfValid(envelop).getContent(), Position.values(), Position.TOP);
 	}
 
 	/**

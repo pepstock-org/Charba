@@ -25,6 +25,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.enums.GlobalCompositeOperation;
 import org.pepstock.charba.client.dom.enums.Repetition;
@@ -1263,6 +1264,36 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsMethod
 	public native ImageData createImageData(double width, double height);
+
+	/**
+	 * Draws an rectangle with rounded edges.
+	 * 
+	 * @param x the x-axis coordinate of the rectangle's starting point
+	 * @param y the y-axis coordinate of the rectangle's starting point
+	 * @param width the rectangle's width. Positive values are to the right, and negative to the left
+	 * @param height the rectangle's height. Positive values are down, and negative are up
+	 * @param radius the radius of the rounded edges
+	 */
+	@JsOverlay
+	public void addRoundedRectPath(double x, double y, double width, double height, BarBorderRadius radius) {
+		final double halfPI = Math.PI / 2;
+		// top left arc
+		this.arc(x + radius.getTopLeft(), y + radius.getTopLeft(), radius.getTopLeft(), -halfPI, Math.PI, true);
+		// line from top left to bottom left
+		this.lineTo(x, y + height - radius.getBottomLeft());
+		// bottom left arc
+		this.arc(x + radius.getBottomLeft(), y + height - radius.getBottomLeft(), radius.getBottomLeft(), Math.PI, halfPI, true);
+		// line from bottom left to bottom right
+		this.lineTo(x + width - radius.getBottomRight(), y + height);
+		// bottom right arc
+		this.arc(x + width - radius.getBottomRight(), y + height - radius.getBottomRight(), radius.getBottomRight(), halfPI, 0, true);
+		// line from bottom right to top right
+		this.lineTo(x + width, y + radius.getTopRight());
+		// top right arc
+		this.arc(x + width - radius.getTopRight(), y + radius.getTopRight(), radius.getTopRight(), 0, -halfPI, true);
+		// line from top right to top left
+		this.lineTo(x + radius.getTopLeft(), y);
+	}
 
 	/**
 	 * Returns the fill or stroke color is used for shapes.

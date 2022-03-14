@@ -24,7 +24,6 @@ import java.util.Set;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.tiles.TilesFactory;
 import org.pepstock.charba.client.configuration.Legend;
-import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseElement;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.BaseNode;
@@ -38,21 +37,18 @@ import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.items.LegendLabelItem;
-import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
  * This plugin implements a HTML legend in order to give more flexibility to who needs to customize the legend.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class HtmlLegendPlugin extends AbstractPlugin {
+final class HtmlLegendPlugin extends CharbaPlugin<HtmlLegendOptions> {
 
 	// suffix label for main HTML legend element id
 	private static final String SUFFIX_LEGEND_ELEMENT_ID = "_legend";
 	// static instance to generate legend in the HTML
 	private static final HtmlLegendGenerator GENERATOR = new HtmlLegendGenerator();
-	// cache to store options in order do not load every time the options
-	private final Map<String, HtmlLegendOptions> pluginOptions = new HashMap<>();
 	// cache to store legend items managed by chart
 	private final Map<String, List<LegendLabelItem>> pluginLegendLabelsItems = new HashMap<>();
 	// cache to store the chart id in order to know when new legend must be created
@@ -69,7 +65,17 @@ final class HtmlLegendPlugin extends AbstractPlugin {
 	 * To avoid any instantiation
 	 */
 	HtmlLegendPlugin() {
-		super(HtmlLegend.ID);
+		super(HtmlLegend.ID, HtmlLegend.FACTORY);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.impl.plugins.CharbaPlugin#createDefaultOptionInstance()
+	 */
+	@Override
+	HtmlLegendOptions createDefaultOptionInstance() {
+		return new HtmlLegendOptions(HtmlLegendDefaultOptions.INSTANCE);
 	}
 
 	/*
@@ -86,18 +92,8 @@ final class HtmlLegendPlugin extends AbstractPlugin {
 			if (!pluginCallbackProxies.containsKey(chart.getId())) {
 				pluginCallbackProxies.put(chart.getId(), new HtmlLegendCallbackProxy(this));
 			}
-			HtmlLegendOptions pOptions = null;
 			// loads chart options for the chart
-			IsDefaultScaledOptions options = chart.getWholeOptions();
-			// if not, loads and cache
-			// creates the plugin options using the java script object
-			// passing also the default color set at constructor.
-			if (options.getPlugins().hasOptions(HtmlLegend.ID)) {
-				pOptions = options.getPlugins().getOptions(HtmlLegend.ID, HtmlLegend.FACTORY);
-			} else {
-				pOptions = new HtmlLegendOptions(HtmlLegendDefaultOptions.INSTANCE);
-			}
-			pluginOptions.put(chart.getId(), pOptions);
+			HtmlLegendOptions pOptions = loadOptions(chart);
 			pOptions.setCurrentCursor(chart.getInitialCursor());
 			// checks if the plugin is configured to show legend
 			if (pOptions.isDisplay()) {
@@ -231,7 +227,7 @@ final class HtmlLegendPlugin extends AbstractPlugin {
 			// removes callback proxies
 			pluginCallbackProxies.remove(chart.getId());
 			// removes the chart from options
-			pluginOptions.remove(chart.getId());
+			removeOptions(chart);
 		}
 	}
 
@@ -286,9 +282,9 @@ final class HtmlLegendPlugin extends AbstractPlugin {
 	 */
 	private boolean mustBeDisplay(IsChart chart) {
 		// checks if argument is consistent
-		if (IsChart.isValid(chart) && pluginOptions.containsKey(chart.getId())) {
+		if (IsChart.isValid(chart) && hasOptions(chart)) {
 			// gets stored option
-			HtmlLegendOptions options = pluginOptions.get(chart.getId());
+			HtmlLegendOptions options = getOptions(chart);
 			// returns if must be display
 			return options.isDisplay();
 		}
@@ -482,15 +478,6 @@ final class HtmlLegendPlugin extends AbstractPlugin {
 		// if here, nothing was found then return false
 		// it should not happen
 		return false;
-	}
-
-	/**
-	 * Returns the map of cached plugin options.
-	 * 
-	 * @return the map of cached plugin options
-	 */
-	Map<String, HtmlLegendOptions> getPluginOptions() {
-		return pluginOptions;
 	}
 
 	/**

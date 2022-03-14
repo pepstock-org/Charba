@@ -366,6 +366,11 @@ CharbaJsItemsHelper.getBaseValue = function(object) {};
  */
 CharbaJsItemsHelper.getBasePixel = function(object) {};
 /**
+ * @param {Object} object
+ * @return {boolean}
+ */
+CharbaJsItemsHelper.isHorizontal = function(object) {};
+/**
  * @param {Object} controller 
  * @param {number} dataIndex 
  * @return {Object}

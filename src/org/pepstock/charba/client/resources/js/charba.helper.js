@@ -1129,6 +1129,15 @@ CharbaJsItemsHelper.getBasePixel = function(obj) {
   return obj.getBasePixel();
 }
 /**
+ * Returns true if the scale is horizontal
+ *
+ * @param {Object} obj scale native object instance 
+ * @return {boolean} true if the scale is horizontal
+ */
+CharbaJsItemsHelper.isHorizontal = function(obj) {
+  return obj.isHorizontal();
+}
+/**
  * Returns a set of predefined style properties that should be used to represent the dataset or the data if the index is specified.
  *
  * @param {Object} controller controller instance 

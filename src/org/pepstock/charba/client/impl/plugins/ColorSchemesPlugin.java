@@ -30,12 +30,10 @@ import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.HoverDataset;
 import org.pepstock.charba.client.data.HoverFlexDataset;
 import org.pepstock.charba.client.data.LiningDataset;
-import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.impl.charts.GaugeChart;
 import org.pepstock.charba.client.impl.charts.MeterChart;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 import org.pepstock.charba.client.items.PluginUpdateArgument;
-import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
  * Default plugin implementation to use color schemes instead the single colors for border and background colors of chart.<br>
@@ -44,7 +42,7 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class ColorSchemesPlugin extends AbstractPlugin {
+final class ColorSchemesPlugin extends CharbaPlugin<ColorSchemesOptions> {
 
 	// callback instance for legend to solve the issue when the scheme is changed when a chart is already
 	// initialized and legend is not changed
@@ -56,7 +54,17 @@ final class ColorSchemesPlugin extends AbstractPlugin {
 	 * To avoid any instantiation
 	 */
 	ColorSchemesPlugin() {
-		super(ColorSchemes.ID);
+		super(ColorSchemes.ID, ColorSchemes.FACTORY);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.impl.plugins.CharbaPlugin#createDefaultOptionInstance()
+	 */
+	@Override
+	ColorSchemesOptions createDefaultOptionInstance() {
+		return new ColorSchemesOptions(ColorSchemesDefaultOptions.INSTANCE);
 	}
 
 	/*
@@ -106,7 +114,7 @@ final class ColorSchemesPlugin extends AbstractPlugin {
 		// this chart
 		if (IsChart.isConsistent(chart) && mustBeActivated(chart)) {
 			// gets options from chart options
-			ColorSchemesOptions options = getOptions(chart);
+			ColorSchemesOptions options = loadOptions(chart);
 			// gets scheme
 			ColorScheme scheme = options.getScheme();
 			// if null, skips all logic
@@ -133,6 +141,8 @@ final class ColorSchemesPlugin extends AbstractPlugin {
 		// checks if chart is consistent and if the plugin should be applicable to
 		// this chart
 		if (IsChart.isValid(chart) && mustBeActivated(chart)) {
+			// removes options from cache
+			removeOptions(chart);
 			// clear the color scheme callback cache
 			// for this chart
 			pluginLegendLabelsCallback.removeDelegatedCallback(chart);
@@ -324,28 +334,6 @@ final class ColorSchemesPlugin extends AbstractPlugin {
 		}
 		// returns array
 		return colorsToSet;
-	}
-
-	/**
-	 * Reads the plugin options at chart level and returns it.
-	 * 
-	 * @param chart chart instances where to extract options from.
-	 * @return the options of plugin
-	 */
-	private ColorSchemesOptions getOptions(IsChart chart) {
-		// options instance
-		ColorSchemesOptions pOptions = null;
-		// loads chart options for the chart
-		IsDefaultScaledOptions options = chart.getWholeOptions();
-		// creates the plugin options using the java script object
-		// passing also the default color set at constructor.
-		if (options.getPlugins().hasOptions(ColorSchemes.ID)) {
-			pOptions = options.getPlugins().getOptions(ColorSchemes.ID, ColorSchemes.FACTORY);
-		} else {
-			// no options, creates new one with global/defaults values
-			pOptions = new ColorSchemesOptions(ColorSchemesDefaultOptions.INSTANCE);
-		}
-		return pOptions;
 	}
 
 }

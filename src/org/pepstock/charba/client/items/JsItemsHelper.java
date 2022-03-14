@@ -237,6 +237,21 @@ final class JsItemsHelper {
 	}
 
 	/**
+	 * Returns <code>true</code> if the scale is horizontal.
+	 * 
+	 * @param scale scale native object instance
+	 * @return <code>true</code> if the scale is horizontal
+	 */
+	boolean isHorizontal(ScaleItem scale) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.isHorizontal(scale.nativeObject());
+		}
+		// if here, scale item not consistent
+		return Undefined.BOOLEAN;
+	}
+
+	/**
 	 * Returns a set of predefined style properties that should be used to represent the dataset or the data if the index is specified.
 	 * 
 	 * @param controller controller instance

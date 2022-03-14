@@ -15,14 +15,11 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.enums.DefaultPluginId;
@@ -30,7 +27,6 @@ import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 import org.pepstock.charba.client.items.LegendHitBoxItem;
 import org.pepstock.charba.client.items.PluginEventArgument;
 import org.pepstock.charba.client.items.PluginUpdateArgument;
-import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
  * This plugin is changing the cursor when mouse over on dataset, title on canvas if a dataset selection, title handler have been defined.
@@ -38,16 +34,23 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
  * @author Andrea "Stock" Stocchero
  * @see CursorType
  */
-final class ChartPointerPlugin extends AbstractPlugin {
-
-	// cache to store options in order do not load every time the options
-	private final Map<String, ChartPointerOptions> pluginOptions = new HashMap<>();
+final class ChartPointerPlugin extends CharbaPlugin<ChartPointerOptions> {
 
 	/**
 	 * To avoid any instantiation
 	 */
 	ChartPointerPlugin() {
-		super(ChartPointer.ID);
+		super(ChartPointer.ID, ChartPointer.FACTORY);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.impl.plugins.CharbaPlugin#createDefaultOptionInstance()
+	 */
+	@Override
+	ChartPointerOptions createDefaultOptionInstance() {
+		return new ChartPointerOptions(ChartPointerDefaultOptions.INSTANCE);
 	}
 
 	/*
@@ -60,17 +63,7 @@ final class ChartPointerPlugin extends AbstractPlugin {
 		// checks if chart is consistent
 		if (IsChart.isConsistent(chart)) {
 			// creates options instance
-			ChartPointerOptions pOptions = null;
-			// loads chart options for the chart
-			IsDefaultScaledOptions options = chart.getWholeOptions();
-			// creates the plugin options checking if exists ot not
-			if (options.getPlugins().hasOptions(ChartPointer.ID)) {
-				pOptions = options.getPlugins().getOptions(ChartPointer.ID, ChartPointer.FACTORY);
-			} else {
-				pOptions = new ChartPointerOptions(ChartPointerDefaultOptions.INSTANCE);
-			}
-			// stores option on the cache
-			pluginOptions.put(chart.getId(), pOptions);
+			ChartPointerOptions pOptions = loadOptions(chart);
 			// sets the initial cursor of chart
 			pOptions.setCurrentCursor(chart.getInitialCursor());
 		}
@@ -85,11 +78,11 @@ final class ChartPointerPlugin extends AbstractPlugin {
 	@Override
 	public void onAfterEvent(IsChart chart, PluginEventArgument argument) {
 		// checks if chart is consistent and options of plugin has been stored
-		if (IsChart.isConsistent(chart) && pluginOptions.containsKey(chart.getId())) {
+		if (IsChart.isConsistent(chart) && hasOptions(chart)) {
 			// gets base native event
 			BaseNativeEvent event = argument.getEventContext().getNativeEvent();
 			// gets options instance
-			ChartPointerOptions pOptions = pluginOptions.get(chart.getId());
+			ChartPointerOptions pOptions = getOptions(chart);
 			// gets the scope
 			Set<PointerElement> scope = pOptions.getElements();
 			// DATASET SELECTION
@@ -124,7 +117,7 @@ final class ChartPointerPlugin extends AbstractPlugin {
 		// checks if chart is valid
 		if (IsChart.isValid(chart)) {
 			// removes the stored options for chart
-			pluginOptions.remove(chart.getId());
+			removeOptions(chart);
 		}
 	}
 

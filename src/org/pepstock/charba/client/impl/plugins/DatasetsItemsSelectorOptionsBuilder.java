@@ -188,9 +188,9 @@ public final class DatasetsItemsSelectorOptionsBuilder extends AbstractBaseBuild
 	}
 
 	/**
-	 * Sets <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>.
+	 * Sets <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>.
 	 * 
-	 * @param display <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>
+	 * @param display <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setDisplay(boolean display) {
@@ -342,9 +342,9 @@ public final class DatasetsItemsSelectorOptionsBuilder extends AbstractBaseBuild
 	}
 
 	/**
-	 * Sets <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>.
+	 * Sets <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>.
 	 * 
-	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied in the chart, otherwise <code>false</code>
+	 * @param useSelectionStyle <code>true</code> if clear of selection label will be applied in the chart, otherwise <code>false</code>
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setUseSelectionStyle(boolean useSelectionStyle) {

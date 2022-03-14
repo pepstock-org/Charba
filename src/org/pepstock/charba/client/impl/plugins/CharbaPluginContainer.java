@@ -23,7 +23,6 @@ import org.pepstock.charba.client.plugins.PluginsEnvelop;
  * Common class for Charba out of the box plugins.
  * 
  * @author Andrea "Stock" Stocchero
- *
  */
 abstract class CharbaPluginContainer implements PluginContainer {
 

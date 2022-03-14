@@ -138,7 +138,7 @@ final class HtmlLegendGenerator {
 	 * @return the table element instance with the complete legend
 	 */
 	private Table buildLegend(IsChart chart) {
-		HtmlLegendOptions options = HtmlLegend.get().getPluginInstance().getPluginOptions().get(chart.getId());
+		HtmlLegendOptions options = HtmlLegend.get().getPluginInstance().getOptions(chart);
 		// gets max columns for legend
 		int maxColumns = Math.max(1, options.getMaximumLegendColumns());
 		// gets legend

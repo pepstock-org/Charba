@@ -18,6 +18,7 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.Position;
 
 /**
  * Wrapper of title node of CHART.JS.<br>
@@ -25,7 +26,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TitleNode extends BaseBoxNodeItem {
+public final class TitleNode extends BaseBoxNodeItem<Position> {
 
 	/**
 	 * Creates the item using envelop with the native java script object which contains all properties.
@@ -33,7 +34,7 @@ public final class TitleNode extends BaseBoxNodeItem {
 	 * @param envelop envelop with the native java script object which contains all properties.
 	 */
 	public TitleNode(ChartEnvelop<NativeObject> envelop) {
-		super(Envelop.checkAndGetIfValid(envelop).getContent());
+		super(Envelop.checkAndGetIfValid(envelop).getContent(), Position.values(), Position.TOP);
 	}
 
 }

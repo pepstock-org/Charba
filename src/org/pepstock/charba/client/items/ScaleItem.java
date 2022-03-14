@@ -36,12 +36,12 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.configuration.AxisType;
-import org.pepstock.charba.client.configuration.RadialAxis;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.AxisKind;
+import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.ChartAxisType;
-import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleDataType;
+import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.options.ScaleId;
 
 /**
@@ -50,7 +50,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class ScaleItem extends BaseBoxNodeItem {
+public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 
 	/**
 	 * Name of properties of native object.
@@ -71,7 +71,6 @@ public class ScaleItem extends BaseBoxNodeItem {
 		POINT_LABELS("pointLabels"),
 		TYPE("type"),
 		// override the key of parent
-		POSITION("position"),
 		OPTIONS("options"),
 		// chart
 		CHART("chart"),
@@ -112,7 +111,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @param nativeObject native java script object which contains all properties.
 	 */
 	ScaleItem(ScaleId scaleId, NativeObject nativeObject) {
-		super(nativeObject);
+		super(nativeObject, AxisPosition.values(), AxisPosition.BOTTOM);
 		// checks scale id
 		ScaleId.checkIfValid(scaleId);
 		// stores scale id
@@ -134,7 +133,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @param nativeObject native java script object which contains all properties.
 	 */
 	ScaleItem(NativeObject nativeObject) {
-		super(nativeObject);
+		super(nativeObject, AxisPosition.values(), AxisPosition.BOTTOM);
 		// stores scale id
 		this.scaleId = null;
 	}
@@ -399,21 +398,27 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
-	 * Returns the position of node as string. This is implements the possibility to have a specific position for scale item, not mapped in the {@link Position} enumeration, like
-	 * for {@link RadialAxis}.
+	 * Returns <code>true</code> if the scale is horizontal.
 	 * 
-	 * @return the position of node.
+	 * @return <code>true</code> if the scale is horizontal
 	 */
-	public final String getPositionAsString() {
-		// gets the value of native object
-		String value = getValue(Property.POSITION, Undefined.STRING);
-		// if value is not consistent and not a enum item
-		if (value != null && !Key.hasKeyByValue(Position.values(), value)) {
-			// returns simply the string
-			return value;
+	public final boolean isHorizontal() {
+		return JsItemsHelper.get().isHorizontal(this);
+	}
+
+	/**
+	 * Returns the value on the axis related to an event position.
+	 * 
+	 * @param context event context instance used to get the value from the scale
+	 * @return the value on the axis related to an event position
+	 */
+	public final ScaleValueItem getValueAtEvent(ChartEventContext context) {
+		// checks if argument is consistent
+		if (context != null) {
+			return getValueAtEvent(context.getNativeEvent());
 		}
-		// invokes the parent implementation
-		return super.getPosition().value();
+		// if here, context is not consistent
+		return null;
 	}
 
 	/**
@@ -428,7 +433,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 			// gets the pixel used for searching
 			// if the scale is horizontal then it uses layer X
 			// otherwise Y
-			double position = AxisKind.X.equals(getAxis()) ? event.getLayerX() : event.getLayerY();
+			double position = isHorizontal() ? event.getLayerX() : event.getLayerY();
 			// creates and returns the value
 			return getValueAtPixel(position);
 		}

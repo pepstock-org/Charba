@@ -177,12 +177,12 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 			this.defaultOptions = defaultOptions;
 		}
 		// sets inner elements
-		selectionCleaner = new SelectionCleaner(getValue(Property.SELECTION_CLEANER), this.defaultOptions.getSelectionCleaner());
+		this.selectionCleaner = new SelectionCleaner(getValue(Property.SELECTION_CLEANER), this.defaultOptions.getSelectionCleaner());
 		// checks if selection cleaner is not already stored
 		if (!has(Property.SELECTION_CLEANER)) {
 			// if here selection cleaner is not stored
 			// then adds it
-			setValue(Property.SELECTION_CLEANER, selectionCleaner);
+			setValue(Property.SELECTION_CLEANER, this.selectionCleaner);
 		}
 	}
 
