@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
@@ -62,7 +63,7 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 	/**
 	 * Default line dash, <b>[2, 2]</b>.
 	 */
-	public static final List<Integer> DEFAULT_LINE_DASH = Arrays.asList(2, 2);
+	public static final List<Integer> DEFAULT_LINE_DASH = Collections.unmodifiableList(Arrays.asList(2, 2));
 
 	/**
 	 * Default line dash offset, <b>{@value DEFAULT_LINE_DASH_OFFSET}</b>.

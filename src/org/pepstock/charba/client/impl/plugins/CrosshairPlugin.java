@@ -180,7 +180,6 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 				contexts.put(chart.getId(), context);
 				// forces redrawing to draw the crosshair
 				argument.setChanged(true);
-				return;
 			}
 		}
 	}
@@ -269,13 +268,13 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 		IsImmutableFont immutableValueFont = Helpers.get().toFont(font);
 		// calculates positions and sizes for the label drawing
 		final int padding = label.getPadding();
-		final double margin = axis.getGrid().getTickLength() + axis.getTicks().getPadding();
+		final int margin = axis.getGrid().getTickLength() + axis.getTicks().getPadding();
 		final double textWidth = metrics.getWidth();
 		final double halfTextWidth = textWidth / 2;
-		final double maxWidth = canvas.getOffsetWidth() - padding;
+		final double maxWidth = canvas.getOffsetWidth() - (double) padding;
 		final double textHeight = immutableValueFont.getLineHeight();
 		final double halfTextHeight = textHeight / 2;
-		final double maxHeight = canvas.getOffsetHeight() - padding;
+		final double maxHeight = canvas.getOffsetHeight() - (double) padding;
 		double labelX = 0;
 		double labelY = 0;
 		// gets scale position
