@@ -500,25 +500,25 @@ final class SelectionHandler {
 	void refresh() {
 		// gets chart node
 		ChartNode node = chart.getNode();
-		ChartAreaNode chartArea = node.getChartArea();
+		ChartAreaNode cArea = node.getChartArea();
 		// gets the scale element of chart
 		// using the X axis id of plugin options
 		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID().value());
 		// gets START pixels by value
 		double startPixel = scaleItem.getPixelForValue(track.getStartValue());
 		// checks if the selection area is still consistent
-		if (Undefined.is(startPixel) || startPixel > chartArea.getRight()) {
+		if (Undefined.is(startPixel) || startPixel > cArea.getRight()) {
 			// does not refresh anything
 			return;
 		}
 		// gets END pixels by value
 		double endPixel = scaleItem.getPixelForValue(track.getEndValue());
 		// checks if the selection area is still consistent
-		if (Undefined.is(endPixel) || endPixel > chartArea.getRight()) {
+		if (Undefined.is(endPixel) || endPixel > cArea.getRight()) {
 			// changes the track accordingly
-			track.setCurrent(chartArea.getRight());
+			track.setCurrent(cArea.getRight());
 			// reset end pixel
-			endPixel = chartArea.getRight();
+			endPixel = cArea.getRight();
 		}
 		// this is new start selection point
 		startSelection((int) Math.ceil(startPixel));
@@ -541,15 +541,15 @@ final class SelectionHandler {
 		// gets chart node
 		ChartNode node = chart.getNode();
 		// gets chart area
-		ChartAreaNode chartArea = node.getChartArea();
+		ChartAreaNode cArea = node.getChartArea();
 		// checks if area is consistent
-		if (!IsArea.isConsistent(chartArea)) {
+		if (!IsArea.isConsistent(cArea)) {
 			return;
 		}
 		// normalized the from and to passed
 		// if not consistent, uses the area
-		final double normalizedFrom = Checker.validOrDefault(from, chartArea.getLeft());
-		final double normalizedTo = Checker.validOrDefault(to, chartArea.getRight());
+		final double normalizedFrom = Checker.validOrDefault(from, cArea.getLeft());
+		final double normalizedTo = Checker.validOrDefault(to, cArea.getRight());
 		// gets canvas
 		Canvas canvas = chart.getCanvas();
 		// extracts the scrolling element
@@ -562,7 +562,7 @@ final class SelectionHandler {
 		// calculates the real TO X coordinate
 		final double xTo = normalizedTo + clientX;
 		// calculates the real Y coordinate, mid of chart area
-		final double y = (chartArea.getHeight() / 2) + clientY;
+		final double y = (cArea.getHeight() / 2) + clientY;
 		// gets canvas as internal one
 		SelectCanvas selectCanvas = canvas.as();
 		// creates an initialization dictionary to create mouse event
