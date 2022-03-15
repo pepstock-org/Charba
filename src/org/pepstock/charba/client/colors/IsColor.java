@@ -48,6 +48,16 @@ public interface IsColor {
 	}
 
 	/**
+	 * Returns <code>true</code> if the passed color instance is not transparent, with alpha greater than 0.
+	 * 
+	 * @param color color instance to check
+	 * @return <code>true</code> if the passed color instance is not transparent
+	 */
+	static boolean isVisible(IsColor color) {
+		return isValid(color) && color.getAlpha() > 0;
+	}
+
+	/**
 	 * Checks if the passed color is consistent, that means with a right red, green, blue and alpha values.<br>
 	 * If not consistent, an {@link IllegalArgumentException} will be thrown.
 	 * 

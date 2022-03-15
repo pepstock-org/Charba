@@ -115,6 +115,8 @@ public final class CrosshairLabel extends NativeObjectContainer implements IsCro
 	// progress callback
 	private static final CallbackPropertyHandler<CrosshairFormatterCallback> FORMATTER_CALLBACK = new CallbackPropertyHandler<>(Property.CHARBA_FORMATTER_CALLBACK);
 
+	// parent plugin options
+	private CrosshairOptions parent;
 	// defaults global options instance
 	private IsCrosshairDefaultLabel defaultOptions;
 	// label font instance
@@ -125,13 +127,16 @@ public final class CrosshairLabel extends NativeObjectContainer implements IsCro
 	/**
 	 * Creates new label element, using stored native object instance and the default values options.
 	 * 
+	 * @param parent the plugin options instance
 	 * @param nativeObject stored label values in the native object to read.
 	 * @param defaultOptions default crosshair label options to returns the default when required.
 	 */
-	CrosshairLabel(NativeObject nativeObject, IsCrosshairDefaultLabel defaultOptions) {
+	CrosshairLabel(CrosshairOptions parent, NativeObject nativeObject, IsCrosshairDefaultLabel defaultOptions) {
 		super(nativeObject);
 		// checks the default values
 		this.defaultOptions = checkDefaultValuesArgument(defaultOptions);
+		// stores parent
+		this.parent = parent;
 		// gets font
 		this.font = new CrosshairLabelFont(this.defaultOptions.getFont(), getNativeObject());
 		// stores border radius
@@ -294,8 +299,8 @@ public final class CrosshairLabel extends NativeObjectContainer implements IsCro
 	 * @return the callback which can be implemented to change the text of label
 	 */
 	@Override
-	public CrosshairFormatterCallback getCrosshairFormatterCallback() {
-		return FORMATTER_CALLBACK.getCallback(this, defaultOptions.getCrosshairFormatterCallback());
+	public CrosshairFormatterCallback getFormatter() {
+		return FORMATTER_CALLBACK.getCallback(this, defaultOptions.getFormatter());
 	}
 
 	/**
@@ -303,8 +308,8 @@ public final class CrosshairLabel extends NativeObjectContainer implements IsCro
 	 * 
 	 * @param formatterCallback the callback which can be implemented to change the text of label
 	 */
-	public void setCrosshairFormatterCallback(CrosshairFormatterCallback formatterCallback) {
-		FORMATTER_CALLBACK.setCallback(this, getIncrementalId(), formatterCallback, formatterCallbackProxy.getProxy());
+	public void setFormatter(CrosshairFormatterCallback formatterCallback) {
+		FORMATTER_CALLBACK.setCallback(this, parent.getId(), formatterCallback, formatterCallbackProxy.getProxy());
 	}
 
 	// ------------------

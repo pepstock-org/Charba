@@ -24,6 +24,8 @@ import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.callbacks.CrosshairFormatterCallback;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
@@ -119,36 +121,9 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 			CrosshairOptions options = getOptions(chart);
 			// gets event context
 			ChartEventContext context = contexts.get(chart.getId());
-			// gets state
-			State state = states.get(chart.getId());
-			// gets chart area
-			ChartAreaNode area = chart.getNode().getChartArea();
-			// gets context
-			Context2dItem ctx = chart.getCanvas().getContext2d();
-			// saves the layer
-			ctx.save();
-			// applies styles
-			ctx.setStrokeColor(options.getLineColor());
-			ctx.setLineWidth(options.getLineWidth());
-			ctx.setLineDash(options.getLineDash());
-			ctx.setLineDashOffset(options.getLineDashOffset());
-			// begins path
-			ctx.beginPath();
-			// checks which type of interaction has been set
-			if (inXScaleRange(state.getXScale(), context) && hasY(options)) {
-				// draws vertical line
-				ctx.moveTo(context.getX(), area.getTop());
-				ctx.lineTo(context.getX(), area.getBottom());
-			}
-			if (inYScaleRange(state.getYScale(), context) && hasX(options)) {
-				// draws horizontal line
-				ctx.moveTo(area.getLeft(), context.getY());
-				ctx.lineTo(area.getRight(), context.getY());
-			}
-			// strokes lines
-			ctx.stroke();
-			ctx.restore();
-			// draw labels
+			// draws lines
+			drawLines(chart, options, context);
+			// draws labels
 			drawLabels(chart, options, context);
 		}
 	}
@@ -203,6 +178,49 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	}
 
 	/**
+	 * Draws the lines which are creating the crosshair.
+	 * 
+	 * @param chart chart instance
+	 * @param options plugin options
+	 * @param context event context
+	 */
+	private void drawLines(IsChart chart, CrosshairOptions options, ChartEventContext context) {
+		// checks if the line must be drawn
+		if (options.getLineWidth() > 0 && IsColor.isVisible(options.getLineColor())) {
+			// gets chart area
+			ChartAreaNode area = chart.getNode().getChartArea();
+			// gets state
+			State state = states.get(chart.getId());
+			// gets context
+			Context2dItem ctx = chart.getCanvas().getContext2d();
+			// checks if
+			// saves the layer
+			ctx.save();
+			// applies styles
+			ctx.setStrokeColor(options.getLineColor());
+			ctx.setLineWidth(options.getLineWidth());
+			ctx.setLineDash(options.getLineDash());
+			ctx.setLineDashOffset(options.getLineDashOffset());
+			// begins path
+			ctx.beginPath();
+			// checks which type of interaction has been set
+			if (inXScaleRange(state.getXScale(), context) && hasY(options)) {
+				// draws vertical line
+				ctx.moveTo(context.getX(), area.getTop());
+				ctx.lineTo(context.getX(), area.getBottom());
+			}
+			if (inYScaleRange(state.getYScale(), context) && hasX(options)) {
+				// draws horizontal line
+				ctx.moveTo(area.getLeft(), context.getY());
+				ctx.lineTo(area.getRight(), context.getY());
+			}
+			// strokes lines
+			ctx.stroke();
+			ctx.restore();
+		}
+	}
+
+	/**
 	 * Draws the labels of the lines which are creating the crosshair.
 	 * 
 	 * @param chart chart instance
@@ -240,10 +258,12 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 		ScaleValueItem item = scale.getValueAtPixel(pixel);
 		// stored the value
 		String labelText = item.getLabel();
+		// gets formatter
+		CrosshairFormatterCallback formatter = label.getFormatter();
 		// checks if there is a formatter callback
-		if (label.getCrosshairFormatterCallback() != null) {
+		if (formatter != null) {
 			// invokes callbacks
-			labelText = label.getCrosshairFormatterCallback().format(chart, scale, item);
+			labelText = formatter.format(chart, scale, item);
 			// if the result is not consistent
 			// the label is skipped
 			if (labelText == null || labelText.trim().length() == 0) {

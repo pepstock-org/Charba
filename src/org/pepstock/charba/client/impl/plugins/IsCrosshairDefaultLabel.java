@@ -86,7 +86,7 @@ interface IsCrosshairDefaultLabel {
 	 * 
 	 * @return the callback which can be implemented to change the text of label
 	 */
-	default CrosshairFormatterCallback getCrosshairFormatterCallback() {
+	default CrosshairFormatterCallback getFormatter() {
 		return null;
 	}
 }

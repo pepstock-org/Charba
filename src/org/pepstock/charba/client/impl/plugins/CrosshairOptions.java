@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -28,6 +29,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -165,7 +167,7 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 		}
 		// sets inner elements
 		// X LABEL
-		this.xLabel = new CrosshairLabel(getValue(Property.X_LABEL), this.defaultOptions.getXLabel());
+		this.xLabel = new CrosshairLabel(this, getValue(Property.X_LABEL), this.defaultOptions.getXLabel());
 		// checks if x label is not already stored
 		if (!has(Property.X_LABEL)) {
 			// if here x label is not stored
@@ -173,7 +175,7 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 			setValue(Property.X_LABEL, this.xLabel);
 		}
 		// Y LABEL
-		this.yLabel = new CrosshairLabel(getValue(Property.Y_LABEL), this.defaultOptions.getYLabel());
+		this.yLabel = new CrosshairLabel(this, getValue(Property.Y_LABEL), this.defaultOptions.getYLabel());
 		// checks if y label is not already stored
 		if (!has(Property.Y_LABEL)) {
 			// if here y label is not stored
@@ -182,6 +184,29 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 		}
 		// creates labels
 		this.labels = new CrosshairLabels(this);
+		// sets default events
+		setEvents((Set<Event>) null);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#setEvents(org.pepstock.charba.client.enums.Event[])
+	 */
+	@Override
+	public void setEvents(Event... events) {
+		setEvents((Set<Event>) null);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#setEvents(java.util.Set)
+	 */
+	@Override
+	public void setEvents(Set<Event> events) {
+		// this is the only event that the plugin should receive from CHART.JS
+		super.setEvents(Event.MOUSE_MOVE);
 	}
 
 	/**
