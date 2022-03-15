@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.InteractionAxis;
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.options.ScaleId;
 
 /**
@@ -112,5 +113,14 @@ interface IsCrosshairDefaultOptions {
 	 */
 	default ScaleId getYScaleID() {
 		return DefaultScaleId.Y;
+	}
+
+	/**
+	 * Returns the modifier key to activate the crosshair.
+	 * 
+	 * @return the modifier key to activate the crosshair
+	 */
+	default ModifierKey getModifierKey() {
+		return null;
 	}
 }

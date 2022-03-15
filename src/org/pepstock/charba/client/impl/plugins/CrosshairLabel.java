@@ -304,7 +304,7 @@ public final class CrosshairLabel extends NativeObjectContainer implements IsCro
 	}
 
 	/**
-	 * Sets the callback which can be implemented to change the text of label,
+	 * Sets the callback which can be implemented to change the text of label.
 	 * 
 	 * @param formatterCallback the callback which can be implemented to change the text of label
 	 */

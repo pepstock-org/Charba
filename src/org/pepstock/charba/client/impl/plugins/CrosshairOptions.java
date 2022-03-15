@@ -31,6 +31,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionAxis;
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
@@ -83,6 +84,7 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 	private enum Property implements Key
 	{
 		ENABLED("enabled"),
+		MODIFIER_KEY("modifierKey"),
 		// inner elements
 		X_LABEL("xLabel"),
 		Y_LABEL("yLabel"),
@@ -349,10 +351,10 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 	/**
 	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines
+	 * @param lineDash the line dash pattern used when stroking lines
 	 */
-	public void setLineDash(int... borderDash) {
-		setArrayValue(Property.LINE_DASH, ArrayInteger.fromOrNull(borderDash));
+	public void setLineDash(int... lineDash) {
+		setArrayValue(Property.LINE_DASH, ArrayInteger.fromOrNull(lineDash));
 	}
 
 	/**
@@ -377,10 +379,10 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 	/**
 	 * Sets the line dash pattern offset.
 	 * 
-	 * @param borderDashOffset Offset for line dashes.
+	 * @param lineDashOffset Offset for line dashes.
 	 */
-	public void setLineDashOffset(double borderDashOffset) {
-		setValue(Property.LINE_DASH_OFFSET, borderDashOffset);
+	public void setLineDashOffset(double lineDashOffset) {
+		setValue(Property.LINE_DASH_OFFSET, lineDashOffset);
 	}
 
 	/**
@@ -461,4 +463,22 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 		return getValue(Property.Y_SCALE_ID, defaultOptions.getYScaleID());
 	}
 
+	/**
+	 * Sets the modifier key to activate the crosshair.
+	 * 
+	 * @param modifierKey the modifier key to activate the crosshair
+	 */
+	public void setModifierKey(ModifierKey modifierKey) {
+		setValue(Property.MODIFIER_KEY, modifierKey);
+	}
+
+	/**
+	 * Returns the modifier key to activate the crosshair.
+	 * 
+	 * @return the modifier key to activate the crosshair
+	 */
+	@Override
+	public ModifierKey getModifierKey() {
+		return getValue(Property.MODIFIER_KEY, ModifierKey.values(), defaultOptions.getModifierKey());
+	}
 }

@@ -28,13 +28,13 @@ import org.pepstock.charba.client.callbacks.CrosshairFormatterCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.BaseEventTypes;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.InteractionAxis;
+import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.PluginEventArgument;
@@ -149,16 +149,20 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 			ChartEventContext context = argument.getEventContext();
 			// checks if event is on chart area
 			if (!argument.isInChartArea()) {
-				// if not removes the state
-				contexts.remove(chart.getId());
-				// forces redrawing to remove the crosshair
-				argument.setChanged(true);
+				// checks if there is the context
+				if (contexts.containsKey(chart.getId())) {
+					// if not removes the state
+					contexts.remove(chart.getId());
+					// forces redrawing to remove the crosshair
+					argument.setChanged(true);
+				}
+				// closes because not managed
 				return;
 			}
-			// gets base native event
-			BaseNativeEvent event = context.getNativeEvent();
+			// gets option on the cache
+			CrosshairOptions options = getOptions(chart);
 			// checks if is mouse move
-			if (BaseEventTypes.MOUSE_MOVE.equalsIgnoreCase(event.getType())) {
+			if (checkEvent(context, options)) {
 				// adds context to the state
 				contexts.put(chart.getId(), context);
 				// forces redrawing to draw the crosshair
@@ -256,6 +260,15 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 		}
 	}
 
+	/**
+	 * Draws the label on the chart
+	 * 
+	 * @param chart chart instance
+	 * @param scale scale instance
+	 * @param axis axis instance
+	 * @param label label options of the plugin
+	 * @param pixel the pixel to use for retriving the value from scale
+	 */
 	private void drawLabel(IsChart chart, ScaleItem scale, Scale axis, CrosshairLabel label, double pixel) {
 		// checks if the position is supported
 		if (!isSupportedPosition(scale)) {
@@ -376,6 +389,26 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 			}
 		}
 		return mustBeActivated;
+	}
+
+	/**
+	 * Checks if the event is consistent and the {@link ModifierKey} has been set in order to check if the event must be managed.
+	 * 
+	 * @param context event context to check
+	 * @param options plugin options
+	 * @return <code>true</code> if the event is consistent and the {@link ModifierKey} has been set in order to check if the event must be managed
+	 */
+	private boolean checkEvent(ChartEventContext context, CrosshairOptions options) {
+		// checks event type
+		boolean mustBeManaged = BaseEventTypes.MOUSE_MOVE.equalsIgnoreCase(context.getType());
+		// checks if passed
+		if (mustBeManaged) {
+			// gets modifier key
+			ModifierKey modifier = options.getModifierKey();
+			// checks if mdifier must be pressed
+			mustBeManaged = modifier == null || ModifierKey.arePressed(context, modifier);
+		}
+		return mustBeManaged;
 	}
 
 	/**
