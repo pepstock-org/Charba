@@ -42,6 +42,7 @@ import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.items.ScaleItem;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsImmutableFont;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -84,6 +85,8 @@ final class SelectionHandler {
 	private final int paddingTop;
 	// stores the original bottom padding value
 	private final int paddingBottom;
+	// current chart area
+	private IsArea chartArea = null;
 	// current mouse track of selection
 	private SelectionTrack track = null;
 	// status if selected
@@ -353,7 +356,9 @@ final class SelectionHandler {
 		setStatus(SelectionStatus.SELECTING);
 		// gets chart AREA
 		ChartNode node = chart.getNode();
-		ChartAreaNode chartArea = node.getChartArea();
+		ChartAreaNode cArea = node.getChartArea();
+		// stores chart area
+		chartArea = cArea.toArea();
 		// initializes the mouse track using the previous instance if exist
 		track = new SelectionTrack(x, track);
 		// sets TOP and BOTTOM
@@ -372,9 +377,6 @@ final class SelectionHandler {
 	 * @param x new X coordinate.
 	 */
 	void updateSelection(double x) {
-		// gets chart AREA
-		ChartNode node = chart.getNode();
-		ChartAreaNode chartArea = node.getChartArea();
 		// checks if X coordinate is inside of
 		// chart area
 		// if less then area, used left as current track point
@@ -398,7 +400,7 @@ final class SelectionHandler {
 		// sets the selecting color in the canvas
 		ctx.setFillColor(options.getColorAsString());
 		// draws the rectangle of area selection
-		ctx.fillRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
+		ctx.fillRect(Math.max(area.getLeft(), chartArea.getLeft()), area.getTop(), Math.min(area.getRight(), chartArea.getRight()) - area.getLeft(), area.getBottom() - area.getTop());
 		// borders
 		applyAreaBorder(ctx);
 		// option instance
@@ -465,9 +467,15 @@ final class SelectionHandler {
 		if (fireEvent && track != null && track.isValid() && chart.isEventHandled(DatasetRangeSelectionEvent.TYPE)) {
 			// gets scale
 			ScaleItem scaleItem = getScale();
+			// gets values
+			double leftValue = scaleItem.getValueForPixel(area.getLeft());
+			double rightValue = scaleItem.getValueForPixel(area.getRight());
+			// gets pixels by norm values
+			double normStart = scaleItem.getPixelForValue(leftValue);
+			double normEnd = scaleItem.getPixelForValue(rightValue);
 			// stores the values of selected area from scale
-			track.setStartValue(scaleItem.getValueForPixel(area.getLeft()));
-			track.setEndValue(scaleItem.getValueForPixel(area.getRight()));
+			track.setStartValue(leftValue / normStart * area.getLeft());
+			track.setEndValue(rightValue / normEnd * area.getRight());
 			// fires the event that scale items selection
 			chart.fireEvent(new DatasetRangeSelectionEvent(event, scaleItem.getValueAtPixel(area.getLeft()), scaleItem.getValueAtPixel(area.getRight())));
 		}
@@ -499,14 +507,14 @@ final class SelectionHandler {
 		// gets START pixels by value
 		double startPixel = scaleItem.getPixelForValue(track.getStartValue());
 		// checks if the selection area is still consistent
-		if (startPixel > chartArea.getRight()) {
+		if (Undefined.is(startPixel) || startPixel > chartArea.getRight()) {
 			// does not refresh anything
 			return;
 		}
 		// gets END pixels by value
 		double endPixel = scaleItem.getPixelForValue(track.getEndValue());
 		// checks if the selection area is still consistent
-		if (endPixel > chartArea.getRight()) {
+		if (Undefined.is(endPixel) || endPixel > chartArea.getRight()) {
 			// changes the track accordingly
 			track.setCurrent(chartArea.getRight());
 			// reset end pixel

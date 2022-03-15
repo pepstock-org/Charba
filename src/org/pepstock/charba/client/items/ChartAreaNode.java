@@ -37,6 +37,15 @@ public final class ChartAreaNode extends BaseBoxItem {
 		super(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
+	/**
+	 * Creates and returns a {@link IsArea} instance, cloning the chart area.
+	 * 
+	 * @return a {@link IsArea} instance, cloning the chart area
+	 */
+	public IsArea toArea() {
+		return new ClonedChartAreaNode(this);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -45,6 +54,76 @@ public final class ChartAreaNode extends BaseBoxItem {
 	@Override
 	public String toString() {
 		return JSON.stringify(getNativeObject());
+	}
+
+	/**
+	 * Internal class which is implementing {@link IsArea} interface filling it with the chart area values.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class ClonedChartAreaNode implements IsArea {
+
+		private double top = 0;
+
+		private double left = 0;
+
+		private double right = 0;
+
+		private double bottom = 0;
+
+		/**
+		 * To avoid any instantiation
+		 * 
+		 * @param chartArea chart area instance
+		 */
+		private ClonedChartAreaNode(ChartAreaNode chartArea) {
+			this.top = chartArea.getTop();
+			this.left = chartArea.getLeft();
+			this.right = chartArea.getRight();
+			this.bottom = chartArea.getBottom();
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.IsArea#getTop()
+		 */
+		@Override
+		public double getTop() {
+			return top;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.IsArea#getRight()
+		 */
+		@Override
+		public double getRight() {
+			return right;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.IsArea#getBottom()
+		 */
+		@Override
+		public double getBottom() {
+			return bottom;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.IsArea#getLeft()
+		 */
+		@Override
+		public double getLeft() {
+			return left;
+		}
+
 	}
 
 }

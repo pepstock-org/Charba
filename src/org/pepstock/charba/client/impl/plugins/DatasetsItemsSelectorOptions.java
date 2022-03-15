@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import java.util.List;
+import java.util.Set;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -27,6 +28,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.DefaultScaleId;
+import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -184,6 +186,31 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 			// then adds it
 			setValue(Property.SELECTION_CLEANER, this.selectionCleaner);
 		}
+		// sets default events
+		setEvents((Set<Event>) null);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#setEvents(org.pepstock.charba.client.enums.Event[])
+	 */
+	@Override
+	public void setEvents(Event... events) {
+		setEvents((Set<Event>) null);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#setEvents(java.util.Set)
+	 */
+	@Override
+	public void setEvents(Set<Event> events) {
+		// these are the only events that the plugin should receive from CHART.JS
+		// MOUSE MOVE is added even if not managed because this enables the usage
+		// of other plugins with this one
+		super.setEvents(Event.CLICK, Event.TOUCH_START, Event.MOUSE_MOVE);
 	}
 
 	/**

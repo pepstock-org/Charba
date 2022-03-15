@@ -29,6 +29,7 @@ import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.enums.Event;
@@ -98,7 +99,7 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 			// resets the padding callback
 			chart.getOptions().getLayout().setPadding((NativeCallback) null);
 			// overrides the events configuration setting only the following
-			chart.getOptions().setEvents(Event.CLICK, Event.TOUCH_START);
+			// chart.getOptions().setEvents(Event.CLICK, Event.TOUCH_START, Event.MOUSE_MOVE);
 			// checks if handler on legend to avoid to remove all data sets has been already added
 			// and if legend is display
 			// checks if is chart is a abstract chart instance
@@ -191,6 +192,11 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 	 */
 	@Override
 	public boolean onBeforeEvent(IsChart chart, PluginEventArgument argument) {
+		// the mouse move is enabled
+		// but not managed in order to work with other plugins
+		if (BaseEventTypes.MOUSE_MOVE.equalsIgnoreCase(argument.getEventContext().getType())) {
+			return true;
+		}
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// gets native event
@@ -438,6 +444,8 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 			handler.refresh();
 		} else if (handler.getStatus().equals(SelectionStatus.SELECTING)) {
 			handler.draw();
+			// returns in order to maintain the cursor crosshair
+			return;
 		}
 		// the drawing of chart is completed and set the default cursor
 		// removing the "wait" one.
