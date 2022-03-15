@@ -137,7 +137,7 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 	 * 
 	 * @param events the browser events that the plugins should listen to.
 	 */
-	public final void setEvents(Event... events) {
+	public void setEvents(Event... events) {
 		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(true, events));
 	}
 
@@ -211,7 +211,7 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 	/**
 	 * Stores this options in the default global plugins options.
 	 */
-	public void store() {
+	public final void store() {
 		// stores itself in the defaults
 		Defaults.get().getGlobal().getPlugins().setOptions(this);
 	}
