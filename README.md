@@ -297,6 +297,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * [#70](https://github.com/pepstock-org/Charba/issues/70) add an empty configuration when a plugin is added without any initial configuration.
  * [#71](https://github.com/pepstock-org/Charba/issues/71) fixes the value of the property because was wrong.
 
+### Development
+
+ * use [Reflect](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect) built-in object to manage the properties of the native objects.
+
 License
 -------
 

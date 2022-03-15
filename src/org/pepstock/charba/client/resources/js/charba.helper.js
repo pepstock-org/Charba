@@ -58,7 +58,7 @@ function CharbaJsObjectArrayHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectArrayHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -68,7 +68,7 @@ CharbaJsObjectArrayHelper.set = function(obj, key, value) {
  * @return {Array} the value of the property
  */
 CharbaJsObjectArrayHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -87,7 +87,7 @@ function CharbaJsObjectBooleanHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectBooleanHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -97,7 +97,8 @@ CharbaJsObjectBooleanHelper.set = function(obj, key, value) {
  * @return {boolean} the value of the property
  */
 CharbaJsObjectBooleanHelper.get = function(obj, key) {
-  return obj[key];
+  //return Reflect.get(obj, key);
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -116,7 +117,7 @@ function CharbaJsObjectCallbackProxyHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectCallbackProxyHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -126,7 +127,7 @@ CharbaJsObjectCallbackProxyHelper.set = function(obj, key, value) {
  * @return {Function} the value of the property
  */
 CharbaJsObjectCallbackProxyHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -145,7 +146,7 @@ function CharbaJsObjectCallbackHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectCallbackHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -155,7 +156,7 @@ CharbaJsObjectCallbackHelper.set = function(obj, key, value) {
  * @return {Function} the value of the property
  */
 CharbaJsObjectCallbackHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -174,7 +175,7 @@ function CharbaJsObjectChartHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectChartHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -184,7 +185,7 @@ CharbaJsObjectChartHelper.set = function(obj, key, value) {
  * @return {Chart} the value of the property
  */
 CharbaJsObjectChartHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -203,7 +204,7 @@ function CharbaJsObjectElementHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectElementHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -213,7 +214,7 @@ CharbaJsObjectElementHelper.set = function(obj, key, value) {
  * @return {HTMLElement} the value of the property
  */
 CharbaJsObjectElementHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -232,7 +233,7 @@ function CharbaJsObjectDoubleHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectDoubleHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -242,7 +243,7 @@ CharbaJsObjectDoubleHelper.set = function(obj, key, value) {
  * @return {number} the value of the property
  */
 CharbaJsObjectDoubleHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -261,7 +262,7 @@ function CharbaJsObjectIntegerHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectIntegerHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -271,7 +272,7 @@ CharbaJsObjectIntegerHelper.set = function(obj, key, value) {
  * @return {number} the value of the property
  */
 CharbaJsObjectIntegerHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -290,7 +291,7 @@ function CharbaJsObjectGradientHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectGradientHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -300,7 +301,7 @@ CharbaJsObjectGradientHelper.set = function(obj, key, value) {
  * @return {CanvasGradient} the value of the property
  */
 CharbaJsObjectGradientHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -319,7 +320,7 @@ function CharbaJsObjectImageHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectImageHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -329,7 +330,7 @@ CharbaJsObjectImageHelper.set = function(obj, key, value) {
  * @return {HTMLImageElement} the value of the property
  */
 CharbaJsObjectImageHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -348,7 +349,7 @@ function CharbaJsObjectCanvasHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectCanvasHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -358,7 +359,7 @@ CharbaJsObjectCanvasHelper.set = function(obj, key, value) {
  * @return {HTMLCanvasElement} the value of the property
  */
 CharbaJsObjectCanvasHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -377,7 +378,7 @@ function CharbaJsObjectNativeObjectHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectNativeObjectHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -387,7 +388,7 @@ CharbaJsObjectNativeObjectHelper.set = function(obj, key, value) {
  * @return {Object} the value of the property
  */
 CharbaJsObjectNativeObjectHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -406,7 +407,7 @@ function CharbaJsObjectNativeEventHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectNativeEventHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -416,7 +417,7 @@ CharbaJsObjectNativeEventHelper.set = function(obj, key, value) {
  * @return {Object} the value of the property
  */
 CharbaJsObjectNativeEventHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -435,7 +436,7 @@ function CharbaJsObjectPatternHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectPatternHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -445,7 +446,7 @@ CharbaJsObjectPatternHelper.set = function(obj, key, value) {
  * @return {CanvasPattern} the value of the property
  */
 CharbaJsObjectPatternHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------
@@ -464,7 +465,7 @@ function CharbaJsObjectStringHelper() {}
  * @return {undefined}
  */
 CharbaJsObjectStringHelper.set = function(obj, key, value) {
-  obj[key] = value;
+  Reflect.set(obj, key, value);
 }
 /**
  * Allows you to get a property on an object.
@@ -474,7 +475,7 @@ CharbaJsObjectStringHelper.set = function(obj, key, value) {
  * @return {string} the value of the property
  */
 CharbaJsObjectStringHelper.get = function(obj, key) {
-  return obj[key];
+  return Reflect.get(obj, key);
 }
 /**
  * ----------------------------------------------------------------------------
@@ -511,7 +512,7 @@ CharbaJsHelper.cast = function(object) {
  * @return {boolean} indicating whether or not the object has the specified property as own property
  */
 CharbaJsHelper.has = function(obj, key) {
-  return key in obj;
+  return Reflect.has(obj, key);
 }
 /**
  * Removes a property from a java script object.
@@ -521,7 +522,7 @@ CharbaJsHelper.has = function(obj, key) {
  * @return {undefined}
  */
 CharbaJsHelper.remove = function(obj, key) {
-  delete obj[key];
+  Reflect.deleteProperty(obj, key);
 }
 /**
  * Returns the java script object type of the object.
