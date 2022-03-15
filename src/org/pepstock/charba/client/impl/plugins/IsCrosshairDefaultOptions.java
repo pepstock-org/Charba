@@ -43,6 +43,15 @@ interface IsCrosshairDefaultOptions {
 	IsCrosshairDefaultLabel getYLabel();
 
 	/**
+	 * Returns <code>true</code> if plugin is enabled.
+	 * 
+	 * @return <code>true</code> if plugin is enabled.
+	 */
+	default boolean isEnabled() {
+		return CrosshairOptions.DEFAULT_ENABLED;
+	}
+
+	/**
 	 * Returns the interaction axis mode.
 	 * 
 	 * @return the interaction axis mode

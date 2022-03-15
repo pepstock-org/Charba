@@ -86,24 +86,32 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 		if (mustBeActivated(chart, false)) {
 			// loads options
 			CrosshairOptions pOptions = loadOptions(chart);
-			// creates a stores the state
-			State state = states.computeIfAbsent(chart.getId(), mapKey -> new State());
-			// gets chart node
-			ChartNode node = chart.getNode();
-			// gets scales
-			ScalesNode scales = node.getScales();
-			// gets scale items
-			Map<String, ScaleItem> items = scales.getItems();
-			// gets and stores x scale
-			state.setXScale(items.get(pOptions.getXScaleID().value()));
-			// gets and stores y scale
-			state.setYScale(items.get(pOptions.getYScaleID().value()));
-			// loads axis
-			Scales axes = node.getOptions().getScales();
-			// gets and stores x axis
-			state.setXAxis(axes.getAxis(pOptions.getXScaleID()));
-			// gets and stores y axis
-			state.setYAxis(axes.getAxis(pOptions.getYScaleID()));
+			// checks if the plugin is enabled
+			if (pOptions.isEnabled()) {
+				// creates a stores the state
+				State state = states.computeIfAbsent(chart.getId(), mapKey -> new State());
+				// gets chart node
+				ChartNode node = chart.getNode();
+				// gets scales
+				ScalesNode scales = node.getScales();
+				// gets scale items
+				Map<String, ScaleItem> items = scales.getItems();
+				// gets and stores x scale
+				state.setXScale(items.get(pOptions.getXScaleID().value()));
+				// gets and stores y scale
+				state.setYScale(items.get(pOptions.getYScaleID().value()));
+				// loads axis
+				Scales axes = node.getOptions().getScales();
+				// gets and stores x axis
+				state.setXAxis(axes.getAxis(pOptions.getXScaleID()));
+				// gets and stores y axis
+				state.setYAxis(axes.getAxis(pOptions.getYScaleID()));
+			} else {
+				// removes the contexts
+				contexts.remove(chart.getId());
+				// removes the state
+				states.remove(chart.getId());
+			}
 		}
 		return true;
 	}
@@ -117,7 +125,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	public void onAfterDraw(IsChart chart) {
 		// checks if chart is consistent
 		if (mustBeActivated(chart, true) && contexts.containsKey(chart.getId()) && states.containsKey(chart.getId())) {
-			// stores option on the cache
+			// gets option on the cache
 			CrosshairOptions options = getOptions(chart);
 			// gets event context
 			ChartEventContext context = contexts.get(chart.getId());
@@ -193,7 +201,6 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 			State state = states.get(chart.getId());
 			// gets context
 			Context2dItem ctx = chart.getCanvas().getContext2d();
-			// checks if
 			// saves the layer
 			ctx.save();
 			// applies styles
@@ -354,11 +361,19 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	 * @return <code>true</code> if the chart is consistent and the scale type is {@link ScaleType#MULTI}
 	 */
 	private boolean mustBeActivated(IsChart chart, boolean options) {
-		// checks consistent
+		// checks consistent and the chart are multiple scales
 		boolean mustBeActivated = IsChart.isConsistent(chart) && checkChartBaseTypes(chart);
-		// if the first check is true...
+		// if the first check is true and options must be checked...
 		if (mustBeActivated && options) {
+			// sets if the options are loaded
 			mustBeActivated = hasOptions(chart);
+			// checks if the plugin is enabled
+			if (mustBeActivated) {
+				// gets option on the cache
+				CrosshairOptions pOptions = getOptions(chart);
+				// checks if enabled
+				mustBeActivated = pOptions.isEnabled();
+			}
 		}
 		return mustBeActivated;
 	}

@@ -43,6 +43,11 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 public final class CrosshairOptions extends AbstractPluginOptions implements IsCrosshairDefaultOptions {
 
 	/**
+	 * Default enabled options, <b>{@value DEFAULT_ENABLED}</b>.
+	 */
+	public static final boolean DEFAULT_ENABLED = true;
+
+	/**
 	 * Default interaction axis mode, <b>{@link InteractionAxis#XY}</b>.
 	 */
 	public static final InteractionAxis DEFAULT_MODE = InteractionAxis.XY;
@@ -77,6 +82,7 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 	 */
 	private enum Property implements Key
 	{
+		ENABLED("enabled"),
 		// inner elements
 		X_LABEL("xLabel"),
 		Y_LABEL("yLabel"),
@@ -236,6 +242,25 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 	@Override
 	public CrosshairLabel getYLabel() {
 		return yLabel;
+	}
+
+	/**
+	 * Sets <code>true</code> if plugin is enabled.
+	 * 
+	 * @param enabled <code>true</code> if plugin is enabled.
+	 */
+	public void setEnabled(boolean enabled) {
+		setValue(Property.ENABLED, enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> if plugin is enabled.
+	 * 
+	 * @return <code>true</code> if plugin is enabled.
+	 */
+	@Override
+	public boolean isEnabled() {
+		return getValue(Property.ENABLED, defaultOptions.isEnabled());
 	}
 
 	/**
