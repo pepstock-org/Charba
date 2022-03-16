@@ -26,6 +26,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.ItemsEnvelop;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.utils.JSON;
 
 /**
  * Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y properties.
@@ -361,4 +362,15 @@ public final class DataPoint extends AbstractDataPoint {
 	public double getR() {
 		return getValue(Property.R, DEFAULT_R);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return JSON.stringifyWithReplacer(getNativeObject());
+	}
+
 }
