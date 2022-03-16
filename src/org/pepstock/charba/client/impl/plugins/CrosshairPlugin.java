@@ -45,7 +45,6 @@ import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.options.IsImmutableFont;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.Scales;
-import org.pepstock.charba.client.utils.Console;
 
 /**
  * This plugin is drawing horizontal and vertical crosshair on the chart.
@@ -345,8 +344,6 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 		// calculates the box position
 		double boxX = labelX - minimum + halfBorderWidth;
 		double boxY = labelY - halfTextHeight - minimum + halfBorderWidth;
-
-		Console.log(boxX, boxY, labelX, labelY, minimum, halfBorderWidth);
 		// ---------
 		// DRAWS BOX
 		// ---------
