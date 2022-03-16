@@ -23,7 +23,7 @@ import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallbac
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBoxLabel extends IsDefaultsInnerLabel {
+interface IsDefaultsBoxLabel extends IsDefaultsInnerLabel, IsDefaultsRotationHandler {
 
 	/**
 	 * Returns the anchor position of label in the box.

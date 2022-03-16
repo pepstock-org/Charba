@@ -293,8 +293,9 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `areaBackgroundColor` option to chart background color plugin (ChartBackgroundColor) in order to enable the coloring of the chart area as well.
  * add a shared map to annotation context in order to manage common instances cross annotations.
  * add `column` option to the Sankey dataset configuration.
- * add `rotation` option to box and label annotation options in the annotation plugin. 
-
+ * add `rotation` option to box and label annotation options in the annotation plugin.
+ * add `rotation` option to label options of box annotation in the annotation plugin.
+ 
 ### Fixed Bugs
 
  * [#69](https://github.com/pepstock-org/Charba/issues/69) set `fill` option to `true` as initial value on `StackeAreaChart` class in order to have the area chart by default. Thanks @salmonb.

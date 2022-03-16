@@ -156,7 +156,6 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	 */
 	private enum Property implements Key
 	{
-		// -
 		POSITION("position"),
 		ROTATION("rotation");
 

@@ -34,7 +34,7 @@ import org.pepstock.charba.client.enums.Weight;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BoxLabel extends InnerLabel implements IsDefaultsBoxLabel {
+public final class BoxLabel extends InnerLabel implements IsDefaultsBoxLabel, HasRotation {
 
 	/**
 	 * Default box label display, <b>{@value DEFAULT_DISPLAY}</b>.
@@ -70,6 +70,11 @@ public final class BoxLabel extends InnerLabel implements IsDefaultsBoxLabel {
 	 * Default box label Y adjust, <b>{@value DEFAULT_Y_ADJUST}</b>.
 	 */
 	public static final double DEFAULT_Y_ADJUST = 0D;
+
+	/**
+	 * Default box label rotation, <b>{@value DEFAULT_ROTATION}</b>.
+	 */
+	public static final double DEFAULT_ROTATION = 0D;
 
 	/**
 	 * Default text align for labels, <b>{@link TextAlign#START}</b>.
@@ -120,6 +125,8 @@ public final class BoxLabel extends InnerLabel implements IsDefaultsBoxLabel {
 	private final BoxAnnotation parent;
 	// defaults options
 	private final IsDefaultsBoxLabel defaultValues;
+	// rotation handler
+	private final RotationHandler rotationHandler;
 	// position instance
 	private final AlignPosition position;
 
@@ -154,11 +161,23 @@ public final class BoxLabel extends InnerLabel implements IsDefaultsBoxLabel {
 			// stores position
 			setValue(Property.POSITION, this.position);
 		}
+		// creates rotation handler
+		this.rotationHandler = new RotationHandler(this.parent, this.defaultValues, getNativeObject());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
 		this.positionCallbackProxy.setCallback(context -> this.parent.onPosition(new AnnotationContext(this.parent, context), getPositionCallback()));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasRotation#getRotationHandler()
+	 */
+	@Override
+	public RotationHandler getRotationHandler() {
+		return rotationHandler;
 	}
 
 	/**
