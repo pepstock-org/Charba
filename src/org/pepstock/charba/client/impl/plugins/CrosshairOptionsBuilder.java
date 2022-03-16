@@ -299,6 +299,39 @@ public final class CrosshairOptionsBuilder extends AbstractBaseBuilder {
 		return IsBuilder.checkAndGetIfValid(this);
 	}
 
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 * @return new builder instance
+	 */
+	public CrosshairOptionsBuilder setXLabelBorderColor(IsColor borderColor) {
+		options.getXLabel().setBorderColor(borderColor);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 * @return new builder instance
+	 */
+	public CrosshairOptionsBuilder setXLabelBorderColor(String borderColor) {
+		options.getXLabel().setBorderColor(borderColor);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the border width.
+	 * 
+	 * @param borderWidth the border width.
+	 * @return new builder instance
+	 */
+	public CrosshairOptionsBuilder setXLabelBorderWidth(int borderWidth) {
+		options.getXLabel().setBorderWidth(borderWidth);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
 	// ------------------------
 	// Y LABEL
 	// ------------------------
@@ -391,6 +424,39 @@ public final class CrosshairOptionsBuilder extends AbstractBaseBuilder {
 		return IsBuilder.checkAndGetIfValid(this);
 	}
 
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 * @return new builder instance
+	 */
+	public CrosshairOptionsBuilder setYLabelBorderColor(IsColor borderColor) {
+		options.getYLabel().setBorderColor(borderColor);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 * @return new builder instance
+	 */
+	public CrosshairOptionsBuilder setYLabelBorderColor(String borderColor) {
+		options.getYLabel().setBorderColor(borderColor);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the border width.
+	 * 
+	 * @param borderWidth the border width.
+	 * @return new builder instance
+	 */
+	public CrosshairOptionsBuilder setYLabelBorderWidth(int borderWidth) {
+		options.getYLabel().setBorderWidth(borderWidth);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
 	// ------------------------
 	// BOTH LABELS
 	// ------------------------
@@ -472,4 +538,36 @@ public final class CrosshairOptionsBuilder extends AbstractBaseBuilder {
 		return IsBuilder.checkAndGetIfValid(this);
 	}
 
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 * @return new builder instance
+	 */
+	public CrosshairOptionsBuilder setLabelsBorderColor(IsColor borderColor) {
+		options.getLabels().setBorderColor(borderColor);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 * @return new builder instance
+	 */
+	public CrosshairOptionsBuilder setLabelsBorderColor(String borderColor) {
+		options.getLabels().setBorderColor(borderColor);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets the border width.
+	 * 
+	 * @param borderWidth the border width.
+	 * @return new builder instance
+	 */
+	public CrosshairOptionsBuilder setLabelsBorderWidth(int borderWidth) {
+		options.getLabels().setBorderWidth(borderWidth);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
 }

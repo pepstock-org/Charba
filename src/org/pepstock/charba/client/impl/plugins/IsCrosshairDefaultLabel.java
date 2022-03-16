@@ -89,4 +89,22 @@ interface IsCrosshairDefaultLabel {
 	default CrosshairFormatterCallback getFormatter() {
 		return null;
 	}
+
+	/**
+	 * Returns the border color.
+	 * 
+	 * @return the border color.
+	 */
+	default String getBorderColorAsString() {
+		return CrosshairLabel.DEFAULT_BORDER_COLOR_AS_STRING;
+	}
+
+	/**
+	 * Returns the border width.
+	 * 
+	 * @return the border width.
+	 */
+	default int getBorderWidth() {
+		return CrosshairLabel.DEFAULT_BORDER_WIDTH;
+	}
 }

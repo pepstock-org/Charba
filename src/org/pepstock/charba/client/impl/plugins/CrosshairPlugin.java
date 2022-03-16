@@ -45,6 +45,7 @@ import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.options.IsImmutableFont;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.Scales;
+import org.pepstock.charba.client.utils.Console;
 
 /**
  * This plugin is drawing horizontal and vertical crosshair on the chart.
@@ -198,7 +199,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	 */
 	private void drawLines(IsChart chart, CrosshairOptions options, ChartEventContext context) {
 		// checks if the line must be drawn
-		if (options.getLineWidth() > 0 && IsColor.isVisible(options.getLineColor())) {
+		if (mustBorderBeDrawn(options.getLineWidth(), options.getLineColor())) {
 			// gets chart area
 			ChartAreaNode area = chart.getNode().getChartArea();
 			// gets state
@@ -308,13 +309,16 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 		IsImmutableFont immutableValueFont = Helpers.get().toFont(font);
 		// calculates positions and sizes for the label drawing
 		final int padding = label.getPadding();
+		final double borderWidth = (double) label.getBorderWidth();
+		final double minimum = padding + borderWidth;
+		final double halfBorderWidth = borderWidth / 2;
 		final int margin = axis.getGrid().getTickLength() + axis.getTicks().getPadding();
 		final double textWidth = metrics.getWidth();
 		final double halfTextWidth = textWidth / 2;
-		final double maxWidth = canvas.getOffsetWidth() - (double) padding;
+		final double maxWidth = canvas.getOffsetWidth() - minimum;
 		final double textHeight = immutableValueFont.getLineHeight();
 		final double halfTextHeight = textHeight / 2;
-		final double maxHeight = canvas.getOffsetHeight() - (double) padding;
+		final double maxHeight = canvas.getOffsetHeight() - minimum;
 		double labelX = 0;
 		double labelY = 0;
 		// gets scale position
@@ -323,24 +327,26 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 		// based on the scale position
 		switch (position) {
 		case TOP:
-			labelX = checkAndGetLabelCoordinate(pixel - halfTextWidth, padding, maxWidth - textWidth);
-			labelY = checkAndGetLabelCoordinate(area.getTop() - margin - halfTextHeight, padding, maxHeight - halfTextHeight);
+			labelX = checkAndGetLabelCoordinate(pixel - halfTextWidth, minimum, maxWidth - textWidth);
+			labelY = checkAndGetLabelCoordinate(area.getTop() - margin - halfTextHeight, minimum, maxHeight - halfTextHeight);
 			break;
 		case BOTTOM:
-			labelX = checkAndGetLabelCoordinate(pixel - halfTextWidth, padding, maxWidth - textWidth);
-			labelY = checkAndGetLabelCoordinate(area.getBottom() + margin + halfTextHeight, padding, maxHeight - halfTextHeight);
+			labelX = checkAndGetLabelCoordinate(pixel - halfTextWidth, minimum, maxWidth - textWidth);
+			labelY = checkAndGetLabelCoordinate(area.getBottom() + margin + halfTextHeight, minimum, maxHeight - halfTextHeight);
 			break;
 		case RIGHT:
-			labelX = checkAndGetLabelCoordinate(area.getRight() + margin, padding, maxWidth - textWidth);
-			labelY = checkAndGetLabelCoordinate(pixel, padding, maxHeight - halfTextHeight);
+			labelX = checkAndGetLabelCoordinate(area.getRight() + margin, minimum, maxWidth - textWidth);
+			labelY = checkAndGetLabelCoordinate(pixel, minimum, maxHeight - halfTextHeight);
 			break;
 		default:
-			labelX = checkAndGetLabelCoordinate(area.getLeft() - margin - textWidth, padding, maxWidth - textWidth);
-			labelY = checkAndGetLabelCoordinate(pixel, padding, maxHeight - halfTextHeight);
+			labelX = checkAndGetLabelCoordinate(area.getLeft() - margin - textWidth, minimum, maxWidth - textWidth);
+			labelY = checkAndGetLabelCoordinate(pixel, minimum, maxHeight - halfTextHeight);
 		}
 		// calculates the box position
-		double boxX = labelX - padding;
-		double boxY = labelY - halfTextHeight - padding;
+		double boxX = labelX - minimum + halfBorderWidth;
+		double boxY = labelY - halfTextHeight - minimum + halfBorderWidth;
+
+		Console.log(boxX, boxY, labelX, labelY, minimum, halfBorderWidth);
 		// ---------
 		// DRAWS BOX
 		// ---------
@@ -348,10 +354,21 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 		ctx.beginPath();
 		// sets box background color
 		ctx.setFillColor(label.getBackgroundColorAsString());
+		// check if border must be drawn
+		boolean border = mustBorderBeDrawn(label.getBorderWidth(), label.getBorderColor());
+		// checks if adds line width and stroke color
+		if (border) {
+			ctx.setLineWidth(label.getBorderWidth());
+			ctx.setStrokeColor(label.getBorderColor());
+		}
 		// draws the rounded rectangle
-		ctx.addRoundedRectPath(boxX, boxY, textWidth + padding * 2, textHeight + padding * 2, label.getBarBordeRadius());
+		ctx.addRoundedRectPath(boxX, boxY, textWidth + padding * 2 + borderWidth, textHeight + padding * 2 + borderWidth, label.getBarBordeRadius());
 		// fills box
 		ctx.fill();
+		// checks if must be stroked
+		if (border) {
+			ctx.stroke();
+		}
 		// ---------
 		// DRAWS TEXT
 		// ---------
@@ -409,6 +426,17 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 			mustBeManaged = modifier == null || ModifierKey.arePressed(context, modifier);
 		}
 		return mustBeManaged;
+	}
+
+	/**
+	 * Returns <code>true</code> if the line can be drawn, width greater than 0 and color not transparent.
+	 * 
+	 * @param width line width to check
+	 * @param color color of the line to check
+	 * @return <code>true</code> if the line can be drawn, width greater than 0 and color not transparent
+	 */
+	private boolean mustBorderBeDrawn(int width, IsColor color) {
+		return width > 0 && IsColor.isVisible(color);
 	}
 
 	/**

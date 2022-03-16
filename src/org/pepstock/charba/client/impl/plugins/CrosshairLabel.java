@@ -58,6 +58,21 @@ public final class CrosshairLabel extends NativeObjectContainer implements IsCro
 	public static final String DEFAULT_BACKGROUND_COLOR_AS_STRING = DEFAULT_BACKGROUND_COLOR.toRGB();
 
 	/**
+	 * Default border color for label, {@link HtmlColor#TRANSPARENT}.
+	 */
+	public static final IsColor DEFAULT_BORDER_COLOR = HtmlColor.TRANSPARENT;
+
+	/**
+	 * Default border color for label, as string, {@link HtmlColor#TRANSPARENT}.
+	 */
+	public static final String DEFAULT_BORDER_COLOR_AS_STRING = DEFAULT_BORDER_COLOR.toRGBA();
+
+	/**
+	 * Default border width for crosshair label, value is <b>{@value DEFAULT_BORDER_WIDTH}</b>.
+	 */
+	public static final int DEFAULT_BORDER_WIDTH = 0;
+
+	/**
 	 * Default flag if crosshair label must be showed in the chart, value is <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
 	public static final boolean DEFAULT_DISPLAY = true;
@@ -78,6 +93,8 @@ public final class CrosshairLabel extends NativeObjectContainer implements IsCro
 	private enum Property implements Key
 	{
 		BACKGROUND_COLOR("backgroundColor"),
+		BORDER_COLOR("borderColor"),
+		BORDER_WIDTH("borderWidth"),
 		BORDER_RADIUS("borderRadius"),
 		COLOR("color"),
 		DISPLAY("display"),
@@ -287,6 +304,62 @@ public final class CrosshairLabel extends NativeObjectContainer implements IsCro
 	@Override
 	public int getBorderRadius() {
 		return getValue(Property.BORDER_RADIUS, defaultOptions.getBorderRadius());
+	}
+
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(IsColor.checkAndGetValue(borderColor));
+	}
+
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 */
+	public void setBorderColor(String borderColor) {
+		setValue(Property.BORDER_COLOR, borderColor);
+	}
+
+	/**
+	 * Returns the border color.
+	 * 
+	 * @return the border color.
+	 */
+	@Override
+	public String getBorderColorAsString() {
+		return getValue(Property.BORDER_COLOR, defaultOptions.getBorderColorAsString());
+	}
+
+	/**
+	 * Returns the border color.
+	 * 
+	 * @return the border color.
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
+	/**
+	 * Sets the border width.
+	 * 
+	 * @param borderWidth the border width.
+	 */
+	public void setBorderWidth(int borderWidth) {
+		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
+	}
+
+	/**
+	 * Returns the border width.
+	 * 
+	 * @return the border width.
+	 */
+	@Override
+	public int getBorderWidth() {
+		return getValue(Property.BORDER_WIDTH, defaultOptions.getBorderWidth());
 	}
 
 	// ------------------

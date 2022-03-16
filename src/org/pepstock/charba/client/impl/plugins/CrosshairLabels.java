@@ -121,4 +121,35 @@ public final class CrosshairLabels {
 		parent.getXLabel().setBorderRadius(borderRadius);
 		parent.getYLabel().setBorderRadius(borderRadius);
 	}
+
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(IsColor.checkAndGetValue(borderColor));
+	}
+
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 */
+	public void setBorderColor(String borderColor) {
+		// stores value on x and y labels
+		parent.getXLabel().setBorderColor(borderColor);
+		parent.getYLabel().setBorderColor(borderColor);
+	}
+
+	/**
+	 * Sets the border width.
+	 * 
+	 * @param borderWidth the border width.
+	 */
+	public void setBorderWidth(int borderWidth) {
+		// stores value on x and y labels
+		parent.getXLabel().setBorderWidth(borderWidth);
+		parent.getYLabel().setBorderWidth(borderWidth);
+	}
 }
