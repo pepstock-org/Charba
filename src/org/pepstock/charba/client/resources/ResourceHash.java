@@ -29,7 +29,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'AnnotationPluginResource' class.
 	 */
-	ANNOTATION_PLUGIN_RESOURCE(ResourceName.ANNOTATION_PLUGIN, 2347187),
+	ANNOTATION_PLUGIN_RESOURCE(ResourceName.ANNOTATION_PLUGIN, 2448424),
 	/**
 	 * Hash item for 'ChartJsResource' class.
 	 */
