@@ -18,7 +18,7 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 
 /**
- * This is the default options for items which provides background color property.
+ * This is the default options for items which provides border radius property.
  * 
  * @author Andrea "Stock" Stocchero
  *
