@@ -21,7 +21,7 @@ import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * Interface to map the background color options.
+ * Interface to map the border radius options.
  * 
  * @author Andrea "Stock" Stocchero
  *
