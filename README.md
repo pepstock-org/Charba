@@ -295,6 +295,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `column` option to the Sankey dataset configuration.
  * add `rotation` option to box and label annotation options in the annotation plugin.
  * add `rotation` option to label options of box annotation in the annotation plugin.
+ * add `textStrokeColor` and `textStrokeWidth` options to label annotation and to box and line labels options in the annotation plugin.
  
 ### Fixed Bugs
 

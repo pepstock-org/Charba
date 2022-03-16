@@ -23,7 +23,7 @@ import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallbac
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsLabelAnnotation extends IsDefaultsAbstractPointedAnnotation, IsDefaultsLabelHandler, IsDefaultsBorderRadiusHandler, IsDefaultsExtendedBorderOptionsHandler, IsDefaultsRotationHandler {
+interface IsDefaultsLabelAnnotation extends IsDefaultsAbstractPointedAnnotation, IsDefaultsLabelHandler, IsDefaultsBorderRadiusHandler, IsDefaultsExtendedBorderOptionsHandler, IsDefaultsRotationHandler, IsDefaultsTextStrokeOptionsHandler {
 
 	/**
 	 * Returns the callout node.

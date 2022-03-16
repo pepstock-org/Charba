@@ -25,7 +25,7 @@ import org.pepstock.charba.client.callbacks.DisplayCallback;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsInnerLabel extends IsDefaultsLabelHandler {
+interface IsDefaultsInnerLabel extends IsDefaultsLabelHandler, IsDefaultsTextStrokeOptionsHandler {
 
 	/**
 	 * Returns <code>true</code> whether the label should be displayed.

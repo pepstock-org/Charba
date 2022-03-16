@@ -35,7 +35,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, HasLabel {
+abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, HasLabel, HasTextStrokeOptions {
 
 	/**
 	 * Name of properties of native object.
@@ -96,6 +96,8 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	private final IsDefaultsInnerLabel defaultValues;
 	// label handler
 	private final LabelHandler labelHandler;
+	// text stroke handler
+	private final TextStrokeOptionsHandler textStrokeHandler;
 
 	/**
 	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
@@ -115,6 +117,8 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 		setNewIncrementalId();
 		// creates label handler
 		this.labelHandler = new LabelHandler(this.parent, this, this.defaultValues, getNativeObject());
+		// creates text stroke handler
+		this.textStrokeHandler = new TextStrokeOptionsHandler(this.parent, this.defaultValues, getNativeObject());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -134,6 +138,16 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	@Override
 	public final LabelHandler getLabelHandler() {
 		return labelHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasTextStrokeOptions#getTextStrokeOptionsHandler()
+	 */
+	@Override
+	public final TextStrokeOptionsHandler getTextStrokeOptionsHandler() {
+		return textStrokeHandler;
 	}
 
 	/**

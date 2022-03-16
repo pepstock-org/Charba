@@ -38,7 +38,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LabelAnnotation extends AbstractPointedAnnotation implements IsDefaultsLabelAnnotation, HasLabel, HasBorderRadius, HasExtendedBorderOptions, HasRotation {
+public final class LabelAnnotation extends AbstractPointedAnnotation implements IsDefaultsLabelAnnotation, HasLabel, HasBorderRadius, HasExtendedBorderOptions, HasRotation, HasTextStrokeOptions {
 
 	/**
 	 * Default label annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -89,6 +89,21 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	 * Default text align for labels, <b>{@link TextAlign#CENTER}</b>.
 	 */
 	public static final TextAlign DEFAULT_TEXT_ALIGN = TextAlign.CENTER;
+
+	/**
+	 * Default label annotation text stroke color, <b>{@link HtmlColor#TRANSPARENT}</b>.
+	 */
+	public static final IsColor DEFAULT_TEXT_STROKE_COLOR = HtmlColor.TRANSPARENT;
+
+	/**
+	 * Default label annotation text stroke color as string, <b>{@link HtmlColor#TRANSPARENT}</b>.
+	 */
+	public static final String DEFAULT_TEXT_STROKE_COLOR_AS_STRING = DEFAULT_TEXT_STROKE_COLOR.toRGBA();
+
+	/**
+	 * Default label annotation text stroke width, <b>{@value DEFAULT_TEXT_STROKE_WIDTH}</b>.
+	 */
+	public static final int DEFAULT_TEXT_STROKE_WIDTH = 0;
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -141,6 +156,8 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	private final ExtendedBorderOptionsHandler extendedBorderOptionsHandler;
 	// rotation handler
 	private final RotationHandler rotationHandler;
+	// text stroke handler
+	private final TextStrokeOptionsHandler textStrokeHandler;
 	// position instance
 	private final AlignPosition position;
 	// callout instance
@@ -220,6 +237,8 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
 		// creates rotation handler
 		this.rotationHandler = new RotationHandler(this, this.defaultValues, getNativeObject());
+		// creates text stroke handler
+		this.textStrokeHandler = new TextStrokeOptionsHandler(this, this.defaultValues, getNativeObject());
 		// loads position
 		this.position = new AlignPosition(this, Property.POSITION, getValue(Property.POSITION), this.defaultValues.getPosition());
 		// loads callout
@@ -248,6 +267,8 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
 		// creates rotation handler
 		this.rotationHandler = new RotationHandler(this, this.defaultValues, getNativeObject());
+		// creates text stroke handler
+		this.textStrokeHandler = new TextStrokeOptionsHandler(this, this.defaultValues, getNativeObject());
 		// loads position
 		this.position = new AlignPosition(this, Property.POSITION, getValue(Property.POSITION), this.defaultValues.getPosition());
 		// loads callout
@@ -315,6 +336,16 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	@Override
 	public RotationHandler getRotationHandler() {
 		return rotationHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasTextStrokeOptions#getTextStrokeOptionsHandler()
+	 */
+	@Override
+	public TextStrokeOptionsHandler getTextStrokeOptionsHandler() {
+		return textStrokeHandler;
 	}
 
 	/**
