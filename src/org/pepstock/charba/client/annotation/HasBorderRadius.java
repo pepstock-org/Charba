@@ -29,9 +29,9 @@ import org.pepstock.charba.client.items.Undefined;
 interface HasBorderRadius extends IsDefaultsBorderRadiusHandler {
 
 	/**
-	 * Returns a background color handler instance to use in the default methods of this interface.
+	 * Returns a border radius handler instance to use in the default methods of this interface.
 	 * 
-	 * @return a background color handler instance
+	 * @return a border radius handler instance
 	 */
 	BorderRadiusHandler getBorderRadiusHandler();
 

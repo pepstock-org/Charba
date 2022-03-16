@@ -66,6 +66,11 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public static final boolean DEFAULT_ADJUST_SCALE_RANGE = true;
 
+	/**
+	 * Default annotation rotation, <b>{@value DEFAULT_ROTATION}</b>.
+	 */
+	public static final double DEFAULT_ROTATION = 0D;
+
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// exception pattern when the annotation default is wrong type

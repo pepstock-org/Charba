@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.callbacks.RadiusCallback;
-import org.pepstock.charba.client.callbacks.RotationCallback;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin annotation DEFAULTS options interface for annotation which are configured by a point and radius in a chart.
@@ -24,7 +23,7 @@ import org.pepstock.charba.client.callbacks.RotationCallback;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsAbstractCircleBasedAnnotation extends IsDefaultsAbstractPointedAnnotation {
+interface IsDefaultsAbstractCircleBasedAnnotation extends IsDefaultsAbstractPointedAnnotation, IsDefaultsRotationHandler {
 
 	/**
 	 * Returns the radius of the annotation.
@@ -34,29 +33,11 @@ interface IsDefaultsAbstractCircleBasedAnnotation extends IsDefaultsAbstractPoin
 	double getRadius();
 
 	/**
-	 * Returns the rotation of annotation in degrees.
-	 * 
-	 * @return the rotation of annotation in degrees
-	 */
-	default double getRotation() {
-		return AbstractCircleBasedAnnotation.DEFAULT_ROTATION;
-	}
-
-	/**
 	 * Returns the callback called to set the radius.
 	 * 
 	 * @return the callback called to set the radius
 	 */
 	default RadiusCallback<AnnotationContext> getRadiusCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called to set the rotation of annotation in degrees.
-	 * 
-	 * @return the callback called to set the rotation of annotation in degrees
-	 */
-	default RotationCallback<AnnotationContext> getRotationCallback() {
 		return null;
 	}
 

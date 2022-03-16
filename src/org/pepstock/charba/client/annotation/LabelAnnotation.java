@@ -38,7 +38,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LabelAnnotation extends AbstractPointedAnnotation implements IsDefaultsLabelAnnotation, HasLabel, HasBorderRadius, HasExtendedBorderOptions {
+public final class LabelAnnotation extends AbstractPointedAnnotation implements IsDefaultsLabelAnnotation, HasLabel, HasBorderRadius, HasExtendedBorderOptions, HasRotation {
 
 	/**
 	 * Default label annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -139,6 +139,8 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	private final BorderRadiusHandler borderRadiusHandler;
 	// extended border options handler
 	private final ExtendedBorderOptionsHandler extendedBorderOptionsHandler;
+	// rotation handler
+	private final RotationHandler rotationHandler;
 	// position instance
 	private final AlignPosition position;
 	// callout instance
@@ -216,6 +218,8 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		this.borderRadiusHandler = new BorderRadiusHandler(this, this.defaultValues, getNativeObject());
 		// creates border options handler
 		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
+		// creates rotation handler
+		this.rotationHandler = new RotationHandler(this, this.defaultValues, getNativeObject());
 		// loads position
 		this.position = new AlignPosition(this, Property.POSITION, getValue(Property.POSITION), this.defaultValues.getPosition());
 		// loads callout
@@ -242,6 +246,8 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 		this.borderRadiusHandler = new BorderRadiusHandler(this, this.defaultValues, getNativeObject());
 		// creates border options handler
 		this.extendedBorderOptionsHandler = new ExtendedBorderOptionsHandler(this, this.defaultValues, getNativeObject());
+		// creates rotation handler
+		this.rotationHandler = new RotationHandler(this, this.defaultValues, getNativeObject());
 		// loads position
 		this.position = new AlignPosition(this, Property.POSITION, getValue(Property.POSITION), this.defaultValues.getPosition());
 		// loads callout
@@ -299,6 +305,16 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	@Override
 	public LabelHandler getLabelHandler() {
 		return labelHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasRotation#getRotationHandler()
+	 */
+	@Override
+	public RotationHandler getRotationHandler() {
+		return rotationHandler;
 	}
 
 	/**

@@ -292,7 +292,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `PlginContainer` interface in order to set plugin implementations without exposing the plugin public methods.
  * add `areaBackgroundColor` option to chart background color plugin (ChartBackgroundColor) in order to enable the coloring of the chart area as well.
  * add a shared map to annotation context in order to manage common instances cross annotations.
- * add `column` option to the Sankey dataset configuration. 
+ * add `column` option to the Sankey dataset configuration.
+ * add `rotation` option to box and label annotation options in the annotation plugin. 
 
 ### Fixed Bugs
 

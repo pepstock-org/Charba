@@ -15,19 +15,32 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.callbacks.RotationCallback;
+
 /**
- * This is the {@link AnnotationPlugin#ID} plugin BOX annotation DEFAULTS options.
+ * This is the default options for items which provides rotation property.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsBoxAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler, IsDefaultsExtendedBorderOptionsHandler, IsDefaultsExtendedShadowOptionsHandler, IsDefaultsRotationHandler {
+interface IsDefaultsRotationHandler {
 
 	/**
-	 * Returns the label on the line.
+	 * Returns the rotation in degrees.
 	 * 
-	 * @return the label on the line
+	 * @return the rotation in degrees
 	 */
-	IsDefaultsBoxLabel getLabel();
+	default double getRotation() {
+		return AbstractAnnotation.DEFAULT_ROTATION;
+	}
+
+	/**
+	 * Returns the callback called to set the rotation in degrees.
+	 * 
+	 * @return the callback called to set the rotation in degrees
+	 */
+	default RotationCallback<AnnotationContext> getRotationCallback() {
+		return null;
+	}
 
 }

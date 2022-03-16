@@ -17,10 +17,8 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
-import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -36,20 +34,14 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class AbstractCircleBasedAnnotation extends AbstractPointedAnnotation implements IsDefaultsAbstractCircleBasedAnnotation {
-
-	/**
-	 * Default annotation rotation, <b>{@value DEFAULT_ROTATION}</b>.
-	 */
-	public static final double DEFAULT_ROTATION = 0D;
+abstract class AbstractCircleBasedAnnotation extends AbstractPointedAnnotation implements IsDefaultsAbstractCircleBasedAnnotation, HasRotation {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		RADIUS("radius"),
-		ROTATION("rotation");
+		RADIUS("radius");
 
 		// name value of property
 		private final String value;
@@ -80,16 +72,14 @@ abstract class AbstractCircleBasedAnnotation extends AbstractPointedAnnotation i
 	// ---------------------------
 	// callback proxy to invoke the radius function
 	private final CallbackProxy<ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the rotation function
-	private final CallbackProxy<ProxyObjectCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle radius options
 	private static final CallbackPropertyHandler<RadiusCallback<AnnotationContext>> RADIUS_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.RADIUS);
-	// callback instance to handle rotation options
-	private static final CallbackPropertyHandler<RotationCallback<AnnotationContext>> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
 
 	// defaults options
 	private final IsDefaultsAbstractCircleBasedAnnotation defaultValues;
+	// rotation handler
+	private final RotationHandler rotationHandler;
 
 	/**
 	 * Creates the object with the type of annotation to handle.
@@ -104,6 +94,8 @@ abstract class AbstractCircleBasedAnnotation extends AbstractPointedAnnotation i
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsAbstractCircleBasedAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, type.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsAbstractCircleBasedAnnotation) getDefaultsValues();
+		// creates rotation handler
+		this.rotationHandler = new RotationHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initCircleBasedCallbacks();
 	}
@@ -120,6 +112,8 @@ abstract class AbstractCircleBasedAnnotation extends AbstractPointedAnnotation i
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsAbstractCircleBasedAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, getType()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsAbstractCircleBasedAnnotation) getDefaultsValues();
+		// creates rotation handler
+		this.rotationHandler = new RotationHandler(this, this.defaultValues, getNativeObject());
 		// sets callbacks proxies
 		initCircleBasedCallbacks();
 	}
@@ -133,8 +127,16 @@ abstract class AbstractCircleBasedAnnotation extends AbstractPointedAnnotation i
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
 		this.radiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getRadiusCallback(), defaultValues.getRadius(), ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
-		// sets function to proxy callback in order to invoke the java interface
-		this.rotationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getRotationCallback(), defaultValues.getRotation()).doubleValue());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasRotation#getRotationHandler()
+	 */
+	@Override
+	public final RotationHandler getRotationHandler() {
+		return rotationHandler;
 	}
 
 	/**
@@ -158,28 +160,6 @@ abstract class AbstractCircleBasedAnnotation extends AbstractPointedAnnotation i
 	@Override
 	public final double getRadius() {
 		return getValue(Property.RADIUS, defaultValues.getRadius());
-	}
-
-	/**
-	 * Sets the rotation of annotation in degrees.
-	 * 
-	 * @param rotation the rotation of annotation in degrees
-	 */
-	public final void setRotation(double rotation) {
-		// resets callback
-		setRotation((RotationCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.ROTATION, rotation);
-	}
-
-	/**
-	 * Returns the rotation of annotation in degrees.
-	 * 
-	 * @return the rotation of annotation in degrees
-	 */
-	@Override
-	public final double getRotation() {
-		return getValue(Property.ROTATION, defaultValues.getRotation());
 	}
 
 	// ---------------------
@@ -215,37 +195,6 @@ abstract class AbstractCircleBasedAnnotation extends AbstractPointedAnnotation i
 		setRadius((RadiusCallback<AnnotationContext>) null);
 		// stores values
 		setValue(Property.RADIUS, radiusCallback);
-	}
-
-	/**
-	 * Returns the callback called to set the rotation of label in degrees.
-	 * 
-	 * @return the callback called to set the rotation of label in degrees
-	 */
-	@Override
-	public final RotationCallback<AnnotationContext> getRotationCallback() {
-		return ROTATION_PROPERTY_HANDLER.getCallback(this, defaultValues.getRotationCallback());
-	}
-
-	/**
-	 * Sets the callback to set the rotation of label in degrees.
-	 * 
-	 * @param rotationCallback to set the rotation of label in degrees
-	 */
-	public final void setRotation(RotationCallback<AnnotationContext> rotationCallback) {
-		ROTATION_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, rotationCallback, rotationCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the rotation of label in degrees.
-	 * 
-	 * @param rotationCallback to set the rotation of label in degrees
-	 */
-	public final void setRotation(NativeCallback rotationCallback) {
-		// resets callback
-		setRotation((RotationCallback<AnnotationContext>) null);
-		// stores values
-		setValue(Property.ROTATION, rotationCallback);
 	}
 
 }

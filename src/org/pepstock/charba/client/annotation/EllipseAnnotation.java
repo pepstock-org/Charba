@@ -16,14 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.commons.CallbackPropertyHandler;
-import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -35,56 +28,12 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class EllipseAnnotation extends AbstractAnnotation implements IsDefaultsEllipseAnnotation, HasBackgroundColor, HasExtendedShadowOptions {
+public final class EllipseAnnotation extends AbstractAnnotation implements IsDefaultsEllipseAnnotation, HasBackgroundColor, HasExtendedShadowOptions, HasRotation {
 
 	/**
 	 * Default ellipse annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
 	 */
 	public static final int DEFAULT_BORDER_WIDTH = 1;
-
-	/**
-	 * Default ellipse annotation rotation, <b>{@value DEFAULT_ROTATION}</b>.
-	 */
-	public static final int DEFAULT_ROTATION = 0;
-
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-	// callback proxy to invoke the rotation function
-	private final CallbackProxy<ProxyObjectCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback instance to handle rotation options
-	private static final CallbackPropertyHandler<RotationCallback<AnnotationContext>> ROTATION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ROTATION);
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		ROTATION("rotation");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
 
 	// defaults options
 	private final IsDefaultsEllipseAnnotation defaultValues;
@@ -92,6 +41,8 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 	private final BackgroundColorHandler backgroundColorHandler;
 	// extended shadow options handler
 	private final ExtendedShadowOptionsHandler extendedShadowOptionsHandler;
+	// rotation handler
+	private final RotationHandler rotationHandler;
 
 	/**
 	 * Creates a ellipse annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -161,6 +112,9 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// creates shadow options handler
 		this.extendedShadowOptionsHandler = new ExtendedShadowOptionsHandler(this, this.defaultValues, getNativeObject());
+		// creates rotation handler
+		this.rotationHandler = new RotationHandler(this, this.defaultValues, getNativeObject());
+
 	}
 
 	/**
@@ -179,6 +133,8 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// creates shadow options handler
 		this.extendedShadowOptionsHandler = new ExtendedShadowOptionsHandler(this, this.defaultValues, getNativeObject());
+		// creates rotation handler
+		this.rotationHandler = new RotationHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/*
@@ -201,61 +157,14 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 		return extendedShadowOptionsHandler;
 	}
 
-	/**
-	 * Sets the rotation of label in degrees.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param rotation the rotation of label in degrees
-	 */
-	public void setRotation(double rotation) {
-		// resets callback
-		setRotation((RotationCallback<AnnotationContext>) null);
-		// stores value
-		setValue(Property.ROTATION, rotation);
-	}
-
-	/**
-	 * Returns the rotation of label in degrees.
-	 * 
-	 * @return the rotation of label in degrees
+	 * @see org.pepstock.charba.client.annotation.HasRotation#getRotationHandler()
 	 */
 	@Override
-	public double getRotation() {
-		return getValue(Property.ROTATION, defaultValues.getRotation());
-	}
-
-	// ---------------------
-	// CALLBACKS
-	// ---------------------
-
-	/**
-	 * Returns the callback called to set the rotation of label in degrees.
-	 * 
-	 * @return the callback called to set the rotation of label in degrees
-	 */
-	@Override
-	public RotationCallback<AnnotationContext> getRotationCallback() {
-		return ROTATION_PROPERTY_HANDLER.getCallback(this, defaultValues.getRotationCallback());
-	}
-
-	/**
-	 * Sets the callback to set the rotation of label in degrees.
-	 * 
-	 * @param rotationCallback to set the rotation of label in degrees
-	 */
-	public void setRotation(RotationCallback<AnnotationContext> rotationCallback) {
-		ROTATION_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, rotationCallback, rotationCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Sets the callback to set the rotation of label in degrees.
-	 * 
-	 * @param rotationCallback to set the rotation of label in degrees
-	 */
-	public void setRotation(NativeCallback rotationCallback) {
-		// resets callback
-		setRotation((RotationCallback<AnnotationContext>) null);
-		// stores values
-		setValueAndAddToParent(Property.ROTATION, rotationCallback);
+	public RotationHandler getRotationHandler() {
+		return rotationHandler;
 	}
 
 }
