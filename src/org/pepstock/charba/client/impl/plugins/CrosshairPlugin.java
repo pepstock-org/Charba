@@ -308,7 +308,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 		IsImmutableFont immutableValueFont = Helpers.get().toFont(font);
 		// calculates positions and sizes for the label drawing
 		final int padding = label.getPadding();
-		final double borderWidth = (double) label.getBorderWidth();
+		final double borderWidth = label.getBorderWidth();
 		final double minimum = padding + borderWidth;
 		final double halfBorderWidth = borderWidth / 2;
 		final int margin = axis.getGrid().getTickLength() + axis.getTicks().getPadding();
