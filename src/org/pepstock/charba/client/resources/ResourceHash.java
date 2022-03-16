@@ -65,7 +65,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'SankeyControllerResource' class.
 	 */
-	SANKEY_CONTROLLER_RESOURCE(ResourceName.SANKEY_CONTROLLER, 868890),
+	SANKEY_CONTROLLER_RESOURCE(ResourceName.SANKEY_CONTROLLER, 883629),
 	/**
 	 * Hash item for 'ToastCssUtilResource' class.
 	 */

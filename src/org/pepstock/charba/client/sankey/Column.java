@@ -18,16 +18,16 @@ package org.pepstock.charba.client.sankey;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * Is a map to user to apply a different priority to sankey node, priority used to layout calculation.
+ * Is a map to user to apply a different start or end position to sankey node.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Priority extends AbstractNumericMap {
+public final class Column extends AbstractNumericMap {
 
 	/**
 	 * Creates the object with an empty native object instance.
 	 */
-	public Priority() {
+	public Column() {
 		this(null);
 	}
 
@@ -36,8 +36,7 @@ public final class Priority extends AbstractNumericMap {
 	 * 
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	Priority(NativeObject nativeObject) {
+	Column(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-
 }

@@ -112,6 +112,7 @@ public final class SankeyDataset extends Dataset {
 		COLOR_MODE("colorMode"),
 		COLOR_TO("colorTo"),
 		// inner objects
+		COLUMN("column"),
 		LABELS("labels"),
 		PRIORITY("priority"),
 		// sankey elements style
@@ -288,6 +289,31 @@ public final class SankeyDataset extends Dataset {
 	 */
 	public Priority getPriority() {
 		return new Priority(getValue(Property.PRIORITY));
+	}
+
+	/**
+	 * Sets the map for assigning the start or ending position to the sankey elements.
+	 * 
+	 * @param column the map for assigning the start or ending position to the sankey elements
+	 */
+	public void setColumn(Column column) {
+		// checks if argument is consistent
+		if (column != null && column.isConsistent()) {
+			setValue(Property.COLUMN, column);
+		} else {
+			// if here the argument is not consistent
+			// then removes the property
+			remove(Property.COLUMN);
+		}
+	}
+
+	/**
+	 * Returns the map for assigning the start or ending position to the sankey elements.
+	 * 
+	 * @return the map for assigning the start or ending position to the sankey elements
+	 */
+	public Column getColumn() {
+		return new Column(getValue(Property.COLUMN));
 	}
 
 	/**
