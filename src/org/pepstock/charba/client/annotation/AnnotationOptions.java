@@ -30,7 +30,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnnotationOptions extends AbstractPluginOptions implements IsDefaultsAnnotationOptions {
+public final class AnnotationOptions extends AbstractPluginOptions implements IsDefaultsAnnotationOptions, HasEventsHandler {
 
 	/**
 	 * Default double click speed in milliseconds, <b>{@value DEFAULT_DOUBLE_CLICK_SPEED}</b>.
@@ -78,6 +78,8 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 
 	// defaults global options instance
 	private final IsDefaultsAnnotationOptions defaultOptions;
+	// event callbacks options handler
+	private final EventsHandler eventsHandler;
 	// annotations object, stored by key
 	private final AnnotationMap annotationsMap;
 
@@ -135,6 +137,10 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 			// stores in the java script object as well
 			setValue(Property.ANNOTATIONS, annotationsMap);
 		}
+		// stores incremental ID
+		setNewIncrementalId();
+		// loads events handler
+		this.eventsHandler = new EventsHandler(this, this.defaultOptions, getNativeObject());
 	}
 
 	/*
@@ -145,6 +151,16 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	@Override
 	protected void applyingDefaults() {
 		AnnotationPlugin.get().mergeDefaults(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasEventsHandler#getEventsHandler()
+	 */
+	@Override
+	public final EventsHandler getEventsHandler() {
+		return eventsHandler;
 	}
 
 	/**

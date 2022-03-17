@@ -18,21 +18,15 @@ package org.pepstock.charba.client.annotation;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
-import org.pepstock.charba.client.annotation.listeners.ClickCallback;
-import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
-import org.pepstock.charba.client.annotation.listeners.EnterCallback;
-import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerEvent;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -42,7 +36,6 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.utils.Window;
@@ -54,7 +47,7 @@ import org.pepstock.charba.client.utils.Window;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractAnnotation extends AbstractNode implements IsDefaultsAnnotation, HasBorderOptions, HasShadowOptions {
+public abstract class AbstractAnnotation extends AbstractNode implements IsDefaultsAnnotation, HasBorderOptions, HasShadowOptions, HasEventsHandler {
 
 	/**
 	 * Default annotation display, <b>{@value DEFAULT_DISPLAY}</b>.
@@ -87,11 +80,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// options
 		ADJUST_SCALE_RANGE("adjustScaleRange"),
 		DISPLAY("display"),
-		// events properties
-		ENTER("enter"),
-		LEAVE("leave"),
-		CLICK("click"),
-		DOUBLE_CLICK("dblclick"),
 		// scales definitions
 		X_SCALE_ID("xScaleID"),
 		X_MIN("xMin"),
@@ -160,33 +148,14 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	// callback instance to handle yMax options
 	private static final CallbackPropertyHandler<ValueCallback> Y_MAX_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_MAX);
 
-	// ---------------------------
-	// -- CALLBACKS PROXIES EVENTS
-	// ---------------------------
-	// callback proxy to invoke the ENTER function
-	private final CallbackProxy<ProxyHandlerEvent> enterCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the LEAVE function
-	private final CallbackProxy<ProxyHandlerEvent> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the CLICK function
-	private final CallbackProxy<ProxyHandlerEvent> clickCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the DBLCLICK function
-	private final CallbackProxy<ProxyHandlerEvent> dblclickCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	// callback instance to handle click event
-	private static final CallbackPropertyHandler<ClickCallback> CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CLICK);
-	// callback instance to handle enter event
-	private static final CallbackPropertyHandler<EnterCallback> ENTER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENTER);
-	// callback instance to handle leave event
-	private static final CallbackPropertyHandler<LeaveCallback> LEAVE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.LEAVE);
-	// callback instance to handle dblclick event
-	private static final CallbackPropertyHandler<DoubleClickCallback> DOUBLE_CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DOUBLE_CLICK);
-
 	// default values instance
 	private final IsDefaultsAnnotation defaultValues;
 	// border options handler
 	private final BorderOptionsHandler borderOptionsHandler;
 	// shadow options handler
 	private final ShadowOptionsHandler shadowOptionsHandler;
+	// event callbacks options handler
+	private final EventsHandler eventsHandler;
 	// draw time instance set at plugin startup
 	private DrawTime parentDrawTime = null;
 
@@ -230,17 +199,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		this.yMinCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getYMinCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.yMaxCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getYMaxCallback()));
-		// ------------------------------------------
-		// -- SET CALLBACKS to PROXIES for EVENTs ---
-		// ------------------------------------------
-		// sets proxy handler to callback proxy to invoke the ENTER function
-		this.enterCallbackProxy.setCallback(this::onEnter);
-		// sets proxy handler to callback proxy to invoke the LEAVE function
-		this.leaveCallbackProxy.setCallback(this::onLeave);
-		// sets proxy handler to callback proxy to invoke the CLICK function
-		this.clickCallbackProxy.setCallback(this::onClick);
-		// sets proxy handler to callback proxy to invoke the DBLCLICK function
-		this.dblclickCallbackProxy.setCallback(this::onDblclick);
 	}
 
 	/**
@@ -258,6 +216,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		this.borderOptionsHandler = new BorderOptionsHandler(this, this.defaultValues, getNativeObject());
 		// loads shadow handler
 		this.shadowOptionsHandler = new ShadowOptionsHandler(this, this.defaultValues, getNativeObject());
+		// loads events handler
+		this.eventsHandler = new EventsHandler(this, this.defaultValues, getNativeObject());
 	}
 
 	/*
@@ -276,8 +236,18 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * @see org.pepstock.charba.client.annotation.HasShadowOptions#getShadowOptionsHandler()
 	 */
 	@Override
-	public ShadowOptionsHandler getShadowOptionsHandler() {
+	public final ShadowOptionsHandler getShadowOptionsHandler() {
 		return shadowOptionsHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.HasEventsHandler#getEventsHandler()
+	 */
+	@Override
+	public final EventsHandler getEventsHandler() {
+		return eventsHandler;
 	}
 
 	/**
@@ -812,86 +782,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		setValueAndAddToParent(Property.ADJUST_SCALE_RANGE, adjustScaleRangeCallback);
 	}
 
-	// ---------------------
-	// EVENTS
-	// ---------------------
-
-	/**
-	 * Returns the callback called when a "enter" event is occurring.
-	 * 
-	 * @return the callback called when a "enter" event is occurring
-	 */
-	@Override
-	public final EnterCallback getEnterCallback() {
-		return ENTER_PROPERTY_HANDLER.getCallback(this, defaultValues.getEnterCallback());
-	}
-
-	/**
-	 * Sets the callback called when a "enter" event is occurring.
-	 * 
-	 * @param enterCallback the callback called when a "enter" event is occurring
-	 */
-	public final void setEnterCallback(EnterCallback enterCallback) {
-		ENTER_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, enterCallback, enterCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Returns the callback called when a "leave" event is occurring.
-	 * 
-	 * @return the callback called when a "leave" event is occurring
-	 */
-	@Override
-	public final LeaveCallback getLeaveCallback() {
-		return LEAVE_PROPERTY_HANDLER.getCallback(this, defaultValues.getLeaveCallback());
-	}
-
-	/**
-	 * Sets the callback called when a "leave" event is occurring.
-	 * 
-	 * @param leaveCallback the callback called when a "leave" event is occurring
-	 */
-	public final void setLeaveCallback(LeaveCallback leaveCallback) {
-		LEAVE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, leaveCallback, leaveCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Returns the callback called when a "click" event is occurring.
-	 * 
-	 * @return the callback called when a "click" event is occurring
-	 */
-	@Override
-	public final ClickCallback getClickCallback() {
-		return CLICK_PROPERTY_HANDLER.getCallback(this, defaultValues.getClickCallback());
-	}
-
-	/**
-	 * Sets the callback called when a "click" event is occurring.
-	 * 
-	 * @param clickCallback the callback called when a "click" event is occurring
-	 */
-	public final void setClickCallback(ClickCallback clickCallback) {
-		CLICK_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, clickCallback, clickCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Returns the callback called when a "dblclick" event is occurring.
-	 * 
-	 * @return the callback called when a "dblclick" event is occurring
-	 */
-	@Override
-	public final DoubleClickCallback getDoubleClickCallback() {
-		return DOUBLE_CLICK_PROPERTY_HANDLER.getCallback(this, defaultValues.getDoubleClickCallback());
-	}
-
-	/**
-	 * Sets the callback called when a "dblclick" event is occurring.
-	 * 
-	 * @param dblclickCallback the callback called when a "dblclick" event is occurring
-	 */
-	public final void setDoubleClickCallback(DoubleClickCallback dblclickCallback) {
-		DOUBLE_CLICK_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, dblclickCallback, dblclickCallbackProxy.getProxy());
-	}
-
 	/**
 	 * Returns the callback called to set the left edge of the annotation, in units along the x axis.
 	 * 
@@ -1016,93 +906,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		setValueAndAddToParent(Property.Y_MAX, valueCallback);
 	}
 
-	/**
-	 * Manages the ENTER event invoking the callback is exists.
-	 * 
-	 * @param context context instance
-	 * @param event event instance
-	 */
-	private void onEnter(NativeObject context, NativeObject event) {
-		// gets callback
-		EnterCallback enterCallback = getEnterCallback();
-		// creates a context wrapper
-		AnnotationContext internalContext = new AnnotationContext(this, context);
-		// gets chart instance from function context
-		IsChart chart = internalContext.getChart();
-		// checks if chart, event and callback are consistent
-		if (IsChart.isValid(chart) && enterCallback != null) {
-			// creates a chart event context
-			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
-			// invokes callback
-			enterCallback.onEnter(internalContext, eventContext);
-		}
-	}
-
-	/**
-	 * Manages the LEAVE event firing an annotation event.
-	 * 
-	 * @param context context instance
-	 * @param event event instance
-	 */
-	private void onLeave(NativeObject context, NativeObject event) {
-		// gets callback
-		LeaveCallback leaveCallback = getLeaveCallback();
-		// creates a context wrapper
-		AnnotationContext internalContext = new AnnotationContext(this, context);
-		// gets chart instance from function context
-		IsChart chart = internalContext.getChart();
-		// checks if chart is consistent
-		if (IsChart.isValid(chart) && leaveCallback != null) {
-			// creates a chart event context
-			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
-			// invokes callback
-			leaveCallback.onLeave(internalContext, eventContext);
-		}
-	}
-
-	/**
-	 * Manages the CLICK event firing an annotation event.
-	 * 
-	 * @param context context instance
-	 * @param event event instance
-	 */
-	private void onClick(NativeObject context, NativeObject event) {
-		// gets callback
-		ClickCallback clickCallback = getClickCallback();
-		// creates a context wrapper
-		AnnotationContext internalContext = new AnnotationContext(this, context);
-		// gets chart instance from function context
-		IsChart chart = internalContext.getChart();
-		// checks if chart is consistent
-		if (IsChart.isValid(chart) && clickCallback != null) {
-			// creates a chart event context
-			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
-			// invokes callback
-			clickCallback.onClick(internalContext, eventContext);
-		}
-	}
-
-	/**
-	 * Manages the DBLCLICK event firing an annotation event.
-	 * 
-	 * @param context context instance
-	 * @param event event instance
-	 */
-	private void onDblclick(NativeObject context, NativeObject event) {
-		// gets callback
-		DoubleClickCallback dblclickCallback = getDoubleClickCallback();
-		// creates a context wrapper
-		AnnotationContext internalContext = new AnnotationContext(this, context);
-		// gets chart instance from function context
-		IsChart chart = internalContext.getChart();
-		// checks if chart is consistent
-		if (IsChart.isValid(chart) && dblclickCallback != null) {
-			// creates a chart event context
-			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
-			// invokes callback
-			dblclickCallback.onDoubleClick(internalContext, eventContext);
-		}
-	}
+	// --------------------------
+	// INTERNALS
+	// --------------------------
 
 	/**
 	 * Returns an object as double, string or date (as time) when the callback has been activated.

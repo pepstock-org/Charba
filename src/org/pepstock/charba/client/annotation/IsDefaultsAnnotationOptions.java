@@ -27,7 +27,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsAnnotationOptions {
+interface IsDefaultsAnnotationOptions extends IsDefaultsEventsHandler {
 
 	/**
 	 * Returns if clips relative to the chart area.

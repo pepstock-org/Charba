@@ -21,10 +21,6 @@ import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
-import org.pepstock.charba.client.annotation.listeners.ClickCallback;
-import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
-import org.pepstock.charba.client.annotation.listeners.EnterCallback;
-import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.Undefined;
@@ -36,7 +32,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefaultsShadowOptionsHandler {
+interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefaultsShadowOptionsHandler, IsDefaultsEventsHandler {
 
 	/**
 	 * Returns the type of annotation.
@@ -70,42 +66,6 @@ interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefault
 	 */
 	default DrawTime getDrawTime() {
 		return AnnotationOptions.DEFAULT_DRAW_TIME;
-	}
-
-	/**
-	 * Returns the callback called when a "enter" event is occurring.
-	 * 
-	 * @return the callback called when a "enter" event is occurring
-	 */
-	default EnterCallback getEnterCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called when a "leave" event is occurring.
-	 * 
-	 * @return the callback called when a "leave" event is occurring
-	 */
-	default LeaveCallback getLeaveCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called when a "click" event is occurring.
-	 * 
-	 * @return the callback called when a "click" event is occurring
-	 */
-	default ClickCallback getClickCallback() {
-		return null;
-	}
-
-	/**
-	 * Returns the callback called when a "dblclick" event is occurring.
-	 * 
-	 * @return the callback called when a "dblclick" event is occurring
-	 */
-	default DoubleClickCallback getDoubleClickCallback() {
-		return null;
 	}
 
 	/**

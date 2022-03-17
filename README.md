@@ -296,6 +296,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `rotation` option to box and label annotation options in the annotation plugin.
  * add `rotation` option to label options of box annotation in the annotation plugin.
  * add `textStrokeColor` and `textStrokeWidth` options to label annotation and to box and line labels options in the annotation plugin.
+ * add events callbacks options to `AnnotationOptions` class in order to enable to events management for all defined annotations.
  
 ### Fixed Bugs
 
