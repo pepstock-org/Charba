@@ -201,9 +201,10 @@ class AnnotationMap extends NativeObjectContainer {
 			return new PointAnnotation(nativeObject, defaultOptions);
 		} else if (AnnotationType.POLYGON.equals(type) && defaultOptions instanceof PolygonAnnotation) {
 			return new PolygonAnnotation(nativeObject, defaultOptions);
+		} else {
+			// if here, the type is not consistent
+			// then returns a line annotation being the default in the plugin
+			return new LineAnnotation(nativeObject, defaultOptions);
 		}
-		// if here, the type is not consistent
-		// then returns null
-		return null;
 	}
 }
