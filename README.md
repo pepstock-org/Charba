@@ -281,7 +281,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Breaking changes
 
- * hide public methods of Charba out-of-the-box plugins (ChartBackgroundColor, ChartPointer, ColorSchemes, HtmlLegend and DatasetsItemsSelector).
+ * hide public CHART.JS hooks of Charba out-of-the-box plugins (ChartBackgroundColor, ChartPointer, ColorSchemes, HtmlLegend and DatasetsItemsSelector).
 
 ### Features
 
