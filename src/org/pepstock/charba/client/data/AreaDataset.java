@@ -19,19 +19,18 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The stacked line chart allows a number of properties to be specified for each dataset.<br>
- * These are used to set display properties for a specific dataset.<br>
- * Extends the line dataset.
+ * The area chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * Being an area dataset, it sets the <code>fill</code> option initial value to <code>true</code>.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class StackedLineDataset extends LineDataset {
+public class AreaDataset extends LineDataset {
 
 	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
 	 */
-	public StackedLineDataset() {
+	public AreaDataset() {
 		this(Dataset.DEFAULT_HIDDEN);
 	}
 
@@ -41,7 +40,7 @@ public class StackedLineDataset extends LineDataset {
 	 * 
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	public StackedLineDataset(boolean hidden) {
+	public AreaDataset(boolean hidden) {
 		this((IsDefaultOptions) null, hidden);
 	}
 
@@ -50,7 +49,7 @@ public class StackedLineDataset extends LineDataset {
 	 * 
 	 * @param defaultValues default options
 	 */
-	public StackedLineDataset(IsDefaultOptions defaultValues) {
+	public AreaDataset(IsDefaultOptions defaultValues) {
 		this(defaultValues, Dataset.DEFAULT_HIDDEN);
 	}
 
@@ -60,10 +59,10 @@ public class StackedLineDataset extends LineDataset {
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	public StackedLineDataset(IsDefaultOptions defaultValues, boolean hidden) {
+	public AreaDataset(IsDefaultOptions defaultValues, boolean hidden) {
 		super(defaultValues, hidden);
-		// sets the stack
-		setValue(BarStackHandler.Property.STACK, getType());
+		// sets initial value of fill
+		super.setFill(true);
 	}
 
 	/**
@@ -72,7 +71,7 @@ public class StackedLineDataset extends LineDataset {
 	 * @param type chart type related to the dataset
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected StackedLineDataset(Type type, boolean hidden) {
+	protected AreaDataset(Type type, boolean hidden) {
 		this(type, null, hidden);
 	}
 
@@ -83,9 +82,10 @@ public class StackedLineDataset extends LineDataset {
 	 * @param defaultValues default options
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
-	protected StackedLineDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
+	protected AreaDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
 		super(type, defaultValues, hidden);
-		// sets the stack
-		setValue(BarStackHandler.Property.STACK, getType());
+		// sets initial value of fill
+		super.setFill(true);
 	}
+
 }

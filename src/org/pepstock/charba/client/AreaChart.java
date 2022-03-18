@@ -15,29 +15,29 @@
 */
 package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.configuration.StackedOptions;
+import org.pepstock.charba.client.configuration.AreaOptions;
+import org.pepstock.charba.client.data.AreaDataset;
 import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.BubbleDataset;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.data.ScatterDataset;
-import org.pepstock.charba.client.data.StackedAreaDataset;
 
 /**
- * STACKED AREA chart implementation.<br>
- * A stacked area chart is a way of plotting data points on a line.<br>
+ * AREA chart implementation.<br>
+ * A area chart is a way of plotting data points on a line.<br>
  * Often, it is used to show trend data, or the comparison of two data sets.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class StackedAreaChart extends AbstractChart implements IsDatasetCreator<StackedAreaDataset>, HasCartesianAxes {
+public class AreaChart extends AbstractChart implements IsDatasetCreator<AreaDataset>, HasCartesianAxes {
 
-	private final StackedOptions options;
+	private final AreaOptions options;
 
 	/**
 	 * Builds the object.
 	 */
-	public StackedAreaChart() {
+	public AreaChart() {
 		this(ChartType.LINE);
 	}
 
@@ -47,10 +47,10 @@ public class StackedAreaChart extends AbstractChart implements IsDatasetCreator<
 	 * 
 	 * @param extendedType type of chart
 	 */
-	protected StackedAreaChart(Type extendedType) {
+	protected AreaChart(Type extendedType) {
 		super(extendedType);
 		// creates the options
-		options = new StackedOptions(this, getDefaultChartOptions(), true);
+		options = new AreaOptions(this, getDefaultChartOptions());
 		// set filler to true
 		options.getElements().getLine().setFill(true);
 	}
@@ -61,7 +61,7 @@ public class StackedAreaChart extends AbstractChart implements IsDatasetCreator<
 	 * @see org.pepstock.charba.client.IsChart#getOptions()
 	 */
 	@Override
-	public StackedOptions getOptions() {
+	public AreaOptions getOptions() {
 		return options;
 	}
 
@@ -71,8 +71,8 @@ public class StackedAreaChart extends AbstractChart implements IsDatasetCreator<
 	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public StackedAreaDataset newDataset(boolean hidden) {
-		return new StackedAreaDataset(getDefaultChartOptions(), hidden);
+	public AreaDataset newDataset(boolean hidden) {
+		return new AreaDataset(getDefaultChartOptions(), hidden);
 	}
 
 	/*

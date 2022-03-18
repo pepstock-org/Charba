@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class StackedAreaDataset extends StackedLineDataset {
+public class StackedAreaDataset extends AreaDataset {
 
 	/**
 	 * Creates a dataset.<br>
@@ -61,7 +61,9 @@ public class StackedAreaDataset extends StackedLineDataset {
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
 	public StackedAreaDataset(IsDefaultOptions defaultValues, boolean hidden) {
-		super(defaultValues, hidden, true);
+		super(defaultValues, hidden);
+		// sets the stack
+		setValue(BarStackHandler.Property.STACK, getType());
 	}
 
 	/**
@@ -82,7 +84,9 @@ public class StackedAreaDataset extends StackedLineDataset {
 	 * @param hidden if <code>true</code>, it will be initially hidden.
 	 */
 	protected StackedAreaDataset(Type type, IsDefaultOptions defaultValues, boolean hidden) {
-		super(type, defaultValues, hidden, true);
+		super(type, defaultValues, hidden);
+		// sets the stack
+		setValue(BarStackHandler.Property.STACK, getType());
 	}
 
 }

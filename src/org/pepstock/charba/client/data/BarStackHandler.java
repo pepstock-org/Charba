@@ -31,7 +31,7 @@ final class BarStackHandler extends NativeObjectContainer {
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		STACK("stack");
 
