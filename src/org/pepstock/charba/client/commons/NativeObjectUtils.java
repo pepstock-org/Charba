@@ -332,13 +332,7 @@ final class NativeObjectUtils {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	static Img getImageProperty(NativeObject object, String key, Img defaultValue) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
-			// returns the descriptor
-			return Reflect.get(object, key);
-		}
-		// if here, property does not exist
-		return defaultValue;
+		return getJSTypeProperty(object, key, defaultValue);
 	}
 
 	/**
@@ -350,13 +344,7 @@ final class NativeObjectUtils {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	static Canvas getCanvasProperty(NativeObject object, String key, Canvas defaultValue) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
-			// returns the descriptor
-			return Reflect.get(object, key);
-		}
-		// if here, property does not exist
-		return defaultValue;
+		return getJSTypeProperty(object, key, defaultValue);
 	}
 
 	/**
@@ -368,13 +356,7 @@ final class NativeObjectUtils {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	static CanvasPatternItem getPatternProperty(NativeObject object, String key, CanvasPatternItem defaultValue) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
-			// returns the descriptor
-			return Reflect.get(object, key);
-		}
-		// if here, property does not exist
-		return defaultValue;
+		return getJSTypeProperty(object, key, defaultValue);
 	}
 
 	/**
@@ -386,13 +368,7 @@ final class NativeObjectUtils {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	static CanvasGradientItem getGradientProperty(NativeObject object, String key, CanvasGradientItem defaultValue) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
-			// returns the descriptor
-			return Reflect.get(object, key);
-		}
-		// if here, property does not exist
-		return defaultValue;
+		return getJSTypeProperty(object, key, defaultValue);
 	}
 
 	/**
@@ -403,12 +379,7 @@ final class NativeObjectUtils {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	static NativeObject getObjectProperty(NativeObject object, String key) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
-			// returns the descriptor
-			return Reflect.get(object, key);
-		}
-		return null;
+		return getJSTypeProperty(object, key, null);
 	}
 
 	/**
@@ -419,12 +390,7 @@ final class NativeObjectUtils {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	static Chart getChartProperty(NativeObject object, String key) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
-			// returns the descriptor
-			return Reflect.get(object, key);
-		}
-		return null;
+		return getJSTypeProperty(object, key, null);
 	}
 
 	/**
@@ -435,12 +401,7 @@ final class NativeObjectUtils {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	static BaseHtmlElement getElementProperty(NativeObject object, String key) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
-			// returns the descriptor
-			return Reflect.get(object, key);
-		}
-		return null;
+		return getJSTypeProperty(object, key, null);
 	}
 
 	/**
@@ -451,12 +412,7 @@ final class NativeObjectUtils {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	static BaseNativeEvent getEventProperty(NativeObject object, String key) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
-			// returns the descriptor
-			return Reflect.get(object, key);
-		}
-		return null;
+		return getJSTypeProperty(object, key, null);
 	}
 
 	/**
@@ -477,4 +433,19 @@ final class NativeObjectUtils {
 		return null;
 	}
 
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's prototype chain) of a given object.
+	 * 
+	 * @param object native object to be managed
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	private static <T extends IsJSType> T getJSTypeProperty(NativeObject object, String key, T defaultvalue) {
+		// checks if the property is present
+		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
+			// returns the descriptor
+			return Reflect.get(object, key);
+		}
+		return defaultvalue;
+	}
 }
