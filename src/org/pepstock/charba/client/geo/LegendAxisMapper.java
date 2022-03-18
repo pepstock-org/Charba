@@ -89,6 +89,8 @@ abstract class LegendAxisMapper extends AbstractNode {
 			// if not, add it
 			setValue(Property.LEGEND, this.legend);
 		}
+		// stores incremental ID
+		setNewIncrementalId();
 	}
 
 	/**
