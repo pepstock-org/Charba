@@ -288,6 +288,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add **new Crosshair Charba plugin** in order to enable the crosshair on the charts with cartesian axes.
  * import CHART.JS SANKEY controller version [v0.9.0](https://github.com/kurkle/chartjs-chart-sankey/releases/tag/v0.9.0).
  * import CHART.JS ANNOTATION plugin version [v1.4.0](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.4.0).
+ * import LUXON library version [v2.3.1](https://github.com/moment/luxon/releases/tag/2.3.1).
  * add `StackedLineChart` class in order to manage the stacked chart for line (no filled).
  * add `PlginContainer` interface in order to set plugin implementations without exposing the plugin public methods.
  * add `areaBackgroundColor` option to chart background color plugin (ChartBackgroundColor) in order to enable the coloring of the chart area as well.
