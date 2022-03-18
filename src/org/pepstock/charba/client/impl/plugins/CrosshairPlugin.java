@@ -19,11 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.pepstock.charba.client.ChartNode;
-import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.HasCartesianAxes;
 import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.CrosshairFormatterCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
@@ -389,7 +388,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	 */
 	private boolean mustBeActivated(IsChart chart, boolean options) {
 		// checks consistent and the chart are multiple scales
-		boolean mustBeActivated = IsChart.isConsistent(chart) && checkChartBaseTypes(chart);
+		boolean mustBeActivated = IsChart.isConsistent(chart) && chart instanceof HasCartesianAxes;
 		// if the first check is true and options must be checked...
 		if (mustBeActivated && options) {
 			// sets if the options are loaded
@@ -434,27 +433,6 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	 */
 	private boolean mustBorderBeDrawn(int width, IsColor color) {
 		return width > 0 && IsColor.isVisible(color);
-	}
-
-	/**
-	 * Returns <code>true</code> if the chart is manageable by this plugin.
-	 * 
-	 * @param chart chart instance to check
-	 * @return <code>true</code> if the chart is manageable by this plugin
-	 */
-	private boolean checkChartBaseTypes(IsChart chart) {
-		// gets base type
-		Type type = chart.getBaseType();
-		// scans all out of the box chart types
-		for (ChartType chartType : ChartType.values()) {
-			// checks if multi scale and equals
-			if (chartType.equals(type) && ScaleType.MULTI.equals(chartType.scaleType())) {
-				// found therefore can be managed
-				return true;
-			}
-		}
-		// if here, the chart is not manageable by this plugin
-		return false;
 	}
 
 	/**
