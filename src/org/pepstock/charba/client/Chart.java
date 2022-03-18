@@ -18,6 +18,7 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.commons.ArrayChart;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Id;
+import org.pepstock.charba.client.commons.IsJSType;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
@@ -36,7 +37,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.CHART, namespace = JsPackage.GLOBAL)
-public final class Chart {
+public final class Chart implements IsJSType {
 
 	/**
 	 * Returns the <code>defaults</code> property by native object.

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.dom;
 
+import org.pepstock.charba.client.commons.IsJSType;
 import org.pepstock.charba.client.commons.NativeName;
 
 import jsinterop.annotations.JsOverlay;
@@ -29,7 +30,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.DOM_HTML_ELEMENT, namespace = JsPackage.GLOBAL)
-public class BaseHtmlElement extends BaseElement {
+public class BaseHtmlElement extends BaseElement implements IsJSType {
 
 	/**
 	 * To avoid any instantiation

@@ -19,15 +19,11 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Base object for all native objects implemented in Charba.<br>
- * it wraps java script object with and without <code>prototype</code>.<br>
- * It's also mapping the java script <code>proxy</code>, used by CHART.JS.<br>
- * PAY ATTENTION that the java script object class name is "?" because otherwise J2CL is not able to cast to an object.<br>
- * Please be also aware that you can not use <code>instanceof</code> against this class.
+ * Empty interface to define native object as native in order to use {@link Reflect} to set and get objects in {@link NativeObject}.
  * 
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.GENERIC, namespace = JsPackage.GLOBAL)
-public interface NativeObject extends IsJSType {
+public interface IsJSType {
 
 }

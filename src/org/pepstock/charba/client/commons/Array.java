@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
-public abstract class Array {
+public abstract class Array implements IsJSType {
 
 	/**
 	 * This method determines whether the passed value is an Array.

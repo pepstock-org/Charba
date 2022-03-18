@@ -93,7 +93,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineBooleanProperty(NativeObject object, String key, boolean value) {
-		NativeJsObjectBoolean.set(object, key, value);
+		Reflect.setBoolean(object, key, value);
 	}
 
 	/**
@@ -104,7 +104,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineIntProperty(NativeObject object, String key, int value) {
-		NativeJsObjectInteger.set(object, key, value);
+		Reflect.setInt(object, key, value);
 	}
 
 	/**
@@ -115,7 +115,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineDoubleProperty(NativeObject object, String key, double value) {
-		NativeJsObjectDouble.set(object, key, value);
+		Reflect.setDouble(object, key, value);
 	}
 
 	/**
@@ -126,7 +126,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineStringProperty(NativeObject object, String key, String value) {
-		NativeJsObjectString.set(object, key, value);
+		Reflect.setString(object, key, value);
 	}
 
 	/**
@@ -137,7 +137,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineImageProperty(NativeObject object, String key, Img value) {
-		NativeJsObjectImage.set(object, key, value);
+		Reflect.set(object, key, value);
 	}
 
 	/**
@@ -148,7 +148,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineCanvasProperty(NativeObject object, String key, Canvas value) {
-		NativeJsObjectCanvas.set(object, key, value);
+		Reflect.set(object, key, value);
 	}
 
 	/**
@@ -159,7 +159,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void definePatternProperty(NativeObject object, String key, CanvasPatternItem value) {
-		NativeJsObjectPattern.set(object, key, value);
+		Reflect.set(object, key, value);
 	}
 
 	/**
@@ -170,7 +170,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineGradientProperty(NativeObject object, String key, CanvasGradientItem value) {
-		NativeJsObjectGradient.set(object, key, value);
+		Reflect.set(object, key, value);
 	}
 
 	/**
@@ -181,7 +181,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineCallbackProperty(NativeObject object, String key, CallbackProxy.Proxy value) {
-		NativeJsObjectCallbackProxy.set(object, key, value);
+		Reflect.setCallbackProxy(object, key, value);
 	}
 
 	/**
@@ -192,7 +192,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineCallbackProperty(NativeObject object, String key, NativeCallback value) {
-		NativeJsObjectCallback.set(object, key, value);
+		Reflect.set(object, key, value);
 	}
 
 	/**
@@ -203,7 +203,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineObjectProperty(NativeObject object, String key, NativeObject value) {
-		NativeJsObjectObject.set(object, key, value);
+		Reflect.set(object, key, value);
 	}
 
 	/**
@@ -214,7 +214,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineChartProperty(NativeObject object, String key, Chart value) {
-		NativeJsObjectChart.set(object, key, value);
+		Reflect.set(object, key, value);
 	}
 
 	/**
@@ -225,7 +225,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineElementProperty(NativeObject object, String key, BaseHtmlElement value) {
-		NativeJsObjectElement.set(object, key, value);
+		Reflect.set(object, key, value);
 	}
 
 	/**
@@ -236,7 +236,7 @@ final class NativeObjectUtils {
 	 * @param value the object associated with the property.
 	 */
 	static void defineEventProperty(NativeObject object, String key, BaseNativeEvent value) {
-		NativeJsObjectEvent.set(object, key, value);
+		Reflect.set(object, key, value);
 	}
 
 	/**
@@ -248,7 +248,7 @@ final class NativeObjectUtils {
 	 * @param <T> type of array to define
 	 */
 	static <T extends Array> void defineArrayProperty(NativeObject object, String key, T value) {
-		NativeJsObjectArray.set(object, key, value);
+		Reflect.set(object, key, value);
 	}
 
 	/**
@@ -263,7 +263,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.BOOLEAN.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the value
-			return NativeJsObjectBoolean.get(object, key);
+			return Reflect.getBoolean(object, key);
 		}
 		// if here, property does not exist
 		return defaultValue;
@@ -281,7 +281,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.NUMBER.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the value
-			return NativeJsObjectInteger.get(object, key);
+			return Reflect.getInt(object, key);
 		}
 		// if here, property does not exist
 		return defaultValue;
@@ -299,7 +299,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.NUMBER.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the value
-			return NativeJsObjectDouble.get(object, key);
+			return Reflect.getDouble(object, key);
 		}
 		// if here, property does not exist
 		return defaultValue;
@@ -317,7 +317,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.STRING.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
-			return NativeJsObjectString.get(object, key);
+			return Reflect.getString(object, key);
 		}
 		// if here, property does not exist
 		return defaultValue;
@@ -335,7 +335,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
-			return NativeJsObjectImage.get(object, key);
+			return Reflect.get(object, key);
 		}
 		// if here, property does not exist
 		return defaultValue;
@@ -353,7 +353,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
-			return NativeJsObjectCanvas.get(object, key);
+			return Reflect.get(object, key);
 		}
 		// if here, property does not exist
 		return defaultValue;
@@ -371,7 +371,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
-			return NativeJsObjectPattern.get(object, key);
+			return Reflect.get(object, key);
 		}
 		// if here, property does not exist
 		return defaultValue;
@@ -389,7 +389,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
-			return NativeJsObjectGradient.get(object, key);
+			return Reflect.get(object, key);
 		}
 		// if here, property does not exist
 		return defaultValue;
@@ -406,7 +406,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
-			return NativeJsObjectObject.get(object, key);
+			return Reflect.get(object, key);
 		}
 		return null;
 	}
@@ -422,7 +422,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
-			return NativeJsObjectChart.get(object, key);
+			return Reflect.get(object, key);
 		}
 		return null;
 	}
@@ -438,7 +438,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
-			return NativeJsObjectElement.get(object, key);
+			return Reflect.get(object, key);
 		}
 		return null;
 	}
@@ -454,7 +454,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
-			return NativeJsObjectEvent.get(object, key);
+			return Reflect.get(object, key);
 		}
 		return null;
 	}
@@ -471,7 +471,7 @@ final class NativeObjectUtils {
 		// checks if the property is present
 		if (ObjectType.ARRAY.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
-			return NativeJsObjectArray.get(object, key);
+			return Reflect.get(object, key);
 		}
 		// if here, property does not exist
 		return null;

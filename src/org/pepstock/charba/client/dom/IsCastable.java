@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.dom;
 
+import org.pepstock.charba.client.commons.IsJSType;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeName;
 
@@ -30,7 +31,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public interface IsCastable {
+public interface IsCastable extends IsJSType {
 
 	/**
 	 * Performs checked cast to lefthand-side type.

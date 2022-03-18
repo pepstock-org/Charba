@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.IsJSType;
 import org.pepstock.charba.client.commons.NativeName;
 
 import jsinterop.annotations.JsMethod;
@@ -31,7 +32,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.FUNCTION, namespace = JsPackage.GLOBAL)
-public final class NativeCallback {
+public final class NativeCallback implements IsJSType {
 
 	// fixed argument of the callback, is the "context"
 	@JsOverlay
