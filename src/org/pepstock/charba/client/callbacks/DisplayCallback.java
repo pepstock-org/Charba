@@ -15,13 +15,42 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.Display;
+
 /**
- * Callback interface to set <code>display</code> property at runtime.
+ * Callback interface to set <code>display</code> property where it can be set by {@link Display} or a boolean.
  * 
  * @author Andrea "Stock" Stocchero
- *
- * @param <C> type of context to pass to the callback.
  */
-public interface DisplayCallback<C extends ChartContext> extends Scriptable<Boolean, C> {
+public interface DisplayCallback<C extends ChartContext> extends Scriptable<Object, C> {
+
+	/**
+	 * Checks the result of this callback returning the right value to set in the options.
+	 * 
+	 * @param result result of callback invocation
+	 * @param defaultValue default value to use if the result is not consistent
+	 * @return the right value to set in the options
+	 */
+	static Object checkAndGet(Object result, Display defaultValue) {
+		// gets return value using teh default argument
+		Display toReturn = Key.checkAndGetIfValid(defaultValue);
+		// checks callback result
+		if (result instanceof Boolean) {
+			// cats and returns the boolean value
+			return ((Boolean) result).booleanValue();
+		} else if (result instanceof Display) {
+			// casts
+			toReturn = (Display) result;
+		}
+		// if here, returns the default
+		// because the callback is not consistent
+		// checks if is auto
+		if (Display.AUTO.equals(toReturn)) {
+			return Display.AUTO.value();
+		}
+		// returns the boolean
+		return Display.TRUE.equals(toReturn);
+	}
 
 }

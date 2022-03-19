@@ -17,7 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
@@ -84,7 +84,7 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	private final CallbackProxy<ProxyDoubleCallback> yAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
-	private static final CallbackPropertyHandler<DisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
+	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
 	// callback instance to handle xAdjust options
 	private static final CallbackPropertyHandler<AdjustSizeCallback> X_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_ADJUST);
 	// callback instance to handle yAdjustg options
@@ -157,7 +157,7 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	 */
 	public final void setDisplay(boolean display) {
 		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>) null);
+		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.ENABLED, display);
 	}
@@ -250,7 +250,7 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	 * @return the callback called to set whether the label should be displayed
 	 */
 	@Override
-	public final DisplayCallback<AnnotationContext> getDisplayCallback() {
+	public final SimpleDisplayCallback<AnnotationContext> getDisplayCallback() {
 		return DISPLAY_PROPERTY_HANDLER.getCallback(this, defaultValues.getDisplayCallback());
 	}
 
@@ -259,7 +259,7 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	 * 
 	 * @param displayCallback to set whether the label should be displayed
 	 */
-	public final void setDisplay(DisplayCallback<AnnotationContext> displayCallback) {
+	public final void setDisplay(SimpleDisplayCallback<AnnotationContext> displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
 	}
 
@@ -270,7 +270,7 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	 */
 	public final void setDisplay(NativeCallback displayCallback) {
 		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>) null);
+		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.ENABLED, displayCallback);
 	}

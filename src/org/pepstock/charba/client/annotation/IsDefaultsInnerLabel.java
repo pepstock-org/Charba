@@ -17,7 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin inner LABEL of annotation DEFAULTS options.
@@ -66,7 +66,7 @@ interface IsDefaultsInnerLabel extends IsDefaultsLabelHandler, IsDefaultsTextStr
 	 * 
 	 * @return the callback called to set whether the label should be displayed
 	 */
-	default DisplayCallback<AnnotationContext> getDisplayCallback() {
+	default SimpleDisplayCallback<AnnotationContext> getDisplayCallback() {
 		return null;
 	}
 

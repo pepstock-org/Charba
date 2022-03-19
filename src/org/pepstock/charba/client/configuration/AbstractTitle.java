@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.callbacks.ElementAlignCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.FullSizeCallback;
@@ -119,7 +119,7 @@ abstract class AbstractTitle extends ConfigurationOptionsContainer implements Is
 	// instance of font callback
 	private FontCallback<ChartContext> fontCallback = null;
 	// instance of display callback
-	private DisplayCallback<ChartContext> displayCallback = null;
+	private SimpleDisplayCallback<ChartContext> displayCallback = null;
 	// instance of color callback
 	private ColorCallback<ChartContext> colorCallback = null;
 	// instance of text callback
@@ -263,7 +263,7 @@ abstract class AbstractTitle extends ConfigurationOptionsContainer implements Is
 	 */
 	public void setDisplay(boolean display) {
 		// resets callback
-		setDisplay((DisplayCallback<ChartContext>) null);
+		setDisplay((SimpleDisplayCallback<ChartContext>) null);
 		// stores value
 		checkAndGet().setDisplay(display);
 	}
@@ -370,7 +370,7 @@ abstract class AbstractTitle extends ConfigurationOptionsContainer implements Is
 	 * 
 	 * @return the callback instance to use
 	 */
-	public DisplayCallback<ChartContext> getDisplayCallback() {
+	public SimpleDisplayCallback<ChartContext> getDisplayCallback() {
 		return displayCallback;
 	}
 
@@ -379,7 +379,7 @@ abstract class AbstractTitle extends ConfigurationOptionsContainer implements Is
 	 * 
 	 * @param displayCallback the callback instance to use
 	 */
-	public void setDisplay(DisplayCallback<ChartContext> displayCallback) {
+	public void setDisplay(SimpleDisplayCallback<ChartContext> displayCallback) {
 		// sets the callback
 		this.displayCallback = displayCallback;
 		// stores and manages callback
@@ -393,7 +393,7 @@ abstract class AbstractTitle extends ConfigurationOptionsContainer implements Is
 	 */
 	public void setDisplay(NativeCallback displayCallback) {
 		// resets the callback
-		setDisplay((DisplayCallback<ChartContext>) null);
+		setDisplay((SimpleDisplayCallback<ChartContext>) null);
 		// stores and manages callback
 		getChart().getOptions().setCallback(checkAndGetNode(), Property.DISPLAY, displayCallback);
 	}

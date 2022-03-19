@@ -17,7 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.FillCallback;
 import org.pepstock.charba.client.annotation.callbacks.LengthCallback;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 
 /**
@@ -73,7 +73,7 @@ interface IsDefaultsArrow extends IsDefaultsBorderOptionsHandler, IsDefaultsShad
 	 *
 	 * @return the callback called to set the display options
 	 */
-	default DisplayCallback<AnnotationContext> getDisplayCallback() {
+	default SimpleDisplayCallback<AnnotationContext> getDisplayCallback() {
 		return null;
 	}
 

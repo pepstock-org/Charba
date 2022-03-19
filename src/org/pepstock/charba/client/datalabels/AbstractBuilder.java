@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
@@ -30,7 +31,6 @@ import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClampCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClipCallback;
-import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
@@ -499,7 +499,7 @@ public abstract class AbstractBuilder<T extends LabelItem> extends AbstractBaseB
 	 * @param displayCallback the display callback to set
 	 * @return builder instance
 	 */
-	public final AbstractBuilder<T> setDisplay(DisplayCallback displayCallback) {
+	public final AbstractBuilder<T> setDisplay(DisplayCallback<DataLabelsContext> displayCallback) {
 		label.setDisplay(displayCallback);
 		return IsBuilder.checkAndGetIfValid(this);
 	}

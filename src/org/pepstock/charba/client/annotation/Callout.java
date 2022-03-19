@@ -20,7 +20,7 @@ import org.pepstock.charba.client.annotation.callbacks.MarginCallback;
 import org.pepstock.charba.client.annotation.callbacks.SideCallback;
 import org.pepstock.charba.client.annotation.callbacks.StartCallback;
 import org.pepstock.charba.client.annotation.enums.CalloutPosition;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
@@ -146,7 +146,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 	private final CallbackProxy<ProxyStringCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
-	private static final CallbackPropertyHandler<DisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
+	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
 	// callback instance to handle margin options
 	private static final CallbackPropertyHandler<MarginCallback> MARGIN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.MARGIN);
 	// callback instance to handle side options
@@ -227,7 +227,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 	 */
 	public void setDisplay(boolean display) {
 		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>) null);
+		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.ENABLED, display);
 	}
@@ -362,7 +362,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 	 * @return the callback called to set whether the label should be displayed
 	 */
 	@Override
-	public DisplayCallback<AnnotationContext> getDisplayCallback() {
+	public SimpleDisplayCallback<AnnotationContext> getDisplayCallback() {
 		return DISPLAY_PROPERTY_HANDLER.getCallback(this, defaultValues.getDisplayCallback());
 	}
 
@@ -371,7 +371,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 	 * 
 	 * @param displayCallback to set whether the label should be displayed
 	 */
-	public void setDisplay(DisplayCallback<AnnotationContext> displayCallback) {
+	public void setDisplay(SimpleDisplayCallback<AnnotationContext> displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
 	}
 
@@ -382,7 +382,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 	 */
 	public void setDisplay(NativeCallback displayCallback) {
 		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>) null);
+		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.ENABLED, displayCallback);
 	}

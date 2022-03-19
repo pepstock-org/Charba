@@ -13,19 +13,15 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.datalabels.callbacks;
-
-import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
-import org.pepstock.charba.client.datalabels.DataLabelsContext;
-import org.pepstock.charba.client.enums.Display;
+package org.pepstock.charba.client.callbacks;
 
 /**
- * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>display</code> property at runtime, using the plugin context.
+ * Callback interface to set <code>display</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *
+ * @param <C> type of context to pass to the callback.
  */
-public interface DisplayCallback extends Scriptable<Display, DataLabelsContext> {
+public interface SimpleDisplayCallback<C extends ChartContext> extends Scriptable<Boolean, C> {
 
 }

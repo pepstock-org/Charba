@@ -17,7 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.FillCallback;
 import org.pepstock.charba.client.annotation.callbacks.LengthCallback;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
@@ -90,7 +90,7 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	private final CallbackProxy<ProxyBooleanCallback> fillCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
-	private static final CallbackPropertyHandler<DisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
+	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
 	// callback instance to handle length options
 	private static final CallbackPropertyHandler<LengthCallback> LENGTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.LENGTH);
 	// callback instance to handle width options
@@ -196,7 +196,7 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	 */
 	public final void setDisplay(boolean display) {
 		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>) null);
+		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores value
 		setValue(Property.ENABLED, display);
 	}
@@ -287,7 +287,7 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	 * @return the callback called to set whether the arrow head should be displayed
 	 */
 	@Override
-	public final DisplayCallback<AnnotationContext> getDisplayCallback() {
+	public final SimpleDisplayCallback<AnnotationContext> getDisplayCallback() {
 		return DISPLAY_PROPERTY_HANDLER.getCallback(this, defaultValues.getDisplayCallback());
 	}
 
@@ -296,7 +296,7 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	 * 
 	 * @param displayCallback to set whether the arrow head should be displayed
 	 */
-	public final void setDisplay(DisplayCallback<AnnotationContext> displayCallback) {
+	public final void setDisplay(SimpleDisplayCallback<AnnotationContext> displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
 	}
 
@@ -307,7 +307,7 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	 */
 	public final void setDisplay(NativeCallback displayCallback) {
 		// resets callback
-		setDisplay((DisplayCallback<AnnotationContext>) null);
+		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores values
 		setValue(Property.ENABLED, displayCallback);
 	}

@@ -20,7 +20,7 @@ import org.pepstock.charba.client.annotation.callbacks.MarginCallback;
 import org.pepstock.charba.client.annotation.callbacks.SideCallback;
 import org.pepstock.charba.client.annotation.callbacks.StartCallback;
 import org.pepstock.charba.client.annotation.enums.CalloutPosition;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 
 /**
  * This is the {@link AnnotationPlugin#ID} plugin CALLOUT of LABEL annotation DEFAULTS options.
@@ -93,7 +93,7 @@ interface IsDefaultsCallout extends IsDefaultsBorderOptionsHandler, IsDefaultsEx
 	 * 
 	 * @return the callback called to set whether the callout should be displayed
 	 */
-	default DisplayCallback<AnnotationContext> getDisplayCallback() {
+	default SimpleDisplayCallback<AnnotationContext> getDisplayCallback() {
 		return null;
 	}
 

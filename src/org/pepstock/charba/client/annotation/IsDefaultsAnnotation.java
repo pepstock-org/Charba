@@ -21,7 +21,7 @@ import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
-import org.pepstock.charba.client.callbacks.DisplayCallback;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
@@ -82,7 +82,7 @@ interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefault
 	 * 
 	 * @return the callback called to set the display options
 	 */
-	default DisplayCallback<AnnotationContext> getDisplayCallback() {
+	default SimpleDisplayCallback<AnnotationContext> getDisplayCallback() {
 		return null;
 	}
 

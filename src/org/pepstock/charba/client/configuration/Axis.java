@@ -25,9 +25,11 @@ import org.pepstock.charba.client.callbacks.AxisDimensionsCallback;
 import org.pepstock.charba.client.callbacks.AxisFitCallback;
 import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
+import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -57,10 +59,9 @@ import org.pepstock.charba.client.options.ScaleTitle;
  */
 public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-
+	// -------------------------------------------
+	// -- CALLBACKS PROXIES FOR AXIS CALLBACKS ---
+	// -------------------------------------------
 	// callback proxy to invoke the before update function
 	private final CallbackProxy<ProxyHandlerCallback> beforeUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before set dimension function
@@ -90,9 +91,15 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	// callback proxy to invoke the after build tricks function
 	private final CallbackProxy<ProxyHandlerCallback> afterBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// ---------------------------
-	// -- USERS CALLBACKS ---
-	// ---------------------------
+	// --------------------------------------------
+	// -- CALLBACKS PROXIES FOR AXIS PROPERTIES ---
+	// --------------------------------------------
+	// callback proxy to invoke the display function
+	private final CallbackProxy<ProxyObjectCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// ---------------------------------------
+	// -- USERS AXIS CALLBACKS x CALLBACKS ---
+	// ---------------------------------------
 	// user callback implementation for tick rotation calculation
 	private AxisCalculateLabelRotationCallback axisCalculateLabelRotationCallback = null;
 	// user callback implementation for data limits
@@ -108,6 +115,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	// user callback implementation for building ticks
 	private AxisBuildTicksCallback axisBuildTicksCallback = null;
 
+	// ----------------------------------------
+	// -- USERS AXIS CALLBACKS x PROPERTIES ---
+	// ----------------------------------------
+	// user callback implementation for display
+	private DisplayCallback<ScaleContext> displayCallback = null;
+
 	// stores axis type
 	private final AxisType storeType;
 	// stores default scale
@@ -116,7 +129,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	private enum CallbackProperty implements Key
 	{
 		BEFORE_UPDATE("beforeUpdate"),
 		AFTER_UPDATE("afterUpdate"),
@@ -132,6 +145,41 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		AFTER_CALCULATE_LABEL_ROTATION("afterCalculateLabelRotation"),
 		BEFORE_FIT("beforeFit"),
 		AFTER_FIT("afterFit");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private CallbackProperty(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		ALIGN_TO_PIXELS("alignToPixels"),
+		BACKGROUND_COLOR("backgroundColor"),
+		DISPLAY("display"),
+		REVERSE("reverse"),
+		WEIGHT("weight");
 
 		// name value of property
 		private final String value;
@@ -178,9 +226,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales
 		setConfiguration(new ExtendedScale(new ConfigurationEnvelop<>(id), type, kind, defaultValues));
-		// -------------------------------
-		// -- SET CALLBACKS to PROXIES ---
-		// -------------------------------
+		// -----------------------------------------------
+		// -- SET CALLBACKS to PROXIES x AXIS CALLBACKS ---
+		// -----------------------------------------------
 		this.beforeUpdateCallbackProxy.setCallback(this::onBeforeUpdateCallback);
 		this.beforeSetDimensionsCallbackProxy.setCallback(this::onBeforeSetDimensionsCallback);
 		this.afterSetDimensionsCallbackProxy.setCallback(this::onAfterSetDimensionsCallback);
@@ -195,6 +243,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		this.afterUpdateCallbackProxy.setCallback(this::onAfterUpdateCallback);
 		this.beforeBuildTicksCallbackProxy.setCallback(this::onBeforeBuildTicksCallback);
 		this.afterBuildTicksCallbackProxy.setCallback(this::onAfterBuildTicksCallback);
+		// -------------------------------------------------
+		// -- SET CALLBACKS to PROXIES x AXIS PROPERTIES ---
+		// -------------------------------------------------
+		this.displayCallbackProxy.setCallback(this::onDisplay);
+
 	}
 
 	/**
@@ -243,6 +296,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 *            Overrides {@link Grid#setDisplay(boolean)}, {@link ScaleTitle#setDisplay(boolean)}, and {@link Tick#setDisplay(boolean)}.
 	 */
 	public void setDisplay(boolean display) {
+		// resets callback
+		setDisplay((DisplayCallback<ScaleContext>) null);
+		// stores value
 		getScale().setDisplay(display);
 	}
 
@@ -254,6 +310,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param display display option controls the visibility of axis
 	 */
 	public final void setDisplay(Display display) {
+		// resets callback
+		setDisplay((DisplayCallback<ScaleContext>) null);
+		// stores value
 		getScale().setDisplay(display);
 	}
 
@@ -274,6 +333,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param backgroundColor background color to use in the chart.
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
+		// FIXME callback
 		getScale().setBackgroundColor(backgroundColor);
 	}
 
@@ -311,6 +371,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param weight weight of axis
 	 */
 	public void setWeight(double weight) {
+		// FIXME callback
 		getScale().setWeight(weight);
 	}
 
@@ -330,6 +391,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param alignToPixels <code>true</code> to align pixel values to device pixels.
 	 */
 	public void setAlignToPixels(boolean alignToPixels) {
+		// FIXME callback
 		getScale().setAlignToPixels(alignToPixels);
 	}
 
@@ -348,6 +410,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param reverse reverses order of tick labels.
 	 */
 	public void setReverse(boolean reverse) {
+		// FIXME callback
 		getScale().setReverse(reverse);
 	}
 
@@ -412,8 +475,47 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	// -----------------------------
-	// CALLBACKS
+	// AXIS PROPERTIES CALLBACKS
 	// -----------------------------
+
+	/**
+	 * Returns the user callback that sets if the axis will be shown.
+	 * 
+	 * @return the user callback that sets if the axis will be shown.
+	 */
+	public DisplayCallback<ScaleContext> getDisplayCallback() {
+		return displayCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets if the axis will be shown.
+	 * 
+	 * @param displayCallback the user callback that sets if the axis will be shown
+	 */
+	public void setDisplay(DisplayCallback<ScaleContext> displayCallback) {
+		// sets the callback
+		this.displayCallback = displayCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.DISPLAY, displayCallback, displayCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets if the axis will be shown.
+	 * 
+	 * @param displayCallback that sets if the axis will be shown.
+	 */
+	public void setDisplay(NativeCallback displayCallback) {
+		// resets callback
+		setDisplay((DisplayCallback<ScaleContext>) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.DISPLAY, displayCallback);
+	}
+
+	// -----------------------------
+	// AXIS CALLBACKS
+	// -----------------------------
+
+	// FIXME changes returns javadoc
 
 	/**
 	 * Returns the user callback that runs before/after tick rotation is determined.
@@ -433,9 +535,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// sets the callback
 		this.axisCalculateLabelRotationCallback = axisCalculateLabelRotationCallback;
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.BEFORE_CALCULATE_LABEL_ROTATION, axisCalculateLabelRotationCallback, beforeCalculateLabelRotationCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.BEFORE_CALCULATE_LABEL_ROTATION, axisCalculateLabelRotationCallback, beforeCalculateLabelRotationCallbackProxy);
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.AFTER_CALCULATE_LABEL_ROTATION, axisCalculateLabelRotationCallback, afterCalculateLabelRotationCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.AFTER_CALCULATE_LABEL_ROTATION, axisCalculateLabelRotationCallback, afterCalculateLabelRotationCallbackProxy);
 	}
 
 	/**
@@ -456,9 +558,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// sets the callback
 		this.axisDataLimitsCallback = axisDataLimitsCallback;
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.BEFORE_DATA_LIMITS, axisDataLimitsCallback, beforeDataLimitsCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.BEFORE_DATA_LIMITS, axisDataLimitsCallback, beforeDataLimitsCallbackProxy);
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.AFTER_DATA_LIMITS, axisDataLimitsCallback, afterDataLimitsCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.AFTER_DATA_LIMITS, axisDataLimitsCallback, afterDataLimitsCallbackProxy);
 	}
 
 	/**
@@ -479,9 +581,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// sets the callback
 		this.axisDimensionsCallback = axisDimensionsCallback;
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.BEFORE_SET_DIMENSIONS, axisDimensionsCallback, beforeSetDimensionsCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.BEFORE_SET_DIMENSIONS, axisDimensionsCallback, beforeSetDimensionsCallbackProxy);
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.AFTER_SET_DIMENSIONS, axisDimensionsCallback, afterSetDimensionsCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.AFTER_SET_DIMENSIONS, axisDimensionsCallback, afterSetDimensionsCallbackProxy);
 	}
 
 	/**
@@ -502,9 +604,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// sets the callback
 		this.axisFitCallback = axisFitCallback;
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.BEFORE_FIT, axisFitCallback, beforeFitCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.BEFORE_FIT, axisFitCallback, beforeFitCallbackProxy);
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.AFTER_FIT, axisFitCallback, afterFitCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.AFTER_FIT, axisFitCallback, afterFitCallbackProxy);
 	}
 
 	/**
@@ -525,9 +627,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// sets the callback
 		this.axisTickToLabelConversionCallback = axisTickToLabelConversionCallback;
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.BEFORE_TICK_TO_LABEL_CONVERSION, axisTickToLabelConversionCallback, beforeTickToLabelConversionCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.BEFORE_TICK_TO_LABEL_CONVERSION, axisTickToLabelConversionCallback, beforeTickToLabelConversionCallbackProxy);
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.AFTER_TICK_TO_LABEL_CONVERSION, axisTickToLabelConversionCallback, afterTickToLabelConversionCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.AFTER_TICK_TO_LABEL_CONVERSION, axisTickToLabelConversionCallback, afterTickToLabelConversionCallbackProxy);
 	}
 
 	/**
@@ -548,9 +650,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// sets the callback
 		this.axisBuildTicksCallback = axisBuildTicksCallback;
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.BEFORE_BUILD_TICKS, axisBuildTicksCallback, beforeBuildTicksCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.BEFORE_BUILD_TICKS, axisBuildTicksCallback, beforeBuildTicksCallbackProxy);
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.AFTER_BUILD_TICKS, axisBuildTicksCallback, afterBuildTicksCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.AFTER_BUILD_TICKS, axisBuildTicksCallback, afterBuildTicksCallbackProxy);
 	}
 
 	/**
@@ -571,9 +673,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// sets the callback
 		this.axisUpdateCallback = axisUpdateCallback;
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.BEFORE_UPDATE, axisUpdateCallback, beforeUpdateCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.BEFORE_UPDATE, axisUpdateCallback, beforeUpdateCallbackProxy);
 		// stores and manages callback
-		setCallback(getConfiguration(), Property.AFTER_UPDATE, axisUpdateCallback, afterUpdateCallbackProxy);
+		setCallback(getConfiguration(), CallbackProperty.AFTER_UPDATE, axisUpdateCallback, afterUpdateCallbackProxy);
 	}
 
 	// -----------------------------
@@ -639,9 +741,28 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		return new ScaleContext(this, context);
 	}
 
-	// -----------------------------
-	// Internal CALLBACKS invocation
-	// -----------------------------
+	// -------------------------------------------------
+	// Internal CALLBACKS invocation for AXIS properties
+	// -------------------------------------------------
+
+	final Object onDisplay(NativeObject context) {
+		// gets callback
+		DisplayCallback<ScaleContext> callback = getDisplayCallback();
+		// if user callback is consistent
+		if (callback != null) {
+			// then it is called
+			Object result = callback.invoke(createContext(context));
+			// returns the display value
+			return DisplayCallback.checkAndGet(result, getDefaultValues().getDisplay());
+		}
+		// if here, returns the default
+		// because the callback is not consistent
+		return DisplayCallback.checkAndGet(getDefaultValues().getDisplay(), Display.TRUE);
+	}
+
+	// ------------------------------------------------
+	// Internal CALLBACKS invocation for AXIS callbacks
+	// ------------------------------------------------
 
 	/**
 	 * Invokes UPDATE axis callback.

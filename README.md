@@ -282,6 +282,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Breaking changes
 
  * hide public CHART.JS hooks of Charba out-of-the-box plugins (ChartBackgroundColor, ChartPointer, ColorSchemes, HtmlLegend and DatasetsItemsSelector).
+ * rename `DisplayCallback` to `SimpleDisplayCallback` class name (package `org.pepstock.charba.client.callbacks`) where the display can be set simply with a boolean.
+ * remove `DisplayCallback` class from `org.pepstock.charba.client.datalabels.callbacks` in order to use the common `DisplayCallback` (package `org.pepstock.charba.client.callbacks`) where the display can be set by a boolean or a `Display` enumeration value.
 
 ### Features
 
@@ -299,6 +301,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `rotation` option to label options of box annotation in the annotation plugin.
  * add `textStrokeColor` and `textStrokeWidth` options to label annotation and to box and line labels options in the annotation plugin.
  * add events callbacks options to `AnnotationOptions` class in order to enable to events management for all defined annotations.
+ * add scriptable options to all axes for the following options:
+   * `display` by `DisplayCallback` (package `org.pepstock.charba.client.callbacks`) class 
  
 ### Fixed Bugs
 

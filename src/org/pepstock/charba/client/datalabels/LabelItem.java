@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.OffsetCallback;
@@ -46,7 +47,6 @@ import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClampCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClipCallback;
-import org.pepstock.charba.client.datalabels.callbacks.DisplayCallback;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
@@ -161,7 +161,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	// clip callback instance
 	private static final CallbackPropertyHandler<ClipCallback> CLIP_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CLIP);
 	// display callback instance
-	private static final CallbackPropertyHandler<DisplayCallback> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
+	private static final CallbackPropertyHandler<DisplayCallback<DataLabelsContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
 	// offset callback instance
 	private static final CallbackPropertyHandler<OffsetCallback<DataLabelsContext>> OFFSET_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.OFFSET);
 	// opacity callback instance
@@ -677,7 +677,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setDisplay(boolean display) {
 		// resets callback
-		setDisplay((DisplayCallback) null);
+		setDisplay((DisplayCallback<DataLabelsContext>) null);
 		// stores the value
 		setValue(Property.DISPLAY, display);
 	}
@@ -1245,7 +1245,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return the display callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	public final DisplayCallback getDisplayCallback() {
+	public final DisplayCallback<DataLabelsContext> getDisplayCallback() {
 		return DISPLAY_PROPERTY_HANDLER.getCallback(this, defaultOptions.getDisplayCallback());
 	}
 
@@ -1254,7 +1254,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * 
 	 * @param displayCallback the display callback to set
 	 */
-	public final void setDisplay(DisplayCallback displayCallback) {
+	public final void setDisplay(DisplayCallback<DataLabelsContext> displayCallback) {
 		DISPLAY_PROPERTY_HANDLER.setCallback(this, DataLabelsPlugin.ID, displayCallback, displayCallbackProxy.getProxy());
 	}
 
@@ -1265,7 +1265,7 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 */
 	public final void setDisplay(NativeCallback displayCallback) {
 		// resets callback
-		setDisplay((DisplayCallback) null);
+		setDisplay((DisplayCallback<DataLabelsContext>) null);
 		// stores value
 		setValue(Property.DISPLAY, displayCallback);
 	}
@@ -1627,17 +1627,18 @@ public class LabelItem extends AbstractPluginOptions implements IsDefaultDataLab
 	 * @return a object property value, as boolean or {@link Display}
 	 */
 	private Object onDisplay(DataLabelsContext context) {
-		// gets value
-		Display value = ScriptableUtils.getOptionValueAsString(context, getDisplayCallback());
-		Display result = value == null ? getDisplay() : value;
-		// checks if is boolean
-		// checks if it must return a boolean or string
-		if (Display.AUTO.equals(result)) {
-			// returns string
-			return Display.AUTO.value();
+		// gets callback
+		DisplayCallback<DataLabelsContext> callback = getDisplayCallback();
+		// if user callback is consistent
+		if (callback != null) {
+			// then it is called
+			Object result = callback.invoke(context);
+			// returns the display value
+			return DisplayCallback.checkAndGet(result, defaultOptions.getDisplay());
 		}
-		// returns boolean
-		return Display.TRUE.equals(result);
+		// if here, returns the default
+		// because the callback is not consistent
+		return DisplayCallback.checkAndGet(defaultOptions.getDisplay(), Display.TRUE);
 	}
 
 	/**
