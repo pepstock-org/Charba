@@ -565,7 +565,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Returns the user callback that runs before/after tick rotation is determined.
 	 * 
-	 * @return the axisCalculateLabelRotationCallback
+	 * @return the user callback that runs before/after tick rotation is determined
 	 */
 	public AxisCalculateLabelRotationCallback getAxisCalculateLabelRotationCallback() {
 		return axisCalculateLabelRotationCallback;
@@ -574,7 +574,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Sets the user callback that runs before/after tick rotation is determined.
 	 * 
-	 * @param axisCalculateLabelRotationCallback the axisCalculateLabelRotationCallback to set
+	 * @param axisCalculateLabelRotationCallback the the user callback that runs before/after tick rotation is determined to set
 	 */
 	public void setAxisCalculateLabelRotationCallback(AxisCalculateLabelRotationCallback axisCalculateLabelRotationCallback) {
 		// sets the callback
