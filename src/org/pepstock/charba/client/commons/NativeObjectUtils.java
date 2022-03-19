@@ -438,14 +438,16 @@ final class NativeObjectUtils {
 	 * 
 	 * @param object native object to be managed
 	 * @param key the name of the property to test.
+	 * @param defaultValue default value to return when the property is not found
+	 * @param <T> type of {@link IsJSType}.
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
-	private static <T extends IsJSType> T getJSTypeProperty(NativeObject object, String key, T defaultvalue) {
+	private static <T extends IsJSType> T getJSTypeProperty(NativeObject object, String key, T defaultValue) {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(object, key))) {
 			// returns the descriptor
 			return Reflect.get(object, key);
 		}
-		return defaultvalue;
+		return defaultValue;
 	}
 }
