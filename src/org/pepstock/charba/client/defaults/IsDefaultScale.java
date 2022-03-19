@@ -134,9 +134,9 @@ public interface IsDefaultScale {
 	boolean isAlignToPixels();
 
 	/**
-	 * Returns the reverses order of tick labels.
+	 * Returns the reversed order of tick labels.
 	 * 
-	 * @return reverses order of tick labels.
+	 * @return reversed order of tick labels.
 	 */
 	boolean isReverse();
 

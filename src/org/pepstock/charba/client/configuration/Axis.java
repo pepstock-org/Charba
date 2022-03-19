@@ -28,7 +28,9 @@ import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ReverseCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -100,6 +102,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private final CallbackProxy<ProxyObjectCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the background color function
 	private final CallbackProxy<ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the reverse function
+	private final CallbackProxy<ProxyBooleanCallback> reverseCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------------------
 	// -- USERS AXIS CALLBACKS x CALLBACKS ---
@@ -126,6 +130,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private DisplayCallback<ScaleContext> displayCallback = null;
 	// background color callback instance
 	private ColorCallback<ScaleContext> backgroundColorCallback = null;
+	// reverse callback instance
+	private ReverseCallback reverseCallback = null;
 
 	// stores axis type
 	private final AxisType storeType;
@@ -255,6 +261,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		this.displayCallbackProxy.setCallback(this::onDisplay);
 		// sets function to proxy callback in order to invoke the java interface
 		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getBackgroundColorCallback(), getDefaultValues().getBackgroundColorAsString()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.reverseCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getReverseCallback(), getDefaultValues().isReverse()).booleanValue());
 	}
 
 	/**
@@ -417,19 +425,21 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
-	 * Sets the reverses order of tick labels.
+	 * Sets the reversed order of tick labels.
 	 * 
-	 * @param reverse reverses order of tick labels.
+	 * @param reverse reversed order of tick labels.
 	 */
 	public void setReverse(boolean reverse) {
-		// FIXME callback
+		// resets callback
+		setReverse((ReverseCallback) null);
+		// stores value
 		getScale().setReverse(reverse);
 	}
 
 	/**
-	 * Returns the reverses order of tick labels.
+	 * Returns the reversed order of tick labels.
 	 * 
-	 * @return reverses order of tick labels.
+	 * @return reversed order of tick labels.
 	 */
 	public boolean isReverse() {
 		return getScale().isReverse();
@@ -556,11 +566,42 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		getChart().getOptions().setCallback(getConfiguration(), Property.BACKGROUND_COLOR, backgroundColorCallback);
 	}
 
+	/**
+	 * Returns the user callback that sets the reversed order of tick labels.
+	 * 
+	 * @return the user callback that sets the reversed order of tick labels.
+	 */
+	public ReverseCallback getReverseCallback() {
+		return reverseCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets the reversed order of tick labels.
+	 * 
+	 * @param reverseCallback the user callback that sets the reversed order of tick labels.
+	 */
+	public void setReverse(ReverseCallback reverseCallback) {
+		// sets the callback
+		this.reverseCallback = reverseCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.REVERSE, reverseCallback, reverseCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets the reversed order of tick labels.
+	 * 
+	 * @param reverseCallback that sets the reversed order of tick labels.
+	 */
+	public void setReverse(NativeCallback reverseCallback) {
+		// resets callback
+		setReverse((ReverseCallback) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.REVERSE, reverseCallback);
+	}
+
 	// -----------------------------
 	// AXIS CALLBACKS
 	// -----------------------------
-
-	// FIXME changes returns javadoc
 
 	/**
 	 * Returns the user callback that runs before/after tick rotation is determined.

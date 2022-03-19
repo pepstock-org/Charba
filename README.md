@@ -304,6 +304,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add scriptable options to all axes for the following options:
    * `display` by `DisplayCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `backgroundColor` by `ColorCallback` (package `org.pepstock.charba.client.callbacks`) class
+   * `reverse` by new `ReverseCallback` (package `org.pepstock.charba.client.callbacks`) class
  
 ### Fixed Bugs
 

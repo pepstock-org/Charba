@@ -587,18 +587,18 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	}
 
 	/**
-	 * Sets the reverses order of tick labels.
+	 * Sets the reversed order of tick labels.
 	 * 
-	 * @param reverse reverses order of tick labels.
+	 * @param reverse reversed order of tick labels.
 	 */
 	public final void setReverse(boolean reverse) {
 		setValueAndAddToParent(Property.REVERSE, reverse);
 	}
 
 	/**
-	 * Returns the reverses order of tick labels.
+	 * Returns the reversed order of tick labels.
 	 * 
-	 * @return if <code>true</code> reverses order of tick labels.
+	 * @return if <code>true</code> reversed order of tick labels.
 	 */
 	@Override
 	public final boolean isReverse() {
