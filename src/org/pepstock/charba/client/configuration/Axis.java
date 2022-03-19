@@ -25,11 +25,13 @@ import org.pepstock.charba.client.callbacks.AxisDimensionsCallback;
 import org.pepstock.charba.client.callbacks.AxisFitCallback;
 import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
+import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -96,6 +98,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	// --------------------------------------------
 	// callback proxy to invoke the display function
 	private final CallbackProxy<ProxyObjectCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the background color function
+	private final CallbackProxy<ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------------------
 	// -- USERS AXIS CALLBACKS x CALLBACKS ---
@@ -120,6 +124,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	// ----------------------------------------
 	// user callback implementation for display
 	private DisplayCallback<ScaleContext> displayCallback = null;
+	// background color callback instance
+	private ColorCallback<ScaleContext> backgroundColorCallback = null;
 
 	// stores axis type
 	private final AxisType storeType;
@@ -247,7 +253,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// -- SET CALLBACKS to PROXIES x AXIS PROPERTIES ---
 		// -------------------------------------------------
 		this.displayCallbackProxy.setCallback(this::onDisplay);
-
+		// sets function to proxy callback in order to invoke the java interface
+		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getBackgroundColorCallback(), getDefaultValues().getBackgroundColorAsString()));
 	}
 
 	/**
@@ -333,7 +340,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param backgroundColor background color to use in the chart.
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
-		// FIXME callback
+		// resets callback
+		setBackgroundColor((ColorCallback<ScaleContext>) null);
+		// stores new value
 		getScale().setBackgroundColor(backgroundColor);
 	}
 
@@ -343,6 +352,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param backgroundColor the background color of the scale area.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
+		// resets callback
+		setBackgroundColor((ColorCallback<ScaleContext>) null);
+		// stores new value
 		getScale().setBackgroundColor(backgroundColor);
 	}
 
@@ -509,6 +521,39 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		setDisplay((DisplayCallback<ScaleContext>) null);
 		// stores and manages callback
 		setCallback(getConfiguration(), Property.DISPLAY, displayCallback);
+	}
+
+	/**
+	 * Returns the background color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the background color callback, if set, otherwise <code>null</code>.
+	 */
+	public ColorCallback<ScaleContext> getBackgroundColorCallback() {
+		return backgroundColorCallback;
+	}
+
+	/**
+	 * Sets the background color callback.
+	 * 
+	 * @param backgroundColorCallback the background color callback.
+	 */
+	public void setBackgroundColor(ColorCallback<ScaleContext> backgroundColorCallback) {
+		// sets the callback
+		this.backgroundColorCallback = backgroundColorCallback;
+		// stores and manages callback
+		getChart().getOptions().setCallback(getConfiguration(), Property.BACKGROUND_COLOR, backgroundColorCallback, backgroundColorCallbackProxy);
+	}
+
+	/**
+	 * Sets the background color callback.
+	 * 
+	 * @param backgroundColorCallback the background color callback.
+	 */
+	public void setBackgroundColor(NativeCallback backgroundColorCallback) {
+		// resets callback
+		setBackgroundColor((ColorCallback<ScaleContext>) null);
+		// stores and manages callback
+		getChart().getOptions().setCallback(getConfiguration(), Property.BACKGROUND_COLOR, backgroundColorCallback);
 	}
 
 	// -----------------------------
