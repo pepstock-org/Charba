@@ -30,13 +30,15 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
+public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implements HasMinMaxHandler<Date> {
 
 	private final CartesianTimeTick ticks;
 
 	private final Time time;
 
 	private final Adapters adapters;
+
+	private final MinMaxHandler<Date> minMaxhandler;
 
 	/**
 	 * Builds the object storing the chart instance. Axis type is X by default.
@@ -116,6 +118,8 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 		this.ticks = new CartesianTimeTick(this);
 		// creates the adapters object
 		this.adapters = new Adapters(this);
+		// creates min max handler
+		this.minMaxhandler = new MinMaxHandler<>(this);
 	}
 
 	/*
@@ -126,6 +130,16 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	@Override
 	public CartesianTimeTick getTicks() {
 		return ticks;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.HasMinMaxHandler#getMinMaxHandler()
+	 */
+	@Override
+	public MinMaxHandler<Date> getMinMaxHandler() {
+		return minMaxhandler;
 	}
 
 	/**

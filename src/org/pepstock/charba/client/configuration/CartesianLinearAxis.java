@@ -31,6 +31,8 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 
 	private final CartesianLinearTick ticks;
 
+	private final MinMaxHandler<Double> minMaxhandler;
+
 	/**
 	 * Builds the object storing the chart instance. Axis type is Y by default.
 	 * 
@@ -105,6 +107,8 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 		super(chart, id, type, kind);
 		// creates the ticks instance
 		this.ticks = new CartesianLinearTick(this);
+		// creates min max handler
+		this.minMaxhandler = new MinMaxHandler<>(this);
 	}
 
 	/*
@@ -115,6 +119,16 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	@Override
 	public final Axis getAxisElement() {
 		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.HasMinMaxHandler#getMinMaxHandler()
+	 */
+	@Override
+	public MinMaxHandler<Double> getMinMaxHandler() {
+		return minMaxhandler;
 	}
 
 	/*

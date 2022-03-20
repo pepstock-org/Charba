@@ -32,6 +32,8 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 
 	private final CartesianLogarithmicTick ticks;
 
+	private final MinMaxHandler<Double> minMaxhandler;
+
 	/**
 	 * Builds the object storing the chart instance. Axis type is Y by default.
 	 * 
@@ -106,6 +108,8 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 		super(chart, id, type, kind);
 		// creates the ticks instance
 		this.ticks = new CartesianLogarithmicTick(this);
+		// creates min max handler
+		this.minMaxhandler = new MinMaxHandler<>(this);
 	}
 
 	/*
@@ -126,6 +130,16 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	@Override
 	public Axis getAxisElement() {
 		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.HasMinMaxHandler#getMinMaxHandler()
+	 */
+	@Override
+	public MinMaxHandler<Double> getMinMaxHandler() {
+		return minMaxhandler;
 	}
 
 }

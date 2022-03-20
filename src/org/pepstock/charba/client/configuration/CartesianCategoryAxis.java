@@ -30,9 +30,11 @@ import org.pepstock.charba.client.options.ScaleId;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> {
+public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> implements HasMinMaxHandler<String> {
 
 	private final CartesianCategoryTick ticks;
+
+	private final MinMaxHandler<String> minMaxhandler;
 
 	/**
 	 * Builds the object storing the chart instance. Axis type is X by default.
@@ -108,6 +110,8 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 		super(chart, id, type, kind);
 		// creates the ticks instance
 		this.ticks = new CartesianCategoryTick(this);
+		// creates min max handler
+		this.minMaxhandler = new MinMaxHandler<>(this);
 	}
 
 	/*
@@ -118,6 +122,16 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	@Override
 	public CartesianCategoryTick getTicks() {
 		return ticks;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.HasMinMaxHandler#getMinMaxHandler()
+	 */
+	@Override
+	public MinMaxHandler<String> getMinMaxHandler() {
+		return minMaxhandler;
 	}
 
 	/**

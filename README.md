@@ -305,6 +305,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `display` by `DisplayCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `backgroundColor` by `ColorCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `reverse` by new `ReverseCallback` (package `org.pepstock.charba.client.callbacks`) class
+   * `min`, `max`, `suggestedMin` and `suggestedMax` by new `MinMaxCallback` (package `org.pepstock.charba.client.callbacks`) class
  
 ### Fixed Bugs
 

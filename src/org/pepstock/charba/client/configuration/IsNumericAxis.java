@@ -23,7 +23,7 @@ import org.pepstock.charba.client.Defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsNumericAxis {
+public interface IsNumericAxis extends HasMinMaxHandler<Double> {
 
 	/**
 	 * Returns the axis instance.

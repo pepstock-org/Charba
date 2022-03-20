@@ -24,12 +24,12 @@ import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallbac
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
-import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -914,7 +914,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * Returns an object as double, string or date (as time) when the callback has been activated.
 	 * 
 	 * @param context annotation context instance.
-	 * @param valueCallback border dash callback instance
+	 * @param valueCallback value callback instance
 	 * @return an object as double, string or date
 	 */
 	final Object onValue(AnnotationContext context, ValueCallback valueCallback) {

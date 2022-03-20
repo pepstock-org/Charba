@@ -391,7 +391,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param weight weight of axis
 	 */
 	public void setWeight(double weight) {
-		// FIXME callback
 		getScale().setWeight(weight);
 	}
 
@@ -411,7 +410,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param alignToPixels <code>true</code> to align pixel values to device pixels.
 	 */
 	public void setAlignToPixels(boolean alignToPixels) {
-		// FIXME callback
 		getScale().setAlignToPixels(alignToPixels);
 	}
 
