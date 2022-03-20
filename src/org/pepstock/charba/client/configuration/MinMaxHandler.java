@@ -114,6 +114,12 @@ final class MinMaxHandler<T> {
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
 		this.minCallbackProxy.setCallback(context -> onValue(this.parent.createContext(context), getMinCallback()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.maxCallbackProxy.setCallback(context -> onValue(this.parent.createContext(context), getMaxCallback()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.suggestedMinCallbackProxy.setCallback(context -> onValue(this.parent.createContext(context), getSuggestedMinCallback()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.suggestedMaxCallbackProxy.setCallback(context -> onValue(this.parent.createContext(context), getSuggestedMaxCallback()));
 	}
 
 	/**
@@ -158,7 +164,7 @@ final class MinMaxHandler<T> {
 		// sets the callback
 		this.maxCallback = maxCallback;
 		// stores and manages callback
-		this.parent.setCallback(this.parent.getConfiguration(), Property.MIN, maxCallback, maxCallbackProxy);
+		this.parent.setCallback(this.parent.getConfiguration(), Property.MAX, maxCallback, maxCallbackProxy);
 	}
 
 	/**
