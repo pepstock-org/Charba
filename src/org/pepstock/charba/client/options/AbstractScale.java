@@ -69,6 +69,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		POSITION("position"),
 		OFFSET("offset"),
 		GRID("grid"),
+		STACKED("stacked"),
 		STACK("stack"),
 		STACK_WEIGHT("stackWeight"),
 		TITLE("title"),
@@ -87,7 +88,6 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		ANGLE_LINES("angleLines"),
 		POINT_LABELS("pointLabels"),
 		REVERSE("reverse"),
-		STACKED("stacked"),
 		START_ANGLE("startAngle"),
 		// internal property for min and max index in order to store as integer
 		CHARBA_MIN_INDEX("charbaMinIndex"),

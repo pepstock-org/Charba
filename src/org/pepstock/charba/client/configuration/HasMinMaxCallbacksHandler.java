@@ -24,14 +24,14 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface HasMinMaxHandler<T> {
+interface HasMinMaxCallbacksHandler<T> {
 
 	/**
-	 * Returns a {@link MinMaxHandler} which is managing all min and max options.
+	 * Returns a {@link MinMaxCallbacksHandler} which is managing all min and max callbacks options.
 	 * 
-	 * @return a {@link MinMaxHandler} which is managing all min and max options
+	 * @return a {@link MinMaxCallbacksHandler} which is managing all min and max callbacks options
 	 */
-	MinMaxHandler<T> getMinMaxHandler();
+	MinMaxCallbacksHandler<T> getMinMaxCallbacksHandler();
 
 	/**
 	 * Returns the callback to set the user defined minimum number for the scale, overrides minimum value from data.
@@ -40,9 +40,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default MinMaxCallback<T> getMinCallback() {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			return getMinMaxHandler().getMinCallback();
+			return getMinMaxCallbacksHandler().getMinCallback();
 		}
 		// if here, axis is not consistent
 		return null;
@@ -55,9 +55,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default void setMin(MinMaxCallback<T> minCallback) {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			getMinMaxHandler().setMin(minCallback);
+			getMinMaxCallbacksHandler().setMin(minCallback);
 		}
 	}
 
@@ -68,9 +68,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default void setMin(NativeCallback minCallback) {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			getMinMaxHandler().setMin(minCallback);
+			getMinMaxCallbacksHandler().setMin(minCallback);
 		}
 	}
 
@@ -81,9 +81,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default void setMax(MinMaxCallback<T> maxCallback) {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			getMinMaxHandler().setMax(maxCallback);
+			getMinMaxCallbacksHandler().setMax(maxCallback);
 		}
 	}
 
@@ -94,9 +94,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default void setMax(NativeCallback maxCallback) {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			getMinMaxHandler().setMax(maxCallback);
+			getMinMaxCallbacksHandler().setMax(maxCallback);
 		}
 	}
 
@@ -107,9 +107,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default MinMaxCallback<T> getMaxCallback() {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			return getMinMaxHandler().getMaxCallback();
+			return getMinMaxCallbacksHandler().getMaxCallback();
 		}
 		// if here, axis is not consistent
 		return null;
@@ -122,9 +122,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default MinMaxCallback<T> getSuggestedMinCallback() {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			return getMinMaxHandler().getSuggestedMinCallback();
+			return getMinMaxCallbacksHandler().getSuggestedMinCallback();
 		}
 		// if here, axis is not consistent
 		return null;
@@ -137,9 +137,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default void setSuggestedMin(MinMaxCallback<T> suggestedMinCallback) {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			getMinMaxHandler().setSuggestedMin(suggestedMinCallback);
+			getMinMaxCallbacksHandler().setSuggestedMin(suggestedMinCallback);
 		}
 	}
 
@@ -150,9 +150,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default void setSuggestedMin(NativeCallback suggestedMinCallback) {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			getMinMaxHandler().setSuggestedMin(suggestedMinCallback);
+			getMinMaxCallbacksHandler().setSuggestedMin(suggestedMinCallback);
 		}
 	}
 
@@ -163,9 +163,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default MinMaxCallback<T> getSuggestedMaxCallback() {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			return getMinMaxHandler().getSuggestedMaxCallback();
+			return getMinMaxCallbacksHandler().getSuggestedMaxCallback();
 		}
 		// if here, axis is not consistent
 		return null;
@@ -178,9 +178,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default void setSuggestedMax(MinMaxCallback<T> suggestedMaxCallback) {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			getMinMaxHandler().setSuggestedMax(suggestedMaxCallback);
+			getMinMaxCallbacksHandler().setSuggestedMax(suggestedMaxCallback);
 		}
 	}
 
@@ -191,9 +191,9 @@ interface HasMinMaxHandler<T> {
 	 */
 	default void setSuggestedMax(NativeCallback suggestedMaxCallback) {
 		// checks if axis is consistent
-		if (getMinMaxHandler() != null) {
+		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
-			getMinMaxHandler().setSuggestedMax(suggestedMaxCallback);
+			getMinMaxCallbacksHandler().setSuggestedMax(suggestedMaxCallback);
 		}
 	}
 

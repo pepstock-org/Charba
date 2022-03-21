@@ -35,7 +35,7 @@ import org.pepstock.charba.client.utils.Window;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class MinMaxHandler<T> {
+final class MinMaxCallbacksHandler<T> {
 
 	/**
 	 * Name of properties of native object.
@@ -104,7 +104,7 @@ final class MinMaxHandler<T> {
 	 * 
 	 * @param parent the axis instance which the handler belongs to.
 	 */
-	MinMaxHandler(Axis parent) {
+	MinMaxCallbacksHandler(Axis parent) {
 		this.parent = Checker.checkAndGetIfValid(parent, "Parent instance");
 		// checks if consistent
 		// stores data type

@@ -41,7 +41,7 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 
 	private final RadialPointLabels pointLabels;
 	// min max handler
-	private final MinMaxHandler<Double> minMaxhandler;
+	private final MinMaxCallbacksHandler<Double> minMaxhandler;
 
 	/**
 	 * Builds the object storing the chart instance.
@@ -68,7 +68,7 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 		this.ticks = new RadialLinearTick(this);
 		this.angleLines = new RadialAngleLines(this);
 		// creates min max handler
-		this.minMaxhandler = new MinMaxHandler<>(this);
+		this.minMaxhandler = new MinMaxCallbacksHandler<>(this);
 	}
 
 	/*
@@ -87,7 +87,7 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 	 * @see org.pepstock.charba.client.configuration.HasMinMaxHandler#getMinMaxHandler()
 	 */
 	@Override
-	public MinMaxHandler<Double> getMinMaxHandler() {
+	public MinMaxCallbacksHandler<Double> getMinMaxCallbacksHandler() {
 		return minMaxhandler;
 	}
 

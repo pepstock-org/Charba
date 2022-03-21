@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.MinMaxCallback;
 
 /**
  * Common methods for numeric scales (linear/log cartesian and radial).<br>
@@ -23,7 +24,7 @@ import org.pepstock.charba.client.Defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsNumericAxis extends HasMinMaxHandler<Double> {
+public interface IsNumericAxis extends HasMinMaxCallbacksHandler<Double> {
 
 	/**
 	 * Returns the axis instance.
@@ -40,6 +41,9 @@ public interface IsNumericAxis extends HasMinMaxHandler<Double> {
 	default void setMin(double min) {
 		// checks if axis is consistent
 		if (getAxisElement() != null) {
+			// reset callback
+			setMin((MinMaxCallback<Double>) null);
+			// stores value
 			getAxisElement().getScale().setMin(min);
 		}
 	}
@@ -66,6 +70,9 @@ public interface IsNumericAxis extends HasMinMaxHandler<Double> {
 	default void setMax(double max) {
 		// checks if axis is consistent
 		if (getAxisElement() != null) {
+			// reset callback
+			setMax((MinMaxCallback<Double>) null);
+			// stores value
 			getAxisElement().getScale().setMax(max);
 		}
 	}
@@ -92,6 +99,9 @@ public interface IsNumericAxis extends HasMinMaxHandler<Double> {
 	default void setSuggestedMax(double suggestedMax) {
 		// checks if axis is consistent
 		if (getAxisElement() != null) {
+			// reset callback
+			setSuggestedMax((MinMaxCallback<Double>) null);
+			// stores value
 			getAxisElement().getScale().setSuggestedMax(suggestedMax);
 		}
 	}
@@ -118,6 +128,9 @@ public interface IsNumericAxis extends HasMinMaxHandler<Double> {
 	default void setSuggestedMin(double suggestedMin) {
 		// checks if axis is consistent
 		if (getAxisElement() != null) {
+			// reset callback
+			setSuggestedMin((MinMaxCallback<Double>) null);
+			// stores value
 			getAxisElement().getScale().setSuggestedMin(suggestedMin);
 		}
 	}

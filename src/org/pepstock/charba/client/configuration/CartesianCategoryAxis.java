@@ -18,6 +18,7 @@ package org.pepstock.charba.client.configuration;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.MinMaxCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.Labels;
 import org.pepstock.charba.client.enums.AxisKind;
@@ -30,11 +31,11 @@ import org.pepstock.charba.client.options.ScaleId;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> implements HasMinMaxHandler<String> {
+public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> implements HasMinMaxCallbacksHandler<String> {
 
 	private final CartesianCategoryTick ticks;
 
-	private final MinMaxHandler<String> minMaxhandler;
+	private final MinMaxCallbacksHandler<String> minMaxhandler;
 
 	/**
 	 * Builds the object storing the chart instance. Axis type is X by default.
@@ -111,7 +112,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 		// creates the ticks instance
 		this.ticks = new CartesianCategoryTick(this);
 		// creates min max handler
-		this.minMaxhandler = new MinMaxHandler<>(this);
+		this.minMaxhandler = new MinMaxCallbacksHandler<>(this);
 	}
 
 	/*
@@ -130,7 +131,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * @see org.pepstock.charba.client.configuration.HasMinMaxHandler#getMinMaxHandler()
 	 */
 	@Override
-	public MinMaxHandler<String> getMinMaxHandler() {
+	public MinMaxCallbacksHandler<String> getMinMaxCallbacksHandler() {
 		return minMaxhandler;
 	}
 
@@ -186,6 +187,9 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * @param min The minimum item to display
 	 */
 	public void setMin(String min) {
+		// reset callback
+		setMin((MinMaxCallback<String>) null);
+		// stores value
 		getScale().setMin(min);
 	}
 
@@ -222,6 +226,9 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * @param max the maximum item to display.
 	 */
 	public void setMax(String max) {
+		// reset callback
+		setMax((MinMaxCallback<String>) null);
+		// stores value
 		getScale().setMax(max);
 	}
 

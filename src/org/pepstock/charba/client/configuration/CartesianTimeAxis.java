@@ -18,6 +18,7 @@ package org.pepstock.charba.client.configuration;
 import java.util.Date;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.MinMaxCallback;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.ChartAxisType;
@@ -30,7 +31,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implements HasMinMaxHandler<Date> {
+public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implements HasMinMaxCallbacksHandler<Date> {
 
 	private final CartesianTimeTick ticks;
 
@@ -38,7 +39,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 
 	private final Adapters adapters;
 
-	private final MinMaxHandler<Date> minMaxhandler;
+	private final MinMaxCallbacksHandler<Date> minMaxhandler;
 
 	/**
 	 * Builds the object storing the chart instance. Axis type is X by default.
@@ -119,7 +120,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 		// creates the adapters object
 		this.adapters = new Adapters(this);
 		// creates min max handler
-		this.minMaxhandler = new MinMaxHandler<>(this);
+		this.minMaxhandler = new MinMaxCallbacksHandler<>(this);
 	}
 
 	/*
@@ -138,7 +139,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 	 * @see org.pepstock.charba.client.configuration.HasMinMaxHandler#getMinMaxHandler()
 	 */
 	@Override
-	public MinMaxHandler<Date> getMinMaxHandler() {
+	public MinMaxCallbacksHandler<Date> getMinMaxCallbacksHandler() {
 		return minMaxhandler;
 	}
 
@@ -166,6 +167,9 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 	 * @param max If defined, this will override the data maximum.
 	 */
 	public void setMax(Date max) {
+		// reset callback
+		setMax((MinMaxCallback<Date>) null);
+		// stores value
 		getScale().setMax(max);
 	}
 
@@ -184,6 +188,9 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 	 * @param min If defined, this will override the data minimum.
 	 */
 	public void setMin(Date min) {
+		// reset callback
+		setMin((MinMaxCallback<Date>) null);
+		// stores value
 		getScale().setMin(min);
 	}
 

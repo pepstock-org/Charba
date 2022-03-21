@@ -16,7 +16,18 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScaleBoundsCallback;
+import org.pepstock.charba.client.callbacks.ScaleOffsetCallback;
+import org.pepstock.charba.client.callbacks.ScalePositionCallback;
+import org.pepstock.charba.client.callbacks.ScaleStackedCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Bounds;
@@ -43,6 +54,65 @@ import org.pepstock.charba.client.options.ScaleId;
  */
 public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
+	// --------------------------------------------
+	// -- CALLBACKS PROXIES FOR AXIS PROPERTIES ---
+	// --------------------------------------------
+	// callback proxy to invoke the position function
+	private final CallbackProxy<ProxyStringCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the offset function
+	private final CallbackProxy<ProxyBooleanCallback> offsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the bounds function
+	private final CallbackProxy<ProxyStringCallback> boundsCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the stacked function
+	private final CallbackProxy<ProxyBooleanCallback> stackedCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		// cartesian
+		BOUNDS("bounds"),
+		POSITION("position"),
+		OFFSET("offset"),
+		STACKED("stacked");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
+	// ----------------------------------------
+	// -- USERS AXIS CALLBACKS x PROPERTIES ---
+	// ----------------------------------------
+	// user callback implementation for position
+	private ScalePositionCallback positionCallback = null;
+	// user callback implementation for offset
+	private ScaleOffsetCallback offsetCallback = null;
+	// user callback implementation for offset
+	private ScaleBoundsCallback boundsCallback = null;
+	// user callback implementation for stacked
+	private ScaleStackedCallback stackedCallback = null;
+
 	private final Grid grid;
 
 	private final CartesianScaleTitle title;
@@ -66,6 +136,17 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		// sets to the objects
 		grid = new Grid(this);
 		title = new CartesianScaleTitle(this);
+		// -------------------------------------------------
+		// -- SET CALLBACKS to PROXIES x AXIS PROPERTIES ---
+		// -------------------------------------------------
+		// sets function to proxy callback in order to invoke the java interface
+		this.positionCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getPositionCallback(), getDefaultValues().getPosition()).value());
+		// sets function to proxy callback in order to invoke the java interface
+		this.offsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getOffsetCallback(), getDefaultValues().isOffset()).booleanValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.boundsCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getBoundsCallback(), getDefaultValues().getBounds()).value());
+		// sets function to proxy callback in order to invoke the java interface
+		this.stackedCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getStackedCallback(), getDefaultValues().isStacked()).booleanValue());
 	}
 
 	/**
@@ -99,6 +180,9 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @param stacked if the axis are stacked or not.
 	 */
 	public void setStacked(boolean stacked) {
+		// resets callback
+		setStacked((ScaleStackedCallback) null);
+		// stores values
 		getScale().setStacked(stacked);
 	}
 
@@ -136,6 +220,9 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @param offset extra space of axis
 	 */
 	public void setOffset(boolean offset) {
+		// resets callback
+		setOffset((ScaleOffsetCallback) null);
+		// stores values
 		getScale().setOffset(offset);
 	}
 
@@ -157,6 +244,9 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @param position position of axis
 	 */
 	public void setPosition(AxisPosition position) {
+		// resets callback
+		setPosition((ScalePositionCallback) null);
+		// stores value
 		getScale().setPosition(position);
 	}
 
@@ -177,6 +267,9 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @param bounds property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
 	public void setBounds(Bounds bounds) {
+		// resets callback
+		setBounds((ScaleBoundsCallback) null);
+		// stores values
 		getScale().setBounds(bounds);
 	}
 
@@ -231,6 +324,142 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 */
 	public double getStackWeight() {
 		return getScale().getStackWeight();
+	}
+
+	// -----------------------------
+	// AXIS PROPERTIES CALLBACKS
+	// -----------------------------
+
+	/**
+	 * Returns the user callback that sets the axis position on the chart.
+	 * 
+	 * @return the user callback that sets the axis position on the chart
+	 */
+	public ScalePositionCallback getPositionCallback() {
+		return positionCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets the axis position on the chart.
+	 * 
+	 * @param positionCallback the user callback that sets the axis position on the chart
+	 */
+	public void setPosition(ScalePositionCallback positionCallback) {
+		// sets the callback
+		this.positionCallback = positionCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.POSITION, positionCallback, positionCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets the axis position on the chart.
+	 * 
+	 * @param positionCallback that sets the axis position on the chart
+	 */
+	public void setPosition(NativeCallback positionCallback) {
+		// resets callback
+		setPosition((ScalePositionCallback) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.POSITION, positionCallback);
+	}
+
+	/**
+	 * Returns the user callback that sets the added extra space to the both edges and the axis is scaled to fit in the chart area.
+	 * 
+	 * @return the user callback that sets the added extra space to the both edges and the axis is scaled to fit in the chart area.
+	 */
+	public ScaleOffsetCallback getOffsetCallback() {
+		return offsetCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets the added extra space to the both edges and the axis is scaled to fit in the chart area.
+	 * 
+	 * @param offsetCallback the user callback that sets the added extra space to the both edges and the axis is scaled to fit in the chart area.
+	 */
+	public void setOffset(ScaleOffsetCallback offsetCallback) {
+		// sets the callback
+		this.offsetCallback = offsetCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.OFFSET, offsetCallback, offsetCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets the added extra space to the both edges and the axis is scaled to fit in the chart area.
+	 * 
+	 * @param offsetCallback that sets the added extra space to the both edges and the axis is scaled to fit in the chart area.
+	 */
+	public void setOffset(NativeCallback offsetCallback) {
+		// resets callback
+		setOffset((ScaleOffsetCallback) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.OFFSET, offsetCallback);
+	}
+
+	/**
+	 * Returns the user callback that sets the property controls the scale boundary strategy (bypassed by min/max time options).
+	 * 
+	 * @return the user callback that sets the property controls the scale boundary strategy (bypassed by min/max time options).
+	 */
+	public ScaleBoundsCallback getBoundsCallback() {
+		return boundsCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets the property controls the scale boundary strategy (bypassed by min/max time options).
+	 * 
+	 * @param boundsCallback the user callback that sets the property controls the scale boundary strategy (bypassed by min/max time options).
+	 */
+	public void setBounds(ScaleBoundsCallback boundsCallback) {
+		// sets the callback
+		this.boundsCallback = boundsCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.BOUNDS, boundsCallback, boundsCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets the property controls the scale boundary strategy (bypassed by min/max time options).
+	 * 
+	 * @param boundsCallback that sets the property controls the scale boundary strategy (bypassed by min/max time options).
+	 */
+	public void setBounds(NativeCallback boundsCallback) {
+		// resets callback
+		setBounds((ScaleBoundsCallback) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.BOUNDS, boundsCallback);
+	}
+
+	/**
+	 * Returns the user callback that sets if the axis are stacked or not.
+	 * 
+	 * @return the user callback that sets if the axis are stacked or not.
+	 */
+	public ScaleStackedCallback getStackedCallback() {
+		return stackedCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets if the axis are stacked or not.
+	 * 
+	 * @param stackedCallback the user callback that sets if the axis are stacked or not.
+	 */
+	public void setStacked(ScaleStackedCallback stackedCallback) {
+		// sets the callback
+		this.stackedCallback = stackedCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.STACKED, stackedCallback, stackedCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets if the axis are stacked or not.
+	 * 
+	 * @param stackedCallback that sets if the axis are stacked or not.
+	 */
+	public void setStacked(NativeCallback stackedCallback) {
+		// resets callback
+		setStacked((ScaleStackedCallback) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.STACKED, stackedCallback);
 	}
 
 }
