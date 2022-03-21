@@ -17,10 +17,10 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.ScaleBoundsCallback;
+import org.pepstock.charba.client.callbacks.BoundsCallback;
 import org.pepstock.charba.client.callbacks.ScaleOffsetCallback;
 import org.pepstock.charba.client.callbacks.ScalePositionCallback;
-import org.pepstock.charba.client.callbacks.ScaleStackedCallback;
+import org.pepstock.charba.client.callbacks.StackedCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -109,9 +109,9 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	// user callback implementation for offset
 	private ScaleOffsetCallback offsetCallback = null;
 	// user callback implementation for offset
-	private ScaleBoundsCallback boundsCallback = null;
+	private BoundsCallback boundsCallback = null;
 	// user callback implementation for stacked
-	private ScaleStackedCallback stackedCallback = null;
+	private StackedCallback stackedCallback = null;
 
 	private final Grid grid;
 
@@ -181,7 +181,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 */
 	public void setStacked(boolean stacked) {
 		// resets callback
-		setStacked((ScaleStackedCallback) null);
+		setStacked((StackedCallback) null);
 		// stores values
 		getScale().setStacked(stacked);
 	}
@@ -268,7 +268,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 */
 	public void setBounds(Bounds bounds) {
 		// resets callback
-		setBounds((ScaleBoundsCallback) null);
+		setBounds((BoundsCallback) null);
 		// stores values
 		getScale().setBounds(bounds);
 	}
@@ -401,7 +401,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * 
 	 * @return the user callback that sets the property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
-	public ScaleBoundsCallback getBoundsCallback() {
+	public BoundsCallback getBoundsCallback() {
 		return boundsCallback;
 	}
 
@@ -410,7 +410,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * 
 	 * @param boundsCallback the user callback that sets the property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
-	public void setBounds(ScaleBoundsCallback boundsCallback) {
+	public void setBounds(BoundsCallback boundsCallback) {
 		// sets the callback
 		this.boundsCallback = boundsCallback;
 		// stores and manages callback
@@ -424,7 +424,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 */
 	public void setBounds(NativeCallback boundsCallback) {
 		// resets callback
-		setBounds((ScaleBoundsCallback) null);
+		setBounds((BoundsCallback) null);
 		// stores and manages callback
 		setCallback(getConfiguration(), Property.BOUNDS, boundsCallback);
 	}
@@ -434,7 +434,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * 
 	 * @return the user callback that sets if the axis are stacked or not.
 	 */
-	public ScaleStackedCallback getStackedCallback() {
+	public StackedCallback getStackedCallback() {
 		return stackedCallback;
 	}
 
@@ -443,7 +443,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * 
 	 * @param stackedCallback the user callback that sets if the axis are stacked or not.
 	 */
-	public void setStacked(ScaleStackedCallback stackedCallback) {
+	public void setStacked(StackedCallback stackedCallback) {
 		// sets the callback
 		this.stackedCallback = stackedCallback;
 		// stores and manages callback
@@ -457,7 +457,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 */
 	public void setStacked(NativeCallback stackedCallback) {
 		// resets callback
-		setStacked((ScaleStackedCallback) null);
+		setStacked((StackedCallback) null);
 		// stores and manages callback
 		setCallback(getConfiguration(), Property.STACKED, stackedCallback);
 	}

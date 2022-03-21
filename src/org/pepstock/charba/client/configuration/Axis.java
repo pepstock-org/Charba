@@ -18,6 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.callbacks.AlignToPixelsCallback;
 import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.callbacks.AxisCalculateLabelRotationCallback;
 import org.pepstock.charba.client.callbacks.AxisDataLimitsCallback;
@@ -30,7 +31,9 @@ import org.pepstock.charba.client.callbacks.DisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ReverseCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
+import org.pepstock.charba.client.callbacks.ScaleWeightCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -104,6 +107,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private final CallbackProxy<ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the reverse function
 	private final CallbackProxy<ProxyBooleanCallback> reverseCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the alignToPixels function
+	private final CallbackProxy<ProxyBooleanCallback> alignToPixelsCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the alignToPixels function
+	private final CallbackProxy<ProxyDoubleCallback> weightCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------------------
 	// -- USERS AXIS CALLBACKS x CALLBACKS ---
@@ -132,6 +139,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private ColorCallback<ScaleContext> backgroundColorCallback = null;
 	// reverse callback instance
 	private ReverseCallback reverseCallback = null;
+	// alignToPixels callback instance
+	private AlignToPixelsCallback alignToPixelsCallback = null;
+	// weight callback instance
+	private ScaleWeightCallback weightCallback = null;
 
 	// stores axis type
 	private final AxisType storeType;
@@ -263,6 +274,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getBackgroundColorCallback(), getDefaultValues().getBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.reverseCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getReverseCallback(), getDefaultValues().isReverse()).booleanValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.alignToPixelsCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getAlignToPixelsCallback(), getDefaultValues().isAlignToPixels()).booleanValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.weightCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getWeightCallback(), getDefaultValues().getWeight()).doubleValue());
 	}
 
 	/**
@@ -391,6 +406,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param weight weight of axis
 	 */
 	public void setWeight(double weight) {
+		// resets callback
+		setWeight((ScaleWeightCallback) null);
+		// stores value
 		getScale().setWeight(weight);
 	}
 
@@ -410,6 +428,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * @param alignToPixels <code>true</code> to align pixel values to device pixels.
 	 */
 	public void setAlignToPixels(boolean alignToPixels) {
+		// resets callback
+		setAlignToPixels((AlignToPixelsCallback) null);
+		// stores value
 		getScale().setAlignToPixels(alignToPixels);
 	}
 
@@ -595,6 +616,72 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		setReverse((ReverseCallback) null);
 		// stores and manages callback
 		setCallback(getConfiguration(), Property.REVERSE, reverseCallback);
+	}
+
+	/**
+	 * Returns the user callback that sets <code>true</code> to align pixel values to device pixels.
+	 * 
+	 * @return the user callback that sets <code>true</code> to align pixel values to device pixels.
+	 */
+	public AlignToPixelsCallback getAlignToPixelsCallback() {
+		return alignToPixelsCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets <code>true</code> to align pixel values to device pixels.
+	 * 
+	 * @param alignToPixelsCallback the user callback that sets <code>true</code> to align pixel values to device pixels.
+	 */
+	public void setAlignToPixels(AlignToPixelsCallback alignToPixelsCallback) {
+		// sets the callback
+		this.alignToPixelsCallback = alignToPixelsCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.ALIGN_TO_PIXELS, alignToPixelsCallback, alignToPixelsCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets <code>true</code> to align pixel values to device pixels.
+	 * 
+	 * @param alignToPixelsCallback that sets <code>true</code> to align pixel values to device pixels.
+	 */
+	public void setAlignToPixels(NativeCallback alignToPixelsCallback) {
+		// resets callback
+		setAlignToPixels((AlignToPixelsCallback) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.ALIGN_TO_PIXELS, alignToPixelsCallback);
+	}
+
+	/**
+	 * Returns the user callback that sets the weight used to sort the axis.
+	 * 
+	 * @return the user callback that sets the weight used to sort the axis.
+	 */
+	public ScaleWeightCallback getWeightCallback() {
+		return weightCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets the weight used to sort the axis.
+	 * 
+	 * @param weightCallback the user callback that sets the weight used to sort the axis.
+	 */
+	public void setWeight(ScaleWeightCallback weightCallback) {
+		// sets the callback
+		this.weightCallback = weightCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.WEIGHT, weightCallback, weightCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets the weight used to sort the axis.
+	 * 
+	 * @param weightCallback that sets the weight used to sort the axis.
+	 */
+	public void setWeight(NativeCallback weightCallback) {
+		// resets callback
+		setWeight((ScaleWeightCallback) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.WEIGHT, weightCallback);
 	}
 
 	// -----------------------------

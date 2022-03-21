@@ -305,12 +305,14 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `display` by `DisplayCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `backgroundColor` by `ColorCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `reverse` by new `ReverseCallback` (package `org.pepstock.charba.client.callbacks`) class
+   * `alignToPixels` by new `AlignToPixelsCallback` (package `org.pepstock.charba.client.callbacks`) class
+   * `weight` by new `ScaleWeightCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `min`, `max`, `suggestedMin` and `suggestedMax` by new `MinMaxCallback` (package `org.pepstock.charba.client.callbacks`) class
  * add scriptable options to all cartesian axes for the following options:
-   * `bounds` by new `ScaleBoundsCallback` (package `org.pepstock.charba.client.callbacks`) class
+   * `bounds` by new `BoundsCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `offset` by new `ScaleOffsetCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `position` by new `ScalePositionCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `stacked` by new `ScaleStackedCallback` (package `org.pepstock.charba.client.callbacks`) class
+   * `stacked` by new `StackedCallback` (package `org.pepstock.charba.client.callbacks`) class
  
 ### Fixed Bugs
 

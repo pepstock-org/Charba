@@ -24,6 +24,6 @@ import org.pepstock.charba.client.enums.Bounds;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public interface ScaleBoundsCallback extends Scriptable<Bounds, ScaleContext> {
+public interface BoundsCallback extends Scriptable<Bounds, ScaleContext> {
 
 }

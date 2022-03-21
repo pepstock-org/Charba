@@ -15,14 +15,14 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.configuration.CartesianAxis;
+import org.pepstock.charba.client.configuration.Axis;
 
 /**
- * Callback interface to set whatever <code>stacked</code> property at runtime, for {@link CartesianAxis}.
+ * Callback interface to set whatever <code>alignToPixels</code> property at runtime, for {@link Axis}.
  * 
  * @author Andrea "Stock" Stocchero
  * 
  */
-public interface ScaleStackedCallback extends Scriptable<Boolean, ScaleContext> {
+public interface AlignToPixelsCallback extends Scriptable<Boolean, ScaleContext> {
 
 }
