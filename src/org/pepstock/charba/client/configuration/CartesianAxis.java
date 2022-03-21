@@ -16,14 +16,17 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.BoundsCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleOffsetCallback;
 import org.pepstock.charba.client.callbacks.ScalePositionCallback;
-import org.pepstock.charba.client.callbacks.StackedCallback;
+import org.pepstock.charba.client.callbacks.ScaleWeightCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.StackCallback;
+import org.pepstock.charba.client.callbacks.StackedCallback;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -65,6 +68,10 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	private final CallbackProxy<ProxyStringCallback> boundsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the stacked function
 	private final CallbackProxy<ProxyBooleanCallback> stackedCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the stackWeight function
+	private final CallbackProxy<ProxyDoubleCallback> stackWeightCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the stack function
+	private final CallbackProxy<ProxyStringCallback> stackCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	/**
 	 * Name of properties of native object.
@@ -75,6 +82,8 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		BOUNDS("bounds"),
 		POSITION("position"),
 		OFFSET("offset"),
+		STACK("stack"),
+		STACK_WEIGHT("stackWeight"),
 		STACKED("stacked");
 
 		// name value of property
@@ -112,6 +121,10 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	private BoundsCallback boundsCallback = null;
 	// user callback implementation for stacked
 	private StackedCallback stackedCallback = null;
+	// user callback implementation for stackWeight
+	private ScaleWeightCallback stackWeightCallback = null;
+	// user callback implementation for stackWeight
+	private StackCallback stackCallback = null;
 
 	private final Grid grid;
 
@@ -147,6 +160,10 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		this.boundsCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getBoundsCallback(), getDefaultValues().getBounds()).value());
 		// sets function to proxy callback in order to invoke the java interface
 		this.stackedCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getStackedCallback(), getDefaultValues().isStacked()).booleanValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.stackWeightCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getStackWeightCallback(), getDefaultValues().getStackWeight()).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.stackCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getStackCallback(), getDefaultValues().getStack()));
 	}
 
 	/**
@@ -290,6 +307,9 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 *            Axes at the same position with same stack are stacked
 	 */
 	public void setStack(String stack) {
+		// resets callback
+		setStack((StackCallback) null);
+		// stores and manages callback
 		getScale().setStack(stack);
 	}
 
@@ -312,6 +332,9 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 *            Used to determine the amount of allocated space for the scale within the group.
 	 */
 	public void setStackWeight(double stackWeight) {
+		// resets callback
+		setStackWeight((ScaleWeightCallback) null);
+		// stores value
 		getScale().setStackWeight(stackWeight);
 	}
 
@@ -462,4 +485,69 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		setCallback(getConfiguration(), Property.STACKED, stackedCallback);
 	}
 
+	/**
+	 * Returns the user callback that sets the weight of the scale in stack group.
+	 * 
+	 * @return the user callback that sets the weight of the scale in stack group.
+	 */
+	public ScaleWeightCallback getStackWeightCallback() {
+		return stackWeightCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets the weight of the scale in stack group.
+	 * 
+	 * @param stackWeightCallback the user callback that sets the weight of the scale in stack group.
+	 */
+	public void setStackWeight(ScaleWeightCallback stackWeightCallback) {
+		// sets the callback
+		this.stackWeightCallback = stackWeightCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.STACK_WEIGHT, stackWeightCallback, stackWeightCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets the weight of the scale in stack group.
+	 * 
+	 * @param stackWeightCallback that sets the weight of the scale in stack group.
+	 */
+	public void setStackWeight(NativeCallback stackWeightCallback) {
+		// resets callback
+		setStackWeight((ScaleWeightCallback) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.STACK_WEIGHT, stackWeightCallback);
+	}
+
+	/**
+	 * Returns the user callback that sets the stack group.
+	 * 
+	 * @return the user callback that sets the stack group
+	 */
+	public StackCallback getStackCallback() {
+		return stackCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets the stack group.
+	 * 
+	 * @param stackCallback the user callback that sets the stack group
+	 */
+	public void setStack(StackCallback stackCallback) {
+		// sets the callback
+		this.stackCallback = stackCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.STACK, stackCallback, stackCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets the stack group.
+	 * 
+	 * @param stackCallback that sets the stack group
+	 */
+	public void setStack(NativeCallback stackCallback) {
+		// resets callback
+		setStack((StackCallback) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.STACK, stackCallback);
+	}
 }

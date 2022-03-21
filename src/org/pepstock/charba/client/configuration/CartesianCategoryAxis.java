@@ -35,7 +35,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 
 	private final CartesianCategoryTick ticks;
 
-	private final MinMaxCallbacksHandler<String> minMaxhandler;
+	private final MinMaxCallbacksHandler<String> minMaxHandler;
 
 	/**
 	 * Builds the object storing the chart instance. Axis type is X by default.
@@ -112,7 +112,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 		// creates the ticks instance
 		this.ticks = new CartesianCategoryTick(this);
 		// creates min max handler
-		this.minMaxhandler = new MinMaxCallbacksHandler<>(this);
+		this.minMaxHandler = new MinMaxCallbacksHandler<>(this);
 	}
 
 	/*
@@ -132,7 +132,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 */
 	@Override
 	public MinMaxCallbacksHandler<String> getMinMaxCallbacksHandler() {
-		return minMaxhandler;
+		return minMaxHandler;
 	}
 
 	/**

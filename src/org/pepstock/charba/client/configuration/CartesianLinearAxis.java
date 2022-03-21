@@ -30,8 +30,10 @@ import org.pepstock.charba.client.options.ScaleId;
 public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> implements IsLinearAxis {
 
 	private final CartesianLinearTick ticks;
-
-	private final MinMaxCallbacksHandler<Double> minMaxhandler;
+	// min max handler
+	private final MinMaxCallbacksHandler<Double> minMaxHandler;
+	// begin at zero handler
+	private final BegiAtZeroCallbackHandler beginAtZeroHandler;
 
 	/**
 	 * Builds the object storing the chart instance. Axis type is Y by default.
@@ -107,8 +109,9 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 		super(chart, id, type, kind);
 		// creates the ticks instance
 		this.ticks = new CartesianLinearTick(this);
-		// creates min max handler
-		this.minMaxhandler = new MinMaxCallbacksHandler<>(this);
+		// creates internal handlers
+		this.minMaxHandler = new MinMaxCallbacksHandler<>(this);
+		this.beginAtZeroHandler = new BegiAtZeroCallbackHandler(this);
 	}
 
 	/*
@@ -128,7 +131,17 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	 */
 	@Override
 	public MinMaxCallbacksHandler<Double> getMinMaxCallbacksHandler() {
-		return minMaxhandler;
+		return minMaxHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.HasBeginAtZeroCallbackHandler#getBegiAtZeroCallbackHandler()
+	 */
+	@Override
+	public BegiAtZeroCallbackHandler getBegiAtZeroCallbackHandler() {
+		return beginAtZeroHandler;
 	}
 
 	/*

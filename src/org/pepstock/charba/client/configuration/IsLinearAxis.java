@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.BeginAtZeroCallback;
 
 /**
  * Common methods for numeric scales (linear/log cartesian and radial).<br>
@@ -23,7 +24,7 @@ import org.pepstock.charba.client.Defaults;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsLinearAxis extends IsNumericAxis {
+public interface IsLinearAxis extends IsNumericAxis, HasBeginAtZeroCallbackHandler {
 
 	/**
 	 * If true, scale will include 0 if it is not already included.
@@ -33,6 +34,9 @@ public interface IsLinearAxis extends IsNumericAxis {
 	default void setBeginAtZero(boolean beginAtZero) {
 		// checks if axis is consistent
 		if (getAxisElement() != null) {
+			// reset callback
+			setBeginAtZero((BeginAtZeroCallback) null);
+			// stores value
 			getAxisElement().getScale().setBeginAtZero(beginAtZero);
 		}
 	}

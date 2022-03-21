@@ -313,7 +313,9 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `offset` by new `ScaleOffsetCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `position` by new `ScalePositionCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `stacked` by new `StackedCallback` (package `org.pepstock.charba.client.callbacks`) class
- 
+   * `stack` by new `StackCallback` (package `org.pepstock.charba.client.callbacks`) class   
+   * `stackWeight` by new `ScaleWeightCallback` (package `org.pepstock.charba.client.callbacks`) class
+
 ### Fixed Bugs
 
  * [#69](https://github.com/pepstock-org/Charba/issues/69) set `fill` option to `true` as initial value on `StackeAreaChart` class in order to have the area chart by default. Thanks @salmonb.

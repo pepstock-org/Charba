@@ -39,12 +39,12 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @return the callback to set the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	default MinMaxCallback<T> getMinCallback() {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			return getMinMaxCallbacksHandler().getMinCallback();
 		}
-		// if here, axis is not consistent
+		// if here, min/max handler is not consistent
 		return null;
 	}
 
@@ -54,7 +54,7 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @param minCallback the callback to set the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	default void setMin(MinMaxCallback<T> minCallback) {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			getMinMaxCallbacksHandler().setMin(minCallback);
@@ -67,7 +67,7 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @param minCallback the callback to set the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	default void setMin(NativeCallback minCallback) {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			getMinMaxCallbacksHandler().setMin(minCallback);
@@ -80,7 +80,7 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @param maxCallback the callback to set the user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	default void setMax(MinMaxCallback<T> maxCallback) {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			getMinMaxCallbacksHandler().setMax(maxCallback);
@@ -93,7 +93,7 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @param maxCallback the callback to set the user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	default void setMax(NativeCallback maxCallback) {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			getMinMaxCallbacksHandler().setMax(maxCallback);
@@ -106,12 +106,12 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @return the callback to set the user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	default MinMaxCallback<T> getMaxCallback() {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			return getMinMaxCallbacksHandler().getMaxCallback();
 		}
-		// if here, axis is not consistent
+		// if here, min/max handler is not consistent
 		return null;
 	}
 
@@ -121,12 +121,12 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @return the callback to set the adjustment used when calculating the minimum data value.
 	 */
 	default MinMaxCallback<T> getSuggestedMinCallback() {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			return getMinMaxCallbacksHandler().getSuggestedMinCallback();
 		}
-		// if here, axis is not consistent
+		// if here, min/max handler is not consistent
 		return null;
 	}
 
@@ -136,7 +136,7 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @param suggestedMinCallback the callback to set the adjustment used when calculating the minimum data value.
 	 */
 	default void setSuggestedMin(MinMaxCallback<T> suggestedMinCallback) {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			getMinMaxCallbacksHandler().setSuggestedMin(suggestedMinCallback);
@@ -149,7 +149,7 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @param suggestedMinCallback the callback to set the adjustment used when calculating the minimum data value.
 	 */
 	default void setSuggestedMin(NativeCallback suggestedMinCallback) {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			getMinMaxCallbacksHandler().setSuggestedMin(suggestedMinCallback);
@@ -162,12 +162,12 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @return the callback to set the adjustment used when calculating the maximum data value.
 	 */
 	default MinMaxCallback<T> getSuggestedMaxCallback() {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			return getMinMaxCallbacksHandler().getSuggestedMaxCallback();
 		}
-		// if here, axis is not consistent
+		// if here, min/max handler is not consistent
 		return null;
 	}
 
@@ -177,7 +177,7 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @param suggestedMaxCallback the callback to set the adjustment used when calculating the maximum data value.
 	 */
 	default void setSuggestedMax(MinMaxCallback<T> suggestedMaxCallback) {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			getMinMaxCallbacksHandler().setSuggestedMax(suggestedMaxCallback);
@@ -190,7 +190,7 @@ interface HasMinMaxCallbacksHandler<T> {
 	 * @param suggestedMaxCallback the callback to set the adjustment used when calculating the maximum data value.
 	 */
 	default void setSuggestedMax(NativeCallback suggestedMaxCallback) {
-		// checks if axis is consistent
+		// checks if min/max handler is consistent
 		if (getMinMaxCallbacksHandler() != null) {
 			// returns callback
 			getMinMaxCallbacksHandler().setSuggestedMax(suggestedMaxCallback);

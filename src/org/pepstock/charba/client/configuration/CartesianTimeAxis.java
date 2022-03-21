@@ -39,7 +39,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 
 	private final Adapters adapters;
 
-	private final MinMaxCallbacksHandler<Date> minMaxhandler;
+	private final MinMaxCallbacksHandler<Date> minMaxHandler;
 
 	/**
 	 * Builds the object storing the chart instance. Axis type is X by default.
@@ -120,7 +120,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 		// creates the adapters object
 		this.adapters = new Adapters(this);
 		// creates min max handler
-		this.minMaxhandler = new MinMaxCallbacksHandler<>(this);
+		this.minMaxHandler = new MinMaxCallbacksHandler<>(this);
 	}
 
 	/*
@@ -140,7 +140,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 	 */
 	@Override
 	public MinMaxCallbacksHandler<Date> getMinMaxCallbacksHandler() {
-		return minMaxhandler;
+		return minMaxHandler;
 	}
 
 	/**
