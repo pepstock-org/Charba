@@ -91,12 +91,12 @@ public interface IsDefaultScale {
 	int getGrace();
 
 	/**
-	 * Returns the value in percentage is added to the maximum data value and subtracted from the minimum data.<br>
+	 * Returns the value in percentage, value between 0 and 1, is added to the maximum data value and subtracted from the minimum data.<br>
 	 * This extends the scale range as if the data values were that much greater.
 	 * 
 	 * @return the value in percentage is added to the maximum data value and subtracted from the minimum data
 	 */
-	String getGraceAsPercentage();
+	double getGraceAsPercentage();
 
 	/**
 	 * Returns the user defined minimum number for the scale, overrides minimum value from data.

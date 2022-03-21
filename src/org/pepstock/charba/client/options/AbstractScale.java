@@ -31,6 +31,7 @@ import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Bounds;
 import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Scales are an integral part of a chart.<br>
@@ -319,26 +320,26 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	}
 
 	/**
-	 * Sets the value in percentage is added to the maximum data value and subtracted from the minimum data.<br>
+	 * Sets the value in percentage, value between 0 and 1, is added to the maximum data value and subtracted from the minimum data.<br>
 	 * This extends the scale range as if the data values were that much greater.
 	 * 
 	 * @param grace the value in percentage is added to the maximum data value and subtracted from the minimum data
 	 */
-	public final void setGraceAsPercentage(String grace) {
-		setValueAndAddToParent(Property.GRACE, grace);
+	public final void setGraceAsPercentage(double grace) {
+		setValueAndAddToParent(Property.GRACE, Utilities.getAsPercentage(grace, 0));
 	}
 
 	/**
-	 * Returns the value in percentage is added to the maximum data value and subtracted from the minimum data.<br>
+	 * Returns the value in percentage, value between 0 and 1, is added to the maximum data value and subtracted from the minimum data.<br>
 	 * This extends the scale range as if the data values were that much greater.
 	 * 
 	 * @return the value in percentage is added to the maximum data value and subtracted from the minimum data
 	 */
 	@Override
-	public final String getGraceAsPercentage() {
+	public final double getGraceAsPercentage() {
 		// checks if the property is a string
 		if (isType(Property.GRACE, ObjectType.STRING)) {
-			return getValue(Property.GRACE, getDefaultValues().getGraceAsPercentage());
+			return Utilities.getAsPercentage(getValue(Property.GRACE, Undefined.STRING), getDefaultValues().getGraceAsPercentage());
 		}
 		// if here, the property is not a string
 		// then returns the default

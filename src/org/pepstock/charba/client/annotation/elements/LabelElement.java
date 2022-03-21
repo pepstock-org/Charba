@@ -120,7 +120,7 @@ public final class LabelElement extends BaseElement {
 	 * @param percentage the position of label on line by the percentage (value between 0 and 1) of the line dimension
 	 */
 	public void setPositionAsPercentage(double percentage) {
-		setValueAndAddToParent(Property.POSITION, Utilities.getAsPercentage(percentage));
+		setValueAndAddToParent(Property.POSITION, Utilities.getAsPercentage(percentage, 0.5D));
 	}
 
 	/**

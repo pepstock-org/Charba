@@ -349,7 +349,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		// resets callback
 		setPosition((LabelPositionCallback) null);
 		// stores value
-		setValue(Property.POSITION, Utilities.getAsPercentage(percentage));
+		setValue(Property.POSITION, Utilities.getAsPercentage(percentage, 0.5D));
 	}
 
 	/**
@@ -528,7 +528,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 			// casts
 			Number number = (Number) result;
 			// returns the double value
-			return Utilities.getAsPercentage(number.doubleValue());
+			return Utilities.getAsPercentage(number.doubleValue(), 0.5D);
 		}
 		// if here the result is null
 		// then returns the default

@@ -93,7 +93,7 @@ public final class AlignPositionElement extends NativeObjectContainer {
 	 * @param percentage the position of label by the percentage (value between 0 and 1) of the horizontal dimension
 	 */
 	public void setXAsPercentage(double percentage) {
-		setValue(Property.X, Utilities.getAsPercentage(percentage));
+		setValue(Property.X, Utilities.getAsPercentage(percentage, 0));
 	}
 
 	/**
@@ -102,7 +102,7 @@ public final class AlignPositionElement extends NativeObjectContainer {
 	 * @param percentage the position of label by the percentage (value between 0 and 1) of the vertical dimension
 	 */
 	public void setYAsPercentage(double percentage) {
-		setValue(Property.Y, Utilities.getAsPercentage(percentage));
+		setValue(Property.Y, Utilities.getAsPercentage(percentage, 0));
 	}
 
 	/**

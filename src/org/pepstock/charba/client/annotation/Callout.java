@@ -20,7 +20,6 @@ import org.pepstock.charba.client.annotation.callbacks.MarginCallback;
 import org.pepstock.charba.client.annotation.callbacks.SideCallback;
 import org.pepstock.charba.client.annotation.callbacks.StartCallback;
 import org.pepstock.charba.client.annotation.enums.CalloutPosition;
-import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
@@ -28,6 +27,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallb
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -317,7 +317,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 		// resets callback
 		setStart((StartCallback) null);
 		// stores value
-		setValue(Property.START, Utilities.getAsPercentage(start));
+		setValue(Property.START, Utilities.getAsPercentage(start, 0));
 	}
 
 	/**
@@ -530,13 +530,21 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 			// returns as integer
 			return result.intValue();
 		} else if (result instanceof Double) {
-			// is a percentage
-			// returns the double value
-			return Utilities.getAsPercentage(result.doubleValue());
+			// cats to double
+			double value = result.doubleValue();
+			// to be a percentage, must be between 0 and 1
+			if (Checker.isBetween(value, 0, 1)) {
+				// is a percentage
+				// returns the double value
+				return Utilities.getAsPercentage(result.doubleValue(), 0);
+			}
+			// if here, returns the returned value
+			// as integer because is not a percentage
+			return result.intValue();
 		}
 		// if here the result is null
 		// then returns the default
-		return Utilities.getAsPercentage(defaultValue);
+		return Utilities.getAsPercentage(defaultValue, 0);
 	}
 
 }

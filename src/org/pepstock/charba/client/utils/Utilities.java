@@ -441,10 +441,12 @@ public final class Utilities {
 	 * Transforms the percentage value (between 0 and 1) in a string with format <code>{number}%</code>.
 	 * 
 	 * @param value the percentage value (between 0 and 1)
+	 * @param defaultValue the default percentage if the passed value if not in the percentage range
 	 * @return the string representation of the percentage.
 	 */
-	public static String getAsPercentage(double value) {
-		return Utilities.applyTemplate(PERCENTAGE_TEMPLATE, Checker.betweenOrDefault(value, 0, 1, 0.5) * 100);
+	public static String getAsPercentage(double value, double defaultValue) {
+		double normalizeDefaultValue = Checker.betweenOrMinimum(defaultValue, 0, 1);
+		return Utilities.applyTemplate(PERCENTAGE_TEMPLATE, Checker.betweenOrDefault(value, 0, 1, normalizeDefaultValue) * 100);
 	}
 
 	/**

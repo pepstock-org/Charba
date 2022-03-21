@@ -16,11 +16,20 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.GraceCallback;
+import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScaleContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.options.ScaleId;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * This object is used to map defined axis as linear.
@@ -28,6 +37,49 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  */
 public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> implements IsLinearAxis {
+
+	// --------------------------------------------
+	// -- CALLBACKS PROXIES FOR AXIS PROPERTIES ---
+	// --------------------------------------------
+	// callback proxy to invoke the position function
+	private final CallbackProxy<ProxyObjectCallback> graceCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		GRACE("grace");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
+	// ----------------------------------------
+	// -- USERS AXIS CALLBACKS x PROPERTIES ---
+	// ----------------------------------------
+	// user callback implementation for position
+	private GraceCallback graceCallback = null;
 
 	private final CartesianLinearTick ticks;
 	// min max handler
@@ -112,6 +164,11 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 		// creates internal handlers
 		this.minMaxHandler = new MinMaxCallbacksHandler<>(this);
 		this.beginAtZeroHandler = new BegiAtZeroCallbackHandler(this);
+		// -------------------------------------------------
+		// -- SET CALLBACKS to PROXIES x AXIS PROPERTIES ---
+		// -------------------------------------------------
+		// sets function to proxy callback in order to invoke the java interface
+		this.graceCallbackProxy.setCallback(context -> onGrace(createContext(context), getDefaultValues().getGrace()));
 	}
 
 	/*
@@ -175,23 +232,94 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	}
 
 	/**
-	 * Sets the value in percentage is added to the maximum data value and subtracted from the minimum data.<br>
+	 * Sets the value in percentage, value between 0 and 1, is added to the maximum data value and subtracted from the minimum data.<br>
 	 * This extends the scale range as if the data values were that much greater.
 	 * 
 	 * @param grace the value in percentage is added to the maximum data value and subtracted from the minimum data
 	 */
-	public void setGraceAsPercentage(String grace) {
+	public void setGraceAsPercentage(double grace) {
 		getScale().setGraceAsPercentage(grace);
 	}
 
 	/**
-	 * Returns the value in percentage is added to the maximum data value and subtracted from the minimum data.<br>
+	 * Returns the value in percentage, value between 0 and 1, is added to the maximum data value and subtracted from the minimum data.<br>
 	 * This extends the scale range as if the data values were that much greater.
 	 * 
 	 * @return the value in percentage is added to the maximum data value and subtracted from the minimum data
 	 */
-	public String getGraceAsPercentage() {
+	public double getGraceAsPercentage() {
 		return getScale().getGraceAsPercentage();
 	}
 
+	// -----------------------------
+	// AXIS PROPERTIES CALLBACKS
+	// -----------------------------
+
+	/**
+	 * Returns the user callback that sets the value in pixels is added to the maximum data value and subtracted from the minimum data.
+	 * 
+	 * @return the user callback that sets the value in pixels is added to the maximum data value and subtracted from the minimum data.
+	 */
+	public GraceCallback getGraceCallback() {
+		return graceCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets the value in pixels is added to the maximum data value and subtracted from the minimum data.
+	 * 
+	 * @param graceCallback the user callback that sets the value in pixels is added to the maximum data value and subtracted from the minimum data.
+	 */
+	public void setGrace(GraceCallback graceCallback) {
+		// sets the callback
+		this.graceCallback = graceCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.GRACE, graceCallback, graceCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets the value in pixels is added to the maximum data value and subtracted from the minimum data.
+	 * 
+	 * @param graceCallback that sets the value in pixels is added to the maximum data value and subtracted from the minimum data.
+	 */
+	public void setGrace(NativeCallback graceCallback) {
+		// resets callback
+		setGrace((GraceCallback) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.GRACE, graceCallback);
+	}
+
+	// -----------------------------
+	// INTERNALS
+	// -----------------------------
+
+	/**
+	 * Returns an object as string when the callback has been activated.
+	 * 
+	 * @param context scale context instance.
+	 * @param defaultValue default value to apply if callback returns an inconsistent value
+	 * @return an object as string
+	 */
+	private Object onGrace(ScaleContext context, int defaultValue) {
+		// gets value
+		Number result = ScriptableUtils.getOptionValue(context, getGraceCallback(), defaultValue);
+		// checks if consistent
+		if (result instanceof Integer) {
+			// returns as integer
+			return result.intValue();
+		} else if (result instanceof Double) {
+			// cats to double
+			double value = result.doubleValue();
+			// to be a percentage, must be between 0 and 1
+			if (Checker.isBetween(value, 0, 1)) {
+				// is a percentage
+				// returns the double value
+				return Utilities.getAsPercentage(result.doubleValue(), 0);
+			}
+			// if here, returns the returned value
+			return value;
+		}
+		// if here the result is null
+		// then returns the default
+		return defaultValue;
+	}
 }

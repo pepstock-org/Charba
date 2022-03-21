@@ -56,7 +56,7 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private static final int DEFAULT_GRACE = 0;
 
-	private static final String DEFAULT_GRACE_AS_PERCENTAGE = "0%";
+	private static final double DEFAULT_GRACE_AS_PERCENTAGE = 0;
 
 	private static final double DEFAULT_MIN = Double.MIN_VALUE;
 
@@ -259,7 +259,7 @@ public final class DefaultScale implements IsDefaultScale {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getGraceAsPercentage()
 	 */
 	@Override
-	public String getGraceAsPercentage() {
+	public double getGraceAsPercentage() {
 		return DEFAULT_GRACE_AS_PERCENTAGE;
 	}
 

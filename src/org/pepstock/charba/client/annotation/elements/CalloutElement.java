@@ -158,7 +158,7 @@ public final class CalloutElement extends BaseElement {
 	 * @param start the percentage of the separator dimension to use as starting point for callout pointer
 	 */
 	public void setStartAsPercentage(double start) {
-		setValue(Property.START, Utilities.getAsPercentage(start));
+		setValue(Property.START, Utilities.getAsPercentage(start, 0));
 	}
 
 	/**
