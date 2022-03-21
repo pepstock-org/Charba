@@ -316,9 +316,12 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `stacked` by new `StackedCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `stack` by new `StackCallback` (package `org.pepstock.charba.client.callbacks`) class   
    * `stackWeight` by new `ScaleWeightCallback` (package `org.pepstock.charba.client.callbacks`) class
- * add scriptable options to all linear axes for the following options:
+ * add scriptable options to cartesian linear axes for the following options:
    * `beginAtZero` by new `BeginAtZeroCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `grace` by new `GraceCallback` (package `org.pepstock.charba.client.callbacks`) class
+ * add scriptable options to radial linear axes for the following options:
+   * `beginAtZero` by new `BeginAtZeroCallback` (package `org.pepstock.charba.client.callbacks`) class
+   * `startAngle` by new `StartAngleCallback` (package `org.pepstock.charba.client.callbacks`) class
 
 ### Fixed Bugs
 

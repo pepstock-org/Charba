@@ -16,6 +16,13 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.StartAngleCallback;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
@@ -31,6 +38,49 @@ import org.pepstock.charba.client.options.ScaleId;
  *
  */
 public class RadialAxis extends Axis implements IsLinearAxis {
+
+	// --------------------------------------------
+	// -- CALLBACKS PROXIES FOR AXIS PROPERTIES ---
+	// --------------------------------------------
+	// callback proxy to invoke the start angle function
+	private final CallbackProxy<ProxyDoubleCallback> startAngleCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		START_ANGLE("startAngle");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
+	// ----------------------------------------
+	// -- USERS AXIS CALLBACKS x PROPERTIES ---
+	// ----------------------------------------
+	// user callback implementation for start angle
+	private StartAngleCallback startAngleCallback = null;
 
 	// sub elements of axis
 	private final Grid grid;
@@ -72,6 +122,11 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 		// creates internal handlers
 		this.minMaxHandler = new MinMaxCallbacksHandler<>(this);
 		this.beginAtZeroHandler = new BegiAtZeroCallbackHandler(this);
+		// -------------------------------------------------
+		// -- SET CALLBACKS to PROXIES x AXIS PROPERTIES ---
+		// -------------------------------------------------
+		// sets function to proxy callback in order to invoke the java interface
+		this.startAngleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getStartAngleCallback(), getDefaultValues().getStartAngle()).doubleValue());
 	}
 
 	/*
@@ -164,6 +219,9 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 	 * @param startAngle starting angle to draw arcs for the first item in a data set.
 	 */
 	public void setStartAngle(double startAngle) {
+		// resets callback
+		setStartAngle((StartAngleCallback) null);
+		// stores value
 		getConfiguration().setStartAngle(startAngle);
 	}
 
@@ -176,4 +234,40 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 		return getConfiguration().getStartAngle();
 	}
 
+	// -----------------------------
+	// AXIS PROPERTIES CALLBACKS
+	// -----------------------------
+
+	/**
+	 * Returns the user callback that sets the starting angle to draw arcs for the first item in a data set.
+	 * 
+	 * @return the user callback that sets the starting angle to draw arcs for the first item in a data set.
+	 */
+	public StartAngleCallback getStartAngleCallback() {
+		return startAngleCallback;
+	}
+
+	/**
+	 * Sets the user callback that sets the starting angle to draw arcs for the first item in a data set.
+	 * 
+	 * @param startAngleCallback the user callback that sets the starting angle to draw arcs for the first item in a data set.
+	 */
+	public void setStartAngle(StartAngleCallback startAngleCallback) {
+		// sets the callback
+		this.startAngleCallback = startAngleCallback;
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.START_ANGLE, startAngleCallback, startAngleCallbackProxy);
+	}
+
+	/**
+	 * Sets the user callback that sets the starting angle to draw arcs for the first item in a data set.
+	 * 
+	 * @param startAngleCallback that sets the starting angle to draw arcs for the first item in a data set.
+	 */
+	public void setStartAngle(NativeCallback startAngleCallback) {
+		// resets callback
+		setStartAngle((StartAngleCallback) null);
+		// stores and manages callback
+		setCallback(getConfiguration(), Property.START_ANGLE, startAngleCallback);
+	}
 }

@@ -41,7 +41,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	// --------------------------------------------
 	// -- CALLBACKS PROXIES FOR AXIS PROPERTIES ---
 	// --------------------------------------------
-	// callback proxy to invoke the position function
+	// callback proxy to invoke the grace function
 	private final CallbackProxy<ProxyObjectCallback> graceCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	/**
@@ -78,7 +78,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	// ----------------------------------------
 	// -- USERS AXIS CALLBACKS x PROPERTIES ---
 	// ----------------------------------------
-	// user callback implementation for position
+	// user callback implementation for grace
 	private GraceCallback graceCallback = null;
 
 	private final CartesianLinearTick ticks;
