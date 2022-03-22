@@ -38,6 +38,7 @@
         
         <!-- CLOSURE COMPILER (to minify javascript) -->
 		<dependency org="com.google.javascript" name="closure-compiler" rev="${depver.closure-compiler}" conf="compile->default"/>
+		<dependency org="com.google.javascript" name="closure-compiler-unshaded" rev="${depver.closure-compiler}" conf="compile->default"/>
 
         <!-- CLOSURE STYLESHEETS (to minify css) -->
 		<dependency org="com.google.closure-stylesheets" name="closure-stylesheets" rev="${depver.closure-stylesheets}" conf="compile->default"/>

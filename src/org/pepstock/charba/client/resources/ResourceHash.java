@@ -45,11 +45,11 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
-	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1420474),
+	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 840798),
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */
-	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1297860),
+	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1371071),
 	/**
 	 * Hash item for 'LuxonAdapterResource' class.
 	 */
@@ -57,7 +57,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'LuxonLibraryResource' class.
 	 */
-	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 15848060),
+	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 15855781),
 	/**
 	 * Hash item for 'MatrixControllerResource' class.
 	 */
@@ -73,7 +73,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'ToastJsUtilResource' class.
 	 */
-	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 1614338),
+	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 1494870),
 	/**
 	 * Hash item for 'TreeMapControllerResource' class.
 	 */

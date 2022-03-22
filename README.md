@@ -332,6 +332,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Development
 
  * use [Reflect](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect) built-in object to manage the properties of the native objects.
+ * change dependency for Google Closure Compiler, version [v20220301](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20220301).
+ * add dependency for Google Closure Compiler Unshaded, version [v20220301](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler-unshaded/v20220301).
 
 License
 -------
