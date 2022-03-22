@@ -33,7 +33,7 @@ public interface DisplayCallback<C extends ChartContext> extends Scriptable<Obje
 	 * @return the right value to set in the options
 	 */
 	static Object checkAndGet(Object result, Display defaultValue) {
-		// gets return value using teh default argument
+		// gets return value using the default argument
 		Display toReturn = Key.checkAndGetIfValid(defaultValue);
 		// checks callback result
 		if (result instanceof Boolean) {

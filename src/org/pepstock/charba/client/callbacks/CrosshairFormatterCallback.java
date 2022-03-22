@@ -21,7 +21,7 @@ import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScaleValueItem;
 
 /**
- * This callback is the interface to defined customized representation pof the labels in {@link Crosshair#ID} plugin.
+ * This callback is the interface to defined customized representation of the labels in {@link Crosshair#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,7 +32,7 @@ public interface CrosshairFormatterCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param scale scale instance
-	 * @param value current value to draw in teh label
+	 * @param value current value to draw in the label
 	 * @return the text to apply to the crosshair label
 	 */
 	String format(IsChart chart, ScaleItem scale, ScaleValueItem value);

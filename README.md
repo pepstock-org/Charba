@@ -284,7 +284,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * hide public CHART.JS hooks of Charba out-of-the-box plugins (ChartBackgroundColor, ChartPointer, ColorSchemes, HtmlLegend and DatasetsItemsSelector).
  * rename `DisplayCallback` to `SimpleDisplayCallback` class name (package `org.pepstock.charba.client.callbacks`) where the display can be set simply with a boolean.
  * remove `DisplayCallback` class from `org.pepstock.charba.client.datalabels.callbacks` in order to use the common `DisplayCallback` (package `org.pepstock.charba.client.callbacks`) where the display can be set by a boolean or a `Display` enumeration value.
- * change `grace` option in the `CartesianLinearAxis` class in order to be a `double` (value between 0 and 1) instead of a `string` when set as percentage.
+ * change `graceAsPercentage` option in the `CartesianLinearAxis` class in order to be a `double` (value between 0 and 1) instead of a `string` when set as percentage.
 
 ### Features
 
