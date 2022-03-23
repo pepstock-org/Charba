@@ -366,6 +366,18 @@ CharbaJsItemsHelper.getBaseValue = function(object) {};
  */
 CharbaJsItemsHelper.getBasePixel = function(object) {};
 /**
+ * @param {Object} object 
+ * @param {number} value 
+ * @return {number}
+ */
+CharbaJsItemsHelper.getDistanceFromCenterForValue = function(object, value) {};
+/**
+ * @param {Object} object 
+ * @param {number} distance 
+ * @return {number}
+ */
+CharbaJsItemsHelper.getValueForDistanceFromCenter = function(object, distance) {};
+/**
  * @param {Object} object
  * @return {boolean}
  */

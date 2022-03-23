@@ -397,6 +397,10 @@ public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 		return (String) element;
 	}
 
+	// --------------------------
+	// JAVASRIPT METHODS WRAPPERS
+	// --------------------------
+
 	/**
 	 * Returns <code>true</code> if the scale is horizontal.
 	 * 
@@ -630,6 +634,42 @@ public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 	 */
 	public final double getBasePixel() {
 		return JsItemsHelper.get().getBasePixel(this);
+	}
+
+	// -----------------
+	// ONLY RADIAL SCALE
+	// -----------------
+
+	/**
+	 * Returns the distance from the center of a specific value.
+	 * 
+	 * @param value the value of to check
+	 * @return the distance from the center of a specific value
+	 */
+	public final double getDistanceFromCenterForValue(double value) {
+		// checks if radial scale
+		if (ChartAxisType.RADIAL_LINEAR.equals(getType())) {
+			return JsItemsHelper.get().getDistanceFromCenterForValue(this, value);
+		}
+		// if here, it's not a radial scale
+		// then returns undefined
+		return Undefined.DOUBLE;
+	}
+
+	/**
+	 * Returns the value calculated applying the specific distance from the center.
+	 * 
+	 * @param distance the distance which must be applied
+	 * @return the value calculated applying the specific distance from the center.
+	 */
+	public final double getValueForDistanceFromCenter(double distance) {
+		// checks if radial scale
+		if (ChartAxisType.RADIAL_LINEAR.equals(getType())) {
+			return JsItemsHelper.get().getValueForDistanceFromCenter(this, distance);
+		}
+		// if here, it's not a radial scale
+		// then returns undefined
+		return Undefined.DOUBLE;
 	}
 
 	/**

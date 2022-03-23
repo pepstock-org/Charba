@@ -691,6 +691,26 @@ CharbaJsItemsHelper.getBasePixel = function(obj) {
   return obj.getBasePixel();
 }
 /**
+ * Returns the distance from the center of a specific value.
+ *
+ * @param {Object} obj scale native object instance 
+ * @param {number} value the value of to check
+ * @return {number} the pixels from the center
+ */
+CharbaJsItemsHelper.getDistanceFromCenterForValue = function(obj, value) {
+  return obj.getDistanceFromCenterForValue(value);
+}
+/**
+ * Returns the value calculated applying the specific distance from the center.
+ *
+ * @param {Object} obj scale native object instance 
+ * @param {number} distance the distance which must be applied
+ * @return {number} the value calculated applying the specific distance from the center
+ */
+CharbaJsItemsHelper.getValueForDistanceFromCenter = function(obj, value) {
+  return obj.getValueForDistanceFromCenter(value);
+}
+/**
  * Returns true if the scale is horizontal
  *
  * @param {Object} obj scale native object instance 

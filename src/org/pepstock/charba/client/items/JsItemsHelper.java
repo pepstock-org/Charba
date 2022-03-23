@@ -237,6 +237,38 @@ final class JsItemsHelper {
 	}
 
 	/**
+	 * Returns the distance from the center of a specific value.
+	 * 
+	 * @param scale scale native object instance
+	 * @param value the value of to check
+	 * @return the distance from the center of a specific value
+	 */
+	double getDistanceFromCenterForValue(ScaleItem scale, double value) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.getDistanceFromCenterForValue(scale.nativeObject(), value);
+		}
+		// if here, scale item not consistent
+		return Undefined.DOUBLE;
+	}
+
+	/**
+	 * Returns the value calculated applying the specific distance from the center.
+	 * 
+	 * @param scale scale native object instance
+	 * @param distance the distance which must be applied
+	 * @return the value calculated applying the specific distance from the center.
+	 */
+	double getValueForDistanceFromCenter(ScaleItem scale, double distance) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.getValueForDistanceFromCenter(scale.nativeObject(), distance);
+		}
+		// if here, scale item not consistent
+		return Undefined.DOUBLE;
+	}
+
+	/**
 	 * Returns <code>true</code> if the scale is horizontal.
 	 * 
 	 * @param scale scale native object instance

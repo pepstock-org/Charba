@@ -147,6 +147,24 @@ final class NativeJsItemsHelper {
 	static native double getBasePixel(NativeObject scale);
 
 	/**
+	 * Returns the distance from the center of a specific value.
+	 * 
+	 * @param scale scale instance
+	 * @param value the value of to check
+	 * @return the distance from the center of a specific value
+	 */
+	static native double getDistanceFromCenterForValue(NativeObject scale, double value);
+
+	/**
+	 * Returns the value calculated applying the specific distance from the center.
+	 * 
+	 * @param scale scale instance
+	 * @param distance the distance which must be applied
+	 * @return the value calculated applying the specific distance from the center.
+	 */
+	static native double getValueForDistanceFromCenter(NativeObject scale, double distance);
+
+	/**
 	 * Returns <code>true</code> if the scale is horizontal.
 	 * 
 	 * @param scale scale native object instance
