@@ -28,6 +28,7 @@ import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.enums.DefaultPluginId;
 
 /**
@@ -206,7 +207,7 @@ public final class GlobalPlugins {
 		// sets in the chart all global plugins to be disable
 		for (String id : pluginsToBeDisabled) {
 			// if the plugin does not have any options or is not disable by options
-			if (!chart.getOptions().getPlugins().hasEnabled(id)) {
+			if (!hasEnabled(chart, id)) {
 				// disables the plugin at chart level
 				chart.getOptions().getPlugins().setEnabled(id, false);
 			}
@@ -220,6 +221,32 @@ public final class GlobalPlugins {
 				entry.getValue().onConfigure(chart);
 			}
 		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the plugin has been configured for the chart or at least a dataset.
+	 * 
+	 * @param chart chart instance to check
+	 * @param id the plugin id.
+	 * @return <code>true</code> if the plugin has been configured for the chart or at least a dataset
+	 */
+	private boolean hasEnabled(IsChart chart, String id) {
+		boolean enabled = chart.getOptions().getPlugins().hasEnabled(id);
+		// checks if not enabled
+		// if global plugin has configured at dataset level
+		if (!enabled) {
+			// scans datasets
+			for (Dataset dataset : chart.getData().getDatasets()) {
+				// checks if the dataste has been configured for the plugin
+				if (dataset.hasOptions(id)) {
+					// if here, the plugin has been configured for dataset
+					// then returns true
+					return true;
+				}
+			}
+		}
+		// returns the enabled
+		return enabled;
 	}
 
 	private static class InternalPlugins extends NativeObjectContainer {

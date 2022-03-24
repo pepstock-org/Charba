@@ -322,7 +322,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add scriptable options to radial linear axes for the following options:
    * `beginAtZero` by new `BeginAtZeroCallback` (package `org.pepstock.charba.client.callbacks`) class
    * `startAngle` by new `StartAngleCallback` (package `org.pepstock.charba.client.callbacks`) class
- * add `getDistanceFromCenterForValue` and `getValueForDistanceFromCenter` methods to `ScaleItem` class, enabled ONLY for radial linear scale.  
+ * add `getDistanceFromCenterForValue` and `getValueForDistanceFromCenter` methods to `ScaleItem` class, enabled ONLY for radial linear scale.
+ * enable global plugins if there are plugin options to configure the dataset and not only in the chart options (as is till now).  
 
 ### Fixed Bugs
 
