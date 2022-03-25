@@ -32,6 +32,9 @@ import org.pepstock.charba.client.items.Undefined;
  */
 public final class Colors extends AbstractNode {
 
+	// prefix of exception message
+	private static final String PREFIX_EXCEPTION_MSG = "Value for color stop ";
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
@@ -48,7 +51,7 @@ public final class Colors extends AbstractNode {
 	 */
 	public void clear() {
 		// scans all keys and removes them
-		keys().forEach((key) -> remove(key));
+		keys().forEach(this::remove);
 	}
 
 	// -----------
@@ -136,7 +139,7 @@ public final class Colors extends AbstractNode {
 	 */
 	public void setColor(double value, String color) {
 		// checks if value is consistent
-		Checker.checkIfValid(value, "Value for color stop ");
+		Checker.checkIfValid(value, PREFIX_EXCEPTION_MSG);
 		// stores value
 		setColor(Key.create(String.valueOf(value)), color);
 	}
@@ -149,7 +152,7 @@ public final class Colors extends AbstractNode {
 	 */
 	public String getColorAsString(double value) {
 		// checks if value is consistent
-		Checker.checkIfValid(value, "Value for color stop ");
+		Checker.checkIfValid(value, PREFIX_EXCEPTION_MSG);
 		// get value
 		return getColorAsString(Key.create(String.valueOf(value)));
 	}
@@ -162,7 +165,7 @@ public final class Colors extends AbstractNode {
 	 */
 	public IsColor getColor(double value) {
 		// checks if value is consistent
-		Checker.checkIfValid(value, "Value for color stop ");
+		Checker.checkIfValid(value, PREFIX_EXCEPTION_MSG);
 		// get value
 		return getColor(Key.create(String.valueOf(value)));
 	}
@@ -208,7 +211,7 @@ public final class Colors extends AbstractNode {
 	 */
 	public void setColor(Date value, String color) {
 		// checks if value is consistent
-		Checker.checkIfValid(value, "Value for color stop ");
+		Checker.checkIfValid(value, PREFIX_EXCEPTION_MSG);
 		// stores value
 		setColor(Key.create(String.valueOf(value.getTime())), color);
 	}
@@ -221,7 +224,7 @@ public final class Colors extends AbstractNode {
 	 */
 	public String getColorAsString(Date value) {
 		// checks if value is consistent
-		Checker.checkIfValid(value, "Value for color stop ");
+		Checker.checkIfValid(value, PREFIX_EXCEPTION_MSG);
 		// get value
 		return getColorAsString(Key.create(String.valueOf(value.getTime())));
 	}
@@ -234,7 +237,7 @@ public final class Colors extends AbstractNode {
 	 */
 	public IsColor getColor(Date value) {
 		// checks if value is consistent
-		Checker.checkIfValid(value, "Value for color stop ");
+		Checker.checkIfValid(value, PREFIX_EXCEPTION_MSG);
 		// get value
 		return getColor(Key.create(String.valueOf(value.getTime())));
 	}

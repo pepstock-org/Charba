@@ -96,10 +96,10 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 	 * 
 	 * @param pluginId plugin ID
 	 * @param nativeObject native object which represents the plugin options as native object
-	 * @param storeInternalID if <code>true</code>, a unique id has been stored
+	 * @param createUniqueId if <code>true</code>, a unique id will be created and stored in the object.
 	 */
-	protected AbstractPluginOptions(String pluginId, NativeObject nativeObject, boolean storeInternalID) {
-		this(pluginId, null, null, nativeObject, storeInternalID);
+	protected AbstractPluginOptions(String pluginId, NativeObject nativeObject, boolean createUniqueId) {
+		this(pluginId, null, null, nativeObject, createUniqueId);
 	}
 
 	/**
@@ -109,16 +109,16 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 	 * @param parent parent node to use to add this element where changed
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param nativeObject native object to map java script properties
-	 * @param storeInternalID if <code>true</code>, a unique id has been stored
+	 * @param createUniqueId if <code>true</code>, a unique id will be created and stored in the object.
 	 */
-	protected AbstractPluginOptions(String pluginId, AbstractNode parent, Key childKey, NativeObject nativeObject, boolean storeInternalID) {
+	protected AbstractPluginOptions(String pluginId, AbstractNode parent, Key childKey, NativeObject nativeObject, boolean createUniqueId) {
 		super(nativeObject);
 		// checks plugin id
 		PluginIdChecker.check(pluginId);
 		// stores plugin id
 		this.pluginId = pluginId;
 		// checks if the ID is already set
-		if (storeInternalID && !has(Property.CHARBA_OPTIONS_ID)) {
+		if (createUniqueId && !has(Property.CHARBA_OPTIONS_ID)) {
 			// sets unique id
 			StringBuilder sb = new StringBuilder(pluginId);
 			// needed for scoping of callbacks
