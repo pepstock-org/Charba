@@ -78,7 +78,7 @@ public final class GradientOptions extends AbstractPluginOptions {
 	 * @param nativeObject native object loaded from configuration
 	 */
 	GradientOptions(NativeObject nativeObject) {
-		super(GradientPlugin.ID, nativeObject);
+		super(GradientPlugin.ID, nativeObject, false);
 	}
 
 	/**
