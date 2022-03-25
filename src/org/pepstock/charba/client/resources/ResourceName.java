@@ -50,6 +50,10 @@ public enum ResourceName implements Key
 	 */
 	ZOOM_PLUGIN("zoom", false),
 	/**
+	 * Script element id for CHART.JS GRADIENT plugin.
+	 */
+	GRADIENT_PLUGIN("gradient", false),
+	/**
 	 * Script element id for HAMMER JS library.
 	 */
 	HAMMER_LIBRARY("hammerjs", true),

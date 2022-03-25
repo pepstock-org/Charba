@@ -296,6 +296,15 @@ function CharbaJsDataLabelsHelper() {}
 CharbaJsDataLabelsHelper.register = function() {};
 /**
  * @constructor
+ * @return {CharbaJsGradientHelper}
+ */	
+function CharbaJsGradientHelper() {}	    
+/**
+ * @return {undefined}
+ */
+CharbaJsGradientHelper.register = function() {};
+/**
+ * @constructor
  * @return {CharbaJsItemsHelper}
  */	
 function CharbaJsItemsHelper() {}

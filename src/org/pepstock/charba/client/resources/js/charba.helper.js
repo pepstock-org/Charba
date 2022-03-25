@@ -568,6 +568,22 @@ CharbaJsDataLabelsHelper.register = function() {
 }
 /**
  * ----------------------------------------------------------------------------
+ * CharbaJsGradientHelper
+ * ----------------------------------------------------------------------------
+ * JsGradientHelpers is an object with a set of static methods used as utility
+ * and needed when GRADIENT plugin has been activated.   
+ */
+function CharbaJsGradientHelper() {} 
+/**
+ * Registers the GRADIENT plugin globally to CHARTS.js.
+ *
+ * @return {undefined}
+ */
+CharbaJsGradientHelper.register = function() {
+  Chart.register(window['chartjs-plugin-gradient']); 
+}
+/**
+ * ----------------------------------------------------------------------------
  * CharbaJsItemsHelper
  * ----------------------------------------------------------------------------
  * JsItemsHelpers is an object with a set of static methods used as utility

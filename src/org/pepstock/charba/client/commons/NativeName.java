@@ -131,6 +131,11 @@ public final class NativeName {
 	public static final String JS_GEO_HELPER = "CharbaJsGeoHelper";
 
 	/**
+	 * Constant to bind java script object as JsGradientHelper with name <b>{@value JS_GRADIENT_HELPER}</b>, (internal of Charba), when <b>GradientPlugin</b> is activated.
+	 */
+	public static final String JS_GRADIENT_HELPER = "CharbaJsGradientHelper";
+
+	/**
 	 * Constant to bind java script object as chart with name <b>{@value CHART}</b>, (internal of CHART.JS).
 	 */
 	public static final String CHART = "Chart";
