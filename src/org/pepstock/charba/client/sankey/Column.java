@@ -18,7 +18,7 @@ package org.pepstock.charba.client.sankey;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * Is a map to user to apply a different start or end position to sankey node.
+ * Is a map to apply a different start or end position to sankey node.
  * 
  * @author Andrea "Stock" Stocchero
  */

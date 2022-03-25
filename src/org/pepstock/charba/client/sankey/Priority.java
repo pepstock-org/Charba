@@ -18,7 +18,7 @@ package org.pepstock.charba.client.sankey;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * Is a map to user to apply a different priority to sankey node, priority used to layout calculation.
+ * Is a map to apply a different priority to sankey node, priority used to layout calculation.
  * 
  * @author Andrea "Stock" Stocchero
  */
