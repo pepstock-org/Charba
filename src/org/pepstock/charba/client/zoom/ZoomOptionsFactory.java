@@ -27,8 +27,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 public final class ZoomOptionsFactory extends AbstractPluginOptionsFactory<ZoomOptions> {
 
 	/**
-	 * To avoid any instantiation. Use the static reference in the {@link ZoomPlugin#FACTORY}.<br>
-	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances when the charts will be destroy.
+	 * To avoid any instantiation. Use the static reference in the {@link ZoomPlugin#FACTORY}.
 	 */
 	ZoomOptionsFactory() {
 		super(ZoomPlugin.ID);
