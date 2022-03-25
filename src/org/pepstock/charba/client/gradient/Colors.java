@@ -39,7 +39,7 @@ public final class Colors extends AbstractNode {
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param nativeObject native object to map java script properties
 	 */
-	protected Colors(AbstractNode parent, Key childKey, NativeObject nativeObject) {
+	Colors(AbstractNode parent, Key childKey, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
 	}
 
