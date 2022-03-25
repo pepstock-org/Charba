@@ -870,9 +870,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the fill patters of elements when hovered. If property is missing or not a pattern, returns <code>null</code>.
+	 * Returns the fill patters of elements when hovered.<br>
+	 * If property is missing or not a pattern, returns <code>null</code>.
 	 * 
-	 * @return the fill patterns of elements when hovered. If property is missing or not a pattern, returns <code>null</code>
+	 * @return the fill patterns of elements when hovered.<br>
+	 *         If property is missing or not a pattern, returns <code>null</code>
 	 */
 	public Pattern getHoverBackgroundColorAsPatterns() {
 		// checks if the property is not a pattern (therefore a color or gradient)
@@ -888,9 +890,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the fill gradients of elements when hovered. If property is missing or not a gradient, returns <code>null</code>.
+	 * Returns the fill gradients of elements when hovered.<br>
+	 * If property is missing or not a gradient, returns <code>null</code>.
 	 * 
-	 * @return the fill gradients of elements when hovered. If property is missing or not a gradient, returns <code>null</code>
+	 * @return the fill gradients of elements when hovered.<br>
+	 *         If property is missing or not a gradient, returns <code>null</code>
 	 */
 	public Gradient getHoverBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
@@ -970,9 +974,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns <code>null</code>.
+	 * Returns the stroke gradients of the elements when hovered.<br>
+	 * If property is missing or not a pattern, returns <code>null</code>.
 	 * 
-	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns <code>null</code>
+	 * @return list of the stroke gradients of the elements when hovered.<br>
+	 *         If property is missing or not a pattern, returns <code>null</code>
 	 */
 	public Gradient getHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
@@ -1171,9 +1177,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the fill color for points. If property is missing or not a color, returns the default point background color color.
+	 * Returns the fill color for points.<br>
+	 * If property is missing or not a color, returns the default point background color color.
 	 * 
-	 * @return list of the fill color for points. If property is missing or not a color, returns the point background color color.
+	 * @return list of the fill color for points.<br>
+	 *         If property is missing or not a color, returns the point background color color.
 	 */
 	public List<String> getPointBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -1198,9 +1206,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the fill color for points. If property is missing or not a gradient, returns an empty list.
+	 * Returns the fill color for points.<br>
+	 * If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the fill color for points. If property is missing or not a gradient, returns an empty list.
+	 * @return list of the fill color for points.<br>
+	 *         If property is missing or not a gradient, returns an empty list.
 	 */
 	public List<Gradient> getPointBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
@@ -1256,9 +1266,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the border color for points. If property is missing or not a color, returns the default point border color.
+	 * Returns the border color for points.<br>
+	 * If property is missing or not a color, returns the default point border color.
 	 * 
-	 * @return list of the border color for points. If property is missing or not a color, returns the default point border color.
+	 * @return list of the border color for points.<br>
+	 *         If property is missing or not a color, returns the default point border color.
 	 */
 	public List<String> getPointBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -1274,18 +1286,22 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the border color for points. If property is missing or not a color, returns the default point border color.
+	 * Returns the border color for points.<br>
+	 * If property is missing or not a color, returns the default point border color.
 	 * 
-	 * @return list of the border color for points. If property is missing or not a color, returns the default point border color.
+	 * @return list of the border color for points.<br>
+	 *         If property is missing or not a color, returns the default point border color.
 	 */
 	public List<IsColor> getPointBorderColor() {
 		return ColorBuilder.parse(getPointBorderColorAsString());
 	}
 
 	/**
-	 * Returns the border gradient for points. If property is missing or not a gradient, returns an empty list.
+	 * Returns the border gradient for points.<br>
+	 * If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the border gradient for points. If property is missing or not a gradient, returns an empty list.
+	 * @return list of the border gradient for points.<br>
+	 *         If property is missing or not a gradient, returns an empty list.
 	 */
 	public List<Gradient> getPointBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
@@ -1475,9 +1491,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the point border color when hovered. If property is missing or not a color, returns the default border color.
+	 * Returns the point border color when hovered.<br>
+	 * If property is missing or not a color, returns the default border color.
 	 * 
-	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border color.
+	 * @return list of the point border color when hovered.<br>
+	 *         If property is missing or not a color, returns the default border color.
 	 */
 	public List<String> getPointHoverBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -1492,18 +1510,22 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the point border color when hovered. If property is missing or not a color, returns the default border color.
+	 * Returns the point border color when hovered.<br>
+	 * If property is missing or not a color, returns the default border color.
 	 * 
-	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border color.
+	 * @return list of the point border color when hovered.<br>
+	 *         If property is missing or not a color, returns the default border color.
 	 */
 	public List<IsColor> getPointHoverBorderColor() {
 		return ColorBuilder.parse(getPointHoverBorderColorAsString());
 	}
 
 	/**
-	 * Returns the point border gradient when hovered. If property is missing or not a gradient, returns an empty list.
+	 * Returns the point border gradient when hovered.<br>
+	 * If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the point border gradient when hovered. If property is missing or not a gradient, returns an empty list.
+	 * @return list of the point border gradient when hovered.<br>
+	 *         If property is missing or not a gradient, returns an empty list.
 	 */
 	public List<Gradient> getPointHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
