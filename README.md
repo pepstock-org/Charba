@@ -292,6 +292,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add **CHART.JS GRADIENT plugin** version [v0.2.2](https://github.com/kurkle/chartjs-plugin-gradient/releases/tag/v0.2.2).
  * import CHART.JS SANKEY controller version [v0.9.0](https://github.com/kurkle/chartjs-chart-sankey/releases/tag/v0.9.0).
  * import CHART.JS ANNOTATION plugin version [v1.4.0](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.4.0).
+ * import CHART.JS ZOOM plugin version [v1.2.1](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.2.1). 
  * import LUXON library version [v2.3.1](https://github.com/moment/luxon/releases/tag/2.3.1).
  * add `StackedLineChart` and `StackedLineChartWidget` classes in order to manage the stacked chart for line (no filled not default).
  * add `AreaChart` and `AreaChartWidget` classes in order to manage the area chart (filled by default).
