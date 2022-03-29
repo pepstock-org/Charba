@@ -16,6 +16,10 @@
 package org.pepstock.charba.client.gradient;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
@@ -263,6 +267,69 @@ public final class Colors extends AbstractNode {
 
 	// -------------------
 	// COMMON METHODS
+	// -------------------
+
+	/**
+	 * Adds a map of values and colors to the colors container.
+	 * 
+	 * @param toAdd map to add to container
+	 * @return <code>true</code> if the values and colors has been loaded, otherwise <code>false</code>
+	 */
+	public boolean addMap(Map<Key, String> toAdd) {
+		// checks if argument is consistent
+		if (toAdd != null && !toAdd.isEmpty()) {
+			// scans all entries
+			for (Entry<Key, String> entry : toAdd.entrySet()) {
+				// stores value
+				setColor(Key.checkAndGetIfValid(entry.getKey()), entry.getValue());
+			}
+			// returns true because some data has been loaded
+			return true;
+		}
+		// if here, the argument is not consistent
+		return false;
+	}
+
+	/**
+	 * Loads a map of values and colors to the colors container, removing all existing values.
+	 * 
+	 * @param toLoad map to load to container
+	 * @return <code>true</code> if the values and colors has been loaded, otherwise <code>false</code>
+	 */
+	public boolean loadMap(Map<Key, String> toLoad) {
+		// removes all keys
+		// gets all keys
+		List<Key> keys = keys();
+		// scans all keys
+		for (Key key : keys) {
+			// removes the keys
+			remove(key);
+		}
+		// adds all new values
+		return addMap(toLoad);
+	}
+
+	/**
+	 * Exports the values and the colors in a map.
+	 * 
+	 * @return the values and the colors in a map
+	 */
+	public Map<Key, String> toMap() {
+		// creates a map
+		final Map<Key, String> result = new HashMap<>();
+		// gets all keys
+		List<Key> keys = keys();
+		// scans all keys
+		for (Key key : keys) {
+			// gets and loads the color
+			result.put(key, getColorAsString(key));
+		}
+		// returns result
+		return result;
+	}
+
+	// -------------------
+	// INTERNALS METHODS
 	// -------------------
 
 	/**
