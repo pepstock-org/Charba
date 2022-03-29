@@ -142,11 +142,11 @@ public final class LegendNode extends BaseBoxNodeItem<Position> {
 	 * 
 	 * @return the list of items of the legend.
 	 */
-	public List<LegendItem> getItems() {
+	public List<LegendLabelItem> getItems() {
 		// gets array from native object
 		ArrayObject array = getArrayValue(Property.LEGEND_ITEMS);
 		// returns list
-		return ArrayListHelper.unmodifiableList(array, LegendItem.FACTORY);
+		return ArrayListHelper.unmodifiableList(array, LegendLabelItem.FACTORY);
 	}
 
 	/*
