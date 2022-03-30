@@ -253,25 +253,20 @@ public final class Gradient extends CanvasObject {
 			// if end colors is not found, use the starting color
 			return startColor;
 		}
-		// gets the sRGB for starting color
-		int startRGBs = startColor.toRGBs();
 		// extract all RGB elements
 		// convert from sRGB to linear
-		double startA = ((startRGBs >> 24) & 0xff) / 255.0D;
-		double startR = fromRGBs(((startRGBs >> 16) & 0xff) / 255.0D);
-		double startG = fromRGBs(((startRGBs >> 8) & 0xff) / 255.0D);
-		double startB = fromRGBs((startRGBs & 0xff) / 255.0D);
+		double startR = fromRGBs(startColor.getRed() / 255.0D);
+		double startG = fromRGBs(startColor.getGreen() / 255.0D);
+		double startB = fromRGBs(startColor.getBlue() / 255.0D);
 		// extract all RGB elements
 		// convert from sRGB to linear
-		int endRGBs = endColor.toRGBs();
-		double endA = ((endRGBs >> 24) & 0xff) / 255.0D;
-		double endR = fromRGBs(((endRGBs >> 16) & 0xff) / 255.0D);
-		double endG = fromRGBs(((endRGBs >> 8) & 0xff) / 255.0D);
-		double endB = fromRGBs((endRGBs & 0xff) / 255.0D);
+		double endR = fromRGBs(endColor.getRed() / 255.0D);
+		double endG = fromRGBs(endColor.getGreen() / 255.0D);
+		double endB = fromRGBs(endColor.getBlue() / 255.0D);
 		// compute the interpolated color in linear space
 		// convert back to sRGB in the [0..255] range
 		// rounds them to int
-		double a = startA + offset * (endA - startA);
+		double a = startColor.getAlpha() + offset * Math.abs(endColor.getAlpha() - startColor.getAlpha());
 		int r = (int) Math.round(toRGBs(startR + offset * (endR - startR)) * 255.0D);
 		int g = (int) Math.round(toRGBs(startG + offset * (endG - startG)) * 255.0D);
 		int b = (int) Math.round(toRGBs(startB + offset * (endB - startB)) * 255.0D);
