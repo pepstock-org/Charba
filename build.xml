@@ -74,7 +74,7 @@
 	<!-- 
 		EXTENSIONS CHART.JS plugins and controllers
 	-->
-	<property name="javascript.annotations.minify.file" value="chartjs-plugin-annotation.min.js" />
+	<property name="javascript.annotation.minify.file" value="chartjs-plugin-annotation.min.js" />
 	<property name="javascript.datalabels.minify.file" value="chartjs-plugin-datalabels.min.js" />
 	<property name="javascript.zoom.minify.file" value="chartjs-plugin-zoom.min.js" />
 	<property name="javascript.hammer.minify.file" value="hammer.min.js" />
@@ -82,6 +82,8 @@
 	<property name="javascript.treemap.minify.file" value="chartjs-chart-treemap.min.js" />
 	<property name="javascript.matrix.minify.file" value="chartjs-chart-matrix.min.js" />
 	<property name="javascript.sankey.minify.file" value="chartjs-chart-sankey.min.js" />
+	<property name="javascript.gradient.minify.file" value="chartjs-plugin-gradient.min.js" />
+
 	<!-- 
 		CHART.JS date adapters 
 	-->
@@ -483,7 +485,7 @@
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.charba.minify.file}"/>
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.labels.minify.file}"/>
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.toast.minify.file}"/>
-				<exclude name="org/pepstock/charba/client/resources/js/${javascript.annotations.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.annotation.minify.file}"/>	
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.datalabels.minify.file}"/>
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.zoom.minify.file}"/>	
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.hammer.minify.file}"/>	
@@ -577,7 +579,7 @@
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.charba.minify.file}"/>
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.labels.minify.file}"/>
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.toast.minify.file}"/>
-				<exclude name="org/pepstock/charba/client/resources/js/${javascript.annotations.minify.file}"/>	
+				<exclude name="org/pepstock/charba/client/resources/js/${javascript.annotation.minify.file}"/>	
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.datalabels.minify.file}"/>
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.zoom.minify.file}"/>	
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.hammer.minify.file}"/>	
@@ -728,13 +730,13 @@
 		<get src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@${depver.datalabels}" dest="${retrieve.dir}/${javascript.datalabels.minify.file}" />
 	</target>
 	
-	<target name="retrieveOfficialAnnotations">
-		<echo>Retrieve ANNOTATIONS plugin minify javascript resource - version ${depver.annotations}</echo>
+	<target name="retrieveOfficialAnnotation">
+		<echo>Retrieve ANNOTATION plugin minify javascript resource - version ${depver.annotation}</echo>
 		<mkdir dir="${retrieve.dir}" />
 		<delete failonerror="false" includeemptydirs="true">
-			<fileset dir="${retrieve.dir}" includes="${javascript.annotations.minify.file}" />
+			<fileset dir="${retrieve.dir}" includes="${javascript.annotation.minify.file}" />
 		</delete>
-		<get src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@${depver.annotations}" dest="${retrieve.dir}/${javascript.annotations.minify.file}" />
+		<get src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@${depver.annotation}" dest="${retrieve.dir}/${javascript.annotation.minify.file}" />
 	</target>
 
 	<target name="retrieveOfficialZoom">
@@ -777,7 +779,7 @@
 	</target>
 
 	<target name="retrieveOfficialTreeMap">
-		<echo>Retrieve TreeMap controller minify javascript resource - version ${depver.treemap}</echo>
+		<echo>Retrieve TREEMAP controller minify javascript resource - version ${depver.treemap}</echo>
 		<mkdir dir="${retrieve.dir}" />
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${retrieve.dir}" includes="${javascript.treemap.minify.file}" />
@@ -786,7 +788,7 @@
 	</target>
 
 	<target name="retrieveOfficialMatrix">
-		<echo>Retrieve Matrix controller minify javascript resource - version ${depver.matrix}</echo>
+		<echo>Retrieve MATRIX controller minify javascript resource - version ${depver.matrix}</echo>
 		<mkdir dir="${retrieve.dir}" />
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${retrieve.dir}" includes="${javascript.matrix.minify.file}" />
@@ -795,12 +797,21 @@
 	</target>
 
 	<target name="retrieveOfficialSankey">
-		<echo>Retrieve Sankey controller minify javascript resource - version ${depver.sankey}</echo>
+		<echo>Retrieve SANKEY controller minify javascript resource - version ${depver.sankey}</echo>
 		<mkdir dir="${retrieve.dir}" />
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${retrieve.dir}" includes="${javascript.sankey.minify.file}" />
 		</delete>
 		<get src="https://cdn.jsdelivr.net/npm/chartjs-chart-sankey@${depver.sankey}" dest="${retrieve.dir}/${javascript.sankey.minify.file}" />
+	</target>
+
+	<target name="retrieveOfficialGradient">
+		<echo>Retrieve GRADIENT pluginminify javascript resource - version ${depver.sankey}</echo>
+		<mkdir dir="${retrieve.dir}" />
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${retrieve.dir}" includes="${javascript.gradient.minify.file}" />
+		</delete>
+		<get src="https://cdn.jsdelivr.net/npm/chartjs-plugin-gradient@${depver.gradient}" dest="${retrieve.dir}/${javascript.gradient.minify.file}" />
 	</target>
 
 </project>
