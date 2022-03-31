@@ -181,7 +181,7 @@ public final class ScriptableUtils {
 		if (isContextConsistent(context) && callback != null) {
 			T result = callback.invoke(context);
 			// checks if consistent
-			if (checker != null) {
+			if (checker != null && result != null) {
 				// passes thru the checker
 				return checker.checkAndGet(result, defaultValue);
 			} else if (result != null) {
