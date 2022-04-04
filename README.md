@@ -39,9 +39,9 @@ Even if **Charba** was born only as GWT chart library, as of version 3, **Charba
 Building
 --------
 
-To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.1/build.xml).
+To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.2/build.xml).
 
-The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.1/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
+The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.2/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
 
 The first distribution is a **Charba** file without any GWT dependency (but working on GWT anyway), consumable also in other [J2CL - JavaToClosure](https://github.com/google/j2cl) frameworks, like [Google Elemental2](https://github.com/google/elemental2) and [Elemento](https://github.com/hal/elemento).
 
@@ -55,7 +55,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
-[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_51.png)](https://github.com/pepstock-org/Charba-Showcase/blob/5.1/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_51.png)](https://github.com/pepstock-org/Charba-Showcase/blob/5.2/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------
@@ -70,18 +70,18 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>5.1</version>
+    <version>5.2</version>
     <!-- for GWT -->
-    <version>5.1-gwt</version>
+    <version>5.2-gwt</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="5.1"/>
+<dependency org="org.pepstock" name="charba" rev="5.2"/>
 <!-- for GWT -->
-<dependency org="org.pepstock" name="charba" rev="5.1-gwt"/>
+<dependency org="org.pepstock" name="charba" rev="5.2-gwt"/>
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration in your GWT project module configuration:
@@ -249,7 +249,7 @@ Documentation
 
 All **Charba** documentation will be maintained in [Charba-Wiki](https://github.com/pepstock-org/Charba-Wiki) project.
 
-API JavaDoc for version **5.1** is published [here](https://pepstock-org.github.io/Charba/5.1/index.html).
+API JavaDoc for version **5.2** is published [here](https://pepstock-org.github.io/Charba/5.2/index.html).
 
 You can also access the previous API JavaDoc, because every version is published to `https://pepstock-org.github.io/Charba/[version.release]`.
 
@@ -274,70 +274,6 @@ Continuous integration and quality gate
 **Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
-
-Going to next release
----------------------
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
-
-### Breaking changes
-
- * hide public CHART.JS hooks of Charba out-of-the-box plugins (ChartBackgroundColor, ChartPointer, ColorSchemes, HtmlLegend and DatasetsItemsSelector).
- * rename `DisplayCallback` to `SimpleDisplayCallback` class name (package `org.pepstock.charba.client.callbacks`) where the display can be set simply with a boolean.
- * remove `DisplayCallback` class from `org.pepstock.charba.client.datalabels.callbacks` in order to use the common `DisplayCallback` (package `org.pepstock.charba.client.callbacks`) where the display can be set by a boolean or a `Display` enumeration value.
- * change `graceAsPercentage` option in the `CartesianLinearAxis` class in order to be a `double` (value between 0 and 1) instead of a `string` when set as percentage.
-
-### Features
-
- * add **new Crosshair Charba plugin** in order to enable the crosshair on the charts with cartesian axes.
- * add **CHART.JS GRADIENT plugin** version [v0.4.0](https://github.com/kurkle/chartjs-plugin-gradient/releases/tag/v0.4.0).
- * import CHART.JS SANKEY controller version [v0.9.0](https://github.com/kurkle/chartjs-chart-sankey/releases/tag/v0.9.0).
- * import CHART.JS ANNOTATION plugin version [v1.4.0](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v1.4.0).
- * import CHART.JS ZOOM plugin version [v1.2.1](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v1.2.1). 
- * import LUXON library version [v2.3.1](https://github.com/moment/luxon/releases/tag/2.3.1).
- * add `StackedLineChart` and `StackedLineChartWidget` classes in order to manage the stacked chart for line (no filled not default).
- * add `AreaChart` and `AreaChartWidget` classes in order to manage the area chart (filled by default).
- * add `PlginContainer` interface in order to set plugin implementations without exposing the plugin public methods.
- * add `areaBackgroundColor` option to chart background color plugin (ChartBackgroundColor) in order to enable the coloring of the chart area as well.
- * add a shared map to annotation context in order to manage common instances cross annotations.
- * add `column` option to the Sankey dataset configuration.
- * add `rotation` option to box and label annotation options in the annotation plugin.
- * add `rotation` option to label options of box annotation in the annotation plugin.
- * add `textStrokeColor` and `textStrokeWidth` options to label annotation and to box and line labels options in the annotation plugin.
- * add events callbacks options to `AnnotationOptions` class in order to enable to events management for all defined annotations.
- * add scriptable options to all axes for the following options:
-   * `display` by `DisplayCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `backgroundColor` by `ColorCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `reverse` by new `ReverseCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `alignToPixels` by new `AlignToPixelsCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `weight` by new `ScaleWeightCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `min`, `max`, `suggestedMin` and `suggestedMax` by new `MinMaxCallback` (package `org.pepstock.charba.client.callbacks`) class
- * add scriptable options to all cartesian axes for the following options:
-   * `bounds` by new `BoundsCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `offset` by new `ScaleOffsetCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `position` by new `ScalePositionCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `stacked` by new `StackedCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `stack` by new `StackCallback` (package `org.pepstock.charba.client.callbacks`) class   
-   * `stackWeight` by new `ScaleWeightCallback` (package `org.pepstock.charba.client.callbacks`) class
- * add scriptable options to cartesian linear axes for the following options:
-   * `beginAtZero` by new `BeginAtZeroCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `grace` by new `GraceCallback` (package `org.pepstock.charba.client.callbacks`) class
- * add scriptable options to radial linear axes for the following options:
-   * `beginAtZero` by new `BeginAtZeroCallback` (package `org.pepstock.charba.client.callbacks`) class
-   * `startAngle` by new `StartAngleCallback` (package `org.pepstock.charba.client.callbacks`) class
- * add `getDistanceFromCenterForValue` and `getValueForDistanceFromCenter` methods to `ScaleItem` class, enabled ONLY for radial linear scale.
- * enable global plugins if there are plugin options to configure the dataset and not only in the chart options (as is till now).  
-
-### Fixed Bugs
-
- * [#69](https://github.com/pepstock-org/Charba/issues/69) set `fill` option to `true` as initial value on `StackeAreaChart` class in order to have the area chart by default. Thanks @salmonb.
- * [#70](https://github.com/pepstock-org/Charba/issues/70) add an empty configuration when a plugin is added without any initial configuration.
- * [#71](https://github.com/pepstock-org/Charba/issues/71) fixes the value of the property because was wrong.
-
-### Development
-
- * use [Reflect](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect) built-in object to manage the properties of the native objects.
- * change dependency for Google Closure Compiler, version [v20220301](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20220301).
- * add dependency for Google Closure Compiler Unshaded, version [v20220301](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler-unshaded/v20220301).
 
 License
 -------
