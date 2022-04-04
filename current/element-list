@@ -28,6 +28,7 @@ org.pepstock.charba.client.events
 org.pepstock.charba.client.geo
 org.pepstock.charba.client.geo.callbacks
 org.pepstock.charba.client.geo.enums
+org.pepstock.charba.client.gradient
 org.pepstock.charba.client.gwt
 org.pepstock.charba.client.gwt.widgets
 org.pepstock.charba.client.impl
