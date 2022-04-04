@@ -253,47 +253,8 @@ public final class Gradient extends CanvasObject {
 			// if end colors is not found, use the starting color
 			return startColor;
 		}
-		// extract all RGB elements
-		// convert from sRGB to linear
-		double startR = fromRGBs(startColor.getRed() / 255.0D);
-		double startG = fromRGBs(startColor.getGreen() / 255.0D);
-		double startB = fromRGBs(startColor.getBlue() / 255.0D);
-		// extract all RGB elements
-		// convert from sRGB to linear
-		double endR = fromRGBs(endColor.getRed() / 255.0D);
-		double endG = fromRGBs(endColor.getGreen() / 255.0D);
-		double endB = fromRGBs(endColor.getBlue() / 255.0D);
-		// compute the interpolated color in linear space
-		// convert back to sRGB in the [0..255] range
-		// rounds them to int
-		double a = startColor.getAlpha() + offset * Math.abs(endColor.getAlpha() - startColor.getAlpha());
-		int r = (int) Math.round(toRGBs(startR + offset * (endR - startR)) * 255.0D);
-		int g = (int) Math.round(toRGBs(startG + offset * (endG - startG)) * 255.0D);
-		int b = (int) Math.round(toRGBs(startB + offset * (endB - startB)) * 255.0D);
-		// creates and return color
-		return new Color(r, g, b, a);
-	}
-
-	/**
-	 * Performs the conversion for the sRGB color space and converts it to a linear sRGB value.
-	 * 
-	 * @param linear optical electronic color value
-	 * @return linear sRGB value
-	 */
-	private double toRGBs(double linear) {
-		// IEC 61966-2-1:1999
-		return linear <= 0.0031308D ? linear * 12.92D : (double) ((Math.pow(linear, 1.0D / 2.4D) * 1.055D) - 0.055D);
-	}
-
-	/**
-	 * Performs the conversion for a linear sRGB value to a gamma-encoded sRGB value
-	 * 
-	 * @param srgb electronic optical color value
-	 * @return gamma-encoded sRGB value
-	 */
-	private double fromRGBs(double srgb) {
-		// IEC 61966-2-1:1999
-		return srgb <= 0.04045D ? srgb / 12.92D : (double) Math.pow((srgb + 0.055D) / 1.055D, 2.4D);
+		// returns interpolated color
+		return startColor.interpolate(endColor, offset);
 	}
 
 }

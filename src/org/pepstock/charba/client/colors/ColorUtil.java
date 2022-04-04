@@ -240,6 +240,28 @@ public final class ColorUtil {
 	}
 
 	/**
+	 * Performs the conversion for the sRGB color space and converts it to a linear sRGB value.
+	 * 
+	 * @param linear optical electronic color value
+	 * @return linear sRGB value
+	 */
+	static double toRGBs(double linear) {
+		// IEC 61966-2-1:1999
+		return linear <= 0.0031308D ? linear * 12.92D : (double) ((Math.pow(linear, 1.0D / 2.4D) * 1.055D) - 0.055D);
+	}
+
+	/**
+	 * Performs the conversion for a linear sRGB value to a gamma-encoded sRGB value
+	 * 
+	 * @param srgb electronic optical color value
+	 * @return gamma-encoded sRGB value
+	 */
+	static double fromRGBs(double srgb) {
+		// IEC 61966-2-1:1999
+		return srgb <= 0.04045D ? srgb / 12.92D : (double) Math.pow((srgb + 0.055D) / 1.055D, 2.4D);
+	}
+
+	/**
 	 * Applies the padding to a string to 2 chars.
 	 * 
 	 * @param in string to be pad

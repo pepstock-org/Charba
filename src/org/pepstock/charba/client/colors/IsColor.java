@@ -193,6 +193,41 @@ public interface IsColor {
 	}
 
 	/**
+	 * Returns a color from a specific offset starting from the current one.
+	 * 
+	 * @param endColor The end color to interpolate
+	 * @param offset offset to apply to the color interpolation
+	 * @return a color from a specific offset starting from the current one
+	 */
+	default IsColor interpolate(IsColor endColor, double offset) {
+		// checks if end color is consistent
+		if (IsColor.isValid(endColor)) {
+			// extract all RGB elements
+			// convert from sRGB to linear
+			double startR = ColorUtil.fromRGBs(getRed() / 255.0D);
+			double startG = ColorUtil.fromRGBs(getGreen() / 255.0D);
+			double startB = ColorUtil.fromRGBs(getBlue() / 255.0D);
+			// extract all RGB elements
+			// convert from sRGB to linear
+			double endR = ColorUtil.fromRGBs(endColor.getRed() / 255.0D);
+			double endG = ColorUtil.fromRGBs(endColor.getGreen() / 255.0D);
+			double endB = ColorUtil.fromRGBs(endColor.getBlue() / 255.0D);
+			// compute the interpolated color in linear space
+			// convert back to sRGB in the [0..255] range
+			// rounds them to int
+			double a = getAlpha() + offset * Math.abs(endColor.getAlpha() - getAlpha());
+			int r = (int) Math.round(ColorUtil.toRGBs(startR + offset * (endR - startR)) * 255.0D);
+			int g = (int) Math.round(ColorUtil.toRGBs(startG + offset * (endG - startG)) * 255.0D);
+			int b = (int) Math.round(ColorUtil.toRGBs(startB + offset * (endB - startB)) * 255.0D);
+			// creates and return color
+			return new Color(r, g, b, a);
+		}
+		// if here, the argument color is not valid
+		// then returns the starting color
+		return this;
+	}
+
+	/**
 	 * Creates a new color that is a brighter version of this color. <br>
 	 * This method applies an arbitrary scale factor to each of the three RGB components of this color to create a brighter version of this color.<br>
 	 * Although <code>brighter</code> and <code>darker</code> are inverse operations, the results of a series of invocations of these two methods might be inconsistent because of
