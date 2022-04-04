@@ -53,7 +53,7 @@ function CharbaJsHelper() {}
  * @return the object cast to another type
  */
 CharbaJsHelper.create = function() {
-  return new Object();
+  return {};
 }
 /**
  * Performs unchecked cast to a type.
