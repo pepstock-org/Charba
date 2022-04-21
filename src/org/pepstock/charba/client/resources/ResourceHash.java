@@ -49,7 +49,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
-	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 877727),
+	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 899800),
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */
@@ -66,6 +66,10 @@ enum ResourceHash {
 	 * Hash item for 'MatrixControllerResource' class.
 	 */
 	MATRIX_CONTROLLER_RESOURCE(ResourceName.MATRIX_CONTROLLER, 323939),
+	/**
+	 * Hash item for 'MlPluginResource' class.
+	 */
+	ML_PLUGIN_RESOURCE(ResourceName.ML_LIBRARY, 21642952),
 	/**
 	 * Hash item for 'SankeyControllerResource' class.
 	 */

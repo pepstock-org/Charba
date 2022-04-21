@@ -17,6 +17,7 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.configuration.ScatterOptions;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.data.ScatterDataset;
 
 /**
@@ -77,7 +78,7 @@ public class ScatterChart extends AbstractChart implements IsDatasetCreator<Scat
 	 */
 	@Override
 	protected boolean checkDataset(Dataset dataset) {
-		return dataset instanceof ScatterDataset;
+		return dataset instanceof ScatterDataset || dataset instanceof LineDataset;
 	}
 
 }

@@ -834,3 +834,31 @@ CharbaJsGeoHelper.getSizeForValue = function(chart, value) {
   // size scale is always 'r' as id 
   return chart.scales.r.getSizeForValue(value);
 }
+/**
+ * ----------------------------------------------------------------------------
+ * CharbaJsMLHelper
+ * ----------------------------------------------------------------------------
+ * JsMLHelper is an object to invoke some methods of regressions.
+ * Needed due to some limitations of Google Closure externs definitions.
+ */
+function CharbaJsMLHelper() {} 
+/**
+ * Returns an array of Y values, calculated by the regression formula for specific X values.
+ * 
+ * @param {ML.BaseRegression} regression regression instance
+ * @param {Array} values values to use to get the predicted values
+ * @return {Array} an array of Y values, calculated by the regression formula for specific X values
+ */
+CharbaJsMLHelper.predict = function(regression, values) {
+  return regression.predict(values);
+}
+/**
+ * Returns an array of Y values, calculated by the regression formula for specific X values.
+ * 
+ * @param {ML.BaseRegression} regression regression instance
+ * @param {number} precision precision to apply to the numbers of the formula
+ * @return {string} the formula of the regression
+ */
+CharbaJsMLHelper.toFormula = function(regression, precision) {
+  return regression.toString(precision);
+}

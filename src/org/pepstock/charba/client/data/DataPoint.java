@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.enums.DataPointType;
 import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.ItemsEnvelop;
 import org.pepstock.charba.client.items.Undefined;
@@ -51,7 +51,10 @@ public final class DataPoint extends AbstractDataPoint {
 	{
 		X("x"),
 		Y("y"),
-		R("r");
+		R("r"),
+		// internal properties about the data type
+		CHARBA_X_TYPE("charbaXType"),
+		CHARBA_Y_TYPE("charbaYType");
 
 		// name value of property
 		private final String value;
@@ -203,8 +206,8 @@ public final class DataPoint extends AbstractDataPoint {
 	 * 
 	 * @return the object type of data stored as X
 	 */
-	public ObjectType getXObjectType() {
-		return type(Property.X);
+	public DataPointType getXType() {
+		return getValue(Property.CHARBA_X_TYPE, DataPointType.values(), DataPointType.UNKNOWN);
 	}
 
 	/**
@@ -214,6 +217,8 @@ public final class DataPoint extends AbstractDataPoint {
 	 */
 	public void setX(double x) {
 		setValue(Property.X, x);
+		// sets type
+		checkAndSetType(Property.X, Property.CHARBA_X_TYPE, DataPointType.NUMBER);
 	}
 
 	/**
@@ -223,7 +228,7 @@ public final class DataPoint extends AbstractDataPoint {
 	 */
 	public double getX() {
 		// checks if the stored data is a number
-		if (ObjectType.NUMBER.equals(getXObjectType())) {
+		if (DataPointType.NUMBER.equals(getXType())) {
 			return getValue(Property.X, DEFAULT_X);
 		}
 		// if here the data is missing or a string
@@ -238,6 +243,8 @@ public final class DataPoint extends AbstractDataPoint {
 	 */
 	public void setX(Date x) {
 		setValue(Property.X, x);
+		// sets type
+		checkAndSetType(Property.X, Property.CHARBA_X_TYPE, DataPointType.DATE);
 	}
 
 	/**
@@ -247,7 +254,7 @@ public final class DataPoint extends AbstractDataPoint {
 	 */
 	public Date getXAsDate() {
 		// checks if the stored data is a number
-		if (ObjectType.NUMBER.equals(getXObjectType())) {
+		if (DataPointType.DATE.equals(getXType())) {
 			return getValue(Property.X, (Date) null);
 		}
 		// if here the data is missing or a string
@@ -262,6 +269,8 @@ public final class DataPoint extends AbstractDataPoint {
 	 */
 	public void setX(String x) {
 		setValue(Property.X, x);
+		// sets type
+		checkAndSetType(Property.X, Property.CHARBA_X_TYPE, DataPointType.STRING);
 	}
 
 	/**
@@ -271,7 +280,7 @@ public final class DataPoint extends AbstractDataPoint {
 	 */
 	public String getXAsString() {
 		// checks if the stored data is a string
-		if (ObjectType.STRING.equals(getXObjectType())) {
+		if (DataPointType.STRING.equals(getXType())) {
 			return getValue(Property.X, Undefined.STRING);
 		}
 		// if here the data is missing or a number
@@ -288,8 +297,8 @@ public final class DataPoint extends AbstractDataPoint {
 	 * 
 	 * @return the object type of data stored as Y
 	 */
-	public ObjectType getYObjectType() {
-		return type(Property.Y);
+	public DataPointType getYType() {
+		return getValue(Property.CHARBA_Y_TYPE, DataPointType.values(), DataPointType.UNKNOWN);
 	}
 
 	/**
@@ -299,6 +308,8 @@ public final class DataPoint extends AbstractDataPoint {
 	 */
 	public void setY(double y) {
 		setValue(Property.Y, y);
+		// sets type
+		checkAndSetType(Property.Y, Property.CHARBA_Y_TYPE, DataPointType.NUMBER);
 	}
 
 	/**
@@ -308,7 +319,7 @@ public final class DataPoint extends AbstractDataPoint {
 	 */
 	public double getY() {
 		// checks if the stored data is a number
-		if (ObjectType.NUMBER.equals(getYObjectType())) {
+		if (DataPointType.NUMBER.equals(getYType())) {
 			return getValue(Property.Y, DEFAULT_Y);
 		}
 		// if here the data is missing or an array
@@ -323,6 +334,8 @@ public final class DataPoint extends AbstractDataPoint {
 	 */
 	public void setY(FloatingData y) {
 		setValue(Property.Y, y);
+		// sets type
+		checkAndSetType(Property.Y, Property.CHARBA_Y_TYPE, DataPointType.FLOATING_DATA);
 	}
 
 	/**
@@ -332,7 +345,7 @@ public final class DataPoint extends AbstractDataPoint {
 	 */
 	public FloatingData getYAsFloatingData() {
 		// checks if the stored data is a array
-		if (ObjectType.ARRAY.equals(getYObjectType())) {
+		if (DataPointType.FLOATING_DATA.equals(getYType())) {
 			return new FloatingData(getArrayValue(Property.Y));
 		}
 		// if here the data is missing or not a number
@@ -373,4 +386,21 @@ public final class DataPoint extends AbstractDataPoint {
 		return JSON.stringifyWithReplacer(getNativeObject());
 	}
 
+	/**
+	 * Checks the type of the property, setting the right type property.
+	 * 
+	 * @param property the property of the data to store
+	 * @param typeProperty property to use to store the type
+	 * @param type type of the property to store in the object
+	 */
+	private void checkAndSetType(Key property, Key typeProperty, DataPointType type) {
+		// checks if property is stored
+		if (has(property)) {
+			// sets type
+			setValue(typeProperty, type);
+		} else {
+			// if here, the property is set as unknown
+			setValue(typeProperty, DataPointType.UNKNOWN);
+		}
+	}
 }

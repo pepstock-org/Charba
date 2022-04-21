@@ -131,9 +131,37 @@ public final class NativeName {
 	public static final String JS_GEO_HELPER = "CharbaJsGeoHelper";
 
 	/**
+	 * Constant to bind java script object with name <b>{@value JS_ML_HELPER}</b>, (internal of Charba), when <b>ML</b> used.
+	 */
+	public static final String JS_ML_HELPER = "CharbaJsMLHelper";
+
+	/**
 	 * Constant to bind java script object as JsGradientHelper with name <b>{@value JS_GRADIENT_HELPER}</b>, (internal of Charba), when <b>GradientPlugin</b> is activated.
 	 */
 	public static final String JS_GRADIENT_HELPER = "CharbaJsGradientHelper";
+
+	// ------------------------
+	// ML
+	// ------------------------
+
+	/**
+	 * Constant to bind java script object as ML BaseRegression with name <b>{@value ML_BASE_REGRESSION}</b>.
+	 */
+	public static final String ML_BASE_REGRESSION = "ML.BaseRegression";
+
+	/**
+	 * Constant to bind java script object as ML RegressionScore with name <b>{@value ML_REGRESSION_SCORE}</b>.
+	 */
+	public static final String ML_REGRESSION_SCORE = "ML.RegressionScore";
+
+	/**
+	 * Constant to bind java script object as ML SimpleLinearRegression with name <b>{@value ML_SIMPLE_LINEAR_REGRESSION}</b>.
+	 */
+	public static final String ML_SIMPLE_LINEAR_REGRESSION = "ML.SimpleLinearRegression";
+
+	// ------------------------
+	// CHARTJS
+	// ------------------------
 
 	/**
 	 * Constant to bind java script object as chart with name <b>{@value CHART}</b>, (internal of CHART.JS).

@@ -14,9 +14,9 @@
     limitations under the License.
 */
 /**
- * Contains all classes to activate the Matrix controller (AKA <code>chartjs-chart-matrix.js</code>) for CHART.js.
+ * Contains all classes to activate the <a href="https://github.com/mljs/ml">ML library</a> to use the regression capabilities.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-package org.pepstock.charba.client.matrix;
+package org.pepstock.charba.client.ml;

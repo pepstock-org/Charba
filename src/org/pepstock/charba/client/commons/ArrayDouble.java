@@ -53,7 +53,7 @@ public final class ArrayDouble extends Array {
 	@JsOverlay
 	public static ArrayDouble fromOrNull(double... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns null
 			return null;
 		}
@@ -70,7 +70,7 @@ public final class ArrayDouble extends Array {
 	@JsOverlay
 	public static ArrayDouble fromOrEmpty(double... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns an empty array
 			return new ArrayDouble();
 		}

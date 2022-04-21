@@ -279,8 +279,14 @@ Going to next release
 ---------------------
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
 
+### Breaking changes
+
+ * Rename `getXObjectType` and `getXObjectType` methods in `DataPoint` class to `getXType` and `getYType`.
+
 ### Features
 
+ * add **regression capabilities** leveraging on ML library, [version 6.0.0](https://github.com/mljs/ml).
+   * add simple **Linear Regression** feature
  * import CHART.JS GRADIENT plugin version [v0.5.0](https://github.com/kurkle/chartjs-plugin-gradient/releases/tag/v0.5.0).
 
 License

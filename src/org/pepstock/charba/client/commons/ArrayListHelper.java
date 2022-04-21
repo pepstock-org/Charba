@@ -324,4 +324,13 @@ public final class ArrayListHelper {
 		return Collections.unmodifiableList(list(array, factory));
 	}
 
+	/**
+	 * Checks if the passed list is consistent.
+	 * 
+	 * @param list list to check
+	 * @return <code>true</code> if the list is consistent
+	 */
+	public static boolean isConsistent(List<?> list) {
+		return list != null && !list.isEmpty();
+	}
 }

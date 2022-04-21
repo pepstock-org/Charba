@@ -82,6 +82,10 @@ public enum ResourceName implements Key
 	 */
 	GEO_CONTROLLER("geo", false),
 	/**
+	 * Script element id for ML JS library.
+	 */
+	ML_LIBRARY("ml", true),
+	/**
 	 * CSS file to use in the Charba toast utility.
 	 */
 	TOAST_CSS_UTIL("charbaToastCss", false),

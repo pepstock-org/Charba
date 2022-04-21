@@ -50,7 +50,7 @@ final class JsHelperResource extends AbstractInjectableResource {
 		"function CharbaJsDateAdapterHelper(){}CharbaJsDateAdapterHelper.create=function($options$$){return new Chart._adapters._date($options$$)};function CharbaJsGeoHelper(){}",
 		"CharbaJsGeoHelper.features=function($parsedFeatures_topojson$$,$featureProperty$$){return\"undefined\"!==typeof $parsedFeatures_topojson$$.objects&&\"undefined\"!==typeof $parsedFeatures_topojson$$.objects[$featureProperty$$]&&($parsedFeatures_topojson$$=ChartGeo.topojson.feature($parsedFeatures_topojson$$,$parsedFeatures_topojson$$.objects[$featureProperty$$]),null!=$parsedFeatures_topojson$$)?$parsedFeatures_topojson$$.features:null};",
 		"CharbaJsGeoHelper.projection=function($chart$$,$latitude$$,$longitude$$){return $chart$$.scales.xy.projection([$longitude$$,$latitude$$])};CharbaJsGeoHelper.invert=function($chart$$,$projection_x$$,$y$$){return($projection_x$$=$chart$$.scales.xy.geoPath.projection())&&\"function\"===typeof $projection_x$$.invert?$chart$$.scales.xy.geoPath.projection().invert([p[0],p[1]]):null};CharbaJsGeoHelper.getColorForValue=function($chart$$,$value$$){return $chart$$.scales.color.getColorForValue($value$$)};",
-		"CharbaJsGeoHelper.getSizeForValue=function($chart$$,$value$$){return $chart$$.scales.r.getSizeForValue($value$$)};"
+		"CharbaJsGeoHelper.getSizeForValue=function($chart$$,$value$$){return $chart$$.scales.r.getSizeForValue($value$$)};function CharbaJsMLHelper(){}CharbaJsMLHelper.predict=function($regression$$,$values$$){return $regression$$.predict($values$$)};CharbaJsMLHelper.toFormula=function($regression$$,$precision$$){return $regression$$.toString($precision$$)};"
 	};
 	
 	/**
