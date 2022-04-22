@@ -69,7 +69,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'MlPluginResource' class.
 	 */
-	ML_PLUGIN_RESOURCE(ResourceName.ML_LIBRARY, 21642952),
+	ML_PLUGIN_RESOURCE(ResourceName.ML_LIBRARY, 5428426),
 	/**
 	 * Hash item for 'SankeyControllerResource' class.
 	 */
