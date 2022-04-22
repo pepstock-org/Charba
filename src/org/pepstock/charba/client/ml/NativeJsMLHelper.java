@@ -46,7 +46,7 @@ final class NativeJsMLHelper {
 	 * @return an array of Y values, calculated by the regression formula for specific X values
 	 */
 	@JsMethod
-	static native final ArrayDouble predict(NativeBaseRegression regression, ArrayDouble x);
+	static native ArrayDouble predict(NativeBaseRegression regression, ArrayDouble x);
 
 	/**
 	 * Returns the formula of the regression, using the requested precision.
@@ -56,5 +56,5 @@ final class NativeJsMLHelper {
 	 * @return the formula of the regression
 	 */
 	@JsMethod
-	static native final String toFormula(NativeBaseRegression regression, int precision);
+	static native String toFormula(NativeBaseRegression regression, int precision);
 }

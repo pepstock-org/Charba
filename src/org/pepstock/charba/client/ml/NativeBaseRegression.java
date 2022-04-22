@@ -39,7 +39,7 @@ class NativeBaseRegression {
 	 * @return the Y value, calculated by the regression formula at specific X value
 	 */
 	@JsMethod
-	native final double predict(double x);
+	native double predict(double x);
 
 	/**
 	 * Evaluates the regression formula if the model fits enough.
@@ -49,7 +49,7 @@ class NativeBaseRegression {
 	 * @return the score of the regression
 	 */
 	@JsMethod
-	native final RegressionScore score(ArrayDouble x, ArrayDouble y);
+	native RegressionScore score(ArrayDouble x, ArrayDouble y);
 
 	/**
 	 * Returns the formula of the regression, using the requested precision.
@@ -58,6 +58,6 @@ class NativeBaseRegression {
 	 * @return the formula of the regression
 	 */
 	@JsMethod
-	native final String toLaTeX(int precision);
+	native String toLaTeX(int precision);
 
 }
