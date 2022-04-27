@@ -223,7 +223,7 @@ public final class RegressionDatasetBuilder extends SamplesContainer<RegressionD
 		// creates regression
 		LinearRegression regression = RegressionBuilder.create(x, y).buildLinearRegression();
 		// returns dataset instance
-		return buildDataset(regression, x, y);
+		return buildDataset(regression, x);
 	}
 
 	/**
@@ -249,7 +249,7 @@ public final class RegressionDatasetBuilder extends SamplesContainer<RegressionD
 		// creates regression
 		PolynomialRegression regression = RegressionBuilder.create(x, y).buildPolynomialRegression(degree);
 		// returns dataset instance
-		return buildDataset(regression, x, y);
+		return buildDataset(regression, x);
 	}
 
 	// ------------------------
@@ -312,10 +312,9 @@ public final class RegressionDatasetBuilder extends SamplesContainer<RegressionD
 	 * 
 	 * @param regression regression instance
 	 * @param x X values to use to create the regression
-	 * @param y Y values to use to create the regression
 	 * @return regression dataset to add to a chart
 	 */
-	private RegressionDataset buildDataset(IsRegression regression, List<Double> x, List<Double> y) {
+	private RegressionDataset buildDataset(IsRegression regression, List<Double> x) {
 		// creates dataset
 		RegressionDataset dataset = new RegressionDataset(regression, hidden, asDates, asDataPoints);
 		// defaults options
