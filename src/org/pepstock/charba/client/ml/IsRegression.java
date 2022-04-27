@@ -36,13 +36,6 @@ public interface IsRegression {
 	boolean isConsistent();
 
 	/**
-	 * Returns the score of regression calculated with initial values.
-	 * 
-	 * @return the score of regression calculated with initial values
-	 */
-	RegressionScore getScore();
-
-	/**
 	 * Returns the Y value, calculated by the regression formula at specific X value.
 	 * 
 	 * @param x value to use to get the predicted value

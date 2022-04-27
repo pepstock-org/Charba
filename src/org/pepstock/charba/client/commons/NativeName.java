@@ -159,6 +159,11 @@ public final class NativeName {
 	 */
 	public static final String ML_SIMPLE_LINEAR_REGRESSION = "ML.SimpleLinearRegression";
 
+	/**
+	 * Constant to bind java script object as ML PolynomialRegression with name <b>{@value ML_POLYNOMIAL_REGRESSION}</b>.
+	 */
+	public static final String ML_POLYNOMIAL_REGRESSION = "ML.PolynomialRegression";
+
 	// ------------------------
 	// CHARTJS
 	// ------------------------

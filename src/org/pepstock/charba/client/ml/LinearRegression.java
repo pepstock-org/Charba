@@ -27,18 +27,19 @@ import org.pepstock.charba.client.data.TimeSeriesItem;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * Represents the simple linear regression is a linear regression model with a single explanatory variable.<br>
- * That is, it concerns two-dimensional sample points with one independent variable and one dependent variable (conventionally, the x and y coordinates in a cartesian coordinate
- * system) and finds a linear function (a non-vertical straight line) that, as accurately as possible, predicts the dependent variable values as a function of the independent
- * variable.<br>
- * The adjective simple refers to the fact that the outcome variable is related to a single predictor.<br>
- * Formula:<br>
- * 
- * <pre>
- * <b>f(x) = slope * x + intercept</b>
- * </pre>
- * 
- * It maps <a href="https://github.com/mljs/regression-simple-linear">mljs/regression-simple-linear</a>.
+ * Simple Linear Regression is a type of Regression algorithms that models the relationship between a dependent variable and a single independent variable.<br>
+ * The relationship shown by a Simple Linear Regression model is linear or a sloped straight line, hence it is called Simple Linear Regression.<br>
+ * The key point in Simple Linear Regression is that the dependent variable must be a continuous/real value.<br>
+ * However, the independent variable can be measured on continuous or categorical values.<br>
+ * The Simple Linear Regression model can be represented using the below equation:<br>
+ * <br>
+ * <b style="font: italic bold 24px courier;">y = a<sub>0</sub> + a<sub>1</sub>x</b><br>
+ * <br>
+ * where<br>
+ * <ul>
+ * <li><b style="font: italic bold 24px courier;">a<sub>0</sub></b> is the intercept of the Regression line (can be obtained putting x=0)
+ * <li><b style="font: italic bold 24px courier;">a<sub>1</sub></b> is the slope of the regression line, which tells whether the line is increasing or decreasing
+ * </ul>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -52,7 +53,7 @@ public final class LinearRegression extends BaseRegression<NativeLinearRegressio
 	 * @param y values bound to y
 	 */
 	LinearRegression(List<Double> x, List<Double> y) {
-		super(new NativeLinearRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y)), x, y);
+		super(new NativeLinearRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y)));
 	}
 
 	/**

@@ -43,19 +43,13 @@ abstract class BaseRegression<T extends NativeBaseRegression> implements IsRegre
 	// native regression instance
 	private final T nativeRegression;
 
-	private final RegressionScore score;
-
 	/**
 	 * Creates the object storing the native regression
 	 * 
 	 * @param nativeRegression native regression instance
-	 * @param x X values to use for regression creation
-	 * @param y Y values to use for regression creation
 	 */
-	BaseRegression(T nativeRegression, List<Double> x, List<Double> y) {
+	BaseRegression(T nativeRegression) {
 		this.nativeRegression = nativeRegression;
-		// stores score
-		this.score = score(x, y);
 	}
 
 	/**
@@ -65,16 +59,6 @@ abstract class BaseRegression<T extends NativeBaseRegression> implements IsRegre
 	 */
 	final T getNativeBaseRegression() {
 		return nativeRegression;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.ml.IsRegression#getScore()
-	 */
-	@Override
-	public final RegressionScore getScore() {
-		return score;
 	}
 
 	/*
