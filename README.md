@@ -285,9 +285,12 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
- * add **regression capabilities** leveraging on ML library (only regressions modules), [version 6.0.0](https://github.com/mljs/ml).
-   * add simple **Linear Regression** feature.
-   * add **Polynomial Regression** feature.
+ * add **REGRESSION** capabilities leveraging on ML library (only regressions modules), [version 6.0.0](https://github.com/mljs/ml).
+   * add simple linear regression feature.
+   * add polynomial regression.
+   * add power regression.
+   * add exponential regression.
+   * add TheilSen regression.
  * import CHART.JS GRADIENT plugin version [v0.5.0](https://github.com/kurkle/chartjs-plugin-gradient/releases/tag/v0.5.0).
 
 License

@@ -252,6 +252,51 @@ public final class RegressionDatasetBuilder extends SamplesContainer<RegressionD
 		return buildDataset(regression, x);
 	}
 
+	/**
+	 * Creates a regression dataset, to add to a chart.
+	 * 
+	 * @return regression dataset to add to a chart
+	 */
+	public RegressionDataset buildPowerRegression() {
+		// gets samples
+		List<Double> x = getX();
+		List<Double> y = getY();
+		// creates regression
+		PowerRegression regression = RegressionBuilder.create(x, y).buildPowerRegression();
+		// returns dataset instance
+		return buildDataset(regression, x);
+	}
+
+	/**
+	 * Creates a regression dataset, to add to a chart.
+	 * 
+	 * @return regression dataset to add to a chart
+	 */
+	public RegressionDataset buildExponentialRegression() {
+		// gets samples
+		List<Double> x = getX();
+		List<Double> y = getY();
+		// creates regression
+		ExponentialRegression regression = RegressionBuilder.create(x, y).buildExponentialRegression();
+		// returns dataset instance
+		return buildDataset(regression, x);
+	}
+
+	/**
+	 * Creates a regression dataset, to add to a chart.
+	 * 
+	 * @return regression dataset to add to a chart
+	 */
+	public RegressionDataset buildTheilSenRegression() {
+		// gets samples
+		List<Double> x = getX();
+		List<Double> y = getY();
+		// creates regression
+		TheilSenRegression regression = RegressionBuilder.create(x, y).buildTheilSenRegression();
+		// returns dataset instance
+		return buildDataset(regression, x);
+	}
+
 	// ------------------------
 	// INTERNALS
 	// ------------------------

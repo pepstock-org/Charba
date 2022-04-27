@@ -15,16 +15,9 @@
 */
 package org.pepstock.charba.client.ml;
 
-import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ImmutableDate;
-import org.pepstock.charba.client.data.DataPoint;
-import org.pepstock.charba.client.data.FloatingData;
-import org.pepstock.charba.client.data.TimeSeriesItem;
-import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Simple Linear Regression is a type of Regression algorithms that models the relationship between a dependent variable and a single independent variable.<br>
@@ -44,7 +37,7 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LinearRegression extends BaseRegression<NativeLinearRegression> {
+public final class LinearRegression extends BaseLinearRegression<NativeLinearRegression> {
 
 	/**
 	 * Creates the simple linear regression object, using the passed data to calculate the formula.
@@ -54,174 +47,6 @@ public final class LinearRegression extends BaseRegression<NativeLinearRegressio
 	 */
 	LinearRegression(List<Double> x, List<Double> y) {
 		super(new NativeLinearRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y)));
-	}
-
-	/**
-	 * Returns the slope coefficient.
-	 * 
-	 * @return the slope coefficient
-	 */
-	public double getSlope() {
-		return getNativeBaseRegression().getSlope();
-	}
-
-	/**
-	 * Returns the intercept coefficient.
-	 * 
-	 * @return the intercept coefficient
-	 */
-	public double getIntercept() {
-		return getNativeBaseRegression().getIntercept();
-	}
-
-	/**
-	 * Returns all calculated coefficients as a list.
-	 * 
-	 * @return all calculated coefficients as a list
-	 */
-	public List<Double> getCoefficients() {
-		return ArrayListHelper.unmodifiableList(getNativeBaseRegression().getCoefficients());
-	}
-
-	/**
-	 * Returns a calculated X value by the Y value.
-	 * 
-	 * @param y Y value to use to calculate the X value
-	 * @return a calculated X value by the Y value
-	 */
-	public double computeX(double y) {
-		// checks if argument is consistent
-		if (Undefined.isNot(y) && isConsistent()) {
-			// computes and returns the value
-			return getNativeBaseRegression().computeX(y);
-		}
-		// if here, argument is not consistent
-		// then returns undefined
-		return Undefined.DOUBLE;
-	}
-
-	/**
-	 * Returns a calculated X value by the Y value.
-	 * 
-	 * @param y Y value to use to calculate the X value
-	 * @return a calculated X value by the Y value
-	 */
-	public double computeX(FloatingData y) {
-		// checks if argument is consistent
-		if (y != null) {
-			// computes and returns the value
-			return computeX(y.getValue());
-		}
-		// if here, argument is not consistent
-		// then returns undefined
-		return Undefined.DOUBLE;
-	}
-
-	/**
-	 * Returns a calculated X value by the Y value.
-	 * 
-	 * @param dataPoint Y value to use to calculate the X value
-	 * @return a calculated X value by the Y value
-	 */
-	public double computeX(DataPoint dataPoint) {
-		// checks if argument is consistent
-		if (dataPoint != null) {
-			// gets y value
-			double value = MLUtil.get().getYValueFromDataPoint(dataPoint);
-			// checks if value is consistent
-			if (Undefined.isNot(value)) {
-				// computes and returns the value
-				return computeX(value);
-			}
-		}
-		// if here, argument is not consistent
-		// then returns undefined
-		return Undefined.DOUBLE;
-	}
-
-	/**
-	 * Returns a calculated X value by the Y value.
-	 * 
-	 * @param item Y value to use to calculate the X value
-	 * @return a calculated X value by the Y value
-	 */
-	public Date computeX(TimeSeriesItem item) {
-		// checks if argument is consistent
-		if (item != null) {
-			// gets y value
-			return computeXToDate(item.getValue());
-		}
-		// if here, argument is not consistent
-		// then returns null
-		return null;
-	}
-
-	/**
-	 * Returns a calculated X value by the Y value.
-	 * 
-	 * @param y Y value to use to calculate the X value
-	 * @return a calculated X value by the Y value
-	 */
-	public Date computeXToDate(double y) {
-		// checks value
-		double value = computeX(y);
-		// checks if argument is consistent
-		if (Undefined.isNot(value)) {
-			// computes and returns the value
-			return new ImmutableDate((long) value);
-		}
-		// if here, argument is not consistent
-		// then returns null
-		return null;
-	}
-
-	/**
-	 * Returns a calculated X value by the Y value.
-	 * 
-	 * @param y Y value to use to calculate the X value
-	 * @return a calculated X value by the Y value
-	 */
-	public Date computeXToDate(FloatingData y) {
-		// checks if argument is consistent
-		if (y != null) {
-			// computes and returns the value
-			return computeXToDate(y.getValue());
-		}
-		// if here, argument is not consistent
-		// then returns null
-		return null;
-	}
-
-	/**
-	 * Returns a calculated X value by the Y value.
-	 * 
-	 * @param dataPoint Y value to use to calculate the X value
-	 * @return a calculated X value by the Y value
-	 */
-	public Date computeXToDate(DataPoint dataPoint) {
-		// checks if argument is consistent
-		if (dataPoint != null) {
-			// gets y value
-			double value = MLUtil.get().getYValueFromDataPoint(dataPoint);
-			// checks if value is consistent
-			if (Undefined.isNot(value)) {
-				// computes and returns the value
-				return computeXToDate(value);
-			}
-		}
-		// if here, argument is not consistent
-		// then returns undefined
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.ml.BaseRegression#isConsistent()
-	 */
-	@Override
-	public boolean isConsistent() {
-		return Undefined.isNot(getSlope()) && Undefined.isNot(getIntercept());
 	}
 
 }

@@ -31,6 +31,10 @@ import org.pepstock.charba.client.data.TimeSeriesItem;
  */
 abstract class SamplesContainer<T> {
 
+	// constants for samples types
+	static final String X_SAMPLES_TYPE = "X";
+	static final String Y_SAMPLES_TYPE = "Y";
+
 	// samples collections
 	private List<Double> x = null;
 	private List<Double> y = null;
@@ -73,9 +77,11 @@ abstract class SamplesContainer<T> {
 	 * 
 	 * @param samples list of doubles to check
 	 * @param type type of the samples, X or Y
+	 * @return the passed list
 	 */
-	final void checkSamples(List<Double> samples, String type) {
+	final List<Double> checkAndGetSamples(List<Double> samples, String type) {
 		Checker.assertCheck(ArrayListHelper.isConsistent(samples), type + " samples are not consistent");
+		return samples;
 	}
 
 	// --------------------------------
@@ -116,7 +122,7 @@ abstract class SamplesContainer<T> {
 	 */
 	public T setSamples(List<Double> y, double starting, double increment) {
 		// checks list of y values
-		checkSamples(y, "Y");
+		checkAndGetSamples(y, Y_SAMPLES_TYPE);
 		// stores samples
 		return setSamples(MLUtil.get().loadXValues(y.size(), starting, increment), y);
 	}

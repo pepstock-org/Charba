@@ -76,17 +76,10 @@ public final class RegressionBuilder extends SamplesContainer<RegressionBuilder>
 	/**
 	 * Creates a simple linear regression.
 	 * 
-	 * @return polynomial regression instance
+	 * @return simple linear regression instance
 	 */
 	public LinearRegression buildLinearRegression() {
-		// gets samples
-		List<Double> x = getX();
-		List<Double> y = getY();
-		// checks samples consistency
-		checkSamples(x, "X");
-		checkSamples(y, "Y");
-		// creates regression
-		return new LinearRegression(x, y);
+		return new LinearRegression(checkAndGetSamples(getX(), X_SAMPLES_TYPE), checkAndGetSamples(getY(), Y_SAMPLES_TYPE));
 	}
 
 	/**
@@ -106,16 +99,37 @@ public final class RegressionBuilder extends SamplesContainer<RegressionBuilder>
 	 * @return polynomial regression instance
 	 */
 	public PolynomialRegression buildPolynomialRegression(int degree) {
-		// gets samples
-		List<Double> x = getX();
-		List<Double> y = getY();
-		// checks samples consistency
-		checkSamples(x, "X");
-		checkSamples(y, "Y");
 		// checks minimum degree
 		Checker.checkIfGreaterThan(degree, PolynomialRegression.MINIMUM_DEGREE, "Degree of polynomial regression ");
 		// creates regression
-		return new PolynomialRegression(x, y, degree);
+		return new PolynomialRegression(checkAndGetSamples(getX(), X_SAMPLES_TYPE), checkAndGetSamples(getY(), Y_SAMPLES_TYPE), degree);
+	}
+
+	/**
+	 * Creates a power regression.
+	 * 
+	 * @return power regression instance
+	 */
+	public PowerRegression buildPowerRegression() {
+		return new PowerRegression(checkAndGetSamples(getX(), X_SAMPLES_TYPE), checkAndGetSamples(getY(), Y_SAMPLES_TYPE));
+	}
+
+	/**
+	 * Creates a exponential regression.
+	 * 
+	 * @return exponential regression instance
+	 */
+	public ExponentialRegression buildExponentialRegression() {
+		return new ExponentialRegression(checkAndGetSamples(getX(), X_SAMPLES_TYPE), checkAndGetSamples(getY(), Y_SAMPLES_TYPE));
+	}
+
+	/**
+	 * Creates a TheilSen regression.
+	 * 
+	 * @return TheilSen regression instance
+	 */
+	public TheilSenRegression buildTheilSenRegression() {
+		return new TheilSenRegression(checkAndGetSamples(getX(), X_SAMPLES_TYPE), checkAndGetSamples(getY(), Y_SAMPLES_TYPE));
 	}
 
 }

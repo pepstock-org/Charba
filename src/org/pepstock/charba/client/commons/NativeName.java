@@ -164,6 +164,21 @@ public final class NativeName {
 	 */
 	public static final String ML_POLYNOMIAL_REGRESSION = "ML.PolynomialRegression";
 
+	/**
+	 * Constant to bind java script object as ML PowerRegression with name <b>{@value ML_POWER_REGRESSION}</b>.
+	 */
+	public static final String ML_POWER_REGRESSION = "ML.PowerRegression";
+
+	/**
+	 * Constant to bind java script object as ML ExponentialRegression with name <b>{@value ML_EXPONENTIAL_REGRESSION}</b>.
+	 */
+	public static final String ML_EXPONENTIAL_REGRESSION = "ML.ExponentialRegression";
+
+	/**
+	 * Constant to bind java script object as ML TheilSenRegression with name <b>{@value ML_THEIL_SEN_REGRESSION}</b>.
+	 */
+	public static final String ML_THEIL_SEN_REGRESSION = "ML.TheilSenRegression";
+
 	// ------------------------
 	// CHARTJS
 	// ------------------------

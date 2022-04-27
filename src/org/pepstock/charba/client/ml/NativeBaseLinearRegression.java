@@ -18,7 +18,9 @@ package org.pepstock.charba.client.ml;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.NativeName;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -41,17 +43,40 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.ML_SIMPLE_LINEAR_REGRESSION, namespace = JsPackage.GLOBAL)
-class NativeLinearRegression extends NativeBaseLinearRegression {
+@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+class NativeBaseLinearRegression extends NativeBaseRegression {
 
 	/**
-	 * Creates the simple linear regression object, using the passed data to calculate the formula.
+	 * Returns the slope coefficient.
 	 * 
-	 * @param x values bound to x
-	 * @param y values bound to y
+	 * @return the slope coefficient
 	 */
-	NativeLinearRegression(ArrayDouble x, ArrayDouble y) {
-		// nothing
-	}
+	@JsProperty
+	native double getSlope();
+
+	/**
+	 * Returns the intercept coefficient.
+	 * 
+	 * @return the intercept coefficient
+	 */
+	@JsProperty
+	native double getIntercept();
+
+	/**
+	 * Returns all calculated coefficients as an array.
+	 * 
+	 * @return all calculated coefficients as an array
+	 */
+	@JsProperty
+	native ArrayDouble getCoefficients();
+
+	/**
+	 * Returns a calculated X value by the Y value.
+	 * 
+	 * @param y Y value to use to calculate the X value
+	 * @return a calculated X value by the Y value
+	 */
+	@JsMethod
+	native double computeX(double y);
 
 }

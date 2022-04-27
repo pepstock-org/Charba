@@ -22,11 +22,10 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Simple Linear Regression is a type of Regression algorithms that models the relationship between a dependent variable and a single independent variable.<br>
- * The relationship shown by a Simple Linear Regression model is linear or a sloped straight line, hence it is called Simple Linear Regression.<br>
- * The key point in Simple Linear Regression is that the dependent variable must be a continuous/real value.<br>
- * However, the independent variable can be measured on continuous or categorical values.<br>
- * The Simple Linear Regression model can be represented using the below equation:<br>
+ * In TheilSen Regression, the estimation of the model is done by calculating the slopes and intercepts of a subpopulation of all possible combinations of p subsample points.<br>
+ * If an intercept is fitted, p must be greater than or equal to n_features + 1.<br>
+ * The final slope and intercept is then defined as the spatial median of these slopes and intercepts.<br>
+ * The TheilSen Regression model can be represented using the below equation:<br>
  * <br>
  * <b style="font: italic bold 24px courier;">y = a<sub>0</sub> + a<sub>1</sub>x</b><br>
  * <br>
@@ -36,21 +35,21 @@ import jsinterop.annotations.JsType;
  * <li><b style="font: italic bold 24px courier;">a<sub>1</sub></b> is the slope of the regression line, which tells whether the line is increasing or decreasing
  * </ul>
  * <br>
- * It maps <a href="https://github.com/mljs/regression-simple-linear">mljs/regression-simple-linear</a>.
+ * It maps <a href="https://github.com/mljs/regression-theil-sen">mljs/regression-theil-sen</a>.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.ML_SIMPLE_LINEAR_REGRESSION, namespace = JsPackage.GLOBAL)
-class NativeLinearRegression extends NativeBaseLinearRegression {
+@JsType(isNative = true, name = NativeName.ML_THEIL_SEN_REGRESSION, namespace = JsPackage.GLOBAL)
+final class NativeTheilSenRegression extends NativeBaseLinearRegression {
 
 	/**
-	 * Creates the simple linear regression object, using the passed data to calculate the formula.
+	 * Creates the TheilSen regression object, using the passed data to calculate the formula.
 	 * 
 	 * @param x values bound to x
 	 * @param y values bound to y
 	 */
-	NativeLinearRegression(ArrayDouble x, ArrayDouble y) {
+	NativeTheilSenRegression(ArrayDouble x, ArrayDouble y) {
 		// nothing
 	}
 

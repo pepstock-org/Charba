@@ -43,7 +43,7 @@ public final class PolynomialRegression extends BaseRegression<NativePolynomialR
 	static final int MINIMUM_DEGREE = 2;
 
 	/**
-	 * Creates the simple linear regression object, using the passed data to calculate the formula.
+	 * Creates the polynomial regression object, using the passed data to calculate the formula.
 	 * 
 	 * @param x values bound to x
 	 * @param y values bound to y
