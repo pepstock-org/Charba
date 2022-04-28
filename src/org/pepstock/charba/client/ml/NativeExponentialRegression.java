@@ -18,6 +18,7 @@ package org.pepstock.charba.client.ml;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.NativeName;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -60,5 +61,14 @@ final class NativeExponentialRegression extends NativeBaseRegression {
 	 */
 	@JsProperty(name = "B")
 	native double getB();
+
+	/**
+	 * Creates new regression by a descriptor.
+	 * 
+	 * @param descriptor regression description used to create new regression
+	 * @return new regression instance
+	 */
+	@JsMethod
+	static native NativeExponentialRegression load(RegressionDescriptor descriptor);
 
 }

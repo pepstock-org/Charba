@@ -18,6 +18,7 @@ package org.pepstock.charba.client.ml;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.NativeName;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -53,4 +54,12 @@ final class NativeTheilSenRegression extends NativeBaseLinearRegression {
 		// nothing
 	}
 
+	/**
+	 * Creates new regression by a descriptor.
+	 * 
+	 * @param descriptor regression description used to create new regression
+	 * @return new regression instance
+	 */
+	@JsMethod
+	static native NativeTheilSenRegression load(RegressionDescriptor descriptor);
 }

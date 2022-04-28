@@ -18,6 +18,7 @@ package org.pepstock.charba.client.ml;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.enums.RegressionType;
 
 /**
  * Builds regressions instances.
@@ -25,13 +26,17 @@ import org.pepstock.charba.client.commons.Checker;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RegressionBuilder extends SamplesContainer<RegressionBuilder> {
+public final class RegressionBuilder extends AbstractBuilder<RegressionBuilder> {
+
+	private final RegressionDescriptor source;
 
 	/**
 	 * To avoid any instantiation
+	 * 
+	 * @param source descriptor source to use to create a regression or <code>null</code>
 	 */
-	private RegressionBuilder() {
-		super();
+	private RegressionBuilder(RegressionDescriptor source) {
+		this.source = source;
 	}
 
 	/*
@@ -50,7 +55,7 @@ public final class RegressionBuilder extends SamplesContainer<RegressionBuilder>
 	 * @return new regression builder, without any sample
 	 */
 	public static RegressionBuilder create() {
-		return new RegressionBuilder();
+		return new RegressionBuilder(null);
 	}
 
 	/**
@@ -69,6 +74,46 @@ public final class RegressionBuilder extends SamplesContainer<RegressionBuilder>
 		return builder;
 	}
 
+	/**
+	 * Creates new regression builder, using the passed regression instance.
+	 * 
+	 * @param regression regression instance to clone
+	 * @return new regression builder
+	 */
+	public static RegressionBuilder create(IsRegression regression) {
+		return create(IsRegression.checkAndGetIfValid(regression).getDescriptor());
+	}
+
+	/**
+	 * Creates new regression builder, using the passed regression descriptor instance to create new regression.
+	 * 
+	 * @param descriptor regression descriptor instance to create new regression
+	 * @return new regression builder
+	 */
+	public static RegressionBuilder create(RegressionDescriptor descriptor) {
+		return new RegressionBuilder(Checker.checkAndGetIfValid(descriptor, "Regression descriptor"));
+	}
+
+	/**
+	 * Creates new regression instance, using the passed regression instance.
+	 * 
+	 * @param regression regression instance to clone
+	 * @return new regression
+	 */
+	public static IsRegression build(IsRegression regression) {
+		return build(IsRegression.checkAndGetIfValid(regression).getDescriptor());
+	}
+
+	/**
+	 * Creates new regression, using the passed regression descriptor instance to create new regression.
+	 * 
+	 * @param descriptor regression descriptor instance to create new regression
+	 * @return new regression
+	 */
+	public static IsRegression build(RegressionDescriptor descriptor) {
+		return RegressionFactory.create(descriptor);
+	}
+
 	// --------------------------------
 	// BUILD
 	// --------------------------------
@@ -79,6 +124,12 @@ public final class RegressionBuilder extends SamplesContainer<RegressionBuilder>
 	 * @return simple linear regression instance
 	 */
 	public LinearRegression buildLinearRegression() {
+		// checks if descriptor was passed
+		if (buildByDescriptor(RegressionType.LINEAR)) {
+			// created by descriptor
+			return new LinearRegression(source);
+		}
+		// if here, created by samples
 		return new LinearRegression(checkAndGetSamples(getX(), X_SAMPLES_TYPE), checkAndGetSamples(getY(), Y_SAMPLES_TYPE));
 	}
 
@@ -89,6 +140,12 @@ public final class RegressionBuilder extends SamplesContainer<RegressionBuilder>
 	 * @return polynomial regression instance
 	 */
 	public PolynomialRegression buildPolynomialRegression() {
+		// checks if descriptor was passed
+		if (buildByDescriptor(RegressionType.POLYNOMIAL)) {
+			// created by descriptor
+			return new PolynomialRegression(source);
+		}
+		// if here, created by samples
 		return buildPolynomialRegression(PolynomialRegression.DEFAULT_DEGREE);
 	}
 
@@ -99,6 +156,10 @@ public final class RegressionBuilder extends SamplesContainer<RegressionBuilder>
 	 * @return polynomial regression instance
 	 */
 	public PolynomialRegression buildPolynomialRegression(int degree) {
+		// if the builder is created by a descriptor
+		// you can not use this build method
+		Checker.assertCheck(!buildByDescriptor(RegressionType.POLYNOMIAL), "Degree can not be changed in the regression descriptor. Use 'buildPolynomialRegression()' method instead.");
+		// if here, created by samples
 		// checks minimum degree
 		Checker.checkIfGreaterThan(degree, PolynomialRegression.MINIMUM_DEGREE, "Degree of polynomial regression ");
 		// creates regression
@@ -111,6 +172,12 @@ public final class RegressionBuilder extends SamplesContainer<RegressionBuilder>
 	 * @return power regression instance
 	 */
 	public PowerRegression buildPowerRegression() {
+		// checks if descriptor was passed
+		if (buildByDescriptor(RegressionType.POWER)) {
+			// created by descriptor
+			return new PowerRegression(source);
+		}
+		// if here, created by samples
 		return new PowerRegression(checkAndGetSamples(getX(), X_SAMPLES_TYPE), checkAndGetSamples(getY(), Y_SAMPLES_TYPE));
 	}
 
@@ -120,6 +187,12 @@ public final class RegressionBuilder extends SamplesContainer<RegressionBuilder>
 	 * @return exponential regression instance
 	 */
 	public ExponentialRegression buildExponentialRegression() {
+		// checks if descriptor was passed
+		if (buildByDescriptor(RegressionType.EXPONENTIAL)) {
+			// created by descriptor
+			return new ExponentialRegression(source);
+		}
+		// if here, created by samples
 		return new ExponentialRegression(checkAndGetSamples(getX(), X_SAMPLES_TYPE), checkAndGetSamples(getY(), Y_SAMPLES_TYPE));
 	}
 
@@ -129,7 +202,22 @@ public final class RegressionBuilder extends SamplesContainer<RegressionBuilder>
 	 * @return TheilSen regression instance
 	 */
 	public TheilSenRegression buildTheilSenRegression() {
+		// checks if descriptor was passed
+		if (buildByDescriptor(RegressionType.THEIL_SEN)) {
+			// created by descriptor
+			return new TheilSenRegression(source);
+		}
+		// if here, created by samples
 		return new TheilSenRegression(checkAndGetSamples(getX(), X_SAMPLES_TYPE), checkAndGetSamples(getY(), Y_SAMPLES_TYPE));
 	}
 
+	/**
+	 * Returns <code>true</code> if the regression instance must be created by the passed descriptor.
+	 * 
+	 * @param type the type of target regression
+	 * @return <code>true</code> if the regression instance must be created by the passed descriptor
+	 */
+	private boolean buildByDescriptor(RegressionType type) {
+		return source != null && type.equals(source.getType());
+	}
 }

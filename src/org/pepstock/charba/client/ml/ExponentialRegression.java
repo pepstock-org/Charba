@@ -18,6 +18,7 @@ package org.pepstock.charba.client.ml;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.enums.RegressionType;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -32,13 +33,22 @@ import org.pepstock.charba.client.items.Undefined;
 public final class ExponentialRegression extends BaseRegression<NativeExponentialRegression> {
 
 	/**
+	 * Creates the Exponential regression object, using the passed regression descriptor.
+	 * 
+	 * @param descriptor regression description used to create new regression
+	 */
+	ExponentialRegression(RegressionDescriptor descriptor) {
+		super(RegressionType.EXPONENTIAL, NativeExponentialRegression.load(descriptor));
+	}
+
+	/**
 	 * Creates the Exponential regression object, using the passed data to calculate the formula.
 	 * 
 	 * @param x values bound to x
 	 * @param y values bound to y
 	 */
 	ExponentialRegression(List<Double> x, List<Double> y) {
-		super(new NativeExponentialRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y)));
+		super(RegressionType.EXPONENTIAL, new NativeExponentialRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y)));
 	}
 
 	/**

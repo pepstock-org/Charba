@@ -36,7 +36,7 @@ import org.pepstock.charba.client.enums.DataType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RegressionDatasetBuilder extends SamplesContainer<RegressionDatasetBuilder> {
+public final class RegressionDatasetBuilder extends AbstractBuilder<RegressionDatasetBuilder> {
 
 	// sorter of data point in ascendent mode
 	private static final Comparator<DataPoint> ASCENDENT = MLUtil.get()::sort;
@@ -88,6 +88,30 @@ public final class RegressionDatasetBuilder extends SamplesContainer<RegressionD
 		// returns builder
 		return builder;
 	}
+
+	/**
+	 * Creates new regression dataset cloning the passed dataset.<br>
+	 * The options and the data are NOT cloned.
+	 * 
+	 * @param dataset dataset to clone.
+	 * @return new regression dataset instance
+	 */
+	public static RegressionDataset build(RegressionDataset dataset) {
+		// checks dataset
+		RegressionDataset checked = Checker.checkAndGetIfValid(dataset, "Dataset to clone");
+		// gets regression descritor
+		IsRegression regression = RegressionFactory.create(checked.getRegression());
+		// creates new dataset
+		RegressionDataset newDataset = new RegressionDataset(regression, false, checked.areDatesManaged(), checked.areDataPointsManaged());
+		// defaults options
+		setDefaultOptions(dataset);
+		// returns cloned dataset
+		return newDataset;
+	}
+
+	// ----------------------
+	// OPTIONS SETTING
+	// ----------------------
 
 	/**
 	 * Sets <code>true</code> if the samples will be loaded as dataset data.
@@ -363,11 +387,7 @@ public final class RegressionDatasetBuilder extends SamplesContainer<RegressionD
 		// creates dataset
 		RegressionDataset dataset = new RegressionDataset(regression, hidden, asDates, asDataPoints);
 		// defaults options
-		dataset.setFill(false);
-		dataset.setPointRadius(0);
-		dataset.setPointHoverRadius(0);
-		dataset.setPointHitRadius(0);
-		dataset.setTension(0);
+		setDefaultOptions(dataset);
 		// checks if the regression is valid
 		if (loadData) {
 			// creates y values
@@ -384,5 +404,19 @@ public final class RegressionDatasetBuilder extends SamplesContainer<RegressionD
 		}
 		// returns dataset instance
 		return dataset;
+	}
+
+	/**
+	 * Sets the default options for a regression dataset
+	 * 
+	 * @param dataset dataset to change
+	 */
+	private static void setDefaultOptions(RegressionDataset dataset) {
+		// defaults options
+		dataset.setFill(false);
+		dataset.setPointRadius(0);
+		dataset.setPointHoverRadius(0);
+		dataset.setPointHitRadius(0);
+		dataset.setTension(0);
 	}
 }

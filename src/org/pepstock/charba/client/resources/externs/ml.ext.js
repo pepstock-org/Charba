@@ -49,6 +49,10 @@ ML.BaseRegression.prototype.score = function(x, y) {};
  */
 ML.BaseRegression.prototype.toLaTeX = function(precision) {};
 /**
+ * @return {Object}
+ */
+ML.BaseRegression.prototype.toJSON = function() {};
+/**
  * @constructor
  * @extends {ML.BaseRegression}
  * @param {Array} x
@@ -74,6 +78,11 @@ ML.SimpleLinearRegression.prototype.intercept;
  */
 ML.SimpleLinearRegression.prototype.coefficients;
 /**
+ * @param {Object} descriptor
+ * @return {ML.SimpleLinearRegression}
+ */
+ML.SimpleLinearRegression.load = function(descriptor) {};
+/**
  * @constructor
  * @extends {ML.BaseRegression}
  * @param {Array} x
@@ -89,6 +98,11 @@ ML.ExponentialRegression.prototype.A;
  * @type {number}
  */
 ML.ExponentialRegression.prototype.B;
+/**
+ * @param {Object} descriptor
+ * @return {ML.ExponentialRegression}
+ */
+ML.ExponentialRegression.load = function(descriptor) {};
 /**
  * @constructor
  * @extends {ML.BaseRegression}
@@ -111,6 +125,11 @@ ML.PolynomialRegression.prototype.powers;
  */
 ML.PolynomialRegression.prototype.coefficients;
 /**
+ * @param {Object} descriptor
+ * @return {ML.PolynomialRegression}
+ */
+ML.PolynomialRegression.load = function(descriptor) {};
+/**
  * @constructor
  * @extends {ML.BaseRegression}
  * @param {Array} x
@@ -126,6 +145,11 @@ ML.PowerRegression.prototype.A;
  * @type {number}
  */
 ML.PowerRegression.prototype.B;
+/**
+ * @param {Object} descriptor
+ * @return {ML.PowerRegression}
+ */
+ML.PowerRegression.load = function(descriptor) {};
 /**
  * @constructor
  * @extends {ML.BaseRegression}
@@ -151,6 +175,11 @@ ML.TheilSenRegression.prototype.intercept;
  * @type {Array}
  */
 ML.TheilSenRegression.prototype.coefficients;
+/**
+ * @param {Object} descriptor
+ * @return {ML.TheilSenRegression}
+ */
+ML.TheilSenRegression.load = function(descriptor) {};
 /**
  * @constructor
  * @return {CharbaJsMLHelper}

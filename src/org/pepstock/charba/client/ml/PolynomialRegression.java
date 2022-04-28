@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.enums.RegressionType;
 
 /**
  * Polynomial Regression is a regression algorithm that models the relationship between a dependent(y) and independent variable(x) as nth degree polynomial.<br>
@@ -43,6 +44,15 @@ public final class PolynomialRegression extends BaseRegression<NativePolynomialR
 	static final int MINIMUM_DEGREE = 2;
 
 	/**
+	 * Creates the polynomial regression object, using the passed regression descriptor.
+	 * 
+	 * @param descriptor regression description used to create new regression
+	 */
+	PolynomialRegression(RegressionDescriptor descriptor) {
+		super(RegressionType.POLYNOMIAL, NativePolynomialRegression.load(descriptor));
+	}
+
+	/**
 	 * Creates the polynomial regression object, using the passed data to calculate the formula.
 	 * 
 	 * @param x values bound to x
@@ -50,7 +60,7 @@ public final class PolynomialRegression extends BaseRegression<NativePolynomialR
 	 * @param degree the maximum degree of the polynomial
 	 */
 	PolynomialRegression(List<Double> x, List<Double> y, int degree) {
-		super(new NativePolynomialRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y), degree));
+		super(RegressionType.POLYNOMIAL, new NativePolynomialRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y), degree));
 	}
 
 	/**

@@ -23,6 +23,7 @@ import org.pepstock.charba.client.commons.ImmutableDate;
 import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.FloatingData;
 import org.pepstock.charba.client.data.TimeSeriesItem;
+import org.pepstock.charba.client.enums.RegressionType;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -36,10 +37,11 @@ abstract class BaseLinearRegression<T extends NativeBaseLinearRegression> extend
 	/**
 	 * Creates the object storing the native regression
 	 * 
+	 * @param type regression type
 	 * @param nativeRegression native regression instance
 	 */
-	BaseLinearRegression(T nativeRegression) {
-		super(nativeRegression);
+	BaseLinearRegression(RegressionType type, T nativeRegression) {
+		super(type, nativeRegression);
 	}
 
 	/**

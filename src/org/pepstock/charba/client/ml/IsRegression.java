@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.TimeSeriesItem;
+import org.pepstock.charba.client.enums.RegressionType;
 
 /**
  * Maps all common methods of a regression.
@@ -27,6 +28,48 @@ import org.pepstock.charba.client.data.TimeSeriesItem;
  * @author Andrea "Stock" Stocchero
  */
 public interface IsRegression {
+
+	/**
+	 * Checks if regression passed as argument is not <code>null</code> and if consistent as well.<br>
+	 * If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param regression regression to be checked
+	 */
+	static void checkIfValid(IsRegression regression) {
+		if (regression == null || !regression.isConsistent()) {
+			throw new IllegalArgumentException("Regression is null or not consistent");
+		}
+	}
+
+	/**
+	 * Checks if regression passed as argument is not <code>null</code> and if consistent as well.<br>
+	 * If not, throw a {@link IllegalArgumentException}, otherwise it returns the regression.
+	 * 
+	 * @param regression regression to be checked
+	 * @param <T> type of regression
+	 * @return the same regression passed as argument
+	 */
+	static <T extends IsRegression> T checkAndGetIfValid(T regression) {
+		// checks if regression is consistent
+		checkIfValid(regression);
+		// if here, is consistent
+		// then returns the argument
+		return regression;
+	}
+
+	/**
+	 * Returns the regression type.
+	 * 
+	 * @return the regression type
+	 */
+	RegressionType getType();
+
+	/**
+	 * Returns the regression descriptor.
+	 * 
+	 * @return the regression descriptor
+	 */
+	RegressionDescriptor getDescriptor();
 
 	/**
 	 * Returns <code>true</code> if the regression is consistent and usable.

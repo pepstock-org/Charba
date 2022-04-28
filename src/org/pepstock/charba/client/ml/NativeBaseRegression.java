@@ -60,4 +60,11 @@ class NativeBaseRegression {
 	@JsMethod
 	native String toLaTeX(int precision);
 
+	/**
+	 * Returns the regression descriptor.
+	 * 
+	 * @return the regression descriptor
+	 */
+	native RegressionDescriptor toJSON();
+
 }

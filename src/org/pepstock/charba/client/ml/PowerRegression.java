@@ -18,6 +18,7 @@ package org.pepstock.charba.client.ml;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.enums.RegressionType;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -31,13 +32,22 @@ import org.pepstock.charba.client.items.Undefined;
 public final class PowerRegression extends BaseRegression<NativePowerRegression> {
 
 	/**
+	 * Creates the power regression object, using the passed regression descriptor.
+	 * 
+	 * @param descriptor regression description used to create new regression
+	 */
+	PowerRegression(RegressionDescriptor descriptor) {
+		super(RegressionType.POWER, NativePowerRegression.load(descriptor));
+	}
+
+	/**
 	 * Creates the power regression object, using the passed data to calculate the formula.
 	 * 
 	 * @param x values bound to x
 	 * @param y values bound to y
 	 */
 	PowerRegression(List<Double> x, List<Double> y) {
-		super(new NativePowerRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y)));
+		super(RegressionType.POWER, new NativePowerRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y)));
 	}
 
 	/**

@@ -41,7 +41,14 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.ML_REGRESSION_SCORE, namespace = JsPackage.GLOBAL)
-public interface RegressionScore {
+public final class RegressionScore {
+
+	/**
+	 * To avoid any instantiation
+	 */
+	private RegressionScore() {
+		// do nothing
+	}
 
 	/**
 	 * Returns the R metric.
@@ -49,7 +56,7 @@ public interface RegressionScore {
 	 * @return the R metric
 	 */
 	@JsProperty
-	double getR();
+	public native double getR();
 
 	/**
 	 * Returns the R-squared (R2) metric.
@@ -57,7 +64,7 @@ public interface RegressionScore {
 	 * @return the R-squared (R2) metric
 	 */
 	@JsProperty
-	double getR2();
+	public native double getR2();
 
 	/**
 	 * Returns the Pearson's chi-squared (Chi2) metric.
@@ -65,7 +72,7 @@ public interface RegressionScore {
 	 * @return the Pearson's chi-squared (Chi2) metric.
 	 */
 	@JsProperty
-	double getChi2();
+	public native double getChi2();
 
 	/**
 	 * Returns the Root Mean Squared Error (RMSE) metric.
@@ -73,5 +80,5 @@ public interface RegressionScore {
 	 * @return the Root Mean Squared Error (RMSE) metric.
 	 */
 	@JsProperty
-	double getRmsd();
+	public native double getRmsd();
 }

@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.commons.ArrayUtil;
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.LineDataset;
 
@@ -49,9 +48,7 @@ public final class RegressionDataset extends LineDataset {
 	RegressionDataset(IsRegression regression, boolean hidden, boolean manageDates, boolean manageDataPoints) {
 		super(ChartType.LINE, null, hidden);
 		// checks if regression is consistent
-		this.regression = Checker.checkAndGetIfValid(regression, "Regression ");
-		// checks if the regression is consistent
-		Checker.assertCheck(this.regression.isConsistent(), "Regression is not consistent");
+		this.regression = IsRegression.checkAndGetIfValid(regression);
 		// stores flags about dates and points
 		this.manageDates = manageDates;
 		this.manageDataPoints = manageDataPoints;
@@ -170,7 +167,7 @@ public final class RegressionDataset extends LineDataset {
 	 * 
 	 * @return <code>true</code> if it is managing {@link Date}s as X values
 	 */
-	private boolean areDatesManaged() {
+	boolean areDatesManaged() {
 		return manageDates;
 	}
 
@@ -179,7 +176,7 @@ public final class RegressionDataset extends LineDataset {
 	 * 
 	 * @return <code>true</code> if it is managing {@link Date}s as X values
 	 */
-	private boolean areDataPointsManaged() {
+	boolean areDataPointsManaged() {
 		return manageDataPoints;
 	}
 

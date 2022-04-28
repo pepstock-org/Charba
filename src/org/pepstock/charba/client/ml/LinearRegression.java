@@ -18,6 +18,7 @@ package org.pepstock.charba.client.ml;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.enums.RegressionType;
 
 /**
  * Simple Linear Regression is a type of Regression algorithms that models the relationship between a dependent variable and a single independent variable.<br>
@@ -40,13 +41,22 @@ import org.pepstock.charba.client.commons.ArrayDouble;
 public final class LinearRegression extends BaseLinearRegression<NativeLinearRegression> {
 
 	/**
+	 * Creates the simple linear regression object, using the passed regression descriptor.
+	 * 
+	 * @param descriptor regression description used to create new regression
+	 */
+	LinearRegression(RegressionDescriptor descriptor) {
+		super(RegressionType.LINEAR, NativeLinearRegression.load(descriptor));
+	}
+
+	/**
 	 * Creates the simple linear regression object, using the passed data to calculate the formula.
 	 * 
 	 * @param x values bound to x
 	 * @param y values bound to y
 	 */
 	LinearRegression(List<Double> x, List<Double> y) {
-		super(new NativeLinearRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y)));
+		super(RegressionType.LINEAR, new NativeLinearRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y)));
 	}
 
 }

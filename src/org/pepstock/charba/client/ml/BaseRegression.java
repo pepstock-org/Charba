@@ -24,6 +24,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.TimeSeriesItem;
+import org.pepstock.charba.client.enums.RegressionType;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -42,14 +43,18 @@ abstract class BaseRegression<T extends NativeBaseRegression> implements IsRegre
 
 	// native regression instance
 	private final T nativeRegression;
+	// regression type
+	private final RegressionType type;
 
 	/**
-	 * Creates the object storing the native regression
+	 * Creates the object storing the native regression and its type
 	 * 
+	 * @param type regression type
 	 * @param nativeRegression native regression instance
 	 */
-	BaseRegression(T nativeRegression) {
+	BaseRegression(RegressionType type, T nativeRegression) {
 		this.nativeRegression = nativeRegression;
+		this.type = type;
 	}
 
 	/**
@@ -59,6 +64,26 @@ abstract class BaseRegression<T extends NativeBaseRegression> implements IsRegre
 	 */
 	final T getNativeBaseRegression() {
 		return nativeRegression;
+	}
+
+	/**
+	 * Returns the regression type.
+	 * 
+	 * @return the regression type
+	 */
+	@Override
+	public final RegressionType getType() {
+		return type;
+	}
+
+	/**
+	 * Returns the regression descriptor.
+	 * 
+	 * @return the regression descriptor
+	 */
+	@Override
+	public final RegressionDescriptor getDescriptor() {
+		return getNativeBaseRegression().toJSON();
 	}
 
 	/*
