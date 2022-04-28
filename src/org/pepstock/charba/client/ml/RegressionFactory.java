@@ -28,23 +28,23 @@ enum RegressionFactory
 	/**
 	 * Identify a simple linear regression, {@link LinearRegression}.
 	 */
-	LINEAR(RegressionType.LINEAR, descriptor -> new LinearRegression(descriptor)),
+	LINEAR(RegressionType.LINEAR, LinearRegression::new),
 	/**
 	 * Identify a polynomial regression, {@link PolynomialRegression}.
 	 */
-	POLYNOMIAL(RegressionType.POLYNOMIAL, descriptor -> new PolynomialRegression(descriptor)),
+	POLYNOMIAL(RegressionType.POLYNOMIAL, PolynomialRegression::new),
 	/**
 	 * Identify a power regression, {@link PowerRegression}.
 	 */
-	POWER(RegressionType.POWER, descriptor -> new PowerRegression(descriptor)),
+	POWER(RegressionType.POWER, PowerRegression::new),
 	/**
 	 * Identify an exponential regression, {@link ExponentialRegression}.
 	 */
-	EXPONENTIAL(RegressionType.EXPONENTIAL, descriptor -> new ExponentialRegression(descriptor)),
+	EXPONENTIAL(RegressionType.EXPONENTIAL, ExponentialRegression::new),
 	/**
 	 * Identify an TheilSen regression, {@link TheilSenRegression}.
 	 */
-	THEIL_SEN(RegressionType.THEIL_SEN, descriptor -> new TheilSenRegression(descriptor));
+	THEIL_SEN(RegressionType.THEIL_SEN, TheilSenRegression::new);
 
 	// regression type
 	private final RegressionType type;
