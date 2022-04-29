@@ -20,6 +20,7 @@ import org.pepstock.charba.client.ml.ExponentialRegression;
 import org.pepstock.charba.client.ml.LinearRegression;
 import org.pepstock.charba.client.ml.PolynomialRegression;
 import org.pepstock.charba.client.ml.PowerRegression;
+import org.pepstock.charba.client.ml.RobustPolynomialRegression;
 import org.pepstock.charba.client.ml.TheilSenRegression;
 
 /**
@@ -48,7 +49,11 @@ public enum RegressionType implements Key
 	/**
 	 * Identify an TheilSen regression, {@link TheilSenRegression}.
 	 */
-	THEIL_SEN("TheilSenRegression");
+	THEIL_SEN("TheilSenRegression"),
+	/**
+	 * Identify a robust polynomial regression, {@link RobustPolynomialRegression}.
+	 */
+	ROBUST_POLYNOMIAL("robustPolynomialRegression");
 
 	// name value of property
 	private final String value;

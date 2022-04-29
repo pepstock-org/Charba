@@ -18,7 +18,6 @@ package org.pepstock.charba.client.ml;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
-import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.enums.RegressionType;
 
 /**
@@ -31,17 +30,7 @@ import org.pepstock.charba.client.enums.RegressionType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PolynomialRegression extends BaseRegression<NativePolynomialRegression> {
-
-	/**
-	 * Default degree, <b>{@value DEFAULT_DEGREE}</b>.
-	 */
-	public static final int DEFAULT_DEGREE = 2;
-
-	/**
-	 * Minimum degree, <b>{@value MINIMUM_DEGREE}</b>.
-	 */
-	static final int MINIMUM_DEGREE = 2;
+public final class PolynomialRegression extends BasePolynomialRegression<NativePolynomialRegression> {
 
 	/**
 	 * Creates the polynomial regression object, using the passed regression descriptor.
@@ -61,43 +50,6 @@ public final class PolynomialRegression extends BaseRegression<NativePolynomialR
 	 */
 	PolynomialRegression(List<Double> x, List<Double> y, int degree) {
 		super(RegressionType.POLYNOMIAL, new NativePolynomialRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y), degree));
-	}
-
-	/**
-	 * Returns the maximum degree of the polynomial.
-	 * 
-	 * @return the maximum degree of the polynomial
-	 */
-	public int getDegree() {
-		return getNativeBaseRegression().getDegree();
-	}
-
-	/**
-	 * Returns the powers coefficient.
-	 * 
-	 * @return the powers coefficient
-	 */
-	public List<Double> getPowers() {
-		return ArrayListHelper.unmodifiableList(getNativeBaseRegression().getPowers());
-	}
-
-	/**
-	 * Returns all calculated coefficients as an array, in increasing order of power (from 0 to degree).
-	 * 
-	 * @return all calculated coefficients as an array
-	 */
-	public List<Double> getCoefficients() {
-		return ArrayListHelper.unmodifiableList(getNativeBaseRegression().getCoefficients());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.ml.BaseRegression#isConsistent()
-	 */
-	@Override
-	public boolean isConsistent() {
-		return !getCoefficients().contains(Double.NaN);
 	}
 
 }

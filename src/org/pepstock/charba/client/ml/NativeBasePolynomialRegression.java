@@ -18,51 +18,41 @@ package org.pepstock.charba.client.ml;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.NativeName;
 
-import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Base class for Linear Regression which is a type of Regression algorithms that models the relationship between a dependent variable and a single independent variable.
+ * Base class for Polynomial Regression which is a regression algorithm that models the relationship between a dependent(y) and independent variable(x) as nth degree polynomial.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-class NativeBaseLinearRegression extends NativeBaseRegression {
+class NativeBasePolynomialRegression extends NativeBaseRegression {
 
 	/**
-	 * Returns the slope coefficient.
+	 * Returns the maximum degree of the polynomial.
 	 * 
-	 * @return the slope coefficient
+	 * @return the maximum degree of the polynomial
 	 */
 	@JsProperty
-	native double getSlope();
+	native int getDegree();
 
 	/**
-	 * Returns the intercept coefficient.
+	 * Returns the powers coefficient.
 	 * 
-	 * @return the intercept coefficient
+	 * @return the powers coefficient
 	 */
 	@JsProperty
-	native double getIntercept();
+	native ArrayDouble getPowers();
 
 	/**
-	 * Returns all calculated coefficients as an array.
+	 * Returns all calculated coefficients as an array, in increasing order of power (from 0 to degree).
 	 * 
 	 * @return all calculated coefficients as an array
 	 */
 	@JsProperty
 	native ArrayDouble getCoefficients();
-
-	/**
-	 * Returns a calculated X value by the Y value.
-	 * 
-	 * @param y Y value to use to calculate the X value
-	 * @return a calculated X value by the Y value
-	 */
-	@JsMethod
-	native double computeX(double y);
 
 }

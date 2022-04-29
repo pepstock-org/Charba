@@ -182,6 +182,32 @@ ML.TheilSenRegression.prototype.coefficients;
 ML.TheilSenRegression.load = function(descriptor) {};
 /**
  * @constructor
+ * @extends {ML.BaseRegression}
+ * @param {Array} x
+ * @param {Array} y
+ * @param {number} degree
+ * @return {ML.RobustPolynomialRegression}
+ */
+ML.RobustPolynomialRegression = function(x, y, degree) {};
+/**
+ * @type {number}
+ */
+ML.RobustPolynomialRegression.prototype.degree;
+/**
+ * @type {Array}
+ */
+ML.RobustPolynomialRegression.prototype.powers;
+/**
+ * @type {Array}
+ */
+ML.RobustPolynomialRegression.prototype.coefficients;
+/**
+ * @param {Object} descriptor
+ * @return {ML.RobustPolynomialRegression}
+ */
+ML.RobustPolynomialRegression.load = function(descriptor) {};
+/**
+ * @constructor
  * @return {CharbaJsMLHelper}
  */
 function CharbaJsMLHelper() {}

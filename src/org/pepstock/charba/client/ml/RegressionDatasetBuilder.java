@@ -321,6 +321,32 @@ public final class RegressionDatasetBuilder extends AbstractBuilder<RegressionDa
 		return buildDataset(regression, x);
 	}
 
+	/**
+	 * Creates a regression dataset, to add to a chart.<br>
+	 * It uses the default degree, <b>{@value RobustPolynomialRegression#DEFAULT_DEGREE}</b>.
+	 * 
+	 * @return regression dataset to add to a chart
+	 */
+	public RegressionDataset buildRobustPolynomialRegression() {
+		return buildPolynomialRegression(RobustPolynomialRegression.DEFAULT_DEGREE);
+	}
+
+	/**
+	 * Creates a regression dataset, to add to a chart, using the passed maximum degree.
+	 * 
+	 * @param degree the maximum degree of the robust polynomial
+	 * @return regression dataset to add to a chart
+	 */
+	public RegressionDataset buildRobustPolynomialRegression(int degree) {
+		// gets samples
+		List<Double> x = getX();
+		List<Double> y = getY();
+		// creates regression
+		RobustPolynomialRegression regression = RegressionBuilder.create(x, y).buildRobustPolynomialRegression(degree);
+		// returns dataset instance
+		return buildDataset(regression, x);
+	}
+
 	// ------------------------
 	// INTERNALS
 	// ------------------------

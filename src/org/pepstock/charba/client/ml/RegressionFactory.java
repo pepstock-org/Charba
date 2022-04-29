@@ -44,7 +44,11 @@ enum RegressionFactory
 	/**
 	 * Identify an TheilSen regression, {@link TheilSenRegression}.
 	 */
-	THEIL_SEN(RegressionType.THEIL_SEN, TheilSenRegression::new);
+	THEIL_SEN(RegressionType.THEIL_SEN, TheilSenRegression::new),
+	/**
+	 * Identify a robust polynomial regression, {@link RobustPolynomialRegression}.
+	 */
+	ROBUST_POLYNOMIAL(RegressionType.ROBUST_POLYNOMIAL, RobustPolynomialRegression::new);
 
 	// regression type
 	private final RegressionType type;

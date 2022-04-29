@@ -43,7 +43,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.ML_SIMPLE_LINEAR_REGRESSION, namespace = JsPackage.GLOBAL)
-class NativeLinearRegression extends NativeBaseLinearRegression {
+final class NativeLinearRegression extends NativeBaseLinearRegression {
 
 	/**
 	 * Creates the simple linear regression object, using the passed data to calculate the formula.

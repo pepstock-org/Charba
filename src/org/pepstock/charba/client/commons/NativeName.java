@@ -179,6 +179,11 @@ public final class NativeName {
 	 */
 	public static final String ML_THEIL_SEN_REGRESSION = "ML.TheilSenRegression";
 
+	/**
+	 * Constant to bind java script object as ML RobustPolynomialRegression with name <b>{@value ML_ROBUST_POLYNOMIAL_REGRESSION}</b>.
+	 */
+	public static final String ML_ROBUST_POLYNOMIAL_REGRESSION = "ML.RobustPolynomialRegression";
+
 	// ------------------------
 	// CHARTJS
 	// ------------------------

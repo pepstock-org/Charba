@@ -20,7 +20,6 @@ import org.pepstock.charba.client.commons.NativeName;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -36,7 +35,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = NativeName.ML_POLYNOMIAL_REGRESSION, namespace = JsPackage.GLOBAL)
-final class NativePolynomialRegression extends NativeBaseRegression {
+final class NativePolynomialRegression extends NativeBasePolynomialRegression {
 
 	/**
 	 * Creates the polynomial regression object, using the passed data to calculate the formula.
@@ -48,30 +47,6 @@ final class NativePolynomialRegression extends NativeBaseRegression {
 	NativePolynomialRegression(ArrayDouble x, ArrayDouble y, int degree) {
 		// nothing
 	}
-
-	/**
-	 * Returns the maximum degree of the polynomial.
-	 * 
-	 * @return the maximum degree of the polynomial
-	 */
-	@JsProperty
-	native int getDegree();
-
-	/**
-	 * Returns the powers coefficient.
-	 * 
-	 * @return the powers coefficient
-	 */
-	@JsProperty
-	native ArrayDouble getPowers();
-
-	/**
-	 * Returns all calculated coefficients as an array, in increasing order of power (from 0 to degree).
-	 * 
-	 * @return all calculated coefficients as an array
-	 */
-	@JsProperty
-	native ArrayDouble getCoefficients();
 
 	/**
 	 * Creates new regression by a descriptor.

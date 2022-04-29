@@ -212,6 +212,39 @@ public final class RegressionBuilder extends AbstractBuilder<RegressionBuilder> 
 	}
 
 	/**
+	 * Creates a robust polynomial regression.<br>
+	 * It uses the default degree, <b>{@value RobustPolynomialRegression#DEFAULT_DEGREE}</b>.
+	 * 
+	 * @return robust polynomial regression instance
+	 */
+	public RobustPolynomialRegression buildRobustPolynomialRegression() {
+		// checks if descriptor was passed
+		if (buildByDescriptor(RegressionType.ROBUST_POLYNOMIAL)) {
+			// created by descriptor
+			return new RobustPolynomialRegression(source);
+		}
+		// if here, created by samples
+		return buildRobustPolynomialRegression(RobustPolynomialRegression.DEFAULT_DEGREE);
+	}
+
+	/**
+	 * Creates a robust polynomial regression.
+	 * 
+	 * @param degree the maximum degree of the robust polynomial
+	 * @return robust polynomial regression instance
+	 */
+	public RobustPolynomialRegression buildRobustPolynomialRegression(int degree) {
+		// if the builder is created by a descriptor
+		// you can not use this build method
+		Checker.assertCheck(!buildByDescriptor(RegressionType.ROBUST_POLYNOMIAL), "Degree can not be changed in the regression descriptor. Use 'buildRobustPolynomialRegression()' method instead.");
+		// if here, created by samples
+		// checks minimum degree
+		Checker.checkIfGreaterThan(degree, RobustPolynomialRegression.MINIMUM_DEGREE, "Degree of robust polynomial regression ");
+		// creates regression
+		return new RobustPolynomialRegression(checkAndGetSamples(getX(), X_SAMPLES_TYPE), checkAndGetSamples(getY(), Y_SAMPLES_TYPE), degree);
+	}
+
+	/**
 	 * Returns <code>true</code> if the regression instance must be created by the passed descriptor.
 	 * 
 	 * @param type the type of target regression
