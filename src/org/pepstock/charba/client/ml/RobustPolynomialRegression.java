@@ -43,6 +43,16 @@ import org.pepstock.charba.client.enums.RegressionType;
 public final class RobustPolynomialRegression extends BasePolynomialRegression<NativeRobustPolynomialRegression> {
 
 	/**
+	 * Default degree, <b>{@value DEFAULT_DEGREE}</b>.
+	 */
+	public static final int DEFAULT_DEGREE = 2;
+
+	/**
+	 * Minimum degree, <b>{@value MINIMUM_DEGREE}</b>.
+	 */
+	static final int MINIMUM_DEGREE = 2;
+
+	/**
 	 * Creates the polynomial regression object, using the passed regression descriptor.
 	 * 
 	 * @param descriptor regression description used to create new regression

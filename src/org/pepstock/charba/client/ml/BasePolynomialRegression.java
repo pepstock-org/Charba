@@ -33,16 +33,6 @@ import org.pepstock.charba.client.enums.RegressionType;
 abstract class BasePolynomialRegression<T extends NativeBasePolynomialRegression> extends BaseRegression<T> {
 
 	/**
-	 * Default degree, <b>{@value DEFAULT_DEGREE}</b>.
-	 */
-	public static final int DEFAULT_DEGREE = 2;
-
-	/**
-	 * Minimum degree, <b>{@value MINIMUM_DEGREE}</b>.
-	 */
-	static final int MINIMUM_DEGREE = 2;
-
-	/**
 	 * Creates the object storing the native regression
 	 * 
 	 * @param type regression type
