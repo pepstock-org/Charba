@@ -124,7 +124,7 @@ public abstract class AbstractBuilder<T> {
 		// checks list of y values
 		checkAndGetSamples(y, Y_SAMPLES_TYPE);
 		// stores samples
-		return setSamples(MLUtil.get().loadXValues(y.size(), starting, increment), y);
+		return setSamplesInternally(MLUtil.get().loadXValues(y.size(), starting, increment), y);
 	}
 
 	/**
@@ -135,7 +135,7 @@ public abstract class AbstractBuilder<T> {
 	 * @return regression builder instance
 	 */
 	public T setSamplesByDates(List<Date> x, List<Double> y) {
-		return setSamples(MLUtil.get().parseDates(x), y);
+		return setSamplesInternally(MLUtil.get().parseDates(x), y);
 	}
 
 	/**
@@ -145,7 +145,7 @@ public abstract class AbstractBuilder<T> {
 	 * @return regression builder instance
 	 */
 	public T setSamplesByDataPoints(List<DataPoint> dataPoints) {
-		return setSamples(MLUtil.get().parseDataPoints(true, dataPoints), MLUtil.get().parseDataPoints(false, dataPoints));
+		return setSamplesInternally(MLUtil.get().parseDataPoints(true, dataPoints), MLUtil.get().parseDataPoints(false, dataPoints));
 	}
 
 	/**
@@ -155,7 +155,7 @@ public abstract class AbstractBuilder<T> {
 	 * @return regression builder instance
 	 */
 	public T setSamplesByTimeSeriesItems(List<TimeSeriesItem> items) {
-		return setSamples(MLUtil.get().parseTimeSeriesItems(true, items), MLUtil.get().parseTimeSeriesItems(false, items));
+		return setSamplesInternally(MLUtil.get().parseTimeSeriesItems(true, items), MLUtil.get().parseTimeSeriesItems(false, items));
 	}
 
 	/**
@@ -166,6 +166,17 @@ public abstract class AbstractBuilder<T> {
 	 * @return regression builder instance
 	 */
 	public T setSamples(List<Double> x, List<Double> y) {
+		return setSamplesInternally(x, y);
+	}
+
+	/**
+	 * Creates a simple linear regression, using the passed X and Y values.
+	 * 
+	 * @param x X values to use to create the regression
+	 * @param y Y values to use to create the regression
+	 * @return regression builder instance
+	 */
+	T setSamplesInternally(List<Double> x, List<Double> y) {
 		// stores samples
 		this.x = x;
 		this.y = y;

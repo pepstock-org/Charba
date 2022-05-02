@@ -202,7 +202,7 @@ public final class RegressionDatasetBuilder extends AbstractBuilder<RegressionDa
 	public RegressionDatasetBuilder setSamplesByTimeSeriesItems(List<TimeSeriesItem> items) {
 		asDates = true;
 		asDataPoints = true;
-		return super.setSamples(MLUtil.get().parseTimeSeriesItems(true, items), MLUtil.get().parseTimeSeriesItems(false, items));
+		return setSamplesInternally(MLUtil.get().parseTimeSeriesItems(true, items), MLUtil.get().parseTimeSeriesItems(false, items));
 	}
 
 	/*
