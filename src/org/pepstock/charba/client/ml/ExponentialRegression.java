@@ -15,11 +15,11 @@
 */
 package org.pepstock.charba.client.ml;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.enums.RegressionType;
-import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Exponential regression is a non-linear regression technique that looks like this:<br>
@@ -32,6 +32,9 @@ import org.pepstock.charba.client.items.Undefined;
  */
 public final class ExponentialRegression extends BaseRegression<NativeExponentialRegression> {
 
+	// coefficients
+	private final List<Double> coefficients;
+
 	/**
 	 * Creates the Exponential regression object, using the passed regression descriptor.
 	 * 
@@ -39,6 +42,8 @@ public final class ExponentialRegression extends BaseRegression<NativeExponentia
 	 */
 	ExponentialRegression(RegressionDescriptor descriptor) {
 		super(RegressionType.EXPONENTIAL, NativeExponentialRegression.load(descriptor));
+		// stores coefficients
+		this.coefficients = Arrays.asList(getA(), getB());
 	}
 
 	/**
@@ -49,6 +54,8 @@ public final class ExponentialRegression extends BaseRegression<NativeExponentia
 	 */
 	ExponentialRegression(List<Double> x, List<Double> y) {
 		super(RegressionType.EXPONENTIAL, new NativeExponentialRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y)));
+		// stores coefficients
+		this.coefficients = Arrays.asList(getA(), getB());
 	}
 
 	/**
@@ -72,11 +79,11 @@ public final class ExponentialRegression extends BaseRegression<NativeExponentia
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ml.BaseRegression#isConsistent()
+	 * @see org.pepstock.charba.client.ml.IsRegression#getCoefficients()
 	 */
 	@Override
-	public boolean isConsistent() {
-		return Undefined.isNot(getA()) && Undefined.isNot(getB());
+	public List<Double> getCoefficients() {
+		return coefficients;
 	}
 
 }

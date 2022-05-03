@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.ml;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -45,6 +46,8 @@ abstract class BaseRegression<T extends NativeBaseRegression> implements IsRegre
 	private final T nativeRegression;
 	// regression type
 	private final RegressionType type;
+	// max digits of formula
+	private int maxDigitsFormula = Undefined.INTEGER;
 
 	/**
 	 * Creates the object storing the native regression and its type
@@ -84,6 +87,16 @@ abstract class BaseRegression<T extends NativeBaseRegression> implements IsRegre
 	@Override
 	public final RegressionDescriptor getDescriptor() {
 		return getNativeBaseRegression().toJSON();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.ml.IsRegression#isConsistent()
+	 */
+	@Override
+	public final boolean isConsistent() {
+		return !getCoefficients().contains(Double.NaN);
 	}
 
 	/*
@@ -321,11 +334,31 @@ abstract class BaseRegression<T extends NativeBaseRegression> implements IsRegre
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.ml.IsRegression#toFormula()
+	 */
+	@Override
+	public final String toFormula() {
+		return toFormula(getMaxAmountOfDigits());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.ml.IsRegression#toFormula(int)
 	 */
 	@Override
 	public final String toFormula(int precision) {
 		return NativeJsMLHelper.toFormula(getNativeBaseRegression(), Checker.greaterThanOrDefault(precision, 0, DEFAULT_FORMULA_PRECISION));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.ml.IsRegression#toLaTeX()
+	 */
+	@Override
+	public final String toLaTeX() {
+		return toLaTeX(getMaxAmountOfDigits());
 	}
 
 	/*
@@ -361,4 +394,30 @@ abstract class BaseRegression<T extends NativeBaseRegression> implements IsRegre
 		return Collections.emptyList();
 	}
 
+	/**
+	 * Calculates the maximum digits of the regression coefficients.
+	 * 
+	 * @return the maximum digits of the regression coefficients
+	 */
+	private int getMaxAmountOfDigits() {
+		// if max digits has already calculated
+		// does not calculate again
+		if (Undefined.is(maxDigitsFormula)) {
+			// creates result
+			maxDigitsFormula = 0;
+			// scans all coefficients
+			for (Double coefficient : getCoefficients()) {
+				// checks if the coefficient is consistent
+				// if not, is discarded from the calculation
+				if (!Double.isNaN(coefficient)) {
+					// creates a big decimal
+					BigDecimal dec = new BigDecimal(coefficient);
+					// calculates the max value with the plain string
+					maxDigitsFormula = Math.max(maxDigitsFormula, dec.toPlainString().length());
+				}
+			}
+		}
+		// returns max digits
+		return maxDigitsFormula;
+	}
 }

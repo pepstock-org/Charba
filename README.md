@@ -286,7 +286,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * add **REGRESSION** capabilities leveraging on ML library (only regressions module), version [6.0.0](https://github.com/mljs/ml).
-   * add simple linear regression feature.
+   * add simple linear regression.
    * add power regression.
    * add exponential regression.
    * add polynomial regression.

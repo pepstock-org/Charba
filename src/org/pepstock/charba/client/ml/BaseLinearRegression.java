@@ -67,6 +67,7 @@ abstract class BaseLinearRegression<T extends NativeBaseLinearRegression> extend
 	 * 
 	 * @return all calculated coefficients as a list
 	 */
+	@Override
 	public final List<Double> getCoefficients() {
 		return ArrayListHelper.unmodifiableList(getNativeBaseRegression().getCoefficients());
 	}
@@ -200,16 +201,6 @@ abstract class BaseLinearRegression<T extends NativeBaseLinearRegression> extend
 		// if here, argument is not consistent
 		// then returns undefined
 		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.ml.BaseRegression#isConsistent()
-	 */
-	@Override
-	public final boolean isConsistent() {
-		return Undefined.isNot(getSlope()) && Undefined.isNot(getIntercept());
 	}
 
 }

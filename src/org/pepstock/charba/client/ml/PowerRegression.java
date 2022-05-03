@@ -15,11 +15,11 @@
 */
 package org.pepstock.charba.client.ml;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.enums.RegressionType;
-import org.pepstock.charba.client.items.Undefined;
 
 /**
  * Power regression is a non-linear regression technique that looks like this:<br>
@@ -31,6 +31,9 @@ import org.pepstock.charba.client.items.Undefined;
  */
 public final class PowerRegression extends BaseRegression<NativePowerRegression> {
 
+	// coefficients
+	private final List<Double> coefficients;
+
 	/**
 	 * Creates the power regression object, using the passed regression descriptor.
 	 * 
@@ -38,6 +41,8 @@ public final class PowerRegression extends BaseRegression<NativePowerRegression>
 	 */
 	PowerRegression(RegressionDescriptor descriptor) {
 		super(RegressionType.POWER, NativePowerRegression.load(descriptor));
+		// stores coefficients
+		this.coefficients = Arrays.asList(getA(), getB());
 	}
 
 	/**
@@ -48,6 +53,18 @@ public final class PowerRegression extends BaseRegression<NativePowerRegression>
 	 */
 	PowerRegression(List<Double> x, List<Double> y) {
 		super(RegressionType.POWER, new NativePowerRegression(ArrayDouble.fromOrEmpty(x), ArrayDouble.fromOrEmpty(y)));
+		// stores coefficients
+		this.coefficients = Arrays.asList(getA(), getB());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.ml.IsRegression#getCoefficients()
+	 */
+	@Override
+	public List<Double> getCoefficients() {
+		return coefficients;
 	}
 
 	/**
@@ -66,16 +83,6 @@ public final class PowerRegression extends BaseRegression<NativePowerRegression>
 	 */
 	public double getB() {
 		return getNativeBaseRegression().getB();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.ml.BaseRegression#isConsistent()
-	 */
-	@Override
-	public boolean isConsistent() {
-		return Undefined.isNot(getA()) && Undefined.isNot(getB());
 	}
 
 }

@@ -72,6 +72,13 @@ public interface IsRegression {
 	RegressionDescriptor getDescriptor();
 
 	/**
+	 * Returns all calculated coefficients as a list.
+	 * 
+	 * @return all calculated coefficients as a list
+	 */
+	List<Double> getCoefficients();
+
+	/**
 	 * Returns <code>true</code> if the regression is consistent and usable.
 	 * 
 	 * @return <code>true</code> if the regression is consistent and usable
@@ -243,9 +250,7 @@ public interface IsRegression {
 	 * 
 	 * @return the formula of the regression
 	 */
-	default String toFormula() {
-		return toFormula(BaseRegression.DEFAULT_FORMULA_PRECISION);
-	}
+	String toFormula();
 
 	/**
 	 * Returns the formula of the regression, using the requested precision.
@@ -260,9 +265,7 @@ public interface IsRegression {
 	 * 
 	 * @return the formula of the regression
 	 */
-	default String toLaTeX() {
-		return toLaTeX(BaseRegression.DEFAULT_FORMULA_PRECISION);
-	}
+	String toLaTeX();
 
 	/**
 	 * Returns the formula of the regression, using the requested precision.

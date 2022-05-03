@@ -65,18 +65,9 @@ abstract class BasePolynomialRegression<T extends NativeBasePolynomialRegression
 	 * 
 	 * @return all calculated coefficients as an array
 	 */
+	@Override
 	public final List<Double> getCoefficients() {
 		return ArrayListHelper.unmodifiableList(getNativeBaseRegression().getCoefficients());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.ml.BaseRegression#isConsistent()
-	 */
-	@Override
-	public final boolean isConsistent() {
-		return !getCoefficients().contains(Double.NaN);
 	}
 
 }
