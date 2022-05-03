@@ -36,7 +36,7 @@ public final class ExponentialRegression extends BaseRegression<NativeExponentia
 	private final List<Double> coefficients;
 
 	/**
-	 * Creates the Exponential regression object, using the passed regression descriptor.
+	 * Creates the exponential regression object, using the passed regression descriptor.
 	 * 
 	 * @param descriptor regression description used to create new regression
 	 */
@@ -47,7 +47,7 @@ public final class ExponentialRegression extends BaseRegression<NativeExponentia
 	}
 
 	/**
-	 * Creates the Exponential regression object, using the passed data to calculate the formula.
+	 * Creates the exponential regression object, using the passed data to calculate the formula.
 	 * 
 	 * @param x values bound to x
 	 * @param y values bound to y
