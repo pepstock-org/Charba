@@ -411,7 +411,7 @@ abstract class BaseRegression<T extends NativeBaseRegression> implements IsRegre
 				// if not, is discarded from the calculation
 				if (!Double.isNaN(coefficient)) {
 					// creates a big decimal
-					BigDecimal dec = new BigDecimal(coefficient);
+					BigDecimal dec = BigDecimal.valueOf(coefficient);
 					// calculates the max value with the plain string
 					maxDigitsFormula = Math.max(maxDigitsFormula, dec.toPlainString().length());
 				}
