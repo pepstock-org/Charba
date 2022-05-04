@@ -72,7 +72,7 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 */
 	public void addAll(NativeObject... values) {
 		// checks if arguments are consistent
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// scans all elements
 			for (NativeObject val : values) {
 				// adds

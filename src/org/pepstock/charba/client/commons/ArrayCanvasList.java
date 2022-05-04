@@ -75,7 +75,7 @@ public final class ArrayCanvasList extends AbstractArrayList<Canvas, ArrayCanvas
 	 */
 	public void addAll(Canvas... values) {
 		// checks if arguments are consistent
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// scans all elements
 			for (Canvas val : values) {
 				// adds

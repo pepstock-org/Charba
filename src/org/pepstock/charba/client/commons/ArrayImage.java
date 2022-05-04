@@ -55,7 +55,7 @@ public final class ArrayImage extends Array {
 	@JsOverlay
 	public static ArrayImage fromOrNull(Img... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns an empty array
 			return null;
 		}
@@ -72,7 +72,7 @@ public final class ArrayImage extends Array {
 	@JsOverlay
 	public static ArrayImage fromOrEmpty(Img... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns an empty array
 			return new ArrayImage();
 		}

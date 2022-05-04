@@ -53,7 +53,7 @@ public final class ArrayInteger extends Array {
 	@JsOverlay
 	public static ArrayInteger fromOrNull(int... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns null
 			return null;
 		}
@@ -70,7 +70,7 @@ public final class ArrayInteger extends Array {
 	@JsOverlay
 	public static ArrayInteger fromOrEmpty(int... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns null
 			return new ArrayInteger();
 		}

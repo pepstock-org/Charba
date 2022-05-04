@@ -55,7 +55,7 @@ public final class ArrayGradient extends Array {
 	@JsOverlay
 	public static ArrayGradient fromOrNull(CanvasGradientItem... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns an empty array
 			return null;
 		}
@@ -72,7 +72,7 @@ public final class ArrayGradient extends Array {
 	@JsOverlay
 	public static ArrayGradient fromOrEmpty(CanvasGradientItem... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns an empty array
 			return new ArrayGradient();
 		}

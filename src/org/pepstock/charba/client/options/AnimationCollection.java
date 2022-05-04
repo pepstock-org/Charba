@@ -372,7 +372,7 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 	 */
 	public void setProperties(AnimationPropertyKey... properties) {
 		// checks if argument is consistent
-		if (properties != null && properties.length > 0) {
+		if (ArrayUtil.isNotEmpty(properties)) {
 			// loads the array from list
 			ArrayString array = ArrayString.fromOrEmpty(properties);
 			// stores the properties

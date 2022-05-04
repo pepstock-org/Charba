@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.enums.AxisKind;
 
@@ -73,7 +74,7 @@ public final class TimeSeriesScales extends Scales {
 	@Override
 	public void setAxes(Axis... axes) {
 		// checks consistency of arguments
-		if (axes != null && axes.length > 0) {
+		if (ArrayUtil.isNotEmpty(axes)) {
 			// creates an empty array of axis plus 1 for X axis
 			Axis[] toStore = new Axis[axes.length + 1];
 			// stores x axis

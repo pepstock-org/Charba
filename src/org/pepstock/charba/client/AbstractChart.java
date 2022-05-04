@@ -22,6 +22,7 @@ import java.util.List;
 import org.pepstock.charba.client.commons.AbstractPoint;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.IsPoint;
@@ -1319,7 +1320,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void checkDatasets(Dataset... datasets) {
 		// checks if argument is consistent
-		if (datasets != null && datasets.length > 0) {
+		if (ArrayUtil.isNotEmpty(datasets)) {
 			// checks the amount of datasets
 			Checker.checkIfBetween(datasets.length, 0, getMaximumDatasetsCount(), "Datasets size");
 			// scans datasets
@@ -1355,7 +1356,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public void checkAxes(Axis... axes) {
 		// checks if argument is consistent
-		if (axes != null && axes.length > 0) {
+		if (ArrayUtil.isNotEmpty(axes)) {
 			// checks the amount of axes
 			Checker.checkIfBetween(axes.length, 0, getMaximumAxesCount(), "Axes size");
 			// scans axes

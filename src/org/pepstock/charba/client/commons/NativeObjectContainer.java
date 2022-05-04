@@ -152,7 +152,7 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final boolean has(Key... keys) {
 		// checks arguments if consistent
-		if (keys != null && keys.length > 0) {
+		if (ArrayUtil.isNotEmpty(keys)) {
 			// scans keys
 			for (Key key : keys) {
 				// if one is not present
@@ -207,7 +207,7 @@ public abstract class NativeObjectContainer {
 	 */
 	public final boolean isType(Key key, ObjectType... types) {
 		// checks arguments if consistent
-		if (types != null && types.length > 0) {
+		if (ArrayUtil.isNotEmpty(types)) {
 			// gets property type
 			ObjectType propertyType = type(key);
 			// scans arguments
@@ -244,7 +244,7 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final void remove(Key... keys) {
 		// checks arguments if consistent
-		if (keys != null && keys.length > 0) {
+		if (ArrayUtil.isNotEmpty(keys)) {
 			// scans all keys
 			for (Key key : keys) {
 				// removes if exists

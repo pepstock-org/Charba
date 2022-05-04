@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -109,7 +110,7 @@ public final class Colors extends AbstractNode {
 	 */
 	public void remove(String... values) {
 		// checks if argument is consistent
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// scans keys
 			for (String value : values) {
 				// checks if keys is consistent
@@ -181,7 +182,7 @@ public final class Colors extends AbstractNode {
 	 */
 	public void remove(double... values) {
 		// checks if argument is consistent
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// scans keys
 			for (double value : values) {
 				// checks if value is consistent
@@ -253,7 +254,7 @@ public final class Colors extends AbstractNode {
 	 */
 	public void remove(Date... values) {
 		// checks if argument is consistent
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// scans keys
 			for (Date value : values) {
 				// checks if value is consistent

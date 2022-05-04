@@ -18,6 +18,7 @@ package org.pepstock.charba.client.annotation;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -72,7 +73,7 @@ final class AnnotationCachedMap extends AnnotationMap {
 		// invokes super
 		super.addAnnotations(annotations);
 		// checks if array argument is consistent
-		if (annotations != null && annotations.length > 0) {
+		if (ArrayUtil.isNotEmpty(annotations)) {
 			// scans all arguments
 			for (AbstractAnnotation annotation : annotations) {
 				// adds annotation

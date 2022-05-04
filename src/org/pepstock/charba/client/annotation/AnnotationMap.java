@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -82,7 +83,7 @@ class AnnotationMap extends NativeObjectContainer {
 	 */
 	void addAnnotations(AbstractAnnotation... annotations) {
 		// checks if array argument is consistent
-		if (annotations != null && annotations.length > 0) {
+		if (ArrayUtil.isNotEmpty(annotations)) {
 			// scans all arguments
 			for (AbstractAnnotation annotation : annotations) {
 				// adds annotation

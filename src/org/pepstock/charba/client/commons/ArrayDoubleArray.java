@@ -92,7 +92,7 @@ public final class ArrayDoubleArray extends Array {
 	@JsOverlay
 	public static <E extends NativeArrayContainer<ArrayDouble>> ArrayDoubleArray fromOrNull(E[] items) {
 		// checks if array is null
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			return null;
 		}
 		// creates the array
@@ -118,7 +118,7 @@ public final class ArrayDoubleArray extends Array {
 		// creates the array
 		ArrayDoubleArray result = new ArrayDoubleArray();
 		// checks if array is null
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			return result;
 		}
 		// scans elements

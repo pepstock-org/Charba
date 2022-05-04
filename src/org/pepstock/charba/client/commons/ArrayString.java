@@ -79,7 +79,7 @@ public final class ArrayString extends Array {
 	@JsOverlay
 	public static ArrayString fromOrNull(String... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns null
 			return null;
 		}
@@ -96,7 +96,7 @@ public final class ArrayString extends Array {
 	@JsOverlay
 	public static ArrayString fromOrEmpty(String... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns null
 			return new ArrayString();
 		}
@@ -171,7 +171,7 @@ public final class ArrayString extends Array {
 	@JsOverlay
 	public static ArrayString fromOrNull(IsColor... items) {
 		// checks if array is null
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			return null;
 		}
 		// creates the array
@@ -198,7 +198,7 @@ public final class ArrayString extends Array {
 		// creates the array
 		ArrayString result = new ArrayString();
 		// checks if array is null
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			return result;
 		}
 		// scans items
@@ -233,7 +233,7 @@ public final class ArrayString extends Array {
 	@JsOverlay
 	public static ArrayString fromOrNull(boolean asSet, Key... items) {
 		// checks if array is null
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			return null;
 		}
 		// creates the array
@@ -273,7 +273,7 @@ public final class ArrayString extends Array {
 		// creates the array
 		ArrayString result = new ArrayString();
 		// checks if array is null
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			return result;
 		}
 		// scans items

@@ -72,7 +72,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	 */
 	public void addAll(String... values) {
 		// checks if arguments are consistent
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// scans all elements
 			for (String val : values) {
 				// adds

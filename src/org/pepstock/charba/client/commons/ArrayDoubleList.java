@@ -72,7 +72,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	 */
 	public void addAll(double... values) {
 		// checks if arguments are consistent
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// scans all elements
 			for (double val : values) {
 				// adds

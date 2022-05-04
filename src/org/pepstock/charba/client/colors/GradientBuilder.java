@@ -197,7 +197,7 @@ public final class GradientBuilder {
 	 */
 	public GradientBuilder setColors(IsColor... colors) {
 		// checks if argument is consistent
-		if (colors != null && colors.length > 0) {
+		if (ArrayUtil.isNotEmpty(colors)) {
 			// checks if array of colors previously loaded is consistent
 			Checker.checkIfGreaterThan(colors.length, 2, "Colors list");
 			// removes all previous colors

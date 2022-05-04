@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.enums;
 
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
@@ -185,7 +186,7 @@ public enum ModifierKey implements Key
 	 */
 	public static boolean arePressed(BaseNativeEvent event, ModifierKey... keys) {
 		// checks if event and keys are consistent
-		if (event != null && keys != null && keys.length > 0) {
+		if (event != null && ArrayUtil.isNotEmpty(keys)) {
 			// creates result instance
 			boolean result = true;
 			// scans keys

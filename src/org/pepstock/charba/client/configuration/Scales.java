@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.options.ScaleId;
@@ -51,7 +52,7 @@ public class Scales extends ConfigurationOptionsContainer {
 	 */
 	public void setAxes(Axis... axes) {
 		// checks consistency of arguments
-		if (axes != null && axes.length > 0) {
+		if (ArrayUtil.isNotEmpty(axes)) {
 			// checks consistency of scales
 			super.getOptions().getChart().checkAxes(axes);
 			// gets charts id

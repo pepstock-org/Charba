@@ -75,7 +75,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 */
 	public void addAll(int... values) {
 		// checks if arguments are consistent
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// scans all elements
 			for (int val : values) {
 				// adds

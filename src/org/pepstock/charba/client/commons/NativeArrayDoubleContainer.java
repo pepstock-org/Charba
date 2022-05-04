@@ -46,7 +46,7 @@ public abstract class NativeArrayDoubleContainer extends NativeArrayContainer<Ar
 	 */
 	protected final void push(double... items) {
 		// checks if items are consistent
-		if (items != null && items.length > 0) {
+		if (ArrayUtil.isNotEmpty(items)) {
 			// scans items to push
 			for (double item : items) {
 				// pushes item in the array

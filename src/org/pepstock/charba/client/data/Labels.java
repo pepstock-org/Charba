@@ -82,7 +82,7 @@ public final class Labels {
 	 */
 	public void load(String... values) {
 		// checks if is a valid array
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// scans values
 			for (String value : values) {
 				// checks is not null
@@ -140,7 +140,7 @@ public final class Labels {
 	 */
 	public void add(String... values) {
 		// checks if is a valid array
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// creates new JS array and push it
 			array.push(ArrayString.fromOrEmpty(values));
 		}

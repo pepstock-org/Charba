@@ -135,7 +135,7 @@ public final class ArrayObject extends Array {
 	@JsOverlay
 	public static <E extends NativeObjectContainer> ArrayObject fromOrNull(E[] items) {
 		// checks if array is null
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			return null;
 		}
 		// creates the array
@@ -164,7 +164,7 @@ public final class ArrayObject extends Array {
 		// creates the array
 		ArrayObject result = new ArrayObject();
 		// checks if array is null
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			return result;
 		}
 		// scans elements

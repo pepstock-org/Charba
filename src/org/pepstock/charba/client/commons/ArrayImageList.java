@@ -75,7 +75,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 	 */
 	public void addAll(Img... values) {
 		// checks if arguments are consistent
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// scans all elements
 			for (Img val : values) {
 				// adds

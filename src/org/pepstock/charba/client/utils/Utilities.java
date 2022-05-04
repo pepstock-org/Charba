@@ -28,6 +28,7 @@ import org.pepstock.charba.client.colors.GradientColor;
 import org.pepstock.charba.client.colors.GradientOrientation;
 import org.pepstock.charba.client.colors.GradientType;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
@@ -393,7 +394,7 @@ public final class Utilities {
 		// creates result instance, at the beginning as the template
 		String result = template;
 		// checks if template and array of values are consistent
-		if (template != null && template.length() > 0 && values != null && values.length > 0) {
+		if (template != null && template.length() > 0 && ArrayUtil.isNotEmpty(values)) {
 			// scans all values to apply to template
 			for (int i = 0; i < values.length; i++) {
 				// creates a instance to apply in the template

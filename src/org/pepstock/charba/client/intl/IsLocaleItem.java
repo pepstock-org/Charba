@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -41,7 +42,7 @@ public interface IsLocaleItem extends Key {
 	static <T extends IsLocaleItem> List<T> getItemsByName(T[] enumValues, String name) {
 		List<T> result = new ArrayList<>();
 		// checks if arguments are consistent
-		if (name != null && enumValues != null && enumValues.length > 0) {
+		if (name != null && ArrayUtil.isNotEmpty(enumValues)) {
 			// to lower case for perform match
 			String nameLowerCase = name.toLowerCase(Locale.getDefault());
 			// scans enumeration

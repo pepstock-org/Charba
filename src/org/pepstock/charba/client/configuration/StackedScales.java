@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.enums.AxisKind;
 
 /**
@@ -62,7 +63,7 @@ public class StackedScales extends Scales {
 	@Override
 	public void setAxes(Axis... axes) {
 		// checks consistency of arguments
-		if (axes != null && axes.length > 0) {
+		if (ArrayUtil.isNotEmpty(axes)) {
 			// if not ONLY Y axis
 			if (!isOnlyYAxis) {
 				// changes the stacked field

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -75,7 +76,7 @@ public final class ExtendedScales extends Scales {
 	 */
 	private void setInternalAxes(Scale... scales) {
 		// checks if the arguments are consistent
-		if (scales != null && scales.length > 0) {
+		if (ArrayUtil.isNotEmpty(scales)) {
 			// checks if is
 			// scans passed scales
 			for (Scale scale : scales) {

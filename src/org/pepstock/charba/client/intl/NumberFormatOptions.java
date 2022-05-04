@@ -307,7 +307,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 */
 	private String createCompoundUnitIdentifier(MeasureUnit... units) {
 		// check if argument is consistent
-		if (units != null && units.length > 0) {
+		if (ArrayUtil.isNotEmpty(units)) {
 			// creates a builder
 			StringBuilder sb = new StringBuilder(Key.checkAndGetIfValid(units[0]).value());
 			// scans the arguments starting from second item of array

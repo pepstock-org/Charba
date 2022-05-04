@@ -303,7 +303,7 @@ public final class ToastOptions extends AbstractToastOptions {
 		// clears stored actions
 		storedActions.clear();
 		// checks consistent of actions
-		if (actions != null && actions.length > 0) {
+		if (ArrayUtil.isNotEmpty(actions)) {
 			// checks if there is same instances
 			for (ActionItem action : actions) {
 				// checks if already added

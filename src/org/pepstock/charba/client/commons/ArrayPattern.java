@@ -55,7 +55,7 @@ public final class ArrayPattern extends Array {
 	@JsOverlay
 	public static ArrayPattern fromOrNull(CanvasPatternItem... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns null
 			return null;
 		}
@@ -72,7 +72,7 @@ public final class ArrayPattern extends Array {
 	@JsOverlay
 	public static ArrayPattern fromOrEmpty(CanvasPatternItem... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns null
 			return new ArrayPattern();
 		}

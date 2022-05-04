@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
@@ -139,7 +140,7 @@ public final class GaugeDataset extends MeterDataset {
 	 */
 	public void setThresholds(Threshold... newThresholds) {
 		// checks if arguments are consistent
-		if (newThresholds != null && newThresholds.length > 0) {
+		if (ArrayUtil.isNotEmpty(newThresholds)) {
 			// clears existing thresholds
 			thresholds.clear();
 			// adds all new ones

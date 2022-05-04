@@ -55,7 +55,7 @@ public final class ArrayCanvas extends Array {
 	@JsOverlay
 	public static ArrayCanvas fromOrNull(Canvas... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns an empty array
 			return null;
 		}
@@ -72,7 +72,7 @@ public final class ArrayCanvas extends Array {
 	@JsOverlay
 	public static ArrayCanvas fromOrEmpty(Canvas... items) {
 		// checks if consistent
-		if (items == null || items.length == 0) {
+		if (ArrayUtil.isEmpty(items)) {
 			// returns an empty array
 			return new ArrayCanvas();
 		}

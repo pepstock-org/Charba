@@ -613,7 +613,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		// resets callbacks
 		setBorderSkipped((BorderSkippedCallback) null);
 		// checks if the argument is consistent
-		if (borderskips != null && borderskips.length > 0) {
+		if (ArrayUtil.isNotEmpty(borderskips)) {
 			if (borderskips.length == 1) {
 				// stores as single value
 				setSingleBorderSkipped(borderskips[0]);
@@ -865,7 +865,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public void setFloatingData(double[][] floatingData) {
 		// checks consistency
-		if (floatingData != null && floatingData.length > 0) {
+		if (ArrayUtil.isNotEmpty(floatingData)) {
 			// creates a list of floating data
 			List<FloatingData> dataList = new LinkedList<>();
 			// scans the array of arrays

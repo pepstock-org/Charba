@@ -29,6 +29,7 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Envelop;
@@ -310,7 +311,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// creates results
 		List<ActiveDatasetElement> result = new ArrayList<>();
 		// checks if argument is consistent
-		if (datasetIndexes != null && datasetIndexes.length > 0) {
+		if (ArrayUtil.isNotEmpty(datasetIndexes)) {
 			// normalizes array
 			int[] indexes = Arrays.stream(datasetIndexes).distinct().toArray();
 			// scans indexes
@@ -345,7 +346,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// creates results
 		List<ActiveDatasetElement> result = new ArrayList<>();
 		// checks if argument is consistent
-		if (dataIndexes != null && dataIndexes.length > 0) {
+		if (ArrayUtil.isNotEmpty(dataIndexes)) {
 			// normalizes array
 			int[] indexes = Arrays.stream(dataIndexes).distinct().toArray();
 			// data set index

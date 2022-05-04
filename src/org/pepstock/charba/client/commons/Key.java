@@ -106,7 +106,7 @@ public interface Key {
 	 */
 	static <T extends Key> T getKeyByValue(T[] enumValues, String value, T defaultKey) {
 		// checks if arguments are consistent
-		if (value != null && enumValues != null && enumValues.length > 0) {
+		if (value != null && ArrayUtil.isNotEmpty(enumValues)) {
 			// scans enumeration
 			for (T enumValue : enumValues) {
 				// checks if enumeration value name is equals to value

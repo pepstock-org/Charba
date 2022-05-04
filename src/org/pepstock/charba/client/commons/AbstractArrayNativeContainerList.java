@@ -48,7 +48,7 @@ abstract class AbstractArrayNativeContainerList<E, A extends Array> extends Abst
 	 */
 	public final void addAll(E[] values) {
 		// checks if arguments are consistent
-		if (values != null && values.length > 0) {
+		if (ArrayUtil.isNotEmpty(values)) {
 			// scans all elements
 			for (E val : values) {
 				// adds

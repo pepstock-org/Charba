@@ -244,7 +244,7 @@ public class ArrayUtil {
 	 * @return an array of primitives from passed array
 	 */
 	public static boolean[] toPrimitive(final Boolean[] array) {
-		if (array == null || array.length == 0) {
+		if (isEmpty(array)) {
 			return EMPTY_BOOLEAN_ARRAY;
 		}
 		final boolean[] result = new boolean[array.length];
@@ -275,7 +275,7 @@ public class ArrayUtil {
 	 * @return an array of primitives from passed array
 	 */
 	public static double[] toPrimitive(final Double[] array) {
-		if (array == null || array.length == 0) {
+		if (isEmpty(array)) {
 			return EMPTY_DOUBLE_ARRAY;
 		}
 		final double[] result = new double[array.length];
@@ -306,7 +306,7 @@ public class ArrayUtil {
 	 * @return an array of primitives from passed array
 	 */
 	public static int[] toPrimitive(final Integer[] array) {
-		if (array == null || array.length == 0) {
+		if (isEmpty(array)) {
 			return EMPTY_INT_ARRAY;
 		}
 		final int[] result = new int[array.length];
