@@ -27,7 +27,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallb
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayInteger;
@@ -117,15 +117,15 @@ final class BorderOptionsHandler extends PropertyHandler<IsDefaultsBorderOptions
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(parent, context), getBorderColorCallback(), getDefaultValues().getBorderColorAsString(), false));
+		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(new AnnotationContext(parent, context), getBorderColorCallback(), getDefaultValues().getBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderWidthCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(parent, context), getBorderWidthCallback(), getDefaultValues().getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(parent, context), getBorderWidthCallback(), getDefaultValues().getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashCallbackProxy.setCallback(context -> onBorderDash(new AnnotationContext(parent, context), getBorderDashCallback(), getDefaultValues().getBorderDash()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashOffsetCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(parent, context), getBorderDashOffsetCallback(), getDefaultValues().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(parent, context), getBorderDashOffsetCallback(), getDefaultValues().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 	}
 
 	/**
@@ -360,7 +360,7 @@ final class BorderOptionsHandler extends PropertyHandler<IsDefaultsBorderOptions
 	 */
 	Array onBorderDash(AnnotationContext context, BorderDashCallback<AnnotationContext> borderDashCallback, List<Integer> defaultValue) {
 		// gets value
-		List<Integer> result = ScriptableUtils.getOptionValue(context, borderDashCallback);
+		List<Integer> result = ScriptableUtil.getOptionValue(context, borderDashCallback);
 		// checks if consistent
 		if (result != null) {
 			// returns result of callback

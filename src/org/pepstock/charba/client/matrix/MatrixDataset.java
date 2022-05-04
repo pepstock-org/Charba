@@ -26,7 +26,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
@@ -172,9 +172,9 @@ public final class MatrixDataset extends HoverFlexDataset {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.widthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getWidthCallback(), DEFAULT_WIDTH, ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
+		this.widthCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getWidthCallback(), DEFAULT_WIDTH, ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.heightCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHeightCallback(), DEFAULT_HEIGHT, ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
+		this.heightCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getHeightCallback(), DEFAULT_HEIGHT, ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderRadiusCallbackProxy.setCallback(context -> onBorderRadius(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
@@ -706,7 +706,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	final NativeObject onBorderRadius(DatasetContext context) {
 		int valueToReturn = DEFAULT_BORDER_RADIUS;
 		// gets value
-		Object value = ScriptableUtils.getOptionValue(context, getBorderRadiusCallback());
+		Object value = ScriptableUtil.getOptionValue(context, getBorderRadiusCallback());
 		// checks if is an object
 		if (value instanceof BarBorderRadius) {
 			// casts to border radius object
@@ -737,7 +737,7 @@ public final class MatrixDataset extends HoverFlexDataset {
 	final NativeObject onBorderWidth(DatasetContext context, BarBorderWidthCallback callback, int defaultValue) {
 		int valueToReturn = defaultValue;
 		// gets value
-		Object value = ScriptableUtils.getOptionValue(context, callback);
+		Object value = ScriptableUtil.getOptionValue(context, callback);
 		// checks if is an object
 		if (value instanceof BarBorderWidth) {
 			// casts to border width object

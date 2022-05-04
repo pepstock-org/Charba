@@ -18,7 +18,7 @@ package org.pepstock.charba.client.treemap;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -96,7 +96,7 @@ public final class Labels extends AbstractLabels {
 	Labels(AbstractNode parent, Key childKey, IsDefaultOptions defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, defaultValues, nativeObject, DEFAULT_DISPLAY);
 		// sets function to proxy callback in order to invoke the java interface
-		this.positionCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(new DatasetContext(context), getPositionCallback(), DEFAULT_POSITION).value());
+		this.positionCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsString(new DatasetContext(context), getPositionCallback(), DEFAULT_POSITION).value());
 	}
 
 	/*

@@ -20,7 +20,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCall
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -151,12 +151,12 @@ public final class Legend extends AbstractNode {
 		// sets function to proxy callback in order to invoke the java interface
 		this.alignCallbackProxy.setCallback(this::onAlign);
 		// sets function to proxy callback in order to invoke the java interface
-		this.lengthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new ScaleContext(mapper.getAxis(), context), getLengthCallback(), DEFAULT_LENGTH, ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+		this.lengthCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new ScaleContext(mapper.getAxis(), context), getLengthCallback(), DEFAULT_LENGTH, ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.widthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new ScaleContext(mapper.getAxis(), context), getWidthCallback(), DEFAULT_WIDTH, ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+		this.widthCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new ScaleContext(mapper.getAxis(), context), getWidthCallback(), DEFAULT_WIDTH, ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.indicatorWidthCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new ScaleContext(mapper.getAxis(), context), getIndicatorWidthCallback(), DEFAULT_INDICATOR_WIDTH, ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new ScaleContext(mapper.getAxis(), context), getIndicatorWidthCallback(), DEFAULT_INDICATOR_WIDTH, ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.marginCallbackProxy.setCallback(this::onMargin);
 	}

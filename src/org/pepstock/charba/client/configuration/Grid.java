@@ -26,7 +26,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallb
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
@@ -102,12 +102,12 @@ public class Grid extends AbstractScaleLines {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.tickColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(getAxis().createContext(context), getTickColorCallback(), getAxis().getDefaultValues().getGrid().getTickColorAsString(), false));
+		this.tickColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(getAxis().createContext(context), getTickColorCallback(), getAxis().getDefaultValues().getGrid().getTickColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
 		this.tickWidthCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(getAxis().createContext(context), getTickWidthCallback(), getAxis().getDefaultValues().getGrid().getTickWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getTickWidthCallback(), getAxis().getDefaultValues().getGrid().getTickWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.tickBorderDashOffsetCallbackProxy.setCallback(context -> ScriptableUtils
+		this.tickBorderDashOffsetCallbackProxy.setCallback(context -> ScriptableUtil
 				.getOptionValueAsNumber(getAxis().createContext(context), getTickBorderDashOffsetCallback(), getAxis().getDefaultValues().getGrid().getTickBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 	}
 

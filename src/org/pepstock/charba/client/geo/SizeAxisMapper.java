@@ -23,7 +23,7 @@ import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -112,11 +112,11 @@ final class SizeAxisMapper extends LegendAxisMapper {
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
 		this.missingRadiusCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new ScaleContext(getAxis(), context), getMissingRadiusCallback(), SizeAxis.DEFAULT_MISSING_RADIUS, ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new ScaleContext(getAxis(), context), getMissingRadiusCallback(), SizeAxis.DEFAULT_MISSING_RADIUS, ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.modeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), context), getModeCallback(), Mode.AREA).value());
+		this.modeCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(new ScaleContext(getAxis(), context), getModeCallback(), Mode.AREA).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.rangeCallbackProxy.setCallback(context -> ArrayInteger.fromOrEmpty(ScriptableUtils.getOptionValue(new ScaleContext(getAxis(), context), getRangeCallback(), SizeAxis.DEFAULT_RANGE)));
+		this.rangeCallbackProxy.setCallback(context -> ArrayInteger.fromOrEmpty(ScriptableUtil.getOptionValue(new ScaleContext(getAxis(), context), getRangeCallback(), SizeAxis.DEFAULT_RANGE)));
 	}
 
 	/**

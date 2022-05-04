@@ -23,7 +23,7 @@ import org.pepstock.charba.client.callbacks.FromCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.ToCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
@@ -505,7 +505,7 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 		// checks if callback are consistent
 		if (callback != null) {
 			// invokes callback
-			Object result = ScriptableUtils.getOptionValue(context, callback);
+			Object result = ScriptableUtil.getOptionValue(context, callback);
 			// checks the result type
 			if (result instanceof Double || result instanceof Boolean || result instanceof String) {
 				return result;

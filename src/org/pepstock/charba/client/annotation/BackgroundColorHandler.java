@@ -19,7 +19,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -101,7 +101,7 @@ final class BackgroundColorHandler extends PropertyHandler<IsDefaultsBackgroundC
 		// stores background color
 		this.defaultBackgroundColor = defaultBackgroundColor;
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(parent, context), getBackgroundColorCallback(), defaultBackgroundColor));
+		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(new AnnotationContext(parent, context), getBackgroundColorCallback(), defaultBackgroundColor));
 	}
 
 	/**

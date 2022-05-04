@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.TickCallback;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -85,7 +85,7 @@ final class LinearTickHandler<T extends Tick> extends AbstractTickHandler<T, Tic
 				// then calls user callback
 				Object result = getCallback().onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
 				// parses and returns the result
-				return ScriptableUtils.parseCallbackResult(result, current);
+				return ScriptableUtil.parseCallbackResult(result, current);
 			}
 			// default tick is the string representation of the tick value
 			return current;

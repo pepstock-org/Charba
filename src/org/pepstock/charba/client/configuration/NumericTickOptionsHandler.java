@@ -19,7 +19,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.NumberFormatCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -135,7 +135,7 @@ class NumericTickOptionsHandler extends AxisContainer {
 		// checks if default number format options is consistent
 		Checker.checkIfValid(defaultValue, "Default number format item");
 		// invokes callback
-		NumberFormatItem result = ScriptableUtils.getOptionValue(context, callback, defaultValue.create());
+		NumberFormatItem result = ScriptableUtil.getOptionValue(context, callback, defaultValue.create());
 		// returns native object
 		return result.nativeObject();
 	}

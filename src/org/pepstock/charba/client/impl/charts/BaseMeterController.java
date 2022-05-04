@@ -21,7 +21,7 @@ import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
@@ -374,7 +374,7 @@ final class BaseMeterController extends AbstractController {
 	private String getColor(AbstractMeterElement options, String defaultValue, MeterContext context) {
 		// checks if the options font color is set as callback
 		if (options.getColorCallback() != null) {
-			Object result = ScriptableUtils.getOptionValueAsColor(context, options.getColorCallback(), defaultValue, false);
+			Object result = ScriptableUtil.getOptionValueAsColor(context, options.getColorCallback(), defaultValue, false);
 			// checks the result
 			if (result instanceof IsColor) {
 				// casts to color
@@ -405,7 +405,7 @@ final class BaseMeterController extends AbstractController {
 	private FontItem getFont(AbstractMeterElement options, MeterContext context) {
 		// checks if the options font is set as callback
 		if (options.getFontCallback() != null) {
-			FontItem result = ScriptableUtils.getOptionValueAsFont(context, options.getFontCallback(), options.getFontItem());
+			FontItem result = ScriptableUtil.getOptionValueAsFont(context, options.getFontCallback(), options.getFontItem());
 			// checks the result
 			if (result != null) {
 				return result;

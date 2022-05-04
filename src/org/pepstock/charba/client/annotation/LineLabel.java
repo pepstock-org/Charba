@@ -21,7 +21,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
@@ -491,7 +491,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	 */
 	private Object onRotation(AnnotationContext context, double defaultValue) {
 		// gets value
-		Double result = ScriptableUtils.getOptionValue(context, getRotationCallback(), defaultValue);
+		Double result = ScriptableUtil.getOptionValue(context, getRotationCallback(), defaultValue);
 		// checks if consistent
 		// if NaN or infinite then AUTO_ROTATION,
 		// returns 'auto'
@@ -516,7 +516,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	 */
 	private String onPosition(AnnotationContext context, LabelPosition defaultValue) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getPositionCallback(), defaultValue);
+		Object result = ScriptableUtil.getOptionValue(context, getPositionCallback(), defaultValue);
 		// checks if consistent
 		if (result instanceof LabelPosition) {
 			// casts

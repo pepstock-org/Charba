@@ -19,7 +19,7 @@ import org.pepstock.charba.client.callbacks.CapStyleCallback;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
@@ -222,7 +222,7 @@ final class ExtendedBorderOptionsHandler extends PropertyHandler<IsDefaultsExten
 	 * @return a object property value, as {@link CapStyle}
 	 */
 	private String onBorderCapStyle(AnnotationContext context, CapStyle defaultValue) {
-		return checkCallbackResult(ScriptableUtils.getOptionValue(context, getBorderCapStyleCallback()), defaultValue);
+		return checkCallbackResult(ScriptableUtil.getOptionValue(context, getBorderCapStyleCallback()), defaultValue);
 	}
 
 	/**
@@ -233,7 +233,7 @@ final class ExtendedBorderOptionsHandler extends PropertyHandler<IsDefaultsExten
 	 * @return a object property value, as {@link JoinStyle}
 	 */
 	private String onBorderJoinStyle(AnnotationContext context, JoinStyle defaultValue) {
-		return checkCallbackResult(ScriptableUtils.getOptionValue(context, getBorderJoinStyleCallback()), defaultValue);
+		return checkCallbackResult(ScriptableUtil.getOptionValue(context, getBorderJoinStyleCallback()), defaultValue);
 	}
 
 	/**

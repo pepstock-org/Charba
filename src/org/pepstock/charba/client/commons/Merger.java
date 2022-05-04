@@ -222,10 +222,10 @@ public final class Merger {
 	 */
 	private void handleMultiScalesType(ChartOptions base, NativeObject chartOptions, NativeObject scaleOptions) {
 		// checks if scales object is present
-		if (NativeObjectUtils.hasProperty(chartOptions, Property.SCALES.value())) {
+		if (NativeObjectUtil.hasProperty(chartOptions, Property.SCALES.value())) {
 			// if here, the chart has got 2 or more scales
 			// gets the native object for scales
-			NativeObject scales = NativeObjectUtils.getObjectProperty(chartOptions, Property.SCALES.value());
+			NativeObject scales = NativeObjectUtil.getObjectProperty(chartOptions, Property.SCALES.value());
 			// checks and apply scales
 			applyDefaultsOnScales(base.getScales().getAxes(), scales, scaleOptions);
 		}
@@ -242,7 +242,7 @@ public final class Merger {
 		// scans all scales
 		for (Scale storedScale : storedScales) {
 			// gets native object of scale
-			NativeObject scaleObject = NativeObjectUtils.getObjectProperty(scales, storedScale.getId().value());
+			NativeObject scaleObject = NativeObjectUtil.getObjectProperty(scales, storedScale.getId().value());
 			// create instance for axis type
 			AxisType type = storedScale.getType();
 			// checks if axis type is consistent
@@ -252,10 +252,10 @@ public final class Merger {
 				// before it applies the axis defaults by its type
 				NativeObject tempObject = mergeNativeObjects(scaleObject, axisDefault.getNativeObject());
 				// then it applies defaults scale
-				NativeObjectUtils.defineObjectProperty(scales, storedScale.getId().value(), mergeNativeObjects(tempObject, scaleOptions));
+				NativeObjectUtil.defineObjectProperty(scales, storedScale.getId().value(), mergeNativeObjects(tempObject, scaleOptions));
 			} else {
 				// then it applies defaults scale
-				NativeObjectUtils.defineObjectProperty(scales, storedScale.getId().value(), mergeNativeObjects(scaleObject, scaleOptions));
+				NativeObjectUtil.defineObjectProperty(scales, storedScale.getId().value(), mergeNativeObjects(scaleObject, scaleOptions));
 			}
 		}
 	}
@@ -341,9 +341,9 @@ public final class Merger {
 	 */
 	private NativeObject internalMerge(NativeObject target, NativeObject source, String property) {
 		// creates new root object
-		NativeObject newObject = NativeObjectUtils.create();
+		NativeObject newObject = NativeObjectUtil.create();
 		// stores configuration
-		NativeObjectUtils.defineObjectProperty(newObject, property, source);
+		NativeObjectUtil.defineObjectProperty(newObject, property, source);
 		// invokes CHART.JS to merge
 		return mergeNativeObjects(target, newObject);
 	}
@@ -358,7 +358,7 @@ public final class Merger {
 	 */
 	private NativeObject mergeNativeObjects(NativeObject target, NativeObject source) {
 		NativeObject newObject = Helpers.get().mergeIf(target, source);
-		return newObject == null ? NativeObjectUtils.create() : newObject;
+		return newObject == null ? NativeObjectUtil.create() : newObject;
 	}
 
 	/**

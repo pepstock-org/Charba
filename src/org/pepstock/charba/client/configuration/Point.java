@@ -23,7 +23,7 @@ import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -108,13 +108,13 @@ public class Point extends AbstractConfigurationElement<IsDefaultPoint> {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.radiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getRadiusCallback(), getDefaultElement().getRadius(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+		this.radiusCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getRadiusCallback(), getDefaultElement().getRadius(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hitRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHitRadiusCallback(), getDefaultElement().getHitRadius(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+		this.hitRadiusCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getHitRadiusCallback(), getDefaultElement().getHitRadius(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHoverRadiusCallback(), getDefaultElement().getHoverRadius(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+		this.hoverRadiusCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getHoverRadiusCallback(), getDefaultElement().getHoverRadius(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.rotationCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getRotationCallback(), getDefaultElement().getRotation()).doubleValue());
+		this.rotationCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getRotationCallback(), getDefaultElement().getRotation()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context), getPointStyleCallback(), getDefaultElement().getPointStyle()));
 	}

@@ -25,12 +25,12 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-final class NativeUtils {
+final class NativeUtil {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private NativeUtils() {
+	private NativeUtil() {
 		// do nothing
 	}
 

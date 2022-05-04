@@ -23,7 +23,7 @@ import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
@@ -269,7 +269,7 @@ public class RadialAngleLines extends AbstractScaleLines {
 	 */
 	private Array onBorderDash(ScaleContext context, BorderDashCallback<ScaleContext> borderDashCallback, List<Integer> defaultValue) {
 		// gets value
-		List<Integer> result = ScriptableUtils.getOptionValue(context, borderDashCallback);
+		List<Integer> result = ScriptableUtil.getOptionValue(context, borderDashCallback);
 		// checks if consistent
 		if (result != null) {
 			// returns result of callback

@@ -32,7 +32,7 @@ import org.pepstock.charba.client.utils.RegExpResult;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class BaseLocationUtils {
+final class BaseLocationUtil {
 	// REGEXP pattern for query string
 	private static final String REGEXP_QUERY_STRING_PATTERN = "([^?=&]+)(=([^&]*))?";
 	// REGEXP for query string
@@ -45,7 +45,7 @@ final class BaseLocationUtils {
 	/**
 	 * To avoid any instantiation
 	 */
-	BaseLocationUtils() {
+	BaseLocationUtil() {
 		// do nothing
 	}
 

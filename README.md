@@ -282,6 +282,10 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Breaking changes
 
  * Rename `getXObjectType` and `getXObjectType` methods in `DataPoint` class to `getXType` and `getYType`.
+ * Rename the following utilities classes using `Util` suffix instead of `Utils`.
+   * `ScriptableUtil`
+   * `SafeHtmlUtil`
+   * `GeoUtil`
 
 ### Features
 

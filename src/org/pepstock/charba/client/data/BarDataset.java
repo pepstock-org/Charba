@@ -36,7 +36,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCall
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayDoubleArray;
 import org.pepstock.charba.client.commons.ArrayDoubleArrayList;
@@ -255,9 +255,9 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.baseCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getBaseCallback(), Undefined.DOUBLE, ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+		this.baseCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getBaseCallback(), Undefined.DOUBLE, ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.enableBorderRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getEnableBorderRadiusCallback(), getDefaultValues().getElements().getBar().isEnableBorderRadius()));
+		this.enableBorderRadiusCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getEnableBorderRadiusCallback(), getDefaultValues().getElements().getBar().isEnableBorderRadius()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.inflateAmountCallbackProxy.setCallback(context -> onInflateAmount(createContext(context), getInflateAmountCallback()));
 	}
@@ -1415,7 +1415,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	private Object onBorderSkipped(DatasetContext context) {
 		// gets value
-		BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, getBorderSkippedCallback());
+		BorderSkipped value = ScriptableUtil.getOptionValueAsString(context, getBorderSkippedCallback());
 		// checks against the default
 		BorderSkipped result = value == null ? getDefaultValues().getElements().getBar().getBorderSkipped() : value;
 		// checks if is boolean
@@ -1435,7 +1435,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	private Object onPointStyle(DatasetContext context) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getPointStyleCallback());
+		Object result = ScriptableUtil.getOptionValue(context, getPointStyleCallback());
 		// checks result
 		if (result instanceof PointStyle) {
 			// is point style instance
@@ -1461,7 +1461,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	private Object onInflateAmount(DatasetContext context, InflateAmountCallback callback) {
 		// gets value
-		int result = ScriptableUtils.getOptionValue(context, callback);
+		int result = ScriptableUtil.getOptionValue(context, callback);
 		// checks result is undefined
 		if (Undefined.is(result)) {
 			// if here is undefined

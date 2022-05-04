@@ -150,7 +150,7 @@ public final class BaseLocation {
 	 */
 	@JsOverlay
 	public String getParameter(String name) {
-		return BaseLocationUtils.getParameter(this, name);
+		return BaseLocationUtil.getParameter(this, name);
 	}
 
 	/**
@@ -161,6 +161,6 @@ public final class BaseLocation {
 	 */
 	@JsOverlay
 	public Map<String, List<String>> getParameterMap() {
-		return BaseLocationUtils.getParameterMap(this);
+		return BaseLocationUtil.getParameterMap(this);
 	}
 }

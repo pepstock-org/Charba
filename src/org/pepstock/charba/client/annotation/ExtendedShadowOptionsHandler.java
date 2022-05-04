@@ -18,7 +18,7 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -91,7 +91,7 @@ final class ExtendedShadowOptionsHandler extends PropertyHandler<IsDefaultsExten
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundShadowColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(parent, context), getBackgroundShadowColorCallback(), getDefaultValues().getBackgroundShadowColorAsString(), false));
+		this.backgroundShadowColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(new AnnotationContext(parent, context), getBackgroundShadowColorCallback(), getDefaultValues().getBackgroundShadowColorAsString(), false));
 	}
 
 	/**

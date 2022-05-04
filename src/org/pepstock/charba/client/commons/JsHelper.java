@@ -82,7 +82,7 @@ public final class JsHelper {
 	public MutationObserverInit createMutationObserverInit() {
 		// create new object
 		// casting it to an observer init
-		return cast(NativeObjectUtils.create());
+		return cast(NativeObjectUtil.create());
 	}
 
 	/**
@@ -229,9 +229,9 @@ public final class JsHelper {
 	 */
 	public int getIntegerProperty(Key key, NativeObject nativeObject) {
 		// checks if arguments are consistent and property exists
-		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
+		if (Key.isValid(key) && nativeObject != null && NativeObjectUtil.hasProperty(nativeObject, key.value())) {
 			// returns value
-			return NativeObjectUtils.getIntProperty(nativeObject, key.value(), Undefined.INTEGER);
+			return NativeObjectUtil.getIntProperty(nativeObject, key.value(), Undefined.INTEGER);
 		}
 		// property doesn't exist
 		return Undefined.INTEGER;
@@ -246,9 +246,9 @@ public final class JsHelper {
 	 */
 	public boolean getBooleanProperty(Key key, NativeObject nativeObject) {
 		// checks if arguments are consistent and property exists
-		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
+		if (Key.isValid(key) && nativeObject != null && NativeObjectUtil.hasProperty(nativeObject, key.value())) {
 			// returns value
-			return NativeObjectUtils.getBooleanProperty(nativeObject, key.value(), Undefined.BOOLEAN);
+			return NativeObjectUtil.getBooleanProperty(nativeObject, key.value(), Undefined.BOOLEAN);
 		}
 		// property doesn't exist
 		return Undefined.BOOLEAN;
@@ -263,9 +263,9 @@ public final class JsHelper {
 	 */
 	public String getStringProperty(Key key, NativeObject nativeObject) {
 		// checks if arguments are consistent and property exists
-		if (Key.isValid(key) && nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, key.value())) {
+		if (Key.isValid(key) && nativeObject != null && NativeObjectUtil.hasProperty(nativeObject, key.value())) {
 			// if descriptor is consistent, return value
-			return NativeObjectUtils.getStringProperty(nativeObject, key.value(), Undefined.STRING);
+			return NativeObjectUtil.getStringProperty(nativeObject, key.value(), Undefined.STRING);
 		}
 		// property doesn't exist
 		return Undefined.STRING;

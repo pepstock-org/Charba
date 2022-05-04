@@ -24,7 +24,7 @@ import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -124,18 +124,18 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getBackgroundColorCallback(), getDefaultElement().getBackgroundColorAsString()));
+		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(createContext(context), getBackgroundColorCallback(), getDefaultElement().getBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getBorderColorCallback(), getDefaultElement().getBorderColorAsString(), false));
+		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(createContext(context), getBorderColorCallback(), getDefaultElement().getBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getBorderWidthCallback(), getDefaultElement().getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+		this.borderWidthCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getBorderWidthCallback(), getDefaultElement().getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBackgroundColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getHoverBackgroundColorCallback(), getDefaultElement().getHoverBackgroundColorAsString()));
+		this.hoverBackgroundColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(createContext(context), getHoverBackgroundColorCallback(), getDefaultElement().getHoverBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverBorderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getHoverBorderColorCallback(), getDefaultElement().getHoverBorderColorAsString(), false));
+		this.hoverBorderColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(createContext(context), getHoverBorderColorCallback(), getDefaultElement().getHoverBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverBorderWidthCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHoverBorderWidthCallback(), getDefaultElement().getHoverBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getHoverBorderWidthCallback(), getDefaultElement().getHoverBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 	}
 
 	/**
@@ -581,7 +581,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	 */
 	final int onBorderRadius(DatasetContext context, BorderRadiusCallback<DatasetContext> callback, int defaultValue) {
 		// gets value
-		Object value = ScriptableUtils.getOptionValue(context, callback);
+		Object value = ScriptableUtil.getOptionValue(context, callback);
 		// checks if is an integer
 		if (value instanceof Number) {
 			// casts to number
@@ -604,7 +604,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	 */
 	final Object onPointStyle(DatasetContext context, PointStyleCallback<DatasetContext> callback, PointStyle defaultValue) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, callback);
+		Object result = ScriptableUtil.getOptionValue(context, callback);
 		// checks result
 		if (result instanceof PointStyle) {
 			// is point style instance
@@ -632,7 +632,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 	 * @return a object property value, as {@link JoinStyle}
 	 */
 	final String onBorderJoinStyle(DatasetContext context, JoinStyleCallback<DatasetContext> callback, JoinStyle defaultValue) {
-		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
+		return checkCallbackResult(ScriptableUtil.getOptionValue(context, callback), defaultValue);
 	}
 
 	/**

@@ -25,7 +25,7 @@ import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -129,7 +129,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderSkippedCallbackProxy.setCallback(context -> onBorderSkipped(createContext(context), getDefaultElement().getBorderSkipped()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.enableBorderRadiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getEnableBorderRadiusCallback(), getDefaultElement().isEnableBorderRadius()));
+		this.enableBorderRadiusCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getEnableBorderRadiusCallback(), getDefaultElement().isEnableBorderRadius()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointStyleCallbackProxy.setCallback(context -> onPointStyle(createContext(context), getPointStyleCallback(), getDefaultElement().getPointStyle()));
 		// sets function to proxy callback in order to invoke the java interface
@@ -581,7 +581,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	private Object onBorderSkipped(DatasetContext context, BorderSkipped defaultValue) {
 		// gets value
-		BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, getBorderSkippedCallback());
+		BorderSkipped value = ScriptableUtil.getOptionValueAsString(context, getBorderSkippedCallback());
 		// checks against the default
 		BorderSkipped result = value == null ? defaultValue : value;
 		// checks if is boolean
@@ -601,7 +601,7 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 */
 	private Object onInflateAmount(DatasetContext context, InflateAmountCallback callback) {
 		// gets value
-		int result = ScriptableUtils.getOptionValue(context, callback);
+		int result = ScriptableUtil.getOptionValue(context, callback);
 		// checks result is undefined
 		if (Undefined.is(result)) {
 			// if here is undefined

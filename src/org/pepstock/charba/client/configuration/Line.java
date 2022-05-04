@@ -30,7 +30,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallba
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.SteppedCallback;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayInteger;
@@ -139,7 +139,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 		this.borderDashCallbackProxy.setCallback(context -> onBorderDash(createContext(context), getBorderDashCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashOffsetCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getBorderDashOffsetCallback(), getDefaultElement().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getBorderDashOffsetCallback(), getDefaultElement().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getBorderJoinStyleCallback(), getDefaultElement().getBorderJoinStyle()));
 		// sets function to proxy callback in order to invoke the java interface
@@ -665,7 +665,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	 * @return a object property value, as {@link CapStyle}
 	 */
 	private String onBorderCapStyle(DatasetContext context, CapStyleCallback<DatasetContext> callback, CapStyle defaultValue) {
-		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
+		return checkCallbackResult(ScriptableUtil.getOptionValue(context, callback), defaultValue);
 	}
 
 	/**
@@ -677,7 +677,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	 */
 	private Array onBorderDash(DatasetContext context, BorderDashCallback<DatasetContext> callback) {
 		// gets value
-		List<Integer> result = ScriptableUtils.getOptionValue(context, callback);
+		List<Integer> result = ScriptableUtil.getOptionValue(context, callback);
 		// default result
 		return ArrayInteger.fromOrEmpty(result);
 	}
@@ -691,7 +691,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	 * @return a object property value, as {@link CubicInterpolationMode}
 	 */
 	private String onCubicInterpolationMode(DatasetContext context, CubicInterpolationModeCallback callback, CubicInterpolationMode defaultValue) {
-		return checkCallbackResult(ScriptableUtils.getOptionValue(context, callback), defaultValue);
+		return checkCallbackResult(ScriptableUtil.getOptionValue(context, callback), defaultValue);
 	}
 
 	/**
@@ -704,7 +704,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	 */
 	private Object onFill(DatasetContext context, FillCallback callback, IsFill defaultValue) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, callback);
+		Object result = ScriptableUtil.getOptionValue(context, callback);
 		// checks and transforms result
 		Object transformed = IsFill.transform(result);
 		// checks if consistent
@@ -727,7 +727,7 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	 */
 	private Object onStepped(DatasetContext context, SteppedCallback callback, Stepped defaultValue) {
 		// gets value
-		Stepped result = ScriptableUtils.getOptionValue(context, callback);
+		Stepped result = ScriptableUtil.getOptionValue(context, callback);
 		// checks if consistent
 		if (Stepped.FALSE.equals(result)) {
 			// returns the result as boolean

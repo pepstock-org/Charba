@@ -19,7 +19,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
@@ -126,7 +126,7 @@ abstract class AbstractCircleBasedAnnotation extends AbstractPointedAnnotation i
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.radiusCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getRadiusCallback(), defaultValues.getRadius(), ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
+		this.radiusCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this, context), getRadiusCallback(), defaultValues.getRadius(), ScriptableDoubleChecker.POSITIVE_OR_ZERO).doubleValue());
 	}
 
 	/*

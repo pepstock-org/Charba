@@ -33,7 +33,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCall
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.SegmentContext;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.commons.Array;
@@ -140,21 +140,21 @@ public class Segment extends ConfigurationOptionsContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(getSegmentContext(context), getBackgroundColorCallback(), getOptions().getDefaultValues().getElements().getLine().getBackgroundColorAsString(), true));
+		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(getSegmentContext(context), getBackgroundColorCallback(), getOptions().getDefaultValues().getElements().getLine().getBackgroundColorAsString(), true));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(getSegmentContext(context), getBorderColorCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderColorAsString(), false));
+		this.borderColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(getSegmentContext(context), getBorderColorCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderWidthCallbackProxy.setCallback(
-				context -> ScriptableUtils.getOptionValueAsNumber(getSegmentContext(context), getBorderWidthCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				context -> ScriptableUtil.getOptionValueAsNumber(getSegmentContext(context), getBorderWidthCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderCapStyleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getSegmentContext(context), getBorderCapStyleCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderCapStyle()).value());
+		this.borderCapStyleCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(getSegmentContext(context), getBorderCapStyleCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderCapStyle()).value());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashCallbackProxy.setCallback(context -> onBorderDash(new BaseContext(getChart(), context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashOffsetCallbackProxy.setCallback(context -> ScriptableUtils
+		this.borderDashOffsetCallbackProxy.setCallback(context -> ScriptableUtil
 				.getOptionValueAsNumber(getSegmentContext(context), getBorderDashOffsetCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderJoinStyleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getSegmentContext(context), getBorderJoinStyleCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderJoinStyle()).value());
+		this.borderJoinStyleCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(getSegmentContext(context), getBorderJoinStyleCallback(), getOptions().getDefaultValues().getElements().getLine().getBorderJoinStyle()).value());
 	}
 
 	/**
@@ -406,7 +406,7 @@ public class Segment extends ConfigurationOptionsContainer {
 	 */
 	private Array onBorderDash(BaseContext context) {
 		// gets value
-		List<Integer> result = ScriptableUtils.getOptionValue(new SegmentContext(context.nativeObject()), getBorderDashCallback());
+		List<Integer> result = ScriptableUtil.getOptionValue(new SegmentContext(context.nativeObject()), getBorderDashCallback());
 		// default result
 		return ArrayInteger.fromOrEmpty(result);
 	}

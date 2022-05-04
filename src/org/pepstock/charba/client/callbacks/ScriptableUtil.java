@@ -39,14 +39,14 @@ import org.pepstock.charba.client.items.PaddingItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ScriptableUtils {
+public final class ScriptableUtil {
 
 	private static final PaddingItem DEFAULT_PADDING_FOR_CALLBACK = new PaddingItem(0);
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private ScriptableUtils() {
+	private ScriptableUtil() {
 		// do nothing
 	}
 
@@ -91,7 +91,7 @@ public final class ScriptableUtils {
 	 * @return a value of property related to the padding value
 	 */
 	public static <C extends ChartContext> PaddingItem getOptionValueAsPadding(C context, Scriptable<PaddingItem, C> callback, IsDefaultPadding defaultValue) {
-		return ScriptableUtils.getOptionValue(context, callback, defaultValue != null ? defaultValue.create() : DEFAULT_PADDING_FOR_CALLBACK.create());
+		return ScriptableUtil.getOptionValue(context, callback, defaultValue != null ? defaultValue.create() : DEFAULT_PADDING_FOR_CALLBACK.create());
 	}
 
 	/**
@@ -107,7 +107,7 @@ public final class ScriptableUtils {
 		// checks if default font is consistent
 		Checker.checkIfValid(defaultValue, "Default font item");
 		// gets value
-		return ScriptableUtils.getOptionValue(context, callback, defaultValue.create());
+		return ScriptableUtil.getOptionValue(context, callback, defaultValue.create());
 	}
 
 	/**

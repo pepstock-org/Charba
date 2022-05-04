@@ -19,7 +19,7 @@ import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.FillCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -135,7 +135,7 @@ final class LiningDatasetFillHandler extends FillHandler {
 	 */
 	private Object onFill(DatasetContext context) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getFillCallback());
+		Object result = ScriptableUtil.getOptionValue(context, getFillCallback());
 		// checks and transforms result
 		Object transformed = IsFill.transform(result);
 		// checks if consistent

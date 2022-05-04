@@ -22,7 +22,7 @@ import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
@@ -260,9 +260,9 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		this.renderCallbackProxy.setCallback(context -> onRender(new LabelsContext(this, context)));
-		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(new LabelsContext(this, context), getFontCallback(), this.defaultOptions.getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsFont(new LabelsContext(this, context), getFontCallback(), this.defaultOptions.getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new LabelsContext(this, context), getColorCallback(), getColorAsString()));
+		this.colorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(new LabelsContext(this, context), getColorCallback(), getColorAsString()));
 	}
 
 	/**
@@ -745,7 +745,7 @@ public final class Label extends AbstractNode implements IsDefaultLabel, IsScrip
 		// gets callback
 		RenderCallback renderCallback = getRenderCallback();
 		// checks if the context and callback are consistent
-		if (ScriptableUtils.isContextConsistent(context) && renderCallback != null) {
+		if (ScriptableUtil.isContextConsistent(context) && renderCallback != null) {
 			// calls callback
 			Object value = renderCallback.invoke(context);
 			// checks result

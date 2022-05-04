@@ -22,7 +22,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -131,13 +131,13 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.displayCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this.annotation, context), getDisplayCallback(), this.defaultValues.isDisplay()));
+		this.displayCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(new AnnotationContext(this.annotation, context), getDisplayCallback(), this.defaultValues.isDisplay()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.lengthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.annotation, context), getLengthCallback(), this.defaultValues.getLength(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+		this.lengthCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this.annotation, context), getLengthCallback(), this.defaultValues.getLength(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.widthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.annotation, context), getWidthCallback(), this.defaultValues.getWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+		this.widthCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this.annotation, context), getWidthCallback(), this.defaultValues.getWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.fillCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this.annotation, context), getFillCallback(), this.defaultValues.isFill()));
+		this.fillCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(new AnnotationContext(this.annotation, context), getFillCallback(), this.defaultValues.isFill()));
 
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this.annotation, this.defaultValues, getNativeObject());

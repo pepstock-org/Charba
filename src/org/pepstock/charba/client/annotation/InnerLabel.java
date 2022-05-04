@@ -21,7 +21,7 @@ import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -123,11 +123,11 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.displayCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getDisplayCallback(), defaultValues.isDisplay()));
+		this.displayCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(new AnnotationContext(this.parent, context), getDisplayCallback(), defaultValues.isDisplay()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.xAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getXAdjustCallback(), defaultValues.getXAdjust()).doubleValue());
+		this.xAdjustCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getXAdjustCallback(), defaultValues.getXAdjust()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.yAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getYAdjustCallback(), defaultValues.getYAdjust()).doubleValue());
+		this.yAdjustCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getYAdjustCallback(), defaultValues.getYAdjust()).doubleValue());
 	}
 
 	/*

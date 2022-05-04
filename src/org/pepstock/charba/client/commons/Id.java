@@ -75,9 +75,9 @@ public enum Id implements Key
 	 */
 	public static String get(NativeObject nativeObject) {
 		// checks if argument is consistent and property exists
-		if (nativeObject != null && NativeObjectUtils.hasProperty(nativeObject, CHARBA_ID.value())) {
+		if (nativeObject != null && NativeObjectUtil.hasProperty(nativeObject, CHARBA_ID.value())) {
 			// returns value
-			return NativeObjectUtils.getStringProperty(nativeObject, CHARBA_ID.value(), Undefined.STRING);
+			return NativeObjectUtil.getStringProperty(nativeObject, CHARBA_ID.value(), Undefined.STRING);
 		}
 		// property doesn't exist
 		return Undefined.STRING;

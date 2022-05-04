@@ -29,7 +29,7 @@ import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
@@ -169,7 +169,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(parent, context), getColorCallback(), this.defaultValues.getColorAsString(), false));
+		this.colorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(new AnnotationContext(parent, context), getColorCallback(), this.defaultValues.getColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
 		this.contentCallbackProxy.setCallback(context -> onContent(new AnnotationContext(parent, context)));
 		// sets function to proxy callback in order to invoke the java interface
@@ -179,9 +179,9 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// sets function to proxy callback in order to invoke the java interface
 		this.textAlignCallbackProxy.setCallback(context -> onTextAlign(new AnnotationContext(parent, context), this.defaultValues.getTextAlign()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsPadding(new AnnotationContext(parent, context), getPaddingCallback(), getPadding()).nativeObject());
+		this.paddingCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsPadding(new AnnotationContext(parent, context), getPaddingCallback(), getPadding()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(new AnnotationContext(parent, context), getFontCallback(), getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsFont(new AnnotationContext(parent, context), getFontCallback(), getFont()).nativeObject());
 	}
 
 	/**
@@ -693,7 +693,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 */
 	private Object onContent(AnnotationContext context) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getContentCallback());
+		Object result = ScriptableUtil.getOptionValue(context, getContentCallback());
 		// checks if consistent
 		if (result instanceof String || result instanceof Img || result instanceof Canvas) {
 			// returns the string or the image
@@ -731,7 +731,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 */
 	private Object onImageSize(AnnotationContext context, ImageSizeCallback callback, double defaultValue, String defaultvalueAsPercentage) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, callback);
+		Object result = ScriptableUtil.getOptionValue(context, callback);
 		// checks if consistent
 		if (result instanceof Number) {
 			// casts to number
@@ -766,7 +766,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 */
 	private String onTextAlign(AnnotationContext context, TextAlign defaultValue) {
 		// gets value
-		TextAlign result = ScriptableUtils.getOptionValue(context, getTextAlignCallback(), defaultValue);
+		TextAlign result = ScriptableUtil.getOptionValue(context, getTextAlignCallback(), defaultValue);
 		// checks if consistent
 		if (Key.isValid(result)) {
 			// returns the value start-end

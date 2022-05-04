@@ -18,7 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.StartAngleCallback;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -126,7 +126,7 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 		// -- SET CALLBACKS to PROXIES x AXIS PROPERTIES ---
 		// -------------------------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.startAngleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getStartAngleCallback(), getDefaultValues().getStartAngle()).doubleValue());
+		this.startAngleCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getStartAngleCallback(), getDefaultValues().getStartAngle()).doubleValue());
 	}
 
 	/*

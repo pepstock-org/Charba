@@ -24,7 +24,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallb
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -119,16 +119,16 @@ final class ShadowOptionsHandler extends PropertyHandler<IsDefaultsShadowOptions
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderShadowColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new AnnotationContext(parent, context), getBorderShadowColorCallback(), getDefaultValues().getBorderShadowColorAsString(), false));
+		this.borderShadowColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(new AnnotationContext(parent, context), getBorderShadowColorCallback(), getDefaultValues().getBorderShadowColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
 		this.shadowBlurCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(parent, context), getShadowBlurCallback(), getDefaultValues().getShadowBlur(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(parent, context), getShadowBlurCallback(), getDefaultValues().getShadowBlur(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.shadowOffsetXCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(parent, context), getShadowOffsetXCallback(), getDefaultValues().getShadowOffsetX(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(parent, context), getShadowOffsetXCallback(), getDefaultValues().getShadowOffsetX(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.shadowOffsetYCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(parent, context), getShadowOffsetYCallback(), getDefaultValues().getShadowOffsetY(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(parent, context), getShadowOffsetYCallback(), getDefaultValues().getShadowOffsetY(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 	}
 
 	/**

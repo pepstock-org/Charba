@@ -25,7 +25,7 @@ import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.SteppedCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
@@ -505,7 +505,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	private String onCubicInterpolationMode(DatasetContext context) {
 		// gets value
-		CubicInterpolationMode result = ScriptableUtils.getOptionValue(context, getCubicInterpolationModeCallback());
+		CubicInterpolationMode result = ScriptableUtil.getOptionValue(context, getCubicInterpolationModeCallback());
 		// checks result
 		if (result != null) {
 			return result.value();
@@ -522,7 +522,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	private Object onStepped(DatasetContext context) {
 		// gets value
-		Stepped result = ScriptableUtils.getOptionValue(context, getSteppedCallback());
+		Stepped result = ScriptableUtil.getOptionValue(context, getSteppedCallback());
 		// checks if consistent
 		if (Stepped.FALSE.equals(result)) {
 			// returns the result as boolean

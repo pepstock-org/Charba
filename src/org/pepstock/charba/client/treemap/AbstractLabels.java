@@ -25,7 +25,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
@@ -171,15 +171,15 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new DatasetContext(context), getColorCallback(), DEFAULT_COLOR, false));
+		this.colorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(new DatasetContext(context), getColorCallback(), DEFAULT_COLOR, false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(new DatasetContext(context), getHoverColorCallback(), DEFAULT_COLOR, false));
+		this.hoverColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(new DatasetContext(context), getHoverColorCallback(), DEFAULT_COLOR, false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.alignCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(new DatasetContext(context), getAlignCallback(), DEFAULT_ALIGN).value());
+		this.alignCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsString(new DatasetContext(context), getAlignCallback(), DEFAULT_ALIGN).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(new DatasetContext(context), getFontCallback(), this.defaultValues.getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsFont(new DatasetContext(context), getFontCallback(), this.defaultValues.getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverFontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(new DatasetContext(context), getHoverFontCallback(), this.defaultValues.getFont()).nativeObject());
+		this.hoverFontCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsFont(new DatasetContext(context), getHoverFontCallback(), this.defaultValues.getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
 		this.formatterCallbackProxy.setCallback(context -> onFormatter(new DatasetContext(context)));
 	}
@@ -598,7 +598,7 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 		// gets callback
 		FormatterCallback callback = getFormatterCallback();
 		// checks if the handler is set
-		if (ScriptableUtils.isContextConsistent(context) && callback != null) {
+		if (ScriptableUtil.isContextConsistent(context) && callback != null) {
 			// calls callback
 			Object result = callback.invoke(context);
 			// checks type of result

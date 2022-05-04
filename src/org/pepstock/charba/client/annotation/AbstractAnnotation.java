@@ -28,7 +28,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -186,11 +186,11 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.displayCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDisplayCallback(), defaultValues.isDisplay()));
+		this.displayCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(new AnnotationContext(this, context), getDisplayCallback(), defaultValues.isDisplay()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.drawTimeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getDrawTimeCallback(), defaultValues.getDrawTime()).value());
+		this.drawTimeCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(new AnnotationContext(this, context), getDrawTimeCallback(), defaultValues.getDrawTime()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.adjustScaleRangeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this, context), getAdjustScaleRangeCallback(), defaultValues.isAdjustScaleRange()));
+		this.adjustScaleRangeCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(new AnnotationContext(this, context), getAdjustScaleRangeCallback(), defaultValues.isAdjustScaleRange()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.xMinCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getXMinCallback()));
 		// sets function to proxy callback in order to invoke the java interface
@@ -919,7 +919,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	final Object onValue(AnnotationContext context, ValueCallback valueCallback) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, valueCallback);
+		Object result = ScriptableUtil.getOptionValue(context, valueCallback);
 		// checks if consistent
 		if (result instanceof Number) {
 			// casts to number
@@ -950,7 +950,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// prepares the result
 		AlignPosition resultPosition = null;
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, callback);
+		Object result = ScriptableUtil.getOptionValue(context, callback);
 		// checks if consistent
 		if (result instanceof AlignPosition) {
 			// casts

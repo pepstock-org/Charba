@@ -18,7 +18,7 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.callbacks.BeginAtZeroCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -88,7 +88,7 @@ final class BegiAtZeroCallbackHandler {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.beginAtZeroCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(this.parent.createContext(context), getBeginAtZeroCallback(), this.parent.getDefaultValues().isBeginAtZero()).booleanValue());
+		this.beginAtZeroCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(this.parent.createContext(context), getBeginAtZeroCallback(), this.parent.getDefaultValues().isBeginAtZero()).booleanValue());
 	}
 
 	/**

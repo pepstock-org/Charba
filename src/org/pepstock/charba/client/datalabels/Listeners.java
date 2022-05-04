@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -180,7 +180,7 @@ public final class Listeners extends AbstractNode implements IsDefaultListeners 
 		// creates the internal context
 		DataLabelsContext internalContext = new DataLabelsContext(this.parent, context);
 		// checks if the context and handler are consistent
-		if (ScriptableUtils.isContextConsistent(internalContext) && clickEventHandler != null) {
+		if (ScriptableUtil.isContextConsistent(internalContext) && clickEventHandler != null) {
 			// creates a chart event context
 			ChartEventContext eventContext = new ChartEventContext(new DataLabelsEnvelop<>(event));
 			// calls handler
@@ -203,7 +203,7 @@ public final class Listeners extends AbstractNode implements IsDefaultListeners 
 		// creates the internal context
 		DataLabelsContext internalContext = new DataLabelsContext(this.parent, context);
 		// checks if the context and handler are consistent
-		if (ScriptableUtils.isContextConsistent(internalContext) && enterEventHandler != null) {
+		if (ScriptableUtil.isContextConsistent(internalContext) && enterEventHandler != null) {
 			// creates a chart event context
 			ChartEventContext eventContext = new ChartEventContext(new DataLabelsEnvelop<>(event));
 			// calls handler
@@ -226,7 +226,7 @@ public final class Listeners extends AbstractNode implements IsDefaultListeners 
 		// creates the internal context
 		DataLabelsContext internalContext = new DataLabelsContext(this.parent, context);
 		// checks if the context and handler are consistent
-		if (ScriptableUtils.isContextConsistent(internalContext) && leaveEventHandler != null) {
+		if (ScriptableUtil.isContextConsistent(internalContext) && leaveEventHandler != null) {
 			// creates a chart event context
 			ChartEventContext eventContext = new ChartEventContext(new DataLabelsEnvelop<>(event));
 			// calls handler

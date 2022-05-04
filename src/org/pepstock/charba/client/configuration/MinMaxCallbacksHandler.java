@@ -21,7 +21,7 @@ import org.pepstock.charba.client.callbacks.MinMaxCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -263,7 +263,7 @@ final class MinMaxCallbacksHandler<T> {
 	 */
 	private Object onValue(ScaleContext context, MinMaxCallback<T> callback) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, callback);
+		Object result = ScriptableUtil.getOptionValue(context, callback);
 		// checks if consistent
 		if (result instanceof Number && ScaleDataType.NUMBER.equals(dataType)) {
 			// casts to number

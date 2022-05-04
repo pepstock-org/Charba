@@ -36,7 +36,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCall
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -271,13 +271,13 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// -------------------------------------------------
 		this.displayCallbackProxy.setCallback(this::onDisplay);
 		// sets function to proxy callback in order to invoke the java interface
-		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(createContext(context), getBackgroundColorCallback(), getDefaultValues().getBackgroundColorAsString()));
+		this.backgroundColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(createContext(context), getBackgroundColorCallback(), getDefaultValues().getBackgroundColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.reverseCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getReverseCallback(), getDefaultValues().isReverse()).booleanValue());
+		this.reverseCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getReverseCallback(), getDefaultValues().isReverse()).booleanValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.alignToPixelsCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getAlignToPixelsCallback(), getDefaultValues().isAlignToPixels()).booleanValue());
+		this.alignToPixelsCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getAlignToPixelsCallback(), getDefaultValues().isAlignToPixels()).booleanValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.weightCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getWeightCallback(), getDefaultValues().getWeight()).doubleValue());
+		this.weightCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getWeightCallback(), getDefaultValues().getWeight()).doubleValue());
 	}
 
 	/**

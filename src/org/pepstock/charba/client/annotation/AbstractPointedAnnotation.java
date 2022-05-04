@@ -22,7 +22,7 @@ import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
@@ -164,9 +164,9 @@ abstract class AbstractPointedAnnotation extends AbstractAnnotation implements I
 		// sets function to proxy callback in order to invoke the java interface
 		this.yValueCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getYValueCallback()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.xAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getXAdjustCallback(), defaultValues.getXAdjust()).doubleValue());
+		this.xAdjustCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this, context), getXAdjustCallback(), defaultValues.getXAdjust()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.yAdjustCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getYAdjustCallback(), defaultValues.getYAdjust()).doubleValue());
+		this.yAdjustCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this, context), getYAdjustCallback(), defaultValues.getYAdjust()).doubleValue());
 	}
 
 	/*

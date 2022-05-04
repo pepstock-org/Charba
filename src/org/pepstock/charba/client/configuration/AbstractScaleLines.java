@@ -24,7 +24,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallb
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -105,12 +105,12 @@ abstract class AbstractScaleLines extends AxisContainer {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(getAxis().createContext(context), getColorCallback(), defaultValues.getColorAsString(), false));
+		this.colorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(getAxis().createContext(context), getColorCallback(), defaultValues.getColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.lineWidthCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(getAxis().createContext(context), getLineWidthCallback(), defaultValues.getLineWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+		this.lineWidthCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getLineWidthCallback(), defaultValues.getLineWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashOffsetCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(getAxis().createContext(context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 	}
 
 	/**

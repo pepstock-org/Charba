@@ -25,7 +25,7 @@ import org.pepstock.charba.client.callbacks.OffsetCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -122,15 +122,15 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.offsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getOffsetCallback(), getDefaultElement().getOffset()).intValue());
+		this.offsetCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getOffsetCallback(), getDefaultElement().getOffset()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.hoverOffsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getHoverOffsetCallback(), getDefaultElement().getOffset()).intValue());
+		this.hoverOffsetCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getHoverOffsetCallback(), getDefaultElement().getOffset()).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderRadiusCallbackProxy.setCallback(context -> onBorderRadius(createContext(context), getBorderRadiusCallback(), getDefaultElement().getBorderRadius()));
 		// gets value and calls the callback
-		this.borderAlignCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsString(createContext(context), getBorderAlignCallback(), getDefaultElement().getBorderAlign()).value());
+		this.borderAlignCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsString(createContext(context), getBorderAlignCallback(), getDefaultElement().getBorderAlign()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.angleCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getAngleCallback(), getDefaultElement().getAngle()).doubleValue());
+		this.angleCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getAngleCallback(), getDefaultElement().getAngle()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getBorderJoinStyleCallback(), getDefaultElement().getBorderJoinStyle()));
 		// sets function to proxy callback in order to invoke the java interface

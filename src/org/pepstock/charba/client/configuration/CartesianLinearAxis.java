@@ -20,7 +20,7 @@ import org.pepstock.charba.client.callbacks.GraceCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -301,7 +301,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> impl
 	 */
 	private Object onGrace(ScaleContext context, int defaultValue) {
 		// gets value
-		Number result = ScriptableUtils.getOptionValue(context, getGraceCallback(), defaultValue);
+		Number result = ScriptableUtil.getOptionValue(context, getGraceCallback(), defaultValue);
 		// checks if consistent
 		if (result instanceof Integer) {
 			// returns as integer

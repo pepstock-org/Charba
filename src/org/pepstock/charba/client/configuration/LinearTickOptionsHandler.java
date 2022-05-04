@@ -23,7 +23,7 @@ import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.StepSizeCallback;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -106,13 +106,13 @@ final class LinearTickOptionsHandler extends NumericTickOptionsHandler {
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
 		this.countCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(getAxis().createContext(context), getCountCallback(), getAxis().getDefaultValues().getTicks().getCount(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getCountCallback(), getAxis().getDefaultValues().getTicks().getCount(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		this.maxTicksLimitCallbackProxy.setCallback(
-				context -> ScriptableUtils.getOptionValueAsNumber(getAxis().createContext(context), getMaxTicksLimitCallback(), getAxis().getDefaultValues().getTicks().getMaxTicksLimit(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getMaxTicksLimitCallback(), getAxis().getDefaultValues().getTicks().getMaxTicksLimit(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		this.precisionCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(getAxis().createContext(context), getPrecisionCallback(), getAxis().getDefaultValues().getTicks().getPrecision(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getPrecisionCallback(), getAxis().getDefaultValues().getTicks().getPrecision(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		this.stepSizeCallbackProxy
-				.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(getAxis().createContext(context), getStepSizeCallback(), getAxis().getDefaultValues().getTicks().getStepSize(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getStepSizeCallback(), getAxis().getDefaultValues().getTicks().getStepSize(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 	}
 
 	/**

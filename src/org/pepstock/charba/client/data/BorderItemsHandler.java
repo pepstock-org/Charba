@@ -23,7 +23,7 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -69,7 +69,7 @@ final class BorderItemsHandler extends NativeObjectContainer {
 	 */
 	<T extends AbstractBarBorderItem> NativeObject onBorderItem(DatasetContext context, Scriptable<Object, DatasetContext> borderItemCallback, NativeObjectContainerFactory<T> factory, int defaultValue) {
 		// gets value
-		Object value = ScriptableUtils.getOptionValue(context, borderItemCallback);
+		Object value = ScriptableUtil.getOptionValue(context, borderItemCallback);
 		// checks the type of result
 		if (value instanceof AbstractBarBorderItem) {
 			// casts to object

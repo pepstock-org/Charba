@@ -24,7 +24,7 @@ import org.pepstock.charba.client.callbacks.ScaleWeightCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.StackCallback;
 import org.pepstock.charba.client.callbacks.StackedCallback;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -153,17 +153,17 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		// -- SET CALLBACKS to PROXIES x AXIS PROPERTIES ---
 		// -------------------------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.positionCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getPositionCallback(), getDefaultValues().getPosition()).value());
+		this.positionCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getPositionCallback(), getDefaultValues().getPosition()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.offsetCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getOffsetCallback(), getDefaultValues().isOffset()).booleanValue());
+		this.offsetCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getOffsetCallback(), getDefaultValues().isOffset()).booleanValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.boundsCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getBoundsCallback(), getDefaultValues().getBounds()).value());
+		this.boundsCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getBoundsCallback(), getDefaultValues().getBounds()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.stackedCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getStackedCallback(), getDefaultValues().isStacked()).booleanValue());
+		this.stackedCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getStackedCallback(), getDefaultValues().isStacked()).booleanValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.stackWeightCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(createContext(context), getStackWeightCallback(), getDefaultValues().getStackWeight()).doubleValue());
+		this.stackWeightCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getStackWeightCallback(), getDefaultValues().getStackWeight()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.stackCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getStackCallback(), getDefaultValues().getStack()));
+		this.stackCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getStackCallback(), getDefaultValues().getStack()));
 	}
 
 	/**

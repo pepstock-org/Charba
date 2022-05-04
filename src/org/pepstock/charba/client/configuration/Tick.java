@@ -25,7 +25,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjec
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.ShowLabelBackdropCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -132,18 +132,18 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(getAxis().createContext(context), getFontCallback(), getAxis().getDefaultValues().getTicks().getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsFont(getAxis().createContext(context), getFontCallback(), getAxis().getDefaultValues().getTicks().getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
 		this.colorCallbackProxy.setCallback(context -> onColor(getAxis().createContext(context), getColorCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.textStrokeColorCallbackProxy.setCallback(context -> onColor(getAxis().createContext(context), getTextStrokeColorCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.textStrokeWidthCallbackProxy.setCallback(
-				context -> ScriptableUtils.getOptionValueAsNumber(getAxis().createContext(context), getTextStrokeWidthCallback(), getAxis().getDefaultValues().getTicks().getTextStrokeWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+				context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getTextStrokeWidthCallback(), getAxis().getDefaultValues().getTicks().getTextStrokeWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.backdropColorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(getAxis().createContext(context), getBackdropColorCallback(), getAxis().getDefaultValues().getTicks().getBackdropColorAsString(), false));
+		this.backdropColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(getAxis().createContext(context), getBackdropColorCallback(), getAxis().getDefaultValues().getTicks().getBackdropColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
-		this.showLabelBackdropCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getAxis().createContext(context), getShowLabelBackdropCallback(), getAxis().getDefaultValues().getTicks().isShowLabelBackdrop()));
+		this.showLabelBackdropCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(getAxis().createContext(context), getShowLabelBackdropCallback(), getAxis().getDefaultValues().getTicks().isShowLabelBackdrop()));
 	}
 
 	/**
@@ -627,7 +627,7 @@ abstract class Tick extends AxisContainer implements IsScriptableFontProvider<Sc
 		// gets default color
 		String defaultColor = getAxis().getDefaultValues().getTicks().getColorAsString();
 		// gets value
-		Object result = ScriptableUtils.getOptionValueAsColor(context, callback, defaultColor, false);
+		Object result = ScriptableUtil.getOptionValueAsColor(context, callback, defaultColor, false);
 		// checks if result is a string
 		if (result instanceof String) {
 			// returns result

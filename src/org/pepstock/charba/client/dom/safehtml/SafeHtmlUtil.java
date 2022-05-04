@@ -24,7 +24,7 @@ import org.pepstock.charba.client.utils.RegExp;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class SafeHtmlUtils {
+final class SafeHtmlUtil {
 
 	/**
 	 * Enumerates the set of chars which must be changed inside a string.
@@ -129,7 +129,7 @@ final class SafeHtmlUtils {
 	/**
 	 * To avoid any instantiation
 	 */
-	private SafeHtmlUtils() {
+	private SafeHtmlUtil() {
 		// do nothing
 	}
 

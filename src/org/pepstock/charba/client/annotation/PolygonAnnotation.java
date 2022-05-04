@@ -19,7 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.SidesCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
@@ -211,7 +211,7 @@ public final class PolygonAnnotation extends AbstractCircleBasedAnnotation imple
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.sidesCallbackProxy.setCallback(context -> Math.max(ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this, context), getSidesCallback(), defaultValues.getSides()).intValue(), MINIMUM_SIDES));
+		this.sidesCallbackProxy.setCallback(context -> Math.max(ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this, context), getSidesCallback(), defaultValues.getSides()).intValue(), MINIMUM_SIDES));
 	}
 
 	/*

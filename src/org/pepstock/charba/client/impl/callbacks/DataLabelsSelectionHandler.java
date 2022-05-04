@@ -19,7 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.events.ChartEventContext;
@@ -92,7 +92,7 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	@Override
 	public boolean onClick(DataLabelsContext context, ChartEventContext event) {
 		// gets chart
-		IsChart chart = ScriptableUtils.retrieveChart(context);
+		IsChart chart = ScriptableUtil.retrieveChart(context);
 		// consistency of argument
 		// checks if there is any selection handler and
 		// chart is initialized

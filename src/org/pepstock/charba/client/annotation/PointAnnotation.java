@@ -19,7 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -296,7 +296,7 @@ public final class PointAnnotation extends AbstractCircleBasedAnnotation impleme
 	 */
 	final Object onPointStyle(AnnotationContext context, PointStyleCallback<AnnotationContext> callback, PointStyle defaultValue) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, callback);
+		Object result = ScriptableUtil.getOptionValue(context, callback);
 		// checks result
 		if (result instanceof PointStyle) {
 			// is point style instance

@@ -22,7 +22,7 @@ import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.ArrayCanvas;
 import org.pepstock.charba.client.commons.ArrayImage;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -268,7 +268,7 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 	 */
 	private Object onPointStyle(DatasetContext context) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getPointStyleCallback());
+		Object result = ScriptableUtil.getOptionValue(context, getPointStyleCallback());
 		// checks result
 		if (result instanceof PointStyle) {
 			// is point style instance

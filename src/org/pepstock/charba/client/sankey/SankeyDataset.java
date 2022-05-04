@@ -28,7 +28,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallb
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
@@ -229,7 +229,7 @@ public final class SankeyDataset extends Dataset {
 		// sets function to proxy callback in order to invoke the java interface
 		this.paddingCallbackProxy.setCallback(context -> onPadding(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(createContext(context), getFontCallback(), getDefaultValues().getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsFont(createContext(context), getFontCallback(), getDefaultValues().getFont()).nativeObject());
 	}
 
 	/**
@@ -1004,7 +1004,7 @@ public final class SankeyDataset extends Dataset {
 			Object result = callback.invoke(context);
 			// only colors are accepted
 			if (result instanceof String || result instanceof IsColor) {
-				return ScriptableUtils.handleCallbackResultAsColor(context, result, defaultValue, false);
+				return ScriptableUtil.handleCallbackResultAsColor(context, result, defaultValue, false);
 			}
 		}
 		// if here, chart, callback or result of callback are not consistent
@@ -1019,7 +1019,7 @@ public final class SankeyDataset extends Dataset {
 	 */
 	private String onColorMode(DatasetContext context) {
 		// gets value
-		ColorMode result = ScriptableUtils.getOptionValue(context, getColorModeCallback());
+		ColorMode result = ScriptableUtil.getOptionValue(context, getColorModeCallback());
 		// checks result
 		if (result != null) {
 			return result.value();
@@ -1036,7 +1036,7 @@ public final class SankeyDataset extends Dataset {
 	 */
 	private String onSize(DatasetContext context) {
 		// gets value
-		Size result = ScriptableUtils.getOptionValue(context, getSizeCallback());
+		Size result = ScriptableUtil.getOptionValue(context, getSizeCallback());
 		// checks result
 		if (result != null) {
 			return result.value();
@@ -1053,7 +1053,7 @@ public final class SankeyDataset extends Dataset {
 	 */
 	private double onPadding(DatasetContext context) {
 		// gets value
-		Double result = ScriptableUtils.getOptionValue(context, getPaddingCallback());
+		Double result = ScriptableUtil.getOptionValue(context, getPaddingCallback());
 		// checks result
 		if (result != null) {
 			return result.doubleValue();

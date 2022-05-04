@@ -31,7 +31,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCall
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.TextCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
@@ -150,21 +150,21 @@ abstract class AbstractTitle extends ConfigurationOptionsContainer implements Is
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.displayCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getDisplayCallback(), getOptions().getDefaultValues().getTitle().isDisplay()));
+		this.displayCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(getOptions().createContext(context), getDisplayCallback(), getOptions().getDefaultValues().getTitle().isDisplay()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.paddingCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsPadding(getOptions().createContext(context), getPaddingCallback(), getOptions().getDefaultValues().getTitle().getPadding()).nativeObject());
+		this.paddingCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsPadding(getOptions().createContext(context), getPaddingCallback(), getOptions().getDefaultValues().getTitle().getPadding()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsFont(getOptions().createContext(context), getFontCallback(), getOptions().getDefaultValues().getTitle().getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsFont(getOptions().createContext(context), getFontCallback(), getOptions().getDefaultValues().getTitle().getFont()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsColor(getOptions().createContext(context), getColorCallback(), getOptions().getDefaultValues().getTitle().getColorAsString()));
+		this.colorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(getOptions().createContext(context), getColorCallback(), getOptions().getDefaultValues().getTitle().getColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.textCallbackProxy.setCallback(context -> onText(getOptions().createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
-		this.positionCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getPositionCallback(), getOptions().getDefaultValues().getTitle().getPosition()).value());
+		this.positionCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(getOptions().createContext(context), getPositionCallback(), getOptions().getDefaultValues().getTitle().getPosition()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.alignCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getAlignCallback(), getOptions().getDefaultValues().getTitle().getAlign()).value());
+		this.alignCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(getOptions().createContext(context), getAlignCallback(), getOptions().getDefaultValues().getTitle().getAlign()).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.fullSizeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(getOptions().createContext(context), getFullSizeCallback(), getOptions().getDefaultValues().getTitle().isFullSize()));
+		this.fullSizeCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(getOptions().createContext(context), getFullSizeCallback(), getOptions().getDefaultValues().getTitle().isFullSize()));
 	}
 
 	/**
@@ -647,7 +647,7 @@ abstract class AbstractTitle extends ConfigurationOptionsContainer implements Is
 	 */
 	private Object onText(ChartContext context) {
 		// gets value
-		Object result = ScriptableUtils.getOptionValue(context, getTextCallback());
+		Object result = ScriptableUtil.getOptionValue(context, getTextCallback());
 		// checks if consistent
 		if (result instanceof String) {
 			// returns the string

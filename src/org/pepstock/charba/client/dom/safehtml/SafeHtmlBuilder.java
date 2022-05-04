@@ -78,7 +78,7 @@ public final class SafeHtmlBuilder {
 	 * @return the safe html builder instance
 	 */
 	public SafeHtmlBuilder append(char value) {
-		builder.append(SafeHtmlUtils.htmlEscape(value));
+		builder.append(SafeHtmlUtil.htmlEscape(value));
 		return this;
 	}
 
@@ -122,7 +122,7 @@ public final class SafeHtmlBuilder {
 	 * @return the safe html builder instance
 	 */
 	public SafeHtmlBuilder appendEscaped(String value) {
-		builder.append(SafeHtmlUtils.htmlEscape(value));
+		builder.append(SafeHtmlUtil.htmlEscape(value));
 		return this;
 	}
 
@@ -133,7 +133,7 @@ public final class SafeHtmlBuilder {
 	 * @return the safe html builder instance
 	 */
 	public SafeHtmlBuilder appendEscapedLines(String value) {
-		builder.append(SafeHtmlUtils.htmlEscape(value).replace(Constants.LINE_SEPARATOR, Constants.LT + LineBreak.TAG + Constants.GT));
+		builder.append(SafeHtmlUtil.htmlEscape(value).replace(Constants.LINE_SEPARATOR, Constants.LT + LineBreak.TAG + Constants.GT));
 		return this;
 	}
 

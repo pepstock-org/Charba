@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.callbacks.CategoryTickCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -87,7 +87,7 @@ final class CategoryTickHandler extends AbstractTickHandler<CartesianCategoryTic
 				// then calls user callback
 				Object result = getCallback().onCallback(getAxis(), current, index, ArrayListHelper.unmodifiableList(values));
 				// parses and returns the result
-				return ScriptableUtils.parseCallbackResult(result, current);
+				return ScriptableUtil.parseCallbackResult(result, current);
 			}
 			// default tick is the tick value
 			return current;

@@ -20,7 +20,7 @@ import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -116,8 +116,8 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		this.modeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getModeCallback(), getDefaultsOptions().getMode()).value());
-		this.overScaleModeCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(createContext(context), getOverScaleModeCallback(), getDefaultsOptions().getOverScaleMode()).value());
+		this.modeCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getModeCallback(), getDefaultsOptions().getMode()).value());
+		this.overScaleModeCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getOverScaleModeCallback(), getDefaultsOptions().getOverScaleMode()).value());
 		this.progressCallbackProxy.setCallback(context -> onProgress(createContext(context)));
 		this.completeCallbackProxy.setCallback(context -> onCompleted(createContext(context)));
 		this.rejectCallbackProxy.setCallback(context -> onRejected(createContext(context)));

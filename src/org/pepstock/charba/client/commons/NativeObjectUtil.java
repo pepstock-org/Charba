@@ -32,12 +32,12 @@ import org.pepstock.charba.client.dom.elements.Img;
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class NativeObjectUtils {
+final class NativeObjectUtil {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private NativeObjectUtils() {
+	private NativeObjectUtil() {
 		// do nothing
 	}
 
@@ -61,7 +61,7 @@ final class NativeObjectUtils {
 	 * @return list of strings that represent all the enumerable properties of the given object.
 	 */
 	static List<String> propertiesKeys(NativeObject object) {
-		return ArrayListHelper.unmodifiableList(NativeUtils.keys(object));
+		return ArrayListHelper.unmodifiableList(NativeUtil.keys(object));
 	}
 
 	/**

@@ -26,7 +26,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCall
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -189,15 +189,15 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.displayCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getDisplayCallback(), this.defaultValues.isDisplay()));
+		this.displayCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(new AnnotationContext(this.parent, context), getDisplayCallback(), this.defaultValues.isDisplay()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.marginCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getMarginCallback(), this.defaultValues.getMargin(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+		this.marginCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getMarginCallback(), this.defaultValues.getMargin(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.sideCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getSideCallback(), this.defaultValues.getSide(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+		this.sideCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getSideCallback(), this.defaultValues.getSide(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.startCallbackProxy.setCallback(context -> onStart(new AnnotationContext(this.parent, context), this.defaultValues.getStart()));
 		// sets function to proxy callback in order to invoke the java interface
-		this.positionCallbackProxy.setCallback(context -> ScriptableUtils.getOptionValue(new AnnotationContext(this.parent, context), getPositionCallback(), this.defaultValues.getPosition()).value());
+		this.positionCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(new AnnotationContext(this.parent, context), getPositionCallback(), this.defaultValues.getPosition()).value());
 	}
 
 	/*
@@ -524,7 +524,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 	 */
 	private Object onStart(AnnotationContext context, double defaultValue) {
 		// gets value
-		Number result = ScriptableUtils.getOptionValue(context, getStartCallback(), defaultValue);
+		Number result = ScriptableUtil.getOptionValue(context, getStartCallback(), defaultValue);
 		// checks if consistent
 		if (result instanceof Integer) {
 			// returns as integer

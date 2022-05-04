@@ -18,7 +18,7 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
@@ -209,7 +209,7 @@ final class BorderRadiusHandler extends PropertyHandler<IsDefaultsBorderRadiusHa
 	NativeObject onBorderRadius(AnnotationContext context, BorderRadiusCallback<AnnotationContext> callback, int defaultValue) {
 		int valueToReturn = defaultValue;
 		// gets value
-		Object value = ScriptableUtils.getOptionValue(context, callback);
+		Object value = ScriptableUtil.getOptionValue(context, callback);
 		// checks if is an object
 		if (value instanceof BarBorderRadius) {
 			// casts to border radius object
