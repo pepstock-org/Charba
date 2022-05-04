@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
@@ -370,7 +371,7 @@ public final class Defaults {
 	 */
 	public List<String> invokeTooltipsCallbackOnTitle(IsChart chart, List<TooltipItem> items) {
 		// checks if arguments are consistent
-		if (IsChart.isConsistent(chart) && !items.isEmpty()) {
+		if (IsChart.isConsistent(chart) && ArrayListHelper.isConsistent(items)) {
 			// gets the first tooltip item
 			TooltipItem item = items.get(0);
 			// if the tooltip item has got the label

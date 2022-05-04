@@ -459,7 +459,7 @@ public final class GeoUtils {
 		// creates labels object
 		Labels labels = Labels.build();
 		// checks if list of feature is consistent
-		if (features != null && !features.isEmpty()) {
+		if (ArrayListHelper.isConsistent(features)) {
 			// scans all features
 			for (Feature feature : features) {
 				String result;

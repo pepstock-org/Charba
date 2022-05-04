@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.utils.RegExp;
 import org.pepstock.charba.client.utils.RegExpResult;
@@ -65,7 +66,7 @@ final class BaseLocationUtils {
 			// retrieves the parameter by name
 			List<String> parametersList = QUERY_STRING_PARAMETERS_MAP.get(name);
 			// checks if list is consistent
-			if (parametersList != null && !parametersList.isEmpty()) {
+			if (ArrayListHelper.isConsistent(parametersList)) {
 				// returns the last parameter set if more then one
 				return parametersList.get(parametersList.size() - 1);
 			}

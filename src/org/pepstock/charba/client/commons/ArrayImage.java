@@ -89,7 +89,7 @@ public final class ArrayImage extends Array {
 	@JsOverlay
 	public static ArrayImage fromOrNull(List<Img> items) {
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return null;
 		}
 		// checks if is already a list with array
@@ -128,7 +128,7 @@ public final class ArrayImage extends Array {
 		// creates the array
 		ArrayImage result = new ArrayImage();
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return result;
 		}
 		// scans all items of list

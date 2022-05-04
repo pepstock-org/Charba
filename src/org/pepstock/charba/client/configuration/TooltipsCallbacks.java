@@ -480,7 +480,7 @@ public class TooltipsCallbacks extends ConfigurationOptionsContainer {
 			// invokes callback
 			List<String> result = callback.onLabel(getChart(), tooltipItem);
 			// checks if the result si consistent
-			if (result != null && !result.isEmpty()) {
+			if (ArrayListHelper.isConsistent(result)) {
 				return ArrayString.fromOrEmpty(result);
 			}
 		}

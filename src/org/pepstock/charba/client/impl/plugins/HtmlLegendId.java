@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.items.LegendItem;
@@ -211,7 +212,7 @@ final class HtmlLegendId {
 	LegendItem lookForLegendItem(List<LegendLabelItem> legendItems) {
 		// checks if argument is consistent and
 		// then can be scanned
-		if (legendItems != null && !legendItems.isEmpty()) {
+		if (ArrayListHelper.isConsistent(legendItems)) {
 			// scans all legend items
 			for (LegendLabelItem item : legendItems) {
 				// transform the undefined values, set as minimum integer

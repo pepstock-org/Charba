@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.Helpers;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -276,7 +277,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 	 */
 	public void setUnitsOfMeasure(List<MeasureUnit> units) {
 		// checks if argument is consistent
-		if (units != null && !units.isEmpty()) {
+		if (ArrayListHelper.isConsistent(units)) {
 			// creates the string to parse
 			setValue(Property.UNIT, createCompoundUnitIdentifier(units.toArray(new MeasureUnit[0])));
 		} else {

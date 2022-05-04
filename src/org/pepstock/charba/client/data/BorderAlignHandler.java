@@ -118,7 +118,7 @@ final class BorderAlignHandler extends NativeObjectContainer {
 	 */
 	void setBorderAlign(List<BorderAlign> align) {
 		// checks if list is consistent
-		if (align != null && !align.isEmpty()) {
+		if (ArrayListHelper.isConsistent(align)) {
 			// invokes the other methods with the array
 			setBorderAlign(align.toArray(new BorderAlign[0]));
 		} else {

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.utils.toast;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -330,7 +331,7 @@ public final class ToastOptions extends AbstractToastOptions {
 		// sets array to store as empty
 		ActionItem[] array = new ActionItem[0];
 		// checks consistent of actions
-		if (actions != null && !actions.isEmpty()) {
+		if (ArrayListHelper.isConsistent(actions)) {
 			// stores to array
 			array = actions.toArray(new ActionItem[0]);
 		}

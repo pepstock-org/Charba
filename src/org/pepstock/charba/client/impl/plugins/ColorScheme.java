@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -43,7 +44,7 @@ public interface ColorScheme extends Key {
 	 * @return <code>true</code> if color scheme passed as argument is not <code>null</code> and its properties are not <code>null</code>
 	 */
 	static boolean isValid(ColorScheme scheme) {
-		return Key.isValid(scheme) && scheme.category() != null && scheme.category().trim().length() > 0 && scheme.getColors() != null && !scheme.getColors().isEmpty();
+		return Key.isValid(scheme) && scheme.category() != null && scheme.category().trim().length() > 0 && ArrayListHelper.isConsistent(scheme.getColors());
 	}
 
 	/**

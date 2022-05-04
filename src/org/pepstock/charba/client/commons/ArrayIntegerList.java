@@ -106,7 +106,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	@Override
 	public boolean addAll(Collection<? extends Integer> collection) {
 		// set modified
-		boolean modified = collection != null && !collection.isEmpty();
+		boolean modified = ArrayListHelper.isConsistent(collection);
 		// checks if argument is consistent
 		if (modified) {
 			Iterator<? extends Integer> iter = collection.iterator();
@@ -127,7 +127,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	@Override
 	public boolean retainAll(Collection<?> collection) {
 		// set modified
-		boolean modified = collection != null && !collection.isEmpty();
+		boolean modified = ArrayListHelper.isConsistent(collection);
 		// checks if argument is consistent
 		if (modified) {
 			// creates a copy of elements

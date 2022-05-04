@@ -89,7 +89,7 @@ public final class ArrayCanvas extends Array {
 	@JsOverlay
 	public static ArrayCanvas fromOrNull(List<Canvas> items) {
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return null;
 		}
 		// checks if is already a list with array
@@ -128,7 +128,7 @@ public final class ArrayCanvas extends Array {
 		// creates the array
 		ArrayCanvas result = new ArrayCanvas();
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return result;
 		}
 		// scans all items of list

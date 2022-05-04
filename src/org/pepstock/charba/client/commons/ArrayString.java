@@ -113,7 +113,7 @@ public final class ArrayString extends Array {
 	@JsOverlay
 	public static ArrayString fromOrNull(List<String> items) {
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return null;
 		}
 		// checks if is already a list with array
@@ -151,7 +151,7 @@ public final class ArrayString extends Array {
 		// creates the array
 		ArrayString result = new ArrayString();
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return result;
 		}
 		for (String value : items) {
@@ -298,7 +298,7 @@ public final class ArrayString extends Array {
 	@JsOverlay
 	public static <T extends Key> ArrayString fromOrNull(Set<T> items) {
 		// checks if array is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return null;
 		}
 		// checks if is already a set with array
@@ -341,7 +341,7 @@ public final class ArrayString extends Array {
 		// creates the array
 		ArrayString result = new ArrayString();
 		// checks if array is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return result;
 		}
 		// scans items

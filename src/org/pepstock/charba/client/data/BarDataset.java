@@ -633,7 +633,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 */
 	public void setBorderSkipped(List<BorderSkipped> borderskips) {
 		// checks if list is consistent
-		if (borderskips != null && !borderskips.isEmpty()) {
+		if (ArrayListHelper.isConsistent(borderskips)) {
 			// invokes the other methods with the array
 			setBorderSkipped(borderskips.toArray(new BorderSkipped[0]));
 		}

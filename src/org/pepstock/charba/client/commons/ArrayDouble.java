@@ -87,7 +87,7 @@ public final class ArrayDouble extends Array {
 	@JsOverlay
 	public static ArrayDouble fromOrNull(List<Double> items) {
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return null;
 		}
 		// checks if is already a list with array
@@ -126,7 +126,7 @@ public final class ArrayDouble extends Array {
 		// creates the list
 		ArrayDouble result = new ArrayDouble();
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return result;
 		}
 		// scans all items of list

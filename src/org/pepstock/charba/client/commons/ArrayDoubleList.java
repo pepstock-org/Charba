@@ -102,7 +102,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	@Override
 	public boolean addAll(Collection<? extends Double> collection) {
 		// set modified
-		boolean modified = collection != null && !collection.isEmpty();
+		boolean modified = ArrayListHelper.isConsistent(collection);
 		// checks if argument is consistent
 		if (modified) {
 			Iterator<? extends Double> iter = collection.iterator();
@@ -123,7 +123,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	@Override
 	public boolean retainAll(Collection<?> collection) {
 		// set modified checking if collection is empty
-		boolean modified = collection != null && !collection.isEmpty();
+		boolean modified = ArrayListHelper.isConsistent(collection);
 		// checks if argument is consistent
 		if (modified) {
 			// creates a copy of elements

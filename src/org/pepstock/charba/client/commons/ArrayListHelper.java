@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.commons;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -330,7 +331,7 @@ public final class ArrayListHelper {
 	 * @param list list to check
 	 * @return <code>true</code> if the list is consistent
 	 */
-	public static boolean isConsistent(List<?> list) {
+	public static boolean isConsistent(Collection<?> list) {
 		return list != null && !list.isEmpty();
 	}
 }

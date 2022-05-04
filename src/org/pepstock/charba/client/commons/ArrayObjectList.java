@@ -122,7 +122,7 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	@Override
 	public boolean retainAll(Collection<?> collection) {
 		// set modified checking if collection is empty
-		boolean modified = collection != null && !collection.isEmpty();
+		boolean modified = ArrayListHelper.isConsistent(collection);
 		// checks if argument is consistent
 		if (modified) {
 			// creates a copy of elements

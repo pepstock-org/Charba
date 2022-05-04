@@ -141,7 +141,7 @@ final class BorderItemsHandler extends NativeObjectContainer {
 	 */
 	<T extends AbstractBarBorderItem> void setBorderItem(Key property, Key propertyType, List<T> list, T[] array) {
 		// checks if list is consistent
-		if (list != null && !list.isEmpty()) {
+		if (ArrayListHelper.isConsistent(list)) {
 			setBorderItem(property, propertyType, list.toArray(array));
 		} else {
 			// removes key

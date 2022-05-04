@@ -89,7 +89,7 @@ public final class ArrayGradient extends Array {
 	@JsOverlay
 	public static ArrayGradient fromOrNull(List<CanvasGradientItem> items) {
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return null;
 		}
 		// creates the array
@@ -114,7 +114,7 @@ public final class ArrayGradient extends Array {
 		// creates the array
 		ArrayGradient result = new ArrayGradient();
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return result;
 		}
 		// scans all items of list

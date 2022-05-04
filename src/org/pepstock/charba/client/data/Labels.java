@@ -23,6 +23,7 @@ import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.ObjectType;
 
@@ -100,7 +101,7 @@ public final class Labels {
 	 */
 	public void load(List<String> values) {
 		// checks if is a valid array
-		if (values != null && !values.isEmpty()) {
+		if (ArrayListHelper.isConsistent(values)) {
 			// scans values
 			for (String value : values) {
 				// checks is not null
@@ -183,7 +184,7 @@ public final class Labels {
 	 */
 	public int indexOf(String... values) {
 		// checks arguments
-		if (values != null && values.length > 0 && !isEmpty()) {
+		if (ArrayUtil.isNotEmpty(values) && !isEmpty()) {
 			// creates an array
 			ArrayString internalArray = ArrayString.fromOrEmpty(values);
 			// gets instance to search

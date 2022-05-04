@@ -109,10 +109,8 @@ public final class Gradient extends CanvasObject {
 		Checker.checkIfValid(orientation, "Gradient orientation argument");
 		// checks if scope is consistent
 		Checker.checkIfValid(scope, "Gradient scope argument");
-		// checks if colors instance is consistent
-		Checker.checkIfValid(colors, "Gradient colors argument");
 		// checks if colors are consistent
-		Checker.assertCheck(!colors.isEmpty(), "Gradient colors list is empty");
+		Checker.assertCheck(ArrayListHelper.isConsistent(colors), "Gradient colors list is not consistent");
 		// creates new color list
 		this.colors = new ArrayObjectContainerList<>();
 		// stores the colors passed as argument

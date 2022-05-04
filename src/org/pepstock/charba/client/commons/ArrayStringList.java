@@ -102,7 +102,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	@Override
 	public boolean addAll(Collection<? extends String> collection) {
 		// set modified
-		boolean modified = collection != null && !collection.isEmpty();
+		boolean modified = ArrayListHelper.isConsistent(collection);
 		// checks if argument is consistent
 		if (modified) {
 			Iterator<? extends String> iter = collection.iterator();

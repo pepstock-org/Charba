@@ -106,7 +106,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 	@Override
 	public boolean addAll(Collection<? extends Img> collection) {
 		// set modified
-		boolean modified = collection != null && !collection.isEmpty();
+		boolean modified = ArrayListHelper.isConsistent(collection);
 		// checks if argument is consistent
 		if (modified) {
 			Iterator<? extends Img> iter = collection.iterator();
@@ -127,7 +127,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 	@Override
 	public boolean retainAll(Collection<?> collection) {
 		// set modified
-		boolean modified = collection != null && !collection.isEmpty();
+		boolean modified = ArrayListHelper.isConsistent(collection);
 		// checks if argument is consistent
 		if (modified) {
 			// creates a copy of elements

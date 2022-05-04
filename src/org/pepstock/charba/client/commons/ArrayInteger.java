@@ -87,7 +87,7 @@ public final class ArrayInteger extends Array {
 	@JsOverlay
 	public static ArrayInteger fromOrNull(List<Integer> items) {
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return null;
 		}
 		// checks if is already a list with array
@@ -126,7 +126,7 @@ public final class ArrayInteger extends Array {
 		// creates the array
 		ArrayInteger result = new ArrayInteger();
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return result;
 		}
 		// scans all items of list

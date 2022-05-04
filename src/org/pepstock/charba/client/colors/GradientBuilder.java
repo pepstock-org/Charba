@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Id;
@@ -228,7 +229,7 @@ public final class GradientBuilder {
 	 */
 	public GradientBuilder setColors(List<IsColor> colors) {
 		// checks if argument is consistent
-		if (colors != null && !colors.isEmpty()) {
+		if (ArrayListHelper.isConsistent(colors)) {
 			// invokes the set colors by array
 			return setColors(colors.toArray(new IsColor[0]));
 		}

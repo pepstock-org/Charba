@@ -25,6 +25,7 @@ import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.callbacks.TooltipLabelCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.HoverDataset;
@@ -122,7 +123,7 @@ final class ColorSchemesPlugin extends CharbaPlugin<ColorSchemesOptions> {
 				// gets the list of colors
 				List<IsColor> colors = scheme.getColors();
 				// checks if the list colors is consistent, if not skips the logic
-				if (colors != null && !colors.isEmpty()) {
+				if (ArrayListHelper.isConsistent(colors)) {
 					scanDatasets(chart, options, colors);
 				}
 			}

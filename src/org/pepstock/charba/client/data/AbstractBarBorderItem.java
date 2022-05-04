@@ -18,6 +18,7 @@ package org.pepstock.charba.client.data;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -73,7 +74,7 @@ abstract class AbstractBarBorderItem extends NativeObjectContainer {
 		// gets the keys managed object
 		List<Key> keys = getKeys();
 		// checks if keys are consistent
-		if (keys != null && !keys.isEmpty()) {
+		if (ArrayListHelper.isConsistent(keys)) {
 			// creates value reference to check
 			int preValue = Integer.MIN_VALUE;
 			// scans the keys
@@ -107,7 +108,7 @@ abstract class AbstractBarBorderItem extends NativeObjectContainer {
 		// gets the keys managed object
 		List<Key> keys = getKeys();
 		// checks if keys are consistent
-		if (keys != null && !keys.isEmpty()) {
+		if (ArrayListHelper.isConsistent(keys)) {
 			// gets the count of items
 			final int count = keys.size();
 			// creates the sum reference

@@ -106,7 +106,7 @@ public final class ArrayCanvasList extends AbstractArrayList<Canvas, ArrayCanvas
 	@Override
 	public boolean addAll(Collection<? extends Canvas> collection) {
 		// set modified
-		boolean modified = collection != null && !collection.isEmpty();
+		boolean modified = ArrayListHelper.isConsistent(collection);
 		// checks if argument is consistent
 		if (modified) {
 			Iterator<? extends Canvas> iter = collection.iterator();
@@ -127,7 +127,7 @@ public final class ArrayCanvasList extends AbstractArrayList<Canvas, ArrayCanvas
 	@Override
 	public boolean retainAll(Collection<?> collection) {
 		// set modified
-		boolean modified = collection != null && !collection.isEmpty();
+		boolean modified = ArrayListHelper.isConsistent(collection);
 		// checks if argument is consistent
 		if (modified) {
 			// creates a copy of elements

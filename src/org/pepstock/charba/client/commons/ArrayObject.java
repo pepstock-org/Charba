@@ -189,7 +189,7 @@ public final class ArrayObject extends Array {
 	@JsOverlay
 	public static <E extends NativeObjectContainer> ArrayObject fromOrNull(List<E> items) {
 		// checks if array is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return null;
 		}
 		// checks if is already a list with array
@@ -232,7 +232,7 @@ public final class ArrayObject extends Array {
 		// creates the array
 		ArrayObject result = new ArrayObject();
 		// checks if array is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return result;
 		}
 		// scans elements

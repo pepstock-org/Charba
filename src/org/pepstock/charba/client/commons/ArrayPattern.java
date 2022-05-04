@@ -89,7 +89,7 @@ public final class ArrayPattern extends Array {
 	@JsOverlay
 	public static ArrayPattern fromOrNull(List<CanvasPatternItem> items) {
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return null;
 		}
 		// creates the array
@@ -114,7 +114,7 @@ public final class ArrayPattern extends Array {
 		// creates the array
 		ArrayPattern result = new ArrayPattern();
 		// checks if list is null
-		if (items == null || items.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(items)) {
 			return result;
 		}
 		// scans all items of list
