@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import java.util.Set;
-
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
 
@@ -27,7 +24,7 @@ import org.pepstock.charba.client.intl.CLocale;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultOptions extends IsDefaultAnimationContainer {
+public interface IsDefaultOptions extends IsDefaultAnimationContainer, IsDefaultEventHandler {
 
 	/**
 	 * Returns the hover defaults.
@@ -119,13 +116,6 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer {
 	 * @return the font
 	 */
 	IsDefaultFont getFont();
-
-	/**
-	 * Returns the browser events that the chart should listen to.
-	 * 
-	 * @return the browser events that the chart should listen to.
-	 */
-	Set<Event> getEvents();
 
 	/**
 	 * Returns the locale instance for internationalization.

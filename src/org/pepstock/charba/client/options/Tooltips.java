@@ -15,12 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.Set;
-
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.ArraySetHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.commons.Key;
@@ -28,7 +24,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -42,7 +37,7 @@ import org.pepstock.charba.client.positioner.Positioner;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection, HasBox, HasAnimationOptions {
+public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultTooltips> implements IsDefaultTooltips, HasTextDirection, HasBox, HasAnimationOptions, HasEvents {
 
 	/**
 	 * Name of properties of native object.
@@ -64,7 +59,6 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		CORNER_RADIUS("cornerRadius"),
 		DISPLAY_COLORS("displayColors"),
 		ENABLED("enabled"),
-		EVENTS("events"),
 		FOOTER_ALIGN("footerAlign"),
 		FOOTER_COLOR("footerColor"),
 		FOOTER_FONT("footerFont"),
@@ -122,6 +116,8 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	private final BoxHandler boxHandler;
 	// animation container
 	private final AnimationContainer animationContainer;
+	// events handler
+	private final EventsOptionHandler eventsHandler;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -146,6 +142,8 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 		this.boxHandler = new BoxHandler(this, getDefaultValues(), getNativeObject());
 		// sets animation container
 		this.animationContainer = new AnimationContainer(options, childKey, getDefaultValues(), getNativeObject(), HasCallbackScope.extractScope(options));
+		// creates events handler
+		this.eventsHandler = new EventsOptionHandler(this, getDefaultValues(), getNativeObject());
 	}
 
 	/*
@@ -156,6 +154,16 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	@Override
 	public BoxHandler getBoxHandler() {
 		return boxHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasEvents#getEventsOptionHandler()
+	 */
+	@Override
+	public EventsOptionHandler getEventsOptionHandler() {
+		return eventsHandler;
 	}
 
 	/*
@@ -234,43 +242,6 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	@Override
 	public boolean isEnabled() {
 		return getValue(Property.ENABLED, getDefaultValues().isEnabled());
-	}
-
-	/**
-	 * Sets the browser events that the tooltip should listen to.
-	 * 
-	 * @param events the browser events that the tooltip should listen to.
-	 */
-	public void setEvents(Event... events) {
-		// gets the array to set
-		ArrayString value = events != null ? ArrayString.fromOrEmpty(true, events) : ArrayString.fromOrNull(true, events);
-		// stores value
-		setArrayValue(Property.EVENTS, value);
-	}
-
-	/**
-	 * Sets the browser events that the legend should listen to.
-	 * 
-	 * @param events the browser events that the legend should listen to.
-	 */
-	public void setEvents(Set<Event> events) {
-		// gets the array to set
-		ArrayString value = events != null ? ArrayString.fromOrEmpty(events) : ArrayString.fromOrNull(events);
-		// stores value
-		setArrayValue(Property.EVENTS, value);
-	}
-
-	/**
-	 * Returns the browser events that the tooltip should listen to.
-	 * 
-	 * @return the browser events that the tooltip should listen to.
-	 */
-	@Override
-	public Set<Event> getEvents() {
-		// retrieves the array
-		ArrayString array = getArrayValue(Property.EVENTS);
-		// if the array is not consistent returns the default
-		return array != null ? ArraySetHelper.set(array, Event.FACTORY) : getDefaultValues().getEvents();
 	}
 
 	/**

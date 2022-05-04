@@ -15,12 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.Set;
-
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.ArraySetHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.commons.Id;
@@ -29,7 +25,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.DefaultPluginId;
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.intl.CLocaleBuilder;
@@ -40,7 +35,7 @@ import org.pepstock.charba.client.items.Undefined;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions, HasSpanGaps, HasAnimationOptions, HasCallbackScope {
+public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions, HasSpanGaps, HasAnimationOptions, HasCallbackScope, HasEvents {
 
 	/**
 	 * Name of properties of native object.<br>
@@ -100,7 +95,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		RESIZE_DELAY("resizeDelay"),
 		ASPECT_RATIO("aspectRatio"),
 		DEVICE_PIXEL_RATIO("devicePixelRatio"),
-		EVENTS("events"),
 		// specific for chart type
 		SHOW_LINE("showLine"),
 		SKIP_NULL("skipNull"),
@@ -170,6 +164,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	private final SpanGapHandler spanGapHandler;
 	// animation container
 	private final AnimationContainer animationContainer;
+	// events handler
+	private final EventsOptionHandler eventsHandler;
 
 	/**
 	 * Creates the object only with default provider. This is used as the root element.<br>
@@ -205,6 +201,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		this.spanGapHandler = new SpanGapHandler(this, getDefaultValues(), getNativeObject());
 		// sets animation container
 		this.animationContainer = new AnimationContainer(this, getDefaultValues(), getNativeObject(), this.scope);
+		// creates events handler
+		this.eventsHandler = new EventsOptionHandler(this, getDefaultValues(), getNativeObject());
 		// the defaults of plugins provided by CHART.JS (legend, title and tooltip)
 		// set own default options in the defaults.plugin and not longer to the default node.
 		// then it reads the default plugins and copies (reference of object)
@@ -237,6 +235,16 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	@Override
 	public final SpanGapHandler getSpanGapHandler() {
 		return spanGapHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasEvents#getEventsOptionHandler()
+	 */
+	@Override
+	public final EventsOptionHandler getEventsOptionHandler() {
+		return eventsHandler;
 	}
 
 	/**
@@ -396,43 +404,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public String getCharbaId() {
 		return Id.get(this);
-	}
-
-	/**
-	 * Sets the browser events that the chart should listen to.
-	 * 
-	 * @param events the browser events that the chart should listen to.
-	 */
-	public void setEvents(Event... events) {
-		// gets the array to set
-		ArrayString value = events != null ? ArrayString.fromOrEmpty(true, events) : ArrayString.fromOrNull(true, events);
-		// stores value
-		setArrayValue(Property.EVENTS, value);
-	}
-
-	/**
-	 * Sets the browser events that the legend should listen to.
-	 * 
-	 * @param events the browser events that the legend should listen to.
-	 */
-	public void setEvents(Set<Event> events) {
-		// gets the array to set
-		ArrayString value = events != null ? ArrayString.fromOrEmpty(events) : ArrayString.fromOrNull(events);
-		// stores value
-		setArrayValue(Property.EVENTS, value);
-	}
-
-	/**
-	 * Returns the browser events that the chart should listen to.
-	 * 
-	 * @return the browser events that the chart should listen to.
-	 */
-	@Override
-	public Set<Event> getEvents() {
-		// retrieves the array
-		ArrayString array = getArrayValue(Property.EVENTS);
-		// if the array is not consistent returns the default
-		return array != null ? ArraySetHelper.set(array, Event.FACTORY) : getDefaultValues().getEvents();
 	}
 
 	/**

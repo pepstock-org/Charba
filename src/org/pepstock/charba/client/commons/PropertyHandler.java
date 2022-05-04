@@ -45,9 +45,9 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 	/**
 	 * Creates a native object where one or more properties must be managed, cross classes and package.
 	 * 
-	 * @param nativeObject native object where properties must be managed
 	 * @param parent parent which contains this property handler.
 	 * @param defaultValues default value of point style to use when the properties do not exist
+	 * @param nativeObject native object where properties must be managed
 	 */
 	protected PropertyHandler(AbstractNode parent, D defaultValues, NativeObject nativeObject) {
 		super(nativeObject);

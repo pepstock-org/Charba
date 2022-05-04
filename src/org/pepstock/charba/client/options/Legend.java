@@ -15,15 +15,10 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.Set;
-
-import org.pepstock.charba.client.commons.ArraySetHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
-import org.pepstock.charba.client.enums.Event;
 
 /**
  * The chart legend displays data about the datasets that area appearing on the chart.
@@ -31,13 +26,15 @@ import org.pepstock.charba.client.enums.Event;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> implements IsDefaultLegend, HasTextDirection {
+public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> implements IsDefaultLegend, HasTextDirection, HasEvents {
 
 	private final LegendLabels labels;
 
 	private final LegendTitle title;
 
 	private final TextDirectionHandler textDirectionHandler;
+	// events handler
+	private final EventsOptionHandler eventsHandler;
 
 	/**
 	 * Name of properties of native object.
@@ -47,7 +44,6 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 		LABELS("labels"),
 		TITLE("title"),
 		// simple properties
-		EVENTS("events"),
 		MAX_WIDTH("maxWidth"),
 		MAX_HEIGHT("maxWidth"),
 		FULL_SIZE("fullSize"),
@@ -94,6 +90,8 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 		this.title = new LegendTitle(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
 		// creates text direction handler
 		this.textDirectionHandler = new TextDirectionHandler(this, getDefaultValues(), getNativeObject());
+		// creates events handler
+		this.eventsHandler = new EventsOptionHandler(this, getDefaultValues(), getNativeObject());
 	}
 
 	/*
@@ -104,6 +102,16 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	@Override
 	public TextDirectionHandler getTextDirectionHandler() {
 		return textDirectionHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasEvents#getEventsOptionHandler()
+	 */
+	@Override
+	public EventsOptionHandler getEventsOptionHandler() {
+		return eventsHandler;
 	}
 
 	/**
@@ -124,43 +132,6 @@ public final class Legend extends AbstractDefaultPluginElement<IsDefaultLegend> 
 	@Override
 	public LegendTitle getTitle() {
 		return title;
-	}
-
-	/**
-	 * Sets the browser events that the legend should listen to.
-	 * 
-	 * @param events the browser events that the legend should listen to.
-	 */
-	public void setEvents(Event... events) {
-		// gets the array to set
-		ArrayString value = events != null ? ArrayString.fromOrEmpty(true, events) : ArrayString.fromOrNull(true, events);
-		// stores value
-		setArrayValue(Property.EVENTS, value);
-	}
-
-	/**
-	 * Sets the browser events that the legend should listen to.
-	 * 
-	 * @param events the browser events that the legend should listen to.
-	 */
-	public void setEvents(Set<Event> events) {
-		// gets the array to set
-		ArrayString value = events != null ? ArrayString.fromOrEmpty(events) : ArrayString.fromOrNull(events);
-		// stores value
-		setArrayValue(Property.EVENTS, value);
-	}
-
-	/**
-	 * Returns the browser events that the legend should listen to.
-	 * 
-	 * @return the browser events that the legend should listen to.
-	 */
-	@Override
-	public Set<Event> getEvents() {
-		// retrieves the array
-		ArrayString array = getArrayValue(Property.EVENTS);
-		// if the array is not consistent returns the default
-		return array != null ? ArraySetHelper.set(array, Event.FACTORY) : getDefaultValues().getEvents();
 	}
 
 	/**

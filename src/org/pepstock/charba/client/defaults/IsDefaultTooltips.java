@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import java.util.Set;
-
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -28,7 +25,7 @@ import org.pepstock.charba.client.enums.TooltipAlign;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefaultBoxHandler, IsDefaultAnimationContainer {
+public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefaultBoxHandler, IsDefaultAnimationContainer, IsDefaultEventHandler {
 
 	/**
 	 * Returns padding object defaults.
@@ -43,13 +40,6 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 * @return if tooltips are enabled.
 	 */
 	boolean isEnabled();
-
-	/**
-	 * Returns the browser events that the tooltip should listen to.
-	 * 
-	 * @return the browser events that the tooltip should listen to.
-	 */
-	Set<Event> getEvents();
 
 	/**
 	 * Returns which elements appear in the tooltip.

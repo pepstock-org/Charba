@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.plugins;
 
-import java.util.Collections;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.ChartEnvelop;
@@ -26,15 +24,15 @@ import org.pepstock.charba.client.GlobalOptions;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.ArraySetHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.EventsOptionHandler;
+import org.pepstock.charba.client.options.HasEvents;
 
 /**
  * Abstract plugin options where to set all the configuration needed to the plugin.
@@ -42,12 +40,14 @@ import org.pepstock.charba.client.items.Undefined;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractPluginOptions extends AbstractNode {
+public abstract class AbstractPluginOptions extends AbstractNode implements HasEvents {
 
 	// static counter. Starts from min value of integer
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// plugin id
 	private final String pluginId;
+	// events handler
+	private final EventsOptionHandler eventsHandler;
 
 	/**
 	 * Name of properties of native object.
@@ -124,6 +124,18 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 			// needed for scoping of callbacks
 			setValue(Property.CHARBA_OPTIONS_ID, sb.append(Constants.MINUS).append(COUNTER.getAndIncrement()).toString());
 		}
+		// creates events handler
+		this.eventsHandler = new EventsOptionHandler(parent, DefaultsBuilder.get().getOptions(), new PluginsEnvelop<>(getNativeObject()));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasEvents#getEventsOptionHandler()
+	 */
+	@Override
+	public final EventsOptionHandler getEventsOptionHandler() {
+		return eventsHandler;
 	}
 
 	/**
@@ -142,36 +154,6 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 	 */
 	public final String getPluginId() {
 		return pluginId;
-	}
-
-	/**
-	 * Sets the browser events that the plugins should listen to.
-	 * 
-	 * @param events the browser events that the plugins should listen to.
-	 */
-	public void setEvents(Event... events) {
-		setArrayValue(Property.EVENTS, ArrayString.fromOrEmpty(true, events));
-	}
-
-	/**
-	 * Sets the browser events that the legend should listen to.
-	 * 
-	 * @param events the browser events that the legend should listen to.
-	 */
-	public void setEvents(Set<Event> events) {
-		setArrayValue(Property.EVENTS, ArrayString.fromOrEmpty(events));
-	}
-
-	/**
-	 * Returns the browser events that the plugins should listen to.
-	 * 
-	 * @return the browser events that the plugins should listen to.
-	 */
-	public final Set<Event> getEvents() {
-		// retrieves the array
-		ArrayString array = getArrayValue(Property.EVENTS);
-		// if the array is not consistent returns the default
-		return array != null ? ArraySetHelper.set(array, Event.FACTORY) : Collections.unmodifiableSet(Defaults.get().getGlobal().getEvents());
 	}
 
 	/**
