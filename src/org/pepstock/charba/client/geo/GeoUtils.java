@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -266,7 +267,7 @@ public final class GeoUtils {
 		// checks if arguments are consistent
 		if (topojson != null && isConsistent(featureProperty)) {
 			// checks if the feature is one of the objects
-			Checker.assertCheck(Key.hasKeyByValue(topojson.objectsKeys().toArray(new Key[0]), featureProperty), Utilities.applyTemplate(INVALID_FEATURE_PROPERTY, featureProperty, topojson.objectsKeysAsString()));
+			Checker.assertCheck(Key.hasKeyByValue(ArrayUtil.toKeys(topojson.objectsKeys()), featureProperty), Utilities.applyTemplate(INVALID_FEATURE_PROPERTY, featureProperty, topojson.objectsKeysAsString()));
 			// gets array of features
 			ArrayObject array = JsGeoHelper.get().features(topojson, featureProperty);
 			// checks if result is consistent
@@ -389,7 +390,7 @@ public final class GeoUtils {
 		// checks if arguments are consistent
 		if (topojson != null && isConsistent(featureProperty) && findCallback != null) {
 			// checks if the feature is one of the objects
-			Checker.assertCheck(Key.hasKeyByValue(topojson.objectsKeys().toArray(new Key[0]), featureProperty), Utilities.applyTemplate(INVALID_FEATURE_PROPERTY, featureProperty, topojson.objectsKeysAsString()));
+			Checker.assertCheck(Key.hasKeyByValue(ArrayUtil.toKeys(topojson.objectsKeys()), featureProperty), Utilities.applyTemplate(INVALID_FEATURE_PROPERTY, featureProperty, topojson.objectsKeysAsString()));
 			// gets array of features
 			ArrayObject array = JsGeoHelper.get().features(topojson, featureProperty);
 			// finds the feature

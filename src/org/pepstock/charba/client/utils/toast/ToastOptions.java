@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -311,7 +312,7 @@ public final class ToastOptions extends AbstractToastOptions {
 					storedActions.add(action);
 				}
 			}
-			ArrayObject array = ArrayObject.fromOrEmpty(storedActions.toArray(new ActionItem[0]));
+			ArrayObject array = ArrayObject.fromOrEmpty(ArrayUtil.toActionItems(storedActions));
 			// stores array
 			setArrayValue(Property.ACTIONS, array);
 		} else {
@@ -329,11 +330,11 @@ public final class ToastOptions extends AbstractToastOptions {
 	 */
 	public void setActions(List<ActionItem> actions) {
 		// sets array to store as empty
-		ActionItem[] array = new ActionItem[0];
+		ActionItem[] array = ArrayUtil.EMPTY_ACTION_ITEM_ARRAY;
 		// checks consistent of actions
 		if (ArrayListHelper.isConsistent(actions)) {
 			// stores to array
-			array = actions.toArray(new ActionItem[0]);
+			array = ArrayUtil.toActionItems(actions);
 		}
 		//
 		// then invokes with empty array

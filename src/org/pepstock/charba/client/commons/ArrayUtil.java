@@ -18,9 +18,15 @@ package org.pepstock.charba.client.commons;
 import java.util.Date;
 import java.util.List;
 
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.TimeSeriesItem;
+import org.pepstock.charba.client.enums.BorderAlign;
+import org.pepstock.charba.client.enums.BorderSkipped;
+import org.pepstock.charba.client.intl.enums.MeasureUnit;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.AnimationPropertyKey;
+import org.pepstock.charba.client.utils.toast.ActionItem;
 
 /**
  * Utility to transform arrays and list of objects to primitives.<br>
@@ -78,6 +84,41 @@ public class ArrayUtil {
 	 * An empty immutable {@link TimeSeriesItem} array.
 	 */
 	public static final TimeSeriesItem[] EMPTY_TIME_SERIES_ITEM_ARRAY = {};
+
+	/**
+	 * An empty immutable {@link IsColor} array.
+	 */
+	public static final IsColor[] EMPTY_COLORS_ARRAY = {};
+
+	/**
+	 * An empty immutable {@link BorderSkipped} array.
+	 */
+	public static final BorderSkipped[] EMPTY_BORDER_SKIPPED_ARRAY = {};
+
+	/**
+	 * An empty immutable {@link BorderAlign} array.
+	 */
+	public static final BorderAlign[] EMPTY_BORDER_ALIGN_ARRAY = {};
+
+	/**
+	 * An empty immutable {@link Key} array.
+	 */
+	public static final Key[] EMPTY_KEY_ARRAY = {};
+
+	/**
+	 * An empty immutable {@link MeasureUnit} array.
+	 */
+	public static final MeasureUnit[] EMPTY_MEASURE_UNIT_ARRAY = {};
+
+	/**
+	 * An empty immutable {@link AnimationPropertyKey} array.
+	 */
+	public static final AnimationPropertyKey[] EMPTY_ANIMATION_PROPERTY_ARRAY = {};
+
+	/**
+	 * An empty immutable {@link ActionItem} array.
+	 */
+	public static final ActionItem[] EMPTY_ACTION_ITEM_ARRAY = {};
 
 	/**
 	 * To avoid any instantiation
@@ -190,7 +231,7 @@ public class ArrayUtil {
 	 * @return an array of primitives from a list
 	 */
 	public static boolean[] toBooleans(final List<Boolean> list) {
-		if (list == null || list.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(list)) {
 			return EMPTY_BOOLEAN_ARRAY;
 		}
 		return toPrimitive(list.toArray(EMPTY_BOOLEAN_OBJECT_ARRAY));
@@ -221,7 +262,7 @@ public class ArrayUtil {
 	 * @return an array of primitives from a list
 	 */
 	public static double[] toDoubles(final List<Double> list) {
-		if (list == null || list.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(list)) {
 			return EMPTY_DOUBLE_ARRAY;
 		}
 		return toPrimitive(list.toArray(EMPTY_DOUBLE_OBJECT_ARRAY));
@@ -252,7 +293,7 @@ public class ArrayUtil {
 	 * @return an array of primitives from a list
 	 */
 	public static int[] toIntegers(final List<Integer> list) {
-		if (list == null || list.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(list)) {
 			return EMPTY_INT_ARRAY;
 		}
 		return toPrimitive(list.toArray(EMPTY_INTEGER_OBJECT_ARRAY));
@@ -283,7 +324,7 @@ public class ArrayUtil {
 	 * @return an array of strings from a list
 	 */
 	public static String[] toStrings(final List<String> list) {
-		if (list == null || list.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(list)) {
 			return EMPTY_STRING_ARRAY;
 		}
 		return list.toArray(EMPTY_STRING_ARRAY);
@@ -296,7 +337,7 @@ public class ArrayUtil {
 	 * @return an array of dates from a list
 	 */
 	public static Date[] toDates(final List<Date> list) {
-		if (list == null || list.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(list)) {
 			return EMPTY_DATE_ARRAY;
 		}
 		return list.toArray(EMPTY_DATE_ARRAY);
@@ -309,7 +350,7 @@ public class ArrayUtil {
 	 * @return an array of dates from a list
 	 */
 	public static DataPoint[] toDataPoints(final List<DataPoint> list) {
-		if (list == null || list.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(list)) {
 			return EMPTY_DATA_POINT_ARRAY;
 		}
 		return list.toArray(EMPTY_DATA_POINT_ARRAY);
@@ -322,10 +363,100 @@ public class ArrayUtil {
 	 * @return an array of dates from a list
 	 */
 	public static TimeSeriesItem[] toTimeSeriesItems(final List<TimeSeriesItem> list) {
-		if (list == null || list.isEmpty()) {
+		if (!ArrayListHelper.isConsistent(list)) {
 			return EMPTY_TIME_SERIES_ITEM_ARRAY;
 		}
 		return list.toArray(EMPTY_TIME_SERIES_ITEM_ARRAY);
 	}
 
+	/**
+	 * Returns an array of dates from a list.
+	 *
+	 * @param list list of objects to transform
+	 * @return an array of dates from a list
+	 */
+	public static IsColor[] toColors(final List<IsColor> list) {
+		if (!ArrayListHelper.isConsistent(list)) {
+			return EMPTY_COLORS_ARRAY;
+		}
+		return list.toArray(EMPTY_COLORS_ARRAY);
+	}
+
+	/**
+	 * Returns an array of dates from a list.
+	 *
+	 * @param list list of objects to transform
+	 * @return an array of dates from a list
+	 */
+	public static BorderSkipped[] toBorderSkipped(final List<BorderSkipped> list) {
+		if (!ArrayListHelper.isConsistent(list)) {
+			return EMPTY_BORDER_SKIPPED_ARRAY;
+		}
+		return list.toArray(EMPTY_BORDER_SKIPPED_ARRAY);
+	}
+
+	/**
+	 * Returns an array of dates from a list.
+	 *
+	 * @param list list of objects to transform
+	 * @return an array of dates from a list
+	 */
+	public static BorderAlign[] toBorderAlign(final List<BorderAlign> list) {
+		if (!ArrayListHelper.isConsistent(list)) {
+			return EMPTY_BORDER_ALIGN_ARRAY;
+		}
+		return list.toArray(EMPTY_BORDER_ALIGN_ARRAY);
+	}
+
+	/**
+	 * Returns an array of dates from a list.
+	 *
+	 * @param list list of objects to transform
+	 * @return an array of dates from a list
+	 */
+	public static Key[] toKeys(final List<Key> list) {
+		if (!ArrayListHelper.isConsistent(list)) {
+			return EMPTY_KEY_ARRAY;
+		}
+		return list.toArray(EMPTY_KEY_ARRAY);
+	}
+
+	/**
+	 * Returns an array of dates from a list.
+	 *
+	 * @param list list of objects to transform
+	 * @return an array of dates from a list
+	 */
+	public static MeasureUnit[] toMeasureUnits(final List<MeasureUnit> list) {
+		if (!ArrayListHelper.isConsistent(list)) {
+			return EMPTY_MEASURE_UNIT_ARRAY;
+		}
+		return list.toArray(EMPTY_MEASURE_UNIT_ARRAY);
+	}
+
+	/**
+	 * Returns an array of dates from a list.
+	 *
+	 * @param list list of objects to transform
+	 * @return an array of dates from a list
+	 */
+	public static AnimationPropertyKey[] toAnimationProperties(final List<AnimationPropertyKey> list) {
+		if (!ArrayListHelper.isConsistent(list)) {
+			return EMPTY_ANIMATION_PROPERTY_ARRAY;
+		}
+		return list.toArray(EMPTY_ANIMATION_PROPERTY_ARRAY);
+	}
+
+	/**
+	 * Returns an array of dates from a list.
+	 *
+	 * @param list list of objects to transform
+	 * @return an array of dates from a list
+	 */
+	public static ActionItem[] toActionItems(final List<ActionItem> list) {
+		if (!ArrayListHelper.isConsistent(list)) {
+			return EMPTY_ACTION_ITEM_ARRAY;
+		}
+		return list.toArray(EMPTY_ACTION_ITEM_ARRAY);
+	}
 }

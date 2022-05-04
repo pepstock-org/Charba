@@ -28,6 +28,7 @@ import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -562,7 +563,7 @@ abstract class BaseElement extends AbstractNode {
 	public final void setContent(List<String> content) {
 		if (content != null) {
 			// stores it
-			setContent(content.toArray(new String[0]));
+			setContent(ArrayUtil.toStrings(content));
 		} else {
 			// if here the argument is not consistent
 			// then removes key

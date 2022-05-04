@@ -33,6 +33,7 @@ import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
@@ -234,7 +235,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// checks if argument is consistent
 		if (content != null) {
 			// stores it
-			setContent(content.toArray(new String[0]));
+			setContent(ArrayUtil.toStrings(content));
 		} else {
 			// if here the argument is not consistent
 			// then removes key

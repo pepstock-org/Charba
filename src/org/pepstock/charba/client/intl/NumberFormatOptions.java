@@ -22,6 +22,7 @@ import java.util.List;
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -279,7 +280,7 @@ public final class NumberFormatOptions extends BaseFormatOptions<IsDefaultNumber
 		// checks if argument is consistent
 		if (ArrayListHelper.isConsistent(units)) {
 			// creates the string to parse
-			setValue(Property.UNIT, createCompoundUnitIdentifier(units.toArray(new MeasureUnit[0])));
+			setValue(Property.UNIT, createCompoundUnitIdentifier(ArrayUtil.toMeasureUnits(units)));
 		} else {
 			// removes the key
 			// because the argument is not consistent

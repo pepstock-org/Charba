@@ -29,6 +29,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.HasCallbackScope;
@@ -388,7 +389,7 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 		// checks if argument is consistent
 		if (ArrayListHelper.isConsistent(properties)) {
 			// loads the array from list
-			ArrayString array = ArrayString.fromOrEmpty(properties.toArray(new AnimationPropertyKey[0]));
+			ArrayString array = ArrayString.fromOrEmpty(ArrayUtil.toAnimationProperties(properties));
 			// stores the properties
 			setArrayValueAndAddToParent(Property.PROPERTIES, array);
 		}

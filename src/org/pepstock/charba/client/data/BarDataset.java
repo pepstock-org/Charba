@@ -43,6 +43,7 @@ import org.pepstock.charba.client.commons.ArrayDoubleArrayList;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
@@ -635,7 +636,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		// checks if list is consistent
 		if (ArrayListHelper.isConsistent(borderskips)) {
 			// invokes the other methods with the array
-			setBorderSkipped(borderskips.toArray(new BorderSkipped[0]));
+			setBorderSkipped(ArrayUtil.toBorderSkipped(borderskips));
 		}
 	}
 

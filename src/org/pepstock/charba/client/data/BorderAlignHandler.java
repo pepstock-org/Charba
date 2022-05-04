@@ -25,6 +25,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallb
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -120,7 +121,7 @@ final class BorderAlignHandler extends NativeObjectContainer {
 		// checks if list is consistent
 		if (ArrayListHelper.isConsistent(align)) {
 			// invokes the other methods with the array
-			setBorderAlign(align.toArray(new BorderAlign[0]));
+			setBorderAlign(ArrayUtil.toBorderAlign(align));
 		} else {
 			// resets callbacks
 			setBorderAlign((BorderAlignCallback) null);
