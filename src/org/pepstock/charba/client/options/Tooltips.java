@@ -242,7 +242,10 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param events the browser events that the tooltip should listen to.
 	 */
 	public void setEvents(Event... events) {
-		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(true, events));
+		// gets the array to set
+		ArrayString value = events != null ? ArrayString.fromOrEmpty(true, events) : ArrayString.fromOrNull(true, events);
+		// stores value
+		setArrayValue(Property.EVENTS, value);
 	}
 
 	/**
@@ -251,7 +254,10 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param events the browser events that the legend should listen to.
 	 */
 	public void setEvents(Set<Event> events) {
-		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(events));
+		// gets the array to set
+		ArrayString value = events != null ? ArrayString.fromOrEmpty(events) : ArrayString.fromOrNull(events);
+		// stores value
+		setArrayValue(Property.EVENTS, value);
 	}
 
 	/**

@@ -614,9 +614,12 @@ public final class Defaults {
 	 * Internal plugin to track native chart instances on all charts.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @see Charts
+	 * 
 	 */
 	private static class NativeChartHandler extends AbstractPlugin {
+
+		// plugin options
+		private static final DisablingEventCatchingOptions PLUGIN_OPTIONS = new DisablingEventCatchingOptions(ID);
 
 		/**
 		 * Creates the plugin, using {@link Defaults#ID}.
@@ -632,16 +635,21 @@ public final class Defaults {
 		 */
 		@Override
 		public void onConfigure(IsChart chart) {
-			// checks if chart is consistent and has got cartesian axes
-			if (IsChart.isConsistent(chart) && ScaleType.MULTI.equals(chart.getType().scaleType()) && chart.getOptions() instanceof ScalesOptions) {
-				// casts to scaled options
-				ScalesOptions options = (ScalesOptions) chart.getOptions();
-				// gets locale from chart
-				CLocale locale = chart.getOptions().getLocale();
-				// checks if locale is consistent
-				if (locale != null) {
-					// applies locale to time and time series scales
-					applyLocaleToTimeScales(options.getScales(), locale);
+			// checks if chart is consistent
+			if (IsChart.isConsistent(chart)) {
+				// disables events for performance
+				chart.getOptions().getPlugins().setOptions(PLUGIN_OPTIONS);
+				// checks to sets has got cartesian axes
+				if (ScaleType.MULTI.equals(chart.getType().scaleType()) && chart.getOptions() instanceof ScalesOptions) {
+					// casts to scaled options
+					ScalesOptions options = (ScalesOptions) chart.getOptions();
+					// gets locale from chart
+					CLocale locale = chart.getOptions().getLocale();
+					// checks if locale is consistent
+					if (locale != null) {
+						// applies locale to time and time series scales
+						applyLocaleToTimeScales(options.getScales(), locale);
+					}
 				}
 			}
 		}

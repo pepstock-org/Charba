@@ -46,6 +46,8 @@ final class ChartBackgroundColorPlugin extends AbstractPlugin {
 	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
 	// container instance
 	private final ChartBackgroundColor container;
+	// plugin options
+	private static final DisablingEventCatchingOptions PLUGIN_OPTIONS = new DisablingEventCatchingOptions(ChartBackgroundColor.ID);
 
 	/**
 	 * Creates the plugin.
@@ -56,6 +58,20 @@ final class ChartBackgroundColorPlugin extends AbstractPlugin {
 		super(ChartBackgroundColor.ID);
 		// stores container
 		this.container = container;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onConfigure(IsChart chart) {
+		// checks if chart is not consistent
+		if (IsChart.isConsistent(chart)) {
+			// disables events for performance
+			chart.getOptions().getPlugins().setOptions(PLUGIN_OPTIONS);
+		}
 	}
 
 	/*

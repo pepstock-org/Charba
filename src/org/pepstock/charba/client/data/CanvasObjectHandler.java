@@ -35,6 +35,8 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	private static final CanvasObjectHandler INSTANCE = new CanvasObjectHandler();
 	// plugin ID
 	static final String ID = "charbacanvasobjecthandler";
+	// plugin options
+	private static final DisablingEventCatchingOptions PLUGIN_OPTIONS = new DisablingEventCatchingOptions(ID);
 
 	/**
 	 * To avoid any instantiation
@@ -73,6 +75,8 @@ final class CanvasObjectHandler extends AbstractPlugin {
 				// reset flags of change
 				dataset.getPatternsContainer().setChanged(false);
 			}
+			// disables events for performance
+			chart.getOptions().getPlugins().setOptions(PLUGIN_OPTIONS);
 		}
 	}
 

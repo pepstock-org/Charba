@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
@@ -101,6 +102,12 @@ final class ColorSchemesPlugin extends CharbaPlugin<ColorSchemesOptions> {
 			}
 			// applies the color scheme callback to chart
 			chart.getOptions().getTooltips().getCallbacks().setLabelCallback(pluginTooltipLabelsCallback);
+			// gets options from chart options
+			ColorSchemesOptions options = loadOptions(chart);
+			// resets event
+			options.setEvents(Collections.emptySet());
+			// stores options
+			options.store(chart);
 		}
 	}
 

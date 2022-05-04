@@ -150,7 +150,7 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 	 * @param events the browser events that the plugins should listen to.
 	 */
 	public void setEvents(Event... events) {
-		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(true, events));
+		setArrayValue(Property.EVENTS, ArrayString.fromOrEmpty(true, events));
 	}
 
 	/**
@@ -159,7 +159,7 @@ public abstract class AbstractPluginOptions extends AbstractNode {
 	 * @param events the browser events that the legend should listen to.
 	 */
 	public void setEvents(Set<Event> events) {
-		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(events));
+		setArrayValue(Property.EVENTS, ArrayString.fromOrEmpty(events));
 	}
 
 	/**

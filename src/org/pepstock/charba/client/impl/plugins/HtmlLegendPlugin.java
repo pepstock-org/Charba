@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -107,6 +108,10 @@ final class HtmlLegendPlugin extends CharbaPlugin<HtmlLegendOptions> {
 				// because display is false
 				resetStatus(chart);
 			}
+			// resets event
+			pOptions.setEvents(Collections.emptySet());
+			// stores options
+			pOptions.store(chart);
 		}
 	}
 
