@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,8 +29,12 @@ import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.items.PluginResizeArgument;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.plugins.AbstractPlugin;
-import org.pepstock.charba.client.plugins.PluginContainer;
+import org.pepstock.charba.client.plugins.SmartPlugin;
+import org.pepstock.charba.client.plugins.SmartPluginContainer;
+import org.pepstock.charba.client.plugins.hooks.AfterDrawHook;
+import org.pepstock.charba.client.plugins.hooks.BeforeDestroyHook;
+import org.pepstock.charba.client.plugins.hooks.BeforeDrawHook;
+import org.pepstock.charba.client.plugins.hooks.ResizeHook;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -41,7 +44,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class ChartBackgroundColorPlugin extends AbstractPlugin {
+final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDrawHook, AfterDrawHook, ResizeHook, BeforeDestroyHook {
 
 	// cache to store options in order do not load every time the options
 	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
@@ -51,36 +54,23 @@ final class ChartBackgroundColorPlugin extends AbstractPlugin {
 	/**
 	 * Creates the plugin.
 	 * 
-	 * @param container the {@link PluginContainer} of this plugin
+	 * @param container the {@link SmartPluginContainer} of this plugin
 	 */
 	ChartBackgroundColorPlugin(ChartBackgroundColor container) {
 		super(ChartBackgroundColor.ID);
 		// stores container
 		this.container = container;
+		// stores itself as hook handler
+		setBeforeDrawHook(this);
+		setAfterDrawHook(this);
+		setResizeHook(this);
+		setBeforeDestroyHook(this);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void onConfigure(IsChart chart) {
-		// checks if chart is not consistent
-		if (IsChart.isConsistent(chart)) {
-			// gets options
-			ChartBackgroundColorOptions bgOptions = getOptions(chart);
-			// disables events
-			bgOptions.setEvents(Collections.emptySet());
-			// stores in the chart
-			bgOptions.store(chart);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDraw(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.plugins.hooks.BeforeDrawHook#onBeforeDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public boolean onBeforeDraw(IsChart chart) {
@@ -100,10 +90,10 @@ final class ChartBackgroundColorPlugin extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onEndDrawing(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.plugins.hooks.AfterDrawHook#onAfterDraw(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onEndDrawing(IsChart chart) {
+	public void onAfterDraw(IsChart chart) {
 		// checks if chart is consistent
 		if (IsChart.isValid(chart)) {
 			// when the draw is completed
@@ -118,7 +108,7 @@ final class ChartBackgroundColorPlugin extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
+	 * @see org.pepstock.charba.client.plugins.hooks.ResizeHook#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
 	 */
 	@Override
 	public void onResize(IsChart chart, PluginResizeArgument argument) {
@@ -136,7 +126,7 @@ final class ChartBackgroundColorPlugin extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.plugins.hooks.BeforeDestroyHook#onBeforeDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onBeforeDestroy(IsChart chart) {

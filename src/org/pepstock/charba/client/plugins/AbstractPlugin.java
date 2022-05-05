@@ -15,12 +15,7 @@
 */
 package org.pepstock.charba.client.plugins;
 
-import java.util.Collections;
-import java.util.Set;
-
 import org.pepstock.charba.client.Plugin;
-import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.enums.Event;
 
 /**
  * Implements a plugin interface to help who will create a plugin do not create all methods.<br>
@@ -66,44 +61,4 @@ public abstract class AbstractPlugin implements Plugin {
 		return "Plugin [" + getId() + "]";
 	}
 
-	/**
-	 * Generic options for plugins which want to disable the event catching.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	public static final class DisablingEventCatchingOptions extends AbstractPluginOptions {
-
-		/**
-		 * Creates the plugin options, disabling the event catching.
-		 * 
-		 * @param id plugin id
-		 */
-		public DisablingEventCatchingOptions(String id) {
-			super(Checker.checkAndGetIfValid(id, "Plugin id"), null);
-			// resets events do not catch them
-			super.setEvents(Collections.emptySet());
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#setEvents(org.pepstock.charba.client.enums.Event[])
-		 */
-		@Override
-		public void setEvents(Event... events) {
-			// do nothing
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#setEvents(java.util.Set)
-		 */
-		@Override
-		public void setEvents(Set<Event> events) {
-			// do nothing
-		}
-
-	}
 }

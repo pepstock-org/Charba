@@ -25,6 +25,7 @@ import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.plugins.NativeHook;
 
 /**
  * Utility object to manage all native objects implemented in Charba by {@link NativeObject}.<br>
@@ -192,6 +193,17 @@ final class NativeObjectUtil {
 	 * @param value the object associated with the property.
 	 */
 	static void defineCallbackProperty(NativeObject object, String key, NativeCallback value) {
+		Reflect.set(object, key, value);
+	}
+
+	/**
+	 * Defines a new property directly on object object, or modifies an existing property.
+	 * 
+	 * @param object native object to be managed
+	 * @param key the name of the property to be defined or modified.
+	 * @param value the object associated with the property.
+	 */
+	static void defineCallbackProperty(NativeObject object, String key, NativeHook value) {
 		Reflect.set(object, key, value);
 	}
 

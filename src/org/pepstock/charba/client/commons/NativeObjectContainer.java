@@ -31,6 +31,7 @@ import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
+import org.pepstock.charba.client.plugins.NativeHook;
 import org.pepstock.charba.client.utils.JSON;
 
 /**
@@ -793,6 +794,28 @@ public abstract class NativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected final void setValue(Key key, NativeCallback value) {
+		// if value is null
+		// try to remove the reference if exists
+		if (value == null) {
+			// removes property if the property exists
+			remove(key);
+		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
+			// sets value
+			NativeObjectUtil.defineCallbackProperty(nativeObject, key.value(), value);
+		}
+	}
+
+	/**
+	 * Sets a value (native hook function for plugin) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValue(Key key, NativeHook value) {
 		// if value is null
 		// try to remove the reference if exists
 		if (value == null) {

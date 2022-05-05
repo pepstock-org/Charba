@@ -19,7 +19,10 @@ import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.PluginResizeArgument;
-import org.pepstock.charba.client.plugins.AbstractPlugin;
+import org.pepstock.charba.client.plugins.SmartPlugin;
+import org.pepstock.charba.client.plugins.hooks.BeforeDestroyHook;
+import org.pepstock.charba.client.plugins.hooks.ConfigureHook;
+import org.pepstock.charba.client.plugins.hooks.ResizeHook;
 
 /**
  * Internal plugin, set by data object before a chart is initializing.<br>
@@ -29,20 +32,22 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class CanvasObjectHandler extends AbstractPlugin {
+final class CanvasObjectHandler extends SmartPlugin implements ConfigureHook, ResizeHook, BeforeDestroyHook {
 
 	// singleton instance
 	private static final CanvasObjectHandler INSTANCE = new CanvasObjectHandler();
 	// plugin ID
 	static final String ID = "charbacanvasobjecthandler";
-	// plugin options
-	private static final DisablingEventCatchingOptions PLUGIN_OPTIONS = new DisablingEventCatchingOptions(ID);
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private CanvasObjectHandler() {
 		super(ID);
+		// stores itself as hook handler
+		setConfigureHook(this);
+		setResizeHook(this);
+		setBeforeDestroyHook(this);
 	}
 
 	/**
@@ -57,7 +62,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.plugins.hooks.ConfigureHook#onConfigure(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onConfigure(IsChart chart) {
@@ -75,15 +80,13 @@ final class CanvasObjectHandler extends AbstractPlugin {
 				// reset flags of change
 				dataset.getPatternsContainer().setChanged(false);
 			}
-			// disables events for performance
-			chart.getOptions().getPlugins().setOptions(PLUGIN_OPTIONS);
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
+	 * @see org.pepstock.charba.client.plugins.hooks.ResizeHook#onResize(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.items.PluginResizeArgument)
 	 */
 	@Override
 	public void onResize(IsChart chart, PluginResizeArgument argument) {
@@ -108,7 +111,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onBeforeDestroy(org.pepstock.charba.client.IsChart)
+	 * @see org.pepstock.charba.client.plugins.hooks.BeforeDestroyHook#onBeforeDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onBeforeDestroy(IsChart chart) {

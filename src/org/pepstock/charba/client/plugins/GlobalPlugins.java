@@ -41,7 +41,7 @@ public final class GlobalPlugins {
 
 	// list of global plugins set by user (not OOTB)
 	// K = plugin id, V = plugin instance
-	private final Map<String, WrapperPlugin> pluginIds = new HashMap<>();
+	private final Map<String, AbstractBasePlugin> pluginIds = new HashMap<>();
 	// internal plugins container
 	private final InternalPlugins plugins;
 	// set of embedded plugin ids to disable for charts
@@ -82,6 +82,52 @@ public final class GlobalPlugins {
 	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
 	 */
 	public boolean register(Plugin plugin) {
+		// checks if plugin is consistent
+		if (plugin != null) {
+			// registers plugin
+			return registerBasePlugin(new WrapperPlugin(plugin));
+		}
+		// if here, plugin instance is not consistent
+		return false;
+	}
+
+	/**
+	 * Registers a plugin as global, to apply to all charts, by a container
+	 * 
+	 * @param container plugin container instance
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
+	 */
+	public boolean register(SmartPluginContainer container) {
+		// checks if plugin container is consistent
+		if (container != null) {
+			// creates envelop
+			PluginsEnvelop<SmartPlugin> envelop = new PluginsEnvelop<>();
+			// loads the plugin by container
+			container.loadPlugin(envelop);
+			// registers plugin
+			return register(envelop.getContent());
+		}
+		// if here, plugin container instance is not consistent
+		return false;
+	}
+
+	/**
+	 * Registers a plugin as global, to apply to all charts.
+	 * 
+	 * @param plugin plugin instance
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
+	 */
+	public boolean register(SmartPlugin plugin) {
+		return registerBasePlugin(plugin);
+	}
+
+	/**
+	 * Registers a plugin as global, to apply to all charts.
+	 * 
+	 * @param plugin plugin instance
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
+	 */
+	private boolean registerBasePlugin(AbstractBasePlugin plugin) {
 		// checks if plugin is consistent and not a default plugin
 		if (plugin != null && !DefaultPluginId.is(plugin.getId())) {
 			// checks the plugin id
@@ -90,11 +136,9 @@ public final class GlobalPlugins {
 			if (getIds().contains(plugin.getId())) {
 				return false;
 			}
-			// creates a java script object, wrapper of the plugin
-			WrapperPlugin wPlugin = new WrapperPlugin(plugin);
-			JsPluginHelper.get().register(wPlugin);
+			JsPluginHelper.get().register(plugin);
 			// stores the id and object in the a map
-			pluginIds.put(plugin.getId(), wPlugin);
+			pluginIds.put(plugin.getId(), plugin);
 			return true;
 		}
 		// if here, plugin instance is not consistent
@@ -213,12 +257,12 @@ public final class GlobalPlugins {
 			}
 		}
 		// scans all plugins
-		for (Entry<String, WrapperPlugin> entry : pluginIds.entrySet()) {
+		for (Entry<String, AbstractBasePlugin> entry : pluginIds.entrySet()) {
 			// checks if plugin is forcedly disabled
 			if (chart.getOptions().getPlugins().isEnabled(entry.getKey())) {
 				// if here, the plugin is not disabled
 				// calls on configure method
-				entry.getValue().onConfigure(chart);
+				entry.getValue().invokeConfigure(chart);
 			}
 		}
 	}

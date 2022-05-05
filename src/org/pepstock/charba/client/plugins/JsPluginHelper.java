@@ -58,7 +58,7 @@ final class JsPluginHelper {
 	 * 
 	 * @param object plugin java script instance
 	 */
-	void register(WrapperPlugin object) {
+	void register(AbstractBasePlugin object) {
 		// checks if argument is consistent
 		if (object != null) {
 			// registers plugin

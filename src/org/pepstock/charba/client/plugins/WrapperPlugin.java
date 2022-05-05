@@ -22,19 +22,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
-import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.PluginDatasetArgument;
 import org.pepstock.charba.client.items.PluginEventArgument;
 import org.pepstock.charba.client.items.PluginResizeArgument;
 import org.pepstock.charba.client.items.PluginScaleArgument;
 import org.pepstock.charba.client.items.PluginTooltipArgument;
 import org.pepstock.charba.client.items.PluginUpdateArgument;
-
-import jsinterop.annotations.JsFunction;
 
 /**
  * Wraps a plugin, delegating the execution of all hooks to it.<br>
@@ -43,299 +36,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class WrapperPlugin extends NativeObjectContainer {
-
-	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
-	/**
-	 * Java script FUNCTION callback called without providing any value.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyWithoutReturnValueCallback {
-
-		/**
-		 * Called without providing any value.
-		 * 
-		 * @param chart the chart instance.
-		 * @param args argument object
-		 * @param options plugin options set by user in the chart options.
-		 */
-		void call(Chart chart, NativeObject args, NativeObject options);
-	}
-
-	/**
-	 * Java script FUNCTION callback called with return value.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyWithReturnValueCallback {
-
-		/**
-		 * Called with return value.
-		 * 
-		 * @param chart the chart instance
-		 * @param args the call arguments
-		 * @param options plugin options set by user in the chart options
-		 * @return <code>false</code> to cancel the chart operations
-		 */
-		boolean call(Chart chart, NativeObject args, NativeObject options);
-	}
-
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-
-	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		ID("id"),
-		// ---------------------------
-		// -- INIT
-		// ---------------------------
-		BEFORE_INIT("beforeInit"),
-		AFTER_INIT("afterInit"),
-		// ---------------------------
-		// -- UPDATE
-		// ---------------------------
-		BEFORE_UPDATE("beforeUpdate"),
-		AFTER_UPDATE("afterUpdate"),
-		// ---------------------------
-		// -- DATASETS UPDATE
-		// ---------------------------
-		BEFORE_DATASETS_UPDATE("beforeDatasetsUpdate"),
-		AFTER_DATASETS_UPDATE("afterDatasetsUpdate"),
-		// ---------------------------
-		// -- DATASET UPDATE
-		// ---------------------------
-		BEFORE_DATASET_UPDATE("beforeDatasetUpdate"),
-		AFTER_DATASET_UPDATE("afterDatasetUpdate"),
-		// ---------------------------
-		// -- ELEMENTS UPDATE
-		// ---------------------------
-		BEFORE_ELEMENTS_UPDATE("beforeElementsUpdate"),
-		// ---------------------------
-		// -- LAYOUT
-		// ---------------------------
-		BEFORE_LAYOUT("beforeLayout"),
-		AFTER_LAYOUT("afterLayout"),
-		// ---------------------------
-		// -- RENDER
-		// ---------------------------
-		BEFORE_RENDER("beforeRender"),
-		AFTER_RENDER("afterRender"),
-		// ---------------------------
-		// -- DRAW
-		// ---------------------------
-		BEFORE_DRAW("beforeDraw"),
-		AFTER_DRAW("afterDraw"),
-		// ---------------------------
-		// -- DATASETS DRAW
-		// ---------------------------
-		BEFORE_DATASETS_DRAW("beforeDatasetsDraw"),
-		AFTER_DATASETS_DRAW("afterDatasetsDraw"),
-		// ---------------------------
-		// -- DATASET DRAW
-		// ---------------------------
-		BEFORE_DATASET_DRAW("beforeDatasetDraw"),
-		AFTER_DATASET_DRAW("afterDatasetDraw"),
-		// ---------------------------
-		// -- EVENT
-		// ---------------------------
-		BEFORE_EVENT("beforeEvent"),
-		AFTER_EVENT("afterEvent"),
-		// ---------------------------
-		// -- TOOLTIP
-		// ---------------------------
-		BEFORE_TOOLTIP_DRAW("beforeTooltipDraw"),
-		AFTER_TOOLTIP_DRAW("afterTooltipDraw"),
-		// ---------------------------
-		// -- RESET
-		// ---------------------------
-		RESET("reset"),
-		// ---------------------------
-		// -- RESIZE
-		// ---------------------------
-		RESIZE("resize"),
-		// ---------------------------
-		// -- DESTROY
-		// ---------------------------
-		BEFORE_DESTROY("beforeDestroy"),
-		AFTER_DESTROY("afterDestroy"),
-		// ---------------------------
-		// -- SCALES DATA LIMITS
-		// ---------------------------
-		BEFORE_DATA_LIMITS("beforeDataLimits"),
-		AFTER_DATA_LIMITS("afterDataLimits"),
-		// ---------------------------
-		// -- SCALES BUILD TICKS
-		// ---------------------------
-		BEFORE_BUILD_TICKS("beforeBuildTicks"),
-		AFTER_BUILD_TICKS("afterBuildTicks"),
-		// ---------------------------
-		// -- PLUGIN LIFECYCLE
-		// ---------------------------
-		INSTALL("install"),
-		START("start"),
-		STOP("stop"),
-		UNINSTALL("uninstall");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use in the native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
-	// ---------------------------
-	// -- CALLBACKS PROXIES
-	// ---------------------------
-	// ---------------------------
-	// -- INIT
-	// ---------------------------
-	// callback proxy to invoke the beforeInit function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> beforeInitCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterInit function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterInitCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- UPDATE
-	// ---------------------------
-	// callback proxy to invoke the beforeUpdate function
-	private final CallbackProxy<ProxyWithReturnValueCallback> beforeUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterUpdate function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- DATASETS UPDATE
-	// ---------------------------
-	// callback proxy to invoke the beforeDatasetsUpdate function
-	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetsUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterDatasetsUpdate function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetsUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- DATASET UPDATE
-	// ---------------------------
-	// callback proxy to invoke the beforeDatasetUpdate function
-	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterDatasetUpdate function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- ELEMENTS UPDATE
-	// ---------------------------
-	// callback proxy to invoke the beforeElementsUpdate function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> beforeElementsUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- LAYOUT
-	// ---------------------------
-	// callback proxy to invoke the beforeLayout function
-	private final CallbackProxy<ProxyWithReturnValueCallback> beforeLayoutCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterLayout function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterLayoutCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- RENDER
-	// ---------------------------
-	// callback proxy to invoke the beforeRender function
-	private final CallbackProxy<ProxyWithReturnValueCallback> beforeRenderCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterRender function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterRenderCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- DRAW
-	// ---------------------------
-	// callback proxy to invoke the beforeDraw function
-	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterDraw function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- DATASETS DRAW
-	// ---------------------------
-	// callback proxy to invoke the beforeDatasetsDraw function
-	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetsDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterDatasetsDraw function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetsDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- DATASET DRAW
-	// ---------------------------
-	// callback proxy to invoke the beforeDatasetDraw function
-	private final CallbackProxy<ProxyWithReturnValueCallback> beforeDatasetDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterDatasetDraw function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDatasetDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- EVENT
-	// ---------------------------
-	// callback proxy to invoke the beforeEvent function
-	private final CallbackProxy<ProxyWithReturnValueCallback> beforeEventCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterEvent function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterEventCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- TOOLTIP
-	// ---------------------------
-	// callback proxy to invoke the beforeTooltipDraw function
-	private final CallbackProxy<ProxyWithReturnValueCallback> beforeTooltipDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterTooltipDraw function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterTooltipDrawCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- RESET
-	// ---------------------------
-	// callback proxy to invoke the reset function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> resetCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- RESIZE
-	// ---------------------------
-	// callback proxy to invoke the resize function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> resizeCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- DESTROY
-	// ---------------------------
-	// callback proxy to invoke the before destroy function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> beforeDestroyCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the after destroy function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDestroyCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- SCALES DATA LIMITS
-	// ---------------------------
-	// callback proxy to invoke the beforeDataLimits function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> beforeDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterDataLimits function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- SCALES BUILD TICKS
-	// ---------------------------
-	// callback proxy to invoke the beforeBuildTicks function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> beforeBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the afterBuildTicks function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> afterBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
-	// ---------------------------
-	// -- PLUGIN LIFECYCLE
-	// ---------------------------
-	// callback proxy to invoke the install function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> installCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the start function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> startCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the stop function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> stopCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the uninstall function
-	private final CallbackProxy<ProxyWithoutReturnValueCallback> uninstallCallbackProxy = JsHelper.get().newCallbackProxy();
+final class WrapperPlugin extends AbstractBasePlugin {
 
 	// user plugin implementation
 	private final Plugin delegation;
@@ -349,226 +50,80 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param delegation plugin instance
 	 */
 	WrapperPlugin(Plugin delegation) {
+		super(delegation.getId());
 		// stores the plugin
 		this.delegation = delegation;
-		// sets the plugin ID
-		setValue(Property.ID, delegation.getId());
-		// -------------------------------
-		// -- SET CALLBACKS to PROXIES ---
-		// -------------------------------
-		// ---------------------------
-		// -- INIT
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeInitCallbackProxy.setCallback((chart, args, options) -> onBeforeInit(chart.getChart()));
-		// invoke user method implementation
-		this.afterInitCallbackProxy.setCallback((chart, args, options) -> onAfterInit(chart.getChart(), chart));
-		// ---------------------------
-		// -- UPDATE
-		// ---------------------------
-		// invoke user method implementation
-		this.afterUpdateCallbackProxy.setCallback((chart, args, options) -> onAfterUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
-		// invoke user method implementation
-		this.beforeUpdateCallbackProxy.setCallback((chart, args, options) -> onBeforeUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
-		// ---------------------------
-		// -- DATASETS UPDATE
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeDatasetsUpdateCallbackProxy.setCallback((chart, args, options) -> onBeforeDatasetsUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
-		// invoke user method implementation
-		this.afterDatasetsUpdateCallbackProxy.setCallback((chart, args, options) -> onAfterDatasetsUpdate(chart.getChart(), new PluginUpdateArgument(new PluginsEnvelop<>(args, true))));
-		// ---------------------------
-		// -- DATASET UPDATE
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeDatasetUpdateCallbackProxy.setCallback((chart, args, options) -> onBeforeDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
-		// invoke user method implementation
-		this.afterDatasetUpdateCallbackProxy.setCallback((chart, args, options) -> onAfterDatasetUpdate(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
-		// ---------------------------
-		// -- ELEMENTS UPDATE
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeElementsUpdateCallbackProxy.setCallback((chart, args, options) -> onBeforeElementsUpdate(chart.getChart()));
-		// ---------------------------
-		// -- LAYOUT
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeLayoutCallbackProxy.setCallback((chart, args, options) -> onBeforeLayout(chart.getChart()));
-		// invoke user method implementation
-		this.afterLayoutCallbackProxy.setCallback((chart, args, options) -> onAfterLayout(chart.getChart()));
-		// ---------------------------
-		// -- RENDER
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeRenderCallbackProxy.setCallback((chart, args, options) -> onBeforeRender(chart.getChart()));
-		// invoke user method implementation
-		this.afterRenderCallbackProxy.setCallback((chart, args, options) -> onAfterRender(chart.getChart()));
-		// ---------------------------
-		// -- DRAW
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeDrawCallbackProxy.setCallback((chart, args, options) -> onBeforeDraw(chart.getChart()));
-		// invoke user method implementation
-		this.afterDrawCallbackProxy.setCallback((chart, args, options) -> onAfterDraw(chart.getChart()));
-		// ---------------------------
-		// -- DATASETS DRAW
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeDatasetsDrawCallbackProxy.setCallback((chart, args, options) -> onBeforeDatasetsDraw(chart.getChart()));
-		// invoke user method implementation
-		this.afterDatasetsDrawCallbackProxy.setCallback((chart, args, options) -> onAfterDatasetsDraw(chart.getChart()));
-		// ---------------------------
-		// -- DATASET DRAW
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeDatasetDrawCallbackProxy.setCallback((chart, args, options) -> onBeforeDatasetDraw(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
-		// invoke user method implementation
-		this.afterDatasetDrawCallbackProxy.setCallback((chart, args, options) -> onAfterDatasetDraw(chart.getChart(), new PluginDatasetArgument(new PluginsEnvelop<>(args, true))));
-		// ---------------------------
-		// -- EVENT
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeEventCallbackProxy.setCallback((chart, args, options) -> onBeforeEvent(chart.getChart(), new PluginEventArgument(new PluginsEnvelop<>(args, true))));
-		// invoke user method implementation
-		this.afterEventCallbackProxy.setCallback((chart, args, options) -> onAfterEvent(chart.getChart(), new PluginEventArgument(new PluginsEnvelop<>(args, true))));
-		// ---------------------------
-		// -- TOOLTIP
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeTooltipDrawCallbackProxy.setCallback((chart, args, options) -> onBeforeTooltipDraw(chart.getChart(), new PluginTooltipArgument(new PluginsEnvelop<>(args, true))));
-		// invoke user method implementation
-		this.afterTooltipDrawCallbackProxy.setCallback((chart, args, options) -> onAfterTooltipDraw(chart.getChart(), new PluginTooltipArgument(new PluginsEnvelop<>(args, true))));
-		// ---------------------------
-		// -- RESET
-		// ---------------------------
-		// invoke user method implementation
-		this.resetCallbackProxy.setCallback((chart, args, options) -> onReset(chart.getChart()));
-		// ---------------------------
-		// -- RESIZE
-		// ---------------------------
-		// invoke user method implementation
-		this.resizeCallbackProxy.setCallback((chart, args, options) -> onResize(chart.getChart(), new PluginResizeArgument(new PluginsEnvelop<>(args, true))));
-		// ---------------------------
-		// -- DESTROY
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeDestroyCallbackProxy.setCallback((chart, args, options) -> onBeforeDestroy(chart.getChart()));
-		// invoke user method implementation
-		this.afterDestroyCallbackProxy.setCallback((chart, args, options) -> onAfterDestroy(chart.getChart()));
-		// ---------------------------
-		// -- PLUGIN LIFECYCLE
-		// ---------------------------
-		// invoke user method implementation
-		this.installCallbackProxy.setCallback((chart, args, options) -> onInstall(chart.getChart()));
-		// invoke user method implementation
-		this.startCallbackProxy.setCallback((chart, args, options) -> onStart(chart.getChart()));
-		// invoke user method implementation
-		this.stopCallbackProxy.setCallback((chart, args, options) -> onStop(chart.getChart()));
-		// invoke user method implementation
-		this.uninstallCallbackProxy.setCallback((chart, args, options) -> onUninstall(chart.getChart()));
-		// ---------------------------
-		// -- SCALES DATA LIMITS
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeDataLimitsCallbackProxy.setCallback((chart, args, options) -> onBeforeDataLimits(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
-		// invoke user method implementation
-		this.afterDataLimitsCallbackProxy.setCallback((chart, args, options) -> onAfterDataLimits(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
-		// ---------------------------
-		// -- SCALES BUILD TICKS
-		// ---------------------------
-		// invoke user method implementation
-		this.beforeBuildTicksCallbackProxy.setCallback((chart, args, options) -> onBeforeBuildTicks(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
-		// invoke user method implementation
-		this.afterBuildTicksCallbackProxy.setCallback((chart, args, options) -> onAfterBuildTicks(chart.getChart(), new PluginScaleArgument(new PluginsEnvelop<>(args, true))));
 		// ------------------------------------
 		// -- SET ALL FUNCTIONS in the object ---
 		// ------------------------------------
 		// sets proxy instance in the afterDataLimits property
-		setValue(Property.AFTER_DATA_LIMITS, afterDataLimitsCallbackProxy.getProxy());
+		setValue(Property.AFTER_DATA_LIMITS, getAfterDataLimitsCallbackProxy().getProxy());
 		// sets proxy instance in the afterBuildTicks property
-		setValue(Property.AFTER_BUILD_TICKS, afterBuildTicksCallbackProxy.getProxy());
+		setValue(Property.AFTER_BUILD_TICKS, getAfterBuildTicksCallbackProxy().getProxy());
 		// sets proxy instance in the afterDatasetDraw property
-		setValue(Property.AFTER_DATASET_DRAW, afterDatasetDrawCallbackProxy.getProxy());
+		setValue(Property.AFTER_DATASET_DRAW, getAfterDatasetDrawCallbackProxy().getProxy());
 		// sets proxy instance in the afterDatasetUpdate property
-		setValue(Property.AFTER_DATASET_UPDATE, afterDatasetUpdateCallbackProxy.getProxy());
+		setValue(Property.AFTER_DATASET_UPDATE, getAfterDatasetUpdateCallbackProxy().getProxy());
 		// sets proxy instance in the afterDatasetsDraw property
-		setValue(Property.AFTER_DATASETS_DRAW, afterDatasetsDrawCallbackProxy.getProxy());
+		setValue(Property.AFTER_DATASETS_DRAW, getAfterDatasetsDrawCallbackProxy().getProxy());
 		// sets proxy instance in the afterDatasetsUpdate property
-		setValue(Property.AFTER_DATASETS_UPDATE, afterDatasetsUpdateCallbackProxy.getProxy());
+		setValue(Property.AFTER_DATASETS_UPDATE, getAfterDatasetsUpdateCallbackProxy().getProxy());
 		// sets proxy instance in the afterDraw property
-		setValue(Property.AFTER_DRAW, afterDrawCallbackProxy.getProxy());
+		setValue(Property.AFTER_DRAW, getAfterDrawCallbackProxy().getProxy());
 		// sets proxy instance in the afterEvent property
-		setValue(Property.AFTER_EVENT, afterEventCallbackProxy.getProxy());
+		setValue(Property.AFTER_EVENT, getAfterEventCallbackProxy().getProxy());
 		// sets proxy instance in the afterInit property
-		setValue(Property.AFTER_INIT, afterInitCallbackProxy.getProxy());
+		setValue(Property.AFTER_INIT, getAfterInitCallbackProxy().getProxy());
 		// sets proxy instance in the afterLayout property
-		setValue(Property.AFTER_LAYOUT, afterLayoutCallbackProxy.getProxy());
+		setValue(Property.AFTER_LAYOUT, getAfterLayoutCallbackProxy().getProxy());
 		// sets proxy instance in the afterRender property
-		setValue(Property.AFTER_RENDER, afterRenderCallbackProxy.getProxy());
+		setValue(Property.AFTER_RENDER, getAfterRenderCallbackProxy().getProxy());
 		// sets proxy instance in the afterTooltipDraw property
-		setValue(Property.AFTER_TOOLTIP_DRAW, afterTooltipDrawCallbackProxy.getProxy());
+		setValue(Property.AFTER_TOOLTIP_DRAW, getAfterTooltipDrawCallbackProxy().getProxy());
 		// sets proxy instance in the afterUpdate property
-		setValue(Property.AFTER_UPDATE, afterUpdateCallbackProxy.getProxy());
+		setValue(Property.AFTER_UPDATE, getAfterUpdateCallbackProxy().getProxy());
 		// sets proxy instance in the beforeDataLimits property
-		setValue(Property.BEFORE_DATA_LIMITS, beforeDataLimitsCallbackProxy.getProxy());
+		setValue(Property.BEFORE_DATA_LIMITS, getBeforeDataLimitsCallbackProxy().getProxy());
 		// sets proxy instance in the beforeBuildTicks property
-		setValue(Property.BEFORE_BUILD_TICKS, beforeBuildTicksCallbackProxy.getProxy());
+		setValue(Property.BEFORE_BUILD_TICKS, getBeforeBuildTicksCallbackProxy().getProxy());
 		// sets proxy instance in the beforeDatasetDraw property
-		setValue(Property.BEFORE_DATASET_DRAW, beforeDatasetDrawCallbackProxy.getProxy());
+		setValue(Property.BEFORE_DATASET_DRAW, getBeforeDatasetDrawCallbackProxy().getProxy());
 		// sets proxy instance in the beforeDatasetUpdate property
-		setValue(Property.BEFORE_DATASET_UPDATE, beforeDatasetUpdateCallbackProxy.getProxy());
+		setValue(Property.BEFORE_DATASET_UPDATE, getBeforeDatasetUpdateCallbackProxy().getProxy());
 		// sets proxy instance in the beforeDatasetsDraw property
-		setValue(Property.BEFORE_DATASETS_DRAW, beforeDatasetsDrawCallbackProxy.getProxy());
+		setValue(Property.BEFORE_DATASETS_DRAW, getBeforeDatasetsDrawCallbackProxy().getProxy());
 		// sets proxy instance in the beforeDatasetsUpdate property
-		setValue(Property.BEFORE_DATASETS_UPDATE, beforeDatasetsUpdateCallbackProxy.getProxy());
+		setValue(Property.BEFORE_DATASETS_UPDATE, getBeforeDatasetsUpdateCallbackProxy().getProxy());
 		// sets proxy instance in the beforeDraw property
-		setValue(Property.BEFORE_DRAW, beforeDrawCallbackProxy.getProxy());
+		setValue(Property.BEFORE_DRAW, getBeforeDrawCallbackProxy().getProxy());
 		// sets proxy instance in the beforeEvent property
-		setValue(Property.BEFORE_EVENT, beforeEventCallbackProxy.getProxy());
+		setValue(Property.BEFORE_EVENT, getBeforeEventCallbackProxy().getProxy());
 		// sets proxy instance in the beforeInit property
-		setValue(Property.BEFORE_INIT, beforeInitCallbackProxy.getProxy());
+		setValue(Property.BEFORE_INIT, getBeforeInitCallbackProxy().getProxy());
 		// sets proxy instance in the beforeLayout property
-		setValue(Property.BEFORE_LAYOUT, beforeLayoutCallbackProxy.getProxy());
+		setValue(Property.BEFORE_LAYOUT, getBeforeLayoutCallbackProxy().getProxy());
 		// sets proxy instance in the beforeRender property
-		setValue(Property.BEFORE_RENDER, beforeRenderCallbackProxy.getProxy());
+		setValue(Property.BEFORE_RENDER, getBeforeRenderCallbackProxy().getProxy());
 		// sets proxy instance in the beforeTooltipDraw property
-		setValue(Property.BEFORE_TOOLTIP_DRAW, beforeTooltipDrawCallbackProxy.getProxy());
+		setValue(Property.BEFORE_TOOLTIP_DRAW, getBeforeTooltipDrawCallbackProxy().getProxy());
 		// sets proxy instance in the beforeUpdate property
-		setValue(Property.BEFORE_UPDATE, beforeUpdateCallbackProxy.getProxy());
+		setValue(Property.BEFORE_UPDATE, getBeforeUpdateCallbackProxy().getProxy());
 		// sets proxy instance in the before destroy property
-		setValue(Property.BEFORE_DESTROY, beforeDestroyCallbackProxy.getProxy());
+		setValue(Property.BEFORE_DESTROY, getBeforeDestroyCallbackProxy().getProxy());
 		// sets proxy instance in the after destroy property
-		setValue(Property.AFTER_DESTROY, afterDestroyCallbackProxy.getProxy());
+		setValue(Property.AFTER_DESTROY, getAfterDestroyCallbackProxy().getProxy());
 		// sets proxy instance in the resize property
-		setValue(Property.RESIZE, resizeCallbackProxy.getProxy());
+		setValue(Property.RESIZE, getResizeCallbackProxy().getProxy());
 		// sets proxy instance in the reset property
-		setValue(Property.RESET, resetCallbackProxy.getProxy());
+		setValue(Property.RESET, getResetCallbackProxy().getProxy());
 		// sets proxy instance in the install property
-		setValue(Property.INSTALL, installCallbackProxy.getProxy());
+		setValue(Property.INSTALL, getInstallCallbackProxy().getProxy());
 		// sets proxy instance in the start property
-		setValue(Property.START, startCallbackProxy.getProxy());
+		setValue(Property.START, getStartCallbackProxy().getProxy());
 		// sets proxy instance in the stop property
-		setValue(Property.STOP, stopCallbackProxy.getProxy());
+		setValue(Property.STOP, getStopCallbackProxy().getProxy());
 		// sets proxy instance in the uninstall property
-		setValue(Property.UNINSTALL, uninstallCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Returns the plugin id.
-	 * 
-	 * @return the plugin id.
-	 */
-	String getId() {
-		return delegation.getId();
-	}
-
-	/**
-	 * Returns the native java script object.
-	 * 
-	 * @return the nativeObject
-	 */
-	NativeObject nativeObject() {
-		return super.getNativeObject();
+		setValue(Property.UNINSTALL, getUninstallCallbackProxy().getProxy());
 	}
 
 	// ----------------------------
@@ -580,7 +135,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance.
 	 */
-	void onConfigure(IsChart chart) {
+	@Override
+	void invokeConfigure(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onConfigure(chart);
@@ -592,7 +148,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onBeforeInit(IsChart chart) {
+	@Override
+	void invokeBeforeInit(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// stores the counter
@@ -608,7 +165,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @param nativeChart CHART.JS chart instance
 	 */
-	void onAfterInit(IsChart chart, Chart nativeChart) {
+	@Override
+	void invokeAfterInit(IsChart chart, Chart nativeChart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterInit(chart, nativeChart);
@@ -627,7 +185,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param argument the argument passed for update
 	 * @return <code>false</code> to cancel the chart update.
 	 */
-	boolean onBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
+	@Override
+	boolean invokeBeforeUpdate(IsChart chart, PluginUpdateArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// gets the counter
@@ -648,7 +207,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @param argument the argument passed for update
 	 */
-	void onAfterUpdate(IsChart chart, PluginUpdateArgument argument) {
+	@Override
+	void invokeAfterUpdate(IsChart chart, PluginUpdateArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterUpdate(chart, argument);
@@ -660,7 +220,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onBeforeElementsUpdate(IsChart chart) {
+	@Override
+	void invokeBeforeElementsUpdate(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the reset of plugin
@@ -675,7 +236,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @return <code>false</code> to cancel the chart layout.
 	 */
-	boolean onBeforeLayout(IsChart chart) {
+	@Override
+	boolean invokeBeforeLayout(IsChart chart) {
 		// if consistent
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
@@ -690,7 +252,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onAfterLayout(IsChart chart) {
+	@Override
+	void invokeAfterLayout(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterLayout(chart);
@@ -705,7 +268,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param argument the argument passed for update
 	 * @return <code>false</code> to cancel the datasets update.
 	 */
-	boolean onBeforeDatasetsUpdate(IsChart chart, PluginUpdateArgument argument) {
+	@Override
+	boolean invokeBeforeDatasetsUpdate(IsChart chart, PluginUpdateArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
@@ -721,7 +285,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @param argument the argument passed for update
 	 */
-	void onAfterDatasetsUpdate(IsChart chart, PluginUpdateArgument argument) {
+	@Override
+	void invokeAfterDatasetsUpdate(IsChart chart, PluginUpdateArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterDatasetsUpdate(chart, argument);
@@ -736,7 +301,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param item dataset item.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetUpdate(IsChart chart, PluginDatasetArgument item) {
+	@Override
+	boolean invokeBeforeDatasetUpdate(IsChart chart, PluginDatasetArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
@@ -752,7 +318,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @param item dataset item.
 	 */
-	void onAfterDatasetUpdate(IsChart chart, PluginDatasetArgument item) {
+	@Override
+	void invokeAfterDatasetUpdate(IsChart chart, PluginDatasetArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterDatasetUpdate(chart, item);
@@ -770,7 +337,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @return <code>false</code> to cancel the chart rendering.
 	 */
-	boolean onBeforeRender(IsChart chart) {
+	@Override
+	boolean invokeBeforeRender(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the before render, checking result for plugin status
@@ -785,7 +353,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onAfterRender(IsChart chart) {
+	@Override
+	void invokeAfterRender(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes after render
@@ -812,7 +381,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @return <code>false</code> to cancel the chart drawing.
 	 */
-	boolean onBeforeDraw(IsChart chart) {
+	@Override
+	boolean invokeBeforeDraw(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
@@ -827,7 +397,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onAfterDraw(IsChart chart) {
+	@Override
+	void invokeAfterDraw(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterDraw(chart);
@@ -841,7 +412,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetsDraw(IsChart chart) {
+	@Override
+	boolean invokeBeforeDatasetsDraw(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
@@ -856,7 +428,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onAfterDatasetsDraw(IsChart chart) {
+	@Override
+	void invokeAfterDatasetsDraw(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterDatasetsDraw(chart);
@@ -871,7 +444,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param item dataset item instance
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetDraw(IsChart chart, PluginDatasetArgument item) {
+	@Override
+	boolean invokeBeforeDatasetDraw(IsChart chart, PluginDatasetArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the call plugin, checking result for plugin status
@@ -887,7 +461,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @param item dataset item instance
 	 */
-	void onAfterDatasetDraw(IsChart chart, PluginDatasetArgument item) {
+	@Override
+	void invokeAfterDatasetDraw(IsChart chart, PluginDatasetArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterDatasetDraw(chart, item);
@@ -905,7 +480,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param item tooltip item instance
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
-	boolean onBeforeTooltipDraw(IsChart chart, PluginTooltipArgument item) {
+	@Override
+	boolean invokeBeforeTooltipDraw(IsChart chart, PluginTooltipArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			return delegation.onBeforeTooltipDraw(chart, item);
@@ -919,7 +495,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @param item tooltip item instance
 	 */
-	void onAfterTooltipDraw(IsChart chart, PluginTooltipArgument item) {
+	@Override
+	void invokeAfterTooltipDraw(IsChart chart, PluginTooltipArgument item) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterTooltipDraw(chart, item);
@@ -937,7 +514,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param argument argument of event callback
 	 * @return <code>false</code> to discard the event.
 	 */
-	boolean onBeforeEvent(IsChart chart, PluginEventArgument argument) {
+	@Override
+	boolean invokeBeforeEvent(IsChart chart, PluginEventArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			return delegation.onBeforeEvent(chart, argument);
@@ -951,7 +529,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @param argument argument of event callback
 	 */
-	void onAfterEvent(IsChart chart, PluginEventArgument argument) {
+	@Override
+	void invokeAfterEvent(IsChart chart, PluginEventArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterEvent(chart, argument);
@@ -968,7 +547,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @param argument argument of method which contains the new canvas display size (eq. canvas.style width and height).
 	 */
-	void onResize(IsChart chart, PluginResizeArgument argument) {
+	@Override
+	void invokeResize(IsChart chart, PluginResizeArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onResize(chart, argument);
@@ -980,7 +560,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onReset(IsChart chart) {
+	@Override
+	void invokeReset(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// checks if counter is stored
@@ -1000,7 +581,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onBeforeDestroy(IsChart chart) {
+	@Override
+	void invokeBeforeDestroy(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// removes the counter
@@ -1015,7 +597,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onAfterDestroy(IsChart chart) {
+	@Override
+	void invokeAfterDestroy(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// removes the counter
@@ -1035,7 +618,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onInstall(IsChart chart) {
+	@Override
+	void invokeInstall(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the install of plugin
@@ -1049,7 +633,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onStart(IsChart chart) {
+	@Override
+	void invokeStart(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the start of plugin
@@ -1063,7 +648,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onStop(IsChart chart) {
+	@Override
+	void invokeStop(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the stop of plugin
@@ -1082,7 +668,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart the chart instance.
 	 * @param argument argument of method which contains the scale instance.
 	 */
-	void onBeforeDataLimits(IsChart chart, PluginScaleArgument argument) {
+	@Override
+	void invokeBeforeDataLimits(IsChart chart, PluginScaleArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onBeforeDataLimits(chart, argument);
@@ -1096,7 +683,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart the chart instance.
 	 * @param argument argument of method which contains the scale instance.
 	 */
-	void onAfterDataLimits(IsChart chart, PluginScaleArgument argument) {
+	@Override
+	void invokeAfterDataLimits(IsChart chart, PluginScaleArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterDataLimits(chart, argument);
@@ -1114,7 +702,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart the chart instance.
 	 * @param argument argument of method which contains the scale instance.
 	 */
-	void onBeforeBuildTicks(IsChart chart, PluginScaleArgument argument) {
+	@Override
+	void invokeBeforeBuildTicks(IsChart chart, PluginScaleArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onBeforeBuildTicks(chart, argument);
@@ -1128,7 +717,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * @param chart the chart instance.
 	 * @param argument argument of method which contains the scale instance.
 	 */
-	void onAfterBuildTicks(IsChart chart, PluginScaleArgument argument) {
+	@Override
+	void invokeAfterBuildTicks(IsChart chart, PluginScaleArgument argument) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			delegation.onAfterBuildTicks(chart, argument);
@@ -1145,7 +735,8 @@ final class WrapperPlugin extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	void onUninstall(IsChart chart) {
+	@Override
+	void invokeUninstall(IsChart chart) {
 		// if consistent, calls plugin
 		if (IsChart.isValid(chart)) {
 			// invokes the unistall of plugin

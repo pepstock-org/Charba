@@ -289,6 +289,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
+ * add **SmartPlugin** capability which enable the user to create a CHART.JS with only the needed hooks, which is improving the performance of chart drawing.
  * add **REGRESSION** capabilities leveraging on ML library (only regressions module), version [6.0.0](https://github.com/mljs/ml).
    * add simple linear regression.
    * add power regression.

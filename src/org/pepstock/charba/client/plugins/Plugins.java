@@ -37,7 +37,7 @@ import org.pepstock.charba.client.enums.DefaultPluginId;
 public final class Plugins implements ConfigurationElement {
 
 	// list of added plugins
-	private final List<WrapperPlugin> pluginsInstances = new LinkedList<>();
+	private final List<AbstractBasePlugin> pluginsInstances = new LinkedList<>();
 
 	/**
 	 * Adds a new plugin to the chart, by a container
@@ -65,6 +65,49 @@ public final class Plugins implements ConfigurationElement {
 	 */
 	public void add(Plugin plugin) {
 		// checks if plugin is consistent
+		if (plugin != null) {
+			// registers plugin
+			addBasePlugin(new WrapperPlugin(plugin));
+		}
+	}
+
+	/**
+	 * Adds a new plugin to the chart, by a container
+	 * 
+	 * @param container plugin container instance
+	 */
+	public void add(SmartPluginContainer container) {
+		// checks if plugin container is consistent
+		if (container != null) {
+			// creates envelop
+			PluginsEnvelop<SmartPlugin> envelop = new PluginsEnvelop<>();
+			// loads the plugin by container
+			container.loadPlugin(envelop);
+			// registers plugin
+			add(envelop.getContent());
+		}
+	}
+
+	/**
+	 * Adds a new plugin to the chart.<br>
+	 * If another plugin instance with the same id has been already loaded, it will remove, storing the new one.<br>
+	 * If the chart is already initialized, to get this update the chart must be drawn again.
+	 * 
+	 * @param plugin plugin instance
+	 */
+	public void add(SmartPlugin plugin) {
+		addBasePlugin(plugin);
+	}
+
+	/**
+	 * Adds a new plugin to the chart.<br>
+	 * If another plugin instance with the same id has been already loaded, it will remove, storing the new one.<br>
+	 * If the chart is already initialized, to get this update the chart must be drawn again.
+	 * 
+	 * @param plugin plugin instance
+	 */
+	private void addBasePlugin(AbstractBasePlugin plugin) {
+		// checks if plugin is consistent
 		// and the plugin id is not a default one
 		if (plugin != null && !DefaultPluginId.is(plugin.getId())) {
 			// checks the plugin id
@@ -75,10 +118,8 @@ public final class Plugins implements ConfigurationElement {
 				// then it removes the previous one
 				remove(plugin.getId());
 			}
-			// creates a java script object, wrapper of the plugin
-			WrapperPlugin wPlugin = new WrapperPlugin(plugin);
 			// stores the wrapper in the a list
-			pluginsInstances.add(wPlugin);
+			pluginsInstances.add(plugin);
 		}
 	}
 
@@ -90,10 +131,10 @@ public final class Plugins implements ConfigurationElement {
 	 */
 	public boolean has(String id) {
 		// scans all plugins
-		Iterator<WrapperPlugin> iter = pluginsInstances.iterator();
+		Iterator<AbstractBasePlugin> iter = pluginsInstances.iterator();
 		while (iter.hasNext()) {
 			// gets wrapper
-			WrapperPlugin plugin = iter.next();
+			AbstractBasePlugin plugin = iter.next();
 			// if has got the same id
 			if (plugin.getId().equalsIgnoreCase(id)) {
 				// removes it
@@ -114,10 +155,10 @@ public final class Plugins implements ConfigurationElement {
 		// and the plugin id is not a default one
 		if (pluginId != null && !DefaultPluginId.is(pluginId)) {
 			// scans all plugins
-			Iterator<WrapperPlugin> iter = pluginsInstances.iterator();
+			Iterator<AbstractBasePlugin> iter = pluginsInstances.iterator();
 			while (iter.hasNext()) {
 				// gets wrapper
-				WrapperPlugin plugin = iter.next();
+				AbstractBasePlugin plugin = iter.next();
 				// if has got the same id
 				if (plugin.getId().equalsIgnoreCase(pluginId)) {
 					// removes it
@@ -140,9 +181,9 @@ public final class Plugins implements ConfigurationElement {
 			return;
 		}
 		// scans all plugins
-		for (WrapperPlugin entry : pluginsInstances) {
+		for (AbstractBasePlugin entry : pluginsInstances) {
 			// calls on configure method
-			entry.onConfigure(chart);
+			entry.invokeConfigure(chart);
 		}
 	}
 
@@ -164,13 +205,13 @@ public final class Plugins implements ConfigurationElement {
 			// checks if ID is already registered
 			Set<String> globalPluginIds = Defaults.get().getPlugins().getIds();
 			// create a list of plugins
-			List<WrapperPlugin> pluginsListToSet = new LinkedList<>();
+			List<AbstractBasePlugin> pluginsListToSet = new LinkedList<>();
 			// adds all java script object of the plugin wrapper
 			// scans all plugins
-			Iterator<WrapperPlugin> iter = pluginsInstances.iterator();
+			Iterator<AbstractBasePlugin> iter = pluginsInstances.iterator();
 			while (iter.hasNext()) {
 				// gets wrapper
-				WrapperPlugin plugin = iter.next();
+				AbstractBasePlugin plugin = iter.next();
 				// checks if the plugin is already loaded in the global ones
 				if (!globalPluginIds.contains(plugin.getId())) {
 					// if not, adds plugin

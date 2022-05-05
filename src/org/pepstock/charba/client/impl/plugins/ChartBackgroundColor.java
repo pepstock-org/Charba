@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.HtmlColor;
@@ -23,6 +22,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.impl.plugins.ChartBackgroundColorOptionsFactory.ChartBackgroundColorDefaultsOptionsFactory;
+import org.pepstock.charba.client.plugins.SmartPlugin;
 
 /**
  * A plugin implementation to set the background color, gradient or pattern of chart.<br>
@@ -31,7 +31,7 @@ import org.pepstock.charba.client.impl.plugins.ChartBackgroundColorOptionsFactor
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ChartBackgroundColor extends CharbaPluginContainer {
+public final class ChartBackgroundColor extends CharbaSmartPluginContainer {
 
 	/**
 	 * Plugin ID <b>{@value ID}</b>.
@@ -167,7 +167,7 @@ public final class ChartBackgroundColor extends CharbaPluginContainer {
 	 * @see org.pepstock.charba.client.impl.plugins.CharbaPluginContainer#getPluginInstance()
 	 */
 	@Override
-	Plugin getPluginInstance() {
+	SmartPlugin getPluginInstance() {
 		return pluginInstance;
 	}
 

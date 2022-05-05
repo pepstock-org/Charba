@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.callbacks;
+package org.pepstock.charba.client.plugins;
 
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.IsJSType;
@@ -25,18 +25,24 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Enables the capability to create callback directly in java script language.<br>
+ * Enables the capability to create a plugin hook directly in java script language.<br>
  * This could be helpful when for performance reason, you don't want to wraps all objects.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 @JsType(isNative = true, name = NativeName.FUNCTION, namespace = JsPackage.GLOBAL)
-public final class NativeCallback implements IsJSType {
+public final class NativeHook implements IsJSType {
 
-	// fixed argument of the callback, is the "context"
+	// fixed first argument of the hook, is the "chart"
 	@JsOverlay
-	private static final String DEFAULT_CONTEXT_ARGUMENT = "context";
+	private static final String DEFAULT_CHART_ARGUMENT = "chart";
+	// fixed second argument of the hook, is the "args"
+	@JsOverlay
+	private static final String DEFAULT_ARGS_ARGUMENT = "args";
+	// fixed third argument of the hook, is the "options"
+	@JsOverlay
+	private static final String DEFAULT_OPTIONS_ARGUMENT = "options";
 
 	/**
 	 * Creates a new <code>Function</code> object.<br>
@@ -44,44 +50,30 @@ public final class NativeCallback implements IsJSType {
 	 * <code>eval</code>.<br>
 	 * However, unlike <code>eval</code>, the <code>Function</code> constructor creates functions that execute in the global scope only.
 	 * 
-	 * @param argument the argument is the CHART.JS context
+	 * @param chart the chart instance name, always {@value NativeHook#DEFAULT_CHART_ARGUMENT}.
+	 * @param args the arguments instance name, always {@value NativeHook#DEFAULT_ARGS_ARGUMENT}.
+	 * @param options the options instance name, always {@value NativeHook#DEFAULT_OPTIONS_ARGUMENT}.
 	 * @param evalString java script code with is the body of new function.
 	 */
-	private NativeCallback(String argument, String evalString) {
+	private NativeHook(String chart, String args, String options, String evalString) {
 		// do nothing
 	}
 
 	/**
-	 * Creates a callback in java script.<br>
-	 * All options in the configuration which can be set like scriptable, can be set with a native callback.<br>
-	 * The callback can receive only 1 argument, the scriptable context. The name of the argument is "<code>context</code>".
+	 * Creates a plugin hook in java script.<br>
+	 * The callback will receive only 3 arguments, "<code>{@value NativeHook#DEFAULT_CHART_ARGUMENT}</code>", "<code>{@value NativeHook#DEFAULT_ARGS_ARGUMENT}</code>",
+	 * "<code>{@value NativeHook#DEFAULT_OPTIONS_ARGUMENT}</code>".
 	 * 
-	 * @param code the code of the callback to execute
-	 * @return a callback in java script
+	 * @param code the code of the hook to execute
+	 * @return a plugin hook in java script
 	 */
 	@JsOverlay
-	public static NativeCallback create(String code) {
-		return create(DEFAULT_CONTEXT_ARGUMENT, code);
-	}
-
-	/**
-	 * Creates a callback in java script.<br>
-	 * All options in the configuration which can be set like scriptable, can be set with a native callback.<br>
-	 * The callback can receive only 1 argument, the scriptable context. The name of the argument can be set.
-	 * 
-	 * @param argument name of the scriptable context variable to use in the java script code.
-	 * @param code the code of the callback to execute
-	 * @return a callback in java script
-	 */
-	@JsOverlay
-	public static NativeCallback create(String argument, String code) {
+	public static NativeHook create(String code) {
 		// checks if code is consistent
 		Checker.checkIfValid(code, "Code argument");
-		Checker.checkAndGetIfGreaterThan(code.trim().length(), 0, "Code argument length ");
-		// checks the argument
-		String argumentVariable = argument != null && argument.trim().length() > 0 ? argument : DEFAULT_CONTEXT_ARGUMENT;
+		Checker.checkAndGetIfGreaterThan(code.trim().length(), 0, "Code argument length");
 		// creates and returns the callback
-		return new NativeCallback(argumentVariable, code);
+		return new NativeHook(DEFAULT_CHART_ARGUMENT, DEFAULT_ARGS_ARGUMENT, DEFAULT_OPTIONS_ARGUMENT, code);
 	}
 
 	/**

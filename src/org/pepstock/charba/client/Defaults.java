@@ -56,8 +56,10 @@ import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.items.TooltipLabelPointStyle;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.Scale;
-import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
+import org.pepstock.charba.client.plugins.SmartPlugin;
+import org.pepstock.charba.client.plugins.hooks.AfterInitHook;
+import org.pepstock.charba.client.plugins.hooks.ConfigureHook;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -616,29 +618,33 @@ public final class Defaults {
 	 * @author Andrea "Stock" Stocchero
 	 * 
 	 */
-	private static class NativeChartHandler extends AbstractPlugin {
+	// private static class NativeChartHandler extends AbstractPlugin {
 
+	private static class NativeChartHandler extends SmartPlugin implements ConfigureHook, AfterInitHook {
 		// plugin options
-		private static final DisablingEventCatchingOptions PLUGIN_OPTIONS = new DisablingEventCatchingOptions(ID);
+		// private static final DisablingEventCatchingOptions PLUGIN_OPTIONS = new DisablingEventCatchingOptions(ID);
 
 		/**
 		 * Creates the plugin, using {@link Defaults#ID}.
 		 */
 		private NativeChartHandler() {
 			super(ID);
+			// stores itself as hook handler
+			setConfigureHook(this);
+			setAfterInitHook(this);
 		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.IsChart)
+		 * @see org.pepstock.charba.client.plugins.hooks.ConfigureHook#onConfigure(org.pepstock.charba.client.IsChart)
 		 */
 		@Override
 		public void onConfigure(IsChart chart) {
 			// checks if chart is consistent
 			if (IsChart.isConsistent(chart)) {
 				// disables events for performance
-				chart.getOptions().getPlugins().setOptions(PLUGIN_OPTIONS);
+				// chart.getOptions().getPlugins().setOptions(PLUGIN_OPTIONS);
 				// checks to sets has got cartesian axes
 				if (ScaleType.MULTI.equals(chart.getType().scaleType()) && chart.getOptions() instanceof ScalesOptions) {
 					// casts to scaled options
@@ -681,7 +687,7 @@ public final class Defaults {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.Plugin#onAfterInit(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Chart)
+		 * @see org.pepstock.charba.client.plugins.hooks.AfterInitHook#onAfterInit(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.Chart)
 		 */
 		@Override
 		public void onAfterInit(IsChart chart, Chart nativeChart) {

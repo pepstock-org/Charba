@@ -26,6 +26,7 @@ import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.plugins.NativeHook;
 
 /**
  * Base class for all options nodes, which will wraps a native object and manages the relations about parent and children elements.
@@ -281,6 +282,18 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected final void setValueAndAddToParent(Key key, NativeCallback value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets a value (hook function for plugin) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, NativeHook value) {
 		setValue(key, value);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
