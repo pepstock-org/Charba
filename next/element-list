@@ -48,6 +48,7 @@ org.pepstock.charba.client.matrix.enums
 org.pepstock.charba.client.ml
 org.pepstock.charba.client.options
 org.pepstock.charba.client.plugins
+org.pepstock.charba.client.plugins.hooks
 org.pepstock.charba.client.positioner
 org.pepstock.charba.client.resources
 org.pepstock.charba.client.sankey
