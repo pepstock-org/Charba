@@ -30,7 +30,7 @@ import jsinterop.annotations.JsFunction;
 
 /**
  * Wraps a controller, delegating the execution of all hooks to it.<br>
- * The wrapper is mandatory to able to catch all hooks of chart even if the controller implements just a part of the hooks.
+ * The wrapper is mandatory to enable catching all hooks of chart even if the controller implements just a part of the hooks.
  * 
  * @author Andrea "Stock" Stocchero
  *

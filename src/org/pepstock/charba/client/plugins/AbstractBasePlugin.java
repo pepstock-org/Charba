@@ -33,8 +33,8 @@ import org.pepstock.charba.client.items.Undefined;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Wraps a plugin, delegating the execution of all hooks to it.<br>
- * The wrapper is mandatory to able to catch all hooks of chart even if the plugin implements just a part of the hooks.
+ * Base plugin class implementation.<br>
+ * It represents the instance to store in CHART.JS configuration.
  * 
  * @author Andrea "Stock" Stocchero
  *

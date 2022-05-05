@@ -31,7 +31,7 @@ import org.pepstock.charba.client.items.PluginUpdateArgument;
 
 /**
  * Wraps a plugin, delegating the execution of all hooks to it.<br>
- * The wrapper is mandatory to able to catch all hooks of chart even if the plugin implements just a part of the hooks.
+ * The wrapper is mandatory to enable catching all hooks of chart even if the plugin implements just a part of the hooks.
  * 
  * @author Andrea "Stock" Stocchero
  *

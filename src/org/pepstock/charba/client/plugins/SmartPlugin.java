@@ -64,7 +64,7 @@ import org.pepstock.charba.client.plugins.hooks.UninstallHook;
 
 /**
  * Wraps a plugin, delegating the execution of all hooks to it.<br>
- * The wrapper is mandatory to able to catch all hooks of chart even if the plugin implements just a part of the hooks.
+ * the needed hooks can be added and CHART.JS will invoke only those hooks, improving the drawing performance.
  * 
  * @author Andrea "Stock" Stocchero
  *
