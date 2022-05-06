@@ -173,6 +173,16 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#getDrawCount()
+	 */
+	@Override
+	public int getDrawCount() {
+		return chart.getDrawCount();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#getCanvas()
 	 */
 	@Override

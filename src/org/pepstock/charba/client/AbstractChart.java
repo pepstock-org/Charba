@@ -18,6 +18,7 @@ package org.pepstock.charba.client;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.commons.AbstractPoint;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -120,6 +121,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private final IsDefaultScaledOptions defaultChartOptions;
 	// cursor defined when chart is created
 	private final CursorType initialCursor;
+	// draw count
+	private final AtomicInteger drawCount = new AtomicInteger(0);
 	// timer instance
 	private CTimer timer = null;
 	// status if attached
@@ -261,6 +264,16 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final String getId() {
 		return id;
+	}
+
+	/**
+	 * Returns the draw count of the chart.
+	 * 
+	 * @return the draw count of the chart
+	 */
+	@Override
+	public final int getDrawCount() {
+		return drawCount.get();
 	}
 
 	/*
@@ -807,6 +820,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	public final void resize() {
 		// checks if chart is created
 		if (isInitialized()) {
+			// increments draw count
+			drawCount.incrementAndGet();
 			// resize!
 			chart.resize();
 		}
@@ -823,6 +838,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	public final void resize(int width, int height) {
 		// checks if chart is created
 		if (isInitialized()) {
+			// increments draw count
+			drawCount.incrementAndGet();
 			// resize!
 			chart.resize(width, height);
 		}
@@ -853,6 +870,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		if (isInitialized()) {
 			// invokes the apply configuration
 			applyConfiguration();
+			// increments draw count
+			drawCount.incrementAndGet();
 			// if mode is valid.. added check to null to avoid issue from code analysis
 			if (mode != null && TransitionKey.isValid(mode)) {
 				// then calls the update with animation mode
@@ -881,6 +900,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			if (configuration == null) {
 				// invokes the apply configuration
 				applyConfiguration();
+				// increments draw count
+				drawCount.incrementAndGet();
 				// then calls the update
 				chart.update();
 			} else {
@@ -990,6 +1011,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	public final void render() {
 		// checks if chart is created
 		if (isInitialized()) {
+			// increments draw count
+			drawCount.incrementAndGet();
 			// calls the render
 			chart.render();
 		}
@@ -1142,6 +1165,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
 		if (instance != null && isValidDatasetIndex(datasetIndex)) {
+			// increments draw count
+			drawCount.incrementAndGet();
 			// hides dataset
 			instance.hide(datasetIndex);
 		}
@@ -1159,6 +1184,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and indexes
 		if (instance != null && isValidDatasetIndex(datasetIndex) && dataIndex >= 0) {
+			// increments draw count
+			drawCount.incrementAndGet();
 			// hides data at data index
 			instance.hide(datasetIndex, dataIndex);
 		}
@@ -1177,6 +1204,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and datasets
 		if (instance != null && isValidDatasetIndex(datasetIndex)) {
+			// increments draw count
+			drawCount.incrementAndGet();
 			// hides dataset
 			instance.show(datasetIndex);
 		}
@@ -1194,6 +1223,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and indexes
 		if (instance != null && isValidDatasetIndex(datasetIndex) && dataIndex >= 0) {
+			// increments draw count
+			drawCount.incrementAndGet();
 			// shows data at data index
 			instance.show(datasetIndex, dataIndex);
 		}
@@ -1285,6 +1316,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 				}
 				// stores the chart instance in the collection
 				Charts.add(this);
+				// increments draw count
+				drawCount.incrementAndGet();
 				// draws chart with configuration
 				chart = new Chart(canvas.getContext2d(), configuration.nativeObject());
 				// replaces the native object in the configuration
@@ -1298,6 +1331,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 					timer.start();
 				}
 			} else if (isInitialized()) {
+				// increments draw count
+				drawCount.incrementAndGet();
 				// if here, the chart is already initialized
 				// and then draw it again.
 				chart.draw();

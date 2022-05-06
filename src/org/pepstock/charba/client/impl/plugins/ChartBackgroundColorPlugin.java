@@ -31,7 +31,6 @@ import org.pepstock.charba.client.items.PluginResizeArgument;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.plugins.SmartPlugin;
 import org.pepstock.charba.client.plugins.SmartPluginContainer;
-import org.pepstock.charba.client.plugins.hooks.AfterDrawHook;
 import org.pepstock.charba.client.plugins.hooks.BeforeDestroyHook;
 import org.pepstock.charba.client.plugins.hooks.BeforeDrawHook;
 import org.pepstock.charba.client.plugins.hooks.ResizeHook;
@@ -44,10 +43,12 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDrawHook, AfterDrawHook, ResizeHook, BeforeDestroyHook {
+final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDrawHook, ResizeHook, BeforeDestroyHook {
 
 	// cache to store options in order do not load every time the options
 	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
+	// cache to store the draw count for chart
+	private static final Map<String, Integer> DRAW_COUNTS = new HashMap<>();
 	// container instance
 	private final ChartBackgroundColor container;
 
@@ -62,7 +63,6 @@ final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDraw
 		this.container = container;
 		// stores itself as hook handler
 		setBeforeDrawHook(this);
-		setAfterDrawHook(this);
 		setResizeHook(this);
 		setBeforeDestroyHook(this);
 	}
@@ -85,24 +85,6 @@ final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDraw
 		}
 		// always TRUE
 		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.hooks.AfterDrawHook#onAfterDraw(org.pepstock.charba.client.IsChart)
-	 */
-	@Override
-	public void onAfterDraw(IsChart chart) {
-		// checks if chart is consistent
-		if (IsChart.isValid(chart)) {
-			// when the draw is completed
-			// remove the options from cache in order to reload it
-			// when chart is re drawing for whatever reason.
-			// in this way if options are updating during chart's life cycle
-			// the updates can be applied.
-			OPTIONS.remove(chart.getId());
-		}
 	}
 
 	/*
@@ -133,9 +115,9 @@ final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDraw
 		// checks if chart is consistent
 		if (IsChart.isValid(chart)) {
 			// removes the options from the cache
-			// even if it could not be needed
-			// because the options should be remove after draw
 			OPTIONS.remove(chart.getId());
+			// removes the draw count from the cache
+			DRAW_COUNTS.remove(chart.getId());
 			// because chart is destroy
 			// clears the cache of patterns and gradients of the chart
 			ChartBackgroundGradientFactory.get().clear(chart);
@@ -245,11 +227,15 @@ final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDraw
 	 * @return the options of plugin
 	 */
 	private ChartBackgroundColorOptions getOptions(IsChart chart) {
+		// gets chart id
+		String id = chart.getId();
 		// checks if options are in cache
-		if (OPTIONS.containsKey(chart.getId())) {
+		if (DRAW_COUNTS.containsKey(id) && chart.getDrawCount() == DRAW_COUNTS.get(id) && OPTIONS.containsKey(id)) {
 			// returns from cache
-			return OPTIONS.get(chart.getId());
+			return OPTIONS.get(id);
 		}
+		// stores draw count
+		DRAW_COUNTS.put(id, chart.getDrawCount());
 		// options instance
 		ChartBackgroundColorOptions bgOptions = null;
 		// loads chart options for the chart
@@ -273,7 +259,7 @@ final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDraw
 			}
 		}
 		// stores in the cache
-		OPTIONS.put(chart.getId(), bgOptions);
+		OPTIONS.put(id, bgOptions);
 		// returns it
 		return bgOptions;
 	}

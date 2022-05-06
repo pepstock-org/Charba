@@ -221,6 +221,13 @@ public interface IsChart {
 	String getId();
 
 	/**
+	 * Returns the draw count of the chart.
+	 * 
+	 * @return the draw count of the chart
+	 */
+	int getDrawCount();
+
+	/**
 	 * Returns the canvas element used to draw the chart.
 	 * 
 	 * @return the canvas
