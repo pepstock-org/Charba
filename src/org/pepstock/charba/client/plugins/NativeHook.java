@@ -26,7 +26,10 @@ import jsinterop.annotations.JsType;
 
 /**
  * Enables the capability to create a plugin hook directly in java script language.<br>
- * This could be helpful when for performance reason, you don't want to wraps all objects.
+ * This could be helpful when for performance reason, you don't want to wraps all objects.<br>
+ * The hook will receive only 3 arguments, to use in the java script code, <code>{@value NativeHook#DEFAULT_CHART_ARGUMENT}</code>,
+ * <code>{@value NativeHook#DEFAULT_ARGS_ARGUMENT}</code>, <code>{@value NativeHook#DEFAULT_OPTIONS_ARGUMENT}</code>.<br>
+ * See <a href="https://www.chartjs.org/docs/latest/api/interfaces/Plugin.html">CHART.JS doc</a> about the arguments.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -61,8 +64,8 @@ public final class NativeHook implements IsJSType {
 
 	/**
 	 * Creates a plugin hook in java script.<br>
-	 * The callback will receive only 3 arguments, "<code>{@value NativeHook#DEFAULT_CHART_ARGUMENT}</code>", "<code>{@value NativeHook#DEFAULT_ARGS_ARGUMENT}</code>",
-	 * "<code>{@value NativeHook#DEFAULT_OPTIONS_ARGUMENT}</code>".
+	 * The hook will receive only 3 arguments, to use in the java script code, <code>{@value NativeHook#DEFAULT_CHART_ARGUMENT}</code>,
+	 * <code>{@value NativeHook#DEFAULT_ARGS_ARGUMENT}</code>, <code>{@value NativeHook#DEFAULT_OPTIONS_ARGUMENT}</code>.
 	 * 
 	 * @param code the code of the hook to execute
 	 * @return a plugin hook in java script
