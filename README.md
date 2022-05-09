@@ -298,7 +298,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * add robust polynomial regression.
    * add TheilSen regression.
  * import CHART.JS GRADIENT plugin version [v0.5.0](https://github.com/kurkle/chartjs-plugin-gradient/releases/tag/v0.5.0).
- * import CHART.JS GEO controller version [v3.7.2](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.7.2). 
+ * import CHART.JS GEO controller version [v3.7.2](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.7.2).
+ * import LUXON library version [v2.4.0](https://github.com/moment/luxon/releases/tag/2.4.0). 
 
 License
 -------
