@@ -34,16 +34,12 @@ import org.pepstock.charba.client.enums.TimeUnit;
  */
 public final class DateAdapter {
 
-	// Property name to get the adapter ID.
-	static final String ID_PROPERTY = "_id";
 	// constant for ISO week
 	private static final String ISO_WEEK_UNIT = "isoWeek";
 	// instance of native adapter inside of CHART.jS
 	private final NativeDateAdapter nativeAdapter;
 	// the options used to creates the adapter
 	private final DateAdapterOptions options;
-	// the date adapter ID
-	private final String id;
 	// the date adapter default formats instance
 	private DateAdapterFormats formats = null;
 
@@ -69,8 +65,6 @@ public final class DateAdapter {
 		}
 		// creates a native date adapter
 		this.nativeAdapter = JsDateAdapterHelper.get().create(this.options);
-		// stores the ID
-		this.id = nativeAdapter.getId();
 		// gets formats
 		// in order to store them once
 		NativeObject nativeObject = nativeAdapter.formats();
@@ -78,15 +72,6 @@ public final class DateAdapter {
 		Checker.checkIfValid(nativeObject, "Default formats");
 		// creates and stores the formats
 		this.formats = new DateAdapterFormats(nativeObject);
-	}
-
-	/**
-	 * Returns the date adapter id.
-	 * 
-	 * @return the date adapter id
-	 */
-	public String getId() {
-		return id;
 	}
 
 	/**

@@ -27,10 +27,6 @@ import org.pepstock.charba.client.resources.DateAdapterInjectionComplete;
  */
 public final class DateAdapterModule {
 
-	/**
-	 * Constants of date adapter identifier, <b>{@value}</b>.
-	 */
-	public static final String ID = "luxon";
 	// singleton instance
 	private static final DateAdapterModule INSTANCE = new DateAdapterModule();
 	// internal instance to know if the module has been injected

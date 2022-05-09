@@ -286,7 +286,8 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `ScriptableUtil`
    * `SafeHtmlUtil`
    * `GeoUtil`
-
+ * Remove `getId` method form DateAdapter because not used anymore and always equals to `"luxon"` value.
+ 
 ### Features
 
  * add **SmartPlugin** capability which enables the user to create a CHART.JS with only the needed hooks, which is improving the performance of chart drawing.

@@ -15,15 +15,11 @@
 */
 package org.pepstock.charba.client.adapters;
 
-import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.ObjectType;
 
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -35,14 +31,6 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = NativeName.CHART_ADAPTERS_DATE, namespace = JsPackage.GLOBAL)
 final class NativeDateAdapter {
-
-	/**
-	 * Returns the id of adapter.
-	 * 
-	 * @return the id of adapter
-	 */
-	@JsProperty(name = DateAdapter.ID_PROPERTY)
-	native String internalId();
 
 	/**
 	 * Returns a map of time formats for the supported formatting units defined in unit.
@@ -115,41 +103,4 @@ final class NativeDateAdapter {
 	@JsMethod
 	native double endOf(double time, String unit);
 
-	/**
-	 * Returns the id of date adapter.
-	 * 
-	 * @return the id of date adapter
-	 */
-	@JsOverlay
-	String getId() {
-		// checks if undefined
-		if (isUndefined(DateAdapter.ID_PROPERTY)) {
-			// if yes, returns the ID got form injected resources
-			return DateAdapterModule.ID;
-		}
-		// gets the id from native object
-		String id = internalId();
-		// returns the value of object check if consistent
-		return id != null ? id : DateAdapterModule.ID;
-	}
-
-	/**
-	 * Returns <code>true</code> if the property, identified by the passed key, is <code>undefined</code>.
-	 * 
-	 * @param key property key to check
-	 * @return <code>true</code> if the property, identified by the passed key, is <code>undefined</code>
-	 */
-	@JsOverlay
-	private final boolean isUndefined(String key) {
-		// checks if the argument is consistent
-		if (key != null) {
-			// gets the type of the property
-			ObjectType type = JsHelper.get().typeOf(this, key);
-			// checks if undefined
-			return ObjectType.UNDEFINED.equals(type);
-		}
-		// if here, the key is null
-		// then is always undefined
-		return true;
-	}
 }
