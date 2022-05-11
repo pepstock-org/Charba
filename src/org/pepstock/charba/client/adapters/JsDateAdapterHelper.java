@@ -63,4 +63,27 @@ final class JsDateAdapterHelper {
 		return NativeJsDateAdapterHelper.create(options.nativeObject());
 	}
 
+	/**
+	 * Returns a epoch time in millisecond by a year and a weeks.
+	 *
+	 * @param weekYear the year of the week
+	 * @param weekNumber the week in the year
+	 * @param options options to configure date adapter
+	 * @return calculated epoch time in millisecond
+	 */
+	double getEpochByWeek(int weekYear, int weekNumber, DateAdapterOptions options) {
+		return NativeJsDateAdapterHelper.getEpochByWeek(weekYear, weekNumber, options.nativeObject());
+	}
+
+	/**
+	 * Returns a epoch time in millisecond by a year and a ordinal.
+	 *
+	 * @param year the year of the week
+	 * @param ordinal the ordinal day in the year
+	 * @param options options to configure date adapter
+	 * @return calculated epoch time in millisecond
+	 */
+	double getEpochByOrdinal(int year, int ordinal, DateAdapterOptions options) {
+		return NativeJsDateAdapterHelper.getEpochByOrdinal(year, ordinal, options.nativeObject());
+	}
 }

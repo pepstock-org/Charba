@@ -762,6 +762,28 @@ CharbaJsDateAdapterHelper.create = function(options) {
   return new Chart._adapters._date(options);
 }
 /**
+ * Returns a epoch time  in millisecond by a year and a weeks.
+ *
+ * @param {number} weekYear the year of the week
+ * @param {number} weekNumber the week in the year
+ * @param {Object} options options to configure date adapter 
+ * @return {number} calculated epoch time in millisecond
+ */
+CharbaJsDateAdapterHelper.getEpochByWeek = function(weekYear, weekNumber, options) {
+  return luxon.DateTime.fromObject({weekNumber, weekYear}, options).toMillis();
+}
+/**
+ * Returns a epoch time  in millisecond by a year and a ordinal.
+ *
+ * @param {number} year the year of the week
+ * @param {number} ordinal the ordinal day in the year
+ * @param {Object} options options to configure date adapter 
+ * @return {number} calculated epoch time in millisecond
+ */
+CharbaJsDateAdapterHelper.getEpochByOrdinal = function(year, ordinal, options) {
+  return luxon.DateTime.fromObject({ordinal, year}, options).toMillis();
+}
+/**
  * ----------------------------------------------------------------------------
  * CharbaJsGeoHelper
  * ----------------------------------------------------------------------------

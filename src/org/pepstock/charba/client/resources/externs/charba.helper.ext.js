@@ -408,6 +408,20 @@ function CharbaJsDateAdapterHelper() {}
  */
 CharbaJsDateAdapterHelper.create = function(object) {};
 /**
+ * @param {number} weekYear
+ * @param {number} weekNumber
+ * @param {Object} options
+ * @return {number}
+ */
+CharbaJsDateAdapterHelper.getEpochByWeek = function(weekYear, weekNumber, options) {};
+/**
+ * @param {number} year
+ * @param {number} ordinal
+ * @param {Object} options 
+ * @return {number}
+ */
+CharbaJsDateAdapterHelper.getEpochByOrdinal = function(year, ordinal, options) {};
+/**
  * @constructor
  * @return {CharbaJsGeoHelper}
  */
