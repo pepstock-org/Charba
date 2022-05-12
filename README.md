@@ -275,33 +275,6 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-Going to next release
----------------------
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
-
-### Breaking changes
-
- * Rename `getXObjectType` and `getXObjectType` methods in `DataPoint` class to `getXType` and `getYType`.
- * Rename the following utilities classes using `Util` suffix instead of `Utils`.
-   * `ScriptableUtil`
-   * `SafeHtmlUtil`
-   * `GeoUtil`
- * Remove `getId` method form DateAdapter because not used anymore and always equals to `"luxon"` value.
- 
-### Features
-
- * add **SmartPlugin** capability which enables the user to create a CHART.JS with only the needed hooks, which is improving the performance of chart drawing.
- * add **REGRESSION** capabilities leveraging on ML library (only regressions module), version [6.0.0](https://github.com/mljs/ml).
-   * add simple linear regression.
-   * add power regression.
-   * add exponential regression.
-   * add polynomial regression.
-   * add robust polynomial regression.
-   * add TheilSen regression.
- * import CHART.JS GRADIENT plugin version [v0.5.0](https://github.com/kurkle/chartjs-plugin-gradient/releases/tag/v0.5.0).
- * import CHART.JS GEO controller version [v3.7.2](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.7.2).
- * import LUXON library version [v2.4.0](https://github.com/moment/luxon/releases/tag/2.4.0). 
-
 License
 -------
 
