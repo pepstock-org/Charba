@@ -275,6 +275,14 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
+Going to next release
+---------------------
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
+
+### Features
+
+  * add `MultilineTextAnnotationBuilder` utility in order to create a canvas to add to a chart, by the annotation plugin labels, where each line of the content can have a specific font and color.
+
 License
 -------
 
