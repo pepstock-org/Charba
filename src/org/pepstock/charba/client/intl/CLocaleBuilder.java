@@ -133,7 +133,7 @@ public final class CLocaleBuilder {
 		// checks if the groups instance is consistent
 		LocaleRegExpGroups groups = Checker.checkAndGetIfValid(uncheckedGroups, "Locale argument");
 		// checks if the groups is consistent
-		Checker.assertCheck(groups.isConsistent(), "Locale argument");
+		Checker.assertCheck(groups.isConsistent(), "Locale argument is not consistent");
 		// gets the references
 		// from groups
 		Language language = groups.getLanguage();
