@@ -230,4 +230,11 @@ public interface IsDefaultScale {
 	 */
 	String getBackgroundColorAsString();
 
+	/**
+	 * If <code>true</code>, bar chart offsets are computed with auto skipped ticks..
+	 * 
+	 * @return if <code>true</code>, bar chart offsets are computed with auto skipped ticks..
+	 */
+	boolean isOffsetAfterAutoskip();
+
 }

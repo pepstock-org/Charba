@@ -72,6 +72,8 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private static final double DEFAULT_STACK_WEIGHT = 1D;
 
+	private static final boolean DEFAULT_OFFSET_AFTER_AUTOSKIP = false;
+
 	private final DefaultAngleLines angleLines = new DefaultAngleLines();
 
 	private final DefaultGrid grid = new DefaultGrid();
@@ -371,6 +373,16 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public double getStackWeight() {
 		return DEFAULT_STACK_WEIGHT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isOffsetAfterAutoskip()
+	 */
+	@Override
+	public boolean isOffsetAfterAutoskip() {
+		return DEFAULT_OFFSET_AFTER_AUTOSKIP;
 	}
 
 }

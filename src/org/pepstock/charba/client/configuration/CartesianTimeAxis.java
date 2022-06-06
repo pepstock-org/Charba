@@ -203,4 +203,21 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 		return getScale().getMinAsDate();
 	}
 
+	/**
+	 * If <code>true</code>, bar chart offsets are computed with auto skipped ticks..
+	 * 
+	 * @param offsetAfterAutoskip if <code>true</code>, bar chart offsets are computed with auto skipped ticks..
+	 */
+	public void setOffsetAfterAutoskip(boolean offsetAfterAutoskip) {
+		getScale().setOffsetAfterAutoskip(offsetAfterAutoskip);
+	}
+
+	/**
+	 * If <code>true</code>, bar chart offsets are computed with auto skipped ticks..
+	 * 
+	 * @return if <code>true</code>, bar chart offsets are computed with auto skipped ticks..
+	 */
+	public boolean isOffsetAfterAutoskip() {
+		return getScale().isBeginAtZero();
+	}
 }

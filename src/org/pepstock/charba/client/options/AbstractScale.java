@@ -84,6 +84,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		// time cartesian
 		ADAPTERS("adapters"),
 		TIME("time"),
+		OFFSET_AFTER_AUTOSKIP("offsetAfterAutoskip"),
 		// radial linear
 		ANIMATE("animate"),
 		ANGLE_LINES("angleLines"),
@@ -891,6 +892,25 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	@Override
 	public double getStartAngle() {
 		return getValue(Property.START_ANGLE, getDefaultValues().getStartAngle());
+	}
+
+	/**
+	 * If <code>true</code>, bar chart offsets are computed with auto skipped ticks..
+	 * 
+	 * @param offsetAfterAutoskip if <code>true</code>, bar chart offsets are computed with auto skipped ticks..
+	 */
+	public final void setOffsetAfterAutoskip(boolean offsetAfterAutoskip) {
+		setValueAndAddToParent(Property.OFFSET_AFTER_AUTOSKIP, offsetAfterAutoskip);
+	}
+
+	/**
+	 * If <code>true</code>, bar chart offsets are computed with auto skipped ticks..
+	 * 
+	 * @return if <code>true</code>, bar chart offsets are computed with auto skipped ticks..
+	 */
+	@Override
+	public final boolean isOffsetAfterAutoskip() {
+		return getValue(Property.OFFSET_AFTER_AUTOSKIP, getDefaultValues().isBeginAtZero());
 	}
 
 }

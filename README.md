@@ -285,6 +285,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `MultilineTextAnnotationBuilder` utility in order to create a canvas to add to a chart, by the annotation plugin labels, where each line of the content can have a specific font and color.
   * add `includeInvisible` option to the `Interaction` configuration and options classes.
   * add `borderRadius` option to the `PointLabels` options and `RadialPointLabels` configuration classes.
+  * add `offsetAfterAutoskip` option to the `CartesianTimeAxis` and `CartesianTimeSeriesAxis` configuration classes.
 
 License
 -------

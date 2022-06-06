@@ -348,4 +348,14 @@ public final class DefaultChartScale implements IsDefaultScale {
 		return scale.getStackWeight();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isOffsetAfterAutoskip()
+	 */
+	@Override
+	public boolean isOffsetAfterAutoskip() {
+		return scale.isOffsetAfterAutoskip();
+	}
+
 }
