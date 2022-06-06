@@ -281,6 +281,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
+  * import CHART.JS version [v3.8.0](https://github.com/chartjs/Chart.js/releases/tag/v3.8.0).
   * add `MultilineTextAnnotationBuilder` utility in order to create a canvas to add to a chart, by the annotation plugin labels, where each line of the content can have a specific font and color.
 
 License
