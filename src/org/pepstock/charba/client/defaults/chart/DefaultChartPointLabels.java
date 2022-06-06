@@ -107,4 +107,15 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 	public boolean isCentered() {
 		return pointLabels.isCentered();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getBorderRadius()
+	 */
+	@Override
+	public int getBorderRadius() {
+		return pointLabels.getBorderRadius();
+	}
+
 }

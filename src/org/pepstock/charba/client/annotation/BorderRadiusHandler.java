@@ -199,12 +199,12 @@ final class BorderRadiusHandler extends PropertyHandler<IsDefaultsBorderRadiusHa
 	// ------------------------
 
 	/**
-	 * Returns an integer when the callback has been activated.
+	 * Returns an {@link BarBorderRadius} instance when the callback has been activated.
 	 * 
 	 * @param context annotation context instance.
 	 * @param callback {@link BorderRadiusCallback} instance to be invoked
 	 * @param defaultValue default value for this border radius.
-	 * @return a object property value, as integer
+	 * @return a object property value, as {@link BarBorderRadius}
 	 */
 	NativeObject onBorderRadius(AnnotationContext context, BorderRadiusCallback<AnnotationContext> callback, int defaultValue) {
 		int valueToReturn = defaultValue;

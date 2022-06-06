@@ -33,6 +33,8 @@ public final class DefaultPointLabels implements IsDefaultPointLabels {
 
 	private static final boolean DEFAULT_CENTER_POINT_LABELS = false;
 
+	private static final int DEFAULT_BORDER_RADIUS = 0;
+
 	private final DefaultPadding padding = new DefaultPadding(DEFAULT_PADDING);
 
 	private final DefaultRoutedFont font = new DefaultRoutedFont();
@@ -112,6 +114,16 @@ public final class DefaultPointLabels implements IsDefaultPointLabels {
 	@Override
 	public boolean isCentered() {
 		return DEFAULT_CENTER_POINT_LABELS;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getBorderRadius()
+	 */
+	@Override
+	public int getBorderRadius() {
+		return DEFAULT_BORDER_RADIUS;
 	}
 
 }

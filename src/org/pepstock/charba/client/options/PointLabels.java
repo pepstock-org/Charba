@@ -20,7 +20,10 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * It is used to configure the point labels that are shown on the perimeter of the scale.<br>
@@ -36,10 +39,11 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	 */
 	private enum Property implements Key
 	{
-		DISPLAY("display"),
-		CENTER_POINT_LABELS("centerPointLabels"),
 		BACKDROP_COLOR("backdropColor"),
 		BACKDROP_PADDING("backdropPadding"),
+		BORDER_RADIUS("borderRadius"),
+		CENTER_POINT_LABELS("centerPointLabels"),
+		DISPLAY("display"),
 		PADDING("padding");
 
 		// name value of property
@@ -201,4 +205,65 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 		return getValue(Property.CENTER_POINT_LABELS, getDefaultValues().isCentered());
 	}
 
+	/**
+	 * Sets the border radius.
+	 * 
+	 * @param radius the border radius.
+	 */
+	public void setBorderRadius(int radius) {
+		setValueAndAddToParent(Property.BORDER_RADIUS, Checker.positiveOrZero(radius));
+	}
+
+	/**
+	 * Sets the border radius (in pixels).
+	 * 
+	 * @param borderRadius the border radius (in pixels).
+	 */
+	public void setBorderRadius(BarBorderRadius borderRadius) {
+		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadius);
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	@Override
+	public int getBorderRadius() {
+		// checks if was stored as number
+		if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
+			return getValue(Property.BORDER_RADIUS, Undefined.INTEGER);
+		} else if (isType(Property.BORDER_RADIUS, ObjectType.OBJECT)) {
+			// if here, the property is a object
+			BarBorderRadius object = getBorderRadiusAsObject();
+			// checks if there is the same value
+			if (object != null && object.areValuesEquals()) {
+				// the returns the same value
+				// in whatever property
+				return object.getTopLeft();
+			}
+		}
+		// if here, the property is missing
+		// then returns default
+		return getDefaultValues().getBorderRadius();
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	public BarBorderRadius getBorderRadiusAsObject() {
+		// checks if was stored as object
+		if (isType(Property.BORDER_RADIUS, ObjectType.OBJECT)) {
+			return BarBorderRadius.FACTORY.create(getValue(Property.BORDER_RADIUS));
+		} else if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
+			// if here, the property is a number
+			// then returns new border radius object
+			return new BarBorderRadius(getBorderRadius());
+		}
+		// if here, the property is missing
+		// then returns null
+		return null;
+	}
 }

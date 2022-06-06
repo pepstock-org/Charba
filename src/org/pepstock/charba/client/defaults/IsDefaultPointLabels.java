@@ -57,4 +57,11 @@ public interface IsDefaultPointLabels extends IsDefaultFontContainer {
 	 */
 	boolean isCentered();
 
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	int getBorderRadius();
+
 }

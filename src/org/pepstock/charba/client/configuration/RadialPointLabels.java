@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
@@ -29,8 +30,11 @@ import org.pepstock.charba.client.callbacks.SimplePaddingCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.options.IsScriptableFontProvider;
 
 import jsinterop.annotations.JsFunction;
@@ -81,6 +85,8 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	private final CallbackProxy<ProxyIntegerCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the backdrop color function
 	private final CallbackProxy<ProxyStringCallback> backdropColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border radius function
+	private final CallbackProxy<ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------
 	// -- USERS CALLBACKS ---
@@ -95,6 +101,8 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	private SimplePaddingCallback paddingCallback = null;
 	// color callback instance
 	private ColorCallback<ScaleContext> backdropColorCallback = null;
+	// border radius callback instance
+	private BorderRadiusCallback<ScaleContext> borderRadiusCallback = null;
 
 	// font instance
 	private final Font font;
@@ -107,10 +115,11 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	private enum Property implements Key
 	{
 		BACKDROP_COLOR("backdropColor"),
+		BORDER_RADIUS("borderRadius"),
+		CALLBACK("callback"),
 		COLOR("color"),
 		FONT("font"),
-		PADDING("padding"),
-		CALLBACK("callback");
+		PADDING("padding");
 
 		// name value of property
 		private final String value;
@@ -171,6 +180,9 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		// sets function to proxy callback in order to invoke the java interface
 		this.paddingCallbackProxy
 				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getPaddingCallback(), getAxis().getDefaultValues().getPointLabels().getPadding(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderRadiusCallbackProxy.setCallback(context -> onBorderRadius(getAxis().createContext(context), getBorderRadiusCallback(), getAxis().getDefaultValues().getPointLabels().getBorderRadius()));
+
 	}
 
 	/**
@@ -339,6 +351,52 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
+	 * Sets the border radius.
+	 * 
+	 * @param radius the border radius.
+	 */
+	public void setBorderRadius(int radius) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback<ScaleContext>) null);
+		// stores value
+		getAxis().getScale().getPointLabels().setBorderRadius(radius);
+	}
+
+	/**
+	 * Sets the border radius (in pixels).
+	 * 
+	 * @param borderRadius the border radius (in pixels).
+	 */
+	public void setBorderRadius(BarBorderRadius borderRadius) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback<ScaleContext>) null);
+		// stores value
+		getAxis().getScale().getPointLabels().setBorderRadius(borderRadius);
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	public int getBorderRadius() {
+		return getAxis().getScale().getPointLabels().getBorderRadius();
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	public BarBorderRadius getBorderRadiusAsObject() {
+		return getAxis().getScale().getPointLabels().getBorderRadiusAsObject();
+	}
+
+	// -------------------------
+	// CALLBACKS
+	// -------------------------
+
+	/**
 	 * Returns the font callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
@@ -474,6 +532,43 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
+	 * Returns the callback called to set the border radius.
+	 * 
+	 * @return the callback called to set the border radius
+	 */
+	public BorderRadiusCallback<ScaleContext> getBorderRadiusCallback() {
+		return borderRadiusCallback;
+	}
+
+	/**
+	 * Sets the callback to set the border radius.
+	 * 
+	 * @param borderRadiusCallback to set the border radius
+	 */
+	public void setBorderRadius(BorderRadiusCallback<ScaleContext> borderRadiusCallback) {
+		// sets the callback
+		this.borderRadiusCallback = borderRadiusCallback;
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.BORDER_RADIUS, borderRadiusCallback, borderRadiusCallbackProxy);
+	}
+
+	/**
+	 * Sets the callback to set the border radius.
+	 * 
+	 * @param borderRadiusCallback to set the border radius
+	 */
+	public void setBorderRadius(NativeCallback borderRadiusCallback) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback<ScaleContext>) null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getPointLabels(), Property.BORDER_RADIUS, borderRadiusCallback);
+	}
+
+	// -------------------------
+	// INTERNALS
+	// -------------------------
+
+	/**
 	 * Returns a string as color when the callback has been activated.
 	 * 
 	 * @param context native object as context
@@ -493,4 +588,34 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		return defaultValue;
 	}
 
+	/**
+	 * Returns an {@link BarBorderRadius} instance when the callback has been activated.
+	 * 
+	 * @param context annotation context instance.
+	 * @param callback {@link BorderRadiusCallback} instance to be invoked
+	 * @param defaultValue default value for this border radius.
+	 * @return a object property value, as {@link BarBorderRadius}
+	 */
+	NativeObject onBorderRadius(ScaleContext context, BorderRadiusCallback<ScaleContext> callback, int defaultValue) {
+		int valueToReturn = defaultValue;
+		// gets value
+		Object value = ScriptableUtil.getOptionValue(context, callback);
+		// checks if is an object
+		if (value instanceof BarBorderRadius) {
+			// casts to border radius object
+			BarBorderRadius object = (BarBorderRadius) value;
+			// returns the native object
+			return object.nativeObject();
+		} else if (value instanceof Number) {
+			// checks if is an number
+			// casts to number
+			Number number = (Number) value;
+			// stores to result
+			valueToReturn = Checker.positiveOrZero(number.intValue());
+		}
+		// cats to a object
+		BarBorderRadius object = new BarBorderRadius(valueToReturn);
+		// returns the native object
+		return object.nativeObject();
+	}
 }
