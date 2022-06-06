@@ -88,4 +88,22 @@ public class Interaction extends ConfigurationOptionsContainer {
 	public InteractionAxis getAxis() {
 		return getConfiguration().getInteraction().getAxis();
 	}
+
+	/**
+	 * If true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
+	 * 
+	 * @param includeInvisible if true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
+	 */
+	public void setIncludeInvisible(boolean includeInvisible) {
+		getConfiguration().getInteraction().setIncludeInvisible(includeInvisible);
+	}
+
+	/**
+	 * If true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
+	 * 
+	 * @return if true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
+	 */
+	public boolean isIncludeInvisible() {
+		return getConfiguration().getInteraction().isIncludeInvisible();
+	}
 }

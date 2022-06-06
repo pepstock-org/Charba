@@ -33,7 +33,7 @@ public interface IsDefaultInteraction {
 	InteractionMode getMode();
 
 	/**
-	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * If true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
 	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
@@ -45,5 +45,12 @@ public interface IsDefaultInteraction {
 	 * @return define which directions are used in calculating distances.
 	 */
 	InteractionAxis getAxis();
+
+	/**
+	 * If true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
+	 * 
+	 * @return if true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
+	 */
+	boolean isIncludeInvisible();
 
 }

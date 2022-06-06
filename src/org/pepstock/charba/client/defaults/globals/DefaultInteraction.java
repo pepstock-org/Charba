@@ -28,6 +28,8 @@ public class DefaultInteraction implements IsDefaultInteraction {
 
 	private static final boolean DEFAULT_INTERSECT = true;
 
+	private static final boolean DEFAULT_INCLUDE_INVISIBLE = false;
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -38,7 +40,7 @@ public class DefaultInteraction implements IsDefaultInteraction {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.hover.IsDefaultHover#getMode()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultInteraction#getMode()
 	 */
 	@Override
 	public InteractionMode getMode() {
@@ -48,7 +50,7 @@ public class DefaultInteraction implements IsDefaultInteraction {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.hover.IsDefaultHover#isIntersect()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultInteraction#isIntersect()
 	 */
 	@Override
 	public boolean isIntersect() {
@@ -58,11 +60,21 @@ public class DefaultInteraction implements IsDefaultInteraction {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.hover.IsDefaultHover#getAxis()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultInteraction#getAxis()
 	 */
 	@Override
 	public InteractionAxis getAxis() {
 		return InteractionAxis.X;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultInteraction#isIncludeInvisible()
+	 */
+	@Override
+	public boolean isIncludeInvisible() {
+		return DEFAULT_INCLUDE_INVISIBLE;
 	}
 
 }

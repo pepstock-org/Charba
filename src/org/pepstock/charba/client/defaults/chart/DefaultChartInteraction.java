@@ -40,7 +40,7 @@ public class DefaultChartInteraction implements IsDefaultInteraction {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#getMode()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultInteraction#getMode()
 	 */
 	@Override
 	public final InteractionMode getMode() {
@@ -50,7 +50,7 @@ public class DefaultChartInteraction implements IsDefaultInteraction {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#isIntersect()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultInteraction#isIntersect()
 	 */
 	@Override
 	public final boolean isIntersect() {
@@ -60,11 +60,21 @@ public class DefaultChartInteraction implements IsDefaultInteraction {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#getAxis()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultInteraction#getAxis()
 	 */
 	@Override
 	public final InteractionAxis getAxis() {
 		return interaction.getAxis();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultInteraction#isIncludeInvisible()
+	 */
+	@Override
+	public boolean isIncludeInvisible() {
+		return interaction.isIncludeInvisible();
 	}
 
 }

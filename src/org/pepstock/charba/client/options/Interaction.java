@@ -34,7 +34,8 @@ public class Interaction extends AbstractInteraction<Options, IsDefaultInteracti
 	 */
 	private enum Property implements Key
 	{
-		AXIS("axis");
+		AXIS("axis"),
+		INCLUDE_INVISIBLE("includeInvisible");
 
 		// name value of property
 		private final String value;
@@ -111,4 +112,22 @@ public class Interaction extends AbstractInteraction<Options, IsDefaultInteracti
 		return getValue(Property.AXIS, InteractionAxis.values(), getDefaultValues().getAxis());
 	}
 
+	/**
+	 * If true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
+	 * 
+	 * @param includeInvisible if true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
+	 */
+	public final void setIncludeInvisible(boolean includeInvisible) {
+		setValueAndAddToParent(Property.INCLUDE_INVISIBLE, includeInvisible);
+	}
+
+	/**
+	 * If true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
+	 * 
+	 * @return if true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
+	 */
+	@Override
+	public final boolean isIncludeInvisible() {
+		return getValue(Property.INCLUDE_INVISIBLE, getDefaultValues().isIncludeInvisible());
+	}
 }
