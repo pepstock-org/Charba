@@ -89,7 +89,7 @@ final class BorderRadiusHandler extends PropertyHandler<IsDefaultsBorderRadiusHa
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderRadiusCallbackProxy.setCallback(context -> BorderRadiusCallback.toNative(new AnnotationContext(parent, context), getBorderRadiusCallback(), getDefaultValues().getBorderRadius()));
+		this.borderRadiusCallbackProxy.setCallback(context -> BorderRadiusCallback.toObject(new AnnotationContext(parent, context), getBorderRadiusCallback(), getDefaultValues().getBorderRadius()).nativeObject());
 	}
 
 	/**

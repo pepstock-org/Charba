@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.items.InteractionItem;
 
 /**
  * Interface to define interaction object defaults.
@@ -52,5 +53,14 @@ public interface IsDefaultInteraction {
 	 * @return if true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
 	 */
 	boolean isIncludeInvisible();
+
+	/**
+	 * Creates an {@link InteractionItem} using the configuration defined in this interaction.
+	 * 
+	 * @return an {@link InteractionItem} using the configuration defined in this interaction
+	 */
+	default InteractionItem create() {
+		return new InteractionItem(getMode(), isIntersect(), getAxis());
+	}
 
 }

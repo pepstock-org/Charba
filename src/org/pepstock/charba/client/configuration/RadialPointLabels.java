@@ -179,7 +179,7 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 		this.paddingCallbackProxy
 				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getPaddingCallback(), getAxis().getDefaultValues().getPointLabels().getPadding(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderRadiusCallbackProxy.setCallback(context -> BorderRadiusCallback.toNative(getAxis().createContext(context), getBorderRadiusCallback(), getAxis().getDefaultValues().getPointLabels().getBorderRadius()));
+		this.borderRadiusCallbackProxy.setCallback(context -> BorderRadiusCallback.toObject(getAxis().createContext(context), getBorderRadiusCallback(), getAxis().getDefaultValues().getPointLabels().getBorderRadius()).nativeObject());
 	}
 
 	/**

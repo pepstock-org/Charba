@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
- * Definitions about how elements appear in the tooltip, hovering the chart.
+ * Definitions about how the user can interact with chart elements.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -130,4 +130,5 @@ public class Interaction extends AbstractInteraction<Options, IsDefaultInteracti
 	public final boolean isIncludeInvisible() {
 		return getValue(Property.INCLUDE_INVISIBLE, getDefaultValues().isIncludeInvisible());
 	}
+
 }

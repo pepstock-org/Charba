@@ -39,6 +39,7 @@ import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.ActiveDatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
+import org.pepstock.charba.client.items.InteractionItem;
 import org.pepstock.charba.client.options.TransitionKey;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.utils.CTimer;
@@ -583,6 +584,16 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#getDatasetAtEvent(org.pepstock.charba.client.dom.BaseNativeEvent, org.pepstock.charba.client.items.InteractionItem)
+	 */
+	@Override
+	public List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event, InteractionItem interaction) {
+		return chart.getDatasetAtEvent(event, interaction);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#isDatasetVisible(int)
 	 */
 	@Override
@@ -683,11 +694,31 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#getElementAtEvent(org.pepstock.charba.client.dom.BaseNativeEvent, org.pepstock.charba.client.items.InteractionItem)
+	 */
+	@Override
+	public DatasetReference getElementAtEvent(BaseNativeEvent event, InteractionItem interaction) {
+		return chart.getElementAtEvent(event, interaction);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#getElementsAtEvent(org.pepstock.charba.client.dom.BaseNativeEvent)
 	 */
 	@Override
 	public final List<DatasetReference> getElementsAtEvent(BaseNativeEvent event) {
 		return chart.getElementsAtEvent(event);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#getElementsAtEvent(org.pepstock.charba.client.dom.BaseNativeEvent, org.pepstock.charba.client.items.InteractionItem)
+	 */
+	@Override
+	public List<DatasetReference> getElementsAtEvent(BaseNativeEvent event, InteractionItem interaction) {
+		return chart.getElementsAtEvent(event, interaction);
 	}
 
 	/*

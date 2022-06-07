@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
- * Definitions about how elements appear, hovering the chart.
+ * Definitions about how the user can interact with chart elements.
  * 
  * @author Andrea "Stock" Stocchero
  * 
@@ -74,50 +74,50 @@ abstract class AbstractInteraction<P extends AbstractModel<?, ?>, D> extends Abs
 	}
 
 	/**
-	 * Returns which elements appear in the tooltip.
+	 * Returns which elements appear in the interaction.
 	 * 
-	 * @return which elements appear in the tooltip.
+	 * @return which elements appear in the interaction.
 	 */
 	abstract InteractionMode getDefaultMode();
 
 	/**
-	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * if true, the mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * @return if true, the mode only applies when the mouse position intersects an item on the chart.
 	 */
 	abstract boolean isDefaultIntersect();
 
 	/**
-	 * Sets which elements appear in the tooltip.
+	 * Sets which elements appear in the interaction.
 	 * 
-	 * @param mode which elements appear in the tooltip.
+	 * @param mode which elements appear in the interaction.
 	 */
 	public final void setMode(InteractionMode mode) {
 		setValueAndAddToParent(Property.MODE, mode);
 	}
 
 	/**
-	 * Returns which elements appear in the tooltip.
+	 * Returns which elements appear in the interaction.
 	 * 
-	 * @return which elements appear in the tooltip.
+	 * @return which elements appear in the interaction.
 	 */
 	public final InteractionMode getMode() {
 		return getValue(Property.MODE, InteractionMode.values(), getDefaultMode());
 	}
 
 	/**
-	 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * if <code>true</code>, the only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @param intersect if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * @param intersect if <code>true</code>, the mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public final void setIntersect(boolean intersect) {
 		setValueAndAddToParent(Property.INTERSECT, intersect);
 	}
 
 	/**
-	 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * if <code>true</code>, the mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @return if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * @return if <code>true</code>, the mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public final boolean isIntersect() {
 		return getValue(Property.INTERSECT, isDefaultIntersect());

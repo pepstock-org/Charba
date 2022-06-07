@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultInteraction;
 
 /**
- * Definitions about how elements appear in the tooltip, hovering the chart.
+ * Definitions about how elements appear in the chart, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
  *

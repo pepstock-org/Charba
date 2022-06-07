@@ -17,9 +17,10 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.items.InteractionItem;
 
 /**
- * Definitions about how elements appear in the tooltip, hovering the chart.
+ * Definitions about how the user can interact with chart elements.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -36,36 +37,36 @@ public class Interaction extends ConfigurationOptionsContainer {
 	}
 
 	/**
-	 * Sets which elements appear in the tooltip.
+	 * Sets which elements appear in the interaction.
 	 * 
-	 * @param mode which elements appear in the tooltip.
+	 * @param mode which elements appear in the interaction.
 	 */
 	public void setMode(InteractionMode mode) {
 		getConfiguration().getInteraction().setMode(mode);
 	}
 
 	/**
-	 * Returns which elements appear in the tooltip.
+	 * Returns which elements appear in the interaction.
 	 * 
-	 * @return which elements appear in the tooltip.
+	 * @return which elements appear in the interaction.
 	 */
 	public InteractionMode getMode() {
 		return getConfiguration().getInteraction().getMode();
 	}
 
 	/**
-	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * if true, the mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @param intersect if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * @param intersect if true, the mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public void setIntersect(boolean intersect) {
 		getConfiguration().getInteraction().setIntersect(intersect);
 	}
 
 	/**
-	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * if true, the mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * @return if true, the mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public boolean isIntersect() {
 		return getConfiguration().getInteraction().isIntersect();
@@ -105,5 +106,14 @@ public class Interaction extends ConfigurationOptionsContainer {
 	 */
 	public boolean isIncludeInvisible() {
 		return getConfiguration().getInteraction().isIncludeInvisible();
+	}
+
+	/**
+	 * Creates an {@link InteractionItem} using the configuration defined in this interaction.
+	 * 
+	 * @return an {@link InteractionItem} using the configuration defined in this interaction
+	 */
+	public final InteractionItem createItem() {
+		return getConfiguration().getInteraction().create();
 	}
 }

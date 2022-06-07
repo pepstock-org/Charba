@@ -19,7 +19,7 @@ import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
- * Definitions about how elements appear in the tooltip, hovering the chart.
+ * Definitions about how elements appear in the chart, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -36,18 +36,18 @@ public class Hover extends ConfigurationOptionsContainer {
 	}
 
 	/**
-	 * Sets which elements appear in the tooltip.
+	 * Sets which elements appear in the chart, hovering the chart.
 	 * 
-	 * @param mode which elements appear in the tooltip.
+	 * @param mode which elements appear in the chart, hovering the chart.
 	 */
 	public void setMode(InteractionMode mode) {
 		getConfiguration().getHover().setMode(mode);
 	}
 
 	/**
-	 * Returns which elements appear in the tooltip.
+	 * Returns which elements appear in the chart, hovering the chart.
 	 * 
-	 * @return which elements appear in the tooltip.
+	 * @return which elements appear in the chart, hovering the chart.
 	 */
 	public InteractionMode getMode() {
 		return getConfiguration().getHover().getMode();

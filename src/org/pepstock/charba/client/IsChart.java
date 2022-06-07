@@ -36,6 +36,7 @@ import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.ActiveDatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
+import org.pepstock.charba.client.items.InteractionItem;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.TransitionKey;
 import org.pepstock.charba.client.plugins.Plugins;
@@ -561,6 +562,15 @@ public interface IsChart {
 	List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event);
 
 	/**
+	 * Looks for the dataset that matches the event.
+	 * 
+	 * @param event event of chart.
+	 * @param interaction how the elements will be checked.
+	 * @return dataset item.
+	 */
+	List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event, InteractionItem interaction);
+
+	/**
 	 * Looks for the dataset if it's visible or not, selected by index.
 	 * 
 	 * @param index dataset index
@@ -646,6 +656,16 @@ public interface IsChart {
 	DatasetReference getElementAtEvent(BaseNativeEvent event);
 
 	/**
+	 * Calling on your chart instance passing an argument of an event, will return the single element at the event position.<br>
+	 * If there are multiple items within range, only the first is returned.
+	 * 
+	 * @param event event of chart.
+	 * @param interaction how the elements will be checked.
+	 * @return single element at the event position or <code>null</code> if event is not consistent
+	 */
+	DatasetReference getElementAtEvent(BaseNativeEvent event, InteractionItem interaction);
+
+	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
 	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the same position of that event.
 	 * 
@@ -653,6 +673,16 @@ public interface IsChart {
 	 * @return all elements at the same data index or an empty list.
 	 */
 	List<DatasetReference> getElementsAtEvent(BaseNativeEvent event);
+
+	/**
+	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
+	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the same position of that event.
+	 * 
+	 * @param event event of chart.
+	 * @param interaction how the elements will be checked.
+	 * @return all elements at the same data index or an empty list.
+	 */
+	List<DatasetReference> getElementsAtEvent(BaseNativeEvent event, InteractionItem interaction);
 
 	/**
 	 * Draws the chart

@@ -49,7 +49,6 @@ import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.Position;
 import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.enums.ImageMimeType;
-import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.ChartEventHandler;
@@ -60,6 +59,7 @@ import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.ActiveDatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
+import org.pepstock.charba.client.items.InteractionItem;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.TransitionKey;
@@ -85,14 +85,16 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
+	// default interaction instance for dataset
+	private static final InteractionItem DEFAULT_INTERACTION_DATASET = new InteractionItem(InteractionMode.DATASET, true);
+	// default interaction instance
+	private static final InteractionItem DEFAULT_INTERACTION = new InteractionItem(InteractionMode.NEAREST, true);
 	// PCT standard for width
 	private static final int DEFAULT_WIDTH = 90;
 	// PCT standard for width
 	private static final int DEFAULT_HEIGHT = 100;
 	// suffix label for canvas element id
 	private static final String SUFFIX_CANVAS_ELEMENT_ID = "_canvas";
-	// creates a static reference for a interaction options for getElementsAtEventForMode method
-	private static final InternalInterationModeObject INTERACTION_MODE = new InternalInterationModeObject(true);
 	// reference to Chart.js chart instance
 	private Chart chart = null;
 	// chart ID using generate unique id
@@ -1045,12 +1047,24 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event) {
+		return getDatasetAtEvent(event, DEFAULT_INTERACTION_DATASET);
+	}
+
+	/**
+	 * Looks for the dataset that matches the event.
+	 * 
+	 * @param event event of chart.
+	 * @param interaction how the elements will be checked.
+	 * @return dataset item.
+	 */
+	@Override
+	public final List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event, InteractionItem interaction) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
-		if (instance != null && event != null) {
+		if (instance != null && event != null && interaction != null) {
 			// gets data sets
-			ArrayObject array = instance.getElementsAtEventForMode(event, InteractionMode.DATASET.value(), INTERACTION_MODE.nativeObject(), false);
+			ArrayObject array = instance.getElementsAtEventForMode(event, interaction.getMode().value(), interaction.nativeObject(), false);
 			// returns the array
 			return ArrayListHelper.unmodifiableList(array, DatasetReference.FACTORY);
 		}
@@ -1239,12 +1253,25 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final DatasetReference getElementAtEvent(BaseNativeEvent event) {
+		return getElementAtEvent(event, DEFAULT_INTERACTION);
+	}
+
+	/**
+	 * Calling on your chart instance passing an argument of an event, will return the single element at the event position.<br>
+	 * If there are multiple items within range, only the first is returned.
+	 * 
+	 * @param event event of chart.
+	 * @param interaction how the elements will be checked.
+	 * @return single element at the event position or <code>null</code> if event is not consistent
+	 */
+	@Override
+	public final DatasetReference getElementAtEvent(BaseNativeEvent event, InteractionItem interaction) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
-		if (instance != null && event != null) {
+		if (instance != null && event != null && interaction != null) {
 			// gets element
-			ArrayObject result = instance.getElementsAtEventForMode(event, InteractionMode.NEAREST.value(), INTERACTION_MODE.nativeObject(), false);
+			ArrayObject result = instance.getElementsAtEventForMode(event, interaction.getMode().value(), interaction.nativeObject(), false);
 			if (result != null && !result.isEmpty()) {
 				return DatasetReference.FACTORY.create(result.get(0));
 			}
@@ -1262,12 +1289,25 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final List<DatasetReference> getElementsAtEvent(BaseNativeEvent event) {
+		return getElementsAtEvent(event, DEFAULT_INTERACTION);
+	}
+
+	/**
+	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
+	 * Calling it on your chart instance passing an argument of an event, will return the point elements that are at that the same position of that event.
+	 * 
+	 * @param event event of chart.
+	 * @param interaction how the elements will be checked.
+	 * @return all elements at the same data index or an empty list.
+	 */
+	@Override
+	public final List<DatasetReference> getElementsAtEvent(BaseNativeEvent event, InteractionItem interaction) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and event
-		if (instance != null && event != null) {
+		if (instance != null && event != null && interaction != null) {
 			// gets elements
-			ArrayObject array = instance.getElementsAtEventForMode(event, InteractionMode.INDEX.value(), INTERACTION_MODE.nativeObject(), false);
+			ArrayObject array = instance.getElementsAtEventForMode(event, interaction.getMode().value(), interaction.nativeObject(), false);
 			// returns the array
 			return ArrayListHelper.unmodifiableList(array, DatasetReference.FACTORY);
 		}
@@ -1459,105 +1499,6 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		 */
 		private ActiveElementsPoint(double x, double y) {
 			super(x, y);
-		}
-
-		/**
-		 * Returns the native object instance.
-		 * 
-		 * @return the native object instance.
-		 */
-		private NativeObject nativeObject() {
-			return super.getNativeObject();
-		}
-
-	}
-
-	/**
-	 * Internal native object container which is mapping the interaction options needed to invoke
-	 * {@link Chart#getElementsAtEventForMode(BaseNativeEvent, String, NativeObject, boolean)}.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	static final class InternalInterationModeObject extends NativeObjectContainer {
-
-		/**
-		 * Name of properties of native object.
-		 */
-		private enum Property implements Key
-		{
-			AXIS("axis"),
-			INTERSECT("intersect");
-
-			// name value of property
-			private final String value;
-
-			/**
-			 * Creates with the property value to use in the native object.
-			 * 
-			 * @param value value of property name
-			 */
-			private Property(String value) {
-				this.value = value;
-			}
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.commons.Key#value()
-			 */
-			@Override
-			public String value() {
-				return value;
-			}
-
-		}
-
-		/**
-		 * Creates the object with a native object instance, setting the intersect passed as argument.
-		 * 
-		 * @param intersect if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart
-		 */
-		private InternalInterationModeObject(boolean intersect) {
-			super();
-			// sets the intersect
-			setValue(Property.INTERSECT, intersect);
-		}
-
-		/**
-		 * Sets which directions are used in calculating distances.
-		 * 
-		 * @param axis define which directions are used in calculating distances.
-		 */
-		void setAxis(InteractionAxis axis) {
-			setValue(Property.AXIS, axis);
-		}
-
-		/**
-		 * Returns which directions are used in calculating distances.
-		 * 
-		 * @return define which directions are used in calculating distances.
-		 */
-		InteractionAxis getAxis() {
-			return getValue(Property.AXIS, InteractionAxis.values(), InteractionAxis.X);
-		}
-
-		/**
-		 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
-		 * 
-		 * @param intersect if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
-		 */
-		final void setIntersect(boolean intersect) {
-			setValue(Property.INTERSECT, intersect);
-		}
-
-		/**
-		 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
-		 * 
-		 * @return if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
-		 */
-		final boolean isIntersect() {
-			return getValue(Property.INTERSECT, true);
 		}
 
 		/**
