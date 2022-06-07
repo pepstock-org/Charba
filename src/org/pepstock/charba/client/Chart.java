@@ -36,6 +36,8 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
+// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
+@SuppressWarnings("java:S1172")
 @JsType(isNative = true, name = NativeName.CHART, namespace = JsPackage.GLOBAL)
 public final class Chart implements IsJSType {
 
