@@ -32,6 +32,9 @@ import org.pepstock.charba.client.items.Undefined;
  * @param <P> parent node class
  * @param <D> defaults provider class
  */
+// SuppressWarnings: the annotation is added to suppress issue in SonarClud about the rule "Inheritance tree of classes should not be too deep (java:S110 Inheritance
+// tree of classes should not be too deep)".
+@SuppressWarnings("java:S110")
 public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends AbstractNode {
 
 	private final D defaultValues;
