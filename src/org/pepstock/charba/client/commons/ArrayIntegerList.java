@@ -109,12 +109,17 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 		boolean modified = ArrayListHelper.isConsistent(collection);
 		// checks if argument is consistent
 		if (modified) {
-			Iterator<? extends Integer> iter = collection.iterator();
+			Iterator<?> iter = collection.iterator();
 			// scans all elements
 			while (iter.hasNext()) {
-				// adds and
-				// sets modified
-				modified = modified && add(iter.next());
+				// gets object
+				Object object = iter.next();
+				// checks if is a integer
+				if (object instanceof Integer) {
+					// adds and
+					// sets modified
+					modified = modified && add((Integer) object);
+				}
 			}
 		}
 		return modified;
