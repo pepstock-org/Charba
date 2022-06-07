@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -108,7 +107,7 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 	@Override
 	Img checkAndGet(Object object) {
 		// checks if canvas
-		if (object instanceof Canvas) {
+		if (object instanceof Img) {
 			// returns casted object
 			return (Img) object;
 		}
