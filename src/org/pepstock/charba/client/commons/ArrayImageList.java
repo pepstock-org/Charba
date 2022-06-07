@@ -17,9 +17,9 @@ package org.pepstock.charba.client.commons;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
+import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -100,24 +100,20 @@ public final class ArrayImageList extends AbstractArrayList<Img, ArrayImage> {
 		return false;
 	}
 
-	/**
-	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.AbstractArrayList#checkAndGet(java.lang.Object)
 	 */
 	@Override
-	public boolean addAll(Collection<? extends Img> collection) {
-		// set modified
-		boolean modified = ArrayListHelper.isConsistent(collection);
-		// checks if argument is consistent
-		if (modified) {
-			Iterator<? extends Img> iter = collection.iterator();
-			// scans all elements
-			while (iter.hasNext()) {
-				// adds and
-				// sets modified
-				modified = modified && add(iter.next());
-			}
+	Img checkAndGet(Object object) {
+		// checks if canvas
+		if (object instanceof Canvas) {
+			// returns casted object
+			return (Img) object;
 		}
-		return modified;
+		// if here is not a correct type
+		return null;
 	}
 
 	/**

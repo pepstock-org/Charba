@@ -128,6 +128,42 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	}
 
 	/**
+	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator
+	 */
+	@Override
+	public boolean addAll(Collection<? extends E> collection) {
+		// set modified
+		boolean modified = ArrayListHelper.isConsistent(collection);
+		// checks if argument is consistent
+		if (modified) {
+			Iterator<?> iter = collection.iterator();
+			// scans all elements
+			while (iter.hasNext()) {
+				// gets object
+				E object = checkAndGet(iter.next());
+				// checks if is a integer
+				if (object != null) {
+					// adds and
+					add(object);
+				} else {
+					modified = false;
+				}
+			}
+		}
+		return modified;
+	}
+
+	/**
+	 * Checks if the object is of instance of the list and returns it (casted), otherwise returns <code>null</code>.
+	 * 
+	 * @param object object to be checked and cast
+	 * @return the object casted to the right value
+	 */
+	E checkAndGet(Object object) {
+		return null;
+	}
+
+	/**
 	 * Returns true if this list contains all of the elements of the specified collection.
 	 */
 	@Override

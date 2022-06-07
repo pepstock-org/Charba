@@ -17,7 +17,6 @@ package org.pepstock.charba.client.commons;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -96,24 +95,20 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 		return false;
 	}
 
-	/**
-	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.AbstractArrayList#checkAndGet(java.lang.Object)
 	 */
 	@Override
-	public boolean addAll(Collection<? extends String> collection) {
-		// set modified
-		boolean modified = ArrayListHelper.isConsistent(collection);
-		// checks if argument is consistent
-		if (modified) {
-			Iterator<? extends String> iter = collection.iterator();
-			// scans all elements
-			while (iter.hasNext()) {
-				// adds and
-				// sets modified
-				modified = modified && add(iter.next());
-			}
+	String checkAndGet(Object object) {
+		// checks if canvas
+		if (object instanceof String) {
+			// returns casted object
+			return (String) object;
 		}
-		return modified;
+		// if here is not a correct type
+		return null;
 	}
 
 	/**
