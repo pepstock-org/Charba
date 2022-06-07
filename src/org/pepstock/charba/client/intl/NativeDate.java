@@ -40,6 +40,8 @@ final class NativeDate {
 	 * 
 	 * @param value a Number that represents milliseconds since 1 January 1970 UTC
 	 */
+	// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
+	@SuppressWarnings("java:S1172")
 	private NativeDate(double value) {
 		// must be empty
 	}

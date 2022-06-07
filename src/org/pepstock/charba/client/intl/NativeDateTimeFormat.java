@@ -39,6 +39,8 @@ final class NativeDateTimeFormat {
 	 * @param locale a string with a BCP 47 language tag
 	 * @param options options to configure the date time format
 	 */
+	// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
+	@SuppressWarnings("java:S1172")
 	NativeDateTimeFormat(String locale, NativeObject options) {
 		// must be empty
 	}

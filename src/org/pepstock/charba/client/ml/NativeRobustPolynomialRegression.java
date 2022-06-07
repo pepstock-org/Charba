@@ -54,6 +54,8 @@ final class NativeRobustPolynomialRegression extends NativeBasePolynomialRegress
 	 * @param y values bound to y
 	 * @param degree the maximum degree of the polynomial
 	 */
+	// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
+	@SuppressWarnings("java:S1172")
 	NativeRobustPolynomialRegression(ArrayDouble x, ArrayDouble y, int degree) {
 		// nothing
 	}

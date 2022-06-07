@@ -58,6 +58,8 @@ public final class NativeHook implements IsJSType {
 	 * @param options the options instance name, always {@value NativeHook#DEFAULT_OPTIONS_ARGUMENT}.
 	 * @param evalString java script code with is the body of new function.
 	 */
+	// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
+	@SuppressWarnings("java:S1172")
 	private NativeHook(String chart, String args, String options, String evalString) {
 		// do nothing
 	}

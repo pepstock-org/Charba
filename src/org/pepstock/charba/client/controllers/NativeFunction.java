@@ -38,6 +38,8 @@ final class NativeFunction {
 	 * 
 	 * @param evalString javascript code with is the body of new function.
 	 */
+	// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
+	@SuppressWarnings("java:S1172")
 	NativeFunction(String evalString) {
 		// do nothing
 	}

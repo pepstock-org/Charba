@@ -60,6 +60,8 @@ public final class MutationObserver {
 	 * 
 	 * @param callback a function which will be called on each DOM change that qualifies given the targeted node or subtree and options
 	 */
+	// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
+	@SuppressWarnings("java:S1172")
 	public MutationObserver(MutationObserver.MutationObserverCallback callback) {
 		// do nothing
 	}

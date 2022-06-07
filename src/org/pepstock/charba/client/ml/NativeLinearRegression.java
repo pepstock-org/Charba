@@ -51,6 +51,8 @@ final class NativeLinearRegression extends NativeBaseLinearRegression {
 	 * @param x values bound to x
 	 * @param y values bound to y
 	 */
+	// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
+	@SuppressWarnings("java:S1172")
 	NativeLinearRegression(ArrayDouble x, ArrayDouble y) {
 		// nothing
 	}

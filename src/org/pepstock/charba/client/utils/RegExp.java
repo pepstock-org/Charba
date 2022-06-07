@@ -37,6 +37,8 @@ public final class RegExp {
 	 * @param pattern the text of the regular expression.<br>
 	 *            Patterns can include special characters so they can match a wider range of values than would a literal string.
 	 */
+	// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
+	@SuppressWarnings("java:S1172")
 	public RegExp(String pattern) {
 		// do nothing
 	}
@@ -75,6 +77,8 @@ public final class RegExp {
 	 *            Does not attempt to match from any later indexes.
 	 *            </ul>
 	 */
+	// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
+	@SuppressWarnings("java:S1172")
 	public RegExp(String pattern, String flags) {
 		// do nothing
 	}

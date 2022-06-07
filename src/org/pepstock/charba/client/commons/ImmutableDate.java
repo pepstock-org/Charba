@@ -52,6 +52,9 @@ public final class ImmutableDate extends Date {
 	 * @param date the day of the month value between 1-31.
 	 * @deprecated As of JDK version 1.1.
 	 */
+	// Ignores SonarCloud issue, java:S6355 - Deprecated annotations should include explanations, because the annotations are not mapped in J2CL.
+	// Ignores SonarCloud issue, java:S1133 - Deprecated code should be removed, because the deprecation must be maintained.
+	@SuppressWarnings({ "java:S1133", "java:S6355" })
 	@Deprecated
 	@Override
 	public void setDate(int date) {
@@ -64,6 +67,9 @@ public final class ImmutableDate extends Date {
 	 * @param hours the hour value.
 	 * @deprecated As of JDK version 1.1.
 	 */
+	// Ignores SonarCloud issue, java:S6355 - Deprecated annotations should include explanations, because the annotations are not mapped in J2CL.
+	// Ignores SonarCloud issue, java:S1133 - Deprecated code should be removed, because the deprecation must be maintained.
+	@SuppressWarnings({ "java:S1133", "java:S6355" })
 	@Deprecated
 	@Override
 	public void setHours(int hours) {
@@ -76,6 +82,9 @@ public final class ImmutableDate extends Date {
 	 * @param minutes the value of the minutes.
 	 * @deprecated As of JDK version 1.1.
 	 */
+	// Ignores SonarCloud issue, java:S6355 - Deprecated annotations should include explanations, because the annotations are not mapped in J2CL.
+	// Ignores SonarCloud issue, java:S1133 - Deprecated code should be removed, because the deprecation must be maintained.
+	@SuppressWarnings({ "java:S1133", "java:S6355" })
 	@Deprecated
 	@Override
 	public void setMinutes(int minutes) {
@@ -88,6 +97,9 @@ public final class ImmutableDate extends Date {
 	 * @param month the month value between 0-11.
 	 * @deprecated As of JDK version 1.1.
 	 */
+	// Ignores SonarCloud issue, java:S6355 - Deprecated annotations should include explanations, because the annotations are not mapped in J2CL.
+	// Ignores SonarCloud issue, java:S1133 - Deprecated code should be removed, because the deprecation must be maintained.
+	@SuppressWarnings({ "java:S1133", "java:S6355" })
 	@Deprecated
 	@Override
 	public void setMonth(int month) {
@@ -100,6 +112,9 @@ public final class ImmutableDate extends Date {
 	 * @param seconds the seconds value.
 	 * @deprecated As of JDK version 1.1.
 	 */
+	// Ignores SonarCloud issue, java:S6355 - Deprecated annotations should include explanations, because the annotations are not mapped in J2CL.
+	// Ignores SonarCloud issue, java:S1133 - Deprecated code should be removed, because the deprecation must be maintained.
+	@SuppressWarnings({ "java:S1133", "java:S6355" })
 	@Deprecated
 	@Override
 	public void setSeconds(int seconds) {
@@ -112,6 +127,9 @@ public final class ImmutableDate extends Date {
 	 * @param time the number of milliseconds.
 	 * @deprecated As of JDK version 1.1.
 	 */
+	// Ignores SonarCloud issue, java:S6355 - Deprecated annotations should include explanations, because the annotations are not mapped in J2CL.
+	// Ignores SonarCloud issue, java:S1133 - Deprecated code should be removed, because the deprecation must be maintained.
+	@SuppressWarnings({ "java:S1133", "java:S6355" })
 	@Deprecated
 	@Override
 	public void setTime(long time) {
@@ -124,6 +142,9 @@ public final class ImmutableDate extends Date {
 	 * @param year the year value
 	 * @deprecated As of JDK version 1.1.
 	 */
+	// Ignores SonarCloud issue, java:S6355 - Deprecated annotations should include explanations, because the annotations are not mapped in J2CL.
+	// Ignores SonarCloud issue, java:S1133 - Deprecated code should be removed, because the deprecation must be maintained.
+	@SuppressWarnings({ "java:S1133", "java:S6355" })
 	@Deprecated
 	@Override
 	public void setYear(int year) {

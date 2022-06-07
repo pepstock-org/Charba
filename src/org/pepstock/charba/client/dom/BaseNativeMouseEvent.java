@@ -37,6 +37,8 @@ public final class BaseNativeMouseEvent extends BaseNativeEvent {
 	 * @param type type of the mouse event
 	 * @param eventInitDict event initialization dictionary to configure the event
 	 */
+	// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
+	@SuppressWarnings("java:S1172")
 	BaseNativeMouseEvent(String type, SelectEventInit eventInitDict) {
 		// do nothing
 	}
