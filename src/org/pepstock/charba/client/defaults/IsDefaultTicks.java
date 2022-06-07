@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.CrossAlign;
-import org.pepstock.charba.client.enums.ElementAlign;
+import org.pepstock.charba.client.enums.TickAlign;
 import org.pepstock.charba.client.enums.TickSource;
 
 /**
@@ -186,7 +186,7 @@ public interface IsDefaultTicks extends IsDefaultFontContainer {
 	 * 
 	 * @return the tick alignment along the axis
 	 */
-	ElementAlign getAlign();
+	TickAlign getAlign();
 
 	/**
 	 * Returns the tick alignment perpendicular to the axis.

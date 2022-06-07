@@ -279,6 +279,10 @@ Going to next release
 ---------------------
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Breaking changes
+
+  * change align option in the ticks in order to use `TickAlign` object instead of `ElementAlign`. 
+
 ### Features
 
   * import CHART.JS version [v3.8.0](https://github.com/chartjs/Chart.js/releases/tag/v3.8.0).
@@ -286,7 +290,8 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `includeInvisible` option to the `Interaction` configuration and options classes.
   * add `borderRadius` option to the `PointLabels` options and `RadialPointLabels` configuration classes.
   * add `offsetAfterAutoskip` option to the `CartesianTimeAxis` and `CartesianTimeSeriesAxis` configuration classes.
-
+  * add `inner` item to `TickAlign` class for the ticks.
+  
 License
 -------
 

@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.CrossAlign;
-import org.pepstock.charba.client.enums.ElementAlign;
+import org.pepstock.charba.client.enums.TickAlign;
 import org.pepstock.charba.client.enums.TickSource;
 
 /**
@@ -569,7 +569,7 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * 
 	 * @param align the tick alignment along the axis
 	 */
-	public void setAlign(ElementAlign align) {
+	public void setAlign(TickAlign align) {
 		setValueAndAddToParent(Property.ALIGN, align);
 	}
 
@@ -579,8 +579,8 @@ public final class Ticks extends AbstractModel<AbstractScale, IsDefaultTicks> im
 	 * @return the tick alignment along the axis
 	 */
 	@Override
-	public ElementAlign getAlign() {
-		return getValue(Property.ALIGN, ElementAlign.values(), getDefaultValues().getAlign());
+	public TickAlign getAlign() {
+		return getValue(Property.ALIGN, TickAlign.values(), getDefaultValues().getAlign());
 	}
 
 	/**

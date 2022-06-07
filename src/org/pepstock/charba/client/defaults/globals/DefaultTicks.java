@@ -23,7 +23,7 @@ import org.pepstock.charba.client.defaults.IsDefaultNumberFormatOptions;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.CrossAlign;
-import org.pepstock.charba.client.enums.ElementAlign;
+import org.pepstock.charba.client.enums.TickAlign;
 import org.pepstock.charba.client.enums.TickSource;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -321,8 +321,8 @@ public class DefaultTicks implements IsDefaultTicks {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getAlign()
 	 */
 	@Override
-	public ElementAlign getAlign() {
-		return ElementAlign.CENTER;
+	public TickAlign getAlign() {
+		return TickAlign.CENTER;
 	}
 
 	/*

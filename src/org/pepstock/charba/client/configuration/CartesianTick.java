@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.enums.CrossAlign;
-import org.pepstock.charba.client.enums.ElementAlign;
+import org.pepstock.charba.client.enums.TickAlign;
 
 /**
  * Common tick configuration, for cartesian axes.
@@ -189,7 +189,7 @@ abstract class CartesianTick extends Tick {
 	 * 
 	 * @param align the tick alignment along the axis
 	 */
-	public void setAlign(ElementAlign align) {
+	public void setAlign(TickAlign align) {
 		getConfiguration().setAlign(align);
 	}
 
@@ -198,7 +198,7 @@ abstract class CartesianTick extends Tick {
 	 * 
 	 * @return the tick alignment along the axis
 	 */
-	public ElementAlign getAlign() {
+	public TickAlign getAlign() {
 		return getConfiguration().getAlign();
 	}
 

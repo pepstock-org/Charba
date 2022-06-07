@@ -18,39 +18,39 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Property to set alignment of the legend and the title.
+ * Property to set alignment of the ticks.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum ElementAlign implements Key
+public enum TickAlign implements Key
 {
 	/**
 	 * The property sets the start alignment.
 	 */
-	START("start", "left"),
+	START("start"),
 	/**
 	 * The property sets the center alignment.
 	 */
-	CENTER("center", "center"),
+	CENTER("center"),
+	/**
+	 * The property sets the center alignment.
+	 */
+	INNER("innner"),
 	/**
 	 * The property sets the end alignment.
 	 */
-	END("end", "right");
+	END("end");
 
 	// name value of property
 	private final String value;
-	// CSS value
-	private final String horizontalAlignmentValue;
 
 	/**
 	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
-	 * @param horizontalAlignmentValue CSS value to apply to horizontal alignment
 	 */
-	private ElementAlign(String value, String horizontalAlignmentValue) {
+	private TickAlign(String value) {
 		this.value = value;
-		this.horizontalAlignmentValue = horizontalAlignmentValue;
 	}
 
 	/*
@@ -61,15 +61,6 @@ public enum ElementAlign implements Key
 	@Override
 	public String value() {
 		return value;
-	}
-
-	/**
-	 * Returns the CSS value for horizontal alignment in the HTML element style.
-	 * 
-	 * @return the CSS value for horizontal alignment in the HTML element style
-	 */
-	public String getHorizontalAlignmentValue() {
-		return horizontalAlignmentValue;
 	}
 
 }
