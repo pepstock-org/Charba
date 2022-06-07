@@ -87,7 +87,7 @@ public final class InteractionItem extends NativeObjectContainer implements IsDe
 	 * @param intersect if <code>true</code>, the mode only applies when the mouse position intersects an element on the chart.
 	 */
 	public InteractionItem(InteractionMode mode, boolean intersect) {
-		this(mode, true, InteractionAxis.XY);
+		this(mode, intersect, InteractionAxis.XY);
 	}
 
 	/**
