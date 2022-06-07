@@ -15,6 +15,10 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.data.BarBorderRadius;
+
 /**
  * Callback interface to set whatever <code>borderRadius</code> property at runtime.
  * 
@@ -23,5 +27,36 @@ package org.pepstock.charba.client.callbacks;
  * @param <C> type of context to pass to the callback.
  */
 public interface BorderRadiusCallback<C extends ChartContext> extends Scriptable<Object, C> {
+
+	/**
+	 * Returns an {@link BarBorderRadius} instance when the callback has been activated.
+	 * 
+	 * @param context annotation context instance.
+	 * @param callback {@link BorderRadiusCallback} instance to be invoked
+	 * @param defaultValue default value for this border radius.
+	 * @return a object property value, as {@link BarBorderRadius}
+	 */
+	static <C extends ChartContext> NativeObject toNative(C context, BorderRadiusCallback<C> callback, int defaultValue) {
+		int valueToReturn = defaultValue;
+		// gets value
+		Object value = ScriptableUtil.getOptionValue(context, callback);
+		// checks if is an object
+		if (value instanceof BarBorderRadius) {
+			// casts to border radius object
+			BarBorderRadius object = (BarBorderRadius) value;
+			// returns the native object
+			return object.nativeObject();
+		} else if (value instanceof Number) {
+			// checks if is an number
+			// casts to number
+			Number number = (Number) value;
+			// stores to result
+			valueToReturn = Checker.positiveOrZero(number.intValue());
+		}
+		// cats to a object
+		BarBorderRadius object = new BarBorderRadius(valueToReturn);
+		// returns the native object
+		return object.nativeObject();
+	}
 
 }

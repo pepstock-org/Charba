@@ -18,7 +18,6 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
-import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
@@ -90,7 +89,7 @@ final class BorderRadiusHandler extends PropertyHandler<IsDefaultsBorderRadiusHa
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.borderRadiusCallbackProxy.setCallback(context -> onBorderRadius(new AnnotationContext(parent, context), getBorderRadiusCallback(), getDefaultValues().getBorderRadius()));
+		this.borderRadiusCallbackProxy.setCallback(context -> BorderRadiusCallback.toNative(new AnnotationContext(parent, context), getBorderRadiusCallback(), getDefaultValues().getBorderRadius()));
 	}
 
 	/**
@@ -192,41 +191,6 @@ final class BorderRadiusHandler extends PropertyHandler<IsDefaultsBorderRadiusHa
 		setBorderRadius((BorderRadiusCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadiusCallback);
-	}
-
-	// ------------------------
-	// INTERNALS for CALLBACKS
-	// ------------------------
-
-	/**
-	 * Returns an {@link BarBorderRadius} instance when the callback has been activated.
-	 * 
-	 * @param context annotation context instance.
-	 * @param callback {@link BorderRadiusCallback} instance to be invoked
-	 * @param defaultValue default value for this border radius.
-	 * @return a object property value, as {@link BarBorderRadius}
-	 */
-	NativeObject onBorderRadius(AnnotationContext context, BorderRadiusCallback<AnnotationContext> callback, int defaultValue) {
-		int valueToReturn = defaultValue;
-		// gets value
-		Object value = ScriptableUtil.getOptionValue(context, callback);
-		// checks if is an object
-		if (value instanceof BarBorderRadius) {
-			// casts to border radius object
-			BarBorderRadius object = (BarBorderRadius) value;
-			// returns the native object
-			return object.nativeObject();
-		} else if (value instanceof Number) {
-			// checks if is an number
-			// casts to number
-			Number number = (Number) value;
-			// stores to result
-			valueToReturn = Checker.positiveOrZero(number.intValue());
-		}
-		// cats to a object
-		BarBorderRadius object = new BarBorderRadius(valueToReturn);
-		// returns the native object
-		return object.nativeObject();
 	}
 
 }
