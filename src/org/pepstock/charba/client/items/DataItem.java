@@ -60,15 +60,16 @@ public final class DataItem {
 		// gets the type of value
 		ObjectType type = JsHelper.get().typeOf(object);
 		// checks if is floating data
-		if (ObjectType.NUMBER.equals(type)) {
+		if (object instanceof Number) {
+			Number number = (Number) object;
 			// sets double and null to floating data and string value
-			this.value = (Double) object;
+			this.value = number.doubleValue();
 			this.valueAsFloatingData = null;
 			this.valueAsString = String.valueOf(value);
 			this.valueAsPoint = null;
 			this.dataType = DataType.NUMBERS;
 			this.nativeObject = null;
-		} else if (ObjectType.ARRAY.equals(type)) {
+		} else if (object instanceof ArrayDouble) {
 			// sets floating data, getting the array double and set nan to value
 			this.value = Undefined.DOUBLE;
 			this.valueAsFloatingData = BarDataset.FLOATING_BAR_DATA_FACTORY.create((ArrayDouble) object);
@@ -76,7 +77,7 @@ public final class DataItem {
 			this.valueAsPoint = null;
 			this.dataType = DataType.ARRAYS;
 			this.nativeObject = null;
-		} else if (ObjectType.STRING.equals(type)) {
+		} else if (object instanceof String) {
 			// uses the to string method of object and nan and null for other values
 			this.value = Undefined.DOUBLE;
 			this.valueAsFloatingData = null;
