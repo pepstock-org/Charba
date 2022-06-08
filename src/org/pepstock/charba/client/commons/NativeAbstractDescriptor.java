@@ -32,6 +32,9 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
+// Ignores SonarCloud issue, java:S1610 - Abstract classes without fields should be converted to interfaces,
+// because this is JSINTEROP implementation of native object which must be a class because there are native methods
+@SuppressWarnings("java:S1133")
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 abstract class NativeAbstractDescriptor {
 
