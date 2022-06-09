@@ -94,9 +94,9 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	}
 
 	/**
-	 * Creates the item using an envelop of the native java script object which contains all properties.
+	 * Creates the object with native object to map java script properties.
 	 * 
-	 * @param envelop envelop of the nativeObject native java script object which contains all properties.
+	 * @param nativeObject native object to map java script properties
 	 */
 	private AnnotationElement(NativeObject nativeObject) {
 		super(nativeObject);

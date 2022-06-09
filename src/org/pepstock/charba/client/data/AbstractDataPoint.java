@@ -21,6 +21,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.enums.DataPointType;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -30,6 +31,40 @@ import org.pepstock.charba.client.items.Undefined;
  *
  */
 public abstract class AbstractDataPoint extends NativeObjectContainer {
+
+	/**
+	 * Name of properties of native object.<br>
+	 * No private because it is used by time series item
+	 */
+	protected enum CharbaProperty implements Key
+	{
+		// internal properties about the data type
+		CHARBA_X_TYPE("charbaXType"),
+		CHARBA_Y_TYPE("charbaYType");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private CharbaProperty(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
 
 	/**
 	 * Creates the object with a native object passed as argument.
@@ -133,4 +168,21 @@ public abstract class AbstractDataPoint extends NativeObjectContainer {
 		return null;
 	}
 
+	/**
+	 * Checks the type of the property, setting the right type property.
+	 * 
+	 * @param property the property of the data to store
+	 * @param typeProperty property to use to store the type
+	 * @param type type of the property to store in the object
+	 */
+	protected void checkAndSetType(Key property, Key typeProperty, DataPointType type) {
+		// checks if property is stored
+		if (has(property)) {
+			// sets type
+			setValue(typeProperty, type);
+		} else {
+			// if here, the property is set as unknown
+			setValue(typeProperty, DataPointType.UNKNOWN);
+		}
+	}
 }

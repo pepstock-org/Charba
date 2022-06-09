@@ -19,6 +19,8 @@ import java.util.Date;
 
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.data.AbstractXYDataPoint.XYProperty;
+import org.pepstock.charba.client.enums.DataPointType;
 
 /**
  * Default implementation for time series item interface in order to manage time series item (time and value).
@@ -67,7 +69,9 @@ public final class TimeSeriesItem extends AbstractDataPoint {
 	 * @param value the value of time series item
 	 */
 	public void setValue(double value) {
-		setValue(DataPoint.Property.Y, value);
+		setValue(XYProperty.Y, value);
+		// sets type
+		checkAndSetType(XYProperty.Y, CharbaProperty.CHARBA_Y_TYPE, DataPointType.NUMBER);
 	}
 
 	/**
@@ -76,7 +80,7 @@ public final class TimeSeriesItem extends AbstractDataPoint {
 	 * @return the value of time series item
 	 */
 	public double getValue() {
-		return getValue(DataPoint.Property.Y, DataPoint.DEFAULT_Y);
+		return getValue(XYProperty.Y, DataPoint.DEFAULT_Y);
 	}
 
 	/**
@@ -85,7 +89,9 @@ public final class TimeSeriesItem extends AbstractDataPoint {
 	 * @param time the time of time series item
 	 */
 	private void setTime(Date time) {
-		setValue(DataPoint.Property.X, time);
+		setValue(XYProperty.X, time);
+		// sets type
+		checkAndSetType(XYProperty.X, CharbaProperty.CHARBA_X_TYPE, DataPointType.DATE);
 	}
 
 	/**
@@ -94,7 +100,7 @@ public final class TimeSeriesItem extends AbstractDataPoint {
 	 * @return the time of time series item
 	 */
 	public Date getTime() {
-		return getValue(DataPoint.Property.X, (Date) null);
+		return getValue(XYProperty.X, (Date) null);
 	}
 
 }

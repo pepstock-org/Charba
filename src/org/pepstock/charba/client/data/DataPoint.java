@@ -34,27 +34,18 @@ import org.pepstock.charba.client.utils.JSON;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataPoint extends AbstractDataPoint {
+public final class DataPoint extends AbstractXYDataPoint {
 
-	// default value for X. No private because it is used by time series item
-	static final double DEFAULT_X = Undefined.DOUBLE;
 	// default value for R. No private because it is used by time series item
 	static final double DEFAULT_R = Undefined.DOUBLE;
-	// default value for Y. No private because it is used by time series item
-	static final double DEFAULT_Y = Undefined.DOUBLE;
 
 	/**
 	 * Name of properties of native object.<br>
 	 * No private because it is used by time series item
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
-		X("x"),
-		Y("y"),
-		R("r"),
-		// internal properties about the data type
-		CHARBA_X_TYPE("charbaXType"),
-		CHARBA_Y_TYPE("charbaYType");
+		R("r");
 
 		// name value of property
 		private final String value;
@@ -198,134 +189,8 @@ public final class DataPoint extends AbstractDataPoint {
 	}
 
 	// -------------
-	// X
-	// -------------
-
-	/**
-	 * Returns the object type of data stored as X.
-	 * 
-	 * @return the object type of data stored as X
-	 */
-	public DataPointType getXType() {
-		return getValue(Property.CHARBA_X_TYPE, DataPointType.values(), DataPointType.UNKNOWN);
-	}
-
-	/**
-	 * Sets X value as double (for scatter and bubble datasets).
-	 * 
-	 * @param x X value as double
-	 */
-	public void setX(double x) {
-		setValue(Property.X, x);
-		// sets type
-		checkAndSetType(Property.X, Property.CHARBA_X_TYPE, DataPointType.NUMBER);
-	}
-
-	/**
-	 * Returns X value as double (for scatter and bubble datasets).
-	 * 
-	 * @return X value as double
-	 */
-	public double getX() {
-		// checks if the stored data is a number
-		if (DataPointType.NUMBER.equals(getXType())) {
-			return getValue(Property.X, DEFAULT_X);
-		}
-		// if here the data is missing or a string
-		// then returns the default
-		return DEFAULT_X;
-	}
-
-	/**
-	 * Sets X value as date for time series.
-	 * 
-	 * @param x X value as date for time series
-	 */
-	public void setX(Date x) {
-		setValue(Property.X, x);
-		// sets type
-		checkAndSetType(Property.X, Property.CHARBA_X_TYPE, DataPointType.DATE);
-	}
-
-	/**
-	 * Returns X value as date for time series.
-	 * 
-	 * @return X value as date for time series or <code>null</code> if is not set
-	 */
-	public Date getXAsDate() {
-		// checks if the stored data is a number
-		if (DataPointType.DATE.equals(getXType())) {
-			return getValue(Property.X, (Date) null);
-		}
-		// if here the data is missing or a string
-		// then returns the default
-		return null;
-	}
-
-	/**
-	 * Sets X value as string.
-	 * 
-	 * @param x X value as string
-	 */
-	public void setX(String x) {
-		setValue(Property.X, x);
-		// sets type
-		checkAndSetType(Property.X, Property.CHARBA_X_TYPE, DataPointType.STRING);
-	}
-
-	/**
-	 * Returns X value as string.
-	 * 
-	 * @return X value as string or {@link Undefined#STRING} if is not set
-	 */
-	public String getXAsString() {
-		// checks if the stored data is a string
-		if (DataPointType.STRING.equals(getXType())) {
-			return getValue(Property.X, Undefined.STRING);
-		}
-		// if here the data is missing or a number
-		// then returns the default
-		return Undefined.STRING;
-	}
-
-	// -------------
 	// Y
 	// -------------
-
-	/**
-	 * Returns the object type of data stored as Y.
-	 * 
-	 * @return the object type of data stored as Y
-	 */
-	public DataPointType getYType() {
-		return getValue(Property.CHARBA_Y_TYPE, DataPointType.values(), DataPointType.UNKNOWN);
-	}
-
-	/**
-	 * Sets Y value.
-	 * 
-	 * @param y Y value.
-	 */
-	public void setY(double y) {
-		setValue(Property.Y, y);
-		// sets type
-		checkAndSetType(Property.Y, Property.CHARBA_Y_TYPE, DataPointType.NUMBER);
-	}
-
-	/**
-	 * Returns Y value.
-	 * 
-	 * @return Y value.
-	 */
-	public double getY() {
-		// checks if the stored data is a number
-		if (DataPointType.NUMBER.equals(getYType())) {
-			return getValue(Property.Y, DEFAULT_Y);
-		}
-		// if here the data is missing or an array
-		// then returns the default
-		return DEFAULT_Y;
-	}
 
 	/**
 	 * Sets Y value.
@@ -333,9 +198,9 @@ public final class DataPoint extends AbstractDataPoint {
 	 * @param y Y value.
 	 */
 	public void setY(FloatingData y) {
-		setValue(Property.Y, y);
+		setValue(XYProperty.Y, y);
 		// sets type
-		checkAndSetType(Property.Y, Property.CHARBA_Y_TYPE, DataPointType.FLOATING_DATA);
+		checkAndSetType(XYProperty.Y, CharbaProperty.CHARBA_Y_TYPE, DataPointType.FLOATING_DATA);
 	}
 
 	/**
@@ -346,7 +211,7 @@ public final class DataPoint extends AbstractDataPoint {
 	public FloatingData getYAsFloatingData() {
 		// checks if the stored data is a array
 		if (DataPointType.FLOATING_DATA.equals(getYType())) {
-			return new FloatingData(getArrayValue(Property.Y));
+			return new FloatingData(getArrayValue(XYProperty.Y));
 		}
 		// if here the data is missing or not a number
 		// then returns an empty data
