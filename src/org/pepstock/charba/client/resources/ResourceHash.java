@@ -53,7 +53,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */
-	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1371071),
+	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1371077),
 	/**
 	 * Hash item for 'LuxonAdapterResource' class.
 	 */

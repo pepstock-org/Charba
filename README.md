@@ -293,7 +293,11 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `inner` item to `TickAlign` class for the ticks.
   * add `getElementAtEvent(BaseNativeEvent event, InteractionItem interaction)` method to the charts.
   * add `getElementsAtEvent(BaseNativeEvent event, InteractionItem interaction)` method to the charts.
-  
+
+### Development
+
+ * change dependency for Google Closure Compiler, version [v20220601](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20220601).
+ 
 License
 -------
 
