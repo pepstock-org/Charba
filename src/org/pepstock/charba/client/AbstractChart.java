@@ -1282,10 +1282,12 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	public final List<DatasetReference> getElementsAtEvent(BaseNativeEvent event, InteractionItem interaction) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
+		// checks if interaction is consistent
+		InteractionItem item = interaction != null ? interaction : getOptions().getInteraction().create();
 		// checks consistency of chart and event
-		if (instance != null && event != null && interaction != null) {
+		if (instance != null && event != null) {
 			// gets elements
-			ArrayObject array = instance.getElementsAtEventForMode(event, interaction.getMode().value(), interaction.nativeObject(), false);
+			ArrayObject array = instance.getElementsAtEventForMode(event, item.getMode().value(), item.nativeObject(), false);
 			// returns the array
 			return ArrayListHelper.unmodifiableList(array, DatasetReference.FACTORY);
 		}

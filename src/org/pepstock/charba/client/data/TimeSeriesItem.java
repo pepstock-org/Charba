@@ -36,7 +36,7 @@ public final class TimeSeriesItem extends AbstractDataPoint {
 	 * @param time time of item
 	 */
 	public TimeSeriesItem(Date time) {
-		this(time, DataPoint.DEFAULT_Y);
+		this(time, AbstractXYDataPoint.DEFAULT_Y);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public final class TimeSeriesItem extends AbstractDataPoint {
 	 * @return the value of time series item
 	 */
 	public double getValue() {
-		return getValue(XYProperty.Y, DataPoint.DEFAULT_Y);
+		return getValue(XYProperty.Y, AbstractXYDataPoint.DEFAULT_Y);
 	}
 
 	/**
