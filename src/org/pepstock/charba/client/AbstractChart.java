@@ -86,9 +86,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// default interaction instance for dataset
-	private static final InteractionItem DEFAULT_INTERACTION_DATASET = new InteractionItem(InteractionMode.DATASET, true);
-	// default interaction instance
-	private static final InteractionItem DEFAULT_INTERACTION = new InteractionItem(InteractionMode.NEAREST, true);
+	private static final InteractionItem DEFAULT_INTERACTION = new InteractionItem(InteractionMode.DATASET, true);
 	// PCT standard for width
 	private static final int DEFAULT_WIDTH = 90;
 	// PCT standard for width
@@ -1047,19 +1045,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event) {
-		return getDatasetAtEvent(event, DEFAULT_INTERACTION_DATASET);
-	}
-
-	/**
-	 * Looks for the dataset that matches the event.
-	 * 
-	 * @param event event of chart.
-	 * @param interaction how the elements will be checked.
-	 * @return dataset item.
-	 */
-	@Override
-	public final List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event, InteractionItem interaction) {
-		return getElementsAtEvent(event, interaction);
+		return getElementsAtEvent(event, DEFAULT_INTERACTION);
 	}
 
 	/**
@@ -1243,7 +1229,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final DatasetReference getElementAtEvent(BaseNativeEvent event) {
-		return getElementAtEvent(event, DEFAULT_INTERACTION);
+		return getElementAtEvent(event, null);
 	}
 
 	/**
@@ -1258,10 +1244,12 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	public final DatasetReference getElementAtEvent(BaseNativeEvent event, InteractionItem interaction) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
+		// checks if interaction is consistent
+		InteractionItem item = interaction != null ? interaction : getOptions().getInteraction().create();
 		// checks consistency of chart and event
-		if (instance != null && event != null && interaction != null) {
+		if (instance != null && event != null) {
 			// gets element
-			ArrayObject result = instance.getElementsAtEventForMode(event, interaction.getMode().value(), interaction.nativeObject(), false);
+			ArrayObject result = instance.getElementsAtEventForMode(event, item.getMode().value(), item.nativeObject(), false);
 			if (result != null && !result.isEmpty()) {
 				return DatasetReference.FACTORY.create(result.get(0));
 			}

@@ -291,7 +291,6 @@ Here you can find the list of enhancements and updates available on `master` bra
   * add `borderRadius` option to the `PointLabels` options and `RadialPointLabels` configuration classes.
   * add `offsetAfterAutoskip` option to the `CartesianTimeAxis` and `CartesianTimeSeriesAxis` configuration classes.
   * add `inner` item to `TickAlign` class for the ticks.
-  * add `getDatasetAtEvent(BaseNativeEvent event, InteractionItem interaction)` method to the charts.
   * add `getElementAtEvent(BaseNativeEvent event, InteractionItem interaction)` method to the charts.
   * add `getElementsAtEvent(BaseNativeEvent event, InteractionItem interaction)` method to the charts.
   

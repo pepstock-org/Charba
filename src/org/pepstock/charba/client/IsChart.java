@@ -562,15 +562,6 @@ public interface IsChart {
 	List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event);
 
 	/**
-	 * Looks for the dataset that matches the event.
-	 * 
-	 * @param event event of chart.
-	 * @param interaction how the elements will be checked.
-	 * @return dataset item.
-	 */
-	List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event, InteractionItem interaction);
-
-	/**
 	 * Looks for the dataset if it's visible or not, selected by index.
 	 * 
 	 * @param index dataset index

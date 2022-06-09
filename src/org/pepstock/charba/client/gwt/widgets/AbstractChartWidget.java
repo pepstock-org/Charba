@@ -584,16 +584,6 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#getDatasetAtEvent(org.pepstock.charba.client.dom.BaseNativeEvent, org.pepstock.charba.client.items.InteractionItem)
-	 */
-	@Override
-	public List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event, InteractionItem interaction) {
-		return chart.getDatasetAtEvent(event, interaction);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.IsChart#isDatasetVisible(int)
 	 */
 	@Override

@@ -113,7 +113,7 @@ public class Interaction extends ConfigurationOptionsContainer {
 	 * 
 	 * @return an {@link InteractionItem} using the configuration defined in this interaction
 	 */
-	public final InteractionItem createItem() {
+	public final InteractionItem create() {
 		return getConfiguration().getInteraction().create();
 	}
 }
