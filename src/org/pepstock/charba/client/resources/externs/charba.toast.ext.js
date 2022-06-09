@@ -5,7 +5,7 @@
  * @constructor
  * @return {CharbaToast}
  */
-function CharbaToast() {}
+function CharbaToast() {};
 /**
  * @type {Object}
  */

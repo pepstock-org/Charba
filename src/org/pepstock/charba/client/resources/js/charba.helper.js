@@ -551,6 +551,20 @@ CharbaJsAnnotationHelper.inRange = function(element, x, y, useFinalPosition) {
   return false;
 }
 /**
+ * Returns the list of properties of the element.
+ *
+ * @param {Object} element annotation element instance
+ * @param {ArrayString} properties annotation element instance
+ * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+ * @return {Object}
+ */
+CharbaJsAnnotationHelper.getProps = function(element, properties, useFinalPosition) {
+  if (element != null){
+    return element.getProps(properties, useFinalPosition);
+  }
+  return {};
+}
+/**
  * ----------------------------------------------------------------------------
  * CharbaJsDataLabelsHelper
  * ----------------------------------------------------------------------------

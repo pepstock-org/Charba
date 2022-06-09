@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.annotation.elements;
 
 import org.pepstock.charba.client.annotation.AnnotationPlugin;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 
@@ -58,4 +59,13 @@ final class NativeJsAnnotationHelper {
 	 */
 	static native boolean inRange(NativeObject element, double x, double y, boolean useFinalPosition);
 
+	/**
+	 * Returns the list of properties of the element.
+	 * 
+	 * @param element element which should be invoked
+	 * @param properties list of properties to get
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return a native object with the selected properties
+	 */
+	static native NativeObject getProps(NativeObject element, ArrayString properties, boolean useFinalPosition);
 }

@@ -7,7 +7,7 @@
  * @param {Object} configuration
  * @return {Chart}
  */
-function Chart(context, configuration) {}
+function Chart(context, configuration) {};
 /**
  * @param {number=} width
  * @param {number=} height
@@ -176,7 +176,7 @@ Chart.instances;
  * @constructor
  * @return {CharbaChartHelpers}
  */
-function CharbaChartHelpers() {}
+function CharbaChartHelpers() {};
 /**
  * @param {Object} target
  * @param {Object} source
@@ -210,7 +210,7 @@ CharbaChartHelpers.prototype.formatNumber = function(number, locale, options) {}
  * @constructor
  * @return {CharbaChartAdaptersDate}
  */
-function CharbaChartAdaptersDate() {}
+function CharbaChartAdaptersDate() {};
 /**
  * @param {*} key
  * @return {boolean}
@@ -267,7 +267,7 @@ CharbaChartAdaptersDate.prototype.endOf = function(time, unit){};
  * @constructor
  * @return {CharbaControllerContext}
  */
-function CharbaControllerContext() {}
+function CharbaControllerContext() {};
 /**
  * @type {Chart}
  */
@@ -284,7 +284,7 @@ CharbaControllerContext.prototype._data;
  * @constructor
  * @return {CharbaScriptableOptionsContext}
  */
-function CharbaScriptableOptionsContext() {}
+function CharbaScriptableOptionsContext() {};
 /**
  * @type {Chart}
  */

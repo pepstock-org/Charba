@@ -18,6 +18,7 @@ package org.pepstock.charba.client.annotation.elements;
 import org.pepstock.charba.client.annotation.AnnotationEnvelop;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.IsPoint;
 import org.pepstock.charba.client.commons.Key;
@@ -89,7 +90,16 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * @param envelop envelop of the nativeObject native java script object which contains all properties.
 	 */
 	public AnnotationElement(AnnotationEnvelop<NativeObject> envelop) {
-		super(Envelop.checkAndGetIfValid(envelop).getContent());
+		this(Envelop.checkAndGetIfValid(envelop).getContent());
+	}
+
+	/**
+	 * Creates the item using an envelop of the native java script object which contains all properties.
+	 * 
+	 * @param envelop envelop of the nativeObject native java script object which contains all properties.
+	 */
+	private AnnotationElement(NativeObject nativeObject) {
+		super(nativeObject);
 		// loads element options only if already stored in the element
 		// there could be in the callbacks invocation, options are not loaded,
 		// instead on event there should be always
@@ -163,6 +173,15 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 */
 	public boolean inRange(double x, double y, boolean useFinalPosition) {
 		return Undefined.isNot(x) && Undefined.isNot(y) && NativeJsAnnotationHelper.inRange(getNativeObject(), x, y, useFinalPosition);
+	}
+
+	/**
+	 * Returns the list of properties of the element, using the final position.
+	 * 
+	 * @return an annotation element instance.
+	 */
+	public AnnotationElement getFinalPositionProps() {
+		return new AnnotationElement(NativeJsAnnotationHelper.getProps(getNativeObject(), ArrayString.fromOrEmpty(Property.values()), true));
 	}
 
 	/**

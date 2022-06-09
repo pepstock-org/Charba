@@ -210,7 +210,7 @@ ML.RobustPolynomialRegression.load = function(descriptor) {};
  * @constructor
  * @return {CharbaJsMLHelper}
  */
-function CharbaJsMLHelper() {}
+function CharbaJsMLHelper() {};
 /**
  * @param {ML.BaseRegression} regression
  * @param {Array} values

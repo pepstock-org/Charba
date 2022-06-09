@@ -386,21 +386,4 @@ public final class DataPoint extends AbstractDataPoint {
 		return JSON.stringifyWithReplacer(getNativeObject());
 	}
 
-	/**
-	 * Checks the type of the property, setting the right type property.
-	 * 
-	 * @param property the property of the data to store
-	 * @param typeProperty property to use to store the type
-	 * @param type type of the property to store in the object
-	 */
-	private void checkAndSetType(Key property, Key typeProperty, DataPointType type) {
-		// checks if property is stored
-		if (has(property)) {
-			// sets type
-			setValue(typeProperty, type);
-		} else {
-			// if here, the property is set as unknown
-			setValue(typeProperty, DataPointType.UNKNOWN);
-		}
-	}
 }

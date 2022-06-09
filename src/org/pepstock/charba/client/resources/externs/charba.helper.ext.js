@@ -5,7 +5,7 @@
  * @constructor
  * @return {CharbaCallbackProxy}
  */
-function CharbaCallbackProxy() {}
+function CharbaCallbackProxy() {};
 /**
  * @type {Function}
  */
@@ -22,7 +22,7 @@ CharbaCallbackProxy.prototype.ignoreFunctionContext;
  * @constructor
  * @return {CharbaJsHelper}
  */
-function CharbaJsHelper() {}
+function CharbaJsHelper() {};
 /**
  * @return {Object}
  */
@@ -91,7 +91,7 @@ CharbaJsHelper.isImage = function(obj, key) {};
  * @constructor
  * @return {CharbaJsPluginHelper}
  */
-function CharbaJsPluginHelper() {}
+function CharbaJsPluginHelper() {};
 /**
  * @param {Object} object
  * @return {undefined}
@@ -110,7 +110,7 @@ CharbaJsPluginHelper.getAll = function() {};
  * @constructor
  * @return {CharbaJsControllerHelper}
  */
-function CharbaJsControllerHelper() {}
+function CharbaJsControllerHelper() {};
 /**
  * @param {string} controllerType 
  * @param {string} chartType 
@@ -157,7 +157,7 @@ CharbaJsControllerHelper.linkScales = function(controllerType, context) {};
  * @constructor
  * @return {CharbaJsPositionerHelper}
  */	
-function CharbaJsPositionerHelper() {}	
+function CharbaJsPositionerHelper() {};	
 /**
  * @param {string} name 
  * @param {Function} object 
@@ -181,7 +181,7 @@ CharbaJsPositionerHelper.invoke = function(name, context, datasetItems, eventPoi
  * @constructor
  * @return {CharbaJsChartHelper}
  */	
-function CharbaJsChartHelper() {}	  
+function CharbaJsChartHelper() {};	  
 /**
  * @param {Chart} chart 
  * @param {Object} options 
@@ -227,7 +227,7 @@ CharbaJsChartHelper.getSubtitle = function(chart) {};
  * @constructor
  * @return {CharbaJsZoomHelper}
  */	
-function CharbaJsZoomHelper() {}	    
+function CharbaJsZoomHelper() {};	    
 /**
  * @param {Chart} chart
  * @return {number}
@@ -270,7 +270,7 @@ CharbaJsZoomHelper.isZoomedOrPanned = function(chart) {};
  * @constructor
  * @return {CharbaJsAnnotationHelper}
  */	
-function CharbaJsAnnotationHelper() {} 
+function CharbaJsAnnotationHelper() {};
 /**
  * @param {Object} element
  * @param {boolean} useFinalPosition
@@ -284,12 +284,19 @@ CharbaJsAnnotationHelper.getCenterPoint = function(element, useFinalPosition) {}
  * @param {boolean} useFinalPosition
  * @return {boolean}
  */
-CharbaJsAnnotationHelper.inRange = function(element, x, y, useFinalPosition) {}
+CharbaJsAnnotationHelper.inRange = function(element, x, y, useFinalPosition) {};
+/**
+ * @param {Object} element
+ * @param {ArrayString} properties
+ * @param {boolean} useFinalPosition
+ * @return {Object}
+ */
+CharbaJsAnnotationHelper.getProps = function(element, properties, useFinalPosition) {};
 /**
  * @constructor
  * @return {CharbaJsDataLabelsHelper}
  */	
-function CharbaJsDataLabelsHelper() {}	    
+function CharbaJsDataLabelsHelper() {};  
 /**
  * @return {undefined}
  */
@@ -298,7 +305,7 @@ CharbaJsDataLabelsHelper.register = function() {};
  * @constructor
  * @return {CharbaJsGradientHelper}
  */	
-function CharbaJsGradientHelper() {}	    
+function CharbaJsGradientHelper() {};   
 /**
  * @return {undefined}
  */
@@ -307,7 +314,7 @@ CharbaJsGradientHelper.register = function() {};
  * @constructor
  * @return {CharbaJsItemsHelper}
  */	
-function CharbaJsItemsHelper() {}
+function CharbaJsItemsHelper() {};
 /**
  * @param {Object} object 
  * @param {string} key 
@@ -401,7 +408,7 @@ CharbaJsItemsHelper.getDatasetControllerStyle  = function(controller, dataIndex)
  * @constructor
  * @return {CharbaJsDateAdapterHelper}
  */	
-function CharbaJsDateAdapterHelper() {}
+function CharbaJsDateAdapterHelper() {};
 /**
  * @param {Object} object 
  * @return {CharbaChartAdaptersDate}
@@ -425,7 +432,7 @@ CharbaJsDateAdapterHelper.getEpochByOrdinal = function(year, ordinal, options) {
  * @constructor
  * @return {CharbaJsGeoHelper}
  */
-function CharbaJsGeoHelper() {} 
+function CharbaJsGeoHelper() {};
 /**
  * @param {Object} topojson 
  * @param {string} featureProperty 
