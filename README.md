@@ -286,6 +286,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
   * import CHART.JS version [v3.8.0](https://github.com/chartjs/Chart.js/releases/tag/v3.8.0).
+  * import CHART.JS GEO controller version [v3.8.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.8.0);
   * add `MultilineTextAnnotationBuilder` utility in order to create a canvas to add to a chart, by the annotation plugin labels, where each line of the content can have a specific font and color.
   * add `includeInvisible` option to the `Interaction` configuration and options classes.
   * add `borderRadius` option to the `PointLabels` options and `RadialPointLabels` configuration classes.
