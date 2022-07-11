@@ -287,7 +287,7 @@ CharbaJsAnnotationHelper.getCenterPoint = function(element, useFinalPosition) {}
 CharbaJsAnnotationHelper.inRange = function(element, x, y, useFinalPosition) {};
 /**
  * @param {Object} element
- * @param {ArrayString} properties
+ * @param {Array} properties
  * @param {boolean} useFinalPosition
  * @return {Object}
  */
