@@ -27,7 +27,7 @@ jobs:
       # Checkout the repository content
       # 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           # Disabling shallow clone 
           fetch-depth: 0
@@ -35,7 +35,7 @@ jobs:
       # Setup Java JDK
       # 
       - name: Setup JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'zulu'
