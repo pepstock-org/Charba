@@ -39,9 +39,9 @@ Even if **Charba** was born only as GWT chart library, as of version 3, **Charba
 Building
 --------
 
-To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.3/build.xml).
+To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.4/build.xml).
 
-The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.3/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
+The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.4/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
 
 The first distribution is a **Charba** file without any GWT dependency (but working on GWT anyway), consumable also in other [J2CL - JavaToClosure](https://github.com/google/j2cl) frameworks, like [Google Elemental2](https://github.com/google/elemental2) and [Elemento](https://github.com/hal/elemento).
 
@@ -55,7 +55,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
-[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_54.png)](https://github.com/pepstock-org/Charba-Showcase/blob/5.3/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_54.png)](https://github.com/pepstock-org/Charba-Showcase/blob/5.4/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------
@@ -70,18 +70,18 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>5.3</version>
+    <version>5.4</version>
     <!-- for GWT -->
-    <version>5.3-gwt</version>
+    <version>5.4-gwt</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="5.3"/>
+<dependency org="org.pepstock" name="charba" rev="5.4"/>
 <!-- for GWT -->
-<dependency org="org.pepstock" name="charba" rev="5.3-gwt"/>
+<dependency org="org.pepstock" name="charba" rev="5.4-gwt"/>
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration in your GWT project module configuration:
@@ -249,7 +249,7 @@ Documentation
 
 All **Charba** documentation will be maintained in [Charba-Wiki](https://github.com/pepstock-org/Charba-Wiki) project.
 
-API JavaDoc for version **5.3** is published [here](https://pepstock-org.github.io/Charba/5.3/index.html).
+API JavaDoc for version **5.4** is published [here](https://pepstock-org.github.io/Charba/5.4/index.html).
 
 You can also access the previous API JavaDoc, because every version is published to `https://pepstock-org.github.io/Charba/[version.release]`.
 
@@ -275,31 +275,6 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-Going to next release
----------------------
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
-
-### Breaking changes
-
-  * change align option in the ticks in order to use `TickAlign` object instead of `ElementAlign`. 
-
-### Features
-
-  * import CHART.JS version [v3.8.0](https://github.com/chartjs/Chart.js/releases/tag/v3.8.0).
-  * import CHART.JS GEO controller version [v3.8.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.8.0).
-  * import LUXON datetime library version [v3.0.1](https://github.com/moment/luxon/releases/tag/3.0.1).
-  * add `MultilineTextAnnotationBuilder` utility in order to create a canvas to add to a chart, by the annotation plugin labels, where each line of the content can have a specific font and color.
-  * add `includeInvisible` option to the `Interaction` configuration and options classes.
-  * add `borderRadius` option to the `PointLabels` options and `RadialPointLabels` configuration classes.
-  * add `offsetAfterAutoskip` option to the `CartesianTimeAxis` and `CartesianTimeSeriesAxis` configuration classes.
-  * add `inner` item to `TickAlign` class for the ticks.
-  * add `getElementAtEvent(BaseNativeEvent event, InteractionItem interaction)` method to the charts.
-  * add `getElementsAtEvent(BaseNativeEvent event, InteractionItem interaction)` method to the charts.
-
-### Development
-
- * change dependency for Google Closure Compiler, version [v20220601](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20220601).
- 
 License
 -------
 
