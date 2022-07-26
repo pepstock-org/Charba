@@ -277,6 +277,28 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 	}
 
 	/**
+	 * Sets if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT} and
+	 * {@link PointStyle#LINE}).
+	 * 
+	 * @param pointStyleWidth if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT}
+	 *            and {@link PointStyle#LINE}).
+	 */
+	public void setPointStyleWidth(double pointStyleWidth) {
+		getConfiguration().getLegend().getLabels().setPointStyleWidth(pointStyleWidth);
+	}
+
+	/**
+	 * Returns if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT} and
+	 * {@link PointStyle#LINE}).
+	 * 
+	 * @return if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT} and
+	 *         {@link PointStyle#LINE}).
+	 */
+	public double getPointStyleWidth() {
+		return getConfiguration().getLegend().getLabels().getPointStyleWidth();
+	}
+
+	/**
 	 * Sets the style of the legend, overriding point style from dataset.<br>
 	 * Only applies if {@link LegendLabels#setUsePointStyle(boolean)} is set to <code>true</code>.
 	 * 

@@ -284,6 +284,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
   * import CHART.JS version [v3.8.2](https://github.com/chartjs/Chart.js/releases/tag/v3.8.2).
+  * add `pointStyleWidth` option to `LegendLabels` options and configuration classes.
   
 ### Development
 

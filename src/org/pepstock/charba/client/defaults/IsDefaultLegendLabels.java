@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.enums.TextAlign;
 
 /**
@@ -31,6 +32,15 @@ public interface IsDefaultLegendLabels extends IsDefaultBoxHandler, IsDefaultPoi
 	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 */
 	boolean isUsePointStyle();
+
+	/**
+	 * Returns if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT} and
+	 * {@link PointStyle#LINE}).
+	 * 
+	 * @return if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT} and
+	 *         {@link PointStyle#LINE}).
+	 */
+	double getPointStyleWidth();
 
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.

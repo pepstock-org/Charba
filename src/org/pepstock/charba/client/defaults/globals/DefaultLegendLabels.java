@@ -38,6 +38,8 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 
 	private static final boolean DEFAULT_USE_POINT_STYLE = false;
 
+	private static final double DEFAULT_POINT_STYLE_WIDTH = Undefined.DOUBLE;
+
 	private final DefaultRoutedFont font = new DefaultRoutedFont();
 
 	/**
@@ -75,6 +77,16 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	@Override
 	public boolean isUsePointStyle() {
 		return DEFAULT_USE_POINT_STYLE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getPointStyleWidth()
+	 */
+	@Override
+	public double getPointStyleWidth() {
+		return DEFAULT_POINT_STYLE_WIDTH;
 	}
 
 	/*

@@ -74,6 +74,16 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getPointStyleWidth()
+	 */
+	@Override
+	public double getPointStyleWidth() {
+		return labels.getPointStyleWidth();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultPointStyler#getPointStyle()
 	 */
 	@Override
