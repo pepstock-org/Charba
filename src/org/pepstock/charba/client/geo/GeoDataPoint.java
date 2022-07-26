@@ -34,6 +34,7 @@ abstract class GeoDataPoint extends AbstractDataPoint {
 	 */
 	private enum Property implements Key
 	{
+		CENTER("center"),
 		VALUE("value");
 
 		// name value of property
@@ -87,4 +88,21 @@ abstract class GeoDataPoint extends AbstractDataPoint {
 		return getValue(Property.VALUE, Undefined.DOUBLE);
 	}
 
+	/**
+	 * Sets the coordinates where the tooltip should appear. e.g. at the capital city.
+	 * 
+	 * @param center the coordinates where the tooltip should appear. e.g. at the capital city.
+	 */
+	public final void setCenter(DataPointCenter center) {
+		setValue(Property.CENTER, center);
+	}
+
+	/**
+	 * Returns the coordinates where the tooltip should appear. e.g. at the capital city.
+	 * 
+	 * @return the coordinates where the tooltip should appear. e.g. at the capital city.
+	 */
+	public final DataPointCenter getCenter() {
+		return new DataPointCenter(getValue(Property.CENTER));
+	}
 }

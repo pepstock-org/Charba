@@ -286,6 +286,7 @@ Here you can find the list of enhancements and updates available on `master` bra
   * import CHART.JS version [v3.8.2](https://github.com/chartjs/Chart.js/releases/tag/v3.8.2).
   * import CHART.JS GEO controller version [v3.8.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.8.1).
   * add `pointStyleWidth` option to `LegendLabels` options and configuration classes.
+  * add `center` option to `GeoDataPoint` configuration class.  
   
 ### Development
 
