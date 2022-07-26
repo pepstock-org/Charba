@@ -17,12 +17,12 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.FillCallback;
 import org.pepstock.charba.client.annotation.callbacks.LengthCallback;
-import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtil;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -45,10 +45,7 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	 */
 	private enum Property implements Key
 	{
-		// even if in the JS plugin the options is called "enabled"
-		// we think that "display" is more coherent with the scope of the option
-		// and then Charba use "display" in the method
-		ENABLED("enabled"),
+		DISPLAY("display"),
 		FILL("fill"),
 		LENGTH("length"),
 		WIDTH("width");
@@ -90,7 +87,7 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	private final CallbackProxy<ProxyBooleanCallback> fillCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
-	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
+	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
 	// callback instance to handle length options
 	private static final CallbackPropertyHandler<LengthCallback> LENGTH_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.LENGTH);
 	// callback instance to handle width options
@@ -198,7 +195,7 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 		// resets callback
 		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores value
-		setValue(Property.ENABLED, display);
+		setValue(Property.DISPLAY, display);
 	}
 
 	/**
@@ -208,7 +205,7 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 	 */
 	@Override
 	public final boolean isDisplay() {
-		return getValue(Property.ENABLED, defaultValues.isDisplay());
+		return getValue(Property.DISPLAY, defaultValues.isDisplay());
 	}
 
 	/**
@@ -309,7 +306,7 @@ public class Arrow extends AbstractNode implements IsDefaultsArrow, HasBorderOpt
 		// resets callback
 		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores values
-		setValue(Property.ENABLED, displayCallback);
+		setValue(Property.DISPLAY, displayCallback);
 	}
 
 	/**

@@ -17,11 +17,11 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
-import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtil;
+import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -42,10 +42,7 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	 */
 	private enum Property implements Key
 	{
-		// even if in the JS plugin the options is called "enabled"
-		// we think that "display" is more coherent with the scope of the option
-		// and then Charba use "display" in the method
-		ENABLED("enabled"),
+		DISPLAY("display"),
 		X_ADJUST("xAdjust"),
 		Y_ADJUST("yAdjust");
 
@@ -84,7 +81,7 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	private final CallbackProxy<ProxyDoubleCallback> yAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
-	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
+	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
 	// callback instance to handle xAdjust options
 	private static final CallbackPropertyHandler<AdjustSizeCallback> X_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_ADJUST);
 	// callback instance to handle yAdjustg options
@@ -159,7 +156,7 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 		// resets callback
 		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores value
-		setValue(Property.ENABLED, display);
+		setValue(Property.DISPLAY, display);
 	}
 
 	/**
@@ -169,7 +166,7 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	 */
 	@Override
 	public final boolean isDisplay() {
-		return getValue(Property.ENABLED, defaultValues.isDisplay());
+		return getValue(Property.DISPLAY, defaultValues.isDisplay());
 	}
 
 	/**
@@ -272,7 +269,7 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 		// resets callback
 		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores values
-		setValueAndAddToParent(Property.ENABLED, displayCallback);
+		setValueAndAddToParent(Property.DISPLAY, displayCallback);
 	}
 
 	/**

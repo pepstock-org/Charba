@@ -36,10 +36,7 @@ public final class CalloutElement extends BaseElement {
 	 */
 	private enum Property implements Key
 	{
-		// even if in the JS plugin the options is called "enabled"
-		// we think that "display" is more coherent with the scope of the option
-		// and then Charba use "display" in the method
-		ENABLED("enabled"),
+		DISPLAY("display"),
 		MARGIN("margin"),
 		POSITION("position"),
 		SIDE("side"),
@@ -86,7 +83,7 @@ public final class CalloutElement extends BaseElement {
 	 * @param display <code>true</code> whether the label should be displayed
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.ENABLED, display);
+		setValue(Property.DISPLAY, display);
 	}
 
 	/**
@@ -95,7 +92,7 @@ public final class CalloutElement extends BaseElement {
 	 * @return <code>true</code> whether the label should be displayed
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.ENABLED, Callout.DEFAULT_DISPLAY);
+		return getValue(Property.DISPLAY, Callout.DEFAULT_DISPLAY);
 	}
 
 	/**

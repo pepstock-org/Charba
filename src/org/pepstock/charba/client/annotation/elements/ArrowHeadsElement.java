@@ -31,7 +31,7 @@ public class ArrowHeadsElement extends ArrowElement {
 	 */
 	private enum Property implements Key
 	{
-		START("enabled"),
+		START("start"),
 		END("end");
 
 		// name value of property

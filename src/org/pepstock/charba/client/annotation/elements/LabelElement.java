@@ -37,7 +37,7 @@ public final class LabelElement extends BaseElement {
 	private enum Property implements Key
 	{
 		// options
-		ENABLED("enabled"),
+		DISPLAY("display"),
 		// styles
 		POSITION("position"),
 		ROTATION("rotation");
@@ -84,7 +84,7 @@ public final class LabelElement extends BaseElement {
 	 * @param display <code>true</code> whether the annotation should be displayed
 	 */
 	public void setDisplay(boolean display) {
-		setValueAndAddToParent(Property.ENABLED, display);
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public final class LabelElement extends BaseElement {
 	 * @return <code>true</code> whether the annotation label should be displayed
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.ENABLED, Undefined.BOOLEAN);
+		return getValue(Property.DISPLAY, Undefined.BOOLEAN);
 	}
 
 	/**

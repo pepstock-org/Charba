@@ -98,10 +98,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 	 */
 	private enum Property implements Key
 	{
-		// even if in the JS plugin the options is called "enabled"
-		// we think that "display" is more coherent with the scope of the option
-		// and then Charba use "display" in the method
-		ENABLED("enabled"),
+		DISPLAY("display"),
 		MARGIN("margin"),
 		POSITION("position"),
 		SIDE("side"),
@@ -146,7 +143,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 	private final CallbackProxy<ProxyStringCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
-	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENABLED);
+	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
 	// callback instance to handle margin options
 	private static final CallbackPropertyHandler<MarginCallback> MARGIN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.MARGIN);
 	// callback instance to handle side options
@@ -229,7 +226,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 		// resets callback
 		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores value
-		setValue(Property.ENABLED, display);
+		setValue(Property.DISPLAY, display);
 	}
 
 	/**
@@ -239,7 +236,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 	 */
 	@Override
 	public boolean isDisplay() {
-		return getValue(Property.ENABLED, defaultValues.isDisplay());
+		return getValue(Property.DISPLAY, defaultValues.isDisplay());
 	}
 
 	/**
@@ -384,7 +381,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 		// resets callback
 		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores values
-		setValueAndAddToParent(Property.ENABLED, displayCallback);
+		setValueAndAddToParent(Property.DISPLAY, displayCallback);
 	}
 
 	/**

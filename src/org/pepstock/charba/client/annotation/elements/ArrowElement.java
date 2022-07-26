@@ -33,10 +33,7 @@ public class ArrowElement extends BaseElement {
 	 */
 	private enum Property implements Key
 	{
-		// even if in the JS plugin the options is called "enabled"
-		// we think that "display" is more coherent with the scope of the option
-		// and then Charba use "display" in the method
-		ENABLED("enabled"),
+		DISPLAY("display"),
 		FILL("fill"),
 		LENGTH("length"),
 		WIDTH("width");
@@ -82,7 +79,7 @@ public class ArrowElement extends BaseElement {
 	 * @param display <code>true</code> whether the arrow head should be displayed
 	 */
 	public final void setDisplay(boolean display) {
-		setValueAndAddToParent(Property.ENABLED, display);
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
@@ -91,7 +88,7 @@ public class ArrowElement extends BaseElement {
 	 * @return <code>true</code> whether the annotation arrow head should be displayed
 	 */
 	public final boolean isDisplay() {
-		return getValue(Property.ENABLED, ArrowHeads.DEFAULT_DISPLAY);
+		return getValue(Property.DISPLAY, ArrowHeads.DEFAULT_DISPLAY);
 	}
 
 	/**
