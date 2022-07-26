@@ -29,7 +29,7 @@ import org.pepstock.charba.client.data.TimeSeriesItem;
  * @author Andrea "Stock" Stocchero
  * @param <T> type of regression builder
  */
-public abstract class AbstractBuilder<T> {
+abstract class AbstractBuilder<T> {
 
 	// constants for samples types
 	static final String X_SAMPLES_TYPE = "X";
