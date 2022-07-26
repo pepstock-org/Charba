@@ -281,6 +281,10 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Features
+
+  * import CHART.JS version [v3.8.2](https://github.com/chartjs/Chart.js/releases/tag/v3.8.2).
+  
 ### Development
 
  * built and tested on [GWT Web toolkit](http://www.gwtproject.org/), [version 2.10.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0).
