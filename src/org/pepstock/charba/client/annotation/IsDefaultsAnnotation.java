@@ -22,7 +22,6 @@ import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
-import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
 
@@ -101,7 +100,7 @@ interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefault
 	 * @return the ID of the X scale to bind onto
 	 */
 	default ScaleId getXScaleID() {
-		return DefaultScaleId.X;
+		return null;
 	}
 
 	/**
@@ -164,7 +163,7 @@ interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefault
 	 * @return the ID of the Y scale to bind onto
 	 */
 	default ScaleId getYScaleID() {
-		return DefaultScaleId.Y;
+		return null;
 	}
 
 	/**

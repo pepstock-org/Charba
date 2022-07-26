@@ -281,6 +281,10 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Breaking changes
+
+ * change default value of `xScaleID` and `yScaleID` options to `null`, in the Annotation plugin.
+
 ### Features
 
   * import CHART.JS version [v3.8.2](https://github.com/chartjs/Chart.js/releases/tag/v3.8.2).
