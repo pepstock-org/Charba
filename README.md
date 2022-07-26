@@ -283,7 +283,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Development
 
- * change dependency for [GWT Web toolkit](http://www.gwtproject.org/), [version 2.10.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0).
+ * built and tested on [GWT Web toolkit](http://www.gwtproject.org/), [version 2.10.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0).
  
 License
 -------
