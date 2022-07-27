@@ -18,18 +18,21 @@ package org.pepstock.charba.client.annotation.elements;
 import java.util.Date;
 
 import org.pepstock.charba.client.annotation.AbstractAnnotation;
+import org.pepstock.charba.client.annotation.LineLabel;
 import org.pepstock.charba.client.annotation.PolygonAnnotation;
+import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
-import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Maps the options of a {@link AnnotationElement} at runtime.
@@ -45,7 +48,6 @@ public final class OptionsElement extends BaseElement {
 	{
 		ARROW_HEADS("arrowHeads"),
 		CALLOUT("callout"),
-		LABEL("label"),
 		// options
 		ADJUST_SCALE_RANGE("adjustScaleRange"),
 		DISPLAY("display"),
@@ -53,6 +55,7 @@ public final class OptionsElement extends BaseElement {
 		RADIUS("radius"),
 		POINT_STYLE("pointStyle"),
 		POSITION("position"),
+		ROTATION("rotation"),
 		SIDES("sides"),
 		// location definitions
 		VALUE("value"),
@@ -92,8 +95,6 @@ public final class OptionsElement extends BaseElement {
 
 	}
 
-	// label instance
-	private final LabelElement label;
 	// arrow heads options
 	private final ArrowHeadsElement arrowHeads;
 	// callout options
@@ -109,18 +110,8 @@ public final class OptionsElement extends BaseElement {
 	OptionsElement(AbstractNode parent, Key childKey, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
 		// loads inner elements
-		this.label = new LabelElement(this, Property.LABEL, getValue(Property.LABEL));
 		this.arrowHeads = new ArrowHeadsElement(this, Property.ARROW_HEADS, getValue(Property.ARROW_HEADS));
 		this.callout = new CalloutElement(this, Property.CALLOUT, getValue(Property.CALLOUT));
-	}
-
-	/**
-	 * Returns the inner label options of the element.
-	 * 
-	 * @return the inner label options of the element
-	 */
-	public LabelElement getLabel() {
-		return label;
 	}
 
 	/**
@@ -178,7 +169,7 @@ public final class OptionsElement extends BaseElement {
 	 * @return the ID of the X scale to bind onto
 	 */
 	public ScaleId getXScaleID() {
-		return getValue(Property.X_SCALE_ID, DefaultScaleId.X);
+		return getValue(Property.X_SCALE_ID, (ScaleId) null);
 	}
 
 	/**
@@ -241,7 +232,7 @@ public final class OptionsElement extends BaseElement {
 	 * @return the ID of the Y scale to bind onto
 	 */
 	public ScaleId getYScaleID() {
-		return getValue(Property.Y_SCALE_ID, DefaultScaleId.Y);
+		return getValue(Property.Y_SCALE_ID, (ScaleId) null);
 	}
 
 	/**
@@ -540,4 +531,66 @@ public final class OptionsElement extends BaseElement {
 	public int getSides() {
 		return getValue(Property.SIDES, PolygonAnnotation.DEFAULT_SIDES);
 	}
+
+	/**
+	 * Sets <code>true</code> whether the rotation of label must calculates automatically.
+	 * 
+	 * @param autoRotation <code>true</code> whether the rotation of label must calculates automatically
+	 */
+	public void setAutoRotation(boolean autoRotation) {
+		// checks is enabling
+		if (autoRotation) {
+			// stores value
+			setValueAndAddToParent(Property.ROTATION, LineLabel.AUTO_ROTATION_AS_STRING);
+		} else {
+			// otherwise removes the key
+			remove(Property.ROTATION);
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> whether the rotation of label must calculates automatically.
+	 * 
+	 * @return <code>true</code> whether the rotation of label must calculates automatically
+	 */
+	public boolean isAutoRotation() {
+		return isType(Property.ROTATION, ObjectType.STRING);
+	}
+
+	/**
+	 * Sets the anchor position of label on line.
+	 * 
+	 * @param position the anchor position of label on line
+	 */
+	public void setPosition(LabelPosition position) {
+		setValueAndAddToParent(Property.POSITION, position);
+	}
+
+	/**
+	 * Returns the anchor position of label on line.
+	 * 
+	 * @return the anchor position of label on line
+	 */
+	public LabelPosition getPosition() {
+		return getValue(Property.POSITION, LabelPosition.values(), LabelPosition.CENTER);
+	}
+
+	/**
+	 * Sets the position of label on line by the percentage (value between 0 and 1) of the line dimension.
+	 * 
+	 * @param percentage the position of label on line by the percentage (value between 0 and 1) of the line dimension
+	 */
+	public void setPositionAsPercentage(double percentage) {
+		setValueAndAddToParent(Property.POSITION, Utilities.getAsPercentage(percentage, 0.5D));
+	}
+
+	/**
+	 * Returns the position of label on line by the percentage (value between 0 and 1) of the line dimension.
+	 * 
+	 * @return the position of label on line by the percentage (value between 0 and 1) of the line dimension
+	 */
+	public double getPositionAsPercentage() {
+		return Utilities.getAsPercentage(getValue(Property.POSITION, Undefined.STRING), 0.5D);
+	}
+
 }

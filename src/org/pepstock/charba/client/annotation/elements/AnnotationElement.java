@@ -46,14 +46,14 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 		Y("y"),
 		X2("x2"),
 		Y2("y2"),
+		CENTER_X("centerX"),
+		CENTER_Y("centerY"),
 		HEIGHT("height"),
 		WIDTH("width"),
 		POINT_X("pointX"),
 		POINT_Y("pointY"),
-		LABEL_X("labelX"),
-		LABEL_Y("labelY"),
-		LABEL_WIDTH("labelWidth"),
-		LABEL_HEIGHT("labelHeight"),
+		// label element
+		LABEL("label"),
 		// options
 		OPTIONS("options");
 
@@ -83,6 +83,8 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 
 	// element options instance
 	private final OptionsElement options;
+	// label instance
+	private final AnnotationElement label;
 
 	/**
 	 * Creates the item using an envelop of the native java script object which contains all properties.
@@ -98,8 +100,27 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * 
 	 * @param nativeObject native object to map java script properties
 	 */
-	private AnnotationElement(NativeObject nativeObject) {
-		super(nativeObject);
+	AnnotationElement(NativeObject nativeObject) {
+		this(null, null, nativeObject);
+	}
+
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * 
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
+	 */
+	AnnotationElement(AbstractNode parent, Key childKey, NativeObject nativeObject) {
+		super(parent, childKey, nativeObject);
+		// loads inner elements
+		if (has(Property.LABEL)) {
+			// sets the element label
+			this.label = new AnnotationElement(this, Property.LABEL, getValue(Property.LABEL));
+		} else {
+			// if not there, is null
+			this.label = null;
+		}
 		// loads element options only if already stored in the element
 		// there could be in the callbacks invocation, options are not loaded,
 		// instead on event there should be always
@@ -110,6 +131,38 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 			// if not there, is null
 			this.options = null;
 		}
+	}
+
+	/**
+	 * Returns the inner label element of the element.
+	 * 
+	 * @return the inner label element of the element
+	 */
+	public AnnotationElement getLabel() {
+		return label;
+	}
+
+	/**
+	 * Sets the center point of the element.
+	 * 
+	 * @param point the center point of the element.
+	 */
+	public void setCenterPoint(IsPoint point) {
+		// checks consistent
+		if (point != null) {
+			setCenterPoint(point.getX(), point.getY());
+		}
+	}
+
+	/**
+	 * Sets the center point of the element.
+	 * 
+	 * @param x the X value of center point of the element.
+	 * @param y the Y value of center point of the element.
+	 */
+	public void setCenterPoint(double x, double y) {
+		setValue(Property.CENTER_X, x);
+		setValue(Property.CENTER_Y, y);
 	}
 
 	/**
@@ -189,7 +242,7 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 *
 	 * @return the element options or <code>null</code> if options are not stored in the element.
 	 */
-	public final OptionsElement getOptions() {
+	public OptionsElement getOptions() {
 		return options;
 	}
 
@@ -198,7 +251,7 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * 
 	 * @return <code>true</code> if the element is active.
 	 */
-	public final boolean isActive() {
+	public boolean isActive() {
 		return getValue(Property.ACTIVE, Undefined.BOOLEAN);
 	}
 
@@ -207,7 +260,7 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * 
 	 * @return <code>true</code> if skipped.
 	 */
-	public final boolean isSkipped() {
+	public boolean isSkipped() {
 		return getValue(Property.SKIP, Undefined.BOOLEAN);
 	}
 
@@ -217,8 +270,17 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * @return the X location of element in pixel.
 	 */
 	@Override
-	public final double getX() {
+	public double getX() {
 		return getValue(Property.X, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Sets the X location of element in pixel.
+	 * 
+	 * @param x the X location of element in pixel.
+	 */
+	public void setX(double x) {
+		setValue(Property.X, x);
 	}
 
 	/**
@@ -227,17 +289,35 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * @return the Y location of element in pixel.
 	 */
 	@Override
-	public final double getY() {
+	public double getY() {
 		return getValue(Property.Y, Undefined.DOUBLE);
 	}
 
 	/**
-	 * Returns the X location of element in pixel.
+	 * Sets the Y location of element in pixel.
 	 * 
-	 * @return the X location of element in pixel.
+	 * @param y the Y location of element in pixel.
 	 */
-	public final double getX2() {
+	public void setY(double y) {
+		setValue(Property.Y, y);
+	}
+
+	/**
+	 * Returns the X2 location of element in pixel.
+	 * 
+	 * @return the X2 location of element in pixel.
+	 */
+	public double getX2() {
 		return getValue(Property.X2, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Sets the X2 location of element in pixel.
+	 * 
+	 * @param x2 the X2 location of element in pixel.
+	 */
+	public void setX2(double x2) {
+		setValue(Property.X2, x2);
 	}
 
 	/**
@@ -245,8 +325,17 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * 
 	 * @return the Y location of element in pixel.
 	 */
-	public final double getY2() {
+	public double getY2() {
 		return getValue(Property.Y2, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Sets the Y2 location of element in pixel.
+	 * 
+	 * @param y2 the Y2 location of element in pixel.
+	 */
+	public void setY2(double y2) {
+		setValue(Property.Y2, y2);
 	}
 
 	/**
@@ -254,8 +343,17 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * 
 	 * @return the width of element in pixel.
 	 */
-	public final double getWidth() {
+	public double getWidth() {
 		return getValue(Property.WIDTH, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Sets the width of element in pixel.
+	 * 
+	 * @param width the width of element in pixel.
+	 */
+	public void setWidth(double width) {
+		setValue(Property.WIDTH, width);
 	}
 
 	/**
@@ -263,44 +361,17 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * 
 	 * @return the height of element in pixel.
 	 */
-	public final double getHeight() {
+	public double getHeight() {
 		return getValue(Property.HEIGHT, Undefined.DOUBLE);
 	}
 
 	/**
-	 * Returns the X location of label element in pixel.
+	 * Sets the height of element in pixel.
 	 * 
-	 * @return the X location of label element in pixel.
+	 * @param height the height of element in pixel.
 	 */
-	public final double getLabelX() {
-		return getValue(Property.LABEL_X, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns the Y location of element in pixel.
-	 * 
-	 * @return the Y location of element in pixel.
-	 */
-	public final double getLabelY() {
-		return getValue(Property.LABEL_Y, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns the width of label element in pixel.
-	 * 
-	 * @return the width of label element in pixel.
-	 */
-	public final double getLabelWidth() {
-		return getValue(Property.LABEL_WIDTH, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns the height of label element in pixel.
-	 * 
-	 * @return the height of label element in pixel.
-	 */
-	public final double getLabelHeight() {
-		return getValue(Property.LABEL_HEIGHT, Undefined.DOUBLE);
+	public void setHeight(double height) {
+		setValue(Property.HEIGHT, height);
 	}
 
 	/**
@@ -308,7 +379,7 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * 
 	 * @return the X location of element point in pixel.
 	 */
-	public final double getPointX() {
+	public double getPointX() {
 		return getValue(Property.POINT_X, Undefined.DOUBLE);
 	}
 
@@ -317,7 +388,7 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * 
 	 * @return the Y location of element point in pixel.
 	 */
-	public final double getPointY() {
+	public double getPointY() {
 		return getValue(Property.POINT_Y, Undefined.DOUBLE);
 	}
 
