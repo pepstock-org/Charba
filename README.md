@@ -296,8 +296,9 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `pointStyleWidth` option to `LegendLabels` options and configuration classes.
  * add `center` option to `GeoDataPoint` configuration class.
  * enable annotation event handlers (`EnterCallback`, `LeaveCallback`, `ClickCallback`) to indicate chart should be re-drawn.
- * add `set` methods to `AnnotationElement` class in order to enable the change of annotation dimension at runtime..
-  
+ * add `set` methods to `AnnotationElement` class in order to enable the change of annotation dimension at runtime.
+ * add `z` option to all annotations options classes.
+   
 ### Development
 
  * built and tested on [GWT Web toolkit](http://www.gwtproject.org/), [version 2.10.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0).

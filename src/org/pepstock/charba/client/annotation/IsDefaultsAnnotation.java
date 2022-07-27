@@ -20,6 +20,7 @@ import java.util.Date;
 import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
+import org.pepstock.charba.client.annotation.callbacks.ZCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.items.Undefined;
@@ -59,6 +60,17 @@ interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefault
 	}
 
 	/**
+	 * Returns the property determines the drawing stack level of the box annotation element.<br>
+	 * All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 * 
+	 * @return the property determines the drawing stack level of the box annotation element.<br>
+	 *         All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 */
+	default int getZ() {
+		return AbstractAnnotation.DEFAULT_Z;
+	}
+
+	/**
 	 * Returns the draw time which defines when the annotations are drawn.
 	 * 
 	 * @return the draw time which defines when the annotations are drawn
@@ -91,6 +103,15 @@ interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefault
 	 * @return the callback called to set whether the scale range should be adjusted if this annotation is out of range
 	 */
 	default AdjustScaleRangeCallback getAdjustScaleRangeCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the property determines the drawing stack level of the box annotation element.
+	 * 
+	 * @return the callback called to set the property determines the drawing stack level of the box annotation element
+	 */
+	default ZCallback getZCallback() {
 		return null;
 	}
 

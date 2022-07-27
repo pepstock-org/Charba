@@ -22,12 +22,15 @@ import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
+import org.pepstock.charba.client.annotation.callbacks.ZCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
+import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
@@ -64,6 +67,11 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 */
 	public static final double DEFAULT_ROTATION = 0D;
 
+	/**
+	 * Default annotation Z, <b>{@value DEFAULT_Z}</b>.
+	 */
+	public static final int DEFAULT_Z = 0;
+
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// exception pattern when the annotation default is wrong type
@@ -87,6 +95,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		Y_SCALE_ID("yScaleID"),
 		Y_MIN("yMin"),
 		Y_MAX("yMax"),
+		Z("z"),
 		// internal property to set an unique id for caching
 		CHARBA_ANNOTATION_ID("charbaAnnotationId");
 
@@ -132,6 +141,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private final CallbackProxy<ProxyObjectCallback> yMinCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the yMax function
 	private final CallbackProxy<ProxyObjectCallback> yMaxCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the z function
+	private final CallbackProxy<ProxyIntegerCallback> zCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
 	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
@@ -147,6 +158,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private static final CallbackPropertyHandler<ValueCallback> Y_MIN_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_MIN);
 	// callback instance to handle yMax options
 	private static final CallbackPropertyHandler<ValueCallback> Y_MAX_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_MAX);
+	// callback instance to handle z options
+	private static final CallbackPropertyHandler<ZCallback> Z_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Z);
 
 	// default values instance
 	private final IsDefaultsAnnotation defaultValues;
@@ -199,6 +212,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		this.yMinCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getYMinCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.yMaxCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getYMaxCallback()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.zCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this, context), getZCallback(), defaultValues.getZ(), ScriptableIntegerChecker.VALID_OR_DEFAULT).intValue());
 	}
 
 	/**
@@ -329,6 +344,32 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	@Override
 	public final boolean isAdjustScaleRange() {
 		return getValue(Property.ADJUST_SCALE_RANGE, defaultValues.isAdjustScaleRange());
+	}
+
+	/**
+	 * Sets the property determines the drawing stack level of the box annotation element.<br>
+	 * All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 * 
+	 * @param z the property determines the drawing stack level of the box annotation element.<br>
+	 *            All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 */
+	public final void setZ(int z) {
+		// resets callback
+		setZ((ZCallback) null);
+		// stores value
+		setValue(Property.Z, z);
+	}
+
+	/**
+	 * Returns the property determines the drawing stack level of the box annotation element.<br>
+	 * All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 * 
+	 * @return the property determines the drawing stack level of the box annotation element.<br>
+	 *         All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 */
+	@Override
+	public final int getZ() {
+		return getValue(Property.Z, defaultValues.getZ());
 	}
 
 	/**
@@ -780,6 +821,37 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		setAdjustScaleRange((AdjustScaleRangeCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.ADJUST_SCALE_RANGE, adjustScaleRangeCallback);
+	}
+
+	/**
+	 * Returns the callback called to set the property determines the drawing stack level of the box annotation element.
+	 * 
+	 * @return the callback called to set the property determines the drawing stack level of the box annotation element
+	 */
+	@Override
+	public final ZCallback getZCallback() {
+		return Z_PROPERTY_HANDLER.getCallback(this, defaultValues.getZCallback());
+	}
+
+	/**
+	 * Sets the callback called to set the property determines the drawing stack level of the box annotation element.
+	 * 
+	 * @param zCallback to set the property determines the drawing stack level of the box annotation element
+	 */
+	public final void setZ(ZCallback zCallback) {
+		Z_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, zCallback, zCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback called to set the property determines the drawing stack level of the box annotation element.
+	 * 
+	 * @param zCallback to set the property determines the drawing stack level of the box annotation element
+	 */
+	public final void setZ(NativeCallback zCallback) {
+		// resets callback
+		setZ((ZCallback) null);
+		// stores values
+		setValueAndAddToParent(Property.Z, zCallback);
 	}
 
 	/**
