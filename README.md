@@ -284,6 +284,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Breaking changes
 
  * change default value of `xScaleID` and `yScaleID` options to `null`, in the Annotation plugin.
+ * remove `DoubleClickCallback` class because `dblclick` event handler is not supported in the Annotation plugin anymore.
 
 ### Features
 

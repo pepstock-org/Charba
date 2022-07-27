@@ -17,7 +17,6 @@ package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.listeners.ClickCallback;
-import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
 import org.pepstock.charba.client.annotation.listeners.EnterCallback;
 import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerEvent;
@@ -44,8 +43,7 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 	{
 		ENTER("enter"),
 		LEAVE("leave"),
-		CLICK("click"),
-		DOUBLE_CLICK("dblclick");
+		CLICK("click");
 
 		// name value of property
 		private final String value;
@@ -80,8 +78,6 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 	private final CallbackProxy<ProxyHandlerEvent> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the CLICK function
 	private final CallbackProxy<ProxyHandlerEvent> clickCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the DBLCLICK function
-	private final CallbackProxy<ProxyHandlerEvent> dblclickCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle click event
 	private static final CallbackPropertyHandler<ClickCallback> CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CLICK);
@@ -89,8 +85,6 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 	private static final CallbackPropertyHandler<EnterCallback> ENTER_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.ENTER);
 	// callback instance to handle leave event
 	private static final CallbackPropertyHandler<LeaveCallback> LEAVE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.LEAVE);
-	// callback instance to handle dblclick event
-	private static final CallbackPropertyHandler<DoubleClickCallback> DOUBLE_CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DOUBLE_CLICK);
 
 	// the annotation options instance if the handlers is set at annotation plugin level
 	private final AnnotationOptions commonParent;
@@ -141,8 +135,6 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 		this.leaveCallbackProxy.setCallback(this::onLeave);
 		// sets proxy handler to callback proxy to invoke the CLICK function
 		this.clickCallbackProxy.setCallback(this::onClick);
-		// sets proxy handler to callback proxy to invoke the DBLCLICK function
-		this.dblclickCallbackProxy.setCallback(this::onDblclick);
 	}
 
 	/**
@@ -197,24 +189,6 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 	 */
 	void setClickCallback(ClickCallback clickCallback) {
 		CLICK_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, clickCallback, clickCallbackProxy.getProxy());
-	}
-
-	/**
-	 * Returns the callback called when a "dblclick" event is occurring.
-	 * 
-	 * @return the callback called when a "dblclick" event is occurring
-	 */
-	DoubleClickCallback getDoubleClickCallback() {
-		return DOUBLE_CLICK_PROPERTY_HANDLER.getCallback(this, getDefaultValues().getDoubleClickCallback());
-	}
-
-	/**
-	 * Sets the callback called when a "dblclick" event is occurring.
-	 * 
-	 * @param dblclickCallback the callback called when a "dblclick" event is occurring
-	 */
-	void setDoubleClickCallback(DoubleClickCallback dblclickCallback) {
-		DOUBLE_CLICK_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, dblclickCallback, dblclickCallbackProxy.getProxy());
 	}
 
 	/**
@@ -319,26 +293,6 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 			// invokes callback
 			clickCallback.onClick(internalContext, eventContext);
-		}
-	}
-
-	/**
-	 * Manages the DBLCLICK event firing an annotation event.
-	 * 
-	 * @param context context instance
-	 * @param event event instance
-	 */
-	private void onDblclick(NativeObject context, NativeObject event) {
-		// gets callback
-		DoubleClickCallback dblclickCallback = getDoubleClickCallback();
-		// creates a context wrapper
-		AnnotationContext internalContext = getAnnotationContext(context);
-		// checks if event must be triggered
-		if (mustBeTriggered(internalContext, dblclickCallback)) {
-			// creates a chart event context
-			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
-			// invokes callback
-			dblclickCallback.onDoubleClick(internalContext, eventContext);
 		}
 	}
 

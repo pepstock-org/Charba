@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.listeners.ClickCallback;
-import org.pepstock.charba.client.annotation.listeners.DoubleClickCallback;
 import org.pepstock.charba.client.annotation.listeners.EnterCallback;
 import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
 
@@ -116,34 +115,6 @@ interface HasEventsHandler extends IsDefaultsEventsHandler {
 		// checks if handler is consistent
 		if (getEventsHandler() != null) {
 			getEventsHandler().setClickCallback(clickCallback);
-		}
-	}
-
-	/**
-	 * Returns the callback called when a "dblclick" event is occurring.
-	 * 
-	 * @return the callback called when a "dblclick" event is occurring
-	 */
-	@Override
-	default DoubleClickCallback getDoubleClickCallback() {
-		// checks if handler is consistent
-		if (getEventsHandler() != null) {
-			return getEventsHandler().getDoubleClickCallback();
-		}
-		// if here, the property is missing
-		// then returns null
-		return null;
-	}
-
-	/**
-	 * Sets the callback called when a "dblclick" event is occurring.
-	 * 
-	 * @param dblclickCallback the callback called when a "dblclick" event is occurring
-	 */
-	default void setDoubleClickCallback(DoubleClickCallback dblclickCallback) {
-		// checks if handler is consistent
-		if (getEventsHandler() != null) {
-			getEventsHandler().setDoubleClickCallback(dblclickCallback);
 		}
 	}
 }
