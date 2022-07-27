@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -33,11 +32,6 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 public final class AnnotationOptions extends AbstractPluginOptions implements IsDefaultsAnnotationOptions, HasEventsHandler {
 
 	/**
-	 * Default double click speed in milliseconds, <b>{@value DEFAULT_DOUBLE_CLICK_SPEED}</b>.
-	 */
-	public static final int DEFAULT_DOUBLE_CLICK_SPEED = 350;
-
-	/**
 	 * Default draw time, <b>{@link DrawTime#AFTER_DATASETS_DRAW}</b>.
 	 */
 	public static final DrawTime DEFAULT_DRAW_TIME = DrawTime.AFTER_DATASETS_DRAW;
@@ -49,7 +43,6 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	{
 		CLIP("clip"),
 		DRAW_TIME("drawTime"),
-		DOUBLE_CLICK_SPEED("dblClickSpeed"),
 		ANNOTATIONS("annotations");
 
 		// name value of property
@@ -201,25 +194,6 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	@Override
 	public DrawTime getDrawTime() {
 		return getValue(Property.DRAW_TIME, DrawTime.values(), defaultOptions.getDrawTime());
-	}
-
-	/**
-	 * Sets the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.
-	 * 
-	 * @param speed the double-click speed in milliseconds
-	 */
-	public void setDoubleClickSpeed(int speed) {
-		setValue(Property.DOUBLE_CLICK_SPEED, Checker.positiveOrZero(speed));
-	}
-
-	/**
-	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.
-	 * 
-	 * @return the double-click speed in milliseconds
-	 */
-	@Override
-	public int getDoubleClickSpeed() {
-		return getValue(Property.DOUBLE_CLICK_SPEED, defaultOptions.getDoubleClickSpeed());
 	}
 
 	/**

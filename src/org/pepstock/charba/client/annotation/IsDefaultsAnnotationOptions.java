@@ -39,15 +39,6 @@ interface IsDefaultsAnnotationOptions extends IsDefaultsEventsHandler {
 	}
 
 	/**
-	 * Returns the double-click speed in milliseconds used to distinguish single-clicks from double-clicks whenever you need to capture both.
-	 * 
-	 * @return the double-click speed in milliseconds
-	 */
-	default int getDoubleClickSpeed() {
-		return AnnotationOptions.DEFAULT_DOUBLE_CLICK_SPEED;
-	}
-
-	/**
 	 * Returns the draw time which defines when the annotations are drawn.
 	 * 
 	 * @return the draw time which defines when the annotations are drawn
