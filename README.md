@@ -285,6 +285,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
  * change default value of `xScaleID` and `yScaleID` options to `null`, in the Annotation plugin.
  * remove `DoubleClickCallback` class because `dblclick` event handler is not supported in the Annotation plugin anymore.
+ * enable annotation event handlers (`EnterCallback`, `LeaveCallback`, `ClickCallback`) to indicate chart should be re-drawn.
 
 ### Features
 
@@ -292,7 +293,8 @@ Here you can find the list of enhancements and updates available on `master` bra
   * import CHART.JS GEO controller version [v3.8.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.8.1).
   * import CHART.JS ANNOTATION plugin version [v2.0.0](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.0.0).
   * add `pointStyleWidth` option to `LegendLabels` options and configuration classes.
-  * add `center` option to `GeoDataPoint` configuration class.  
+  * add `center` option to `GeoDataPoint` configuration class.
+ * enable annotation event handlers (`EnterCallback`, `LeaveCallback`, `ClickCallback`) to indicate chart should be re-drawn.
   
 ### Development
 

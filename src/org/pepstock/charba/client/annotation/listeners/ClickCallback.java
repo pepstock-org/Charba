@@ -32,7 +32,8 @@ public interface ClickCallback {
 	 * 
 	 * @param context context instance
 	 * @param event event instance
+	 * @return if <code>true</code>, it will ask to Chart.js to redraw
 	 */
-	void onClick(AnnotationContext context, ChartEventContext event);
+	boolean onClick(AnnotationContext context, ChartEventContext event);
 
 }

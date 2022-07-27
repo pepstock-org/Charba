@@ -19,7 +19,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.listeners.ClickCallback;
 import org.pepstock.charba.client.annotation.listeners.EnterCallback;
 import org.pepstock.charba.client.annotation.listeners.LeaveCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerEvent;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerEventAndRedraw;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -73,11 +73,11 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the ENTER function
-	private final CallbackProxy<ProxyHandlerEvent> enterCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerEventAndRedraw> enterCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the LEAVE function
-	private final CallbackProxy<ProxyHandlerEvent> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerEventAndRedraw> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the CLICK function
-	private final CallbackProxy<ProxyHandlerEvent> clickCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyHandlerEventAndRedraw> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle click event
 	private static final CallbackPropertyHandler<ClickCallback> CLICK_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CLICK);
@@ -241,8 +241,9 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 	 * 
 	 * @param context context instance
 	 * @param event event instance
+	 * @return if <code>true</code>, it will ask to Chart.js to redraw
 	 */
-	private void onEnter(NativeObject context, NativeObject event) {
+	private boolean onEnter(NativeObject context, NativeObject event) {
 		// gets callback
 		EnterCallback enterCallback = getEnterCallback();
 		// creates a context wrapper
@@ -252,8 +253,10 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 			// creates a chart event context
 			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 			// invokes callback
-			enterCallback.onEnter(internalContext, eventContext);
+			return enterCallback.onEnter(internalContext, eventContext);
 		}
+		// if here, returns default
+		return false;
 	}
 
 	/**
@@ -261,8 +264,9 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 	 * 
 	 * @param context context instance
 	 * @param event event instance
+	 * @return if <code>true</code>, it will ask to Chart.js to redraw
 	 */
-	private void onLeave(NativeObject context, NativeObject event) {
+	private boolean onLeave(NativeObject context, NativeObject event) {
 		// gets callback
 		LeaveCallback leaveCallback = getLeaveCallback();
 		// creates a context wrapper
@@ -272,8 +276,10 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 			// creates a chart event context
 			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 			// invokes callback
-			leaveCallback.onLeave(internalContext, eventContext);
+			return leaveCallback.onLeave(internalContext, eventContext);
 		}
+		// if here, returns default
+		return false;
 	}
 
 	/**
@@ -281,8 +287,9 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 	 * 
 	 * @param context context instance
 	 * @param event event instance
+	 * @return if <code>true</code>, it will ask to Chart.js to redraw
 	 */
-	private void onClick(NativeObject context, NativeObject event) {
+	private boolean onClick(NativeObject context, NativeObject event) {
 		// gets callback
 		ClickCallback clickCallback = getClickCallback();
 		// creates a context wrapper
@@ -292,8 +299,10 @@ final class EventsHandler extends PropertyHandler<IsDefaultsEventsHandler> {
 			// creates a chart event context
 			ChartEventContext eventContext = new ChartEventContext(new AnnotationEnvelop<>(event));
 			// invokes callback
-			clickCallback.onClick(internalContext, eventContext);
+			return clickCallback.onClick(internalContext, eventContext);
 		}
+		// if here, returns default
+		return false;
 	}
 
 }

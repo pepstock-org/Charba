@@ -32,7 +32,8 @@ public interface EnterCallback {
 	 * 
 	 * @param context context instance
 	 * @param event event instance
+	 * @return if <code>true</code>, it will ask to Chart.js to redraw
 	 */
-	void onEnter(AnnotationContext context, ChartEventContext event);
+	boolean onEnter(AnnotationContext context, ChartEventContext event);
 
 }

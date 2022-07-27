@@ -32,7 +32,8 @@ public interface LeaveCallback {
 	 * 
 	 * @param context context instance
 	 * @param event event instance
+	 * @return if <code>true</code>, it will ask to Chart.js to redraw
 	 */
-	void onLeave(AnnotationContext context, ChartEventContext event);
+	boolean onLeave(AnnotationContext context, ChartEventContext event);
 
 }
