@@ -52,6 +52,7 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 		WIDTH("width"),
 		POINT_X("pointX"),
 		POINT_Y("pointY"),
+		RADIUS("radius"),
 		// label element
 		LABEL("label"),
 		// options
@@ -372,6 +373,24 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 */
 	public void setHeight(double height) {
 		setValue(Property.HEIGHT, height);
+	}
+
+	/**
+	 * Returns the radius of element in pixel.
+	 * 
+	 * @return the radius of element in pixel.
+	 */
+	public double getRadius() {
+		return getValue(Property.RADIUS, Undefined.DOUBLE);
+	}
+
+	/**
+	 * Sets the radius of element in pixel.
+	 * 
+	 * @param radius the radius of element in pixel.
+	 */
+	public void setRadius(double radius) {
+		setValue(Property.RADIUS, radius);
 	}
 
 	/**

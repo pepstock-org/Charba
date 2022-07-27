@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
+import org.pepstock.charba.client.annotation.callbacks.ZCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 
@@ -57,6 +58,17 @@ interface IsDefaultsInnerLabel extends IsDefaultsLabelHandler, IsDefaultsTextStr
 	 */
 	double getYAdjust();
 
+	/**
+	 * Returns the property determines the drawing stack level of the box annotation element.<br>
+	 * All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 * 
+	 * @return the property determines the drawing stack level of the box annotation element.<br>
+	 *         All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 */
+	default int getZ() {
+		return AbstractAnnotation.DEFAULT_Z;
+	}
+
 	// ----------------
 	// CALLBACKS
 	// ----------------
@@ -88,4 +100,12 @@ interface IsDefaultsInnerLabel extends IsDefaultsLabelHandler, IsDefaultsTextStr
 		return null;
 	}
 
+	/**
+	 * Returns the callback called to set the property determines the drawing stack level of the box annotation element.
+	 * 
+	 * @return the callback called to set the property determines the drawing stack level of the box annotation element
+	 */
+	default ZCallback getZCallback() {
+		return null;
+	}
 }

@@ -16,10 +16,13 @@
 package org.pepstock.charba.client.annotation;
 
 import org.pepstock.charba.client.annotation.callbacks.AdjustSizeCallback;
+import org.pepstock.charba.client.annotation.callbacks.ZCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
+import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
 import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.commons.AbstractNode;
@@ -44,7 +47,8 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	{
 		DISPLAY("display"),
 		X_ADJUST("xAdjust"),
-		Y_ADJUST("yAdjust");
+		Y_ADJUST("yAdjust"),
+		Z("z");
 
 		// name value of property
 		private final String value;
@@ -79,6 +83,8 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	private final CallbackProxy<ProxyDoubleCallback> xAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the yAdjust function
 	private final CallbackProxy<ProxyDoubleCallback> yAdjustCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the z function
+	private final CallbackProxy<ProxyIntegerCallback> zCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
 	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
@@ -86,6 +92,8 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	private static final CallbackPropertyHandler<AdjustSizeCallback> X_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.X_ADJUST);
 	// callback instance to handle yAdjustg options
 	private static final CallbackPropertyHandler<AdjustSizeCallback> Y_ADJUST_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_ADJUST);
+	// callback instance to handle z options
+	private static final CallbackPropertyHandler<ZCallback> Z_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Z);
 
 	// line annotation parent instance
 	private final AbstractAnnotation parent;
@@ -125,6 +133,8 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 		this.xAdjustCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getXAdjustCallback(), defaultValues.getXAdjust()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.yAdjustCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getYAdjustCallback(), defaultValues.getYAdjust()).doubleValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.zCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this.parent, context), getZCallback(), defaultValues.getZ(), ScriptableIntegerChecker.VALID_OR_DEFAULT).intValue());
 	}
 
 	/*
@@ -237,6 +247,32 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 		return getValue(AnnotationOptions.Property.DRAW_TIME, DrawTime.values(), defaultValues.getDrawTime());
 	}
 
+	/**
+	 * Sets the property determines the drawing stack level of the box annotation element.<br>
+	 * All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 * 
+	 * @param z the property determines the drawing stack level of the box annotation element.<br>
+	 *            All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 */
+	public final void setZ(int z) {
+		// resets callback
+		setZ((ZCallback) null);
+		// stores value
+		setValue(Property.Z, z);
+	}
+
+	/**
+	 * Returns the property determines the drawing stack level of the box annotation element.<br>
+	 * All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 * 
+	 * @return the property determines the drawing stack level of the box annotation element.<br>
+	 *         All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 */
+	@Override
+	public final int getZ() {
+		return getValue(Property.Z, defaultValues.getZ());
+	}
+
 	// ---------------------
 	// CALLBACKS
 	// ---------------------
@@ -332,6 +368,37 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 		setYAdjust((AdjustSizeCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.Y_ADJUST, adjustCallback);
+	}
+
+	/**
+	 * Returns the callback called to set the property determines the drawing stack level of the box annotation element.
+	 * 
+	 * @return the callback called to set the property determines the drawing stack level of the box annotation element
+	 */
+	@Override
+	public final ZCallback getZCallback() {
+		return Z_PROPERTY_HANDLER.getCallback(this, defaultValues.getZCallback());
+	}
+
+	/**
+	 * Sets the callback called to set the property determines the drawing stack level of the box annotation element.
+	 * 
+	 * @param zCallback to set the property determines the drawing stack level of the box annotation element
+	 */
+	public final void setZ(ZCallback zCallback) {
+		Z_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, zCallback, zCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback called to set the property determines the drawing stack level of the box annotation element.
+	 * 
+	 * @param zCallback to set the property determines the drawing stack level of the box annotation element
+	 */
+	public final void setZ(NativeCallback zCallback) {
+		// resets callback
+		setZ((ZCallback) null);
+		// stores values
+		setValueAndAddToParent(Property.Z, zCallback);
 	}
 
 }
