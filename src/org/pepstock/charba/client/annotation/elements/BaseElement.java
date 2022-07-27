@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.annotation.AbstractAnnotation;
 import org.pepstock.charba.client.annotation.AnnotationOptions;
 import org.pepstock.charba.client.annotation.enums.ContentType;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
@@ -84,7 +85,8 @@ abstract class BaseElement extends AbstractNode {
 		TEXT_ALIGN("textAlign"),
 		X_ADJUST("xAdjust"),
 		Y_ADJUST("yAdjust"),
-		WIDTH("width");
+		WIDTH("width"),
+		Z("z");
 
 		// name value of property
 		private String value;
@@ -823,6 +825,28 @@ abstract class BaseElement extends AbstractNode {
 	 */
 	public final double getXAdjust() {
 		return getValue(Property.X_ADJUST, Undefined.INTEGER);
+	}
+
+	/**
+	 * Sets the property determines the drawing stack level of the box annotation element.<br>
+	 * All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 * 
+	 * @param z the property determines the drawing stack level of the box annotation element.<br>
+	 *            All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 */
+	public final void setZ(int z) {
+		setValue(Property.Z, z);
+	}
+
+	/**
+	 * Returns the property determines the drawing stack level of the box annotation element.<br>
+	 * All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 * 
+	 * @return the property determines the drawing stack level of the box annotation element.<br>
+	 *         All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
+	 */
+	public final int getZ() {
+		return getValue(Property.Z, AbstractAnnotation.DEFAULT_Z);
 	}
 
 	/**
