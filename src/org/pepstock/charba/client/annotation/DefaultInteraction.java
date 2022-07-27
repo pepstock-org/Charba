@@ -16,31 +16,21 @@
 package org.pepstock.charba.client.annotation;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin DEFAULTS for main options.
+ * This is the {@link AnnotationPlugin#ID} plugin DEFAULTS for interaction options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultOptions implements IsDefaultsAnnotationOptions {
+final class DefaultInteraction implements IsDefaultsAnnotationInteraction {
 
 	// defaults options instance
-	static final DefaultOptions INSTANCE = new DefaultOptions();
+	static final DefaultInteraction INSTANCE = new DefaultInteraction();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private DefaultOptions() {
+	private DefaultInteraction() {
 		// do nothing
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.annotation.IsDefaultsAnnotationOptions#getInteraction()
-	 */
-	@Override
-	public IsDefaultsAnnotationInteraction getInteraction() {
-		return DefaultInteraction.INSTANCE;
 	}
 
 }

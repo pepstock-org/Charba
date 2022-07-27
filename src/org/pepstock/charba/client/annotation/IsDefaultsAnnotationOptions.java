@@ -30,6 +30,13 @@ import org.pepstock.charba.client.items.Undefined;
 interface IsDefaultsAnnotationOptions extends IsDefaultsEventsHandler {
 
 	/**
+	 * Returns the configuration which events trigger plugin interactions
+	 * 
+	 * @return the configuration which events trigger plugin interactions
+	 */
+	IsDefaultsAnnotationInteraction getInteraction();
+
+	/**
 	 * Returns if clips relative to the chart area.
 	 * 
 	 * @return <code>true</code> if clips relative to the chart area.

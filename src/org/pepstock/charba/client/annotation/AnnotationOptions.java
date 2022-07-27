@@ -43,6 +43,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	{
 		CLIP("clip"),
 		DRAW_TIME("drawTime"),
+		INTERACTION("interaction"),
 		ANNOTATIONS("annotations");
 
 		// name value of property
@@ -75,6 +76,8 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	private final EventsHandler eventsHandler;
 	// annotations object, stored by key
 	private final AnnotationMap annotationsMap;
+	// interaction object
+	private final Interaction interaction;
 
 	/**
 	 * Creates new {@link AnnotationPlugin#ID} plugin options.
@@ -130,6 +133,16 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 			// stores in the java script object as well
 			setValue(Property.ANNOTATIONS, annotationsMap);
 		}
+		// checks if interaction exists
+		if (has(Property.INTERACTION)) {
+			// found in the options
+			this.interaction = new Interaction(this.defaultOptions.getInteraction(), getValue(Property.INTERACTION));
+		} else {
+			// not found and add 1 empty
+			this.interaction = new Interaction(this.defaultOptions.getInteraction());
+			// stores in the java script object as well
+			setValue(Property.INTERACTION, interaction);
+		}
 		// stores incremental ID
 		setNewIncrementalId();
 		// loads events handler
@@ -152,8 +165,18 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	 * @see org.pepstock.charba.client.annotation.HasEventsHandler#getEventsHandler()
 	 */
 	@Override
-	public final EventsHandler getEventsHandler() {
+	public EventsHandler getEventsHandler() {
 		return eventsHandler;
+	}
+
+	/**
+	 * Returns the configuration which events trigger plugin interactions
+	 * 
+	 * @return the configuration which events trigger plugin interactions
+	 */
+	@Override
+	public Interaction getInteraction() {
+		return interaction;
 	}
 
 	/**
