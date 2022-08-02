@@ -22,9 +22,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -49,8 +51,12 @@ public final class GlobalPlugins {
 
 	/**
 	 * Builds the object by the native object which maps <code>chart.registry.plugins</code>
+	 * 
+	 * @param envelop envelop from root package to avoid invocation
 	 */
-	public GlobalPlugins() {
+	public GlobalPlugins(ChartEnvelop<NativeObject> envelop) {
+		// checks if envelop is consistent
+		Envelop.checkIfValid(envelop);
 		// stores plugins items
 		this.plugins = new InternalPlugins(JsPluginHelper.get().getAll());
 	}

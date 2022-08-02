@@ -113,7 +113,7 @@ public final class Defaults {
 		// creates global scales wrapping the scales property of CHART
 		this.scales = new InternalDefaultScales(wrapperDefaults.getScales());
 		// creates global plugins manager
-		this.plugins = new GlobalPlugins();
+		this.plugins = new GlobalPlugins(new ChartEnvelop<>(defaults));
 		// creates the controller object
 		this.controllers = Controllers.get();
 		// adds the internal plugin to all charts
