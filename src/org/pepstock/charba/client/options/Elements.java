@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.defaults.IsDefaultElements;
 
 /**
@@ -125,6 +127,38 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	@Override
 	public Bar getBar() {
 		return bar;
+	}
+
+	/**
+	 * Returns the options defined for a custom element.
+	 * 
+	 * @param <T> type of the options
+	 * @param factory factory instance to create the element
+	 * @return the options instance defined for a custom element.
+	 */
+	public <T extends NativeObjectContainer> T getElement(ElementFactory<T> factory) {
+		// checks if factory is consistent
+		if (factory != null) {
+			// checks of element key is consistent
+			Key elementKey = Key.checkAndGetIfValid(factory.getElementKey());
+			// the element key MUST NOT be an existing element, like bar, line, arc and point
+			Checker.assertCheck(!Key.hasKeyByValue(Property.values(), elementKey.value()), "Getting '" + elementKey.value() + "' element is not allowed by a factory");
+			// gets the element options
+			T result = factory.create(getValue(elementKey));
+			// checks if the property doesn't exist because
+			// it has to be added
+			// if factory returns a null object,
+			// it must not be stored
+			if (result != null && !has(elementKey)) {
+				// stored in the object
+				setValueAndAddToParent(elementKey, result);
+			}
+			// returns element
+			return result;
+		}
+		// if here the factory is not consistent
+		// then returns null
+		return null;
 	}
 
 }

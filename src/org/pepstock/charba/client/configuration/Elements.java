@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.options.ElementFactory;
+
 /**
  * Options can be configured for four different types of elements: arc, lines, points, and bars.<br>
  * When set, these options apply to the configuration attached to a dataset.
@@ -83,4 +86,14 @@ public class Elements extends ConfigurationOptionsContainer {
 		return bar;
 	}
 
+	/**
+	 * Returns the options defined for a custom element.
+	 * 
+	 * @param <T> type of the options
+	 * @param factory factory instance to create the element
+	 * @return the options instance defined for a custom element.
+	 */
+	public <T extends NativeObjectContainer> T getElement(ElementFactory<T> factory) {
+		return getOptions().getElements().getElement(factory);
+	}
 }

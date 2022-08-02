@@ -299,6 +299,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `set` methods to `AnnotationElement` class in order to enable the change of annotation dimension at runtime.
  * add `z` option to all annotations options classes.
  * add `interaction` option to `AnnotationOptions` configuration class.
+ * enable the management of annotation types defaults stored as elements.
    
 ### Development
 

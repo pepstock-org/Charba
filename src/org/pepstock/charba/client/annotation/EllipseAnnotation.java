@@ -15,9 +15,11 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.options.ElementFactory;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -35,6 +37,14 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 	 */
 	public static final int DEFAULT_BORDER_WIDTH = 1;
 
+	// Annotation element key
+	private static final String ELEMENT_KEY_AS_STRING = "ellipseAnnotation";
+
+	/**
+	 * Element factory to get "{@value EllipseAnnotation#ELEMENT_KEY_AS_STRING}" element.
+	 */
+	public static final ElementFactory<EllipseAnnotation> FACTORY = new EllipseElementFactory(ELEMENT_KEY_AS_STRING);
+
 	// defaults options
 	private final IsDefaultsEllipseAnnotation defaultValues;
 	// background color handler
@@ -51,7 +61,7 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 	 * @see AnnotationType#createId()
 	 */
 	public EllipseAnnotation() {
-		this(AnnotationType.ELLIPSE.createId(), AnnotationType.ELLIPSE.getDefaultsValues());
+		this(AnnotationType.ELLIPSE.createId(), Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -69,7 +79,7 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 	 * @param id annotation id to apply to the object
 	 */
 	public EllipseAnnotation(AnnotationId id) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.ELLIPSE, id));
+		this(id, Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -93,7 +103,7 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 	 * @param chart chart instance related to the plugin options
 	 */
 	public EllipseAnnotation(AnnotationId id, IsChart chart) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByChart(AnnotationType.ELLIPSE, id, chart));
+		this(id, IsChart.checkAndGetIfConsistent(chart).getOptions().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -167,4 +177,32 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 		return rotationHandler;
 	}
 
+	/**
+	 * Specific element factory for ellipse annotation elements.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class EllipseElementFactory extends AnnotationElementFactory<EllipseAnnotation> {
+
+		/**
+		 * Creates the factory by the key of object, as string.
+		 * 
+		 * @param elementKeyAsString the key of object, as string.
+		 */
+		private EllipseElementFactory(String elementKeyAsString) {
+			super(elementKeyAsString);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.annotation.AnnotationElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		EllipseAnnotation createOptions(NativeObject nativeObject) {
+			return new EllipseAnnotation(nativeObject, AnnotationType.ELLIPSE.getDefaultsValues());
+		}
+
+	}
 }

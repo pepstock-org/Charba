@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.SidesCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
@@ -28,6 +29,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
+import org.pepstock.charba.client.options.ElementFactory;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -67,6 +69,14 @@ public final class PolygonAnnotation extends AbstractCircleBasedAnnotation imple
 	 * Minimum value of polygon annotation sides, <b>{@value MINIMUM_SIDES}</b>.
 	 */
 	public static final int MINIMUM_SIDES = 3;
+
+	// Annotation element key
+	private static final String ELEMENT_KEY_AS_STRING = "polygonAnnotation";
+
+	/**
+	 * Element factory to get "{@value PolygonAnnotation#ELEMENT_KEY_AS_STRING}" element.
+	 */
+	public static final ElementFactory<PolygonAnnotation> FACTORY = new PolygonElementFactory(ELEMENT_KEY_AS_STRING);
 
 	/**
 	 * Name of properties of native object.
@@ -120,7 +130,7 @@ public final class PolygonAnnotation extends AbstractCircleBasedAnnotation imple
 	 * @see AnnotationType#createId()
 	 */
 	public PolygonAnnotation() {
-		this(AnnotationType.POLYGON.createId(), AnnotationType.POLYGON.getDefaultsValues());
+		this(AnnotationType.POLYGON.createId(), Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -138,7 +148,7 @@ public final class PolygonAnnotation extends AbstractCircleBasedAnnotation imple
 	 * @param id annotation id to apply to the object
 	 */
 	public PolygonAnnotation(AnnotationId id) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.POLYGON, id));
+		this(id, Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -162,7 +172,7 @@ public final class PolygonAnnotation extends AbstractCircleBasedAnnotation imple
 	 * @param chart chart instance related to the plugin options
 	 */
 	public PolygonAnnotation(AnnotationId id, IsChart chart) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByChart(AnnotationType.POLYGON, id, chart));
+		this(id, IsChart.checkAndGetIfConsistent(chart).getOptions().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -280,4 +290,34 @@ public final class PolygonAnnotation extends AbstractCircleBasedAnnotation imple
 		// stores values
 		setValue(Property.SIDES, sidesCallback);
 	}
+
+	/**
+	 * Specific element factory for polygon annotation elements.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class PolygonElementFactory extends AnnotationElementFactory<PolygonAnnotation> {
+
+		/**
+		 * Creates the factory by the key of object, as string.
+		 * 
+		 * @param elementKeyAsString the key of object, as string.
+		 */
+		private PolygonElementFactory(String elementKeyAsString) {
+			super(elementKeyAsString);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.annotation.AnnotationElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		PolygonAnnotation createOptions(NativeObject nativeObject) {
+			return new PolygonAnnotation(nativeObject, AnnotationType.POLYGON.getDefaultsValues());
+		}
+
+	}
+
 }

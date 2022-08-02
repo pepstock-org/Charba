@@ -15,12 +15,14 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
+import org.pepstock.charba.client.options.ElementFactory;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -52,6 +54,14 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * Default box annotation border join style, <b>{@link JoinStyle#MITER}</b>.
 	 */
 	public static final JoinStyle DEFAULT_BORDER_JOIN_STYLE = JoinStyle.MITER;
+
+	// Annotation element key
+	private static final String ELEMENT_KEY_AS_STRING = "boxAnnotation";
+
+	/**
+	 * Element factory to get "{@value BoxAnnotation#ELEMENT_KEY_AS_STRING}" element.
+	 */
+	public static final ElementFactory<BoxAnnotation> FACTORY = new BoxElementFactory(ELEMENT_KEY_AS_STRING);
 
 	/**
 	 * Name of properties of native object.
@@ -106,7 +116,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * @see AnnotationType#createId()
 	 */
 	public BoxAnnotation() {
-		this(AnnotationType.BOX.createId(), AnnotationType.BOX.getDefaultsValues());
+		this(AnnotationType.BOX.createId(), Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -124,7 +134,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * @param id annotation id to apply to the object
 	 */
 	public BoxAnnotation(AnnotationId id) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.BOX, id));
+		this(id, Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -148,7 +158,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	 * @param chart chart instance related to the plugin options
 	 */
 	public BoxAnnotation(AnnotationId id, IsChart chart) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByChart(AnnotationType.BOX, id, chart));
+		this(id, IsChart.checkAndGetIfConsistent(chart).getOptions().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -192,7 +202,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		// casts and stores it
 		this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
 		// creates a line label
-		this.label = new BoxLabel(this, this.defaultValues.getLabel());
+		this.label = new BoxLabel(this, getValue(Property.LABEL), this.defaultValues.getLabel());
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// creates border radius handler
@@ -263,6 +273,34 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	@Override
 	public BoxLabel getLabel() {
 		return label;
+	}
+
+	/**
+	 * Specific element factory for box annotation elements.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class BoxElementFactory extends AnnotationElementFactory<BoxAnnotation> {
+
+		/**
+		 * Creates the factory by the key of object, as string.
+		 * 
+		 * @param elementKeyAsString the key of object, as string.
+		 */
+		private BoxElementFactory(String elementKeyAsString) {
+			super(elementKeyAsString);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.annotation.AnnotationElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		BoxAnnotation createOptions(NativeObject nativeObject) {
+			return new BoxAnnotation(nativeObject, AnnotationType.BOX.getDefaultsValues());
+		}
 	}
 
 }

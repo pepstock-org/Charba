@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
@@ -30,6 +31,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.options.ElementFactory;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -105,6 +107,14 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	 */
 	public static final int DEFAULT_TEXT_STROKE_WIDTH = 0;
 
+	// Annotation element key
+	private static final String ELEMENT_KEY_AS_STRING = "labelAnnotation";
+
+	/**
+	 * Element factory to get "{@value LabelAnnotation#ELEMENT_KEY_AS_STRING}" element.
+	 */
+	public static final ElementFactory<LabelAnnotation> FACTORY = new LabelElementFactory(ELEMENT_KEY_AS_STRING);
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -170,7 +180,7 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	 * @see AnnotationType#createId()
 	 */
 	public LabelAnnotation() {
-		this(AnnotationType.LABEL.createId(), AnnotationType.LABEL.getDefaultsValues());
+		this(AnnotationType.LABEL.createId(), Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -188,7 +198,7 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	 * @param id annotation id to apply to the object
 	 */
 	public LabelAnnotation(AnnotationId id) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.LABEL, id));
+		this(id, Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -212,7 +222,7 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	 * @param chart chart instance related to the plugin options
 	 */
 	public LabelAnnotation(AnnotationId id, IsChart chart) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByChart(AnnotationType.LABEL, id, chart));
+		this(id, IsChart.checkAndGetIfConsistent(chart).getOptions().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -401,6 +411,35 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	@Override
 	public LabelAlignPositionCallback getPositionCallback() {
 		return POSITION_PROPERTY_HANDLER.getCallback(this, defaultValues.getPositionCallback());
+	}
+
+	/**
+	 * Specific element factory for label annotation elements.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class LabelElementFactory extends AnnotationElementFactory<LabelAnnotation> {
+
+		/**
+		 * Creates the factory by the key of object, as string.
+		 * 
+		 * @param elementKeyAsString the key of object, as string.
+		 */
+		private LabelElementFactory(String elementKeyAsString) {
+			super(elementKeyAsString);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.annotation.AnnotationElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		LabelAnnotation createOptions(NativeObject nativeObject) {
+			return new LabelAnnotation(nativeObject, AnnotationType.LABEL.getDefaultsValues());
+		}
+
 	}
 
 }

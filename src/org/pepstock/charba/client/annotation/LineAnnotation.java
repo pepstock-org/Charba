@@ -17,6 +17,7 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
@@ -27,6 +28,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.options.ElementFactory;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -42,6 +44,14 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * Default line annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
 	 */
 	public static final int DEFAULT_BORDER_WIDTH = 2;
+
+	// Annotation element key
+	private static final String ELEMENT_KEY_AS_STRING = "LineAnnotation";
+
+	/**
+	 * Element factory to get "{@value LineAnnotation#ELEMENT_KEY_AS_STRING}" element.
+	 */
+	public static final ElementFactory<LineAnnotation> FACTORY = new LineElementFactory(ELEMENT_KEY_AS_STRING);
 
 	/**
 	 * Name of properties of native object.
@@ -105,7 +115,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @see AnnotationType#createId()
 	 */
 	public LineAnnotation() {
-		this(AnnotationType.LINE.createId(), AnnotationType.LINE.getDefaultsValues());
+		this(AnnotationType.LINE.createId(), Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -123,7 +133,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @param id annotation id to apply to the object
 	 */
 	public LineAnnotation(AnnotationId id) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.LINE, id));
+		this(id, Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -147,7 +157,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	 * @param chart chart instance related to the plugin options
 	 */
 	public LineAnnotation(AnnotationId id, IsChart chart) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByChart(AnnotationType.LINE, id, chart));
+		this(id, IsChart.checkAndGetIfConsistent(chart).getOptions().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -461,4 +471,32 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		setValueAndAddToParent(Property.END_VALUE, valueCallback);
 	}
 
+	/**
+	 * Specific element factory for line annotation elements.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class LineElementFactory extends AnnotationElementFactory<LineAnnotation> {
+
+		/**
+		 * Creates the factory by the key of object, as string.
+		 * 
+		 * @param elementKeyAsString the key of object, as string.
+		 */
+		private LineElementFactory(String elementKeyAsString) {
+			super(elementKeyAsString);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.annotation.AnnotationElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		LineAnnotation createOptions(NativeObject nativeObject) {
+			return new LineAnnotation(nativeObject, AnnotationType.LINE.getDefaultsValues());
+		}
+
+	}
 }

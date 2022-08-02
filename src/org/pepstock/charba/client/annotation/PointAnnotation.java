@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
@@ -31,6 +32,7 @@ import org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.options.ElementFactory;
 import org.pepstock.charba.client.options.HasPointStyle;
 import org.pepstock.charba.client.options.PointStyleHandler;
 import org.pepstock.charba.client.utils.Utilities;
@@ -52,6 +54,14 @@ public final class PointAnnotation extends AbstractCircleBasedAnnotation impleme
 	 * Default point annotation radius, <b>{@value DEFAULT_RADIUS}</b>.
 	 */
 	public static final double DEFAULT_RADIUS = 10D;
+
+	// Annotation element key
+	private static final String ELEMENT_KEY_AS_STRING = "pointAnnotation";
+
+	/**
+	 * Element factory to get "{@value PointAnnotation#ELEMENT_KEY_AS_STRING}" element.
+	 */
+	public static final ElementFactory<PointAnnotation> FACTORY = new PointElementFactory(ELEMENT_KEY_AS_STRING);
 
 	/**
 	 * Name of properties of native object.
@@ -104,7 +114,7 @@ public final class PointAnnotation extends AbstractCircleBasedAnnotation impleme
 	 * @see AnnotationType#createId()
 	 */
 	public PointAnnotation() {
-		this(AnnotationType.POINT.createId(), AnnotationType.POINT.getDefaultsValues());
+		this(AnnotationType.POINT.createId(), Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -122,7 +132,7 @@ public final class PointAnnotation extends AbstractCircleBasedAnnotation impleme
 	 * @param id annotation id to apply to the object
 	 */
 	public PointAnnotation(AnnotationId id) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByGlobal(AnnotationType.POINT, id));
+		this(id, Defaults.get().getGlobal().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -146,7 +156,7 @@ public final class PointAnnotation extends AbstractCircleBasedAnnotation impleme
 	 * @param chart chart instance related to the plugin options
 	 */
 	public PointAnnotation(AnnotationId id, IsChart chart) {
-		this(id, AnnotationHelper.get().getDefaultsAnnotationOptionsByChart(AnnotationType.POINT, id, chart));
+		this(id, IsChart.checkAndGetIfConsistent(chart).getOptions().getElements().getElement(FACTORY));
 	}
 
 	/**
@@ -333,4 +343,34 @@ public final class PointAnnotation extends AbstractCircleBasedAnnotation impleme
 		}
 
 	}
+
+	/**
+	 * Specific element factory for point annotation elements.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class PointElementFactory extends AnnotationElementFactory<PointAnnotation> {
+
+		/**
+		 * Creates the factory by the key of object, as string.
+		 * 
+		 * @param elementKeyAsString the key of object, as string.
+		 */
+		private PointElementFactory(String elementKeyAsString) {
+			super(elementKeyAsString);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.annotation.AnnotationElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		PointAnnotation createOptions(NativeObject nativeObject) {
+			return new PointAnnotation(nativeObject, AnnotationType.POINT.getDefaultsValues());
+		}
+
+	}
+
 }
