@@ -37,7 +37,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'DataLabelsPluginResource' class.
 	 */
-	DATA_LABELS_PLUGIN_RESOURCE(ResourceName.DATALABELS_PLUGIN, 1138320),
+	DATA_LABELS_PLUGIN_RESOURCE(ResourceName.DATALABELS_PLUGIN, 1136892),
 	/**
 	 * Hash item for 'GeoControllerResource' class.
 	 */
