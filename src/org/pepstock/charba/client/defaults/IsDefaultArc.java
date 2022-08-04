@@ -95,4 +95,11 @@ public interface IsDefaultArc extends IsDefaultOptionsElement {
 	 * @return the fixed arc offset (in pixels)
 	 */
 	int getSpacing();
+
+	/**
+	 * Returns <code>true</code> if the arc is curved.
+	 * 
+	 * @return <code>true</code> if the arc is curved
+	 */
+	boolean isCircular();
 }

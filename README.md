@@ -304,6 +304,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable the management of annotation types defaults stored as elements.
  * add `borderDash` option as scriptable option in `Grid` configuration.
  * add `BorderSkipped.TRUE` item in order to skip all borders for bars drawing.
+ * add `circular` option to `Arc` element options and configuration classes.
    
 ### Development
 

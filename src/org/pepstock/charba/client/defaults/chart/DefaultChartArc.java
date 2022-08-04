@@ -186,4 +186,15 @@ public final class DefaultChartArc implements IsDefaultArc {
 	public JoinStyle getHoverBorderJoinStyle() {
 		return arc.getHoverBorderJoinStyle();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#isCircular()
+	 */
+	@Override
+	public boolean isCircular() {
+		return arc.isCircular();
+	}
+
 }

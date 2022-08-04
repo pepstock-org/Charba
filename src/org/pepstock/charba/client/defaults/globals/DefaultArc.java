@@ -38,6 +38,8 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 
 	private static final int DEFAULT_SPACING = 0;
 
+	private static final boolean DEFAULT_CIRCULAR = true;
+
 	/**
 	 * Creates a default arc
 	 */
@@ -113,6 +115,16 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 	@Override
 	public int getSpacing() {
 		return DEFAULT_SPACING;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#isCircular()
+	 */
+	@Override
+	public boolean isCircular() {
+		return DEFAULT_CIRCULAR;
 	}
 
 }

@@ -39,6 +39,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 		BORDER_ALIGN("borderAlign"),
 		BORDER_JOIN_STYLE("borderJoinStyle"),
 		BORDER_RADIUS("borderRadius"),
+		CIRCULAR("circular"),
 		HOVER_BORDER_JOIN_STYLE("hoverBorderJoinStyle"),
 		HOVER_OFFSET("hoverOffset"),
 		OFFSET("offset"),
@@ -258,5 +259,24 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	@Override
 	public int getHoverOffset() {
 		return getValue(Property.HOVER_OFFSET, getDefaultValues().getHoverOffset());
+	}
+
+	/**
+	 * Sets <code>true</code> if the arc is curved.
+	 * 
+	 * @param circular <code>true</code> if the arc is curved
+	 */
+	public void setCircular(int circular) {
+		setValueAndAddToParent(Property.CIRCULAR, circular);
+	}
+
+	/**
+	 * Returns <code>true</code> if the arc is curved.
+	 * 
+	 * @return <code>true</code> if the arc is curved
+	 */
+	@Override
+	public boolean isCircular() {
+		return getValue(Property.CIRCULAR, getDefaultValues().isCircular());
 	}
 }

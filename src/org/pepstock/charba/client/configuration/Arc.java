@@ -348,6 +348,24 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		return getConfiguration().getElements().getArc().getHoverOffset();
 	}
 
+	/**
+	 * Sets <code>true</code> if the arc is curved.
+	 * 
+	 * @param circular <code>true</code> if the arc is curved
+	 */
+	public void setCircular(int circular) {
+		getConfiguration().getElements().getArc().setCircular(circular);
+	}
+
+	/**
+	 * Returns <code>true</code> if the arc is curved.
+	 * 
+	 * @return <code>true</code> if the arc is curved
+	 */
+	public boolean isCircular() {
+		return getConfiguration().getElements().getArc().isCircular();
+	}
+
 	// -----------------
 	// CALLBACK
 	// -----------------
@@ -582,5 +600,4 @@ public class Arc extends AbstractConfigurationElement<IsDefaultArc> {
 		// stores and manages callback
 		getChart().getOptions().setCallback(getElement(), Property.ANGLE, angleCallback);
 	}
-
 }
