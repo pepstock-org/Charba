@@ -302,6 +302,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `z` option to all annotations options classes.
  * add `interaction` option to `AnnotationOptions` configuration class.
  * enable the management of annotation types defaults stored as elements.
+ * add `borderDash` option as scriptable option in `Grid` configuration. 
    
 ### Development
 
