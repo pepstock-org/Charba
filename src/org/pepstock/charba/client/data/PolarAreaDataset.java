@@ -19,10 +19,13 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.callbacks.CircularCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.JoinStyleCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -42,6 +45,8 @@ public class PolarAreaDataset extends HoverDataset implements HasBorderAlign {
 	private final CallbackProxy<ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border join style function
 	private final CallbackProxy<ProxyStringCallback> hoverBorderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the circular function
+	private final CallbackProxy<ProxyBooleanCallback> circularCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	/**
 	 * Name of properties of native object.
@@ -49,6 +54,7 @@ public class PolarAreaDataset extends HoverDataset implements HasBorderAlign {
 	private enum Property implements Key
 	{
 		BORDER_JOIN_STYLE("borderJoinStyle"),
+		CIRCULAR("circular"),
 		HOVER_BORDER_JOIN_STYLE("hoverBorderJoinStyle");
 
 		// name value of property
@@ -81,6 +87,8 @@ public class PolarAreaDataset extends HoverDataset implements HasBorderAlign {
 	private JoinStyleCallback<DatasetContext> borderJoinStyleCallback = null;
 	// hover border join style callback instance
 	private JoinStyleCallback<DatasetContext> hoverBorderJoinStyleCallback = null;
+	// circular callback instance
+	private CircularCallback circularCallback = null;
 
 	/**
 	 * Creates a dataset.<br>
@@ -144,6 +152,8 @@ public class PolarAreaDataset extends HoverDataset implements HasBorderAlign {
 		this.borderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getBorderJoinStyleCallback(), getDefaultValues().getElements().getArc().getBorderJoinStyle()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.hoverBorderJoinStyleCallbackProxy.setCallback(context -> onBorderJoinStyle(createContext(context), getHoverBorderJoinStyleCallback(), getDefaultValues().getElements().getArc().getBorderJoinStyle()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.circularCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(new DatasetContext(context), getCircularCallback(), getDefaultValues().getElements().getArc().isCircular()));
 	}
 
 	/*
@@ -204,6 +214,27 @@ public class PolarAreaDataset extends HoverDataset implements HasBorderAlign {
 	public List<JoinStyle> getBorderJoinStyle() {
 		ArrayString array = getValueOrArray(Property.BORDER_JOIN_STYLE, getDefaultValues().getElements().getArc().getBorderJoinStyle());
 		return ArrayListHelper.list(JoinStyle.values(), array);
+	}
+
+	/**
+	 * Sets <code>true</code> if the arc is curved.
+	 * 
+	 * @param circular <code>true</code> if the arc is curved
+	 */
+	public void setCircular(int circular) {
+		// resets callback
+		setCircular((CircularCallback) null);
+		// stores value
+		setValue(Property.CIRCULAR, circular);
+	}
+
+	/**
+	 * Returns <code>true</code> if the arc is curved.
+	 * 
+	 * @return <code>true</code> if the arc is curved
+	 */
+	public boolean isCircular() {
+		return getValue(Property.CIRCULAR, getDefaultValues().getElements().getArc().isCircular());
 	}
 
 	// --------------------------
@@ -285,6 +316,45 @@ public class PolarAreaDataset extends HoverDataset implements HasBorderAlign {
 		} else {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.HOVER_BORDER_JOIN_STYLE);
+		}
+	}
+
+	/**
+	 * Sets <code>true</code> if the arc is curved
+	 * 
+	 * @param circularCallback <code>true</code> if the arc is curved
+	 */
+	public void setCircular(NativeCallback circularCallback) {
+		// resets callback
+		setCircular((CircularCallback) null);
+		// stores value
+		setValue(Property.HOVER_BORDER_JOIN_STYLE, circularCallback);
+	}
+
+	/**
+	 * Returns <code>true</code> if the arc is curved.
+	 * 
+	 * @return <code>true</code> if the arc is curved.
+	 */
+	public CircularCallback getCircularCallback() {
+		return circularCallback;
+	}
+
+	/**
+	 * Sets <code>true</code> if the arc is curved
+	 * 
+	 * @param circularCallback <code>true</code> if the arc is curved
+	 */
+	public void setCircular(CircularCallback circularCallback) {
+		// sets the callback
+		this.circularCallback = circularCallback;
+		// checks if callback is consistent
+		if (circularCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.CIRCULAR, circularCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.CIRCULAR);
 		}
 	}
 }
