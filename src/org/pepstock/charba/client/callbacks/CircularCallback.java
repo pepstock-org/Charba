@@ -18,7 +18,7 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.configuration.Arc;
 
 /**
- * Callback interface to set <code>circular</code>property of {@link Arc} at runtime.
+ * Callback interface to set <code>circular</code> property of {@link Arc} at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *

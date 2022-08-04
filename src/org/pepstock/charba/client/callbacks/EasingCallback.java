@@ -19,7 +19,7 @@ import org.pepstock.charba.client.configuration.Animation;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
- * Callback interface to set <code>easing</code>property of {@link Animation} at runtime.
+ * Callback interface to set <code>easing</code> property of {@link Animation} at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *

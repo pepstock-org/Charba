@@ -18,7 +18,7 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.configuration.Animation;
 
 /**
- * Callback interface to set <code>delay</code>property of {@link Animation} at runtime.
+ * Callback interface to set <code>delay</code> property of {@link Animation} at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *

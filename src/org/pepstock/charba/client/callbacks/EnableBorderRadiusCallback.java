@@ -18,7 +18,7 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.configuration.Bar;
 
 /**
- * Callback interface to set <code>enableBorderRadius</code>property of {@link Bar} at runtime.
+ * Callback interface to set <code>enableBorderRadius</code> property of {@link Bar} at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -18,7 +18,7 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.configuration.Axis;
 
 /**
- * Callback interface to set <code>reverse</code>property of {@link Axis} at runtime.
+ * Callback interface to set <code>reverse</code> property of {@link Axis} at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *

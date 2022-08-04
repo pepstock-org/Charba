@@ -18,7 +18,7 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.enums.Stepped;
 
 /**
- * Callback interface to set <code>stepped</code>property at runtime.
+ * Callback interface to set <code>stepped</code> property at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *

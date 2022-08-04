@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.callbacks;
 
 /**
- * Callback interface to set <code>drawActiveElementsOnTop</code>property of at runtime.
+ * Callback interface to set <code>drawActiveElementsOnTop</code> property of at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *
