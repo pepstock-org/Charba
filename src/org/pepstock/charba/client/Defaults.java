@@ -29,11 +29,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.AxisType;
-import org.pepstock.charba.client.configuration.CartesianTimeAxis;
-import org.pepstock.charba.client.configuration.Scales;
-import org.pepstock.charba.client.configuration.ScalesOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.data.Dataset;
@@ -47,7 +43,6 @@ import org.pepstock.charba.client.events.IsLegendEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
-import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.items.DatasetElementOptions;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
@@ -59,7 +54,6 @@ import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
 import org.pepstock.charba.client.plugins.SmartPlugin;
 import org.pepstock.charba.client.plugins.hooks.AfterInitHook;
-import org.pepstock.charba.client.plugins.hooks.ConfigureHook;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -618,7 +612,7 @@ public final class Defaults {
 	 * @author Andrea "Stock" Stocchero
 	 * 
 	 */
-	private static class NativeChartHandler extends SmartPlugin implements ConfigureHook, AfterInitHook {
+	private static class NativeChartHandler extends SmartPlugin implements AfterInitHook {
 
 		/**
 		 * Creates the plugin, using {@link Defaults#ID}.
@@ -626,54 +620,7 @@ public final class Defaults {
 		private NativeChartHandler() {
 			super(ID);
 			// stores itself as hook handler
-			setConfigureHook(this);
 			setAfterInitHook(this);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.plugins.hooks.ConfigureHook#onConfigure(org.pepstock.charba.client.IsChart)
-		 */
-		@Override
-		public void onConfigure(IsChart chart) {
-			// checks if chart is consistent
-			// checks to sets has got cartesian axes
-			if (IsChart.isConsistent(chart) && ScaleType.MULTI.equals(chart.getType().scaleType()) && chart.getOptions() instanceof ScalesOptions) {
-				// casts to scaled options
-				ScalesOptions options = (ScalesOptions) chart.getOptions();
-				// gets locale from chart
-				CLocale locale = chart.getOptions().getLocale();
-				// checks if locale is consistent
-				if (locale != null) {
-					// applies locale to time and time series scales
-					applyLocaleToTimeScales(options.getScales(), locale);
-				}
-			}
-		}
-
-		/**
-		 * Applies the locale, taken from chart options, to all time or time series scales if the locale is not set.
-		 * 
-		 * @param scales list of scales to scan
-		 * @param locale the chart options locale to apply
-		 */
-		private void applyLocaleToTimeScales(Scales scales, CLocale locale) {
-			// scans all scales, searching for time or times series ones
-			for (Axis axis : scales.getAxes()) {
-				// checks if is time or time series
-				if (axis instanceof CartesianTimeAxis) {
-					// casts to time axis
-					CartesianTimeAxis timeAxis = (CartesianTimeAxis) axis;
-					// gets the locale from date adapter options
-					CLocale dateAdapterOptionsLocale = timeAxis.getAdapters().getDate().getLocale();
-					// if the locale is not set
-					if (dateAdapterOptionsLocale == null) {
-						// applies the locale of the chart
-						timeAxis.getAdapters().getDate().setLocale(locale);
-					}
-				}
-			}
 		}
 
 		/*
