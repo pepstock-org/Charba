@@ -57,9 +57,13 @@ public enum BorderSkipped implements Key
 	 */
 	MIDDLE("middle"),
 	/**
-	 * The property sets <code>false</code> to avoid drawing the bar stroke at the base of the fill.
+	 * The property sets <code>false</code> to draw all borders.
 	 */
-	FALSE("false");
+	FALSE("false"),
+	/**
+	 * The property sets <code>true</code> to skip all borders.
+	 */
+	TRUE("true");
 
 	// name value of property
 	private final String value;

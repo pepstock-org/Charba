@@ -593,15 +593,11 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
-	 * @param borderskip to set <code>false</code> as border skipped. If set <code>true</code>, is ignored
+	 * @param borderskip to set <code>false</code> as border skipped.
 	 */
 	public void setBorderSkipped(boolean borderskip) {
-		// checks value for border skipped
-		// if not false, otherwise ignore it
-		if (!borderskip) {
-			// stores boolean value
-			setValue(Property.BORDER_SKIPPED, BorderSkipped.FALSE);
-		}
+		// stores boolean value
+		setValue(Property.BORDER_SKIPPED, borderskip);
 	}
 
 	/**
@@ -650,10 +646,13 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		ArrayMixedObject array = new ArrayMixedObject();
 		// scans all value
 		for (BorderSkipped borderskip : borderskips) {
-			// checks if setting a false value
+			// checks if setting a boolean value
 			if (BorderSkipped.FALSE.equals(borderskip)) {
 				// stores boolean value
 				array.push(false);
+			} else if (BorderSkipped.TRUE.equals(borderskip)) {
+				// stores boolean value
+				array.push(true);
 			} else {
 				// otherwise stores the key value
 				array.push(borderskip.value());
@@ -669,10 +668,13 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	 * @param borderskip the edge to skip drawing the border for.
 	 */
 	private void setSingleBorderSkipped(BorderSkipped borderskip) {
-		// checks if setting a false value
+		// checks if setting a boolean value
 		if (BorderSkipped.FALSE.equals(borderskip)) {
 			// stores boolean value
 			setValue(Property.BORDER_SKIPPED, false);
+		} else if (BorderSkipped.TRUE.equals(borderskip)) {
+			// stores boolean value
+			setValue(Property.BORDER_SKIPPED, true);
 		} else {
 			// otherwise stores the key value
 			setValue(Property.BORDER_SKIPPED, borderskip);
@@ -689,8 +691,10 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		ObjectType type = type(Property.BORDER_SKIPPED);
 		// checks if 'false' has been set
 		if (ObjectType.BOOLEAN.equals(type)) {
-			// returns is false
-			return Arrays.asList(BorderSkipped.FALSE);
+			// gets boolean value
+			boolean value = getValue(Property.BORDER_SKIPPED, Undefined.BOOLEAN);
+			// returns the value as enum item
+			return Arrays.asList(value ? BorderSkipped.TRUE : BorderSkipped.FALSE);
 		} else if (ObjectType.FUNCTION.equals(type)) {
 			// checks if a callback has been set
 			// returns defaults
@@ -706,7 +710,9 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 				Object value = array.get(i);
 				// checks if it is a boolean
 				if (value instanceof Boolean) {
-					result.add(BorderSkipped.FALSE);
+					// casts to boolean
+					boolean bool = (Boolean) value;
+					result.add(bool ? BorderSkipped.TRUE : BorderSkipped.FALSE);
 				} else if (value instanceof String) {
 					// checks if it is a string
 					result.add(Key.getKeyByValue(BorderSkipped.values(), (String) value, getDefaultValues().getElements().getBar().getBorderSkipped()));

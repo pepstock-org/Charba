@@ -115,15 +115,11 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar, 
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
-	 * @param borderskip to set <code>false</code> as border skipped. If set <code>true</code>, is ignored
+	 * @param borderskip to set <code>false</code> as border skipped.
 	 */
 	public void setBorderSkipped(boolean borderskip) {
-		// checks value for border skipped
-		// if not false, otherwise ignore it
-		if (!borderskip) {
-			// stores boolean value
-			setValueAndAddToParent(Property.BORDER_SKIPPED, BorderSkipped.FALSE);
-		}
+		// stores boolean value
+		setValueAndAddToParent(Property.BORDER_SKIPPED, borderskip);
 	}
 
 	/**
@@ -136,6 +132,9 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar, 
 		if (BorderSkipped.FALSE.equals(position)) {
 			// stores boolean value
 			setValueAndAddToParent(Property.BORDER_SKIPPED, false);
+		} else if (BorderSkipped.TRUE.equals(position)) {
+			// stores boolean value
+			setValueAndAddToParent(Property.BORDER_SKIPPED, true);
 		} else {
 			// otherwise stores the key value
 			setValueAndAddToParent(Property.BORDER_SKIPPED, position);
@@ -151,8 +150,10 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar, 
 	public BorderSkipped getBorderSkipped() {
 		// checks if 'false' has been set
 		if (isType(Property.BORDER_SKIPPED, ObjectType.BOOLEAN)) {
+			// gets boolean value
+			boolean value = getValue(Property.BORDER_SKIPPED, Undefined.BOOLEAN);
 			// returns is false
-			return BorderSkipped.FALSE;
+			return value ? BorderSkipped.TRUE : BorderSkipped.FALSE;
 		}
 		// otherwise returns the enum value as string
 		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), getDefaultValues().getBorderSkipped());
