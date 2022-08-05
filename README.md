@@ -309,6 +309,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Development
 
  * built and tested on [GWT Web toolkit](http://www.gwtproject.org/), [version 2.10.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0).
+ * change dependency for Google Closure Compiler, version [v20220719](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20220719).
+   * add explicit dependency at compile phase for Google Guava, version [31.1](https://github.com/google/guava/releases/tag/v31.1).
  
 License
 -------
