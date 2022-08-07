@@ -88,7 +88,7 @@ public class InjectableResourceGenerator {
 	private static final byte CARRIAGE_RETURN = '\r';
 	// defines the line separator
 	private static final byte LINE_SEPARATOR = '\n';
-	// defines the comma
+	// defines the blank
 	private static final String BLANK_STRING = " ";
 	// defines the comma
 	private static final String COMMA_STRING = ",";

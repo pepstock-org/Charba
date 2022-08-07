@@ -51,23 +51,11 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>31.1-jre</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
       <groupId>com.google.javascript</groupId>
       <artifactId>closure-compiler</artifactId>
       <version>v20220719</version>
       <optional>true</optional>
     </dependency>
-    <dependency>
-      <groupId>com.google.closure-stylesheets</groupId>
-      <artifactId>closure-stylesheets</artifactId>
-      <version>1.5.0</version>
-      <optional>true</optional>
-    </dependency>    
     <dependency>
       <groupId>org.apache.ivy</groupId>
       <artifactId>ivy</artifactId>

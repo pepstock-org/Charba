@@ -33,18 +33,11 @@
         <dependency org="com.google.gwt" name="gwt-user" rev="${depver.gwt}" conf="compile"/>
         <dependency org="com.google.gwt" name="gwt-dev" rev="${depver.gwt}" conf="compile"/>
 
-        <!-- GUAVA -->
-		<dependency org="com.google.guava" name="guava" rev="${depver.guava}" conf="compile"/>
-
 		<!-- JS INTEROP --> 	
         <dependency org="com.google.jsinterop" name="jsinterop-annotations" rev="${depver.jsinterop-annotations}" conf="compile"/>
         
         <!-- CLOSURE COMPILER (to minify javascript) -->
 		<dependency org="com.google.javascript" name="closure-compiler" rev="${depver.closure-compiler}" conf="compile->default"/>
-		<dependency org="com.google.javascript" name="closure-compiler-unshaded" rev="${depver.closure-compiler}" conf="compile->default"/>
-
-        <!-- CLOSURE STYLESHEETS (to minify css) -->
-		<dependency org="com.google.closure-stylesheets" name="closure-stylesheets" rev="${depver.closure-stylesheets}" conf="compile->default"/>
 		
 		<!-- IVY -->
         <dependency org="org.apache.ivy" name="ivy" rev="${depver.ivy}" conf="compile"/>

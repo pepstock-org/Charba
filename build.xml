@@ -292,23 +292,22 @@
 	<!--
         CHARBA - CREATE CSS compiler
     -->
-	<macrodef name="google-closure-stylesheets">
+	<macrodef name="css-minifier">
 		<attribute name="source" />
 		<attribute name="target" />
 		<sequential>
 			<echo>Minify CSS file "@{source}" to "@{target}" </echo>
-			<java classname="com.google.common.css.compiler.commandline.ClosureCommandLineCompiler" fork="true">
+			<java classname="org.pepstock.charba.codegen.CssMinifier">
+  				<sysproperty key="java.util.logging.SimpleFormatter.format" value="%4$-7s %5$s %n"/>
 				<classpath>
-					<path refid="ivyPath-runtime" />
-					<path refid="ivyPath-compile"/>
+				    <pathelement location="${classes.dir}"/>
 				</classpath>
 				<arg value="@{source}"/>
-				<arg value="--output-file"/>
 				<arg value="@{target}"/>
 			</java>
 		</sequential>
 	</macrodef>
-		
+
 	<!--
         CHARBA - JAVA compile, MINIFY CHARBA javascript helper, COPY resources into classes folder
     -->
@@ -329,7 +328,7 @@
 		<google-closure-compiler target="${javascript.dist.dir}/${javascript.labels.minify.file}" sourceDir="${javascript.src.dir}" source="${javascript.labels.file}" />
 		<!-- minify TOAST utility -->
 		<google-closure-compiler target="${javascript.dist.dir}/${javascript.toast.minify.file}" sourceDir="${javascript.src.dir}" source="${javascript.toast.file}" />
-		<google-closure-stylesheets source="${css.src.dir}/${css.toast.file}" target="${css.dist.dir}/${css.toast.minify.file}"/>
+		<css-minifier source="${css.src.dir}/${css.toast.file}" target="${css.dist.dir}/${css.toast.minify.file}"/>
 		<!-- copy all sources is necessary as J2CL-GWT needs sources: exclude charba.helper.js and labels plugin because already created by minify and package-info-->
 		<copy todir="${classes.dir}">
 			<fileset dir="${src.dir}">
@@ -657,7 +656,7 @@
 		<google-closure-compiler target="${javascript.dist.dir}/${javascript.labels.minify.file}" sourceDir="${javascript.src.dir}" source="${javascript.labels.file}" />
 		<!-- minify TOAST utility -->
 		<google-closure-compiler target="${javascript.dist.dir}/${javascript.toast.minify.file}" sourceDir="${javascript.src.dir}" source="${javascript.toast.file}" />
-		<google-closure-stylesheets source="${css.src.dir}/${css.toast.file}" target="${css.dist.dir}/${css.toast.minify.file}"/>
+		<css-minifier source="${css.src.dir}/${css.toast.file}" target="${css.dist.dir}/${css.toast.minify.file}"/>
 		<!-- copy all sources is necessary as J2CL-GWT needs sources: exclude charba.helper.js and labels plugin because already created by minify and package-info-->
 		<copy todir="${javascript.dist.dir}">
 			<fileset dir="${resources.dir}">
