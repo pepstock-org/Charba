@@ -39,9 +39,9 @@ Even if **Charba** was born only as GWT chart library, as of version 3, **Charba
 Building
 --------
 
-To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.4/build.xml).
+To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.5/build.xml).
 
-The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.4/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
+The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/5.5/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
 
 The first distribution is a **Charba** file without any GWT dependency (but working on GWT anyway), consumable also in other [J2CL - JavaToClosure](https://github.com/google/j2cl) frameworks, like [Google Elemental2](https://github.com/google/elemental2) and [Elemento](https://github.com/hal/elemento).
 
@@ -55,7 +55,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
-[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_54.png)](https://github.com/pepstock-org/Charba-Showcase/blob/5.4/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_55.png)](https://github.com/pepstock-org/Charba-Showcase/blob/5.5/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------
@@ -70,18 +70,18 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>5.4</version>
+    <version>5.5</version>
     <!-- for GWT -->
-    <version>5.4-gwt</version>
+    <version>5.5-gwt</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="5.4"/>
+<dependency org="org.pepstock" name="charba" rev="5.5"/>
 <!-- for GWT -->
-<dependency org="org.pepstock" name="charba" rev="5.4-gwt"/>
+<dependency org="org.pepstock" name="charba" rev="5.5-gwt"/>
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration in your GWT project module configuration:
@@ -249,7 +249,7 @@ Documentation
 
 All **Charba** documentation will be maintained in [Charba-Wiki](https://github.com/pepstock-org/Charba-Wiki) project.
 
-API JavaDoc for version **5.4** is published [here](https://pepstock-org.github.io/Charba/5.4/index.html).
+API JavaDoc for version **5.5** is published [here](https://pepstock-org.github.io/Charba/5.5/index.html).
 
 You can also access the previous API JavaDoc, because every version is published to `https://pepstock-org.github.io/Charba/[version.release]`.
 
@@ -274,43 +274,6 @@ Continuous integration and quality gate
 **Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
-
-		  
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
-
-### Breaking changes
-
- * change default value of `xScaleID` and `yScaleID` options to `null`, in the Annotation plugin.
- * remove `DoubleClickCallback` class because `dblclick` event handler is not supported in the Annotation plugin anymore.
- * remove `LabelElement` class because is not supported in the Annotation plugin anymore. Use `AnnotationElement.getLabel().getOptions()` instead.
- * enable annotation event handlers (`EnterCallback`, `LeaveCallback`, `ClickCallback`) to indicate chart should be re-drawn.
-
-### Features
-
- * import CHART.JS version [v3.9.1](https://github.com/chartjs/Chart.js/releases/tag/v3.9.1).
- * import CHART.JS GEO controller version [v3.8.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.8.1).
- * import CHART.JS ANNOTATION plugin version [v2.0.0](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.0.0).
- * import CHART.JS DATALABELS plugin version [v2.1.0](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v2.1.0).
- * import CHART.JS LUXON adapter version [v1.2.0](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v1.2.0).
- * add `pointStyleWidth` option to `LegendLabels` options and configuration classes.
- * add `center` option to `GeoDataPoint` configuration class.
- * enable annotation event handlers (`EnterCallback`, `LeaveCallback`, `ClickCallback`) to indicate chart should be re-drawn.
- * add `set` methods to `AnnotationElement` class in order to enable the change of annotation dimension at runtime.
- * add `z` option to all annotations options classes.
- * add `interaction` option to `AnnotationOptions` configuration class.
- * enable the management of annotation types defaults stored as elements.
- * add `borderDash` option as scriptable option in `Grid` configuration.
- * add `BorderSkipped.TRUE` item in order to skip all borders for bars drawing.
- * add `circular` option to `Arc` element options and configuration and to `PolarAreaDataset` classes.
-   
-### Development
-
- * built and tested on [GWT Web toolkit](http://www.gwtproject.org/), [version 2.10.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0).
- * change dependency for Google Closure Compiler, version [v20220719](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20220719).
- * remove dependency from Google Closure Stylesheets because the project is not maintained anymore.
  
 License
 -------
