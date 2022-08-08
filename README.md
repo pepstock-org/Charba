@@ -310,7 +310,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
  * built and tested on [GWT Web toolkit](http://www.gwtproject.org/), [version 2.10.0](http://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0).
  * change dependency for Google Closure Compiler, version [v20220719](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20220719).
- * remove dependency from Google Closure Stylesheets, version [1.5.0](https://github.com/google/closure-stylesheets/releases/tag/v1.5.0), because the project is not maintained anymore.
+ * remove dependency from Google Closure Stylesheets because the project is not maintained anymore.
  
 License
 -------
