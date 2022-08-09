@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.AnimationType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardAnimationProperty extends AbstractTypedAnimationKey implements AnimationPropertyKey {
+final class StandardAnimationProperty extends AbstractTypedAnimationKey implements AnimationPropertyKey {
 
 	// list of properties with only the key
 	private List<AnimationPropertyKey> properties = null;

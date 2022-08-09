@@ -22,7 +22,7 @@ package org.pepstock.charba.client.commons;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardKey implements Key {
+final class StandardKey implements Key {
 
 	private final String value;
 

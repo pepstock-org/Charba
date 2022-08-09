@@ -24,7 +24,7 @@ import org.pepstock.charba.client.enums.DefaultScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardScaleId extends AbstractStandardKey implements ScaleId {
+final class StandardScaleId extends AbstractStandardKey implements ScaleId {
 
 	// default axis kind
 	private final AxisKind axisKind;

@@ -21,7 +21,7 @@ package org.pepstock.charba.client.options;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardAnimationTransition extends AbstractStandardKey implements TransitionKey {
+final class StandardAnimationTransition extends AbstractStandardKey implements TransitionKey {
 
 	/**
 	 * Builds the object with the animation update mode (transition) value as string.

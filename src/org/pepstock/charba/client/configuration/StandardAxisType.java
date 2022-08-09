@@ -25,7 +25,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardAxisType implements AxisType {
+final class StandardAxisType implements AxisType {
 
 	// type of scale
 	private final String type;
