@@ -19,7 +19,6 @@ import java.util.Set;
 
 import org.pepstock.charba.client.defaults.IsDefaultEventHandler;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
-import org.pepstock.charba.client.enums.Event;
 
 /**
  * Defines a configuration element which is managing the EVENTS property.
@@ -41,7 +40,7 @@ public interface HasEvents extends IsDefaultEventHandler {
 	 * 
 	 * @param events the browser events that the chart should listen to.
 	 */
-	default void setEvents(Event... events) {
+	default void setEvents(IsEvent... events) {
 		// checks if event handler handler is consistent
 		if (getEventsOptionHandler() != null) {
 			getEventsOptionHandler().setEvents(events);
@@ -53,7 +52,7 @@ public interface HasEvents extends IsDefaultEventHandler {
 	 * 
 	 * @param events the browser events that the legend should listen to.
 	 */
-	default void setEvents(Set<Event> events) {
+	default void setEvents(Set<IsEvent> events) {
 		// checks if event handler handler is consistent
 		if (getEventsOptionHandler() != null) {
 			getEventsOptionHandler().setEvents(events);
@@ -66,7 +65,7 @@ public interface HasEvents extends IsDefaultEventHandler {
 	 * @return the browser events that the chart should listen to.
 	 */
 	@Override
-	default Set<Event> getEvents() {
+	default Set<IsEvent> getEvents() {
 		// checks if event handler handler is consistent
 		if (getEventsOptionHandler() != null) {
 			return getEventsOptionHandler().getEvents();

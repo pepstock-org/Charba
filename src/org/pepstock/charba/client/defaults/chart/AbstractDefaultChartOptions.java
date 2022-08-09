@@ -19,9 +19,9 @@ import java.util.Set;
 
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.AbstractDefaultOptions;
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
+import org.pepstock.charba.client.options.IsEvent;
 
 /**
  * Abstract defaults for options element, based on chart type. THIS IS MUST BE EXTENDED AS ROOT OF ALL ELEMENTS CHART DEFAULTS.
@@ -49,7 +49,7 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getEvents()
 	 */
 	@Override
-	public Set<Event> getEvents() {
+	public Set<IsEvent> getEvents() {
 		return options.getEvents();
 	}
 

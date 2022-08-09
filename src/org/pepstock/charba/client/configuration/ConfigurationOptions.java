@@ -38,7 +38,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.enums.ChartEventProperty;
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.ChartClickEvent;
 import org.pepstock.charba.client.events.ChartEventContext;
@@ -51,6 +50,7 @@ import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.ExtendedScale;
+import org.pepstock.charba.client.options.IsEvent;
 
 import jsinterop.annotations.JsFunction;
 
@@ -453,7 +453,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * 
 	 * @param events the browser events that the chart should listen to.
 	 */
-	public void setEvents(Event... events) {
+	public void setEvents(IsEvent... events) {
 		getConfiguration().setEvents(events);
 	}
 
@@ -462,7 +462,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * 
 	 * @return the browser events that the chart should listen to.
 	 */
-	public Set<Event> getEvents() {
+	public Set<IsEvent> getEvents() {
 		return getConfiguration().getEvents();
 	}
 

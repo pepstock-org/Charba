@@ -23,12 +23,12 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.defaults.IsDefaultTransitions;
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.enums.TooltipAlign;
+import org.pepstock.charba.client.options.IsEvent;
 
 /**
  * Defaults for tooltips option element, based on chart type.
@@ -104,7 +104,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getEvents()
 	 */
 	@Override
-	public Set<Event> getEvents() {
+	public Set<IsEvent> getEvents() {
 		return tooltip.getEvents();
 	}
 

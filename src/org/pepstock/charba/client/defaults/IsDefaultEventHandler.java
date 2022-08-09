@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults;
 
 import java.util.Set;
 
-import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.options.IsEvent;
 
 /**
  * Interface to define events handler defaults.
@@ -31,6 +31,6 @@ public interface IsDefaultEventHandler {
 	 * 
 	 * @return the browser events that the chart should listen to.
 	 */
-	Set<Event> getEvents();
+	Set<IsEvent> getEvents();
 
 }

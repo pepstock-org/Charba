@@ -32,7 +32,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.enums.CursorType;
-import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.enums.DefaultEvent;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.events.LegendClickEvent;
@@ -407,7 +407,7 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 	private boolean manageClickEvent(IsChart chart, BaseNativeEvent event, SelectionHandler handler) {
 		// checks if it is a click event
 		// ONLY click are caught
-		if (Event.CLICK.value().equalsIgnoreCase(event.getType())) {
+		if (DefaultEvent.CLICK.value().equalsIgnoreCase(event.getType())) {
 			// option instance
 			DatasetsItemsSelectorOptions pOptions = handler.getOptions();
 			// get selection cleaner element

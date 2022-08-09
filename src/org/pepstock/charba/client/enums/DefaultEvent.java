@@ -15,15 +15,15 @@
 */
 package org.pepstock.charba.client.enums;
 
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.KeyFactory;
+import org.pepstock.charba.client.options.IsEvent;
 
 /**
- * The events option defines the browser events that the chart, legend, tooltip or plugins should listen to.
+ * The events option defines the default browser events that the chart, legend, tooltip or plugins should listen to.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum Event implements Key
+public enum DefaultEvent implements IsEvent
 {
 	/**
 	 * The user moves the mouse over an element
@@ -85,7 +85,7 @@ public enum Event implements Key
 	/**
 	 * Key factory instance to use for array set reading.
 	 */
-	public static final KeyFactory<Event> FACTORY = keyValue -> Key.getKeyByValue(Event.values(), keyValue);
+	public static final KeyFactory<IsEvent> FACTORY = keyValue -> IsEvent.create(keyValue);
 
 	// name value of property
 	private final String value;
@@ -95,7 +95,7 @@ public enum Event implements Key
 	 * 
 	 * @param value value of property name
 	 */
-	private Event(String value) {
+	private DefaultEvent(String value) {
 		this.value = value;
 	}
 

@@ -274,6 +274,19 @@ Continuous integration and quality gate
 **Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
+
+Going to next release
+---------------------
+
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
+
+### Breaking changes
+
+ * rename `org.pepstock.charba.client.enums.Event` enumeration to `org.pepstock.charba.client.enums.DefaultEvent`.
+
+### Features
+
+ * enable custom event types to define to CHART.JS options by `IsEvent` interface, on top of the default ones.
  
 License
 -------

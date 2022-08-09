@@ -29,9 +29,10 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.enums.DefaultEvent;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.ModifierKey;
+import org.pepstock.charba.client.options.IsEvent;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
@@ -193,7 +194,7 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 		// creates labels
 		this.labels = new CrosshairLabels(this);
 		// sets default events
-		setEvents((Set<Event>) null);
+		setEvents((Set<IsEvent>) null);
 	}
 
 	/*
@@ -202,8 +203,8 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#setEvents(org.pepstock.charba.client.enums.Event[])
 	 */
 	@Override
-	public void setEvents(Event... events) {
-		setEvents((Set<Event>) null);
+	public void setEvents(IsEvent... events) {
+		setEvents((Set<IsEvent>) null);
 	}
 
 	/*
@@ -212,9 +213,9 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#setEvents(java.util.Set)
 	 */
 	@Override
-	public void setEvents(Set<Event> events) {
+	public void setEvents(Set<IsEvent> events) {
 		// this is the only event that the plugin should receive from CHART.JS
-		super.setEvents(Event.MOUSE_MOVE);
+		super.setEvents(DefaultEvent.MOUSE_MOVE);
 	}
 
 	/**

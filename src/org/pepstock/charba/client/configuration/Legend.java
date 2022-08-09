@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ElementAlign;
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.LegendEventProperty;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
@@ -32,6 +31,7 @@ import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.items.LegendItem;
+import org.pepstock.charba.client.options.IsEvent;
 
 import jsinterop.annotations.JsFunction;
 
@@ -131,7 +131,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 	 * 
 	 * @param events the browser events that the legend should listen to.
 	 */
-	public void setEvents(Event... events) {
+	public void setEvents(IsEvent... events) {
 		getConfiguration().getLegend().setEvents(events);
 	}
 
@@ -140,7 +140,7 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 	 * 
 	 * @return the browser events that the legend should listen to.
 	 */
-	public Set<Event> getEvents() {
+	public Set<IsEvent> getEvents() {
 		return getConfiguration().getLegend().getEvents();
 	}
 

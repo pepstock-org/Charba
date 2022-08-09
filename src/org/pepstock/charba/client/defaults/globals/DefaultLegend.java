@@ -23,10 +23,10 @@ import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.defaults.IsDefaultLegendTitle;
 import org.pepstock.charba.client.enums.ElementAlign;
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.IsEvent;
 
 /**
  * CHART.JS default values for LEGEND element.
@@ -84,7 +84,7 @@ public final class DefaultLegend implements IsDefaultLegend {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getEvents()
 	 */
 	@Override
-	public Set<Event> getEvents() {
+	public Set<IsEvent> getEvents() {
 		return Collections.unmodifiableSet(Defaults.get().getGlobal().getEvents());
 	}
 

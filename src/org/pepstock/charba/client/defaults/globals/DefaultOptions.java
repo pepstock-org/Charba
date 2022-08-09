@@ -20,10 +20,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.enums.DefaultEvent;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.IsEvent;
 import org.pepstock.charba.client.utils.Window;
 
 /**
@@ -69,7 +70,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final boolean DEFAULT_DESTROY_ON_DETACH = true;
 
-	private static final Set<Event> DEFAULT_EVENTS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(Event.MOUSE_MOVE, Event.MOUSE_OUT, Event.CLICK, Event.TOUCH_MOVE, Event.TOUCH_START)));
+	private static final Set<IsEvent> DEFAULT_EVENTS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(DefaultEvent.MOUSE_MOVE, DefaultEvent.MOUSE_OUT, DefaultEvent.CLICK, DefaultEvent.TOUCH_MOVE, DefaultEvent.TOUCH_START)));
 
 	/**
 	 * To avoid any instantiation
@@ -84,7 +85,7 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getEvents()
 	 */
 	@Override
-	public Set<Event> getEvents() {
+	public Set<IsEvent> getEvents() {
 		return DEFAULT_EVENTS;
 	}
 

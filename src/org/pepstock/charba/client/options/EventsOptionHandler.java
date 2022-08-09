@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.defaults.IsDefaultEventHandler;
-import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.enums.DefaultEvent;
 import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
@@ -93,7 +93,7 @@ public final class EventsOptionHandler extends PropertyHandler<IsDefaultEventHan
 	 * 
 	 * @param events the browser events that the chart should listen to.
 	 */
-	void setEvents(Event... events) {
+	void setEvents(IsEvent... events) {
 		// gets the array to set
 		ArrayString value = events != null ? ArrayString.fromOrEmpty(true, events) : ArrayString.fromOrNull(true, events);
 		// stores value
@@ -105,7 +105,7 @@ public final class EventsOptionHandler extends PropertyHandler<IsDefaultEventHan
 	 * 
 	 * @param events the browser events that the legend should listen to.
 	 */
-	void setEvents(Set<Event> events) {
+	void setEvents(Set<IsEvent> events) {
 		// gets the array to set
 		ArrayString value = events != null ? ArrayString.fromOrEmpty(events) : ArrayString.fromOrNull(events);
 		// stores value
@@ -117,11 +117,11 @@ public final class EventsOptionHandler extends PropertyHandler<IsDefaultEventHan
 	 * 
 	 * @return the browser events that the chart should listen to.
 	 */
-	Set<Event> getEvents() {
+	Set<IsEvent> getEvents() {
 		// retrieves the array
 		ArrayString array = getArrayValue(Property.EVENTS);
 		// if the array is not consistent returns the default
-		return array != null ? ArraySetHelper.set(array, Event.FACTORY) : getDefaultValues().getEvents();
+		return array != null ? ArraySetHelper.set(array, DefaultEvent.FACTORY) : getDefaultValues().getEvents();
 	}
 
 }

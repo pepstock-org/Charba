@@ -29,7 +29,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.BarBorderRadius;
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -37,6 +36,7 @@ import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.enums.TooltipAlign;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipModel;
+import org.pepstock.charba.client.options.IsEvent;
 
 import jsinterop.annotations.JsFunction;
 
@@ -278,7 +278,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	 * 
 	 * @param events the browser events that the tooltip should listen to.
 	 */
-	public void setEvents(Event... events) {
+	public void setEvents(IsEvent... events) {
 		getConfiguration().getTooltips().setEvents(events);
 	}
 
@@ -287,7 +287,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	 * 
 	 * @return the browser events that the tooltip should listen to.
 	 */
-	public Set<Event> getEvents() {
+	public Set<IsEvent> getEvents() {
 		return getConfiguration().getTooltips().getEvents();
 	}
 
