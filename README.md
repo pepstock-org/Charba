@@ -286,6 +286,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
+ * import CHART.JS GEO controller version [v3.9.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.9.0).
  * enable custom event types to define to CHART.JS options by `IsEvent` interface, on top of the default ones.
  
 License
