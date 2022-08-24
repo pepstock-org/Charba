@@ -16,6 +16,9 @@
 package org.pepstock.charba.client.dom;
 
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.dom.enums.PointerEventType;
+import org.pepstock.charba.client.dom.events.NativePointerEvent;
+import org.pepstock.charba.client.dom.events.PointerEventInit;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -220,5 +223,32 @@ public abstract class BaseElement extends BaseNode {
 	 */
 	@JsMethod
 	public final native boolean hasAttributes();
+
+	/**
+	 * It is used to designate a specific element as the capture target of future pointer events.<br>
+	 * Subsequent events for the pointer will be targeted at the capture element until capture is released (via {@link BaseElement#releasePointerCapture(int)} or the
+	 * {@link PointerEventType#POINTER_UP} event is fired).
+	 * 
+	 * @param pointerId pointer id, retrievable by {@link NativePointerEvent#getId()} or in {@link PointerEventInit#getId()}
+	 */
+	@JsMethod
+	public final native void setPointerCapture(int pointerId);
+
+	/**
+	 * Checks whether the element on which it is invoked has pointer capture for the pointer identified by the given pointer ID.
+	 * 
+	 * @param pointerId pointer id, retrievable by {@link NativePointerEvent#getId()} or in {@link PointerEventInit#getId()}
+	 * @return <code>true</code> whether the element on which it is invoked has pointer capture for the pointer identified by the given pointer ID
+	 */
+	@JsMethod
+	public final native boolean hasPointerCapture(int pointerId);
+
+	/**
+	 * Releases (stops) pointer capture that was previously set for a specific {@link NativePointerEvent}.
+	 * 
+	 * @param pointerId pointer id, retrievable by {@link NativePointerEvent#getId()} or in {@link PointerEventInit#getId()}
+	 */
+	@JsMethod
+	public final native void releasePointerCapture(int pointerId);
 
 }

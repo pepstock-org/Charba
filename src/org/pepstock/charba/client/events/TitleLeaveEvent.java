@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.options.Title;
 
 /**
@@ -36,7 +36,7 @@ public final class TitleLeaveEvent extends AbstractTitleEvent<Title> {
 	 * @param nativeEvent native event of this custom event
 	 * @param item title related to the leave
 	 */
-	public TitleLeaveEvent(BaseNativeEvent nativeEvent, Title item) {
+	public TitleLeaveEvent(NativeAbstractMouseEvent nativeEvent, Title item) {
 		super(nativeEvent, TYPE, item);
 	}
 

@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.TitleClickEvent;
@@ -134,55 +135,70 @@ final class EventTitleHandler extends AbstractEventElementHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleClickEventOnElements(org.pepstock.charba.client.dom.BaseNativeEvent)
+	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleClickEventOnElements(org.pepstock.charba.client.dom.events.NativeBaseEvent)
 	 */
 	@Override
-	void handleClickEventOnElements(BaseNativeEvent event) {
-		// checks if title has been selected and there is any handler
-		if (hasTitleClickHandlers() && getConfiguration().getChart().getNode().getTitle().isInside(event)) {
-			// fires the click event on the chart title
-			getConfiguration().getChart().fireEvent(new TitleClickEvent(event, getConfiguration().getChart().getNode().getOptions().getTitle()));
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleHoverEventOnElements(org.pepstock.charba.client.dom.BaseNativeEvent)
-	 */
-	@Override
-	void handleHoverEventOnElements(BaseNativeEvent event) {
-		// checks if title has been selected and there is any handler
-		if (getConfiguration().getChart().getNode().getTitle().isInside(event)) {
-			// checks if already hovered
-			if (!hoveredTitle) {
-				// checks if handler is set
-				if (hasTitleEnterHandlers()) {
-					// fires the enter event on the chart title
-					getConfiguration().getChart().fireEvent(new TitleEnterEvent(event, getConfiguration().getChart().getNode().getOptions().getTitle()));
-				}
-				// resets flag
-				hoveredTitle = true;
+	void handleClickEventOnElements(NativeBaseEvent event) {
+		// checks if event is a mouse event
+		if (event instanceof NativeAbstractMouseEvent) {
+			// casts to mouse event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+			// checks if title has been selected and there is any handler
+			if (hasTitleClickHandlers() && getConfiguration().getChart().getNode().getTitle().isInside(mouseEvent)) {
+				// fires the click event on the chart title
+				getConfiguration().getChart().fireEvent(new TitleClickEvent(mouseEvent, getConfiguration().getChart().getNode().getOptions().getTitle()));
 			}
-		} else {
-			// if here checks and performs leave event
-			handleLeaveEventOnElements(event);
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleLeaveEventOnElements(org.pepstock.charba.client.dom.BaseNativeEvent)
+	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleHoverEventOnElements(org.pepstock.charba.client.dom.events.NativeBaseEvent)
 	 */
 	@Override
-	void handleLeaveEventOnElements(BaseNativeEvent event) {
-		// checks if title has been left and there is any handler
-		if (hoveredTitle && hasTitleLeaveHandlers()) {
-			// fires the leave event on the chart title
-			getConfiguration().getChart().fireEvent(new TitleLeaveEvent(event, getConfiguration().getChart().getNode().getOptions().getTitle()));
-			// resets status
-			hoveredTitle = false;
+	void handleHoverEventOnElements(NativeBaseEvent event) {
+		// checks if event is a mouse event
+		if (event instanceof NativeAbstractMouseEvent) {
+			// casts to mouse event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+			// checks if title has been selected and there is any handler
+			if (getConfiguration().getChart().getNode().getTitle().isInside(mouseEvent)) {
+				// checks if already hovered
+				if (!hoveredTitle) {
+					// checks if handler is set
+					if (hasTitleEnterHandlers()) {
+						// fires the enter event on the chart title
+						getConfiguration().getChart().fireEvent(new TitleEnterEvent(mouseEvent, getConfiguration().getChart().getNode().getOptions().getTitle()));
+					}
+					// resets flag
+					hoveredTitle = true;
+				}
+			} else {
+				// if here checks and performs leave event
+				handleLeaveEventOnElements(event);
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleLeaveEventOnElements(org.pepstock.charba.client.dom.events.NativeBaseEvent)
+	 */
+	@Override
+	void handleLeaveEventOnElements(NativeBaseEvent event) {
+		// checks if event is a mouse event
+		if (event instanceof NativeAbstractMouseEvent) {
+			// casts to mouse event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+			// checks if title has been left and there is any handler
+			if (hoveredTitle && hasTitleLeaveHandlers()) {
+				// fires the leave event on the chart title
+				getConfiguration().getChart().fireEvent(new TitleLeaveEvent(mouseEvent, getConfiguration().getChart().getNode().getOptions().getTitle()));
+				// resets status
+				hoveredTitle = false;
+			}
 		}
 	}
 

@@ -17,7 +17,6 @@ package org.pepstock.charba.client.dom;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.Heading;
@@ -30,8 +29,6 @@ import org.pepstock.charba.client.dom.elements.Table;
 import org.pepstock.charba.client.dom.elements.TableCell;
 import org.pepstock.charba.client.dom.elements.TableRow;
 import org.pepstock.charba.client.dom.elements.TextNode;
-import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
-import org.pepstock.charba.client.impl.plugins.SelectEventInit;
 
 /**
  * Singleton utility to create and manage DOM element.
@@ -232,32 +229,4 @@ public final class DOMBuilder {
 		return DOM.getDocument().createTextNode(data);
 	}
 
-	/**
-	 * Creates a change event (based on a mouse event, type {@link BaseEventTypes#CONTEXT_MENU}) for internal use.
-	 * 
-	 * @return a change event (based on a mouse event, type {@link BaseEventTypes#CONTEXT_MENU})
-	 */
-	public BaseNativeEvent createChangeEvent() {
-		// creates a mouse event
-		BaseNativeEvent event = DOM.getDocument().createEvent(BaseEventTypes.EVENT_MOUSE);
-		// initializes it as context menu
-		event.initEvent(BaseEventTypes.CONTEXT_MENU, true, false);
-		// returns event
-		return event;
-	}
-
-	/**
-	 * Creates a mouse event, internally used by {@link DatasetsItemsSelector} plugin.
-	 * 
-	 * @param eventInitDict event initialization dictionary to configure the event
-	 * @return a mouse event, internally used by {@link DatasetsItemsSelector} plugin
-	 */
-	public BaseNativeMouseEvent createSelectionEvent(SelectEventInit eventInitDict) {
-		// checks if initialization dictionary is consistent
-		Checker.checkIfValid(eventInitDict, "Mouse event initialization dictionary");
-		// checks if event type is consistent
-		Checker.checkIfValid(eventInitDict.getType(), "Mouse event type");
-		// creates and returns a mouse event
-		return new BaseNativeMouseEvent(eventInitDict.getType(), eventInitDict);
-	}
 }

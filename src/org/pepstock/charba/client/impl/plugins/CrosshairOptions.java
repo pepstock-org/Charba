@@ -29,7 +29,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.enums.DefaultEvent;
+import org.pepstock.charba.client.dom.enums.MouseEventType;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.options.IsEvent;
@@ -215,7 +215,7 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 	@Override
 	public void setEvents(Set<IsEvent> events) {
 		// this is the only event that the plugin should receive from CHART.JS
-		super.setEvents(DefaultEvent.MOUSE_MOVE);
+		super.setEvents(MouseEventType.MOUSE_MOVE);
 	}
 
 	/**

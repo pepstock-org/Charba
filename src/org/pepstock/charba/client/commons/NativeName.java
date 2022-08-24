@@ -351,9 +351,39 @@ public final class NativeName {
 	public static final String DOM_EVENT = "Event";
 
 	/**
+	 * Constant to bind java script object as DOM custom event with name <b>{@value DOM_CUSTOM_EVENT}</b>.
+	 */
+	public static final String DOM_CUSTOM_EVENT = "CustomEvent";
+
+	/**
+	 * Constant to bind java script object as DOM UI event with name <b>{@value DOM_UI_EVENT}</b>.
+	 */
+	public static final String DOM_UI_EVENT = "UIEvent";
+
+	/**
 	 * Constant to bind java script object as DOM mouse event with name <b>{@value DOM_MOUSE_EVENT}</b>.
 	 */
 	public static final String DOM_MOUSE_EVENT = "MouseEvent";
+
+	/**
+	 * Constant to bind java script object as DOM pointer event with name <b>{@value DOM_POINTER_EVENT}</b>.
+	 */
+	public static final String DOM_POINTER_EVENT = "PointerEvent";
+
+	/**
+	 * Constant to bind java script object as DOM touch event with name <b>{@value DOM_TOUCH_EVENT}</b>.
+	 */
+	public static final String DOM_TOUCH_EVENT = "TouchEvent";
+
+	/**
+	 * Constant to bind java script object as DOM touch with name <b>{@value DOM_TOUCH}</b>.
+	 */
+	public static final String DOM_TOUCH = "Touch";
+
+	/**
+	 * Constant to bind java script object as DOM touch event with name <b>{@value DOM_KEYBOARD_EVENT}</b>.
+	 */
+	public static final String DOM_KEYBOARD_EVENT = "KeyboardEvent";
 
 	/**
 	 * Constant to bind java script object as DOM location with name <b>{@value DOM_LOCATION}</b>.
@@ -384,11 +414,6 @@ public final class NativeName {
 	 * Constant to bind java script object as DOM text metrics with name <b>{@value DOM_TEXT_METRICS}</b>.
 	 */
 	public static final String DOM_TEXT_METRICS = "TextMetrics";
-
-	/**
-	 * Constant to bind java script object as DOM touch with name <b>{@value DOM_TOUCH}</b>.
-	 */
-	public static final String DOM_TOUCH = "Touch";
 
 	/**
 	 * Constant to bind java script object number formatter for localization, <b>{@value NUMBER_FORMAT}</b>.

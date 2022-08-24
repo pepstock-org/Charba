@@ -36,12 +36,13 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.configuration.AxisType;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.ChartAxisType;
 import org.pepstock.charba.client.enums.ScaleDataType;
-import org.pepstock.charba.client.events.ChartEventContext;
+import org.pepstock.charba.client.events.HasNativeEvent;
 import org.pepstock.charba.client.options.ScaleId;
 
 /**
@@ -413,15 +414,23 @@ public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 	/**
 	 * Returns the value on the axis related to an event position.
 	 * 
-	 * @param context event context instance used to get the value from the scale
+	 * @param container event container instance used to get the value from the scale
 	 * @return the value on the axis related to an event position
 	 */
-	public final ScaleValueItem getValueAtEvent(ChartEventContext context) {
-		// checks if argument is consistent
-		if (context != null) {
-			return getValueAtEvent(context.getNativeEvent());
+	public final ScaleValueItem getValueAtEvent(HasNativeEvent container) {
+		// checks argument if consistent
+		if (container != null) {
+			// gets native event
+			NativeBaseEvent event = container.getNativeEvent();
+			// it must be a mouse event
+			if (event instanceof NativeAbstractMouseEvent) {
+				// casts to mouse event
+				NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+				return getValueAtEvent(mouseEvent);
+			}
 		}
-		// if here, context is not consistent
+		// if here, argument is not consistent
+		// or not a mouse event
 		return null;
 	}
 
@@ -431,7 +440,7 @@ public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 	 * @param event event instance used to get the value from the scale
 	 * @return the value on the axis related to an event position
 	 */
-	public final ScaleValueItem getValueAtEvent(BaseNativeEvent event) {
+	public final ScaleValueItem getValueAtEvent(NativeAbstractMouseEvent event) {
 		// checks if argument is consistent
 		if (event != null) {
 			// gets the pixel used for searching

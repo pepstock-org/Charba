@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeCustomEvent;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
 import org.pepstock.charba.client.items.ScaleValueItem;
 
@@ -44,7 +44,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent {
 	 * @param from starting value of selected scale
 	 * @param to ending value of selected scale
 	 */
-	public DatasetRangeSelectionEvent(BaseNativeEvent nativeEvent, ScaleValueItem from, ScaleValueItem to) {
+	public DatasetRangeSelectionEvent(NativeCustomEvent nativeEvent, ScaleValueItem from, ScaleValueItem to) {
 		super(nativeEvent, TYPE);
 		// checks if arguments are consistent
 		// stores arguments

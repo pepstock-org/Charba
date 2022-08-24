@@ -20,11 +20,11 @@ import java.util.List;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.plugins.NativeHook;
 
 /**
@@ -247,7 +247,7 @@ final class NativeObjectUtil {
 	 * @param key the name of the property to be defined or modified.
 	 * @param value the object associated with the property.
 	 */
-	static void defineEventProperty(NativeObject object, String key, BaseNativeEvent value) {
+	static void defineEventProperty(NativeObject object, String key, NativeBaseEvent value) {
 		Reflect.set(object, key, value);
 	}
 
@@ -423,7 +423,7 @@ final class NativeObjectUtil {
 	 * @param key the name of the property to test.
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
-	static BaseNativeEvent getEventProperty(NativeObject object, String key) {
+	static NativeBaseEvent getEventProperty(NativeObject object, String key) {
 		return getJSTypeProperty(object, key, null);
 	}
 

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.options.Subtitle;
 
 /**
@@ -36,7 +36,7 @@ public final class SubtitleEnterEvent extends AbstractTitleEvent<Subtitle> {
 	 * @param nativeEvent native event of this custom event
 	 * @param item subtitle related to the enter
 	 */
-	public SubtitleEnterEvent(BaseNativeEvent nativeEvent, Subtitle item) {
+	public SubtitleEnterEvent(NativeAbstractMouseEvent nativeEvent, Subtitle item) {
 		super(nativeEvent, TYPE, item);
 	}
 

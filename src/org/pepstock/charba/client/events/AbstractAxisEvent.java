@@ -17,7 +17,8 @@ package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.configuration.Axis;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
+import org.pepstock.charba.client.dom.events.NativeMouseEvent;
 import org.pepstock.charba.client.items.ScaleItem;
 
 /**
@@ -40,7 +41,7 @@ abstract class AbstractAxisEvent extends AbstractEvent {
 	 * @param item scale item related to the action
 	 * @param axis axis configuration instance
 	 */
-	AbstractAxisEvent(BaseNativeEvent nativeEvent, EventType type, ScaleItem item, Axis axis) {
+	AbstractAxisEvent(NativeAbstractMouseEvent nativeEvent, EventType type, ScaleItem item, Axis axis) {
 		super(nativeEvent, type);
 		// stores arguments
 		// checks if item is consistent
@@ -66,4 +67,12 @@ abstract class AbstractAxisEvent extends AbstractEvent {
 		return axis;
 	}
 
+	/**
+	 * Returns the native event as {@link NativeMouseEvent}.
+	 * 
+	 * @return the native event as {@link NativeMouseEvent}.
+	 */
+	public final NativeAbstractMouseEvent getNativeMouseEvent() {
+		return (NativeAbstractMouseEvent) getNativeEvent();
+	}
 }

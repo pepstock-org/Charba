@@ -16,10 +16,16 @@
 package org.pepstock.charba.client.dom;
 
 import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.events.AbstractEvent;
+import org.pepstock.charba.client.events.HasNativeEvent;
+import org.pepstock.charba.client.options.IsEvent;
 
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -53,7 +59,7 @@ public abstract class BaseEventTarget {
 		 * 
 		 * @param event a event object describing the event that has been fired and needs to be processed.
 		 */
-		void call(BaseNativeEvent event);
+		void call(NativeBaseEvent event);
 	}
 
 	/**
@@ -68,7 +74,6 @@ public abstract class BaseEventTarget {
 	 * 
 	 * @param type a case-sensitive string representing the event type to listen for
 	 * @param listener the object which receives a notification when an event of the specified type occurs
-	 * @see BaseEventTypes
 	 */
 	@JsMethod
 	public final native void addEventListener(String type, CallbackProxy.Proxy listener);
@@ -83,4 +88,68 @@ public abstract class BaseEventTarget {
 	@JsMethod
 	public final native void removeEventListener(String type, CallbackProxy.Proxy listener);
 
+	/**
+	 * Dispatches an {@link NativeBaseEvent} at the specified {@link BaseEventTarget}, (synchronously) invoking the affected event listeners in the appropriate order.
+	 * 
+	 * @param event the {@link NativeBaseEvent} instance to be dispatched.
+	 * @return <code>false</code> if event is cancelable and at least one of the event handlers which received event called {@link NativeBaseEvent#preventDefault()}, otherwise it
+	 *         returns <code>true</code>.
+	 */
+	@JsMethod
+	public final native boolean dispatchEvent(NativeBaseEvent event);
+
+	// --------------------
+	// OVERLAY
+	// --------------------
+
+	/**
+	 * Sets up a function that will be called whenever the specified event is delivered to the target.
+	 * 
+	 * @param type a case-sensitive string representing the event type to listen for
+	 * @param listener the object which receives a notification when an event of the specified type occurs
+	 */
+	@JsOverlay
+	public final void addEventListener(IsEvent type, CallbackProxy.Proxy listener) {
+		// checks if type consistent
+		if (Key.isValid(type)) {
+			// adds listener
+			addEventListener(type.value(), listener);
+		}
+	}
+
+	/**
+	 * Removes from the event target an event listener previously registered.<br>
+	 * The event listener to be removed is identified using a combination of the event type and the event listener function itself.
+	 * 
+	 * @param type a string which specifies the type of event for which to remove an event listener
+	 * @param listener function instance of the event handler to remove from the event target.
+	 */
+	@JsOverlay
+	public final void removeEventListener(IsEvent type, CallbackProxy.Proxy listener) {
+		// checks if type consistent
+		if (Key.isValid(type)) {
+			// adds listener
+			removeEventListener(type.value(), listener);
+		}
+	}
+
+	/**
+	 * Dispatches an {@link AbstractEvent} at the specified {@link BaseEventTarget}, (synchronously) invoking the affected event listeners in the appropriate order.
+	 * 
+	 * @param event the {@link AbstractEvent} instance to be dispatched.
+	 * @return <code>false</code> if event is cancelable and at least one of the event handlers which received event called {@link NativeBaseEvent#preventDefault()}, otherwise it
+	 *         returns <code>true</code>.
+	 */
+	@JsOverlay
+	public final boolean dispatchEvent(HasNativeEvent event) {
+		// checks if argument is consistent
+		if (event != null) {
+			// dispatch event
+			return dispatchEvent(event.getNativeEvent());
+		}
+		// event not consistent
+		// then return false
+		return false;
+
+	}
 }

@@ -29,10 +29,10 @@ import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.dom.BaseEventTypes;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.enums.CursorType;
-import org.pepstock.charba.client.enums.DefaultEvent;
+import org.pepstock.charba.client.dom.enums.MouseEventType;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.events.LegendClickEvent;
@@ -192,31 +192,36 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 	public boolean onBeforeEvent(IsChart chart, PluginEventArgument argument) {
 		// the mouse move is enabled
 		// but not managed in order to work with other plugins
-		if (BaseEventTypes.MOUSE_MOVE.equalsIgnoreCase(argument.getEventContext().getType())) {
+		if (MouseEventType.MOUSE_MOVE.is(argument.getEventContext().getType())) {
 			return true;
 		}
 		// checks if chart is consistent and the plugin has been invoked for LINE or BAR charts
 		if (mustBeActivated(chart) && pluginSelectionHandlers.containsKey(chart.getId())) {
 			// gets native event
-			BaseNativeEvent event = argument.getEventContext().getNativeEvent();
-			// gets selection handler
-			SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
-			// manages event
-			// if returns false
-			// does not continue
-			// avoiding to propagate the event
-			if (!manageClickEvent(chart, event, handler)) {
-				return false;
-			}
-			// This control has been added because a click event is always fired
-			// by canvas when mouse up (of selection handler) is performed
-			// but to avoid to refresh the chart every time
-			// selection handler sets a flag to check this condition
-			if (handler.isPreventClickEvent()) {
-				// resets flag
-				handler.resetPreventClickEvent();
-				// and forces the event will be discarded.
-				return false;
+			NativeBaseEvent event = argument.getEventContext().getNativeEvent();
+			// checks if is a mouse event
+			if (event instanceof NativeAbstractMouseEvent) {
+				// cats to mouse event
+				NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+				// gets selection handler
+				SelectionHandler handler = pluginSelectionHandlers.get(chart.getId());
+				// manages event
+				// if returns false
+				// does not continue
+				// avoiding to propagate the event
+				if (!manageClickEvent(chart, mouseEvent, handler)) {
+					return false;
+				}
+				// This control has been added because a click event is always fired
+				// by canvas when mouse up (of selection handler) is performed
+				// but to avoid to refresh the chart every time
+				// selection handler sets a flag to check this condition
+				if (handler.isPreventClickEvent()) {
+					// resets flag
+					handler.resetPreventClickEvent();
+					// and forces the event will be discarded.
+					return false;
+				}
 			}
 		}
 		// if here, propagates the event to other listeners
@@ -404,10 +409,10 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 	 * @param handler selection handler related to chart instance
 	 * @return <code>true</code> if must continue the event management
 	 */
-	private boolean manageClickEvent(IsChart chart, BaseNativeEvent event, SelectionHandler handler) {
+	private boolean manageClickEvent(IsChart chart, NativeAbstractMouseEvent event, SelectionHandler handler) {
 		// checks if it is a click event
 		// ONLY click are caught
-		if (DefaultEvent.CLICK.value().equalsIgnoreCase(event.getType())) {
+		if (MouseEventType.CLICK.is(event)) {
 			// option instance
 			DatasetsItemsSelectorOptions pOptions = handler.getOptions();
 			// get selection cleaner element

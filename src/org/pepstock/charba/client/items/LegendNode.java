@@ -24,7 +24,7 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -152,10 +152,10 @@ public final class LegendNode extends BaseBoxNodeItem<Position> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.items.BaseBoxItem#isInside(org.pepstock.charba.client.dom.BaseNativeEvent)
+	 * @see org.pepstock.charba.client.items.BaseBoxItem#isInside(org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent)
 	 */
 	@Override
-	public boolean isInside(BaseNativeEvent event) {
+	public boolean isInside(NativeAbstractMouseEvent event) {
 		// checks if inside the legend
 		if (super.isInside(event)) {
 			// checks all hit boxes

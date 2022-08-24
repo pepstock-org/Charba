@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.utils.toast.ToastItem.CommonProperty;
 import org.pepstock.charba.client.utils.toast.handlers.ClickEventHandler;
 import org.pepstock.charba.client.utils.toast.handlers.CloseHandler;
@@ -60,7 +60,7 @@ public final class ToastOptions extends AbstractToastOptions {
 		 * @param itemId toast item id affected by event
 		 * @param event event fired on item
 		 */
-		void call(int itemId, BaseNativeEvent event);
+		void call(int itemId, NativeBaseEvent event);
 	}
 
 	/**

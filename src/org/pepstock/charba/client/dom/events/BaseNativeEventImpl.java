@@ -13,33 +13,32 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.dom;
+package org.pepstock.charba.client.dom.events;
 
 import org.pepstock.charba.client.commons.NativeName;
-import org.pepstock.charba.client.impl.plugins.SelectEventInit;
+import org.pepstock.charba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Represents a mouse events that occur due to the user interacting with a pointing device.<br>
- * This is used only internally.
+ * Internal implementation of a base native event.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.DOM_MOUSE_EVENT, namespace = JsPackage.GLOBAL)
-public final class BaseNativeMouseEvent extends BaseNativeEvent {
+@JsType(isNative = true, name = NativeName.DOM_EVENT, namespace = JsPackage.GLOBAL)
+final class BaseNativeEventImpl extends NativeBaseEvent {
 
 	/**
-	 * Create a mouse event by its type and initialization configuration.
+	 * Create a native event by its type and initialization configuration.
 	 * 
-	 * @param type type of the mouse event
-	 * @param eventInitDict event initialization dictionary to configure the event
+	 * @param type type of the native event
+	 * @param init event initialization dictionary to configure the event
 	 */
 	// Ignores SonarCloud issue, java:S1172 - Unused method parameters should be removed, because this is the way of JSINTEROP to invoke a JavaScript constructor.
 	@SuppressWarnings("java:S1172")
-	BaseNativeMouseEvent(String type, SelectEventInit eventInitDict) {
+	BaseNativeEventImpl(String type, NativeObject init) {
 		// do nothing
 	}
 

@@ -21,6 +21,7 @@ import java.util.List;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.TimeSeriesItem;
+import org.pepstock.charba.client.dom.enums.EventButton;
 import org.pepstock.charba.client.enums.BorderAlign;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.intl.enums.MeasureUnit;
@@ -119,6 +120,11 @@ public class ArrayUtil {
 	 * An empty immutable {@link ActionItem} array.
 	 */
 	public static final ActionItem[] EMPTY_ACTION_ITEM_ARRAY = {};
+
+	/**
+	 * An empty immutable {@link EventButton} array.
+	 */
+	public static final EventButton[] EMPTY_EVENT_BUTTON_ARRAY = {};
 
 	/**
 	 * To avoid any instantiation
@@ -458,5 +464,18 @@ public class ArrayUtil {
 			return EMPTY_ACTION_ITEM_ARRAY;
 		}
 		return list.toArray(EMPTY_ACTION_ITEM_ARRAY);
+	}
+
+	/**
+	 * Returns an array of dates from a list.
+	 *
+	 * @param list list of objects to transform
+	 * @return an array of dates from a list
+	 */
+	public static EventButton[] toEventButtons(final List<EventButton> list) {
+		if (!ArrayListHelper.isConsistent(list)) {
+			return EMPTY_EVENT_BUTTON_ARRAY;
+		}
+		return list.toArray(EMPTY_EVENT_BUTTON_ARRAY);
 	}
 }

@@ -22,6 +22,7 @@ import java.util.List;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.events.Touch;
 
 /**
  * Utility to create array list objects from java script arrays.
@@ -100,6 +101,19 @@ public final class ArrayListHelper {
 		// if values not consistent
 		// creates an empty list
 		return new ArrayCanvasList(values);
+	}
+
+	/**
+	 * Creates a array list of touches by a java script array of touches.
+	 * 
+	 * @param values array of elements to load when the list is creating.
+	 * @return a array list of touches instance
+	 */
+	public static ArrayTouchList list(ArrayTouch values) {
+		// creates the list
+		// if values not consistent
+		// creates an empty list
+		return new ArrayTouchList(values);
 	}
 
 	/**
@@ -252,6 +266,16 @@ public final class ArrayListHelper {
 	 * @return a array list of canvas instance
 	 */
 	public static List<Canvas> unmodifiableList(ArrayCanvas values) {
+		return Collections.unmodifiableList(list(values));
+	}
+
+	/**
+	 * Creates a array list of touches by a java script array of touches.
+	 * 
+	 * @param values array of elements to load when the list is creating.
+	 * @return a array list of touches instance
+	 */
+	public static List<Touch> unmodifiableList(ArrayTouch values) {
 		return Collections.unmodifiableList(list(values));
 	}
 

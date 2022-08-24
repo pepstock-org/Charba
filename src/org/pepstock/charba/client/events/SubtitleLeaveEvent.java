@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.options.Subtitle;
 
 /**
@@ -36,7 +36,7 @@ public final class SubtitleLeaveEvent extends AbstractTitleEvent<Subtitle> {
 	 * @param nativeEvent native event of this custom event
 	 * @param item subtitle related to the leave
 	 */
-	public SubtitleLeaveEvent(BaseNativeEvent nativeEvent, Subtitle item) {
+	public SubtitleLeaveEvent(NativeAbstractMouseEvent nativeEvent, Subtitle item) {
 		super(nativeEvent, TYPE, item);
 	}
 

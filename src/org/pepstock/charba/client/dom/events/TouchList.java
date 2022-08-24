@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.dom;
+package org.pepstock.charba.client.dom.events;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -51,5 +51,5 @@ public final class TouchList {
 	 * @return the touch object at the specified index
 	 */
 	@JsMethod
-	public native BaseTouch item(int index);
+	public native Touch item(int index);
 }

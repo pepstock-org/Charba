@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.utils.toast.ToastItem.CommonProperty;
 import org.pepstock.charba.client.utils.toast.handlers.ActionClickEventHandler;
 
@@ -55,7 +55,7 @@ public final class ActionItem extends Action {
 		 * @param event event fired on item
 		 * @return <code>true</code> if the toaster must be close after click on action
 		 */
-		boolean call(int itemId, BaseNativeEvent event);
+		boolean call(int itemId, NativeBaseEvent event);
 	}
 
 	// ---------------------------

@@ -19,8 +19,8 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
-import org.pepstock.charba.client.dom.BaseEventTypes;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.enums.MouseEventType;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 
 /**
  * Base class to manage the events on canvas for chart elements, like title and axes.
@@ -87,10 +87,10 @@ abstract class AbstractEventElementHandler implements IsEventProvider {
 			// checks if must be add
 			if (isAdding) {
 				// adds listener
-				configuration.getChart().getCanvas().addEventListener(BaseEventTypes.CLICK, clickCallbackProxy.getProxy());
+				configuration.getChart().getCanvas().addEventListener(MouseEventType.CLICK, clickCallbackProxy.getProxy());
 			} else {
 				// removes listener
-				configuration.getChart().getCanvas().removeEventListener(BaseEventTypes.CLICK, clickCallbackProxy.getProxy());
+				configuration.getChart().getCanvas().removeEventListener(MouseEventType.CLICK, clickCallbackProxy.getProxy());
 			}
 		}
 	}
@@ -108,12 +108,12 @@ abstract class AbstractEventElementHandler implements IsEventProvider {
 			// checks if must be add
 			if (isAdding) {
 				// adds listeners
-				configuration.getChart().getCanvas().addEventListener(BaseEventTypes.MOUSE_MOVE, hoverCallbackProxy.getProxy());
-				configuration.getChart().getCanvas().addEventListener(BaseEventTypes.MOUSE_LEAVE, leaveCallbackProxy.getProxy());
+				configuration.getChart().getCanvas().addEventListener(MouseEventType.MOUSE_MOVE, hoverCallbackProxy.getProxy());
+				configuration.getChart().getCanvas().addEventListener(MouseEventType.MOUSE_LEAVE, leaveCallbackProxy.getProxy());
 			} else {
 				// removes listeners
-				configuration.getChart().getCanvas().removeEventListener(BaseEventTypes.MOUSE_MOVE, hoverCallbackProxy.getProxy());
-				configuration.getChart().getCanvas().removeEventListener(BaseEventTypes.MOUSE_LEAVE, leaveCallbackProxy.getProxy());
+				configuration.getChart().getCanvas().removeEventListener(MouseEventType.MOUSE_MOVE, hoverCallbackProxy.getProxy());
+				configuration.getChart().getCanvas().removeEventListener(MouseEventType.MOUSE_LEAVE, leaveCallbackProxy.getProxy());
 			}
 		}
 	}
@@ -123,20 +123,20 @@ abstract class AbstractEventElementHandler implements IsEventProvider {
 	 * 
 	 * @param event event generated on chart
 	 */
-	abstract void handleClickEventOnElements(BaseNativeEvent event);
+	abstract void handleClickEventOnElements(NativeBaseEvent event);
 
 	/**
 	 * Check if the hover event on element of chart and manage it firing the event.
 	 * 
 	 * @param event event generated on chart
 	 */
-	abstract void handleHoverEventOnElements(BaseNativeEvent event);
+	abstract void handleHoverEventOnElements(NativeBaseEvent event);
 
 	/**
 	 * Check if the leave event on element of chart and manage it firing the event.
 	 * 
 	 * @param event event generated on chart
 	 */
-	abstract void handleLeaveEventOnElements(BaseNativeEvent event);
+	abstract void handleLeaveEventOnElements(NativeBaseEvent event);
 
 }

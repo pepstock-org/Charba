@@ -17,7 +17,7 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -25,7 +25,7 @@ import org.pepstock.charba.client.enums.Position;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LegendHitBoxItem extends SizeItem {
+public final class LegendHitBoxItem extends SizeItem implements HasInsideChecker {
 
 	// static instance for the legend item hit box factory
 	static final LegendHitBoxItemFactory FACTORY = new LegendHitBoxItemFactory();
@@ -63,7 +63,8 @@ public final class LegendHitBoxItem extends SizeItem {
 	 * @param event event to check if inside the box
 	 * @return <code>true</code> if the chart event is inside of this box, otherwise <code>false</code>
 	 */
-	public boolean isInside(BaseNativeEvent event) {
+	@Override
+	public boolean isInside(NativeAbstractMouseEvent event) {
 		// checks is properties are consistent
 		if (has(Position.LEFT) && has(Position.TOP)) {
 			// checks X

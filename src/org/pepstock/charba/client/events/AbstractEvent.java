@@ -17,7 +17,7 @@ package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 
 /**
  * Abstract event for all events which must contain a native event.<br>
@@ -26,12 +26,12 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractEvent extends Event {
+public abstract class AbstractEvent extends Event implements HasNativeEvent {
 
 	// event type instance
 	private final EventType type;
 	// native event
-	private final BaseNativeEvent nativeEvent;
+	private final NativeBaseEvent nativeEvent;
 
 	/**
 	 * Creates an event using a native event
@@ -39,7 +39,7 @@ public abstract class AbstractEvent extends Event {
 	 * @param nativeEvent native event of this custom event
 	 * @param type type of event
 	 */
-	protected AbstractEvent(BaseNativeEvent nativeEvent, EventType type) {
+	protected AbstractEvent(NativeBaseEvent nativeEvent, EventType type) {
 		super();
 		// stores arguments
 		// checks if native event is consistent
@@ -64,7 +64,8 @@ public abstract class AbstractEvent extends Event {
 	 * @return the nativeEvent
 	 * 
 	 */
-	public final BaseNativeEvent getNativeEvent() {
+	@Override
+	public final NativeBaseEvent getNativeEvent() {
 		return nativeEvent;
 	}
 

@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.options.ScaleId;
 
 /**
@@ -34,7 +34,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ScalesNode extends NativeObjectContainer {
+public final class ScalesNode extends NativeObjectContainer implements HasInsideChecker {
 
 	/**
 	 * Creates the item using an envelop with the native java script object which contains all properties.
@@ -73,7 +73,7 @@ public final class ScalesNode extends NativeObjectContainer {
 	 * @param event event to check if inside of one of scales.
 	 * @return the scale item if the chart event is inside of one of scales, otherwise <code>null</code>
 	 */
-	public ScaleItem getScaleIsInside(BaseNativeEvent event) {
+	public ScaleItem getScaleIsInside(NativeAbstractMouseEvent event) {
 		// gets all keys
 		List<Key> keys = keys();
 		// if keys are consistent
@@ -100,7 +100,8 @@ public final class ScalesNode extends NativeObjectContainer {
 	 * @param event event to check if inside of one of scales.
 	 * @return <code>true</code> if the chart event is inside of one of scales, otherwise <code>false</code>
 	 */
-	public boolean isInside(BaseNativeEvent event) {
+	@Override
+	public boolean isInside(NativeAbstractMouseEvent event) {
 		return getScaleIsInside(event) != null;
 	}
 }

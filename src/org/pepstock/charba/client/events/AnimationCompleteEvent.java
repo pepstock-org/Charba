@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeCustomEvent;
 import org.pepstock.charba.client.items.AnimationItem;
 
 /**
@@ -36,7 +36,7 @@ public final class AnimationCompleteEvent extends AbstractAnimationEvent {
 	 * @param nativeEvent native event of this custom event
 	 * @param item item with animation info from chart
 	 */
-	public AnimationCompleteEvent(BaseNativeEvent nativeEvent, AnimationItem item) {
+	public AnimationCompleteEvent(NativeCustomEvent nativeEvent, AnimationItem item) {
 		super(nativeEvent, TYPE, item);
 	}
 

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeCustomEvent;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
 
 /**
@@ -36,7 +36,7 @@ public final class DatasetRangeCleanSelectionEvent extends AbstractEvent {
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 */
-	public DatasetRangeCleanSelectionEvent(BaseNativeEvent nativeEvent) {
+	public DatasetRangeCleanSelectionEvent(NativeCustomEvent nativeEvent) {
 		super(nativeEvent, TYPE);
 	}
 

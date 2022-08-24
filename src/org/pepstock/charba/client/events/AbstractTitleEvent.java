@@ -16,7 +16,8 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
+import org.pepstock.charba.client.dom.events.NativeMouseEvent;
 import org.pepstock.charba.client.options.AbstractTitle;
 
 /**
@@ -36,7 +37,7 @@ abstract class AbstractTitleEvent<T extends AbstractTitle<?>> extends AbstractEv
 	 * @param type type of event
 	 * @param item title related to the action
 	 */
-	AbstractTitleEvent(BaseNativeEvent nativeEvent, EventType type, T item) {
+	AbstractTitleEvent(NativeAbstractMouseEvent nativeEvent, EventType type, T item) {
 		super(nativeEvent, type);
 		// checks if argument is consistent
 		this.item = Checker.checkAndGetIfValid(item, "Title item argument");
@@ -51,4 +52,12 @@ abstract class AbstractTitleEvent<T extends AbstractTitle<?>> extends AbstractEv
 		return item;
 	}
 
+	/**
+	 * Returns the native event as {@link NativeMouseEvent}.
+	 * 
+	 * @return the native event as {@link NativeMouseEvent}.
+	 */
+	public final NativeAbstractMouseEvent getNativeMouseEvent() {
+		return (NativeAbstractMouseEvent) getNativeEvent();
+	}
 }

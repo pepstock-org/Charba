@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.defaults.IsDefaultEventHandler;
-import org.pepstock.charba.client.enums.DefaultEvent;
+import org.pepstock.charba.client.enums.DefaultEvents;
 import org.pepstock.charba.client.plugins.PluginsEnvelop;
 
 /**
@@ -121,7 +121,7 @@ public final class EventsOptionHandler extends PropertyHandler<IsDefaultEventHan
 		// retrieves the array
 		ArrayString array = getArrayValue(Property.EVENTS);
 		// if the array is not consistent returns the default
-		return array != null ? ArraySetHelper.set(array, DefaultEvent.FACTORY) : getDefaultValues().getEvents();
+		return array != null ? ArraySetHelper.set(array, DefaultEvents.FACTORY) : getDefaultValues().getEvents();
 	}
 
 }

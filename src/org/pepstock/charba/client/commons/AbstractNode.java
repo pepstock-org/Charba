@@ -21,11 +21,11 @@ import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.plugins.NativeHook;
 
 /**
@@ -469,7 +469,7 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
 	 */
-	protected final void setValueAndAddToParent(Key key, BaseNativeEvent value) {
+	protected final void setValueAndAddToParent(Key key, NativeBaseEvent value) {
 		setValue(key, value);
 		// checks if the node is already added to parent
 		checkAndAddToParent();

@@ -24,10 +24,10 @@ import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.enums.ImageMimeType;
 import org.pepstock.charba.client.events.Event;
 import org.pepstock.charba.client.events.EventHandler;
@@ -559,7 +559,7 @@ public interface IsChart {
 	 * @param event event of chart.
 	 * @return dataset item.
 	 */
-	List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event);
+	List<DatasetReference> getDatasetAtEvent(NativeBaseEvent event);
 
 	/**
 	 * Looks for the dataset if it's visible or not, selected by index.
@@ -644,7 +644,7 @@ public interface IsChart {
 	 * @param event event of chart.
 	 * @return single element at the event position or null.
 	 */
-	DatasetReference getElementAtEvent(BaseNativeEvent event);
+	DatasetReference getElementAtEvent(NativeBaseEvent event);
 
 	/**
 	 * Calling on your chart instance passing an argument of an event, will return the single element at the event position.<br>
@@ -654,7 +654,7 @@ public interface IsChart {
 	 * @param interaction how the elements will be checked.
 	 * @return single element at the event position or <code>null</code> if event is not consistent
 	 */
-	DatasetReference getElementAtEvent(BaseNativeEvent event, InteractionItem interaction);
+	DatasetReference getElementAtEvent(NativeBaseEvent event, InteractionItem interaction);
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
@@ -663,7 +663,7 @@ public interface IsChart {
 	 * @param event event of chart.
 	 * @return all elements at the same data index or an empty list.
 	 */
-	List<DatasetReference> getElementsAtEvent(BaseNativeEvent event);
+	List<DatasetReference> getElementsAtEvent(NativeBaseEvent event);
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
@@ -673,7 +673,7 @@ public interface IsChart {
 	 * @param interaction how the elements will be checked.
 	 * @return all elements at the same data index or an empty list.
 	 */
-	List<DatasetReference> getElementsAtEvent(BaseNativeEvent event, InteractionItem interaction);
+	List<DatasetReference> getElementsAtEvent(NativeBaseEvent event, InteractionItem interaction);
 
 	/**
 	 * Draws the chart

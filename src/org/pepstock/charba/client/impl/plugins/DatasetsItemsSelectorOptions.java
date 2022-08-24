@@ -27,7 +27,8 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.enums.DefaultEvent;
+import org.pepstock.charba.client.dom.enums.MouseEventType;
+import org.pepstock.charba.client.dom.enums.TouchEventType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.options.IsEvent;
@@ -211,7 +212,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 		// these are the only events that the plugin should receive from CHART.JS
 		// MOUSE MOVE is added even if not managed because this enables the usage
 		// of other plugins with this one
-		super.setEvents(DefaultEvent.CLICK, DefaultEvent.TOUCH_START, DefaultEvent.MOUSE_MOVE);
+		super.setEvents(MouseEventType.CLICK, TouchEventType.TOUCH_START, MouseEventType.MOUSE_MOVE);
 	}
 
 	/**

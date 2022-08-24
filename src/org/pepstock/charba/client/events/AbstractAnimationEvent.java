@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.commons.Checker;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.items.AnimationItem;
 
 /**
@@ -36,7 +36,7 @@ abstract class AbstractAnimationEvent extends AbstractEvent {
 	 * @param type type of event
 	 * @param item item with animation info from chart
 	 */
-	AbstractAnimationEvent(BaseNativeEvent nativeEvent, EventType type, AnimationItem item) {
+	AbstractAnimationEvent(NativeBaseEvent nativeEvent, EventType type, AnimationItem item) {
 		super(nativeEvent, type);
 		// checks if item is consistent
 		// stores argument

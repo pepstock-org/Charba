@@ -18,7 +18,6 @@ package org.pepstock.charba.client.dom;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.dom.elements.Body;
 
-import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -46,16 +45,5 @@ public final class BaseHtmlDocument extends BaseDocument {
 	 */
 	@JsProperty
 	public native Body getBody();
-
-	/**
-	 * Creates an event of the type specified.<br>
-	 * The returned object should be first initialized and can then be dispatched.
-	 * 
-	 * @param type a string that represents the type of event to be created.
-	 * @return an event of the type specified
-	 * @see BaseEventTypes
-	 */
-	@JsMethod
-	native BaseNativeEvent createEvent(String type);
 
 }

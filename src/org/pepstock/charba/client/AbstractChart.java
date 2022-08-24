@@ -39,15 +39,15 @@ import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.chart.DefaultChartOptions;
 import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
-import org.pepstock.charba.client.dom.BaseEventTypes;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.elements.Heading;
 import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.dom.enums.MouseEventType;
 import org.pepstock.charba.client.dom.enums.Position;
 import org.pepstock.charba.client.dom.enums.Unit;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.enums.ImageMimeType;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.events.AddHandlerEvent;
@@ -162,10 +162,10 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// -- SET CALLBACKS to PROXIES ---
 			// -------------------------------
 			// sets function to proxy callback in order to invoke the java interface
-			this.canvasCallbackProxy.setCallback(BaseNativeEvent::preventDefault);
+			this.canvasCallbackProxy.setCallback(NativeBaseEvent::preventDefault);
 			// adds the listener to disable canvas selection
 			// removes the default behavior
-			this.canvas.addEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());
+			this.canvas.addEventListener(MouseEventType.MOUSE_DOWN, canvasCallbackProxy.getProxy());
 		} else {
 			// creates a header element
 			Heading h = DOMBuilder.get().createHeadingElement();
@@ -333,7 +333,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	@Override
 	public final void removeCanvasPreventDefault() {
 		// cleans up the handler for mouse listener
-		canvas.removeEventListener(BaseEventTypes.MOUSE_DOWN, canvasCallbackProxy.getProxy());
+		canvas.removeEventListener(MouseEventType.MOUSE_DOWN, canvasCallbackProxy.getProxy());
 	}
 
 	/**
@@ -1044,7 +1044,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return data set items references list or or an empty list.
 	 */
 	@Override
-	public final List<DatasetReference> getDatasetAtEvent(BaseNativeEvent event) {
+	public final List<DatasetReference> getDatasetAtEvent(NativeBaseEvent event) {
 		return getElementsAtEvent(event, DEFAULT_INTERACTION);
 	}
 
@@ -1228,7 +1228,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return single element at the event position or <code>null</code> if event is not consistent
 	 */
 	@Override
-	public final DatasetReference getElementAtEvent(BaseNativeEvent event) {
+	public final DatasetReference getElementAtEvent(NativeBaseEvent event) {
 		return getElementAtEvent(event, null);
 	}
 
@@ -1241,7 +1241,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return single element at the event position or <code>null</code> if event is not consistent
 	 */
 	@Override
-	public final DatasetReference getElementAtEvent(BaseNativeEvent event, InteractionItem interaction) {
+	public final DatasetReference getElementAtEvent(NativeBaseEvent event, InteractionItem interaction) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks if interaction is consistent
@@ -1266,7 +1266,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return all elements at the same data index or an empty list.
 	 */
 	@Override
-	public final List<DatasetReference> getElementsAtEvent(BaseNativeEvent event) {
+	public final List<DatasetReference> getElementsAtEvent(NativeBaseEvent event) {
 		return getElementsAtEvent(event, DEFAULT_INTERACTION);
 	}
 
@@ -1279,7 +1279,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return all elements at the same data index or an empty list.
 	 */
 	@Override
-	public final List<DatasetReference> getElementsAtEvent(BaseNativeEvent event, InteractionItem interaction) {
+	public final List<DatasetReference> getElementsAtEvent(NativeBaseEvent event, InteractionItem interaction) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks if interaction is consistent

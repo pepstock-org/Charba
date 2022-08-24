@@ -36,7 +36,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.ChartClickEvent;
@@ -213,7 +213,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(new ConfigurationEnvelop<>(event));
 			// gets the native event
-			BaseNativeEvent nativeEvent = eventContext.getNativeEvent();
+			NativeBaseEvent nativeEvent = eventContext.getNativeEvent();
 			// handle click event for dataset
 			handleDatasetSelection(nativeEvent);
 			// fires the click event on the chart
@@ -228,7 +228,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		});
 		this.resizeCallbackProxy.setCallback((nativeChart, size) -> {
 			// creates a event context
-			ChartEventContext eventContext = new ChartEventContext(nativeChart);
+			ChartEventContext eventContext = new ChartEventContext(getChart(), nativeChart);
 			// fires the resize event on chart
 			getChart().fireEvent(new ChartResizeEvent(eventContext, new SizeItem(new ConfigurationEnvelop<>(size, true))));
 		});
@@ -966,7 +966,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * 
 	 * @param event event generated on chart
 	 */
-	private void handleDatasetSelection(BaseNativeEvent event) {
+	private void handleDatasetSelection(NativeBaseEvent event) {
 		// gets the data set items by event
 		DatasetReference item = getChart().getElementAtEvent(event);
 		// if the item is consistent and there is any handler

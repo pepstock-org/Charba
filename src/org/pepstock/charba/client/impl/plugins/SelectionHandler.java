@@ -25,19 +25,23 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.dom.BaseElement;
 import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
-import org.pepstock.charba.client.dom.BaseEventTypes;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.dom.enums.MouseEventType;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.dom.events.MouseEventInit;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
+import org.pepstock.charba.client.dom.events.NativeCustomEvent;
+import org.pepstock.charba.client.dom.events.NativeMouseEvent;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
+import org.pepstock.charba.client.impl.plugins.enums.DatasetSeletionEventType;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.IsArea;
@@ -55,9 +59,9 @@ import org.pepstock.charba.client.utils.Utilities;
 final class SelectionHandler {
 
 	// custom event type for programmatically selection
-	static final String INTERNAL_MOUSE_DOWN = BaseEventTypes.MOUSE_DOWN + System.currentTimeMillis();
+	static final String INTERNAL_MOUSE_DOWN = MouseEventType.MOUSE_DOWN.value() + System.currentTimeMillis();
 	// custom event type for programmatically selection
-	static final String INTERNAL_MOUSE_UP = BaseEventTypes.MOUSE_UP + System.currentTimeMillis();
+	static final String INTERNAL_MOUSE_UP = MouseEventType.MOUSE_UP.value() + System.currentTimeMillis();
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -191,10 +195,10 @@ final class SelectionHandler {
 	 */
 	void addListeners() {
 		// adds to the canvas all event listeners
-		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_DOWN, mouseDownCallbackProxy.getProxy());
-		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
-		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_LEAVE, mouseLeaveCallbackProxy.getProxy());
-		chart.getCanvas().addEventListener(BaseEventTypes.MOUSE_UP, mouseUpCallbackProxy.getProxy());
+		chart.getCanvas().addEventListener(MouseEventType.MOUSE_DOWN, mouseDownCallbackProxy.getProxy());
+		chart.getCanvas().addEventListener(MouseEventType.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
+		chart.getCanvas().addEventListener(MouseEventType.MOUSE_LEAVE, mouseLeaveCallbackProxy.getProxy());
+		chart.getCanvas().addEventListener(MouseEventType.MOUSE_UP, mouseUpCallbackProxy.getProxy());
 		chart.getCanvas().addEventListener(INTERNAL_MOUSE_DOWN, internalMouseDownCallbackProxy.getProxy());
 		chart.getCanvas().addEventListener(INTERNAL_MOUSE_UP, internalMouseUpCallbackProxy.getProxy());
 	}
@@ -204,10 +208,10 @@ final class SelectionHandler {
 	 */
 	private void removeListeners() {
 		// adds to the canvas all event listeners
-		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_DOWN, mouseDownCallbackProxy.getProxy());
-		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
-		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_LEAVE, mouseLeaveCallbackProxy.getProxy());
-		chart.getCanvas().removeEventListener(BaseEventTypes.MOUSE_UP, mouseUpCallbackProxy.getProxy());
+		chart.getCanvas().removeEventListener(MouseEventType.MOUSE_DOWN, mouseDownCallbackProxy.getProxy());
+		chart.getCanvas().removeEventListener(MouseEventType.MOUSE_MOVE, mouseMoveCallbackProxy.getProxy());
+		chart.getCanvas().removeEventListener(MouseEventType.MOUSE_LEAVE, mouseLeaveCallbackProxy.getProxy());
+		chart.getCanvas().removeEventListener(MouseEventType.MOUSE_UP, mouseUpCallbackProxy.getProxy());
 		chart.getCanvas().removeEventListener(INTERNAL_MOUSE_DOWN, internalMouseDownCallbackProxy.getProxy());
 		chart.getCanvas().removeEventListener(INTERNAL_MOUSE_UP, internalMouseUpCallbackProxy.getProxy());
 	}
@@ -217,20 +221,25 @@ final class SelectionHandler {
 	 * 
 	 * @param event canvas mouse event.
 	 */
-	void onMouseDown(BaseNativeEvent event) {
-		// removes the default behavior of mouse down on canvas
-		// this removes the canvas selection
-		event.preventDefault();
-		// gets modifier key options
-		ModifierKey modifier = options.getModifierKey();
-		// if the mouse down event points
-		// are in chart area and has got datasets items
-		// checking also if modifier key is configured and pressed
-		if (isEventInChartArea(event) && (modifier == null || modifier.isPressed(event))) {
-			// sets cursor
-			chart.getCanvas().getStyle().setCursorType(CursorType.CROSSHAIR);
-			// then start selection with X coordinate
-			startSelection(event.getX());
+	void onMouseDown(NativeBaseEvent event) {
+		// checks if mouse event
+		if (event instanceof NativeAbstractMouseEvent) {
+			// casts to mouce event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+			// removes the default behavior of mouse down on canvas
+			// this removes the canvas selection
+			event.preventDefault();
+			// gets modifier key options
+			ModifierKey modifier = options.getModifierKey();
+			// if the mouse down event points
+			// are in chart area and has got datasets items
+			// checking also if modifier key is configured and pressed
+			if (isEventInChartArea(mouseEvent) && (modifier == null || modifier.isPressed(mouseEvent))) {
+				// sets cursor
+				chart.getCanvas().getStyle().setCursorType(CursorType.CROSSHAIR);
+				// then start selection with X coordinate
+				startSelection(mouseEvent.getLayerX());
+			}
 		}
 	}
 
@@ -239,39 +248,44 @@ final class SelectionHandler {
 	 * 
 	 * @param event canvas mouse event.
 	 */
-	void onMouseMove(BaseNativeEvent event) {
-		// if the mouse move event points
-		// are out of chart area
-		if (!isEventInChartArea(event)) {
-			// figures out as an end of selection
-			onMouseUp(event);
-			return;
-		}
-		// removes the default behavior of mouse down on canvas
-		// this removes the canvas selection
-		event.preventDefault();
-		// if the status of is in selecting
-		// means that mouse down is already done
-		if (getStatus().equals(SelectionStatus.SELECTING)) {
-			// updates the selection in the canvas
-			updateSelection(event.getX());
-			chart.draw();
-		} else if (isEventInSelectionCleaner(event) && getStatus().equals(SelectionStatus.SELECTED)) {
-			// if here
-			// the mouse is hovering the selection cleaner
-			// checks if was already hover
-			// using the cursor previously saved
-			if (cursorOverSelectionCleaner == null) {
-				// gets cursor
-				cursorOverSelectionCleaner = Utilities.getCursorOfChart(chart);
+	void onMouseMove(NativeBaseEvent event) {
+		// checks if mouse event
+		if (event instanceof NativeAbstractMouseEvent) {
+			// casts to mouce event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+			// if the mouse move event points
+			// are out of chart area
+			if (!isEventInChartArea(mouseEvent)) {
+				// figures out as an end of selection
+				onMouseUp(event);
+				return;
 			}
-			// sets cursor pointer because hover the selection cleaner
-			chart.getCanvas().getStyle().setCursorType(CursorType.POINTER);
-		} else if (cursorOverSelectionCleaner != null) {
-			// if here, the mouse is not selecting and not hover the selection cleaner
-			// but before it was on selection cleaner therefore reset the cursor and the instance
-			chart.getCanvas().getStyle().setCursorType(cursorOverSelectionCleaner);
-			cursorOverSelectionCleaner = null;
+			// removes the default behavior of mouse down on canvas
+			// this removes the canvas selection
+			event.preventDefault();
+			// if the status of is in selecting
+			// means that mouse down is already done
+			if (getStatus().equals(SelectionStatus.SELECTING)) {
+				// updates the selection in the canvas
+				updateSelection(mouseEvent.getLayerX());
+				chart.draw();
+			} else if (isEventInSelectionCleaner(mouseEvent) && getStatus().equals(SelectionStatus.SELECTED)) {
+				// if here
+				// the mouse is hovering the selection cleaner
+				// checks if was already hover
+				// using the cursor previously saved
+				if (cursorOverSelectionCleaner == null) {
+					// gets cursor
+					cursorOverSelectionCleaner = Utilities.getCursorOfChart(chart);
+				}
+				// sets cursor pointer because hover the selection cleaner
+				chart.getCanvas().getStyle().setCursorType(CursorType.POINTER);
+			} else if (cursorOverSelectionCleaner != null) {
+				// if here, the mouse is not selecting and not hover the selection cleaner
+				// but before it was on selection cleaner therefore reset the cursor and the instance
+				chart.getCanvas().getStyle().setCursorType(cursorOverSelectionCleaner);
+				cursorOverSelectionCleaner = null;
+			}
 		}
 	}
 
@@ -280,7 +294,7 @@ final class SelectionHandler {
 	 * 
 	 * @param event canvas mouse event.
 	 */
-	void onMouseLeave(BaseNativeEvent event) {
+	void onMouseLeave(NativeBaseEvent event) {
 		// if here the cursor went out of the canvas
 		// the same of mouse up
 		onMouseUp(event);
@@ -291,23 +305,28 @@ final class SelectionHandler {
 	 * 
 	 * @param event canvas mouse event.
 	 */
-	void onMouseUp(BaseNativeEvent event) {
-		// removes the default behavior of mouse down on canvas
-		// this removes the canvas selection
-		event.preventDefault();
-		// this could be the end of selection
-		// therefore will apply the logic of end selection
-		// only if current status is selecting and selected
-		if (getStatus().equals(SelectionStatus.SELECTING)) {
-			// sets this flag to prevent to propagate a click event
-			// that canvas is generating after mouse up
-			preventClickEvent = true;
-			// sets the cursor
-			chart.getCanvas().getStyle().setCursorType(CursorType.DEFAULT);
-			// updates the selection in the canvas
-			updateSelection(event.getX());
-			chart.draw();
-			endSelection(event);
+	void onMouseUp(NativeBaseEvent event) {
+		// checks if mouse event
+		if (event instanceof NativeAbstractMouseEvent) {
+			// casts to mouce event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+			// removes the default behavior of mouse down on canvas
+			// this removes the canvas selection
+			event.preventDefault();
+			// this could be the end of selection
+			// therefore will apply the logic of end selection
+			// only if current status is selecting and selected
+			if (getStatus().equals(SelectionStatus.SELECTING)) {
+				// sets this flag to prevent to propagate a click event
+				// that canvas is generating after mouse up
+				preventClickEvent = true;
+				// sets the cursor
+				chart.getCanvas().getStyle().setCursorType(CursorType.DEFAULT);
+				// updates the selection in the canvas
+				updateSelection(mouseEvent.getLayerX());
+				chart.draw();
+				endSelection(mouseEvent);
+			}
 		}
 	}
 
@@ -448,7 +467,7 @@ final class SelectionHandler {
 	 * 
 	 * @param event event which will complete the selection
 	 */
-	void endSelection(BaseNativeEvent event) {
+	void endSelection(NativeAbstractMouseEvent event) {
 		endSelection(event, true);
 	}
 
@@ -459,7 +478,7 @@ final class SelectionHandler {
 	 * @param event event which will complete the selection
 	 * @param fireEvent if <code>false</code>, does not send any event
 	 */
-	void endSelection(BaseNativeEvent event, boolean fireEvent) {
+	void endSelection(NativeAbstractMouseEvent event, boolean fireEvent) {
 		// sets status
 		setStatus(SelectionStatus.SELECTED);
 		// checks if it must send event
@@ -476,8 +495,10 @@ final class SelectionHandler {
 			// stores the values of selected area from scale
 			track.setStartValue(leftValue / normStart * area.getLeft());
 			track.setEndValue(rightValue / normEnd * area.getRight());
+			// creates custom event
+			NativeCustomEvent customEvent = NativeCustomEvent.createCustomEvent(DatasetSeletionEventType.SET_SELECTION);
 			// fires the event that scale items selection
-			chart.fireEvent(new DatasetRangeSelectionEvent(event, scaleItem.getValueAtPixel(area.getLeft()), scaleItem.getValueAtPixel(area.getRight())));
+			chart.fireEvent(new DatasetRangeSelectionEvent(customEvent, scaleItem.getValueAtPixel(area.getLeft()), scaleItem.getValueAtPixel(area.getRight())));
 		}
 	}
 
@@ -528,7 +549,7 @@ final class SelectionHandler {
 		draw();
 		// when here, the area has been draw
 		// then complete the selection
-		endSelection(DOMBuilder.get().createChangeEvent(), false);
+		endSelection(NativeMouseEvent.createMouseEvent(MouseEventType.CONTEXT_MENU), false);
 	}
 
 	/**
@@ -563,21 +584,16 @@ final class SelectionHandler {
 		final double xTo = normalizedTo + clientX;
 		// calculates the real Y coordinate, mid of chart area
 		final double y = (cArea.getHeight() / 2) + clientY;
-		// gets canvas as internal one
-		SelectCanvas selectCanvas = canvas.as();
 		// creates an initialization dictionary to create mouse event
-		SelectEventInit init = new SelectEventInit();
+		MouseEventInit init = new MouseEventInit();
 		// sets mouse down and client coordinates
-		init.setType(SelectionHandler.INTERNAL_MOUSE_DOWN);
 		init.setClientX(xFrom);
 		init.setClientY(y);
 		// creates and fires the event
-		selectCanvas.dispatchEvent(DOMBuilder.get().createSelectionEvent(init));
-		// sets mouse up and client coordinates
-		init.setType(SelectionHandler.INTERNAL_MOUSE_UP);
+		canvas.dispatchEvent(NativeBaseEvent.createEvent(INTERNAL_MOUSE_DOWN, init));
 		init.setClientX(xTo);
 		// creates and fires the event
-		selectCanvas.dispatchEvent(DOMBuilder.get().createSelectionEvent(init));
+		canvas.dispatchEvent(NativeBaseEvent.createEvent(INTERNAL_MOUSE_UP, init));
 	}
 
 	// -----------------------------------------
@@ -1007,14 +1023,14 @@ final class SelectionHandler {
 	 * @param event event to be checked.
 	 * @return <code>true</code> if inside the element, otherwise <code>false</code>.
 	 */
-	private boolean isEventInSelectionCleaner(BaseNativeEvent event) {
+	private boolean isEventInSelectionCleaner(NativeAbstractMouseEvent event) {
 		// option instance
 		DatasetsItemsSelectorOptions pOptions = getOptions();
 		// gets selection cleaner element
 		SelectionCleaner selectionCleaner = pOptions.getSelectionCleaner();
 		// checks if inside
-		boolean isX = event.getX() >= selectionCleaner.getX() && event.getX() <= (selectionCleaner.getX() + selectionCleaner.getWidth());
-		boolean isY = event.getY() >= selectionCleaner.getY() && event.getY() <= (selectionCleaner.getY() + selectionCleaner.getHeight());
+		boolean isX = event.getLayerX() >= selectionCleaner.getX() && event.getLayerX() <= (selectionCleaner.getX() + selectionCleaner.getWidth());
+		boolean isY = event.getLayerY() >= selectionCleaner.getY() && event.getLayerY() <= (selectionCleaner.getY() + selectionCleaner.getHeight());
 		return isX && isY;
 	}
 
@@ -1024,13 +1040,13 @@ final class SelectionHandler {
 	 * @param event event to be checked.
 	 * @return <code>true</code> if inside the area, otherwise <code>false</code>.
 	 */
-	private boolean isEventInChartArea(BaseNativeEvent event) {
+	private boolean isEventInChartArea(NativeAbstractMouseEvent event) {
 		// gets chart AREA
 		ChartNode node = chart.getNode();
 		ChartAreaNode areaInstance = node.getChartArea();
 		// checks if inside
-		boolean isX = event.getX() >= areaInstance.getLeft() && event.getX() <= areaInstance.getRight();
-		boolean isY = event.getY() >= areaInstance.getTop() && event.getY() <= areaInstance.getBottom();
+		boolean isX = event.getLayerX() >= areaInstance.getLeft() && event.getLayerX() <= areaInstance.getRight();
+		boolean isY = event.getLayerY() >= areaInstance.getTop() && event.getLayerY() <= areaInstance.getBottom();
 		return isX && isY;
 	}
 

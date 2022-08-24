@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.items.DatasetReference;
 
 /**
@@ -42,7 +42,7 @@ public final class DatasetSelectionEvent extends AbstractEvent {
 	 * @param nativeEvent native event of this custom event
 	 * @param item dataset reference item related to the click
 	 */
-	public DatasetSelectionEvent(BaseNativeEvent nativeEvent, DatasetReference item) {
+	public DatasetSelectionEvent(NativeBaseEvent nativeEvent, DatasetReference item) {
 		super(nativeEvent, TYPE);
 		this.item = item;
 		// sets null because already present in native event as source
@@ -56,7 +56,7 @@ public final class DatasetSelectionEvent extends AbstractEvent {
 	 * @param chart chart instance
 	 * @param item dataset reference item related to the click
 	 */
-	public DatasetSelectionEvent(BaseNativeEvent nativeEvent, IsChart chart, DatasetReference item) {
+	public DatasetSelectionEvent(NativeBaseEvent nativeEvent, IsChart chart, DatasetReference item) {
 		super(nativeEvent, TYPE);
 		this.item = item;
 		this.chart = chart;

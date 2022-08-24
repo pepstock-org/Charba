@@ -24,10 +24,11 @@ import org.pepstock.charba.client.configuration.CartesianLinearAxis;
 import org.pepstock.charba.client.configuration.CartesianLogarithmicAxis;
 import org.pepstock.charba.client.configuration.CartesianTimeAxis;
 import org.pepstock.charba.client.configuration.CartesianTimeSeriesAxis;
-import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.events.NativeCustomEvent;
 import org.pepstock.charba.client.events.DatasetRangeCleanSelectionEvent;
 import org.pepstock.charba.client.impl.callbacks.AtLeastOneDatasetHandler;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptionsFactory.DatasetsItemsSelectorDefaultsOptionsFactory;
+import org.pepstock.charba.client.impl.plugins.enums.DatasetSeletionEventType;
 import org.pepstock.charba.client.items.ScaleItem;
 
 /**
@@ -157,7 +158,7 @@ public final class DatasetsItemsSelector extends CharbaPluginContainer {
 		// checks if it must fire the event
 		if (fireEvent) {
 			// fires the reset event
-			chart.fireEvent(new DatasetRangeCleanSelectionEvent(DOMBuilder.get().createChangeEvent()));
+			chart.fireEvent(new DatasetRangeCleanSelectionEvent(NativeCustomEvent.createCustomEvent(DatasetSeletionEventType.CLEAN_SELECTION)));
 		}
 		// updates the chart only if the selection was done
 		if (mustBeUpdated) {

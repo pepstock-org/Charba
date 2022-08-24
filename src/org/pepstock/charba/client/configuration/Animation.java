@@ -25,8 +25,8 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCall
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.events.NativeCustomEvent;
+import org.pepstock.charba.client.enums.AnimationEventType;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AnimationCompleteEvent;
@@ -437,10 +437,8 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 * @param item animation item info.
 	 */
 	private void onProgress(AnimationItem item) {
-		// creates a native event by DOM (change)
-		BaseNativeEvent event = DOMBuilder.get().createChangeEvent();
 		// fires the event
-		this.chart.fireEvent(new AnimationProgressEvent(event, item));
+		this.chart.fireEvent(new AnimationProgressEvent(NativeCustomEvent.createCustomEvent(AnimationEventType.PROGRESS), item));
 	}
 
 	/**
@@ -449,9 +447,7 @@ public class Animation extends AbstractDynamicConfiguration<IsAnimation> impleme
 	 * @param item animation item info.
 	 */
 	private void onComplete(AnimationItem item) {
-		// creates a native event by DOM (change)
-		BaseNativeEvent event = DOMBuilder.get().createChangeEvent();
 		// fires the event
-		this.chart.fireEvent(new AnimationCompleteEvent(event, item));
+		this.chart.fireEvent(new AnimationCompleteEvent(NativeCustomEvent.createCustomEvent(AnimationEventType.COMPLETED), item));
 	}
 }

@@ -18,11 +18,10 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.events.AbstractEvent;
-import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.intl.NumberFormatOptions;
 import org.pepstock.charba.client.items.ChartAreaNode;
@@ -114,15 +113,15 @@ public final class Helpers {
 	/**
 	 * A common occurrence is taking an event, such as a click, and finding the data coordinates on the chart where the event occurred. It provides the relative point on canvas.
 	 * 
-	 * @param eventContext event context to be used for getting the point.
+	 * @param event native event to be used for getting the point.
 	 * @return a point object
 	 */
-	public EventPoint getRelativePosition(ChartEventContext eventContext) {
-		// checks if even context is consistent
-		if (eventContext != null) {
-			return getRelativePosition(eventContext.getChart(), eventContext.getNativeEvent());
+	public EventPoint getRelativePosition(AbstractEvent event) {
+		// checks if even is consistent
+		if (event != null) {
+			return getRelativePosition(event.getChart(), event.getNativeEvent());
 		}
-		// if here, event context is not consistent
+		// if here, event is not consistent
 		// then returns the default
 		return DEFAULT_EVENT_POINT;
 	}
@@ -151,7 +150,7 @@ public final class Helpers {
 	 * @param event native event to be used for getting the point.
 	 * @return a point object
 	 */
-	public EventPoint getRelativePosition(IsChart chart, BaseNativeEvent event) {
+	public EventPoint getRelativePosition(IsChart chart, NativeBaseEvent event) {
 		// checks if even is consistent
 		if (Charts.hasNative(chart) && event != null) {
 			// creates and returns the point

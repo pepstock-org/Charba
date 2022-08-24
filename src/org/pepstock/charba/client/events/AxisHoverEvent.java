@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.configuration.Axis;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.items.ScaleItem;
 
 /**
@@ -38,7 +38,7 @@ public final class AxisHoverEvent extends AbstractAxisEvent {
 	 * @param item scale item related to the hover
 	 * @param axis axis configuration instance
 	 */
-	public AxisHoverEvent(BaseNativeEvent nativeEvent, ScaleItem item, Axis axis) {
+	public AxisHoverEvent(NativeAbstractMouseEvent nativeEvent, ScaleItem item, Axis axis) {
 		super(nativeEvent, TYPE, item, axis);
 	}
 

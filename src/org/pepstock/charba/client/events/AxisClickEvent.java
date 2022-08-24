@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.configuration.Axis;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScaleValueItem;
 
@@ -42,7 +42,7 @@ public final class AxisClickEvent extends AbstractAxisEvent {
 	 * @param axis axis configuration instance
 	 * @param value value instance selected on axis
 	 */
-	public AxisClickEvent(BaseNativeEvent nativeEvent, ScaleItem item, Axis axis, ScaleValueItem value) {
+	public AxisClickEvent(NativeAbstractMouseEvent nativeEvent, ScaleItem item, Axis axis, ScaleValueItem value) {
 		super(nativeEvent, TYPE, item, axis);
 		this.value = value;
 	}

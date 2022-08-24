@@ -21,8 +21,8 @@ import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.IsJSType;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -208,7 +208,7 @@ public final class Chart implements IsJSType {
 	 * </code>
 	 */
 	@JsMethod
-	native ArrayObject getElementsAtEventForMode(BaseNativeEvent event, String mode, NativeObject options, boolean useFinalPosition);
+	native ArrayObject getElementsAtEventForMode(NativeBaseEvent event, String mode, NativeObject options, boolean useFinalPosition);
 
 	/**
 	 * Looks for the dataset that matches the current index.

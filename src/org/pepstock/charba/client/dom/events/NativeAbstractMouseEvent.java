@@ -13,9 +13,15 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.dom;
+package org.pepstock.charba.client.dom.events;
+
+import java.util.List;
 
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.dom.BaseElement;
+import org.pepstock.charba.client.dom.BaseEventTarget;
+import org.pepstock.charba.client.dom.BaseHtmlElement;
+import org.pepstock.charba.client.dom.enums.EventButton;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -23,19 +29,19 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Represents events that occur due to the user interacting with a pointing device (such as a mouse).<br>
- * It also used for event which is sent when the state of contacts with a touch sensitive surface changes.
+ * Contains all common properties and methods of a DOM mouse event.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public class BaseNativeEvent extends BaseEvent implements IsCastable {
+@JsType(isNative = true, name = NativeName.DOM_MOUSE_EVENT, namespace = JsPackage.GLOBAL)
+public abstract class NativeAbstractMouseEvent extends NativeUIEvent {
 
 	/**
-	 * To avoid any instantiation
+	 * Create a mouse event by its type and initialization configuration.
 	 */
-	BaseNativeEvent() {
+	NativeAbstractMouseEvent() {
+		// do nothing
 	}
 
 	/**
@@ -51,16 +57,16 @@ public class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 *
 	 * @return the button number that was pressed (if applicable) when the mouse event was fired
 	 */
-	@JsProperty
-	public final native int getButton();
+	@JsProperty(name = "button")
+	private final native int getNativeButton();
 
 	/**
 	 * Returns the buttons being depressed (if any) when the mouse event was fired.
 	 *
 	 * @return the buttons being depressed (if any) when the mouse event was fired
 	 */
-	@JsProperty
-	public final native int getButtons();
+	@JsProperty(name = "buttons")
+	private final native int getNativeButtons();
 
 	/**
 	 * Returns the X coordinate of the mouse pointer in local (DOM content) coordinates.
@@ -159,44 +165,24 @@ public class BaseNativeEvent extends BaseEvent implements IsCastable {
 	public final native BaseHtmlElement getRelatedTarget();
 
 	/**
-	 * Returns a list of all the touch objects representing individual points of contact whose states changed between the previous touch event and this one.
-	 * 
-	 * @return a list of all the touch objects representing individual points of contact whose states changed between the previous touch event and this one
+	 * Returns the X coordinate of the mouse pointer in local (DOM content) coordinates.
+	 *
+	 * @return the X coordinate of the mouse pointer in local (DOM content) coordinates
 	 */
 	@JsProperty
-	public final native TouchList getChangedTouches();
+	public final native double getX();
 
 	/**
-	 * Returns a list of all the touch objects that are both currently in contact with the touch surface and were also started on the same element that is the target of the event.
-	 * 
-	 * @return a list of all the touch objects that are both currently in contact with the touch surface and were also started on the same element that is the target of the event
+	 * Returns the Y coordinate of the mouse pointer in local (DOM content) coordinates.
+	 *
+	 * @return the Y coordinate of the mouse pointer in local (DOM content) coordinates
 	 */
 	@JsProperty
-	public final native TouchList getTargetTouches();
+	public final native double getY();
 
-	/**
-	 * Returns a list of all the touch objects representing all current points of contact with the surface, regardless of target or changed status.
-	 * 
-	 * @return a list of all the touch objects representing all current points of contact with the surface, regardless of target or changed status
-	 */
-	@JsProperty
-	public final native TouchList getTouches();
-
-	/**
-	 * Returns the horizontal coordinate of the event relative to the current layer.
-	 * 
-	 * @return the horizontal coordinate of the event relative to the current layer
-	 */
-	@JsProperty
-	public final native double getLayerX();
-
-	/**
-	 * Returns the vertical coordinate of the event relative to the current layer.
-	 * 
-	 * @return the vertical coordinate of the event relative to the current layer
-	 */
-	@JsProperty
-	public final native double getLayerY();
+	// ----------------------
+	// OVERLAY
+	// ----------------------
 
 	/**
 	 * Returns the horizontal coordinate of the event relative to the current layer.
@@ -204,7 +190,7 @@ public class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the horizontal coordinate of the event relative to the current layer
 	 */
 	@JsOverlay
-	public final double getX() {
+	public final double getLayerX() {
 		// gets the event target
 		BaseEventTarget target = getTarget();
 		// checks if is a html element
@@ -227,7 +213,7 @@ public class BaseNativeEvent extends BaseEvent implements IsCastable {
 	 * @return the vertical coordinate of the event relative to the current layer
 	 */
 	@JsOverlay
-	public final double getY() {
+	public final double getLayerY() {
 		// gets the event target
 		BaseEventTarget target = getTarget();
 		// checks if is a html element
@@ -243,4 +229,25 @@ public class BaseNativeEvent extends BaseEvent implements IsCastable {
 		// then returns the client Y
 		return getClientY();
 	}
+
+	/**
+	 * Returns the button that was pressed (if applicable) when the mouse event was fired.
+	 *
+	 * @return the button that was pressed (if applicable) when the mouse event was fired
+	 */
+	@JsOverlay
+	public final EventButton getButton() {
+		return EventButton.mapToButton(getNativeButton());
+	}
+
+	/**
+	 * Returns the buttons being depressed (if any) when the mouse event was fired.
+	 *
+	 * @return the buttons being depressed (if any) when the mouse event was fired
+	 */
+	@JsOverlay
+	public final List<EventButton> getButtons() {
+		return EventButton.mapToButtons(getNativeButtons());
+	}
+
 }

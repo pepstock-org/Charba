@@ -18,7 +18,7 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 
 /**
  * Base object which maps the CHART.JS chart items which represents a box.<br>
@@ -27,7 +27,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class BaseBoxItem extends NativeObjectContainer implements IsArea {
+public abstract class BaseBoxItem extends NativeObjectContainer implements IsArea, HasInsideChecker {
 
 	/**
 	 * Name of properties of native object.
@@ -139,9 +139,10 @@ public abstract class BaseBoxItem extends NativeObjectContainer implements IsAre
 	 * @param event event to check if inside the box
 	 * @return <code>true</code> if the chart event is inside of this box, otherwise <code>false</code>
 	 */
-	public boolean isInside(BaseNativeEvent event) {
+	@Override
+	public boolean isInside(NativeAbstractMouseEvent event) {
 		// checks if consistent
-		if (IsArea.isConsistent(this)) {
+		if (event != null && IsArea.isConsistent(this)) {
 			// checks X
 			final boolean isX = event.getLayerX() >= getLeft() && event.getLayerX() <= getRight();
 			// checks Y

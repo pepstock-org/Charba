@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.SubtitleClickEvent;
@@ -134,55 +135,70 @@ final class EventSubtitleHandler extends AbstractEventElementHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleClickEventOnElements(org.pepstock.charba.client.dom.BaseNativeEvent)
+	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleClickEventOnElements(org.pepstock.charba.client.dom.events.NativeBaseEvent)
 	 */
 	@Override
-	void handleClickEventOnElements(BaseNativeEvent event) {
-		// checks if subtitle has been selected and there is any handler
-		if (hasSubtitleClickHandlers() && getConfiguration().getChart().getNode().getSubtitle().isInside(event)) {
-			// fires the click event on the chart subtitle
-			getConfiguration().getChart().fireEvent(new SubtitleClickEvent(event, getConfiguration().getChart().getNode().getOptions().getSubtitle()));
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleHoverEventOnElements(org.pepstock.charba.client.dom.BaseNativeEvent)
-	 */
-	@Override
-	void handleHoverEventOnElements(BaseNativeEvent event) {
-		// checks if subtitle has been selected and there is any handler
-		if (getConfiguration().getChart().getNode().getSubtitle().isInside(event)) {
-			// checks if already hovered
-			if (!hoveredSubtitle) {
-				// checks if handler is set
-				if (hasSubtitleEnterHandlers()) {
-					// fires the enter event on the chart title
-					getConfiguration().getChart().fireEvent(new SubtitleEnterEvent(event, getConfiguration().getChart().getNode().getOptions().getSubtitle()));
-				}
-				// resets flag
-				hoveredSubtitle = true;
+	void handleClickEventOnElements(NativeBaseEvent event) {
+		// checks if event is a mouse event
+		if (event instanceof NativeAbstractMouseEvent) {
+			// casts to mouse event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+			// checks if subtitle has been selected and there is any handler
+			if (hasSubtitleClickHandlers() && getConfiguration().getChart().getNode().getSubtitle().isInside(mouseEvent)) {
+				// fires the click event on the chart subtitle
+				getConfiguration().getChart().fireEvent(new SubtitleClickEvent(mouseEvent, getConfiguration().getChart().getNode().getOptions().getSubtitle()));
 			}
-		} else {
-			// if here checks and performs leave event
-			handleLeaveEventOnElements(event);
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleLeaveEventOnElements(org.pepstock.charba.client.dom.BaseNativeEvent)
+	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleHoverEventOnElements(org.pepstock.charba.client.dom.events.NativeBaseEvent)
 	 */
 	@Override
-	void handleLeaveEventOnElements(BaseNativeEvent event) {
-		// checks if subtitle has been left and there is any handler
-		if (hoveredSubtitle && hasSubtitleLeaveHandlers()) {
-			// fires the leave event on the chart subtitle
-			getConfiguration().getChart().fireEvent(new SubtitleLeaveEvent(event, getConfiguration().getChart().getNode().getOptions().getSubtitle()));
-			// resets status
-			hoveredSubtitle = false;
+	void handleHoverEventOnElements(NativeBaseEvent event) {
+		// checks if event is a mouse event
+		if (event instanceof NativeAbstractMouseEvent) {
+			// casts to mouse event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+			// checks if subtitle has been selected and there is any handler
+			if (getConfiguration().getChart().getNode().getSubtitle().isInside(mouseEvent)) {
+				// checks if already hovered
+				if (!hoveredSubtitle) {
+					// checks if handler is set
+					if (hasSubtitleEnterHandlers()) {
+						// fires the enter event on the chart title
+						getConfiguration().getChart().fireEvent(new SubtitleEnterEvent(mouseEvent, getConfiguration().getChart().getNode().getOptions().getSubtitle()));
+					}
+					// resets flag
+					hoveredSubtitle = true;
+				}
+			} else {
+				// if here checks and performs leave event
+				handleLeaveEventOnElements(event);
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleLeaveEventOnElements(org.pepstock.charba.client.dom.events.NativeBaseEvent)
+	 */
+	@Override
+	void handleLeaveEventOnElements(NativeBaseEvent event) {
+		// checks if event is a mouse event
+		if (event instanceof NativeAbstractMouseEvent) {
+			// casts to mouse event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+			// checks if subtitle has been left and there is any handler
+			if (hoveredSubtitle && hasSubtitleLeaveHandlers()) {
+				// fires the leave event on the chart subtitle
+				getConfiguration().getChart().fireEvent(new SubtitleLeaveEvent(mouseEvent, getConfiguration().getChart().getNode().getOptions().getSubtitle()));
+				// resets status
+				hoveredSubtitle = false;
+			}
 		}
 	}
 

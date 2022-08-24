@@ -20,8 +20,9 @@ import java.util.Set;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 import org.pepstock.charba.client.items.LegendHitBoxItem;
@@ -80,29 +81,34 @@ final class ChartPointerPlugin extends CharbaPlugin<ChartPointerOptions> {
 		// checks if chart is consistent and options of plugin has been stored
 		if (IsChart.isConsistent(chart) && hasOptions(chart)) {
 			// gets base native event
-			BaseNativeEvent event = argument.getEventContext().getNativeEvent();
-			// gets options instance
-			ChartPointerOptions pOptions = getOptions(chart);
-			// gets the scope
-			Set<PointerElement> scope = pOptions.getElements();
-			// DATASET SELECTION
-			if (hasDatasetSelection(chart, event, scope)) {
-				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
-			} else if (hasTitleSelection(chart, event, scope)) {
-				// TITLE SELECTION
-				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
-			} else if (hasSubtitleSelection(chart, event, scope)) {
-				// SUBTITLE SELECTION
-				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
-			} else if (hasScaleSelection(chart, event, scope)) {
-				// AXIS SELECTION
-				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
-			} else if (hasLegendSelection(chart, event, scope)) {
-				// LEGEND SELECTION
-				chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
-			} else {
-				// if null, sets the default cursor
-				chart.getChartElement().getStyle().setCursorType(chart.getInitialCursor());
+			NativeBaseEvent event = argument.getEventContext().getNativeEvent();
+			// checks if is a mouse event
+			if (event instanceof NativeAbstractMouseEvent) {
+				// casts to mouse event
+				NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+				// gets options instance
+				ChartPointerOptions pOptions = getOptions(chart);
+				// gets the scope
+				Set<PointerElement> scope = pOptions.getElements();
+				// DATASET SELECTION
+				if (hasDatasetSelection(chart, mouseEvent, scope)) {
+					chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
+				} else if (hasTitleSelection(chart, mouseEvent, scope)) {
+					// TITLE SELECTION
+					chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
+				} else if (hasSubtitleSelection(chart, mouseEvent, scope)) {
+					// SUBTITLE SELECTION
+					chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
+				} else if (hasScaleSelection(chart, mouseEvent, scope)) {
+					// AXIS SELECTION
+					chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
+				} else if (hasLegendSelection(chart, mouseEvent, scope)) {
+					// LEGEND SELECTION
+					chart.getChartElement().getStyle().setCursorType(pOptions.getCursorPointer());
+				} else {
+					// if null, sets the default cursor
+					chart.getChartElement().getStyle().setCursorType(chart.getInitialCursor());
+				}
 			}
 		}
 	}
@@ -129,7 +135,7 @@ final class ChartPointerPlugin extends CharbaPlugin<ChartPointerOptions> {
 	 * @param scope the scope with all activated scope of the plugin
 	 * @return <code>true</code> if the cursor is over to a dataset, otherwise <code>false</code>
 	 */
-	private boolean hasDatasetSelection(IsChart chart, BaseNativeEvent event, Set<PointerElement> scope) {
+	private boolean hasDatasetSelection(IsChart chart, NativeBaseEvent event, Set<PointerElement> scope) {
 		// checks if the datasets is in scope
 		if (chart.getOptions().hasDatasetSelectionHandlers() && isElementInScope(scope, PointerElement.DATASET)) {
 			// if yes, asks the dataset item by event
@@ -147,7 +153,7 @@ final class ChartPointerPlugin extends CharbaPlugin<ChartPointerOptions> {
 	 * @param scope the scope with all activated scope of the plugin
 	 * @return <code>true</code> if the cursor is over to the title, otherwise <code>false</code>
 	 */
-	private boolean hasTitleSelection(IsChart chart, BaseNativeEvent event, Set<PointerElement> scope) {
+	private boolean hasTitleSelection(IsChart chart, NativeAbstractMouseEvent event, Set<PointerElement> scope) {
 		// checks if title display is activated or title plugin is activated
 		boolean isTitleEnabled = chart.getOptions().getTitle().isDisplay();
 		// checks if there is any title click handler and title is in scope
@@ -163,7 +169,7 @@ final class ChartPointerPlugin extends CharbaPlugin<ChartPointerOptions> {
 	 * @param scope the scope with all activated scope of the plugin
 	 * @return <code>true</code> if the cursor is over to the subtitle, otherwise <code>false</code>
 	 */
-	private boolean hasSubtitleSelection(IsChart chart, BaseNativeEvent event, Set<PointerElement> scope) {
+	private boolean hasSubtitleSelection(IsChart chart, NativeAbstractMouseEvent event, Set<PointerElement> scope) {
 		// checks if subtitle display is activated or subtitle plugin is activated
 		boolean isSubtitleEnabled = chart.getOptions().getSubtitle().isDisplay();
 		// checks if there is any subtitle click handler and subtitle is in scope
@@ -179,7 +185,7 @@ final class ChartPointerPlugin extends CharbaPlugin<ChartPointerOptions> {
 	 * @param scope the scope with all activated scope of the plugin
 	 * @return <code>true</code> if the cursor is over to a scale, otherwise <code>false</code>
 	 */
-	private boolean hasScaleSelection(IsChart chart, BaseNativeEvent event, Set<PointerElement> scope) {
+	private boolean hasScaleSelection(IsChart chart, NativeAbstractMouseEvent event, Set<PointerElement> scope) {
 		// checks if there is any axis click handler and axis is in scope
 		// and the cursor is over the axis element
 		return chart.getOptions().hasAxisClickHandlers() && isElementInScope(scope, PointerElement.AXES) && !ScaleType.NONE.equals(chart.getType().scaleType()) && chart.getNode().getScales().isInside(event);
@@ -193,7 +199,7 @@ final class ChartPointerPlugin extends CharbaPlugin<ChartPointerOptions> {
 	 * @param scope the scope with all activated scope of the plugin
 	 * @return <code>true</code> if the cursor is over to the legend, otherwise <code>false</code>
 	 */
-	private boolean hasLegendSelection(IsChart chart, BaseNativeEvent event, Set<PointerElement> scope) {
+	private boolean hasLegendSelection(IsChart chart, NativeAbstractMouseEvent event, Set<PointerElement> scope) {
 		// checks if legend display is activated or legend plugin is activated
 		boolean isLegendEnabled = chart.getOptions().getLegend().isDisplay() && chart.getOptions().getPlugins().isEnabled(DefaultPluginId.LEGEND);
 		// checks if legend is in scope

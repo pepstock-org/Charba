@@ -24,11 +24,11 @@ import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.plugins.NativeHook;
@@ -1497,7 +1497,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
 	 */
-	protected final void setValue(Key key, BaseNativeEvent value) {
+	protected final void setValue(Key key, NativeBaseEvent value) {
 		// if value is null
 		// try to remove the reference if exists
 		if (value == null) {
@@ -1519,7 +1519,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @return value of the property
 	 */
-	protected final BaseNativeEvent getNativeEvent(Key key) {
+	protected final NativeBaseEvent getNativeEvent(Key key) {
 		// checks if the property exists
 		if (!has(key)) {
 			// if no, returns null

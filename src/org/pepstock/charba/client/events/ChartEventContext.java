@@ -16,6 +16,9 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.Charts;
+import org.pepstock.charba.client.EventPoint;
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.AnnotationEnvelop;
 import org.pepstock.charba.client.commons.Checker;
@@ -27,8 +30,10 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.configuration.ConfigurationEnvelop;
 import org.pepstock.charba.client.datalabels.DataLabelsEnvelop;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
-import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.enums.MouseEventType;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.dom.events.NativeMouseEvent;
 import org.pepstock.charba.client.items.ItemsEnvelop;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -37,7 +42,7 @@ import org.pepstock.charba.client.items.Undefined;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartEventContext extends NativeObjectContainer implements IsPoint {
+public final class ChartEventContext extends NativeObjectContainer implements IsPoint, HasNativeEvent {
 
 	/**
 	 * Name of properties of native object.
@@ -77,9 +82,10 @@ public final class ChartEventContext extends NativeObjectContainer implements Is
 	 * Creates the object with the chart instance, creating a change native event.
 	 * 
 	 * @param chart chart instance.
+	 * @param nativeChart native chart instance.
 	 */
-	public ChartEventContext(Chart chart) {
-		this(chart, DOMBuilder.get().createChangeEvent());
+	public ChartEventContext(IsChart chart, Chart nativeChart) {
+		this(chart, nativeChart, NativeMouseEvent.createMouseEvent(MouseEventType.CONTEXT_MENU));
 	}
 
 	/**
@@ -88,21 +94,36 @@ public final class ChartEventContext extends NativeObjectContainer implements Is
 	 * @param chart chart instance to store in the object
 	 * @param event native event instance to store in the object
 	 */
-	public ChartEventContext(Chart chart, BaseNativeEvent event) {
+	public ChartEventContext(IsChart chart, NativeAbstractMouseEvent event) {
+		this(chart, Charts.getNative(chart), event);
+	}
+
+	/**
+	 * Creates the object with the chart instance, creating a change native event.
+	 * 
+	 * @param chart chart instance to store in the object
+	 * @param nativeChart native chart instance.
+	 * @param event native event instance to store in the object
+	 */
+	private ChartEventContext(IsChart chart, Chart nativeChart, NativeAbstractMouseEvent event) {
 		// creates an empty native object
-		super(null);
+		super();
 		// checks if chart is consistent
-		Checker.checkIfValid(chart, "Chart argument");
+		IsChart.checkIfValid(chart);
+		// checks if chart is consistent
+		Checker.checkIfValid(nativeChart, "Chart argument");
 		// checks if event is consistent
 		Checker.checkIfValid(event, "Event argument");
 		// stores chart and event
-		setValue(Property.CHART, chart);
+		setValue(Property.CHART, nativeChart);
 		setValue(Property.NATIVE, event);
 		// sets type to event type
 		setValue(Property.TYPE, event.getType());
+		// gets relative position
+		EventPoint point = Helpers.get().getRelativePosition(chart, event);
 		// sets x and y to event point
-		setValue(Property.X, event.getX());
-		setValue(Property.Y, event.getY());
+		setValue(Property.X, point.getX());
+		setValue(Property.Y, point.getY());
 	}
 
 	/**
@@ -178,7 +199,8 @@ public final class ChartEventContext extends NativeObjectContainer implements Is
 	 * 
 	 * @return the CHARBA chart instance
 	 */
-	public BaseNativeEvent getNativeEvent() {
+	@Override
+	public NativeBaseEvent getNativeEvent() {
 		// checks if native event is inside the context
 		if (isType(Property.NATIVE, ObjectType.OBJECT)) {
 			return getNativeEvent(Property.NATIVE);

@@ -16,7 +16,8 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AxisClickEvent;
 import org.pepstock.charba.client.events.AxisEnterEvent;
@@ -162,31 +163,35 @@ final class EventAxesHandler extends AbstractEventElementHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleClickEventOnElements(org.pepstock.charba.client.dom.BaseNativeEvent)
+	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleClickEventOnElements(org.pepstock.charba.client.dom.events.NativeBaseEvent)
 	 */
 	@Override
-	void handleClickEventOnElements(BaseNativeEvent event) {
+	void handleClickEventOnElements(NativeBaseEvent event) {
 		// checks if there is any handler, the event is not in chart area because if there is managed as chart click and the chart has got scales
 		if (hasAxisClickHandlers()) {
 			// gets scale item
 			ScaleItem scaleItem = searchScaleItem(event);
 			// checks if scale item is consistent
-			if (scaleItem != null) {
+			// checks if event is a mouse event
+			if (scaleItem != null && event instanceof NativeAbstractMouseEvent) {
+				// casts to mouse event
+				NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
 				// gets axis instance
 				Axis axis = searchAxis(scaleItem);
 				// fires the click event on the chart scale
-				getConfiguration().getChart().fireEvent(new AxisClickEvent(event, scaleItem, axis, scaleItem.getValueAtEvent(event)));
+				getConfiguration().getChart().fireEvent(new AxisClickEvent(mouseEvent, scaleItem, axis, scaleItem.getValueAtEvent(mouseEvent)));
 			}
 		}
+
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleHoverEventOnElements(org.pepstock.charba.client.dom.BaseNativeEvent)
+	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleHoverEventOnElements(org.pepstock.charba.client.dom.events.NativeBaseEvent)
 	 */
 	@Override
-	void handleHoverEventOnElements(BaseNativeEvent event) {
+	void handleHoverEventOnElements(NativeBaseEvent event) {
 		// checks if there is any handler, the event is not in chart area because if there is managed as chart click and the chart has got scales
 		if (hasAxisHoverHandlers() || hasAxisLeaveHandlers() || hasAxisEnterHandlers()) {
 			// gets scale item
@@ -211,50 +216,58 @@ final class EventAxesHandler extends AbstractEventElementHandler {
 	 * @param scaleItem scale item instance
 	 * @param axis axis instance
 	 */
-	private void manageHoverEventOnAxis(BaseNativeEvent event, ScaleItem scaleItem, Axis axis) {
-		// checks if axis was already hovered
-		if (hoveredAxis != null) {
-			// checks if is the same scale item
-			if (hoveredAxis.getId().equals(scaleItem.getId()) && hasAxisHoverHandlers()) {
-				// fires the hover event on the chart scale
-				getConfiguration().getChart().fireEvent(new AxisHoverEvent(event, scaleItem, axis));
-			} else if (!hoveredAxis.getId().equals(scaleItem.getId())) {
-				// leaves the stored one
-				handleLeaveEventOnElements(event);
+	private void manageHoverEventOnAxis(NativeBaseEvent event, ScaleItem scaleItem, Axis axis) {
+		// checks if event is a mouse event
+		if (event instanceof NativeAbstractMouseEvent) {
+			// casts to mouse event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+			// checks if axis was already hovered
+			if (hoveredAxis != null) {
+				// checks if is the same scale item
+				if (hoveredAxis.getId().equals(scaleItem.getId()) && hasAxisHoverHandlers()) {
+					// fires the hover event on the chart scale
+					getConfiguration().getChart().fireEvent(new AxisHoverEvent(mouseEvent, scaleItem, axis));
+				} else if (!hoveredAxis.getId().equals(scaleItem.getId())) {
+					// leaves the stored one
+					handleLeaveEventOnElements(event);
+					// checks if events must be fired
+					if (hasAxisEnterHandlers()) {
+						// fires the enter event on the chart scale
+						getConfiguration().getChart().fireEvent(new AxisEnterEvent(mouseEvent, scaleItem, axis));
+					}
+					// adds as hovered
+					hoveredAxis = scaleItem;
+				}
+			} else {
 				// checks if events must be fired
 				if (hasAxisEnterHandlers()) {
 					// fires the enter event on the chart scale
-					getConfiguration().getChart().fireEvent(new AxisEnterEvent(event, scaleItem, axis));
+					getConfiguration().getChart().fireEvent(new AxisEnterEvent(mouseEvent, scaleItem, axis));
 				}
 				// adds as hovered
 				hoveredAxis = scaleItem;
 			}
-		} else {
-			// checks if events must be fired
-			if (hasAxisEnterHandlers()) {
-				// fires the enter event on the chart scale
-				getConfiguration().getChart().fireEvent(new AxisEnterEvent(event, scaleItem, axis));
-			}
-			// adds as hovered
-			hoveredAxis = scaleItem;
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleLeaveEventOnElements(org.pepstock.charba.client.dom.BaseNativeEvent)
+	 * @see org.pepstock.charba.client.configuration.AbstractEventElementHandler#handleLeaveEventOnElements(org.pepstock.charba.client.dom.events.NativeBaseEvent)
 	 */
 	@Override
-	void handleLeaveEventOnElements(BaseNativeEvent event) {
+	void handleLeaveEventOnElements(NativeBaseEvent event) {
 		// checks if there is any handler, the event is not in chart area because if there is managed as chart click and the chart has got scales
-		if (hoveredAxis != null && hasAxisLeaveHandlers()) {
+		// checks also if mouse event
+		if (hoveredAxis != null && hasAxisLeaveHandlers() && event instanceof NativeAbstractMouseEvent) {
+			// casts to mouse event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
 			// if here, the user is not hovering any scale
 			// there is was hovering a scale before
 			// gets axis instance
 			Axis axis = searchAxis(hoveredAxis);
 			// fires the click event on the chart scale
-			getConfiguration().getChart().fireEvent(new AxisLeaveEvent(event, hoveredAxis, axis));
+			getConfiguration().getChart().fireEvent(new AxisLeaveEvent(mouseEvent, hoveredAxis, axis));
 		}
 		// adds as hovered
 		hoveredAxis = null;
@@ -262,20 +275,25 @@ final class EventAxesHandler extends AbstractEventElementHandler {
 
 	/**
 	 * Searches the {@link ScaleItem} instance related to the event.<br>
-	 * If the {@link BaseNativeEvent} instance is not related to any {@link ScaleItem}, returns <code>null</code>.
+	 * If the {@link NativeBaseEvent} instance is not related to any {@link ScaleItem}, returns <code>null</code>.
 	 * 
 	 * @param event event generated on chart
 	 * @return the {@link ScaleItem} instance related to the event or <code>null</code>
 	 */
-	private ScaleItem searchScaleItem(BaseNativeEvent event) {
-		// checks if there is any handler, the event is not in chart area because if there is managed as chart click and the chart has got scales
-		if (!getConfiguration().getChart().getNode().getChartArea().isInside(event) && !ScaleType.NONE.equals(getConfiguration().getChart().getType().scaleType())) {
-			// gets the scales
-			ScalesNode scales = getConfiguration().getChart().getNode().getScales();
-			// checks if event is inside a scale box
-			if (scales.isInside(event)) {
-				// gets scale item
-				return scales.getScaleIsInside(event);
+	private ScaleItem searchScaleItem(NativeBaseEvent event) {
+		// checks if event is a mouse event
+		if (event instanceof NativeAbstractMouseEvent) {
+			// casts to mouse event
+			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
+			// checks if there is any handler, the event is not in chart area because if there is managed as chart click and the chart has got scales
+			if (!getConfiguration().getChart().getNode().getChartArea().isInside(mouseEvent) && !ScaleType.NONE.equals(getConfiguration().getChart().getType().scaleType())) {
+				// gets the scales
+				ScalesNode scales = getConfiguration().getChart().getNode().getScales();
+				// checks if event is inside a scale box
+				if (scales.isInside(mouseEvent)) {
+					// gets scale item
+					return scales.getScaleIsInside(mouseEvent);
+				}
 			}
 		}
 		// if here, the event is not related to any scale

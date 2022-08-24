@@ -17,7 +17,6 @@ package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
 
 /**
  * Interface which maps a common chart event, an event generated from CHART.JS.
@@ -25,7 +24,7 @@ import org.pepstock.charba.client.dom.BaseNativeEvent;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsCommonChartEvent {
+interface IsCommonChartEvent extends HasNativeEvent {
 
 	/**
 	 * Returns the java script function context of CHART.JS events.
@@ -47,12 +46,5 @@ public interface IsCommonChartEvent {
 	 * @return the chart instance
 	 */
 	IsChart getChart();
-
-	/**
-	 * Returns the native event instance.
-	 * 
-	 * @return the nativeEvent
-	 */
-	BaseNativeEvent getNativeEvent();
 
 }

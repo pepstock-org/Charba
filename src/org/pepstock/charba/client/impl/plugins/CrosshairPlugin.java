@@ -26,10 +26,10 @@ import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CrosshairFormatterCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
-import org.pepstock.charba.client.dom.BaseEventTypes;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
+import org.pepstock.charba.client.dom.enums.MouseEventType;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.InteractionAxis;
@@ -413,7 +413,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	 */
 	private boolean checkEvent(ChartEventContext context, CrosshairOptions options) {
 		// checks event type
-		boolean mustBeManaged = BaseEventTypes.MOUSE_MOVE.equalsIgnoreCase(context.getType());
+		boolean mustBeManaged = MouseEventType.MOUSE_MOVE.is(context.getType());
 		// checks if passed
 		if (mustBeManaged) {
 			// gets modifier key

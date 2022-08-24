@@ -17,7 +17,7 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.dom.BaseNativeEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -60,7 +60,7 @@ final class NativeHelpers {
 	 * @return a point object
 	 */
 	@JsMethod
-	native NativeObject getRelativePosition(BaseNativeEvent event, Chart chart);
+	native NativeObject getRelativePosition(NativeBaseEvent event, Chart chart);
 
 	/**
 	 * Parses font options and returns the font object.
