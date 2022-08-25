@@ -27,7 +27,7 @@ import org.pepstock.charba.client.events.HasNativeEvent;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum KeyboardModifierKey implements Key
+public enum KeyboardModifierKey implements IsKeyboardKey
 {
 	/**
 	 * The Alt (Alternative) key.
@@ -97,7 +97,7 @@ public enum KeyboardModifierKey implements Key
 		// checks if argument is consistent
 		if (event != null) {
 			// checks if pressed
-			return isPressed(checkAndGet(event.getNativeEvent()));
+			return isPressed(event.getNativeEvent());
 		}
 		// if here, argument is not consistent
 		// then returns false
@@ -179,10 +179,10 @@ public enum KeyboardModifierKey implements Key
 	private static NativeUIEvent checkAndGet(NativeBaseEvent event) {
 		// checks if event has modifier keys
 		if (event instanceof NativeUIEvent) {
-			// casts to modifier key
+			// casts to ui event
 			return (NativeUIEvent) event;
 		}
-		// if here, the event doesn't have modifier keys
+		// if here, the event is a ui one
 		// then returns null
 		return null;
 	}

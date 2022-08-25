@@ -96,18 +96,6 @@ public final class KeyboardEventInit extends UIEventInit implements IsModifiersH
 		setKey(key);
 	}
 
-	/**
-	 * Creates an initialization object, setting the keyboard key and code values.
-	 * 
-	 * @param key keyboard key initialization property.
-	 * @param code keyboard code initialization property.
-	 */
-	public KeyboardEventInit(String key, String code) {
-		this(key);
-		// stores keyboard code
-		setCode(code);
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
