@@ -96,6 +96,27 @@ public final class KeyboardEventInit extends UIEventInit implements IsModifiersH
 		setKey(key);
 	}
 
+	/**
+	 * Creates an initialization object, cloning all source event data
+	 * 
+	 * @param source source event to clone.
+	 */
+	public KeyboardEventInit(NativeKeyboardEvent source) {
+		super(source);
+		// stores the modifier handler
+		this.handler = new ModifiersHandler(getNativeObject());
+		// sets all source properties
+		setKey(source.getKey());
+		setCode(source.getCode());
+		setRepeat(source.isRepeat());
+		setLocation(source.getLocation());
+		setComposing(source.isComposing());
+		setCtrlKey(source.isCtrlKey());
+		setAltKey(source.isAltKey());
+		setShiftKey(source.isShiftKey());
+		setMetaKey(source.isMetaKey());
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

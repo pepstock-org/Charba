@@ -68,6 +68,17 @@ class UIEventInit extends EventInit {
 	}
 
 	/**
+	 * Creates an initialization object, cloning all source event data
+	 * 
+	 * @param source source event to clone.
+	 */
+	UIEventInit(NativeUIEvent source) {
+		super(source);
+		// sets all source properties
+		setDetail(source.getDetail());
+	}
+
+	/**
 	 * When non-zero, provides the current (or next, depending on the event) click count.<br>
 	 * For click events, is the current click count.<br>
 	 * For mousedown or mouseup events, is 1 plus the current click count.<br>

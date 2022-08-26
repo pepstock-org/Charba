@@ -77,6 +77,28 @@ public final class TouchEventInit extends UIEventInit implements IsModifiersHand
 		this.handler = new ModifiersHandler(getNativeObject());
 	}
 
+	/**
+	 * Creates an object with an array of objects for every point of contact currently touching the surface.
+	 * 
+	 * @param touches an array of objects for every point of contact currently touching the surface
+	 */
+	public TouchEventInit(Touch... touches) {
+		this();
+		// stores touches
+		setTouches(touches);
+	}
+
+	/**
+	 * Creates an object with an array of objects for every point of contact currently touching the surface.
+	 * 
+	 * @param touches an array of objects for every point of contact currently touching the surface
+	 */
+	public TouchEventInit(List<Touch> touches) {
+		this();
+		// stores touches
+		setTouches(touches);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

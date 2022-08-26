@@ -15,7 +15,10 @@
 */
 package org.pepstock.charba.client.dom.enums;
 
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.dom.DOMBuilder;
+import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.dom.events.NativeKeyboardEvent;
 import org.pepstock.charba.client.events.HasNativeEvent;
@@ -26,23 +29,35 @@ import org.pepstock.charba.client.events.HasNativeEvent;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsKeyboardKey extends Key {
+public interface IsKeyboardKey extends Key {
 
 	/**
-	 * Checks and get the native event if is an instance of {@link NativeKeyboardEvent}, otherwise <code>null</code>.
+	 * Returns the {@link Div} element which describes the modifier key.<br>
+	 * It can be used in UI if needed.
 	 * 
-	 * @param event DOM native event instance
-	 * @return the native event if is an instance of {@link NativeKeyboardEvent}, otherwise <code>null</code>
+	 * @param key the keyboard key to use in <code>kbd</code> tag.
+	 * @return the {@link Div} element which describes the modifier key
 	 */
-	static NativeKeyboardEvent checkAndGet(NativeBaseEvent event) {
-		// checks if event is a keyboard one
-		if (event instanceof NativeKeyboardEvent) {
-			// casts to keyboard event
-			return (NativeKeyboardEvent) event;
-		}
-		// if here, argument is not a keyboard event
-		// then returns null
-		return null;
+	static Div getElement(IsKeyboardKey key) {
+		return getElement(Key.isValid(key) ? key.value() : null);
+	}
+
+	/**
+	 * Returns the {@link Div} element which describes the modifier key.<br>
+	 * It can be used in UI if needed.
+	 * 
+	 * @param key the keyboard key to use in <code>kbd</code> tag.
+	 * @return the {@link Div} element which describes the modifier key
+	 */
+	static Div getElement(String key) {
+		// creates the div with kbd inside
+		Div element = DOMBuilder.get().createDivElement();
+		// checks key value if consistent
+		String inner = key == null ? Constants.NULL_STRING : key;
+		// sets inner html for key code
+		element.setInnerHTML("<kbd style=\"" + KeyboardCommonKey.CSS + "\">" + inner + "</kbd>");
+		// returns it
+		return element;
 	}
 
 	/**
@@ -70,7 +85,7 @@ interface IsKeyboardKey extends Key {
 	 */
 	default boolean is(NativeBaseEvent event) {
 		// gets native ui event
-		NativeKeyboardEvent keyboardEvent = checkAndGet(event);
+		NativeKeyboardEvent keyboardEvent = KeyboardCommonKey.checkAndGet(event);
 		// checks if event is consistent
 		if (keyboardEvent != null) {
 			return is(keyboardEvent.getKey());

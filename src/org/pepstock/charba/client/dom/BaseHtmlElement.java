@@ -18,6 +18,7 @@ package org.pepstock.charba.client.dom;
 import org.pepstock.charba.client.commons.IsJSType;
 import org.pepstock.charba.client.commons.NativeName;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -120,6 +121,22 @@ public class BaseHtmlElement extends BaseElement implements IsJSType {
 	 */
 	@JsProperty
 	public final native void setTabIndex(int tabIndex);
+
+	/**
+	 * Sets focus on the specified element, if it can be focused. The focused element is the element that will receive keyboard and similar events by default.
+	 */
+	@JsMethod
+	public final native void focus();
+
+	/**
+	 * Removes keyboard focus from the current element.
+	 */
+	@JsMethod
+	public final native void blur();
+
+	// ----------------------
+	// OVERLAY
+	// ----------------------
 
 	/**
 	 * Returns an HTML element that is the parent of this element.<br>

@@ -967,12 +967,15 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * @param event event generated on chart
 	 */
 	private void handleDatasetSelection(NativeBaseEvent event) {
-		// gets the data set items by event
-		DatasetReference item = getChart().getElementAtEvent(event);
-		// if the item is consistent and there is any handler
-		if (item != null && hasDatasetSelectionHandlers()) {
-			// fires the event for data set selection
-			getChart().fireEvent(new DatasetSelectionEvent(event, item));
+		// checks ifthere is any handler
+		if (hasDatasetSelectionHandlers()) {
+			// gets the data set items by event
+			DatasetReference item = getChart().getElementAtEvent(event);
+			// if the item is consistent
+			if (item != null) {
+				// fires the event for data set selection
+				getChart().fireEvent(new DatasetSelectionEvent(event, item));
+			}
 		}
 	}
 

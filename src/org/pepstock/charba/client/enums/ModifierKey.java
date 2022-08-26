@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.dom.DOMBuilder;
-import org.pepstock.charba.client.dom.elements.Div;
 import org.pepstock.charba.client.dom.enums.KeyboardModifierKey;
 import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.events.HasNativeEvent;
@@ -50,15 +48,10 @@ public enum ModifierKey implements Key
 	 */
 	SHIFT("shift", KeyboardModifierKey.SHIFT);
 
-	// CSS in-line to show the modifier key by element
-	private static final String CSS = "background: linear-gradient(180deg,#eee,#fff); background-color: rgba(0, 0, 0, 0); background-color: #eee; border: 1px solid #cdd5d7; border-radius: 6px; box-shadow: 0 1px 2px 1px #cdd5d7; "
-			+ "font-family: consolas,courier,monospace; font-size: .9rem; font-weight: 700; line-height: 1; margin: 3px; padding: 4px 6px; white-space: nowrap; color: black;";
 	// name value of property
 	private final String value;
 	// instance of modifier key
 	private final KeyboardModifierKey modifier;
-	// creates div element
-	private Div element = null;
 
 	/**
 	 * Creates with the property value to use in the native object.
@@ -82,19 +75,12 @@ public enum ModifierKey implements Key
 	}
 
 	/**
-	 * Returns the {@link Div} element which describes the modifier key.<br>
-	 * It can be used in UI if needed.
+	 * Returns the related {@link KeyboardModifierKey}.
 	 * 
-	 * @return the {@link Div} element which describes the modifier key
+	 * @return the related {@link KeyboardModifierKey}
 	 */
-	public Div getElement() {
-		// checks if element has been instantiated
-		if (element == null) {
-			// creates the div with kbd inside
-			element = DOMBuilder.get().createDivElement();
-			element.setInnerHTML("<kbd style=\"" + CSS + "\">" + value() + "</kbd>");
-		}
-		return element;
+	public KeyboardModifierKey getKeyboardKey() {
+		return modifier;
 	}
 
 	/**

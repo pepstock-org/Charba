@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.dom.events;
 
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -89,6 +90,20 @@ public class EventInit extends NativeObjectContainer {
 	public EventInit(boolean bubbles, boolean cancelable) {
 		this(bubbles);
 		setCancelable(cancelable);
+	}
+
+	/**
+	 * Creates an initialization object, cloning all source event data
+	 * 
+	 * @param source source event to clone.
+	 */
+	public EventInit(NativeBaseEvent source) {
+		this();
+		// checks if event is consistent
+		Checker.checkIfValid(source, "Event");
+		// sets all source properties
+		setBubbles(source.isBubbles());
+		setCancelable(source.isCancelable());
 	}
 
 	/**

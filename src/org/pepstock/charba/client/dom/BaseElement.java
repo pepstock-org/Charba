@@ -251,4 +251,12 @@ public abstract class BaseElement extends BaseNode {
 	@JsMethod
 	public final native void releasePointerCapture(int pointerId);
 
+	/**
+	 * Returns a {@link DOMRectangle} object providing information about the size of an element and its position relative to the viewport.
+	 * 
+	 * @return a {@link DOMRectangle} object providing information about the size of an element and its position relative to the viewport
+	 */
+	@JsMethod
+	public final native DOMRectangle getBoundingClientRect();
+
 }

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.dom.events;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayUtil;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.enums.EventButton;
@@ -119,6 +120,49 @@ public class MouseEventInit extends UIEventInit implements IsModifiersHandler {
 		// stores arguments
 		setScreenX(screenX);
 		setScreenY(screenY);
+	}
+
+	/**
+	 * Creates an initialization object, cloning all source event data
+	 * 
+	 * @param source source event to clone.
+	 */
+	public MouseEventInit(NativeMouseEvent source) {
+		this((NativeAbstractMouseEvent) source);
+	}
+
+	/**
+	 * Creates an initialization object, cloning all source event data and new related target.
+	 * 
+	 * @param source source event to clone.
+	 * @param relatedTarget new target of the event
+	 */
+	public MouseEventInit(NativeMouseEvent source, BaseHtmlElement relatedTarget) {
+		this((NativeAbstractMouseEvent) source);
+		// checks if event is consistent
+		Checker.checkIfValid(relatedTarget, "Target");
+		// overrides target
+		setRelatedTarget(relatedTarget);
+	}
+
+	/**
+	 * Creates an initialization object, cloning all source event data
+	 * 
+	 * @param source source event to clone.
+	 */
+	MouseEventInit(NativeAbstractMouseEvent source) {
+		super(source);
+		// stores the modifier handler
+		this.handler = new ModifiersHandler(getNativeObject());
+		// sets all source properties
+		setScreenY(source.getScreenY());
+		setButton(source.getButton());
+		setButtons(source.getButtons());
+		setButtons(source.getButtons());
+		setClientX(source.getClientX());
+		setClientY(source.getClientY());
+		setScreenX(source.getScreenX());
+		setRelatedTarget(source.getRelatedTarget());
 	}
 
 	/*

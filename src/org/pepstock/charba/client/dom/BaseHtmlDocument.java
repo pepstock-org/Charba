@@ -39,6 +39,14 @@ public final class BaseHtmlDocument extends BaseDocument {
 	}
 
 	/**
+	 * Returns the element within the DOM that currently has focus.
+	 *
+	 * @return the element within the DOM that currently has focus
+	 */
+	@JsProperty
+	public native BaseHtmlElement getActiveElement();
+
+	/**
 	 * Returns the &lt;body&gt; or &lt;frameset&gt; node of the current document, or <code>null</code> if no such element exists.
 	 *
 	 * @return the &lt;body&gt; or &lt;frameset&gt; node of the current document, or <code>null</code> if no such element exists

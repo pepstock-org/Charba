@@ -28,19 +28,19 @@ public enum KeyboardNavigationKey implements IsKeyboardKey
 	/**
 	 * The down arrow key.
 	 */
-	ARROWDOWN("ArrowDown"),
+	ARROW_DOWN("ArrowDown"),
 	/**
 	 * The left arrow key.
 	 */
-	ARROWLEFT("ArrowLeft"),
+	ARROW_LEFT("ArrowLeft"),
 	/**
 	 * The right arrow key.
 	 */
-	ARROWRIGHT("ArrowRight"),
+	ARROW_RIGHT("ArrowRight"),
 	/**
 	 * The up arrow key.
 	 */
-	ARROWUP("ArrowUp"),
+	ARROW_UP("ArrowUp"),
 	/**
 	 * The <code>End</code> key. Moves to the end of content.
 	 */
@@ -52,11 +52,11 @@ public enum KeyboardNavigationKey implements IsKeyboardKey
 	/**
 	 * The <code>Page Down</code> (or <code>PgDn</code>) key. Scrolls down or displays the next page of content.
 	 */
-	PAGEDOWN("PageDown"),
+	PAGE_DOWN("PageDown"),
 	/**
 	 * The <code>Page Up</code> (or <code>PgUp</code>) key. Scrolls up or displays the previous page of content.
 	 */
-	PAGEUP("PageUp");
+	PAGE_UP("PageUp");
 
 	private final String value;
 

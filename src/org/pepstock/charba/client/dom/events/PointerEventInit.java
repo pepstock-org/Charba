@@ -17,6 +17,7 @@ package org.pepstock.charba.client.dom.events;
 
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.enums.PointerType;
 
 /**
@@ -25,7 +26,7 @@ import org.pepstock.charba.client.dom.enums.PointerType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class PointerEventInit extends UIEventInit implements IsModifiersHandler {
+public class PointerEventInit extends MouseEventInit {
 
 	// default instance
 	static final PointerEventInit DEFAULT_INSTANCE = new PointerEventInit();
@@ -91,15 +92,11 @@ public class PointerEventInit extends UIEventInit implements IsModifiersHandler 
 
 	}
 
-	// instance of modifier handler
-	private final ModifiersHandler handler;
-
 	/**
 	 * Creates an empty object
 	 */
 	public PointerEventInit() {
 		super();
-		this.handler = new ModifiersHandler(getNativeObject());
 	}
 
 	/**
@@ -122,17 +119,41 @@ public class PointerEventInit extends UIEventInit implements IsModifiersHandler 
 	public PointerEventInit(int id, PointerType type) {
 		this(id);
 		// stores type
-		setPointType(type);
+		setPointerType(type);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Creates an initialization object, cloning all source event data
 	 * 
-	 * @see org.pepstock.charba.client.dom.events.IsModifiersHandler#getModifiersHandler()
+	 * @param source source event to clone.
 	 */
-	@Override
-	public final ModifiersHandler getModifiersHandler() {
-		return handler;
+	public PointerEventInit(NativePointerEvent source) {
+		super(source);
+		// sets all source properties
+		setTangentialPressure(source.getTangentialPressure());
+		setWidth(source.getWidth());
+		setHeight(source.getHeight());
+		setPointerType(source.getPointerType());
+		setTiltX(source.getTiltX());
+		setTiltY(source.getTiltY());
+		setId(source.getId());
+		setPressure(source.getPressure());
+		setPrimary(source.isPrimary());
+		setTwist(source.getTwist());
+	}
+
+	/**
+	 * Creates an initialization object, cloning all source event data and new related target.
+	 * 
+	 * @param source source event to clone.
+	 * @param relatedTarget new target of the event
+	 */
+	public PointerEventInit(NativePointerEvent source, BaseHtmlElement relatedTarget) {
+		this(source);
+		// checks if event is consistent
+		Checker.checkIfValid(relatedTarget, "Target");
+		// overrides target
+		setRelatedTarget(relatedTarget);
 	}
 
 	/**
@@ -292,7 +313,7 @@ public class PointerEventInit extends UIEventInit implements IsModifiersHandler 
 	 * 
 	 * @return the device type that caused the event (mouse, pen, touch, etc.)
 	 */
-	public final PointerType getPointType() {
+	public final PointerType getPointerType() {
 		return getValue(Property.POINTER_TYPE, PointerType.values(), DEFAULT_POINTER_TYPE);
 	}
 
@@ -301,7 +322,7 @@ public class PointerEventInit extends UIEventInit implements IsModifiersHandler 
 	 * 
 	 * @param pointerType the device type that caused the event (mouse, pen, touch, etc.)
 	 */
-	public final void setPointType(PointerType pointerType) {
+	public final void setPointerType(PointerType pointerType) {
 		setValue(Property.POINTER_TYPE, pointerType);
 	}
 

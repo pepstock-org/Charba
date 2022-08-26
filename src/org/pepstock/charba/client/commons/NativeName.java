@@ -266,6 +266,11 @@ public final class NativeName {
 	public static final String DOM_ELEMENT = "Element";
 
 	/**
+	 * Constant to bind java script object as DOM element rectangle with name <b>{@value DOM_RECTANGLE}</b>.
+	 */
+	public static final String DOM_RECTANGLE = "DOMRect";
+
+	/**
 	 * Constant to bind java script object as DOM HTML element with name <b>{@value DOM_HTML_ELEMENT}</b>.
 	 */
 	public static final String DOM_HTML_ELEMENT = "HTMLElement";
