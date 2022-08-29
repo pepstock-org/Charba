@@ -22,9 +22,7 @@ package org.pepstock.charba.client.commons;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class StandardKey implements Key {
-
-	private final String value;
+final class StandardKey extends AbstractKey {
 
 	/**
 	 * Builds the object with the key value as string
@@ -32,20 +30,7 @@ final class StandardKey implements Key {
 	 * @param value value of key as String
 	 */
 	StandardKey(String value) {
-		// stores value
-		this.value = value;
-		// checks if argument is consistent
-		Key.checkIfValid(this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.commons.Key#value()
-	 */
-	@Override
-	public String value() {
-		return value;
+		super(value);
 	}
 
 }

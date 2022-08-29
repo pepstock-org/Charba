@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.AbstractKey;
 
 /**
  * This is a standard implementation of a event type
@@ -23,10 +23,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class StandardEvent implements IsEvent {
-
-	// event type
-	private final String value;
+final class StandardEvent extends AbstractKey implements IsEvent {
 
 	/**
 	 * Builds the object with the scale id value as string
@@ -34,55 +31,7 @@ final class StandardEvent implements IsEvent {
 	 * @param value value of event type as string
 	 */
 	StandardEvent(String value) {
-		// stores value
-		this.value = value;
-		// checks if argument is consistent
-		Key.checkIfValid(this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.commons.Key#value()
-	 */
-	@Override
-	public String value() {
-		return value;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		return Key.getHashCode(this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		// checks if is the same object
-		if (this == obj) {
-			return true;
-		}
-		// checks if argument is null
-		if (obj == null) {
-			return false;
-		}
-		// checks if the class is the same
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		// casts to a standard key
-		IsEvent other = (IsEvent) obj;
-		// checks if keys are equals
-		return Key.equals(this, other);
+		super(value);
 	}
 
 }

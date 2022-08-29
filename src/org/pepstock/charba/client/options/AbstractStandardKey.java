@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.AbstractKey;
 
 /**
  * This is an abstract standard implementation of a custom key.
@@ -23,9 +23,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class AbstractStandardKey implements Key {
-
-	private final String value;
+abstract class AbstractStandardKey extends AbstractKey {
 
 	/**
 	 * Builds the object with the custom key value as string
@@ -33,57 +31,7 @@ abstract class AbstractStandardKey implements Key {
 	 * @param value value of key as String
 	 */
 	AbstractStandardKey(String value) {
-		// stores value
-		this.value = value;
-		// pay attention
-		// it does not perform any check
-		// because it must be done on original constructor of the object
-		// which extends this class
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.commons.Key#value()
-	 */
-	@Override
-	public final String value() {
-		return value;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		return Key.getHashCode(this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		// checks if is the same object
-		if (this == obj) {
-			return true;
-		}
-		// checks if argument is null
-		if (obj == null) {
-			return false;
-		}
-		// checks if the class is the same
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		// casts to a standard key
-		AbstractStandardKey other = (AbstractStandardKey) obj;
-		// checks if keys are equals
-		return Key.equals(this, other);
+		super(value);
 	}
 
 }

@@ -162,26 +162,6 @@ public interface Key {
 	}
 
 	/**
-	 * Returns a hash code value for the a key.<br>
-	 * This method is supported for the benefit of hash tables such as those provided by {@link java.util.HashMap}.
-	 * 
-	 * @param key the key to use for hash code calculation
-	 * @return hash code value for the a key
-	 */
-	static int getHashCode(Key key) {
-		// checks argument if consistent
-		if (Key.isValid(key)) {
-			// calculates hash code
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((key.value() == null) ? 0 : key.value().hashCode());
-			return result;
-		}
-		// if here, key is not valid tehn returns zero
-		return 0;
-	}
-
-	/**
 	 * Returns the name value of property
 	 * 
 	 * @return the name value of property
