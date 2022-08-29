@@ -84,14 +84,6 @@ public final class NativeKeyboardEvent extends NativeUIEvent {
 	public native boolean isRepeat();
 
 	/**
-	 * Returns a boolean value indicating if the event is fired within a composition session.
-	 * 
-	 * @return a boolean value indicating if the event is fired within a composition session
-	 */
-	@JsProperty(name = "isComposing")
-	public native boolean isComposing();
-
-	/**
 	 * Returns true if the alt key was down when the mouse event was fired.
 	 *
 	 * @return true if the alt key was down when the mouse event was fired

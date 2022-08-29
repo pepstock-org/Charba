@@ -39,14 +39,10 @@ public class PointerEventInit extends MouseEventInit {
 	private static final double DEFAULT_HEIGHT = 1;
 	// default pressure property
 	private static final double DEFAULT_PRESSURE = 0;
-	// default tangential pressure property
-	private static final double DEFAULT_TANGENTIAL_PRESSURE = 0;
 	// default tiltx property
 	private static final double DEFAULT_TILT_X = 0;
 	// default tilty property
 	private static final double DEFAULT_TILT_Y = 0;
-	// default twist property
-	private static final double DEFAULT_TWIST = 0;
 	// default pointer type property
 	private static final PointerType DEFAULT_POINTER_TYPE = PointerType.UNKNOWN;
 	// default primary property
@@ -61,10 +57,8 @@ public class PointerEventInit extends MouseEventInit {
 		WIDTH("width"),
 		HEIGHT("height"),
 		PRESSURE("pressure"),
-		TANGENTIAL_PRESSURE("tangentialPressure"),
 		TILT_X("tiltX"),
 		TILT_Y("tiltY"),
-		TWIST("twist"),
 		POINTER_TYPE("pointerType"),
 		IS_PRIMARY("isPrimary");
 
@@ -129,8 +123,6 @@ public class PointerEventInit extends MouseEventInit {
 	 */
 	public PointerEventInit(NativePointerEvent source) {
 		super(source);
-		// sets all source properties
-		setTangentialPressure(source.getTangentialPressure());
 		setWidth(source.getWidth());
 		setHeight(source.getHeight());
 		setPointerType(source.getPointerType());
@@ -139,7 +131,6 @@ public class PointerEventInit extends MouseEventInit {
 		setId(source.getId());
 		setPressure(source.getPressure());
 		setPrimary(source.isPrimary());
-		setTwist(source.getTwist());
 	}
 
 	/**
@@ -233,28 +224,6 @@ public class PointerEventInit extends MouseEventInit {
 	}
 
 	/**
-	 * Returns the normalized tangential pressure of the pointer input (also known as barrel pressure or cylinder stress) in the range -1 to 1, where 0 is the neutral position of
-	 * the control.
-	 * 
-	 * @return the normalized tangential pressure of the pointer input (also known as barrel pressure or cylinder stress) in the range -1 to 1, where 0 is the neutral position of
-	 *         the control
-	 */
-	public final double getTangentialPressure() {
-		return getValue(Property.TANGENTIAL_PRESSURE, DEFAULT_TANGENTIAL_PRESSURE);
-	}
-
-	/**
-	 * Sets the normalized tangential pressure of the pointer input (also known as barrel pressure or cylinder stress) in the range -1 to 1, where 0 is the neutral position of the
-	 * control.
-	 * 
-	 * @param pressure the normalized tangential pressure of the pointer input (also known as barrel pressure or cylinder stress) in the range -1 to 1, where 0 is the neutral
-	 *            position of the control
-	 */
-	public final void setTangentialPressure(double pressure) {
-		setValue(Property.TANGENTIAL_PRESSURE, Checker.betweenOrDefault(pressure, -1, 1, DEFAULT_TANGENTIAL_PRESSURE));
-	}
-
-	/**
 	 * Returns the plane angle (in degrees, in the range of -90 to 90) between the Y–Z plane and the plane containing both the pointer (e.g. pen stylus) axis and the Y axis.
 	 * 
 	 * @return the plane angle (in degrees, in the range of -90 to 90) between the Y–Z plane and the plane containing both the pointer (e.g. pen stylus) axis and the Y axis.
@@ -288,24 +257,6 @@ public class PointerEventInit extends MouseEventInit {
 	 */
 	public final void setTiltY(double tilty) {
 		setValue(Property.TILT_Y, Checker.betweenOrDefault(tilty, -90, 90, DEFAULT_TILT_Y));
-	}
-
-	/**
-	 * Returns the clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.
-	 * 
-	 * @return the clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.
-	 */
-	public final double getTwist() {
-		return getValue(Property.TWIST, DEFAULT_TWIST);
-	}
-
-	/**
-	 * Sets the clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.
-	 * 
-	 * @param twist the clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.
-	 */
-	public final void setTwist(double twist) {
-		setValue(Property.TWIST, Checker.betweenOrDefault(twist, 0, 359, DEFAULT_TWIST));
 	}
 
 	/**

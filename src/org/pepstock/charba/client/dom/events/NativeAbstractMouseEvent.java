@@ -162,7 +162,7 @@ public abstract class NativeAbstractMouseEvent extends NativeUIEvent {
 	 * @return the secondary target for the event, if there is one
 	 */
 	@JsProperty
-	public final native BaseHtmlElement getRelatedTarget();
+	public final native BaseEventTarget getRelatedTarget();
 
 	/**
 	 * Returns the X coordinate of the mouse pointer in local (DOM content) coordinates.

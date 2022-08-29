@@ -46,8 +46,7 @@ public final class KeyboardEventInit extends UIEventInit implements IsModifiersH
 		KEY("key"),
 		CODE("code"),
 		LOCATION("location"),
-		REPEAT("repeat"),
-		IS_COMPOSING("isComposing");
+		REPEAT("repeat");
 
 		// name value of property
 		private final String value;
@@ -110,7 +109,6 @@ public final class KeyboardEventInit extends UIEventInit implements IsModifiersH
 		setCode(source.getCode());
 		setRepeat(source.isRepeat());
 		setLocation(source.getLocation());
-		setComposing(source.isComposing());
 		setCtrlKey(source.isCtrlKey());
 		setAltKey(source.isAltKey());
 		setShiftKey(source.isShiftKey());
@@ -203,24 +201,6 @@ public final class KeyboardEventInit extends UIEventInit implements IsModifiersH
 	 */
 	public void setRepeat(boolean repeat) {
 		setValue(Property.REPEAT, repeat);
-	}
-
-	/**
-	 * Returns a boolean value indicating if the event is fired within a composition session.
-	 * 
-	 * @return a boolean value indicating if the event is fired within a composition session
-	 */
-	public boolean isComposing() {
-		return getValue(Property.IS_COMPOSING, Undefined.BOOLEAN);
-	}
-
-	/**
-	 * Sets a boolean value indicating if the event is fired within a composition session.
-	 * 
-	 * @param composing a boolean value indicating if the event is fired within a composition session
-	 */
-	public void setComposing(boolean composing) {
-		setValue(Property.IS_COMPOSING, composing);
 	}
 
 }

@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.dom.BaseEventTarget;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.enums.EventButton;
 import org.pepstock.charba.client.dom.enums.MouseEventType;
@@ -276,7 +277,7 @@ public class MouseEventInit extends UIEventInit implements IsModifiersHandler {
 	 * @return an {@link BaseHtmlElement}, defaulting to null that is the element just left (in case of a {@link MouseEventType#MOUSE_ENTER} or {@link MouseEventType#MOUSE_OVER})
 	 *         or is entering (in case of a {@link MouseEventType#MOUSE_OUT} or {@link MouseEventType#MOUSE_LEAVE})
 	 */
-	public final BaseHtmlElement getRelatedTarget() {
+	public final BaseEventTarget getRelatedTarget() {
 		return getElement(Property.RELATED_TARGET);
 	}
 
@@ -287,8 +288,15 @@ public class MouseEventInit extends UIEventInit implements IsModifiersHandler {
 	 * @param relatedTarget an {@link BaseHtmlElement}, defaulting to null that is the element just left (in case of a {@link MouseEventType#MOUSE_ENTER} or
 	 *            {@link MouseEventType#MOUSE_OVER}) or is entering (in case of a {@link MouseEventType#MOUSE_OUT} or {@link MouseEventType#MOUSE_LEAVE})
 	 */
-	public final void setRelatedTarget(BaseHtmlElement relatedTarget) {
-		setElement(Property.RELATED_TARGET, relatedTarget);
+	public final void setRelatedTarget(BaseEventTarget relatedTarget) {
+		// checks if is an html element
+		if (relatedTarget instanceof BaseHtmlElement) {
+			setElement(Property.RELATED_TARGET, (BaseHtmlElement) relatedTarget);
+		} else if (relatedTarget == null) {
+			// if here, removes keys
+			remove(Property.RELATED_TARGET);
+		}
+
 	}
 
 	/**

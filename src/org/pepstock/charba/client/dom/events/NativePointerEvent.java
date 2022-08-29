@@ -86,16 +86,6 @@ public final class NativePointerEvent extends NativeAbstractMouseEvent {
 	public native double getPressure();
 
 	/**
-	 * Returns the normalized tangential pressure of the pointer input (also known as barrel pressure or cylinder stress) in the range -1 to 1, where 0 is the neutral position of
-	 * the control.
-	 * 
-	 * @return the normalized tangential pressure of the pointer input (also known as barrel pressure or cylinder stress) in the range -1 to 1, where 0 is the neutral position of
-	 *         the control
-	 */
-	@JsProperty
-	public native double getTangentialPressure();
-
-	/**
 	 * Returns the plane angle (in degrees, in the range of -90 to 90) between the Y–Z plane and the plane containing both the pointer (e.g. pen stylus) axis and the Y axis.
 	 * 
 	 * @return the plane angle (in degrees, in the range of -90 to 90) between the Y–Z plane and the plane containing both the pointer (e.g. pen stylus) axis and the Y axis.
@@ -110,14 +100,6 @@ public final class NativePointerEvent extends NativeAbstractMouseEvent {
 	 */
 	@JsProperty
 	public native double getTiltY();
-
-	/**
-	 * Returns the clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.
-	 * 
-	 * @return the clockwise rotation of the pointer (e.g. pen stylus) around its major axis in degrees, with a value in the range 0 to 359.
-	 */
-	@JsProperty
-	public native double getTwist();
 
 	/**
 	 * Returns the device type that caused the event (mouse, pen, touch, etc.).
