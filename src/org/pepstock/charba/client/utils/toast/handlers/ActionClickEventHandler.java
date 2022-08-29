@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.utils.toast.handlers;
 
-import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.dom.events.NativeMouseEvent;
 import org.pepstock.charba.client.utils.toast.ActionItem;
 import org.pepstock.charba.client.utils.toast.ToastItem;
 
@@ -34,6 +34,6 @@ public interface ActionClickEventHandler {
 	 * @param event event fired on item
 	 * @return <code>true</code> if the toaster must be close after click on action
 	 */
-	boolean onClick(ToastItem item, NativeBaseEvent event);
+	boolean onClick(ToastItem item, NativeMouseEvent event);
 
 }

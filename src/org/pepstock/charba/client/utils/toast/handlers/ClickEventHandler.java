@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.utils.toast.handlers;
 
-import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.dom.events.NativeMouseEvent;
 import org.pepstock.charba.client.utils.toast.ToastItem;
 import org.pepstock.charba.client.utils.toast.Toaster;
 
@@ -33,6 +33,6 @@ public interface ClickEventHandler {
 	 * @param item toast item affected by event
 	 * @param event event fired on item
 	 */
-	void onClick(ToastItem item, NativeBaseEvent event);
+	void onClick(ToastItem item, NativeMouseEvent event);
 
 }
