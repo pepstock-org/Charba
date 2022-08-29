@@ -29,7 +29,7 @@ final class GradientPluginResource extends AbstractInjectableResource {
 	// encoded javascript content of chartjs-plugin-gradient.min.js
 	private static final String[] CONTENT = {
 		"/*!",
-		" * chartjs-plugin-gradient v0.5.0",
+		" * chartjs-plugin-gradient v0.5.1",
 		" * https://github.com/kurkle/chartjs-plugin-gradient#readme",
 		" * (c) 2022 Jukka Kurkela",
 		" * Released under the MIT License",

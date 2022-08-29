@@ -810,7 +810,7 @@
 	</target>
 
 	<target name="retrieveOfficialGradient">
-		<echo>Retrieve GRADIENT plugin minify javascript resource - version ${depver.sankey}</echo>
+		<echo>Retrieve GRADIENT plugin minify javascript resource - version ${depver.gradient}</echo>
 		<mkdir dir="${retrieve.dir}" />
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${retrieve.dir}" includes="${javascript.gradient.minify.file}" />
