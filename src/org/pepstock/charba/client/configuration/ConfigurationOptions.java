@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.List;
 import java.util.Set;
 
 import org.pepstock.charba.client.Chart;
@@ -214,10 +215,12 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			ChartEventContext eventContext = new ChartEventContext(new ConfigurationEnvelop<>(event));
 			// gets the native event
 			NativeBaseEvent nativeEvent = eventContext.getNativeEvent();
+			// gets list of elements
+			List<DatasetReference> references = ArrayListHelper.unmodifiableList(items, DatasetReference.FACTORY);
 			// handle click event for dataset
-			handleDatasetSelection(nativeEvent);
+			handleDatasetSelection(nativeEvent, references);
 			// fires the click event on the chart
-			getChart().fireEvent(new ChartClickEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReference.FACTORY)));
+			getChart().fireEvent(new ChartClickEvent(eventContext, references));
 		});
 		// fires the hover hover on the chart
 		this.hoverCallbackProxy.setCallback((event, items, nativeChart) -> {
@@ -965,9 +968,10 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 * Check if the click event on chart and manage it fire a CHARBA data set selection event.
 	 * 
 	 * @param event event generated on chart
+	 * @param references a list of items with dataset references related to the click
 	 */
-	private void handleDatasetSelection(NativeBaseEvent event) {
-		// checks ifthere is any handler
+	private void handleDatasetSelection(NativeBaseEvent event, List<DatasetReference> references) {
+		// checks if there is any handler
 		if (hasDatasetSelectionHandlers()) {
 			// gets the data set items by event
 			DatasetReference item = getChart().getElementAtEvent(event);
@@ -975,7 +979,13 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			if (item != null) {
 				// fires the event for data set selection
 				getChart().fireEvent(new DatasetSelectionEvent(event, item));
+			} else if (!references.isEmpty()) {
+				// if here, the element is not retrieved by interaction
+				// and then it uses the elements passed by CHART.JS
+				// fires the event for the first elements
+				getChart().fireEvent(new DatasetSelectionEvent(event, references.get(0)));
 			}
+
 		}
 	}
 
