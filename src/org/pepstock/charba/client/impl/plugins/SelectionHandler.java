@@ -32,11 +32,10 @@ import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.MouseEventType;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
-import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.dom.events.MouseEventInit;
 import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.dom.events.NativeCustomEvent;
-import org.pepstock.charba.client.dom.events.NativeMouseEvent;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
@@ -325,7 +324,7 @@ final class SelectionHandler {
 				// updates the selection in the canvas
 				updateSelection(mouseEvent.getLayerX());
 				chart.draw();
-				endSelection(mouseEvent);
+				endSelection();
 			}
 		}
 	}
@@ -464,21 +463,18 @@ final class SelectionHandler {
 	/**
 	 * Complete an existing selection on canvas by an event.<br>
 	 * Can be invokes by mouse up or refresh of chart (like resizing).
-	 * 
-	 * @param event event which will complete the selection
 	 */
-	void endSelection(NativeAbstractMouseEvent event) {
-		endSelection(event, true);
+	void endSelection() {
+		endSelection(true);
 	}
 
 	/**
 	 * Complete an existing selection on canvas by an event.<br>
 	 * Can be invokes by mouse up or refresh of chart (like resizing).
 	 * 
-	 * @param event event which will complete the selection
 	 * @param fireEvent if <code>false</code>, does not send any event
 	 */
-	void endSelection(NativeAbstractMouseEvent event, boolean fireEvent) {
+	void endSelection(boolean fireEvent) {
 		// sets status
 		setStatus(SelectionStatus.SELECTED);
 		// checks if it must send event
@@ -549,7 +545,7 @@ final class SelectionHandler {
 		draw();
 		// when here, the area has been draw
 		// then complete the selection
-		endSelection(NativeMouseEvent.createMouseEvent(MouseEventType.CONTEXT_MENU), false);
+		endSelection(false);
 	}
 
 	/**

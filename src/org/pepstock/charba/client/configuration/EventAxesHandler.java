@@ -223,21 +223,7 @@ final class EventAxesHandler extends AbstractEventElementHandler {
 			NativeAbstractMouseEvent mouseEvent = (NativeAbstractMouseEvent) event;
 			// checks if axis was already hovered
 			if (hoveredAxis != null) {
-				// checks if is the same scale item
-				if (hoveredAxis.getId().equals(scaleItem.getId()) && hasAxisHoverHandlers()) {
-					// fires the hover event on the chart scale
-					getConfiguration().getChart().fireEvent(new AxisHoverEvent(mouseEvent, scaleItem, axis));
-				} else if (!hoveredAxis.getId().equals(scaleItem.getId())) {
-					// leaves the stored one
-					handleLeaveEventOnElements(event);
-					// checks if events must be fired
-					if (hasAxisEnterHandlers()) {
-						// fires the enter event on the chart scale
-						getConfiguration().getChart().fireEvent(new AxisEnterEvent(mouseEvent, scaleItem, axis));
-					}
-					// adds as hovered
-					hoveredAxis = scaleItem;
-				}
+				managedHoveredAxis(mouseEvent, scaleItem, axis);
 			} else {
 				// checks if events must be fired
 				if (hasAxisEnterHandlers()) {
@@ -247,6 +233,31 @@ final class EventAxesHandler extends AbstractEventElementHandler {
 				// adds as hovered
 				hoveredAxis = scaleItem;
 			}
+		}
+	}
+
+	/**
+	 * Manages hover event on axis where hovered axis is already found.
+	 * 
+	 * @param mouseEvent hover mouse event
+	 * @param scaleItem scale item instance
+	 * @param axis axis instance
+	 */
+	private void managedHoveredAxis(NativeAbstractMouseEvent mouseEvent, ScaleItem scaleItem, Axis axis) {
+		// checks if is the same scale item
+		if (hoveredAxis.getId().equals(scaleItem.getId()) && hasAxisHoverHandlers()) {
+			// fires the hover event on the chart scale
+			getConfiguration().getChart().fireEvent(new AxisHoverEvent(mouseEvent, scaleItem, axis));
+		} else if (!hoveredAxis.getId().equals(scaleItem.getId())) {
+			// leaves the stored one
+			handleLeaveEventOnElements(mouseEvent);
+			// checks if events must be fired
+			if (hasAxisEnterHandlers()) {
+				// fires the enter event on the chart scale
+				getConfiguration().getChart().fireEvent(new AxisEnterEvent(mouseEvent, scaleItem, axis));
+			}
+			// adds as hovered
+			hoveredAxis = scaleItem;
 		}
 	}
 

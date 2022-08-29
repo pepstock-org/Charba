@@ -52,7 +52,7 @@ public interface IsEvent extends Key {
 	 * @return <code>true</code> if the event type is equals to the event type passed as string
 	 */
 	default boolean is(String eventType) {
-		return Key.isValid(this) ? value().equalsIgnoreCase(eventType) : false;
+		return Key.isValid(this) && value().equalsIgnoreCase(eventType);
 	}
 
 	/**
@@ -62,7 +62,7 @@ public interface IsEvent extends Key {
 	 * @return <code>true</code> if the event type is equals to the event type passed as event
 	 */
 	default boolean is(NativeBaseEvent event) {
-		return event != null ? is(event.getType()) : false;
+		return event != null && is(event.getType());
 	}
 
 	/**
@@ -72,7 +72,7 @@ public interface IsEvent extends Key {
 	 * @return <code>true</code> if the event type is equals to the event type passed as event container
 	 */
 	default boolean is(HasNativeEvent container) {
-		return container != null ? is(container.getNativeEvent()) : false;
+		return container != null && is(container.getNativeEvent());
 	}
 
 }

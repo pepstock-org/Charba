@@ -35,7 +35,7 @@ public final class DefaultEvents {
 	/**
 	 * Key factory instance to use for array set reading.
 	 */
-	public static final KeyFactory<IsEvent> FACTORY = keyValue -> IsEvent.create(keyValue);
+	public static final KeyFactory<IsEvent> FACTORY = IsEvent::create;
 	/**
 	 * Unmodifiable set with all default events.
 	 */
