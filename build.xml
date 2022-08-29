@@ -402,7 +402,7 @@
 			<fileset dir="${javadoc.dir}" includes="**/*"/>
 		</delete>
 		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" encoding="utf-8" source="${javadoc.source}"
-			windowtitle="${charba.description}" access="private">
+			windowtitle="${charba.description}">
 			<classpath>
 				<path refid="ivyPath-compile" />
 				<fileset dir="${classes.dir}" />

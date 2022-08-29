@@ -282,12 +282,27 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Breaking changes
 
- * rename `org.pepstock.charba.client.enums.Event` enumeration to `org.pepstock.charba.client.enums.DefaultEvent`.
+ * DOM events refactoring
+   * rename `org.pepstock.charba.client.enums.Event` enumeration to `org.pepstock.charba.client.enums.DefaultEvent`.
+   * remove `org.pepstock.charba.client.dom.BaseNativeEvent` class. Use `org.pepstock.charba.client.dom.events.NativeBaseEvent` or its subclasses in `org.pepstock.charba.client.dom.events` package instead. 
+   * remove `org.pepstock.charba.client.dom.BaseEventTypes` class. Use event types enumerations in in `org.pepstock.charba.client.dom.enums` package instead.
+   * move `Touch` and `TouchList` classes from `org.pepstock.charba.client.dom` to `org.pepstock.charba.client.dom.events` one.
+   * toast utility will use `org.pepstock.charba.client.dom.events.NativeMouseEvent` class for its actions.
 
 ### Features
 
  * import CHART.JS GEO controller version [v3.9.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.9.0).
- * enable custom event types to define to CHART.JS options by `IsEvent` interface, on top of the default ones.
+ * DOM events refactoring
+   * enable custom event types to define to CHART.JS options by `IsEvent` interface, on top of the default ones.
+   * create specific classes to map DOM events in `org.pepstock.charba.client.dom.events` package:
+     * `NativeBaseEvent` to map the [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) javascript class.
+     * `NativeUIEvent` to map the [UIEvent](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) javascript class.
+     * `NativeMouseEvent` to map the [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) javascript class.
+     * `NativeTouchEvent` to map the [TouchEvent](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent) javascript class.
+     * `NativePointerEvent` to map the [PointerEvent](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent) javascript class.
+     * `NativeKeyboardEvent` to map the [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent) javascript class.
+     * `NativeCustomEvent` to map the [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) javascript class.
+   * enable events creation by own event initialization configuration.  
  
 License
 -------
