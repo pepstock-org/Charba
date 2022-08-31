@@ -294,6 +294,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import CHART.JS GEO controller version [v3.9.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.9.0).
  * import CHART.JS ANNOTATION plugin version [v2.0.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.0.1).
  * import CHART.JS GRADIENT plugin version [v0.5.1](https://github.com/kurkle/chartjs-plugin-gradient/releases/tag/v0.5.1).
+ * import LUXON datetime library version [v3.0.3](https://github.com/moment/luxon/releases/tag/3.0.3).
  * DOM events refactoring
    * enable custom event types to define to CHART.JS options by `IsEvent` interface, on top of the default ones.
    * create specific classes to map DOM events in `org.pepstock.charba.client.dom.events` package:
