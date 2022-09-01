@@ -180,7 +180,7 @@ public final class BarBorderWidth extends AbstractBarBorderItem {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
 		public BarBorderWidth create(NativeObject nativeObject) {

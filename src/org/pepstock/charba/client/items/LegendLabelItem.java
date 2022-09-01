@@ -381,7 +381,7 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
 		public LegendLabelItem create(NativeObject nativeObject) {

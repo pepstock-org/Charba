@@ -216,7 +216,7 @@ public final class Positioner {
 				// gets the custom implementation
 				TooltipPositioner positioner = positioners.get(position.value());
 				// list of dataset items
-				List<DatasetReference> items = ArrayListHelper.unmodifiableList(datasetItems, DatasetReference.FACTORY);
+				List<DatasetReference> items = ArrayListHelper.unmodifiableList(datasetItems, chart.getDatasetReferenceFactory());
 				// and invokes it
 				Point result = positioner.computePosition(chart, items, internalPoint);
 				// checks if the result is consistent

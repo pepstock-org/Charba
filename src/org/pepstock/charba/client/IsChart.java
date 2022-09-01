@@ -18,6 +18,7 @@ package org.pepstock.charba.client;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.IsPoint;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
@@ -695,5 +696,12 @@ public interface IsChart {
 	 * @param axes list of axes to check.
 	 */
 	void checkAxes(Axis... axes);
+
+	/**
+	 * FIXME
+	 * 
+	 * @return
+	 */
+	NativeObjectContainerFactory<DatasetReference> getDatasetReferenceFactory();
 
 }

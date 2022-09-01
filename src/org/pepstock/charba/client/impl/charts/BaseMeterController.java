@@ -35,7 +35,9 @@ import org.pepstock.charba.client.dom.elements.ImageData;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.items.ArcElement;
 import org.pepstock.charba.client.items.ChartAreaNode;
+import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.options.IsFont;
@@ -164,13 +166,20 @@ final class BaseMeterController extends AbstractController {
 			double maxCircumference = dataset.getValueMaximumRatio() * 360D;
 			// gets the data set item of data set 0
 			DatasetItem item = chart.getDatasetItem(0);
-			// calculates the circumference in degree of element
-			double elemCircumference = item.getElements().get(0).getCircumference() * 180 / Math.PI;
-			// calculate the dividend
-			double dividend = Math.min(maxCircumference, elemCircumference);
-			double divider = Math.max(maxCircumference, elemCircumference);
-			// returns easing
-			return Math.min(dividend / divider, 1D);
+			// gets first element
+			ChartElement element = item.getElements().get(0);
+			// checks if is an arc element
+			if (element instanceof ArcElement) {
+				// cats to arc element
+				ArcElement arc = (ArcElement) element;
+				// calculates the circumference in degree of element
+				double elemCircumference = arc.getCircumference() * 180 / Math.PI;
+				// calculate the dividend
+				double dividend = Math.min(maxCircumference, elemCircumference);
+				double divider = Math.max(maxCircumference, elemCircumference);
+				// returns easing
+				return Math.min(dividend / divider, 1D);
+			}
 		}
 		// if here, no animation is requested
 		// then returns no easing

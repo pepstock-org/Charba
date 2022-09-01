@@ -300,4 +300,35 @@ final class JsItemsHelper {
 		return null;
 	}
 
+	/**
+	 * Returns the data element type.
+	 * 
+	 * @param controller controller instance
+	 * @return the data element type or null
+	 */
+	String getDataElementType(NativeObject controller) {
+		// checks if controller is consistent
+		if (controller != null) {
+			return NativeJsItemsHelper.getDataElementType(controller);
+		}
+		// if here, the argument is not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the dataset element type.
+	 * 
+	 * @param controller controller instance
+	 * @return the dataset element type or null
+	 */
+	String getDatasetElementType(NativeObject controller) {
+		// checks if controller is consistent
+		if (controller != null) {
+			return NativeJsItemsHelper.getDatasetElementType(controller);
+		}
+		// if here, the argument is not consistent
+		// then returns null
+		return null;
+	}
 }

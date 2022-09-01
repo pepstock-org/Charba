@@ -49,7 +49,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
-	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 949590),
+	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 975144),
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */

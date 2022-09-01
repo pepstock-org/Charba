@@ -405,6 +405,16 @@ CharbaJsItemsHelper.isHorizontal = function(object) {};
  */
 CharbaJsItemsHelper.getDatasetControllerStyle  = function(controller, dataIndex) {};
 /**
+ * @param {Object} controller 
+ * @return {String}
+ */
+CharbaJsItemsHelper.getDataElementType  = function(controller) {};
+/**
+ * @param {Object} controller 
+ * @return {String}
+ */
+CharbaJsItemsHelper.getDatasetElementType  = function(controller) {};
+/**
  * @constructor
  * @return {CharbaJsDateAdapterHelper}
  */	

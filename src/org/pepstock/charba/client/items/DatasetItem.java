@@ -15,13 +15,14 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
@@ -312,9 +313,25 @@ public final class DatasetItem extends NativeObjectContainer {
 	 * 
 	 * @return a list of dataset elements.
 	 */
-	public List<DatasetElement> getElements() {
+	public List<ChartElement> getElements() {
+		// prepares result
+		List<ChartElement> result = new LinkedList<>();
+		// gets array of elements
 		ArrayObject array = getArrayValue(Property.DATA);
-		return ArrayListHelper.unmodifiableList(array, DatasetElement.FACTORY);
+		// checks if empty
+		if (!array.isEmpty()) {
+			// gets the factory
+			ElementFactory<?> factory = ElementFactories.get().getFactory(this);
+			// scans array
+			for (int i = 0; i < array.length(); i++) {
+				// gets item of the array at index i
+				NativeObject nativeObject = array.get(i);
+				// sets the chart element
+				result.add(factory.create(nativeObject));
+			}
+		}
+		// returns the unmodifiable list
+		return Collections.unmodifiableList(result);
 	}
 
 	/**

@@ -149,12 +149,30 @@ public class TooltipItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the dataset element (point, arc, bar, etc.) for this tooltip item.
+	 * Returns the chart element (point, arc, bar, etc.) for this tooltip item.
 	 * 
-	 * @return the dataset element (point, arc, bar, etc.) for this tooltip item.
+	 * @return the chart element (point, arc, bar, etc.) for this tooltip item.
 	 */
-	public final DatasetElement getElement() {
-		return new DatasetElement(getValue(Property.ELEMENT));
+	public final ChartElement getElement() {
+		// gets native object
+		NativeObject nativeObject = getValue(Property.ELEMENT);
+		// gets chart
+		IsChart chart = getChart();
+		// check is consistent
+		if (IsChart.isValid(chart)) {
+			// gets dataset item
+			DatasetItem item = chart.getDatasetItem(getDatasetIndex());
+			// checks if the item is consistent
+			if (item != null) {
+				// gets the factory
+				ElementFactory<?> factory = ElementFactories.get().getFactory(item);
+				// creates and returns element
+				return factory.create(nativeObject);
+			}
+		}
+		// if here, it's not able to resolve the chart or dataset item
+		// then returns the base element
+		return new ChartElement(nativeObject);
 	}
 
 	/**
@@ -174,7 +192,7 @@ public class TooltipItem extends NativeObjectContainer {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
 		public TooltipItem create(NativeObject nativeObject) {

@@ -23,6 +23,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.UpdateConfiguration;
 import org.pepstock.charba.client.commons.IsPoint;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
@@ -709,6 +710,16 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	@Override
 	public List<DatasetReference> getElementsAtEvent(NativeBaseEvent event, InteractionItem interaction) {
 		return chart.getElementsAtEvent(event, interaction);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.IsChart#getDatasetReferenceFactory()
+	 */
+	@Override
+	public NativeObjectContainerFactory<DatasetReference> getDatasetReferenceFactory() {
+		return chart.getDatasetReferenceFactory();
 	}
 
 	/*

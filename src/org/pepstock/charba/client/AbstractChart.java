@@ -31,6 +31,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.controllers.ControllerType;
@@ -123,6 +124,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private final CursorType initialCursor;
 	// draw count
 	private final AtomicInteger drawCount = new AtomicInteger(0);
+	// factory to create a data set reference from a native object.
+	public final DatasetReferenceFactory datasetReferenceFactory;
 	// timer instance
 	private CTimer timer = null;
 	// status if attached
@@ -192,6 +195,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		this.initialCursor = Utilities.getCursorOfChart(this);
 		// adds chart observer to get on attach and detach
 		ChartObserver.get().addHandler(this);
+		// creaets reference factory
+		this.datasetReferenceFactory = new DatasetReferenceFactory(this);
 	}
 
 	/*
@@ -1251,7 +1256,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// gets element
 			ArrayObject result = instance.getElementsAtEventForMode(event, item.getMode().value(), item.nativeObject(), false);
 			if (result != null && !result.isEmpty()) {
-				return DatasetReference.FACTORY.create(result.get(0));
+				return getDatasetReferenceFactory().create(result.get(0));
 			}
 		}
 		// if here, inconsistent result
@@ -1289,10 +1294,18 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// gets elements
 			ArrayObject array = instance.getElementsAtEventForMode(event, item.getMode().value(), item.nativeObject(), false);
 			// returns the array
-			return ArrayListHelper.unmodifiableList(array, DatasetReference.FACTORY);
+			return ArrayListHelper.unmodifiableList(array, getDatasetReferenceFactory());
 		}
 		// if here, chart and event not consistent then returns an empty list
 		return Collections.emptyList();
+	}
+
+	/**
+	 * FIXME
+	 */
+	@Override
+	public final NativeObjectContainerFactory<DatasetReference> getDatasetReferenceFactory() {
+		return datasetReferenceFactory;
 	}
 
 	/**
@@ -1528,4 +1541,34 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 
 	}
 
+	/**
+	 * Inner class to create data set reference item by a native object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	private static class DatasetReferenceFactory implements NativeObjectContainerFactory<DatasetReference> {
+
+		private final IsChart chart;
+
+		/**
+		 * To avoid any instantiation
+		 * 
+		 * @param chart chart instance
+		 */
+		private DatasetReferenceFactory(IsChart chart) {
+			this.chart = chart;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public DatasetReference create(NativeObject nativeObject) {
+			// creates envelop
+			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<NativeObject>(nativeObject, false);
+			return new DatasetReference(chart, envelop);
+		}
+	}
 }

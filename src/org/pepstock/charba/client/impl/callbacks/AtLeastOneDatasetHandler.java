@@ -22,7 +22,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendClickEventHandler;
-import org.pepstock.charba.client.items.DatasetElement;
+import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -106,7 +106,7 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 				// gets dataset item
 				DatasetItem datasetItem = chart.getDatasetItem(i);
 				// gets all items
-				List<DatasetElement> items = datasetItem.getElements();
+				List<ChartElement> items = datasetItem.getElements();
 				// scans all items by index
 				for (int k = 0; k < items.size(); k++) {
 					// if visible return can be hidden

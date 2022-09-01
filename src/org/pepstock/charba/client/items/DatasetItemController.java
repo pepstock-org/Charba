@@ -128,4 +128,37 @@ public final class DatasetItemController extends NativeObjectContainer {
 		return new DatasetElementOptions(JsItemsHelper.get().getDatasetControllerStyle(getNativeObject(), dataIndex));
 	}
 
+	/**
+	 * Returns the data element type.
+	 * 
+	 * @return the data element type or <code>null</code> if not defined
+	 */
+	public String getDataElementType() {
+		return chechAndGetType(JsItemsHelper.get().getDataElementType(getNativeObject()));
+	}
+
+	/**
+	 * Returns the dataset element type.
+	 * 
+	 * @param controller controller instance
+	 * @return the dataset element type or <code>null</code> if not defined
+	 */
+	public String getDatasetElementType() {
+		return chechAndGetType(JsItemsHelper.get().getDatasetElementType(getNativeObject()));
+	}
+
+	/**
+	 * Checks the element type and returns itself is consistent, otherwise {@link ChartElement#UNDEFINED_TYPE}.
+	 * 
+	 * @param type the element type to check
+	 * @return argument is consistent, otherwise {@link ChartElement#UNDEFINED_TYPE}.
+	 */
+	private String chechAndGetType(String type) {
+		// checks if type is consistent
+		if (type != null) {
+			return type;
+		}
+		// if not, returns undefined
+		return ChartElement.UNDEFINED_TYPE;
+	}
 }

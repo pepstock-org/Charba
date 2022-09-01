@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.configuration.Segment;
 import org.pepstock.charba.client.enums.ContextType;
-import org.pepstock.charba.client.items.DatasetElement;
+import org.pepstock.charba.client.items.PointElement;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -64,9 +64,9 @@ public final class SegmentContext extends ChartContext {
 	}
 
 	// instances for point 0 and point 1
-	private final DatasetElement point0;
+	private final PointElement point0;
 
-	private final DatasetElement point1;
+	private final PointElement point1;
 
 	/**
 	 * Creates the object with native object instance to be wrapped, called by <code>configuration</code> package.
@@ -85,7 +85,7 @@ public final class SegmentContext extends ChartContext {
 	 * 
 	 * @return the {@link DatasetElement} related to the data as starting point of segment
 	 */
-	public DatasetElement getStartPoint() {
+	public PointElement getStartPoint() {
 		return point0;
 	}
 
@@ -94,7 +94,7 @@ public final class SegmentContext extends ChartContext {
 	 * 
 	 * @return the {@link DatasetElement} related to the data as ending point of segment
 	 */
-	public DatasetElement getEndPoint() {
+	public PointElement getEndPoint() {
 		return point1;
 	}
 
@@ -158,7 +158,7 @@ public final class SegmentContext extends ChartContext {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static final class SegementDatasetElement extends DatasetElement {
+	private static final class SegementDatasetElement extends PointElement {
 
 		/**
 		 * Creates the object with native object instance to be wrapped.

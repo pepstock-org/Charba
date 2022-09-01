@@ -87,7 +87,7 @@ public final class LegendHitBoxItem extends SizeItem implements HasInsideChecker
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
 		public LegendHitBoxItem create(NativeObject nativeObject) {

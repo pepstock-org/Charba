@@ -25,7 +25,7 @@ import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.events.ChartEventContext;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEventHandler;
-import org.pepstock.charba.client.items.DatasetElement;
+import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetReference;
 
 /**
@@ -98,7 +98,7 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 		// chart is initialized
 		if (IsChart.isValid(chart) && !dataSelectionHandlers.isEmpty() && chart.isInitialized()) {
 			// gets data set element
-			DatasetElement element = context.getDatasetElement();
+			ChartElement element = context.getElement();
 			// checks if element is consistent
 			if (element != null) {
 				// creates the data set reference element

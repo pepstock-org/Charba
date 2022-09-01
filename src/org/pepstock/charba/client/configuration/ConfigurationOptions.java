@@ -216,7 +216,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// gets the native event
 			NativeBaseEvent nativeEvent = eventContext.getNativeEvent();
 			// gets list of elements
-			List<DatasetReference> references = ArrayListHelper.unmodifiableList(items, DatasetReference.FACTORY);
+			List<DatasetReference> references = ArrayListHelper.unmodifiableList(items, getChart().getDatasetReferenceFactory());
 			// handle click event for dataset
 			handleDatasetSelection(nativeEvent, references);
 			// fires the click event on the chart
@@ -227,7 +227,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// creates a event context
 			ChartEventContext eventContext = new ChartEventContext(new ConfigurationEnvelop<>(event));
 			// fires the hover event on the chart
-			getChart().fireEvent(new ChartHoverEvent(eventContext, ArrayListHelper.unmodifiableList(items, DatasetReference.FACTORY)));
+			getChart().fireEvent(new ChartHoverEvent(eventContext, ArrayListHelper.unmodifiableList(items, getChart().getDatasetReferenceFactory())));
 		});
 		this.resizeCallbackProxy.setCallback((nativeChart, size) -> {
 			// creates a event context

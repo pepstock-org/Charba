@@ -213,7 +213,7 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
 		public BarBorderRadius create(NativeObject nativeObject) {

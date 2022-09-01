@@ -28,8 +28,9 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
+import org.pepstock.charba.client.items.ArcElement;
 import org.pepstock.charba.client.items.ChartAreaNode;
-import org.pepstock.charba.client.items.DatasetElement;
+import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.items.Undefined;
@@ -195,9 +196,11 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 		DatasetItem datasetItem = chart.getDatasetItem(datasetIndex);
 		// checks if datasetIndex is consistent
 		if (datasetItem != null && index < datasetItem.getElements().size() && index >= 0) {
-			DatasetElement item = datasetItem.getElements().get(index);
+			ChartElement element = datasetItem.getElements().get(index);
 			// checks if chart is circular or not
-			if (Undefined.isNot(item.getInnerRadius()) && Undefined.isNot(item.getOuterRadius())) {
+			if (element instanceof ArcElement) {
+				// casts to arc
+				ArcElement item = (ArcElement) element;
 				// uses the inner radius
 				radius.setInner(Math.max(item.getInnerRadius(), node.getController().getInnerRadius()));
 				// uses the outer radius

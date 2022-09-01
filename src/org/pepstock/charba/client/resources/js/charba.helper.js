@@ -760,6 +760,32 @@ CharbaJsItemsHelper.getDatasetControllerStyle = function(controller, dataIndex) 
   return controller.getStyle(dataIndex);
 }
 /**
+ * Returns the data element type.
+ *
+ * @param {Object} controller controller instance 
+ * @return {String} the data element type
+ */
+CharbaJsItemsHelper.getDataElementType = function(controller) {
+  const type = controller.dataElementType.id;
+  if (typeof id === 'boolean') {
+    return null;
+  }
+  return type;
+}
+/**
+ * Returns the dataset element type.
+ *
+ * @param {Object} controller controller instance 
+ * @return {String} the dataset element type
+ */
+CharbaJsItemsHelper.getDatasetElementType = function(controller) {
+  const type = controller.datasetElementType.id;
+  if (typeof id === 'boolean') {
+    return null;
+  }
+  return type;
+}
+/**
  * ----------------------------------------------------------------------------
  * CharbaJsDateAdapterHelper
  * ----------------------------------------------------------------------------

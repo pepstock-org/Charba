@@ -20,7 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.items.DatasetElement;
+import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.TransitionKey;
@@ -138,11 +138,11 @@ public abstract class AbstractDatasetContext extends ChartContext {
 	}
 
 	/**
-	 * Returns the {@link DatasetElement} related to the context, if there is, otherwise <code>null</code>.
+	 * Returns the {@link ChartElement} related to the context, if there is, otherwise <code>null</code>.
 	 * 
-	 * @return the {@link DatasetElement} related to the context, if there is, otherwise <code>null</code>
+	 * @return the {@link ChartElement} related to the context, if there is, otherwise <code>null</code>
 	 */
-	public final DatasetElement getDatasetElement() {
+	public final ChartElement getElement() {
 		// gets data set item
 		DatasetItem datasetItem = getDatasetItem();
 		// checks if data set item is consistent
@@ -150,7 +150,7 @@ public abstract class AbstractDatasetContext extends ChartContext {
 			// gets data index
 			int dataIndex = getDataIndex();
 			// gets the list of all data set elements
-			List<DatasetElement> elements = datasetItem.getElements();
+			List<ChartElement> elements = datasetItem.getElements();
 			// checks if the data index is consistent against the list
 			if (!elements.isEmpty() && dataIndex >= 0 && dataIndex < elements.size()) {
 				// gets data set element

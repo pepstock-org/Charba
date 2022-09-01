@@ -53,7 +53,7 @@ import org.pepstock.charba.client.dom.safehtml.SafeHtmlBuilder;
 import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
-import org.pepstock.charba.client.items.DatasetElement;
+import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetElementOptions;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.LegendItem;
@@ -564,7 +564,7 @@ final class HtmlLegendGenerator {
 		// with the locator
 		if (datasetItem != null && datasetItem.getElements().size() > itemIndex) {
 			// gets data set element by calculated index
-			DatasetElement datasetElement = datasetItem.getElements().get(itemIndex);
+			ChartElement datasetElement = datasetItem.getElements().get(itemIndex);
 			// checks if consistent
 			if (datasetElement != null) {
 				// returns the options of element

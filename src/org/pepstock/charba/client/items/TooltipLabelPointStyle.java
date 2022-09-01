@@ -246,7 +246,7 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons. NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
 		public TooltipLabelPointStyle create(NativeObject nativeObject) {

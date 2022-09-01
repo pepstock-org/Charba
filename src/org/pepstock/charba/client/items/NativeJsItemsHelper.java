@@ -180,4 +180,20 @@ final class NativeJsItemsHelper {
 	 * @return a set of predefined style properties that should be used to represent the dataset or the data if the index is specified
 	 */
 	static native NativeObject getDatasetControllerStyle(NativeObject controller, int dataIndex);
+
+	/**
+	 * Returns the data element type.
+	 * 
+	 * @param controller controller instance
+	 * @return the data element type or null
+	 */
+	static native String getDataElementType(NativeObject controller);
+
+	/**
+	 * Returns the dataset element type.
+	 * 
+	 * @param controller controller instance
+	 * @return the dataset element type or null
+	 */
+	static native String getDatasetElementType(NativeObject controller);
 }
