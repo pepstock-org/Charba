@@ -22,7 +22,7 @@ import org.pepstock.charba.client.items.Undefined;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractReadOnlyPoint extends NativeObjectContainer implements IsPoint {
+public abstract class AbstractReadOnlyPoint extends AbstractNode implements IsPoint {
 
 	/**
 	 * Name of properties of native object.
@@ -90,7 +90,7 @@ public abstract class AbstractReadOnlyPoint extends NativeObjectContainer implem
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public final String toString() {
+	public String toString() {
 		return "Point [x=" + getX() + ", y=" + getY() + "]";
 	}
 

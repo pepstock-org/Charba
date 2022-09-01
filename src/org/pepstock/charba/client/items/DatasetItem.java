@@ -321,7 +321,7 @@ public final class DatasetItem extends NativeObjectContainer {
 		// checks if empty
 		if (!array.isEmpty()) {
 			// gets the factory
-			ElementFactory<?> factory = ElementFactories.get().getFactory(this);
+			ChartElementFactory<?> factory = ChartElementFactories.get().getFactory(this);
 			// scans array
 			for (int i = 0; i < array.length(); i++) {
 				// gets item of the array at index i

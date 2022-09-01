@@ -15,9 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
 import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
-import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
@@ -74,27 +72,19 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	private final DatasetElementOptions options;
 
 	/**
-	 * Creates the item using an envelop of the native java script object which contains all properties.
-	 * 
-	 * @param envelop envelop of the nativeObject native java script object which contains all properties.
-	 */
-	protected ChartElement(CallbacksEnvelop<NativeObject> envelop) {
-		this(Envelop.checkAndGetIfValid(envelop).getContent());
-	}
-
-	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	ChartElement(NativeObject nativeObject) {
+	protected ChartElement(NativeObject nativeObject) {
 		super(nativeObject);
 		// sets the data set item options
+		// FIXME
 		this.options = new DatasetElementOptions(getValue(Property.OPTIONS));
 	}
 
 	/**
-	 * Returns the data set item options.
+	 * FIXME Returns the data set item options.
 	 *
 	 * @return the data set item options.
 	 */
@@ -129,12 +119,22 @@ public class ChartElement extends AbstractReadOnlyPoint {
 		return getValue(Property.STOP, Undefined.BOOLEAN);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public final String toString() {
+		return "Element [x=" + getX() + ", y=" + getY() + "]";
+	}
+
 	/**
 	 * Inner class to create data element by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class UndefinedDataElementFactory implements ElementFactory<ChartElement> {
+	private static class UndefinedDataElementFactory implements ChartElementFactory<ChartElement> {
 
 		/*
 		 * (non-Javadoc)

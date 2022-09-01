@@ -13,11 +13,13 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.items;
+package org.pepstock.charba.client.matrix;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.items.ChartElement;
+import org.pepstock.charba.client.items.ChartElementFactory;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * FIXME Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
@@ -27,30 +29,24 @@ import org.pepstock.charba.client.commons.NativeObject;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class ArcElement extends ChartElement {
+public final class MatrixElement extends ChartElement {
 
 	/**
-	 * ARC element type.
+	 * MATRIX element type.
 	 */
-	public static final String TYPE = "arc";
+	public static final String TYPE = "matrix";
 	/**
-	 * Static instance for the ARC element factory
+	 * Static instance for the MATRIX element factory
 	 */
-	public static final ChartElementFactory<ArcElement> FACTORY = new ArcElementFactory();
+	public static final ChartElementFactory<MatrixElement> FACTORY = new MatrixElementFactory();
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		CIRCUMFERENCE("circumference"),
-		END_ANGLE("endAngle"),
-		INNER_RADIUS("innerRadius"),
-		OUTER_RADIUS("outerRadius"),
-		START_ANGLE("startAngle"),
-		// bubble, line, radar
-		SKIP("skip"),
-		STOP("stop");
+		HEIGHT("height"),
+		WIDTH("width");
 
 		// name value of property
 		private final String value;
@@ -81,53 +77,26 @@ public class ArcElement extends ChartElement {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	ArcElement(NativeObject nativeObject) {
+	MatrixElement(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
 	/**
-	 * Returns the start angle of data set item.
+	 * Returns the width of data set item in pixel.
 	 * 
-	 * @return the start angle of data set item.
+	 * @return the width of data set item in pixel.
 	 */
-	public final double getStartAngle() {
-		return getValue(Property.START_ANGLE, Undefined.DOUBLE);
+	public double getWidth() {
+		return getValue(Property.WIDTH, Undefined.DOUBLE);
 	}
 
 	/**
-	 * Returns the end angle of data set item.
+	 * Returns the height of data set item in pixel.
 	 * 
-	 * @return the end angle of data set item.
+	 * @return the height of data set item in pixel.
 	 */
-	public double getEndAngle() {
-		return getValue(Property.END_ANGLE, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns the circumference of data set item.
-	 * 
-	 * @return the circumference of data set item.
-	 */
-	public double getCircumference() {
-		return getValue(Property.CIRCUMFERENCE, Defaults.get().getGlobal().getCircumference());
-	}
-
-	/**
-	 * Returns the outer radius of data set item in pixel.
-	 * 
-	 * @return the outer radius of data set item in pixel.
-	 */
-	public double getOuterRadius() {
-		return getValue(Property.OUTER_RADIUS, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns the inner radius of data set item in pixel.
-	 * 
-	 * @return the inner radius of data set item in pixel.
-	 */
-	public double getInnerRadius() {
-		return getValue(Property.INNER_RADIUS, Undefined.DOUBLE);
+	public double getHeight() {
+		return getValue(Property.HEIGHT, Undefined.DOUBLE);
 	}
 
 	/**
@@ -135,7 +104,7 @@ public class ArcElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class ArcElementFactory implements ChartElementFactory<ArcElement> {
+	private static class MatrixElementFactory implements ChartElementFactory<MatrixElement> {
 
 		/*
 		 * (non-Javadoc)
@@ -143,8 +112,8 @@ public class ArcElement extends ChartElement {
 		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public ArcElement create(NativeObject nativeObject) {
-			return new ArcElement(nativeObject);
+		public MatrixElement create(NativeObject nativeObject) {
+			return new MatrixElement(nativeObject);
 		}
 
 		/*

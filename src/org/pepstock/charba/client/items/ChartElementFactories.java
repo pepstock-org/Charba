@@ -24,18 +24,18 @@ import java.util.Map;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ElementFactories {
+public final class ChartElementFactories {
 
 	// private instance for singleton
-	private static final ElementFactories INSTANCE = new ElementFactories();
+	private static final ChartElementFactories INSTANCE = new ChartElementFactories();
 	// maps with all factories
 	// K = data element type, V = data element factory
-	private final Map<String, ElementFactory<?>> factories = new HashMap<>();
+	private final Map<String, ChartElementFactory<?>> factories = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private ElementFactories() {
+	private ChartElementFactories() {
 		// loads elements factories OOTB of CHART.JS
 		register(BarElement.FACTORY);
 		register(PointElement.FACTORY);
@@ -47,7 +47,7 @@ public final class ElementFactories {
 	 * 
 	 * @return the singleton instance
 	 */
-	public static ElementFactories get() {
+	public static ChartElementFactories get() {
 		return INSTANCE;
 	}
 
@@ -57,7 +57,7 @@ public final class ElementFactories {
 	 * @param factory
 	 * @return
 	 */
-	public boolean register(ElementFactory<?> factory) {
+	public boolean register(ChartElementFactory<?> factory) {
 		// checks if factory is consistent
 		if (factory != null) {
 			// gets the type and
@@ -81,11 +81,11 @@ public final class ElementFactories {
 	 * @param item
 	 * @return
 	 */
-	public ElementFactory<?> getFactory(DatasetItem item) {
+	public ChartElementFactory<?> getFactory(DatasetItem item) {
 		// checks if items is consistent
 		if (item != null) {
 			// gets and returns the factory
-			return getFactory(item.getController().getDatasetElementType());
+			return getFactory(item.getController().getDataElementType());
 		}
 		// if here, item not consistent
 		return ChartElement.FACTORY;
@@ -97,7 +97,7 @@ public final class ElementFactories {
 	 * @param type
 	 * @return
 	 */
-	public ElementFactory<?> getFactory(String type) {
+	public ChartElementFactory<?> getFactory(String type) {
 		// check if consistent and registered
 		if (type != null && factories.containsKey(type)) {
 			// then returns factory

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface ElementFactory<T extends ChartElement> extends NativeObjectContainerFactory<T> {
+public interface ChartElementFactory<T extends ChartElement> extends NativeObjectContainerFactory<T> {
 
 	/**
 	 * FIXME

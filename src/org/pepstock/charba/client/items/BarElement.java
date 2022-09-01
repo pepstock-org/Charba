@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
-import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
@@ -37,7 +35,7 @@ public class BarElement extends ChartElement {
 	/**
 	 * Static instance for the BAR element factory
 	 */
-	public static final ElementFactory<BarElement> FACTORY = new BarElementFactory();
+	public static final ChartElementFactory<BarElement> FACTORY = new BarElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -71,15 +69,6 @@ public class BarElement extends ChartElement {
 			return value;
 		}
 
-	}
-
-	/**
-	 * Creates the item using an envelop of the native java script object which contains all properties.
-	 * 
-	 * @param envelop envelop of the nativeObject native java script object which contains all properties.
-	 */
-	protected BarElement(CallbacksEnvelop<NativeObject> envelop) {
-		this(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
 
 	/**
@@ -132,7 +121,7 @@ public class BarElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class BarElementFactory implements ElementFactory<BarElement> {
+	private static class BarElementFactory implements ChartElementFactory<BarElement> {
 
 		/*
 		 * (non-Javadoc)

@@ -20,6 +20,7 @@ import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.controllers.AbstractController;
 import org.pepstock.charba.client.controllers.ControllerProvider;
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.items.ChartElementFactories;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -73,6 +74,8 @@ final class SankeyController extends AbstractController {
 			ResourcesType.getResources().inject();
 			// injects CHARTJS-SANKEY controller
 			Injector.ensureInjected(RESOURCE);
+			// registers sankey element
+			ChartElementFactories.get().register(SankeyElement.FACTORY);
 			// creates and returns an fake controller
 			return new SankeyController(controllerType);
 		}

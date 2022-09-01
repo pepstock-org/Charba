@@ -13,11 +13,13 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.items;
+package org.pepstock.charba.client.sankey;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.items.ChartElement;
+import org.pepstock.charba.client.items.ChartElementFactory;
+import org.pepstock.charba.client.items.Undefined;
 
 /**
  * FIXME Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
@@ -27,30 +29,25 @@ import org.pepstock.charba.client.commons.NativeObject;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class ArcElement extends ChartElement {
+public final class SankeyElement extends ChartElement {
 
 	/**
-	 * ARC element type.
+	 * SANKEY element type.
 	 */
-	public static final String TYPE = "arc";
+	public static final String TYPE = "flow";
 	/**
-	 * Static instance for the ARC element factory
+	 * Static instance for the SANKEY element factory
 	 */
-	public static final ChartElementFactory<ArcElement> FACTORY = new ArcElementFactory();
+	public static final ChartElementFactory<SankeyElement> FACTORY = new SankeyElementFactory();
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		CIRCUMFERENCE("circumference"),
-		END_ANGLE("endAngle"),
-		INNER_RADIUS("innerRadius"),
-		OUTER_RADIUS("outerRadius"),
-		START_ANGLE("startAngle"),
-		// bubble, line, radar
-		SKIP("skip"),
-		STOP("stop");
+		HEIGHT("height"),
+		X2("x2"),
+		Y2("y2");
 
 		// name value of property
 		private final String value;
@@ -81,53 +78,35 @@ public class ArcElement extends ChartElement {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	ArcElement(NativeObject nativeObject) {
+	SankeyElement(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
 	/**
-	 * Returns the start angle of data set item.
+	 * Returns the X2 location of element in pixel.
 	 * 
-	 * @return the start angle of data set item.
+	 * @return the X2 location of element in pixel.
 	 */
-	public final double getStartAngle() {
-		return getValue(Property.START_ANGLE, Undefined.DOUBLE);
+	public double getX2() {
+		return getValue(Property.X2, Undefined.DOUBLE);
 	}
 
 	/**
-	 * Returns the end angle of data set item.
+	 * Returns the Y location of element in pixel.
 	 * 
-	 * @return the end angle of data set item.
+	 * @return the Y location of element in pixel.
 	 */
-	public double getEndAngle() {
-		return getValue(Property.END_ANGLE, Undefined.DOUBLE);
+	public double getY2() {
+		return getValue(Property.Y2, Undefined.DOUBLE);
 	}
 
 	/**
-	 * Returns the circumference of data set item.
+	 * Returns the height of data set item in pixel.
 	 * 
-	 * @return the circumference of data set item.
+	 * @return the height of data set item in pixel.
 	 */
-	public double getCircumference() {
-		return getValue(Property.CIRCUMFERENCE, Defaults.get().getGlobal().getCircumference());
-	}
-
-	/**
-	 * Returns the outer radius of data set item in pixel.
-	 * 
-	 * @return the outer radius of data set item in pixel.
-	 */
-	public double getOuterRadius() {
-		return getValue(Property.OUTER_RADIUS, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns the inner radius of data set item in pixel.
-	 * 
-	 * @return the inner radius of data set item in pixel.
-	 */
-	public double getInnerRadius() {
-		return getValue(Property.INNER_RADIUS, Undefined.DOUBLE);
+	public double getHeight() {
+		return getValue(Property.HEIGHT, Undefined.DOUBLE);
 	}
 
 	/**
@@ -135,7 +114,7 @@ public class ArcElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class ArcElementFactory implements ChartElementFactory<ArcElement> {
+	private static class SankeyElementFactory implements ChartElementFactory<SankeyElement> {
 
 		/*
 		 * (non-Javadoc)
@@ -143,8 +122,8 @@ public class ArcElement extends ChartElement {
 		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public ArcElement create(NativeObject nativeObject) {
-			return new ArcElement(nativeObject);
+		public SankeyElement create(NativeObject nativeObject) {
+			return new SankeyElement(nativeObject);
 		}
 
 		/*
