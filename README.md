@@ -322,7 +322,7 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `TreeMapElement` and `TreeMapElementOptions` classes for treemap charts.
    * `SankeyElement` and `SankeyElementOptions` classes for sankey charts.
    * `ChoroplethElement` and `ChoroplethElementOptions` classes for GEO choropeth charts.
- * add `GeoFeature` configuration element to BubbleMap chart.  
+ * add `GeoFeature` configuration element to `BubbleMap` chart.  
  
 License
 -------
