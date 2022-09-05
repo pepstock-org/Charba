@@ -32,7 +32,7 @@ public class BarElement extends ChartElement {
 	/**
 	 * Static instance for the BAR element factory
 	 */
-	public static final ChartElementFactory<BarElement> FACTORY = new BarElementFactory();
+	public static final ChartElementFactory<BarElement, BarElementOptions> FACTORY = new BarElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -74,7 +74,17 @@ public class BarElement extends ChartElement {
 	 * @param nativeObject native java script object which contains all properties.
 	 */
 	BarElement(NativeObject nativeObject) {
-		super(nativeObject);
+		super(TYPE, nativeObject);
+	}
+
+	/**
+	 * Returns the element options.
+	 *
+	 * @return the element options.
+	 */
+	@Override
+	public BarElementOptions getOptions() {
+		return (BarElementOptions) super.getOptions();
 	}
 
 	/**
@@ -82,7 +92,7 @@ public class BarElement extends ChartElement {
 	 * 
 	 * @return <code>true</code> if is an horizontal view.
 	 */
-	public final boolean isHorizontal() {
+	public boolean isHorizontal() {
 		return getValue(Property.HORIZONTAL, Undefined.BOOLEAN);
 	}
 
@@ -91,7 +101,7 @@ public class BarElement extends ChartElement {
 	 * 
 	 * @return the base value of data set.
 	 */
-	public final double getBase() {
+	public double getBase() {
 		return getValue(Property.BASE, Undefined.DOUBLE);
 	}
 
@@ -100,7 +110,7 @@ public class BarElement extends ChartElement {
 	 * 
 	 * @return the width of data set item in pixel.
 	 */
-	public final double getWidth() {
+	public double getWidth() {
 		return getValue(Property.WIDTH, Undefined.DOUBLE);
 	}
 
@@ -109,7 +119,7 @@ public class BarElement extends ChartElement {
 	 * 
 	 * @return the height of data set item in pixel.
 	 */
-	public final double getHeight() {
+	public double getHeight() {
 		return getValue(Property.HEIGHT, Undefined.DOUBLE);
 	}
 
@@ -118,7 +128,7 @@ public class BarElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class BarElementFactory implements ChartElementFactory<BarElement> {
+	private static class BarElementFactory implements ChartElementFactory<BarElement, BarElementOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -139,6 +149,17 @@ public class BarElement extends ChartElement {
 		public String getType() {
 			return TYPE;
 		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public BarElementOptions createOptions(NativeObject nativeObject) {
+			return new BarElementOptions(nativeObject);
+		}
+
 	}
 
 }

@@ -44,6 +44,8 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 
 	private static final boolean DEFAULT_AUTO_INFLATE_AMOUNT = true;
 
+	private static final double DEFAULT_BASE = Undefined.DOUBLE;
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -149,6 +151,16 @@ public final class DefaultBar extends AbstractDefaultOptionsElement implements I
 	@Override
 	public int getInflateAmount() {
 		return Undefined.INTEGER;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#getBase()
+	 */
+	@Override
+	public double getBase() {
+		return DEFAULT_BASE;
 	}
 
 }

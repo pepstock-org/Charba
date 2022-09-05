@@ -157,6 +157,28 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	}
 
 	/**
+	 * Sets the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @param base base value for the bar in data units along the value axis.<br>
+	 *            If not set, defaults to the value axis base value
+	 */
+	public void setBase(double base) {
+		getConfiguration().getElements().getBar().setBase(base);
+	}
+
+	/**
+	 * Returns the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @return base value for the bar in data units along the value axis.<br>
+	 *         If not set, defaults to the value axis base value
+	 */
+	public double getBase() {
+		return getConfiguration().getElements().getBar().getBase();
+	}
+
+	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
 	 * @param borderSkipped to set <code>false</code> as border skipped. If set <code>true</code>, is ignored

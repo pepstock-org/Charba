@@ -33,7 +33,7 @@ public class ArcElement extends ChartElement {
 	/**
 	 * Static instance for the ARC element factory
 	 */
-	public static final ChartElementFactory<ArcElement> FACTORY = new ArcElementFactory();
+	public static final ChartElementFactory<ArcElement, ArcElementOptions> FACTORY = new ArcElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -74,12 +74,22 @@ public class ArcElement extends ChartElement {
 	}
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the elemet using a native java script object which contains all properties.
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
 	ArcElement(NativeObject nativeObject) {
-		super(nativeObject);
+		super(TYPE, nativeObject);
+	}
+
+	/**
+	 * Returns the element options.
+	 *
+	 * @return the element options.
+	 */
+	@Override
+	public ArcElementOptions getOptions() {
+		return (ArcElementOptions) super.getOptions();
 	}
 
 	/**
@@ -87,7 +97,7 @@ public class ArcElement extends ChartElement {
 	 * 
 	 * @return the start angle of data set item.
 	 */
-	public final double getStartAngle() {
+	public double getStartAngle() {
 		return getValue(Property.START_ANGLE, Undefined.DOUBLE);
 	}
 
@@ -132,7 +142,7 @@ public class ArcElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class ArcElementFactory implements ChartElementFactory<ArcElement> {
+	private static class ArcElementFactory implements ChartElementFactory<ArcElement, ArcElementOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -153,6 +163,17 @@ public class ArcElement extends ChartElement {
 		public String getType() {
 			return TYPE;
 		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public ArcElementOptions createOptions(NativeObject nativeObject) {
+			return new ArcElementOptions(nativeObject);
+		}
+
 	}
 
 }

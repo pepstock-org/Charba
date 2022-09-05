@@ -165,14 +165,14 @@ public class TooltipItem extends NativeObjectContainer {
 			// checks if the item is consistent
 			if (item != null) {
 				// gets the factory
-				ChartElementFactory<?> factory = ChartElementFactories.get().getFactory(item);
+				ChartElementFactory<?, ?> factory = ChartElementFactories.get().getFactory(item);
 				// creates and returns element
 				return factory.create(nativeObject);
 			}
 		}
 		// if here, it's not able to resolve the chart or dataset item
 		// then returns the base element
-		return new ChartElement(nativeObject);
+		return new ChartElement(ChartElement.UNDEFINED_TYPE, nativeObject);
 	}
 
 	/**

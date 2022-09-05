@@ -35,7 +35,7 @@ public final class TreeMapElement extends ChartElement {
 	/**
 	 * Static instance for the TREEMAP element factory
 	 */
-	public static final ChartElementFactory<TreeMapElement> FACTORY = new TreeMapElementFactory();
+	public static final ChartElementFactory<TreeMapElement, TreeMapElementOptions> FACTORY = new TreeMapElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -75,7 +75,7 @@ public final class TreeMapElement extends ChartElement {
 	 * @param nativeObject native java script object which contains all properties.
 	 */
 	TreeMapElement(NativeObject nativeObject) {
-		super(nativeObject);
+		super(TYPE, nativeObject);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public final class TreeMapElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class TreeMapElementFactory implements ChartElementFactory<TreeMapElement> {
+	private static class TreeMapElementFactory implements ChartElementFactory<TreeMapElement, TreeMapElementOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -122,6 +122,17 @@ public final class TreeMapElement extends ChartElement {
 		public String getType() {
 			return TYPE;
 		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public TreeMapElementOptions createOptions(NativeObject nativeObject) {
+			return new TreeMapElementOptions(nativeObject);
+		}
+
 	}
 
 }

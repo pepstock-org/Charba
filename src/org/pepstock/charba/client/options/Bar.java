@@ -36,6 +36,7 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar, 
 	 */
 	private enum Property implements Key
 	{
+		BASE("base"),
 		BORDER_SKIPPED("borderSkipped"),
 		BORDER_RADIUS("borderRadius"),
 		ENABLE_BORDER_RADIUS("enableBorderRadius"),
@@ -110,6 +111,29 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar, 
 	@Override
 	public boolean isEnableBorderRadius() {
 		return getValue(Property.ENABLE_BORDER_RADIUS, getDefaultValues().isEnableBorderRadius());
+	}
+
+	/**
+	 * Sets the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @param base base value for the bar in data units along the value axis.<br>
+	 *            If not set, defaults to the value axis base value
+	 */
+	public void setBase(double base) {
+		setValueAndAddToParent(Property.BASE, base);
+	}
+
+	/**
+	 * Returns the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @return base value for the bar in data units along the value axis.<br>
+	 *         If not set, defaults to the value axis base value
+	 */
+	@Override
+	public double getBase() {
+		return getValue(Property.BASE, getDefaultValues().getBase());
 	}
 
 	/**

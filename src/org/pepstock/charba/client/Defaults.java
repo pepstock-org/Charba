@@ -43,9 +43,11 @@ import org.pepstock.charba.client.events.IsLegendEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
-import org.pepstock.charba.client.items.DatasetElementOptions;
+import org.pepstock.charba.client.items.ChartElementOptions;
+import org.pepstock.charba.client.items.CommonElementOptions;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
+import org.pepstock.charba.client.items.PointElementOptions;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.items.TooltipLabelPointStyle;
@@ -428,11 +430,13 @@ public final class Defaults {
 	 */
 	public TooltipLabelColor invokeTooltipsCallbackOnLabelColor(IsChart chart, TooltipItem item) {
 		// gets the style options of controller
-		DatasetElementOptions style = retrieveDatasetElementOptions(chart, item);
+		ChartElementOptions style = retrieveDatasetElementOptions(chart, item);
 		// checks if style is consistent
-		if (style != null) {
+		if (style instanceof CommonElementOptions) {
+			// casts to common element option
+			CommonElementOptions options = (CommonElementOptions) style;
 			// creates new tooltip label color
-			return style.createTooltipLabelColor();
+			return options.createTooltipLabelColor();
 		}
 		// if here, the arguments or the labels are not consistent
 		// then returns null
@@ -448,11 +452,13 @@ public final class Defaults {
 	 */
 	public TooltipLabelPointStyle invokeTooltipsCallbackOnLabelPointStyle(IsChart chart, TooltipItem item) {
 		// gets the style options of controller
-		DatasetElementOptions style = retrieveDatasetElementOptions(chart, item);
+		ChartElementOptions style = retrieveDatasetElementOptions(chart, item);
 		// checks if style is consistent
-		if (style != null) {
+		if (style instanceof PointElementOptions) {
+			// casts to point element option
+			PointElementOptions options = (PointElementOptions) style;
 			// creates new tooltip label point style
-			return style.createTooltipLabelPointStyle();
+			return options.createTooltipLabelPointStyle();
 		}
 		// if here, the arguments or the labels are not consistent
 		// then returns null
@@ -467,7 +473,7 @@ public final class Defaults {
 	 * @return a set of predefined style properties that should be used to represent the data set or the data if the index is specified or <code>null</code> if arguments are not
 	 *         consistent
 	 */
-	private DatasetElementOptions retrieveDatasetElementOptions(IsChart chart, TooltipItem item) {
+	private ChartElementOptions retrieveDatasetElementOptions(IsChart chart, TooltipItem item) {
 		// checks if arguments are consistent
 		if (IsChart.isConsistent(chart) && item != null && Undefined.isNot(item.getDatasetIndex())) {
 			// gets the data set item at index

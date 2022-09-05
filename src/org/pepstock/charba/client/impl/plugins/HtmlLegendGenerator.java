@@ -54,10 +54,11 @@ import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.items.ChartElement;
-import org.pepstock.charba.client.items.DatasetElementOptions;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
+import org.pepstock.charba.client.items.PointElement;
+import org.pepstock.charba.client.items.PointElementOptions;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -499,7 +500,7 @@ final class HtmlLegendGenerator {
 			// calculated a radius, predefined by size
 			double radius = (size - 2) / 2D;
 			// here is searching for radius set to data set level
-			DatasetElementOptions datasetViewItem = lookForDatasetMetaItem(chart, item);
+			PointElementOptions datasetViewItem = lookForDatasetMetaItem(chart, item);
 			// checks if data set item is consistent
 			if (datasetViewItem != null) {
 				// if data set item is found
@@ -544,7 +545,7 @@ final class HtmlLegendGenerator {
 	 * @param item legend item to use as data set locator
 	 * @return a data set element options instance using the legend item locator (data set or data index) or <code>null</code> if not found.
 	 */
-	private DatasetElementOptions lookForDatasetMetaItem(IsChart chart, LegendItem item) {
+	private PointElementOptions lookForDatasetMetaItem(IsChart chart, LegendItem item) {
 		// prepares the data set item instance
 		DatasetItem datasetItem = null;
 		// item index set to 0 for data set index locator
@@ -566,9 +567,11 @@ final class HtmlLegendGenerator {
 			// gets data set element by calculated index
 			ChartElement datasetElement = datasetItem.getElements().get(itemIndex);
 			// checks if consistent
-			if (datasetElement != null) {
+			if (datasetElement instanceof PointElement) {
+				// casts
+				PointElement element = (PointElement) datasetElement;
 				// returns the options of element
-				return datasetElement.getOptions();
+				return element.getOptions();
 			}
 		}
 		// if here, the locator is not able to get the right data set item

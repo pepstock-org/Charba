@@ -35,7 +35,7 @@ public final class MatrixElement extends ChartElement {
 	/**
 	 * Static instance for the MATRIX element factory
 	 */
-	public static final ChartElementFactory<MatrixElement> FACTORY = new MatrixElementFactory();
+	public static final ChartElementFactory<MatrixElement, MatrixElementOptions> FACTORY = new MatrixElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -75,7 +75,17 @@ public final class MatrixElement extends ChartElement {
 	 * @param nativeObject native java script object which contains all properties.
 	 */
 	MatrixElement(NativeObject nativeObject) {
-		super(nativeObject);
+		super(TYPE, nativeObject);
+	}
+
+	/**
+	 * Returns the element options.
+	 *
+	 * @return the element options.
+	 */
+	@Override
+	public MatrixElementOptions getOptions() {
+		return (MatrixElementOptions) super.getOptions();
 	}
 
 	/**
@@ -101,7 +111,7 @@ public final class MatrixElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class MatrixElementFactory implements ChartElementFactory<MatrixElement> {
+	private static class MatrixElementFactory implements ChartElementFactory<MatrixElement, MatrixElementOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -122,6 +132,17 @@ public final class MatrixElement extends ChartElement {
 		public String getType() {
 			return TYPE;
 		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public MatrixElementOptions createOptions(NativeObject nativeObject) {
+			return new MatrixElementOptions(nativeObject);
+		}
+
 	}
 
 }

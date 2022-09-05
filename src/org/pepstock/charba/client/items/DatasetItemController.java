@@ -124,8 +124,11 @@ public final class DatasetItemController extends NativeObjectContainer {
 	 * @param dataIndex index of data
 	 * @return a set of predefined style properties that should be used to represent the dataset or the data if the index is specified
 	 */
-	public DatasetElementOptions getStyle(int dataIndex) {
-		return new DatasetElementOptions(JsItemsHelper.get().getDatasetControllerStyle(getNativeObject(), dataIndex));
+	public ChartElementOptions getStyle(int dataIndex) {
+		// gets factory
+		ChartElementFactory<?, ?> factory = ChartElementFactories.get().getFactory(getDataElementType());
+		// creates and return the options
+		return factory.createOptions(JsItemsHelper.get().getDatasetControllerStyle(getNativeObject(), dataIndex));
 	}
 
 	/**

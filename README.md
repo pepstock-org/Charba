@@ -288,7 +288,14 @@ Here you can find the list of enhancements and updates available on `master` bra
    * remove `org.pepstock.charba.client.dom.BaseEventTypes` class. Use event types enumerations in in `org.pepstock.charba.client.dom.enums` package instead.
    * move `Touch` and `TouchList` classes from `org.pepstock.charba.client.dom` to `org.pepstock.charba.client.dom.events` one.
    * toast utility will use `org.pepstock.charba.client.dom.events.NativeMouseEvent` class for its actions.
-
+   * rename `getDatasetElement` method to `getElement` in `AbstractDatasetContext` class.
+   * rename `DatasetElement` class to `ChartElement`.
+     * the chart elements are typed based on the data type of the chart controller.
+   * rename `DatasetElementOptions` class to `ChartElementOptions`.
+     * the chart elements options are typed based on the data type of the chart controller.
+   * rename `ChoroplethBar` class to `GeoFeature`
+   * remove `BubbleMapPoint` class. Use `Point` element class instead to configure bubble map points.
+   
 ### Features
 
  * import CHART.JS GEO controller version [v3.9.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.9.0).
@@ -306,6 +313,7 @@ Here you can find the list of enhancements and updates available on `master` bra
      * `NativeKeyboardEvent` to map the [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent) javascript class.
      * `NativeCustomEvent` to map the [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) javascript class.
    * enable events creation by own event initialization configuration.  
+ * add `base` option to `Bar` element options and configuration class.
  
 License
 -------

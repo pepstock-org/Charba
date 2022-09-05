@@ -108,7 +108,7 @@ public final class DatasetReference extends NativeObjectContainer {
 		// gets dataset item form chart
 		DatasetItem item = chart.getDatasetItem(datasetIndex);
 		// gets the factory
-		ChartElementFactory<?> factory = ChartElementFactories.get().getFactory(item);
+		ChartElementFactory<?, ?> factory = ChartElementFactories.get().getFactory(item);
 		// sets the chart element
 		element = factory.create(getValue(Property.ELEMENT));
 	}

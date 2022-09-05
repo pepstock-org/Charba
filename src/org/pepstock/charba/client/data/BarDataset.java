@@ -372,7 +372,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		if (!isType(Property.BASE, ObjectType.FUNCTION)) {
 			// is not a function therefore
 			// the property is an array or number
-			ArrayDouble array = getValueOrArray(Property.BASE, Undefined.DOUBLE);
+			ArrayDouble array = getValueOrArray(Property.BASE, getDefaultValues().getElements().getBar().getBase());
 			return ArrayListHelper.list(array);
 		}
 		// if here, the property is missing

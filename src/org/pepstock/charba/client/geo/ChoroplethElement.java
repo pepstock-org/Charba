@@ -36,7 +36,7 @@ public final class ChoroplethElement extends ChartElement {
 	/**
 	 * Static instance for the GEOFEATURE element factory
 	 */
-	public static final ChartElementFactory<ChoroplethElement> FACTORY = new ChoroplethElementFactory();
+	public static final ChartElementFactory<ChoroplethElement, ChoroplethElementOptions> FACTORY = new ChoroplethElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -82,10 +82,20 @@ public final class ChoroplethElement extends ChartElement {
 	 * @param nativeObject native java script object which contains all properties.
 	 */
 	ChoroplethElement(NativeObject nativeObject) {
-		super(nativeObject);
+		super(TYPE, nativeObject);
 		// stores internal element
 		this.center = new DataPointCenter(getValue(Property.CENTER));
 		this.feature = new Feature(getValue(Property.FEATURE));
+	}
+
+	/**
+	 * Returns the element options.
+	 *
+	 * @return the element options.
+	 */
+	@Override
+	public ChoroplethElementOptions getOptions() {
+		return (ChoroplethElementOptions) super.getOptions();
 	}
 
 	/**
@@ -120,7 +130,7 @@ public final class ChoroplethElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class ChoroplethElementFactory implements ChartElementFactory<ChoroplethElement> {
+	private static class ChoroplethElementFactory implements ChartElementFactory<ChoroplethElement, ChoroplethElementOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -141,6 +151,17 @@ public final class ChoroplethElement extends ChartElement {
 		public String getType() {
 			return TYPE;
 		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public ChoroplethElementOptions createOptions(NativeObject nativeObject) {
+			return new ChoroplethElementOptions(nativeObject);
+		}
+
 	}
 
 }

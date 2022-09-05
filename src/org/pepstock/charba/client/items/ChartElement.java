@@ -68,27 +68,42 @@ public class ChartElement extends AbstractReadOnlyPoint {
 
 	}
 
-	// data set item options instance
-	private final DatasetElementOptions options;
+	// element type instance
+	private final String type;
+	// element options instance
+	private final ChartElementOptions options;
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Creates the element using its type and a native java script object which contains all properties.
 	 * 
+	 * @param type chart element type
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	protected ChartElement(NativeObject nativeObject) {
+	protected ChartElement(String type, NativeObject nativeObject) {
 		super(nativeObject);
-		// sets the data set item options
-		// FIXME
-		this.options = new DatasetElementOptions(getValue(Property.OPTIONS));
+		// gets factory
+		ChartElementFactory<?, ?> factory = ChartElementFactories.get().getFactory(type);
+		// stores chart element type
+		this.type = factory.getType();
+		// sets the element options
+		this.options = factory.createOptions(getValue(Property.OPTIONS));
 	}
 
 	/**
-	 * FIXME Returns the data set item options.
+	 * Returns the data set item options.
 	 *
 	 * @return the data set item options.
 	 */
-	public final DatasetElementOptions getOptions() {
+	public final String getType() {
+		return type;
+	}
+
+	/**
+	 * Returns the element options.
+	 *
+	 * @return the element options.
+	 */
+	public ChartElementOptions getOptions() {
 		return options;
 	}
 
@@ -134,7 +149,7 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class UndefinedDataElementFactory implements ChartElementFactory<ChartElement> {
+	private static class UndefinedDataElementFactory implements ChartElementFactory<ChartElement, ChartElementOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -143,7 +158,7 @@ public class ChartElement extends AbstractReadOnlyPoint {
 		 */
 		@Override
 		public ChartElement create(NativeObject nativeObject) {
-			return new ChartElement(nativeObject);
+			return new ChartElement(UNDEFINED_TYPE, nativeObject);
 		}
 
 		/*
@@ -154,6 +169,16 @@ public class ChartElement extends AbstractReadOnlyPoint {
 		@Override
 		public String getType() {
 			return UNDEFINED_TYPE;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public ChartElementOptions createOptions(NativeObject nativeObject) {
+			return new ChartElementOptions(nativeObject);
 		}
 
 	}

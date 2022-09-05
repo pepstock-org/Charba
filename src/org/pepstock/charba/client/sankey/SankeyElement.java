@@ -35,7 +35,7 @@ public final class SankeyElement extends ChartElement {
 	/**
 	 * Static instance for the SANKEY element factory
 	 */
-	public static final ChartElementFactory<SankeyElement> FACTORY = new SankeyElementFactory();
+	public static final ChartElementFactory<SankeyElement, SankeyElementOptions> FACTORY = new SankeyElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -76,7 +76,17 @@ public final class SankeyElement extends ChartElement {
 	 * @param nativeObject native java script object which contains all properties.
 	 */
 	SankeyElement(NativeObject nativeObject) {
-		super(nativeObject);
+		super(TYPE, nativeObject);
+	}
+
+	/**
+	 * Returns the element options.
+	 *
+	 * @return the element options.
+	 */
+	@Override
+	public SankeyElementOptions getOptions() {
+		return (SankeyElementOptions) super.getOptions();
 	}
 
 	/**
@@ -111,7 +121,7 @@ public final class SankeyElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class SankeyElementFactory implements ChartElementFactory<SankeyElement> {
+	private static class SankeyElementFactory implements ChartElementFactory<SankeyElement, SankeyElementOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -132,6 +142,17 @@ public final class SankeyElement extends ChartElement {
 		public String getType() {
 			return TYPE;
 		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public SankeyElementOptions createOptions(NativeObject nativeObject) {
+			return new SankeyElementOptions(nativeObject);
+		}
+
 	}
 
 }

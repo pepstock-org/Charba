@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
@@ -22,8 +23,9 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * 
  * @author Andrea "Stock" Stocchero
  * @param <T> type of {@link ChartElement}
+ * @param <O> type of {@link ChartElementOptions}
  */
-public interface ChartElementFactory<T extends ChartElement> extends NativeObjectContainerFactory<T> {
+public interface ChartElementFactory<T extends ChartElement, O extends ChartElementOptions> extends NativeObjectContainerFactory<T> {
 
 	/**
 	 * Returns the type of the {@link ChartElement}.
@@ -32,4 +34,11 @@ public interface ChartElementFactory<T extends ChartElement> extends NativeObjec
 	 */
 	String getType();
 
+	/**
+	 * Creates a {@link ChartElementOptions} instance by a native object.
+	 * 
+	 * @param nativeObject native object
+	 * @return a {@link ChartElementOptions} instance by a native object
+	 */
+	O createOptions(final NativeObject nativeObject);
 }

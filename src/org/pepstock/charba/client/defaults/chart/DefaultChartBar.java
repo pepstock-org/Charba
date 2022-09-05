@@ -200,4 +200,13 @@ public final class DefaultChartBar implements IsDefaultBar {
 		return bar.getInflateAmount();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBar#getBase()
+	 */
+	@Override
+	public double getBase() {
+		return bar.getBase();
+	}
 }

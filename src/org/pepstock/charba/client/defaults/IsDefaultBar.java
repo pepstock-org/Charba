@@ -66,4 +66,13 @@ public interface IsDefaultBar extends IsDefaultOptionsElement, IsDefaultPointSty
 	 */
 	int getInflateAmount();
 
+	/**
+	 * Returns the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @return base value for the bar in data units along the value axis.<br>
+	 *         If not set, defaults to the value axis base value
+	 */
+	double getBase();
+
 }

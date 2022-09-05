@@ -34,7 +34,7 @@ public class PointElement extends ChartElement {
 	/**
 	 * Static instance for the POINT element factory
 	 */
-	public static final ChartElementFactory<PointElement> FACTORY = new PointElementFactory();
+	public static final ChartElementFactory<PointElement, PointElementOptions> FACTORY = new PointElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -90,9 +90,19 @@ public class PointElement extends ChartElement {
 	 * @param nativeObject native java script object which contains all properties.
 	 */
 	PointElement(NativeObject nativeObject) {
-		super(nativeObject);
+		super(TYPE, nativeObject);
 		// gets parsed
 		this.parsed = new Parsed(getValue(Property.PARSED));
+	}
+
+	/**
+	 * Returns the element options.
+	 *
+	 * @return the element options.
+	 */
+	@Override
+	public PointElementOptions getOptions() {
+		return (PointElementOptions) super.getOptions();
 	}
 
 	/**
@@ -100,7 +110,7 @@ public class PointElement extends ChartElement {
 	 *
 	 * @return the parsed values.
 	 */
-	public final Parsed getParsed() {
+	public Parsed getParsed() {
 		return parsed;
 	}
 
@@ -109,7 +119,7 @@ public class PointElement extends ChartElement {
 	 * 
 	 * @return the previous X control point of data set item in pixel.
 	 */
-	public final double getControlPointPreviousX() {
+	public double getControlPointPreviousX() {
 		return getValue(Property.CONTROL_POINT_PREVIOUS_X, Undefined.DOUBLE);
 	}
 
@@ -118,7 +128,7 @@ public class PointElement extends ChartElement {
 	 * 
 	 * @return the previous Y control point of data set item in pixel.
 	 */
-	public final double getControlPointPreviousY() {
+	public double getControlPointPreviousY() {
 		return getValue(Property.CONTROL_POINT_PREVIOUS_Y, Undefined.DOUBLE);
 	}
 
@@ -127,7 +137,7 @@ public class PointElement extends ChartElement {
 	 * 
 	 * @return the next X control point of data set item in pixel.
 	 */
-	public final double getControlPointNextX() {
+	public double getControlPointNextX() {
 		return getValue(Property.CONTROL_POINT_NEXT_X, Undefined.DOUBLE);
 	}
 
@@ -136,7 +146,7 @@ public class PointElement extends ChartElement {
 	 * 
 	 * @return the next Y control point of data set item in pixel.
 	 */
-	public final double getControlPointNextY() {
+	public double getControlPointNextY() {
 		return getValue(Property.CONTROL_POINT_NEXT_Y, Undefined.DOUBLE);
 	}
 
@@ -145,7 +155,7 @@ public class PointElement extends ChartElement {
 	 * 
 	 * @return the angle of data set item.
 	 */
-	public final double getAngle() {
+	public double getAngle() {
 		return getValue(Property.ANGLE, Undefined.DOUBLE);
 	}
 
@@ -154,7 +164,7 @@ public class PointElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class PointElementFactory implements ChartElementFactory<PointElement> {
+	private static class PointElementFactory implements ChartElementFactory<PointElement, PointElementOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -175,6 +185,17 @@ public class PointElement extends ChartElement {
 		public String getType() {
 			return TYPE;
 		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public PointElementOptions createOptions(NativeObject nativeObject) {
+			return new PointElementOptions(nativeObject);
+		}
+
 	}
 
 }
