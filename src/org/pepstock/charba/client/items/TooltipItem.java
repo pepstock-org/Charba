@@ -159,7 +159,7 @@ public class TooltipItem extends NativeObjectContainer {
 		// gets chart
 		IsChart chart = getChart();
 		// check is consistent
-		if (IsChart.isValid(chart)) {
+		if (chart != null && IsChart.isValid(chart)) {
 			// gets dataset item
 			DatasetItem item = chart.getDatasetItem(getDatasetIndex());
 			// checks if the item is consistent
