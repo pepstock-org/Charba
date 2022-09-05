@@ -165,7 +165,7 @@ public class TooltipItem extends NativeObjectContainer {
 			// checks if the item is consistent
 			if (item != null) {
 				// gets the factory
-				ChartElementFactory<?, ?> factory = ChartElementFactories.get().getFactory(item);
+				ChartElementFactory factory = ChartElementFactories.get().getFactory(item);
 				// creates and returns element
 				return factory.create(nativeObject);
 			}

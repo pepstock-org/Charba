@@ -126,7 +126,7 @@ public final class DatasetItemController extends NativeObjectContainer {
 	 */
 	public ChartElementOptions getStyle(int dataIndex) {
 		// gets factory
-		ChartElementFactory<?, ?> factory = ChartElementFactories.get().getFactory(getDataElementType());
+		ChartElementFactory factory = ChartElementFactories.get().getFactory(getDataElementType());
 		// creates and return the options
 		return factory.createOptions(JsItemsHelper.get().getDatasetControllerStyle(getNativeObject(), dataIndex));
 	}

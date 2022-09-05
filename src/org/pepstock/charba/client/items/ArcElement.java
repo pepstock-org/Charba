@@ -33,7 +33,7 @@ public class ArcElement extends ChartElement {
 	/**
 	 * Static instance for the ARC element factory
 	 */
-	public static final ChartElementFactory<ArcElement, ArcElementOptions> FACTORY = new ArcElementFactory();
+	public static final ChartElementFactory FACTORY = new ArcElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -142,7 +142,7 @@ public class ArcElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class ArcElementFactory implements ChartElementFactory<ArcElement, ArcElementOptions> {
+	private static class ArcElementFactory implements ChartElementFactory {
 
 		/*
 		 * (non-Javadoc)

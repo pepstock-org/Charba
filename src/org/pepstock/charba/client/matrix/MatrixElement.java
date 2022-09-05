@@ -35,7 +35,7 @@ public final class MatrixElement extends ChartElement {
 	/**
 	 * Static instance for the MATRIX element factory
 	 */
-	public static final ChartElementFactory<MatrixElement, MatrixElementOptions> FACTORY = new MatrixElementFactory();
+	public static final ChartElementFactory FACTORY = new MatrixElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -111,7 +111,7 @@ public final class MatrixElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class MatrixElementFactory implements ChartElementFactory<MatrixElement, MatrixElementOptions> {
+	private static class MatrixElementFactory implements ChartElementFactory {
 
 		/*
 		 * (non-Javadoc)

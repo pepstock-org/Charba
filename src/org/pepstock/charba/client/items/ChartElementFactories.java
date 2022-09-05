@@ -30,7 +30,7 @@ public final class ChartElementFactories {
 	private static final ChartElementFactories INSTANCE = new ChartElementFactories();
 	// maps with all factories
 	// K = data element type, V = data element factory
-	private final Map<String, ChartElementFactory<?, ?>> factories = new HashMap<>();
+	private final Map<String, ChartElementFactory> factories = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -57,7 +57,7 @@ public final class ChartElementFactories {
 	 * @param factory factory instance to register
 	 * @return <code>true</code> if the factory has been registered otherwise <code>false</code>
 	 */
-	public boolean register(ChartElementFactory<?, ?> factory) {
+	public boolean register(ChartElementFactory factory) {
 		// checks if factory is consistent
 		if (factory != null) {
 			// gets the type and
@@ -80,7 +80,7 @@ public final class ChartElementFactories {
 	 * @param item the dataset item to use for searching the related factory
 	 * @return the factory related to the dataset item
 	 */
-	public ChartElementFactory<?, ?> getFactory(DatasetItem item) {
+	public ChartElementFactory getFactory(DatasetItem item) {
 		// checks if items is consistent
 		if (item != null) {
 			// gets and returns the factory
@@ -96,7 +96,7 @@ public final class ChartElementFactories {
 	 * @param type the element type to use for searching the related factory
 	 * @return the factory related to the element type
 	 */
-	public ChartElementFactory<?, ?> getFactory(String type) {
+	public ChartElementFactory getFactory(String type) {
 		// check if consistent and registered
 		if (type != null && factories.containsKey(type)) {
 			// then returns factory

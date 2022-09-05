@@ -35,7 +35,7 @@ public final class TreeMapElement extends ChartElement {
 	/**
 	 * Static instance for the TREEMAP element factory
 	 */
-	public static final ChartElementFactory<TreeMapElement, TreeMapElementOptions> FACTORY = new TreeMapElementFactory();
+	public static final ChartElementFactory FACTORY = new TreeMapElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -101,7 +101,7 @@ public final class TreeMapElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class TreeMapElementFactory implements ChartElementFactory<TreeMapElement, TreeMapElementOptions> {
+	private static class TreeMapElementFactory implements ChartElementFactory {
 
 		/*
 		 * (non-Javadoc)

@@ -35,7 +35,7 @@ public final class SankeyElement extends ChartElement {
 	/**
 	 * Static instance for the SANKEY element factory
 	 */
-	public static final ChartElementFactory<SankeyElement, SankeyElementOptions> FACTORY = new SankeyElementFactory();
+	public static final ChartElementFactory FACTORY = new SankeyElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -121,7 +121,7 @@ public final class SankeyElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class SankeyElementFactory implements ChartElementFactory<SankeyElement, SankeyElementOptions> {
+	private static class SankeyElementFactory implements ChartElementFactory {
 
 		/*
 		 * (non-Javadoc)

@@ -34,7 +34,7 @@ public class PointElement extends ChartElement {
 	/**
 	 * Static instance for the POINT element factory
 	 */
-	public static final ChartElementFactory<PointElement, PointElementOptions> FACTORY = new PointElementFactory();
+	public static final ChartElementFactory FACTORY = new PointElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -164,7 +164,7 @@ public class PointElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class PointElementFactory implements ChartElementFactory<PointElement, PointElementOptions> {
+	private static class PointElementFactory implements ChartElementFactory {
 
 		/*
 		 * (non-Javadoc)

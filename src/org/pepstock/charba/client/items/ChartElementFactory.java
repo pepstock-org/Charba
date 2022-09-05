@@ -22,10 +22,8 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * Maps the methods to implement an factory to map {@link ChartElement}, used by each controlloer to draw the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @param <T> type of {@link ChartElement}
- * @param <O> type of {@link ChartElementOptions}
  */
-public interface ChartElementFactory<T extends ChartElement, O extends ChartElementOptions> extends NativeObjectContainerFactory<T> {
+public interface ChartElementFactory extends NativeObjectContainerFactory<ChartElement> {
 
 	/**
 	 * Returns the type of the {@link ChartElement}.
@@ -40,5 +38,5 @@ public interface ChartElementFactory<T extends ChartElement, O extends ChartElem
 	 * @param nativeObject native object
 	 * @return a {@link ChartElementOptions} instance by a native object
 	 */
-	O createOptions(final NativeObject nativeObject);
+	ChartElementOptions createOptions(final NativeObject nativeObject);
 }

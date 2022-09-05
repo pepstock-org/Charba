@@ -32,7 +32,7 @@ public class BarElement extends ChartElement {
 	/**
 	 * Static instance for the BAR element factory
 	 */
-	public static final ChartElementFactory<BarElement, BarElementOptions> FACTORY = new BarElementFactory();
+	public static final ChartElementFactory FACTORY = new BarElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -128,7 +128,7 @@ public class BarElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class BarElementFactory implements ChartElementFactory<BarElement, BarElementOptions> {
+	private static class BarElementFactory implements ChartElementFactory {
 
 		/*
 		 * (non-Javadoc)

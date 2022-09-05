@@ -82,7 +82,7 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	protected ChartElement(String type, NativeObject nativeObject) {
 		super(nativeObject);
 		// gets factory
-		ChartElementFactory<?, ?> factory = ChartElementFactories.get().getFactory(type);
+		ChartElementFactory factory = ChartElementFactories.get().getFactory(type);
 		// stores chart element type
 		this.type = factory.getType();
 		// sets the element options
@@ -149,7 +149,7 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class UndefinedDataElementFactory implements ChartElementFactory<ChartElement, ChartElementOptions> {
+	private static class UndefinedDataElementFactory implements ChartElementFactory {
 
 		/*
 		 * (non-Javadoc)

@@ -36,7 +36,7 @@ public final class ChoroplethElement extends ChartElement {
 	/**
 	 * Static instance for the GEOFEATURE element factory
 	 */
-	public static final ChartElementFactory<ChoroplethElement, ChoroplethElementOptions> FACTORY = new ChoroplethElementFactory();
+	public static final ChartElementFactory FACTORY = new ChoroplethElementFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -130,7 +130,7 @@ public final class ChoroplethElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class ChoroplethElementFactory implements ChartElementFactory<ChoroplethElement, ChoroplethElementOptions> {
+	private static class ChoroplethElementFactory implements ChartElementFactory {
 
 		/*
 		 * (non-Javadoc)
