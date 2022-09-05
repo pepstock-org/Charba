@@ -63,11 +63,10 @@ public final class ChartElementFactories {
 			// gets the type and
 			String type = factory.getType();
 			// check if consistent and not already registered
-			if (type != null && !factories.containsKey(type)) {
+			if (type != null) {
 				// adds factory
-				factories.put(type, factory);
-				// then returns true
-				return true;
+				// and checks if added
+				return factories.computeIfAbsent(type, mapKey -> factory) != null;
 			}
 		}
 		// if here, factory not consistent or

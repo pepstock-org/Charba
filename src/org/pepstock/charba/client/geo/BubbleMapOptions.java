@@ -57,19 +57,6 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#afterConfigurationUpdate()
-	 */
-	@Override
-	protected final void afterConfigurationUpdate() {
-		// creates and stores mapper
-		this.mapper = getConfiguration().getRemappedOptions(factory);
-		// creates and stores options handler
-		this.optionsHandler = new CommonOptionsHandler(mapper);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#afterAxisConfigurationUpdate(org.pepstock.charba.client.configuration.Axis)
 	 */
 	@Override
@@ -87,6 +74,19 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 			// resets axis
 			sAxis.afterAxisConfigurationUpdate();
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#afterConfigurationUpdate()
+	 */
+	@Override
+	protected final void afterConfigurationUpdate() {
+		// creates and stores mapper
+		this.mapper = getConfiguration().getRemappedOptions(factory);
+		// creates and stores options handler
+		this.optionsHandler = new CommonOptionsHandler(mapper);
 	}
 
 	/*

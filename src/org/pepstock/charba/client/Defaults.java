@@ -434,9 +434,9 @@ public final class Defaults {
 		// checks if style is consistent
 		if (style instanceof CommonElementOptions) {
 			// casts to common element option
-			CommonElementOptions options = (CommonElementOptions) style;
+			CommonElementOptions elementOptions = (CommonElementOptions) style;
 			// creates new tooltip label color
-			return options.createTooltipLabelColor();
+			return elementOptions.createTooltipLabelColor();
 		}
 		// if here, the arguments or the labels are not consistent
 		// then returns null
@@ -456,9 +456,9 @@ public final class Defaults {
 		// checks if style is consistent
 		if (style instanceof PointElementOptions) {
 			// casts to point element option
-			PointElementOptions options = (PointElementOptions) style;
+			PointElementOptions elementOptions = (PointElementOptions) style;
 			// creates new tooltip label point style
-			return options.createTooltipLabelPointStyle();
+			return elementOptions.createTooltipLabelPointStyle();
 		}
 		// if here, the arguments or the labels are not consistent
 		// then returns null

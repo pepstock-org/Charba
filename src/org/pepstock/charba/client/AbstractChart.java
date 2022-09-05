@@ -1569,7 +1569,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		@Override
 		public DatasetReference create(NativeObject nativeObject) {
 			// creates envelop
-			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<NativeObject>(nativeObject, false);
+			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>(nativeObject, false);
 			return new DatasetReference(chart, envelop);
 		}
 	}
