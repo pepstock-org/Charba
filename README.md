@@ -314,6 +314,15 @@ Here you can find the list of enhancements and updates available on `master` bra
      * `NativeCustomEvent` to map the [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) javascript class.
    * enable events creation by own event initialization configuration.  
  * add `base` option to `Bar` element options and configuration class.
+ * add specific data element and own options based to `dataElementType` property of CHART.JS controller, in the `DatasetReference`, `DatasetItem` and `AbstractDatasetContext` classes.
+   * `ArcElement` and `ArcElementOptions` classes for controllers which are using arcs to draw the chart.
+   * `BarElement` and `BarElementOptions` classes for controllers which are using bars to draw the chart.
+   * `PointElement` and `PointElementOptions` classes for controllers which are using points to draw the chart.
+   * `MatrixElement` and `MatrixElementOptions` classes for matrix charts.
+   * `TreeMapElement` and `TreeMapElementOptions` classes for treemap charts.
+   * `SankeyElement` and `SankeyElementOptions` classes for sankey charts.
+   * `ChoroplethElement` and `ChoroplethElementOptions` classes for GEO choropeth charts.
+ * add `GeoFeature` configuration element to BubbleMap chart.  
  
 License
 -------
