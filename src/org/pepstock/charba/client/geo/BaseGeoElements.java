@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.options.Elements;
 
 /**
- * Extends the out of the box {@link Elements} object adding the {@link ChoroplethBar} element needed to configure the GEO chart.
+ * Extends the out of the box {@link Elements} object adding the {@link GeoFeature} element needed to configure the GEO chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -65,8 +65,7 @@ final class BaseGeoElements extends AbstractNode {
 	 */
 	private enum Property implements Key
 	{
-		GEO_FEATURE("geoFeature"),
-		POINT("point");
+		GEO_FEATURE("geoFeature");
 
 		// name value of property
 		private final String value;
@@ -92,10 +91,8 @@ final class BaseGeoElements extends AbstractNode {
 
 	}
 
-	// instance of choropleth bar element
-	private final ChoroplethBar choroplethBar;
-	// instance of bubble map point element
-	private final BubbleMapPoint bubbleMapPoint;
+	// instance of geo feature element
+	private final GeoFeature geoFeature;
 
 	/**
 	 * Creates the object with the mapper, native object to map java script properties and the {@link Elements} instance.
@@ -108,27 +105,16 @@ final class BaseGeoElements extends AbstractNode {
 		super(mapper, CommonProperty.ELEMENTS, nativeObject);
 		// gets and stores the GEO elements configuration
 		// uses the default bar configuration
-		this.choroplethBar = new ChoroplethBar(elements, Property.GEO_FEATURE, Defaults.get().getGlobal().getElements().getBar(), getValue(Property.GEO_FEATURE));
-		// uses the default point configuration
-		this.bubbleMapPoint = new BubbleMapPoint(elements, Property.POINT, Defaults.get().getGlobal().getElements().getPoint(), getValue(Property.POINT));
+		this.geoFeature = new GeoFeature(elements, Property.GEO_FEATURE, Defaults.get().getGlobal().getElements().getBar(), getValue(Property.GEO_FEATURE));
 	}
 
 	/**
-	 * Returns the {@link ChoroplethBar}.
+	 * Returns the {@link GeoFeature}.
 	 * 
-	 * @return the choropleth bar element instance
+	 * @return the geo feature element instance
 	 */
-	ChoroplethBar getChoroplethBar() {
-		return choroplethBar;
-	}
-
-	/**
-	 * Returns the {@link BubbleMapPoint}.
-	 * 
-	 * @return the bubble map point element instance
-	 */
-	BubbleMapPoint getBubbleMapPoint() {
-		return bubbleMapPoint;
+	GeoFeature getGeoFeature() {
+		return geoFeature;
 	}
 
 }

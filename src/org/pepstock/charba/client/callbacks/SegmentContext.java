@@ -81,18 +81,18 @@ public final class SegmentContext extends ChartContext {
 	}
 
 	/**
-	 * Returns the {@link DatasetElement} related to the data as starting point of segment.
+	 * Returns the {@link PointElement} related to the data as starting point of segment.
 	 * 
-	 * @return the {@link DatasetElement} related to the data as starting point of segment
+	 * @return the {@link PointElement} related to the data as starting point of segment
 	 */
 	public PointElement getStartPoint() {
 		return point0;
 	}
 
 	/**
-	 * Returns the {@link DatasetElement} related to the data as ending point of segment.
+	 * Returns the {@link PointElement} related to the data as ending point of segment.
 	 * 
-	 * @return the {@link DatasetElement} related to the data as ending point of segment
+	 * @return the {@link PointElement} related to the data as ending point of segment
 	 */
 	public PointElement getEndPoint() {
 		return point1;
@@ -154,7 +154,7 @@ public final class SegmentContext extends ChartContext {
 	}
 
 	/**
-	 * Extends {@link DatasetElement} in order to wrap the points inside the context.
+	 * Extends {@link PointElement} in order to wrap the points inside the context.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */

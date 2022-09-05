@@ -17,17 +17,17 @@ package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultPoint;
+import org.pepstock.charba.client.defaults.IsDefaultBar;
+import org.pepstock.charba.client.options.Bar;
 import org.pepstock.charba.client.options.Elements;
-import org.pepstock.charba.client.options.Point;
 
 /**
- * The styling of the new element {@link BubbleMapPoint} is based on {@link Point} element with some additional options for the outline and graticule.
+ * The styling of the new element {@link GeoFeature} is based on {@link Bar} element with some additional options for the outline and graticule.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BubbleMapPoint extends Point implements HasCommonOptionsElement {
+public final class GeoFeature extends Bar implements HasCommonOptionsElement {
 
 	// common element options handler instance
 	private final CommonOptionsElementHandler optionsHandler;
@@ -40,7 +40,7 @@ public final class BubbleMapPoint extends Point implements HasCommonOptionsEleme
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	BubbleMapPoint(Elements elements, Key childKey, IsDefaultPoint defaultValues, NativeObject nativeObject) {
+	GeoFeature(Elements elements, Key childKey, IsDefaultBar defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 		// creates new options handler
 		this.optionsHandler = new CommonOptionsElementHandler(elements, childKey, getNativeObject());

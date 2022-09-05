@@ -22,8 +22,8 @@ import org.pepstock.charba.client.commons.NativeObject;
 /**
  * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
  * The elements are mapped by this object.<br>
- * This is the CHART.JS item with all needed info about a selected data set.<br>
- * This object has been created and passed to event handler or callbacks to apply own logic.
+ * This is the CHART.JS item with all needed info about a data element, used to draw the chart.<br>
+ * This is the base element created by CHART.JS which is extended by the controllers to manage own elements.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -130,7 +130,7 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	}
 
 	/**
-	 * Inner class to create data element by a native object.
+	 * Inner class to create a chart element by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */

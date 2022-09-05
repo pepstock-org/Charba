@@ -140,7 +140,6 @@ public final class DatasetItemController extends NativeObjectContainer {
 	/**
 	 * Returns the dataset element type.
 	 * 
-	 * @param controller controller instance
 	 * @return the dataset element type or <code>null</code> if not defined
 	 */
 	public String getDatasetElementType() {

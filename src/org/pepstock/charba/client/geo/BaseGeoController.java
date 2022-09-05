@@ -21,6 +21,7 @@ import org.pepstock.charba.client.configuration.AxisType;
 import org.pepstock.charba.client.controllers.AbstractController;
 import org.pepstock.charba.client.controllers.ControllerProvider;
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.items.ChartElementFactories;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -78,6 +79,8 @@ final class BaseGeoController extends AbstractController {
 			ResourcesType.getResources().inject();
 			// injects CHARTJS-GEO controller
 			Injector.ensureInjected(RESOURCE);
+			// registers the geo feature elements
+			ChartElementFactories.get().register(ChoroplethElement.FACTORY);
 			// creates and returns an fake controller
 			return new BaseGeoController(controllerType);
 		}

@@ -71,7 +71,7 @@ public final class DatasetReference extends NativeObjectContainer {
 	private final ChartElement element;
 
 	/**
-	 * Creates the item reference using a a scriptale context and a data set item.
+	 * Creates the item reference using a a scriptale context and a data element
 	 * 
 	 * @param context scriptable context instance
 	 * @param element chart element to add to the object
@@ -92,9 +92,10 @@ public final class DatasetReference extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the item using a native java script object which contains all properties. FIXME
+	 * Creates the item using a chart instance and a native java script object which contains all properties.
 	 * 
-	 * @param evenlop envelop from chart with native java script object which contains all properties
+	 * @param chart chart instance needed to create the dataset reference
+	 * @param envelop envelop from chart with native java script object which contains all properties
 	 */
 	public DatasetReference(IsChart chart, ChartEnvelop<NativeObject> envelop) {
 		super(Envelop.checkAndGetIfValid(envelop).getContent());

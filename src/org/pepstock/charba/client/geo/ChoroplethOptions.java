@@ -32,7 +32,7 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 	// mapper options factory instance
 	private final ChoroplethRemappedOptionsFactory factory;
 	// elements instance
-	private final ChoroplethElements elements;
+	private final GeoElements elements;
 	// common options handler
 	private CommonOptionsHandler optionsHandler;
 	// mapper options instance
@@ -51,7 +51,7 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 		// initialized objects
 		this.afterConfigurationUpdate();
 		// creates and stores elements
-		this.elements = new ChoroplethElements(this);
+		this.elements = new GeoElements(this);
 	}
 
 	/*
@@ -115,7 +115,7 @@ public final class ChoroplethOptions extends BaseGeoOptions {
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getElements()
 	 */
 	@Override
-	public ChoroplethElements getElements() {
+	public GeoElements getElements() {
 		return elements;
 	}
 

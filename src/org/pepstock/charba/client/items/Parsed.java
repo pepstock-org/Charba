@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * This object is wrapping the native java script object provided by {@link DatasetElement} to know the parsed value.
+ * This object is wrapping the native java script object provided by {@link PointElement} to know the parsed value.
  * 
  * @author Andrea "Stock" Stocchero
  */

@@ -1301,7 +1301,9 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
-	 * FIXME
+	 * Returns the factory to create {@link DatasetReference} when required, based on the data element type of the chart.
+	 * 
+	 * @return the factory to create {@link DatasetReference} when required, based on the data element type of the chart
 	 */
 	@Override
 	public final NativeObjectContainerFactory<DatasetReference> getDatasetReferenceFactory() {

@@ -698,9 +698,9 @@ public interface IsChart {
 	void checkAxes(Axis... axes);
 
 	/**
-	 * FIXME
+	 * Returns the factory to create {@link DatasetReference} when required, based on the data element type of the chart.
 	 * 
-	 * @return
+	 * @return the factory to create {@link DatasetReference} when required, based on the data element type of the chart
 	 */
 	NativeObjectContainerFactory<DatasetReference> getDatasetReferenceFactory();
 

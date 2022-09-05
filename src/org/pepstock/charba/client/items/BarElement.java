@@ -19,10 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * FIXME Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
- * The elements are mapped by this object.<br>
- * This is the CHART.JS item with all needed info about a selected data set.<br>
- * This object has been created and passed to event handler or callbacks to apply own logic.
+ * Maps the out-of-the-box CHART.JS element used to represents bars on the charts.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -117,7 +114,7 @@ public class BarElement extends ChartElement {
 	}
 
 	/**
-	 * Inner class to create data set item by a native object.
+	 * Inner class to create BAR data element by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */

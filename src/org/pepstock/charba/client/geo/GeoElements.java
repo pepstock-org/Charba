@@ -19,33 +19,33 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.configuration.Elements;
 
 /**
- * Extends {@link Elements} provided by CHART.JS in order to add the {@link ChoroplethBar} element to be configured for GEO charts.
+ * Extends {@link Elements} provided by CHART.JS in order to add the {@link GeoFeature} element to be configured for GEO charts.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ChoroplethElements extends Elements {
+public final class GeoElements extends Elements {
 
 	// options wrapper instance
-	private final ChoroplethOptions options;
+	private final BaseGeoOptions options;
 
 	/**
 	 * Builds the object storing the default root options.
 	 * 
 	 * @param options default root options.
 	 */
-	ChoroplethElements(ChoroplethOptions options) {
+	GeoElements(BaseGeoOptions options) {
 		super(options);
 		// stores options
-		this.options = Checker.checkAndGetIfValid(options, "Choropleth options argument");
+		this.options = Checker.checkAndGetIfValid(options, "Geo options argument");
 	}
 
 	/**
-	 * Returns the choropleth bar element.
+	 * Returns the GEO feature element.
 	 * 
-	 * @return the choropleth bar element
+	 * @return the GEO feature element
 	 */
-	public ChoroplethBar getChoroplethBar() {
-		return options.getMapper().getElements().getChoroplethBar();
+	public GeoFeature getGeoFeature() {
+		return options.getMapper().getElements().getGeoFeature();
 	}
 }

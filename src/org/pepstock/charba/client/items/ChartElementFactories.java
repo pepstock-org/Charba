@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * FIXME
+ * Utility which is registering all {@link ChartElementFactory} for element type.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -52,10 +52,10 @@ public final class ChartElementFactories {
 	}
 
 	/**
-	 * FIXME
+	 * Registers the factory. It ignores if the factory is already registered.
 	 * 
-	 * @param factory
-	 * @return
+	 * @param factory factory instance to register
+	 * @return <code>true</code> if the factory has been registered otherwise <code>false</code>
 	 */
 	public boolean register(ChartElementFactory<?> factory) {
 		// checks if factory is consistent
@@ -76,10 +76,10 @@ public final class ChartElementFactories {
 	}
 
 	/**
-	 * FIXME
+	 * Returns the factory related to the dataset item.
 	 * 
-	 * @param item
-	 * @return
+	 * @param item the dataset item to use for searching the related factory
+	 * @return the factory related to the dataset item
 	 */
 	public ChartElementFactory<?> getFactory(DatasetItem item) {
 		// checks if items is consistent
@@ -92,10 +92,10 @@ public final class ChartElementFactories {
 	}
 
 	/**
-	 * FIXME
+	 * Returns the factory related to the element type.
 	 * 
-	 * @param type
-	 * @return
+	 * @param type the element type to use for searching the related factory
+	 * @return the factory related to the element type
 	 */
 	public ChartElementFactory<?> getFactory(String type) {
 		// check if consistent and registered
@@ -105,7 +105,7 @@ public final class ChartElementFactories {
 		}
 		// if here, type not consistent or
 		// type not register
-		// then returns the undefined factory
+		// then returns the default factory
 		return ChartElement.FACTORY;
 	}
 

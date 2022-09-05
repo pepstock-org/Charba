@@ -32,7 +32,7 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 	// mapper options factory instance
 	private final BubbleMapRemappedOptionsFactory factory;
 	// elements instance
-	private final BubbleMapElements elements;
+	private final GeoElements elements;
 	// common options handler
 	private CommonOptionsHandler optionsHandler;
 	// mapper options instance
@@ -51,7 +51,7 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 		// initialized objects
 		this.afterConfigurationUpdate();
 		// creates and stores elements
-		this.elements = new BubbleMapElements(this);
+		this.elements = new GeoElements(this);
 	}
 
 	/*
@@ -115,7 +115,7 @@ public final class BubbleMapOptions extends BaseGeoOptions {
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getElements()
 	 */
 	@Override
-	public BubbleMapElements getElements() {
+	public GeoElements getElements() {
 		return elements;
 	}
 

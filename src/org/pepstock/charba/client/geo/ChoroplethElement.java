@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.sankey;
+package org.pepstock.charba.client.geo;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -22,29 +22,30 @@ import org.pepstock.charba.client.items.ChartElementFactory;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
- * Maps the CHART.JS element used by Sankey controller.
+ * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
+ * The <b>geoFeature</b> elements are mapped by this object.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class SankeyElement extends ChartElement {
+public final class ChoroplethElement extends ChartElement {
 
 	/**
-	 * SANKEY element type.
+	 * GEOFEATURE element type.
 	 */
-	public static final String TYPE = "flow";
+	public static final String TYPE = "geoFeature";
 	/**
-	 * Static instance for the SANKEY element factory
+	 * Static instance for the GEOFEATURE element factory
 	 */
-	public static final ChartElementFactory<SankeyElement> FACTORY = new SankeyElementFactory();
+	public static final ChartElementFactory<ChoroplethElement> FACTORY = new ChoroplethElementFactory();
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		HEIGHT("height"),
-		X2("x2"),
-		Y2("y2");
+		FEATURE("feature"),
+		CENTER("center"),
+		PIXEL_RATIO("pixelRatio");
 
 		// name value of property
 		private final String value;
@@ -70,48 +71,56 @@ public final class SankeyElement extends ChartElement {
 
 	}
 
+	// instance of center
+	private final DataPointCenter center;
+	// instance of feature
+	private final Feature feature;
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	SankeyElement(NativeObject nativeObject) {
+	ChoroplethElement(NativeObject nativeObject) {
 		super(nativeObject);
+		// stores internal element
+		this.center = new DataPointCenter(getValue(Property.CENTER));
+		this.feature = new Feature(getValue(Property.FEATURE));
 	}
 
 	/**
-	 * Returns the X2 location of element in pixel.
+	 * Returns the center of GEO feature element.
 	 * 
-	 * @return the X2 location of element in pixel.
+	 * @return the center of GEO feature element.
 	 */
-	public double getX2() {
-		return getValue(Property.X2, Undefined.DOUBLE);
+	public DataPointCenter getCenter() {
+		return center;
 	}
 
 	/**
-	 * Returns the Y location of element in pixel.
+	 * Returns the feature of GEO element.
 	 * 
-	 * @return the Y location of element in pixel.
+	 * @return the feature of GEO element.
 	 */
-	public double getY2() {
-		return getValue(Property.Y2, Undefined.DOUBLE);
+	public Feature getFeature() {
+		return feature;
 	}
 
 	/**
-	 * Returns the height of data set item in pixel.
+	 * Returns the pixel ratio used by GEO feature element.
 	 * 
-	 * @return the height of data set item in pixel.
+	 * @return the pixel ratio used by GEO feature element.
 	 */
-	public double getHeight() {
-		return getValue(Property.HEIGHT, Undefined.DOUBLE);
+	public double getPixelRatio() {
+		return getValue(Property.PIXEL_RATIO, Undefined.DOUBLE);
 	}
 
 	/**
-	 * Inner class to create SANKEY data element by a native object.
+	 * Inner class to create GEO feature data element by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class SankeyElementFactory implements ChartElementFactory<SankeyElement> {
+	private static class ChoroplethElementFactory implements ChartElementFactory<ChoroplethElement> {
 
 		/*
 		 * (non-Javadoc)
@@ -119,8 +128,8 @@ public final class SankeyElement extends ChartElement {
 		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public SankeyElement create(NativeObject nativeObject) {
-			return new SankeyElement(nativeObject);
+		public ChoroplethElement create(NativeObject nativeObject) {
+			return new ChoroplethElement(nativeObject);
 		}
 
 		/*

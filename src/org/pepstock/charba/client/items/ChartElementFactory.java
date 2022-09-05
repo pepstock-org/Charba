@@ -18,17 +18,17 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * FIXME
+ * Maps the methods to implement an factory to map {@link ChartElement}, used by each controlloer to draw the chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @param <T> type of {@link ChartElement}
  */
 public interface ChartElementFactory<T extends ChartElement> extends NativeObjectContainerFactory<T> {
 
 	/**
-	 * FIXME
+	 * Returns the type of the {@link ChartElement}.
 	 * 
-	 * @return
+	 * @return the type of the {@link ChartElement}
 	 */
 	String getType();
 
