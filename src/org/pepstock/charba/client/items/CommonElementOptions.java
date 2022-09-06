@@ -22,6 +22,7 @@ import org.pepstock.charba.client.colors.GradientBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.PatternBuilder;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -179,12 +180,57 @@ public class CommonElementOptions extends ChartElementOptions {
 	}
 
 	/**
+	 * Sets the background color.
+	 * 
+	 * @param backgroundColor the background color.
+	 */
+	public final void setBackgroundColor(IsColor backgroundColor) {
+		setBackgroundColor(IsColor.checkAndGetValue(backgroundColor));
+	}
+
+	/**
+	 * Sets the background color.
+	 * 
+	 * @param backgroundColor the background color.
+	 */
+	public final void setBackgroundColor(String backgroundColor) {
+		setValue(Property.BACKGROUND_COLOR, backgroundColor);
+	}
+
+	/**
+	 * Sets the background color as gradient.
+	 * 
+	 * @param backgroundColor the background color as gradient.
+	 */
+	public final void setBackgroundColor(CanvasGradientItem backgroundColor) {
+		setValue(Property.BACKGROUND_COLOR, backgroundColor);
+	}
+
+	/**
+	 * Sets the background color as pattern.
+	 * 
+	 * @param backgroundColor the background color as pattern.
+	 */
+	public final void setBackgroundColor(CanvasPatternItem backgroundColor) {
+		setValue(Property.BACKGROUND_COLOR, backgroundColor);
+	}
+
+	/**
 	 * Returns the border width of the dataset item in pixels.
 	 *
 	 * @return the border width of the dataset item in pixels.
 	 */
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, getDefaultBorderWidth());
+	}
+
+	/**
+	 * Sets the border width.
+	 * 
+	 * @param borderWidth the border width.
+	 */
+	public final void setBorderWidth(int borderWidth) {
+		setValue(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**
@@ -244,6 +290,33 @@ public class CommonElementOptions extends ChartElementOptions {
 		}
 		// if here, is not a color then returns null
 		return null;
+	}
+
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 */
+	public final void setBorderColor(IsColor borderColor) {
+		setBorderColor(IsColor.checkAndGetValue(borderColor));
+	}
+
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 */
+	public final void setBorderColor(String borderColor) {
+		setValue(Property.BORDER_COLOR, borderColor);
+	}
+
+	/**
+	 * Sets the border color as gradient.
+	 * 
+	 * @param borderColor the border color as gradient.
+	 */
+	public final void setBorderColor(CanvasGradientItem borderColor) {
+		setValue(Property.BORDER_COLOR, borderColor);
 	}
 
 	/**

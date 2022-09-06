@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * Maps the base options of the {@link ChartElement}s.
@@ -24,7 +24,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ChartElementOptions extends NativeObjectContainer {
+public class ChartElementOptions extends AbstractNode {
 
 	/**
 	 * Creates the item using a native java script object which contains all properties.

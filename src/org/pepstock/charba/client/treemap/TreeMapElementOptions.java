@@ -15,11 +15,16 @@
 */
 package org.pepstock.charba.client.treemap;
 
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.BarBorderWidth;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.CommonElementOptions;
+import org.pepstock.charba.client.options.AbstractElementFactory;
+import org.pepstock.charba.client.options.ElementFactory;
 
 /**
  * Maps the out-of-the-box CHART.JS element options used to represents boxes for treemap on the charts.
@@ -30,11 +35,22 @@ import org.pepstock.charba.client.items.CommonElementOptions;
 public final class TreeMapElementOptions extends CommonElementOptions {
 
 	/**
+	 * Element factory to get "{@value TreeMapElement#TYPE}" element.
+	 */
+	public static final ElementFactory<TreeMapElementOptions> FACTORY = new TreeMapElementOptionsFactory(TreeMapElement.TYPE);
+
+	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		BORDER_WIDTH("borderWidth");
+		BORDER_WIDTH("borderWidth"),
+		RTL("rtl"),
+		SPACING("spacing"),
+		// inner elements
+		CAPTIONS("captions"),
+		DIVIDERS("dividers"),
+		LABELS("labels");
 
 		// name value of property
 		private final String value;
@@ -60,6 +76,13 @@ public final class TreeMapElementOptions extends CommonElementOptions {
 
 	}
 
+	// dividers instance
+	private final Dividers dividers;
+	// captions instance
+	private final Captions captions;
+	// labels instance
+	private final Labels labels;
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
@@ -67,6 +90,39 @@ public final class TreeMapElementOptions extends CommonElementOptions {
 	 */
 	TreeMapElementOptions(NativeObject nativeObject) {
 		super(nativeObject);
+		// gets options defaults
+		IsDefaultOptions global = Defaults.get().getGlobal();
+		// gets the inner element
+		this.dividers = new Dividers(this, Property.DIVIDERS, getValue(Property.DIVIDERS));
+		this.captions = new Captions(this, Property.CAPTIONS, global, getValue(Property.CAPTIONS));
+		this.labels = new Labels(this, Property.LABELS, global, getValue(Property.LABELS));
+	}
+
+	/**
+	 * Returns the dividers object.
+	 * 
+	 * @return the dividers object.
+	 */
+	public Dividers getDividers() {
+		return dividers;
+	}
+
+	/**
+	 * Returns the captions object.
+	 * 
+	 * @return the captions object.
+	 */
+	public Captions getCaptions() {
+		return captions;
+	}
+
+	/**
+	 * Returns the labels object.
+	 * 
+	 * @return the labels object.
+	 */
+	public Labels getLabels() {
+		return labels;
 	}
 
 	/*
@@ -119,5 +175,79 @@ public final class TreeMapElementOptions extends CommonElementOptions {
 		// if here, the border width is a number or missing
 		// then returns a new object with same value
 		return new BarBorderWidth(super.getBorderWidth());
+	}
+
+	/**
+	 * Sets the border width (in pixels).
+	 * 
+	 * @param borderWidth the border width (in pixels).
+	 */
+	public void setBorderWidth(BarBorderWidth borderWidth) {
+		setValue(Property.BORDER_WIDTH, borderWidth);
+	}
+
+	/**
+	 * Sets <code>true</code> for rendering the rectangles from right to left.
+	 * 
+	 * @param rtl <code>true</code> for rendering the rectangles from right to left
+	 */
+	public void setRtl(boolean rtl) {
+		setValue(Property.RTL, rtl);
+	}
+
+	/**
+	 * Returns <code>true</code> for rendering the rectangles from right to left.
+	 * 
+	 * @return <code>true</code> for rendering the rectangles from right to left.
+	 */
+	public boolean isRtl() {
+		return getValue(Property.RTL, TreeMapDataset.DEFAULT_RTL);
+	}
+
+	/**
+	 * Sets the fixed spacing among rectangles.
+	 * 
+	 * @param spacing the fixed spacing among rectangles
+	 */
+	public void setSpacing(double spacing) {
+		setValue(Property.SPACING, Checker.positiveOrZero(spacing));
+	}
+
+	/**
+	 * Returns the fixed spacing among rectangles.
+	 * 
+	 * @return the fixed spacing among rectangles
+	 */
+	public double getSpacing() {
+		return getValue(Property.SPACING, TreeMapDataset.DEFAULT_SPACING);
+	}
+
+	/**
+	 * Specific element factory for treemap element options.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class TreeMapElementOptionsFactory extends AbstractElementFactory<TreeMapElementOptions> {
+
+		/**
+		 * Creates the factory by the key of object, as string.
+		 * 
+		 * @param elementKeyAsString the key of object, as string.
+		 */
+		private TreeMapElementOptionsFactory(String elementKeyAsString) {
+			super(elementKeyAsString);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public TreeMapElementOptions create(NativeObject nativeObject) {
+			return new TreeMapElementOptions(nativeObject);
+		}
+
 	}
 }

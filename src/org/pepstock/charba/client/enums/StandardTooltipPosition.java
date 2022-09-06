@@ -18,30 +18,36 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Defines an object which represents the positioning of the tooltip.
+ * This is a standard implementation of a {@link IsTooltipPosition}.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsTooltipPosition extends Key {
+final class StandardTooltipPosition implements IsTooltipPosition {
+
+	// instance of value
+	private String value;
 
 	/**
-	 * Returns a tooltip position instance by its string value.
+	 * Builds the object with the key value as string
 	 * 
-	 * @param tooltipPosition string value to use
-	 * @return new tooltip position instance
+	 * @param value value of key as String
 	 */
-	static IsTooltipPosition create(String tooltipPosition) {
-		// checks if event as argument is a default one
-		for (TooltipPosition tp : TooltipPosition.values()) {
-			// checks if is the default
-			if (tp.value().equalsIgnoreCase(tooltipPosition)) {
-				return tp;
-			}
-		}
-		// if here, is not a defined one
-		// then creates new tooltip position
-		return new StandardTooltipPosition(tooltipPosition);
+	StandardTooltipPosition(String value) {
+		// stores value
+		this.value = value;
+		// checsk if consistent
+		Key.checkIfValid(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
 	}
 
 }

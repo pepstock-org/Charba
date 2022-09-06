@@ -94,6 +94,6 @@ public class Elements extends ConfigurationOptionsContainer {
 	 * @return the options instance defined for a custom element.
 	 */
 	public <T extends NativeObjectContainer> T getElement(ElementFactory<T> factory) {
-		return getOptions().getElements().getElement(factory);
+		return getConfiguration().getElements().getElement(factory);
 	}
 }

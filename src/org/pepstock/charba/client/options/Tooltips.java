@@ -28,7 +28,6 @@ import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipAlign;
-import org.pepstock.charba.client.enums.TooltipPosition;
 import org.pepstock.charba.client.positioner.Positioner;
 
 /**
@@ -250,13 +249,6 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @param position the mode for positioning the tooltip.
 	 */
 	public void setPosition(IsTooltipPosition position) {
-		// checks if the tooltip position is consistent
-		Key.checkIfValid(position);
-		// that means that is defined both out of the box or custom one by positioner
-		if (!Key.hasKeyByValue(TooltipPosition.values(), position.value()) && !Positioner.get().hasTooltipPosition(position.value())) {
-			throw new IllegalArgumentException("The tooltip position '" + position + "' is not consistent");
-		}
-		// stores values
 		setValueAndAddToParent(Property.POSITION, position);
 	}
 
@@ -269,19 +261,15 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	public IsTooltipPosition getPosition() {
 		// gets string value
 		String value = getValue(Property.POSITION, getDefaultValues().getPosition().value());
-		// checks if is the out of the box one
-		if (Key.hasKeyByValue(TooltipPosition.values(), value)) {
-			// returns the pout of the box
-			return Key.getKeyByValue(TooltipPosition.values(), value);
-		}
-		// if here, it could be a custom tooltip position
+		// it could be a custom tooltip position
 		// checks if is a custom tooltip position
 		if (Positioner.get().hasTooltipPosition(value)) {
 			// returns the pout of the box
 			return Positioner.get().getTooltipPosition(value);
 		}
-		// if here, it's wrong but returns the default ones
-		return getDefaultValues().getPosition();
+		// if here, it could be a default or custom one
+		// then creates and returns it.
+		return IsTooltipPosition.create(value);
 	}
 
 	/**

@@ -17,8 +17,6 @@ package org.pepstock.charba.client.treemap;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.configuration.ConfigurationOptions;
-import org.pepstock.charba.client.configuration.Interaction;
-import org.pepstock.charba.client.configuration.Tooltips;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 
 /**
@@ -29,10 +27,6 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  */
 public final class TreeMapOptions extends ConfigurationOptions {
 
-	private final InternalTooltips tooltips;
-
-	private final InternalInteraction interaction;
-
 	/**
 	 * Builds the object storing the chart instance and defaults.
 	 * 
@@ -41,29 +35,6 @@ public final class TreeMapOptions extends ConfigurationOptions {
 	 */
 	TreeMapOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		super(chart, defaultValues);
-		// creates internal tooltips and interaction instance
-		this.tooltips = new InternalTooltips(this);
-		this.interaction = new InternalInteraction(this);
-	}
-
-	/**
-	 * Returns the tooltips element.
-	 * 
-	 * @return the tooltips
-	 */
-	@Override
-	public Tooltips getTooltips() {
-		return tooltips;
-	}
-
-	/**
-	 * Returns the interaction element.
-	 * 
-	 * @return the interaction
-	 */
-	@Override
-	public Interaction getInteraction() {
-		return interaction;
 	}
 
 }
