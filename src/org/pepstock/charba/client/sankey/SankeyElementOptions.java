@@ -20,6 +20,8 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.ChartElementOptions;
+import org.pepstock.charba.client.options.AbstractElementFactory;
+import org.pepstock.charba.client.options.ElementFactory;
 import org.pepstock.charba.client.sankey.enums.ColorMode;
 
 /**
@@ -29,6 +31,11 @@ import org.pepstock.charba.client.sankey.enums.ColorMode;
  *
  */
 public final class SankeyElementOptions extends ChartElementOptions {
+
+	/**
+	 * Element factory to get "{@value SankeyElement#TYPE}" element.
+	 */
+	public static final ElementFactory<SankeyElementOptions> FACTORY = new SankeyElementOptionsFactory(SankeyElement.TYPE);
 
 	/**
 	 * Name of properties of native object.
@@ -82,6 +89,15 @@ public final class SankeyElementOptions extends ChartElementOptions {
 	}
 
 	/**
+	 * Sets the color mode between sankey elements.
+	 * 
+	 * @param colorMode the color mode between sankey elements
+	 */
+	public void setColorMode(ColorMode colorMode) {
+		setValue(Property.COLOR_MODE, colorMode);
+	}
+
+	/**
 	 * Returns the starting color of the flow between sankey elements.
 	 * 
 	 * @return the starting color of the flow between sankey elements
@@ -100,6 +116,24 @@ public final class SankeyElementOptions extends ChartElementOptions {
 	}
 
 	/**
+	 * Sets the starting color of the flow between sankey elements.
+	 * 
+	 * @param color the starting color of the flow between sankey elements
+	 */
+	public void setColorFrom(IsColor color) {
+		setColorFrom(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the starting color of the flow between sankey elements.
+	 * 
+	 * @param color the starting color of the flow between sankey elements
+	 */
+	public void setColorFrom(String color) {
+		setValue(Property.COLOR_FROM, color);
+	}
+
+	/**
 	 * Returns the ending color of the flow between sankey elements.
 	 * 
 	 * @return the ending color of the flow between sankey elements
@@ -115,5 +149,52 @@ public final class SankeyElementOptions extends ChartElementOptions {
 	 */
 	public IsColor getColorTo() {
 		return ColorBuilder.parse(getColorToAsString());
+	}
+
+	/**
+	 * Sets the ending color of the flow between sankey elements.
+	 * 
+	 * @param color the ending color of the flow between sankey elements
+	 */
+	public void setColorTo(IsColor color) {
+		setColorTo(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the ending color of the flow between sankey elements.
+	 * 
+	 * @param color the ending color of the flow between sankey elements
+	 */
+	public void setColorTo(String color) {
+		setValue(Property.COLOR_TO, color);
+	}
+
+	/**
+	 * Specific element factory for sankey element options.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class SankeyElementOptionsFactory extends AbstractElementFactory<SankeyElementOptions> {
+
+		/**
+		 * Creates the factory by the key of object, as string.
+		 * 
+		 * @param elementKeyAsString the key of object, as string.
+		 */
+		private SankeyElementOptionsFactory(String elementKeyAsString) {
+			super(elementKeyAsString);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public SankeyElementOptions create(NativeObject nativeObject) {
+			return new SankeyElementOptions(nativeObject);
+		}
+
 	}
 }
