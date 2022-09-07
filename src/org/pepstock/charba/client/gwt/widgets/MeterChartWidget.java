@@ -64,4 +64,11 @@ public final class MeterChartWidget extends AbstractChartWidget<MeterChart> impl
 		return getChart().newDataset(max);
 	}
 
+	/**
+	 * Registers the METER controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		MeterChart.register();
+	}
 }

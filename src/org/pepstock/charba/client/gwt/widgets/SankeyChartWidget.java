@@ -67,4 +67,11 @@ public class SankeyChartWidget extends AbstractChartWidget<SankeyChart> implemen
 		return getChart().newDataset(hidden);
 	}
 
+	/**
+	 * Registers the SANKEY controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		SankeyChart.register();
+	}
 }

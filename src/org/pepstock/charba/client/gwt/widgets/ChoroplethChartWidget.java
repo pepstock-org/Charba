@@ -109,4 +109,11 @@ public class ChoroplethChartWidget extends AbstractChartWidget<ChoroplethChart> 
 		return getChart().projectionInvert(point);
 	}
 
+	/**
+	 * Registers the CHOROPLETH controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		ChoroplethChart.register();
+	}
 }

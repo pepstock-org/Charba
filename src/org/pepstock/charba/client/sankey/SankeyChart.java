@@ -186,4 +186,13 @@ public final class SankeyChart extends AbstractChart implements IsDatasetCreator
 	protected final int getMaximumAxesCount() {
 		return MAXIMUM_AXES_COUNT;
 	}
+
+	/**
+	 * Registers the SANKEY controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		CONTROLLER_TYPE.register();
+	}
+
 }

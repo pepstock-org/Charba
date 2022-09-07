@@ -64,4 +64,11 @@ public final class GaugeChartWidget extends AbstractChartWidget<GaugeChart> impl
 		return getChart().newDataset(max);
 	}
 
+	/**
+	 * Registers the GAUGE controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		GaugeChart.register();
+	}
 }

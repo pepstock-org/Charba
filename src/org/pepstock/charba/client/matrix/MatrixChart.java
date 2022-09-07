@@ -160,4 +160,11 @@ public final class MatrixChart extends AbstractChart implements IsDatasetCreator
 		return MAXIMUM_AXES_COUNT;
 	}
 
+	/**
+	 * Registers the MATRIX controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		CONTROLLER_TYPE.register();
+	}
 }

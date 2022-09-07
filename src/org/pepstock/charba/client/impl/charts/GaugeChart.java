@@ -97,4 +97,11 @@ public final class GaugeChart extends BaseMeterChart<GaugeDataset> {
 		return dataset instanceof GaugeDataset;
 	}
 
+	/**
+	 * Registers the GAUGE controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		CONTROLLER_TYPE.register();
+	}
 }

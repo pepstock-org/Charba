@@ -110,4 +110,12 @@ public class BubbleMapChartWidget extends AbstractChartWidget<BubbleMapChart> im
 		return getChart().projection(coordinates);
 	}
 
+	/**
+	 * Registers the BUBBLEMAP controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		BubbleMapChart.register();
+	}
+
 }

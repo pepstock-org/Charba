@@ -127,4 +127,11 @@ public final class ChoroplethChart extends BaseGeoChart<ChoroplethDataset> {
 		}
 	}
 
+	/**
+	 * Registers the CHOROPLETH controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		CONTROLLER_TYPE.register();
+	}
 }

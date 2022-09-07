@@ -128,4 +128,11 @@ public final class BubbleMapChart extends BaseGeoChart<BubbleMapDataset> {
 		}
 	}
 
+	/**
+	 * Registers the BUBBLEMAP controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		CONTROLLER_TYPE.register();
+	}
 }

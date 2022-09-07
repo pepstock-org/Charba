@@ -66,4 +66,11 @@ public class MatrixChartWidget extends AbstractChartWidget<MatrixChart> implemen
 		return getChart().newDataset(hidden);
 	}
 
+	/**
+	 * Registers the MATRIX controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		MatrixChart.register();
+	}
 }

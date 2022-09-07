@@ -65,4 +65,11 @@ public class TreeMapChartWidget extends AbstractChartWidget<TreeMapChart> implem
 		return getChart().newDataset(hidden);
 	}
 
+	/**
+	 * Registers the TREEMAP controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		TreeMapChart.register();
+	}
 }

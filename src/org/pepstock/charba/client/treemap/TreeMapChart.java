@@ -158,4 +158,12 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 		return dataset instanceof TreeMapDataset;
 	}
 
+	/**
+	 * Registers the TREEMAP controller in CHART.JS.
+	 */
+	public static void register() {
+		// registers the controller
+		CONTROLLER_TYPE.register();
+	}
+
 }
