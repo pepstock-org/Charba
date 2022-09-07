@@ -323,8 +323,9 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `SankeyElement` and `SankeyElementOptions` classes for sankey charts.
    * `ChoroplethElement` and `ChoroplethElementOptions` classes for GEO choropeth charts.
  * add `GeoFeature` configuration element to `BubbleMap` chart.
- * add `register` method to charts, where the controller type is not a CHART.JS out-of-the-box ones, in order to register then and act on defaults options if needed befoire to instantiate a chart instance.
+ * add `register` method to charts, where the controller type is not a CHART.JS out-of-the-box ones, in order to register then and act on the options if needed before instantiating a chart instance.
    * applied to matrix, sankey, treemap, choropleth, bubblemap, gauge and meter charts.
+ * add element factories to matrix, sankey, treemap charts in order to manage defaults options once for all chart instances in the application.  
  
 License
 -------
