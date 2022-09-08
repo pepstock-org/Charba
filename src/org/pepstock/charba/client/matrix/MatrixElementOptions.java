@@ -173,15 +173,6 @@ public final class MatrixElementOptions extends CommonElementOptions {
 	}
 
 	/**
-	 * Returns <code>true</code> if the border width is defined as {@link BarBorderRadius}.
-	 * 
-	 * @return <code>true</code> if the border width is defined as {@link BarBorderRadius}
-	 */
-	public boolean isBorderRadiusAsObject() {
-		return isType(Property.BORDER_RADIUS, ObjectType.OBJECT);
-	}
-
-	/**
 	 * Returns the bar border radius (in pixels).
 	 * 
 	 * @return the bar border radius (in pixels).
@@ -195,6 +186,15 @@ public final class MatrixElementOptions extends CommonElementOptions {
 		}
 		// if here, the border radius is a number or missing
 		return getValue(Property.BORDER_RADIUS, MatrixDataset.DEFAULT_BORDER_RADIUS);
+	}
+
+	/**
+	 * Returns <code>true</code> if the border width is defined as {@link BarBorderRadius}.
+	 * 
+	 * @return <code>true</code> if the border width is defined as {@link BarBorderRadius}
+	 */
+	public boolean isBorderRadiusAsObject() {
+		return isType(Property.BORDER_RADIUS, ObjectType.OBJECT);
 	}
 
 	/**

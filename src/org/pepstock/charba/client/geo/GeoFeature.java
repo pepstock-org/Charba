@@ -85,7 +85,7 @@ public final class GeoFeature extends Bar {
 	}
 
 	/**
-	 * FIXME Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
 	 * @param elements parent node to use to add this element where changed
 	 * @param childKey the property name of this element to use to add it to the parent.
