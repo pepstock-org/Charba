@@ -249,15 +249,6 @@ public final class MatrixElementOptions extends CommonElementOptions {
 	}
 
 	/**
-	 * Returns <code>true</code> if the border width is defined as {@link BarBorderWidth}.
-	 * 
-	 * @return <code>true</code> if the border width is defined as {@link BarBorderWidth}
-	 */
-	public boolean isBorderWidthAsObject() {
-		return isType(Property.BORDER_WIDTH, ObjectType.OBJECT);
-	}
-
-	/**
 	 * Returns the border width of the dataset item in pixels as {@link BarBorderWidth}.
 	 *
 	 * @return the border width of the dataset item in pixels as {@link BarBorderWidth}.
@@ -271,6 +262,15 @@ public final class MatrixElementOptions extends CommonElementOptions {
 		// if here, the border width is a number or missing
 		// then returns a new object with same value
 		return new BarBorderWidth(super.getBorderWidth());
+	}
+
+	/**
+	 * Returns <code>true</code> if the border width is defined as {@link BarBorderWidth}.
+	 * 
+	 * @return <code>true</code> if the border width is defined as {@link BarBorderWidth}
+	 */
+	public boolean isBorderWidthAsObject() {
+		return isType(Property.BORDER_WIDTH, ObjectType.OBJECT);
 	}
 
 	/**
