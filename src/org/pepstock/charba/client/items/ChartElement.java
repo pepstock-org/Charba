@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.IsPoint;
@@ -177,8 +178,11 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	 * @param keys array of keys to request
 	 * @return an element instance.
 	 */
-	public final ChartElement getFinalPositionProps(Key... keys) {
-		return getFinalPositionProps(ArrayString.fromOrEmpty(keys));
+	public final ElementProperties getFinalPositionProps(Key... keys) {
+		// gets array
+		ArrayString array = ArrayString.fromOrEmpty(keys);
+		// gets elements
+		return getFinalPositionProps(array, ArrayListHelper.list(keys, array));
 	}
 
 	/**
@@ -187,26 +191,25 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	 * @param keys list of keys to request
 	 * @return an element instance.
 	 */
-	public final ChartElement getFinalPositionProps(List<Key> keys) {
-		return getFinalPositionProps(ArrayString.fromOrEmpty(ArrayUtil.toKeys(keys)));
+	public final ElementProperties getFinalPositionProps(List<Key> keys) {
+		return getFinalPositionProps(ArrayString.fromOrEmpty(ArrayUtil.toKeys(keys)), keys);
 	}
 
 	/**
 	 * Returns the list of properties of the element, using the final position.
 	 * 
+	 * @param nativeKeys array of keys to request
 	 * @param keys list of keys to request
 	 * @return an element instance.
 	 */
-	private ChartElement getFinalPositionProps(ArrayString keys) {
-		// gets factory
-		ChartElementFactory factory = ChartElementFactories.get().getFactory(getType());
+	private ElementProperties getFinalPositionProps(ArrayString nativeKeys, List<Key> keys) {
 		// checks if array is consistent
-		if (!keys.isEmpty()) {
+		if (!nativeKeys.isEmpty()) {
 			// gets and creates the result
-			return factory.create(NativeJsItemsHelper.getProps(getNativeObject(), keys, true));
+			return new ElementProperties(keys, NativeJsItemsHelper.getProps(getNativeObject(), nativeKeys, true));
 		}
 		// if here, the keys are not consistent
-		return factory.create(null);
+		return new ElementProperties(keys, null);
 	}
 
 	/*
