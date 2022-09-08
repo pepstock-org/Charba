@@ -155,10 +155,10 @@ public final class ChoroplethElement extends ChartElement {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.items.ChartElement, org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public ChoroplethElementOptions createOptions(NativeObject nativeObject) {
+		public ChoroplethElementOptions createOptions(ChartElement parent, NativeObject nativeObject) {
 			return new ChoroplethElementOptions(nativeObject);
 		}
 

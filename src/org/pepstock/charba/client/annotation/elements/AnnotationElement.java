@@ -17,12 +17,13 @@ package org.pepstock.charba.client.annotation.elements;
 
 import org.pepstock.charba.client.annotation.AnnotationEnvelop;
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
-import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.IsPoint;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.items.ChartElement;
+import org.pepstock.charba.client.items.ChartElementFactory;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -31,16 +32,22 @@ import org.pepstock.charba.client.items.Undefined;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AnnotationElement extends AbstractNode implements IsPoint {
+public final class AnnotationElement extends ChartElement {
+
+	/**
+	 * MATRIX element type.
+	 */
+	public static final String TYPE = "annotation";
+	/**
+	 * Static instance for the MATRIX element factory
+	 */
+	public static final ChartElementFactory FACTORY = new AnnotationElementFactory();
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		// for element activation
-		ACTIVE("active"),
-		SKIP("skip"),
 		// for element location
 		X("x"),
 		Y("y"),
@@ -82,8 +89,6 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 
 	}
 
-	// element options instance
-	private final OptionsElement options;
 	// label instance
 	private final AnnotationElement label;
 
@@ -113,7 +118,7 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 * @param nativeObject native object to map java script properties
 	 */
 	AnnotationElement(AbstractNode parent, Key childKey, NativeObject nativeObject) {
-		super(parent, childKey, nativeObject);
+		super(parent, childKey, TYPE, nativeObject);
 		// loads inner elements
 		if (has(Property.LABEL)) {
 			// sets the element label
@@ -121,16 +126,6 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 		} else {
 			// if not there, is null
 			this.label = null;
-		}
-		// loads element options only if already stored in the element
-		// there could be in the callbacks invocation, options are not loaded,
-		// instead on event there should be always
-		if (has(Property.OPTIONS)) {
-			// sets the element options
-			this.options = new OptionsElement(this, Property.OPTIONS, getValue(Property.OPTIONS));
-		} else {
-			// if not there, is null
-			this.options = null;
 		}
 	}
 
@@ -164,25 +159,6 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	public void setCenterPoint(double x, double y) {
 		setValue(Property.CENTER_X, x);
 		setValue(Property.CENTER_Y, y);
-	}
-
-	/**
-	 * Returns the center point of the element.
-	 * 
-	 * @return the center point of the element.
-	 */
-	public IsPoint getCenterPoint() {
-		return getCenterPoint(true);
-	}
-
-	/**
-	 * Returns the center point of the element.
-	 * 
-	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
-	 * @return the center point of the element.
-	 */
-	public IsPoint getCenterPoint(boolean useFinalPosition) {
-		return new InternalCenterPoint(NativeJsAnnotationHelper.getCenterPoint(getNativeObject(), useFinalPosition));
 	}
 
 	/**
@@ -230,49 +206,13 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	}
 
 	/**
-	 * Returns the list of properties of the element, using the final position.
-	 * 
-	 * @return an annotation element instance.
-	 */
-	public AnnotationElement getFinalPositionProps() {
-		return new AnnotationElement(NativeJsAnnotationHelper.getProps(getNativeObject(), ArrayString.fromOrEmpty(Property.values()), true));
-	}
-
-	/**
 	 * Returns the element options or <code>null</code> if options are not stored in the element.
 	 *
 	 * @return the element options or <code>null</code> if options are not stored in the element.
 	 */
-	public OptionsElement getOptions() {
-		return options;
-	}
-
-	/**
-	 * Returns if element is active.
-	 * 
-	 * @return <code>true</code> if the element is active.
-	 */
-	public boolean isActive() {
-		return getValue(Property.ACTIVE, Undefined.BOOLEAN);
-	}
-
-	/**
-	 * Returns <code>true</code> if skipped.
-	 * 
-	 * @return <code>true</code> if skipped.
-	 */
-	public boolean isSkipped() {
-		return getValue(Property.SKIP, Undefined.BOOLEAN);
-	}
-
-	/**
-	 * Returns the X location of element in pixel.
-	 * 
-	 * @return the X location of element in pixel.
-	 */
 	@Override
-	public double getX() {
-		return getValue(Property.X, Undefined.DOUBLE);
+	public OptionsElement getOptions() {
+		return (OptionsElement) super.getOptions();
 	}
 
 	/**
@@ -282,16 +222,6 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	 */
 	public void setX(double x) {
 		setValue(Property.X, x);
-	}
-
-	/**
-	 * Returns the Y location of element in pixel.
-	 * 
-	 * @return the Y location of element in pixel.
-	 */
-	@Override
-	public double getY() {
-		return getValue(Property.Y, Undefined.DOUBLE);
 	}
 
 	/**
@@ -412,17 +342,44 @@ public final class AnnotationElement extends AbstractNode implements IsPoint {
 	}
 
 	/**
-	 * Maps the center point of the element.
+	 * Inner class to create annotation element by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 *
 	 */
-	private static class InternalCenterPoint extends AbstractReadOnlyPoint {
+	private static class AnnotationElementFactory implements ChartElementFactory {
 
-		InternalCenterPoint(NativeObject nativeObject) {
-			super(nativeObject);
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public AnnotationElement create(NativeObject nativeObject) {
+			return new AnnotationElement(nativeObject);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.ElementFactory#getType()
+		 */
+		@Override
+		public String getType() {
+			return TYPE;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.items.ChartElement, org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public OptionsElement createOptions(ChartElement parent, NativeObject nativeObject) {
+			// checks if parent is consistent
+			Checker.assertCheck(parent instanceof AnnotationElement, "Element of the options is not an AnnotationElement");
+			// creates and returns options
+			return new OptionsElement(parent, Property.OPTIONS, nativeObject);
 		}
 
 	}
-
 }

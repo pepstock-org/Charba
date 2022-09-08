@@ -273,25 +273,12 @@ CharbaJsZoomHelper.isZoomedOrPanned = function(chart) {};
 function CharbaJsAnnotationHelper() {};
 /**
  * @param {Object} element
- * @param {boolean} useFinalPosition
- * @return {Object}
- */
-CharbaJsAnnotationHelper.getCenterPoint = function(element, useFinalPosition) {};
-/**
- * @param {Object} element
  * @param {number} x
  * @param {number} y
  * @param {boolean} useFinalPosition
  * @return {boolean}
  */
 CharbaJsAnnotationHelper.inRange = function(element, x, y, useFinalPosition) {};
-/**
- * @param {Object} element
- * @param {Array} properties
- * @param {boolean} useFinalPosition
- * @return {Object}
- */
-CharbaJsAnnotationHelper.getProps = function(element, properties, useFinalPosition) {};
 /**
  * @constructor
  * @return {CharbaJsDataLabelsHelper}
@@ -414,6 +401,19 @@ CharbaJsItemsHelper.getDataElementType  = function(controller) {};
  * @return {String}
  */
 CharbaJsItemsHelper.getDatasetElementType  = function(controller) {};
+/**
+ * @param {Object} element
+ * @param {boolean} useFinalPosition
+ * @return {Object}
+ */
+CharbaJsItemsHelper.getCenterPoint = function(element, useFinalPosition) {};
+/**
+ * @param {Object} element
+ * @param {Array} properties
+ * @param {boolean} useFinalPosition
+ * @return {Object}
+ */
+CharbaJsItemsHelper.getProps = function(element, properties, useFinalPosition) {};
 /**
  * @constructor
  * @return {CharbaJsDateAdapterHelper}

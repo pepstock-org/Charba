@@ -126,13 +126,12 @@ public final class TreeMapElement extends ChartElement {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.items.ChartElement, org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public TreeMapElementOptions createOptions(NativeObject nativeObject) {
+		public TreeMapElementOptions createOptions(ChartElement parent, NativeObject nativeObject) {
 			return new TreeMapElementOptions(nativeObject);
 		}
-
 	}
 
 }

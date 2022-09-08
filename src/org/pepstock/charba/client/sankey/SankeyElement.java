@@ -146,13 +146,12 @@ public final class SankeyElement extends ChartElement {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.items.ChartElement, org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public SankeyElementOptions createOptions(NativeObject nativeObject) {
+		public SankeyElementOptions createOptions(ChartElement parent, NativeObject nativeObject) {
 			return new SankeyElementOptions(nativeObject);
 		}
-
 	}
 
 }

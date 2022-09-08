@@ -65,6 +65,17 @@ public abstract class AbstractReadOnlyPoint extends AbstractNode implements IsPo
 	}
 
 	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * 
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
+	 */
+	protected AbstractReadOnlyPoint(AbstractNode parent, Key childKey, NativeObject nativeObject) {
+		super(parent, childKey, nativeObject);
+	}
+
+	/**
 	 * Returns the X coordinate of the point.
 	 * 
 	 * @return the X coordinate of the point.

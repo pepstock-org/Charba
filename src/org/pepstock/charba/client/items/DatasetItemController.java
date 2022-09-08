@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.List;
+
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -64,13 +67,19 @@ public final class DatasetItemController extends NativeObjectContainer {
 
 	}
 
+	// parent instance
+	private final DatasetItem parent;
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
+	 * @param parent {@link DatasetItem} instance where controller belongs to
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	DatasetItemController(NativeObject nativeObject) {
+	DatasetItemController(DatasetItem parent, NativeObject nativeObject) {
 		super(nativeObject);
+		// stores parent
+		this.parent = parent;
 	}
 
 	/**
@@ -125,10 +134,14 @@ public final class DatasetItemController extends NativeObjectContainer {
 	 * @return a set of predefined style properties that should be used to represent the dataset or the data if the index is specified
 	 */
 	public ChartElementOptions getStyle(int dataIndex) {
+		// gets elements from parent
+		List<ChartElement> elements = parent.getElements();
+		// checks if elements is consistent
+		ChartElement element = Checker.isBetween(dataIndex, 0, elements.size() - 1) ? elements.get(dataIndex) : null;
 		// gets factory
 		ChartElementFactory factory = ChartElementFactories.get().getFactory(getDataElementType());
 		// creates and return the options
-		return factory.createOptions(JsItemsHelper.get().getDatasetControllerStyle(getNativeObject(), dataIndex));
+		return factory.createOptions(element, JsItemsHelper.get().getDatasetControllerStyle(getNativeObject(), dataIndex));
 	}
 
 	/**

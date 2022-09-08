@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.AbstractNode;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
@@ -33,6 +34,17 @@ public class ChartElementOptions extends AbstractNode {
 	 */
 	protected ChartElementOptions(NativeObject nativeObject) {
 		super(nativeObject);
+	}
+
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * 
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
+	 */
+	protected ChartElementOptions(AbstractNode parent, Key childKey, NativeObject nativeObject) {
+		super(parent, childKey, nativeObject);
 	}
 
 }

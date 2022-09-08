@@ -167,10 +167,10 @@ public class ArcElement extends ChartElement {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.items.ChartElement, org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public ArcElementOptions createOptions(NativeObject nativeObject) {
+		public ArcElementOptions createOptions(ChartElement parent, NativeObject nativeObject) {
 			return new ArcElementOptions(nativeObject);
 		}
 

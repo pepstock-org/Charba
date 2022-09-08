@@ -15,7 +15,13 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.List;
+
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
+import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.ArrayUtil;
+import org.pepstock.charba.client.commons.IsPoint;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 
@@ -80,13 +86,25 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	 * @param nativeObject native java script object which contains all properties.
 	 */
 	protected ChartElement(String type, NativeObject nativeObject) {
-		super(nativeObject);
+		this(null, null, type, nativeObject);
+	}
+
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * 
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param type chart element type
+	 * @param nativeObject native object to map java script properties
+	 */
+	protected ChartElement(AbstractNode parent, Key childKey, String type, NativeObject nativeObject) {
+		super(parent, childKey, nativeObject);
 		// gets factory
 		ChartElementFactory factory = ChartElementFactories.get().getFactory(type);
 		// stores chart element type
 		this.type = factory.getType();
 		// sets the element options
-		this.options = factory.createOptions(getValue(Property.OPTIONS));
+		this.options = factory.createOptions(this, getValue(Property.OPTIONS));
 	}
 
 	/**
@@ -134,6 +152,63 @@ public class ChartElement extends AbstractReadOnlyPoint {
 		return getValue(Property.STOP, Undefined.BOOLEAN);
 	}
 
+	/**
+	 * Returns the center point of the element.
+	 * 
+	 * @return the center point of the element.
+	 */
+	public final IsPoint getCenterPoint() {
+		return getCenterPoint(true);
+	}
+
+	/**
+	 * Returns the center point of the element.
+	 * 
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return the center point of the element.
+	 */
+	public final IsPoint getCenterPoint(boolean useFinalPosition) {
+		return new InternalCenterPoint(NativeJsItemsHelper.getCenterPoint(getNativeObject(), useFinalPosition));
+	}
+
+	/**
+	 * Returns the list of properties of the element, using the final position.
+	 * 
+	 * @param keys array of keys to request
+	 * @return an element instance.
+	 */
+	public final ChartElement getFinalPositionProps(Key... keys) {
+		return getFinalPositionProps(ArrayString.fromOrEmpty(keys));
+	}
+
+	/**
+	 * Returns the list of properties of the element, using the final position.
+	 * 
+	 * @param keys list of keys to request
+	 * @return an element instance.
+	 */
+	public final ChartElement getFinalPositionProps(List<Key> keys) {
+		return getFinalPositionProps(ArrayString.fromOrEmpty(ArrayUtil.toKeys(keys)));
+	}
+
+	/**
+	 * Returns the list of properties of the element, using the final position.
+	 * 
+	 * @param keys list of keys to request
+	 * @return an element instance.
+	 */
+	private ChartElement getFinalPositionProps(ArrayString keys) {
+		// gets factory
+		ChartElementFactory factory = ChartElementFactories.get().getFactory(getType());
+		// checks if array is consistent
+		if (!keys.isEmpty()) {
+			// gets and creates the result
+			return factory.create(NativeJsItemsHelper.getProps(getNativeObject(), keys, true));
+		}
+		// if here, the keys are not consistent
+		return factory.create(null);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -174,11 +249,25 @@ public class ChartElement extends AbstractReadOnlyPoint {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.items.ChartElement, org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public ChartElementOptions createOptions(NativeObject nativeObject) {
+		public ChartElementOptions createOptions(ChartElement element, NativeObject nativeObject) {
 			return new ChartElementOptions(nativeObject);
+		}
+
+	}
+
+	/**
+	 * Maps the center point of the element.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalCenterPoint extends AbstractReadOnlyPoint {
+
+		InternalCenterPoint(NativeObject nativeObject) {
+			super(nativeObject);
 		}
 
 	}

@@ -153,13 +153,12 @@ public class BarElement extends ChartElement {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.items.ChartElement, org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public BarElementOptions createOptions(NativeObject nativeObject) {
+		public BarElementOptions createOptions(ChartElement parent, NativeObject nativeObject) {
 			return new BarElementOptions(nativeObject);
 		}
-
 	}
 
 }

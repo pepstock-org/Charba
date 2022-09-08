@@ -523,19 +523,6 @@ CharbaJsZoomHelper.isZoomedOrPanned = function(chart) {
  */
 function CharbaJsAnnotationHelper() {} 
 /**
- * Returns the center point of the element.
- *
- * @param {Object} element annotation element instance
- * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
- * @return {Object}
- */
-CharbaJsAnnotationHelper.getCenterPoint = function(element, useFinalPosition) {
-  if (element != null){
-    return element.getCenterPoint(useFinalPosition);
-  }
-  return null;
-}
-/**
  * Returns whether the coordinates, passed as arguments, are inside the element or not.
  *
  * @param {Object} element annotation element instance
@@ -549,20 +536,6 @@ CharbaJsAnnotationHelper.inRange = function(element, x, y, useFinalPosition) {
     return element.inRange(x, y, useFinalPosition);
   }
   return false;
-}
-/**
- * Returns the list of properties of the element.
- *
- * @param {Object} element annotation element instance
- * @param {ArrayString} properties annotation element instance
- * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
- * @return {Object}
- */
-CharbaJsAnnotationHelper.getProps = function(element, properties, useFinalPosition) {
-  if (element != null){
-    return element.getProps(properties, useFinalPosition);
-  }
-  return {};
 }
 /**
  * ----------------------------------------------------------------------------
@@ -784,6 +757,33 @@ CharbaJsItemsHelper.getDatasetElementType = function(controller) {
     return null;
   }
   return type;
+}
+/**
+ * Returns the center point of the element.
+ *
+ * @param {Object} element annotation element instance
+ * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+ * @return {Object}
+ */
+CharbaJsItemsHelper.getCenterPoint = function(element, useFinalPosition) {
+  if (element != null){
+    return element.getCenterPoint(useFinalPosition);
+  }
+  return null;
+}
+/**
+ * Returns the list of properties of the element.
+ *
+ * @param {Object} element annotation element instance
+ * @param {ArrayString} properties annotation element instance
+ * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+ * @return {Object}
+ */
+CharbaJsItemsHelper.getProps = function(element, properties, useFinalPosition) {
+  if (element != null){
+    return element.getProps(properties, useFinalPosition);
+  }
+  return {};
 }
 /**
  * ----------------------------------------------------------------------------

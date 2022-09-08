@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -328,6 +329,41 @@ final class JsItemsHelper {
 			return NativeJsItemsHelper.getDatasetElementType(controller);
 		}
 		// if here, the argument is not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the list of properties of the element.
+	 * 
+	 * @param element element which should be invoked
+	 * @param properties list of properties to get
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return a native object with the selected properties
+	 */
+	NativeObject getProps(NativeObject element, ArrayString properties, boolean useFinalPosition) {
+		// checks arguments
+		if (element != null && properties != null) {
+			return NativeJsItemsHelper.getProps(element, properties, useFinalPosition);
+		}
+		// if here, not consistent
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the center point of the element.
+	 * 
+	 * @param element element which should provide the point
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return the center point of the element.
+	 */
+	NativeObject getCenterPoint(NativeObject element, boolean useFinalPosition) {
+		// checks arguments
+		if (element != null) {
+			return NativeJsItemsHelper.getCenterPoint(element, useFinalPosition);
+		}
+		// if here, not consistent
 		// then returns null
 		return null;
 	}

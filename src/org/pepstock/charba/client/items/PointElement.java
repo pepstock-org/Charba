@@ -189,13 +189,12 @@ public class PointElement extends ChartElement {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.commons.NativeObject)
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.items.ChartElement, org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public PointElementOptions createOptions(NativeObject nativeObject) {
+		public PointElementOptions createOptions(ChartElement parent, NativeObject nativeObject) {
 			return new PointElementOptions(nativeObject);
 		}
-
 	}
 
 }

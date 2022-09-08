@@ -42,6 +42,7 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.items.ChartElementOptions;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.AbstractFont;
 import org.pepstock.charba.client.options.AbstractPadding;
@@ -54,7 +55,7 @@ import org.pepstock.charba.client.options.IsPadding;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class BaseElement extends AbstractNode {
+abstract class BaseElement extends ChartElementOptions {
 
 	/**
 	 * Name of properties of native object.

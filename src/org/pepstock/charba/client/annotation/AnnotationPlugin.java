@@ -18,6 +18,8 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.annotation.AnnotationOptionsFactory.AnnotationDefaultsOptionsFactory;
+import org.pepstock.charba.client.annotation.elements.AnnotationElement;
+import org.pepstock.charba.client.items.ChartElementFactories;
 import org.pepstock.charba.client.plugins.AbstractExtensionPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -93,6 +95,8 @@ public final class AnnotationPlugin extends AbstractExtensionPlugin<AnnotationOp
 		Injector.ensureInjected(RESOURCE);
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
+		// registers factory for element
+		ChartElementFactories.get().register(AnnotationElement.FACTORY);
 		// loads defaults
 		AnnotationPlugin.get().loadDefaults(DEFAULTS_FACTORY);
 	}

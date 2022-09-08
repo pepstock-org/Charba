@@ -121,7 +121,7 @@ public final class DatasetItem extends NativeObjectContainer {
 	DatasetItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// stores controller
-		this.datasetItemController = new DatasetItemController(getValue(Property.CONTROLLER));
+		this.datasetItemController = new DatasetItemController(this, getValue(Property.CONTROLLER));
 	}
 
 	/**

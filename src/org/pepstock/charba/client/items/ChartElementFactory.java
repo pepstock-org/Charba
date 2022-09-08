@@ -35,8 +35,9 @@ public interface ChartElementFactory extends NativeObjectContainerFactory<ChartE
 	/**
 	 * Creates a {@link ChartElementOptions} instance by a native object.
 	 * 
+	 * @param parent chart element where the options belong to
 	 * @param nativeObject native object
 	 * @return a {@link ChartElementOptions} instance by a native object
 	 */
-	ChartElementOptions createOptions(final NativeObject nativeObject);
+	ChartElementOptions createOptions(final ChartElement parent, final NativeObject nativeObject);
 }

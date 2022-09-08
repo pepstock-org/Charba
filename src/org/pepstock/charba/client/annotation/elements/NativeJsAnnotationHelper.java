@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.annotation.elements;
 
 import org.pepstock.charba.client.annotation.AnnotationPlugin;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 
@@ -40,15 +39,6 @@ final class NativeJsAnnotationHelper {
 	}
 
 	/**
-	 * Returns the center point of the element.
-	 * 
-	 * @param element element which should provide the point
-	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
-	 * @return the center point of the element.
-	 */
-	static native NativeObject getCenterPoint(NativeObject element, boolean useFinalPosition);
-
-	/**
 	 * Returns whether the coordinates, passed as arguments, are inside the element or not.
 	 * 
 	 * @param element element which should be invoked
@@ -59,13 +49,4 @@ final class NativeJsAnnotationHelper {
 	 */
 	static native boolean inRange(NativeObject element, double x, double y, boolean useFinalPosition);
 
-	/**
-	 * Returns the list of properties of the element.
-	 * 
-	 * @param element element which should be invoked
-	 * @param properties list of properties to get
-	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
-	 * @return a native object with the selected properties
-	 */
-	static native NativeObject getProps(NativeObject element, ArrayString properties, boolean useFinalPosition);
 }
