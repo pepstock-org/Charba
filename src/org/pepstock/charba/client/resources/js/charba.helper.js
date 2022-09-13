@@ -736,7 +736,7 @@ CharbaJsItemsHelper.getDatasetControllerStyle = function(controller, dataIndex) 
  * Returns the data element type.
  *
  * @param {Object} controller controller instance 
- * @return {String} the data element type
+ * @return {string} the data element type
  */
 CharbaJsItemsHelper.getDataElementType = function(controller) {
   const type = controller.dataElementType.id;
@@ -749,7 +749,7 @@ CharbaJsItemsHelper.getDataElementType = function(controller) {
  * Returns the dataset element type.
  *
  * @param {Object} controller controller instance 
- * @return {String} the dataset element type
+ * @return {string} the dataset element type
  */
 CharbaJsItemsHelper.getDatasetElementType = function(controller) {
   const type = controller.datasetElementType.id;

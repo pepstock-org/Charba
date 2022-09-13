@@ -393,12 +393,12 @@ CharbaJsItemsHelper.isHorizontal = function(object) {};
 CharbaJsItemsHelper.getDatasetControllerStyle  = function(controller, dataIndex) {};
 /**
  * @param {Object} controller 
- * @return {String}
+ * @return {string}
  */
 CharbaJsItemsHelper.getDataElementType  = function(controller) {};
 /**
  * @param {Object} controller 
- * @return {String}
+ * @return {string}
  */
 CharbaJsItemsHelper.getDatasetElementType  = function(controller) {};
 /**
