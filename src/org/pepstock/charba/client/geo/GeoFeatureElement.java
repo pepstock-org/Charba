@@ -27,7 +27,7 @@ import org.pepstock.charba.client.items.Undefined;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChoroplethElement extends ChartElement {
+public final class GeoFeatureElement extends ChartElement {
 
 	/**
 	 * GEOFEATURE element type.
@@ -81,7 +81,7 @@ public final class ChoroplethElement extends ChartElement {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	ChoroplethElement(NativeObject nativeObject) {
+	GeoFeatureElement(NativeObject nativeObject) {
 		super(TYPE, nativeObject);
 		// stores internal element
 		this.center = new DataPointCenter(getValue(Property.CENTER));
@@ -94,8 +94,8 @@ public final class ChoroplethElement extends ChartElement {
 	 * @return the element options.
 	 */
 	@Override
-	public ChoroplethElementOptions getOptions() {
-		return (ChoroplethElementOptions) super.getOptions();
+	public GeoFeatureElementOptions getOptions() {
+		return (GeoFeatureElementOptions) super.getOptions();
 	}
 
 	/**
@@ -138,8 +138,8 @@ public final class ChoroplethElement extends ChartElement {
 		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public ChoroplethElement create(NativeObject nativeObject) {
-			return new ChoroplethElement(nativeObject);
+		public GeoFeatureElement create(NativeObject nativeObject) {
+			return new GeoFeatureElement(nativeObject);
 		}
 
 		/*
@@ -158,8 +158,8 @@ public final class ChoroplethElement extends ChartElement {
 		 * @see org.pepstock.charba.client.items.ChartElementFactory#createOptions(org.pepstock.charba.client.items.ChartElement, org.pepstock.charba.client.commons.NativeObject)
 		 */
 		@Override
-		public ChoroplethElementOptions createOptions(ChartElement parent, NativeObject nativeObject) {
-			return new ChoroplethElementOptions(nativeObject);
+		public GeoFeatureElementOptions createOptions(ChartElement parent, NativeObject nativeObject) {
+			return new GeoFeatureElementOptions(nativeObject);
 		}
 
 	}

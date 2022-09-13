@@ -71,29 +71,13 @@ class CommonOptionsHandler extends AbstractNode {
 
 	}
 
-	// default clip map instance
-	// because choropleth and bubblemap charts have got different default
-	private final ClipMap defaultClipMap;
-
-	/**
-	 * Creates an handler at options level.
-	 * 
-	 * @param mapper instance of options mapper
-	 */
-	CommonOptionsHandler(BaseGeoOptionsMapper mapper) {
-		this(mapper.nativeObject(), mapper.getDefaultClipMap());
-	}
-
 	/**
 	 * Creates an handler at data set level.
 	 * 
 	 * @param nativeObject native object of data set
-	 * @param defaultClipMap default clip map instance, different between choropleth and bubblemap.
 	 */
-	CommonOptionsHandler(NativeObject nativeObject, ClipMap defaultClipMap) {
+	CommonOptionsHandler(NativeObject nativeObject) {
 		super(nativeObject);
-		// stores default clip map instance
-		this.defaultClipMap = defaultClipMap;
 	}
 
 	/**
@@ -241,7 +225,7 @@ class CommonOptionsHandler extends AbstractNode {
 		// checks if is a string
 		if (isType(Property.CLIP_MAP, ObjectType.STRING)) {
 			// the clip map is stored as string
-			return Key.getKeyByValue(ClipMap.values(), getValue(Property.CLIP_MAP, defaultClipMap));
+			return Key.getKeyByValue(ClipMap.values(), getValue(Property.CLIP_MAP, ClipMap.FALSE));
 		} else if (isType(Property.CLIP_MAP, ObjectType.BOOLEAN)) {
 			// the clip map is stored as boolean
 			// checks what it has to return
@@ -253,6 +237,6 @@ class CommonOptionsHandler extends AbstractNode {
 		}
 		// if here the property is not set
 		// then returns default
-		return defaultClipMap;
+		return ClipMap.FALSE;
 	}
 }

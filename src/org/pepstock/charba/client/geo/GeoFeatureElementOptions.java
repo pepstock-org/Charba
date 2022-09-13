@@ -21,18 +21,24 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultBar;
+import org.pepstock.charba.client.items.BarElementOptions;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.AbstractElementFactory;
 import org.pepstock.charba.client.options.Bar;
-import org.pepstock.charba.client.options.Elements;
+import org.pepstock.charba.client.options.ElementFactory;
 
 /**
- * The styling of the new element {@link GeoFeature} is based on {@link Bar} element with some additional options for the outline and graticule.
+ * The styling of the new element {@link GeoFeatureElementOptions} is based on {@link Bar} element with some additional options for the outline and graticule.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class GeoFeature extends Bar {
+public final class GeoFeatureElementOptions extends BarElementOptions {
+
+	/**
+	 * Element factory to get "{@value GeoFeatureElement#TYPE}" element.
+	 */
+	public static final ElementFactory<GeoFeatureElementOptions> FACTORY = new GeoFeatureElementOptionsFactory(GeoFeatureElement.TYPE);
 
 	/**
 	 * Default outline border width options, <b>{@value DEFAULT_OUTLINE_BORDER_WIDTH}</b>.
@@ -85,15 +91,12 @@ public final class GeoFeature extends Bar {
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param elements parent node to use to add this element where changed
-	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param defaultValues default provider
-	 * @param nativeObject native object to map java script properties
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	GeoFeature(Elements elements, Key childKey, IsDefaultBar defaultValues, NativeObject nativeObject) {
-		super(elements, childKey, defaultValues, nativeObject);
+	GeoFeatureElementOptions(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -247,4 +250,32 @@ public final class GeoFeature extends Bar {
 		return ColorBuilder.parse(getGraticuleBorderColorAsString());
 	}
 
+	/**
+	 * Specific element factory for matrix element options.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class GeoFeatureElementOptionsFactory extends AbstractElementFactory<GeoFeatureElementOptions> {
+
+		/**
+		 * Creates the factory by the key of object, as string.
+		 * 
+		 * @param elementKeyAsString the key of object, as string.
+		 */
+		private GeoFeatureElementOptionsFactory(String elementKeyAsString) {
+			super(elementKeyAsString);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public GeoFeatureElementOptions create(NativeObject nativeObject) {
+			return new GeoFeatureElementOptions(nativeObject);
+		}
+
+	}
 }

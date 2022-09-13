@@ -80,7 +80,7 @@ final class BaseGeoController extends AbstractController {
 			// injects CHARTJS-GEO controller
 			Injector.ensureInjected(RESOURCE);
 			// registers the geo feature elements
-			ChartElementFactories.get().register(ChoroplethElement.FACTORY);
+			ChartElementFactories.get().register(GeoFeatureElement.FACTORY);
 			// creates and returns an fake controller
 			return new BaseGeoController(controllerType);
 		}

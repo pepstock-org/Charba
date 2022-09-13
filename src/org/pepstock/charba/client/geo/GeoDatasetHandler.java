@@ -24,7 +24,6 @@ import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.geo.enums.ClipMap;
 
 /**
  * This is the options handler for data set implementation for GEO charts.
@@ -77,11 +76,10 @@ final class GeoDatasetHandler<T extends GeoDataPoint> extends CommonOptionsHandl
 	 * Creates a data set.
 	 * 
 	 * @param nativeObject native object of data set
-	 * @param defaultClipMap default clip map instance, different between choropleth and bubblemap.
 	 * @param factory factory instance to retrieve the data points
 	 */
-	GeoDatasetHandler(NativeObject nativeObject, ClipMap defaultClipMap, NativeObjectContainerFactory<T> factory) {
-		super(nativeObject, defaultClipMap);
+	GeoDatasetHandler(NativeObject nativeObject, NativeObjectContainerFactory<T> factory) {
+		super(nativeObject);
 		// stores factory
 		this.factory = factory;
 	}

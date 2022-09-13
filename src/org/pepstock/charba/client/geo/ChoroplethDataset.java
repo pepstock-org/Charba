@@ -63,7 +63,7 @@ public final class ChoroplethDataset extends BarDataset implements IsGeoDataset<
 	ChoroplethDataset(ControllerType type, IsDefaultOptions defaultValues) {
 		super(type, defaultValues, Dataset.DEFAULT_HIDDEN);
 		// creates handler
-		this.handler = new GeoDatasetHandler<>(getNativeObject(), ChoroplethOptionsMapper.DEFAULT_CLIP_MAP, FACTORY);
+		this.handler = new GeoDatasetHandler<>(getNativeObject(), FACTORY);
 	}
 
 	/*

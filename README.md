@@ -293,7 +293,8 @@ Here you can find the list of enhancements and updates available on `master` bra
      * the chart elements are typed based on the data type of the chart controller.
    * rename `DatasetElementOptions` class to `ChartElementOptions`.
      * the chart elements options are typed based on the data type of the chart controller.
-   * rename `ChoroplethBar` class to `GeoFeature`
+   * rename `ChoroplethBar` class to `GeoFeatureElement`
+   * remove `ChoroplethElement` class, accessible by the options elements node. Use `chart.getOptions().getElements().getElement(GeoFeatureElementOptions.FACTORY)` to get the GEO feature element options, by `GeoFeatureElementOptions` class.
    * remove `BubbleMapPoint` class. Use `Point` element class instead to configure bubble map points.
    
 ### Features
@@ -321,11 +322,11 @@ Here you can find the list of enhancements and updates available on `master` bra
    * `MatrixElement` and `MatrixElementOptions` classes for matrix charts.
    * `TreeMapElement` and `TreeMapElementOptions` classes for treemap charts.
    * `SankeyElement` and `SankeyElementOptions` classes for sankey charts.
-   * `ChoroplethElement` and `ChoroplethElementOptions` classes for GEO choropeth charts.
- * add `GeoFeature` configuration element to `BubbleMap` chart.
+   * `GeoFeatureElement` and `GeoFeatureElementOptions` classes for GEO choropeth charts.
+ * add `GeoFeatureElementOptions` configuration element to `BubbleMap` chart.
  * add `register` method to charts, where the controller type is not a CHART.JS out-of-the-box ones, in order to register then and act on the options if needed before instantiating a chart instance.
    * applied to matrix, sankey, treemap, choropleth, bubblemap, gauge and meter charts.
- * add element factories to matrix, sankey, treemap charts in order to manage defaults options once for all chart instances in the application.  
+ * add options element factories to matrix, sankey, treemap, choropleth and bubblemap charts in order to manage defaults options once for all chart instances in the application.  
  
 License
 -------

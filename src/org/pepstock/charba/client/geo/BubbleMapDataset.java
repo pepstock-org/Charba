@@ -68,7 +68,7 @@ public final class BubbleMapDataset extends BubbleDataset implements IsGeoDatase
 	BubbleMapDataset(ControllerType type, IsDefaultOptions defaultValues) {
 		super(type, defaultValues, Dataset.DEFAULT_HIDDEN);
 		// creates handler
-		this.handler = new GeoDatasetHandler<>(getNativeObject(), BubbleMapOptionsMapper.DEFAULT_CLIP_MAP, FACTORY);
+		this.handler = new GeoDatasetHandler<>(getNativeObject(), FACTORY);
 	}
 
 	/*
