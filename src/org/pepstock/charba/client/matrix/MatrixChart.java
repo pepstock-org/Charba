@@ -121,6 +121,7 @@ public final class MatrixChart extends AbstractChart implements IsDatasetCreator
 		// disables plugins which can not work with this controller.
 		getOptions().getPlugins().setEnabled(ResourceName.DATALABELS_PLUGIN.value(), false);
 		getOptions().getPlugins().setEnabled(ResourceName.LABELS_PLUGIN.value(), false);
+		getOptions().getPlugins().setEnabled(ResourceName.ANNOTATION_PLUGIN.value(), false);
 		// checks all defined scales
 		for (Axis axis : getOptions().getScales().getAxes()) {
 			// checks type of axis
