@@ -335,6 +335,40 @@ public class CommonElementOptions extends ChartElementOptions {
 	}
 
 	/**
+	 * Returns if the point passed as the argument is in the element.
+	 *
+	 * @param x point X value
+	 * @param y point Y value
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return <code>true</code> if the point is in the element
+	 */
+	public final boolean inRange(double x, double y, boolean useFinalPosition) {
+		return JsItemsHelper.get().inRange(getNativeObject(), x, y, useFinalPosition);
+	}
+
+	/**
+	 * Returns if the point X passed as the argument is in the element.
+	 *
+	 * @param x point X value
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return <code>true</code> if the point X is in the element
+	 */
+	public final boolean inXRange(double x, boolean useFinalPosition) {
+		return JsItemsHelper.get().inXRange(getNativeObject(), x, useFinalPosition);
+	}
+
+	/**
+	 * Returns if the point Y passed as the argument is in the element.
+	 *
+	 * @param y point Y value
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return <code>true</code> if the point Y is in the element
+	 */
+	public final boolean inYRange(double y, boolean useFinalPosition) {
+		return JsItemsHelper.get().inYRange(getNativeObject(), y, useFinalPosition);
+	}
+
+	/**
 	 * Loads the background color in the {@link TooltipLabelColor} instance.
 	 * 
 	 * @param labelColor {@link TooltipLabelColor} instance to be filled

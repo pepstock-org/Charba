@@ -367,4 +367,59 @@ final class JsItemsHelper {
 		// then returns null
 		return null;
 	}
+
+	/**
+	 * Returns if the point passed as the argument is in the element.
+	 *
+	 * @param element chart element instance
+	 * @param x point X value
+	 * @param y point Y value
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return <code>true</code> if the point is in the element
+	 */
+	boolean inRange(NativeObject element, double x, double y, boolean useFinalPosition) {
+		// checks arguments
+		if (element != null) {
+			return NativeJsItemsHelper.inRange(element, x, y, useFinalPosition);
+		}
+		// if here, not consistent
+		// then returns false
+		return false;
+	}
+
+	/**
+	 * Returns if the point X passed as the argument is in the element.
+	 *
+	 * @param element chart element instance
+	 * @param x point X value
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return <code>true</code> if the point X is in the element
+	 */
+	boolean inXRange(NativeObject element, double x, boolean useFinalPosition) {
+		// checks arguments
+		if (element != null) {
+			return NativeJsItemsHelper.inXRange(element, x, useFinalPosition);
+		}
+		// if here, not consistent
+		// then returns false
+		return false;
+	}
+
+	/**
+	 * Returns if the point Y passed as the argument is in the element.
+	 *
+	 * @param element chart element instance
+	 * @param y point Y value
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return <code>true</code> if the point Y is in the element
+	 */
+	boolean inYRange(NativeObject element, double y, boolean useFinalPosition) {
+		// checks arguments
+		if (element != null) {
+			return NativeJsItemsHelper.inYRange(element, y, useFinalPosition);
+		}
+		// if here, not consistent
+		// then returns false
+		return false;
+	}
 }

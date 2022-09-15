@@ -216,4 +216,35 @@ final class NativeJsItemsHelper {
 	 * @return the center point of the element.
 	 */
 	static native NativeObject getCenterPoint(NativeObject element, boolean useFinalPosition);
+
+	/**
+	 * Returns if the point passed as the argument is in the element.
+	 *
+	 * @param element chart element instance
+	 * @param x point X value
+	 * @param y point Y value
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return <code>true</code> if the point is in the element
+	 */
+	static native boolean inRange(NativeObject element, double x, double y, boolean useFinalPosition);
+
+	/**
+	 * Returns if the point X passed as the argument is in the element.
+	 *
+	 * @param element chart element instance
+	 * @param x point X value
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return <code>true</code> if the point X is in the element
+	 */
+	static native boolean inXRange(NativeObject element, double x, boolean useFinalPosition);
+
+	/**
+	 * Returns if the point Y passed as the argument is in the element.
+	 *
+	 * @param element chart element instance
+	 * @param y point Y value
+	 * @param useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+	 * @return <code>true</code> if the point Y is in the element
+	 */
+	static native boolean inYRange(NativeObject element, double y, boolean useFinalPosition);
 }

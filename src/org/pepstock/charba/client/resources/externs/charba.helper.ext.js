@@ -415,6 +415,28 @@ CharbaJsItemsHelper.getCenterPoint = function(element, useFinalPosition) {};
  */
 CharbaJsItemsHelper.getProps = function(element, properties, useFinalPosition) {};
 /**
+ * @param {Object} element
+ * @param {number} x
+ * @param {number} y
+ * @param {boolean} useFinalPosition
+ * @return {boolean}
+ */
+CharbaJsItemsHelper.inRange = function(element, x, y, useFinalPosition) {};
+/**
+ * @param {Object} element
+ * @param {number} x
+ * @param {boolean} useFinalPosition
+ * @return {boolean}
+ */
+CharbaJsItemsHelper.inXRange = function(element, x, useFinalPosition) {};
+/**
+ * @param {Object} element
+ * @param {number} y
+ * @param {boolean} useFinalPosition
+ * @return {boolean}
+ */
+CharbaJsItemsHelper.inYRange = function(element, y, useFinalPosition) {};
+/**
  * @constructor
  * @return {CharbaJsDateAdapterHelper}
  */	

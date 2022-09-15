@@ -761,7 +761,7 @@ CharbaJsItemsHelper.getDatasetElementType = function(controller) {
 /**
  * Returns the center point of the element.
  *
- * @param {Object} element annotation element instance
+ * @param {Object} element chart element instance
  * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
  * @return {Object}
  */
@@ -774,7 +774,7 @@ CharbaJsItemsHelper.getCenterPoint = function(element, useFinalPosition) {
 /**
  * Returns the list of properties of the element.
  *
- * @param {Object} element annotation element instance
+ * @param {Object} element chart element instance
  * @param {ArrayString} properties annotation element instance
  * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
  * @return {Object}
@@ -784,6 +784,49 @@ CharbaJsItemsHelper.getProps = function(element, properties, useFinalPosition) {
     return element.getProps(properties, useFinalPosition);
   }
   return {};
+}
+/**
+ * Returns if the point passed as the argument is in the element.
+ *
+ * @param {Object} element chart element instance
+ * @param {number} x point X value
+ * @param {number} y point Y value
+ * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+ * @return {boolean}
+ */
+CharbaJsItemsHelper.inRange = function(element, x, y, useFinalPosition) {
+  if (element != null){
+    return element.inRange(x, y, useFinalPosition);
+  }
+  return false;
+}
+/**
+ * Returns if the point X passed as the argument is in the element.
+ *
+ * @param {Object} element chart element instance
+ * @param {number} x point X value
+ * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+ * @return {boolean}
+ */
+CharbaJsItemsHelper.inXRange = function(element, x, useFinalPosition) {
+  if (element != null){
+    return element.inXRange(x, useFinalPosition);
+  }
+  return false;
+}
+/**
+ * Returns if the point Y passed as the argument is in the element.
+ *
+ * @param {Object} element annotation element instance
+ * @param {number} x point Y value
+ * @param {boolean} useFinalPosition if the position must be calculated with final dimensions or also during the animation.
+ * @return {boolean}
+ */
+CharbaJsItemsHelper.inYRange = function(element, y, useFinalPosition) {
+  if (element != null){
+    return element.inYRange(y, useFinalPosition);
+  }
+  return false;
 }
 /**
  * ----------------------------------------------------------------------------
