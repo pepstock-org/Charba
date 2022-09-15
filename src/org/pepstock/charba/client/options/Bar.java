@@ -142,7 +142,6 @@ public class Bar extends AbstractElement<IsDefaultBar> implements IsDefaultBar, 
 	 * @param borderskip to set <code>false</code> as border skipped.
 	 */
 	public void setBorderSkipped(boolean borderskip) {
-		// stores boolean value
 		setValueAndAddToParent(Property.BORDER_SKIPPED, borderskip);
 	}
 
