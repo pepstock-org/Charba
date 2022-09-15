@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.dom.elements.Canvas;
@@ -187,6 +188,80 @@ public class PointElementOptions extends CommonElementOptions {
 		// if here, means the point style as stored as image or canvas
 		// then returns the default
 		return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
+	}
+
+	/**
+	 * Sets the radius of the point shape.<br>
+	 * If set to 0, the point is not rendered.
+	 * 
+	 * @param radius array of the radius of the point shape.
+	 */
+	public void setRadius(double radius) {
+		setValue(Property.RADIUS, Checker.positiveOrZero(radius));
+	}
+
+	/**
+	 * Sets the pixel size of the non-displayed point that reacts to mouse events.
+	 * 
+	 * @param hitRadius the pixel size of the non-displayed point.
+	 */
+	public void setHitRadius(double hitRadius) {
+		setValue(Property.HIT_RADIUS, Checker.positiveOrZero(hitRadius));
+	}
+
+	/**
+	 * Sets the radius of the point when hovered.
+	 * 
+	 * @param hoverRadius the radius of the point when hovered.
+	 */
+	public void setHoverRadius(double hoverRadius) {
+		setValue(Property.HOVER_RADIUS, Checker.positiveOrZero(hoverRadius));
+	}
+
+	/**
+	 * Sets the point rotation (in degrees).
+	 * 
+	 * @param rotation the point rotation (in degrees).
+	 */
+	public void setRotation(double rotation) {
+		setValue(Property.ROTATION, rotation);
+	}
+
+	/**
+	 * Sets the style of the point.
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
+	public void setPointStyle(PointStyle pointStyle) {
+		// stores value
+		setValue(Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
+	 * Sets the style of the point as image.
+	 * 
+	 * @param pointStyle image element of the style of the point as image.
+	 */
+	public void setPointStyle(Img pointStyle) {
+		setValue(Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
+	 * Sets the style of the point as canvas.
+	 * 
+	 * @param pointStyle canvas element of the style of the point as canvas.
+	 */
+	public void setPointStyle(Canvas pointStyle) {
+		setValue(Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
+	 * Sets the border width of point when hovered.
+	 * 
+	 * @param borderWidth the border width of point when hovered.
+	 */
+	public void setHoverBorderWidth(int borderWidth) {
+		setValue(Property.HOVER_BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
 	}
 
 	/**

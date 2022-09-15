@@ -17,6 +17,7 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -32,6 +33,11 @@ import org.pepstock.charba.client.enums.BorderSkipped;
  *
  */
 public class BarElementOptions extends CommonElementOptions {
+
+	// min value of percentage
+	private static final double MINIMUM_PERCENTAGE = 0D;
+	// max value of percentage
+	private static final double MAXIMUM_PERCENTAGE = 1D;
 
 	/**
 	 * Name of properties of native object.
@@ -132,6 +138,15 @@ public class BarElementOptions extends CommonElementOptions {
 	}
 
 	/**
+	 * Sets the border width.
+	 * 
+	 * @param borderWidth the border width.
+	 */
+	public final void setBorderWidth(BarBorderWidth borderWidth) {
+		setValue(Property.BORDER_WIDTH, borderWidth);
+	}
+
+	/**
 	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each
 	 * other.
 	 * 
@@ -139,6 +154,16 @@ public class BarElementOptions extends CommonElementOptions {
 	 */
 	public double getBarPercentage() {
 		return getValue(Property.BAR_PERCENTAGE, Defaults.get().getGlobal().getDatasets().get(ChartType.BAR).getBarPercentage());
+	}
+
+	/**
+	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other.
+	 * 
+	 * @param barPercentage percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to
+	 *            each other.
+	 */
+	public void setBarPercentage(double barPercentage) {
+		setValue(Property.BAR_PERCENTAGE, checkAndGetPercentage(barPercentage, Property.BAR_PERCENTAGE));
 	}
 
 	/**
@@ -151,6 +176,15 @@ public class BarElementOptions extends CommonElementOptions {
 	}
 
 	/**
+	 * Sets the percent (0-1) of the available width each category should be within the sample width.
+	 * 
+	 * @param categoryPercentage percent (0-1) of the available width each category should be within the sample width.
+	 */
+	public void setCategoryPercentage(double categoryPercentage) {
+		setValue(Property.CATEGORY_PERCENTAGE, checkAndGetPercentage(categoryPercentage, Property.CATEGORY_PERCENTAGE));
+	}
+
+	/**
 	 * Returns the base value for the bar in data units along the value axis.<br>
 	 * If not set, defaults to the value axis base value.
 	 * 
@@ -159,6 +193,17 @@ public class BarElementOptions extends CommonElementOptions {
 	 */
 	public double getBase() {
 		return getValue(Property.BASE, Defaults.get().getGlobal().getElements().getBar().getBase());
+	}
+
+	/**
+	 * Sets the base value for the bar in data units along the value axis.<br>
+	 * If not set, defaults to the value axis base value.
+	 * 
+	 * @param base base value for the bar in data units along the value axis.<br>
+	 *            If not set, defaults to the value axis base value
+	 */
+	public void setBase(double base) {
+		setValue(Property.BASE, base);
 	}
 
 	/**
@@ -174,6 +219,34 @@ public class BarElementOptions extends CommonElementOptions {
 		}
 		// otherwise returns the enum value as string
 		return getValue(Property.BORDER_SKIPPED, BorderSkipped.values(), Defaults.get().getGlobal().getElements().getBar().getBorderSkipped());
+	}
+
+	/**
+	 * Sets the edge to skip drawing the border for.
+	 * 
+	 * @param position the edge to skip drawing the border for.
+	 */
+	public void setBorderSkipped(BorderSkipped position) {
+		// checks if setting a false value
+		if (BorderSkipped.FALSE.equals(position)) {
+			// stores boolean value
+			setValue(Property.BORDER_SKIPPED, false);
+		} else if (BorderSkipped.TRUE.equals(position)) {
+			// stores boolean value
+			setValue(Property.BORDER_SKIPPED, true);
+		} else {
+			// otherwise stores the key value
+			setValue(Property.BORDER_SKIPPED, position);
+		}
+	}
+
+	/**
+	 * Sets the edge to skip drawing the border for.
+	 * 
+	 * @param borderskip to set <code>false</code> as border skipped.
+	 */
+	public void setBorderSkipped(boolean borderskip) {
+		setValue(Property.BORDER_SKIPPED, borderskip);
 	}
 
 	/**
@@ -202,6 +275,15 @@ public class BarElementOptions extends CommonElementOptions {
 	}
 
 	/**
+	 * Sets the bar border radius (in pixels).
+	 * 
+	 * @param borderRadius the bar border radius (in pixels).
+	 */
+	public void setBorderRadius(int borderRadius) {
+		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(borderRadius));
+	}
+
+	/**
 	 * Returns the border radius of the dataset item in pixels as {@link BarBorderRadius}.
 	 *
 	 * @return the border radius of the dataset item in pixels as {@link BarBorderRadius}.
@@ -215,6 +297,15 @@ public class BarElementOptions extends CommonElementOptions {
 		// if here, the border radius is a number or missing
 		// then returns a new object with same value
 		return new BarBorderRadius(getValue(Property.BORDER_RADIUS, Defaults.get().getGlobal().getElements().getBar().getBorderRadius()));
+	}
+
+	/**
+	 * Sets the bar border radius (in pixels).
+	 * 
+	 * @param borderRadius the bar border radius (in pixels).
+	 */
+	public void setBorderRadius(BarBorderRadius borderRadius) {
+		setValue(Property.BORDER_RADIUS, borderRadius);
 	}
 
 	/**
@@ -242,6 +333,21 @@ public class BarElementOptions extends CommonElementOptions {
 	}
 
 	/**
+	 * Sets <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated.
+	 * 
+	 * @param autoInflateAmount <code>true</code> if the amount of pixels to inflate the bar rectangles, when drawing, is automatically calculated
+	 */
+	public void setAutoInflateAmount(boolean autoInflateAmount) {
+		// checks if setting
+		if (autoInflateAmount) {
+			setValue(Property.INFLATE_AMOUNT, DefaultBar.AUTO_INFLATE_AMOUNT);
+		} else {
+			// removes key
+			remove(Property.INFLATE_AMOUNT);
+		}
+	}
+
+	/**
 	 * Returns the amount of pixels to inflate the bar rectangles, when drawing.
 	 * 
 	 * @return the amount of pixels to inflate the bar rectangles, when drawing
@@ -254,5 +360,27 @@ public class BarElementOptions extends CommonElementOptions {
 		// if here, the inflate is a number
 		// then returns false
 		return Undefined.INTEGER;
+	}
+
+	/**
+	 * Sets the amount of pixels to inflate the bar rectangles, when drawing.
+	 * 
+	 * @param inflateAmount the amount of pixels to inflate the bar rectangles, when drawing
+	 */
+	public void setInflateAmount(int inflateAmount) {
+		setValue(Property.INFLATE_AMOUNT, Checker.positiveOrZero(inflateAmount));
+	}
+
+	/**
+	 * Any double between 0d and 1d (inclusive) is valid.
+	 * 
+	 * @param percentage value between 0 and 1 for a percentage value
+	 * @param property property to be checked
+	 * @return the value passed as argument
+	 */
+	private double checkAndGetPercentage(double percentage, Property property) {
+		Checker.checkIfBetween(percentage, MINIMUM_PERCENTAGE, MAXIMUM_PERCENTAGE, property.value + " argument");
+		// if here the value is correct
+		return percentage;
 	}
 }

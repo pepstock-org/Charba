@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -43,6 +44,7 @@ public class ArcElementOptions extends CommonElementOptions {
 		CIRCULAR("circular"),
 		WEIGHT("weight"),
 		ANGLE("angle"),
+		SPACING("spacing"),
 		OFFSET("offset");
 
 		// name value of property
@@ -98,12 +100,31 @@ public class ArcElementOptions extends CommonElementOptions {
 	}
 
 	/**
+	 * Sets the property to set the border alignment on chart datasets.
+	 * 
+	 * @param align the property to set the border alignment on chart datasets
+	 */
+	public void setBorderAlign(BorderAlign align) {
+		setValue(Property.BORDER_ALIGN, align);
+	}
+
+	/**
 	 * Returns the relative thickness of the dataset.
 	 * 
 	 * @return the relative thickness of the dataset
 	 */
 	public double getWeight() {
 		return getValue(Property.WEIGHT, Defaults.get().getGlobal().getElements().getArc().getWeight());
+	}
+
+	/**
+	 * Sets the relative thickness of the dataset.<br>
+	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of all the dataset weight values.
+	 * 
+	 * @param weight the relative thickness of the dataset
+	 */
+	public void setWeight(double weight) {
+		setValue(Property.WEIGHT, weight);
 	}
 
 	/**
@@ -116,12 +137,30 @@ public class ArcElementOptions extends CommonElementOptions {
 	}
 
 	/**
+	 * Sets the arc angle to cover.
+	 * 
+	 * @param angle the arc angle to cover
+	 */
+	public void setAngle(double angle) {
+		setValue(Property.ANGLE, angle);
+	}
+
+	/**
 	 * Returns the arc offset (in pixels).
 	 * 
 	 * @return the arc offset
 	 */
 	public int getOffset() {
 		return getValue(Property.OFFSET, Defaults.get().getGlobal().getElements().getArc().getOffset());
+	}
+
+	/**
+	 * Sets the arc offset (in pixels).
+	 * 
+	 * @param offset the arc offset
+	 */
+	public void setOffset(int offset) {
+		setValue(Property.OFFSET, offset);
 	}
 
 	/**
@@ -132,6 +171,16 @@ public class ArcElementOptions extends CommonElementOptions {
 	 */
 	public JoinStyle getBorderJoinStyle() {
 		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), Defaults.get().getGlobal().getElements().getArc().getBorderJoinStyle());
+	}
+
+	/**
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified end
+	 * points and control points are exactly at the same position, are skipped).
+	 * 
+	 * @param borderJoinStyle how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 */
+	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
+		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyle);
 	}
 
 	/**
@@ -149,6 +198,15 @@ public class ArcElementOptions extends CommonElementOptions {
 		}
 		// if here, it's not a number
 		return Undefined.INTEGER;
+	}
+
+	/**
+	 * Sets the arc border radius (in pixels).
+	 * 
+	 * @param borderRadius the arc border radius (in pixels).
+	 */
+	public void setBorderRadius(int borderRadius) {
+		setValue(Property.BORDER_RADIUS, Checker.positiveOrZero(borderRadius));
 	}
 
 	/**
@@ -170,11 +228,49 @@ public class ArcElementOptions extends CommonElementOptions {
 	}
 
 	/**
+	 * Sets the arc border radius (as object).
+	 * 
+	 * @param borderRadius the arc border radius (as object).
+	 */
+	public void setBorderRadius(ArcBorderRadius borderRadius) {
+		setValue(Property.BORDER_RADIUS, borderRadius);
+	}
+
+	/**
 	 * Returns <code>true</code> if the arc is curved.
 	 * 
 	 * @return <code>true</code> if the arc is curved
 	 */
 	public boolean isCircular() {
 		return getValue(Property.CIRCULAR, Defaults.get().getGlobal().getElements().getArc().isCircular());
+	}
+
+	/**
+	 * Sets <code>true</code> if the arc is curved.
+	 * 
+	 * @param circular <code>true</code> if the arc is curved
+	 */
+	public void setCircular(int circular) {
+		setValue(Property.CIRCULAR, circular);
+	}
+
+	/**
+	 * Sets the fixed arc offset (in pixels).<br>
+	 * Similar to <code>offset</code> but applies to all arcs.
+	 * 
+	 * @param spacing the fixed arc offset (in pixels)
+	 */
+	public void setSpacing(int spacing) {
+		setValue(Property.SPACING, spacing);
+	}
+
+	/**
+	 * Returns the fixed arc offset (in pixels).<br>
+	 * Similar to <code>offset</code> but applies to all arcs.
+	 * 
+	 * @return the fixed arc offset (in pixels)
+	 */
+	public int getSpacing() {
+		return getValue(Property.SPACING, Defaults.get().getGlobal().getElements().getArc().getSpacing());
 	}
 }
