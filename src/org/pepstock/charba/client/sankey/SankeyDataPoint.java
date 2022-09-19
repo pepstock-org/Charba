@@ -17,7 +17,9 @@ package org.pepstock.charba.client.sankey;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.data.AbstractDataPoint;
+import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -27,6 +29,11 @@ import org.pepstock.charba.client.items.Undefined;
  *
  */
 public final class SankeyDataPoint extends AbstractDataPoint {
+
+	/**
+	 * Factory instance to create data points. To use by {@link DataItem} to get the data point for matrix chart.
+	 */
+	public static final SankeyDataPointFactory FACTORY = new SankeyDataPointFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -243,6 +250,33 @@ public final class SankeyDataPoint extends AbstractDataPoint {
 		// if here, value of key is not consistent
 		// then returns null
 		return null;
+	}
+
+	/**
+	 * Creates {@link SankeyDataPoint} form a {@link NativeObject}. This can be used by {@link DataItem}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	public static final class SankeyDataPointFactory implements NativeObjectContainerFactory<SankeyDataPoint> {
+
+		/**
+		 * To avoid any instantiation
+		 */
+		private SankeyDataPointFactory() {
+			// do nothing
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public SankeyDataPoint create(NativeObject nativeObject) {
+			return new SankeyDataPoint(nativeObject);
+		}
+
 	}
 
 }

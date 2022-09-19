@@ -25,6 +25,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.data.AbstractDataPoint;
+import org.pepstock.charba.client.items.DataItem;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -34,6 +35,11 @@ import org.pepstock.charba.client.items.Undefined;
  *
  */
 public final class TreeMapDataPoint extends AbstractDataPoint {
+
+	/**
+	 * Factory instance to create data points. To use by {@link DataItem} to get the data point for matrix chart.
+	 */
+	public static final TreeMapDataPointFactory FACTORY = new TreeMapDataPointFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -226,6 +232,33 @@ public final class TreeMapDataPoint extends AbstractDataPoint {
 		 */
 		private ArrayObject getChildren() {
 			return getArrayValue(Property.CHILDREN);
+		}
+
+	}
+
+	/**
+	 * Creates {@link TreeMapDataPoint} form a {@link NativeObject}. This can be used by {@link DataItem}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	public static final class TreeMapDataPointFactory implements NativeObjectContainerFactory<TreeMapDataPoint> {
+
+		/**
+		 * To avoid any instantiation
+		 */
+		private TreeMapDataPointFactory() {
+			// do nothing
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public TreeMapDataPoint create(NativeObject nativeObject) {
+			return new TreeMapDataPoint(nativeObject);
 		}
 
 	}

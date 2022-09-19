@@ -326,7 +326,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `GeoFeatureElementOptions` configuration element to `BubbleMap` chart.
  * add `register` method to charts, where the controller type is not a CHART.JS out-of-the-box ones, in order to register then and act on the options if needed before instantiating a chart instance.
    * applied to matrix, sankey, treemap, choropleth, bubblemap, gauge and meter charts.
- * add options element factories to matrix, sankey, treemap, choropleth and bubblemap charts in order to manage defaults options once for all chart instances in the application.  
+ * add options element factories to matrix, sankey, treemap, choropleth and bubblemap charts in order to manage defaults options once for all chart instances in the application.
+ * enable `Datalabels` plugin use for matrix and treemap charts.
  
 License
 -------
