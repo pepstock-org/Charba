@@ -123,7 +123,6 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 			treeMapController = (TreeMapController) controllerInstance;
 		}
 		// disables plugins which can not work with this controller.
-		getOptions().getPlugins().setEnabled(ResourceName.DATALABELS_PLUGIN.value(), false);
 		getOptions().getPlugins().setEnabled(ResourceName.LABELS_PLUGIN.value(), false);
 		getOptions().getPlugins().setEnabled(ResourceName.ZOOM_PLUGIN.value(), false);
 		getOptions().getPlugins().setEnabled(ResourceName.ANNOTATION_PLUGIN.value(), false);
