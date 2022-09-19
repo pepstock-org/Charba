@@ -328,6 +328,10 @@ Here you can find the list of enhancements and updates available on `master` bra
    * applied to matrix, sankey, treemap, choropleth, bubblemap, gauge and meter charts.
  * add options element factories to matrix, sankey, treemap, choropleth and bubblemap charts in order to manage defaults options once for all chart instances in the application.
  * enable `Datalabels` plugin use for matrix and treemap charts.
+
+### Development
+
+ * change dependency for Google Closure Compiler, version [v20220905](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20220905).
  
 License
 -------
