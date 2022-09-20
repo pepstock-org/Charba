@@ -55,7 +55,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
-[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_55.png)](https://github.com/pepstock-org/Charba-Showcase/blob/5.5/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_56.png)](https://github.com/pepstock-org/Charba-Showcase/blob/5.5/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------
@@ -300,6 +300,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * import CHART.JS GEO controller version [v3.9.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.9.0).
+ * import CHART.JS SANKEY controller version [v0.9.1](https://github.com/kurkle/chartjs-chart-sankey/releases/tag/v0.9.1).
  * import CHART.JS ANNOTATION plugin version [v2.0.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.0.1).
  * import CHART.JS GRADIENT plugin version [v0.5.1](https://github.com/kurkle/chartjs-plugin-gradient/releases/tag/v0.5.1).
  * import LUXON datetime library version [v3.0.3](https://github.com/moment/luxon/releases/tag/3.0.3).
