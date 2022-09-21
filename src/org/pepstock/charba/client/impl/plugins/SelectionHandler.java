@@ -22,6 +22,7 @@ import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.dom.BaseElement;
 import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
@@ -36,6 +37,7 @@ import org.pepstock.charba.client.dom.events.MouseEventInit;
 import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.dom.events.NativeCustomEvent;
+import org.pepstock.charba.client.dom.events.NativeMouseEvent;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.DatasetRangeSelectionEvent;
@@ -58,9 +60,9 @@ import org.pepstock.charba.client.utils.Utilities;
 final class SelectionHandler {
 
 	// custom event type for programmatically selection
-	static final String INTERNAL_MOUSE_DOWN = MouseEventType.MOUSE_DOWN.value() + System.currentTimeMillis();
+	static final String INTERNAL_MOUSE_DOWN = MouseEventType.MOUSE_DOWN.value() + Constants.UNDERSCORE + System.currentTimeMillis();
 	// custom event type for programmatically selection
-	static final String INTERNAL_MOUSE_UP = MouseEventType.MOUSE_UP.value() + System.currentTimeMillis();
+	static final String INTERNAL_MOUSE_UP = MouseEventType.MOUSE_UP.value() + Constants.UNDERSCORE + System.currentTimeMillis();
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -581,15 +583,18 @@ final class SelectionHandler {
 		// calculates the real Y coordinate, mid of chart area
 		final double y = (cArea.getHeight() / 2) + clientY;
 		// creates an initialization dictionary to create mouse event
-		MouseEventInit init = new MouseEventInit();
+		MouseEventInit start = new MouseEventInit();
 		// sets mouse down and client coordinates
-		init.setClientX(xFrom);
-		init.setClientY(y);
+		start.setClientX(xFrom);
+		start.setClientY(y);
 		// creates and fires the event
-		canvas.dispatchEvent(NativeBaseEvent.createEvent(INTERNAL_MOUSE_DOWN, init));
-		init.setClientX(xTo);
+		canvas.dispatchEvent(NativeMouseEvent.createMouseEvent(INTERNAL_MOUSE_DOWN, start));
+		MouseEventInit end = new MouseEventInit();
+		// sets mouse down and client coordinates
+		end.setClientX(xTo);
+		end.setClientY(y);
 		// creates and fires the event
-		canvas.dispatchEvent(NativeBaseEvent.createEvent(INTERNAL_MOUSE_UP, init));
+		canvas.dispatchEvent(NativeMouseEvent.createMouseEvent(INTERNAL_MOUSE_UP, end));
 	}
 
 	// -----------------------------------------

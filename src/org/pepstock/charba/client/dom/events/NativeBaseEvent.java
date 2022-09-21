@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.dom.events;
 
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -211,9 +212,34 @@ public abstract class NativeBaseEvent implements IsCastable {
 		// checks if types must be checks
 		if (types != null) {
 			// checks if is a consistent mouse type
-			Checker.assertCheck(Key.hasKeyByValue(types, type), "Type is not consistent for this kind of event: " + type);
+			Checker.assertCheck(checkIfSubEventType(type, types) || Key.hasKeyByValue(types, type), "Type is not consistent for this kind of event: " + type);
 		}
 		// return init object reference
 		return init != null ? init.nativeObject() : defaultInit.nativeObject();
+	}
+
+	/**
+	 * Checks if the event type is a sub event of original ones.<br>
+	 * For instance, 'mousedown_xxxx'.
+	 * 
+	 * @param type type of the event to check
+	 * @param types possible event type of this specific event
+	 * @return <code>true</code> if the event type is a sub event of the types
+	 */
+	@JsOverlay
+	private static boolean checkIfSubEventType(String type, IsEvent[] types) {
+		// scans types to check if is
+		// a sub-type: type + underscore
+		for (IsEvent originalType : types) {
+			// normalized event
+			String normEvent = originalType.value() + Constants.UNDERSCORE;
+			// checks if is a sub event
+			if (type.startsWith(normEvent)) {
+				return true;
+			}
+		}
+		// if event, is not a sub event
+		// then returns true
+		return false;
 	}
 }
