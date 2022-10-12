@@ -276,6 +276,15 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
+Going to next release
+---------------------
+
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
+
+### Fixed Bugs
+
+ * [#77](https://github.com/pepstock-org/Charba/issues/77) with event refactoring, the [`Datasets items selector` plugin](https://pepstock-org.github.io/Charba-Wiki/docs/plugins/PluginDatasetsItemsSelector#selecting-dataset-items) cannot selected an area by APIs.
+
 License
 -------
 
