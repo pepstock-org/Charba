@@ -21,6 +21,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.data.BarBorderWidth;
 import org.pepstock.charba.client.items.BarElementOptions;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.AbstractElementFactory;
@@ -54,6 +55,11 @@ public final class GeoFeatureElementOptions extends BarElementOptions {
 	 * Default graticule border width options, <b>{@value DEFAULT_OUTLINE_BORDER_WIDTH}</b>.
 	 */
 	static final int DEFAULT_GRATICULE_BORDER_WIDTH = 0;
+
+	/**
+	 * Default border width options, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
+	 */
+	static final int DEFAULT_BORDER_WIDTH = 0;
 
 	/**
 	 * Name of properties of native object.
@@ -97,6 +103,26 @@ public final class GeoFeatureElementOptions extends BarElementOptions {
 	 */
 	GeoFeatureElementOptions(NativeObject nativeObject) {
 		super(nativeObject);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.items.ChartElementOptions#getDefaultBorderWidth()
+	 */
+	@Override
+	protected int getDefaultBorderWidth() {
+		return DEFAULT_BORDER_WIDTH;
+	}
+
+	/**
+	 * It doesn't do anything because you can set the border width only by a number.
+	 * 
+	 * @param borderWidth the border width.
+	 */
+	@Override
+	public void setBorderWidth(BarBorderWidth borderWidth) {
+		// do nothing
 	}
 
 	/**

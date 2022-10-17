@@ -142,7 +142,7 @@ public class BarElementOptions extends CommonElementOptions {
 	 * 
 	 * @param borderWidth the border width.
 	 */
-	public final void setBorderWidth(BarBorderWidth borderWidth) {
+	public void setBorderWidth(BarBorderWidth borderWidth) {
 		setValue(Property.BORDER_WIDTH, borderWidth);
 	}
 
