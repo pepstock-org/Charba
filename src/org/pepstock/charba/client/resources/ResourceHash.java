@@ -65,7 +65,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'MatrixControllerResource' class.
 	 */
-	MATRIX_CONTROLLER_RESOURCE(ResourceName.MATRIX_CONTROLLER, 323939),
+	MATRIX_CONTROLLER_RESOURCE(ResourceName.MATRIX_CONTROLLER, 323940),
 	/**
 	 * Hash item for 'MlPluginResource' class.
 	 */

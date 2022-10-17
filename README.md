@@ -281,6 +281,10 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
 
+### Features
+
+ * import CHART.JS MATRIX controller version [v1.2.0](https://github.com/kurkle/chartjs-chart-matrix/releases/tag/v1.2.0).
+ 
 ### Fixed Bugs
 
  * [#77](https://github.com/pepstock-org/Charba/issues/77) with event refactoring, the [`Datasets items selector` plugin](https://pepstock-org.github.io/Charba-Wiki/docs/plugins/PluginDatasetsItemsSelector#selecting-dataset-items) cannot selected an area by APIs.

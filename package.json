@@ -19,7 +19,7 @@
     "chartjs-plugin-gradient": "0.5.1",
     "chartjs-chart-geo": "3.9.0",
     "chartjs-chart-treemap": "2.0.2",
-    "chartjs-chart-matrix": "1.1.1",
+    "chartjs-chart-matrix": "1.2.0",
     "chartjs-chart-sankey": "0.9.1",
     "luxon": "3.0.3",
     "hammerjs": "2.0.8",
