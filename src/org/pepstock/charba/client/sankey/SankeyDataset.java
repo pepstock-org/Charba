@@ -111,6 +111,8 @@ public final class SankeyDataset extends Dataset {
 		COLOR_FROM("colorFrom"),
 		COLOR_MODE("colorMode"),
 		COLOR_TO("colorTo"),
+		HOVER_COLOR_FROM("hoverColorFrom"),
+		HOVER_COLOR_TO("hoverColorTo"),
 		// inner objects
 		COLUMN("column"),
 		LABELS("labels"),
@@ -156,6 +158,10 @@ public final class SankeyDataset extends Dataset {
 	private final CallbackProxy<ProxyObjectCallback> colorFromCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the color to function
 	private final CallbackProxy<ProxyObjectCallback> colorToCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover color from function
+	private final CallbackProxy<ProxyObjectCallback> hoverColorFromCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover color to function
+	private final CallbackProxy<ProxyObjectCallback> hoverColorToCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the size function
 	private final CallbackProxy<ProxyStringCallback> sizeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the padding function
@@ -167,6 +173,10 @@ public final class SankeyDataset extends Dataset {
 	private ColorCallback<DatasetContext> colorToCallback = null;
 	// colorFrom callback instance
 	private ColorCallback<DatasetContext> colorFromCallback = null;
+	// hoverColorTo callback instance
+	private ColorCallback<DatasetContext> hoverColorToCallback = null;
+	// hoverColorFrom callback instance
+	private ColorCallback<DatasetContext> hoverColorFromCallback = null;
 	// color mode callback instance
 	private ColorModeCallback colorModeCallback = null;
 	// size callback instance
@@ -222,6 +232,10 @@ public final class SankeyDataset extends Dataset {
 		this.colorFromCallbackProxy.setCallback(context -> invokeColorCallback(createContext(context), getColorFromCallback(), DEFAULT_COLOR_FROM));
 		// sets function to proxy callback in order to invoke the java interface
 		this.colorToCallbackProxy.setCallback(context -> invokeColorCallback(createContext(context), getColorToCallback(), DEFAULT_COLOR_TO));
+		// sets function to proxy callback in order to invoke the java interface
+		this.hoverColorFromCallbackProxy.setCallback(context -> invokeColorCallback(createContext(context), getHoverColorFromCallback(), DEFAULT_COLOR_FROM));
+		// sets function to proxy callback in order to invoke the java interface
+		this.hoverColorToCallbackProxy.setCallback(context -> invokeColorCallback(createContext(context), getHoverColorToCallback(), DEFAULT_COLOR_TO));
 		// sets function to proxy callback in order to invoke the java interface
 		this.colorModeCallbackProxy.setCallback(context -> onColorMode(createContext(context)));
 		// sets function to proxy callback in order to invoke the java interface
@@ -512,6 +526,106 @@ public final class SankeyDataset extends Dataset {
 	}
 
 	/**
+	 * Sets the starting color of the flow between sankey elements, when hovered.
+	 * 
+	 * @param colors the starting color of the flow between sankey elements, when hovered
+	 */
+	public void setHoverColorFrom(IsColor... colors) {
+		// resets callback
+		setHoverColorFrom((ColorCallback<DatasetContext>) null);
+		// stores value
+		setValueOrArray(Property.HOVER_COLOR_FROM, colors);
+	}
+
+	/**
+	 * Sets the starting color of the flow between sankey elements, when hovered.
+	 * 
+	 * @param colors the starting color of the flow between sankey elements, when hovered
+	 */
+	public void setHoverColorFrom(String... colors) {
+		// resets callback
+		setHoverColorFrom((ColorCallback<DatasetContext>) null);
+		// stores value
+		setValueOrArray(Property.HOVER_COLOR_FROM, colors);
+	}
+
+	/**
+	 * Returns the starting color of the flow between sankey elements, when hovered.
+	 * 
+	 * @return list of the starting color of the flow between sankey elements, when hovered
+	 */
+	public List<String> getHoverColorFromAsString() {
+		// checks if the property is a color
+		if (isType(Property.HOVER_COLOR_FROM, ObjectType.ARRAY, ObjectType.STRING)) {
+			ArrayString array = getValueOrArray(Property.HOVER_COLOR_FROM, DEFAULT_COLOR_TO);
+			return ArrayListHelper.list(array);
+		}
+		// if here, the property is not a string
+		// or the property is missing or a gradient
+		// returns empty list
+		return Collections.emptyList();
+	}
+
+	/**
+	 * Returns the starting color of the flow between sankey elements, when hovered.
+	 * 
+	 * @return list of the starting color of the flow between sankey elements, when hovered
+	 */
+	public List<IsColor> getHoverColorFrom() {
+		return ColorBuilder.parse(getHoverColorFromAsString());
+	}
+
+	/**
+	 * Sets the ending color of the flow between sankey elements, when hovered.
+	 * 
+	 * @param colors the ending color of the flow between sankey elements, when hovered
+	 */
+	public void setHoverColorTo(IsColor... colors) {
+		// resets callback
+		setHoverColorTo((ColorCallback<DatasetContext>) null);
+		// stores value
+		setValueOrArray(Property.HOVER_COLOR_TO, colors);
+	}
+
+	/**
+	 * Sets the ending color of the flow between sankey elements, when hovered.
+	 * 
+	 * @param colors the ending color of the flow between sankey elements, when hovered
+	 */
+	public void setHoverColorTo(String... colors) {
+		// resets callback
+		setHoverColorTo((ColorCallback<DatasetContext>) null);
+		// stores value
+		setValueOrArray(Property.HOVER_COLOR_TO, colors);
+	}
+
+	/**
+	 * Returns the ending color of the flow between sankey elements, when hovered.
+	 * 
+	 * @return list of the ending color of the flow between sankey elements, when hovered
+	 */
+	public List<String> getHoverColorToAsString() {
+		// checks if the property is a color
+		if (isType(Property.HOVER_COLOR_TO, ObjectType.ARRAY, ObjectType.STRING)) {
+			ArrayString array = getValueOrArray(Property.HOVER_COLOR_TO, DEFAULT_COLOR_TO);
+			return ArrayListHelper.list(array);
+		}
+		// if here, the property is not a string
+		// or the property is missing or a gradient
+		// returns empty list
+		return Collections.emptyList();
+	}
+
+	/**
+	 * Returns the ending color of the flow between sankey elements, when hovered.
+	 * 
+	 * @return list of the ending color of the flow between sankey elements, when hovered
+	 */
+	public List<IsColor> getHoverColorTo() {
+		return ColorBuilder.parse(getHoverColorToAsString());
+	}
+
+	/**
 	 * Sets the border color of the sankey elements.
 	 * 
 	 * @param borderColor the border color of the sankey elements
@@ -723,6 +837,84 @@ public final class SankeyDataset extends Dataset {
 		setColorTo((ColorCallback<DatasetContext>) null);
 		// stores value
 		setValue(Property.COLOR_TO, colorCallback);
+	}
+
+	/**
+	 * Returns the color "from" callback when hovered, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the color "from" callback when hovered, if set, otherwise <code>null</code>.
+	 */
+	public ColorCallback<DatasetContext> getHoverColorFromCallback() {
+		return hoverColorFromCallback;
+	}
+
+	/**
+	 * Sets the color "from" callback when hovered.
+	 * 
+	 * @param colorCallback the color "from" callback when hovered.
+	 */
+	public void setHoverColorFrom(ColorCallback<DatasetContext> colorCallback) {
+		// sets the callback
+		this.hoverColorFromCallback = colorCallback;
+		// checks if callback is consistent
+		if (colorCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.HOVER_COLOR_FROM, hoverColorFromCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.HOVER_COLOR_FROM);
+		}
+	}
+
+	/**
+	 * Sets the color "from" callback when hovered.
+	 * 
+	 * @param colorCallback the color "from" callback when hovered.
+	 */
+	public void setHoverColorFrom(NativeCallback colorCallback) {
+		// resets callback
+		setHoverColorFrom((ColorCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HOVER_COLOR_FROM, colorCallback);
+	}
+
+	/**
+	 * Returns the color "to" callback when hovered, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the color "to" callback when hovered, if set, otherwise <code>null</code>.
+	 */
+	public ColorCallback<DatasetContext> getHoverColorToCallback() {
+		return hoverColorToCallback;
+	}
+
+	/**
+	 * Sets the color "to" callback when hovered.
+	 * 
+	 * @param colorCallback the color "to" callback when hovered.
+	 */
+	public void setHoverColorTo(ColorCallback<DatasetContext> colorCallback) {
+		// sets the callback
+		this.hoverColorToCallback = colorCallback;
+		// checks if callback is consistent
+		if (colorCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.HOVER_COLOR_TO, hoverColorToCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.HOVER_COLOR_TO);
+		}
+	}
+
+	/**
+	 * Sets the color "to" callback when hovered.
+	 * 
+	 * @param colorCallback the color "to" callback when hovered.
+	 */
+	public void setHoverColorTo(NativeCallback colorCallback) {
+		// resets callback
+		setHoverColorTo((ColorCallback<DatasetContext>) null);
+		// stores value
+		setValue(Property.HOVER_COLOR_TO, colorCallback);
 	}
 
 	/**

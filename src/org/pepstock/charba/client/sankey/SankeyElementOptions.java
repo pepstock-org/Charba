@@ -44,7 +44,9 @@ public final class SankeyElementOptions extends ChartElementOptions {
 	{
 		COLOR_FROM("colorFrom"),
 		COLOR_MODE("colorMode"),
-		COLOR_TO("colorTo");
+		COLOR_TO("colorTo"),
+		HOVER_COLOR_FROM("hoverColorFrom"),
+		HOVER_COLOR_TO("hoverColorTo");
 
 		// name value of property
 		private final String value;
@@ -167,6 +169,78 @@ public final class SankeyElementOptions extends ChartElementOptions {
 	 */
 	public void setColorTo(String color) {
 		setValue(Property.COLOR_TO, color);
+	}
+
+	/**
+	 * Returns the starting color of the flow between sankey elements, when hovered.
+	 * 
+	 * @return the starting color of the flow between sankey elements, when hovered
+	 */
+	public String getHoverColorFromAsString() {
+		return getValue(Property.HOVER_COLOR_FROM, getColorFromAsString());
+	}
+
+	/**
+	 * Returns the starting color of the flow between sankey elements, when hovered.
+	 * 
+	 * @return the starting color of the flow between sankey elements, when hovered
+	 */
+	public IsColor getHoverColorFrom() {
+		return ColorBuilder.parse(getHoverColorFromAsString());
+	}
+
+	/**
+	 * Sets the starting color of the flow between sankey elements, when hovered.
+	 * 
+	 * @param color the starting color of the flow between sankey elements, when hovered
+	 */
+	public void setHoverColorFrom(IsColor color) {
+		setHoverColorFrom(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the starting color of the flow between sankey elements, when hovered.
+	 * 
+	 * @param color the starting color of the flow between sankey elements, when hovered
+	 */
+	public void setHoverColorFrom(String color) {
+		setValue(Property.HOVER_COLOR_FROM, color);
+	}
+
+	/**
+	 * Returns the ending color of the flow between sankey elements, when hovered.
+	 * 
+	 * @return the ending color of the flow between sankey elements, when hovered
+	 */
+	public String getHoverColorToAsString() {
+		return getValue(Property.HOVER_COLOR_TO, getColorToAsString());
+	}
+
+	/**
+	 * Returns the ending color of the flow between sankey elements, when hovered.
+	 * 
+	 * @return the ending color of the flow between sankey elements, when hovered
+	 */
+	public IsColor getHoverColorTo() {
+		return ColorBuilder.parse(getHoverColorToAsString());
+	}
+
+	/**
+	 * Sets the ending color of the flow between sankey elements, when hovered.
+	 * 
+	 * @param color the ending color of the flow between sankey elements, when hovered
+	 */
+	public void setHoverColorTo(IsColor color) {
+		setHoverColorTo(IsColor.checkAndGetValue(color));
+	}
+
+	/**
+	 * Sets the ending color of the flow between sankey elements, when hovered.
+	 * 
+	 * @param color the ending color of the flow between sankey elements, when hovered
+	 */
+	public void setHoverColorTo(String color) {
+		setValue(Property.HOVER_COLOR_TO, color);
 	}
 
 	/**
