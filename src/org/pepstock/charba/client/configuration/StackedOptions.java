@@ -17,6 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.IndexAxis;
 
 /**
@@ -31,24 +32,13 @@ public class StackedOptions extends ScalesOptions {
 	private final StackedScales scales;
 
 	/**
-	 * Builds the object storing the chart instance, default values and if only Y axis is scaled.
+	 * Builds the object storing the chart instance and default values.
 	 * 
 	 * @param chart chart instance
-	 * @param defaultValues defaults options of stacked chart
-	 * @param onlyYScaled <code>true</code> if only Y axis is scaled.
+	 * @param defaultValues defaults options of bar chart
 	 */
-	public StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, boolean onlyYScaled) {
-		// asks to do not create a scale
-		super(chart, defaultValues, false);
-		// creates scales for stacked chart
-		scales = new StackedScales(this);
-		// sets if only Y scaled
-		scales.setOnlyYAxis(onlyYScaled);
-		// creates the axes
-		CartesianCategoryAxis axis1 = new CartesianCategoryAxis(chart);
-		CartesianLinearAxis axis2 = new CartesianLinearAxis(chart);
-		// stores axes
-		scales.setAxes(axis1, axis2);
+	public StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
+		this(chart, defaultValues, IndexAxis.X);
 	}
 
 	/**
@@ -56,9 +46,47 @@ public class StackedOptions extends ScalesOptions {
 	 * 
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of bar chart
+	 * @param indexAxis defines the orientation of the bar chart
 	 */
-	public StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
-		this(chart, defaultValues, false);
+	public StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, IndexAxis indexAxis) {
+		this(chart, defaultValues, indexAxis, false);
+	}
+
+	/**
+	 * Builds the object storing the chart instance, default values and if only Y axis is scaled.
+	 * 
+	 * @param chart chart instance
+	 * @param defaultValues defaults options of stacked chart
+	 * @param onlyYScaled <code>true</code> if only Y axis is scaled.
+	 */
+	public StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, boolean onlyYScaled) {
+		this(chart, defaultValues, IndexAxis.X, onlyYScaled);
+	}
+
+	/**
+	 * Builds the object storing the chart instance, default values and if only Y axis is scaled.
+	 * 
+	 * @param chart chart instance
+	 * @param defaultValues defaults options of stacked chart
+	 * @param indexAxis defines the orientation of the bar chart
+	 * @param onlyYScaled <code>true</code> if only Y axis is scaled.
+	 */
+	private StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, IndexAxis indexAxis, boolean onlyYScaled) {
+		// asks to do not create a scale
+		super(chart, defaultValues, false);
+		// creates scales for stacked chart
+		scales = new StackedScales(this);
+		// sets if only Y scaled
+		scales.setOnlyYAxis(onlyYScaled);
+		// stores if x axis
+		boolean xAxis = IndexAxis.X.equals(indexAxis);
+		// creates the axes
+		CartesianCategoryAxis axis1 = new CartesianCategoryAxis(chart, xAxis ? AxisKind.X : AxisKind.Y);
+		CartesianLinearAxis axis2 = new CartesianLinearAxis(chart, xAxis ? AxisKind.Y : AxisKind.X);
+		// stores axes
+		scales.setAxes(axis1, axis2);
+		// stores index axis
+		getConfiguration().setIndexAxis(indexAxis);
 	}
 
 	/*
@@ -71,22 +99,4 @@ public class StackedOptions extends ScalesOptions {
 		return scales;
 	}
 
-	/**
-	 * Sets the base axis for the dataset.<br>
-	 * Use {@link IndexAxis#Y} for horizontal bar.
-	 * 
-	 * @param indexAxis the base axis for the dataset
-	 */
-	public void setIndexAxis(IndexAxis indexAxis) {
-		getConfiguration().setIndexAxis(indexAxis);
-	}
-
-	/**
-	 * Returns the base axis for the dataset.
-	 * 
-	 * @return the base axis for the dataset
-	 */
-	public IndexAxis getIndexAxis() {
-		return getConfiguration().getIndexAxis();
-	}
 }
