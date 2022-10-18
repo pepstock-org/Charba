@@ -17,6 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.enums.IndexAxis;
 
 /**
  * Configuration of chart which could be stacked.<br>
@@ -70,4 +71,22 @@ public class StackedOptions extends ScalesOptions {
 		return scales;
 	}
 
+	/**
+	 * Sets the base axis for the dataset.<br>
+	 * Use {@link IndexAxis#Y} for horizontal bar.
+	 * 
+	 * @param indexAxis the base axis for the dataset
+	 */
+	public void setIndexAxis(IndexAxis indexAxis) {
+		getConfiguration().setIndexAxis(indexAxis);
+	}
+
+	/**
+	 * Returns the base axis for the dataset.
+	 * 
+	 * @return the base axis for the dataset
+	 */
+	public IndexAxis getIndexAxis() {
+		return getConfiguration().getIndexAxis();
+	}
 }
