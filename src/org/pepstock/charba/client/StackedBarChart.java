@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.configuration.StackedOptions;
+import org.pepstock.charba.client.configuration.StackedBarOptions;
 import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.BubbleDataset;
 import org.pepstock.charba.client.data.Dataset;
@@ -33,7 +33,7 @@ import org.pepstock.charba.client.data.StackedBarDataset;
  */
 public class StackedBarChart extends AbstractChart implements IsDatasetCreator<StackedBarDataset>, HasCartesianAxes {
 
-	private final StackedOptions options;
+	private final StackedBarOptions options;
 
 	/**
 	 * Builds the object.
@@ -51,7 +51,7 @@ public class StackedBarChart extends AbstractChart implements IsDatasetCreator<S
 	protected StackedBarChart(Type extendedType) {
 		super(extendedType);
 		// creates the options
-		options = new StackedOptions(this, getDefaultChartOptions());
+		options = new StackedBarOptions(this, getDefaultChartOptions());
 	}
 
 	/*
@@ -60,7 +60,7 @@ public class StackedBarChart extends AbstractChart implements IsDatasetCreator<S
 	 * @see org.pepstock.charba.client.IsChart#getOptions()
 	 */
 	@Override
-	public StackedOptions getOptions() {
+	public StackedBarOptions getOptions() {
 		return options;
 	}
 

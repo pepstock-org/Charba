@@ -17,7 +17,7 @@ package org.pepstock.charba.client.gwt.widgets;
 
 import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.StackedAreaChart;
-import org.pepstock.charba.client.configuration.StackedOptions;
+import org.pepstock.charba.client.configuration.StackedLineOptions;
 import org.pepstock.charba.client.data.StackedAreaDataset;
 
 /**
@@ -52,7 +52,7 @@ public class StackedAreaChartWidget extends AbstractChartWidget<StackedAreaChart
 	 * @see org.pepstock.charba.client.IsChart#getOptions()
 	 */
 	@Override
-	public StackedOptions getOptions() {
+	public StackedLineOptions getOptions() {
 		return getChart().getOptions();
 	}
 

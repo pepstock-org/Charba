@@ -27,9 +27,7 @@ import org.pepstock.charba.client.enums.IndexAxis;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class StackedOptions extends ScalesOptions {
-
-	private final StackedScales scales;
+public class StackedBarOptions extends BarOptions {
 
 	/**
 	 * Builds the object storing the chart instance and default values.
@@ -37,7 +35,7 @@ public class StackedOptions extends ScalesOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of bar chart
 	 */
-	public StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
+	public StackedBarOptions(IsChart chart, IsDefaultScaledOptions defaultValues) {
 		this(chart, defaultValues, IndexAxis.X);
 	}
 
@@ -48,55 +46,30 @@ public class StackedOptions extends ScalesOptions {
 	 * @param defaultValues defaults options of bar chart
 	 * @param indexAxis defines the orientation of the bar chart
 	 */
-	public StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, IndexAxis indexAxis) {
-		this(chart, defaultValues, indexAxis, false);
-	}
-
-	/**
-	 * Builds the object storing the chart instance, default values and if only Y axis is scaled.
-	 * 
-	 * @param chart chart instance
-	 * @param defaultValues defaults options of stacked chart
-	 * @param onlyYScaled <code>true</code> if only Y axis is scaled.
-	 */
-	public StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, boolean onlyYScaled) {
-		this(chart, defaultValues, IndexAxis.X, onlyYScaled);
-	}
-
-	/**
-	 * Builds the object storing the chart instance, default values and if only Y axis is scaled.
-	 * 
-	 * @param chart chart instance
-	 * @param defaultValues defaults options of stacked chart
-	 * @param indexAxis defines the orientation of the bar chart
-	 * @param onlyYScaled <code>true</code> if only Y axis is scaled.
-	 */
-	private StackedOptions(IsChart chart, IsDefaultScaledOptions defaultValues, IndexAxis indexAxis, boolean onlyYScaled) {
+	public StackedBarOptions(IsChart chart, IsDefaultScaledOptions defaultValues, IndexAxis indexAxis) {
 		// asks to do not create a scale
-		super(chart, defaultValues, false);
-		// creates scales for stacked chart
-		scales = new StackedScales(this);
-		// sets if only Y scaled
-		scales.setOnlyYAxis(onlyYScaled);
+		super(chart, defaultValues);
 		// stores if x axis
 		boolean xAxis = IndexAxis.X.equals(indexAxis);
 		// creates the axes
 		CartesianCategoryAxis axis1 = new CartesianCategoryAxis(chart, xAxis ? AxisKind.X : AxisKind.Y);
 		CartesianLinearAxis axis2 = new CartesianLinearAxis(chart, xAxis ? AxisKind.Y : AxisKind.X);
+		// sets the axes as stacked
+		axis1.setStacked(true);
+		axis2.setStacked(true);
 		// stores axes
-		scales.setAxes(axis1, axis2);
+		getScales().setAxes(axis1, axis2);
 		// stores index axis
 		getConfiguration().setIndexAxis(indexAxis);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * If invoked, this is ignored because the {@link IndexAxis} is already set, based on the chart class.
 	 * 
-	 * @see org.pepstock.charba.client.configuration.MultiScalesOptions#getScales()
+	 * @param indexAxis this is ignored because the {@link IndexAxis} is already set, based on the chart class
 	 */
 	@Override
-	public Scales getScales() {
-		return scales;
+	public final void setIndexAxis(IndexAxis indexAxis) {
+		// ignored
 	}
-
 }

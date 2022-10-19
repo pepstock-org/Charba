@@ -21,23 +21,24 @@ import org.pepstock.charba.client.data.BubbleDataset;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.data.ScatterDataset;
-import org.pepstock.charba.client.data.StackedLineDataset;
+import org.pepstock.charba.client.data.StackedVerticalLineDataset;
+import org.pepstock.charba.client.enums.IndexAxis;
 
 /**
- * STACKED LINE chart implementation.<br>
+ * STACKED VERTICAL LINE chart implementation.<br>
  * A stacked area chart is a way of plotting data points on a line.<br>
  * Often, it is used to show trend data, or the comparison of two data sets.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class StackedLineChart extends AbstractChart implements IsDatasetCreator<StackedLineDataset>, HasCartesianAxes {
+public class StackedVerticalLineChart extends AbstractChart implements IsDatasetCreator<StackedVerticalLineDataset>, HasCartesianAxes {
 
 	private final StackedLineOptions options;
 
 	/**
 	 * Builds the object.
 	 */
-	public StackedLineChart() {
+	public StackedVerticalLineChart() {
 		this(ChartType.LINE);
 	}
 
@@ -47,10 +48,10 @@ public class StackedLineChart extends AbstractChart implements IsDatasetCreator<
 	 * 
 	 * @param extendedType type of chart
 	 */
-	protected StackedLineChart(Type extendedType) {
+	protected StackedVerticalLineChart(Type extendedType) {
 		super(extendedType);
 		// creates the options
-		options = new StackedLineOptions(this, getDefaultChartOptions());
+		options = new StackedLineOptions(this, getDefaultChartOptions(), IndexAxis.Y);
 	}
 
 	/*
@@ -69,8 +70,8 @@ public class StackedLineChart extends AbstractChart implements IsDatasetCreator<
 	 * @see org.pepstock.charba.client.AbstractChart#newDataset(boolean)
 	 */
 	@Override
-	public StackedLineDataset newDataset(boolean hidden) {
-		return new StackedLineDataset(getDefaultChartOptions(), hidden);
+	public StackedVerticalLineDataset newDataset(boolean hidden) {
+		return new StackedVerticalLineDataset(getDefaultChartOptions(), hidden);
 	}
 
 	/*

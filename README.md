@@ -281,13 +281,17 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
 
+### Breaking changes
+
+ * remove `StackedOptions` class, going to specific chart options, `StackedLineOptions` and `StackedBarOptions` classes, in order to expose all configuration options.
+
 ### Features
 
  * import CHART.JS MATRIX controller version [v1.2.0](https://github.com/kurkle/chartjs-chart-matrix/releases/tag/v1.2.0).
  * import CHART.JS GEO controller version [v3.10.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v3.10.0). 
  * import CHART.JS SANKEY controller version [v0.11.0](https://github.com/kurkle/chartjs-chart-sankey/releases/tag/v0.11.0).
  * add `hoverColorFrom` and `hoverColorTo` options to `SankeyDataset` and `SankeyElementOptions` classes.
- * add `StackedHorizontalBarChart` class.
+ * add `StackedHorizontalBarChart` and `StackedVerticalLineChart` classes.
 
 ### Fixed Bugs
 

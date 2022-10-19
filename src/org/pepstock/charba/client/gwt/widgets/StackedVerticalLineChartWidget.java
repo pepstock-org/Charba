@@ -16,24 +16,24 @@
 package org.pepstock.charba.client.gwt.widgets;
 
 import org.pepstock.charba.client.IsDatasetCreator;
-import org.pepstock.charba.client.StackedLineChart;
+import org.pepstock.charba.client.StackedVerticalLineChart;
 import org.pepstock.charba.client.configuration.StackedLineOptions;
-import org.pepstock.charba.client.data.StackedLineDataset;
+import org.pepstock.charba.client.data.StackedVerticalLineDataset;
 
 /**
- * STACKED LINE chart GWT WIDGET implementation.<br>
+ * STACKED VERTICAL LINE chart GWT WIDGET implementation.<br>
  * A stacked area chart is a way of plotting data points on a line.<br>
  * Often, it is used to show trend data, or the comparison of two data sets.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class StackedLineChartWidget extends AbstractChartWidget<StackedLineChart> implements IsDatasetCreator<StackedLineDataset> {
+public class StackedVerticalLineChartWidget extends AbstractChartWidget<StackedVerticalLineChart> implements IsDatasetCreator<StackedVerticalLineDataset> {
 
 	/**
 	 * Builds the object.
 	 */
-	public StackedLineChartWidget() {
-		this(new StackedLineChart());
+	public StackedVerticalLineChartWidget() {
+		this(new StackedVerticalLineChart());
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class StackedLineChartWidget extends AbstractChartWidget<StackedLineChart
 	 * 
 	 * @param extendedChart new chart
 	 */
-	protected StackedLineChartWidget(StackedLineChart extendedChart) {
+	protected StackedVerticalLineChartWidget(StackedVerticalLineChart extendedChart) {
 		super(extendedChart);
 	}
 
@@ -62,7 +62,7 @@ public class StackedLineChartWidget extends AbstractChartWidget<StackedLineChart
 	 * @see org.pepstock.charba.client.gwt.widgets.AbstractChartWidget#newDataset(boolean)
 	 */
 	@Override
-	public StackedLineDataset newDataset(boolean hidden) {
+	public StackedVerticalLineDataset newDataset(boolean hidden) {
 		return getChart().newDataset(hidden);
 	}
 
