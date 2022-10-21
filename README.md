@@ -299,6 +299,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * [#77](https://github.com/pepstock-org/Charba/issues/77) with event refactoring, the [`Datasets items selector` plugin](https://pepstock-org.github.io/Charba-Wiki/docs/plugins/PluginDatasetsItemsSelector#selecting-dataset-items) cannot selected an area by APIs.
  * [#79](https://github.com/pepstock-org/Charba/issues/79) `StackedBarChart` and `StackedLineChart` didn't manage horizontal and vertical drawing. `StackedHorizontalBarChart` and `StackedVerticalLineChart` classes added. Thanks @Anschke
 
+### Development
+
+ * change dependency for Google Closure Compiler, version [v20221004](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20221004).
+
 License
 -------
 
