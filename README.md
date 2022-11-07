@@ -284,6 +284,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * import LUXON datetime library version [v3.1.0](https://github.com/moment/luxon/releases/tag/3.1.0).
+ * enable `Zoom` plugin use for sankey charts.
 
 License
 -------
