@@ -276,6 +276,15 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
+Going to next release
+---------------------
+
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
+
+### Features
+
+ * import LUXON datetime library version [v3.1.0](https://github.com/moment/luxon/releases/tag/3.1.0).
+
 License
 -------
 
