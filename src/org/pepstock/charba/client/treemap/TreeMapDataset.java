@@ -20,6 +20,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.BorderRadiusCallback;
+import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayDoubleList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -27,13 +31,17 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArraySetHelper;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.KeyFactory;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.HoverFlexDataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
@@ -58,6 +66,10 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 * Default spacing, <b>{@value}</b>.
 	 */
 	public static final double DEFAULT_SPACING = 0.5;
+	/**
+	 * Default border radius, <b>{@value}</b>.
+	 */
+	public static final int DEFAULT_BORDER_RADIUS = 0;
 	/**
 	 * Default right-to-left, <b>{@value}</b>.
 	 */
@@ -85,6 +97,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		GROUPS("groups"),
 		SPACING("spacing"),
 		RTL("rtl"),
+		BORDER_RADIUS("borderRadius"),
 		// inner elements
 		DIVIDERS("dividers"),
 		CAPTIONS("captions"),
@@ -115,6 +128,18 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		}
 
 	}
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the border radius function
+	private final CallbackProxy<ProxyNativeObjectCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// ---------------------------
+	// -- USERS CALLBACKS ---
+	// ---------------------------
+	// border radius callback instance
+	private BorderRadiusCallback<DatasetContext> borderRadiusCallback = null;
 
 	// dividers instance
 	private final Dividers dividers;
@@ -152,6 +177,8 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		this.dividers = new Dividers(this, Property.DIVIDERS, getValue(Property.DIVIDERS));
 		this.captions = new Captions(this, Property.CAPTIONS, getDefaultValues(), getValue(Property.CAPTIONS));
 		this.labels = new Labels(this, Property.LABELS, getDefaultValues(), getValue(Property.LABELS));
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderRadiusCallbackProxy.setCallback(context -> BorderRadiusCallback.toObject(createContext(context), getBorderRadiusCallback(), DEFAULT_BORDER_RADIUS).nativeObject());
 	}
 
 	/*
@@ -547,7 +574,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 * @param spacing the fixed spacing among rectangles
 	 */
 	public void setSpacing(double spacing) {
-		setValue(Property.SPACING, Checker.positiveOrZero(spacing));
+		setValue(Property.SPACING, spacing);
 	}
 
 	/**
@@ -575,6 +602,67 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 */
 	public boolean isRtl() {
 		return getValue(Property.RTL, DEFAULT_RTL);
+	}
+
+	/**
+	 * Sets the border radius.
+	 * 
+	 * @param radius the border radius.
+	 */
+	public void setBorderRadius(int radius) {
+		setValueAndAddToParent(Property.BORDER_RADIUS, Checker.positiveOrZero(radius));
+	}
+
+	/**
+	 * Sets the border radius (in pixels).
+	 * 
+	 * @param borderRadius the border radius (in pixels).
+	 */
+	public void setBorderRadius(BarBorderRadius borderRadius) {
+		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadius);
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	public int getBorderRadius() {
+		// checks if was stored as number
+		if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
+			return getValue(Property.BORDER_RADIUS, Undefined.INTEGER);
+		} else if (isType(Property.BORDER_RADIUS, ObjectType.OBJECT)) {
+			// if here, the property is a object
+			BarBorderRadius object = getBorderRadiusAsObject();
+			// checks if there is the same value
+			if (object != null && object.areValuesEquals()) {
+				// the returns the same value
+				// in whatever property
+				return object.getTopLeft();
+			}
+		}
+		// if here, the property is missing
+		// then returns default
+		return DEFAULT_BORDER_RADIUS;
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	public BarBorderRadius getBorderRadiusAsObject() {
+		// checks if was stored as object
+		if (isType(Property.BORDER_RADIUS, ObjectType.OBJECT)) {
+			return BarBorderRadius.FACTORY.create(getValue(Property.BORDER_RADIUS));
+		} else if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
+			// if here, the property is a number
+			// then returns new border radius object
+			return new BarBorderRadius(getBorderRadius());
+		}
+		// if here, the property is missing
+		// then returns null
+		return null;
 	}
 
 	// ---------------------------
@@ -659,6 +747,49 @@ public final class TreeMapDataset extends HoverFlexDataset {
 			return value;
 		}
 
+	}
+
+	// ---------------------------
+	// CALLBACKS METHODS
+	// ---------------------------
+
+	/**
+	 * Returns the border radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border radius callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderRadiusCallback<DatasetContext> getBorderRadiusCallback() {
+		return borderRadiusCallback;
+	}
+
+	/**
+	 * Sets the border radius callback.
+	 * 
+	 * @param borderRadiusCallback the border radius callback.
+	 */
+	public void setBorderRadius(BorderRadiusCallback<DatasetContext> borderRadiusCallback) {
+		// sets the callback
+		this.borderRadiusCallback = borderRadiusCallback;
+		// checks if callback is consistent
+		if (borderRadiusCallback != null) {
+			// adds the callback proxy function to java script object
+			setValueAndAddToParent(Property.BORDER_RADIUS, borderRadiusCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.BORDER_RADIUS);
+		}
+	}
+
+	/**
+	 * Sets the border radius callback.
+	 * 
+	 * @param borderRadiusCallback the border radius callback.
+	 */
+	public void setBorderRadius(NativeCallback borderRadiusCallback) {
+		// resets callback
+		setBorderRadius((BorderRadiusCallback<DatasetContext>) null);
+		// stores value
+		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadiusCallback);
 	}
 
 	/**

@@ -20,9 +20,11 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.data.BarBorderWidth;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.CommonElementOptions;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.AbstractElementFactory;
 import org.pepstock.charba.client.options.ElementFactory;
 
@@ -45,6 +47,7 @@ public final class TreeMapElementOptions extends CommonElementOptions {
 	private enum Property implements Key
 	{
 		BORDER_WIDTH("borderWidth"),
+		BORDER_RADIUS("borderRadius"),
 		RTL("rtl"),
 		SPACING("spacing"),
 		// inner elements
@@ -210,7 +213,7 @@ public final class TreeMapElementOptions extends CommonElementOptions {
 	 * @param spacing the fixed spacing among rectangles
 	 */
 	public void setSpacing(double spacing) {
-		setValue(Property.SPACING, Checker.positiveOrZero(spacing));
+		setValue(Property.SPACING, spacing);
 	}
 
 	/**
@@ -220,6 +223,67 @@ public final class TreeMapElementOptions extends CommonElementOptions {
 	 */
 	public double getSpacing() {
 		return getValue(Property.SPACING, TreeMapDataset.DEFAULT_SPACING);
+	}
+
+	/**
+	 * Sets the border radius (in pixels).
+	 * 
+	 * @param borderRadius the border radius (in pixels).
+	 */
+	public void setBorderRadius(BarBorderRadius borderRadius) {
+		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadius);
+	}
+
+	/**
+	 * Sets the border radius.
+	 * 
+	 * @param radius the border radius.
+	 */
+	public void setBorderRadius(int radius) {
+		setValueAndAddToParent(Property.BORDER_RADIUS, Checker.positiveOrZero(radius));
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	public BarBorderRadius getBorderRadiusAsObject() {
+		// checks if was stored as object
+		if (isType(Property.BORDER_RADIUS, ObjectType.OBJECT)) {
+			return BarBorderRadius.FACTORY.create(getValue(Property.BORDER_RADIUS));
+		} else if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
+			// if here, the property is a number
+			// then returns new border radius object
+			return new BarBorderRadius(getBorderRadius());
+		}
+		// if here, the property is missing
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	public int getBorderRadius() {
+		// checks if was stored as number
+		if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
+			return getValue(Property.BORDER_RADIUS, Undefined.INTEGER);
+		} else if (isType(Property.BORDER_RADIUS, ObjectType.OBJECT)) {
+			// if here, the property is a object
+			BarBorderRadius object = getBorderRadiusAsObject();
+			// checks if there is the same value
+			if (object != null && object.areValuesEquals()) {
+				// the returns the same value
+				// in whatever property
+				return object.getTopLeft();
+			}
+		}
+		// if here, the property is missing
+		// then returns default
+		return TreeMapDataset.DEFAULT_BORDER_RADIUS;
 	}
 
 	/**
