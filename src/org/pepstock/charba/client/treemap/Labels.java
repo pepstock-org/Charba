@@ -25,7 +25,9 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.treemap.callbacks.OverflowCallback;
 import org.pepstock.charba.client.treemap.callbacks.PositionCallback;
+import org.pepstock.charba.client.treemap.enums.Overflow;
 import org.pepstock.charba.client.treemap.enums.Position;
 
 /**
@@ -46,11 +48,17 @@ public final class Labels extends AbstractLabels {
 	public static final Position DEFAULT_POSITION = Position.MIDDLE;
 
 	/**
+	 * Default labels overflow, <b>{@link Overflow#CUT}</b>.
+	 */
+	public static final Overflow DEFAULT_OVERFLOW = Overflow.CUT;
+
+	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		POSITION("position");
+		POSITION("position"),
+		OVERFLOW("overflow");
 
 		// name value of property
 		private final String value;
@@ -81,9 +89,13 @@ public final class Labels extends AbstractLabels {
 	// ---------------------------
 	// callback proxy to invoke the position function
 	private final CallbackProxy<ProxyStringCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the overflow function
+	private final CallbackProxy<ProxyStringCallback> overflowCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// position callback instance
 	private PositionCallback positionCallback = null;
+	// overflow callback instance
+	private OverflowCallback overflowCallback = null;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -97,6 +109,9 @@ public final class Labels extends AbstractLabels {
 		super(parent, childKey, defaultValues, nativeObject, DEFAULT_DISPLAY);
 		// sets function to proxy callback in order to invoke the java interface
 		this.positionCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsString(new DatasetContext(context), getPositionCallback(), DEFAULT_POSITION).value());
+		// sets function to proxy callback in order to invoke the java interface
+		this.overflowCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsString(new DatasetContext(context), getOverflowCallback(), DEFAULT_OVERFLOW).value());
+
 	}
 
 	/*
@@ -128,6 +143,27 @@ public final class Labels extends AbstractLabels {
 	 */
 	public Position getPosition() {
 		return getValue(Property.POSITION, Position.values(), DEFAULT_POSITION);
+	}
+
+	/**
+	 * Sets the control what happens to a label that is too big to fit into a rectangle.
+	 * 
+	 * @param overflow the control what happens to a label that is too big to fit into a rectangle
+	 */
+	public void setOverflow(Overflow overflow) {
+		// resets callback
+		setOverflow((OverflowCallback) null);
+		// stores the value
+		setValueAndAddToParent(Property.OVERFLOW, overflow);
+	}
+
+	/**
+	 * Returns the control what happens to a label that is too big to fit into a rectangle.
+	 * 
+	 * @return the control what happens to a label that is too big to fit into a rectangle
+	 */
+	public Overflow getOverflow() {
+		return getValue(Property.OVERFLOW, Overflow.values(), DEFAULT_OVERFLOW);
 	}
 
 	// ---------------------------
@@ -173,4 +209,42 @@ public final class Labels extends AbstractLabels {
 		setValueAndAddToParent(Property.POSITION, positionCallback);
 	}
 
+	/**
+	 * Returns the overflow callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the overflow callback, if set, otherwise <code>null</code>.
+	 */
+	public OverflowCallback getOverflowCallback() {
+		return overflowCallback;
+	}
+
+	/**
+	 * Sets the overflow callback.
+	 * 
+	 * @param overflowCallback the overflow callback.
+	 */
+	public void setOverflow(OverflowCallback overflowCallback) {
+		// sets the callback
+		this.overflowCallback = overflowCallback;
+		// checks if callback is consistent
+		if (overflowCallback != null) {
+			// adds the callback proxy function to java script object
+			setValueAndAddToParent(Property.OVERFLOW, overflowCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.OVERFLOW);
+		}
+	}
+
+	/**
+	 * Sets the overflow callback.
+	 * 
+	 * @param overflowCallback the overflow callback.
+	 */
+	public void setOverflow(NativeCallback overflowCallback) {
+		// resets callback
+		setOverflow((OverflowCallback) null);
+		// stores value
+		setValueAndAddToParent(Property.OVERFLOW, overflowCallback);
+	}
 }
