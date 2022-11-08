@@ -62,6 +62,10 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 * Default right-to-left, <b>{@value}</b>.
 	 */
 	public static final boolean DEFAULT_RTL = false;
+	/**
+	 * Default tree leaf node key, <b>{@value}</b>.
+	 */
+	public static final String DEFAULT_TREE_LEAF_KEY = "_leaf";
 
 	// exception string message for setting data
 	private static final String INVALID_SET_DATA_CALL = "'setData' method is not invokable by a treemap chart. Use 'setTree' or 'setTreeObjects' methods";
@@ -76,6 +80,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	private enum Property implements Key
 	{
 		TREE("tree"),
+		TREE_LEAF_KEY("treeLeafKey"),
 		KEY("key"),
 		GROUPS("groups"),
 		SPACING("spacing"),
@@ -204,7 +209,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 * @return the type of tree property
 	 */
 	TreeType getTreeType() {
-		return getValue(Property.TREE, TreeType.values(), TreeType.UNKNOWN);
+		return getValue(Property.CHARBA_TREE_TYPE, TreeType.values(), TreeType.UNKNOWN);
 	}
 
 	/**
@@ -248,7 +253,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 */
 	public List<Double> getTree(boolean binding) {
 		// checks if the type is not an object
-		if (!TreeType.OBJECTS.equals(getTreeType())) {
+		if (TreeType.NUMBERS.equals(getTreeType())) {
 			// checks if is a numbers data type
 			if (has(Property.TREE)) {
 				// gets numbers
@@ -316,7 +321,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 */
 	public <T extends NativeObjectContainer> List<T> getTreeObjects(NativeObjectContainerFactory<T> factory, boolean binding) {
 		// checks if the type is not an number and factory is consistent
-		if (!TreeType.NUMBERS.equals(getTreeType()) && factory != null) {
+		if (TreeType.OBJECTS.equals(getTreeType()) && factory != null) {
 			// checks if is a numbers data type
 			if (has(Property.TREE)) {
 				// gets objects
@@ -335,6 +340,63 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		}
 		// returns an empty list
 		return Collections.emptyList();
+	}
+
+	/**
+	 * Sets the tree data property of a data set for a chart is specified as an object.
+	 * 
+	 * @param value the object instance
+	 */
+	public void setTreeNativeObject(NativeObject value) {
+		// set value. If null, removes key and then.
+		setValue(Property.TREE, value);
+		// sets data type checking if the key exists
+		setValue(Property.CHARBA_TREE_TYPE, has(Property.TREE) ? TreeType.TREE : TreeType.UNKNOWN);
+	}
+
+	/**
+	 * Returns he tree data property of a data set for a chart is specified as an object.
+	 * 
+	 * @return the object instance.
+	 */
+	public NativeObject getTreeNativeObject() {
+		// checks if the type is a tree and factory is consistent
+		if (TreeType.TREE.equals(getTreeType())) {
+			// returns object
+			return getValue(Property.TREE);
+		}
+		// returns a null object
+		return null;
+	}
+
+	/**
+	 * Sets the tree data property of a data set for a chart is specified as an object.
+	 * 
+	 * @param value the object instance
+	 * @param <T> type of tree object
+	 */
+	public <T extends NativeObjectContainer> void setTreeObject(T value) {
+		// set value. If null, removes key and then.
+		setValue(Property.TREE, value);
+		// sets data type checking if the key exists
+		setValue(Property.CHARBA_TREE_TYPE, has(Property.TREE) ? TreeType.TREE : TreeType.UNKNOWN);
+	}
+
+	/**
+	 * Returns he tree data property of a data set for a chart is specified as an object.
+	 * 
+	 * @param factory instance of factory to create the native object
+	 * @param <T> type of tree object
+	 * @return the object instance.
+	 */
+	public <T extends NativeObjectContainer> T getTreeObject(NativeObjectContainerFactory<T> factory) {
+		// checks if the type is a tree and factory is consistent
+		if (TreeType.TREE.equals(getTreeType()) && factory != null) {
+			// returns object
+			return factory.create(getValue(Property.TREE));
+		}
+		// returns a null object
+		return null;
 	}
 
 	/**
@@ -374,6 +436,49 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 * @return the key of the object to use to get data value from a tree object
 	 */
 	public Key getKey() {
+		// gets string value
+		String value = getKeyAsString();
+		// returns creating the key
+		return value != null ? Key.create(value) : null;
+	}
+
+	/**
+	 * Sets the name of the key where the object key of leaf node of tree object is stored.<br>
+	 * Used only when `tree` is an `object`, as hierarchical data.
+	 * 
+	 * @param key the name of the key where the object key of leaf node of tree object is stored.
+	 */
+	public void setTreeLeafKey(String key) {
+		setValue(Property.TREE_LEAF_KEY, key);
+	}
+
+	/**
+	 * Sets the name of the key where the object key of leaf node of tree object is stored.<br>
+	 * Used only when `tree` is an `object`, as hierarchical data.
+	 * 
+	 * @param key the name of the key where the object key of leaf node of tree object is stored.
+	 */
+	public void setTreeLeafKey(Key key) {
+		setValue(Property.TREE_LEAF_KEY, key);
+	}
+
+	/**
+	 * Returns the name of the key where the object key of leaf node of tree object is stored.<br>
+	 * Used only when `tree` is an `object`, as hierarchical data.
+	 * 
+	 * @return the name of the key where the object key of leaf node of tree object is stored.
+	 */
+	public String getTreeLeafKeyAsString() {
+		return getValue(Property.TREE_LEAF_KEY, DEFAULT_TREE_LEAF_KEY);
+	}
+
+	/**
+	 * Returns the name of the key where the object key of leaf node of tree object is stored.<br>
+	 * Used only when `tree` is an `object`, as hierarchical data.
+	 * 
+	 * @return the name of the key where the object key of leaf node of tree object is stored.
+	 */
+	public Key getTreeLeafKey() {
 		// gets string value
 		String value = getKeyAsString();
 		// returns creating the key
@@ -519,6 +624,10 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		 * The tree property is not set yet.
 		 */
 		UNKNOWN("unknown"),
+		/**
+		 * The tree property is set by {@link NativeObject}.
+		 */
+		TREE("tree"),
 		/**
 		 * The tree property is set as array of doubles.
 		 */
