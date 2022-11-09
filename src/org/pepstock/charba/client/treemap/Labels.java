@@ -369,7 +369,7 @@ public final class Labels extends AbstractLabels {
 	/**
 	 * Sets the color of the text, when hovered.
 	 * 
-	 * @param colors the color of the text, when hovered
+	 * @param hoverColors the color of the text, when hovered
 	 */
 	public void setHoverColor(List<IsColor> hoverColors) {
 		// resets callback
