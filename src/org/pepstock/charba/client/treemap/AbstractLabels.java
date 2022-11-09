@@ -18,17 +18,12 @@ package org.pepstock.charba.client.treemap;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
-import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtil;
-import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -40,7 +35,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.options.AbstractFont;
-import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.treemap.callbacks.AlignCallback;
 import org.pepstock.charba.client.treemap.callbacks.FormatterCallback;
 import org.pepstock.charba.client.treemap.enums.Align;
@@ -70,14 +64,44 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	/**
 	 * Name of properties of native object.
 	 */
+	enum CommonProperty implements Key
+	{
+		COLOR("color"),
+		HOVER_COLOR("hoverColor"),
+		FONT("font"),
+		HOVER_FONT("hoverFont");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private CommonProperty(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
+	/**
+	 * Name of properties of native object.
+	 */
 	private enum Property implements Key
 	{
 		ALIGN("align"),
-		COLOR("color"),
-		HOVER_COLOR("hoverColor"),
 		FORMATTER("formatter"),
-		FONT("font"),
-		HOVER_FONT("hoverFont"),
 		PADDING("padding");
 
 		// name value of property
@@ -107,29 +131,13 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// callback proxy to invoke the color function
-	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the hover color function
-	private final CallbackProxy<ProxyObjectCallback> hoverColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the align function
 	private final CallbackProxy<ProxyStringCallback> alignCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the font function
-	private final CallbackProxy<ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the hover font function
-	private final CallbackProxy<ProxyNativeObjectCallback> hoverFontCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the formatter function
 	private final CallbackProxy<ProxyObjectCallback> formatterCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// color callback instance
-	private ColorCallback<DatasetContext> colorCallback = null;
-	// hover color callback instance
-	private ColorCallback<DatasetContext> hoverColorCallback = null;
 	// align callback instance
 	private AlignCallback alignCallback = null;
-	// instance of font callback
-	private FontCallback<DatasetContext> fontCallback = null;
-	// instance of hover font callback
-	private FontCallback<DatasetContext> hoverFontCallback = null;
 	// instance of formatter callback
 	private FormatterCallback formatterCallback = null;
 	// font instance
@@ -154,34 +162,35 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 		this.defaultValues = checkDefaultValuesArgument(defaultValues);
 		// gets inner elements
 		// FONT
-		this.font = new Font(this.defaultValues.getFont(), getValue(Property.FONT));
+		this.font = new Font(this.defaultValues.getFont(), getValue(CommonProperty.FONT));
 		// checks if already added
-		if (!has(Property.FONT)) {
+		if (!has(CommonProperty.FONT)) {
 			// sets the font
-			setValue(Property.FONT, this.font);
+			setValue(CommonProperty.FONT, this.font);
 		}
 		// HOVER FONT
-		this.hoverFont = new Font(this.defaultValues.getFont(), getValue(Property.HOVER_FONT));
+		this.hoverFont = new Font(this.defaultValues.getFont(), getValue(CommonProperty.HOVER_FONT));
 		// checks if already added
-		if (!has(Property.HOVER_FONT)) {
+		if (!has(CommonProperty.HOVER_FONT)) {
 			// sets the font
-			setValue(Property.HOVER_FONT, this.hoverFont);
+			setValue(CommonProperty.HOVER_FONT, this.hoverFont);
 		}
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(new DatasetContext(context), getColorCallback(), DEFAULT_COLOR, false));
-		// sets function to proxy callback in order to invoke the java interface
-		this.hoverColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(new DatasetContext(context), getHoverColorCallback(), DEFAULT_COLOR, false));
-		// sets function to proxy callback in order to invoke the java interface
 		this.alignCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsString(new DatasetContext(context), getAlignCallback(), DEFAULT_ALIGN).value());
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsFont(new DatasetContext(context), getFontCallback(), this.defaultValues.getFont()).nativeObject());
-		// sets function to proxy callback in order to invoke the java interface
-		this.hoverFontCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsFont(new DatasetContext(context), getHoverFontCallback(), this.defaultValues.getFont()).nativeObject());
-		// sets function to proxy callback in order to invoke the java interface
 		this.formatterCallbackProxy.setCallback(context -> onFormatter(new DatasetContext(context)));
+	}
+
+	/**
+	 * Returns the defaults options.
+	 * 
+	 * @return the defaults options
+	 */
+	final IsDefaultOptions getDefaultValues() {
+		return defaultValues;
 	}
 
 	/**
@@ -189,7 +198,7 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	 * 
 	 * @return the font object.
 	 */
-	public final IsFont getFont() {
+	final Font getOriginalFont() {
 		return font;
 	}
 
@@ -198,7 +207,7 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	 * 
 	 * @return the font object when hovered
 	 */
-	public final IsFont getHoverFont() {
+	final Font getOriginalHoverFont() {
 		return hoverFont;
 	}
 
@@ -225,84 +234,6 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	 */
 	public final Align getAlign() {
 		return getValue(Property.ALIGN, Align.values(), DEFAULT_ALIGN);
-	}
-
-	/**
-	 * Sets the color of the text.
-	 * 
-	 * @param color the color of the text
-	 */
-	public final void setColor(IsColor color) {
-		setColor(IsColor.checkAndGetValue(color));
-	}
-
-	/**
-	 * Sets the color of the text.
-	 * 
-	 * @param color the color of the text
-	 */
-	public final void setColor(String color) {
-		// resets callback
-		setColor((ColorCallback<DatasetContext>) null);
-		// stores value
-		setValueAndAddToParent(Property.COLOR, color);
-	}
-
-	/**
-	 * Returns the color of the text.
-	 * 
-	 * @return the color of the text
-	 */
-	public final String getColorAsString() {
-		return getValue(Property.COLOR, DEFAULT_COLOR);
-	}
-
-	/**
-	 * Returns the color of the text.
-	 * 
-	 * @return the color of the text
-	 */
-	public final IsColor getColor() {
-		return ColorBuilder.parse(getColorAsString());
-	}
-
-	/**
-	 * Sets the hover color of the text.
-	 * 
-	 * @param hoverColor the hover color of the text
-	 */
-	public final void setHoverColor(IsColor hoverColor) {
-		setHoverColor(IsColor.checkAndGetValue(hoverColor));
-	}
-
-	/**
-	 * Sets the hover color of the text.
-	 * 
-	 * @param hoverColor the hover color of the text
-	 */
-	public final void setHoverColor(String hoverColor) {
-		// resets callback
-		setHoverColor((ColorCallback<DatasetContext>) null);
-		// stores value
-		setValueAndAddToParent(Property.HOVER_COLOR, hoverColor);
-	}
-
-	/**
-	 * Returns the hover color of the text.
-	 * 
-	 * @return the hover color of the text
-	 */
-	public final String getHoverColorAsString() {
-		return getValue(Property.HOVER_COLOR, DEFAULT_COLOR);
-	}
-
-	/**
-	 * Returns the hover color of the text.
-	 * 
-	 * @return the hover color of the text
-	 */
-	public final IsColor getHoverColor() {
-		return ColorBuilder.parse(getHoverColorAsString());
 	}
 
 	/**
@@ -367,84 +298,6 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	}
 
 	/**
-	 * Returns the color callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the color callback, if set, otherwise <code>null</code>.
-	 */
-	public final ColorCallback<DatasetContext> getColorCallback() {
-		return colorCallback;
-	}
-
-	/**
-	 * Sets the color callback.
-	 * 
-	 * @param colorCallback the color callback.
-	 */
-	public final void setColor(ColorCallback<DatasetContext> colorCallback) {
-		// sets the callback
-		this.colorCallback = colorCallback;
-		// checks if callback is consistent
-		if (colorCallback != null) {
-			// adds the callback proxy function to java script object
-			setValueAndAddToParent(Property.COLOR, colorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.COLOR);
-		}
-	}
-
-	/**
-	 * Sets the color callback.
-	 * 
-	 * @param colorCallback the color callback.
-	 */
-	public final void setColor(NativeCallback colorCallback) {
-		// resets callback
-		setColor((ColorCallback<DatasetContext>) null);
-		// stores value
-		setValueAndAddToParent(Property.COLOR, colorCallback);
-	}
-
-	/**
-	 * Returns the hover color callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the hover color callback, if set, otherwise <code>null</code>.
-	 */
-	public final ColorCallback<DatasetContext> getHoverColorCallback() {
-		return hoverColorCallback;
-	}
-
-	/**
-	 * Sets the hover color callback.
-	 * 
-	 * @param hoverColorCallback the hover color callback.
-	 */
-	public final void setHoverColor(ColorCallback<DatasetContext> hoverColorCallback) {
-		// sets the callback
-		this.hoverColorCallback = hoverColorCallback;
-		// checks if callback is consistent
-		if (hoverColorCallback != null) {
-			// adds the callback proxy function to java script object
-			setValueAndAddToParent(Property.HOVER_COLOR, hoverColorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.HOVER_COLOR);
-		}
-	}
-
-	/**
-	 * Sets the hover color callback.
-	 * 
-	 * @param hoverColorCallback the color callback.
-	 */
-	public final void setHoverColor(NativeCallback hoverColorCallback) {
-		// resets callback
-		setHoverColor((ColorCallback<DatasetContext>) null);
-		// stores value
-		setValueAndAddToParent(Property.HOVER_COLOR, hoverColorCallback);
-	}
-
-	/**
 	 * Returns the align callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the align callback, if set, otherwise <code>null</code>.
@@ -481,96 +334,6 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 		setAlign((AlignCallback) null);
 		// stores value
 		setValueAndAddToParent(Property.ALIGN, alignCallback);
-	}
-
-	/**
-	 * Returns the font callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the font callback, if set, otherwise <code>null</code>.
-	 */
-	public final FontCallback<DatasetContext> getFontCallback() {
-		return fontCallback;
-	}
-
-	/**
-	 * Sets the font callback.
-	 * 
-	 * @param fontCallback the font callback to set
-	 */
-	public final void setFont(FontCallback<DatasetContext> fontCallback) {
-		// sets the callback
-		this.fontCallback = fontCallback;
-		// checks if consistent
-		if (fontCallback != null) {
-			// adds the callback proxy function to java script object
-			setValueAndAddToParent(Property.FONT, fontCallbackProxy.getProxy());
-		} else {
-			// stores the font
-			setValueAndAddToParent(Property.FONT, font);
-		}
-	}
-
-	/**
-	 * Sets the font callback.
-	 * 
-	 * @param fontCallback the font callback to set
-	 */
-	public final void setFont(NativeCallback fontCallback) {
-		// checks if consistent
-		if (fontCallback != null) {
-			// resets callback
-			setFont((FontCallback<DatasetContext>) null);
-			// adds the callback proxy function to java script object
-			setValueAndAddToParent(Property.FONT, fontCallback);
-		} else {
-			// stores the font
-			setValueAndAddToParent(Property.FONT, font);
-		}
-	}
-
-	/**
-	 * Returns the hover font callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the hover font callback, if set, otherwise <code>null</code>.
-	 */
-	public final FontCallback<DatasetContext> getHoverFontCallback() {
-		return hoverFontCallback;
-	}
-
-	/**
-	 * Sets the hover font callback.
-	 * 
-	 * @param hoverFontCallback the hover font callback to set
-	 */
-	public final void setHoverFont(FontCallback<DatasetContext> hoverFontCallback) {
-		// sets the callback
-		this.hoverFontCallback = hoverFontCallback;
-		// checks if consistent
-		if (hoverFontCallback != null) {
-			// adds the callback proxy function to java script object
-			setValueAndAddToParent(Property.HOVER_FONT, hoverFontCallbackProxy.getProxy());
-		} else {
-			// stores the font
-			setValueAndAddToParent(Property.HOVER_FONT, hoverFont);
-		}
-	}
-
-	/**
-	 * Sets the hover font callback.
-	 * 
-	 * @param hoverFontCallback the hover font callback to set
-	 */
-	public final void setHoverFont(NativeCallback hoverFontCallback) {
-		// checks if consistent
-		if (hoverFontCallback != null) {
-			// resets callback
-			setHoverFont((FontCallback<DatasetContext>) null);
-			// adds the callback proxy function to java script object
-			setValueAndAddToParent(Property.HOVER_FONT, hoverFontCallback);
-		} else {
-			// stores the font
-			setValueAndAddToParent(Property.HOVER_FONT, hoverFont);
-		}
 	}
 
 	// ------------------------------
@@ -631,7 +394,7 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class Font extends AbstractFont {
+	static class Font extends AbstractFont {
 
 		/**
 		 * Creates a font to use for plugin.

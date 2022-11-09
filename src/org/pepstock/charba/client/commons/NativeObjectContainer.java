@@ -694,6 +694,31 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
+	 * Returns a value (array) in the embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a object.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the value was stored as single object value
+	 * @return value of the property (by array)
+	 */
+	protected final ArrayObject getValueOrArray(Key key, NativeObjectContainer defaultValue) {
+		// gets object type of key
+		ObjectType type = type(key);
+		// checks if property type
+		if (ObjectType.OBJECT.equals(type)) {
+			// if here, is a single value, therefore creates an array
+			// with only 1 element
+			return ArrayObject.fromOrEmpty(getValue(key));
+		} else if (ObjectType.ARRAY.equals(type)) {
+			// if here, is an array, therefore return it
+			return getArrayValue(key);
+		}
+		// if here the property doesn't exist
+		// returns default
+		return ArrayObject.fromOrEmpty(defaultValue.getNativeObject());
+	}
+
+	/**
 	 * Sets a value (Array from a container list) in the embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.

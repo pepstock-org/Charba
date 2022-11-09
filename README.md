@@ -281,6 +281,10 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Breaking changes
+
+ * remove color and font callbacks from treemap labels. Use `ColorsCallback` and `FontsCallback` instead, in order to return a list of colors and fonts.
+
 ### Features
 
  * import CHART.JS TREEMAP controller version [v2.1.3](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.1.3).
@@ -288,6 +292,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable `Zoom` plugin use for sankey and treemap charts.
  * add `treeLeafKey` and `borderRadius` option to TreeMapDataset class.
  * add `overflow` option to TreeMapDataset labels class.
+ * change `color` options in TreeMapDataset labels class in order to enable to set different colors on multiple lines labels.
+ * change `font` options in TreeMapDataset labels class in order to enable to set different fonts on multiple lines labels.
  
 License
 -------

@@ -13,17 +13,20 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.callbacks;
+package org.pepstock.charba.client.treemap.callbacks;
 
-import org.pepstock.charba.client.items.FontItem;
+import java.util.List;
+
+import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.Scriptable;
+import org.pepstock.charba.client.treemap.Labels;
 
 /**
- * Callback interface to set <code>font</code> property at runtime.
+ * Callback interface to set <code>color</code> property at runtime for {@link Labels}.
  * 
  * @author Andrea "Stock" Stocchero
- *
- * @param <C> type of context to pass to the callback.
+ * 
  */
-public interface FontCallback<C extends ChartContext> extends Scriptable<FontItem, C> {
+public interface ColorsCallback extends Scriptable<List<Object>, DatasetContext> {
 
 }

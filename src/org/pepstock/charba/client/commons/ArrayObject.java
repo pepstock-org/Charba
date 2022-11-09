@@ -88,6 +88,42 @@ public final class ArrayObject extends Array {
 	}
 
 	/**
+	 * Creates a java script array of objects starting from a native object and the array will have ONE 1 element.
+	 * 
+	 * @param item single object to load in the new java script array.
+	 * @return new array instance of ONE 1 element or <code>null</code> if argument is <code>null</code>
+	 */
+	@JsOverlay
+	public static ArrayObject fromOrNull(NativeObject item) {
+		// checks if array is null
+		if (item == null) {
+			return null;
+		}
+		// returns the array
+		return ArrayObject.of(item);
+	}
+
+	/**
+	 * Creates a java script array of objects starting from a native object containers and the array will have ONE 1 element.
+	 * 
+	 * @param item single object to load in the new java script array.
+	 * @return new array instance of ONE 1 element or an empty array if argument is <code>null</code>
+	 */
+	@JsOverlay
+	public static ArrayObject fromOrEmpty(NativeObject item) {
+		// creates the array
+		ArrayObject result = new ArrayObject();
+		// checks if array is null
+		if (item == null) {
+			return result;
+		}
+		// adds element
+		result.push(item);
+		// returns the array
+		return result;
+	}
+
+	/**
 	 * Creates a java script array of objects starting from a native object containers and the array will have ONE 1 element.
 	 * 
 	 * @param item single object to load in the new java script array.
