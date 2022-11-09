@@ -40,6 +40,8 @@ public abstract class AbstractNode extends NativeObjectContainer {
 
 	private final Key childKey;
 
+	private NodeUpdateListener updateListener = null;
+
 	/**
 	 * Creates the object with native object to map java script properties.<br>
 	 * This is used for the root of tree composed by native objects.
@@ -89,6 +91,24 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	 */
 	protected final AbstractNode getRootNode() {
 		return retrieveRoot();
+	}
+
+	/**
+	 * Returns the update listener instance if there is.
+	 * 
+	 * @return the update listener
+	 */
+	public final NodeUpdateListener getUpdateListener() {
+		return updateListener;
+	}
+
+	/**
+	 * Sets an update listener instance to be invoked at every update.
+	 * 
+	 * @param updateListener an update listener instance to be invoked at every update
+	 */
+	public final void setUpdateListener(NodeUpdateListener updateListener) {
+		this.updateListener = updateListener;
 	}
 
 	/**
@@ -520,6 +540,11 @@ public abstract class AbstractNode extends NativeObjectContainer {
 	 * This is mandatory because it could happen that the parent item is not present, therefore it must be added.
 	 */
 	protected final void checkAndAddToParent() {
+		// checks if there is an listener
+		if (updateListener != null) {
+			// invoked listener
+			updateListener.update(this);
+		}
 		// checks if we are at root element
 		// or if the parent hasn't got the key
 		if (parent != null && Key.isValid(childKey) && !parent.has(childKey)) {

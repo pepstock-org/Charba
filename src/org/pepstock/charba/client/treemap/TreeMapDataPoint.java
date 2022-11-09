@@ -17,6 +17,7 @@ package org.pepstock.charba.client.treemap;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.data.AbstractDataPoint;
 import org.pepstock.charba.client.items.DataItem;
@@ -97,6 +98,17 @@ public final class TreeMapDataPoint extends AbstractDataPoint {
 	 */
 	public InnerData getData() {
 		return innerData;
+	}
+
+	/**
+	 * Returns the object in the user format of the data point.
+	 * 
+	 * @param factory instance of factory to create the native object
+	 * @param <T> type of user object
+	 * @return the object in the user format of the data point
+	 */
+	public <T extends NativeObjectContainer> T getData(NativeObjectContainerFactory<T> factory) {
+		return getAttributeAsObject(Property.DATA, factory);
 	}
 
 	/**

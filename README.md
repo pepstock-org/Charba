@@ -292,8 +292,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable `Zoom` plugin use for sankey and treemap charts.
  * add `treeLeafKey` and `borderRadius` option to TreeMapDataset class.
  * add `overflow` option to TreeMapDataset labels class.
- * change `color` options in TreeMapDataset labels class in order to enable to set different colors on multiple lines labels.
- * change `font` options in TreeMapDataset labels class in order to enable to set different fonts on multiple lines labels.
+ * change `color` and `hoverColor` options in TreeMapDataset labels class in order to enable to set different colors on multiple lines labels.
+ * change `font` and `hoverFont` options in TreeMapDataset labels class in order to enable to set different fonts on multiple lines labels.
  
 License
 -------

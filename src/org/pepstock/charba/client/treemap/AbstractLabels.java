@@ -172,8 +172,14 @@ abstract class AbstractLabels extends AbstractDatasetNode {
 		this.hoverFont = new Font(this.defaultValues.getFont(), getValue(CommonProperty.HOVER_FONT));
 		// checks if already added
 		if (!has(CommonProperty.HOVER_FONT)) {
-			// sets the font
-			setValue(CommonProperty.HOVER_FONT, this.hoverFont);
+			// adds a listener to add it when updated
+			this.hoverFont.setUpdateListener(node -> {
+				// checks if already added because it has been updated
+				if (!has(CommonProperty.HOVER_FONT)) {
+					// stores in this object
+					setValue(CommonProperty.HOVER_FONT, this.hoverFont);
+				}
+			});
 		}
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---

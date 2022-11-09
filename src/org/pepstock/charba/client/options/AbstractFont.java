@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NodeUpdateListener;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Weight;
@@ -56,6 +57,24 @@ public abstract class AbstractFont extends AbstractReadOnlyFont implements IsFon
 	 */
 	protected AbstractFont(AbstractNode parent, IsDefaultFont defaultValues, NativeObject nativeObject) {
 		super(parent, defaultValues, nativeObject);
+	}
+
+	/**
+	 * Sets an update listener instance to be invoked at every update.
+	 * 
+	 * @param updateListener an update listener instance to be invoked at every update
+	 */
+	public final void setUpdateListener(NodeUpdateListener updateListener) {
+		getDelegated().setUpdateListener(updateListener);
+	}
+
+	/**
+	 * Returns the update listener instance if there is.
+	 * 
+	 * @return the update listener
+	 */
+	public final NodeUpdateListener getUpdateListener() {
+		return getDelegated().getUpdateListener();
 	}
 
 	/*
