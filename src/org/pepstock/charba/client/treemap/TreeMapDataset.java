@@ -627,6 +627,25 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 * 
 	 * @return the border radius (in pixels).
 	 */
+	public BarBorderRadius getBorderRadiusAsObject() {
+		// checks if was stored as object
+		if (isType(Property.BORDER_RADIUS, ObjectType.OBJECT)) {
+			return BarBorderRadius.FACTORY.create(getValue(Property.BORDER_RADIUS));
+		} else if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
+			// if here, the property is a number
+			// then returns new border radius object
+			return new BarBorderRadius(getBorderRadius());
+		}
+		// if here, the property is missing
+		// then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
 	public int getBorderRadius() {
 		// checks if was stored as number
 		if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
@@ -644,25 +663,6 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		// if here, the property is missing
 		// then returns default
 		return DEFAULT_BORDER_RADIUS;
-	}
-
-	/**
-	 * Returns the border radius (in pixels).
-	 * 
-	 * @return the border radius (in pixels).
-	 */
-	public BarBorderRadius getBorderRadiusAsObject() {
-		// checks if was stored as object
-		if (isType(Property.BORDER_RADIUS, ObjectType.OBJECT)) {
-			return BarBorderRadius.FACTORY.create(getValue(Property.BORDER_RADIUS));
-		} else if (isType(Property.BORDER_RADIUS, ObjectType.NUMBER)) {
-			// if here, the property is a number
-			// then returns new border radius object
-			return new BarBorderRadius(getBorderRadius());
-		}
-		// if here, the property is missing
-		// then returns null
-		return null;
 	}
 
 	// ---------------------------
