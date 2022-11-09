@@ -217,6 +217,21 @@ public final class Labels extends AbstractLabels {
 	}
 
 	/**
+	 * Sets the font of the text.
+	 * 
+	 * @param fonts the font of the text
+	 */
+	public void setFonts(List<FontItem> fonts) {
+		// resets callback
+		setFont((FontsCallback) null);
+		// checks if argument is consistent
+		if (ArrayListHelper.isConsistent(fonts)) {
+			// stores value
+			setValueOrArrayAndAddToParent(CommonProperty.FONT, fonts.toArray(new FontItem[0]));
+		}
+	}
+
+	/**
 	 * Returns the font of the text.
 	 * 
 	 * @return the font of the text
@@ -245,6 +260,21 @@ public final class Labels extends AbstractLabels {
 		setHoverFont((FontsCallback) null);
 		// stores value
 		setValueOrArrayAndAddToParent(CommonProperty.HOVER_FONT, fonts);
+	}
+
+	/**
+	 * Sets the font of the text, when hovered.
+	 * 
+	 * @param fonts the font of the text, when hovered
+	 */
+	public void setHoverFonts(List<FontItem> fonts) {
+		// resets callback
+		setHoverFont((FontsCallback) null);
+		// checks if argument is consistent
+		if (ArrayListHelper.isConsistent(fonts)) {
+			// stores value
+			setValueOrArrayAndAddToParent(CommonProperty.HOVER_FONT, fonts.toArray(new FontItem[0]));
+		}
 	}
 
 	/**
@@ -283,6 +313,21 @@ public final class Labels extends AbstractLabels {
 	 * 
 	 * @param colors the color of the text
 	 */
+	public void setColor(List<IsColor> colors) {
+		// resets callback
+		setColor((ColorsCallback) null);
+		// checks if argument is consistent
+		if (ArrayListHelper.isConsistent(colors)) {
+			// stores value
+			setValueOrArrayAndAddToParent(CommonProperty.COLOR, colors.toArray(new IsColor[0]));
+		}
+	}
+
+	/**
+	 * Sets the color of the text.
+	 * 
+	 * @param colors the color of the text
+	 */
 	public void setColor(String... colors) {
 		// resets callback
 		setColor((ColorsCallback) null);
@@ -310,9 +355,9 @@ public final class Labels extends AbstractLabels {
 	}
 
 	/**
-	 * Sets the hover color of the text.
+	 * Sets the color of the text, when hovered.
 	 * 
-	 * @param hoverColors the hover color of the text
+	 * @param hoverColors the color of the text, when hovered
 	 */
 	public void setHoverColor(IsColor... hoverColors) {
 		// resets callback
@@ -322,9 +367,24 @@ public final class Labels extends AbstractLabels {
 	}
 
 	/**
-	 * Sets the hover color of the text.
+	 * Sets the color of the text, when hovered.
 	 * 
-	 * @param hoverColors the hover color of the text
+	 * @param colors the color of the text, when hovered
+	 */
+	public void setHoverColor(List<IsColor> hoverColors) {
+		// resets callback
+		setHoverColor((ColorsCallback) null);
+		// checks if argument is consistent
+		if (ArrayListHelper.isConsistent(hoverColors)) {
+			// stores value
+			setValueOrArrayAndAddToParent(CommonProperty.HOVER_COLOR, hoverColors.toArray(new IsColor[0]));
+		}
+	}
+
+	/**
+	 * Sets the color of the text, when hovered.
+	 * 
+	 * @param hoverColors the color of the text, when hovered
 	 */
 	public void setHoverColor(String... hoverColors) {
 		// resets callback
@@ -334,9 +394,9 @@ public final class Labels extends AbstractLabels {
 	}
 
 	/**
-	 * Returns the hover color of the text.
+	 * Returns the color of the text, when hovered.
 	 * 
-	 * @return the hover color of the text
+	 * @return the color of the text, when hovered
 	 */
 	public List<String> getHoverColorAsString() {
 		ArrayString array = getValueOrArray(CommonProperty.HOVER_COLOR, AbstractLabels.DEFAULT_COLOR);
@@ -344,9 +404,9 @@ public final class Labels extends AbstractLabels {
 	}
 
 	/**
-	 * Returns the hover color of the text.
+	 * Returns the color of the text, when hovered.
 	 * 
-	 * @return the hover color of the text
+	 * @return the color of the text, when hovered
 	 */
 	public List<IsColor> getHoverColor() {
 		return ColorBuilder.parse(getHoverColorAsString());
