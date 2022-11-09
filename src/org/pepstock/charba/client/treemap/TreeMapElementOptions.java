@@ -226,24 +226,6 @@ public final class TreeMapElementOptions extends CommonElementOptions {
 	}
 
 	/**
-	 * Sets the border radius (in pixels).
-	 * 
-	 * @param borderRadius the border radius (in pixels).
-	 */
-	public void setBorderRadius(BarBorderRadius borderRadius) {
-		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadius);
-	}
-
-	/**
-	 * Sets the border radius.
-	 * 
-	 * @param radius the border radius.
-	 */
-	public void setBorderRadius(int radius) {
-		setValueAndAddToParent(Property.BORDER_RADIUS, Checker.positiveOrZero(radius));
-	}
-
-	/**
 	 * Returns the border radius (in pixels).
 	 * 
 	 * @return the border radius (in pixels).
@@ -260,6 +242,24 @@ public final class TreeMapElementOptions extends CommonElementOptions {
 		// if here, the property is missing
 		// then returns null
 		return null;
+	}
+
+	/**
+	 * Sets the border radius (in pixels).
+	 * 
+	 * @param borderRadius the border radius (in pixels).
+	 */
+	public void setBorderRadius(BarBorderRadius borderRadius) {
+		setValueAndAddToParent(Property.BORDER_RADIUS, borderRadius);
+	}
+
+	/**
+	 * Sets the border radius.
+	 * 
+	 * @param radius the border radius.
+	 */
+	public void setBorderRadius(int radius) {
+		setValueAndAddToParent(Property.BORDER_RADIUS, Checker.positiveOrZero(radius));
 	}
 
 	/**
