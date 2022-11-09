@@ -283,6 +283,15 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	}
 
 	/**
+	 * Sets the browser events that the tooltip should listen to.
+	 * 
+	 * @param events the browser events that the tooltip should listen to.
+	 */
+	public void setEvents(Set<IsEvent> events) {
+		getConfiguration().getTooltips().setEvents(events);
+	}
+
+	/**
 	 * Returns the browser events that the tooltip should listen to.
 	 * 
 	 * @return the browser events that the tooltip should listen to.

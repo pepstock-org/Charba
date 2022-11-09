@@ -136,6 +136,15 @@ public class Legend extends ConfigurationOptionsContainer implements IsEventProv
 	}
 
 	/**
+	 * Sets the browser events that the legend should listen to.
+	 * 
+	 * @param events the browser events that the legend should listen to.
+	 */
+	public void setEvents(Set<IsEvent> events) {
+		getConfiguration().getLegend().setEvents(events);
+	}
+
+	/**
 	 * Returns the browser events that the legend should listen to.
 	 * 
 	 * @return the browser events that the legend should listen to.
