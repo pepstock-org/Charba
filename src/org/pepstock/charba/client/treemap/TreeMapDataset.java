@@ -507,7 +507,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 	 */
 	public Key getTreeLeafKey() {
 		// gets string value
-		String value = getKeyAsString();
+		String value = getTreeLeafKeyAsString();
 		// returns creating the key
 		return value != null ? Key.create(value) : null;
 	}
