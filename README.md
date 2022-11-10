@@ -289,7 +289,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 
  * import CHART.JS TREEMAP controller version [v2.1.3](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.1.3).
  * import LUXON datetime library version [v3.1.0](https://github.com/moment/luxon/releases/tag/3.1.0).
- * enable `Zoom` plugin use for sankey and treemap charts.
+ * enable `Zoom` plugin use for sankey and treemap charts. 
+ * enable `Annotation` plugin use for matrix charts.
  * add `treeLeafKey` and `borderRadius` option to TreeMapDataset class.
  * add `overflow` option to TreeMapDataset labels class.
  * change `color` and `hoverColor` options in TreeMapDataset labels class in order to enable to set different colors on multiple lines labels.
