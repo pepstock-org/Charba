@@ -105,9 +105,9 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	private final TextStrokeOptionsHandler textStrokeHandler;
 
 	/**
-	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
+	 * To avoid any instantiation because is added in the all {@link AbstractAnnotation}.
 	 * 
-	 * @param parent {@link LineAnnotation} instance which contains the label
+	 * @param parent {@link AbstractAnnotation} instance which contains the label
 	 * @param nativeObject native object to wrap, with all properties of a label
 	 * @param defaultValues default options instance
 	 */
@@ -155,6 +155,15 @@ abstract class InnerLabel extends AbstractNode implements IsDefaultsInnerLabel, 
 	@Override
 	public final TextStrokeOptionsHandler getTextStrokeOptionsHandler() {
 		return textStrokeHandler;
+	}
+
+	/**
+	 * Returns the parent annotation.
+	 * 
+	 * @return the parent annotation
+	 */
+	AbstractAnnotation getParent() {
+		return parent;
 	}
 
 	/**

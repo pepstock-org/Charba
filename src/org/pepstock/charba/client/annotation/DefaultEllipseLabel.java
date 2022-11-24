@@ -16,18 +16,21 @@
 package org.pepstock.charba.client.annotation;
 
 /**
- * This is the {@link AnnotationPlugin#ID} plugin ELLIPSE annotation DEFAULTS options.
+ * This is the {@link AnnotationPlugin#ID} plugin LABEL of ELLIPSE annotation DEFAULTS options.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsDefaultsEllipseAnnotation extends IsDefaultsAnnotation, IsDefaultsBackgroundColorHandler, IsDefaultsExtendedShadowOptionsHandler, IsDefaultsRotationHandler {
+final class DefaultEllipseLabel extends DefaultBoxLabel implements IsDefaultsEllipseLabel {
+
+	// defaults options instance
+	static final DefaultEllipseLabel INSTANCE = new DefaultEllipseLabel();
 
 	/**
-	 * Returns the label on the ellipse.
-	 * 
-	 * @return the label on the ellipse
+	 * To avoid any instantiation
 	 */
-	IsDefaultsEllipseLabel getLabel();
+	private DefaultEllipseLabel() {
+		super();
+	}
 
 }

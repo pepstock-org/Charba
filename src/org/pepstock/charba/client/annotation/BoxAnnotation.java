@@ -173,7 +173,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsBoxAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
-		// creates a line label
+		// creates a box label
 		this.label = new BoxLabel(this, this.defaultValues.getLabel());
 		// stores in the annotation
 		setValue(Property.LABEL, label);
@@ -201,7 +201,7 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsBoxAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.BOX.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsBoxAnnotation) getDefaultsValues();
-		// creates a line label
+		// creates a box label
 		this.label = new BoxLabel(this, getValue(Property.LABEL), this.defaultValues.getLabel());
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
@@ -266,9 +266,9 @@ public final class BoxAnnotation extends AbstractAnnotation implements IsDefault
 	}
 
 	/**
-	 * Returns the label on the line.
+	 * Returns the label on the box.
 	 * 
-	 * @return the label on the line
+	 * @return the label on the box
 	 */
 	@Override
 	public BoxLabel getLabel() {

@@ -30,6 +30,13 @@ interface IsDefaultsLineLabel
 		extends IsDefaultsInnerLabel, IsDefaultsBackgroundColorHandler, IsDefaultsBorderRadiusHandler, IsDefaultsBorderOptionsHandler, IsDefaultsExtendedBorderOptionsHandler, IsDefaultsShadowOptionsHandler, IsDefaultsExtendedShadowOptionsHandler {
 
 	/**
+	 * Returns the callout node.
+	 * 
+	 * @return the callout node
+	 */
+	IsDefaultsCallout getCallout();
+
+	/**
 	 * Returns the anchor position of label on line.
 	 * 
 	 * @return the anchor position of label on line

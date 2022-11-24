@@ -18,6 +18,7 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.options.ElementFactory;
 import org.pepstock.charba.client.utils.Utilities;
@@ -30,7 +31,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class EllipseAnnotation extends AbstractAnnotation implements IsDefaultsEllipseAnnotation, HasBackgroundColor, HasExtendedShadowOptions, HasRotation {
+public final class EllipseAnnotation extends AbstractAnnotation implements IsDefaultsEllipseAnnotation, IsLabelContainer<EllipseLabel>, HasBackgroundColor, HasExtendedShadowOptions, HasRotation {
 
 	/**
 	 * Default ellipse annotation border width, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
@@ -45,6 +46,37 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 	 */
 	public static final ElementFactory<EllipseAnnotation> FACTORY = new EllipseElementFactory(ELEMENT_KEY_AS_STRING);
 
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		LABEL("label");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
+
 	// defaults options
 	private final IsDefaultsEllipseAnnotation defaultValues;
 	// background color handler
@@ -53,6 +85,8 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 	private final ExtendedShadowOptionsHandler extendedShadowOptionsHandler;
 	// rotation handler
 	private final RotationHandler rotationHandler;
+	// label for ellipse instance
+	private final EllipseLabel label;
 
 	/**
 	 * Creates a ellipse annotation to be added to an {@link AnnotationOptions} instance.<br>
@@ -118,6 +152,10 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsEllipseAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.ELLIPSE.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsEllipseAnnotation) getDefaultsValues();
+		// creates a ellipse label
+		this.label = new EllipseLabel(this, this.defaultValues.getLabel());
+		// stores in the annotation
+		setValue(Property.LABEL, label);
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// creates shadow options handler
@@ -139,6 +177,8 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 		Checker.assertCheck(getDefaultsValues() instanceof IsDefaultsEllipseAnnotation, Utilities.applyTemplate(INVALID_DEFAULTS_VALUES_CLASS, AnnotationType.ELLIPSE.value()));
 		// casts and stores it
 		this.defaultValues = (IsDefaultsEllipseAnnotation) getDefaultsValues();
+		// creates a ellipse label
+		this.label = new EllipseLabel(this, getValue(Property.LABEL), this.defaultValues.getLabel());
 		// creates background color handler
 		this.backgroundColorHandler = new BackgroundColorHandler(this, this.defaultValues, getNativeObject());
 		// creates shadow options handler
@@ -175,6 +215,16 @@ public final class EllipseAnnotation extends AbstractAnnotation implements IsDef
 	@Override
 	public RotationHandler getRotationHandler() {
 		return rotationHandler;
+	}
+
+	/**
+	 * Returns the label on the ellipse.
+	 * 
+	 * @return the label on the ellipse
+	 */
+	@Override
+	public EllipseLabel getLabel() {
+		return label;
 	}
 
 	/**

@@ -163,10 +163,10 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 	private final ExtendedBorderOptionsHandler extendedBorderOptionsHandler;
 
 	/**
-	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
+	 * To avoid any instantiation because is added in the all {@link LabelAnnotation}.
 	 * 
-	 * @param parent {@link LineAnnotation} instance which contains the label
-	 * @param nativeObject native object to wrap, with all properties of a label
+	 * @param parent {@link AbstractAnnotation} instance which contains the callout
+	 * @param nativeObject native object to wrap, with all properties of a callout
 	 * @param defaultValues default options instance
 	 */
 	Callout(AbstractAnnotation parent, NativeObject nativeObject, IsDefaultsCallout defaultValues) {
@@ -226,7 +226,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 		// resets callback
 		setDisplay((SimpleDisplayCallback<AnnotationContext>) null);
 		// stores value
-		setValue(Property.DISPLAY, display);
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
@@ -248,7 +248,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 		// resets callback
 		setMargin((MarginCallback) null);
 		// stores value
-		setValue(Property.MARGIN, Checker.positiveOrZero(margin));
+		setValueAndAddToParent(Property.MARGIN, Checker.positiveOrZero(margin));
 	}
 
 	/**
@@ -270,7 +270,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 		// resets callback
 		setSide((SideCallback) null);
 		// stores value
-		setValue(Property.SIDE, Checker.positiveOrZero(side));
+		setValueAndAddToParent(Property.SIDE, Checker.positiveOrZero(side));
 	}
 
 	/**
@@ -292,7 +292,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 		// resets callback
 		setStart((StartCallback) null);
 		// stores value
-		setValue(Property.START, Checker.positiveOrZero(start));
+		setValueAndAddToParent(Property.START, Checker.positiveOrZero(start));
 	}
 
 	/**
@@ -314,7 +314,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 		// resets callback
 		setStart((StartCallback) null);
 		// stores value
-		setValue(Property.START, Utilities.getAsPercentage(start, 0));
+		setValueAndAddToParent(Property.START, Utilities.getAsPercentage(start, 0));
 	}
 
 	/**
@@ -336,7 +336,7 @@ public final class Callout extends AbstractNode implements IsDefaultsCallout, Ha
 		// resets callback
 		setPosition((CalloutPositionCallback) null);
 		// stores value
-		setValue(Property.POSITION, position);
+		setValueAndAddToParent(Property.POSITION, position);
 	}
 
 	/**

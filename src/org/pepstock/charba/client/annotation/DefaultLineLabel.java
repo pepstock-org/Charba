@@ -50,6 +50,16 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.annotation.IsDefaultsLineLabel#getCallout()
+	 */
+	@Override
+	public IsDefaultsCallout getCallout() {
+		return DefaultCallout.INSTANCE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.annotation.IsDefaultsLineLabel#getFont()
 	 */
 	@Override

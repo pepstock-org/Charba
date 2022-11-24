@@ -18,32 +18,31 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * Implements a <b>LABEL</b> to apply on a BOX annotation.
+ * Implements a <b>LABEL</b> to apply on a ELLIPSE annotation.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BoxLabel extends AbstractBoxedLabel<BoxAnnotation> implements IsDefaultsBoxLabel, HasRotation {
+public final class EllipseLabel extends AbstractBoxedLabel<EllipseAnnotation> implements IsDefaultsEllipseLabel, HasRotation {
 
 	/**
-	 * To avoid any instantiation because is added in the all {@link BoxAnnotation}.
+	 * To avoid any instantiation because is added in the all {@link EllipseAnnotation}.
 	 * 
-	 * @param parent {@link BoxAnnotation} instance which contains the label
+	 * @param parent {@link EllipseAnnotation} instance which contains the label
 	 * @param defaultValues default options instance
 	 */
-	BoxLabel(BoxAnnotation parent, IsDefaultsBoxLabel defaultValues) {
+	EllipseLabel(EllipseAnnotation parent, IsDefaultsEllipseLabel defaultValues) {
 		this(parent, null, defaultValues);
 	}
 
 	/**
-	 * To avoid any instantiation because is added in the all {@link BoxAnnotation}.
+	 * To avoid any instantiation because is added in the all {@link EllipseAnnotation}.
 	 * 
-	 * @param parent {@link BoxAnnotation} instance which contains the label
+	 * @param parent {@link EllipseAnnotation} instance which contains the label
 	 * @param nativeObject native object to wrap, with all properties of a label
 	 * @param defaultValues default options instance
 	 */
-	BoxLabel(BoxAnnotation parent, NativeObject nativeObject, IsDefaultsBoxLabel defaultValues) {
+	EllipseLabel(EllipseAnnotation parent, NativeObject nativeObject, IsDefaultsEllipseLabel defaultValues) {
 		super(parent, nativeObject, defaultValues);
 	}
-
 }

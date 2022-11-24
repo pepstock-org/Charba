@@ -300,6 +300,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * change `color` and `hoverColor` options in TreeMapDataset labels class in order to enable to set different colors on multiple lines labels.
  * change `font` and `hoverFont` options in TreeMapDataset labels class in order to enable to set different fonts on multiple lines labels.
  * enable `events` option to be set by a Set of objects in the chart, legend and tooltip configuration.
+ * enable `label` options to ellipse annotation configuration.
+ * enable `caption` options to the label of line annotation configuration.
   
 License
 -------

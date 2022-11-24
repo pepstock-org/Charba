@@ -29,19 +29,19 @@ import org.pepstock.charba.client.enums.Weight;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DefaultBoxLabel implements IsDefaultsBoxLabel {
+class DefaultBoxLabel implements IsDefaultsBoxLabel {
 
 	// defaults options instance
 	static final DefaultBoxLabel INSTANCE = new DefaultBoxLabel();
 	// default font instance
 	private final IsDefaultFont font = new InternalFont();
 	// default padding instance
-	private final IsDefaultPadding padding = new DefaultPadding(BoxLabel.DEFAULT_PADDING);
+	private final IsDefaultPadding padding = new DefaultPadding(AbstractBoxedLabel.DEFAULT_PADDING);
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private DefaultBoxLabel() {
+	DefaultBoxLabel() {
 		// do nothing
 	}
 
@@ -82,7 +82,7 @@ final class DefaultBoxLabel implements IsDefaultsBoxLabel {
 	 */
 	@Override
 	public String getColorAsString() {
-		return BoxLabel.DEFAULT_COLOR_AS_STRING;
+		return AbstractBoxedLabel.DEFAULT_COLOR_AS_STRING;
 	}
 
 	/**
@@ -92,7 +92,7 @@ final class DefaultBoxLabel implements IsDefaultsBoxLabel {
 	 */
 	@Override
 	public TextAlign getTextAlign() {
-		return BoxLabel.DEFAULT_TEXT_ALIGN;
+		return AbstractBoxedLabel.DEFAULT_TEXT_ALIGN;
 	}
 
 	/**
@@ -102,7 +102,7 @@ final class DefaultBoxLabel implements IsDefaultsBoxLabel {
 	 */
 	@Override
 	public boolean isDisplay() {
-		return BoxLabel.DEFAULT_DISPLAY;
+		return AbstractBoxedLabel.DEFAULT_DISPLAY;
 	}
 
 	/**
@@ -123,7 +123,7 @@ final class DefaultBoxLabel implements IsDefaultsBoxLabel {
 	 */
 	@Override
 	public double getXAdjust() {
-		return BoxLabel.DEFAULT_X_ADJUST;
+		return AbstractBoxedLabel.DEFAULT_X_ADJUST;
 	}
 
 	/**
@@ -134,7 +134,7 @@ final class DefaultBoxLabel implements IsDefaultsBoxLabel {
 	 */
 	@Override
 	public double getYAdjust() {
-		return BoxLabel.DEFAULT_Y_ADJUST;
+		return AbstractBoxedLabel.DEFAULT_Y_ADJUST;
 	}
 
 	/**
@@ -152,7 +152,7 @@ final class DefaultBoxLabel implements IsDefaultsBoxLabel {
 		 */
 		@Override
 		public Weight getWeight() {
-			return BoxLabel.DEFAULT_FONT_WEIGHT;
+			return AbstractBoxedLabel.DEFAULT_FONT_WEIGHT;
 		}
 
 	}

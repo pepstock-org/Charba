@@ -156,6 +156,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	 */
 	private enum Property implements Key
 	{
+		CALLOUT("callout"),
 		POSITION("position"),
 		ROTATION("rotation");
 
@@ -212,6 +213,8 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	private final ShadowOptionsHandler shadowOptionsHandler;
 	// extended shadow options handler
 	private final ExtendedShadowOptionsHandler extendedShadowOptionsHandler;
+	// callout instance
+	private final Callout callout;
 
 	/**
 	 * To avoid any instantiation because is added in the all {@link LineAnnotation}.
@@ -256,6 +259,16 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		this.rotationCallbackProxy.setCallback(context -> onRotation(new AnnotationContext(this.parent, context), defaultValues.getRotation()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.positionCallbackProxy.setCallback(context -> onPosition(new AnnotationContext(this.parent, context), getPosition()));
+		// loads callout
+		this.callout = new Callout(this.parent, getValue(Property.CALLOUT), this.defaultValues.getCallout());
+		// adds update listener
+		this.callout.setUpdateListener((node) -> {
+			// checks if already added
+			if (!has(Property.CALLOUT)) {
+				// if not, adds the callout
+				setValue(Property.CALLOUT, this.callout);
+			}
+		});
 	}
 
 	/*
@@ -316,6 +329,16 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 	@Override
 	public ExtendedShadowOptionsHandler getExtendedShadowOptionsHandler() {
 		return extendedShadowOptionsHandler;
+	}
+
+	/**
+	 * Returns the callout node.
+	 * 
+	 * @return the callout node
+	 */
+	@Override
+	public Callout getCallout() {
+		return callout;
 	}
 
 	/**
