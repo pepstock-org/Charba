@@ -29,7 +29,7 @@ final class SankeyControllerResource extends AbstractInjectableResource {
 	// encoded javascript content of chartjs-chart-sankey.min.js
 	private static final String[] CONTENT = {
 		"/*!",
-		" * chartjs-chart-sankey v0.11.0",
+		" * chartjs-chart-sankey v0.12.0",
 		" * https://github.com/kurkle/chartjs-chart-sankey#readme",
 		" * (c) 2022 Jukka Kurkela",
 		" * Released under the MIT license",
