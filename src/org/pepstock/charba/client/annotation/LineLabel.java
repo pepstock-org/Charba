@@ -262,7 +262,7 @@ public final class LineLabel extends InnerLabel implements IsDefaultsLineLabel, 
 		// loads callout
 		this.callout = new Callout(this.parent, getValue(Property.CALLOUT), this.defaultValues.getCallout());
 		// adds update listener
-		this.callout.setUpdateListener((node) -> {
+		this.callout.setUpdateListener(node -> {
 			// checks if already added
 			if (!has(Property.CALLOUT)) {
 				// if not, adds the callout
