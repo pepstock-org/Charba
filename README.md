@@ -288,7 +288,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * import CHART.JS TREEMAP controller version [v2.1.3](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.1.3).
- * import CHART.JS LUXON adapter version [v1.3.0](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v1.3f.0).
+ * import CHART.JS MATRIX controller version [v1.3.0](https://github.com/kurkle/chartjs-chart-matrix/releases/tag/v1.3.0).
+ * import CHART.JS LUXON adapter version [v1.3.0](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v1.3.0).
  * import LUXON datetime library version [v3.1.0](https://github.com/moment/luxon/releases/tag/3.1.0).
  * enable `Zoom` plugin use for sankey and treemap charts. 
  * enable `Annotation` plugin use for matrix charts.
