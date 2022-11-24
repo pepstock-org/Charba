@@ -34,7 +34,7 @@ import org.pepstock.charba.client.enums.Weight;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class AbstractBoxedLabel<T extends AbstractAnnotation> extends InnerLabel implements HasRotation {
+abstract class AbstractBoxedLabel extends InnerLabel implements HasRotation {
 
 	/**
 	 * Default box label display, <b>{@value DEFAULT_DISPLAY}</b>.
@@ -122,7 +122,7 @@ abstract class AbstractBoxedLabel<T extends AbstractAnnotation> extends InnerLab
 	private static final CallbackPropertyHandler<LabelAlignPositionCallback> POSITION_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.POSITION);
 
 	// line annotation parent instance
-	private final T parent;
+	private final AbstractAnnotation parent;
 	// defaults options
 	private final IsDefaultsBoxLabel defaultValues;
 	// rotation handler
@@ -136,7 +136,7 @@ abstract class AbstractBoxedLabel<T extends AbstractAnnotation> extends InnerLab
 	 * @param parent {@link BoxAnnotation} instance which contains the label
 	 * @param defaultValues default options instance
 	 */
-	AbstractBoxedLabel(T parent, IsDefaultsBoxLabel defaultValues) {
+	AbstractBoxedLabel(AbstractAnnotation parent, IsDefaultsBoxLabel defaultValues) {
 		this(parent, null, defaultValues);
 	}
 
@@ -147,7 +147,7 @@ abstract class AbstractBoxedLabel<T extends AbstractAnnotation> extends InnerLab
 	 * @param nativeObject native object to wrap, with all properties of a label
 	 * @param defaultValues default options instance
 	 */
-	AbstractBoxedLabel(T parent, NativeObject nativeObject, IsDefaultsBoxLabel defaultValues) {
+	AbstractBoxedLabel(AbstractAnnotation parent, NativeObject nativeObject, IsDefaultsBoxLabel defaultValues) {
 		super(parent, nativeObject, defaultValues);
 		// stores line annotation parent
 		this.parent = parent;

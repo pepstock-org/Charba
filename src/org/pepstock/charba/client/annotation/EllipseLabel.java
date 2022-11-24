@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class EllipseLabel extends AbstractBoxedLabel<EllipseAnnotation> implements IsDefaultsEllipseLabel, HasRotation {
+public final class EllipseLabel extends AbstractBoxedLabel implements IsDefaultsEllipseLabel, HasRotation {
 
 	/**
 	 * To avoid any instantiation because is added in the all {@link EllipseAnnotation}.

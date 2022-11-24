@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BoxLabel extends AbstractBoxedLabel<BoxAnnotation> implements IsDefaultsBoxLabel, HasRotation {
+public final class BoxLabel extends AbstractBoxedLabel implements IsDefaultsBoxLabel, HasRotation {
 
 	/**
 	 * To avoid any instantiation because is added in the all {@link BoxAnnotation}.
