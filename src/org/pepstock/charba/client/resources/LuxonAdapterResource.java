@@ -26,7 +26,7 @@ final class LuxonAdapterResource extends AbstractInjectableResource {
 	// encoded javascript content of chartjs-adapter-luxon.min.js
 	private static final String[] CONTENT = {
 		"/*!",
-		" * chartjs-adapter-luxon v1.2.0",
+		" * chartjs-adapter-luxon v1.3.0",
 		" * https://www.chartjs.org",
 		" * (c) 2022 chartjs-adapter-luxon Contributors",
 		" * Released under the MIT license",
