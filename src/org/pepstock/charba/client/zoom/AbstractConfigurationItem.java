@@ -304,8 +304,6 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 		setValue(Property.SCALE_MODE, modeCallback);
 	}
 
-	// FIXME
-
 	/**
 	 * Returns the element (panning or zooming) directions callback, to set the mode at runtime, which of the enabled zooming directions should only be available when the mouse
 	 * cursor is over one of scale
