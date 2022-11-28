@@ -304,7 +304,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable `label` option to ellipse annotation configuration.
  * enable `caption` option to the label of line annotation configuration.
  * add `scaleMode` option to the zoom plugin configuration.
- * add `drawTime` option to `Drag` option of the zoom plugin configuration. 
+ * add `drawTime` option to `Drag` option of the zoom plugin configuration.
+ * add `zoomRect` methods to zoom programmatically in the zoom plugin.
   
 License
 -------

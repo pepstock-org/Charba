@@ -158,4 +158,23 @@ final class NativeJsZoomHelper {
 	 */
 	static native void zoomScale(Chart chart, String scaleId, NativeObject range, String transition);
 
+	/**
+	 * Zooms the chart for a specific rectangle, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param p0 data point to coordinate of the start of the zoom operation
+	 * @param p1 data point to coordinate of the end of the zoom operation
+	 */
+	static native void zoomRect(Chart chart, NativeObject p0, NativeObject p1);
+
+	/**
+	 * Zooms the chart for a specific rectangle, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param p0 data point to coordinate of the start of the zoom operation
+	 * @param p1 data point to coordinate of the end of the zoom operation
+	 * @param transition update transition mode
+	 */
+	static native void zoomRect(Chart chart, NativeObject p0, NativeObject p1, String transition);
+
 }

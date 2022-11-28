@@ -503,6 +503,20 @@ CharbaJsZoomHelper.zoomScale = function(chart, scaleId, range, mode) {
   }
 }
 /**
+ * Zooms the chart for a specific rectangle, programmatically.
+ *
+ * @param {Chart} chart
+ * @param {Object} p0 
+ * @param {Object} p1 
+ * @param {string=} mode 
+ * @return {undefined}
+ */
+CharbaJsZoomHelper.zoomRect = function(chart, p0, p1, mode) {
+  if (chart != null && typeof chart.zoomRect === 'function'){
+    chart.zoomRect.call(chart, p0, p1, mode);
+  }
+}
+/**
  * Returns whether the chart has been zoomed or panned - i.e. whether the initial scale of any axis is different to the one used currently.
  *
  * @param {Chart} chart

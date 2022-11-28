@@ -216,4 +216,25 @@ final class JsZoomHelper {
 		}
 	}
 
+	/**
+	 * Zooms the chart for a specific rectangle, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param p0 data point to coordinate of the start of the zoom operation
+	 * @param p1 data point to coordinate of the end of the zoom operation
+	 * @param transition update transition mode
+	 */
+	void zoomRect(Chart chart, ZoomPoint p0, ZoomPoint p1, TransitionKey transition) {
+		// checks if chart is consistent
+		if (chart != null) {
+			// checks if transition is consistent
+			if (TransitionKey.isValid(transition)) {
+				// zooms by transition key
+				NativeJsZoomHelper.zoomRect(chart, p0.nativeObject(), p1.nativeObject(), transition.value());
+			} else {
+				// zooms by transition key
+				NativeJsZoomHelper.zoomRect(chart, p0.nativeObject(), p1.nativeObject());
+			}
+		}
+	}
 }

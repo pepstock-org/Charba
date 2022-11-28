@@ -324,6 +324,35 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	}
 
 	/**
+	 * Zooms the chart for a specific rectangle, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param p0 data point to coordinate of the start of the zoom operation
+	 * @param p1 data point to coordinate of the end of the zoom operation
+	 */
+	public static void zoomRect(IsChart chart, ZoomPoint p0, ZoomPoint p1) {
+		zoomRect(chart, p0, p1, null);
+	}
+
+	/**
+	 * Zooms the chart for a specific rectangle, programmatically.
+	 * 
+	 * @param chart chart instance to invoke
+	 * @param p0 data point to coordinate of the start of the zoom operation
+	 * @param p1 data point to coordinate of the end of the zoom operation
+	 * @param transition update transition mode
+	 */
+	public static void zoomRect(IsChart chart, ZoomPoint p0, ZoomPoint p1, TransitionKey transition) {
+		// check if chart is consistent and zoom plugin is activated
+		if (isReadyForApi(chart) && p0 != null && p1 != null) {
+			// gets native chart instance
+			Chart nativeChart = Charts.getNative(chart);
+			// zooms rect
+			JsZoomHelper.get().zoomRect(nativeChart, p0, p1, transition);
+		}
+	}
+
+	/**
 	 * Checks if the chart is ready to perform the API.<br>
 	 * It searches if the chart is consistent and if the plugin has been activated for the chart.
 	 * 
