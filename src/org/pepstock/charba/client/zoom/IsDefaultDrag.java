@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.zoom;
 
 import org.pepstock.charba.client.enums.ModifierKey;
+import org.pepstock.charba.client.zoom.enums.DrawTime;
 
 /**
  * {@link ZoomPlugin#ID} plugin default options interface for DRAG element.<br>
@@ -33,6 +34,15 @@ interface IsDefaultDrag {
 	 */
 	default boolean isEnabled() {
 		return Drag.DEFAULT_ENABLED;
+	}
+
+	/**
+	 * Returns the draw time which defines when the drag rectangle is drawn.
+	 * 
+	 * @return the draw time which defines when the drag rectangle is drawn
+	 */
+	default DrawTime getDrawTime() {
+		return Drag.DEFAULT_DRAW_TIME;
 	}
 
 	/**

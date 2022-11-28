@@ -22,6 +22,7 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.ModifierKey;
+import org.pepstock.charba.client.zoom.enums.DrawTime;
 
 /**
  * Configuration item to define the style to apply to drag area, during zooming.
@@ -57,6 +58,11 @@ public final class Drag extends AbstractNode implements IsDefaultDrag {
 	public static final double DEFAULT_THRESHOLD = 0D;
 
 	/**
+	 * Default draw time, <b>{@link DrawTime#BEFORE_DATASETS_DRAW}</b>.
+	 */
+	public static final DrawTime DEFAULT_DRAW_TIME = DrawTime.BEFORE_DATASETS_DRAW;
+
+	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
@@ -64,6 +70,7 @@ public final class Drag extends AbstractNode implements IsDefaultDrag {
 		BACKGROUND_COLOR("backgroundColor"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth"),
+		DRAW_TIME("drawTime"),
 		ENABLED("enabled"),
 		MODIFIER_KEY("modifierKey"),
 		THRESHOLD("threshold");
@@ -127,6 +134,25 @@ public final class Drag extends AbstractNode implements IsDefaultDrag {
 	@Override
 	public boolean isEnabled() {
 		return getValue(Property.ENABLED, defaultOptions.isEnabled());
+	}
+
+	/**
+	 * Sets the draw time which defines when the drag rectangle is drawn.
+	 * 
+	 * @param drawTime the draw time which defines when the drag rectangle is drawn
+	 */
+	public void setDrawTime(DrawTime drawTime) {
+		setValueAndAddToParent(Property.DRAW_TIME, drawTime);
+	}
+
+	/**
+	 * Returns the draw time which defines when the drag rectangle is drawn.
+	 * 
+	 * @return the draw time which defines when the drag rectangle is drawn
+	 */
+	@Override
+	public DrawTime getDrawTime() {
+		return getValue(Property.DRAW_TIME, DrawTime.values(), defaultOptions.getDrawTime());
 	}
 
 	/**
