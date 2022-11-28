@@ -47,6 +47,8 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 	// callback proxy to invoke the MODE function
 	private final CallbackProxy<ProxyStringCallback> modeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the MODE function
+	private final CallbackProxy<ProxyStringCallback> scaleModeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the MODE function
 	private final CallbackProxy<ProxyStringCallback> overScaleModeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the PROGRESS function
 	private final CallbackProxy<ProxyHandlerCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
@@ -59,6 +61,8 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 
 	// mode callback
 	private static final CallbackPropertyHandler<ModeCallback> MODE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.MODE);
+	// scale mode callback
+	private static final CallbackPropertyHandler<ModeCallback> SCALE_MODE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.SCALE_MODE);
 	// over scale mode callback
 	private static final CallbackPropertyHandler<ModeCallback> OVER_SCALE_MODE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.OVER_SCALE_MODE);
 
@@ -66,6 +70,11 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 	 * Default mode directions, <b>{@link Mode#XY}</b>.
 	 */
 	public static final Mode DEFAULT_MODE = Mode.XY;
+
+	/**
+	 * Default mode directions for the scale, <b>{@link Mode#XY}</b>.
+	 */
+	public static final Mode DEFAULT_SCALE_MODE = Mode.XY;
 
 	/**
 	 * Default mode directions, when over the scale, <b>{@link Mode#XY}</b>.
@@ -78,6 +87,7 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 	private enum Property implements Key
 	{
 		MODE("mode"),
+		SCALE_MODE("scaleMode"),
 		OVER_SCALE_MODE("overScaleMode");
 
 		// name value of property
@@ -117,6 +127,7 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		this.modeCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getModeCallback(), getDefaultsOptions().getMode()).value());
+		this.scaleModeCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getScaleModeCallback(), getDefaultsOptions().getScaleMode()).value());
 		this.overScaleModeCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getOverScaleModeCallback(), getDefaultsOptions().getOverScaleMode()).value());
 		this.progressCallbackProxy.setCallback(context -> onProgress(createContext(context)));
 		this.completeCallbackProxy.setCallback(context -> onCompleted(createContext(context)));
@@ -182,6 +193,28 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 	}
 
 	/**
+	 * Enables panning over a scale for that axis (regardless of mode).
+	 * 
+	 * @param mode panning over a scale for that axis (regardless of mode).
+	 */
+	public final void setScaleMode(Mode mode) {
+		// reset callback if there is
+		setScaleMode((ModeCallback) null);
+		// sets values
+		setValue(Property.SCALE_MODE, mode);
+	}
+
+	/**
+	 * Returns panning over a scale for that axis (regardless of mode).
+	 * 
+	 * @return panning over a scale for that axis (regardless of mode).
+	 */
+	@Override
+	public final Mode getScaleMode() {
+		return getValue(Property.SCALE_MODE, Mode.values(), getDefaultsOptions().getScaleMode());
+	}
+
+	/**
 	 * Sets which of the enabled zooming directions should only be available when the mouse cursor is over one of scale.<br>
 	 * If under mouse hasn't scale, then return all other scales which 'mode' is different with overScaleMode.<br>
 	 * So 'overScaleMode' works as a limiter to scale the user-selected scale (in 'mode') only when the cursor is under the scale, and other directions in 'mode' works as before.
@@ -239,6 +272,39 @@ public abstract class AbstractConfigurationItem extends AbstractNode implements 
 		// stores value
 		setValue(Property.MODE, modeCallback);
 	}
+
+	/**
+	 * Returns the element directions callback, to enable panning over a scale for that axis (regardless of mode).
+	 * 
+	 * @return the element directions callback
+	 */
+	@Override
+	public final ModeCallback getScaleModeCallback() {
+		return SCALE_MODE_PROPERTY_HANDLER.getCallback(this, getDefaultsOptions().getScaleModeCallback());
+	}
+
+	/**
+	 * Sets the element directions callback, to enable panning over a scale for that axis (regardless of mode).
+	 * 
+	 * @param modeCallback the element directions callback
+	 */
+	public final void setScaleMode(ModeCallback modeCallback) {
+		SCALE_MODE_PROPERTY_HANDLER.setCallback(this, ZoomPlugin.ID, modeCallback, scaleModeCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the element directions callback, to enable panning over a scale for that axis (regardless of mode).
+	 * 
+	 * @param modeCallback the element directions callback
+	 */
+	public final void setScaleMode(NativeCallback modeCallback) {
+		// resets callback
+		setScaleMode((ModeCallback) null);
+		// stores value
+		setValue(Property.SCALE_MODE, modeCallback);
+	}
+
+	// FIXME
 
 	/**
 	 * Returns the element (panning or zooming) directions callback, to set the mode at runtime, which of the enabled zooming directions should only be available when the mouse

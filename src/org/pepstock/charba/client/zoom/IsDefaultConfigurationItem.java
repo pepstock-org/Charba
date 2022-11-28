@@ -40,6 +40,15 @@ interface IsDefaultConfigurationItem {
 	}
 
 	/**
+	 * Returns panning over a scale for that axis (regardless of mode).
+	 * 
+	 * @return panning over a scale for that axis (regardless of mode).
+	 */
+	default Mode getScaleMode() {
+		return AbstractConfigurationItem.DEFAULT_SCALE_MODE;
+	}
+
+	/**
 	 * Returns which of the enabled zooming directions should only be available when the mouse cursor is over one of scale.
 	 * 
 	 * @return which of the enabled zooming directions should only be available when the mouse cursor is over one of scale
@@ -54,6 +63,15 @@ interface IsDefaultConfigurationItem {
 	 * @return the element (panning or zooming) directions callback
 	 */
 	default ModeCallback getModeCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the element directions callback, to enable panning over a scale for that axis (regardless of mode).
+	 * 
+	 * @return the element directions callback
+	 */
+	default ModeCallback getScaleModeCallback() {
 		return null;
 	}
 
