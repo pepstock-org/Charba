@@ -306,7 +306,11 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `scaleMode` option to the zoom plugin configuration.
  * add `drawTime` option to `Drag` option of the zoom plugin configuration.
  * add `zoomRect` methods to zoom programmatically in the zoom plugin.
-  
+
+### Development
+
+ * change dependency for Google Closure Compiler, version [v20221102](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20221102).
+
 License
 -------
 
