@@ -293,7 +293,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import CHART.JS ANNOTATION plugin version [v2.1.0](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.1.0).
  * import CHART.JS ZOOM plugin version [v2.0.0](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v2.0.0).
  * import CHART.JS LUXON adapter version [v1.3.0](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v1.3.0).
- * import LUXON datetime library version [v3.1.0](https://github.com/moment/luxon/releases/tag/3.1.0).
+ * import LUXON datetime library version [v3.1.1](https://github.com/moment/luxon/releases/tag/3.1.1).
  * enable `Zoom` plugin use for sankey and treemap charts. 
  * enable `Annotation` plugin use for matrix charts.
  * add `treeLeafKey` and `borderRadius` option to TreeMapDataset class.

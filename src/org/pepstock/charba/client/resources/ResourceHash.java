@@ -49,11 +49,11 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
-	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1028281),
+	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1028287),
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */
-	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1371077),
+	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1371089),
 	/**
 	 * Hash item for 'LuxonAdapterResource' class.
 	 */
@@ -61,7 +61,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'LuxonLibraryResource' class.
 	 */
-	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 15937627),
+	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 15946530),
 	/**
 	 * Hash item for 'MatrixControllerResource' class.
 	 */
