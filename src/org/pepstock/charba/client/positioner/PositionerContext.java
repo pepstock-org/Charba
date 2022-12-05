@@ -34,7 +34,7 @@ public final class PositionerContext extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		CHART("_chart");
+		CHART("chart");
 
 		// name value of property
 		private final String value;

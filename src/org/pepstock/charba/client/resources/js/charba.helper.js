@@ -334,7 +334,7 @@ CharbaJsPositionerHelper.unregister = function(name) {
 CharbaJsPositionerHelper.invoke = function(name, context, elements, eventPoint) {
   const positioners = Chart.Tooltip.positioners;
   if (positioners[name]  != 'undefined'){
-    const tooltip = context._chart.tooltip;
+    const tooltip = context.chart.tooltip;
     const result = positioners[name].apply(tooltip, Array.of(elements, eventPoint));
     if (typeof result === 'object') {
       return result;
