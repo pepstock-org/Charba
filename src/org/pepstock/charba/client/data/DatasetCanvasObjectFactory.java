@@ -34,6 +34,7 @@ import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.utils.Console;
 
 /**
  * Utility class which creates a canvas gradient and pattern java script objects using a Charba gradient or pattern.<br>
@@ -167,6 +168,9 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			// CHART
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
+
+			Console.log(datasetItem.getController());
+
 			if (datasetItem != null && Undefined.isNot(datasetItem.getController().getInnerRadius()) && Undefined.isNot(datasetItem.getController().getOuterRadius())) {
 				// manages radius by chart node
 				manageRadiusByChartNode(chart, datasetItem, datasetIndex, index, radius);
@@ -192,31 +196,46 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	 * @param radius radius instance to be updated
 	 */
 	private void manageRadiusByChartNode(IsChart chart, DatasetItem node, int datasetIndex, int index, Radius radius) {
+		// stores values
+		final double inner = node.getController().getInnerRadius();
+		final double outer = node.getController().getOuterRadius();
 		// gets dataset item
 		DatasetItem datasetItem = chart.getDatasetItem(datasetIndex);
 		// checks if datasetIndex is consistent
 		if (datasetItem != null && index < datasetItem.getElements().size() && index >= 0) {
 			ChartElement element = datasetItem.getElements().get(index);
 			// checks if chart is circular or not
-			if (element instanceof ArcElement) {
-				// casts to arc
-				ArcElement item = (ArcElement) element;
-				// uses the inner radius
-				radius.setInner(Math.max(item.getInnerRadius(), node.getController().getInnerRadius()));
-				// uses the outer radius
-				radius.setOuter(Math.max(item.getOuterRadius(), node.getController().getOuterRadius()));
-			} else {
-				// uses the inner radius
-				radius.setInner(node.getController().getInnerRadius());
-				// uses the outer radius
-				radius.setOuter(node.getController().getOuterRadius());
+			if (element instanceof ArcElement && updateRadiusByArcElement((ArcElement) element, radius, inner, outer)) {
+				// if here, inner radius has been updated
+				return;
 			}
-		} else {
-			// uses the inner radius
-			radius.setInner(node.getController().getInnerRadius());
-			// uses the outer radius
-			radius.setOuter(node.getController().getOuterRadius());
 		}
+		// uses the inner radius
+		radius.setInner(inner);
+		// uses the outer radius
+		radius.setOuter(outer);
+	}
+
+	/**
+	 * Checks if arc element has got the inner and outer radius and updates
+	 * 
+	 * @param element arc element to check
+	 * @param radius radius instance to update
+	 * @param inner controller inner radius
+	 * @param outer controller outer radius
+	 * @return <code>true</code> if the radius has been updated
+	 */
+	private boolean updateRadiusByArcElement(ArcElement element, Radius radius, double inner, double outer) {
+		if (Undefined.isNot(element.getInnerRadius()) && Undefined.isNot(element.getOuterRadius())) {
+			// uses the inner radius
+			radius.setInner(Math.max(element.getInnerRadius(), inner));
+			// uses the outer radius
+			radius.setOuter(Math.max(element.getOuterRadius(), outer));
+			// updated!
+			return true;
+		}
+		// not updated
+		return false;
 	}
 
 }
