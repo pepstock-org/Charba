@@ -34,7 +34,6 @@ import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.utils.Console;
 
 /**
  * Utility class which creates a canvas gradient and pattern java script objects using a Charba gradient or pattern.<br>
@@ -168,9 +167,6 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			// CHART
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
-
-			Console.log(datasetItem.getController());
-
 			if (datasetItem != null && Undefined.isNot(datasetItem.getController().getInnerRadius()) && Undefined.isNot(datasetItem.getController().getOuterRadius())) {
 				// manages radius by chart node
 				manageRadiusByChartNode(chart, datasetItem, datasetIndex, index, radius);
