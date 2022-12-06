@@ -26,8 +26,6 @@ import org.pepstock.charba.client.enums.TimeUnit;
  */
 public class DefaultTime implements IsDefaultTime {
 
-	private static final double DEFAULT_STEP_SIZE = 1D;
-
 	/**
 	 * To avoid any instantiation
 	 */
@@ -73,16 +71,6 @@ public class DefaultTime implements IsDefaultTime {
 	@Override
 	public TimeUnit getUnit() {
 		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getStepSize()
-	 */
-	@Override
-	public double getStepSize() {
-		return DEFAULT_STEP_SIZE;
 	}
 
 	/*

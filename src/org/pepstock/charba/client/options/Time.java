@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -44,7 +43,6 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 		ROUND("round"),
 		TOOLTIP_FORMAT("tooltipFormat"),
 		UNIT("unit"),
-		STEP_SIZE("stepSize"),
 		MIN_UNIT("minUnit");
 
 		// name value of property
@@ -218,25 +216,6 @@ public final class Time extends AbstractModel<AbstractScale, IsDefaultTime> impl
 		}
 		// returns the value
 		return getValue(Property.UNIT, TimeUnit.values(), getDefaultValues().getUnit());
-	}
-
-	/**
-	 * The number of units between grid.
-	 * 
-	 * @param stepSize number of units between grid.
-	 */
-	public void setStepSize(double stepSize) {
-		setValueAndAddToParent(Property.STEP_SIZE, Checker.positiveOrDefault(stepSize, getDefaultValues().getStepSize()));
-	}
-
-	/**
-	 * The number of units between grid.
-	 * 
-	 * @return number of units between grid.
-	 */
-	@Override
-	public double getStepSize() {
-		return getValue(Property.STEP_SIZE, getDefaultValues().getStepSize());
 	}
 
 	/**

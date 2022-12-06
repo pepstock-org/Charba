@@ -139,24 +139,6 @@ public class Time extends AxisContainer {
 	}
 
 	/**
-	 * The number of units between grid.
-	 * 
-	 * @param stepSize The number of units between grid.
-	 */
-	public void setStepSize(double stepSize) {
-		getAxis().getScale().getTime().setStepSize(stepSize);
-	}
-
-	/**
-	 * The number of units between grid.
-	 * 
-	 * @return The number of units between grid.
-	 */
-	public double getStepSize() {
-		return getAxis().getScale().getTime().getStepSize();
-	}
-
-	/**
 	 * The minimum display format to be used for a time unit.
 	 * 
 	 * @param unit The minimum display format to be used for a time unit.

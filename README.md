@@ -281,6 +281,10 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
 
+### Breaking changes
+
+ * remove `stepSize` option from `Time` configuration and options class. Use `stepSize` option in the `Ticks` configuration and options. 
+
 ### Features
 
  * import CHART.JS [version 4.0.1](https://github.com/chartjs/Chart.js/releases/tag/v4.0.1). 

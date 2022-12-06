@@ -54,13 +54,6 @@ public interface IsDefaultTime {
 	TimeUnit getUnit();
 
 	/**
-	 * The number of units between grid.
-	 * 
-	 * @return The number of units between grid.
-	 */
-	double getStepSize();
-
-	/**
 	 * The minimum display format to be used for a time unit.
 	 * 
 	 * @return The minimum display format to be used for a time unit.

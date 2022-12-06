@@ -15,7 +15,15 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
+import org.pepstock.charba.client.callbacks.StepSizeCallback;
 import org.pepstock.charba.client.callbacks.TimeTickCallback;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.TickSource;
 
 /**
@@ -26,6 +34,46 @@ import org.pepstock.charba.client.enums.TickSource;
  *
  */
 public class CartesianTimeTick extends CartesianTick {
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the step size function
+	private final CallbackProxy<ProxyDoubleCallback> stepSizeCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// step size callback instance
+	private StepSizeCallback stepSizeCallback = null;
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		STEP_SIZE("stepSize");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use in the native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
+	}
 
 	// handler for callback for category axis
 	private final TimeTickHandler tickHandler;
@@ -39,6 +87,12 @@ public class CartesianTimeTick extends CartesianTick {
 		super(axis);
 		// creates handler
 		this.tickHandler = new TimeTickHandler(axis, this);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		this.stepSizeCallbackProxy
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getStepSizeCallback(), getAxis().getDefaultValues().getTicks().getStepSize(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+
 	}
 
 	/**
@@ -57,6 +111,60 @@ public class CartesianTimeTick extends CartesianTick {
 	 */
 	public TickSource getSource() {
 		return getConfiguration().getSource();
+	}
+
+	/**
+	 * Sets the user defined fixed step size for the scale.
+	 * 
+	 * @param stepSize user defined fixed step size for the scale.
+	 */
+	public void setStepSize(double stepSize) {
+		// resets callback
+		setStepSize((StepSizeCallback) null);
+		// stores value
+		getConfiguration().setStepSize(stepSize);
+	}
+
+	/**
+	 * Returns the user defined fixed step size for the scale.
+	 * 
+	 * @return user defined fixed step size for the scale.
+	 */
+	public double getStepSize() {
+		return getConfiguration().getStepSize();
+	}
+
+	/**
+	 * Sets the stepSize callback instance.
+	 * 
+	 * @param stepSizeCallback the stepSize callback instance
+	 */
+	public void setStepSize(StepSizeCallback stepSizeCallback) {
+		// stores callback
+		this.stepSizeCallback = stepSizeCallback;
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.STEP_SIZE, stepSizeCallback, stepSizeCallbackProxy);
+	}
+
+	/**
+	 * Returns the stepSize callback instance.
+	 * 
+	 * @return the stepSize callback instance
+	 */
+	public StepSizeCallback getStepSizeCallback() {
+		return stepSizeCallback;
+	}
+
+	/**
+	 * Sets the stepSize callback instance.
+	 * 
+	 * @param stepSizeCallback the stepSize callback instance
+	 */
+	public void setStepSize(NativeCallback stepSizeCallback) {
+		// resets callback
+		setStepSize((StepSizeCallback) null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getTicks(), Property.STEP_SIZE, stepSizeCallback);
 	}
 
 	/**

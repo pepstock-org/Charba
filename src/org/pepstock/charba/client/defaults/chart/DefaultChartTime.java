@@ -81,16 +81,6 @@ public final class DefaultChartTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getStepSize()
-	 */
-	@Override
-	public double getStepSize() {
-		return time.getStepSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getMinUnit()
 	 */
 	@Override
