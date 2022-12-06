@@ -19,7 +19,6 @@ import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
-import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.enums.TextAlign;
 
 /**
@@ -138,22 +137,18 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	}
 
 	/**
-	 * Sets if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT} and
-	 * {@link PointStyle#LINE}).
+	 * Sets if <code>usePointStyle</code> is true, the width of the point style used for the legend.
 	 * 
-	 * @param pointStyleWidth if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT}
-	 *            and {@link PointStyle#LINE}).
+	 * @param pointStyleWidth if <code>usePointStyle</code> is true, the width of the point style used for the legend.
 	 */
 	public void setPointStyleWidth(double pointStyleWidth) {
 		setValueAndAddToParent(Property.POINT_STYLE_WIDTH, pointStyleWidth);
 	}
 
 	/**
-	 * Returns if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT} and
-	 * {@link PointStyle#LINE}).
+	 * Returns if <code>usePointStyle</code> is true, the width of the point style used for the legend.
 	 * 
-	 * @return if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT} and
-	 *         {@link PointStyle#LINE}).
+	 * @return if <code>usePointStyle</code> is true, the width of the point style used for the legend.
 	 */
 	@Override
 	public double getPointStyleWidth() {
