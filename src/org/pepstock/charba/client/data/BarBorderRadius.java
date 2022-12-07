@@ -25,6 +25,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.items.IsBorderRadius;
 
 /**
  * Defines the border radius for BAR data set element, applies the corner radius to all corners of the rectangle (topLeft, topRight, bottomLeft, bottomRight).
@@ -32,7 +33,7 @@ import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BarBorderRadius extends AbstractBarBorderItem {
+public final class BarBorderRadius extends AbstractBarBorderItem implements IsBorderRadius {
 
 	/**
 	 * Public factory to create a border radius object from a native object.
@@ -138,6 +139,7 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	 * 
 	 * @return the border radius for top-left corner of the rectangle, in pixel.
 	 */
+	@Override
 	public int getTopLeft() {
 		return getValue(Property.TOP_LEFT, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
 	}
@@ -156,6 +158,7 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	 * 
 	 * @return the border radius for top-right corner of the rectangle, in pixel.
 	 */
+	@Override
 	public int getTopRight() {
 		return getValue(Property.TOP_RIGHT, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
 	}
@@ -174,6 +177,7 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	 * 
 	 * @return the border radius for bottom-left corner of the rectangle, in pixel.
 	 */
+	@Override
 	public int getBottomLeft() {
 		return getValue(Property.BOTTOM_LEFT, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
 	}
@@ -192,6 +196,7 @@ public final class BarBorderRadius extends AbstractBarBorderItem {
 	 * 
 	 * @return the border radius for bottom-right corner of the rectangle, in pixel.
 	 */
+	@Override
 	public int getBottomRight() {
 		return getValue(Property.BOTTOM_RIGHT, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
 	}

@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BorderRadiusItem extends AbstractNode {
+public final class BorderRadiusItem extends AbstractNode implements IsBorderRadius {
 
 	/**
 	 * Name of properties of native object.
@@ -100,6 +100,7 @@ public final class BorderRadiusItem extends AbstractNode {
 	 * 
 	 * @return the border radius for top-left corner of the rectangle, in pixel.
 	 */
+	@Override
 	public int getTopLeft() {
 		return getValue(Property.TOP_LEFT, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
 	}
@@ -118,6 +119,7 @@ public final class BorderRadiusItem extends AbstractNode {
 	 * 
 	 * @return the border radius for top-right corner of the rectangle, in pixel.
 	 */
+	@Override
 	public int getTopRight() {
 		return getValue(Property.TOP_RIGHT, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
 	}
@@ -136,6 +138,7 @@ public final class BorderRadiusItem extends AbstractNode {
 	 * 
 	 * @return the border radius for bottom-left corner of the rectangle, in pixel.
 	 */
+	@Override
 	public int getBottomLeft() {
 		return getValue(Property.BOTTOM_LEFT, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
 	}
@@ -154,8 +157,26 @@ public final class BorderRadiusItem extends AbstractNode {
 	 * 
 	 * @return the border radius for bottom-right corner of the rectangle, in pixel.
 	 */
+	@Override
 	public int getBottomRight() {
 		return getValue(Property.BOTTOM_RIGHT, Defaults.get().getGlobal().getElements().getBar().getBorderRadius());
+	}
+
+	/**
+	 * Returns <code>true</code> if the item contains defined values.
+	 * 
+	 * @return <code>true</code> if the item contains defined values.
+	 */
+	public boolean isConsistent() {
+		// scans keys
+		for (Key key : Property.values()) {
+			// if one is not present
+			// returns false
+			if (has(key)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

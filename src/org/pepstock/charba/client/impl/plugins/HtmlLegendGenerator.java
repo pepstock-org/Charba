@@ -34,6 +34,7 @@ import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.configuration.Legend;
 import org.pepstock.charba.client.configuration.LegendLabels;
 import org.pepstock.charba.client.configuration.LegendTitle;
+import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.dom.DOMBuilder;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
@@ -55,6 +56,7 @@ import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.IsBorderRadius;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.PointElement;
@@ -395,8 +397,17 @@ final class HtmlLegendGenerator {
 		color.getStyle().setHeight(Unit.PX.format(height));
 		// checks if must apply point style
 		if (!legendLabels.isUsePointStyle()) {
-			// applies border radius
-			colorCell.getStyle().setBorderRadius(Utilities.toCSSBorderRadiusProperty(item.getBorderRadius()));
+			// checks if border radius must be used
+			if (legendLabels.isUseBorderRadius()) {
+				// gets radius of item
+				IsBorderRadius itemRadius = item.getBorderRadius();
+				// checks if consistent
+				if (!item.getBorderRadius().isConsistent()) {
+					itemRadius = new BarBorderRadius(legendLabels.getBorderRadius());
+				}
+				// applies border radius
+				colorCell.getStyle().setBorderRadius(Utilities.toCSSBorderRadiusProperty(itemRadius));
+			}
 			// applies the background color
 			applyBackgroundColor(chart, item, color, width, height);
 			// applies the border width

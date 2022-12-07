@@ -40,7 +40,7 @@ import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.Repetition;
 import org.pepstock.charba.client.dom.enums.Unit;
-import org.pepstock.charba.client.items.BorderRadiusItem;
+import org.pepstock.charba.client.items.IsBorderRadius;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -209,7 +209,7 @@ public final class Utilities {
 	 * @param borderRadius border radius item to use
 	 * @return the border radius string to use in the canvas object or in DOM element.
 	 */
-	public static String toCSSBorderRadiusProperty(BorderRadiusItem borderRadius) {
+	public static String toCSSBorderRadiusProperty(IsBorderRadius borderRadius) {
 		// checks if argument is consistent
 		if (borderRadius != null) {
 			// creates string builder
