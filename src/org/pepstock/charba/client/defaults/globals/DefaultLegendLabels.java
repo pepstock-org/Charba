@@ -40,6 +40,10 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 
 	private static final double DEFAULT_POINT_STYLE_WIDTH = Undefined.DOUBLE;
 
+	private static final boolean DEFAULT_USE_BORDER_RADIUS = false;
+
+	private static final int DEFAULT_BORDER_RADIUS = 0;
+
 	private final DefaultRoutedFont font = new DefaultRoutedFont();
 
 	/**
@@ -167,6 +171,26 @@ public final class DefaultLegendLabels implements IsDefaultLegendLabels {
 	@Override
 	public TextAlign getTextAlign() {
 		return TextAlign.CENTER;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#isUseBorderRadius()
+	 */
+	@Override
+	public boolean isUseBorderRadius() {
+		return DEFAULT_USE_BORDER_RADIUS;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getBorderRadius()
+	 */
+	@Override
+	public int getBorderRadius() {
+		return DEFAULT_BORDER_RADIUS;
 	}
 
 }

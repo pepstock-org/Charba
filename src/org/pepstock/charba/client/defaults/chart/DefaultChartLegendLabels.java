@@ -161,4 +161,23 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 		return labels.getTextAlign();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#isUseBorderRadius()
+	 */
+	@Override
+	public boolean isUseBorderRadius() {
+		return labels.isUseBorderRadius();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getBorderRadius()
+	 */
+	@Override
+	public int getBorderRadius() {
+		return labels.getBorderRadius();
+	}
 }

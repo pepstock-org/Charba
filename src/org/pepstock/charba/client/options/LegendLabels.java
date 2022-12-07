@@ -33,9 +33,11 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	 */
 	private enum Property implements Key
 	{
+		BORDER_RADIUS("borderRadius"),
 		PADDING("padding"),
 		POINT_STYLE_WIDTH("pointStyleWidth"),
 		TEXT_ALIGN("textAlign"),
+		USE_BORDER_RADIUS("useBorderRadius"),
 		USE_POINT_STYLE("usePointStyle");
 
 		// name value of property
@@ -193,6 +195,44 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 	@Override
 	public TextAlign getTextAlign() {
 		return getValue(Property.TEXT_ALIGN, TextAlign.values(), getDefaultValues().getTextAlign());
+	}
+
+	/**
+	 * Returns if label border radius will match corresponding borderRadius.
+	 * 
+	 * @return if label border radius will match corresponding borderRadius.
+	 */
+	@Override
+	public boolean isUseBorderRadius() {
+		return getValue(Property.USE_BORDER_RADIUS, getDefaultValues().isUseBorderRadius());
+	}
+
+	/**
+	 * Sets if label border radius will match corresponding borderRadius.
+	 * 
+	 * @param useRadius if label border radius will match corresponding borderRadius.
+	 */
+	public void setUseBorderRadius(boolean useRadius) {
+		setValueAndAddToParent(Property.USE_BORDER_RADIUS, useRadius);
+	}
+
+	/**
+	 * Sets the border radius.
+	 * 
+	 * @param radius the border radius.
+	 */
+	public void setBorderRadius(int radius) {
+		setValueAndAddToParent(Property.BORDER_RADIUS, Checker.positiveOrZero(radius));
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	@Override
+	public int getBorderRadius() {
+		return getValue(Property.BORDER_RADIUS, getDefaultValues().getBorderRadius());
 	}
 
 }

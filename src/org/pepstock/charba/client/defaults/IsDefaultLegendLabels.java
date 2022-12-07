@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.enums.TextAlign;
 
 /**
@@ -34,11 +33,9 @@ public interface IsDefaultLegendLabels extends IsDefaultBoxHandler, IsDefaultPoi
 	boolean isUsePointStyle();
 
 	/**
-	 * Returns if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT} and
-	 * {@link PointStyle#LINE}).
+	 * Returns if <code>usePointStyle</code> is true, the width of the point style used for the legend.
 	 * 
-	 * @return if <code>usePointStyle</code> is true, the width of the point style used for the legend (only for {@link PointStyle#CIRCLE}, {@link PointStyle#RECT} and
-	 *         {@link PointStyle#LINE}).
+	 * @return if <code>usePointStyle</code> is true, the width of the point style used for the legend.
 	 */
 	double getPointStyleWidth();
 
@@ -55,5 +52,19 @@ public interface IsDefaultLegendLabels extends IsDefaultBoxHandler, IsDefaultPoi
 	 * @return the horizontal alignment of the label text.
 	 */
 	TextAlign getTextAlign();
+
+	/**
+	 * Returns if label border radius will match corresponding border radius.
+	 * 
+	 * @return if label border radius will match corresponding border radius.
+	 */
+	boolean isUseBorderRadius();
+
+	/**
+	 * Returns the the border radius to use on the legend.
+	 * 
+	 * @return the the border radius to use on the legend
+	 */
+	int getBorderRadius();
 
 }

@@ -433,6 +433,46 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 	}
 
 	/**
+	 * Returns if label border radius will match corresponding borderRadius.
+	 * 
+	 * @return if label border radius will match corresponding borderRadius.
+	 */
+	public boolean isUseBorderRadius() {
+		return getConfiguration().getLegend().getLabels().isUseBorderRadius();
+	}
+
+	/**
+	 * Sets if label border radius will match corresponding borderRadius.
+	 * 
+	 * @param useRadius if label border radius will match corresponding borderRadius.
+	 */
+	public void setUseBorderRadius(boolean useRadius) {
+		getConfiguration().getLegend().getLabels().setUseBorderRadius(useRadius);
+	}
+
+	/**
+	 * Sets the border radius.
+	 * 
+	 * @param radius the border radius.
+	 */
+	public void setBorderRadius(int radius) {
+		getConfiguration().getLegend().getLabels().setBorderRadius(radius);
+	}
+
+	/**
+	 * Returns the border radius (in pixels).
+	 * 
+	 * @return the border radius (in pixels).
+	 */
+	public int getBorderRadius() {
+		return getConfiguration().getLegend().getLabels().getBorderRadius();
+	}
+
+	// --------------------------
+	// CALLBACKS
+	// --------------------------
+
+	/**
 	 * Returns the user filter callback instance.
 	 * 
 	 * @return the user filter callback instance
