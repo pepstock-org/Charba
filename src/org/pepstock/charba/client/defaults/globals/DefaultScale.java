@@ -21,6 +21,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
 import org.pepstock.charba.client.defaults.IsDefaultGrid;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
+import org.pepstock.charba.client.defaults.IsDefaultScaleBorder;
 import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
@@ -74,11 +75,13 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private static final boolean DEFAULT_OFFSET_AFTER_AUTOSKIP = false;
 
+	private final DefaultGrid grid;
+
 	private final DefaultAngleLines angleLines = new DefaultAngleLines();
 
-	private final DefaultGrid grid = new DefaultGrid();
-
 	private final DefaultPointLabels pointLabels = new DefaultPointLabels();
+
+	private final DefaultScaleBorder border = new DefaultScaleBorder();
 
 	private final DefaultScaleTitle title = new DefaultScaleTitle();
 
@@ -92,7 +95,17 @@ public final class DefaultScale implements IsDefaultScale {
 	 * To avoid any instantiation
 	 */
 	DefaultScale() {
-		// do nothing
+		this.grid = new DefaultGrid(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getBorder()
+	 */
+	@Override
+	public IsDefaultScaleBorder getBorder() {
+		return border;
 	}
 
 	/*

@@ -34,6 +34,13 @@ public interface IsDefaultScale {
 	IsDefaultScaleTitle getTitle();
 
 	/**
+	 * Returns the border defaults.
+	 * 
+	 * @return the border defaults.
+	 */
+	IsDefaultScaleBorder getBorder();
+
+	/**
 	 * Returns the ticks defaults.
 	 * 
 	 * @return the ticks defaults.

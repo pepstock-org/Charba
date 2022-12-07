@@ -65,6 +65,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 		WEIGHT("weight"),
 		TICKS("ticks"),
 		BACKGROUND_COLOR("backgroundColor"),
+		BORDER("border"),
 		// cartesian
 		BOUNDS("bounds"),
 		POSITION("position"),
@@ -126,6 +127,8 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 
 	private final ScaleTitle title;
 
+	private final ScaleBorder border;
+
 	private final AngleLines angleLines;
 
 	private final PointLabels pointLabels;
@@ -146,6 +149,7 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	protected AbstractScale(IsDefaultScale defaultValues, NativeObject nativeObject) {
 		super(null, null, defaultValues, nativeObject);
 		// gets all sub elements
+		this.border = new ScaleBorder(this, Property.BORDER, getDefaultValues().getBorder(), getValue(Property.BORDER));
 		this.angleLines = new AngleLines(this, Property.ANGLE_LINES, getDefaultValues().getAngleLines(), getValue(Property.ANGLE_LINES));
 		this.grid = new Grid(this, Property.GRID, getDefaultValues().getGrid(), getValue(Property.GRID));
 		this.pointLabels = new PointLabels(this, Property.POINT_LABELS, getDefaultValues().getPointLabels(), getValue(Property.POINT_LABELS));
@@ -165,6 +169,16 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	@Override
 	public final LabelsHandler getLabelsHandler() {
 		return labelsHandler;
+	}
+
+	/**
+	 * Returns the scale border element.
+	 * 
+	 * @return the scale border element
+	 */
+	@Override
+	public final ScaleBorder getBorder() {
+		return border;
 	}
 
 	/**

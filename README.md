@@ -283,11 +283,18 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Breaking changes
 
- * remove `stepSize` option from `Time` configuration and options class. Use `stepSize` option in the `Ticks` configuration and options. 
+ * remove `stepSize` option from `Time` configuration and options class. Use `stepSize` option in the `Ticks` configuration and options.
+ * remove `drawBorder` option from `Grid` configuration and options. Use `display` option in the `border` object in the axes or scales configuration. 
+ * remove `borderWidth` option from `Grid` configuration and options. Use `width` option in the `border` object in the axes or scales configuration. 
+ * remove `borderColor` option from `Grid` configuration and options. Use `color` option in the `border` object in the axes or scales configuration. 
+ * remove `borderDash` option from `Grid` configuration and options. Use `dash` option in the `border` object in the axes or scales configuration. 
+ * remove `borderDashOffset` option from `Grid` configuration and options. Use `dashOffset` option in the `border` object in the axes or scales configuration. 
+ * change `z` option default value of `Grid` options from `0` to `-1`. 
 
 ### Features
 
- * import CHART.JS [version 4.0.1](https://github.com/chartjs/Chart.js/releases/tag/v4.0.1). 
+ * import CHART.JS [version 4.0.1](https://github.com/chartjs/Chart.js/releases/tag/v4.0.1).
+ * add `border` object option to axes or scales configuration in order to manage the options for the border that run perpendicular to the axis.
 
 License
 -------

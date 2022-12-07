@@ -50,6 +50,7 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 	 */
 	private enum Property implements Key
 	{
+		BORDER("border"),
 		START_ANGLE("startAngle");
 
 		// name value of property
@@ -85,6 +86,8 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 	// sub elements of axis
 	private final Grid grid;
 
+	private final AxisBorder border;
+
 	private final RadialLinearTick ticks;
 
 	private final RadialAngleLines angleLines;
@@ -117,6 +120,7 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 		// initialize sub elements
 		this.pointLabels = new RadialPointLabels(this);
 		this.grid = new Grid(this);
+		this.border = new AxisBorder(this);
 		this.ticks = new RadialLinearTick(this);
 		this.angleLines = new RadialAngleLines(this);
 		// creates internal handlers
@@ -166,6 +170,15 @@ public class RadialAxis extends Axis implements IsLinearAxis {
 	 */
 	public RadialLinearTick getTicks() {
 		return ticks;
+	}
+
+	/**
+	 * Returns the border element.
+	 * 
+	 * @return the border
+	 */
+	public AxisBorder getBorder() {
+		return border;
 	}
 
 	/**

@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import java.util.List;
+
 /**
  * Interface to define angle lines defaults.
  * 
@@ -29,4 +31,17 @@ public interface IsDefaultAngleLines extends IsDefaultScaleLines {
 	 */
 	boolean isDisplay();
 
+	/**
+	 * Returns the line dash pattern offset.
+	 * 
+	 * @return Offset for line dashes.
+	 */
+	double getBorderDashOffset();
+
+	/**
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking lines
+	 */
+	List<Integer> getBorderDash();
 }

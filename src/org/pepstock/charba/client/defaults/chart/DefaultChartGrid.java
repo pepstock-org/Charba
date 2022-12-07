@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import java.util.List;
-
 import org.pepstock.charba.client.defaults.IsDefaultGrid;
 import org.pepstock.charba.client.options.Grid;
 
@@ -61,51 +59,11 @@ public final class DefaultChartGrid implements IsDefaultGrid {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getBorderDashOffset()
-	 */
-	@Override
-	public double getBorderDashOffset() {
-		return grid.getBorderDashOffset();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getBorderWidth()
-	 */
-	@Override
-	public int getBorderWidth() {
-		return grid.getBorderWidth();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getBorderColorAsString()
-	 */
-	@Override
-	public String getBorderColorAsString() {
-		return grid.getBorderColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#getLineWidth()
 	 */
 	@Override
 	public int getLineWidth() {
 		return grid.getLineWidth();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultGrid#isDrawBorder()
-	 */
-	@Override
-	public boolean isDrawBorder() {
-		return grid.isDrawBorder();
 	}
 
 	/*
@@ -175,7 +133,7 @@ public final class DefaultChartGrid implements IsDefaultGrid {
 	 */
 	@Override
 	public double getTickBorderDashOffset() {
-		return grid.getBorderDashOffset();
+		return grid.getTickBorderDashOffset();
 	}
 
 	/*
@@ -196,16 +154,6 @@ public final class DefaultChartGrid implements IsDefaultGrid {
 	@Override
 	public int getTickWidth() {
 		return grid.getTickWidth();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLines#getBorderDash()
-	 */
-	@Override
-	public List<Integer> getBorderDash() {
-		return grid.getBorderDash();
 	}
 
 }

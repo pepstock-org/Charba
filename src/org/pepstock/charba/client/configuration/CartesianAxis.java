@@ -43,12 +43,13 @@ import org.pepstock.charba.client.options.ScaleId;
  * These axes are know as 'cartesian axes'.<br>
  * Axes that follow a cartesian grid are known as 'Cartesian Axes'.<br>
  * Cartesian axes are used for line, bar, and bubble charts.<br>
- * Four cartesian axes are included by default.<br>
+ * Five cartesian axes are included by default.<br>
  * <ul>
  * <li>linear
  * <li>logarithmic
  * <li>category
  * <li>time
+ * <li>timeseries
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
@@ -128,6 +129,8 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
 	private final Grid grid;
 
+	private final AxisBorder border;
+
 	private final CartesianScaleTitle title;
 
 	/**
@@ -148,6 +151,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		Checker.assertCheck(!AxisKind.R.equals(kind), "The axis kind is invalid. It must not be " + AxisKind.R.value());
 		// sets to the objects
 		grid = new Grid(this);
+		border = new AxisBorder(this);
 		title = new CartesianScaleTitle(this);
 		// -------------------------------------------------
 		// -- SET CALLBACKS to PROXIES x AXIS PROPERTIES ---
@@ -189,6 +193,15 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 */
 	public Grid getGrid() {
 		return grid;
+	}
+
+	/**
+	 * Returns the border element.
+	 * 
+	 * @return the border
+	 */
+	public AxisBorder getBorder() {
+		return border;
 	}
 
 	/**

@@ -15,12 +15,9 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
-import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableIntegerChecker;
@@ -48,15 +45,11 @@ abstract class AbstractScaleLines extends AxisContainer {
 	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the line width function
 	private final CallbackProxy<ProxyIntegerCallback> lineWidthCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the border dash offset function
-	private final CallbackProxy<ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// color callback instance
 	private ColorCallback<ScaleContext> colorCallback = null;
 	// line width callback instance
 	private WidthCallback<ScaleContext> lineWidthCallback = null;
-	// border dashoffset callback instance
-	private BorderDashOffsetCallback<ScaleContext> borderDashOffsetCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -64,8 +57,7 @@ abstract class AbstractScaleLines extends AxisContainer {
 	private enum Property implements Key
 	{
 		COLOR("color"),
-		LINE_WIDTH("lineWidth"),
-		BORDER_DASH_OFFSET("borderDashOffset");
+		LINE_WIDTH("lineWidth");
 
 		// name value of property
 		private final String value;
@@ -108,9 +100,6 @@ abstract class AbstractScaleLines extends AxisContainer {
 		this.colorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(getAxis().createContext(context), getColorCallback(), defaultValues.getColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
 		this.lineWidthCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getLineWidthCallback(), defaultValues.getLineWidth(), ScriptableIntegerChecker.POSITIVE_OR_DEFAULT).intValue());
-		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashOffsetCallbackProxy
-				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(getAxis().createContext(context), getBorderDashOffsetCallback(), defaultValues.getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 	}
 
 	/**
@@ -184,39 +173,6 @@ abstract class AbstractScaleLines extends AxisContainer {
 		setLineWidth((WidthCallback<ScaleContext>) null);
 		// stores and manages callback
 		getAxis().setCallback(checkAndGet(), Property.LINE_WIDTH, lineWidthCallback);
-	}
-
-	/**
-	 * Returns the border dash offset callback instance.
-	 * 
-	 * @return the border dash offset callback instance
-	 */
-	public BorderDashOffsetCallback<ScaleContext> getBorderDashOffsetCallback() {
-		return borderDashOffsetCallback;
-	}
-
-	/**
-	 * Sets the border dash offset callback instance.
-	 * 
-	 * @param borderDashOffsetCallback the border dash offset callback instance
-	 */
-	public void setBorderDashOffset(BorderDashOffsetCallback<ScaleContext> borderDashOffsetCallback) {
-		// stores callback
-		this.borderDashOffsetCallback = borderDashOffsetCallback;
-		// stores and manages callback
-		getAxis().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallback, borderDashOffsetCallbackProxy);
-	}
-
-	/**
-	 * Sets the border dash offset callback instance.
-	 * 
-	 * @param borderDashOffsetCallback the border dash offset callback instance
-	 */
-	public void setBorderDashOffset(NativeCallback borderDashOffsetCallback) {
-		// resets callback
-		setBorderDashOffset((BorderDashOffsetCallback<ScaleContext>) null);
-		// stores and manages callback
-		getAxis().setCallback(checkAndGet(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallback);
 	}
 
 	/**

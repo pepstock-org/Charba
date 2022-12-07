@@ -22,7 +22,9 @@ import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
+import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.IsColor;
@@ -47,16 +49,21 @@ public class RadialAngleLines extends AbstractScaleLines {
 	// ---------------------------
 	// callback proxy to invoke the border dash function
 	private final CallbackProxy<ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border dash offset function
+	private final CallbackProxy<ProxyDoubleCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border dashoffset callback instance
 	private BorderDashCallback<ScaleContext> borderDashCallback = null;
+	// border dashoffset callback instance
+	private BorderDashOffsetCallback<ScaleContext> borderDashOffsetCallback = null;
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		BORDER_DASH("borderDash");
+		BORDER_DASH("borderDash"),
+		BORDER_DASH_OFFSET("borderDashOffset");
 
 		// name value of property
 		private final String value;
@@ -91,6 +98,9 @@ public class RadialAngleLines extends AbstractScaleLines {
 		super(axis, axis.getDefaultValues().getAngleLines());
 		// sets function to proxy callback in order to invoke the java interface
 		this.borderDashCallbackProxy.setCallback(context -> onBorderDash(getAxis().createContext(context), getBorderDashCallback(), getAxis().getDefaultValues().getAngleLines().getBorderDash()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.borderDashOffsetCallbackProxy.setCallback(context -> ScriptableUtil
+				.getOptionValueAsNumber(getAxis().createContext(context), getBorderDashOffsetCallback(), getAxis().getDefaultValues().getAngleLines().getBorderDashOffset(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 	}
 
 	/*
@@ -226,6 +236,10 @@ public class RadialAngleLines extends AbstractScaleLines {
 		return getAxis().getScale().getAngleLines().getBorderDashOffset();
 	}
 
+	// ------------------
+	// CALLBACKS
+	// ------------------
+
 	/**
 	 * Returns the border dash callback when element is hovered, if set, otherwise <code>null</code>.
 	 * 
@@ -258,6 +272,43 @@ public class RadialAngleLines extends AbstractScaleLines {
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getAngleLines(), Property.BORDER_DASH, borderDashCallback);
 	}
+
+	/**
+	 * Returns the border dash offset callback instance.
+	 * 
+	 * @return the border dash offset callback instance
+	 */
+	public BorderDashOffsetCallback<ScaleContext> getBorderDashOffsetCallback() {
+		return borderDashOffsetCallback;
+	}
+
+	/**
+	 * Sets the border dash offset callback instance.
+	 * 
+	 * @param borderDashOffsetCallback the border dash offset callback instance
+	 */
+	public void setBorderDashOffset(BorderDashOffsetCallback<ScaleContext> borderDashOffsetCallback) {
+		// stores callback
+		this.borderDashOffsetCallback = borderDashOffsetCallback;
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getAngleLines(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallback, borderDashOffsetCallbackProxy);
+	}
+
+	/**
+	 * Sets the border dash offset callback instance.
+	 * 
+	 * @param borderDashOffsetCallback the border dash offset callback instance
+	 */
+	public void setBorderDashOffset(NativeCallback borderDashOffsetCallback) {
+		// resets callback
+		setBorderDashOffset((BorderDashOffsetCallback<ScaleContext>) null);
+		// stores and manages callback
+		getAxis().setCallback(getAxis().getConfiguration().getAngleLines(), Property.BORDER_DASH_OFFSET, borderDashOffsetCallback);
+	}
+
+	// ------------------------
+	// INTERNALS
+	// ------------------------
 
 	/**
 	 * Returns an array of integer when the callback has been activated.

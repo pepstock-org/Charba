@@ -20,6 +20,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
 import org.pepstock.charba.client.defaults.IsDefaultGrid;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
+import org.pepstock.charba.client.defaults.IsDefaultScaleBorder;
 import org.pepstock.charba.client.defaults.IsDefaultScaleTitle;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
@@ -36,6 +37,8 @@ import org.pepstock.charba.client.options.Scale;
 public final class DefaultChartScale implements IsDefaultScale {
 
 	private final Scale scale;
+
+	private final DefaultChartScaleBorder border;
 
 	private final DefaultChartScaleTitle title;
 
@@ -59,6 +62,7 @@ public final class DefaultChartScale implements IsDefaultScale {
 	public DefaultChartScale(Scale scale) {
 		this.scale = scale;
 		// creates sub elements
+		this.border = new DefaultChartScaleBorder(scale.getBorder());
 		this.title = new DefaultChartScaleTitle(scale.getTitle());
 		this.ticks = new DefaultChartTicks(scale.getTicks());
 		this.grid = new DefaultChartGrid(scale.getGrid());
@@ -66,6 +70,16 @@ public final class DefaultChartScale implements IsDefaultScale {
 		this.pointLabels = new DefaultChartPointLabels(scale.getPointLabels());
 		this.time = new DefaultChartTime(scale.getTime());
 		this.adapters = new DefaultChartAdapters(scale.getAdapters());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getBorder()
+	 */
+	@Override
+	public IsDefaultScaleBorder getBorder() {
+		return border;
 	}
 
 	/*

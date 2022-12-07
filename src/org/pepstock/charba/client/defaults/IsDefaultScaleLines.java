@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import java.util.List;
-
 /**
  * Interface to define scale lines defaults.<br>
  * THis is used by {@link IsDefaultAngleLines} and {@link IsDefaultGrid}.
@@ -38,19 +36,5 @@ public interface IsDefaultScaleLines {
 	 * @return width of lines.
 	 */
 	int getLineWidth();
-
-	/**
-	 * Returns the line dash pattern offset.
-	 * 
-	 * @return Offset for line dashes.
-	 */
-	double getBorderDashOffset();
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines
-	 */
-	List<Integer> getBorderDash();
 
 }

@@ -17,13 +17,11 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.callbacks.BorderDashCallback;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
@@ -32,8 +30,6 @@ import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.WidthCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
-import org.pepstock.charba.client.commons.Array;
-import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -49,16 +45,13 @@ public class Grid extends AbstractScaleLines {
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// callback proxy to invoke the border dash function
-	private final CallbackProxy<ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the tick color function
 	private final CallbackProxy<ProxyObjectCallback> tickColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the tick width function
 	private final CallbackProxy<ProxyIntegerCallback> tickWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the tick border dash offset function
 	private final CallbackProxy<ProxyDoubleCallback> tickBorderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
-	// border dash callback instance
-	private BorderDashCallback<ScaleContext> borderDashCallback = null;
+
 	// color callback instance
 	private ColorCallback<ScaleContext> tickColorCallback = null;
 	// tick line width callback instance
@@ -71,7 +64,6 @@ public class Grid extends AbstractScaleLines {
 	 */
 	private enum Property implements Key
 	{
-		BORDER_DASH("borderDash"),
 		TICK_BORDER_DASH_OFFSET("tickBorderDashOffset"),
 		TICK_COLOR("tickColor"),
 		TICK_WIDTH("tickWidth");
@@ -110,9 +102,6 @@ public class Grid extends AbstractScaleLines {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		// sets function to proxy callback in order to invoke the java interface
-		this.borderDashCallbackProxy.setCallback(context -> onBorderDash(getAxis().createContext(context), getBorderDashCallback()));
-
 		// sets function to proxy callback in order to invoke the java interface
 		this.tickColorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(getAxis().createContext(context), getTickColorCallback(), getAxis().getDefaultValues().getGrid().getTickColorAsString(), false));
 		// sets function to proxy callback in order to invoke the java interface
@@ -218,114 +207,6 @@ public class Grid extends AbstractScaleLines {
 	}
 
 	/**
-	 * If set, used as the color of the border line.<br>
-	 * If unset, the first color option is resolved and used.
-	 * 
-	 * @param color if set, used as the color of the border line.<br>
-	 *            If unset, the first color option is resolved and used.
-	 */
-	public void setBorderColor(IsColor color) {
-		getAxis().getScale().getGrid().setBorderColor(color);
-	}
-
-	/**
-	 * If set, used as the color of the border line.<br>
-	 * If unset, the first color option is resolved and used.
-	 * 
-	 * @param color if set, used as the color of the border line.<br>
-	 *            If unset, the first color option is resolved and used.
-	 */
-	public void setBorderColor(String color) {
-		getAxis().getScale().getGrid().setBorderColor(color);
-	}
-
-	/**
-	 * If set, used as the color of the border line.<br>
-	 * If unset, the first color option is resolved and used.
-	 * 
-	 * @return if set, used as the color of the border line.<br>
-	 *         If unset, the first color option is resolved and used.
-	 */
-	public String getBorderColorAsString() {
-		return getAxis().getScale().getGrid().getBorderColorAsString();
-	}
-
-	/**
-	 * If set, used as the color of the border line.<br>
-	 * If unset, the first color option is resolved and used.
-	 * 
-	 * @return if set, used as the color of the border line.<br>
-	 *         If unset, the first color option is resolved and used.
-	 */
-	public IsColor getBorderColor() {
-		return getAxis().getScale().getGrid().getBorderColor();
-	}
-
-	/**
-	 * If set, used as the width of the border line.<br>
-	 * If unset, the first lineWidth option is resolved and used.
-	 * 
-	 * @param borderWidth if set, used as the width of the border line.<br>
-	 *            If unset, the first lineWidth option is resolved and used.
-	 */
-	public void setBorderWidth(int borderWidth) {
-		getAxis().getScale().getGrid().setBorderWidth(borderWidth);
-	}
-
-	/**
-	 * If set, used as the width of the border line.<br>
-	 * If unset, the first lineWidth option is resolved and used.
-	 * 
-	 * @return if set, used as the width of the border line.<br>
-	 *         If unset, the first lineWidth option is resolved and used.
-	 */
-	public int getBorderWidth() {
-		return getAxis().getScale().getGrid().getBorderWidth();
-	}
-
-	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @param borderDash the line dash pattern used when stroking lines
-	 */
-	public void setBorderDash(int... borderDash) {
-		// resets callback
-		setBorderDash((BorderDashCallback<ScaleContext>) null);
-		// stores value
-		getAxis().getScale().getGrid().setBorderDash(borderDash);
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines.
-	 */
-	public List<Integer> getBorderDash() {
-		return getAxis().getScale().getGrid().getBorderDash();
-	}
-
-	/**
-	 * Sets the line dash pattern offset.
-	 * 
-	 * @param borderDashOffset Offset for line dashes.
-	 */
-	public void setBorderDashOffset(double borderDashOffset) {
-		// reset callback if there is
-		setBorderDashOffset((BorderDashOffsetCallback<ScaleContext>) null);
-		// stores value
-		getAxis().getScale().getGrid().setBorderDashOffset(borderDashOffset);
-	}
-
-	/**
-	 * Returns the line dash pattern offset.
-	 * 
-	 * @return Offset for line dashes.
-	 */
-	public double getBorderDashOffset() {
-		return getAxis().getScale().getGrid().getBorderDashOffset();
-	}
-
-	/**
 	 * Sets the stroke widths of grid.
 	 * 
 	 * @param lineWidth stroke widths of grid.
@@ -344,24 +225,6 @@ public class Grid extends AbstractScaleLines {
 	 */
 	public List<Integer> getLineWidth() {
 		return getAxis().getScale().getGrid().getLinesWidth();
-	}
-
-	/***
-	 * If true, draw border at the edge between the axis and the chart area.
-	 * 
-	 * @param drawBorder If true, draw border at the edge between the axis and the chart area.
-	 */
-	public void setDrawBorder(boolean drawBorder) {
-		getAxis().getScale().getGrid().setDrawBorder(drawBorder);
-	}
-
-	/**
-	 * If true, draw border at the edge between the axis and the chart area.
-	 * 
-	 * @return If true, draw border at the edge between the axis and the chart area.
-	 */
-	public boolean isDrawBorder() {
-		return getAxis().getScale().getGrid().isDrawBorder();
 	}
 
 	/**
@@ -443,10 +306,10 @@ public class Grid extends AbstractScaleLines {
 	}
 
 	/**
-	 * Sets z-index of grid line layer.<br>
+	 * Sets z-index of grid layer.<br>
 	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @param z z-index of grid line layer.<br>
+	 * @param z z-index of grid layer.<br>
 	 *            Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
@@ -454,10 +317,10 @@ public class Grid extends AbstractScaleLines {
 	}
 
 	/**
-	 * Returns z-index of grid line layer.<br>
+	 * Returns z-index of grid layer.<br>
 	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @return z-index of grid line layer.<br>
+	 * @return z-index of grid layer.<br>
 	 *         Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public int getZ() {
@@ -689,57 +552,6 @@ public class Grid extends AbstractScaleLines {
 		setTickBorderDashOffset((BorderDashOffsetCallback<ScaleContext>) null);
 		// stores and manages callback
 		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.TICK_BORDER_DASH_OFFSET, tickBorderDashOffsetCallback);
-	}
-
-	/**
-	 * Returns the border dash callback instance.
-	 * 
-	 * @return the border dash callback instance
-	 */
-	public BorderDashCallback<ScaleContext> getBorderDashCallback() {
-		return borderDashCallback;
-	}
-
-	/**
-	 * Sets the border dash callback instance.
-	 * 
-	 * @param borderDashCallback the border dash callback instance
-	 */
-	public void setBorderDash(BorderDashCallback<ScaleContext> borderDashCallback) {
-		// stores callback
-		this.borderDashCallback = borderDashCallback;
-		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.BORDER_DASH, borderDashCallback, borderDashCallbackProxy);
-	}
-
-	/**
-	 * Sets the border dash callback instance.
-	 * 
-	 * @param borderDashCallback the border dash callback instance
-	 */
-	public void setBorderDash(NativeCallback borderDashCallback) {
-		// resets callback
-		setBorderDash((BorderDashCallback<ScaleContext>) null);
-		// stores and manages callback
-		getAxis().setCallback(getAxis().getConfiguration().getGrid(), Property.BORDER_DASH, borderDashCallback);
-	}
-
-	// -----------------
-	// INTERNALS
-	// -----------------
-
-	/**
-	 * Returns an array of integer when the callback has been activated.
-	 * 
-	 * @param context native object as context.
-	 * @param callback border dash callback instance
-	 * @return an array of integer
-	 */
-	private Array onBorderDash(ScaleContext context, BorderDashCallback<ScaleContext> callback) {
-		// gets value
-		List<Integer> result = ScriptableUtil.getOptionValue(context, callback);
-		// default result
-		return ArrayInteger.fromOrEmpty(result);
 	}
 
 }

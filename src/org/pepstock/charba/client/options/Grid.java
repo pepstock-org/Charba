@@ -36,7 +36,7 @@ import org.pepstock.charba.client.defaults.IsDefaultGrid;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsDefaultGrid {
+public final class Grid extends AbstractModel<AbstractScale, IsDefaultGrid> implements IsDefaultGrid {
 
 	/**
 	 * Name of properties of native object.
@@ -45,10 +45,7 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	{
 		CIRCULAR("circular"),
 		COLOR("color"),
-		BORDER_COLOR("borderColor"),
-		BORDER_WIDTH("borderWidth"),
 		DISPLAY("display"),
-		DRAW_BORDER("drawBorder"),
 		DRAW_ON_CHART_AREA("drawOnChartArea"),
 		DRAW_TICKS("drawTicks"),
 		LINE_WIDTH("lineWidth"),
@@ -96,26 +93,6 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 		super(scale, childKey, defaultValues, nativeObject);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractScaleLine#getDefaultBorderDashOffset()
-	 */
-	@Override
-	double getDefaultBorderDashOffset() {
-		return getDefaultValues().getBorderDashOffset();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractScaleLines#getDefaultBorderDash()
-	 */
-	@Override
-	List<Integer> getDefaultBorderDash() {
-		return getDefaultValues().getBorderDash();
-	}
-
 	/**
 	 * If <code>false</code>, do not display grid for this axis.
 	 * 
@@ -152,51 +129,6 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	@Override
 	public boolean isCircular() {
 		return getValue(Property.CIRCULAR, getDefaultValues().isCircular());
-	}
-
-	/**
-	 * If set, used as the color of the border line.<br>
-	 * If unset, the first color option is resolved and used.
-	 * 
-	 * @param color if set, used as the color of the border line.<br>
-	 *            If unset, the first color option is resolved and used.
-	 */
-	public void setBorderColor(IsColor color) {
-		setBorderColor(IsColor.checkAndGetValue(color));
-	}
-
-	/**
-	 * If set, used as the color of the border line.<br>
-	 * If unset, the first color option is resolved and used.
-	 * 
-	 * @param color if set, used as the color of the border line.<br>
-	 *            If unset, the first color option is resolved and used.
-	 */
-	public void setBorderColor(String color) {
-		setValueAndAddToParent(Property.BORDER_COLOR, color);
-	}
-
-	/**
-	 * If set, used as the color of the border line.<br>
-	 * If unset, the first color option is resolved and used.
-	 * 
-	 * @return if set, used as the color of the border line.<br>
-	 *         If unset, the first color option is resolved and used.
-	 */
-	@Override
-	public String getBorderColorAsString() {
-		return getValue(Property.BORDER_COLOR, getDefaultValues().getBorderColorAsString());
-	}
-
-	/**
-	 * If set, used as the color of the border line.<br>
-	 * If unset, the first color option is resolved and used.
-	 * 
-	 * @return if set, used as the color of the border line.<br>
-	 *         If unset, the first color option is resolved and used.
-	 */
-	public IsColor getBorderColor() {
-		return ColorBuilder.parse(getBorderColorAsString());
 	}
 
 	/**
@@ -273,25 +205,6 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	}
 
 	/**
-	 * If set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
-	 * 
-	 * @param borderWidth if set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
-	 */
-	public void setBorderWidth(int borderWidth) {
-		setValueAndAddToParent(Property.BORDER_WIDTH, Checker.positiveOrZero(borderWidth));
-	}
-
-	/**
-	 * If set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
-	 * 
-	 * @return if set, used as the width of the border line. If unset, the first lineWidth option is resolved and used.
-	 */
-	@Override
-	public int getBorderWidth() {
-		return getValue(Property.BORDER_WIDTH, getDefaultValues().getBorderWidth());
-	}
-
-	/**
 	 * Sets the stroke widths of grid.
 	 * 
 	 * @param lineWidth stroke widths of grid.
@@ -321,25 +234,6 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	public List<Integer> getLinesWidth() {
 		ArrayInteger array = getValueOrArray(Property.LINE_WIDTH, getDefaultValues().getLineWidth());
 		return ArrayListHelper.list(array);
-	}
-
-	/***
-	 * If <code>true</code>, draw border at the edge between the axis and the chart area.
-	 * 
-	 * @param drawBorder If <code>true</code>, draw border at the edge between the axis and the chart area.
-	 */
-	public void setDrawBorder(boolean drawBorder) {
-		setValueAndAddToParent(Property.DRAW_BORDER, drawBorder);
-	}
-
-	/**
-	 * If <code>true</code>, draw border at the edge between the axis and the chart area.
-	 * 
-	 * @return If <code>true</code>, draw border at the edge between the axis and the chart area.
-	 */
-	@Override
-	public boolean isDrawBorder() {
-		return getValue(Property.DRAW_BORDER, getDefaultValues().isDrawBorder());
 	}
 
 	/**
@@ -422,10 +316,10 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	}
 
 	/**
-	 * Sets z-index of gridline layer.<br>
+	 * Sets z-index of grid layer.<br>
 	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @param z z-index of gridline layer.<br>
+	 * @param z z-index of grid layer.<br>
 	 *            Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
@@ -433,10 +327,10 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	}
 
 	/**
-	 * Returns z-index of grid line layer.<br>
+	 * Returns z-index of grid layer.<br>
 	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @return z-index of grid line layer.<br>
+	 * @return z-index of grid layer.<br>
 	 *         Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	@Override
@@ -467,7 +361,7 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 		}
 		// if here, the property is missing
 		// then returns the default
-		return getBorderDash();
+		return getParent().getBorder().getDash();
 	}
 
 	/**
@@ -486,7 +380,7 @@ public final class Grid extends AbstractScaleLines<IsDefaultGrid> implements IsD
 	 */
 	@Override
 	public final double getTickBorderDashOffset() {
-		return getValue(Property.TICK_BORDER_DASH_OFFSET, getDefaultBorderDashOffset());
+		return getValue(Property.TICK_BORDER_DASH_OFFSET, getParent().getBorder().getDashOffset());
 	}
 
 	/**
