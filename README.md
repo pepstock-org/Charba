@@ -296,6 +296,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import CHART.JS [version 4.0.1](https://github.com/chartjs/Chart.js/releases/tag/v4.0.1).
  * import CHART.JS TREEMAP controller version [v2.2.0](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.2.0).
  * import CHART.JS DATALABELS plugin version [v2.2.0](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v2.2.0).
+ * import CHART.JS GRADIENT plugin version [v0.6.1](https://github.com/kurkle/chartjs-plugin-gradient/releases/tag/v0.6.1).
  * add `border` object option to axes or scales configuration in order to manage the options for the border that run perpendicular to the axis.
  * add `borderRadius` and `useBorderRadius` options to `LegendLabels` configuration and options classes.
 

@@ -45,7 +45,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'GradientPluginResource' class.
 	 */
-	GRADIENT_PLUGIN_RESOURCE(ResourceName.GRADIENT_PLUGIN, 389641),
+	GRADIENT_PLUGIN_RESOURCE(ResourceName.GRADIENT_PLUGIN, 389642),
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
