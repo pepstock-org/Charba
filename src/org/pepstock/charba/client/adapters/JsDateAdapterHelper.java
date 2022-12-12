@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.adapters;
 
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -61,6 +63,23 @@ final class JsDateAdapterHelper {
 	 */
 	NativeDateAdapter create(DateAdapterOptions options) {
 		return NativeJsDateAdapterHelper.create(options.nativeObject());
+	}
+
+	/**
+	 * Returns a date adapter instance, using the scale passed as argument.
+	 * 
+	 * @param scale date adapter of {@link ScaleItem}.
+	 * @return a date adapter instance.
+	 */
+	NativeDateAdapter retrieve(NativeObject scale) {
+		// checks if scale instance is consistent
+		if (scale != null) {
+			// retrieves adapter
+			return NativeJsDateAdapterHelper.retrieve(scale);
+		}
+		// inconsistent scale
+		// then returns null
+		return null;
 	}
 
 	/**

@@ -20,11 +20,14 @@ import java.util.Date;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.ImmutableDate;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.IsoWeekDay;
 import org.pepstock.charba.client.enums.TimeUnit;
+import org.pepstock.charba.client.items.ItemsEnvelop;
+import org.pepstock.charba.client.items.ScaleItem;
 
 /**
  * Maps a date adapter provided by CHART.JS to manage time series.<br>
@@ -48,7 +51,7 @@ public final class DateAdapter {
 	 * Creates a date adapter without any options.
 	 */
 	public DateAdapter() {
-		this(null);
+		this((DateAdapterOptions) null);
 	}
 
 	/**
@@ -66,6 +69,33 @@ public final class DateAdapter {
 		}
 		// creates a native date adapter
 		this.nativeAdapter = JsDateAdapterHelper.get().create(this.options);
+		// gets formats
+		// in order to store them once
+		NativeObject nativeObject = nativeAdapter.formats();
+		// checks if formats are consistent
+		Checker.checkIfValid(nativeObject, "Default formats");
+		// creates and stores the formats
+		this.formats = new DateAdapterFormats(nativeObject);
+	}
+
+	/**
+	 * Creates a date adapter using the options passed as argument and the envelop where {@link ScaleItem} is stored.
+	 * 
+	 * @param envelop envelop where {@link ScaleItem} is stored
+	 * @param options date adapter options
+	 */
+	public DateAdapter(ItemsEnvelop<NativeObject> envelop, DateAdapterOptions options) {
+		// checks if envelop is consistent
+		Envelop.checkIfValid(envelop);
+		// checks if argument is consistent
+		this.options = options != null ? options : new DateAdapterOptions();
+		// checks if options has got the locale
+		if (!this.options.hasLocale()) {
+			// if not, it sets the locale from defaults
+			this.options.setLocale(Defaults.get().getGlobal().getLocale());
+		}
+		// creates a native date adapter
+		this.nativeAdapter = JsDateAdapterHelper.get().retrieve(envelop.getContent());
 		// gets formats
 		// in order to store them once
 		NativeObject nativeObject = nativeAdapter.formats();

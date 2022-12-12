@@ -18,14 +18,19 @@ package org.pepstock.charba.client.configuration;
 import java.util.Date;
 import java.util.List;
 
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.adapters.DateAdapter;
 import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.TimeTickCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
+import org.pepstock.charba.client.commons.Constants;
+import org.pepstock.charba.client.commons.ImmutableDate;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.enums.TimeUnit;
+import org.pepstock.charba.client.items.ScaleItem;
 import org.pepstock.charba.client.items.ScaleTickItem;
 
 import jsinterop.annotations.JsFunction;
@@ -56,12 +61,12 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 		/**
 		 * Method of function to be called when tick is created.
 		 * 
-		 * @param label label of tick, passed by CHART.JS formatting the date by the selected {@link TimeUnit} and its display format.
+		 * @param value the timestamp of the thick
 		 * @param index index of tick
 		 * @param values array with all values of ticks
 		 * @return string or array of strings representation of tick
 		 */
-		Object call(String label, int index, ArrayObject values);
+		Object call(double value, int index, ArrayObject values);
 	}
 
 	// ---------------------------
@@ -69,6 +74,9 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 	// ---------------------------
 	// callback proxy to invoke the tick function
 	private final CallbackProxy<ProxyTickCallback> tickCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// gets date adapter
+	private final CartesianTimeAxis timeAxis;
 
 	/**
 	 * Builds the object storing the axis instance and options element, based on different kind of axis.
@@ -78,24 +86,51 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 	 */
 	TimeTickHandler(Axis axis, CartesianTimeTick configuration) {
 		super(axis, configuration);
+		// checks if axis is a time or time series axis
+		if (axis instanceof CartesianTimeAxis) {
+			// stores time axis
+			this.timeAxis = (CartesianTimeAxis) axis;
+		} else {
+			// oif here is an error
+			throw new IllegalArgumentException("Axis is not a time or time series instance");
+		}
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		tickCallbackProxy.setCallback((label, index, values) -> {
-			// checks if user callback is consistent
+		tickCallbackProxy.setCallback((value, index, values) -> {
+			// get default label
+			String label = Constants.EMPTY_STRING;
+			// gets chart
+			IsChart chart = getAxis().getChart();
+			// gets scale item
+			ScaleItem scale = chart.getNode().getScales().getItems().get(getAxis().getId().value());
+			// checks if scale is consistent
+			if (scale != null) {
+				// creates adapter
+				DateAdapter adapter = scale.getDateAdapter();
+				// get time unit
+				TimeUnit unit = timeAxis.getTime().getUnit();
+				// gets format
+				String format = timeAxis.getTime().getDisplayFormats().getDisplayFormat(unit);
+				// stores default label
+				label = adapter.format((long) value, format);
+			}
+			// checks if callback is consistent
 			if (getCallback() != null) {
 				// gets as list the tick items
 				List<ScaleTickItem> tickItems = getTickItems(values);
 				// retrieves the current value
-				Date value = tickItems.get(index).getValueAsDate();
+				Date dtValue = new ImmutableDate((long) value);
 				// then calls user callback
-				Object result = getCallback().onCallback(getAxis(), value, label, index, getTickItems(values));
+				Object result = getCallback().onCallback(getAxis(), dtValue, label, index, tickItems);
 				// parses and returns the result
 				return ScriptableUtil.parseCallbackResult(result, label);
 			}
-			// default tick is the tick label
+			// scale is inconsistent
+			// then returns an empty string
 			return label;
 		});
+
 	}
 
 	/**

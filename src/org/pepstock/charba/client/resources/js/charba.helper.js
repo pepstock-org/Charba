@@ -859,6 +859,15 @@ CharbaJsDateAdapterHelper.create = function(options) {
   return new Chart._adapters._date(options);
 }
 /**
+ * Returns a date adapter instance.
+ *
+ * @param {Object} scale scale item where the adpater is stored 
+ * @return {CharbaChartAdaptersDate} a date adapter instance
+ */
+CharbaJsDateAdapterHelper.retrieve = function(scale) {
+  return scale._adapter;
+}
+/**
  * Returns a epoch time  in millisecond by a year and a weeks.
  *
  * @param {number} weekYear the year of the week

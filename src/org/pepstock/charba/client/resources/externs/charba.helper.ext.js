@@ -455,6 +455,11 @@ function CharbaJsDateAdapterHelper() {};
  */
 CharbaJsDateAdapterHelper.create = function(object) {};
 /**
+ * @param {Object} scale
+ * @return {CharbaChartAdaptersDate}
+ */
+CharbaJsDateAdapterHelper.retrieve = function(scale) {};
+/**
  * @param {number} weekYear
  * @param {number} weekNumber
  * @param {Object} options

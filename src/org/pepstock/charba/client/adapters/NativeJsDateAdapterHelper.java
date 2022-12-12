@@ -17,6 +17,7 @@ package org.pepstock.charba.client.adapters;
 
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.items.ScaleItem;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -45,6 +46,14 @@ final class NativeJsDateAdapterHelper {
 	 * @return a date adapter instance.
 	 */
 	static native NativeDateAdapter create(NativeObject options);
+
+	/**
+	 * Returns a date adapter instance, using the {@link ScaleItem} passed as argument.
+	 * 
+	 * @param scale scale item, {@link ScaleItem}.
+	 * @return a date adapter instance.
+	 */
+	static native NativeDateAdapter retrieve(NativeObject scale);
 
 	/**
 	 * Returns a epoch time in millisecond by a year and a weeks.

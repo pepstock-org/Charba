@@ -289,7 +289,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `borderColor` option from `Grid` configuration and options. Use `color` option in the `border` object in the axes or scales configuration. 
  * remove `borderDash` option from `Grid` configuration and options. Use `dash` option in the `border` object in the axes or scales configuration. 
  * remove `borderDashOffset` option from `Grid` configuration and options. Use `dashOffset` option in the `border` object in the axes or scales configuration. 
- * change `z` option default value of `Grid` options from `0` to `-1`. 
+ * change `z` option default value of `Grid` options from `0` to `-1`.
 
 ### Features
 

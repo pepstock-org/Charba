@@ -21,6 +21,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.adapters.DateAdapter;
+import org.pepstock.charba.client.adapters.DateAdapterOptions;
 import org.pepstock.charba.client.callbacks.CallbacksEnvelop;
 import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -35,9 +37,13 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.AxisType;
-import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.configuration.CartesianTimeAxis;
+import org.pepstock.charba.client.configuration.ConfigurationOptions;
+import org.pepstock.charba.client.configuration.ScalesOptions;
 import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.ChartAxisType;
@@ -75,6 +81,8 @@ public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 		OPTIONS("options"),
 		// chart
 		CHART("chart"),
+		// time adapter
+		ADAPTER("_adapter"),
 		// internal key to store a unique id
 		CHARBA_ID("charbaId");
 
@@ -184,6 +192,43 @@ public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 		}
 		// otherwise if here is undefined
 		return Undefined.INTEGER;
+	}
+
+	/**
+	 * Returns the date adapter of the scale if the scale is a time or time series, otherwise new date adapter.
+	 * 
+	 * @return the date adapter of the scale if the scale is a time or time series, otherwise new date adapter
+	 */
+	public final DateAdapter getDateAdapter() {
+		// gets chart
+		IsChart chart = getChart();
+		// gets options
+		ConfigurationOptions options = chart.getOptions();
+		// checks if chart has scales
+		if (options instanceof ScalesOptions) {
+			ScalesOptions scales = (ScalesOptions) options;
+			// gets scales options
+			Axis axis = scales.getScales().getAxisById(getId());
+			// checks if time axis
+			if (axis instanceof CartesianTimeAxis) {
+				CartesianTimeAxis timeAxis = (CartesianTimeAxis) axis;
+				// gets date adapter options
+				DateAdapterOptions daOptions = timeAxis.getAdapters().getDate().getDateAdapterOptions();
+				// checks if there is a date adapter
+				if (isType(Property.ADAPTER, ObjectType.OBJECT)) {
+					// creates envelop
+					ItemsEnvelop<NativeObject> envelop = new ItemsEnvelop<NativeObject>(nativeObject());
+					// returns date adapter wrapping the scale adapter
+					return new DateAdapter(envelop, daOptions);
+				}
+				// if here, the adapter is not stored
+				// then return a adapter with options
+				return daOptions.create();
+			}
+		}
+		// if here, the adapter is not stored
+		// then return a default adapter
+		return new DateAdapter();
 	}
 
 	/**
