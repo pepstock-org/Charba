@@ -41,7 +41,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'GeoControllerResource' class.
 	 */
-	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 7571908),
+	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 7578834),
 	/**
 	 * Hash item for 'GradientPluginResource' class.
 	 */
@@ -49,7 +49,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'JsHelperResource' class.
 	 */
-	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1035726),
+	JS_HELPER_RESOURCE(ResourceName.CHARBA_HELPER, 1038587),
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */

@@ -41,7 +41,7 @@ public final class ProjectionAxis extends Axis {
 	/**
 	 * Projection axis id.
 	 */
-	public static final ScaleId ID = ScaleId.create("xy");
+	public static final ScaleId ID = ScaleId.create("projection");
 	/**
 	 * Projection axis type.
 	 */

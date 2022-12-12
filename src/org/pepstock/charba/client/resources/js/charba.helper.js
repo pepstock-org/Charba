@@ -922,7 +922,7 @@ CharbaJsGeoHelper.features = function(topojson, featureProperty) {
  */
 CharbaJsGeoHelper.projection = function(chart, latitude, longitude) {
   // projection scale is always 'xy' as id 
-  return chart.scales.xy.projection([longitude, latitude]);
+  return chart.scales.projection.projection([longitude, latitude]);
 }
 /**
  * Transforms the cooredinates of a chart, x and y, in latitude and longitude.
@@ -934,9 +934,9 @@ CharbaJsGeoHelper.projection = function(chart, latitude, longitude) {
  */
 CharbaJsGeoHelper.invert = function(chart, x, y) {
   // projection scale is always 'xy' as id 
-  const projection = chart.scales.xy.geoPath.projection();
+  const projection = chart.scales.projection.geoPath.projection();
   if (projection && typeof projection.invert === 'function') {
-    return chart.scales.xy.geoPath.projection().invert([p[0], p[1]]);
+    return chart.scales.projection.geoPath.projection().invert([p[0], p[1]]);
   }
   return null;
 }
@@ -960,7 +960,7 @@ CharbaJsGeoHelper.getColorForValue = function(chart, value) {
  */
 CharbaJsGeoHelper.getSizeForValue = function(chart, value) {
   // size scale is always 'r' as id 
-  return chart.scales.r.getSizeForValue(value);
+  return chart.scales.size.getSizeForValue(value);
 }
 /**
  * ----------------------------------------------------------------------------

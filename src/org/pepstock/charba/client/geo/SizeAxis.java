@@ -62,7 +62,7 @@ public final class SizeAxis extends CartesianLinearAxis implements IsSizeAxis {
 	/**
 	 * Size axis id.
 	 */
-	public static final ScaleId ID = ScaleId.create("r");
+	public static final ScaleId ID = ScaleId.create("size");
 
 	/**
 	 * Size axis type.
