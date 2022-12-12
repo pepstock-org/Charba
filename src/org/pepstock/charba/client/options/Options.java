@@ -152,6 +152,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	private final Filler filler;
 
+	private final AutoColors autoColors;
+
 	private final Plugins plugins;
 
 	private final Font font;
@@ -215,6 +217,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		this.tooltips = new Tooltips(plugins, DefaultPluginId.TOOLTIP, getDefaultValues().getTooltips(), plugins.getDefaultPluginOptions(DefaultPluginId.TOOLTIP));
 		this.decimation = new Decimation(plugins, DefaultPluginId.DECIMATION, getDefaultValues().getDecimation(), plugins.getDefaultPluginOptions(DefaultPluginId.DECIMATION));
 		this.filler = new Filler(plugins, DefaultPluginId.FILLER, getDefaultValues().getFiller(), plugins.getDefaultPluginOptions(DefaultPluginId.FILLER));
+		this.autoColors = new AutoColors(plugins, DefaultPluginId.COLORS, getDefaultValues(), plugins.getDefaultPluginOptions(DefaultPluginId.COLORS));
 	}
 
 	/**
@@ -688,6 +691,25 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
+	/**
+	 * Sets <code>true</code> when the auto colors plugin has been enabled and CHART.JS apply the default colors to datasets.
+	 * 
+	 * @param enabled <code>true</code> when the auto colors plugin has been enabled and CHART.JS apply the default colors to datasets
+	 */
+	public void setAutoColors(boolean enabled) {
+		autoColors.setEnabled(enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> when the auto colors plugin has been enabled and CHART.JS apply the default colors to datasets.
+	 * 
+	 * @return <code>true</code> when the auto colors plugin has been enabled and CHART.JS apply the default colors to datasets
+	 */
+	@Override
+	public boolean isAutoColors() {
+		return autoColors.isEnabled();
 	}
 
 	/**

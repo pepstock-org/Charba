@@ -26,6 +26,10 @@ import org.pepstock.charba.client.commons.Key;
 public enum DefaultPluginId implements Key
 {
 	/**
+	 * CHART.JS plugin to manage the auto colors.
+	 */
+	COLORS("colors"),
+	/**
 	 * CHART.JS plugin to manage the legend.
 	 */
 	LEGEND("legend"),

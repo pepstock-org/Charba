@@ -728,6 +728,24 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	}
 
 	/**
+	 * Sets <code>true</code> when the auto colors plugin has been enabled and CHART.JS apply the default colors to datasets.
+	 * 
+	 * @param enabled <code>true</code> when the auto colors plugin has been enabled and CHART.JS apply the default colors to datasets
+	 */
+	public void setAutoColors(boolean enabled) {
+		getConfiguration().setAutoColors(enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> when the auto colors plugin has been enabled and CHART.JS apply the default colors to datasets.
+	 * 
+	 * @return <code>true</code> when the auto colors plugin has been enabled and CHART.JS apply the default colors to datasets
+	 */
+	public boolean isAutoColors() {
+		return getConfiguration().isAutoColors();
+	}
+
+	/**
 	 * Returns the default border color to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
 	 * @return border color to use in the chart.

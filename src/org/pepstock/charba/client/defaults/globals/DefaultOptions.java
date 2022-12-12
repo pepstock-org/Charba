@@ -68,6 +68,8 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final boolean DEFAULT_DESTROY_ON_DETACH = true;
 
+	private static final boolean DEFAULT_AUTO_COLORS = true;
+
 	private static final Set<IsEvent> DEFAULT_EVENTS = Collections.unmodifiableSet(DefaultEvents.INSTANCE);
 
 	/**
@@ -175,6 +177,16 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	@Override
 	public String getBorderColorAsString() {
 		return DEFAULT_BORDER_COLOR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isAutoColors()
+	 */
+	@Override
+	public boolean isAutoColors() {
+		return DEFAULT_AUTO_COLORS;
 	}
 
 	/*

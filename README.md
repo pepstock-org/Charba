@@ -298,8 +298,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import CHART.JS GEO controller version [v4.0.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v4.0.1).  
  * import CHART.JS DATALABELS plugin version [v2.2.0](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v2.2.0).
  * import CHART.JS GRADIENT plugin version [v0.6.1](https://github.com/kurkle/chartjs-plugin-gradient/releases/tag/v0.6.1).
+ * add `autoColors` option to the configuration of the chart and to global options in order to enable `colors` plugin.
  * add `border` object option to axes or scales configuration in order to manage the options for the border that run perpendicular to the axis.
  * add `borderRadius` and `useBorderRadius` options to `LegendLabels` configuration and options classes.
+ 
 
 License
 -------

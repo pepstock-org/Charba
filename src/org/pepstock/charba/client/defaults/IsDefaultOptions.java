@@ -275,4 +275,11 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer, IsDefault
 	 */
 	boolean isDestroyOnDetach();
 
+	/**
+	 * Returns <code>true</code> when the auto colors plugin has been enabled and CHART.JS apply the default colors to datasets.
+	 * 
+	 * @return <code>true</code> when the auto colors plugin has been enabled and CHART.JS apply the default colors to datasets
+	 */
+	boolean isAutoColors();
+
 }
