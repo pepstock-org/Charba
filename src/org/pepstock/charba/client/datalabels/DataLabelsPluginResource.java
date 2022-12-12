@@ -29,7 +29,7 @@ final class DataLabelsPluginResource extends AbstractInjectableResource {
 	// encoded javascript content of chartjs-plugin-datalabels.min.js
 	private static final String[] CONTENT = {
 		"/*!",
-		" * chartjs-plugin-datalabels v2.1.0",
+		" * chartjs-plugin-datalabels v2.2.0",
 		" * https://chartjs-plugin-datalabels.netlify.app",
 		" * (c) 2017-2022 chartjs-plugin-datalabels contributors",
 		" * Released under the MIT license",
