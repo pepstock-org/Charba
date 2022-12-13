@@ -82,6 +82,8 @@ final class ColorSchemesPlugin extends CharbaPlugin<ColorSchemesOptions> {
 			// disable the canvas object handler because with color scheme
 			// you can use ONLY colors
 			chart.getData().setCanvasObjectHandling(false);
+			// disable autocolor feature based on color plugin
+			chart.getOptions().setAutoColors(false);
 			// gets the legend labels callback
 			// this is done because changing colors by plugin
 			// the legend does not change accordingly
