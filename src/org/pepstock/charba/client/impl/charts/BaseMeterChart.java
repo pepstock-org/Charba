@@ -131,6 +131,8 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		Checker.assertCheck(getOptions() instanceof MeterOptions, "Chart options are not a MeterOptions instance");
 		// cats and stores
 		options = (MeterOptions) getOptions();
+		// disable auto colors
+		options.setAutoColors(false);
 		// disables legend
 		options.getLegend().setDisplay(false);
 		// disables tooltips

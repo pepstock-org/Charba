@@ -101,6 +101,18 @@ public final class GaugeDataset extends MeterDataset {
 		super.setColor(IsColor.isConsistent(current.getColor()) ? current.getColor().toRGBA() : DefaultThreshold.NORMAL.getColor().toRGBA());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.impl.charts.MeterDataset#setMax(double)
+	 */
+	@Override
+	public void setMax(double max) {
+		super.setMax(max);
+		// recalculates the level
+		checkLevel();
+	}
+
 	/**
 	 * Returns the current threshold.
 	 * 

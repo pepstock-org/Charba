@@ -129,7 +129,7 @@ public class MeterDataset extends Dataset {
 
 	private final DescriptionLabel label;
 
-	private final double max;
+	private double max;
 
 	private double value = MINIMUM_VALUE;
 
@@ -298,6 +298,17 @@ public class MeterDataset extends Dataset {
 	 */
 	public final double getMax() {
 		return max;
+	}
+
+	/**
+	 * Sets the maximum value of chart.
+	 * 
+	 * @param max the maximum value of chart.
+	 */
+	public void setMax(double max) {
+		this.max = Math.max(max, MINIMUM_VALUE);
+		// recalculates the data of the dataset
+		setValue(this.value);
 	}
 
 	/**
