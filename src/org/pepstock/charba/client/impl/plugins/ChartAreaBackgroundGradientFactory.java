@@ -78,10 +78,10 @@ final class ChartAreaBackgroundGradientFactory extends CanvasObjectFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getCenter(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int, int)
+	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getCenter(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int)
 	 */
 	@Override
-	protected Center getCenter(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+	protected Center getCenter(IsChart chart, Gradient gradient, int datasetIndex) {
 		// IGNORE THE SCOPE of gradient
 		// ALWAYS CHART AREA
 		final Center center = new Center();
@@ -99,10 +99,10 @@ final class ChartAreaBackgroundGradientFactory extends CanvasObjectFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getRadius(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int, int)
+	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getRadius(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int)
 	 */
 	@Override
-	protected Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+	protected Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex) {
 		// by default is the center of chart area
 		final Radius radius = new Radius();
 		// gets chart area

@@ -28,9 +28,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
-import org.pepstock.charba.client.items.ArcElement;
 import org.pepstock.charba.client.items.ChartAreaNode;
-import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.items.Undefined;
@@ -101,10 +99,10 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getCenter(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int, int)
+	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getCenter(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int)
 	 */
 	@Override
-	protected Center getCenter(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+	protected Center getCenter(IsChart chart, Gradient gradient, int datasetIndex) {
 		// creates center instance to return
 		final Center center = new Center();
 		// gets chart node
@@ -135,10 +133,10 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getRadius(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int, int)
+	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getRadius(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.colors.Gradient, int)
 	 */
 	@Override
-	protected Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+	protected Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex) {
 		// creates radius instance to return
 		final Radius radius = new Radius();
 		// gets chart node
@@ -154,7 +152,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			// depending on chart type
 			if (datasetItem != null && Undefined.isNot(datasetItem.getController().getInnerRadius()) && Undefined.isNot(datasetItem.getController().getOuterRadius())) {
 				// manages radius by chart node
-				manageRadiusByChartNode(chart, datasetItem, datasetIndex, index, radius);
+				manageRadiusByChartNode(chart, datasetItem, radius);
 			} else {
 				// gets canvas
 				Canvas canvas = chart.getCanvas();
@@ -169,7 +167,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			// depending on chart type
 			if (datasetItem != null && Undefined.isNot(datasetItem.getController().getInnerRadius()) && Undefined.isNot(datasetItem.getController().getOuterRadius())) {
 				// manages radius by chart node
-				manageRadiusByChartNode(chart, datasetItem, datasetIndex, index, radius);
+				manageRadiusByChartNode(chart, datasetItem, radius);
 			} else {
 				// by default is the center of chart area
 				radius.setInner(0D);
@@ -187,51 +185,16 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance
 	 * @param node chart node instance
-	 * @param datasetIndex dataset index
-	 * @param index data index
 	 * @param radius radius instance to be updated
 	 */
-	private void manageRadiusByChartNode(IsChart chart, DatasetItem node, int datasetIndex, int index, Radius radius) {
+	private void manageRadiusByChartNode(IsChart chart, DatasetItem node, Radius radius) {
 		// stores values
 		final double inner = node.getController().getInnerRadius();
 		final double outer = node.getController().getOuterRadius();
-		// gets dataset item
-		DatasetItem datasetItem = chart.getDatasetItem(datasetIndex);
-		// checks if datasetIndex is consistent
-		if (datasetItem != null && index < datasetItem.getElements().size() && index >= 0) {
-			ChartElement element = datasetItem.getElements().get(index);
-			// checks if chart is circular or not
-			if (element instanceof ArcElement && updateRadiusByArcElement((ArcElement) element, radius, inner, outer)) {
-				// if here, inner radius has been updated
-				return;
-			}
-		}
 		// uses the inner radius
 		radius.setInner(inner);
 		// uses the outer radius
 		radius.setOuter(outer);
-	}
-
-	/**
-	 * Checks if arc element has got the inner and outer radius and updates
-	 * 
-	 * @param element arc element to check
-	 * @param radius radius instance to update
-	 * @param inner controller inner radius
-	 * @param outer controller outer radius
-	 * @return <code>true</code> if the radius has been updated
-	 */
-	private boolean updateRadiusByArcElement(ArcElement element, Radius radius, double inner, double outer) {
-		if (Undefined.isNot(element.getInnerRadius()) && Undefined.isNot(element.getOuterRadius())) {
-			// uses the inner radius
-			radius.setInner(Math.max(element.getInnerRadius(), inner));
-			// uses the outer radius
-			radius.setOuter(Math.max(element.getOuterRadius(), outer));
-			// updated!
-			return true;
-		}
-		// not updated
-		return false;
 	}
 
 }

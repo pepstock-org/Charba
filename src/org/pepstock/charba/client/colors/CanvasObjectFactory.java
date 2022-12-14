@@ -152,10 +152,9 @@ public abstract class CanvasObjectFactory {
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
 	 * @param datasetIndex data set index
-	 * @param index index of gradient related to index of data set item of whole data set
 	 * @return a canvas gradient
 	 */
-	public final CanvasGradientItem createGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+	public final CanvasGradientItem createGradient(IsChart chart, Gradient gradient, int datasetIndex) {
 		// checks if chart is consistent
 		IsChart.checkIfValid(chart);
 		// checks if gradient is consistent
@@ -189,7 +188,7 @@ public abstract class CanvasObjectFactory {
 			result = createLinearGradient(chart, gradient);
 		} else {
 			// creates a radial
-			result = createRadialGradient(chart, gradient, datasetIndex, index);
+			result = createRadialGradient(chart, gradient, datasetIndex);
 		}
 		// checks if result is consistent
 		if (result != null) {
@@ -306,10 +305,9 @@ public abstract class CanvasObjectFactory {
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
 	 * @param datasetIndex data set index
-	 * @param index index of gradient related to index of data set item of whole data set
 	 * @return a radial canvas gradient
 	 */
-	private CanvasGradientItem createRadialGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+	private CanvasGradientItem createRadialGradient(IsChart chart, Gradient gradient, int datasetIndex) {
 		// gets canvas and context 2d
 		Canvas canvas = chart.getCanvas();
 		Context2dItem context = canvas.getContext2d();
@@ -327,12 +325,12 @@ public abstract class CanvasObjectFactory {
 		double y1 = 0;
 		double r1 = 0;
 		// these are the coordinates of center and radius of scope
-		final Center center = getCenter(chart, gradient, datasetIndex, index);
+		final Center center = getCenter(chart, gradient, datasetIndex);
 		// checks if center is consistent
 		Checker.checkIfValid(center, "Center for radial gradient");
 		final double centerX = center.getX();
 		final double centerY = center.getY();
-		final Radius radius = getRadius(chart, gradient, datasetIndex, index);
+		final Radius radius = getRadius(chart, gradient, datasetIndex);
 		// checks if radius is consistent
 		Checker.checkIfValid(radius, "Radius for radial gradient");
 		final double radius0 = radius.getInner();
@@ -393,10 +391,9 @@ public abstract class CanvasObjectFactory {
 	 * @param chart chart instance
 	 * @param gradient gradient instance
 	 * @param datasetIndex data set index
-	 * @param index data index
 	 * @return the coordinates of a center of arc
 	 */
-	protected abstract Center getCenter(IsChart chart, Gradient gradient, int datasetIndex, int index);
+	protected abstract Center getCenter(IsChart chart, Gradient gradient, int datasetIndex);
 
 	/**
 	 * Returns the inner and outer radius of arc for RADIAL gradient.
@@ -404,9 +401,8 @@ public abstract class CanvasObjectFactory {
 	 * @param chart chart instance
 	 * @param gradient gradient instance
 	 * @param datasetIndex data set index
-	 * @param index data index
 	 * @return the inner and outer radius of arc
 	 */
-	protected abstract Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index);
+	protected abstract Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex);
 
 }

@@ -191,9 +191,8 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 			// calculated the maximum values
 			// to avoid undefined values
 			int datasetIndex = Math.max(0, getDatasetIndex());
-			int index = Math.max(0, getIndex());
 			// be aware that if chart is null, an exception will be throw
-			setFillStyle(DatasetCanvasObjectFactory.get().createGradient(chart, gradient, datasetIndex, index));
+			setFillStyle(DatasetCanvasObjectFactory.get().createGradient(chart, gradient, datasetIndex));
 		} else {
 			// resets the property
 			remove(LegendItem.Property.FILL_STYLE);
@@ -319,9 +318,8 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 			// calculated the maximum values
 			// to oavoid undefined values
 			int datasetIndex = Math.max(0, getDatasetIndex());
-			int index = Math.max(0, getIndex());
 			// be aware that if chart is null, an exception will be throw
-			setStrokeStyle(DatasetCanvasObjectFactory.get().createGradient(chart, gradient, datasetIndex, index));
+			setStrokeStyle(DatasetCanvasObjectFactory.get().createGradient(chart, gradient, datasetIndex));
 		} else {
 			// resets the property
 			remove(LegendItem.Property.STROKE_STYLE);

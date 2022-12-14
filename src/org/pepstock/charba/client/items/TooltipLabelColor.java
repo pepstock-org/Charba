@@ -211,9 +211,8 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 			// calculated the maximum values
 			// to avoid undefined values
 			int datasetIndex = Math.max(0, tooltipItem.getDatasetIndex());
-			int index = Math.max(0, tooltipItem.getDataIndex());
 			// be aware that if chart is null, an exception will be throw
-			setBackgroundColor(DatasetCanvasObjectFactory.get().createGradient(tooltipItem.getChart(), gradient, datasetIndex, index));
+			setBackgroundColor(DatasetCanvasObjectFactory.get().createGradient(tooltipItem.getChart(), gradient, datasetIndex));
 		} else {
 			// resets the property
 			remove(Property.BACKGROUND_COLOR);
@@ -368,9 +367,8 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 			// calculated the maximum values
 			// to avoid undefined values
 			int datasetIndex = Math.max(0, tooltipItem.getDatasetIndex());
-			int index = Math.max(0, tooltipItem.getDataIndex());
 			// be aware that if chart is null, an exception will be throw
-			setBorderColor(DatasetCanvasObjectFactory.get().createGradient(tooltipItem.getChart(), gradient, datasetIndex, index));
+			setBorderColor(DatasetCanvasObjectFactory.get().createGradient(tooltipItem.getChart(), gradient, datasetIndex));
 		} else {
 			// resets the property
 			remove(Property.BORDER_COLOR);

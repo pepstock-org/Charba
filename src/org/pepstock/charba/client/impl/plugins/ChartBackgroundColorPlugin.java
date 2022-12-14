@@ -171,7 +171,7 @@ final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDraw
 			applyBackgroundToChartElement(chart, Utilities.toCSSBackgroundProperty(options.getBackgroundColorAsPattern()));
 		} else if (ColorType.GRADIENT.equals(options.getColorType())) {
 			// creates the gradient
-			CanvasGradientItem canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, options.getBackgroundColorAsGradient(), Undefined.INTEGER, Undefined.INTEGER);
+			CanvasGradientItem canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, options.getBackgroundColorAsGradient(), Undefined.INTEGER);
 			// set fill canvas color
 			ctx.setFillGradient(canvasGradient);
 			// sets background to chart HTML element
@@ -209,7 +209,7 @@ final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDraw
 				ctx.setFillPattern(canvasPattern);
 			} else if (ColorType.GRADIENT.equals(options.getAreaColorType())) {
 				// creates the gradient
-				CanvasGradientItem canvasGradient = ChartAreaBackgroundGradientFactory.get().createGradient(chart, options.getAreaBackgroundColorAsGradient(), Undefined.INTEGER, Undefined.INTEGER);
+				CanvasGradientItem canvasGradient = ChartAreaBackgroundGradientFactory.get().createGradient(chart, options.getAreaBackgroundColorAsGradient(), Undefined.INTEGER);
 				// set fill canvas color
 				ctx.setFillGradient(canvasGradient);
 			}
