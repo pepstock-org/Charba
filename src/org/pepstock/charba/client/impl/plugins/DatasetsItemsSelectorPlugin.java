@@ -22,14 +22,20 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.configuration.BarOptions;
 import org.pepstock.charba.client.configuration.LineOptions;
 import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback;
+import org.pepstock.charba.client.dom.DOM;
 import org.pepstock.charba.client.dom.enums.CursorType;
+import org.pepstock.charba.client.dom.enums.KeyboardEventType;
+import org.pepstock.charba.client.dom.enums.KeyboardUiKey;
 import org.pepstock.charba.client.dom.enums.MouseEventType;
 import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.dom.events.NativeBaseEvent;
@@ -66,6 +72,8 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 	private final AtLeastOneDatasetHandler pluginLegendClickHandler = new AtLeastOneDatasetHandler();
 	// maps with the enablement if the plugin by chart instances
 	private final Map<String, Boolean> pluginChartEnablement = new HashMap<>();
+	// maps with the key event listener
+	private final Map<String, EscKeyEventListener> pluginKeyEventListener = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -118,6 +126,8 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 			}
 			// option instance
 			DatasetsItemsSelectorOptions pOptions = getOptions(chart);
+			// checks if the key listener must be activated
+			checkAndApplyKeyEventListener(chart, pOptions);
 			// creates the handler of selection
 			// by chart instance and the options stored in the options (if exists).
 			SelectionHandler handler = new SelectionHandler(chart, pOptions);
@@ -180,6 +190,22 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 		if (mustBeActivated(chart)) {
 			// resets configuration
 			resetPluginConfiguration(chart);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Plugin#onAfterDestroy(org.pepstock.charba.client.IsChart)
+	 */
+	@Override
+	public void onAfterDestroy(IsChart chart) {
+		// checks if chart has got already an key event listener to the DOM document
+		if (IsChart.isValid(chart) && pluginKeyEventListener.containsKey(chart.getId())) {
+			// get callback proxy
+			EscKeyEventListener keyUpCallbackProxy = pluginKeyEventListener.remove(chart.getId());
+			// adds key event to document to catch ESC key
+			DOM.getDocument().removeEventListener(KeyboardEventType.KEY_UP, keyUpCallbackProxy.getCallbackProxy().getProxy());
 		}
 	}
 
@@ -453,5 +479,78 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 		// the drawing of chart is completed and set the default cursor
 		// removing the "wait" one.
 		chart.getCanvas().getStyle().setCursorType(CursorType.DEFAULT);
+	}
+
+	/**
+	 * Checks if the key event listener must be added to DOM comunet or to remove it.
+	 * 
+	 * @param chart chart instance
+	 * @param pOptions plugin options
+	 */
+	private void checkAndApplyKeyEventListener(IsChart chart, DatasetsItemsSelectorOptions pOptions) {
+		// checks if chart has got already an ket event listener to the DOM document
+		if (!pluginKeyEventListener.containsKey(chart.getId())) {
+			// checks if the key event listener must be setup
+			if (pOptions.isEnabledClearByESC()) {
+				// creates key event listener
+				EscKeyEventListener listener = new EscKeyEventListener(chart);
+				// stores the proxy in the map
+				pluginKeyEventListener.put(chart.getId(), listener);
+				// adds key event to document to catch ESC key
+				DOM.getDocument().addEventListener(KeyboardEventType.KEY_UP, listener.getCallbackProxy().getProxy());
+			} else {
+				// removes listener
+				onAfterDestroy(chart);
+			}
+		}
+	}
+
+	/**
+	 * Event listener implementation to catch the {@link KeyboardUiKey#ESCAPE} key and then executes the reset of selection.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static final class EscKeyEventListener implements EventListenerCallback {
+
+		// callback proxy to invoke the key up function
+		private final CallbackProxy<EventListenerCallback> callbackProxy = JsHelper.get().newCallbackProxy();
+
+		private final IsChart chart;
+
+		/**
+		 * Creates the listener with the chart instance
+		 * 
+		 * @param chart chart instance
+		 */
+		private EscKeyEventListener(IsChart chart) {
+			this.chart = chart;
+			// callback of key up proxy
+			callbackProxy.setCallback(this);
+		}
+
+		/**
+		 * Returns the callback proxy.
+		 * 
+		 * @return the key up callback proxy
+		 */
+		private CallbackProxy<EventListenerCallback> getCallbackProxy() {
+			return callbackProxy;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback#call(org.pepstock.charba.client.dom.events.NativeBaseEvent)
+		 */
+		@Override
+		public void call(NativeBaseEvent event) {
+			// checks if ESC is pressed
+			if (KeyboardUiKey.ESCAPE.is(event)) {
+				// resets selection
+				DatasetsItemsSelector.get().cleanSelection(chart);
+			}
+		}
+
 	}
 }

@@ -20,6 +20,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractBaseBuilder;
 import org.pepstock.charba.client.commons.IsBuilder;
 import org.pepstock.charba.client.dom.elements.Img;
+import org.pepstock.charba.client.dom.enums.KeyboardUiKey;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.enums.Position;
@@ -85,6 +86,17 @@ public final class DatasetsItemsSelectorOptionsBuilder extends AbstractBaseBuild
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setEnabled(boolean enabled) {
 		options.setEnabled(enabled);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
+	 * Sets <code>true</code> if you want to clear selection by {@link KeyboardUiKey#ESCAPE}.
+	 * 
+	 * @param enabled <code>true</code> if you want to clear selection by {@link KeyboardUiKey#ESCAPE}.
+	 * @return builder instance
+	 */
+	public DatasetsItemsSelectorOptionsBuilder setEnabledClearByESC(boolean enabled) {
+		options.setEnabledClearByESC(enabled);
 		return IsBuilder.checkAndGetIfValid(this);
 	}
 

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.dom.enums.KeyboardUiKey;
 import org.pepstock.charba.client.enums.ModifierKey;
 import org.pepstock.charba.client.options.ScaleId;
 
@@ -42,6 +43,15 @@ interface IsDatasetsItemsSelectorDefaultOptions {
 	 */
 	default boolean isEnabled() {
 		return DatasetsItemsSelectorOptions.DEFAULT_ENABLED;
+	}
+
+	/**
+	 * Returns <code>true</code> if you want to clear selection by {@link KeyboardUiKey#ESCAPE}.
+	 * 
+	 * @return <code>true</code> if you want to clear selection by {@link KeyboardUiKey#ESCAPE}.
+	 */
+	default boolean isEnabledClearByESC() {
+		return DatasetsItemsSelectorOptions.DEFAULT_CLEAR_BY_ESC_ENABLED;
 	}
 
 	/**

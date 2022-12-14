@@ -27,6 +27,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.dom.enums.KeyboardUiKey;
 import org.pepstock.charba.client.dom.enums.MouseEventType;
 import org.pepstock.charba.client.dom.enums.TouchEventType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
@@ -46,6 +47,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * <li>the border dash
  * <li>the border dash offset
  * <li>flag to fire event on update
+ * <li>flag to activate clean selection by {@link KeyboardUiKey#ESCAPE}
  * <li>"clear" options
  * </ul>
  * 
@@ -88,6 +90,11 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 */
 	public static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
 
+	/**
+	 * Default flag option to activate clear selection by {@link KeyboardUiKey#ESCAPE}, <b>{@value DEFAULT_CLEAR_BY_ESC_ENABLED}</b>.
+	 */
+	public static final boolean DEFAULT_CLEAR_BY_ESC_ENABLED = true;
+
 	// default border color for area as string.
 	static final String DEFAULT_BORDER_COLOR_AS_STRING = DEFAULT_BORDER_COLOR.toRGBA();
 
@@ -103,6 +110,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	{
 		ENABLED("enabled"),
 		COLOR("color"),
+		CLEAR_BY_ESC_ENABLED("enabledClearByEscape"),
 		X_AXIS_ID("xAxisID"),
 		BORDER_COLOR("borderColor"),
 		BORDER_DASH("borderDash"),
@@ -242,6 +250,25 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	@Override
 	public boolean isEnabled() {
 		return getValue(Property.ENABLED, defaultOptions.isEnabled());
+	}
+
+	/**
+	 * Sets <code>true</code> if you want to clear selection by {@link KeyboardUiKey#ESCAPE}.
+	 * 
+	 * @param enabled <code>true</code> if you want to clear selection by {@link KeyboardUiKey#ESCAPE}.
+	 */
+	public void setEnabledClearByESC(boolean enabled) {
+		setValue(Property.CLEAR_BY_ESC_ENABLED, enabled);
+	}
+
+	/**
+	 * Returns <code>true</code> if you want to clear selection by {@link KeyboardUiKey#ESCAPE}.
+	 * 
+	 * @return <code>true</code> if you want to clear selection by {@link KeyboardUiKey#ESCAPE}.
+	 */
+	@Override
+	public boolean isEnabledClearByESC() {
+		return getValue(Property.CLEAR_BY_ESC_ENABLED, defaultOptions.isEnabledClearByESC());
 	}
 
 	/**
