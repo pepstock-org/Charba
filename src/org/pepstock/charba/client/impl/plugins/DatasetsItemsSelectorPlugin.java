@@ -511,7 +511,7 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static final class EscKeyEventListener implements EventListenerCallback {
+	private static final class EscKeyEventListener {
 
 		// callback proxy to invoke the key up function
 		private final CallbackProxy<EventListenerCallback> callbackProxy = JsHelper.get().newCallbackProxy();
@@ -526,7 +526,7 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 		private EscKeyEventListener(IsChart chart) {
 			this.chart = chart;
 			// callback of key up proxy
-			callbackProxy.setCallback(this);
+			callbackProxy.setCallback(this::call);
 		}
 
 		/**
@@ -538,12 +538,11 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 			return callbackProxy;
 		}
 
-		/*
-		 * (non-Javadoc)
+		/**
+		 * A function that is called whenever an event of the specified type occurs.
 		 * 
-		 * @see org.pepstock.charba.client.dom.BaseEventTarget.EventListenerCallback#call(org.pepstock.charba.client.dom.events.NativeBaseEvent)
+		 * @param event a event object describing the event that has been fired and needs to be processed.
 		 */
-		@Override
 		public void call(NativeBaseEvent event) {
 			// checks if ESC is pressed
 			if (KeyboardUiKey.ESCAPE.is(event)) {
