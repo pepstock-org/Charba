@@ -31,8 +31,8 @@ import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.MouseEventType;
-import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
+import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.enums.IndexAxis;
 import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.events.LegendClickEvent;
@@ -86,7 +86,7 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client. AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onConfigure(IsChart chart) {

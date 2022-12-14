@@ -82,7 +82,7 @@ final class HtmlLegendPlugin extends CharbaPlugin<HtmlLegendOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client. AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onConfigure(IsChart chart) {
@@ -174,7 +174,7 @@ final class HtmlLegendPlugin extends CharbaPlugin<HtmlLegendOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client. AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onAfterDraw(IsChart chart) {
