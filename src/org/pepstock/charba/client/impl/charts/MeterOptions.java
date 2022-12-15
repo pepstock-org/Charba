@@ -16,8 +16,11 @@
 package org.pepstock.charba.client.impl.charts;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.configuration.AbstractPieOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Specific options for METER chart.
@@ -27,13 +30,22 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  */
 public class MeterOptions extends AbstractPieOptions {
 
-	private static final double DEFAULT_CIRCUMFERENCE = 360;
-
-	private static final double DEFAULT_ROTATION = 0;
-
-	private static final String DEFAULT_CUTOUT_PERCENTAGE = "90%";
+	// fixes circumference
+	private static final double FIXED_CIRCUMFERENCE = 360;
+	// fixed rotation
+	private static final double FIXED_ROTATION = 0;
+	// min cutout percentage
+	static final double MINIMUM_CUTOUT_PERCENTAGE = 0.8;
+	// default cutout percentage
+	static final double DEFAULT_CUTOUT_PERCENTAGE = 0.9;
+	// max cutout percentage
+	static final double MAXIMUM_CUTOUT_PERCENTAGE = 1;
+	// default cutout percentage as string
+	static final String DEFAULT_CUTOUT_PERCENTAGE_AS_STRING = Utilities.getAsPercentage(DEFAULT_CUTOUT_PERCENTAGE, DEFAULT_CUTOUT_PERCENTAGE);
 
 	private MeterContext context = null;
+
+	private double thickness = Undefined.DOUBLE;
 
 	/**
 	 * Builds the object storing the chart instance and defaults.
@@ -47,10 +59,10 @@ public class MeterOptions extends AbstractPieOptions {
 		getLegend().setDisplay(false);
 		getTooltips().setEnabled(false);
 		// sets the 90% of cut out
-		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
+		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE_AS_STRING);
 		// sets fixed circumference and rotation
-		super.setCircumference(DEFAULT_CIRCUMFERENCE);
-		super.setRotation(DEFAULT_ROTATION);
+		super.setCircumference(FIXED_CIRCUMFERENCE);
+		super.setRotation(FIXED_ROTATION);
 	}
 
 	/**
@@ -76,8 +88,10 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	@Override
 	public void setCutoutPercentage(String cutout) {
-		// ignore the "set" because you can not change it
-		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
+		// sets percentage
+		setInternalCutoutPercentage(cutout);
+		// reset tickness
+		thickness = Undefined.DOUBLE;
 	}
 
 	/*
@@ -87,8 +101,9 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	@Override
 	public final void setCutout(double cutout) {
-		// ignore the "set" because you can not change it
-		setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
+		// ignore the "set" because you can not set in pixels
+		// by this method. Use thickness
+		this.thickness = Checker.positiveOrDefault(cutout, Undefined.DOUBLE);
 	}
 
 	/*
@@ -97,8 +112,8 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#getCutout()
 	 */
 	@Override
-	public final double getCutout() {
-		return Double.NaN;
+	public double getCutout() {
+		return thickness;
 	}
 
 	/*
@@ -109,7 +124,7 @@ public class MeterOptions extends AbstractPieOptions {
 	@Override
 	public final void setCircumference(double circumference) {
 		// ignore the passed value.
-		super.setCircumference(DEFAULT_CIRCUMFERENCE);
+		super.setCircumference(FIXED_CIRCUMFERENCE);
 	}
 
 	/*
@@ -120,7 +135,20 @@ public class MeterOptions extends AbstractPieOptions {
 	@Override
 	public final void setRotation(double rotation) {
 		// ignore the passed value.
-		super.setRotation(DEFAULT_ROTATION);
+		super.setRotation(FIXED_ROTATION);
 	}
 
+	/**
+	 * Stores the cutout percentage in chart options.
+	 * 
+	 * @param cutout the cutout percentage to store in chart options.
+	 */
+	final void setInternalCutoutPercentage(String cutout) {
+		// transforms in number
+		double percentage = Utilities.getAsPercentage(cutout, DEFAULT_CUTOUT_PERCENTAGE);
+		// checks if inside the range
+		double checkedPercentage = Checker.betweenOrDefault(percentage, MINIMUM_CUTOUT_PERCENTAGE, MAXIMUM_CUTOUT_PERCENTAGE, DEFAULT_CUTOUT_PERCENTAGE);
+		// sets the percetnage
+		super.setCutoutPercentage(Utilities.getAsPercentage(checkedPercentage, DEFAULT_CUTOUT_PERCENTAGE));
+	}
 }

@@ -40,8 +40,10 @@ import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.FontItem;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.options.IsImmutableFont;
+import org.pepstock.charba.client.options.TransitionKey;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -93,6 +95,31 @@ final class BaseMeterController extends AbstractController {
 			// forces hidden data set
 			meterDataset.hide();
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Controller#onBeforeUpdate(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
+	 * org.pepstock.charba.client.options.TransitionKey)
+	 */
+	@Override
+	public void onBeforeUpdate(ControllerContext context, IsChart chart, TransitionKey mode) {
+		// checks if arguments are consistent
+		Checker.assertCheck(Controller.isConsistent(this, context, chart), "Before updating method arguments are not consistent");
+		// gets options reference
+		MeterOptions options = null;
+		// checks if meter chart
+		if (chart instanceof MeterChart) {
+			MeterChart meterChart = (MeterChart) chart;
+			options = meterChart.getOptions();
+		} else if (chart instanceof GaugeChart) {
+			// checks if meter chart
+			GaugeChart gaugeChart = (GaugeChart) chart;
+			options = gaugeChart.getOptions();
+		}
+		// sets cutout percentage
+		applyCutoutPercentage(options, chart.getDatasetItem(0));
 	}
 
 	/*
@@ -476,6 +503,27 @@ final class BaseMeterController extends AbstractController {
 		// checks if the content was set,
 		// otherwise returns the data set label
 		return options.getContent() != null ? options.getContent() : context.getDatasetLabel();
+	}
+
+	/**
+	 * Calculates the cutout of the doughnut chart,using the thickness passed by user in the options.
+	 * 
+	 * @param options chart options instance
+	 * @param item dataset item
+	 */
+	private void applyCutoutPercentage(MeterOptions options, DatasetItem item) {
+		// checks if options is consistent
+		if (options != null && item != null) {
+			// gets thickness
+			double thickness = options.getCutout();
+			// gets the dataset radius
+			double radius = item.getController().getOuterRadius();
+			// checks if thickness is defined
+			if (Undefined.isNot(thickness) && Checker.isPositive(radius) && Double.compare(thickness, radius) < 0) {
+				// calculates and sets the percentage
+				options.setInternalCutoutPercentage(Utilities.getAsPercentage((radius - thickness) / radius, MeterOptions.DEFAULT_CUTOUT_PERCENTAGE));
+			}
+		}
 	}
 
 	/**
