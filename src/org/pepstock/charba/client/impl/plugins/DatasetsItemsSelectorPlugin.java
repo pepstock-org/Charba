@@ -491,7 +491,7 @@ final class DatasetsItemsSelectorPlugin extends AbstractPlugin {
 		// checks if chart has got already an ket event listener to the DOM document
 		if (!pluginKeyEventListener.containsKey(chart.getId())) {
 			// checks if the key event listener must be setup
-			if (pOptions.isEnabledClearByESC()) {
+			if (pOptions.isEnabledClearByEscape()) {
 				// creates key event listener
 				EscKeyEventListener listener = new EscKeyEventListener(chart);
 				// stores the proxy in the map

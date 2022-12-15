@@ -93,7 +93,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	/**
 	 * Default flag option to activate clear selection by {@link KeyboardUiKey#ESCAPE}, <b>{@value DEFAULT_CLEAR_BY_ESC_ENABLED}</b>.
 	 */
-	public static final boolean DEFAULT_CLEAR_BY_ESC_ENABLED = true;
+	public static final boolean DEFAULT_CLEAR_BY_ESCAPE_ENABLED = true;
 
 	// default border color for area as string.
 	static final String DEFAULT_BORDER_COLOR_AS_STRING = DEFAULT_BORDER_COLOR.toRGBA();
@@ -257,7 +257,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 * 
 	 * @param enabled <code>true</code> if you want to clear selection by {@link KeyboardUiKey#ESCAPE}.
 	 */
-	public void setEnabledClearByESC(boolean enabled) {
+	public void setEnabledClearByEscape(boolean enabled) {
 		setValue(Property.CLEAR_BY_ESC_ENABLED, enabled);
 	}
 
@@ -267,8 +267,8 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	 * @return <code>true</code> if you want to clear selection by {@link KeyboardUiKey#ESCAPE}.
 	 */
 	@Override
-	public boolean isEnabledClearByESC() {
-		return getValue(Property.CLEAR_BY_ESC_ENABLED, defaultOptions.isEnabledClearByESC());
+	public boolean isEnabledClearByEscape() {
+		return getValue(Property.CLEAR_BY_ESC_ENABLED, defaultOptions.isEnabledClearByEscape());
 	}
 
 	/**

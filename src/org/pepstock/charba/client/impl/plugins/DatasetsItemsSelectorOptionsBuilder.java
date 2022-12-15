@@ -96,7 +96,7 @@ public final class DatasetsItemsSelectorOptionsBuilder extends AbstractBaseBuild
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setEnabledClearByESC(boolean enabled) {
-		options.setEnabledClearByESC(enabled);
+		options.setEnabledClearByEscape(enabled);
 		return IsBuilder.checkAndGetIfValid(this);
 	}
 

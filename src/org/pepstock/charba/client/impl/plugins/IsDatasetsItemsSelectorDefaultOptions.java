@@ -50,8 +50,8 @@ interface IsDatasetsItemsSelectorDefaultOptions {
 	 * 
 	 * @return <code>true</code> if you want to clear selection by {@link KeyboardUiKey#ESCAPE}.
 	 */
-	default boolean isEnabledClearByESC() {
-		return DatasetsItemsSelectorOptions.DEFAULT_CLEAR_BY_ESC_ENABLED;
+	default boolean isEnabledClearByEscape() {
+		return DatasetsItemsSelectorOptions.DEFAULT_CLEAR_BY_ESCAPE_ENABLED;
 	}
 
 	/**
