@@ -304,6 +304,11 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `enabledClearByEscape` option to `DatasetsItemsSelectorOptions` plugin configuration in order to enable or disable the selection clearing pressing `Escape` key.
  * enable the change of maximum value at runtime in the `Meter` and `Gauge` datasets.
 
+### Development
+
+ * change Apache Software License header in source code as [defined](https://www.apache.org/legal/src-headers.html#headers).
+ * add `NOTICE` file, [defined](https://www.apache.org/legal/src-headers.html#notice) for Apache Software License adoption.
+ 
 License
 -------
 
