@@ -25,6 +25,7 @@
 	<property name="temp.dir" value="temp"/>
 	<property name="log.dir" value="log"/>
 	<property name="manifest.file" value="${temp.dir}/MANIFEST.MF"/>
+	<property name="meta-inf.dir" value="${classes.dir}/META-INF" />
 	<property name="all.sources.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-sources.zip" />
 		
 	<!-- 
@@ -436,6 +437,10 @@
         CHARBA - CREATE sources jar file for J2CL
     -->
 	<target name="createSources" depends="makeManifest">
+		<mkdir dir="${meta-inf.dir}"/>
+		<!-- copy LICENSE and NOTICE to classes folder -->
+		<copy file="LICENSE" todir="${meta-inf.dir}"/>
+		<copy file="NOTICE" todir="${meta-inf.dir}"/>
 		<!-- exclude from jar all classes where GWT is used, all javascript sources (not needed because embedded into java classes) and code gen source folder -->
 		<jar jarfile="${sources.archive.file}" manifest="${manifest.file}" encoding="UTF-8">
 			<fileset dir="${classes.dir}">
@@ -452,10 +457,6 @@
 				<exclude name="org/pepstock/charba/client/resources/js/**"/>
 				<exclude name="org/pepstock/charba/client/resources/style/**"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
-			</fileset>
-			<!-- includes license -->
-			<fileset dir=".">
-			  <filename name="LICENSE"/>
 			</fileset>
 		</jar>
 	</target>
@@ -478,6 +479,9 @@
         CHARBA - CREATE sources jar file for GWT
     -->
 	<target name="createSourcesGwt" depends="makeManifest">
+		<!-- copy LICENSE and NOTICE to classes folder -->
+		<copy file="LICENSE" todir="${meta-inf.dir}"/>
+		<copy file="NOTICE" todir="${meta-inf.dir}"/>
 		<!-- exclude from jar the GWT module defined for Charba J2CL and code gen source folder -->
 		<jar jarfile="${sources.gwt.archive.file}" manifest="${manifest.file}" encoding="UTF-8">
 			<fileset dir="${classes.dir}">
@@ -499,10 +503,6 @@
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.sankey.minify.file}"/>	
 				<exclude name="org/pepstock/charba/client/resources/style/**"/>
 			</fileset>
-			<!-- includes license -->
-			<fileset dir=".">
-			  <filename name="LICENSE"/>
-			</fileset>
 		</jar>
 	</target>
 
@@ -513,12 +513,13 @@
 		<attribute name="file" />
 		
 		<sequential>
+			<!-- copy LICENSE and NOTICE to classes folder -->
+			<copy file="LICENSE" todir="${meta-inf.dir}"/>
+			<copy file="NOTICE" todir="${meta-inf.dir}"/>
 			<jar jarfile="@{file}" encoding="UTF-8">
 				<fileset dir="${javadoc.dir}" />
 				<!-- includes license -->
-				<fileset dir=".">
-				  <filename name="LICENSE"/>
-				</fileset>
+				<metainf dir="${meta-inf.dir}"/>
 				<manifest>
 					<section name="Charba">
 						<attribute name="Version" value="${ivy.pubrevision}" />
@@ -545,6 +546,9 @@
         CHARBA - CREATE classes jar file for J2CL
     -->
 	<target name="createBinary" depends="compile, makeManifest">
+		<!-- copy LICENSE and NOTICE to classes folder -->
+		<copy file="LICENSE" todir="${meta-inf.dir}"/>
+		<copy file="NOTICE" todir="${meta-inf.dir}"/>
 		<!-- exclude from jar all classes where GWT is used, all javascript sources (not needed because embedded into java classes) and code gen source folder -->
 		<jar jarfile="${bin.archive.file}" manifest="${manifest.file}" encoding="UTF-8">
 			<fileset dir="${classes.dir}">
@@ -560,10 +564,6 @@
 				<exclude name="org/pepstock/charba/client/resources/js/**"/>
 				<exclude name="org/pepstock/charba/client/resources/style/**"/>
 			</fileset>
-			<!-- includes license -->
-			<fileset dir=".">
-			  <filename name="LICENSE"/>
-			</fileset>
 		</jar>
 	</target>
 
@@ -573,6 +573,9 @@
 	<target name="createBinaryGwt" depends="compile, makeManifest">
 		<!-- override the GWT module defined for Charba J2CL with GWT one -->
 		<copy file="${classes.dir}/org/pepstock/charba/client/gwt/Charba.gwt.xml" todir="${classes.dir}/org/pepstock/charba"/>
+		<!-- copy LICENSE and NOTICE to classes folder -->
+		<copy file="LICENSE" todir="${meta-inf.dir}"/>
+		<copy file="NOTICE" todir="${meta-inf.dir}"/>
 		<!-- exclude from jar the GWT module defined for Charba GWT (because copied on right folder above) and code gen source folder -->
 		<jar jarfile="${bin.gwt.archive.file}" manifest="${manifest.file}" encoding="UTF-8">
 			<fileset dir="${classes.dir}">
@@ -593,10 +596,6 @@
 				<exclude name="org/pepstock/charba/client/resources/js/${javascript.sankey.minify.file}"/>	
 				<exclude name="org/pepstock/charba/client/resources/style/**"/>
 			</fileset>
-			<!-- includes license -->
-			<fileset dir=".">
-			  <filename name="LICENSE"/>
-			</fileset>
 		</jar>
 	</target>
 
@@ -604,16 +603,15 @@
         CHARBA - CREATE all sources ZIP file
     -->
 	<target name="createAllSources">
+		<!-- copy LICENSE and NOTICE to classes folder -->
+		<copy file="LICENSE" todir="${meta-inf.dir}"/>
+		<copy file="NOTICE" todir="${meta-inf.dir}"/>
 		<!-- exclude from zip all classes and code gen source folder -->
 		<zip destfile="${all.sources.archive.file}">
 			<fileset dir="${classes.dir}">
 				<include name="**/*"/>
 				<exclude name="**/*.class"/>
 				<exclude name="org/pepstock/charba/codegen/**"/>
-			</fileset>
-			<!-- includes license -->
-			<fileset dir=".">
-			  <filename name="LICENSE"/>
 			</fileset>
 		</zip>
 	</target>
