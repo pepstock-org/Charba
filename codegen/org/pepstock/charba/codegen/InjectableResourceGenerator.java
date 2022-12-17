@@ -31,7 +31,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -81,6 +83,14 @@ public class InjectableResourceGenerator {
 	private static final File TEMPLATE_FILE = new File("./codegen/org/pepstock/charba/codegen/InjectableResource.template");
 	// file where the java class template for reosurce hash is stored
 	private static final File HASH_TEMPLATE_FILE = new File("./codegen/org/pepstock/charba/codegen/ResourceHash.template");
+	// file where the dependencies are stored
+	private static final File DEPENDENCIES_FILE = new File("ivymoduleconfiguration.properties");
+	// file where the Apache Software license template is stored
+	private static final File ASL_TEMPLATE_FILE = new File("./codegen/org/pepstock/charba/codegen/ApacheSoftwareLicense.template");
+	// file where the Apache Software license file is stored
+	private static final File ASL_FILE = new File("LICENSE");
+	// file where the Apache Software license notice file is stored
+	private static final File ASL_NOTICE_FILE = new File("NOTICE");
 	// resource hash java class name
 	private static final String HASH_CLASS_NAME = "ResourceHash";
 	// resource hash java class name
@@ -161,6 +171,22 @@ public class InjectableResourceGenerator {
 	private static final String ADDITIONAL_RESOURCE_NAME_PACKAGE = "import org.pepstock.charba.client.resources.ResourceName;";
 	// collection of escape result
 	private static final Map<String, EscapeResult> ESCAPE_RESULTS = new HashMap<>();
+	// template for bundled libraries for Apache Software license
+	private static final String ASL_BUNDLED = "   This product bundles ${javaScriptFile} version ${javaScriptFileVersion}, which is available under a \"${javaScriptFileLicense}\" license.\n   For details, see ${javaScriptURLLicense}\n";
+	// defines the pattern to apply on replace all on the java class template
+	// for java script file version
+	private static final String JAVASCRIPT_FILE_VERSION_VARIABLE = Pattern.quote("${javaScriptFileVersion}");
+	// defines the pattern to apply on replace all on the java class template
+	// for java script file license
+	private static final String JAVASCRIPT_FILE_LICENSE_VARIABLE = Pattern.quote("${javaScriptFileLicense}");
+	// defines the pattern to apply on replace all on the java class template
+	// for java script URL license
+	private static final String JAVASCRIPT_URL_LICENSE_VARIABLE = Pattern.quote("${javaScriptURLLicense}");
+	// defines the prefix for dependencies property
+	private static final String DEPENDENCY_PREFIX = "depver.";
+	// template for bundled libraries for Apache Software license
+	private static final String ASL_NOTICE_CONTENT = "Charba\nCopyright 2017-" + Calendar.getInstance(Locale.ITALY).get(Calendar.YEAR) + " Andrea Stocchero\n\n";
+
 	// digest algorithm
 	private static final String ALGORITHM = "SHA-256";
 	// message diget instance
@@ -196,12 +222,21 @@ public class InjectableResourceGenerator {
 		StringBuilder templateSource = readTemplate(TEMPLATE_FILE);
 		// reads the template of hash enum java class to create
 		StringBuilder templateHashSource = readTemplate(HASH_TEMPLATE_FILE);
+		// reads the template of Apache Software License
+		StringBuilder templateASLSource = readTemplate(ASL_TEMPLATE_FILE);
 		// reads the properties with items that the code gen must manage
-		Properties properties = readProperties();
+		Properties properties = readProperties(PROPERTIES_FILE);
 		// checks if properties are consistent
 		if (properties.isEmpty()) {
 			// if not exception
 			throw new IOException("Properties are empty");
+		}
+		// reads the dependencies
+		Properties dependencies = readProperties(DEPENDENCIES_FILE);
+		// checks if properties are consistent
+		if (dependencies.isEmpty()) {
+			// if not exception
+			throw new IOException("Dependencies file is empty");
 		}
 		// scans all properties
 		for (Entry<Object, Object> entry : properties.entrySet()) {
@@ -212,7 +247,7 @@ public class InjectableResourceGenerator {
 			String[] values = entry.getValue().toString().split(COMMA_STRING);
 			// checks if the value has got the right format
 			// must have 4 items, comma separated
-			if (values.length == 4) {
+			if (values.length >= 4) {
 				// initialized the instances using the split values
 				final String javaScriptSourceFolder = values[0];
 				final String packageName = values[1];
@@ -267,6 +302,22 @@ public class InjectableResourceGenerator {
 				}
 				// stores escape result
 				ESCAPE_RESULTS.put(className, escapeResult);
+				// ---------------------
+				// LICENSE update
+				// ---------------------
+				// checks if injectable must be added to apache license
+				if (values.length == 7) {
+					// gets license and url
+					String depver = values[4];
+					String version = dependencies.getProperty(DEPENDENCY_PREFIX + depver);
+					String license = values[5];
+					String url = values[6].replaceAll(JAVASCRIPT_FILE_VERSION_VARIABLE, Matcher.quoteReplacement(version));
+					String asl = ASL_BUNDLED.replaceAll(JAVASCRIPT_FILE_VARIABLE, Matcher.quoteReplacement(javaScriptFileName));
+					asl = asl.replaceAll(JAVASCRIPT_FILE_VERSION_VARIABLE, Matcher.quoteReplacement(version));
+					asl = asl.replaceAll(JAVASCRIPT_FILE_LICENSE_VARIABLE, Matcher.quoteReplacement(license));
+					asl = asl.replaceAll(JAVASCRIPT_URL_LICENSE_VARIABLE, Matcher.quoteReplacement(url));
+					templateASLSource.append(asl).append(LINE_SEPARATOR_STRING).append(LINE_SEPARATOR_STRING);
+				}
 			} else {
 				// if here the source properties are wrong
 				LOGGER.warning("Property format for '" + javaScriptFileName + "' is not correct");
@@ -289,6 +340,11 @@ public class InjectableResourceGenerator {
 			// if here the escape result map is empty
 			LOGGER.warning("Escape result map is empty and the " + HASH_CLASS_NAME + " is not created");
 		}
+		// writes the Apache Software License
+		LOGGER.info("Started Apache Software license generation");
+		writeLicense(ASL_FILE, templateASLSource.toString());
+		writeLicense(ASL_NOTICE_FILE, ASL_NOTICE_CONTENT);
+		LOGGER.info("Apache Software license generation is completed");
 	}
 
 	/**
@@ -324,15 +380,16 @@ public class InjectableResourceGenerator {
 	/**
 	 * Reads the properties of this code generator, returning the content as a properties instance.
 	 * 
+	 * @param file file properties to read
 	 * @return the properties of this code generator
 	 * @throws IOException occurs if the properties file not exists or any errors occurred reading the file
 	 */
-	private static Properties readProperties() throws IOException {
+	private static Properties readProperties(File file) throws IOException {
 		// creates reference file reader for properties
 		InputStreamReader propertiesFileReader = null;
 		try {
 			// creates instance file reader for properties
-			propertiesFileReader = new InputStreamReader(new FileInputStream(PROPERTIES_FILE), UTF8);
+			propertiesFileReader = new InputStreamReader(new FileInputStream(file), UTF8);
 			// creates properties instance
 			Properties properties = new Properties();
 			// loads properties
@@ -424,6 +481,33 @@ public class InjectableResourceGenerator {
 			if (targetJavaClassFileOutputStream != null) {
 				// then closes the java script file output stream
 				targetJavaClassFileOutputStream.close();
+			}
+		}
+	}
+
+	/**
+	 * Writes the Apache Software license in the project
+	 * 
+	 * @param licenseFile the file needed for Apahce Software license to write
+	 * @param changedTemplate the content of the Apache Software license
+	 * @throws IOException occurs if any errors writing the file
+	 */
+	private static final void writeLicense(File licenseFile, String changedTemplate) throws IOException {
+		// creates a print stream reference
+		PrintStream targetLicenseFileOutputStream = null;
+		try {
+			// creates a print stream reference
+			targetLicenseFileOutputStream = new PrintStream(licenseFile, UTF8.name());
+			// writes the java class
+			targetLicenseFileOutputStream.print(changedTemplate);
+		} catch (UnsupportedEncodingException e) {
+			// charset not supported
+			throw new IOException(e);
+		} finally {
+			// checks if java script file output stream has been initialized
+			if (targetLicenseFileOutputStream != null) {
+				// then closes the java script file output stream
+				targetLicenseFileOutputStream.close();
 			}
 		}
 	}

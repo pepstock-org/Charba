@@ -308,6 +308,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 
  * change Apache Software License header in source code as [defined](https://www.apache.org/legal/src-headers.html#headers).
  * add `NOTICE` file, [defined](https://www.apache.org/legal/src-headers.html#notice) for Apache Software License adoption.
+ * add all javascript bundled resources with the dependency's license within the distribution and a short note summarizing its licensing [defined](https://infra.apache.org/licensing-howto.html#permissive-deps) for Apache Software License adoption.
+ * move `LICENSE` and `NOTICE` files to `META-INF` folder in all distribution files.
  
 License
 -------
