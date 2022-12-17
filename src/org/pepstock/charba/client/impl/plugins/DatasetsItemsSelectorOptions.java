@@ -94,7 +94,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	public static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
 
 	/**
-	 * Default flag option to activate clear selection by {@link KeyboardUiKey#ESCAPE}, <b>{@value DEFAULT_CLEAR_BY_ESC_ENABLED}</b>.
+	 * Default flag option to activate clear selection by {@link KeyboardUiKey#ESCAPE}, <b>{@value DEFAULT_CLEAR_BY_ESCAPE_ENABLED}</b>.
 	 */
 	public static final boolean DEFAULT_CLEAR_BY_ESCAPE_ENABLED = true;
 
