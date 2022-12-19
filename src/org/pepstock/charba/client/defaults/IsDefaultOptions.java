@@ -285,4 +285,13 @@ public interface IsDefaultOptions extends IsDefaultAnimationContainer, IsDefault
 	 */
 	boolean isAutoColors();
 
+	/**
+	 * By default the colors plugin only works when you initialize the chart without any colors for the border or background specified.<br>
+	 * If you want to force the colors plugin to always color your datasets, for example when using dynamic datasets at runtime you will need to set the <code>forceOverride</code>
+	 * option to <code>true</code>.
+	 * 
+	 * @return <code>true</code> if auto color plugin forces setting palette.
+	 */
+	boolean isAutoColorsForceOverride();
+
 }

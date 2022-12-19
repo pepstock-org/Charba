@@ -159,6 +159,16 @@ abstract class AbstractDefaultChartOptions extends AbstractDefaultOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isAutoColorsForceOverride()
+	 */
+	@Override
+	public boolean isAutoColorsForceOverride() {
+		return options.isAutoColorsForceOverride();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isShowLine()
 	 */
 	@Override

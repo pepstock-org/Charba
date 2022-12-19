@@ -73,6 +73,8 @@ public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final boolean DEFAULT_AUTO_COLORS = true;
 
+	private static final boolean DEFAULT_AUTO_COLORS_FORCE_OVERRIDE = false;
+
 	private static final Set<IsEvent> DEFAULT_EVENTS = Collections.unmodifiableSet(DefaultEvents.INSTANCE);
 
 	/**
@@ -190,6 +192,16 @@ public class DefaultOptions extends AbstractDefaultOptions {
 	@Override
 	public boolean isAutoColors() {
 		return DEFAULT_AUTO_COLORS;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#isAutoColorsForceOverride()
+	 */
+	@Override
+	public boolean isAutoColorsForceOverride() {
+		return DEFAULT_AUTO_COLORS_FORCE_OVERRIDE;
 	}
 
 	/*
