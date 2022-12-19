@@ -25,6 +25,7 @@ import java.util.List;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
 import org.pepstock.charba.client.dom.elements.Canvas;
@@ -1647,4 +1648,18 @@ public abstract class NativeObjectContainer {
 		return IncrementalIdHandler.get().getId(this);
 	}
 
+	/**
+	 * Checks the color passed as argument and returns {@link IsColor} instance.
+	 * 
+	 * @param color string color to be parsed.
+	 * @return {@link IsColor} instance of the string color or <code>null</code> if not consistent
+	 */
+	protected IsColor checkAndGetColor(String color) {
+		// checks if consistent
+		if (color != null && color.length() > 0) {
+			return ColorBuilder.parse(color);
+		}
+		// if here the color is not consistent
+		return null;
+	}
 }

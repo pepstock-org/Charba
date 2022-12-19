@@ -32,7 +32,7 @@ import org.pepstock.charba.client.items.FontItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class AbstractReadOnlyFont extends NativeObjectContainer implements IsDefaultFont {
+public abstract class AbstractReadOnlyFont extends NativeObjectContainer implements IsDefaultFont {
 
 	/**
 	 * Name of properties of native object.

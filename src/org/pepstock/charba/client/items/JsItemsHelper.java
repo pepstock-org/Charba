@@ -18,6 +18,7 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -238,6 +239,21 @@ final class JsItemsHelper {
 		}
 		// if here, scale item not consistent
 		return Undefined.DOUBLE;
+	}
+
+	/**
+	 * Returns the labels computed in the scale.
+	 * 
+	 * @param scale scale instance
+	 * @return the labels computed in the scale.
+	 */
+	ArrayObject getLabelItems(ScaleItem scale) {
+		// checks if scale is consistent
+		if (scale != null) {
+			return NativeJsItemsHelper.getLabelItems(scale.nativeObject());
+		}
+		// if here, scale item not consistent
+		return null;
 	}
 
 	/**

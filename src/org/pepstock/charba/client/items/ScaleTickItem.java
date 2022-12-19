@@ -85,7 +85,7 @@ public final class ScaleTickItem extends NativeObjectContainer {
 	 * 
 	 * @return the label of the tick or {@link Undefined#STRING} if missing.
 	 */
-	public final String getLabel() {
+	public String getLabel() {
 		return getValue(Property.LABEL, Undefined.STRING);
 	}
 
@@ -94,7 +94,7 @@ public final class ScaleTickItem extends NativeObjectContainer {
 	 * 
 	 * @return the value of the tick or {@link Undefined#DOUBLE} if missing or not a double.
 	 */
-	public final double getValue() {
+	public double getValue() {
 		return getValueForMultipleKeyTypes(Property.VALUE, Undefined.DOUBLE);
 	}
 
@@ -103,7 +103,7 @@ public final class ScaleTickItem extends NativeObjectContainer {
 	 * 
 	 * @return the value of the tick or {@link Undefined#STRING} if missing or not a string.
 	 */
-	public final String getValueAsString() {
+	public String getValueAsString() {
 		return getValueForMultipleKeyTypes(Property.VALUE, Undefined.STRING);
 	}
 
@@ -126,7 +126,7 @@ public final class ScaleTickItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Inner class to create time tick item by a native object.
+	 * Inner class to create tick item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */

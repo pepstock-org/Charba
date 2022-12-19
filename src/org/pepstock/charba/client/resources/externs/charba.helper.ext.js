@@ -377,6 +377,11 @@ CharbaJsItemsHelper.getBaseValue = function(object) {};
  */
 CharbaJsItemsHelper.getBasePixel = function(object) {};
 /**
+ * @param {Object} obj 
+ * @return {Array}
+ */
+CharbaJsItemsHelper.getLabelItems = function(obj) {};
+/**
  * @param {Object} object 
  * @param {number} value 
  * @return {number}

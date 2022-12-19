@@ -447,8 +447,25 @@ public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 	}
 
 	// --------------------------
-	// JAVASRIPT METHODS WRAPPERS
+	// JAVASCRIPT METHODS WRAPPERS
 	// --------------------------
+
+	/**
+	 * Returns the labels computed in the scale.
+	 * 
+	 * @return the labels computed in the scale.
+	 */
+	public List<ScaleLabelItem> getLabelItems() {
+		// gets array
+		ArrayObject array = JsItemsHelper.get().getLabelItems(this);
+		// checks if array is consistent
+		if (array != null) {
+			return ArrayListHelper.unmodifiableList(array, ScaleLabelItem.FACTORY);
+		}
+		// if here the array is not consistent
+		// then returns and empty list
+		return Collections.emptyList();
+	}
 
 	/**
 	 * Returns <code>true</code> if the scale is horizontal.

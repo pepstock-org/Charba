@@ -711,6 +711,15 @@ CharbaJsItemsHelper.getBasePixel = function(obj) {
   return obj.getBasePixel();
 }
 /**
+ * Returns the labels computed in the scale.
+ *
+ * @param {Object} obj scale native object instance 
+ * @return {Array} the labels computed in the scale
+ */
+CharbaJsItemsHelper.getLabelItems = function(obj) {
+  return obj.getLabelItems();
+}
+/**
  * Returns the distance from the center of a specific value.
  *
  * @param {Object} obj scale native object instance 

@@ -18,6 +18,7 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -158,6 +159,14 @@ final class NativeJsItemsHelper {
 	 * @return the distance from the center of a specific value
 	 */
 	static native double getDistanceFromCenterForValue(NativeObject scale, double value);
+
+	/**
+	 * Returns the labels computed in the scale.
+	 * 
+	 * @param scale scale instance
+	 * @return the labels computed in the scale.
+	 */
+	static native ArrayObject getLabelItems(NativeObject scale);
 
 	/**
 	 * Returns the value calculated applying the specific distance from the center.
