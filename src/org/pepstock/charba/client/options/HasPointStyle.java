@@ -46,6 +46,18 @@ public interface HasPointStyle extends IsDefaultPointStyleHandler {
 	 * 
 	 * @param pointStyle array of the style of the point.
 	 */
+	default void setPointStyle(boolean pointStyle) {
+		// checks if point style handler is consistent
+		if (getPointStyleHandler() != null) {
+			getPointStyleHandler().setPointStyle(pointStyle);
+		}
+	}
+
+	/**
+	 * Sets the style of the point.
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
 	default void setPointStyle(PointStyle pointStyle) {
 		// checks if point style handler is consistent
 		if (getPointStyleHandler() != null) {

@@ -462,6 +462,11 @@ public class LegendItem extends AbstractNode {
 	public final PointStyle getPointStyle() {
 		// checks if is an point style and not an image
 		if (PointStyleType.STRING.equals(getPointStyleType())) {
+			// checks if is boolean
+			if (isType(Property.POINT_STYLE, ObjectType.BOOLEAN)) {
+				// is false
+				return PointStyle.FALSE;
+			}
 			return getValue(Property.POINT_STYLE, PointStyle.values(), Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 		}
 		// if here, the point style is undefined or an image or canvas

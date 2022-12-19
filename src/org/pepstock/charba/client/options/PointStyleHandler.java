@@ -21,6 +21,7 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.commons.PropertyHandler;
 import org.pepstock.charba.client.defaults.IsDefaultPointStyleHandler;
 import org.pepstock.charba.client.dom.elements.Canvas;
@@ -84,9 +85,29 @@ public class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandle
 	 * 
 	 * @param pointStyle array of the style of the point.
 	 */
+	void setPointStyle(boolean pointStyle) {
+		// checks if false
+		if (!pointStyle) {
+			setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
+		} else {
+			// if true, remove the value and use default
+			remove(Property.POINT_STYLE);
+		}
+	}
+
+	/**
+	 * Sets the style of the point.
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
 	void setPointStyle(PointStyle pointStyle) {
-		// stores value
-		setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
+		// checks if false
+		if (PointStyle.FALSE.equals(pointStyle)) {
+			setPointStyle(false);
+		} else {
+			// stores value
+			setValueAndAddToParent(Property.POINT_STYLE, pointStyle);
+		}
 	}
 
 	/**
@@ -124,6 +145,11 @@ public class PointStyleHandler extends PropertyHandler<IsDefaultPointStyleHandle
 	PointStyle getPointStyle() {
 		// checks if string as point style has been used
 		if (PointStyleType.STRING.equals(getPointStyleType())) {
+			// checks if is boolean
+			if (isType(Property.POINT_STYLE, ObjectType.BOOLEAN)) {
+				// is false
+				return PointStyle.FALSE;
+			}
 			return getValue(Property.POINT_STYLE, PointStyle.values(), getDefaultValues().getPointStyle());
 		}
 		// if here, means the point style as stored as image or canvas

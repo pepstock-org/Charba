@@ -261,6 +261,18 @@ public class Bar extends AbstractConfigurationElement<IsDefaultBar> {
 	 * 
 	 * @param pointStyle the style of the point.
 	 */
+	public void setPointStyle(boolean pointStyle) {
+		// resets callback
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
+		// stores value
+		getConfiguration().getElements().getBar().setPointStyle(pointStyle);
+	}
+
+	/**
+	 * Sets the style of the point.
+	 * 
+	 * @param pointStyle the style of the point.
+	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		// resets callback
 		setPointStyle((PointStyleCallback<DatasetContext>) null);

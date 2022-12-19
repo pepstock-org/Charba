@@ -303,6 +303,16 @@ public class LegendLabels extends ConfigurationOptionsContainer {
 	 * 
 	 * @param pointStyle the style of the legend, overriding point style from dataset.
 	 */
+	public void setPointStyle(boolean pointStyle) {
+		getConfiguration().getLegend().getLabels().setPointStyle(pointStyle);
+	}
+
+	/**
+	 * Sets the style of the legend, overriding point style from dataset.<br>
+	 * Only applies if {@link LegendLabels#setUsePointStyle(boolean)} is set to <code>true</code>.
+	 * 
+	 * @param pointStyle the style of the legend, overriding point style from dataset.
+	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		getConfiguration().getLegend().getLabels().setPointStyle(pointStyle);
 	}

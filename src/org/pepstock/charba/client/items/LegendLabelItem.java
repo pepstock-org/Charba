@@ -334,8 +334,29 @@ public final class LegendLabelItem extends LegendItem implements HasLegendText {
 	 * 
 	 * @param style the style of the legend box
 	 */
+	public void setPointStyle(boolean style) {
+		// checks if false
+		if (!style) {
+			setValue(LegendItem.Property.POINT_STYLE, style);
+		} else {
+			// if true, remove the value and use default
+			remove(Property.POINT_STYLE);
+		}
+	}
+
+	/**
+	 * Sets the style of the legend box (only used if usePointStyle is true)
+	 * 
+	 * @param style the style of the legend box
+	 */
 	public void setPointStyle(PointStyle style) {
-		setValue(LegendItem.Property.POINT_STYLE, style);
+		// checks if false
+		if (PointStyle.FALSE.equals(style)) {
+			setPointStyle(false);
+		} else {
+			// stores value
+			setValue(LegendItem.Property.POINT_STYLE, style);
+		}
 	}
 
 	/**

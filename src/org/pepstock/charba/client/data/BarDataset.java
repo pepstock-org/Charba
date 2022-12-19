@@ -925,6 +925,23 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	}
 
 	/**
+	 * Sets the style of the point.
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
+	public void setPointStyle(boolean pointStyle) {
+		// reset callback
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
+		// checks if false
+		if (!pointStyle) {
+			setValue(Property.POINT_STYLE, pointStyle);
+		} else {
+			// if true, remove the value and use default
+			remove(Property.POINT_STYLE);
+		}
+	}
+
+	/**
 	 * Sets the style of the point for legend.
 	 * 
 	 * @param pointStyle the style of the point for legend.
@@ -932,8 +949,13 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	public void setPointStyle(PointStyle pointStyle) {
 		// reset callback
 		setPointStyle((PointStyleCallback<DatasetContext>) null);
-		// stores value
-		setValue(Property.POINT_STYLE, pointStyle);
+		// checks if false
+		if (PointStyle.FALSE.equals(pointStyle)) {
+			setPointStyle(false);
+		} else {
+			// stores value
+			setValue(Property.POINT_STYLE, pointStyle);
+		}
 	}
 
 	/**
@@ -944,6 +966,11 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	public PointStyle getPointStyle() {
 		// checks if string as point style has been used
 		if (PointStyleType.STRING.equals(getPointStyleType())) {
+			// checks if is boolean
+			if (isType(Property.POINT_STYLE, ObjectType.BOOLEAN)) {
+				// is false
+				return PointStyle.FALSE;
+			}
 			return getValue(Property.POINT_STYLE, PointStyle.values(), getDefaultValues().getElements().getBar().getPointStyle());
 		}
 		// if here, the point style is set as image or canvas
@@ -1449,6 +1476,10 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		if (result instanceof PointStyle) {
 			// is point style instance
 			PointStyle style = (PointStyle) result;
+			// checks if false
+			if (PointStyle.FALSE.equals(style)) {
+				return false;
+			}
 			return style.value();
 		} else if (result instanceof Img) {
 			// is image element instance
@@ -1456,6 +1487,13 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		} else if (result instanceof Canvas) {
 			// is canvas element instance
 			return result;
+		} else if (result instanceof Boolean) {
+			// is point style instance false
+			Boolean style = (Boolean) result;
+			// checks if false
+			if (!style) {
+				return false;
+			}
 		}
 		// default result
 		return getDefaultValues().getElements().getBar().getPointStyle().value();

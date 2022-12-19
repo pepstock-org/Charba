@@ -139,8 +139,8 @@ enum PointStyleShape implements IsShape
 	static PointStyleShape get(PointStyle pointStyle) {
 		// gets temp instance
 		PointStyle changedPointStyle = null;
-		// checks if argument is consistent
-		if (pointStyle != null) {
+		// checks if argument is consistent and not equals to false
+		if (pointStyle != null && !PointStyle.FALSE.equals(pointStyle)) {
 			// stores the argument because consistent
 			changedPointStyle = pointStyle;
 		} else {

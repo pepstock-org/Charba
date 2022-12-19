@@ -304,6 +304,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `borderRadius` and `useBorderRadius` options to `LegendLabels` configuration and options classes.
  * add `enabledClearByEscape` option to `DatasetsItemsSelectorOptions` plugin configuration in order to enable or disable the selection clearing pressing `Escape` key.
  * enable the change of maximum value at runtime in the `Meter` and `Gauge` datasets.
+ * add `FALSE` item to `PointStyle` enumeration.
 
 ### Development
 

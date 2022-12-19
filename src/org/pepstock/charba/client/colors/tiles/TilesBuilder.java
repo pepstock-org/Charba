@@ -79,7 +79,10 @@ public final class TilesBuilder {
 	 * @return tiles builder instance
 	 */
 	public TilesBuilder setPointStyle(PointStyle pointStyle) {
-		this.shape = PointStyleShape.get(pointStyle);
+		// checks if false
+		if (!PointStyle.FALSE.equals(pointStyle)) {
+			this.shape = PointStyleShape.get(pointStyle);
+		}
 		return this;
 	}
 

@@ -36,7 +36,8 @@ public enum PointStyle implements Key
 	RECT_ROUNDED("rectRounded"),
 	RECT_ROT("rectRot"),
 	STAR("star"),
-	TRIANGLE("triangle");
+	TRIANGLE("triangle"),
+	FALSE("false");
 
 	// name value of property
 	private final String value;

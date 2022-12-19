@@ -276,6 +276,10 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 		if (result instanceof PointStyle) {
 			// is point style instance
 			PointStyle style = (PointStyle) result;
+			// checks if false
+			if (PointStyle.FALSE.equals(style)) {
+				return false;
+			}
 			return style.value();
 		} else if (result instanceof Img) {
 			// is image element instance
@@ -283,6 +287,13 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 		} else if (result instanceof Canvas) {
 			// is canvas element instance
 			return result;
+		} else if (result instanceof Boolean) {
+			// is point style instance false
+			Boolean style = (Boolean) result;
+			// checks if false
+			if (!style) {
+				return false;
+			}
 		}
 		// default result
 		return defaultValues.getPointStyle().value();

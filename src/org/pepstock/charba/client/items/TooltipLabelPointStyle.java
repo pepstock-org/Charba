@@ -22,6 +22,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.PointStyle;
@@ -126,6 +127,11 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	public PointStyle getPointStyle() {
 		// checks if image as point style has been used
 		if (PointStyleType.STRING.equals(getPointStyleType())) {
+			// checks if is boolean
+			if (isType(Property.POINT_STYLE, ObjectType.BOOLEAN)) {
+				// is false
+				return PointStyle.FALSE;
+			}
 			return getValue(Property.POINT_STYLE, PointStyle.values(), PointStyle.CIRCLE);
 		}
 		// if here, means the point style as stored as image or canvas
@@ -181,10 +187,31 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	/**
 	 * Sets the style of the point.
 	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
+	public void setPointStyle(boolean pointStyle) {
+		// checks if false
+		if (!pointStyle) {
+			setValue(Property.POINT_STYLE, pointStyle);
+		} else {
+			// if true, remove the value and use default
+			remove(Property.POINT_STYLE);
+		}
+	}
+
+	/**
+	 * Sets the style of the point.
+	 * 
 	 * @param pointStyle style of the point.
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
-		setValue(Property.POINT_STYLE, pointStyle);
+		// checks if false
+		if (PointStyle.FALSE.equals(pointStyle)) {
+			setPointStyle(false);
+		} else {
+			// stores value
+			setValue(Property.POINT_STYLE, pointStyle);
+		}
 	}
 
 	/**
