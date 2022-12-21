@@ -155,7 +155,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			// depending on chart type
 			if (datasetItem != null && Undefined.isNot(datasetItem.getController().getInnerRadius()) && Undefined.isNot(datasetItem.getController().getOuterRadius())) {
 				// manages radius by chart node
-				manageRadiusByChartNode(chart, datasetItem, radius);
+				manageRadiusByChartNode(datasetItem, radius);
 			} else {
 				// gets canvas
 				Canvas canvas = chart.getCanvas();
@@ -170,7 +170,7 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 			// depending on chart type
 			if (datasetItem != null && Undefined.isNot(datasetItem.getController().getInnerRadius()) && Undefined.isNot(datasetItem.getController().getOuterRadius())) {
 				// manages radius by chart node
-				manageRadiusByChartNode(chart, datasetItem, radius);
+				manageRadiusByChartNode(datasetItem, radius);
 			} else {
 				// by default is the center of chart area
 				radius.setInner(0D);
@@ -186,11 +186,10 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	/**
 	 * Manages radius values inspecting chart node and its values.
 	 * 
-	 * @param chart chart instance
 	 * @param node chart node instance
 	 * @param radius radius instance to be updated
 	 */
-	private void manageRadiusByChartNode(IsChart chart, DatasetItem node, Radius radius) {
+	private void manageRadiusByChartNode(DatasetItem node, Radius radius) {
 		// stores values
 		final double inner = node.getController().getInnerRadius();
 		final double outer = node.getController().getOuterRadius();
