@@ -220,7 +220,7 @@ public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 				// checks if there is a date adapter
 				if (isType(Property.ADAPTER, ObjectType.OBJECT)) {
 					// creates envelop
-					ItemsEnvelop<NativeObject> envelop = new ItemsEnvelop<NativeObject>(nativeObject());
+					ItemsEnvelop<NativeObject> envelop = new ItemsEnvelop<>(nativeObject());
 					// returns date adapter wrapping the scale adapter
 					return new DateAdapter(envelop, daOptions);
 				}
