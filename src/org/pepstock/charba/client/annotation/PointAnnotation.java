@@ -336,7 +336,7 @@ public final class PointAnnotation extends AbstractCircleBasedAnnotation impleme
 			// is point style instance false
 			Boolean style = (Boolean) result;
 			// checks if false
-			if (!style) {
+			if (Boolean.FALSE.equals(style)) {
 				return false;
 			}
 		} else if (result instanceof Img) {

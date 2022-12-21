@@ -1491,7 +1491,7 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 			// is point style instance false
 			Boolean style = (Boolean) result;
 			// checks if false
-			if (!style) {
+			if (Boolean.FALSE.equals(style)) {
 				return false;
 			}
 		}

@@ -627,7 +627,7 @@ abstract class AbstractConfigurationElement<D extends IsDefaultOptionsElement> e
 			// is point style instance false
 			Boolean style = (Boolean) result;
 			// checks if false
-			if (!style) {
+			if (Boolean.FALSE.equals(style)) {
 				return false;
 			}
 		}
