@@ -241,6 +241,19 @@ public final class PointAnnotation extends AbstractCircleBasedAnnotation impleme
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.options.HasPointStyle#setPointStyle(boolean)
+	 */
+	@Override
+	public void setPointStyle(boolean pointStyle) {
+		// reset callback
+		setPointStyle((PointStyleCallback<AnnotationContext>) null);
+		// stores values
+		HasPointStyle.super.setPointStyle(pointStyle);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.HasPointStyle#setPointStyle(org.pepstock.charba.client.dom.elements.Img)
 	 */
 	@Override
@@ -314,7 +327,18 @@ public final class PointAnnotation extends AbstractCircleBasedAnnotation impleme
 		if (result instanceof PointStyle) {
 			// is point style instance
 			PointStyle style = (PointStyle) result;
+			// checks if false
+			if (PointStyle.FALSE.equals(style)) {
+				return false;
+			}
 			return style.value();
+		} else if (result instanceof Boolean) {
+			// is point style instance false
+			Boolean style = (Boolean) result;
+			// checks if false
+			if (!style) {
+				return false;
+			}
 		} else if (result instanceof Img) {
 			// is image element instance
 			return result;
