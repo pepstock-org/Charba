@@ -252,21 +252,6 @@ public class PointElementOptions extends CommonElementOptions {
 	}
 
 	/**
-	 * Sets the style of the point.
-	 * 
-	 * @param pointStyle array of the style of the point.
-	 */
-	public void setPointStyle(PointStyle pointStyle) {
-		// checks if false
-		if (PointStyle.FALSE.equals(pointStyle)) {
-			setPointStyle(false);
-		} else {
-			// stores value
-			setValue(Property.POINT_STYLE, pointStyle);
-		}
-	}
-
-	/**
 	 * Sets the style of the point as image.
 	 * 
 	 * @param pointStyle image element of the style of the point as image.
@@ -282,6 +267,21 @@ public class PointElementOptions extends CommonElementOptions {
 	 */
 	public void setPointStyle(Canvas pointStyle) {
 		setValue(Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
+	 * Sets the style of the point.
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
+	public void setPointStyle(PointStyle pointStyle) {
+		// checks if false
+		if (PointStyle.FALSE.equals(pointStyle)) {
+			setPointStyle(false);
+		} else {
+			// stores value
+			setValue(Property.POINT_STYLE, pointStyle);
+		}
 	}
 
 	/**

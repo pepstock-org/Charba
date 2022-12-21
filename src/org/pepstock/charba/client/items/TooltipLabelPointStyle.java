@@ -187,21 +187,6 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	/**
 	 * Sets the style of the point.
 	 * 
-	 * @param pointStyle array of the style of the point.
-	 */
-	public void setPointStyle(boolean pointStyle) {
-		// checks if false
-		if (!pointStyle) {
-			setValue(Property.POINT_STYLE, pointStyle);
-		} else {
-			// if true, remove the value and use default
-			remove(Property.POINT_STYLE);
-		}
-	}
-
-	/**
-	 * Sets the style of the point.
-	 * 
 	 * @param pointStyle style of the point.
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
@@ -230,6 +215,21 @@ public final class TooltipLabelPointStyle extends NativeObjectContainer {
 	 */
 	public void setPointStyle(Canvas pointStyle) {
 		setValue(Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
+	 * Sets the style of the point.
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
+	public void setPointStyle(boolean pointStyle) {
+		// checks if false
+		if (!pointStyle) {
+			setValue(Property.POINT_STYLE, pointStyle);
+		} else {
+			// if true, remove the value and use default
+			remove(Property.POINT_STYLE);
+		}
 	}
 
 	/**
