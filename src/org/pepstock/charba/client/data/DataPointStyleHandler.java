@@ -273,7 +273,14 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 		// gets value
 		Object result = ScriptableUtil.getOptionValue(context, getPointStyleCallback());
 		// checks result
-		if (result instanceof PointStyle) {
+		if (result instanceof Boolean) {
+			// is point style instance false
+			Boolean style = (Boolean) result;
+			// checks if false
+			if (Boolean.FALSE.equals(style)) {
+				return false;
+			}
+		} else if (result instanceof PointStyle) {
 			// is point style instance
 			PointStyle style = (PointStyle) result;
 			// checks if false
@@ -287,13 +294,6 @@ final class DataPointStyleHandler extends NativeObjectContainer {
 		} else if (result instanceof Canvas) {
 			// is canvas element instance
 			return result;
-		} else if (result instanceof Boolean) {
-			// is point style instance false
-			Boolean style = (Boolean) result;
-			// checks if false
-			if (Boolean.FALSE.equals(style)) {
-				return false;
-			}
 		}
 		// default result
 		return defaultValues.getPointStyle().value();

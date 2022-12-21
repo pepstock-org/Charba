@@ -925,23 +925,6 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 	}
 
 	/**
-	 * Sets the style of the point.
-	 * 
-	 * @param pointStyle array of the style of the point.
-	 */
-	public void setPointStyle(boolean pointStyle) {
-		// reset callback
-		setPointStyle((PointStyleCallback<DatasetContext>) null);
-		// checks if false
-		if (!pointStyle) {
-			setValue(Property.POINT_STYLE, pointStyle);
-		} else {
-			// if true, remove the value and use default
-			remove(Property.POINT_STYLE);
-		}
-	}
-
-	/**
 	 * Sets the style of the point for legend.
 	 * 
 	 * @param pointStyle the style of the point for legend.
@@ -976,6 +959,23 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		// if here, the point style is set as image or canvas
 		// then returns the default
 		return getDefaultValues().getElements().getBar().getPointStyle();
+	}
+
+	/**
+	 * Sets the style of the point.
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
+	public void setPointStyle(boolean pointStyle) {
+		// reset callback
+		setPointStyle((PointStyleCallback<DatasetContext>) null);
+		// checks if false
+		if (!pointStyle) {
+			setValue(Property.POINT_STYLE, pointStyle);
+		} else {
+			// if true, remove the value and use default
+			remove(Property.POINT_STYLE);
+		}
 	}
 
 	/**
@@ -1484,9 +1484,6 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 		} else if (result instanceof Img) {
 			// is image element instance
 			return result;
-		} else if (result instanceof Canvas) {
-			// is canvas element instance
-			return result;
 		} else if (result instanceof Boolean) {
 			// is point style instance false
 			Boolean style = (Boolean) result;
@@ -1494,6 +1491,9 @@ public class BarDataset extends HoverFlexDataset implements HasDataPoints, HasOr
 			if (Boolean.FALSE.equals(style)) {
 				return false;
 			}
+		} else if (result instanceof Canvas) {
+			// is canvas element instance
+			return result;
 		}
 		// default result
 		return getDefaultValues().getElements().getBar().getPointStyle().value();
