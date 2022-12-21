@@ -57,21 +57,21 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAngleLines#getColorAsString()
-	 */
-	@Override
-	public String getColorAsString() {
-		return Defaults.get().getGlobal().getBorderColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAngleLines#getLineWidth()
 	 */
 	@Override
 	public int getLineWidth() {
 		return DEFAULT_LINE_WIDTH;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAngleLines#getColorAsString()
+	 */
+	@Override
+	public String getColorAsString() {
+		return Defaults.get().getGlobal().getBorderColorAsString();
 	}
 
 	/*

@@ -86,25 +86,6 @@ public final class AngleLines extends AbstractModel<AbstractScale, IsDefaultAngl
 	}
 
 	/**
-	 * If <code>true</code>, angle lines are shown
-	 * 
-	 * @param display if <code>true</code>, angle lines are shown
-	 */
-	public void setDisplay(boolean display) {
-		setValueAndAddToParent(Property.DISPLAY, display);
-	}
-
-	/**
-	 * If <code>true</code>, angle lines are shown
-	 * 
-	 * @return if <code>true</code>, angle lines are shown.
-	 */
-	@Override
-	public boolean isDisplay() {
-		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
-	}
-
-	/**
 	 * Sets the color of angled lines.
 	 * 
 	 * @param color color of angled lines.
@@ -139,6 +120,25 @@ public final class AngleLines extends AbstractModel<AbstractScale, IsDefaultAngl
 	 */
 	public IsColor getColor() {
 		return ColorBuilder.parse(getColorAsString());
+	}
+
+	/**
+	 * If <code>true</code>, angle lines are shown
+	 * 
+	 * @param display if <code>true</code>, angle lines are shown
+	 */
+	public void setDisplay(boolean display) {
+		setValueAndAddToParent(Property.DISPLAY, display);
+	}
+
+	/**
+	 * If <code>true</code>, angle lines are shown
+	 * 
+	 * @return if <code>true</code>, angle lines are shown.
+	 */
+	@Override
+	public boolean isDisplay() {
+		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
 
 	/**
