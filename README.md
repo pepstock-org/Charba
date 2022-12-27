@@ -275,44 +275,6 @@ Continuous integration and quality gate
 **Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
-
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
-
-### Breaking changes
-
- * remove `stepSize` option from `Time` configuration and options class. Use `stepSize` option in the `Ticks` configuration and options.
- * remove `drawBorder` option from `Grid` configuration and options. Use `display` option in the `border` object in the axes or scales configuration. 
- * remove `borderWidth` option from `Grid` configuration and options. Use `width` option in the `border` object in the axes or scales configuration. 
- * remove `borderColor` option from `Grid` configuration and options. Use `color` option in the `border` object in the axes or scales configuration. 
- * remove `borderDash` option from `Grid` configuration and options. Use `dash` option in the `border` object in the axes or scales configuration. 
- * remove `borderDashOffset` option from `Grid` configuration and options. Use `dashOffset` option in the `border` object in the axes or scales configuration. 
- * change `z` option default value of `Grid` options from `0` to `-1`.
-
-### Features
-
- * import CHART.JS [version 4.1.1](https://github.com/chartjs/Chart.js/releases/tag/v4.1.1).
- * import CHART.JS TREEMAP controller version [v2.2.0](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.2.0).
- * import CHART.JS GEO controller version [v4.1.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v4.1.0).  
- * import CHART.JS DATALABELS plugin version [v2.2.0](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v2.2.0).
- * import CHART.JS GRADIENT plugin version [v0.6.1](https://github.com/kurkle/chartjs-plugin-gradient/releases/tag/v0.6.1).
- * add `autoColors` option to the configuration of the chart and to global options in order to enable `colors` plugin.
- * add `autoColorsForceOverride` option to the configuration of the chart and to global options in order to force to use `colors` plugin.
- * add `border` object option to axes or scales configuration in order to manage the options for the border that run perpendicular to the axis.
- * add `borderRadius` and `useBorderRadius` options to `LegendLabels` configuration and options classes.
- * add `enabledClearByEscape` option to `DatasetsItemsSelectorOptions` plugin configuration in order to enable or disable the selection clearing pressing `Escape` key.
- * enable the change of maximum value at runtime in the `Meter` and `Gauge` datasets.
- * add `FALSE` item to `PointStyle` enumeration.
- * add `getLabelItems` method to `ScaleItem`.
-
-### Development
-
- * change Apache Software License header in source code as [defined](https://www.apache.org/legal/src-headers.html#headers).
- * add `NOTICE` file, [defined](https://www.apache.org/legal/src-headers.html#notice) for Apache Software License adoption.
- * add all javascript bundled resources with the dependency's license within the distribution and a short note summarizing its licensing [defined](https://infra.apache.org/licensing-howto.html#permissive-deps) for Apache Software License adoption.
- * move `LICENSE` and `NOTICE` files to `META-INF` folder in all distribution files.
  
 License
 -------
