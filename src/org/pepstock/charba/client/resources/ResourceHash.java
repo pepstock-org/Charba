@@ -44,7 +44,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'GeoControllerResource' class.
 	 */
-	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 7578834),
+	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 7583128),
 	/**
 	 * Hash item for 'GradientPluginResource' class.
 	 */
