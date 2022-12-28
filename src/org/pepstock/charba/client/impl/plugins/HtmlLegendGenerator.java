@@ -54,6 +54,7 @@ import org.pepstock.charba.client.dom.enums.TextDecoration;
 import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.dom.safehtml.SafeHtml;
 import org.pepstock.charba.client.dom.safehtml.SafeHtmlBuilder;
+import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.enums.PointStyleType;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
@@ -484,6 +485,15 @@ final class HtmlLegendGenerator {
 	private void applyPointStyle(IsChart chart, HtmlLegendItem htmlLegendItem, Div color, int width, int height) {
 		// gets legend label item
 		LegendLabelItem item = htmlLegendItem.getLegendItem();
+		// gets point style
+		PointStyle pointStyle = item.getPointStyle();
+		// checks if is false
+		if (PointStyle.FALSE.equals(pointStyle)) {
+			// removes color div
+			color.removeFromParent();
+			// do nothing
+			return;
+		}
 		// checks if point style is an image
 		if (PointStyleType.IMAGE.equals(item.getPointStyleType())) {
 			// gets point style image
