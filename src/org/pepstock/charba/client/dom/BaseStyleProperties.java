@@ -25,6 +25,7 @@ import org.pepstock.charba.client.dom.enums.CursorType;
 import org.pepstock.charba.client.dom.enums.Display;
 import org.pepstock.charba.client.dom.enums.Position;
 import org.pepstock.charba.client.dom.enums.TextDecoration;
+import org.pepstock.charba.client.dom.enums.Visibility;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -1523,8 +1524,22 @@ public final class BaseStyleProperties {
 	 *
 	 * @return the CSS 'visibility' property
 	 */
-	@JsProperty
-	public native String getVisibility();
+	@JsProperty(name = "visibility")
+	public native String getVisibilityAsString();
+
+	/**
+	 *
+	 * Returns the CSS 'visibility' property from element.
+	 *
+	 * @return the CSS 'visibility' property
+	 */
+	@JsOverlay
+	public Visibility getVisibility() {
+		// gets visibility as string
+		String visibility = getVisibilityAsString();
+		// checks if consistent
+		return Key.getKeyByValue(Visibility.values(), visibility);
+	}
 
 	/**
 	 *
@@ -1534,6 +1549,20 @@ public final class BaseStyleProperties {
 	 */
 	@JsProperty
 	public native void setVisibility(String visibility);
+
+	/**
+	 *
+	 * Sets the CSS 'visibility' property in the element.
+	 *
+	 * @param visibility the CSS 'visibility' property to set
+	 */
+	@JsOverlay
+	public void setVisibility(Visibility visibility) {
+		// checks if argument is consistent
+		if (Key.isValid(visibility)) {
+			setVisibility(visibility.value());
+		}
+	}
 
 	/**
 	 *
