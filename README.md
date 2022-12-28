@@ -268,6 +268,14 @@ See also [Charba showcase J2CL source code](https://github.com/pepstock-org/Char
 
 The samples are going to reflect what CHART.JS samples are showing [here](http://www.chartjs.org/samples/latest/).
 
+Going to next release
+---------------------
+
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
+
+### Features
+
+ * import CHART.JS GEO controller version [v4.1.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v4.1.1).  
 
 Continuous integration and quality gate
 ---------------------------------------
