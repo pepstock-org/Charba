@@ -276,6 +276,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * import CHART.JS GEO controller version [v4.1.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v4.1.1).
+ * import CHART.JS ANNOTATION plugin version [v2.1.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.1.1).
  * add `Visibility` enumeration with values for `visibility` CSS style option.
 
 Continuous integration and quality gate
