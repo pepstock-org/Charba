@@ -268,6 +268,13 @@ See also [Charba showcase J2CL source code](https://github.com/pepstock-org/Char
 
 The samples are going to reflect what CHART.JS samples are showing [here](http://www.chartjs.org/samples/latest/).
 
+Continuous integration and quality gate
+---------------------------------------
+
+**Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
+
+At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
+
 Going to next release
 ---------------------
 
@@ -275,18 +282,15 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
- * import CHART.JS [version 4.1.2](https://github.com/chartjs/Chart.js/releases/tag/v4.1.2).
+ * import CHART.JS version [4.1.2](https://github.com/chartjs/Chart.js/releases/tag/v4.1.2).
  * import CHART.JS GEO controller version [v4.1.1](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v4.1.1).
  * import CHART.JS ANNOTATION plugin version [v2.1.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.1.1).
  * import LUXON datetime library version [v3.2.1](https://github.com/moment/luxon/releases/tag/3.2.1).
  * add `Visibility` enumeration with values for `visibility` CSS style option.
+ 
+### Development
 
-Continuous integration and quality gate
----------------------------------------
-
-**Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
-
-At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
+ * change dependency for Google Closure Compiler, version [v20230103](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20230103). 
  
 License
 -------
