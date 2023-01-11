@@ -1314,6 +1314,25 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	}
 
 	/**
+	 * Check if a plugin with the specific ID is registered and enabled.
+	 * 
+	 * @param pluginId the ID of the plugin of which to check if it is enabled
+	 * @return boolean returns true if plugin is registered and enabled
+	 */
+	@Override
+	public final boolean isPluginEnabled(String pluginId) {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
+		// checks consistency of chart and event
+		if (instance != null) {
+			// gets plugin status
+			return chart.isPluginEnabled(pluginId);
+		}
+		// if here, chart not consistent then returns false
+		return false;
+	}
+
+	/**
 	 * Draws the chart.<br>
 	 * It can be invoked once during the life cycle of the chart.
 	 */

@@ -685,6 +685,14 @@ public interface IsChart {
 	void draw();
 
 	/**
+	 * Check if a plugin with the specific ID is registered and enabled.
+	 * 
+	 * @param pluginId the ID of the plugin of which to check if it is enabled
+	 * @return boolean returns true if plugin is registered and enabled
+	 */
+	boolean isPluginEnabled(String pluginId);
+
+	/**
 	 * Checks if datasets, requested to be stored, are an acceptable type or amount.<br>
 	 * If a dataset type or the amount of datasets are not consistent for the chart, a {@link IllegalArgumentException} will be thrown.
 	 * 

@@ -728,6 +728,16 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#isPluginEnabled(java.lang.String)
+	 */
+	@Override
+	public boolean isPluginEnabled(String pluginId) {
+		return chart.isPluginEnabled(pluginId);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#draw()
 	 */
 	@Override

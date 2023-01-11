@@ -302,6 +302,12 @@ public final class GlobalPlugins {
 		return enabled;
 	}
 
+	/**
+	 * Internal class to wrap a native plugins container.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
 	private static class InternalPlugins extends NativeObjectContainer {
 
 		InternalPlugins(NativeObject nativeObject) {

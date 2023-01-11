@@ -88,14 +88,6 @@ public final class Chart implements IsJSType {
 	}
 
 	/**
-	 * Registers a plugin by chart registry.
-	 * 
-	 * @param plugin plugin instance to register
-	 */
-	@JsMethod
-	native void register(NativeObject plugin);
-
-	/**
 	 * Use this to manually resize the canvas element.<br>
 	 * This is run each time the canvas container is resized, but can be called this method manually if you change the size of the canvas nodes container element.
 	 */
@@ -322,6 +314,15 @@ public final class Chart implements IsJSType {
 	 */
 	@JsMethod
 	native ArrayObject getActiveElements();
+
+	/**
+	 * Check if a plugin with the specific ID is registered and enabled.
+	 * 
+	 * @param pluginId the ID of the plugin of which to check if it is enabled
+	 * @return boolean returns true if plugin is registered and enabled
+	 */
+	@JsMethod
+	native boolean isPluginEnabled(String pluginId);
 
 	/**
 	 * Returns the CHART JS chart ID.
