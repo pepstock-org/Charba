@@ -287,7 +287,11 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import CHART.JS ANNOTATION plugin version [v2.1.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.1.1).
  * import LUXON datetime library version [v3.2.1](https://github.com/moment/luxon/releases/tag/3.2.1).
  * add `Visibility` enumeration with values for `visibility` CSS style option.
+
+### Fixed Bugs 
  
+ * [Alert #2](https://github.com/pepstock-org/Charba/security/dependabot/2): importing LUXON datetime library version [v3.2.1](https://github.com/moment/luxon/releases/tag/3.2.1), the alert is solved.
+
 ### Development
 
  * change dependency for Google Closure Compiler, version [v20230103](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20230103). 
