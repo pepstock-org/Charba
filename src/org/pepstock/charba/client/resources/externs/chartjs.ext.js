@@ -54,6 +54,11 @@ Chart.prototype.toBase64Image = function(type, quality) {};
  */
 Chart.prototype.generateLegend = function() {};
 /**
+ * @param {string} pluginId
+ * @return {boolean}
+ */
+Chart.prototype.isPluginEnabled = function(pluginId) {};
+/**
  * @param {Object} event
  * @param {string} mode 
  * @param {Object} options 

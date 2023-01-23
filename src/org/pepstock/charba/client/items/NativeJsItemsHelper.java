@@ -186,6 +186,25 @@ final class NativeJsItemsHelper {
 	static native boolean isHorizontal(NativeObject scale);
 
 	/**
+	 * Formats the time passed as argument with the date configuration.
+	 * 
+	 * @param scale scale native object instance
+	 * @param time epoch time to format
+	 * @return formatted time
+	 */
+	static native String format(NativeObject scale, double time);
+
+	/**
+	 * Formats the time passed as argument with passed format.
+	 * 
+	 * @param scale scale native object instance
+	 * @param time epoch time to format
+	 * @param format string format to apply
+	 * @return formatted time
+	 */
+	static native String format(NativeObject scale, double time, String format);
+
+	/**
 	 * Returns a set of predefined style properties that should be used to represent the dataset or the data if the index is specified.
 	 * 
 	 * @param controller controller instance

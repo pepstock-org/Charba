@@ -749,6 +749,21 @@ CharbaJsItemsHelper.isHorizontal = function(obj) {
   return obj.isHorizontal();
 }
 /**
+ * Formats the time passed as argument with the date configuration or the format.
+ *
+ * @param {Object} obj scale native object instance 
+ * @param {number} time epoch time to format
+ * @param {string=} fmt format to apply
+ * @return {string} formatted time
+ */
+CharbaJsItemsHelper.format = function(obj, time, fmt) {
+  if (typeof obj.format === 'function') { 
+    return fmt ? obj.format(time, fmt) : obj.format(time);
+  }
+  return null;
+}
+
+/**
  * Returns a set of predefined style properties that should be used to represent the dataset or the data if the index is specified.
  *
  * @param {Object} controller controller instance 

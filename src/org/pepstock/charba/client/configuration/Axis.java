@@ -482,7 +482,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @return the scale item related to this axis
 	 */
-	final ScaleItem getScaleItem() {
+	public final ScaleItem getScaleItem() {
 		// gets scales from chart node
 		ScalesNode scaleNode = getChart().getNode().getScales();
 		// gets scale item

@@ -477,6 +477,53 @@ public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 	}
 
 	/**
+	 * Formats the time passed as argument with date configuration.
+	 * 
+	 * @param time epoch time to format
+	 * @return formatted time
+	 */
+	public final String format(Date time) {
+		return format(time, null);
+	}
+
+	/**
+	 * Formats the time passed as argument with date configuration.
+	 * 
+	 * @param time epoch time to format
+	 * @return formatted time
+	 */
+	public final String format(long time) {
+		return format(time, null);
+	}
+
+	/**
+	 * Formats the time passed as argument with passed format.
+	 * 
+	 * @param time epoch time to format
+	 * @param format string format to apply
+	 * @return formatted time
+	 */
+	public final String format(Date time, String format) {
+		// checks date
+		if (time != null) {
+			return format(time.getTime(), format);
+		}
+		// if here, date argument is not consistent
+		return Undefined.STRING;
+	}
+
+	/**
+	 * Formats the time passed as argument with passed format.
+	 * 
+	 * @param time epoch time to format
+	 * @param format string format to apply
+	 * @return formatted time
+	 */
+	public final String format(long time, String format) {
+		return JsItemsHelper.get().format(this, time, format);
+	}
+
+	/**
 	 * Returns the value on the axis related to an event position.
 	 * 
 	 * @param container event container instance used to get the value from the scale

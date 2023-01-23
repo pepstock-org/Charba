@@ -399,6 +399,13 @@ CharbaJsItemsHelper.getValueForDistanceFromCenter = function(object, distance) {
  */
 CharbaJsItemsHelper.isHorizontal = function(object) {};
 /**
+ * @param {Object} object
+ * @param {number} time
+ * @param {string=} fmt
+ * @return {string}
+ */
+CharbaJsItemsHelper.format = function(object, time, fmt) {};
+/**
  * @param {Object} controller 
  * @param {number} dataIndex 
  * @return {Object}

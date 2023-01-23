@@ -20,6 +20,7 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Constants;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -301,6 +302,29 @@ final class JsItemsHelper {
 		}
 		// if here, scale item not consistent
 		return Undefined.BOOLEAN;
+	}
+
+	/**
+	 * Formats the time passed as argument with the passed format.
+	 * 
+	 * @param scale scale native object instance
+	 * @param time epoch time to format
+	 * @param format string format to apply
+	 * @return formatted time
+	 */
+	String format(ScaleItem scale, long time, String format) {
+		// checks consistency
+		if (scale != null && Checker.isPositive(time)) {
+			// checks if format is passed
+			if (format != null) {
+				return NativeJsItemsHelper.format(scale.nativeObject(), time, format);
+			}
+			// if here, it uses the scale configuration
+			return NativeJsItemsHelper.format(scale.nativeObject(), time);
+		}
+		// if here the arguments are not consistent
+		// then undefined value
+		return Undefined.STRING;
 	}
 
 	/**
