@@ -292,6 +292,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `isPluginEnabled` method to the chart classes.
  * add `format` method to the time scale item classes.
  * add `fit` item to `Overflow` enumeration for treemap charts.
+ * add `sumKeys` option to the treemap datasets.
 
 ### Fixed Bugs 
  

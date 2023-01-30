@@ -97,6 +97,7 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		TREE("tree"),
 		TREE_LEAF_KEY("treeLeafKey"),
 		KEY("key"),
+		SUM_KEYS("sumKeys"),
 		GROUPS("groups"),
 		SPACING("spacing"),
 		RTL("rtl"),
@@ -513,6 +514,62 @@ public final class TreeMapDataset extends HoverFlexDataset {
 		String value = getTreeLeafKeyAsString();
 		// returns creating the key
 		return value != null ? Key.create(value) : null;
+	}
+
+	/**
+	 * Sets multiple keys to add additional sums, on top of the `key` one, for scriptable options use.<br>
+	 * It's needed ONLY when tree data is set by a list of objects.
+	 * 
+	 * @param sumKeys multiple keys to add additional sums, on top of the `key` one, for scriptable options use.
+	 */
+	public void setSumKeys(String... sumKeys) {
+		setArrayValue(Property.SUM_KEYS, ArrayString.fromOrNull(sumKeys));
+	}
+
+	/**
+	 * Sets multiple keys to add additional sums, on top of the `key` one, for scriptable options use.<br>
+	 * It's needed ONLY when tree data is set by a list of objects.
+	 * 
+	 * @param sumKeys multiple keys to add additional sums, on top of the `key` one, for scriptable options use.
+	 */
+	public void setSumKeys(Key... sumKeys) {
+		setArrayValue(Property.SUM_KEYS, ArrayString.fromOrNull(sumKeys));
+	}
+
+	/**
+	 * Sets multiple keys to add additional sums, on top of the `key` one, for scriptable options use.<br>
+	 * It's needed ONLY when tree data is set by a list of objects.
+	 * 
+	 * @param sumKeys multiple keys to add additional sums, on top of the `key` one, for scriptable options use.
+	 */
+	public void setSumKeys(Set<Key> sumKeys) {
+		setArrayValue(Property.SUM_KEYS, sumKeys != null ? ArrayString.fromOrNull(sumKeys) : null);
+	}
+
+	/**
+	 * Returns multiple keys to add additional sums, on top of the `key` one, for scriptable options use.<br>
+	 * It's needed ONLY when tree data is set by a list of objects.
+	 * 
+	 * @return multiple keys to add additional sums, on top of the `key` one, for scriptable options use.
+	 */
+	public Set<String> getSumKeysAsString() {
+		// retrieves the array
+		ArrayString array = getArrayValue(Property.SUM_KEYS);
+		// if the array is not consistent returns an empty list
+		return array != null ? ArraySetHelper.set(array) : Collections.emptySet();
+	}
+
+	/**
+	 * Returns multiple keys to add additional sums, on top of the `key` one, for scriptable options use.<br>
+	 * It's needed ONLY when tree data is set by a list of objects.
+	 * 
+	 * @return multiple keys to add additional sums, on top of the `key` one, for scriptable options use.
+	 */
+	public Set<Key> getSumKeys() {
+		// retrieves the array
+		ArrayString array = getArrayValue(Property.SUM_KEYS);
+		// if the array is not consistent returns an empty list
+		return array != null ? ArraySetHelper.set(array, KEY_FACTORY) : Collections.emptySet();
 	}
 
 	/**

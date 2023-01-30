@@ -51,6 +51,7 @@ public final class TreeMapDataPoint extends AbstractDataPoint {
 		W("w"),
 		H("h"),
 		V("v"),
+		VS("vs"),
 		S("s"),
 		L("l"),
 		G("g"),
@@ -82,6 +83,8 @@ public final class TreeMapDataPoint extends AbstractDataPoint {
 
 	// inner data
 	private final InnerData innerData;
+	// sum keys data
+	private final TreeMapSumKeysData sumKeysData;
 
 	/**
 	 * Creates the object with a native object passed as argument.
@@ -92,6 +95,7 @@ public final class TreeMapDataPoint extends AbstractDataPoint {
 		super(nativeObject);
 		// loads inner element
 		this.innerData = new InnerData(getValue(Property.DATA));
+		this.sumKeysData = new TreeMapSumKeysData(getValue(Property.VS));
 	}
 
 	/**
@@ -101,6 +105,15 @@ public final class TreeMapDataPoint extends AbstractDataPoint {
 	 */
 	public InnerData getData() {
 		return innerData;
+	}
+
+	/**
+	 * Returns the sum keys data.
+	 * 
+	 * @return the sum keys data.
+	 */
+	public TreeMapSumKeysData getSumKeysData() {
+		return sumKeysData;
 	}
 
 	/**
