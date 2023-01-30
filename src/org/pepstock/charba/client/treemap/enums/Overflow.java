@@ -34,7 +34,11 @@ public enum Overflow implements Key
 	/**
 	 * The label is removed altogether if the rectangle is too small for it.
 	 */
-	HIDDEN("hidden");
+	HIDDEN("hidden"),
+	/**
+	 * The label will be automatically fit inside the rectangle if its dimension is bigger than the rectangle size.
+	 */
+	FIT("fit");
 
 	// name value of property
 	private final String value;

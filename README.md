@@ -291,6 +291,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `Visibility` enumeration with values for `visibility` CSS style option.
  * add `isPluginEnabled` method to the chart classes.
  * add `format` method to the time scale item classes.
+ * add `fit` item to `Overflow` enumeration for treemap charts.
 
 ### Fixed Bugs 
  
