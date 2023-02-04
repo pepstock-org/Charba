@@ -60,7 +60,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'LuxonAdapterResource' class.
 	 */
-	LUXON_ADAPTER_RESOURCE(ResourceName.DATE_TIME_ADAPTER, 165291),
+	LUXON_ADAPTER_RESOURCE(ResourceName.DATE_TIME_ADAPTER, 165293),
 	/**
 	 * Hash item for 'LuxonLibraryResource' class.
 	 */

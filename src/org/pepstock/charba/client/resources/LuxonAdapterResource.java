@@ -29,9 +29,9 @@ final class LuxonAdapterResource extends AbstractInjectableResource {
 	// encoded javascript content of chartjs-adapter-luxon.min.js
 	private static final String[] CONTENT = {
 		"/*!",
-		" * chartjs-adapter-luxon v1.3.0",
+		" * chartjs-adapter-luxon v1.3.1",
 		" * https://www.chartjs.org",
-		" * (c) 2022 chartjs-adapter-luxon Contributors",
+		" * (c) 2023 chartjs-adapter-luxon Contributors",
 		" * Released under the MIT license",
 		" */",
 		"!function(e,t){\"object\"==typeof exports&&\"undefined\"!=typeof module?t(require(\"chart.js\"),require(\"luxon\")):\"function\"==typeof define&&define.amd?define([\"chart.js\",\"luxon\"],t):t((e=\"undefined\"!=typeof globalThis?globalThis:e||self).Chart,e.luxon)}(this,(function(e,t){\"use strict\";const n={datetime:t.DateTime.DATETIME_MED_WITH_SECONDS,millisecond:\"h:mm:ss.SSS a\",second:t.DateTime.TIME_WITH_SECONDS,minute:t.DateTime.TIME_SIMPLE,hour:{hour:\"numeric\"},day:{day:\"numeric\",month:\"short\"},week:\"DD\",month:{month:\"short\",year:\"numeric\"},quarter:\"'Q'q - yyyy\",year:{year:\"numeric\"}};e._adapters._date.override({_id:\"luxon\",_create:function(e){return t.DateTime.fromMillis(e,this.options)},init(e){this.options.locale||(this.options.locale=e.locale)},formats:function(){return n},parse:function(e,n){const i=this.options,r=typeof e;return null===e||\"undefined\"===r?null:(\"number\"===r?e=this._create(e):\"string\"===r?e=\"string\"==typeof n?t.DateTime.fromFormat(e,",
