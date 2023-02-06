@@ -39,9 +39,9 @@ Even if **Charba** was born only as GWT chart library, as of version 3, **Charba
 Building
 --------
 
-To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.0/build.xml).
+To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.1/build.xml).
 
-The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.0/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
+The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.1/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
 
 The first distribution is a **Charba** file without any GWT dependency (but working on GWT anyway), consumable also in other [J2CL - JavaToClosure](https://github.com/google/j2cl) frameworks, like [Google Elemental2](https://github.com/google/elemental2) and [Elemento](https://github.com/hal/elemento).
 
@@ -55,7 +55,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
-[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_60.png)](https://github.com/pepstock-org/Charba-Showcase/blob/6.0/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_61.png)](https://github.com/pepstock-org/Charba-Showcase/blob/6.1/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------
@@ -70,18 +70,18 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>6.0</version>
+    <version>6.1</version>
     <!-- for GWT -->
-    <version>6.0-gwt</version>
+    <version>6.1-gwt</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="6.0"/>
+<dependency org="org.pepstock" name="charba" rev="6.1"/>
 <!-- for GWT -->
-<dependency org="org.pepstock" name="charba" rev="6.0-gwt"/>
+<dependency org="org.pepstock" name="charba" rev="6.1-gwt"/>
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration in your GWT project module configuration:
@@ -249,7 +249,7 @@ Documentation
 
 All **Charba** documentation will be maintained in [Charba-Wiki](https://github.com/pepstock-org/Charba-Wiki) project.
 
-API JavaDoc for version **6.0** is published [here](https://pepstock-org.github.io/Charba/6.0/index.html).
+API JavaDoc for version **6.1** is published [here](https://pepstock-org.github.io/Charba/6.1/index.html).
 
 You can also access the previous API JavaDoc, because every version is published to `https://pepstock-org.github.io/Charba/[version.release]`.
 
@@ -274,34 +274,6 @@ Continuous integration and quality gate
 **Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
-
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:	
-
-### Features
-
- * import CHART.JS version [4.2.0](https://github.com/chartjs/Chart.js/releases/tag/v4.2.0).
- * import CHART.JS GEO controller version [v4.1.2](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v4.1.2).
- * import CHART.JS MATRIX controller version [v2.0.1](https://github.com/kurkle/chartjs-chart-matrix/releases/tag/v2.0.1).
- * import CHART.JS TREEMAP controller version [v2.3.0](https://github.com/kurkle/chartjs-chart-treemap/releases/tag/v2.3.0).
- * import CHART.JS ANNOTATION plugin version [v2.1.2](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.1.2).
- * import CHART.JS LUXON adapter version [v1.3.1](https://github.com/chartjs/chartjs-adapter-luxon/releases/tag/v1.3.1).
- * import LUXON datetime library version [v3.2.1](https://github.com/moment/luxon/releases/tag/3.2.1).
- * add `Visibility` enumeration with values for `visibility` CSS style option.
- * add `isPluginEnabled` method to the chart classes.
- * add `format` method to the time scale item classes.
- * add `fit` item to `Overflow` enumeration for treemap charts.
- * add `sumKeys` option to the treemap datasets.
-
-### Fixed Bugs 
- 
- * [Alert #2](https://github.com/pepstock-org/Charba/security/dependabot/2): importing LUXON datetime library version [v3.2.1](https://github.com/moment/luxon/releases/tag/3.2.1), the alert is solved.
-
-### Development
-
- * change dependency for Google Closure Compiler, version [v20230103](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20230103). 
  
 License
 -------
