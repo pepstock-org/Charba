@@ -46,6 +46,10 @@ public enum Fill implements IsFill
 	 */
 	STACK("stack", FillingMode.PREDEFINED),
 	/**
+	 * Fill inside line.
+	 */
+	SHAPE("shape", FillingMode.PREDEFINED),
+	/**
 	 * Does not fill any area
 	 */
 	FALSE("false", FillingMode.PREDEFINED);

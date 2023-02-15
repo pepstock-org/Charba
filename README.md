@@ -283,6 +283,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * import CHART.JS version [v4.2.1](https://github.com/chartjs/Chart.js/releases/tag/v4.2.1).
+ * add `Fill.SHAPE` item to the filling options.
  
 ### Fixed Bugs
 
