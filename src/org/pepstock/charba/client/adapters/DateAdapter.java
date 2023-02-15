@@ -155,7 +155,7 @@ public final class DateAdapter {
 	 */
 	public String format(long time, String format) {
 		// checks if arguments are consistent
-		if (time >= 0 && format != null) {
+		if (!Double.isNaN(time) && format != null) {
 			// invokes the date adapter to format the time
 			return nativeAdapter.format(time, format);
 		}
@@ -173,7 +173,7 @@ public final class DateAdapter {
 	 */
 	public String format(long time, TimeUnit unit) {
 		// checks if arguments are consistent
-		if (time >= 0 && Key.isValid(unit)) {
+		if (!Double.isNaN(time) && Key.isValid(unit)) {
 			// invokes the date adapter to format the time
 			return format(time, getFormats().getFormat(unit));
 		}
@@ -228,7 +228,7 @@ public final class DateAdapter {
 	 */
 	public Date add(long time, long amount, TimeUnit unit) {
 		// checks if arguments are consistent
-		if (time >= 0 && Key.isValid(unit)) {
+		if (!Double.isNaN(time) && Key.isValid(unit)) {
 			// invoke the date adapter to add an amount of time units
 			double value = nativeAdapter.add(time, amount, unit.value());
 			// creates and returns new date
@@ -268,7 +268,7 @@ public final class DateAdapter {
 	 */
 	public double diff(long maxTime, long minTime, TimeUnit unit) {
 		// checks if arguments are consistent
-		if (maxTime >= 0 && minTime >= 0 && maxTime >= minTime && Key.isValid(unit)) {
+		if (!Double.isNaN(maxTime) && !Double.isNaN(minTime) && maxTime >= minTime && Key.isValid(unit)) {
 			// invoke the date adapter to get the difference in time units
 			return nativeAdapter.diff(maxTime, minTime, unit.value());
 		}
@@ -305,7 +305,7 @@ public final class DateAdapter {
 	 */
 	public Date startOf(long time, TimeUnit unit) {
 		// checks if arguments are consistent
-		if (time >= 0 && Key.isValid(unit)) {
+		if (!Double.isNaN(time) && Key.isValid(unit)) {
 			// invoke the date adapter to get the date start of by time unit
 			double value = nativeAdapter.startOf(time, unit.value(), Integer.MAX_VALUE);
 			// creates and returns new date
@@ -343,7 +343,7 @@ public final class DateAdapter {
 	 */
 	public Date startOf(long time, IsoWeekDay weekday) {
 		// checks if arguments are consistent
-		if (time >= 0 && weekday != null) {
+		if (!Double.isNaN(time) && weekday != null) {
 			// invoke the date adapter to get the date start of by time unit
 			double value = nativeAdapter.startOf(time, ISO_WEEK_UNIT, weekday.value());
 			// creates and returns new date
@@ -381,7 +381,7 @@ public final class DateAdapter {
 	 */
 	public Date endOf(long time, TimeUnit unit) {
 		// checks if arguments are consistent
-		if (time >= 0 && Key.isValid(unit)) {
+		if (!Double.isNaN(time) && Key.isValid(unit)) {
 			// invoke the date adapter to get the date end of by time unit
 			double value = nativeAdapter.endOf(time, unit.value());
 			// creates and returns new date

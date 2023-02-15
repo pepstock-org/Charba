@@ -286,7 +286,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  
 ### Fixed Bugs
 
- * [#87](https://github.com/pepstock-org/Charba/issues/87): remove check, checking if the epoch ust be greater than 1, when dates are read from java script object. Thanks @Speykious.
+ * [#87](https://github.com/pepstock-org/Charba/issues/87): remove check, which tested if the epoch must be greater than 1, when dates are managed. Thanks @Speykious.
 
 License
 -------
