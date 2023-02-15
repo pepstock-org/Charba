@@ -90,7 +90,7 @@ public class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLin
 	protected Line(Elements elements, Key childKey, IsDefaultLine defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 		// creates fill handler instance
-		this.fillHandler = new FillHandler(this, getDefaultValues().getFill(), getNativeObject());
+		this.fillHandler = new FillHandler(this, getDefaultValues().getFill(), getNativeObject(), FillHandler.Property.FILL);
 	}
 
 	/*

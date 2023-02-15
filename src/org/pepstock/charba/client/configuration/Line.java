@@ -48,6 +48,7 @@ import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.Stepped;
 import org.pepstock.charba.client.items.FillBaseline;
+import org.pepstock.charba.client.items.FillColors;
 import org.pepstock.charba.client.options.AbstractElement;
 
 /**
@@ -415,8 +416,29 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	 * 
 	 * @return the baseline value to use for filling
 	 */
-	protected FillBaseline getFillBaseline() {
+	public FillBaseline getFillBaseline() {
 		return getConfiguration().getElements().getLine().getFillBaseline();
+	}
+
+	/**
+	 * Sets the above and below color of baseline to use for filling.
+	 * 
+	 * @param colors the above and below color of baseline to use for filling.
+	 */
+	public void setFillColors(FillColors colors) {
+		// resets callback
+		setFill((FillCallback) null);
+		// stores value
+		getConfiguration().getElements().getLine().setFillColors(colors);
+	}
+
+	/**
+	 * Returns the above and below color of baseline to use for filling.
+	 * 
+	 * @return the above and below color of baseline to use for filling.
+	 */
+	public FillColors getFillColors() {
+		return getConfiguration().getElements().getLine().getFillColors();
 	}
 
 	/**

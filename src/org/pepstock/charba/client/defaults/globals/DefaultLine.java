@@ -26,6 +26,7 @@ import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.Stepped;
 import org.pepstock.charba.client.items.FillBaseline;
+import org.pepstock.charba.client.items.FillColors;
 
 /**
  * CHART.JS default values for LINE element.
@@ -128,6 +129,16 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	@Override
 	public FillBaseline getFillBaseline() {
 		return FillBaseline.DEFAULT_INSTANCE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFillHandler#getFillColors()
+	 */
+	@Override
+	public FillColors getFillColors() {
+		return null;
 	}
 
 	/*

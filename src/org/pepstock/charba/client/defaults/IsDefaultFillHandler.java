@@ -20,6 +20,7 @@ package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.items.FillBaseline;
+import org.pepstock.charba.client.items.FillColors;
 
 /**
  * Interface to define fill defaults values.
@@ -41,5 +42,12 @@ public interface IsDefaultFillHandler {
 	 * @return the baseline value to use for filling
 	 */
 	FillBaseline getFillBaseline();
+
+	/**
+	 * Returns the above and below color of baseline to use for filling.
+	 * 
+	 * @return the above and below color of baseline to use for filling.
+	 */
+	FillColors getFillColors();
 
 }

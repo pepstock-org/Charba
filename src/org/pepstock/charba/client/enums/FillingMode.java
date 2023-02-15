@@ -46,7 +46,11 @@ public enum FillingMode implements Key
 	/**
 	 * Baseline value to fill at specific axis value.
 	 */
-	BASELINE("baseline"), // FIXME check where used
+	BASELINE("baseline"),
+	/**
+	 * The fill options sets the color above and below the baseline.
+	 */
+	COLORS("colors"),
 	/**
 	 * Predefined values by {@link Fill}.
 	 */

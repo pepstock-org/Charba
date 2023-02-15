@@ -20,6 +20,7 @@ package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.items.FillBaseline;
+import org.pepstock.charba.client.items.FillColors;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -63,6 +64,11 @@ public interface IsFill extends Key {
 		} else if (object instanceof FillBaseline) {
 			// casts to fill baseline
 			FillBaseline cast = (FillBaseline) object;
+			// returns native object
+			return cast.nativeObject();
+		} else if (object instanceof FillColors) {
+			// casts to fill baseline
+			FillColors cast = (FillColors) object;
 			// returns native object
 			return cast.nativeObject();
 		} else if (object instanceof Integer) {

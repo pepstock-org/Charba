@@ -31,6 +31,8 @@ import org.pepstock.charba.client.enums.FillingMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
 import org.pepstock.charba.client.items.FillBaseline;
+import org.pepstock.charba.client.items.FillColors;
+import org.pepstock.charba.client.items.ItemsEnvelop;
 
 /**
  * Manages the FILL property of options in order to use the same logic between line datasets and options/configuration.
@@ -46,6 +48,8 @@ public class FillHandler extends PropertyHandler<IsFill> {
 	protected enum Property implements Key
 	{
 		FILL("fill"),
+		// used in fill colors
+		TARGET("target"),
 		// internal property key to map the type of FILL property
 		CHARBA_FILLING_MODE("charbaFillingMode");
 
@@ -73,6 +77,10 @@ public class FillHandler extends PropertyHandler<IsFill> {
 
 	}
 
+	// property to use the fill data.
+	// This is needed for fill colors when the key can be target
+	private final Key property;
+
 	/**
 	 * Creates a fill handler with the native object where FILL property must be managed and the default value to use when the property does not exist.<br>
 	 * This is called from <code>data</code> package.
@@ -82,7 +90,19 @@ public class FillHandler extends PropertyHandler<IsFill> {
 	 * @param envelop envelop of native object where FILL property must be managed
 	 */
 	protected FillHandler(AbstractNode parent, IsFill defaultValues, DataEnvelop<NativeObject> envelop) {
-		this(parent, defaultValues, Envelop.checkAndGetIfValid(envelop).getContent());
+		this(parent, defaultValues, Envelop.checkAndGetIfValid(envelop).getContent(), Property.FILL);
+	}
+
+	/**
+	 * Creates a fill handler with the native object where FILL property must be managed and the default value to use when the property does not exist.<br>
+	 * This is called from <code>items</code> package.
+	 * 
+	 * @param parent model which contains the fill handler.
+	 * @param defaultValues default value of FILL to use when the property does not exist
+	 * @param envelop envelop of native object where FILL property must be managed
+	 */
+	protected FillHandler(AbstractNode parent, IsFill defaultValues, ItemsEnvelop<NativeObject> envelop) {
+		this(parent, defaultValues, Envelop.checkAndGetIfValid(envelop).getContent(), Property.TARGET);
 	}
 
 	/**
@@ -91,11 +111,14 @@ public class FillHandler extends PropertyHandler<IsFill> {
 	 * @param parent model which contains the fill handler.
 	 * @param defaultValues default value of FILL to use when the property does not exist
 	 * @param nativeObject native object where FILL property must be managed
+	 * @param property the key to use to store the fill options
 	 */
-	FillHandler(AbstractNode parent, IsFill defaultValues, NativeObject nativeObject) {
+	FillHandler(AbstractNode parent, IsFill defaultValues, NativeObject nativeObject, Key property) {
 		super(parent, defaultValues, nativeObject);
 		// checks default value instance
 		Checker.assertCheck(IsFill.isValid(getDefaultValues()), "Default fill argument is null or not consistent");
+		// stores key
+		this.property = property;
 	}
 
 	/**
@@ -104,7 +127,7 @@ public class FillHandler extends PropertyHandler<IsFill> {
 	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
 	 */
 	protected void setFill(boolean fill) {
-		setValueAndAddToParent(Property.FILL, fill);
+		setValueAndAddToParent(this.property, fill);
 		// stores the filling mode
 		setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
 	}
@@ -138,22 +161,22 @@ public class FillHandler extends PropertyHandler<IsFill> {
 			// checks if is no fill
 			if (Fill.FALSE.equals(fill)) {
 				// sets the boolean value instead of string one
-				setValueAndAddToParent(Property.FILL, false);
+				setValueAndAddToParent(this.property, false);
 				// stores the filling mode
 				setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
 			} else if (Fill.isPredefined(fill)) {
 				// sets value
-				setValueAndAddToParent(Property.FILL, fill);
+				setValueAndAddToParent(this.property, fill);
 				// stores the filling mode
 				setValue(Property.CHARBA_FILLING_MODE, fill.getMode());
 			} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(fill.getMode())) {
 				// sets value
-				setValueAndAddToParent(Property.FILL, fill.getValueAsInt());
+				setValueAndAddToParent(this.property, fill.getValueAsInt());
 				// stores the filling mode
 				setValue(Property.CHARBA_FILLING_MODE, FillingMode.ABSOLUTE_DATASET_INDEX);
 			} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(fill.getMode())) {
 				// sets value
-				setValueAndAddToParent(Property.FILL, fill.getValue());
+				setValueAndAddToParent(this.property, fill.getValue());
 				// stores the filling mode
 				setValue(Property.CHARBA_FILLING_MODE, FillingMode.RELATIVE_DATASET_INDEX);
 			}
@@ -174,20 +197,20 @@ public class FillHandler extends PropertyHandler<IsFill> {
 			// to return the right value
 			if (FillingMode.PREDEFINED_BOOLEAN.equals(mode)) {
 				// returns no fill
-				return getValue(Property.FILL, false) ? Fill.ORIGIN : Fill.FALSE;
+				return getValue(this.property, false) ? Fill.ORIGIN : Fill.FALSE;
 			} else if (FillingMode.PREDEFINED.equals(mode)) {
 				// gets the fill value, using null as default
-				IsFill fill = getValue(Property.FILL, Fill.values(), null);
+				IsFill fill = getValue(this.property, Fill.values(), null);
 				// if null, returns the default one
 				return fill == null ? getDefaultValues() : fill;
 			} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(mode)) {
 				// the default here is 0 because the property must be set
 				// setting 0, an exception will be thrown
-				return Fill.getFill(getValue(Property.FILL, AbsoluteDatasetIndexFill.DEFAULT_VALUE_AS_INT));
+				return Fill.getFill(getValue(this.property, AbsoluteDatasetIndexFill.DEFAULT_VALUE_AS_INT));
 			} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(mode)) {
 				// the default here is 0 because the property must be set
 				// setting 0, an exception will be thrown
-				return Fill.getFill(getValue(Property.FILL, RelativeDatasetIndexFill.DEFAULT_VALUE));
+				return Fill.getFill(getValue(this.property, RelativeDatasetIndexFill.DEFAULT_VALUE));
 			}
 		}
 		// returns the default
@@ -210,7 +233,7 @@ public class FillHandler extends PropertyHandler<IsFill> {
 	 */
 	protected void setFillBaseline(FillBaseline baseline) {
 		// sets value
-		setValueAndAddToParent(Property.FILL, baseline);
+		setValueAndAddToParent(this.property, baseline);
 		// stores the filling mode
 		setValue(Property.CHARBA_FILLING_MODE, FillingMode.BASELINE);
 	}
@@ -226,14 +249,45 @@ public class FillHandler extends PropertyHandler<IsFill> {
 			// gets the filling mode
 			FillingMode mode = getValue(Property.CHARBA_FILLING_MODE, FillingMode.values(), FillingMode.PREDEFINED);
 			// checks type of filling mode
-			// to return the right value
 			if (FillingMode.BASELINE.equals(mode)) {
 				// returns baseline
-				return new FillBaseline(new OptionsEnvelop<>(getValue(Property.FILL)));
+				return new FillBaseline(new OptionsEnvelop<>(getValue(this.property)));
 			}
 		}
 		// returns the default
 		return FillBaseline.DEFAULT_INSTANCE;
+	}
+
+	/**
+	 * Sets the above and below color of baseline to use for filling.
+	 * 
+	 * @param colors the above and below color of baseline to use for filling.
+	 */
+	protected void setFillColors(FillColors colors) {
+		// sets value
+		setValueAndAddToParent(Property.FILL, colors);
+		// stores the filling mode
+		setValue(Property.CHARBA_FILLING_MODE, FillingMode.COLORS);
+	}
+
+	/**
+	 * Returns the above and below color of baseline to use for filling.
+	 * 
+	 * @return the above and below color of baseline to use for filling.
+	 */
+	protected FillColors getFillColors() {
+		// checks if there is the property
+		if (has(Property.CHARBA_FILLING_MODE)) {
+			// gets the filling mode
+			FillingMode mode = getValue(Property.CHARBA_FILLING_MODE, FillingMode.values(), FillingMode.PREDEFINED);
+			// checks type of filling mode
+			if (FillingMode.COLORS.equals(mode)) {
+				// returns baseline
+				return new FillColors(new OptionsEnvelop<>(getValue(Property.FILL)));
+			}
+		}
+		// returns null because no set
+		return null;
 	}
 
 }

@@ -23,6 +23,7 @@ import org.pepstock.charba.client.defaults.IsDefaultFillHandler;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.items.FillBaseline;
+import org.pepstock.charba.client.items.FillColors;
 
 /**
  * Defines a configuration element which is managing the FILL property.<br>
@@ -142,5 +143,33 @@ public interface HasFill extends IsDefaultFillHandler {
 		// if here, fill handler is not consistent and then
 		// returns the default value
 		return FillBaseline.DEFAULT_INSTANCE;
+	}
+
+	/**
+	 * Sets the above and below color of baseline to use for filling.
+	 * 
+	 * @param colors the above and below color of baseline to use for filling.
+	 */
+	default void setFillColors(FillColors colors) {
+		// checks if fill handler is consistent
+		if (getFillHandler() != null) {
+			getFillHandler().setFillColors(colors);
+		}
+	}
+
+	/**
+	 * Returns the above and below color of baseline to use for filling.
+	 * 
+	 * @return the above and below color of baseline to use for filling.
+	 */
+	@Override
+	default FillColors getFillColors() {
+		// checks if fill handler is consistent
+		if (getFillHandler() != null) {
+			return getFillHandler().getFillColors();
+		}
+		// if here, fill handler is not consistent and then
+		// returns null
+		return null;
 	}
 }
