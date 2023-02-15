@@ -19,6 +19,7 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.IsFill;
+import org.pepstock.charba.client.items.FillBaseline;
 
 /**
  * Interface to define fill defaults values.
@@ -33,5 +34,12 @@ public interface IsDefaultFillHandler {
 	 * @return how to fill the area under the line.
 	 */
 	IsFill getFill();
+
+	/**
+	 * Returns the baseline value to use for filling.
+	 * 
+	 * @return the baseline value to use for filling
+	 */
+	FillBaseline getFillBaseline();
 
 }

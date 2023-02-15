@@ -60,7 +60,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.options.FillHandler;
 import org.pepstock.charba.client.options.HasFill;
@@ -309,8 +308,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 		this.pointHitRadiusCallbackProxy
 				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getPointHitRadiusCallback(), getDefaultValues().getElements().getPoint().getHitRadius(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
-		this.pointHoverRadiusCallbackProxy.setCallback(
-				context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getPointHoverRadiusCallback(), getDefaultValues().getElements().getPoint().getHoverRadius(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
+		this.pointHoverRadiusCallbackProxy
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getPointHoverRadiusCallback(), getDefaultValues().getElements().getPoint().getHoverRadius(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
 		this.pointRotationCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(createContext(context), getPointRotationCallback(), getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// sets function to proxy callback in order to invoke the java interface
@@ -764,17 +763,6 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	 */
 	public JoinStyle getBorderJoinStyle() {
 		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.values(), getDefaultValues().getElements().getLine().getBorderJoinStyle());
-	}
-
-	/**
-	 * Returns how to fill the area under the line.
-	 * 
-	 * @return how to fill the area under the line.
-	 */
-	@Override
-	public IsFill getFill() {
-		// returns the default
-		return getDefaultValues().getElements().getLine().getFill();
 	}
 
 	/**

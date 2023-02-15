@@ -284,6 +284,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
  * import CHART.JS version [v4.2.1](https://github.com/chartjs/Chart.js/releases/tag/v4.2.1).
  * add `Fill.SHAPE` item to the filling options.
+ * add `FillBaseline` class to enable the baseline on axis for filling.
  
 ### Fixed Bugs
 

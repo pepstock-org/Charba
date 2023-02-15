@@ -30,6 +30,7 @@ import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.FillingMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
+import org.pepstock.charba.client.items.FillBaseline;
 
 /**
  * Manages the FILL property of options in order to use the same logic between line datasets and options/configuration.
@@ -192,4 +193,47 @@ public class FillHandler extends PropertyHandler<IsFill> {
 		// returns the default
 		return getDefaultValues();
 	}
+
+	/**
+	 * Sets the baseline value to use for filling.
+	 * 
+	 * @param baseline the baseline value to use for filling
+	 */
+	protected void setFillBaseline(double baseline) {
+		setFillBaseline(new FillBaseline(baseline));
+	}
+
+	/**
+	 * Sets the baseline value to use for filling.
+	 * 
+	 * @param baseline the baseline value to use for filling
+	 */
+	protected void setFillBaseline(FillBaseline baseline) {
+		// sets value
+		setValueAndAddToParent(Property.FILL, baseline);
+		// stores the filling mode
+		setValue(Property.CHARBA_FILLING_MODE, FillingMode.BASELINE);
+	}
+
+	/**
+	 * Returns the baseline value to use for filling.
+	 * 
+	 * @return the baseline value to use for filling
+	 */
+	protected FillBaseline getFillBaseline() {
+		// checks if there is the property
+		if (has(Property.CHARBA_FILLING_MODE)) {
+			// gets the filling mode
+			FillingMode mode = getValue(Property.CHARBA_FILLING_MODE, FillingMode.values(), FillingMode.PREDEFINED);
+			// checks type of filling mode
+			// to return the right value
+			if (FillingMode.BASELINE.equals(mode)) {
+				// returns baseline
+				return new FillBaseline(new OptionsEnvelop<>(getValue(Property.FILL)));
+			}
+		}
+		// returns the default
+		return FillBaseline.DEFAULT_INSTANCE;
+	}
+
 }

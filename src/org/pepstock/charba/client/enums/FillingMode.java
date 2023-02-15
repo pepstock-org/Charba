@@ -44,6 +44,10 @@ public enum FillingMode implements Key
 	 */
 	RELATIVE_DATASET_INDEX("relativeDatasetIndex"),
 	/**
+	 * Baseline value to fill at specific axis value.
+	 */
+	BASELINE("baseline"), // FIXME check where used
+	/**
 	 * Predefined values by {@link Fill}.
 	 */
 	PREDEFINED("predefined"),

@@ -47,6 +47,7 @@ import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.Stepped;
+import org.pepstock.charba.client.items.FillBaseline;
 import org.pepstock.charba.client.options.AbstractElement;
 
 /**
@@ -383,6 +384,39 @@ public class Line extends AbstractConfigurationElement<IsDefaultLine> {
 	 */
 	public IsFill getFill() {
 		return getConfiguration().getElements().getLine().getFill();
+	}
+
+	/**
+	 * Sets the baseline value to use for filling.
+	 * 
+	 * @param baseline the baseline value to use for filling
+	 */
+	public void setFillBaseline(double baseline) {
+		// resets callback
+		setFill((FillCallback) null);
+		// stores value
+		getConfiguration().getElements().getLine().setFillBaseline(baseline);
+	}
+
+	/**
+	 * Sets the baseline value to use for filling.
+	 * 
+	 * @param baseline the baseline value to use for filling
+	 */
+	public void setFillBaseline(FillBaseline baseline) {
+		// resets callback
+		setFill((FillCallback) null);
+		// stores value
+		getConfiguration().getElements().getLine().setFillBaseline(baseline);
+	}
+
+	/**
+	 * Returns the baseline value to use for filling.
+	 * 
+	 * @return the baseline value to use for filling
+	 */
+	protected FillBaseline getFillBaseline() {
+		return getConfiguration().getElements().getLine().getFillBaseline();
 	}
 
 	/**

@@ -121,6 +121,17 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.options.HasFill#setFillBaseline(double)
+	 */
+	@Override
+	public void setFillBaseline(double baseline) {
+		// sets always to no fill
+		super.setFill(Fill.FALSE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.LiningDataset#setFill(org.pepstock.charba.client.callbacks.FillCallback)
 	 */
 	@Override

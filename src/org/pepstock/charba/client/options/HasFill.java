@@ -22,6 +22,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFillHandler;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
+import org.pepstock.charba.client.items.FillBaseline;
 
 /**
  * Defines a configuration element which is managing the FILL property.<br>
@@ -103,4 +104,43 @@ public interface HasFill extends IsDefaultFillHandler {
 		return Defaults.get().getGlobal().getElements().getLine().getFill();
 	}
 
+	/**
+	 * Sets the baseline value to use for filling.
+	 * 
+	 * @param baseline the baseline value to use for filling
+	 */
+	default void setFillBaseline(double baseline) {
+		// checks if fill handler is consistent
+		if (getFillHandler() != null) {
+			getFillHandler().setFillBaseline(baseline);
+		}
+	}
+
+	/**
+	 * Sets the baseline value to use for filling.
+	 * 
+	 * @param baseline the baseline value to use for filling
+	 */
+	default void setFillBaseline(FillBaseline baseline) {
+		// checks if fill handler is consistent
+		if (getFillHandler() != null) {
+			getFillHandler().setFillBaseline(baseline);
+		}
+	}
+
+	/**
+	 * Retunrs the baseline value to use for filling.
+	 * 
+	 * @return the baseline value to use for filling
+	 */
+	@Override
+	default FillBaseline getFillBaseline() {
+		// checks if fill handler is consistent
+		if (getFillHandler() != null) {
+			return getFillHandler().getFillBaseline();
+		}
+		// if here, fill handler is not consistent and then
+		// returns the default value
+		return FillBaseline.DEFAULT_INSTANCE;
+	}
 }

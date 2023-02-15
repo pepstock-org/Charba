@@ -22,6 +22,7 @@ import org.pepstock.charba.client.enums.AbsoluteDatasetIndexFill;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
+import org.pepstock.charba.client.items.FillBaseline;
 
 /**
  * Callback interface to set <code>fill</code> property at runtime.<br>
@@ -39,6 +40,7 @@ import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
  * @see Fill
  * @see AbsoluteDatasetIndexFill
  * @see RelativeDatasetIndexFill
+ * @see FillBaseline
  */
 public interface FillCallback extends Scriptable<Object, DatasetContext> {
 
