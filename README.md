@@ -274,7 +274,20 @@ Continuous integration and quality gate
 **Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
+
+Going to next release
+---------------------
+
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
+
+### Features
+
+ * import CHART.JS version [v4.2.1](https://github.com/chartjs/Chart.js/releases/tag/v4.2.1).
  
+### Fixed Bugs
+
+ * [#87](https://github.com/pepstock-org/Charba/issues/87): remove check, checking if the epoch ust be greater than 1, when dates are read from java script object. Thanks @Speykious.
+
 License
 -------
 
