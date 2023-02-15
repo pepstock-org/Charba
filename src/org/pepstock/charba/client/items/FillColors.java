@@ -109,8 +109,6 @@ public final class FillColors extends NativeObjectContainer implements HasFill {
 		return handler;
 	}
 
-	// FIXME manca override per set di questo oggetto
-
 	/**
 	 * Sets the above color for filling.
 	 * 
