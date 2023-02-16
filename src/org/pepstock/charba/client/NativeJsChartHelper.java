@@ -43,6 +43,20 @@ final class NativeJsChartHelper {
 	}
 
 	// -----------------
+	// ANIMATION interpolators
+	// -----------------
+
+	/**
+	 * Returns an interpolated color value for a specific type from CHART.JS.
+	 *
+	 * @param from starting value
+	 * @param to ending value
+	 * @param factor interpolation factor
+	 * @return interpolated value for specific type
+	 */
+	static native String interpolateColors(String from, String to, double factor);
+
+	// -----------------
 	// LEGEND callback
 	// -----------------
 

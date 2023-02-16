@@ -63,6 +63,22 @@ final class JsChartHelper {
 		return INSTANCE;
 	}
 
+	// -----------------
+	// ANIMATION interpolators
+	// -----------------
+
+	/**
+	 * Returns an interpolated COLOR value for a specific type from CHART.JS.
+	 *
+	 * @param from starting value
+	 * @param to ending value
+	 * @param factor interpolation factor
+	 * @return interpolated value for specific type
+	 */
+	String interpolateColors(String from, String to, double factor) {
+		return NativeJsChartHelper.interpolateColors(from, to, factor);
+	}
+
 	/**
 	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box, invoking <code>generateLabels</code> function property.
 	 * 

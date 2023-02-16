@@ -181,7 +181,14 @@ CharbaJsPositionerHelper.invoke = function(name, context, datasetItems, eventPoi
  * @constructor
  * @return {CharbaJsChartHelper}
  */	
-function CharbaJsChartHelper() {};	  
+function CharbaJsChartHelper() {};
+/**
+ * @param {string} from
+ * @param {string} to
+ * @param {number} factor
+ * @return {string}
+ */
+CharbaJsChartHelper.interpolateColors = function(from, to, factor) {};
 /**
  * @param {Chart} chart 
  * @param {Object} options 

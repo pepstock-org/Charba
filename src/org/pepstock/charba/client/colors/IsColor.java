@@ -18,6 +18,7 @@
 */
 package org.pepstock.charba.client.colors;
 
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -205,25 +206,7 @@ public interface IsColor {
 	default IsColor interpolate(IsColor endColor, double percentage) {
 		// checks if end color is consistent
 		if (IsColor.isValid(endColor) && Checker.isBetween(percentage, 0, 1)) {
-			// extract all RGB elements
-			// convert from sRGB to linear
-			double startR = ColorUtil.fromRGBs(getRed() / 255.0D);
-			double startG = ColorUtil.fromRGBs(getGreen() / 255.0D);
-			double startB = ColorUtil.fromRGBs(getBlue() / 255.0D);
-			// extract all RGB elements
-			// convert from sRGB to linear
-			double endR = ColorUtil.fromRGBs(endColor.getRed() / 255.0D);
-			double endG = ColorUtil.fromRGBs(endColor.getGreen() / 255.0D);
-			double endB = ColorUtil.fromRGBs(endColor.getBlue() / 255.0D);
-			// compute the interpolated color in linear space
-			// convert back to sRGB in the [0..255] range
-			// rounds them to int
-			double a = getAlpha() + percentage * Math.abs(endColor.getAlpha() - getAlpha());
-			int r = (int) Math.round(ColorUtil.toRGBs(startR + percentage * (endR - startR)) * 255.0D);
-			int g = (int) Math.round(ColorUtil.toRGBs(startG + percentage * (endG - startG)) * 255.0D);
-			int b = (int) Math.round(ColorUtil.toRGBs(startB + percentage * (endB - startB)) * 255.0D);
-			// creates and return color
-			return new Color(r, g, b, a);
+			return Helpers.get().interpolate(this, endColor, percentage);
 		}
 		// if here, the argument color is not valid
 		// then returns the starting color

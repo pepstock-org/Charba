@@ -286,6 +286,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `Fill.SHAPE` item to the filling options.
  * add `FillBaseline` class to enable the baseline on axis for filling.
  * add `FillColors` class to enable different colors above and below the baseline.
+ * add `interpolate` methods to `Helpers` class to enable the values interpolation for numbers, colors and booleans.
  
 ### Fixed Bugs
 

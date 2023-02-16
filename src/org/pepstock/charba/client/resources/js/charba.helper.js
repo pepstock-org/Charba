@@ -354,6 +354,21 @@ CharbaJsPositionerHelper.invoke = function(name, context, elements, eventPoint) 
  */
 function CharbaJsChartHelper() {}
 /**
+ * Returns an interpolated value for a specific type from CHART.JS.
+ *
+  * @param {string} from starting value
+ * @param {string} to ending value
+ * @param {number} factor interpolation factor
+ * @return {string} interpolated value for specific type
+ */
+CharbaJsChartHelper.interpolateColors = function(from, to, factor) {
+  const c0 = Chart.helpers.color(from || 'transparent');
+  const c1 = c0.valid && Chart.helpers.color(to || 'transparent');
+  return c1 && c1.valid
+    ? c1.mix(c0, factor).rgbString()
+    : to;
+}
+/**
  * Invokes the default generate labels callbacks from CHART.JS.
  *
  * @param {Chart} chart chart instance

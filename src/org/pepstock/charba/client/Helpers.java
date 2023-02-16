@@ -18,6 +18,9 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.HtmlColor;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
@@ -30,6 +33,7 @@ import org.pepstock.charba.client.intl.NumberFormatOptions;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.items.IsArea;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.AbstractImmutableFont;
 import org.pepstock.charba.client.options.IsImmutableFont;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -500,6 +504,86 @@ public final class Helpers {
 		}
 		// invokes the native methods to format the number
 		return nativeObject.formatNumber(number, locale != null ? locale : Window.undefined(), optionsToPass);
+	}
+
+	/**
+	 * Returns an interpolated value for a number for a specific type from CHART.JS.
+	 *
+	 * @param from starting value
+	 * @param to ending value
+	 * @param factor interpolation factor
+	 * @return interpolated value for specific type
+	 */
+	public double interpolate(double from, double to, double factor) {
+		// checks argument
+		if (Undefined.isNot(from) && Undefined.isNot(to) && Checker.isBetween(factor, 0, 1)) {
+			return from + (to - from) * factor;
+		}
+		// if here the factor is not consistent
+		// then returns to or from value
+		return Undefined.isNot(to) ? to : Undefined.isNot(from) ? from : Undefined.DOUBLE;
+	}
+
+	/**
+	 * Returns an interpolated value for a color (as string) for a specific type from CHART.JS.
+	 *
+	 * @param from starting value
+	 * @param to ending value
+	 * @param factor interpolation factor
+	 * @return interpolated value for specific type
+	 */
+	public String interpolate(String from, String to, double factor) {
+		// checks argument
+		if (Checker.isBetween(factor, 0, 1)) {
+			return JsChartHelper.get().interpolateColors(from, to, factor);
+		}
+		// if here the factor is not consistent
+		// then returns to value
+		return to;
+	}
+
+	/**
+	 * Returns an interpolated value for a color for a specific type from CHART.JS.
+	 *
+	 * @param from starting value
+	 * @param to ending value
+	 * @param factor interpolation factor
+	 * @return interpolated value for specific type
+	 */
+	public IsColor interpolate(IsColor from, IsColor to, double factor) {
+		// checks argument
+		if (Checker.isBetween(factor, 0, 1)) {
+			// checks if colors are consistent
+			String fromString = IsColor.isValid(from) ? from.toRGBA() : HtmlColor.TRANSPARENT.toRGBA();
+			String toString = IsColor.isValid(to) ? to.toRGBA() : HtmlColor.TRANSPARENT.toRGBA();
+			String interpolated = interpolate(fromString, toString, factor);
+			// checks if consistent
+			if (interpolated != null) {
+				// creates and returns the color
+				return ColorBuilder.parse(interpolated);
+			}
+		}
+		// if here the factor is not consistent
+		// then returns to value
+		return to;
+	}
+
+	/**
+	 * Returns an interpolated value for a boolean for a specific type from CHART.JS.
+	 *
+	 * @param from starting value
+	 * @param to ending value
+	 * @param factor interpolation factor
+	 * @return interpolated value for specific type
+	 */
+	public boolean interpolate(boolean from, boolean to, double factor) {
+		// checks argument
+		if (Checker.isBetween(factor, 0, 1)) {
+			return factor > 0.5 ? to : from;
+		}
+		// if here the factor is not consistent
+		// then returns from value
+		return to;
 	}
 
 	/**
