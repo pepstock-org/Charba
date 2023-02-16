@@ -131,7 +131,14 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 	 * @param type the type of <code>from</code> property and determines the interpolator used.
 	 */
 	public void setType(AnimationType type) {
-		setValueAndAddToParent(Property.TYPE, type);
+		// checks if unknown
+		if (AnimationType.UNKNOWN.equals(type)) {
+			// removes key
+			remove(Property.TYPE);
+		} else {
+			// stores key
+			setValueAndAddToParent(Property.TYPE, type);
+		}
 	}
 
 	/**

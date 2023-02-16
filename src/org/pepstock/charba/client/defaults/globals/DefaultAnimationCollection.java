@@ -83,7 +83,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	 */
 	@Override
 	public AnimationType getType() {
-		return collection != null ? collection.type() : AnimationType.NUMBER;
+		return collection != null ? collection.type() : AnimationType.UNKNOWN;
 	}
 
 	/*
