@@ -37,11 +37,6 @@ public final class FillBaseline extends NativeObjectContainer {
 	public static final double DEFAULT_VALUE = 0;
 
 	/**
-	 * Default baseline instance.
-	 */
-	public static final FillBaseline DEFAULT_INSTANCE = new FillBaseline(DEFAULT_VALUE);
-
-	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key

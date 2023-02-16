@@ -141,8 +141,8 @@ public interface HasFill extends IsDefaultFillHandler {
 			return getFillHandler().getFillBaseline();
 		}
 		// if here, fill handler is not consistent and then
-		// returns the default value
-		return FillBaseline.DEFAULT_INSTANCE;
+		// returns null
+		return null;
 	}
 
 	/**

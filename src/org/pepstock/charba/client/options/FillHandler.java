@@ -223,7 +223,16 @@ public class FillHandler extends PropertyHandler<IsFill> {
 	 * @param baseline the baseline value to use for filling
 	 */
 	protected void setFillBaseline(double baseline) {
-		setFillBaseline(new FillBaseline(baseline));
+		// checks if there is already a baseline
+		FillBaseline storedBaseline = getFillBaseline();
+		// checks if consistent
+		if (storedBaseline != null) {
+			storedBaseline.setValue(baseline);
+		} else {
+			// if here the baseline wasm't set
+			// then creates and sets new one
+			setFillBaseline(new FillBaseline(baseline));
+		}
 	}
 
 	/**
@@ -254,8 +263,8 @@ public class FillHandler extends PropertyHandler<IsFill> {
 				return new FillBaseline(new OptionsEnvelop<>(getValue(this.property)));
 			}
 		}
-		// returns the default
-		return FillBaseline.DEFAULT_INSTANCE;
+		// returns null
+		return null;
 	}
 
 	/**

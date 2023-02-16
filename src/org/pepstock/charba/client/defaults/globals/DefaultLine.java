@@ -128,7 +128,7 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	 */
 	@Override
 	public FillBaseline getFillBaseline() {
-		return FillBaseline.DEFAULT_INSTANCE;
+		return null;
 	}
 
 	/*
