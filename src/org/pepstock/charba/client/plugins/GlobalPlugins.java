@@ -37,7 +37,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.resources.AbstractInjectableResource;
-import org.pepstock.charba.client.utils.Console;
 
 /**
  * Global configuration to set plugins at global level.<br>
@@ -162,7 +161,6 @@ public final class GlobalPlugins {
 			Injector.ensureInjected(resource);
 			// gets added plugin
 			Key pluginId = retrieveNewAddedPlugin(currentIds);
-			Console.log(pluginId);
 			// checks if id is consistent
 			if (Key.isValid(pluginId)) {
 				// sets enablement for all charts

@@ -287,12 +287,12 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `FillBaseline` class to enable the baseline on axis for filling.
  * add `FillColors` class to enable different colors above and below the baseline.
  * add `interpolate` methods to `Helpers` class to enable the values interpolation for numbers, colors and booleans.
- * add `register` method to GlobalPlugin class to inject and register CHART.JS plugins not included in this library.
+ * add `register` method to `GlobalPlugin` class to inject and register CHART.JS plugins not included in this library.
  
 ### Fixed Bugs
 
  * [#87](https://github.com/pepstock-org/Charba/issues/87): remove check, which tested if the epoch must be greater than 1, when dates are managed. Thanks @Speykious.
- * [#88](https://github.com/pepstock-org/Charba/issues/88): add `register` method to GlobalPlugin class to inject and register CHART.JS plugins not included in this library. Thanks @Speykious. 
+ * [#88](https://github.com/pepstock-org/Charba/issues/88): add `register` method to `GlobalPlugin` class to inject and register CHART.JS plugins not included in this library. Thanks @Speykious. 
 
 License
 -------
