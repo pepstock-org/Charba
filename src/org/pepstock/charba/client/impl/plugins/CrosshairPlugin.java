@@ -597,7 +597,8 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 			// scans states
 			for (Entry<String, State> entry : states.entrySet()) {
 				// checks if a state to evaluate
-				if (chart.getId() != entry.getKey() && group.equalsIgnoreCase(entry.getValue().getGroup())) {
+				if (entry.getKey().equals(chart.getId()) && group.equalsIgnoreCase(entry.getValue().getGroup())) {
+					// stores chart instance to result
 					result.add(Charts.get(entry.getKey()));
 				}
 			}
