@@ -37,6 +37,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.enums.DefaultPluginId;
 import org.pepstock.charba.client.resources.AbstractInjectableResource;
+import org.pepstock.charba.client.utils.Console;
 
 /**
  * Global configuration to set plugins at global level.<br>
@@ -140,11 +141,33 @@ public final class GlobalPlugins {
 	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
 	 */
 	public boolean register(AbstractInjectableResource resource) {
+		return register(resource, false);
+	}
+
+	/**
+	 * Registers a plugin as global, to apply to all charts.<br>
+	 * The plugin is a CHART.JS implementation which is added on top of existing library.
+	 * 
+	 * @param resource javascript code which is the extension as plugin to import and register
+	 * @param enable <code>true</code> to enable to all charts, otherwise <code>false</code>.
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
+	 */
+	public boolean register(AbstractInjectableResource resource, boolean enable) {
 		// checks if plugin is consistent
 		// and is not already loaded
 		if (resource != null && !Injector.isInjected(resource)) {
+			// gets current plugins ids
+			List<Key> currentIds = plugins.ids();
 			// injects and registers plugin
 			Injector.ensureInjected(resource);
+			// gets added plugin
+			Key pluginId = retrieveNewAddedPlugin(currentIds);
+			Console.log(pluginId);
+			// checks if id is consistent
+			if (Key.isValid(pluginId)) {
+				// sets enablement for all charts
+				setEnabledAllCharts(pluginId.value(), enable);
+			}
 			// returns that is injected and registered
 			return true;
 		}
@@ -322,6 +345,29 @@ public final class GlobalPlugins {
 		}
 		// returns the enabled
 		return enabled;
+	}
+
+	/**
+	 * Retrieves if new plugin has been registered globally in CHART.JS.
+	 * 
+	 * @param previous list of plugin ids before injecting a CHART.JS plugin.
+	 * @return the added plugin id or <code>null</code> if not
+	 */
+	private Key retrieveNewAddedPlugin(List<Key> previous) {
+		// gets new plugins ids
+		// with new added
+		List<Key> newIds = plugins.ids();
+		// scans the lists
+		for (Key pId : newIds) {
+			// checks if the plugin id is not in the previous one
+			if (!previous.contains(pId)) {
+				// if not present, is new.
+				return pId;
+			}
+		}
+		// if here no new plugins are added
+		// then return null
+		return null;
 	}
 
 	/**
