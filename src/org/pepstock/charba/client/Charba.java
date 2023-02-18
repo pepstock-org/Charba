@@ -57,8 +57,6 @@ public final class Charba {
 			ChartEnvelop<EmbeddedResources> envelop = new ChartEnvelop<>(loadDateTimeLibrary ? EmbeddedResources.INSTANCE : EmbeddedResources.INSTANCE_WITHOUT_DATE_LIBRARY);
 			// then sets resource
 			ResourcesType.setResources(envelop);
-			// injects CHART.JS
-			ResourcesType.getResources().inject();
 		}
 	}
 

@@ -27,6 +27,7 @@ import java.util.Set;
 
 import org.pepstock.charba.client.ChartEnvelop;
 import org.pepstock.charba.client.Configuration;
+import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.commons.Envelop;
@@ -35,6 +36,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.enums.DefaultPluginId;
+import org.pepstock.charba.client.resources.AbstractInjectableResource;
 
 /**
  * Global configuration to set plugins at global level.<br>
@@ -128,6 +130,26 @@ public final class GlobalPlugins {
 	 */
 	public boolean register(SmartPlugin plugin) {
 		return registerBasePlugin(plugin);
+	}
+
+	/**
+	 * Registers a plugin as global, to apply to all charts.<br>
+	 * The plugin is a CHART.JS implementation which is added on top of existing library.
+	 * 
+	 * @param resource javascript code which is the extension as plugin to import and register
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
+	 */
+	public boolean register(AbstractInjectableResource resource) {
+		// checks if plugin is consistent
+		// and is not already loaded
+		if (resource != null && !Injector.isInjected(resource)) {
+			// injects and registers plugin
+			Injector.ensureInjected(resource);
+			// returns that is injected and registered
+			return true;
+		}
+		// if here, plugin instance is not consistent
+		return false;
 	}
 
 	/**
