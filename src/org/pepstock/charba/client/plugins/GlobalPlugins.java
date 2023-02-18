@@ -162,7 +162,7 @@ public final class GlobalPlugins {
 			// gets added plugin
 			Key pluginId = retrieveNewAddedPlugin(currentIds);
 			// checks if id is consistent
-			if (Key.isValid(pluginId)) {
+			if (pluginId != null && Key.isValid(pluginId)) {
 				// sets enablement for all charts
 				setEnabledAllCharts(pluginId.value(), enable);
 			}

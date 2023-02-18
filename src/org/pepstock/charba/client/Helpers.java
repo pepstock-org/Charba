@@ -520,8 +520,14 @@ public final class Helpers {
 			return from + (to - from) * factor;
 		}
 		// if here the factor is not consistent
-		// then returns to or from value
-		return Undefined.isNot(to) ? to : Undefined.isNot(from) ? from : Undefined.DOUBLE;
+		// if to is consistent
+		if (Undefined.isNot(to)) {
+			// returns to
+			return to;
+		}
+		// if here, to is not consistent
+		// then returns from or undefined
+		return Undefined.isNot(from) ? from : Undefined.DOUBLE;
 	}
 
 	/**
