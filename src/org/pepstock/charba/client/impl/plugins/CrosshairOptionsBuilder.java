@@ -101,6 +101,17 @@ public final class CrosshairOptionsBuilder extends AbstractBaseBuilder {
 	}
 
 	/**
+	 * Sets the group name used to synchronized more chart instances.
+	 * 
+	 * @param group the group name used to synchronized more chart instances
+	 * @return new builder instance
+	 */
+	public CrosshairOptionsBuilder setGroup(String group) {
+		options.setGroup(group);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
 	 * Sets the color of the line.
 	 * 
 	 * @param color the color of the line.

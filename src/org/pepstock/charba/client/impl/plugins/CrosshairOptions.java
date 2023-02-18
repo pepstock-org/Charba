@@ -93,6 +93,7 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 		X_LABEL("xLabel"),
 		Y_LABEL("yLabel"),
 		// options
+		GROUP("group"),
 		LINE_COLOR("lineColor"),
 		LINE_DASH("lineDash"),
 		LINE_DASH_OFFSET("lineDashOffset"),
@@ -294,6 +295,25 @@ public final class CrosshairOptions extends AbstractPluginOptions implements IsC
 	@Override
 	public InteractionAxis getMode() {
 		return getValue(Property.MODE, InteractionAxis.values(), defaultOptions.getMode());
+	}
+
+	/**
+	 * Sets the group name used to synchronized more chart instances.
+	 * 
+	 * @param group the group name used to synchronized more chart instances
+	 */
+	public void setGroup(String group) {
+		setValue(Property.GROUP, group);
+	}
+
+	/**
+	 * Returns the group name used to synchronized more chart instances.
+	 * 
+	 * @return the group name used to synchronized more chart instances
+	 */
+	@Override
+	public String getGroup() {
+		return getValue(Property.GROUP, defaultOptions.getGroup());
 	}
 
 	/**

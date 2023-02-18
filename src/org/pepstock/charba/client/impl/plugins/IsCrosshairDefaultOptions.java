@@ -65,6 +65,15 @@ interface IsCrosshairDefaultOptions {
 	}
 
 	/**
+	 * Returns the group name used to synchronized more chart instances.
+	 * 
+	 * @return the group name used to synchronized more chart instances
+	 */
+	default String getGroup() {
+		return null;
+	}
+
+	/**
 	 * Returns the color of the line.
 	 * 
 	 * @return the color of the line.

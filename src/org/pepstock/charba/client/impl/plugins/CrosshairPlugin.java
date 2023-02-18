@@ -18,16 +18,21 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.pepstock.charba.client.ChartNode;
+import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.HasCartesianAxes;
 import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.CrosshairFormatterCallback;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.IsPoint;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
@@ -58,7 +63,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	// states map
 	private final Map<String, State> states = new HashMap<>();
 	// contexts map
-	private final Map<String, ChartEventContext> contexts = new HashMap<>();
+	private final Map<String, IsPoint> contexts = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -92,6 +97,8 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 			if (pOptions.isEnabled()) {
 				// creates a stores the state
 				State state = states.computeIfAbsent(chart.getId(), mapKey -> new State());
+				// stores group
+				state.setGroup(pOptions.getGroup());
 				// gets chart node
 				ChartNode node = chart.getNode();
 				// gets scales
@@ -130,7 +137,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 			// gets option on the cache
 			CrosshairOptions options = getOptions(chart);
 			// gets event context
-			ChartEventContext context = contexts.get(chart.getId());
+			IsPoint context = contexts.get(chart.getId());
 			// draws lines
 			drawLines(chart, options, context);
 			// draws labels
@@ -147,28 +154,20 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	public void onAfterEvent(IsChart chart, PluginEventArgument argument) {
 		// checks if chart is consistent
 		if (mustBeActivated(chart, true)) {
-			// gets event context
-			ChartEventContext context = argument.getEventContext();
-			// checks if event is on chart area
-			if (!argument.isInChartArea()) {
-				// checks if there is the context
-				if (contexts.containsKey(chart.getId())) {
-					// if not removes the state
-					contexts.remove(chart.getId());
-					// forces redrawing to remove the crosshair
-					argument.setChanged(true);
-				}
-				// closes because not managed
-				return;
-			}
 			// gets option on the cache
 			CrosshairOptions options = getOptions(chart);
+			// checks if event is on chart area
+			if (!argument.isInChartArea()) {
+				// out of chart area
+				manageEventOutOfChartArea(chart, argument, options);
+				return;
+			}
+			// gets event context
+			ChartEventContext context = argument.getEventContext();
 			// checks if is mouse move
 			if (checkEvent(context, options)) {
-				// adds context to the state
-				contexts.put(chart.getId(), context);
-				// forces redrawing to draw the crosshair
-				argument.setChanged(true);
+				// manages event
+				manageEventInChartArea(chart, argument, options, context);
 			}
 		}
 	}
@@ -192,13 +191,68 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	}
 
 	/**
+	 * Manages all actions when the event is out of chart area.
+	 * 
+	 * @param chart chart instance
+	 * @param argument argument of plugin hook
+	 * @param options plugin options
+	 */
+	private void manageEventOutOfChartArea(IsChart chart, PluginEventArgument argument, CrosshairOptions options) {
+		// checks if there is the context
+		if (contexts.containsKey(chart.getId())) {
+			// if not removes the state
+			contexts.remove(chart.getId());
+			// forces redrawing to remove the crosshair
+			argument.setChanged(true);
+			// gets group of charts
+			List<IsChart> charts = getChartsInGroup(chart, options.getGroup());
+			// checks if is grouped
+			for (IsChart c : charts) {
+				// if not removes the state
+				contexts.remove(c.getId());
+				// redraw
+				c.draw();
+			}
+		}
+	}
+
+	/**
+	 * Manages all actions when the event is out of chart area.
+	 * 
+	 * @param chart chart instance
+	 * @param argument argument of plugin hook
+	 * @param options plugin options
+	 * @param context event context
+	 */
+	private void manageEventInChartArea(IsChart chart, PluginEventArgument argument, CrosshairOptions options, ChartEventContext context) {
+		// adds context to the state
+		contexts.put(chart.getId(), context);
+		// forces redrawing to draw the crosshair
+		argument.setChanged(true);
+		// gets group of charts
+		List<IsChart> charts = getChartsInGroup(chart, options.getGroup());
+		// checks if is grouped
+		if (!charts.isEmpty()) {
+			// gets percentage
+			IsPoint percentage = getPercentage(context, chart);
+			// scans charts
+			for (IsChart c : charts) {
+				// adds context to the state
+				contexts.put(c.getId(), getSyncEventToChart(percentage, c));
+				// redraw
+				c.draw();
+			}
+		}
+	}
+
+	/**
 	 * Draws the lines which are creating the crosshair.
 	 * 
 	 * @param chart chart instance
 	 * @param options plugin options
 	 * @param context event context
 	 */
-	private void drawLines(IsChart chart, CrosshairOptions options, ChartEventContext context) {
+	private void drawLines(IsChart chart, CrosshairOptions options, IsPoint context) {
 		// checks if the line must be drawn
 		if (mustBorderBeDrawn(options.getLineWidth(), options.getLineColor())) {
 			// gets chart area
@@ -240,7 +294,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	 * @param options plugin options
 	 * @param context event context
 	 */
-	private void drawLabels(IsChart chart, CrosshairOptions options, ChartEventContext context) {
+	private void drawLabels(IsChart chart, CrosshairOptions options, IsPoint context) {
 		// checks if there is the state
 		if (states.containsKey(chart.getId())) {
 			// gets state
@@ -445,7 +499,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	 * @param context event context to check
 	 * @return <code>true</code> if the event is on X scale range. Needed for stacked scales.
 	 */
-	private boolean inXScaleRange(ScaleItem scale, ChartEventContext context) {
+	private boolean inXScaleRange(ScaleItem scale, IsPoint context) {
 		// checks if scale is consistent
 		if (scale != null && scale.isHorizontal()) {
 			return scale.getLeft() <= context.getX() && scale.getRight() >= context.getX();
@@ -462,7 +516,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	 * @param context event context to check
 	 * @return <code>true</code> if the event is on Y scale range. Needed for stacked scales.
 	 */
-	private boolean inYScaleRange(ScaleItem scale, ChartEventContext context) {
+	private boolean inYScaleRange(ScaleItem scale, IsPoint context) {
 		// checks if scale is consistent
 		if (scale != null && !scale.isHorizontal()) {
 			return scale.getTop() <= context.getY() && scale.getBottom() >= context.getY();
@@ -529,6 +583,108 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	}
 
 	/**
+	 * Extracts all charts which are grouped
+	 * 
+	 * @param chart chart instance which gets the event
+	 * @param group group name
+	 * @return list of grouped charts
+	 */
+	private List<IsChart> getChartsInGroup(IsChart chart, String group) {
+		// gets result
+		List<IsChart> result = new ArrayList<>();
+		// checks if group argument is consistent
+		if (group != null) {
+			// scans states
+			for (Entry<String, State> entry : states.entrySet()) {
+				// checks if a state to evaluate
+				if (chart.getId() != entry.getKey() && group.equalsIgnoreCase(entry.getValue().getGroup())) {
+					result.add(Charts.get(entry.getKey()));
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Calculates the percentage of the event against the chart area.
+	 * 
+	 * @param point event point
+	 * @param chart chart instance
+	 * @return a point where x and y are percentages on chart area
+	 */
+	private Point getPercentage(IsPoint point, IsChart chart) {
+		// gets chart area
+		ChartAreaNode area = chart.getNode().getChartArea();
+		// calculates x and y as percentage of chart area
+		double x = (point.getX() - area.getLeft()) / area.getWidth();
+		double y = (point.getY() - area.getTop()) / area.getHeight();
+		// returns the percentages as a point
+		return new Point(x, y);
+	}
+
+	/**
+	 * Calculates the chart area point using a percentage.
+	 * 
+	 * @param percentage percentage point
+	 * @param chart chart instance
+	 * @return a point where x and y is a point in chart area
+	 */
+	private IsPoint getSyncEventToChart(IsPoint percentage, IsChart chart) {
+		// gets chart area
+		ChartAreaNode area = chart.getNode().getChartArea();
+		// calculates x and y using the percentage of chart area
+		double x = (percentage.getX() * area.getWidth()) + area.getLeft();
+		double y = (percentage.getY() * area.getHeight()) + area.getTop();
+		// returns the point in chart area
+		return new Point(x, y);
+	}
+
+	/**
+	 * Internal object to have the percentage or point of the event point related to the scales.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class Point implements IsPoint {
+
+		private final double x;
+
+		private final double y;
+
+		/**
+		 * Creates object with x and y point or percentages.
+		 * 
+		 * @param x the X value
+		 * @param y the Y value
+		 */
+		private Point(double x, double y) {
+			this.x = x;
+			this.y = y;
+		}
+
+		/**
+		 * Returns the X of the point.
+		 * 
+		 * @return the X of the point.
+		 */
+		@Override
+		public double getX() {
+			return x;
+		}
+
+		/**
+		 * Returns the Y of the point.
+		 * 
+		 * @return the Y of the point.
+		 */
+		@Override
+		public double getY() {
+			return y;
+		}
+
+	}
+
+	/**
 	 * Internal object to maintain the instances needed to draw the crosshair by every chart instance.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -543,6 +699,8 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 		private ScaleItem xScale = null;
 
 		private ScaleItem yScale = null;
+
+		private String group = null;
 
 		/**
 		 * Returns the X scale instance
@@ -614,6 +772,24 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 		 */
 		private void setYAxis(Scale yAxis) {
 			this.yAxis = yAxis;
+		}
+
+		/**
+		 * Returns the group name of chart instance.
+		 * 
+		 * @return the group name of chart instance
+		 */
+		private String getGroup() {
+			return group;
+		}
+
+		/**
+		 * Sets the group name of chart instance
+		 * 
+		 * @param group the group name of chart instance
+		 */
+		private void setGroup(String group) {
+			this.group = group;
 		}
 
 	}

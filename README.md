@@ -288,7 +288,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `FillColors` class to enable different colors above and below the baseline.
  * add `interpolate` methods to `Helpers` class to enable the values interpolation for numbers, colors and booleans.
  * add `register` method to `GlobalPlugin` class to inject and register CHART.JS plugins not included in this library.
- 
+ * add `group` option to `CrosshairOptions` class by `Crosshair` plugin to enable crosshairs on linked chart instances.
+  
 ### Fixed Bugs
 
  * [#87](https://github.com/pepstock-org/Charba/issues/87): remove check, which tested if the epoch must be greater than 1, when dates are managed. Thanks @Speykious.
