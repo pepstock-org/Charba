@@ -110,8 +110,10 @@ public abstract class AbstractXYDataPoint extends AbstractDataPoint {
 	 * @return X value as double
 	 */
 	public final double getX() {
+		// gets data point type
+		DataPointType type = getXType();
 		// checks if the stored data is a number
-		if (DataPointType.NUMBER.equals(getXType())) {
+		if (DataPointType.NUMBER.equals(type) || DataPointType.DATE.equals(type)) {
 			return getValue(XYProperty.X, DEFAULT_X);
 		}
 		// if here the data is missing or a string

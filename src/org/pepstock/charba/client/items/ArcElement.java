@@ -145,7 +145,7 @@ public class ArcElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class ArcElementFactory implements ChartElementFactory {
+	private static class ArcElementFactory implements ChartContextElementFactory {
 
 		/*
 		 * (non-Javadoc)

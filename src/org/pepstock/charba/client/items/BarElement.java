@@ -131,7 +131,7 @@ public class BarElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class BarElementFactory implements ChartElementFactory {
+	private static class BarElementFactory implements ChartContextElementFactory {
 
 		/*
 		 * (non-Javadoc)

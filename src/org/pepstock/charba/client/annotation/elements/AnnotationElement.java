@@ -19,6 +19,7 @@
 package org.pepstock.charba.client.annotation.elements;
 
 import org.pepstock.charba.client.annotation.AnnotationEnvelop;
+import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Envelop;
@@ -382,6 +383,17 @@ public final class AnnotationElement extends ChartElement {
 			Checker.assertCheck(parent instanceof AnnotationElement, "Element of the options is not an AnnotationElement");
 			// creates and returns options
 			return new OptionsElement(parent, Property.OPTIONS, nativeObject);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.items.ChartElementFactory#createContext(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public ChartContext createContext(NativeObject nativeObject) {
+			// context for annotation is NOT retrieved
+			return null;
 		}
 
 	}

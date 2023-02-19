@@ -20,6 +20,7 @@ package org.pepstock.charba.client.sankey;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.items.ChartContextElementFactory;
 import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.ChartElementFactory;
 import org.pepstock.charba.client.items.Undefined;
@@ -124,7 +125,7 @@ public final class SankeyElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class SankeyElementFactory implements ChartElementFactory {
+	private static class SankeyElementFactory implements ChartContextElementFactory {
 
 		/*
 		 * (non-Javadoc)

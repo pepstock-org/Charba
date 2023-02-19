@@ -167,7 +167,7 @@ public class PointElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class PointElementFactory implements ChartElementFactory {
+	private static class PointElementFactory implements ChartContextElementFactory {
 
 		/*
 		 * (non-Javadoc)

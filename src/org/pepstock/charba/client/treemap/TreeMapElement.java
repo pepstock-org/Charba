@@ -20,6 +20,7 @@ package org.pepstock.charba.client.treemap;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.items.ChartContextElementFactory;
 import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.ChartElementFactory;
 import org.pepstock.charba.client.items.Undefined;
@@ -104,7 +105,7 @@ public final class TreeMapElement extends ChartElement {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class TreeMapElementFactory implements ChartElementFactory {
+	private static class TreeMapElementFactory implements ChartContextElementFactory {
 
 		/*
 		 * (non-Javadoc)

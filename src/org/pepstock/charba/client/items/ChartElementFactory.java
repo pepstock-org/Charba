@@ -18,6 +18,7 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
@@ -43,4 +44,12 @@ public interface ChartElementFactory extends NativeObjectContainerFactory<ChartE
 	 * @return a {@link ChartElementOptions} instance by a native object
 	 */
 	ChartElementOptions createOptions(final ChartElement parent, final NativeObject nativeObject);
+
+	/**
+	 * Returns the context instance from an element.
+	 * 
+	 * @param nativeObject native object
+	 * @return the context instance from an element
+	 */
+	ChartContext createContext(final NativeObject nativeObject);
 }

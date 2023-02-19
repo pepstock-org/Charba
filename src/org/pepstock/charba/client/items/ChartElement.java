@@ -20,6 +20,7 @@ package org.pepstock.charba.client.items;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.ChartContext;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.AbstractReadOnlyPoint;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -50,6 +51,7 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	private enum Property implements Key
 	{
 		ACTIVE("active"),
+		CONTEXT("$context"),
 		OPTIONS("options"),
 		SKIP("skip"),
 		STOP("stop");
@@ -82,6 +84,8 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	private final String type;
 	// element options instance
 	private final ChartElementOptions options;
+	// context instance
+	private final ChartContext context;
 
 	/**
 	 * Creates the element using its type and a native java script object which contains all properties.
@@ -109,6 +113,8 @@ public class ChartElement extends AbstractReadOnlyPoint {
 		this.type = factory.getType();
 		// sets the element options
 		this.options = factory.createOptions(this, getValue(Property.OPTIONS));
+		// sets context
+		this.context = factory.createContext(getValue(Property.CONTEXT));
 	}
 
 	/**
@@ -118,6 +124,15 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	 */
 	public final String getType() {
 		return type;
+	}
+
+	/**
+	 * Returns the context of the element.
+	 * 
+	 * @return the context of the element
+	 */
+	public final ChartContext getContext() {
+		return context;
 	}
 
 	/**
@@ -230,7 +245,7 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static class UndefinedDataElementFactory implements ChartElementFactory {
+	private static class UndefinedDataElementFactory implements ChartContextElementFactory {
 
 		/*
 		 * (non-Javadoc)

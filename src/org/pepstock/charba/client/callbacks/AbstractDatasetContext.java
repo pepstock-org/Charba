@@ -23,6 +23,7 @@ import java.util.List;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.ChartElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.Undefined;
@@ -43,6 +44,7 @@ public abstract class AbstractDatasetContext extends ChartContext {
 		ACTIVE("active"),
 		DATASET_INDEX("datasetIndex"),
 		DATA_INDEX("dataIndex"),
+		PARSED("parsed"),
 		MODE("mode");
 
 		// name value of property
@@ -68,6 +70,9 @@ public abstract class AbstractDatasetContext extends ChartContext {
 		}
 	}
 
+	// parsed data instance
+	private final ParsedData parsed;
+
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * 
@@ -75,6 +80,23 @@ public abstract class AbstractDatasetContext extends ChartContext {
 	 */
 	protected AbstractDatasetContext(NativeObject nativeObject) {
 		super(nativeObject);
+		// checks the type of parsed
+		if (isType(Property.PARSED, ObjectType.NUMBER)) {
+			// if here is for no scale data
+			this.parsed = new ParsedData(getValue(Property.PARSED, Undefined.DOUBLE));
+		} else {
+			// if here there is at least a scale
+			this.parsed = new ParsedData(getValue(Property.PARSED));
+		}
+	}
+
+	/**
+	 * Returns the parsed data from controller.
+	 * 
+	 * @return the parsed data from controller
+	 */
+	public final ParsedData getParsedData() {
+		return parsed;
 	}
 
 	/**
