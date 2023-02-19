@@ -323,7 +323,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 	 * @param scale scale instance
 	 * @param axis axis instance
 	 * @param label label options of the plugin
-	 * @param pixel the pixel to use for retriving the value from scale
+	 * @param pixel the pixel to use for retrieving the value from scale
 	 */
 	private void drawLabel(IsChart chart, ScaleItem scale, Scale axis, CrosshairLabel label, double pixel) {
 		// checks if the position is supported
@@ -597,7 +597,7 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 			// scans states
 			for (Entry<String, State> entry : states.entrySet()) {
 				// checks if a state to evaluate
-				if (entry.getKey().equals(chart.getId()) && group.equalsIgnoreCase(entry.getValue().getGroup())) {
+				if (!entry.getKey().equals(chart.getId()) && group.equalsIgnoreCase(entry.getValue().getGroup())) {
 					// stores chart instance to result
 					result.add(Charts.get(entry.getKey()));
 				}
