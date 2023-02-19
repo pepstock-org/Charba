@@ -51,10 +51,11 @@ public final class ScaleValueItem {
 	 * Used for {@link ChartAxisType#CATEGORY} scale.
 	 * 
 	 * @param value value on the scale
+	 * @param index value index on the scale
 	 * @param label string representation of the value, showed on the scale
 	 */
-	ScaleValueItem(String value, String label) {
-		this.value = Undefined.DOUBLE;
+	ScaleValueItem(String value, double index, String label) {
+		this.value = index;
 		this.valueAsDate = null;
 		this.valueAsString = value;
 		this.dataType = ScaleDataType.STRING;

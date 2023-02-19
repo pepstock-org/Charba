@@ -594,7 +594,7 @@ public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 			} else if (ScaleDataType.STRING.equals(getType().getDataType())) {
 				// if here, is a string
 				// uses only label
-				result = new ScaleValueItem(label, label);
+				result = new ScaleValueItem(label, value, label);
 			} else {
 				// if here, the type is not recognize
 				// then resets the result
