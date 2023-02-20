@@ -135,12 +135,12 @@ public final class ParsedData extends NativeObjectContainer implements IsPoint {
 		if (isType(Property.VALUE, ObjectType.NUMBER)) {
 			// no scale, single value
 			return ScaleType.NONE;
-		} else if (isType(Property.R, ObjectType.NUMBER)) {
-			// single scale, single value at R position
-			return ScaleType.SINGLE;
 		} else if (isType(Property.X, ObjectType.NUMBER) && isType(Property.Y, ObjectType.NUMBER)) {
 			// multi scales, X and Y are set
 			return ScaleType.MULTI;
+		} else if (isType(Property.R, ObjectType.NUMBER)) {
+			// single scale, single value at R position
+			return ScaleType.SINGLE;
 		}
 		// if here, parsed object is not readable
 		// it could be customized by the controller
