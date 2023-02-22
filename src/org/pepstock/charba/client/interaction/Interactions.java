@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.ChartsLifecycleListener;
 import org.pepstock.charba.client.Helpers;
@@ -255,10 +254,7 @@ public final class Interactions implements ChartsLifecycleListener {
 				// checks if the value is defined
 				if (mode.value().equals(name)) {
 					// checks if interactioner not exists
-					if (!instances.containsKey(name)) {
-						// loads new discovered interaction mode
-						instances.put(name, createExtendedInteractioner(name, modes.getExtendedInteraction(name)));
-					}
+					instances.computeIfAbsent(name, mapKey -> createExtendedInteractioner(mapKey, modes.getExtendedInteraction(mapKey)));
 					return true;
 				}
 			}
@@ -396,33 +392,29 @@ public final class Interactions implements ChartsLifecycleListener {
 	 * 
 	 * @param interactioner interactioner instance to store
 	 */
-	void storeInteration(Interactioner interactioner) {
+	private void storeInteration(Interactioner interactioner) {
 		// gets mode
 		IsInteractionMode mode = interactioner.getMode();
 		// creates a proxy
 		CallbackProxy<ExtendedInteraction> proxy = JsHelper.get().newCallbackProxy();
-		proxy.setCallback(new ExtendedInteraction() {
-
-			@Override
-			public ArrayObject call(Chart chart, NativeObject event, NativeObject options, boolean useFinalPosition) {
-				// gets chart instances
-				IsChart chartInstance = Charts.get(chart.getCharbaId());
-				// gets interactioner
-				Interactioner inter = getInteractioner(mode);
-				// checks if chart is consistent
-				if (IsChart.isValid(chartInstance) && inter != null) {
-					// creates context
-					ChartEventContext context = new ChartEventContext(new InteractionEnvelop<>(event, true));
-					// creates options
-					InteractionOptions optionsInstance = new InteractionOptions(new InteractionEnvelop<>(options, true));
-					// invokes callback
-					List<InteractionItem> result = inter.invoke(chartInstance, context, optionsInstance, useFinalPosition);
-					// creates factory and returns item
-					return ArrayObject.fromOrEmpty(result);
-				}
-				// if here the arguments not consistent
-				return ArrayObject.fromOrEmpty((NativeObject) null);
+		proxy.setCallback((chart, event, options, useFinalPosition) -> {
+			// gets chart instances
+			IsChart chartInstance = Charts.get(chart.getCharbaId());
+			// gets interactioner
+			Interactioner inter = getInteractioner(mode);
+			// checks if chart is consistent
+			if (IsChart.isValid(chartInstance) && inter != null) {
+				// creates context
+				ChartEventContext context = new ChartEventContext(new InteractionEnvelop<>(event, true));
+				// creates options
+				InteractionOptions optionsInstance = new InteractionOptions(new InteractionEnvelop<>(options, true));
+				// invokes callback
+				List<InteractionItem> result = inter.invoke(chartInstance, context, optionsInstance, useFinalPosition);
+				// creates factory and returns item
+				return ArrayObject.fromOrEmpty(result);
 			}
+			// if here the arguments not consistent
+			return ArrayObject.fromOrEmpty((NativeObject) null);
 		});
 		// adds the function to the modes
 		modes.registerMode(mode, proxy.getProxy());
@@ -435,7 +427,7 @@ public final class Interactions implements ChartsLifecycleListener {
 	 * 
 	 * @param interactioner interactioner instance to store
 	 */
-	void storeNativeInteration(Interactioner interactioner) {
+	private void storeNativeInteration(Interactioner interactioner) {
 		// checks type of implementation
 		if (interactioner instanceof ExtendedInteractioner) {
 			// casts interactioner
@@ -571,7 +563,7 @@ public final class Interactions implements ChartsLifecycleListener {
 		 */
 		ExtendedInteraction getExtendedInteraction(String mode) {
 			// cast needed because the J2CL transpiller
-			// it's not able to transform a return instance {*}
+			// it's not able to transform a return instance (any object *)
 			// to the function
 			return JsHelper.get().cast(InternalReflect.getExtendedInteraction(getNativeObject(), mode));
 		}

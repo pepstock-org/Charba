@@ -135,8 +135,6 @@ public final class InteractionItem extends NativeObjectContainer {
 	public final ChartElement getElement() {
 		// gets native object
 		NativeObject nativeObject = getValue(Property.ELEMENT);
-		// gets chart
-		IsChart chart = getChart();
 		// check is consistent
 		if (chart != null && IsChart.isValid(chart)) {
 			// gets dataset item

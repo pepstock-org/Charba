@@ -161,10 +161,10 @@ public final class ParsedData extends NativeObjectContainer implements IsPoint {
 		if (ScaleType.MULTI.equals(type)) {
 			// MULTI SCALE
 			return "ParsedData [x=" + getX() + ", y=" + getY() + "]";
-		} else if (ScaleType.MULTI.equals(type)) {
+		} else if (ScaleType.SINGLE.equals(type)) {
 			// SINGLE SCALE
 			return "ParsedData [r=" + getR() + "]";
-		} else if (ScaleType.MULTI.equals(type)) {
+		} else if (ScaleType.NONE.equals(type)) {
 			// NONE SCALE
 			return "ParsedData [" + getValue() + " ]";
 		}

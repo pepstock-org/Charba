@@ -18,6 +18,7 @@
 */
 package org.pepstock.charba.client.interaction;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
@@ -93,8 +94,11 @@ abstract class AbstractNativeInteractioner<T> extends AbstractInteractioner {
 		Chart nativeChart = Charts.getNative(IsChart.checkAndGetIfValid(chart));
 		// checks native chart consistency
 		Checker.assertCheck(nativeChart != null, "Native chart is undefined");
-		// checks event
-		Checker.assertCheck(event != null && event.isConsistent(), "Event is not consistent");
+		// checks event if consistent
+		if (event == null) {
+			// if not, return and empty values
+			return Collections.emptyList();
+		}
 		// checks options
 		InteractionOptions internalOptions = options != null ? options : DEFAULT_OPTIONS;
 		// invokes interaction mode callback
