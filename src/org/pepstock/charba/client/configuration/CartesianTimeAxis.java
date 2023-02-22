@@ -34,7 +34,7 @@ import org.pepstock.charba.client.options.ScaleId;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implements HasMinMaxCallbacksHandler<Date> {
+public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implements HasMinMaxCallbacksHandler<Object> {
 
 	private final CartesianTimeTick ticks;
 
@@ -42,7 +42,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 
 	private final Adapters adapters;
 
-	private final MinMaxCallbacksHandler<Date> minMaxHandler;
+	private final MinMaxCallbacksHandler<Object> minMaxHandler;
 
 	/**
 	 * Builds the object storing the chart instance. Axis type is X by default.
@@ -142,7 +142,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 	 * @see org.pepstock.charba.client.configuration.HasMinMaxHandler#getMinMaxHandler()
 	 */
 	@Override
-	public MinMaxCallbacksHandler<Date> getMinMaxCallbacksHandler() {
+	public MinMaxCallbacksHandler<Object> getMinMaxCallbacksHandler() {
 		return minMaxHandler;
 	}
 
@@ -171,7 +171,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 	 */
 	public void setMax(Date max) {
 		// reset callback
-		setMax((MinMaxCallback<Date>) null);
+		setMax((MinMaxCallback<Object>) null);
 		// stores value
 		getScale().setMax(max);
 	}
@@ -192,7 +192,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> implemen
 	 */
 	public void setMin(Date min) {
 		// reset callback
-		setMin((MinMaxCallback<Date>) null);
+		setMin((MinMaxCallback<Object>) null);
 		// stores value
 		getScale().setMin(min);
 	}

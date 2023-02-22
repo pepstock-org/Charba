@@ -284,6 +284,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
  * rename `InteractionMode` enumeration to `DefaultInteractionMode`.
  * rename `InteractionItem` enumeration to `InteractionOptions`.
+ * change the generic type from `Date` to `Object` for `MinMaxCallback` instance on time and time series axes. In this way the callback can return also a `Number` (i.e. a double) in order to be more precise when zooming.
  
 ### Features
 
@@ -299,7 +300,8 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Fixed Bugs
 
  * [#87](https://github.com/pepstock-org/Charba/issues/87): remove check, which tested if the epoch must be greater than 1, when dates are managed. Thanks @Speykious.
- * [#88](https://github.com/pepstock-org/Charba/issues/88): add `register` method to `GlobalPlugin` class to inject and register CHART.JS plugins not included in this library. Thanks @Speykious. 
+ * [#88](https://github.com/pepstock-org/Charba/issues/88): add `register` method to `GlobalPlugin` class to inject and register CHART.JS plugins not included in this library. Thanks @Speykious.
+ * [#89](https://github.com/pepstock-org/Charba/issues/89): change the generic type from `Date` to `Object` for `MinMaxCallback` instance on time and time series axes. In this way the callback can return also a `Number` (i.e. a double) in order to be more precise when zooming. Thanks @Speykious.
 
 License
 -------

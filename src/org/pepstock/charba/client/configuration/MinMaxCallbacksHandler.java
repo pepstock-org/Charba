@@ -268,7 +268,7 @@ final class MinMaxCallbacksHandler<T> {
 		// gets value
 		Object result = ScriptableUtil.getOptionValue(context, callback);
 		// checks if consistent
-		if (result instanceof Number && ScaleDataType.NUMBER.equals(dataType)) {
+		if (result instanceof Number && (ScaleDataType.NUMBER.equals(dataType) || ScaleDataType.DATE.equals(dataType))) {
 			// casts to number
 			Number number = (Number) result;
 			// returns the number
