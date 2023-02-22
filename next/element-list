@@ -37,6 +37,7 @@ org.pepstock.charba.client.impl.callbacks
 org.pepstock.charba.client.impl.charts
 org.pepstock.charba.client.impl.plugins
 org.pepstock.charba.client.impl.plugins.enums
+org.pepstock.charba.client.interaction
 org.pepstock.charba.client.intl
 org.pepstock.charba.client.intl.enums
 org.pepstock.charba.client.items
