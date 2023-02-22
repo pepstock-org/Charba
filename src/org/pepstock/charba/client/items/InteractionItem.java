@@ -18,33 +18,32 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.defaults.IsDefaultInteraction;
-import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * Definitions about how the interaction with events will be applied on chart elements.
+ * Object used by CHART.JS to manages the user interaction on chart instances, for events, hovering and tooltips.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class InteractionItem extends NativeObjectContainer implements IsDefaultInteraction {
+public final class InteractionItem extends NativeObjectContainer {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		AXIS("axis"),
-		MODE("mode"),
-		INCLUDE_INVISIBLE("includeInvisible"),
-		INTERSECT("intersect");
+		DATASET_INDEX("datasetIndex"),
+		INDEX("index"),
+		ELEMENT("element");
 
 		// name value of property
-		private String value;
+		private final String value;
 
 		/**
 		 * Creates with the property value to use in the native object.
@@ -67,120 +66,92 @@ public final class InteractionItem extends NativeObjectContainer implements IsDe
 
 	}
 
+	// chart instance
+	private final IsChart chart;
+
 	/**
-	 * Creates an interaction item with defaults.
+	 * Creates an item with chart and a specific dataset element, setting dataset and data indexes.
+	 * 
+	 * @param chart chart instance
+	 * @param element element of the dataset
+	 * @param datasetIndex dataset index in the chart
+	 * @param index data index in the dataset data
 	 */
-	public InteractionItem() {
-		this(InteractionMode.NEAREST);
+	public InteractionItem(IsChart chart, ChartElement element, int datasetIndex, int index) {
+		this(chart, (NativeObject) null);
+		// checks arguments
+		Checker.assertCheck(element != null, "Element argument is not consistent");
+		// stores element
+		setValue(Property.ELEMENT, element);
+		// stores indexes
+		setValue(Property.DATASET_INDEX, datasetIndex);
+		setValue(Property.INDEX, index);
 	}
 
 	/**
-	 * Creates an interaction item with passed mode and all other configuration as defaults.
+	 * Creates the object with native object instance to be wrapped.
 	 * 
-	 * @param mode how the event will be apply on elements
+	 * @param chart chart instance
+	 * @param nativeObject native object instance to be wrapped.
 	 */
-	public InteractionItem(InteractionMode mode) {
-		this(mode, true);
+	InteractionItem(IsChart chart, NativeObject nativeObject) {
+		super(nativeObject);
+		// checks if chart is correct
+		this.chart = IsChart.checkAndGetIfValid(chart);
 	}
 
 	/**
-	 * Creates an interaction item with passed mode and intersect and all other configuration as defaults.
+	 * Returns the CHARBA chart instance.
 	 * 
-	 * @param mode how the event will be apply on elements
-	 * @param intersect if <code>true</code>, the mode only applies when the mouse position intersects an element on the chart.
+	 * @return the CHARBA chart instance
 	 */
-	public InteractionItem(InteractionMode mode, boolean intersect) {
-		this(mode, intersect, InteractionAxis.XY);
+	public final IsChart getChart() {
+		return chart;
 	}
 
 	/**
-	 * Creates an interaction item with all passed arguments.
+	 * Returns the index of the data inside the dataset.
 	 * 
-	 * @param mode how to interact with the elements on charts.
-	 * @param intersect if <code>true</code>, the mode only applies when the mouse position intersects an element on the chart.
-	 * @param axis which directions are used in calculating distances.
+	 * @return the index of the data inside the dataset.
 	 */
-	public InteractionItem(InteractionMode mode, boolean intersect, InteractionAxis axis) {
-		super();
-		setMode(mode);
-		setIntersect(intersect);
-		setAxis(axis);
+	public final int getIndex() {
+		return getValue(Property.INDEX, Undefined.INTEGER);
 	}
 
 	/**
-	 * Sets which directions are used in calculating distances.
+	 * Returns the dataset index of the chart
 	 * 
-	 * @param axis define which directions are used in calculating distances.
+	 * @return the dataset index of the chart.
 	 */
-	public void setAxis(InteractionAxis axis) {
-		setValue(Property.AXIS, axis);
+	public final int getDatasetIndex() {
+		return getValue(Property.DATASET_INDEX, Undefined.INTEGER);
 	}
 
 	/**
-	 * Returns which directions are used in calculating distances.
+	 * Returns the chart element (point, arc, bar, etc.) for this tooltip item.
 	 * 
-	 * @return define which directions are used in calculating distances.
+	 * @return the chart element (point, arc, bar, etc.) for this tooltip item.
 	 */
-	@Override
-	public InteractionAxis getAxis() {
-		return getValue(Property.AXIS, InteractionAxis.values(), InteractionAxis.XY);
-	}
-
-	/**
-	 * If true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
-	 * 
-	 * @param includeInvisible if true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
-	 */
-	public void setIncludeInvisible(boolean includeInvisible) {
-		setValue(Property.INCLUDE_INVISIBLE, includeInvisible);
-	}
-
-	/**
-	 * If true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
-	 * 
-	 * @return if true, the invisible points that are outside of the chart area will also be included when evaluating interactions.
-	 */
-	@Override
-	public boolean isIncludeInvisible() {
-		return getValue(Property.INCLUDE_INVISIBLE, false);
-	}
-
-	/**
-	 * Sets which elements appear in the interaction.
-	 * 
-	 * @param mode which elements appear in the interaction.
-	 */
-	public void setMode(InteractionMode mode) {
-		setValue(Property.MODE, mode);
-	}
-
-	/**
-	 * Returns which elements appear in the interaction.
-	 * 
-	 * @return which elements appear in the interaction.
-	 */
-	@Override
-	public InteractionMode getMode() {
-		return getValue(Property.MODE, InteractionMode.values(), InteractionMode.NEAREST);
-	}
-
-	/**
-	 * if <code>true</code>, the mode only applies when the mouse position intersects an item on the chart.
-	 * 
-	 * @param intersect if <code>true</code>, the mode only applies when the mouse position intersects an item on the chart.
-	 */
-	public void setIntersect(boolean intersect) {
-		setValue(Property.INTERSECT, intersect);
-	}
-
-	/**
-	 * if <code>true</code>, the mode only applies when the mouse position intersects an item on the chart.
-	 * 
-	 * @return if <code>true</code>, the mode only applies when the mouse position intersects an item on the chart.
-	 */
-	@Override
-	public boolean isIntersect() {
-		return getValue(Property.INTERSECT, true);
+	public final ChartElement getElement() {
+		// gets native object
+		NativeObject nativeObject = getValue(Property.ELEMENT);
+		// gets chart
+		IsChart chart = getChart();
+		// check is consistent
+		if (chart != null && IsChart.isValid(chart)) {
+			// gets dataset item
+			DatasetItem item = chart.getDatasetItem(getDatasetIndex());
+			// checks if the item is consistent
+			if (item != null) {
+				// gets the factory
+				ChartElementFactory factory = ChartElementFactories.get().getFactory(item);
+				// creates and returns element
+				return factory.create(nativeObject);
+			}
+		}
+		// if here, it's not able to resolve the chart or dataset item
+		// then returns the base element
+		return new ChartElement(ChartElement.UNDEFINED_TYPE, nativeObject);
 	}
 
 	/**
@@ -191,4 +162,46 @@ public final class InteractionItem extends NativeObjectContainer implements IsDe
 	public NativeObject nativeObject() {
 		return super.getNativeObject();
 	}
+
+	/**
+	 * Returns an interaction items factory for a specific chart.
+	 * 
+	 * @param chart chart instance
+	 * @return an interaction items factory for a specific chart
+	 */
+	public static NativeObjectContainerFactory<InteractionItem> createFactory(IsChart chart) {
+		return new InteractionItemFactory(IsChart.checkAndGetIfValid(chart));
+	}
+
+	/**
+	 * Interaction item factory used to create items.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InteractionItemFactory implements NativeObjectContainerFactory<InteractionItem> {
+
+		private final IsChart chart;
+
+		/**
+		 * Creates a item factory with chart instance
+		 * 
+		 * @param chart chart instance
+		 */
+		private InteractionItemFactory(IsChart chart) {
+			this.chart = chart;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public InteractionItem create(NativeObject nativeObject) {
+			return new InteractionItem(chart, nativeObject);
+		}
+
+	}
+
 }

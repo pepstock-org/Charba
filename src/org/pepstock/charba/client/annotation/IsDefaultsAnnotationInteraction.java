@@ -18,8 +18,8 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import org.pepstock.charba.client.enums.DefaultInteractionMode;
 import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
  * Interface to define interaction object defaults on annotations.
@@ -33,7 +33,7 @@ public interface IsDefaultsAnnotationInteraction {
 	 * 
 	 * @return which the mode to engaged annotations on events.
 	 */
-	default InteractionMode getMode() {
+	default DefaultInteractionMode getMode() {
 		return null;
 	}
 

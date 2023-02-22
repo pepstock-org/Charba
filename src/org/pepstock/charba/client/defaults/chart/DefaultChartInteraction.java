@@ -20,7 +20,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultInteraction;
 import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsInteractionMode;
 
 /**
  * Defaults for interaction option element, based on chart type.
@@ -46,7 +46,7 @@ public class DefaultChartInteraction implements IsDefaultInteraction {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultInteraction#getMode()
 	 */
 	@Override
-	public final InteractionMode getMode() {
+	public final IsInteractionMode getMode() {
 		return interaction.getMode();
 	}
 

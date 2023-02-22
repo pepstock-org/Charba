@@ -52,8 +52,8 @@ import org.pepstock.charba.client.dom.enums.MouseEventType;
 import org.pepstock.charba.client.dom.enums.Position;
 import org.pepstock.charba.client.dom.enums.Unit;
 import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.enums.DefaultInteractionMode;
 import org.pepstock.charba.client.enums.ImageMimeType;
-import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.ChartEventHandler;
 import org.pepstock.charba.client.events.EventHandler;
@@ -63,7 +63,7 @@ import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.ActiveDatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
-import org.pepstock.charba.client.items.InteractionItem;
+import org.pepstock.charba.client.items.InteractionOptions;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.TransitionKey;
@@ -90,7 +90,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// default interaction instance for dataset
-	private static final InteractionItem DEFAULT_INTERACTION = new InteractionItem(InteractionMode.DATASET, true);
+	private static final InteractionOptions DEFAULT_INTERACTION = new InteractionOptions(DefaultInteractionMode.DATASET, true);
 	// PCT standard for width
 	private static final int DEFAULT_WIDTH = 90;
 	// PCT standard for width
@@ -1249,11 +1249,11 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return single element at the event position or <code>null</code> if event is not consistent
 	 */
 	@Override
-	public final DatasetReference getElementAtEvent(NativeBaseEvent event, InteractionItem interaction) {
+	public final DatasetReference getElementAtEvent(NativeBaseEvent event, InteractionOptions interaction) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks if interaction is consistent
-		InteractionItem item = interaction != null ? interaction : getOptions().getInteraction().create();
+		InteractionOptions item = interaction != null ? interaction : getOptions().getInteraction().create();
 		// checks consistency of chart and event
 		if (instance != null && event != null) {
 			// gets element
@@ -1287,11 +1287,11 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return all elements at the same data index or an empty list.
 	 */
 	@Override
-	public final List<DatasetReference> getElementsAtEvent(NativeBaseEvent event, InteractionItem interaction) {
+	public final List<DatasetReference> getElementsAtEvent(NativeBaseEvent event, InteractionOptions interaction) {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks if interaction is consistent
-		InteractionItem item = interaction != null ? interaction : getOptions().getInteraction().create();
+		InteractionOptions item = interaction != null ? interaction : getOptions().getInteraction().create();
 		// checks consistency of chart and event
 		if (instance != null && event != null) {
 			// gets elements

@@ -19,8 +19,9 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultInteraction;
+import org.pepstock.charba.client.enums.DefaultInteractionMode;
 import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsInteractionMode;
 
 /**
  * CHART.JS default values for INTERACTION element.
@@ -46,8 +47,8 @@ public class DefaultInteraction implements IsDefaultInteraction {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultInteraction#getMode()
 	 */
 	@Override
-	public InteractionMode getMode() {
-		return InteractionMode.NEAREST;
+	public IsInteractionMode getMode() {
+		return DefaultInteractionMode.NEAREST;
 	}
 
 	/*

@@ -271,12 +271,12 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 			// begins path
 			ctx.beginPath();
 			// checks which type of interaction has been set
-			if (inXScaleRange(state.getXScale(), context) && hasY(options)) {
+			if (inXScaleRange(state.getXScale(), context) && hasX(options)) {
 				// draws vertical line
 				ctx.moveTo(context.getX(), area.getTop());
 				ctx.lineTo(context.getX(), area.getBottom());
 			}
-			if (inYScaleRange(state.getYScale(), context) && hasX(options)) {
+			if (inYScaleRange(state.getYScale(), context) && hasY(options)) {
 				// draws horizontal line
 				ctx.moveTo(area.getLeft(), context.getY());
 				ctx.lineTo(area.getRight(), context.getY());
@@ -302,14 +302,14 @@ final class CrosshairPlugin extends CharbaPlugin<CrosshairOptions> {
 			// gets x label options
 			CrosshairLabel xLabel = options.getXLabel();
 			// checks if x scale is consistent
-			if (inXScaleRange(state.getXScale(), context) && state.getXAxis() != null && hasY(options) && xLabel.isDisplay()) {
+			if (inXScaleRange(state.getXScale(), context) && state.getXAxis() != null && hasX(options) && xLabel.isDisplay()) {
 				// draws the X label
 				drawLabel(chart, state.getXScale(), state.getXAxis(), xLabel, context.getX());
 			}
 			// gets y label options
 			CrosshairLabel yLabel = options.getYLabel();
 			// checks if y scale is consistent
-			if (inYScaleRange(state.getYScale(), context) && state.getYAxis() != null && hasX(options) && xLabel.isDisplay()) {
+			if (inYScaleRange(state.getYScale(), context) && state.getYAxis() != null && hasY(options) && xLabel.isDisplay()) {
 				// draws the Y label
 				drawLabel(chart, state.getYScale(), state.getYAxis(), yLabel, context.getY());
 			}

@@ -213,6 +213,25 @@ public class ChartElement extends AbstractReadOnlyPoint {
 		return getFinalPositionProps(ArrayString.fromOrEmpty(ArrayUtil.toKeys(keys)), keys);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public final String toString() {
+		return "Element [x=" + getX() + ", y=" + getY() + "]";
+	}
+
+	/**
+	 * Returns the native object instance.
+	 * 
+	 * @return the native object instance.
+	 */
+	public NativeObject nativeObject() {
+		return super.getNativeObject();
+	}
+
 	/**
 	 * Returns the list of properties of the element, using the final position.
 	 * 
@@ -228,16 +247,6 @@ public class ChartElement extends AbstractReadOnlyPoint {
 		}
 		// if here, the keys are not consistent
 		return new ElementProperties(keys, null);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public final String toString() {
-		return "Element [x=" + getX() + ", y=" + getY() + "]";
 	}
 
 	/**

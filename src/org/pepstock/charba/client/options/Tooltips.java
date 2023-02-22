@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsInteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipAlign;
@@ -213,7 +213,7 @@ public final class Tooltips extends AbstractInteraction<Plugins, IsDefaultToolti
 	 * @see org.pepstock.charba.client.options.AbstractHover#getDefaultMode()
 	 */
 	@Override
-	InteractionMode getDefaultMode() {
+	IsInteractionMode getDefaultMode() {
 		return getDefaultValues().getMode();
 	}
 

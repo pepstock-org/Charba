@@ -178,6 +178,10 @@ Chart.helpers;
  */
 Chart.instances;
 /**
+ * @type {Object}
+ */
+Chart.Interaction;
+/**
  * @constructor
  * @return {CharbaChartHelpers}
  */

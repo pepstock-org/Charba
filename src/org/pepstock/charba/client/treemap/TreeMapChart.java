@@ -25,7 +25,7 @@ import org.pepstock.charba.client.IsDatasetCreator;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.DefaultInteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector;
 import org.pepstock.charba.client.impl.plugins.HtmlLegend;
@@ -132,7 +132,7 @@ public final class TreeMapChart extends AbstractChart implements IsDatasetCreato
 		getOptions().getPlugins().setEnabled(DatasetsItemsSelector.ID, false);
 		// overrides interaction and tooltip position
 		// to use always the configuration of the controller
-		getOptions().getInteraction().setMode(InteractionMode.POINT);
+		getOptions().getInteraction().setMode(DefaultInteractionMode.POINT);
 		getOptions().getInteraction().setIntersect(true);
 		getOptions().getTooltips().setPosition(POSITIONER);
 		getOptions().getTooltips().setIntersect(true);

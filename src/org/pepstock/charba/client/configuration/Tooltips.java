@@ -32,7 +32,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.BarBorderRadius;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsInteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
@@ -308,7 +308,16 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	 * 
 	 * @param mode which elements appear in the tooltip.
 	 */
-	public void setMode(InteractionMode mode) {
+	public void setMode(IsInteractionMode mode) {
+		getConfiguration().getTooltips().setMode(mode);
+	}
+
+	/**
+	 * Sets which elements appear in the tooltip.
+	 * 
+	 * @param mode which elements appear in the tooltip.
+	 */
+	public void setMode(String mode) {
 		getConfiguration().getTooltips().setMode(mode);
 	}
 
@@ -317,7 +326,7 @@ public class Tooltips extends ConfigurationOptionsContainer implements HasAnimat
 	 * 
 	 * @return which elements appear in the tooltip.
 	 */
-	public InteractionMode getMode() {
+	public IsInteractionMode getMode() {
 		return getConfiguration().getTooltips().getMode();
 	}
 

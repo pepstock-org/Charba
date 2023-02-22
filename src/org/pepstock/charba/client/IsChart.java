@@ -40,7 +40,7 @@ import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.ActiveDatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
-import org.pepstock.charba.client.items.InteractionItem;
+import org.pepstock.charba.client.items.InteractionOptions;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.TransitionKey;
 import org.pepstock.charba.client.plugins.Plugins;
@@ -658,7 +658,7 @@ public interface IsChart {
 	 * @param interaction how the elements will be checked.
 	 * @return single element at the event position or <code>null</code> if event is not consistent
 	 */
-	DatasetReference getElementAtEvent(NativeBaseEvent event, InteractionItem interaction);
+	DatasetReference getElementAtEvent(NativeBaseEvent event, InteractionOptions interaction);
 
 	/**
 	 * Looks for the element under the event point, then returns all elements at the same data index.<br>
@@ -677,7 +677,7 @@ public interface IsChart {
 	 * @param interaction how the elements will be checked.
 	 * @return all elements at the same data index or an empty list.
 	 */
-	List<DatasetReference> getElementsAtEvent(NativeBaseEvent event, InteractionItem interaction);
+	List<DatasetReference> getElementsAtEvent(NativeBaseEvent event, InteractionOptions interaction);
 
 	/**
 	 * Draws the chart

@@ -21,41 +21,26 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Defines which directions are used in calculating distances, interacting on the chart.<br>
- * Defaults to {@link InteractionAxis#X} for {@link DefaultInteractionMode#INDEX} mode and {@link InteractionAxis#XY} in {@link DefaultInteractionMode#DATASET} and
- * {@link DefaultInteractionMode#NEAREST} modes.
+ * This is a standard implementation of a {@link IsInteractionMode}.
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-public enum InteractionAxis implements Key
-{
-	/**
-	 * Radial directions are used in calculating distances.
-	 */
-	R("r"),
-	/**
-	 * X directions are used in calculating distances.
-	 */
-	X("x"),
-	/**
-	 * Y directions are used in calculating distances.
-	 */
-	Y("y"),
-	/**
-	 * XY directions are used in calculating distances.
-	 */
-	XY("xy");
+final class StandardInteractionMode implements IsInteractionMode {
 
-	// name value of property
-	private final String value;
+	// instance of value
+	private String value;
 
 	/**
-	 * Creates with the property value to use in the native object.
+	 * Builds the object with the key value as string
 	 * 
-	 * @param value value of property name
+	 * @param value value of key as String
 	 */
-	private InteractionAxis(String value) {
+	StandardInteractionMode(String value) {
+		// stores value
 		this.value = value;
+		// checsk if consistent
+		Key.checkIfValid(this);
 	}
 
 	/*

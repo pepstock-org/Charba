@@ -26,7 +26,7 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.defaults.IsDefaultTransitions;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsInteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TextDirection;
@@ -117,7 +117,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getMode()
 	 */
 	@Override
-	public InteractionMode getMode() {
+	public IsInteractionMode getMode() {
 		return tooltip.getMode();
 	}
 

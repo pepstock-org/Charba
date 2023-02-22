@@ -19,7 +19,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsInteractionMode;
 
 /**
  * Definitions about how elements appear in the chart, hovering the chart.
@@ -43,7 +43,16 @@ public class Hover extends ConfigurationOptionsContainer {
 	 * 
 	 * @param mode which elements appear in the chart, hovering the chart.
 	 */
-	public void setMode(InteractionMode mode) {
+	public void setMode(IsInteractionMode mode) {
+		getConfiguration().getHover().setMode(mode);
+	}
+
+	/**
+	 * Sets which elements appear in the chart, hovering the chart.
+	 * 
+	 * @param mode which elements appear in the chart, hovering the chart.
+	 */
+	public void setMode(String mode) {
 		getConfiguration().getHover().setMode(mode);
 	}
 
@@ -52,7 +61,7 @@ public class Hover extends ConfigurationOptionsContainer {
 	 * 
 	 * @return which elements appear in the chart, hovering the chart.
 	 */
-	public InteractionMode getMode() {
+	public IsInteractionMode getMode() {
 		return getConfiguration().getHover().getMode();
 	}
 

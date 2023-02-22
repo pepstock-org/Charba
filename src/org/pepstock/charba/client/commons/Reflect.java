@@ -110,7 +110,7 @@ final class Reflect {
 	static native void setCallbackProxy(NativeObject target, String key, CallbackProxy.Proxy value);
 
 	// ----------
-	// IS NATIVE
+	// NATIVE Object
 	// ----------
 
 	/**

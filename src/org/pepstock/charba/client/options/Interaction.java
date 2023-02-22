@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultInteraction;
 import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsInteractionMode;
 
 /**
  * Definitions about how the user can interact with chart elements.
@@ -82,7 +82,7 @@ public class Interaction extends AbstractInteraction<Options, IsDefaultInteracti
 	 * @see org.pepstock.charba.client.options.AbstractHover#getDefaultMode()
 	 */
 	@Override
-	final InteractionMode getDefaultMode() {
+	final IsInteractionMode getDefaultMode() {
 		return getDefaultValues().getMode();
 	}
 

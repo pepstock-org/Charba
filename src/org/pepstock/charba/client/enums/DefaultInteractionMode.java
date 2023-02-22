@@ -18,14 +18,21 @@
 */
 package org.pepstock.charba.client.enums;
 
-import org.pepstock.charba.client.commons.Key;
+import java.util.List;
+
+import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.events.ChartEventContext;
+import org.pepstock.charba.client.interaction.Interactioner;
+import org.pepstock.charba.client.interaction.Interactions;
+import org.pepstock.charba.client.items.InteractionItem;
+import org.pepstock.charba.client.items.InteractionOptions;
 
 /**
  * When configuring interaction with the graph via hover or tooltips, a number of different modes are available to set which elements appear via tooltip or hover.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum InteractionMode implements Key
+public enum DefaultInteractionMode implements IsInteractionMode, Interactioner
 {
 
 	/**
@@ -67,7 +74,7 @@ public enum InteractionMode implements Key
 	 * 
 	 * @param value value of property name
 	 */
-	private InteractionMode(String value) {
+	private DefaultInteractionMode(String value) {
 		this.value = value;
 	}
 
@@ -79,6 +86,27 @@ public enum InteractionMode implements Key
 	@Override
 	public String value() {
 		return value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.interaction.Interactioner#getMode()
+	 */
+	@Override
+	public IsInteractionMode getMode() {
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.interaction.Interactioner#invoke(org.pepstock.charba.client.IsChart, org.pepstock.charba.client.events.ChartEventContext,
+	 * org.pepstock.charba.client.items.InteractionOptions, boolean)
+	 */
+	@Override
+	public List<InteractionItem> invoke(IsChart chart, ChartEventContext event, InteractionOptions options, boolean useFinalPosition) {
+		return Interactions.get().getInteractioner(this).invoke(chart, event, options, useFinalPosition);
 	}
 
 }

@@ -43,7 +43,7 @@ import org.pepstock.charba.client.events.HandlerRegistration;
 import org.pepstock.charba.client.items.ActiveDatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
-import org.pepstock.charba.client.items.InteractionItem;
+import org.pepstock.charba.client.items.InteractionOptions;
 import org.pepstock.charba.client.options.TransitionKey;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.utils.CTimer;
@@ -688,10 +688,10 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#getElementAtEvent(org.pepstock.charba.client.dom.events.NativeBaseEvent, org.pepstock.charba.client.items.InteractionItem)
+	 * @see org.pepstock.charba.client.IsChart#getElementAtEvent(org.pepstock.charba.client.dom.events.NativeBaseEvent, org.pepstock.charba.client.items.InteractionOptions)
 	 */
 	@Override
-	public DatasetReference getElementAtEvent(NativeBaseEvent event, InteractionItem interaction) {
+	public DatasetReference getElementAtEvent(NativeBaseEvent event, InteractionOptions interaction) {
 		return chart.getElementAtEvent(event, interaction);
 	}
 
@@ -708,10 +708,10 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#getElementsAtEvent(org.pepstock.charba.client.dom.events.NativeBaseEvent, org.pepstock.charba.client.items.InteractionItem)
+	 * @see org.pepstock.charba.client.IsChart#getElementsAtEvent(org.pepstock.charba.client.dom.events.NativeBaseEvent, org.pepstock.charba.client.items.InteractionOptions)
 	 */
 	@Override
-	public List<DatasetReference> getElementsAtEvent(NativeBaseEvent event, InteractionItem interaction) {
+	public List<DatasetReference> getElementsAtEvent(NativeBaseEvent event, InteractionOptions interaction) {
 		return chart.getElementsAtEvent(event, interaction);
 	}
 

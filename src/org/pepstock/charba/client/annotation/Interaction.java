@@ -21,8 +21,8 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.enums.DefaultInteractionMode;
 import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
  * Definitions about how the user can interact with chart elements.
@@ -94,7 +94,7 @@ public final class Interaction extends NativeObjectContainer implements IsDefaul
 	 * 
 	 * @param mode which the mode to engaged annotations on events.
 	 */
-	public void setMode(InteractionMode mode) {
+	public void setMode(DefaultInteractionMode mode) {
 		setValue(Property.MODE, mode);
 	}
 
@@ -104,8 +104,8 @@ public final class Interaction extends NativeObjectContainer implements IsDefaul
 	 * @return which the mode to engaged annotations on events.
 	 */
 	@Override
-	public InteractionMode getMode() {
-		return getValue(Property.MODE, InteractionMode.values(), defaultValues.getMode());
+	public DefaultInteractionMode getMode() {
+		return getValue(Property.MODE, DefaultInteractionMode.values(), defaultValues.getMode());
 	}
 
 	/**

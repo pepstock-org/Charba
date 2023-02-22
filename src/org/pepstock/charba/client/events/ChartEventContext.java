@@ -37,6 +37,7 @@ import org.pepstock.charba.client.dom.enums.MouseEventType;
 import org.pepstock.charba.client.dom.events.NativeAbstractMouseEvent;
 import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.dom.events.NativeMouseEvent;
+import org.pepstock.charba.client.interaction.InteractionEnvelop;
 import org.pepstock.charba.client.items.ItemsEnvelop;
 import org.pepstock.charba.client.items.Undefined;
 
@@ -152,6 +153,15 @@ public final class ChartEventContext extends NativeObjectContainer implements Is
 	 * 
 	 * @param envelop envelop with the native object instance to be wrapped.
 	 */
+	public ChartEventContext(InteractionEnvelop<NativeObject> envelop) {
+		super(Envelop.checkAndGetIfValid(envelop).getContent());
+	}
+
+	/**
+	 * Creates the object with envelop envelop with the native object instance to be wrapped.
+	 * 
+	 * @param envelop envelop with the native object instance to be wrapped.
+	 */
 	public ChartEventContext(AnnotationEnvelop<NativeObject> envelop) {
 		super(Envelop.checkAndGetIfValid(envelop).getContent());
 	}
@@ -247,7 +257,7 @@ public final class ChartEventContext extends NativeObjectContainer implements Is
 	 * 
 	 * @return the java script object in order to consume it.
 	 */
-	public NativeObject getObject() {
+	public NativeObject nativeObject() {
 		return getNativeObject();
 	}
 }

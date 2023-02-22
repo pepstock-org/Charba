@@ -77,6 +77,14 @@ public final class Chart implements IsJSType {
 	public static native ArrayChart getInstances();
 
 	/**
+	 * Returns the <code>interaction</code> property by native object.
+	 * 
+	 * @return the <code>interaction</code> property by native object.
+	 */
+	@JsProperty(name = "Interaction")
+	static native NativeObject getInteraction();
+
+	/**
 	 * Builds CHART object at CHART.JS level.<br>
 	 * This constructor MUST be empty.
 	 * 

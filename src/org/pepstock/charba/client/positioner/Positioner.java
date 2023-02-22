@@ -130,7 +130,7 @@ public final class Positioner {
 	/**
 	 * Register the tooltips positioner to CHART.JS.
 	 * 
-	 * @param positioner tooltip positioner instance to invoke
+	 * @param positioner tooltip positioner instance to register
 	 */
 	public void register(TooltipPositioner positioner) {
 		// checks if tooltip positioner is consistent

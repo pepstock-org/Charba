@@ -20,7 +20,8 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsInteractionMode;
+import org.pepstock.charba.client.interaction.Interactions;
 
 /**
  * Definitions about how the user can interact with chart elements.
@@ -81,7 +82,7 @@ abstract class AbstractInteraction<P extends AbstractModel<?, ?>, D> extends Abs
 	 * 
 	 * @return which elements appear in the interaction.
 	 */
-	abstract InteractionMode getDefaultMode();
+	abstract IsInteractionMode getDefaultMode();
 
 	/**
 	 * if true, the mode only applies when the mouse position intersects an item on the chart.
@@ -95,7 +96,20 @@ abstract class AbstractInteraction<P extends AbstractModel<?, ?>, D> extends Abs
 	 * 
 	 * @param mode which elements appear in the interaction.
 	 */
-	public final void setMode(InteractionMode mode) {
+	public final void setMode(String name) {
+		// checks if exist
+		if (Interactions.get().hasInteractionMode(name)) {
+			// gets the interaction mode by name
+			setMode(Interactions.get().getInteractionMode(name));
+		}
+	}
+
+	/**
+	 * Sets which elements appear in the interaction.
+	 * 
+	 * @param mode which elements appear in the interaction.
+	 */
+	public final void setMode(IsInteractionMode mode) {
 		setValueAndAddToParent(Property.MODE, mode);
 	}
 
@@ -104,8 +118,13 @@ abstract class AbstractInteraction<P extends AbstractModel<?, ?>, D> extends Abs
 	 * 
 	 * @return which elements appear in the interaction.
 	 */
-	public final InteractionMode getMode() {
-		return getValue(Property.MODE, InteractionMode.values(), getDefaultMode());
+	public final IsInteractionMode getMode() {
+		// gets mode
+		String value = getValue(Property.MODE, getDefaultMode().value());
+		// checks if mode exists
+		IsInteractionMode mode = Interactions.get().getInteractionMode(value);
+		// checks if exists and then returns the mode
+		return mode != null ? mode : getDefaultMode();
 	}
 
 	/**

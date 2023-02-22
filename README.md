@@ -280,6 +280,11 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Breaking changes
+
+ * rename `InteractionMode` enumeration to `DefaultInteractionMode`.
+ * rename `InteractionItem` enumeration to `InteractionOptions`.
+ 
 ### Features
 
  * import CHART.JS version [v4.2.1](https://github.com/chartjs/Chart.js/releases/tag/v4.2.1).
@@ -289,6 +294,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `interpolate` methods to `Helpers` class to enable the values interpolation for numbers, colors and booleans.
  * add `register` method to `GlobalPlugin` class to inject and register CHART.JS plugins not included in this library.
  * add `group` option to `CrosshairOptions` class by `Crosshair` plugin to enable crosshairs on linked chart instances.
+ * enable the capabilities to create and use custom interaction mode. All classes needed for that are available in new package `org.pepstock.charba.client.interaction`.
   
 ### Fixed Bugs
 

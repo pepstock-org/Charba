@@ -22,12 +22,14 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Checker;
+import org.pepstock.charba.client.commons.Envelop;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
 import org.pepstock.charba.client.dom.events.NativeBaseEvent;
 import org.pepstock.charba.client.events.AbstractEvent;
+import org.pepstock.charba.client.interaction.InteractionEnvelop;
 import org.pepstock.charba.client.intl.CLocale;
 import org.pepstock.charba.client.intl.NumberFormatOptions;
 import org.pepstock.charba.client.items.ChartAreaNode;
@@ -71,6 +73,18 @@ public final class Helpers {
 	 */
 	public static Helpers get() {
 		return INSTANCE;
+	}
+
+	/**
+	 * Loads the interaction module from CHART.JS.
+	 * 
+	 * @param envelop object to wrap the native object of interaction
+	 */
+	public void loadInteraction(InteractionEnvelop<NativeObject> envelop) {
+		// checks envelop consistency
+		Envelop.checkAndGetIfValid(envelop);
+		// loads data to envelop
+		envelop.setContent(Chart.getInteraction());
 	}
 
 	/**

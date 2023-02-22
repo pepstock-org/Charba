@@ -18,7 +18,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsInteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipAlign;
@@ -49,7 +49,7 @@ public interface IsDefaultTooltips extends IsDefaultTextDirectionHandler, IsDefa
 	 * 
 	 * @return which elements appear in the tooltip.
 	 */
-	InteractionMode getMode();
+	IsInteractionMode getMode();
 
 	/**
 	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.

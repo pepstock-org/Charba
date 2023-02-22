@@ -21,6 +21,7 @@ package org.pepstock.charba.client.positioner;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.options.Tooltips;
 
@@ -39,7 +40,7 @@ public interface TooltipPositioner {
 	 * @return <code>true</code> if tooltip positioner passed as argument is not <code>null</code> and its name is not <code>null</code>
 	 */
 	static boolean isValid(TooltipPositioner tooltipPositioner) {
-		return tooltipPositioner != null && tooltipPositioner.getName() != null;
+		return tooltipPositioner != null && Key.isValid(tooltipPositioner.getName());
 	}
 
 	/**

@@ -19,8 +19,8 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
-import org.pepstock.charba.client.items.InteractionItem;
+import org.pepstock.charba.client.enums.IsInteractionMode;
+import org.pepstock.charba.client.items.InteractionOptions;
 
 /**
  * Definitions about how the user can interact with chart elements.
@@ -44,7 +44,16 @@ public class Interaction extends ConfigurationOptionsContainer {
 	 * 
 	 * @param mode which elements appear in the interaction.
 	 */
-	public void setMode(InteractionMode mode) {
+	public void setMode(String mode) {
+		getConfiguration().getInteraction().setMode(mode);
+	}
+
+	/**
+	 * Sets which elements appear in the interaction.
+	 * 
+	 * @param mode which elements appear in the interaction.
+	 */
+	public void setMode(IsInteractionMode mode) {
 		getConfiguration().getInteraction().setMode(mode);
 	}
 
@@ -53,7 +62,7 @@ public class Interaction extends ConfigurationOptionsContainer {
 	 * 
 	 * @return which elements appear in the interaction.
 	 */
-	public InteractionMode getMode() {
+	public IsInteractionMode getMode() {
 		return getConfiguration().getInteraction().getMode();
 	}
 
@@ -112,11 +121,11 @@ public class Interaction extends ConfigurationOptionsContainer {
 	}
 
 	/**
-	 * Creates an {@link InteractionItem} using the configuration defined in this interaction.
+	 * Creates an {@link InteractionOptions} using the configuration defined in this interaction.
 	 * 
-	 * @return an {@link InteractionItem} using the configuration defined in this interaction
+	 * @return an {@link InteractionOptions} using the configuration defined in this interaction
 	 */
-	public final InteractionItem create() {
+	public final InteractionOptions create() {
 		return getConfiguration().getInteraction().create();
 	}
 }

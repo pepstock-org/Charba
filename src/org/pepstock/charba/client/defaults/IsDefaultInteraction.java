@@ -19,8 +19,8 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
-import org.pepstock.charba.client.items.InteractionItem;
+import org.pepstock.charba.client.enums.IsInteractionMode;
+import org.pepstock.charba.client.items.InteractionOptions;
 
 /**
  * Interface to define interaction object defaults.
@@ -34,7 +34,7 @@ public interface IsDefaultInteraction {
 	 * 
 	 * @return which elements appear in the tooltip.
 	 */
-	InteractionMode getMode();
+	IsInteractionMode getMode();
 
 	/**
 	 * If true, the hover mode only applies when the mouse position intersects an item on the chart.
@@ -58,12 +58,15 @@ public interface IsDefaultInteraction {
 	boolean isIncludeInvisible();
 
 	/**
-	 * Creates an {@link InteractionItem} using the configuration defined in this interaction.
+	 * Creates an {@link InteractionOptions} using the configuration defined in this interaction.
 	 * 
-	 * @return an {@link InteractionItem} using the configuration defined in this interaction
+	 * @return an {@link InteractionOptions} using the configuration defined in this interaction
 	 */
-	default InteractionItem create() {
-		return new InteractionItem(getMode(), isIntersect(), getAxis());
+	default InteractionOptions create() {
+		// creates options
+		InteractionOptions options = new InteractionOptions(getMode(), isIntersect(), getAxis());
+		options.setIncludeInvisible(isIncludeInvisible());
+		return options;
 	}
 
 }

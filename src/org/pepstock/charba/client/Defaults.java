@@ -305,7 +305,7 @@ public final class Defaults {
 				// gets array object
 				ArrayObject array = ArrayObject.fromOrNull(event.getItems());
 				// invokes the onclick legend out of the box
-				JsChartHelper.get().invokeDefaultChartEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), array);
+				JsChartHelper.get().invokeDefaultChartEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.nativeObject(), array);
 			}
 		}
 	}
@@ -354,7 +354,7 @@ public final class Defaults {
 				// creates an envelop to load the native object
 				ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>(true);
 				// invokes the onclick legend out of the box
-				JsChartHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.getObject(), event.getItem().loadNativeObject(envelop).getContent());
+				JsChartHelper.get().invokeDefaultLegendEvent(getChartOptions(chart.getType()), event.getKey(), eventContext.getNativeChart(), eventContext.nativeObject(), event.getItem().loadNativeObject(envelop).getContent());
 			}
 		}
 	}

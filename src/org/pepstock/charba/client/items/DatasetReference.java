@@ -72,6 +72,8 @@ public final class DatasetReference extends NativeObjectContainer {
 
 	// dataset item element instance
 	private final ChartElement element;
+	// chart instance
+	private final IsChart chart;
 
 	/**
 	 * Creates the item reference using a a scriptale context and a data element
@@ -85,6 +87,8 @@ public final class DatasetReference extends NativeObjectContainer {
 		Checker.checkIfValid(context, "Scriptable context argument");
 		// checks if chart element is consistent
 		Checker.checkIfValid(element, "Chart element argument");
+		// checks if chart is valid
+		this.chart = IsChart.checkAndGetIfValid(context.getChart());
 		// stores data set and data indexes by content
 		setValue(Property.DATASET_INDEX, context.getDatasetIndex());
 		setValue(Property.INDEX, context.getDataIndex());
@@ -103,7 +107,7 @@ public final class DatasetReference extends NativeObjectContainer {
 	public DatasetReference(IsChart chart, ChartEnvelop<NativeObject> envelop) {
 		super(Envelop.checkAndGetIfValid(envelop).getContent());
 		// checks if chart is valid
-		IsChart.checkIfValid(chart);
+		this.chart = IsChart.checkAndGetIfValid(chart);
 		// checks if dataset index is consistent
 		Checker.assertCheck(has(Property.values()), "Invalid object: it does not contain all properties of a dataset reference");
 		// gets dataset index from native object
@@ -113,7 +117,7 @@ public final class DatasetReference extends NativeObjectContainer {
 		// gets the factory
 		ChartElementFactory factory = ChartElementFactories.get().getFactory(item);
 		// sets the chart element
-		element = factory.create(getValue(Property.ELEMENT));
+		this.element = factory.create(getValue(Property.ELEMENT));
 	}
 
 	/**
@@ -141,6 +145,15 @@ public final class DatasetReference extends NativeObjectContainer {
 	 */
 	public final int getIndex() {
 		return getValue(Property.INDEX, Undefined.INTEGER);
+	}
+
+	/**
+	 * Creates new {@link InteractionItem} which can be used in custom interaction mode.
+	 * 
+	 * @return new {@link InteractionItem} which can be used in custom interaction mode
+	 */
+	public InteractionItem createInteractionItem() {
+		return new InteractionItem(chart, getElement(), getDatasetIndex(), getIndex());
 	}
 
 }
