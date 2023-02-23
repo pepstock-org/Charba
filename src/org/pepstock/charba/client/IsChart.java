@@ -558,6 +558,13 @@ public interface IsChart {
 	DatasetItem getDatasetItem(int index);
 
 	/**
+	 * Returns an array of all the dataset items in the order that they are drawn on the canvas that are not hidden.
+	 * 
+	 * @return an array of all the dataset items in the order that they are drawn on the canvas that are not hidden.
+	 */
+	List<DatasetItem> getSortedVisibleDatasetMetas();
+
+	/**
 	 * Looks for the dataset that matches the event.
 	 * 
 	 * @param event event of chart.

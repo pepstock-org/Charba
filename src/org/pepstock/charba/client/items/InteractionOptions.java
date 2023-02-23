@@ -170,7 +170,7 @@ public final class InteractionOptions extends NativeObjectContainer implements I
 	/**
 	 * Sets which elements appear in the interaction.
 	 * 
-	 * @param mode which elements appear in the interaction.
+	 * @param name which elements appear in the interaction.
 	 */
 	public void setMode(String name) {
 		// checks if exist

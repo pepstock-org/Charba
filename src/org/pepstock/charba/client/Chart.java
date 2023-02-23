@@ -214,6 +214,14 @@ public final class Chart implements IsJSType {
 	native ArrayObject getElementsAtEventForMode(NativeBaseEvent event, String mode, NativeObject options, boolean useFinalPosition);
 
 	/**
+	 * Returns an array of all the dataset meta's in the order that they are drawn on the canvas that are not hidden.
+	 * 
+	 * @return an array of all the dataset meta's in the order that they are drawn on the canvas that are not hidden.
+	 */
+	@JsMethod
+	native ArrayObject getSortedVisibleDatasetMetas();
+
+	/**
 	 * Looks for the dataset that matches the current index.
 	 * 
 	 * @param index dataset index

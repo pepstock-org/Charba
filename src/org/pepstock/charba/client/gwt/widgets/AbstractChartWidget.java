@@ -578,6 +578,16 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.IsChart#getSortedVisibleDatasetMetas()
+	 */
+	@Override
+	public final List<DatasetItem> getSortedVisibleDatasetMetas() {
+		return chart.getSortedVisibleDatasetMetas();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.IsChart#getDatasetAtEvent(org.pepstock.charba.client.dom.events.NativeBaseEvent)
 	 */
 	@Override

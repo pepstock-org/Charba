@@ -97,6 +97,8 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	private static final int DEFAULT_HEIGHT = 100;
 	// suffix label for canvas element id
 	private static final String SUFFIX_CANVAS_ELEMENT_ID = "_canvas";
+	// dataset item factory
+	private static final DatasetItemFactory DATASET_ITEM_FACTORY = new DatasetItemFactory();
 	// reference to Chart.js chart instance
 	private Chart chart = null;
 	// chart ID using generate unique id
@@ -1039,10 +1041,28 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 		// checks consistency of chart and data sets
 		if (instance != null && isValidDatasetIndex(index)) {
 			// returns the array
-			return new DatasetItem(new ChartEnvelop<>(instance.getDatasetMeta(index), true));
+			return DATASET_ITEM_FACTORY.create(instance.getDatasetMeta(index));
 		}
 		// returns null
 		return null;
+	}
+
+	/**
+	 * Returns an array of all the dataset items in the order that they are drawn on the canvas that are not hidden.
+	 * 
+	 * @return an array of all the dataset items in the order that they are drawn on the canvas that are not hidden.
+	 */
+	@Override
+	public List<DatasetItem> getSortedVisibleDatasetMetas() {
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
+		// checks consistency of chart and data sets
+		if (instance != null) {
+			// returns the array
+			return ArrayListHelper.unmodifiableList(chart.getSortedVisibleDatasetMetas(), DATASET_ITEM_FACTORY);
+		}
+		// returns empty list
+		return Collections.emptyList();
 	}
 
 	/**
@@ -1593,6 +1613,27 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// creates envelop
 			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>(nativeObject, false);
 			return new DatasetReference(chart, envelop);
+		}
+	}
+
+	/**
+	 * Inner class to create data set item by a native object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	private static class DatasetItemFactory implements NativeObjectContainerFactory<DatasetItem> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
+		 */
+		@Override
+		public DatasetItem create(NativeObject nativeObject) {
+			// creates envelop
+			ChartEnvelop<NativeObject> envelop = new ChartEnvelop<>(nativeObject, true);
+			// creates and returns the item
+			return new DatasetItem(envelop);
 		}
 	}
 }

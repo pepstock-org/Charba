@@ -67,6 +67,10 @@ Chart.prototype.isPluginEnabled = function(pluginId) {};
  */
 Chart.prototype.getElementsAtEventForMode = function(event, mode, options, useFinalPosition) {};
 /**
+ * @return {Array}
+ */
+Chart.prototype.getSortedVisibleDatasetMetas = function() {};
+/**
  * @param {number} index
  * @return {Object}
  */

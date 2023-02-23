@@ -94,7 +94,7 @@ abstract class AbstractInteraction<P extends AbstractModel<?, ?>, D> extends Abs
 	/**
 	 * Sets which elements appear in the interaction.
 	 * 
-	 * @param mode which elements appear in the interaction.
+	 * @param name which elements appear in the interaction.
 	 */
 	public final void setMode(String name) {
 		// checks if exist

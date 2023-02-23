@@ -284,7 +284,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
  * rename `InteractionMode` enumeration to `DefaultInteractionMode`.
  * rename `InteractionItem` enumeration to `InteractionOptions`.
- * change the generic type from `Date` to `Object` for `MinMaxCallback` instance on time and time series axes. In this way the callback can return also a `Number` (i.e. a double) in order to be more precise when zooming.
+ * change the generic type from `Date` to `Object` for `MinMaxCallback` instance on time and time series axes. In this way the callback can return also a `Number` (i.e. a double) as epoch.
  
 ### Features
 
@@ -296,12 +296,13 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `register` method to `GlobalPlugin` class to inject and register CHART.JS plugins not included in this library.
  * add `group` option to `CrosshairOptions` class by `Crosshair` plugin to enable crosshairs on linked chart instances.
  * enable the capabilities to create and use custom interaction mode. All classes needed for that are available in new package `org.pepstock.charba.client.interaction`.
+ * add `getSortedVisibleDatasetMetas` method to the chart classes to get all dataset items in the order that they are drawn on the canvas that are not hidden.
   
 ### Fixed Bugs
 
  * [#87](https://github.com/pepstock-org/Charba/issues/87): remove check, which tested if the epoch must be greater than 1, when dates are managed. Thanks @Speykious.
  * [#88](https://github.com/pepstock-org/Charba/issues/88): add `register` method to `GlobalPlugin` class to inject and register CHART.JS plugins not included in this library. Thanks @Speykious.
- * [#89](https://github.com/pepstock-org/Charba/issues/89): change the generic type from `Date` to `Object` for `MinMaxCallback` instance on time and time series axes. In this way the callback can return also a `Number` (i.e. a double) in order to be more precise when zooming. Thanks @Speykious.
+ * [#89](https://github.com/pepstock-org/Charba/issues/89): change the generic type from `Date` to `Object` for `MinMaxCallback` instance on time and time series axes. In this way the callback can return also a `Number` (i.e. a double) as epoch. Thanks @Speykious.
 
 License
 -------
