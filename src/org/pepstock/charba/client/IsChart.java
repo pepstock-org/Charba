@@ -562,7 +562,7 @@ public interface IsChart {
 	 * 
 	 * @return an array of all the dataset items in the order that they are drawn on the canvas that are not hidden.
 	 */
-	List<DatasetItem> getSortedVisibleDatasetMetas();
+	List<DatasetItem> getSortedVisibleDatasetItems();
 
 	/**
 	 * Looks for the dataset that matches the event.

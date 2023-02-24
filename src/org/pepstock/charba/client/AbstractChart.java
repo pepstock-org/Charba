@@ -1053,7 +1053,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @return an array of all the dataset items in the order that they are drawn on the canvas that are not hidden.
 	 */
 	@Override
-	public List<DatasetItem> getSortedVisibleDatasetMetas() {
+	public List<DatasetItem> getSortedVisibleDatasetItems() {
 		// get consistent chart instance
 		Chart instance = lookForConsistentInstance();
 		// checks consistency of chart and data sets
