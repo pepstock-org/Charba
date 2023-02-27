@@ -46,12 +46,12 @@ public enum DefaultInteractionMode implements IsInteractionMode, Interactioner
 	 */
 	NEAREST("nearest"),
 	/**
-	 * Finds item at the same index. If the intersect setting is true, the first intersecting item is used to determine the index in the data.<br>
+	 * Finds all items at the same index. If the intersect setting is true, the first intersecting item is used to determine the index in the data.<br>
 	 * If intersect false the nearest item, in the x direction, is used to determine the index.
 	 */
 	INDEX("index"),
 	/**
-	 * Finds items in the same dataset. If the intersect setting is true, the first intersecting item is used to determine the index in the data.<br>
+	 * Finds all items in the same dataset. If the intersect setting is true, the first intersecting item is used to determine the index in the data.<br>
 	 * If intersect false the nearest item is used to determine the index.
 	 */
 	DATASET("dataset"),
