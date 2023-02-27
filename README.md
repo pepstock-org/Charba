@@ -304,6 +304,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * [#88](https://github.com/pepstock-org/Charba/issues/88): add `register` method to `GlobalPlugin` class to inject and register CHART.JS plugins not included in this library. Thanks @Speykious.
  * [#89](https://github.com/pepstock-org/Charba/issues/89): change the generic type from `Date` to `Object` for `MinMaxCallback` instance on time and time series axes. In this way the callback can return also a `Number` (i.e. a double) as epoch. Thanks @Speykious.
 
+### Development
+
+ * change dependency for Google Closure Compiler, version [v20230206](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20230206). 
+
 License
 -------
 
