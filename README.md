@@ -39,9 +39,9 @@ Even if **Charba** was born only as GWT chart library, as of version 3, **Charba
 Building
 --------
 
-To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.1/build.xml).
+To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.2/build.xml).
 
-The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.1/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
+The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.2/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
 
 The first distribution is a **Charba** file without any GWT dependency (but working on GWT anyway), consumable also in other [J2CL - JavaToClosure](https://github.com/google/j2cl) frameworks, like [Google Elemental2](https://github.com/google/elemental2) and [Elemento](https://github.com/hal/elemento).
 
@@ -55,7 +55,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
-[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_61.png)](https://github.com/pepstock-org/Charba-Showcase/blob/6.1/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_61.png)](https://github.com/pepstock-org/Charba-Showcase/blob/6.2/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------
@@ -70,18 +70,18 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>6.1</version>
+    <version>6.2</version>
     <!-- for GWT -->
-    <version>6.1-gwt</version>
+    <version>6.2-gwt</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="6.1"/>
+<dependency org="org.pepstock" name="charba" rev="6.2"/>
 <!-- for GWT -->
-<dependency org="org.pepstock" name="charba" rev="6.1-gwt"/>
+<dependency org="org.pepstock" name="charba" rev="6.2-gwt"/>
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration in your GWT project module configuration:
@@ -249,7 +249,7 @@ Documentation
 
 All **Charba** documentation will be maintained in [Charba-Wiki](https://github.com/pepstock-org/Charba-Wiki) project.
 
-API JavaDoc for version **6.1** is published [here](https://pepstock-org.github.io/Charba/6.1/index.html).
+API JavaDoc for version **6.2** is published [here](https://pepstock-org.github.io/Charba/6.2/index.html).
 
 You can also access the previous API JavaDoc, because every version is published to `https://pepstock-org.github.io/Charba/[version.release]`.
 
@@ -274,39 +274,6 @@ Continuous integration and quality gate
 **Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
-
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
-
-### Breaking changes
-
- * rename `InteractionMode` enumeration to `DefaultInteractionMode`.
- * rename `InteractionItem` enumeration to `InteractionOptions`.
- * change the generic type from `Date` to `Object` for `MinMaxCallback` instance on time and time series axes. In this way the callback can return also a `Number` (i.e. a double) as epoch.
- 
-### Features
-
- * import CHART.JS version [v4.2.1](https://github.com/chartjs/Chart.js/releases/tag/v4.2.1).
- * add `Fill.SHAPE` item to the filling options.
- * add `FillBaseline` class to enable the baseline on axis for filling.
- * add `FillColors` class to enable different colors above and below the baseline.
- * add `interpolate` methods to `Helpers` class to enable the values interpolation for numbers, colors and booleans.
- * add `register` method to `GlobalPlugin` class to inject and register CHART.JS plugins not included in this library.
- * add `group` option to `CrosshairOptions` class by `Crosshair` plugin to enable crosshairs on linked chart instances.
- * enable the capabilities to create and use custom interaction mode. All classes needed for that are available in new package `org.pepstock.charba.client.interaction`.
- * add `getSortedVisibleDatasetMetas` method to the chart classes to get all dataset items in the order that they are drawn on the canvas that are not hidden.
-  
-### Fixed Bugs
-
- * [#87](https://github.com/pepstock-org/Charba/issues/87): remove check, which tested if the epoch must be greater than 1, when dates are managed. Thanks @Speykious.
- * [#88](https://github.com/pepstock-org/Charba/issues/88): add `register` method to `GlobalPlugin` class to inject and register CHART.JS plugins not included in this library. Thanks @Speykious.
- * [#89](https://github.com/pepstock-org/Charba/issues/89): change the generic type from `Date` to `Object` for `MinMaxCallback` instance on time and time series axes. In this way the callback can return also a `Number` (i.e. a double) as epoch. Thanks @Speykious.
-
-### Development
-
- * change dependency for Google Closure Compiler, version [v20230206](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20230206). 
 
 License
 -------
