@@ -44,8 +44,6 @@ import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.enums.TooltipAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
 import org.pepstock.charba.client.enums.Weight;
-import org.pepstock.charba.client.options.AnimationCollectionKey;
-import org.pepstock.charba.client.options.AnimationPropertyKey;
 import org.pepstock.charba.client.options.IsEvent;
 
 /**
@@ -576,11 +574,9 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	private static class InternalAnimations extends DefaultAnimations {
 
-		private static final AnimationPropertyKey OPACITY = AnimationPropertyKey.create("opacity", AnimationType.NUMBER);
+		private static final Key OPACITY = Key.create("opacity");
 
-		private static final AnimationCollectionKey DEFAULT_OPACITY = AnimationCollectionKey.create("opacity", OPACITY);
-
-		private static final List<AnimationCollectionKey> DEFAULT_ANIMATION_COLLECTION_KEYS = Arrays.asList(DefaultAnimationCollectionKey.NUMBERS, DEFAULT_OPACITY);
+		private static final List<Key> DEFAULT_ANIMATION_COLLECTION_KEYS = Arrays.asList(DefaultAnimationCollectionKey.NUMBERS, OPACITY);
 
 		private static final DefaultAnimationCollection NUMBERS_COLLECTION = new InternalNumbersAnimationCollection();
 
@@ -589,14 +585,14 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#has(org.pepstock.charba.client.options.AnimationCollectionKey)
+		 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#contains(org.pepstock.charba.client.commons.Key)
 		 */
 		@Override
-		public boolean has(AnimationCollectionKey collection) {
+		public boolean contains(Key collection) {
 			// checks if collection is valid
-			if (AnimationCollectionKey.isValid(collection)) {
+			if (Key.isValid(collection)) {
 				// scans all defaults
-				for (AnimationCollectionKey defaultCollection : DEFAULT_ANIMATION_COLLECTION_KEYS) {
+				for (Key defaultCollection : DEFAULT_ANIMATION_COLLECTION_KEYS) {
 					// checks if equals
 					if (Key.equals(defaultCollection, collection)) {
 						// equals then exist
@@ -611,17 +607,17 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#get(org.pepstock.charba.client.options.AnimationCollectionKey)
+		 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#get(org.pepstock.charba.client.commons.Key)
 		 */
 		@Override
-		public IsDefaultAnimationCollection get(AnimationCollectionKey collection) {
+		public IsDefaultAnimationCollection get(Key collection) {
 			// checks if collection is valid and is default color collection
-			if (has(collection)) {
+			if (contains(collection)) {
 				// checks if is numbers or opacity
 				if (Key.equals(DefaultAnimationCollectionKey.NUMBERS, collection)) {
 					// equals then returns the default colors
 					return NUMBERS_COLLECTION;
-				} else if (Key.equals(DEFAULT_OPACITY, collection)) {
+				} else if (Key.equals(OPACITY, collection)) {
 					// equals then returns the default opacity
 					return OPACITY_COLLECTION;
 				}
@@ -639,9 +635,8 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	private static class InternalNumbersAnimationCollection extends DefaultAnimationCollection {
 
-		private static final List<AnimationPropertyKey> DEFAULT_ANIMATION_PROPERTIES_KEYS = Collections
-				.unmodifiableList(Arrays.asList(DefaultAnimationPropertyKey.X, DefaultAnimationPropertyKey.Y, AnimationPropertyKey.create("width", AnimationType.NUMBER), AnimationPropertyKey.create("height", AnimationType.NUMBER),
-						AnimationPropertyKey.create("caretX", AnimationType.NUMBER), AnimationPropertyKey.create("caretY", AnimationType.NUMBER)));
+		private static final List<Key> DEFAULT_ANIMATION_PROPERTIES_KEYS = Collections
+				.unmodifiableList(Arrays.asList(DefaultAnimationPropertyKey.X, DefaultAnimationPropertyKey.Y, Key.create("width"), Key.create("height"), Key.create("caretX"), Key.create("caretY")));
 
 		/*
 		 * (non-Javadoc)
@@ -649,7 +644,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		 * @see org.pepstock.charba.client.defaults.globals.DefaultAnimationCollection#getProperties()
 		 */
 		@Override
-		public List<AnimationPropertyKey> getProperties() {
+		public List<Key> getProperties() {
 			return DEFAULT_ANIMATION_PROPERTIES_KEYS;
 		}
 
@@ -660,7 +655,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		 */
 		@Override
 		public AnimationType getType() {
-			return DefaultAnimationCollectionKey.NUMBERS.type();
+			return AnimationType.NUMBER;
 		}
 
 	}
@@ -675,7 +670,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 
 		private static final int DEFAULT_DURATION = 200;
 
-		private List<AnimationPropertyKey> properties = null;
+		private List<Key> properties = null;
 
 		/*
 		 * (non-Javadoc)
@@ -683,7 +678,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		 * @see org.pepstock.charba.client.defaults.globals.DefaultAnimationCollection#getProperties()
 		 */
 		@Override
-		public List<AnimationPropertyKey> getProperties() {
+		public List<Key> getProperties() {
 			// if the list is null
 			if (properties == null) {
 				// creates and loads it
@@ -699,7 +694,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 		 */
 		@Override
 		public AnimationType getType() {
-			return InternalAnimations.OPACITY.type();
+			return AnimationType.NUMBER;
 		}
 
 		/*

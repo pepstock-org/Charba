@@ -18,8 +18,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.options.AnimationCollection;
-import org.pepstock.charba.client.options.AnimationCollectionKey;
 import org.pepstock.charba.client.options.IsAnimations;
 
 /**
@@ -47,7 +47,7 @@ public final class Animations extends AbstractDynamicConfiguration<IsAnimations>
 	 * @param enabled if <code>true</code> it enables an animation collection
 	 */
 	@Override
-	public void setEnabled(AnimationCollectionKey collection, boolean enabled) {
+	public void setEnabled(Key collection, boolean enabled) {
 		checkAndGet().setEnabled(collection, enabled);
 	}
 
@@ -58,7 +58,7 @@ public final class Animations extends AbstractDynamicConfiguration<IsAnimations>
 	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
 	 */
 	@Override
-	public boolean isEnabled(AnimationCollectionKey collection) {
+	public boolean isEnabled(Key collection) {
 		return checkAndGet().isEnabled(collection);
 	}
 
@@ -69,8 +69,8 @@ public final class Animations extends AbstractDynamicConfiguration<IsAnimations>
 	 * @return <code>true</code> if an animation collection instance is stored in the animation options
 	 */
 	@Override
-	public boolean has(AnimationCollectionKey collection) {
-		return checkAndGet().has(collection);
+	public boolean contains(Key collection) {
+		return checkAndGet().contains(collection);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public final class Animations extends AbstractDynamicConfiguration<IsAnimations>
 	 * @return an animation collection instance or <code>null</code> if does not exists
 	 */
 	@Override
-	public AnimationCollection get(AnimationCollectionKey collection) {
+	public AnimationCollection get(Key collection) {
 		return checkAndGet().get(collection);
 	}
 
@@ -91,7 +91,7 @@ public final class Animations extends AbstractDynamicConfiguration<IsAnimations>
 	 * @param animationCollection an animation collection instance to set
 	 */
 	@Override
-	public void set(AnimationCollectionKey collection, AnimationCollection animationCollection) {
+	public void set(Key collection, AnimationCollection animationCollection) {
 		checkAndGet().set(collection, animationCollection);
 	}
 
@@ -102,7 +102,7 @@ public final class Animations extends AbstractDynamicConfiguration<IsAnimations>
 	 * @return a collection animation options
 	 */
 	@Override
-	public AnimationCollection create(AnimationCollectionKey collection) {
+	public AnimationCollection create(Key collection) {
 		return checkAndGet().create(collection);
 	}
 
@@ -112,8 +112,8 @@ public final class Animations extends AbstractDynamicConfiguration<IsAnimations>
 	 * @param collection collection instance used to remove from animation options
 	 */
 	@Override
-	public void remove(AnimationCollectionKey collection) {
-		checkAndGet().remove(collection);
+	public void delete(Key collection) {
+		checkAndGet().delete(collection);
 	}
 
 }

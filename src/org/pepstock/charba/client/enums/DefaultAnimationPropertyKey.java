@@ -18,73 +18,62 @@
 */
 package org.pepstock.charba.client.enums;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.AnimationPropertyKey;
 
 /**
  * Cores animation properties, to use to animate, provided out of the box by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultAnimationPropertyKey implements AnimationPropertyKey
+public enum DefaultAnimationPropertyKey implements Key
 {
 	/**
 	 * Uses to <b>x</b> property to animate the element.
 	 */
-	X("x", AnimationType.NUMBER),
+	X("x"),
 	/**
 	 * Uses to <b>y</b> property to animate the element.
 	 */
-	Y("y", AnimationType.NUMBER),
+	Y("y"),
 	/**
 	 * Uses to <b>borderWidth</b> property to animate the element.
 	 */
-	BORDER_WIDTH("borderWidth", AnimationType.NUMBER),
+	BORDER_WIDTH("borderWidth"),
 	/**
 	 * Uses to <b>radius</b> property to animate the element.
 	 */
-	RADIUS("radius", AnimationType.NUMBER),
+	RADIUS("radius"),
 	/**
 	 * Uses to <b>tension</b> property to animate the element.
 	 */
-	TENSION("tension", AnimationType.NUMBER),
+	TENSION("tension"),
 	/**
 	 * Uses to <b>backgroundColor</b> property to animate the element.
 	 */
-	BACKGROUND_COLOR("backgroundColor", AnimationType.COLOR),
+	BACKGROUND_COLOR("backgroundColor"),
 	/**
 	 * Uses to <b>borderColor</b> property to animate the element.
 	 */
-	BORDER_COLOR("borderColor", AnimationType.COLOR),
+	BORDER_COLOR("borderColor"),
 	/**
 	 * Uses to <b>color</b> property to animate the element.
 	 */
-	COLOR("color", AnimationType.COLOR),
+	COLOR("color"),
 	/**
 	 * Uses to <b>visible</b> property to animate the element.
 	 */
-	VISIBLE("visible", AnimationType.BOOLEAN);
+	VISIBLE("visible");
 
 	// name value of property
 	private final String value;
-	// animation type
-	private final AnimationType type;
-	// list of properties with only the key
-	private List<AnimationPropertyKey> properties = null;
 
 	/**
 	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
-	 * @param type animation type related to the property
 	 */
-	private DefaultAnimationPropertyKey(String value, AnimationType type) {
+	private DefaultAnimationPropertyKey(String value) {
 		this.value = value;
-		this.type = type;
 	}
 
 	/*
@@ -95,49 +84,6 @@ public enum DefaultAnimationPropertyKey implements AnimationPropertyKey
 	@Override
 	public String value() {
 		return value;
-	}
-
-	/**
-	 * Returns the animation type related to the property.
-	 * 
-	 * @return the animation type related to the property
-	 */
-	@Override
-	public AnimationType type() {
-		return type;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AnimationCollectionKey#properties()
-	 */
-	@Override
-	public List<AnimationPropertyKey> properties() {
-		// checks if properties instance is initialized
-		if (properties == null) {
-			// stores the property itself in the properties list
-			// in order to act as animation collection key as well
-			this.properties = Collections.unmodifiableList(Arrays.asList(this));
-		}
-		return properties;
-	}
-
-	/**
-	 * Returns <code>true</code> if the argument is equals to a default animation property.
-	 * 
-	 * @param property the animation property to check
-	 * @return <code>true</code> if the argument is equals to a default animation property
-	 */
-	public static boolean is(AnimationPropertyKey property) {
-		// checks if property is valid
-		if (AnimationPropertyKey.isValid(property)) {
-			// invokes the checking
-			return is(property.value());
-		}
-		// if here the argument is not consistent
-		// then always false
-		return false;
 	}
 
 	/**

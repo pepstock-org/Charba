@@ -22,9 +22,9 @@ import java.util.List;
 
 import org.pepstock.charba.client.callbacks.FromCallback;
 import org.pepstock.charba.client.callbacks.ToCallback;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.enums.AnimationType;
-import org.pepstock.charba.client.options.AnimationPropertyKey;
 
 /**
  * CHART.JS default values for animation collection.
@@ -48,7 +48,7 @@ public final class DefaultChartAnimationCollection extends AbstractDefaultChartA
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getProperties()
 	 */
 	@Override
-	public List<AnimationPropertyKey> getProperties() {
+	public List<Key> getProperties() {
 		return getDefaults().getProperties();
 	}
 

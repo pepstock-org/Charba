@@ -18,7 +18,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.options.AnimationCollectionKey;
+import org.pepstock.charba.client.commons.Key;
 
 /**
  * Interface to define animations for animation element properties defaults, ANIMATIONS name space.
@@ -33,7 +33,7 @@ public interface IsDefaultAnimations {
 	 * @param collection collection instance used to check in the animation options
 	 * @return <code>true</code> if an animation collection instance is stored in the animation options
 	 */
-	boolean has(AnimationCollectionKey collection);
+	boolean contains(Key collection);
 
 	/**
 	 * Returns an animation collection instance if stored in the animation options.
@@ -41,6 +41,6 @@ public interface IsDefaultAnimations {
 	 * @param collection collection instance used to get for animation options
 	 * @return an animation collection instance or <code>null</code> if does not exists
 	 */
-	IsDefaultAnimationCollection get(AnimationCollectionKey collection);
+	IsDefaultAnimationCollection get(Key collection);
 
 }

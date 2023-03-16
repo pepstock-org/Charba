@@ -18,6 +18,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 
 /**
@@ -33,7 +34,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	 * @param collection collection instance used to check in the animation options
 	 * @param enabled if <code>true</code> it enables an animation collection
 	 */
-	void setEnabled(AnimationCollectionKey collection, boolean enabled);
+	void setEnabled(Key collection, boolean enabled);
 
 	/**
 	 * Returns <code>true</code> if the animation collection is enabled, otherwise <code>false</code>.
@@ -41,7 +42,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	 * @param collection collection instance used to check in the animation options
 	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
 	 */
-	boolean isEnabled(AnimationCollectionKey collection);
+	boolean isEnabled(Key collection);
 
 	/**
 	 * Returns an animation collection instance if stored in the animation options.
@@ -50,7 +51,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	 * @return an animation collection instance or <code>null</code> if does not exists
 	 */
 	@Override
-	AnimationCollection get(AnimationCollectionKey collection);
+	AnimationCollection get(Key collection);
 
 	/**
 	 * Sets an animation collection instance to store in the animation options.
@@ -58,7 +59,7 @@ public interface IsAnimations extends IsDefaultAnimations {
 	 * @param collection collection instance used to get for animation options
 	 * @param animationCollection an animation collection instance to set
 	 */
-	void set(AnimationCollectionKey collection, AnimationCollection animationCollection);
+	void set(Key collection, AnimationCollection animationCollection);
 
 	/**
 	 * Creates an animation collection instance and stores in the animation options.
@@ -66,13 +67,13 @@ public interface IsAnimations extends IsDefaultAnimations {
 	 * @param collection collection key used to create the animation collections
 	 * @return a collection animation options
 	 */
-	AnimationCollection create(AnimationCollectionKey collection);
+	AnimationCollection create(Key collection);
 
 	/**
 	 * Removes an animation collection previously added.
 	 * 
 	 * @param collection collection instance used to remove from animation options
 	 */
-	void remove(AnimationCollectionKey collection);
+	void delete(Key collection);
 
 }

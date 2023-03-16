@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
-import org.pepstock.charba.client.options.AnimationCollectionKey;
 
 /**
  * CHART.JS default values for ANIMATION element.
@@ -33,10 +32,6 @@ import org.pepstock.charba.client.options.AnimationCollectionKey;
  * @author Andrea "Stock" Stocchero
  */
 public class DefaultAnimations implements IsDefaultAnimations {
-
-	private static final IsDefaultAnimationCollection DEFAULT_COLLECTION_NUMBERS = new DefaultAnimationCollection(DefaultAnimationCollectionKey.NUMBERS);
-
-	private static final IsDefaultAnimationCollection DEFAULT_COLLECTION_COLORS = new DefaultAnimationCollection(DefaultAnimationCollectionKey.COLORS);
 
 	private static final List<DefaultAnimationCollectionKey> DEFAULT_ANIMATION_COLLECTION_KEYS = Arrays.asList(DefaultAnimationCollectionKey.NUMBERS, DefaultAnimationCollectionKey.COLORS);
 
@@ -51,12 +46,12 @@ public class DefaultAnimations implements IsDefaultAnimations {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#has(org.pepstock.charba.client.options.AnimationCollectionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#contains(org.pepstock.charba.client.commons.Key)
 	 */
 	@Override
-	public boolean has(AnimationCollectionKey collection) {
+	public boolean contains(Key collection) {
 		// checks if collection is valid
-		if (AnimationCollectionKey.isValid(collection)) {
+		if (Key.isValid(collection)) {
 			// scans all defaults
 			for (DefaultAnimationCollectionKey defaultCollection : DEFAULT_ANIMATION_COLLECTION_KEYS) {
 				// checks if equals
@@ -74,23 +69,14 @@ public class DefaultAnimations implements IsDefaultAnimations {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#get(org.pepstock.charba.client.options.AnimationCollectionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#get(org.pepstock.charba.client.commons.Key)
 	 */
 	@Override
-	public IsDefaultAnimationCollection get(AnimationCollectionKey collection) {
+	public IsDefaultAnimationCollection get(Key collection) {
 		// checks if collection key is consistent
-		AnimationCollectionKey.checkIfValid(collection);
-		// checks if collection is valid and is default one
-		if (DefaultAnimationCollectionKey.is(collection)) {
-			// checks if is color
-			if (Key.equals(collection, DefaultAnimationCollectionKey.COLORS)) {
-				return DEFAULT_COLLECTION_COLORS;
-			}
-			// if here, is numbers
-			return DEFAULT_COLLECTION_NUMBERS;
-		}
+		Key.checkIfValid(collection);
 		// if here, collection not valid or not a default
-		return new DefaultAnimationCollection(collection);
+		return new DefaultAnimationCollection();
 	}
 
 }

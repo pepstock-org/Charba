@@ -18,58 +18,38 @@
 */
 package org.pepstock.charba.client.enums;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.AnimationCollectionKey;
-import org.pepstock.charba.client.options.AnimationPropertyKey;
 
 /**
  * Cores animation collections names provided out of the box by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum DefaultAnimationCollectionKey implements AnimationCollectionKey
+public enum DefaultAnimationCollectionKey implements Key
 {
 	/**
 	 * Defines the default animation collection for colors.
 	 */
-	COLORS("colors", DefaultAnimationPropertyKey.COLOR, DefaultAnimationPropertyKey.BORDER_COLOR, DefaultAnimationPropertyKey.BACKGROUND_COLOR),
+	COLORS("colors"),
 	/**
 	 * Defines the default animation collection for numbers.
 	 */
-	NUMBERS("numbers", DefaultAnimationPropertyKey.X, DefaultAnimationPropertyKey.Y, DefaultAnimationPropertyKey.BORDER_WIDTH, DefaultAnimationPropertyKey.RADIUS, DefaultAnimationPropertyKey.TENSION),
+	NUMBERS("numbers"),
 	/**
 	 * Defines the default animation collection for visible property.
 	 */
-	VISIBLE("visible", DefaultAnimationPropertyKey.VISIBLE);
+	VISIBLE("visible");
 
 	// name value of property
 	private final String value;
-	// animation type
-	private final AnimationType type;
-	// animation properties
-	private final List<AnimationPropertyKey> properties = new LinkedList<>();
 
 	/**
 	 * Creates with the property value to use in the native object.
 	 * 
 	 * @param value value of property name
-	 * @param properties array of properties to use as default
 	 */
-	private DefaultAnimationCollectionKey(String value, AnimationPropertyKey... properties) {
+	private DefaultAnimationCollectionKey(String value) {
 		this.value = value;
-		// scans all properties
-		for (AnimationPropertyKey property : properties) {
-			// adds to list
-			this.properties.add(property);
-		}
-		// sets type
-		// using the first element of the list
-		// no checks here because this is an enum
-		this.type = this.properties.get(0).type();
 	}
 
 	/*
@@ -82,40 +62,19 @@ public enum DefaultAnimationCollectionKey implements AnimationCollectionKey
 		return value;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.IsAnimationCollection#type()
-	 */
-	@Override
-	public AnimationType type() {
-		return type;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.IsAnimationCollection#properties()
-	 */
-	@Override
-	public List<AnimationPropertyKey> properties() {
-		return Collections.unmodifiableList(properties);
-	}
-
 	/**
 	 * Returns <code>true</code> if the argument is equals to a default animation collection.
 	 * 
 	 * @param collection the animation collection to check
 	 * @return <code>true</code> if the argument is equals to a default animation collection
 	 */
-	public static boolean is(AnimationCollectionKey collection) {
-		// checks if collection is valid
+	public static boolean is(Key collection) {
+		// checks if collection key is consistent
 		if (Key.isValid(collection)) {
-			// invokes the checking
 			return is(collection.value());
 		}
-		// if here the argument is not consistent
-		// then always false
+		// if here, argument not consistent
+		// then returns false
 		return false;
 	}
 
@@ -125,7 +84,7 @@ public enum DefaultAnimationCollectionKey implements AnimationCollectionKey
 	 * @param collection the animation collection to check
 	 * @return <code>true</code> if the argument is equals to a default animation collection
 	 */
-	private static boolean is(String collection) {
+	public static boolean is(String collection) {
 		return Key.hasKeyByValue(values(), collection);
 	}
 

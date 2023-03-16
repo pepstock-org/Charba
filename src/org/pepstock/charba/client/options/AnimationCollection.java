@@ -50,7 +50,7 @@ import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public final class AnimationCollection extends AbstractAnimation<AnimationCollectionKey, IsDefaultAnimationCollection> implements IsDefaultAnimationCollection {
+public final class AnimationCollection extends AbstractAnimation<IsDefaultAnimationCollection> implements IsDefaultAnimationCollection {
 
 	/**
 	 * Name of properties of native object.
@@ -110,12 +110,10 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AnimationCollection(Animations parent, AnimationCollectionKey childKey, IsDefaultAnimationCollection defaultValues, NativeObject nativeObject) {
+	AnimationCollection(Animations parent, Key childKey, IsDefaultAnimationCollection defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, defaultValues, nativeObject);
 		// checks scope
 		this.scope = HasCallbackScope.extractScope(parent);
-		// stores properties
-		setProperties(AnimationCollectionKey.checkAndGetIfValid(childKey).properties());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -380,7 +378,7 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 	 * 
 	 * @param properties the properties to be defined in the animation collection
 	 */
-	public void setProperties(AnimationPropertyKey... properties) {
+	public void setProperties(Key... properties) {
 		// checks if argument is consistent
 		if (ArrayUtil.isNotEmpty(properties)) {
 			// loads the array from list
@@ -395,11 +393,11 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 	 * 
 	 * @param properties the properties to be defined in the animation collection
 	 */
-	public void setProperties(List<AnimationPropertyKey> properties) {
+	public void setProperties(List<Key> properties) {
 		// checks if argument is consistent
 		if (ArrayListHelper.isConsistent(properties)) {
 			// loads the array from list
-			ArrayString array = ArrayString.fromOrEmpty(ArrayUtil.toAnimationProperties(properties));
+			ArrayString array = ArrayString.fromOrEmpty(ArrayUtil.toKeys(properties));
 			// stores the properties
 			setArrayValueAndAddToParent(Property.PROPERTIES, array);
 		}
@@ -411,9 +409,9 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 	 * @return the properties defined in the animation collection
 	 */
 	@Override
-	public List<AnimationPropertyKey> getProperties() {
+	public List<Key> getProperties() {
 		// gets result list
-		List<AnimationPropertyKey> result = new LinkedList<>();
+		List<Key> result = new LinkedList<>();
 		// gets array
 		ArrayString array = getArrayValue(Property.PROPERTIES);
 		// checks if array is consistent
@@ -428,7 +426,7 @@ public final class AnimationCollection extends AbstractAnimation<AnimationCollec
 					result.add(Key.getKeyByValue(DefaultAnimationPropertyKey.values(), property));
 				} else {
 					// adds new property
-					result.add(AnimationPropertyKey.create(property, getType()));
+					result.add(Key.create(property));
 				}
 			}
 		}

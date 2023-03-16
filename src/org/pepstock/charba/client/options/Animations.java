@@ -60,9 +60,9 @@ public final class Animations extends AbstractNode implements IsAnimations {
 	 * @param enabled if <code>true</code> it enables an animation collection
 	 */
 	@Override
-	public void setEnabled(AnimationCollectionKey collection, boolean enabled) {
+	public void setEnabled(Key collection, boolean enabled) {
 		// checks if collection is consistent
-		if (AnimationCollectionKey.isValid(collection)) {
+		if (Key.isValid(collection)) {
 			// checks if is enabling
 			if (enabled) {
 				// checks if cached
@@ -86,9 +86,9 @@ public final class Animations extends AbstractNode implements IsAnimations {
 	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
 	 */
 	@Override
-	public boolean isEnabled(AnimationCollectionKey collection) {
+	public boolean isEnabled(Key collection) {
 		// checks if collection is consistent
-		return AnimationCollectionKey.isValid(collection) && !isType(collection, ObjectType.BOOLEAN);
+		return Key.isValid(collection) && !isType(collection, ObjectType.BOOLEAN);
 	}
 
 	/**
@@ -98,9 +98,9 @@ public final class Animations extends AbstractNode implements IsAnimations {
 	 * @return <code>true</code> if an animation collection instance is stored in the animation options
 	 */
 	@Override
-	public boolean has(AnimationCollectionKey collection) {
+	public boolean contains(Key collection) {
 		// checks if collection is consistent
-		if (AnimationCollectionKey.isValid(collection)) {
+		if (Key.isValid(collection)) {
 			// checks if is cached
 			return isType(collection, ObjectType.OBJECT);
 		}
@@ -116,13 +116,13 @@ public final class Animations extends AbstractNode implements IsAnimations {
 	 * @return an animation collection instance or <code>null</code> if does not exists
 	 */
 	@Override
-	public AnimationCollection get(AnimationCollectionKey collection) {
+	public AnimationCollection get(Key collection) {
 		// checks if collection is consistent
 		if (has(collection)) {
 			// gets defaults
 			IsDefaultAnimationCollection defaultCollection = defaultValues.get(collection);
 			// creates the collection
-			return new AnimationCollection(this, collection, defaultCollection == null ? new DefaultAnimationCollection(collection) : defaultCollection, getValue(collection));
+			return new AnimationCollection(this, collection, defaultCollection == null ? new DefaultAnimationCollection() : defaultCollection, getValue(collection));
 		}
 		// if here, the collection is not valid
 		// then returns null
@@ -136,9 +136,9 @@ public final class Animations extends AbstractNode implements IsAnimations {
 	 * @param animationCollection an animation collection instance to set
 	 */
 	@Override
-	public void set(AnimationCollectionKey collection, AnimationCollection animationCollection) {
+	public void set(Key collection, AnimationCollection animationCollection) {
 		// checks if is consistent
-		if (AnimationCollectionKey.isValid(collection)) {
+		if (Key.isValid(collection)) {
 			// stores in the object
 			setValueAndAddToParent(collection, animationCollection);
 		}
@@ -151,11 +151,11 @@ public final class Animations extends AbstractNode implements IsAnimations {
 	 * @return a collection animation options
 	 */
 	@Override
-	public AnimationCollection create(AnimationCollectionKey collection) {
+	public AnimationCollection create(Key collection) {
 		// gets defaults
 		IsDefaultAnimationCollection defaultCollection = defaultValues.get(collection);
 		// creates the collection
-		AnimationCollection options = new AnimationCollection(this, collection, defaultCollection == null ? new DefaultAnimationCollection(collection) : defaultCollection, null);
+		AnimationCollection options = new AnimationCollection(this, collection, defaultCollection == null ? new DefaultAnimationCollection() : defaultCollection, null);
 		// stores in the object
 		setValueAndAddToParent(collection, options);
 		// returns the animation options
@@ -168,9 +168,9 @@ public final class Animations extends AbstractNode implements IsAnimations {
 	 * @param collection collection instance used to remove from animation options
 	 */
 	@Override
-	public void remove(AnimationCollectionKey collection) {
+	public void delete(Key collection) {
 		// checks if collection is consistent and if the collection has been previously added
-		if (AnimationCollectionKey.isValid(collection)) {
+		if (Key.isValid(collection)) {
 			// remove from object
 			remove(collection);
 		}

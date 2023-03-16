@@ -29,11 +29,11 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationTransition;
 import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.defaults.IsDefaultTransitions;
+import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
 import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
 import org.pepstock.charba.client.enums.DefaultTransitionKey;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.options.AnimationCollectionKey;
 import org.pepstock.charba.client.options.TransitionKey;
 
 /**
@@ -271,22 +271,22 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#has(org.pepstock.charba.client.options.AnimationCollectionKey)
+			 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#contains(org.pepstock.charba.client.commons.Key)
 			 */
 			@Override
-			public boolean has(AnimationCollectionKey collection) {
-				return AnimationCollectionKey.isValid(collection) && (Key.equals(collection, DefaultAnimationCollectionKey.COLORS) || Key.equals(collection, DefaultAnimationCollectionKey.VISIBLE));
+			public boolean contains(Key collection) {
+				return Key.isValid(collection) && (Key.equals(collection, DefaultAnimationCollectionKey.COLORS) || Key.equals(collection, DefaultAnimationCollectionKey.VISIBLE));
 			}
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#get(org.pepstock.charba.client.options.AnimationCollectionKey)
+			 * @see org.pepstock.charba.client.defaults.IsDefaultAnimations#get(org.pepstock.charba.client.commons.Key)
 			 */
 			@Override
-			public IsDefaultAnimationCollection get(AnimationCollectionKey collection) {
+			public IsDefaultAnimationCollection get(Key collection) {
 				// checks if collection is valid and is default color collection
-				if (has(collection)) {
+				if (contains(collection)) {
 					// checks if is colors or visible
 					if (Key.equals(DefaultAnimationCollectionKey.COLORS, collection)) {
 						// equals then exist
@@ -315,7 +315,17 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 			 * Creates a default animation collection wrapping the {@link DefaultAnimationCollectionKey#COLORS}.
 			 */
 			private ShowAndHideDefaultAnimationCollection() {
-				super(DefaultAnimationCollectionKey.COLORS);
+				super();
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.defaults.globals.DefaultAnimationCollection#getType()
+			 */
+			@Override
+			public AnimationType getType() {
+				return AnimationType.COLOR;
 			}
 
 			/*

@@ -44,11 +44,10 @@ import org.pepstock.charba.client.enums.Easing;
  * Is the base animation options with common options for animation configuration, for ANIMATION and ANIMATIONS name spaces.
  * 
  * @author Andrea "Stock" Stocchero
- * @param <T> type of key
  * @param <D> type of default values
  * 
  */
-abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation> extends AbstractNode implements IsDefaultBaseAnimation, HasCallbackScope {
+abstract class AbstractAnimation<D extends IsDefaultBaseAnimation> extends AbstractNode implements IsDefaultBaseAnimation, HasCallbackScope {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -116,7 +115,7 @@ abstract class AbstractAnimation<T extends Key, D extends IsDefaultBaseAnimation
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	AbstractAnimation(AbstractNode parent, T childKey, D defaultValues, NativeObject nativeObject) {
+	AbstractAnimation(AbstractNode parent, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, nativeObject);
 		// checks if default value is consistent
 		// stores defaults values

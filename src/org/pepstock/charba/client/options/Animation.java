@@ -31,7 +31,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAnimation;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animation extends AbstractAnimation<Key, IsDefaultAnimation> implements IsAnimation {
+public final class Animation extends AbstractAnimation<IsDefaultAnimation> implements IsAnimation {
 
 	/**
 	 * Name of properties of native object.

@@ -23,11 +23,10 @@ import java.util.List;
 
 import org.pepstock.charba.client.callbacks.FromCallback;
 import org.pepstock.charba.client.callbacks.ToCallback;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultAnimationCollection;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.options.AnimationCollectionKey;
-import org.pepstock.charba.client.options.AnimationPropertyKey;
 
 /**
  * CHART.JS default values for animation collection.
@@ -48,32 +47,14 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 
 	private static final String DEFAULT_TO_AS_STRING = Undefined.STRING;
 
-	private final AnimationCollectionKey collection;
-
-	/**
-	 * To avoid any instantiation
-	 */
-	DefaultAnimationCollection() {
-		this.collection = null;
-	}
-
-	/**
-	 * Creates a default animation collection wrapping the {@link AnimationCollectionKey}.
-	 * 
-	 * @param collection a default animation collection to wrap
-	 */
-	public DefaultAnimationCollection(AnimationCollectionKey collection) {
-		this.collection = AnimationCollectionKey.checkAndGetIfValid(collection);
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimationCollection#getProperties()
 	 */
 	@Override
-	public List<AnimationPropertyKey> getProperties() {
-		return collection != null ? collection.properties() : Collections.emptyList();
+	public List<Key> getProperties() {
+		return Collections.emptyList();
 	}
 
 	/*
@@ -83,7 +64,7 @@ public class DefaultAnimationCollection extends AbstractDefaultAnimation impleme
 	 */
 	@Override
 	public AnimationType getType() {
-		return collection != null ? collection.type() : AnimationType.UNKNOWN;
+		return AnimationType.UNKNOWN;
 	}
 
 	/*

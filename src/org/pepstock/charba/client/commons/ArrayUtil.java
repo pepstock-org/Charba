@@ -29,7 +29,6 @@ import org.pepstock.charba.client.enums.BorderAlign;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.intl.enums.MeasureUnit;
 import org.pepstock.charba.client.items.Undefined;
-import org.pepstock.charba.client.options.AnimationPropertyKey;
 import org.pepstock.charba.client.utils.toast.ActionItem;
 
 /**
@@ -113,11 +112,6 @@ public class ArrayUtil {
 	 * An empty immutable {@link MeasureUnit} array.
 	 */
 	public static final MeasureUnit[] EMPTY_MEASURE_UNIT_ARRAY = {};
-
-	/**
-	 * An empty immutable {@link AnimationPropertyKey} array.
-	 */
-	public static final AnimationPropertyKey[] EMPTY_ANIMATION_PROPERTY_ARRAY = {};
 
 	/**
 	 * An empty immutable {@link ActionItem} array.
@@ -441,19 +435,6 @@ public class ArrayUtil {
 			return EMPTY_MEASURE_UNIT_ARRAY;
 		}
 		return list.toArray(EMPTY_MEASURE_UNIT_ARRAY);
-	}
-
-	/**
-	 * Returns an array of dates from a list.
-	 *
-	 * @param list list of objects to transform
-	 * @return an array of dates from a list
-	 */
-	public static AnimationPropertyKey[] toAnimationProperties(final List<AnimationPropertyKey> list) {
-		if (!ArrayListHelper.isConsistent(list)) {
-			return EMPTY_ANIMATION_PROPERTY_ARRAY;
-		}
-		return list.toArray(EMPTY_ANIMATION_PROPERTY_ARRAY);
 	}
 
 	/**
