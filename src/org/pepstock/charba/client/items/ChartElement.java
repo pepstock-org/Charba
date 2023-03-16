@@ -113,8 +113,14 @@ public class ChartElement extends AbstractReadOnlyPoint {
 		this.type = factory.getType();
 		// sets the element options
 		this.options = factory.createOptions(this, getValue(Property.OPTIONS));
-		// sets context
-		this.context = factory.createContext(getValue(Property.CONTEXT));
+		// checks if context is consistent
+		if (has(Property.CONTEXT)) {
+			// sets context
+			this.context = factory.createContext(getValue(Property.CONTEXT));
+		} else {
+			// if here no context, then store a null
+			this.context = null;
+		}
 	}
 
 	/**
