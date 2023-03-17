@@ -66,7 +66,7 @@ import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.InteractionOptions;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ExtendedOptions;
-import org.pepstock.charba.client.options.TransitionKey;
+import org.pepstock.charba.client.options.TransitionMode;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.CTimer;
@@ -862,7 +862,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void update() {
-		update((TransitionKey) null);
+		update((TransitionMode) null);
 	}
 
 	/**
@@ -875,7 +875,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
 	 */
 	@Override
-	public final void update(TransitionKey mode) {
+	public final void update(TransitionMode mode) {
 		// checks if chart is created
 		if (isInitialized()) {
 			// invokes the apply configuration
@@ -883,7 +883,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 			// increments draw count
 			drawCount.incrementAndGet();
 			// if mode is valid.. added check to null to avoid issue from code analysis
-			if (mode != null && TransitionKey.isValid(mode)) {
+			if (mode != null && TransitionMode.isValid(mode)) {
 				// then calls the update with animation mode
 				chart.update(mode.value());
 			} else {
@@ -931,7 +931,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 */
 	@Override
 	public final void reconfigure() {
-		reconfigure((TransitionKey) null);
+		reconfigure((TransitionMode) null);
 	}
 
 	/**
@@ -944,7 +944,7 @@ public abstract class AbstractChart extends HandlerManager implements IsChart, M
 	 * @param mode an animation mode can be provided to indicate what should be updated and what animation configuration should be used
 	 */
 	@Override
-	public final void reconfigure(TransitionKey mode) {
+	public final void reconfigure(TransitionMode mode) {
 		// checks and performs pre-reconfiguration
 		if (reconfigureOptions()) {
 			// if here, pre-reconfiguration has been done

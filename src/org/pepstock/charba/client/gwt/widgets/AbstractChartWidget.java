@@ -44,7 +44,7 @@ import org.pepstock.charba.client.items.ActiveDatasetElement;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetReference;
 import org.pepstock.charba.client.items.InteractionOptions;
-import org.pepstock.charba.client.options.TransitionKey;
+import org.pepstock.charba.client.options.TransitionMode;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.utils.CTimer;
 
@@ -511,7 +511,7 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	 * @see org.pepstock.charba.client.IsChart#update(org.pepstock.charba.client.options.IsAnimationModeKey)
 	 */
 	@Override
-	public final void update(TransitionKey mode) {
+	public final void update(TransitionMode mode) {
 		chart.update(mode);
 	}
 
@@ -538,10 +538,10 @@ public abstract class AbstractChartWidget<C extends IsChart> extends SimplePanel
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.IsChart#reconfigure(org.pepstock.charba.client.options.TransitionKey)
+	 * @see org.pepstock.charba.client.IsChart#reconfigure(org.pepstock.charba.client.options.TransitionMode)
 	 */
 	@Override
-	public void reconfigure(TransitionKey mode) {
+	public void reconfigure(TransitionMode mode) {
 		chart.reconfigure(mode);
 	}
 

@@ -21,7 +21,7 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerContext;
 import org.pepstock.charba.client.controllers.ControllerType;
-import org.pepstock.charba.client.options.TransitionKey;
+import org.pepstock.charba.client.options.TransitionMode;
 
 /**
  * This interface enables the capability to create a custom chart.
@@ -158,7 +158,7 @@ public interface Controller {
 	 * @param chart chart instance
 	 * @param mode update mode
 	 */
-	default void onBeforeUpdate(ControllerContext context, IsChart chart, TransitionKey mode) {
+	default void onBeforeUpdate(ControllerContext context, IsChart chart, TransitionMode mode) {
 		// do nothing
 	}
 
@@ -169,7 +169,7 @@ public interface Controller {
 	 * @param chart chart instance
 	 * @param mode update mode
 	 */
-	default void onAfterUpdate(ControllerContext context, IsChart chart, TransitionKey mode) {
+	default void onAfterUpdate(ControllerContext context, IsChart chart, TransitionMode mode) {
 		// do nothing
 	}
 

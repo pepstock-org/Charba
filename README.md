@@ -286,6 +286,8 @@ Here you can find the list of enhancements and updates available on `master` bra
  * remove `AnimationPropertyKey`. Use `Key` instead.
  * rename `has` method to `contains` in `Animations` options and configuration classes and `UpdateConfiguration` class.
  * rename `remove` method to `delete` in `Animations` options and configuration classes and `UpdateConfiguration` class.
+ * rename `TransitionKey` class to `TransitionMode` one.
+ * rename `DefaultTransitionKey` class to `DefaultTransitionMode` one.
 
 License
 -------

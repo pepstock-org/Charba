@@ -19,14 +19,14 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.DefaultTransitionKey;
+import org.pepstock.charba.client.enums.DefaultTransitionMode;
 
 /**
  * Represents the update mode (transition) to set to configure animation.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface TransitionKey extends Key {
+public interface TransitionMode extends Key {
 
 	/**
 	 * Returns a animation update mode (transition) instance by its string value.
@@ -34,9 +34,9 @@ public interface TransitionKey extends Key {
 	 * @param transition string value to use
 	 * @return new update mode (transition) instance
 	 */
-	static TransitionKey create(String transition) {
+	static TransitionMode create(String transition) {
 		// checks if mode as argument is a default one
-		for (DefaultTransitionKey defMode : DefaultTransitionKey.values()) {
+		for (DefaultTransitionMode defMode : DefaultTransitionMode.values()) {
 			// checks if mode is equals to default
 			if (defMode.value().equals(transition)) {
 				// if equals, returns the default mode
@@ -54,7 +54,7 @@ public interface TransitionKey extends Key {
 	 * @param transition animation update mode (transition) to be checked
 	 * @return <code>true</code> if type passed as argument is not <code>null</code>
 	 */
-	static boolean isValid(TransitionKey transition) {
+	static boolean isValid(TransitionMode transition) {
 		return Key.isValid(transition);
 	}
 
@@ -64,7 +64,7 @@ public interface TransitionKey extends Key {
 	 * 
 	 * @param transition animation update mode (transition) to be checked
 	 */
-	static void checkIfValid(TransitionKey transition) {
+	static void checkIfValid(TransitionMode transition) {
 		if (!isValid(transition)) {
 			// gets the exception message
 			// additional check to throw the right exception message
@@ -81,7 +81,7 @@ public interface TransitionKey extends Key {
 	 * @param transition update mode (transition) to be checked
 	 * @return the same update mode (transition) passed as argument
 	 */
-	static TransitionKey checkAndGetIfValid(TransitionKey transition) {
+	static TransitionMode checkAndGetIfValid(TransitionMode transition) {
 		// checks if collection is consistent
 		checkIfValid(transition);
 		// if here, is consistent

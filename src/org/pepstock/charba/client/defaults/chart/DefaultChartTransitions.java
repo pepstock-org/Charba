@@ -20,7 +20,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultAnimationTransition;
 import org.pepstock.charba.client.defaults.IsDefaultTransitions;
-import org.pepstock.charba.client.options.TransitionKey;
+import org.pepstock.charba.client.options.TransitionMode;
 
 /**
  * Defaults for transitions option element, based on chart type.
@@ -43,20 +43,20 @@ public final class DefaultChartTransitions implements IsDefaultTransitions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#has(org.pepstock.charba.client.options.TransitionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#has(org.pepstock.charba.client.options.TransitionMode)
 	 */
 	@Override
-	public boolean has(TransitionKey transition) {
+	public boolean has(TransitionMode transition) {
 		return transitions.has(transition);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#get(org.pepstock.charba.client.options.TransitionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#get(org.pepstock.charba.client.options.TransitionMode)
 	 */
 	@Override
-	public IsDefaultAnimationTransition get(TransitionKey transition) {
+	public IsDefaultAnimationTransition get(TransitionMode transition) {
 		return transitions.get(transition);
 	}
 

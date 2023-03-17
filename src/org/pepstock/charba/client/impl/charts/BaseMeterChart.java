@@ -28,7 +28,7 @@ import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.dom.elements.ImageData;
 import org.pepstock.charba.client.enums.BorderAlign;
-import org.pepstock.charba.client.enums.DefaultTransitionKey;
+import org.pepstock.charba.client.enums.DefaultTransitionMode;
 import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.options.AnimationTransition;
 
@@ -154,21 +154,21 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		// creates a new mode every time
 		// because once it has been added to the options
 		// it could be changed by user
-		AnimationTransition disabledActiveMode = options.getTransitions().create(DefaultTransitionKey.ACTIVE);
+		AnimationTransition disabledActiveMode = options.getTransitions().create(DefaultTransitionMode.ACTIVE);
 		// disables the animation mode
 		disabledActiveMode.getAnimation().setDuration(0);
 		// creates a new mode every time
 		// because once it has been added to the options
 		// it could be changed by user
-		AnimationTransition disabledResizeMode = options.getTransitions().create(DefaultTransitionKey.RESIZE);
+		AnimationTransition disabledResizeMode = options.getTransitions().create(DefaultTransitionMode.RESIZE);
 		// disables the animation mode
 		disabledResizeMode.getAnimation().setDuration(0);
 		// scans all data sets
 		for (Dataset dataset : getData().getDatasets()) {
 			// disables animation mode active
-			dataset.getTransitions().create(DefaultTransitionKey.ACTIVE).getAnimation().setDuration(0);
+			dataset.getTransitions().create(DefaultTransitionMode.ACTIVE).getAnimation().setDuration(0);
 			// disables animation mode resize
-			dataset.getTransitions().create(DefaultTransitionKey.RESIZE).getAnimation().setDuration(0);
+			dataset.getTransitions().create(DefaultTransitionMode.RESIZE).getAnimation().setDuration(0);
 			// ---
 			// resets font items
 			// ---

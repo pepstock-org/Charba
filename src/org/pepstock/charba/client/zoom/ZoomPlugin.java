@@ -25,7 +25,7 @@ import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
-import org.pepstock.charba.client.options.TransitionKey;
+import org.pepstock.charba.client.options.TransitionMode;
 import org.pepstock.charba.client.plugins.AbstractExtensionPlugin;
 import org.pepstock.charba.client.resources.ResourceName;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -53,7 +53,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	/**
 	 * Custom transition mode to update the chart by API, "<b>zoom</b>".
 	 */
-	public static final TransitionKey ZOOM_TRANSITION_MODE = TransitionKey.create("zoom");
+	public static final TransitionMode ZOOM_TRANSITION_MODE = TransitionMode.create("zoom");
 	// internal defaults options factory
 	static final ZoomDefaultsOptionsFactory DEFAULTS_FACTORY = new ZoomDefaultsOptionsFactory();
 	// injectable resource for plugin
@@ -179,7 +179,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param chart chart instance to invoke
 	 * @param transition update transition mode, could be <code>null</code>
 	 */
-	public static void reset(IsChart chart, TransitionKey transition) {
+	public static void reset(IsChart chart, TransitionMode transition) {
 		// check if chart is consistent and zoom plugin is activated
 		if (isReadyForApi(chart)) {
 			// gets native chart instance
@@ -206,7 +206,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param amount amount of pan to apply
 	 * @param transition update transition mode
 	 */
-	public static void pan(IsChart chart, Amount amount, TransitionKey transition) {
+	public static void pan(IsChart chart, Amount amount, TransitionMode transition) {
 		// check if chart is consistent and zoom plugin is activated
 		if (isReadyForApi(chart)) {
 			// gets native chart instance
@@ -233,7 +233,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param amount amount of pan to apply
 	 * @param transition update transition mode
 	 */
-	public static void pan(IsChart chart, double amount, TransitionKey transition) {
+	public static void pan(IsChart chart, double amount, TransitionMode transition) {
 		// check if chart is consistent and zoom plugin is activated
 		if (isReadyForApi(chart)) {
 			// gets native chart instance
@@ -260,7 +260,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param amount amount of zoom to apply
 	 * @param transition update transition mode
 	 */
-	public static void zoom(IsChart chart, Amount amount, TransitionKey transition) {
+	public static void zoom(IsChart chart, Amount amount, TransitionMode transition) {
 		// check if chart is consistent and zoom plugin is activated
 		if (isReadyForApi(chart)) {
 			// gets native chart instance
@@ -287,7 +287,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param amount amount of zoom to apply
 	 * @param transition update transition mode
 	 */
-	public static void zoom(IsChart chart, double amount, TransitionKey transition) {
+	public static void zoom(IsChart chart, double amount, TransitionMode transition) {
 		// check if chart is consistent and zoom plugin is activated
 		if (isReadyForApi(chart)) {
 			// gets native chart instance
@@ -316,7 +316,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param range range (min/max) of scale to zoom
 	 * @param transition update transition mode
 	 */
-	public static void zoomScale(IsChart chart, ScaleId scaleId, ScaleRange range, TransitionKey transition) {
+	public static void zoomScale(IsChart chart, ScaleId scaleId, ScaleRange range, TransitionMode transition) {
 		// check if chart is consistent and zoom plugin is activated
 		if (isReadyForApi(chart) && ScaleId.isValid(scaleId) && chart.getNode().getScales().getItems().containsKey(scaleId.value())) {
 			// gets native chart instance
@@ -345,7 +345,7 @@ public final class ZoomPlugin extends AbstractExtensionPlugin<ZoomOptions> {
 	 * @param p1 data point to coordinate of the end of the zoom operation
 	 * @param transition update transition mode
 	 */
-	public static void zoomRect(IsChart chart, ZoomPoint p0, ZoomPoint p1, TransitionKey transition) {
+	public static void zoomRect(IsChart chart, ZoomPoint p0, ZoomPoint p1, TransitionMode transition) {
 		// check if chart is consistent and zoom plugin is activated
 		if (isReadyForApi(chart) && p0 != null && p1 != null) {
 			// gets native chart instance

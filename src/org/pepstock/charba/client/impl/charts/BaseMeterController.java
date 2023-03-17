@@ -46,7 +46,7 @@ import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.options.IsImmutableFont;
-import org.pepstock.charba.client.options.TransitionKey;
+import org.pepstock.charba.client.options.TransitionMode;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -104,10 +104,10 @@ final class BaseMeterController extends AbstractController {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.Controller#onBeforeUpdate(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.options.TransitionKey)
+	 * org.pepstock.charba.client.options.TransitionMode)
 	 */
 	@Override
-	public void onBeforeUpdate(ControllerContext context, IsChart chart, TransitionKey mode) {
+	public void onBeforeUpdate(ControllerContext context, IsChart chart, TransitionMode mode) {
 		// checks if arguments are consistent
 		Checker.assertCheck(Controller.isConsistent(this, context, chart), "Before updating method arguments are not consistent");
 		// gets options reference

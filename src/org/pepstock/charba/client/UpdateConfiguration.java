@@ -32,7 +32,7 @@ import org.pepstock.charba.client.options.AnimationCollection;
 import org.pepstock.charba.client.options.AnimationTransition;
 import org.pepstock.charba.client.options.IsAnimation;
 import org.pepstock.charba.client.options.IsAnimations;
-import org.pepstock.charba.client.options.TransitionKey;
+import org.pepstock.charba.client.options.TransitionMode;
 
 /**
  * Object can be provided with additional configuration for the update process.<br>
@@ -48,7 +48,7 @@ public final class UpdateConfiguration extends NativeObjectContainer implements 
 	/**
 	 * Default animation mode key, used for chart updating.
 	 */
-	public static final TransitionKey UPDATE = TransitionKey.create(UPDATE_MODE_KEY);
+	public static final TransitionMode UPDATE = TransitionMode.create(UPDATE_MODE_KEY);
 	// delegated animation mode
 	private final AnimationTransition transition;
 

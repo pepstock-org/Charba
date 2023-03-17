@@ -32,9 +32,9 @@ import org.pepstock.charba.client.defaults.IsDefaultTransitions;
 import org.pepstock.charba.client.enums.AnimationType;
 import org.pepstock.charba.client.enums.DefaultAnimationCollectionKey;
 import org.pepstock.charba.client.enums.DefaultAnimationPropertyKey;
-import org.pepstock.charba.client.enums.DefaultTransitionKey;
+import org.pepstock.charba.client.enums.DefaultTransitionMode;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.options.TransitionKey;
+import org.pepstock.charba.client.options.TransitionMode;
 
 /**
  * CHART.JS default values for ANIMATION element.
@@ -52,11 +52,11 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 
 	private static final IsDefaultAnimationTransition RESIZE_DEFAULT_ANIMATION_TRANSITION = new ResizeDefaultAnimationTransition();
 
-	private static final IsDefaultAnimationTransition SHOW_DEFAULT_ANIMATION_TRANSITION = new ShowAndHideDefaultAnimationTransition(DefaultTransitionKey.SHOW);
+	private static final IsDefaultAnimationTransition SHOW_DEFAULT_ANIMATION_TRANSITION = new ShowAndHideDefaultAnimationTransition(DefaultTransitionMode.SHOW);
 
-	private static final IsDefaultAnimationTransition HIDE_DEFAULT_ANIMATION_TRANSITION = new ShowAndHideDefaultAnimationTransition(DefaultTransitionKey.HIDE);
+	private static final IsDefaultAnimationTransition HIDE_DEFAULT_ANIMATION_TRANSITION = new ShowAndHideDefaultAnimationTransition(DefaultTransitionMode.HIDE);
 
-	private static final List<DefaultTransitionKey> DEFAULT_ANIMATION_MODE_KEYS = Arrays.asList(DefaultTransitionKey.ACTIVE, DefaultTransitionKey.RESIZE, DefaultTransitionKey.SHOW, DefaultTransitionKey.HIDE);
+	private static final List<DefaultTransitionMode> DEFAULT_ANIMATION_MODE_KEYS = Arrays.asList(DefaultTransitionMode.ACTIVE, DefaultTransitionMode.RESIZE, DefaultTransitionMode.SHOW, DefaultTransitionMode.HIDE);
 
 	/**
 	 * To avoid any instantiation
@@ -69,14 +69,14 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#has(org.pepstock.charba.client.options.TransitionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#has(org.pepstock.charba.client.options.TransitionMode)
 	 */
 	@Override
-	public boolean has(TransitionKey transition) {
+	public boolean has(TransitionMode transition) {
 		// checks if mode is valid and is default one
-		if (TransitionKey.isValid(transition)) {
+		if (TransitionMode.isValid(transition)) {
 			// scans all defaults
-			for (DefaultTransitionKey defaultMode : DEFAULT_ANIMATION_MODE_KEYS) {
+			for (DefaultTransitionMode defaultMode : DEFAULT_ANIMATION_MODE_KEYS) {
 				// checks if equals
 				if (defaultMode.equals(transition)) {
 					// equals then exist
@@ -91,23 +91,23 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#get(org.pepstock.charba.client.options.TransitionKey)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTransitions#get(org.pepstock.charba.client.options.TransitionMode)
 	 */
 	@Override
-	public IsDefaultAnimationTransition get(TransitionKey transition) {
+	public IsDefaultAnimationTransition get(TransitionMode transition) {
 		// checks if mode is valid and is default one
-		if (TransitionKey.isValid(transition) && DefaultTransitionKey.is(transition)) {
+		if (TransitionMode.isValid(transition) && DefaultTransitionMode.is(transition)) {
 			// checks which default mode is
-			if (Key.equals(transition, DefaultTransitionKey.ACTIVE)) {
+			if (Key.equals(transition, DefaultTransitionMode.ACTIVE)) {
 				// if here, is ACTIVE
 				return ACTIVE_DEFAULT_ANIMATION_TRANSITION;
-			} else if (Key.equals(transition, DefaultTransitionKey.RESIZE)) {
+			} else if (Key.equals(transition, DefaultTransitionMode.RESIZE)) {
 				// if here, is RESIZE
 				return RESIZE_DEFAULT_ANIMATION_TRANSITION;
-			} else if (Key.equals(transition, DefaultTransitionKey.SHOW)) {
+			} else if (Key.equals(transition, DefaultTransitionMode.SHOW)) {
 				// if here, is SHOW
 				return SHOW_DEFAULT_ANIMATION_TRANSITION;
-			} else if (Key.equals(transition, DefaultTransitionKey.HIDE)) {
+			} else if (Key.equals(transition, DefaultTransitionMode.HIDE)) {
 				// if here, is HIDE
 				return HIDE_DEFAULT_ANIMATION_TRANSITION;
 			}
@@ -117,7 +117,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 	}
 
 	/**
-	 * Default animation for animation mode {@link DefaultTransitionKey#ACTIVE}.
+	 * Default animation for animation mode {@link DefaultTransitionMode#ACTIVE}.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -129,7 +129,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 		private static final ActiveDefaultAnimation DEFAULT_ANIMATION = new ActiveDefaultAnimation();
 
 		/**
-		 * Creates a default animation mode wrapping the {@link DefaultTransitionKey#ACTIVE}.
+		 * Creates a default animation mode wrapping the {@link DefaultTransitionMode#ACTIVE}.
 		 */
 		private ActiveDefaultAnimationTransition() {
 			super();
@@ -168,7 +168,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 	}
 
 	/**
-	 * Default animation for animation mode {@link DefaultTransitionKey#RESIZE}.
+	 * Default animation for animation mode {@link DefaultTransitionMode#RESIZE}.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -180,7 +180,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 		private static final ResizeDefaultAnimation DEFAULT_ANIMATION = new ResizeDefaultAnimation();
 
 		/**
-		 * Creates a default animation mode wrapping the {@link DefaultTransitionKey#RESIZE}.
+		 * Creates a default animation mode wrapping the {@link DefaultTransitionMode#RESIZE}.
 		 */
 		private ResizeDefaultAnimationTransition() {
 			super();
@@ -219,7 +219,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 	}
 
 	/**
-	 * Default animation for {@link DefaultTransitionKey#SHOW} and {@link DefaultTransitionKey#HIDE} animation mode.
+	 * Default animation for {@link DefaultTransitionMode#SHOW} and {@link DefaultTransitionMode#HIDE} animation mode.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -229,11 +229,11 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 		private final ShowAndHideDefaultAnimations animations;
 
 		/**
-		 * Creates a default animation mode wrapping the {@link DefaultTransitionKey#SHOW} or {@link DefaultTransitionKey#HIDE}.
+		 * Creates a default animation mode wrapping the {@link DefaultTransitionMode#SHOW} or {@link DefaultTransitionMode#HIDE}.
 		 * 
-		 * @param mode update mode (transition) to set, can be {@link DefaultTransitionKey#SHOW} or {@link DefaultTransitionKey#HIDE}
+		 * @param mode update mode (transition) to set, can be {@link DefaultTransitionMode#SHOW} or {@link DefaultTransitionMode#HIDE}
 		 */
-		private ShowAndHideDefaultAnimationTransition(TransitionKey mode) {
+		private ShowAndHideDefaultAnimationTransition(TransitionMode mode) {
 			this.animations = new ShowAndHideDefaultAnimations(mode);
 		}
 
@@ -260,12 +260,12 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 			private final IsDefaultAnimationCollection visibleCollection;
 
 			/**
-			 * Creates a default animations wrapping the {@link DefaultTransitionKey#SHOW} or {@link DefaultTransitionKey#HIDE}.
+			 * Creates a default animations wrapping the {@link DefaultTransitionMode#SHOW} or {@link DefaultTransitionMode#HIDE}.
 			 * 
-			 * @param mode update mode (transition) to set, can be {@link DefaultTransitionKey#SHOW} or {@link DefaultTransitionKey#HIDE}
+			 * @param mode update mode (transition) to set, can be {@link DefaultTransitionMode#SHOW} or {@link DefaultTransitionMode#HIDE}
 			 */
-			private ShowAndHideDefaultAnimations(TransitionKey mode) {
-				this.visibleCollection = new ShowAndHideDefaultVisibleAnimationCollection(DefaultTransitionKey.SHOW.equals(mode));
+			private ShowAndHideDefaultAnimations(TransitionMode mode) {
+				this.visibleCollection = new ShowAndHideDefaultVisibleAnimationCollection(DefaultTransitionMode.SHOW.equals(mode));
 			}
 
 			/*
@@ -302,7 +302,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 		}
 
 		/**
-		 * {@link DefaultAnimationCollectionKey#COLORS} default animation collection for {@link DefaultTransitionKey#SHOW} and {@link DefaultTransitionKey#HIDE} animation mode.
+		 * {@link DefaultAnimationCollectionKey#COLORS} default animation collection for {@link DefaultTransitionMode#SHOW} and {@link DefaultTransitionMode#HIDE} animation mode.
 		 * 
 		 * @author Andrea "Stock" Stocchero
 		 *
@@ -341,7 +341,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 		}
 
 		/**
-		 * {@link DefaultAnimationPropertyKey#VISIBLE} default animation property for {@link DefaultTransitionKey#SHOW} and {@link DefaultTransitionKey#HIDE} animation mode.
+		 * {@link DefaultAnimationPropertyKey#VISIBLE} default animation property for {@link DefaultTransitionMode#SHOW} and {@link DefaultTransitionMode#HIDE} animation mode.
 		 * 
 		 * @author Andrea "Stock" Stocchero
 		 *
@@ -355,7 +355,7 @@ public final class DefaultTransitions implements IsDefaultTransitions {
 			/**
 			 * Creates a default animation property wrapping the {@link DefaultAnimationPropertyKey#VISIBLE}.
 			 * 
-			 * @param show if <code>true</code>, initializes the object for {@link DefaultTransitionKey#SHOW} mode, otherwise for {@link DefaultTransitionKey#HIDE}
+			 * @param show if <code>true</code>, initializes the object for {@link DefaultTransitionMode#SHOW} mode, otherwise for {@link DefaultTransitionMode#HIDE}
 			 */
 			private ShowAndHideDefaultVisibleAnimationCollection(boolean show) {
 				// stores show

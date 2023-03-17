@@ -75,9 +75,9 @@ public final class Transitions extends AbstractNode implements IsTransitions, Ha
 	 * @return <code>true</code> if an animation transition instance is stored in the animation options
 	 */
 	@Override
-	public boolean has(TransitionKey transition) {
+	public boolean has(TransitionMode transition) {
 		// checks if transition is consistent
-		if (TransitionKey.isValid(transition)) {
+		if (TransitionMode.isValid(transition)) {
 			// checks if is cached
 			return isType(transition, ObjectType.OBJECT);
 		}
@@ -93,7 +93,7 @@ public final class Transitions extends AbstractNode implements IsTransitions, Ha
 	 * @return an animation transition instance or <code>null</code> if does not exists
 	 */
 	@Override
-	public AnimationTransition get(TransitionKey transition) {
+	public AnimationTransition get(TransitionMode transition) {
 		// checks if transition is consistent
 		if (has(transition)) {
 			// gets from the native object
@@ -111,9 +111,9 @@ public final class Transitions extends AbstractNode implements IsTransitions, Ha
 	 * @param animationTransition an animation transition instance to set
 	 */
 	@Override
-	public void set(TransitionKey transition, AnimationTransition animationTransition) {
+	public void set(TransitionMode transition, AnimationTransition animationTransition) {
 		// checks if is consistent and if the has been previously added
-		if (TransitionKey.isValid(transition)) {
+		if (TransitionMode.isValid(transition)) {
 			// stores in the object
 			setValue(transition, animationTransition);
 		}
@@ -126,7 +126,7 @@ public final class Transitions extends AbstractNode implements IsTransitions, Ha
 	 * @return a transition animation options
 	 */
 	@Override
-	public AnimationTransition create(TransitionKey transition) {
+	public AnimationTransition create(TransitionMode transition) {
 		// gets from the native object
 		AnimationTransition options = new AnimationTransition(this, transition, defaultValues.get(transition), null, getScope());
 		// stores in the object
@@ -141,9 +141,9 @@ public final class Transitions extends AbstractNode implements IsTransitions, Ha
 	 * @param transition transition instance used to remove from animation options
 	 */
 	@Override
-	public void remove(TransitionKey transition) {
+	public void remove(TransitionMode transition) {
 		// checks if is consistent and if the has been previously added
-		if (TransitionKey.isValid(transition)) {
+		if (TransitionMode.isValid(transition)) {
 			// removes from object
 			remove(transition);
 		}

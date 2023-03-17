@@ -22,7 +22,7 @@ import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
-import org.pepstock.charba.client.options.TransitionKey;
+import org.pepstock.charba.client.options.TransitionMode;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
@@ -99,11 +99,11 @@ final class JsZoomHelper {
 	 * @param chart chart instance to invoke
 	 * @param transition update transition mode, could be <code>null</code>
 	 */
-	void resetZoom(Chart chart, TransitionKey transition) {
+	void resetZoom(Chart chart, TransitionMode transition) {
 		// checks if chart is consistent
 		if (chart != null) {
 			// checks if transition is consistent
-			if (TransitionKey.isValid(transition)) {
+			if (TransitionMode.isValid(transition)) {
 				// resets zoom by transition key
 				NativeJsZoomHelper.resetZoom(chart, transition.value());
 			} else {
@@ -120,11 +120,11 @@ final class JsZoomHelper {
 	 * @param amount amount of pan to apply
 	 * @param transition update transition mode
 	 */
-	void pan(Chart chart, Amount amount, TransitionKey transition) {
+	void pan(Chart chart, Amount amount, TransitionMode transition) {
 		// checks if chart and amount are consistent
 		if (chart != null && amount != null) {
 			// checks if transition is consistent
-			if (TransitionKey.isValid(transition)) {
+			if (TransitionMode.isValid(transition)) {
 				// pans by transition key
 				NativeJsZoomHelper.pan(chart, amount.nativeObject(), transition.value());
 			} else {
@@ -141,11 +141,11 @@ final class JsZoomHelper {
 	 * @param amount amount of pan to apply
 	 * @param transition update transition mode
 	 */
-	void pan(Chart chart, double amount, TransitionKey transition) {
+	void pan(Chart chart, double amount, TransitionMode transition) {
 		// checks if chart and amount are consistent
 		if (chart != null && Undefined.isNot(amount)) {
 			// checks if transition is consistent
-			if (TransitionKey.isValid(transition)) {
+			if (TransitionMode.isValid(transition)) {
 				// pans by transition key
 				NativeJsZoomHelper.pan(chart, amount, transition.value());
 			} else {
@@ -162,11 +162,11 @@ final class JsZoomHelper {
 	 * @param amount amount of zoom to apply
 	 * @param transition update transition mode
 	 */
-	void zoom(Chart chart, Amount amount, TransitionKey transition) {
+	void zoom(Chart chart, Amount amount, TransitionMode transition) {
 		// checks if chart and amount are consistent
 		if (chart != null && amount != null) {
 			// checks if transition is consistent
-			if (TransitionKey.isValid(transition)) {
+			if (TransitionMode.isValid(transition)) {
 				// zooms by transition key
 				NativeJsZoomHelper.zoom(chart, amount.nativeObject(), transition.value());
 			} else {
@@ -183,11 +183,11 @@ final class JsZoomHelper {
 	 * @param amount amount of zoom to apply
 	 * @param transition update transition mode
 	 */
-	void zoom(Chart chart, double amount, TransitionKey transition) {
+	void zoom(Chart chart, double amount, TransitionMode transition) {
 		// checks if chart and amount are consistent
 		if (chart != null && Undefined.isNot(amount)) {
 			// checks if transition is consistent
-			if (TransitionKey.isValid(transition)) {
+			if (TransitionMode.isValid(transition)) {
 				// zooms by transition key
 				NativeJsZoomHelper.zoom(chart, amount, transition.value());
 			} else {
@@ -205,11 +205,11 @@ final class JsZoomHelper {
 	 * @param range range (min/max) of scale to zoom
 	 * @param transition update transition mode
 	 */
-	void zoomScale(Chart chart, ScaleId scaleId, ScaleRange range, TransitionKey transition) {
+	void zoomScale(Chart chart, ScaleId scaleId, ScaleRange range, TransitionMode transition) {
 		// checks if chart and amount are consistent
 		if (chart != null && ScaleId.isValid(scaleId) && range != null) {
 			// checks if transition is consistent
-			if (TransitionKey.isValid(transition)) {
+			if (TransitionMode.isValid(transition)) {
 				// zooms by transition key
 				NativeJsZoomHelper.zoomScale(chart, scaleId.value(), range.nativeObject(), transition.value());
 			} else {
@@ -227,11 +227,11 @@ final class JsZoomHelper {
 	 * @param p1 data point to coordinate of the end of the zoom operation
 	 * @param transition update transition mode
 	 */
-	void zoomRect(Chart chart, ZoomPoint p0, ZoomPoint p1, TransitionKey transition) {
+	void zoomRect(Chart chart, ZoomPoint p0, ZoomPoint p1, TransitionMode transition) {
 		// checks if chart is consistent
 		if (chart != null) {
 			// checks if transition is consistent
-			if (TransitionKey.isValid(transition)) {
+			if (TransitionMode.isValid(transition)) {
 				// zooms by transition key
 				NativeJsZoomHelper.zoomRect(chart, p0.nativeObject(), p1.nativeObject(), transition.value());
 			} else {

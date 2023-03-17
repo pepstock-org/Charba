@@ -37,7 +37,7 @@ import org.pepstock.charba.client.data.ArcBorderRadius;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderItemType;
-import org.pepstock.charba.client.enums.DefaultTransitionKey;
+import org.pepstock.charba.client.enums.DefaultTransitionMode;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -181,7 +181,7 @@ public class MeterDataset extends Dataset {
 		// disable hover back ground color
 		setArrayValue(Dataset.CanvasObjectProperty.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
 		// disables animation active mode
-		getTransitions().create(DefaultTransitionKey.ACTIVE).getAnimation().setDuration(0);
+		getTransitions().create(DefaultTransitionMode.ACTIVE).getAnimation().setDuration(0);
 	}
 
 	/**
