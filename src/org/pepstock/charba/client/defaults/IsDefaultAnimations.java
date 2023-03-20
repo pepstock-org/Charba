@@ -36,6 +36,16 @@ public interface IsDefaultAnimations {
 	boolean contains(Key collection);
 
 	/**
+	 * Returns <code>true</code> if an animation collection instance is stored in the animation options.
+	 * 
+	 * @param collection collection instance used to check in the animation options
+	 * @return <code>true</code> if an animation collection instance is stored in the animation options
+	 */
+	default boolean contains(String collection) {
+		return contains(Key.create(collection));
+	}
+
+	/**
 	 * Returns an animation collection instance if stored in the animation options.
 	 * 
 	 * @param collection collection instance used to get for animation options
@@ -43,4 +53,13 @@ public interface IsDefaultAnimations {
 	 */
 	IsDefaultAnimationCollection get(Key collection);
 
+	/**
+	 * Returns an animation collection instance if stored in the animation options.
+	 * 
+	 * @param collection collection instance used to get for animation options
+	 * @return an animation collection instance or <code>null</code> if does not exists
+	 */
+	default IsDefaultAnimationCollection get(String collection) {
+		return get(Key.create(collection));
+	}
 }

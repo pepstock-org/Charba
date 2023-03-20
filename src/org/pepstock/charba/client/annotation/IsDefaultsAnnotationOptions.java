@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.annotation.enums.DrawTime;
+import org.pepstock.charba.client.defaults.IsDefaultAnimations;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -31,6 +32,13 @@ import org.pepstock.charba.client.items.Undefined;
  *
  */
 interface IsDefaultsAnnotationOptions extends IsDefaultsEventsHandler {
+
+	/**
+	 * Returns the configuration to manage the annotation animations
+	 * 
+	 * @return the configuration to manage the annotation animations
+	 */
+	IsDefaultAnimations getAnimations();
 
 	/**
 	 * Returns the configuration which events trigger plugin interactions

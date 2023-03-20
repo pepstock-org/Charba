@@ -22,8 +22,10 @@ import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
+import org.pepstock.charba.client.commons.HasCallbackScope;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.options.IsAnimations;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
@@ -32,7 +34,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnnotationOptions extends AbstractPluginOptions implements IsDefaultsAnnotationOptions, HasEventsHandler {
+public final class AnnotationOptions extends AbstractPluginOptions implements IsDefaultsAnnotationOptions, HasEventsHandler, HasCallbackScope {
 
 	/**
 	 * Default draw time, <b>{@link DrawTime#AFTER_DATASETS_DRAW}</b>.
@@ -47,6 +49,7 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 		CLIP("clip"),
 		DRAW_TIME("drawTime"),
 		INTERACTION("interaction"),
+		ANIMATIONS("animations"),
 		ANNOTATIONS("annotations");
 
 		// name value of property
@@ -81,6 +84,8 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	private final AnnotationMap annotationsMap;
 	// interaction object
 	private final Interaction interaction;
+	// interaction object
+	private final Animations animations;
 
 	/**
 	 * Creates new {@link AnnotationPlugin#ID} plugin options.
@@ -146,6 +151,16 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 			// stores in the java script object as well
 			setValue(Property.INTERACTION, interaction);
 		}
+		// checks if animations exists
+		if (has(Property.ANIMATIONS)) {
+			// found in the options
+			this.animations = new Animations(this, this.defaultOptions.getAnimations(), getValue(Property.ANIMATIONS));
+		} else {
+			// not found and add 1 empty
+			this.animations = new Animations(this, this.defaultOptions.getAnimations());
+			// stores in the java script object as well
+			setValue(Property.ANIMATIONS, animations);
+		}
 		// stores incremental ID
 		setNewIncrementalId();
 		// loads events handler
@@ -180,6 +195,26 @@ public final class AnnotationOptions extends AbstractPluginOptions implements Is
 	@Override
 	public Interaction getInteraction() {
 		return interaction;
+	}
+
+	/**
+	 * Returns the configuration to manage the annotation animations
+	 * 
+	 * @return the configuration to manage the annotation animations
+	 */
+	@Override
+	public IsAnimations getAnimations() {
+		return animations;
+	}
+
+	/**
+	 * Returns the scope of the options, which is the annotation plugin.
+	 * 
+	 * @return the scope of the options
+	 */
+	@Override
+	public String getScope() {
+		return AnnotationPlugin.ID;
 	}
 
 	/**

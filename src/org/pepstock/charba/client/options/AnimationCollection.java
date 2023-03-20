@@ -378,6 +378,21 @@ public final class AnimationCollection extends AbstractAnimation<IsDefaultAnimat
 	 * 
 	 * @param properties the properties to be defined in the animation collection
 	 */
+	public void setProperties(String... properties) {
+		// checks if argument is consistent
+		if (ArrayUtil.isNotEmpty(properties)) {
+			// loads the array from list
+			ArrayString array = ArrayString.fromOrEmpty(properties);
+			// stores the properties
+			setArrayValueAndAddToParent(Property.PROPERTIES, array);
+		}
+	}
+
+	/**
+	 * Sets the properties to be defined in the animation collection.
+	 * 
+	 * @param properties the properties to be defined in the animation collection
+	 */
 	public void setProperties(Key... properties) {
 		// checks if argument is consistent
 		if (ArrayUtil.isNotEmpty(properties)) {
@@ -433,6 +448,17 @@ public final class AnimationCollection extends AbstractAnimation<IsDefaultAnimat
 		return result;
 	}
 
+	/**
+	 * Returns the properties defined in the animation collection.
+	 * 
+	 * @return the properties defined in the animation collection
+	 */
+	public List<String> getPropertiesAsString() {
+		// gets array
+		ArrayString array = getArrayValue(Property.PROPERTIES);
+		// returns as list
+		return ArrayListHelper.list(array);
+	}
 	// -------------------
 	// CALLBACKS
 	// -------------------

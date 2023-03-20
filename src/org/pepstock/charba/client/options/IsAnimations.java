@@ -37,12 +37,32 @@ public interface IsAnimations extends IsDefaultAnimations {
 	void setEnabled(Key collection, boolean enabled);
 
 	/**
+	 * Enables or disables an animation collection instance in the animation options.
+	 * 
+	 * @param collection collection instance used to check in the animation options
+	 * @param enabled if <code>true</code> it enables an animation collection
+	 */
+	default void setEnabled(String collection, boolean enabled) {
+		setEnabled(Key.create(collection), enabled);
+	}
+
+	/**
 	 * Returns <code>true</code> if the animation collection is enabled, otherwise <code>false</code>.
 	 * 
 	 * @param collection collection instance used to check in the animation options
 	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
 	 */
 	boolean isEnabled(Key collection);
+
+	/**
+	 * Returns <code>true</code> if the animation collection is enabled, otherwise <code>false</code>.
+	 * 
+	 * @param collection collection instance used to check in the animation options
+	 * @return <code>true</code> if the animation collection is enabled, otherwise <code>false</code>
+	 */
+	default boolean isEnabled(String collection) {
+		return isEnabled(Key.create(collection));
+	}
 
 	/**
 	 * Returns an animation collection instance if stored in the animation options.
@@ -54,12 +74,33 @@ public interface IsAnimations extends IsDefaultAnimations {
 	AnimationCollection get(Key collection);
 
 	/**
+	 * Returns an animation collection instance if stored in the animation options.
+	 * 
+	 * @param collection collection instance used to get for animation options
+	 * @return an animation collection instance or <code>null</code> if does not exists
+	 */
+	@Override
+	default AnimationCollection get(String collection) {
+		return get(Key.create(collection));
+	}
+
+	/**
 	 * Sets an animation collection instance to store in the animation options.
 	 * 
 	 * @param collection collection instance used to get for animation options
 	 * @param animationCollection an animation collection instance to set
 	 */
 	void set(Key collection, AnimationCollection animationCollection);
+
+	/**
+	 * Sets an animation collection instance to store in the animation options.
+	 * 
+	 * @param collection collection instance used to get for animation options
+	 * @param animationCollection an animation collection instance to set
+	 */
+	default void set(String collection, AnimationCollection animationCollection) {
+		set(Key.create(collection), animationCollection);
+	}
 
 	/**
 	 * Creates an animation collection instance and stores in the animation options.
@@ -70,10 +111,29 @@ public interface IsAnimations extends IsDefaultAnimations {
 	AnimationCollection create(Key collection);
 
 	/**
+	 * Creates an animation collection instance and stores in the animation options.
+	 * 
+	 * @param collection collection key used to create the animation collections
+	 * @return a collection animation options
+	 */
+	default AnimationCollection create(String collection) {
+		return create(Key.create(collection));
+	}
+
+	/**
 	 * Removes an animation collection previously added.
 	 * 
 	 * @param collection collection instance used to remove from animation options
 	 */
 	void delete(Key collection);
+
+	/**
+	 * Removes an animation collection previously added.
+	 * 
+	 * @param collection collection instance used to remove from animation options
+	 */
+	default void delete(String collection) {
+		delete(Key.create(collection));
+	}
 
 }

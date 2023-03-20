@@ -289,6 +289,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * rename `TransitionKey` class to `TransitionMode` one.
  * rename `DefaultTransitionKey` class to `DefaultTransitionMode` one.
 
+### Features
+
+ * add `Animations` options and configuration to annotation plugin.
+
 License
 -------
 
