@@ -21,6 +21,7 @@ package org.pepstock.charba.client.annotation;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -53,8 +54,11 @@ public final class ControlPoint extends AbstractNode {
 	 */
 	public static final double DEFAULT_Y_PERCENTAGE = -0.5D;
 
+	// default of X value as percentage string
+	private static final String DEFAULT_X_PERCENTAGE_STRING = "0%";
+
 	// default of Y value as percentage string
-	private static final String DEFAULT_Y_PERCENTAGE_STRING = "-0.50%";
+	private static final String DEFAULT_Y_PERCENTAGE_STRING = "-50%";
 
 	/**
 	 * Name of properties of native object.
@@ -143,16 +147,9 @@ public final class ControlPoint extends AbstractNode {
 	 */
 	public ControlPoint(String x, String y) {
 		this(null, null, null);
-		// checks if value is consistent
-		if (x != null) {
-			// stores value
-			setXAsPercentage(Utilities.getAsPercentage(x, DEFAULT_X_PERCENTAGE));
-		}
-		// checks if value is consistent
-		if (y != null) {
-			// stores value
-			setYAsPercentage(Utilities.getAsPercentage(y, DEFAULT_Y_PERCENTAGE));
-		}
+		// stores values
+		setX(x);
+		setY(y);
 	}
 
 	/**
@@ -182,6 +179,24 @@ public final class ControlPoint extends AbstractNode {
 	 */
 	public void setY(double y) {
 		setValueAndAddToParent(Property.Y, y);
+	}
+
+	/**
+	 * Sets the X value of the control point as percentage.
+	 * 
+	 * @param x the X value of the control point as percentage
+	 */
+	public void setX(String x) {
+		setXAsPercentage(Utilities.getAsPercentage(x, DEFAULT_X_PERCENTAGE));
+	}
+
+	/**
+	 * Sets the Y value of the control point as percentage.
+	 * 
+	 * @param y the Y value of the control point as percentage
+	 */
+	public void setY(String y) {
+		setYAsPercentage(Utilities.getAsPercentage(y, DEFAULT_Y_PERCENTAGE));
 	}
 
 	/**
@@ -225,8 +240,32 @@ public final class ControlPoint extends AbstractNode {
 	 * 
 	 * @return the X value of the control point as percentage.
 	 */
+	public String getXAsPercentageString() {
+		return getValue(Property.X, DEFAULT_X_PERCENTAGE_STRING);
+	}
+
+	/**
+	 * Returns the Y value of the control point as percentage.
+	 * 
+	 * @return the Y value of the control point as percentage.
+	 */
+	public String getYAsPercentageString() {
+		return getValue(Property.Y, DEFAULT_Y_PERCENTAGE_STRING);
+	}
+
+	/**
+	 * Returns the X value of the control point as percentage.
+	 * 
+	 * @return the X value of the control point as percentage.
+	 */
 	public double getXAsPercentage() {
-		return Utilities.getAsPercentage(getValue(Property.X, Undefined.STRING), DEFAULT_X_PERCENTAGE);
+		// checks if stored as percentage
+		if (isType(Property.X, ObjectType.STRING)) {
+			return Utilities.getAsPercentage(getValue(Property.X, DEFAULT_X_PERCENTAGE_STRING), DEFAULT_X_PERCENTAGE);
+		}
+		// if here, it's not a percentage
+		// then returns default
+		return DEFAULT_X_PERCENTAGE;
 	}
 
 	/**
@@ -235,7 +274,13 @@ public final class ControlPoint extends AbstractNode {
 	 * @return the Y value of the control point as percentage.
 	 */
 	public double getYAsPercentage() {
-		return Utilities.getAsPercentage(getValue(Property.Y, Undefined.STRING), DEFAULT_Y_PERCENTAGE);
+		// checks if stored as percentage
+		if (isType(Property.Y, ObjectType.STRING)) {
+			return Utilities.getAsPercentage(getValue(Property.Y, DEFAULT_Y_PERCENTAGE_STRING), DEFAULT_Y_PERCENTAGE);
+		}
+		// if here, it's not a percentage
+		// then returns default
+		return DEFAULT_Y_PERCENTAGE;
 	}
 
 	/**
