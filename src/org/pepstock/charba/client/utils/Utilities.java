@@ -402,8 +402,14 @@ public final class Utilities {
 			for (int i = 0; i < values.length; i++) {
 				// creates a instance to apply in the template
 				String replacement = Constants.NULL_STRING;
-				// checks if values is consistent
-				if (values[i] != null) {
+				// checks if value is number
+				if (values[i] instanceof Number) {
+					// cast to number
+					Number num = (Number) values[i];
+					// gets a string
+					replacement = String.valueOf(num.doubleValue());
+				} else if (values[i] != null) {
+					// checks if values is consistent
 					// gets the to string value
 					replacement = values[i].toString();
 				}
@@ -449,8 +455,21 @@ public final class Utilities {
 	 * @return the string representation of the percentage.
 	 */
 	public static String getAsPercentage(double value, double defaultValue) {
-		double normalizeDefaultValue = Checker.betweenOrMinimum(defaultValue, 0, 1);
-		return Utilities.applyTemplate(PERCENTAGE_TEMPLATE, Checker.betweenOrDefault(value, 0, 1, normalizeDefaultValue) * 100);
+		return getAsPercentage(value, 0, 1, defaultValue);
+	}
+
+	/**
+	 * Transforms the percentage value in a string with format <code>{number}%</code>.
+	 * 
+	 * @param value the percentage value
+	 * @param min minimum value of percentage
+	 * @param max maximum value of percentage
+	 * @param defaultValue the default percentage if the passed value if not in the percentage range
+	 * @return the string representation of the percentage.
+	 */
+	public static String getAsPercentage(double value, double min, double max, double defaultValue) {
+		double normalizeDefaultValue = Checker.betweenOrMinimum(defaultValue, min, max);
+		return Utilities.applyTemplate(PERCENTAGE_TEMPLATE, Checker.betweenOrDefault(value, min, max, normalizeDefaultValue) * 100);
 	}
 
 	/**

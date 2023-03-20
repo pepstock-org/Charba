@@ -20,6 +20,8 @@ package org.pepstock.charba.client.annotation;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.annotation.callbacks.ControlPointCallback;
+import org.pepstock.charba.client.annotation.callbacks.CurveCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
@@ -45,6 +47,15 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	 * @return the arrow heads of annotation
 	 */
 	IsDefaultsArrowHeads getArrowHeads();
+
+	/**
+	 * Returns <code>true</code> if the line is set as a curve.
+	 * 
+	 * @return <code>true</code> if the line is set as a curve
+	 */
+	default boolean isCurve() {
+		return false;
+	}
 
 	/**
 	 * Returns the ID of the scale to bind onto.
@@ -124,6 +135,24 @@ interface IsDefaultsLineAnnotation extends IsDefaultsAnnotation {
 	 * @return the callback called to set the data value at which the line draw should end
 	 */
 	default ValueCallback getEndValueCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set whether the annotation should be curve.
+	 * 
+	 * @return the callback called to set whether the annotation should be curve
+	 */
+	default CurveCallback getCurveCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to set the annotation control point for curve.
+	 * 
+	 * @return the callback called to set the annotation control point for curve
+	 */
+	default ControlPointCallback getControlPointCallback() {
 		return null;
 	}
 }

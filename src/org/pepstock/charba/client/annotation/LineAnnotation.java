@@ -22,18 +22,25 @@ import java.util.Date;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.annotation.callbacks.ControlPointCallback;
+import org.pepstock.charba.client.annotation.callbacks.CurveCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
+import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ElementFactory;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.utils.Utilities;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * Implements a LINE annotation which draws a line in the a chart.
@@ -62,6 +69,8 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	private enum Property implements Key
 	{
 		ARROW_HEADS("arrowHeads"),
+		CONTROL_POINT("controlPoint"),
+		CURVE("curve"),
 		VALUE("value"),
 		END_VALUE("endValue"),
 		SCALE_ID("scaleID"),
@@ -98,11 +107,19 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	private final CallbackProxy<ProxyObjectCallback> valueCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the end value function
 	private final CallbackProxy<ProxyObjectCallback> endValueCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the curve function
+	private final CallbackProxy<ProxyBooleanCallback> curveCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the controlpoint function
+	private final CallbackProxy<ProxyObjectCallback> controlPointCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle value options
 	private static final CallbackPropertyHandler<ValueCallback> VALUE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.VALUE);
 	// callback instance to handle value options
 	private static final CallbackPropertyHandler<ValueCallback> END_VALUE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.END_VALUE);
+	// callback instance to handle curve options
+	private static final CallbackPropertyHandler<CurveCallback> CURVE_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CURVE);
+	// callback instance to handle control point options
+	private static final CallbackPropertyHandler<ControlPointCallback> CONTROL_POINT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CONTROL_POINT);
 
 	// defaults options
 	private final IsDefaultsLineAnnotation defaultValues;
@@ -220,6 +237,10 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		this.valueCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getValueCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.endValueCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getEndValueCallback()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.curveCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(new AnnotationContext(this, context), getCurveCallback(), defaultValues.isCurve()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.controlPointCallbackProxy.setCallback(context -> onControlPoint(new AnnotationContext(this, context), getControlPointCallback()));
 	}
 
 	/**
@@ -243,6 +264,114 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 	}
 
 	/**
+	 * Sets <code>true</code> if the line is set as a curve.
+	 * 
+	 * @param curve <code>true</code> if the line is set as a curve.
+	 */
+	public void setCurve(boolean curve) {
+		// reset callback
+		setCurve((CurveCallback) null);
+		// stores value
+		setValue(Property.CURVE, curve);
+	}
+
+	/**
+	 * Returns <code>true</code> if the line is set as a curve.
+	 * 
+	 * @return <code>true</code> if the line is set as a curve
+	 */
+	@Override
+	public boolean isCurve() {
+		return getValue(Property.CURVE, defaultValues.isCurve());
+	}
+
+	/**
+	 * Sets the control point to drawn the curve, calculated in pixels.
+	 * 
+	 * @param cp the control point to drawn the curve.
+	 */
+	public void setControlPoint(double cp) {
+		// resets callback
+		setControlPoint((ControlPointCallback) null);
+		// stores values
+		setValue(Property.CONTROL_POINT, cp);
+	}
+
+	/**
+	 * Sets the control point to drawn the curve, calculated in percentage.
+	 * 
+	 * @param cp the control point to drawn the curve.
+	 */
+	public void setControlPointAsPercentage(double cp) {
+		// resets callback
+		setControlPoint((ControlPointCallback) null);
+		// stores values
+		setControlPoint(Utilities.getAsPercentage(cp, ControlPoint.MINIMUN_PERCENTAGE, ControlPoint.MINIMUN_PERCENTAGE, 0D));
+	}
+
+	/**
+	 * Sets the control point to drawn the curve, calculated in percentage format 'number%' which are representing the percentage of the distance between the start and end point
+	 * from the center.
+	 * 
+	 * @param cp the control point to drawn the curve.
+	 */
+	public void setControlPoint(String cp) {
+		// gets percentage
+		double value = Utilities.getAsPercentage(cp, Undefined.DOUBLE);
+		// checks if consistent
+		if (Undefined.isNot(value)) {
+			// resets callback
+			setControlPoint((ControlPointCallback) null);
+			// stores value
+			setValue(Property.CONTROL_POINT, cp);
+		} else {
+			// if here, the argument is not consistent
+			// then removes the options
+			remove(Property.CONTROL_POINT);
+		}
+	}
+
+	/**
+	 * Sets the control point to drawn the curve, calculated in pixels.<br>
+	 * It can be set by a string in percentage format 'number%' which are representing the percentage of the distance between the start and end point from the center.
+	 * 
+	 * @param cp the control point to drawn the curve.
+	 */
+	public void setControlPoint(ControlPoint cp) {
+		// resets callback
+		setControlPoint((ControlPointCallback) null);
+		// stores values
+		setValue(Property.CONTROL_POINT, cp);
+	}
+
+	/**
+	 * Returns the control point to drawn the curve, calculated in pixels.<br>
+	 * It can be set by a string in percentage format 'number%' which are representing the percentage of the distance between the start and end point from the center.
+	 * 
+	 * @return the control point to drawn the curve
+	 */
+	public ControlPoint getControlPoint() {
+		// checks the type of control point
+		if (isType(Property.CONTROL_POINT, ObjectType.NUMBER)) {
+			// gets value as number
+			double value = getValue(Property.CONTROL_POINT, Undefined.DOUBLE);
+			// creates and returns object
+			return new ControlPoint(value, value);
+		} else if (isType(Property.CONTROL_POINT, ObjectType.STRING)) {
+			// gets value as number
+			String value = getValue(Property.CONTROL_POINT, Undefined.STRING);
+			// creates and returns object
+			return new ControlPoint(value, value);
+		} else if (isType(Property.CONTROL_POINT, ObjectType.OBJECT)) {
+			// returns as object
+			return new ControlPoint(this, Property.CONTROL_POINT, getValue(Property.CONTROL_POINT));
+		}
+		// if here, control point is not set
+		// then returns new default
+		return new ControlPoint(this, Property.CONTROL_POINT, null);
+	}
+
+	/**
 	 * Sets the ID of the scale to bind onto.
 	 * 
 	 * @param scaleId the ID of the scale to bind onto
@@ -251,7 +380,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		// checks if scale id is valid
 		ScaleId.checkIfValid(scaleId);
 		// stores it
-		setValue(LineAnnotation.Property.SCALE_ID, scaleId);
+		setValue(Property.SCALE_ID, scaleId);
 	}
 
 	/**
@@ -263,7 +392,7 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		// checks if scale id is valid
 		ScaleId.checkIfValid(scaleId);
 		// stores it
-		setValue(LineAnnotation.Property.SCALE_ID, scaleId);
+		setValue(Property.SCALE_ID, scaleId);
 	}
 
 	/**
@@ -472,6 +601,101 @@ public final class LineAnnotation extends AbstractAnnotation implements IsDefaul
 		setEndValue((ValueCallback) null);
 		// stores values
 		setValueAndAddToParent(Property.END_VALUE, valueCallback);
+	}
+
+	/**
+	 * Returns the callback called to set whether the annotation should be curve.
+	 * 
+	 * @return the callback called to set whether the annotation should be curve
+	 */
+	@Override
+	public CurveCallback getCurveCallback() {
+		return CURVE_PROPERTY_HANDLER.getCallback(this, defaultValues.getCurveCallback());
+	}
+
+	/**
+	 * Sets the callback to set whether the annotation should be curve.
+	 * 
+	 * @param curveCallback to set whether the annotation should be curve
+	 */
+	public void setCurve(CurveCallback curveCallback) {
+		CURVE_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, curveCallback, curveCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set whether the annotation should be curve.
+	 * 
+	 * @param curveCallback to set whether the annotation should be curve
+	 */
+	public void setCurve(NativeCallback curveCallback) {
+		// resets callback
+		setCurve((CurveCallback) null);
+		// stores values
+		setValueAndAddToParent(Property.CURVE, curveCallback);
+	}
+
+	/**
+	 * Returns the callback called to set the annotation control point for curve.
+	 * 
+	 * @return the callback called to set the annotation control point for curve.
+	 */
+	@Override
+	public ControlPointCallback getControlPointCallback() {
+		return CONTROL_POINT_PROPERTY_HANDLER.getCallback(this, defaultValues.getControlPointCallback());
+	}
+
+	/**
+	 * Sets the callback to set the annotation control point for curve.
+	 * 
+	 * @param controlPointCallback to set the annotation control point for curve.
+	 */
+	public void setControlPoint(ControlPointCallback controlPointCallback) {
+		CONTROL_POINT_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, controlPointCallback, controlPointCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to set the annotation control point for curve.
+	 * 
+	 * @param controlPointCallback to set the annotation control point for curve.
+	 */
+	public void setControlPoint(NativeCallback controlPointCallback) {
+		// resets callback
+		setControlPoint((ControlPointCallback) null);
+		// stores values
+		setValueAndAddToParent(Property.CONTROL_POINT, controlPointCallback);
+	}
+
+	// --------------------------
+	// INTERNALS
+	// --------------------------
+
+	/**
+	 * Returns an object as double, string or control point {@link ControlPoint} when the callback has been activated.
+	 * 
+	 * @param context annotation context instance.
+	 * @param controlPointCallback value callback instance
+	 * @return an object as double, string or control point {@link ControlPoint}
+	 */
+	final Object onControlPoint(AnnotationContext context, ControlPointCallback controlPointCallback) {
+		// gets value
+		Object result = ScriptableUtil.getOptionValue(context, controlPointCallback);
+		// checks if consistent
+		if (result instanceof Number) {
+			// casts to number
+			Number number = (Number) result;
+			// returns the number
+			return number.doubleValue();
+		} else if (result instanceof String) {
+			// returns the string
+			return result;
+		} else if (result instanceof ControlPoint) {
+			// casts to control point
+			ControlPoint cp = (ControlPoint) result;
+			// returns the object
+			return cp.nativeObject();
+		}
+		// default result is undefined
+		return Window.undefined();
 	}
 
 	/**

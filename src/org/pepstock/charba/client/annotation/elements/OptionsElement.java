@@ -21,6 +21,7 @@ package org.pepstock.charba.client.annotation.elements;
 import java.util.Date;
 
 import org.pepstock.charba.client.annotation.AbstractAnnotation;
+import org.pepstock.charba.client.annotation.ControlPoint;
 import org.pepstock.charba.client.annotation.LineLabel;
 import org.pepstock.charba.client.annotation.PolygonAnnotation;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
@@ -54,6 +55,8 @@ public final class OptionsElement extends BaseElement {
 		// options
 		ADJUST_SCALE_RANGE("adjustScaleRange"),
 		DISPLAY("display"),
+		CONTROL_POINT("controlPoint"),
+		CURVE("curve"),
 		// styles
 		RADIUS("radius"),
 		POINT_STYLE("pointStyle"),
@@ -596,4 +599,96 @@ public final class OptionsElement extends BaseElement {
 		return Utilities.getAsPercentage(getValue(Property.POSITION, Undefined.STRING), 0.5D);
 	}
 
+	/**
+	 * Sets <code>true</code> if the line is set as a curve.
+	 * 
+	 * @param curve <code>true</code> if the line is set as a curve.
+	 */
+	public void setCurve(boolean curve) {
+		setValue(Property.CURVE, curve);
+	}
+
+	/**
+	 * Returns <code>true</code> if the line is set as a curve.
+	 * 
+	 * @return <code>true</code> if the line is set as a curve
+	 */
+	public boolean isCurve() {
+		return getValue(Property.CURVE, Undefined.BOOLEAN);
+	}
+
+	/**
+	 * Sets the control point to drawn the curve, calculated in pixels.
+	 * 
+	 * @param cp the control point to drawn the curve.
+	 */
+	public void setControlPoint(double cp) {
+		setValue(Property.CONTROL_POINT, cp);
+	}
+
+	/**
+	 * Sets the control point to drawn the curve, calculated in percentage.
+	 * 
+	 * @param cp the control point to drawn the curve.
+	 */
+	public void setControlPointAsPercentage(double cp) {
+		setControlPoint(Utilities.getAsPercentage(cp, ControlPoint.MINIMUN_PERCENTAGE, ControlPoint.MAXIMUN_PERCENTAGE, 0D));
+	}
+
+	/**
+	 * Sets the control point to drawn the curve, calculated in percentage format 'number%' which are representing the percentage of the distance between the start and end point
+	 * from the center.
+	 * 
+	 * @param cp the control point to drawn the curve.
+	 */
+	public void setControlPoint(String cp) {
+		// gets percentage
+		double value = Utilities.getAsPercentage(cp, Undefined.DOUBLE);
+		// checks if consistent
+		if (Undefined.isNot(value)) {
+			// stores value
+			setValue(Property.CONTROL_POINT, cp);
+		} else {
+			// if here, the argument is not consistent
+			// then removes the options
+			remove(Property.CONTROL_POINT);
+		}
+	}
+
+	/**
+	 * Sets the control point to drawn the curve, calculated in pixels.<br>
+	 * It can be set by a string in percentage format 'number%' which are representing the percentage of the distance between the start and end point from the center.
+	 * 
+	 * @param cp the control point to drawn the curve.
+	 */
+	public void setControlPoint(ControlPoint cp) {
+		setValue(Property.CONTROL_POINT, cp);
+	}
+
+	/**
+	 * Returns the control point to drawn the curve, calculated in pixels.<br>
+	 * It can be set by a string in percentage format 'number%' which are representing the percentage of the distance between the start and end point from the center.
+	 * 
+	 * @return the control point to drawn the curve
+	 */
+	public ControlPointElement getControlPoint() {
+		// checks the type of control point
+		if (isType(Property.CONTROL_POINT, ObjectType.NUMBER)) {
+			// gets value as number
+			double value = getValue(Property.CONTROL_POINT, Undefined.DOUBLE);
+			// creates and returns object
+			return new ControlPointElement(this, Property.CONTROL_POINT, value);
+		} else if (isType(Property.CONTROL_POINT, ObjectType.STRING)) {
+			// gets value as number
+			String value = getValue(Property.CONTROL_POINT, Undefined.STRING);
+			// creates and returns object
+			return new ControlPointElement(this, Property.CONTROL_POINT, value);
+		} else if (isType(Property.CONTROL_POINT, ObjectType.OBJECT)) {
+			// returns as object
+			return new ControlPointElement(this, Property.CONTROL_POINT, getValue(Property.CONTROL_POINT));
+		}
+		// if here, control point is not set
+		// then returns null
+		return null;
+	}
 }
