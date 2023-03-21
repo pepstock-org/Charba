@@ -16,12 +16,10 @@
     specific language governing permissions and limitations
     under the License.
 */
-package org.pepstock.charba.client.treemap.callbacks;
+package org.pepstock.charba.client.callbacks;
 
 import java.util.List;
 
-import org.pepstock.charba.client.callbacks.DatasetContext;
-import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.treemap.Labels;
 
 /**
@@ -29,7 +27,9 @@ import org.pepstock.charba.client.treemap.Labels;
  * 
  * @author Andrea "Stock" Stocchero
  * 
+ * @param <C> type of context to pass to the callback.
+ * 
  */
-public interface ColorsCallback extends Scriptable<List<Object>, DatasetContext> {
+public interface ColorsCallback<C extends ChartContext> extends Scriptable<List<Object>, C> {
 
 }

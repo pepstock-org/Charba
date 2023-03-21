@@ -290,6 +290,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * rename `DefaultTransitionKey` class to `DefaultTransitionMode` one.
  * remove `Font` class from annotation plugin package in favor to `IsFont` interface.
  * move `FontsCallback` interface from treemap package to the callbacks (common) ones.
+ * move `ColorsCallback` interface from treemap package to the callbacks (common) ones.
 
 ### Features
 

@@ -21,6 +21,7 @@ package org.pepstock.charba.client.treemap;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.ColorsCallback;
 import org.pepstock.charba.client.callbacks.DatasetContext;
 import org.pepstock.charba.client.callbacks.FontsCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
@@ -42,7 +43,6 @@ import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.options.IsFont;
-import org.pepstock.charba.client.treemap.callbacks.ColorsCallback;
 import org.pepstock.charba.client.treemap.callbacks.OverflowCallback;
 import org.pepstock.charba.client.treemap.callbacks.PositionCallback;
 import org.pepstock.charba.client.treemap.enums.Overflow;
@@ -123,9 +123,9 @@ public final class Labels extends AbstractLabels {
 	// overflow callback instance
 	private OverflowCallback overflowCallback = null;
 	// color callback instance
-	private ColorsCallback colorCallback = null;
+	private ColorsCallback<DatasetContext> colorCallback = null;
 	// hover color callback instance
-	private ColorsCallback hoverColorCallback = null;
+	private ColorsCallback<DatasetContext> hoverColorCallback = null;
 	// instance of font callback
 	private FontsCallback<DatasetContext> fontCallback = null;
 	// instance of hover font callback
@@ -306,7 +306,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setColor(IsColor... colors) {
 		// resets callback
-		setColor((ColorsCallback) null);
+		setColor((ColorsCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArrayAndAddToParent(CommonProperty.COLOR, colors);
 	}
@@ -318,7 +318,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setColor(List<IsColor> colors) {
 		// resets callback
-		setColor((ColorsCallback) null);
+		setColor((ColorsCallback<DatasetContext>) null);
 		// checks if argument is consistent
 		if (ArrayListHelper.isConsistent(colors)) {
 			// stores value
@@ -333,7 +333,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setColor(String... colors) {
 		// resets callback
-		setColor((ColorsCallback) null);
+		setColor((ColorsCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArrayAndAddToParent(CommonProperty.COLOR, colors);
 	}
@@ -364,7 +364,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setHoverColor(IsColor... hoverColors) {
 		// resets callback
-		setHoverColor((ColorsCallback) null);
+		setHoverColor((ColorsCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArrayAndAddToParent(CommonProperty.HOVER_COLOR, hoverColors);
 	}
@@ -376,7 +376,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setHoverColor(List<IsColor> hoverColors) {
 		// resets callback
-		setHoverColor((ColorsCallback) null);
+		setHoverColor((ColorsCallback<DatasetContext>) null);
 		// checks if argument is consistent
 		if (ArrayListHelper.isConsistent(hoverColors)) {
 			// stores value
@@ -391,7 +391,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setHoverColor(String... hoverColors) {
 		// resets callback
-		setHoverColor((ColorsCallback) null);
+		setHoverColor((ColorsCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArrayAndAddToParent(CommonProperty.HOVER_COLOR, hoverColors);
 	}
@@ -548,7 +548,7 @@ public final class Labels extends AbstractLabels {
 	 * 
 	 * @return the color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorsCallback getColorCallback() {
+	public ColorsCallback<DatasetContext> getColorCallback() {
 		return colorCallback;
 	}
 
@@ -557,7 +557,7 @@ public final class Labels extends AbstractLabels {
 	 * 
 	 * @param colorCallback the color callback.
 	 */
-	public void setColor(ColorsCallback colorCallback) {
+	public void setColor(ColorsCallback<DatasetContext> colorCallback) {
 		// sets the callback
 		this.colorCallback = colorCallback;
 		// checks if callback is consistent
@@ -577,7 +577,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setColor(NativeCallback colorCallback) {
 		// resets callback
-		setColor((ColorsCallback) null);
+		setColor((ColorsCallback<DatasetContext>) null);
 		// stores value
 		setValueAndAddToParent(CommonProperty.COLOR, colorCallback);
 	}
@@ -587,7 +587,7 @@ public final class Labels extends AbstractLabels {
 	 * 
 	 * @return the hover color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorsCallback getHoverColorCallback() {
+	public ColorsCallback<DatasetContext> getHoverColorCallback() {
 		return hoverColorCallback;
 	}
 
@@ -596,7 +596,7 @@ public final class Labels extends AbstractLabels {
 	 * 
 	 * @param hoverColorCallback the hover color callback.
 	 */
-	public void setHoverColor(ColorsCallback hoverColorCallback) {
+	public void setHoverColor(ColorsCallback<DatasetContext> hoverColorCallback) {
 		// sets the callback
 		this.hoverColorCallback = hoverColorCallback;
 		// checks if callback is consistent
@@ -616,7 +616,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setHoverColor(NativeCallback hoverColorCallback) {
 		// resets callback
-		setHoverColor((ColorsCallback) null);
+		setHoverColor((ColorsCallback<DatasetContext>) null);
 		// stores value
 		setValueAndAddToParent(CommonProperty.HOVER_COLOR, hoverColorCallback);
 	}
@@ -723,7 +723,7 @@ public final class Labels extends AbstractLabels {
 	 * @param defaultColor default color to use
 	 * @return an array of strings of colors
 	 */
-	private ArrayString onColors(DatasetContext context, ColorsCallback callback, String defaultColor) {
+	private ArrayString onColors(DatasetContext context, ColorsCallback<DatasetContext> callback, String defaultColor) {
 		// gets value
 		List<Object> result = ScriptableUtil.getOptionValue(context, callback);
 		// checks result
