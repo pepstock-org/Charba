@@ -24,6 +24,7 @@ import java.util.List;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.AbstractAnnotation;
 import org.pepstock.charba.client.annotation.AnnotationOptions;
+import org.pepstock.charba.client.annotation.LabelAnnotation;
 import org.pepstock.charba.client.annotation.enums.ContentType;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -80,6 +81,7 @@ abstract class BaseElement extends ChartElementOptions {
 		DRAW_TIME("drawTime"),
 		FONT("font"),
 		HEIGHT("height"),
+		OPACITY("opacity"),
 		PADDING("padding"),
 		POSITION("position"),
 		ROTATION("rotation"),
@@ -757,6 +759,29 @@ abstract class BaseElement extends ChartElementOptions {
 		// if here is not a string then
 		// returns undefined
 		return Undefined.STRING;
+	}
+
+	/**
+	 * Overrides the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive.<br>
+	 * If undefined, uses the opacity of the image or canvas element.<br>
+	 * It is used only when the content is an image or canvas element.
+	 * 
+	 * @param opacity the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive
+	 */
+	public final void setImageOpacity(double opacity) {
+		// stores the value
+		setValueAndAddToParent(Property.OPACITY, Checker.betweenOrDefault(opacity, 0, 1, LabelAnnotation.DEFAULT_IMAGE_OPACITY));
+	}
+
+	/**
+	 * Overrides the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive.<br>
+	 * If undefined, uses the opacity of the image or canvas element.<br>
+	 * It is used only when the content is an image or canvas element.
+	 * 
+	 * @return the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive
+	 */
+	public final double getImageOpacity() {
+		return getValue(Property.OPACITY, LabelAnnotation.DEFAULT_IMAGE_OPACITY);
 	}
 
 	/**
