@@ -19,9 +19,9 @@
 package org.pepstock.charba.client.annotation.elements;
 
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -30,7 +30,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AlignPositionElement extends NativeObjectContainer {
+public final class AlignPositionElement extends AbstractNode {
 
 	/**
 	 * Name of properties of native object.
@@ -64,12 +64,14 @@ public final class AlignPositionElement extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the object with native object instance to be wrapped.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
 	 * 
-	 * @param nativeObject native object instance to be wrapped.
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
 	 */
-	AlignPositionElement(NativeObject nativeObject) {
-		super(nativeObject);
+	AlignPositionElement(AbstractNode parent, Key childKey, NativeObject nativeObject) {
+		super(parent, childKey, nativeObject);
 	}
 
 	/**
@@ -78,7 +80,7 @@ public final class AlignPositionElement extends NativeObjectContainer {
 	 * @param position the anchor position of label on horizontal dimension
 	 */
 	public void setX(LabelPosition position) {
-		setValue(Property.X, position);
+		setValueAndAddToParent(Property.X, position);
 	}
 
 	/**
@@ -87,7 +89,7 @@ public final class AlignPositionElement extends NativeObjectContainer {
 	 * @param position the anchor position of label on vertical dimension
 	 */
 	public void setY(LabelPosition position) {
-		setValue(Property.Y, position);
+		setValueAndAddToParent(Property.Y, position);
 	}
 
 	/**
@@ -96,7 +98,7 @@ public final class AlignPositionElement extends NativeObjectContainer {
 	 * @param percentage the position of label by the percentage (value between 0 and 1) of the horizontal dimension
 	 */
 	public void setXAsPercentage(double percentage) {
-		setValue(Property.X, Utilities.getAsPercentage(percentage, 0));
+		setValueAndAddToParent(Property.X, Utilities.getAsPercentage(percentage, 0));
 	}
 
 	/**
@@ -105,7 +107,7 @@ public final class AlignPositionElement extends NativeObjectContainer {
 	 * @param percentage the position of label by the percentage (value between 0 and 1) of the vertical dimension
 	 */
 	public void setYAsPercentage(double percentage) {
-		setValue(Property.Y, Utilities.getAsPercentage(percentage, 0));
+		setValueAndAddToParent(Property.Y, Utilities.getAsPercentage(percentage, 0));
 	}
 
 	/**

@@ -159,7 +159,7 @@ abstract class BaseElement extends ChartElementOptions {
 	 * @return the anchor position of label on line
 	 */
 	public final AlignPositionElement getAlignPosition() {
-		return new AlignPositionElement(getValue(Property.POSITION));
+		return new AlignPositionElement(this, Property.POSITION, getValue(Property.POSITION));
 	}
 
 	/**
@@ -222,7 +222,7 @@ abstract class BaseElement extends ChartElementOptions {
 	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public final void setBorderDash(int... borderDash) {
-		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
+		setArrayValueAndAddToParent(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
 
 	/**
@@ -839,7 +839,7 @@ abstract class BaseElement extends ChartElementOptions {
 	 *            All visible elements will be drawn in ascending order of `z` option, with the same "drawTime" option.
 	 */
 	public final void setZ(int z) {
-		setValue(Property.Z, z);
+		setValueAndAddToParent(Property.Z, z);
 	}
 
 	/**

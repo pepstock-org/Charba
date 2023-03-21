@@ -605,7 +605,7 @@ public final class OptionsElement extends BaseElement {
 	 * @param curve <code>true</code> if the line is set as a curve.
 	 */
 	public void setCurve(boolean curve) {
-		setValue(Property.CURVE, curve);
+		setValueAndAddToParent(Property.CURVE, curve);
 	}
 
 	/**
@@ -623,7 +623,7 @@ public final class OptionsElement extends BaseElement {
 	 * @param cp the control point to drawn the curve.
 	 */
 	public void setControlPoint(double cp) {
-		setValue(Property.CONTROL_POINT, cp);
+		setValueAndAddToParent(Property.CONTROL_POINT, cp);
 	}
 
 	/**
@@ -647,7 +647,7 @@ public final class OptionsElement extends BaseElement {
 		// checks if consistent
 		if (Undefined.isNot(value)) {
 			// stores value
-			setValue(Property.CONTROL_POINT, cp);
+			setValueAndAddToParent(Property.CONTROL_POINT, cp);
 		} else {
 			// if here, the argument is not consistent
 			// then removes the options
@@ -662,7 +662,7 @@ public final class OptionsElement extends BaseElement {
 	 * @param cp the control point to drawn the curve.
 	 */
 	public void setControlPoint(ControlPoint cp) {
-		setValue(Property.CONTROL_POINT, cp);
+		setValueAndAddToParent(Property.CONTROL_POINT, cp);
 	}
 
 	/**

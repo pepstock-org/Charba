@@ -86,7 +86,7 @@ public final class CalloutElement extends BaseElement {
 	 * @param display <code>true</code> whether the label should be displayed
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.DISPLAY, display);
+		setValueAndAddToParent(Property.DISPLAY, display);
 	}
 
 	/**
@@ -104,7 +104,7 @@ public final class CalloutElement extends BaseElement {
 	 * @param margin the amount of pixels between the label and the callout separator
 	 */
 	public void setMargin(int margin) {
-		setValue(Property.MARGIN, Checker.positiveOrZero(margin));
+		setValueAndAddToParent(Property.MARGIN, Checker.positiveOrZero(margin));
 	}
 
 	/**
@@ -122,7 +122,7 @@ public final class CalloutElement extends BaseElement {
 	 * @param side the width of the starter line of callout pointer
 	 */
 	public void setSide(int side) {
-		setValue(Property.SIDE, Checker.positiveOrZero(side));
+		setValueAndAddToParent(Property.SIDE, Checker.positiveOrZero(side));
 	}
 
 	/**
@@ -140,7 +140,7 @@ public final class CalloutElement extends BaseElement {
 	 * @param start the separator dimension in pixels to use as starting point for callout pointer
 	 */
 	public void setStart(int start) {
-		setValue(Property.START, Checker.positiveOrZero(start));
+		setValueAndAddToParent(Property.START, Checker.positiveOrZero(start));
 	}
 
 	/**
@@ -158,7 +158,7 @@ public final class CalloutElement extends BaseElement {
 	 * @param start the percentage of the separator dimension to use as starting point for callout pointer
 	 */
 	public void setStartAsPercentage(double start) {
-		setValue(Property.START, Utilities.getAsPercentage(start, 0));
+		setValueAndAddToParent(Property.START, Utilities.getAsPercentage(start, 0));
 	}
 
 	/**
@@ -176,7 +176,7 @@ public final class CalloutElement extends BaseElement {
 	 * @param position the position of callout, with respect to the label
 	 */
 	public void setPosition(CalloutPosition position) {
-		setValue(Property.POSITION, position);
+		setValueAndAddToParent(Property.POSITION, position);
 	}
 
 	/**

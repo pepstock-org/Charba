@@ -89,8 +89,8 @@ public final class ControlPointElement extends AbstractNode {
 	ControlPointElement(AbstractNode parent, Key childKey, String value) {
 		super(parent, childKey, null);
 		// stores values
-		setValue(Property.X, value);
-		setValue(Property.Y, value);
+		setValueAndAddToParent(Property.X, value);
+		setValueAndAddToParent(Property.Y, value);
 	}
 
 	/**
