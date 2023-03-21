@@ -300,6 +300,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `imageOpacity` option to label and inner label annotations configuration.
  * enable multiple fonts on the label and inner label annotations configuration for multiple lines content.
  * enable multiple colors on the label and inner label annotations configuration for multiple lines content.
+ * add `beforeDraw` and `afterDraw` hook options to all annotations configuration.
 
 License
 -------

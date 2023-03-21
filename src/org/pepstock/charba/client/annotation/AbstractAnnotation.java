@@ -28,8 +28,10 @@ import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.callbacks.ZCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
+import org.pepstock.charba.client.annotation.listeners.ElementHookCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyHandlerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
@@ -99,6 +101,9 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		Y_MIN("yMin"),
 		Y_MAX("yMax"),
 		Z("z"),
+		// hooks
+		BEFORE_DRAW("beforeDraw"),
+		AFTER_DRAW("afterDraw"),
 		// internal property to set an unique id for caching
 		CHARBA_ANNOTATION_ID("charbaAnnotationId");
 
@@ -146,6 +151,10 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private final CallbackProxy<ProxyObjectCallback> yMaxCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the z function
 	private final CallbackProxy<ProxyIntegerCallback> zCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the before draw function
+	private final CallbackProxy<ProxyHandlerCallback> beforeDrawCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the after draw function
+	private final CallbackProxy<ProxyHandlerCallback> afterDrawCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
 	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
@@ -163,6 +172,10 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private static final CallbackPropertyHandler<ValueCallback> Y_MAX_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Y_MAX);
 	// callback instance to handle z options
 	private static final CallbackPropertyHandler<ZCallback> Z_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.Z);
+	// callback instance to handle before draw options
+	private static final CallbackPropertyHandler<ElementHookCallback> BEFORE_DRAW_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BEFORE_DRAW);
+	// callback instance to handle after draw options
+	private static final CallbackPropertyHandler<ElementHookCallback> AFTER_DRAW_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.AFTER_DRAW);
 
 	// default values instance
 	private final IsDefaultsAnnotation defaultValues;
@@ -217,6 +230,10 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		this.yMaxCallbackProxy.setCallback(context -> onValue(new AnnotationContext(this, context), getYMaxCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.zCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(this, context), getZCallback(), defaultValues.getZ(), ScriptableIntegerChecker.VALID_OR_DEFAULT).intValue());
+		// sets function to proxy callback in order to invoke the java interface
+		this.beforeDrawCallbackProxy.setCallback(context -> onDraw(new AnnotationContext(this, context), getBeforeDrawCallback()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.afterDrawCallbackProxy.setCallback(context -> onDraw(new AnnotationContext(this, context), getAfterDrawCallback()));
 	}
 
 	/**
@@ -982,6 +999,72 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	// --------------------------
+	// HOOKS
+	// --------------------------
+
+	/**
+	 * Returns the callback called to get the control before the annotation element drawing.
+	 * 
+	 * @return the callback called to get the control before the annotation element drawing
+	 */
+	@Override
+	public final ElementHookCallback getBeforeDrawCallback() {
+		return BEFORE_DRAW_PROPERTY_HANDLER.getCallback(this, defaultValues.getBeforeDrawCallback());
+	}
+
+	/**
+	 * Sets the callback to get the control before the annotation element drawing.
+	 * 
+	 * @param beforeDrawCallback to get the control before the annotation element drawing
+	 */
+	public final void setBeforeDraw(ElementHookCallback beforeDrawCallback) {
+		BEFORE_DRAW_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, beforeDrawCallback, beforeDrawCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to get the control before the annotation element drawing.
+	 * 
+	 * @param beforeDrawCallback to get the control before the annotation element drawing
+	 */
+	public final void setBeforeDraw(NativeCallback beforeDrawCallback) {
+		// resets callback
+		setBeforeDraw((ElementHookCallback) null);
+		// stores beforeDraws
+		setValueAndAddToParent(Property.BEFORE_DRAW, beforeDrawCallback);
+	}
+
+	/**
+	 * Returns the callback called to get the control after the annotation element drawing.
+	 * 
+	 * @return the callback called to get the control after the annotation element drawing
+	 */
+	@Override
+	public final ElementHookCallback getAfterDrawCallback() {
+		return AFTER_DRAW_PROPERTY_HANDLER.getCallback(this, defaultValues.getAfterDrawCallback());
+	}
+
+	/**
+	 * Sets the callback to get the control after the annotation element drawing.
+	 * 
+	 * @param afterDrawCallback to get the control after the annotation element drawing
+	 */
+	public final void setAfterDraw(ElementHookCallback afterDrawCallback) {
+		AFTER_DRAW_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, afterDrawCallback, afterDrawCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to get the control after the annotation element drawing.
+	 * 
+	 * @param afterDrawCallback to get the control after the annotation element drawing
+	 */
+	public final void setAfterDraw(NativeCallback afterDrawCallback) {
+		// resets callback
+		setAfterDraw((ElementHookCallback) null);
+		// stores afterDraws
+		setValueAndAddToParent(Property.AFTER_DRAW, afterDrawCallback);
+	}
+
+	// --------------------------
 	// INTERNALS
 	// --------------------------
 
@@ -1048,6 +1131,20 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		}
 		// returns the object
 		return resultPosition.nativeObject();
+	}
+
+	/**
+	 * /** Invoked before and after drawing of annotation element.
+	 * 
+	 * @param context annotation context instance
+	 * @param hookCallback value callback instance
+	 */
+	private void onDraw(AnnotationContext context, ElementHookCallback hookCallback) {
+		// checks if callback is consistent
+		if (hookCallback != null) {
+			// invokes callback
+			hookCallback.invoke(context);
+		}
 	}
 
 }

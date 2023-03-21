@@ -25,6 +25,7 @@ import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.callbacks.ZCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
+import org.pepstock.charba.client.annotation.listeners.ElementHookCallback;
 import org.pepstock.charba.client.callbacks.SimpleDisplayCallback;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
@@ -279,4 +280,23 @@ interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefault
 	default ValueCallback getYMaxCallback() {
 		return null;
 	}
+
+	/**
+	 * Returns the callback called to get the control before the annotation element drawing.
+	 * 
+	 * @return the callback called to get the control before the annotation element drawing
+	 */
+	default ElementHookCallback getBeforeDrawCallback() {
+		return null;
+	}
+
+	/**
+	 * Returns the callback called to get the control after the annotation element drawing.
+	 * 
+	 * @return the callback called to get the control after the annotation element drawing
+	 */
+	default ElementHookCallback getAfterDrawCallback() {
+		return null;
+	}
+
 }
