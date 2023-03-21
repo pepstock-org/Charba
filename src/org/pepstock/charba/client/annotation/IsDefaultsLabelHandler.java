@@ -25,7 +25,7 @@ import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageOpacityCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.FontsCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
@@ -208,7 +208,7 @@ interface IsDefaultsLabelHandler {
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
-	default FontCallback<AnnotationContext> getFontCallback() {
+	default FontsCallback<AnnotationContext> getFontCallback() {
 		return null;
 	}
 

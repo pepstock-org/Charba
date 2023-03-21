@@ -27,17 +27,20 @@ import org.pepstock.charba.client.annotation.callbacks.ImageOpacityCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.annotation.enums.ContentType;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.FontsCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
+import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayUtil;
 import org.pepstock.charba.client.commons.CallbackPropertyHandler;
@@ -48,11 +51,15 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.commons.PropertyHandler;
+import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.items.PaddingItem;
 import org.pepstock.charba.client.items.Undefined;
+import org.pepstock.charba.client.options.AbstractFont;
+import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.utils.Window;
 
 /**
@@ -120,7 +127,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	// callback proxy to invoke the padding function
 	private final CallbackProxy<ProxyNativeObjectCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the content function
-	private final CallbackProxy<ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyArrayCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the opacity function
 	private final CallbackProxy<ProxyDoubleCallback> imageOpacityCallbackProxy = JsHelper.get().newCallbackProxy();
 
@@ -137,14 +144,14 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	// callback instance to handle padding options
 	private static final CallbackPropertyHandler<PaddingCallback<AnnotationContext>> PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.PADDING);
 	// callback instance to handle font options
-	private static final CallbackPropertyHandler<FontCallback<AnnotationContext>> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
+	private static final CallbackPropertyHandler<FontsCallback<AnnotationContext>> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
 	// callback instance to handle opacity options
 	private static final CallbackPropertyHandler<ImageOpacityCallback> IMAGE_OPACITY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.OPACITY);
 
 	// default values instance
 	private final IsDefaultsLabelHandler defaultValues;
 	// font instance
-	private final Font font;
+	private final InternalFont font;
 	// padding instance
 	private final Padding padding;
 
@@ -163,7 +170,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// checks if annotation has label
 		Checker.assertCheck(labelContainer != null, "Label container is not consistent");
 		// gets font
-		this.font = new Font(labelContainer, this.defaultValues.getFont(), getValue(Property.FONT));
+		this.font = new InternalFont(parent, this.defaultValues.getFont(), getValue(Property.FONT));
 		// checks if it must be added
 		if (!has(Property.FONT)) {
 			// stores instance
@@ -192,19 +199,86 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// sets function to proxy callback in order to invoke the java interface
 		this.paddingCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsPadding(new AnnotationContext(parent, context), getPaddingCallback(), getPadding()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
-		this.fontCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsFont(new AnnotationContext(parent, context), getFontCallback(), getFont()).nativeObject());
+		this.fontCallbackProxy.setCallback(context -> onFonts(new AnnotationContext(parent, context), getFontCallback(), getDefaultValues().getFont()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.imageOpacityCallbackProxy
 				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(parent, context), getImageOpacityCallback(), this.defaultValues.getImageOpacity(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 	}
 
 	/**
-	 * Returns the font element.
+	 * Returns the font object.
 	 * 
-	 * @return the font element.
+	 * @return the font object.
 	 */
-	Font getFont() {
+	InternalFont getOriginalFont() {
 		return font;
+	}
+
+	/**
+	 * Returns the font object.
+	 * 
+	 * @return the font object.
+	 */
+	IsFont getFont() {
+		// checks if is stored as array
+		if (isType(Property.FONT, ObjectType.ARRAY)) {
+			// gets fonts
+			List<IsFont> fonts = getFonts();
+			// checks if consistent
+			if (ArrayListHelper.isConsistent(fonts)) {
+				// returns the first
+				return fonts.get(0);
+			}
+		}
+		// if here, the value is not an array then
+		// can be accessible directly
+		return getOriginalFont();
+	}
+
+	/**
+	 * Sets the font of the text.
+	 * 
+	 * @param fonts the font of the text
+	 */
+	void setFonts(FontItem... fonts) {
+		// resets callback
+		setFont((FontsCallback<AnnotationContext>) null);
+		// stores value
+		setValueOrArrayAndAddToParent(Property.FONT, fonts);
+	}
+
+	/**
+	 * Sets the font of the text.
+	 * 
+	 * @param fonts the font of the text
+	 */
+	void setFonts(List<FontItem> fonts) {
+		// resets callback
+		setFont((FontsCallback<AnnotationContext>) null);
+		// checks if argument is consistent
+		if (ArrayListHelper.isConsistent(fonts)) {
+			// stores value
+			setValueOrArrayAndAddToParent(Property.FONT, fonts.toArray(new FontItem[0]));
+		}
+	}
+
+	/**
+	 * Returns the font of the text.
+	 * 
+	 * @return the font of the text
+	 */
+	List<IsFont> getFonts() {
+		// gets result
+		final List<IsFont> result = new LinkedList<>();
+		// gets array
+		ArrayObject array = getValueOrArray(Property.FONT, getOriginalFont());
+		// scans array
+		for (int i = 0; i < array.length(); i++) {
+			// creates and adds font
+			result.add(new InternalFont(getDefaultValues().getFont(), array.get(i)));
+		}
+		// returns result
+		return result;
 	}
 
 	/**
@@ -695,7 +769,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
-	FontCallback<AnnotationContext> getFontCallback() {
+	FontsCallback<AnnotationContext> getFontCallback() {
 		return FONT_PROPERTY_HANDLER.getCallback(this, defaultValues.getFontCallback());
 	}
 
@@ -704,7 +778,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
-	void setFont(FontCallback<AnnotationContext> fontCallback) {
+	void setFont(FontsCallback<AnnotationContext> fontCallback) {
 		FONT_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, fontCallback, fontCallbackProxy.getProxy());
 	}
 
@@ -715,7 +789,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 */
 	void setFont(NativeCallback fontCallback) {
 		// resets callback
-		setFont((FontCallback<AnnotationContext>) null);
+		setFont((FontsCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.FONT, fontCallback);
 	}
@@ -846,4 +920,57 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		return defaultValue.value();
 	}
 
+	/**
+	 * Invokes and manages the result of the font callback, which is returning an array of objects of fonts.
+	 * 
+	 * @param context scriptable options context
+	 * @param callback callback instance to invoke
+	 * @param defaultFont default font to use
+	 * @return an array of objects of fonts
+	 */
+	private ArrayObject onFonts(AnnotationContext context, FontsCallback<AnnotationContext> callback, IsDefaultFont defaultFont) {
+		// gets value
+		List<FontItem> result = ScriptableUtil.getOptionValue(context, callback);
+		// checks result
+		if (ArrayListHelper.isConsistent(result)) {
+			return ArrayObject.fromOrEmpty(result);
+		}
+		// default result
+		return ArrayObject.fromOrEmpty(defaultFont.create().nativeObject());
+	}
+
+	// ----------------------------
+	// INTERNAL CLASSES
+	// ----------------------------
+
+	/**
+	 * Object to map font options for annotation labels configuration.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InternalFont extends AbstractFont {
+
+		/**
+		 * Creates a font to use for chart configuration, wrapping a native object instance.
+		 * 
+		 * @param parent the native object container which font belongs to.
+		 * @param defaultValues default provider
+		 * @param nativeObject native object to map java script properties
+		 */
+		private InternalFont(AbstractNode parent, IsDefaultFont defaultValues, NativeObject nativeObject) {
+			super(parent, defaultValues, nativeObject);
+		}
+
+		/**
+		 * Creates a font to use for plugin.
+		 * 
+		 * @param defaultValues default provider
+		 * @param nativeObject native object to map java script properties
+		 */
+		private InternalFont(IsDefaultFont defaultValues, NativeObject nativeObject) {
+			super(defaultValues, nativeObject);
+		}
+
+	}
 }

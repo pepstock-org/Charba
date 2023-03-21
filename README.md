@@ -288,13 +288,16 @@ Here you can find the list of enhancements and updates available on `master` bra
  * rename `remove` method to `delete` in `Animations` options and configuration classes and `UpdateConfiguration` class.
  * rename `TransitionKey` class to `TransitionMode` one.
  * rename `DefaultTransitionKey` class to `DefaultTransitionMode` one.
+ * remove `Font` class from annotation plugin package in favor to `IsFont` interface.
+ * move `FontsCallback` interface from treemap package to the callbacks (common) ones.
 
 ### Features
 
  * import CHART.JS ANNOTATION plugin version [v2.2.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.2.1).
  * add `Animations` options and configuration to annotation plugin.
  * enable curve line annotation, adding `curve` and `controlPoint` options to annotation plugin.
- * add `imageOpacity` option to label and inner label annotations configuration and options.
+ * add `imageOpacity` option to label and inner label annotations configuration.
+ * enable multiple fonts on the label and inner label annotations configuration for multiple lines content.
 
 License
 -------

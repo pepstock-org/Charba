@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.callbacks.DatasetContext;
+import org.pepstock.charba.client.callbacks.FontsCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyArrayCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
@@ -42,7 +43,6 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.treemap.callbacks.ColorsCallback;
-import org.pepstock.charba.client.treemap.callbacks.FontsCallback;
 import org.pepstock.charba.client.treemap.callbacks.OverflowCallback;
 import org.pepstock.charba.client.treemap.callbacks.PositionCallback;
 import org.pepstock.charba.client.treemap.enums.Overflow;
@@ -127,9 +127,9 @@ public final class Labels extends AbstractLabels {
 	// hover color callback instance
 	private ColorsCallback hoverColorCallback = null;
 	// instance of font callback
-	private FontsCallback fontCallback = null;
+	private FontsCallback<DatasetContext> fontCallback = null;
 	// instance of hover font callback
-	private FontsCallback hoverFontCallback = null;
+	private FontsCallback<DatasetContext> hoverFontCallback = null;
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script properties.
@@ -214,7 +214,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setFonts(FontItem... fonts) {
 		// resets callback
-		setFont((FontsCallback) null);
+		setFont((FontsCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArrayAndAddToParent(CommonProperty.FONT, fonts);
 	}
@@ -226,7 +226,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setFonts(List<FontItem> fonts) {
 		// resets callback
-		setFont((FontsCallback) null);
+		setFont((FontsCallback<DatasetContext>) null);
 		// checks if argument is consistent
 		if (ArrayListHelper.isConsistent(fonts)) {
 			// stores value
@@ -260,7 +260,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setHoverFonts(FontItem... fonts) {
 		// resets callback
-		setHoverFont((FontsCallback) null);
+		setHoverFont((FontsCallback<DatasetContext>) null);
 		// stores value
 		setValueOrArrayAndAddToParent(CommonProperty.HOVER_FONT, fonts);
 	}
@@ -272,7 +272,7 @@ public final class Labels extends AbstractLabels {
 	 */
 	public void setHoverFonts(List<FontItem> fonts) {
 		// resets callback
-		setHoverFont((FontsCallback) null);
+		setHoverFont((FontsCallback<DatasetContext>) null);
 		// checks if argument is consistent
 		if (ArrayListHelper.isConsistent(fonts)) {
 			// stores value
@@ -626,7 +626,7 @@ public final class Labels extends AbstractLabels {
 	 * 
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
-	public final FontsCallback getFontCallback() {
+	public final FontsCallback<DatasetContext> getFontCallback() {
 		return fontCallback;
 	}
 
@@ -635,7 +635,7 @@ public final class Labels extends AbstractLabels {
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
-	public final void setFont(FontsCallback fontCallback) {
+	public final void setFont(FontsCallback<DatasetContext> fontCallback) {
 		// sets the callback
 		this.fontCallback = fontCallback;
 		// checks if consistent
@@ -657,7 +657,7 @@ public final class Labels extends AbstractLabels {
 		// checks if consistent
 		if (fontCallback != null) {
 			// resets callback
-			setFont((FontsCallback) null);
+			setFont((FontsCallback<DatasetContext>) null);
 			// adds the callback proxy function to java script object
 			setValueAndAddToParent(CommonProperty.FONT, fontCallback);
 		} else {
@@ -671,7 +671,7 @@ public final class Labels extends AbstractLabels {
 	 * 
 	 * @return the hover font callback, if set, otherwise <code>null</code>.
 	 */
-	public final FontsCallback getHoverFontCallback() {
+	public final FontsCallback<DatasetContext> getHoverFontCallback() {
 		return hoverFontCallback;
 	}
 
@@ -680,7 +680,7 @@ public final class Labels extends AbstractLabels {
 	 * 
 	 * @param hoverFontCallback the hover font callback to set
 	 */
-	public final void setHoverFont(FontsCallback hoverFontCallback) {
+	public final void setHoverFont(FontsCallback<DatasetContext> hoverFontCallback) {
 		// sets the callback
 		this.hoverFontCallback = hoverFontCallback;
 		// checks if consistent
@@ -702,7 +702,7 @@ public final class Labels extends AbstractLabels {
 		// checks if consistent
 		if (hoverFontCallback != null) {
 			// resets callback
-			setHoverFont((FontsCallback) null);
+			setHoverFont((FontsCallback<DatasetContext>) null);
 			// adds the callback proxy function to java script object
 			setValueAndAddToParent(CommonProperty.HOVER_FONT, hoverFontCallback);
 		} else {
@@ -757,7 +757,7 @@ public final class Labels extends AbstractLabels {
 	 * @param defaultFont default font to use
 	 * @return an array of objects of fonts
 	 */
-	private ArrayObject onFonts(DatasetContext context, FontsCallback callback, IsDefaultFont defaultFont) {
+	private ArrayObject onFonts(DatasetContext context, FontsCallback<DatasetContext> callback, IsDefaultFont defaultFont) {
 		// gets value
 		List<FontItem> result = ScriptableUtil.getOptionValue(context, callback);
 		// checks result

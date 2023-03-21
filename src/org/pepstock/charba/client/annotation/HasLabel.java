@@ -18,6 +18,7 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageOpacityCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
-import org.pepstock.charba.client.callbacks.FontCallback;
+import org.pepstock.charba.client.callbacks.FontsCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
@@ -35,10 +36,10 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.dom.elements.Canvas;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.items.FontItem;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsFont;
 import org.pepstock.charba.client.options.IsPadding;
-import org.pepstock.charba.client.options.IsScriptableFontProvider;
 import org.pepstock.charba.client.options.IsScriptablePaddingProvider;
 
 /**
@@ -47,7 +48,7 @@ import org.pepstock.charba.client.options.IsScriptablePaddingProvider;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<AnnotationContext>, IsScriptableFontProvider<AnnotationContext> {
+interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<AnnotationContext> {
 
 	/**
 	 * Returns a label handler instance to use in the default methods of this interface.
@@ -69,7 +70,50 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 		}
 		// if here, handler is not consistent
 		// then returns the default
-		return Defaults.get().getGlobal().getFont();
+		return Defaults.get().getGlobal().getFont().create();
+	}
+
+	/**
+	 * Sets the font of the text.
+	 * 
+	 * @param fonts the font of the text
+	 */
+	default void setFonts(FontItem... fonts) {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			// stores value
+			getLabelHandler().setFonts(fonts);
+		}
+
+	}
+
+	/**
+	 * Sets the font of the text.
+	 * 
+	 * @param fonts the font of the text
+	 */
+	default void setFonts(List<FontItem> fonts) {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			// stores value
+			getLabelHandler().setFonts(fonts);
+		}
+
+	}
+
+	/**
+	 * Returns the font of the text.
+	 * 
+	 * @return the font of the text
+	 */
+	default List<IsFont> getFonts() {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			return getLabelHandler().getFonts();
+		}
+		// if here, handler is not consistent
+		// then returns the default
+		return Arrays.asList(Defaults.get().getGlobal().getFont().create());
 	}
 
 	/**
@@ -680,7 +724,7 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
 	@Override
-	default FontCallback<AnnotationContext> getFontCallback() {
+	default FontsCallback<AnnotationContext> getFontCallback() {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
 			return getLabelHandler().getFontCallback();
@@ -695,8 +739,7 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
-	@Override
-	default void setFont(FontCallback<AnnotationContext> fontCallback) {
+	default void setFont(FontsCallback<AnnotationContext> fontCallback) {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
 			// stores value
@@ -709,7 +752,6 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
-	@Override
 	default void setFont(NativeCallback fontCallback) {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
