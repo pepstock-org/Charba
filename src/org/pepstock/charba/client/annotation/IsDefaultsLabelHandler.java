@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
+import org.pepstock.charba.client.annotation.callbacks.ImageOpacityCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
@@ -127,6 +128,17 @@ interface IsDefaultsLabelHandler {
 	}
 
 	/**
+	 * Overrides the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive.<br>
+	 * If undefined, uses the opacity of the image or canvas element.<br>
+	 * It is used only when the content is an image or canvas element.
+	 * 
+	 * @return the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive
+	 */
+	default double getImageOpacity() {
+		return LabelAnnotation.DEFAULT_IMAGE_OPACITY;
+	}
+
+	/**
 	 * Returns the horizontal alignment of the label text when multiple lines.
 	 * 
 	 * @return the horizontal alignment of the label text when multiple lines
@@ -200,4 +212,12 @@ interface IsDefaultsLabelHandler {
 		return null;
 	}
 
+	/**
+	 * Returns the opacity callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the opacity callback, if set, otherwise <code>null</code>.
+	 */
+	default ImageOpacityCallback getImageOpacityCallback() {
+		return null;
+	}
 }

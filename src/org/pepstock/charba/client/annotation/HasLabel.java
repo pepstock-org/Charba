@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
+import org.pepstock.charba.client.annotation.callbacks.ImageOpacityCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
@@ -353,6 +354,39 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	}
 
 	/**
+	 * Overrides the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive.<br>
+	 * If undefined, uses the opacity of the image or canvas element.<br>
+	 * It is used only when the content is an image or canvas element.
+	 * 
+	 * @param opacity the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive
+	 */
+	default void setImageOpacity(double opacity) {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			// stores value
+			getLabelHandler().setImageOpacity(opacity);
+		}
+	}
+
+	/**
+	 * Overrides the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive.<br>
+	 * If undefined, uses the opacity of the image or canvas element.<br>
+	 * It is used only when the content is an image or canvas element.
+	 * 
+	 * @return the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive
+	 */
+	@Override
+	default double getImageOpacity() {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			return getLabelHandler().getImageOpacity();
+		}
+		// if here, handler is not consistent
+		// then returns the default
+		return LabelAnnotation.DEFAULT_IMAGE_OPACITY;
+	}
+
+	/**
 	 * Sets the horizontal alignment of the label text when multiple lines.
 	 * 
 	 * @param align the horizontal alignment of the label text when multiple lines
@@ -395,7 +429,6 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	default ColorCallback<AnnotationContext> getColorCallback() {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
-			// stores value
 			return getLabelHandler().getColorCallback();
 		}
 		// if here, handler is not consistent
@@ -480,7 +513,6 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	default ImageSizeCallback getImageHeightCallback() {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
-			// stores value
 			return getLabelHandler().getImageHeightCallback();
 		}
 		// if here, handler is not consistent
@@ -523,7 +555,6 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	default ImageSizeCallback getImageWidthCallback() {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
-			// stores value
 			return getLabelHandler().getImageWidthCallback();
 		}
 		// if here, handler is not consistent
@@ -566,7 +597,6 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	default TextAlignCallback<AnnotationContext> getTextAlignCallback() {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
-			// stores value
 			return getLabelHandler().getTextAlignCallback();
 		}
 		// if here, handler is not consistent
@@ -609,7 +639,6 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	default PaddingCallback<AnnotationContext> getPaddingCallback() {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
-			// stores value
 			return getLabelHandler().getPaddingCallback();
 		}
 		// if here, handler is not consistent
@@ -654,7 +683,6 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	default FontCallback<AnnotationContext> getFontCallback() {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
-			// stores value
 			return getLabelHandler().getFontCallback();
 		}
 		// if here, handler is not consistent
@@ -687,6 +715,48 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 		if (getLabelHandler() != null) {
 			// stores value
 			getLabelHandler().setFont(fontCallback);
+		}
+	}
+
+	/**
+	 * Returns the opacity callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the opacity callback, if set, otherwise <code>null</code>.
+	 */
+	@Override
+	default ImageOpacityCallback getImageOpacityCallback() {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			return getLabelHandler().getImageOpacityCallback();
+		}
+		// if here, handler is not consistent
+		// then returns the default
+		return null;
+	}
+
+	/**
+	 * Sets the opacity callback.
+	 * 
+	 * @param opacityCallback the opacity callback to set
+	 */
+	default void setImageOpacity(ImageOpacityCallback opacityCallback) {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			// stores value
+			getLabelHandler().setImageOpacity(opacityCallback);
+		}
+	}
+
+	/**
+	 * Sets the opacity callback.
+	 * 
+	 * @param opacityCallback the opacity callback to set
+	 */
+	default void setImageOpacity(NativeCallback opacityCallback) {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			// stores value
+			getLabelHandler().setImageOpacity(opacityCallback);
 		}
 	}
 }

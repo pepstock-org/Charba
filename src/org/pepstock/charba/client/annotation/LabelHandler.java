@@ -23,12 +23,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
+import org.pepstock.charba.client.annotation.callbacks.ImageOpacityCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.annotation.enums.ContentType;
 import org.pepstock.charba.client.callbacks.ColorCallback;
 import org.pepstock.charba.client.callbacks.FontCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
+import org.pepstock.charba.client.callbacks.ScriptableDoubleChecker;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
@@ -72,6 +75,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		CONTENT("content"),
 		FONT("font"),
 		HEIGHT("height"),
+		OPACITY("opacity"),
 		PADDING("padding"),
 		TEXT_ALIGN("textAlign"),
 		WIDTH("width");
@@ -117,6 +121,8 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	private final CallbackProxy<ProxyNativeObjectCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the content function
 	private final CallbackProxy<ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the opacity function
+	private final CallbackProxy<ProxyDoubleCallback> imageOpacityCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle color options
 	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
@@ -132,6 +138,8 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	private static final CallbackPropertyHandler<PaddingCallback<AnnotationContext>> PADDING_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.PADDING);
 	// callback instance to handle font options
 	private static final CallbackPropertyHandler<FontCallback<AnnotationContext>> FONT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.FONT);
+	// callback instance to handle opacity options
+	private static final CallbackPropertyHandler<ImageOpacityCallback> IMAGE_OPACITY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.OPACITY);
 
 	// default values instance
 	private final IsDefaultsLabelHandler defaultValues;
@@ -185,6 +193,9 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		this.paddingCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsPadding(new AnnotationContext(parent, context), getPaddingCallback(), getPadding()).nativeObject());
 		// sets function to proxy callback in order to invoke the java interface
 		this.fontCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsFont(new AnnotationContext(parent, context), getFontCallback(), getFont()).nativeObject());
+		// sets function to proxy callback in order to invoke the java interface
+		this.imageOpacityCallbackProxy
+				.setCallback(context -> ScriptableUtil.getOptionValueAsNumber(new AnnotationContext(parent, context), getImageOpacityCallback(), this.defaultValues.getImageOpacity(), ScriptableDoubleChecker.POSITIVE_OR_DEFAULT).doubleValue());
 	}
 
 	/**
@@ -462,6 +473,31 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	}
 
 	/**
+	 * Overrides the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive.<br>
+	 * If undefined, uses the opacity of the image or canvas element.<br>
+	 * It is used only when the content is an image or canvas element.
+	 * 
+	 * @param opacity the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive
+	 */
+	void setImageOpacity(double opacity) {
+		// resets callback
+		setImageOpacity((ImageOpacityCallback) null);
+		// stores the value
+		setValueAndAddToParent(Property.OPACITY, Checker.betweenOrDefault(opacity, 0, 1, LabelAnnotation.DEFAULT_IMAGE_OPACITY));
+	}
+
+	/**
+	 * Overrides the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive.<br>
+	 * If undefined, uses the opacity of the image or canvas element.<br>
+	 * It is used only when the content is an image or canvas element.
+	 * 
+	 * @return the opacity of the image or canvas element. Could be set a number in the range 0.0 to 1.0, inclusive
+	 */
+	double getImageOpacity() {
+		return getValue(Property.OPACITY, defaultValues.getImageOpacity());
+	}
+
+	/**
 	 * Returns the horizontal alignment of the label text when multiple lines.
 	 * 
 	 * @return the horizontal alignment of the label text when multiple lines
@@ -682,6 +718,36 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		setFont((FontCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.FONT, fontCallback);
+	}
+
+	/**
+	 * Returns the opacity callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the opacity callback, if set, otherwise <code>null</code>.
+	 */
+	ImageOpacityCallback getImageOpacityCallback() {
+		return IMAGE_OPACITY_PROPERTY_HANDLER.getCallback(this, defaultValues.getImageOpacityCallback());
+	}
+
+	/**
+	 * Sets the opacity callback.
+	 * 
+	 * @param opacityCallback the opacity callback to set
+	 */
+	void setImageOpacity(ImageOpacityCallback opacityCallback) {
+		IMAGE_OPACITY_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, opacityCallback, imageOpacityCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the opacity callback.
+	 * 
+	 * @param opacityCallback the opacity callback to set
+	 */
+	void setImageOpacity(NativeCallback opacityCallback) {
+		// resets callback
+		setImageOpacity((ImageOpacityCallback) null);
+		// stores values
+		setValueAndAddToParent(Property.OPACITY, opacityCallback);
 	}
 
 	// -----------------------

@@ -110,6 +110,11 @@ public final class LabelAnnotation extends AbstractPointedAnnotation implements 
 	 */
 	public static final int DEFAULT_TEXT_STROKE_WIDTH = 0;
 
+	/**
+	 * Default label annotation image opacity, <b>{@value DEFAULT_IMAGE_OPACITY}</b>.
+	 */
+	public static final double DEFAULT_IMAGE_OPACITY = 0;
+
 	// Annotation element key
 	private static final String ELEMENT_KEY_AS_STRING = "labelAnnotation";
 
