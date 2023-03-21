@@ -18,6 +18,10 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
@@ -42,6 +46,8 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	private final IsDefaultFont font = new InternalFont();
 	// default padding instance
 	private final IsDefaultPadding padding = new DefaultPadding(LineLabel.DEFAULT_PADDING);
+	// internal defaults for colors
+	private final List<String> colors = Collections.unmodifiableList(Arrays.asList(LineLabel.DEFAULT_COLOR_AS_STRING));
 
 	/**
 	 * To avoid any instantiation
@@ -136,8 +142,8 @@ final class DefaultLineLabel implements IsDefaultsLineLabel {
 	 * @see org.pepstock.charba.client.annotation.IsDefaultsLabelHandler#getColorAsString()
 	 */
 	@Override
-	public String getColorAsString() {
-		return LineLabel.DEFAULT_COLOR_AS_STRING;
+	public List<String> getColorAsString() {
+		return colors;
 	}
 
 	/*

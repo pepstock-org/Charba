@@ -299,6 +299,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable curve line annotation, adding `curve` and `controlPoint` options to annotation plugin.
  * add `imageOpacity` option to label and inner label annotations configuration.
  * enable multiple fonts on the label and inner label annotations configuration for multiple lines content.
+ * enable multiple colors on the label and inner label annotations configuration for multiple lines content.
 
 License
 -------

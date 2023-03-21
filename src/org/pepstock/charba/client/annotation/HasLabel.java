@@ -26,7 +26,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageOpacityCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
-import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.ColorsCallback;
 import org.pepstock.charba.client.callbacks.FontsCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
@@ -137,8 +137,12 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	 * 
 	 * @param fontColor the color of text
 	 */
-	default void setColor(IsColor fontColor) {
-		setColor(IsColor.checkAndGetValue(fontColor));
+	default void setColor(IsColor... fontColor) {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			// stores value
+			getLabelHandler().setColor(fontColor);
+		}
 	}
 
 	/**
@@ -146,7 +150,7 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	 * 
 	 * @param fontColor the color of text
 	 */
-	default void setColor(String fontColor) {
+	default void setColor(String... fontColor) {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
 			// stores value
@@ -160,14 +164,14 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	 * @return the color of text
 	 */
 	@Override
-	default String getColorAsString() {
+	default List<String> getColorAsString() {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
 			return getLabelHandler().getColorAsString();
 		}
 		// if here, handler is not consistent
 		// then returns the default
-		return Defaults.get().getGlobal().getColorAsString();
+		return Arrays.asList(Defaults.get().getGlobal().getColorAsString());
 	}
 
 	/**
@@ -175,7 +179,7 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	 * 
 	 * @return the color of text
 	 */
-	default IsColor getColor() {
+	default List<IsColor> getColor() {
 		return ColorBuilder.parse(getColorAsString());
 	}
 
@@ -470,7 +474,7 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	 * @return the callback called to set the color of the text of label
 	 */
 	@Override
-	default ColorCallback<AnnotationContext> getColorCallback() {
+	default ColorsCallback<AnnotationContext> getColorCallback() {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
 			return getLabelHandler().getColorCallback();
@@ -485,7 +489,7 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	 * 
 	 * @param colorCallback to set the color of the text of label
 	 */
-	default void setColor(ColorCallback<AnnotationContext> colorCallback) {
+	default void setColor(ColorsCallback<AnnotationContext> colorCallback) {
 		// checks if handler is consistent
 		if (getLabelHandler() != null) {
 			// stores value

@@ -18,6 +18,10 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
@@ -40,6 +44,8 @@ class DefaultBoxLabel implements IsDefaultsBoxLabel {
 	private final IsDefaultFont font = new InternalFont();
 	// default padding instance
 	private final IsDefaultPadding padding = new DefaultPadding(AbstractBoxedLabel.DEFAULT_PADDING);
+	// internal defaults for colors
+	private final List<String> colors = Collections.unmodifiableList(Arrays.asList(AbstractBoxedLabel.DEFAULT_COLOR_AS_STRING));
 
 	/**
 	 * To avoid any instantiation
@@ -84,8 +90,8 @@ class DefaultBoxLabel implements IsDefaultsBoxLabel {
 	 * @return the font color of text
 	 */
 	@Override
-	public String getColorAsString() {
-		return AbstractBoxedLabel.DEFAULT_COLOR_AS_STRING;
+	public List<String> getColorAsString() {
+		return colors;
 	}
 
 	/**

@@ -513,8 +513,8 @@ abstract class BaseElement extends ChartElementOptions {
 	 * 
 	 * @param fontColor the color of text
 	 */
-	public final void setColor(String fontColor) {
-		setValueAndAddToParent(Property.COLOR, fontColor);
+	public final void setColor(String... fontColor) {
+		setValueOrArrayAndAddToParent(Property.COLOR, fontColor);
 	}
 
 	/**
@@ -540,8 +540,8 @@ abstract class BaseElement extends ChartElementOptions {
 	 * 
 	 * @param fontColor the color of text
 	 */
-	public final void setColor(IsColor fontColor) {
-		setColor(IsColor.checkAndGetValue(fontColor));
+	public final void setColor(IsColor... fontColor) {
+		setValueOrArrayAndAddToParent(Property.COLOR, fontColor);
 	}
 
 	/**
@@ -549,8 +549,9 @@ abstract class BaseElement extends ChartElementOptions {
 	 * 
 	 * @return the color of text
 	 */
-	public final String getColorAsString() {
-		return getValue(Property.COLOR, Defaults.get().getGlobal().getColorAsString());
+	public final List<String> getColorAsString() {
+		ArrayString array = getValueOrArray(Property.COLOR, Defaults.get().getGlobal().getColorAsString());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -558,7 +559,7 @@ abstract class BaseElement extends ChartElementOptions {
 	 * 
 	 * @return the color of text
 	 */
-	public final IsColor getColor() {
+	public final List<IsColor> getColor() {
 		return ColorBuilder.parse(getColorAsString());
 	}
 

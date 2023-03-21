@@ -24,7 +24,7 @@ import java.util.List;
 import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageOpacityCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
-import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.ColorsCallback;
 import org.pepstock.charba.client.callbacks.FontsCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
@@ -62,7 +62,7 @@ interface IsDefaultsLabelHandler {
 	 * 
 	 * @return the font color of text
 	 */
-	String getColorAsString();
+	List<String> getColorAsString();
 
 	/**
 	 * Returns the text to display in label as list.
@@ -154,7 +154,7 @@ interface IsDefaultsLabelHandler {
 	 * 
 	 * @return the callback called to set the color of the text of label
 	 */
-	default ColorCallback<AnnotationContext> getColorCallback() {
+	default ColorsCallback<AnnotationContext> getColorCallback() {
 		return null;
 	}
 

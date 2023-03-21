@@ -18,6 +18,10 @@
 */
 package org.pepstock.charba.client.annotation;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
@@ -38,6 +42,8 @@ final class DefaultLabel implements IsDefaultsLabelAnnotation {
 	static final DefaultLabel INSTANCE = new DefaultLabel();
 	// default padding instance
 	private final IsDefaultPadding padding = new DefaultPadding(LabelAnnotation.DEFAULT_PADDING);
+	// internal defaults for colors
+	private final List<String> colors = Collections.unmodifiableList(Arrays.asList(LabelAnnotation.DEFAULT_COLOR_AS_STRING));
 
 	/**
 	 * To avoid any instantiation
@@ -142,8 +148,8 @@ final class DefaultLabel implements IsDefaultsLabelAnnotation {
 	 * @see org.pepstock.charba.client.annotation.IsDefaultsLabelHandler#getColorAsString()
 	 */
 	@Override
-	public String getColorAsString() {
-		return LabelAnnotation.DEFAULT_COLOR_AS_STRING;
+	public List<String> getColorAsString() {
+		return colors;
 	}
 
 	/*

@@ -26,7 +26,7 @@ import org.pepstock.charba.client.annotation.callbacks.ContentCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageOpacityCallback;
 import org.pepstock.charba.client.annotation.callbacks.ImageSizeCallback;
 import org.pepstock.charba.client.annotation.enums.ContentType;
-import org.pepstock.charba.client.callbacks.ColorCallback;
+import org.pepstock.charba.client.callbacks.ColorsCallback;
 import org.pepstock.charba.client.callbacks.FontsCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
 import org.pepstock.charba.client.callbacks.PaddingCallback;
@@ -38,6 +38,7 @@ import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallb
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.TextAlignCallback;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.AbstractNode;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -115,7 +116,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the color function
-	private final CallbackProxy<ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyArrayCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the content function
 	private final CallbackProxy<ProxyObjectCallback> contentCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the image height function
@@ -132,7 +133,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	private final CallbackProxy<ProxyDoubleCallback> imageOpacityCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle color options
-	private static final CallbackPropertyHandler<ColorCallback<AnnotationContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
+	private static final CallbackPropertyHandler<ColorsCallback<AnnotationContext>> COLOR_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.COLOR);
 	// callback instance to handle content options
 	private static final CallbackPropertyHandler<ContentCallback> CONTENT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.CONTENT);
 	// callback instance to handle image height options
@@ -187,7 +188,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.colorCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValueAsColor(new AnnotationContext(parent, context), getColorCallback(), this.defaultValues.getColorAsString(), false));
+		this.colorCallbackProxy.setCallback(context -> onColors(new AnnotationContext(parent, context), getColorCallback(), this.defaultValues.getColorAsString()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.contentCallbackProxy.setCallback(context -> onContent(new AnnotationContext(parent, context)));
 		// sets function to proxy callback in order to invoke the java interface
@@ -295,11 +296,23 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 * 
 	 * @param fontColor the color of text
 	 */
-	void setColor(String fontColor) {
+	void setColor(IsColor... fontColor) {
 		// resets callback
-		setColor((ColorCallback<AnnotationContext>) null);
+		setColor((ColorsCallback<AnnotationContext>) null);
 		// stores value
-		setValueAndAddToParent(Property.COLOR, fontColor);
+		setValueOrArrayAndAddToParent(Property.COLOR, fontColor);
+	}
+
+	/**
+	 * Sets the color of text as string.
+	 * 
+	 * @param fontColor the color of text
+	 */
+	void setColor(String... fontColor) {
+		// resets callback
+		setColor((ColorsCallback<AnnotationContext>) null);
+		// stores value
+		setValueOrArrayAndAddToParent(Property.COLOR, fontColor);
 	}
 
 	/**
@@ -307,8 +320,9 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 * 
 	 * @return the color of text
 	 */
-	String getColorAsString() {
-		return getValue(Property.COLOR, defaultValues.getColorAsString());
+	List<String> getColorAsString() {
+		ArrayString array = getValueOrArray(Property.COLOR, defaultValues.getColorAsString().get(0));
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -589,7 +603,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 * 
 	 * @return the callback called to set the color of the text of label
 	 */
-	ColorCallback<AnnotationContext> getColorCallback() {
+	ColorsCallback<AnnotationContext> getColorCallback() {
 		return COLOR_PROPERTY_HANDLER.getCallback(this, defaultValues.getColorCallback());
 	}
 
@@ -598,7 +612,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 * 
 	 * @param colorCallback to set the color of the text of label
 	 */
-	void setColor(ColorCallback<AnnotationContext> colorCallback) {
+	void setColor(ColorsCallback<AnnotationContext> colorCallback) {
 		COLOR_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, colorCallback, colorCallbackProxy.getProxy());
 	}
 
@@ -609,7 +623,7 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	 */
 	void setColor(NativeCallback colorCallback) {
 		// resets callback
-		setColor((ColorCallback<AnnotationContext>) null);
+		setColor((ColorsCallback<AnnotationContext>) null);
 		// stores values
 		setValueAndAddToParent(Property.COLOR, colorCallback);
 	}
@@ -937,6 +951,40 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		}
 		// default result
 		return ArrayObject.fromOrEmpty(defaultFont.create().nativeObject());
+	}
+
+	/**
+	 * Invokes and manages the result of the color callback, which is returning an array of strings of colors.
+	 * 
+	 * @param context scriptable options context
+	 * @param callback callback instance to invoke
+	 * @param defaultColor default color to use
+	 * @return an array of strings of colors
+	 */
+	private ArrayString onColors(AnnotationContext context, ColorsCallback<AnnotationContext> callback, List<String> defaultColor) {
+		// gets value
+		List<Object> result = ScriptableUtil.getOptionValue(context, callback);
+		// checks result
+		if (ArrayListHelper.isConsistent(result)) {
+			// temporary list
+			List<String> temp = new LinkedList<>();
+			// scans result
+			for (Object item : result) {
+				// checks item type
+				if (item instanceof String) {
+					// adds item
+					temp.add(item.toString());
+				} else if (item instanceof IsColor) {
+					// casts to color
+					IsColor color = (IsColor) item;
+					// adds color
+					temp.add(color.toRGBA());
+				}
+			}
+			return ArrayString.fromOrEmpty(temp);
+		}
+		// default result
+		return ArrayString.fromOrEmpty(defaultColor);
 	}
 
 	// ----------------------------
