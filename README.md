@@ -295,6 +295,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Features
 
  * import CHART.JS ANNOTATION plugin version [v2.2.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.2.1).
+ * import CHART.JS ZOOM plugin version [v2.0.1](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v2.0.1).
  * add `Animations` options and configuration to annotation plugin.
  * enable curve line annotation, adding `curve` and `controlPoint` options to annotation plugin.
  * add `imageOpacity` option to label and inner label annotations configuration.

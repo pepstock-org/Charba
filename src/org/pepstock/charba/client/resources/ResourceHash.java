@@ -96,7 +96,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'ZoomPluginResource' class.
 	 */
-	ZOOM_PLUGIN_RESOURCE(ResourceName.ZOOM_PLUGIN, 1148300);
+	ZOOM_PLUGIN_RESOURCE(ResourceName.ZOOM_PLUGIN, 1135627);
 	
 	// resource name instance
 	private final ResourceName resourceName;

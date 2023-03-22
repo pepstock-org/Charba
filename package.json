@@ -16,7 +16,7 @@
     "chartjs-plugin-annotation": "2.2.1",
     "chartjs-plugin-datalabels": "2.2.0",
     "chartjs-plugin-gradient": "0.6.1",
-    "chartjs-plugin-zoom": "2.0.0",
+    "chartjs-plugin-zoom": "2.0.1",
     "chartjs-chart-geo": "4.1.2",
     "chartjs-chart-matrix": "2.0.1",
     "chartjs-chart-sankey": "0.12.0",
