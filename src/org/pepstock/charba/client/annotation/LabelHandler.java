@@ -971,14 +971,14 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 			// scans result
 			for (Object item : result) {
 				// checks item type
-				if (item instanceof String) {
-					// adds item
-					temp.add(item.toString());
-				} else if (item instanceof IsColor) {
+				if (item instanceof IsColor) {
 					// casts to color
 					IsColor color = (IsColor) item;
 					// adds color
 					temp.add(color.toRGBA());
+				} else if (item instanceof String) {
+					// adds item
+					temp.add(item.toString());
 				}
 			}
 			return ArrayString.fromOrEmpty(temp);
