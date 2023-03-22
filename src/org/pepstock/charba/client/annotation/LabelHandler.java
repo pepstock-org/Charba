@@ -207,6 +207,15 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	}
 
 	/**
+	 * Returns the padding element.
+	 * 
+	 * @return the padding element.
+	 */
+	Padding getPadding() {
+		return padding;
+	}
+
+	/**
 	 * Returns the font object.
 	 * 
 	 * @return the font object.
@@ -237,6 +246,25 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	}
 
 	/**
+	 * Returns the font of the text.
+	 * 
+	 * @return the font of the text
+	 */
+	List<IsFont> getFonts() {
+		// gets result
+		final List<IsFont> result = new LinkedList<>();
+		// gets array
+		ArrayObject array = getValueOrArray(Property.FONT, getOriginalFont());
+		// scans array
+		for (int i = 0; i < array.length(); i++) {
+			// creates and adds font
+			result.add(new InternalFont(getDefaultValues().getFont(), array.get(i)));
+		}
+		// returns result
+		return result;
+	}
+
+	/**
 	 * Sets the font of the text.
 	 * 
 	 * @param fonts the font of the text
@@ -264,31 +292,13 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	}
 
 	/**
-	 * Returns the font of the text.
+	 * Returns the color of text as string.
 	 * 
-	 * @return the font of the text
+	 * @return the color of text
 	 */
-	List<IsFont> getFonts() {
-		// gets result
-		final List<IsFont> result = new LinkedList<>();
-		// gets array
-		ArrayObject array = getValueOrArray(Property.FONT, getOriginalFont());
-		// scans array
-		for (int i = 0; i < array.length(); i++) {
-			// creates and adds font
-			result.add(new InternalFont(getDefaultValues().getFont(), array.get(i)));
-		}
-		// returns result
-		return result;
-	}
-
-	/**
-	 * Returns the padding element.
-	 * 
-	 * @return the padding element.
-	 */
-	Padding getPadding() {
-		return padding;
+	List<String> getColorAsString() {
+		ArrayString array = getValueOrArray(Property.COLOR, defaultValues.getColorAsString().get(0));
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -313,16 +323,6 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 		setColor((ColorsCallback<AnnotationContext>) null);
 		// stores value
 		setValueOrArrayAndAddToParent(Property.COLOR, fontColor);
-	}
-
-	/**
-	 * Returns the color of text as string.
-	 * 
-	 * @return the color of text
-	 */
-	List<String> getColorAsString() {
-		ArrayString array = getValueOrArray(Property.COLOR, defaultValues.getColorAsString().get(0));
-		return ArrayListHelper.list(array);
 	}
 
 	/**
