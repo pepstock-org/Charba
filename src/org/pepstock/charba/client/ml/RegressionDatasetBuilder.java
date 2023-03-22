@@ -46,7 +46,7 @@ public final class RegressionDatasetBuilder extends AbstractBuilder<RegressionDa
 	// flags references
 	private boolean loadData = true;
 	private boolean hidden = false;
-	// internal flagsto set hte right type of dataset data
+	// internal flags to set the right type of dataset data
 	private boolean asDates = false;
 	private boolean asDataPoints = false;
 
