@@ -306,6 +306,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `init` option to all annotations configuration in order to define the init animation of the annotation elements.
  * add `interpolator` option to `AnimationCollection` class in order to enable a custom interpolation during the animation.
 
+### Development
+
+ * change dependency for Google Closure Compiler, version [v20230228](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20230228). 
+
 License
 -------
 
