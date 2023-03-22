@@ -64,7 +64,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'LuxonLibraryResource' class.
 	 */
-	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 16003874),
+	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 16055380),
 	/**
 	 * Hash item for 'MatrixControllerResource' class.
 	 */

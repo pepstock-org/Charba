@@ -219,8 +219,8 @@
    For details, see https://github.com/chartjs/chartjs-plugin-datalabels/blob/v2.2.0/LICENSE.md
 
 
-   This product bundles luxon.min.js version 3.2.1, which is available under a "MIT" license.
-   For details, see https://github.com/moment/luxon/blob/3.2.1/LICENSE.md
+   This product bundles luxon.min.js version 3.3.0, which is available under a "MIT" license.
+   For details, see https://github.com/moment/luxon/blob/3.3.0/LICENSE.md
 
 
    This product bundles chartjs-chart-geo.min.js version 4.1.2, which is available under a "MIT" license.
