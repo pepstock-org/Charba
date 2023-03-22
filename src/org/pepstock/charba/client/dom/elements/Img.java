@@ -97,4 +97,13 @@ public final class Img extends BaseHtmlElement implements IsCastable {
 	@JsProperty
 	public native void setWidth(int width);
 
+	/**
+	 * Returns a boolean value that is true if the browser has finished fetching the image, whether successful or not.<br>
+	 * That means this value is also true if the image has no src value indicating an image to load.
+	 * 
+	 * @return a boolean value that is true if the browser has finished fetching the image, whether successful or not
+	 */
+	@JsProperty
+	public native boolean isComplete();
+
 }
