@@ -1262,13 +1262,16 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * FIXME
+	 * Wrapper of init callback context passed by plugin.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
 	private static class InitContextWrapper extends NativeObjectContainer {
 
+		/**
+		 * Properties names of the context
+		 */
 		private enum InnerProperty implements Key
 		{
 			CHART("chart"),
@@ -1299,10 +1302,21 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 
 		}
 
+		/**
+		 * Creates the object with native object instance to be wrapped.
+		 * 
+		 * @param nativeObject native object instance to be wrapped.
+		 */
 		private InitContextWrapper(NativeObject nativeObject) {
 			super(nativeObject);
 		}
 
+		/**
+		 * Returns a value (chart) in the embedded JavaScript object at specific property.
+		 * 
+		 * @param key key of the property of JavaScript object.
+		 * @return value of the property
+		 */
 		private IsChart getChart() {
 			// gets native chart
 			Chart nativeChart = getNativeChart(InnerProperty.CHART);
@@ -1316,6 +1330,12 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 			return null;
 		}
 
+		/**
+		 * Returns a value (annotation properties) in the embedded JavaScript object at specific property.
+		 * 
+		 * @param key key of the property of JavaScript object.
+		 * @return value of the property
+		 */
 		private AnnotationProperties getProperties() {
 			// gets properties
 			NativeObject properties = getValue(InnerProperty.PROPERTIES);
