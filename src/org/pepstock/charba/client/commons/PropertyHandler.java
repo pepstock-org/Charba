@@ -28,6 +28,7 @@ import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Img;
 import org.pepstock.charba.client.dom.events.NativeBaseEvent;
+import org.pepstock.charba.client.options.NativeInterpolator;
 import org.pepstock.charba.client.plugins.NativeHook;
 
 /**
@@ -270,6 +271,18 @@ public abstract class PropertyHandler<D> extends NativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected final void setValueAndAddToParent(Key key, NativeCallback value) {
+		setValue(key, value);
+		// checks if the node is already added to parent
+		parent.checkAndAddToParent();
+	}
+
+	/**
+	 * Sets a value (interpolator function for animations) in the embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValueAndAddToParent(Key key, NativeInterpolator value) {
 		setValue(key, value);
 		// checks if the node is already added to parent
 		parent.checkAndAddToParent();

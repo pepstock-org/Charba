@@ -57,6 +57,7 @@ public final class AnimationCollection extends AbstractAnimation<IsDefaultAnimat
 	 */
 	private enum Property implements Key
 	{
+		FN("fn"),
 		PROPERTIES("properties"),
 		TYPE("type"),
 		FROM("from"),
@@ -459,6 +460,16 @@ public final class AnimationCollection extends AbstractAnimation<IsDefaultAnimat
 		// returns as list
 		return ArrayListHelper.list(array);
 	}
+
+	/**
+	 * Sets a custom animation interpolator in java script code.
+	 * 
+	 * @param interpolator a custom animation interpolator in java script code.
+	 */
+	public void setInterpolator(NativeInterpolator interpolator) {
+		setValueAndAddToParent(Property.FN, interpolator);
+	}
+
 	// -------------------
 	// CALLBACKS
 	// -------------------

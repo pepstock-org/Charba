@@ -1314,7 +1314,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		/**
 		 * Returns a value (chart) in the embedded JavaScript object at specific property.
 		 * 
-		 * @param key key of the property of JavaScript object.
 		 * @return value of the property
 		 */
 		private IsChart getChart() {
@@ -1333,7 +1332,6 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		/**
 		 * Returns a value (annotation properties) in the embedded JavaScript object at specific property.
 		 * 
-		 * @param key key of the property of JavaScript object.
 		 * @return value of the property
 		 */
 		private AnnotationProperties getProperties() {
