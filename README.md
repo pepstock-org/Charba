@@ -301,6 +301,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * enable multiple fonts on the label and inner label annotations configuration for multiple lines content.
  * enable multiple colors on the label and inner label annotations configuration for multiple lines content.
  * add `beforeDraw` and `afterDraw` hook options to all annotations configuration.
+ * add `init` option to all annotations configuration in order to define the init animation of the annotation elements.
 
 License
 -------

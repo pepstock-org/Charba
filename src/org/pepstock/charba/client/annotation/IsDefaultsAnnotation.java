@@ -22,6 +22,7 @@ import java.util.Date;
 
 import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
+import org.pepstock.charba.client.annotation.callbacks.InitCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.callbacks.ZCallback;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
@@ -52,6 +53,15 @@ interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefault
 	 */
 	default boolean isDisplay() {
 		return AbstractAnnotation.DEFAULT_DISPLAY;
+	}
+
+	/**
+	 * Returns <code>true</code> to enable the animation to the annotations when they are drawing at chart initialization.
+	 * 
+	 * @return <code>true</code> to enable the animation to the annotations when they are drawing at chart initialization.
+	 */
+	default boolean isInit() {
+		return AbstractAnnotation.DEFAULT_INIT;
 	}
 
 	/**
@@ -299,4 +309,12 @@ interface IsDefaultsAnnotation extends IsDefaultsBorderOptionsHandler, IsDefault
 		return null;
 	}
 
+	/**
+	 * Returns the callback called to get the control of animation initialization element.
+	 * 
+	 * @return the callback called to get the control of animation initialization element
+	 */
+	default InitCallback getInitCallback() {
+		return null;
+	}
 }

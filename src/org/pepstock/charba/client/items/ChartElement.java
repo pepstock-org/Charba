@@ -302,6 +302,11 @@ public class ChartElement extends AbstractReadOnlyPoint {
 	 */
 	private static class InternalCenterPoint extends AbstractReadOnlyPoint {
 
+		/**
+		 * Creates the object with native object instance to be wrapped.
+		 * 
+		 * @param nativeObject native object instance to be wrapped.
+		 */
 		InternalCenterPoint(NativeObject nativeObject) {
 			super(nativeObject);
 		}

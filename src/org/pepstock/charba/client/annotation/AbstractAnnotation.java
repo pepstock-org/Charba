@@ -21,11 +21,16 @@ package org.pepstock.charba.client.annotation;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.annotation.callbacks.AdjustScaleRangeCallback;
 import org.pepstock.charba.client.annotation.callbacks.DrawTimeCallback;
+import org.pepstock.charba.client.annotation.callbacks.InitCallback;
 import org.pepstock.charba.client.annotation.callbacks.LabelAlignPositionCallback;
 import org.pepstock.charba.client.annotation.callbacks.ValueCallback;
 import org.pepstock.charba.client.annotation.callbacks.ZCallback;
+import org.pepstock.charba.client.annotation.elements.AnnotationElement;
+import org.pepstock.charba.client.annotation.elements.AnnotationProperties;
 import org.pepstock.charba.client.annotation.enums.DrawTime;
 import org.pepstock.charba.client.annotation.enums.LabelPosition;
 import org.pepstock.charba.client.annotation.listeners.ElementHookCallback;
@@ -44,6 +49,8 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.utils.Window;
@@ -61,6 +68,11 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	 * Default annotation display, <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
 	public static final boolean DEFAULT_DISPLAY = true;
+
+	/**
+	 * Default annotation animation initialization, <b>{@value DEFAULT_INIT}</b>.
+	 */
+	public static final boolean DEFAULT_INIT = false;
 
 	/**
 	 * Default annotation adjust scale range, <b>{@value DEFAULT_ADJUST_SCALE_RANGE}</b>.
@@ -93,6 +105,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		// options
 		ADJUST_SCALE_RANGE("adjustScaleRange"),
 		DISPLAY("display"),
+		INIT("init"),
 		// scales definitions
 		X_SCALE_ID("xScaleID"),
 		X_MIN("xMin"),
@@ -155,6 +168,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private final CallbackProxy<ProxyHandlerCallback> beforeDrawCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after draw function
 	private final CallbackProxy<ProxyHandlerCallback> afterDrawCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the init function
+	private final CallbackProxy<ProxyObjectCallback> initCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// callback instance to handle display options
 	private static final CallbackPropertyHandler<SimpleDisplayCallback<AnnotationContext>> DISPLAY_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.DISPLAY);
@@ -176,6 +191,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	private static final CallbackPropertyHandler<ElementHookCallback> BEFORE_DRAW_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.BEFORE_DRAW);
 	// callback instance to handle after draw options
 	private static final CallbackPropertyHandler<ElementHookCallback> AFTER_DRAW_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.AFTER_DRAW);
+	// callback instance to handle init options
+	private static final CallbackPropertyHandler<InitCallback> INIT_PROPERTY_HANDLER = new CallbackPropertyHandler<>(Property.INIT);
 
 	// default values instance
 	private final IsDefaultsAnnotation defaultValues;
@@ -234,6 +251,8 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		this.beforeDrawCallbackProxy.setCallback(context -> onDraw(new AnnotationContext(this, context), getBeforeDrawCallback()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.afterDrawCallbackProxy.setCallback(context -> onDraw(new AnnotationContext(this, context), getAfterDrawCallback()));
+		// sets function to proxy callback in order to invoke the java interface
+		this.initCallbackProxy.setCallback(this::onInit);
 	}
 
 	/**
@@ -342,6 +361,28 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	@Override
 	public final boolean isDisplay() {
 		return getValue(Property.DISPLAY, defaultValues.isDisplay());
+	}
+
+	/**
+	 * Sets <code>true</code> to enable the animation to the annotations when they are drawing at chart initialization.
+	 * 
+	 * @param init <code>true</code> to enable the animation to the annotations when they are drawing at chart initialization
+	 */
+	public final void setInit(boolean init) {
+		// resets callback
+		setInit((InitCallback) null);
+		// stores value
+		setValue(Property.INIT, init);
+	}
+
+	/**
+	 * Returns <code>true</code> to enable the animation to the annotations when they are drawing at chart initialization.
+	 * 
+	 * @return <code>true</code> to enable the animation to the annotations when they are drawing at chart initialization.
+	 */
+	@Override
+	public final boolean isInit() {
+		return isType(Property.INIT, ObjectType.FUNCTION) || getValue(Property.INIT, defaultValues.isInit());
 	}
 
 	/**
@@ -1064,6 +1105,37 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 		setValueAndAddToParent(Property.AFTER_DRAW, afterDrawCallback);
 	}
 
+	/**
+	 * Returns the callback called to get the control after the annotation element drawing.
+	 * 
+	 * @return the callback called to get the control after the annotation element drawing
+	 */
+	@Override
+	public final InitCallback getInitCallback() {
+		return INIT_PROPERTY_HANDLER.getCallback(this, defaultValues.getInitCallback());
+	}
+
+	/**
+	 * Sets the callback to get the control after the annotation element drawing.
+	 * 
+	 * @param initCallback to get the control after the annotation element drawing
+	 */
+	public final void setInit(InitCallback initCallback) {
+		INIT_PROPERTY_HANDLER.setCallback(this, AnnotationPlugin.ID, initCallback, initCallbackProxy.getProxy());
+	}
+
+	/**
+	 * Sets the callback to get the control after the annotation element drawing.
+	 * 
+	 * @param initCallback to get the control after the annotation element drawing
+	 */
+	public final void setInit(NativeCallback initCallback) {
+		// resets callback
+		setInit((InitCallback) null);
+		// stores inits
+		setValueAndAddToParent(Property.INIT, initCallback);
+	}
+
 	// --------------------------
 	// INTERNALS
 	// --------------------------
@@ -1134,7 +1206,7 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 	}
 
 	/**
-	 * /** Invoked before and after drawing of annotation element.
+	 * Invoked before and after drawing of annotation element.
 	 * 
 	 * @param context annotation context instance
 	 * @param hookCallback value callback instance
@@ -1145,6 +1217,118 @@ public abstract class AbstractAnnotation extends AbstractNode implements IsDefau
 			// invokes callback
 			hookCallback.invoke(context);
 		}
+	}
+
+	/**
+	 * Returns an object as boolean or {@link AnnotationElement} when the callback has been activated.
+	 * 
+	 * @param context context with chart, properties and options
+	 * @return an object as boolean or {@link AnnotationElement} when the callback has been activated
+	 */
+	final Object onInit(NativeObject context) {
+		// gets init callback
+		InitCallback callback = getInitCallback();
+		// checks if callback is consistent
+		if (callback != null) {
+			// wraps context
+			InitContextWrapper wrapper = new InitContextWrapper(context);
+			// gets chart
+			IsChart chart = wrapper.getChart();
+			// checks if chart is consistent
+			if (IsChart.isValid(chart)) {
+				// gets element
+				AnnotationProperties properties = wrapper.getProperties();
+				if (properties != null) {
+					// invokes callback
+					Object result = callback.invoke(chart, properties, this);
+					// checks result of callback
+					if (result instanceof Boolean) {
+						// cats to boolean
+						Boolean value = (Boolean) result;
+						// returns value
+						return value.booleanValue();
+					} else if (result instanceof AnnotationProperties) {
+						// cats to annotation element
+						AnnotationProperties value = (AnnotationProperties) result;
+						// returns value
+						return value.nativeObject();
+					}
+				}
+			}
+		}
+		// if here, the callback or the context are not consistent
+		// then returns default
+		return DEFAULT_INIT;
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class InitContextWrapper extends NativeObjectContainer {
+
+		private enum InnerProperty implements Key
+		{
+			CHART("chart"),
+			PROPERTIES("properties");
+
+			// name value of property
+			private final String value;
+			//
+
+			/**
+			 * Creates with the property value to use in the native object.
+			 * 
+			 * @param value value of property name
+			 */
+			private InnerProperty(String value) {
+				this.value = value;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.commons.Key#value()
+			 */
+			@Override
+			public String value() {
+				return value;
+			}
+
+		}
+
+		private InitContextWrapper(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+
+		private IsChart getChart() {
+			// gets native chart
+			Chart nativeChart = getNativeChart(InnerProperty.CHART);
+			// checks chart consistency
+			if (nativeChart != null) {
+				// returns chart instance
+				return nativeChart.getChart();
+			}
+			// if chart is not consistent
+			// the returns null
+			return null;
+		}
+
+		private AnnotationProperties getProperties() {
+			// gets properties
+			NativeObject properties = getValue(InnerProperty.PROPERTIES);
+			// checks properties consistency
+			if (properties != null) {
+				// returns annotation element
+				return new AnnotationProperties(new AnnotationEnvelop<>(properties, true));
+			}
+			// if properties are not consistent
+			// the returns null
+			return null;
+		}
+
 	}
 
 }

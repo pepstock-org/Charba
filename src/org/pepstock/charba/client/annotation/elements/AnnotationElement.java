@@ -36,7 +36,7 @@ import org.pepstock.charba.client.items.Undefined;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AnnotationElement extends ChartElement {
+public final class AnnotationElement extends ChartElement implements HasAnnotationPropertiesHandler {
 
 	/**
 	 * MATRIX element type.
@@ -52,18 +52,6 @@ public final class AnnotationElement extends ChartElement {
 	 */
 	private enum Property implements Key
 	{
-		// for element location
-		X("x"),
-		Y("y"),
-		X2("x2"),
-		Y2("y2"),
-		CENTER_X("centerX"),
-		CENTER_Y("centerY"),
-		HEIGHT("height"),
-		WIDTH("width"),
-		POINT_X("pointX"),
-		POINT_Y("pointY"),
-		RADIUS("radius"),
 		// label element
 		LABEL("label"),
 		// options
@@ -95,6 +83,8 @@ public final class AnnotationElement extends ChartElement {
 
 	// label instance
 	private final AnnotationElement label;
+	// properties handler instance
+	private final AnnotationPropertiesHandler handler;
 
 	/**
 	 * Creates the item using an envelop of the native java script object which contains all properties.
@@ -131,6 +121,18 @@ public final class AnnotationElement extends ChartElement {
 			// if not there, is null
 			this.label = null;
 		}
+		// creates handler
+		this.handler = new AnnotationPropertiesHandler(getNativeObject());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.annotation.elements.HasAnnotationPropertiesHandler#getHandler()
+	 */
+	@Override
+	public AnnotationPropertiesHandler getHandler() {
+		return handler;
 	}
 
 	/**
@@ -140,29 +142,6 @@ public final class AnnotationElement extends ChartElement {
 	 */
 	public AnnotationElement getLabel() {
 		return label;
-	}
-
-	/**
-	 * Sets the center point of the element.
-	 * 
-	 * @param point the center point of the element.
-	 */
-	public void setCenterPoint(IsPoint point) {
-		// checks consistent
-		if (point != null) {
-			setCenterPoint(point.getX(), point.getY());
-		}
-	}
-
-	/**
-	 * Sets the center point of the element.
-	 * 
-	 * @param x the X value of center point of the element.
-	 * @param y the Y value of center point of the element.
-	 */
-	public void setCenterPoint(double x, double y) {
-		setValue(Property.CENTER_X, x);
-		setValue(Property.CENTER_Y, y);
 	}
 
 	/**
@@ -217,132 +196,6 @@ public final class AnnotationElement extends ChartElement {
 	@Override
 	public OptionsElement getOptions() {
 		return (OptionsElement) super.getOptions();
-	}
-
-	/**
-	 * Sets the X location of element in pixel.
-	 * 
-	 * @param x the X location of element in pixel.
-	 */
-	public void setX(double x) {
-		setValue(Property.X, x);
-	}
-
-	/**
-	 * Sets the Y location of element in pixel.
-	 * 
-	 * @param y the Y location of element in pixel.
-	 */
-	public void setY(double y) {
-		setValue(Property.Y, y);
-	}
-
-	/**
-	 * Returns the X2 location of element in pixel.
-	 * 
-	 * @return the X2 location of element in pixel.
-	 */
-	public double getX2() {
-		return getValue(Property.X2, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Sets the X2 location of element in pixel.
-	 * 
-	 * @param x2 the X2 location of element in pixel.
-	 */
-	public void setX2(double x2) {
-		setValue(Property.X2, x2);
-	}
-
-	/**
-	 * Returns the Y location of element in pixel.
-	 * 
-	 * @return the Y location of element in pixel.
-	 */
-	public double getY2() {
-		return getValue(Property.Y2, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Sets the Y2 location of element in pixel.
-	 * 
-	 * @param y2 the Y2 location of element in pixel.
-	 */
-	public void setY2(double y2) {
-		setValue(Property.Y2, y2);
-	}
-
-	/**
-	 * Returns the width of element in pixel.
-	 * 
-	 * @return the width of element in pixel.
-	 */
-	public double getWidth() {
-		return getValue(Property.WIDTH, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Sets the width of element in pixel.
-	 * 
-	 * @param width the width of element in pixel.
-	 */
-	public void setWidth(double width) {
-		setValue(Property.WIDTH, width);
-	}
-
-	/**
-	 * Returns the height of element in pixel.
-	 * 
-	 * @return the height of element in pixel.
-	 */
-	public double getHeight() {
-		return getValue(Property.HEIGHT, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Sets the height of element in pixel.
-	 * 
-	 * @param height the height of element in pixel.
-	 */
-	public void setHeight(double height) {
-		setValue(Property.HEIGHT, height);
-	}
-
-	/**
-	 * Returns the radius of element in pixel.
-	 * 
-	 * @return the radius of element in pixel.
-	 */
-	public double getRadius() {
-		return getValue(Property.RADIUS, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Sets the radius of element in pixel.
-	 * 
-	 * @param radius the radius of element in pixel.
-	 */
-	public void setRadius(double radius) {
-		setValue(Property.RADIUS, radius);
-	}
-
-	/**
-	 * Returns the X location of element point in pixel.
-	 * 
-	 * @return the X location of element point in pixel.
-	 */
-	public double getPointX() {
-		return getValue(Property.POINT_X, Undefined.DOUBLE);
-	}
-
-	/**
-	 * Returns the Y location of element point in pixel.
-	 * 
-	 * @return the Y location of element point in pixel.
-	 */
-	public double getPointY() {
-		return getValue(Property.POINT_Y, Undefined.DOUBLE);
 	}
 
 	/**

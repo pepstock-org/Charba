@@ -84,7 +84,6 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 			// stores value
 			getLabelHandler().setFonts(fonts);
 		}
-
 	}
 
 	/**
