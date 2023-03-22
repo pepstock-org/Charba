@@ -145,6 +145,19 @@ interface HasLabel extends IsDefaultsLabelHandler, IsScriptablePaddingProvider<A
 	}
 
 	/**
+	 * Sets the color of the text.
+	 * 
+	 * @param fontColor the color of the text
+	 */
+	default void setColor(List<IsColor> fontColor) {
+		// checks if handler is consistent
+		if (getLabelHandler() != null) {
+			// stores value
+			getLabelHandler().setColor(fontColor);
+		}
+	}
+
+	/**
 	 * Sets the color of text as string.
 	 * 
 	 * @param fontColor the color of text

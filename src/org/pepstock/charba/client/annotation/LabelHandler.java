@@ -302,6 +302,21 @@ final class LabelHandler extends PropertyHandler<IsDefaultsLabelHandler> {
 	}
 
 	/**
+	 * Sets the color of the text.
+	 * 
+	 * @param fontColor the color of the text
+	 */
+	void setColor(List<IsColor> fontColor) {
+		// resets callback
+		setColor((ColorsCallback<AnnotationContext>) null);
+		// checks if argument is consistent
+		if (ArrayListHelper.isConsistent(fontColor)) {
+			// stores value
+			setValueOrArrayAndAddToParent(Property.COLOR, fontColor.toArray(new IsColor[0]));
+		}
+	}
+
+	/**
 	 * Sets the color of text as string.
 	 * 
 	 * @param fontColor the color of text
