@@ -309,6 +309,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Development
 
  * change dependency for Google Closure Compiler, version [v20230228](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20230228). 
+ * remove dependency from GWT DEV package.
 
 License
 -------
