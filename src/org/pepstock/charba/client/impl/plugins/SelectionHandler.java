@@ -95,8 +95,8 @@ final class SelectionHandler {
 	private final int paddingTop;
 	// stores the original bottom padding value
 	private final int paddingBottom;
-	// current chart area
-	private IsArea chartArea = null;
+	// current scale area
+	private IsArea scaleArea = null;
 	// current mouse track of selection
 	private SelectionTrack track = null;
 	// status if selected
@@ -383,7 +383,9 @@ final class SelectionHandler {
 		ChartNode node = chart.getNode();
 		ChartAreaNode cArea = node.getChartArea();
 		// stores chart area
-		chartArea = cArea.toArea();
+		IsArea chartArea = cArea.toArea();
+		// sets scale area
+		scaleArea = getScale();
 		// gets scale
 		Scale axis = getAxis();
 		// initializes the mouse track using the previous instance if exist
@@ -405,11 +407,11 @@ final class SelectionHandler {
 	 */
 	void updateSelection(double x) {
 		// checks if X coordinate is inside of
-		// chart area
+		// scale area
 		// if less then area, used left as current track point
 		// if great then area, used right as current track point
 		// otherwise use X coordinate passed as current point
-		track.setCurrent(Math.min(Math.max(x, chartArea.getLeft()), chartArea.getRight()));
+		track.setCurrent(Math.min(Math.max(x, scaleArea.getLeft()), scaleArea.getRight()));
 		// sets the left part of selection area
 		area.setLeft(track.getStart());
 		// sets the right part of selection area, max must be right of chart area
@@ -427,7 +429,7 @@ final class SelectionHandler {
 		// sets the selecting color in the canvas
 		ctx.setFillColor(options.getColorAsString());
 		// draws the rectangle of area selection
-		ctx.fillRect(Math.max(area.getLeft(), chartArea.getLeft()), area.getTop(), Math.min(area.getRight(), chartArea.getRight()) - area.getLeft(), area.getBottom() - area.getTop());
+		ctx.fillRect(Math.max(area.getLeft(), scaleArea.getLeft()), area.getTop(), Math.min(area.getRight(), scaleArea.getRight()) - area.getLeft(), area.getBottom() - area.getTop());
 		// borders
 		applyAreaBorder(ctx);
 		// option instance
@@ -538,27 +540,24 @@ final class SelectionHandler {
 	 * Recalculates the selection area and track and draws the area when a chart is updated or resized.
 	 */
 	void refresh() {
-		// gets chart node
-		ChartNode node = chart.getNode();
-		ChartAreaNode cArea = node.getChartArea();
 		// gets the scale element of chart
 		// using the X axis id of plugin options
 		ScaleItem scaleItem = getScale();
 		// gets START pixels by value
 		double startPixel = scaleItem.getPixelForDecimal(track.getStartDecimal());
 		// checks if the selection area is still consistent
-		if (Undefined.is(startPixel) || startPixel > cArea.getRight()) {
+		if (Undefined.is(startPixel) || startPixel > scaleItem.getRight()) {
 			// does not refresh anything
 			return;
 		}
 		// gets END pixels by value
 		double endPixel = scaleItem.getPixelForDecimal(track.getEndDecimal());
 		// checks if the selection area is still consistent
-		if (Undefined.is(endPixel) || endPixel > cArea.getRight()) {
+		if (Undefined.is(endPixel) || endPixel > scaleItem.getRight()) {
 			// changes the track accordingly
-			track.setCurrent(cArea.getRight());
+			track.setCurrent(scaleItem.getRight());
 			// reset end pixel
-			endPixel = cArea.getRight();
+			endPixel = scaleItem.getRight();
 		}
 		// this is new start selection point
 		startSelection((int) Math.ceil(startPixel));
@@ -586,10 +585,12 @@ final class SelectionHandler {
 		if (!IsArea.isConsistent(cArea)) {
 			return;
 		}
+		// gets scale item
+		ScaleItem scaleitem = getScale();
 		// normalized the from and to passed
 		// if not consistent, uses the area
-		final double normalizedFrom = Checker.validOrDefault(from, cArea.getLeft());
-		final double normalizedTo = Checker.validOrDefault(to, cArea.getRight());
+		final double normalizedFrom = Checker.validOrDefault(from, scaleitem.getLeft());
+		final double normalizedTo = Checker.validOrDefault(to, scaleitem.getRight());
 		// gets canvas
 		Canvas canvas = chart.getCanvas();
 		// extracts the scrolling element
@@ -1066,8 +1067,10 @@ final class SelectionHandler {
 		// gets chart AREA
 		ChartNode node = chart.getNode();
 		ChartAreaNode areaInstance = node.getChartArea();
+		// gets scale item
+		ScaleItem scaleItem = getScale();
 		// checks if inside
-		boolean isX = event.getLayerX() >= areaInstance.getLeft() && event.getLayerX() <= areaInstance.getRight();
+		boolean isX = event.getLayerX() >= scaleItem.getLeft() && event.getLayerX() <= scaleItem.getRight();
 		boolean isY = event.getLayerY() >= areaInstance.getTop() && event.getLayerY() <= areaInstance.getBottom();
 		return isX && isY;
 	}
