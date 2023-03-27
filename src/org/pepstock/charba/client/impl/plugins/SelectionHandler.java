@@ -50,8 +50,10 @@ import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.IsArea;
 import org.pepstock.charba.client.items.ScaleItem;
+import org.pepstock.charba.client.items.ScaleValueItem;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsImmutableFont;
+import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
@@ -382,8 +384,10 @@ final class SelectionHandler {
 		ChartAreaNode cArea = node.getChartArea();
 		// stores chart area
 		chartArea = cArea.toArea();
+		// gets scale
+		Scale axis = getAxis();
 		// initializes the mouse track using the previous instance if exist
-		track = new SelectionTrack(x, track);
+		track = new SelectionTrack(x, axis.isReverse(), track);
 		// sets TOP and BOTTOM
 		// always related to area dimension
 		area.setTop(chartArea.getTop());
@@ -487,19 +491,20 @@ final class SelectionHandler {
 		if (fireEvent && track != null && track.isValid() && chart.isEventHandled(DatasetRangeSelectionEvent.TYPE)) {
 			// gets scale
 			ScaleItem scaleItem = getScale();
-			// gets values
-			double leftValue = scaleItem.getValueForPixel(area.getLeft());
-			double rightValue = scaleItem.getValueForPixel(area.getRight());
-			// gets pixels by norm values
-			double normStart = scaleItem.getPixelForValue(leftValue);
-			double normEnd = scaleItem.getPixelForValue(rightValue);
+			// gets decimal (0..1) values
+			double leftDecimal = scaleItem.getDecimalForPixel(area.getLeft());
+			double rightDecimal = scaleItem.getDecimalForPixel(area.getRight());
 			// stores the values of selected area from scale
-			track.setStartValue(leftValue / normStart * area.getLeft());
-			track.setEndValue(rightValue / normEnd * area.getRight());
+			track.setStartDecimal(track.isReverse() ? rightDecimal : leftDecimal);
+			track.setEndDecimal(track.isReverse() ? leftDecimal : rightDecimal);
 			// creates custom event
 			NativeCustomEvent customEvent = NativeCustomEvent.createCustomEvent(DatasetSeletionEventType.SET_SELECTION);
+			// gets from item
+			ScaleValueItem from = scaleItem.getValueAtPixel(area.getLeft());
+			// gets to item
+			ScaleValueItem to = scaleItem.getValueAtPixel(area.getRight());
 			// fires the event that scale items selection
-			chart.fireEvent(new DatasetRangeSelectionEvent(customEvent, scaleItem.getValueAtPixel(area.getLeft()), scaleItem.getValueAtPixel(area.getRight())));
+			chart.fireEvent(new DatasetRangeSelectionEvent(customEvent, track.isReverse() ? to : from, track.isReverse() ? from : to));
 		}
 	}
 
@@ -517,6 +522,19 @@ final class SelectionHandler {
 	}
 
 	/**
+	 * Returns the axis related to the plugin.
+	 * 
+	 * @return the axis related to the plugin
+	 */
+	Scale getAxis() {
+		// gets chart node
+		ChartNode node = chart.getNode();
+		// gets the scale element of chart
+		// using the X axis id of plugin options
+		return node.getOptions().getScales().getAxis(options.getXAxisID().value());
+	}
+
+	/**
 	 * Recalculates the selection area and track and draws the area when a chart is updated or resized.
 	 */
 	void refresh() {
@@ -525,16 +543,16 @@ final class SelectionHandler {
 		ChartAreaNode cArea = node.getChartArea();
 		// gets the scale element of chart
 		// using the X axis id of plugin options
-		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID().value());
+		ScaleItem scaleItem = getScale();
 		// gets START pixels by value
-		double startPixel = scaleItem.getPixelForValue(track.getStartValue());
+		double startPixel = scaleItem.getPixelForDecimal(track.getStartDecimal());
 		// checks if the selection area is still consistent
 		if (Undefined.is(startPixel) || startPixel > cArea.getRight()) {
 			// does not refresh anything
 			return;
 		}
 		// gets END pixels by value
-		double endPixel = scaleItem.getPixelForValue(track.getEndValue());
+		double endPixel = scaleItem.getPixelForDecimal(track.getEndDecimal());
 		// checks if the selection area is still consistent
 		if (Undefined.is(endPixel) || endPixel > cArea.getRight()) {
 			// changes the track accordingly

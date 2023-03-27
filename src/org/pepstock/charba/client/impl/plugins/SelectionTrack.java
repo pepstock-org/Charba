@@ -29,29 +29,33 @@ final class SelectionTrack {
 
 	private final double starting;
 
+	private final boolean reverse;
+
 	private double start = Double.NaN;
 
 	private double end = Double.NaN;
 
-	private double startValue = Double.NaN;
+	private double startDecimal = Double.NaN;
 
-	private double endValue = Double.NaN;
+	private double endDecimal = Double.NaN;
 
 	/**
 	 * Creates the object storing the original X point of mouse down.
 	 * 
 	 * @param starting the original X point of mouse down.
+	 * @param reverse if <code>true</code>, the scale is configured in reverse mode
 	 * @param formerInstance former instance of the tracker
 	 */
-	SelectionTrack(double starting, SelectionTrack formerInstance) {
+	SelectionTrack(double starting, boolean reverse, SelectionTrack formerInstance) {
 		this.starting = starting;
+		this.reverse = reverse;
 		// sets as start point as well
 		this.start = starting;
 		// checks if former instance is consistent
 		if (formerInstance != null) {
 			// stores the previous values
-			setStartValue(formerInstance.getStartValue());
-			setEndValue(formerInstance.getEndValue());
+			setStartDecimal(formerInstance.getStartDecimal());
+			setEndDecimal(formerInstance.getEndDecimal());
 		}
 	}
 
@@ -83,30 +87,30 @@ final class SelectionTrack {
 	}
 
 	/**
-	 * Sets the start value retrieved from scale
+	 * Sets the start decimal (0..1) retrieved from scale
 	 * 
-	 * @param startValue the start value retrieved from scale
+	 * @param startDecimal the start decimal (0..1) retrieved from scale
 	 */
-	void setStartValue(double startValue) {
-		this.startValue = startValue;
+	void setStartDecimal(double startDecimal) {
+		this.startDecimal = startDecimal;
 	}
 
 	/**
-	 * Returns the start value on scale
+	 * Returns the start decimal (0..1) on scale
 	 * 
-	 * @return the start value
+	 * @return the start decimal (0..1)
 	 */
-	double getStartValue() {
-		return startValue;
+	double getStartDecimal() {
+		return startDecimal;
 	}
 
 	/**
-	 * Sets the end value retrieved from scale
+	 * Sets the end decimal (0..1) retrieved from scale
 	 * 
-	 * @param endValue the end value retrieved from scale
+	 * @param endDecimal the end decimal (0..1) retrieved from scale
 	 */
-	void setEndValue(double endValue) {
-		this.endValue = endValue;
+	void setEndDecimal(double endDecimal) {
+		this.endDecimal = endDecimal;
 	}
 
 	/**
@@ -114,8 +118,8 @@ final class SelectionTrack {
 	 * 
 	 * @return the end value
 	 */
-	double getEndValue() {
-		return endValue;
+	double getEndDecimal() {
+		return endDecimal;
 	}
 
 	/**
@@ -147,6 +151,15 @@ final class SelectionTrack {
 		return Undefined.isNot(start) && Undefined.isNot(end);
 	}
 
+	/**
+	 * Returns <code>true</code> if the scale is configured in reverse mode.
+	 * 
+	 * @return <code>true</code> if the scale is configured in reverse mode
+	 */
+	boolean isReverse() {
+		return reverse;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -154,7 +167,7 @@ final class SelectionTrack {
 	 */
 	@Override
 	public String toString() {
-		return "SelectionTrack [starting=" + starting + ", start=" + start + ", end=" + end + ", startValue=" + startValue + ", endValue=" + endValue + "]";
+		return "SelectionTrack [starting=" + starting + ", start=" + start + ", end=" + end + ", startDecimal=" + startDecimal + ", endDecimal=" + endDecimal + "]";
 	}
 
 }
