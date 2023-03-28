@@ -184,7 +184,7 @@ public final class DatasetsItemsSelector extends CharbaPluginContainer {
 			// gets selection handler
 			SelectionHandler handler = pluginInstance.getHandlers().get(chart.getId());
 			// gets scale
-			ScaleItem scaleItem = handler.getScale();
+			ScaleItem scaleItem = handler.getXScale();
 			// sets selection
 			handler.setSelection(scaleItem.getPixelForStringValue(from), scaleItem.getPixelForStringValue(to));
 		}
@@ -204,7 +204,7 @@ public final class DatasetsItemsSelector extends CharbaPluginContainer {
 			// gets selection handler
 			SelectionHandler handler = pluginInstance.getHandlers().get(chart.getId());
 			// gets scale
-			ScaleItem scaleItem = handler.getScale();
+			ScaleItem scaleItem = handler.getXScale();
 			// sets selection
 			handler.setSelection(scaleItem.getPixelForValue(from), scaleItem.getPixelForValue(to));
 		}
@@ -224,7 +224,7 @@ public final class DatasetsItemsSelector extends CharbaPluginContainer {
 			// gets selection handler
 			SelectionHandler handler = pluginInstance.getHandlers().get(chart.getId());
 			// gets scale
-			ScaleItem scaleItem = handler.getScale();
+			ScaleItem scaleItem = handler.getXScale();
 			// sets selection
 			handler.setSelection(scaleItem.getPixelForDateValue(from), scaleItem.getPixelForDateValue(to));
 		}

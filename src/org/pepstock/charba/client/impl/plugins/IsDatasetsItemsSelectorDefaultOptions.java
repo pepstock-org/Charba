@@ -69,6 +69,15 @@ interface IsDatasetsItemsSelectorDefaultOptions {
 	}
 
 	/**
+	 * Returns the ID of the y axis to plot this dataset on. If not specified, the chart area is used.
+	 * 
+	 * @return the ID of the y axis to plot this dataset on. If not specified, the chart area is used.
+	 */
+	default ScaleId getYAxisID() {
+		return null;
+	}
+
+	/**
 	 * Returns the color.
 	 * 
 	 * @return the color.

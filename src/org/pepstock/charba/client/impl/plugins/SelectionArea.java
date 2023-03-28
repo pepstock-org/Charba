@@ -18,12 +18,14 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import org.pepstock.charba.client.items.IsArea;
+
 /**
  * Which maintains coordinates of the are to be draw on the canvas as selection area.
  * 
  * @author Andrea "Stock" Stocchero
  */
-final class SelectionArea {
+final class SelectionArea implements IsArea {
 
 	private double top = 0;
 
@@ -38,7 +40,8 @@ final class SelectionArea {
 	 * 
 	 * @return the top
 	 */
-	double getTop() {
+	@Override
+	public double getTop() {
 		return top;
 	}
 
@@ -56,7 +59,8 @@ final class SelectionArea {
 	 * 
 	 * @return the left
 	 */
-	double getLeft() {
+	@Override
+	public double getLeft() {
 		return left;
 	}
 
@@ -74,7 +78,8 @@ final class SelectionArea {
 	 * 
 	 * @return the right
 	 */
-	double getRight() {
+	@Override
+	public double getRight() {
 		return right;
 	}
 
@@ -92,7 +97,8 @@ final class SelectionArea {
 	 * 
 	 * @return the bottom
 	 */
-	double getBottom() {
+	@Override
+	public double getBottom() {
 		return bottom;
 	}
 

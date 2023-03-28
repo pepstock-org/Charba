@@ -95,8 +95,8 @@ final class SelectionHandler {
 	private final int paddingTop;
 	// stores the original bottom padding value
 	private final int paddingBottom;
-	// current scale area
-	private IsArea scaleArea = null;
+	// current plugin area
+	private IsArea pluginArea = null;
 	// current mouse track of selection
 	private SelectionTrack track = null;
 	// status if selected
@@ -379,21 +379,16 @@ final class SelectionHandler {
 	void startSelection(double x) {
 		// sets status
 		setStatus(SelectionStatus.SELECTING);
-		// gets chart AREA
-		ChartNode node = chart.getNode();
-		ChartAreaNode cArea = node.getChartArea();
-		// stores chart area
-		IsArea chartArea = cArea.toArea();
 		// sets scale area
-		scaleArea = getScale();
+		pluginArea = getArea();
 		// gets scale
 		Scale axis = getAxis();
 		// initializes the mouse track using the previous instance if exist
 		track = new SelectionTrack(x, axis.isReverse(), track);
 		// sets TOP and BOTTOM
 		// always related to area dimension
-		area.setTop(chartArea.getTop());
-		area.setBottom(chartArea.getBottom());
+		area.setTop(pluginArea.getTop());
+		area.setBottom(pluginArea.getBottom());
 		// sets the left part of selection area
 		area.setLeft(track.getStart());
 		// sets the right part of selection area, max must be right of chart area
@@ -411,7 +406,7 @@ final class SelectionHandler {
 		// if less then area, used left as current track point
 		// if great then area, used right as current track point
 		// otherwise use X coordinate passed as current point
-		track.setCurrent(Math.min(Math.max(x, scaleArea.getLeft()), scaleArea.getRight()));
+		track.setCurrent(Math.min(Math.max(x, pluginArea.getLeft()), pluginArea.getRight()));
 		// sets the left part of selection area
 		area.setLeft(track.getStart());
 		// sets the right part of selection area, max must be right of chart area
@@ -429,7 +424,7 @@ final class SelectionHandler {
 		// sets the selecting color in the canvas
 		ctx.setFillColor(options.getColorAsString());
 		// draws the rectangle of area selection
-		ctx.fillRect(Math.max(area.getLeft(), scaleArea.getLeft()), area.getTop(), Math.min(area.getRight(), scaleArea.getRight()) - area.getLeft(), area.getBottom() - area.getTop());
+		ctx.fillRect(Math.max(area.getLeft(), pluginArea.getLeft()), area.getTop(), Math.min(area.getRight(), pluginArea.getRight()) - area.getLeft(), area.getBottom() - area.getTop());
 		// borders
 		applyAreaBorder(ctx);
 		// option instance
@@ -492,7 +487,7 @@ final class SelectionHandler {
 		// and if an area has been selected
 		if (fireEvent && track != null && track.isValid() && chart.isEventHandled(DatasetRangeSelectionEvent.TYPE)) {
 			// gets scale
-			ScaleItem scaleItem = getScale();
+			ScaleItem scaleItem = getXScale();
 			// gets decimal (0..1) values
 			double leftDecimal = scaleItem.getDecimalForPixel(area.getLeft());
 			double rightDecimal = scaleItem.getDecimalForPixel(area.getRight());
@@ -511,16 +506,35 @@ final class SelectionHandler {
 	}
 
 	/**
-	 * Returns the scale related to the plugin.
+	 * Returns the X scale related to the plugin.
 	 * 
-	 * @return the scale related to the plugin
+	 * @return the X scale related to the plugin
 	 */
-	ScaleItem getScale() {
+	ScaleItem getXScale() {
 		// gets chart node
 		ChartNode node = chart.getNode();
 		// gets the scale element of chart
 		// using the X axis id of plugin options
 		return node.getScales().getItems().get(options.getXAxisID().value());
+	}
+
+	/**
+	 * Returns the Y scale related to the plugin.
+	 * 
+	 * @return the Y scale related to the plugin
+	 */
+	ScaleItem getYScale() {
+		// checks if Y scale has been set
+		if (options.getYAxisID() != null) {
+			// gets chart node
+			ChartNode node = chart.getNode();
+			// gets the scale element of chart
+			// using the X axis id of plugin options
+			return node.getScales().getItems().get(options.getYAxisID().value());
+		}
+		// if here, y scale not consistent
+		// then returns null
+		return null;
 	}
 
 	/**
@@ -542,7 +556,7 @@ final class SelectionHandler {
 	void refresh() {
 		// gets the scale element of chart
 		// using the X axis id of plugin options
-		ScaleItem scaleItem = getScale();
+		ScaleItem scaleItem = getXScale();
 		// gets START pixels by value
 		double startPixel = scaleItem.getPixelForDecimal(track.getStartDecimal());
 		// checks if the selection area is still consistent
@@ -586,7 +600,7 @@ final class SelectionHandler {
 			return;
 		}
 		// gets scale item
-		ScaleItem scaleitem = getScale();
+		ScaleItem scaleitem = getXScale();
 		// normalized the from and to passed
 		// if not consistent, uses the area
 		final double normalizedFrom = Checker.validOrDefault(from, scaleitem.getLeft());
@@ -1064,15 +1078,45 @@ final class SelectionHandler {
 	 * @return <code>true</code> if inside the area, otherwise <code>false</code>.
 	 */
 	private boolean isEventInChartArea(NativeAbstractMouseEvent event) {
-		// gets chart AREA
-		ChartNode node = chart.getNode();
-		ChartAreaNode areaInstance = node.getChartArea();
-		// gets scale item
-		ScaleItem scaleItem = getScale();
+		// gets plugin area
+		IsArea area = getArea();
 		// checks if inside
-		boolean isX = event.getLayerX() >= scaleItem.getLeft() && event.getLayerX() <= scaleItem.getRight();
-		boolean isY = event.getLayerY() >= areaInstance.getTop() && event.getLayerY() <= areaInstance.getBottom();
+		boolean isX = event.getLayerX() >= area.getLeft() && event.getLayerX() <= area.getRight();
+		boolean isY = event.getLayerY() >= area.getTop() && event.getLayerY() <= area.getBottom();
 		return isX && isY;
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @return
+	 */
+	private IsArea getArea() {
+		// gets result
+		SelectionArea area = new SelectionArea();
+		// sets x scale item
+		ScaleItem x = getXScale();
+		// sets X values
+		area.setLeft(x.getLeft());
+		area.setRight(x.getRight());
+		// sets y scale item
+		ScaleItem y = getYScale();
+		// checks if y scale is consistent
+		if (y != null) {
+			// sets Y values
+			area.setTop(y.getTop());
+			area.setBottom(y.getBottom());
+		} else {
+			// gets chart AREA
+			ChartNode node = chart.getNode();
+			ChartAreaNode cArea = node.getChartArea();
+			// stores chart area
+			IsArea chartArea = cArea.toArea();
+			// sets Y values
+			area.setTop(chartArea.getTop());
+			area.setBottom(chartArea.getBottom());
+		}
+		return area;
 	}
 
 }

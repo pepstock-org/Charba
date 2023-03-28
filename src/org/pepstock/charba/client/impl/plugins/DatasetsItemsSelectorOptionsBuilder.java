@@ -115,6 +115,17 @@ public final class DatasetsItemsSelectorOptionsBuilder extends AbstractBaseBuild
 	}
 
 	/**
+	 * Sets the ID of the y axis to plot this dataset on. If not specified, the chart area is used.
+	 * 
+	 * @param yAxisID the ID of the y axis to plot this dataset on. If not specified, the chart area is used.
+	 * @return builder instance
+	 */
+	public DatasetsItemsSelectorOptionsBuilder setYAxisID(String yAxisID) {
+		options.setYAxisID(yAxisID);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
+
+	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 
 	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.

@@ -35,6 +35,7 @@ import org.pepstock.charba.client.dom.enums.MouseEventType;
 import org.pepstock.charba.client.dom.enums.TouchEventType;
 import org.pepstock.charba.client.enums.DefaultScaleId;
 import org.pepstock.charba.client.enums.ModifierKey;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.options.IsEvent;
 import org.pepstock.charba.client.options.ScaleId;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -44,6 +45,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * It is managing:<br>
  * <ul>
  * <li>the X axis ID
+ * <li>the Y axis ID
  * <li>the selection color
  * <li>the border color
  * <li>the border width
@@ -115,6 +117,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 		COLOR("color"),
 		CLEAR_BY_ESC_ENABLED("enabledClearByEscape"),
 		X_AXIS_ID("xAxisID"),
+		Y_AXIS_ID("yAxisID"),
 		BORDER_COLOR("borderColor"),
 		BORDER_DASH("borderDash"),
 		BORDER_DASH_OFFSET("borderDashOffset"),
@@ -306,6 +309,48 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions im
 	@Override
 	public ScaleId getXAxisID() {
 		return getValue(Property.X_AXIS_ID, defaultOptions.getXAxisID());
+	}
+
+	/**
+	 * Sets the ID of the y axis to plot this dataset on. If not specified, the chart area is used.
+	 * 
+	 * @param yAxisID the ID of the y axis to plot this dataset on. If not specified, the chart area is used.
+	 */
+	public void setYAxisID(String yAxisID) {
+		// checks if is valid scale id
+		ScaleId.checkIfValid(yAxisID);
+		// stores
+		setValue(Property.Y_AXIS_ID, yAxisID);
+	}
+
+	/**
+	 * Sets the ID of the y axis to plot this dataset on. If not specified, the chart area is used.
+	 * 
+	 * @param yAxisID the ID of the y axis to plot this dataset on. If not specified, the chart area is used.
+	 */
+	public void setYAxisID(ScaleId yAxisID) {
+		// checks if is valid scale id
+		ScaleId.checkIfValid(yAxisID);
+		// stores
+		setValue(Property.Y_AXIS_ID, yAxisID);
+	}
+
+	/**
+	 * Returns the ID of the y axis to plot this dataset on. If not specified, the chart area is used.
+	 * 
+	 * @return the ID of the y axis to plot this dataset on. If not specified, the chart area is used.
+	 */
+	@Override
+	public ScaleId getYAxisID() {
+		// gets value as string
+		String value = getValue(Property.Y_AXIS_ID, Undefined.STRING);
+		// checks if consistent
+		if (value != null) {
+			return ScaleId.checkAndGetScaleID(value, defaultOptions.getYAxisID());
+		}
+		// if here, the value is not consistent
+		// then returns null
+		return null;
 	}
 
 	/**
