@@ -27,6 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.dom.elements.CanvasGradientItem;
 import org.pepstock.charba.client.dom.elements.CanvasPatternItem;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
+import org.pepstock.charba.client.dom.enums.FillRule;
 import org.pepstock.charba.client.enums.ColorType;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.IsArea;
@@ -37,7 +38,6 @@ import org.pepstock.charba.client.plugins.SmartPluginContainer;
 import org.pepstock.charba.client.plugins.hooks.BeforeDestroyHook;
 import org.pepstock.charba.client.plugins.hooks.BeforeDrawHook;
 import org.pepstock.charba.client.plugins.hooks.ResizeHook;
-import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * A plugin implementation to set the background color, gradient or pattern of chart.<br>
@@ -157,31 +157,46 @@ final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDraw
 		Context2dItem ctx = chart.getCanvas().getContext2d();
 		// save context
 		ctx.save();
+		// start path
+		ctx.beginPath();
 		// sets global composite operation
 		ctx.setGlobalCompositeOperation(options.getGlobalCompositeOperation());
 		// checks color types
 		if (ColorType.COLOR.equals(options.getColorType())) {
 			// set fill canvas color
 			ctx.setFillColor(options.getBackgroundColorAsString());
-			// sets background to chart HTML element
-			applyBackgroundColorToChartElement(chart, options.getBackgroundColorAsString());
 		} else if (ColorType.PATTERN.equals(options.getColorType())) {
 			// creates the pattern
 			CanvasPatternItem canvasPattern = ChartBackgroundGradientFactory.get().createPattern(chart, options.getBackgroundColorAsPattern());
 			// set fill canvas pattern
 			ctx.setFillPattern(canvasPattern);
-			// sets background to chart HTML element
-			applyBackgroundToChartElement(chart, Utilities.toCSSBackgroundProperty(options.getBackgroundColorAsPattern()));
 		} else if (ColorType.GRADIENT.equals(options.getColorType())) {
 			// creates the gradient
 			CanvasGradientItem canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, options.getBackgroundColorAsGradient(), Undefined.INTEGER);
 			// set fill canvas color
 			ctx.setFillGradient(canvasGradient);
-			// sets background to chart HTML element
-			applyBackgroundImageToChartElement(chart, Utilities.toCSSBackgroundProperty(options.getBackgroundColorAsGradient()));
 		}
-		// fills background
-		ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+		// checks if chart area must be filled
+		if (options.isFillArea()) {
+			// defines rect
+			ctx.rect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+			// fills background
+			ctx.fill();
+		} else {
+			// gets chart area
+			ChartAreaNode chartArea = chart.getNode().getChartArea();
+			// checks if area is consistent
+			if (IsArea.isConsistent(chartArea)) {
+				// fills background area
+				ctx.rect(chartArea.getLeft(), chartArea.getTop(), chartArea.getWidth(), chartArea.getHeight());
+				// defines rect
+				ctx.rect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+				// without chart area
+				ctx.fill(FillRule.EVENODD);
+			}
+		}
+		// closes path
+		ctx.closePath();
 		// restore context
 		ctx.restore();
 	}
@@ -265,48 +280,6 @@ final class ChartBackgroundColorPlugin extends SmartPlugin implements BeforeDraw
 		OPTIONS.put(id, bgOptions);
 		// returns it
 		return bgOptions;
-	}
-
-	/**
-	 * Applies the background CSS property in the chart HTML element.
-	 * 
-	 * @param chart chart instance to use to apply CSS property
-	 * @param value value of CSS property to set
-	 */
-	private void applyBackgroundToChartElement(IsChart chart, String value) {
-		// checks if chart, name and value of CSS property are consistent
-		if (IsChart.isValid(chart) && value != null) {
-			// sets style property
-			chart.getChartElement().getStyle().setBackground(value);
-		}
-	}
-
-	/**
-	 * Applies the background color CSS property in the chart HTML element.
-	 * 
-	 * @param chart chart instance to use to apply CSS property
-	 * @param value value of CSS property to set
-	 */
-	private void applyBackgroundColorToChartElement(IsChart chart, String value) {
-		// checks if chart, name and value of CSS property are consistent
-		if (IsChart.isValid(chart) && value != null) {
-			// sets style property
-			chart.getChartElement().getStyle().setBackgroundColor(value);
-		}
-	}
-
-	/**
-	 * Applies the background image CSS property in the chart HTML element.
-	 * 
-	 * @param chart chart instance to use to apply CSS property
-	 * @param value value of CSS property to set
-	 */
-	private void applyBackgroundImageToChartElement(IsChart chart, String value) {
-		// checks if chart, name and value of CSS property are consistent
-		if (IsChart.isValid(chart) && value != null) {
-			// sets style property
-			chart.getChartElement().getStyle().setBackgroundImage(value);
-		}
 	}
 
 }

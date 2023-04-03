@@ -176,4 +176,14 @@ public final class ChartBackgroundColorOptionsBuilder extends AbstractBaseBuilde
 		return IsBuilder.checkAndGetIfValid(this);
 	}
 
+	/**
+	 * Sets <code>true</code> if the want to fill the chart area with also the canvas background color.
+	 *
+	 * @param fillArea <code>true</code> if the want to fill the chart area with also the canvas background color.
+	 * @return new builder instance
+	 */
+	public ChartBackgroundColorOptionsBuilder setFillArea(boolean fillArea) {
+		options.setFillArea(fillArea);
+		return IsBuilder.checkAndGetIfValid(this);
+	}
 }

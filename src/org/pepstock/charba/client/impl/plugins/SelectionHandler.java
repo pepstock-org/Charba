@@ -1087,9 +1087,9 @@ final class SelectionHandler {
 	}
 
 	/**
-	 * FIXME
+	 * Returns the plugin selected area
 	 * 
-	 * @return
+	 * @return the selected area
 	 */
 	private IsArea getArea() {
 		// gets result

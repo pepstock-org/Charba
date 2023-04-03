@@ -47,7 +47,8 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 		AREA_COLOR_TYPE("areaColorType"),
 		BACKGROUND_COLOR("backgroundColor"),
 		COLOR_TYPE("colorType"),
-		GLOBAL_COMPOSITE_OPERATION("globalCompositeOperation");
+		GLOBAL_COMPOSITE_OPERATION("globalCompositeOperation"),
+		FILL_AREA("fillArea");
 
 		// name value of property
 		private final String value;
@@ -449,5 +450,24 @@ public final class ChartBackgroundColorOptions extends AbstractPluginOptions imp
 	@Override
 	public GlobalCompositeOperation getGlobalCompositeOperation() {
 		return getValue(Property.GLOBAL_COMPOSITE_OPERATION, GlobalCompositeOperation.values(), defaultOptions.getGlobalCompositeOperation());
+	}
+
+	/**
+	 * Sets <code>true</code> if the want to fill the chart area with also the canvas background color.
+	 *
+	 * @param fillArea <code>true</code> if the want to fill the chart area with also the canvas background color.
+	 */
+	public void setFillArea(boolean fillArea) {
+		setValue(Property.FILL_AREA, fillArea);
+	}
+
+	/**
+	 * Returns <code>true</code> if the want to fill the chart area with also the canvas background color.
+	 *
+	 * @return <code>true</code> if the want to fill the chart area with also the canvas background color.
+	 */
+	@Override
+	public boolean isFillArea() {
+		return getValue(Property.FILL_AREA, defaultOptions.isFillArea());
 	}
 }

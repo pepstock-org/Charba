@@ -112,4 +112,12 @@ interface IsChartBackgroundColorDefaultOptions {
 		return GlobalCompositeOperation.SOURCE_OVER;
 	}
 
+	/**
+	 * Returns <code>true</code> if the want to fill the chart area with also the canvas background color.
+	 *
+	 * @return <code>true</code> if the want to fill the chart area with also the canvas background color.
+	 */
+	default boolean isFillArea() {
+		return true;
+	}
 }

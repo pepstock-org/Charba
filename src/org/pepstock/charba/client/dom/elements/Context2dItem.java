@@ -30,6 +30,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.dom.BaseHtmlElement;
+import org.pepstock.charba.client.dom.enums.FillRule;
 import org.pepstock.charba.client.dom.enums.GlobalCompositeOperation;
 import org.pepstock.charba.client.dom.enums.Repetition;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
@@ -1030,6 +1031,31 @@ public final class Context2dItem extends BaseHtmlElement {
 	 */
 	@JsMethod
 	public native void fill();
+
+	/**
+	 * Fills the current or given path with the current fill style.
+	 * 
+	 * @param fillRule the algorithm by which to determine if a point is inside or outside the filling region.
+	 */
+	@JsMethod
+	private native void fill(String fillRule);
+
+	/**
+	 * Fills the current or given path with the current fill style.
+	 * 
+	 * @param fillRule the algorithm by which to determine if a point is inside or outside the filling region.
+	 */
+	@JsOverlay
+	public void fill(FillRule fillRule) {
+		// checks if argument is consistent
+		if (Key.isValid(fillRule)) {
+			// sets the fill color
+			fill(fillRule.value());
+		} else {
+			// invokes the standard fill
+			fill();
+		}
+	}
 
 	/**
 	 * Draws a rectangle that is filled according to the current fill style.<br>

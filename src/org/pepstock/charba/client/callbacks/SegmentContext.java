@@ -79,8 +79,8 @@ public final class SegmentContext extends ChartContext {
 	public SegmentContext(NativeObject nativeObject) {
 		super(nativeObject);
 		// loads point 0 and point 1
-		this.point0 = new SegementDatasetElement(getValue(Property.P0));
-		this.point1 = new SegementDatasetElement(getValue(Property.P1));
+		this.point0 = new SegmentDatasetElement(getValue(Property.P0));
+		this.point1 = new SegmentDatasetElement(getValue(Property.P1));
 	}
 
 	/**
@@ -161,14 +161,14 @@ public final class SegmentContext extends ChartContext {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	private static final class SegementDatasetElement extends PointElement {
+	private static final class SegmentDatasetElement extends PointElement {
 
 		/**
 		 * Creates the object with native object instance to be wrapped.
 		 * 
 		 * @param nativeObject native object instance to be wrapped.
 		 */
-		private SegementDatasetElement(NativeObject nativeObject) {
+		private SegmentDatasetElement(NativeObject nativeObject) {
 			super(new CallbacksEnvelop<>(nativeObject));
 		}
 

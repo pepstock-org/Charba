@@ -306,6 +306,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * add `init` option to all annotations configuration in order to define the init animation of the annotation elements.
  * add `interpolator` option to `AnimationCollection` class in order to enable a custom interpolation during the animation.
  * enable `DatasetItemsSelector` plugin to X axes in reverse and/or stacked mode.
+ * add `fillArea` option to chart background color plugin in order to color everything excluding the chart area.
 
 ### Development
 
