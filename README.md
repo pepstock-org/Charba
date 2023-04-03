@@ -275,44 +275,6 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
-
-### Breaking changes
-
- * remove `AnimationCollectionKey`. Use `Key` instead.
- * remove `AnimationPropertyKey`. Use `Key` instead.
- * rename `has` method to `contains` in `Animations` options and configuration classes and `UpdateConfiguration` class.
- * rename `remove` method to `delete` in `Animations` options and configuration classes and `UpdateConfiguration` class.
- * rename `TransitionKey` class to `TransitionMode` one.
- * rename `DefaultTransitionKey` class to `DefaultTransitionMode` one.
- * remove `Font` class from annotation plugin package in favor to `IsFont` interface.
- * move `FontsCallback` interface from treemap package to the callbacks (common) ones.
- * move `ColorsCallback` interface from treemap package to the callbacks (common) ones.
-
-### Features
-
- * import CHART.JS ANNOTATION plugin version [v2.2.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v2.2.1).
- * import CHART.JS ZOOM plugin version [v2.0.1](https://github.com/chartjs/chartjs-plugin-zoom/releases/tag/v2.0.1).
- * import LUXON datetime library version [v3.3.0](https://github.com/moment/luxon/releases/tag/3.3.0).
- * add `Animations` options and configuration to annotation plugin.
- * enable curve line annotation, adding `curve` and `controlPoint` options to annotation plugin.
- * add `imageOpacity` option to label and inner label annotations configuration.
- * enable multiple fonts on the label and inner label annotations configuration for multiple lines content.
- * enable multiple colors on the label and inner label annotations configuration for multiple lines content.
- * add `beforeDraw` and `afterDraw` hook options to all annotations configuration.
- * add `init` option to all annotations configuration in order to define the init animation of the annotation elements.
- * add `interpolator` option to `AnimationCollection` class in order to enable a custom interpolation during the animation.
- * enable `DatasetItemsSelector` plugin to X axes in reverse and/or stacked mode.
- * add `fillArea` option to chart background color plugin in order to color everything excluding the chart area.
-
-### Development
-
- * change dependency for Google Closure Compiler, version [v20230228](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20230228). 
- * remove dependency from GWT DEV package.
-
 License
 -------
 
