@@ -1093,19 +1093,19 @@ final class SelectionHandler {
 	 */
 	private IsArea getArea() {
 		// gets result
-		SelectionArea area = new SelectionArea();
+		SelectionArea selectionArea = new SelectionArea();
 		// sets x scale item
 		ScaleItem x = getXScale();
 		// sets X values
-		area.setLeft(x.getLeft());
-		area.setRight(x.getRight());
+		selectionArea.setLeft(x.getLeft());
+		selectionArea.setRight(x.getRight());
 		// sets y scale item
 		ScaleItem y = getYScale();
 		// checks if y scale is consistent
 		if (y != null) {
 			// sets Y values
-			area.setTop(y.getTop());
-			area.setBottom(y.getBottom());
+			selectionArea.setTop(y.getTop());
+			selectionArea.setBottom(y.getBottom());
 		} else {
 			// gets chart AREA
 			ChartNode node = chart.getNode();
@@ -1113,10 +1113,10 @@ final class SelectionHandler {
 			// stores chart area
 			IsArea chartArea = cArea.toArea();
 			// sets Y values
-			area.setTop(chartArea.getTop());
-			area.setBottom(chartArea.getBottom());
+			selectionArea.setTop(chartArea.getTop());
+			selectionArea.setBottom(chartArea.getBottom());
 		}
-		return area;
+		return selectionArea;
 	}
 
 }
