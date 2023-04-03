@@ -1079,10 +1079,10 @@ final class SelectionHandler {
 	 */
 	private boolean isEventInChartArea(NativeAbstractMouseEvent event) {
 		// gets plugin area
-		IsArea area = getArea();
+		IsArea selectionArea = getArea();
 		// checks if inside
-		boolean isX = event.getLayerX() >= area.getLeft() && event.getLayerX() <= area.getRight();
-		boolean isY = event.getLayerY() >= area.getTop() && event.getLayerY() <= area.getBottom();
+		boolean isX = event.getLayerX() >= selectionArea.getLeft() && event.getLayerX() <= selectionArea.getRight();
+		boolean isY = event.getLayerY() >= selectionArea.getTop() && event.getLayerY() <= selectionArea.getBottom();
 		return isX && isY;
 	}
 
