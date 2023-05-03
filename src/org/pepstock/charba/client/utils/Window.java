@@ -18,10 +18,15 @@
 */
 package org.pepstock.charba.client.utils;
 
+import org.pepstock.charba.client.callbacks.RequestAnimationCallback;
+import org.pepstock.charba.client.commons.ImmutableDate;
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.WindowHelper.OnBeforePrintCallback;
+import org.pepstock.charba.client.utils.WindowHelper.OnRequestAnimationCallback;
 
 import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -188,6 +193,25 @@ public final class Window {
 	public static native String btoa(String str);
 
 	/**
+	 * Tells the browser that you wish to perform an animation and requests that the browser calls a specified function to update an animation right before the next repaint.<br>
+	 * The method takes a callback as an argument to be invoked before the repaint.
+	 * 
+	 * @param callback the function to call when it's time to update your animation for the next repaint.
+	 * @return A integer integer value, the request id, that uniquely identifies the entry in the callback list.<br>
+	 *         This is a non-zero value, but you may not make any other assumptions about its value.<br>
+	 *         You can pass this value to <code>cancelAnimationFrame()</code> to cancel the refresh callback request.
+	 */
+	@JsMethod(name = "requestAnimationFrame")
+	private static native int nativeRequestAnimationFrame(OnRequestAnimationCallback callback);
+
+	/**
+	 * Cancels an animation frame request previously scheduled through a call to #{@link Window#requestAnimationFrame(RequestAnimationCallback)}.
+	 * 
+	 * @param handle The ID value returned by the call to {@link Window#requestAnimationFrame(RequestAnimationCallback)} that requested the callback.
+	 */
+	public static native void cancelAnimationFrame(int handle);
+
+	/**
 	 * CSS media queries allow changing styles when printing a page. The CSS applied from these media queries may cause charts to need to resize. However, the resize won't happen
 	 * automatically. To support resizing charts when printing, one needs to hook the <code>onbeforeprint</code> event and manually trigger resizing of each chart.
 	 * 
@@ -195,6 +219,26 @@ public final class Window {
 	@JsOverlay
 	public static void enableResizeOnBeforePrint() {
 		WindowHelper.get().enableResizeOnBeforePrint();
+	}
+
+	/**
+	 * Tells the browser that you wish to perform an animation and requests that the browser calls a specified function to update an animation right before the next repaint.<br>
+	 * The method takes a callback as an argument to be invoked before the repaint.
+	 * 
+	 * @param callback the function to call when it's time to update your animation for the next repaint.
+	 * @return A integer integer value, the request id, that uniquely identifies the entry in the callback list.<br>
+	 *         This is a non-zero value, but you may not make any other assumptions about its value.<br>
+	 *         You can pass this value to {@link Window#cancelAnimationFrame(int)} to cancel the refresh callback request.
+	 */
+	@JsOverlay
+	public static int requestAnimationFrame(RequestAnimationCallback callback) {
+		// checks consistency of callback
+		if (callback != null) {
+			// sets callback
+			return nativeRequestAnimationFrame((timestamp) -> callback.invoke(new ImmutableDate((long) timestamp)));
+		}
+		// if here the argument is not consistent
+		return Undefined.INTEGER;
 	}
 
 }

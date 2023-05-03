@@ -52,6 +52,24 @@ final class WindowHelper {
 		void call(Object event);
 	}
 
+	/**
+	 * Java script FUNCTION callback to tell the browser that you wish to perform an animation and requests that the browser calls a specified function to update an animation right
+	 * before the next repaint.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	@JsFunction
+	interface OnRequestAnimationCallback {
+
+		/**
+		 * Tells the browser that you wish to perform an animation and requests that the browser calls a specified function to update an animation right before the next repaint.
+		 * 
+		 * @param timestamp the callback function is passed one single argument indicating the point in time when request animation frame starts to execute callback functions.
+		 */
+		void call(double timestamp);
+	}
+
 	// static instance for singleton
 	private static final WindowHelper INSTANCE = new WindowHelper();
 
