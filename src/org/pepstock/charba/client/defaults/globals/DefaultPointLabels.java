@@ -22,6 +22,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
+import org.pepstock.charba.client.enums.Display;
 
 /**
  * CHART.JS default values for POINTLABELS element.
@@ -30,7 +31,7 @@ import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
  */
 public final class DefaultPointLabels implements IsDefaultPointLabels {
 
-	private static final boolean DEFAULT_DISPLAY = false;
+	private static final Display DEFAULT_DISPLAY = Display.FALSE;
 
 	private static final int DEFAULT_PADDING = 5;
 
@@ -72,10 +73,10 @@ public final class DefaultPointLabels implements IsDefaultPointLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getDisplay()
 	 */
 	@Override
-	public boolean isDisplay() {
+	public Display getDisplay() {
 		return DEFAULT_DISPLAY;
 	}
 

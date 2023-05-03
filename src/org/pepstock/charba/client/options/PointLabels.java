@@ -26,6 +26,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.BarBorderRadius;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -124,13 +125,38 @@ public final class PointLabels extends AbstractModel<AbstractScale, IsDefaultPoi
 	}
 
 	/**
-	 * If <code>true</code>, labels are shown.
+	 * The display option controls the visibility of labels.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the labels are visible only if there is enough space to draw them.
 	 * 
-	 * @return if <code>true</code>, labels are shown.
+	 * @param display display option controls the visibility of labels
+	 */
+	public void setDisplay(Display display) {
+		// checks if is setting auto
+		if (Display.AUTO.equals(display)) {
+			setValueAndAddToParent(Property.DISPLAY, display);
+		} else {
+			// otherwise transforms in the a boolean
+			setDisplay(Display.TRUE.equals(display));
+		}
+	}
+
+	/**
+	 * The display option controls the visibility of labels.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the labels are visible only if there is enough space to draw them.
+	 * 
+	 * @return display option controls the visibility of labels
 	 */
 	@Override
-	public boolean isDisplay() {
-		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
+	public Display getDisplay() {
+		// checks if is boolean
+		if (isType(Property.DISPLAY, ObjectType.BOOLEAN)) {
+			// gets value
+			boolean value = getValue(Property.DISPLAY, true);
+			// returns value
+			return value ? Display.TRUE : Display.FALSE;
+		}
+		// returns value. Must be auto
+		return getValue(Property.DISPLAY, Display.values(), getDefaultValues().getDisplay());
 	}
 
 	/**

@@ -36,6 +36,7 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.BarBorderRadius;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.options.IsScriptableFontProvider;
 
 import jsinterop.annotations.JsFunction;
@@ -249,12 +250,23 @@ public class RadialPointLabels extends AxisContainer implements IsScriptableFont
 	}
 
 	/**
-	 * If true, labels are shown
+	 * The display option controls the visibility of labels.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the labels are visible only if there is enough space to draw them.
 	 * 
-	 * @return if true, labels are shown.
+	 * @param display display option controls the visibility of labels
 	 */
-	public boolean isDisplay() {
-		return getAxis().getScale().getPointLabels().isDisplay();
+	public void setDisplay(Display display) {
+		getAxis().getScale().getPointLabels().setDisplay(display);
+	}
+
+	/**
+	 * The display option controls the visibility of labels.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the labels are visible only if there is enough space to draw them.
+	 * 
+	 * @return display option controls the visibility of labels
+	 */
+	public Display getDisplay() {
+		return getAxis().getScale().getPointLabels().getDisplay();
 	}
 
 	/**

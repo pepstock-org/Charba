@@ -21,6 +21,7 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultFont;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.options.PointLabels;
 
 /**
@@ -64,11 +65,11 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getDisplay()
 	 */
 	@Override
-	public boolean isDisplay() {
-		return pointLabels.isDisplay();
+	public Display getDisplay() {
+		return pointLabels.getDisplay();
 	}
 
 	/*

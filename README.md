@@ -280,6 +280,10 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Breaking changes
+
+ * remove `isDisplay` method from `PointLabels` options and `RadialPointLabels` configuration classes. Use getDisplay instead, to get the display policy.
+
 ### Features
 
  * import CHART.JS version [v4.3.0](https://github.com/chartjs/Chart.js/releases/tag/v4.3.0).

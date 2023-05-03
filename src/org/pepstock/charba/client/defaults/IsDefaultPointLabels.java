@@ -18,6 +18,8 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.Display;
+
 /**
  * Interface to define point labels object defaults.
  * 
@@ -33,11 +35,11 @@ public interface IsDefaultPointLabels extends IsDefaultFontContainer {
 	IsDefaultPadding getBackdropPadding();
 
 	/**
-	 * Returns if the title is shown.
+	 * Returns if the labels is shown.
 	 * 
-	 * @return if the title is shown.
+	 * @return if the labels is shown.
 	 */
-	boolean isDisplay();
+	Display getDisplay();
 
 	/**
 	 * Returns the padding between chart and point labels, in pixels.
