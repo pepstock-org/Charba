@@ -282,6 +282,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
+ * import CHART.JS GEO controller version [v4.2.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v4.2.0).
  * enable `Window.requestAnimationFrame`.
 
 License
