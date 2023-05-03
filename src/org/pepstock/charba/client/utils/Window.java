@@ -235,7 +235,7 @@ public final class Window {
 		// checks consistency of callback
 		if (callback != null) {
 			// sets callback
-			return nativeRequestAnimationFrame((timestamp) -> callback.invoke(new ImmutableDate((long) timestamp)));
+			return nativeRequestAnimationFrame(timestamp -> callback.invoke(new ImmutableDate((long) timestamp)));
 		}
 		// if here the argument is not consistent
 		return Undefined.INTEGER;
