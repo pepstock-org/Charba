@@ -203,8 +203,8 @@
  
    THIRD-PARTY LIBRARIES
  
-   This product bundles chartjs-plugin-annotation.min.js version 2.2.1, which is available under a "MIT" license.
-   For details, see https://github.com/chartjs/chartjs-plugin-annotation/blob/v2.2.1/LICENSE.md
+   This product bundles chartjs-plugin-annotation.min.js version 3.0.1, which is available under a "MIT" license.
+   For details, see https://github.com/chartjs/chartjs-plugin-annotation/blob/v3.0.1/LICENSE.md
 
 
    This product bundles hammer.min.js version 2.0.8, which is available under a "MIT" license.
