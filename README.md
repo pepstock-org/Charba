@@ -291,6 +291,10 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import CHART.JS ANNOTATION plugin version [v3.0.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v3.0.1).
  * enable `Window.requestAnimationFrame`.
  * enable position of cartesian axes by a relation to another axis, by `AxisPositionItem` class.
+ 
+### Development
+
+ * change dependency for Google Closure Compiler, version [v20230502](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20230502).  
 
 License
 -------
