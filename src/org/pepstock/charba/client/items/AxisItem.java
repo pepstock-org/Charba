@@ -270,4 +270,17 @@ public final class AxisItem extends ScaleItem {
 		setValue(BaseBoxNodeItem.Property.POSITION, position);
 	}
 
+	/**
+	 * Sets the position of axis
+	 * 
+	 * @param position the position of axis
+	 */
+	public void setPosition(AxisPositionItem position) {
+		// checks if position is consistent
+		if (position != null && position.isConsistent()) {
+			// stores the value
+			setValue(BaseBoxNodeItem.Property.POSITION, position);
+		}
+	}
+
 }

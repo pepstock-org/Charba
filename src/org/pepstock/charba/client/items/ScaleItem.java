@@ -261,6 +261,22 @@ public class ScaleItem extends BaseBoxNodeItem<AxisPosition> {
 	}
 
 	/**
+	 * Returns the position of the axis at a specific value of another axis.
+	 * 
+	 * @return position of axis.
+	 */
+	public final AxisPositionItem getPositionAsItem() {
+		// checks if property is a object then it is a position
+		if (isType(BaseBoxNodeItem.Property.POSITION, ObjectType.OBJECT)) {
+			// creates and returns the item
+			return new AxisPositionItem(getValue(BaseBoxNodeItem.Property.POSITION));
+		}
+		// if here, the position is a string
+		// therefore returns null
+		return null;
+	}
+
+	/**
 	 * Returns the max value of scale.
 	 * 
 	 * @return the max value of scale.

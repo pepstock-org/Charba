@@ -21,11 +21,13 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.BoundsCallback;
 import org.pepstock.charba.client.callbacks.NativeCallback;
+import org.pepstock.charba.client.callbacks.ScaleContext;
 import org.pepstock.charba.client.callbacks.ScaleOffsetCallback;
 import org.pepstock.charba.client.callbacks.ScalePositionCallback;
 import org.pepstock.charba.client.callbacks.ScaleWeightCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback;
 import org.pepstock.charba.client.callbacks.ScriptableUtil;
 import org.pepstock.charba.client.callbacks.StackCallback;
@@ -38,6 +40,7 @@ import org.pepstock.charba.client.enums.AxisKind;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Bounds;
 import org.pepstock.charba.client.enums.DefaultScaleId;
+import org.pepstock.charba.client.items.AxisPositionItem;
 import org.pepstock.charba.client.options.ScaleId;
 
 /**
@@ -65,7 +68,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	// -- CALLBACKS PROXIES FOR AXIS PROPERTIES ---
 	// --------------------------------------------
 	// callback proxy to invoke the position function
-	private final CallbackProxy<ProxyStringCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyObjectCallback> positionCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the offset function
 	private final CallbackProxy<ProxyBooleanCallback> offsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the bounds function
@@ -160,7 +163,7 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		// -- SET CALLBACKS to PROXIES x AXIS PROPERTIES ---
 		// -------------------------------------------------
 		// sets function to proxy callback in order to invoke the java interface
-		this.positionCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getPositionCallback(), getDefaultValues().getPosition()).value());
+		this.positionCallbackProxy.setCallback(context -> onPosition(createContext(context), getPositionCallback(), getDefaultValues().getPosition()));
 		// sets function to proxy callback in order to invoke the java interface
 		this.offsetCallbackProxy.setCallback(context -> ScriptableUtil.getOptionValue(createContext(context), getOffsetCallback(), getDefaultValues().isOffset()).booleanValue());
 		// sets function to proxy callback in order to invoke the java interface
@@ -292,6 +295,27 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 */
 	public AxisPosition getPosition() {
 		return getScale().getPosition();
+	}
+
+	/**
+	 * Sets the position of the axis at a specific value of another axis.
+	 * 
+	 * @param position position of axis
+	 */
+	public void setPosition(AxisPositionItem position) {
+		// resets callback
+		setPosition((ScalePositionCallback) null);
+		// stores value
+		getScale().setPosition(position);
+	}
+
+	/**
+	 * Returns the position of the axis at a specific value of another axis.
+	 * 
+	 * @return position of axis.
+	 */
+	public AxisPositionItem getPositionAsItem() {
+		return getScale().getPositionAsItem();
 	}
 
 	/**
@@ -566,4 +590,36 @@ public abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		// stores and manages callback
 		setCallback(getConfiguration(), Property.STACK, stackCallback);
 	}
+
+	// -----------------------
+	// INTERNAL methods
+	// -----------------------
+
+	/**
+	 * Invoked to manage the position callback.
+	 * 
+	 * @param context context of scale
+	 * @param callback callback instance
+	 * @param defaultValue the default value used if the callback returns inconsistent value.
+	 * @return the axis position by {@link AxisPosition} or {@link AxisPositionItem}.
+	 */
+	private Object onPosition(ScaleContext context, ScalePositionCallback callback, AxisPosition defaultValue) {
+		// gets value
+		Object result = ScriptableUtil.getOptionValue(context, callback);
+		// checks if consistent
+		if (result instanceof AxisPosition) {
+			// casts result
+			AxisPosition value = (AxisPosition) result;
+			// returns result of callback
+			return value.value();
+		} else if (result instanceof AxisPositionItem) {
+			// casts result
+			AxisPositionItem value = (AxisPositionItem) result;
+			// returns result of callback
+			return value.nativeObject();
+		}
+		// default result
+		return defaultValue.value();
+	}
+
 }

@@ -21,6 +21,7 @@ package org.pepstock.charba.client.defaults;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Bounds;
 import org.pepstock.charba.client.enums.Display;
+import org.pepstock.charba.client.items.AxisPositionItem;
 
 /**
  * Interface to define scale/axis object defaults.
@@ -193,6 +194,13 @@ public interface IsDefaultScale {
 	 * @return position of axis.
 	 */
 	AxisPosition getPosition();
+
+	/**
+	 * Returns the position of the axis at a specific value of another axis.
+	 * 
+	 * @return position of axis.
+	 */
+	AxisPositionItem getPositionAsItem();
 
 	/**
 	 * Returns the property controls the scale boundary strategy (bypassed by min/max time options).

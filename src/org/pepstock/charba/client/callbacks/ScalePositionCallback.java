@@ -19,7 +19,6 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.configuration.CartesianAxis;
-import org.pepstock.charba.client.enums.AxisPosition;
 
 /**
  * Callback interface to set <code>position</code> property at runtime, for {@link CartesianAxis}.
@@ -27,6 +26,6 @@ import org.pepstock.charba.client.enums.AxisPosition;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public interface ScalePositionCallback extends Scriptable<AxisPosition, ScaleContext> {
+public interface ScalePositionCallback extends Scriptable<Object, ScaleContext> {
 
 }

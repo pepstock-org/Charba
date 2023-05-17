@@ -31,6 +31,7 @@ import org.pepstock.charba.client.defaults.IsDefaultTime;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Bounds;
 import org.pepstock.charba.client.enums.Display;
+import org.pepstock.charba.client.items.AxisPositionItem;
 import org.pepstock.charba.client.items.Undefined;
 
 /**
@@ -239,6 +240,16 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public AxisPosition getPosition() {
 		return AxisPosition.TOP;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getPositionAsItem()
+	 */
+	@Override
+	public AxisPositionItem getPositionAsItem() {
+		return null;
 	}
 
 	/*

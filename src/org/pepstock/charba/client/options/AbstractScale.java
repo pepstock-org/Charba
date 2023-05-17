@@ -33,6 +33,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.enums.AxisPosition;
 import org.pepstock.charba.client.enums.Bounds;
 import org.pepstock.charba.client.enums.Display;
+import org.pepstock.charba.client.items.AxisPositionItem;
 import org.pepstock.charba.client.items.Undefined;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -773,13 +774,48 @@ public abstract class AbstractScale extends AbstractModel<Options, IsDefaultScal
 	@Override
 	public final AxisPosition getPosition() {
 		// checks if property is a string then it is a position
-		// checks if not a number in order to leverage on default
-		if (!isType(Property.POSITION, ObjectType.NUMBER)) {
+		if (isType(Property.POSITION, ObjectType.STRING)) {
 			return getValue(Property.POSITION, AxisPosition.values(), getDefaultValues().getPosition());
 		}
 		// if here, the position is a number
 		// therefore returns the default
 		return getDefaultValues().getPosition();
+	}
+
+	/**
+	 * Sets the position of the axis at a specific value of another axis.
+	 * 
+	 * @param position position of axis
+	 */
+	public final void setPosition(AxisPositionItem position) {
+		// checks if position is consistent
+		if (position != null && position.isConsistent()) {
+			// stores the value
+			setValueAndAddToParent(Property.POSITION, position);
+		} else {
+			// if here the value is not consistent
+			// then remove keys and used the default
+			remove(Property.POSITION);
+		}
+	}
+
+	/**
+	 * Returns the position of the axis at a specific value of another axis.
+	 * 
+	 * @return position of axis.
+	 */
+	@Override
+	public final AxisPositionItem getPositionAsItem() {
+		// checks if property is a object then it is a position
+		if (isType(Property.POSITION, ObjectType.OBJECT)) {
+			// creates envelop
+			OptionsEnvelop<NativeObject> envelop = new OptionsEnvelop<>(getValue(Property.POSITION));
+			// creates and returns the item
+			return new AxisPositionItem(envelop);
+		}
+		// if here, the position is a string
+		// therefore returns the default
+		return getDefaultValues().getPositionAsItem();
 	}
 
 	/**

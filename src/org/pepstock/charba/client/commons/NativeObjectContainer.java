@@ -1637,7 +1637,7 @@ public abstract class NativeObjectContainer {
 			// creates and returns a date
 			return new ImmutableDate((long) value);
 		}
-		// the property is not a string
+		// the property is not a number
 		// then returns undefined value
 		return defaultsValue;
 	}

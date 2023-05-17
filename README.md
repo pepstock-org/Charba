@@ -290,6 +290,7 @@ Here you can find the list of enhancements and updates available on `master` bra
  * import CHART.JS GEO controller version [v4.2.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v4.2.0).
  * import CHART.JS ANNOTATION plugin version [v3.0.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v3.0.1).
  * enable `Window.requestAnimationFrame`.
+ * enable position of cartesian axes by a relation to another axis, by `AxisPositionItem` class.
 
 License
 -------
