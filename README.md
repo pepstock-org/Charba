@@ -282,7 +282,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Breaking changes
 
- * remove `isDisplay` method from `PointLabels` options and `RadialPointLabels` configuration classes. Use getDisplay instead, to get the display policy.
+ * remove `isDisplay` method from `PointLabels` options and `RadialPointLabels` configuration classes. Use `getDisplay` instead, to get the display policy.
 
 ### Features
 
