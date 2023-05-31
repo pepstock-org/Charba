@@ -39,9 +39,9 @@ Even if **Charba** was born only as GWT chart library, as of version 3, **Charba
 Building
 --------
 
-To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.3/build.xml).
+To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.4/build.xml).
 
-The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.3/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
+The [Ant build.xml](https://github.com/pepstock-org/Charba/blob/6.4/build.xml) is able to build the 2 artifacts, related to the 2 distributions available.
 
 The first distribution is a **Charba** file without any GWT dependency (but working on GWT anyway), consumable also in other [J2CL - JavaToClosure](https://github.com/google/j2cl) frameworks, like [Google Elemental2](https://github.com/google/elemental2) and [Elemento](https://github.com/hal/elemento).
 
@@ -55,7 +55,7 @@ To build the project, execute `buildBinaryGwt` target.
 
 It creates a `charba-[version.release]-gwt.jar` file in `dist` folder, ready to be included in your project.
 
-[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_63.png)](https://github.com/pepstock-org/Charba-Showcase/blob/6.3/src/org/pepstock/charba/showcase/client/views/HomeView.java)
+[![Charba](https://github.com/pepstock-org/Charba-Wiki/blob/master/static/img/charba_jar_trend_64.png)](https://github.com/pepstock-org/Charba-Showcase/blob/6.4/src/org/pepstock/charba/showcase/client/views/HomeView.java)
 
 Installation
 ------------
@@ -70,18 +70,18 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>6.3</version>
+    <version>6.4</version>
     <!-- for GWT -->
-    <version>6.3-gwt</version>
+    <version>6.4-gwt</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="6.3"/>
+<dependency org="org.pepstock" name="charba" rev="6.4"/>
 <!-- for GWT -->
-<dependency org="org.pepstock" name="charba" rev="6.3-gwt"/>
+<dependency org="org.pepstock" name="charba" rev="6.4-gwt"/>
 ```
 
 To install in your GWT project, both for GWT and for J2CL artifacts, you must the following configuration in your GWT project module configuration:
@@ -249,7 +249,7 @@ Documentation
 
 All **Charba** documentation will be maintained in [Charba-Wiki](https://github.com/pepstock-org/Charba-Wiki) project.
 
-API JavaDoc for version **6.3** is published [here](https://pepstock-org.github.io/Charba/6.3/index.html).
+API JavaDoc for version **6.4** is published [here](https://pepstock-org.github.io/Charba/6.4/index.html).
 
 You can also access the previous API JavaDoc, because every version is published to `https://pepstock-org.github.io/Charba/[version.release]`.
 
@@ -267,34 +267,6 @@ See [Charba showcase built by J2CL](https://pepstock-org.github.io/Charba-Showca
 See also [Charba showcase J2CL source code](https://github.com/pepstock-org/Charba-Showcase-J2CL) on GitHub as starting point, if you are going to use on J2CL.
 
 The samples are going to reflect what CHART.JS samples are showing [here](http://www.chartjs.org/samples/latest/).
-
-Continuous integration and quality gate
----------------------------------------
-
-**Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
-
-At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
-
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
-
-### Breaking changes
-
- * remove `isDisplay` method from `PointLabels` options and `RadialPointLabels` configuration classes. Use `getDisplay` instead, to get the display policy.
-
-### Features
-
- * import CHART.JS version [v4.3.0](https://github.com/chartjs/Chart.js/releases/tag/v4.3.0).
- * import CHART.JS GEO controller version [v4.2.0](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v4.2.0).
- * import CHART.JS ANNOTATION plugin version [v3.0.1](https://github.com/chartjs/chartjs-plugin-annotation/releases/tag/v3.0.1).
- * enable `Window.requestAnimationFrame`.
- * enable position of cartesian axes by a relation to another axis, by `AxisPositionItem` class.
- 
-### Development
-
- * change dependency for Google Closure Compiler, version [v20230502](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20230502).  
 
 License
 -------
