@@ -34,7 +34,6 @@ import org.pepstock.charba.client.controllers.ControllerProvider;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.dom.elements.Context2dItem;
-import org.pepstock.charba.client.dom.elements.ImageData;
 import org.pepstock.charba.client.dom.elements.TextMetricsItem;
 import org.pepstock.charba.client.dom.enums.TextBaseline;
 import org.pepstock.charba.client.enums.TextAlign;
@@ -50,7 +49,8 @@ import org.pepstock.charba.client.options.TransitionMode;
 import org.pepstock.charba.client.utils.Utilities;
 
 /**
- * Controller implementation to create charts like meter of gauges, extending doughnut chart.
+ * Controller implementation to create charts like meter of gauges, extending
+ * doughnut chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -81,12 +81,15 @@ final class BaseMeterController extends AbstractController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#onBeforeInitialize(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
+	 * @see
+	 * org.pepstock.charba.client.Controller#onBeforeInitialize(org.pepstock.charba.
+	 * client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onBeforeInitialize(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
-		Checker.assertCheck(Controller.isConsistent(this, context, chart), "Initialize method arguments are not consistent");
+		Checker.assertCheck(Controller.isConsistent(this, context, chart),
+				"Initialize method arguments are not consistent");
 		// gets the data set at index
 		Dataset dataset = chart.getData().getDatasets().get(context.getIndex());
 		// casts to meter data set
@@ -103,13 +106,16 @@ final class BaseMeterController extends AbstractController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#onBeforeUpdate(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
+	 * @see
+	 * org.pepstock.charba.client.Controller#onBeforeUpdate(org.pepstock.charba.
+	 * client.controllers.ControllerContext, org.pepstock.charba.client.IsChart,
 	 * org.pepstock.charba.client.options.TransitionMode)
 	 */
 	@Override
 	public void onBeforeUpdate(ControllerContext context, IsChart chart, TransitionMode mode) {
 		// checks if arguments are consistent
-		Checker.assertCheck(Controller.isConsistent(this, context, chart), "Before updating method arguments are not consistent");
+		Checker.assertCheck(Controller.isConsistent(this, context, chart),
+				"Before updating method arguments are not consistent");
 		// gets options reference
 		MeterOptions options = null;
 		// checks if meter chart
@@ -128,20 +134,25 @@ final class BaseMeterController extends AbstractController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#onBeforeDraw(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
+	 * @see
+	 * org.pepstock.charba.client.Controller#onBeforeDraw(org.pepstock.charba.client
+	 * .controllers.ControllerContext, org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onBeforeDraw(ControllerContext context, IsChart chart) {
 		// checks if arguments are consistent
 		// checks if the index is 0 because
 		// only the data set 0 contains my value
-		Checker.assertCheck(Controller.isConsistent(this, context, chart) && context.getIndex() == 0, "Draw method arguments are not consistent");
+		Checker.assertCheck(Controller.isConsistent(this, context, chart) && context.getIndex() == 0,
+				"Draw method arguments are not consistent");
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Controller#onAfterDraw(org.pepstock.charba.client.controllers.ControllerContext, org.pepstock.charba.client.IsChart)
+	 * @see
+	 * org.pepstock.charba.client.Controller#onAfterDraw(org.pepstock.charba.client.
+	 * controllers.ControllerContext, org.pepstock.charba.client.IsChart)
 	 */
 	@Override
 	public void onAfterDraw(ControllerContext context, IsChart chart) {
@@ -155,7 +166,7 @@ final class BaseMeterController extends AbstractController {
 	 * Draws the labels in the center of doughnut chart.
 	 * 
 	 * @param chart chart instance
-	 * @param node native chart as chart node
+	 * @param node  native chart as chart node
 	 */
 	void drawLabels(IsChart chart, ChartNode node) {
 		// gets the list of data sets
@@ -183,7 +194,7 @@ final class BaseMeterController extends AbstractController {
 	/**
 	 * Calculates the easing based on circumference of the data set element.
 	 * 
-	 * @param chart chart instance to use for calculation
+	 * @param chart   chart instance to use for calculation
 	 * @param dataset meter data set to get the ratio between value and maximum
 	 * @return easing of drawing (between 0 and 1) for animation
 	 */
@@ -219,13 +230,15 @@ final class BaseMeterController extends AbstractController {
 	/**
 	 * Draws the value inside the inner radius of doughnut.
 	 * 
-	 * @param chart chart instance
-	 * @param item chart item with CHART.JS properties needed to calculate the area where to drawn the value
+	 * @param chart   chart instance
+	 * @param item    chart item with CHART.JS properties needed to calculate the
+	 *                area where to drawn the value
 	 * @param dataset the data set instance
 	 * @param options the chart options
-	 * @param ease easing of drawing (between 0 and 1) for animation
+	 * @param ease    easing of drawing (between 0 and 1) for animation
 	 */
-	private void execute(BaseMeterChart<?> chart, ChartNode item, MeterDataset dataset, MeterOptions options, double ease) {
+	private void execute(BaseMeterChart<?> chart, ChartNode item, MeterDataset dataset, MeterOptions options,
+			double ease) {
 		// gets elements
 		ValueLabel valueLabel = dataset.getValueLabel();
 		DescriptionLabel descriptionLabel = dataset.getDescriptionLabel();
@@ -238,8 +251,7 @@ final class BaseMeterController extends AbstractController {
 		// it can not be null
 		DatasetItem datasetMetaItem = chart.getDatasetItem(0);
 		// calculate the side of the square where to draw the value
-		// minus 1 because of the image data to put and the round management
-		final double sideOfSquare = Math.floor((datasetMetaItem.getController().getInnerRadius() * 2) / SQRT_2) - 1;
+		final double sideOfSquare = Math.floor((datasetMetaItem.getController().getInnerRadius() * 2) / SQRT_2);
 		// gets canvas context 2d
 		Context2dItem ctx = chart.getCanvas().getContext2d();
 		// gets the chart area of CHART.JS
@@ -252,7 +264,8 @@ final class BaseMeterController extends AbstractController {
 		// gets max value
 		final double maxValue = valueLabel.isPercentage() ? MAX_PERCENTAGE : dataset.getMax();
 		// gets value
-		final double valueToCalculate = valueLabel.isPercentage() ? dataset.getValue() / dataset.getMax() : dataset.getValue();
+		final double valueToCalculate = valueLabel.isPercentage() ? dataset.getValue() / dataset.getMax()
+				: dataset.getValue();
 		// here is calculating the value to showed
 		// based on easing of drawing
 		final double value = valueLabel.isAnimated() ? valueToCalculate * ease : valueToCalculate;
@@ -300,18 +313,6 @@ final class BaseMeterController extends AbstractController {
 		ctx.rect(x, y, sideOfSquare, sideOfSquare);
 		// clip area
 		ctx.clip();
-		// checks if image data must be get
-		if (chart.getImageData() == null) {
-			// gets image data in the center, 1 pixel more
-			// because of rounded of dimensions
-			ImageData data = ctx.getImageData(x, y, sideOfSquare + 1, sideOfSquare + 1);
-			// stores the image data
-			chart.setImageData(data);
-		}
-		// clears the previous label
-		ctx.clearRect(x, y, sideOfSquare, sideOfSquare);
-		// sets stored image data to canvas
-		ctx.putImageData(chart.getImageData(), x, y);
 		// checks if auto font size is set
 		if (valueLabel.isAutoFontSize()) {
 			// calculates the font size
@@ -371,12 +372,13 @@ final class BaseMeterController extends AbstractController {
 	}
 
 	/**
-	 * Calculates the font size based on available space in the square in the doughnut inner radius.
+	 * Calculates the font size based on available space in the square in the
+	 * doughnut inner radius.
 	 * 
-	 * @param ctx canvas context
+	 * @param ctx          canvas context
 	 * @param sideOfSquare side of square
-	 * @param value value to display
-	 * @param font font instance
+	 * @param value        value to display
+	 * @param font         font instance
 	 */
 	private void calculateFontSize(Context2dItem ctx, double sideOfSquare, String value, IsFont font) {
 		// half of side of square
@@ -405,15 +407,17 @@ final class BaseMeterController extends AbstractController {
 	/**
 	 * Returns the color to apply to rendered label, invoking the callback if set.
 	 * 
-	 * @param options options of the element
-	 * @param defaultValue default color to use if the callback returns an unconsistent value
-	 * @param context scriptable context of meter
+	 * @param options      options of the element
+	 * @param defaultValue default color to use if the callback returns an
+	 *                     unconsistent value
+	 * @param context      scriptable context of meter
 	 * @return the font color to apply to rendered label
 	 */
 	private String getColor(AbstractMeterElement options, String defaultValue, MeterContext context) {
 		// checks if the options font color is set as callback
 		if (options.getColorCallback() != null) {
-			Object result = ScriptableUtil.getOptionValueAsColor(context, options.getColorCallback(), defaultValue, false);
+			Object result = ScriptableUtil.getOptionValueAsColor(context, options.getColorCallback(), defaultValue,
+					false);
 			// checks the result
 			if (result instanceof IsColor) {
 				// casts to color
@@ -444,7 +448,8 @@ final class BaseMeterController extends AbstractController {
 	private FontItem getFont(AbstractMeterElement options, MeterContext context) {
 		// checks if the options font is set as callback
 		if (options.getFontCallback() != null) {
-			FontItem result = ScriptableUtil.getOptionValueAsFont(context, options.getFontCallback(), options.getFontItem());
+			FontItem result = ScriptableUtil.getOptionValueAsFont(context, options.getFontCallback(),
+					options.getFontItem());
 			// checks the result
 			if (result != null) {
 				return result;
@@ -457,7 +462,8 @@ final class BaseMeterController extends AbstractController {
 	}
 
 	/**
-	 * Returns a formatted value of the chart applying the precision or invoking the value callback.
+	 * Returns a formatted value of the chart applying the precision or invoking the
+	 * value callback.
 	 * 
 	 * @param options options of the element
 	 * @param context scriptable context of meter
@@ -509,10 +515,11 @@ final class BaseMeterController extends AbstractController {
 	}
 
 	/**
-	 * Calculates the cutout of the doughnut chart,using the thickness passed by user in the options.
+	 * Calculates the cutout of the doughnut chart,using the thickness passed by
+	 * user in the options.
 	 * 
 	 * @param options chart options instance
-	 * @param item dataset item
+	 * @param item    dataset item
 	 */
 	private void applyCutoutPercentage(MeterOptions options, DatasetItem item) {
 		// checks if options is consistent
@@ -524,13 +531,15 @@ final class BaseMeterController extends AbstractController {
 			// checks if thickness is defined
 			if (Undefined.isNot(thickness) && Checker.isPositive(radius) && Double.compare(thickness, radius) < 0) {
 				// calculates and sets the percentage
-				options.setInternalCutoutPercentage(Utilities.getAsPercentage((radius - thickness) / radius, MeterOptions.DEFAULT_CUTOUT_PERCENTAGE));
+				options.setInternalCutoutPercentage(Utilities.getAsPercentage((radius - thickness) / radius,
+						MeterOptions.DEFAULT_CUTOUT_PERCENTAGE));
 			}
 		}
 	}
 
 	/**
-	 * Inner class which is implementing a {@link ControllerProvider} to create a base meter controller.
+	 * Inner class which is implementing a {@link ControllerProvider} to create a
+	 * base meter controller.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -540,7 +549,8 @@ final class BaseMeterController extends AbstractController {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.controllers.ControllerProvider#provide(org.pepstock.charba.client.controllers.ControllerType)
+		 * @see org.pepstock.charba.client.controllers.ControllerProvider#provide(org.
+		 * pepstock.charba.client.controllers.ControllerType)
 		 */
 		@Override
 		public Controller provide(ControllerType controllerType) {

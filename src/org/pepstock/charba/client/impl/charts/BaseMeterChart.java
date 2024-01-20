@@ -26,7 +26,6 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Checker;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.dom.elements.ImageData;
 import org.pepstock.charba.client.enums.BorderAlign;
 import org.pepstock.charba.client.enums.DefaultTransitionMode;
 import org.pepstock.charba.client.items.FontItem;
@@ -42,19 +41,19 @@ import org.pepstock.charba.client.options.AnimationTransition;
 abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart implements IsDatasetCreator<D> {
 
 	/**
-	 * Default of maximum value of data in the a dataset (percentage based), <b>{@value DEFAULT_MAX}</b>.
+	 * Default of maximum value of data in the a dataset (percentage based),
+	 * <b>{@value DEFAULT_MAX}</b>.
 	 */
 	public static final double DEFAULT_MAX = 100D;
 	// maximum amount of datasets
 	private static final int MAXIMUM_DATASETS_COUNT = 1;
 	// controller instance
 	private BaseMeterController meterController = null;
-	// stores image data to apply on label square
-	private ImageData imageData = null;
 
 	/**
 	 * Builds the chart.<br>
-	 * This is must be extended for controller which are based on this type of chart.
+	 * This is must be extended for controller which are based on this type of
+	 * chart.
 	 * 
 	 * @param type type of chart
 	 */
@@ -78,30 +77,13 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 	abstract ControllerType getControllerType();
 
 	/**
-	 * Returns the controller instance or <code>null</code> if chart not initialized.
+	 * Returns the controller instance or <code>null</code> if chart not
+	 * initialized.
 	 * 
 	 * @return the controller instance
 	 */
 	final BaseMeterController getController() {
 		return meterController;
-	}
-
-	/**
-	 * Returns the image data, of chart label, previously stored, or <code>null</code>.
-	 * 
-	 * @return the image data, of chart label, previously stored, or <code>null</code>
-	 */
-	final ImageData getImageData() {
-		return imageData;
-	}
-
-	/**
-	 * Sets the image data, of chart label, previously stored, or <code>null</code>.
-	 * 
-	 * @param imageData the image data, of chart label, previously stored, or <code>null</code>
-	 */
-	final void setImageData(ImageData imageData) {
-		this.imageData = imageData;
 	}
 
 	/*
@@ -124,7 +106,8 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 			// then gets it
 			Controller controllerInstance = Defaults.get().getControllers().getController(type);
 			// checks if controller is a base meter controller
-			Checker.assertCheck(controllerInstance instanceof BaseMeterController, "Controller stored for " + getControllerType().value() + " is not a BaseMeterController");
+			Checker.assertCheck(controllerInstance instanceof BaseMeterController,
+					"Controller stored for " + getControllerType().value() + " is not a BaseMeterController");
 			// casts to meter controller
 			meterController = (BaseMeterController) controllerInstance;
 		}
@@ -150,7 +133,7 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		options.getElements().getArc().setBackgroundColor(MeterDataset.DEFAULT_EMPTY_VALUE_COLOR);
 		options.getElements().getArc().setHoverBackgroundColor(MeterDataset.DEFAULT_EMPTY_VALUE_COLOR);
 		// resets image data
-		setImageData(null);
+		// setImageData(null);
 		// creates a new mode every time
 		// because once it has been added to the options
 		// it could be changed by user
