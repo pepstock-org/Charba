@@ -1,7 +1,7 @@
 {
   "name": "Charba",
   "description": "Charba, J2Cl and GWT Chart library based on CHART.JS",
-  "version": "6.4",
+  "version": "6.5",
   "author": "The Pepstock Team <info@pepstock.org>",
   "license": "Apache-2.0",
   "homepage": "https://pepstock-org.github.io/Charba-Wiki/docs",

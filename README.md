@@ -268,6 +268,20 @@ See also [Charba showcase J2CL source code](https://github.com/pepstock-org/Char
 
 The samples are going to reflect what CHART.JS samples are showing [here](http://www.chartjs.org/samples/latest/).
 
+Going to next release
+---------------------
+
+Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
+
+
+### Fixed Bugs
+
+ * [#91](https://github.com/pepstock-org/Charba/issues/91): remove storing of internal label on doughnut because useless and the label drawing is invoked after chart drawing. Thanks @AHijner.
+ 
+### Development
+
+ * change dependency for Apache Ivy, version [2.5.2](https://mvnrepository.com/artifact/org.apache.ivy/ivy/2.5.202).
+ 
 License
 -------
 
