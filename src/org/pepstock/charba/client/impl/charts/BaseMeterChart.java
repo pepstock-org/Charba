@@ -132,8 +132,6 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart impl
 		options.getElements().getArc().setSpacing(0);
 		options.getElements().getArc().setBackgroundColor(MeterDataset.DEFAULT_EMPTY_VALUE_COLOR);
 		options.getElements().getArc().setHoverBackgroundColor(MeterDataset.DEFAULT_EMPTY_VALUE_COLOR);
-		// resets image data
-		// setImageData(null);
 		// creates a new mode every time
 		// because once it has been added to the options
 		// it could be changed by user
