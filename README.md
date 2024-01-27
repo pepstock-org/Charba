@@ -273,6 +273,9 @@ Going to next release
 
 Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
 
+### Features
+
+ * import LUXON datetime library version [v3.4.4](https://github.com/moment/luxon/releases/tag/3.4.4).
 
 ### Fixed Bugs
 

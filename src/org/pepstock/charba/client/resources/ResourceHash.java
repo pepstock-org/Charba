@@ -56,7 +56,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'LabelsPluginResource' class.
 	 */
-	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1371089),
+	LABELS_PLUGIN_RESOURCE(ResourceName.LABELS_PLUGIN, 1371072),
 	/**
 	 * Hash item for 'LuxonAdapterResource' class.
 	 */
@@ -84,7 +84,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'ToastJsUtilResource' class.
 	 */
-	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 1505267),
+	TOAST_JS_UTIL_RESOURCE(ResourceName.TOAST_JS_UTIL, 1401194),
 	/**
 	 * Hash item for 'TreeMapControllerResource' class.
 	 */
