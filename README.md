@@ -268,6 +268,12 @@ See also [Charba showcase J2CL source code](https://github.com/pepstock-org/Char
 
 The samples are going to reflect what CHART.JS samples are showing [here](http://www.chartjs.org/samples/latest/).
 
+Continuous integration and quality gate
+---------------------------------------
+
+**Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
+At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
+
 Going to next release
 ---------------------
 
