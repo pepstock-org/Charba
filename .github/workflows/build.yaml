@@ -31,6 +31,37 @@ jobs:
           # Disabling shallow clone 
           fetch-depth: 0
       # 
+      # Setup Java JDK
+      # 
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'zulu'
+      # 
+      # Run the build of project by ANT
+      # 
+      - name: Build
+        run: ant buildAll
+      # 
+      # Print out the artifacts list
+      # 
+      - name: Print artifacts
+        run: ls -R ./dist
+
+  sonar:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      # 
+      # Checkout the repository content
+      # 
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          # Disabling shallow clone 
+          fetch-depth: 0
+      # 
       # Remove 'pom.xml' otherwise Sonar will fail forcing to use Maven   
       # 
       - name: Remove pom
@@ -41,7 +72,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'zulu'
       # 
       # Setup Node.js (for Sonar)
@@ -51,11 +82,6 @@ jobs:
         with:
           node-version: '16'         
       # 
-      # Run the build of project by ANT
-      # 
-      - name: Build
-        run: ant buildAll
-      # 
       # Run the Sonar scan
       # 
       - name: SonarCloud Scan
@@ -63,8 +89,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      # 
-      # Print out the artifacts list
-      # 
-      - name: Print artifacts
-        run: ls -R ./dist
