@@ -281,6 +281,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 ### Development
 
  * change dependency for Apache Ivy, version [2.5.2](https://mvnrepository.com/artifact/org.apache.ivy/ivy/2.5.202).
+ * change dependency for Google Closure Compiler, version [v20231112](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20231112).
  
 License
 -------
