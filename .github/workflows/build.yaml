@@ -75,6 +75,11 @@ jobs:
           java-version: '17'
           distribution: 'zulu'
       # 
+      # Run the build of project by ANT
+      # 
+      - name: Build
+        run: ant buildBinaryGwt
+      # 
       # Setup Node.js (for Sonar)
       # 
       - name: Setup Node.js
