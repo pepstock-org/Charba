@@ -275,6 +275,7 @@ Here you can find the list of enhancements and updates available on `master` bra
 
 ### Features
 
+ * import CHART.JS version [v4.4.1](https://github.com/chartjs/Chart.js/releases/tag/v4.4.1).
  * import CHART.JS GEO controller version [v4.2.8](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v4.2.8).
  * import LUXON datetime library version [v3.4.4](https://github.com/moment/luxon/releases/tag/3.4.4).
 

@@ -36,7 +36,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'ChartJsResource' class.
 	 */
-	CHART_JS_RESOURCE(ResourceName.CHART, 18417652),
+	CHART_JS_RESOURCE(ResourceName.CHART, 18472051),
 	/**
 	 * Hash item for 'DataLabelsPluginResource' class.
 	 */
@@ -44,7 +44,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'GeoControllerResource' class.
 	 */
-	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 7299940),
+	GEO_CONTROLLER_RESOURCE(ResourceName.GEO_CONTROLLER, 7298554),
 	/**
 	 * Hash item for 'GradientPluginResource' class.
 	 */
@@ -64,7 +64,7 @@ enum ResourceHash {
 	/**
 	 * Hash item for 'LuxonLibraryResource' class.
 	 */
-	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 16055380),
+	LUXON_LIBRARY_RESOURCE(ResourceName.DATE_TIME_LIBRARY, 16495096),
 	/**
 	 * Hash item for 'MatrixControllerResource' class.
 	 */
