@@ -274,26 +274,6 @@ Continuous integration and quality gate
 **Charba** is continuously built at every commit and merge in `master` by [GitHub Action](https://github.com/pepstock-org/Charba/actions?query=workflow%3ABuild).
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-Going to next release
----------------------
-
-Here you can find the list of enhancements and updates available on `master` branch before which will be part of new official release:
-
-### Features
-
- * import CHART.JS version [v4.4.1](https://github.com/chartjs/Chart.js/releases/tag/v4.4.1).
- * import CHART.JS GEO controller version [v4.2.8](https://github.com/sgratzl/chartjs-chart-geo/releases/tag/v4.2.8).
- * import LUXON datetime library version [v3.4.4](https://github.com/moment/luxon/releases/tag/3.4.4).
-
-### Fixed Bugs
-
- * [#91](https://github.com/pepstock-org/Charba/issues/91): remove storing of internal label on doughnut because useless and the label drawing is invoked after chart drawing. Thanks @AHijner.
- 
-### Development
-
- * change dependency for Apache Ivy, version [2.5.2](https://mvnrepository.com/artifact/org.apache.ivy/ivy/2.5.202).
- * change dependency for Google Closure Compiler, version [v20231112](https://mvnrepository.com/artifact/com.google.javascript/closure-compiler/v20231112).
- 
 License
 -------
 
