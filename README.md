@@ -14,7 +14,7 @@ Charba - J2CL and GWT Charts library based on CHART.JS
   <a href="https://pepstock-org.github.io/Charba-Wiki"><img alt="Documentation" src="https://img.shields.io/badge/static-Documentation-F27173.svg"></a>
 </p>
 
-What's Charba
+What's Charba 
 --------
 
 [GWT Web toolkit](http://www.gwtproject.org/) doesn't have charting library available out of the box.
